@@ -1,43 +1,51 @@
 # Neo Galaga Tribute
 
-A keyboard-only Galaga-style shooter tuned for closer arcade behavior and polished for localhost play in Chrome on macOS.
+Galaga-inspired browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.
 
-## Run on macOS (MacBook Pro M4)
+## Live
+
+After GitHub Pages deploys, play at:
+
+- `https://sgwoods.github.io/Codex-Test1/`
+
+## Screenshot
+
+![Gameplay Screenshot](./export.mov.png)
+
+## Run Locally (macOS / Chrome)
 
 1. Open Terminal in this folder:
    ```bash
    cd /Users/stevenwoods/Documents/Codex-Test1
    ```
-2. Start a local web server:
+2. Start a local server:
    ```bash
    python3 -m http.server 8000
    ```
-3. Open the game in Chrome:
+3. Open:
    - `http://localhost:8000`
 
 ## Controls
 
 - `Left/Right` or `A/D`: Move
-- `Space`: Fire (arcade-style 2-shot limit)
+- `Space`: Fire (arcade-style shot cap)
 - `P`: Pause
-- `F`: Toggle fullscreen
-- `U`: Toggle ultra-scale rendering (enabled by default)
+- `F`: Fullscreen
+- `U`: Ultra scale toggle
 - `Enter`: Start / Restart
 
-## Fidelity features in this build
+## What Is Implemented
 
-- Fixed arcade playfield (`280x360`) with integer scaling and centered letterboxing in fullscreen
-- Deterministic Stage 1 opening timeline (first ~45s) for repeatable entry/attack comparison
-- Explicit hit zones for player/enemy/bullets and a narrow tractor-beam capture core
-- 40-enemy core formation spirit (boss + butterfly + bee composition)
-- Stage progression with challenging stages on stage 3, 7, 11, ...
-- Boss escort dives with Galaga-like dive scoring behavior
-- Boss capture flow with tractor beam and true rescue constraints:
-  - captured fighter is rescued only if carrying boss is destroyed while attacking
-  - destroying carrying boss in formation forfeits immediate rescue
-- Stage 1-3 timing profile tuned to lower missile pressure and narrower spread
-- Richer synthesized arcade audio (layered oscillators, sweeps, filtered noise)
-- Significantly upscaled playfield geometry (formation spacing, ship size, beam length, projectile scale)
-- Formation now sits in the upper screen band with a larger defender-to-formation gap (closer to original Galaga framing)
-- More realistic rendered graphics (layered hull shading, canopy highlights, glow, scanline/vignette/chromatic post effects)
-- Persistent high score in browser local storage
+- Fixed arcade playfield with integer scaling and fullscreen letterboxing
+- Stage progression with challenge stages
+- Stage 1 scripted opening timing for consistency
+- Boss capture beam, ship capture, rescue, and dual-fighter fire mode
+- Enemy dive behavior and tuned missile pacing/spread
+- Pixel-art sprite rendering and starfield
+- Synthesized arcade-style SFX
+- Local high score persistence via browser storage
+
+## Development
+
+- Main game file: `index.html`
+- Auto deploy workflow: `.github/workflows/pages.yml`
