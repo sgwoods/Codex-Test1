@@ -55,11 +55,5 @@ After GitHub Pages deploys, play at:
 
 The game includes a floating `Feedback` button (top-right).
 
-- `Feature Request` submissions open a prefilled `mailto:` draft to `default-dimiglyd88@inbox.modem.dev`
-- `Bug Report` submissions continue to use the configured endpoint/API settings
-
-Optional runtime config via browser globals or `localStorage`:
-
-- `MODEM_FEEDBACK_ENDPOINT` / `localStorage.modemFeedbackEndpoint`
-- `MODEM_API_KEY` / `localStorage.modemApiKey`
-- `MODEM_PROJECT_ID` / `localStorage.modemProjectId`
+- Both `Feature Request` and `Bug Report` submissions open a prefilled `mailto:` draft to `default-dimiglyd88@inbox.modem.dev`
+- The email body includes the report content plus game metadata (build, timestamp, stage, score, lives, and user agent)

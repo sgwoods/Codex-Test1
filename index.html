@@ -68,7 +68,6 @@ let DPR=1;
 const BUILD='1.0.0-modem';
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
-const MODEM={endpoint:window.MODEM_FEEDBACK_ENDPOINT||localStorage.modemFeedbackEndpoint||'https://api.modem.dev/v1/feedback',apiKey:window.MODEM_API_KEY||localStorage.modemApiKey||'',projectId:window.MODEM_PROJECT_ID||localStorage.modemProjectId||''};
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:44,shipH:34,enemyW:44,enemyH:34,gx:118,gy:66,playerBottom:92,beamLen:380};
@@ -164,52 +163,38 @@ async function submitFeedback(ev){
  if(title.length<4){setFeedbackStatus('Title must be at least 4 characters.',1);return;}
  if(description.length<10){setFeedbackStatus('Description must be at least 10 characters.',1);return;}
  feedbackBusy=1;
- setFeedbackStatus('Submitting to Modem...');
+ setFeedbackStatus('Opening mail app draft...');
  const payload={
   type,title,description,
-  project_id:MODEM.projectId||undefined,
   timestamp:new Date(now).toISOString(),
   game:{name:'Neo Galaga Tribute',version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge}
  };
- if(type==='feature_request'){
-  const subject=`[Feature Request] ${title}`;
-  const lines=[
-   description,'',
-   '---',
-   `Build: ${BUILD}`,
-   `Timestamp: ${payload.timestamp}`,
-   `URL: ${location.href}`,
-   `Stage: ${S.stage}`,
-   `Score: ${S.score}`,
-   `Lives: ${Math.max(0,S.lives+1)}`,
-   `Started: ${started?1:0}`,
-   `Paused: ${paused?1:0}`,
-   `Challenge: ${S.challenge?1:0}`,
-   `User-Agent: ${navigator.userAgent}`
-  ];
-  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
-  feedbackLastSubmit=now;
-  fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
-  setFeedbackStatus('Opened mail app draft for Modem feature request.');
-  showToast('Email draft opened');
-  setTimeout(()=>closeFeedback(),120);
-  return;
- }
- const headers={'Content-Type':'application/json'};
- if(MODEM.apiKey)headers.Authorization=`Bearer ${MODEM.apiKey}`;
- try{
-  const r=await fetch(MODEM.endpoint,{method:'POST',headers,body:JSON.stringify(payload)});
-  if(!r.ok){const body=(await r.text().catch(()=>''))||`HTTP ${r.status}`;throw new Error(body.slice(0,140));}
-  feedbackLastSubmit=now;
-  fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
-  setFeedbackStatus('Submitted. Thanks for the report.');
-  showToast('Feedback sent');
-  setTimeout(()=>closeFeedback(),240);
- }catch(err){
-  const txt=String(err&&err.message||err||'Network error');
-  setFeedbackStatus(txt.includes('Failed to fetch')?'Network error: could not reach Modem API.':`Submit failed: ${txt}`,1);
- }finally{feedbackBusy=0;}
+ const kind=type==='feature_request'?'Feature Request':'Bug Report';
+ const subject=`[${kind}] ${title}`;
+ const lines=[
+  description,'',
+  '---',
+  `Type: ${kind}`,
+  `Build: ${BUILD}`,
+  `Timestamp: ${payload.timestamp}`,
+  `URL: ${location.href}`,
+  `Stage: ${S.stage}`,
+  `Score: ${S.score}`,
+  `Lives: ${Math.max(0,S.lives+1)}`,
+  `Started: ${started?1:0}`,
+  `Paused: ${paused?1:0}`,
+  `Challenge: ${S.challenge?1:0}`,
+  `User-Agent: ${navigator.userAgent}`
+ ];
+ window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+ feedbackLastSubmit=now;
+ fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
+ setFeedbackStatus('Opened mail app draft for Modem feedback.');
+ showToast('Email draft opened');
+ setTimeout(()=>closeFeedback(),120);
+ feedbackBusy=0;
+ return;
 }
 
 function rs(){
