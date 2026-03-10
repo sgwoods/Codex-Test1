@@ -53,7 +53,10 @@ After GitHub Pages deploys, play at:
 
 ## Modem Feedback Integration
 
-The game includes a floating `Feedback` button (top-right) and sends submissions to Modem API.
+The game includes a floating `Feedback` button (top-right).
+
+- `Feature Request` submissions open a prefilled `mailto:` draft to `default-dimiglyd88@inbox.modem.dev`
+- `Bug Report` submissions continue to use the configured endpoint/API settings
 
 Optional runtime config via browser globals or `localStorage`:
 

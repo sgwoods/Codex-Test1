@@ -67,6 +67,7 @@ const rnd=(a=1,b=0)=>Math.random()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
 const BUILD='1.0.0-modem';
 const FEEDBACK_RATE_MS=30000;
+const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const MODEM={endpoint:window.MODEM_FEEDBACK_ENDPOINT||localStorage.modemFeedbackEndpoint||'https://api.modem.dev/v1/feedback',apiKey:window.MODEM_API_KEY||localStorage.modemApiKey||'',projectId:window.MODEM_PROJECT_ID||localStorage.modemProjectId||''};
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 const PLAY_W=280,PLAY_H=360;
@@ -171,6 +172,30 @@ async function submitFeedback(ev){
   game:{name:'Neo Galaga Tribute',version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge}
  };
+ if(type==='feature_request'){
+  const subject=`[Feature Request] ${title}`;
+  const lines=[
+   description,'',
+   '---',
+   `Build: ${BUILD}`,
+   `Timestamp: ${payload.timestamp}`,
+   `URL: ${location.href}`,
+   `Stage: ${S.stage}`,
+   `Score: ${S.score}`,
+   `Lives: ${Math.max(0,S.lives+1)}`,
+   `Started: ${started?1:0}`,
+   `Paused: ${paused?1:0}`,
+   `Challenge: ${S.challenge?1:0}`,
+   `User-Agent: ${navigator.userAgent}`
+  ];
+  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  feedbackLastSubmit=now;
+  fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
+  setFeedbackStatus('Opened mail app draft for Modem feature request.');
+  showToast('Email draft opened');
+  setTimeout(()=>closeFeedback(),120);
+  return;
+ }
  const headers={'Content-Type':'application/json'};
  if(MODEM.apiKey)headers.Authorization=`Bearer ${MODEM.apiKey}`;
  try{
