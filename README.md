@@ -33,6 +33,7 @@ After GitHub Pages deploys, play at:
 - `F`: Fullscreen
 - `U`: Ultra scale toggle
 - `Enter`: Start / Restart
+- `F1` or `?`: Open in-game feedback form
 
 ## What Is Implemented
 
@@ -49,3 +50,13 @@ After GitHub Pages deploys, play at:
 
 - Main game file: `index.html`
 - Auto deploy workflow: `.github/workflows/pages.yml`
+
+## Modem Feedback Integration
+
+The game includes a floating `Feedback` button (top-right) and sends submissions to Modem API.
+
+Optional runtime config via browser globals or `localStorage`:
+
+- `MODEM_FEEDBACK_ENDPOINT` / `localStorage.modemFeedbackEndpoint`
+- `MODEM_API_KEY` / `localStorage.modemApiKey`
+- `MODEM_PROJECT_ID` / `localStorage.modemProjectId`
