@@ -68,6 +68,7 @@ let DPR=1;
 const BUILD='1.0.0-modem';
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
+const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:44,shipH:34,enemyW:44,enemyH:34,gx:118,gy:66,playerBottom:92,beamLen:380};
@@ -152,6 +153,9 @@ function closeFeedback(force=0){
  feedbackModal.setAttribute('aria-hidden','true');
  feedbackBtn.setAttribute('aria-expanded','false');
 }
+function openMailFallback(subject,lines){
+ window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
 async function submitFeedback(ev){
  ev.preventDefault();
  if(feedbackBusy)return;
@@ -163,8 +167,8 @@ async function submitFeedback(ev){
  if(title.length<4){setFeedbackStatus('Title must be at least 4 characters.',1);return;}
  if(description.length<10){setFeedbackStatus('Description must be at least 10 characters.',1);return;}
  feedbackBusy=1;
- setFeedbackStatus('Opening mail app draft...');
- const payload={
+ setFeedbackStatus('Sending feedback...');
+  const payload={
   type,title,description,
   timestamp:new Date(now).toISOString(),
   game:{name:'Neo Galaga Tribute',version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
@@ -187,12 +191,42 @@ async function submitFeedback(ev){
   `Challenge: ${S.challenge?1:0}`,
   `User-Agent: ${navigator.userAgent}`
  ];
- window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
- feedbackLastSubmit=now;
- fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
- setFeedbackStatus('Opened mail app draft for Modem feedback.');
- showToast('Email draft opened');
- setTimeout(()=>closeFeedback(),120);
+ try{
+  const r=await fetch(FORMSUBMIT_ENDPOINT,{
+   method:'POST',
+   headers:{'Content-Type':'application/json','Accept':'application/json'},
+   body:JSON.stringify({
+    _subject:subject,
+    _template:'table',
+    product:'Neo Galaga Tribute',
+    type:kind,
+    title,
+    description,
+    build:BUILD,
+    timestamp:payload.timestamp,
+    url:location.href,
+    stage:S.stage,
+    score:S.score,
+    lives:Math.max(0,S.lives+1),
+    started:started?1:0,
+    paused:paused?1:0,
+    challenge:S.challenge?1:0,
+    user_agent:navigator.userAgent,
+    message:lines.join('\n')
+   })
+  });
+  const data=await r.json().catch(()=>null);
+  if(!r.ok||data?.success===false)throw new Error(data?.message||`HTTP ${r.status}`);
+  feedbackLastSubmit=now;
+  fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
+  setFeedbackStatus('Sent to Modem inbox.');
+  showToast('Feedback sent');
+  setTimeout(()=>closeFeedback(),220);
+ }catch(err){
+  openMailFallback(subject,lines);
+  setFeedbackStatus('FormSubmit could not send directly. Opened mail draft fallback.',1);
+  showToast('Mail fallback opened');
+ }
  feedbackBusy=0;
  return;
 }

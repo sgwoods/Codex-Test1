@@ -55,5 +55,11 @@ After GitHub Pages deploys, play at:
 
 The game includes a floating `Feedback` button (top-right).
 
-- Both `Feature Request` and `Bug Report` submissions open a prefilled `mailto:` draft to `default-dimiglyd88@inbox.modem.dev`
-- The email body includes the report content plus game metadata (build, timestamp, stage, score, lives, and user agent)
+- Both `Feature Request` and `Bug Report` submissions post to FormSubmit, which forwards them to `default-dimiglyd88@inbox.modem.dev`
+- If FormSubmit cannot send directly, the game falls back to opening a prefilled `mailto:` draft
+- The submission body includes the report plus game metadata (build, timestamp, stage, score, lives, and user agent)
+
+One-time setup:
+
+- FormSubmit is free and does not require an account
+- The first submission to a destination email triggers a confirmation email from FormSubmit that must be clicked once for that exact inbox address
