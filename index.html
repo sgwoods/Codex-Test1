@@ -172,8 +172,10 @@ const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
  :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
  :s===2?{shotCap:1,attackCap:2,diveRate:.72,coolA:5.6,coolB:3.6,globalA:1.9,globalB:1.35,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
- :s===3?{shotCap:2,attackCap:3,diveRate:.86,coolA:5.1,coolB:3.1,globalA:1.7,globalB:1.2,capChance:.22,diveShotRate:.62,aimMul:.12,aimClamp:16,aimRnd:2.3,bulletVy:176,bulletVyStage:4}
- :{shotCap:3,attackCap:2+(s>5)+(s>10),diveRate:1.02+s*.055,coolA:4.7,coolB:2.2,globalA:1.3,globalB:.9,capChance:.28,diveShotRate:.8,aimMul:.18,aimClamp:22,aimRnd:4,bulletVy:184,bulletVyStage:4};
+ :s===3?{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3}
+ :s===4?{shotCap:2,attackCap:2,diveRate:.92,coolA:4.9,coolB:2.95,globalA:1.55,globalB:1.08,capChance:.23,diveShotRate:.64,aimMul:.13,aimClamp:17,aimRnd:2.6,bulletVy:178,bulletVyStage:4}
+ :s===5?{shotCap:2,attackCap:2,diveRate:1.02,coolA:4.5,coolB:2.65,globalA:1.35,globalB:.96,capChance:.25,diveShotRate:.7,aimMul:.15,aimClamp:19,aimRnd:3.1,bulletVy:182,bulletVyStage:4}
+ :{shotCap:3,attackCap:2+(s>7)+(s>11),diveRate:1.02+s*.045,coolA:4.4,coolB:2.1,globalA:1.18,globalB:.84,capChance:.28,diveShotRate:.76,aimMul:.17,aimClamp:21,aimRnd:3.7,bulletVy:185,bulletVyStage:4};
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
@@ -452,7 +454,8 @@ function spawnChallenge(){
  const total=40,cx=PLAY_W/2;
  for(let i=0;i<total;i++){
   const t=i%10<2?'boss':i%3?'but':'bee';
-  S.e.push({id:(Math.random()*1e9)|0,t,r:0,c:i%10,hp:1,max:1,x:cx,y:-120,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:(i%10)*.18+Math.floor(i/10)*1.25,en:0,lead:null,off:0,esc:0,ch:1,miss:0});
+  const wave=(i/10)|0,lane=i%10,dir=wave%2?-1:1;
+  S.e.push({id:(Math.random()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:dir>0?-44:PLAY_W+44,y:48+wave*26,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.65+lane*.11,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,dir});
  }
  S.ch={hits:0,total:40,done:0};
 }
@@ -565,12 +568,22 @@ function runStage1Script(dt,p,T){
 
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){e.spawn-=dt;return}
- e.tm+=dt*(1.26+S.stage*.02);
- const u=e.tm,p=e.ph;
- const lane=(e.c-4.5)/4.5;
- e.x=PLAY_W/2+Math.sin(u*2.1+p)*(PLAY_W*.24)*(1-Math.min(.45,u*.05))+lane*36+Math.sin(u*6+p)*8;
- e.y=-110+u*220+Math.cos(u*2.7+p)*30;
- if(e.y>PLAY_H+30){e.hp=0;e.miss=1;}
+ e.tm+=dt*(.82+(e.wave||0)*.035+Math.min(.08,S.stage*.008));
+ const u=e.tm,p=e.ph,lane=(e.c-4.5)/4.5,dir=e.dir||1,wave=e.wave||0;
+ if(u<1.8){
+  const q=u/1.8,midX=PLAY_W/2+lane*88;
+  e.x=(dir>0?-42:PLAY_W+42)+(midX-(dir>0?-42:PLAY_W+42))*(1-Math.pow(1-q,2));
+  e.y=42+wave*24+Math.sin(u*4.2+p)*10;
+ }else if(u<4.5){
+  const q=(u-1.8)/2.7;
+  e.x=PLAY_W/2+lane*82-dir*(q-.5)*150+Math.sin(q*7+p)*10;
+  e.y=68+wave*22+q*96+Math.sin(q*5.4+p)*12;
+ }else{
+  const q=(u-4.5)/1.55;
+  e.x=PLAY_W/2+lane*64+dir*q*152;
+  e.y=164+wave*18+q*248;
+ }
+ if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
 }
 
 function updateEnemy(e,dt,t,T,p){
@@ -672,7 +685,7 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22;
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?0.28:(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 function playerHitbox(){return{w:7,h:6};}
