@@ -12,6 +12,8 @@ canvas{display:block;width:100vw;height:100vh}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
+#exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
+#exportBtn:hover{background:rgba(26,39,73,.85);border-color:rgba(170,205,255,.9)}
 #feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
 #feedbackModal.open{display:flex}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
@@ -34,6 +36,7 @@ canvas{display:block;width:100vw;height:100vh}
 <div id="hud"><div id="left"></div><div id="right"></div></div>
 <div id="msg"></div>
 <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
+<button id="exportBtn">Export Log</button>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
     <h2 id="feedbackTitle">Send Feedback</h2>
@@ -61,7 +64,7 @@ canvas{display:block;width:100vw;height:100vh}
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn');
 let t0=0,started=0,paused=0,aud=0,keys={};
 const rnd=(a=1,b=0)=>Math.random()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
@@ -70,6 +73,7 @@ const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let REC=null,recShotT=0,sessionN=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:44,shipH:34,enemyW:44,enemyH:34,gx:118,gy:66,playerBottom:92,beamLen:380};
 const STAGE1_SCRIPT=[
@@ -126,6 +130,34 @@ const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,g
  :s===3?{shotCap:2,attackCap:3,diveRate:.86,coolA:5.1,coolB:3.1,globalA:1.7,globalB:1.2,capChance:.22,diveShotRate:.62,aimMul:.12,aimClamp:16,aimRnd:2.3,bulletVy:176,bulletVyStage:4}
  :{shotCap:3,attackCap:2+(s>5)+(s>10),diveRate:1.02+s*.055,coolA:4.7,coolB:2.2,globalA:1.3,globalB:.9,capChance:.28,diveShotRate:.8,aimMul:.18,aimClamp:22,aimRnd:4,bulletVy:184,bulletVyStage:4};
 const shotCap=()=>S.t?S.t.shotCap:0;
+const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
+const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+function resetSession(reason='boot'){
+ sessionN++;
+ REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
+ REC.t0=performance.now();
+ recShotT=0;
+}
+function logEvent(type,data={}){
+ if(!REC)resetSession();
+ REC.events.push(Object.assign({t:recTime(),type},data));
+}
+function logSnapshot(tag='tick'){
+ if(!REC)resetSession();
+ REC.snapshots.push(Object.assign({t:recTime(),tag},snapshot()));
+}
+function exportSession(){
+ if(!REC)resetSession();
+ logSnapshot('export');
+ const out=JSON.stringify({session:Object.assign({},REC,{duration:recTime()})},null,2);
+ const file=`neo-galaga-session-${REC.id}.json`;
+ const blob=new Blob([out],{type:'application/json'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download=file;a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+ showToast('Session log downloaded');
+}
 
 function setFeedbackStatus(t='',err=0){
  feedbackStatus.textContent=t;
@@ -140,6 +172,7 @@ function showToast(t){
 function openFeedback(){
  if(feedbackOpen)return;
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};
+ logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
  feedbackBtn.setAttribute('aria-expanded','true');
@@ -149,6 +182,7 @@ function openFeedback(){
 function closeFeedback(force=0){
  if(!feedbackOpen||(!force&&feedbackBusy))return;
  feedbackOpen=0;paused=feedbackPrevPaused;
+ logEvent('feedback_close',{force:!!force});
  feedbackModal.classList.remove('open');
  feedbackModal.setAttribute('aria-hidden','true');
  feedbackBtn.setAttribute('aria-expanded','false');
@@ -245,10 +279,13 @@ function rs(){
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 feedbackBtn.addEventListener('click',openFeedback);
+exportBtn.addEventListener('click',exportSession);
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 feedbackForm.addEventListener('submit',submitFeedback);
 addEventListener('keydown',e=>{
+ const wasDown=!!keys[e.code];
+ logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  keys[e.code]=1;
@@ -259,7 +296,7 @@ addEventListener('keydown',e=>{
  if(started&&e.code==='KeyP')paused=!paused;
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){sfx.a?.resume?.();aud=1;}
 });
-addEventListener('keyup',e=>keys[e.code]=0);
+addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
 
 function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(Math.random()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,ch:0,miss:0};}
 
@@ -292,13 +329,17 @@ function spawnChallenge(){
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=isChallengeStage(S.stage);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=1.2;
+ logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
+ logSnapshot('stage_spawn');
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.banner=2.5}
  else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.banner=1.6}
 }
 
 function start(){
+ resetSession('game_start');
  started=1;paused=0;Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
+ logEvent('game_start');
  spawnStage();msg.textContent='';sfx.start();
 }
 
@@ -307,13 +348,14 @@ function ex(x,y,n=14,col='#fff'){for(let i=0;i<n;i++)S.fx.push({x,y,vx:rnd(240,-
 
 function loseShip(){
  const p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
+ logEvent('ship_lost',{stage:S.stage,score:S.score,livesBefore:Math.max(0,S.lives+1)});
  S.shake=.55;p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
  if(p.dual)p.dual=0;
  S.lives--;p.spawn=.95;
  if(S.lives<0)gameOver();
 }
 
-function gameOver(){started=0;S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
+function gameOver(){logEvent('game_over',{score:S.score,stage:S.stage});logSnapshot('game_over');started=0;S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
 function bulletsMax(){return S.p.dual?4:2}
 
 function shoot(){
@@ -432,6 +474,8 @@ function updateEnemy(e,dt,t,T,p){
 
 function update(dt){
  if(!started||paused)return;
+ recShotT-=dt;
+ if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
@@ -443,8 +487,8 @@ function update(dt){
  if(keys.Space)shoot();
 
  const alive=S.e.filter(e=>e.hp>0);
- if(!alive.length&&!S.challenge){S.stage++;spawnStage();sfx.start();return}
- if(S.challenge&&!alive.length&&!S.ch.done){S.ch.done=1;const perfect=S.ch.hits===S.ch.total?10000:0;S.score+=perfect;S.bannerTxt=perfect?('PERFECT '+perfect):('HITS '+S.ch.hits+'/'+S.ch.total);S.banner=2.8;S.stage++;setTimeout(()=>{if(started)spawnStage()},900);}
+ if(!alive.length&&!S.challenge){logEvent('stage_clear',{stage:S.stage,score:S.score});S.stage++;spawnStage();sfx.start();return}
+ if(S.challenge&&!alive.length&&!S.ch.done){logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total});S.ch.done=1;const perfect=S.ch.hits===S.ch.total?10000:0;S.score+=perfect;S.bannerTxt=perfect?('PERFECT '+perfect):('HITS '+S.ch.hits+'/'+S.ch.total);S.banner=2.8;S.stage++;setTimeout(()=>{if(started)spawnStage()},900);}
 
  const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
  S.att=0;
@@ -543,6 +587,9 @@ function draw(){
 }
 
 function loop(ts){const dt=Math.min(.033,(ts-t0)/1000||0);t0=ts;update(dt);draw();requestAnimationFrame(loop)}
+resetSession();
+logEvent('boot');
+logSnapshot('boot');
 rs();requestAnimationFrame(loop);
 })();
 </script>

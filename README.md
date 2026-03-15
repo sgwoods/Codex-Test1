@@ -34,6 +34,7 @@ After GitHub Pages deploys, play at:
 - `U`: Ultra scale toggle
 - `Enter`: Start / Restart
 - `F1` or `?`: Open in-game feedback form
+- `Export Log` button: Download the current gameplay session as JSON
 
 ## What Is Implemented
 
@@ -50,6 +51,12 @@ After GitHub Pages deploys, play at:
 
 - Main game file: `index.html`
 - Auto deploy workflow: `.github/workflows/pages.yml`
+
+## Session Logging
+
+- The game records keyboard events, major lifecycle events, and periodic gameplay snapshots
+- Exported logs are downloaded as JSON from the in-game `Export Log` button
+- Each export includes build metadata, browser/user agent, viewport info, input events, and game-state snapshots
 
 ## Modem Feedback Integration
 
