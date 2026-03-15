@@ -18,6 +18,16 @@ canvas{display:block;width:100vw;height:100vh}
 #recordBtn:hover{background:rgba(64,17,17,.88);border-color:rgba(255,115,115,.92)}
 #recordBtn.active{border-color:rgba(255,84,84,.95);background:rgba(92,15,15,.9);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
+#testBtn{position:fixed;top:170px;right:16px;z-index:30;border:1px solid rgba(145,255,179,.45);background:rgba(10,28,14,.72);color:#e8fff0;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px)}
+#testBtn:hover{background:rgba(18,56,25,.88);border-color:rgba(145,255,179,.88)}
+#testPanel{position:fixed;top:206px;right:16px;z-index:30;width:214px;background:rgba(6,13,10,.94);border:1px solid rgba(145,255,179,.28);padding:10px 11px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45)}
+#testPanel.open{display:block}
+#testPanel h3{margin:0 0 8px;font-size:15px;color:#d8ffe4}
+#testPanel label{display:block;margin:6px 0 3px;font-size:12px;color:#b7efd0}
+#testPanel input{width:100%;box-sizing:border-box;border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7;padding:6px;font:13px/1.2 "Courier New",Consolas,monospace}
+#testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
+#testRow input{width:auto;transform:translateY(1px)}
+#testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
 #feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
 #feedbackModal.open{display:flex}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
@@ -42,6 +52,19 @@ canvas{display:block;width:100vw;height:100vh}
 <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
 <button id="exportBtn">Export Log</button>
 <button id="recordBtn" type="button">Auto Video: On</button>
+<button id="testBtn" type="button">Test Setup</button>
+<div id="testPanel" aria-hidden="true">
+  <h3>Test Setup</h3>
+  <label for="testStage">Start Stage</label>
+  <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+  <label for="testShips">Starting Ships</label>
+  <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+  <div id="testRow">
+    <input id="testChallenge" type="checkbox" />
+    <label for="testChallenge">Force challenge opening</label>
+  </div>
+  <div id="testHint">Applies on next game start only.</div>
+</div>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
     <h2 id="feedbackTitle">Send Feedback</h2>
@@ -70,6 +93,7 @@ const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElem
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
+const testBtn=document.getElementById('testBtn'),testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 let t0=0,started=0,paused=0,aud=0,keys={};
 const rnd=(a=1,b=0)=>Math.random()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
@@ -81,7 +105,9 @@ let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toas
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
 const RECORD_PREF_KEY='galagaTribAutoVideo';
+const TEST_PREF_KEY='galagaTribTestCfg';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
+let testOpen=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380};
 const STAGE1_SCRIPT=[
@@ -95,17 +121,27 @@ const STAGE1_SCRIPT=[
  {t:41.0,type:'boss',c:4,escort:1}
 ];
 
-const AC=()=>sfx.a||(sfx.a=new (window.AudioContext||webkitAudioContext)());
+const AC=()=>{
+ if(sfx.a)return sfx.a;
+ const A=new (window.AudioContext||webkitAudioContext)();
+ sfx.a=A;
+ sfx.bus=A.createGain();
+ sfx.bus.gain.value=.9;
+ sfx.tap=A.createMediaStreamDestination();
+ sfx.bus.connect(A.destination);
+ sfx.bus.connect(sfx.tap);
+ return A;
+};
 const sfx={
- a:null,n:null,
+ a:null,n:null,bus:null,tap:null,
  play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
   o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);
-  o.connect(lp);o2.connect(lp);lp.connect(g);g.connect(A.destination);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);
+  o.connect(lp);o2.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);
  },
  noise(d=.08,v=.02,hp=900,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=Math.random()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
-  src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(A.destination);src.start(tm);src.stop(tm+d+.01);
+  src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(this.bus);src.start(tm);src.stop(tm+d+.01);
  },
  seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92)},
  start(){this.seq([523,659,784],.055,'square',.02,24,3600);this.play(392,.18,'triangle',.018,110,.005,2500,.02)},
@@ -130,7 +166,7 @@ const C={ship:'#7ed3ff',ship2:'#4da4f0',bee:'#ffd84a',but:'#ff7c49',boss:'#6df77
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',fireCD:0,t:null,rogue:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
@@ -174,6 +210,24 @@ function exportSession(opts={}){
  if(opts.auto)autoExportedSessionId=REC.id;
  if(!opts.silent)showToast('Session log downloaded');
 }
+function loadTestCfg(){
+ try{
+  const raw=JSON.parse(localStorage.getItem(TEST_PREF_KEY)||'{}');
+  return{stage:cl(+raw.stage||1,1,99)|0,ships:cl(+raw.ships||3,1,9)|0,challenge:!!raw.challenge};
+ }catch{return{stage:1,ships:3,challenge:0}}
+}
+function saveTestCfg(){
+ const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
+ testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ localStorage.setItem(TEST_PREF_KEY,JSON.stringify(cfg));
+ return cfg;
+}
+function syncTestUi(){
+ const cfg=loadTestCfg();
+ testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ testPanel.classList.toggle('open',testOpen);
+ testPanel.setAttribute('aria-hidden',testOpen?'false':'true');
+}
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download=file;a.click();
@@ -203,7 +257,10 @@ function startRunRecording(){
  if(!VIDEO_REC.enabled||!videoRecordSupported())return;
  if(VIDEO_REC.active)stopRunRecording();
  VIDEO_REC.mime=pickVideoMime();
- VIDEO_REC.stream=c.captureStream(60);
+ const videoStream=c.captureStream(60),stream=new MediaStream();
+ for(const t of videoStream.getVideoTracks())stream.addTrack(t);
+ if(sfx.tap)for(const t of sfx.tap.stream.getAudioTracks())stream.addTrack(t);
+ VIDEO_REC.stream=stream;
  VIDEO_REC.chunks.length=0;
  VIDEO_REC.sessionId=REC?.id||`run-${Date.now()}`;
  VIDEO_REC.file=`neo-galaga-video-${VIDEO_REC.sessionId}.webm`;
@@ -349,6 +406,8 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
+testBtn.addEventListener('click',()=>{testOpen=!testOpen;syncTestUi();});
+for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 feedbackForm.addEventListener('submit',submitFeedback);
@@ -361,9 +420,10 @@ addEventListener('keydown',e=>{
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
+ if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();testOpen=!testOpen;syncTestUi();}
  if(!started&&e.code==='Enter')start();
  if(started&&e.code==='KeyP')paused=!paused;
- if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){sfx.a?.resume?.();aud=1;}
+ if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
 addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
 
@@ -398,7 +458,7 @@ function spawnChallenge(){
 }
 
 function spawnStage(){
- S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=isChallengeStage(S.stage);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
+ S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.banner=2.5}
@@ -409,7 +469,9 @@ function spawnStage(){
 function start(){
  resetSession('game_start');
  autoExportedSessionId='';
- started=1;paused=0;Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0});
+ const cfg=saveTestCfg();
+ aud=1;AC().resume?.();
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
  startRunRecording();
@@ -513,6 +575,7 @@ function updateChallengeEnemy(e,dt){
 
 function updateEnemy(e,dt,t,T,p){
  if(e.hp<=0)return;
+ const cleanup=S.stage===1&&!S.challenge&&S.liveCount<=6;
  const tx=e.tx+Math.sin(t*.92+e.r*.45)*52,ty=e.ty+Math.sin(t*1.35+e.c*.55)*9;
  if(!e.form){
   if(e.spawn>0){e.spawn-=dt;return}
@@ -548,10 +611,11 @@ function updateEnemy(e,dt,t,T,p){
   return;
  }
  if(e.dive===3){e.x+=(tx-e.x)*Math.min(1,dt*3.4);e.y+=(ty-e.y)*Math.min(1,dt*3.5);if(Math.hypot(tx-e.x,ty-e.y)<5){e.dive=0;e.vx=e.vy=0;e.esc=0}return}
- e.x+=(tx-e.x)*Math.min(1,dt*6);e.y+=(ty-e.y)*Math.min(1,dt*6);e.cool-=dt;
+ e.x+=(tx-e.x)*Math.min(1,dt*6);e.y+=(ty-e.y)*Math.min(1,dt*6);e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
- if(e.cool<=0&&Math.random()<dt*T.diveRate&&S.att<T.attackCap){
-  e.cool=rnd(T.coolA,T.coolB)-S.stage*.02;
+ const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate;
+ if(e.cool<=0&&Math.random()<dt*diveRate&&S.att<attackCap){
+  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
   if(e.t==='boss'&&canCapture()&&Math.random()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
   else{e.dive=1;e.vx=(p.x-e.x)*.56+rnd(38,-38);e.vy=94+rnd(20);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
  }
@@ -572,6 +636,7 @@ function update(dt){
  if(keys.Space)shoot();
 
  const alive=S.e.filter(e=>e.hp>0);
+ S.liveCount=alive.length;
  if(!alive.length&&!S.challenge){logEvent('stage_clear',{stage:S.stage,score:S.score});S.stage++;spawnStage();sfx.start();return}
  if(S.challenge&&!alive.length&&!S.ch.done){logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total});S.ch.done=1;const perfect=S.ch.hits===S.ch.total?10000:0;S.score+=perfect;S.bannerTxt=perfect?('PERFECT '+perfect):('HITS '+S.ch.hits+'/'+S.ch.total);S.banner=2.8;S.stage++;setTimeout(()=>{if(started)spawnStage()},900);}
 
@@ -580,10 +645,11 @@ function update(dt){
  for(const e of S.e){e.tm+=dt;if(e.hp<=0)continue;if(S.challenge)updateChallengeEnemy(e,dt);else updateEnemy(e,dt,t,T,p)}
  runStage1Script(dt,p,T);
 
+ const cleanup=!S.challenge&&S.stage===1&&alive.length<=6;
  if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()){
   const bottoms={};for(const e of S.e)if(e.hp>0&&e.form&&!e.dive&&!e.ch){if(!bottoms[e.c]||e.y>bottoms[e.c].y)bottoms[e.c]=e}
   const list=Object.values(bottoms);
-  if(list.length){const q=list[(Math.random()*list.length)|0];fireEnemyBullet(q,rnd(2,-2),154+S.stage*4,'formation');S.fireCD=rnd(T.globalA,T.globalB)-Math.min(.1,S.stage*.004)}else S.fireCD=.25;
+  if(list.length){const q=list[(Math.random()*list.length)|0];fireEnemyBullet(q,rnd(2,-2),154+S.stage*4,'formation');S.fireCD=cleanup?rnd(.9,.45):rnd(T.globalA,T.globalB)-Math.min(.1,S.stage*.004)}else S.fireCD=.25;
  }
 
  for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
@@ -671,6 +737,9 @@ function draw(){
  feedbackBtn.style.display=toolsVisible?'block':'none';
  exportBtn.style.display=toolsVisible?'block':'none';
  recordBtn.style.display=toolsVisible?'block':'none';
+ testBtn.style.display=toolsVisible?'block':'none';
+ if(!toolsVisible)testPanel.classList.remove('open');
+ else testPanel.classList.toggle('open',testOpen);
  if(!started)msg.innerHTML='PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
@@ -683,6 +752,7 @@ resetSession();
 logEvent('boot');
 logSnapshot('boot');
 syncRecordUi();
+syncTestUi();
 rs();requestAnimationFrame(loop);
 })();
 </script>
