@@ -14,6 +14,10 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
 #exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #exportBtn:hover{background:rgba(26,39,73,.85);border-color:rgba(170,205,255,.9)}
+#recordBtn{position:fixed;top:134px;right:16px;z-index:30;border:1px solid rgba(255,115,115,.55);background:rgba(28,10,10,.72);color:#ffe9e9;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
+#recordBtn:hover{background:rgba(64,17,17,.88);border-color:rgba(255,115,115,.92)}
+#recordBtn.active{border-color:rgba(255,84,84,.95);background:rgba(92,15,15,.9);color:#fff3f3}
+#recordBtn[disabled]{opacity:.45;cursor:default}
 #feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
 #feedbackModal.open{display:flex}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
@@ -37,6 +41,7 @@ canvas{display:block;width:100vw;height:100vh}
 <div id="msg"></div>
 <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
 <button id="exportBtn">Export Log</button>
+<button id="recordBtn" type="button">Auto Video: On</button>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
     <h2 id="feedbackTitle">Send Feedback</h2>
@@ -64,7 +69,7 @@ canvas{display:block;width:100vw;height:100vh}
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 let t0=0,started=0,paused=0,aud=0,keys={};
 const rnd=(a=1,b=0)=>Math.random()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
@@ -74,6 +79,8 @@ const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let REC=null,recShotT=0,sessionN=0;
+const RECORD_PREF_KEY='galagaTribAutoVideo';
+const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380};
 const STAGE1_SCRIPT=[
@@ -166,6 +173,52 @@ function exportSession(){
  a.href=url;a.download=file;a.click();
  setTimeout(()=>URL.revokeObjectURL(url),1000);
  showToast('Session log downloaded');
+}
+function downloadBlob(blob,file){
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=file;a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function videoRecordSupported(){return !!(c.captureStream&&window.MediaRecorder);}
+function pickVideoMime(){
+ const list=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];
+ for(const m of list)if(!window.MediaRecorder||!MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(m))return m;
+ return '';
+}
+function syncRecordUi(){
+ const supported=videoRecordSupported();
+ recordBtn.disabled=!supported;
+ recordBtn.classList.toggle('active',VIDEO_REC.enabled||VIDEO_REC.active);
+ recordBtn.textContent=supported?(VIDEO_REC.active?'Recording Video...':`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
+}
+function stopRunRecording(){
+ if(!VIDEO_REC.active||!VIDEO_REC.rec)return;
+ VIDEO_REC.active=0;
+ const rec=VIDEO_REC.rec;
+ VIDEO_REC.rec=null;
+ try{rec.stop();}catch{}
+ syncRecordUi();
+}
+function startRunRecording(){
+ if(!VIDEO_REC.enabled||!videoRecordSupported())return;
+ if(VIDEO_REC.active)stopRunRecording();
+ VIDEO_REC.mime=pickVideoMime();
+ VIDEO_REC.stream=c.captureStream(60);
+ VIDEO_REC.chunks.length=0;
+ VIDEO_REC.sessionId=REC?.id||`run-${Date.now()}`;
+ VIDEO_REC.file=`neo-galaga-video-${VIDEO_REC.sessionId}.webm`;
+ const rec=VIDEO_REC.mime?new MediaRecorder(VIDEO_REC.stream,{mimeType:VIDEO_REC.mime}):new MediaRecorder(VIDEO_REC.stream);
+ rec.ondataavailable=e=>{if(e.data&&e.data.size)VIDEO_REC.chunks.push(e.data);};
+ rec.onstop=()=>{
+  const blob=new Blob(VIDEO_REC.chunks,{type:VIDEO_REC.mime||'video/webm'});
+  if(VIDEO_REC.stream){for(const t of VIDEO_REC.stream.getTracks())t.stop();VIDEO_REC.stream=null;}
+  VIDEO_REC.chunks.length=0;
+  if(blob.size>0){downloadBlob(blob,VIDEO_REC.file);showToast('Run video downloaded');}
+ };
+ rec.start(1000);
+ VIDEO_REC.rec=rec;
+ VIDEO_REC.active=1;
+ syncRecordUi();
 }
 
 function setFeedbackStatus(t='',err=0){
@@ -289,6 +342,13 @@ addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
+recordBtn.addEventListener('click',()=>{
+ if(VIDEO_REC.active)return;
+ VIDEO_REC.enabled=!VIDEO_REC.enabled;
+ localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
+ showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
+ syncRecordUi();
+});
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 feedbackForm.addEventListener('submit',submitFeedback);
@@ -351,6 +411,7 @@ function start(){
  started=1;paused=0;Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
+ startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
 }
 
@@ -366,7 +427,7 @@ function loseShip(){
  if(S.lives<0)gameOver();
 }
 
-function gameOver(){logEvent('game_over',{score:S.score,stage:S.stage});logSnapshot('game_over');started=0;S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
+function gameOver(){logEvent('game_over',{score:S.score,stage:S.stage});logSnapshot('game_over');started=0;stopRunRecording();S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
 function bulletsMax(){return S.p.dual?4:2}
 
 function shoot(){
@@ -400,7 +461,8 @@ function awardKill(e,mode){
 
 function assignEscorts(boss){
  if(boss.t!=='boss')return;
- const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,2);
+ const maxEscorts=S.stage===1&&S.scriptMode?1:2;
+ const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;
  for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*64;e.shot=1;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
 }
@@ -424,6 +486,7 @@ function runStage1Script(dt,p,T){
  S.scriptT+=dt;
  if(S.scriptT>52){S.scriptMode=0;return;}
  while(S.scriptI<STAGE1_SCRIPT.length&&S.scriptT>=STAGE1_SCRIPT[S.scriptI].t){
+  if(S.stage===1&&S.att>=1)break;
   const s=STAGE1_SCRIPT[S.scriptI++],e=pickScriptEnemy(s.type,s.c);
   startDive(e,p,{capture:!!s.capture,escort:!!s.escort});
  }
@@ -542,7 +605,7 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=e&&!e.form&&stage1?0.12:0.22;
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22;
  return{w:d.w*scale,h:d.h*scale};
 }
 function playerHitbox(){return{w:7,h:6};}
@@ -602,10 +665,11 @@ function draw(){
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
- right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}`;
+ right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
  const toolsVisible=!started||paused||feedbackOpen;
  feedbackBtn.style.display=toolsVisible?'block':'none';
  exportBtn.style.display=toolsVisible?'block':'none';
+ recordBtn.style.display=toolsVisible?'block':'none';
  if(!started)msg.innerHTML='PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
@@ -617,6 +681,7 @@ function loop(ts){const dt=Math.min(.033,(ts-t0)/1000||0);t0=ts;update(dt);draw(
 resetSession();
 logEvent('boot');
 logSnapshot('boot');
+syncRecordUi();
 rs();requestAnimationFrame(loop);
 })();
 </script>
