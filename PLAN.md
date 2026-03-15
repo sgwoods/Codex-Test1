@@ -55,6 +55,14 @@
 - Build a synthetic player that can operate headlessly
 - Reuse the same log format for replay and automated regression testing
 
+### 5. Run Artifact Submission
+
+- Add a `Submit Run` flow that packages a gameplay video and matching JSON log together
+- Use external storage for large artifacts instead of trying to send them through email
+- Prefer GitHub issues as the durable tracking surface for submitted gameplay samples
+- Evaluate Google Drive as low-cost public artifact storage, with explicit handling for permissions and link generation
+- Keep manual fallback paths available when upload fails
+
 ## GitHub Issue Map
 
 - `#3` Synthetic user agent for headless gameplay with session replay
@@ -62,6 +70,7 @@
 - `#5` Add replay / watch mode for recorded sessions
 - `#6` Add gameplay session logging and export
 - `#7` Verify FormSubmit activation against Modem inbox
+- `#8` Design `Submit Run` flow using GitHub issues plus Google Drive artifact storage
 
 ## Immediate Next Steps
 
@@ -69,3 +78,4 @@
 2. Implement `#6` structured gameplay logging
 3. Implement `#5` replay mode using the same session log format
 4. Use `#4` to tune early-stage fidelity with logs plus reference video
+5. Design and evaluate a reliable artifact submission workflow for video + JSON run captures
