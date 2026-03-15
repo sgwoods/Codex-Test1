@@ -132,7 +132,7 @@ const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,g
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
-const enemyRef=e=>e?{id:e.id,type:e.t,column:e.c,row:e.r,dive:e.dive,carry:!!e.carry}:null;
+const enemyRef=e=>e?{id:e.id,enemyType:e.t,column:e.c,row:e.r,dive:e.dive,carry:!!e.carry}:null;
 function resetSession(reason='boot'){
  sessionN++;
  REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
@@ -318,7 +318,7 @@ function spawnFormation(){
   if(r===0)t=(c>=3&&c<=6)?'boss':'but';
   else if(r===1)t='but';
   const e=makeEnemy(t,r,c,ox+c*gx,oy+r*gy);
-  e.spawn=S.stage===1?(entry.indexOf(c)*.48+r*1.2+(r>1?1.1:0)+(t==='boss'?.1:0)):r*.08+c*.03;
+  e.spawn=S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03;
   S.e.push(e);
  }
  for(let i=0;i<S.rogue;i++){
@@ -339,7 +339,7 @@ function spawnChallenge(){
 
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=isChallengeStage(S.stage);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
- S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=2.4;
+ S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.banner=2.5}
  else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.banner=1.6}
@@ -422,7 +422,7 @@ function startDive(e,p,opts={}){
 function runStage1Script(dt,p,T){
  if(!S.scriptMode)return;
  S.scriptT+=dt;
- if(S.scriptT>45){S.scriptMode=0;return;}
+ if(S.scriptT>52){S.scriptMode=0;return;}
  while(S.scriptI<STAGE1_SCRIPT.length&&S.scriptT>=STAGE1_SCRIPT[S.scriptI].t){
   const s=STAGE1_SCRIPT[S.scriptI++],e=pickScriptEnemy(s.type,s.c);
   startDive(e,p,{capture:!!s.capture,escort:!!s.escort});
@@ -452,8 +452,12 @@ function updateEnemy(e,dt,t,T,p){
  const tx=e.tx+Math.sin(t*.92+e.r*.45)*52,ty=e.ty+Math.sin(t*1.35+e.c*.55)*9;
  if(!e.form){
   if(e.spawn>0){e.spawn-=dt;return}
-  e.en+=dt*1.35;const k=Math.max(0,1-e.en*.42),sx=tx+Math.sin(e.en*5+e.ph)*150*k,sy=ty+Math.cos(e.en*4+e.ph)*48*k;
-  e.x+=(sx-e.x)*Math.min(1,dt*3.6);e.y+=(sy-e.y)*Math.min(1,dt*3.4);if(e.en>2.4)e.form=1;return;
+  const stage1=S.stage===1&&!S.challenge;
+  e.en+=dt*(stage1?1.02:1.35);
+  const k=Math.max(0,1-e.en*(stage1?0.35:0.42));
+  const sx=tx+Math.sin(e.en*(stage1?5.6:5)+e.ph)*(stage1?170:150)*k;
+  const sy=ty+Math.cos(e.en*(stage1?4.5:4)+e.ph)*(stage1?58:48)*k;
+  e.x+=(sx-e.x)*Math.min(1,dt*(stage1?3.1:3.6));e.y+=(sy-e.y)*Math.min(1,dt*(stage1?3:3.4));if(e.en>(stage1?2.9:2.4))e.form=1;return;
  }
  if(e.dive===5){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
@@ -537,7 +541,10 @@ function enemyDims(e){
  if(e.t==='rogue')return{w:35,h:28};
  return{w:32,h:26};
 }
-function enemyHitbox(e){const d=enemyDims(e);return{w:d.w*.22,h:d.h*.22};}
+function enemyHitbox(e){
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=e&&!e.form&&stage1?0.12:0.22;
+ return{w:d.w*scale,h:d.h*scale};
+}
 function playerHitbox(){return{w:7,h:6};}
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  const ps=3*s;drawPix(-ps*1.6,-ps*2,ps,P.ship,colA,colB);
