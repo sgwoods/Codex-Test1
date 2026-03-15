@@ -79,6 +79,7 @@ const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let REC=null,recShotT=0,sessionN=0;
+let autoExportedSessionId='';
 const RECORD_PREF_KEY='galagaTribAutoVideo';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
 const PLAY_W=280,PLAY_H=360;
@@ -163,17 +164,15 @@ function fireEnemyBullet(e,vx,vy,kind){
 function logEnemyAttackStart(e,mode,extra={}){
  logEvent('enemy_attack_start',Object.assign({mode,x:+e.x.toFixed(2),y:+e.y.toFixed(2)},enemyRef(e),extra));
 }
-function exportSession(){
+function exportSession(opts={}){
  if(!REC)resetSession();
+ if(opts.auto&&autoExportedSessionId===REC.id)return;
  logSnapshot('export');
  const out=JSON.stringify({session:Object.assign({},REC,{duration:recTime(),eventCount:REC.events.length,snapshotCount:REC.snapshots.length})},null,2);
  const file=`neo-galaga-session-${REC.id}.json`;
- const blob=new Blob([out],{type:'application/json'});
- const url=URL.createObjectURL(blob);
- const a=document.createElement('a');
- a.href=url;a.download=file;a.click();
- setTimeout(()=>URL.revokeObjectURL(url),1000);
- showToast('Session log downloaded');
+ downloadBlob(new Blob([out],{type:'application/json'}),file);
+ if(opts.auto)autoExportedSessionId=REC.id;
+ if(!opts.silent)showToast('Session log downloaded');
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -409,6 +408,7 @@ function spawnStage(){
 
 function start(){
  resetSession('game_start');
+ autoExportedSessionId='';
  started=1;paused=0;Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -428,7 +428,7 @@ function loseShip(){
  if(S.lives<0)gameOver();
 }
 
-function gameOver(){logEvent('game_over',{score:S.score,stage:S.stage});logSnapshot('game_over');started=0;stopRunRecording();S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
+function gameOver(){logEvent('game_over',{score:S.score,stage:S.stage});logSnapshot('game_over');started=0;if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});stopRunRecording();S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
 function bulletsMax(){return S.p.dual?4:2}
 
 function shoot(){
