@@ -75,16 +75,16 @@ const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let REC=null,recShotT=0,sessionN=0;
 const PLAY_W=280,PLAY_H=360;
-const VIS={shipW:44,shipH:34,enemyW:44,enemyH:34,gx:118,gy:66,playerBottom:92,beamLen:380};
+const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380};
 const STAGE1_SCRIPT=[
- {t:2.2,type:'bee',c:1},{t:4.4,type:'bee',c:8},
- {t:6.3,type:'but',c:2},{t:8.1,type:'but',c:7},
- {t:10.4,type:'bee',c:0},{t:12.7,type:'bee',c:9},
- {t:15.1,type:'but',c:4},{t:17.8,type:'boss',c:3,escort:1},
- {t:21.0,type:'bee',c:5},{t:23.2,type:'but',c:6},
- {t:26.2,type:'boss',c:6,capture:1},
- {t:30.0,type:'bee',c:2},{t:33.0,type:'but',c:8},
- {t:36.1,type:'boss',c:4,escort:1}
+ {t:4.6,type:'bee',c:1},{t:6.1,type:'bee',c:8},
+ {t:8.2,type:'but',c:2},{t:9.8,type:'but',c:7},
+ {t:12.4,type:'bee',c:0},{t:14.2,type:'bee',c:9},
+ {t:17.3,type:'but',c:4},{t:20.4,type:'boss',c:3,escort:1},
+ {t:24.1,type:'bee',c:5},{t:26.0,type:'but',c:6},
+ {t:29.6,type:'boss',c:6,capture:1},
+ {t:34.0,type:'bee',c:2},{t:37.2,type:'but',c:8},
+ {t:41.0,type:'boss',c:4,escort:1}
 ];
 
 const AC=()=>sfx.a||(sfx.a=new (window.AudioContext||webkitAudioContext)());
@@ -125,7 +125,7 @@ const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
- :s<=1?{shotCap:1,attackCap:2,diveRate:.55,coolA:6,coolB:4.2,globalA:2.1,globalB:1.55,capChance:.14,diveShotRate:.42,aimMul:.09,aimClamp:13,aimRnd:2,bulletVy:165,bulletVyStage:3}
+ :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
  :s===2?{shotCap:1,attackCap:2,diveRate:.72,coolA:5.6,coolB:3.6,globalA:1.9,globalB:1.35,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
  :s===3?{shotCap:2,attackCap:3,diveRate:.86,coolA:5.1,coolB:3.1,globalA:1.7,globalB:1.2,capChance:.22,diveShotRate:.62,aimMul:.12,aimClamp:16,aimRnd:2.3,bulletVy:176,bulletVyStage:4}
  :{shotCap:3,attackCap:2+(s>5)+(s>10),diveRate:1.02+s*.055,coolA:4.7,coolB:2.2,globalA:1.3,globalB:.9,capChance:.28,diveShotRate:.8,aimMul:.18,aimClamp:22,aimRnd:4,bulletVy:184,bulletVyStage:4};
@@ -282,7 +282,7 @@ function rs(){
   const cols=['#ffffff','#8dc4ff','#ff6f6f','#7dff7d','#ffd36f','#ff7cff'];
   for(let i=0;i<420;i++)S.st.push({x:rnd(PLAY_W),y:rnd(PLAY_H),z:rnd(1,.2),s:rnd(2,.7),c:cols[(Math.random()*cols.length)|0],tw:rnd(6.28)});
  }
- VIS.gx=21;VIS.gy=18;VIS.playerBottom=20;VIS.beamLen=300;
+ VIS.gx=18;VIS.gy=15;VIS.playerBottom=20;VIS.beamLen=300;
  S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;
 }
 addEventListener('resize',rs);
@@ -310,13 +310,15 @@ addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e
 function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(Math.random()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,ch:0,miss:0};}
 
 function spawnFormation(){
- const cols=10,rows=4,gx=VIS.gx,gy=VIS.gy,ox=PLAY_W/2-(cols-1)*gx/2,oy=22;
+ const cols=10,rows=4,gx=VIS.gx,gy=VIS.gy,ox=PLAY_W/2-(cols-1)*gx/2,oy=18;
+ const entry=[4,5,3,6,2,7,1,8,0,9];
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
   if(r===0)t=(c>=3&&c<=6)?'boss':'but';
   else if(r===1)t='but';
   const e=makeEnemy(t,r,c,ox+c*gx,oy+r*gy);
+  e.spawn=S.stage===1?(entry.indexOf(c)*.48+r*1.2+(r>1?1.1:0)+(t==='boss'?.1:0)):r*.08+c*.03;
   S.e.push(e);
  }
  for(let i=0;i<S.rogue;i++){
@@ -337,7 +339,7 @@ function spawnChallenge(){
 
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=isChallengeStage(S.stage);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
- S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=1.2;
+ S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=2.4;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.banner=2.5}
  else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.banner=1.6}
@@ -530,18 +532,18 @@ function update(dt){
 }
 
 function enemyDims(e){
- if(e.t==='boss')return{w:48,h:38};
- if(e.t==='but')return{w:42,h:34};
- if(e.t==='rogue')return{w:44,h:35};
- return{w:40,h:32};
+ if(e.t==='boss')return{w:38,h:30};
+ if(e.t==='but')return{w:34,h:27};
+ if(e.t==='rogue')return{w:35,h:28};
+ return{w:32,h:26};
 }
 function enemyHitbox(e){const d=enemyDims(e);return{w:d.w*.22,h:d.h*.22};}
-function playerHitbox(){return{w:8,h:7};}
+function playerHitbox(){return{w:7,h:6};}
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
- const ps=4*s;drawPix(-ps*1.6,-ps*2,ps,P.ship,colA,colB);
+ const ps=3*s;drawPix(-ps*1.6,-ps*2,ps,P.ship,colA,colB);
 }
 function drawEnemy(e){
- const ps=4;
+ const ps=3;
  ctx.save();ctx.translate(e.x,e.y);if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
  if(e.t==='bee')drawPix(-ps*1.5,-ps*2,ps,P.bee,'#ffcf3b','#2f78ff');
  else if(e.t==='but')drawPix(-ps*1.5,-ps*2,ps,P.but,'#ff2f43','#59a1ff');
@@ -557,7 +559,7 @@ function drawEnemy(e){
  ctx.restore();
 }
 function drawPlayerBody(x,y,dual=0,ghost=0){
- const ps=4;
+ const ps=3;
  ctx.save();ctx.translate(x,y);if(ghost)ctx.globalAlpha=.52;
  drawPix(-ps*1.6,-ps*2.2,ps,P.ship,'#f4f8ff','#ff3347');
  if(dual){drawPix(-ps*4.2,-ps*1.9,ps*0.82,P.ship,'#f4f8ff','#ff3347');drawPix(ps*0.95,-ps*1.9,ps*0.82,P.ship,'#f4f8ff','#ff3347');}
@@ -584,8 +586,8 @@ function draw(){
  for(const s of S.st){ctx.globalAlpha=.2+s.z*.8*(.35+Math.sin(s.tw)*.65);ctx.fillStyle=s.c;ctx.fillRect(s.x,s.y,s.s,s.s)}ctx.globalAlpha=1;
  for(const f of S.fx){ctx.globalAlpha=Math.max(0,f.t*2);ctx.fillStyle=f.c;ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,7);ctx.fill()}ctx.globalAlpha=1;
  if(S.cap){ctx.save();ctx.translate(S.cap.x,S.cap.y);drawMiniShip(1.25,'#f4f8ff','#ff3347');ctx.restore();}
- for(const b of S.pb){ctx.fillStyle='#e9f8ff';ctx.fillRect(b.x-2,b.y-18,4,22)}
- for(const b of S.eb){ctx.fillStyle='#ff5e5e';ctx.fillRect(b.x-2,b.y-12,4,16)}
+ for(const b of S.pb){ctx.fillStyle='#e9f8ff';ctx.fillRect(b.x-1,b.y-16,2,18)}
+ for(const b of S.eb){ctx.fillStyle='#ff5e5e';ctx.fillRect(b.x-1,b.y-10,2,13)}
  for(const e of S.e)if(e.hp>0)drawEnemy(e);
  const p=S.p;if((!p.pending||p.spawn<=.3)&&!p.spawn){if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0)}
  if(p.captured)drawPlayerBody(p.x,p.y,0,1);
@@ -594,6 +596,9 @@ function draw(){
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
  right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}`;
+ const toolsVisible=!started||paused||feedbackOpen;
+ feedbackBtn.style.display=toolsVisible?'block':'none';
+ exportBtn.style.display=toolsVisible?'block':'none';
  if(!started)msg.innerHTML='PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
