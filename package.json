@@ -1,0 +1,24 @@
+{
+  "name": "codex-test1",
+  "version": "1.0.0",
+  "description": "Galaga-inspired browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.",
+  "main": "index.js",
+  "scripts": {
+    "harness": "node tools/harness/run-gameplay.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgwoods/Codex-Test1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgwoods/Codex-Test1/issues"
+  },
+  "homepage": "https://github.com/sgwoods/Codex-Test1#readme",
+  "dependencies": {
+    "playwright-core": "^1.58.2"
+  }
+}

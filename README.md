@@ -58,6 +58,18 @@ After GitHub Pages deploys, play at:
 - Exported logs are downloaded as JSON from the in-game `Export Log` button
 - Each export includes build metadata, browser/user agent, viewport info, input events, and game-state snapshots
 
+## Gameplay Harness
+
+- A local replay harness can run the game in Chrome, replay a saved session JSON, and write fresh `.webm` and `.json` artifacts into `harness-artifacts/`
+- It uses your installed `/Applications/Google Chrome.app`
+- Run it with a previously exported session:
+  ```bash
+  npm run harness -- --session /absolute/path/to/neo-galaga-session.json
+  ```
+- Output is written to a timestamped folder under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+- The harness also writes a `summary.json` beside the generated artifacts
+
 ## Modem Feedback Integration
 
 The game includes a floating `Feedback` button (top-right).

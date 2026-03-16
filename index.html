@@ -777,6 +777,45 @@ function draw(){
  else msg.textContent='';
 }
 
+window.__galagaHarness__={
+ start(cfg={}){
+  if(typeof cfg.autoVideo==='boolean'){
+   VIDEO_REC.enabled=!!cfg.autoVideo;
+   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
+   syncRecordUi();
+  }
+  if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
+   testStage.value=cl(+cfg.stage||1,1,99)|0;
+   testShips.value=cl(+cfg.ships||3,1,9)|0;
+   testChallenge.checked=!!cfg.challenge;
+   saveTestCfg();
+  }
+  if(!started)start();
+ },
+ stop(label='harness'){
+  logEvent('harness_stop',{label});
+  logSnapshot('harness_stop');
+  if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
+  stopRunRecording();
+  started=0;paused=0;
+  msg.textContent='';
+ },
+ export(){exportSession({silent:1})},
+ snapshot(){return snapshot()},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active}},
+ setAutoVideo(v){
+  VIDEO_REC.enabled=!!v;
+  localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
+  syncRecordUi();
+ },
+ setTest(cfg={}){
+  testStage.value=cl(+cfg.stage||1,1,99)|0;
+  testShips.value=cl(+cfg.ships||3,1,9)|0;
+  testChallenge.checked=!!cfg.challenge;
+  saveTestCfg();
+ }
+};
+
 function loop(ts){const dt=Math.min(.033,(ts-t0)/1000||0);t0=ts;update(dt);draw();requestAnimationFrame(loop)}
 resetSession();
 logEvent('boot');
