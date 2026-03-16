@@ -66,9 +66,21 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run harness -- --session /absolute/path/to/neo-galaga-session.json
   ```
+- Or run one of the built-in scenarios:
+  ```bash
+  npm run harness -- --scenario stage3-challenge
+  npm run harness -- --scenario stage4-five-ships
+  ```
 - Output is written to a timestamped folder under:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
-- The harness also writes a `summary.json` beside the generated artifacts
+- The harness writes a `summary.json` beside the generated artifacts, including:
+  - seed used for the run
+  - stage clears / challenge clears / ship losses
+  - whether the generated `.webm` contains audio
+- You can re-run the analyzer on an existing run folder:
+  ```bash
+  npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder
+  ```
 
 ## Modem Feedback Integration
 

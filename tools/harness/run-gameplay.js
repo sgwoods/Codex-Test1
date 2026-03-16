@@ -3,10 +3,12 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { chromium } = require('playwright-core');
+const { analyze } = require('./analyze-run');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const DEFAULT_OUT = path.join(ROOT, 'harness-artifacts');
+const SCENARIOS = path.join(__dirname, 'scenarios');
 
 function parseArgs(argv){
   const args = {};
@@ -69,6 +71,12 @@ function inferConfig(session){
   };
 }
 
+function hashString(input=''){
+  let h = 2166136261;
+  for(const ch of input){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+
 function specFromSession(file){
   const raw = JSON.parse(fs.readFileSync(file, 'utf8')).session;
   return {
@@ -76,6 +84,7 @@ function specFromSession(file){
     source: file,
     duration: Math.max(8, Math.ceil((raw.duration || 15) + 1)),
     config: inferConfig(raw),
+    seed: raw.seed || hashString(raw.id || path.basename(file)),
     actions: raw.events
       .filter(e => e.type === 'key_down' || e.type === 'key_up')
       .map(e => ({ t: e.t || 0, action: e.type === 'key_down' ? 'down' : 'up', code: e.code }))
@@ -93,6 +102,7 @@ function specFromScenario(file){
       ships: Math.max(1, Math.min(9, raw.config?.ships || 3)),
       challenge: !!raw.config?.challenge
     },
+    seed: (raw.seed >>> 0) || hashString(raw.name || path.basename(file)),
     actions: (raw.actions || []).map(a => ({ t: a.t || 0, action: a.action || 'press', code: a.code || a.key || 'Space', hold: a.hold || 0.1 }))
   };
 }
@@ -133,11 +143,14 @@ async function main(){
   if(args.help || (!args.session && !args.scenario)){
     console.log('Usage: npm run harness -- --session /absolute/path/to/session.json');
     console.log('   or: npm run harness -- --scenario /absolute/path/to/scenario.json');
+    console.log('   or: npm run harness -- --scenario stage3-challenge');
     process.exit(args.help ? 0 : 1);
   }
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
 
-  const spec = args.session ? specFromSession(path.resolve(args.session)) : specFromScenario(path.resolve(args.scenario));
+  const scenarioPath = args.scenario && !String(args.scenario).includes(path.sep) ? path.join(SCENARIOS, `${args.scenario}.json`) : args.scenario;
+  const spec = args.session ? specFromSession(path.resolve(args.session)) : specFromScenario(path.resolve(scenarioPath));
+  if(args.seed) spec.seed = (+args.seed >>> 0) || spec.seed;
   const outBase = path.resolve(args.out || DEFAULT_OUT);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const outDir = path.join(outBase, `${spec.name}-${stamp}`);
@@ -159,11 +172,12 @@ async function main(){
     await page.addInitScript(cfg => {
       localStorage.setItem('galagaTribAutoVideo', '1');
       localStorage.setItem('galagaTribTestCfg', JSON.stringify(cfg));
-    }, spec.config);
+      localStorage.setItem('galagaTribHarnessSeed', String(cfg.seed >>> 0));
+    }, Object.assign({}, spec.config, { seed: spec.seed }));
 
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__galagaHarness__);
-    await page.evaluate(cfg => window.__galagaHarness__.start(Object.assign({ autoVideo: true }, cfg)), spec.config);
+    await page.evaluate(cfg => window.__galagaHarness__.start(Object.assign({ autoVideo: true }, cfg)), Object.assign({}, spec.config, { seed: spec.seed }));
 
     const replayTime = await replay(page, spec);
     const remain = Math.max(0, spec.duration - replayTime);
@@ -185,9 +199,12 @@ async function main(){
       source: spec.source,
       duration: spec.duration,
       config: spec.config,
+      seed: spec.seed,
       state,
       files: saved
     };
+    fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
+    summary.analysis = analyze(outDir);
     fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
     console.log(JSON.stringify(summary, null, 2));
     await context.close();
