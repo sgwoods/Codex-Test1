@@ -15,12 +15,15 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .splashScore{display:block;color:#ffd86d;font-size:1em;letter-spacing:.06em}
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
-#msg .scoreTable{display:grid;grid-template-columns:auto auto auto;gap:.08em .95em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
+#msg .scoreTable{display:grid;grid-template-columns:auto auto auto auto;gap:.08em .85em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
+#msg .scoreName{color:#f4f7ff;text-align:center;min-width:3.4em}
 #msg .scoreValue{color:#f4f7ff}
 #msg .scoreStage{color:#a9d8ff}
 #msg .scoreHot{color:#ffd86d}
+#msg .gameOverEntry{display:block;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em 0 .25em}
+#msg .entryCursor{color:#ffd86d;text-decoration:underline}
 #msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
 #feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
@@ -132,6 +135,7 @@ let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toas
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
 let gameOverHtml='';
+let gameOverState=null;
 const RECORD_PREF_KEY='galagaTribAutoVideo';
 const TEST_PREF_KEY='galagaTribTestCfg';
 const SEED_PREF_KEY='galagaTribHarnessSeed';
@@ -216,15 +220,16 @@ const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.sco
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,column:e.c,row:e.r,dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
-  return JSON.parse(localStorage.getItem(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
+  return JSON.parse(localStorage.getItem(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
  }catch{return[]}
 }
 function saveScoreboard(list){
  localStorage.setItem(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
 }
 function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
+function sanitizeInitials(txt=''){return String(txt).toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)}
 function recordScore(score,stage){
- const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,score:score|0,stage:stage|0,at:new Date().toISOString()};
+ const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:'YOU',score:score|0,stage:stage|0,at:new Date().toISOString()};
  const board=loadScoreboard();
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
@@ -234,11 +239,39 @@ function recordScore(score,stage){
  localStorage.galagaTribBest=S.best;
  return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
 }
-function buildGameOverHtml(score,stage){
+function saveGameOverInitials(){
+ if(!gameOverState?.entryId)return;
+ const board=loadScoreboard();
+ const row=board.find(x=>x.id===gameOverState.entryId);
+  if(row){
+  row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
+  saveScoreboard(board);
+ }
+}
+function buildGameOverHtmlFromState(){
+ if(!gameOverState)return '';
+ const board=loadScoreboard();
+ const rows=board.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String(i+1).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
+ const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
+ let entryHtml='';
+ let footHtml='<span class="gameOverFoot"><span class="k">Enter</span> to play again</span>';
+ if(gameOverState.editing){
+  const shown=gameOverState.initials.map((ch,i)=>`<span class="${i===gameOverState.cursor?'entryCursor':''}">${ch||'_'}</span>`).join(' ');
+  entryHtml=`<span class="gameOverEntry">ENTER INITIALS ${shown}</span>`;
+  footHtml='<span class="gameOverFoot">Type letters, <span class="k">Backspace</span> to edit, <span class="k">Enter</span> to save</span>';
+ }
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">TOP 10 PILOTS   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+}
+function buildGameOverState(score,stage){
  const res=recordScore(score,stage);
- const rows=res.board.map((row,i)=>`<span class="scoreRank${row.id===res.entry.id?' scoreHot':''}">${String(i+1).padStart(2,'0')}</span><span class="scoreValue${row.id===res.entry.id?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===res.entry.id?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
- const rankTxt=res.rank?`RANK ${String(res.rank).padStart(2,'0')}`:'OUT OF TOP 10';
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">TOP 10 PILOTS   ${rankTxt}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot"><span class="k">Enter</span> to play again</span>`;
+ const editing=!!res.rank;
+ return{
+  entryId:res.entry.id,
+  rank:res.rank,
+  initials:['Y','O','U'],
+  cursor:0,
+  editing
+ };
 }
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
@@ -500,6 +533,31 @@ addEventListener('keydown',e=>{
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
  if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();testOpen=!testOpen;syncTestUi();}
+ if(!started&&gameOverState?.editing){
+  if(e.code==='Enter'){
+   e.preventDefault();
+   saveGameOverInitials();
+   gameOverState.editing=0;
+   gameOverHtml=buildGameOverHtmlFromState();
+   return;
+  }
+  if(e.code==='Backspace'){
+   e.preventDefault();
+   gameOverState.cursor=Math.max(0,gameOverState.cursor-1);
+   gameOverState.initials[gameOverState.cursor]='A';
+   gameOverHtml=buildGameOverHtmlFromState();
+   return;
+  }
+  const m=e.code.match(/^Key([A-Z])$/);
+  if(m){
+   e.preventDefault();
+   gameOverState.initials[gameOverState.cursor]=m[1];
+   gameOverState.cursor=Math.min(2,gameOverState.cursor+1);
+   saveGameOverInitials();
+   gameOverHtml=buildGameOverHtmlFromState();
+   return;
+  }
+ }
  if(!started&&e.code==='Enter')start();
  if(started&&e.code==='KeyP')paused=!paused;
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
@@ -552,7 +610,7 @@ function start(){
  const cfg=saveTestCfg();
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
- gameOverHtml='';
+ gameOverHtml='';gameOverState=null;
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -578,7 +636,8 @@ function gameOver(){
  started=0;
  if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
  stopRunRecording();
- gameOverHtml=buildGameOverHtml(S.score,S.stage);
+ gameOverState=buildGameOverState(S.score,S.stage);
+ gameOverHtml=buildGameOverHtmlFromState();
  sfx.over();
 }
 function bulletsMax(){return S.p.dual?4:2}
