@@ -28,8 +28,8 @@
 ## Known Problems
 
 - We do not yet know whether the Modem inbox address can complete FormSubmit's one-time activation flow
-- Challenge-stage scoring is still too low in automated runs
-- Stage 4/5 pressure remains too punishing in the five-ship scenario
+- Challenge-stage scoring has improved materially, but still needs visual/reference review against original Galaga
+- Stage 4/5 pressure remains the main gameplay balance problem in the five-ship scenario
 - Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison
 - Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own
 
@@ -39,7 +39,8 @@
 - Audio capture is stable in the harness (`0` audio failures in the latest quick batch)
 - Challenge scenario improved sharply to `24/40` hits (`60%` hit rate), which is materially closer to a readable Galaga-like challenge stage
 - The stage-pressure scenario now survives the full window, but still spends too many ships and ends at Stage `4`
-- The new lower-input Stage `4` survival scenario still dies before the full window and does not progress beyond Stage `4`
+- The five-ship Stage `4` scenario now survives the full window in the latest tuning pass, but still loses ships too quickly and does not progress deeply enough
+- New harness diagnostics now expose first-loss timing, loss clustering, and attacker pressure at death
 - Current gameplay work should now focus primarily on later-stage survivability, spacing, and attack structure while preserving the improved challenge-stage behavior
 
 ## Workstreams
@@ -97,4 +98,5 @@
 3. Reduce Stage 4/5 punishment in both the pressure and survival scenarios
 4. Improve later-stage progression so Stage `4` scenarios reach deeper comparison territory
 5. Add richer scenario coverage and better automated tuning metrics
-6. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place
+6. Improve the late-stage visual presentation and high-score screen readability to match the stronger gameplay foundation
+7. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place

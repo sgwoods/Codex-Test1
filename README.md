@@ -84,10 +84,12 @@ After GitHub Pages deploys, play at:
 - The harness writes a `summary.json` beside the generated artifacts, including:
   - seed used for the run
   - stage clears / challenge clears / ship losses
+  - per-loss context such as recent attack starts, recent enemy bullets, and nearby snapshot counts
   - whether the generated `.webm` contains audio
 - Batch mode also writes:
   - `batch-report.json` with aggregate challenge hits, ship losses, total duration, and audio failures
   - `tuning-report.json` with prioritized findings to guide the next gameplay pass
+  - later-stage diagnostics such as first-loss timing, loss clustering, and attacker pressure at death
   - the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish "died early" from "survived the full window but spent too many ships"
 - Typical batch timings on this machine:
   - `quick`: about `1.5-2 minutes`
@@ -117,9 +119,9 @@ After GitHub Pages deploys, play at:
 - `harness:check-latest` keeps a small local state file in `harness-artifacts/` so scheduled scans can safely skip runs that were already imported
 - Current tuning targets from the latest quick batch:
   - challenge-stage scoring is materially improved, but later-stage visual fidelity still needs work
-  - Stage 4/5 pressure is still too punishing
+  - Stage 4/5 pressure is improving, but still needs smoother loss spacing
   - lower-input Stage 4 survival needs to stay alive long enough to prove later stages are readable
-  - five-ship runs still end too early for rich late-stage comparison
+  - five-ship runs still need deeper progression for richer late-stage comparison
 
 ## Modem Feedback Integration
 
