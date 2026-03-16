@@ -10,6 +10,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:"Cour
 canvas{display:block;width:100vw;height:100vh}
 #hud{position:fixed;inset:0;pointer-events:none;display:flex;justify-content:space-between;padding:12px 18px;font-size:clamp(20px,1.6vw,30px);font-weight:700;letter-spacing:.02em;text-shadow:0 0 6px #000}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
+#msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
+#msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
+#msg .splashScore{display:block;color:#ffd86d;font-size:1em;letter-spacing:.06em}
 #feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
 #exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
@@ -184,7 +187,7 @@ const P={
 };
 const C={ship:'#7ed3ff',ship2:'#4da4f0',bee:'#ffd84a',but:'#ff7c49',boss:'#6df77f',boss2:'#ff6db0',rogue:'#ff7c9b'};
 
-const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',fireCD:0,t:null,rogue:0,
+const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40};
 
@@ -496,8 +499,8 @@ function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
- if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.banner=2.5}
- else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.banner=1.6}
+ if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challenge';S.banner=2.6}
+ else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
  logSnapshot('stage_spawn');
 }
 
@@ -507,7 +510,7 @@ function start(){
  const cfg=saveTestCfg();
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
- started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0});
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
  startRunRecording();
@@ -692,11 +695,23 @@ function update(dt){
   logEvent('stage_clear',{stage:S.stage,score:S.score});
   S.stage++;
   if(isChallengeStage(S.stage)){
-   S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.nextStageT=2.1;S.bannerTxt='CHALLENGING STAGE';S.banner=2.5;
+   S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.nextStageT=2.6;S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challengeIntro';S.banner=2.6;
   }else{spawnStage();sfx.start();}
   return
  }
- if(S.challenge&&!alive.length&&!S.ch.done){logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total});S.ch.done=1;const perfect=S.ch.hits===S.ch.total?10000:0;S.score+=perfect;S.bannerTxt=perfect?('PERFECT '+perfect):('HITS '+S.ch.hits+'/'+S.ch.total);S.banner=2.8;S.stage++;setTimeout(()=>{if(started)spawnStage()},900);}
+ if(S.challenge&&!alive.length&&!S.ch.done){
+  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total});
+  S.ch.done=1;
+  const perfect=S.ch.hits===S.ch.total?10000:0;
+  S.score+=perfect;
+  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';
+  S.bannerSub=`HITS ${S.ch.hits}/${S.ch.total}`;
+  if(perfect)S.bannerSub+=`\nBONUS ${perfect}`;
+  S.bannerMode='challengeResult';
+  S.banner=3.1;
+  S.stage++;
+  setTimeout(()=>{if(started)spawnStage()},1250);
+ }
 
  const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
  S.att=0;
@@ -801,7 +816,15 @@ function draw(){
  if(!started)msg.innerHTML='PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
- else if(S.banner>0)msg.textContent=S.bannerTxt;
+ else if(S.banner>0){
+  if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
+  else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
+  else if(S.bannerMode==='challengeResult'){
+   const parts=String(S.bannerSub||'').split('\n');
+   msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashScore">${parts[0]||''}</span>${parts[1]?`<span class="splashSub">${parts[1]}</span>`:''}`;
+  }else if(S.bannerMode==='stage')msg.innerHTML=`<span class="splashSub">${S.bannerTxt}</span>`;
+  else msg.textContent=S.bannerTxt;
+ }
  else msg.textContent='';
 }
 
