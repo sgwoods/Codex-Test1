@@ -185,7 +185,7 @@ const P={
 const C={ship:'#7ed3ff',ship2:'#4da4f0',bee:'#ffd84a',but:'#ff7c49',boss:'#6df77f',boss2:'#ff6db0',rogue:'#ff7c9b'};
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',fireCD:0,t:null,rogue:0,
- p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,
+ p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -486,8 +486,8 @@ function spawnChallenge(){
  const total=40;
  for(let i=0;i<total;i++){
   const t=i%10<2?'boss':i%3?'but':'bee';
-  const wave=(i/10)|0,lane=i%10,dir=wave%2?-1:1,group=lane<5?-1:1,slot=lane%5,row=slot<3?0:1;
-  S.e.push({id:(randUnit()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:dir>0?-44:PLAY_W+44,y:38+wave*20+row*12,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.92+slot*.18,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,dir,group,slot,row});
+  const wave=(i/10)|0,lane=i%10,side=lane<5?-1:1,slot=lane%5,row=slot<3?0:1;
+  S.e.push({id:(randUnit()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*18+row*10,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.7+slot*.14,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,sweep:wave%2?-1:1});
  }
  S.ch={hits:0,total:40,done:0};
 }
@@ -507,7 +507,7 @@ function start(){
  const cfg=saveTestCfg();
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
- started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40});
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
  startRunRecording();
@@ -520,7 +520,7 @@ function ex(x,y,n=10,col='#fff'){for(let i=0;i<n;i++)S.fx.push({x,y,vx:rnd(190,-
 function loseShip(){
  const p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
  logEvent('ship_lost',{stage:S.stage,score:S.score,livesBefore:Math.max(0,S.lives+1)});
- S.shake=.55;p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
+ S.shake=.55;S.recoverT=Math.max(S.recoverT,S.stage>=4?1.6:1.05);S.attackGapT=Math.max(S.attackGapT,.9);p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
  if(p.dual)p.dual=0;
  S.lives--;p.spawn=.95;
  if(S.lives<0)gameOver();
@@ -601,22 +601,22 @@ function runStage1Script(dt,p,T){
 
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){e.spawn-=dt;return}
- e.tm+=dt*(.52+(e.wave||0)*.016+Math.min(.03,S.stage*.003));
- const u=e.tm,p=e.ph,wave=e.wave||0,dir=e.dir||1,group=e.group||1,slot=e.slot||0,row=e.row||0;
- const laneX=PLAY_W/2+group*(34+slot*16);
- const topY=52+wave*18+row*12;
- if(u<2.35){
-  const q=u/2.35,startX=dir>0?-42:PLAY_W+42;
+ e.tm+=dt*(.48+(e.wave||0)*.012+Math.min(.025,S.stage*.0025));
+ const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
+ const laneX=PLAY_W/2+side*(70+slot*24);
+ const topY=50+wave*16+row*10;
+ if(u<2.45){
+  const q=u/2.45,startX=side>0?PLAY_W+44:-44;
   e.x=startX+(laneX-startX)*(1-Math.pow(1-q,2));
-  e.y=topY+Math.sin(u*2+p)*1.5;
- }else if(u<7.4){
-  const q=(u-2.35)/5.05;
-  e.x=laneX+group*Math.sin(q*Math.PI)*18+Math.sin(q*3.14+p)*1.5;
-  e.y=topY+q*18;
+  e.y=topY+Math.sin(u*1.8+p)*1.2;
+ }else if(u<7.85){
+  const q=(u-2.45)/5.4;
+  e.x=laneX+sweep*(1-q*2)*34+Math.sin(q*3.14+p)*1.2;
+  e.y=topY+q*14;
  }else{
-  const q=(u-7.4)/2.45;
-  e.x=laneX-group*(10+q*60)+Math.sin(q*4.6+p)*2.5;
-  e.y=topY+18+q*232;
+  const q=(u-7.85)/2.3;
+  e.x=laneX-sweep*(12+q*54)+Math.sin(q*4.2+p)*2;
+  e.y=topY+14+q*236;
  }
  if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
 }
@@ -661,11 +661,12 @@ function updateEnemy(e,dt,t,T,p){
  if(e.dive===3){e.x+=(tx-e.x)*Math.min(1,dt*3.4);e.y+=(ty-e.y)*Math.min(1,dt*3.5);if(Math.hypot(tx-e.x,ty-e.y)<5){e.dive=0;e.vx=e.vy=0;e.esc=0}return}
  e.x+=(tx-e.x)*Math.min(1,dt*6);e.y+=(ty-e.y)*Math.min(1,dt*6);e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
- const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate;
- if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap){
+ const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&S.stage>=4&&!cleanup;
+ if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
   if(e.t==='boss'&&canCapture()&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
   else{e.dive=1;e.vx=(p.x-e.x)*.56+rnd(38,-38);e.vy=94+rnd(20);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
+  if(stageAttackGap)S.attackGapT=.55+rnd(.14,.04);
  }
 }
 
@@ -674,6 +675,7 @@ function update(dt){
  recShotT-=dt;
  if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
+ S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
@@ -694,7 +696,7 @@ function update(dt){
  runStage1Script(dt,p,T);
 
  const cleanup=!S.challenge&&S.stage===1&&alive.length<=6;
- if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()){
+ if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()&&S.recoverT<=0){
   const bottoms={};for(const e of S.e)if(e.hp>0&&e.form&&!e.dive&&!e.ch){if(!bottoms[e.c]||e.y>bottoms[e.c].y)bottoms[e.c]=e}
   const list=Object.values(bottoms);
   if(list.length){const q=list[(randUnit()*list.length)|0];fireEnemyBullet(q,rnd(2,-2),154+S.stage*4,'formation');S.fireCD=cleanup?rnd(.9,.45):rnd(T.globalA,T.globalB)-Math.min(.1,S.stage*.004)}else S.fireCD=.25;
@@ -720,7 +722,7 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?0.52:(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?0.58:(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 function playerHitbox(){return{w:7,h:6};}

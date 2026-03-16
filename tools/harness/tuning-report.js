@@ -57,6 +57,7 @@ function buildReport(batch){
   const allRuns = batch.runs;
   const challengeRuns = scenarioRuns(allRuns, 'stage3-challenge');
   const stageRuns = scenarioRuns(allRuns, 'stage4-five-ships');
+  const survivalRuns = scenarioRuns(allRuns, 'stage4-survival');
 
   const audioFailures = allRuns.filter(r => r.analysis?.video?.audio === false).length;
   if(audioFailures){
@@ -89,6 +90,18 @@ function buildReport(batch){
     findings.push(makeFinding(2, 'Stage progression in the five-ship scenario is shallow', `Average ending stage is ${progressAvg.toFixed(2)}, suggesting later-stage survivability still limits useful comparison time.${survivalTxt}`));
   }
 
+  const survivalShipLosses = survivalRuns.map(r => (r.analysis?.shipLost || []).length);
+  const survivalLossAvg = avg(survivalShipLosses);
+  const survivalProgress = survivalRuns.map(stageFromState);
+  const survivalProgressAvg = avg(survivalProgress);
+  const survivalWindow = survivalRuns.map(survivalRatio);
+  const survivalWindowAvg = avg(survivalWindow);
+  if(survivalRuns.length){
+    if(survivalWindowAvg < 0.95) findings.push(makeFinding(1, 'Stage 4 survival scenario still ends too early', `Average survival reaches only ${(survivalWindowAvg*100).toFixed(1)}% of the scenario window.`));
+    else if(survivalLossAvg >= 3) findings.push(makeFinding(2, 'Stage 4 survival scenario still spends too many ships', `Average ship losses are ${survivalLossAvg.toFixed(2)} per run in the lower-input survival scenario.`));
+    if(survivalProgressAvg < 5) findings.push(makeFinding(2, 'Stage 4 survival scenario is not progressing far enough', `Average ending stage is ${survivalProgressAvg.toFixed(2)} in the survival scenario.`));
+  }
+
   if(!findings.length){
     findings.push(makeFinding(3, 'No obvious harness regressions', 'Audio, challenge scoring, and later-stage survivability all look within expected ranges for this batch.'));
   }
@@ -104,7 +117,10 @@ function buildReport(batch){
       stagePressureAverageShipLosses: +stageLossAvg.toFixed(4),
       stagePressureAverageEndingStage: +progressAvg.toFixed(4),
       stagePressureAverageSurvivalRatio: +stageSurvivalAvg.toFixed(4),
-      stagePressureAverageEndScore: +stageScoreAvg.toFixed(2)
+      stagePressureAverageEndScore: +stageScoreAvg.toFixed(2),
+      stageSurvivalAverageShipLosses: +survivalLossAvg.toFixed(4),
+      stageSurvivalAverageEndingStage: +survivalProgressAvg.toFixed(4),
+      stageSurvivalAverageSurvivalRatio: +survivalWindowAvg.toFixed(4)
     },
     findings
   };

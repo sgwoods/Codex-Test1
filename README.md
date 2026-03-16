@@ -71,6 +71,7 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run harness -- --scenario stage3-challenge
   npm run harness -- --scenario stage4-five-ships
+  npm run harness -- --scenario stage4-survival
   ```
 - Or run a seeded batch:
   ```bash
@@ -115,8 +116,9 @@ After GitHub Pages deploys, play at:
   ```
 - `harness:check-latest` keeps a small local state file in `harness-artifacts/` so scheduled scans can safely skip runs that were already imported
 - Current tuning targets from the latest quick batch:
-  - challenge-stage scoring is still too low
+  - challenge-stage scoring is materially improved, but later-stage visual fidelity still needs work
   - Stage 4/5 pressure is still too punishing
+  - lower-input Stage 4 survival needs to stay alive long enough to prove later stages are readable
   - five-ship runs still end too early for rich late-stage comparison
 
 ## Modem Feedback Integration

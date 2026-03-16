@@ -1,0 +1,38 @@
+{
+  "name": "stage4-survival",
+  "seed": 4017,
+  "duration": 36,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.5, "action": "down", "code": "Space" },
+    { "t": 0.6, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.81, "action": "down", "code": "ArrowRight" },
+    { "t": 6.0, "action": "up", "code": "ArrowRight" },
+    { "t": 6.01, "action": "up", "code": "Space" },
+    { "t": 6.4, "action": "down", "code": "ArrowLeft" },
+    { "t": 9.6, "action": "up", "code": "ArrowLeft" },
+    { "t": 10.2, "action": "down", "code": "Space" },
+    { "t": 10.25, "action": "down", "code": "ArrowRight" },
+    { "t": 13.4, "action": "up", "code": "ArrowRight" },
+    { "t": 13.41, "action": "up", "code": "Space" },
+    { "t": 13.8, "action": "down", "code": "ArrowLeft" },
+    { "t": 17.3, "action": "up", "code": "ArrowLeft" },
+    { "t": 18.0, "action": "down", "code": "Space" },
+    { "t": 18.05, "action": "down", "code": "ArrowRight" },
+    { "t": 21.0, "action": "up", "code": "ArrowRight" },
+    { "t": 21.01, "action": "up", "code": "Space" },
+    { "t": 21.4, "action": "down", "code": "ArrowLeft" },
+    { "t": 25.0, "action": "up", "code": "ArrowLeft" },
+    { "t": 25.8, "action": "down", "code": "Space" },
+    { "t": 25.81, "action": "down", "code": "ArrowRight" },
+    { "t": 29.4, "action": "up", "code": "ArrowRight" },
+    { "t": 29.41, "action": "up", "code": "Space" },
+    { "t": 29.8, "action": "down", "code": "ArrowLeft" },
+    { "t": 33.2, "action": "up", "code": "ArrowLeft" }
+  ]
+}

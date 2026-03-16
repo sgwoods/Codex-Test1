@@ -35,12 +35,12 @@
 
 ## Latest Harness Signals
 
-- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-16T17-10-40-903Z`
-- Audio capture is now stable in the harness (`0` audio failures in the latest quick batch)
-- Challenge scenario improved to `11/40` hits (`27.5%` hit rate), but that is still below a comfortable scoring window
-- The stage-pressure scenario now survives the full window more reliably, but still spends too many ships and ends at Stage `4`
-- The tuning report now needs to weigh survival duration alongside ship losses so we do not confuse "survived but paid heavily" with "died early"
-- Current gameplay work should keep focusing on challenge readability and Stage 4/5 pressure smoothing before expanding scope
+- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-16T17-35-57-996Z`
+- Audio capture is stable in the harness (`0` audio failures in the latest quick batch)
+- Challenge scenario improved sharply to `24/40` hits (`60%` hit rate), which is materially closer to a readable Galaga-like challenge stage
+- The stage-pressure scenario now survives the full window, but still spends too many ships and ends at Stage `4`
+- The new lower-input Stage `4` survival scenario still dies before the full window and does not progress beyond Stage `4`
+- Current gameplay work should now focus primarily on later-stage survivability, spacing, and attack structure while preserving the improved challenge-stage behavior
 
 ## Workstreams
 
@@ -93,8 +93,8 @@
 ## Immediate Next Steps
 
 1. Use `quick` harness batches as the default tuning loop
-2. Improve challenge-stage scoring windows and readability
-3. Reduce Stage 4/5 punishment in the five-ship scenario
-4. Re-run the updated gameplay tuning against `quick` batches until the metrics move materially
+2. Preserve the improved challenge-stage pattern while refining visual fidelity against original footage
+3. Reduce Stage 4/5 punishment in both the pressure and survival scenarios
+4. Improve later-stage progression so Stage `4` scenarios reach deeper comparison territory
 5. Add richer scenario coverage and better automated tuning metrics
 6. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place

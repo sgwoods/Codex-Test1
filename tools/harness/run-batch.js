@@ -11,15 +11,18 @@ const OUT_BASE = path.join(ROOT, 'harness-artifacts');
 const PROFILES = {
   quick: [
     { scenario: 'stage3-challenge', repeats: 1, seedBase: 3000 },
-    { scenario: 'stage4-five-ships', repeats: 1, seedBase: 4000 }
+    { scenario: 'stage4-five-ships', repeats: 1, seedBase: 4000 },
+    { scenario: 'stage4-survival', repeats: 1, seedBase: 4100 }
   ],
   default: [
     { scenario: 'stage3-challenge', repeats: 2, seedBase: 3000 },
-    { scenario: 'stage4-five-ships', repeats: 2, seedBase: 4000 }
+    { scenario: 'stage4-five-ships', repeats: 2, seedBase: 4000 },
+    { scenario: 'stage4-survival', repeats: 2, seedBase: 4100 }
   ],
   deep: [
     { scenario: 'stage3-challenge', repeats: 3, seedBase: 3000 },
-    { scenario: 'stage4-five-ships', repeats: 3, seedBase: 4000 }
+    { scenario: 'stage4-five-ships', repeats: 3, seedBase: 4000 },
+    { scenario: 'stage4-survival', repeats: 3, seedBase: 4100 }
   ]
 };
 
