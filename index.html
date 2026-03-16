@@ -25,7 +25,9 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .gameOverEntry{display:block;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em 0 .25em}
 #msg .entryCursor{display:inline-block;min-width:.72em;color:#000;background:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
 #msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
+#msg .blinkPrompt{animation:blinkPrompt .8s steps(1,end) infinite}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
 #feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
 #exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
@@ -191,7 +193,9 @@ const sfx={
  beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
  rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
  over(){this.seq([294,262,220,196],.11,'triangle',.017,-45,2300);this.play(147,.32,'sawtooth',.016,-120,.01,1900,.018);this.noise(.09,.004,1100,.1)},
- march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)}
+ march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)},
+ uiTick(){this.play(920,.024,'square',.004,-110,.001,5400);this.play(1320,.016,'triangle',.0025,-70,.001,5200,.004)},
+ uiConfirm(){this.seq([660,880],.04,'triangle',.008,30,4200)}
 };
 
 const P={
@@ -229,6 +233,10 @@ function saveScoreboard(list){
 }
 function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
 function sanitizeInitials(txt=''){return String(txt).toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)}
+function cycleInitial(ch='A',dir=1){
+ const code=((String(ch||'A').charCodeAt(0)-65+dir+26)%26)+65;
+ return String.fromCharCode(code);
+}
 function recordScore(score,stage){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:'YOU',score:score|0,stage:stage|0,at:new Date().toISOString()};
  const board=loadScoreboard();
@@ -255,11 +263,11 @@ function buildGameOverHtmlFromState(){
  const rows=board.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String(i+1).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
  const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
  let entryHtml='';
- let footHtml='<span class="gameOverFoot"><span class="k">Enter</span> to play again</span>';
+ let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
   const shown=gameOverState.initials.map((ch,i)=>`<span class="${i===gameOverState.cursor?'entryCursor':''}">${ch||'_'}</span>`).join(' ');
   entryHtml=`<span class="gameOverEntry">ENTER INITIALS ${shown}</span>`;
-  footHtml='<span class="gameOverFoot">Type letters, <span class="k">Backspace</span> to edit, <span class="k">Enter</span> to save</span>';
+  footHtml='<span class="gameOverFoot"><span class="k">Left/Right</span> move, <span class="k">Up/Down</span> change, type letters, <span class="k">Enter</span> to save</span>';
  }
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">TOP 10 PILOTS   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
@@ -539,13 +547,38 @@ addEventListener('keydown',e=>{
    e.preventDefault();
    saveGameOverInitials();
    gameOverState.editing=0;
+   sfx.uiConfirm();
+   gameOverHtml=buildGameOverHtmlFromState();
+   return;
+  }
+  if(e.code==='ArrowLeft'){
+   e.preventDefault();
+   gameOverState.cursor=Math.max(0,gameOverState.cursor-1);
+   sfx.uiTick();
+   gameOverHtml=buildGameOverHtmlFromState();
+   return;
+  }
+  if(e.code==='ArrowRight'){
+   e.preventDefault();
+   gameOverState.cursor=Math.min(2,gameOverState.cursor+1);
+   sfx.uiTick();
+   gameOverHtml=buildGameOverHtmlFromState();
+   return;
+  }
+  if(e.code==='ArrowUp'||e.code==='ArrowDown'){
+   e.preventDefault();
+   gameOverState.initials[gameOverState.cursor]=cycleInitial(gameOverState.initials[gameOverState.cursor],e.code==='ArrowUp'?1:-1);
+   saveGameOverInitials();
+   sfx.uiTick();
    gameOverHtml=buildGameOverHtmlFromState();
    return;
   }
   if(e.code==='Backspace'){
    e.preventDefault();
    gameOverState.cursor=Math.max(0,gameOverState.cursor-1);
-   gameOverState.initials[gameOverState.cursor]='A';
+    gameOverState.initials[gameOverState.cursor]='A';
+   saveGameOverInitials();
+   sfx.uiTick();
    gameOverHtml=buildGameOverHtmlFromState();
    return;
   }
@@ -555,6 +588,7 @@ addEventListener('keydown',e=>{
    gameOverState.initials[gameOverState.cursor]=m[1];
    gameOverState.cursor=Math.min(2,gameOverState.cursor+1);
    saveGameOverInitials();
+   sfx.uiTick();
    gameOverHtml=buildGameOverHtmlFromState();
    return;
   }
