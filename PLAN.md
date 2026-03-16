@@ -10,6 +10,11 @@
   - challenge stages
   - fullscreen and ultra scale
   - in-game feedback form
+- Local automation harness implemented:
+  - session replay in Chrome
+  - seeded scenario runs
+  - batch execution
+  - automatic artifact analysis and tuning reports
 - Feedback delivery currently uses FormSubmit to forward to `default-dimiglyd88@inbox.modem.dev`
 - If FormSubmit direct send fails, the game falls back to a prefilled `mailto:` draft
 
@@ -17,14 +22,16 @@
 
 - The game should continue to run as a lightweight localhost-friendly Chrome experience
 - Fidelity to original Galaga remains a primary product goal
-- We want better reproducibility for tuning, not just ad hoc visual comparisons
+- We now have a reproducible local tuning loop and should use it as the default evaluation path
 - GitHub issues should mirror the active roadmap closely enough that we can pick up work later without re-deriving context
 
 ## Known Problems
 
 - We do not yet know whether the Modem inbox address can complete FormSubmit's one-time activation flow
-- We do not yet have a structured gameplay capture system for comparing user inputs and rendered output against original Galaga footage
-- Gameplay tuning is still based on manual observation rather than repeatable traces
+- Challenge-stage scoring is still too low in automated runs
+- Stage 4/5 pressure remains too punishing in the five-ship scenario
+- Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison
+- Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own
 
 ## Workstreams
 
@@ -39,7 +46,8 @@
 - Add in-game session logging for keyboard actions and game-state snapshots
 - Add export/download of recorded sessions
 - Add replay or watch mode for recorded sessions
-- Pair session logs with screen recordings for direct comparison to original Galaga footage
+- Use harness-generated `.webm` + `.json` artifacts as the default tuning input
+- Pair local harness results with original Galaga reference clips for direct fidelity comparison
 
 ### 3. Fidelity Tuning
 
@@ -52,7 +60,8 @@
 
 ### 4. Automated Play / Testing
 
-- Build a synthetic player that can operate headlessly
+- Replay harness is now working with seeded scenarios and session replays
+- Keep extending the harness toward stronger coverage and more useful scoring behavior
 - Reuse the same log format for replay and automated regression testing
 
 ### 5. Run Artifact Submission
@@ -74,8 +83,8 @@
 
 ## Immediate Next Steps
 
-1. Resolve `#7` by confirming whether FormSubmit activation can be completed through Modem inbox
-2. Implement `#6` structured gameplay logging
-3. Implement `#5` replay mode using the same session log format
-4. Use `#4` to tune early-stage fidelity with logs plus reference video
-5. Design and evaluate a reliable artifact submission workflow for video + JSON run captures
+1. Use `quick` harness batches as the default tuning loop
+2. Improve challenge-stage scoring windows and readability
+3. Reduce Stage 4/5 punishment in the five-ship scenario
+4. Add richer scenario coverage and better automated tuning metrics
+5. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place
