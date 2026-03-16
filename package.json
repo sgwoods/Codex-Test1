@@ -6,6 +6,7 @@
   "scripts": {
     "harness:analyze": "node tools/harness/analyze-run.js",
     "harness:batch": "node tools/harness/run-batch.js",
+    "harness:check-latest": "node tools/harness/check-latest-run.js",
     "harness:import-latest": "node tools/harness/import-latest-run.js",
     "harness:tune": "node tools/harness/tuning-report.js",
     "harness": "node tools/harness/run-gameplay.js",

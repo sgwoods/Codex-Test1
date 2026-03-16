@@ -104,11 +104,16 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run harness:import-latest
   ```
+- You can also check for a new self-play run without duplicating already imported files:
+  ```bash
+  npm run harness:check-latest
+  ```
 - Optional import flags:
   ```bash
   npm run harness:import-latest -- --session-id ngt-1773602145011-2
   npm run harness:import-latest -- --source /absolute/path/to/folder
   ```
+- `harness:check-latest` keeps a small local state file in `harness-artifacts/` so scheduled scans can safely skip runs that were already imported
 - Current tuning targets from the latest quick batch:
   - challenge-stage scoring is still too low
   - Stage 4/5 pressure is still too punishing
