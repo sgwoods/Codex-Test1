@@ -13,6 +13,15 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
 #msg .splashScore{display:block;color:#ffd86d;font-size:1em;letter-spacing:.06em}
+#msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
+#msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
+#msg .scoreTable{display:grid;grid-template-columns:auto auto auto;gap:.08em .95em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
+#msg .scoreHead{color:#ff6f66}
+#msg .scoreRank{color:#f4f7ff;text-align:left}
+#msg .scoreValue{color:#f4f7ff}
+#msg .scoreStage{color:#a9d8ff}
+#msg .scoreHot{color:#ffd86d}
+#msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
 #feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
 #exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
@@ -122,9 +131,11 @@ const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
+let gameOverHtml='';
 const RECORD_PREF_KEY='galagaTribAutoVideo';
 const TEST_PREF_KEY='galagaTribTestCfg';
 const SEED_PREF_KEY='galagaTribHarnessSeed';
+const SCOREBOARD_KEY='galagaTribTop10';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
 let testOpen=0;
 const PLAY_W=280,PLAY_H=360;
@@ -203,6 +214,37 @@ const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,column:e.c,row:e.r,dive:e.dive,carry:!!e.carry}:null;
+function loadScoreboard(){
+ try{
+  return JSON.parse(localStorage.getItem(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
+ }catch{return[]}
+}
+function saveScoreboard(list){
+ localStorage.setItem(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
+}
+function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
+function recordScore(score,stage){
+ const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,score:score|0,stage:stage|0,at:new Date().toISOString()};
+ const board=loadScoreboard();
+ board.push(entry);
+ board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
+ const top=board.slice(0,10);
+ saveScoreboard(top);
+ S.best=top[0]?.score||0;
+ localStorage.galagaTribBest=S.best;
+ return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
+}
+function buildGameOverHtml(score,stage){
+ const res=recordScore(score,stage);
+ const rows=res.board.map((row,i)=>`<span class="scoreRank${row.id===res.entry.id?' scoreHot':''}">${String(i+1).padStart(2,'0')}</span><span class="scoreValue${row.id===res.entry.id?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===res.entry.id?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
+ const rankTxt=res.rank?`RANK ${String(res.rank).padStart(2,'0')}`:'OUT OF TOP 10';
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">TOP 10 PILOTS   ${rankTxt}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot"><span class="k">Enter</span> to play again</span>`;
+}
+const initialBoard=loadScoreboard();
+if((initialBoard[0]?.score||0)>S.best){
+ S.best=initialBoard[0].score;
+ localStorage.galagaTribBest=S.best;
+}
 function resetSession(reason='boot'){
  sessionN++;
  REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
@@ -510,6 +552,7 @@ function start(){
  const cfg=saveTestCfg();
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
+ gameOverHtml='';
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0});
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -529,7 +572,15 @@ function loseShip(){
  if(S.lives<0)gameOver();
 }
 
-function gameOver(){logEvent('game_over',{score:S.score,stage:S.stage});logSnapshot('game_over');started=0;if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});stopRunRecording();S.best=Math.max(S.best,S.score);localStorage.galagaTribBest=S.best;msg.innerHTML='GAME OVER\n\nScore '+S.score+'\nBest '+S.best+'\n\n<span class="k">Enter</span> to play again';sfx.over()}
+function gameOver(){
+ logEvent('game_over',{score:S.score,stage:S.stage});
+ logSnapshot('game_over');
+ started=0;
+ if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
+ stopRunRecording();
+ gameOverHtml=buildGameOverHtml(S.score,S.stage);
+ sfx.over();
+}
 function bulletsMax(){return S.p.dual?4:2}
 
 function shoot(){
@@ -813,7 +864,7 @@ function draw(){
  testBtn.style.display=toolsVisible?'block':'none';
  if(!toolsVisible)testPanel.classList.remove('open');
  else testPanel.classList.toggle('open',testOpen);
- if(!started)msg.innerHTML='PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
+ if(!started)msg.innerHTML=gameOverHtml||'PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){
