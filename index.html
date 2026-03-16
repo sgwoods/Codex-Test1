@@ -8,7 +8,7 @@
 :root{--fg:#f4f7ff;--a:#74e6ff}
 html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:"Courier New",Consolas,monospace;color:var(--fg)}
 canvas{display:block;width:100vw;height:100vh}
-#hud{position:fixed;inset:0;pointer-events:none;display:flex;justify-content:space-between;padding:12px 18px;font-size:clamp(20px,1.6vw,30px);font-weight:700;letter-spacing:.02em;text-shadow:0 0 6px #000}
+#hud{position:fixed;inset:0;pointer-events:none;display:flex;justify-content:space-between;padding:10px 16px;font-size:clamp(16px,1.25vw,24px);font-weight:700;letter-spacing:.02em;text-shadow:0 0 6px #000}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
@@ -205,13 +205,32 @@ const sfx={
 };
 
 const P={
- ship:[[0,0],[1,0],[2,0],[3,0],[-1,1],[0,1],[1,1],[2,1],[3,1],[4,1],[-2,2],[-1,2],[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[-1,3],[0,3],[1,3],[2,3],[3,3],[4,3],[0,4],[1,4],[2,4],[3,4]],
- bee:[[0,0],[1,0],[2,0],[3,0],[4,0],[-1,1],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[0,2],[1,2],[2,2],[3,2],[4,2],[1,3],[2,3],[3,3]],
- but:[[0,0],[1,0],[3,0],[4,0],[-1,1],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[0,2],[1,2],[2,2],[3,2],[4,2],[1,3],[2,3],[3,3]],
- boss:[[1,0],[2,0],[3,0],[0,1],[1,1],[2,1],[3,1],[4,1],[0,2],[1,2],[2,2],[3,2],[4,2],[1,3],[2,3],[3,3]],
- rogue:[[0,0],[1,0],[2,0],[3,0],[-1,1],[0,1],[1,1],[2,1],[3,1],[4,1],[-1,2],[0,2],[1,2],[2,2],[3,2],[4,2],[0,3],[1,3],[2,3],[3,3],[1,4],[2,4]]
+ ship:{
+  a:[[2,0],[3,0],[1,1],[2,1],[3,1],[4,1],[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[1,3],[2,3],[3,3],[4,3],[2,4],[3,4]],
+  b:[[2,1],[3,1],[2,2],[3,2],[2,3],[3,3]],
+  c:[[0,2],[5,2],[1,1],[4,1]]
+ },
+ bee:{
+  a:[[0,1],[6,1],[-1,2],[0,2],[6,2],[7,2],[0,3],[6,3],[1,4],[5,4]],
+  b:[[2,0],[3,0],[1,1],[2,1],[3,1],[4,1],[1,2],[2,2],[3,2],[4,2],[2,3],[3,3],[2,4],[3,4]],
+  c:[[2,1],[3,1],[2,4],[3,4]]
+ },
+ but:{
+  a:[[0,1],[6,1],[-1,2],[0,2],[6,2],[7,2],[0,3],[6,3],[1,4],[5,4]],
+  b:[[2,0],[3,0],[1,1],[2,1],[3,1],[4,1],[1,2],[2,2],[3,2],[4,2],[1,3],[2,3],[3,3],[4,3],[2,4],[3,4]],
+  c:[[2,1],[3,1],[2,3],[3,3]]
+ },
+ boss:{
+  a:[[0,1],[1,1],[6,1],[7,1],[-1,2],[0,2],[1,2],[6,2],[7,2],[8,2],[0,3],[1,3],[6,3],[7,3],[1,4],[6,4]],
+  b:[[2,0],[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[2,2],[3,2],[4,2],[5,2],[2,3],[3,3],[4,3],[5,3],[3,4],[4,4]],
+  c:[[2,0],[5,0],[3,2],[4,2]]
+ },
+ rogue:{
+  a:[[0,1],[1,1],[6,1],[7,1],[-1,2],[0,2],[1,2],[6,2],[7,2],[8,2],[0,3],[1,3],[6,3],[7,3],[1,4],[6,4]],
+  b:[[2,0],[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[2,2],[3,2],[4,2],[5,2],[2,3],[3,3],[4,3],[5,3],[3,4],[4,4]],
+  c:[[2,0],[5,0],[3,2],[4,2]]
+ }
 };
-const C={ship:'#7ed3ff',ship2:'#4da4f0',bee:'#ffd84a',but:'#ff7c49',boss:'#6df77f',boss2:'#ff6db0',rogue:'#ff7c9b'};
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,
@@ -660,7 +679,8 @@ function start(){
  spawnStage();msg.textContent='';sfx.start();
 }
 
-function drawPix(px,py,s,pat,col,col2){ctx.fillStyle=col;for(const p of pat)ctx.fillRect(px+p[0]*s,py+p[1]*s,s,s);if(col2){ctx.fillStyle=col2;ctx.fillRect(px-s,py+s*2,s*2,s);ctx.fillRect(px+s*3,py+s*2,s*2,s)}}
+function fillPat(px,py,s,pat,col){if(!pat||!col)return;ctx.fillStyle=col;for(const p of pat)ctx.fillRect(px+p[0]*s,py+p[1]*s,s,s)}
+function drawPix(px,py,s,pat,col,col2,pat2=null,col3='',pat3=null){fillPat(px,py,s,pat,col);if(pat2)fillPat(px,py,s,pat2,col2);else if(col2){ctx.fillStyle=col2;ctx.fillRect(px-s,py+s*2,s*2,s);ctx.fillRect(px+s*3,py+s*2,s*2,s)}if(pat3)fillPat(px,py,s,pat3,col3)}
 function ex(x,y,n=10,col='#fff'){for(let i=0;i<n;i++)S.fx.push({x,y,vx:rnd(178,-178),vy:rnd(178,-178),t:rnd(.24,.09),r:rnd(1.5,.45),c:col})}
 
 function loseShip(cause={}){
@@ -919,15 +939,15 @@ function enemyCollisionHitbox(e){
 }
 function playerHitbox(){return{w:7,h:6};}
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
- const ps=2*s;drawPix(-ps*1.6,-ps*2,ps,P.ship,colA,colB);
+ const ps=2*s;drawPix(-ps*2.5,-ps*2.2,ps,P.ship.a,colA,colB,P.ship.b,'#ff4658',P.ship.c);
 }
 function drawEnemy(e){
  const ps=2;
  ctx.save();ctx.translate(Math.round(e.x),Math.round(e.y));if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
- if(e.t==='bee')drawPix(-ps*1.5,-ps*2,ps,P.bee,'#ffcf3b','#2f78ff');
- else if(e.t==='but')drawPix(-ps*1.5,-ps*2,ps,P.but,'#ff2f43','#59a1ff');
- else if(e.t==='rogue')drawPix(-ps*1.5,-ps*2,ps,P.rogue,'#ff5ca2','#70b7ff');
- else drawPix(-ps*1.5,-ps*2,ps,P.boss,'#57ea73',e.hp>1?'#b65bff':'#4a8cff');
+ if(e.t==='bee')drawPix(-ps*3,-ps*2.2,ps,P.bee.a,'#2a75ff','#ffd24a',P.bee.b,'#f08f2e',P.bee.c);
+ else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,'#3c86ff','#ff3d51',P.but.b,'#ffd25a',P.but.c);
+ else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,'#78b6ff','#ff5ea0',P.rogue.b,'#ffe36a',P.rogue.c);
+ else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,e.hp>1?'#33d7b0':'#5bc2ff','#5fe85c',P.boss.b,'#cc5fff',P.boss.c);
  if(e.beam){
   const len=VIS.beamLen,bw=10;
   const g=ctx.createLinearGradient(0,0,0,len);g.addColorStop(0,'rgba(136,245,255,.92)');g.addColorStop(1,'rgba(136,245,255,.03)');
@@ -940,8 +960,8 @@ function drawEnemy(e){
 function drawPlayerBody(x,y,dual=0,ghost=0){
  const ps=2;
  ctx.save();ctx.translate(Math.round(x),Math.round(y));if(ghost)ctx.globalAlpha=.52;
- drawPix(-ps*1.6,-ps*2.2,ps,P.ship,'#f4f8ff','#ff3347');
- if(dual){drawPix(-ps*4.2,-ps*1.9,ps*0.82,P.ship,'#f4f8ff','#ff3347');drawPix(ps*0.95,-ps*1.9,ps*0.82,P.ship,'#f4f8ff','#ff3347');}
+ drawPix(-ps*2.5,-ps*2.2,ps,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
+ if(dual){drawPix(-ps*5.2,-ps*2,ps*0.82,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);drawPix(ps*1.45,-ps*2,ps*0.82,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);}
  ctx.restore();
 }
 
