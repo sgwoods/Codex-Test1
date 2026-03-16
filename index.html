@@ -23,8 +23,9 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .scoreStage{color:#a9d8ff}
 #msg .scoreHot{color:#ffd86d}
 #msg .gameOverEntry{display:block;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em 0 .25em}
-#msg .entryCursor{color:#ffd86d;text-decoration:underline}
+#msg .entryCursor{display:inline-block;min-width:.72em;color:#000;background:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
 #msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
+@keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 #feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
 #feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
 #exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
