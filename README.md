@@ -62,6 +62,7 @@ After GitHub Pages deploys, play at:
 
 - A local replay harness can run the game in Chrome, replay a saved session JSON, and write fresh `.webm` and `.json` artifacts into `harness-artifacts/`
 - It uses your installed `/Applications/Google Chrome.app`
+- Harness execution and artifact generation are local-only on your Mac; it does not use cloud compute
 - Run it with a previously exported session:
   ```bash
   npm run harness -- --session /absolute/path/to/neo-galaga-session.json
@@ -86,6 +87,10 @@ After GitHub Pages deploys, play at:
 - Batch mode also writes:
   - `batch-report.json` with aggregate challenge hits, ship losses, total duration, and audio failures
   - `tuning-report.json` with prioritized findings to guide the next gameplay pass
+- Typical batch timings on this machine:
+  - `quick`: about `1.5-2 minutes`
+  - `default`: about `3-4 minutes`
+  - `deep`: about `5-7 minutes`
 - You can re-run the analyzer on an existing run folder:
   ```bash
   npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder
@@ -94,6 +99,10 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder
   ```
+- Current tuning targets from the latest quick batch:
+  - challenge-stage scoring is still too low
+  - Stage 4/5 pressure is still too punishing
+  - five-ship runs still end too early for rich late-stage comparison
 
 ## Modem Feedback Integration
 

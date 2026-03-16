@@ -33,6 +33,14 @@
 - Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison
 - Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own
 
+## Latest Harness Signals
+
+- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-16T17-03-57-798Z`
+- Audio capture is now stable in the harness (`0` audio failures in the latest quick batch)
+- Challenge scenario is still landing at `8/40` hits (`20%` hit rate), which is below a comfortable scoring window
+- The five-ship pressure scenario is still averaging `3` ship losses and ending at Stage `4`
+- Current gameplay work should keep focusing on challenge readability and Stage 4/5 pressure smoothing before expanding scope
+
 ## Workstreams
 
 ### 1. Feedback Delivery
@@ -86,5 +94,6 @@
 1. Use `quick` harness batches as the default tuning loop
 2. Improve challenge-stage scoring windows and readability
 3. Reduce Stage 4/5 punishment in the five-ship scenario
-4. Add richer scenario coverage and better automated tuning metrics
-5. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place
+4. Re-run the updated gameplay tuning against `quick` batches until the metrics move materially
+5. Add richer scenario coverage and better automated tuning metrics
+6. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place
