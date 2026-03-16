@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const { buildReport, loadBatch } = require('./tuning-report');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const HARNESS = path.join(__dirname, 'run-gameplay.js');
@@ -95,7 +96,9 @@ async function main(){
 
   const report = summarize(batch);
   fs.writeFileSync(path.join(outDir, 'batch-report.json'), JSON.stringify(report, null, 2));
-  console.log(JSON.stringify({ outDir, report }, null, 2));
+  const tuning = buildReport(loadBatch(outDir));
+  fs.writeFileSync(path.join(outDir, 'tuning-report.json'), JSON.stringify(tuning, null, 2));
+  console.log(JSON.stringify({ outDir, report, tuning }, null, 2));
 }
 
 main().catch(err => {

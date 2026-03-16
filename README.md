@@ -85,9 +85,14 @@ After GitHub Pages deploys, play at:
   - whether the generated `.webm` contains audio
 - Batch mode also writes:
   - `batch-report.json` with aggregate challenge hits, ship losses, total duration, and audio failures
+  - `tuning-report.json` with prioritized findings to guide the next gameplay pass
 - You can re-run the analyzer on an existing run folder:
   ```bash
   npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder
+  ```
+- You can also regenerate the tuning summary for an existing batch:
+  ```bash
+  npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder
   ```
 
 ## Modem Feedback Integration
