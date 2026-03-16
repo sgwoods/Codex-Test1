@@ -464,7 +464,7 @@ addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e
 function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,ch:0,miss:0};}
 
 function spawnFormation(){
- const cols=10,rows=4,gx=VIS.gx,gy=VIS.gy,ox=PLAY_W/2-(cols-1)*gx/2,oy=18;
+ const cols=10,rows=4,gx=VIS.gx,gy=VIS.gy,ox=PLAY_W/2-(cols-1)*gx/2,oy=22;
  const entry=[4,5,3,6,2,7,1,8,0,9];
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
@@ -532,7 +532,7 @@ function bulletsMax(){return S.p.dual?4:2}
 function shoot(){
  const p=S.p;if(p.cd>0||p.spawn>0||p.captured)return;if(S.pb.length>=bulletsMax())return;
  p.cd=S.challenge?.11:.24;const y=p.y-40;
- if(p.dual)S.pb.push({x:p.x-40,y,v:560},{x:p.x+40,y,v:560});
+ if(p.dual)S.pb.push({x:p.x-24,y,v:560},{x:p.x+24,y,v:560});
  else S.pb.push({x:p.x,y,v:560});
  logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),activeBullets:S.pb.length});
  sfx.shot();
@@ -624,7 +624,7 @@ function updateChallengeEnemy(e,dt){
 function updateEnemy(e,dt,t,T,p){
  if(e.hp<=0)return;
  const cleanup=S.stage===1&&!S.challenge&&S.liveCount<=6;
- const tx=e.tx+Math.sin(t*.92+e.r*.45)*52,ty=e.ty+Math.sin(t*1.35+e.c*.55)*9;
+ const tx=e.tx+Math.sin(t*.92+e.r*.45)*52,ty=e.ty+Math.sin(t*1.35+e.c*.55)*6;
  if(!e.form){
   if(e.spawn>0){e.spawn-=dt;return}
   const stage1=S.stage===1&&!S.challenge;
