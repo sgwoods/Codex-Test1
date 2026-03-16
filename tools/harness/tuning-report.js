@@ -57,6 +57,10 @@ function avgLossField(runs, pick){
   return avg(vals);
 }
 
+function totalCauseCount(runs, cause){
+  return runs.reduce((sum, run) => sum + (run.analysis?.lossCauseCounts?.[cause] || 0), 0);
+}
+
 function buildReport(batch){
   const findings = [];
   const allRuns = batch.runs;
@@ -87,6 +91,8 @@ function buildReport(batch){
   const stageRecentBulletAvg = avgLossField(stageRuns, loss => loss.recentEnemyBullets);
   const stageActiveAttackersAvg = avgLossField(stageRuns, loss => loss.snapshot?.attackers || 0);
   const stageMinGapAvg = avg(stageRuns.map(run => run.analysis?.stageLossClusters?.['4']?.minGap).filter(v => Number.isFinite(v)));
+  const stageBulletDeaths = totalCauseCount(stageRuns, 'enemy_bullet');
+  const stageCollisionDeaths = totalCauseCount(stageRuns, 'enemy_collision');
   if(stageShipLosses.length){
     if(stageLossAvg >= 3 && stageSurvivalAvg < 0.9) findings.push(makeFinding(1, 'Stage 4/5 pressure is too punishing', `Average ship losses are ${stageLossAvg.toFixed(2)} per run and survival reaches only ${(stageSurvivalAvg*100).toFixed(1)}% of the scenario window.`));
     else if(stageLossAvg >= 4) findings.push(makeFinding(2, 'Stage 4/5 survives longer but still costs too many ships', `Average ship losses are ${stageLossAvg.toFixed(2)} per run even though survival reaches ${(stageSurvivalAvg*100).toFixed(1)}% of the scenario window.`));
@@ -94,6 +100,7 @@ function buildReport(batch){
     if(stageFirstLossAvg && stageFirstLossAvg < 10) findings.push(makeFinding(1, 'Stage 4 opens too aggressively', `First ship loss arrives around ${stageFirstLossAvg.toFixed(2)}s on average, which is too early for the five-ship benchmark.`));
     if(stageRecentAttackAvg >= 2.5 || stageActiveAttackersAvg >= 2) findings.push(makeFinding(2, 'Stage 4 losses are happening under stacked pressure', `At loss moments there are about ${stageRecentAttackAvg.toFixed(2)} recent attack starts and ${stageActiveAttackersAvg.toFixed(2)} active attackers on average.`));
     if(stageMinGapAvg && stageMinGapAvg < 3.5) findings.push(makeFinding(2, 'Stage 4 deaths are still clustering too tightly', `Average minimum time between Stage 4 ship losses is ${stageMinGapAvg.toFixed(2)}s.`));
+    if(stageCollisionDeaths > stageBulletDeaths) findings.push(makeFinding(2, 'Stage 4 losses skew toward direct collisions', `${stageCollisionDeaths} collision deaths vs ${stageBulletDeaths} bullet deaths were recorded in the stage-pressure scenario.`));
   }
 
   const stageProgress = stageRuns.map(stageFromState);
@@ -109,10 +116,13 @@ function buildReport(batch){
   const survivalProgressAvg = avg(survivalProgress);
   const survivalWindow = survivalRuns.map(survivalRatio);
   const survivalWindowAvg = avg(survivalWindow);
+  const survivalBulletDeaths = totalCauseCount(survivalRuns, 'enemy_bullet');
+  const survivalCollisionDeaths = totalCauseCount(survivalRuns, 'enemy_collision');
   if(survivalRuns.length){
     if(survivalWindowAvg < 0.95) findings.push(makeFinding(1, 'Stage 4 survival scenario still ends too early', `Average survival reaches only ${(survivalWindowAvg*100).toFixed(1)}% of the scenario window.`));
     else if(survivalLossAvg >= 3) findings.push(makeFinding(2, 'Stage 4 survival scenario still spends too many ships', `Average ship losses are ${survivalLossAvg.toFixed(2)} per run in the lower-input survival scenario.`));
     if(survivalProgressAvg < 5) findings.push(makeFinding(2, 'Stage 4 survival scenario is not progressing far enough', `Average ending stage is ${survivalProgressAvg.toFixed(2)} in the survival scenario.`));
+    if(survivalCollisionDeaths > survivalBulletDeaths) findings.push(makeFinding(2, 'Stage 4 survival losses skew toward collisions', `${survivalCollisionDeaths} collision deaths vs ${survivalBulletDeaths} bullet deaths were recorded in the survival scenario.`));
   }
 
   if(!findings.length){
@@ -136,9 +146,13 @@ function buildReport(batch){
       stagePressureAverageRecentEnemyBulletsAtLoss: +stageRecentBulletAvg.toFixed(4),
       stagePressureAverageActiveAttackersAtLoss: +stageActiveAttackersAvg.toFixed(4),
       stagePressureAverageMinLossGap: +stageMinGapAvg.toFixed(4),
+      stagePressureBulletDeaths: stageBulletDeaths,
+      stagePressureCollisionDeaths: stageCollisionDeaths,
       stageSurvivalAverageShipLosses: +survivalLossAvg.toFixed(4),
       stageSurvivalAverageEndingStage: +survivalProgressAvg.toFixed(4),
-      stageSurvivalAverageSurvivalRatio: +survivalWindowAvg.toFixed(4)
+      stageSurvivalAverageSurvivalRatio: +survivalWindowAvg.toFixed(4),
+      stageSurvivalBulletDeaths: survivalBulletDeaths,
+      stageSurvivalCollisionDeaths: survivalCollisionDeaths
     },
     findings
   };

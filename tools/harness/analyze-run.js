@@ -61,6 +61,15 @@ function stageMetrics(session){
   return stages;
 }
 
+function causeSummary(losses){
+  const out = {};
+  for(const loss of losses){
+    const key = loss.cause || 'unknown';
+    out[key] = (out[key] || 0) + 1;
+  }
+  return out;
+}
+
 function lossDetails(session){
   const events = session.events || [];
   const losses = events.filter(e => e.type === 'ship_lost');
@@ -74,6 +83,12 @@ function lossDetails(session){
       stage: e.stage,
       score: e.score,
       livesBefore: e.livesBefore,
+      cause: e.cause || 'unknown',
+      bulletKind: e.bulletKind || null,
+      sourceType: e.sourceType || e.enemyType || null,
+      sourceDive: e.sourceDive ?? e.enemyDive ?? null,
+      enemyForm: e.enemyForm ?? null,
+      stageClock: e.stageClock ?? null,
       gapFromPrev: prev ? +(e.t - prev.t).toFixed(3) : null,
       recentAttackStarts: attacks.filter(a => a.stage === e.stage && a.t <= e.t && a.t >= e.t - 2.2).length,
       recentEnemyBullets: bullets.filter(b => b.stage === e.stage && b.t <= e.t && b.t >= e.t - 2.2).length,
@@ -137,6 +152,7 @@ function analyze(target){
   const shipLost = lossDetails(session);
   const shipLostByStage = byStage(shipLost);
   const stageLossClusters = Object.fromEntries(Object.entries(shipLostByStage).map(([stage, losses]) => [stage, clusterSummary(losses)]));
+  const lossCauseCounts = causeSummary(shipLost);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
   const analysis = {
     id: session.id,
@@ -148,6 +164,7 @@ function analyze(target){
     shipLost,
     stageMetrics: stageMetrics(session),
     stageLossClusters,
+    lossCauseCounts,
     video: Object.assign({ file: run.videoFile || null }, audio)
   };
   if(run.summaryFile){
