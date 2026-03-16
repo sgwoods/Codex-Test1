@@ -35,10 +35,11 @@
 
 ## Latest Harness Signals
 
-- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-16T17-03-57-798Z`
+- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-16T17-10-40-903Z`
 - Audio capture is now stable in the harness (`0` audio failures in the latest quick batch)
-- Challenge scenario is still landing at `8/40` hits (`20%` hit rate), which is below a comfortable scoring window
-- The five-ship pressure scenario is still averaging `3` ship losses and ending at Stage `4`
+- Challenge scenario improved to `11/40` hits (`27.5%` hit rate), but that is still below a comfortable scoring window
+- The stage-pressure scenario now survives the full window more reliably, but still spends too many ships and ends at Stage `4`
+- The tuning report now needs to weigh survival duration alongside ship losses so we do not confuse "survived but paid heavily" with "died early"
 - Current gameplay work should keep focusing on challenge readability and Stage 4/5 pressure smoothing before expanding scope
 
 ## Workstreams

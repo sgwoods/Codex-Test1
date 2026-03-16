@@ -87,6 +87,7 @@ After GitHub Pages deploys, play at:
 - Batch mode also writes:
   - `batch-report.json` with aggregate challenge hits, ship losses, total duration, and audio failures
   - `tuning-report.json` with prioritized findings to guide the next gameplay pass
+  - the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish "died early" from "survived the full window but spent too many ships"
 - Typical batch timings on this machine:
   - `quick`: about `1.5-2 minutes`
   - `default`: about `3-4 minutes`

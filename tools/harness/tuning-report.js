@@ -39,6 +39,14 @@ function scenarioRuns(runs, name){
 }
 
 function stageFromState(run){ return run.state?.stage || 0; }
+function runDuration(run){ return +((run.analysis?.duration || 0)); }
+function configDuration(run){ return +((run.duration || 0)); }
+function survivalRatio(run){
+  const planned = configDuration(run);
+  if(!planned) return 0;
+  return Math.min(1, runDuration(run) / planned);
+}
+function endScore(run){ return +(run.state?.score || 0); }
 
 function makeFinding(priority, title, detail){
   return { priority, title, detail };
@@ -64,15 +72,21 @@ function buildReport(batch){
 
   const stageShipLosses = stageRuns.map(r => (r.analysis?.shipLost || []).length);
   const stageLossAvg = avg(stageShipLosses);
+  const stageSurvival = stageRuns.map(survivalRatio);
+  const stageSurvivalAvg = avg(stageSurvival);
+  const stageScores = stageRuns.map(endScore);
+  const stageScoreAvg = avg(stageScores);
   if(stageShipLosses.length){
-    if(stageLossAvg >= 3) findings.push(makeFinding(1, 'Stage 4/5 pressure is too punishing', `Average ship losses in the stage-pressure scenario are ${stageLossAvg.toFixed(2)} per run.`));
+    if(stageLossAvg >= 3 && stageSurvivalAvg < 0.9) findings.push(makeFinding(1, 'Stage 4/5 pressure is too punishing', `Average ship losses are ${stageLossAvg.toFixed(2)} per run and survival reaches only ${(stageSurvivalAvg*100).toFixed(1)}% of the scenario window.`));
+    else if(stageLossAvg >= 4) findings.push(makeFinding(2, 'Stage 4/5 survives longer but still costs too many ships', `Average ship losses are ${stageLossAvg.toFixed(2)} per run even though survival reaches ${(stageSurvivalAvg*100).toFixed(1)}% of the scenario window.`));
     else if(stageLossAvg >= 2) findings.push(makeFinding(2, 'Stage 4/5 pressure still bunches up', `Average ship losses in the stage-pressure scenario are ${stageLossAvg.toFixed(2)} per run.`));
   }
 
   const stageProgress = stageRuns.map(stageFromState);
   const progressAvg = avg(stageProgress);
   if(stageProgress.length && progressAvg < 5){
-    findings.push(makeFinding(2, 'Stage progression in the five-ship scenario is shallow', `Average ending stage is ${progressAvg.toFixed(2)}, suggesting later-stage survivability still limits useful comparison time.`));
+    const survivalTxt = stageSurvival.length ? ` Survival averages ${(stageSurvivalAvg*100).toFixed(1)}% of the scenario window.` : '';
+    findings.push(makeFinding(2, 'Stage progression in the five-ship scenario is shallow', `Average ending stage is ${progressAvg.toFixed(2)}, suggesting later-stage survivability still limits useful comparison time.${survivalTxt}`));
   }
 
   if(!findings.length){
@@ -88,7 +102,9 @@ function buildReport(batch){
       audioFailures,
       challengeAverageHitRate: +challengeAvg.toFixed(4),
       stagePressureAverageShipLosses: +stageLossAvg.toFixed(4),
-      stagePressureAverageEndingStage: +progressAvg.toFixed(4)
+      stagePressureAverageEndingStage: +progressAvg.toFixed(4),
+      stagePressureAverageSurvivalRatio: +stageSurvivalAvg.toFixed(4),
+      stagePressureAverageEndScore: +stageScoreAvg.toFixed(2)
     },
     findings
   };
