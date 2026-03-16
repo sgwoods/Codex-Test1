@@ -71,12 +71,20 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario stage3-challenge
   npm run harness -- --scenario stage4-five-ships
   ```
+- Or run a seeded batch:
+  ```bash
+  npm run harness:batch -- --profile quick
+  npm run harness:batch -- --profile default
+  npm run harness:batch -- --profile deep
+  ```
 - Output is written to a timestamped folder under:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
 - The harness writes a `summary.json` beside the generated artifacts, including:
   - seed used for the run
   - stage clears / challenge clears / ship losses
   - whether the generated `.webm` contains audio
+- Batch mode also writes:
+  - `batch-report.json` with aggregate challenge hits, ship losses, total duration, and audio failures
 - You can re-run the analyzer on an existing run folder:
   ```bash
   npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder
