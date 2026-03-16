@@ -100,6 +100,15 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder
   ```
+- You can import the latest self-play capture pair from your Downloads folder into `harness-artifacts/` and analyze it in one step:
+  ```bash
+  npm run harness:import-latest
+  ```
+- Optional import flags:
+  ```bash
+  npm run harness:import-latest -- --session-id ngt-1773602145011-2
+  npm run harness:import-latest -- --source /absolute/path/to/folder
+  ```
 - Current tuning targets from the latest quick batch:
   - challenge-stage scoring is still too low
   - Stage 4/5 pressure is still too punishing
