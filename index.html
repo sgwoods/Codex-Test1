@@ -215,15 +215,15 @@ const C={ship:'#7ed3ff',ship2:'#4da4f0',bee:'#ffd84a',but:'#ff7c49',boss:'#6df77
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
  :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
  :s===2?{shotCap:1,attackCap:2,diveRate:.72,coolA:5.6,coolB:3.6,globalA:1.9,globalB:1.35,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
  :s===3?{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3}
- :s===4?{shotCap:1,attackCap:1,diveRate:.62,coolA:6.2,coolB:4.1,globalA:2.35,globalB:1.62,capChance:.16,diveShotRate:.4,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:170,bulletVyStage:3}
- :s===5?{shotCap:1,attackCap:2,diveRate:.72,coolA:6.1,coolB:3.9,globalA:2.08,globalB:1.42,capChance:.18,diveShotRate:.46,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:173,bulletVyStage:3}
+ :s===4?{shotCap:1,attackCap:1,diveRate:.55,coolA:6.9,coolB:4.7,globalA:2.65,globalB:1.86,capChance:.14,diveShotRate:.34,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:168,bulletVyStage:3}
+ :s===5?{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3}
  :{shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4};
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
@@ -638,7 +638,7 @@ function spawnChallenge(){
 
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
- S.recoverT=S.challenge?0:(S.stage>=6?1.1:S.stage>=4?.85:0);S.attackGapT=S.challenge?0:(S.stage>=6?.95:S.stage>=4?.72:0);
+ S.stageClock=0;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage>=4?1.18:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage>=4?1.22:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challenge';S.banner=2.6}
@@ -666,7 +666,7 @@ function ex(x,y,n=10,col='#fff'){for(let i=0;i<n;i++)S.fx.push({x,y,vx:rnd(178,-
 function loseShip(){
  const p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
  logEvent('ship_lost',{stage:S.stage,score:S.score,livesBefore:Math.max(0,S.lives+1)});
- S.shake=.55;S.recoverT=Math.max(S.recoverT,S.stage>=4?1.6:1.05);S.attackGapT=Math.max(S.attackGapT,.9);p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
+ S.shake=.55;S.recoverT=Math.max(S.recoverT,S.stage>=4?2.05:1.05);S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.28:.9);p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
  if(p.dual)p.dual=0;
  S.lives--;p.spawn=.95;
  if(S.lives<0)gameOver();
@@ -817,11 +817,11 @@ function updateEnemy(e,dt,t,T,p){
  e.x+=(tx-e.x)*Math.min(1,dt*6);e.y+=(ty-e.y)*Math.min(1,dt*6);e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&S.stage>=4&&!cleanup;
- if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)){
+ if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===4&&S.stageClock<2.8)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
   if(e.t==='boss'&&canCapture()&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
   else{e.dive=1;e.vx=(p.x-e.x)*.56+rnd(38,-38);e.vy=94+rnd(20);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
-  if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.74:.94)+rnd(.12,.03);
+  if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:1.08)+rnd(.12,.03);
  }
 }
 
@@ -831,6 +831,7 @@ function update(dt){
  if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);S.nextStageT=Math.max(0,S.nextStageT-dt);
+ S.stageClock+=dt;
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.nextStageT>0){if(S.nextStageT<=dt){S.nextStageT=0;spawnStage();sfx.start();}return}
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
@@ -871,7 +872,7 @@ function update(dt){
  runStage1Script(dt,p,T);
 
  const cleanup=!S.challenge&&S.stage===1&&alive.length<=6;
- if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()&&S.recoverT<=0&&!(S.stage>=4&&S.attackGapT>.18)){
+ if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()&&S.recoverT<=0&&!(S.stage>=4&&S.attackGapT>.18)&&!(S.stage===4&&S.stageClock<4.1)&&!(S.stage===5&&S.stageClock<2.8)){
   const bottoms={};for(const e of S.e)if(e.hp>0&&e.form&&!e.dive&&!e.ch){if(!bottoms[e.c]||e.y>bottoms[e.c].y)bottoms[e.c]=e}
   const list=Object.values(bottoms);
   if(list.length){const q=list[(randUnit()*list.length)|0];fireEnemyBullet(q,rnd(2,-2),154+S.stage*4,'formation');S.fireCD=cleanup?rnd(.9,.45):rnd(T.globalA,T.globalB)-Math.min(.08,S.stage*.003)}else S.fireCD=.25;
@@ -906,7 +907,7 @@ function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
 }
 function drawEnemy(e){
  const ps=2;
- ctx.save();ctx.translate(e.x,e.y);if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
+ ctx.save();ctx.translate(Math.round(e.x),Math.round(e.y));if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
  if(e.t==='bee')drawPix(-ps*1.5,-ps*2,ps,P.bee,'#ffcf3b','#2f78ff');
  else if(e.t==='but')drawPix(-ps*1.5,-ps*2,ps,P.but,'#ff2f43','#59a1ff');
  else if(e.t==='rogue')drawPix(-ps*1.5,-ps*2,ps,P.rogue,'#ff5ca2','#70b7ff');
@@ -922,7 +923,7 @@ function drawEnemy(e){
 }
 function drawPlayerBody(x,y,dual=0,ghost=0){
  const ps=2;
- ctx.save();ctx.translate(x,y);if(ghost)ctx.globalAlpha=.52;
+ ctx.save();ctx.translate(Math.round(x),Math.round(y));if(ghost)ctx.globalAlpha=.52;
  drawPix(-ps*1.6,-ps*2.2,ps,P.ship,'#f4f8ff','#ff3347');
  if(dual){drawPix(-ps*4.2,-ps*1.9,ps*0.82,P.ship,'#f4f8ff','#ff3347');drawPix(ps*0.95,-ps*1.9,ps*0.82,P.ship,'#f4f8ff','#ff3347');}
  ctx.restore();
@@ -947,9 +948,9 @@ function draw(){
  ctx.save();ctx.beginPath();ctx.rect(0,0,PLAY_W,PLAY_H);ctx.clip();
  for(const s of S.st){ctx.globalAlpha=.04+s.z*.22*(.3+Math.sin(s.tw)*.58);ctx.fillStyle=s.c;ctx.fillRect(s.x,s.y,s.s,s.s)}ctx.globalAlpha=1;
  for(const f of S.fx){ctx.globalAlpha=Math.max(0,f.t*2.7);ctx.fillStyle=f.c;ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,7);ctx.fill()}ctx.globalAlpha=1;
- if(S.cap){ctx.save();ctx.translate(S.cap.x,S.cap.y);drawMiniShip(1.25,'#f4f8ff','#ff3347');ctx.restore();}
- for(const b of S.pb){ctx.fillStyle='#e9f8ff';ctx.fillRect(b.x-1,b.y-16,2,18)}
- for(const b of S.eb){ctx.fillStyle='#ff5e5e';ctx.fillRect(b.x-1,b.y-10,2,13)}
+ if(S.cap){ctx.save();ctx.translate(Math.round(S.cap.x),Math.round(S.cap.y));drawMiniShip(1.25,'#f4f8ff','#ff3347');ctx.restore();}
+ for(const b of S.pb){const x=Math.round(b.x),y=Math.round(b.y);ctx.fillStyle='#e9f8ff';ctx.fillRect(x,y-16,1,18)}
+ for(const b of S.eb){const x=Math.round(b.x),y=Math.round(b.y);ctx.fillStyle='#ff5e5e';ctx.fillRect(x,y-10,1,13)}
  for(const e of S.e)if(e.hp>0)drawEnemy(e);
  const p=S.p;if((!p.pending||p.spawn<=.3)&&!p.spawn){if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0)}
  if(p.captured)drawPlayerBody(p.x,p.y,0,1);
@@ -970,12 +971,12 @@ function draw(){
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){
-  if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
-  else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
+ if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
+ else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
   else if(S.bannerMode==='challengeResult'){
    const parts=String(S.bannerSub||'').split('\n');
    msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashScore">${parts[0]||''}</span>${parts[1]?`<span class="splashSub">${parts[1]}</span>`:''}`;
-  }else if(S.bannerMode==='stage')msg.innerHTML=`<span class="splashSub">${S.bannerTxt}</span>`;
+  }else if(S.bannerMode==='stage')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span>`;
   else msg.textContent=S.bannerTxt;
  }
  else msg.textContent='';
