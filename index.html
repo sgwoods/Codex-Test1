@@ -626,8 +626,15 @@ addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e
 
 function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,ch:0,miss:0};}
 
+function formationLayout(stage){
+ if(stage>=8)return{gx:15.2,gy:12.4,oy:27};
+ if(stage>=6)return{gx:15.8,gy:12.9,oy:27};
+ if(stage>=4)return{gx:16.4,gy:13.4,oy:28};
+ return{gx:VIS.gx,gy:VIS.gy,oy:VIS.formTop};
+}
+
 function spawnFormation(){
- const cols=10,rows=4,gx=VIS.gx,gy=VIS.gy,ox=PLAY_W/2-(cols-1)*gx/2,oy=VIS.formTop;
+ const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
@@ -650,7 +657,7 @@ function spawnChallenge(){
  for(let i=0;i<total;i++){
   const t=i%10<2?'boss':i%3?'but':'bee';
   const wave=(i/10)|0,lane=i%10,side=lane<5?-1:1,slot=lane%5,row=slot<3?0:1;
-  S.e.push({id:(randUnit()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*18+row*10,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.7+slot*.14,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,sweep:wave%2?-1:1});
+  S.e.push({id:(randUnit()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:30+wave*16+row*8,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.88+slot*.16,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,sweep:wave%2?-1:1});
  }
  S.ch={hits:0,total:40,done:0};
 }
@@ -739,7 +746,7 @@ function awardKill(e,mode){
  else if(e.t==='boss')pts=dive?(e.esc>=2?1600:e.esc===1?800:400):150;
  S.score+=pts;
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
-  if(e.carry){
+ if(e.carry){
   if(dive){S.cap={x:e.x,y:e.y,vy:90,t:8};sfx.rescue();}
   else{S.rogue=Math.min(3,S.rogue+1);S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';S.alertT=2.2;}
  }
@@ -788,22 +795,22 @@ function runStage1Script(dt,p,T){
 
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){e.spawn-=dt;return}
- e.tm+=dt*(.48+(e.wave||0)*.012+Math.min(.025,S.stage*.0025));
+ e.tm+=dt*(.46+(e.wave||0)*.01+Math.min(.02,S.stage*.002));
  const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
- const laneX=PLAY_W/2+side*(70+slot*24);
- const topY=50+wave*16+row*10;
- if(u<2.45){
-  const q=u/2.45,startX=side>0?PLAY_W+44:-44;
-  e.x=startX+(laneX-startX)*(1-Math.pow(1-q,2));
-  e.y=topY+Math.sin(u*1.8+p)*1.2;
- }else if(u<7.85){
-  const q=(u-2.45)/5.4;
-  e.x=laneX+sweep*(1-q*2)*34+Math.sin(q*3.14+p)*1.2;
-  e.y=topY+q*14;
+ const laneX=PLAY_W/2+side*(58+slot*20);
+ const topY=38+wave*14+row*8;
+ if(u<2.7){
+  const q=u/2.7,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
+  e.x=startX+(laneX-startX)*curve;
+  e.y=topY+Math.sin(q*3.14+p)*2.2;
+ }else if(u<7.2){
+  const q=(u-2.7)/4.5;
+  e.x=laneX+sweep*Math.sin(q*Math.PI)*42;
+  e.y=topY+q*10+Math.sin(q*6.28+p)*1.3;
  }else{
-  const q=(u-7.85)/2.3;
-  e.x=laneX-sweep*(12+q*54)+Math.sin(q*4.2+p)*2;
-  e.y=topY+14+q*236;
+  const q=(u-7.2)/2.55;
+  e.x=laneX-sweep*(6+q*50)+Math.sin(q*5.4+p)*1.8;
+  e.y=topY+10+q*224;
  }
  if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
 }
@@ -811,15 +818,15 @@ function updateChallengeEnemy(e,dt){
 function updateEnemy(e,dt,t,T,p){
  if(e.hp<=0)return;
  const cleanup=S.stage===1&&!S.challenge&&S.liveCount<=6;
- const pulseX=S.stage>=4?34:38,pulseY=S.stage>=4?2.6:3.4;
+ const pulseX=S.stage>=8?28:S.stage>=4?34:38,pulseY=S.stage>=8?1.9:S.stage>=4?2.6:3.4;
  const tx=e.tx+Math.sin(t*.92+e.r*.45)*pulseX,ty=e.ty+Math.sin(t*1.35+e.c*.55)*pulseY;
  if(!e.form){
   if(e.spawn>0){e.spawn-=dt;return}
   const stage1=S.stage===1&&!S.challenge;
   e.en+=dt*(stage1?1.02:1.35);
   const k=Math.max(0,1-e.en*(stage1?0.35:0.42));
-  const sx=tx+Math.sin(e.en*(stage1?5.6:5)+e.ph)*(stage1?170:150)*k;
-  const sy=ty+Math.cos(e.en*(stage1?4.5:4)+e.ph)*(stage1?58:48)*k;
+  const sx=tx+Math.sin(e.en*(stage1?5.6:5)+e.ph)*(stage1?170:(S.stage>=6?136:150))*k;
+  const sy=ty+Math.cos(e.en*(stage1?4.5:4)+e.ph)*(stage1?58:(S.stage>=6?42:48))*k;
   e.x+=(sx-e.x)*Math.min(1,dt*(stage1?3.1:3.6));e.y+=(sy-e.y)*Math.min(1,dt*(stage1?3:3.4));if(e.en>(stage1?2.9:2.4))e.form=1;return;
  }
  if(e.dive===5){
@@ -869,7 +876,7 @@ function update(dt){
  if(S.nextStageT>0){if(S.nextStageT<=dt){S.nextStageT=0;spawnStage();sfx.start();}return}
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
- if(p.captured&&p.capBoss&&p.capBoss.hp>0){p.capT-=dt;p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.6);p.y+=(p.capBoss.y+22-p.y)*Math.min(1,dt*4.4);if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-(p.capBoss.y+22))<8)finishCapture();}
+ if(p.captured&&p.capBoss&&p.capBoss.hp>0){const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;p.capT-=dt;p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);p.y+=(capY-p.y)*Math.min(1,dt*3.9);if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();}
  else if(p.captured){p.captured=0;p.capBoss=null;p.inv=1.2;}
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom}
  if(p.spawn<=0&&!p.captured){const hp=playerHitbox();p.x=cl(p.x+(((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0))*p.s*dt,hp.w+2,PLAY_W-hp.w-2);}
@@ -920,7 +927,7 @@ function update(dt){
 
  if(!S.challenge){for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyForm:!!e.form});}}}
 
- if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;sfx.rescue()}}
+ if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.alertTxt='DUAL FIGHTER READY';S.alertT=1.45;sfx.rescue()}}
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }
 
@@ -971,9 +978,12 @@ function drawCaptureTether(){
  const p=S.p,b=p.capBoss;if(!p.captured||!b||b.hp<=0)return;
  const bx=Math.round(b.x),by=Math.round(b.y+12),px=Math.round(p.x),py=Math.round(p.y-8);
  const g=ctx.createLinearGradient(bx,by,px,py);
- g.addColorStop(0,'rgba(155,246,255,.75)');
+ g.addColorStop(0,'rgba(155,246,255,.78)');
+ g.addColorStop(.65,'rgba(155,246,255,.18)');
  g.addColorStop(1,'rgba(155,246,255,.04)');
  ctx.strokeStyle=g;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(px,py);ctx.stroke();
+ ctx.fillStyle='rgba(145,236,255,.09)';
+ ctx.beginPath();ctx.moveTo(bx-7,by);ctx.lineTo(bx+7,by);ctx.lineTo(px+10,py);ctx.lineTo(px-10,py);ctx.closePath();ctx.fill();
 }
 function drawRescuePod(){
  if(!S.cap)return;
@@ -982,6 +992,9 @@ function drawRescuePod(){
  ctx.globalAlpha=.94;
  ctx.fillStyle='rgba(145,236,255,.16)';
  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.fill();
+ ctx.strokeStyle='rgba(202,249,255,.28)';
+ ctx.lineWidth=1;
+ ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.stroke();
  drawMiniShip(1.25,'#f4f8ff','#ff3347');
  ctx.restore();
 }
@@ -1029,8 +1042,8 @@ function draw(){
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){
- if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
- else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
+ if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
+ else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
   else if(S.bannerMode==='challengeResult'){
    const parts=String(S.bannerSub||'').split('\n');
    msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashScore">${parts[0]||''}</span>${parts[1]?`<span class="splashSub">${parts[1]}</span>`:''}`;
