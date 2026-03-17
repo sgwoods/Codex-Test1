@@ -61,6 +61,50 @@ function stageMetrics(session){
   return stages;
 }
 
+function countEvents(events, type){
+  return events.filter(e => e.type === type).length;
+}
+
+function dualShotMetrics(events){
+  const dualShots = events.filter(e => e.type === 'player_shot' && e.dual);
+  const spreads = dualShots.map(e => +e.spread).filter(v => Number.isFinite(v) && v > 0);
+  if(!dualShots.length) return { count: 0, avgSpread: 0, minSpread: 0, maxSpread: 0 };
+  return {
+    count: dualShots.length,
+    avgSpread: +(spreads.reduce((a,b)=>a+b,0) / Math.max(1, spreads.length)).toFixed(3),
+    minSpread: spreads.length ? Math.min(...spreads) : 0,
+    maxSpread: spreads.length ? Math.max(...spreads) : 0
+  };
+}
+
+function descentMetrics(events){
+  const starts = events.filter(e => e.type === 'enemy_attack_start');
+  const lowers = events.filter(e => e.type === 'enemy_lower_field');
+  const pairs = [];
+  for(const low of lowers){
+    const start = [...starts].reverse().find(s => s.id === low.id && s.t <= low.t);
+    if(start) pairs.push({
+      id: low.id,
+      stage: low.stage || start.stage || 0,
+      mode: start.mode || 'dive',
+      dt: +(low.t - start.t).toFixed(3)
+    });
+  }
+  const avg = arr => arr.length ? +(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(3) : 0;
+  const all = pairs.map(p => p.dt);
+  const byStage = {};
+  for(const pair of pairs){
+    const k = pair.stage || 0;
+    if(!byStage[k]) byStage[k] = [];
+    byStage[k].push(pair.dt);
+  }
+  return {
+    samples: pairs.length,
+    avgToLowerField: avg(all),
+    byStage: Object.fromEntries(Object.entries(byStage).map(([k,v]) => [k, { samples: v.length, avgToLowerField: avg(v) }]))
+  };
+}
+
 function causeSummary(losses){
   const out = {};
   for(const loss of losses){
@@ -153,6 +197,14 @@ function analyze(target){
   const shipLostByStage = byStage(shipLost);
   const stageLossClusters = Object.fromEntries(Object.entries(shipLostByStage).map(([stage, losses]) => [stage, clusterSummary(losses)]));
   const lossCauseCounts = causeSummary(shipLost);
+  const events = session.events || [];
+  const captureMetrics = {
+    captureStarts: countEvents(events, 'capture_started'),
+    fightersCaptured: countEvents(events, 'fighter_captured'),
+    fightersRescued: countEvents(events, 'fighter_rescued')
+  };
+  const dualMetrics = dualShotMetrics(events);
+  const descent = descentMetrics(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
   const analysis = {
     id: session.id,
@@ -165,6 +217,9 @@ function analyze(target){
     stageMetrics: stageMetrics(session),
     stageLossClusters,
     lossCauseCounts,
+    captureMetrics,
+    dualMetrics,
+    descent,
     video: Object.assign({ file: run.videoFile || null }, audio)
   };
   if(run.summaryFile){

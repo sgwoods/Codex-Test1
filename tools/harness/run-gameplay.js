@@ -103,7 +103,14 @@ function specFromScenario(file){
       challenge: !!raw.config?.challenge
     },
     seed: (raw.seed >>> 0) || hashString(raw.name || path.basename(file)),
-    actions: (raw.actions || []).map(a => ({ t: a.t || 0, action: a.action || 'press', code: a.code || a.key || 'Space', hold: a.hold || 0.1 }))
+    actions: (raw.actions || []).map(a => ({
+      t: a.t || 0,
+      action: a.action || 'press',
+      code: a.code || a.key || 'Space',
+      hold: a.hold || 0.1,
+      method: a.method || null,
+      args: a.args || null
+    }))
   };
 }
 
@@ -113,15 +120,23 @@ async function replay(page, spec){
   for(const action of spec.actions){
     const wait = Math.max(0, (action.t - at) * 1000);
     if(wait) await sleep(wait);
-    const key = keyName(action.code);
-    if(action.action === 'down'){
-      if(!down.has(key)){ await page.keyboard.down(key); down.add(key); }
-    }else if(action.action === 'up'){
-      if(down.has(key)){ await page.keyboard.up(key); down.delete(key); }
+    if(action.action === 'harness'){
+      await page.evaluate(({ method, args }) => {
+        const api = window.__galagaHarness__;
+        if(!api || typeof api[method] !== 'function') throw new Error(`Harness method not found: ${method}`);
+        return api[method](args || {});
+      }, { method: action.method, args: action.args || {} });
     }else{
+      const key = keyName(action.code);
+      if(action.action === 'down'){
+      if(!down.has(key)){ await page.keyboard.down(key); down.add(key); }
+      }else if(action.action === 'up'){
+      if(down.has(key)){ await page.keyboard.up(key); down.delete(key); }
+      }else{
       await page.keyboard.down(key);
       await sleep((action.hold || 0.08) * 1000);
       await page.keyboard.up(key);
+      }
     }
     at = action.t;
   }

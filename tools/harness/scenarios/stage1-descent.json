@@ -1,0 +1,22 @@
+{
+  "name": "stage1-descent",
+  "seed": 2003,
+  "duration": 24,
+  "config": {
+    "stage": 1,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 1.4, "action": "down", "code": "ArrowLeft" },
+    { "t": 4.4, "action": "up", "code": "ArrowLeft" },
+    { "t": 4.41, "action": "down", "code": "ArrowRight" },
+    { "t": 8.2, "action": "up", "code": "ArrowRight" },
+    { "t": 8.21, "action": "down", "code": "ArrowLeft" },
+    { "t": 12.1, "action": "up", "code": "ArrowLeft" },
+    { "t": 12.11, "action": "down", "code": "ArrowRight" },
+    { "t": 16.2, "action": "up", "code": "ArrowRight" },
+    { "t": 16.21, "action": "down", "code": "ArrowLeft" },
+    { "t": 20.2, "action": "up", "code": "ArrowLeft" }
+  ]
+}

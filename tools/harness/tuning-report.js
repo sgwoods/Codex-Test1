@@ -67,6 +67,9 @@ function buildReport(batch){
   const challengeRuns = scenarioRuns(allRuns, 'stage3-challenge');
   const stageRuns = scenarioRuns(allRuns, 'stage4-five-ships');
   const survivalRuns = scenarioRuns(allRuns, 'stage4-survival');
+  const descentRuns = scenarioRuns(allRuns, 'stage1-descent');
+  const rescueRuns = scenarioRuns(allRuns, 'rescue-dual');
+  const secondCaptureRuns = scenarioRuns(allRuns, 'second-capture-current');
 
   const audioFailures = allRuns.filter(r => r.analysis?.video?.audio === false).length;
   if(audioFailures){
@@ -125,6 +128,32 @@ function buildReport(batch){
     if(survivalCollisionDeaths > survivalBulletDeaths) findings.push(makeFinding(2, 'Stage 4 survival losses skew toward collisions', `${survivalCollisionDeaths} collision deaths vs ${survivalBulletDeaths} bullet deaths were recorded in the survival scenario.`));
   }
 
+  const descentAvgs = descentRuns.map(r => r.analysis?.descent?.avgToLowerField || 0).filter(v => v > 0);
+  const descentAvg = avg(descentAvgs);
+  if(descentRuns.length && descentAvg){
+    findings.push(makeFinding(3, 'Stage 1 descent speed baseline is now measurable', `Average time from attack start to lower-field crossing is ${descentAvg.toFixed(2)}s in the descent scenario. Use this as a comparison point against original Galaga footage.`));
+  }
+
+  const rescueCaptures = rescueRuns.map(r => r.analysis?.captureMetrics?.fightersRescued || 0);
+  const dualCounts = rescueRuns.map(r => r.analysis?.dualMetrics?.count || 0);
+  const dualSpread = rescueRuns.map(r => r.analysis?.dualMetrics?.avgSpread || 0).filter(v => v > 0);
+  const dualSpreadAvg = avg(dualSpread);
+  if(rescueRuns.length){
+    if(avg(rescueCaptures) < 1) findings.push(makeFinding(1, 'Rescue scenario is not producing a rescued fighter', 'The rescue-dual scenario did not consistently trigger a rescue event.'));
+    else if(avg(dualCounts) < 1) findings.push(makeFinding(1, 'Rescue scenario is not exercising dual-fire mode', 'A fighter was rescued, but no dual-fire shots were recorded afterward.'));
+    else if(dualSpreadAvg > 40) findings.push(makeFinding(2, 'Dual-fighter shot spread still looks wide', `Average dual-shot spread is ${dualSpreadAvg.toFixed(1)}px in the rescue scenario.`));
+  }
+
+  if(secondCaptureRuns.length){
+    const captures = secondCaptureRuns.map(r => r.analysis?.captureMetrics?.fightersCaptured || 0);
+    const starts = secondCaptureRuns.map(r => r.analysis?.captureMetrics?.captureStarts || 0);
+    if(avg(captures) >= 1 || avg(starts) >= 1){
+      findings.push(makeFinding(2, 'Current game allows a second capture attempt with one fighter already carried', `The second-capture scenario recorded ${avg(starts).toFixed(1)} capture starts and ${avg(captures).toFixed(1)} completed captures on average.`));
+    }else{
+      findings.push(makeFinding(3, 'Current game appears to block second capture in the dedicated scenario', 'The second-capture scenario did not record a new capture start or completed capture.'));
+    }
+  }
+
   if(!findings.length){
     findings.push(makeFinding(3, 'No obvious harness regressions', 'Audio, challenge scoring, and later-stage survivability all look within expected ranges for this batch.'));
   }
@@ -152,7 +181,9 @@ function buildReport(batch){
       stageSurvivalAverageEndingStage: +survivalProgressAvg.toFixed(4),
       stageSurvivalAverageSurvivalRatio: +survivalWindowAvg.toFixed(4),
       stageSurvivalBulletDeaths: survivalBulletDeaths,
-      stageSurvivalCollisionDeaths: survivalCollisionDeaths
+      stageSurvivalCollisionDeaths: survivalCollisionDeaths,
+      stage1AverageDescentToLowerField: +descentAvg.toFixed(4),
+      rescueAverageDualSpread: +dualSpreadAvg.toFixed(4)
     },
     findings
   };

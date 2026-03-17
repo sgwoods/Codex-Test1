@@ -72,10 +72,14 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario stage3-challenge
   npm run harness -- --scenario stage4-five-ships
   npm run harness -- --scenario stage4-survival
+  npm run harness -- --scenario stage1-descent
+  npm run harness -- --scenario rescue-dual
+  npm run harness -- --scenario second-capture-current
   ```
 - Or run a seeded batch:
   ```bash
   npm run harness:batch -- --profile quick
+  npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
   npm run harness:batch -- --profile deep
   ```
@@ -85,6 +89,9 @@ After GitHub Pages deploys, play at:
   - seed used for the run
   - stage clears / challenge clears / ship losses
   - per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes
+  - capture/rescue markers such as capture start, fighter captured, and fighter rescued
+  - dual-fire metrics such as average spread in the rescue scenario
+  - descent-speed metrics such as time from attack start to lower-field crossing
   - whether the generated `.webm` contains audio
 - Batch mode also writes:
   - `batch-report.json` with aggregate challenge hits, ship losses, total duration, and audio failures

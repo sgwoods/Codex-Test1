@@ -1,0 +1,23 @@
+{
+  "name": "rescue-dual",
+  "seed": 5003,
+  "duration": 14,
+  "config": {
+    "stage": 1,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.8, "action": "harness", "method": "spawnRescuePod", "args": { "vy": 72 } },
+    { "t": 1.8, "action": "down", "code": "Space" },
+    { "t": 2.0, "action": "down", "code": "ArrowLeft" },
+    { "t": 4.1, "action": "up", "code": "ArrowLeft" },
+    { "t": 4.11, "action": "down", "code": "ArrowRight" },
+    { "t": 6.5, "action": "up", "code": "ArrowRight" },
+    { "t": 6.51, "action": "down", "code": "ArrowLeft" },
+    { "t": 8.6, "action": "up", "code": "ArrowLeft" },
+    { "t": 8.61, "action": "down", "code": "ArrowRight" },
+    { "t": 11.0, "action": "up", "code": "ArrowRight" },
+    { "t": 12.0, "action": "up", "code": "Space" }
+  ]
+}

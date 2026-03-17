@@ -1,0 +1,13 @@
+{
+  "name": "second-capture-current",
+  "seed": 6003,
+  "duration": 10,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.9, "action": "harness", "method": "setupSecondCaptureTest", "args": { "playerX": 140 } }
+  ]
+}

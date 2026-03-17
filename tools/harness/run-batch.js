@@ -14,6 +14,11 @@ const PROFILES = {
     { scenario: 'stage4-five-ships', repeats: 1, seedBase: 4000 },
     { scenario: 'stage4-survival', repeats: 1, seedBase: 4100 }
   ],
+  fidelity: [
+    { scenario: 'stage1-descent', repeats: 1, seedBase: 2000 },
+    { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },
+    { scenario: 'second-capture-current', repeats: 1, seedBase: 6000 }
+  ],
   default: [
     { scenario: 'stage3-challenge', repeats: 2, seedBase: 3000 },
     { scenario: 'stage4-five-ships', repeats: 2, seedBase: 4000 },
