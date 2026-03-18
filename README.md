@@ -52,7 +52,10 @@ After GitHub Pages deploys, play at:
 - Editable source files live in:
   - `src/index.template.html`
   - `src/styles.css`
-  - `src/game.js`
+  - `src/js/00-boot.js`
+  - `src/js/10-gameplay.js`
+  - `src/js/20-render.js`
+  - `src/js/90-harness.js`
 - Served artifact:
   - `index.html`
 - Build the served file from source with:

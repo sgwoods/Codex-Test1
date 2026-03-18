@@ -115,10 +115,9 @@ canvas{display:block;width:100vw;height:100vh}
 <div id="feedbackToast" aria-live="polite"></div>
 <script>
 (()=>{
-// Generated from src/game.js
-// Main game source for Neo Galaga Tribute.
-// This file is embedded into the served index.html by tools/build/build-index.js.
-
+// Generated from src/js/*.js
+// Source: src/js/00-boot.js
+// Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
@@ -630,6 +629,8 @@ addEventListener('keydown',e=>{
 });
 addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
 
+// Source: src/js/10-gameplay.js
+// Enemy spawning, stage flow, combat, capture, and game-state updates.
 function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,ch:0,miss:0,low:0};}
 
 function formationLayout(stage){
@@ -943,6 +944,8 @@ function update(dt){
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }
 
+// Source: src/js/20-render.js
+// Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 function enemyDims(e){
  if(e.t==='boss')return{w:38,h:30};
  if(e.t==='but')return{w:34,h:27};
@@ -1079,6 +1082,8 @@ function draw(){
  else msg.textContent='';
 }
 
+// Source: src/js/90-harness.js
+// Harness hooks and startup loop.
 window.__galagaHarness__={
  start(cfg={}){
   if(cfg.seed!==undefined)setSeed(cfg.seed);
