@@ -31,6 +31,7 @@ let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
 let gameOverHtml='';
 let gameOverState=null;
+const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const RECORD_PREF_KEY='galagaTribAutoVideo';
 const TEST_PREF_KEY='galagaTribTestCfg';
 const SEED_PREF_KEY='galagaTribHarnessSeed';
@@ -120,7 +121,7 @@ const P={
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
@@ -148,6 +149,19 @@ function cycleInitial(ch='A',dir=1){
  const code=((String(ch||'A').charCodeAt(0)-65+dir+26)%26)+65;
  return String.fromCharCode(code);
 }
+function challengeGroupBonus(stage){
+ if(stage>=12)return 3000;
+ if(stage>=8)return 2000;
+ return 1000;
+}
+function hitMissRatio(stats){
+ if(!stats?.shots)return 0;
+ return Math.round((stats.hits/stats.shots)*100);
+}
+function buildResultsHtml(stats,score,stage){
+ const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${String(stage).padStart(2,'0')}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+}
 function recordScore(score,stage){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:'YOU',score:score|0,stage:stage|0,at:new Date().toISOString()};
  const board=loadScoreboard();
@@ -170,6 +184,7 @@ function saveGameOverInitials(){
 }
 function buildGameOverHtmlFromState(){
  if(!gameOverState)return '';
+ if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage);
  const board=loadScoreboard();
  const rows=board.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String(i+1).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
  const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
@@ -188,6 +203,10 @@ function buildGameOverState(score,stage){
  return{
   entryId:res.entry.id,
   rank:res.rank,
+  phase:'results',
+  score:score|0,
+  stage:stage|0,
+  stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
   initials:['Y','O','U'],
   cursor:0,
   editing
@@ -453,6 +472,16 @@ addEventListener('keydown',e=>{
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
  if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();testOpen=!testOpen;syncTestUi();}
+ if(!started&&gameOverState){
+  if(gameOverState.phase==='results'){
+   if(e.code==='Enter'){
+    e.preventDefault();
+    gameOverState.phase='scoreboard';
+    gameOverHtml=buildGameOverHtmlFromState();
+   }
+   return;
+  }
+ }
  if(!started&&gameOverState?.editing){
   if(e.code==='Enter'){
    e.preventDefault();

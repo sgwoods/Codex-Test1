@@ -16,6 +16,9 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .scoreValue{color:#f4f7ff}
 #msg .scoreStage{color:#a9d8ff}
 #msg .scoreHot{color:#ffd86d}
+#msg .resultsTable{display:grid;grid-template-columns:auto auto;gap:.16em 1.2em;justify-content:center;font-size:.82em;line-height:1.18;text-align:right}
+#msg .resultsLabel{color:#ff6f66;text-align:left}
+#msg .resultsValue{color:#f4f7ff;min-width:4.5em}
 #msg .gameOverEntry{display:block;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em 0 .25em}
 #msg .entryCursor{display:inline-block;min-width:.72em;color:#000;background:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
 #msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
@@ -24,6 +27,7 @@ canvas{display:block;width:100vw;height:100vh}
 #msg.gameOverScreen .gameOverTitle{font-size:1.34em;letter-spacing:.14em;margin-bottom:.16em}
 #msg.gameOverScreen .gameOverSub{font-size:.9em;letter-spacing:.08em;margin-bottom:.35em}
 #msg.gameOverScreen .scoreTable{gap:.16em 1.3em;font-size:.92em;line-height:1.14}
+#msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
 #msg.gameOverScreen .gameOverEntry{font-size:.88em;margin:.34em 0 .18em}
 #msg.gameOverScreen .gameOverFoot{font-size:.82em;margin-top:.45em}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
