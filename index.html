@@ -102,8 +102,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 1.0.0</span>
-    <span id="settingsRelease">Mar 18 2026, 5:38 PM EDT</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.54.sha.c04bd9c.dirty</span>
+    <span id="settingsRelease">Mar 18 2026, 7:05 PM EDT</span>
+    <span id="settingsState">main@c04bd9c dirty</span>
   </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
@@ -157,7 +158,8 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD='1.0.0';
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.54.sha.c04bd9c.dirty',commit:'c04bd9c315c367f0039fc6f1425407fecb17beeb',branch:'main',dirty:true,released:'Mar 18 2026, 7:05 PM EDT',state:'main@c04bd9c dirty'};
+const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;

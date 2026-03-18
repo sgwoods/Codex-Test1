@@ -3,6 +3,10 @@
 ## Current State
 
 - Browser-based Galaga-inspired game built from readable source modules and served as `index.html`
+- Build identity is now part of the product:
+  - prerelease SemVer in `package.json`
+  - generated `build-info.json`
+  - in-game settings drawer shows the current build label and Eastern release timestamp
 - Hosted on GitHub Pages: `https://sgwoods.github.io/Codex-Test1/`
 - Core gameplay implemented:
   - stage progression
@@ -25,6 +29,7 @@
 - Fidelity to original Galaga remains a primary product goal
 - We now have a reproducible local tuning loop and should use it as the default evaluation path
 - GitHub issues should mirror the active roadmap closely enough that we can pick up work later without re-deriving context
+- Release recommendations should follow an explicit policy and roadmap rather than ad hoc judgment
 - Official reference material such as manuals and curated clips should live under `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/` so rules and visual comparisons are not stranded in Downloads
 - Secondary sources such as walkthroughs should inform later-stage breadth and player-facing behavior, but should not override manuals or original gameplay footage on arcade-rule questions
 
@@ -54,7 +59,19 @@
 
 ## Workstreams
 
-### 0. Reference Baseline
+### 0. Release Management
+
+- Maintain prerelease SemVer while the game is still in active fidelity development
+- Stamp every build with:
+  - version
+  - build number
+  - commit
+  - branch / dirty state
+  - Eastern build timestamp
+- Use `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md` for bump guidance
+- Use `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md` to decide when a minor-version milestone has actually been reached
+
+### 1. Reference Baseline
 
 - Use `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/` as the durable home for manuals, curated clips, and analysis notes
 - Pull concrete gameplay rules from the 1981 Namco manual before inventing behavior from memory
@@ -67,13 +84,13 @@
   - special attack squadron behavior from Stage `4` onward
   - later-stage enemy family / transform cadence
 
-### 1. Feedback Delivery
+### 2. Feedback Delivery
 
 - Verify whether FormSubmit can be activated against the Modem inbox address
 - If activation is impossible, replace FormSubmit with a more reliable free flow
 - Keep in-game feedback UX intact even if transport changes
 
-### 2. Gameplay Capture And Comparison
+### 3. Gameplay Capture And Comparison
 
 - Add in-game session logging for keyboard actions and game-state snapshots
 - Add export/download of recorded sessions
@@ -81,7 +98,7 @@
 - Use harness-generated `.webm` + `.json` artifacts as the default tuning input
 - Pair local harness results with original Galaga reference clips for direct fidelity comparison
 
-### 3. Fidelity Tuning
+### 4. Fidelity Tuning
 
 - Use captured traces plus original reference clips to tune:
   - formation spacing and screen composition
@@ -91,13 +108,13 @@
   - player ship vertical placement
   - sprite sharpness, collision fairness, and stage/challenge presentation cards
 
-### 4. Automated Play / Testing
+### 5. Automated Play / Testing
 
 - Replay harness is now working with seeded scenarios and session replays
 - Keep extending the harness toward stronger coverage and more useful scoring behavior
 - Reuse the same log format for replay and automated regression testing
 
-### 5. Run Artifact Submission
+### 6. Run Artifact Submission
 
 - Add a `Submit Run` flow that packages a gameplay video and matching JSON log together
 - Use external storage for large artifacts instead of trying to send them through email

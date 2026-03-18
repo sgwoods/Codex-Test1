@@ -24,13 +24,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
+
+      - name: Build site
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          npm run build
 
       - name: Build static site artifact
         run: |
           mkdir -p _site
           cp index.html _site/
+          cp build-info.json _site/
           cp export.mov.png _site/
           cp README.md _site/
 

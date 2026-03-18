@@ -64,9 +64,29 @@ After GitHub Pages deploys, play at:
   ```
 - Build script:
   - `tools/build/build-index.js`
+- Build metadata output:
+  - `build-info.json`
+- Release/versioning policy:
+  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+- Product roadmap:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
 - Auto deploy workflow: `.github/workflows/pages.yml`
 - Durable reference material:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
+
+## Versioning
+
+- Current versioning is prerelease SemVer with build metadata
+- Local and deployed builds carry:
+  - version
+  - build number
+  - short commit
+  - branch / dirty state
+  - Eastern release timestamp
+- Example build label:
+  - `0.5.0-alpha.1+build.54.sha.c04bd9c`
+- See:
+  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 
 ## Session Logging
 
