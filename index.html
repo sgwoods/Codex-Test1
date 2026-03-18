@@ -732,11 +732,28 @@ function gameOver(){
  sfx.over();
 }
 function bulletsMax(){return S.p.dual?4:2}
+function dualShotOffsets(){return S.p.dual?[-14,14]:[0]}
+function scriptedDiveVy(stage){
+ if(stage<=1)return 80;
+ if(stage===2)return 86;
+ return 92;
+}
+function randomDiveVy(stage){
+ if(stage<=1)return 82;
+ if(stage<=3)return 88;
+ if(stage===4)return 88;
+ return 94;
+}
+function diveAccel(stage){
+ if(stage<=1)return 150;
+ if(stage<=3)return 162;
+ return 172;
+}
 
 function shoot(){
  const p=S.p;if(p.cd>0||p.spawn>0||p.captured)return;if(S.pb.length>=bulletsMax())return;
  p.cd=S.challenge?.11:.24;const y=p.y-40;
- const shotXs=p.dual?[p.x-24,p.x+24]:[p.x];
+ const shotXs=dualShotOffsets().map(off=>p.x+off);
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
  logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length});
@@ -780,8 +797,8 @@ function pickScriptEnemy(type,c){
 function startDive(e,p,opts={}){
  if(!e)return;
  e.low=0;
- if(opts.capture&&e.t==='boss'&&canCapture()){e.dive=4;e.targetX=cl(p.x+rnd(28,-28),24,PLAY_W-24);e.targetY=132;e.vx=0;e.vy=120;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:1});return;}
- e.dive=1;e.vx=(p.x-e.x)*.56+rnd(26,-26);e.vy=92+rnd(12);e.shot=e.t==='boss'?2:1;
+ if(opts.capture&&e.t==='boss'&&canCapture()){e.dive=4;e.targetX=cl(p.x+rnd(28,-28),24,PLAY_W-24);e.targetY=132;e.vx=0;e.vy=S.stage<=2?110:120;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:1});return;}
+ e.dive=1;e.vx=(p.x-e.x)*.56+rnd(26,-26);e.vy=scriptedDiveVy(S.stage)+rnd(S.stage<=2?8:12);e.shot=e.t==='boss'?2:1;
  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
  if(opts.escort&&e.t==='boss')assignEscorts(e);
 }
@@ -843,7 +860,7 @@ function updateEnemy(e,dt,t,T,p){
  }
  if(e.dive===5){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
-  if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=104;return}
+  if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=S.stage<=2?96:104;return}
   e.x+=(l.x+e.off-e.x)*Math.min(1,dt*6.2);e.y+=(l.y-34-e.y)*Math.min(1,dt*6);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');e.shot--;}
   return;
@@ -851,7 +868,7 @@ function updateEnemy(e,dt,t,T,p){
  if(e.dive===2){
   S.att++;e.x+=Math.sin(t*6.4+e.ph)*6*dt;e.beamT-=dt;
   if(e.beam&&canCapture()&&Math.abs(p.x-e.x)<8&&p.y>e.y+12&&p.y<e.y+VIS.beamLen)capturePlayer(e);
-  if(e.beamT<=0){e.beam=0;e.dive=1;e.vx=rnd(28,-28);e.vy=112;e.shot=1;e.esc=0}
+  if(e.beamT<=0){e.beam=0;e.dive=1;e.vx=rnd(28,-28);e.vy=S.stage<=2?102:112;e.shot=1;e.esc=0}
   return;
  }
  if(e.dive===4){
@@ -860,7 +877,7 @@ function updateEnemy(e,dt,t,T,p){
   return;
  }
  if(e.dive===1){
-  S.att++;e.vy+=172*dt;e.x+=e.vx*dt+Math.sin(e.tm*7+e.ph)*13*dt;e.y+=e.vy*dt;
+  S.att++;e.vy+=diveAccel(S.stage)*dt;e.x+=e.vx*dt+Math.sin(e.tm*7+e.ph)*13*dt;e.y+=e.vy*dt;
   if(!e.low&&e.y>=PLAY_H*.62){e.low=1;logEvent('enemy_lower_field',Object.assign({stage:S.stage,y:+e.y.toFixed(2),stageClock:+S.stageClock.toFixed(3)},enemyRef(e)))}
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&e.y>108&&e.y<p.y-88&&randUnit()<dt*T.diveShotRate){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'dive');e.shot--;}
   if(e.y>PLAY_H+30){e.x=tx;e.y=-26;e.vx=e.vy=0;e.dive=3;e.low=0;e.beam=0;e.esc=0}
@@ -872,8 +889,8 @@ function updateEnemy(e,dt,t,T,p){
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&S.stage>=4&&!cleanup;
  if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
-  if(e.t==='boss'&&canCapture()&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
-  else{const steer=S.stage===4?.31:S.stage>=5?.48:.56,jitter=S.stage===4?20:S.stage>=5?32:38;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=(S.stage===4?88:94)+rnd(S.stage===4?14:20);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
+  if(e.t==='boss'&&canCapture()&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=S.stage<=2?116:128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
+  else{const steer=S.stage===4?.31:S.stage>=5?.48:.56,jitter=S.stage===4?20:S.stage>=5?32:38;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)+rnd(S.stage===4?14:S.stage>=5?20:12);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:1.18)+rnd(.12,.03);
  }
 }
