@@ -2,7 +2,7 @@
 
 ## Current State
 
-- Browser-based Galaga-inspired game implemented in a single file: `index.html`
+- Browser-based Galaga-inspired game built from readable source modules and served as `index.html`
 - Hosted on GitHub Pages: `https://sgwoods.github.io/Codex-Test1/`
 - Core gameplay implemented:
   - stage progression
@@ -26,24 +26,31 @@
 - We now have a reproducible local tuning loop and should use it as the default evaluation path
 - GitHub issues should mirror the active roadmap closely enough that we can pick up work later without re-deriving context
 - Official reference material such as manuals and curated clips should live under `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/` so rules and visual comparisons are not stranded in Downloads
+- Secondary sources such as walkthroughs should inform later-stage breadth and player-facing behavior, but should not override manuals or original gameplay footage on arcade-rule questions
 
 ## Known Problems
 
 - We do not yet know whether the Modem inbox address can complete FormSubmit's one-time activation flow
-- Challenge-stage scoring has improved materially, but still needs visual/reference review against original Galaga
+- Challenge-stage scoring has improved materially, but manual-driven group bonuses and results presentation are still missing
 - Stage 4 survival remains the main gameplay balance problem, and diagnostics show it is primarily collision-driven
 - Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison
+- Later-stage enemy variety is still far below Galaga's broader stage-band content
 - Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own
 
 ## Latest Harness Signals
 
-- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-16T17-35-57-996Z`
+- Latest `quick` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-quick-2026-03-18T20-22-44-404Z`
+- Latest `fidelity` batch: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-fidelity-2026-03-18T20-26-14-680Z`
 - Audio capture is stable in the harness (`0` audio failures in the latest quick batch)
-- Challenge scenario improved sharply to `24/40` hits (`60%` hit rate), which is materially closer to a readable Galaga-like challenge stage
-- The Stage `4` five-ship scenario is now much healthier and can survive the full window with no deaths in the latest targeted run
-- The Stage `4` survival scenario still loses ships, but diagnostics now show those losses are predominantly direct dive collisions rather than bullet spam
+- Challenge scenario is currently strong at about `26/40` hits (`65%` hit rate in the latest quick batch)
+- The Stage `4` five-ship scenario still survives the full scenario window, but the average progression is still shallow and losses skew toward collisions
+- The Stage `4` survival scenario still reaches only Stage `4`, confirming later-stage progression remains limited even when survivability improves
 - New harness diagnostics now expose first-loss timing, loss clustering, attacker pressure at death, and explicit death causes
-- Current gameplay work should now focus primarily on collision-driven later-stage survivability and on visual fidelity against original Galaga footage
+- Fidelity harness now confirms:
+  - Stage `1` descent baseline is about `1.20s`
+  - rescue dual-shot spread is `28px`
+  - the dedicated second-capture scenario is now blocked as intended
+- Current gameplay work should now focus primarily on collision-driven later-stage survivability, later-stage enemy/content breadth, and visual fidelity against original Galaga footage
 
 ## Workstreams
 
@@ -52,11 +59,13 @@
 - Use `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/` as the durable home for manuals, curated clips, and analysis notes
 - Pull concrete gameplay rules from the 1981 Namco manual before inventing behavior from memory
 - Cross-check manual rules against original gameplay footage whenever the manual is ambiguous or incomplete
+- Use walkthroughs only as secondary references for later-stage variety, progression patterns, and player-visible behavior in ports
 - Favor measurable baseline facts such as:
   - challenge-stage cadence and bonus structure
   - capture / rescue constraints
   - stage-transition and results-screen flow
   - special attack squadron behavior from Stage `4` onward
+  - later-stage enemy family / transform cadence
 
 ### 1. Feedback Delivery
 
@@ -104,6 +113,10 @@
 - `#6` Add gameplay session logging and export
 - `#7` Verify FormSubmit activation against Modem inbox
 - `#8` Design `Submit Run` flow using GitHub issues plus Google Drive artifact storage
+- `#20` Model manual-accurate captured-fighter destruction scoring
+- `#21` Add special three-ship attack squadron bonuses from the manual
+- `#22` Implement manual-accurate challenge-stage bonus scoring
+- `#23` Add Galaga-style results screen before initials entry
 
 ## Revised Plan
 
@@ -122,12 +135,24 @@
 ### Phase 3. Deepen Arcade Systems
 
 1. Revisit capture/rescue and dual-fighter behavior against original footage
-2. Improve later-stage progression so automated scenarios reach deeper comparison territory
-3. Add more scenario coverage for rescue, challenge, and late-board cleanup behavior
-4. Incorporate manual-driven rules that are not yet modeled:
+2. Add manual-accurate post-game flow, challenge bonuses, and results presentation
+3. Improve later-stage progression and enemy variety so automated scenarios reach deeper comparison territory
+4. Add more scenario coverage for rescue, challenge, and late-board cleanup behavior
+5. Incorporate manual-driven rules that are not yet modeled:
    - challenge-stage complete-group bonuses
    - special attack squadron bonuses from Stage `4` onward
    - results/statistics flow before initials entry
+
+## Updated Priority Order
+
+1. Fix later-stage survivability and progression, especially Stage `4` collision pressure and the shallow five-ship progression benchmark
+2. Implement high-confidence manual-driven fidelity items:
+   - challenge-stage group bonuses
+   - results screen before initials entry
+   - special three-ship attack squadron bonuses
+3. Expand later-stage content variety using manual and walkthrough evidence, while keeping manual/video sources primary for rule accuracy
+4. Revisit capture / rescue edge cases and captured-fighter scoring behavior once the baseline rules and later-stage pacing are steadier
+5. Keep improving harness coverage so new fidelity work becomes measurable instead of purely visual
 
 ### Phase 4. Productize The Workflow
 
