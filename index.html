@@ -760,7 +760,10 @@ function shoot(){
  sfx.shot();
 }
 
-function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&p.spawn<=0&&S.lives>=0}
+function hasCarriedFighter(){
+ return S.e.some(e=>e.hp>0&&e.carry);
+}
+function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0}
 function capturePlayer(e){if(!canCapture())return;const p=S.p;p.captured=1;p.capBoss=e;p.capT=1.2;e.beam=1;e.beamT=Math.max(.5,e.beamT);logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)},enemyRef(e)));sfx.beam()}
 function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;logEvent('fighter_captured',Object.assign({stage:S.stage,livesAfter:Math.max(0,S.lives+1)},enemyRef(e)));S.alertTxt='FIGHTER CAPTURED';S.alertT=1.55;if(S.lives<0)gameOver()}
 
