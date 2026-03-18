@@ -113,12 +113,9 @@ function draw(){
  left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
  right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
  const toolsVisible=!started||paused||feedbackOpen;
- feedbackBtn.style.display=toolsVisible?'block':'none';
- exportBtn.style.display=toolsVisible?'block':'none';
- recordBtn.style.display=toolsVisible?'block':'none';
- testBtn.style.display=toolsVisible?'block':'none';
- if(!toolsVisible)testPanel.classList.remove('open');
- else testPanel.classList.toggle('open',testOpen);
+ settingsBtn.style.display=toolsVisible?'block':'none';
+ if(!toolsVisible)closeSettings();
+ else syncTestUi();
  msg.className=!started&&gameOverHtml?'gameOverScreen':'';
  if(!started)msg.innerHTML=gameOverHtml||'PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';

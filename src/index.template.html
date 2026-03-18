@@ -12,21 +12,30 @@
 <canvas id="c"></canvas>
 <div id="hud"><div id="left"></div><div id="right"></div></div>
 <div id="msg"></div>
-<button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
-<button id="exportBtn">Export Log</button>
-<button id="recordBtn" type="button">Auto Video: On</button>
-<button id="testBtn" type="button">Test Setup</button>
-<div id="testPanel" aria-hidden="true">
-  <h3>Test Setup</h3>
-  <label for="testStage">Start Stage</label>
-  <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
-  <label for="testShips">Starting Ships</label>
-  <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
-  <div id="testRow">
-    <input id="testChallenge" type="checkbox" />
-    <label for="testChallenge">Force challenge opening</label>
+<button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
+<div id="settingsPanel" aria-hidden="true">
+  <h3>Settings</h3>
+  <div id="settingsActions">
+    <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
+    <button id="exportBtn" type="button">Export Log</button>
+    <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
-  <div id="testHint">Applies on next game start only.</div>
+  <div id="testPanel">
+    <h4>Test Setup</h4>
+    <label for="testStage">Start Stage</label>
+    <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+    <label for="testShips">Starting Ships</label>
+    <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+    <div id="testRow">
+      <input id="testChallenge" type="checkbox" />
+      <label for="testChallenge">Force challenge opening</label>
+    </div>
+    <div id="testHint">Applies on next game start only.</div>
+  </div>
+  <div id="settingsMeta">
+    <span id="settingsVersion">Version {{BUILD_VERSION}}</span>
+    <span id="settingsRelease">{{BUILD_RELEASE_ET}}</span>
+  </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">

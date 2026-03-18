@@ -40,24 +40,26 @@ canvas{display:block;width:100vw;height:100vh}
 #msg.gameOverScreen .gameOverFoot{font-size:.82em;margin-top:.45em}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
-#feedbackBtn{position:fixed;top:62px;right:16px;z-index:30;border:1px solid rgba(136,245,255,.6);background:rgba(8,18,35,.75);color:#dbf8ff;padding:7px 11px;font:700 14px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
-#feedbackBtn:hover{background:rgba(19,43,84,.85);border-color:rgba(136,245,255,.95)}
-#exportBtn{position:fixed;top:98px;right:16px;z-index:30;border:1px solid rgba(170,205,255,.55);background:rgba(10,15,28,.7);color:#e6f1ff;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
-#exportBtn:hover{background:rgba(26,39,73,.85);border-color:rgba(170,205,255,.9)}
-#recordBtn{position:fixed;top:134px;right:16px;z-index:30;border:1px solid rgba(255,115,115,.55);background:rgba(28,10,10,.72);color:#ffe9e9;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s}
-#recordBtn:hover{background:rgba(64,17,17,.88);border-color:rgba(255,115,115,.92)}
-#recordBtn.active{border-color:rgba(255,84,84,.95);background:rgba(92,15,15,.9);color:#fff3f3}
+#settingsBtn{position:fixed;top:62px;right:16px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.78);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
+#settingsBtn:hover{background:rgba(19,43,84,.88);border-color:rgba(136,245,255,.9);transform:rotate(18deg)}
+#settingsBtn.open{background:rgba(19,43,84,.92);border-color:rgba(136,245,255,.95)}
+#settingsPanel{position:fixed;top:112px;right:16px;z-index:30;width:238px;background:rgba(7,12,24,.95);border:1px solid rgba(136,245,255,.26);padding:12px 12px 10px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45);backdrop-filter:blur(3px)}
+#settingsPanel.open{display:block}
+#settingsPanel h3{margin:0 0 10px;font-size:15px;color:#dff7ff;letter-spacing:.05em}
+#settingsActions{display:grid;gap:8px;margin-bottom:10px}
+#settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
+#settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
+#recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
-#testBtn{position:fixed;top:170px;right:16px;z-index:30;border:1px solid rgba(145,255,179,.45);background:rgba(10,28,14,.72);color:#e8fff0;padding:7px 11px;font:700 13px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px)}
-#testBtn:hover{background:rgba(18,56,25,.88);border-color:rgba(145,255,179,.88)}
-#testPanel{position:fixed;top:206px;right:16px;z-index:30;width:214px;background:rgba(6,13,10,.94);border:1px solid rgba(145,255,179,.28);padding:10px 11px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45)}
-#testPanel.open{display:block}
-#testPanel h3{margin:0 0 8px;font-size:15px;color:#d8ffe4}
+#testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:10px}
+#testPanel h4{margin:0 0 8px;font-size:13px;color:#d8ffe4;letter-spacing:.05em}
 #testPanel label{display:block;margin:6px 0 3px;font-size:12px;color:#b7efd0}
 #testPanel input{width:100%;box-sizing:border-box;border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7;padding:6px;font:13px/1.2 "Courier New",Consolas,monospace}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
+#settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.25;color:rgba(218,236,255,.58);letter-spacing:.03em}
+#settingsVersion,#settingsRelease{display:block}
 #feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
 #feedbackModal.open{display:flex}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
@@ -79,21 +81,30 @@ canvas{display:block;width:100vw;height:100vh}
 <canvas id="c"></canvas>
 <div id="hud"><div id="left"></div><div id="right"></div></div>
 <div id="msg"></div>
-<button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
-<button id="exportBtn">Export Log</button>
-<button id="recordBtn" type="button">Auto Video: On</button>
-<button id="testBtn" type="button">Test Setup</button>
-<div id="testPanel" aria-hidden="true">
-  <h3>Test Setup</h3>
-  <label for="testStage">Start Stage</label>
-  <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
-  <label for="testShips">Starting Ships</label>
-  <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
-  <div id="testRow">
-    <input id="testChallenge" type="checkbox" />
-    <label for="testChallenge">Force challenge opening</label>
+<button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
+<div id="settingsPanel" aria-hidden="true">
+  <h3>Settings</h3>
+  <div id="settingsActions">
+    <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
+    <button id="exportBtn" type="button">Export Log</button>
+    <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
-  <div id="testHint">Applies on next game start only.</div>
+  <div id="testPanel">
+    <h4>Test Setup</h4>
+    <label for="testStage">Start Stage</label>
+    <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+    <label for="testShips">Starting Ships</label>
+    <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+    <div id="testRow">
+      <input id="testChallenge" type="checkbox" />
+      <label for="testChallenge">Force challenge opening</label>
+    </div>
+    <div id="testHint">Applies on next game start only.</div>
+  </div>
+  <div id="settingsMeta">
+    <span id="settingsVersion">Version 1.0.0</span>
+    <span id="settingsRelease">Mar 18 2026, 5:38 PM EDT</span>
+  </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
@@ -123,10 +134,11 @@ canvas{display:block;width:100vw;height:100vh}
 // Source: src/js/00-boot.js
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
+const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
-const testBtn=document.getElementById('testBtn'),testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 let t0=0,started=0,paused=0,aud=0,keys={};
 let RNG_SEED=0,RNG_STATE=0;
 function randUnit(){
@@ -145,7 +157,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD='1.0.0-modem';
+const BUILD='1.0.0';
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -160,7 +172,7 @@ const TEST_PREF_KEY='galagaTribTestCfg';
 const SEED_PREF_KEY='galagaTribHarnessSeed';
 const SCOREBOARD_KEY='galagaTribTop10';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
-let testOpen=0;
+let settingsOpen=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -388,8 +400,14 @@ function saveTestCfg(){
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
- testPanel.classList.toggle('open',testOpen);
- testPanel.setAttribute('aria-hidden',testOpen?'false':'true');
+ settingsPanel.classList.toggle('open',settingsOpen);
+ settingsPanel.setAttribute('aria-hidden',settingsOpen?'false':'true');
+ settingsBtn.classList.toggle('open',settingsOpen);
+ settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
+}
+function closeSettings(){
+ settingsOpen=0;
+ syncTestUi();
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -464,6 +482,7 @@ function showToast(t){
 }
 function openFeedback(){
  if(feedbackOpen)return;
+ closeSettings();
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
@@ -571,6 +590,7 @@ function rs(){
 }
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
+settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncTestUi();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -580,21 +600,22 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
-testBtn.addEventListener('click',()=>{testOpen=!testOpen;syncTestUi();});
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
+settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
 addEventListener('keydown',e=>{
  const wasDown=!!keys[e.code];
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
+ if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
- if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();testOpen=!testOpen;syncTestUi();}
+ if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncTestUi();}
  if(!started&&gameOverState){
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
@@ -661,6 +682,11 @@ addEventListener('keydown',e=>{
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
 addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
+addEventListener('pointerdown',e=>{
+ if(!settingsOpen)return;
+ if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
+ closeSettings();
+});
 
 // Source: src/js/10-gameplay.js
 // Enemy spawning, stage flow, combat, capture, and game-state updates.
@@ -1132,12 +1158,9 @@ function draw(){
  left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
  right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
  const toolsVisible=!started||paused||feedbackOpen;
- feedbackBtn.style.display=toolsVisible?'block':'none';
- exportBtn.style.display=toolsVisible?'block':'none';
- recordBtn.style.display=toolsVisible?'block':'none';
- testBtn.style.display=toolsVisible?'block':'none';
- if(!toolsVisible)testPanel.classList.remove('open');
- else testPanel.classList.toggle('open',testOpen);
+ settingsBtn.style.display=toolsVisible?'block':'none';
+ if(!toolsVisible)closeSettings();
+ else syncTestUi();
  msg.className=!started&&gameOverHtml?'gameOverScreen':'';
  if(!started)msg.innerHTML=gameOverHtml||'PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';

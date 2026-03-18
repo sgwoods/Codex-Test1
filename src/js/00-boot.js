@@ -1,9 +1,10 @@
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
+const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
-const testBtn=document.getElementById('testBtn'),testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 let t0=0,started=0,paused=0,aud=0,keys={};
 let RNG_SEED=0,RNG_STATE=0;
 function randUnit(){
@@ -22,7 +23,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD='1.0.0-modem';
+const BUILD='{{BUILD_VERSION}}';
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -37,7 +38,7 @@ const TEST_PREF_KEY='galagaTribTestCfg';
 const SEED_PREF_KEY='galagaTribHarnessSeed';
 const SCOREBOARD_KEY='galagaTribTop10';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
-let testOpen=0;
+let settingsOpen=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -265,8 +266,14 @@ function saveTestCfg(){
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
- testPanel.classList.toggle('open',testOpen);
- testPanel.setAttribute('aria-hidden',testOpen?'false':'true');
+ settingsPanel.classList.toggle('open',settingsOpen);
+ settingsPanel.setAttribute('aria-hidden',settingsOpen?'false':'true');
+ settingsBtn.classList.toggle('open',settingsOpen);
+ settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
+}
+function closeSettings(){
+ settingsOpen=0;
+ syncTestUi();
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -341,6 +348,7 @@ function showToast(t){
 }
 function openFeedback(){
  if(feedbackOpen)return;
+ closeSettings();
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
@@ -448,6 +456,7 @@ function rs(){
 }
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
+settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncTestUi();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -457,21 +466,22 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
-testBtn.addEventListener('click',()=>{testOpen=!testOpen;syncTestUi();});
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
+settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
 addEventListener('keydown',e=>{
  const wasDown=!!keys[e.code];
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
+ if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
- if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();testOpen=!testOpen;syncTestUi();}
+ if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncTestUi();}
  if(!started&&gameOverState){
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
@@ -538,3 +548,8 @@ addEventListener('keydown',e=>{
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
 addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
+addEventListener('pointerdown',e=>{
+ if(!settingsOpen)return;
+ if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
+ closeSettings();
+});
