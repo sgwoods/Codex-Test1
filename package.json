@@ -4,6 +4,7 @@
   "description": "Galaga-inspired browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.",
   "main": "index.js",
   "scripts": {
+    "build": "node tools/build/build-index.js",
     "harness:analyze": "node tools/harness/analyze-run.js",
     "harness:batch": "node tools/harness/run-batch.js",
     "harness:check-latest": "node tools/harness/check-latest-run.js",

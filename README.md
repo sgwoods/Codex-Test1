@@ -49,7 +49,18 @@ After GitHub Pages deploys, play at:
 
 ## Development
 
-- Main game file: `index.html`
+- Editable source files live in:
+  - `src/index.template.html`
+  - `src/styles.css`
+  - `src/game.js`
+- Served artifact:
+  - `index.html`
+- Build the served file from source with:
+  ```bash
+  npm run build
+  ```
+- Build script:
+  - `tools/build/build-index.js`
 - Auto deploy workflow: `.github/workflows/pages.yml`
 
 ## Session Logging

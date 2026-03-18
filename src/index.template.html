@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Neo Galaga Tribute</title>
+<style>
+{{INLINE_STYLES}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud"><div id="left"></div><div id="right"></div></div>
+<div id="msg"></div>
+<button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
+<button id="exportBtn">Export Log</button>
+<button id="recordBtn" type="button">Auto Video: On</button>
+<button id="testBtn" type="button">Test Setup</button>
+<div id="testPanel" aria-hidden="true">
+  <h3>Test Setup</h3>
+  <label for="testStage">Start Stage</label>
+  <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+  <label for="testShips">Starting Ships</label>
+  <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+  <div id="testRow">
+    <input id="testChallenge" type="checkbox" />
+    <label for="testChallenge">Force challenge opening</label>
+  </div>
+  <div id="testHint">Applies on next game start only.</div>
+</div>
+<div id="feedbackModal" aria-hidden="true">
+  <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+    <h2 id="feedbackTitle">Send Feedback</h2>
+    <form id="feedbackForm">
+      <label for="fbType">Type</label>
+      <select id="fbType" required>
+        <option value="bug_report">Bug Report</option>
+        <option value="feature_request">Feature Request</option>
+      </select>
+      <label for="fbSummary">Title</label>
+      <input id="fbSummary" maxlength="120" placeholder="Short summary" required />
+      <label for="fbDescription">Description</label>
+      <textarea id="fbDescription" maxlength="3000" placeholder="What happened? Steps to reproduce? Expected behavior?" required></textarea>
+      <div id="feedbackActions">
+        <button type="button" id="fbCancel">Cancel</button>
+        <button type="submit">Submit</button>
+      </div>
+      <div id="feedbackStatus"></div>
+    </form>
+  </div>
+</div>
+<div id="feedbackToast" aria-live="polite"></div>
+<script>
+(()=>{
+{{INLINE_SCRIPT}}
+})();
+</script>
+</body>
+</html>
