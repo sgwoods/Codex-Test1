@@ -25,6 +25,7 @@
 - Fidelity to original Galaga remains a primary product goal
 - We now have a reproducible local tuning loop and should use it as the default evaluation path
 - GitHub issues should mirror the active roadmap closely enough that we can pick up work later without re-deriving context
+- Official reference material such as manuals and curated clips should live under `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/` so rules and visual comparisons are not stranded in Downloads
 
 ## Known Problems
 
@@ -45,6 +46,17 @@
 - Current gameplay work should now focus primarily on collision-driven later-stage survivability and on visual fidelity against original Galaga footage
 
 ## Workstreams
+
+### 0. Reference Baseline
+
+- Use `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/` as the durable home for manuals, curated clips, and analysis notes
+- Pull concrete gameplay rules from the 1981 Namco manual before inventing behavior from memory
+- Cross-check manual rules against original gameplay footage whenever the manual is ambiguous or incomplete
+- Favor measurable baseline facts such as:
+  - challenge-stage cadence and bonus structure
+  - capture / rescue constraints
+  - stage-transition and results-screen flow
+  - special attack squadron behavior from Stage `4` onward
 
 ### 1. Feedback Delivery
 
@@ -112,6 +124,10 @@
 1. Revisit capture/rescue and dual-fighter behavior against original footage
 2. Improve later-stage progression so automated scenarios reach deeper comparison territory
 3. Add more scenario coverage for rescue, challenge, and late-board cleanup behavior
+4. Incorporate manual-driven rules that are not yet modeled:
+   - challenge-stage complete-group bonuses
+   - special attack squadron bonuses from Stage `4` onward
+   - results/statistics flow before initials entry
 
 ### Phase 4. Productize The Workflow
 

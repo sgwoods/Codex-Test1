@@ -65,6 +65,8 @@ After GitHub Pages deploys, play at:
 - Build script:
   - `tools/build/build-index.js`
 - Auto deploy workflow: `.github/workflows/pages.yml`
+- Durable reference material:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
 
 ## Session Logging
 
