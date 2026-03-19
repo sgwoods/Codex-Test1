@@ -62,8 +62,14 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run build
   ```
+- Sync the separate public project pages repo from the latest build metadata with:
+  ```bash
+  npm run sync:public
+  ```
 - Build script:
   - `tools/build/build-index.js`
+- Public-pages sync script:
+  - `tools/build/sync-public-pages.js`
 - Build metadata output:
   - `build-info.json`
 - Release notes source:
@@ -75,6 +81,8 @@ After GitHub Pages deploys, play at:
 - Release history:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
 - Auto deploy workflow: `.github/workflows/pages.yml`
+- Cross-repo public-pages sync workflow:
+  - `.github/workflows/sync-public-pages.yml`
 - Durable reference material:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
 
@@ -91,6 +99,9 @@ After GitHub Pages deploys, play at:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
 - Each release can also keep a structured session summary and optional raw transcript under:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
+- The separate public project pages repo is synced from `build-info.json` and `release-notes.json`
+  - CI uses the `PUBLIC_REPO_SYNC_TOKEN` secret when available
+  - The token should have `contents:write` access to `sgwoods/public`
 - Example build label:
   - `0.5.0-alpha.1+build.54.sha.c04bd9c`
 - See:

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node tools/build/build-index.js",
+    "sync:public": "node tools/build/sync-public-pages.js",
     "harness:analyze": "node tools/harness/analyze-run.js",
     "harness:batch": "node tools/harness/run-batch.js",
     "harness:check-latest": "node tools/harness/check-latest-run.js",

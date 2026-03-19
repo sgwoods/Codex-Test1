@@ -1,0 +1,33 @@
+name: Sync Public Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-public-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build site
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          npm run build
+
+      - name: Sync public pages repo
+        env:
+          PUBLIC_REPO_SYNC_TOKEN: ${{ secrets.PUBLIC_REPO_SYNC_TOKEN }}
+        run: |
+          npm run sync:public
