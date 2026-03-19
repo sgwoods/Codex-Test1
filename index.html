@@ -106,9 +106,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.58.sha.9ccdfd1.dirty</span>
-    <span id="settingsRelease">Mar 19 2026, 11:36 AM EDT</span>
-    <span id="settingsState">main@9ccdfd1 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.59.sha.8421d35.dirty</span>
+    <span id="settingsRelease">Mar 19 2026, 11:39 AM EDT</span>
+    <span id="settingsState">main@8421d35 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -167,7 +167,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.58.sha.9ccdfd1.dirty',commit:'9ccdfd19ffc7067f1a79520ecb08b779efa6cab2',branch:'main',dirty:true,released:'Mar 19 2026, 11:36 AM EDT',state:'main@9ccdfd1 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.59.sha.8421d35.dirty',commit:'8421d355829e3ec251ca9957f469e3140e745cba',branch:'main',dirty:true,released:'Mar 19 2026, 11:39 AM EDT',state:'main@8421d35 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -803,7 +803,7 @@ function gameOver(){
  sfx.over();
 }
 function bulletsMax(){return S.p.dual?4:2}
-function dualShotOffsets(){return S.p.dual?[-14,14]:[0]}
+function dualShotOffsets(){return S.p.dual?[-10,10]:[0]}
 function scriptedDiveVy(stage){
  if(stage<=1)return 80;
  if(stage===2)return 86;

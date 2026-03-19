@@ -141,7 +141,7 @@ function buildReport(batch){
   if(rescueRuns.length){
     if(avg(rescueCaptures) < 1) findings.push(makeFinding(1, 'Rescue scenario is not producing a rescued fighter', 'The rescue-dual scenario did not consistently trigger a rescue event.'));
     else if(avg(dualCounts) < 1) findings.push(makeFinding(1, 'Rescue scenario is not exercising dual-fire mode', 'A fighter was rescued, but no dual-fire shots were recorded afterward.'));
-    else if(dualSpreadAvg > 40) findings.push(makeFinding(2, 'Dual-fighter shot spread still looks wide', `Average dual-shot spread is ${dualSpreadAvg.toFixed(1)}px in the rescue scenario.`));
+    else if(dualSpreadAvg > 24) findings.push(makeFinding(2, 'Dual-fighter shot spread still looks wide', `Average dual-shot spread is ${dualSpreadAvg.toFixed(1)}px in the rescue scenario.`));
   }
 
   if(secondCaptureRuns.length){

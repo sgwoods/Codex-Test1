@@ -101,7 +101,7 @@ function gameOver(){
  sfx.over();
 }
 function bulletsMax(){return S.p.dual?4:2}
-function dualShotOffsets(){return S.p.dual?[-14,14]:[0]}
+function dualShotOffsets(){return S.p.dual?[-10,10]:[0]}
 function scriptedDiveVy(stage){
  if(stage<=1)return 80;
  if(stage===2)return 86;
