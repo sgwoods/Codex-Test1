@@ -32,7 +32,7 @@ function spawnChallenge(){
  for(let i=0;i<total;i++){
   const t=i%8<2?'boss':i%3?'but':'bee';
   const wave=(i/8)|0,lane=i%8,side=lane<4?-1:1,slot=lane%4,row=slot<2?0:1;
-  S.e.push({id:(randUnit()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*13+row*8,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.48+slot*.18,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1});
+  S.e.push({id:(randUnit()*1e9)|0,t,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*13+row*8,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.52+slot*.18,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1});
  }
  S.ch={hits:0,total:40,done:0,groups:Array.from({length:5},()=>0),bonus:0,perfect:0};
 }
@@ -121,7 +121,7 @@ function diveAccel(stage){
 
 function shoot(){
  const p=S.p;if(p.cd>0||p.spawn>0||p.captured)return;if(S.pb.length>=bulletsMax())return;
- p.cd=S.challenge?.11:.24;const y=p.y-40;
+ p.cd=S.challenge?.095:.24;const y=p.y-40;
  const shotXs=dualShotOffsets().map(off=>p.x+off);
  S.stats.shots+=p.dual?2:1;
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
@@ -246,22 +246,22 @@ function runStage1Script(dt,p,T){
 
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){e.spawn-=dt;return}
- e.tm+=dt*(.39+(e.wave||0)*.008+Math.min(.014,S.stage*.0018));
+ e.tm+=dt*(.355+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
  const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
  const laneX=PLAY_W/2+side*(48+slot*16);
  const topY=38+wave*14+row*8;
  if(u<3.15){
   const q=u/3.15,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
   e.x=startX+(laneX-startX)*curve;
-  e.y=topY+Math.sin(q*3.14+p)*2.2;
- }else if(u<9.35){
-  const q=(u-3.15)/6.2;
-  e.x=laneX+sweep*Math.sin(q*Math.PI)*32;
-  e.y=topY+q*8+Math.sin(q*6.28+p)*1.15;
+  e.y=topY+Math.sin(q*3.14+p)*2;
+ }else if(u<9.7){
+  const q=(u-3.15)/6.55;
+  e.x=laneX+sweep*Math.sin(q*Math.PI)*28;
+  e.y=topY+q*6.5+Math.sin(q*5.5+p)*.95;
  }else{
-  const q=(u-9.35)/3.4;
-  e.x=laneX-sweep*(4+q*38)+Math.sin(q*5.4+p)*1.5;
-  e.y=topY+8+q*210;
+  const q=(u-9.7)/3.35;
+  e.x=laneX-sweep*(4+q*34)+Math.sin(q*5.1+p)*1.2;
+  e.y=topY+8+q*198;
  }
  if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
 }

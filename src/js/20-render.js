@@ -6,7 +6,7 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?0.58:(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?0.7:(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 function enemyCollisionHitbox(e){
