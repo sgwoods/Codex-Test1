@@ -141,6 +141,25 @@ function activeEscortCount(e){
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function carriedFighterTarget(e){
+ if(!e?.carry)return null;
+ return {x:e.x,y:e.y+18,w:6,h:6};
+}
+
+function destroyCarriedFighter(e){
+ if(!e?.carry)return 0;
+ const attacking=!!e.dive;
+ const points=attacking?1000:500;
+ e.carry=0;
+ S.score+=points;
+ logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+ S.alertTxt=`CAPTURED FIGHTER ${attacking?'ATTACK':'STANDBY'} ${points}`;
+ S.alertT=Math.max(S.alertT,1.15);
+ ex(e.x,e.y+18,10,'#d8f2ff');
+ sfx.hit();
+ return points;
+}
+
 function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
@@ -354,7 +373,25 @@ function update(dt){
  }
 
  for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
-  for(const e of S.e){if(e.hp<=0)continue;const h=enemyHitbox(e);if(Math.abs(b.x-e.x)<h.w&&Math.abs(b.y-e.y)<h.h){S.stats.hits++;S.pb.splice(i,1);e.hp--;if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}else sfx.hit();break}}
+  for(const e of S.e){
+   if(e.hp<=0)continue;
+   const cf=carriedFighterTarget(e);
+   if(cf&&Math.abs(b.x-cf.x)<cf.w&&Math.abs(b.y-cf.y)<cf.h){
+    S.stats.hits++;
+    S.pb.splice(i,1);
+    destroyCarriedFighter(e);
+    break;
+   }
+   const h=enemyHitbox(e);
+   if(e.carry&&b.y>=e.y+8)continue;
+   if(Math.abs(b.x-e.x)<h.w&&Math.abs(b.y-e.y)<h.h){
+    S.stats.hits++;
+    S.pb.splice(i,1);
+    e.hp--;
+    if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}else sfx.hit();
+    break;
+   }
+  }
  }
 
  for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}

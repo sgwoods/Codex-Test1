@@ -203,6 +203,7 @@ function analyze(target){
     fightersCaptured: countEvents(events, 'fighter_captured'),
     fightersRescued: countEvents(events, 'fighter_rescued')
   };
+  const carriedFighterDestroyed = events.filter(e => e.type === 'captured_fighter_destroyed');
   const specialAttackBonuses = events.filter(e => e.type === 'special_attack_bonus');
   const dualMetrics = dualShotMetrics(events);
   const descent = descentMetrics(events);
@@ -219,6 +220,12 @@ function analyze(target){
     stageLossClusters,
     lossCauseCounts,
     captureMetrics,
+    carriedFighterMetrics: {
+      count: carriedFighterDestroyed.length,
+      standbyCount: carriedFighterDestroyed.filter(e => !e.attacking).length,
+      attackingCount: carriedFighterDestroyed.filter(e => !!e.attacking).length,
+      totalPoints: carriedFighterDestroyed.reduce((sum, e) => sum + (+e.points || 0), 0)
+    },
     specialAttackMetrics: {
       count: specialAttackBonuses.length,
       totalBonus: specialAttackBonuses.reduce((sum, e) => sum + (+e.bonus || 0), 0),

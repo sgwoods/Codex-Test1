@@ -26,6 +26,18 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED}},
+ spawnPlayerBullet(cfg={}){
+  const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
+  S.pb.push({x,y,v});
+  logEvent('harness_spawn_player_bullet',{x:+x.toFixed(2),y:+y.toFixed(2),v:+v.toFixed(2)});
+ },
+ triggerCarriedFighterHit(){
+  const boss=S.e.find(e=>e.hp>0&&e.carry);
+  if(!boss)return false;
+  const points=destroyCarriedFighter(boss);
+  logEvent('harness_trigger_carried_fighter_hit',{boss:boss.id,points});
+  return !!points;
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
@@ -71,6 +83,24 @@ window.__galagaHarness__={
   logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2)});
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,squadron:1});
   for(const e of escorts)logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off,harness:1,squadron:1});
+  return true;
+ },
+ setupCarriedFighterScoringTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  const attacking=!!cfg.attacking;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=2;boss.max=2;boss.form=1;boss.carry=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=p.x;boss.shot=0;
+  if(attacking){
+   boss.dive=1;boss.y=132;boss.vx=0;boss.vy=24;
+   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,carriedFighter:1});
+  }else{
+   boss.dive=0;boss.x=p.x;boss.y=186;
+  }
+  logEvent('harness_carried_fighter_setup',{boss:boss.id,attacking,playerX:+p.x.toFixed(2)});
   return true;
  }
 };

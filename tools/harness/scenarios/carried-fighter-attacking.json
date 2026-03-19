@@ -1,0 +1,16 @@
+{
+  "name": "carried-fighter-attacking",
+  "seed": 20022,
+  "duration": 5,
+  "config": {
+    "stage": 4,
+    "ships": 3,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupCarriedFighterScoringTest", "args": { "attacking": true, "playerX": 140 } },
+    { "t": 0.70, "action": "press", "code": "Space", "hold": 0.06 },
+    { "t": 1.60, "action": "press", "code": "Space", "hold": 0.06 },
+    { "t": 2.20, "action": "harness", "method": "stop", "args": "carried-fighter-attacking" }
+  ]
+}

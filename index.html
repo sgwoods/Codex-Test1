@@ -106,9 +106,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.57.sha.c7b698b.dirty</span>
-    <span id="settingsRelease">Mar 19 2026, 8:09 AM EDT</span>
-    <span id="settingsState">main@c7b698b dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.58.sha.9ccdfd1.dirty</span>
+    <span id="settingsRelease">Mar 19 2026, 11:36 AM EDT</span>
+    <span id="settingsState">main@9ccdfd1 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -167,7 +167,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.57.sha.c7b698b.dirty',commit:'c7b698b48eb0043cbe6a29ddaf4a28e9fa322403',branch:'main',dirty:true,released:'Mar 19 2026, 8:09 AM EDT',state:'main@c7b698b dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.58.sha.9ccdfd1.dirty',commit:'9ccdfd19ffc7067f1a79520ecb08b779efa6cab2',branch:'main',dirty:true,released:'Mar 19 2026, 11:36 AM EDT',state:'main@9ccdfd1 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -843,6 +843,25 @@ function activeEscortCount(e){
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function carriedFighterTarget(e){
+ if(!e?.carry)return null;
+ return {x:e.x,y:e.y+18,w:6,h:6};
+}
+
+function destroyCarriedFighter(e){
+ if(!e?.carry)return 0;
+ const attacking=!!e.dive;
+ const points=attacking?1000:500;
+ e.carry=0;
+ S.score+=points;
+ logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+ S.alertTxt=`CAPTURED FIGHTER ${attacking?'ATTACK':'STANDBY'} ${points}`;
+ S.alertT=Math.max(S.alertT,1.15);
+ ex(e.x,e.y+18,10,'#d8f2ff');
+ sfx.hit();
+ return points;
+}
+
 function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
@@ -1056,7 +1075,25 @@ function update(dt){
  }
 
  for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
-  for(const e of S.e){if(e.hp<=0)continue;const h=enemyHitbox(e);if(Math.abs(b.x-e.x)<h.w&&Math.abs(b.y-e.y)<h.h){S.stats.hits++;S.pb.splice(i,1);e.hp--;if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}else sfx.hit();break}}
+  for(const e of S.e){
+   if(e.hp<=0)continue;
+   const cf=carriedFighterTarget(e);
+   if(cf&&Math.abs(b.x-cf.x)<cf.w&&Math.abs(b.y-cf.y)<cf.h){
+    S.stats.hits++;
+    S.pb.splice(i,1);
+    destroyCarriedFighter(e);
+    break;
+   }
+   const h=enemyHitbox(e);
+   if(e.carry&&b.y>=e.y+8)continue;
+   if(Math.abs(b.x-e.x)<h.w&&Math.abs(b.y-e.y)<h.h){
+    S.stats.hits++;
+    S.pb.splice(i,1);
+    e.hp--;
+    if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}else sfx.hit();
+    break;
+   }
+  }
  }
 
  for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
@@ -1232,6 +1269,18 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED}},
+ spawnPlayerBullet(cfg={}){
+  const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
+  S.pb.push({x,y,v});
+  logEvent('harness_spawn_player_bullet',{x:+x.toFixed(2),y:+y.toFixed(2),v:+v.toFixed(2)});
+ },
+ triggerCarriedFighterHit(){
+  const boss=S.e.find(e=>e.hp>0&&e.carry);
+  if(!boss)return false;
+  const points=destroyCarriedFighter(boss);
+  logEvent('harness_trigger_carried_fighter_hit',{boss:boss.id,points});
+  return !!points;
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
@@ -1277,6 +1326,24 @@ window.__galagaHarness__={
   logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2)});
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,squadron:1});
   for(const e of escorts)logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off,harness:1,squadron:1});
+  return true;
+ },
+ setupCarriedFighterScoringTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  const attacking=!!cfg.attacking;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=2;boss.max=2;boss.form=1;boss.carry=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=p.x;boss.shot=0;
+  if(attacking){
+   boss.dive=1;boss.y=132;boss.vx=0;boss.vy=24;
+   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,carriedFighter:1});
+  }else{
+   boss.dive=0;boss.x=p.x;boss.y=186;
+  }
+  logEvent('harness_carried_fighter_setup',{boss:boss.id,attacking,playerX:+p.x.toFixed(2)});
   return true;
  }
 };
