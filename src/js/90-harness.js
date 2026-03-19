@@ -86,6 +86,9 @@ window.__galagaHarness__={
   return true;
  },
  setupCarriedFighterScoringTest(cfg={}){
+  // Harness-only deterministic setup for issue #20. This isolates the carried
+  // fighter scoring branches without depending on a full capture/rescue play
+  // sequence during the test run.
   const p=S.p;
   const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
   if(!boss)return false;

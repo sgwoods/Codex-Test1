@@ -29,6 +29,9 @@ function spawnFormation(){
 function spawnChallenge(){
  S.e.length=0;
  const total=40;
+ // Manual-backed structure: the first Galaga challenge stage is modeled as
+ // 5 groups of 8 enemies. Motion fidelity is still being tuned in #9, but
+ // the board structure and group bookkeeping are meant to stay stable.
  for(let i=0;i<total;i++){
   const t=i%8<2?'boss':i%3?'but':'bee';
   const wave=(i/8)|0,lane=i%8,side=lane<4?-1:1,slot=lane%4,row=slot<2?0:1;
@@ -148,6 +151,10 @@ function carriedFighterTarget(e){
 
 function destroyCarriedFighter(e){
  if(!e?.carry)return 0;
+ // Manual-backed rule from the 1981 Namco manual:
+ // - 500 for destroying a carried fighter in standby/formation
+ // - 1000 when the carried fighter is attacking
+ // The boss survives; only the carried fighter is lost.
  const attacking=!!e.dive;
  const points=attacking?1000:500;
  e.carry=0;
@@ -185,6 +192,8 @@ function awardKill(e,mode){
  else if(e.t==='boss'){
   if(dive){
    const escorts=activeEscortCount(e);
+   // Manual-backed Stage 4+ special attack squadron scoring:
+   // 400 / 800 / 1600 depending on how many escorts are still attached.
    pts=escorts>=2?1600:escorts===1?800:400;
    if(S.stage>=4&&escorts>0){
     logEvent('special_attack_bonus',{stage:S.stage,bonus:pts,escorts});
@@ -246,6 +255,9 @@ function runStage1Script(dt,p,T){
 
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){e.spawn-=dt;return}
+ // Challenge-stage fidelity is intentionally isolated here so we can tune the
+ // first challenge pattern against reference footage without disturbing the
+ // normal stage attack logic.
  e.tm+=dt*(.355+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
  const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
  const laneX=PLAY_W/2+side*(48+slot*16);
@@ -376,6 +388,8 @@ function update(dt){
   for(const e of S.e){
    if(e.hp<=0)continue;
    const cf=carriedFighterTarget(e);
+   // Check the carried fighter before the boss body so manual scoring can
+   // distinguish "shot the rescued fighter" from "killed the boss."
    if(cf&&Math.abs(b.x-cf.x)<cf.w&&Math.abs(b.y-cf.y)<cf.h){
     S.stats.hits++;
     S.pb.splice(i,1);

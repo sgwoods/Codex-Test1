@@ -56,6 +56,8 @@ After GitHub Pages deploys, play at:
   - `src/js/10-gameplay.js`
   - `src/js/20-render.js`
   - `src/js/90-harness.js`
+- Source orientation guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
 - Served artifact:
   - `index.html`
 - Build the served file from source with:
