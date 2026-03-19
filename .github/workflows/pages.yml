@@ -43,6 +43,7 @@ jobs:
           mkdir -p _site
           cp index.html _site/
           cp build-info.json _site/
+          cp release-notes.json _site/
           cp export.mov.png _site/
           cp README.md _site/
 

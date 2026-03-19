@@ -75,6 +75,16 @@ This gives every build a unique identity without forcing a SemVer bump for every
   - failed tuning experiments
   - internal-only diagnostic changes unless they materially affect shipped behavior
 
+## Release History Policy
+
+- every meaningful release should add an entry under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
+- required:
+  - structured session summary
+- optional but preferred:
+  - verbatim raw chat transcript if exported from Codex
+- subsequent release entries should capture the incremental work since the previous release entry
+
 ## Release Targets
 
 - `alpha`

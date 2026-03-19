@@ -66,10 +66,14 @@ After GitHub Pages deploys, play at:
   - `tools/build/build-index.js`
 - Build metadata output:
   - `build-info.json`
+- Release notes source:
+  - `release-notes.json`
 - Release/versioning policy:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 - Product roadmap:
   - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+- Release history:
+  - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
 - Auto deploy workflow: `.github/workflows/pages.yml`
 - Durable reference material:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
@@ -83,6 +87,10 @@ After GitHub Pages deploys, play at:
   - short commit
   - branch / dirty state
   - Eastern release timestamp
+- The settings drawer also shows the latest human-written release note from:
+  - `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
+- Each release can also keep a structured session summary and optional raw transcript under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
 - Example build label:
   - `0.5.0-alpha.1+build.54.sha.c04bd9c`
 - See:

@@ -9,6 +9,7 @@ const SRC = path.join(ROOT, 'src');
 const SCRIPT_DIR = path.join(SRC, 'js');
 const TEMPLATE = path.join(SRC, 'index.template.html');
 const STYLES = path.join(SRC, 'styles.css');
+const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const OUT = path.join(ROOT, 'index.html');
 const BUILD_INFO_OUT = path.join(ROOT, 'build-info.json');
 
@@ -21,6 +22,15 @@ function fillBuildTokens(input, tokens){
     (out, [key, value]) => out.replace(new RegExp(`\\{\\{${key}\\}\\}`, 'g'), String(value)),
     input
   );
+}
+
+function loadReleaseNotes(){
+  try{
+    const raw = JSON.parse(read(RELEASE_NOTES));
+    return Array.isArray(raw.notes) ? raw.notes : [];
+  }catch{
+    return [];
+  }
 }
 
 function git(args, fallback = ''){
@@ -54,6 +64,11 @@ function build(){
     hour12:true,
     timeZoneName:'short'
   }).format(new Date()).replace(',', '');
+  const releaseNotes = loadReleaseNotes();
+  const latestNote = releaseNotes[0] || {
+    title: 'No release notes yet',
+    summary: 'This build has stamped identity, but no human-written note has been added yet.'
+  };
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_LABEL: buildLabel,
@@ -61,7 +76,9 @@ function build(){
     BUILD_BRANCH: buildBranch,
     BUILD_DIRTY: buildDirty ? 'true' : 'false',
     BUILD_RELEASE_ET: buildReleaseEt,
-    BUILD_STATE: buildState
+    BUILD_STATE: buildState,
+    LATEST_RELEASE_TITLE: latestNote.title,
+    LATEST_RELEASE_BODY: latestNote.summary
   };
   const script = fs.readdirSync(SCRIPT_DIR)
     .filter(file => file.endsWith('.js'))
@@ -86,7 +103,8 @@ function build(){
     dirty: buildDirty,
     dirtyFiles: buildDirtyFiles,
     builtAtUtc: buildUtc,
-    builtAtEt: buildReleaseEt
+    builtAtEt: buildReleaseEt,
+    latestReleaseNote: latestNote
   };
 
   fs.writeFileSync(OUT, html.endsWith('\n') ? html : `${html}\n`);

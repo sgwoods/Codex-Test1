@@ -59,7 +59,11 @@ canvas{display:block;width:100vw;height:100vh}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.25;color:rgba(218,236,255,.58);letter-spacing:.03em}
-#settingsVersion,#settingsRelease{display:block}
+#settingsVersion,#settingsRelease,#settingsState{display:block}
+#settingsNotes{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
+#settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
+#settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff}
+#settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72)}
 #feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
 #feedbackModal.open{display:flex}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
@@ -102,9 +106,14 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.54.sha.c04bd9c.dirty</span>
-    <span id="settingsRelease">Mar 18 2026, 7:05 PM EDT</span>
-    <span id="settingsState">main@c04bd9c dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.55.sha.2f12123.dirty</span>
+    <span id="settingsRelease">Mar 19 2026, 7:30 AM EDT</span>
+    <span id="settingsState">main@2f12123 dirty</span>
+  </div>
+  <div id="settingsNotes">
+    <span id="settingsNotesLabel">Latest Note</span>
+    <span id="settingsNotesTitle">Build identity, settings drawer, and roadmap sync</span>
+    <span id="settingsNotesBody">Replaced the floating tools stack with a settings drawer, added stamped build identity, and aligned the project with an explicit release policy and roadmap.</span>
   </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
@@ -158,7 +167,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.54.sha.c04bd9c.dirty',commit:'c04bd9c315c367f0039fc6f1425407fecb17beeb',branch:'main',dirty:true,released:'Mar 18 2026, 7:05 PM EDT',state:'main@c04bd9c dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.55.sha.2f12123.dirty',commit:'2f12123112c345327c79c0971a5ab99b353563f3',branch:'main',dirty:true,released:'Mar 19 2026, 7:30 AM EDT',state:'main@2f12123 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
