@@ -119,6 +119,7 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario stage1-descent
   npm run harness -- --scenario rescue-dual
   npm run harness -- --scenario second-capture-current
+  npm run harness -- --scenario stage4-squadron-bonus
   ```
 - Or run a seeded batch:
   ```bash
@@ -134,6 +135,7 @@ After GitHub Pages deploys, play at:
   - stage clears / challenge clears / ship losses
   - per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes
   - capture/rescue markers such as capture start, fighter captured, and fighter rescued
+  - special attack squadron bonus metrics such as triggered count, total awarded bonus, and max escorts present
   - dual-fire metrics such as average spread in the rescue scenario
   - descent-speed metrics such as time from attack start to lower-field crossing
   - whether the generated `.webm` contains audio

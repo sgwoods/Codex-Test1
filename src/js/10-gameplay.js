@@ -1,5 +1,5 @@
 // Enemy spawning, stage flow, combat, capture, and game-state updates.
-function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,ch:0,miss:0,low:0};}
+function makeEnemy(t,r,c,tx,ty){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,squadId:0,ch:0,miss:0,low:0};}
 
 function formationLayout(stage){
  if(stage>=8)return{gx:15.2,gy:12.4,oy:27};
@@ -136,6 +136,10 @@ function hasCarriedFighter(){
 function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0}
 function capturePlayer(e){if(!canCapture())return;const p=S.p;p.captured=1;p.capBoss=e;p.capT=1.2;e.beam=1;e.beamT=Math.max(.5,e.beamT);logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)},enemyRef(e)));sfx.beam()}
 function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;logEvent('fighter_captured',Object.assign({stage:S.stage,livesAfter:Math.max(0,S.lives+1)},enemyRef(e)));S.alertTxt='FIGHTER CAPTURED';S.alertT=1.55;if(S.lives<0)gameOver()}
+function activeEscortCount(e){
+ if(!e?.squadId)return Math.max(0,e?.esc|0);
+ return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
+}
 
 function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
@@ -154,12 +158,22 @@ function awardKill(e,mode){
    }
   }
   logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:1,rescued:0,turnedHostile:0,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
-  return
+ return
  }
  if(e.t==='bee')pts=dive?100:50;
  else if(e.t==='but')pts=dive?160:80;
  else if(e.t==='rogue')pts=dive?1000:500;
- else if(e.t==='boss')pts=dive?(e.esc>=2?1600:e.esc===1?800:400):150;
+ else if(e.t==='boss'){
+  if(dive){
+   const escorts=activeEscortCount(e);
+   pts=escorts>=2?1600:escorts===1?800:400;
+   if(S.stage>=4&&escorts>0){
+    logEvent('special_attack_bonus',{stage:S.stage,bonus:pts,escorts});
+    S.alertTxt=`SPECIAL BONUS ${pts}`;
+    S.alertT=Math.max(S.alertT,1.1);
+   }
+  }else pts=150;
+ }
  S.score+=pts;
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  if(e.carry){
@@ -171,9 +185,10 @@ function awardKill(e,mode){
 function assignEscorts(boss){
  if(boss.t!=='boss')return;
  const maxEscorts=S.stage===1&&S.scriptMode?1:2;
+ const squadId=++S.squadSeq;
  const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
- boss.esc=0;
- for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*64;e.shot=1;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
+ boss.esc=0;boss.squadId=cand.length?squadId:0;
+ for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*64;e.shot=1;e.squadId=squadId;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
 }
 
 function pickScriptEnemy(type,c){

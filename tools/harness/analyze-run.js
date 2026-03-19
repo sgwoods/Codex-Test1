@@ -203,6 +203,7 @@ function analyze(target){
     fightersCaptured: countEvents(events, 'fighter_captured'),
     fightersRescued: countEvents(events, 'fighter_rescued')
   };
+  const specialAttackBonuses = events.filter(e => e.type === 'special_attack_bonus');
   const dualMetrics = dualShotMetrics(events);
   const descent = descentMetrics(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
@@ -218,6 +219,11 @@ function analyze(target){
     stageLossClusters,
     lossCauseCounts,
     captureMetrics,
+    specialAttackMetrics: {
+      count: specialAttackBonuses.length,
+      totalBonus: specialAttackBonuses.reduce((sum, e) => sum + (+e.bonus || 0), 0),
+      maxEscorts: specialAttackBonuses.reduce((max, e) => Math.max(max, +e.escorts || 0), 0)
+    },
     dualMetrics,
     descent,
     video: Object.assign({ file: run.videoFile || null }, audio)
