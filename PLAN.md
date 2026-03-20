@@ -137,6 +137,37 @@
 
 ## Revised Plan
 
+## Go-Forward Plan
+
+This is now the operating plan for the project.
+
+### Track A. Autonomous Original-Galaga Baseline
+
+1. Build and maintain a durable reference baseline using:
+   - manuals
+   - curated gameplay footage
+   - emulator captures when available
+   - secondary written references only where they help fill later-stage context
+2. Map fidelity questions back to:
+   - durable source artifacts
+   - open GitHub issues
+   - harness scenarios and measurable targets
+3. Prefer reference-backed iteration over blind tuning whenever a rule or behavior question exists
+
+### Track B. Collaborator Readiness
+
+1. Keep onboarding docs, architecture docs, and reference maps current
+2. Use issue labels and PR structure so work can be divided cleanly across collaborators
+3. Keep harness evidence and source maps good enough that a new collaborator can move without reconstructing project history
+
+### Working Rule
+
+After each material step:
+
+1. restate the high-level plan
+2. note how the last change moved the roadmap
+3. recommend the next best step in that context
+
 ### Phase 1. Stabilize Later-Stage Gameplay
 
 1. Keep using the harness as the default loop for Stage `4` and Stage `5`

@@ -58,6 +58,12 @@ After GitHub Pages deploys, play at:
   - `src/js/90-harness.js`
 - Source orientation guide:
   - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
+- Contributor guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
+- Architecture overview:
+  - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+- Reference baseline:
+  - `/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md`
 - Served artifact:
   - `index.html`
 - Build the served file from source with:

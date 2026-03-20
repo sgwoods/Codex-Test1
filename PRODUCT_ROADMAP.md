@@ -36,6 +36,13 @@ Suggested versioning:
 
 - stay on `0.5.x-alpha`
 
+Execution model:
+
+- Use the autonomous reference-baseline track to decide what "closer to Galaga"
+  means
+- Use the collaborator-readiness track to make sure new contributors can help
+  without re-learning the whole project
+
 ## Milestone B: Later-Stage Depth Alpha
 
 Target outcome:
