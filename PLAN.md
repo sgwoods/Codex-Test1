@@ -154,6 +154,7 @@
 1. Revisit capture/rescue and dual-fighter behavior against original footage
 2. Add manual-accurate post-game flow, challenge bonuses, and results presentation
 3. Improve later-stage progression and enemy variety so automated scenarios reach deeper comparison territory
+   - Stage-banded later enemy families are now in place and measurable via the `stage12-variety` harness scenario
 4. Add more scenario coverage for rescue, challenge, and late-board cleanup behavior
 5. Incorporate manual-driven rules that are not yet modeled:
    - challenge-stage complete-group bonuses
@@ -163,11 +164,8 @@
 ## Updated Priority Order
 
 1. Fix later-stage survivability and progression, especially Stage `4` collision pressure and the shallow five-ship progression benchmark
-2. Implement high-confidence manual-driven fidelity items:
-   - challenge-stage group bonuses
-   - results screen before initials entry
-   - special three-ship attack squadron bonuses
-3. Expand later-stage content variety using manual and walkthrough evidence, while keeping manual/video sources primary for rule accuracy
+2. Keep refining challenge-stage fidelity against original footage now that the manual-backed structure is in place
+3. Expand later-stage content variety beyond the initial stage-band families, while keeping manual/video sources primary for rule accuracy
 4. Revisit capture / rescue edge cases and captured-fighter scoring behavior once the baseline rules and later-stage pacing are steadier
 5. Keep improving harness coverage so new fidelity work becomes measurable instead of purely visual
 

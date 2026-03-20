@@ -1,4 +1,33 @@
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
+const FAMILY_PIXELS={
+ scorpion:[[1,0],[5,0],[0,2],[6,2]],
+ stingray:[[2,0],[3,0],[1,4],[4,4]],
+ galboss:[[0,1],[6,1],[2,4],[4,4]],
+ dragonfly:[[1,0],[5,0],[0,3],[6,3]],
+ mosquito:[[2,0],[4,0],[1,4],[5,4]]
+};
+
+function enemyPalette(e,flap,hot){
+ switch(e?.fam){
+  case 'scorpion':
+   if(e.t==='boss')return{a:flap?'#67ffc1':'#8dffd5',b:hot?'#ff7d7d':'#ffb34d',c:'#a24fff',pat:FAMILY_PIXELS.scorpion};
+   return{a:flap?'#7dff63':'#a2ff78',b:hot?'#ff8a4e':'#ffc04d',c:'#5f42ff',pat:FAMILY_PIXELS.scorpion};
+  case 'stingray':
+   return{a:flap?'#56efff':'#7fdfff',b:hot?'#4d92ff':'#86b0ff',c:'#ffe76f',pat:FAMILY_PIXELS.stingray};
+  case 'galboss':
+   return{a:flap?'#ff8be9':'#ffb0ef',b:hot?'#77ffd3':'#53e5b7',c:'#fff18f',pat:FAMILY_PIXELS.galboss};
+  case 'dragonfly':
+   return{a:flap?'#69ff8e':'#98ffab',b:hot?'#5ce1ff':'#94f0ff',c:'#ffe76f',pat:FAMILY_PIXELS.dragonfly};
+  case 'mosquito':
+   return{a:flap?'#ff8c70':'#ffab85',b:hot?'#ffd24c':'#ffe179',c:'#74f4ff',pat:FAMILY_PIXELS.mosquito};
+  default:
+   if(e.t==='bee')return{a:flap?'#2a75ff':'#4e95ff',b:hot?'#ffe470':'#ffd24a',c:'#f08f2e',pat:null};
+   if(e.t==='but')return{a:flap?'#3c86ff':'#62a5ff',b:hot?'#ff6776':'#ff3d51',c:'#ffd25a',pat:null};
+   if(e.t==='rogue')return{a:flap?'#78b6ff':'#a3cfff',b:hot?'#ff7bb2':'#ff5ea0',c:'#ffe36a',pat:null};
+   return{a:e.hp>1?(flap?'#33d7b0':'#60f0cf'):(flap?'#5bc2ff':'#8fd7ff'),b:hot?'#7ef173':'#5fe85c',c:'#cc5fff',pat:null};
+ }
+}
+
 function enemyDims(e){
  if(e.t==='boss')return{w:38,h:30};
  if(e.t==='but')return{w:34,h:27};
@@ -20,11 +49,12 @@ function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
 function drawEnemy(e){
  const ps=2;
  const flap=Math.sin(e.tm*11+e.ph)>.12,hot=e.dive===1||e.dive===4;
+ const pal=enemyPalette(e,flap,hot);
  ctx.save();ctx.translate(Math.round(e.x),Math.round(e.y));if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
- if(e.t==='bee')drawPix(-ps*3,-ps*2.2,ps,P.bee.a,flap?'#2a75ff':'#4e95ff',hot?'#ffe470':'#ffd24a',P.bee.b,'#f08f2e',P.bee.c);
- else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,flap?'#3c86ff':'#62a5ff',hot?'#ff6776':'#ff3d51',P.but.b,'#ffd25a',P.but.c);
- else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,flap?'#78b6ff':'#a3cfff',hot?'#ff7bb2':'#ff5ea0',P.rogue.b,'#ffe36a',P.rogue.c);
- else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,e.hp>1?(flap?'#33d7b0':'#60f0cf'):(flap?'#5bc2ff':'#8fd7ff'),hot?'#7ef173':'#5fe85c',P.boss.b,'#cc5fff',P.boss.c);
+ if(e.t==='bee')drawPix(-ps*3,-ps*2.2,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
+ else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
+ else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
+ else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
  if(e.beam){
   const len=Math.max(24,Math.min(VIS.beamLen,PLAY_H-e.y-8)),bw=10;
   const g=ctx.createLinearGradient(0,14,0,len);g.addColorStop(0,'rgba(136,245,255,.98)');g.addColorStop(.55,'rgba(110,229,255,.32)');g.addColorStop(1,'rgba(136,245,255,.03)');

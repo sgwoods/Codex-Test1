@@ -52,6 +52,33 @@ const STAGE1_SCRIPT=[
  {t:34.0,type:'bee',c:2},{t:37.2,type:'but',c:8},
  {t:41.0,type:'boss',c:4,escort:1}
 ];
+const STAGE_BAND_PROFILES=[
+ {name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic',pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1,steer:1,jitter:1,diveVy:1,diveAccel:1},
+ {name:'scorpion',beeFamily:'scorpion',butFamily:'scorpion',bossFamily:'classic',challengeFamily:'classic',pulseX:.95,pulseY:.8,entryX:.92,entryY:.9,weave:1.18,steer:.96,jitter:1.1,diveVy:.98,diveAccel:1},
+ {name:'stingray',beeFamily:'stingray',butFamily:'stingray',bossFamily:'stingray',challengeFamily:'dragonfly',pulseX:1.08,pulseY:.78,entryX:1.06,entryY:.82,weave:1.28,steer:1.06,jitter:1.16,diveVy:1.04,diveAccel:1.03},
+ {name:'galboss',beeFamily:'galboss',butFamily:'galboss',bossFamily:'galboss',challengeFamily:'mosquito',pulseX:.9,pulseY:.72,entryX:.88,entryY:.76,weave:.9,steer:.9,jitter:.92,diveVy:1.02,diveAccel:.98}
+];
+
+function stageBandIndex(stage){
+ if(stage < 4) return 0;
+ return 1 + (Math.floor((stage - 4) / 4) % 3);
+}
+
+function stageBandProfile(stage, challenge){
+ const base = STAGE_BAND_PROFILES[stageBandIndex(stage)] || STAGE_BAND_PROFILES[0];
+ if(!challenge) return base;
+ if(stage >= 19) return Object.assign({}, base, { challengeFamily: 'mosquito' });
+ if(stage >= 11) return Object.assign({}, base, { challengeFamily: 'dragonfly' });
+ return Object.assign({}, base, { challengeFamily: 'classic' });
+}
+
+function enemyFamilyForType(profile, type){
+ if(type === 'bee') return profile.beeFamily;
+ if(type === 'but') return profile.butFamily;
+ if(type === 'boss') return profile.bossFamily;
+ if(type === 'rogue') return 'rogue';
+ return 'classic';
+}
 
 const AC=()=>{
  if(sfx.a)return sfx.a;
@@ -122,7 +149,7 @@ const P={
 };
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,
- p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,
+ p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -135,8 +162,8 @@ const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,g
  :{shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4};
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
-const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
-const enemyRef=e=>e?{id:e.id,enemyType:e.t,column:e.c,row:e.r,dive:e.dive,carry:!!e.carry}:null;
+const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
   return JSON.parse(localStorage.getItem(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);

@@ -70,6 +70,7 @@ function buildReport(batch){
   const descentRuns = scenarioRuns(allRuns, 'stage1-descent');
   const rescueRuns = scenarioRuns(allRuns, 'rescue-dual');
   const secondCaptureRuns = scenarioRuns(allRuns, 'second-capture-current');
+  const varietyRuns = scenarioRuns(allRuns, 'stage12-variety');
 
   const audioFailures = allRuns.filter(r => r.analysis?.video?.audio === false).length;
   if(audioFailures){
@@ -154,6 +155,16 @@ function buildReport(batch){
     }
   }
 
+  if(varietyRuns.length){
+    const nonClassicBands = varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicBands || []);
+    const nonClassicFamilies = varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicFamilies || []);
+    if(!nonClassicBands.length || !nonClassicFamilies.length){
+      findings.push(makeFinding(2, 'Later-stage variety scenario is not surfacing distinct enemy families', 'The dedicated later-stage variety scenario did not record any non-classic stage bands or enemy families.'));
+    }else{
+      findings.push(makeFinding(3, 'Later-stage variety is now measurable', `Observed bands: ${[...new Set(nonClassicBands)].join(', ')}. Observed families: ${[...new Set(nonClassicFamilies)].join(', ')}.`));
+    }
+  }
+
   if(!findings.length){
     findings.push(makeFinding(3, 'No obvious harness regressions', 'Audio, challenge scoring, and later-stage survivability all look within expected ranges for this batch.'));
   }
@@ -183,7 +194,9 @@ function buildReport(batch){
       stageSurvivalBulletDeaths: survivalBulletDeaths,
       stageSurvivalCollisionDeaths: survivalCollisionDeaths,
       stage1AverageDescentToLowerField: +descentAvg.toFixed(4),
-      rescueAverageDualSpread: +dualSpreadAvg.toFixed(4)
+      rescueAverageDualSpread: +dualSpreadAvg.toFixed(4),
+      laterStageVarietyBands: [...new Set(varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicBands || []))],
+      laterStageVarietyFamilies: [...new Set(varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicFamilies || []))]
     },
     findings
   };

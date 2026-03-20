@@ -98,10 +98,30 @@ This is where the Stage 4+ special squadron bonus behavior now lives.
 
 - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
   - `stageTune(...)` in `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+  - `stageBandProfile(...)` in `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
   - attack-gap / recovery timing in `spawnStage()` and `loseShip()`
   - dive decisions in `updateEnemy()`
 
 If Stage 4/5 feels wrong, this is usually where to look first.
+
+### Later-Stage Variety
+
+- `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+  - `STAGE_BAND_PROFILES`
+  - `stageBandProfile(...)`
+  - `enemyFamilyForType(...)`
+
+- `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
+  - `makeEnemy(...)`
+  - `familyMotion(...)`
+  - `spawnStage()` stage-profile logging
+
+- `/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js`
+  - `enemyPalette(...)`
+  - `FAMILY_PIXELS`
+
+This is where stage-banded family progression now lives for issues like
+later-stage enemy variety and future transform-style fidelity work.
 
 ## Harness / Measurement
 

@@ -61,6 +61,32 @@ function stageMetrics(session){
   return stages;
 }
 
+function stageProfiles(events){
+  return events
+    .filter(e => e.type === 'stage_profile')
+    .map(e => ({
+      stage: e.stage || 0,
+      challenge: !!e.challenge,
+      band: e.band || 'classic',
+      beeFamily: e.beeFamily || 'classic',
+      butFamily: e.butFamily || 'classic',
+      bossFamily: e.bossFamily || 'classic',
+      challengeFamily: e.challengeFamily || 'classic'
+    }));
+}
+
+function varietyMetrics(profiles){
+  const bands = [...new Set(profiles.map(p => p.band).filter(Boolean))];
+  const families = [...new Set(profiles.flatMap(p => [p.beeFamily, p.butFamily, p.bossFamily, p.challengeFamily]).filter(Boolean))];
+  return {
+    profiles,
+    uniqueBands: bands,
+    uniqueFamilies: families,
+    nonClassicBands: bands.filter(b => b !== 'classic'),
+    nonClassicFamilies: families.filter(f => f !== 'classic' && f !== 'rogue')
+  };
+}
+
 function countEvents(events, type){
   return events.filter(e => e.type === type).length;
 }
@@ -207,6 +233,7 @@ function analyze(target){
   const specialAttackBonuses = events.filter(e => e.type === 'special_attack_bonus');
   const dualMetrics = dualShotMetrics(events);
   const descent = descentMetrics(events);
+  const profiles = stageProfiles(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
   const analysis = {
     id: session.id,
@@ -233,6 +260,7 @@ function analyze(target){
     },
     dualMetrics,
     descent,
+    varietyMetrics: varietyMetrics(profiles),
     video: Object.assign({ file: run.videoFile || null }, audio)
   };
   if(run.summaryFile){

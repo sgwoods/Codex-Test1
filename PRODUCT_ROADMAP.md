@@ -43,13 +43,15 @@ Target outcome:
 - Later stages are not just “same enemies, more pressure”
 - Better stage-to-stage variety and progression
 - Stage 4+ survivability is stable under harness and real play
+- Stage-banded enemy-family progression is visible and measurable
 
 Key issue groups:
 
 - Later-stage survivability
   - collision-heavy Stage 4/5 pressure tuning
 - Later-stage variety
-  - `#24` later-stage enemy variety
+  - initial stage-band family progression has landed
+  - remaining work is deeper transform / behavior fidelity beyond the first banded pass
 - Visual/gameplay comparison baseline
   - `#17` stronger baseline against original Galaga
 

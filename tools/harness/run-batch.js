@@ -17,7 +17,8 @@ const PROFILES = {
   fidelity: [
     { scenario: 'stage1-descent', repeats: 1, seedBase: 2000 },
     { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },
-    { scenario: 'second-capture-current', repeats: 1, seedBase: 6000 }
+    { scenario: 'second-capture-current', repeats: 1, seedBase: 6000 },
+    { scenario: 'stage12-variety', repeats: 1, seedBase: 12000 }
   ],
   default: [
     { scenario: 'stage3-challenge', repeats: 2, seedBase: 3000 },
