@@ -115,9 +115,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.81.sha.f18b1c5.dirty</span>
-    <span id="settingsRelease">Mar 21 2026, 3:24 PM EDT</span>
-    <span id="settingsState">main@f18b1c5 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.82.sha.e757a16.dirty</span>
+    <span id="settingsRelease">Mar 21 2026, 3:26 PM EDT</span>
+    <span id="settingsState">main@e757a16 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -176,7 +176,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.81.sha.f18b1c5.dirty',commit:'f18b1c50b3083855732f7509aa1df764cafddaf1',branch:'main',dirty:true,released:'Mar 21 2026, 3:24 PM EDT',state:'main@f18b1c5 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.82.sha.e757a16.dirty',commit:'e757a16e6bcdce0e8b97080b577c77035a053151',branch:'main',dirty:true,released:'Mar 21 2026, 3:26 PM EDT',state:'main@e757a16 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -264,6 +264,7 @@ const sfx={
  shot(){this.play(1140,.028,'square',.006,-620,.006,6200);this.play(1520,.018,'square',.003,-480,-.004,6800,.006)},
  enemyShot(){this.play(338,.075,'triangle',.009,-130,.002,3000);this.play(258,.05,'square',.004,-90,.002,2600,.012)},
  hit(){this.play(228,.05,'square',.013,-180,.008,3200);this.play(146,.1,'sawtooth',.015,-220,.012,2300,.02);this.noise(.05,.006,1600,.012)},
+ shipHit(){this.play(214,.085,'square',.018,-260,.01,2800);this.play(162,.16,'sawtooth',.02,-280,.014,2200,.012);this.play(118,.22,'triangle',.018,-130,.007,1700,.022);this.noise(.12,.012,1250,.008)},
  boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
  beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
  rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
@@ -848,9 +849,19 @@ function loseShip(cause={}){
   timeSinceFighterCaptured:S.lastFighterCapturedT==null?null:+(S.stageClock-S.lastFighterCapturedT).toFixed(3),
   playerHitbox:{w:hp.w,h:hp.h}
  },cause));
- S.shake=.55;S.recoverT=Math.max(S.recoverT,S.stage>=4?2.05:1.05);S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.28:.9);p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
+ S.shake=.8;
+ S.recoverT=Math.max(S.recoverT,S.stage>=4?2.35:1.45);
+ S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.55:1.18);
+ S.eb.length=0;
+ p.inv=2.35;
+ p.cd=Math.max(p.cd,0.35);
+ ex(p.x,p.y,34,'#86c7ff');
+ ex(p.x,p.y,18,'#f4f8ff');
+ S.alertTxt='SHIP DESTROYED';
+ S.alertT=Math.max(S.alertT,1.05);
+ sfx.shipHit();
  if(p.dual)p.dual=0;
- S.lives--;p.spawn=.95;
+ S.lives--;p.spawn=1.18;
  if(S.lives<0)gameOver();
 }
 
@@ -921,8 +932,8 @@ function destroyCarriedFighter(e){
  e.carry=0;
  S.score+=points;
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
- S.alertTxt=`CAPTURED FIGHTER ${attacking?'ATTACK':'STANDBY'} ${points}`;
- S.alertT=Math.max(S.alertT,1.15);
+ S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
+ S.alertT=Math.max(S.alertT,1.45);
  ex(e.x,e.y+18,10,'#d8f2ff');
  sfx.hit();
  return points;
@@ -966,7 +977,13 @@ function awardKill(e,mode){
  S.score+=pts;
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  if(e.carry){
-  if(dive){S.cap={x:e.x,y:e.y,vy:90,t:8};sfx.rescue();}
+  if(dive){
+   S.cap={x:e.x,y:e.y,vy:90,t:8};
+   logEvent('rescue_pod_spawned',Object.assign({stage:S.stage,podX:+e.x.toFixed(2),podY:+e.y.toFixed(2)},enemyRef(e)));
+   S.alertTxt='RESCUE POD DROPPED';
+   S.alertT=Math.max(S.alertT,1.5);
+   sfx.rescue();
+  }
   else{S.rogue=Math.min(3,S.rogue+1);S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';S.alertT=2.2;}
  }
 }
@@ -1200,7 +1217,7 @@ function update(dt){
 
  if(!S.challenge){for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form});}}}
 
- if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});S.alertTxt='DUAL FIGHTER READY';S.alertT=1.45;sfx.rescue()}}
+ if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});S.alertTxt='DUAL FIGHTER JOINED';S.alertT=1.8;sfx.rescue()}}
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }
 
@@ -1296,10 +1313,13 @@ function drawRescuePod(){
  ctx.save();
  ctx.translate(Math.round(S.cap.x),Math.round(S.cap.y));
  ctx.globalAlpha=.94;
+ const pulse=.75+Math.sin(performance.now()/120)*.25;
+ ctx.fillStyle=`rgba(145,236,255,${(0.12+pulse*0.12).toFixed(3)})`;
+ ctx.beginPath();ctx.ellipse(0,0,15,20,0,0,7);ctx.fill();
  ctx.fillStyle='rgba(145,236,255,.16)';
  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.fill();
- ctx.strokeStyle='rgba(202,249,255,.28)';
- ctx.lineWidth=1;
+ ctx.strokeStyle='rgba(202,249,255,.42)';
+ ctx.lineWidth=1.2;
  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.stroke();
  drawMiniShip(1.25,'#f4f8ff','#ff3347');
  ctx.restore();

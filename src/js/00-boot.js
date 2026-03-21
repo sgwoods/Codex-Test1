@@ -111,6 +111,7 @@ const sfx={
  shot(){this.play(1140,.028,'square',.006,-620,.006,6200);this.play(1520,.018,'square',.003,-480,-.004,6800,.006)},
  enemyShot(){this.play(338,.075,'triangle',.009,-130,.002,3000);this.play(258,.05,'square',.004,-90,.002,2600,.012)},
  hit(){this.play(228,.05,'square',.013,-180,.008,3200);this.play(146,.1,'sawtooth',.015,-220,.012,2300,.02);this.noise(.05,.006,1600,.012)},
+ shipHit(){this.play(214,.085,'square',.018,-260,.01,2800);this.play(162,.16,'sawtooth',.02,-280,.014,2200,.012);this.play(118,.22,'triangle',.018,-130,.007,1700,.022);this.noise(.12,.012,1250,.008)},
  boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
  beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
  rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},

@@ -108,9 +108,19 @@ function loseShip(cause={}){
   timeSinceFighterCaptured:S.lastFighterCapturedT==null?null:+(S.stageClock-S.lastFighterCapturedT).toFixed(3),
   playerHitbox:{w:hp.w,h:hp.h}
  },cause));
- S.shake=.55;S.recoverT=Math.max(S.recoverT,S.stage>=4?2.05:1.05);S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.28:.9);p.inv=2.1;ex(p.x,p.y,24,'#86c7ff');sfx.hit();
+ S.shake=.8;
+ S.recoverT=Math.max(S.recoverT,S.stage>=4?2.35:1.45);
+ S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.55:1.18);
+ S.eb.length=0;
+ p.inv=2.35;
+ p.cd=Math.max(p.cd,0.35);
+ ex(p.x,p.y,34,'#86c7ff');
+ ex(p.x,p.y,18,'#f4f8ff');
+ S.alertTxt='SHIP DESTROYED';
+ S.alertT=Math.max(S.alertT,1.05);
+ sfx.shipHit();
  if(p.dual)p.dual=0;
- S.lives--;p.spawn=.95;
+ S.lives--;p.spawn=1.18;
  if(S.lives<0)gameOver();
 }
 
@@ -181,8 +191,8 @@ function destroyCarriedFighter(e){
  e.carry=0;
  S.score+=points;
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
- S.alertTxt=`CAPTURED FIGHTER ${attacking?'ATTACK':'STANDBY'} ${points}`;
- S.alertT=Math.max(S.alertT,1.15);
+ S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
+ S.alertT=Math.max(S.alertT,1.45);
  ex(e.x,e.y+18,10,'#d8f2ff');
  sfx.hit();
  return points;
@@ -226,7 +236,13 @@ function awardKill(e,mode){
  S.score+=pts;
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  if(e.carry){
-  if(dive){S.cap={x:e.x,y:e.y,vy:90,t:8};sfx.rescue();}
+  if(dive){
+   S.cap={x:e.x,y:e.y,vy:90,t:8};
+   logEvent('rescue_pod_spawned',Object.assign({stage:S.stage,podX:+e.x.toFixed(2),podY:+e.y.toFixed(2)},enemyRef(e)));
+   S.alertTxt='RESCUE POD DROPPED';
+   S.alertT=Math.max(S.alertT,1.5);
+   sfx.rescue();
+  }
   else{S.rogue=Math.min(3,S.rogue+1);S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';S.alertT=2.2;}
  }
 }
@@ -460,6 +476,6 @@ function update(dt){
 
  if(!S.challenge){for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form});}}}
 
- if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});S.alertTxt='DUAL FIGHTER READY';S.alertT=1.45;sfx.rescue()}}
+ if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});S.alertTxt='DUAL FIGHTER JOINED';S.alertT=1.8;sfx.rescue()}}
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }

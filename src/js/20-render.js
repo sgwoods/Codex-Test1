@@ -89,10 +89,13 @@ function drawRescuePod(){
  ctx.save();
  ctx.translate(Math.round(S.cap.x),Math.round(S.cap.y));
  ctx.globalAlpha=.94;
+ const pulse=.75+Math.sin(performance.now()/120)*.25;
+ ctx.fillStyle=`rgba(145,236,255,${(0.12+pulse*0.12).toFixed(3)})`;
+ ctx.beginPath();ctx.ellipse(0,0,15,20,0,0,7);ctx.fill();
  ctx.fillStyle='rgba(145,236,255,.16)';
  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.fill();
- ctx.strokeStyle='rgba(202,249,255,.28)';
- ctx.lineWidth=1;
+ ctx.strokeStyle='rgba(202,249,255,.42)';
+ ctx.lineWidth=1.2;
  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.stroke();
  drawMiniShip(1.25,'#f4f8ff','#ff3347');
  ctx.restore();
