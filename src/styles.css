@@ -79,4 +79,6 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
+#buildStamp{position:fixed;right:14px;bottom:10px;z-index:12;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px;font:400 10px/1.2 "Courier New",Consolas,monospace;letter-spacing:.03em;color:rgba(218,236,255,.42);text-align:right;text-shadow:0 0 6px rgba(0,0,0,.92)}
+#buildStampVersion,#buildStampRelease{display:block}
 .k{color:var(--a)}

@@ -87,6 +87,8 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
+#buildStamp{position:fixed;right:14px;bottom:10px;z-index:12;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px;font:400 10px/1.2 "Courier New",Consolas,monospace;letter-spacing:.03em;color:rgba(218,236,255,.42);text-align:right;text-shadow:0 0 6px rgba(0,0,0,.92)}
+#buildStampVersion,#buildStampRelease{display:block}
 .k{color:var(--a)}
 </style>
 </head>
@@ -115,9 +117,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.88.sha.85a7b01.dirty</span>
-    <span id="settingsRelease">Mar 21 2026, 4:25 PM EDT</span>
-    <span id="settingsState">main@85a7b01 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.89.sha.21bb95e.dirty</span>
+    <span id="settingsRelease">Mar 21 2026, 4:27 PM EDT</span>
+    <span id="settingsState">main@21bb95e dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -147,6 +149,10 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
+<div id="buildStamp" aria-hidden="true">
+  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.89.sha.21bb95e.dirty</span>
+  <span id="buildStampRelease">Mar 21 2026, 4:27 PM EDT</span>
+</div>
 <script>
 (()=>{
 // Generated from src/js/*.js
@@ -176,7 +182,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.88.sha.85a7b01.dirty',commit:'85a7b014bdaa3b77b516c2db083fe66bea0f7346',branch:'main',dirty:true,released:'Mar 21 2026, 4:25 PM EDT',state:'main@85a7b01 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.89.sha.21bb95e.dirty',commit:'21bb95e5c7395ea5b04139b87b7ca2b4e3269472',branch:'main',dirty:true,released:'Mar 21 2026, 4:27 PM EDT',state:'main@21bb95e dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
