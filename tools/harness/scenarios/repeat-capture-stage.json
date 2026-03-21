@@ -1,0 +1,13 @@
+{
+  "name": "repeat-capture-stage",
+  "seed": 6011,
+  "duration": 10,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.9, "action": "harness", "method": "setupRepeatCaptureAttemptTest", "args": { "playerX": 140 } }
+  ]
+}

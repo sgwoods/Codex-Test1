@@ -44,7 +44,9 @@ function summarize(result){
     lives: result.summary?.state?.lives || 0,
     videoAudio: !!a.video?.audio,
     challenge: challenge ? { stage: challenge.stage, hits: challenge.hits, total: challenge.total } : null,
-    shipLosses: (a.shipLost || []).length
+    shipLosses: (a.shipLost || []).length,
+    lifeLosses: (a.lifeLost || []).length,
+    postHitPause: a.postHitPauseMetrics || null
   };
 }
 

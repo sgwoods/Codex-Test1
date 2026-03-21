@@ -67,6 +67,20 @@ window.__galagaHarness__={
   logEnemyAttackStart(capBoss,'capture',{targetX:+capBoss.targetX.toFixed(2),targetY:capBoss.targetY,scripted:0,harness:1});
   return true;
  },
+ setupRepeatCaptureAttemptTest(cfg={}){
+  const p=S.p;
+  const bosses=S.e.filter(e=>e.hp>0&&e.t==='boss').slice(0,2);
+  if(bosses.length<2)return false;
+  const priorBoss=bosses[0],capBoss=bosses[1];
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;
+  S.captureCountStage=1;S.lastCaptureStartT=0;S.lastFighterCapturedT=.5;
+  priorBoss.hp=Math.max(1,priorBoss.hp);priorBoss.carry=0;priorBoss.form=1;priorBoss.dive=0;priorBoss.beam=0;priorBoss.beamT=0;priorBoss.low=0;priorBoss.x=priorBoss.tx;priorBoss.y=priorBoss.ty;
+  capBoss.hp=Math.max(1,capBoss.hp);capBoss.carry=0;capBoss.form=1;capBoss.dive=4;capBoss.targetX=p.x;capBoss.targetY=138;capBoss.vx=0;capBoss.vy=124;capBoss.shot=0;capBoss.beam=0;capBoss.beamT=0;capBoss.low=0;capBoss.x=capBoss.tx;capBoss.y=capBoss.ty;
+  logEvent('harness_repeat_capture_setup',{priorBoss:priorBoss.id,captureBoss:capBoss.id,playerX:+p.x.toFixed(2),captureCountStage:S.captureCountStage});
+  logEnemyAttackStart(capBoss,'capture',{targetX:+capBoss.targetX.toFixed(2),targetY:capBoss.targetY,scripted:0,harness:1,repeatCapture:1});
+  return true;
+ },
  setupSquadronBonusTest(cfg={}){
   const p=S.p;
   const boss=S.e.find(e=>e.hp>0&&e.t==='boss');

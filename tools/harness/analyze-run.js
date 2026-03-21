@@ -140,6 +140,11 @@ function causeSummary(losses){
   return out;
 }
 
+function nextEventDelta(events, type, stage, t){
+  const next = events.find(e => e.type === type && e.stage === stage && e.t > t);
+  return next ? +(next.t - t).toFixed(3) : null;
+}
+
 function recentCount(events, type, stage, t, windowSec){
   return events.filter(e => e.type === type && e.stage === stage && e.t <= t && e.t >= t - windowSec).length;
 }
@@ -195,6 +200,66 @@ function lossDetails(session){
       } : null
     };
   });
+}
+
+function lifeLossDetails(session){
+  const shipLosses = lossDetails(session).map(loss => Object.assign({ lossType: 'ship_lost' }, loss));
+  const captureLosses = (session.events || [])
+    .filter(e => e.type === 'fighter_captured')
+    .map(e => ({
+      t: e.t,
+      stage: e.stage,
+      score: e.score ?? null,
+      livesBefore: Number.isFinite(e.livesAfter) ? e.livesAfter + 1 : null,
+      cause: 'fighter_captured',
+      lossType: 'fighter_captured',
+      bulletKind: null,
+      sourceType: e.enemyType || null,
+      sourceDive: e.dive ?? null,
+      sourceLane: e.lane ?? null,
+      playerLane: e.playerLane ?? null,
+      enemyForm: null,
+      stageClock: e.stageClock ?? null,
+      gapFromPrev: null,
+      recentAttackStarts: 0,
+      recentEnemyBullets: 0,
+      recentCaptureStarts: 0,
+      recentFighterCaptured: 0,
+      timeSinceCaptureStart: e.timeSinceCaptureStart ?? null,
+      timeSinceFighterCaptured: 0,
+      sourceAttackMode: 'capture',
+      sourceOriginLane: e.lane ?? null,
+      sourceTargetLane: e.playerLane ?? null,
+      sourceColumn: e.column ?? null,
+      snapshot: nearestSnapshot(session, e.t) ? {
+        t: nearestSnapshot(session, e.t).t,
+        attackers: nearestSnapshot(session, e.t).counts?.attackers || 0,
+        enemies: nearestSnapshot(session, e.t).counts?.enemies || 0,
+        enemyBullets: nearestSnapshot(session, e.t).counts?.enemyBullets || 0,
+        playerBullets: nearestSnapshot(session, e.t).counts?.playerBullets || 0
+      } : null
+    }));
+  const merged = [...shipLosses, ...captureLosses].sort((a,b) => a.t - b.t);
+  for(let i=0;i<merged.length;i++){
+    merged[i].gapFromPrev = i > 0 ? +(merged[i].t - merged[i-1].t).toFixed(3) : null;
+  }
+  return merged;
+}
+
+function postHitPauseMetrics(session, losses){
+  const events = session.events || [];
+  const shipLosses = losses.filter(l => l.lossType === 'ship_lost');
+  const toVals = arr => arr.filter(v => Number.isFinite(v));
+  const avg = arr => arr.length ? +(arr.reduce((a,b)=>a+b,0) / arr.length).toFixed(3) : null;
+  const nextBullet = toVals(shipLosses.map(loss => nextEventDelta(events, 'enemy_bullet_fired', loss.stage, loss.t)));
+  const nextAttack = toVals(shipLosses.map(loss => nextEventDelta(events, 'enemy_attack_start', loss.stage, loss.t)));
+  return {
+    samples: shipLosses.length,
+    avgNextEnemyBullet: avg(nextBullet),
+    minNextEnemyBullet: nextBullet.length ? Math.min(...nextBullet) : null,
+    avgNextEnemyAttack: avg(nextAttack),
+    minNextEnemyAttack: nextAttack.length ? Math.min(...nextAttack) : null
+  };
 }
 
 function clusterSummary(losses){
@@ -260,6 +325,10 @@ function analyze(target){
     sourceLanes: [...new Set(losses.map(l => l.sourceLane).filter(Number.isFinite))],
     sourceColumns: [...new Set(losses.map(l => l.sourceColumn).filter(Number.isFinite))]
   }]));
+  const lifeLost = lifeLossDetails(session);
+  const lifeLostByStage = byStage(lifeLost);
+  const lifeLossClusters = Object.fromEntries(Object.entries(lifeLostByStage).map(([stage, losses]) => [stage, clusterSummary(losses)]));
+  const lifeLossCauseCounts = causeSummary(lifeLost);
   const events = session.events || [];
   const captureMetrics = {
     captureStarts: countEvents(events, 'capture_started'),
@@ -280,10 +349,14 @@ function analyze(target){
     stageClears,
     challengeClears,
     shipLost,
+    lifeLost,
     stageMetrics: stageMetrics(session),
     stageLossClusters,
     stageLossLanePatterns,
     lossCauseCounts,
+    lifeLossClusters,
+    lifeLossCauseCounts,
+    postHitPauseMetrics: postHitPauseMetrics(session, lifeLost),
     captureMetrics,
     carriedFighterMetrics: {
       count: carriedFighterDestroyed.length,

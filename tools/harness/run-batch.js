@@ -18,6 +18,7 @@ const PROFILES = {
     { scenario: 'stage1-descent', repeats: 1, seedBase: 2000 },
     { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },
     { scenario: 'second-capture-current', repeats: 1, seedBase: 6000 },
+    { scenario: 'repeat-capture-stage', repeats: 1, seedBase: 6010 },
     { scenario: 'stage12-variety', repeats: 1, seedBase: 12000 }
   ],
   default: [

@@ -46,6 +46,10 @@ Key issue groups:
   - `#9` challenge-stage fidelity
   - `#18` Stage 4 survivability
   - `#32` Stage 2 opening pressure / spacing feel
+- Current Modem-driven follow-up work inside the same milestone
+  - `#35` capture-driven life-loss accounting in self-play summaries
+  - `#38` ship-hit explosion / sound / post-hit pause feel
+  - `#39` repeated fighter capture behavior within a stage
 - Manual-backed arcade rules
   - `#14` second captured-fighter behavior research
 - Capture/rescue rules

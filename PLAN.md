@@ -22,6 +22,10 @@
 - Feedback delivery currently uses FormSubmit to forward to `default-dimiglyd88@inbox.modem.dev`
 - If FormSubmit direct send fails, the game falls back to a prefilled `mailto:` draft
 - High-score entry now supports Galaga-style three-letter initials with arcade-flavored cursor/input behavior
+- Public status export now follows the shared `public` repo contract:
+  - this repo updates its own public project page
+  - this repo updates only its own status manifest in `data/projects/codex-test1.json`
+  - this repo no longer rewrites the shared public homepage directly
 
 ## Working Assumptions
 
@@ -36,8 +40,14 @@
 ## Known Problems
 
 - We do not yet know whether the Modem inbox address can complete FormSubmit's one-time activation flow
-- Challenge-stage scoring has improved materially, but manual-driven group bonuses and results presentation are still missing
-- Stage 4 survival remains the main gameplay balance problem, and diagnostics show it is primarily collision-driven
+- Stage 4 remains the main gameplay balance problem for the four-stage `1.0` slice
+- Stage 4 failures are now better localized:
+  - early formation-shot fairness
+  - later escort / diagonal collision fairness
+- Imported self-play summaries still need capture-driven life-loss accounting and better post-hit pause reporting in the day-to-day workflow
+- Modem feedback is surfacing two current product concerns that should stay visible:
+  - hit/explosion/post-hit pause feel
+  - whether a stage should allow more than one successful fighter capture
 - Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison
 - Later-stage enemy variety is still far below Galaga's broader stage-band content
 - Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own
@@ -56,6 +66,11 @@
   - rescue dual-shot spread is `28px`
   - the dedicated second-capture scenario is now blocked as intended
 - Current gameplay work should now focus primarily on collision-driven later-stage survivability, later-stage enemy/content breadth, and visual fidelity against original Galaga footage
+- Latest four-stage `1.0` refresh on `2026-03-21` shows:
+  - Stage 1 opening: acceptable
+  - Stage 2 opening: acceptable
+  - Stage 3 challenge: stable around `23/40`
+  - Stage 4 still needs work, especially around mixed early-shot / later-escort pressure
 
 ## Workstreams
 
@@ -196,6 +211,7 @@ After each material step:
    stronger Stage `1`-`3` experience
 4. Preserve the improved challenge-stage behavior and avoid broad difficulty
    sweeps that undo Stage `4` progress
+5. Use Modem/manual-play feedback to decide where the harness needs one more scenario instead of guessing
 
 ### Phase 2. Raise Visual Fidelity
 
@@ -217,6 +233,12 @@ After each material step:
 3. Cut a deliberate `1.0` candidate for the four-stage slice
 4. Move expansion work into the post-`1.0` roadmap
 ## Updated Priority Order
+
+1. Finish Stage `4` fairness for the four-stage `1.0` slice
+2. Fix capture-driven life-loss accounting in imported/self-play summaries
+3. Evaluate ship-hit feel and post-hit pause from short manual runs, then add or adjust metrics if needed
+4. Add repeat-capture-per-stage validation so capture-rule issues are measurable
+5. Move into `1.0` finishing polish once Stage `4` is good enough
 
 1. Fix Stage `4` survivability and fairness so the four-stage loop feels winnable
 2. Finish challenge-stage fidelity for the Stage `3` experience without
