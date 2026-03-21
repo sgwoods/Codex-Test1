@@ -88,6 +88,7 @@ For each fidelity topic:
 - Sources:
   - original gameplay footage
   - our harness diagnostics
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md`
 - Current metrics:
   - `stage4-five-ships`
   - `stage4-survival`
