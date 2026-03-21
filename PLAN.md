@@ -141,6 +141,20 @@
 
 This is now the operating plan for the project.
 
+### Immediate Product Goal: 1.0 Four-Stage Slice
+
+The project is now targeting a smaller `1.0` sub-goal first:
+
+- a polished Stage `1` through Stage `4` experience
+- one cleaned-up challenge stage
+- one solid capture / rescue loop
+- stable local and hosted play
+- persistent high scores and clean end-of-run flow
+
+Expansion beyond Stage `4`, new theme systems, and broader content breadth are
+still valuable, but they are now explicitly post-`1.0` work unless they are
+needed to support this smaller shipped slice.
+
 ### Track A. Autonomous Original-Galaga Baseline
 
 1. Build and maintain a durable reference baseline using:
@@ -170,11 +184,18 @@ After each material step:
 2. note how the last change moved the roadmap
 3. recommend the next best step in that context
 
-### Phase 1. Stabilize Later-Stage Gameplay
+### Phase 1. Stabilize The 1.0 Play Slice
 
-1. Keep using the harness as the default loop for Stage `4` and Stage `5`
-2. Continue reducing collision-driven deaths in the Stage `4` survival scenario
-3. Preserve the improved challenge-stage behavior and avoid broad difficulty sweeps that undo Stage `4` progress
+1. Treat Stage `4` as the end of the current `1.0` game loop
+2. Keep using the harness as the default loop for:
+   - Stage `1` opening fidelity
+   - Stage `2` opening pressure
+   - Stage `3` challenge-stage fidelity
+   - Stage `4` survival / fairness
+3. Continue reducing collision-driven Stage `4` failures without breaking the
+   stronger Stage `1`-`3` experience
+4. Preserve the improved challenge-stage behavior and avoid broad difficulty
+   sweeps that undo Stage `4` progress
 
 ### Phase 2. Raise Visual Fidelity
 
@@ -182,29 +203,33 @@ After each material step:
 2. Improve enemy silhouette/readability and tighten formation presentation
 3. Refine explosions, starfield, and stage/challenge/game-over presentation until they feel more cabinet-authentic
 
-### Phase 3. Deepen Arcade Systems
+### Phase 3. Finish 1.0 Arcade Systems
 
 1. Revisit capture/rescue and dual-fighter behavior against original footage
-2. Add manual-accurate post-game flow, challenge bonuses, and results presentation
-3. Improve later-stage progression and enemy variety so automated scenarios reach deeper comparison territory
-   - Stage-banded later enemy families are now in place and measurable via the `stage12-variety` harness scenario
-4. Add more scenario coverage for rescue, challenge, and late-board cleanup behavior
-5. Incorporate manual-driven rules that are not yet modeled:
-   - challenge-stage complete-group bonuses
-   - special attack squadron bonuses from Stage `4` onward
-   - results/statistics flow before initials entry
+2. Keep high-score entry, results flow, and release/build identity polished
+3. Ensure the hosted build, public pages, and release metadata feel reliable
+4. Add only the scenario coverage needed to validate the four-stage slice
 
+### Phase 4. Ship The 1.0 Slice
+
+1. Run a final 4-stage polish pass with both harness and real play
+2. Confirm deployment / public page sync / release notes are stable
+3. Cut a deliberate `1.0` candidate for the four-stage slice
+4. Move expansion work into the post-`1.0` roadmap
 ## Updated Priority Order
 
-1. Fix later-stage survivability and progression, especially Stage `4` collision pressure and the shallow five-ship progression benchmark
-2. Keep refining challenge-stage fidelity against original footage now that the manual-backed structure is in place
-   - use `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md` as the starting baseline for `#9`
-3. Expand later-stage content variety beyond the initial stage-band families, while keeping manual/video sources primary for rule accuracy
-4. Revisit capture / rescue edge cases and captured-fighter scoring behavior once the baseline rules and later-stage pacing are steadier
-5. Keep improving harness coverage so new fidelity work becomes measurable instead of purely visual
+1. Fix Stage `4` survivability and fairness so the four-stage loop feels winnable
+2. Finish challenge-stage fidelity for the Stage `3` experience without
+   destabilizing hit rate or readability
+3. Polish capture/rescue usefulness and clarity within the four-stage slice
+4. Tighten game-over, results, initials, high-score persistence, and release
+   identity so the product feels intentionally shippable
+5. Keep improving harness coverage only where it reduces guesswork for the
+   four-stage `1.0` slice
 
-### Phase 4. Productize The Workflow
+### Phase 5. Productize The Workflow
 
 1. Keep improving harness summaries and tuning reports where they meaningfully reduce guesswork
-2. Return to artifact submission / Modem transport questions after gameplay tuning is in a stronger place
-3. Decide when the hosted version is good enough to treat as a wider-playtest build rather than an internal tuning build
+2. Return to artifact submission / Modem transport questions after the four-stage gameplay slice is stable
+3. Treat deeper stage expansion, theme/template work, and broader content
+   breadth as post-`1.0` roadmap items

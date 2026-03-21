@@ -2,6 +2,17 @@
 
 Galaga-inspired browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.
 
+Current shipping target:
+
+- a polished four-stage slice:
+  - Stage `1`
+  - Stage `2`
+  - Stage `3` challenging stage
+  - Stage `4`
+
+Expansion beyond Stage `4` is currently treated as post-`1.0` work unless it
+directly supports polishing this slice.
+
 ## Live
 
 After GitHub Pages deploys, play at:

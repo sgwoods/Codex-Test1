@@ -17,7 +17,11 @@ Example:
 ## Meaning
 
 - `MAJOR`
-  - reserve `1.x` for a public-quality release where core gameplay, rules fidelity, and presentation are stable
+  - reserve `1.x` for a public-quality release where the scoped product goal is
+    stable and shippable
+  - current scoped goal:
+    - a polished four-stage slice (Stages `1`-`4`) rather than full long-form
+      Galaga expansion
 - `MINOR`
   - use for meaningful product milestones
   - examples:
@@ -89,15 +93,19 @@ This gives every build a unique identity without forcing a SemVer bump for every
 
 - `alpha`
   - current phase
-  - core gameplay and fidelity still moving
+  - core gameplay and fidelity for the four-stage slice are still moving
 - `beta`
   - target when:
-    - later-stage progression is stable
-    - capture/rescue rules are settled
-    - manual-backed scoring/results behavior is in place
+    - the four-stage slice is stable enough for broader external playtesting
+    - capture/rescue rules are settled for that slice
+    - stage challenge/results/high-score flow is in place
     - visuals/audio are consistent enough for broader playtesting
 - `1.0`
   - target when:
-    - arcade feel is stable across early and mid-game
-    - core rule fidelity gaps are resolved or consciously documented
-    - hosted build is suitable for general external use
+    - Stage `1` through Stage `4` feel stable as one coherent game loop
+    - the Stage `3` challenge stage is rewarding and readable
+    - the Stage `4` endpoint is fair and beatable
+    - core rule fidelity gaps inside the four-stage slice are resolved or
+      consciously documented
+    - the hosted build, high-score flow, and public project pages are suitable
+      for general external use
