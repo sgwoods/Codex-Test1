@@ -52,6 +52,7 @@ For each fidelity topic:
 - Current metrics:
   - `stage3-challenge`
   - challenge hit rate
+  - average upper-band dwell time per target
 - Active gap:
   - visual and timing fidelity still not close enough to original Galaga
 

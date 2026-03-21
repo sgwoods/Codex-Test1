@@ -42,15 +42,16 @@ function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
  S.e.length=0;
  const total=40;
+ const upperBandY=PLAY_H*.5;
  // Manual-backed structure: the first Galaga challenge stage is modeled as
  // 5 groups of 8 enemies. Motion fidelity is still being tuned in #9, but
  // the board structure and group bookkeeping are meant to stay stable.
  for(let i=0;i<total;i++){
   const t=i%8<2?'boss':i%3?'but':'bee';
   const wave=(i/8)|0,lane=i%8,side=lane<4?-1:1,slot=lane%4,row=slot<2?0:1;
-  S.e.push({id:(randUnit()*1e9)|0,t,fam:profile.challengeFamily,band:profile.name,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*13+row*8,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.52+slot*.18,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1});
+  S.e.push({id:(randUnit()*1e9)|0,t,fam:profile.challengeFamily,band:profile.name,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*13+row*8,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.52+slot*.18,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1,ub:0,upperBandY});
  }
- S.ch={hits:0,total:40,done:0,groups:Array.from({length:5},()=>0),bonus:0,perfect:0};
+ S.ch={hits:0,total:40,done:0,groups:Array.from({length:5},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
 function spawnStage(){
@@ -290,6 +291,7 @@ function updateChallengeEnemy(e,dt){
   e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
   e.y=topY+8+q*198*fm.challengeDrop;
  }
+ if(e.y<=(e.upperBandY||PLAY_H*.5)){e.ub+=dt;if(S.ch){S.ch.upperBandTime+=dt;S.ch.upperBandSamples++;}}
  if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
 }
 
@@ -373,7 +375,7 @@ function update(dt){
   return
  }
  if(S.challenge&&!alive.length&&!S.ch.done){
-  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total});
+  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(S.ch.upperBandY||PLAY_H*.5),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
   S.ch.done=1;
   const perfect=S.ch.hits===S.ch.total?10000:0;
   S.ch.perfect=perfect;

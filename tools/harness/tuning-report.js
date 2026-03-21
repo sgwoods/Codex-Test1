@@ -79,9 +79,13 @@ function buildReport(batch){
 
   const challengeRates = challengeRuns.flatMap(r => (r.analysis?.challengeClears || []).map(c => c.total ? c.hits / c.total : 0));
   const challengeAvg = avg(challengeRates);
+  const challengeUpperBand = avg(challengeRuns.flatMap(r => (r.analysis?.challengeClears || []).map(c => +c.avgUpperBandTime).filter(v => Number.isFinite(v))));
   if(challengeRates.length){
     if(challengeAvg < 0.25) findings.push(makeFinding(1, 'Challenge-stage scoring is too low', `Average challenge hit rate is ${(challengeAvg*100).toFixed(1)}%, which is still well below a comfortable scoring window.`));
     else if(challengeAvg < 0.4) findings.push(makeFinding(2, 'Challenge-stage scoring is improving but still low', `Average challenge hit rate is ${(challengeAvg*100).toFixed(1)}%; patterns likely still need clearer lanes or more forgiving timing.`));
+  }
+  if(challengeUpperBand){
+    findings.push(makeFinding(3, 'Challenge upper-band dwell time is now measurable', `Average upper-band dwell time is ${challengeUpperBand.toFixed(2)}s per target before the challenge clears.`));
   }
 
   const stageShipLosses = stageRuns.map(r => (r.analysis?.shipLost || []).length);
@@ -177,6 +181,7 @@ function buildReport(batch){
       runs: allRuns.length,
       audioFailures,
       challengeAverageHitRate: +challengeAvg.toFixed(4),
+      challengeAverageUpperBandTime: +challengeUpperBand.toFixed(4),
       stagePressureAverageShipLosses: +stageLossAvg.toFixed(4),
       stagePressureAverageEndingStage: +progressAvg.toFixed(4),
       stagePressureAverageSurvivalRatio: +stageSurvivalAvg.toFixed(4),

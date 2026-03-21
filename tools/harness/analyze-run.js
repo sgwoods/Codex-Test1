@@ -218,7 +218,15 @@ function analyze(target){
   const session = run.session;
   const eventCounts = counts(session.events || []);
   const stageClears = (session.events || []).filter(e => e.type === 'stage_clear').map(e => ({ t: e.t, stage: e.stage, score: e.score }));
-  const challengeClears = (session.events || []).filter(e => e.type === 'challenge_clear').map(e => ({ t: e.t, stage: e.stage, hits: e.hits, total: e.total }));
+  const challengeClears = (session.events || []).filter(e => e.type === 'challenge_clear').map(e => ({
+    t: e.t,
+    stage: e.stage,
+    hits: e.hits,
+    total: e.total,
+    upperBandY: e.upperBandY ?? null,
+    upperBandTime: e.upperBandTime ?? null,
+    avgUpperBandTime: e.avgUpperBandTime ?? null
+  }));
   const shipLost = lossDetails(session);
   const shipLostByStage = byStage(shipLost);
   const stageLossClusters = Object.fromEntries(Object.entries(shipLostByStage).map(([stage, losses]) => [stage, clusterSummary(losses)]));
