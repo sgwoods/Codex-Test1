@@ -48,6 +48,10 @@
 - Modem feedback is surfacing two current product concerns that should stay visible:
   - hit/explosion/post-hit pause feel
   - whether a stage should allow more than one successful fighter capture
+- The Stage 4+ special three-ship boss squadron behavior is only partially closed:
+  - bonus logic exists
+  - but we still need it to show up naturally in gameplay and read clearly as a
+    visible arcade event before the four-stage release is considered complete
 - Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison
 - Later-stage enemy variety is still far below Galaga's broader stage-band content
 - Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own
@@ -244,9 +248,11 @@ After each material step:
 2. Finish challenge-stage fidelity for the Stage `3` experience without
    destabilizing hit rate or readability
 3. Polish capture/rescue usefulness and clarity within the four-stage slice
-4. Tighten game-over, results, initials, high-score persistence, and release
+4. Make sure special three-ship boss squadron attacks and bonus presentation are
+   present in the live four-stage slice, not just harness coverage
+5. Tighten game-over, results, initials, high-score persistence, and release
    identity so the product feels intentionally shippable
-5. Keep improving harness coverage only where it reduces guesswork for the
+6. Keep improving harness coverage only where it reduces guesswork for the
    four-stage `1.0` slice
 
 ### Phase 5. Productize The Workflow

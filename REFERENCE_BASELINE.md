@@ -86,6 +86,12 @@ For each fidelity topic:
   - capture stronger evidence after 1.0 and map exact appearance timing,
     composition, and scoring behavior before expanding that system further
 
+Important near-term exception:
+
+- for the scoped four-stage `1.0`, the game should still visibly demonstrate the
+  classic boss-with-two-escorts special attack and show the resulting bonus in
+  normal play, even if deeper late-game pattern research stays post-`1.0`
+
 ### Later-Stage Variety
 
 - Sources:

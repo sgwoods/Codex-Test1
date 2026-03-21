@@ -54,6 +54,9 @@ Key issue groups:
   - `#14` second captured-fighter behavior research
 - Capture/rescue rules
   - remaining rescue usefulness / clarity polish
+- Manual-backed visible arcade moments
+  - ensure the Stage 4+ three-ship boss squadron appears naturally in regular
+    gameplay and shows its bonus clearly during the four-stage slice
 - Product polish
   - `#31` release date display refinement
   - high-score/results/initials polish as needed
