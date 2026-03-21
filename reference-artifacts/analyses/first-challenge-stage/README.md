@@ -49,6 +49,26 @@ But it still differs from the original in ways that matter to feel:
 - the targets become "moving exercise targets" too easily instead of reading as
   deliberate mirrored patterns
 
+## Latest side-by-side read
+
+Using:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/challenge-check/original-challenge-sheet.png`
+- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/challenge-check/our-challenge-sheet.png`
+
+Current read:
+
+1. Our challenge stage is now materially more scoreable than earlier versions.
+2. The original still reads as more discrete mirrored groups with more black
+   space between groupings.
+3. Our current pass still clusters targets a bit more tightly in some frames,
+   which makes the board feel busier than the original.
+4. The original appears to preserve clearer left/right group identity during
+   the scoreable window.
+5. Our current best harness result should be treated as a viable baseline, but
+   the next visual-fidelity pass should focus on group separation and mirrored
+   readability rather than just making targets easier to hit.
+
 ## What to tune against
 
 For future challenge-stage passes, compare changes against these targets:
