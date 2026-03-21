@@ -38,6 +38,15 @@ window.__galagaHarness__={
   logEvent('harness_trigger_carried_fighter_hit',{boss:boss.id,points});
   return !!points;
  },
+ triggerCarriedBossRescueKill(){
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss'&&e.carry&&e.dive);
+  if(!boss)return false;
+  boss.hp=0;
+  awardKill(boss,boss.dive);
+  ex(boss.x,boss.y,16,'#ff8cd7');
+  logEvent('harness_trigger_carried_boss_rescue_kill',{boss:boss.id});
+  return true;
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
@@ -53,6 +62,22 @@ window.__galagaHarness__={
   const p=S.p;
   S.cap={x:cl(+cfg.x||p.x,18,PLAY_W-18),y:+cfg.y||Math.max(28,p.y-56),vy:+cfg.vy||78,t:+cfg.t||8};
   logEvent('harness_spawn_rescue',{x:+S.cap.x.toFixed(2),y:+S.cap.y.toFixed(2),vy:+S.cap.vy.toFixed(2)});
+ },
+ setupCaptureRescueDualTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  const spare=S.e.find(e=>e.hp>0&&e.t==='bee'&&e.id!==boss?.id);
+  if(!boss||!spare)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
+  S.captureCountStage=1;S.lastCaptureStartT=0;S.lastFighterCapturedT=.5;
+  for(const e of S.e)if(e.id!==boss.id&&e.id!==spare.id)e.hp=0;
+  spare.hp=1;spare.max=1;spare.form=1;spare.dive=0;spare.carry=0;spare.beam=0;spare.beamT=0;spare.low=0;spare.x=spare.tx;spare.y=spare.ty;
+  boss.hp=1;boss.max=2;boss.form=1;boss.carry=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.dive=1;boss.shot=0;
+  boss.x=p.x;boss.y=132;boss.vx=0;boss.vy=22;
+  logEvent('harness_capture_rescue_dual_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),stage:S.stage});
+  logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,carry:1,rescueFlow:1});
+  return true;
  },
  setupSecondCaptureTest(cfg={}){
   const p=S.p;

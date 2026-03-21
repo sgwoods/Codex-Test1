@@ -103,6 +103,33 @@ function dualShotMetrics(events){
   };
 }
 
+function rescuePipelineMetrics(session){
+  const events = session.events || [];
+  const rescued = events.filter(e => e.type === 'fighter_rescued');
+  const dualShots = events.filter(e => e.type === 'player_shot' && e.dual);
+  const destroyed = events.filter(e => e.type === 'captured_fighter_destroyed');
+  if(!rescued.length){
+    return {
+      rescued: 0,
+      dualShotsAfterRescue: 0,
+      firstRescueToDualShot: null,
+      rescueToDualSuccess: false,
+      destroyedInsteadOfRescued: destroyed.length > 0
+    };
+  }
+  const rescue = rescued[0];
+  const after = dualShots.filter(e => e.t >= rescue.t);
+  const firstShot = after[0] || null;
+  const snap = nearestSnapshot(session, rescue.t);
+  return {
+    rescued: rescued.length,
+    dualShotsAfterRescue: after.length,
+    firstRescueToDualShot: firstShot ? +(firstShot.t - rescue.t).toFixed(3) : null,
+    rescueToDualSuccess: after.length > 0 || !!snap?.player?.dual,
+    destroyedInsteadOfRescued: false
+  };
+}
+
 function descentMetrics(events){
   const starts = events.filter(e => e.type === 'enemy_attack_start');
   const lowers = events.filter(e => e.type === 'enemy_lower_field');
@@ -338,6 +365,7 @@ function analyze(target){
   const carriedFighterDestroyed = events.filter(e => e.type === 'captured_fighter_destroyed');
   const specialAttackBonuses = events.filter(e => e.type === 'special_attack_bonus');
   const dualMetrics = dualShotMetrics(events);
+  const rescuePipeline = rescuePipelineMetrics(session);
   const descent = descentMetrics(events);
   const profiles = stageProfiles(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
@@ -370,6 +398,7 @@ function analyze(target){
       maxEscorts: specialAttackBonuses.reduce((max, e) => Math.max(max, +e.escorts || 0), 0)
     },
     dualMetrics,
+    rescuePipeline,
     descent,
     varietyMetrics: varietyMetrics(profiles),
     video: Object.assign({ file: run.videoFile || null }, audio)

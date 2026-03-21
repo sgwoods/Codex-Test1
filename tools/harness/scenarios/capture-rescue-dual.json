@@ -1,0 +1,16 @@
+{
+  "name": "capture-rescue-dual",
+  "seed": 5007,
+  "duration": 8,
+  "config": {
+    "stage": 2,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupCaptureRescueDualTest", "args": { "stage": 2, "playerX": 140 } },
+    { "t": 0.75, "action": "harness", "method": "triggerCarriedBossRescueKill" },
+    { "t": 2.6, "action": "down", "code": "Space" },
+    { "t": 5.0, "action": "up", "code": "Space" }
+  ]
+}

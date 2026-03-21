@@ -107,6 +107,9 @@ Key issue groups:
   - `#19` Stage 2/late-run collision chain regressions
 - Visual/gameplay comparison baseline
   - `#17` stronger baseline against original Galaga
+- Original-scoring / special-pattern research
+  - deeper validation of Galaga's bonus-yielding three-fighter attack clusters,
+    including exact timing, composition, and scoring triggers
 - Theme/template work
   - `#26` through `#30`
 

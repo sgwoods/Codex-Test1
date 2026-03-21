@@ -66,10 +66,25 @@ For each fidelity topic:
   - gameplay footage
 - Current metrics:
   - `rescue-dual`
+  - `capture-rescue-dual`
   - `second-capture-current`
   - carried-fighter scoring scenarios
 - Active gaps:
   - remaining rescue usefulness / edge-case fidelity
+
+### Post-1.0 Scoring / Special Pattern Research
+
+- Sources:
+  - manual
+  - original gameplay footage
+  - future emulator captures
+- Current state:
+  - special attack squadron bonus logic exists, but we do not yet have enough
+    evidence to claim original-accurate timing/composition for the bonus-yielding
+    three-fighter attack clusters seen in regular play
+- Planned follow-up:
+  - capture stronger evidence after 1.0 and map exact appearance timing,
+    composition, and scoring behavior before expanding that system further
 
 ### Later-Stage Variety
 
