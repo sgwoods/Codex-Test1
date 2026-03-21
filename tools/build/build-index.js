@@ -60,14 +60,16 @@ function loadProjectGuide(){
       title: raw.title || 'Project Guide',
       strapline: raw.strapline || '',
       currentGoal: raw.currentGoal || '',
-      sections: Array.isArray(raw.sections) ? raw.sections : []
+      sections: Array.isArray(raw.sections) ? raw.sections : [],
+      sourceDocs: Array.isArray(raw.sourceDocs) ? raw.sourceDocs : []
     };
   }catch{
     return {
       title: 'Project Guide Unavailable',
       strapline: 'Add project-guide.json to restore the generated documentation guide.',
       currentGoal: '',
-      sections: []
+      sections: [],
+      sourceDocs: []
     };
   }
 }
@@ -519,6 +521,61 @@ function projectGuideStyles(){
       margin-bottom:10px;
       text-decoration:none;
     }
+    .docWrap{
+      padding:20px 22px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .docMeta{
+      margin:0 0 14px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .markdown h3,.markdown h4,.markdown h5{
+      margin:24px 0 10px;
+      letter-spacing:-0.02em;
+      color:#f2fbff;
+    }
+    .markdown h3{font-size:24px}
+    .markdown h4{font-size:20px}
+    .markdown h5{font-size:17px}
+    .markdown p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .markdown ul,.markdown ol{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      padding-left:22px;
+    }
+    .markdown li{
+      margin:0 0 8px;
+      line-height:1.65;
+    }
+    .markdown pre{
+      margin:0 0 16px;
+      padding:14px 16px;
+      overflow:auto;
+      border-radius:16px;
+      background:rgba(3,10,16,0.9);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e8f6ff;
+    }
+    .markdown pre code{
+      color:inherit;
+      font-size:13px;
+    }
+    .markdown img{
+      display:block;
+      max-width:100%;
+      margin:0 0 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
     .toc{
       position:sticky;
       top:20px;
@@ -676,12 +733,125 @@ function renderGuideSection(section){
   `;
 }
 
+function renderInlineMarkdown(text=''){
+  let out = esc(text);
+  out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img alt="$1" src="$2">');
+  out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+  out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  return out;
+}
+
+function renderMarkdown(md=''){
+  const lines = md.replace(/\r\n/g, '\n').split('\n');
+  if(lines[0] && /^#\s+/.test(lines[0])) lines.shift();
+  const out = [];
+  let i = 0;
+
+  function renderList(start, ordered){
+    const pattern = ordered ? /^(\s*)\d+\.\s+(.*)$/ : /^(\s*)[-*]\s+(.*)$/;
+    const stack = [];
+    let html = '';
+    let j = start;
+    const tag = ordered ? 'ol' : 'ul';
+    while(j < lines.length){
+      const m = lines[j].match(pattern);
+      if(!m) break;
+      const indent = m[1].length;
+      const text = m[2];
+      while(stack.length && indent < stack[stack.length - 1]){
+        html += `</li></${tag}>`;
+        stack.pop();
+      }
+      if(!stack.length || indent > stack[stack.length - 1]){
+        html += `<${tag}>`;
+        stack.push(indent);
+      }else if(indent === stack[stack.length - 1]){
+        html += '</li>';
+      }
+      html += `<li>${renderInlineMarkdown(text)}`;
+      j++;
+    }
+    while(stack.length){
+      html += `</li></${tag}>`;
+      stack.pop();
+    }
+    return { html, next: j };
+  }
+
+  while(i < lines.length){
+    const line = lines[i];
+    if(!line.trim()){ i++; continue; }
+    if(/^\s*```/.test(line)){
+      const lang = line.replace(/^\s*```/, '').trim();
+      const block = [];
+      i++;
+      while(i < lines.length && !/^\s*```/.test(lines[i])){
+        block.push(lines[i]);
+        i++;
+      }
+      i++;
+      out.push(`<pre><code${lang ? ` data-lang="${esc(lang)}"` : ''}>${esc(block.join('\n'))}</code></pre>`);
+      continue;
+    }
+    const heading = line.match(/^\s*(#{2,5})\s+(.*)$/);
+    if(heading){
+      const level = Math.min(6, heading[1].length + 1);
+      out.push(`<h${level}>${renderInlineMarkdown(heading[2])}</h${level}>`);
+      i++;
+      continue;
+    }
+    if(/^(\s*)[-*]\s+/.test(line)){
+      const list = renderList(i, false);
+      out.push(list.html);
+      i = list.next;
+      continue;
+    }
+    if(/^(\s*)\d+\.\s+/.test(line)){
+      const list = renderList(i, true);
+      out.push(list.html);
+      i = list.next;
+      continue;
+    }
+    const para = [line.trim()];
+    i++;
+    while(i < lines.length && lines[i].trim() && !/^\s*```/.test(lines[i]) && !/^\s*(#{2,5})\s+/.test(lines[i]) && !/^(\s*)[-*]\s+/.test(lines[i]) && !/^(\s*)\d+\.\s+/.test(lines[i])){
+      para.push(lines[i].trim());
+      i++;
+    }
+    out.push(`<p>${renderInlineMarkdown(para.join(' '))}</p>`);
+  }
+  return out.join('\n');
+}
+
+function renderSourceDocSection(section){
+  const file = path.join(ROOT, section.file);
+  const source = read(file);
+  const body = renderMarkdown(source);
+  return `
+    <section class="section" id="${esc(section.id)}">
+      <div class="sectionHeader">
+        <h2>${esc(section.title)}</h2>
+        <p>${esc(section.summary || '')}</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>${esc(section.file)}</code> during build.</p>
+        <div class="markdown">
+          ${body}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function buildProjectGuide(buildInfo, latestNote, guide){
   const template = read(PROJECT_GUIDE_TEMPLATE);
-  const toc = (guide.sections || []).map(section => `
+  const orderedSections = [...(guide.sections || []), ...(guide.sourceDocs || [])];
+  const toc = orderedSections.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
   `).join('\n');
   const sections = (guide.sections || []).map(renderGuideSection).join('\n');
+  const sourceDocs = (guide.sourceDocs || []).map(renderSourceDocSection).join('\n');
   const body = `
     <main class="shell">
       <div class="main">
@@ -715,6 +885,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           </div>
         </section>
         ${sections}
+        ${sourceDocs}
       </div>
       <aside class="toc">
         <h2>Guide Index</h2>

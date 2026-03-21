@@ -26,6 +26,15 @@ Project guide:
   - `https://sgwoods.github.io/Codex-Test1/project-guide.html`
 - source data:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
+  - plus the maintained source docs it renders from:
+    - `/Users/stevenwoods/Documents/Codex-Test1/README.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/PLAN.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 
 ## Live
 
@@ -125,6 +134,7 @@ After GitHub Pages deploys, play at:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
 - Generated project guide:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.html`
+  - This page is regenerated during `npm run build` from the guide config and the maintained docs above.
 - Release history:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
 - Auto deploy workflow: `.github/workflows/pages.yml`
