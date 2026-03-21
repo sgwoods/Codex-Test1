@@ -152,6 +152,8 @@ This is now the operating plan for the project.
    - durable source artifacts
    - open GitHub issues
    - harness scenarios and measurable targets
+   - the first challenge-stage baseline note now lives at:
+     - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
 3. Prefer reference-backed iteration over blind tuning whenever a rule or behavior question exists
 
 ### Track B. Collaborator Readiness
@@ -196,6 +198,7 @@ After each material step:
 
 1. Fix later-stage survivability and progression, especially Stage `4` collision pressure and the shallow five-ship progression benchmark
 2. Keep refining challenge-stage fidelity against original footage now that the manual-backed structure is in place
+   - use `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md` as the starting baseline for `#9`
 3. Expand later-stage content variety beyond the initial stage-band families, while keeping manual/video sources primary for rule accuracy
 4. Revisit capture / rescue edge cases and captured-fighter scoring behavior once the baseline rules and later-stage pacing are steadier
 5. Keep improving harness coverage so new fidelity work becomes measurable instead of purely visual

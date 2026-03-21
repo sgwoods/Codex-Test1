@@ -93,6 +93,8 @@ After GitHub Pages deploys, play at:
   - `.github/workflows/sync-public-pages.yml`
 - Durable reference material:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
+  - challenge-stage baseline:
+    - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
 
 ## Versioning
 

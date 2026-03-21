@@ -48,6 +48,7 @@ For each fidelity topic:
 - Source:
   - manual-backed structure
   - original challenge-stage footage
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
 - Current metrics:
   - `stage3-challenge`
   - challenge hit rate
