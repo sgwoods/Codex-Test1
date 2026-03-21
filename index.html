@@ -115,9 +115,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.87.sha.a9c5c7d.dirty</span>
-    <span id="settingsRelease">Mar 21 2026, 4:14 PM EDT</span>
-    <span id="settingsState">main@a9c5c7d dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.88.sha.85a7b01.dirty</span>
+    <span id="settingsRelease">Mar 21 2026, 4:25 PM EDT</span>
+    <span id="settingsState">main@85a7b01 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -176,7 +176,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.87.sha.a9c5c7d.dirty',commit:'a9c5c7ded564484f25b51bc4e6d4cde98e42abd4',branch:'main',dirty:true,released:'Mar 21 2026, 4:14 PM EDT',state:'main@a9c5c7d dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.88.sha.85a7b01.dirty',commit:'85a7b014bdaa3b77b516c2db083fe66bea0f7346',branch:'main',dirty:true,released:'Mar 21 2026, 4:25 PM EDT',state:'main@85a7b01 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -448,17 +448,20 @@ function saveTestCfg(){
  localStorage.setItem(TEST_PREF_KEY,JSON.stringify(cfg));
  return cfg;
 }
-function syncTestUi(){
- const cfg=loadTestCfg();
- testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+function syncSettingsUi(){
  settingsPanel.classList.toggle('open',settingsOpen);
  settingsPanel.setAttribute('aria-hidden',settingsOpen?'false':'true');
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
 }
+function syncTestUi(){
+ const cfg=loadTestCfg();
+ testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ syncSettingsUi();
+}
 function closeSettings(){
  settingsOpen=0;
- syncTestUi();
+ syncSettingsUi();
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -641,7 +644,7 @@ function rs(){
 }
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
-settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncTestUi();});
+settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -652,6 +655,7 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
@@ -666,7 +670,7 @@ addEventListener('keydown',e=>{
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
- if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncTestUi();}
+ if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncSettingsUi();}
  if(!started&&gameOverState){
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
@@ -1416,10 +1420,10 @@ function draw(){
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
  right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
- const toolsVisible=!started||paused||feedbackOpen;
- settingsBtn.style.display=toolsVisible?'block':'none';
- if(!toolsVisible)closeSettings();
- else syncTestUi();
+const toolsVisible=!started||paused||feedbackOpen;
+settingsBtn.style.display=toolsVisible?'block':'none';
+if(!toolsVisible)closeSettings();
+ else syncSettingsUi();
  msg.className=!started?(gameOverHtml?'gameOverScreen':'startScreen'):'';
  if(!started)msg.innerHTML=gameOverHtml||`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">FOUR-STAGE 1.0 FLIGHT</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';

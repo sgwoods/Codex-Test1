@@ -174,10 +174,10 @@ function draw(){
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
  right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
- const toolsVisible=!started||paused||feedbackOpen;
- settingsBtn.style.display=toolsVisible?'block':'none';
- if(!toolsVisible)closeSettings();
- else syncTestUi();
+const toolsVisible=!started||paused||feedbackOpen;
+settingsBtn.style.display=toolsVisible?'block':'none';
+if(!toolsVisible)closeSettings();
+ else syncSettingsUi();
  msg.className=!started?(gameOverHtml?'gameOverScreen':'startScreen'):'';
  if(!started)msg.innerHTML=gameOverHtml||`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">FOUR-STAGE 1.0 FLIGHT</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';

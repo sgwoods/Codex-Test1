@@ -295,17 +295,20 @@ function saveTestCfg(){
  localStorage.setItem(TEST_PREF_KEY,JSON.stringify(cfg));
  return cfg;
 }
-function syncTestUi(){
- const cfg=loadTestCfg();
- testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+function syncSettingsUi(){
  settingsPanel.classList.toggle('open',settingsOpen);
  settingsPanel.setAttribute('aria-hidden',settingsOpen?'false':'true');
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
 }
+function syncTestUi(){
+ const cfg=loadTestCfg();
+ testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ syncSettingsUi();
+}
 function closeSettings(){
  settingsOpen=0;
- syncTestUi();
+ syncSettingsUi();
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -488,7 +491,7 @@ function rs(){
 }
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
-settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncTestUi();});
+settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -499,6 +502,7 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
@@ -513,7 +517,7 @@ addEventListener('keydown',e=>{
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
- if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncTestUi();}
+ if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncSettingsUi();}
  if(!started&&gameOverState){
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
