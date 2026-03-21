@@ -5,6 +5,7 @@ const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const BUILD_INFO = path.join(ROOT, 'build-info.json');
+const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const OWNER = process.env.PUBLIC_REPO_OWNER || 'sgwoods';
 const REPO = process.env.PUBLIC_REPO_NAME || 'public';
 const TOKEN = process.env.PUBLIC_REPO_SYNC_TOKEN || process.env.GH_TOKEN || loadGhToken();
@@ -22,8 +23,19 @@ function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-function publicDateLong(buildInfo){
-  const source = buildInfo.builtAtUtc || new Date().toISOString();
+function repoPushedAt(buildInfo){
+  const ref = buildInfo.commit || 'HEAD';
+  try{
+    return execSync(`git -C ${JSON.stringify(ROOT)} show -s --format=%cI ${ref}`, {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).trim();
+  }catch{
+    return buildInfo.builtAtUtc || new Date().toISOString();
+  }
+}
+
+function publicDateLong(source){
   return new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/New_York',
     year: 'numeric',
@@ -60,19 +72,27 @@ function ensureIncludes(haystack, needle, context){
 
 async function main(){
   const buildInfo = readJson(BUILD_INFO);
-  const dateLong = publicDateLong(buildInfo);
+  const dashboard = readJson(RELEASE_DASHBOARD);
+  const pushedAt = repoPushedAt(buildInfo);
+  const dateLong = publicDateLong(pushedAt);
   const expectedShaFragment = `sha.${buildInfo.shortCommit}`;
-  const indexHtml = await getContent('index.html');
   const projectHtml = await getContent('codex-test1.html');
-
-  ensureIncludes(indexHtml, `Repository work last updated: ${dateLong}.`, 'public/index.html date');
-  ensureIncludes(indexHtml, `Current release: ${buildInfo.version}.`, 'public/index.html release');
+  const manifestRaw = await getContent('data/projects/codex-test1.json');
+  const manifest = JSON.parse(manifestRaw);
 
   ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, 'public/codex-test1.html date');
   ensureIncludes(projectHtml, expectedShaFragment, 'public/codex-test1.html build sha');
   ensureIncludes(projectHtml, 'release-dashboard.html', 'public/codex-test1.html dashboard link');
+  if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/codex-test1.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
+  if(manifest.project_id !== 'codex-test1') throw new Error(`Public sync verification failed for data/projects/codex-test1.json project_id: expected "codex-test1" got "${manifest.project_id}"`);
+  if(manifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/codex-test1.json status_value: expected "${buildInfo.version}" got "${manifest.status_value}"`);
+  if(manifest.focus_value !== (dashboard.currentFocus || '')) throw new Error(`Public sync verification failed for data/projects/codex-test1.json focus_value: expected "${dashboard.currentFocus}" got "${manifest.focus_value}"`);
+  if(manifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/codex-test1.json repo_pushed_at: expected "${pushedAt}" got "${manifest.repo_pushed_at}"`);
+  if(manifest.project_page_path !== 'codex-test1.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json project_page_path`);
+  if(manifest.dashboard_url !== 'https://sgwoods.github.io/Codex-Test1/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json dashboard_url`);
+  if(manifest.experience_url !== 'https://sgwoods.github.io/Codex-Test1/') throw new Error(`Public sync verification failed for data/projects/codex-test1.json experience_url`);
 
-  console.log(`Verified public repo pages match ${buildInfo.version} ${expectedShaFragment}`);
+  console.log(`Verified public project page and status manifest match ${buildInfo.version} ${expectedShaFragment}`);
 }
 
 main().catch(err => {

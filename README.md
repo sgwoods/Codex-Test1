@@ -88,10 +88,14 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run build
   ```
-- Sync the separate public project pages repo from the latest build metadata with:
+- Sync the separate public repo from the latest build metadata with:
   ```bash
   npm run sync:public
   ```
+  This updates:
+  - `/Users/stevenwoods/GitPages/public/codex-test1.html`
+  - `/Users/stevenwoods/GitPages/public/data/projects/codex-test1.json`
+  It does not update `/Users/stevenwoods/GitPages/public/index.html` directly.
 - Verify that the public repo content reflects the current build metadata with:
   ```bash
   npm run verify:public
