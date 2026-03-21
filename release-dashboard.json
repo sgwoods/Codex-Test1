@@ -31,7 +31,7 @@
       "id": "challenge",
       "title": "Stage 3 Challenge",
       "status": "in_progress",
-      "summary": "Manual-backed structure is in place; scoreability and mirrored readability still need one last polish pass."
+      "summary": "Manual-backed structure is in place and now plays acceptably, but one last visual/readability polish pass is still likely before 1.0."
     },
     {
       "id": "stage4",
@@ -43,13 +43,19 @@
       "id": "capture",
       "title": "Capture / Rescue",
       "status": "in_progress",
-      "summary": "Core loop works and scoring rules are stronger, but the four-stage slice still needs final usefulness polish."
+      "summary": "Core loop works, dual-fighter rescue is now testable end-to-end, and carrying-boss readability is better, but the natural rescue flow still needs one more confidence pass."
+    },
+    {
+      "id": "squadron",
+      "title": "Special Squadron Bonus",
+      "status": "in_progress",
+      "summary": "Manual-backed bonus logic exists, but the Stage 4 boss-with-two-escorts attack still needs to appear naturally and clearly in normal 1.0 gameplay."
     },
     {
       "id": "ship-polish",
       "title": "Ship-Ready Polish",
       "status": "up_next",
-      "summary": "High scores, results flow, public pages, release notes, and final UI cleanup for the 1.0 slice."
+      "summary": "High scores, results flow, public pages, release notes, and final UI cleanup for the four-stage 1.0 slice."
     },
     {
       "id": "release",
@@ -70,6 +76,10 @@
     {
       "label": "Fair Finish",
       "detail": "Stage 4 must feel beatable without cheap collisions or abrupt spikes."
+    },
+    {
+      "label": "Arcade Moments",
+      "detail": "Capture/rescue and special squadron bonus moments should read clearly in normal play, not only in harness scenarios."
     },
     {
       "label": "Player Finish",
