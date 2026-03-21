@@ -92,10 +92,16 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run sync:public
   ```
+- Verify that the public repo content reflects the current build metadata with:
+  ```bash
+  npm run verify:public
+  ```
 - Build script:
   - `tools/build/build-index.js`
 - Public-pages sync script:
   - `tools/build/sync-public-pages.js`
+- Public-pages verification script:
+  - `tools/build/verify-public-sync.js`
 - Build metadata output:
   - `build-info.json`
 - Release notes source:

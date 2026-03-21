@@ -31,3 +31,9 @@ jobs:
           PUBLIC_REPO_SYNC_TOKEN: ${{ secrets.PUBLIC_REPO_SYNC_TOKEN }}
         run: |
           npm run sync:public
+
+      - name: Verify public pages repo content
+        env:
+          PUBLIC_REPO_SYNC_TOKEN: ${{ secrets.PUBLIC_REPO_SYNC_TOKEN }}
+        run: |
+          npm run verify:public
