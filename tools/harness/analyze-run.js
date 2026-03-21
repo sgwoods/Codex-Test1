@@ -140,14 +140,28 @@ function causeSummary(losses){
   return out;
 }
 
+function recentCount(events, type, stage, t, windowSec){
+  return events.filter(e => e.type === type && e.stage === stage && e.t <= t && e.t >= t - windowSec).length;
+}
+
+function latestMatching(events, predicate){
+  for(let i = events.length - 1; i >= 0; i--){
+    if(predicate(events[i])) return events[i];
+  }
+  return null;
+}
+
 function lossDetails(session){
   const events = session.events || [];
   const losses = events.filter(e => e.type === 'ship_lost');
   const attacks = events.filter(e => e.type === 'enemy_attack_start');
   const bullets = events.filter(e => e.type === 'enemy_bullet_fired');
+  const captures = events.filter(e => e.type === 'capture_started');
+  const fighterCaptured = events.filter(e => e.type === 'fighter_captured');
   return losses.map((e, i) => {
     const snap = nearestSnapshot(session, e.t);
     const prev = i > 0 ? losses[i - 1] : null;
+    const sourceAttack = latestMatching(attacks, a => a.stage === e.stage && a.id === (e.sourceId || e.enemyId) && a.t <= e.t);
     return {
       t: e.t,
       stage: e.stage,
@@ -157,11 +171,21 @@ function lossDetails(session){
       bulletKind: e.bulletKind || null,
       sourceType: e.sourceType || e.enemyType || null,
       sourceDive: e.sourceDive ?? e.enemyDive ?? null,
+      sourceLane: e.bulletLane ?? e.enemyLane ?? null,
+      playerLane: e.playerLane ?? null,
       enemyForm: e.enemyForm ?? null,
       stageClock: e.stageClock ?? null,
       gapFromPrev: prev ? +(e.t - prev.t).toFixed(3) : null,
       recentAttackStarts: attacks.filter(a => a.stage === e.stage && a.t <= e.t && a.t >= e.t - 2.2).length,
       recentEnemyBullets: bullets.filter(b => b.stage === e.stage && b.t <= e.t && b.t >= e.t - 2.2).length,
+      recentCaptureStarts: recentCount(captures, 'capture_started', e.stage, e.t, 4),
+      recentFighterCaptured: recentCount(fighterCaptured, 'fighter_captured', e.stage, e.t, 4),
+      timeSinceCaptureStart: e.timeSinceCaptureStart ?? null,
+      timeSinceFighterCaptured: e.timeSinceFighterCaptured ?? null,
+      sourceAttackMode: sourceAttack?.mode || null,
+      sourceOriginLane: sourceAttack?.originLane ?? sourceAttack?.lane ?? null,
+      sourceTargetLane: sourceAttack?.targetLane ?? null,
+      sourceColumn: sourceAttack?.column ?? null,
       snapshot: snap ? {
         t: snap.t,
         attackers: snap.counts?.attackers || 0,
@@ -231,6 +255,11 @@ function analyze(target){
   const shipLostByStage = byStage(shipLost);
   const stageLossClusters = Object.fromEntries(Object.entries(shipLostByStage).map(([stage, losses]) => [stage, clusterSummary(losses)]));
   const lossCauseCounts = causeSummary(shipLost);
+  const stageLossLanePatterns = Object.fromEntries(Object.entries(shipLostByStage).map(([stage, losses]) => [stage, {
+    playerLanes: [...new Set(losses.map(l => l.playerLane).filter(Number.isFinite))],
+    sourceLanes: [...new Set(losses.map(l => l.sourceLane).filter(Number.isFinite))],
+    sourceColumns: [...new Set(losses.map(l => l.sourceColumn).filter(Number.isFinite))]
+  }]));
   const events = session.events || [];
   const captureMetrics = {
     captureStarts: countEvents(events, 'capture_started'),
@@ -253,6 +282,7 @@ function analyze(target){
     shipLost,
     stageMetrics: stageMetrics(session),
     stageLossClusters,
+    stageLossLanePatterns,
     lossCauseCounts,
     captureMetrics,
     carriedFighterMetrics: {
