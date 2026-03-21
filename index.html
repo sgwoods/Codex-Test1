@@ -115,9 +115,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.83.sha.8be3a33.dirty</span>
-    <span id="settingsRelease">Mar 21 2026, 3:41 PM EDT</span>
-    <span id="settingsState">main@8be3a33 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.84.sha.9d6036d.dirty</span>
+    <span id="settingsRelease">Mar 21 2026, 4:05 PM EDT</span>
+    <span id="settingsState">main@9d6036d dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -176,7 +176,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.83.sha.8be3a33.dirty',commit:'8be3a33587d7359fd01413ece2636176b598ba3b',branch:'main',dirty:true,released:'Mar 21 2026, 3:41 PM EDT',state:'main@8be3a33 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.84.sha.9d6036d.dirty',commit:'9d6036dede3797948a748ec3f5a5142a30b2d5ca',branch:'main',dirty:true,released:'Mar 21 2026, 4:05 PM EDT',state:'main@9d6036d dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -917,9 +917,15 @@ function activeEscortCount(e){
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function carriedFighterOffset(e){
+ if(!e?.carry)return {x:0,y:18};
+ return e.dive ? {x:0,y:-18} : {x:0,y:18};
+}
+
 function carriedFighterTarget(e){
  if(!e?.carry)return null;
- return {x:e.x,y:e.y+18,w:6,h:6};
+ const off=carriedFighterOffset(e);
+ return {x:e.x+off.x,y:e.y+off.y,w:6,h:6};
 }
 
 function destroyCarriedFighter(e){
@@ -930,12 +936,13 @@ function destroyCarriedFighter(e){
  // The boss survives; only the carried fighter is lost.
  const attacking=!!e.dive;
  const points=attacking?1000:500;
+ const off=carriedFighterOffset(e);
  e.carry=0;
  S.score+=points;
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
  S.alertT=Math.max(S.alertT,1.45);
- ex(e.x,e.y+18,10,'#d8f2ff');
+ ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
  sfx.hit();
  return points;
 }
@@ -1211,8 +1218,6 @@ function update(dt){
     else{
      logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
      if(e.t==='boss'&&hpBefore>e.hp){
-      S.alertTxt='BOSS DAMAGED';
-      S.alertT=Math.max(S.alertT,.85);
       ex(e.x,e.y,8,'#fff4a8');
       sfx.bossHit();
      }else sfx.hit();
@@ -1314,7 +1319,22 @@ function drawEnemy(e){
   ctx.fillStyle='rgba(255,246,168,.18)';
   for(let i=0;i<4;i++){const yy=20+i*28+Math.sin((e.tm+i)*4)*3;ctx.fillRect(-bw*1.1,yy,bw*2.2,4)}
  }
- if(e.carry){ctx.save();ctx.translate(0,18);ctx.globalAlpha=.92;drawMiniShip(1.02,'#d8f2ff','#ff3e4f');ctx.restore();}
+ if(e.carry){
+  const off=carriedFighterOffset(e);
+  ctx.save();
+  ctx.translate(off.x,off.y);
+  ctx.globalAlpha=.92;
+  drawMiniShip(1.02,'#d8f2ff','#ff3e4f');
+  if(e.dive){
+   ctx.strokeStyle='rgba(228,250,255,.32)';
+   ctx.lineWidth=1;
+   ctx.beginPath();
+   ctx.moveTo(0,off.y>0?-4:4);
+   ctx.lineTo(0,off.y>0?-12:12);
+   ctx.stroke();
+  }
+  ctx.restore();
+ }
  ctx.restore();
 }
 function drawPlayerBody(x,y,dual=0,ghost=0){
@@ -1473,8 +1493,6 @@ window.__galagaHarness__={
   boss.hp--;
   boss.hitT=.34;
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
-  S.alertTxt='BOSS DAMAGED';
-  S.alertT=Math.max(S.alertT,.85);
   ex(boss.x,boss.y,8,'#fff4a8');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});

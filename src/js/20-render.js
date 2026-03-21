@@ -77,7 +77,22 @@ function drawEnemy(e){
   ctx.fillStyle='rgba(255,246,168,.18)';
   for(let i=0;i<4;i++){const yy=20+i*28+Math.sin((e.tm+i)*4)*3;ctx.fillRect(-bw*1.1,yy,bw*2.2,4)}
  }
- if(e.carry){ctx.save();ctx.translate(0,18);ctx.globalAlpha=.92;drawMiniShip(1.02,'#d8f2ff','#ff3e4f');ctx.restore();}
+ if(e.carry){
+  const off=carriedFighterOffset(e);
+  ctx.save();
+  ctx.translate(off.x,off.y);
+  ctx.globalAlpha=.92;
+  drawMiniShip(1.02,'#d8f2ff','#ff3e4f');
+  if(e.dive){
+   ctx.strokeStyle='rgba(228,250,255,.32)';
+   ctx.lineWidth=1;
+   ctx.beginPath();
+   ctx.moveTo(0,off.y>0?-4:4);
+   ctx.lineTo(0,off.y>0?-12:12);
+   ctx.stroke();
+  }
+  ctx.restore();
+ }
  ctx.restore();
 }
 function drawPlayerBody(x,y,dual=0,ghost=0){

@@ -175,9 +175,15 @@ function activeEscortCount(e){
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function carriedFighterOffset(e){
+ if(!e?.carry)return {x:0,y:18};
+ return e.dive ? {x:0,y:-18} : {x:0,y:18};
+}
+
 function carriedFighterTarget(e){
  if(!e?.carry)return null;
- return {x:e.x,y:e.y+18,w:6,h:6};
+ const off=carriedFighterOffset(e);
+ return {x:e.x+off.x,y:e.y+off.y,w:6,h:6};
 }
 
 function destroyCarriedFighter(e){
@@ -188,12 +194,13 @@ function destroyCarriedFighter(e){
  // The boss survives; only the carried fighter is lost.
  const attacking=!!e.dive;
  const points=attacking?1000:500;
+ const off=carriedFighterOffset(e);
  e.carry=0;
  S.score+=points;
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
  S.alertT=Math.max(S.alertT,1.45);
- ex(e.x,e.y+18,10,'#d8f2ff');
+ ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
  sfx.hit();
  return points;
 }
@@ -469,8 +476,6 @@ function update(dt){
     else{
      logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
      if(e.t==='boss'&&hpBefore>e.hp){
-      S.alertTxt='BOSS DAMAGED';
-      S.alertT=Math.max(S.alertT,.85);
       ex(e.x,e.y,8,'#fff4a8');
       sfx.bossHit();
      }else sfx.hit();

@@ -54,8 +54,6 @@ window.__galagaHarness__={
   boss.hp--;
   boss.hitT=.34;
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
-  S.alertTxt='BOSS DAMAGED';
-  S.alertT=Math.max(S.alertT,.85);
   ex(boss.x,boss.y,8,'#fff4a8');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
