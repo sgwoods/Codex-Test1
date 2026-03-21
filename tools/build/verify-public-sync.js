@@ -61,17 +61,18 @@ function ensureIncludes(haystack, needle, context){
 async function main(){
   const buildInfo = readJson(BUILD_INFO);
   const dateLong = publicDateLong(buildInfo);
+  const expectedShaFragment = `sha.${buildInfo.shortCommit}`;
   const indexHtml = await getContent('index.html');
   const projectHtml = await getContent('codex-test1.html');
 
   ensureIncludes(indexHtml, `Repository work last updated: ${dateLong}.`, 'public/index.html date');
   ensureIncludes(indexHtml, `Current release: ${buildInfo.version}.`, 'public/index.html release');
 
-  ensureIncludes(projectHtml, `Last repository update: ${dateLong}`, 'public/codex-test1.html date');
-  ensureIncludes(projectHtml, buildInfo.label, 'public/codex-test1.html build label');
+  ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, 'public/codex-test1.html date');
+  ensureIncludes(projectHtml, expectedShaFragment, 'public/codex-test1.html build sha');
   ensureIncludes(projectHtml, 'release-dashboard.html', 'public/codex-test1.html dashboard link');
 
-  console.log(`Verified public repo pages match ${buildInfo.label}`);
+  console.log(`Verified public repo pages match ${buildInfo.version} ${expectedShaFragment}`);
 }
 
 main().catch(err => {

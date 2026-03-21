@@ -146,8 +146,8 @@ function draw(){
  settingsBtn.style.display=toolsVisible?'block':'none';
  if(!toolsVisible)closeSettings();
  else syncTestUi();
- msg.className=!started&&gameOverHtml?'gameOverScreen':'';
- if(!started)msg.innerHTML=gameOverHtml||'PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
+ msg.className=!started?(gameOverHtml?'gameOverScreen':'startScreen'):'';
+ if(!started)msg.innerHTML=gameOverHtml||`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">FOUR-STAGE 1.0 FLIGHT</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){

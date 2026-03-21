@@ -15,6 +15,10 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
 #msg .splashScore{display:block;color:#ffd86d;font-size:1em;letter-spacing:.06em}
+#msg .startTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.14em;margin-bottom:.18em}
+#msg .startSub{display:block;color:#7ef2ff;font-size:.84em;letter-spacing:.18em;margin-bottom:.58em}
+#msg .startHelp{display:block;color:#f4f7ff;font-size:.92em;letter-spacing:.06em;margin-bottom:.34em}
+#msg .startMeta{display:block;color:rgba(231,240,255,.82);font-size:.62em;letter-spacing:.08em;line-height:1.42}
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .scoreTable{display:grid;grid-template-columns:auto auto auto auto;gap:.08em .85em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
@@ -32,12 +36,17 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
 #msg .blinkPrompt{animation:blinkPrompt .8s steps(1,end) infinite}
 #msg.gameOverScreen{top:52%;width:min(92vw,980px);font-size:clamp(26px,2.15vw,38px);line-height:1.06}
+#msg.startScreen{top:76%;width:min(92vw,840px);font-size:clamp(22px,1.9vw,32px);line-height:1.08}
 #msg.gameOverScreen .gameOverTitle{font-size:1.34em;letter-spacing:.14em;margin-bottom:.16em}
 #msg.gameOverScreen .gameOverSub{font-size:.9em;letter-spacing:.08em;margin-bottom:.35em}
 #msg.gameOverScreen .scoreTable{gap:.16em 1.3em;font-size:.92em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
 #msg.gameOverScreen .gameOverEntry{font-size:.88em;margin:.34em 0 .18em}
 #msg.gameOverScreen .gameOverFoot{font-size:.82em;margin-top:.45em}
+#msg.startScreen .startTitle{font-size:1.22em}
+#msg.startScreen .startSub{font-size:.8em}
+#msg.startScreen .startHelp{font-size:.94em}
+#msg.startScreen .startMeta{font-size:.62em}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
 #settingsBtn{position:fixed;top:62px;right:16px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.78);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
@@ -106,9 +115,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.74.sha.c6572a1.dirty</span>
-    <span id="settingsRelease">Mar 21 2026, 11:25 AM EDT</span>
-    <span id="settingsState">main@c6572a1 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.76.sha.f8747ef.dirty</span>
+    <span id="settingsRelease">Mar 21 2026, 11:39 AM EDT</span>
+    <span id="settingsState">main@f8747ef dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -167,7 +176,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.74.sha.c6572a1.dirty',commit:'c6572a16d8dad0856e4a5d6e10dcf0bc39d80896',branch:'main',dirty:true,released:'Mar 21 2026, 11:25 AM EDT',state:'main@c6572a1 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.76.sha.f8747ef.dirty',commit:'f8747efd9c267841d9a4596fb6d02dfd5067b9e4',branch:'main',dirty:true,released:'Mar 21 2026, 11:39 AM EDT',state:'main@f8747ef dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1331,8 +1340,8 @@ function draw(){
  settingsBtn.style.display=toolsVisible?'block':'none';
  if(!toolsVisible)closeSettings();
  else syncTestUi();
- msg.className=!started&&gameOverHtml?'gameOverScreen':'';
- if(!started)msg.innerHTML=gameOverHtml||'PRESS <span class=\"k\">ENTER</span> TO START\n<span class=\"k\">F</span> FULLSCREEN   <span class=\"k\">U</span> ULTRA SCALE';
+ msg.className=!started?(gameOverHtml?'gameOverScreen':'startScreen'):'';
+ if(!started)msg.innerHTML=gameOverHtml||`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">FOUR-STAGE 1.0 FLIGHT</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){
