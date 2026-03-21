@@ -106,9 +106,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.65.sha.579fdd6.dirty</span>
-    <span id="settingsRelease">Mar 20 2026, 9:29 PM EDT</span>
-    <span id="settingsState">main@579fdd6 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.66.sha.edf0e55.dirty</span>
+    <span id="settingsRelease">Mar 20 2026, 9:40 PM EDT</span>
+    <span id="settingsState">main@edf0e55 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -167,7 +167,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.65.sha.579fdd6.dirty',commit:'579fdd67d612aecc2b49d3e5c0a426827242612f',branch:'main',dirty:true,released:'Mar 20 2026, 9:29 PM EDT',state:'main@579fdd6 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.66.sha.edf0e55.dirty',commit:'edf0e551125fde2de66d547615ddbc656e999f76',branch:'main',dirty:true,released:'Mar 20 2026, 9:40 PM EDT',state:'main@edf0e55 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1003,7 +1003,8 @@ function updateChallengeEnemy(e,dt){
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
  const fm=familyMotion(e);
- e.tm+=dt*(.355+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+ const classicStage3=S.stage===3&&e.fam==='classic';
+ e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
  const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
   const laneX=PLAY_W/2+side*(48+slot*16);
   const topY=38+wave*14+row*8;
@@ -1014,11 +1015,11 @@ function updateChallengeEnemy(e,dt){
  }else if(u<9.7){
   const q=(u-3.15)/6.55;
   e.x=laneX+sweep*Math.sin(q*Math.PI)*28*fm.challengeSweep;
-  e.y=topY+q*6.5*fm.challengeDrop+Math.sin(q*5.5+p)*.95;
+  e.y=topY+q*(classicStage3?5.8:6.5)*fm.challengeDrop+Math.sin(q*5.5+p)*(classicStage3?.82:.95);
  }else{
   const q=(u-9.7)/3.35;
   e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
-  e.y=topY+8+q*198*fm.challengeDrop;
+  e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
  }
  if(e.y<=(e.upperBandY||PLAY_H*.5)){e.ub+=dt;if(S.ch){S.ch.upperBandTime+=dt;S.ch.upperBandSamples++;}}
  if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
@@ -1202,7 +1203,7 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?0.7:(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 function enemyCollisionHitbox(e){

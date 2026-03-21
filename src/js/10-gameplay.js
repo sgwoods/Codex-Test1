@@ -274,7 +274,8 @@ function updateChallengeEnemy(e,dt){
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
  const fm=familyMotion(e);
- e.tm+=dt*(.355+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+ const classicStage3=S.stage===3&&e.fam==='classic';
+ e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
  const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
   const laneX=PLAY_W/2+side*(48+slot*16);
   const topY=38+wave*14+row*8;
@@ -285,11 +286,11 @@ function updateChallengeEnemy(e,dt){
  }else if(u<9.7){
   const q=(u-3.15)/6.55;
   e.x=laneX+sweep*Math.sin(q*Math.PI)*28*fm.challengeSweep;
-  e.y=topY+q*6.5*fm.challengeDrop+Math.sin(q*5.5+p)*.95;
+  e.y=topY+q*(classicStage3?5.8:6.5)*fm.challengeDrop+Math.sin(q*5.5+p)*(classicStage3?.82:.95);
  }else{
   const q=(u-9.7)/3.35;
   e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
-  e.y=topY+8+q*198*fm.challengeDrop;
+  e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
  }
  if(e.y<=(e.upperBandY||PLAY_H*.5)){e.ub+=dt;if(S.ch){S.ch.upperBandTime+=dt;S.ch.upperBandSamples++;}}
  if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){e.hp=0;e.miss=1;}
