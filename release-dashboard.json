@@ -1,0 +1,79 @@
+{
+  "targetVersion": "1.0.0",
+  "currentFocus": "Polished four-stage 1.0 slice",
+  "strapline": "A compact, shippable Galaga tribute with a fair Stage 4 finish, a rewarding challenge stage, and release-ready presentation.",
+  "timeline": [
+    {
+      "id": "foundation",
+      "title": "Foundation",
+      "status": "done",
+      "summary": "Browser build, local harness, release identity, and public deployment are in place."
+    },
+    {
+      "id": "baseline",
+      "title": "Reference Baseline",
+      "status": "done",
+      "summary": "Manuals, footage, and challenge-stage reference notes now drive fidelity decisions."
+    },
+    {
+      "id": "stage1",
+      "title": "Stage 1 Feel",
+      "status": "done",
+      "summary": "Opening pacing and descent timing are much closer to original Galaga."
+    },
+    {
+      "id": "stage2",
+      "title": "Stage 2 Opening",
+      "status": "done",
+      "summary": "The cramped opening was reduced by softening early attack pressure instead of moving the formation."
+    },
+    {
+      "id": "challenge",
+      "title": "Stage 3 Challenge",
+      "status": "in_progress",
+      "summary": "Manual-backed structure is in place; scoreability and mirrored readability still need one last polish pass."
+    },
+    {
+      "id": "stage4",
+      "title": "Stage 4 Fairness",
+      "status": "in_progress",
+      "summary": "This is the main blocker for 1.0. Collision-heavy deaths are much narrower now, but the finish is not fair enough yet."
+    },
+    {
+      "id": "capture",
+      "title": "Capture / Rescue",
+      "status": "in_progress",
+      "summary": "Core loop works and scoring rules are stronger, but the four-stage slice still needs final usefulness polish."
+    },
+    {
+      "id": "ship-polish",
+      "title": "Ship-Ready Polish",
+      "status": "up_next",
+      "summary": "High scores, results flow, public pages, release notes, and final UI cleanup for the 1.0 slice."
+    },
+    {
+      "id": "release",
+      "title": "1.0 Release",
+      "status": "up_next",
+      "summary": "Package the polished four-stage slice as a clean, reliable public release."
+    }
+  ],
+  "legend": [
+    {
+      "label": "Foundation",
+      "detail": "Build, deploy, automation, and reference infrastructure."
+    },
+    {
+      "label": "Four-Stage Slice",
+      "detail": "Stages 1, 2, 3 challenge, and 4 as the current shippable game."
+    },
+    {
+      "label": "Fair Finish",
+      "detail": "Stage 4 must feel beatable without cheap collisions or abrupt spikes."
+    },
+    {
+      "label": "Player Finish",
+      "detail": "High scores, initials, results flow, and public pages should feel finished."
+    }
+  ]
+}

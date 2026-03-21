@@ -42,6 +42,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html _site/
+          cp release-dashboard.html _site/
           cp build-info.json _site/
           cp release-notes.json _site/
           cp export.mov.png _site/

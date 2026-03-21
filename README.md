@@ -13,6 +13,13 @@ Current shipping target:
 Expansion beyond Stage `4` is currently treated as post-`1.0` work unless it
 directly supports polishing this slice.
 
+Release dashboard:
+
+- live page:
+  - `https://sgwoods.github.io/Codex-Test1/release-dashboard.html`
+- source data:
+  - `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
+
 ## Live
 
 After GitHub Pages deploys, play at:
