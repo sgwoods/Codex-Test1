@@ -71,6 +71,7 @@ function buildReport(batch){
   const rescueRuns = scenarioRuns(allRuns, 'rescue-dual');
   const secondCaptureRuns = scenarioRuns(allRuns, 'second-capture-current');
   const varietyRuns = scenarioRuns(allRuns, 'stage12-variety');
+  const squadronRuns = scenarioRuns(allRuns, 'stage4-squadron-bonus');
 
   const audioFailures = allRuns.filter(r => r.analysis?.video?.audio === false).length;
   if(audioFailures){
@@ -159,6 +160,11 @@ function buildReport(batch){
     }
   }
 
+  const squadronEscortOffsetAvg = avg(squadronRuns.map(r => +(r.analysis?.specialAttackMetrics?.avgEscortOffset || 0)).filter(v => v > 0));
+  if(squadronRuns.length && squadronEscortOffsetAvg){
+    findings.push(makeFinding(3, 'Special squadron escort spacing is now measurable', `Average escort offset is ${squadronEscortOffsetAvg.toFixed(1)}px in the dedicated squadron scenario.`));
+  }
+
   if(varietyRuns.length){
     const nonClassicBands = varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicBands || []);
     const nonClassicFamilies = varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicFamilies || []);
@@ -200,6 +206,7 @@ function buildReport(batch){
       stageSurvivalCollisionDeaths: survivalCollisionDeaths,
       stage1AverageDescentToLowerField: +descentAvg.toFixed(4),
       rescueAverageDualSpread: +dualSpreadAvg.toFixed(4),
+      squadronAverageEscortOffset: +squadronEscortOffsetAvg.toFixed(4),
       laterStageVarietyBands: [...new Set(varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicBands || []))],
       laterStageVarietyFamilies: [...new Set(varietyRuns.flatMap(r => r.analysis?.varietyMetrics?.nonClassicFamilies || []))]
     },

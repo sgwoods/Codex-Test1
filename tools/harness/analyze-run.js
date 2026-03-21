@@ -364,6 +364,7 @@ function analyze(target){
   };
   const carriedFighterDestroyed = events.filter(e => e.type === 'captured_fighter_destroyed');
   const specialAttackBonuses = events.filter(e => e.type === 'special_attack_bonus');
+  const squadronEscortStarts = events.filter(e => e.type === 'enemy_attack_start' && e.mode === 'escort' && (+e.offset || 0) !== 0);
   const dualMetrics = dualShotMetrics(events);
   const rescuePipeline = rescuePipelineMetrics(session);
   const descent = descentMetrics(events);
@@ -395,7 +396,9 @@ function analyze(target){
     specialAttackMetrics: {
       count: specialAttackBonuses.length,
       totalBonus: specialAttackBonuses.reduce((sum, e) => sum + (+e.bonus || 0), 0),
-      maxEscorts: specialAttackBonuses.reduce((max, e) => Math.max(max, +e.escorts || 0), 0)
+      maxEscorts: specialAttackBonuses.reduce((max, e) => Math.max(max, +e.escorts || 0), 0),
+      avgEscortOffset: squadronEscortStarts.length ? squadronEscortStarts.reduce((sum, e) => sum + Math.abs(+e.offset || 0), 0) / squadronEscortStarts.length : 0,
+      maxEscortOffset: squadronEscortStarts.reduce((max, e) => Math.max(max, Math.abs(+e.offset || 0)), 0)
     },
     dualMetrics,
     rescuePipeline,

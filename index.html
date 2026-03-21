@@ -117,9 +117,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.89.sha.21bb95e.dirty</span>
-    <span id="settingsRelease">Mar 21 2026, 4:27 PM EDT</span>
-    <span id="settingsState">main@21bb95e dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.90.sha.df99b66.dirty</span>
+    <span id="settingsRelease">Mar 21 2026, 4:42 PM EDT</span>
+    <span id="settingsState">main@df99b66 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -150,8 +150,8 @@ canvas{display:block;width:100vw;height:100vh}
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="buildStamp" aria-hidden="true">
-  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.89.sha.21bb95e.dirty</span>
-  <span id="buildStampRelease">Mar 21 2026, 4:27 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.90.sha.df99b66.dirty</span>
+  <span id="buildStampRelease">Mar 21 2026, 4:42 PM EDT</span>
 </div>
 <script>
 (()=>{
@@ -182,7 +182,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.89.sha.21bb95e.dirty',commit:'21bb95e5c7395ea5b04139b87b7ca2b4e3269472',branch:'main',dirty:true,released:'Mar 21 2026, 4:27 PM EDT',state:'main@21bb95e dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.90.sha.df99b66.dirty',commit:'df99b66832b8c898c05eb7127e7d10da462914ba',branch:'main',dirty:true,released:'Mar 21 2026, 4:42 PM EDT',state:'main@df99b66 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1012,7 +1012,7 @@ function assignEscorts(boss){
  const squadId=++S.squadSeq;
  const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;boss.squadId=cand.length?squadId:0;
- const escortOffset=S.stage===4?74:64;
+ const escortOffset=S.stage===4?58:50;
  for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*escortOffset;e.shot=1;e.squadId=squadId;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
 }
 
@@ -1098,7 +1098,7 @@ function updateEnemy(e,dt,t,T,p){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
   if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=S.stage<=2?96:104;return}
   const escortTrackX=S.stage===4?5.4:6.2,escortTrackY=S.stage===4?5.2:6;
-  e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-34-e.y)*Math.min(1,dt*escortTrackY);
+  e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-28-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');e.shot--;}
   return;
  }
@@ -1579,7 +1579,7 @@ window.__galagaHarness__={
   for(const e of S.e)if(!keep.has(e.id))e.hp=0;
   const squadId=++S.squadSeq;
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=2;boss.squadId=squadId;boss.x=p.x;boss.y=112;boss.vx=0;boss.vy=42;boss.shot=0;
-  escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-22:22;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-10;});
+  escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-18:18;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-8;});
   logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2)});
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,squadron:1});
   for(const e of escorts)logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off,harness:1,squadron:1});

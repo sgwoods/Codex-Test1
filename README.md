@@ -191,7 +191,7 @@ After GitHub Pages deploys, play at:
   - capture/rescue markers such as capture start, fighter captured, and fighter rescued
   - rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire
   - carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points
-  - special attack squadron bonus metrics such as triggered count, total awarded bonus, and max escorts present
+  - special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset
   - dual-fire metrics such as average spread in the rescue scenario
   - descent-speed metrics such as time from attack start to lower-field crossing
   - whether the generated `.webm` contains audio
