@@ -47,6 +47,20 @@ window.__galagaHarness__={
   logEvent('harness_trigger_carried_boss_rescue_kill',{boss:boss.id});
   return true;
  },
+ triggerBossFirstHit(){
+  const boss=S.e.find(e=>e.hp>1&&e.t==='boss');
+  if(!boss)return false;
+  const hpBefore=boss.hp;
+  boss.hp--;
+  boss.hitT=.34;
+  logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
+  S.alertTxt='BOSS DAMAGED';
+  S.alertT=Math.max(S.alertT,.85);
+  ex(boss.x,boss.y,8,'#fff4a8');
+  sfx.bossHit();
+  logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
+  return true;
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
@@ -143,6 +157,17 @@ window.__galagaHarness__={
    boss.dive=0;boss.x=p.x;boss.y=186;
   }
   logEvent('harness_carried_fighter_setup',{boss:boss.id,attacking,playerX:+p.x.toFixed(2)});
+  return true;
+ },
+ setupBossFirstHitTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||1);S.stageClock=0;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=2;boss.max=2;boss.form=1;boss.dive=0;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;boss.hitT=0;
+  logEvent('harness_boss_first_hit_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
   return true;
  }
 };

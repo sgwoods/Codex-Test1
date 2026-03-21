@@ -168,6 +168,7 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario stage1-descent
   npm run harness -- --scenario rescue-dual
   npm run harness -- --scenario capture-rescue-dual
+  npm run harness -- --scenario boss-first-hit
   npm run harness -- --scenario second-capture-current
   npm run harness -- --scenario stage12-variety
   npm run harness -- --scenario stage4-squadron-bonus

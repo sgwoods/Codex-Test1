@@ -1,5 +1,5 @@
 // Enemy spawning, stage flow, combat, capture, and game-state updates.
-function makeEnemy(t,r,c,tx,ty,profile=stageBandProfile(S.stage,S.challenge)){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,fam:enemyFamilyForType(profile,t),band:profile.name,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,squadId:0,ch:0,miss:0,low:0};}
+function makeEnemy(t,r,c,tx,ty,profile=stageBandProfile(S.stage,S.challenge)){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,fam:enemyFamilyForType(profile,t),band:profile.name,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,squadId:0,ch:0,miss:0,low:0,hitT:0};}
 
 function familyMotion(e){
  switch(e?.fam){
@@ -321,6 +321,7 @@ function updateChallengeEnemy(e,dt){
 
 function updateEnemy(e,dt,t,T,p){
  if(e.hp<=0)return;
+ e.hitT=Math.max(0,(e.hitT||0)-dt);
  const cleanup=S.stage===1&&!S.challenge&&S.liveCount<=6;
  const fm=familyMotion(e);
  const pulseX=(S.stage>=8?28:S.stage>=4?34:38)*fm.pulseX,pulseY=(S.stage>=8?1.9:S.stage>=4?2.6:3.4)*fm.pulseY;
@@ -461,8 +462,19 @@ function update(dt){
    if(Math.abs(b.x-e.x)<h.w&&Math.abs(b.y-e.y)<h.h){
     S.stats.hits++;
     S.pb.splice(i,1);
+    const hpBefore=e.hp;
     e.hp--;
-    if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}else sfx.hit();
+    e.hitT=.34;
+    if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}
+    else{
+     logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+     if(e.t==='boss'&&hpBefore>e.hp){
+      S.alertTxt='BOSS DAMAGED';
+      S.alertT=Math.max(S.alertT,.85);
+      ex(e.x,e.y,8,'#fff4a8');
+      sfx.bossHit();
+     }else sfx.hit();
+    }
     break;
    }
   }

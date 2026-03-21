@@ -1,0 +1,15 @@
+{
+  "name": "boss-first-hit",
+  "seed": 21001,
+  "duration": 3,
+  "config": {
+    "stage": 1,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupBossFirstHitTest", "args": { "stage": 1, "playerX": 140, "bossX": 140, "bossY": 112 } },
+    { "t": 0.55, "action": "harness", "method": "triggerBossFirstHit" },
+    { "t": 1.4, "action": "harness", "method": "stop", "args": "boss-first-hit" }
+  ]
+}
