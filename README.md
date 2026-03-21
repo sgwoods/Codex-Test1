@@ -20,6 +20,13 @@ Release dashboard:
 - source data:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
 
+Project guide:
+
+- live page:
+  - `https://sgwoods.github.io/Codex-Test1/project-guide.html`
+- source data:
+  - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
+
 ## Live
 
 After GitHub Pages deploys, play at:
@@ -114,6 +121,10 @@ After GitHub Pages deploys, play at:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 - Product roadmap:
   - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+- Project guide source:
+  - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
+- Generated project guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.html`
 - Release history:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
 - Auto deploy workflow: `.github/workflows/pages.yml`

@@ -83,6 +83,7 @@ async function main(){
   ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, 'public/codex-test1.html date');
   ensureIncludes(projectHtml, expectedShaFragment, 'public/codex-test1.html build sha');
   ensureIncludes(projectHtml, 'release-dashboard.html', 'public/codex-test1.html dashboard link');
+  ensureIncludes(projectHtml, 'project-guide.html', 'public/codex-test1.html project guide link');
   if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/codex-test1.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
   if(manifest.project_id !== 'codex-test1') throw new Error(`Public sync verification failed for data/projects/codex-test1.json project_id: expected "codex-test1" got "${manifest.project_id}"`);
   if(manifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/codex-test1.json status_value: expected "${buildInfo.version}" got "${manifest.status_value}"`);
