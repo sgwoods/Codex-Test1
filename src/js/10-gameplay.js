@@ -400,7 +400,21 @@ function update(dt){
  if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()&&S.recoverT<=0&&!(S.stage>=4&&S.attackGapT>.18)&&!(S.stage===4&&S.stageClock<4.9)&&!(S.stage===5&&S.stageClock<2.8)){
   const bottoms={};for(const e of S.e)if(e.hp>0&&e.form&&!e.dive&&!e.ch){if(!bottoms[e.c]||e.y>bottoms[e.c].y)bottoms[e.c]=e}
   const list=Object.values(bottoms);
-  if(list.length){const q=list[(randUnit()*list.length)|0];fireEnemyBullet(q,rnd(2,-2),154+S.stage*4,'formation');S.fireCD=cleanup?rnd(.9,.45):rnd(T.globalA,T.globalB)-Math.min(.08,S.stage*.003)}else S.fireCD=.25;
+  if(list.length){
+   let pool=list;
+   let bulletVx=rnd(2,-2),bulletVy=154+S.stage*4;
+   if(S.stage===4&&S.stageClock<8.2){
+    // Early Stage 4 formation shots should pressure movement without coming
+    // straight down the player's current lane.
+    const offsetPool=list.filter(e=>Math.abs(e.x-p.x)>=26);
+    if(offsetPool.length)pool=offsetPool;
+    bulletVx=rnd(1.3,-1.3);
+    bulletVy-=8;
+   }
+   const q=pool[(randUnit()*pool.length)|0];
+   fireEnemyBullet(q,bulletVx,bulletVy,'formation');
+   S.fireCD=(cleanup?rnd(.9,.45):rnd(T.globalA,T.globalB)-Math.min(.08,S.stage*.003))+(S.stage===4&&S.stageClock<8.2?.28:0);
+  }else S.fireCD=.25;
  }
 
  for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
