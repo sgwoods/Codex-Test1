@@ -32,6 +32,10 @@ treated as visual/timing guidance rather than emulator-perfect internals.
    variants, which is one reason the original feels more scoreable.
 6. The groups feel visually discrete. You can read the `5 x 8` structure, even
    when not every enemy is on screen at once.
+7. The available reference material points toward challenge stages behaving as
+   non-lethal bonus rounds rather than active attack waves. We should treat any
+   future attempt to add player deaths during challenge stages as a
+   re-verification task, not an assumed fix.
 
 ## Current project gap
 

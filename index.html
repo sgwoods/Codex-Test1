@@ -106,9 +106,9 @@ canvas{display:block;width:100vw;height:100vh}
     <div id="testHint">Applies on next game start only.</div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.68.sha.11e4edd.dirty</span>
-    <span id="settingsRelease">Mar 20 2026, 9:59 PM EDT</span>
-    <span id="settingsState">main@11e4edd dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.69.sha.e8a723d.dirty</span>
+    <span id="settingsRelease">Mar 20 2026, 10:04 PM EDT</span>
+    <span id="settingsState">main@e8a723d dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -167,7 +167,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.68.sha.11e4edd.dirty',commit:'11e4eddbfec42712c74e361228934de81672d02c',branch:'main',dirty:true,released:'Mar 20 2026, 9:59 PM EDT',state:'main@11e4edd dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.69.sha.e8a723d.dirty',commit:'e8a723dd29c7394977c33e0c7ee0e141feaf565f',branch:'main',dirty:true,released:'Mar 20 2026, 10:04 PM EDT',state:'main@e8a723d dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1171,6 +1171,9 @@ function update(dt){
  }
 
  for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
+  // Reference note for #33: original Galaga challenge stages are treated as
+  // non-attacking/non-lethal bonus rounds, so player deaths remain disabled
+  // while S.challenge is active.
   if(!S.challenge&&p.spawn<=0&&!p.captured){const h=playerHitbox();if(Math.abs(b.x-p.x)<h.w&&Math.abs(b.y-p.y)<h.h){S.eb.splice(i,1);loseShip({cause:'enemy_bullet',bulletKind:b.kind||'unknown',sourceId:b.sourceId||null,sourceType:b.sourceType||null,sourceDive:b.sourceDive??null,bulletX:+b.x.toFixed(2),bulletY:+b.y.toFixed(2),bulletVx:+b.vx.toFixed(2),bulletVy:+b.vy.toFixed(2)});}}}
 
  if(!S.challenge){for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyForm:!!e.form});}}}

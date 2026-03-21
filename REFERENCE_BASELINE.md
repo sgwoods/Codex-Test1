@@ -53,6 +53,9 @@ For each fidelity topic:
   - `stage3-challenge`
   - challenge hit rate
   - average upper-band dwell time per target
+- Current rule note:
+  - challenge stages are currently treated as non-lethal bonus rounds, which
+    matches our present reading of the reference material for `#33`
 - Active gap:
   - visual and timing fidelity still not close enough to original Galaga
 
