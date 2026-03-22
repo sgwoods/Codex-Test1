@@ -219,6 +219,7 @@ function draw(){
 const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display=toolsVisible?'block':'none';
 if(leaderboardViews)leaderboardViews.style.display=(!started||paused)?'flex':'none';
+if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();

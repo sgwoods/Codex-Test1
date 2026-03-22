@@ -1,4 +1,10 @@
 // Shared leaderboard and Supabase client integration.
+const leaderboardPanel=document.getElementById('leaderboardPanel');
+const leaderboardPanelTitle=document.getElementById('leaderboardPanelTitle');
+const leaderboardPanelSub=document.getElementById('leaderboardPanelSub');
+const leaderboardPanelStatus=document.getElementById('leaderboardPanelStatus');
+const leaderboardPanelTable=document.getElementById('leaderboardPanelTable');
+const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
@@ -38,7 +44,8 @@ const LEADERBOARD={
   submitBusy:0,
  authBusy:0,
  primed:0,
- refreshTimer:0
+ refreshTimer:0,
+ panelOpen:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -118,6 +125,51 @@ function scheduleLeaderboardRefresh(){
 function setLeaderboardStatus(text){
  LEADERBOARD.status=String(text||'');
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
+ if(leaderboardPanelStatus)leaderboardPanelStatus.textContent=LEADERBOARD.status;
+}
+function renderLeaderboardPanel(){
+ if(!leaderboardPanel||!leaderboardPanelTable)return;
+ if(leaderboardPanelTitle)leaderboardPanelTitle.textContent='HIGH SCORES';
+ if(leaderboardPanelSub)leaderboardPanelSub.textContent=currentLeaderboardTitle();
+ const rows=leaderboardRowsForView(LEADERBOARD.view);
+ if(!rows.length){
+  leaderboardPanelTable.innerHTML='<div id="leaderboardPanelEmpty">No scores loaded for this view yet.</div>';
+  return;
+ }
+ const filled=rows.length?rows:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1,verified:0}));
+ const limited=filled.slice(0,10);
+ const body=[
+  '<span class="scoreCellHead">NO</span>',
+  '<span class="scoreCellHead">ID</span>',
+  '<span class="scoreCellHead" style="text-align:right">SCORE</span>',
+  '<span class="scoreCellHead" style="text-align:right">STG</span>'
+ ];
+ for(let i=0;i<10;i++){
+  const row=limited[i]||{initials:'---',score:0,stage:0,idx:i+1,verified:0};
+  body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
+  body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
+  body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
+  body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
+ }
+ leaderboardPanelTable.innerHTML=body.join('');
+}
+function syncLeaderboardPanelVisibility(){
+ if(!leaderboardPanel)return;
+ const show=!!LEADERBOARD.panelOpen&&(!started||paused);
+ leaderboardPanel.hidden=!show;
+ leaderboardPanel.classList.toggle('visible',show);
+}
+function openLeaderboardPanel(view=LEADERBOARD.view){
+ LEADERBOARD.panelOpen=1;
+ if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
+ else{
+  renderLeaderboardPanel();
+  syncLeaderboardPanelVisibility();
+ }
+}
+function closeLeaderboardPanel(){
+ LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
@@ -178,6 +230,8 @@ function syncLeaderboardUi(){
   btn.disabled=view==='mine'&&!signedIn;
  }
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
+ renderLeaderboardPanel();
+ syncLeaderboardPanelVisibility();
  syncAccountUi();
 }
 function syncLeaderboardBest(){
@@ -242,6 +296,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
 function setLeaderboardView(view){
  const next=['all','validated','local','mine'].includes(view)?view:'all';
  LEADERBOARD.view=next;
+ LEADERBOARD.panelOpen=1;
  localStorage.setItem(LEADERBOARD_PREF_KEY,next);
  if(next==='mine'&&!LEADERBOARD.user)setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
  else if(next==='local')setLeaderboardStatus(leaderboardStatusLabel(next,'local'));
@@ -448,8 +503,9 @@ async function initLeaderboard(){
 }
 
 for(const btn of leaderboardViewButtons){
- btn.addEventListener('click',()=>setLeaderboardView(btn.dataset.view||'all'));
+ btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
+if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);

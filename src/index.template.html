@@ -89,6 +89,17 @@
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
+  <div id="leaderboardPanel" aria-live="polite" hidden>
+    <div id="leaderboardPanelHead">
+      <div>
+        <span id="leaderboardPanelTitle">HIGH SCORES</span>
+        <span id="leaderboardPanelSub">TOP 10 PILOTS</span>
+      </div>
+      <button type="button" id="leaderboardPanelClose" aria-label="Close score panel">×</button>
+    </div>
+    <div id="leaderboardPanelStatus">Choose a score view to load scores.</div>
+    <div id="leaderboardPanelTable"></div>
+  </div>
   <div id="leaderboardViews" aria-label="Leaderboard view selector">
     <div id="leaderboardViewsHead">
       <span id="leaderboardViewsLabel">Score View</span>

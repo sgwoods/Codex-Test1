@@ -95,6 +95,23 @@ canvas{display:block;width:100vw;height:100vh}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
 #statusDock{position:fixed;right:14px;bottom:10px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#leaderboardPanel.visible{display:flex}
+#leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#leaderboardPanelTitle,#leaderboardPanelSub{display:block}
+#leaderboardPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#ff4b43}
+#leaderboardPanelSub{margin-top:4px;font:400 12px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;color:#dff7ff}
+#leaderboardPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#leaderboardPanelStatus{min-height:18px;color:rgba(218,236,255,.74);font:700 11px/1.3 "Courier New",Consolas,monospace}
+#leaderboardPanelTable{display:grid;grid-template-columns:44px minmax(48px,1fr) minmax(90px,1.2fr) 46px;gap:6px 10px;align-items:baseline}
+#leaderboardPanelTable .scoreCellHead{color:#dff7ff;font:700 12px/1 "Courier New",Consolas,monospace;letter-spacing:.08em}
+#leaderboardPanelTable .scoreCell{color:#f7fbff;font:400 13px/1.1 "Courier New",Consolas,monospace}
+#leaderboardPanelTable .scoreCell.rank{color:#f0f4ff}
+#leaderboardPanelTable .scoreCell.initials{letter-spacing:.08em}
+#leaderboardPanelTable .scoreCell.score{text-align:right}
+#leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
+#leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
+#leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
 #leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,360px);padding:10px 12px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
 #leaderboardViewsHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 #leaderboardViewsLabel{color:rgba(218,236,255,.68);text-transform:uppercase}
@@ -110,7 +127,7 @@ canvas{display:block;width:100vw;height:100vh}
 .k{color:var(--a)}
 @media (max-width:840px){
  #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}
- #leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}

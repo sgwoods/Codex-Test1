@@ -103,6 +103,23 @@ canvas{display:block;width:100vw;height:100vh}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
 #statusDock{position:fixed;right:14px;bottom:10px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#leaderboardPanel.visible{display:flex}
+#leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#leaderboardPanelTitle,#leaderboardPanelSub{display:block}
+#leaderboardPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#ff4b43}
+#leaderboardPanelSub{margin-top:4px;font:400 12px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;color:#dff7ff}
+#leaderboardPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#leaderboardPanelStatus{min-height:18px;color:rgba(218,236,255,.74);font:700 11px/1.3 "Courier New",Consolas,monospace}
+#leaderboardPanelTable{display:grid;grid-template-columns:44px minmax(48px,1fr) minmax(90px,1.2fr) 46px;gap:6px 10px;align-items:baseline}
+#leaderboardPanelTable .scoreCellHead{color:#dff7ff;font:700 12px/1 "Courier New",Consolas,monospace;letter-spacing:.08em}
+#leaderboardPanelTable .scoreCell{color:#f7fbff;font:400 13px/1.1 "Courier New",Consolas,monospace}
+#leaderboardPanelTable .scoreCell.rank{color:#f0f4ff}
+#leaderboardPanelTable .scoreCell.initials{letter-spacing:.08em}
+#leaderboardPanelTable .scoreCell.score{text-align:right}
+#leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
+#leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
+#leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
 #leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,360px);padding:10px 12px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
 #leaderboardViewsHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 #leaderboardViewsLabel{color:rgba(218,236,255,.68);text-transform:uppercase}
@@ -118,7 +135,7 @@ canvas{display:block;width:100vw;height:100vh}
 .k{color:var(--a)}
 @media (max-width:840px){
  #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}
- #leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
@@ -174,9 +191,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.110.sha.7b881f4.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 5:52 PM EDT</span>
-    <span id="settingsState">main@7b881f4 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.112.sha.de03351.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 6:02 PM EDT</span>
+    <span id="settingsState">main@de03351 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -207,6 +224,17 @@ canvas{display:block;width:100vw;height:100vh}
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
+  <div id="leaderboardPanel" aria-live="polite" hidden>
+    <div id="leaderboardPanelHead">
+      <div>
+        <span id="leaderboardPanelTitle">HIGH SCORES</span>
+        <span id="leaderboardPanelSub">TOP 10 PILOTS</span>
+      </div>
+      <button type="button" id="leaderboardPanelClose" aria-label="Close score panel">×</button>
+    </div>
+    <div id="leaderboardPanelStatus">Choose a score view to load scores.</div>
+    <div id="leaderboardPanelTable"></div>
+  </div>
   <div id="leaderboardViews" aria-label="Leaderboard view selector">
     <div id="leaderboardViewsHead">
       <span id="leaderboardViewsLabel">Score View</span>
@@ -221,8 +249,8 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.110.sha.7b881f4.dirty</span>
-    <span id="buildStampRelease">Mar 22 2026, 5:52 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.112.sha.de03351.dirty</span>
+    <span id="buildStampRelease">Mar 22 2026, 6:02 PM EDT</span>
   </div>
 </div>
 <script>
@@ -280,7 +308,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.110.sha.7b881f4.dirty',commit:'7b881f44f094d012334bde2bbe3a4c368c2d8229',branch:'main',dirty:true,released:'Mar 22 2026, 5:52 PM EDT',state:'main@7b881f4 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.112.sha.de03351.dirty',commit:'de033515d4848fa7b1efc3fcff1087f105e2e8c4',branch:'main',dirty:true,released:'Mar 22 2026, 6:02 PM EDT',state:'main@de03351 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -917,6 +945,12 @@ addEventListener('pointerdown',e=>{
 
 // Source: src/js/05-supabase.js
 // Shared leaderboard and Supabase client integration.
+const leaderboardPanel=document.getElementById('leaderboardPanel');
+const leaderboardPanelTitle=document.getElementById('leaderboardPanelTitle');
+const leaderboardPanelSub=document.getElementById('leaderboardPanelSub');
+const leaderboardPanelStatus=document.getElementById('leaderboardPanelStatus');
+const leaderboardPanelTable=document.getElementById('leaderboardPanelTable');
+const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
@@ -956,7 +990,8 @@ const LEADERBOARD={
   submitBusy:0,
  authBusy:0,
  primed:0,
- refreshTimer:0
+ refreshTimer:0,
+ panelOpen:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -1036,6 +1071,51 @@ function scheduleLeaderboardRefresh(){
 function setLeaderboardStatus(text){
  LEADERBOARD.status=String(text||'');
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
+ if(leaderboardPanelStatus)leaderboardPanelStatus.textContent=LEADERBOARD.status;
+}
+function renderLeaderboardPanel(){
+ if(!leaderboardPanel||!leaderboardPanelTable)return;
+ if(leaderboardPanelTitle)leaderboardPanelTitle.textContent='HIGH SCORES';
+ if(leaderboardPanelSub)leaderboardPanelSub.textContent=currentLeaderboardTitle();
+ const rows=leaderboardRowsForView(LEADERBOARD.view);
+ if(!rows.length){
+  leaderboardPanelTable.innerHTML='<div id="leaderboardPanelEmpty">No scores loaded for this view yet.</div>';
+  return;
+ }
+ const filled=rows.length?rows:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1,verified:0}));
+ const limited=filled.slice(0,10);
+ const body=[
+  '<span class="scoreCellHead">NO</span>',
+  '<span class="scoreCellHead">ID</span>',
+  '<span class="scoreCellHead" style="text-align:right">SCORE</span>',
+  '<span class="scoreCellHead" style="text-align:right">STG</span>'
+ ];
+ for(let i=0;i<10;i++){
+  const row=limited[i]||{initials:'---',score:0,stage:0,idx:i+1,verified:0};
+  body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
+  body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
+  body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
+  body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
+ }
+ leaderboardPanelTable.innerHTML=body.join('');
+}
+function syncLeaderboardPanelVisibility(){
+ if(!leaderboardPanel)return;
+ const show=!!LEADERBOARD.panelOpen&&(!started||paused);
+ leaderboardPanel.hidden=!show;
+ leaderboardPanel.classList.toggle('visible',show);
+}
+function openLeaderboardPanel(view=LEADERBOARD.view){
+ LEADERBOARD.panelOpen=1;
+ if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
+ else{
+  renderLeaderboardPanel();
+  syncLeaderboardPanelVisibility();
+ }
+}
+function closeLeaderboardPanel(){
+ LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
@@ -1096,6 +1176,8 @@ function syncLeaderboardUi(){
   btn.disabled=view==='mine'&&!signedIn;
  }
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
+ renderLeaderboardPanel();
+ syncLeaderboardPanelVisibility();
  syncAccountUi();
 }
 function syncLeaderboardBest(){
@@ -1160,6 +1242,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
 function setLeaderboardView(view){
  const next=['all','validated','local','mine'].includes(view)?view:'all';
  LEADERBOARD.view=next;
+ LEADERBOARD.panelOpen=1;
  localStorage.setItem(LEADERBOARD_PREF_KEY,next);
  if(next==='mine'&&!LEADERBOARD.user)setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
  else if(next==='local')setLeaderboardStatus(leaderboardStatusLabel(next,'local'));
@@ -1366,8 +1449,9 @@ async function initLeaderboard(){
 }
 
 for(const btn of leaderboardViewButtons){
- btn.addEventListener('click',()=>setLeaderboardView(btn.dataset.view||'all'));
+ btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
+if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
@@ -2212,6 +2296,7 @@ function draw(){
 const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display=toolsVisible?'block':'none';
 if(leaderboardViews)leaderboardViews.style.display=(!started||paused)?'flex':'none';
+if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
