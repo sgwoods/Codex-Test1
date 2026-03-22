@@ -358,7 +358,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.112.sha.de03351.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.114.sha.82a6879.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -1066,7 +1066,7 @@
 <p>matches our present reading of the reference material for <code>#33</code></p>
 <ul><li>Active gap:<ul><li>visual and timing fidelity still not close enough to original Galaga</li></ul></li></ul>
 <h4>Capture / Rescue / Dual Fighter</h4>
-<ul><li>Sources:<ul><li>manual</li><li>gameplay footage</li></ul></li><li>Current metrics:<ul><li><code>rescue-dual</code></li><li><code>capture-rescue-dual</code></li><li><code>carried-boss-diving-release</code></li><li><code>carried-boss-formation-hostile</code></li><li><code>second-capture-current</code></li><li><code>natural-capture-cycle</code></li><li><code>stage4-capture-pressure</code></li><li>carried-fighter scoring scenarios</li></ul></li><li>Active gaps:<ul><li>remaining rescue usefulness / edge-case fidelity</li><li>Stage 4-specific capture pressure still needs stronger measurement and tuning</li><li>manual-backed confidence is currently strongest for:<ul><li>killing the boss while it is attacking recovers dual fighters</li><li>shooting the carried fighter itself destroys it for points</li></ul></li><li>current implementation now follows that attacking-boss branch more directly:<ul><li>diving boss kill releases the captured fighter into an automatic rejoin path</li><li>in-formation boss kill spawns an immediate hostile captured fighter branch</li></ul></li><li>the exact hostile / in-formation branch still needs stronger primary-source confirmation against original gameplay footage or emulator capture</li></ul></li></ul>
+<ul><li>Sources:<ul><li>manual</li><li>gameplay footage</li><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md</code></li></ul></li><li>Current metrics:<ul><li><code>rescue-dual</code></li><li><code>capture-rescue-dual</code></li><li><code>carried-boss-diving-release</code></li><li><code>carried-boss-formation-hostile</code></li><li><code>second-capture-current</code></li><li><code>natural-capture-cycle</code></li><li><code>stage4-capture-pressure</code></li><li>carried-fighter scoring scenarios</li></ul></li><li>Active gaps:<ul><li>remaining rescue usefulness / edge-case fidelity</li><li>Stage 4-specific capture pressure still needs stronger measurement and tuning</li><li>manual-backed confidence is currently strongest for:<ul><li>killing the boss while it is attacking recovers dual fighters</li><li>shooting the carried fighter itself destroys it for points</li></ul></li><li>current implementation now follows that attacking-boss branch more directly:<ul><li>diving boss kill releases the captured fighter into an automatic rejoin path</li><li>in-formation boss kill spawns an immediate hostile captured fighter branch</li></ul></li><li>the exact hostile / in-formation branch still needs stronger primary-source confirmation against original gameplay footage or emulator capture</li></ul></li></ul>
 <h4>Post-1.0 Scoring / Special Pattern Research</h4>
 <ul><li>Sources:<ul><li>manual</li><li>original gameplay footage</li><li>future emulator captures</li></ul></li><li>Current state:<ul><li>special attack squadron bonus logic exists, but we do not yet have enough</li></ul></li></ul>
 <p>evidence to claim original-accurate timing/composition for the bonus-yielding three-fighter attack clusters seen in regular play</p>
@@ -1078,7 +1078,7 @@
 <h4>Later-Stage Variety</h4>
 <ul><li>Sources:<ul><li>walkthrough notes</li><li>later gameplay footage</li></ul></li><li>Current metrics:<ul><li><code>stage12-variety</code></li><li>stage profile / family logging</li></ul></li><li>Current state:<ul><li>first stage-band pass is in</li><li>deeper transform / family fidelity is still follow-up work</li></ul></li></ul>
 <h4>Later-Stage Survivability</h4>
-<ul><li>Sources:<ul><li>original gameplay footage</li><li>our harness diagnostics</li><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md</code></li></ul></li><li>Current metrics:<ul><li><code>stage4-five-ships</code></li><li><code>stage4-survival</code></li></ul></li><li>Active gap:<ul><li>later-stage collision fairness and progression depth</li></ul></li></ul>
+<ul><li>Sources:<ul><li>original gameplay footage</li><li>our harness diagnostics</li><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md</code></li></ul></li><li>Current metrics:<ul><li><code>stage4-five-ships</code></li><li><code>stage4-survival</code></li></ul></li><li>Active gap:<ul><li>later-stage collision fairness and progression depth</li></ul></li></ul>
 <h4>External Implementation References</h4>
 <ul><li>These are architecture/presentation references, not original-Galaga rules</li></ul>
 <p>sources.</p>
@@ -1088,6 +1088,8 @@
 <ol><li>Emulator-derived captures and timing notes</li><li>Curated reference clips by system:</li></ol>
 <ul><li>first challenge stage</li><li>first capture</li><li>first rescue</li><li>later-stage pressure</li></ul>
 <ol><li>Issue-by-issue reference mapping so open fidelity issues point directly at evidence</li></ol>
+<p>Current focused release pack:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md</code></li></ul>
 <h3>Collaboration Rule</h3>
 <p>When a gameplay-fidelity issue is opened or worked, it should eventually point back to at least one entry in this document or to a durable source under:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/</code></li></ul>
@@ -1234,7 +1236,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Capture clarity, boss feedback, and 1.0 release focus</strong><br>
-          Build: 0.5.0-alpha.1+build.112.sha.de03351.dirty
+          Build: 0.5.0-alpha.1+build.114.sha.82a6879.dirty
         </p>
       </aside>
     </main>

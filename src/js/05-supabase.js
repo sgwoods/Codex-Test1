@@ -58,6 +58,9 @@ function normalizeRemoteScoreRow(row){
   verified:!!row?.is_verified
  };
 }
+function preferredInitialsFromUser(user=LEADERBOARD.user){
+ return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||'').slice(0,3);
+}
 function localLeaderboardRows(){
  return loadScoreboard().map(row=>Object.assign({verified:0},row));
 }
@@ -176,7 +179,7 @@ function buildStartAccountPrompt(){
  const pending=LEADERBOARD.configured===null;
  const signedIn=!!LEADERBOARD.user;
  const verified=!!LEADERBOARD.user?.email_confirmed_at;
- const initials=sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3);
+ const initials=preferredInitialsFromUser();
  if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
  if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
  if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
@@ -196,7 +199,7 @@ function syncAccountUi(){
  if(accountPassword)accountPassword.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
  if(accountInitials){
   accountInitials.disabled=!configured||pending||LEADERBOARD.authBusy||!signedIn;
-  if(document.activeElement!==accountInitials)accountInitials.value=signedIn?sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3):'';
+  if(document.activeElement!==accountInitials)accountInitials.value=signedIn?preferredInitialsFromUser():'';
  }
  if(accountSummary){
   if(pending)accountSummary.textContent='Connecting leaderboard...';
@@ -214,7 +217,7 @@ function syncAccountUi(){
   }
  }
  if(pilotStamp){
-  const initials=sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3);
+  const initials=preferredInitialsFromUser();
   const show=signedIn&&initials;
   const verifiedClass=signedIn&&verified;
   pilotStamp.hidden=!show;
@@ -242,7 +245,14 @@ function syncLeaderboardBest(){
 }
 async function loadOwnProfile(){
  if(!LEADERBOARD.client||!LEADERBOARD.user){LEADERBOARD.profile=null;return null;}
- const {data}=await LEADERBOARD.client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',LEADERBOARD.user.id).maybeSingle();
+ let {data}=await LEADERBOARD.client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',LEADERBOARD.user.id).maybeSingle();
+ if(!data){
+  const initials=preferredInitialsFromUser(LEADERBOARD.user);
+  if(initials){
+   const seeded=await LEADERBOARD.client.from('profiles').upsert({user_id:LEADERBOARD.user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
+   if(!seeded.error)data=seeded.data||null;
+  }
+ }
  LEADERBOARD.profile=data||null;
  syncAccountUi();
  return LEADERBOARD.profile;
@@ -379,13 +389,21 @@ async function signUpAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy)return;
  const email=String(accountEmail?.value||'').trim();
  const password=String(accountPassword?.value||'');
+ const initials=sanitizeInitials(accountInitials?.value||'').slice(0,3);
  if(!email||!password){
   if(accountSummary)accountSummary.textContent='Enter an email and password first.';
   return;
  }
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.auth.signUp({email,password,options:{emailRedirectTo:authRedirectUrl()}});
+ const {error}=await LEADERBOARD.client.auth.signUp({
+  email,
+  password,
+  options:{
+   emailRedirectTo:authRedirectUrl(),
+   data:initials?{display_initials:initials}:{}
+  }
+ });
  LEADERBOARD.authBusy=0;
  if(error){
   if(accountSummary)accountSummary.textContent=`Signup failed: ${error.message}`;
@@ -430,13 +448,17 @@ async function saveAccountInitials(){
  const initials=sanitizeInitials(accountInitials?.value||'').padEnd(3,'-').slice(0,3);
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {data,error}=await LEADERBOARD.client.from('profiles').upsert({user_id:LEADERBOARD.user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
+ const [{data,error},metaResult]=await Promise.all([
+  LEADERBOARD.client.from('profiles').upsert({user_id:LEADERBOARD.user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle(),
+  LEADERBOARD.client.auth.updateUser({data:{display_initials:initials}})
+ ]);
  LEADERBOARD.authBusy=0;
  if(error){
   if(accountSummary)accountSummary.textContent=`Could not save initials: ${error.message}`;
   syncAccountUi();
   return;
  }
+ if(metaResult?.data?.user)LEADERBOARD.user=metaResult.data.user;
  LEADERBOARD.profile=data||{user_id:LEADERBOARD.user.id,display_initials:initials};
  if(accountSummary)accountSummary.textContent=`Saved display initials ${initials}.`;
  syncAccountUi();
