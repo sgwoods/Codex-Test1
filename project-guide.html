@@ -55,6 +55,13 @@
       overflow:hidden;
       position:relative;
     }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
     .eyebrow{
       display:inline-flex;
       align-items:center;
@@ -66,6 +73,19 @@
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
     }
     h1{
       margin:18px 0 10px;
@@ -328,14 +348,17 @@
 <main class="shell">
       <div class="main">
         <section class="hero">
-          <span class="eyebrow">Project Guide</span>
+          <div class="heroTop">
+            <span class="eyebrow">Project Guide</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
+          </div>
           <h1>Neo Galaga Tribute Project Guide</h1>
           <p>A readable, current map of the project: what we are building, how the code and tooling fit together, and what still matters before the four-stage 1.0 release.</p>
           <div class="goal"><strong>Current goal:</strong> Ship a polished four-stage 1.0 slice: Stage 1, Stage 2, Stage 3 challenge, and a fair Stage 4 finish.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.106.sha.8896e5c.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.107.sha.6c92bac.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -861,9 +884,9 @@
 <p>Target outcome:</p>
 <ul><li>Strong Stage 1 through Stage 4 feel</li><li>Stable Stage 3 challenge stage</li><li>Capture/rescue behavior feels useful and understandable</li><li>High-score/results/release flow feels shippable</li></ul>
 <p>Key issue groups:</p>
-<ul><li>Gameplay tuning<ul><li><code>#4</code> Stage 1 fidelity</li><li><code>#9</code> challenge-stage fidelity</li><li><code>#18</code> Stage 4 survivability</li><li><code>#32</code> Stage 2 opening pressure / spacing feel</li></ul></li><li>Current Modem-driven follow-up work inside the same milestone<ul><li><code>#35</code> capture-driven life-loss accounting in self-play summaries</li><li><code>#38</code> ship-hit explosion / sound / post-hit pause feel</li><li><code>#39</code> repeated fighter capture behavior within a stage</li></ul></li><li>Manual-backed arcade rules<ul><li><code>#14</code> second captured-fighter behavior research</li></ul></li><li>Capture/rescue rules<ul><li>remaining rescue usefulness / clarity polish</li></ul></li><li>Manual-backed visible arcade moments<ul><li>ensure the Stage 4+ three-ship boss squadron appears naturally in regular</li></ul></li></ul>
+<ul><li>Gameplay tuning<ul><li><code>#4</code> Stage 1 fidelity</li><li><code>#9</code> challenge-stage fidelity</li><li><code>#18</code> Stage 4 survivability</li><li><code>#32</code> Stage 2 opening pressure / spacing feel</li></ul></li><li>Current Modem-driven follow-up work inside the same milestone<ul><li><code>#35</code> capture-driven life-loss accounting in self-play summaries</li><li><code>#38</code> ship-hit explosion / sound / post-hit pause feel</li><li><code>#39</code> repeated fighter capture behavior within a stage</li></ul></li><li>Manual-backed arcade rules<ul><li><code>#14</code> second captured-fighter behavior research</li></ul></li><li>Capture/rescue rules<ul><li>remaining rescue usefulness / clarity polish</li><li>make the rescue pod / pickup marker more prominent so the rescue target reads clearly in live play</li></ul></li><li>Manual-backed visible arcade moments<ul><li>ensure the Stage 4+ three-ship boss squadron appears naturally in regular</li></ul></li></ul>
 <p>gameplay and shows its bonus clearly during the four-stage slice</p>
-<ul><li>Product polish<ul><li><code>#31</code> release date display refinement</li><li>high-score/results/initials polish as needed</li><li>move the temporary settings/account panel toward a more centered overlay or otherwise reposition it so long forms are not obscured at the bottom of the playfield</li></ul></li></ul>
+<ul><li>Product polish<ul><li><code>#31</code> release date display refinement</li><li>high-score/results/initials polish as needed</li><li>move the temporary settings/account panel toward a more centered overlay or otherwise reposition it so long forms are not obscured at the bottom of the playfield</li><li>add a clearer visible playfield frame and tighten the integrated status / score-view HUD treatment</li></ul></li></ul>
 <p>Suggested versioning:</p>
 <ul><li>stay on <code>0.5.x-alpha</code></li></ul>
 <p>Execution model:</p>
@@ -1209,7 +1232,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Capture clarity, boss feedback, and 1.0 release focus</strong><br>
-          Build: 0.5.0-alpha.1+build.106.sha.8896e5c.dirty
+          Build: 0.5.0-alpha.1+build.107.sha.6c92bac.dirty
         </p>
       </aside>
     </main>

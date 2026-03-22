@@ -10,6 +10,7 @@
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="playfieldFrame" aria-hidden="true"></div>
 <div id="hud"><div id="left"></div><div id="right"></div></div>
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
@@ -87,20 +88,24 @@
   </div>
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
-<div id="leaderboardViews" aria-label="Leaderboard view selector">
-  <span id="leaderboardViewsLabel">Scores</span>
-  <div id="leaderboardViewButtons">
-    <button type="button" data-view="all">All</button>
-    <button type="button" data-view="validated">Validated</button>
-    <button type="button" data-view="local">Local</button>
-    <button type="button" data-view="mine">My Scores</button>
+<div id="statusDock">
+  <div id="leaderboardViews" aria-label="Leaderboard view selector">
+    <div id="leaderboardViewsHead">
+      <span id="leaderboardViewsLabel">Score View</span>
+      <span id="leaderboardStatus">Local fallback</span>
+    </div>
+    <div id="leaderboardViewButtons">
+      <button type="button" data-view="all">All</button>
+      <button type="button" data-view="validated">Validated</button>
+      <button type="button" data-view="local">Local</button>
+      <button type="button" data-view="mine">My Scores</button>
+    </div>
   </div>
-  <span id="leaderboardStatus">Local fallback</span>
-</div>
-<div id="buildStamp" aria-hidden="true">
-  <span id="pilotStamp" hidden>Pilot ---</span>
-  <span id="buildStampVersion">Version {{BUILD_LABEL}}</span>
-  <span id="buildStampRelease">{{BUILD_RELEASE_ET}}</span>
+  <div id="buildStamp">
+    <span id="pilotStamp" hidden>Pilot ---</span>
+    <span id="buildStampVersion">Version {{BUILD_LABEL}}</span>
+    <span id="buildStampRelease">{{BUILD_RELEASE_ET}}</span>
+  </div>
 </div>
 <script>
 {{INLINE_VENDOR_SCRIPT}}

@@ -54,6 +54,7 @@ Key issue groups:
   - `#14` second captured-fighter behavior research
 - Capture/rescue rules
   - remaining rescue usefulness / clarity polish
+  - make the rescue pod / pickup marker more prominent so the rescue target reads clearly in live play
 - Manual-backed visible arcade moments
   - ensure the Stage 4+ three-ship boss squadron appears naturally in regular
     gameplay and shows its bonus clearly during the four-stage slice
@@ -61,6 +62,7 @@ Key issue groups:
   - `#31` release date display refinement
   - high-score/results/initials polish as needed
   - move the temporary settings/account panel toward a more centered overlay or otherwise reposition it so long forms are not obscured at the bottom of the playfield
+  - add a clearer visible playfield frame and tighten the integrated status / score-view HUD treatment
 
 Suggested versioning:
 

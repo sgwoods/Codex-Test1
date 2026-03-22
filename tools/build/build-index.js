@@ -144,6 +144,13 @@ function dashboardStyles(){
         radial-gradient(circle at 20% 0%, rgba(103,230,168,0.14), transparent 32%);
       box-shadow:var(--shadow);
     }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
     .eyebrow{
       display:inline-flex;
       align-items:center;
@@ -155,6 +162,19 @@ function dashboardStyles(){
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
     }
     h1{
       margin:18px 0 10px;
@@ -364,6 +384,13 @@ function projectGuideStyles(){
       overflow:hidden;
       position:relative;
     }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
     .eyebrow{
       display:inline-flex;
       align-items:center;
@@ -375,6 +402,19 @@ function projectGuideStyles(){
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
     }
     h1{
       margin:18px 0 10px;
@@ -660,7 +700,10 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
   const body = `
     <main class="shell">
       <section class="hero">
-        <span class="eyebrow">Release Dashboard</span>
+        <div class="heroTop">
+          <span class="eyebrow">Release Dashboard</span>
+          <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
+        </div>
         <h1>Neo Galaga Tribute</h1>
         <p>${esc(dashboard.strapline || '')}</p>
         <div class="meta">
@@ -857,7 +900,10 @@ function buildProjectGuide(buildInfo, latestNote, guide){
     <main class="shell">
       <div class="main">
         <section class="hero">
-          <span class="eyebrow">Project Guide</span>
+          <div class="heroTop">
+            <span class="eyebrow">Project Guide</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
+          </div>
           <h1>${esc(guide.title || 'Project Guide')}</h1>
           <p>${esc(guide.strapline || '')}</p>
           <div class="goal"><strong>Current goal:</strong> ${esc(guide.currentGoal || '')}</div>
@@ -988,8 +1034,8 @@ function build(){
   fs.writeFileSync(DASHBOARD_OUT, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
   fs.writeFileSync(PROJECT_GUIDE_OUT, buildProjectGuide(buildInfo, latestNote, projectGuide));
   fs.writeFileSync(BUILD_INFO_OUT, JSON.stringify(buildInfo, null, 2) + '\n');
-  return OUT;
+  return [OUT, DASHBOARD_OUT, PROJECT_GUIDE_OUT, BUILD_INFO_OUT];
 }
 
-const out = build();
-console.log(`Built ${out}`);
+const outputs = build();
+for(const out of outputs)console.log(`Built ${out}`);

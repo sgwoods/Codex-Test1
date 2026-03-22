@@ -10,6 +10,9 @@
 :root{--fg:#f4f7ff;--a:#74e6ff}
 html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:"Courier New",Consolas,monospace;color:var(--fg)}
 canvas{display:block;width:100vw;height:100vh}
+#playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;border:1px solid rgba(122,195,255,.38);box-shadow:0 0 0 1px rgba(10,25,42,.92),0 0 24px rgba(76,156,255,.08),inset 0 0 0 1px rgba(255,222,134,.1)}
+#playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.05);pointer-events:none}
+#playfieldFrame::after{inset:auto 10px 10px;top:14px;border-top:none;border-color:rgba(255,214,104,.12)}
 #hud{position:fixed;inset:0;pointer-events:none;display:flex;justify-content:space-between;padding:10px 16px;font-size:clamp(16px,1.25vw,24px);font-weight:700;letter-spacing:.02em;text-shadow:0 0 6px #000}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
@@ -69,12 +72,12 @@ canvas{display:block;width:100vw;height:100vh}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
-#settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.25;color:rgba(218,236,255,.58);letter-spacing:.03em}
+#settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsVersion,#settingsRelease,#settingsState{display:block}
 #settingsNotes{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
-#settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff}
-#settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72)}
+#settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
+#settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72);overflow-wrap:anywhere;word-break:break-word}
 #feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
 #feedbackModal.open{display:flex}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
@@ -99,22 +102,33 @@ canvas{display:block;width:100vw;height:100vh}
 #accountInitialsRow input{width:90px;text-transform:uppercase}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
-#leaderboardViews{position:fixed;left:14px;bottom:12px;z-index:20;display:none;align-items:center;gap:10px;flex-wrap:wrap;max-width:min(88vw,620px);padding:8px 10px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff}
-#leaderboardViewsLabel{color:rgba(218,236,255,.6);text-transform:uppercase}
-#leaderboardViewButtons{display:flex;gap:6px;flex-wrap:wrap}
-#leaderboardViewButtons button{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.7);color:#dff7ff;padding:6px 8px;font:700 11px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#statusDock{position:fixed;right:14px;bottom:10px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,360px);padding:10px 12px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
+#leaderboardViewsHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+#leaderboardViewsLabel{color:rgba(218,236,255,.68);text-transform:uppercase}
+#leaderboardViewButtons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+#leaderboardViewButtons button{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.7);color:#dff7ff;padding:6px 8px;font:700 11px/1 "Courier New",Consolas,monospace;cursor:pointer;min-width:72px}
 #leaderboardViewButtons button.active{border-color:rgba(255,216,109,.72);color:#ffd86d;background:rgba(60,44,8,.72)}
 #leaderboardViewButtons button[disabled]{opacity:.5;cursor:default}
-#leaderboardStatus{color:rgba(218,236,255,.68)}
-#buildStamp{position:fixed;right:14px;bottom:10px;z-index:12;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px;font:400 10px/1.2 "Courier New",Consolas,monospace;letter-spacing:.03em;color:rgba(218,236,255,.42);text-align:right;text-shadow:0 0 6px rgba(0,0,0,.92)}
-#pilotStamp{display:block;margin-bottom:4px;font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(126,242,255,.82)}
+#leaderboardStatus{color:rgba(218,236,255,.68);text-align:right;max-width:170px;line-height:1.3}
+#buildStamp{pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:min(100%,360px);padding:8px 10px 10px;border:1px solid rgba(136,245,255,.14);background:linear-gradient(180deg,rgba(8,18,35,.28),rgba(5,12,24,.62));font:400 10px/1.3 "Courier New",Consolas,monospace;letter-spacing:.03em;color:rgba(218,236,255,.52);text-align:right;text-shadow:0 0 6px rgba(0,0,0,.92)}
+#pilotStamp{display:block;margin-bottom:3px;padding:4px 8px;border:1px solid rgba(126,242,255,.24);background:rgba(7,22,36,.78);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(126,242,255,.9);max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #pilotStamp.verified::before{content:'🔒 ';font-size:11px;vertical-align:baseline}
-#buildStampVersion,#buildStampRelease{display:block}
+#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 .k{color:var(--a)}
+@media (max-width:840px){
+ #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}
+ #leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #leaderboardViewsHead{align-items:flex-start}
+ #leaderboardViewButtons{justify-content:flex-start}
+ #leaderboardStatus,#buildStamp{text-align:left}
+ #buildStamp{align-items:flex-start}
+}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="playfieldFrame" aria-hidden="true"></div>
 <div id="hud"><div id="left"></div><div id="right"></div></div>
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
@@ -160,9 +174,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.106.sha.8896e5c.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 4:50 PM EDT</span>
-    <span id="settingsState">main@8896e5c dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.107.sha.6c92bac.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 5:08 PM EDT</span>
+    <span id="settingsState">main@6c92bac dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -192,20 +206,24 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
-<div id="leaderboardViews" aria-label="Leaderboard view selector">
-  <span id="leaderboardViewsLabel">Scores</span>
-  <div id="leaderboardViewButtons">
-    <button type="button" data-view="all">All</button>
-    <button type="button" data-view="validated">Validated</button>
-    <button type="button" data-view="local">Local</button>
-    <button type="button" data-view="mine">My Scores</button>
+<div id="statusDock">
+  <div id="leaderboardViews" aria-label="Leaderboard view selector">
+    <div id="leaderboardViewsHead">
+      <span id="leaderboardViewsLabel">Score View</span>
+      <span id="leaderboardStatus">Local fallback</span>
+    </div>
+    <div id="leaderboardViewButtons">
+      <button type="button" data-view="all">All</button>
+      <button type="button" data-view="validated">Validated</button>
+      <button type="button" data-view="local">Local</button>
+      <button type="button" data-view="mine">My Scores</button>
+    </div>
   </div>
-  <span id="leaderboardStatus">Local fallback</span>
-</div>
-<div id="buildStamp" aria-hidden="true">
-  <span id="pilotStamp" hidden>Pilot ---</span>
-  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.106.sha.8896e5c.dirty</span>
-  <span id="buildStampRelease">Mar 22 2026, 4:50 PM EDT</span>
+  <div id="buildStamp">
+    <span id="pilotStamp" hidden>Pilot ---</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.107.sha.6c92bac.dirty</span>
+    <span id="buildStampRelease">Mar 22 2026, 5:08 PM EDT</span>
+  </div>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -262,7 +280,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.106.sha.8896e5c.dirty',commit:'8896e5cf603ea9751abc3fe0dbce4e5900360ab1',branch:'main',dirty:true,released:'Mar 22 2026, 4:50 PM EDT',state:'main@8896e5c dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.107.sha.6c92bac.dirty',commit:'6c92bac539aa21b6f04af40e74a6a8133017bf3b',branch:'main',dirty:true,released:'Mar 22 2026, 5:08 PM EDT',state:'main@6c92bac dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1840,6 +1858,7 @@ function update(dt){
 
 // Source: src/js/20-render.js
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
+const playfieldFrame=document.getElementById('playfieldFrame');
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -2003,6 +2022,13 @@ function draw(){
  const scale=S.ultra?fit:Math.max(1,fit-1);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
  const ox=Math.floor((innerWidth-viewW)/2),oy=Math.floor((innerHeight-viewH)/2);
+ if(playfieldFrame){
+  playfieldFrame.style.display='block';
+  playfieldFrame.style.left=`${ox-2}px`;
+  playfieldFrame.style.top=`${oy-2}px`;
+  playfieldFrame.style.width=`${viewW+4}px`;
+  playfieldFrame.style.height=`${viewH+4}px`;
+ }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);

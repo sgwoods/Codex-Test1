@@ -1,4 +1,5 @@
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
+const playfieldFrame=document.getElementById('playfieldFrame');
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -162,6 +163,13 @@ function draw(){
  const scale=S.ultra?fit:Math.max(1,fit-1);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
  const ox=Math.floor((innerWidth-viewW)/2),oy=Math.floor((innerHeight-viewH)/2);
+ if(playfieldFrame){
+  playfieldFrame.style.display='block';
+  playfieldFrame.style.left=`${ox-2}px`;
+  playfieldFrame.style.top=`${oy-2}px`;
+  playfieldFrame.style.width=`${viewW+4}px`;
+  playfieldFrame.style.height=`${viewH+4}px`;
+ }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);

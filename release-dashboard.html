@@ -45,6 +45,13 @@
         radial-gradient(circle at 20% 0%, rgba(103,230,168,0.14), transparent 32%);
       box-shadow:var(--shadow);
     }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
     .eyebrow{
       display:inline-flex;
       align-items:center;
@@ -56,6 +63,19 @@
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
     }
     h1{
       margin:18px 0 10px;
@@ -215,7 +235,10 @@
 <body>
 <main class="shell">
       <section class="hero">
-        <span class="eyebrow">Release Dashboard</span>
+        <div class="heroTop">
+          <span class="eyebrow">Release Dashboard</span>
+          <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
+        </div>
         <h1>Neo Galaga Tribute</h1>
         <p>A compact, shippable Galaga tribute with a fair Stage 4 finish, a rewarding challenge stage, and release-ready presentation.</p>
         <div class="meta">
@@ -229,7 +252,7 @@
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Build</span>
-            <span class="metaValue">0.5.0-alpha.1+build.106.sha.8896e5c.dirty</span>
+            <span class="metaValue">0.5.0-alpha.1+build.107.sha.6c92bac.dirty</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
