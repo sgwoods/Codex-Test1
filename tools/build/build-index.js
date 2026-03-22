@@ -11,6 +11,7 @@ const TEMPLATE = path.join(SRC, 'index.template.html');
 const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
 const STYLES = path.join(SRC, 'styles.css');
+const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
@@ -936,6 +937,8 @@ function build(){
     title: 'No release notes yet',
     summary: 'This build has stamped identity, but no human-written note has been added yet.'
   };
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://iddyodcknmxupavnuuwg.supabase.co';
+  const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || 'sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_LABEL: buildLabel,
@@ -944,9 +947,14 @@ function build(){
     BUILD_DIRTY: buildDirty ? 'true' : 'false',
     BUILD_RELEASE_ET: buildReleaseEt,
     BUILD_STATE: buildState,
+    SUPABASE_URL: supabaseUrl,
+    SUPABASE_ANON_KEY: supabaseAnonKey,
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary
   };
+  const vendorScript = fs.existsSync(SUPABASE_UMD)
+    ? read(SUPABASE_UMD)
+    : 'window.supabase = window.supabase || null;';
   const script = fs.readdirSync(SCRIPT_DIR)
     .filter(file => file.endsWith('.js'))
     .sort()
@@ -958,6 +966,7 @@ function build(){
 
   const html = fillBuildTokens(template, tokens)
     .replace('{{INLINE_STYLES}}', `/* Generated from src/styles.css */\n${styles}`)
+    .replace('{{INLINE_VENDOR_SCRIPT}}', `/* Generated from @supabase/supabase-js */\n${vendorScript}`)
     .replace('{{INLINE_SCRIPT}}', `// Generated from src/js/*.js\n${builtScript}`);
 
   const buildInfo = {
@@ -971,6 +980,7 @@ function build(){
     dirtyFiles: buildDirtyFiles,
     builtAtUtc: buildUtc,
     builtAtEt: buildReleaseEt,
+    supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
     latestReleaseNote: latestNote
   };
 

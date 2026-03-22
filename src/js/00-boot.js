@@ -39,6 +39,7 @@ const RECORD_PREF_KEY='galagaTribAutoVideo';
 const TEST_PREF_KEY='galagaTribTestCfg';
 const SEED_PREF_KEY='galagaTribHarnessSeed';
 const SCOREBOARD_KEY='galagaTribTop10';
+const LEADERBOARD_PREF_KEY='galagaTribLeaderboardView';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
 let settingsOpen=0;
 const PLAY_W=280,PLAY_H=360;
@@ -235,9 +236,11 @@ function saveGameOverInitials(){
 function buildGameOverHtmlFromState(){
  if(!gameOverState)return '';
  if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage);
- const board=loadScoreboard();
- const rows=board.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String(i+1).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
+ const board=leaderboardRowsForView();
+ const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
+ const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
  const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
+ const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
@@ -245,12 +248,13 @@ function buildGameOverHtmlFromState(){
   entryHtml=`<span class="gameOverEntry">ENTER INITIALS ${shown}</span>`;
   footHtml='<span class="gameOverFoot"><span class="k">Left/Right</span> move, <span class="k">Up/Down</span> change, type letters, <span class="k">Enter</span> to save</span>';
  }
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">TOP 10 PILOTS   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
- const board=loadScoreboard();
+ const board=leaderboardRowsForView();
+ const boardTitle=currentLeaderboardTitle();
  const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
- return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">TOP 10 PILOTS</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
+ return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
 function buildGameOverState(score,stage){
  const res=recordScore(score,stage);
@@ -264,7 +268,8 @@ function buildGameOverState(score,stage){
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
   initials:['Y','O','U'],
   cursor:0,
-  editing
+  editing,
+  remoteSubmitted:0
  };
 }
 function resetAttractBackdrop(){
@@ -581,6 +586,7 @@ addEventListener('keydown',e=>{
    if(e.code==='Enter'){
     e.preventDefault();
     gameOverState.phase='scoreboard';
+    if(!gameOverState.editing)submitGameOverScore();
     gameOverHtml=buildGameOverHtmlFromState();
    }
    return;
@@ -591,6 +597,7 @@ addEventListener('keydown',e=>{
    e.preventDefault();
    saveGameOverInitials();
    gameOverState.editing=0;
+   submitGameOverScore();
    sfx.uiConfirm();
    gameOverHtml=buildGameOverHtmlFromState();
    return;
@@ -637,7 +644,10 @@ addEventListener('keydown',e=>{
    return;
   }
  }
- if(!started&&e.code==='Enter'){stopAttractLoop();start();}
+ if(!started&&e.code==='Enter'){
+  if(gameOverState&&!gameOverState.editing)submitGameOverScore();
+  stopAttractLoop();start();
+ }
  if(started&&e.code==='KeyP')paused=!paused;
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
