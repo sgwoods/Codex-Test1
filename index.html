@@ -106,6 +106,8 @@ canvas{display:block;width:100vw;height:100vh}
 #leaderboardViewButtons button[disabled]{opacity:.5;cursor:default}
 #leaderboardStatus{color:rgba(218,236,255,.68)}
 #buildStamp{position:fixed;right:14px;bottom:10px;z-index:12;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px;font:400 10px/1.2 "Courier New",Consolas,monospace;letter-spacing:.03em;color:rgba(218,236,255,.42);text-align:right;text-shadow:0 0 6px rgba(0,0,0,.92)}
+#pilotStamp{display:block;margin-bottom:4px;font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(126,242,255,.82)}
+#pilotStamp.verified::before{content:'🔒 ';font-size:11px;vertical-align:baseline}
 #buildStampVersion,#buildStampRelease{display:block}
 .k{color:var(--a)}
 </style>
@@ -157,9 +159,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.103.sha.24ed306.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 4:13 PM EDT</span>
-    <span id="settingsState">main@24ed306 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.105.sha.cf38940.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 4:45 PM EDT</span>
+    <span id="settingsState">main@cf38940 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -200,8 +202,9 @@ canvas{display:block;width:100vw;height:100vh}
   <span id="leaderboardStatus">Local fallback</span>
 </div>
 <div id="buildStamp" aria-hidden="true">
-  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.103.sha.24ed306.dirty</span>
-  <span id="buildStampRelease">Mar 22 2026, 4:13 PM EDT</span>
+  <span id="pilotStamp" hidden>Pilot ---</span>
+  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.105.sha.cf38940.dirty</span>
+  <span id="buildStampRelease">Mar 22 2026, 4:45 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -258,7 +261,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.103.sha.24ed306.dirty',commit:'24ed306b73e092cce233149eccd14ba71d1cd0a1',branch:'main',dirty:true,released:'Mar 22 2026, 4:13 PM EDT',state:'main@24ed306 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.105.sha.cf38940.dirty',commit:'cf38940851b073363980f10e72662c53f2afd16c',branch:'main',dirty:true,released:'Mar 22 2026, 4:45 PM EDT',state:'main@cf38940 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -908,6 +911,7 @@ const accountSaveInitialsBtn=document.getElementById('accountSaveInitialsBtn');
 const accountSummary=document.getElementById('accountSummary');
 const accountBest=document.getElementById('accountBest');
 const accountRecent=document.getElementById('accountRecent');
+const pilotStamp=document.getElementById('pilotStamp');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!localStorage.getItem(SEED_PREF_KEY);
@@ -993,6 +997,14 @@ function syncAccountUi(){
    const recent=LEADERBOARD.remote.mine.slice(0,3).map(row=>`${formatScore(row.score)} · STG ${String(row.stage).padStart(2,'0')}`).join('   /   ');
    accountRecent.textContent=`Recent: ${recent||'--'}`;
   }
+ }
+ if(pilotStamp){
+  const initials=sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3);
+  const show=signedIn&&initials;
+  const verifiedClass=signedIn&&verified;
+  pilotStamp.hidden=!show;
+  pilotStamp.classList.toggle('verified',!!verifiedClass);
+  pilotStamp.textContent=show?`Pilot ${initials}`:'Pilot ---';
  }
 }
 function syncLeaderboardUi(){

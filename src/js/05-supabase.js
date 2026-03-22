@@ -12,6 +12,7 @@ const accountSaveInitialsBtn=document.getElementById('accountSaveInitialsBtn');
 const accountSummary=document.getElementById('accountSummary');
 const accountBest=document.getElementById('accountBest');
 const accountRecent=document.getElementById('accountRecent');
+const pilotStamp=document.getElementById('pilotStamp');
 const SUPABASE_URL='{{SUPABASE_URL}}';
 const SUPABASE_ANON_KEY='{{SUPABASE_ANON_KEY}}';
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!localStorage.getItem(SEED_PREF_KEY);
@@ -97,6 +98,14 @@ function syncAccountUi(){
    const recent=LEADERBOARD.remote.mine.slice(0,3).map(row=>`${formatScore(row.score)} · STG ${String(row.stage).padStart(2,'0')}`).join('   /   ');
    accountRecent.textContent=`Recent: ${recent||'--'}`;
   }
+ }
+ if(pilotStamp){
+  const initials=sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3);
+  const show=signedIn&&initials;
+  const verifiedClass=signedIn&&verified;
+  pilotStamp.hidden=!show;
+  pilotStamp.classList.toggle('verified',!!verifiedClass);
+  pilotStamp.textContent=show?`Pilot ${initials}`:'Pilot ---';
  }
 }
 function syncLeaderboardUi(){
