@@ -64,6 +64,7 @@ For each fidelity topic:
 - Sources:
   - manual
   - gameplay footage
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
 - Current metrics:
   - `rescue-dual`
   - `capture-rescue-dual`
@@ -122,6 +123,7 @@ Important near-term exception:
   - original gameplay footage
   - our harness diagnostics
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md`
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
 - Current metrics:
   - `stage4-five-ships`
   - `stage4-survival`
@@ -149,6 +151,10 @@ High-value future baseline additions:
    - first rescue
    - later-stage pressure
 3. Issue-by-issue reference mapping so open fidelity issues point directly at evidence
+
+Current focused release pack:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
 
 ## Collaboration Rule
 
