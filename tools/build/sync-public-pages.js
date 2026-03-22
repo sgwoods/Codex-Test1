@@ -114,7 +114,7 @@ function buildStatusManifest(buildInfo, dashboard, pushedAt){
     schema_version: '1.0',
     project_id: 'codex-test1',
     active: true,
-    display_name: 'Codex-Test1 game project',
+    display_name: 'Neo Galaga Tribute',
     project_page_path: 'codex-test1.html',
     repo_url: 'https://github.com/sgwoods/Codex-Test1',
     dashboard_url: 'https://sgwoods.github.io/Codex-Test1/release-dashboard.html',
@@ -152,19 +152,19 @@ async function main(){
   const changedProject = await syncFile(
     'codex-test1.html',
     projectHtml,
-    `Sync Codex-Test1 public page from ${buildInfo.label}`
+    `Sync Neo Galaga Tribute public page from ${buildInfo.label}`
   );
   const changedManifest = await syncFile(
     'data/projects/codex-test1.json',
     statusManifest,
-    'Update public status manifest for Codex-Test1'
+    'Update public status manifest for Neo Galaga Tribute'
   );
 
   if(!changedProject && !changedManifest){
     console.log(`Public project page and status manifest already match ${buildInfo.label}`);
     return;
   }
-  console.log(`Synced Codex-Test1 public assets to ${OWNER}/${REPO} from ${buildInfo.label}`);
+  console.log(`Synced Neo Galaga Tribute public assets to ${OWNER}/${REPO} from ${buildInfo.label}`);
 }
 
 main().catch(err => {
