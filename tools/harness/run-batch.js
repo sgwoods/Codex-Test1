@@ -19,6 +19,7 @@ const PROFILES = {
     { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },
     { scenario: 'capture-rescue-dual', repeats: 1, seedBase: 5006 },
     { scenario: 'natural-capture-cycle', repeats: 1, seedBase: 5012 },
+    { scenario: 'stage4-capture-pressure', repeats: 1, seedBase: 5020 },
     { scenario: 'second-capture-current', repeats: 1, seedBase: 6000 },
     { scenario: 'repeat-capture-stage', repeats: 1, seedBase: 6010 },
     { scenario: 'stage12-variety', repeats: 1, seedBase: 12000 }

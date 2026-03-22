@@ -1,0 +1,25 @@
+{
+  "name": "stage4-capture-pressure",
+  "seed": 5021,
+  "duration": 14,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupNaturalCaptureCycleTest", "args": { "stage": 4, "playerX": 146, "bossX": 146, "bossY": 74, "keepAlive": 4 } },
+    { "t": 3.5, "action": "harness", "method": "launchCarryingBossAttack", "args": { "playerX": 146, "bossX": 152, "bossY": 126, "vy": 26 } },
+    { "t": 3.72, "action": "down", "code": "Space" },
+    { "t": 3.74, "action": "down", "code": "ArrowLeft" },
+    { "t": 4.55, "action": "up", "code": "ArrowLeft" },
+    { "t": 4.56, "action": "down", "code": "ArrowRight" },
+    { "t": 5.2, "action": "harness", "method": "triggerCarriedBossRescueKill" },
+    { "t": 5.6, "action": "up", "code": "ArrowRight" },
+    { "t": 5.61, "action": "down", "code": "ArrowLeft" },
+    { "t": 6.2, "action": "up", "code": "Space" },
+    { "t": 6.65, "action": "up", "code": "ArrowLeft" },
+    { "t": 6.8, "action": "down", "code": "Space" },
+    { "t": 8.2, "action": "up", "code": "Space" }
+  ]
+}

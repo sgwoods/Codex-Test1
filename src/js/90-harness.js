@@ -96,14 +96,18 @@ window.__galagaHarness__={
   const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
   const spare=S.e.find(e=>e.hp>0&&e.t==='bee'&&e.id!==boss?.id);
   if(!boss||!spare)return false;
+  const keepAlive=Math.max(0,+cfg.keepAlive||0);
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
   S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
   S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;
-  for(const e of S.e)if(e.id!==boss.id&&e.id!==spare.id)e.hp=0;
+  const extra=S.e.filter(e=>e.hp>0&&e.id!==boss.id&&e.id!==spare.id).slice(0,keepAlive);
+  const keep=new Set([boss.id,spare.id,...extra.map(e=>e.id)]);
+  for(const e of S.e)if(!keep.has(e.id))e.hp=0;
+  for(const e of extra){e.form=1;e.dive=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.x=e.tx;e.y=e.ty;}
   spare.hp=1;spare.max=1;spare.form=1;spare.dive=0;spare.carry=0;spare.beam=0;spare.beamT=0;spare.low=0;spare.x=spare.tx;spare.y=spare.ty;
   boss.hp=1;boss.max=2;boss.form=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.dive=4;boss.shot=0;
   boss.targetX=p.x;boss.targetY=138;boss.vx=0;boss.vy=S.stage<=2?116:124;boss.x=cl(+cfg.bossX||p.x,26,PLAY_W-26);boss.y=+cfg.bossY||70;
-  logEvent('harness_natural_capture_cycle_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
+  logEvent('harness_natural_capture_cycle_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage,keepAlive:extra.length});
   logEnemyAttackStart(boss,'capture',{targetX:+boss.targetX.toFixed(2),targetY:boss.targetY,scripted:0,harness:1,naturalCapture:1});
   return true;
  },

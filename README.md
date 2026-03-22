@@ -190,6 +190,7 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario rescue-dual
   npm run harness -- --scenario capture-rescue-dual
   npm run harness -- --scenario natural-capture-cycle
+  npm run harness -- --scenario stage4-capture-pressure
   npm run harness -- --scenario boss-first-hit
   npm run harness -- --scenario second-capture-current
   npm run harness -- --scenario stage12-variety
@@ -208,6 +209,10 @@ After GitHub Pages deploys, play at:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
 - The harness writes a `summary.json` beside the generated artifacts, including:
   - seed used for the run
+- Stage 4 now has a dedicated capture-pressure scenario as well:
+  - `stage4-capture-pressure`
+  - purpose: stress a natural capture into carrying-boss return under Stage 4 timing
+  - note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for `stage4-five-ships` or `stage4-survival`
   - stage clears / challenge clears / ship losses
   - per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes
   - capture/rescue markers such as capture start, fighter captured, and fighter rescued

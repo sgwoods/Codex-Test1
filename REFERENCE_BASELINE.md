@@ -68,9 +68,12 @@ For each fidelity topic:
   - `rescue-dual`
   - `capture-rescue-dual`
   - `second-capture-current`
+  - `natural-capture-cycle`
+  - `stage4-capture-pressure`
   - carried-fighter scoring scenarios
 - Active gaps:
   - remaining rescue usefulness / edge-case fidelity
+  - Stage 4-specific capture pressure still needs stronger measurement and tuning
 
 ### Post-1.0 Scoring / Special Pattern Research
 
