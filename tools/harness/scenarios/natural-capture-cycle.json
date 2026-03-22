@@ -1,0 +1,17 @@
+{
+  "name": "natural-capture-cycle",
+  "seed": 5013,
+  "duration": 9,
+  "config": {
+    "stage": 2,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupNaturalCaptureCycleTest", "args": { "stage": 2, "playerX": 140 } },
+    { "t": 3.4, "action": "harness", "method": "launchCarryingBossAttack", "args": { "playerX": 140, "bossY": 126 } },
+    { "t": 4.1, "action": "harness", "method": "triggerCarriedBossRescueKill" },
+    { "t": 5.1, "action": "down", "code": "Space" },
+    { "t": 7.1, "action": "up", "code": "Space" }
+  ]
+}

@@ -105,12 +105,19 @@ function dualShotMetrics(events){
 
 function rescuePipelineMetrics(session){
   const events = session.events || [];
+  const captureStarts = events.filter(e => e.type === 'capture_started');
+  const captured = events.filter(e => e.type === 'fighter_captured');
   const rescued = events.filter(e => e.type === 'fighter_rescued');
   const dualShots = events.filter(e => e.type === 'player_shot' && e.dual);
   const destroyed = events.filter(e => e.type === 'captured_fighter_destroyed');
   if(!rescued.length){
     return {
+      captureStarts: captureStarts.length,
+      fightersCaptured: captured.length,
       rescued: 0,
+      naturalCaptureCycleSuccess: false,
+      firstCaptureStartToCaptured: captured.length && captureStarts.length ? +(captured[0].t - captureStarts[0].t).toFixed(3) : null,
+      firstCapturedToRescue: null,
       dualShotsAfterRescue: 0,
       firstRescueToDualShot: null,
       rescueToDualSuccess: false,
@@ -122,7 +129,12 @@ function rescuePipelineMetrics(session){
   const firstShot = after[0] || null;
   const snap = nearestSnapshot(session, rescue.t);
   return {
+    captureStarts: captureStarts.length,
+    fightersCaptured: captured.length,
     rescued: rescued.length,
+    naturalCaptureCycleSuccess: captureStarts.length > 0 && captured.length > 0,
+    firstCaptureStartToCaptured: captured.length && captureStarts.length ? +(captured[0].t - captureStarts[0].t).toFixed(3) : null,
+    firstCapturedToRescue: captured.length ? +(rescue.t - captured[0].t).toFixed(3) : null,
     dualShotsAfterRescue: after.length,
     firstRescueToDualShot: firstShot ? +(firstShot.t - rescue.t).toFixed(3) : null,
     rescueToDualSuccess: after.length > 0 || !!snap?.player?.dual,

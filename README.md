@@ -189,6 +189,7 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario stage1-descent
   npm run harness -- --scenario rescue-dual
   npm run harness -- --scenario capture-rescue-dual
+  npm run harness -- --scenario natural-capture-cycle
   npm run harness -- --scenario boss-first-hit
   npm run harness -- --scenario second-capture-current
   npm run harness -- --scenario stage12-variety
@@ -211,6 +212,7 @@ After GitHub Pages deploys, play at:
   - per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes
   - capture/rescue markers such as capture start, fighter captured, and fighter rescued
   - rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire
+  - natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing
   - carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points
   - special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset
   - dual-fire metrics such as average spread in the rescue scenario

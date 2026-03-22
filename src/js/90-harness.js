@@ -91,6 +91,33 @@ window.__galagaHarness__={
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,carry:1,rescueFlow:1});
   return true;
  },
+ setupNaturalCaptureCycleTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  const spare=S.e.find(e=>e.hp>0&&e.t==='bee'&&e.id!==boss?.id);
+  if(!boss||!spare)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
+  S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;
+  for(const e of S.e)if(e.id!==boss.id&&e.id!==spare.id)e.hp=0;
+  spare.hp=1;spare.max=1;spare.form=1;spare.dive=0;spare.carry=0;spare.beam=0;spare.beamT=0;spare.low=0;spare.x=spare.tx;spare.y=spare.ty;
+  boss.hp=1;boss.max=2;boss.form=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.dive=4;boss.shot=0;
+  boss.targetX=p.x;boss.targetY=138;boss.vx=0;boss.vy=S.stage<=2?116:124;boss.x=cl(+cfg.bossX||p.x,26,PLAY_W-26);boss.y=+cfg.bossY||70;
+  logEvent('harness_natural_capture_cycle_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
+  logEnemyAttackStart(boss,'capture',{targetX:+boss.targetX.toFixed(2),targetY:boss.targetY,scripted:0,harness:1,naturalCapture:1});
+  return true;
+ },
+ launchCarryingBossAttack(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss'&&e.carry);
+  if(!boss)return false;
+  if(cfg.playerX!==undefined)p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);
+  boss.form=1;boss.dive=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.shot=0;boss.esc=0;
+  boss.x=cl(+cfg.bossX||p.x,26,PLAY_W-26);boss.y=+cfg.bossY||126;boss.vx=+cfg.vx||0;boss.vy=+cfg.vy||24;
+  logEvent('harness_launch_carrying_boss_attack',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2)});
+  logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,carry:1,naturalCapture:1});
+  return true;
+ },
  setupSecondCaptureTest(cfg={}){
   const p=S.p;
   const bosses=S.e.filter(e=>e.hp>0&&e.t==='boss').slice(0,2);
