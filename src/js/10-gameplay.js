@@ -56,7 +56,7 @@ function spawnChallenge(){
 
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily});
@@ -76,6 +76,15 @@ function queueStageTransition(){
  sfx.transition(nextIsChallenge?1:0);
 }
 
+function startSequence(mode,duration,title,subtitle=''){
+ S.sequenceMode=mode;
+ S.sequenceT=Math.max(S.sequenceT,duration);
+ S.bannerTxt=title;
+ S.bannerSub=subtitle;
+ S.bannerMode=mode;
+ S.banner=Math.max(S.banner,duration);
+}
+
 function start(){
  resetSession('game_start');
  autoExportedSessionId='';
@@ -83,7 +92,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
- started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0});
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:''});
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -180,7 +189,7 @@ function hasCarriedFighter(){
 }
 function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0}
 function capturePlayer(e){if(!canCapture())return;const p=S.p;p.captured=1;p.capBoss=e;p.capT=1.2;e.beam=1;e.beamT=Math.max(.5,e.beamT);S.lastCaptureStartT=S.stageClock;logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));sfx.beam()}
-function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;S.captureCountStage++;S.lastFighterCapturedT=S.stageClock;logEvent('fighter_captured',Object.assign({stage:S.stage,stageClock:+S.stageClock.toFixed(3),captureCountStage:S.captureCountStage,livesAfter:Math.max(0,S.lives+1),playerLane:playLane(p.x),timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)},enemyRef(e)));S.alertTxt='FIGHTER CAPTURED';S.alertT=1.55;if(S.lives<0)gameOver()}
+function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;S.captureCountStage++;S.lastFighterCapturedT=S.stageClock;S.recoverT=Math.max(S.recoverT,1.6);S.attackGapT=Math.max(S.attackGapT,1.35);startSequence('captureBeat',1.45,'FIGHTER CAPTURED','BOSS RETREAT');logEvent('fighter_captured',Object.assign({stage:S.stage,stageClock:+S.stageClock.toFixed(3),captureCountStage:S.captureCountStage,livesAfter:Math.max(0,S.lives+1),playerLane:playLane(p.x),timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)},enemyRef(e)));logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});sfx.captureRetreat();if(S.lives<0)gameOver()}
 function activeEscortCount(e){
  if(!e?.squadId)return Math.max(0,e?.esc|0);
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
@@ -397,6 +406,8 @@ function update(dt){
  if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);S.nextStageT=Math.max(0,S.nextStageT-dt);
+ S.sequenceT=Math.max(0,S.sequenceT-dt);
+ if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.nextStageT>0){if(S.nextStageT<=dt){S.nextStageT=0;spawnStage();}return}
@@ -433,6 +444,8 @@ function update(dt){
  }
 
  const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
+ const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
+ if(sequenceLock)return;
  S.att=0;
  for(const e of S.e){e.tm+=dt;if(e.hp<=0)continue;if(S.challenge)updateChallengeEnemy(e,dt);else updateEnemy(e,dt,t,T,p)}
  runStage1Script(dt,p,T);
@@ -502,6 +515,6 @@ function update(dt){
 
  if(!S.challenge){for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form});}}}
 
- if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});S.alertTxt='DUAL FIGHTER JOINED';S.alertT=1.8;sfx.rescue()}}
+ if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2)});sfx.rescue();sfx.join()}}
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }

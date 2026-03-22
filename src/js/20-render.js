@@ -130,8 +130,28 @@ function drawRescuePod(){
  ctx.restore();
 }
 
-function drawBadges(stage){const vals=[50,30,20,10,5,1],col=['#f3cf65','#f0b35e','#ef9559','#ec7755','#e95b51','#e53f4e'];let x=PLAY_W-8,y=PLAY_H-8;
- for(let i=0;i<vals.length;i++)while(stage>=vals[i]){stage-=vals[i];ctx.fillStyle=col[i];ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-3,y-5);ctx.lineTo(x+3,y-5);ctx.closePath();ctx.fill();x-=6;if(x<PLAY_W-66){x=PLAY_W-8;y-=8;}}
+function drawBadges(stage){
+ const vals=[50,30,20,10,5,1],col=['#f3cf65','#f0b35e','#ef9559','#ec7755','#e95b51','#e53f4e'];
+ let x=PLAY_W-10,y=PLAY_H-8;
+ for(let i=0;i<vals.length;i++)while(stage>=vals[i]){
+  stage-=vals[i];
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.fillStyle=col[i];
+  ctx.beginPath();
+  ctx.moveTo(0,0);
+  ctx.lineTo(-4,-6);
+  ctx.lineTo(4,-6);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle='rgba(255,245,210,.72)';
+  ctx.fillRect(-.5,-6,1,5);
+  ctx.fillStyle='rgba(120,36,24,.42)';
+  ctx.fillRect(-3,-4,6,1);
+  ctx.restore();
+  x-=8;
+  if(x<PLAY_W-72){x=PLAY_W-10;y-=9;}
+ }
 }
 
 function drawPostFx(){}
@@ -169,6 +189,7 @@ function draw(){
  drawCaptureTether();
  const p=S.p;if((!p.pending||p.spawn<=.3)&&!p.spawn){if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0)}
  if(p.captured)drawPlayerBody(p.x,p.y,0,1);
+ drawBadges(S.stage);
  drawPostFx();
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
@@ -185,6 +206,8 @@ if(!toolsVisible)closeSettings();
  else if(S.banner>0){
  if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
  else if(S.bannerMode==='stageTransition')msg.innerHTML=`<span class="splashTitle">GET READY</span><span class="splashScore">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
+ else if(S.bannerMode==='captureBeat')msg.innerHTML=`<span class="splashTitle">FIGHTER CAPTURED</span><span class="splashSub">BOSS RETREAT</span>`;
+ else if(S.bannerMode==='rescueBeat')msg.innerHTML=`<span class="splashTitle">DUAL FIGHTER</span><span class="splashSub">JOINED</span>`;
  else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
   else if(S.bannerMode==='challengeResult'){
    const parts=String(S.bannerSub||'').split('\n');

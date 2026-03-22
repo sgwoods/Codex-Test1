@@ -119,6 +119,16 @@ Important near-term exception:
 - Active gap:
   - later-stage collision fairness and progression depth
 
+### External Implementation References
+
+- These are architecture/presentation references, not original-Galaga rules
+  sources.
+- Current external reference:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/external-galaga5/README.md`
+- Use case:
+  - borrow ideas about structure or presentation when useful
+  - do not treat them as fidelity evidence
+
 ## What To Add Next
 
 High-value future baseline additions:
