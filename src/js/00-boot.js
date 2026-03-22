@@ -33,6 +33,7 @@ let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
 let gameOverHtml='';
 let gameOverState=null;
+const ATTRACT={active:0,phase:'',timer:0,cycle:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const RECORD_PREF_KEY='galagaTribAutoVideo';
 const TEST_PREF_KEY='galagaTribTestCfg';
@@ -167,7 +168,7 @@ const P={
  }
 };
 
-const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,
+const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
@@ -182,7 +183,7 @@ const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,g
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
-const snapshot=()=>({started:!!started,paused:!!paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const snapshot=()=>({started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
@@ -246,6 +247,11 @@ function buildGameOverHtmlFromState(){
  }
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">TOP 10 PILOTS   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
+function buildAttractScoreboardHtml(){
+ const board=loadScoreboard();
+ const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
+ return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">TOP 10 PILOTS</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
+}
 function buildGameOverState(score,stage){
  const res=recordScore(score,stage);
  const editing=!!res.rank;
@@ -260,6 +266,41 @@ function buildGameOverState(score,stage){
   cursor:0,
   editing
  };
+}
+function resetAttractBackdrop(){
+ S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.alertT=0;S.alertTxt='';S.banner=0;S.bannerTxt='';S.bannerMode='';S.bannerSub='';
+ for(const e of S.e)e.hp=0;
+ S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;
+}
+function enterAttractScores(){
+ ATTRACT.active=1;
+ ATTRACT.phase='scores';
+ ATTRACT.timer=7.5;
+ S.attract=1;
+ resetAttractBackdrop();
+ logEvent('attract_scores',{cycle:ATTRACT.cycle});
+}
+function startAttractDemo(){
+ stopRunRecording();
+ autoExportedSessionId='';
+ resetSession('attract_demo');
+ gameOverHtml='';gameOverState=null;
+ started=0;paused=0;
+ ATTRACT.active=1;
+ ATTRACT.phase='demo';
+ ATTRACT.timer=11.5;
+ ATTRACT.cycle++;
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1});
+ S.stats={shots:0,hits:0};
+ Object.assign(S.p,{dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0});
+ logEvent('attract_demo_start',{cycle:ATTRACT.cycle});
+ spawnStage();
+}
+function stopAttractLoop(){
+ ATTRACT.active=0;
+ ATTRACT.phase='';
+ ATTRACT.timer=0;
+ S.attract=0;
 }
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
@@ -436,7 +477,7 @@ async function submitFeedback(ev){
   type,title,description,
   timestamp:new Date(now).toISOString(),
   game:{name:'Neo Galaga Tribute',version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
-  game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge}
+  game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge,attract:!!ATTRACT.active}
  };
  const kind=type==='feature_request'?'Feature Request':'Bug Report';
  const subject=`[${kind}] ${title}`;
@@ -596,7 +637,7 @@ addEventListener('keydown',e=>{
    return;
   }
  }
- if(!started&&e.code==='Enter')start();
+ if(!started&&e.code==='Enter'){stopAttractLoop();start();}
  if(started&&e.code==='KeyP')paused=!paused;
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });

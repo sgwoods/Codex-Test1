@@ -199,8 +199,12 @@ const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display=toolsVisible?'block':'none';
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
- msg.className=!started?(gameOverHtml?'gameOverScreen':'startScreen'):'';
- if(!started)msg.innerHTML=gameOverHtml||`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">FOUR-STAGE 1.0 FLIGHT</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
+ msg.className=!started?((gameOverHtml||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):'';
+ if(!started){
+  if(gameOverHtml)msg.innerHTML=gameOverHtml;
+  else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
+  else msg.innerHTML=`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
+ }
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){

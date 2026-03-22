@@ -208,4 +208,6 @@ logEvent('boot');
 logSnapshot('boot');
 syncRecordUi();
 syncTestUi();
-rs();requestAnimationFrame(loop);
+rs();
+startAttractDemo();
+requestAnimationFrame(loop);

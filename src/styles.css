@@ -39,6 +39,7 @@ canvas{display:block;width:100vw;height:100vh}
 #msg.startScreen .startSub{font-size:.8em}
 #msg.startScreen .startHelp{font-size:.94em}
 #msg.startScreen .startMeta{font-size:.62em}
+#msg.startScreen .startSub{color:#ffd86d}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
 #settingsBtn{position:fixed;top:62px;right:16px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.78);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
