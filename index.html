@@ -19,6 +19,7 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .startSub{display:block;color:#7ef2ff;font-size:.84em;letter-spacing:.18em;margin-bottom:.58em}
 #msg .startHelp{display:block;color:#f4f7ff;font-size:.92em;letter-spacing:.06em;margin-bottom:.34em}
 #msg .startMeta{display:block;color:rgba(231,240,255,.82);font-size:.62em;letter-spacing:.08em;line-height:1.42}
+#msg .startBadge{color:#7ef2ff}
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .scoreTable{display:grid;grid-template-columns:auto auto auto auto;gap:.08em .85em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
@@ -159,9 +160,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.105.sha.cf38940.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 4:45 PM EDT</span>
-    <span id="settingsState">main@cf38940 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.106.sha.8896e5c.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 4:50 PM EDT</span>
+    <span id="settingsState">main@8896e5c dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -203,8 +204,8 @@ canvas{display:block;width:100vw;height:100vh}
 </div>
 <div id="buildStamp" aria-hidden="true">
   <span id="pilotStamp" hidden>Pilot ---</span>
-  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.105.sha.cf38940.dirty</span>
-  <span id="buildStampRelease">Mar 22 2026, 4:45 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.106.sha.8896e5c.dirty</span>
+  <span id="buildStampRelease">Mar 22 2026, 4:50 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -261,7 +262,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.105.sha.cf38940.dirty',commit:'cf38940851b073363980f10e72662c53f2afd16c',branch:'main',dirty:true,released:'Mar 22 2026, 4:45 PM EDT',state:'main@cf38940 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.106.sha.8896e5c.dirty',commit:'8896e5cf603ea9751abc3fe0dbce4e5900360ab1',branch:'main',dirty:true,released:'Mar 22 2026, 4:50 PM EDT',state:'main@8896e5c dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -967,6 +968,18 @@ function leaderboardRowsForView(view=LEADERBOARD.view){
 function setLeaderboardStatus(text){
  LEADERBOARD.status=String(text||'');
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
+}
+function buildStartAccountPrompt(){
+ const configured=!!LEADERBOARD.configured;
+ const pending=LEADERBOARD.configured===null;
+ const signedIn=!!LEADERBOARD.user;
+ const verified=!!LEADERBOARD.user?.email_confirmed_at;
+ const initials=sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3);
+ if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
+ if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
+ if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+ if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+ return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
 }
 function syncAccountUi(){
  const configured=!!LEADERBOARD.configured;
@@ -2034,7 +2047,7 @@ if(!toolsVisible)closeSettings();
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
-  else msg.innerHTML=`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
+  else msg.innerHTML=`<span class="startTitle">NEO GALAGA TRIBUTE</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
  }
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;

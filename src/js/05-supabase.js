@@ -69,6 +69,18 @@ function setLeaderboardStatus(text){
  LEADERBOARD.status=String(text||'');
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
 }
+function buildStartAccountPrompt(){
+ const configured=!!LEADERBOARD.configured;
+ const pending=LEADERBOARD.configured===null;
+ const signedIn=!!LEADERBOARD.user;
+ const verified=!!LEADERBOARD.user?.email_confirmed_at;
+ const initials=sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3);
+ if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
+ if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
+ if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+ if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+ return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
+}
 function syncAccountUi(){
  const configured=!!LEADERBOARD.configured;
  const signedIn=!!LEADERBOARD.user;
