@@ -345,8 +345,8 @@ function updateEnemy(e,dt,t,T,p){
  if(e.dive===5){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
   if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=S.stage<=2?96:104;return}
-  const escortTrackX=S.stage===4?5.4:6.2,escortTrackY=S.stage===4?5.2:6;
-  e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-28-e.y)*Math.min(1,dt*escortTrackY);
+  const escortTrackX=S.stage===4?4.9:6.2,escortTrackY=S.stage===4?4.8:6,escortLift=S.stage===4?34:28;
+  e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');e.shot--;}
   return;
  }

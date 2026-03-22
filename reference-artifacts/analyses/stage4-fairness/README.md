@@ -65,6 +65,14 @@ Representative frame review against the kept baseline suggested:
    - regressed `stage4-survival` by creating an early loss
    - suggests path geometry matters, but cannot be changed in isolation
 
+4. Escort-only tracking / lift easing
+   - made Stage `4` escorts ride a bit higher and track less tightly
+   - improved `stage4-survival` to a single later escort collision
+   - shifted `stage4-five-ships` from a direct escort collision into a capture loss
+   - kept the dedicated `stage4-capture-pressure` rescue path healthy
+   - suggests escort path fairness is real leverage, but the remaining pressure
+     case may now be more about capture follow-up than raw escort collision
+
 ## Current working interpretation
 
 Stage `4` appears to be a two-part fairness problem:
