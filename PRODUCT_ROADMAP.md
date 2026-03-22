@@ -60,6 +60,7 @@ Key issue groups:
 - Product polish
   - `#31` release date display refinement
   - high-score/results/initials polish as needed
+  - move the temporary settings/account panel toward a more centered overlay or otherwise reposition it so long forms are not obscured at the bottom of the playfield
 
 Suggested versioning:
 

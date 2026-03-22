@@ -157,9 +157,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.102.sha.3db7861.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 2:36 PM EDT</span>
-    <span id="settingsState">main@3db7861 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.103.sha.24ed306.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 4:13 PM EDT</span>
+    <span id="settingsState">main@24ed306 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -200,8 +200,8 @@ canvas{display:block;width:100vw;height:100vh}
   <span id="leaderboardStatus">Local fallback</span>
 </div>
 <div id="buildStamp" aria-hidden="true">
-  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.102.sha.3db7861.dirty</span>
-  <span id="buildStampRelease">Mar 22 2026, 2:36 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-alpha.1+build.103.sha.24ed306.dirty</span>
+  <span id="buildStampRelease">Mar 22 2026, 4:13 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -258,7 +258,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.102.sha.3db7861.dirty',commit:'3db7861d1342bf401793baa62ea594bab5c57279',branch:'main',dirty:true,released:'Mar 22 2026, 2:36 PM EDT',state:'main@3db7861 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.103.sha.24ed306.dirty',commit:'24ed306b73e092cce233149eccd14ba71d1cd0a1',branch:'main',dirty:true,released:'Mar 22 2026, 4:13 PM EDT',state:'main@24ed306 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -913,14 +913,14 @@ const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!localStorage.getItem(SEED_PREF_KEY);
 const LEADERBOARD={
  client:null,
- configured:0,
+ configured:null,
  view:(()=>{
   try{
    const raw=String(localStorage.getItem(LEADERBOARD_PREF_KEY)||'all').toLowerCase();
    return['all','validated','local','mine'].includes(raw)?raw:'all';
   }catch{return'all'}
  })(),
- status:'Local fallback',
+ status:'Connecting leaderboard...',
  remote:{all:[],validated:[],mine:[]},
  loading:{all:0,validated:0,mine:0},
  user:null,
@@ -968,18 +968,20 @@ function syncAccountUi(){
  const configured=!!LEADERBOARD.configured;
  const signedIn=!!LEADERBOARD.user;
  const verified=!!LEADERBOARD.user?.email_confirmed_at;
+ const pending=LEADERBOARD.configured===null;
  if(accountSignupBtn)accountSignupBtn.disabled=!configured||LEADERBOARD.authBusy||signedIn;
  if(accountLoginBtn)accountLoginBtn.disabled=!configured||LEADERBOARD.authBusy||signedIn;
  if(accountLogoutBtn)accountLogoutBtn.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
  if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
- if(accountEmail)accountEmail.disabled=!configured||LEADERBOARD.authBusy||signedIn;
- if(accountPassword)accountPassword.disabled=!configured||LEADERBOARD.authBusy||signedIn;
+ if(accountEmail)accountEmail.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
+ if(accountPassword)accountPassword.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
  if(accountInitials){
-  accountInitials.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
+  accountInitials.disabled=!configured||pending||LEADERBOARD.authBusy||!signedIn;
   if(document.activeElement!==accountInitials)accountInitials.value=signedIn?sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3):'';
  }
  if(accountSummary){
-  if(!configured)accountSummary.textContent='Supabase is not configured. Scores stay local.';
+  if(pending)accountSummary.textContent='Connecting leaderboard...';
+  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
  }

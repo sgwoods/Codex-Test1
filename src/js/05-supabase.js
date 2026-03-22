@@ -17,14 +17,14 @@ const SUPABASE_ANON_KEY='{{SUPABASE_ANON_KEY}}';
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!localStorage.getItem(SEED_PREF_KEY);
 const LEADERBOARD={
  client:null,
- configured:0,
+ configured:null,
  view:(()=>{
   try{
    const raw=String(localStorage.getItem(LEADERBOARD_PREF_KEY)||'all').toLowerCase();
    return['all','validated','local','mine'].includes(raw)?raw:'all';
   }catch{return'all'}
  })(),
- status:'Local fallback',
+ status:'Connecting leaderboard...',
  remote:{all:[],validated:[],mine:[]},
  loading:{all:0,validated:0,mine:0},
  user:null,
@@ -72,18 +72,20 @@ function syncAccountUi(){
  const configured=!!LEADERBOARD.configured;
  const signedIn=!!LEADERBOARD.user;
  const verified=!!LEADERBOARD.user?.email_confirmed_at;
+ const pending=LEADERBOARD.configured===null;
  if(accountSignupBtn)accountSignupBtn.disabled=!configured||LEADERBOARD.authBusy||signedIn;
  if(accountLoginBtn)accountLoginBtn.disabled=!configured||LEADERBOARD.authBusy||signedIn;
  if(accountLogoutBtn)accountLogoutBtn.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
  if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
- if(accountEmail)accountEmail.disabled=!configured||LEADERBOARD.authBusy||signedIn;
- if(accountPassword)accountPassword.disabled=!configured||LEADERBOARD.authBusy||signedIn;
+ if(accountEmail)accountEmail.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
+ if(accountPassword)accountPassword.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
  if(accountInitials){
-  accountInitials.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
+  accountInitials.disabled=!configured||pending||LEADERBOARD.authBusy||!signedIn;
   if(document.activeElement!==accountInitials)accountInitials.value=signedIn?sanitizeInitials(LEADERBOARD.profile?.display_initials||LEADERBOARD.user?.user_metadata?.display_initials||'').slice(0,3):'';
  }
  if(accountSummary){
-  if(!configured)accountSummary.textContent='Supabase is not configured. Scores stay local.';
+  if(pending)accountSummary.textContent='Connecting leaderboard...';
+  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
  }
