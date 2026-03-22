@@ -174,9 +174,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.107.sha.6c92bac.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 5:08 PM EDT</span>
-    <span id="settingsState">main@6c92bac dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.108.sha.ba53934.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 5:33 PM EDT</span>
+    <span id="settingsState">main@ba53934 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -221,8 +221,8 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.107.sha.6c92bac.dirty</span>
-    <span id="buildStampRelease">Mar 22 2026, 5:08 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.108.sha.ba53934.dirty</span>
+    <span id="buildStampRelease">Mar 22 2026, 5:33 PM EDT</span>
   </div>
 </div>
 <script>
@@ -280,7 +280,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.107.sha.6c92bac.dirty',commit:'6c92bac539aa21b6f04af40e74a6a8133017bf3b',branch:'main',dirty:true,released:'Mar 22 2026, 5:08 PM EDT',state:'main@6c92bac dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.108.sha.ba53934.dirty',commit:'ba539346ed9de58c4968e40abfc9a70208d4bbac',branch:'main',dirty:true,released:'Mar 22 2026, 5:33 PM EDT',state:'main@ba53934 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -934,6 +934,9 @@ const pilotStamp=document.getElementById('pilotStamp');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!localStorage.getItem(SEED_PREF_KEY);
+const LEADERBOARD_CACHE_PREFIX='neoGalagaLeaderboardCache.v1.';
+const LEADERBOARD_STALE_MS=45000;
+const LEADERBOARD_REFRESH_MS=120000;
 const LEADERBOARD={
  client:null,
  configured:null,
@@ -945,13 +948,15 @@ const LEADERBOARD={
  })(),
  status:'Connecting leaderboard...',
  remote:{all:[],validated:[],mine:[]},
+ cacheStamp:{all:0,validated:0,mine:0},
  loading:{all:0,validated:0,mine:0},
  user:null,
  profile:null,
   lastRemoteOk:0,
   submitBusy:0,
  authBusy:0,
- primed:0
+ primed:0,
+ refreshTimer:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -980,8 +985,53 @@ function leaderboardRowsForView(view=LEADERBOARD.view){
  if(view==='mine'&&!LEADERBOARD.user)return localLeaderboardRows();
  const rows=LEADERBOARD.remote[view]||[];
  if(rows.length)return rows;
- if(view==='validated'&&LEADERBOARD.lastRemoteOk)return [];
+ if((view==='validated'||view==='mine')&&(LEADERBOARD.lastRemoteOk||LEADERBOARD.cacheStamp[view]))return [];
  return localLeaderboardRows();
+}
+function leaderboardStatusLabel(view,mode='ready'){
+ if(mode==='loading')return view==='validated'?'Loading validated scores...':view==='mine'?'Loading your scores...':'Loading shared scores...';
+ if(mode==='fallback')return view==='mine'?'My Scores unavailable · showing local':'Remote unavailable · showing local';
+ if(mode==='cached')return view==='validated'?'Validated scores cached · refreshing':view==='mine'?'My scores cached · refreshing':'Shared scores cached · refreshing';
+ if(mode==='signed_out')return 'Sign in required · showing local';
+ if(mode==='local')return 'Local device scores';
+ return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
+}
+function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
+ return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+}
+function persistLeaderboardCache(view){
+ if(view==='local')return;
+ try{
+  localStorage.setItem(leaderboardCacheKey(view),JSON.stringify({fetchedAt:LEADERBOARD.cacheStamp[view]||Date.now(),rows:LEADERBOARD.remote[view]||[]}));
+ }catch{}
+}
+function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
+ if(view==='local')return 0;
+ try{
+  const raw=localStorage.getItem(leaderboardCacheKey(view,userId));
+  if(!raw)return 0;
+  const parsed=JSON.parse(raw);
+  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow):[];
+  const fetchedAt=+parsed?.fetchedAt||0;
+  LEADERBOARD.remote[view]=rows;
+  LEADERBOARD.cacheStamp[view]=fetchedAt;
+  if(rows.length||fetchedAt)LEADERBOARD.lastRemoteOk=1;
+  return rows.length||fetchedAt?1:0;
+ }catch{
+  return 0;
+ }
+}
+function leaderboardCacheFresh(view){
+ const stamp=LEADERBOARD.cacheStamp[view]||0;
+ return !!stamp&&(Date.now()-stamp)<LEADERBOARD_STALE_MS;
+}
+function scheduleLeaderboardRefresh(){
+ if(LEADERBOARD.refreshTimer)clearInterval(LEADERBOARD.refreshTimer);
+ if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
+ LEADERBOARD.refreshTimer=setInterval(()=>{
+  if(document.hidden)return;
+  prefetchLeaderboards(1);
+ },LEADERBOARD_REFRESH_MS);
 }
 function setLeaderboardStatus(text){
  LEADERBOARD.status=String(text||'');
@@ -1061,26 +1111,32 @@ async function loadOwnProfile(){
  syncAccountUi();
  return LEADERBOARD.profile;
 }
-async function refreshLeaderboard(view=LEADERBOARD.view){
+async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  if(view==='local'){
   syncLeaderboardBest();
-  setLeaderboardStatus('Local device scores');
+  if(!silent)setLeaderboardStatus(leaderboardStatusLabel('local','local'));
   syncLeaderboardUi();
   return localLeaderboardRows();
  }
  if(!LEADERBOARD.configured||!LEADERBOARD.client){
-  setLeaderboardStatus('Local fallback');
+  if(!silent)setLeaderboardStatus('Local fallback');
   syncLeaderboardUi();
   return localLeaderboardRows();
  }
  if(view==='mine'&&!LEADERBOARD.user){
-  setLeaderboardStatus('Sign in required · showing local');
+  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'signed_out'));
   syncLeaderboardUi();
   return localLeaderboardRows();
  }
+ if(!force&&leaderboardCacheFresh(view)&&((LEADERBOARD.remote[view]||[]).length||LEADERBOARD.cacheStamp[view])){
+  syncLeaderboardBest();
+  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'ready'));
+  syncLeaderboardUi();
+  return leaderboardRowsForView(view);
+ }
  if(LEADERBOARD.loading[view])return leaderboardRowsForView(view);
  LEADERBOARD.loading[view]=1;
- setLeaderboardStatus(view==='validated'?'Loading validated scores...':view==='mine'?'Loading your scores...':'Loading shared scores...');
+ if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'loading'));
  syncLeaderboardUi();
  let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
@@ -1088,32 +1144,46 @@ async function refreshLeaderboard(view=LEADERBOARD.view){
  const {data,error}=await query;
  LEADERBOARD.loading[view]=0;
  if(error){
-  setLeaderboardStatus(view==='mine'?'My Scores unavailable · showing local':'Remote unavailable · showing local');
+  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'fallback'));
   syncLeaderboardUi();
   return localLeaderboardRows();
  }
  LEADERBOARD.lastRemoteOk=1;
  LEADERBOARD.remote[view]=(data||[]).map(normalizeRemoteScoreRow);
+ LEADERBOARD.cacheStamp[view]=Date.now();
+ persistLeaderboardCache(view);
  syncLeaderboardBest();
-  setLeaderboardStatus(view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':view==='all'?'Shared leaderboard live':'Local device scores');
-  syncLeaderboardUi();
-  return LEADERBOARD.remote[view];
+ if(!silent||view===LEADERBOARD.view)setLeaderboardStatus(leaderboardStatusLabel(view,'ready'));
+ syncLeaderboardUi();
+ return LEADERBOARD.remote[view];
 }
 function setLeaderboardView(view){
  const next=['all','validated','local','mine'].includes(view)?view:'all';
  LEADERBOARD.view=next;
  localStorage.setItem(LEADERBOARD_PREF_KEY,next);
- if(next==='mine'&&!LEADERBOARD.user)setLeaderboardStatus('Sign in required · showing local');
- else if(next==='local')setLeaderboardStatus('Local device scores');
+ if(next==='mine'&&!LEADERBOARD.user)setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
+ else if(next==='local')setLeaderboardStatus(leaderboardStatusLabel(next,'local'));
+ else if((LEADERBOARD.remote[next]||[]).length||LEADERBOARD.cacheStamp[next])setLeaderboardStatus(leaderboardCacheFresh(next)?leaderboardStatusLabel(next,'ready'):leaderboardStatusLabel(next,'cached'));
  syncLeaderboardUi();
- refreshLeaderboard(next);
+ refreshLeaderboard(next,{silent:((LEADERBOARD.remote[next]||[]).length||LEADERBOARD.cacheStamp[next])?1:0,force:!leaderboardCacheFresh(next)});
+}
+async function prefetchLeaderboards(force=0){
+ if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
+ const tasks=[refreshLeaderboard('all',{silent:1,force}),refreshLeaderboard('validated',{silent:1,force})];
+ if(LEADERBOARD.user)tasks.push(refreshLeaderboard('mine',{silent:1,force}));
+ await Promise.all(tasks);
+ if(['all','validated','mine'].includes(LEADERBOARD.view))setLeaderboardStatus(leaderboardStatusLabel(LEADERBOARD.view,'ready'));
+ syncLeaderboardUi();
 }
 function primeLeaderboard(){
  if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
  if(started&&!paused)return;
- if(!LEADERBOARD.primed||LEADERBOARD.view==='all')refreshLeaderboard('all');
- if(!LEADERBOARD.primed||LEADERBOARD.view==='validated')refreshLeaderboard('validated');
- if(LEADERBOARD.user&&(!LEADERBOARD.primed||LEADERBOARD.view==='mine'))refreshLeaderboard('mine');
+ if(!LEADERBOARD.primed){
+  prefetchLeaderboards();
+  LEADERBOARD.primed=1;
+  return;
+ }
+ refreshLeaderboard(LEADERBOARD.view,{silent:((LEADERBOARD.remote[LEADERBOARD.view]||[]).length||LEADERBOARD.cacheStamp[LEADERBOARD.view])?1:0,force:!leaderboardCacheFresh(LEADERBOARD.view)});
  LEADERBOARD.primed=1;
 }
 function resolveGameOverScoreEntry(){
@@ -1149,9 +1219,9 @@ async function submitScoreRemote(entry){
  }
  setLeaderboardStatus(payload.is_verified?'Verified score saved online':'Shared leaderboard updated');
  syncLeaderboardUi();
- refreshLeaderboard('all');
- if(payload.is_verified)refreshLeaderboard('validated');
- if(payload.user_id)refreshLeaderboard('mine');
+ refreshLeaderboard('all',{force:1});
+ if(payload.is_verified)refreshLeaderboard('validated',{force:1});
+ if(payload.user_id)refreshLeaderboard('mine',{force:1});
  return 1;
 }
 function submitGameOverScore(){
@@ -1254,24 +1324,37 @@ async function initLeaderboard(){
   LEADERBOARD.client=supabaseFactory.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
    auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
   });
+  hydrateLeaderboardCache('all');
+  hydrateLeaderboardCache('validated');
   const hadAuthHash=location.hash.includes('access_token=');
   const {data:{session}}=await LEADERBOARD.client.auth.getSession();
   LEADERBOARD.user=session?.user||null;
-  if(LEADERBOARD.user)await loadOwnProfile();
+  if(LEADERBOARD.user){
+   hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+   await loadOwnProfile();
+  }
+  syncLeaderboardBest();
   if(hadAuthHash)history.replaceState({},document.title,location.pathname+location.search);
   setLeaderboardStatus(LEADERBOARD.user?'Shared leaderboard ready · signed in':'Shared leaderboard ready');
   syncLeaderboardUi();
   primeLeaderboard();
+  scheduleLeaderboardRefresh();
   LEADERBOARD.client.auth.onAuthStateChange(async(_event,sessionState)=>{
    LEADERBOARD.user=sessionState?.user||null;
-   if(LEADERBOARD.user)await loadOwnProfile();
+   if(LEADERBOARD.user){
+    hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+    await loadOwnProfile();
+   }
    else{
     LEADERBOARD.profile=null;
     LEADERBOARD.remote.mine=[];
+    LEADERBOARD.cacheStamp.mine=0;
     if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
    }
+   syncLeaderboardBest();
    syncLeaderboardUi();
    primeLeaderboard();
+   scheduleLeaderboardRefresh();
   });
  }catch(err){
   LEADERBOARD.client=null;
