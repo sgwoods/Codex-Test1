@@ -54,6 +54,13 @@
             padding: 36px 34px 32px;
         }
 
+        .heroTop {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
         .eyebrow {
             display: inline-flex;
             align-items: center;
@@ -65,6 +72,22 @@
             font-size: 12px;
             letter-spacing: .14em;
             text-transform: uppercase;
+        }
+
+        .homeLink {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d9f7ff;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         h1 {
@@ -187,13 +210,21 @@
             .panel {
                 padding: 24px 22px;
             }
+
+            .heroTop {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
     <main class="shell">
         <section class="hero">
-            <span class="eyebrow">Public Project Page</span>
+            <div class="heroTop">
+                <span class="eyebrow">Public Project Page</span>
+                <a class="homeLink" href="https://sgwoods.github.io/public/">Steven Woods</a>
+            </div>
             <h1>Neo Galaga Tribute</h1>
             <p>This project is a browser-built Galaga tribute focused on arcade feel, readable stage flow, capture-and-rescue mechanics, and a polished four-stage 1.0 slice that is easy to share and replay.</p>
             <div class="meta">
