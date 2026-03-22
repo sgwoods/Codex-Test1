@@ -184,6 +184,7 @@ if(!toolsVisible)closeSettings();
  else if(S.alertT>0)msg.textContent=S.alertTxt;
  else if(S.banner>0){
  if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
+ else if(S.bannerMode==='stageTransition')msg.innerHTML=`<span class="splashTitle">GET READY</span><span class="splashScore">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
  else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
   else if(S.bannerMode==='challengeResult'){
    const parts=String(S.bannerSub||'').split('\n');

@@ -119,7 +119,16 @@ const sfx={
  over(){this.seq([294,262,220,196],.11,'triangle',.017,-45,2300);this.play(147,.32,'sawtooth',.016,-120,.01,1900,.018);this.noise(.09,.004,1100,.1)},
  march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)},
  uiTick(){this.play(920,.024,'square',.004,-110,.001,5400);this.play(1320,.016,'triangle',.0025,-70,.001,5200,.004)},
- uiConfirm(){this.seq([660,880],.04,'triangle',.008,30,4200)}
+ uiConfirm(){this.seq([660,880],.04,'triangle',.008,30,4200)},
+ transition(challenge=0){
+  if(challenge){
+   this.seq([392,523,659,784],.055,'triangle',.012,40,3600);
+   this.play(988,.12,'square',.006,-70,.12,4600);
+  }else{
+   this.seq([440,554,659],.06,'triangle',.011,24,3400);
+   this.play(880,.09,'square',.005,-80,.1,4300);
+  }
+ }
 };
 
 const P={

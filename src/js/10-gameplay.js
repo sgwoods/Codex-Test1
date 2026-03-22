@@ -65,6 +65,17 @@ function spawnStage(){
  logSnapshot('stage_spawn');
 }
 
+function queueStageTransition(){
+ const nextIsChallenge=!!S.forceChallenge||isChallengeStage(S.stage);
+ S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
+ S.nextStageT=nextIsChallenge?2.8:2.2;
+ S.bannerTxt=nextIsChallenge?'CHALLENGING STAGE':`STAGE ${S.stage}`;
+ S.bannerSub=nextIsChallenge?`STAGE ${S.stage}`:'NEXT PHASE';
+ S.bannerMode='stageTransition';
+ S.banner=S.nextStageT;
+ sfx.transition(nextIsChallenge?1:0);
+}
+
 function start(){
  resetSession('game_start');
  autoExportedSessionId='';
@@ -388,7 +399,7 @@ function update(dt){
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);S.nextStageT=Math.max(0,S.nextStageT-dt);
  S.stageClock+=dt;
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
- if(S.nextStageT>0){if(S.nextStageT<=dt){S.nextStageT=0;spawnStage();sfx.start();}return}
+ if(S.nextStageT>0){if(S.nextStageT<=dt){S.nextStageT=0;spawnStage();}return}
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
  if(p.captured&&p.capBoss&&p.capBoss.hp>0){const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;p.capT-=dt;p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);p.y+=(capY-p.y)*Math.min(1,dt*3.9);if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();}
@@ -402,9 +413,7 @@ function update(dt){
  if(!alive.length&&!S.challenge){
   logEvent('stage_clear',{stage:S.stage,score:S.score});
   S.stage++;
-  if(isChallengeStage(S.stage)){
-   S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.nextStageT=2.6;S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challengeIntro';S.banner=2.6;
-  }else{spawnStage();sfx.start();}
+  queueStageTransition();
   return
  }
  if(S.challenge&&!alive.length&&!S.ch.done){
@@ -420,7 +429,7 @@ function update(dt){
   S.bannerMode='challengeResult';
   S.banner=3.1;
   S.stage++;
-  setTimeout(()=>{if(started)spawnStage()},1250);
+  setTimeout(()=>{if(started)queueStageTransition()},1250);
  }
 
  const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
