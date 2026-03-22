@@ -18,6 +18,8 @@ const PROFILES = {
     { scenario: 'stage1-descent', repeats: 1, seedBase: 2000 },
     { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },
     { scenario: 'capture-rescue-dual', repeats: 1, seedBase: 5006 },
+    { scenario: 'carried-boss-diving-release', repeats: 1, seedBase: 5008 },
+    { scenario: 'carried-boss-formation-hostile', repeats: 1, seedBase: 5010 },
     { scenario: 'natural-capture-cycle', repeats: 1, seedBase: 5012 },
     { scenario: 'stage4-capture-pressure', repeats: 1, seedBase: 5020 },
     { scenario: 'second-capture-current', repeats: 1, seedBase: 6000 },

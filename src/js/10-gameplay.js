@@ -300,7 +300,12 @@ function awardKill(e,mode){
    S.alertT=Math.max(S.alertT,1.5);
    sfx.rescue();
   }
-  else{S.rogue=Math.min(3,S.rogue+1);S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';S.alertT=2.2;}
+  else{
+   S.rogue=Math.min(3,S.rogue+1);
+   logEvent('captured_fighter_turned_hostile',Object.assign({stage:S.stage,pendingRogues:S.rogue},enemyRef(e)));
+   S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';
+   S.alertT=2.2;
+  }
  }
 }
 

@@ -47,6 +47,15 @@ window.__galagaHarness__={
   logEvent('harness_trigger_carried_boss_rescue_kill',{boss:boss.id});
   return true;
  },
+ triggerCarriedBossKill(){
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss'&&e.carry);
+  if(!boss)return false;
+  boss.hp=0;
+  awardKill(boss,boss.dive);
+  ex(boss.x,boss.y,16,'#ff8cd7');
+  logEvent('harness_trigger_carried_boss_kill',{boss:boss.id,dive:boss.dive});
+  return true;
+ },
  triggerBossFirstHit(){
   const boss=S.e.find(e=>e.hp>1&&e.t==='boss');
   if(!boss)return false;
@@ -109,6 +118,18 @@ window.__galagaHarness__={
   boss.targetX=p.x;boss.targetY=138;boss.vx=0;boss.vy=S.stage<=2?116:124;boss.x=cl(+cfg.bossX||p.x,26,PLAY_W-26);boss.y=+cfg.bossY||70;
   logEvent('harness_natural_capture_cycle_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage,keepAlive:extra.length});
   logEnemyAttackStart(boss,'capture',{targetX:+boss.targetX.toFixed(2),targetY:boss.targetY,scripted:0,harness:1,naturalCapture:1});
+  return true;
+ },
+ setupCarriedBossFormationTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=1;boss.max=2;boss.form=1;boss.dive=0;boss.carry=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.shot=0;
+  boss.x=cl(+cfg.bossX||boss.tx||PLAY_W/2,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;
+  logEvent('harness_carried_boss_formation_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
   return true;
  },
  launchCarryingBossAttack(cfg={}){

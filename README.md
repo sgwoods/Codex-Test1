@@ -189,6 +189,8 @@ After GitHub Pages deploys, play at:
   npm run harness -- --scenario stage1-descent
   npm run harness -- --scenario rescue-dual
   npm run harness -- --scenario capture-rescue-dual
+  npm run harness -- --scenario carried-boss-diving-release
+  npm run harness -- --scenario carried-boss-formation-hostile
   npm run harness -- --scenario natural-capture-cycle
   npm run harness -- --scenario stage4-capture-pressure
   npm run harness -- --scenario boss-first-hit
@@ -216,6 +218,7 @@ After GitHub Pages deploys, play at:
   - stage clears / challenge clears / ship losses
   - per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes
   - capture/rescue markers such as capture start, fighter captured, and fighter rescued
+  - capture-branch markers such as rescue-pod spawn versus captured-fighter-turned-hostile
   - rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire
   - natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing
   - carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points

@@ -142,6 +142,22 @@ function rescuePipelineMetrics(session){
   };
 }
 
+function captureBranchMetrics(session){
+  const events = session.events || [];
+  const rescuePodSpawns = events.filter(e => e.type === 'rescue_pod_spawned');
+  const hostileTurns = events.filter(e => e.type === 'captured_fighter_turned_hostile');
+  const rescues = events.filter(e => e.type === 'fighter_rescued');
+  const destroyed = events.filter(e => e.type === 'captured_fighter_destroyed');
+  return {
+    rescuePodSpawns: rescuePodSpawns.length,
+    hostileTurns: hostileTurns.length,
+    fighterRescues: rescues.length,
+    carriedFighterDestroyed: destroyed.length,
+    divingRecoveryBranchTriggered: rescuePodSpawns.length > 0 || rescues.length > 0,
+    formationHostileBranchTriggered: hostileTurns.length > 0
+  };
+}
+
 function descentMetrics(events){
   const starts = events.filter(e => e.type === 'enemy_attack_start');
   const lowers = events.filter(e => e.type === 'enemy_lower_field');
@@ -379,6 +395,7 @@ function analyze(target){
   const squadronEscortStarts = events.filter(e => e.type === 'enemy_attack_start' && e.mode === 'escort' && (+e.offset || 0) !== 0);
   const dualMetrics = dualShotMetrics(events);
   const rescuePipeline = rescuePipelineMetrics(session);
+  const captureBranches = captureBranchMetrics(session);
   const descent = descentMetrics(events);
   const profiles = stageProfiles(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
@@ -414,6 +431,7 @@ function analyze(target){
     },
     dualMetrics,
     rescuePipeline,
+    captureBranches,
     descent,
     varietyMetrics: varietyMetrics(profiles),
     video: Object.assign({ file: run.videoFile || null }, audio)

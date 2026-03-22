@@ -67,6 +67,8 @@ For each fidelity topic:
 - Current metrics:
   - `rescue-dual`
   - `capture-rescue-dual`
+  - `carried-boss-diving-release`
+  - `carried-boss-formation-hostile`
   - `second-capture-current`
   - `natural-capture-cycle`
   - `stage4-capture-pressure`
@@ -74,6 +76,10 @@ For each fidelity topic:
 - Active gaps:
   - remaining rescue usefulness / edge-case fidelity
   - Stage 4-specific capture pressure still needs stronger measurement and tuning
+  - manual-backed confidence is currently strongest for:
+    - killing the boss while it is attacking recovers dual fighters
+    - shooting the carried fighter itself destroys it for points
+  - the exact hostile / in-formation branch still needs stronger primary-source confirmation against original gameplay footage or emulator capture
 
 ### Post-1.0 Scoring / Special Pattern Research
 

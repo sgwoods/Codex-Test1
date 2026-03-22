@@ -1,0 +1,15 @@
+{
+  "name": "carried-boss-diving-release",
+  "seed": 5027,
+  "duration": 3,
+  "config": {
+    "stage": 2,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupCaptureRescueDualTest", "args": { "stage": 2, "playerX": 140 } },
+    { "t": 0.75, "action": "harness", "method": "triggerCarriedBossRescueKill" },
+    { "t": 1.8, "action": "harness", "method": "stop", "args": "carried-boss-diving-release" }
+  ]
+}
