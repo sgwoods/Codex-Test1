@@ -79,6 +79,9 @@ For each fidelity topic:
   - manual-backed confidence is currently strongest for:
     - killing the boss while it is attacking recovers dual fighters
     - shooting the carried fighter itself destroys it for points
+  - current implementation now follows that attacking-boss branch more directly:
+    - diving boss kill releases the captured fighter into an automatic rejoin path
+    - in-formation boss kill spawns an immediate hostile captured fighter branch
   - the exact hostile / in-formation branch still needs stronger primary-source confirmation against original gameplay footage or emulator capture
 
 ### Post-1.0 Scoring / Special Pattern Research

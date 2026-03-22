@@ -174,9 +174,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.109.sha.16d38cc.dirty</span>
-    <span id="settingsRelease">Mar 22 2026, 5:43 PM EDT</span>
-    <span id="settingsState">main@16d38cc dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.110.sha.7b881f4.dirty</span>
+    <span id="settingsRelease">Mar 22 2026, 5:52 PM EDT</span>
+    <span id="settingsState">main@7b881f4 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -221,8 +221,8 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.109.sha.16d38cc.dirty</span>
-    <span id="buildStampRelease">Mar 22 2026, 5:43 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.110.sha.7b881f4.dirty</span>
+    <span id="buildStampRelease">Mar 22 2026, 5:52 PM EDT</span>
   </div>
 </div>
 <script>
@@ -280,7 +280,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.109.sha.16d38cc.dirty',commit:'16d38cc25b23c325634ce3743f24c09983c9dca0',branch:'main',dirty:true,released:'Mar 22 2026, 5:43 PM EDT',state:'main@16d38cc dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.110.sha.7b881f4.dirty',commit:'7b881f44f094d012334bde2bbe3a4c368c2d8229',branch:'main',dirty:true,released:'Mar 22 2026, 5:52 PM EDT',state:'main@7b881f4 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1633,6 +1633,37 @@ function destroyCarriedFighter(e){
  return points;
 }
 
+function releaseCapturedFighter(e){
+ S.cap={
+  mode:'dock',
+  x:e.x,
+  y:e.y,
+  vx:0,
+  vy:78,
+  t:8,
+  spin:0,
+  side:S.p.x<PLAY_W/2?1:-1
+ };
+ logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+e.x.toFixed(2),releaseY:+e.y.toFixed(2)},enemyRef(e)));
+ S.alertTxt='FIGHTER RELEASED';
+ S.alertT=Math.max(S.alertT,1.5);
+ sfx.rescue();
+}
+
+function spawnHostileCapturedFighter(e){
+ const rogue=makeEnemy('rogue',e.r,e.c,e.tx,e.ty,S.profile);
+ rogue.form=1;
+ rogue.spawn=0;
+ rogue.en=3;
+ rogue.x=e.tx;
+ rogue.y=e.ty;
+ rogue.cool=.55;
+ rogue.hitT=.2;
+ S.e.push(rogue);
+ logEvent('captured_fighter_hostile_spawned',Object.assign({stage:S.stage,hostileId:rogue.id,spawnX:+rogue.x.toFixed(2),spawnY:+rogue.y.toFixed(2)},enemyRef(e)));
+ return rogue;
+}
+
 function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
@@ -1672,15 +1703,11 @@ function awardKill(e,mode){
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  if(e.carry){
   if(dive){
-   S.cap={x:e.x,y:e.y,vy:90,t:8};
-   logEvent('rescue_pod_spawned',Object.assign({stage:S.stage,podX:+e.x.toFixed(2),podY:+e.y.toFixed(2)},enemyRef(e)));
-   S.alertTxt='RESCUE POD DROPPED';
-   S.alertT=Math.max(S.alertT,1.5);
-   sfx.rescue();
+   releaseCapturedFighter(e);
   }
   else{
-   S.rogue=Math.min(3,S.rogue+1);
-   logEvent('captured_fighter_turned_hostile',Object.assign({stage:S.stage,pendingRogues:S.rogue},enemyRef(e)));
+   const hostile=spawnHostileCapturedFighter(e);
+   logEvent('captured_fighter_turned_hostile',Object.assign({stage:S.stage,hostileId:hostile.id},enemyRef(e)));
    S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';
    S.alertT=2.2;
   }
@@ -1940,7 +1967,26 @@ function update(dt){
 
  if(!S.challenge){for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form});}}}
 
- if(S.cap){S.cap.y+=S.cap.vy*dt;S.cap.t-=dt;if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2)});sfx.rescue();sfx.join()}}
+ if(S.cap){
+  S.cap.t-=dt;
+  if(S.cap.mode==='dock'){
+   S.cap.spin=(S.cap.spin||0)+dt*8.8;
+   const side=S.cap.side||1;
+   const targetX=cl(p.x+side*(p.dual?14:10),14,PLAY_W-14);
+   const targetY=p.y-2;
+   S.cap.x+=(targetX-S.cap.x)*Math.min(1,dt*3.8)+(S.cap.vx||0)*dt;
+   S.cap.y+=(targetY-S.cap.y)*Math.min(1,dt*2.8)+(S.cap.vy||0)*dt;
+   S.cap.vy=Math.max(0,(S.cap.vy||0)-92*dt);
+   if(S.cap.t<=0||S.cap.y>PLAY_H+32)S.cap=null;
+   else if(!p.captured&&p.spawn<=0&&Math.abs(S.cap.x-targetX)<5&&Math.abs(S.cap.y-targetY)<5){
+    S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),autoDock:1});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2),autoDock:1});sfx.rescue();sfx.join();
+   }
+  }else{
+   S.cap.y+=S.cap.vy*dt;
+   if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;
+   else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2)});sfx.rescue();sfx.join()}
+  }
+ }
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }
 
@@ -2065,16 +2111,29 @@ function drawRescuePod(){
  if(!S.cap)return;
  ctx.save();
  ctx.translate(Math.round(S.cap.x),Math.round(S.cap.y));
- ctx.globalAlpha=.94;
- const pulse=.75+Math.sin(performance.now()/120)*.25;
- ctx.fillStyle=`rgba(145,236,255,${(0.12+pulse*0.12).toFixed(3)})`;
- ctx.beginPath();ctx.ellipse(0,0,15,20,0,0,7);ctx.fill();
- ctx.fillStyle='rgba(145,236,255,.16)';
- ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.fill();
- ctx.strokeStyle='rgba(202,249,255,.42)';
- ctx.lineWidth=1.2;
- ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.stroke();
- drawMiniShip(1.25,'#f4f8ff','#ff3347');
+ if(S.cap.mode==='dock'){
+  const pulse=.68+Math.sin((S.cap.spin||0)*1.7)*.18;
+  ctx.rotate(Math.sin((S.cap.spin||0)*0.7)*0.14);
+  ctx.globalAlpha=.96;
+  ctx.fillStyle=`rgba(210,248,255,${(0.08+pulse*0.12).toFixed(3)})`;
+  ctx.beginPath();ctx.ellipse(0,0,18,12,0,0,7);ctx.fill();
+  ctx.strokeStyle='rgba(255,242,184,.44)';
+  ctx.lineWidth=1.1;
+  ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(12,0);ctx.stroke();
+  ctx.rotate(Math.sin((S.cap.spin||0))*0.2);
+  drawMiniShip(1.18,'#f4f8ff','#ff4658');
+ }else{
+  ctx.globalAlpha=.94;
+  const pulse=.75+Math.sin(performance.now()/120)*.25;
+  ctx.fillStyle=`rgba(145,236,255,${(0.12+pulse*0.12).toFixed(3)})`;
+  ctx.beginPath();ctx.ellipse(0,0,15,20,0,0,7);ctx.fill();
+  ctx.fillStyle='rgba(145,236,255,.16)';
+  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.fill();
+  ctx.strokeStyle='rgba(202,249,255,.42)';
+  ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.ellipse(0,0,10,14,0,0,7);ctx.stroke();
+  drawMiniShip(1.25,'#f4f8ff','#ff3347');
+ }
  ctx.restore();
 }
 

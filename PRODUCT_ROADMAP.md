@@ -54,7 +54,7 @@ Key issue groups:
   - `#14` second captured-fighter behavior research
 - Capture/rescue rules
   - remaining rescue usefulness / clarity polish
-  - make the rescue pod / pickup marker more prominent so the rescue target reads clearly in live play
+  - make the released-fighter / rescue target read more prominently in live play
 - Manual-backed visible arcade moments
   - ensure the Stage 4+ three-ship boss squadron appears naturally in regular
     gameplay and shows its bonus clearly during the four-stage slice
