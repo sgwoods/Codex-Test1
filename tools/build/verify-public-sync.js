@@ -92,6 +92,7 @@ async function main(){
 
   if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
   if(manifest.project_id !== CANONICAL_PROJECT_SLUG) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json project_id: expected "${CANONICAL_PROJECT_SLUG}" got "${manifest.project_id}"`);
+  if(manifest.active !== true) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json active: expected true got "${manifest.active}"`);
   if(manifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json status_value: expected "${buildInfo.version}" got "${manifest.status_value}"`);
   if(manifest.focus_value !== expectedFocus) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json focus_value: expected "${expectedFocus}" got "${manifest.focus_value}"`);
   if(manifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json repo_pushed_at: expected "${pushedAt}" got "${manifest.repo_pushed_at}"`);
@@ -101,6 +102,7 @@ async function main(){
 
   if(legacyManifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json schema_version: expected "1.0" got "${legacyManifest.schema_version}"`);
   if(legacyManifest.project_id !== LEGACY_PROJECT_SLUG) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json project_id: expected "${LEGACY_PROJECT_SLUG}" got "${legacyManifest.project_id}"`);
+  if(legacyManifest.active !== false) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json active: expected false got "${legacyManifest.active}"`);
   if(legacyManifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json status_value: expected "${buildInfo.version}" got "${legacyManifest.status_value}"`);
   if(legacyManifest.focus_value !== expectedFocus) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json focus_value: expected "${expectedFocus}" got "${legacyManifest.focus_value}"`);
   if(legacyManifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json repo_pushed_at: expected "${pushedAt}" got "${legacyManifest.repo_pushed_at}"`);

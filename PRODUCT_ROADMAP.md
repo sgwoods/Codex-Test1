@@ -148,6 +148,25 @@ Suggested versioning:
 
 - `1.0.0`
 
+## Milestone F: Post-1.0 Environment Separation
+
+Target outcome:
+
+- production and non-production are operationally distinct
+- public score integrity is not blurred by day-to-day development traffic
+- release labeling makes environment intent obvious
+
+Key issue groups:
+
+- production vs pre-production score/data separation
+- environment-aware build labeling and account/status presentation
+- release workflow hardening between dev, production, and beta lanes
+
+Suggested versioning:
+
+- `1.0.x`
+- `1.1.x`
+
 ## How We Should Use This Roadmap
 
 - Use it to decide when a `PATCH` bump is enough versus when a `MINOR` bump is justified

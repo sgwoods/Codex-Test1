@@ -146,3 +146,16 @@ This gives every build a unique identity without forcing a SemVer bump for every
       consciously documented
     - the hosted build, high-score flow, and public project pages are suitable
       for general external use
+
+## Post-1.0 Environment Goal
+
+- after `1.0`, cleanly separate production and non-production score/data paths
+- production should remain the canonical public Aurora environment
+- non-production should no longer write directly into the same live score path
+  by default
+- preferred order after `1.0`:
+  1. keep Aurora production and Aurora beta together only if that remains useful
+  2. isolate pre-production/dev writes behind a separate environment, separate
+     tables, or a no-submit/dev-only mode
+  3. make the active environment obvious in the build label and account/status
+     surfaces

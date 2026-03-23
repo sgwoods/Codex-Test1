@@ -110,12 +110,12 @@ function buildProjectPage(buildInfo, latestNote, pushedAt){
   }).trimEnd() + '\n';
 }
 
-function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projectPagePath }){
+function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projectPagePath, active }){
   const latestNote = (readJson(RELEASE_NOTES).notes || [])[0] || buildInfo.latestReleaseNote || {};
   const status = {
     schema_version: '1.0',
     project_id: projectId,
-    active: true,
+    active,
     display_name: 'Aurora Galactica',
     project_page_path: projectPagePath,
     repo_url: 'https://github.com/sgwoods/Codex-Test1',
@@ -154,11 +154,13 @@ async function main(){
   const projectHtml = buildProjectPage(buildInfo, latestNote, pushedAt);
   const canonicalStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
     projectId: CANONICAL_PROJECT_SLUG,
-    projectPagePath: `${CANONICAL_PROJECT_SLUG}.html`
+    projectPagePath: `${CANONICAL_PROJECT_SLUG}.html`,
+    active: true
   });
   const legacyStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
     projectId: LEGACY_PROJECT_SLUG,
-    projectPagePath: `${LEGACY_PROJECT_SLUG}.html`
+    projectPagePath: `${LEGACY_PROJECT_SLUG}.html`,
+    active: false
   });
 
   const changedCanonicalProject = await syncFile(
