@@ -47,13 +47,12 @@ Repository roles:
 
 After GitHub Pages deploys, play at:
 
-- alpha:
+- production:
   - `https://sgwoods.github.io/Aurora-Galactica/`
 - beta:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
-The root build is the continuously updated `alpha` lane. The `/beta/` lane is a manually promoted snapshot used for less-frequent milestone playtesting.
-Day-to-day engineering work continues in `Codex-Test1`, while the public/shared release surface lives under `Aurora-Galactica`.
+The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The `/beta/` lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in `Codex-Test1` as the pre-production development line.
 
 ## Screenshot
 

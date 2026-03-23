@@ -30,16 +30,18 @@ function escapeRegex(value){
 
 function buildBetaInfo(sourceInfo){
   const betaVersion = toBetaVersion(sourceInfo.version);
-  const betaLabel = `${betaVersion}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}.beta${sourceInfo.dirty ? '.dirty' : ''}`;
+  const betaLabel = `${betaVersion}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}.beta`;
   const sourceState = sourceInfo.state || `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`;
   return {
     ...sourceInfo,
     version: betaVersion,
     label: betaLabel,
     branch: 'beta',
-    state: `beta@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`,
+    state: `beta@${sourceInfo.shortCommit} clean`,
     releaseChannel: 'production beta',
-    promotedFromState: sourceState
+    promotedFromState: sourceState,
+    dirty: false,
+    dirtyFiles: []
   };
 }
 
@@ -54,6 +56,7 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
     [new RegExp(`branch:'${escapeRegex(sourceInfo.branch)}'`, 'g'), `branch:'${betaInfo.branch}'`],
     [new RegExp(`state:'${escapeRegex(sourceState)}'`, 'g'), `state:'${betaInfo.state}'`],
     [new RegExp(`releaseChannel:'${escapeRegex(sourceChannel)}'`, 'g'), `releaseChannel:'${betaInfo.releaseChannel}'`],
+    [new RegExp(`dirty:${sourceInfo.dirty ? 'true' : 'false'}`, 'g'), `dirty:${betaInfo.dirty ? 'true' : 'false'}`],
     [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${betaInfo.label}`],
     [new RegExp(`Lane ${escapeRegex(sourceChannel)}`, 'g'), `Lane ${betaInfo.releaseChannel}`]
   ];

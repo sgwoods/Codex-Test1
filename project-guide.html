@@ -359,7 +359,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.134.sha.10b368d.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.137.sha.ceede57.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -375,7 +375,7 @@
             </div>
           </div>
           <div class="heroLinks">
-            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open alpha build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open production build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -708,8 +708,8 @@
 <ul><li>development repo:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li><li>public release repo:<ul><li><code>https://github.com/sgwoods/Aurora-Galactica</code></li></ul></li></ul>
 <h3>Live</h3>
 <p>After GitHub Pages deploys, play at:</p>
-<ul><li>alpha:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
-<p>The root build is the continuously updated <code>alpha</code> lane. The <code>/beta/</code> lane is a manually promoted snapshot used for less-frequent milestone playtesting. Day-to-day engineering work continues in <code>Codex-Test1</code>, while the public/shared release surface lives under <code>Aurora-Galactica</code>.</p>
+<ul><li>production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
+<p>The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The <code>/beta/</code> lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in <code>Codex-Test1</code> as the pre-production development line.</p>
 <h3>Screenshot</h3>
 <p><img alt="Gameplay Screenshot" src="./export.mov.png"></p>
 <h3>Run Locally (macOS / Chrome)</h3>
@@ -1174,7 +1174,7 @@
 <p>Galaga expansion</p>
 <ul><li><code>MINOR</code><ul><li>use for meaningful product milestones</li><li>examples:<ul><li>major gameplay fidelity improvement</li><li>large systems addition</li><li>new stage/content breadth milestone</li><li>public playtest readiness</li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>bug fixes</li><li>tuning passes</li><li>UI polish</li><li>harness/reporting improvements</li></ul></li></ul></li><li><code>prerelease</code><ul><li><code>alpha</code>: active system building, rules changes, frequent balance changes</li><li><code>beta</code>: feature-complete enough for broader testing, still tuning quality and regressions</li><li><code>rc</code>: release candidate, only bug fixes and polish before a stable cut</li></ul></li></ul>
 <h3>Hosted Release Lanes</h3>
-<ul><li><code>alpha</code><ul><li>continuously published at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>expected to move frequently with active development, instrumentation, tuning, and UI changes</li></ul></li><li><code>beta</code><ul><li>manually promoted at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>should move only when a build is materially better and worth broader checkpoint testing</li></ul></li></ul>
+<ul><li><code>production</code><ul><li>published at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>this is the official shared build, even while SemVer remains prerelease before <code>1.0</code></li></ul></li><li><code>beta</code><ul><li>manually promoted at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>this is a distinct public checkpoint lane for less-frequent milestone playtesting</li></ul></li><li><code>pre-production</code><ul><li>day-to-day development happens in:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li><li>this is the active engineering line and not the canonical shared play URL</li></ul></li></ul>
 <h3>Repository Roles</h3>
 <ul><li><code>Codex-Test1</code><ul><li>development repo</li><li>active day-to-day engineering, tuning, issues, and harness work</li></ul></li><li><code>Aurora-Galactica</code><ul><li>public release repo</li><li>promoted checkpoints intended for broader sharing and less frequent change</li></ul></li></ul>
 <h3>Beta Promotion Workflow</h3>
@@ -1194,7 +1194,7 @@
 <h3>Release History Policy</h3>
 <ul><li>every meaningful release should add an entry under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-history/</code></li></ul></li><li>required:<ul><li>structured session summary</li></ul></li><li>optional but preferred:<ul><li>verbatim raw chat transcript if exported from Codex</li></ul></li><li>subsequent release entries should capture the incremental work since the previous release entry</li></ul>
 <h3>Release Targets</h3>
-<ul><li><code>alpha</code><ul><li>current phase</li><li>core gameplay and fidelity for the four-stage slice are still moving</li></ul></li><li><code>beta</code><ul><li>target when:<ul><li>the four-stage slice is stable enough for broader external playtesting</li><li>capture/rescue rules are settled for that slice</li><li>stage challenge/results/high-score flow is in place</li><li>visuals/audio are consistent enough for broader playtesting</li></ul></li><li>hosted expectation:<ul><li>use the manually promoted <code>/beta/</code> lane for these checkpoint builds rather than updating it on every alpha change</li></ul></li></ul></li><li><code>1.0</code><ul><li>target when:<ul><li>Stage <code>1</code> through Stage <code>4</code> feel stable as one coherent game loop</li><li>the Stage <code>3</code> challenge stage is rewarding and readable</li><li>the Stage <code>4</code> endpoint is fair and beatable</li><li>core rule fidelity gaps inside the four-stage slice are resolved or</li></ul></li></ul></li></ul>
+<ul><li><code>pre-1.0</code><ul><li>current phase</li><li>production remains prerelease in SemVer terms while core gameplay and fidelity for the four-stage slice are still moving</li></ul></li><li><code>beta</code><ul><li>target when:<ul><li>the four-stage slice is stable enough for broader external playtesting</li><li>capture/rescue rules are settled for that slice</li><li>stage challenge/results/high-score flow is in place</li><li>visuals/audio are consistent enough for broader playtesting</li></ul></li><li>hosted expectation:<ul><li>use the manually promoted <code>/beta/</code> lane for these checkpoint builds rather than updating it on every production change</li></ul></li></ul></li><li><code>1.0</code><ul><li>target when:<ul><li>Stage <code>1</code> through Stage <code>4</code> feel stable as one coherent game loop</li><li>the Stage <code>3</code> challenge stage is rewarding and readable</li><li>the Stage <code>4</code> endpoint is fair and beatable</li><li>core rule fidelity gaps inside the four-stage slice are resolved or</li></ul></li></ul></li></ul>
 <p>consciously documented</p>
 <ul><li>the hosted build, high-score flow, and public project pages are suitable</li></ul>
 <p>for general external use</p>
@@ -1261,7 +1261,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Capture clarity, boss feedback, and 1.0 release focus</strong><br>
-          Build: 0.5.0-alpha.1+build.134.sha.10b368d.dirty
+          Build: 0.5.0-alpha.1+build.137.sha.ceede57.dirty
         </p>
       </aside>
     </main>
