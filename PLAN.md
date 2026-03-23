@@ -176,6 +176,43 @@ Expansion beyond Stage `4`, new theme systems, and broader content breadth are
 still valuable, but they are now explicitly post-`1.0` work unless they are
 needed to support this smaller shipped slice.
 
+### Launch Blocking List
+
+This is the maintained release view for the scoped four-stage `1.0` launch.
+Use it as the default triage order until launch unless a new regression clearly
+overrides it.
+
+| Bucket | Issue | Summary | Plan Stage |
+| --- | --- | --- | --- |
+| Must Fix | `#18` | Stage `4` fairness and survivability are still too punishing in harness and real play. | Phase 1 |
+| Must Fix | `#61` | Hosted runs can still hit the empty-playfield / bad Stage `3` -> `4` transition edge case. | Phase 1 |
+| Must Fix | `#32` | Stage `2` spacing / pressure still needs to feel consistently fair in live play. | Phase 1 |
+| Must Fix | `#64` | Challenge-stage enemies firing breaks core bonus-stage fidelity. | Phase 1 |
+| Must Fix | `#9` | Stage `3` challenge stage still needs closer original-Galaga fidelity. | Phase 1 |
+| Must Fix | `#40` | Capture / rescue feedback is still too unclear in live play. | Phase 3 |
+| Must Fix | `#74` | Bonus squadron spacing is too loose, so the three-kill bonus group reads poorly. | Phase 2 |
+| Must Fix | `#47` | Special squadron spacing and bonus presentation still need tighter fidelity. | Phase 2 |
+| Must Fix | `#38` | Ship-hit explosion, pause, and feedback still need to feel good enough for release. | Phase 2 |
+| Should Fix | `#58` | Capture / rescue rules are much improved but still not fully at original-Galaga fidelity. | Phase 3 |
+| Should Fix | `#73` | Let players shoot during the early tractor-beam capture window for fidelity and skill expression. | Phase 3 |
+| Should Fix | `#4` | Stage `1` opening fidelity should improve if we can do it without destabilizing later work. | Phase 1 |
+| Should Fix | `#62` | Self-play can still fail too early in Stage `1`; keep measuring it while tuning the opening. | Phase 1 |
+| Should Fix | `#31` | Minor release/build timestamp polish for public presentation. | Phase 3 |
+| Can Slip | `#63` | Wait-mode score cycling is nice-to-have attract polish, not a release blocker. | Phase 3 |
+| Can Slip | `#49` / `#60` | Score-view interaction polish can slip if the current panel remains understandable. | Phase 3 |
+| Can Slip | `#48` | Visible frame is good to have, but decorative fidelity can slip if gameplay is solid. | Phase 2 |
+| Can Slip | `#65` | Aurora / wintry frame art and backdrop theming are post-stability visual polish. | Phase 2 |
+| Can Slip | `#71` | In-game mute button is useful, but not required for the scoped launch. | Phase 3 |
+
+Items currently treated as post-`1.0` unless they become necessary for
+external playtesting or operational stability:
+
+- `#69` remote gameplay logs and optional video artifacts
+- `#70` homepage recent plays / watch links
+- `#17` broader reference baseline work
+- `#19` later-run collision-chain regression outside the four-stage slice
+- replay, submission, theme-system, and broader public-workflow enhancements
+
 ### Track A. Autonomous Original-Galaga Baseline
 
 1. Build and maintain a durable reference baseline using:
