@@ -36,6 +36,13 @@ Project guide:
     - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 
+Repository roles:
+
+- development repo:
+  - `https://github.com/sgwoods/Codex-Test1`
+- public release repo:
+  - `https://github.com/sgwoods/Aurora-Galactica`
+
 ## Live
 
 After GitHub Pages deploys, play at:
@@ -46,6 +53,7 @@ After GitHub Pages deploys, play at:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
 The root build is the continuously updated `alpha` lane. The `/beta/` lane is a manually promoted snapshot used for less-frequent milestone playtesting.
+Day-to-day engineering work continues in `Codex-Test1`, while the public/shared release surface lives under `Aurora-Galactica`.
 
 ## Screenshot
 
