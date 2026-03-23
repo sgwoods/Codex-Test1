@@ -176,7 +176,7 @@ const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
  :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
- :s===2?{shotCap:1,attackCap:2,diveRate:.72,coolA:5.6,coolB:3.6,globalA:1.9,globalB:1.35,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
+ :s===2?{shotCap:1,attackCap:1,diveRate:.64,coolA:6,coolB:3.9,globalA:2.05,globalB:1.48,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
  :s===3?{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3}
  :s===4?{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3}
  :s===5?{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3}
