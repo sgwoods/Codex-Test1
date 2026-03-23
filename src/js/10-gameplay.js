@@ -269,7 +269,7 @@ function shoot(){
 function hasCarriedFighter(){
  return S.e.some(e=>e.hp>0&&e.carry);
 }
-function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0}
+function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0}
 function capturePlayer(e){if(!canCapture())return;const p=S.p;p.captured=1;p.capBoss=e;p.capT=1.2;e.beam=1;e.beamT=Math.max(.5,e.beamT);S.lastCaptureStartT=S.stageClock;logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));sfx.beam()}
 function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;S.captureCountStage++;S.lastFighterCapturedT=S.stageClock;S.recoverT=Math.max(S.recoverT,1.6);S.attackGapT=Math.max(S.attackGapT,1.35);startSequence('captureBeat',1.45,'FIGHTER CAPTURED','BOSS RETREAT');logEvent('fighter_captured',Object.assign({stage:S.stage,stageClock:+S.stageClock.toFixed(3),captureCountStage:S.captureCountStage,livesAfter:Math.max(0,S.lives+1),playerLane:playLane(p.x),timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)},enemyRef(e)));logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});sfx.captureRetreat();if(S.lives<0)gameOver()}
 function activeEscortCount(e){
@@ -279,7 +279,11 @@ function activeEscortCount(e){
 
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- return e.dive ? {x:0,y:-18} : {x:0,y:18};
+ // Docked bosses carry the fighter tucked above/behind them in formation.
+ // When the boss is diving, keep the fighter trailing from the same back-side
+ // anchor so the carried state reads as "behind the boss" rather than hanging
+ // below it.
+ return e.dive ? {x:0,y:-16} : {x:0,y:-18};
 }
 
 function carriedFighterTarget(e){
@@ -308,17 +312,18 @@ function destroyCarriedFighter(e){
 }
 
 function releaseCapturedFighter(e){
+ const carryPos=carriedFighterTarget(e);
  S.cap={
   mode:'dock',
-  x:e.x,
-  y:e.y,
+  x:carryPos?.x??e.x,
+  y:carryPos?.y??e.y,
   vx:0,
   vy:78,
   t:8,
   spin:0,
   side:S.p.x<PLAY_W/2?1:-1
  };
- logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+e.x.toFixed(2),releaseY:+e.y.toFixed(2)},enemyRef(e)));
+ logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+S.cap.x.toFixed(2),releaseY:+S.cap.y.toFixed(2)},enemyRef(e)));
  S.alertTxt='FIGHTER RELEASED';
  S.alertT=Math.max(S.alertT,1.5);
  sfx.rescue();
@@ -326,14 +331,15 @@ function releaseCapturedFighter(e){
 
 function spawnHostileCapturedFighter(e){
  const rogue=makeEnemy('rogue',e.r,e.c,e.tx,e.ty,S.profile);
+ const carryPos=carriedFighterTarget(e);
  rogue.form=1;
  rogue.spawn=0;
  rogue.en=3;
- rogue.x=e.tx;
- rogue.y=e.ty;
- rogue.cool=.55;
- rogue.hitT=.2;
- S.e.push(rogue);
+ rogue.x=carryPos?.x??e.tx;
+ rogue.y=carryPos?.y??e.ty;
+  rogue.cool=.55;
+  rogue.hitT=.2;
+  S.e.push(rogue);
  logEvent('captured_fighter_hostile_spawned',Object.assign({stage:S.stage,hostileId:rogue.id,spawnX:+rogue.x.toFixed(2),spawnY:+rogue.y.toFixed(2)},enemyRef(e)));
  return rogue;
 }
