@@ -735,7 +735,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         </div>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong>. Live game:
-          <a href="https://sgwoods.github.io/Aurora-Galactica/">sgwoods.github.io/Codex-Test1/</a>
+          <a href="https://sgwoods.github.io/Aurora-Galactica/">sgwoods.github.io/Aurora-Galactica/</a>
         </p>
       </section>
     </main>
