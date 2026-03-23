@@ -43,14 +43,18 @@ Example:
 
 ## Hosted Release Lanes
 
-- `alpha`
-  - continuously published at:
+- `production`
+  - published at:
     - `https://sgwoods.github.io/Aurora-Galactica/`
-  - expected to move frequently with active development, instrumentation, tuning, and UI changes
+  - this is the official shared build, even while SemVer remains prerelease before `1.0`
 - `beta`
   - manually promoted at:
     - `https://sgwoods.github.io/Aurora-Galactica/beta/`
-  - should move only when a build is materially better and worth broader checkpoint testing
+  - this is a distinct public checkpoint lane for less-frequent milestone playtesting
+- `pre-production`
+  - day-to-day development happens in:
+    - `https://github.com/sgwoods/Codex-Test1`
+  - this is the active engineering line and not the canonical shared play URL
 
 ## Repository Roles
 
@@ -122,9 +126,9 @@ This gives every build a unique identity without forcing a SemVer bump for every
 
 ## Release Targets
 
-- `alpha`
+- `pre-1.0`
   - current phase
-  - core gameplay and fidelity for the four-stage slice are still moving
+  - production remains prerelease in SemVer terms while core gameplay and fidelity for the four-stage slice are still moving
 - `beta`
   - target when:
     - the four-stage slice is stable enough for broader external playtesting
@@ -132,7 +136,7 @@ This gives every build a unique identity without forcing a SemVer bump for every
     - stage challenge/results/high-score flow is in place
     - visuals/audio are consistent enough for broader playtesting
   - hosted expectation:
-    - use the manually promoted `/beta/` lane for these checkpoint builds rather than updating it on every alpha change
+    - use the manually promoted `/beta/` lane for these checkpoint builds rather than updating it on every production change
 - `1.0`
   - target when:
     - Stage `1` through Stage `4` feel stable as one coherent game loop

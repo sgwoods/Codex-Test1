@@ -25,30 +25,37 @@ function toBetaVersion(version){
 }
 
 function escapeRegex(value){
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function buildBetaInfo(sourceInfo){
   const betaVersion = toBetaVersion(sourceInfo.version);
   const betaLabel = `${betaVersion}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}.beta${sourceInfo.dirty ? '.dirty' : ''}`;
+  const sourceState = sourceInfo.state || `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`;
   return {
     ...sourceInfo,
     version: betaVersion,
     label: betaLabel,
     branch: 'beta',
-    state: `beta@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`
+    state: `beta@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`,
+    releaseChannel: 'production beta',
+    promotedFromState: sourceState
   };
 }
 
 function rewriteBetaText(filePath, sourceInfo, betaInfo){
   if(!fs.existsSync(filePath)) return;
   let text = fs.readFileSync(filePath, 'utf8');
+  const sourceState = sourceInfo.state || `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`;
+  const sourceChannel = sourceInfo.releaseChannel || 'pre-production';
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), betaInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${betaInfo.version}'`],
     [new RegExp(`branch:'${escapeRegex(sourceInfo.branch)}'`, 'g'), `branch:'${betaInfo.branch}'`],
-    [new RegExp(`state:'${escapeRegex(sourceInfo.state)}'`, 'g'), `state:'${betaInfo.state}'`],
-    [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${betaInfo.label}`]
+    [new RegExp(`state:'${escapeRegex(sourceState)}'`, 'g'), `state:'${betaInfo.state}'`],
+    [new RegExp(`releaseChannel:'${escapeRegex(sourceChannel)}'`, 'g'), `releaseChannel:'${betaInfo.releaseChannel}'`],
+    [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${betaInfo.label}`],
+    [new RegExp(`Lane ${escapeRegex(sourceChannel)}`, 'g'), `Lane ${betaInfo.releaseChannel}`]
   ];
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);

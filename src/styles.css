@@ -65,7 +65,8 @@ canvas{display:block;width:100vw;height:100vh}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
-#settingsVersion,#settingsRelease,#settingsState{display:block}
+#settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
+#settingsChannel{color:rgba(126,242,255,.82);text-transform:uppercase}
 #settingsNotes{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
@@ -123,7 +124,8 @@ canvas{display:block;width:100vw;height:100vh}
 #buildStamp{pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:min(100%,360px);padding:8px 10px 10px;border:1px solid rgba(136,245,255,.14);background:linear-gradient(180deg,rgba(8,18,35,.28),rgba(5,12,24,.62));font:400 10px/1.3 "Courier New",Consolas,monospace;letter-spacing:.03em;color:rgba(218,236,255,.52);text-align:right;text-shadow:0 0 6px rgba(0,0,0,.92)}
 #pilotStamp{display:block;margin-bottom:3px;padding:4px 8px;border:1px solid rgba(126,242,255,.24);background:rgba(7,22,36,.78);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(126,242,255,.9);max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #pilotStamp.verified::before{content:'🔒 ';font-size:11px;vertical-align:baseline}
-#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+#buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+#buildStampChannel{color:rgba(126,242,255,.82);text-transform:uppercase}
 .k{color:var(--a)}
 @media (max-width:840px){
  #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}

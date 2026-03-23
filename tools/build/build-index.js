@@ -83,6 +83,18 @@ function git(args, fallback = ''){
   }
 }
 
+function detectRepoRef(){
+  return process.env.GITHUB_REPOSITORY
+    || git('config --get remote.origin.url', '')
+    || '';
+}
+
+function detectReleaseChannel(repoRef){
+  if(/Aurora-Galactica/i.test(repoRef)) return 'production';
+  if(/Codex-Test1/i.test(repoRef)) return 'pre-production';
+  return 'development';
+}
+
 function esc(value=''){
   return String(value)
     .replace(/&/g, '&amp;')
@@ -927,7 +939,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             </div>
           </div>
           <div class="heroLinks">
-            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open alpha build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open production build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -962,6 +974,8 @@ function build(){
   const buildCommit = git('rev-parse HEAD', 'unknown');
   const buildShortCommit = git('rev-parse --short HEAD', 'unknown');
   const buildBranch = git('branch --show-current', 'detached');
+  const buildRepoRef = detectRepoRef();
+  const buildReleaseChannel = detectReleaseChannel(buildRepoRef);
   const buildDirtyFiles = git('status --porcelain', '').split('\n').map(s => s.trim()).filter(Boolean);
   const buildDirty = buildDirtyFiles.length > 0;
   const buildNumber = process.env.BUILD_NUMBER || process.env.GITHUB_RUN_NUMBER || git('rev-list --count HEAD', '0');
@@ -990,6 +1004,7 @@ function build(){
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_LABEL: buildLabel,
+    BUILD_CHANNEL: buildReleaseChannel,
     BUILD_COMMIT: buildCommit,
     BUILD_BRANCH: buildBranch,
     BUILD_DIRTY: buildDirty ? 'true' : 'false',
@@ -1024,6 +1039,8 @@ function build(){
     commit: buildCommit,
     shortCommit: buildShortCommit,
     branch: buildBranch,
+    state: buildState,
+    releaseChannel: buildReleaseChannel,
     dirty: buildDirty,
     dirtyFiles: buildDirtyFiles,
     builtAtUtc: buildUtc,
