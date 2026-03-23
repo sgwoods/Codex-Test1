@@ -22,6 +22,9 @@ const PROFILES = {
     { scenario: 'stage4-survival', repeats: 1, seedBase: 4100 }
   ],
   fidelity: [
+    { scenario: 'stage3-challenge', repeats: 1, seedBase: 3002 },
+    { scenario: 'stage6-regular', repeats: 1, seedBase: 6000 },
+    { scenario: 'stage7-challenge', repeats: 1, seedBase: 7000 },
     { scenario: 'stage3-transition', repeats: 1, seedBase: 3000 },
     { scenario: 'stage1-descent', repeats: 1, seedBase: 2000 },
     { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },

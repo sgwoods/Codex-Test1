@@ -49,8 +49,11 @@ For each fidelity topic:
   - manual-backed structure
   - original challenge-stage footage
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/challenge-stage-reference/README.md`
 - Current metrics:
   - `stage3-challenge`
+  - `stage6-regular`
+  - `stage7-challenge`
   - challenge hit rate
   - average upper-band dwell time per target
 - Current rule note:

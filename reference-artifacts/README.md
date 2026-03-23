@@ -10,6 +10,9 @@ This directory stores durable reference material used to tune the game toward or
 - `analyses/release-reference-pack/`: current release-focused comparison pack
   spanning capture branches, stage transitions, Stage 4 composition, and frame
   treatment
+- `analyses/challenge-stage-reference/`: reusable challenge-stage video notes
+  covering non-firing bonus behavior, moving starfield, reserve-ships drawer,
+  and perfect-result presentation
 
 ## Storage Policy
 

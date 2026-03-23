@@ -202,6 +202,29 @@ function transitionMetrics(session){
   };
 }
 
+function challengeRulesMetrics(session){
+  const events = session.events || [];
+  const stageSpawns = events.filter(e => e.type === 'stage_spawn');
+  const challengeStages = stageSpawns.filter(e => !!e.challenge).map(e => e.stage);
+  const regularStages = stageSpawns.filter(e => !e.challenge).map(e => e.stage);
+  const bulletsDuringChallenge = events.filter(e => e.type === 'enemy_bullet_fired' && !!e.challenge);
+  const attacksDuringChallenge = events.filter(e => e.type === 'enemy_attack_start' && !!e.challenge);
+  const shipLossesDuringChallenge = events.filter(e => e.type === 'ship_lost' && !!e.challenge);
+  const challengeClears = events.filter(e => e.type === 'challenge_clear').map(e => e.stage);
+  return {
+    challengeStages,
+    regularStages,
+    challengeClears,
+    bulletsDuringChallenge: bulletsDuringChallenge.length,
+    attacksDuringChallenge: attacksDuringChallenge.length,
+    shipLossesDuringChallenge: shipLossesDuringChallenge.length,
+    firstChallengeStage: challengeStages.length ? Math.min(...challengeStages) : null,
+    cadenceLooksLikeFirstThenEveryFourthStage:
+      challengeStages.length <= 1 ||
+      challengeStages.slice(1).every((stage, idx) => stage - challengeStages[idx] === 4)
+  };
+}
+
 function descentMetrics(events){
   const starts = events.filter(e => e.type === 'enemy_attack_start');
   const lowers = events.filter(e => e.type === 'enemy_lower_field');
@@ -441,6 +464,7 @@ function analyze(target){
   const rescuePipeline = rescuePipelineMetrics(session);
   const captureBranches = captureBranchMetrics(session);
   const transition = transitionMetrics(session);
+  const challengeRules = challengeRulesMetrics(session);
   const descent = descentMetrics(events);
   const profiles = stageProfiles(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
@@ -478,6 +502,7 @@ function analyze(target){
     rescuePipeline,
     captureBranches,
     transition,
+    challengeRules,
     descent,
     varietyMetrics: varietyMetrics(profiles),
     video: Object.assign({ file: run.videoFile || null }, audio)

@@ -1,0 +1,18 @@
+{
+  "name": "stage6-regular",
+  "seed": 6006,
+  "duration": 8,
+  "config": {
+    "stage": 6,
+    "ships": 3,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.4, "action": "down", "code": "Space" },
+    { "t": 0.6, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.2, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.21, "action": "down", "code": "ArrowRight" },
+    { "t": 4.2, "action": "up", "code": "ArrowRight" },
+    { "t": 6.5, "action": "up", "code": "Space" }
+  ]
+}
