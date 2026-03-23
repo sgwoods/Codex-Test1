@@ -94,7 +94,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
- started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,sequenceT:0,sequenceMode:'',attract:0});
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,sequenceT:0,sequenceMode:'',attract:0});
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -529,8 +529,17 @@ function update(dt){
   S.bannerMode='challengeResult';
   S.banner=1.15;
   S.pendingStage=S.stage+1;
+  S.lastChallengeClearT=S.stageClock;
   S.postChallengeT=1.1;
   return;
+ }
+ if(S.challenge&&S.ch.done&&!alive.length&&S.pendingStage&&S.postChallengeT<=0&&S.nextStageT<=0){
+  const dtSinceClear=S.lastChallengeClearT==null?Infinity:(S.stageClock-S.lastChallengeClearT);
+  if(dtSinceClear>=1.25){
+   logEvent('challenge_transition_recovered',{stage:S.stage,pendingStage:S.pendingStage,dtSinceClear:+dtSinceClear.toFixed(3)});
+   queueStageTransition('challengeResult');
+   return;
+  }
  }
 
  const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}

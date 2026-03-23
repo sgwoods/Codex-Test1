@@ -191,9 +191,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.120.sha.f072d24.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 8:19 AM EDT</span>
-    <span id="settingsState">main@f072d24 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.121.sha.3cb10f9.dirty</span>
+    <span id="settingsRelease">Mar 23 2026, 8:28 AM EDT</span>
+    <span id="settingsState">main@3cb10f9 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -249,8 +249,8 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.120.sha.f072d24.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 8:19 AM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.121.sha.3cb10f9.dirty</span>
+    <span id="buildStampRelease">Mar 23 2026, 8:28 AM EDT</span>
   </div>
 </div>
 <script>
@@ -308,7 +308,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.120.sha.f072d24.dirty',commit:'f072d24d57fd91e5b663048396b224e3cc03a949',branch:'main',dirty:true,released:'Mar 23 2026, 8:19 AM EDT',state:'main@f072d24 dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.121.sha.3cb10f9.dirty',commit:'3cb10f9a96c6a8ad6c1c3baa3d51f629b5fe1587',branch:'main',dirty:true,released:'Mar 23 2026, 8:28 AM EDT',state:'main@3cb10f9 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -455,7 +455,7 @@ const P={
 };
 
 const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
- p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,profile:STAGE_BAND_PROFILES[0],
+ p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -1594,7 +1594,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
- started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,sequenceT:0,sequenceMode:'',attract:0});
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,sequenceT:0,sequenceMode:'',attract:0});
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -2029,8 +2029,17 @@ function update(dt){
   S.bannerMode='challengeResult';
   S.banner=1.15;
   S.pendingStage=S.stage+1;
+  S.lastChallengeClearT=S.stageClock;
   S.postChallengeT=1.1;
   return;
+ }
+ if(S.challenge&&S.ch.done&&!alive.length&&S.pendingStage&&S.postChallengeT<=0&&S.nextStageT<=0){
+  const dtSinceClear=S.lastChallengeClearT==null?Infinity:(S.stageClock-S.lastChallengeClearT);
+  if(dtSinceClear>=1.25){
+   logEvent('challenge_transition_recovered',{stage:S.stage,pendingStage:S.pendingStage,dtSinceClear:+dtSinceClear.toFixed(3)});
+   queueStageTransition('challengeResult');
+   return;
+  }
  }
 
  const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
