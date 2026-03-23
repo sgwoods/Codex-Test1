@@ -7,7 +7,9 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const BUILD_INFO = path.join(ROOT, 'build-info.json');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
-const PROJECT_TEMPLATE = path.join(ROOT, 'src', 'public', 'codex-test1.template.html');
+const PROJECT_TEMPLATE = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
+const CANONICAL_PROJECT_SLUG = 'aurora-galactica';
+const LEGACY_PROJECT_SLUG = 'codex-test1';
 
 const OWNER = process.env.PUBLIC_REPO_OWNER || 'sgwoods';
 const REPO = process.env.PUBLIC_REPO_NAME || 'public';
@@ -68,7 +70,7 @@ function request(url, options = {}){
     headers: {
       'Authorization': `Bearer ${TOKEN}`,
       'Accept': 'application/vnd.github+json',
-      'User-Agent': 'Codex-Test1-public-sync',
+      'User-Agent': 'Aurora-Galactica-public-sync',
       ...(options.headers || {})
     }
   });
@@ -108,14 +110,14 @@ function buildProjectPage(buildInfo, latestNote, pushedAt){
   }).trimEnd() + '\n';
 }
 
-function buildStatusManifest(buildInfo, dashboard, pushedAt){
+function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projectPagePath }){
   const latestNote = (readJson(RELEASE_NOTES).notes || [])[0] || buildInfo.latestReleaseNote || {};
   const status = {
     schema_version: '1.0',
-    project_id: 'codex-test1',
+    project_id: projectId,
     active: true,
     display_name: 'Aurora Galactica',
-    project_page_path: 'codex-test1.html',
+    project_page_path: projectPagePath,
     repo_url: 'https://github.com/sgwoods/Codex-Test1',
     dashboard_url: 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html',
     experience_url: 'https://sgwoods.github.io/Aurora-Galactica/',
@@ -150,24 +152,41 @@ async function main(){
   };
   const pushedAt = repoPushedAt(buildInfo);
   const projectHtml = buildProjectPage(buildInfo, latestNote, pushedAt);
-  const statusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt);
+  const canonicalStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
+    projectId: CANONICAL_PROJECT_SLUG,
+    projectPagePath: `${CANONICAL_PROJECT_SLUG}.html`
+  });
+  const legacyStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
+    projectId: LEGACY_PROJECT_SLUG,
+    projectPagePath: `${LEGACY_PROJECT_SLUG}.html`
+  });
 
-  const changedProject = await syncFile(
-    'codex-test1.html',
+  const changedCanonicalProject = await syncFile(
+    `${CANONICAL_PROJECT_SLUG}.html`,
     projectHtml,
     `Sync Aurora Galactica public page from ${buildInfo.label}`
   );
-  const changedManifest = await syncFile(
-    'data/projects/codex-test1.json',
-    statusManifest,
+  const changedLegacyProject = await syncFile(
+    `${LEGACY_PROJECT_SLUG}.html`,
+    projectHtml,
+    `Keep legacy public page alias current for Aurora Galactica from ${buildInfo.label}`
+  );
+  const changedCanonicalManifest = await syncFile(
+    `data/projects/${CANONICAL_PROJECT_SLUG}.json`,
+    canonicalStatusManifest,
     'Update public status manifest for Aurora Galactica'
   );
+  const changedLegacyManifest = await syncFile(
+    `data/projects/${LEGACY_PROJECT_SLUG}.json`,
+    legacyStatusManifest,
+    'Keep legacy public status alias current for Aurora Galactica'
+  );
 
-  if(!changedProject && !changedManifest){
-    console.log(`Public project page and status manifest already match ${buildInfo.label}`);
+  if(!changedCanonicalProject && !changedLegacyProject && !changedCanonicalManifest && !changedLegacyManifest){
+    console.log(`Public Aurora canonical and legacy alias assets already match ${buildInfo.label}`);
     return;
   }
-  console.log(`Synced Aurora Galactica public assets to ${OWNER}/${REPO} from ${buildInfo.label}`);
+  console.log(`Synced Aurora Galactica canonical and legacy public assets to ${OWNER}/${REPO} from ${buildInfo.label}`);
 }
 
 main().catch(err => {

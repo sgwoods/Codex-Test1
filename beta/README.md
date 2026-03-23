@@ -128,7 +128,10 @@ Day-to-day engineering work continues in `Codex-Test1`, while the public/shared 
   ```bash
   npm run sync:public
   ```
-  This updates:
+  This updates the canonical Aurora public/status files:
+  - `/Users/stevenwoods/GitPages/public/aurora-galactica.html`
+  - `/Users/stevenwoods/GitPages/public/data/projects/aurora-galactica.json`
+  And it keeps the legacy compatibility aliases current:
   - `/Users/stevenwoods/GitPages/public/codex-test1.html`
   - `/Users/stevenwoods/GitPages/public/data/projects/codex-test1.json`
   It does not update `/Users/stevenwoods/GitPages/public/index.html` directly.

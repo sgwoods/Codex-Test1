@@ -24,7 +24,8 @@
 - High-score entry now supports Galaga-style three-letter initials with arcade-flavored cursor/input behavior
 - Public status export now follows the shared `public` repo contract:
   - this repo updates its own public project page
-  - this repo updates only its own status manifest in `data/projects/codex-test1.json`
+- this repo updates its canonical public status manifest in `data/projects/aurora-galactica.json`
+- and keeps the legacy compatibility alias in `data/projects/codex-test1.json`
   - this repo no longer rewrites the shared public homepage directly
 
 ## Working Assumptions

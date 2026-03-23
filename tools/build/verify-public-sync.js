@@ -6,6 +6,8 @@ const { execSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const BUILD_INFO = path.join(ROOT, 'build-info.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
+const CANONICAL_PROJECT_SLUG = 'aurora-galactica';
+const LEGACY_PROJECT_SLUG = 'codex-test1';
 const OWNER = process.env.PUBLIC_REPO_OWNER || 'sgwoods';
 const REPO = process.env.PUBLIC_REPO_NAME || 'public';
 const TOKEN = process.env.PUBLIC_REPO_SYNC_TOKEN || process.env.GH_TOKEN || loadGhToken();
@@ -52,7 +54,7 @@ async function request(url){
     headers: {
       'Authorization': `Bearer ${TOKEN}`,
       'Accept': 'application/vnd.github+json',
-      'User-Agent': 'Codex-Test1-public-verify'
+      'User-Agent': 'Aurora-Galactica-public-verify'
     }
   });
 }
@@ -76,24 +78,37 @@ async function main(){
   const pushedAt = repoPushedAt(buildInfo);
   const dateLong = publicDateLong(pushedAt);
   const expectedShaFragment = `sha.${buildInfo.shortCommit}`;
-  const projectHtml = await getContent('codex-test1.html');
-  const manifestRaw = await getContent('data/projects/codex-test1.json');
-  const manifest = JSON.parse(manifestRaw);
+  const expectedFocus = dashboard.currentFocus || '';
+  const projectHtml = await getContent(`${CANONICAL_PROJECT_SLUG}.html`);
+  const legacyProjectHtml = await getContent(`${LEGACY_PROJECT_SLUG}.html`);
+  const manifest = JSON.parse(await getContent(`data/projects/${CANONICAL_PROJECT_SLUG}.json`));
+  const legacyManifest = JSON.parse(await getContent(`data/projects/${LEGACY_PROJECT_SLUG}.json`));
 
-  ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, 'public/codex-test1.html date');
-  ensureIncludes(projectHtml, expectedShaFragment, 'public/codex-test1.html build sha');
-  ensureIncludes(projectHtml, 'release-dashboard.html', 'public/codex-test1.html dashboard link');
-  ensureIncludes(projectHtml, 'project-guide.html', 'public/codex-test1.html project guide link');
-  if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/codex-test1.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
-  if(manifest.project_id !== 'codex-test1') throw new Error(`Public sync verification failed for data/projects/codex-test1.json project_id: expected "codex-test1" got "${manifest.project_id}"`);
-  if(manifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/codex-test1.json status_value: expected "${buildInfo.version}" got "${manifest.status_value}"`);
-  if(manifest.focus_value !== (dashboard.currentFocus || '')) throw new Error(`Public sync verification failed for data/projects/codex-test1.json focus_value: expected "${dashboard.currentFocus}" got "${manifest.focus_value}"`);
-  if(manifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/codex-test1.json repo_pushed_at: expected "${pushedAt}" got "${manifest.repo_pushed_at}"`);
-  if(manifest.project_page_path !== 'codex-test1.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json project_page_path`);
-  if(manifest.dashboard_url !== 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json dashboard_url`);
-  if(manifest.experience_url !== 'https://sgwoods.github.io/Aurora-Galactica/') throw new Error(`Public sync verification failed for data/projects/codex-test1.json experience_url`);
+  ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, `public/${CANONICAL_PROJECT_SLUG}.html date`);
+  ensureIncludes(projectHtml, expectedShaFragment, `public/${CANONICAL_PROJECT_SLUG}.html build sha`);
+  ensureIncludes(projectHtml, 'release-dashboard.html', `public/${CANONICAL_PROJECT_SLUG}.html dashboard link`);
+  ensureIncludes(projectHtml, 'project-guide.html', `public/${CANONICAL_PROJECT_SLUG}.html project guide link`);
+  ensureIncludes(legacyProjectHtml, expectedShaFragment, `public/${LEGACY_PROJECT_SLUG}.html build sha`);
 
-  console.log(`Verified public project page and status manifest match ${buildInfo.version} ${expectedShaFragment}`);
+  if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
+  if(manifest.project_id !== CANONICAL_PROJECT_SLUG) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json project_id: expected "${CANONICAL_PROJECT_SLUG}" got "${manifest.project_id}"`);
+  if(manifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json status_value: expected "${buildInfo.version}" got "${manifest.status_value}"`);
+  if(manifest.focus_value !== expectedFocus) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json focus_value: expected "${expectedFocus}" got "${manifest.focus_value}"`);
+  if(manifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json repo_pushed_at: expected "${pushedAt}" got "${manifest.repo_pushed_at}"`);
+  if(manifest.project_page_path !== `${CANONICAL_PROJECT_SLUG}.html`) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json project_page_path`);
+  if(manifest.dashboard_url !== 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json dashboard_url`);
+  if(manifest.experience_url !== 'https://sgwoods.github.io/Aurora-Galactica/') throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json experience_url`);
+
+  if(legacyManifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json schema_version: expected "1.0" got "${legacyManifest.schema_version}"`);
+  if(legacyManifest.project_id !== LEGACY_PROJECT_SLUG) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json project_id: expected "${LEGACY_PROJECT_SLUG}" got "${legacyManifest.project_id}"`);
+  if(legacyManifest.status_value !== buildInfo.version) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json status_value: expected "${buildInfo.version}" got "${legacyManifest.status_value}"`);
+  if(legacyManifest.focus_value !== expectedFocus) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json focus_value: expected "${expectedFocus}" got "${legacyManifest.focus_value}"`);
+  if(legacyManifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json repo_pushed_at: expected "${pushedAt}" got "${legacyManifest.repo_pushed_at}"`);
+  if(legacyManifest.project_page_path !== `${LEGACY_PROJECT_SLUG}.html`) throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json project_page_path`);
+  if(legacyManifest.dashboard_url !== 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json dashboard_url`);
+  if(legacyManifest.experience_url !== 'https://sgwoods.github.io/Aurora-Galactica/') throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json experience_url`);
+
+  console.log(`Verified Aurora canonical and legacy public assets match ${buildInfo.version} ${expectedShaFragment}`);
 }
 
 main().catch(err => {
