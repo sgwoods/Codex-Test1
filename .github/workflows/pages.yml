@@ -45,11 +45,6 @@ jobs:
         run: |
           npm run build
 
-      - name: Promote beta artifact
-        if: github.repository != 'sgwoods/Codex-Test1'
-        run: |
-          npm run promote:beta
-
       - name: Build redirect artifact
         if: github.repository == 'sgwoods/Codex-Test1'
         run: |
