@@ -359,7 +359,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.137.sha.ceede57.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.143.sha.e51712e.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -938,6 +938,13 @@
 <ul><li>A polished, consciously scoped four-stage Galaga tribute</li><li>Core rules and presentation feel stable</li><li>The hosted build is trustworthy as the canonical public version</li></ul>
 <p>Suggested versioning:</p>
 <ul><li><code>1.0.0</code></li></ul>
+<h3>Milestone F: Post-1.0 Environment Separation</h3>
+<p>Target outcome:</p>
+<ul><li>production and non-production are operationally distinct</li><li>public score integrity is not blurred by day-to-day development traffic</li><li>release labeling makes environment intent obvious</li></ul>
+<p>Key issue groups:</p>
+<ul><li>production vs pre-production score/data separation</li><li>environment-aware build labeling and account/status presentation</li><li>release workflow hardening between dev, production, and beta lanes</li></ul>
+<p>Suggested versioning:</p>
+<ul><li><code>1.0.x</code></li><li><code>1.1.x</code></li></ul>
 <h3>How We Should Use This Roadmap</h3>
 <ul><li>Use it to decide when a <code>PATCH</code> bump is enough versus when a <code>MINOR</code> bump is justified</li><li>Use it to group open issues into meaningful release targets instead of treating the backlog as a flat list</li><li>Use it as the default basis for Codex release recommendations after each meaningful pass</li></ul>
         </div>
@@ -1198,6 +1205,14 @@
 <p>consciously documented</p>
 <ul><li>the hosted build, high-score flow, and public project pages are suitable</li></ul>
 <p>for general external use</p>
+<h3>Post-1.0 Environment Goal</h3>
+<ul><li>after <code>1.0</code>, cleanly separate production and non-production score/data paths</li><li>production should remain the canonical public Aurora environment</li><li>non-production should no longer write directly into the same live score path</li></ul>
+<p>by default</p>
+<ul><li>preferred order after <code>1.0</code>:</li></ul>
+<ol><li>keep Aurora production and Aurora beta together only if that remains useful</li><li>isolate pre-production/dev writes behind a separate environment, separate</li></ol>
+<p>tables, or a no-submit/dev-only mode</p>
+<ol><li>make the active environment obvious in the build label and account/status</li></ol>
+<p>surfaces</p>
         </div>
       </div>
     </section>
@@ -1261,7 +1276,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Capture clarity, boss feedback, and 1.0 release focus</strong><br>
-          Build: 0.5.0-beta.1+build.137.sha.ceede57.beta
+          Build: 0.5.0-beta.1+build.143.sha.e51712e.beta
         </p>
       </aside>
     </main>
