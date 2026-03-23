@@ -74,6 +74,17 @@ function queueStageTransition(mode='normal'){
  S.bannerSub=nextIsChallenge?`STAGE ${targetStage}`:'NEXT PHASE';
  S.bannerMode='stageTransition';
  S.banner=S.nextStageT;
+ logEvent('challenge_transition_started',{
+  stage:S.stage,
+  pendingStage:S.pendingStage||null,
+  targetStage,
+  mode,
+  nextIsChallenge:!!nextIsChallenge,
+  nextStageT:+S.nextStageT.toFixed(3),
+  postChallengeT:+S.postChallengeT.toFixed(3),
+  challenge:!!S.challenge,
+  enemies:S.e.filter(e=>e.hp>0).length
+ });
  sfx.transition(nextIsChallenge?1:0);
 }
 
@@ -94,7 +105,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
- started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,sequenceT:0,sequenceMode:'',attract:0});
+ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
  logEvent('game_start');
@@ -483,6 +494,12 @@ function update(dt){
  }
  if(S.nextStageT>0){
   if(S.nextStageT<=dt){
+   logEvent('challenge_transition_spawn_commit',{
+    stage:S.stage,
+    pendingStage:S.pendingStage||null,
+    nextStageT:+S.nextStageT.toFixed(3),
+    challenge:!!S.challenge
+   });
    S.nextStageT=0;
    if(S.pendingStage){S.stage=S.pendingStage;S.pendingStage=0;}
    spawnStage();
@@ -493,6 +510,14 @@ function update(dt){
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
+   logEvent('challenge_transition_timer_elapsed',{
+    stage:S.stage,
+    pendingStage:S.pendingStage||null,
+    postChallengeT:+S.postChallengeT.toFixed(3),
+    nextStageT:+S.nextStageT.toFixed(3),
+    challenge:!!S.challenge,
+    enemies:S.e.filter(e=>e.hp>0).length
+   });
    S.postChallengeT=0;
    queueStageTransition('challengeResult');
   }else S.postChallengeT-=dt;
@@ -530,8 +555,35 @@ function update(dt){
   S.banner=1.15;
   S.pendingStage=S.stage+1;
   S.lastChallengeClearT=S.stageClock;
+  S.challengeTransitionStallLogged=0;
   S.postChallengeT=1.1;
+  logEvent('challenge_transition_queued',{
+   stage:S.stage,
+   pendingStage:S.pendingStage,
+   hits:S.ch.hits,
+   total:S.ch.total,
+   postChallengeT:+S.postChallengeT.toFixed(3),
+   bannerMode:S.bannerMode,
+   bonusTotal
+  });
   return;
+ }
+ if(S.challenge&&S.ch.done&&!alive.length&&S.pendingStage&&S.postChallengeT<=0&&S.nextStageT<=0&&!S.challengeTransitionStallLogged){
+  const dtSinceClear=S.lastChallengeClearT==null?Infinity:(S.stageClock-S.lastChallengeClearT);
+  if(dtSinceClear>=0.9){
+   S.challengeTransitionStallLogged=1;
+   logEvent('challenge_transition_stalled',{
+    stage:S.stage,
+    pendingStage:S.pendingStage,
+    dtSinceClear:+dtSinceClear.toFixed(3),
+    postChallengeT:+S.postChallengeT.toFixed(3),
+    nextStageT:+S.nextStageT.toFixed(3),
+    challenge:!!S.challenge,
+    enemies:alive.length,
+    playerBullets:S.pb.length,
+    enemyBullets:S.eb.length
+   });
+  }
  }
  if(S.challenge&&S.ch.done&&!alive.length&&S.pendingStage&&S.postChallengeT<=0&&S.nextStageT<=0){
   const dtSinceClear=S.lastChallengeClearT==null?Infinity:(S.stageClock-S.lastChallengeClearT);
