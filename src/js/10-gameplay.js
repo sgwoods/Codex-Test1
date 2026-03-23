@@ -256,13 +256,16 @@ function diveAccel(stage){
 }
 
 function shoot(){
- const p=S.p;if(p.cd>0||p.spawn>0||p.captured)return;if(S.pb.length>=bulletsMax())return;
+ const p=S.p;
+ const captureWindow=!!(p.captured&&p.capBoss&&p.capBoss.hp>0&&p.capT>.55);
+ if(p.cd>0||p.spawn>0||(!captureWindow&&p.captured))return;
+ if(S.pb.length>=bulletsMax())return;
  p.cd=S.challenge?.095:.24;const y=p.y-40;
  const shotXs=dualShotOffsets().map(off=>p.x+off);
  S.stats.shots+=p.dual?2:1;
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
- logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length});
+ logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length,captureWindow});
  sfx.shot();
 }
 
@@ -272,6 +275,31 @@ function hasCarriedFighter(){
 function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0}
 function capturePlayer(e){if(!canCapture())return;const p=S.p;p.captured=1;p.capBoss=e;p.capT=1.2;e.beam=1;e.beamT=Math.max(.5,e.beamT);S.lastCaptureStartT=S.stageClock;logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));sfx.beam()}
 function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;S.captureCountStage++;S.lastFighterCapturedT=S.stageClock;S.recoverT=Math.max(S.recoverT,1.6);S.attackGapT=Math.max(S.attackGapT,1.35);startSequence('captureBeat',1.45,'FIGHTER CAPTURED','BOSS RETREAT');logEvent('fighter_captured',Object.assign({stage:S.stage,stageClock:+S.stageClock.toFixed(3),captureCountStage:S.captureCountStage,livesAfter:Math.max(0,S.lives+1),playerLane:playLane(p.x),timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)},enemyRef(e)));logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});sfx.captureRetreat();if(S.lives<0)gameOver()}
+function breakCapture(reason='boss_destroyed'){
+ const p=S.p,e=p.capBoss;
+ p.captured=0;
+ p.capBoss=null;
+ p.capT=0;
+ p.inv=Math.max(p.inv||0,1.2);
+ p.cd=Math.max(p.cd||0,.16);
+ S.alertTxt='CAPTURE BROKEN';
+ S.alertT=Math.max(S.alertT,1.15);
+ S.bannerTxt='CAPTURE BROKEN';
+ S.bannerSub='FIGHTER ESCAPED';
+ S.bannerMode='captureEscape';
+ S.banner=1.05;
+ ex(p.x,p.y,12,'#d8f2ff');
+ logEvent('capture_escape',{
+  stage:S.stage,
+  reason,
+  playerX:+p.x.toFixed(2),
+  playerY:+p.y.toFixed(2),
+  playerLane:playLane(p.x),
+  bossId:e?.id||null,
+  timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)
+ });
+ sfx.join();
+}
 function activeEscortCount(e){
  if(!e?.squadId)return Math.max(0,e?.esc|0);
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
@@ -323,6 +351,10 @@ function destroyCarriedFighter(e){
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
  S.alertT=Math.max(S.alertT,1.45);
+ S.bannerTxt='CAPTURED FIGHTER';
+ S.bannerSub='DESTROYED';
+ S.bannerMode='captureLoss';
+ S.banner=1.05;
  ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
  sfx.hit();
  return points;
@@ -343,6 +375,10 @@ function releaseCapturedFighter(e){
  logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+S.cap.x.toFixed(2),releaseY:+S.cap.y.toFixed(2)},enemyRef(e)));
  S.alertTxt='FIGHTER RELEASED';
  S.alertT=Math.max(S.alertT,1.5);
+ S.bannerTxt='FIGHTER RELEASED';
+ S.bannerSub='RETURNING TO SHIP';
+ S.bannerMode='rescueReturn';
+ S.banner=1.1;
  sfx.rescue();
 }
 
@@ -586,8 +622,15 @@ function update(dt){
   }else S.postChallengeT-=dt;
   return;
  }
- if(p.captured&&p.capBoss&&p.capBoss.hp>0){const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;p.capT-=dt;p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);p.y+=(capY-p.y)*Math.min(1,dt*3.9);if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();}
- else if(p.captured){p.captured=0;p.capBoss=null;p.inv=1.2;}
+ if(p.captured&&p.capBoss&&p.capBoss.hp>0){
+  const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;
+  p.capT-=dt;
+  p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);
+  p.y+=(capY-p.y)*Math.min(1,dt*3.9);
+  if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();
+ }else if(p.captured){
+  breakCapture('boss_destroyed');
+ }
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom}
  const harnessPersona=harnessPersonaCfg();
  const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);

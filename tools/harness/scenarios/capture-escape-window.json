@@ -1,0 +1,15 @@
+{
+  "name": "capture-escape-window",
+  "seed": 4407,
+  "duration": 3,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.2, "action": "harness", "method": "setupCaptureEscapeTest", "args": { "stage": 4, "playerX": 140, "bossX": 140, "bossY": 110, "playerY": 186, "capT": 0.95, "beamT": 1.4 } },
+    { "t": 0.28, "action": "down", "code": "Space" },
+    { "t": 0.62, "action": "up", "code": "Space" }
+  ]
+}
