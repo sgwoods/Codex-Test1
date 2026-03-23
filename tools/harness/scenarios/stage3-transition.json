@@ -1,0 +1,26 @@
+{
+  "name": "stage3-transition",
+  "seed": 3007,
+  "duration": 19,
+  "config": {
+    "stage": 3,
+    "ships": 3,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.55, "action": "down", "code": "ArrowLeft" },
+    { "t": 3.35, "action": "up", "code": "ArrowLeft" },
+    { "t": 3.36, "action": "down", "code": "ArrowRight" },
+    { "t": 6.05, "action": "up", "code": "ArrowRight" },
+    { "t": 6.06, "action": "down", "code": "ArrowLeft" },
+    { "t": 8.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 8.81, "action": "down", "code": "ArrowRight" },
+    { "t": 11.3, "action": "up", "code": "ArrowRight" },
+    { "t": 11.31, "action": "down", "code": "ArrowLeft" },
+    { "t": 14.2, "action": "up", "code": "ArrowLeft" },
+    { "t": 14.21, "action": "down", "code": "ArrowRight" },
+    { "t": 17.4, "action": "up", "code": "ArrowRight" },
+    { "t": 18.5, "action": "up", "code": "Space" }
+  ]
+}

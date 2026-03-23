@@ -158,6 +158,50 @@ function captureBranchMetrics(session){
   };
 }
 
+function transitionMetrics(session){
+  const events = session.events || [];
+  const snapshots = session.snapshots || [];
+  const challengeClear = events.find(e => e.type === 'challenge_clear');
+  if(!challengeClear){
+    return {
+      challengeClearAt: null,
+      nextStage: null,
+      stageSpawnAt: null,
+      firstNextStageSnapshotAt: null,
+      firstVisibleNextStageAt: null,
+      challengeToSpawn: null,
+      challengeToVisible: null,
+      preSpawnNextStageWindow: null,
+      prematureNextStageSnapshot: false,
+      stageVisibleAfterSpawn: false
+    };
+  }
+  const nextStage = (challengeClear.stage || 0) + 1;
+  const stageSpawn = events.find(e => e.type === 'stage_spawn' && e.stage === nextStage && !e.challenge && e.t >= challengeClear.t);
+  const firstNextStageSnapshot = snapshots.find(s => s.t >= challengeClear.t && s.stage === nextStage) || null;
+  const firstVisibleNextStage = snapshots.find(s =>
+    s.t >= challengeClear.t &&
+    s.stage === nextStage &&
+    !s.challenge &&
+    (((s.counts && s.counts.enemies) || 0) > 0 || ((s.counts && s.counts.attackers) || 0) > 0)
+  ) || null;
+  const prematureNextStageSnapshot = stageSpawn
+    ? snapshots.find(s => s.t >= challengeClear.t && s.t < stageSpawn.t && s.stage === nextStage) || null
+    : firstNextStageSnapshot;
+  return {
+    challengeClearAt: challengeClear.t,
+    nextStage,
+    stageSpawnAt: stageSpawn ? stageSpawn.t : null,
+    firstNextStageSnapshotAt: firstNextStageSnapshot ? firstNextStageSnapshot.t : null,
+    firstVisibleNextStageAt: firstVisibleNextStage ? firstVisibleNextStage.t : null,
+    challengeToSpawn: stageSpawn ? +(stageSpawn.t - challengeClear.t).toFixed(3) : null,
+    challengeToVisible: firstVisibleNextStage ? +(firstVisibleNextStage.t - challengeClear.t).toFixed(3) : null,
+    preSpawnNextStageWindow: stageSpawn && prematureNextStageSnapshot ? +(stageSpawn.t - prematureNextStageSnapshot.t).toFixed(3) : null,
+    prematureNextStageSnapshot: !!prematureNextStageSnapshot,
+    stageVisibleAfterSpawn: !!firstVisibleNextStage
+  };
+}
+
 function descentMetrics(events){
   const starts = events.filter(e => e.type === 'enemy_attack_start');
   const lowers = events.filter(e => e.type === 'enemy_lower_field');
@@ -396,6 +440,7 @@ function analyze(target){
   const dualMetrics = dualShotMetrics(events);
   const rescuePipeline = rescuePipelineMetrics(session);
   const captureBranches = captureBranchMetrics(session);
+  const transition = transitionMetrics(session);
   const descent = descentMetrics(events);
   const profiles = stageProfiles(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
@@ -432,6 +477,7 @@ function analyze(target){
     dualMetrics,
     rescuePipeline,
     captureBranches,
+    transition,
     descent,
     varietyMetrics: varietyMetrics(profiles),
     video: Object.assign({ file: run.videoFile || null }, audio)

@@ -10,11 +10,12 @@ const OUT_BASE = path.join(ROOT, 'harness-artifacts');
 
 const PROFILES = {
   quick: [
-    { scenario: 'stage3-challenge', repeats: 1, seedBase: 3000 },
+    { scenario: 'stage3-transition', repeats: 1, seedBase: 3000 },
     { scenario: 'stage4-five-ships', repeats: 1, seedBase: 4000 },
     { scenario: 'stage4-survival', repeats: 1, seedBase: 4100 }
   ],
   fidelity: [
+    { scenario: 'stage3-transition', repeats: 1, seedBase: 3000 },
     { scenario: 'stage1-descent', repeats: 1, seedBase: 2000 },
     { scenario: 'rescue-dual', repeats: 1, seedBase: 5000 },
     { scenario: 'capture-rescue-dual', repeats: 1, seedBase: 5006 },
@@ -27,12 +28,12 @@ const PROFILES = {
     { scenario: 'stage12-variety', repeats: 1, seedBase: 12000 }
   ],
   default: [
-    { scenario: 'stage3-challenge', repeats: 2, seedBase: 3000 },
+    { scenario: 'stage3-transition', repeats: 2, seedBase: 3000 },
     { scenario: 'stage4-five-ships', repeats: 2, seedBase: 4000 },
     { scenario: 'stage4-survival', repeats: 2, seedBase: 4100 }
   ],
   deep: [
-    { scenario: 'stage3-challenge', repeats: 3, seedBase: 3000 },
+    { scenario: 'stage3-transition', repeats: 3, seedBase: 3000 },
     { scenario: 'stage4-five-ships', repeats: 3, seedBase: 4000 },
     { scenario: 'stage4-survival', repeats: 3, seedBase: 4100 }
   ]
