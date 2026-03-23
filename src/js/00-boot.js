@@ -29,6 +29,7 @@ const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let settingsOpen=0,settingsPrevPaused=0;
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
 let gameOverHtml='';
@@ -41,7 +42,6 @@ const SEED_PREF_KEY='galagaTribHarnessSeed';
 const SCOREBOARD_KEY='galagaTribTop10';
 const LEADERBOARD_PREF_KEY='galagaTribLeaderboardView';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
-let settingsOpen=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -370,7 +370,14 @@ function syncTestUi(){
  syncSettingsUi();
 }
 function closeSettings(){
+ if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
+ syncSettingsUi();
+}
+function openSettings(){
+ settingsPrevPaused=paused;
+ if(started&&!paused)paused=1;
+ settingsOpen=1;
  syncSettingsUi();
 }
 function downloadBlob(blob,file){
@@ -576,11 +583,17 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
+ if(e.code==='KeyL'){e.preventDefault();exportSession();return;}
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
- if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncSettingsUi();}
+ if(e.code==='KeyT'){
+  e.preventDefault();
+  if(settingsOpen)closeSettings();
+  else openSettings();
+  return;
+ }
  if(!started&&gameOverState){
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
@@ -648,7 +661,10 @@ addEventListener('keydown',e=>{
   if(gameOverState&&!gameOverState.editing)submitGameOverScore();
   stopAttractLoop();start();
  }
- if(started&&e.code==='KeyP')paused=!paused;
+ if(started&&e.code==='KeyP'){
+  paused=!paused;
+  if(!paused&&settingsOpen)closeSettings();
+ }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
 addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});

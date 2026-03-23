@@ -191,9 +191,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.119.sha.8a1e6ef.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 8:13 AM EDT</span>
-    <span id="settingsState">main@8a1e6ef dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.120.sha.f072d24.dirty</span>
+    <span id="settingsRelease">Mar 23 2026, 8:19 AM EDT</span>
+    <span id="settingsState">main@f072d24 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -249,8 +249,8 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.119.sha.8a1e6ef.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 8:13 AM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.120.sha.f072d24.dirty</span>
+    <span id="buildStampRelease">Mar 23 2026, 8:19 AM EDT</span>
   </div>
 </div>
 <script>
@@ -308,12 +308,13 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.119.sha.8a1e6ef.dirty',commit:'8a1e6ef204c653df592d6654bcf10d1b12f387a4',branch:'main',dirty:true,released:'Mar 23 2026, 8:13 AM EDT',state:'main@8a1e6ef dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.120.sha.f072d24.dirty',commit:'f072d24d57fd91e5b663048396b224e3cc03a949',branch:'main',dirty:true,released:'Mar 23 2026, 8:19 AM EDT',state:'main@f072d24 dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let settingsOpen=0,settingsPrevPaused=0;
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
 let gameOverHtml='';
@@ -326,7 +327,6 @@ const SEED_PREF_KEY='galagaTribHarnessSeed';
 const SCOREBOARD_KEY='galagaTribTop10';
 const LEADERBOARD_PREF_KEY='galagaTribLeaderboardView';
 const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
-let settingsOpen=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -655,7 +655,14 @@ function syncTestUi(){
  syncSettingsUi();
 }
 function closeSettings(){
+ if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
+ syncSettingsUi();
+}
+function openSettings(){
+ settingsPrevPaused=paused;
+ if(started&&!paused)paused=1;
+ settingsOpen=1;
  syncSettingsUi();
 }
 function downloadBlob(blob,file){
@@ -861,11 +868,17 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
+ if(e.code==='KeyL'){e.preventDefault();exportSession();return;}
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
- if(e.code==='KeyT'&&(!started||paused)){e.preventDefault();settingsOpen=!settingsOpen;syncSettingsUi();}
+ if(e.code==='KeyT'){
+  e.preventDefault();
+  if(settingsOpen)closeSettings();
+  else openSettings();
+  return;
+ }
  if(!started&&gameOverState){
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
@@ -933,7 +946,10 @@ addEventListener('keydown',e=>{
   if(gameOverState&&!gameOverState.editing)submitGameOverScore();
   stopAttractLoop();start();
  }
- if(started&&e.code==='KeyP')paused=!paused;
+ if(started&&e.code==='KeyP'){
+  paused=!paused;
+  if(!paused&&settingsOpen)closeSettings();
+ }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
 addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
