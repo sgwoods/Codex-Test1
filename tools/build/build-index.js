@@ -967,15 +967,22 @@ function buildProjectGuide(buildInfo, latestNote, guide){
     .trimEnd() + '\n';
 }
 
+function normalizeVersionForChannel(version, releaseChannel){
+  if(releaseChannel === 'production'){
+    return String(version).replace(/-(alpha|beta|rc)(\.[0-9]+)?$/, '');
+  }
+  return version;
+}
+
 function build(){
   const template = read(TEMPLATE);
   const styles = read(STYLES).trimEnd();
-  const buildVersion = pkg.version;
   const buildCommit = git('rev-parse HEAD', 'unknown');
   const buildShortCommit = git('rev-parse --short HEAD', 'unknown');
   const buildBranch = git('branch --show-current', 'detached');
   const buildRepoRef = detectRepoRef();
   const buildReleaseChannel = detectReleaseChannel(buildRepoRef);
+  const buildVersion = normalizeVersionForChannel(pkg.version, buildReleaseChannel);
   const buildDirtyFiles = git('status --porcelain', '').split('\n').map(s => s.trim()).filter(Boolean);
   const buildDirty = buildDirtyFiles.length > 0;
   const buildNumber = process.env.BUILD_NUMBER || process.env.GITHUB_RUN_NUMBER || git('rev-list --count HEAD', '0');
