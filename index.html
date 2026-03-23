@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.156.sha.11766f6.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 3:44 PM EDT</span>
-    <span id="settingsState">main@11766f6 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.157.sha.88a5852.dirty</span>
+    <span id="settingsRelease">Mar 23 2026, 4:12 PM EDT</span>
+    <span id="settingsState">main@88a5852 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.156.sha.11766f6.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 3:44 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.157.sha.88a5852.dirty</span>
+    <span id="buildStampRelease">Mar 23 2026, 4:12 PM EDT</span>
   </div>
 </div>
 <script>
@@ -355,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.156.sha.11766f6.dirty',commit:'11766f66f4a78250ca0562237592ae30a86a3823',branch:'main',dirty:true,released:'Mar 23 2026, 3:44 PM EDT',state:'main@11766f6 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.157.sha.88a5852.dirty',commit:'88a5852ad0e87d1ab77247b93fd3e89aa74bd387',branch:'main',dirty:true,released:'Mar 23 2026, 4:12 PM EDT',state:'main@88a5852 dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1832,6 +1832,23 @@ function activeEscortCount(e){
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function specialSquadronTuning(stage=S.stage){
+ if(stage===4){
+  return {
+   escortOffset:42,
+   escortTrackX:5.8,
+   escortTrackY:5.9,
+   escortLift:20
+  };
+ }
+ return {
+  escortOffset:44,
+  escortTrackX:6.2,
+  escortTrackY:6,
+  escortLift:24
+ };
+}
+
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
  // Docked bosses carry the fighter tucked above/behind them in formation.
@@ -1955,7 +1972,7 @@ function assignEscorts(boss){
  const squadId=++S.squadSeq;
  const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;boss.squadId=cand.length?squadId:0;
- const escortOffset=S.stage===4?58:50;
+ const { escortOffset }=specialSquadronTuning(S.stage);
  for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*escortOffset;e.shot=1;e.squadId=squadId;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
 }
 
@@ -2040,7 +2057,7 @@ function updateEnemy(e,dt,t,T,p){
  if(e.dive===5){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
   if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=S.stage<=2?96:104;return}
-  const escortTrackX=S.stage===4?4.9:6.2,escortTrackY=S.stage===4?4.8:6,escortLift=S.stage===4?34:28;
+  const { escortTrackX, escortTrackY, escortLift }=specialSquadronTuning(S.stage);
   e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');e.shot--;}
   return;
@@ -2740,11 +2757,12 @@ window.__galagaHarness__={
   if(escorts.length<2)return false;
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
   S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;
-  const keep=new Set([boss.id,...escorts.map(e=>e.id)]);
-  for(const e of S.e)if(!keep.has(e.id))e.hp=0;
+ const keep=new Set([boss.id,...escorts.map(e=>e.id)]);
+ for(const e of S.e)if(!keep.has(e.id))e.hp=0;
   const squadId=++S.squadSeq;
+  const tuning=typeof specialSquadronTuning==='function' ? specialSquadronTuning(4) : { escortOffset:18, escortLift:8 };
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=2;boss.squadId=squadId;boss.x=p.x;boss.y=112;boss.vx=0;boss.vy=42;boss.shot=0;
-  escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-18:18;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-8;});
+  escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-tuning.escortOffset:tuning.escortOffset;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-tuning.escortLift;});
   logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2)});
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,squadron:1});
   for(const e of escorts)logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off,harness:1,squadron:1});

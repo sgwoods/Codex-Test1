@@ -277,6 +277,23 @@ function activeEscortCount(e){
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function specialSquadronTuning(stage=S.stage){
+ if(stage===4){
+  return {
+   escortOffset:42,
+   escortTrackX:5.8,
+   escortTrackY:5.9,
+   escortLift:20
+  };
+ }
+ return {
+  escortOffset:44,
+  escortTrackX:6.2,
+  escortTrackY:6,
+  escortLift:24
+ };
+}
+
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
  // Docked bosses carry the fighter tucked above/behind them in formation.
@@ -400,7 +417,7 @@ function assignEscorts(boss){
  const squadId=++S.squadSeq;
  const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;boss.squadId=cand.length?squadId:0;
- const escortOffset=S.stage===4?58:50;
+ const { escortOffset }=specialSquadronTuning(S.stage);
  for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*escortOffset;e.shot=1;e.squadId=squadId;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
 }
 
@@ -485,7 +502,7 @@ function updateEnemy(e,dt,t,T,p){
  if(e.dive===5){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
   if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=S.stage<=2?96:104;return}
-  const escortTrackX=S.stage===4?4.9:6.2,escortTrackY=S.stage===4?4.8:6,escortLift=S.stage===4?34:28;
+  const { escortTrackX, escortTrackY, escortLift }=specialSquadronTuning(S.stage);
   e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');e.shot--;}
   return;
