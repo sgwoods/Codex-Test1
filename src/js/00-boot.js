@@ -270,16 +270,16 @@ function buildGameOverHtmlFromState(){
  const board=leaderboardRowsForView();
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
- const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
+ const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
-  const shown=gameOverState.initials.map((ch,i)=>`<span class="${i===gameOverState.cursor?'entryCursor':''}">${ch||'_'}</span>`).join(' ');
-  entryHtml=`<span class="gameOverEntry">ENTER INITIALS ${shown}</span>`;
-  footHtml='<span class="gameOverFoot"><span class="k">Left/Right</span> move, <span class="k">Up/Down</span> change, type letters, <span class="k">Enter</span> to save</span>';
+  const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
+  entryHtml=`<span class="gameOverEntry"><span class="entryLabel">ENTER INITIALS</span><span class="entrySlots">${shown}</span></span>`;
+  footHtml='<span class="gameOverFoot"><span class="gameOverFootLine"><span class="k">Left/Right</span> select, <span class="k">Up/Down</span> change</span><span class="gameOverFootLine">type letters or press <span class="k">Enter</span> to save</span></span>';
  }
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
  const board=leaderboardRowsForView();
