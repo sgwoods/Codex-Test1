@@ -702,7 +702,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
       <section class="hero">
         <div class="heroTop">
           <span class="eyebrow">Release Dashboard</span>
-          <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
+          <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
         </div>
         <h1>Aurora Galactica</h1>
         <p>${esc(dashboard.strapline || '')}</p>
@@ -735,7 +735,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         </div>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong>. Live game:
-          <a href="https://sgwoods.github.io/Codex-Test1/">sgwoods.github.io/Codex-Test1/</a>
+          <a href="https://sgwoods.github.io/Aurora-Galactica/">sgwoods.github.io/Codex-Test1/</a>
         </p>
       </section>
     </main>
@@ -902,8 +902,8 @@ function buildProjectGuide(buildInfo, latestNote, guide){
         <section class="hero">
           <div class="heroTop">
             <span class="eyebrow">Project Guide</span>
-            <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
-            <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/beta/">Beta Build</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Beta Build</a>
           </div>
           <h1>${esc(guide.title || 'Project Guide')}</h1>
           <p>${esc(guide.strapline || '')}</p>
@@ -927,10 +927,10 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             </div>
           </div>
           <div class="heroLinks">
-            <a class="button" href="https://sgwoods.github.io/Codex-Test1/">Open alpha build</a>
-            <a class="button" href="https://sgwoods.github.io/Codex-Test1/beta/">Open beta build</a>
-            <a class="button" href="https://sgwoods.github.io/Codex-Test1/release-dashboard.html">Open release dashboard</a>
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open alpha build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
+            <a class="button" href="https://github.com/sgwoods/Aurora-Galactica">Open repository</a>
           </div>
         </section>
         ${sections}

@@ -16,14 +16,14 @@ directly supports polishing this slice.
 Release dashboard:
 
 - live page:
-  - `https://sgwoods.github.io/Codex-Test1/release-dashboard.html`
+  - `https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html`
 - source data:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
 
 Project guide:
 
 - live page:
-  - `https://sgwoods.github.io/Codex-Test1/project-guide.html`
+  - `https://sgwoods.github.io/Aurora-Galactica/project-guide.html`
 - source data:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
   - plus the maintained source docs it renders from:
@@ -41,9 +41,9 @@ Project guide:
 After GitHub Pages deploys, play at:
 
 - alpha:
-  - `https://sgwoods.github.io/Codex-Test1/`
+  - `https://sgwoods.github.io/Aurora-Galactica/`
 - beta:
-  - `https://sgwoods.github.io/Codex-Test1/beta/`
+  - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
 The root build is the continuously updated `alpha` lane. The `/beta/` lane is a manually promoted snapshot used for less-frequent milestone playtesting.
 

@@ -7,7 +7,7 @@
   - prerelease SemVer in `package.json`
   - generated `build-info.json`
   - in-game settings drawer shows the current build label and Eastern release timestamp
-- Hosted on GitHub Pages: `https://sgwoods.github.io/Codex-Test1/`
+- Hosted on GitHub Pages: `https://sgwoods.github.io/Aurora-Galactica/`
 - Core gameplay implemented:
   - stage progression
   - capture / rescue / dual-fighter flow

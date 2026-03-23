@@ -90,8 +90,8 @@ async function main(){
   if(manifest.focus_value !== (dashboard.currentFocus || '')) throw new Error(`Public sync verification failed for data/projects/codex-test1.json focus_value: expected "${dashboard.currentFocus}" got "${manifest.focus_value}"`);
   if(manifest.repo_pushed_at !== pushedAt) throw new Error(`Public sync verification failed for data/projects/codex-test1.json repo_pushed_at: expected "${pushedAt}" got "${manifest.repo_pushed_at}"`);
   if(manifest.project_page_path !== 'codex-test1.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json project_page_path`);
-  if(manifest.dashboard_url !== 'https://sgwoods.github.io/Codex-Test1/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json dashboard_url`);
-  if(manifest.experience_url !== 'https://sgwoods.github.io/Codex-Test1/') throw new Error(`Public sync verification failed for data/projects/codex-test1.json experience_url`);
+  if(manifest.dashboard_url !== 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/codex-test1.json dashboard_url`);
+  if(manifest.experience_url !== 'https://sgwoods.github.io/Aurora-Galactica/') throw new Error(`Public sync verification failed for data/projects/codex-test1.json experience_url`);
 
   console.log(`Verified public project page and status manifest match ${buildInfo.version} ${expectedShaFragment}`);
 }

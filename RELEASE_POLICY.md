@@ -45,11 +45,11 @@ Example:
 
 - `alpha`
   - continuously published at:
-    - `https://sgwoods.github.io/Codex-Test1/`
+    - `https://sgwoods.github.io/Aurora-Galactica/`
   - expected to move frequently with active development, instrumentation, tuning, and UI changes
 - `beta`
   - manually promoted at:
-    - `https://sgwoods.github.io/Codex-Test1/beta/`
+    - `https://sgwoods.github.io/Aurora-Galactica/beta/`
   - should move only when a build is materially better and worth broader checkpoint testing
 
 ## Beta Promotion Workflow
