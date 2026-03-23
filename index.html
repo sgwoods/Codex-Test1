@@ -194,9 +194,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.148.sha.59f006d.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 2:07 PM EDT</span>
-    <span id="settingsState">main@59f006d dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.149.sha.6611057.dirty</span>
+    <span id="settingsRelease">Mar 23 2026, 2:42 PM EDT</span>
+    <span id="settingsState">main@6611057 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -253,8 +253,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.148.sha.59f006d.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 2:07 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.149.sha.6611057.dirty</span>
+    <span id="buildStampRelease">Mar 23 2026, 2:42 PM EDT</span>
   </div>
 </div>
 <script>
@@ -348,7 +348,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.148.sha.59f006d.dirty',commit:'59f006d4b0a754a2dff068527a2fdf5a8a0efcff',branch:'main',dirty:true,released:'Mar 23 2026, 2:07 PM EDT',state:'main@59f006d dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.149.sha.6611057.dirty',commit:'661105705a34fc2d1dc22d76207bf9da708b04dd',branch:'main',dirty:true,released:'Mar 23 2026, 2:42 PM EDT',state:'main@6611057 dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -496,7 +496,7 @@ const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[]
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
  :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
- :s===2?{shotCap:1,attackCap:1,diveRate:.64,coolA:6,coolB:3.9,globalA:2.05,globalB:1.48,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
+ :s===2?{shotCap:1,attackCap:1,diveRate:.56,coolA:6.2,coolB:4.2,globalA:2.2,globalB:1.62,capChance:.12,diveShotRate:.46,aimMul:.1,aimClamp:14,aimRnd:1.8,bulletVy:169,bulletVyStage:3}
  :s===3?{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3}
  :s===4?{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3}
  :s===5?{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3}
@@ -2045,11 +2045,11 @@ function updateEnemy(e,dt,t,T,p){
  e.x+=(tx-e.x)*Math.min(1,dt*6);e.y+=(ty-e.y)*Math.min(1,dt*6);e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
- if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.1)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
+ if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
-  if(e.t==='boss'&&canCapture()&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=S.stage<=2?116:128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
-  else{const steer=(S.stage===2?.48:S.stage===4?.31:S.stage>=5?.48:.56)*fm.steer,jitter=(S.stage===2?28:S.stage===4?20:S.stage>=5?32:38)*fm.jitter;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(S.stage===4?14:S.stage>=5?20:S.stage===2?10:12);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
-  if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?.94:1.18)+rnd(.12,.03);
+  if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=S.stage<=2?116:128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
+  else{const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:.56)*fm.steer,jitter=(S.stage===2?22:S.stage===4?20:S.stage>=5?32:38)*fm.jitter;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(S.stage===4?14:S.stage>=5?20:S.stage===2?8:12);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
+  if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
  }
 }
 
