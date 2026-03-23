@@ -194,14 +194,14 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.143.sha.e51712e.beta</span>
-    <span id="settingsRelease">Mar 23 2026, 12:57 PM EDT</span>
-    <span id="settingsState">beta@e51712e clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.146.sha.457df28.beta</span>
+    <span id="settingsRelease">Mar 23 2026, 1:14 PM EDT</span>
+    <span id="settingsState">beta@457df28 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Capture clarity, boss feedback, and 1.0 release focus</span>
-    <span id="settingsNotesBody">Improved rescue-versus-destroy feedback, strengthened ship-hit and boss first-hit cues, aligned the carried-fighter attack position with the original game, and promoted visible special squadron bonuses into the four-stage 1.0 release plan.</span>
+    <span id="settingsNotesTitle">Aurora production lane and public beta split</span>
+    <span id="settingsNotesBody">Established Aurora Galactica as the official production URL, published a distinct production-beta lane, preserved legacy Codex bookmarks with redirects, and clarified release labeling so public players no longer see alpha branding on the live build.</span>
   </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
@@ -253,8 +253,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.143.sha.e51712e.beta</span>
-    <span id="buildStampRelease">Mar 23 2026, 12:57 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.146.sha.457df28.beta</span>
+    <span id="buildStampRelease">Mar 23 2026, 1:14 PM EDT</span>
   </div>
 </div>
 <script>
@@ -348,7 +348,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.143.sha.e51712e.beta',commit:'e51712e27ddfffafd673393b0fe3c052978c91d8',branch:'beta',dirty:false,released:'Mar 23 2026, 12:57 PM EDT',state:'beta@e51712e clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.146.sha.457df28.beta',commit:'457df2885112ba888d3b254eea4292d0f12715f7',branch:'beta',dirty:false,released:'Mar 23 2026, 1:14 PM EDT',state:'beta@457df28 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';

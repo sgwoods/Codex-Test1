@@ -4,7 +4,8 @@
 
 - Browser-based fixed-screen arcade shooter built from readable source modules and served as `index.html`
 - Build identity is now part of the product:
-  - prerelease SemVer in `package.json`
+  - prerelease SemVer in `package.json` for the pre-production engineering line
+  - production and production-beta labels derived from that source version during Aurora release builds
   - generated `build-info.json`
   - in-game settings drawer shows the current build label and Eastern release timestamp
 - Hosted on GitHub Pages: `https://sgwoods.github.io/Aurora-Galactica/`
@@ -81,7 +82,7 @@
 
 ### 0. Release Management
 
-- Maintain prerelease SemVer while the game is still in active fidelity development
+- Maintain prerelease SemVer in the pre-production source line while deriving cleaner public production and production-beta labels for Aurora release builds
 - Stamp every build with:
   - version
   - build number

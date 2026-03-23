@@ -2,17 +2,26 @@
 
 ## Version Format
 
-- We use Semantic Versioning with prerelease tags while the game is still evolving toward a stable arcade-quality release.
-- Current format:
+- We use Semantic Versioning across three release surfaces while the game is still evolving toward a stable arcade-quality release.
+- Pre-production development format:
   - `MAJOR.MINOR.PATCH-prerelease`
-- Current build label format:
-  - `MAJOR.MINOR.PATCH-prerelease+build.<number>.sha.<shortcommit>`
+- Production format:
+  - `MAJOR.MINOR.PATCH`
+- Production beta format:
+  - `MAJOR.MINOR.PATCH-beta.<number>`
+- Current build label format adds build metadata to the surface version:
+  - `surface-version+build.<number>.sha.<shortcommit>`
 - Dirty local builds append:
   - `.dirty`
 
-Example:
+Examples:
 
-- `0.5.0-alpha.1+build.54.sha.c04bd9c`
+- pre-production:
+  - `0.5.0-alpha.1+build.115.sha.b0d812c`
+- production:
+  - `0.5.0+build.9.sha.457df28`
+- production beta:
+  - `0.5.0-beta.1+build.9.sha.457df28.beta`
 
 ## Meaning
 

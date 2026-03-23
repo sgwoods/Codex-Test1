@@ -169,7 +169,13 @@ The root Aurora build is the official public production lane, even while the pro
 
 ## Versioning
 
-- Current versioning is prerelease SemVer with build metadata
+- Current versioning uses three release surfaces with build metadata:
+  - pre-production:
+    - prerelease SemVer from `package.json`
+  - production:
+    - stable public label without the prerelease suffix
+  - production beta:
+    - promoted public beta label
 - Local and deployed builds carry:
   - version
   - build number
@@ -183,8 +189,10 @@ The root Aurora build is the official public production lane, even while the pro
 - The separate public project pages repo is synced from `build-info.json` and `release-notes.json`
   - CI uses the `PUBLIC_REPO_SYNC_TOKEN` secret when available
   - The token should have `contents:write` access to `sgwoods/public`
-- Example build label:
-  - `0.5.0-alpha.1+build.54.sha.c04bd9c`
+- Example production build label:
+  - `0.5.0+build.9.sha.457df28`
+- Example production beta build label:
+  - `0.5.0-beta.1+build.9.sha.457df28.beta`
 - See:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 
