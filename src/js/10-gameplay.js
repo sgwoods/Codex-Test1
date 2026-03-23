@@ -66,11 +66,12 @@ function spawnStage(){
 }
 
 function queueStageTransition(mode='normal'){
- const nextIsChallenge=!!S.forceChallenge||isChallengeStage(S.stage);
+ const targetStage=S.pendingStage||S.stage;
+ const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
  S.nextStageT=mode==='challengeResult'?(nextIsChallenge?1.8:1.25):(nextIsChallenge?2.8:2.2);
- S.bannerTxt=nextIsChallenge?'CHALLENGING STAGE':`STAGE ${S.stage}`;
- S.bannerSub=nextIsChallenge?`STAGE ${S.stage}`:'NEXT PHASE';
+ S.bannerTxt=nextIsChallenge?'CHALLENGING STAGE':`STAGE ${targetStage}`;
+ S.bannerSub=nextIsChallenge?`STAGE ${targetStage}`:'NEXT PHASE';
  S.bannerMode='stageTransition';
  S.banner=S.nextStageT;
  sfx.transition(nextIsChallenge?1:0);
@@ -480,14 +481,19 @@ function update(dt){
    return;
   }
  }
- if(S.nextStageT>0){if(S.nextStageT<=dt){S.nextStageT=0;spawnStage();}return}
+ if(S.nextStageT>0){
+  if(S.nextStageT<=dt){
+   S.nextStageT=0;
+   if(S.pendingStage){S.stage=S.pendingStage;S.pendingStage=0;}
+   spawnStage();
+  }
+  return
+ }
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
    S.postChallengeT=0;
-   S.stage=S.pendingStage||S.stage+1;
-   S.pendingStage=0;
    queueStageTransition('challengeResult');
   }else S.postChallengeT-=dt;
   return;
