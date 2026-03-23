@@ -1,4 +1,4 @@
-name: Deploy Pages
+name: Deploy Legacy Redirect
 
 on:
   push:
@@ -21,47 +21,19 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Install dependencies
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Build redirect artifact
         run: |
-          npm ci
-
-      - name: Build site
-        env:
-          BUILD_NUMBER: ${{ github.run_number }}
-        run: |
-          npm run build
-
-      - name: Build static site artifact
-        run: |
-          mkdir -p _site
+          mkdir -p _site/beta
           cp index.html _site/
           cp release-dashboard.html _site/
           cp project-guide.html _site/
-          cp build-info.json _site/
-          cp release-notes.json _site/
-          cp export.mov.png _site/
+          cp 404.html _site/
           cp README.md _site/
-          if [ -d beta ]; then
-            mkdir -p _site/beta
-            cp -R beta/. _site/beta/
-          fi
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+          cp beta/index.html _site/beta/index.html
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-
-      - name: Deploy
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
