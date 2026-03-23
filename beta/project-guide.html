@@ -359,7 +359,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.147.sha.5164351.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.150.sha.625d817.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -750,6 +750,7 @@
 <pre><code data-lang="bash">  npm run harness -- --session /absolute/path/to/neo-galaga-session.json</code></pre>
 <ul><li>Or run one of the built-in scenarios:</li></ul>
 <pre><code data-lang="bash">  npm run harness -- --scenario stage3-challenge
+  npm run harness -- --scenario stage3-challenge-persona --persona expert
   npm run harness -- --scenario stage3-transition
   npm run harness -- --scenario stage3-perfect-transition
   npm run harness -- --scenario stage4-five-ships
@@ -768,11 +769,16 @@
   npm run harness -- --scenario carried-fighter-standby
   npm run harness -- --scenario carried-fighter-attacking</code></pre>
 <ul><li>Or run a seeded batch:</li></ul>
-<pre><code data-lang="bash">  npm run harness:batch -- --profile quick
+<pre><code data-lang="bash">  npm run harness:batch -- --profile personas
+  npm run harness:batch -- --profile quick
   npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
   npm run harness:batch -- --profile deep</code></pre>
-<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>The harness writes a <code>summary.json</code> beside the generated artifacts, including:<ul><li>seed used for the run</li></ul></li><li>Stage 4 now has a dedicated capture-pressure scenario as well:<ul><li><code>stage4-capture-pressure</code></li><li>purpose: stress a natural capture into carrying-boss return under Stage 4 timing</li><li>note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for <code>stage4-five-ships</code> or <code>stage4-survival</code></li><li>stage clears / challenge clears / ship losses</li><li>per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes</li><li>capture/rescue markers such as capture start, fighter captured, and fighter rescued</li><li>capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile</li><li>transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible</li><li>rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire</li><li>natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing</li><li>carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points</li><li>special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset</li><li>dual-fire metrics such as average spread in the rescue scenario</li><li>descent-speed metrics such as time from attack start to lower-field crossing</li><li>whether the generated <code>.webm</code> contains audio</li></ul></li><li>Batch mode also writes:<ul><li><code>batch-report.json</code> with aggregate challenge hits, ship losses, total duration, and audio failures</li><li><code>tuning-report.json</code> with prioritized findings to guide the next gameplay pass</li><li>later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix</li><li>the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish &quot;died early&quot; from &quot;survived the full window but spent too many ships&quot;</li></ul></li><li>Typical batch timings on this machine:<ul><li><code>quick</code>: about <code>1.5-2 minutes</code></li><li><code>default</code>: about <code>3-4 minutes</code></li><li><code>deep</code>: about <code>5-7 minutes</code></li></ul></li><li>You can re-run the analyzer on an existing run folder:</li></ul>
+<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>The harness writes a <code>summary.json</code> beside the generated artifacts, including:<ul><li>seed used for the run</li><li>selected self-play persona when used:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li></ul></li></ul></li><li>Stage 4 now has a dedicated capture-pressure scenario as well:<ul><li><code>stage4-capture-pressure</code></li><li>purpose: stress a natural capture into carrying-boss return under Stage 4 timing</li><li>note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for <code>stage4-five-ships</code> or <code>stage4-survival</code></li><li>stage clears / challenge clears / ship losses</li><li>per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes</li><li>capture/rescue markers such as capture start, fighter captured, and fighter rescued</li><li>capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile</li><li>transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible</li><li>rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire</li></ul></li><li>Persona self-play is useful for launch-readiness tuning without changing game rules:</li></ul>
+<pre><code data-lang="bash">  npm run harness -- --scenario stage1-opening --persona novice
+  npm run harness -- --scenario stage2-opening --persona advanced
+  npm run harness -- --scenario stage4-survival --persona expert</code></pre>
+<ul><li>natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing</li><li>carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points</li><li>special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset</li><li>dual-fire metrics such as average spread in the rescue scenario</li><li>descent-speed metrics such as time from attack start to lower-field crossing</li><li>whether the generated <code>.webm</code> contains audio</li></ul><ul><li>Batch mode also writes:<ul><li><code>batch-report.json</code> with aggregate challenge hits, ship losses, total duration, and audio failures</li><li><code>tuning-report.json</code> with prioritized findings to guide the next gameplay pass</li><li>later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix</li><li>the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish &quot;died early&quot; from &quot;survived the full window but spent too many ships&quot;</li></ul></li><li>Typical batch timings on this machine:<ul><li><code>quick</code>: about <code>1.5-2 minutes</code></li><li><code>default</code>: about <code>3-4 minutes</code></li><li><code>deep</code>: about <code>5-7 minutes</code></li></ul></li><li>You can re-run the analyzer on an existing run folder:</li></ul>
 <pre><code data-lang="bash">  npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder</code></pre>
 <ul><li>You can also regenerate the tuning summary for an existing batch:</li></ul>
 <pre><code data-lang="bash">  npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder</code></pre>
@@ -1276,7 +1282,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.147.sha.5164351.beta
+          Build: 0.5.0-beta.1+build.150.sha.625d817.beta
         </p>
       </aside>
     </main>
