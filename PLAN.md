@@ -189,13 +189,14 @@ overrides it.
 | Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |
 | Must Fix | `#64` | Codex | Open | Challenge enemies firing still breaks bonus-stage fidelity. | Disable enemy fire during challenge stages. | Phase 1 |
 | Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
-| Must Fix | `#40` | Codex | Open | Capture / rescue still reads unclearly in live play. | Polish rescue feedback and readability. | Phase 3 |
-| Must Fix | `#74` | Codex | Open | The three-kill bonus group is still too spread out to read well. | Tighten bonus-squadron spacing. | Phase 2 |
-| Must Fix | `#47` | Codex | Open | Special squadron spacing and presentation are still too loose. | Compact special-squadron layout and presentation. | Phase 2 |
+| Must Fix | `#40` | Codex | Beta review | Capture / rescue now has clearer banners, but the live read still needs confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |
+| Must Fix | `#74` | Codex | Beta review | Bonus/special squadron spacing was tightened and now needs a live feel check. | Confirm the tighter bonus grouping in beta play. | Phase 2 |
+| Must Fix | `#47` | Codex | Beta review | Special squadron presentation is tighter, but needs manual release judgment. | Confirm squadron readability and bonus feel in beta. | Phase 2 |
+| Must Fix | `#45` | Codex | Open | Boss damaged label text still lingers on-screen after the hit state. | Remove the lingering damaged-text visual from boss encounters. | Phase 2 |
 | Must Fix | `#38` | Codex | Open | Ship-hit feedback still does not feel release-ready. | Improve explosion, pause, and hit feedback. | Phase 2 |
 | Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
-| Should Fix | `#73` | Codex | Open | Players still cannot shoot during the early tractor-beam capture window. | Add the shoot-to-save capture moment. | Phase 3 |
+| Should Fix | `#73` | Codex | Beta review | Early tractor-beam escape is implemented and harness-passing. | Verify the feel of the shoot-to-save window in beta. | Phase 3 |
 | Should Fix | `#4` | Shared | Watch | Stage `1` feels acceptable manually, with mixed harness urgency. | Revisit only if evidence worsens. | Phase 1 |
 | Should Fix | `#62` | Shared | Watch | Self-play can still fail early in Stage `1`. | Keep the persona baseline in view while tuning. | Phase 1 |
 | Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
