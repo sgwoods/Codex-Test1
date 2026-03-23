@@ -9,6 +9,13 @@ const HARNESS = path.join(__dirname, 'run-gameplay.js');
 const OUT_BASE = path.join(ROOT, 'harness-artifacts');
 
 const PROFILES = {
+  personas: [
+    { scenario: 'stage1-opening', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 1100 },
+    { scenario: 'stage2-opening', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 2100 },
+    { scenario: 'stage3-challenge-persona', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 3100 },
+    { scenario: 'stage4-five-ships', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 4100 },
+    { scenario: 'stage4-survival', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 4200 }
+  ],
   quick: [
     { scenario: 'stage3-transition', repeats: 1, seedBase: 3000 },
     { scenario: 'stage4-five-ships', repeats: 1, seedBase: 4000 },
@@ -66,6 +73,11 @@ function runHarness(args){
   });
 }
 
+function avg(arr){
+  if(!arr.length) return 0;
+  return arr.reduce((a,b)=>a+b,0)/arr.length;
+}
+
 function summarize(batch){
   const report = {
     createdAt: new Date().toISOString(),
@@ -76,7 +88,8 @@ function summarize(batch){
       totalDuration: 0,
       audioFailures: 0,
       challengeHits: [],
-      shipLost: 0
+      shipLost: 0,
+      byPersona: {}
     }
   };
   for(const run of batch.results){
@@ -84,6 +97,36 @@ function summarize(batch){
     if(run.analysis?.video?.audio === false) report.aggregate.audioFailures++;
     for(const c of run.analysis?.challengeClears || []) report.aggregate.challengeHits.push({ scenario: run.name, hits: c.hits, total: c.total, stage: c.stage });
     report.aggregate.shipLost += (run.analysis?.shipLost || []).length;
+    const persona = run.persona || 'default';
+    const scenario = run.name;
+    const personaBucket = report.aggregate.byPersona[persona] || (report.aggregate.byPersona[persona] = { runs: 0, shipLost: 0, avgEndingStage: 0, avgSurvivalRatio: 0, avgChallengeHitRate: 0, scenarios: {} });
+    const scenarioBucket = personaBucket.scenarios[scenario] || (personaBucket.scenarios[scenario] = { runs: 0, shipLost: 0, endingStage: [], survivalRatio: [], challengeHitRate: [] });
+    const losses = (run.analysis?.shipLost || []).length;
+    const survivalRatio = run.duration ? Math.min(1, (run.analysis?.duration || 0) / run.duration) : 0;
+    const challengeRates = (run.analysis?.challengeClears || []).map(c => c.total ? c.hits / c.total : 0);
+    personaBucket.runs++;
+    personaBucket.shipLost += losses;
+    scenarioBucket.runs++;
+    scenarioBucket.shipLost += losses;
+    scenarioBucket.endingStage.push(run.state?.stage || 0);
+    scenarioBucket.survivalRatio.push(survivalRatio);
+    scenarioBucket.challengeHitRate.push(...challengeRates);
+  }
+  for(const persona of Object.keys(report.aggregate.byPersona)){
+    const bucket = report.aggregate.byPersona[persona];
+    const scenarios = Object.values(bucket.scenarios);
+    bucket.avgEndingStage = +avg(scenarios.flatMap(s => s.endingStage)).toFixed(3);
+    bucket.avgSurvivalRatio = +avg(scenarios.flatMap(s => s.survivalRatio)).toFixed(3);
+    bucket.avgChallengeHitRate = +avg(scenarios.flatMap(s => s.challengeHitRate)).toFixed(3);
+    for(const [name, scenario] of Object.entries(bucket.scenarios)){
+      bucket.scenarios[name] = {
+        runs: scenario.runs,
+        avgShipLosses: +(scenario.shipLost / Math.max(1, scenario.runs)).toFixed(3),
+        avgEndingStage: +avg(scenario.endingStage).toFixed(3),
+        avgSurvivalRatio: +avg(scenario.survivalRatio).toFixed(3),
+        avgChallengeHitRate: +avg(scenario.challengeHitRate).toFixed(3)
+      };
+    }
   }
   return report;
 }
@@ -92,7 +135,7 @@ async function main(){
   const args = parseArgs(process.argv.slice(2));
   const profile = PROFILES[args.profile || 'default'];
   if(args.help || !profile){
-    console.log('Usage: npm run harness:batch -- --profile quick|default|deep');
+    console.log('Usage: npm run harness:batch -- --profile personas|quick|fidelity|default|deep');
     process.exit(args.help ? 0 : 1);
   }
 
@@ -102,11 +145,17 @@ async function main(){
 
   const batch = { profile: args.profile || 'default', runs: [], results: [] };
   for(const item of profile){
-    for(let i=0;i<item.repeats;i++){
-      const seed = item.seedBase + i + 1;
-      const result = await runHarness(['--scenario', item.scenario, '--seed', String(seed), '--out', outDir]);
-      batch.runs.push({ scenario: item.scenario, seed });
-      batch.results.push(result);
+    const personas = item.personas && item.personas.length ? item.personas : [item.persona || null];
+    for(let pIndex=0;pIndex<personas.length;pIndex++){
+      const persona = personas[pIndex];
+      for(let i=0;i<item.repeats;i++){
+        const seed = item.seedBase + i + 1 + (persona ? pIndex * 100 : 0);
+        const harnessArgs = ['--scenario', item.scenario, '--seed', String(seed), '--out', outDir];
+        if(persona) harnessArgs.push('--persona', persona);
+        const result = await runHarness(harnessArgs);
+        batch.runs.push({ scenario: item.scenario, persona, seed });
+        batch.results.push(result);
+      }
     }
   }
 

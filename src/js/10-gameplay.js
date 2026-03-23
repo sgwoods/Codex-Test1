@@ -58,7 +58,7 @@ function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
- logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
+ logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily});
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challenge';S.banner=2.6}
  else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
@@ -106,9 +106,10 @@ function start(){
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
+ S.harnessPersona=(window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
- logEvent('game_start');
+ logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
 }
@@ -189,6 +190,45 @@ function attractMoveAxis(p){
  if(!target)return 0;
  if(Math.abs(target.x-p.x)<8)return 0;
  return target.x>p.x?1:-1;
+}
+const HARNESS_PERSONAS={
+ novice:{name:'novice',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:150,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
+ advanced:{name:'advanced',moveMul:.72,urgentDx:34,urgentLook:162,deadZone:8,aimBoss:14,aimOther:10,fireChance:.78,challengeFireChance:.76,openShotY:78,diveBias:420,carryBias:240,bossBias:120,activeBias:100,heightBias:1,distanceBias:1},
+ expert:{name:'expert',moveMul:.92,urgentDx:40,urgentLook:188,deadZone:6,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:64,diveBias:560,carryBias:320,bossBias:160,activeBias:120,heightBias:1.08,distanceBias:.9}
+};
+function harnessPersonaCfg(){
+ const key=(window.__auroraHarnessPersona||'').toLowerCase();
+ return HARNESS_PERSONAS[key]||null;
+}
+function harnessTargetScore(e,p,cfg){
+ return (e.dive?cfg.diveBias:0)+(e.carry?cfg.carryBias:0)+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
+}
+function harnessSelectTarget(p,cfg){
+ return S.e.filter(e=>e.hp>0).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||null;
+}
+function harnessMoveAxis(p,cfg){
+ const hp=playerHitbox();
+ const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&p.y-b.y<cfg.urgentLook&&Math.abs(b.x-p.x)<cfg.urgentDx).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
+ if(urgent){
+  const away=urgent.x>=p.x?-1:1;
+  if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
+ }
+ const target=harnessSelectTarget(p,cfg);
+ if(!target)return 0;
+ const dx=target.x-p.x;
+ if(Math.abs(dx)<cfg.deadZone)return 0;
+ return dx>0?1:-1;
+}
+function runHarnessPlayer(dt,p,cfg){
+ if(p.spawn>0||p.captured)return;
+ const hp=playerHitbox();
+ const axis=harnessMoveAxis(p,cfg);
+ p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
+ const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY)).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||harnessSelectTarget(p,cfg);
+ if(!target||p.cd>0||S.pb.length>=bulletsMax())return;
+ const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
+ const fireChance=S.challenge?cfg.challengeFireChance:cfg.fireChance;
+ if(Math.abs(target.x-p.x)<=tol&&randUnit()<=fireChance)shoot();
 }
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
@@ -526,11 +566,16 @@ function update(dt){
  if(p.captured&&p.capBoss&&p.capBoss.hp>0){const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;p.capT-=dt;p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);p.y+=(capY-p.y)*Math.min(1,dt*3.9);if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();}
  else if(p.captured){p.captured=0;p.capBoss=null;p.inv=1.2;}
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom}
+ const harnessPersona=harnessPersonaCfg();
+ const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);
+ const manualFire=!!keys.Space;
  if(p.spawn<=0&&!p.captured){
   if(S.attract)runAttractPlayer(dt,p);
-  else{const hp=playerHitbox();p.x=cl(p.x+(((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0))*p.s*dt,hp.w+2,PLAY_W-hp.w-2);}
+  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
+  else{const hp=playerHitbox();p.x=cl(p.x+manualAxis*p.s*dt,hp.w+2,PLAY_W-hp.w-2);}
  }
- if(!S.attract&&keys.Space)shoot();
+ if(!S.attract&&!harnessPersona&&keys.Space)shoot();
+ else if(!S.attract&&harnessPersona&&manualFire)shoot();
 
  const alive=S.e.filter(e=>e.hp>0);
  S.liveCount=alive.length;

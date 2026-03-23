@@ -7,14 +7,15 @@ window.__galagaHarness__={
    localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
    syncRecordUi();
   }
-  if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
-   testStage.value=cl(+cfg.stage||1,1,99)|0;
-   testShips.value=cl(+cfg.ships||3,1,9)|0;
-   testChallenge.checked=!!cfg.challenge;
-   saveTestCfg();
-  }
-  if(!started)start();
- },
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
+  testStage.value=cl(+cfg.stage||1,1,99)|0;
+  testShips.value=cl(+cfg.ships||3,1,9)|0;
+  testChallenge.checked=!!cfg.challenge;
+  saveTestCfg();
+ }
+ window.__auroraHarnessPersona=(cfg.persona||'').toLowerCase();
+ if(!started)start();
+},
  stop(label='harness'){
   logEvent('harness_stop',{label});
   logSnapshot('harness_stop');
@@ -25,7 +26,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
  spawnPlayerBullet(cfg={}){
   const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
   S.pb.push({x,y,v});

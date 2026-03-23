@@ -100,7 +100,8 @@ function specFromScenario(file){
     config: {
       stage: Math.max(1, raw.config?.stage || 1),
       ships: Math.max(1, Math.min(9, raw.config?.ships || 3)),
-      challenge: !!raw.config?.challenge
+      challenge: !!raw.config?.challenge,
+      persona: raw.config?.persona || null
     },
     seed: (raw.seed >>> 0) || hashString(raw.name || path.basename(file)),
     actions: (raw.actions || []).map(a => ({
@@ -159,6 +160,7 @@ async function main(){
     console.log('Usage: npm run harness -- --session /absolute/path/to/session.json');
     console.log('   or: npm run harness -- --scenario /absolute/path/to/scenario.json');
     console.log('   or: npm run harness -- --scenario stage3-challenge');
+    console.log('Optional: --persona novice|advanced|expert');
     process.exit(args.help ? 0 : 1);
   }
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
@@ -166,6 +168,7 @@ async function main(){
   const scenarioPath = args.scenario && !String(args.scenario).includes(path.sep) ? path.join(SCENARIOS, `${args.scenario}.json`) : args.scenario;
   const spec = args.session ? specFromSession(path.resolve(args.session)) : specFromScenario(path.resolve(scenarioPath));
   if(args.seed) spec.seed = (+args.seed >>> 0) || spec.seed;
+  if(args.persona) spec.config.persona = String(args.persona).toLowerCase();
   const outBase = path.resolve(args.out || DEFAULT_OUT);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const outDir = path.join(outBase, `${spec.name}-${stamp}`);
@@ -211,6 +214,7 @@ async function main(){
 
     const summary = {
       name: spec.name,
+      persona: spec.config?.persona || null,
       source: spec.source,
       duration: spec.duration,
       config: spec.config,

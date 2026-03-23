@@ -214,6 +214,7 @@ The root Aurora build is the official public production lane, even while the pro
 - Or run one of the built-in scenarios:
   ```bash
   npm run harness -- --scenario stage3-challenge
+  npm run harness -- --scenario stage3-challenge-persona --persona expert
   npm run harness -- --scenario stage3-transition
   npm run harness -- --scenario stage3-perfect-transition
   npm run harness -- --scenario stage4-five-ships
@@ -234,6 +235,7 @@ The root Aurora build is the official public production lane, even while the pro
   ```
 - Or run a seeded batch:
   ```bash
+  npm run harness:batch -- --profile personas
   npm run harness:batch -- --profile quick
   npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
@@ -243,6 +245,10 @@ The root Aurora build is the official public production lane, even while the pro
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
 - The harness writes a `summary.json` beside the generated artifacts, including:
   - seed used for the run
+  - selected self-play persona when used:
+    - `novice`
+    - `advanced`
+    - `expert`
 - Stage 4 now has a dedicated capture-pressure scenario as well:
   - `stage4-capture-pressure`
   - purpose: stress a natural capture into carrying-boss return under Stage 4 timing
@@ -253,6 +259,12 @@ The root Aurora build is the official public production lane, even while the pro
   - capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile
   - transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible
   - rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire
+- Persona self-play is useful for launch-readiness tuning without changing game rules:
+  ```bash
+  npm run harness -- --scenario stage1-opening --persona novice
+  npm run harness -- --scenario stage2-opening --persona advanced
+  npm run harness -- --scenario stage4-survival --persona expert
+  ```
   - natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing
   - carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points
   - special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset
