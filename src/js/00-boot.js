@@ -608,13 +608,22 @@ fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+function keyboardTargetIsEditable(target){
+ if(!target||typeof target.closest!=='function')return false;
+ return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
+}
 addEventListener('keydown',e=>{
+ const typingTarget=keyboardTargetIsEditable(e.target);
  const wasDown=!!keys[e.code];
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
- if(e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(typingTarget){
+  if(e.code==='Escape'&&settingsOpen){e.preventDefault();closeSettings();}
+  return;
+ }
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();

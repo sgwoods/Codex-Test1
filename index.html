@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.153.sha.8144d11.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 3:07 PM EDT</span>
-    <span id="settingsState">main@8144d11 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.154.sha.c198258.dirty</span>
+    <span id="settingsRelease">Mar 23 2026, 3:23 PM EDT</span>
+    <span id="settingsState">main@c198258 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.153.sha.8144d11.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 3:07 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.154.sha.c198258.dirty</span>
+    <span id="buildStampRelease">Mar 23 2026, 3:23 PM EDT</span>
   </div>
 </div>
 <script>
@@ -355,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.153.sha.8144d11.dirty',commit:'8144d11cd10621f18406770d0b977effa3a4e9dc',branch:'main',dirty:true,released:'Mar 23 2026, 3:07 PM EDT',state:'main@8144d11 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.154.sha.c198258.dirty',commit:'c19825891ac37045a8533451a4935e8223013432',branch:'main',dirty:true,released:'Mar 23 2026, 3:23 PM EDT',state:'main@c198258 dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -904,13 +904,22 @@ fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+function keyboardTargetIsEditable(target){
+ if(!target||typeof target.closest!=='function')return false;
+ return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
+}
 addEventListener('keydown',e=>{
+ const typingTarget=keyboardTargetIsEditable(e.target);
  const wasDown=!!keys[e.code];
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
- if(e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(typingTarget){
+  if(e.code==='Escape'&&settingsOpen){e.preventDefault();closeSettings();}
+  return;
+ }
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
