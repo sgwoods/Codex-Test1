@@ -704,7 +704,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
           <span class="eyebrow">Release Dashboard</span>
           <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
         </div>
-        <h1>Neo Galaga Tribute</h1>
+        <h1>Aurora Galactica</h1>
         <p>${esc(dashboard.strapline || '')}</p>
         <div class="meta">
           <div class="metaCard">

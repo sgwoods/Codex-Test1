@@ -41,6 +41,28 @@ Example:
   - `beta`: feature-complete enough for broader testing, still tuning quality and regressions
   - `rc`: release candidate, only bug fixes and polish before a stable cut
 
+## Hosted Release Lanes
+
+- `alpha`
+  - continuously published at:
+    - `https://sgwoods.github.io/Codex-Test1/`
+  - expected to move frequently with active development, instrumentation, tuning, and UI changes
+- `beta`
+  - manually promoted at:
+    - `https://sgwoods.github.io/Codex-Test1/beta/`
+  - should move only when a build is materially better and worth broader checkpoint testing
+
+## Beta Promotion Workflow
+
+1. Build the current root artifacts:
+   - `npm run build`
+2. Promote the current artifacts into the beta lane:
+   - `npm run promote:beta`
+3. Commit the updated `/beta/` directory
+4. Push `main` so GitHub Pages republishes both lanes
+
+The beta lane is intentionally a snapshot of selected root artifacts, not a separate branch or a second build pipeline.
+
 ## Build Number
 
 - Every build gets a build number, even when there is no major/minor release bump.
@@ -100,6 +122,8 @@ This gives every build a unique identity without forcing a SemVer bump for every
     - capture/rescue rules are settled for that slice
     - stage challenge/results/high-score flow is in place
     - visuals/audio are consistent enough for broader playtesting
+  - hosted expectation:
+    - use the manually promoted `/beta/` lane for these checkpoint builds rather than updating it on every alpha change
 - `1.0`
   - target when:
     - Stage `1` through Stage `4` feel stable as one coherent game loop

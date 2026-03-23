@@ -21,8 +21,9 @@ const accountRecent=document.getElementById('accountRecent');
 const pilotStamp=document.getElementById('pilotStamp');
 const SUPABASE_URL='{{SUPABASE_URL}}';
 const SUPABASE_ANON_KEY='{{SUPABASE_ANON_KEY}}';
-const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!localStorage.getItem(SEED_PREF_KEY);
-const LEADERBOARD_CACHE_PREFIX='neoGalagaLeaderboardCache.v1.';
+const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
+const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';
+const LEGACY_LEADERBOARD_CACHE_PREFIX='neoGalagaLeaderboardCache.v1.';
 const LEADERBOARD_STALE_MS=45000;
 const LEADERBOARD_REFRESH_MS=120000;
 const LEADERBOARD={
@@ -30,7 +31,7 @@ const LEADERBOARD={
  configured:null,
  view:(()=>{
   try{
-   const raw=String(localStorage.getItem(LEADERBOARD_PREF_KEY)||'all').toLowerCase();
+   const raw=String(readPref(LEADERBOARD_PREF_KEY)||'all').toLowerCase();
    return['all','validated','local','mine'].includes(raw)?raw:'all';
   }catch{return'all'}
  })(),
@@ -91,6 +92,9 @@ function leaderboardStatusLabel(view,mode='ready'){
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
 }
+function legacyLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
+ return `${LEGACY_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+}
 function persistLeaderboardCache(view){
  if(view==='local')return;
  try{
@@ -100,7 +104,7 @@ function persistLeaderboardCache(view){
 function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
  if(view==='local')return 0;
  try{
-  const raw=localStorage.getItem(leaderboardCacheKey(view,userId));
+  const raw=localStorage.getItem(leaderboardCacheKey(view,userId))||localStorage.getItem(legacyLeaderboardCacheKey(view,userId));
   if(!raw)return 0;
   const parsed=JSON.parse(raw);
   const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow):[];
@@ -241,7 +245,7 @@ function syncLeaderboardBest(){
  const localBest=localLeaderboardRows()[0]?.score||0;
  const remoteBest=LEADERBOARD.remote.all[0]?.score||0;
  S.best=Math.max(S.best||0,localBest,remoteBest);
- localStorage.galagaTribBest=S.best;
+ writePref(BEST_SCORE_KEY,String(S.best));
 }
 async function loadOwnProfile(){
  if(!LEADERBOARD.client||!LEADERBOARD.user){LEADERBOARD.profile=null;return null;}
@@ -307,7 +311,7 @@ function setLeaderboardView(view){
  const next=['all','validated','local','mine'].includes(view)?view:'all';
  LEADERBOARD.view=next;
  LEADERBOARD.panelOpen=1;
- localStorage.setItem(LEADERBOARD_PREF_KEY,next);
+ writePref(LEADERBOARD_PREF_KEY,next);
  if(next==='mine'&&!LEADERBOARD.user)setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
  else if(next==='local')setLeaderboardStatus(leaderboardStatusLabel(next,'local'));
  else if((LEADERBOARD.remote[next]||[]).length||LEADERBOARD.cacheStamp[next])setLeaderboardStatus(leaderboardCacheFresh(next)?leaderboardStatusLabel(next,'ready'):leaderboardStatusLabel(next,'cached'));

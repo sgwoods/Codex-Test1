@@ -185,9 +185,9 @@ async function main(){
     page.on('download', d => downloads.push(d));
 
     await page.addInitScript(cfg => {
-      localStorage.setItem('galagaTribAutoVideo', '1');
-      localStorage.setItem('galagaTribTestCfg', JSON.stringify(cfg));
-      localStorage.setItem('galagaTribHarnessSeed', String(cfg.seed >>> 0));
+      localStorage.setItem('auroraGalacticaAutoVideo', '1');
+      localStorage.setItem('auroraGalacticaTestCfg', JSON.stringify(cfg));
+      localStorage.setItem('auroraGalacticaHarnessSeed', String(cfg.seed >>> 0));
     }, Object.assign({}, spec.config, { seed: spec.seed }));
 
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });

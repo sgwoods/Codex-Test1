@@ -7,6 +7,42 @@ const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=doc
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 let t0=0,started=0,paused=0,aud=0,keys={};
 let RNG_SEED=0,RNG_STATE=0;
+const PRODUCT_NAME='Aurora Galactica';
+const STORAGE_PREFIX='auroraGalactica';
+const LEGACY_STORAGE_PREFIX='galagaTrib';
+const RECORD_PREF_KEY=`${STORAGE_PREFIX}AutoVideo`;
+const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
+const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
+const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
+const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
+const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
+const LEGACY_STORAGE_KEYS={
+ [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
+ [TEST_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}TestCfg`,
+ [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
+ [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
+ [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
+ [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
+};
+function readPref(key){
+ try{
+  const current=localStorage.getItem(key);
+  if(current!=null)return current;
+  const legacy=LEGACY_STORAGE_KEYS[key];
+  if(!legacy)return null;
+  const fallback=localStorage.getItem(legacy);
+  if(fallback!=null)localStorage.setItem(key,fallback);
+  return fallback;
+ }catch{
+  return null;
+ }
+}
+function writePref(key,value){
+ try{localStorage.setItem(key,value)}catch{}
+}
+function removePref(key){
+ try{localStorage.removeItem(key)}catch{}
+}
 function randUnit(){
  if(!RNG_SEED)return Math.random();
  RNG_STATE=(RNG_STATE+0x6D2B79F5)|0;
@@ -17,8 +53,8 @@ function randUnit(){
 function setSeed(seed=0){
  RNG_SEED=(+seed>>>0)||0;
  RNG_STATE=RNG_SEED||0;
- if(RNG_SEED)localStorage.setItem(SEED_PREF_KEY,String(RNG_SEED));
- else localStorage.removeItem(SEED_PREF_KEY);
+ if(RNG_SEED)writePref(SEED_PREF_KEY,String(RNG_SEED));
+ else removePref(SEED_PREF_KEY);
  return RNG_SEED;
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
@@ -36,12 +72,7 @@ let gameOverHtml='';
 let gameOverState=null;
 const ATTRACT={active:0,phase:'',timer:0,cycle:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
-const RECORD_PREF_KEY='galagaTribAutoVideo';
-const TEST_PREF_KEY='galagaTribTestCfg';
-const SEED_PREF_KEY='galagaTribHarnessSeed';
-const SCOREBOARD_KEY='galagaTribTop10';
-const LEADERBOARD_PREF_KEY='galagaTribLeaderboardView';
-const VIDEO_REC={enabled:localStorage.getItem(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
+const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -169,7 +200,7 @@ const P={
  }
 };
 
-const S={score:0,best:+localStorage.galagaTribBest||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
+const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
  p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
@@ -188,11 +219,11 @@ const snapshot=()=>({started:!!started,paused:!!paused,attract:{active:!!ATTRACT
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
-  return JSON.parse(localStorage.getItem(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
+  return JSON.parse(readPref(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
  }catch{return[]}
 }
 function saveScoreboard(list){
- localStorage.setItem(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
+ writePref(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
 }
 function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
 function sanitizeInitials(txt=''){return String(txt).toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)}
@@ -221,7 +252,7 @@ function recordScore(score,stage){
  const top=board.slice(0,10);
  saveScoreboard(top);
  S.best=top[0]?.score||0;
- localStorage.galagaTribBest=S.best;
+ writePref(BEST_SCORE_KEY,String(S.best));
  return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
 }
 function saveGameOverInitials(){
@@ -310,7 +341,7 @@ function stopAttractLoop(){
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;
- localStorage.galagaTribBest=S.best;
+ writePref(BEST_SCORE_KEY,String(S.best));
 }
 function resetSession(reason='boot'){
  sessionN++;
@@ -348,14 +379,14 @@ function exportSession(opts={}){
 }
 function loadTestCfg(){
  try{
-  const raw=JSON.parse(localStorage.getItem(TEST_PREF_KEY)||'{}');
+  const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
   return{stage:cl(+raw.stage||1,1,99)|0,ships:cl(+raw.ships||3,1,9)|0,challenge:!!raw.challenge};
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
- localStorage.setItem(TEST_PREF_KEY,JSON.stringify(cfg));
+ writePref(TEST_PREF_KEY,JSON.stringify(cfg));
  return cfg;
 }
 function syncSettingsUi(){
@@ -488,7 +519,7 @@ async function submitFeedback(ev){
   const payload={
   type,title,description,
   timestamp:new Date(now).toISOString(),
-  game:{name:'Neo Galaga Tribute',version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
+  game:{name:PRODUCT_NAME,version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge,attract:!!ATTRACT.active}
  };
  const kind=type==='feature_request'?'Feature Request':'Bug Report';
@@ -515,7 +546,7 @@ async function submitFeedback(ev){
    body:JSON.stringify({
     _subject:subject,
     _template:'table',
-    product:'Neo Galaga Tribute',
+    product:PRODUCT_NAME,
     type:kind,
     title,
     description,
@@ -567,7 +598,7 @@ exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
  if(VIDEO_REC.active)return;
  VIDEO_REC.enabled=!VIDEO_REC.enabled;
- localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
+ writePref(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });

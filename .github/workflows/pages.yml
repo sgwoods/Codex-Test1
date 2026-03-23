@@ -52,6 +52,10 @@ jobs:
           cp release-notes.json _site/
           cp export.mov.png _site/
           cp README.md _site/
+          if [ -d beta ]; then
+            mkdir -p _site/beta
+            cp -R beta/. _site/beta/
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

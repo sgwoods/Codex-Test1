@@ -1,8 +1,8 @@
-# Neo Galaga Tribute Plan
+# Aurora Galactica Plan
 
 ## Current State
 
-- Browser-based Galaga-inspired game built from readable source modules and served as `index.html`
+- Browser-based fixed-screen arcade shooter built from readable source modules and served as `index.html`
 - Build identity is now part of the product:
   - prerelease SemVer in `package.json`
   - generated `build-info.json`
