@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node
+        if: github.repository != 'sgwoods/Codex-Test1'
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -33,16 +34,51 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
+        if: github.repository != 'sgwoods/Codex-Test1'
         run: |
           npm ci
 
       - name: Build site
+        if: github.repository != 'sgwoods/Codex-Test1'
         env:
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
           npm run build
 
+      - name: Build redirect artifact
+        if: github.repository == 'sgwoods/Codex-Test1'
+        run: |
+          mkdir -p _site/beta
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1">
+          <title>Aurora Galactica Moved</title>
+          <meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/">
+          <link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/">
+          <script>location.replace('https://sgwoods.github.io/Aurora-Galactica/');</script>
+          <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#07131f;color:#eff7ff;font:16px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}main{max-width:42rem;padding:2rem}a{color:#9de1ff}</style>
+          </head>
+          <body><main><h1>Aurora Galactica</h1><p>The official public build has moved.</p><p><a href="https://sgwoods.github.io/Aurora-Galactica/">Open the current live game</a></p></main></body>
+          </html>
+          HTML
+          cat > _site/release-dashboard.html <<'HTML'
+          <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Redirecting to the Aurora Galactica release dashboard…</a></p></body></html>
+          HTML
+          cat > _site/project-guide.html <<'HTML'
+          <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/project-guide.html"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/project-guide.html');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html">Redirecting to the Aurora Galactica project guide…</a></p></body></html>
+          HTML
+          cat > _site/404.html <<'HTML'
+          <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/">Redirecting to Aurora Galactica…</a></p></body></html>
+          HTML
+          cat > _site/beta/index.html <<'HTML'
+          <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/beta/"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/beta/"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/beta/');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/beta/">Redirecting to the Aurora Galactica beta build…</a></p></body></html>
+          HTML
+
       - name: Build static site artifact
+        if: github.repository != 'sgwoods/Codex-Test1'
         run: |
           mkdir -p _site
           cp index.html _site/

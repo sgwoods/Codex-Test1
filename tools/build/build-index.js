@@ -930,7 +930,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open alpha build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
-            <a class="button" href="https://github.com/sgwoods/Aurora-Galactica">Open repository</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
         </section>
         ${sections}

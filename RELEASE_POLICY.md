@@ -52,6 +52,15 @@ Example:
     - `https://sgwoods.github.io/Aurora-Galactica/beta/`
   - should move only when a build is materially better and worth broader checkpoint testing
 
+## Repository Roles
+
+- `Codex-Test1`
+  - development repo
+  - active day-to-day engineering, tuning, issues, and harness work
+- `Aurora-Galactica`
+  - public release repo
+  - promoted checkpoints intended for broader sharing and less frequent change
+
 ## Beta Promotion Workflow
 
 1. Build the current root artifacts:

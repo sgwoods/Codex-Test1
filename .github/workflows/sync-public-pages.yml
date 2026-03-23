@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   sync-public-pages:
+    if: github.repository == 'sgwoods/Aurora-Galactica'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

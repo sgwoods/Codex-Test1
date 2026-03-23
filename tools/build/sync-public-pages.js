@@ -116,7 +116,7 @@ function buildStatusManifest(buildInfo, dashboard, pushedAt){
     active: true,
     display_name: 'Aurora Galactica',
     project_page_path: 'codex-test1.html',
-    repo_url: 'https://github.com/sgwoods/Aurora-Galactica',
+    repo_url: 'https://github.com/sgwoods/Codex-Test1',
     dashboard_url: 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html',
     experience_url: 'https://sgwoods.github.io/Aurora-Galactica/',
     repo_pushed_at: pushedAt,
