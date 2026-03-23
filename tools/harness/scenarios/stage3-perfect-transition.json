@@ -1,0 +1,15 @@
+{
+  "name": "stage3-perfect-transition",
+  "seed": 3011,
+  "duration": 10,
+  "config": {
+    "stage": 3,
+    "ships": 3,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 1.2, "action": "harness", "method": "forcePerfectChallengeClear" },
+    { "t": 2.0, "action": "up", "code": "Space" }
+  ]
+}

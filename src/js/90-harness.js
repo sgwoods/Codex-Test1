@@ -68,6 +68,19 @@ window.__galagaHarness__={
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
   return true;
  },
+ forcePerfectChallengeClear(){
+  if(!S.challenge)return false;
+  let cleared=0;
+  for(const e of S.e){
+   if(e.hp<=0)continue;
+   e.hp=0;
+   awardKill(e,e.dive);
+   ex(e.x,e.y,14,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':'#ffe563');
+   cleared++;
+  }
+  logEvent('harness_force_perfect_challenge_clear',{stage:S.stage,cleared,hits:S.ch.hits,total:S.ch.total});
+  return cleared>0;
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');

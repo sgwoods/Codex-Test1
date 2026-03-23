@@ -185,6 +185,7 @@ After GitHub Pages deploys, play at:
   ```bash
   npm run harness -- --scenario stage3-challenge
   npm run harness -- --scenario stage3-transition
+  npm run harness -- --scenario stage3-perfect-transition
   npm run harness -- --scenario stage4-five-ships
   npm run harness -- --scenario stage4-survival
   npm run harness -- --scenario stage1-descent

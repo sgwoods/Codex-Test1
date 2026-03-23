@@ -191,9 +191,9 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
   </div>
   <div id="settingsMeta">
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.118.sha.43a70fb.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 7:57 AM EDT</span>
-    <span id="settingsState">main@43a70fb dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.119.sha.8a1e6ef.dirty</span>
+    <span id="settingsRelease">Mar 23 2026, 8:13 AM EDT</span>
+    <span id="settingsState">main@8a1e6ef dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -249,8 +249,8 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.118.sha.43a70fb.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 7:57 AM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.119.sha.8a1e6ef.dirty</span>
+    <span id="buildStampRelease">Mar 23 2026, 8:13 AM EDT</span>
   </div>
 </div>
 <script>
@@ -308,7 +308,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.118.sha.43a70fb.dirty',commit:'43a70fb0a31f4861f04fe560aec94e9949d4c6a4',branch:'main',dirty:true,released:'Mar 23 2026, 7:57 AM EDT',state:'main@43a70fb dirty'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.119.sha.8a1e6ef.dirty',commit:'8a1e6ef204c653df592d6654bcf10d1b12f387a4',branch:'main',dirty:true,released:'Mar 23 2026, 8:13 AM EDT',state:'main@8a1e6ef dirty'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -2432,6 +2432,19 @@ window.__galagaHarness__={
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
   return true;
+ },
+ forcePerfectChallengeClear(){
+  if(!S.challenge)return false;
+  let cleared=0;
+  for(const e of S.e){
+   if(e.hp<=0)continue;
+   e.hp=0;
+   awardKill(e,e.dive);
+   ex(e.x,e.y,14,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':'#ffe563');
+   cleared++;
+  }
+  logEvent('harness_force_perfect_challenge_clear',{stage:S.stage,cleared,hits:S.ch.hits,total:S.ch.total});
+  return cleared>0;
  },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
