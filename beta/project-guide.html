@@ -233,6 +233,50 @@
       margin-bottom:10px;
       text-decoration:none;
     }
+    .tableWrap{
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .dataTable th{
+      position:sticky;
+      top:0;
+      background:rgba(7,19,31,0.96);
+      color:#e8f7ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      z-index:1;
+    }
+    .dataTable td{
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    .dataTable tbody tr:last-child td{
+      border-bottom:none;
+    }
+    .dataTable code{
+      color:#f1fbff;
+      font-size:12px;
+      background:rgba(255,255,255,0.06);
+      padding:2px 6px;
+      border-radius:999px;
+    }
     .docWrap{
       padding:20px 22px;
       border-radius:22px;
@@ -359,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.152.sha.c39b16c.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.156.sha.11766f6.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -444,6 +488,83 @@
     <li>The special boss-with-two-escorts bonus attack now appears naturally in real play, but its spacing and presentation still need polish before 1.0 is called done.</li>
   
 </ul>
+    </section>
+  
+
+    <section class="section" id="launch-blockers">
+      <div class="sectionHeader">
+        <h2>Launch Blocking View</h2>
+        <p>Compact release-triage view for the scoped four-stage 1.0 launch. Owner/status are intentionally short so the whole list stays visible.</p>
+      </div>
+      <div class="tableWrap">
+        <table class="dataTable">
+          <thead>
+            <tr><th>Bucket</th><th>Issue</th><th>Owner</th><th>Status</th><th>Evidence</th><th>Next</th><th>Phase</th></tr>
+          </thead>
+          <tbody>
+            
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/18">#18</a></td><td>Codex</td><td>Open</td><td>Stage 4 still collapses in harness/manual</td><td>Tune Stage 4 finish fairness</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/61">#61</a></td><td>Shared</td><td>Watching</td><td>Hosted Stage 3-&gt;4 can still stall intermittently</td><td>Keep logging, capture next bad run</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/32">#32</a></td><td>Codex</td><td>Tuning</td><td>Stage 2 improved, still live-checking spacing</td><td>Keep manual + persona checks</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/64">#64</a></td><td>Codex</td><td>Open</td><td>Challenge enemies firing breaks bonus rules</td><td>Disable bonus-stage fire</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/9">#9</a></td><td>Codex</td><td>Open</td><td>Challenge stage still not close enough to original</td><td>Tighten challenge behavior</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/40">#40</a></td><td>Codex</td><td>Open</td><td>Capture/rescue still reads unclearly in play</td><td>Polish rescue feedback</td><td>Phase 3</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/74">#74</a></td><td>Codex</td><td>Open</td><td>Three-kill bonus group too spread out</td><td>Tighten bonus spacing</td><td>Phase 2</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/47">#47</a></td><td>Codex</td><td>Open</td><td>Special squadrons still too loose visually</td><td>Compact squadron layout</td><td>Phase 2</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/38">#38</a></td><td>Codex</td><td>Open</td><td>Ship-hit feel still not release-quality</td><td>Improve hit/pause feedback</td><td>Phase 2</td></tr>
+            
+
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/76">#76</a></td><td>Shared</td><td>Open</td><td>Prod and non-prod share score/data path</td><td>Choose env split and route writes</td><td>Phase 4</td></tr>
+            
+
+              <tr><td>Should</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/58">#58</a></td><td>Codex</td><td>Open</td><td>Capture rules improved, not fully original</td><td>Finish rescue fidelity pass</td><td>Phase 3</td></tr>
+            
+
+              <tr><td>Should</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/73">#73</a></td><td>Codex</td><td>Open</td><td>Missing shoot-to-save capture moment</td><td>Allow firing during beam-up</td><td>Phase 3</td></tr>
+            
+
+              <tr><td>Should</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/4">#4</a></td><td>Shared</td><td>Watch</td><td>Stage 1 feels fine manually, mixed harness</td><td>Revisit only if evidence worsens</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Should</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/62">#62</a></td><td>Shared</td><td>Watch</td><td>Self-play can still fail early in Stage 1</td><td>Keep persona baseline</td><td>Phase 1</td></tr>
+            
+
+              <tr><td>Should</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/31">#31</a></td><td>Codex</td><td>Open</td><td>Minor public timestamp polish remains</td><td>Clean release date display</td><td>Phase 3</td></tr>
+            
+
+              <tr><td>Slip</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/63">#63</a></td><td>Codex</td><td>Queued</td><td>Wait-mode score cycling is polish</td><td>Do in attract pass</td><td>Phase 3</td></tr>
+            
+
+              <tr><td>Slip</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/49">#49</a> / <a href="https://github.com/sgwoods/Codex-Test1/issues/60">#60</a></td><td>Codex</td><td>Queued</td><td>Score panel still wants stronger cues</td><td>Polish score view interaction</td><td>Phase 3</td></tr>
+            
+
+              <tr><td>Slip</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/48">#48</a></td><td>Codex</td><td>Partial</td><td>Frame exists, art fidelity can wait</td><td>Add cabinet-style art later</td><td>Phase 2</td></tr>
+            
+
+              <tr><td>Slip</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/65">#65</a></td><td>Codex</td><td>Queued</td><td>Aurora/wintry theming is later polish</td><td>Apply after gameplay stabilizes</td><td>Phase 2</td></tr>
+            
+
+              <tr><td>Slip</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/71">#71</a></td><td>Codex</td><td>Queued</td><td>Mute button is useful but non-blocking</td><td>Add audio toggle in UI</td><td>Phase 3</td></tr>
+            
+          </tbody>
+        </table>
+      </div>
     </section>
   
 
@@ -842,6 +963,39 @@
 <p>The project is now targeting a smaller <code>1.0</code> sub-goal first:</p>
 <ul><li>a polished Stage <code>1</code> through Stage <code>4</code> experience</li><li>one cleaned-up challenge stage</li><li>one solid capture / rescue loop</li><li>stable local and hosted play</li><li>persistent high scores and clean end-of-run flow</li></ul>
 <p>Expansion beyond Stage <code>4</code>, new theme systems, and broader content breadth are still valuable, but they are now explicitly post-<code>1.0</code> work unless they are needed to support this smaller shipped slice.</p>
+<h4>Launch Blocking List</h4>
+<p>This is the maintained release view for the scoped four-stage <code>1.0</code> launch. Use it as the default triage order until launch unless a new regression clearly overrides it.</p>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Bucket</th><th>Issue</th><th>Owner</th><th>Status</th><th>Evidence</th><th>Next Action</th><th>Plan Stage</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Must Fix</td><td><code>#18</code></td><td>Codex</td><td>Open</td><td>Stage <code>4</code> still collapses in harness and manual play.</td><td>Tune the Stage <code>4</code> finish and escort pressure.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#61</code></td><td>Shared</td><td>Watching</td><td>Hosted Stage <code>3</code> -&gt; <code>4</code> still has an intermittent bad-transition edge case.</td><td>Keep transition telemetry live and capture the next failing run.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#32</code></td><td>Codex</td><td>Tuning</td><td>Stage <code>2</code> improved, but live spacing/fairness still needs confirmation.</td><td>Keep manual and persona checks on Stage <code>2</code> pressure.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#64</code></td><td>Codex</td><td>Open</td><td>Challenge enemies firing still breaks bonus-stage fidelity.</td><td>Disable enemy fire during challenge stages.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#9</code></td><td>Codex</td><td>Open</td><td>Stage <code>3</code> challenge still is not close enough to original Galaga.</td><td>Tighten challenge behavior against reference.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#40</code></td><td>Codex</td><td>Open</td><td>Capture / rescue still reads unclearly in live play.</td><td>Polish rescue feedback and readability.</td><td>Phase 3</td></tr>
+<tr><td>Must Fix</td><td><code>#74</code></td><td>Codex</td><td>Open</td><td>The three-kill bonus group is still too spread out to read well.</td><td>Tighten bonus-squadron spacing.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix</td><td><code>#47</code></td><td>Codex</td><td>Open</td><td>Special squadron spacing and presentation are still too loose.</td><td>Compact special-squadron layout and presentation.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix</td><td><code>#38</code></td><td>Codex</td><td>Open</td><td>Ship-hit feedback still does not feel release-ready.</td><td>Improve explosion, pause, and hit feedback.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix</td><td><code>#76</code></td><td>Shared</td><td>Open</td><td>Production and non-production still share the same live score/data path.</td><td>Choose environment split and route non-production writes away from production by default.</td><td>Phase 4</td></tr>
+<tr><td>Should Fix</td><td><code>#58</code></td><td>Codex</td><td>Open</td><td>Capture rules are much improved but still not fully original.</td><td>Finish the rescue-fidelity pass.</td><td>Phase 3</td></tr>
+<tr><td>Should Fix</td><td><code>#73</code></td><td>Codex</td><td>Open</td><td>Players still cannot shoot during the early tractor-beam capture window.</td><td>Add the shoot-to-save capture moment.</td><td>Phase 3</td></tr>
+<tr><td>Should Fix</td><td><code>#4</code></td><td>Shared</td><td>Watch</td><td>Stage <code>1</code> feels acceptable manually, with mixed harness urgency.</td><td>Revisit only if evidence worsens.</td><td>Phase 1</td></tr>
+<tr><td>Should Fix</td><td><code>#62</code></td><td>Shared</td><td>Watch</td><td>Self-play can still fail early in Stage <code>1</code>.</td><td>Keep the persona baseline in view while tuning.</td><td>Phase 1</td></tr>
+<tr><td>Should Fix</td><td><code>#31</code></td><td>Codex</td><td>Open</td><td>Minor public timestamp/date polish remains.</td><td>Clean the release date display.</td><td>Phase 3</td></tr>
+<tr><td>Can Slip</td><td><code>#63</code></td><td>Codex</td><td>Queued</td><td>Wait-mode score cycling is useful attract polish.</td><td>Do it in the attract-mode pass.</td><td>Phase 3</td></tr>
+<tr><td>Can Slip</td><td><code>#49</code> / <code>#60</code></td><td>Codex</td><td>Queued</td><td>The score panel still wants stronger cues and clearer invocation.</td><td>Polish score-view interaction after core gameplay work.</td><td>Phase 3</td></tr>
+<tr><td>Can Slip</td><td><code>#48</code></td><td>Codex</td><td>Partial</td><td>The frame exists; decorative fidelity can still wait.</td><td>Add cabinet-style frame art later.</td><td>Phase 2</td></tr>
+<tr><td>Can Slip</td><td><code>#65</code></td><td>Codex</td><td>Queued</td><td>Aurora / wintry theming is still later polish.</td><td>Apply thematic art after gameplay stabilizes.</td><td>Phase 2</td></tr>
+<tr><td>Can Slip</td><td><code>#71</code></td><td>Codex</td><td>Queued</td><td>Mute is useful, but not launch-blocking.</td><td>Add an audio toggle in the UI.</td><td>Phase 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p>Items currently treated as post-<code>1.0</code> unless they become necessary for external playtesting or operational stability:</p>
+<ul><li><code>#69</code> remote gameplay logs and optional video artifacts</li><li><code>#70</code> homepage recent plays / watch links</li><li><code>#17</code> broader reference baseline work</li><li><code>#19</code> later-run collision-chain regression outside the four-stage slice</li><li>replay, submission, theme-system, and broader public-workflow enhancements</li></ul>
 <h4>Track A. Autonomous Original-Galaga Baseline</h4>
 <ol><li>Build and maintain a durable reference baseline using:</li></ol>
 <ul><li>manuals</li><li>curated gameplay footage</li><li>emulator captures when available</li><li>secondary written references only where they help fill later-stage context</li></ul>
@@ -1235,6 +1389,9 @@
     <li><a href="#release">Release Scope And Status</a></li>
   
 
+    <li><a href="#launch-blockers">Launch Blocking View</a></li>
+  
+
     <li><a href="#architecture">Architecture Map</a></li>
   
 
@@ -1282,7 +1439,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.152.sha.c39b16c.beta
+          Build: 0.5.0-beta.1+build.156.sha.11766f6.beta
         </p>
       </aside>
     </main>

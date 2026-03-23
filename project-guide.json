@@ -41,6 +41,36 @@
       ]
     },
     {
+      "id": "launch-blockers",
+      "title": "Launch Blocking View",
+      "summary": "Compact release-triage view for the scoped four-stage 1.0 launch. Owner/status are intentionally short so the whole list stays visible.",
+      "table": {
+        "columns": ["Bucket", "Issue", "Owner", "Status", "Evidence", "Next", "Phase"],
+        "rows": [
+          ["Must", "[#18](https://github.com/sgwoods/Codex-Test1/issues/18)", "Codex", "Open", "Stage 4 still collapses in harness/manual", "Tune Stage 4 finish fairness", "Phase 1"],
+          ["Must", "[#61](https://github.com/sgwoods/Codex-Test1/issues/61)", "Shared", "Watching", "Hosted Stage 3->4 can still stall intermittently", "Keep logging, capture next bad run", "Phase 1"],
+          ["Must", "[#32](https://github.com/sgwoods/Codex-Test1/issues/32)", "Codex", "Tuning", "Stage 2 improved, still live-checking spacing", "Keep manual + persona checks", "Phase 1"],
+          ["Must", "[#64](https://github.com/sgwoods/Codex-Test1/issues/64)", "Codex", "Open", "Challenge enemies firing breaks bonus rules", "Disable bonus-stage fire", "Phase 1"],
+          ["Must", "[#9](https://github.com/sgwoods/Codex-Test1/issues/9)", "Codex", "Open", "Challenge stage still not close enough to original", "Tighten challenge behavior", "Phase 1"],
+          ["Must", "[#40](https://github.com/sgwoods/Codex-Test1/issues/40)", "Codex", "Open", "Capture/rescue still reads unclearly in play", "Polish rescue feedback", "Phase 3"],
+          ["Must", "[#74](https://github.com/sgwoods/Codex-Test1/issues/74)", "Codex", "Open", "Three-kill bonus group too spread out", "Tighten bonus spacing", "Phase 2"],
+          ["Must", "[#47](https://github.com/sgwoods/Codex-Test1/issues/47)", "Codex", "Open", "Special squadrons still too loose visually", "Compact squadron layout", "Phase 2"],
+          ["Must", "[#38](https://github.com/sgwoods/Codex-Test1/issues/38)", "Codex", "Open", "Ship-hit feel still not release-quality", "Improve hit/pause feedback", "Phase 2"],
+          ["Must", "[#76](https://github.com/sgwoods/Codex-Test1/issues/76)", "Shared", "Open", "Prod and non-prod share score/data path", "Choose env split and route writes", "Phase 4"],
+          ["Should", "[#58](https://github.com/sgwoods/Codex-Test1/issues/58)", "Codex", "Open", "Capture rules improved, not fully original", "Finish rescue fidelity pass", "Phase 3"],
+          ["Should", "[#73](https://github.com/sgwoods/Codex-Test1/issues/73)", "Codex", "Open", "Missing shoot-to-save capture moment", "Allow firing during beam-up", "Phase 3"],
+          ["Should", "[#4](https://github.com/sgwoods/Codex-Test1/issues/4)", "Shared", "Watch", "Stage 1 feels fine manually, mixed harness", "Revisit only if evidence worsens", "Phase 1"],
+          ["Should", "[#62](https://github.com/sgwoods/Codex-Test1/issues/62)", "Shared", "Watch", "Self-play can still fail early in Stage 1", "Keep persona baseline", "Phase 1"],
+          ["Should", "[#31](https://github.com/sgwoods/Codex-Test1/issues/31)", "Codex", "Open", "Minor public timestamp polish remains", "Clean release date display", "Phase 3"],
+          ["Slip", "[#63](https://github.com/sgwoods/Codex-Test1/issues/63)", "Codex", "Queued", "Wait-mode score cycling is polish", "Do in attract pass", "Phase 3"],
+          ["Slip", "[#49](https://github.com/sgwoods/Codex-Test1/issues/49) / [#60](https://github.com/sgwoods/Codex-Test1/issues/60)", "Codex", "Queued", "Score panel still wants stronger cues", "Polish score view interaction", "Phase 3"],
+          ["Slip", "[#48](https://github.com/sgwoods/Codex-Test1/issues/48)", "Codex", "Partial", "Frame exists, art fidelity can wait", "Add cabinet-style art later", "Phase 2"],
+          ["Slip", "[#65](https://github.com/sgwoods/Codex-Test1/issues/65)", "Codex", "Queued", "Aurora/wintry theming is later polish", "Apply after gameplay stabilizes", "Phase 2"],
+          ["Slip", "[#71](https://github.com/sgwoods/Codex-Test1/issues/71)", "Codex", "Queued", "Mute button is useful but non-blocking", "Add audio toggle in UI", "Phase 3"]
+        ]
+      }
+    },
+    {
       "id": "architecture",
       "title": "Architecture Map",
       "summary": "The main files and what they own.",

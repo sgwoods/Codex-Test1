@@ -182,27 +182,28 @@ This is the maintained release view for the scoped four-stage `1.0` launch.
 Use it as the default triage order until launch unless a new regression clearly
 overrides it.
 
-| Bucket | Issue | Summary | Plan Stage |
-| --- | --- | --- | --- |
-| Must Fix | `#18` | Stage `4` fairness and survivability are still too punishing in harness and real play. | Phase 1 |
-| Must Fix | `#61` | Hosted runs can still hit the empty-playfield / bad Stage `3` -> `4` transition edge case. | Phase 1 |
-| Must Fix | `#32` | Stage `2` spacing / pressure still needs to feel consistently fair in live play. | Phase 1 |
-| Must Fix | `#64` | Challenge-stage enemies firing breaks core bonus-stage fidelity. | Phase 1 |
-| Must Fix | `#9` | Stage `3` challenge stage still needs closer original-Galaga fidelity. | Phase 1 |
-| Must Fix | `#40` | Capture / rescue feedback is still too unclear in live play. | Phase 3 |
-| Must Fix | `#74` | Bonus squadron spacing is too loose, so the three-kill bonus group reads poorly. | Phase 2 |
-| Must Fix | `#47` | Special squadron spacing and bonus presentation still need tighter fidelity. | Phase 2 |
-| Must Fix | `#38` | Ship-hit explosion, pause, and feedback still need to feel good enough for release. | Phase 2 |
-| Should Fix | `#58` | Capture / rescue rules are much improved but still not fully at original-Galaga fidelity. | Phase 3 |
-| Should Fix | `#73` | Let players shoot during the early tractor-beam capture window for fidelity and skill expression. | Phase 3 |
-| Should Fix | `#4` | Stage `1` opening fidelity should improve if we can do it without destabilizing later work. | Phase 1 |
-| Should Fix | `#62` | Self-play can still fail too early in Stage `1`; keep measuring it while tuning the opening. | Phase 1 |
-| Should Fix | `#31` | Minor release/build timestamp polish for public presentation. | Phase 3 |
-| Can Slip | `#63` | Wait-mode score cycling is nice-to-have attract polish, not a release blocker. | Phase 3 |
-| Can Slip | `#49` / `#60` | Score-view interaction polish can slip if the current panel remains understandable. | Phase 3 |
-| Can Slip | `#48` | Visible frame is good to have, but decorative fidelity can slip if gameplay is solid. | Phase 2 |
-| Can Slip | `#65` | Aurora / wintry frame art and backdrop theming are post-stability visual polish. | Phase 2 |
-| Can Slip | `#71` | In-game mute button is useful, but not required for the scoped launch. | Phase 3 |
+| Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
+| --- | --- | --- | --- | --- | --- | --- |
+| Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
+| Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
+| Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |
+| Must Fix | `#64` | Codex | Open | Challenge enemies firing still breaks bonus-stage fidelity. | Disable enemy fire during challenge stages. | Phase 1 |
+| Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
+| Must Fix | `#40` | Codex | Open | Capture / rescue still reads unclearly in live play. | Polish rescue feedback and readability. | Phase 3 |
+| Must Fix | `#74` | Codex | Open | The three-kill bonus group is still too spread out to read well. | Tighten bonus-squadron spacing. | Phase 2 |
+| Must Fix | `#47` | Codex | Open | Special squadron spacing and presentation are still too loose. | Compact special-squadron layout and presentation. | Phase 2 |
+| Must Fix | `#38` | Codex | Open | Ship-hit feedback still does not feel release-ready. | Improve explosion, pause, and hit feedback. | Phase 2 |
+| Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
+| Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
+| Should Fix | `#73` | Codex | Open | Players still cannot shoot during the early tractor-beam capture window. | Add the shoot-to-save capture moment. | Phase 3 |
+| Should Fix | `#4` | Shared | Watch | Stage `1` feels acceptable manually, with mixed harness urgency. | Revisit only if evidence worsens. | Phase 1 |
+| Should Fix | `#62` | Shared | Watch | Self-play can still fail early in Stage `1`. | Keep the persona baseline in view while tuning. | Phase 1 |
+| Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
+| Can Slip | `#63` | Codex | Queued | Wait-mode score cycling is useful attract polish. | Do it in the attract-mode pass. | Phase 3 |
+| Can Slip | `#49` / `#60` | Codex | Queued | The score panel still wants stronger cues and clearer invocation. | Polish score-view interaction after core gameplay work. | Phase 3 |
+| Can Slip | `#48` | Codex | Partial | The frame exists; decorative fidelity can still wait. | Add cabinet-style frame art later. | Phase 2 |
+| Can Slip | `#65` | Codex | Queued | Aurora / wintry theming is still later polish. | Apply thematic art after gameplay stabilizes. | Phase 2 |
+| Can Slip | `#71` | Codex | Queued | Mute is useful, but not launch-blocking. | Add an audio toggle in the UI. | Phase 3 |
 
 Items currently treated as post-`1.0` unless they become necessary for
 external playtesting or operational stability:

@@ -574,6 +574,50 @@ function projectGuideStyles(){
       margin-bottom:10px;
       text-decoration:none;
     }
+    .tableWrap{
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .dataTable th{
+      position:sticky;
+      top:0;
+      background:rgba(7,19,31,0.96);
+      color:#e8f7ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      z-index:1;
+    }
+    .dataTable td{
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    .dataTable tbody tr:last-child td{
+      border-bottom:none;
+    }
+    .dataTable code{
+      color:#f1fbff;
+      font-size:12px;
+      background:rgba(255,255,255,0.06);
+      padding:2px 6px;
+      border-radius:999px;
+    }
     .docWrap{
       padding:20px 22px;
       border-radius:22px;
@@ -774,10 +818,27 @@ function renderGuideSection(section){
       <p>${esc(item.detail)}</p>
     </article>
   `).join('\n');
+  const table = section.table && Array.isArray(section.table.columns) && Array.isArray(section.table.rows)
+    ? `
+      <div class="tableWrap">
+        <table class="dataTable">
+          <thead>
+            <tr>${section.table.columns.map(column => `<th>${esc(column)}</th>`).join('')}</tr>
+          </thead>
+          <tbody>
+            ${section.table.rows.map(row => `
+              <tr>${row.map(cell => `<td>${renderInlineMarkdown(String(cell ?? ''))}</td>`).join('')}</tr>
+            `).join('\n')}
+          </tbody>
+        </table>
+      </div>
+    `.trim()
+    : '';
   let body = '';
   if(cards) body += `<div class="cardGrid">\n${cards}\n</div>`;
   if(bullets) body += `${body ? '\n' : ''}<ul class="bulletList">\n${bullets}\n</ul>`;
   if(links) body += `${body ? '\n' : ''}<div class="linkGrid">\n${links}\n</div>`;
+  if(table) body += `${body ? '\n' : ''}${table}`;
   return `
     <section class="section" id="${esc(section.id)}">
       <div class="sectionHeader">
@@ -803,6 +864,14 @@ function renderMarkdown(md=''){
   if(lines[0] && /^#\s+/.test(lines[0])) lines.shift();
   const out = [];
   let i = 0;
+
+  function splitTableRow(line){
+    return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => cell.trim());
+  }
+
+  function isTableDelimiter(line){
+    return /^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*(?:\s*:?-{3,}:?\s*)?\|?\s*$/.test(line);
+  }
 
   function renderList(start, ordered){
     const pattern = ordered ? /^(\s*)\d+\.\s+(.*)$/ : /^(\s*)[-*]\s+(.*)$/;
@@ -838,6 +907,28 @@ function renderMarkdown(md=''){
   while(i < lines.length){
     const line = lines[i];
     if(!line.trim()){ i++; continue; }
+    if(line.includes('|') && i + 1 < lines.length && isTableDelimiter(lines[i + 1])){
+      const headers = splitTableRow(line);
+      const rows = [];
+      i += 2;
+      while(i < lines.length && lines[i].trim() && lines[i].includes('|')){
+        rows.push(splitTableRow(lines[i]));
+        i++;
+      }
+      out.push(`
+        <div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr>${headers.map(cell => `<th>${renderInlineMarkdown(cell)}</th>`).join('')}</tr>
+            </thead>
+            <tbody>
+              ${rows.map(row => `<tr>${row.map(cell => `<td>${renderInlineMarkdown(cell)}</td>`).join('')}</tr>`).join('\n')}
+            </tbody>
+          </table>
+        </div>
+      `.trim());
+      continue;
+    }
     if(/^\s*```/.test(line)){
       const lang = line.replace(/^\s*```/, '').trim();
       const block = [];
