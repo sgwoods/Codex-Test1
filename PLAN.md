@@ -191,8 +191,8 @@ overrides it.
 | Must Fix | `#40` | Codex | Beta review | Capture / rescue now has clearer banners, but the live read still needs confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |
 | Must Fix | `#74` | Codex | Beta review | Bonus/special squadron spacing was tightened and now needs a live feel check. | Confirm the tighter bonus grouping in beta play. | Phase 2 |
 | Must Fix | `#47` | Codex | Beta review | Special squadron presentation is tighter, but needs manual release judgment. | Confirm squadron readability and bonus feel in beta. | Phase 2 |
-| Must Fix | `#45` | Codex | Open | Boss damaged label text still lingers on-screen after the hit state. | Remove the lingering damaged-text visual from boss encounters. | Phase 2 |
-| Must Fix | `#38` | Codex | Open | Ship-hit feedback still does not feel release-ready. | Improve explosion, pause, and hit feedback. | Phase 2 |
+| Must Fix | `#45` | Codex | Beta review | The lingering boss-damaged text was removed in the latest feedback pass. | Confirm boss first-hit feedback reads cleanly in beta. | Phase 2 |
+| Must Fix | `#38` | Codex | Beta review | Ship-loss feedback was strengthened and now needs live feel confirmation. | Verify explosion, pause, and recovery feel in beta play. | Phase 2 |
 | Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
 | Should Fix | `#73` | Codex | Beta review | Early tractor-beam escape is implemented and harness-passing. | Verify the feel of the shoot-to-save window in beta. | Phase 3 |
