@@ -25,7 +25,8 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .startBadge{color:#7ef2ff}
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
-#msg .scoreTable{display:grid;grid-template-columns:auto auto auto auto;gap:.08em .85em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
+#msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
+#msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
 #msg .scoreName{color:#f4f7ff;text-align:center;min-width:3.4em}
@@ -35,18 +36,24 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .resultsTable{display:grid;grid-template-columns:auto auto;gap:.16em 1.2em;justify-content:center;font-size:.82em;line-height:1.18;text-align:right}
 #msg .resultsLabel{color:#ff6f66;text-align:left}
 #msg .resultsValue{color:#f4f7ff;min-width:4.5em}
-#msg .gameOverEntry{display:block;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em 0 .25em}
-#msg .entryCursor{display:inline-block;min-width:.72em;color:#000;background:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
-#msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
+#msg .gameOverEntry{display:grid;justify-content:center;gap:.22em;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em auto .35em;width:min(100%,18em)}
+#msg .entryLabel{display:block;color:#f4f7ff}
+#msg .entrySlots{display:flex;justify-content:center;gap:.22em}
+#msg .entrySlot{display:inline-flex;align-items:center;justify-content:center;min-width:1.08em;padding:.04em .16em;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.74);color:#f4f7ff}
+#msg .entryCursor{color:#000;background:#ffd86d;border-color:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
+#msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;line-height:1.18;margin:.7em auto 0;max-width:22em}
+#msg .gameOverFootLine{display:block}
 #msg .blinkPrompt{animation:blinkPrompt .8s steps(1,end) infinite}
-#msg.gameOverScreen{top:52%;width:min(92vw,980px);font-size:clamp(26px,2.15vw,38px);line-height:1.06}
+#msg.gameOverScreen{top:52%;width:min(86vw,720px);font-size:clamp(22px,1.85vw,34px);line-height:1.06}
 #msg.startScreen{top:76%;width:min(92vw,840px);font-size:clamp(22px,1.9vw,32px);line-height:1.08}
 #msg.gameOverScreen .gameOverTitle{font-size:1.34em;letter-spacing:.14em;margin-bottom:.16em}
-#msg.gameOverScreen .gameOverSub{font-size:.9em;letter-spacing:.08em;margin-bottom:.35em}
-#msg.gameOverScreen .scoreTable{gap:.16em 1.3em;font-size:.92em;line-height:1.14}
+#msg.gameOverScreen .gameOverSub{font-size:.82em;letter-spacing:.08em;margin-bottom:.1em}
+#msg.gameOverScreen .gameOverMeta{font-size:.6em;margin-bottom:.38em}
+#msg.gameOverScreen .scoreTable{gap:.16em 1.05em;font-size:.84em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
-#msg.gameOverScreen .gameOverEntry{font-size:.88em;margin:.34em 0 .18em}
-#msg.gameOverScreen .gameOverFoot{font-size:.82em;margin-top:.45em}
+#msg.gameOverScreen .gameOverEntry{font-size:.78em;margin:.3em auto .26em}
+#msg.gameOverScreen .entrySlot{min-width:1.14em}
+#msg.gameOverScreen .gameOverFoot{font-size:.72em;margin-top:.4em;max-width:24em}
 #msg.startScreen .startTitle{font-size:1.22em}
 #msg.startScreen .startSub{font-size:.8em}
 #msg.startScreen .startHelp{font-size:.94em}
@@ -194,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.150.sha.625d817.beta</span>
-    <span id="settingsRelease">Mar 23 2026, 2:49 PM EDT</span>
-    <span id="settingsState">beta@625d817 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.152.sha.c39b16c.beta</span>
+    <span id="settingsRelease">Mar 23 2026, 3:00 PM EDT</span>
+    <span id="settingsState">beta@c39b16c clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -253,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.150.sha.625d817.beta</span>
-    <span id="buildStampRelease">Mar 23 2026, 2:49 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.152.sha.c39b16c.beta</span>
+    <span id="buildStampRelease">Mar 23 2026, 3:00 PM EDT</span>
   </div>
 </div>
 <script>
@@ -348,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.150.sha.625d817.beta',commit:'625d817f56372e1160ce21db8b81e1f98d74f8e5',branch:'beta',dirty:false,released:'Mar 23 2026, 2:49 PM EDT',state:'beta@625d817 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.152.sha.c39b16c.beta',commit:'c39b16c577b85745c53173e15742d949b9716e6f',branch:'beta',dirty:false,released:'Mar 23 2026, 3:00 PM EDT',state:'beta@c39b16c clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -559,16 +566,16 @@ function buildGameOverHtmlFromState(){
  const board=leaderboardRowsForView();
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
- const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
+ const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
-  const shown=gameOverState.initials.map((ch,i)=>`<span class="${i===gameOverState.cursor?'entryCursor':''}">${ch||'_'}</span>`).join(' ');
-  entryHtml=`<span class="gameOverEntry">ENTER INITIALS ${shown}</span>`;
-  footHtml='<span class="gameOverFoot"><span class="k">Left/Right</span> move, <span class="k">Up/Down</span> change, type letters, <span class="k">Enter</span> to save</span>';
+  const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
+  entryHtml=`<span class="gameOverEntry"><span class="entryLabel">ENTER INITIALS</span><span class="entrySlots">${shown}</span></span>`;
+  footHtml='<span class="gameOverFoot"><span class="gameOverFootLine"><span class="k">Left/Right</span> select, <span class="k">Up/Down</span> change</span><span class="gameOverFootLine">type letters or press <span class="k">Enter</span> to save</span></span>';
  }
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
  const board=leaderboardRowsForView();
