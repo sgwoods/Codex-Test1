@@ -57,13 +57,6 @@ function drawEnemy(e){
  else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
  else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
  else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
- const damaged=e.t==='boss'&&e.max>1&&e.hp===1;
- if(damaged){
-  ctx.fillStyle='rgba(255,244,168,.28)';
-  ctx.fillRect(-10,-8,20,4);
-  ctx.fillStyle='rgba(255,86,180,.42)';
-  ctx.fillRect(-2,-4,4,10);
- }
  if(e.hitT>0){
   ctx.globalAlpha=Math.min(.9,e.hitT/.34);
   ctx.fillStyle=e.t==='boss'?'rgba(255,248,196,.86)':'rgba(255,255,255,.72)';

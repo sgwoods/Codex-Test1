@@ -142,19 +142,20 @@ function loseShip(cause={}){
   timeSinceFighterCaptured:S.lastFighterCapturedT==null?null:+(S.stageClock-S.lastFighterCapturedT).toFixed(3),
   playerHitbox:{w:hp.w,h:hp.h}
  },cause));
- S.shake=.8;
- S.recoverT=Math.max(S.recoverT,S.stage>=4?2.35:1.45);
- S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.55:1.18);
+ S.shake=1.1;
+ S.recoverT=Math.max(S.recoverT,S.stage>=4?2.75:1.75);
+ S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.9:1.42);
  S.eb.length=0;
- p.inv=2.35;
- p.cd=Math.max(p.cd,0.35);
- ex(p.x,p.y,34,'#86c7ff');
- ex(p.x,p.y,18,'#f4f8ff');
+ p.inv=2.7;
+ p.cd=Math.max(p.cd,0.42);
+ ex(p.x,p.y,42,'#86c7ff');
+ ex(p.x,p.y,28,'#f4f8ff');
+ ex(p.x,p.y,14,'#ff7f9f');
  S.alertTxt='SHIP DESTROYED';
- S.alertT=Math.max(S.alertT,1.05);
+ S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();
  if(p.dual)p.dual=0;
- S.lives--;p.spawn=1.18;
+ S.lives--;p.spawn=1.32;
  if(S.lives<0)gameOver();
 }
 
