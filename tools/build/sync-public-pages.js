@@ -139,6 +139,9 @@ async function syncFile(filePath, content, message){
 
 async function main(){
   const buildInfo = readJson(BUILD_INFO);
+  if(buildInfo.dirty && process.env.ALLOW_DIRTY_PUBLIC_SYNC !== '1'){
+    throw new Error('Refusing to sync public pages from a dirty local build. Commit or rebuild from a clean tree first, or set ALLOW_DIRTY_PUBLIC_SYNC=1 to override.');
+  }
   const releaseNotes = readJson(RELEASE_NOTES);
   const dashboard = readJson(RELEASE_DASHBOARD);
   const latestNote = (releaseNotes.notes && releaseNotes.notes[0]) || buildInfo.latestReleaseNote || {

@@ -903,6 +903,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           <div class="heroTop">
             <span class="eyebrow">Project Guide</span>
             <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/">Game Home</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Codex-Test1/beta/">Beta Build</a>
           </div>
           <h1>${esc(guide.title || 'Project Guide')}</h1>
           <p>${esc(guide.strapline || '')}</p>
@@ -926,7 +927,8 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             </div>
           </div>
           <div class="heroLinks">
-            <a class="button" href="https://sgwoods.github.io/Codex-Test1/">Open live game</a>
+            <a class="button" href="https://sgwoods.github.io/Codex-Test1/">Open alpha build</a>
+            <a class="button" href="https://sgwoods.github.io/Codex-Test1/beta/">Open beta build</a>
             <a class="button" href="https://sgwoods.github.io/Codex-Test1/release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
