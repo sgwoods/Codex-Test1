@@ -194,9 +194,9 @@ function attractMoveAxis(p){
 }
 const HARNESS_PERSONAS={
  novice:{name:'novice',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:150,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
- advanced:{name:'advanced',moveMul:.72,urgentDx:34,urgentLook:162,deadZone:8,aimBoss:14,aimOther:10,fireChance:.78,challengeFireChance:.76,openShotY:78,diveBias:420,carryBias:240,bossBias:120,activeBias:100,heightBias:1,distanceBias:1},
+ advanced:{name:'advanced',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:220,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
  expert:{name:'expert',moveMul:.92,urgentDx:40,urgentLook:188,deadZone:6,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:64,diveBias:560,carryBias:320,bossBias:160,activeBias:120,heightBias:1.08,distanceBias:.9},
- professional:{name:'professional',moveMul:1.03,urgentDx:46,urgentLook:214,deadZone:5,aimBoss:20,aimOther:15,fireChance:.985,challengeFireChance:.995,openShotY:56,diveBias:660,carryBias:380,bossBias:190,activeBias:132,heightBias:1.14,distanceBias:.82}
+ professional:{name:'professional',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:350,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
 };
 function harnessPersonaCfg(){
  const key=(window.__auroraHarnessPersona||'').toLowerCase();
