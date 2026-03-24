@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.164.sha.cad2184.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.167.sha.9cae671.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">March 23, 2026</span>
+              <span class="metaValue">March 24, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -965,6 +965,10 @@
 <p>Expansion beyond Stage <code>4</code>, new theme systems, and broader content breadth are still valuable, but they are now explicitly post-<code>1.0</code> work unless they are needed to support this smaller shipped slice.</p>
 <h4>Launch Blocking List</h4>
 <p>This is the maintained release view for the scoped four-stage <code>1.0</code> launch. Use it as the default triage order until launch unless a new regression clearly overrides it.</p>
+<p>Current beta-review cluster:</p>
+<ul><li><code>#40</code> capture / rescue feedback</li><li><code>#73</code> shoot during beam-up</li><li><code>#74</code> bonus spacing</li><li><code>#47</code> special squadron spacing</li><li><code>#45</code> boss damaged-text linger</li><li><code>#38</code> ship-loss feedback</li></ul>
+<p>Current coding priority once those beta checks are confirmed:</p>
+<ol><li><code>#18</code> Stage <code>4</code> fairness</li><li><code>#76</code> production vs non-production data separation design</li><li><code>#9</code> remaining challenge-stage fidelity</li></ol>
 <div class="tableWrap">
           <table class="dataTable">
             <thead>
@@ -1240,6 +1244,12 @@
 <ol><li>Identify the source artifact</li><li>Capture the specific observed behavior</li><li>Write the current project behavior</li><li>Define the gap</li><li>Link the gap to:</li></ol>
 <ul><li>a GitHub issue</li><li>a harness scenario or metric</li><li>a target release / roadmap milestone if applicable</li></ul>
 <h3>Current Baseline Topics</h3>
+<h4>Player Control Principles</h4>
+<ul><li>Source:<ul><li>original cabinet feel as observed in gameplay footage</li><li>modern keyboard best practice for translating joystick-style intent into</li></ul></li></ul>
+<p>digital input</p>
+<ul><li>Current rule:<ul><li>keyboard movement should emulate joystick intent, not instantaneous digital</li></ul></li></ul>
+<p>stepping</p>
+<ul><li>Current implementation target:<ul><li>use a target-velocity model for manual keyboard control</li><li>apply acceleration on press and stronger deceleration on release</li><li>preserve neutral behavior when opposite directions are held together</li><li>tune for:<ul><li>tap = fine correction</li><li>hold = lane travel</li></ul></li></ul></li><li>Validation questions:<ul><li>can a player line up under descending enemies with small corrections?</li><li>does the ship still cross the playfield quickly enough for evasive play?</li><li>does manual control feel smoother than the old full-speed-per-frame step?</li></ul></li></ul>
 <h4>Stage 1 Dive Timing</h4>
 <ul><li>Source:<ul><li>original gameplay video</li></ul></li><li>Current metric:<ul><li><code>stage1-descent</code> harness scenario</li></ul></li><li>Current use:<ul><li>compare first dive timing and lower-field crossing against original footage</li></ul></li></ul>
 <h4>Challenge Stage Fidelity</h4>
@@ -1439,7 +1449,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.164.sha.cad2184.beta
+          Build: 0.5.0-beta.1+build.167.sha.9cae671.beta
         </p>
       </aside>
     </main>
