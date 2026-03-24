@@ -143,6 +143,12 @@
 - Evaluate Google Drive as low-cost public artifact storage, with explicit handling for permissions and link generation
 - Keep manual fallback paths available when upload fails
 
+### 7. Commentary-Ready Replay Telemetry
+
+- Expand gameplay logging so a replay can be described beat-by-beat rather than just reconstructed mechanically
+- Preserve stable timestamps and semantic event context so later tools can align commentary to replay or video
+- Capture enough run-state detail to support future narrated replays, notable-play summaries, and richer post-game analysis
+
 ## GitHub Issue Map
 
 - `#3` Synthetic user agent for headless gameplay with session replay
@@ -155,6 +161,7 @@
 - `#21` Add special three-ship attack squadron bonuses from the manual
 - `#22` Implement manual-accurate challenge-stage bonus scoring
 - `#23` Add Galaga-style results screen before initials entry
+- `#81` Add commentary-ready gameplay telemetry for narrated replays
 
 ## Revised Plan
 

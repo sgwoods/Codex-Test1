@@ -113,6 +113,10 @@ Key issue groups:
   - `#19` Stage 2/late-run collision chain regressions
 - Visual/gameplay comparison baseline
   - `#17` stronger baseline against original Galaga
+- Replay, telemetry, and commentary-ready artifacts
+  - `#69` remote gameplay logs and optional video artifacts
+  - `#70` homepage recent plays and linked run viewing
+  - `#81` commentary-ready gameplay telemetry for narrated replays
 - Original-scoring / special-pattern research
   - deeper validation of Galaga's bonus-yielding three-fighter attack clusters,
     including exact timing, composition, and scoring triggers

@@ -10,11 +10,14 @@ const OUT_BASE = path.join(ROOT, 'harness-artifacts');
 
 const PROFILES = {
   personas: [
-    { scenario: 'stage1-opening', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 1100 },
-    { scenario: 'stage2-opening', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 2100 },
-    { scenario: 'stage3-challenge-persona', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 3100 },
-    { scenario: 'stage4-five-ships', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 4100 },
-    { scenario: 'stage4-survival', personas: ['novice','advanced','expert'], repeats: 1, seedBase: 4200 }
+    { scenario: 'stage1-opening', personas: ['novice','advanced','expert','professional'], repeats: 1, seedBase: 1100 },
+    { scenario: 'stage2-opening', personas: ['novice','advanced','expert','professional'], repeats: 1, seedBase: 2100 },
+    { scenario: 'stage3-challenge-persona', personas: ['novice','advanced','expert','professional'], repeats: 1, seedBase: 3100 },
+    { scenario: 'stage4-five-ships', personas: ['novice','advanced','expert','professional'], repeats: 1, seedBase: 4100 },
+    { scenario: 'stage4-survival', personas: ['novice','advanced','expert','professional'], repeats: 1, seedBase: 4200 }
+  ],
+  distribution: [
+    { scenario: 'full-run-persona', personas: ['novice','advanced','expert','professional'], repeats: 1, seedBase: 51000 }
   ],
   quick: [
     { scenario: 'stage3-transition', repeats: 1, seedBase: 3000 },
@@ -81,11 +84,45 @@ function avg(arr){
   return arr.reduce((a,b)=>a+b,0)/arr.length;
 }
 
+function percentile(arr, p){
+  if(!arr.length) return 0;
+  const sorted = [...arr].sort((a,b)=>a-b);
+  const idx = (sorted.length - 1) * p;
+  const lo = Math.floor(idx);
+  const hi = Math.ceil(idx);
+  if(lo === hi) return sorted[lo];
+  const frac = idx - lo;
+  return sorted[lo] + (sorted[hi] - sorted[lo]) * frac;
+}
+
+function statSeries(arr, digits=3){
+  if(!arr.length){
+    return { count: 0, avg: 0, median: 0, min: 0, max: 0, p10: 0, p90: 0 };
+  }
+  const fix = n => +n.toFixed(digits);
+  return {
+    count: arr.length,
+    avg: fix(avg(arr)),
+    median: fix(percentile(arr, 0.5)),
+    min: fix(Math.min(...arr)),
+    max: fix(Math.max(...arr)),
+    p10: fix(percentile(arr, 0.1)),
+    p90: fix(percentile(arr, 0.9))
+  };
+}
+
+function addCounts(into, next){
+  for(const [key, value] of Object.entries(next || {})){
+    into[key] = (into[key] || 0) + value;
+  }
+}
+
 function summarize(batch){
   const report = {
     createdAt: new Date().toISOString(),
     profile: batch.profile,
     runs: batch.runs,
+    findings: [],
     aggregate: {
       totalRuns: batch.runs.length,
       totalDuration: 0,
@@ -102,35 +139,148 @@ function summarize(batch){
     report.aggregate.shipLost += (run.analysis?.shipLost || []).length;
     const persona = run.persona || 'default';
     const scenario = run.name;
-    const personaBucket = report.aggregate.byPersona[persona] || (report.aggregate.byPersona[persona] = { runs: 0, shipLost: 0, avgEndingStage: 0, avgSurvivalRatio: 0, avgChallengeHitRate: 0, scenarios: {} });
-    const scenarioBucket = personaBucket.scenarios[scenario] || (personaBucket.scenarios[scenario] = { runs: 0, shipLost: 0, endingStage: [], survivalRatio: [], challengeHitRate: [] });
+    const personaBucket = report.aggregate.byPersona[persona] || (report.aggregate.byPersona[persona] = {
+      runs: 0,
+      shipLost: 0,
+      gameOvers: 0,
+      avgEndingStage: 0,
+      avgSurvivalRatio: 0,
+      avgChallengeHitRate: 0,
+      scenarios: {},
+      endingStage: [],
+      survivalRatio: [],
+      challengeHitRate: [],
+      score: [],
+      duration: [],
+      livesLeft: [],
+      stageClears: [],
+      lossCauseCounts: {}
+    });
+    const scenarioBucket = personaBucket.scenarios[scenario] || (personaBucket.scenarios[scenario] = {
+      runs: 0,
+      shipLost: 0,
+      gameOvers: 0,
+      endingStage: [],
+      survivalRatio: [],
+      challengeHitRate: [],
+      score: [],
+      duration: [],
+      livesLeft: [],
+      stageClears: [],
+      lossCauseCounts: {}
+    });
     const losses = (run.analysis?.shipLost || []).length;
     const survivalRatio = run.duration ? Math.min(1, (run.analysis?.duration || 0) / run.duration) : 0;
     const challengeRates = (run.analysis?.challengeClears || []).map(c => c.total ? c.hits / c.total : 0);
+    const endingStage = run.state?.stage || 0;
+    const score = +(run.state?.score || 0);
+    const duration = +(run.analysis?.duration || 0);
+    const livesLeft = +(run.state?.lives || 0);
+    const stageClears = (run.analysis?.stageClears || []).length;
+    const gameOver = !run.state?.started && livesLeft === 0;
     personaBucket.runs++;
     personaBucket.shipLost += losses;
+    personaBucket.gameOvers += gameOver ? 1 : 0;
+    personaBucket.endingStage.push(endingStage);
+    personaBucket.survivalRatio.push(survivalRatio);
+    personaBucket.challengeHitRate.push(...challengeRates);
+    personaBucket.score.push(score);
+    personaBucket.duration.push(duration);
+    personaBucket.livesLeft.push(livesLeft);
+    personaBucket.stageClears.push(stageClears);
+    addCounts(personaBucket.lossCauseCounts, run.analysis?.lossCauseCounts || {});
     scenarioBucket.runs++;
     scenarioBucket.shipLost += losses;
-    scenarioBucket.endingStage.push(run.state?.stage || 0);
+    scenarioBucket.gameOvers += gameOver ? 1 : 0;
+    scenarioBucket.endingStage.push(endingStage);
     scenarioBucket.survivalRatio.push(survivalRatio);
     scenarioBucket.challengeHitRate.push(...challengeRates);
+    scenarioBucket.score.push(score);
+    scenarioBucket.duration.push(duration);
+    scenarioBucket.livesLeft.push(livesLeft);
+    scenarioBucket.stageClears.push(stageClears);
+    addCounts(scenarioBucket.lossCauseCounts, run.analysis?.lossCauseCounts || {});
   }
   for(const persona of Object.keys(report.aggregate.byPersona)){
     const bucket = report.aggregate.byPersona[persona];
     const scenarios = Object.values(bucket.scenarios);
-    bucket.avgEndingStage = +avg(scenarios.flatMap(s => s.endingStage)).toFixed(3);
-    bucket.avgSurvivalRatio = +avg(scenarios.flatMap(s => s.survivalRatio)).toFixed(3);
-    bucket.avgChallengeHitRate = +avg(scenarios.flatMap(s => s.challengeHitRate)).toFixed(3);
+    bucket.avgEndingStage = +avg(bucket.endingStage).toFixed(3);
+    bucket.avgSurvivalRatio = +avg(bucket.survivalRatio).toFixed(3);
+    bucket.avgChallengeHitRate = +avg(bucket.challengeHitRate).toFixed(3);
+    bucket.avgScore = +avg(bucket.score).toFixed(2);
+    bucket.avgDuration = +avg(bucket.duration).toFixed(3);
+    bucket.avgLivesLeft = +avg(bucket.livesLeft).toFixed(3);
+    bucket.avgStageClears = +avg(bucket.stageClears).toFixed(3);
+    bucket.avgShipLosses = +(bucket.shipLost / Math.max(1, bucket.runs)).toFixed(3);
+    bucket.gameOverRate = +(bucket.gameOvers / Math.max(1, bucket.runs)).toFixed(3);
+    bucket.scoreStats = statSeries(bucket.score, 2);
+    bucket.durationStats = statSeries(bucket.duration, 3);
+    bucket.endingStageStats = statSeries(bucket.endingStage, 3);
+    bucket.livesLeftStats = statSeries(bucket.livesLeft, 3);
+    bucket.stageClearStats = statSeries(bucket.stageClears, 3);
+    bucket.stageReachRates = {};
+    const maxStage = Math.max(1, ...bucket.endingStage);
+    for(let stage=2; stage<=maxStage; stage++){
+      bucket.stageReachRates[stage] = +(bucket.endingStage.filter(v => v >= stage).length / Math.max(1, bucket.runs)).toFixed(3);
+    }
     for(const [name, scenario] of Object.entries(bucket.scenarios)){
       bucket.scenarios[name] = {
         runs: scenario.runs,
         avgShipLosses: +(scenario.shipLost / Math.max(1, scenario.runs)).toFixed(3),
+        gameOverRate: +(scenario.gameOvers / Math.max(1, scenario.runs)).toFixed(3),
         avgEndingStage: +avg(scenario.endingStage).toFixed(3),
         avgSurvivalRatio: +avg(scenario.survivalRatio).toFixed(3),
-        avgChallengeHitRate: +avg(scenario.challengeHitRate).toFixed(3)
+        avgChallengeHitRate: +avg(scenario.challengeHitRate).toFixed(3),
+        avgScore: +avg(scenario.score).toFixed(2),
+        avgDuration: +avg(scenario.duration).toFixed(3),
+        avgLivesLeft: +avg(scenario.livesLeft).toFixed(3),
+        avgStageClears: +avg(scenario.stageClears).toFixed(3),
+        scoreStats: statSeries(scenario.score, 2),
+        durationStats: statSeries(scenario.duration, 3),
+        endingStageStats: statSeries(scenario.endingStage, 3),
+        livesLeftStats: statSeries(scenario.livesLeft, 3),
+        stageClearStats: statSeries(scenario.stageClears, 3),
+        lossCauseCounts: scenario.lossCauseCounts
       };
     }
+    delete bucket.endingStage;
+    delete bucket.survivalRatio;
+    delete bucket.challengeHitRate;
+    delete bucket.score;
+    delete bucket.duration;
+    delete bucket.livesLeft;
+    delete bucket.stageClears;
   }
+  const ordered = ['novice','advanced','expert','professional'].filter(k => report.aggregate.byPersona[k]);
+  for(let i=1;i<ordered.length;i++){
+    const prev = report.aggregate.byPersona[ordered[i-1]];
+    const next = report.aggregate.byPersona[ordered[i]];
+    if(next.avgScore < prev.avgScore){
+      report.findings.push({
+        priority: 1,
+        title: `${next.runs > 1 ? 'Higher-skill distribution regressed' : 'Higher-skill sample underperformed'}`,
+        detail: `${ordered[i]} averaged ${next.avgScore.toFixed(2)} points versus ${prev.avgScore.toFixed(2)} for ${ordered[i-1]}.`
+      });
+    }
+    if(next.avgEndingStage < prev.avgEndingStage){
+      report.findings.push({
+        priority: 1,
+        title: 'Persona progression is out of order',
+        detail: `${ordered[i]} averaged ending stage ${next.avgEndingStage.toFixed(2)} versus ${prev.avgEndingStage.toFixed(2)} for ${ordered[i-1]}.`
+      });
+    }
+  }
+  for(const persona of ordered){
+    const bucket = report.aggregate.byPersona[persona];
+    if(bucket.shipLost > 0 && (bucket.lossCauseCounts.enemy_collision || 0) === bucket.shipLost){
+      report.findings.push({
+        priority: 2,
+        title: `${persona} deaths are collision-dominated`,
+        detail: `All ${bucket.shipLost} recorded ship losses for ${persona} came from enemy collisions.`
+      });
+    }
+  }
+  report.findings.sort((a,b)=>a.priority-b.priority);
   return report;
 }
 
@@ -138,9 +288,10 @@ async function main(){
   const args = parseArgs(process.argv.slice(2));
   const profile = PROFILES[args.profile || 'default'];
   if(args.help || !profile){
-    console.log('Usage: npm run harness:batch -- --profile personas|quick|fidelity|default|deep');
+    console.log('Usage: npm run harness:batch -- --profile personas|distribution|quick|fidelity|default|deep [--repeats N]');
     process.exit(args.help ? 0 : 1);
   }
+  const repeatMul = Math.max(1, parseInt(args.repeats || '1', 10) || 1);
 
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const outDir = path.join(OUT_BASE, `batch-${args.profile || 'default'}-${stamp}`);
@@ -151,7 +302,7 @@ async function main(){
     const personas = item.personas && item.personas.length ? item.personas : [item.persona || null];
     for(let pIndex=0;pIndex<personas.length;pIndex++){
       const persona = personas[pIndex];
-      for(let i=0;i<item.repeats;i++){
+      for(let i=0;i<item.repeats * repeatMul;i++){
         const seed = item.seedBase + i + 1 + (persona ? pIndex * 100 : 0);
         const harnessArgs = ['--scenario', item.scenario, '--seed', String(seed), '--out', outDir];
         if(persona) harnessArgs.push('--persona', persona);

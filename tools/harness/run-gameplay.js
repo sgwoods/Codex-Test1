@@ -97,6 +97,7 @@ function specFromScenario(file){
     name: raw.name || path.basename(file, path.extname(file)),
     source: file,
     duration: Math.max(5, raw.duration || 20),
+    stopOnGameOver: !!raw.stopOnGameOver,
     config: {
       stage: Math.max(1, raw.config?.stage || 1),
       ships: Math.max(1, Math.min(9, raw.config?.ships || 3)),
@@ -154,6 +155,22 @@ async function waitForDownloads(list, count, timeoutMs){
   throw new Error(`Timed out waiting for ${count} downloads, saw ${list.length}`);
 }
 
+async function waitForRun(page, spec, replayTime){
+  const finishAt = Date.now() + Math.max(0, spec.duration) * 1000;
+  let state = await page.evaluate(() => window.__galagaHarness__.state());
+  if(!spec.stopOnGameOver){
+    const remain = Math.max(0, spec.duration - replayTime);
+    if(remain) await sleep(remain * 1000);
+    return page.evaluate(() => window.__galagaHarness__.state());
+  }
+  while(Date.now() < finishAt){
+    await sleep(250);
+    state = await page.evaluate(() => window.__galagaHarness__.state());
+    if(!state.started) return state;
+  }
+  return page.evaluate(() => window.__galagaHarness__.state());
+}
+
 async function main(){
   const args = parseArgs(process.argv.slice(2));
   if(args.help || (!args.session && !args.scenario)){
@@ -198,10 +215,7 @@ async function main(){
     await page.evaluate(cfg => window.__galagaHarness__.start(Object.assign({ autoVideo: true }, cfg)), Object.assign({}, spec.config, { seed: spec.seed }));
 
     const replayTime = await replay(page, spec);
-    const remain = Math.max(0, spec.duration - replayTime);
-    if(remain) await sleep(remain * 1000);
-
-    const state = await page.evaluate(() => window.__galagaHarness__.state());
+    const state = await waitForRun(page, spec, replayTime);
     if(state.started) await page.evaluate(name => window.__galagaHarness__.stop(name), spec.name);
 
     await waitForDownloads(downloads, 2, 15000);
