@@ -108,7 +108,7 @@ function start(){
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
  S.harnessPersona=(window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
- Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
+ Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
@@ -632,14 +632,22 @@ function update(dt){
  }else if(p.captured){
   breakCapture('boss_destroyed');
  }
- if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom}
+ if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom;p.vx=0}
  const harnessPersona=harnessPersonaCfg();
  const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);
  const manualFire=!!keys.Space;
  if(p.spawn<=0&&!p.captured){
   if(S.attract)runAttractPlayer(dt,p);
   else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
-  else{const hp=playerHitbox();p.x=cl(p.x+manualAxis*p.s*dt,hp.w+2,PLAY_W-hp.w-2);}
+  else{
+   const hp=playerHitbox();
+   const targetVx=manualAxis*p.s;
+   const blend=Math.min(1,(manualAxis?p.accel:p.decel)*dt);
+   p.vx+=(targetVx-p.vx)*blend;
+   if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;
+   p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
+   if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+  }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();
  else if(!S.attract&&harnessPersona&&manualFire)shoot();

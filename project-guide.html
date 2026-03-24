@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.165.sha.2206d4b.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.166.sha.8fe0add.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -1244,6 +1244,12 @@
 <ol><li>Identify the source artifact</li><li>Capture the specific observed behavior</li><li>Write the current project behavior</li><li>Define the gap</li><li>Link the gap to:</li></ol>
 <ul><li>a GitHub issue</li><li>a harness scenario or metric</li><li>a target release / roadmap milestone if applicable</li></ul>
 <h3>Current Baseline Topics</h3>
+<h4>Player Control Principles</h4>
+<ul><li>Source:<ul><li>original cabinet feel as observed in gameplay footage</li><li>modern keyboard best practice for translating joystick-style intent into</li></ul></li></ul>
+<p>digital input</p>
+<ul><li>Current rule:<ul><li>keyboard movement should emulate joystick intent, not instantaneous digital</li></ul></li></ul>
+<p>stepping</p>
+<ul><li>Current implementation target:<ul><li>use a target-velocity model for manual keyboard control</li><li>apply acceleration on press and stronger deceleration on release</li><li>preserve neutral behavior when opposite directions are held together</li><li>tune for:<ul><li>tap = fine correction</li><li>hold = lane travel</li></ul></li></ul></li><li>Validation questions:<ul><li>can a player line up under descending enemies with small corrections?</li><li>does the ship still cross the playfield quickly enough for evasive play?</li><li>does manual control feel smoother than the old full-speed-per-frame step?</li></ul></li></ul>
 <h4>Stage 1 Dive Timing</h4>
 <ul><li>Source:<ul><li>original gameplay video</li></ul></li><li>Current metric:<ul><li><code>stage1-descent</code> harness scenario</li></ul></li><li>Current use:<ul><li>compare first dive timing and lower-field crossing against original footage</li></ul></li></ul>
 <h4>Challenge Stage Fidelity</h4>
@@ -1443,7 +1449,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-alpha.1+build.165.sha.2206d4b.dirty
+          Build: 0.5.0-alpha.1+build.166.sha.8fe0add.dirty
         </p>
       </aside>
     </main>

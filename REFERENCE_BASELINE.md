@@ -34,6 +34,27 @@ For each fidelity topic:
 
 ## Current Baseline Topics
 
+### Player Control Principles
+
+- Source:
+  - original cabinet feel as observed in gameplay footage
+  - modern keyboard best practice for translating joystick-style intent into
+    digital input
+- Current rule:
+  - keyboard movement should emulate joystick intent, not instantaneous digital
+    stepping
+- Current implementation target:
+  - use a target-velocity model for manual keyboard control
+  - apply acceleration on press and stronger deceleration on release
+  - preserve neutral behavior when opposite directions are held together
+  - tune for:
+    - tap = fine correction
+    - hold = lane travel
+- Validation questions:
+  - can a player line up under descending enemies with small corrections?
+  - does the ship still cross the playfield quickly enough for evasive play?
+  - does manual control feel smoother than the old full-speed-per-frame step?
+
 ### Stage 1 Dive Timing
 
 - Source:

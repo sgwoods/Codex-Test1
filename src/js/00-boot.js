@@ -201,7 +201,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
- p:{x:0,y:0,s:470,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,cd:0,inv:0,dual:0,captured:0,pending:0,spawn:0,capBoss:null,capT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -306,7 +306,7 @@ function buildGameOverState(score,stage){
 function resetAttractBackdrop(){
  S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.alertT=0;S.alertTxt='';S.banner=0;S.bannerTxt='';S.bannerMode='';S.bannerSub='';
  for(const e of S.e)e.hp=0;
- S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;
+ S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;
 }
 function enterAttractScores(){
  ATTRACT.active=1;
@@ -328,7 +328,7 @@ function startAttractDemo(){
  ATTRACT.cycle++;
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1});
  S.stats={shots:0,hits:0};
- Object.assign(S.p,{dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0});
+ Object.assign(S.p,{dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0});
  logEvent('attract_demo_start',{cycle:ATTRACT.cycle});
  spawnStage();
 }
