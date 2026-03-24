@@ -182,6 +182,21 @@ This is the maintained release view for the scoped four-stage `1.0` launch.
 Use it as the default triage order until launch unless a new regression clearly
 overrides it.
 
+Current beta-review cluster:
+
+- `#40` capture / rescue feedback
+- `#73` shoot during beam-up
+- `#74` bonus spacing
+- `#47` special squadron spacing
+- `#45` boss damaged-text linger
+- `#38` ship-loss feedback
+
+Current coding priority once those beta checks are confirmed:
+
+1. `#18` Stage `4` fairness
+2. `#76` production vs non-production data separation design
+3. `#9` remaining challenge-stage fidelity
+
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
 | Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
