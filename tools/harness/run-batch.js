@@ -300,9 +300,9 @@ async function main(){
   const batch = { profile: args.profile || 'default', runs: [], results: [] };
   for(const item of profile){
     const personas = item.personas && item.personas.length ? item.personas : [item.persona || null];
-    for(let pIndex=0;pIndex<personas.length;pIndex++){
-      const persona = personas[pIndex];
-      for(let i=0;i<item.repeats * repeatMul;i++){
+    for(let i=0;i<item.repeats * repeatMul;i++){
+      for(let pIndex=0;pIndex<personas.length;pIndex++){
+        const persona = personas[pIndex];
         const seed = item.seedBase + i + 1 + (persona ? pIndex * 100 : 0);
         const harnessArgs = ['--scenario', item.scenario, '--seed', String(seed), '--out', outDir];
         if(persona) harnessArgs.push('--persona', persona);
