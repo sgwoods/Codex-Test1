@@ -193,17 +193,23 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#18` Stage `4` fairness
-2. `#76` production vs non-production data separation design
-3. `#9` remaining challenge-stage fidelity
+1. `#77` keyboard tap precision and reversal overshoot
+2. `#79` capture-escape return-to-play recovery
+3. `#78` challenge-stage collision lethality
+4. `#18` Stage `4` fairness
+5. `#76` production vs non-production data separation design
+6. `#9` remaining challenge-stage fidelity
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
+| Must Fix | `#77` | Codex | Open | Manual beta play still shows single-tap overshoot when lining up under a single descending target; first retune regressed the Stage `2` guardrail and was reverted. | Rework manual movement for finer tap precision and stronger reversal braking without destabilizing Stage `2`. | Phase 1 |
 | Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
 | Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
 | Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |
 | Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
+| Must Fix | `#78` | Codex | Open | Current code suppresses player/enemy collision loss during challenge stages, but challenge stages should remain non-firing rather than fully non-lethal. | Restore lethal challenge collisions and verify the post-hit stage outcome against reference. | Phase 1 |
 | Must Fix | `#40` | Codex | Beta review | Capture / rescue now has clearer banners, but the live read still needs confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |
+| Must Fix | `#79` | Codex | Open | After breaking capture by shooting the boss during beam-up, the ship can remain alive mid-screen instead of dropping back to the player row. | Fix the beam-escape recovery path so the ship visibly drops back into active play. | Phase 3 |
 | Must Fix | `#74` | Codex | Beta review | Bonus/special squadron spacing was tightened and now needs a live feel check. | Confirm the tighter bonus grouping in beta play. | Phase 2 |
 | Must Fix | `#47` | Codex | Beta review | Special squadron presentation is tighter, but needs manual release judgment. | Confirm squadron readability and bonus feel in beta. | Phase 2 |
 | Must Fix | `#45` | Codex | Beta review | The lingering boss-damaged text was removed in the latest feedback pass. | Confirm boss first-hit feedback reads cleanly in beta. | Phase 2 |
