@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.185.sha.7e113ea.beta</span>
-    <span id="settingsRelease">Mar 24 2026, 8:56 PM EDT</span>
-    <span id="settingsState">beta@7e113ea clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.186.sha.c5e0b20.beta</span>
+    <span id="settingsRelease">Mar 24 2026, 9:03 PM EDT</span>
+    <span id="settingsState">beta@c5e0b20 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.185.sha.7e113ea.beta</span>
-    <span id="buildStampRelease">Mar 24 2026, 8:56 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.186.sha.c5e0b20.beta</span>
+    <span id="buildStampRelease">Mar 24 2026, 9:03 PM EDT</span>
   </div>
 </div>
 <script>
@@ -355,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.185.sha.7e113ea.beta',commit:'7e113ead3ce44978403fe34bcf670e0b796784bd',branch:'beta',dirty:false,released:'Mar 24 2026, 8:56 PM EDT',state:'beta@7e113ea clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.186.sha.c5e0b20.beta',commit:'c5e0b20aed2d8abe913746e5457c5d2ed892c753',branch:'beta',dirty:false,released:'Mar 24 2026, 9:03 PM EDT',state:'beta@c5e0b20 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1968,10 +1968,10 @@ function specialSquadronTuning(stage=S.stage){
 
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- // The boss sprite faces "up" in local coordinates. In formation we want the
- // carried fighter tucked above the boss, but once the boss rotates to dive
- // downward the same back-side anchor becomes positive local Y.
- return e.dive ? {x:0,y:16} : {x:0,y:-18};
+ // Only active downward dive states rotate the boss sprite. Return/standby
+ // states should keep the carried fighter tucked above the docked boss.
+ const divingDown=e.dive===1||e.dive===4;
+ return divingDown ? {x:0,y:16} : {x:0,y:-18};
 }
 
 function carriedFighterTarget(e){
