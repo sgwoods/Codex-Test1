@@ -358,9 +358,11 @@ function logEvent(type,data={}){
  REC.events.push(Object.assign({t:recTime(),type},data));
 }
 let carryDebugLastState='';
+let rescueDebugLastState='';
 function setCarryDebug(enabled,label='manual'){
  window.__auroraCarryDebug=enabled?1:0;
  carryDebugLastState='';
+ rescueDebugLastState='';
  logEvent('carry_debug_toggle',{enabled:!!enabled,label});
 }
 function carryRelationState(){
@@ -393,6 +395,18 @@ function carryRelationState(){
  }
  return null;
 }
+function rescuePodDebugState(){
+ if(!S.cap)return null;
+ return {
+  mode:'rescue_pod',
+  x:+S.cap.x.toFixed(2),
+  y:+S.cap.y.toFixed(2),
+  podMode:S.cap.mode||'fall',
+  side:S.cap.side||0,
+  playerX:+S.p.x.toFixed(2),
+  playerY:+S.p.y.toFixed(2)
+ };
+}
 function logCarryDebugState(reason='tick'){
  if(!window.__auroraCarryDebug)return;
  const state=carryRelationState();
@@ -400,6 +414,12 @@ function logCarryDebugState(reason='tick'){
  if(key===carryDebugLastState&&reason==='tick')return;
  carryDebugLastState=key;
  logEvent('carry_relation_state',Object.assign({reason},state||{mode:'none'}));
+ const rescueState=rescuePodDebugState();
+ const rescueKey=rescueState?`${rescueState.podMode}:${rescueState.x}:${rescueState.y}`:'none';
+ if(rescueKey!==rescueDebugLastState||reason!=='tick'){
+  rescueDebugLastState=rescueKey;
+  logEvent('rescue_pod_state',Object.assign({reason},rescueState||{mode:'none'}));
+ }
 }
 window.setCarryDebug=setCarryDebug;
 window.logCarryDebugState=logCarryDebugState;

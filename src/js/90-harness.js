@@ -27,6 +27,64 @@ window.__galagaHarness__={
   window.startAttractDemo();
   return true;
  },
+ setupWaitModeCarriedBossTest(cfg={}){
+  started=0;
+  paused=0;
+  ATTRACT.active=1;
+  ATTRACT.phase='demo';
+  ATTRACT.timer=Math.max(2,+cfg.timer||9);
+  S.attract=1;
+  S.challenge=0;
+  S.cap=null;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=Math.max(S.recoverT,4);
+  S.attackGapT=Math.max(S.attackGapT,4);
+  const bosses=S.e.filter(e=>e.hp>0&&e.t==='boss');
+  if(!bosses.length)return false;
+  const boss=bosses.sort((a,b)=>Math.abs((a.tx||a.x)-PLAY_W/2)-Math.abs((b.tx||b.x)-PLAY_W/2))[0];
+  for(const e of S.e){
+   if(e.hp<=0)continue;
+   e.form=1;
+   e.dive=0;
+   e.beam=0;
+   e.beamT=0;
+   e.low=0;
+   e.esc=0;
+   e.shot=0;
+   e.carry=e.id===boss.id?1:0;
+   e.x=e.tx;
+   e.y=e.ty;
+   e.vx=0;
+   e.vy=0;
+   e.cool=99;
+  }
+  Object.assign(S.p,{
+   x:PLAY_W/2,
+   y:PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  logEvent('harness_wait_mode_carried_boss_setup',{
+   boss:boss.id,
+   bossX:+boss.x.toFixed(2),
+   bossY:+boss.y.toFixed(2),
+   stage:S.stage,
+   attractPhase:ATTRACT.phase
+  });
+  if(window.__auroraCarryDebug)logCarryDebugState('wait-mode-setup');
+  return true;
+ },
  stop(label='harness'){
   logEvent('harness_stop',{label});
   logSnapshot('harness_stop');
@@ -108,6 +166,33 @@ window.__galagaHarness__={
   const p=S.p;
   S.cap={x:cl(+cfg.x||p.x,18,PLAY_W-18),y:+cfg.y||Math.max(28,p.y-56),vy:+cfg.vy||78,t:+cfg.t||8};
   logEvent('harness_spawn_rescue',{x:+S.cap.x.toFixed(2),y:+S.cap.y.toFixed(2),vy:+S.cap.vy.toFixed(2)});
+ },
+ setupWaitModeDockingRescuePodTest(cfg={}){
+  started=0;
+  paused=0;
+  ATTRACT.active=1;
+  ATTRACT.phase='demo';
+  ATTRACT.timer=Math.max(2,+cfg.timer||9);
+  S.attract=1;
+  const p=S.p;
+  S.cap={
+   mode:'dock',
+   x:cl(+cfg.x||PLAY_W/2,18,PLAY_W-18),
+   y:+cfg.y||112,
+   vx:+cfg.vx||0,
+   vy:+cfg.vy||0,
+   t:+cfg.t||8,
+   spin:+cfg.spin||0,
+   side:+cfg.side||1
+  };
+  logEvent('harness_wait_mode_rescue_pod_setup',{
+   x:+S.cap.x.toFixed(2),
+   y:+S.cap.y.toFixed(2),
+   side:S.cap.side,
+   mode:S.cap.mode
+  });
+  if(window.__auroraCarryDebug)logCarryDebugState('wait-mode-rescue-setup');
+  return true;
  },
  setupCaptureRescueDualTest(cfg={}){
   const p=S.p;

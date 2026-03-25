@@ -1,0 +1,16 @@
+{
+  "name": "wait-mode-carried-boss-debug",
+  "seed": 9013,
+  "duration": 4,
+  "config": {
+    "stage": 1,
+    "ships": 3,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.1, "action": "harness", "method": "startAttractDemo", "args": { "debugCarry": true } },
+    { "t": 0.45, "action": "harness", "method": "setupWaitModeCarriedBossTest", "args": { "timer": 6 } },
+    { "t": 2.6, "action": "harness", "method": "export" },
+    { "t": 2.8, "action": "harness", "method": "stop", "args": "wait-mode-carried-boss-debug" }
+  ]
+}

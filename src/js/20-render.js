@@ -140,6 +140,17 @@ function drawCarryDebugOverlay(){
   ctx.fillStyle=relation==='above'?'#b8ffd8':'#ffb3b3';
   ctx.fillText(`CARRY ${relation.toUpperCase()} d${e.dive||0}`,Math.round(e.x),Math.round(e.y-24));
  }
+ if(S.cap){
+  const label=S.cap.mode==='dock'?'RESCUE DOCK':'RESCUE FALL';
+  ctx.strokeStyle='#ffd36a';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(Math.round(S.cap.x),Math.round(S.cap.y));
+  ctx.lineTo(Math.round(S.p.x),Math.round(S.p.y));
+  ctx.stroke();
+  ctx.fillStyle='#ffe6a8';
+  ctx.fillText(label,Math.round(S.cap.x),Math.round(S.cap.y-18));
+ }
  ctx.restore();
 }
 function drawRescuePod(){

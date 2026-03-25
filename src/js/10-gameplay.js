@@ -406,10 +406,10 @@ function specialSquadronTuning(stage=S.stage){
 
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- // Only active downward dive states rotate the boss sprite. Return/standby
- // states should keep the carried fighter tucked above the docked boss.
- const divingDown=e.dive===1||e.dive===4;
- return divingDown ? {x:0,y:16} : {x:0,y:-18};
+ // Once a fighter is fully carried, keep it tucked above/behind the boss in
+ // both formation and attack movement. The beam-up phase is handled by the
+ // live player capture state, not by the carried-fighter sprite.
+ return {x:0,y:-18};
 }
 
 function carriedFighterTarget(e){
