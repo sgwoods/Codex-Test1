@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.174.sha.771c744.dirty</span>
-    <span id="settingsRelease">Mar 24 2026, 7:58 PM EDT</span>
-    <span id="settingsState">main@771c744 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.176.sha.9d66355.dirty</span>
+    <span id="settingsRelease">Mar 24 2026, 8:13 PM EDT</span>
+    <span id="settingsState">main@9d66355 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.174.sha.771c744.dirty</span>
-    <span id="buildStampRelease">Mar 24 2026, 7:58 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.176.sha.9d66355.dirty</span>
+    <span id="buildStampRelease">Mar 24 2026, 8:13 PM EDT</span>
   </div>
 </div>
 <script>
@@ -355,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.174.sha.771c744.dirty',commit:'771c744fbc834822e846bcab215249f4d80bc5c0',branch:'main',dirty:true,released:'Mar 24 2026, 7:58 PM EDT',state:'main@771c744 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.176.sha.9d66355.dirty',commit:'9d66355d19b5af4a115f346c0941ba9d83af026f',branch:'main',dirty:true,released:'Mar 24 2026, 8:13 PM EDT',state:'main@9d66355 dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -2092,7 +2092,11 @@ function startDive(e,p,opts={}){
  if(!e)return;
  e.low=0;
  if(opts.capture&&e.t==='boss'&&canCapture()){e.dive=4;e.targetX=cl(p.x+rnd(28,-28),24,PLAY_W-24);e.targetY=132;e.vx=0;e.vy=S.stage<=2?110:120;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:1});return;}
- e.dive=1;e.vx=(p.x-e.x)*.56+rnd(26,-26);e.vy=scriptedDiveVy(S.stage)+rnd(S.stage<=2?8:12);e.shot=e.t==='boss'?2:1;
+ const stage1Scripted=S.stage===1&&!S.challenge;
+ const steer=stage1Scripted?.42:.56;
+ const jitter=stage1Scripted?18:26;
+ const vyRnd=stage1Scripted?5:(S.stage<=2?8:12);
+ e.dive=1;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);e.shot=e.t==='boss'?2:1;
  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
  if(opts.escort&&e.t==='boss')assignEscorts(e);
 }
@@ -2193,7 +2197,12 @@ function updateEnemy(e,dt,t,T,p){
  if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
   if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=S.stage<=2?116:128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
-  else{const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:.56)*fm.steer,jitter=(S.stage===2?22:S.stage===4?20:S.stage>=5?32:38)*fm.jitter;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(S.stage===4?14:S.stage>=5?20:S.stage===2?8:12);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
+  else{
+   const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:S.stage===1?.46:.56)*fm.steer;
+   const jitter=(S.stage===2?22:S.stage===4?20:S.stage>=5?32:S.stage===1?24:38)*fm.jitter;
+   const vyRnd=S.stage===4?14:S.stage>=5?20:S.stage===2?8:S.stage===1?6:12;
+   e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)
+  }
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
  }
 }
