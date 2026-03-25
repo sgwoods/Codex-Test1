@@ -19,6 +19,17 @@ const OUT = path.join(ROOT, 'index.html');
 const DASHBOARD_OUT = path.join(ROOT, 'release-dashboard.html');
 const PROJECT_GUIDE_OUT = path.join(ROOT, 'project-guide.html');
 const BUILD_INFO_OUT = path.join(ROOT, 'build-info.json');
+const GENERATED_BUILD_PATHS = new Set([
+  'index.html',
+  'release-dashboard.html',
+  'project-guide.html',
+  'build-info.json',
+  'beta/index.html',
+  'beta/release-dashboard.html',
+  'beta/project-guide.html',
+  'beta/build-info.json',
+  'beta/README.txt'
+]);
 
 function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
@@ -81,6 +92,20 @@ function git(args, fallback = ''){
   }catch{
     return fallback;
   }
+}
+
+function parsePorcelainPath(entry=''){
+  const trimmed = String(entry || '').trim();
+  if(!trimmed) return '';
+  const body = trimmed.slice(3);
+  if(!body) return '';
+  if(body.includes(' -> ')) return body.split(' -> ').pop().trim();
+  return body.trim();
+}
+
+function isGeneratedBuildPath(filePath=''){
+  const normalized = String(filePath || '').replace(/\\/g, '/');
+  return GENERATED_BUILD_PATHS.has(normalized);
 }
 
 function detectRepoRef(){
@@ -1074,7 +1099,11 @@ function build(){
   const buildRepoRef = detectRepoRef();
   const buildReleaseChannel = detectReleaseChannel(buildRepoRef);
   const buildVersion = normalizeVersionForChannel(pkg.version, buildReleaseChannel);
-  const buildDirtyFiles = git('status --porcelain', '').split('\n').map(s => s.trim()).filter(Boolean);
+  const buildDirtyFiles = git('status --porcelain', '')
+    .split('\n')
+    .map(s => s.trim())
+    .filter(Boolean)
+    .filter(entry => !isGeneratedBuildPath(parsePorcelainPath(entry)));
   const buildDirty = buildDirtyFiles.length > 0;
   const buildNumber = process.env.BUILD_NUMBER || process.env.GITHUB_RUN_NUMBER || git('rev-list --count HEAD', '0');
   const buildLabel = `${buildVersion}+build.${buildNumber}.sha.${buildShortCommit}${buildDirty ? '.dirty' : ''}`;
