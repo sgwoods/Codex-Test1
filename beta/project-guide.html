@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.192.sha.8c6ede7.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.202.sha.286ee08.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -972,7 +972,7 @@
 <h4>Launch Blocking List</h4>
 <p>This is the maintained release view for the scoped four-stage <code>1.0</code> launch. Use it as the default triage order until launch unless a new regression clearly overrides it.</p>
 <p>Current beta-review cluster:</p>
-<ul><li><code>#40</code> capture / rescue feedback</li><li><code>#73</code> shoot during beam-up</li><li><code>#77</code> capture escape drop-back recovery</li><li><code>#80</code> wait-mode carried fighter dock direction</li><li><code>#74</code> bonus spacing</li><li><code>#47</code> special squadron spacing</li><li><code>#45</code> boss damaged-text linger</li><li><code>#38</code> ship-loss feedback</li></ul>
+<ul><li><code>#40</code> capture / rescue feedback</li><li><code>#73</code> shoot during beam-up</li><li><code>#77</code> capture escape drop-back recovery</li><li><code>#80</code> wait-mode carried fighter dock direction</li><li><code>#88</code> captured fighter disappears at top</li><li><code>#74</code> bonus spacing</li><li><code>#47</code> special squadron spacing</li><li><code>#45</code> boss damaged-text linger</li><li><code>#38</code> ship-loss feedback</li></ul>
 <p>Current coding priority once those beta checks are confirmed:</p>
 <ol><li><code>#18</code> Stage <code>4</code> fairness</li><li><code>#76</code> production vs non-production data separation design</li><li><code>#9</code> remaining challenge-stage fidelity</li></ol>
 <div class="tableWrap">
@@ -981,21 +981,23 @@
               <tr><th>Bucket</th><th>Issue</th><th>Owner</th><th>Status</th><th>Evidence</th><th>Next Action</th><th>Plan Stage</th></tr>
             </thead>
             <tbody>
-              <tr><td>Must Fix</td><td><code>#80</code></td><td>Codex</td><td>Beta review</td><td>Wait-mode carried-fighter anchoring now keeps the release, hostile-turn, and natural rescue branches aligned in harness after the upper-dock anchor fix.</td><td>Verify the carried fighter now sits above/behind the boss during wait-mode drops in beta.</td><td>Phase 3</td></tr>
+              <tr><td>Must Fix</td><td><code>#80</code></td><td>Codex</td><td>Beta review + automation</td><td>Carry-state automation now proves drag-up stays <code>below</code> and docked/wait-mode carried states render <code>above</code>, but the exact swap timing still needs live eyes.</td><td>Verify the fighter flips from below to above only at the correct top-dock moment in beta.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix</td><td><code>#18</code></td><td>Codex</td><td>Open</td><td>Stage <code>4</code> still collapses in harness and manual play.</td><td>Tune the Stage <code>4</code> finish and escort pressure.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#61</code></td><td>Shared</td><td>Watching</td><td>Hosted Stage <code>3</code> -&gt; <code>4</code> still has an intermittent bad-transition edge case.</td><td>Keep transition telemetry live and capture the next failing run.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#32</code></td><td>Codex</td><td>Tuning</td><td>Stage <code>2</code> improved, but live spacing/fairness still needs confirmation.</td><td>Keep manual and persona checks on Stage <code>2</code> pressure.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#9</code></td><td>Codex</td><td>Open</td><td>Stage <code>3</code> challenge still is not close enough to original Galaga.</td><td>Tighten challenge behavior against reference.</td><td>Phase 1</td></tr>
-<tr><td>Must Fix</td><td><code>#78</code></td><td>Codex</td><td>Beta review</td><td>Challenge-stage collisions are lethal again in harness while enemy fire remains disabled.</td><td>Verify live challenge-stage collision behavior and post-hit flow in beta.</td><td>Phase 1</td></tr>
-<tr><td>Must Fix</td><td><code>#40</code></td><td>Codex</td><td>Beta review</td><td>Capture / rescue now has clearer banners, but the live read still needs confirmation.</td><td>Verify the updated beta capture feedback in manual play.</td><td>Phase 3</td></tr>
-<tr><td>Must Fix</td><td><code>#77</code></td><td>Codex</td><td>Beta review</td><td>Capture-break recovery now returns cleanly in harness instead of stranding the ship mid-screen.</td><td>Verify the beam-escape drop-back animation and control return in beta.</td><td>Phase 3</td></tr>
+<tr><td>Must Fix</td><td><code>#78</code></td><td>Codex</td><td>Automated check + manual confirm</td><td>Automated regression now proves challenge collisions kill the player while challenge fire stays off.</td><td>Keep the check green and confirm the live post-hit flow still reads correctly in beta.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#40</code></td><td>Codex</td><td>Partial automation + beta review</td><td>Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation.</td><td>Verify the updated beta capture feedback in manual play.</td><td>Phase 3</td></tr>
+<tr><td>Must Fix</td><td><code>#77</code></td><td>Codex</td><td>Automated check + low-risk manual confirm</td><td>Automated recovery check now proves beam-escape recovery returns the ship to the bottom row and allows post-escape firing.</td><td>Confirm the drop-back animation/control return still looks clean in beta.</td><td>Phase 3</td></tr>
+<tr><td>Must Fix</td><td><code>#88</code></td><td>Codex</td><td>Automated check + beta review</td><td>Carry-visual automation now guards against the captured fighter simply disappearing at the top carried state.</td><td>Confirm the fighter remains visibly carried in the exact live beta path you were seeing.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix</td><td><code>#74</code></td><td>Codex</td><td>Beta review</td><td>Bonus/special squadron spacing was tightened and now needs a live feel check.</td><td>Confirm the tighter bonus grouping in beta play.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix</td><td><code>#47</code></td><td>Codex</td><td>Beta review</td><td>Special squadron presentation is tighter, but needs manual release judgment.</td><td>Confirm squadron readability and bonus feel in beta.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix</td><td><code>#45</code></td><td>Codex</td><td>Beta review</td><td>The lingering boss-damaged text was removed in the latest feedback pass.</td><td>Confirm boss first-hit feedback reads cleanly in beta.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix</td><td><code>#45</code></td><td>Codex</td><td>Automated check + manual confirm</td><td>Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact.</td><td>Confirm boss first-hit feedback still looks clean in beta.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix</td><td><code>#38</code></td><td>Codex</td><td>Beta review</td><td>Ship-loss feedback was strengthened and now needs live feel confirmation.</td><td>Verify explosion, pause, and recovery feel in beta play.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix</td><td><code>#76</code></td><td>Shared</td><td>Open</td><td>Production and non-production still share the same live score/data path.</td><td>Choose environment split and route non-production writes away from production by default.</td><td>Phase 4</td></tr>
+<tr><td>Must Fix</td><td><code>#85</code></td><td>Shared</td><td>Open</td><td>Final release-readiness pass still needs security review, code/docs consistency, and a short players guide.</td><td>Schedule the final release-readiness cycle once the blocker cluster is down to a short list.</td><td>Phase 4</td></tr>
 <tr><td>Should Fix</td><td><code>#58</code></td><td>Codex</td><td>Open</td><td>Capture rules are much improved but still not fully original.</td><td>Finish the rescue-fidelity pass.</td><td>Phase 3</td></tr>
-<tr><td>Should Fix</td><td><code>#73</code></td><td>Codex</td><td>Beta review</td><td>Early tractor-beam escape is implemented and harness-passing.</td><td>Verify the feel of the shoot-to-save window in beta.</td><td>Phase 3</td></tr>
+<tr><td>Should Fix</td><td><code>#73</code></td><td>Codex</td><td>Automated check + beta review</td><td>Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked.</td><td>Verify the feel/fairness of the shoot-to-save window in beta.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix</td><td><code>#79</code></td><td>Codex</td><td>Beta review</td><td>Manual beta play says keyboard control is better, but fine single-tap alignment still needs a final confidence check.</td><td>Keep the current manual-control baseline and revisit only if new live evidence says the feel is still off.</td><td>Phase 1</td></tr>
 <tr><td>Should Fix</td><td><code>#4</code></td><td>Shared</td><td>Watch</td><td>Stage <code>1</code> feels acceptable manually, with mixed harness urgency.</td><td>Revisit only if evidence worsens.</td><td>Phase 1</td></tr>
 <tr><td>Should Fix</td><td><code>#62</code></td><td>Shared</td><td>Watch</td><td>Self-play can still fail early in Stage <code>1</code>.</td><td>Keep the persona baseline in view while tuning.</td><td>Phase 1</td></tr>
@@ -1005,6 +1007,7 @@
 <tr><td>Can Slip</td><td><code>#48</code></td><td>Codex</td><td>Partial</td><td>The frame exists; decorative fidelity can still wait.</td><td>Add cabinet-style frame art later.</td><td>Phase 2</td></tr>
 <tr><td>Can Slip</td><td><code>#65</code></td><td>Codex</td><td>Queued</td><td>Aurora / wintry theming is still later polish.</td><td>Apply thematic art after gameplay stabilizes.</td><td>Phase 2</td></tr>
 <tr><td>Can Slip</td><td><code>#71</code></td><td>Codex</td><td>Queued</td><td>Mute is useful, but not launch-blocking.</td><td>Add an audio toggle in the UI.</td><td>Phase 3</td></tr>
+<tr><td>Can Slip</td><td><code>#91</code></td><td>Codex</td><td>Queued</td><td>The scoreboard/header should align cleanly with the top edge of the playfield for arcade fidelity.</td><td>Lock the scoreboard to the gameboard top edge in the UI polish pass.</td><td>Phase 2</td></tr>
             </tbody>
           </table>
         </div>
@@ -1459,7 +1462,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.192.sha.8c6ede7.beta
+          Build: 0.5.0-beta.1+build.202.sha.286ee08.beta
         </p>
       </aside>
     </main>
