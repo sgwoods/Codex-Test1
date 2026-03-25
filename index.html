@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.196.sha.65a9631.dirty</span>
-    <span id="settingsRelease">Mar 25 2026, 5:38 PM EDT</span>
-    <span id="settingsState">main@65a9631 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.198.sha.6b0878e.dirty</span>
+    <span id="settingsRelease">Mar 25 2026, 6:59 PM EDT</span>
+    <span id="settingsState">main@6b0878e dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.196.sha.65a9631.dirty</span>
-    <span id="buildStampRelease">Mar 25 2026, 5:38 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.198.sha.6b0878e.dirty</span>
+    <span id="buildStampRelease">Mar 25 2026, 6:59 PM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.196.sha.65a9631.dirty',commit:'65a96314ee07405ec5e901e33a2e9c385c1de78a',branch:'main',dirty:true,released:'Mar 25 2026, 5:38 PM EDT',state:'main@65a9631 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.198.sha.6b0878e.dirty',commit:'6b0878e4487a3bd0f2aae5e29279a8aaf425c0d3',branch:'main',dirty:true,released:'Mar 25 2026, 6:59 PM EDT',state:'main@6b0878e dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -729,6 +729,8 @@ function logCarryDebugState(reason='tick'){
 }
 window.setCarryDebug=setCarryDebug;
 window.logCarryDebugState=logCarryDebugState;
+window.getCarryRelationState=carryRelationState;
+window.getRescuePodDebugState=rescuePodDebugState;
 function logSnapshot(tag='tick'){
  if(!REC)resetSession();
  REC.snapshots.push(Object.assign({t:recTime(),tag},snapshot()));
@@ -2977,6 +2979,21 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ bannerState(){
+  return {
+   bannerTxt:S.bannerTxt||'',
+   bannerSub:S.bannerSub||'',
+   bannerMode:S.bannerMode||'',
+   banner:+(+S.banner||0).toFixed(3),
+   alertTxt:S.alertTxt||'',
+   alertT:+(+S.alertT||0).toFixed(3)
+  };
+ },
+ carryState(){
+  const carry=typeof window.getCarryRelationState==='function' ? window.getCarryRelationState() : null;
+  const rescue=typeof window.getRescuePodDebugState==='function' ? window.getRescuePodDebugState() : null;
+  return { carry, rescue };
+ },
  spawnPlayerBullet(cfg={}){
   const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
   S.pb.push({x,y,v});
