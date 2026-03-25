@@ -237,6 +237,18 @@ function logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire){
   scriptMode:!!S.scriptMode
  });
 }
+
+function keyHeldMs(...codes){
+ const now=performance.now();
+ let held=0;
+ for(const code of codes){
+  if(!keys[code])continue;
+  const downAt=keyState[code]?.downAt||0;
+  if(!downAt)continue;
+  held=Math.max(held,now-downAt);
+ }
+ return held;
+}
 function harnessSelectTarget(p,cfg){
  return S.e.filter(e=>e.hp>0).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||null;
 }
@@ -725,10 +737,18 @@ function update(dt){
  logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(dt,p);
-  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
+ else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
   else{
    const hp=playerHitbox();
-   const targetVx=manualAxis*p.s;
+   const leftHeld=keyHeldMs('ArrowLeft','KeyA');
+   const rightHeld=keyHeldMs('ArrowRight','KeyD');
+   const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
+   const precisionWindow=p.manualTapWindow*1000;
+   const reverseWindow=p.manualReverseWindow*1000;
+   const reversing=manualAxis&&Math.sign(p.vx)!==0&&Math.sign(p.vx)!==Math.sign(manualAxis);
+   const precisionMove=!!manualAxis&&(heldMs>0&&heldMs<=precisionWindow||reversing&&heldMs<=reverseWindow);
+   const targetSpeed=precisionMove?p.manualTapSpeed:p.s;
+   const targetVx=manualAxis*targetSpeed;
    const blend=Math.min(1,(manualAxis?p.accel:p.decel)*dt);
    p.vx+=(targetVx-p.vx)*blend;
    if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;

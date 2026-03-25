@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.176.sha.9d66355.beta</span>
-    <span id="settingsRelease">Mar 24 2026, 8:13 PM EDT</span>
-    <span id="settingsState">beta@9d66355 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.179.sha.5bcf975.beta</span>
+    <span id="settingsRelease">Mar 24 2026, 8:37 PM EDT</span>
+    <span id="settingsState">beta@5bcf975 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.176.sha.9d66355.beta</span>
-    <span id="buildStampRelease">Mar 24 2026, 8:13 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.179.sha.5bcf975.beta</span>
+    <span id="buildStampRelease">Mar 24 2026, 8:37 PM EDT</span>
   </div>
 </div>
 <script>
@@ -301,7 +301,7 @@ const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
-let t0=0,started=0,paused=0,aud=0,keys={};
+let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 const PRODUCT_NAME='Aurora Galactica';
 const STORAGE_PREFIX='auroraGalactica';
@@ -355,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.176.sha.9d66355.beta',commit:'9d66355d19b5af4a115f346c0941ba9d83af026f',branch:'beta',dirty:false,released:'Mar 24 2026, 8:13 PM EDT',state:'beta@9d66355 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.179.sha.5bcf975.beta',commit:'5bcf97509bf82cbc163b4795de1c50120641459e',branch:'beta',dirty:false,released:'Mar 24 2026, 8:37 PM EDT',state:'beta@5bcf975 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -497,7 +497,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -781,7 +781,7 @@ function showToast(t){
 function openFeedback(){
  if(feedbackOpen)return;
  closeSettings();
- feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};
+ feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};keyState={};
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
@@ -911,6 +911,7 @@ function keyboardTargetIsEditable(target){
 addEventListener('keydown',e=>{
  const typingTarget=keyboardTargetIsEditable(e.target);
  const wasDown=!!keys[e.code];
+ const now=performance.now();
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
@@ -921,6 +922,7 @@ addEventListener('keydown',e=>{
   return;
  }
  keys[e.code]=1;
+ if(!wasDown)keyState[e.code]={downAt:now,upAt:0};
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
@@ -1003,7 +1005,12 @@ addEventListener('keydown',e=>{
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
-addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
+addEventListener('keyup',e=>{
+ keys[e.code]=0;
+ if(!keyState[e.code])keyState[e.code]={downAt:0,upAt:performance.now()};
+ else keyState[e.code].upAt=performance.now();
+ logEvent('key_up',{code:e.code,key:e.key});
+});
 addEventListener('pointerdown',e=>{
  if(!settingsOpen)return;
  if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
@@ -1792,6 +1799,18 @@ function logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire){
   scriptMode:!!S.scriptMode
  });
 }
+
+function keyHeldMs(...codes){
+ const now=performance.now();
+ let held=0;
+ for(const code of codes){
+  if(!keys[code])continue;
+  const downAt=keyState[code]?.downAt||0;
+  if(!downAt)continue;
+  held=Math.max(held,now-downAt);
+ }
+ return held;
+}
 function harnessSelectTarget(p,cfg){
  return S.e.filter(e=>e.hp>0).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||null;
 }
@@ -2280,10 +2299,18 @@ function update(dt){
  logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(dt,p);
-  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
+ else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
   else{
    const hp=playerHitbox();
-   const targetVx=manualAxis*p.s;
+   const leftHeld=keyHeldMs('ArrowLeft','KeyA');
+   const rightHeld=keyHeldMs('ArrowRight','KeyD');
+   const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
+   const precisionWindow=p.manualTapWindow*1000;
+   const reverseWindow=p.manualReverseWindow*1000;
+   const reversing=manualAxis&&Math.sign(p.vx)!==0&&Math.sign(p.vx)!==Math.sign(manualAxis);
+   const precisionMove=!!manualAxis&&(heldMs>0&&heldMs<=precisionWindow||reversing&&heldMs<=reverseWindow);
+   const targetSpeed=precisionMove?p.manualTapSpeed:p.s;
+   const targetVx=manualAxis*targetSpeed;
    const blend=Math.min(1,(manualAxis?p.accel:p.decel)*dt);
    p.vx+=(targetVx-p.vx)*blend;
    if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;

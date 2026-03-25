@@ -5,7 +5,7 @@ const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
-let t0=0,started=0,paused=0,aud=0,keys={};
+let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 const PRODUCT_NAME='Aurora Galactica';
 const STORAGE_PREFIX='auroraGalactica';
@@ -201,7 +201,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -485,7 +485,7 @@ function showToast(t){
 function openFeedback(){
  if(feedbackOpen)return;
  closeSettings();
- feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};
+ feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};keyState={};
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
@@ -615,6 +615,7 @@ function keyboardTargetIsEditable(target){
 addEventListener('keydown',e=>{
  const typingTarget=keyboardTargetIsEditable(e.target);
  const wasDown=!!keys[e.code];
+ const now=performance.now();
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
@@ -625,6 +626,7 @@ addEventListener('keydown',e=>{
   return;
  }
  keys[e.code]=1;
+ if(!wasDown)keyState[e.code]={downAt:now,upAt:0};
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
@@ -707,7 +709,12 @@ addEventListener('keydown',e=>{
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
-addEventListener('keyup',e=>{keys[e.code]=0;logEvent('key_up',{code:e.code,key:e.key});});
+addEventListener('keyup',e=>{
+ keys[e.code]=0;
+ if(!keyState[e.code])keyState[e.code]={downAt:0,upAt:performance.now()};
+ else keyState[e.code].upAt=performance.now();
+ logEvent('key_up',{code:e.code,key:e.key});
+});
 addEventListener('pointerdown',e=>{
  if(!settingsOpen)return;
  if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
