@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.190.sha.13cc0ea.beta</span>
-    <span id="settingsRelease">Mar 24 2026, 9:32 PM EDT</span>
-    <span id="settingsState">beta@13cc0ea clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.192.sha.8c6ede7.beta</span>
+    <span id="settingsRelease">Mar 25 2026, 11:53 AM EDT</span>
+    <span id="settingsState">beta@8c6ede7 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.190.sha.13cc0ea.beta</span>
-    <span id="buildStampRelease">Mar 24 2026, 9:32 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.192.sha.8c6ede7.beta</span>
+    <span id="buildStampRelease">Mar 25 2026, 11:53 AM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.190.sha.13cc0ea.beta',commit:'13cc0eafe56e769d9ef7c007e781e67af138cb7b',branch:'beta',dirty:false,released:'Mar 24 2026, 9:32 PM EDT',state:'beta@13cc0ea clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.192.sha.8c6ede7.beta',commit:'8c6ede7d2347ef1767f6aaee84f37569ca94d8ab',branch:'beta',dirty:false,released:'Mar 25 2026, 11:53 AM EDT',state:'beta@8c6ede7 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -369,7 +369,7 @@ let gameOverHtml='';
 let gameOverState=null;
 const ATTRACT={active:0,phase:'',timer:0,cycle:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
-const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:''};
+const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[]};
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -613,7 +613,17 @@ function enterAttractScores(){
  resetAttractBackdrop();
  logEvent('attract_scores',{cycle:ATTRACT.cycle});
 }
-function startAttractDemo(){
+function runAfterRecordingStops(fn){
+ if(typeof fn!=='function')return;
+ if(!VIDEO_REC.rec&&!VIDEO_REC.active){fn();return;}
+ VIDEO_REC.afterStop.push(fn);
+}
+function flushAfterRecordingStops(){
+ const queued=VIDEO_REC.afterStop.splice(0,VIDEO_REC.afterStop.length);
+ for(const fn of queued)try{fn();}catch{}
+}
+function startAttractDemo(opts={}){
+ const record=opts.record!==false;
  stopRunRecording();
  autoExportedSessionId='';
  resetSession('attract_demo');
@@ -626,8 +636,8 @@ function startAttractDemo(){
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1});
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0});
- logEvent('attract_demo_start',{cycle:ATTRACT.cycle});
- startRunRecording();
+ logEvent('attract_demo_start',{cycle:ATTRACT.cycle,record});
+ if(record)startRunRecording();
  spawnStage();
 }
 window.startAttractDemo=startAttractDemo;
@@ -794,7 +804,7 @@ function syncRecordUi(){
  recordBtn.textContent=supported?(VIDEO_REC.active?'Recording Video...':`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
 }
 function stopRunRecording(){
- if(!VIDEO_REC.active||!VIDEO_REC.rec)return;
+ if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
  VIDEO_REC.active=0;
  if(sfx.recOsc){try{sfx.recOsc.stop();}catch{}try{sfx.recOsc.disconnect();}catch{}sfx.recOsc=null}
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
@@ -815,26 +825,48 @@ function startRunRecording(){
  sfx.recOsc.connect(sfx.recGain);
  sfx.recGain.connect(sfx.tap);
  sfx.recOsc.start();
- VIDEO_REC.mime=pickVideoMime();
+ const mime=pickVideoMime();
+ VIDEO_REC.mime=mime;
  const videoStream=c.captureStream(60),stream=new MediaStream();
  for(const t of videoStream.getVideoTracks())stream.addTrack(t);
  if(sfx.tap)for(const t of sfx.tap.stream.getAudioTracks())stream.addTrack(t);
  VIDEO_REC.stream=stream;
- VIDEO_REC.chunks.length=0;
+ const chunks=[];
+ VIDEO_REC.chunks=chunks;
  VIDEO_REC.sessionId=REC?.id||`run-${Date.now()}`;
  VIDEO_REC.file=`neo-galaga-video-${VIDEO_REC.sessionId}.webm`;
- const rec=VIDEO_REC.mime?new MediaRecorder(VIDEO_REC.stream,{mimeType:VIDEO_REC.mime}):new MediaRecorder(VIDEO_REC.stream);
- rec.ondataavailable=e=>{if(e.data&&e.data.size)VIDEO_REC.chunks.push(e.data);};
+ const file=VIDEO_REC.file;
+ const currentStream=VIDEO_REC.stream;
+ const rec=mime?new MediaRecorder(currentStream,{mimeType:mime}):new MediaRecorder(currentStream);
+ rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  rec.onstop=()=>{
-  const blob=new Blob(VIDEO_REC.chunks,{type:VIDEO_REC.mime||'video/webm'});
-  if(VIDEO_REC.stream){for(const t of VIDEO_REC.stream.getTracks())t.stop();VIDEO_REC.stream=null;}
-  VIDEO_REC.chunks.length=0;
-  if(blob.size>0){downloadBlob(blob,VIDEO_REC.file);showToast('Run video downloaded');}
+  const blob=new Blob(chunks,{type:mime||'video/webm'});
+  if(currentStream)for(const t of currentStream.getTracks())t.stop();
+  if(VIDEO_REC.stream===currentStream)VIDEO_REC.stream=null;
+  if(VIDEO_REC.chunks===chunks)VIDEO_REC.chunks=[];
+  if(blob.size>0){downloadBlob(blob,file);showToast('Run video downloaded');}
+  flushAfterRecordingStops();
  };
  rec.start(1000);
  VIDEO_REC.rec=rec;
  VIDEO_REC.active=1;
  syncRecordUi();
+}
+function exportAndReturnToWaitMode(reason='manual_capture_reset'){
+ if(!REC)resetSession();
+ logEvent('capture_export_reset',{reason,started:!!started,attract:!!ATTRACT.active,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1)});
+ exportSession({silent:1});
+ const finish=()=>{
+  if(feedbackOpen)closeFeedback();
+  if(settingsOpen)closeSettings();
+  gameOverHtml='';gameOverState=null;
+  startAttractDemo({record:false});
+  showToast('Run exported, returned to wait mode');
+ };
+ if(VIDEO_REC.rec||VIDEO_REC.active){
+  runAfterRecordingStops(finish);
+  stopRunRecording();
+ }else finish();
 }
 
 function setFeedbackStatus(t='',err=0){
@@ -986,6 +1018,7 @@ addEventListener('keydown',e=>{
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(!typingTarget&&e.code==='KeyX'&&(started||ATTRACT.active)){e.preventDefault();exportAndReturnToWaitMode('manual_hotkey');return;}
  if(typingTarget){
   if(e.code==='Escape'&&settingsOpen){e.preventDefault();closeSettings();}
   return;
@@ -2867,7 +2900,12 @@ window.__galagaHarness__={
  },
  startAttractDemo(cfg={}){
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-attract');
-  window.startAttractDemo();
+  window.startAttractDemo({record:cfg.record!==false});
+  return true;
+ },
+ exportAndReset(cfg={}){
+  const label=typeof cfg==='string'?cfg:(cfg.label||'harness_export_reset');
+  exportAndReturnToWaitMode(label);
   return true;
  },
  setupWaitModeCarriedBossTest(cfg={}){
