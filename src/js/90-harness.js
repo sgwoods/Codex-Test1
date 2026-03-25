@@ -24,7 +24,12 @@ window.__galagaHarness__={
  },
  startAttractDemo(cfg={}){
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-attract');
-  window.startAttractDemo();
+  window.startAttractDemo({record:cfg.record!==false});
+  return true;
+ },
+ exportAndReset(cfg={}){
+  const label=typeof cfg==='string'?cfg:(cfg.label||'harness_export_reset');
+  exportAndReturnToWaitMode(label);
   return true;
  },
  setupWaitModeCarriedBossTest(cfg={}){

@@ -1,0 +1,16 @@
+{
+  "name": "capture-escape-evidence",
+  "seed": 9022,
+  "duration": 5,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.15, "action": "harness", "method": "setupCaptureEscapeTest", "args": { "stage": 4, "playerX": 140, "bossX": 140, "playerY": 186, "bossY": 110, "capT": 0.95, "beamT": 1.2 } },
+    { "t": 0.35, "action": "harness", "method": "spawnPlayerBullet", "args": { "x": 140, "y": 156, "v": 560 } },
+    { "t": 1.8, "action": "harness", "method": "exportAndReset", "args": { "label": "capture-escape-evidence" } },
+    { "t": 3.2, "action": "harness", "method": "stop", "args": "capture-escape-evidence" }
+  ]
+}
