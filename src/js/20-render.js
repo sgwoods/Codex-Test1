@@ -107,6 +107,41 @@ function drawCaptureTether(){
  ctx.fillStyle='rgba(145,236,255,.09)';
  ctx.beginPath();ctx.moveTo(bx-7,by);ctx.lineTo(bx+7,by);ctx.lineTo(px+10,py);ctx.lineTo(px-10,py);ctx.closePath();ctx.fill();
 }
+
+function drawCarryDebugOverlay(){
+ if(!window.__auroraCarryDebug)return;
+ const p=S.p;
+ ctx.save();
+ ctx.font='10px monospace';
+ ctx.textAlign='center';
+ ctx.textBaseline='bottom';
+ if(p.captured&&p.capBoss&&p.capBoss.hp>0){
+  const relation=p.y>p.capBoss.y?'below':'above';
+  ctx.strokeStyle=relation==='below'?'#ff5e5e':'#5ef0a4';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(Math.round(p.capBoss.x),Math.round(p.capBoss.y));
+  ctx.lineTo(Math.round(p.x),Math.round(p.y));
+  ctx.stroke();
+  ctx.fillStyle=relation==='below'?'#ffb3b3':'#b8ffd8';
+  ctx.fillText(`CAPTURE ${relation.toUpperCase()} d${p.capBoss.dive||0}`,Math.round(p.capBoss.x),Math.round(p.capBoss.y-24));
+ }
+ for(const e of S.e){
+  if(e.hp<=0||!e.carry)continue;
+  const target=carriedFighterTarget(e);
+  if(!target)continue;
+  const relation=target.y<e.y?'above':'below';
+  ctx.strokeStyle=relation==='above'?'#5ef0a4':'#ff5e5e';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(Math.round(e.x),Math.round(e.y));
+  ctx.lineTo(Math.round(target.x),Math.round(target.y));
+  ctx.stroke();
+  ctx.fillStyle=relation==='above'?'#b8ffd8':'#ffb3b3';
+  ctx.fillText(`CARRY ${relation.toUpperCase()} d${e.dive||0}`,Math.round(e.x),Math.round(e.y-24));
+ }
+ ctx.restore();
+}
 function drawRescuePod(){
  if(!S.cap)return;
  ctx.save();
@@ -201,6 +236,7 @@ function draw(){
  for(const b of S.eb){const x=Math.round(b.x),y=Math.round(b.y);ctx.fillStyle='#ff5e5e';ctx.fillRect(x,y-10,1,13)}
  for(const e of S.e)if(e.hp>0)drawEnemy(e);
  drawCaptureTether();
+ drawCarryDebugOverlay();
  const p=S.p;if((!p.pending||p.spawn<=.3)&&!p.spawn){if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0)}
  if(p.captured)drawPlayerBody(p.x,p.y,0,1);
  drawBadges(S.stage);

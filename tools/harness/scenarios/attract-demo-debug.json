@@ -1,0 +1,15 @@
+{
+  "name": "attract-demo-debug",
+  "seed": 9011,
+  "duration": 12,
+  "config": {
+    "stage": 1,
+    "ships": 3,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.1, "action": "harness", "method": "startAttractDemo", "args": { "debugCarry": true } },
+    { "t": 11.0, "action": "harness", "method": "export" },
+    { "t": 11.2, "action": "harness", "method": "stop", "args": "attract-demo-debug" }
+  ]
+}

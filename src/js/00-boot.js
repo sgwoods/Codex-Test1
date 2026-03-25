@@ -7,6 +7,7 @@ const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=doc
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
+window.__auroraCarryDebug=window.__auroraCarryDebug||0;
 const PRODUCT_NAME='Aurora Galactica';
 const STORAGE_PREFIX='auroraGalactica';
 const LEGACY_STORAGE_PREFIX='galagaTrib';
@@ -330,8 +331,10 @@ function startAttractDemo(){
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0});
  logEvent('attract_demo_start',{cycle:ATTRACT.cycle});
+ startRunRecording();
  spawnStage();
 }
+window.startAttractDemo=startAttractDemo;
 function stopAttractLoop(){
  ATTRACT.active=0;
  ATTRACT.phase='';
@@ -354,6 +357,52 @@ function logEvent(type,data={}){
  if(!REC)resetSession();
  REC.events.push(Object.assign({t:recTime(),type},data));
 }
+let carryDebugLastState='';
+function setCarryDebug(enabled,label='manual'){
+ window.__auroraCarryDebug=enabled?1:0;
+ carryDebugLastState='';
+ logEvent('carry_debug_toggle',{enabled:!!enabled,label});
+}
+function carryRelationState(){
+ const p=S.p;
+ if(p.captured&&p.capBoss&&p.capBoss.hp>0){
+  return {
+   mode:'captured',
+   bossId:p.capBoss.id,
+   bossX:+p.capBoss.x.toFixed(2),
+   bossY:+p.capBoss.y.toFixed(2),
+   fighterX:+p.x.toFixed(2),
+   fighterY:+p.y.toFixed(2),
+   relation:p.y>p.capBoss.y?'below':'above',
+   dive:p.capBoss.dive||0
+  };
+ }
+ const carryingBoss=S.e.find(e=>e.hp>0&&e.carry);
+ if(carryingBoss){
+  const target=typeof carriedFighterTarget==='function'?carriedFighterTarget(carryingBoss):null;
+  return {
+   mode:'carried',
+   bossId:carryingBoss.id,
+   bossX:+carryingBoss.x.toFixed(2),
+   bossY:+carryingBoss.y.toFixed(2),
+   fighterX:target?+target.x.toFixed(2):null,
+   fighterY:target?+target.y.toFixed(2):null,
+   relation:target&&target.y<carryingBoss.y?'above':'below',
+   dive:carryingBoss.dive||0
+  };
+ }
+ return null;
+}
+function logCarryDebugState(reason='tick'){
+ if(!window.__auroraCarryDebug)return;
+ const state=carryRelationState();
+ const key=state?`${state.mode}:${state.bossId}:${state.relation}:${state.dive}`:'none';
+ if(key===carryDebugLastState&&reason==='tick')return;
+ carryDebugLastState=key;
+ logEvent('carry_relation_state',Object.assign({reason},state||{mode:'none'}));
+}
+window.setCarryDebug=setCarryDebug;
+window.logCarryDebugState=logCarryDebugState;
 function logSnapshot(tag='tick'){
  if(!REC)resetSession();
  REC.snapshots.push(Object.assign({t:recTime(),tag},snapshot()));

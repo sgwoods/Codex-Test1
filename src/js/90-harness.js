@@ -2,11 +2,12 @@
 window.__galagaHarness__={
  start(cfg={}){
   if(cfg.seed!==undefined)setSeed(cfg.seed);
-  if(typeof cfg.autoVideo==='boolean'){
+ if(typeof cfg.autoVideo==='boolean'){
    VIDEO_REC.enabled=!!cfg.autoVideo;
    localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
    syncRecordUi();
   }
+  if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
  if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   testShips.value=cl(+cfg.ships||3,1,9)|0;
@@ -16,6 +17,16 @@ window.__galagaHarness__={
  window.__auroraHarnessPersona=(cfg.persona||'').toLowerCase();
  if(!started)start();
 },
+ setCarryDebug(cfg={}){
+  const enabled=typeof cfg.enabled==='boolean'?cfg.enabled:!!cfg;
+  window.setCarryDebug(enabled,'harness');
+  return enabled;
+ },
+ startAttractDemo(cfg={}){
+  if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-attract');
+  window.startAttractDemo();
+  return true;
+ },
  stop(label='harness'){
   logEvent('harness_stop',{label});
   logSnapshot('harness_stop');

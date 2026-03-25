@@ -665,6 +665,7 @@ function updateEnemy(e,dt,t,T,p){
 
 function update(dt){
  if((!started&&!S.attract)||paused)return;
+ logCarryDebugState();
  recShotT-=dt;
  if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
