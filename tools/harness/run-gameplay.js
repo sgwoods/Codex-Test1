@@ -188,7 +188,9 @@ async function main(){
   if(args.persona) spec.config.persona = String(args.persona).toLowerCase();
   const outBase = path.resolve(args.out || DEFAULT_OUT);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const outDir = path.join(outBase, `${spec.name}-${stamp}`);
+  const personaTag = spec.config?.persona ? `-${String(spec.config.persona).toLowerCase()}` : '';
+  const seedTag = spec.seed ? `-seed${spec.seed}` : '';
+  const outDir = path.join(outBase, `${spec.name}${personaTag}${seedTag}-${stamp}`);
   fs.mkdirSync(outDir, { recursive: true });
 
   const { server, port } = await serve(ROOT);
