@@ -433,6 +433,8 @@ function logCarryDebugState(reason='tick'){
 }
 window.setCarryDebug=setCarryDebug;
 window.logCarryDebugState=logCarryDebugState;
+window.getCarryRelationState=carryRelationState;
+window.getRescuePodDebugState=rescuePodDebugState;
 function logSnapshot(tag='tick'){
  if(!REC)resetSession();
  REC.snapshots.push(Object.assign({t:recTime(),tag},snapshot()));

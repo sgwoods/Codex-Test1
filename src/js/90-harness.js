@@ -101,6 +101,21 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ bannerState(){
+  return {
+   bannerTxt:S.bannerTxt||'',
+   bannerSub:S.bannerSub||'',
+   bannerMode:S.bannerMode||'',
+   banner:+(+S.banner||0).toFixed(3),
+   alertTxt:S.alertTxt||'',
+   alertT:+(+S.alertT||0).toFixed(3)
+  };
+ },
+ carryState(){
+  const carry=typeof window.getCarryRelationState==='function' ? window.getCarryRelationState() : null;
+  const rescue=typeof window.getRescuePodDebugState==='function' ? window.getRescuePodDebugState() : null;
+  return { carry, rescue };
+ },
  spawnPlayerBullet(cfg={}){
   const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
   S.pb.push({x,y,v});
