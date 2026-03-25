@@ -205,6 +205,38 @@ function harnessPersonaCfg(){
 function harnessTargetScore(e,p,cfg){
  return (e.dive?cfg.diveBias:0)+(e.carry?cfg.carryBias:0)+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
 }
+function logProfessionalDecision(p,cfg,reason,extra={}){
+ if(cfg?.name!=='professional')return;
+ if(p.hDebugT>0)return;
+ p.hDebugT=.75;
+ logEvent('harness_professional_decision',Object.assign({
+  stage:S.stage,
+  score:S.score,
+  lives:Math.max(0,S.lives+1),
+  playerX:+p.x.toFixed(2),
+  playerLane:playLane(p.x),
+  noShotFor:+p.hNoShotT.toFixed(3),
+  reason
+ },extra));
+}
+function logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire){
+ if(harnessPersona?.name!=='professional')return;
+ if(p.hDebugT>0)return;
+ p.hDebugT=.75;
+ logEvent('harness_professional_handoff',{
+  stage:S.stage,
+  score:S.score,
+  lives:Math.max(0,S.lives+1),
+  playerX:+p.x.toFixed(2),
+  playerLane:playLane(p.x),
+  spawn:+p.spawn.toFixed(3),
+  captured:!!p.captured,
+  returning:!!p.returning,
+  manualAxis,
+  manualFire:!!manualFire,
+  scriptMode:!!S.scriptMode
+ });
+}
 function harnessSelectTarget(p,cfg){
  return S.e.filter(e=>e.hp>0).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||null;
 }
@@ -223,14 +255,48 @@ function harnessMoveAxis(p,cfg){
 }
 function runHarnessPlayer(dt,p,cfg){
  if(p.spawn>0||p.captured)return;
+ p.hNoShotT=(p.hNoShotT||0)+dt;
+ p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
  const axis=harnessMoveAxis(p,cfg);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
- const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY)).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||harnessSelectTarget(p,cfg);
- if(!target||p.cd>0||S.pb.length>=bulletsMax())return;
+ const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
+ const target=attackables.sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||harnessSelectTarget(p,cfg);
+ logProfessionalDecision(p,cfg,'tick',{
+  attackables:attackables.length,
+  targetId:target?target.id:null,
+  targetX:target?+target.x.toFixed(2):null,
+  targetDx:target?+(target.x-p.x).toFixed(2):null,
+  axis,
+  cooldown:+p.cd.toFixed(3),
+  playerBullets:S.pb.length
+ });
+ if(!target){
+  logProfessionalDecision(p,cfg,'no_target',{attackables:attackables.length});
+  return;
+ }
+ if(p.cd>0){
+  logProfessionalDecision(p,cfg,'cooldown',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),cooldown:+p.cd.toFixed(3)});
+  return;
+ }
+ if(S.pb.length>=bulletsMax()){
+  logProfessionalDecision(p,cfg,'bullet_cap',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length});
+  return;
+ }
  const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
  const fireChance=S.challenge?cfg.challengeFireChance:cfg.fireChance;
- if(Math.abs(target.x-p.x)<=tol&&randUnit()<=fireChance)shoot();
+ const dx=Math.abs(target.x-p.x);
+ if(dx<=tol){
+  if(randUnit()<=fireChance){
+   shoot();
+   p.hNoShotT=0;
+   logProfessionalDecision(p,cfg,'shot',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol});
+  }else{
+   logProfessionalDecision(p,cfg,'fire_roll_miss',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,fireChance});
+  }
+  return;
+ }
+ logProfessionalDecision(p,cfg,'not_aligned',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,axis});
 }
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
@@ -647,6 +713,7 @@ function update(dt){
  const harnessPersona=harnessPersonaCfg();
  const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);
  const manualFire=!!keys.Space;
+ logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(dt,p);
   else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
