@@ -1,0 +1,15 @@
+{
+  "name": "close-shot-hit",
+  "seed": 9048,
+  "duration": 2,
+  "config": {
+    "stage": 1,
+    "ships": 3,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.12, "action": "harness", "method": "setupCloseShotTest", "args": { "stage": 1, "playerX": 140, "playerY": 340, "enemyX": 140, "enemyY": 322, "enemyVy": 18 } },
+    { "t": 0.18, "action": "press", "code": "Space", "hold": 0.05 },
+    { "t": 0.85, "action": "harness", "method": "stop", "args": "close-shot-hit" }
+  ]
+}

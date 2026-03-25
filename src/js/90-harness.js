@@ -101,6 +101,10 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ recentEvents(cfg={}){
+  const count=Math.max(1,Math.min(200,+cfg.count||20));
+  return REC ? REC.events.slice(-count) : [];
+ },
  bannerState(){
   return {
    bannerTxt:S.bannerTxt||'',
@@ -115,6 +119,30 @@ window.__galagaHarness__={
   const carry=typeof window.getCarryRelationState==='function' ? window.getCarryRelationState() : null;
   const rescue=typeof window.getRescuePodDebugState==='function' ? window.getRescuePodDebugState() : null;
   return { carry, rescue };
+ },
+ squadronState(){
+  const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
+  if(!boss)return null;
+  const escorts=S.e
+   .filter(e=>e.hp>0&&e.squadId===boss.squadId&&e.id!==boss.id)
+   .map(e=>({
+    id:e.id,
+    x:+e.x.toFixed(2),
+    y:+e.y.toFixed(2),
+    off:+(+e.off||0).toFixed(2),
+    lead:e.lead||null,
+    dive:e.dive||0
+   }));
+  return {
+   boss:{
+    id:boss.id,
+    x:+boss.x.toFixed(2),
+    y:+boss.y.toFixed(2),
+    squadId:boss.squadId,
+    dive:boss.dive||0
+   },
+   escorts
+  };
  },
  spawnPlayerBullet(cfg={}){
   const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
@@ -156,6 +184,66 @@ window.__galagaHarness__={
   ex(boss.x,boss.y,8,'#fff4a8');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
+  return true;
+ },
+ triggerSquadronBossKill(){
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss'&&e.squadId);
+  if(!boss)return false;
+  boss.hp=0;
+  awardKill(boss,boss.dive);
+  ex(boss.x,boss.y,16,'#ff8cd7');
+  logEvent('harness_trigger_squadron_boss_kill',{boss:boss.id,squadId:boss.squadId,dive:boss.dive});
+  return true;
+ },
+ setupCloseShotTest(cfg={}){
+  const p=S.p;
+  const enemy=S.e.find(e=>e.hp>0&&e.t!=='boss')||S.e.find(e=>e.hp>0);
+  if(!enemy)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);
+  p.y=+cfg.playerY||PLAY_H-VIS.playerBottom;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.spawn=0;
+  p.capBoss=null;
+  p.capT=0;
+  p.inv=0;
+  p.cd=0;
+  p.returning=0;
+  p.vx=0;
+  S.cap=null;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.att=0;
+  S.recoverT=0;
+  S.attackGapT=0;
+  S.stage=Math.max(1,+cfg.stage||1);
+  S.stageClock=0;
+  for(const e of S.e)if(e.id!==enemy.id)e.hp=0;
+  enemy.hp=1;
+  enemy.max=1;
+  enemy.form=1;
+  enemy.beam=0;
+  enemy.beamT=0;
+  enemy.carry=0;
+  enemy.low=0;
+  enemy.esc=0;
+  enemy.shot=0;
+  enemy.dive=1;
+  enemy.x=cl(+cfg.enemyX||p.x,18,PLAY_W-18);
+  enemy.y=+cfg.enemyY||(p.y-18);
+  enemy.vx=+cfg.enemyVx||0;
+  enemy.vy=+cfg.enemyVy||20;
+  logEvent('harness_close_shot_setup',{
+   stage:S.stage,
+   enemyId:enemy.id,
+   enemyType:enemy.t,
+   playerX:+p.x.toFixed(2),
+   playerY:+p.y.toFixed(2),
+   enemyX:+enemy.x.toFixed(2),
+   enemyY:+enemy.y.toFixed(2),
+   enemyVy:+enemy.vy.toFixed(2)
+  });
   return true;
  },
  forcePerfectChallengeClear(){

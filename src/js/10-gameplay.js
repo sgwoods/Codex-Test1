@@ -108,7 +108,7 @@ function start(){
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
  S.harnessPersona=(window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
- Object.assign(S.p,{inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
+ Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
@@ -340,13 +340,22 @@ function shoot(){
  const captureWindow=!!(p.captured&&p.capBoss&&p.capBoss.hp>0&&p.capT>.55);
  if(p.cd>0||p.spawn>0||p.returning||(!captureWindow&&p.captured))return;
  if(S.pb.length>=bulletsMax())return;
- p.cd=S.challenge?.095:.24;const y=p.y-40;
+ p.cd=S.challenge?.095:.24;const y=p.y-18;
  const shotXs=dualShotOffsets().map(off=>p.x+off);
  S.stats.shots+=p.dual?2:1;
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
  logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length,captureWindow});
  sfx.shot();
+}
+
+function playerBulletSegment(b){
+ const x=+b.x||0,y=+b.y||0;
+ return {x,top:y-16,bottom:y+2};
+}
+
+function segmentHitsTarget(seg,targetX,targetY,targetW,targetH){
+ return Math.abs(seg.x-targetX)<targetW && seg.bottom>targetY-targetH && seg.top<targetY+targetH;
 }
 
 function hasCarriedFighter(){
@@ -853,20 +862,21 @@ function update(dt){
  }
 
  for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
+  const seg=playerBulletSegment(b);
   for(const e of S.e){
    if(e.hp<=0)continue;
    const cf=carriedFighterTarget(e);
    // Check the carried fighter before the boss body so manual scoring can
    // distinguish "shot the rescued fighter" from "killed the boss."
-   if(cf&&Math.abs(b.x-cf.x)<cf.w&&Math.abs(b.y-cf.y)<cf.h){
+   if(cf&&segmentHitsTarget(seg,cf.x,cf.y,cf.w,cf.h)){
     S.stats.hits++;
     S.pb.splice(i,1);
     destroyCarriedFighter(e);
     break;
    }
    const h=enemyHitbox(e);
-   if(e.carry&&b.y>=e.y+8)continue;
-   if(Math.abs(b.x-e.x)<h.w&&Math.abs(b.y-e.y)<h.h){
+   if(e.carry&&seg.top>=e.y+8)continue;
+   if(segmentHitsTarget(seg,e.x,e.y,h.w,h.h)){
     S.stats.hits++;
     S.pb.splice(i,1);
     const hpBefore=e.hp;
