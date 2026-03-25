@@ -1,0 +1,16 @@
+{
+  "name": "capture-escape-recovery",
+  "seed": 9032,
+  "duration": 4,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.15, "action": "harness", "method": "setupCaptureEscapeTest", "args": { "stage": 4, "playerX": 140, "bossX": 140, "playerY": 186, "bossY": 110, "capT": 0.95, "beamT": 1.2, "keepAlive": 1 } },
+    { "t": 0.35, "action": "harness", "method": "spawnPlayerBullet", "args": { "x": 140, "y": 156, "v": 560 } },
+    { "t": 2.35, "action": "press", "code": "Space", "hold": 0.08 },
+    { "t": 3.2, "action": "harness", "method": "stop", "args": "capture-escape-recovery" }
+  ]
+}

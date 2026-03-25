@@ -14,6 +14,7 @@
     "harness:import-latest": "node tools/harness/import-latest-run.js",
     "harness:tune": "node tools/harness/tuning-report.js",
     "harness:check:challenge-collision": "node tools/harness/check-challenge-collision.js",
+    "harness:check:capture-escape": "node tools/harness/check-capture-escape.js",
     "harness": "node tools/harness/run-gameplay.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
