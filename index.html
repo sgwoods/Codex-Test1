@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.188.sha.af6728e.dirty</span>
-    <span id="settingsRelease">Mar 24 2026, 9:14 PM EDT</span>
-    <span id="settingsState">main@af6728e dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.190.sha.13cc0ea.dirty</span>
+    <span id="settingsRelease">Mar 24 2026, 9:32 PM EDT</span>
+    <span id="settingsState">main@13cc0ea dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.188.sha.af6728e.dirty</span>
-    <span id="buildStampRelease">Mar 24 2026, 9:14 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.190.sha.13cc0ea.dirty</span>
+    <span id="buildStampRelease">Mar 24 2026, 9:32 PM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.188.sha.af6728e.dirty',commit:'af6728eb1fe10c3bf569bd5e64c2bb8359c5e22b',branch:'main',dirty:true,released:'Mar 24 2026, 9:14 PM EDT',state:'main@af6728e dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.190.sha.13cc0ea.dirty',commit:'13cc0eafe56e769d9ef7c007e781e67af138cb7b',branch:'main',dirty:true,released:'Mar 24 2026, 9:32 PM EDT',state:'main@13cc0ea dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -654,9 +654,11 @@ function logEvent(type,data={}){
  REC.events.push(Object.assign({t:recTime(),type},data));
 }
 let carryDebugLastState='';
+let rescueDebugLastState='';
 function setCarryDebug(enabled,label='manual'){
  window.__auroraCarryDebug=enabled?1:0;
  carryDebugLastState='';
+ rescueDebugLastState='';
  logEvent('carry_debug_toggle',{enabled:!!enabled,label});
 }
 function carryRelationState(){
@@ -689,6 +691,18 @@ function carryRelationState(){
  }
  return null;
 }
+function rescuePodDebugState(){
+ if(!S.cap)return null;
+ return {
+  mode:'rescue_pod',
+  x:+S.cap.x.toFixed(2),
+  y:+S.cap.y.toFixed(2),
+  podMode:S.cap.mode||'fall',
+  side:S.cap.side||0,
+  playerX:+S.p.x.toFixed(2),
+  playerY:+S.p.y.toFixed(2)
+ };
+}
 function logCarryDebugState(reason='tick'){
  if(!window.__auroraCarryDebug)return;
  const state=carryRelationState();
@@ -696,6 +710,12 @@ function logCarryDebugState(reason='tick'){
  if(key===carryDebugLastState&&reason==='tick')return;
  carryDebugLastState=key;
  logEvent('carry_relation_state',Object.assign({reason},state||{mode:'none'}));
+ const rescueState=rescuePodDebugState();
+ const rescueKey=rescueState?`${rescueState.podMode}:${rescueState.x}:${rescueState.y}`:'none';
+ if(rescueKey!==rescueDebugLastState||reason!=='tick'){
+  rescueDebugLastState=rescueKey;
+  logEvent('rescue_pod_state',Object.assign({reason},rescueState||{mode:'none'}));
+ }
 }
 window.setCarryDebug=setCarryDebug;
 window.logCarryDebugState=logCarryDebugState;
@@ -2017,10 +2037,10 @@ function specialSquadronTuning(stage=S.stage){
 
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- // Only active downward dive states rotate the boss sprite. Return/standby
- // states should keep the carried fighter tucked above the docked boss.
- const divingDown=e.dive===1||e.dive===4;
- return divingDown ? {x:0,y:16} : {x:0,y:-18};
+ // Once a fighter is fully carried, keep it tucked above/behind the boss in
+ // both formation and attack movement. The beam-up phase is handled by the
+ // live player capture state, not by the carried-fighter sprite.
+ return {x:0,y:-18};
 }
 
 function carriedFighterTarget(e){
@@ -2670,6 +2690,17 @@ function drawCarryDebugOverlay(){
   ctx.fillStyle=relation==='above'?'#b8ffd8':'#ffb3b3';
   ctx.fillText(`CARRY ${relation.toUpperCase()} d${e.dive||0}`,Math.round(e.x),Math.round(e.y-24));
  }
+ if(S.cap){
+  const label=S.cap.mode==='dock'?'RESCUE DOCK':'RESCUE FALL';
+  ctx.strokeStyle='#ffd36a';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(Math.round(S.cap.x),Math.round(S.cap.y));
+  ctx.lineTo(Math.round(S.p.x),Math.round(S.p.y));
+  ctx.stroke();
+  ctx.fillStyle='#ffe6a8';
+  ctx.fillText(label,Math.round(S.cap.x),Math.round(S.cap.y-18));
+ }
  ctx.restore();
 }
 function drawRescuePod(){
@@ -2839,6 +2870,64 @@ window.__galagaHarness__={
   window.startAttractDemo();
   return true;
  },
+ setupWaitModeCarriedBossTest(cfg={}){
+  started=0;
+  paused=0;
+  ATTRACT.active=1;
+  ATTRACT.phase='demo';
+  ATTRACT.timer=Math.max(2,+cfg.timer||9);
+  S.attract=1;
+  S.challenge=0;
+  S.cap=null;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=Math.max(S.recoverT,4);
+  S.attackGapT=Math.max(S.attackGapT,4);
+  const bosses=S.e.filter(e=>e.hp>0&&e.t==='boss');
+  if(!bosses.length)return false;
+  const boss=bosses.sort((a,b)=>Math.abs((a.tx||a.x)-PLAY_W/2)-Math.abs((b.tx||b.x)-PLAY_W/2))[0];
+  for(const e of S.e){
+   if(e.hp<=0)continue;
+   e.form=1;
+   e.dive=0;
+   e.beam=0;
+   e.beamT=0;
+   e.low=0;
+   e.esc=0;
+   e.shot=0;
+   e.carry=e.id===boss.id?1:0;
+   e.x=e.tx;
+   e.y=e.ty;
+   e.vx=0;
+   e.vy=0;
+   e.cool=99;
+  }
+  Object.assign(S.p,{
+   x:PLAY_W/2,
+   y:PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  logEvent('harness_wait_mode_carried_boss_setup',{
+   boss:boss.id,
+   bossX:+boss.x.toFixed(2),
+   bossY:+boss.y.toFixed(2),
+   stage:S.stage,
+   attractPhase:ATTRACT.phase
+  });
+  if(window.__auroraCarryDebug)logCarryDebugState('wait-mode-setup');
+  return true;
+ },
  stop(label='harness'){
   logEvent('harness_stop',{label});
   logSnapshot('harness_stop');
@@ -2920,6 +3009,33 @@ window.__galagaHarness__={
   const p=S.p;
   S.cap={x:cl(+cfg.x||p.x,18,PLAY_W-18),y:+cfg.y||Math.max(28,p.y-56),vy:+cfg.vy||78,t:+cfg.t||8};
   logEvent('harness_spawn_rescue',{x:+S.cap.x.toFixed(2),y:+S.cap.y.toFixed(2),vy:+S.cap.vy.toFixed(2)});
+ },
+ setupWaitModeDockingRescuePodTest(cfg={}){
+  started=0;
+  paused=0;
+  ATTRACT.active=1;
+  ATTRACT.phase='demo';
+  ATTRACT.timer=Math.max(2,+cfg.timer||9);
+  S.attract=1;
+  const p=S.p;
+  S.cap={
+   mode:'dock',
+   x:cl(+cfg.x||PLAY_W/2,18,PLAY_W-18),
+   y:+cfg.y||112,
+   vx:+cfg.vx||0,
+   vy:+cfg.vy||0,
+   t:+cfg.t||8,
+   spin:+cfg.spin||0,
+   side:+cfg.side||1
+  };
+  logEvent('harness_wait_mode_rescue_pod_setup',{
+   x:+S.cap.x.toFixed(2),
+   y:+S.cap.y.toFixed(2),
+   side:S.cap.side,
+   mode:S.cap.mode
+  });
+  if(window.__auroraCarryDebug)logCarryDebugState('wait-mode-rescue-setup');
+  return true;
  },
  setupCaptureRescueDualTest(cfg={}){
   const p=S.p;
