@@ -193,6 +193,8 @@ Current beta-review cluster:
 
 - `#40` capture / rescue feedback
 - `#73` shoot during beam-up
+- `#77` capture escape drop-back recovery
+- `#80` wait-mode carried fighter dock direction
 - `#74` bonus spacing
 - `#47` special squadron spacing
 - `#45` boss damaged-text linger
@@ -200,21 +202,21 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#77` keyboard tap precision and reversal overshoot
+1. `#80` wait-mode carried fighter dock direction
 2. `#18` Stage `4` fairness
 3. `#76` production vs non-production data separation design
 4. `#9` remaining challenge-stage fidelity
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
-| Must Fix | `#77` | Codex | Open | Manual beta play still shows single-tap overshoot when lining up under a single descending target; first retune regressed the Stage `2` guardrail and was reverted. | Rework manual movement for finer tap precision and stronger reversal braking without destabilizing Stage `2`. | Phase 1 |
+| Must Fix | `#80` | Codex | Open | Manual beta play still shows the carried fighter on the wrong side of the boss in wait mode / upper dock presentation. | Fix the wait-mode carried-fighter anchor so docked and dropping bosses keep the fighter above/behind them. | Phase 3 |
 | Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
 | Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
 | Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |
 | Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
 | Must Fix | `#78` | Codex | Beta review | Challenge-stage collisions are lethal again in harness while enemy fire remains disabled. | Verify live challenge-stage collision behavior and post-hit flow in beta. | Phase 1 |
 | Must Fix | `#40` | Codex | Beta review | Capture / rescue now has clearer banners, but the live read still needs confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |
-| Must Fix | `#79` | Codex | Beta review | Capture-break recovery now returns cleanly in harness instead of stranding the ship mid-screen. | Verify the beam-escape drop-back animation and control return in beta. | Phase 3 |
+| Must Fix | `#77` | Codex | Beta review | Capture-break recovery now returns cleanly in harness instead of stranding the ship mid-screen. | Verify the beam-escape drop-back animation and control return in beta. | Phase 3 |
 | Must Fix | `#74` | Codex | Beta review | Bonus/special squadron spacing was tightened and now needs a live feel check. | Confirm the tighter bonus grouping in beta play. | Phase 2 |
 | Must Fix | `#47` | Codex | Beta review | Special squadron presentation is tighter, but needs manual release judgment. | Confirm squadron readability and bonus feel in beta. | Phase 2 |
 | Must Fix | `#45` | Codex | Beta review | The lingering boss-damaged text was removed in the latest feedback pass. | Confirm boss first-hit feedback reads cleanly in beta. | Phase 2 |
@@ -222,6 +224,7 @@ Current coding priority once those beta checks are confirmed:
 | Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
 | Should Fix | `#73` | Codex | Beta review | Early tractor-beam escape is implemented and harness-passing. | Verify the feel of the shoot-to-save window in beta. | Phase 3 |
+| Should Fix | `#79` | Codex | Beta review | Manual beta play says keyboard control is better, but fine single-tap alignment still needs a final confidence check. | Keep the current manual-control baseline and revisit only if new live evidence says the feel is still off. | Phase 1 |
 | Should Fix | `#4` | Shared | Watch | Stage `1` feels acceptable manually, with mixed harness urgency. | Revisit only if evidence worsens. | Phase 1 |
 | Should Fix | `#62` | Shared | Watch | Self-play can still fail early in Stage `1`. | Keep the persona baseline in view while tuning. | Phase 1 |
 | Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
