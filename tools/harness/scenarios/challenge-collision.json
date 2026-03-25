@@ -1,0 +1,14 @@
+{
+  "name": "challenge-collision",
+  "seed": 9031,
+  "duration": 3,
+  "stopOnGameOver": true,
+  "config": {
+    "stage": 3,
+    "ships": 3,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.15, "action": "harness", "method": "setupChallengeCollisionTest", "args": { "stage": 3, "playerX": 140 } }
+  ]
+}

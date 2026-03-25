@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.192.sha.8c6ede7.dirty</span>
-    <span id="settingsRelease">Mar 25 2026, 11:53 AM EDT</span>
-    <span id="settingsState">main@8c6ede7 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.193.sha.5d229e9.dirty</span>
+    <span id="settingsRelease">Mar 25 2026, 4:02 PM EDT</span>
+    <span id="settingsState">main@5d229e9 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.192.sha.8c6ede7.dirty</span>
-    <span id="buildStampRelease">Mar 25 2026, 11:53 AM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.193.sha.5d229e9.dirty</span>
+    <span id="buildStampRelease">Mar 25 2026, 4:02 PM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.192.sha.8c6ede7.dirty',commit:'8c6ede7d2347ef1767f6aaee84f37569ca94d8ab',branch:'main',dirty:true,released:'Mar 25 2026, 11:53 AM EDT',state:'main@8c6ede7 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.193.sha.5d229e9.dirty',commit:'5d229e997c8d37cb3b73c99f643e28397ad3d8ff',branch:'main',dirty:true,released:'Mar 25 2026, 4:02 PM EDT',state:'main@5d229e9 dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -3031,6 +3031,44 @@ window.__galagaHarness__={
   }
   logEvent('harness_force_perfect_challenge_clear',{stage:S.stage,cleared,hits:S.ch.hits,total:S.ch.total});
   return cleared>0;
+ },
+ setupChallengeCollisionTest(cfg={}){
+  const p=S.p;
+  const candidates=S.e.filter(e=>e.hp>0&&e.ch);
+  const enemy=candidates.sort((a,b)=>Math.abs(a.x-PLAY_W/2)-Math.abs(b.x-PLAY_W/2))[0];
+  if(!enemy)return false;
+  for(const e of S.e)if(e.id!==enemy.id)e.hp=0;
+  enemy.tm=+cfg.enemyTm||11.2;
+  updateChallengeEnemy(enemy,0.016);
+  p.x=cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:enemy.x,18,PLAY_W-18);
+  p.y=Number.isFinite(+cfg.playerY)?+cfg.playerY:enemy.y;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.spawn=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  p.inv=0;
+  p.cd=0;
+  p.vx=0;
+  S.cap=null;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=0;
+  S.attackGapT=0;
+  logEvent('harness_challenge_collision_setup',{
+   stage:S.stage,
+   playerX:+p.x.toFixed(2),
+   playerY:+p.y.toFixed(2),
+   enemyId:enemy.id,
+   enemyX:+enemy.x.toFixed(2),
+   enemyY:+enemy.y.toFixed(2),
+   enemyTm:+enemy.tm.toFixed(3)
+  });
+  return true;
  },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;

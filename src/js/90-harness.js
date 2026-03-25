@@ -156,6 +156,44 @@ window.__galagaHarness__={
   logEvent('harness_force_perfect_challenge_clear',{stage:S.stage,cleared,hits:S.ch.hits,total:S.ch.total});
   return cleared>0;
  },
+ setupChallengeCollisionTest(cfg={}){
+  const p=S.p;
+  const candidates=S.e.filter(e=>e.hp>0&&e.ch);
+  const enemy=candidates.sort((a,b)=>Math.abs(a.x-PLAY_W/2)-Math.abs(b.x-PLAY_W/2))[0];
+  if(!enemy)return false;
+  for(const e of S.e)if(e.id!==enemy.id)e.hp=0;
+  enemy.tm=+cfg.enemyTm||11.2;
+  updateChallengeEnemy(enemy,0.016);
+  p.x=cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:enemy.x,18,PLAY_W-18);
+  p.y=Number.isFinite(+cfg.playerY)?+cfg.playerY:enemy.y;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.spawn=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  p.inv=0;
+  p.cd=0;
+  p.vx=0;
+  S.cap=null;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=0;
+  S.attackGapT=0;
+  logEvent('harness_challenge_collision_setup',{
+   stage:S.stage,
+   playerX:+p.x.toFixed(2),
+   playerY:+p.y.toFixed(2),
+   enemyId:enemy.id,
+   enemyX:+enemy.x.toFixed(2),
+   enemyY:+enemy.y.toFixed(2),
+   enemyTm:+enemy.tm.toFixed(3)
+  });
+  return true;
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
