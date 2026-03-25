@@ -202,14 +202,13 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#80` wait-mode carried fighter dock direction
-2. `#18` Stage `4` fairness
-3. `#76` production vs non-production data separation design
-4. `#9` remaining challenge-stage fidelity
+1. `#18` Stage `4` fairness
+2. `#76` production vs non-production data separation design
+3. `#9` remaining challenge-stage fidelity
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
-| Must Fix | `#80` | Codex | Open | Manual beta play still shows the carried fighter on the wrong side of the boss in wait mode / upper dock presentation. | Fix the wait-mode carried-fighter anchor so docked and dropping bosses keep the fighter above/behind them. | Phase 3 |
+| Must Fix | `#80` | Codex | Beta review | Wait-mode carried-fighter anchoring now keeps the release, hostile-turn, and natural rescue branches aligned in harness after the upper-dock anchor fix. | Verify the carried fighter now sits above/behind the boss during wait-mode drops in beta. | Phase 3 |
 | Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
 | Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
 | Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |

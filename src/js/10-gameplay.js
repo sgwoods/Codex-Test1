@@ -406,11 +406,10 @@ function specialSquadronTuning(stage=S.stage){
 
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- // Docked bosses carry the fighter tucked above/behind them in formation.
- // When the boss is diving, keep the fighter trailing from the same back-side
- // anchor so the carried state reads as "behind the boss" rather than hanging
- // below it.
- return e.dive ? {x:0,y:-16} : {x:0,y:-18};
+ // The boss sprite faces "up" in local coordinates. In formation we want the
+ // carried fighter tucked above the boss, but once the boss rotates to dive
+ // downward the same back-side anchor becomes positive local Y.
+ return e.dive ? {x:0,y:16} : {x:0,y:-18};
 }
 
 function carriedFighterTarget(e){
