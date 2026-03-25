@@ -236,6 +236,7 @@ The root Aurora build is the official public production lane, even while the pro
 - Or run a seeded batch:
   ```bash
   npm run harness:batch -- --profile personas
+  npm run harness:batch -- --profile distribution
   npm run harness:batch -- --profile quick
   npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
@@ -249,6 +250,7 @@ The root Aurora build is the official public production lane, even while the pro
     - `novice`
     - `advanced`
     - `expert`
+    - `professional`
 - Stage 4 now has a dedicated capture-pressure scenario as well:
   - `stage4-capture-pressure`
   - purpose: stress a natural capture into carrying-boss return under Stage 4 timing
@@ -265,6 +267,24 @@ The root Aurora build is the official public production lane, even while the pro
   npm run harness -- --scenario stage2-opening --persona advanced
   npm run harness -- --scenario stage4-survival --persona expert
   ```
+  - full-run persona distributions are useful for overall game-shape tuning:
+    ```bash
+    npm run harness:batch -- --profile distribution
+    npm run harness:batch -- --profile distribution --repeats 4
+    ```
+  - the distribution batch runs Stage 1 -> game over for:
+    - `novice`
+    - `advanced`
+    - `expert`
+    - `professional`
+  - and records:
+    - ending stage distribution
+    - score distribution
+    - game-length distribution
+    - lives-left distribution
+    - stage-clear counts
+    - stage-reach rates by persona
+    - aggregated loss causes
   - natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing
   - carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points
   - special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset
