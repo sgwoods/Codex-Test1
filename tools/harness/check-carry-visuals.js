@@ -32,13 +32,13 @@ async function main(){
     while(Date.now() < endAt){
       const state = await page.evaluate(() => window.__galagaHarness__.carryState());
       sampled.push(state.carry || { mode: 'none' });
-      if(state.carry?.mode === 'carried' && state.carry?.relation === 'above' && state.carry?.dive === 3) break;
+      if(state.carry?.mode === 'carried' && state.carry?.relation === 'above' && state.carry?.dive === 0) break;
       await sleep(50);
     }
 
     const docked = await waitForHarness(page, () => {
       const state = window.__galagaHarness__.carryState();
-      return state.carry && state.carry.mode === 'carried' && state.carry.relation === 'above' && state.carry.dive === 3 ? state.carry : null;
+      return state.carry && state.carry.mode === 'carried' && state.carry.relation === 'above' && state.carry.dive === 0 ? state.carry : null;
     }, 2500, 50);
 
     const topSample = await capturePlayfieldRegion(page, {
@@ -67,7 +67,15 @@ async function main(){
   if(badCaptured.length){
     fail('captured fighter flipped above the boss before the carried state began', { badCaptured, sampled: result.sampled });
   }
-  if(result.docked.relation !== 'above' || result.docked.dive !== 3){
+  const retreatingCarried = result.sampled.filter(state => state.mode === 'carried' && state.dive === 3);
+  if(!retreatingCarried.length){
+    fail('no carried retreat state was observed before docking', result);
+  }
+  const badRetreating = retreatingCarried.filter(state => state.relation !== 'below');
+  if(badRetreating.length){
+    fail('carried fighter flipped above the boss before the boss reached the upper dock', { badRetreating, sampled: result.sampled });
+  }
+  if(result.docked.relation !== 'above' || result.docked.dive !== 0){
     fail('carried fighter did not settle above the boss in docked state', result);
   }
   if(result.topSample.count < 18){

@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.204.sha.f6fbc01.dirty</span>
-    <span id="settingsRelease">Mar 25 2026, 8:00 PM EDT</span>
-    <span id="settingsState">main@f6fbc01 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.205.sha.95c9f7f.dirty</span>
+    <span id="settingsRelease">Mar 25 2026, 8:06 PM EDT</span>
+    <span id="settingsState">main@95c9f7f dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.204.sha.f6fbc01.dirty</span>
-    <span id="buildStampRelease">Mar 25 2026, 8:00 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.205.sha.95c9f7f.dirty</span>
+    <span id="buildStampRelease">Mar 25 2026, 8:06 PM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.204.sha.f6fbc01.dirty',commit:'f6fbc0150a8de135d5644809a81c5170d203c2cc',branch:'main',dirty:true,released:'Mar 25 2026, 8:00 PM EDT',state:'main@f6fbc01 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.205.sha.95c9f7f.dirty',commit:'95c9f7f30d3cc8ca6a259777ed54f3ec0ffeb912',branch:'main',dirty:true,released:'Mar 25 2026, 8:06 PM EDT',state:'main@95c9f7f dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -2081,9 +2081,10 @@ function specialSquadronTuning(stage=S.stage){
 
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- // Once a fighter is fully carried, keep it tucked above/behind the boss in
- // both formation and attack movement. The beam-up phase is handled by the
- // live player capture state, not by the carried-fighter sprite.
+ // Keep the fighter below the boss while the boss is still retreating upward
+ // after a capture. Only flip it to the docked/attached side once the boss is
+ // actually back in formation. Active carried attacks stay on the upper side.
+ if(e.dive===3)return {x:0,y:18};
  return {x:0,y:-18};
 }
 
