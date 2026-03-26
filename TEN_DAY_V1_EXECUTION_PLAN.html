@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurora Galactica: 10-Day V1 Execution Plan</title>
+  <style>
+    :root{
+      --bg:#f4f1e8;
+      --paper:#fffdfa;
+      --ink:#16202b;
+      --muted:#5d6a75;
+      --line:#d7cfc0;
+      --accent:#8e2a2a;
+      --accent2:#175a77;
+      --soft:#f1ece0;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#ece6d9 0%,#f7f3eb 100%);
+      color:var(--ink);
+      font:16px/1.5 Georgia,"Times New Roman",serif;
+    }
+    .page{
+      width:min(980px, calc(100vw - 48px));
+      margin:28px auto 56px;
+      background:var(--paper);
+      border:1px solid var(--line);
+      box-shadow:0 18px 60px rgba(22,32,43,.12);
+      padding:56px 64px 72px;
+    }
+    h1,h2,h3{
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+      line-height:1.08;
+      letter-spacing:-0.03em;
+      margin:0;
+    }
+    h1{
+      font-size:40px;
+      color:var(--accent);
+      margin-bottom:10px;
+    }
+    h2{
+      font-size:24px;
+      margin-top:36px;
+      margin-bottom:10px;
+      color:var(--accent2);
+      border-top:1px solid var(--line);
+      padding-top:20px;
+    }
+    h3{
+      font-size:18px;
+      margin-top:24px;
+      margin-bottom:8px;
+    }
+    p{
+      margin:10px 0;
+    }
+    .lede{
+      font-size:18px;
+      color:var(--muted);
+      max-width:52rem;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px 24px;
+      margin:18px 0 28px;
+      font:13px/1.4 "Avenir Next","Segoe UI",sans-serif;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .card{
+      background:var(--soft);
+      border:1px solid var(--line);
+      padding:16px 18px;
+      border-radius:10px;
+      margin:14px 0;
+    }
+    ul,ol{
+      margin:10px 0 10px 22px;
+    }
+    li{
+      margin:6px 0;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:16px 0 8px;
+      font-size:14px;
+    }
+    th,td{
+      border:1px solid var(--line);
+      padding:10px 12px;
+      vertical-align:top;
+    }
+    th{
+      text-align:left;
+      background:#f2ede4;
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+    }
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+      background:#f3eee6;
+      padding:1px 5px;
+      border-radius:4px;
+      font-size:.92em;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    .small{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .break{
+      break-before:page;
+      page-break-before:always;
+    }
+    @media (max-width: 760px){
+      .page{width:calc(100vw - 24px);padding:28px 22px 40px}
+      .grid{grid-template-columns:1fr}
+      h1{font-size:32px}
+    }
+    @page{
+      size:Letter;
+      margin:0.55in;
+    }
+    @media print{
+      body{background:#fff}
+      .page{
+        width:auto;
+        margin:0;
+        box-shadow:none;
+        border:none;
+        padding:0;
+      }
+      a{color:inherit;text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Aurora Galactica: 10-Day V1 Execution Plan</h1>
+    <p class="lede">A practical plan to ship <code>v1</code>, reduce launch risk, and land the highest-value architectural seams without stopping for a full platform refactor before release.</p>
+
+    <div class="meta">
+      <span>Date: March 26, 2026</span>
+      <span>Project: Aurora Galactica</span>
+      <span>Repo: /Users/stevenwoods/Documents/Codex-Test1</span>
+    </div>
+
+    <section>
+      <h2>Purpose</h2>
+      <p>This plan is designed to do four things at once:</p>
+      <ol>
+        <li>finish the current <code>v1</code> launch push</li>
+        <li>reduce launch risk materially</li>
+        <li>strengthen the regression and release pipeline</li>
+        <li>add enough architectural seams that the codebase remains evolvable after launch</li>
+      </ol>
+      <div class="card">
+        <strong>Key decision:</strong> the next 10 days should target <em>launch + thin-seam refactor</em>, not a full generalized arcade platform.
+      </div>
+    </section>
+
+    <section>
+      <h2>Success Definition</h2>
+      <ul>
+        <li>Aurora Galactica is ready to launch as <code>v1</code>, or is one very small final decision away from promotion.</li>
+        <li>The launch blocker list is short, stable, and justified.</li>
+        <li>The beta-review cluster is largely closed or downgraded to low-risk polish.</li>
+        <li>Stage 2 and Stage 4 fairness have better tuning and stronger evidence than today.</li>
+        <li>Release-readiness materials are complete: security review, code docs, consistent public docs, and a short players guide.</li>
+        <li>The runtime has thin architectural seams: <code>gameDef</code>, data-driven tuning, optional-system boundaries, and stable telemetry vocabulary.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Scope</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>In Scope</h3>
+          <ul>
+            <li>Launch blockers and beta-review closure</li>
+            <li>Stage 2 and Stage 4 fairness tuning</li>
+            <li>Security review and release-readiness pass</li>
+            <li>Players guide and documentation refresh</li>
+            <li>Production vs non-production data-path separation</li>
+            <li>Thin-seam refactor work that helps Aurora immediately</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Out of Scope</h3>
+          <ul>
+            <li>Full arcade-platform extraction</li>
+            <li>Implementing Galaxian as a second game</li>
+            <li>Generalized multi-game runtime/menu</li>
+            <li>Large speculative framework work</li>
+            <li>Theme/template expansion unrelated to launch</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>Operating Model</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Track</th>
+            <th>Owners</th>
+            <th>Focus</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gameplay Strike Team</td>
+            <td>2 agents</td>
+            <td><code>#18</code>, <code>#32</code>, <code>#38</code>, <code>#74/#47</code>, manual-beta feedback</td>
+            <td>Tuned gameplay changes and beta-ready builds</td>
+          </tr>
+          <tr>
+            <td>Rules / Capture / Challenge Team</td>
+            <td>1 agent</td>
+            <td><code>#40</code>, <code>#73</code>, <code>#77</code>, <code>#78</code>, <code>#80</code>, <code>#88</code></td>
+            <td>Closed or downgraded correctness risks</td>
+          </tr>
+          <tr>
+            <td>Architecture / Thin-Seam Team</td>
+            <td>2 agents</td>
+            <td><code>gameDef</code>, tuning tables, optional systems, decoupling</td>
+            <td>Cleaner runtime boundaries without behavior regressions</td>
+          </tr>
+          <tr>
+            <td>Harness / Regression Team</td>
+            <td>1-2 agents</td>
+            <td>Pressure guards, flaky scenarios, personas, acceptance suite</td>
+            <td>Trustworthy regression signal</td>
+          </tr>
+          <tr>
+            <td>Release / Docs / Product Team</td>
+            <td>1 agent</td>
+            <td><code>#76</code>, <code>#85</code>, <code>#86</code>, players guide, security review</td>
+            <td>Launch-ready product surface and support materials</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small">Recommended team size: 7 to 8 active agents plus one coordinating lead.</p>
+    </section>
+
+    <section>
+      <h2>Core Principles</h2>
+      <ol>
+        <li>No broad refactor without a regression guard.</li>
+        <li>No speculative platform work that does not help Aurora today.</li>
+        <li>Every gameplay change needs a manual reason, a harness bar, and a rollback path.</li>
+        <li>Refactor work must be seam-oriented, not aesthetic.</li>
+        <li>If the plan slips, cut platform ambition before cutting launch integrity.</li>
+      </ol>
+    </section>
+
+    <section class="break">
+      <h2>10-Day Timeline</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Theme</th>
+            <th>Primary Work</th>
+            <th>Exit Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Stabilize review cluster</td>
+            <td>Close or sharply re-scope beta-review items; capture/challenge/squadron presentation cleanup</td>
+            <td>Cluster smaller and more explicit</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Finish mechanic guards</td>
+            <td>Extend critical automation and reduce flaky harness ambiguity</td>
+            <td>Mechanic-level confidence is higher and cleaner</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Stage 2 fairness</td>
+            <td>Tune dive geometry and lane convergence using pressure metrics</td>
+            <td><code>#32</code> improved or narrowed with evidence</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Stage 4 fairness</td>
+            <td>Tune escort/convergence pressure using the pressure guard</td>
+            <td><code>#18</code> improved or narrowed with evidence</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Thin seams part 1</td>
+            <td>Introduce <code>gameDef</code>; move obvious rules/tuning into data</td>
+            <td>Runtime is cleaner and still stable</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Thin seams part 2</td>
+            <td>Optional-system boundaries, telemetry stability, more data-driven tuning</td>
+            <td>Seams are real, not aspirational</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Release integrity</td>
+            <td><code>#76</code>, security review, release-surface sanity pass</td>
+            <td>Environment strategy is implemented or locked</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Docs and product surface</td>
+            <td>Code docs, materials refresh, players guide, UI polish from <code>#86</code></td>
+            <td>Launch materials are coherent and user-ready</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Final beta sweep</td>
+            <td>Acceptance suite, manual beta pass, public surface verification</td>
+            <td>Blocker list is short and decision-ready</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Launch decision</td>
+            <td>Final blocker review, release notes, production promotion if ready</td>
+            <td>Launch or explicit small final punch list</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Deliverables</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Gameplay</h3>
+          <ul>
+            <li>Stage 2 fairness pass</li>
+            <li>Stage 4 fairness pass</li>
+            <li>Final squadron readability decision</li>
+            <li>Ship-loss feel decision</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Architecture</h3>
+          <ul>
+            <li><code>gameDef</code> seam</li>
+            <li>Stage-tuning data tables</li>
+            <li>Optional-system boundaries</li>
+            <li>Stable telemetry vocabulary</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Harness</h3>
+          <ul>
+            <li>Reliable mechanic guards</li>
+            <li>Stable pressure check</li>
+            <li>Less flaky scenario behavior</li>
+            <li>Persona recalibration after difficulty changes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Release</h3>
+          <ul>
+            <li>Environment split decision and implementation</li>
+            <li>Security review</li>
+            <li>Code documentation pass</li>
+            <li>Players guide and public materials refresh</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>Risks And Mitigations</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Why it matters</th>
+            <th>Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stage 2 / Stage 4 tuning takes longer than expected</td>
+            <td>These remain the most meaningful gameplay blockers.</td>
+            <td>Dedicated owners, persona/pressure metrics, and quick reverts when a pass clearly regresses.</td>
+          </tr>
+          <tr>
+            <td>Thin-seam refactor creates late regressions</td>
+            <td>Structural churn can silently change gameplay.</td>
+            <td>Only land seam-oriented work behind harness guards and preserve rollback paths.</td>
+          </tr>
+          <tr>
+            <td>Harness flakiness corrupts decision-making</td>
+            <td>Good changes get blocked by noisy tests.</td>
+            <td>Dedicated harness ownership, cleaner timeouts, quarantine known-flaky paths.</td>
+          </tr>
+          <tr>
+            <td>Documentation and release work gets squeezed</td>
+            <td>That creates sloppy launches even if gameplay is good.</td>
+            <td>Separate release/docs track with work starting before Day 10.</td>
+          </tr>
+          <tr>
+            <td>Scope creep toward full platformization</td>
+            <td>That risks missing both launch and architecture goals.</td>
+            <td>Hold the line on thin seams only; defer full engine extraction and second-game work.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Decision Rules If We Slip</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Cut First</h3>
+          <ol>
+            <li>Broad architectural ambition</li>
+            <li>Non-essential UI polish</li>
+            <li>Lower-priority post-<code>v1</code> documentation polish</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Do Not Cut</h3>
+          <ol>
+            <li>Launch integrity</li>
+            <li>Stage 2 and Stage 4 fairness work</li>
+            <li>Critical mechanic regression coverage</li>
+            <li>Security and release-readiness review</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Thin-Seam Investments To Keep</h2>
+      <ul>
+        <li><code>gameDef</code></li>
+        <li>Stage-tuning data tables</li>
+        <li>Explicit optional systems</li>
+        <li>Mechanic-level harness abstractions</li>
+        <li>Stable telemetry vocabulary</li>
+      </ul>
+      <p>These are the highest-value incremental investments because they improve Aurora today and directly reduce the cost of post-<code>v1</code> platformization.</p>
+    </section>
+
+    <section>
+      <h2>Final Recommendation</h2>
+      <p>The best achievable 10-day plan is:</p>
+      <ol>
+        <li>launch Aurora Galactica <code>v1</code></li>
+        <li>strengthen the harness and release workflow</li>
+        <li>land thin seams that keep the project evolvable</li>
+        <li>defer full platform extraction until immediately after release</li>
+      </ol>
+      <p class="small">That gets the product out the door without trapping the codebase in a non-evolvable state.</p>
+    </section>
+  </main>
+</body>
+</html>
