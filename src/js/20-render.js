@@ -1,5 +1,6 @@
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 const playfieldFrame=document.getElementById('playfieldFrame');
+window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -52,6 +53,8 @@ function drawEnemy(e){
  const ps=2;
  const flap=Math.sin(e.tm*11+e.ph)>.12,hot=e.dive===1||e.dive===4;
  const pal=enemyPalette(e,flap,hot);
+ const carryTarget=e.carry?carriedFighterTarget(e):null;
+ const carryOffset=e.carry?carriedFighterOffset(e):null;
  ctx.save();ctx.translate(Math.round(e.x),Math.round(e.y));if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
  if(e.t==='bee')drawPix(-ps*3,-ps*2.2,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
  else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
@@ -71,23 +74,33 @@ function drawEnemy(e){
   ctx.fillStyle='rgba(255,246,168,.18)';
   for(let i=0;i<4;i++){const yy=20+i*28+Math.sin((e.tm+i)*4)*3;ctx.fillRect(-bw*1.1,yy,bw*2.2,4)}
  }
- if(e.carry){
-  const off=carriedFighterOffset(e);
+ ctx.restore();
+ if(e.carry&&carryTarget&&carryOffset){
+  window.__auroraRenderDebug.carryDraws.push({
+   bossId:e.id,
+   bossX:+e.x.toFixed(2),
+   bossY:+e.y.toFixed(2),
+   fighterX:+carryTarget.x.toFixed(2),
+   fighterY:+carryTarget.y.toFixed(2),
+   relation:carryTarget.y<e.y?'above':'below',
+   dive:e.dive||0
+  });
   ctx.save();
-  ctx.translate(off.x,off.y);
+  ctx.translate(Math.round(carryTarget.x),Math.round(carryTarget.y));
   ctx.globalAlpha=.92;
   drawMiniShip(1.02,'#d8f2ff','#ff3e4f');
+  ctx.restore();
   if(e.dive){
+   ctx.save();
    ctx.strokeStyle='rgba(228,250,255,.32)';
    ctx.lineWidth=1;
    ctx.beginPath();
-   ctx.moveTo(0,off.y>0?-4:4);
-   ctx.lineTo(0,off.y>0?-12:12);
+   ctx.moveTo(Math.round(e.x),Math.round(e.y));
+   ctx.lineTo(Math.round(carryTarget.x),Math.round(carryTarget.y));
    ctx.stroke();
+   ctx.restore();
   }
-  ctx.restore();
  }
- ctx.restore();
 }
 function drawPlayerBody(x,y,dual=0,ghost=0){
  const ps=2;
@@ -226,6 +239,7 @@ function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);
  ctx.fillStyle='#000';ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ window.__auroraRenderDebug.carryDraws.length=0;
  ctx.save();ctx.beginPath();ctx.rect(0,0,PLAY_W,PLAY_H);ctx.clip();
  for(const s of S.st){ctx.globalAlpha=.04+s.z*.22*(.3+Math.sin(s.tw)*.58);ctx.fillStyle=s.c;ctx.fillRect(s.x,s.y,s.s,s.s)}ctx.globalAlpha=1;
  for(const f of S.fx){

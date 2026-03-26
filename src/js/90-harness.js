@@ -120,6 +120,9 @@ window.__galagaHarness__={
   const rescue=typeof window.getRescuePodDebugState==='function' ? window.getRescuePodDebugState() : null;
   return { carry, rescue };
  },
+ renderState(){
+  return window.__auroraRenderDebug||{carryDraws:[]};
+ },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
   if(!boss)return null;

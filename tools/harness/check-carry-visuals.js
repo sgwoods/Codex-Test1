@@ -60,7 +60,37 @@ async function main(){
     });
     await page.screenshot({ path: path.join(outDir, 'wait-mode-carry.png') });
 
-    return { sampled, docked, topSample, waitCarry, waitSample };
+    await page.evaluate(() => window.__galagaHarness__.setupCarriedBossFormationTest({
+      stage: 2,
+      playerX: 140,
+      bossX: 140,
+      bossY: 126
+    }));
+    await page.evaluate(() => window.__galagaHarness__.launchCarryingBossAttack({
+      playerX: 140,
+      bossX: 140,
+      bossY: 126,
+      vy: 24
+    }));
+    const divingCarry = await waitForHarness(page, () => {
+      const state = window.__galagaHarness__.carryState().carry;
+      return state && state.mode === 'carried' && state.dive === 1 ? state : null;
+    }, 1200, 50);
+    const divingSample = await capturePlayfieldRegion(page, {
+      x: divingCarry.fighterX - 10,
+      y: divingCarry.fighterY - 10,
+      w: 20,
+      h: 20
+    });
+    const divingWrongSideSample = await capturePlayfieldRegion(page, {
+      x: divingCarry.fighterX - 10,
+      y: (divingCarry.bossY + 18) - 10,
+      w: 20,
+      h: 20
+    });
+    await page.screenshot({ path: path.join(outDir, 'diving-carry.png') });
+
+    return { sampled, docked, topSample, waitCarry, waitSample, divingCarry, divingSample, divingWrongSideSample };
   });
 
   const badCaptured = result.sampled.filter(state => state.mode === 'captured' && state.relation !== 'below');
@@ -87,6 +117,15 @@ async function main(){
   if(result.waitSample.count < 18){
     fail('wait-mode carried fighter was not visibly rendered near the expected position', result);
   }
+  if(!result.divingCarry || result.divingCarry.relation !== 'above' || result.divingCarry.dive !== 1){
+    fail('diving carried boss did not report an above relation', result);
+  }
+  if(result.divingSample.count < 18){
+    fail('diving carried fighter was not visibly rendered at the expected upper-side position', result);
+  }
+  if(result.divingWrongSideSample.count >= result.divingSample.count){
+    fail('diving carried fighter still appears on the wrong side of the boss', result);
+  }
 
   fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify({
     ok: true,
@@ -95,6 +134,9 @@ async function main(){
     topSample: result.topSample,
     waitCarry: result.waitCarry,
     waitSample: result.waitSample,
+    divingCarry: result.divingCarry,
+    divingSample: result.divingSample,
+    divingWrongSideSample: result.divingWrongSideSample,
     sampledCount: result.sampled.length
   }, null, 2));
 
@@ -105,6 +147,9 @@ async function main(){
     topSample: result.topSample,
     waitCarry: result.waitCarry,
     waitSample: result.waitSample,
+    divingCarry: result.divingCarry,
+    divingSample: result.divingSample,
+    divingWrongSideSample: result.divingWrongSideSample,
     sampledCount: result.sampled.length
   }, null, 2));
 }
