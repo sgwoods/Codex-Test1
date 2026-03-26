@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.206.sha.66371b4.beta</span>
-    <span id="settingsRelease">Mar 25 2026, 8:07 PM EDT</span>
-    <span id="settingsState">beta@66371b4 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.209.sha.80f8ecd.beta</span>
+    <span id="settingsRelease">Mar 25 2026, 8:20 PM EDT</span>
+    <span id="settingsState">beta@80f8ecd clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.206.sha.66371b4.beta</span>
-    <span id="buildStampRelease">Mar 25 2026, 8:07 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.209.sha.80f8ecd.beta</span>
+    <span id="buildStampRelease">Mar 25 2026, 8:20 PM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.206.sha.66371b4.beta',commit:'66371b4d89c4d6c479a0ff826776f6e246db1807',branch:'beta',dirty:false,released:'Mar 25 2026, 8:07 PM EDT',state:'beta@66371b4 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.209.sha.80f8ecd.beta',commit:'80f8ecd74b0dca3b6a376e176e59362f6293bbb3',branch:'beta',dirty:false,released:'Mar 25 2026, 8:20 PM EDT',state:'beta@80f8ecd clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -2596,6 +2596,7 @@ function update(dt){
 // Source: src/js/20-render.js
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 const playfieldFrame=document.getElementById('playfieldFrame');
+window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -2648,6 +2649,8 @@ function drawEnemy(e){
  const ps=2;
  const flap=Math.sin(e.tm*11+e.ph)>.12,hot=e.dive===1||e.dive===4;
  const pal=enemyPalette(e,flap,hot);
+ const carryTarget=e.carry?carriedFighterTarget(e):null;
+ const carryOffset=e.carry?carriedFighterOffset(e):null;
  ctx.save();ctx.translate(Math.round(e.x),Math.round(e.y));if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
  if(e.t==='bee')drawPix(-ps*3,-ps*2.2,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
  else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
@@ -2667,23 +2670,33 @@ function drawEnemy(e){
   ctx.fillStyle='rgba(255,246,168,.18)';
   for(let i=0;i<4;i++){const yy=20+i*28+Math.sin((e.tm+i)*4)*3;ctx.fillRect(-bw*1.1,yy,bw*2.2,4)}
  }
- if(e.carry){
-  const off=carriedFighterOffset(e);
+ ctx.restore();
+ if(e.carry&&carryTarget&&carryOffset){
+  window.__auroraRenderDebug.carryDraws.push({
+   bossId:e.id,
+   bossX:+e.x.toFixed(2),
+   bossY:+e.y.toFixed(2),
+   fighterX:+carryTarget.x.toFixed(2),
+   fighterY:+carryTarget.y.toFixed(2),
+   relation:carryTarget.y<e.y?'above':'below',
+   dive:e.dive||0
+  });
   ctx.save();
-  ctx.translate(off.x,off.y);
+  ctx.translate(Math.round(carryTarget.x),Math.round(carryTarget.y));
   ctx.globalAlpha=.92;
   drawMiniShip(1.02,'#d8f2ff','#ff3e4f');
+  ctx.restore();
   if(e.dive){
+   ctx.save();
    ctx.strokeStyle='rgba(228,250,255,.32)';
    ctx.lineWidth=1;
    ctx.beginPath();
-   ctx.moveTo(0,off.y>0?-4:4);
-   ctx.lineTo(0,off.y>0?-12:12);
+   ctx.moveTo(Math.round(e.x),Math.round(e.y));
+   ctx.lineTo(Math.round(carryTarget.x),Math.round(carryTarget.y));
    ctx.stroke();
+   ctx.restore();
   }
-  ctx.restore();
  }
- ctx.restore();
 }
 function drawPlayerBody(x,y,dual=0,ghost=0){
  const ps=2;
@@ -2822,6 +2835,7 @@ function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);
  ctx.fillStyle='#000';ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ window.__auroraRenderDebug.carryDraws.length=0;
  ctx.save();ctx.beginPath();ctx.rect(0,0,PLAY_W,PLAY_H);ctx.clip();
  for(const s of S.st){ctx.globalAlpha=.04+s.z*.22*(.3+Math.sin(s.tw)*.58);ctx.fillStyle=s.c;ctx.fillRect(s.x,s.y,s.s,s.s)}ctx.globalAlpha=1;
  for(const f of S.fx){
@@ -3008,6 +3022,9 @@ window.__galagaHarness__={
   const carry=typeof window.getCarryRelationState==='function' ? window.getCarryRelationState() : null;
   const rescue=typeof window.getRescuePodDebugState==='function' ? window.getRescuePodDebugState() : null;
   return { carry, rescue };
+ },
+ renderState(){
+  return window.__auroraRenderDebug||{carryDraws:[]};
  },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
