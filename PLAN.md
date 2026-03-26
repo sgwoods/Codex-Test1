@@ -204,15 +204,16 @@ Current beta-review cluster:
 Current coding priority once those beta checks are confirmed:
 
 1. `#18` Stage `4` fairness
-2. `#76` production vs non-production data separation design
-3. `#9` remaining challenge-stage fidelity
+2. `#32` Stage `2` fairness
+3. `#76` production vs non-production data separation design
+4. `#9` remaining challenge-stage fidelity
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
 | Must Fix | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
-| Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
+| Must Fix | `#18` | Codex | Open | Latest expert Stage `5` run shows only `0.548` bullets per attack overall, but all Stage `4`/`5` deaths are still `enemy_collision`; Stage `4` losses happen under modest fire with stacked escort/dive pressure instead of bullet spam. | Tune Stage `4` finish and escort/convergence pressure before touching bullet density broadly. | Phase 1 |
 | Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
-| Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |
+| Must Fix | `#32` | Codex | Tuning | Latest full runs show Stage `2` attacks are active but still collision-dominated: advanced `4` attacks / `2` bullets / `1` collision death, professional `15` attacks / `9` bullets / `2` collision deaths, expert `13` attacks / `9` bullets / `1` collision death. | Tune Stage `2` dive geometry and lane convergence first, then reassess whether bullet timing needs to soften. | Phase 1 |
 | Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
 | Must Fix | `#78` | Codex | Automated check + manual confirm | Automated regression now proves challenge collisions kill the player while challenge fire stays off. | Keep the check green and confirm the live post-hit flow still reads correctly in beta. | Phase 1 |
 | Must Fix | `#40` | Codex | Partial automation + beta review | Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |

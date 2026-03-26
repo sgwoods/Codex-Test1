@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.210.sha.2fc4219.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.214.sha.8b20f17.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -974,7 +974,7 @@
 <p>Current beta-review cluster:</p>
 <ul><li><code>#40</code> capture / rescue feedback</li><li><code>#73</code> shoot during beam-up</li><li><code>#77</code> capture escape drop-back recovery</li><li><code>#80</code> wait-mode carried fighter dock direction</li><li><code>#88</code> captured fighter disappears at top</li><li><code>#74</code> bonus spacing</li><li><code>#47</code> special squadron spacing</li><li><code>#45</code> boss damaged-text linger</li><li><code>#38</code> ship-loss feedback</li></ul>
 <p>Current coding priority once those beta checks are confirmed:</p>
-<ol><li><code>#18</code> Stage <code>4</code> fairness</li><li><code>#76</code> production vs non-production data separation design</li><li><code>#9</code> remaining challenge-stage fidelity</li></ol>
+<ol><li><code>#18</code> Stage <code>4</code> fairness</li><li><code>#32</code> Stage <code>2</code> fairness</li><li><code>#76</code> production vs non-production data separation design</li><li><code>#9</code> remaining challenge-stage fidelity</li></ol>
 <div class="tableWrap">
           <table class="dataTable">
             <thead>
@@ -982,9 +982,9 @@
             </thead>
             <tbody>
               <tr><td>Must Fix</td><td><code>#80</code></td><td>Codex</td><td>Beta review + automation</td><td>Carry-state automation now proves drag-up stays <code>below</code> and docked/wait-mode carried states render <code>above</code>, but the exact swap timing still needs live eyes.</td><td>Verify the fighter flips from below to above only at the correct top-dock moment in beta.</td><td>Phase 3</td></tr>
-<tr><td>Must Fix</td><td><code>#18</code></td><td>Codex</td><td>Open</td><td>Stage <code>4</code> still collapses in harness and manual play.</td><td>Tune the Stage <code>4</code> finish and escort pressure.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#18</code></td><td>Codex</td><td>Open</td><td>Latest expert Stage <code>5</code> run shows only <code>0.548</code> bullets per attack overall, but all Stage <code>4</code>/<code>5</code> deaths are still <code>enemy_collision</code>; Stage <code>4</code> losses happen under modest fire with stacked escort/dive pressure instead of bullet spam.</td><td>Tune Stage <code>4</code> finish and escort/convergence pressure before touching bullet density broadly.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#61</code></td><td>Shared</td><td>Watching</td><td>Hosted Stage <code>3</code> -&gt; <code>4</code> still has an intermittent bad-transition edge case.</td><td>Keep transition telemetry live and capture the next failing run.</td><td>Phase 1</td></tr>
-<tr><td>Must Fix</td><td><code>#32</code></td><td>Codex</td><td>Tuning</td><td>Stage <code>2</code> improved, but live spacing/fairness still needs confirmation.</td><td>Keep manual and persona checks on Stage <code>2</code> pressure.</td><td>Phase 1</td></tr>
+<tr><td>Must Fix</td><td><code>#32</code></td><td>Codex</td><td>Tuning</td><td>Latest full runs show Stage <code>2</code> attacks are active but still collision-dominated: advanced <code>4</code> attacks / <code>2</code> bullets / <code>1</code> collision death, professional <code>15</code> attacks / <code>9</code> bullets / <code>2</code> collision deaths, expert <code>13</code> attacks / <code>9</code> bullets / <code>1</code> collision death.</td><td>Tune Stage <code>2</code> dive geometry and lane convergence first, then reassess whether bullet timing needs to soften.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#9</code></td><td>Codex</td><td>Open</td><td>Stage <code>3</code> challenge still is not close enough to original Galaga.</td><td>Tighten challenge behavior against reference.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#78</code></td><td>Codex</td><td>Automated check + manual confirm</td><td>Automated regression now proves challenge collisions kill the player while challenge fire stays off.</td><td>Keep the check green and confirm the live post-hit flow still reads correctly in beta.</td><td>Phase 1</td></tr>
 <tr><td>Must Fix</td><td><code>#40</code></td><td>Codex</td><td>Partial automation + beta review</td><td>Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation.</td><td>Verify the updated beta capture feedback in manual play.</td><td>Phase 3</td></tr>
@@ -1468,7 +1468,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-alpha.1+build.210.sha.2fc4219.dirty
+          Build: 0.5.0-alpha.1+build.214.sha.8b20f17.dirty
         </p>
       </aside>
     </main>
