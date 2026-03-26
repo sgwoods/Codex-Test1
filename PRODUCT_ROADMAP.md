@@ -171,6 +171,22 @@ Suggested versioning:
 - `1.0.x`
 - `1.1.x`
 
+## Post-1.0 Architecture Themes
+
+These are the architectural themes we should keep capturing incrementally during
+the `v1` push so they can become the basis of a focused post-`v1` platform
+plan.
+
+- move game rules and tuning further into data-driven `gameDef` structures
+- isolate optional systems so capture, challenge stages, special squadrons, and
+  dual-fighter behavior are less entangled with the core update loop
+- keep mechanic-level harnesses and telemetry stable enough to survive larger
+  runtime refactors
+- separate engine-like concerns from game-specific rules only when the seam is
+  real and already helping Aurora
+- use Aurora's ongoing work to reduce the eventual cost of supporting Galaxian
+  and other future variants without pausing product progress now
+
 ## How We Should Use This Roadmap
 
 - Use it to decide when a `PATCH` bump is enough versus when a `MINOR` bump is justified

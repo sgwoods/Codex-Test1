@@ -319,20 +319,13 @@ function runAttractPlayer(dt,p){
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }
 function scriptedDiveVy(stage){
- if(stage<=1)return 80;
- if(stage===2)return 86;
- return 92;
+ return stageFlightTune(stage).scriptedDiveVy;
 }
 function randomDiveVy(stage){
- if(stage<=1)return 82;
- if(stage<=3)return 88;
- if(stage===4)return 88;
- return 94;
+ return stageFlightTune(stage).randomDiveVy;
 }
 function diveAccel(stage){
- if(stage<=1)return 150;
- if(stage<=3)return 162;
- return 172;
+ return stageFlightTune(stage).diveAccel;
 }
 
 function shoot(){

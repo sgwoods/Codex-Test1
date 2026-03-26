@@ -34,6 +34,10 @@ function writeJson(file, data){
 function summarize(result){
   const a = result.analysis || {};
   const challenge = (a.challengeClears || [])[0] || null;
+  const artifactQuality = result.summary?.artifactQuality || null;
+  const artifactWarning = artifactQuality && !artifactQuality.ok
+    ? 'Video artifact quality deviated from expected. File an immediate bug and repair/remux before using this run for synchronized review.'
+    : null;
   return {
     status: 'imported',
     pairId: result.pairId,
@@ -46,7 +50,9 @@ function summarize(result){
     challenge: challenge ? { stage: challenge.stage, hits: challenge.hits, total: challenge.total } : null,
     shipLosses: (a.shipLost || []).length,
     lifeLosses: (a.lifeLost || []).length,
-    postHitPause: a.postHitPauseMetrics || null
+    postHitPause: a.postHitPauseMetrics || null,
+    artifactQuality,
+    artifactWarning
   };
 }
 

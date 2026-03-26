@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.218.sha.9f46342</span>
+              <span class="metaValue">0.5.0-alpha.1+build.221.sha.a549daf.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -896,14 +896,20 @@
   npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
   npm run harness:batch -- --profile deep</code></pre>
-<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>The harness writes a <code>summary.json</code> beside the generated artifacts, including:<ul><li>seed used for the run</li><li>selected self-play persona when used:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li></ul></li><li>Stage 4 now has a dedicated capture-pressure scenario as well:<ul><li><code>stage4-capture-pressure</code></li><li>purpose: stress a natural capture into carrying-boss return under Stage 4 timing</li><li>note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for <code>stage4-five-ships</code> or <code>stage4-survival</code></li><li>stage clears / challenge clears / ship losses</li><li>per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes</li><li>capture/rescue markers such as capture start, fighter captured, and fighter rescued</li><li>capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile</li><li>transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible</li><li>rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire</li></ul></li><li>Persona self-play is useful for launch-readiness tuning without changing game rules:</li></ul>
+<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>Every new harness run should be treated as incomplete until the artifact-quality check passes:</li></ul>
+<pre><code data-lang="bash">  npm run harness:check:video-artifact</code></pre>
+<ul><li>If the quality check fails while reviewing logs or videos:<ul><li>file an immediate bug because the recorder/export path is no longer trustworthy</li><li>suggest the repair path:</li></ul></li></ul>
+<pre><code data-lang="bash">    npm run harness:repair:videos</code></pre>
+<ul><li>and avoid using the affected video for synchronized analysis until it has a repaired review artifact</li></ul><ul><li>The harness writes a <code>summary.json</code> beside the generated artifacts, including:<ul><li>seed used for the run</li><li>selected self-play persona when used:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li></ul></li><li>Stage 4 now has a dedicated capture-pressure scenario as well:<ul><li><code>stage4-capture-pressure</code></li><li>purpose: stress a natural capture into carrying-boss return under Stage 4 timing</li><li>note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for <code>stage4-five-ships</code> or <code>stage4-survival</code></li><li>stage clears / challenge clears / ship losses</li><li>per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes</li><li>capture/rescue markers such as capture start, fighter captured, and fighter rescued</li><li>capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile</li><li>transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible</li><li>rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire</li></ul></li><li>Persona self-play is useful for launch-readiness tuning without changing game rules:</li></ul>
 <pre><code data-lang="bash">  npm run harness -- --scenario stage1-opening --persona novice
   npm run harness -- --scenario stage2-opening --persona advanced
   npm run harness -- --scenario stage4-survival --persona expert</code></pre>
 <ul><li>full-run persona distributions are useful for overall game-shape tuning:</li></ul>
 <pre><code data-lang="bash">    npm run harness:batch -- --profile distribution
     npm run harness:batch -- --profile distribution --repeats 4</code></pre>
-<ul><li>the distribution batch runs Stage 1 -&gt; game over for:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li><li>and records:<ul><li>ending stage distribution</li><li>score distribution</li><li>game-length distribution</li><li>lives-left distribution</li><li>stage-clear counts</li><li>stage-reach rates by persona</li><li>aggregated loss causes</li></ul></li><li>natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing</li><li>carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points</li><li>special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset</li><li>dual-fire metrics such as average spread in the rescue scenario</li><li>descent-speed metrics such as time from attack start to lower-field crossing</li><li>whether the generated <code>.webm</code> contains audio</li></ul><ul><li>Batch mode also writes:<ul><li><code>batch-report.json</code> with aggregate challenge hits, ship losses, total duration, and audio failures</li><li><code>tuning-report.json</code> with prioritized findings to guide the next gameplay pass</li><li>later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix</li><li>the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish &quot;died early&quot; from &quot;survived the full window but spent too many ships&quot;</li></ul></li><li>Typical batch timings on this machine:<ul><li><code>quick</code>: about <code>1.5-2 minutes</code></li><li><code>default</code>: about <code>3-4 minutes</code></li><li><code>deep</code>: about <code>5-7 minutes</code></li></ul></li><li>You can re-run the analyzer on an existing run folder:</li></ul>
+<ul><li>the distribution batch runs Stage 1 -&gt; game over for:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li><li>and records:<ul><li>ending stage distribution</li><li>score distribution</li><li>game-length distribution</li><li>lives-left distribution</li><li>stage-clear counts</li><li>stage-reach rates by persona</li><li>aggregated loss causes</li></ul></li><li>natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing</li><li>carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points</li><li>special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset</li><li>dual-fire metrics such as average spread in the rescue scenario</li><li>descent-speed metrics such as time from attack start to lower-field crossing</li><li>whether the generated <code>.webm</code> contains audio</li></ul><ul><li>Batch mode also writes:<ul><li><code>batch-report.json</code> with aggregate challenge hits, ship losses, total duration, and audio failures</li><li><code>tuning-report.json</code> with prioritized findings to guide the next gameplay pass</li><li>later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix</li><li>the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish &quot;died early&quot; from &quot;survived the full window but spent too many ships&quot;</li></ul></li><li>Historical harness videos can be repaired in place into <code>.review.mkv</code> artifacts and have their neighboring <code>summary.json</code> updated with artifact-quality metadata:</li></ul>
+<pre><code data-lang="bash">  npm run harness:repair:videos</code></pre>
+<ul><li>Typical batch timings on this machine:<ul><li><code>quick</code>: about <code>1.5-2 minutes</code></li><li><code>default</code>: about <code>3-4 minutes</code></li><li><code>deep</code>: about <code>5-7 minutes</code></li></ul></li><li>You can re-run the analyzer on an existing run folder:</li></ul>
 <pre><code data-lang="bash">  npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder</code></pre>
 <ul><li>You can also regenerate the tuning summary for an existing batch:</li></ul>
 <pre><code data-lang="bash">  npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder</code></pre>
@@ -1122,6 +1128,16 @@
 <ul><li>production vs pre-production score/data separation</li><li>environment-aware build labeling and account/status presentation</li><li>release workflow hardening between dev, production, and beta lanes</li></ul>
 <p>Suggested versioning:</p>
 <ul><li><code>1.0.x</code></li><li><code>1.1.x</code></li></ul>
+<h3>Post-1.0 Architecture Themes</h3>
+<p>These are the architectural themes we should keep capturing incrementally during the <code>v1</code> push so they can become the basis of a focused post-<code>v1</code> platform plan.</p>
+<ul><li>move game rules and tuning further into data-driven <code>gameDef</code> structures</li><li>isolate optional systems so capture, challenge stages, special squadrons, and</li></ul>
+<p>dual-fighter behavior are less entangled with the core update loop</p>
+<ul><li>keep mechanic-level harnesses and telemetry stable enough to survive larger</li></ul>
+<p>runtime refactors</p>
+<ul><li>separate engine-like concerns from game-specific rules only when the seam is</li></ul>
+<p>real and already helping Aurora</p>
+<ul><li>use Aurora&#39;s ongoing work to reduce the eventual cost of supporting Galaxian</li></ul>
+<p>and other future variants without pausing product progress now</p>
 <h3>How We Should Use This Roadmap</h3>
 <ul><li>Use it to decide when a <code>PATCH</code> bump is enough versus when a <code>MINOR</code> bump is justified</li><li>Use it to group open issues into meaningful release targets instead of treating the backlog as a flat list</li><li>Use it as the default basis for Codex release recommendations after each meaningful pass</li></ul>
         </div>
@@ -1468,7 +1484,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-alpha.1+build.218.sha.9f46342
+          Build: 0.5.0-alpha.1+build.221.sha.a549daf.dirty
         </p>
       </aside>
     </main>

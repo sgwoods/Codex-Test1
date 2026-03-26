@@ -3,6 +3,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { analyze } = require('./analyze-run');
+const { ensureUsableVideoArtifact } = require('./video-artifact-util');
 
 function parseArgs(argv){
   const args = {};
@@ -96,11 +97,16 @@ function importLatest(opts={}){
   const sessionDst = copyFile(pair.sessionFile, path.join(outDir, path.basename(pair.sessionFile)));
   const videoDst = copyFile(pair.videoFile, path.join(outDir, path.basename(pair.videoFile)));
   const session = loadSession(sessionDst);
+  const artifactQuality = ensureUsableVideoArtifact(videoDst, +(session.duration || 0));
+  const files = [sessionDst, videoDst];
+  if(artifactQuality.repaired && artifactQuality.file && !files.includes(artifactQuality.file)) files.unshift(artifactQuality.file);
   const summaryPath = path.join(outDir, 'summary.json');
-  fs.writeFileSync(summaryPath, JSON.stringify(buildSummary(session, outDir, [sessionDst, videoDst], sourceDir), null, 2));
+  const summary = buildSummary(session, outDir, files, sourceDir);
+  summary.artifactQuality = artifactQuality;
+  fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
   const analysis = analyze(outDir);
-  const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
-  return { outDir, pairId: pair.id, files: summary.files, analysis: analysis, summary };
+  const finalSummary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+  return { outDir, pairId: pair.id, files: finalSummary.files, analysis: analysis, summary: finalSummary };
 }
 
 if(require.main === module){

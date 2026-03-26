@@ -2,8 +2,9 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const { chromium } = require('playwright-core');
 const { analyze } = require('./analyze-run');
+const { ensureUsableVideoArtifact } = require('./video-artifact-util');
+const { chromium } = require('playwright-core');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -59,6 +60,16 @@ function keyName(code){
   if(code.startsWith('Key')) return code.slice(3).toLowerCase();
   if(code.startsWith('Digit')) return code.slice(5);
   return code;
+}
+
+function pickPrimaryVideoFile(files, session){
+  const videos = files.filter(file => file.endsWith('.webm'));
+  if(!videos.length) return null;
+  if(session?.id){
+    const exact = videos.find(file => path.basename(file).includes(session.id));
+    if(exact) return exact;
+  }
+  return videos.sort((a,b) => fs.statSync(b).size - fs.statSync(a).size)[0];
 }
 
 function inferConfig(session){
@@ -149,10 +160,10 @@ async function replay(page, spec){
 async function waitForDownloads(list, count, timeoutMs){
   const until = Date.now() + timeoutMs;
   while(Date.now() < until){
-    if(list.length >= count) return;
+    if(list.length >= count) return true;
     await sleep(200);
   }
-  throw new Error(`Timed out waiting for ${count} downloads, saw ${list.length}`);
+  return false;
 }
 
 async function waitForRun(page, spec, replayTime){
@@ -169,6 +180,19 @@ async function waitForRun(page, spec, replayTime){
     if(!state.started) return state;
   }
   return page.evaluate(() => window.__galagaHarness__.state());
+}
+
+async function finalizeArtifacts(page, downloads, spec, state){
+  const wanted = 2;
+  if(state.started){
+    await page.evaluate(name => window.__galagaHarness__.stop(name), spec.name);
+  }
+  if(await waitForDownloads(downloads, wanted, 15000)) return;
+
+  await page.evaluate(label => window.__galagaHarness__.exportAndReset({ label }), `${spec.name}_forced_export`);
+  if(await waitForDownloads(downloads, wanted, 15000)) return;
+
+  throw new Error(`Timed out waiting for ${wanted} downloads after forced export/reset, saw ${downloads.length}`);
 }
 
 async function main(){
@@ -201,7 +225,10 @@ async function main(){
   });
 
   try{
-    const context = await browser.newContext({ acceptDownloads: true, viewport: { width: 1440, height: 1800 } });
+    const context = await browser.newContext({
+      acceptDownloads: true,
+      viewport: { width: 1440, height: 1800 }
+    });
     const page = await context.newPage();
     const downloads = [];
     page.on('download', d => downloads.push(d));
@@ -218,15 +245,24 @@ async function main(){
 
     const replayTime = await replay(page, spec);
     const state = await waitForRun(page, spec, replayTime);
-    if(state.started) await page.evaluate(name => window.__galagaHarness__.stop(name), spec.name);
-
-    await waitForDownloads(downloads, 2, 15000);
+    await finalizeArtifacts(page, downloads, spec, state);
     const saved = [];
-    for(const download of downloads.slice(0, 2)){
+    for(const download of downloads){
       const file = path.join(outDir, download.suggestedFilename());
       await download.saveAs(file);
       saved.push(file);
     }
+    const sessionFile = saved.find(file => file.endsWith('.json'));
+    const session = sessionFile ? JSON.parse(fs.readFileSync(sessionFile, 'utf8')).session : null;
+    const rawVideoFile = pickPrimaryVideoFile(saved, session);
+    let artifactQuality = null;
+    if(rawVideoFile){
+      artifactQuality = ensureUsableVideoArtifact(rawVideoFile, session?.duration || 0);
+      if(artifactQuality.repaired && artifactQuality.file && !saved.includes(artifactQuality.file)){
+        saved.unshift(artifactQuality.file);
+      }
+    }
+    await context.close();
 
     const summary = {
       name: spec.name,
@@ -236,13 +272,13 @@ async function main(){
       config: spec.config,
       seed: spec.seed,
       state,
-      files: saved
+      files: saved,
+      artifactQuality
     };
     fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
     summary.analysis = analyze(outDir);
     fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
     console.log(JSON.stringify(summary, null, 2));
-    await context.close();
   } finally {
     await browser.close();
     server.close();

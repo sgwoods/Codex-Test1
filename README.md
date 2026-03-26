@@ -244,6 +244,17 @@ The root Aurora build is the official public production lane, even while the pro
   ```
 - Output is written to a timestamped folder under:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+- Every new harness run should be treated as incomplete until the artifact-quality check passes:
+  ```bash
+  npm run harness:check:video-artifact
+  ```
+- If the quality check fails while reviewing logs or videos:
+  - file an immediate bug because the recorder/export path is no longer trustworthy
+  - suggest the repair path:
+    ```bash
+    npm run harness:repair:videos
+    ```
+  - and avoid using the affected video for synchronized analysis until it has a repaired review artifact
 - The harness writes a `summary.json` beside the generated artifacts, including:
   - seed used for the run
   - selected self-play persona when used:
@@ -296,6 +307,10 @@ The root Aurora build is the official public production lane, even while the pro
   - `tuning-report.json` with prioritized findings to guide the next gameplay pass
   - later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix
   - the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish "died early" from "survived the full window but spent too many ships"
+- Historical harness videos can be repaired in place into `.review.mkv` artifacts and have their neighboring `summary.json` updated with artifact-quality metadata:
+  ```bash
+  npm run harness:repair:videos
+  ```
 - Typical batch timings on this machine:
   - `quick`: about `1.5-2 minutes`
   - `default`: about `3-4 minutes`

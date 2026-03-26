@@ -22,6 +22,8 @@
     "harness:check:capture-lifecycle": "node tools/harness/check-capture-lifecycle.js",
     "harness:check:squadron-spacing": "node tools/harness/check-squadron-spacing.js",
     "harness:check:stage-pressure": "node tools/harness/check-stage-pressure-balance.js",
+    "harness:check:video-artifact": "node tools/harness/check-video-artifact.js",
+    "harness:repair:videos": "node tools/harness/repair-video-artifacts.js",
     "harness:check:start-position": "node tools/harness/check-start-position.js",
     "harness:check:close-shot-hit": "node tools/harness/check-close-shot-hit.js",
     "harness": "node tools/harness/run-gameplay.js",
