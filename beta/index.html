@@ -201,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.209.sha.80f8ecd.beta</span>
-    <span id="settingsRelease">Mar 25 2026, 8:20 PM EDT</span>
-    <span id="settingsState">beta@80f8ecd clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.210.sha.2fc4219.beta</span>
+    <span id="settingsRelease">Mar 25 2026, 8:35 PM EDT</span>
+    <span id="settingsState">beta@2fc4219 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -260,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.209.sha.80f8ecd.beta</span>
-    <span id="buildStampRelease">Mar 25 2026, 8:20 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.210.sha.2fc4219.beta</span>
+    <span id="buildStampRelease">Mar 25 2026, 8:35 PM EDT</span>
   </div>
 </div>
 <script>
@@ -356,7 +356,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.209.sha.80f8ecd.beta',commit:'80f8ecd74b0dca3b6a376e176e59362f6293bbb3',branch:'beta',dirty:false,released:'Mar 25 2026, 8:20 PM EDT',state:'beta@80f8ecd clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.210.sha.2fc4219.beta',commit:'2fc4219afaf97c2a972c269046e8f1ed14b9fa83',branch:'beta',dirty:false,released:'Mar 25 2026, 8:35 PM EDT',state:'beta@2fc4219 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -2065,17 +2065,17 @@ function activeEscortCount(e){
 function specialSquadronTuning(stage=S.stage){
  if(stage===4){
   return {
-   escortOffset:42,
+   escortOffset:34,
    escortTrackX:5.8,
    escortTrackY:5.9,
-   escortLift:20
+   escortLift:18
   };
  }
  return {
-  escortOffset:44,
+  escortOffset:36,
   escortTrackX:6.2,
   escortTrackY:6,
-  escortLift:24
+  escortLift:20
  };
 }
 
@@ -3368,15 +3368,16 @@ window.__galagaHarness__={
   if(!boss)return false;
   const escorts=S.e.filter(e=>e.hp>0&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,2);
   if(escorts.length<2)return false;
+  const stage=Math.max(4,+cfg.stage||4);
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=stage;S.stageClock=0;
  const keep=new Set([boss.id,...escorts.map(e=>e.id)]);
  for(const e of S.e)if(!keep.has(e.id))e.hp=0;
   const squadId=++S.squadSeq;
-  const tuning=typeof specialSquadronTuning==='function' ? specialSquadronTuning(4) : { escortOffset:18, escortLift:8 };
+  const tuning=typeof specialSquadronTuning==='function' ? specialSquadronTuning(stage) : { escortOffset:18, escortLift:8 };
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=2;boss.squadId=squadId;boss.x=p.x;boss.y=112;boss.vx=0;boss.vy=42;boss.shot=0;
   escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-tuning.escortOffset:tuning.escortOffset;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-tuning.escortLift;});
-  logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2)});
+  logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2),stage});
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,squadron:1});
   for(const e of escorts)logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off,harness:1,squadron:1});
   return true;
