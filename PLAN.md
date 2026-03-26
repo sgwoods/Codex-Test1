@@ -203,24 +203,25 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#18` Stage `4` fairness
-2. `#32` Stage `2` fairness
-3. `#76` production vs non-production data separation design
-4. `#9` remaining challenge-stage fidelity
+1. `#74` / `#47` special squadron spacing
+2. `#18` Stage `4` fairness
+3. `#32` Stage `2` fairness
+4. `#76` production vs non-production data separation design
+5. `#9` remaining challenge-stage fidelity
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
 | Must Fix | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
-| Must Fix | `#18` | Codex | Open | Latest expert Stage `5` run shows only `0.548` bullets per attack overall, but all Stage `4`/`5` deaths are still `enemy_collision`; Stage `4` losses happen under modest fire with stacked escort/dive pressure instead of bullet spam. | Tune Stage `4` finish and escort/convergence pressure before touching bullet density broadly. | Phase 1 |
+| Must Fix | `#18` | Codex | Automated guard + tuning | New stage-pressure check now guards the Stage `4` baseline, and the latest expert run still shows modest fire (`0.548` bullets/attack overall) with collision-dominated Stage `4`/`5` deaths. | Use the stage-pressure check to tune escort/convergence pressure before touching bullet density broadly. | Phase 1 |
 | Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
-| Must Fix | `#32` | Codex | Tuning | Latest full runs show Stage `2` attacks are active but still collision-dominated: advanced `4` attacks / `2` bullets / `1` collision death, professional `15` attacks / `9` bullets / `2` collision deaths, expert `13` attacks / `9` bullets / `1` collision death. | Tune Stage `2` dive geometry and lane convergence first, then reassess whether bullet timing needs to soften. | Phase 1 |
+| Must Fix | `#32` | Codex | Automated guard + tuning | New stage-pressure check now guards the Stage `2` baseline; full runs still show active attacks with collision-heavy deaths and no sign that bullet spam is the primary issue. | Use the stage-pressure check to tune Stage `2` dive geometry and lane convergence, then reassess bullet timing only if pressure still feels off. | Phase 1 |
 | Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
 | Must Fix | `#78` | Codex | Automated check + manual confirm | Automated regression now proves challenge collisions kill the player while challenge fire stays off. | Keep the check green and confirm the live post-hit flow still reads correctly in beta. | Phase 1 |
 | Must Fix | `#40` | Codex | Partial automation + beta review | Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |
 | Must Fix | `#77` | Codex | Automated check + low-risk manual confirm | Automated recovery check now proves beam-escape recovery returns the ship to the bottom row and allows post-escape firing. | Confirm the drop-back animation/control return still looks clean in beta. | Phase 3 |
-| Must Fix | `#88` | Codex | Automated check + beta review | Carry-visual automation now guards against the captured fighter simply disappearing at the top carried state. | Confirm the fighter remains visibly carried in the exact live beta path you were seeing. | Phase 3 |
-| Must Fix | `#74` | Codex | Beta review | Bonus/special squadron spacing was tightened and now needs a live feel check. | Confirm the tighter bonus grouping in beta play. | Phase 2 |
-| Must Fix | `#47` | Codex | Beta review | Special squadron presentation is tighter, but needs manual release judgment. | Confirm squadron readability and bonus feel in beta. | Phase 2 |
+| Must Fix | `#88` | Codex | Low-risk beta confirm | Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state. | Keep one more live confirmation while we close the remaining capture items. | Phase 3 |
+| Must Fix | `#74` | Codex | Open | Latest manual beta pass still says the three-ship bonus/special squadron is too spread out. | Tighten the three-ship attack geometry again and keep the squadron spacing check green. | Phase 2 |
+| Must Fix | `#47` | Codex | Open | Latest manual beta pass still says the special squadron reads too loose visually. | Tighten lateral/vertical squadron coherence and recheck it in beta. | Phase 2 |
 | Must Fix | `#45` | Codex | Automated check + manual confirm | Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact. | Confirm boss first-hit feedback still looks clean in beta. | Phase 2 |
 | Must Fix | `#38` | Codex | Beta review | Ship-loss feedback was strengthened and now needs live feel confirmation. | Verify explosion, pause, and recovery feel in beta play. | Phase 2 |
 | Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
