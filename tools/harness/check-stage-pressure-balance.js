@@ -17,7 +17,8 @@ function runScenario(scenario, seed, persona){
   if(persona) args.push('--persona', persona);
   const run = spawnSync(process.execPath, args, {
     cwd: ROOT,
-    encoding: 'utf8'
+    encoding: 'utf8',
+    timeout: 90000
   });
   if(run.status !== 0){
     fail('stage pressure harness run failed', {
@@ -26,7 +27,8 @@ function runScenario(scenario, seed, persona){
       persona,
       stdout: run.stdout,
       stderr: run.stderr,
-      status: run.status
+      status: run.status,
+      signal: run.signal
     });
   }
   try{

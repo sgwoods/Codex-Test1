@@ -400,15 +400,15 @@ function specialSquadronTuning(stage=S.stage){
  if(stage===4){
   return {
    escortOffset:34,
-   escortTrackX:5.8,
-   escortTrackY:5.9,
+   escortTrackX:6.4,
+   escortTrackY:32,
    escortLift:18
   };
  }
  return {
   escortOffset:36,
-  escortTrackX:6.2,
-  escortTrackY:6,
+   escortTrackX:6.8,
+  escortTrackY:28,
   escortLift:20
  };
 }
