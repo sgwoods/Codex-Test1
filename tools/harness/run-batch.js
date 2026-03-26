@@ -117,6 +117,46 @@ function addCounts(into, next){
   }
 }
 
+function addPressure(into, next){
+  if(!next) return;
+  into.attacks += next.attacks || 0;
+  into.bullets += next.bullets || 0;
+  into.shipLosses += next.shipLosses || 0;
+  into.bulletDeaths += next.bulletDeaths || 0;
+  into.collisionDeaths += next.collisionDeaths || 0;
+  into.lossesWithBulletsOnScreen += next.lossesWithBulletsOnScreen || 0;
+  into.lossesWithoutBulletsOnScreen += next.lossesWithoutBulletsOnScreen || 0;
+  into.lossesWithRecentEnemyBullets += next.lossesWithRecentEnemyBullets || 0;
+  into.lossesWithoutRecentEnemyBullets += next.lossesWithoutRecentEnemyBullets || 0;
+  if(Number.isFinite(next.avgRecentEnemyBulletsAtLoss)) into._recentEnemyBulletsAtLoss.push(next.avgRecentEnemyBulletsAtLoss);
+  if(Number.isFinite(next.avgAttackersOnScreenAtLoss)) into._attackersOnScreenAtLoss.push(next.avgAttackersOnScreenAtLoss);
+}
+
+function makePressureBucket(){
+  return {
+    attacks: 0,
+    bullets: 0,
+    shipLosses: 0,
+    bulletDeaths: 0,
+    collisionDeaths: 0,
+    lossesWithBulletsOnScreen: 0,
+    lossesWithoutBulletsOnScreen: 0,
+    lossesWithRecentEnemyBullets: 0,
+    lossesWithoutRecentEnemyBullets: 0,
+    _recentEnemyBulletsAtLoss: [],
+    _attackersOnScreenAtLoss: []
+  };
+}
+
+function finalizePressure(bucket){
+  bucket.bulletsPerAttack = bucket.attacks ? +(bucket.bullets / bucket.attacks).toFixed(3) : 0;
+  bucket.avgRecentEnemyBulletsAtLoss = +avg(bucket._recentEnemyBulletsAtLoss).toFixed(3);
+  bucket.avgAttackersOnScreenAtLoss = +avg(bucket._attackersOnScreenAtLoss).toFixed(3);
+  delete bucket._recentEnemyBulletsAtLoss;
+  delete bucket._attackersOnScreenAtLoss;
+  return bucket;
+}
+
 function summarize(batch){
   const report = {
     createdAt: new Date().toISOString(),
@@ -154,7 +194,9 @@ function summarize(batch){
       duration: [],
       livesLeft: [],
       stageClears: [],
-      lossCauseCounts: {}
+      lossCauseCounts: {},
+      pressure: makePressureBucket(),
+      pressureByStage: {}
     });
     const scenarioBucket = personaBucket.scenarios[scenario] || (personaBucket.scenarios[scenario] = {
       runs: 0,
@@ -167,7 +209,9 @@ function summarize(batch){
       duration: [],
       livesLeft: [],
       stageClears: [],
-      lossCauseCounts: {}
+      lossCauseCounts: {},
+      pressure: makePressureBucket(),
+      pressureByStage: {}
     });
     const losses = (run.analysis?.shipLost || []).length;
     const survivalRatio = run.duration ? Math.min(1, (run.analysis?.duration || 0) / run.duration) : 0;
@@ -189,6 +233,11 @@ function summarize(batch){
     personaBucket.livesLeft.push(livesLeft);
     personaBucket.stageClears.push(stageClears);
     addCounts(personaBucket.lossCauseCounts, run.analysis?.lossCauseCounts || {});
+    addPressure(personaBucket.pressure, run.analysis?.bulletPressure?.overall);
+    for(const [stage, metrics] of Object.entries(run.analysis?.bulletPressure?.byStage || {})){
+      const stageBucket = personaBucket.pressureByStage[stage] || (personaBucket.pressureByStage[stage] = makePressureBucket());
+      addPressure(stageBucket, metrics);
+    }
     scenarioBucket.runs++;
     scenarioBucket.shipLost += losses;
     scenarioBucket.gameOvers += gameOver ? 1 : 0;
@@ -200,6 +249,11 @@ function summarize(batch){
     scenarioBucket.livesLeft.push(livesLeft);
     scenarioBucket.stageClears.push(stageClears);
     addCounts(scenarioBucket.lossCauseCounts, run.analysis?.lossCauseCounts || {});
+    addPressure(scenarioBucket.pressure, run.analysis?.bulletPressure?.overall);
+    for(const [stage, metrics] of Object.entries(run.analysis?.bulletPressure?.byStage || {})){
+      const stageBucket = scenarioBucket.pressureByStage[stage] || (scenarioBucket.pressureByStage[stage] = makePressureBucket());
+      addPressure(stageBucket, metrics);
+    }
   }
   for(const persona of Object.keys(report.aggregate.byPersona)){
     const bucket = report.aggregate.byPersona[persona];
@@ -218,6 +272,8 @@ function summarize(batch){
     bucket.endingStageStats = statSeries(bucket.endingStage, 3);
     bucket.livesLeftStats = statSeries(bucket.livesLeft, 3);
     bucket.stageClearStats = statSeries(bucket.stageClears, 3);
+    bucket.pressure = finalizePressure(bucket.pressure);
+    bucket.pressureByStage = Object.fromEntries(Object.entries(bucket.pressureByStage).map(([stage, pressure]) => [stage, finalizePressure(pressure)]));
     bucket.stageReachRates = {};
     const maxStage = Math.max(1, ...bucket.endingStage);
     for(let stage=2; stage<=maxStage; stage++){
@@ -240,7 +296,9 @@ function summarize(batch){
         endingStageStats: statSeries(scenario.endingStage, 3),
         livesLeftStats: statSeries(scenario.livesLeft, 3),
         stageClearStats: statSeries(scenario.stageClears, 3),
-        lossCauseCounts: scenario.lossCauseCounts
+        lossCauseCounts: scenario.lossCauseCounts,
+        pressure: finalizePressure(scenario.pressure),
+        pressureByStage: Object.fromEntries(Object.entries(scenario.pressureByStage).map(([stage, pressure]) => [stage, finalizePressure(pressure)]))
       };
     }
     delete bucket.endingStage;
@@ -277,6 +335,13 @@ function summarize(batch){
         priority: 2,
         title: `${persona} deaths are collision-dominated`,
         detail: `All ${bucket.shipLost} recorded ship losses for ${persona} came from enemy collisions.`
+      });
+    }
+    if(bucket.pressure.shipLosses > 0 && bucket.pressure.lossesWithoutBulletsOnScreen === bucket.pressure.shipLosses){
+      report.findings.push({
+        priority: 2,
+        title: `${persona} losses happen without bullets on screen`,
+        detail: `All ${bucket.pressure.shipLosses} ship losses for ${persona} happened with zero enemy bullets visible in the nearest snapshot.`
       });
     }
   }

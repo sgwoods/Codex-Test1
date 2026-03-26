@@ -61,6 +61,65 @@ function stageMetrics(session){
   return stages;
 }
 
+function bulletPressureMetrics(session, shipLost){
+  const stages = stageMetrics(session);
+  const overall = {
+    attacks: 0,
+    bullets: 0,
+    bulletsPerAttack: 0,
+    shipLosses: shipLost.length,
+    bulletDeaths: 0,
+    collisionDeaths: 0,
+    lossesWithBulletsOnScreen: 0,
+    lossesWithoutBulletsOnScreen: 0,
+    lossesWithRecentEnemyBullets: 0,
+    lossesWithoutRecentEnemyBullets: 0,
+    avgRecentEnemyBulletsAtLoss: 0,
+    avgAttackersOnScreenAtLoss: 0
+  };
+  const byStage = {};
+  const avg = arr => arr.length ? +(arr.reduce((a,b)=>a+b,0) / arr.length).toFixed(3) : 0;
+
+  for(const [stage, metrics] of Object.entries(stages)){
+    const key = String(stage);
+    const losses = shipLost.filter(loss => String(loss.stage || 0) === key);
+    const bulletDeaths = losses.filter(loss => loss.cause === 'enemy_bullet').length;
+    const collisionDeaths = losses.filter(loss => loss.cause === 'enemy_collision').length;
+    const lossesWithBulletsOnScreen = losses.filter(loss => (loss.snapshot?.enemyBullets || 0) > 0).length;
+    const lossesWithoutBulletsOnScreen = losses.length - lossesWithBulletsOnScreen;
+    const lossesWithRecentEnemyBullets = losses.filter(loss => (loss.recentEnemyBullets || 0) > 0).length;
+    const lossesWithoutRecentEnemyBullets = losses.length - lossesWithRecentEnemyBullets;
+    const stagePressure = {
+      attacks: metrics.attacks || 0,
+      bullets: metrics.bullets || 0,
+      bulletsPerAttack: metrics.attacks ? +((metrics.bullets || 0) / metrics.attacks).toFixed(3) : 0,
+      shipLosses: losses.length,
+      bulletDeaths,
+      collisionDeaths,
+      lossesWithBulletsOnScreen,
+      lossesWithoutBulletsOnScreen,
+      lossesWithRecentEnemyBullets,
+      lossesWithoutRecentEnemyBullets,
+      avgRecentEnemyBulletsAtLoss: avg(losses.map(loss => loss.recentEnemyBullets || 0)),
+      avgAttackersOnScreenAtLoss: avg(losses.map(loss => loss.snapshot?.attackers || 0))
+    };
+    byStage[key] = stagePressure;
+    overall.attacks += stagePressure.attacks;
+    overall.bullets += stagePressure.bullets;
+    overall.bulletDeaths += bulletDeaths;
+    overall.collisionDeaths += collisionDeaths;
+    overall.lossesWithBulletsOnScreen += lossesWithBulletsOnScreen;
+    overall.lossesWithoutBulletsOnScreen += lossesWithoutBulletsOnScreen;
+    overall.lossesWithRecentEnemyBullets += lossesWithRecentEnemyBullets;
+    overall.lossesWithoutRecentEnemyBullets += lossesWithoutRecentEnemyBullets;
+  }
+
+  overall.bulletsPerAttack = overall.attacks ? +(overall.bullets / overall.attacks).toFixed(3) : 0;
+  overall.avgRecentEnemyBulletsAtLoss = avg(shipLost.map(loss => loss.recentEnemyBullets || 0));
+  overall.avgAttackersOnScreenAtLoss = avg(shipLost.map(loss => loss.snapshot?.attackers || 0));
+  return { overall, byStage };
+}
+
 function stageProfiles(events){
   return events
     .filter(e => e.type === 'stage_profile')
@@ -466,6 +525,7 @@ function analyze(target){
   const transition = transitionMetrics(session);
   const challengeRules = challengeRulesMetrics(session);
   const descent = descentMetrics(events);
+  const bulletPressure = bulletPressureMetrics(session, shipLost);
   const profiles = stageProfiles(events);
   const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
   const analysis = {
@@ -478,6 +538,7 @@ function analyze(target){
     shipLost,
     lifeLost,
     stageMetrics: stageMetrics(session),
+    bulletPressure,
     stageLossClusters,
     stageLossLanePatterns,
     lossCauseCounts,
