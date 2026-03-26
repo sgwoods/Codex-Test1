@@ -122,7 +122,7 @@ The root Aurora build is the official public production lane, even while the pro
   ```
   This creates or refreshes:
   - `/Users/stevenwoods/Documents/Codex-Test1/beta/`
-  Commit the promoted `beta/` artifacts when you want the published beta lane to move.
+  Commit the promoted `beta/` artifacts in `/Users/stevenwoods/Documents/Codex-Test1` when you want the public beta snapshot to move, then publish that committed snapshot into `https://github.com/sgwoods/Aurora-Galactica` so the hosted `https://sgwoods.github.io/Aurora-Galactica/beta/` lane updates.
 - Sync the separate public repo from the latest build metadata with:
   ```bash
   npm run sync:public

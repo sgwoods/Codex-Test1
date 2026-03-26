@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.202.sha.286ee08.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.204.sha.f6fbc01.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -851,7 +851,7 @@
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
 <p>This creates or refreshes:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/beta/</code></li></ul>
-<p>Commit the promoted <code>beta/</code> artifacts when you want the published beta lane to move.</p>
+<p>Commit the promoted <code>beta/</code> artifacts in <code>/Users/stevenwoods/Documents/Codex-Test1</code> when you want the public beta snapshot to move, then publish that committed snapshot into <code>https://github.com/sgwoods/Aurora-Galactica</code> so the hosted <code>https://sgwoods.github.io/Aurora-Galactica/beta/</code> lane updates.</p>
 <ul><li>Sync the separate public repo from the latest build metadata with:</li></ul>
 <pre><code data-lang="bash">  npm run sync:public</code></pre>
 <p>This updates the canonical Aurora public/status files:</p>
@@ -1372,8 +1372,14 @@
 <ul><li><code>npm run build</code></li></ul>
 <ol><li>Promote the current artifacts into the beta lane:</li></ol>
 <ul><li><code>npm run promote:beta</code></li></ul>
-<ol><li>Commit the updated <code>/beta/</code> directory</li><li>Push <code>main</code> so GitHub Pages republishes both lanes</li></ol>
-<p>The beta lane is intentionally a snapshot of selected root artifacts, not a separate branch or a second build pipeline.</p>
+<ol><li>Commit and push the updated <code>/beta/</code> directory in:</li></ol>
+<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul>
+<ol><li>Publish that promoted beta snapshot into:</li></ol>
+<ul><li><code>https://github.com/sgwoods/Aurora-Galactica</code></li></ul>
+<ol><li>Let GitHub Pages deploy from <code>Aurora-Galactica</code> so:</li></ol>
+<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul>
+<p>serves the promoted checkpoint</p>
+<p>The beta lane is intentionally a snapshot of selected root artifacts, not a separate branch or a second build pipeline. <code>Codex-Test1</code> remains the engineering source of truth; <code>Aurora-Galactica</code> is the public release surface for both production and beta.</p>
 <h3>Build Number</h3>
 <ul><li>Every build gets a build number, even when there is no major/minor release bump.</li><li>Local default:<ul><li>git commit count</li></ul></li><li>CI/Pages default:<ul><li>GitHub Actions run number if available</li></ul></li></ul>
 <p>This gives every build a unique identity without forcing a SemVer bump for every commit.</p>
@@ -1462,7 +1468,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-alpha.1+build.202.sha.286ee08.dirty
+          Build: 0.5.0-alpha.1+build.204.sha.f6fbc01.dirty
         </p>
       </aside>
     </main>

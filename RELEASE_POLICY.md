@@ -80,10 +80,15 @@ Examples:
    - `npm run build`
 2. Promote the current artifacts into the beta lane:
    - `npm run promote:beta`
-3. Commit the updated `/beta/` directory
-4. Push `main` so GitHub Pages republishes both lanes
+3. Commit and push the updated `/beta/` directory in:
+   - `https://github.com/sgwoods/Codex-Test1`
+4. Publish that promoted beta snapshot into:
+   - `https://github.com/sgwoods/Aurora-Galactica`
+5. Let GitHub Pages deploy from `Aurora-Galactica` so:
+   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
+     serves the promoted checkpoint
 
-The beta lane is intentionally a snapshot of selected root artifacts, not a separate branch or a second build pipeline.
+The beta lane is intentionally a snapshot of selected root artifacts, not a separate branch or a second build pipeline. `Codex-Test1` remains the engineering source of truth; `Aurora-Galactica` is the public release surface for both production and beta.
 
 ## Build Number
 
