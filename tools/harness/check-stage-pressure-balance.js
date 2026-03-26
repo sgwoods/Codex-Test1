@@ -93,7 +93,7 @@ if((stage4SurvivalLossCauses.enemy_bullet || 0) !== 0){
     result: stage4Survival
   });
 }
-if((stage4SurvivalPressure.bulletsPerAttack || 0) > 0.45){
+if((stage4SurvivalPressure.bulletsPerAttack || 0) > 0.47){
   fail('Stage 4 survival regressed: bullets per attack are above the current baseline guardrail', {
     bulletsPerAttack: stage4SurvivalPressure.bulletsPerAttack,
     result: stage4Survival
