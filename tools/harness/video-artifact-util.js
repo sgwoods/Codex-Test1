@@ -62,7 +62,7 @@ function assessVideoArtifact(file, expectedDuration=0){
 function repairedPathFor(file){
   const ext = path.extname(file);
   const base = file.slice(0, file.length - ext.length);
-  return `${base}.review.mkv`;
+  return `${base}.review.webm`;
 }
 
 function repairVideoArtifact(file){

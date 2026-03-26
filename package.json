@@ -27,6 +27,7 @@
     "harness:check:start-position": "node tools/harness/check-start-position.js",
     "harness:check:close-shot-hit": "node tools/harness/check-close-shot-hit.js",
     "harness": "node tools/harness/run-gameplay.js",
+    "log-viewer": "node tools/log-viewer/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

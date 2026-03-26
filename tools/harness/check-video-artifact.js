@@ -46,7 +46,7 @@ function runScenario(){
 
 function main(){
   const result = runScenario();
-  const videoFile = (result.files || []).find(f => f.endsWith('.review.mkv')) || (result.files || []).find(f => f.endsWith('.webm'));
+  const videoFile = (result.files || []).find(f => f.includes('.review.')) || (result.files || []).find(f => f.endsWith('.webm'));
   if(!videoFile || !fs.existsSync(videoFile)){
     fail('recorded video file was not produced', result);
   }
@@ -54,7 +54,7 @@ function main(){
   const formatDuration = assessed.formatDuration;
   const summaryDuration = +(result.analysis?.duration || 0);
   if(!assessed.ok){
-    fail('recorded video artifact quality deviated from expected; file an immediate bug and repair by remuxing the raw .webm to .review.mkv', {
+    fail('recorded video artifact quality deviated from expected; file an immediate bug and repair by remuxing the raw .webm to a .review.webm', {
       videoFile,
       summaryDuration,
       assessed,

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurora Log Viewer</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="runs-panel">
+      <div class="panel-head">
+        <h1>Log Viewer</h1>
+        <input id="runFilter" type="search" placeholder="Filter runs, persona, stage...">
+      </div>
+      <div id="runList" class="run-list"></div>
+    </aside>
+
+    <main class="viewer-panel">
+      <div class="viewer-head">
+        <div>
+          <h2 id="runTitle">Select a run</h2>
+          <p id="runMeta" class="meta"></p>
+        </div>
+        <div id="artifactBadge" class="artifact-badge">No run loaded</div>
+      </div>
+
+      <div class="video-wrap">
+        <video id="runVideo" controls preload="metadata"></video>
+      </div>
+
+      <div class="transport-row">
+        <button id="back5">-5s</button>
+        <button id="playPause">Play</button>
+        <button id="forward5">+5s</button>
+        <label>Speed
+          <select id="playbackRate">
+            <option>0.5</option>
+            <option selected>1</option>
+            <option>1.5</option>
+            <option>2</option>
+          </select>
+        </label>
+        <span id="timeLabel">0.000 / 0.000</span>
+      </div>
+
+      <div class="scrub-wrap">
+        <input id="timeline" type="range" min="0" max="0" step="0.001" value="0">
+      </div>
+
+      <section class="events-panel">
+        <div class="panel-subhead">
+          <h3>Event Stream</h3>
+          <span id="eventMeta"></span>
+        </div>
+        <div id="eventList" class="event-list"></div>
+      </section>
+    </main>
+
+    <aside class="codex-panel">
+      <div class="panel-head">
+        <h2>Codex</h2>
+        <p class="meta">Capture the current moment, ask about it, or file an issue.</p>
+      </div>
+
+      <label>
+        Question / Notes
+        <textarea id="codexQuestion" rows="6" placeholder="What looks wrong here?"></textarea>
+      </label>
+
+      <label>
+        Issue Title
+        <input id="issueTitle" type="text" placeholder="Bug: Describe the moment">
+      </label>
+
+      <div class="button-row">
+        <button id="copyPrompt">Copy Codex Prompt</button>
+        <button id="draftIssue">Draft Issue Body</button>
+      </div>
+
+      <div class="button-row">
+        <button id="createIssue" class="primary">Create GitHub Issue</button>
+      </div>
+
+      <label>
+        Generated Context
+        <textarea id="codexContext" rows="16" readonly></textarea>
+      </label>
+
+      <div id="issueStatus" class="meta"></div>
+    </aside>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
