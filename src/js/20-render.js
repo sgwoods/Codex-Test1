@@ -237,19 +237,21 @@ function drawPostFx(){}
 
 function draw(){
  const sh=S.shake*8,dx=rnd(sh,-sh),dy=rnd(sh,-sh);
- const outerPadX=Math.max(18,Math.floor(innerWidth*.03));
- const outerPadTop=Math.max(20,Math.floor(innerHeight*.02));
- const outerPadBottom=Math.max(18,Math.floor(innerHeight*.02));
- const shellPadL=Math.max(108,Math.floor(innerWidth*.09));
- const shellPadT=Math.max(116,Math.floor(innerHeight*.105));
- const shellPadB=Math.max(88,Math.floor(innerHeight*.082));
+ const compactCabinet=innerWidth<1500||innerHeight<980;
+ const outerPadX=Math.max(10,Math.floor(innerWidth*(compactCabinet?.012:.016)));
+ const outerPadTop=Math.max(10,Math.floor(innerHeight*(compactCabinet?.01:.014)));
+ const outerPadBottom=Math.max(10,Math.floor(innerHeight*(compactCabinet?.01:.014)));
+ const shellPadL=Math.max(compactCabinet?84:92,Math.floor(innerWidth*(compactCabinet?.068:.075)));
+ const shellPadT=Math.max(compactCabinet?90:98,Math.floor(innerHeight*(compactCabinet?.078:.088)));
+ const shellPadB=Math.max(compactCabinet?68:76,Math.floor(innerHeight*(compactCabinet?.062:.07)));
  const shellPadR=shellPadL;
  const railInset=Math.max(12,Math.floor(shellPadR*.12));
- const railW=Math.max(92,Math.min(128,shellPadR-railInset*2));
+ const railW=Math.max(compactCabinet?78:88,Math.min(compactCabinet?112:124,shellPadR-railInset*2));
  const availW=Math.max(PLAY_W,innerWidth-outerPadX*2-shellPadL-shellPadR);
  const availH=Math.max(PLAY_H,innerHeight-outerPadTop-outerPadBottom-shellPadT-shellPadB);
- const fit=Math.max(1,Math.floor(Math.min(availW/PLAY_W,availH/PLAY_H)));
- const scale=S.ultra?fit:Math.max(1,fit-1);
+ const fit=Math.max(1,Math.min(availW/PLAY_W,availH/PLAY_H));
+ const steppedFit=Math.max(1,Math.floor(fit*4)/4);
+ const scale=S.ultra?steppedFit:Math.max(1,steppedFit-.25);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
  const shellW=viewW+shellPadL+shellPadR;
  const shellH=viewH+shellPadT+shellPadB;
