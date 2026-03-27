@@ -112,6 +112,8 @@ The root Aurora build is the official public production lane, even while the pro
   - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
 - Contributor guide:
   - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
+- Home machine setup:
+  - `/Users/stevenwoods/Documents/Codex-Test1/HOME_MACHINE_SETUP.md`
 - Architecture overview:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
 - Reference baseline:
