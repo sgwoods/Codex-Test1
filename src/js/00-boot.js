@@ -1,5 +1,5 @@
 // Boot, constants, audio, logging, UI, and input handling.
-const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
+const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');

@@ -28,6 +28,12 @@ gameplay or tuning values.
   - harness-only hooks exposed on `window.__galagaHarness__`
   - deterministic setup helpers for scenarios and regression checks
 
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/`
+  - local artifact review app
+  - `server.js` indexes run folders under `harness-artifacts/`
+  - `app.js` synchronizes repaired videos, event streams, clips, and issue drafting
+  - expects a run folder with `summary.json` plus neighboring session/video artifacts
+
 ## Build / Deploy
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
@@ -137,6 +143,10 @@ later-stage enemy variety and future transform-style fidelity work.
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/`
   - scenario definitions for challenge, rescue, carried-fighter scoring,
     descent timing, Stage 4 pressure, and squadron bonuses
+
+- `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+  - canonical local evidence tree for harness runs and imported manual sessions
+  - the log viewer walks this tree recursively and treats each folder containing `summary.json` as a reviewable run
 
 ## Reference Material
 

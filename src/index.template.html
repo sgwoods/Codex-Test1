@@ -11,7 +11,7 @@
 <body>
 <canvas id="c"></canvas>
 <div id="playfieldFrame" aria-hidden="true"></div>
-<div id="hud"><div id="left"></div><div id="right"></div></div>
+<div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
 <div id="settingsPanel" aria-hidden="true">
@@ -70,6 +70,7 @@
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
   <div id="dockQuickTools">
+    <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores">🏆</button>
     <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤</button>
   </div>
   <div id="accountPanel" aria-live="polite" hidden>

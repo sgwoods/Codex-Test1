@@ -63,10 +63,27 @@ how work should flow through it.
 - Scenarios:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/`
 
+### Log Viewer
+
+- Local review server:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/server.js`
+- Viewer UI:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/app.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/styles.css`
+- The viewer reads the same recursive artifact tree under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+- Review-ready runs should include:
+  - `summary.json`
+  - `neo-galaga-session-*.json`
+  - `neo-galaga-video-*.review.webm` when available
+- The viewer uses `summary.json` as the run index and then resolves the neighboring session/video files from the summary metadata.
+
 ### Real Play
 
 - Player-generated `.json` and `.webm` can be imported and analyzed
 - The same analysis pipeline should be used whenever possible so live play and harness results stay comparable
+- The log viewer can inspect those imported runs as long as they are copied into the expected `harness-artifacts/` folder structure and have a `summary.json` beside them.
 
 ## Reference Flow
 

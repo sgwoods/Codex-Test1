@@ -13,7 +13,15 @@ canvas{display:block;width:100vw;height:100vh}
 #playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;border:1px solid rgba(122,195,255,.38);box-shadow:0 0 0 1px rgba(10,25,42,.92),0 0 24px rgba(76,156,255,.08),inset 0 0 0 1px rgba(255,222,134,.1)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.05);pointer-events:none}
 #playfieldFrame::after{inset:auto 10px 10px;top:14px;border-top:none;border-color:rgba(255,214,104,.12)}
-#hud{position:fixed;inset:0;pointer-events:none;display:flex;justify-content:space-between;padding:10px 16px;font-size:clamp(16px,1.25vw,24px);font-weight:700;letter-spacing:.02em;text-shadow:0 0 6px #000}
+#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) auto;align-items:center;gap:14px;padding:8px 16px 7px;border:1px solid rgba(122,195,255,.24);background:linear-gradient(180deg,rgba(9,18,31,.96),rgba(4,11,22,.88));box-shadow:0 10px 28px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.04);font-size:clamp(15px,1.1vw,24px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
+#left,#center,#right{min-width:0;white-space:nowrap}
+#left{text-align:left}
+#center{text-align:center}
+#right{text-align:right}
+#hud .hudLabel{color:#ff3a36}
+#hud .hudValue{color:#f4f7ff}
+#hud .hudStage{color:#ffd86d}
+#hud .hudLives{color:rgba(142,239,255,.84);font-size:.72em;margin-left:10px}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
@@ -61,15 +69,17 @@ canvas{display:block;width:100vw;height:100vh}
 #msg.startScreen .startSub{color:#ffd86d}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
-#settingsBtn{position:fixed;top:62px;right:16px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.78);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
+#settingsBtn{position:fixed;bottom:14px;right:14px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.84);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
 #settingsBtn:hover{background:rgba(19,43,84,.88);border-color:rgba(136,245,255,.9);transform:rotate(18deg)}
 #settingsBtn.open{background:rgba(19,43,84,.92);border-color:rgba(136,245,255,.95)}
-#settingsPanel{position:fixed;top:112px;right:16px;z-index:30;width:238px;background:rgba(7,12,24,.95);border:1px solid rgba(136,245,255,.26);padding:12px 12px 10px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45);backdrop-filter:blur(3px)}
+#settingsPanel{position:fixed;right:14px;bottom:64px;z-index:30;width:238px;background:rgba(7,12,24,.95);border:1px solid rgba(136,245,255,.26);padding:12px 12px 10px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45);backdrop-filter:blur(3px)}
 #settingsPanel.open{display:block}
 #settingsPanel h3{margin:0 0 10px;font-size:15px;color:#dff7ff;letter-spacing:.05em}
 #settingsActions{display:grid;gap:8px;margin-bottom:10px}
 #settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
 #settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
+#openViewerBtn{border-color:rgba(255,214,104,.4);background:rgba(46,34,8,.82);color:#fff0c5}
+#openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
 #testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:10px}
@@ -100,8 +110,17 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
-#accountPanel{margin-top:12px;padding-top:10px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:6px}
-#accountPanel h4{margin:0 0 2px;font-size:13px;letter-spacing:.05em;color:#dff7ff}
+#dockQuickTools{display:flex;justify-content:flex-end;gap:8px;width:min(100%,360px)}
+#dockQuickTools button{width:42px;height:42px;border-radius:999px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.74);color:#dff7ff;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
+#dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
+#dockQuickTools button.active{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
+#accountPanel{display:none;flex-direction:column;gap:8px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#accountPanel.visible{display:flex}
+#accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#accountPanelTitle,#accountPanelSub{display:block}
+#accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
+#accountPanelSub{margin-top:4px;font:400 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.1em;color:#dff7ff}
+#accountPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountPanel label{font-size:11px;line-height:1.2;color:rgba(218,236,255,.72)}
 #accountPanel input{width:100%;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:7px 8px;font:13px/1.25 "Courier New",Consolas,monospace;box-sizing:border-box}
 #accountActions,#accountInitialsRow{display:flex;gap:8px}
@@ -110,7 +129,7 @@ canvas{display:block;width:100vw;height:100vh}
 #accountInitialsRow input{width:90px;text-transform:uppercase}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
-#statusDock{position:fixed;right:14px;bottom:10px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#statusDock{position:fixed;right:14px;bottom:64px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
 #leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -144,29 +163,33 @@ canvas{display:block;width:100vw;height:100vh}
 .k{color:var(--a)}
 @media (max-width:840px){
  #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}
- #leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #dockQuickTools,#accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
  #buildStamp{align-items:flex-start}
+ #hud{grid-template-columns:1fr;gap:2px;padding:8px 12px 7px}
+ #left,#center,#right{text-align:left}
+ #right .hudLives{display:inline-block;margin-left:8px}
 }
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
 <div id="playfieldFrame" aria-hidden="true"></div>
-<div id="hud"><div id="left"></div><div id="right"></div></div>
+<div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
 <div id="settingsPanel" aria-hidden="true">
-  <h3>Settings</h3>
+  <h3>Developer Tools</h3>
   <div id="settingsActions">
+    <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
     <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
   <div id="testPanel">
-    <h4>Test Setup</h4>
+    <h4>Developer Start State</h4>
     <label for="testStage">Start Stage</label>
     <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
     <label for="testShips">Starting Ships</label>
@@ -177,33 +200,11 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
     <div id="testHint">Applies on next game start only.</div>
   </div>
-  <div id="accountPanel">
-    <h4>Account</h4>
-    <label for="accountEmail">Email</label>
-    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-    <label for="accountPassword">Password</label>
-    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
-    <div id="accountActions">
-      <button id="accountSignupBtn" type="button">Create Account</button>
-      <button id="accountLoginBtn" type="button">Log In</button>
-      <button id="accountLogoutBtn" type="button">Log Out</button>
-    </div>
-    <label for="accountInitials">Display Initials</label>
-    <div id="accountInitialsRow">
-      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
-      <button id="accountSaveInitialsBtn" type="button">Save</button>
-    </div>
-    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
-    <div id="accountMeta">
-      <span id="accountBest">Best: --</span>
-      <span id="accountRecent">Recent: --</span>
-    </div>
-  </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.218.sha.9f46342.beta</span>
-    <span id="settingsRelease">Mar 26 2026, 2:07 PM EDT</span>
-    <span id="settingsState">beta@9f46342 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.225.sha.65420bb.beta</span>
+    <span id="settingsRelease">Mar 27 2026, 7:58 AM EDT</span>
+    <span id="settingsState">beta@65420bb clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -234,6 +235,38 @@ canvas{display:block;width:100vw;height:100vh}
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
+  <div id="dockQuickTools">
+    <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores">🏆</button>
+    <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤</button>
+  </div>
+  <div id="accountPanel" aria-live="polite" hidden>
+    <div id="accountPanelHead">
+      <div>
+        <span id="accountPanelTitle">PILOT PROFILE</span>
+        <span id="accountPanelSub">SIGN IN FOR VALIDATED SCORES</span>
+      </div>
+      <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
+    </div>
+    <label for="accountEmail">Email</label>
+    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+    <label for="accountPassword">Password</label>
+    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+    <div id="accountActions">
+      <button id="accountSignupBtn" type="button">Create Account</button>
+      <button id="accountLoginBtn" type="button">Log In</button>
+      <button id="accountLogoutBtn" type="button">Log Out</button>
+    </div>
+    <label for="accountInitials">Display Initials</label>
+    <div id="accountInitialsRow">
+      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
+      <button id="accountSaveInitialsBtn" type="button">Save</button>
+    </div>
+    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
+    <div id="accountMeta">
+      <span id="accountBest">Best: --</span>
+      <span id="accountRecent">Recent: --</span>
+    </div>
+  </div>
   <div id="leaderboardPanel" aria-live="polite" hidden>
     <div id="leaderboardPanelHead">
       <div>
@@ -260,8 +293,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.218.sha.9f46342.beta</span>
-    <span id="buildStampRelease">Mar 26 2026, 2:07 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.225.sha.65420bb.beta</span>
+    <span id="buildStampRelease">Mar 27 2026, 7:58 AM EDT</span>
   </div>
 </div>
 <script>
@@ -295,8 +328,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 // Generated from src/js/*.js
 // Source: src/js/00-boot.js
 // Boot, constants, audio, logging, UI, and input handling.
-const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
+const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
+const openViewerBtn=document.getElementById('openViewerBtn');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
@@ -356,7 +390,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.218.sha.9f46342.beta',commit:'9f463427f57376ef18a9ddcf3322ee769171bb66',branch:'beta',dirty:false,released:'Mar 26 2026, 2:07 PM EDT',state:'beta@9f46342 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.225.sha.65420bb.beta',commit:'65420bbb33c0cd95749b84692d0bef98c5a5bcda',branch:'beta',dirty:false,released:'Mar 27 2026, 7:58 AM EDT',state:'beta@65420bb clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -370,6 +404,7 @@ let gameOverState=null;
 const ATTRACT={active:0,phase:'',timer:0,cycle:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[]};
+const VIDEO_REC_INCLUDE_AUDIO=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
 const STAGE1_SCRIPT=[
@@ -502,13 +537,28 @@ const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[]
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
-const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
- :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
- :s===2?{shotCap:1,attackCap:1,diveRate:.56,coolA:6.2,coolB:4.2,globalA:2.2,globalB:1.62,capChance:.12,diveShotRate:.46,aimMul:.1,aimClamp:14,aimRnd:1.8,bulletVy:169,bulletVyStage:3}
- :s===3?{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3}
- :s===4?{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3}
- :s===5?{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3}
- :{shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4};
+const CHALLENGE_STAGE_TUNE={shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2};
+const STAGE_RULES={
+ opening:{maxStage:1,tune:{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2},flight:{scriptedDiveVy:80,randomDiveVy:82,diveAccel:150}},
+ stage2:{maxStage:2,tune:{shotCap:1,attackCap:1,diveRate:.56,coolA:6.2,coolB:4.2,globalA:2.2,globalB:1.62,capChance:.12,diveShotRate:.46,aimMul:.1,aimClamp:14,aimRnd:1.8,bulletVy:169,bulletVyStage:3},flight:{scriptedDiveVy:86,randomDiveVy:88,diveAccel:162}},
+ stage3:{maxStage:3,tune:{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:162}},
+ stage4:{maxStage:4,tune:{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:172}},
+ stage5:{maxStage:5,tune:{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}},
+ endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
+};
+function stageRuleSet(stage){
+ for(const key of Object.keys(STAGE_RULES)){
+  const rule=STAGE_RULES[key];
+  if(stage<=rule.maxStage)return rule;
+ }
+ return STAGE_RULES.endless;
+}
+const stageTune=(s,ch)=>{
+ if(ch)return CHALLENGE_STAGE_TUNE;
+ const tune=stageRuleSet(s).tune;
+ return typeof tune==='function'?tune(s):tune;
+};
+const stageFlightTune=s=>stageRuleSet(s).flight;
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
@@ -788,6 +838,16 @@ function openSettings(){
  settingsOpen=1;
  syncSettingsUi();
 }
+function logViewerUrl(){
+ return 'http://127.0.0.1:4311/';
+}
+function openLogViewer(){
+ const win=window.open(logViewerUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened log viewer');
+ }else showToast('Allow popups to open the log viewer');
+}
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download=file;a.click();
@@ -818,20 +878,22 @@ function stopRunRecording(){
 function startRunRecording(){
  if(!VIDEO_REC.enabled||!videoRecordSupported())return;
  if(VIDEO_REC.active)stopRunRecording();
- const A=AC();A.resume?.();
- sfx.recGain=A.createGain();
- sfx.recGain.gain.value=.00035;
- sfx.recOsc=A.createOscillator();
- sfx.recOsc.type='sine';
- sfx.recOsc.frequency.value=23;
- sfx.recOsc.connect(sfx.recGain);
- sfx.recGain.connect(sfx.tap);
- sfx.recOsc.start();
  const mime=pickVideoMime();
  VIDEO_REC.mime=mime;
  const videoStream=c.captureStream(60),stream=new MediaStream();
  for(const t of videoStream.getVideoTracks())stream.addTrack(t);
- if(sfx.tap)for(const t of sfx.tap.stream.getAudioTracks())stream.addTrack(t);
+ if(VIDEO_REC_INCLUDE_AUDIO&&sfx.tap){
+  const A=AC();A.resume?.();
+  sfx.recGain=A.createGain();
+  sfx.recGain.gain.value=.00035;
+  sfx.recOsc=A.createOscillator();
+  sfx.recOsc.type='sine';
+  sfx.recOsc.frequency.value=23;
+  sfx.recOsc.connect(sfx.recGain);
+  sfx.recGain.connect(sfx.tap);
+  sfx.recOsc.start();
+  for(const t of sfx.tap.stream.getAudioTracks())stream.addTrack(t);
+ }
  VIDEO_REC.stream=stream;
  const chunks=[];
  VIDEO_REC.chunks=chunks;
@@ -992,6 +1054,7 @@ function rs(){
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
+if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -1019,6 +1082,7 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
+ if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
  if(!typingTarget&&e.code==='KeyX'&&(started||ATTRACT.active)){e.preventDefault();exportAndReturnToWaitMode('manual_hotkey');return;}
  if(typingTarget){
@@ -1132,6 +1196,10 @@ const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
+const leaderboardDockBtn=document.getElementById('leaderboardDockBtn');
+const accountDockBtn=document.getElementById('accountDockBtn');
+const accountPanel=document.getElementById('accountPanel');
+const accountPanelClose=document.getElementById('accountPanelClose');
 const accountEmail=document.getElementById('accountEmail');
 const accountPassword=document.getElementById('accountPassword');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
@@ -1170,7 +1238,10 @@ const LEADERBOARD={
  authBusy:0,
  primed:0,
  refreshTimer:0,
- panelOpen:0
+ panelOpen:0,
+ accountPanelOpen:0,
+ overlayPauseApplied:0,
+ overlayPausePrev:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -1286,21 +1357,76 @@ function renderLeaderboardPanel(){
 }
 function syncLeaderboardPanelVisibility(){
  if(!leaderboardPanel)return;
- const show=!!LEADERBOARD.panelOpen&&(!started||paused);
+ const show=!!LEADERBOARD.panelOpen;
  leaderboardPanel.hidden=!show;
  leaderboardPanel.classList.toggle('visible',show);
+ if(leaderboardViews)leaderboardViews.style.display=show?'flex':'none';
+ if(leaderboardDockBtn){
+  leaderboardDockBtn.classList.toggle('active',show);
+  leaderboardDockBtn.setAttribute('aria-expanded',show?'true':'false');
+ }
+}
+function syncOverlayPause(){
+ const overlayOpen=!!(LEADERBOARD.panelOpen||LEADERBOARD.accountPanelOpen);
+ if(overlayOpen){
+  if(started&&!paused&&!LEADERBOARD.overlayPauseApplied){
+   LEADERBOARD.overlayPausePrev=0;
+   LEADERBOARD.overlayPauseApplied=1;
+   paused=1;
+  }
+  return;
+ }
+ if(LEADERBOARD.overlayPauseApplied){
+  paused=LEADERBOARD.overlayPausePrev;
+  LEADERBOARD.overlayPauseApplied=0;
+ }
 }
 function openLeaderboardPanel(view=LEADERBOARD.view){
  LEADERBOARD.panelOpen=1;
+ LEADERBOARD.accountPanelOpen=0;
  if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
  else{
   renderLeaderboardPanel();
   syncLeaderboardPanelVisibility();
- }
+   syncAccountPanelVisibility();
+   syncOverlayPause();
+  }
 }
 function closeLeaderboardPanel(){
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
+ syncOverlayPause();
+}
+function syncAccountPanelVisibility(){
+ if(!accountPanel)return;
+ const show=!!LEADERBOARD.accountPanelOpen;
+ accountPanel.hidden=!show;
+ accountPanel.classList.toggle('visible',show);
+ if(accountDockBtn){
+  accountDockBtn.classList.toggle('active',show);
+  accountDockBtn.setAttribute('aria-expanded',show?'true':'false');
+ }
+}
+function openAccountPanel(){
+ LEADERBOARD.accountPanelOpen=1;
+ LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
+ syncAccountUi();
+ syncOverlayPause();
+}
+function closeAccountPanel(){
+ LEADERBOARD.accountPanelOpen=0;
+ syncAccountPanelVisibility();
+ syncOverlayPause();
+}
+function toggleAccountPanel(){
+ LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
+ if(LEADERBOARD.accountPanelOpen)LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
+ syncAccountUi();
+ syncOverlayPause();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
@@ -1363,6 +1489,7 @@ function syncLeaderboardUi(){
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
  renderLeaderboardPanel();
  syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
  syncAccountUi();
 }
 function syncLeaderboardBest(){
@@ -1656,10 +1783,21 @@ for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
+if(leaderboardDockBtn)leaderboardDockBtn.addEventListener('click',e=>{e.stopPropagation();openLeaderboardPanel();syncOverlayPause();});
+if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});
+if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPanel);
+if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+addEventListener('pointerdown',e=>{
+ const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
+ const inLeaderboard=LEADERBOARD.panelOpen&&leaderboardPanel&&(e.target===leaderboardDockBtn||leaderboardPanel.contains(e.target)||leaderboardViews.contains(e.target));
+ if(inAccount||inLeaderboard)return;
+ if(LEADERBOARD.accountPanelOpen)closeAccountPanel();
+ if(LEADERBOARD.panelOpen)closeLeaderboardPanel();
+});
 syncLeaderboardUi();
 initLeaderboard();
 
@@ -1985,20 +2123,13 @@ function runAttractPlayer(dt,p){
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }
 function scriptedDiveVy(stage){
- if(stage<=1)return 80;
- if(stage===2)return 86;
- return 92;
+ return stageFlightTune(stage).scriptedDiveVy;
 }
 function randomDiveVy(stage){
- if(stage<=1)return 82;
- if(stage<=3)return 88;
- if(stage===4)return 88;
- return 94;
+ return stageFlightTune(stage).randomDiveVy;
 }
 function diveAccel(stage){
- if(stage<=1)return 150;
- if(stage<=3)return 162;
- return 172;
+ return stageFlightTune(stage).diveAccel;
 }
 
 function shoot(){
@@ -2824,6 +2955,11 @@ function draw(){
  const scale=S.ultra?fit:Math.max(1,fit-1);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
  const ox=Math.floor((innerWidth-viewW)/2),oy=Math.floor((innerHeight-viewH)/2);
+ if(hud){
+  hud.style.left=`${ox+2}px`;
+  hud.style.top=`${Math.max(6,oy+4)}px`;
+  hud.style.width=`${Math.max(220,viewW-4)}px`;
+ }
  if(playfieldFrame){
   playfieldFrame.style.display='block';
   playfieldFrame.style.left=`${ox-2}px`;
@@ -2864,11 +3000,11 @@ function draw(){
  drawPostFx();
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
- left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
- right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
+ left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
+ if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
+ right.innerHTML=`<span class="hudStage">STAGE ${S.stage}</span><span class="hudLives">SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}</span>`;
 const toolsVisible=!started||paused||feedbackOpen;
-settingsBtn.style.display=toolsVisible?'block':'none';
-if(leaderboardViews)leaderboardViews.style.display=(!started||paused)?'flex':'none';
+settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
@@ -2878,7 +3014,7 @@ if(!toolsVisible)closeSettings();
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
-  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
+  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
  }
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;

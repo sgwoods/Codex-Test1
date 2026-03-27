@@ -269,7 +269,7 @@
         },
         {
           "title": "Log Viewer",
-          "body": "`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay."
+          "body": "`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay. It reads the recursive `harness-artifacts/` tree and expects each reviewable run folder to keep a `summary.json` beside its session log and repaired review video."
         }
       ]
     },
@@ -314,7 +314,7 @@
       "bullets": [
         "Edit source files in `src/` and rebuild with `npm run build`.",
         "Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.",
-        "Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned.",
+        "Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned, but it only sees runs that live inside the expected `harness-artifacts/` folder structure.",
         "Push `main` only when the generated artifacts and release-facing pages are current and the repo is clean.",
         "Use the release dashboard for milestone-level status, release notes for player-visible changes, and the public status export for the separate public project page.",
         "When a behavior question is unclear, preserve the lesson in a durable note under `reference-artifacts/` or `reference-analysis/` instead of relying on chat history."
@@ -328,7 +328,7 @@
         {
           "label": "Log Viewer",
           "href": "http://127.0.0.1:4311/",
-          "detail": "Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues."
+          "detail": "Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues. Runs must live under `harness-artifacts/` with a `summary.json` and neighboring session/video files."
         },
         {
           "label": "README",

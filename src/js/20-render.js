@@ -228,6 +228,11 @@ function draw(){
  const scale=S.ultra?fit:Math.max(1,fit-1);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
  const ox=Math.floor((innerWidth-viewW)/2),oy=Math.floor((innerHeight-viewH)/2);
+ if(hud){
+  hud.style.left=`${ox+2}px`;
+  hud.style.top=`${Math.max(6,oy+4)}px`;
+  hud.style.width=`${Math.max(220,viewW-4)}px`;
+ }
  if(playfieldFrame){
   playfieldFrame.style.display='block';
   playfieldFrame.style.left=`${ox-2}px`;
@@ -268,11 +273,11 @@ function draw(){
  drawPostFx();
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
- left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
- right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
+ left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
+ if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
+ right.innerHTML=`<span class="hudStage">STAGE ${S.stage}</span><span class="hudLives">SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}</span>`;
 const toolsVisible=!started||paused||feedbackOpen;
-settingsBtn.style.display=toolsVisible?'block':'none';
-if(leaderboardViews)leaderboardViews.style.display=(!started||paused)?'flex':'none';
+settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();

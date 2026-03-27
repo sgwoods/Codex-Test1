@@ -123,6 +123,12 @@ The root Aurora build is the official public production lane, even while the pro
   Then open:
   - `http://127.0.0.1:4311/`
   The viewer loads repaired run videos, keeps the event stream aligned beside playback, supports paused zoom/pan and region clipping, and can draft Codex context or GitHub issues from the selected moment.
+  It expects run artifacts to live under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+  With one `summary.json` per run folder and neighboring files such as:
+  - `neo-galaga-session-*.json`
+  - `neo-galaga-video-*.review.webm`
+  The viewer discovers runs recursively, so batch folders may contain nested run folders as long as each run keeps that local structure.
 - Promote the current built artifacts to the hosted `beta` lane with:
   ```bash
   npm run promote:beta
@@ -251,6 +257,13 @@ The root Aurora build is the official public production lane, even while the pro
   ```
 - Output is written to a timestamped folder under:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+- The log viewer reads that same tree recursively. A run folder is considered review-ready when it contains:
+  - `summary.json`
+  - a neighboring session log:
+    - `neo-galaga-session-*.json`
+  - a browser-friendly repaired review video when available:
+    - `neo-galaga-video-*.review.webm`
+  - fallback raw videos such as `.webm` or `.mkv` can still be discovered, but the repaired `.review.webm` is the preferred review artifact.
 - Every new harness run should be treated as incomplete until the artifact-quality check passes:
   ```bash
   npm run harness:check:video-artifact

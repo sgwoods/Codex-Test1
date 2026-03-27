@@ -8,6 +8,7 @@ const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
+const leaderboardDockBtn=document.getElementById('leaderboardDockBtn');
 const accountDockBtn=document.getElementById('accountDockBtn');
 const accountPanel=document.getElementById('accountPanel');
 const accountPanelClose=document.getElementById('accountPanelClose');
@@ -50,7 +51,9 @@ const LEADERBOARD={
  primed:0,
  refreshTimer:0,
  panelOpen:0,
- accountPanelOpen:0
+ accountPanelOpen:0,
+ overlayPauseApplied:0,
+ overlayPausePrev:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -166,21 +169,45 @@ function renderLeaderboardPanel(){
 }
 function syncLeaderboardPanelVisibility(){
  if(!leaderboardPanel)return;
- const show=!!LEADERBOARD.panelOpen&&(!started||paused);
+ const show=!!LEADERBOARD.panelOpen;
  leaderboardPanel.hidden=!show;
  leaderboardPanel.classList.toggle('visible',show);
+ if(leaderboardViews)leaderboardViews.style.display=show?'flex':'none';
+ if(leaderboardDockBtn){
+  leaderboardDockBtn.classList.toggle('active',show);
+  leaderboardDockBtn.setAttribute('aria-expanded',show?'true':'false');
+ }
+}
+function syncOverlayPause(){
+ const overlayOpen=!!(LEADERBOARD.panelOpen||LEADERBOARD.accountPanelOpen);
+ if(overlayOpen){
+  if(started&&!paused&&!LEADERBOARD.overlayPauseApplied){
+   LEADERBOARD.overlayPausePrev=0;
+   LEADERBOARD.overlayPauseApplied=1;
+   paused=1;
+  }
+  return;
+ }
+ if(LEADERBOARD.overlayPauseApplied){
+  paused=LEADERBOARD.overlayPausePrev;
+  LEADERBOARD.overlayPauseApplied=0;
+ }
 }
 function openLeaderboardPanel(view=LEADERBOARD.view){
  LEADERBOARD.panelOpen=1;
+ LEADERBOARD.accountPanelOpen=0;
  if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
  else{
   renderLeaderboardPanel();
   syncLeaderboardPanelVisibility();
- }
+   syncAccountPanelVisibility();
+   syncOverlayPause();
+  }
 }
 function closeLeaderboardPanel(){
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
+ syncOverlayPause();
 }
 function syncAccountPanelVisibility(){
  if(!accountPanel)return;
@@ -194,17 +221,24 @@ function syncAccountPanelVisibility(){
 }
 function openAccountPanel(){
  LEADERBOARD.accountPanelOpen=1;
+ LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
  syncAccountPanelVisibility();
  syncAccountUi();
+ syncOverlayPause();
 }
 function closeAccountPanel(){
  LEADERBOARD.accountPanelOpen=0;
  syncAccountPanelVisibility();
+ syncOverlayPause();
 }
 function toggleAccountPanel(){
  LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
+ if(LEADERBOARD.accountPanelOpen)LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
  syncAccountPanelVisibility();
  syncAccountUi();
+ syncOverlayPause();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
@@ -561,6 +595,7 @@ for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
+if(leaderboardDockBtn)leaderboardDockBtn.addEventListener('click',e=>{e.stopPropagation();openLeaderboardPanel();syncOverlayPause();});
 if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});
 if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPanel);
 if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
@@ -569,9 +604,11 @@ if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 addEventListener('pointerdown',e=>{
- if(!LEADERBOARD.accountPanelOpen||!accountPanel)return;
- if(e.target===accountDockBtn||accountPanel.contains(e.target))return;
- closeAccountPanel();
+ const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
+ const inLeaderboard=LEADERBOARD.panelOpen&&leaderboardPanel&&(e.target===leaderboardDockBtn||leaderboardPanel.contains(e.target)||leaderboardViews.contains(e.target));
+ if(inAccount||inLeaderboard)return;
+ if(LEADERBOARD.accountPanelOpen)closeAccountPanel();
+ if(LEADERBOARD.panelOpen)closeLeaderboardPanel();
 });
 syncLeaderboardUi();
 initLeaderboard();

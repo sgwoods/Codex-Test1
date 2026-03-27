@@ -116,6 +116,19 @@ The root Aurora build is the official public production lane, even while the pro
   ```bash
   npm run build
   ```
+- Start the local artifact review viewer with:
+  ```bash
+  npm run log-viewer
+  ```
+  Then open:
+  - `http://127.0.0.1:4311/`
+  The viewer loads repaired run videos, keeps the event stream aligned beside playback, supports paused zoom/pan and region clipping, and can draft Codex context or GitHub issues from the selected moment.
+  It expects run artifacts to live under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+  With one `summary.json` per run folder and neighboring files such as:
+  - `neo-galaga-session-*.json`
+  - `neo-galaga-video-*.review.webm`
+  The viewer discovers runs recursively, so batch folders may contain nested run folders as long as each run keeps that local structure.
 - Promote the current built artifacts to the hosted `beta` lane with:
   ```bash
   npm run promote:beta
@@ -244,6 +257,24 @@ The root Aurora build is the official public production lane, even while the pro
   ```
 - Output is written to a timestamped folder under:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+- The log viewer reads that same tree recursively. A run folder is considered review-ready when it contains:
+  - `summary.json`
+  - a neighboring session log:
+    - `neo-galaga-session-*.json`
+  - a browser-friendly repaired review video when available:
+    - `neo-galaga-video-*.review.webm`
+  - fallback raw videos such as `.webm` or `.mkv` can still be discovered, but the repaired `.review.webm` is the preferred review artifact.
+- Every new harness run should be treated as incomplete until the artifact-quality check passes:
+  ```bash
+  npm run harness:check:video-artifact
+  ```
+- If the quality check fails while reviewing logs or videos:
+  - file an immediate bug because the recorder/export path is no longer trustworthy
+  - suggest the repair path:
+    ```bash
+    npm run harness:repair:videos
+    ```
+  - and avoid using the affected video for synchronized analysis until it has a repaired browser-friendly review artifact
 - The harness writes a `summary.json` beside the generated artifacts, including:
   - seed used for the run
   - selected self-play persona when used:
@@ -296,6 +327,10 @@ The root Aurora build is the official public production lane, even while the pro
   - `tuning-report.json` with prioritized findings to guide the next gameplay pass
   - later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix
   - the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish "died early" from "survived the full window but spent too many ships"
+- Historical harness videos can be repaired in place into `.review.webm` artifacts and have their neighboring `summary.json` updated with artifact-quality metadata:
+  ```bash
+  npm run harness:repair:videos
+  ```
 - Typical batch timings on this machine:
   - `quick`: about `1.5-2 minutes`
   - `default`: about `3-4 minutes`

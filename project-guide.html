@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-alpha.1+build.223.sha.a9faab5.dirty</span>
+              <span class="metaValue">0.5.0-alpha.1+build.225.sha.65420bb.dirty</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -613,7 +613,7 @@
 
     <article class="card">
       <h3>Log Viewer</h3>
-      <p>`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay.</p>
+      <p>`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay. It reads the recursive `harness-artifacts/` tree and expects each reviewable run folder to keep a `summary.json` beside its session log and repaired review video.</p>
     </article>
   
 </div>
@@ -695,7 +695,7 @@
     <li>Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.</li>
   
 
-    <li>Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned.</li>
+    <li>Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned, but it only sees runs that live inside the expected `harness-artifacts/` folder structure.</li>
   
 
     <li>Push `main` only when the generated artifacts and release-facing pages are current and the repo is clean.</li>
@@ -719,7 +719,7 @@
 
     <article class="linkCard">
       <a href="http://127.0.0.1:4311/">Log Viewer</a>
-      <p>Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues.</p>
+      <p>Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues. Runs must live under `harness-artifacts/` with a `summary.json` and neighboring session/video files.</p>
     </article>
   
 
@@ -869,7 +869,11 @@
 <pre><code data-lang="bash">  npm run log-viewer</code></pre>
 <p>Then open:</p>
 <ul><li><code>http://127.0.0.1:4311/</code></li></ul>
-<p>The viewer loads repaired run videos, keeps the event stream aligned beside playback, supports paused zoom/pan and region clipping, and can draft Codex context or GitHub issues from the selected moment.</p>
+<p>The viewer loads repaired run videos, keeps the event stream aligned beside playback, supports paused zoom/pan and region clipping, and can draft Codex context or GitHub issues from the selected moment. It expects run artifacts to live under:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul>
+<p>With one <code>summary.json</code> per run folder and neighboring files such as:</p>
+<ul><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code></li></ul>
+<p>The viewer discovers runs recursively, so batch folders may contain nested run folders as long as each run keeps that local structure.</p>
 <ul><li>Promote the current built artifacts to the hosted <code>beta</code> lane with:</li></ul>
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
 <p>This creates or refreshes:</p>
@@ -919,7 +923,7 @@
   npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
   npm run harness:batch -- --profile deep</code></pre>
-<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>Every new harness run should be treated as incomplete until the artifact-quality check passes:</li></ul>
+<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>The log viewer reads that same tree recursively. A run folder is considered review-ready when it contains:<ul><li><code>summary.json</code></li><li>a neighboring session log:<ul><li><code>neo-galaga-session-*.json</code></li></ul></li><li>a browser-friendly repaired review video when available:<ul><li><code>neo-galaga-video-*.review.webm</code></li></ul></li><li>fallback raw videos such as <code>.webm</code> or <code>.mkv</code> can still be discovered, but the repaired <code>.review.webm</code> is the preferred review artifact.</li></ul></li><li>Every new harness run should be treated as incomplete until the artifact-quality check passes:</li></ul>
 <pre><code data-lang="bash">  npm run harness:check:video-artifact</code></pre>
 <ul><li>If the quality check fails while reviewing logs or videos:<ul><li>file an immediate bug because the recorder/export path is no longer trustworthy</li><li>suggest the repair path:</li></ul></li></ul>
 <pre><code data-lang="bash">    npm run harness:repair:videos</code></pre>
@@ -1192,8 +1196,10 @@
 <h3>Testing / Evidence Flow</h3>
 <h4>Harness</h4>
 <ul><li>Run gameplay:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-gameplay.js</code></li></ul></li><li>Analyze a run:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/analyze-run.js</code></li></ul></li><li>Batch runner:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-batch.js</code></li></ul></li><li>Batch prioritization:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/tuning-report.js</code></li></ul></li><li>Scenarios:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/</code></li></ul></li></ul>
+<h4>Log Viewer</h4>
+<ul><li>Local review server:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/server.js</code></li></ul></li><li>Viewer UI:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/app.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/styles.css</code></li></ul></li><li>The viewer reads the same recursive artifact tree under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>Review-ready runs should include:<ul><li><code>summary.json</code></li><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code> when available</li></ul></li><li>The viewer uses <code>summary.json</code> as the run index and then resolves the neighboring session/video files from the summary metadata.</li></ul>
 <h4>Real Play</h4>
-<ul><li>Player-generated <code>.json</code> and <code>.webm</code> can be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li></ul>
+<ul><li>Player-generated <code>.json</code> and <code>.webm</code> can be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li><li>The log viewer can inspect those imported runs as long as they are copied into the expected <code>harness-artifacts/</code> folder structure and have a <code>summary.json</code> beside them.</li></ul>
 <h3>Reference Flow</h3>
 <h4>Durable Sources</h4>
 <ul><li>Reference root:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/</code></li></ul></li><li>Manual:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/</code></li></ul></li><li>Walkthrough notes:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/walkthroughs/trueachievements-galaga/</code></li></ul></li></ul>
@@ -1232,6 +1238,7 @@
 <p>bullet logic, ship loss, and the main update loop</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js</code><ul><li>sprite rendering, hitbox rendering assumptions, overlays, HUD, banners</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code><ul><li>harness-only hooks exposed on <code>window.__galagaHarness__</code></li><li>deterministic setup helpers for scenarios and regression checks</li></ul></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/</code><ul><li>local artifact review app</li><li><code>server.js</code> indexes run folders under <code>harness-artifacts/</code></li><li><code>app.js</code> synchronizes repaired videos, event streams, clips, and issue drafting</li><li>expects a run folder with <code>summary.json</code> plus neighboring session/video artifacts</li></ul></li></ul>
 <h3>Build / Deploy</h3>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code><ul><li>assembles source files into <code>/Users/stevenwoods/Documents/Codex-Test1/index.html</code></li><li>writes <code>/Users/stevenwoods/Documents/Codex-Test1/build-info.json</code></li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js</code><ul><li>syncs the separate <code>sgwoods/public</code> repo from build metadata</li></ul></li></ul>
@@ -1266,6 +1273,7 @@
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/tuning-report.js</code><ul><li>rolls per-run analysis into prioritized findings</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/</code><ul><li>scenario definitions for challenge, rescue, carried-fighter scoring,</li></ul></li></ul>
 <p>descent timing, Stage 4 pressure, and squadron bonuses</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code><ul><li>canonical local evidence tree for harness runs and imported manual sessions</li><li>the log viewer walks this tree recursively and treats each folder containing <code>summary.json</code> as a reviewable run</li></ul></li></ul>
 <h3>Reference Material</h3>
 <p>Primary rule references:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/Galaga_-_1981_-_Namco.pdf</code></li></ul>
@@ -1507,7 +1515,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-alpha.1+build.223.sha.a9faab5.dirty
+          Build: 0.5.0-alpha.1+build.225.sha.65420bb.dirty
         </p>
       </aside>
     </main>

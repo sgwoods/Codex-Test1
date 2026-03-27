@@ -13,7 +13,15 @@ canvas{display:block;width:100vw;height:100vh}
 #playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;border:1px solid rgba(122,195,255,.38);box-shadow:0 0 0 1px rgba(10,25,42,.92),0 0 24px rgba(76,156,255,.08),inset 0 0 0 1px rgba(255,222,134,.1)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.05);pointer-events:none}
 #playfieldFrame::after{inset:auto 10px 10px;top:14px;border-top:none;border-color:rgba(255,214,104,.12)}
-#hud{position:fixed;inset:0;pointer-events:none;display:flex;justify-content:space-between;padding:10px 16px;font-size:clamp(16px,1.25vw,24px);font-weight:700;letter-spacing:.02em;text-shadow:0 0 6px #000}
+#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) auto;align-items:center;gap:14px;padding:8px 16px 7px;border:1px solid rgba(122,195,255,.24);background:linear-gradient(180deg,rgba(9,18,31,.96),rgba(4,11,22,.88));box-shadow:0 10px 28px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.04);font-size:clamp(15px,1.1vw,24px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
+#left,#center,#right{min-width:0;white-space:nowrap}
+#left{text-align:left}
+#center{text-align:center}
+#right{text-align:right}
+#hud .hudLabel{color:#ff3a36}
+#hud .hudValue{color:#f4f7ff}
+#hud .hudStage{color:#ffd86d}
+#hud .hudLives{color:rgba(142,239,255,.84);font-size:.72em;margin-left:10px}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
@@ -61,10 +69,10 @@ canvas{display:block;width:100vw;height:100vh}
 #msg.startScreen .startSub{color:#ffd86d}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
-#settingsBtn{position:fixed;top:62px;right:16px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.78);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
+#settingsBtn{position:fixed;bottom:14px;right:14px;z-index:30;width:42px;height:42px;border:1px solid rgba(136,245,255,.48);background:rgba(8,18,35,.84);color:#dbf8ff;font:700 22px/1 "Courier New",Consolas,monospace;border-radius:999px;cursor:pointer;backdrop-filter:blur(2px);transition:background .14s,border-color .14s,transform .14s}
 #settingsBtn:hover{background:rgba(19,43,84,.88);border-color:rgba(136,245,255,.9);transform:rotate(18deg)}
 #settingsBtn.open{background:rgba(19,43,84,.92);border-color:rgba(136,245,255,.95)}
-#settingsPanel{position:fixed;top:112px;right:16px;z-index:30;width:238px;background:rgba(7,12,24,.95);border:1px solid rgba(136,245,255,.26);padding:12px 12px 10px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45);backdrop-filter:blur(3px)}
+#settingsPanel{position:fixed;right:14px;bottom:64px;z-index:30;width:238px;background:rgba(7,12,24,.95);border:1px solid rgba(136,245,255,.26);padding:12px 12px 10px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45);backdrop-filter:blur(3px)}
 #settingsPanel.open{display:block}
 #settingsPanel h3{margin:0 0 10px;font-size:15px;color:#dff7ff;letter-spacing:.05em}
 #settingsActions{display:grid;gap:8px;margin-bottom:10px}
@@ -121,7 +129,7 @@ canvas{display:block;width:100vw;height:100vh}
 #accountInitialsRow input{width:90px;text-transform:uppercase}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
-#statusDock{position:fixed;right:14px;bottom:10px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#statusDock{position:fixed;right:14px;bottom:64px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
 #leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -160,13 +168,16 @@ canvas{display:block;width:100vw;height:100vh}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
  #buildStamp{align-items:flex-start}
+ #hud{grid-template-columns:1fr;gap:2px;padding:8px 12px 7px}
+ #left,#center,#right{text-align:left}
+ #right .hudLives{display:inline-block;margin-left:8px}
 }
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
 <div id="playfieldFrame" aria-hidden="true"></div>
-<div id="hud"><div id="left"></div><div id="right"></div></div>
+<div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
 <div id="settingsPanel" aria-hidden="true">
@@ -191,9 +202,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.223.sha.a9faab5.dirty</span>
-    <span id="settingsRelease">Mar 27 2026, 7:32 AM EDT</span>
-    <span id="settingsState">main@a9faab5 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.225.sha.65420bb.dirty</span>
+    <span id="settingsRelease">Mar 27 2026, 7:58 AM EDT</span>
+    <span id="settingsState">main@65420bb dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -225,6 +236,7 @@ canvas{display:block;width:100vw;height:100vh}
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
   <div id="dockQuickTools">
+    <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores">🏆</button>
     <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤</button>
   </div>
   <div id="accountPanel" aria-live="polite" hidden>
@@ -281,8 +293,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.223.sha.a9faab5.dirty</span>
-    <span id="buildStampRelease">Mar 27 2026, 7:32 AM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.225.sha.65420bb.dirty</span>
+    <span id="buildStampRelease">Mar 27 2026, 7:58 AM EDT</span>
   </div>
 </div>
 <script>
@@ -316,7 +328,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 // Generated from src/js/*.js
 // Source: src/js/00-boot.js
 // Boot, constants, audio, logging, UI, and input handling.
-const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
+const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
@@ -378,7 +390,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.223.sha.a9faab5.dirty',commit:'a9faab50f5b4054c0fa3cbe68a5eee7ec63c1d37',branch:'main',dirty:true,released:'Mar 27 2026, 7:32 AM EDT',state:'main@a9faab5 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.225.sha.65420bb.dirty',commit:'65420bbb33c0cd95749b84692d0bef98c5a5bcda',branch:'main',dirty:true,released:'Mar 27 2026, 7:58 AM EDT',state:'main@65420bb dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1184,6 +1196,7 @@ const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
+const leaderboardDockBtn=document.getElementById('leaderboardDockBtn');
 const accountDockBtn=document.getElementById('accountDockBtn');
 const accountPanel=document.getElementById('accountPanel');
 const accountPanelClose=document.getElementById('accountPanelClose');
@@ -1226,7 +1239,9 @@ const LEADERBOARD={
  primed:0,
  refreshTimer:0,
  panelOpen:0,
- accountPanelOpen:0
+ accountPanelOpen:0,
+ overlayPauseApplied:0,
+ overlayPausePrev:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -1342,21 +1357,45 @@ function renderLeaderboardPanel(){
 }
 function syncLeaderboardPanelVisibility(){
  if(!leaderboardPanel)return;
- const show=!!LEADERBOARD.panelOpen&&(!started||paused);
+ const show=!!LEADERBOARD.panelOpen;
  leaderboardPanel.hidden=!show;
  leaderboardPanel.classList.toggle('visible',show);
+ if(leaderboardViews)leaderboardViews.style.display=show?'flex':'none';
+ if(leaderboardDockBtn){
+  leaderboardDockBtn.classList.toggle('active',show);
+  leaderboardDockBtn.setAttribute('aria-expanded',show?'true':'false');
+ }
+}
+function syncOverlayPause(){
+ const overlayOpen=!!(LEADERBOARD.panelOpen||LEADERBOARD.accountPanelOpen);
+ if(overlayOpen){
+  if(started&&!paused&&!LEADERBOARD.overlayPauseApplied){
+   LEADERBOARD.overlayPausePrev=0;
+   LEADERBOARD.overlayPauseApplied=1;
+   paused=1;
+  }
+  return;
+ }
+ if(LEADERBOARD.overlayPauseApplied){
+  paused=LEADERBOARD.overlayPausePrev;
+  LEADERBOARD.overlayPauseApplied=0;
+ }
 }
 function openLeaderboardPanel(view=LEADERBOARD.view){
  LEADERBOARD.panelOpen=1;
+ LEADERBOARD.accountPanelOpen=0;
  if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
  else{
   renderLeaderboardPanel();
   syncLeaderboardPanelVisibility();
- }
+   syncAccountPanelVisibility();
+   syncOverlayPause();
+  }
 }
 function closeLeaderboardPanel(){
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
+ syncOverlayPause();
 }
 function syncAccountPanelVisibility(){
  if(!accountPanel)return;
@@ -1370,17 +1409,24 @@ function syncAccountPanelVisibility(){
 }
 function openAccountPanel(){
  LEADERBOARD.accountPanelOpen=1;
+ LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
  syncAccountPanelVisibility();
  syncAccountUi();
+ syncOverlayPause();
 }
 function closeAccountPanel(){
  LEADERBOARD.accountPanelOpen=0;
  syncAccountPanelVisibility();
+ syncOverlayPause();
 }
 function toggleAccountPanel(){
  LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
+ if(LEADERBOARD.accountPanelOpen)LEADERBOARD.panelOpen=0;
+ syncLeaderboardPanelVisibility();
  syncAccountPanelVisibility();
  syncAccountUi();
+ syncOverlayPause();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
@@ -1737,6 +1783,7 @@ for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
+if(leaderboardDockBtn)leaderboardDockBtn.addEventListener('click',e=>{e.stopPropagation();openLeaderboardPanel();syncOverlayPause();});
 if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});
 if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPanel);
 if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
@@ -1745,9 +1792,11 @@ if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 addEventListener('pointerdown',e=>{
- if(!LEADERBOARD.accountPanelOpen||!accountPanel)return;
- if(e.target===accountDockBtn||accountPanel.contains(e.target))return;
- closeAccountPanel();
+ const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
+ const inLeaderboard=LEADERBOARD.panelOpen&&leaderboardPanel&&(e.target===leaderboardDockBtn||leaderboardPanel.contains(e.target)||leaderboardViews.contains(e.target));
+ if(inAccount||inLeaderboard)return;
+ if(LEADERBOARD.accountPanelOpen)closeAccountPanel();
+ if(LEADERBOARD.panelOpen)closeLeaderboardPanel();
 });
 syncLeaderboardUi();
 initLeaderboard();
@@ -2906,6 +2955,11 @@ function draw(){
  const scale=S.ultra?fit:Math.max(1,fit-1);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
  const ox=Math.floor((innerWidth-viewW)/2),oy=Math.floor((innerHeight-viewH)/2);
+ if(hud){
+  hud.style.left=`${ox+2}px`;
+  hud.style.top=`${Math.max(6,oy+4)}px`;
+  hud.style.width=`${Math.max(220,viewW-4)}px`;
+ }
  if(playfieldFrame){
   playfieldFrame.style.display='block';
   playfieldFrame.style.left=`${ox-2}px`;
@@ -2946,11 +3000,11 @@ function draw(){
  drawPostFx();
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
- left.innerHTML=`<span style=\"color:#ff2d2d\">1UP</span> ${S.score.toString().padStart(6,'0')}   <span style=\"color:#ff2d2d\">HIGH SCORE</span> ${String(S.best).padStart(6,'0')}   STAGE ${S.stage}`;
- right.textContent=`SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}`;
+ left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
+ if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
+ right.innerHTML=`<span class="hudStage">STAGE ${S.stage}</span><span class="hudLives">SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}</span>`;
 const toolsVisible=!started||paused||feedbackOpen;
-settingsBtn.style.display=toolsVisible?'block':'none';
-if(leaderboardViews)leaderboardViews.style.display=(!started||paused)?'flex':'none';
+settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();

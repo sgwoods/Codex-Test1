@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.218.sha.9f46342.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.225.sha.65420bb.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">March 26, 2026</span>
+              <span class="metaValue">March 27, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -610,6 +610,12 @@
       <p>`tools/build/build-index.js` assembles the playable game and generated pages. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo using the agreed public status interface.</p>
     </article>
   
+
+    <article class="card">
+      <h3>Log Viewer</h3>
+      <p>`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay. It reads the recursive `harness-artifacts/` tree and expects each reviewable run folder to keep a `summary.json` beside its session log and repaired review video.</p>
+    </article>
+  
 </div>
     </section>
   
@@ -640,6 +646,9 @@
   
 
     <li>Run analysis now includes challenge, rescue, carried-fighter, later-stage, audio, and measured squadron-spacing metrics so regressions are easier to spot.</li>
+  
+
+    <li>Artifact review coverage now includes repaired `.review.webm` playback, quality checks, clip extraction, synced event browsing, and direct issue drafting through the local log viewer.</li>
   
 </ul>
     </section>
@@ -686,6 +695,9 @@
     <li>Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.</li>
   
 
+    <li>Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned, but it only sees runs that live inside the expected `harness-artifacts/` folder structure.</li>
+  
+
     <li>Push `main` only when the generated artifacts and release-facing pages are current and the repo is clean.</li>
   
 
@@ -704,6 +716,12 @@
         <p>The best entry points for different kinds of work.</p>
       </div>
       <div class="linkGrid">
+
+    <article class="linkCard">
+      <a href="http://127.0.0.1:4311/">Log Viewer</a>
+      <p>Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues. Runs must live under `harness-artifacts/` with a `summary.json` and neighboring session/video files.</p>
+    </article>
+  
 
     <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/README.md">README</a>
@@ -847,6 +865,15 @@
 <h3>Development</h3>
 <ul><li>Editable source files live in:<ul><li><code>src/index.template.html</code></li><li><code>src/styles.css</code></li><li><code>src/js/00-boot.js</code></li><li><code>src/js/10-gameplay.js</code></li><li><code>src/js/20-render.js</code></li><li><code>src/js/90-harness.js</code></li></ul></li><li>Source orientation guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>Contributor guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md</code></li></ul></li><li>Architecture overview:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>Reference baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md</code></li></ul></li><li>Served artifact:<ul><li><code>index.html</code></li></ul></li><li>Build the served file from source with:</li></ul>
 <pre><code data-lang="bash">  npm run build</code></pre>
+<ul><li>Start the local artifact review viewer with:</li></ul>
+<pre><code data-lang="bash">  npm run log-viewer</code></pre>
+<p>Then open:</p>
+<ul><li><code>http://127.0.0.1:4311/</code></li></ul>
+<p>The viewer loads repaired run videos, keeps the event stream aligned beside playback, supports paused zoom/pan and region clipping, and can draft Codex context or GitHub issues from the selected moment. It expects run artifacts to live under:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul>
+<p>With one <code>summary.json</code> per run folder and neighboring files such as:</p>
+<ul><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code></li></ul>
+<p>The viewer discovers runs recursively, so batch folders may contain nested run folders as long as each run keeps that local structure.</p>
 <ul><li>Promote the current built artifacts to the hosted <code>beta</code> lane with:</li></ul>
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
 <p>This creates or refreshes:</p>
@@ -896,14 +923,20 @@
   npm run harness:batch -- --profile fidelity
   npm run harness:batch -- --profile default
   npm run harness:batch -- --profile deep</code></pre>
-<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>The harness writes a <code>summary.json</code> beside the generated artifacts, including:<ul><li>seed used for the run</li><li>selected self-play persona when used:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li></ul></li><li>Stage 4 now has a dedicated capture-pressure scenario as well:<ul><li><code>stage4-capture-pressure</code></li><li>purpose: stress a natural capture into carrying-boss return under Stage 4 timing</li><li>note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for <code>stage4-five-ships</code> or <code>stage4-survival</code></li><li>stage clears / challenge clears / ship losses</li><li>per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes</li><li>capture/rescue markers such as capture start, fighter captured, and fighter rescued</li><li>capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile</li><li>transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible</li><li>rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire</li></ul></li><li>Persona self-play is useful for launch-readiness tuning without changing game rules:</li></ul>
+<ul><li>Output is written to a timestamped folder under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>The log viewer reads that same tree recursively. A run folder is considered review-ready when it contains:<ul><li><code>summary.json</code></li><li>a neighboring session log:<ul><li><code>neo-galaga-session-*.json</code></li></ul></li><li>a browser-friendly repaired review video when available:<ul><li><code>neo-galaga-video-*.review.webm</code></li></ul></li><li>fallback raw videos such as <code>.webm</code> or <code>.mkv</code> can still be discovered, but the repaired <code>.review.webm</code> is the preferred review artifact.</li></ul></li><li>Every new harness run should be treated as incomplete until the artifact-quality check passes:</li></ul>
+<pre><code data-lang="bash">  npm run harness:check:video-artifact</code></pre>
+<ul><li>If the quality check fails while reviewing logs or videos:<ul><li>file an immediate bug because the recorder/export path is no longer trustworthy</li><li>suggest the repair path:</li></ul></li></ul>
+<pre><code data-lang="bash">    npm run harness:repair:videos</code></pre>
+<ul><li>and avoid using the affected video for synchronized analysis until it has a repaired browser-friendly review artifact</li></ul><ul><li>The harness writes a <code>summary.json</code> beside the generated artifacts, including:<ul><li>seed used for the run</li><li>selected self-play persona when used:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li></ul></li><li>Stage 4 now has a dedicated capture-pressure scenario as well:<ul><li><code>stage4-capture-pressure</code></li><li>purpose: stress a natural capture into carrying-boss return under Stage 4 timing</li><li>note: this scenario is currently most useful as a focused capture-pressure probe, not a full Stage 4 replacement for <code>stage4-five-ships</code> or <code>stage4-survival</code></li><li>stage clears / challenge clears / ship losses</li><li>per-loss context such as recent attack starts, recent enemy bullets, nearby snapshot counts, and explicit death causes</li><li>capture/rescue markers such as capture start, fighter captured, and fighter rescued</li><li>capture-branch markers such as captured-fighter release / auto-recovery versus captured-fighter-turned-hostile</li><li>transition markers such as challenge-clear-to-next-stage spawn timing, first visible next-stage snapshot, and whether the game ever showed the next stage before enemies were visible</li><li>rescue-pipeline metrics such as whether a rescue actually turned into active dual-fighter fire</li></ul></li><li>Persona self-play is useful for launch-readiness tuning without changing game rules:</li></ul>
 <pre><code data-lang="bash">  npm run harness -- --scenario stage1-opening --persona novice
   npm run harness -- --scenario stage2-opening --persona advanced
   npm run harness -- --scenario stage4-survival --persona expert</code></pre>
 <ul><li>full-run persona distributions are useful for overall game-shape tuning:</li></ul>
 <pre><code data-lang="bash">    npm run harness:batch -- --profile distribution
     npm run harness:batch -- --profile distribution --repeats 4</code></pre>
-<ul><li>the distribution batch runs Stage 1 -&gt; game over for:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li><li>and records:<ul><li>ending stage distribution</li><li>score distribution</li><li>game-length distribution</li><li>lives-left distribution</li><li>stage-clear counts</li><li>stage-reach rates by persona</li><li>aggregated loss causes</li></ul></li><li>natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing</li><li>carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points</li><li>special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset</li><li>dual-fire metrics such as average spread in the rescue scenario</li><li>descent-speed metrics such as time from attack start to lower-field crossing</li><li>whether the generated <code>.webm</code> contains audio</li></ul><ul><li>Batch mode also writes:<ul><li><code>batch-report.json</code> with aggregate challenge hits, ship losses, total duration, and audio failures</li><li><code>tuning-report.json</code> with prioritized findings to guide the next gameplay pass</li><li>later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix</li><li>the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish &quot;died early&quot; from &quot;survived the full window but spent too many ships&quot;</li></ul></li><li>Typical batch timings on this machine:<ul><li><code>quick</code>: about <code>1.5-2 minutes</code></li><li><code>default</code>: about <code>3-4 minutes</code></li><li><code>deep</code>: about <code>5-7 minutes</code></li></ul></li><li>You can re-run the analyzer on an existing run folder:</li></ul>
+<ul><li>the distribution batch runs Stage 1 -&gt; game over for:<ul><li><code>novice</code></li><li><code>advanced</code></li><li><code>expert</code></li><li><code>professional</code></li></ul></li><li>and records:<ul><li>ending stage distribution</li><li>score distribution</li><li>game-length distribution</li><li>lives-left distribution</li><li>stage-clear counts</li><li>stage-reach rates by persona</li><li>aggregated loss causes</li></ul></li><li>natural capture-cycle metrics such as capture-start-to-capture timing and captured-to-rescue timing</li><li>carried-fighter scoring metrics such as standby vs attacking destroy counts and total awarded points</li><li>special attack squadron bonus metrics such as triggered count, total awarded bonus, max escorts present, and measured escort offset</li><li>dual-fire metrics such as average spread in the rescue scenario</li><li>descent-speed metrics such as time from attack start to lower-field crossing</li><li>whether the generated <code>.webm</code> contains audio</li></ul><ul><li>Batch mode also writes:<ul><li><code>batch-report.json</code> with aggregate challenge hits, ship losses, total duration, and audio failures</li><li><code>tuning-report.json</code> with prioritized findings to guide the next gameplay pass</li><li>later-stage diagnostics such as first-loss timing, loss clustering, attacker pressure at death, and bullet-vs-collision loss mix</li><li>the tuning report now considers both ship losses and how much of the stage-pressure scenario survived, so it can distinguish &quot;died early&quot; from &quot;survived the full window but spent too many ships&quot;</li></ul></li><li>Historical harness videos can be repaired in place into <code>.review.webm</code> artifacts and have their neighboring <code>summary.json</code> updated with artifact-quality metadata:</li></ul>
+<pre><code data-lang="bash">  npm run harness:repair:videos</code></pre>
+<ul><li>Typical batch timings on this machine:<ul><li><code>quick</code>: about <code>1.5-2 minutes</code></li><li><code>default</code>: about <code>3-4 minutes</code></li><li><code>deep</code>: about <code>5-7 minutes</code></li></ul></li><li>You can re-run the analyzer on an existing run folder:</li></ul>
 <pre><code data-lang="bash">  npm run harness:analyze -- --run /absolute/path/to/harness-artifacts/run-folder</code></pre>
 <ul><li>You can also regenerate the tuning summary for an existing batch:</li></ul>
 <pre><code data-lang="bash">  npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder</code></pre>
@@ -1122,6 +1155,16 @@
 <ul><li>production vs pre-production score/data separation</li><li>environment-aware build labeling and account/status presentation</li><li>release workflow hardening between dev, production, and beta lanes</li></ul>
 <p>Suggested versioning:</p>
 <ul><li><code>1.0.x</code></li><li><code>1.1.x</code></li></ul>
+<h3>Post-1.0 Architecture Themes</h3>
+<p>These are the architectural themes we should keep capturing incrementally during the <code>v1</code> push so they can become the basis of a focused post-<code>v1</code> platform plan.</p>
+<ul><li>move game rules and tuning further into data-driven <code>gameDef</code> structures</li><li>isolate optional systems so capture, challenge stages, special squadrons, and</li></ul>
+<p>dual-fighter behavior are less entangled with the core update loop</p>
+<ul><li>keep mechanic-level harnesses and telemetry stable enough to survive larger</li></ul>
+<p>runtime refactors</p>
+<ul><li>separate engine-like concerns from game-specific rules only when the seam is</li></ul>
+<p>real and already helping Aurora</p>
+<ul><li>use Aurora&#39;s ongoing work to reduce the eventual cost of supporting Galaxian</li></ul>
+<p>and other future variants without pausing product progress now</p>
 <h3>How We Should Use This Roadmap</h3>
 <ul><li>Use it to decide when a <code>PATCH</code> bump is enough versus when a <code>MINOR</code> bump is justified</li><li>Use it to group open issues into meaningful release targets instead of treating the backlog as a flat list</li><li>Use it as the default basis for Codex release recommendations after each meaningful pass</li></ul>
         </div>
@@ -1153,8 +1196,10 @@
 <h3>Testing / Evidence Flow</h3>
 <h4>Harness</h4>
 <ul><li>Run gameplay:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-gameplay.js</code></li></ul></li><li>Analyze a run:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/analyze-run.js</code></li></ul></li><li>Batch runner:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-batch.js</code></li></ul></li><li>Batch prioritization:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/tuning-report.js</code></li></ul></li><li>Scenarios:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/</code></li></ul></li></ul>
+<h4>Log Viewer</h4>
+<ul><li>Local review server:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/server.js</code></li></ul></li><li>Viewer UI:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/app.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/styles.css</code></li></ul></li><li>The viewer reads the same recursive artifact tree under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>Review-ready runs should include:<ul><li><code>summary.json</code></li><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code> when available</li></ul></li><li>The viewer uses <code>summary.json</code> as the run index and then resolves the neighboring session/video files from the summary metadata.</li></ul>
 <h4>Real Play</h4>
-<ul><li>Player-generated <code>.json</code> and <code>.webm</code> can be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li></ul>
+<ul><li>Player-generated <code>.json</code> and <code>.webm</code> can be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li><li>The log viewer can inspect those imported runs as long as they are copied into the expected <code>harness-artifacts/</code> folder structure and have a <code>summary.json</code> beside them.</li></ul>
 <h3>Reference Flow</h3>
 <h4>Durable Sources</h4>
 <ul><li>Reference root:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/</code></li></ul></li><li>Manual:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/</code></li></ul></li><li>Walkthrough notes:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/walkthroughs/trueachievements-galaga/</code></li></ul></li></ul>
@@ -1193,6 +1238,7 @@
 <p>bullet logic, ship loss, and the main update loop</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js</code><ul><li>sprite rendering, hitbox rendering assumptions, overlays, HUD, banners</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code><ul><li>harness-only hooks exposed on <code>window.__galagaHarness__</code></li><li>deterministic setup helpers for scenarios and regression checks</li></ul></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/</code><ul><li>local artifact review app</li><li><code>server.js</code> indexes run folders under <code>harness-artifacts/</code></li><li><code>app.js</code> synchronizes repaired videos, event streams, clips, and issue drafting</li><li>expects a run folder with <code>summary.json</code> plus neighboring session/video artifacts</li></ul></li></ul>
 <h3>Build / Deploy</h3>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code><ul><li>assembles source files into <code>/Users/stevenwoods/Documents/Codex-Test1/index.html</code></li><li>writes <code>/Users/stevenwoods/Documents/Codex-Test1/build-info.json</code></li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js</code><ul><li>syncs the separate <code>sgwoods/public</code> repo from build metadata</li></ul></li></ul>
@@ -1227,6 +1273,7 @@
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/tuning-report.js</code><ul><li>rolls per-run analysis into prioritized findings</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/</code><ul><li>scenario definitions for challenge, rescue, carried-fighter scoring,</li></ul></li></ul>
 <p>descent timing, Stage 4 pressure, and squadron bonuses</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code><ul><li>canonical local evidence tree for harness runs and imported manual sessions</li><li>the log viewer walks this tree recursively and treats each folder containing <code>summary.json</code> as a reviewable run</li></ul></li></ul>
 <h3>Reference Material</h3>
 <p>Primary rule references:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/Galaga_-_1981_-_Namco.pdf</code></li></ul>
@@ -1468,7 +1515,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.218.sha.9f46342.beta
+          Build: 0.5.0-beta.1+build.225.sha.65420bb.beta
         </p>
       </aside>
     </main>
