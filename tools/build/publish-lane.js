@@ -10,6 +10,12 @@ const {
   PRODUCTION_BUILD_INFO,
   BETA_BUILD_INFO
 } = require('./paths');
+const {
+  laneConfig: preflightLaneConfig,
+  checkGitClean,
+  checkArtifacts,
+  checkBuildInfo
+} = require('./check-publish-ready');
 
 const OWNER = process.env.AURORA_PUBLIC_OWNER || 'sgwoods';
 const REPO = process.env.AURORA_PUBLIC_REPO || 'Aurora-Galactica';
@@ -101,21 +107,6 @@ function laneConfig(lane){
   throw new Error(`Unsupported lane "${lane}". Use --lane beta or --lane production.`);
 }
 
-function ensureBuildArtifacts(cfg){
-  if(!fs.existsSync(cfg.sourceDir)){
-    throw new Error(`Missing source directory ${cfg.sourceDir}. Run the appropriate build/promotion first.`);
-  }
-  if(!fs.existsSync(cfg.buildInfo)){
-    throw new Error(`Missing build info ${cfg.buildInfo}. Run the appropriate build/promotion first.`);
-  }
-  for(const file of cfg.files){
-    const src = path.join(cfg.sourceDir, file);
-    if(!fs.existsSync(src)){
-      throw new Error(`Missing artifact ${src}.`);
-    }
-  }
-}
-
 function stageArtifacts(repoDir, cfg){
   const targetBase = path.join(repoDir, cfg.targetDir);
   ensureDir(targetBase);
@@ -142,7 +133,10 @@ function main(){
   const dryRun = !!args['dry-run'];
   const keepTemp = !!args['keep-temp'];
   const cfg = laneConfig(lane);
-  ensureBuildArtifacts(cfg);
+  const preflightCfg = preflightLaneConfig(lane);
+  checkGitClean();
+  checkArtifacts(preflightCfg);
+  checkBuildInfo(preflightCfg);
 
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `aurora-${lane}-publish-`));
   const repoDir = path.join(tempRoot, 'public');

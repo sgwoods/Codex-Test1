@@ -48,6 +48,10 @@ gameplay or tuning values.
   - publishes either `dist/beta/` or `dist/production/` into `sgwoods/Aurora-Galactica`
   - automates the clone/copy/commit/push release step
 
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js`
+  - verifies the repo is clean and the chosen lane was built from the current `HEAD`
+  - fails early if required generated files are missing or stale
+
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
   - exports project-status content from the current production build into the separate `sgwoods/public` repo
   - does not publish the playable Aurora build

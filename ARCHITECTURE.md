@@ -51,6 +51,8 @@ how work should flow through it.
     - `/beta/`
   - lane publishing is now scripted through:
     - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js`
+  - publish readiness is checked through:
+    - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js`
 
 ### Public Project Pages Sync
 

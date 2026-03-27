@@ -229,6 +229,10 @@ The root Aurora build is the official public production lane, even while the pro
 
 ### 5. Publish Hosted Beta
 
+- Preflight:
+  ```bash
+  npm run publish:check:beta
+  ```
 - Preferred:
   ```bash
   npm run publish:beta
@@ -241,6 +245,10 @@ The root Aurora build is the official public production lane, even while the pro
 
 ### 6. Publish Hosted Production
 
+- Preflight:
+  ```bash
+  npm run publish:check:production
+  ```
 - Preferred:
   ```bash
   npm run publish:production

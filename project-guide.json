@@ -265,7 +265,7 @@
         },
         {
           "title": "Build / Public Sync",
-          "body": "`tools/build/build-index.js` assembles the production build into `dist/production/`. `tools/build/promote-beta.js` snapshots that output into `dist/beta/`. `tools/build/publish-lane.js` publishes those generated surfaces into `Aurora-Galactica`. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo and does not publish the playable game."
+          "body": "`tools/build/build-index.js` assembles the production build into `dist/production/`. `tools/build/promote-beta.js` snapshots that output into `dist/beta/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces into `Aurora-Galactica`. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo and does not publish the playable game."
         },
         {
           "title": "Log Viewer",

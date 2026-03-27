@@ -88,9 +88,11 @@ Examples:
 5. Review the generated output in:
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
-6. Publish the promoted beta snapshot with:
+6. Run the beta preflight:
+   - `npm run publish:check:beta`
+7. Publish the promoted beta snapshot with:
    - `npm run publish:beta`
-7. Let GitHub Pages deploy from `Aurora-Galactica` so:
+8. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/beta/`
      serves the promoted checkpoint
 
@@ -101,9 +103,11 @@ The beta lane is intentionally a snapshot of selected generated artifacts under 
 1. Build and validate the current production output:
    - `npm run build`
    - plus whatever harness/manual checks are appropriate for the release
-2. Publish the generated production surface with:
+2. Run the production preflight:
+   - `npm run publish:check:production`
+3. Publish the generated production surface with:
    - `npm run publish:production`
-3. Let GitHub Pages deploy from `Aurora-Galactica` so:
+4. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/`
      serves the promoted production build
 

@@ -54,7 +54,9 @@ reference-backed fidelity work, and safe collaboration.
   ```
 - Publish a generated lane into the public Aurora repo:
   ```bash
+  npm run publish:check:beta
   npm run publish:beta
+  npm run publish:check:production
   npm run publish:production
   ```
 - The main local playable build is generated at:
