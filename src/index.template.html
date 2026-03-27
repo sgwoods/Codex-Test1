@@ -10,10 +10,29 @@
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="cabinetShell" aria-hidden="true">
+  <div class="shellPanel shellTop">
+    <div id="cabinetMarquee">
+      <span id="cabinetMarqueeTitle">Aurora Galactica</span>
+    </div>
+  </div>
+  <div class="shellPanel shellLeft"></div>
+  <div class="shellPanel shellRight"></div>
+  <div class="shellPanel shellBottom"></div>
+</div>
 <div id="playfieldFrame" aria-hidden="true"></div>
+<div id="cabinetRightFrame" aria-hidden="true">
+  <div id="statusDock">
+    <div id="dockQuickTools">
+      <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores">🏆<span class="dockLabel">Scores</span></button>
+      <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤<span class="dockLabel">Pilot</span></button>
+      <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙<span class="dockLabel">Tools</span></button>
+      <button id="handToggleBtn" type="button" aria-pressed="false" aria-label="Toggle handed controls">Hand R</button>
+    </div>
+  </div>
+</div>
 <div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
-<button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
 <div id="settingsPanel" aria-hidden="true">
   <h3>Developer Tools</h3>
   <div id="settingsActions">
@@ -33,14 +52,6 @@
       <label for="testChallenge">Force challenge opening</label>
     </div>
     <div id="testHint">Applies on next game start only.</div>
-  </div>
-  <div id="controlPanel">
-    <h4>Controls</h4>
-    <div id="controlRow">
-      <input id="switchHand" type="checkbox" />
-      <label for="switchHand">Switch Hand</label>
-    </div>
-    <div id="controlHint">Standard uses arrows. Switched uses Fn/Ctrl for left and Option for right.</div>
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane {{BUILD_CHANNEL}}</span>
@@ -76,11 +87,7 @@
   </div>
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
-<div id="statusDock">
-  <div id="dockQuickTools">
-    <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores">🏆</button>
-    <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤</button>
-  </div>
+<div id="statusPanels">
   <div id="accountPanel" aria-live="polite" hidden>
     <div id="accountPanelHead">
       <div>
@@ -132,12 +139,11 @@
       <button type="button" data-view="mine">My Scores</button>
     </div>
   </div>
-  <div id="buildStamp">
-    <span id="pilotStamp" hidden>Pilot ---</span>
-    <span id="buildStampChannel">Lane {{BUILD_CHANNEL}}</span>
-    <span id="buildStampVersion">Version {{BUILD_LABEL}}</span>
-    <span id="buildStampRelease">{{BUILD_RELEASE_ET}}</span>
-  </div>
+</div>
+<div id="buildStamp">
+  <span id="buildStampChannel">Lane {{BUILD_CHANNEL}}</span>
+  <span id="buildStampVersion">Version {{BUILD_LABEL}}</span>
+  <span id="buildStampRelease">{{BUILD_RELEASE_ET}}</span>
 </div>
 <script>
 {{INLINE_VENDOR_SCRIPT}}

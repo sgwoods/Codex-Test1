@@ -237,14 +237,34 @@ function drawPostFx(){}
 
 function draw(){
  const sh=S.shake*8,dx=rnd(sh,-sh),dy=rnd(sh,-sh);
- const fit=Math.max(1,Math.floor(Math.min(innerWidth/PLAY_W,innerHeight/PLAY_H)));
+ const outerPadX=Math.max(18,Math.floor(innerWidth*.03));
+ const outerPadTop=Math.max(20,Math.floor(innerHeight*.02));
+ const outerPadBottom=Math.max(18,Math.floor(innerHeight*.02));
+ const shellPadL=Math.max(108,Math.floor(innerWidth*.09));
+ const shellPadT=Math.max(116,Math.floor(innerHeight*.105));
+ const shellPadB=Math.max(88,Math.floor(innerHeight*.082));
+ const shellPadR=shellPadL;
+ const railInset=Math.max(12,Math.floor(shellPadR*.12));
+ const railW=Math.max(92,Math.min(128,shellPadR-railInset*2));
+ const availW=Math.max(PLAY_W,innerWidth-outerPadX*2-shellPadL-shellPadR);
+ const availH=Math.max(PLAY_H,innerHeight-outerPadTop-outerPadBottom-shellPadT-shellPadB);
+ const fit=Math.max(1,Math.floor(Math.min(availW/PLAY_W,availH/PLAY_H)));
  const scale=S.ultra?fit:Math.max(1,fit-1);
  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
- const ox=Math.floor((innerWidth-viewW)/2),oy=Math.floor((innerHeight-viewH)/2);
+ const shellW=viewW+shellPadL+shellPadR;
+ const shellH=viewH+shellPadT+shellPadB;
+ const shellX=Math.floor((innerWidth-shellW)/2);
+ const shellY=Math.floor((innerHeight-shellH)/2);
+ const ox=shellX+shellPadL;
+ const oy=shellY+shellPadT;
  if(hud){
-  hud.style.left=`${ox+2}px`;
+  hud.style.left=`${ox+10}px`;
   hud.style.top=`${Math.max(6,oy+4)}px`;
-  hud.style.width=`${Math.max(220,viewW-4)}px`;
+  hud.style.width=`${Math.max(220,viewW-20)}px`;
+ }
+ if(msg){
+  msg.style.left=`${Math.floor(ox+viewW/2)}px`;
+  msg.style.width=`${Math.max(220,viewW-36)}px`;
  }
  if(playfieldFrame){
   playfieldFrame.style.display='block';
@@ -253,6 +273,43 @@ function draw(){
   playfieldFrame.style.width=`${viewW+4}px`;
   playfieldFrame.style.height=`${viewH+4}px`;
  }
+ const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
+ const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
+ const railTop=oy+Math.floor((viewH-railH)/2);
+ if(cabinetShell){
+  cabinetShell.style.display='block';
+  cabinetShell.style.left=`${shellX}px`;
+  cabinetShell.style.top=`${shellY}px`;
+  cabinetShell.style.width=`${shellW}px`;
+  cabinetShell.style.height=`${shellH}px`;
+  cabinetShell.style.setProperty('--shell-left',`${shellPadL}px`);
+  cabinetShell.style.setProperty('--shell-top',`${shellPadT}px`);
+  cabinetShell.style.setProperty('--shell-right',`${shellPadR}px`);
+  cabinetShell.style.setProperty('--shell-bottom',`${shellPadB}px`);
+ }
+ if(cabinetRightFrame){
+  if(railW>0){
+   cabinetRightFrame.style.display='block';
+   cabinetRightFrame.style.left=`${railLeft}px`;
+   cabinetRightFrame.style.top=`${railTop}px`;
+   cabinetRightFrame.style.width=`${railW}px`;
+   cabinetRightFrame.style.height=`${railH}px`;
+  }else cabinetRightFrame.style.display='none';
+ }
+ if(statusPanels){
+  statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
+  statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+ }
+ if(settingsPanel){
+  settingsPanel.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
+  settingsPanel.style.top=`${Math.max(14,oy+14)}px`;
+ }
+ if(buildStamp){
+  const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
+  buildStamp.style.width=`${stampW}px`;
+  buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
+  buildStamp.style.top=`${shellY+shellH-Math.max(66,Math.floor(shellPadB*.78))}px`;
+  }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);
@@ -289,7 +346,7 @@ function draw(){
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
- right.innerHTML='';
+ right.innerHTML=window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`;
 const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
@@ -297,6 +354,9 @@ if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
  msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):'';
+ if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.74)}px`;
+ else if(!started&&msg.className==='gameOverScreen')msg.style.top=`${Math.floor(oy+viewH*.54)}px`;
+ else msg.style.top='';
  if(!started){
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;

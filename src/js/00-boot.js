@@ -1,12 +1,16 @@
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
+const cabinetShell=document.getElementById('cabinetShell');
+const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
-const controlPanel=document.getElementById('controlPanel'),switchHand=document.getElementById('switchHand');
+const handToggleBtn=document.getElementById('handToggleBtn');
+const statusPanels=document.getElementById('statusPanels');
+const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
@@ -499,13 +503,26 @@ function controlMoveHelpHtml(){
  return `ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
 }
 function syncControlUi(){
- if(switchHand)switchHand.checked=!!switchHandMode;
+ if(handToggleBtn){
+  handToggleBtn.textContent=switchHandMode?'Hand L':'Hand R';
+  handToggleBtn.setAttribute('aria-pressed',switchHandMode?'true':'false');
+  handToggleBtn.title=switchHandMode?'Switched controls: Fn/Ctrl left, Option right':'Standard controls: arrows move';
+ }
 }
 function setSwitchHandMode(next,opts={}){
  switchHandMode=!!next;
  writePref(HAND_SWITCH_PREF_KEY,switchHandMode?'1':'0');
  syncControlUi();
  if(!opts.silent)showToast(switchHandMode?'Switched movement to Fn/Ctrl + Option':'Switched movement to arrows');
+}
+function syncBuildStampUi(){
+ if(!buildStamp)return;
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ const production=channel==='production';
+ buildStamp.classList.toggle('production',production);
+ if(buildStampChannel)buildStampChannel.textContent=`Lane ${BUILD_INFO.releaseChannel}`;
+ if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
+ if(buildStampRelease)buildStampRelease.textContent=production?'':BUILD_INFO.released;
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
@@ -764,7 +781,7 @@ recordBtn.addEventListener('click',()=>{
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
-if(switchHand)switchHand.addEventListener('change',()=>setSwitchHandMode(!!switchHand.checked,{silent:0}));
+if(handToggleBtn)handToggleBtn.addEventListener('click',()=>setSwitchHandMode(!switchHandMode,{silent:0}));
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
@@ -884,3 +901,4 @@ addEventListener('pointerdown',e=>{
  closeSettings();
 });
 syncTestUi();
+syncBuildStampUi();

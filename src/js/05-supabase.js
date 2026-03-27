@@ -204,6 +204,13 @@ function openLeaderboardPanel(view=LEADERBOARD.view){
    syncOverlayPause();
   }
 }
+function toggleLeaderboardPanel(view=LEADERBOARD.view){
+ if(LEADERBOARD.panelOpen&&(!view||view===LEADERBOARD.view)){
+  closeLeaderboardPanel();
+  return;
+ }
+ openLeaderboardPanel(view);
+}
 function closeLeaderboardPanel(){
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
@@ -282,14 +289,9 @@ function syncAccountUi(){
    accountRecent.textContent=`Recent: ${recent||'--'}`;
   }
  }
- if(pilotStamp){
-  const initials=preferredInitialsFromUser();
-  const show=signedIn&&initials;
-  const verifiedClass=signedIn&&verified;
-  pilotStamp.hidden=!show;
-  pilotStamp.classList.toggle('verified',!!verifiedClass);
-  pilotStamp.textContent=show?`Pilot ${initials}`:'Pilot ---';
- }
+ const initials=preferredInitialsFromUser();
+ const hudInitials=signedIn&&initials?initials:'---';
+ window.__auroraPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
 }
 function syncLeaderboardUi(){
  const signedIn=!!LEADERBOARD.user;
@@ -595,7 +597,7 @@ for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
-if(leaderboardDockBtn)leaderboardDockBtn.addEventListener('click',e=>{e.stopPropagation();openLeaderboardPanel();syncOverlayPause();});
+if(leaderboardDockBtn)leaderboardDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleLeaderboardPanel();syncOverlayPause();});
 if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});
 if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPanel);
 if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
