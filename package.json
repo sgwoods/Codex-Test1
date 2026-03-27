@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node tools/build/build-index.js",
+    "build:production": "node tools/build/build-index.js --lane production",
+    "promote:production": "node tools/build/promote-production.js",
     "publish:check:beta": "node tools/build/check-publish-ready.js --lane beta",
     "publish:check:production": "node tools/build/check-publish-ready.js --lane production",
     "publish:beta": "node tools/build/publish-lane.js --lane beta",

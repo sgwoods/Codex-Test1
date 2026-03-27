@@ -2,10 +2,10 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { chromium } = require('playwright-core');
-const { DIST_PRODUCTION } = require('../build/paths');
+const { DIST_DEV } = require('../build/paths');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const APP_ROOT = DIST_PRODUCTION;
+const APP_ROOT = DIST_DEV;
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 function mime(file){

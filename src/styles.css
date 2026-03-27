@@ -5,15 +5,14 @@ canvas{display:block;width:100vw;height:100vh}
 #playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;border:1px solid rgba(122,195,255,.38);box-shadow:0 0 0 1px rgba(10,25,42,.92),0 0 24px rgba(76,156,255,.08),inset 0 0 0 1px rgba(255,222,134,.1)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.05);pointer-events:none}
 #playfieldFrame::after{inset:auto 10px 10px;top:14px;border-top:none;border-color:rgba(255,214,104,.12)}
-#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) auto;align-items:center;gap:14px;padding:8px 16px 7px;border:1px solid rgba(122,195,255,.24);background:linear-gradient(180deg,rgba(9,18,31,.96),rgba(4,11,22,.88));box-shadow:0 10px 28px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.04);font-size:clamp(15px,1.1vw,24px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
+#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;padding:4px 10px 3px;background:rgba(0,0,0,.72);font-size:clamp(14px,1vw,22px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
 #left,#center,#right{min-width:0;white-space:nowrap}
 #left{text-align:left}
 #center{text-align:center}
-#right{text-align:right}
+#right{text-align:right;visibility:hidden}
+#center{grid-column:2}
 #hud .hudLabel{color:#ff3a36}
 #hud .hudValue{color:#f4f7ff}
-#hud .hudStage{color:#ffd86d}
-#hud .hudLives{color:rgba(142,239,255,.84);font-size:.72em;margin-left:10px}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
@@ -166,7 +165,7 @@ canvas{display:block;width:100vw;height:100vh}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
  #buildStamp{align-items:flex-start}
- #hud{grid-template-columns:1fr;gap:2px;padding:8px 12px 7px}
- #left,#center,#right{text-align:left}
- #right .hudLives{display:inline-block;margin-left:8px}
+ #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 5px}
+ #left,#center{text-align:left}
+ #right{display:none}
 }

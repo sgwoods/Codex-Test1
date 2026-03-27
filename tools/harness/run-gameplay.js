@@ -5,10 +5,10 @@ const path = require('path');
 const { analyze } = require('./analyze-run');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
 const { chromium } = require('playwright-core');
-const { DIST_PRODUCTION } = require('../build/paths');
+const { DIST_DEV } = require('../build/paths');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const APP_ROOT = DIST_PRODUCTION;
+const APP_ROOT = DIST_DEV;
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const DEFAULT_OUT = path.join(ROOT, 'harness-artifacts');
 const SCENARIOS = path.join(__dirname, 'scenarios');

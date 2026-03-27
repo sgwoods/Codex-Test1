@@ -22,9 +22,13 @@ how work should flow through it.
 
 ### Generated Output
 
-- Served file:
+- Local dev build:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
+- Local dev build metadata:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json`
+- Stable production artifact:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
-- Build metadata:
+- Stable production build metadata:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
 - Promoted beta snapshot:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
@@ -36,6 +40,11 @@ how work should flow through it.
 - Build script:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
 - Generates:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json`
+- Production promotion:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js`
+- Produces:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
 

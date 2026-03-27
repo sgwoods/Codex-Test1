@@ -79,14 +79,14 @@ Examples:
 1. Update source content in `Codex-Test1`:
    - gameplay/UI under `src/`
    - maintained docs and release metadata under the repo root
-2. Build the current production artifacts:
+2. Build the current dev artifacts:
    - `npm run build`
-3. Test the generated production build in:
-   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
-4. Promote the current production build into the beta lane:
+3. Test the generated dev build in:
+   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
+4. Promote the current dev build into the beta lane:
    - `npm run promote:beta`
 5. Review the generated output in:
-   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
 6. Run the beta preflight:
    - `npm run publish:check:beta`
@@ -100,21 +100,24 @@ The beta lane is intentionally a snapshot of selected generated artifacts under 
 
 ## Production Publish Workflow
 
-1. Build and validate the current production output:
+1. Build and validate the current dev output:
    - `npm run build`
    - plus whatever harness/manual checks are appropriate for the release
-2. Run the production preflight:
+2. Promote the approved dev build into the stable production artifact:
+   - `npm run promote:production`
+3. Run the production preflight:
    - `npm run publish:check:production`
-3. Publish the generated production surface with:
+4. Publish the generated production surface with:
    - `npm run publish:production`
-4. Let GitHub Pages deploy from `Aurora-Galactica` so:
+5. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/`
      serves the promoted production build
 
 ## Public Project Status Sync Workflow
 
-1. Build the current production output:
+1. Build the current dev output and promote the stable production artifact:
    - `npm run build`
+   - `npm run promote:production`
 2. Run:
    - `npm run sync:public`
 3. This updates the separate `sgwoods/public` project-summary pages and manifests from:

@@ -220,6 +220,19 @@ function drawBadges(stage){
  }
 }
 
+function drawReserveShips(lives){
+ let reserve=Math.max(0,lives|0);
+ let x=12,y=PLAY_H-8;
+ while(reserve>0){
+  ctx.save();
+  ctx.translate(x,y);
+  drawMiniShip(.82,'#f4f8ff','#ff3347');
+  ctx.restore();
+  reserve--;
+  x+=18;
+ }
+}
+
 function drawPostFx(){}
 
 function draw(){
@@ -269,13 +282,14 @@ function draw(){
  drawCarryDebugOverlay();
  const p=S.p;if((!p.pending||p.spawn<=.3)&&!p.spawn){if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0)}
  if(p.captured)drawPlayerBody(p.x,p.y,0,1);
+ drawReserveShips(S.lives);
  drawBadges(S.stage);
  drawPostFx();
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
- right.innerHTML=`<span class="hudStage">STAGE ${S.stage}</span><span class="hudLives">SHIPS ${Math.max(0,S.lives+1)}${S.ultra?'  U':''}${document.fullscreenElement?'  F':''}${VIDEO_REC.active?'  REC':''}</span>`;
+ right.innerHTML='';
 const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();

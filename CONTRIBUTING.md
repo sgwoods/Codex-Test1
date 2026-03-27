@@ -48,6 +48,10 @@ reference-backed fidelity work, and safe collaboration.
   ```bash
   npm run build
   ```
+- Promote the current dev build into the stable production artifact:
+  ```bash
+  npm run promote:production
+  ```
 - Promote the current built output into a beta snapshot:
   ```bash
   npm run promote:beta
@@ -60,9 +64,11 @@ reference-backed fidelity work, and safe collaboration.
   npm run publish:production
   ```
 - The main local playable build is generated at:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
 - The beta-ready snapshot is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+- The stable production artifact is generated at:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
 - Replay a saved gameplay session:
   ```bash
   npm run harness -- --session /absolute/path/to/neo-galaga-session.json

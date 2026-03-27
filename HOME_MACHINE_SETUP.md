@@ -49,13 +49,13 @@ Optional but useful:
    git pull --rebase origin main
    npm install
    ```
-2. Build the current production output:
+2. Build the current local dev output:
    ```bash
    npm run build
    ```
 3. Run the game locally:
    ```bash
-   python3 -m http.server 8000 --directory dist/production
+   python3 -m http.server 8000 --directory dist/dev
    ```
 4. Open:
    - `http://localhost:8000`
@@ -155,6 +155,7 @@ When a build is ready for the hosted production lane:
 
 ```bash
 npm run build
+npm run promote:production
 npm run publish:check:production
 npm run publish:production
 ```

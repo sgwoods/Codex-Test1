@@ -3,9 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const {
   ROOT,
-  DIST_PRODUCTION,
+  DIST_DEV,
   DIST_BETA,
-  PRODUCTION_BUILD_INFO,
+  DEV_BUILD_INFO,
   BETA_BUILD_INFO
 } = require('./paths');
 
@@ -77,14 +77,14 @@ fs.mkdirSync(BETA_DIR, { recursive: true });
 for(const file of FILES){
   const src = file === 'release-notes.json' || file === 'README.md'
     ? path.join(ROOT, file)
-    : path.join(DIST_PRODUCTION, file);
+    : path.join(DIST_DEV, file);
   if(!fs.existsSync(src)) continue;
   const dest = path.join(BETA_DIR, file === 'index.html' ? 'index.html' : path.basename(file));
   fs.copyFileSync(src, dest);
 }
 
-if(fs.existsSync(PRODUCTION_BUILD_INFO) && fs.existsSync(BETA_BUILD_INFO)){
-  const sourceInfo = JSON.parse(fs.readFileSync(PRODUCTION_BUILD_INFO, 'utf8'));
+if(fs.existsSync(DEV_BUILD_INFO) && fs.existsSync(BETA_BUILD_INFO)){
+  const sourceInfo = JSON.parse(fs.readFileSync(DEV_BUILD_INFO, 'utf8'));
   const betaInfo = buildBetaInfo(sourceInfo);
   fs.writeFileSync(BETA_BUILD_INFO, JSON.stringify(betaInfo, null, 2) + '\n');
   rewriteBetaText(path.join(BETA_DIR, 'index.html'), sourceInfo, betaInfo);

@@ -4,7 +4,13 @@ const path = require('path');
 const { execSync } = require('child_process');
 const {
   ROOT,
+  DIST_DEV,
   DIST_PRODUCTION,
+  DEV_INDEX,
+  DEV_DASHBOARD,
+  DEV_PROJECT_GUIDE,
+  DEV_BUILD_INFO,
+  DEV_SCREENSHOT,
   PRODUCTION_INDEX,
   PRODUCTION_DASHBOARD,
   PRODUCTION_PROJECT_GUIDE,
@@ -24,6 +30,11 @@ const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const GENERATED_BUILD_PATHS = new Set([
+  'dist/dev/index.html',
+  'dist/dev/release-dashboard.html',
+  'dist/dev/project-guide.html',
+  'dist/dev/build-info.json',
+  'dist/dev/export.mov.png',
   'dist/production/index.html',
   'dist/production/release-dashboard.html',
   'dist/production/project-guide.html',
@@ -1107,15 +1118,54 @@ function normalizeVersionForChannel(version, releaseChannel){
   return version;
 }
 
-function build(){
-  fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
+function parseArgs(argv){
+  const args = {};
+  for(let i = 0; i < argv.length; i++){
+    const token = argv[i];
+    if(!token.startsWith('--')) continue;
+    const key = token.slice(2);
+    const next = argv[i + 1];
+    if(!next || next.startsWith('--')) args[key] = true;
+    else {
+      args[key] = next;
+      i++;
+    }
+  }
+  return args;
+}
+
+function lanePaths(lane){
+  if(lane === 'production'){
+    return {
+      distDir: DIST_PRODUCTION,
+      index: PRODUCTION_INDEX,
+      dashboard: PRODUCTION_DASHBOARD,
+      projectGuide: PRODUCTION_PROJECT_GUIDE,
+      buildInfo: PRODUCTION_BUILD_INFO,
+      screenshot: PRODUCTION_SCREENSHOT
+    };
+  }
+  return {
+    distDir: DIST_DEV,
+    index: DEV_INDEX,
+    dashboard: DEV_DASHBOARD,
+    projectGuide: DEV_PROJECT_GUIDE,
+    buildInfo: DEV_BUILD_INFO,
+    screenshot: DEV_SCREENSHOT
+  };
+}
+
+function build(options = {}){
+  const buildLane = String(options.lane || 'dev').toLowerCase() === 'production' ? 'production' : 'dev';
+  const out = lanePaths(buildLane);
+  fs.mkdirSync(out.distDir, { recursive: true });
   const template = read(TEMPLATE);
   const styles = read(STYLES).trimEnd();
   const buildCommit = git('rev-parse HEAD', 'unknown');
   const buildShortCommit = git('rev-parse --short HEAD', 'unknown');
   const buildBranch = git('branch --show-current', 'detached');
   const buildRepoRef = detectRepoRef();
-  const buildReleaseChannel = detectReleaseChannel(buildRepoRef);
+  const buildReleaseChannel = buildLane === 'production' ? 'production' : 'development';
   const buildVersion = normalizeVersionForChannel(pkg.version, buildReleaseChannel);
   const buildDirtyFiles = git('status --porcelain', '')
     .split('\n')
@@ -1194,21 +1244,22 @@ function build(){
     latestReleaseNote: latestNote
   };
 
-  fs.writeFileSync(PRODUCTION_INDEX, html.endsWith('\n') ? html : `${html}\n`);
-  fs.writeFileSync(PRODUCTION_DASHBOARD, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
-  fs.writeFileSync(PRODUCTION_PROJECT_GUIDE, buildProjectGuide(buildInfo, latestNote, projectGuide));
-  fs.writeFileSync(PRODUCTION_BUILD_INFO, JSON.stringify(buildInfo, null, 2) + '\n');
+  fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
+  fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
+  fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
+  fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
-    fs.copyFileSync(path.join(ROOT, 'export.mov.png'), PRODUCTION_SCREENSHOT);
+    fs.copyFileSync(path.join(ROOT, 'export.mov.png'), out.screenshot);
   }
   return [
-    PRODUCTION_INDEX,
-    PRODUCTION_DASHBOARD,
-    PRODUCTION_PROJECT_GUIDE,
-    PRODUCTION_BUILD_INFO,
-    PRODUCTION_SCREENSHOT
+    out.index,
+    out.dashboard,
+    out.projectGuide,
+    out.buildInfo,
+    out.screenshot
   ];
 }
 
-const outputs = build();
+const args = parseArgs(process.argv.slice(2));
+const outputs = build({ lane: args.lane });
 for(const out of outputs)console.log(`Built ${out}`);

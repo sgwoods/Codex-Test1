@@ -64,13 +64,13 @@ The root Aurora build is the official public production lane, even while the pro
    ```bash
    cd /Users/stevenwoods/Documents/Codex-Test1
    ```
-2. Build the current production output:
+2. Build the current local dev output:
    ```bash
    npm run build
    ```
 3. Start a local server against the generated build:
    ```bash
-   python3 -m http.server 8000 --directory dist/production
+   python3 -m http.server 8000 --directory dist/dev
    ```
 4. Open:
    - `http://localhost:8000`
@@ -118,13 +118,15 @@ The root Aurora build is the official public production lane, even while the pro
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
 - Reference baseline:
   - `/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md`
-- Served artifact:
-  - `dist/production/index.html`
+- Local dev artifact:
+  - `dist/dev/index.html`
 - Build the served file from source with:
   ```bash
   npm run build
   ```
 - Build outputs are generated into:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
 - Do not hand-edit generated files under `dist/`; treat them as disposable build output.
 - Start the local artifact review viewer with:
@@ -146,9 +148,15 @@ The root Aurora build is the official public production lane, even while the pro
   ```
   This creates or refreshes:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
-  The production build lives in:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+  from the current dev build in:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
   Publish the generated `dist/beta/` snapshot into `https://github.com/sgwoods/Aurora-Galactica` when you want the hosted `https://sgwoods.github.io/Aurora-Galactica/beta/` lane to move.
+- Promote the current dev build into the stable production artifact with:
+  ```bash
+  npm run promote:production
+  ```
+  This creates or refreshes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
 - Sync the separate public repo from the latest build metadata with:
   ```bash
   npm run sync:public
@@ -170,8 +178,8 @@ The root Aurora build is the official public production lane, even while the pro
   - `tools/build/sync-public-pages.js`
 - Public-pages verification script:
   - `tools/build/verify-public-sync.js`
-- Build metadata output:
-  - `dist/production/build-info.json`
+- Local dev build metadata output:
+  - `dist/dev/build-info.json`
 - Release notes source:
   - `release-notes.json`
 - Release/versioning policy:
@@ -180,8 +188,8 @@ The root Aurora build is the official public production lane, even while the pro
   - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
 - Project guide source:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
-- Generated project guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/project-guide.html`
+- Generated local dev project guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html`
 - This page is regenerated during `npm run build` from the guide config and the maintained docs above.
 
 ## End-To-End Workflow
@@ -207,18 +215,18 @@ The root Aurora build is the official public production lane, even while the pro
   npm run build
   ```
 - This regenerates:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/project-guide.html`
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/release-dashboard.html`
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/release-dashboard.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json`
 
 ### 3. Test Against The Built App
 
-- Manual local play should use the generated production build:
+- Manual local play should use the generated dev build:
   ```bash
-  python3 -m http.server 8000 --directory dist/production
+  python3 -m http.server 8000 --directory dist/dev
   ```
-- Harness/browser checks also run against `dist/production/`, not raw source.
+- Harness/browser checks also run against `dist/dev/`, not raw source.
 - The log viewer is separate and reads run artifacts from:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
 
@@ -248,6 +256,11 @@ The root Aurora build is the official public production lane, even while the pro
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
 ### 6. Publish Hosted Production
+
+- First promote the approved dev build into the stable production artifact:
+  ```bash
+  npm run promote:production
+  ```
 
 - Preflight:
   ```bash

@@ -37,12 +37,16 @@ gameplay or tuning values.
 ## Build / Deploy
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
-  - assembles source files into `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
-  - writes `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+  - assembles source files into `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
+  - writes `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json`
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-beta.js`
-  - copies the current production build into `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+  - copies the current dev build into `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
   - rewrites build identity there for the public beta lane
+
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js`
+  - copies the approved dev build into `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+  - rewrites build identity there for the stable production lane
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js`
   - publishes either `dist/beta/` or `dist/production/` into `sgwoods/Aurora-Galactica`

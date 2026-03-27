@@ -69,7 +69,7 @@ function laneConfig(lane){
       dir: DIST_PRODUCTION,
       buildInfo: PRODUCTION_BUILD_INFO,
       required: REQUIRED_PRODUCTION,
-      nextStep: 'Run "npm run build" first.'
+      nextStep: 'Run "npm run build && npm run promote:production" first.'
     };
   }
   throw new Error('Use --lane beta or --lane production.');
