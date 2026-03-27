@@ -44,6 +44,10 @@ gameplay or tuning values.
   - copies the current production build into `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
   - rewrites build identity there for the public beta lane
 
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js`
+  - publishes either `dist/beta/` or `dist/production/` into `sgwoods/Aurora-Galactica`
+  - automates the clone/copy/commit/push release step
+
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
   - exports project-status content from the current production build into the separate `sgwoods/public` repo
   - does not publish the playable Aurora build

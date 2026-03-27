@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node tools/build/build-index.js",
+    "publish:beta": "node tools/build/publish-lane.js --lane beta",
+    "publish:production": "node tools/build/publish-lane.js --lane production",
     "sync:public": "node tools/build/sync-public-pages.js",
     "verify:public": "node tools/build/verify-public-sync.js",
     "promote:beta": "node tools/build/promote-beta.js",

@@ -229,20 +229,26 @@ The root Aurora build is the official public production lane, even while the pro
 
 ### 5. Publish Hosted Beta
 
-- Copy the generated contents of:
+- Preferred:
+  ```bash
+  npm run publish:beta
+  ```
+- This clones `sgwoods/Aurora-Galactica`, copies:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
-- into the `/beta/` folder of:
-  - `https://github.com/sgwoods/Aurora-Galactica`
-- Then push `Aurora-Galactica` so GitHub Pages updates:
+  into the `/beta/` folder, commits, and pushes.
+- Then GitHub Pages updates:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
 ### 6. Publish Hosted Production
 
-- When promoting a production build, copy the generated contents of:
+- Preferred:
+  ```bash
+  npm run publish:production
+  ```
+- This clones `sgwoods/Aurora-Galactica`, copies:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
-- into the root of:
-  - `https://github.com/sgwoods/Aurora-Galactica`
-- Then push `Aurora-Galactica` so GitHub Pages updates:
+  into the root published surface, commits, and pushes.
+- Then GitHub Pages updates:
   - `https://sgwoods.github.io/Aurora-Galactica/`
 
 ### 7. Sync Public Project Status

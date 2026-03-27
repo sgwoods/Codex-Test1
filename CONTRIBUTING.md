@@ -52,6 +52,11 @@ reference-backed fidelity work, and safe collaboration.
   ```bash
   npm run promote:beta
   ```
+- Publish a generated lane into the public Aurora repo:
+  ```bash
+  npm run publish:beta
+  npm run publish:production
+  ```
 - The main local playable build is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
 - The beta-ready snapshot is generated at:

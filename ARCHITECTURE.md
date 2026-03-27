@@ -49,6 +49,8 @@ how work should flow through it.
   - `Aurora-Galactica` is the public artifact host for:
     - `/`
     - `/beta/`
+  - lane publishing is now scripted through:
+    - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js`
 
 ### Public Project Pages Sync
 
