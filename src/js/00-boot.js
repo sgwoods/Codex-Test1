@@ -6,6 +6,7 @@ const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
+const controlPanel=document.getElementById('controlPanel'),switchHand=document.getElementById('switchHand');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
@@ -17,6 +18,7 @@ const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
+const HAND_SWITCH_PREF_KEY=`${STORAGE_PREFIX}SwitchHand`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const LEGACY_STORAGE_KEYS={
  [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
@@ -24,8 +26,10 @@ const LEGACY_STORAGE_KEYS={
  [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
+ [HAND_SWITCH_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}SwitchHand`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
 };
+let switchHandMode=readPref(HAND_SWITCH_PREF_KEY)==='1';
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -481,6 +485,28 @@ function loadTestCfg(){
   return{stage:cl(+raw.stage||1,1,99)|0,ships:cl(+raw.ships||3,1,9)|0,challenge:!!raw.challenge};
  }catch{return{stage:1,ships:3,challenge:0}}
 }
+function movementLeftCodes(){
+ return switchHandMode?['Fn','ControlLeft']:['ArrowLeft','KeyA'];
+}
+function movementRightCodes(){
+ return switchHandMode?['AltLeft']:['ArrowRight','KeyD'];
+}
+function movementControlCodes(){
+ return [...movementLeftCodes(),...movementRightCodes()];
+}
+function controlMoveHelpHtml(){
+ if(switchHandMode)return `<span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+}
+function syncControlUi(){
+ if(switchHand)switchHand.checked=!!switchHandMode;
+}
+function setSwitchHandMode(next,opts={}){
+ switchHandMode=!!next;
+ writePref(HAND_SWITCH_PREF_KEY,switchHandMode?'1':'0');
+ syncControlUi();
+ if(!opts.silent)showToast(switchHandMode?'Switched movement to Fn/Ctrl + Option':'Switched movement to arrows');
+}
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
@@ -496,6 +522,7 @@ function syncSettingsUi(){
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ syncControlUi();
  syncSettingsUi();
 }
 function closeSettings(){
@@ -737,6 +764,7 @@ recordBtn.addEventListener('click',()=>{
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
+if(switchHand)switchHand.addEventListener('change',()=>setSwitchHandMode(!!switchHand.checked,{silent:0}));
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
@@ -762,7 +790,7 @@ addEventListener('keydown',e=>{
  }
  keys[e.code]=1;
  if(!wasDown)keyState[e.code]={downAt:now,upAt:0};
- if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
+ if([...movementControlCodes(),'Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
  if(e.code==='KeyT'){
@@ -855,3 +883,4 @@ addEventListener('pointerdown',e=>{
  if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
  closeSettings();
 });
+syncTestUi();

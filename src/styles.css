@@ -81,6 +81,12 @@ canvas{display:block;width:100vw;height:100vh}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
+#controlPanel{border-top:1px solid rgba(136,245,255,.12);padding-top:10px;margin-top:10px}
+#controlPanel h4{margin:0 0 8px;font-size:13px;color:#e8f3ff;letter-spacing:.05em}
+#controlRow{display:flex;align-items:center;gap:8px}
+#controlRow input{width:auto;transform:translateY(1px)}
+#controlRow label{margin:0;font-size:12px;color:#d9eeff}
+#controlHint{margin-top:8px;font-size:11px;color:#a9cfe6;line-height:1.3}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
 #settingsChannel{color:rgba(126,242,255,.82);text-transform:uppercase}

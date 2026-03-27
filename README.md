@@ -78,6 +78,8 @@ The root Aurora build is the official public production lane, even while the pro
 ## Controls
 
 - `Left/Right` or `A/D`: Move
+- `Switch Hand` setting in developer tools:
+  - swaps movement to `Fn/Ctrl` for left and `Option` for right on desktop keyboards
 - `Space`: Fire (arcade-style shot cap)
 - `P`: Pause
 - `F`: Fullscreen

@@ -735,7 +735,8 @@ function update(dt){
  }
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom;p.vx=0}
  const harnessPersona=harnessPersonaCfg();
- const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);
+ const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
+ const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
  logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
  if(p.spawn<=0&&!p.captured&&!p.returning){
@@ -743,8 +744,8 @@ function update(dt){
  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
   else{
    const hp=playerHitbox();
-   const leftHeld=keyHeldMs('ArrowLeft','KeyA');
-   const rightHeld=keyHeldMs('ArrowRight','KeyD');
+   const leftHeld=keyHeldMs(...leftCodes);
+   const rightHeld=keyHeldMs(...rightCodes);
    const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
    const precisionWindow=p.manualTapWindow*1000;
    const reverseWindow=p.manualReverseWindow*1000;
