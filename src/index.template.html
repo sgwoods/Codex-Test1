@@ -15,14 +15,15 @@
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
 <div id="settingsPanel" aria-hidden="true">
-  <h3>Settings</h3>
+  <h3>Developer Tools</h3>
   <div id="settingsActions">
+    <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
     <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
   <div id="testPanel">
-    <h4>Test Setup</h4>
+    <h4>Developer Start State</h4>
     <label for="testStage">Start Stage</label>
     <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
     <label for="testShips">Starting Ships</label>
@@ -32,28 +33,6 @@
       <label for="testChallenge">Force challenge opening</label>
     </div>
     <div id="testHint">Applies on next game start only.</div>
-  </div>
-  <div id="accountPanel">
-    <h4>Account</h4>
-    <label for="accountEmail">Email</label>
-    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-    <label for="accountPassword">Password</label>
-    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
-    <div id="accountActions">
-      <button id="accountSignupBtn" type="button">Create Account</button>
-      <button id="accountLoginBtn" type="button">Log In</button>
-      <button id="accountLogoutBtn" type="button">Log Out</button>
-    </div>
-    <label for="accountInitials">Display Initials</label>
-    <div id="accountInitialsRow">
-      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
-      <button id="accountSaveInitialsBtn" type="button">Save</button>
-    </div>
-    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
-    <div id="accountMeta">
-      <span id="accountBest">Best: --</span>
-      <span id="accountRecent">Recent: --</span>
-    </div>
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane {{BUILD_CHANNEL}}</span>
@@ -90,6 +69,37 @@
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
+  <div id="dockQuickTools">
+    <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤</button>
+  </div>
+  <div id="accountPanel" aria-live="polite" hidden>
+    <div id="accountPanelHead">
+      <div>
+        <span id="accountPanelTitle">PILOT PROFILE</span>
+        <span id="accountPanelSub">SIGN IN FOR VALIDATED SCORES</span>
+      </div>
+      <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
+    </div>
+    <label for="accountEmail">Email</label>
+    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+    <label for="accountPassword">Password</label>
+    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+    <div id="accountActions">
+      <button id="accountSignupBtn" type="button">Create Account</button>
+      <button id="accountLoginBtn" type="button">Log In</button>
+      <button id="accountLogoutBtn" type="button">Log Out</button>
+    </div>
+    <label for="accountInitials">Display Initials</label>
+    <div id="accountInitialsRow">
+      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
+      <button id="accountSaveInitialsBtn" type="button">Save</button>
+    </div>
+    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
+    <div id="accountMeta">
+      <span id="accountBest">Best: --</span>
+      <span id="accountRecent">Recent: --</span>
+    </div>
+  </div>
   <div id="leaderboardPanel" aria-live="polite" hidden>
     <div id="leaderboardPanelHead">
       <div>

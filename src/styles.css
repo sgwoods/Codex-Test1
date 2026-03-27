@@ -62,6 +62,8 @@ canvas{display:block;width:100vw;height:100vh}
 #settingsActions{display:grid;gap:8px;margin-bottom:10px}
 #settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
 #settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
+#openViewerBtn{border-color:rgba(255,214,104,.4);background:rgba(46,34,8,.82);color:#fff0c5}
+#openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
 #testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:10px}
@@ -92,8 +94,17 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
-#accountPanel{margin-top:12px;padding-top:10px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:6px}
-#accountPanel h4{margin:0 0 2px;font-size:13px;letter-spacing:.05em;color:#dff7ff}
+#dockQuickTools{display:flex;justify-content:flex-end;gap:8px;width:min(100%,360px)}
+#dockQuickTools button{width:42px;height:42px;border-radius:999px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.74);color:#dff7ff;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
+#dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
+#dockQuickTools button.active{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
+#accountPanel{display:none;flex-direction:column;gap:8px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#accountPanel.visible{display:flex}
+#accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#accountPanelTitle,#accountPanelSub{display:block}
+#accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
+#accountPanelSub{margin-top:4px;font:400 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.1em;color:#dff7ff}
+#accountPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountPanel label{font-size:11px;line-height:1.2;color:rgba(218,236,255,.72)}
 #accountPanel input{width:100%;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:7px 8px;font:13px/1.25 "Courier New",Consolas,monospace;box-sizing:border-box}
 #accountActions,#accountInitialsRow{display:flex;gap:8px}
@@ -136,7 +147,7 @@ canvas{display:block;width:100vw;height:100vh}
 .k{color:var(--a)}
 @media (max-width:840px){
  #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}
- #leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #dockQuickTools,#accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}

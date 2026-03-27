@@ -16,17 +16,16 @@
       <div id="runList" class="run-list"></div>
     </aside>
 
-    <main class="viewer-panel">
+    <main class="viewer-panel" id="viewerPanel" tabindex="0">
       <div class="viewer-head">
         <div>
           <h2 id="runTitle">Select a run</h2>
           <p id="runMeta" class="meta"></p>
         </div>
-        <div id="artifactBadge" class="artifact-badge">No run loaded</div>
-      </div>
-
-      <div class="video-wrap">
-        <video id="runVideo" controls preload="metadata"></video>
+        <div class="viewer-head-actions">
+          <button id="shortcutsBtn" class="icon-button" type="button" aria-haspopup="dialog" aria-controls="shortcutsModal" title="Keyboard shortcuts">⌨</button>
+          <div id="artifactBadge" class="artifact-badge">No run loaded</div>
+        </div>
       </div>
 
       <div class="transport-row">
@@ -41,19 +40,59 @@
             <option>2</option>
           </select>
         </label>
+        <label>Event Zoom
+          <div class="zoom-controls">
+            <button id="zoomOut" type="button">-</button>
+            <span id="zoomLabel">±6s</span>
+            <button id="zoomIn" type="button">+</button>
+          </div>
+        </label>
         <span id="timeLabel">0.000 / 0.000</span>
       </div>
 
       <div class="scrub-wrap">
+        <div id="timelineMarkers" class="timeline-markers"></div>
         <input id="timeline" type="range" min="0" max="0" step="0.001" value="0">
       </div>
 
-      <section class="events-panel">
-        <div class="panel-subhead">
-          <h3>Event Stream</h3>
-          <span id="eventMeta"></span>
+      <section class="media-events-panel">
+        <div class="video-wrap">
+          <div id="videoViewport" class="video-viewport">
+            <video id="runVideo" controls preload="metadata"></video>
+            <div id="selectionOverlay" class="selection-overlay">
+              <div id="selectionBox" class="selection-box hidden"></div>
+            </div>
+          </div>
+          <div class="video-tools">
+            <button id="selectRegionBtn" type="button">Select Region</button>
+            <button id="clearRegionBtn" type="button">Remove Region</button>
+            <div id="videoHint" class="meta video-hint">Pause to pan/zoom. Wheel to zoom, drag to pan, `0` to reset. In selection mode, drag to clip a region.</div>
+          </div>
         </div>
-        <div id="eventList" class="event-list"></div>
+
+        <section class="events-panel">
+          <div class="panel-subhead">
+            <h3>Event Stream</h3>
+            <span id="eventMeta"></span>
+          </div>
+          <div class="filter-row">
+            <button class="filter-chip active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="loss">Losses</button>
+            <button class="filter-chip" type="button" data-filter="capture">Capture</button>
+            <button class="filter-chip" type="button" data-filter="stage">Stage</button>
+            <button class="filter-chip" type="button" data-filter="combat">Combat</button>
+            <button class="filter-chip" type="button" data-filter="input">Input</button>
+            <input id="eventFilterText" type="search" placeholder="Filter event names">
+          </div>
+          <div id="currentEventCard" class="current-event-card">
+            <div class="current-event-head">
+              <strong id="currentEventTitle">No active event</strong>
+              <span id="currentEventTime" class="meta"></span>
+            </div>
+            <div id="currentEventDetails" class="current-event-details meta"></div>
+          </div>
+          <div id="eventList" class="event-list"></div>
+        </section>
       </section>
     </main>
 
@@ -87,8 +126,43 @@
         <textarea id="codexContext" rows="16" readonly></textarea>
       </label>
 
+      <div class="clip-panel">
+        <div class="panel-subhead">
+          <h3>Selected Clip</h3>
+          <span id="clipMeta" class="meta">No region selected</span>
+        </div>
+        <div id="clipPreviewWrap" class="clip-preview-wrap empty">
+          <img id="clipPreview" alt="Selected gameplay region preview">
+        </div>
+      </div>
+
       <div id="issueStatus" class="meta"></div>
     </aside>
+  </div>
+
+  <div id="shortcutsModal" class="modal-shell" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Keyboard Shortcuts</h3>
+        <button id="closeShortcuts" class="icon-button" type="button" aria-label="Close shortcuts">×</button>
+      </div>
+      <div class="shortcut-grid">
+        <div><kbd>Space</kbd><span>Play / pause</span></div>
+        <div><kbd>Left</kbd><span>Back 5s</span></div>
+        <div><kbd>Right</kbd><span>Forward 5s</span></div>
+        <div><kbd>Up</kbd><span>Previous event</span></div>
+        <div><kbd>Down</kbd><span>Next event</span></div>
+        <div><kbd>,</kbd><span>Back 0.1s</span></div>
+        <div><kbd>.</kbd><span>Forward 0.1s</span></div>
+        <div><kbd>Shift</kbd> + <kbd>,</kbd><span>Back 1s</span></div>
+        <div><kbd>Shift</kbd> + <kbd>.</kbd><span>Forward 1s</span></div>
+        <div><kbd>1</kbd>..<kbd>5</kbd><span>Switch event filters</span></div>
+        <div><kbd>C</kbd><span>Copy Codex prompt</span></div>
+        <div><kbd>I</kbd><span>Draft issue body</span></div>
+        <div><kbd>0</kbd><span>Reset paused zoom/pan</span></div>
+        <div><kbd>?</kbd></div><div><span>Open / close shortcuts</span></div>
+      </div>
+    </div>
   </div>
 
   <script src="/app.js"></script>

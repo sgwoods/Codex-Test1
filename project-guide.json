@@ -266,6 +266,10 @@
         {
           "title": "Build / Public Sync",
           "body": "`tools/build/build-index.js` assembles the playable game and generated pages. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo using the agreed public status interface."
+        },
+        {
+          "title": "Log Viewer",
+          "body": "`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay."
         }
       ]
     },
@@ -280,7 +284,8 @@
         "Capture/rescue coverage: `rescue-dual`, `capture-rescue-dual`, `second-capture-current`, `repeat-capture-stage`, `carried-fighter-standby`, and `carried-fighter-attacking`.",
         "Boss clarity coverage: `boss-first-hit`.",
         "Special arcade-moment coverage: `stage4-squadron-bonus` and `stage12-variety`.",
-        "Run analysis now includes challenge, rescue, carried-fighter, later-stage, audio, and measured squadron-spacing metrics so regressions are easier to spot."
+        "Run analysis now includes challenge, rescue, carried-fighter, later-stage, audio, and measured squadron-spacing metrics so regressions are easier to spot.",
+        "Artifact review coverage now includes repaired `.review.webm` playback, quality checks, clip extraction, synced event browsing, and direct issue drafting through the local log viewer."
       ]
     },
     {
@@ -309,6 +314,7 @@
       "bullets": [
         "Edit source files in `src/` and rebuild with `npm run build`.",
         "Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.",
+        "Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned.",
         "Push `main` only when the generated artifacts and release-facing pages are current and the repo is clean.",
         "Use the release dashboard for milestone-level status, release notes for player-visible changes, and the public status export for the separate public project page.",
         "When a behavior question is unclear, preserve the lesson in a durable note under `reference-artifacts/` or `reference-analysis/` instead of relying on chat history."
@@ -319,6 +325,11 @@
       "title": "Documentation Index",
       "summary": "The best entry points for different kinds of work.",
       "links": [
+        {
+          "label": "Log Viewer",
+          "href": "http://127.0.0.1:4311/",
+          "detail": "Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues."
+        },
         {
           "label": "README",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/README.md",

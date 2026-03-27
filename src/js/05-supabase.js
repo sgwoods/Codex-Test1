@@ -8,6 +8,9 @@ const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
+const accountDockBtn=document.getElementById('accountDockBtn');
+const accountPanel=document.getElementById('accountPanel');
+const accountPanelClose=document.getElementById('accountPanelClose');
 const accountEmail=document.getElementById('accountEmail');
 const accountPassword=document.getElementById('accountPassword');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
@@ -46,7 +49,8 @@ const LEADERBOARD={
  authBusy:0,
  primed:0,
  refreshTimer:0,
- panelOpen:0
+ panelOpen:0,
+ accountPanelOpen:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -178,6 +182,30 @@ function closeLeaderboardPanel(){
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
 }
+function syncAccountPanelVisibility(){
+ if(!accountPanel)return;
+ const show=!!LEADERBOARD.accountPanelOpen;
+ accountPanel.hidden=!show;
+ accountPanel.classList.toggle('visible',show);
+ if(accountDockBtn){
+  accountDockBtn.classList.toggle('active',show);
+  accountDockBtn.setAttribute('aria-expanded',show?'true':'false');
+ }
+}
+function openAccountPanel(){
+ LEADERBOARD.accountPanelOpen=1;
+ syncAccountPanelVisibility();
+ syncAccountUi();
+}
+function closeAccountPanel(){
+ LEADERBOARD.accountPanelOpen=0;
+ syncAccountPanelVisibility();
+}
+function toggleAccountPanel(){
+ LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
+ syncAccountPanelVisibility();
+ syncAccountUi();
+}
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
  const pending=LEADERBOARD.configured===null;
@@ -239,6 +267,7 @@ function syncLeaderboardUi(){
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
  renderLeaderboardPanel();
  syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
  syncAccountUi();
 }
 function syncLeaderboardBest(){
@@ -532,9 +561,17 @@ for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
+if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});
+if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPanel);
+if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+addEventListener('pointerdown',e=>{
+ if(!LEADERBOARD.accountPanelOpen||!accountPanel)return;
+ if(e.target===accountDockBtn||accountPanel.contains(e.target))return;
+ closeAccountPanel();
+});
 syncLeaderboardUi();
 initLeaderboard();

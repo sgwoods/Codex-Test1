@@ -7,6 +7,7 @@ const { spawnSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const STATIC_ROOT = __dirname;
 const ARTIFACT_ROOT = path.join(ROOT, 'harness-artifacts');
+const CLIP_ROOT = path.join(ARTIFACT_ROOT, 'viewer-clips');
 const HOST = '127.0.0.1';
 const PORT = +(process.env.LOG_VIEWER_PORT || 4311);
 
@@ -28,6 +29,11 @@ function safeResolve(base, rel){
 function readJson(file, fallback=null){
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
   catch { return fallback; }
+}
+
+function ensureDir(dir){
+  fs.mkdirSync(dir, { recursive: true });
+  return dir;
 }
 
 function walk(dir, out=[]){
@@ -108,6 +114,7 @@ function issueBody(payload){
   if(payload.time != null) lines.push(`- Timestamp: \`${payload.time.toFixed(3)}s\``);
   if(payload.videoUrl) lines.push(`- Video: \`${payload.videoUrl}\``);
   if(payload.sessionUrl) lines.push(`- Session: \`${payload.sessionUrl}\``);
+  if(payload.clipPath) lines.push(`- Clip: \`${payload.clipPath}\``);
   lines.push('');
   lines.push('## Notes');
   lines.push(payload.notes || '(none)');
@@ -118,6 +125,21 @@ function issueBody(payload){
     lines.push('');
   }
   return lines.join('\n');
+}
+
+function saveClip(payload){
+  const dataUrl = payload.dataUrl || '';
+  const match = dataUrl.match(/^data:image\/png;base64,(.+)$/);
+  if(!match) throw new Error('clip must be a PNG data URL');
+  const dir = ensureDir(path.join(CLIP_ROOT, new Date().toISOString().slice(0, 10)));
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const safeRun = String(payload.runId || 'run').replace(/[^a-zA-Z0-9._-]/g, '_').slice(-120);
+  const file = path.join(dir, `${safeRun}-${stamp}.png`);
+  fs.writeFileSync(file, Buffer.from(match[1], 'base64'));
+  return {
+    file,
+    url: '/artifacts/' + path.relative(ARTIFACT_ROOT, file).split(path.sep).map(encodeURIComponent).join('/')
+  };
 }
 
 function createIssue(payload){
@@ -167,6 +189,11 @@ const server = http.createServer(async (req, res) => {
       if(!payload.title) return sendJson(res, 400, { error: 'title required' });
       const created = createIssue(payload);
       return sendJson(res, 200, created);
+    }
+    if(url.pathname === '/api/clips' && req.method === 'POST'){
+      const payload = JSON.parse(await collectBody(req) || '{}');
+      const saved = saveClip(payload);
+      return sendJson(res, 200, saved);
     }
     if(url.pathname.startsWith('/artifacts/')){
       const rel = decodeURIComponent(url.pathname.slice('/artifacts'.length));

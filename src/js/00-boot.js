@@ -1,6 +1,7 @@
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
+const openViewerBtn=document.getElementById('openViewerBtn');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
@@ -508,6 +509,16 @@ function openSettings(){
  settingsOpen=1;
  syncSettingsUi();
 }
+function logViewerUrl(){
+ return 'http://127.0.0.1:4311/';
+}
+function openLogViewer(){
+ const win=window.open(logViewerUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened log viewer');
+ }else showToast('Allow popups to open the log viewer');
+}
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download=file;a.click();
@@ -714,6 +725,7 @@ function rs(){
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
+if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -741,6 +753,7 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
+ if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
  if(!typingTarget&&e.code==='KeyX'&&(started||ATTRACT.active)){e.preventDefault();exportAndReturnToWaitMode('manual_hotkey');return;}
  if(typingTarget){

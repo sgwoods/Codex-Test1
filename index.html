@@ -70,6 +70,8 @@ canvas{display:block;width:100vw;height:100vh}
 #settingsActions{display:grid;gap:8px;margin-bottom:10px}
 #settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
 #settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
+#openViewerBtn{border-color:rgba(255,214,104,.4);background:rgba(46,34,8,.82);color:#fff0c5}
+#openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
 #testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:10px}
@@ -100,8 +102,17 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
-#accountPanel{margin-top:12px;padding-top:10px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:6px}
-#accountPanel h4{margin:0 0 2px;font-size:13px;letter-spacing:.05em;color:#dff7ff}
+#dockQuickTools{display:flex;justify-content:flex-end;gap:8px;width:min(100%,360px)}
+#dockQuickTools button{width:42px;height:42px;border-radius:999px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.74);color:#dff7ff;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
+#dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
+#dockQuickTools button.active{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
+#accountPanel{display:none;flex-direction:column;gap:8px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#accountPanel.visible{display:flex}
+#accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#accountPanelTitle,#accountPanelSub{display:block}
+#accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
+#accountPanelSub{margin-top:4px;font:400 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.1em;color:#dff7ff}
+#accountPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountPanel label{font-size:11px;line-height:1.2;color:rgba(218,236,255,.72)}
 #accountPanel input{width:100%;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:7px 8px;font:13px/1.25 "Courier New",Consolas,monospace;box-sizing:border-box}
 #accountActions,#accountInitialsRow{display:flex;gap:8px}
@@ -144,7 +155,7 @@ canvas{display:block;width:100vw;height:100vh}
 .k{color:var(--a)}
 @media (max-width:840px){
  #statusDock{left:14px;right:14px;align-items:stretch;bottom:10px}
- #leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #dockQuickTools,#accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
@@ -159,14 +170,15 @@ canvas{display:block;width:100vw;height:100vh}
 <div id="msg"></div>
 <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙</button>
 <div id="settingsPanel" aria-hidden="true">
-  <h3>Settings</h3>
+  <h3>Developer Tools</h3>
   <div id="settingsActions">
+    <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
     <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
   <div id="testPanel">
-    <h4>Test Setup</h4>
+    <h4>Developer Start State</h4>
     <label for="testStage">Start Stage</label>
     <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
     <label for="testShips">Starting Ships</label>
@@ -177,33 +189,11 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
     <div id="testHint">Applies on next game start only.</div>
   </div>
-  <div id="accountPanel">
-    <h4>Account</h4>
-    <label for="accountEmail">Email</label>
-    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-    <label for="accountPassword">Password</label>
-    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
-    <div id="accountActions">
-      <button id="accountSignupBtn" type="button">Create Account</button>
-      <button id="accountLoginBtn" type="button">Log In</button>
-      <button id="accountLogoutBtn" type="button">Log Out</button>
-    </div>
-    <label for="accountInitials">Display Initials</label>
-    <div id="accountInitialsRow">
-      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
-      <button id="accountSaveInitialsBtn" type="button">Save</button>
-    </div>
-    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
-    <div id="accountMeta">
-      <span id="accountBest">Best: --</span>
-      <span id="accountRecent">Recent: --</span>
-    </div>
-  </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.221.sha.a549daf.dirty</span>
-    <span id="settingsRelease">Mar 26 2026, 6:42 PM EDT</span>
-    <span id="settingsState">main@a549daf dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.223.sha.a9faab5.dirty</span>
+    <span id="settingsRelease">Mar 27 2026, 7:32 AM EDT</span>
+    <span id="settingsState">main@a9faab5 dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -234,6 +224,37 @@ canvas{display:block;width:100vw;height:100vh}
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
 <div id="statusDock">
+  <div id="dockQuickTools">
+    <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤</button>
+  </div>
+  <div id="accountPanel" aria-live="polite" hidden>
+    <div id="accountPanelHead">
+      <div>
+        <span id="accountPanelTitle">PILOT PROFILE</span>
+        <span id="accountPanelSub">SIGN IN FOR VALIDATED SCORES</span>
+      </div>
+      <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
+    </div>
+    <label for="accountEmail">Email</label>
+    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+    <label for="accountPassword">Password</label>
+    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+    <div id="accountActions">
+      <button id="accountSignupBtn" type="button">Create Account</button>
+      <button id="accountLoginBtn" type="button">Log In</button>
+      <button id="accountLogoutBtn" type="button">Log Out</button>
+    </div>
+    <label for="accountInitials">Display Initials</label>
+    <div id="accountInitialsRow">
+      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
+      <button id="accountSaveInitialsBtn" type="button">Save</button>
+    </div>
+    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
+    <div id="accountMeta">
+      <span id="accountBest">Best: --</span>
+      <span id="accountRecent">Recent: --</span>
+    </div>
+  </div>
   <div id="leaderboardPanel" aria-live="polite" hidden>
     <div id="leaderboardPanelHead">
       <div>
@@ -260,8 +281,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.221.sha.a549daf.dirty</span>
-    <span id="buildStampRelease">Mar 26 2026, 6:42 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.223.sha.a9faab5.dirty</span>
+    <span id="buildStampRelease">Mar 27 2026, 7:32 AM EDT</span>
   </div>
 </div>
 <script>
@@ -297,6 +318,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),left=document.getElementById('left'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
+const openViewerBtn=document.getElementById('openViewerBtn');
 const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
@@ -356,7 +378,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.221.sha.a549daf.dirty',commit:'a549dafcdbb25bc5921d26e2f1803c9a222dae48',branch:'main',dirty:true,released:'Mar 26 2026, 6:42 PM EDT',state:'main@a549daf dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.223.sha.a9faab5.dirty',commit:'a9faab50f5b4054c0fa3cbe68a5eee7ec63c1d37',branch:'main',dirty:true,released:'Mar 27 2026, 7:32 AM EDT',state:'main@a9faab5 dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -804,6 +826,16 @@ function openSettings(){
  settingsOpen=1;
  syncSettingsUi();
 }
+function logViewerUrl(){
+ return 'http://127.0.0.1:4311/';
+}
+function openLogViewer(){
+ const win=window.open(logViewerUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened log viewer');
+ }else showToast('Allow popups to open the log viewer');
+}
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download=file;a.click();
@@ -1010,6 +1042,7 @@ function rs(){
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
+if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
 feedbackBtn.addEventListener('click',openFeedback);
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
@@ -1037,6 +1070,7 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
+ if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
  if(!typingTarget&&e.code==='KeyX'&&(started||ATTRACT.active)){e.preventDefault();exportAndReturnToWaitMode('manual_hotkey');return;}
  if(typingTarget){
@@ -1150,6 +1184,9 @@ const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
+const accountDockBtn=document.getElementById('accountDockBtn');
+const accountPanel=document.getElementById('accountPanel');
+const accountPanelClose=document.getElementById('accountPanelClose');
 const accountEmail=document.getElementById('accountEmail');
 const accountPassword=document.getElementById('accountPassword');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
@@ -1188,7 +1225,8 @@ const LEADERBOARD={
  authBusy:0,
  primed:0,
  refreshTimer:0,
- panelOpen:0
+ panelOpen:0,
+ accountPanelOpen:0
 };
 
 function normalizeRemoteScoreRow(row){
@@ -1320,6 +1358,30 @@ function closeLeaderboardPanel(){
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
 }
+function syncAccountPanelVisibility(){
+ if(!accountPanel)return;
+ const show=!!LEADERBOARD.accountPanelOpen;
+ accountPanel.hidden=!show;
+ accountPanel.classList.toggle('visible',show);
+ if(accountDockBtn){
+  accountDockBtn.classList.toggle('active',show);
+  accountDockBtn.setAttribute('aria-expanded',show?'true':'false');
+ }
+}
+function openAccountPanel(){
+ LEADERBOARD.accountPanelOpen=1;
+ syncAccountPanelVisibility();
+ syncAccountUi();
+}
+function closeAccountPanel(){
+ LEADERBOARD.accountPanelOpen=0;
+ syncAccountPanelVisibility();
+}
+function toggleAccountPanel(){
+ LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
+ syncAccountPanelVisibility();
+ syncAccountUi();
+}
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
  const pending=LEADERBOARD.configured===null;
@@ -1381,6 +1443,7 @@ function syncLeaderboardUi(){
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
  renderLeaderboardPanel();
  syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
  syncAccountUi();
 }
 function syncLeaderboardBest(){
@@ -1674,10 +1737,18 @@ for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
+if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});
+if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPanel);
+if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+addEventListener('pointerdown',e=>{
+ if(!LEADERBOARD.accountPanelOpen||!accountPanel)return;
+ if(e.target===accountDockBtn||accountPanel.contains(e.target))return;
+ closeAccountPanel();
+});
 syncLeaderboardUi();
 initLeaderboard();
 
@@ -2889,7 +2960,7 @@ if(!toolsVisible)closeSettings();
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
-  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> SETTINGS</span>`;
+  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
  }
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;

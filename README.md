@@ -116,6 +116,13 @@ The root Aurora build is the official public production lane, even while the pro
   ```bash
   npm run build
   ```
+- Start the local artifact review viewer with:
+  ```bash
+  npm run log-viewer
+  ```
+  Then open:
+  - `http://127.0.0.1:4311/`
+  The viewer loads repaired run videos, keeps the event stream aligned beside playback, supports paused zoom/pan and region clipping, and can draft Codex context or GitHub issues from the selected moment.
 - Promote the current built artifacts to the hosted `beta` lane with:
   ```bash
   npm run promote:beta
