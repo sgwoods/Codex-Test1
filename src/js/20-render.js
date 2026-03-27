@@ -260,9 +260,9 @@ function draw(){
  const ox=shellX+shellPadL;
  const oy=shellY+shellPadT;
  if(hud){
-  hud.style.left=`${ox+10}px`;
+  hud.style.left=`${ox+16}px`;
   hud.style.top=`${Math.max(6,oy+4)}px`;
-  hud.style.width=`${Math.max(220,viewW-20)}px`;
+  hud.style.width=`${Math.max(220,viewW-32)}px`;
  }
  if(msg){
   msg.style.left=`${Math.floor(ox+viewW/2)}px`;

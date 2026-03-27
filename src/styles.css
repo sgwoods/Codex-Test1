@@ -93,7 +93,7 @@ canvas{display:block;width:100vw;height:100vh}
  radial-gradient(circle at 84% 14%,rgba(255,255,255,.76) 0 1px,transparent 2px);
  opacity:.95}
 #cabinetRightFrame::before,#cabinetRightFrame::after{pointer-events:none}
-#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;padding:4px 10px 3px;background:rgba(0,0,0,.72);font-size:clamp(14px,1vw,22px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
+#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;padding:4px 14px 3px;background:rgba(0,0,0,.72);font-size:clamp(14px,1vw,22px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
 #left,#center,#right{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #left{text-align:left}
 #center{text-align:center}
