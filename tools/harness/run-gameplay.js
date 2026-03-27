@@ -5,8 +5,10 @@ const path = require('path');
 const { analyze } = require('./analyze-run');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
 const { chromium } = require('playwright-core');
+const { DIST_PRODUCTION } = require('../build/paths');
 
 const ROOT = path.resolve(__dirname, '..', '..');
+const APP_ROOT = DIST_PRODUCTION;
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const DEFAULT_OUT = path.join(ROOT, 'harness-artifacts');
 const SCENARIOS = path.join(__dirname, 'scenarios');
@@ -205,6 +207,9 @@ async function main(){
     process.exit(args.help ? 0 : 1);
   }
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
+  if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))){
+    throw new Error(`Built app not found at ${APP_ROOT}. Run "npm run build" first.`);
+  }
 
   const scenarioPath = args.scenario && !String(args.scenario).includes(path.sep) ? path.join(SCENARIOS, `${args.scenario}.json`) : args.scenario;
   const spec = args.session ? specFromSession(path.resolve(args.session)) : specFromScenario(path.resolve(scenarioPath));
@@ -217,7 +222,7 @@ async function main(){
   const outDir = path.join(outBase, `${spec.name}${personaTag}${seedTag}-${stamp}`);
   fs.mkdirSync(outDir, { recursive: true });
 
-  const { server, port } = await serve(ROOT);
+  const { server, port } = await serve(APP_ROOT);
   const browser = await chromium.launch({
     executablePath: CHROME,
     headless: args.headed ? false : true,

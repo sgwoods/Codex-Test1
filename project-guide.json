@@ -245,7 +245,7 @@
       "cards": [
         {
           "title": "Game Shell",
-          "body": "`src/index.template.html` and `src/styles.css` define the page shell, settings UI, overlays, layout, and in-game presentation. The served `index.html` is generated from these sources during build."
+          "body": "`src/index.template.html` and `src/styles.css` define the page shell, settings UI, overlays, layout, and in-game presentation. The served production build is generated into `dist/production/index.html` during build."
         },
         {
           "title": "Boot / State / Metadata",

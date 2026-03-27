@@ -2,8 +2,10 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { chromium } = require('playwright-core');
+const { DIST_PRODUCTION } = require('../build/paths');
 
 const ROOT = path.resolve(__dirname, '..', '..');
+const APP_ROOT = DIST_PRODUCTION;
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 function mime(file){
@@ -16,7 +18,7 @@ function mime(file){
   return 'application/octet-stream';
 }
 
-function serve(root = ROOT){
+function serve(root = APP_ROOT){
   const server = http.createServer((req, res) => {
     const clean = decodeURIComponent((req.url || '/').split('?')[0]);
     const rel = clean === '/' ? '/index.html' : clean;
@@ -39,7 +41,10 @@ function sleep(ms){
 
 async function withHarnessPage(cfg, fn){
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
-  const { server, port } = await serve(ROOT);
+  if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))){
+    throw new Error(`Built app not found at ${APP_ROOT}. Run "npm run build" first.`);
+  }
+  const { server, port } = await serve(APP_ROOT);
   const browser = await chromium.launch({
     executablePath: CHROME,
     headless: cfg.headed ? false : true,
@@ -72,7 +77,7 @@ async function withHarnessPage(cfg, fn){
       seed,
       persona: cfg.persona || null
     });
-    const result = await fn({ page, context, browser, port, root: ROOT });
+    const result = await fn({ page, context, browser, port, root: APP_ROOT });
     await context.close();
     return result;
   } finally {
@@ -139,6 +144,7 @@ async function capturePlayfieldRegion(page, clip){
 
 module.exports = {
   ROOT,
+  APP_ROOT,
   CHROME,
   sleep,
   withHarnessPage,

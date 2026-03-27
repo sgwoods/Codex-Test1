@@ -2,11 +2,11 @@
 
 ## Current State
 
-- Browser-based fixed-screen arcade shooter built from readable source modules and served as `index.html`
+- Browser-based fixed-screen arcade shooter built from readable source modules and served from `dist/production/index.html`
 - Build identity is now part of the product:
   - prerelease SemVer in `package.json` for the pre-production engineering line
   - production and production-beta labels derived from that source version during Aurora release builds
-  - generated `build-info.json`
+  - generated `dist/production/build-info.json`
   - in-game settings drawer shows the current build label and Eastern release timestamp
 - Hosted on GitHub Pages: `https://sgwoods.github.io/Aurora-Galactica/`
 - Core gameplay implemented:

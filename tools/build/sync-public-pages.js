@@ -2,9 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { ROOT, PRODUCTION_BUILD_INFO } = require('./paths');
 
-const ROOT = path.resolve(__dirname, '..', '..');
-const BUILD_INFO = path.join(ROOT, 'build-info.json');
+const BUILD_INFO = PRODUCTION_BUILD_INFO;
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const PROJECT_TEMPLATE = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');

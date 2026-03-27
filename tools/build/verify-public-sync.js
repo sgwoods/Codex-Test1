@@ -2,9 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { ROOT, PRODUCTION_BUILD_INFO } = require('./paths');
 
-const ROOT = path.resolve(__dirname, '..', '..');
-const BUILD_INFO = path.join(ROOT, 'build-info.json');
+const BUILD_INFO = PRODUCTION_BUILD_INFO;
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const CANONICAL_PROJECT_SLUG = 'aurora-galactica';
 const LEGACY_PROJECT_SLUG = 'codex-test1';

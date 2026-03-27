@@ -7,8 +7,8 @@ reference-backed fidelity work, and safe collaboration.
 
 - Edit source files under:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/`
-- Do not hand-edit the served artifact:
-  - `/Users/stevenwoods/Documents/Codex-Test1/index.html`
+- Do not hand-edit generated build output under:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/`
 - Rebuild after source changes:
   ```bash
   cd /Users/stevenwoods/Documents/Codex-Test1
@@ -48,6 +48,8 @@ reference-backed fidelity work, and safe collaboration.
   ```bash
   npm run build
   ```
+- The main local playable build is generated at:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
 - Replay a saved gameplay session:
   ```bash
   npm run harness -- --session /absolute/path/to/neo-galaga-session.json

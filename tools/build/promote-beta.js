@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const {
+  ROOT,
+  DIST_PRODUCTION,
+  DIST_BETA,
+  PRODUCTION_BUILD_INFO,
+  BETA_BUILD_INFO
+} = require('./paths');
 
-const ROOT = path.resolve(__dirname, '..', '..');
-const BETA_DIR = path.join(ROOT, 'beta');
-const ROOT_BUILD_INFO = path.join(ROOT, 'build-info.json');
-const BETA_BUILD_INFO = path.join(BETA_DIR, 'build-info.json');
+const BETA_DIR = DIST_BETA;
 const FILES = [
   'index.html',
   'release-dashboard.html',
@@ -67,17 +71,20 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
   fs.writeFileSync(filePath, text);
 }
 
+fs.rmSync(BETA_DIR, { recursive: true, force: true });
 fs.mkdirSync(BETA_DIR, { recursive: true });
 
 for(const file of FILES){
-  const src = path.join(ROOT, file);
+  const src = file === 'release-notes.json' || file === 'README.md'
+    ? path.join(ROOT, file)
+    : path.join(DIST_PRODUCTION, file);
   if(!fs.existsSync(src)) continue;
   const dest = path.join(BETA_DIR, file === 'index.html' ? 'index.html' : path.basename(file));
   fs.copyFileSync(src, dest);
 }
 
-if(fs.existsSync(ROOT_BUILD_INFO) && fs.existsSync(BETA_BUILD_INFO)){
-  const sourceInfo = JSON.parse(fs.readFileSync(ROOT_BUILD_INFO, 'utf8'));
+if(fs.existsSync(PRODUCTION_BUILD_INFO) && fs.existsSync(BETA_BUILD_INFO)){
+  const sourceInfo = JSON.parse(fs.readFileSync(PRODUCTION_BUILD_INFO, 'utf8'));
   const betaInfo = buildBetaInfo(sourceInfo);
   fs.writeFileSync(BETA_BUILD_INFO, JSON.stringify(betaInfo, null, 2) + '\n');
   rewriteBetaText(path.join(BETA_DIR, 'index.html'), sourceInfo, betaInfo);

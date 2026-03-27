@@ -2,9 +2,17 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const pkg = require(path.resolve(__dirname, '..', '..', 'package.json'));
+const {
+  ROOT,
+  DIST_PRODUCTION,
+  PRODUCTION_INDEX,
+  PRODUCTION_DASHBOARD,
+  PRODUCTION_PROJECT_GUIDE,
+  PRODUCTION_BUILD_INFO,
+  PRODUCTION_SCREENSHOT
+} = require('./paths');
+const pkg = require(path.resolve(ROOT, 'package.json'));
 
-const ROOT = path.resolve(__dirname, '..', '..');
 const SRC = path.join(ROOT, 'src');
 const SCRIPT_DIR = path.join(SRC, 'js');
 const TEMPLATE = path.join(SRC, 'index.template.html');
@@ -15,11 +23,19 @@ const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js',
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
-const OUT = path.join(ROOT, 'index.html');
-const DASHBOARD_OUT = path.join(ROOT, 'release-dashboard.html');
-const PROJECT_GUIDE_OUT = path.join(ROOT, 'project-guide.html');
-const BUILD_INFO_OUT = path.join(ROOT, 'build-info.json');
 const GENERATED_BUILD_PATHS = new Set([
+  'dist/production/index.html',
+  'dist/production/release-dashboard.html',
+  'dist/production/project-guide.html',
+  'dist/production/build-info.json',
+  'dist/production/export.mov.png',
+  'dist/beta/index.html',
+  'dist/beta/release-dashboard.html',
+  'dist/beta/project-guide.html',
+  'dist/beta/build-info.json',
+  'dist/beta/export.mov.png',
+  'dist/beta/README.md',
+  'dist/beta/README.txt',
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
@@ -28,7 +44,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/release-dashboard.html',
   'beta/project-guide.html',
   'beta/build-info.json',
-  'beta/README.txt'
+  'beta/README.txt',
+  'beta/README.md'
 ]);
 
 function read(file){
@@ -1091,6 +1108,7 @@ function normalizeVersionForChannel(version, releaseChannel){
 }
 
 function build(){
+  fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
   const template = read(TEMPLATE);
   const styles = read(STYLES).trimEnd();
   const buildCommit = git('rev-parse HEAD', 'unknown');
@@ -1176,11 +1194,20 @@ function build(){
     latestReleaseNote: latestNote
   };
 
-  fs.writeFileSync(OUT, html.endsWith('\n') ? html : `${html}\n`);
-  fs.writeFileSync(DASHBOARD_OUT, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
-  fs.writeFileSync(PROJECT_GUIDE_OUT, buildProjectGuide(buildInfo, latestNote, projectGuide));
-  fs.writeFileSync(BUILD_INFO_OUT, JSON.stringify(buildInfo, null, 2) + '\n');
-  return [OUT, DASHBOARD_OUT, PROJECT_GUIDE_OUT, BUILD_INFO_OUT];
+  fs.writeFileSync(PRODUCTION_INDEX, html.endsWith('\n') ? html : `${html}\n`);
+  fs.writeFileSync(PRODUCTION_DASHBOARD, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
+  fs.writeFileSync(PRODUCTION_PROJECT_GUIDE, buildProjectGuide(buildInfo, latestNote, projectGuide));
+  fs.writeFileSync(PRODUCTION_BUILD_INFO, JSON.stringify(buildInfo, null, 2) + '\n');
+  if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
+    fs.copyFileSync(path.join(ROOT, 'export.mov.png'), PRODUCTION_SCREENSHOT);
+  }
+  return [
+    PRODUCTION_INDEX,
+    PRODUCTION_DASHBOARD,
+    PRODUCTION_PROJECT_GUIDE,
+    PRODUCTION_BUILD_INFO,
+    PRODUCTION_SCREENSHOT
+  ];
 }
 
 const outputs = build();

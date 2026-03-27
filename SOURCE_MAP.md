@@ -37,8 +37,12 @@ gameplay or tuning values.
 ## Build / Deploy
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
-  - assembles source files into `/Users/stevenwoods/Documents/Codex-Test1/index.html`
-  - writes `/Users/stevenwoods/Documents/Codex-Test1/build-info.json`
+  - assembles source files into `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
+  - writes `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-beta.js`
+  - copies the current production build into `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+  - rewrites build identity there for the public beta lane
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
   - syncs the separate `sgwoods/public` repo from build metadata

@@ -23,7 +23,11 @@ how work should flow through it.
 ### Generated Output
 
 - Served file:
-  - `/Users/stevenwoods/Documents/Codex-Test1/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
+- Build metadata:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+- Promoted beta snapshot:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
 
 ## Build / Deploy Flow
 
@@ -32,8 +36,8 @@ how work should flow through it.
 - Build script:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
 - Generates:
-  - `/Users/stevenwoods/Documents/Codex-Test1/index.html`
-  - `/Users/stevenwoods/Documents/Codex-Test1/build-info.json`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
 
 ### Pages Deploy
 
