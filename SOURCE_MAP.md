@@ -45,6 +45,10 @@ gameplay or tuning values.
   - rewrites build identity there for the public beta lane
 
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
+  - exports project-status content from the current production build into the separate `sgwoods/public` repo
+  - does not publish the playable Aurora build
+
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
   - syncs the separate `sgwoods/public` repo from build metadata
 
 - `/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml`

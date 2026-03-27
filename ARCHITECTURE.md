@@ -43,7 +43,12 @@ how work should flow through it.
 
 - Workflow:
   - `/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml`
-- CI rebuilds before deploy so the hosted game reflects committed source, not just local generated files
+- CI rebuilds the dev repo’s generated outputs, but the publicly shared Aurora production and beta lanes are published from the separate `Aurora-Galactica` repo.
+- In practice:
+  - `Codex-Test1` produces generated artifacts in `dist/`
+  - `Aurora-Galactica` is the public artifact host for:
+    - `/`
+    - `/beta/`
 
 ### Public Project Pages Sync
 
@@ -51,6 +56,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
 - Workflow:
   - `/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/sync-public-pages.yml`
+- This syncs project/status surfaces to `sgwoods/public`.
+- It does not publish the playable game.
 
 ## Testing / Evidence Flow
 

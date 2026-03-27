@@ -265,7 +265,7 @@
         },
         {
           "title": "Build / Public Sync",
-          "body": "`tools/build/build-index.js` assembles the playable game and generated pages. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo using the agreed public status interface."
+          "body": "`tools/build/build-index.js` assembles the production build into `dist/production/`. `tools/build/promote-beta.js` snapshots that output into `dist/beta/`. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo and does not publish the playable game."
         },
         {
           "title": "Log Viewer",
@@ -315,7 +315,7 @@
         "Edit source files in `src/` and rebuild with `npm run build`.",
         "Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.",
         "Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned, but it only sees runs that live inside the expected `harness-artifacts/` folder structure.",
-        "Push `main` only when the generated artifacts and release-facing pages are current and the repo is clean.",
+        "Push `main` only when the maintained source, docs, and release metadata are current and the repo is clean.",
         "Use the release dashboard for milestone-level status, release notes for player-visible changes, and the public status export for the separate public project page.",
         "When a behavior question is unclear, preserve the lesson in a durable note under `reference-artifacts/` or `reference-analysis/` instead of relying on chat history."
       ]

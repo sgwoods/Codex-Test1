@@ -120,6 +120,9 @@ The root Aurora build is the official public production lane, even while the pro
   ```bash
   npm run build
   ```
+- Build outputs are generated into:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+- Do not hand-edit generated files under `dist/`; treat them as disposable build output.
 - Start the local artifact review viewer with:
   ```bash
   npm run log-viewer
@@ -175,7 +178,81 @@ The root Aurora build is the official public production lane, even while the pro
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
 - Generated project guide:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/project-guide.html`
-  - This page is regenerated during `npm run build` from the guide config and the maintained docs above.
+- This page is regenerated during `npm run build` from the guide config and the maintained docs above.
+
+## End-To-End Workflow
+
+### 1. Develop In Source
+
+- Make gameplay, UI, harness, or documentation changes in:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/`
+  - maintained docs such as:
+    - `/Users/stevenwoods/Documents/Codex-Test1/README.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/PLAN.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
+  - structured release/project data such as:
+    - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
+    - `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
+    - `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
+
+### 2. Build Local Outputs
+
+- Run:
+  ```bash
+  npm run build
+  ```
+- This regenerates:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/project-guide.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/release-dashboard.html`
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+
+### 3. Test Against The Built App
+
+- Manual local play should use the generated production build:
+  ```bash
+  python3 -m http.server 8000 --directory dist/production
+  ```
+- Harness/browser checks also run against `dist/production/`, not raw source.
+- The log viewer is separate and reads run artifacts from:
+  - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+
+### 4. Promote A Beta Snapshot
+
+- When the current build is worth external testing, run:
+  ```bash
+  npm run promote:beta
+  ```
+- This creates a beta-ready snapshot in:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+
+### 5. Publish Hosted Beta
+
+- Copy the generated contents of:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+- into the `/beta/` folder of:
+  - `https://github.com/sgwoods/Aurora-Galactica`
+- Then push `Aurora-Galactica` so GitHub Pages updates:
+  - `https://sgwoods.github.io/Aurora-Galactica/beta/`
+
+### 6. Publish Hosted Production
+
+- When promoting a production build, copy the generated contents of:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+- into the root of:
+  - `https://github.com/sgwoods/Aurora-Galactica`
+- Then push `Aurora-Galactica` so GitHub Pages updates:
+  - `https://sgwoods.github.io/Aurora-Galactica/`
+
+### 7. Sync Public Project Status
+
+- The separate public project-summary repo is not the game host.
+- It is updated from the current production build metadata with:
+  ```bash
+  npm run sync:public
+  ```
+- That updates Aurora’s public project/status surfaces in `sgwoods/public`, not the playable game itself.
 - Release history:
   - `/Users/stevenwoods/Documents/Codex-Test1/release-history/`
 - Auto deploy workflow: `.github/workflows/pages.yml`

@@ -48,8 +48,14 @@ reference-backed fidelity work, and safe collaboration.
   ```bash
   npm run build
   ```
+- Promote the current built output into a beta snapshot:
+  ```bash
+  npm run promote:beta
+  ```
 - The main local playable build is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
+- The beta-ready snapshot is generated at:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
 - Replay a saved gameplay session:
   ```bash
   npm run harness -- --session /absolute/path/to/neo-galaga-session.json

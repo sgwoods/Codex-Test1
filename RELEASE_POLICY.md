@@ -76,20 +76,49 @@ Examples:
 
 ## Beta Promotion Workflow
 
-1. Build the current production artifacts:
+1. Update source content in `Codex-Test1`:
+   - gameplay/UI under `src/`
+   - maintained docs and release metadata under the repo root
+2. Build the current production artifacts:
    - `npm run build`
-2. Promote the current production build into the beta lane:
+3. Test the generated production build in:
+   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+4. Promote the current production build into the beta lane:
    - `npm run promote:beta`
-3. Review the generated output in:
+5. Review the generated output in:
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
-4. Publish the promoted beta snapshot into:
+6. Publish the promoted beta snapshot into:
    - `https://github.com/sgwoods/Aurora-Galactica`
-5. Let GitHub Pages deploy from `Aurora-Galactica` so:
+7. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/beta/`
      serves the promoted checkpoint
 
 The beta lane is intentionally a snapshot of selected generated artifacts under `dist/`, not a separate branch or a second build pipeline. `Codex-Test1` remains the engineering source of truth; `Aurora-Galactica` is the public release surface for both production and beta.
+
+## Production Publish Workflow
+
+1. Build and validate the current production output:
+   - `npm run build`
+   - plus whatever harness/manual checks are appropriate for the release
+2. Publish the generated contents of:
+   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+   into the root of:
+   - `https://github.com/sgwoods/Aurora-Galactica`
+3. Let GitHub Pages deploy from `Aurora-Galactica` so:
+   - `https://sgwoods.github.io/Aurora-Galactica/`
+     serves the promoted production build
+
+## Public Project Status Sync Workflow
+
+1. Build the current production output:
+   - `npm run build`
+2. Run:
+   - `npm run sync:public`
+3. This updates the separate `sgwoods/public` project-summary pages and manifests from:
+   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+   - `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
+4. It does not publish the playable game itself.
 
 ## Build Number
 
