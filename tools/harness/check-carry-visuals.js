@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { writePortableSummary } = require('./summary-path-util');
 const { withHarnessPage, sleep, waitForHarness, capturePlayfieldRegion } = require('./browser-check-util');
 
 const OUT = path.join(__dirname, '..', '..', 'harness-artifacts', 'checks', 'carry-visuals');
@@ -127,7 +128,7 @@ async function main(){
     fail('diving carried fighter still appears on the wrong side of the boss', result);
   }
 
-  fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify({
+  writePortableSummary(path.join(outDir, 'summary.json'), {
     ok: true,
     outDir,
     docked: result.docked,
@@ -138,7 +139,7 @@ async function main(){
     divingSample: result.divingSample,
     divingWrongSideSample: result.divingWrongSideSample,
     sampledCount: result.sampled.length
-  }, null, 2));
+  });
 
   console.log(JSON.stringify({
     ok: true,

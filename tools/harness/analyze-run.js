@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { writePortableSummary } = require('./summary-path-util');
 const { spawnSync } = require('child_process');
 
 function parseArgs(argv){
@@ -571,7 +572,7 @@ function analyze(target){
   if(run.summaryFile){
     const summary = JSON.parse(fs.readFileSync(run.summaryFile, 'utf8'));
     summary.analysis = analysis;
-    fs.writeFileSync(run.summaryFile, JSON.stringify(summary, null, 2));
+    writePortableSummary(run.summaryFile, summary);
   }
   return analysis;
 }

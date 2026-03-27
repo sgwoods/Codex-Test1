@@ -45,6 +45,18 @@ function walk(dir, out=[]){
   return out;
 }
 
+function resolveRunFile(dir, candidate){
+  if(!candidate) return null;
+  const raw = String(candidate);
+  const baseName = path.basename(raw);
+  const localSibling = path.join(dir, baseName);
+  if(fs.existsSync(localSibling)) return localSibling;
+  if(path.isAbsolute(raw) && fs.existsSync(raw)) return raw;
+  const relativeLocal = path.join(dir, raw);
+  if(fs.existsSync(relativeLocal)) return relativeLocal;
+  return null;
+}
+
 function runVideoFile(summary, dir){
   const files = Array.isArray(summary?.files) ? summary.files : [];
   const candidates = files.filter(file => /\.review\.(webm|mkv)$/.test(file) || /\.webm$/.test(file));
@@ -52,7 +64,7 @@ function runVideoFile(summary, dir){
     const preferred = candidates.find(file => file.endsWith('.review.webm'))
       || candidates.find(file => file.endsWith('.webm'))
       || candidates[0];
-    return path.isAbsolute(preferred) ? preferred : path.join(dir, preferred);
+    return resolveRunFile(dir, preferred);
   }
   return null;
 }
@@ -60,7 +72,7 @@ function runVideoFile(summary, dir){
 function sessionFile(summary, dir){
   const files = Array.isArray(summary?.files) ? summary.files : [];
   const file = files.find(f => /neo-galaga-session-.*\.json$/.test(f));
-  return file ? (path.isAbsolute(file) ? file : path.join(dir, file)) : null;
+  return file ? resolveRunFile(dir, file) : null;
 }
 
 function summarizeRun(summaryFile){

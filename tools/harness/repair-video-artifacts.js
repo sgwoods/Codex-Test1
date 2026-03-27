@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { writePortableSummary } = require('./summary-path-util');
 const { ensureUsableVideoArtifact, repairedPathFor } = require('./video-artifact-util');
 
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -24,7 +25,7 @@ function loadSummary(file){
 }
 
 function saveSummary(file, summary){
-  fs.writeFileSync(file, JSON.stringify(summary, null, 2));
+  writePortableSummary(file, summary);
 }
 
 function main(){

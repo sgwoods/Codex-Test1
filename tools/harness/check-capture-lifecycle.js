@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { writePortableSummary } = require('./summary-path-util');
 const { withHarnessPage, sleep, waitForHarness } = require('./browser-check-util');
 
 const OUT = path.join(__dirname, '..', '..', 'harness-artifacts', 'checks', 'capture-lifecycle');
@@ -149,12 +150,12 @@ async function main(){
     fail('rescue branch did not create the expected returning rescue pod state', { captureEscape, fullCapture });
   }
 
-  fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify({
+  writePortableSummary(path.join(outDir, 'summary.json'), {
     ok: true,
     outDir,
     captureEscape,
     fullCapture
-  }, null, 2));
+  });
 
   console.log(JSON.stringify({
     ok: true,

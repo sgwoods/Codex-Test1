@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { writePortableSummary } = require('./summary-path-util');
 const { withHarnessPage, sleep, capturePlayfieldRegion } = require('./browser-check-util');
 
 const OUT = path.join(__dirname, '..', '..', 'harness-artifacts', 'checks', 'boss-first-hit-visual');
@@ -51,13 +52,13 @@ async function main(){
     fail('settled boss region did not calm down after the hit flash', result);
   }
 
-  fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify({
+  writePortableSummary(path.join(outDir, 'summary.json'), {
     ok: true,
     outDir,
     before: result.before,
     flash: result.flash,
     settled: result.settled
-  }, null, 2));
+  });
 
   console.log(JSON.stringify({
     ok: true,

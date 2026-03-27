@@ -3,6 +3,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { analyze } = require('./analyze-run');
+const { writePortableSummary } = require('./summary-path-util');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
 
 function parseArgs(argv){
@@ -103,7 +104,7 @@ function importLatest(opts={}){
   const summaryPath = path.join(outDir, 'summary.json');
   const summary = buildSummary(session, outDir, files, sourceDir);
   summary.artifactQuality = artifactQuality;
-  fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
+  writePortableSummary(summaryPath, summary);
   const analysis = analyze(outDir);
   const finalSummary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
   return { outDir, pairId: pair.id, files: finalSummary.files, analysis: analysis, summary: finalSummary };

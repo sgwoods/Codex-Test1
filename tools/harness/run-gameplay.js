@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { analyze } = require('./analyze-run');
+const { writePortableSummary } = require('./summary-path-util');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
 const { chromium } = require('playwright-core');
 const { DIST_DEV } = require('../build/paths');
@@ -280,9 +281,9 @@ async function main(){
       files: saved,
       artifactQuality
     };
-    fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
+    writePortableSummary(path.join(outDir, 'summary.json'), summary);
     summary.analysis = analyze(outDir);
-    fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
+    writePortableSummary(path.join(outDir, 'summary.json'), summary);
     console.log(JSON.stringify(summary, null, 2));
   } finally {
     await browser.close();
