@@ -28,6 +28,7 @@ const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
 const PLAYER_GUIDE_TEMPLATE = path.join(SRC, 'player-guide.template.html');
 const STYLES = path.join(SRC, 'styles.css');
+const SHARED_REPLAY_STORE = path.join(ROOT, 'shared', 'replay-store.js');
 const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
@@ -1309,13 +1310,16 @@ function build(options = {}){
   const vendorScript = fs.existsSync(SUPABASE_UMD)
     ? read(SUPABASE_UMD)
     : 'window.supabase = window.supabase || null;';
+  const sharedReplayStore = fs.existsSync(SHARED_REPLAY_STORE)
+    ? read(SHARED_REPLAY_STORE)
+    : '';
   const script = fs.readdirSync(SCRIPT_DIR)
     .filter(file => file.endsWith('.js'))
     .sort()
     .map(file => `// Source: src/js/${file}\n${read(path.join(SCRIPT_DIR, file)).trimEnd()}`)
     .join('\n\n')
     .replace(/\r\n/g, '\n');
-  const builtScript = fillBuildTokens(script, tokens)
+  const builtScript = fillBuildTokens(`${sharedReplayStore}\n\n${script}`, tokens)
     .trimEnd();
 
   const html = fillBuildTokens(template, tokens)

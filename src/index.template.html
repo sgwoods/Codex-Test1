@@ -27,6 +27,7 @@
       <div class="dockToolGroup dockToolGroupPrimary">
         <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
         <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
+        <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Recent Replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
         <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
         <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
         <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
@@ -110,6 +111,7 @@
           <div class="controlRow"><span class="controlKeys">Arrow Right / D / Command</span><span class="controlAction">Move right</span></div>
           <div class="controlRow"><span class="controlKeys">Space</span><span class="controlAction">Fire</span></div>
           <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
+          <div class="controlRow"><span class="controlKeys">🎞</span><span class="controlAction">Open recent replays saved on this device</span></div>
           <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
           <div class="controlRow"><span class="controlKeys">L</span><span class="controlAction">Export session log</span></div>
           <div class="controlRow"><span class="controlKeys">X</span><span class="controlAction">Export and return to wait mode</span></div>
@@ -146,6 +148,35 @@
   </div>
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
+<div id="movieModal" aria-hidden="true">
+  <div id="moviePanel" aria-live="polite" hidden>
+    <video id="movieVideo" preload="metadata" playsinline></video>
+    <div id="movieEmptyState">No replay selected yet.</div>
+    <div id="movieReplayBadge">REPLAY</div>
+    <button type="button" id="moviePanelClose" aria-label="Close replay panel">×</button>
+    <div id="movieSelectionOverlay">
+      <label id="movieRunPicker">
+        <span>Run</span>
+        <select id="movieRunSelect" aria-label="Recent replay list"></select>
+      </label>
+      <div id="moviePanelStatus">Finish a game and your replay will appear here.</div>
+      <div id="movieSelectionActions">
+        <button type="button" id="movieStartBtn">Play Replay</button>
+      </div>
+    </div>
+    <div id="movieTopBar">
+      <div id="moviePlaybackMeta"></div>
+      <div id="movieControls">
+        <button type="button" id="movieBackBtn">-5s</button>
+        <button type="button" id="moviePlayPauseBtn">Play</button>
+        <button type="button" id="movieForwardBtn">+5s</button>
+        <button type="button" id="movieDeleteBtn">Delete</button>
+        <button type="button" id="movieCloseToWaitBtn">Back To Wait</button>
+      </div>
+      <input id="movieTimeline" type="range" min="0" max="0" step="0.001" value="0" aria-label="Replay timeline" />
+    </div>
+  </div>
+</div>
 <div id="statusPanels">
   <div id="accountPanel" aria-live="polite" hidden>
     <div id="accountPanelHead">

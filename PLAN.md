@@ -218,6 +218,10 @@ Recent additions since the last review:
 - `#98` largely reflects cleanup that has already landed:
   generated artifacts moved under `dist/` and publish scripts now use scripted lane promotion.
 - `#97` and `#99` are useful platform directions, but they should not displace the four-stage `1.0` slice.
+- `#111` is now the explicit early post-`1.0` platform-refactor umbrella:
+  ship `1.0` first, then extract a shared arcade platform so Aurora variants,
+  Galaxian, and similar cabinet shooters can reuse the mature shell/replay/
+  harness/build layer with less churn.
 - Fresh Modem feedback on `2026-03-28` mostly reinforced the current shell/control-surface direction rather than changing the launch strategy:
   - `#105` is effectively a direct refinement of `#86` and is now treated as part of the same active shell pass
   - `#103` extends the shell pass by replacing the hand-toggle model with simultaneous support plus an input/help surface

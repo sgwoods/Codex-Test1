@@ -90,7 +90,7 @@ let gameOverHtml='';
 let gameOverState=null;
 const ATTRACT={active:0,phase:'',timer:0,cycle:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
-const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[]};
+const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
@@ -548,6 +548,16 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
+ const override=window.__auroraBuildStampOverride;
+ if(override){
+  buildStamp.classList.remove('production');
+  buildStamp.classList.add('replay');
+  if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
+  if(buildStampVersion)buildStampVersion.textContent=override.version||'';
+  if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  return;
+ }
+ buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
  buildStamp.classList.toggle('production',production);
@@ -680,6 +690,12 @@ function downloadBlob(blob,file){
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function videoRecordSupported(){return !!(c.captureStream&&window.MediaRecorder);}
+function localReplaySupported(){
+ return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
+}
+function shouldCaptureRunVideo(){
+ return videoRecordSupported()&&(VIDEO_REC.enabled||localReplaySupported());
+}
 function pickVideoMime(){
  const list=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];
  for(const m of list)if(!window.MediaRecorder||!MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(m))return m;
@@ -689,11 +705,41 @@ function syncRecordUi(){
  const supported=videoRecordSupported();
  recordBtn.disabled=!supported;
  recordBtn.classList.toggle('active',VIDEO_REC.enabled||VIDEO_REC.active);
- recordBtn.textContent=supported?(VIDEO_REC.active?'Recording Video...':`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
+ recordBtn.textContent=supported?(VIDEO_REC.active?(VIDEO_REC.enabled?'Recording Video...':'Recording Replay...'):`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
+}
+function currentReplayMeta(){
+ return {
+  id:VIDEO_REC.sessionId||REC?.id||`replay-${Date.now()}`,
+  source:'game_native',
+  build:BUILD,
+  createdAt:REC?.createdAt||new Date().toISOString(),
+  duration:recTime(),
+  score:S.score|0,
+  stage:S.stage|0,
+  challenge:!!S.challenge,
+  attract:!!S.attract,
+  reason:REC?.reason||'unknown',
+  persona:S.harnessPersona||null,
+  stats:{shots:S.stats?.shots|0,hits:S.stats?.hits|0}
+ };
+}
+async function persistLocalReplay(blob,meta){
+ if(!blob||!meta||!localReplaySupported())return;
+ if(meta.attract||meta.reason!=='game_start'||meta.duration<3)return;
+ try{
+  await window.AuroraReplayStore.saveReplay(Object.assign({},meta,{
+   blob,
+   mime:blob.type||VIDEO_REC.mime||'video/webm'
+  }));
+  if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
+ }catch(err){
+  console.warn('local replay save failed',err);
+ }
 }
 function stopRunRecording(){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
  VIDEO_REC.active=0;
+ VIDEO_REC.stopMeta=currentReplayMeta();
  if(sfx.recOsc){try{sfx.recOsc.stop();}catch{}try{sfx.recOsc.disconnect();}catch{}sfx.recOsc=null}
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
@@ -702,7 +748,7 @@ function stopRunRecording(){
  syncRecordUi();
 }
 function startRunRecording(){
- if(!VIDEO_REC.enabled||!videoRecordSupported())return;
+ if(!shouldCaptureRunVideo())return;
  if(VIDEO_REC.active)stopRunRecording();
  const mime=pickVideoMime();
  VIDEO_REC.mime=mime;
@@ -725,16 +771,25 @@ function startRunRecording(){
  VIDEO_REC.chunks=chunks;
  VIDEO_REC.sessionId=REC?.id||`run-${Date.now()}`;
  VIDEO_REC.file=`neo-galaga-video-${VIDEO_REC.sessionId}.webm`;
+ VIDEO_REC.stopMeta=null;
  const file=VIDEO_REC.file;
  const currentStream=VIDEO_REC.stream;
  const rec=mime?new MediaRecorder(currentStream,{mimeType:mime}):new MediaRecorder(currentStream);
  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  rec.onstop=()=>{
   const blob=new Blob(chunks,{type:mime||'video/webm'});
+  const replayMeta=VIDEO_REC.stopMeta||currentReplayMeta();
   if(currentStream)for(const t of currentStream.getTracks())t.stop();
   if(VIDEO_REC.stream===currentStream)VIDEO_REC.stream=null;
   if(VIDEO_REC.chunks===chunks)VIDEO_REC.chunks=[];
-  if(blob.size>0){downloadBlob(blob,file);showToast('Run video downloaded');}
+  if(blob.size>0){
+   persistLocalReplay(blob,replayMeta);
+   if(VIDEO_REC.enabled){
+    downloadBlob(blob,file);
+    showToast('Run video downloaded');
+   }
+  }
+  VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
  rec.start(1000);
@@ -926,6 +981,7 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(helpOpen){if(e.code==='Escape'){e.preventDefault();closeHelp();}return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
+ if(typeof isMoviePanelOpen==='function'&&isMoviePanelOpen()){if(e.code==='Escape'){e.preventDefault();closeMoviePanel();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}

@@ -171,6 +171,26 @@ Suggested versioning:
 - `1.0.x`
 - `1.1.x`
 
+## Milestone G: Early Post-1.0 Arcade Platform Extraction
+
+Target outcome:
+
+- Aurora keeps shipping as the first game pack on a more stable shared runtime
+- replay, shell, harness, input, build, and logging systems become less one-off
+- similar cabinet shooters can reuse mature systems with less churn
+
+Key issue groups:
+
+- `#111` extract a shared arcade platform for Galaga-family cabinet shooters
+- early `gameDef` / game-pack extraction
+- shared shell / replay / harness / build systems
+- shared left-right cabinet input model for sibling fixed-screen shooters
+
+Suggested versioning:
+
+- `1.1.x`
+- `1.2.x`
+
 ## Post-1.0 Architecture Themes
 
 These are the architectural themes we should keep capturing incrementally during
@@ -178,6 +198,9 @@ the `v1` push so they can become the basis of a focused post-`v1` platform
 plan.
 
 - move game rules and tuning further into data-driven `gameDef` structures
+- use `#111` as the early post-`1.0` umbrella for turning Aurora into a shared
+  arcade platform that can support Galaga variants, Galaxian, and other
+  similar cabinet shooters
 - isolate optional systems so capture, challenge stages, special squadrons, and
   dual-fighter behavior are less entangled with the core update loop
 - keep mechanic-level harnesses and telemetry stable enough to survive larger

@@ -238,6 +238,34 @@ canvas{display:block;width:100vw;height:100vh}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
 #statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#movieModal{position:fixed;inset:0;z-index:41;display:none;background:transparent}
+#movieModal.open{display:block}
+#moviePanel{position:fixed;display:none;overflow:hidden;color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+#moviePanel.visible{display:block}
+#movieVideo{position:absolute;inset:0;width:100%;height:100%;display:none;background:#000;object-fit:cover;object-position:center center}
+#moviePanel.ready #movieVideo{display:block}
+#movieEmptyState{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;color:rgba(218,236,255,.74);text-align:center;background:rgba(0,0,0,.42)}
+#moviePanel.ready #movieEmptyState{display:none}
+#movieReplayBadge{position:absolute;left:12px;top:12px;padding:5px 10px;border:1px solid rgba(255,216,109,.6);background:rgba(60,44,8,.82);color:#ffe39a;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase}
+#moviePanelClose{position:absolute;right:12px;top:12px;border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.78);color:#dff7ff;width:32px;height:32px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#movieSelectionOverlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:10px;width:min(84%,460px);padding:14px;border:1px solid rgba(136,245,255,.2);background:rgba(7,12,24,.84);backdrop-filter:blur(4px);box-shadow:0 14px 42px rgba(0,0,0,.44)}
+#moviePanel.ready #movieSelectionOverlay{display:none}
+#movieRunPicker{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.82);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.05em}
+#movieRunPicker span{color:rgba(218,236,255,.72);text-transform:uppercase}
+#movieRunSelect{min-width:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:6px 8px;font:700 11px/1 "Courier New",Consolas,monospace}
+#moviePanelStatus{padding:7px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(7,12,24,.72);color:rgba(218,236,255,.82);font:700 11px/1.35 "Courier New",Consolas,monospace}
+#movieSelectionActions{display:flex;justify-content:center}
+#movieStartBtn{border:1px solid rgba(255,216,109,.48);background:rgba(60,44,8,.76);color:#ffe39a;padding:8px 14px;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer;min-width:132px}
+#movieStartBtn:hover{background:rgba(84,61,12,.88);border-color:rgba(255,216,109,.82)}
+#movieStartBtn:disabled{opacity:.5;cursor:default}
+#movieTopBar{position:absolute;left:120px;right:52px;top:12px;display:none;flex-direction:column;gap:5px;padding:4px 6px 6px;border:1px solid rgba(136,245,255,.14);background:rgba(7,12,24,.56);backdrop-filter:blur(2px)}
+#moviePanel.ready #movieTopBar{display:flex}
+#moviePlaybackMeta{min-height:12px;color:rgba(218,236,255,.9);font:700 10px/1.1 "Courier New",Consolas,monospace;letter-spacing:.06em;text-align:left}
+#movieControls{display:flex;gap:4px;align-items:center;flex-wrap:nowrap}
+#movieControls button{border:1px solid rgba(136,245,255,.22);background:rgba(8,18,35,.62);color:#dff7ff;padding:4px 7px;font:700 10px/1 "Courier New",Consolas,monospace;cursor:pointer;min-width:0;white-space:nowrap}
+#movieControls button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82)}
+#movieCloseToWaitBtn{margin-left:auto}
+#movieTimeline{width:100%;margin:0;height:12px}
 #leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -275,6 +303,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
+#buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
+#buildStamp.replay #buildStampChannel{color:#ffe39a}
+#buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
 .k{color:var(--a)}
 @media (max-width:980px){
  #cabinetRightFrame{display:none!important}
@@ -286,6 +317,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #settingsPanel{bottom:126px!important}
  #statusPanels{align-items:stretch;bottom:126px!important}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #movieSelectionOverlay{width:min(calc(100% - 24px),420px)}
+ #movieTopBar{left:10px;right:46px;top:48px;padding:7px 8px}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}

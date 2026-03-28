@@ -321,6 +321,13 @@ function draw(){
   playfieldFrame.style.height=`${viewH+DISPLAY_SHELL.frameOuterInset*2}px`;
   playfieldFrame.style.setProperty('--frame-inner-inset',`${Math.max(9,Math.floor(scale*DISPLAY_SHELL.frameInnerInset))}px`);
  }
+ const movieOverlayPanel=document.getElementById('moviePanel');
+ if(movieOverlayPanel){
+  movieOverlayPanel.style.left=`${ox}px`;
+  movieOverlayPanel.style.top=`${oy}px`;
+  movieOverlayPanel.style.width=`${viewW}px`;
+  movieOverlayPanel.style.height=`${viewH}px`;
+ }
  const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
  const railTop=oy+Math.floor((viewH-railH)/2);

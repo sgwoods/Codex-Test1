@@ -160,3 +160,33 @@ The project is moving toward two parallel tracks:
 2. Harness / gameplay tuning / shipping quality
 
 That split should let collaborators work with less conflict and clearer ownership.
+
+## Early Post-1.0 Platform Direction
+
+Shortly after `1.0`, this codebase should start moving toward a shared arcade
+platform rather than remaining a one-off Aurora-only runtime.
+
+Tracked umbrella:
+
+- `#111` shared arcade platform extraction for Galaga-family cabinet shooters
+
+The intended stable/shared layer is:
+
+- cabinet shell / HUD / control rail surfaces
+- replay, logging, and artifact model
+- harness runner and event vocabulary
+- build / publish / local handoff flow
+- left-right cabinet input primitives
+
+The intended configurable/game-pack layer is:
+
+- formations
+- enemy families
+- scoring tables
+- stage cadence
+- attack scripts
+- optional mechanics such as capture/rescue or challenge stages
+
+The goal is to reduce churn in mature infrastructure while letting future games
+such as Galaxian, Aurora variants, or similar fixed-screen cabinet shooters
+reuse the stable platform with smaller game-specific packs.

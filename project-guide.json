@@ -280,6 +280,11 @@
           "detail": "Where specific gameplay systems live in code."
         },
         {
+          "label": "External Services",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/EXTERNAL_SERVICES.md",
+          "detail": "Current inventory of runtime, hosting, feedback, and release services, plus what stays browser-local."
+        },
+        {
           "label": "Reference Baseline",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md",
           "detail": "How fidelity questions are grounded in durable source material and issues."
@@ -372,6 +377,12 @@
       "title": "Source Map",
       "summary": "Gameplay ownership and where to edit specific systems are pulled from the source map.",
       "file": "SOURCE_MAP.md"
+    },
+    {
+      "id": "external-services-doc",
+      "title": "External Services Source",
+      "summary": "Runtime dependencies, hosting, feedback transport, and local-only systems are pulled from the external services inventory.",
+      "file": "EXTERNAL_SERVICES.md"
     },
     {
       "id": "baseline-doc",

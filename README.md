@@ -32,6 +32,7 @@ Project guide:
     - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
+    - `/Users/stevenwoods/Documents/Codex-Test1/EXTERNAL_SERVICES.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
@@ -51,6 +52,8 @@ Repository roles:
   - `https://github.com/sgwoods/Codex-Test1`
 - public release repo:
   - `https://github.com/sgwoods/Aurora-Galactica`
+- external runtime and tooling services:
+  - `/Users/stevenwoods/Documents/Codex-Test1/EXTERNAL_SERVICES.md`
 
 ## Live
 
@@ -110,6 +113,7 @@ npm run local:stop
 - `F1` or `?`: Open in-game feedback form
 - `ℹ` icon: Open the player guide inside the game
 - `🕹` icon: Open the controls reference inside the game
+- `🎞` icon: Watch recent local replays saved on this device
 - `Export Log` button: Download the current gameplay session as JSON
 
 ## What Is Implemented
