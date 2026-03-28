@@ -374,6 +374,13 @@ npm run local:stop
 - The game records keyboard events, major lifecycle events, and periodic gameplay snapshots
 - Exported logs are downloaded as JSON from the in-game `Export Log` button
 - Each export includes build metadata, browser/user agent, viewport info, input events, and game-state snapshots
+- Player-triggered exports are browser downloads, not repo-local harness artifacts
+  - they usually land in the user’s downloads directory
+- The in-game `🎞` replay surface is separate and keeps recent local replay state in browser storage
+- The canonical developer review archive is still:
+  - `harness-artifacts/`
+- See the formal distinction in:
+  - `/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md`
 
 ## Gameplay Harness
 
@@ -507,6 +514,9 @@ npm run local:stop
   ```bash
   npm run harness:import-latest
   ```
+- This import step is the intended bridge from:
+  - browser download artifacts in the user’s downloads location
+  - to the normalized developer review archive in `harness-artifacts/`
 - You can also check for a new self-play run without duplicating already imported files:
   ```bash
   npm run harness:check-latest

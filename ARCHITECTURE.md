@@ -108,9 +108,14 @@ how work should flow through it.
 
 ### Real Play
 
-- Player-generated `.json` and `.webm` can be imported and analyzed
+- Player-generated `.json` and `.webm` are browser download artifacts first
+  - they typically land in the user’s downloads location
+- Player-native in-game replay state is browser-local storage, not the harness archive
+- Player-generated `.json` and `.webm` can then be imported and analyzed
 - The same analysis pipeline should be used whenever possible so live play and harness results stay comparable
 - The log viewer can inspect those imported runs as long as they are copied into the expected `harness-artifacts/` folder structure and have a `summary.json` beside them.
+- Formal policy:
+  - `/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md`
 
 ## Reference Flow
 

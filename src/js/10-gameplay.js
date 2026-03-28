@@ -184,16 +184,21 @@ function attractMoveAxis(p){
  const hp=playerHitbox();
  const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&Math.abs(b.x-p.x)<34).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
  if(urgent){
+  p.demoTargetId=null;
+  p.demoTargetT=0;
   const away=urgent.x>=p.x?-1:1;
   if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
  }
- const target=S.e.filter(e=>e.hp>0).sort((a,b)=>{
+ const lockedTarget=p.demoTargetId==null?null:S.e.find(e=>e.hp>0&&e.id===p.demoTargetId);
+ const target=(lockedTarget&&p.demoTargetT>0)?lockedTarget:S.e.filter(e=>e.hp>0).sort((a,b)=>{
   const ap=(b.dive?1000:0)+(b.carry?250:0)+b.y;
   const bp=(a.dive?1000:0)+(a.carry?250:0)+a.y;
   return bp-ap;
  })[0];
  if(!target)return 0;
- if(Math.abs(target.x-p.x)<8)return 0;
+ p.demoTargetId=target.id;
+ p.demoTargetT=Math.max(p.demoTargetT||0,target.dive?0.32:0.2);
+ if(Math.abs(target.x-p.x)<12)return 0;
  return target.x>p.x?1:-1;
 }
 const HARNESS_PERSONAS={
@@ -316,6 +321,7 @@ function runHarnessPlayer(dt,p,cfg){
 }
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
+ p.demoTargetT=Math.max(0,(p.demoTargetT||0)-dt);
  const hp=playerHitbox();
  const axis=attractMoveAxis(p);
  const targetVx=axis*p.s*.68;

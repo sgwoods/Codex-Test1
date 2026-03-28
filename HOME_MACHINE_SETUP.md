@@ -109,6 +109,19 @@ The viewer expects artifacts under:
 
 - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
 
+Player-triggered exported logs and videos are different:
+
+- they download through the browser first
+- on macOS that is usually the user’s `Downloads` folder
+- import them into `harness-artifacts/` when you want them in the developer review archive:
+  ```bash
+  npm run harness:import-latest
+  ```
+
+See:
+
+- `~/Documents/Codex-Test1/ARTIFACT_POLICY.md`
+
 On the home machine that means the same repo-relative folder inside your local clone.
 
 ## Staying In Sync Across Machines
