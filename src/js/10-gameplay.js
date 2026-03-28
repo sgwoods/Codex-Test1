@@ -152,7 +152,8 @@ function loseShip(cause={}){
  ex(p.x,p.y,42,'#86c7ff');
  ex(p.x,p.y,28,'#f4f8ff');
  ex(p.x,p.y,14,'#ff7f9f');
- S.alertTxt='SHIP DESTROYED';
+ const shipsRemaining=Math.max(0,S.lives+1);
+ S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();
  if(p.dual)p.dual=0;
@@ -317,7 +318,12 @@ function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
  const hp=playerHitbox();
  const axis=attractMoveAxis(p);
- p.x=cl(p.x+axis*p.s*dt*.78,hp.w+2,PLAY_W-hp.w-2);
+ const targetVx=axis*p.s*.68;
+ const blend=Math.min(1,p.accel*dt*.82);
+ p.vx+=(targetVx-p.vx)*blend;
+ if(!axis&&Math.abs(p.vx)<8)p.vx=0;
+ p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
+ if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
  const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||e.y>72)).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0]||S.e.filter(e=>e.hp>0).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0];
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }

@@ -275,6 +275,80 @@ function drawReserveShips(lives){
 
 function drawPostFx(){}
 
+function escapeMessageHtml(value=''){
+ return String(value)
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;');
+}
+
+function collectMessageLines(...parts){
+ const lines=[];
+ for(const part of parts){
+  if(part==null)continue;
+  for(const line of String(part).split('\n')){
+   const trimmed=line.trim();
+   if(trimmed)lines.push(trimmed);
+  }
+ }
+ return lines;
+}
+
+function buildBoardMessageHtml({title='',accent='',score='',lines=[]}={}){
+ const body=[];
+ if(title)body.push(`<span class="boardTitle">${escapeMessageHtml(title)}</span>`);
+ if(accent)body.push(`<span class="boardAccent">${escapeMessageHtml(accent)}</span>`);
+ if(score)body.push(`<span class="boardScore">${escapeMessageHtml(score)}</span>`);
+ for(const line of collectMessageLines(...lines)){
+  body.push(`<span class="boardLine">${escapeMessageHtml(line)}</span>`);
+ }
+ return body.join('');
+}
+
+function gameplayMessageState(){
+ if(paused){
+  return {mode:'board',html:buildBoardMessageHtml({title:'PAUSED',lines:['Press P to resume']}),topRatio:.48};
+ }
+ if(S.alertT>0){
+  const lines=collectMessageLines(S.alertTxt);
+  return {
+   mode:'board',
+   html:buildBoardMessageHtml({title:lines.shift()||'',lines}),
+   topRatio:.48
+  };
+ }
+ if(S.banner<=0)return null;
+ switch(S.bannerMode){
+  case 'challengeIntro':
+   return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
+  case 'stageTransition':
+   return {mode:'board',html:buildBoardMessageHtml({title:'GET READY',score:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
+  case 'captureBeat':
+   return {mode:'board',html:buildBoardMessageHtml({title:'FIGHTER CAPTURED',lines:['BOSS RETREAT']}),topRatio:.48};
+  case 'captureEscape':
+   return {mode:'board',html:buildBoardMessageHtml({title:'CAPTURE BROKEN',lines:['FIGHTER ESCAPED']}),topRatio:.48};
+  case 'captureLoss':
+   return {mode:'board',html:buildBoardMessageHtml({title:'CAPTURED FIGHTER',lines:['DESTROYED']}),topRatio:.48};
+  case 'rescueReturn':
+   return {mode:'board',html:buildBoardMessageHtml({title:'FIGHTER RELEASED',lines:['RETURNING TO SHIP']}),topRatio:.48};
+  case 'rescueBeat':
+   return {mode:'board',html:buildBoardMessageHtml({title:'DUAL FIGHTER',lines:['JOINED']}),topRatio:.48};
+  case 'challenge':
+   return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
+  case 'challengeResult':{
+   const parts=collectMessageLines(S.bannerSub);
+   return {mode:'board',html:buildBoardMessageHtml({title:S.bannerTxt,score:parts[0]||'',lines:parts.slice(1)}),topRatio:.46};
+  }
+  case 'stage':
+   return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt}),topRatio:.46};
+  default:{
+   const lines=collectMessageLines(S.bannerTxt,S.bannerSub);
+   return {mode:'board',html:buildBoardMessageHtml({title:lines.shift()||'',lines}),topRatio:.48};
+  }
+ }
+}
+
 function draw(){
  const sh=S.shake*8,dx=rnd(sh,-sh),dy=rnd(sh,-sh);
  const compactCabinet=innerWidth<1500||innerHeight<980;
@@ -351,9 +425,21 @@ function draw(){
    cabinetRightFrame.style.height=`${railH}px`;
   }else cabinetRightFrame.style.display='none';
  }
+ const waitScoreOverlay=!started&&typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD.panelOpen;
  if(statusPanels){
-  statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
-  statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+  statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
+  if(waitScoreOverlay){
+   const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
+   statusPanels.style.width=`${panelW}px`;
+   statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
+   statusPanels.style.right='auto';
+   statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
+  }else{
+   statusPanels.style.width='';
+   statusPanels.style.left='auto';
+   statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
+   statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+  }
  }
  if(settingsPanel){
   settingsPanel.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
@@ -364,6 +450,7 @@ function draw(){
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
   buildStamp.style.top=`${shellY+shellH-Math.max(66,Math.floor(shellPadB*.78))}px`;
+  buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
   }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
@@ -408,9 +495,11 @@ if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibi
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
- msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):'';
+ const activeMessage=started?gameplayMessageState():null;
+ msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):(activeMessage?.mode==='board'?'boardMessage':'');
  if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.72)}px`;
  else if(!started&&msg.className==='gameOverScreen')msg.style.top=`${Math.floor(oy+viewH*.54)}px`;
+ else if(activeMessage?.mode==='board')msg.style.top=`${Math.floor(oy+viewH*(activeMessage.topRatio||.48))}px`;
  else msg.style.top='';
  if(!started){
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
@@ -418,22 +507,6 @@ if(!toolsVisible)closeSettings();
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
   else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
  }
- else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
- else if(S.alertT>0)msg.textContent=S.alertTxt;
- else if(S.banner>0){
- if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
- else if(S.bannerMode==='stageTransition')msg.innerHTML=`<span class="splashTitle">GET READY</span><span class="splashScore">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
- else if(S.bannerMode==='captureBeat')msg.innerHTML=`<span class="splashTitle">FIGHTER CAPTURED</span><span class="splashSub">BOSS RETREAT</span>`;
- else if(S.bannerMode==='captureEscape')msg.innerHTML=`<span class="splashTitle">CAPTURE BROKEN</span><span class="splashSub">FIGHTER ESCAPED</span>`;
- else if(S.bannerMode==='captureLoss')msg.innerHTML=`<span class="splashTitle">CAPTURED FIGHTER</span><span class="splashSub">DESTROYED</span>`;
- else if(S.bannerMode==='rescueReturn')msg.innerHTML=`<span class="splashTitle">FIGHTER RELEASED</span><span class="splashSub">RETURNING TO SHIP</span>`;
- else if(S.bannerMode==='rescueBeat')msg.innerHTML=`<span class="splashTitle">DUAL FIGHTER</span><span class="splashSub">JOINED</span>`;
- else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
-  else if(S.bannerMode==='challengeResult'){
-   const parts=String(S.bannerSub||'').split('\n');
-   msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashScore">${parts[0]||''}</span>${parts[1]?`<span class="splashSub">${parts[1]}</span>`:''}`;
-  }else if(S.bannerMode==='stage')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span>`;
-  else msg.textContent=S.bannerTxt;
- }
+ else if(activeMessage)msg.innerHTML=activeMessage.html;
  else msg.textContent='';
 }
