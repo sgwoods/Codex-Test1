@@ -203,7 +203,7 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#91` / `#48` / `#44` / `#86` / `#71` display-shell, stage indicator, and icon/control-surface polish
+1. `#91` / `#48` / `#44` / `#86` / `#71` / `#82` / `#49` / `#60` display-shell, icon/control-surface, and score-panel polish
 2. `#74` / `#47` / `#38` / `#45` special-squadron and combat-feedback polish
 3. `#87` wait-mode/demo visual stability
 4. `#76` production vs non-production data separation design
@@ -229,10 +229,12 @@ Recent additions since the last review:
 | Must Fix Now | `#61` | Shared | Watching | Hosted Stage `3` -> `4` can still hit the empty-playfield edge case, which directly undermines public trust. | Keep transition telemetry live and treat the next reproducible bad run as launch-blocking. | Phase 1 |
 | Must Fix Now | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
 | Must Fix Now | `#85` | Shared | Open | Final release-readiness pass still needs security review, code/docs consistency, and a short players guide. | Schedule the final release-readiness cycle once the visual polish cluster is down to a short list. | Phase 4 |
-| Must Fix Now | `#86` | Codex | Open | The production shell still needs the players-guide / account / scores / persistent-settings layout to feel intentionally shipped. | Finish the production-shell pass and confirm settings pause/resume cleanly during active play. | Phase 4 |
+| Must Fix Now | `#86` | Codex | Open | The production shell still needs the players-guide / account / scores / feedback-reporting / persistent-settings layout to feel intentionally shipped. | Finish the production-shell pass, move the remaining player actions into the icon/control surface, and confirm settings pause/resume cleanly during active play. | Phase 4 |
 | Must Fix Now | `#91` | Codex | Open | The score header still wants stronger arcade alignment with the playfield top edge. | Lock the top HUD to the gameboard width and edge in the shell polish pass. | Phase 2 |
 | Must Fix Now | `#48` | Codex | Open | The browser presentation still benefits from a clearer playfield frame / bezel so the arcade boundary reads immediately. | Finish a stable playfield frame treatment and keep it aligned with the HUD shell. | Phase 2 |
 | Must Fix Now | `#44` | Codex | Open | A bottom-right stage indicator is part of the cabinet-like HUD language and belongs in the same visual shell pass as the top HUD/frame work. | Add the stage indicator as part of the HUD polish pass rather than as a separate later feature. | Phase 2 |
+| Must Fix Now | `#82` | Codex | Open | Wait-mode score surfaces still risk overlapping the playfield under narrower desktop layouts, which weakens the shell polish. | Rework the wait-mode score panel so it stays clearly outside the active playfield and matches the new shell layout. | Phase 2 |
+| Must Fix Now | `#49` / `#60` | Codex | Open | Score-view controls now belong to the player-facing shell, but their state changes/loading cues still feel too subtle. | Make score-view switches open or animate an explicit scoreboard/loading surface as part of the shell polish pass. | Phase 3 |
 | Must Fix Now | `#74` | Codex | Open | Latest manual beta pass still says the three-ship bonus/special squadron is too spread out. | Tighten the three-ship attack geometry again and keep the squadron spacing check green. | Phase 2 |
 | Must Fix Now | `#47` | Codex | Open | Latest manual beta pass still says the special squadron reads too loose visually. | Tighten lateral/vertical squadron coherence and recheck it in beta. | Phase 2 |
 | Must Fix Now | `#38` | Codex | Beta review | Ship-loss feedback is better, but it is still one of the most visible “finished/not finished” signals in live play. | Verify and polish explosion, pause, and recovery feel. | Phase 2 |
