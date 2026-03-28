@@ -203,11 +203,12 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#91` / `#48` / `#44` / `#86` / `#71` / `#82` / `#49` / `#60` display-shell, icon/control-surface, and score-panel polish
+1. `#91` / `#48` / `#44` / `#86` / `#71` / `#82` / `#49` / `#60` / `#103` / `#105` display-shell, icon/control-surface, and score-panel polish
 2. `#74` / `#47` / `#38` / `#45` special-squadron and combat-feedback polish
 3. `#87` wait-mode/demo visual stability
-4. `#76` production vs non-production data separation design
-5. `#85` final release-readiness pass
+4. `#106` standardized between-level message presentation
+5. `#76` production vs non-production data separation design
+6. `#85` final release-readiness pass
 
 Recent additions since the last review:
 
@@ -217,6 +218,12 @@ Recent additions since the last review:
 - `#98` largely reflects cleanup that has already landed:
   generated artifacts moved under `dist/` and publish scripts now use scripted lane promotion.
 - `#97` and `#99` are useful platform directions, but they should not displace the four-stage `1.0` slice.
+- Fresh Modem feedback on `2026-03-28` mostly reinforced the current shell/control-surface direction rather than changing the launch strategy:
+  - `#105` is effectively a direct refinement of `#86` and is now treated as part of the same active shell pass
+  - `#103` extends the shell pass by replacing the hand-toggle model with simultaneous support plus an input/help surface
+  - `#107` reinforces the already-open `#79` control-feel concern rather than creating a meaningfully different launch bucket
+  - `#104` is a stronger post-`v1` version of the Players Guide surface unless a lightweight manual viewer lands almost for free
+  - `#106` is visible presentation polish and is worth keeping near the launch queue after the shell pass
 - User direction for this review:
   - treat Stage `2` / `4` fairness tuning as a likely `1.1` experimental pass unless a fresh regression makes them launch-critical again
   - move broader challenge-stage variation/fidelity work out of the launch path
@@ -230,6 +237,7 @@ Recent additions since the last review:
 | Must Fix Now | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
 | Must Fix Now | `#85` | Shared | Open | Final release-readiness pass still needs security review, code/docs consistency, and a short players guide. | Schedule the final release-readiness cycle once the visual polish cluster is down to a short list. | Phase 4 |
 | Must Fix Now | `#86` | Codex | Open | The production shell still needs the players-guide / account / scores / feedback-reporting / persistent-settings layout to feel intentionally shipped. | Finish the production-shell pass, move the remaining player actions into the icon/control surface, and confirm settings pause/resume cleanly during active play. | Phase 4 |
+| Must Fix Now | `#103` / `#105` | Codex | Open | Fresh March 28 Modem feedback confirms the shell still wants bug-report promotion, tooltip-first icons, and simultaneous left/right-handed support without a mode toggle. | Finish the icon rail around tooltip-first controls, promote bug reporting into the rail, and replace the handed toggle with always-on combined controls plus a control index surface. | Phase 3 |
 | Must Fix Now | `#91` | Codex | Open | The score header still wants stronger arcade alignment with the playfield top edge. | Lock the top HUD to the gameboard width and edge in the shell polish pass. | Phase 2 |
 | Must Fix Now | `#48` | Codex | Open | The browser presentation still benefits from a clearer playfield frame / bezel so the arcade boundary reads immediately. | Finish a stable playfield frame treatment and keep it aligned with the HUD shell. | Phase 2 |
 | Must Fix Now | `#44` | Codex | Open | A bottom-right stage indicator is part of the cabinet-like HUD language and belongs in the same visual shell pass as the top HUD/frame work. | Add the stage indicator as part of the HUD polish pass rather than as a separate later feature. | Phase 2 |
@@ -248,12 +256,14 @@ Recent additions since the last review:
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
 | Should Fix | `#73` | Codex | Automated check + beta review | Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked. | Verify the feel/fairness of the shoot-to-save window in beta. | Phase 3 |
 | Should Fix | `#79` | Codex | Beta review | Manual beta play says keyboard control is better, but fine single-tap alignment still needs a final confidence check. | Keep the current manual-control baseline and revisit only if new live evidence says the feel is still off. | Phase 1 |
+| Should Fix | `#106` | Codex | Open | Between-level and in-game status messaging is still visually fragmented and would benefit from one centered display system. | Standardize message presentation once the shell and combat-polish cluster is stable. | Phase 2 |
 | Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
 | Should Fix Before Launch | `#71` | Codex | Queued | Audio control belongs in the shipped settings/control surface if it lands cleanly in the same shell work. | Pull mute into the `v1` settings pass rather than leaving it as indefinite polish. | Phase 3 |
 | Should Fix Before Launch | `#95` | Shared | Process | We now use persona distributions to judge balance, so the ladder can drift silently after gameplay changes. | Re-run the persona ladder only if a prelaunch polish pass materially changes difficulty or control feel. | Phase 1 |
 | Should Fix Before Launch | `#96` | Shared | Watch | Recorder repair, artifact quality checks, and salvage scripts landed; `64` historical videos are still unrecoverable but new runs are now checkable. | Keep `npm run harness:check:video-artifact` green and file immediately if new artifacts regress. | Phase 4 |
 | Should Fix Before Launch | `#98` | Shared | Implemented / close | Dist-based release outputs, publish preflights, and scripted beta/production publishing are now in place. | Let the new flow soak briefly, then close the issue once no further migration fallout appears. | Phase 4 |
 | Can Slip | `#63` | Codex | Queued | Wait-mode score cycling is useful attract polish. | Do it in the attract-mode pass. | Phase 3 |
+| Can Slip | `#104` | Codex | Queued | A richer in-game manual viewer is useful, but the current launch need is satisfied by a strong Players Guide entry point; search/PDF/embedded browsing can slip if needed. | Keep the guide icon for `v1`; revisit the full manual viewer if it falls out naturally from the shell work. | Phase 4 |
 | Can Slip | `#49` / `#60` | Codex | Queued | The score panel still wants stronger cues and clearer invocation. | Polish score-view interaction after core gameplay work. | Phase 3 |
 | Can Slip | `#65` | Codex | Queued | Aurora / wintry theming is still later polish. | Apply thematic art after gameplay stabilizes. | Phase 2 |
 | Post-1.0 | `#18` | Shared | Deferred to 1.1 tuning | Stage `4` fairness tuning is important, but current manual play says the slice is healthy enough to launch without holding `1.0` for more experimental balancing. | Reopen as a focused `1.1` survivability/fairness pass after launch. | Post-1.0 |
