@@ -245,7 +245,7 @@
       "cards": [
         {
           "title": "Game Shell",
-          "body": "`src/index.template.html` and `src/styles.css` define the page shell, settings UI, overlays, layout, and in-game presentation. The served production build is generated into `dist/production/index.html` during build."
+          "body": "`src/index.template.html` and `src/styles.css` define the page shell, settings UI, overlays, layout, and in-game presentation. The served local development build is generated into `dist/dev/index.html` during build."
         },
         {
           "title": "Boot / State / Metadata",
@@ -265,7 +265,7 @@
         },
         {
           "title": "Build / Public Sync",
-          "body": "`tools/build/build-index.js` assembles the production build into `dist/production/`. `tools/build/promote-beta.js` snapshots that output into `dist/beta/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces into `Aurora-Galactica`. `tools/build/sync-public-pages.js` exports project status to the separate public-site repo and does not publish the playable game."
+          "body": "`tools/build/build-index.js` assembles the local dev build into `dist/dev/`. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces into `Aurora-Galactica`. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff."
         },
         {
           "title": "Log Viewer",
@@ -313,6 +313,7 @@
       "summary": "How changes are expected to move from idea to confidence.",
       "bullets": [
         "Edit source files in `src/` and rebuild with `npm run build`.",
+        "After switching machines or refreshing a workstation, use `npm run local:resume` so the local game and the log viewer come back up together before resuming debugging.",
         "Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.",
         "Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned, but it only sees runs that live inside the expected `harness-artifacts/` folder structure.",
         "Push `main` only when the maintained source, docs, and release metadata are current and the repo is clean.",

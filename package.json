@@ -14,6 +14,8 @@
     "sync:public": "node tools/build/sync-public-pages.js",
     "verify:public": "node tools/build/verify-public-sync.js",
     "promote:beta": "node tools/build/promote-beta.js",
+    "local:resume": "node tools/dev/local-resume.js",
+    "local:stop": "node tools/dev/local-stop.js",
     "harness:analyze": "node tools/harness/analyze-run.js",
     "harness:batch": "node tools/harness/run-batch.js",
     "harness:check-latest": "node tools/harness/check-latest-run.js",

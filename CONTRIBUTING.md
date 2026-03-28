@@ -65,6 +65,10 @@ reference-backed fidelity work, and safe collaboration.
   ```
 - The main local playable build is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
+- Preferred local handoff/startup command:
+  ```bash
+  npm run local:resume
+  ```
 - The beta-ready snapshot is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
 - The stable production artifact is generated at:

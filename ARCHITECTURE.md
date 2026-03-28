@@ -47,6 +47,9 @@ how work should flow through it.
 - Produces:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html`
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json`
+- Local ready-state helper:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/dev/local-resume.js`
+  - starts the local `dist/dev` game server and the log viewer together for machine handoff/debugging
 
 ### Pages Deploy
 

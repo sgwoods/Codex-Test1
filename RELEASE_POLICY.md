@@ -83,6 +83,8 @@ Examples:
    - `npm run build`
 3. Test the generated dev build in:
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
+   - recommended local service startup:
+     - `npm run local:resume`
 4. Promote the current dev build into the beta lane:
    - `npm run promote:beta`
 5. Review the generated output in:

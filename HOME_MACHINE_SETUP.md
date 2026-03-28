@@ -53,12 +53,25 @@ Optional but useful:
    ```bash
    npm run build
    ```
-3. Run the game locally:
+3. Bring the local game and viewer back up:
    ```bash
-   python3 -m http.server 8000 --directory dist/dev
+   npm run local:resume
    ```
 4. Open:
    - `http://localhost:8000`
+   - `http://127.0.0.1:4311/`
+
+If you only want the game without the viewer, the lower-level command is:
+
+```bash
+python3 -m http.server 8000 --directory dist/dev
+```
+
+When you want to stop the locally tracked services cleanly:
+
+```bash
+npm run local:stop
+```
 
 ## Local Tools
 
@@ -78,7 +91,7 @@ npm run harness:batch -- --profile quick
 
 ### Log Viewer
 
-Start:
+Start by itself:
 
 ```bash
 npm run log-viewer
@@ -179,5 +192,10 @@ If you want the least-friction two-machine workflow:
 
 1. keep both machines cloned to `Codex-Test1`
 2. pull before every session
-3. push before switching machines
-4. publish from either machine only after the preflight passes
+3. rebuild and run:
+   ```bash
+   npm run build
+   npm run local:resume
+   ```
+4. push before switching machines
+5. publish from either machine only after the preflight passes

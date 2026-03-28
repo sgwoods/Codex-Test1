@@ -56,6 +56,13 @@ gameplay or tuning values.
   - verifies the repo is clean and the chosen lane was built from the current `HEAD`
   - fails early if required generated files are missing or stale
 
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/dev/local-resume.js`
+  - starts the local `dist/dev` game server and the log viewer together
+  - preferred command when resuming work on a machine
+
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/dev/local-stop.js`
+  - stops the locally tracked game server and log viewer processes
+
 - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
   - exports project-status content from the current production build into the separate `sgwoods/public` repo
   - does not publish the playable Aurora build

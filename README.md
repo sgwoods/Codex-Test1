@@ -68,12 +68,25 @@ The root Aurora build is the official public production lane, even while the pro
    ```bash
    npm run build
    ```
-3. Start a local server against the generated build:
+3. Start the local game and viewer services:
    ```bash
-   python3 -m http.server 8000 --directory dist/dev
+   npm run local:resume
    ```
 4. Open:
    - `http://localhost:8000`
+   - `http://127.0.0.1:4311/`
+
+If you only want the game server, the lower-level command is:
+
+```bash
+python3 -m http.server 8000 --directory dist/dev
+```
+
+To stop the locally tracked game and viewer services cleanly:
+
+```bash
+npm run local:stop
+```
 
 ## Controls
 
@@ -114,6 +127,8 @@ The root Aurora build is the official public production lane, even while the pro
   - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
 - Home machine setup:
   - `/Users/stevenwoods/Documents/Codex-Test1/HOME_MACHINE_SETUP.md`
+- Repo-managed Codex skill source:
+  - `/Users/stevenwoods/Documents/Codex-Test1/codex-skills/aurora-dev-refresh/SKILL.md`
 - Architecture overview:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
 - Reference baseline:
@@ -224,8 +239,11 @@ The root Aurora build is the official public production lane, even while the pro
 
 - Manual local play should use the generated dev build:
   ```bash
-  python3 -m http.server 8000 --directory dist/dev
+  npm run local:resume
   ```
+- This brings up:
+  - `http://localhost:8000`
+  - `http://127.0.0.1:4311/`
 - Harness/browser checks also run against `dist/dev/`, not raw source.
 - The log viewer is separate and reads run artifacts from:
   - `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
