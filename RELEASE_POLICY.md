@@ -120,6 +120,17 @@ The beta lane is intentionally a snapshot of selected generated artifacts under 
 
 This is the current launch-safe answer to `#76`: non-production lanes no longer use the same default write path as production, even though they can still mirror production leaderboard reads.
 
+Optional test-pilot override for non-production:
+
+- `TEST_ACCOUNT_EMAIL`
+  - enables one specific beta/dev pilot account for auth and write-flow testing
+- `TEST_ACCOUNT_USER_ID`
+  - excludes that pilot's scores from shared leaderboard reads
+- when configured:
+  - beta/dev may authenticate only that test pilot
+  - score submission is enabled only while that pilot is signed in
+  - production continues to reject that pilot account for normal use
+
 ## Production Publish Workflow
 
 1. Treat production as a promotion from an approved beta candidate, not as a direct publish from arbitrary dev output.

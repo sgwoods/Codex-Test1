@@ -22,13 +22,15 @@ const accountSaveInitialsBtn=document.getElementById('accountSaveInitialsBtn');
 const accountSummary=document.getElementById('accountSummary');
 const accountBest=document.getElementById('accountBest');
 const accountRecent=document.getElementById('accountRecent');
+const resetTestPilotScoresBtn=document.getElementById('resetTestPilotScoresBtn');
 const pilotStamp=document.getElementById('pilotStamp');
 const SUPABASE_URL='{{SUPABASE_URL}}';
 const SUPABASE_ANON_KEY='{{SUPABASE_ANON_KEY}}';
+const TEST_ACCOUNT_EMAIL='{{TEST_ACCOUNT_EMAIL}}';
+const TEST_ACCOUNT_USER_ID='{{TEST_ACCOUNT_USER_ID}}';
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
-const REMOTE_WRITE_ENABLED=RELEASE_CHANNEL==='production';
-const REMOTE_AUTH_ENABLED=REMOTE_WRITE_ENABLED;
+const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
 const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';
 const LEGACY_LEADERBOARD_CACHE_PREFIX='neoGalagaLeaderboardCache.v1.';
 const LEADERBOARD_STALE_MS=45000;
@@ -61,16 +63,41 @@ const LEADERBOARD={
 };
 
 function remoteLeaderboardPolicyLabel(){
- return REMOTE_WRITE_ENABLED?'live':'read-only mirror';
+ return remoteWriteEnabled()?'live':'read-only mirror';
 }
 function nonProductionAccountSummary(){
+ if(testAccountEnabled())return `Test pilot lane active for ${TEST_ACCOUNT_EMAIL}. Shared scores stay read-only unless that pilot is signed in.`;
  return 'Pilot account is disabled in this lane. Shared scores are read-only; your runs save locally on this device.';
 }
 function setAccountNotice(text=''){
  LEADERBOARD.accountNotice=String(text||'').trim();
 }
+function normalizeTestAccountEmail(value=''){
+ return String(value||'').trim().toLowerCase();
+}
+function testAccountEnabled(){
+ return NON_PRODUCTION_LANE&&!!normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL);
+}
+function isConfiguredTestAccountEmail(value=''){
+ return !!normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL)&&normalizeTestAccountEmail(value)===normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL);
+}
+function isSignedInAsTestAccount(){
+ const email=normalizeTestAccountEmail(LEADERBOARD.user?.email||'');
+ if(TEST_ACCOUNT_USER_ID&&LEADERBOARD.user?.id)return LEADERBOARD.user.id===TEST_ACCOUNT_USER_ID;
+ return !!email&&isConfiguredTestAccountEmail(email);
+}
+function remoteAuthEnabled(){
+ return RELEASE_CHANNEL==='production'||testAccountEnabled();
+}
+function remoteWriteEnabled(){
+ if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
+ return isSignedInAsTestAccount();
+}
+function shouldHideTestAccountScores(){
+ return !!TEST_ACCOUNT_USER_ID;
+}
 function normalizeLeaderboardViewForLane(view){
- if(view==='mine'&&!REMOTE_AUTH_ENABLED)return 'local';
+ if(view==='mine'&&!remoteAuthEnabled())return 'local';
  return view;
 }
 
@@ -100,7 +127,7 @@ function currentLeaderboardTitle(){
 }
 function leaderboardRowsForView(view=LEADERBOARD.view){
  if(view==='local')return localLeaderboardRows();
- if(view==='mine'&&!REMOTE_AUTH_ENABLED)return localLeaderboardRows();
+ if(view==='mine'&&!remoteAuthEnabled())return localLeaderboardRows();
  if(view==='mine'&&!LEADERBOARD.user)return localLeaderboardRows();
  const rows=LEADERBOARD.remote[view]||[];
  if(rows.length)return rows;
@@ -111,9 +138,9 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='loading')return view==='validated'?'Loading validated scores...':view==='mine'?'Loading your scores...':'Loading shared scores...';
  if(mode==='fallback')return view==='mine'?'My Scores unavailable · showing local':'Remote unavailable · showing local';
  if(mode==='cached')return view==='validated'?'Validated scores cached · refreshing':view==='mine'?'My scores cached · refreshing':'Shared scores cached · refreshing';
- if(mode==='signed_out')return REMOTE_AUTH_ENABLED?'Sign in required · showing local':'Pilot account disabled in this lane · showing local';
+ if(mode==='signed_out')return remoteAuthEnabled()?'Sign in required · showing local':'Pilot account disabled in this lane · showing local';
  if(mode==='local')return 'Local device scores';
- if(!REMOTE_WRITE_ENABLED)return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
+ if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
@@ -270,39 +297,40 @@ function toggleAccountPanel(){
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
  const pending=LEADERBOARD.configured===null;
- const signedIn=!!LEADERBOARD.user;
- const verified=!!LEADERBOARD.user?.email_confirmed_at;
- const initials=preferredInitialsFromUser();
- if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
- if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
- if(!REMOTE_AUTH_ENABLED)return 'LOCAL SCORES ACTIVE   PRODUCTION SCORES READ ONLY';
- if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
- if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
- return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
+  const signedIn=!!LEADERBOARD.user;
+  const verified=!!LEADERBOARD.user?.email_confirmed_at;
+  const initials=preferredInitialsFromUser();
+  if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
+  if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
+ if(!remoteAuthEnabled())return testAccountEnabled()?`TEST PILOT ${TEST_ACCOUNT_EMAIL.toUpperCase()} AVAILABLE IN THIS LANE`:'LOCAL SCORES ACTIVE   PRODUCTION SCORES READ ONLY';
+ if(NON_PRODUCTION_LANE&&!signedIn)return `SIGN IN AS TEST PILOT <span class="k">${TEST_ACCOUNT_EMAIL}</span>`;
+  if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+  if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+  return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
 }
 function syncAccountUi(){
- const configured=!!LEADERBOARD.configured;
- const signedIn=!!LEADERBOARD.user;
- const verified=!!LEADERBOARD.user?.email_confirmed_at;
- const pending=LEADERBOARD.configured===null;
- if(accountSignupBtn)accountSignupBtn.disabled=!configured||!REMOTE_AUTH_ENABLED||LEADERBOARD.authBusy||signedIn;
- if(accountLoginBtn)accountLoginBtn.disabled=!configured||!REMOTE_AUTH_ENABLED||LEADERBOARD.authBusy||signedIn;
- if(accountLogoutBtn)accountLogoutBtn.disabled=!configured||!REMOTE_AUTH_ENABLED||LEADERBOARD.authBusy||!signedIn;
- if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||!REMOTE_AUTH_ENABLED||LEADERBOARD.authBusy||!signedIn;
- if(accountEmail)accountEmail.disabled=!configured||!REMOTE_AUTH_ENABLED||pending||LEADERBOARD.authBusy||signedIn;
- if(accountPassword)accountPassword.disabled=!configured||!REMOTE_AUTH_ENABLED||pending||LEADERBOARD.authBusy||signedIn;
- if(accountInitials){
-  accountInitials.disabled=!configured||!REMOTE_AUTH_ENABLED||pending||LEADERBOARD.authBusy||!signedIn;
+  const configured=!!LEADERBOARD.configured;
+  const signedIn=!!LEADERBOARD.user;
+  const verified=!!LEADERBOARD.user?.email_confirmed_at;
+  const pending=LEADERBOARD.configured===null;
+ if(accountSignupBtn)accountSignupBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn;
+ if(accountLoginBtn)accountLoginBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn;
+ if(accountLogoutBtn)accountLogoutBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn;
+ if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn;
+ if(accountEmail)accountEmail.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||signedIn;
+ if(accountPassword)accountPassword.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||signedIn;
+  if(accountInitials){
+  accountInitials.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!signedIn;
   if(document.activeElement!==accountInitials)accountInitials.value=signedIn?preferredInitialsFromUser():'';
- }
- if(accountSummary){
-  if(pending)accountSummary.textContent='Connecting leaderboard...';
-  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
+  }
+  if(accountSummary){
+   if(pending)accountSummary.textContent='Connecting leaderboard...';
+   else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
-  else if(!REMOTE_AUTH_ENABLED)accountSummary.textContent=nonProductionAccountSummary();
-  else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
-  else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
- }
+  else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
+   else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
+   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
+  }
  const best=LEADERBOARD.remote.mine[0]?.score||0;
  if(accountBest)accountBest.textContent=signedIn?`Best: ${best?formatScore(best):'--'}`:'Best: --';
  if(accountRecent){
@@ -315,14 +343,20 @@ function syncAccountUi(){
  const initials=preferredInitialsFromUser();
  const hudInitials=signedIn&&initials?initials:'---';
  window.__auroraPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ if(resetTestPilotScoresBtn){
+  const show=testAccountEnabled();
+  resetTestPilotScoresBtn.hidden=!show;
+  resetTestPilotScoresBtn.disabled=!show||LEADERBOARD.authBusy||!isSignedInAsTestAccount();
+  resetTestPilotScoresBtn.textContent=isSignedInAsTestAccount()?'🧹 Reset Test Pilot Scores':'🧹 Reset Test Pilot Scores (Sign in required)';
+ }
 }
 function syncLeaderboardUi(){
- const signedIn=!!LEADERBOARD.user;
- for(const btn of leaderboardViewButtons){
-  const view=btn.dataset.view||'all';
-  btn.classList.toggle('active',view===LEADERBOARD.view);
-  btn.disabled=view==='mine'&&(!signedIn||!REMOTE_AUTH_ENABLED);
- }
+  const signedIn=!!LEADERBOARD.user;
+  for(const btn of leaderboardViewButtons){
+   const view=btn.dataset.view||'all';
+   btn.classList.toggle('active',view===LEADERBOARD.view);
+  btn.disabled=view==='mine'&&(!signedIn||!remoteAuthEnabled());
+  }
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
  renderLeaderboardPanel();
  syncLeaderboardPanelVisibility();
@@ -362,7 +396,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
   syncLeaderboardUi();
   return localLeaderboardRows();
  }
- if(view==='mine'&&(!REMOTE_AUTH_ENABLED||!LEADERBOARD.user)){
+ if(view==='mine'&&(!remoteAuthEnabled()||!LEADERBOARD.user)){
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'signed_out'));
   syncLeaderboardUi();
   return localLeaderboardRows();
@@ -379,6 +413,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  syncLeaderboardUi();
  let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
+ if(shouldHideTestAccountScores()&&view!=='mine')query=query.neq('user_id',TEST_ACCOUNT_USER_ID);
  if(view==='mine')query=query.eq('user_id',LEADERBOARD.user.id);
  const {data,error}=await query;
  LEADERBOARD.loading[view]=0;
@@ -401,7 +436,7 @@ function setLeaderboardView(view){
  LEADERBOARD.view=next;
  LEADERBOARD.panelOpen=1;
  writePref(LEADERBOARD_PREF_KEY,next);
- if(next==='mine'&&(!REMOTE_AUTH_ENABLED||!LEADERBOARD.user))setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
+ if(next==='mine'&&(!remoteAuthEnabled()||!LEADERBOARD.user))setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
  else if(next==='local')setLeaderboardStatus(leaderboardStatusLabel(next,'local'));
  else if((LEADERBOARD.remote[next]||[]).length||LEADERBOARD.cacheStamp[next])setLeaderboardStatus(leaderboardCacheFresh(next)?leaderboardStatusLabel(next,'ready'):leaderboardStatusLabel(next,'cached'));
  syncLeaderboardUi();
@@ -410,7 +445,7 @@ function setLeaderboardView(view){
 async function prefetchLeaderboards(force=0){
  if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
  const tasks=[refreshLeaderboard('all',{silent:1,force}),refreshLeaderboard('validated',{silent:1,force})];
- if(REMOTE_AUTH_ENABLED&&LEADERBOARD.user)tasks.push(refreshLeaderboard('mine',{silent:1,force}));
+ if(remoteAuthEnabled()&&LEADERBOARD.user)tasks.push(refreshLeaderboard('mine',{silent:1,force}));
  await Promise.all(tasks);
  if(['all','validated','mine'].includes(LEADERBOARD.view))setLeaderboardStatus(leaderboardStatusLabel(LEADERBOARD.view,'ready'));
  syncLeaderboardUi();
@@ -441,7 +476,7 @@ function resolveGameOverScoreEntry(){
 }
 async function submitScoreRemote(entry){
  if(!entry||!LEADERBOARD.configured||!LEADERBOARD.client)return 0;
- if(!REMOTE_WRITE_ENABLED){
+ if(!remoteWriteEnabled()){
   setLeaderboardStatus('Saved locally · production submit disabled in this lane');
   syncLeaderboardUi();
   return 0;
@@ -484,12 +519,17 @@ function authRedirectUrl(){
  return `${location.origin}${location.pathname}`;
 }
 async function signUpAccount(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy||!REMOTE_AUTH_ENABLED)return;
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const email=String(accountEmail?.value||'').trim();
  const password=String(accountPassword?.value||'');
  const initials=sanitizeInitials(accountInitials?.value||'').slice(0,3);
  if(!email||!password){
   setAccountNotice('Enter an email and password first.');
+  syncAccountUi();
+  return;
+ }
+ if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
+  setAccountNotice(`Only test pilot ${TEST_ACCOUNT_EMAIL} can create an account from this lane.`);
   syncAccountUi();
   return;
  }
@@ -514,11 +554,16 @@ async function signUpAccount(){
  syncAccountUi();
 }
 async function loginAccount(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy||!REMOTE_AUTH_ENABLED)return;
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const email=String(accountEmail?.value||'').trim();
  const password=String(accountPassword?.value||'');
  if(!email||!password){
   setAccountNotice('Enter your email and password first.');
+  syncAccountUi();
+  return;
+ }
+ if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
+  setAccountNotice(`Only test pilot ${TEST_ACCOUNT_EMAIL} can sign in from this lane.`);
   syncAccountUi();
   return;
  }
@@ -537,7 +582,7 @@ async function loginAccount(){
  syncAccountUi();
 }
 async function logoutAccount(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy||!REMOTE_AUTH_ENABLED)return;
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
@@ -549,7 +594,7 @@ async function logoutAccount(){
  syncAccountUi();
 }
 async function saveAccountInitials(){
- if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!REMOTE_AUTH_ENABLED)return;
+ if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const initials=sanitizeInitials(accountInitials?.value||'').padEnd(3,'-').slice(0,3);
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
@@ -568,6 +613,27 @@ async function saveAccountInitials(){
  LEADERBOARD.profile=data||{user_id:LEADERBOARD.user.id,display_initials:initials};
  setAccountNotice(`Saved display initials ${initials}.`);
  syncAccountUi();
+}
+async function resetTestPilotScores(){
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!isSignedInAsTestAccount())return;
+ setAccountNotice('');
+ LEADERBOARD.authBusy=1;
+ syncAccountUi();
+ const {error}=await LEADERBOARD.client.from('scores').delete().eq('user_id',LEADERBOARD.user.id);
+ LEADERBOARD.authBusy=0;
+ if(error){
+  setAccountNotice(`Could not reset test pilot scores: ${error.message}`);
+  syncAccountUi();
+  return;
+ }
+ LEADERBOARD.remote.mine=[];
+ LEADERBOARD.cacheStamp.mine=0;
+ setLeaderboardStatus('Test pilot scores cleared');
+ setAccountNotice('Cleared remote scores for the configured test pilot.');
+ syncLeaderboardUi();
+ refreshLeaderboard('all',{force:1});
+ refreshLeaderboard('validated',{force:1});
+ refreshLeaderboard('mine',{force:1});
 }
 async function initLeaderboard(){
  if(HARNESS_SUPABASE_BYPASS){
@@ -591,11 +657,16 @@ async function initLeaderboard(){
   });
   hydrateLeaderboardCache('all');
   hydrateLeaderboardCache('validated');
-  if(!REMOTE_AUTH_ENABLED&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
-  const hadAuthHash=REMOTE_AUTH_ENABLED&&location.hash.includes('access_token=');
-  if(REMOTE_AUTH_ENABLED){
+  if(!remoteAuthEnabled()&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
+  const hadAuthHash=remoteAuthEnabled()&&location.hash.includes('access_token=');
+  if(remoteAuthEnabled()){
    const {data:{session}}=await LEADERBOARD.client.auth.getSession();
    LEADERBOARD.user=session?.user||null;
+   if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+    await LEADERBOARD.client.auth.signOut();
+    LEADERBOARD.user=null;
+    setAccountNotice('The test pilot account is disabled in production.');
+   }
    if(LEADERBOARD.user){
     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
     await loadOwnProfile();
@@ -608,14 +679,19 @@ async function initLeaderboard(){
   }
   syncLeaderboardBest();
   if(hadAuthHash)history.replaceState({},document.title,location.pathname+location.search);
-  if(!REMOTE_WRITE_ENABLED)setLeaderboardStatus(`Production scores ready · ${remoteLeaderboardPolicyLabel()}`);
+  if(!remoteWriteEnabled())setLeaderboardStatus(`Production scores ready · ${remoteLeaderboardPolicyLabel()}`);
   else setLeaderboardStatus(LEADERBOARD.user?'Shared leaderboard ready · signed in':'Shared leaderboard ready');
   syncLeaderboardUi();
   primeLeaderboard();
   scheduleLeaderboardRefresh();
-  if(REMOTE_AUTH_ENABLED){
+  if(remoteAuthEnabled()){
    LEADERBOARD.client.auth.onAuthStateChange(async(_event,sessionState)=>{
-   LEADERBOARD.user=sessionState?.user||null;
+    LEADERBOARD.user=sessionState?.user||null;
+    if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+     await LEADERBOARD.client.auth.signOut();
+     LEADERBOARD.user=null;
+     setAccountNotice('The test pilot account is disabled in production.');
+    }
     if(LEADERBOARD.user){
      setAccountNotice('');
      hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
@@ -655,6 +731,7 @@ if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
  const inLeaderboard=LEADERBOARD.panelOpen&&leaderboardPanel&&(e.target===leaderboardDockBtn||leaderboardPanel.contains(e.target)||leaderboardViews.contains(e.target));

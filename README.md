@@ -74,8 +74,17 @@ Current score/data policy:
 - beta and local pre-production:
   - production leaderboard reads only
   - score submission disabled by default
-  - pilot account/profile writes disabled
+  - pilot account/profile writes disabled unless a configured non-production test pilot is signed in
   - local device scores still save normally
+
+Optional non-production test pilot configuration:
+
+- set `TEST_ACCOUNT_EMAIL` to enable one specific beta/dev pilot account for auth and write-flow testing
+- set `TEST_ACCOUNT_USER_ID` to exclude that pilot's scores from shared leaderboard views
+- when that test pilot is signed in on beta/dev:
+  - `My Scores` becomes available
+  - score submission is enabled for that pilot only
+  - the Developer Tools panel can reset that pilot's remote scores
 
 ## Screenshot
 

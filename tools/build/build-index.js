@@ -1293,6 +1293,8 @@ function build(options = {}){
   };
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://iddyodcknmxupavnuuwg.supabase.co';
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || 'sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
+  const testAccountEmail = (process.env.TEST_ACCOUNT_EMAIL || '').trim().toLowerCase();
+  const testAccountUserId = (process.env.TEST_ACCOUNT_USER_ID || '').trim();
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_LABEL: buildLabel,
@@ -1304,6 +1306,8 @@ function build(options = {}){
     BUILD_STATE: buildState,
     SUPABASE_URL: supabaseUrl,
     SUPABASE_ANON_KEY: supabaseAnonKey,
+    TEST_ACCOUNT_EMAIL: testAccountEmail,
+    TEST_ACCOUNT_USER_ID: testAccountUserId,
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary
   };
@@ -1341,6 +1345,8 @@ function build(options = {}){
     builtAtUtc: buildUtc,
     builtAtEt: buildReleaseEt,
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
+    testAccountEmail,
+    testAccountUserId,
     latestReleaseNote: latestNote
   };
 
