@@ -100,7 +100,7 @@ npm run local:stop
 ## Controls
 
 - `Left/Right` or `A/D`: Move
-- `Fn` or `Ctrl`: Left-handed cabinet-style move left
+- `Ctrl`: Left-handed cabinet-style move left on the web
 - `Option`: Left-handed cabinet-style move right
 - `Space`: Fire (arcade-style shot cap)
 - `P` or pause icon: Pause
