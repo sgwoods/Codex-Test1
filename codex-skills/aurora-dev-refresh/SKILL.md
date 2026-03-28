@@ -12,6 +12,7 @@ Use this skill when we want Codex to bring the current machine back to a ready A
 Read these files first when they exist in the local clone:
 
 - `HOME_MACHINE_SETUP.md`
+- `HOME_CODEX_PROMPT.md`
 - `README.md`
 - `RELEASE_POLICY.md`
 - `CONTRIBUTING.md`
