@@ -4,6 +4,7 @@ const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.
 const cabinetShell=document.getElementById('cabinetShell');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
+const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
 const controlsDockBtn=document.getElementById('controlsDockBtn');
 const feedbackDockBtn=document.getElementById('feedbackDockBtn');
@@ -616,8 +617,18 @@ function openSettings(){
 function logViewerUrl(){
  return 'http://127.0.0.1:4311/';
 }
-function playersGuideUrl(){
+function projectGuideUrl(){
  return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}project-guide.html`;
+}
+function playersGuideUrl(){
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}player-guide.html`;
+}
+function openProjectGuide(){
+ const win=window.open(projectGuideUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened project guide');
+ }else showToast('Allow popups to open the project guide');
 }
 function openPlayersGuideWindow(){
  const win=window.open(playersGuideUrl(), '_blank', 'noopener');
@@ -879,6 +890,7 @@ addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
+if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
 if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
 if(controlsDockBtn)controlsDockBtn.addEventListener('click',()=>openHelp('controls'));
 if(feedbackDockBtn)feedbackDockBtn.addEventListener('click',openFeedback);

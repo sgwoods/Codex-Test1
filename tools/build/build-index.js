@@ -9,11 +9,13 @@ const {
   DEV_INDEX,
   DEV_DASHBOARD,
   DEV_PROJECT_GUIDE,
+  DEV_PLAYER_GUIDE,
   DEV_BUILD_INFO,
   DEV_SCREENSHOT,
   PRODUCTION_INDEX,
   PRODUCTION_DASHBOARD,
   PRODUCTION_PROJECT_GUIDE,
+  PRODUCTION_PLAYER_GUIDE,
   PRODUCTION_BUILD_INFO,
   PRODUCTION_SCREENSHOT
 } = require('./paths');
@@ -24,25 +26,30 @@ const SCRIPT_DIR = path.join(SRC, 'js');
 const TEMPLATE = path.join(SRC, 'index.template.html');
 const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
+const PLAYER_GUIDE_TEMPLATE = path.join(SRC, 'player-guide.template.html');
 const STYLES = path.join(SRC, 'styles.css');
 const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
+const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
   'dist/dev/project-guide.html',
+  'dist/dev/player-guide.html',
   'dist/dev/build-info.json',
   'dist/dev/export.mov.png',
   'dist/production/index.html',
   'dist/production/release-dashboard.html',
   'dist/production/project-guide.html',
+  'dist/production/player-guide.html',
   'dist/production/build-info.json',
   'dist/production/export.mov.png',
   'dist/beta/index.html',
   'dist/beta/release-dashboard.html',
   'dist/beta/project-guide.html',
+  'dist/beta/player-guide.html',
   'dist/beta/build-info.json',
   'dist/beta/export.mov.png',
   'dist/beta/README.md',
@@ -50,10 +57,12 @@ const GENERATED_BUILD_PATHS = new Set([
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'player-guide.html',
   'build-info.json',
   'beta/index.html',
   'beta/release-dashboard.html',
   'beta/project-guide.html',
+  'beta/player-guide.html',
   'beta/build-info.json',
   'beta/README.txt',
   'beta/README.md'
@@ -110,6 +119,25 @@ function loadProjectGuide(){
       currentGoal: '',
       sections: [],
       sourceDocs: []
+    };
+  }
+}
+
+function loadPlayerGuide(){
+  try{
+    const raw = JSON.parse(read(PLAYER_GUIDE));
+    return {
+      title: raw.title || 'Player Guide',
+      strapline: raw.strapline || '',
+      currentGoal: raw.currentGoal || '',
+      sections: Array.isArray(raw.sections) ? raw.sections : []
+    };
+  }catch{
+    return {
+      title: 'Player Guide Unavailable',
+      strapline: 'Add player-guide.json to restore the generated player guide.',
+      currentGoal: '',
+      sections: []
     };
   }
 }
@@ -1085,6 +1113,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           <div class="heroLinks">
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open production build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/player-guide.html">Open player guide</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
@@ -1108,6 +1137,70 @@ function buildProjectGuide(buildInfo, latestNote, guide){
   return template
     .replace('{{PROJECT_GUIDE_STYLES}}', projectGuideStyles())
     .replace('{{PROJECT_GUIDE_BODY}}', body)
+    .trimEnd() + '\n';
+}
+
+function buildPlayerGuide(buildInfo, latestNote, guide){
+  const template = read(PLAYER_GUIDE_TEMPLATE);
+  const toc = (guide.sections || []).map(section => `
+    <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
+  `).join('\n');
+  const sections = (guide.sections || []).map(renderGuideSection).join('\n');
+  const body = `
+    <main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">Player Guide</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Beta Build</a>
+          </div>
+          <h1>${esc(guide.title || 'Player Guide')}</h1>
+          <p>${esc(guide.strapline || '')}</p>
+          <div class="goal"><strong>Guide focus:</strong> ${esc(guide.currentGoal || '')}</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Build</span>
+              <span class="metaValue">${esc(buildInfo.label)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Release Line</span>
+              <span class="metaValue">${esc(buildInfo.version)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">${esc(publicDateLong(buildInfo))}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Latest Note</span>
+              <span class="metaValue">${esc(latestNote.title)}</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Play production build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Play beta build</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/issues">Report or track issues</a>
+          </div>
+        </section>
+        ${sections}
+      </div>
+      <aside class="toc">
+        <h2>Player Index</h2>
+        <p>This guide is generated during the normal build so the in-game manual stays aligned with the current shipped controls and UI.</p>
+        <ul>
+          ${toc}
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>${esc(latestNote.title)}</strong><br>
+          Build: ${esc(buildInfo.label)}
+        </p>
+      </aside>
+    </main>
+  `.trim();
+  return template
+    .replace('{{PLAYER_GUIDE_STYLES}}', projectGuideStyles())
+    .replace('{{PLAYER_GUIDE_BODY}}', body)
     .trimEnd() + '\n';
 }
 
@@ -1141,6 +1234,7 @@ function lanePaths(lane){
       index: PRODUCTION_INDEX,
       dashboard: PRODUCTION_DASHBOARD,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
+      playerGuide: PRODUCTION_PLAYER_GUIDE,
       buildInfo: PRODUCTION_BUILD_INFO,
       screenshot: PRODUCTION_SCREENSHOT
     };
@@ -1150,6 +1244,7 @@ function lanePaths(lane){
     index: DEV_INDEX,
     dashboard: DEV_DASHBOARD,
     projectGuide: DEV_PROJECT_GUIDE,
+    playerGuide: DEV_PLAYER_GUIDE,
     buildInfo: DEV_BUILD_INFO,
     screenshot: DEV_SCREENSHOT
   };
@@ -1190,6 +1285,7 @@ function build(options = {}){
   const releaseNotes = loadReleaseNotes();
   const releaseDashboard = loadReleaseDashboard();
   const projectGuide = loadProjectGuide();
+  const playerGuide = loadPlayerGuide();
   const latestNote = releaseNotes[0] || {
     title: 'No release notes yet',
     summary: 'This build has stamped identity, but no human-written note has been added yet.'
@@ -1247,6 +1343,7 @@ function build(options = {}){
   fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
   fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
+  fs.writeFileSync(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
   fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
     fs.copyFileSync(path.join(ROOT, 'export.mov.png'), out.screenshot);
@@ -1255,6 +1352,7 @@ function build(options = {}){
     out.index,
     out.dashboard,
     out.projectGuide,
+    out.playerGuide,
     out.buildInfo,
     out.screenshot
   ];

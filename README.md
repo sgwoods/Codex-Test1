@@ -36,6 +36,15 @@ Project guide:
     - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
     - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 
+Player guide:
+
+- live page:
+  - `https://sgwoods.github.io/Aurora-Galactica/player-guide.html`
+- source data:
+  - `/Users/stevenwoods/Documents/Codex-Test1/player-guide.json`
+- generated local dev page:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html`
+
 Repository roles:
 
 - development repo:
@@ -91,14 +100,16 @@ npm run local:stop
 ## Controls
 
 - `Left/Right` or `A/D`: Move
-- `Switch Hand` setting in developer tools:
-  - swaps movement to `Fn/Ctrl` for left and `Option` for right on desktop keyboards
+- `Fn` or `Ctrl`: Left-handed cabinet-style move left
+- `Option`: Left-handed cabinet-style move right
 - `Space`: Fire (arcade-style shot cap)
-- `P`: Pause
+- `P` or pause icon: Pause
 - `F`: Fullscreen
 - `U`: Ultra scale toggle
 - `Enter`: Start / Restart
 - `F1` or `?`: Open in-game feedback form
+- `ℹ` icon: Open the player guide inside the game
+- `🕹` icon: Open the controls reference inside the game
 - `Export Log` button: Download the current gameplay session as JSON
 
 ## What Is Implemented
@@ -207,6 +218,8 @@ npm run local:stop
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
 - Generated local dev project guide:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html`
+- Generated local dev player guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html`
 - This page is regenerated during `npm run build` from the guide config and the maintained docs above.
 
 ## End-To-End Workflow

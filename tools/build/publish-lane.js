@@ -25,6 +25,7 @@ const PRODUCTION_FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'player-guide.html',
   'build-info.json',
   'export.mov.png'
 ];
@@ -33,6 +34,7 @@ const BETA_FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'player-guide.html',
   'build-info.json',
   'release-notes.json',
   'export.mov.png',

@@ -1,0 +1,98 @@
+{
+  "title": "Aurora Galactica Player Guide",
+  "strapline": "A quick, player-first guide to starting the game, reading the screen, staying alive, and using the key in-game controls.",
+  "currentGoal": "Help a new player start quickly, understand the cabinet-style HUD, and make sense of the capture/rescue loop without needing developer context.",
+  "sections": [
+    {
+      "id": "start-fast",
+      "title": "Start Fast",
+      "summary": "The shortest path from opening the game to surviving your first run.",
+      "cards": [
+        {
+          "title": "Start A Run",
+          "body": "Press Enter to begin from the title/wait screen. The current development build may start from a selected stage if Developer Tools were used, but the normal player flow starts at Stage 1."
+        },
+        {
+          "title": "Basic Controls",
+          "body": "Move with Arrow Left/Right or A / D. Fire with Space. Pause with P or the pause icon on the right rail. Both-handed cabinet play is also supported: Fn or Ctrl moves left and Option moves right."
+        },
+        {
+          "title": "Use The Rail",
+          "body": "The right-side icon rail keeps key actions in the game: guide, controls, scores, account, bug report, mute, pause, and settings. You should not need to leave the game to learn or report something."
+        }
+      ]
+    },
+    {
+      "id": "hud",
+      "title": "Read The Screen",
+      "summary": "The HUD follows classic Galaga conventions closely enough that the key signals should be familiar once you know where to look.",
+      "bullets": [
+        "Top-left shows your current score.",
+        "Top-center shows the high score.",
+        "Bottom-right stage markers track your current stage in Galaga-style count markers.",
+        "Reserve ships at the lower-left show how many lives remain after the current fighter.",
+        "Short center-screen banners explain captures, rescues, transitions, and challenge-stage results."
+      ]
+    },
+    {
+      "id": "survive",
+      "title": "How To Survive",
+      "summary": "The game is still about lane reading and timing, not spraying bullets constantly.",
+      "cards": [
+        {
+          "title": "Prioritize Descending Enemies",
+          "body": "The biggest danger usually comes from enemies diving or converging into your lane. Clear close threats early and avoid getting trapped between bullets and a descending enemy."
+        },
+        {
+          "title": "Move Early, Not Late",
+          "body": "The ship rewards small early corrections more than last-second swerves. If a lane is becoming dangerous, slide out before the dive path closes on you."
+        },
+        {
+          "title": "Know When To Stop Shooting",
+          "body": "You have an arcade-style shot limit. If the screen is already carrying your shot, focus on positioning instead of hammering fire and expecting another projectile immediately."
+        }
+      ]
+    },
+    {
+      "id": "capture",
+      "title": "Capture And Rescue",
+      "summary": "Bosses can capture your fighter, and later you can rescue it for a stronger dual-fighter attack.",
+      "bullets": [
+        "A boss using the tractor beam can pull your fighter upward if you stay in the beam.",
+        "If you break the capture at the right moment, your ship returns and the boss retreats.",
+        "If the fighter is fully captured, the boss may carry it later during an attack.",
+        "Destroying the carrying boss can release the captured fighter and let it rejoin you.",
+        "A successful rescue creates a dual-fighter state with wider firepower."
+      ]
+    },
+    {
+      "id": "challenge",
+      "title": "Challenge Stage",
+      "summary": "Challenge stages are a scoring break: fewer survival demands, more emphasis on accuracy.",
+      "bullets": [
+        "Focus on clean hits and rhythm rather than panic movement.",
+        "The challenge stage is the best place to recover mentally before the next live combat stage.",
+        "Perfect or high-accuracy clears are valuable, but surviving the normal stages still matters more overall."
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Helpful In-Game Tools",
+      "summary": "The game includes a few player-support surfaces beyond the core action.",
+      "cards": [
+        {
+          "title": "Controls Overlay",
+          "body": "Use the joystick icon to open a compact controls index without leaving the game."
+        },
+        {
+          "title": "Bug Report",
+          "body": "Use the bug icon to report gameplay or visual problems directly from the rail."
+        },
+        {
+          "title": "Pilot Account And Scores",
+          "body": "Use the account and trophy icons to manage your profile and review score tables."
+        }
+      ]
+    }
+  ]
+}

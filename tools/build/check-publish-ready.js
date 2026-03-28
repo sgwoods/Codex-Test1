@@ -13,6 +13,7 @@ const REQUIRED_PRODUCTION = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'player-guide.html',
   'build-info.json',
   'export.mov.png'
 ];
@@ -21,6 +22,7 @@ const REQUIRED_BETA = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'player-guide.html',
   'build-info.json',
   'release-notes.json',
   'export.mov.png',
