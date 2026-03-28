@@ -101,7 +101,7 @@ npm run local:stop
 
 - `Left/Right` or `A/D`: Move
 - `Ctrl`: Left-handed cabinet-style move left on the web
-- `Option`: Left-handed cabinet-style move right
+- `Command`: Left-handed cabinet-style move right on the web
 - `Space`: Fire (arcade-style shot cap)
 - `P` or pause icon: Pause
 - `F`: Fullscreen

@@ -500,16 +500,16 @@ function loadTestCfg(){
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function movementLeftCodes(){
- return ['ArrowLeft','KeyA','Fn','ControlLeft'];
+ return ['ArrowLeft','KeyA','ControlLeft'];
 }
 function movementRightCodes(){
- return ['ArrowRight','KeyD','AltLeft'];
+ return ['ArrowRight','KeyD','MetaLeft'];
 }
 function movementControlCodes(){
  return [...movementLeftCodes(),...movementRightCodes()];
 }
 function controlMoveHelpHtml(){
- return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">CTRL</span> LEFT   <span class="k">COMMAND</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
 }
 function syncAudioUi(){
  if(!muteToggleBtn)return;
