@@ -365,6 +365,7 @@ function startAttractDemo(opts={}){
  autoExportedSessionId='';
  resetSession('attract_demo');
  gameOverHtml='';gameOverState=null;
+ aud=0;
  started=0;paused=0;
  syncPauseUi();
  ATTRACT.active=1;

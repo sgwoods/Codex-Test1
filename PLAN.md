@@ -222,6 +222,13 @@ Recent additions since the last review:
   ship `1.0` first, then extract a shared arcade platform so Aurora variants,
   Galaxian, and similar cabinet shooters can reuse the mature shell/replay/
   harness/build layer with less churn.
+- `#110` has now crossed from concept into a shipped first cut:
+  native in-game replay exists, so the remaining work is polish and follow-up
+  behavior rather than whether replay should exist at all.
+- `#112` is a fresh replay-exit regression:
+  returning to wait mode after replay can restart idle audio unexpectedly, so
+  replay exit needs to preserve a quiet wait state before the next production
+  refresh.
 - Fresh Modem feedback on `2026-03-28` mostly reinforced the current shell/control-surface direction rather than changing the launch strategy:
   - `#105` is effectively a direct refinement of `#86` and is now treated as part of the same active shell pass
   - `#103` extends the shell pass by replacing the hand-toggle model with simultaneous support plus an input/help surface
@@ -252,6 +259,7 @@ Recent additions since the last review:
 | Must Fix Now | `#38` | Codex | Beta review | Ship-loss feedback is better, but it is still one of the most visible “finished/not finished” signals in live play. | Verify and polish explosion, pause, and recovery feel. | Phase 2 |
 | Must Fix Now | `#45` | Codex | Automated check + manual confirm | Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact. | Confirm boss first-hit feedback still looks clean in beta and close it if it does. | Phase 2 |
 | Must Fix Now | `#87` | Codex | Open | Wait-mode/demo ship jitter makes the attract presentation look unfinished. | Stabilize the demo ship rendering and verify with the existing wait-mode video/debug path. | Phase 2 |
+| Must Fix Now | `#112` | Codex | Fix in dev / needs ship | Exiting replay back to wait mode can restart idle audio unexpectedly, which is especially annoying when the tab stays open after review. | Ship the attract/wait-mode audio fix and confirm replay exit returns to a quiet idle state. | Phase 3 |
 | Must Fix Now | `#40` | Codex | Partial automation + beta review | Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation. | Verify the updated beta capture feedback in manual play and close if it feels clear. | Phase 3 |
 | Must Fix Now | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
 | Must Fix Now | `#88` | Codex | Low-risk beta confirm | Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state. | Keep one more live confirmation while we close the remaining capture items. | Phase 3 |
@@ -266,6 +274,7 @@ Recent additions since the last review:
 | Should Fix Before Launch | `#95` | Shared | Process | We now use persona distributions to judge balance, so the ladder can drift silently after gameplay changes. | Re-run the persona ladder only if a prelaunch polish pass materially changes difficulty or control feel. | Phase 1 |
 | Should Fix Before Launch | `#96` | Shared | Watch | Recorder repair, artifact quality checks, and salvage scripts landed; `64` historical videos are still unrecoverable but new runs are now checkable. | Keep `npm run harness:check:video-artifact` green and file immediately if new artifacts regress. | Phase 4 |
 | Should Fix Before Launch | `#98` | Shared | Implemented / close | Dist-based release outputs, publish preflights, and scripted beta/production publishing are now in place. | Let the new flow soak briefly, then close the issue once no further migration fallout appears. | Phase 4 |
+| Should Fix Before Launch | `#110` | Codex | First cut shipped / polish | Native in-game replay is now live, but it still wants final polish around playback presentation, state transitions, and follow-up behavior. | Keep replay as a shipped `v1` surface and finish only the highest-value polish/regression fixes. | Phase 3 |
 | Can Slip | `#63` | Codex | Queued | Wait-mode score cycling is useful attract polish. | Do it in the attract-mode pass. | Phase 3 |
 | Can Slip | `#104` | Codex | Queued | A richer in-game manual viewer is useful, but the current launch need is satisfied by a strong Players Guide entry point; search/PDF/embedded browsing can slip if needed. | Keep the guide icon for `v1`; revisit the full manual viewer if it falls out naturally from the shell work. | Phase 4 |
 | Can Slip | `#49` / `#60` | Codex | Queued | The score panel still wants stronger cues and clearer invocation. | Polish score-view interaction after core gameplay work. | Phase 3 |
