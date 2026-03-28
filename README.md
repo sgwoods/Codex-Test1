@@ -278,13 +278,20 @@ npm run local:stop
 
 ### 5. Publish Hosted Beta
 
-- Preflight:
-  ```bash
-  npm run publish:check:beta
-  ```
 - Preferred:
   ```bash
   npm run publish:beta
+  ```
+- This command now refreshes the beta lane from the current `HEAD` automatically:
+  - rebuilds `dist/dev`
+  - promotes to `dist/beta`
+  - runs beta preflight
+  - publishes the lane
+- Optional manual inspection steps still exist:
+  ```bash
+  npm run promote:beta
+  npm run publish:check:beta
+  npm run publish:beta:raw
   ```
 - This clones `sgwoods/Aurora-Galactica`, copies:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
@@ -294,18 +301,20 @@ npm run local:stop
 
 ### 6. Publish Hosted Production
 
-- First promote the approved dev build into the stable production artifact:
-  ```bash
-  npm run promote:production
-  ```
-
-- Preflight:
-  ```bash
-  npm run publish:check:production
-  ```
 - Preferred:
   ```bash
   npm run publish:production
+  ```
+- This command now refreshes the production lane from the current `HEAD` automatically:
+  - rebuilds `dist/dev`
+  - promotes to `dist/production`
+  - runs production preflight
+  - publishes the lane
+- Optional manual inspection steps still exist:
+  ```bash
+  npm run promote:production
+  npm run publish:check:production
+  npm run publish:production:raw
   ```
 - This clones `sgwoods/Aurora-Galactica`, copies:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
