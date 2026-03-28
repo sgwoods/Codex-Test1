@@ -139,6 +139,12 @@ function currentBuildShort(cfg){
   return info.shortCommit || 'unknown';
 }
 
+function stagedPaths(cfg){
+  const paths = cfg.files.map(file => cfg.targetDir === '.' ? file : path.join(cfg.targetDir, file));
+  for(const file of cfg.rootFiles || []) paths.push(file);
+  return paths;
+}
+
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const lane = String(args.lane || '').toLowerCase();
@@ -173,7 +179,7 @@ function main(){
 
     const short = currentBuildShort(cfg);
     const message = `${cfg.commitPrefix} ${short}`;
-    run('git', ['-C', repoDir, 'add', cfg.targetDir === '.' ? '.' : cfg.targetDir], { stdio: ['ignore', 'inherit', 'inherit'] });
+    run('git', ['-C', repoDir, 'add', '-f', ...stagedPaths(cfg)], { stdio: ['ignore', 'inherit', 'inherit'] });
     run('git', ['-C', repoDir, 'commit', '-m', message], { stdio: ['ignore', 'inherit', 'inherit'] });
     if(!dryRun){
       run('git', ['-C', repoDir, 'push', 'origin', branch], { stdio: ['ignore', 'inherit', 'inherit'] });
