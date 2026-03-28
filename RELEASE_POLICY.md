@@ -100,6 +100,26 @@ Examples:
 
 The beta lane is intentionally a snapshot of selected generated artifacts under `dist/`, not a separate branch or a second build pipeline. `Codex-Test1` remains the engineering source of truth; `Aurora-Galactica` is the public release surface for both production and beta.
 
+## Score/Data Lane Policy
+
+- `production`
+  - full online Supabase path
+  - shared leaderboard reads enabled
+  - score submission enabled
+  - pilot account/auth/profile actions enabled
+- `beta`
+  - production-score read-only mirror by default
+  - score submission disabled
+  - pilot account/auth/profile writes disabled
+  - local device scores still save normally
+- `pre-production`
+  - production-score read-only mirror by default
+  - score submission disabled
+  - pilot account/auth/profile writes disabled
+  - local device scores still save normally
+
+This is the current launch-safe answer to `#76`: non-production lanes no longer use the same default write path as production, even though they can still mirror production leaderboard reads.
+
 ## Production Publish Workflow
 
 1. Treat production as a promotion from an approved beta candidate, not as a direct publish from arbitrary dev output.
@@ -205,13 +225,9 @@ This gives every build a unique identity without forcing a SemVer bump for every
 
 ## Post-1.0 Environment Goal
 
-- after `1.0`, cleanly separate production and non-production score/data paths
-- production should remain the canonical public Aurora environment
-- non-production should no longer write directly into the same live score path
-  by default
+- keep production as the canonical public Aurora environment
+- keep the current non-production read-only/default-local policy unless there is a strong reason to loosen it
 - preferred order after `1.0`:
-  1. keep Aurora production and Aurora beta together only if that remains useful
-  2. isolate pre-production/dev writes behind a separate environment, separate
-     tables, or a no-submit/dev-only mode
-  3. make the active environment obvious in the build label and account/status
-     surfaces
+  1. decide whether beta should remain a production-read mirror or move to its own backend
+  2. isolate non-production fully behind a separate Supabase project or clearly separate tables if shared reads stop being useful
+  3. keep the active environment obvious in the build label and account/status surfaces

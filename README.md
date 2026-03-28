@@ -66,6 +66,17 @@ After GitHub Pages deploys, play at:
 
 The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The `/beta/` lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in `Codex-Test1` as the pre-production development line.
 
+Current score/data policy:
+
+- production:
+  - live shared leaderboard reads and writes
+  - pilot account actions enabled
+- beta and local pre-production:
+  - production leaderboard reads only
+  - score submission disabled by default
+  - pilot account/profile writes disabled
+  - local device scores still save normally
+
 ## Screenshot
 
 ![Gameplay Screenshot](./export.mov.png)

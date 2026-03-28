@@ -67,9 +67,9 @@
             "Must",
             "[#76](https://github.com/sgwoods/Codex-Test1/issues/76)",
             "Shared",
-            "Open",
-            "Production and non-production still share the same live score/data path",
-            "Choose environment split and route non-production writes away from production by default",
+            "Implemented on dev",
+            "Non-production lanes now use a production-score read-only mirror with local-only score saves by default",
+            "Refresh beta, confirm the read-only lane messaging and blocked submit path, then close if it holds",
             "Phase 4"
           ],
           [
