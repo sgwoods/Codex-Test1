@@ -1,6 +1,20 @@
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 const playfieldFrame=document.getElementById('playfieldFrame');
 window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
+const DISPLAY_SHELL=Object.freeze({
+ hudInsetX:12,
+ hudInsetTop:6,
+ hudInsetBottom:38,
+ hudMinWidth:220,
+ frameOuterInset:2,
+ frameInnerInset:11,
+ stageBadgeRight:12,
+ stageBadgeBottom:12,
+ stageBadgeGap:9,
+ reserveLeft:12,
+ reserveBottom:8,
+ stageLabelGap:5
+});
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -197,32 +211,58 @@ function drawRescuePod(){
 }
 
 function drawBadges(stage){
- const vals=[50,30,20,10,5,1],col=['#f3cf65','#f0b35e','#ef9559','#ec7755','#e95b51','#e53f4e'];
- let x=PLAY_W-10,y=PLAY_H-8;
- for(let i=0;i<vals.length;i++)while(stage>=vals[i]){
-  stage-=vals[i];
+ if(stage<=0)return;
+ const bigCount=Math.floor(stage/5);
+ const smallCount=stage%5;
+ const badges=[];
+ const rightEdge=PLAY_W-DISPLAY_SHELL.stageBadgeRight;
+ const minX=PLAY_W-88;
+ let x=rightEdge;
+ let y=PLAY_H-DISPLAY_SHELL.stageBadgeBottom;
+ const layout=[...Array(bigCount).fill('big'),...Array(smallCount).fill('small')];
+ for(const size of layout){
+  const w=size==='big'?11:8;
+  const step=size==='big'?13:DISPLAY_SHELL.stageBadgeGap;
+  badges.push({x,y,size});
+  x-=step;
+  if(x<minX){
+   x=rightEdge;
+   y-=14;
+  }
+ }
+ const right=badges.reduce((m,b)=>Math.max(m,b.x+(b.size==='big'?5.5:4)),0);
+ const bottom=badges.reduce((m,b)=>Math.max(m,b.y),0);
+ ctx.save();
+ for(const badge of badges){
   ctx.save();
-  ctx.translate(x,y);
-  ctx.fillStyle=col[i];
+  ctx.translate(badge.x,badge.y);
+  const big=badge.size==='big';
+  ctx.fillStyle=big?'#7ab7ff':'#e95b51';
   ctx.beginPath();
   ctx.moveTo(0,0);
-  ctx.lineTo(-4,-6);
-  ctx.lineTo(4,-6);
+  ctx.lineTo(big?-5.5:-4,big?-9:-6);
+  ctx.lineTo(big?5.5:4,big?-9:-6);
   ctx.closePath();
   ctx.fill();
-  ctx.fillStyle='rgba(255,245,210,.72)';
-  ctx.fillRect(-.5,-6,1,5);
-  ctx.fillStyle='rgba(120,36,24,.42)';
-  ctx.fillRect(-3,-4,6,1);
+  ctx.fillStyle=big?'rgba(222,240,255,.82)':'rgba(255,245,210,.78)';
+  ctx.fillRect(-.5,big?-9:-6,1,big?8:5);
+  ctx.fillStyle=big?'rgba(24,68,136,.5)':'rgba(120,36,24,.46)';
+  ctx.fillRect(big?-4:-3,big?-6:-4,big?8:6,1);
   ctx.restore();
-  x-=8;
-  if(x<PLAY_W-72){x=PLAY_W-10;y-=9;}
  }
+ if(badges.length){
+  ctx.textAlign='right';
+  ctx.textBaseline='top';
+  ctx.font='7px "Courier New",Consolas,monospace';
+  ctx.fillStyle='rgba(169,216,255,.72)';
+  ctx.fillText('STAGE',right,bottom+DISPLAY_SHELL.stageLabelGap);
+ }
+ ctx.restore();
 }
 
 function drawReserveShips(lives){
  let reserve=Math.max(0,lives|0);
- let x=12,y=PLAY_H-8;
+ let x=DISPLAY_SHELL.reserveLeft,y=PLAY_H-DISPLAY_SHELL.reserveBottom;
  while(reserve>0){
   ctx.save();
   ctx.translate(x,y);
@@ -260,9 +300,14 @@ function draw(){
  const ox=shellX+shellPadL;
  const oy=shellY+shellPadT;
  if(hud){
-  hud.style.left=`${ox+16}px`;
-  hud.style.top=`${Math.max(6,oy+4)}px`;
-  hud.style.width=`${Math.max(220,viewW-32)}px`;
+  const hudLeft=ox+DISPLAY_SHELL.hudInsetX;
+  const hudTop=oy+DISPLAY_SHELL.hudInsetTop;
+  const hudWidth=Math.max(DISPLAY_SHELL.hudMinWidth,viewW-DISPLAY_SHELL.hudInsetX*2);
+  hud.style.left=`${hudLeft}px`;
+  hud.style.top=`${hudTop}px`;
+  hud.style.width=`${hudWidth}px`;
+  hud.style.setProperty('--hud-band-height',`${Math.max(28,Math.floor(scale*24))}px`);
+  hud.style.setProperty('--hud-band-fade',`${Math.max(18,Math.floor(scale*30))}px`);
  }
  if(msg){
   msg.style.left=`${Math.floor(ox+viewW/2)}px`;
@@ -270,10 +315,11 @@ function draw(){
  }
  if(playfieldFrame){
   playfieldFrame.style.display='block';
-  playfieldFrame.style.left=`${ox-2}px`;
-  playfieldFrame.style.top=`${oy-2}px`;
-  playfieldFrame.style.width=`${viewW+4}px`;
-  playfieldFrame.style.height=`${viewH+4}px`;
+  playfieldFrame.style.left=`${ox-DISPLAY_SHELL.frameOuterInset}px`;
+  playfieldFrame.style.top=`${oy-DISPLAY_SHELL.frameOuterInset}px`;
+  playfieldFrame.style.width=`${viewW+DISPLAY_SHELL.frameOuterInset*2}px`;
+  playfieldFrame.style.height=`${viewH+DISPLAY_SHELL.frameOuterInset*2}px`;
+  playfieldFrame.style.setProperty('--frame-inner-inset',`${Math.max(9,Math.floor(scale*DISPLAY_SHELL.frameInnerInset))}px`);
  }
  const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
@@ -356,7 +402,7 @@ if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
  msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):'';
- if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.74)}px`;
+ if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.72)}px`;
  else if(!started&&msg.className==='gameOverScreen')msg.style.top=`${Math.floor(oy+viewH*.54)}px`;
  else msg.style.top='';
  if(!started){

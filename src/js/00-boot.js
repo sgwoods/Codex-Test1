@@ -9,6 +9,7 @@ const fbType=document.getElementById('fbType'),fbSummary=document.getElementById
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 const handToggleBtn=document.getElementById('handToggleBtn');
+const muteToggleBtn=document.getElementById('muteToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
@@ -23,6 +24,7 @@ const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const HAND_SWITCH_PREF_KEY=`${STORAGE_PREFIX}SwitchHand`;
+const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const LEGACY_STORAGE_KEYS={
  [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
@@ -31,9 +33,11 @@ const LEGACY_STORAGE_KEYS={
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [HAND_SWITCH_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}SwitchHand`,
+ [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
 };
 let switchHandMode=readPref(HAND_SWITCH_PREF_KEY)==='1';
+let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -129,7 +133,7 @@ const AC=()=>{
  const A=new (window.AudioContext||webkitAudioContext)();
  sfx.a=A;
  sfx.bus=A.createGain();
- sfx.bus.gain.value=.9;
+ sfx.bus.gain.value=audioMuted?0:.9;
  sfx.tap=A.createMediaStreamDestination();
  sfx.keep=A.createConstantSource();
  sfx.keep.offset.value=0;
@@ -504,10 +508,27 @@ function controlMoveHelpHtml(){
 }
 function syncControlUi(){
  if(handToggleBtn){
-  handToggleBtn.textContent=switchHandMode?'Hand L':'Hand R';
+  handToggleBtn.dataset.handMode=switchHandMode?'switched':'standard';
   handToggleBtn.setAttribute('aria-pressed',switchHandMode?'true':'false');
+  handToggleBtn.setAttribute('aria-label',switchHandMode?'Switched controls: Fn/Ctrl left, Option right':'Standard controls: arrows move');
   handToggleBtn.title=switchHandMode?'Switched controls: Fn/Ctrl left, Option right':'Standard controls: arrows move';
  }
+}
+function syncAudioUi(){
+ if(!muteToggleBtn)return;
+ muteToggleBtn.dataset.muted=audioMuted?'true':'false';
+ muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
+ muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
+ muteToggleBtn.title=audioMuted?'Game audio muted':'Game audio on';
+ const icon=muteToggleBtn.querySelector('.dockIcon');
+ if(icon)icon.textContent=audioMuted?'🔇':'🔊';
+ if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
+}
+function setAudioMuted(next,opts={}){
+ audioMuted=!!next;
+ writePref(AUDIO_MUTED_PREF_KEY,audioMuted?'1':'0');
+ syncAudioUi();
+ if(!opts.silent)showToast(audioMuted?'Game audio muted':'Game audio on');
 }
 function setSwitchHandMode(next,opts={}){
  switchHandMode=!!next;
@@ -540,6 +561,7 @@ function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
  syncControlUi();
+ syncAudioUi();
  syncSettingsUi();
 }
 function closeSettings(){
@@ -782,6 +804,7 @@ recordBtn.addEventListener('click',()=>{
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
 if(handToggleBtn)handToggleBtn.addEventListener('click',()=>setSwitchHandMode(!switchHandMode,{silent:0}));
+if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());

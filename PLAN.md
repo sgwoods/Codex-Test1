@@ -203,7 +203,7 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#91` / `#48` / `#86` top HUD, playfield frame, and production-shell polish
+1. `#91` / `#48` / `#44` / `#86` / `#71` display-shell, stage indicator, and icon/control-surface polish
 2. `#74` / `#47` / `#38` / `#45` special-squadron and combat-feedback polish
 3. `#87` wait-mode/demo visual stability
 4. `#76` production vs non-production data separation design
