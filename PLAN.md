@@ -203,11 +203,11 @@ Current beta-review cluster:
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#74` / `#47` special squadron spacing
-2. `#18` Stage `4` fairness
-3. `#32` Stage `2` fairness
+1. `#91` / `#48` / `#86` top HUD, playfield frame, and production-shell polish
+2. `#74` / `#47` / `#38` / `#45` special-squadron and combat-feedback polish
+3. `#87` wait-mode/demo visual stability
 4. `#76` production vs non-production data separation design
-5. `#9` remaining challenge-stage fidelity
+5. `#85` final release-readiness pass
 
 Recent additions since the last review:
 
@@ -217,41 +217,50 @@ Recent additions since the last review:
 - `#98` largely reflects cleanup that has already landed:
   generated artifacts moved under `dist/` and publish scripts now use scripted lane promotion.
 - `#97` and `#99` are useful platform directions, but they should not displace the four-stage `1.0` slice.
+- User direction for this review:
+  - treat Stage `2` / `4` fairness tuning as a likely `1.1` experimental pass unless a fresh regression makes them launch-critical again
+  - move broader challenge-stage variation/fidelity work out of the launch path
+  - keep tooling/platform features post-`1.0`
+  - spend remaining prelaunch energy on visible polish, trust, and stable graphical structure
+  - keep recent icon, settings, HUD, and control-surface issues inside `v1`
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
-| Must Fix | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
-| Must Fix | `#18` | Codex | Automated guard + tuning | New stage-pressure check now guards the Stage `4` baseline, and the latest expert run still shows modest fire (`0.548` bullets/attack overall) with collision-dominated Stage `4`/`5` deaths. | Use the stage-pressure check to tune escort/convergence pressure before touching bullet density broadly. | Phase 1 |
-| Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
-| Must Fix | `#32` | Codex | Automated guard + tuning | New stage-pressure check now guards the Stage `2` baseline; full runs still show active attacks with collision-heavy deaths and no sign that bullet spam is the primary issue. | Use the stage-pressure check to tune Stage `2` dive geometry and lane convergence, then reassess bullet timing only if pressure still feels off. | Phase 1 |
-| Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
-| Must Fix | `#78` | Codex | Automated check + manual confirm | Automated regression now proves challenge collisions kill the player while challenge fire stays off. | Keep the check green and confirm the live post-hit flow still reads correctly in beta. | Phase 1 |
-| Must Fix | `#40` | Codex | Partial automation + beta review | Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation. | Verify the updated beta capture feedback in manual play. | Phase 3 |
-| Must Fix | `#77` | Codex | Automated check + low-risk manual confirm | Automated recovery check now proves beam-escape recovery returns the ship to the bottom row and allows post-escape firing. | Confirm the drop-back animation/control return still looks clean in beta. | Phase 3 |
-| Must Fix | `#88` | Codex | Low-risk beta confirm | Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state. | Keep one more live confirmation while we close the remaining capture items. | Phase 3 |
-| Must Fix | `#74` | Codex | Open | Latest manual beta pass still says the three-ship bonus/special squadron is too spread out. | Tighten the three-ship attack geometry again and keep the squadron spacing check green. | Phase 2 |
-| Must Fix | `#47` | Codex | Open | Latest manual beta pass still says the special squadron reads too loose visually. | Tighten lateral/vertical squadron coherence and recheck it in beta. | Phase 2 |
-| Must Fix | `#45` | Codex | Automated check + manual confirm | Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact. | Confirm boss first-hit feedback still looks clean in beta. | Phase 2 |
-| Must Fix | `#38` | Codex | Beta review | Ship-loss feedback was strengthened and now needs live feel confirmation. | Verify explosion, pause, and recovery feel in beta play. | Phase 2 |
-| Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
-| Must Fix | `#85` | Shared | Open | Final release-readiness pass still needs security review, code/docs consistency, and a short players guide. | Schedule the final release-readiness cycle once the blocker cluster is down to a short list. | Phase 4 |
+| Must Fix Now | `#61` | Shared | Watching | Hosted Stage `3` -> `4` can still hit the empty-playfield edge case, which directly undermines public trust. | Keep transition telemetry live and treat the next reproducible bad run as launch-blocking. | Phase 1 |
+| Must Fix Now | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
+| Must Fix Now | `#85` | Shared | Open | Final release-readiness pass still needs security review, code/docs consistency, and a short players guide. | Schedule the final release-readiness cycle once the visual polish cluster is down to a short list. | Phase 4 |
+| Must Fix Now | `#86` | Codex | Open | The production shell still needs the players-guide / account / scores / persistent-settings layout to feel intentionally shipped. | Finish the production-shell pass and confirm settings pause/resume cleanly during active play. | Phase 4 |
+| Must Fix Now | `#91` | Codex | Open | The score header still wants stronger arcade alignment with the playfield top edge. | Lock the top HUD to the gameboard width and edge in the shell polish pass. | Phase 2 |
+| Must Fix Now | `#48` | Codex | Open | The browser presentation still benefits from a clearer playfield frame / bezel so the arcade boundary reads immediately. | Finish a stable playfield frame treatment and keep it aligned with the HUD shell. | Phase 2 |
+| Must Fix Now | `#44` | Codex | Open | A bottom-right stage indicator is part of the cabinet-like HUD language and belongs in the same visual shell pass as the top HUD/frame work. | Add the stage indicator as part of the HUD polish pass rather than as a separate later feature. | Phase 2 |
+| Must Fix Now | `#74` | Codex | Open | Latest manual beta pass still says the three-ship bonus/special squadron is too spread out. | Tighten the three-ship attack geometry again and keep the squadron spacing check green. | Phase 2 |
+| Must Fix Now | `#47` | Codex | Open | Latest manual beta pass still says the special squadron reads too loose visually. | Tighten lateral/vertical squadron coherence and recheck it in beta. | Phase 2 |
+| Must Fix Now | `#38` | Codex | Beta review | Ship-loss feedback is better, but it is still one of the most visible “finished/not finished” signals in live play. | Verify and polish explosion, pause, and recovery feel. | Phase 2 |
+| Must Fix Now | `#45` | Codex | Automated check + manual confirm | Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact. | Confirm boss first-hit feedback still looks clean in beta and close it if it does. | Phase 2 |
+| Must Fix Now | `#87` | Codex | Open | Wait-mode/demo ship jitter makes the attract presentation look unfinished. | Stabilize the demo ship rendering and verify with the existing wait-mode video/debug path. | Phase 2 |
+| Must Fix Now | `#40` | Codex | Partial automation + beta review | Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation. | Verify the updated beta capture feedback in manual play and close if it feels clear. | Phase 3 |
+| Must Fix Now | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
+| Must Fix Now | `#88` | Codex | Low-risk beta confirm | Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state. | Keep one more live confirmation while we close the remaining capture items. | Phase 3 |
+| Should Fix Before Launch | `#78` | Codex | Automated check + manual confirm | Automated regression now proves challenge collisions kill the player while challenge fire stays off. | Keep the check green and confirm the live post-hit flow still reads correctly in beta. | Phase 1 |
+| Should Fix Before Launch | `#77` | Codex | Automated check + low-risk manual confirm | Automated recovery check now proves beam-escape recovery returns the ship to the bottom row and allows post-escape firing. | Confirm the drop-back animation/control return still looks clean in beta. | Phase 3 |
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
 | Should Fix | `#73` | Codex | Automated check + beta review | Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked. | Verify the feel/fairness of the shoot-to-save window in beta. | Phase 3 |
-| Should Fix | `#95` | Shared | Process | We now use persona distributions to judge balance, so the ladder can drift silently after gameplay changes. | Run a quick persona sanity pass after each meaningful Stage `2` / `4` tuning change. | Phase 1 |
-| Should Fix | `#96` | Shared | Watch | Recorder repair, artifact quality checks, and salvage scripts landed; `64` historical videos are still unrecoverable but new runs are now checkable. | Keep `npm run harness:check:video-artifact` green and file immediately if new artifacts regress. | Phase 4 |
-| Should Fix | `#98` | Shared | Implemented / close | Dist-based release outputs, publish preflights, and scripted beta/production publishing are now in place. | Let the new flow soak briefly, then close the issue once no further migration fallout appears. | Phase 4 |
 | Should Fix | `#79` | Codex | Beta review | Manual beta play says keyboard control is better, but fine single-tap alignment still needs a final confidence check. | Keep the current manual-control baseline and revisit only if new live evidence says the feel is still off. | Phase 1 |
-| Should Fix | `#4` | Shared | Watch | Stage `1` feels acceptable manually, with mixed harness urgency. | Revisit only if evidence worsens. | Phase 1 |
-| Should Fix | `#62` | Shared | Watch | Self-play can still fail early in Stage `1`. | Keep the persona baseline in view while tuning. | Phase 1 |
 | Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
+| Should Fix Before Launch | `#71` | Codex | Queued | Audio control belongs in the shipped settings/control surface if it lands cleanly in the same shell work. | Pull mute into the `v1` settings pass rather than leaving it as indefinite polish. | Phase 3 |
+| Should Fix Before Launch | `#95` | Shared | Process | We now use persona distributions to judge balance, so the ladder can drift silently after gameplay changes. | Re-run the persona ladder only if a prelaunch polish pass materially changes difficulty or control feel. | Phase 1 |
+| Should Fix Before Launch | `#96` | Shared | Watch | Recorder repair, artifact quality checks, and salvage scripts landed; `64` historical videos are still unrecoverable but new runs are now checkable. | Keep `npm run harness:check:video-artifact` green and file immediately if new artifacts regress. | Phase 4 |
+| Should Fix Before Launch | `#98` | Shared | Implemented / close | Dist-based release outputs, publish preflights, and scripted beta/production publishing are now in place. | Let the new flow soak briefly, then close the issue once no further migration fallout appears. | Phase 4 |
 | Can Slip | `#63` | Codex | Queued | Wait-mode score cycling is useful attract polish. | Do it in the attract-mode pass. | Phase 3 |
 | Can Slip | `#49` / `#60` | Codex | Queued | The score panel still wants stronger cues and clearer invocation. | Polish score-view interaction after core gameplay work. | Phase 3 |
-| Can Slip | `#48` | Codex | Partial | The frame exists; decorative fidelity can still wait. | Add cabinet-style frame art later. | Phase 2 |
 | Can Slip | `#65` | Codex | Queued | Aurora / wintry theming is still later polish. | Apply thematic art after gameplay stabilizes. | Phase 2 |
-| Can Slip | `#71` | Codex | Queued | Mute is useful, but not launch-blocking. | Add an audio toggle in the UI. | Phase 3 |
-| Can Slip | `#91` | Codex | Queued | The scoreboard/header should align cleanly with the top edge of the playfield for arcade fidelity. | Lock the scoreboard to the gameboard top edge in the UI polish pass. | Phase 2 |
-| Post-1.0 | `#97` | Shared | Open | The log viewer currently depends on a local artifact tree, which is good enough for current debugging but not collaboration at distance. | Keep the viewer local-first for `1.0`; design a remote artifact catalog after launch. | Post-1.0 |
-| Post-1.0 | `#99` | Shared | Open | Swappable brand/style packages are strategically useful, but they are a full platform/theming abstraction rather than a four-stage launch need. | Capture renderer/theme seams incrementally during `v1`; do the full brand-package abstraction after launch. | Post-1.0 |
+| Post-1.0 | `#18` | Shared | Deferred to 1.1 tuning | Stage `4` fairness tuning is important, but current manual play says the slice is healthy enough to launch without holding `1.0` for more experimental balancing. | Reopen as a focused `1.1` survivability/fairness pass after launch. | Post-1.0 |
+| Post-1.0 | `#32` | Shared | Deferred to 1.1 tuning | Stage `2` tuning now looks more like iterative refinement than a blocker for the current slice. | Revisit in the same `1.1` experimental balancing pass as Stage `4`. | Post-1.0 |
+| Post-1.0 | `#9` | Shared | Deferred with challenge variation work | Remaining challenge-stage fidelity/variation work is broader than the current launch need. | Group with broader challenge/reference expansion after `1.0`. | Post-1.0 |
+| Post-1.0 | `#17` | Shared | Open | Stronger Galaga baseline work remains valuable, but it is no longer on the critical path to shipping the current slice. | Continue incrementally, but do not let it block launch. | Post-1.0 |
+| Post-1.0 | `#19` / `#62` | Shared | Watch | Later-run and self-play balance regressions remain useful signals, but not launch-critical if manual play remains healthy. | Keep measuring them without promoting them over visible polish. | Post-1.0 |
+| Post-1.0 | `#89` / `#90` / `#92` / `#97` | Shared | Open | Tooling, artifact workflow, and broader harness/platform improvements are useful leverage, but they are not required to ship the four-stage slice. | Keep them in the post-`1.0` tooling/platform lane. | Post-1.0 |
+| Post-1.0 | `#99` / `#84` / `#83` / `#30` / `#26`-`#29` | Shared | Open | Theme/package/custom-stage work is strategically important, but it is platform expansion, not launch work. | Keep capturing seams now; do the full abstraction after launch. | Post-1.0 |
 
 Items currently treated as post-`1.0` unless they become necessary for
 external playtesting or operational stability:
@@ -259,6 +268,8 @@ external playtesting or operational stability:
 - `#69` remote gameplay logs and optional video artifacts
 - `#70` homepage recent plays / watch links
 - `#17` broader reference baseline work
+- `#18` / `#32` experimental Stage `2` / `4` tuning for `1.1`
+- `#9` broader challenge-stage fidelity / variation work
 - `#19` later-run collision-chain regression outside the four-stage slice
 - replay, submission, theme-system, and broader public-workflow enhancements
 
@@ -310,6 +321,15 @@ After each material step:
 1. Compare our current board composition directly against the original reference sheets
 2. Improve enemy silhouette/readability and tighten formation presentation
 3. Refine explosions, starfield, and stage/challenge/game-over presentation until they feel more cabinet-authentic
+4. Use the remaining prelaunch time to make the shell feel intentionally shipped:
+   - top HUD alignment
+   - playfield frame/bezel clarity
+   - right-panel / settings / players-guide presentation
+   - wait-mode visual stability
+5. Pull forward only the narrow structural work that supports those polish passes:
+   - centralize HUD/frame/chrome values
+   - keep renderer-owned style tokens separate from gameplay logic where the seam is real
+   - avoid a full theme/brand-package abstraction before launch
 
 ### Phase 3. Finish 1.0 Arcade Systems
 
