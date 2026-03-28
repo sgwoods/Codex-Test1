@@ -98,9 +98,90 @@ window.__galagaHarness__={
   started=0;paused=0;
   msg.textContent='';
  },
+ async seedLocalReplay(cfg={}){
+  if(!window.AuroraReplayStore?.supported?.()) return false;
+  if(cfg.clearExisting){
+   const existing = await window.AuroraReplayStore.listReplays();
+   for(const replay of existing) await window.AuroraReplayStore.deleteReplay(replay.id);
+  }
+  const bytes = Array.isArray(cfg.blobBytes) && cfg.blobBytes.length
+   ? cfg.blobBytes
+   : [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88];
+  const blob = new Blob([new Uint8Array(bytes)], { type: cfg.type || 'video/webm' });
+  await window.AuroraReplayStore.saveReplay({
+   id: cfg.id || `harness-replay-${Date.now()}`,
+   createdAt: cfg.createdAt || new Date().toISOString(),
+   duration: +cfg.duration || 12,
+   score: +cfg.score || 4321,
+   stage: +cfg.stage || 2,
+   challenge: !!cfg.challenge,
+   build: (window.BUILD && window.BUILD.version) || '',
+   stats: cfg.stats || { shots: 6, hits: 4 },
+   source: cfg.source || 'local',
+   blob
+  });
+  return true;
+ },
+ openMoviePanel(){
+  if(typeof window.refreshMovieCatalog === 'function')window.refreshMovieCatalog({ silent: 1 });
+  if(typeof movieDockBtn !== 'undefined' && movieDockBtn)movieDockBtn.click();
+  return !!(typeof window.isMoviePanelOpen === 'function' && window.isMoviePanelOpen());
+ },
+ startSelectedMovieReplay(){
+  if(typeof movieStartBtn !== 'undefined' && movieStartBtn)movieStartBtn.click();
+  return true;
+ },
+ closeMoviePanel(){
+  if(typeof window.closeMoviePanel === 'function')window.closeMoviePanel();
+  return true;
+ },
+ openWaitLeaderboard(view='all'){
+  startAttractDemo({ record: false });
+  if(typeof openLeaderboardPanel === 'function')openLeaderboardPanel(view);
+  return true;
+ },
+ restartCurrentConfig(){
+  S.lives = -1;
+  gameOver();
+  start();
+  return snapshot();
+ },
+ setBoardMessage(cfg={}){
+  paused = !!cfg.paused;
+  if(typeof syncPauseUi === 'function')syncPauseUi();
+  if(cfg.mode === 'alert'){
+   S.banner = 0;
+   S.bannerTxt = '';
+   S.bannerSub = '';
+   S.bannerMode = '';
+   S.alertTxt = String(cfg.text || '');
+   S.alertT = Math.max(0.1, +cfg.duration || 1.2);
+   return true;
+  }
+  if(cfg.mode === 'banner'){
+   S.alertT = 0;
+   S.alertTxt = '';
+   S.bannerMode = String(cfg.bannerMode || '');
+   S.bannerTxt = String(cfg.title || '');
+   S.bannerSub = String(cfg.subtitle || '');
+   S.banner = Math.max(0.1, +cfg.duration || 1.2);
+   return true;
+  }
+  return false;
+ },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ uiState(){
+  return {
+   started: !!started,
+   paused: !!paused,
+   aud,
+   attract: { active: !!ATTRACT.active, phase: ATTRACT.phase || '' },
+   movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
+   leaderboardOpen: typeof LEADERBOARD !== 'undefined' ? !!LEADERBOARD.panelOpen : false
+  };
+ },
  recentEvents(cfg={}){
   const count=Math.max(1,Math.min(200,+cfg.count||20));
   return REC ? REC.events.slice(-count) : [];

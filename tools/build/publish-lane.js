@@ -27,6 +27,8 @@ const PRODUCTION_FILES = [
   'project-guide.html',
   'player-guide.html',
   'build-info.json',
+  'release-notes.json',
+  'README.md',
   'export.mov.png'
 ];
 
@@ -93,6 +95,7 @@ function laneConfig(lane){
       buildInfo: BETA_BUILD_INFO,
       targetDir: 'beta',
       files: BETA_FILES,
+      rootFiles: ['.github/workflows/pages.yml'],
       commitPrefix: 'Update beta lane from dev build'
     };
   }
@@ -103,6 +106,7 @@ function laneConfig(lane){
       buildInfo: PRODUCTION_BUILD_INFO,
       targetDir: '.',
       files: PRODUCTION_FILES,
+      rootFiles: ['.github/workflows/pages.yml'],
       commitPrefix: 'Update production lane from dev build'
     };
   }
@@ -115,6 +119,12 @@ function stageArtifacts(repoDir, cfg){
   for(const file of cfg.files){
     const src = path.join(cfg.sourceDir, file);
     const dest = path.join(targetBase, file);
+    removeEntry(dest);
+    copyFile(src, dest);
+  }
+  for(const file of cfg.rootFiles || []){
+    const src = path.join(ROOT, file);
+    const dest = path.join(repoDir, file);
     removeEntry(dest);
     copyFile(src, dest);
   }

@@ -1,7 +1,7 @@
 {
   "title": "Aurora Galactica Project Guide",
   "strapline": "A readable, current map of the project: what we are building, how the code and tooling fit together, and what still matters before the polished four-stage 1.0 launch.",
-  "currentGoal": "Ship a polished four-stage 1.0 slice with a cleaner arcade shell, trustworthy public release flow, and a player-ready guide that stays inside the game.",
+  "currentGoal": "Ship a polished four-stage 1.0 slice with native replays, a player-ready in-game guide, and a corrected production publish path that matches beta.",
   "sections": [
     {
       "id": "snapshot",
@@ -14,7 +14,7 @@
         },
         {
           "title": "Where The Game Is Strong",
-          "body": "Manual play says the core slice is healthy enough to launch if the presentation lands cleanly: capture/rescue is now guarded end-to-end, the shell/control rail is much stronger, the release flow is scripted, and the log viewer gives us a practical debugging loop."
+          "body": "Manual play says the core slice is healthy enough to launch if the final trust items land cleanly: capture/rescue is guarded end-to-end, the shell/control rail is much stronger, native replay is in the game, and the remaining release work is mostly production correctness plus final presentation confidence."
         },
         {
           "title": "Main Remaining Gameplay Blocker",
@@ -37,7 +37,7 @@
         "The active 1.0 work is the cabinet shell, icon/control surface, score/guide surfaces, and a short player-focused guide.",
         "Capture/rescue now has meaningful automation coverage, but the remaining launch question is mostly whether the live presentation reads clearly enough.",
         "The special boss-with-two-escorts bonus attack still needs one more readability pass before 1.0 is called done.",
-        "The production-vs-beta operational split and final release-readiness pass remain real launch-significant items."
+        "The production-vs-beta operational split, the public production deploy path, and the final release-readiness pass remain the real launch-significant items."
       ]
     },
     {
@@ -183,7 +183,7 @@
         },
         {
           "title": "Build / Public Sync",
-          "body": "`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces into `Aurora-Galactica`. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff."
+          "body": "`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces and the Pages workflow contract into `Aurora-Galactica`, where Pages should package committed artifacts rather than rebuild stale source. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff."
         },
         {
           "title": "Log Viewer",

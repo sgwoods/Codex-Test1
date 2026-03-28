@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.0.0",
-  "currentFocus": "Polished four-stage 1.0 slice",
-  "strapline": "A compact, shippable Aurora Galactica slice with a fair Stage 4 finish, a rewarding challenge stage, and release-ready presentation.",
+  "currentFocus": "Launch confidence, player-facing polish, and correct production publish flow",
+  "strapline": "A compact, shippable Aurora Galactica slice with native replay, a player-ready shell, and a trustworthy beta-to-production release path.",
   "timeline": [
     {
       "id": "foundation",
@@ -30,14 +30,14 @@
     {
       "id": "challenge",
       "title": "Stage 3 Challenge",
-      "status": "in_progress",
-      "summary": "Manual-backed structure is in place and now plays acceptably, but one last visual/readability polish pass is still likely before 1.0."
+      "status": "done",
+      "summary": "The current launch slice uses an acceptable challenge-stage baseline, with broader variation and fidelity work intentionally deferred unless a fresh regression appears."
     },
     {
       "id": "stage4",
       "title": "Stage 4 Fairness",
-      "status": "in_progress",
-      "summary": "This is the main blocker for 1.0. Collision-heavy deaths are much narrower now, but the finish is not fair enough yet."
+      "status": "done",
+      "summary": "The launch path now treats further Stage 4 retuning as a post-1.0 tuning pass unless a fresh regression makes it launch-critical again."
     },
     {
       "id": "capture",
@@ -54,14 +54,14 @@
     {
       "id": "ship-polish",
       "title": "Ship-Ready Polish",
-      "status": "up_next",
-      "summary": "High scores, results flow, public pages, release notes, and final UI cleanup for the four-stage 1.0 slice."
+      "status": "in_progress",
+      "summary": "Native replay, player guide, icon-rail controls, wait-mode polish, release notes, and production publish correctness are the current prelaunch finish work."
     },
     {
       "id": "release",
       "title": "1.0 Release",
       "status": "up_next",
-      "summary": "Package the polished four-stage slice as a clean, reliable public release."
+      "summary": "Republish production from the current beta candidate once the environment split and final release-readiness pass are confirmed."
     }
   ],
   "legend": [
@@ -75,7 +75,7 @@
     },
     {
       "label": "Fair Finish",
-      "detail": "Stage 4 must feel beatable without cheap collisions or abrupt spikes."
+      "detail": "The launch slice is currently considered healthy enough to ship; further Stage 2 and Stage 4 tuning is now a post-1.0 lane unless new regressions surface."
     },
     {
       "label": "Arcade Moments",
@@ -83,7 +83,7 @@
     },
     {
       "label": "Player Finish",
-      "detail": "High scores, initials, results flow, and public pages should feel finished."
+      "detail": "High scores, replays, guide/help, results flow, and public pages should feel finished and trustworthy."
     }
   ]
 }

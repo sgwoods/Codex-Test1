@@ -15,6 +15,8 @@ const REQUIRED_PRODUCTION = [
   'project-guide.html',
   'player-guide.html',
   'build-info.json',
+  'release-notes.json',
+  'README.md',
   'export.mov.png'
 ];
 

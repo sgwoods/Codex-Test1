@@ -15,6 +15,8 @@ const FILES = [
   'project-guide.html',
   'player-guide.html',
   'build-info.json',
+  'release-notes.json',
+  'README.md',
   'export.mov.png'
 ];
 
@@ -63,7 +65,9 @@ fs.rmSync(DIST_PRODUCTION, { recursive: true, force: true });
 fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
 
 for(const file of FILES){
-  const src = path.join(DIST_DEV, file);
+  const src = file === 'release-notes.json' || file === 'README.md'
+    ? path.join(ROOT, file)
+    : path.join(DIST_DEV, file);
   if(!fs.existsSync(src)) continue;
   fs.copyFileSync(src, path.join(DIST_PRODUCTION, path.basename(file)));
 }

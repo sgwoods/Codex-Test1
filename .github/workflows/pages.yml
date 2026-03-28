@@ -24,26 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        if: github.repository != 'sgwoods/Codex-Test1'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
-
-      - name: Install dependencies
-        if: github.repository != 'sgwoods/Codex-Test1'
-        run: |
-          npm ci
-
-      - name: Build site
-        if: github.repository != 'sgwoods/Codex-Test1'
-        env:
-          BUILD_NUMBER: ${{ github.run_number }}
-        run: |
-          npm run build
 
       - name: Build redirect artifact
         if: github.repository == 'sgwoods/Codex-Test1'
@@ -84,6 +66,7 @@ jobs:
           cp index.html _site/
           cp release-dashboard.html _site/
           cp project-guide.html _site/
+          cp player-guide.html _site/
           cp build-info.json _site/
           cp release-notes.json _site/
           cp export.mov.png _site/

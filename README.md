@@ -310,6 +310,7 @@ npm run local:stop
   - promotes to `dist/production`
   - runs production preflight
   - publishes the lane
+- `Aurora-Galactica` Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.
 - Optional manual inspection steps still exist:
   ```bash
   npm run promote:production
