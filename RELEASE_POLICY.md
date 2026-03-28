@@ -102,18 +102,23 @@ The beta lane is intentionally a snapshot of selected generated artifacts under 
 
 ## Production Publish Workflow
 
-1. Build and validate the current dev output:
+1. Treat production as a promotion from an approved beta candidate, not as a direct publish from arbitrary dev output.
+2. Build and validate the current dev output:
    - `npm run build`
    - plus whatever harness/manual checks are appropriate for the release
-2. Promote the approved dev build into the stable production artifact:
-   - `npm run promote:production`
-3. Run the production preflight:
-   - `npm run publish:check:production`
-4. Publish the generated production surface with:
+3. Promote and review the beta candidate first:
+   - `npm run publish:beta`
+4. Once that beta candidate is explicitly approved, promote the matching release into the stable production artifact:
    - `npm run publish:production`
 5. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/`
      serves the promoted production build
+
+Tracked hardening item:
+
+- `#113`
+  - enforce dev -> beta -> production as the only supported publish chain
+  - production preflight should eventually fail if the current production publish is not sourced from the approved beta candidate
 
 ## Public Project Status Sync Workflow
 

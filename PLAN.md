@@ -200,15 +200,16 @@ Current beta-review cluster:
 - `#47` special squadron spacing
 - `#45` boss damaged-text linger
 - `#38` ship-loss feedback
+- `#76` production vs non-production data separation design
+- `#113` enforce production promotion only from approved beta
 
 Current coding priority once those beta checks are confirmed:
 
-1. `#91` / `#48` / `#44` / `#86` / `#71` / `#82` / `#49` / `#60` / `#103` / `#105` display-shell, icon/control-surface, and score-panel polish
-2. `#74` / `#47` / `#38` / `#45` special-squadron and combat-feedback polish
-3. `#87` wait-mode/demo visual stability
-4. `#106` standardized between-level message presentation
-5. `#76` production vs non-production data separation design
-6. `#85` final release-readiness pass
+1. `#76` production vs non-production data separation design
+2. `#113` enforce production promotion only from approved beta
+3. `#85` final release-readiness pass
+4. `#74` / `#47` / `#38` / `#45` remaining visual polish with live confidence
+5. `#40` / `#73` / `#77` / `#80` / `#88` remaining capture/rescue live confidence
 
 Recent additions since the last review:
 
@@ -229,6 +230,9 @@ Recent additions since the last review:
   returning to wait mode after replay can restart idle audio unexpectedly, so
   replay exit needs to preserve a quiet wait state before the next production
   refresh.
+- `#113` now tracks a release-process rule we want to harden before launch:
+  production should only be promoted from an explicitly approved beta
+  candidate, not directly from arbitrary dev output.
 - Fresh Modem feedback on `2026-03-28` mostly reinforced the current shell/control-surface direction rather than changing the launch strategy:
   - `#105` is effectively a direct refinement of `#86` and is now treated as part of the same active shell pass
   - `#103` extends the shell pass by replacing the hand-toggle model with simultaneous support plus an input/help surface
@@ -246,20 +250,20 @@ Recent additions since the last review:
 | --- | --- | --- | --- | --- | --- | --- |
 | Must Fix Now | `#61` | Shared | Watching | Hosted Stage `3` -> `4` can still hit the empty-playfield edge case, which directly undermines public trust. | Keep transition telemetry live and treat the next reproducible bad run as launch-blocking. | Phase 1 |
 | Must Fix Now | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
+| Must Fix Now | `#113` | Shared | Open | We now have a reliable deploy path, but production can still be promoted directly from the current dev line instead of only from an approved beta candidate. | Enforce dev -> beta -> production as the only supported release chain and fail production preflight unless the exact approved beta candidate is being promoted. | Phase 4 |
 | Must Fix Now | `#85` | Shared | Open | Final release-readiness pass still needs security review, code/docs consistency, and a short players guide. | Schedule the final release-readiness cycle once the visual polish cluster is down to a short list. | Phase 4 |
 | Must Fix Now | `#86` | Codex | Open | The production shell still needs the players-guide / account / scores / feedback-reporting / persistent-settings layout to feel intentionally shipped. | Finish the production-shell pass, move the remaining player actions into the icon/control surface, and confirm settings pause/resume cleanly during active play. | Phase 4 |
 | Must Fix Now | `#103` / `#105` | Codex | Open | Fresh March 28 Modem feedback confirms the shell still wants bug-report promotion, tooltip-first icons, and simultaneous left/right-handed support without a mode toggle. | Finish the icon rail around tooltip-first controls, promote bug reporting into the rail, and replace the handed toggle with always-on combined controls plus a control index surface. | Phase 3 |
 | Must Fix Now | `#91` | Codex | Open | The score header still wants stronger arcade alignment with the playfield top edge. | Lock the top HUD to the gameboard width and edge in the shell polish pass. | Phase 2 |
 | Must Fix Now | `#48` | Codex | Open | The browser presentation still benefits from a clearer playfield frame / bezel so the arcade boundary reads immediately. | Finish a stable playfield frame treatment and keep it aligned with the HUD shell. | Phase 2 |
 | Must Fix Now | `#44` | Codex | Open | A bottom-right stage indicator is part of the cabinet-like HUD language and belongs in the same visual shell pass as the top HUD/frame work. | Add the stage indicator as part of the HUD polish pass rather than as a separate later feature. | Phase 2 |
-| Must Fix Now | `#82` | Codex | Fix in dev / needs ship | Wait-mode score surfaces now shift into a centered overlay locally instead of intruding into the playfield, but that resize behavior still needs hosted confirmation. | Refresh beta and verify the wait-mode score overlay stays intentional across common desktop sizes. | Phase 2 |
+| Must Fix Now | `#82` | Codex | Automated check + shipped | The wait-mode score overlay now has a passing regression check and is live on beta/production with the centered overlay layout. | Keep the new wait-overlay check green and close after final manual confidence. | Phase 2 |
 | Must Fix Now | `#49` / `#60` | Codex | Open | Score-view controls now belong to the player-facing shell, but their state changes/loading cues still feel too subtle. | Make score-view switches open or animate an explicit scoreboard/loading surface as part of the shell polish pass. | Phase 3 |
 | Must Fix Now | `#74` | Codex | Open | Latest manual beta pass still says the three-ship bonus/special squadron is too spread out. | Tighten the three-ship attack geometry again and keep the squadron spacing check green. | Phase 2 |
 | Must Fix Now | `#47` | Codex | Open | Latest manual beta pass still says the special squadron reads too loose visually. | Tighten lateral/vertical squadron coherence and recheck it in beta. | Phase 2 |
 | Must Fix Now | `#38` | Codex | Beta review | Ship-loss feedback is better, but it is still one of the most visible “finished/not finished” signals in live play. | Verify and polish explosion, pause, and recovery feel. | Phase 2 |
 | Must Fix Now | `#45` | Codex | Automated check + manual confirm | Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact. | Confirm boss first-hit feedback still looks clean in beta and close it if it does. | Phase 2 |
-| Must Fix Now | `#87` | Codex | Improved in dev / needs ship | Wait-mode/demo ship jitter is materially reduced after smoothing the attract pilot and adding a short target lock, but it still wants hosted confirmation before we call it done. | Refresh beta with the attract stabilizer and verify the remaining shimmer is acceptable in live review. | Phase 2 |
-| Must Fix Now | `#112` | Codex | Fix in dev / needs ship | Exiting replay back to wait mode can restart idle audio unexpectedly, which is especially annoying when the tab stays open after review. | Ship the attract/wait-mode audio fix and confirm replay exit returns to a quiet idle state. | Phase 3 |
+| Must Fix Now | `#112` | Codex | Automated check + shipped | Replay exit now has a passing regression check and the quiet-wait fix is live on beta/production. | Keep the replay-exit audio check green and close after one last manual confidence pass. | Phase 3 |
 | Must Fix Now | `#40` | Codex | Partial automation + beta review | Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation. | Verify the updated beta capture feedback in manual play and close if it feels clear. | Phase 3 |
 | Must Fix Now | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
 | Must Fix Now | `#88` | Codex | Low-risk beta confirm | Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state. | Keep one more live confirmation while we close the remaining capture items. | Phase 3 |
@@ -268,8 +272,8 @@ Recent additions since the last review:
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
 | Should Fix | `#73` | Codex | Automated check + beta review | Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked. | Verify the feel/fairness of the shoot-to-save window in beta. | Phase 3 |
 | Should Fix Before Launch | `#79` / `#107` | Codex | Beta review | The velocity-based control model is now in place, but fine single-tap alignment and overall feel still need final live confidence. | Keep the current movement baseline, do one more hosted beta pass, and only retune if fresh evidence says targeting still overshoots. | Phase 1 |
-| Should Fix Before Launch | `#106` | Codex | Fix in dev / needs ship | Between-level and in-game status messaging now uses a shared centered board-message path locally, including multi-line ship-loss text. | Refresh beta and confirm the centered message treatment feels consistent in live play. | Phase 2 |
-| Should Fix Before Launch | `#108` | Codex | Likely fixed / needs confirm | Current start-position smoke passes, so the mid-screen respawn/new-game issue appears fixed on the dev line, but the report was severe enough that it still deserves one explicit hosted replay. | Confirm second-game spawn reset in beta and close if the ship reliably starts at the bottom center. | Phase 1 |
+| Should Fix Before Launch | `#106` | Codex | Automated check + shipped | Between-level and in-game status messaging now uses a shared centered board-message path with a passing regression check, and the current implementation is live on beta/production. | Keep the board-message check green and close after one last visual confidence pass. | Phase 2 |
+| Should Fix Before Launch | `#108` | Codex | Automated check + shipped | New-game spawn reset now has a passing restart regression check and matches the expected bottom-center start position. | Close after one last hosted confidence pass if no contradictory report appears. | Phase 1 |
 | Should Fix Before Launch | `#109` | Codex | Resolved in behavior / close after docs confirm | Browser `Fn` is not reliable on the web, and the shipped left-hand mapping is now documented and implemented as `Ctrl` left / `Command` right. | Confirm the player guide/controls overlay wording is right in beta, then close as a clarified web-platform constraint. | Phase 3 |
 | Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
 | Should Fix Before Launch | `#71` | Codex | Queued | Audio control belongs in the shipped settings/control surface if it lands cleanly in the same shell work. | Pull mute into the `v1` settings pass rather than leaving it as indefinite polish. | Phase 3 |
