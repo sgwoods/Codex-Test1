@@ -48,6 +48,7 @@ const LEADERBOARD={
  loading:{all:0,validated:0,mine:0},
  user:null,
  profile:null,
+ accountNotice:'',
   lastRemoteOk:0,
   submitBusy:0,
  authBusy:0,
@@ -64,6 +65,9 @@ function remoteLeaderboardPolicyLabel(){
 }
 function nonProductionAccountSummary(){
  return 'Pilot account is disabled in this lane. Shared scores are read-only; your runs save locally on this device.';
+}
+function setAccountNotice(text=''){
+ LEADERBOARD.accountNotice=String(text||'').trim();
 }
 function normalizeLeaderboardViewForLane(view){
  if(view==='mine'&&!REMOTE_AUTH_ENABLED)return 'local';
@@ -294,6 +298,7 @@ function syncAccountUi(){
  if(accountSummary){
   if(pending)accountSummary.textContent='Connecting leaderboard...';
   else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
+  else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
   else if(!REMOTE_AUTH_ENABLED)accountSummary.textContent=nonProductionAccountSummary();
   else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
@@ -484,9 +489,11 @@ async function signUpAccount(){
  const password=String(accountPassword?.value||'');
  const initials=sanitizeInitials(accountInitials?.value||'').slice(0,3);
  if(!email||!password){
-  if(accountSummary)accountSummary.textContent='Enter an email and password first.';
+  setAccountNotice('Enter an email and password first.');
+  syncAccountUi();
   return;
  }
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const {error}=await LEADERBOARD.client.auth.signUp({
@@ -499,11 +506,11 @@ async function signUpAccount(){
  });
  LEADERBOARD.authBusy=0;
  if(error){
-  if(accountSummary)accountSummary.textContent=`Signup failed: ${error.message}`;
+  setAccountNotice(`Signup failed: ${error.message}`);
   syncAccountUi();
   return;
  }
- if(accountSummary)accountSummary.textContent='Check your email to verify your account, then log in here.';
+ setAccountNotice('Check your email to verify your account, then log in here.');
  syncAccountUi();
 }
 async function loginAccount(){
@@ -511,34 +518,40 @@ async function loginAccount(){
  const email=String(accountEmail?.value||'').trim();
  const password=String(accountPassword?.value||'');
  if(!email||!password){
-  if(accountSummary)accountSummary.textContent='Enter your email and password first.';
+  setAccountNotice('Enter your email and password first.');
+  syncAccountUi();
   return;
  }
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const {error}=await LEADERBOARD.client.auth.signInWithPassword({email,password});
  LEADERBOARD.authBusy=0;
  if(error){
-  if(accountSummary)accountSummary.textContent=`Login failed: ${error.message}`;
+  setAccountNotice(`Login failed: ${error.message}`);
   syncAccountUi();
   return;
  }
  if(accountPassword)accountPassword.value='';
+ setAccountNotice('');
  syncAccountUi();
 }
 async function logoutAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!REMOTE_AUTH_ENABLED)return;
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const {error}=await LEADERBOARD.client.auth.signOut();
  LEADERBOARD.authBusy=0;
- if(error&&accountSummary)accountSummary.textContent=`Logout failed: ${error.message}`;
+ if(error)setAccountNotice(`Logout failed: ${error.message}`);
  if(!error&&accountPassword)accountPassword.value='';
+ if(!error)setAccountNotice('');
  syncAccountUi();
 }
 async function saveAccountInitials(){
  if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!REMOTE_AUTH_ENABLED)return;
  const initials=sanitizeInitials(accountInitials?.value||'').padEnd(3,'-').slice(0,3);
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const [{data,error},metaResult]=await Promise.all([
@@ -547,13 +560,13 @@ async function saveAccountInitials(){
  ]);
  LEADERBOARD.authBusy=0;
  if(error){
-  if(accountSummary)accountSummary.textContent=`Could not save initials: ${error.message}`;
+  setAccountNotice(`Could not save initials: ${error.message}`);
   syncAccountUi();
   return;
  }
  if(metaResult?.data?.user)LEADERBOARD.user=metaResult.data.user;
  LEADERBOARD.profile=data||{user_id:LEADERBOARD.user.id,display_initials:initials};
- if(accountSummary)accountSummary.textContent=`Saved display initials ${initials}.`;
+ setAccountNotice(`Saved display initials ${initials}.`);
  syncAccountUi();
 }
 async function initLeaderboard(){
@@ -602,12 +615,14 @@ async function initLeaderboard(){
   scheduleLeaderboardRefresh();
   if(REMOTE_AUTH_ENABLED){
    LEADERBOARD.client.auth.onAuthStateChange(async(_event,sessionState)=>{
-    LEADERBOARD.user=sessionState?.user||null;
+   LEADERBOARD.user=sessionState?.user||null;
     if(LEADERBOARD.user){
+     setAccountNotice('');
      hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
      await loadOwnProfile();
     }
     else{
+     setAccountNotice('');
      LEADERBOARD.profile=null;
      LEADERBOARD.remote.mine=[];
      LEADERBOARD.cacheStamp.mine=0;
