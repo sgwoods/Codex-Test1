@@ -127,6 +127,8 @@ npm run local:stop
   - `/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md`
 - Home machine setup:
   - `/Users/stevenwoods/Documents/Codex-Test1/HOME_MACHINE_SETUP.md`
+- Home Codex prompt:
+  - `/Users/stevenwoods/Documents/Codex-Test1/HOME_CODEX_PROMPT.md`
 - Repo-managed Codex skill source:
   - `/Users/stevenwoods/Documents/Codex-Test1/codex-skills/aurora-dev-refresh/SKILL.md`
 - Architecture overview:

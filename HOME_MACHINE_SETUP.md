@@ -13,6 +13,10 @@ Use `Codex-Test1` as the only development repo on both machines.
   - public release host only
   - do not use it as the normal day-to-day development repo
 
+For a maintained first-session prompt you can paste into the home Codex instance, use:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/HOME_CODEX_PROMPT.md`
+
 ## Prerequisites
 
 Install on the home machine:
