@@ -184,6 +184,12 @@ plan.
   runtime refactors
 - separate engine-like concerns from game-specific rules only when the seam is
   real and already helping Aurora
+- decouple visual/stylistic assets toward a swappable brand-package only after
+  the four-stage slice is stable enough that theming work does not destabilize
+  launch
+- evolve the log viewer from a local artifact tree toward an optional remote
+  catalog after `1.0`, while keeping the current local-first debugging flow as
+  the default
 - use Aurora's ongoing work to reduce the eventual cost of supporting Galaxian
   and other future variants without pausing product progress now
 

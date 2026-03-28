@@ -209,6 +209,15 @@ Current coding priority once those beta checks are confirmed:
 4. `#76` production vs non-production data separation design
 5. `#9` remaining challenge-stage fidelity
 
+Recent additions since the last review:
+
+- `#95` is now the standing process reminder that persona ladders must be rechecked after meaningful difficulty changes.
+- `#96` is a release-support watch item, not a fresh gameplay blocker:
+  artifact-quality checks and repair landed, but recorder trust now needs to stay explicitly green.
+- `#98` largely reflects cleanup that has already landed:
+  generated artifacts moved under `dist/` and publish scripts now use scripted lane promotion.
+- `#97` and `#99` are useful platform directions, but they should not displace the four-stage `1.0` slice.
+
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
 | Must Fix | `#80` | Codex | Beta review + automation | Carry-state automation now proves drag-up stays `below` and docked/wait-mode carried states render `above`, but the exact swap timing still needs live eyes. | Verify the fighter flips from below to above only at the correct top-dock moment in beta. | Phase 3 |
@@ -228,6 +237,9 @@ Current coding priority once those beta checks are confirmed:
 | Must Fix | `#85` | Shared | Open | Final release-readiness pass still needs security review, code/docs consistency, and a short players guide. | Schedule the final release-readiness cycle once the blocker cluster is down to a short list. | Phase 4 |
 | Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
 | Should Fix | `#73` | Codex | Automated check + beta review | Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked. | Verify the feel/fairness of the shoot-to-save window in beta. | Phase 3 |
+| Should Fix | `#95` | Shared | Process | We now use persona distributions to judge balance, so the ladder can drift silently after gameplay changes. | Run a quick persona sanity pass after each meaningful Stage `2` / `4` tuning change. | Phase 1 |
+| Should Fix | `#96` | Shared | Watch | Recorder repair, artifact quality checks, and salvage scripts landed; `64` historical videos are still unrecoverable but new runs are now checkable. | Keep `npm run harness:check:video-artifact` green and file immediately if new artifacts regress. | Phase 4 |
+| Should Fix | `#98` | Shared | Implemented / close | Dist-based release outputs, publish preflights, and scripted beta/production publishing are now in place. | Let the new flow soak briefly, then close the issue once no further migration fallout appears. | Phase 4 |
 | Should Fix | `#79` | Codex | Beta review | Manual beta play says keyboard control is better, but fine single-tap alignment still needs a final confidence check. | Keep the current manual-control baseline and revisit only if new live evidence says the feel is still off. | Phase 1 |
 | Should Fix | `#4` | Shared | Watch | Stage `1` feels acceptable manually, with mixed harness urgency. | Revisit only if evidence worsens. | Phase 1 |
 | Should Fix | `#62` | Shared | Watch | Self-play can still fail early in Stage `1`. | Keep the persona baseline in view while tuning. | Phase 1 |
@@ -238,6 +250,8 @@ Current coding priority once those beta checks are confirmed:
 | Can Slip | `#65` | Codex | Queued | Aurora / wintry theming is still later polish. | Apply thematic art after gameplay stabilizes. | Phase 2 |
 | Can Slip | `#71` | Codex | Queued | Mute is useful, but not launch-blocking. | Add an audio toggle in the UI. | Phase 3 |
 | Can Slip | `#91` | Codex | Queued | The scoreboard/header should align cleanly with the top edge of the playfield for arcade fidelity. | Lock the scoreboard to the gameboard top edge in the UI polish pass. | Phase 2 |
+| Post-1.0 | `#97` | Shared | Open | The log viewer currently depends on a local artifact tree, which is good enough for current debugging but not collaboration at distance. | Keep the viewer local-first for `1.0`; design a remote artifact catalog after launch. | Post-1.0 |
+| Post-1.0 | `#99` | Shared | Open | Swappable brand/style packages are strategically useful, but they are a full platform/theming abstraction rather than a four-stage launch need. | Capture renderer/theme seams incrementally during `v1`; do the full brand-package abstraction after launch. | Post-1.0 |
 
 Items currently treated as post-`1.0` unless they become necessary for
 external playtesting or operational stability:
