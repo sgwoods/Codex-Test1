@@ -4,12 +4,17 @@ const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.
 const cabinetShell=document.getElementById('cabinetShell');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
-const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
+const guideDockBtn=document.getElementById('guideDockBtn');
+const controlsDockBtn=document.getElementById('controlsDockBtn');
+const feedbackDockBtn=document.getElementById('feedbackDockBtn');
+const helpModal=document.getElementById('helpModal'),helpClose=document.getElementById('helpClose'),helpGuideFrame=document.getElementById('helpGuideFrame'),helpOpenWindowBtn=document.getElementById('helpOpenWindowBtn');
+const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),helpPanels=Array.from(document.querySelectorAll('[data-help-panel]'));
+const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
-const handToggleBtn=document.getElementById('handToggleBtn');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
+const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
@@ -23,7 +28,6 @@ const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
-const HAND_SWITCH_PREF_KEY=`${STORAGE_PREFIX}SwitchHand`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const LEGACY_STORAGE_KEYS={
@@ -32,11 +36,9 @@ const LEGACY_STORAGE_KEYS={
  [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
- [HAND_SWITCH_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}SwitchHand`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
 };
-let switchHandMode=readPref(HAND_SWITCH_PREF_KEY)==='1';
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 function readPref(key){
  try{
@@ -79,6 +81,7 @@ const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let helpOpen=0,helpPrevPaused=0,helpMode='controls';
 let settingsOpen=0,settingsPrevPaused=0;
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
@@ -362,6 +365,7 @@ function startAttractDemo(opts={}){
  resetSession('attract_demo');
  gameOverHtml='';gameOverState=null;
  started=0;paused=0;
+ syncPauseUi();
  ATTRACT.active=1;
  ATTRACT.phase='demo';
  ATTRACT.timer=11.5;
@@ -379,6 +383,7 @@ function stopAttractLoop(){
  ATTRACT.phase='';
  ATTRACT.timer=0;
  S.attract=0;
+ syncPauseUi();
 }
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
@@ -494,25 +499,16 @@ function loadTestCfg(){
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function movementLeftCodes(){
- return switchHandMode?['Fn','ControlLeft']:['ArrowLeft','KeyA'];
+ return ['ArrowLeft','KeyA','Fn','ControlLeft'];
 }
 function movementRightCodes(){
- return switchHandMode?['AltLeft']:['ArrowRight','KeyD'];
+ return ['ArrowRight','KeyD','AltLeft'];
 }
 function movementControlCodes(){
  return [...movementLeftCodes(),...movementRightCodes()];
 }
 function controlMoveHelpHtml(){
- if(switchHandMode)return `<span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
- return `ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
-}
-function syncControlUi(){
- if(handToggleBtn){
-  handToggleBtn.dataset.handMode=switchHandMode?'switched':'standard';
-  handToggleBtn.setAttribute('aria-pressed',switchHandMode?'true':'false');
-  handToggleBtn.setAttribute('aria-label',switchHandMode?'Switched controls: Fn/Ctrl left, Option right':'Standard controls: arrows move');
-  handToggleBtn.title=switchHandMode?'Switched controls: Fn/Ctrl left, Option right':'Standard controls: arrows move';
- }
+ return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
 }
 function syncAudioUi(){
  if(!muteToggleBtn)return;
@@ -524,17 +520,30 @@ function syncAudioUi(){
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
 }
+function syncPauseUi(){
+ if(!pauseToggleBtn)return;
+ const canPause=!!started;
+ const active=!!(started&&paused&&!feedbackOpen&&!helpOpen&&!settingsOpen);
+ pauseToggleBtn.disabled=!canPause;
+ pauseToggleBtn.dataset.paused=active?'true':'false';
+ pauseToggleBtn.setAttribute('aria-pressed',active?'true':'false');
+ pauseToggleBtn.setAttribute('aria-label',active?'Resume game':'Pause game');
+ pauseToggleBtn.title=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
+ const icon=pauseToggleBtn.querySelector('.dockIcon');
+ if(icon)icon.textContent=active?'▶':'⏸';
+ pauseToggleBtn.classList.toggle('active',active);
+}
+function toggleGameplayPause(){
+ if(!started)return;
+ paused=!paused;
+ if(!paused&&settingsOpen)closeSettings();
+ syncPauseUi();
+}
 function setAudioMuted(next,opts={}){
  audioMuted=!!next;
  writePref(AUDIO_MUTED_PREF_KEY,audioMuted?'1':'0');
  syncAudioUi();
  if(!opts.silent)showToast(audioMuted?'Game audio muted':'Game audio on');
-}
-function setSwitchHandMode(next,opts={}){
- switchHandMode=!!next;
- writePref(HAND_SWITCH_PREF_KEY,switchHandMode?'1':'0');
- syncControlUi();
- if(!opts.silent)showToast(switchHandMode?'Switched movement to Fn/Ctrl + Option':'Switched movement to arrows');
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
@@ -557,26 +566,95 @@ function syncSettingsUi(){
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
 }
+function syncHelpUi(){
+ if(!helpModal)return;
+ helpModal.classList.toggle('open',helpOpen);
+ helpModal.setAttribute('aria-hidden',helpOpen?'false':'true');
+ if(guideDockBtn){
+  const open=helpOpen&&helpMode==='guide';
+  guideDockBtn.classList.toggle('open',open);
+  guideDockBtn.setAttribute('aria-expanded',open?'true':'false');
+ }
+ if(controlsDockBtn){
+  const open=helpOpen&&helpMode==='controls';
+  controlsDockBtn.classList.toggle('open',open);
+  controlsDockBtn.setAttribute('aria-expanded',open?'true':'false');
+ }
+ helpTabButtons.forEach(btn=>{
+  const active=btn.dataset.helpTab===helpMode;
+  btn.setAttribute('aria-selected',active?'true':'false');
+  btn.classList.toggle('active',active);
+ });
+ helpPanels.forEach(panel=>{
+  const active=panel.dataset.helpPanel===helpMode;
+  panel.hidden=!active;
+  panel.classList.toggle('visible',active);
+ });
+ if(helpGuideFrame&&helpMode==='guide'&&!helpGuideFrame.src)helpGuideFrame.src=playersGuideUrl();
+}
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
- syncControlUi();
  syncAudioUi();
+ syncPauseUi();
  syncSettingsUi();
+ syncHelpUi();
 }
 function closeSettings(){
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
  syncSettingsUi();
+ syncPauseUi();
 }
 function openSettings(){
  settingsPrevPaused=paused;
  if(started&&!paused)paused=1;
  settingsOpen=1;
  syncSettingsUi();
+ syncPauseUi();
 }
 function logViewerUrl(){
  return 'http://127.0.0.1:4311/';
+}
+function playersGuideUrl(){
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}project-guide.html`;
+}
+function openPlayersGuideWindow(){
+ const win=window.open(playersGuideUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened players guide');
+ }else showToast('Allow popups to open the players guide');
+}
+function openHelp(mode='controls'){
+ if(helpOpen&&helpMode===mode)return;
+ closeSettings();
+ if(feedbackOpen)closeFeedback(1);
+ helpPrevPaused=paused;
+ if(started&&!paused)paused=1;
+ helpMode=mode==='guide'?'guide':'controls';
+ helpOpen=1;
+ keys={};keyState={};
+ logEvent('help_open',{mode:helpMode});
+ syncHelpUi();
+ syncPauseUi();
+ setTimeout(()=>{
+  const target=helpMode==='guide'?helpOpenWindowBtn:helpTabButtons.find(btn=>btn.dataset.helpTab===helpMode);
+  target?.focus?.();
+ },0);
+}
+function closeHelp(force=0){
+ if(!helpOpen&&!force)return;
+ helpOpen=0;
+ if(started)paused=helpPrevPaused;
+ logEvent('help_close',{force:!!force,mode:helpMode});
+ syncHelpUi();
+ syncPauseUi();
+}
+function setHelpMode(mode='controls'){
+ helpMode=mode==='guide'?'guide':'controls';
+ if(helpOpen)logEvent('help_tab',{mode:helpMode});
+ syncHelpUi();
 }
 function openLogViewer(){
  const win=window.open(logViewerUrl(), '_blank', 'noopener');
@@ -683,12 +761,17 @@ function showToast(t){
 function openFeedback(){
  if(feedbackOpen)return;
  closeSettings();
+ if(helpOpen)closeHelp(1);
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};keyState={};
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
- feedbackBtn.setAttribute('aria-expanded','true');
+ if(feedbackDockBtn){
+  feedbackDockBtn.classList.add('open');
+  feedbackDockBtn.setAttribute('aria-expanded','true');
+ }
  setFeedbackStatus('');
+ syncPauseUi();
  setTimeout(()=>fbSummary.focus(),0);
 }
 function closeFeedback(force=0){
@@ -697,7 +780,11 @@ function closeFeedback(force=0){
  logEvent('feedback_close',{force:!!force});
  feedbackModal.classList.remove('open');
  feedbackModal.setAttribute('aria-hidden','true');
- feedbackBtn.setAttribute('aria-expanded','false');
+ if(feedbackDockBtn){
+  feedbackDockBtn.classList.remove('open');
+  feedbackDockBtn.setAttribute('aria-expanded','false');
+ }
+ syncPauseUi();
 }
 function openMailFallback(subject,lines){
  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
@@ -792,7 +879,12 @@ addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
-feedbackBtn.addEventListener('click',openFeedback);
+if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
+if(controlsDockBtn)controlsDockBtn.addEventListener('click',()=>openHelp('controls'));
+if(feedbackDockBtn)feedbackDockBtn.addEventListener('click',openFeedback);
+if(helpClose)helpClose.addEventListener('click',()=>closeHelp());
+if(helpOpenWindowBtn)helpOpenWindowBtn.addEventListener('click',openPlayersGuideWindow);
+helpTabButtons.forEach(btn=>btn.addEventListener('click',()=>setHelpMode(btn.dataset.helpTab)));
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
  if(VIDEO_REC.active)return;
@@ -803,9 +895,10 @@ recordBtn.addEventListener('click',()=>{
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
-if(handToggleBtn)handToggleBtn.addEventListener('click',()=>setSwitchHandMode(!switchHandMode,{silent:0}));
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
+if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
+if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)closeHelp();});
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
@@ -819,6 +912,7 @@ addEventListener('keydown',e=>{
  const now=performance.now();
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
+ if(helpOpen){if(e.code==='Escape'){e.preventDefault();closeHelp();}return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
@@ -907,8 +1001,7 @@ addEventListener('keydown',e=>{
   stopAttractLoop();start();
  }
  if(started&&e.code==='KeyP'){
-  paused=!paused;
-  if(!paused&&settingsOpen)closeSettings();
+  toggleGameplayPause();
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });

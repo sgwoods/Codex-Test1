@@ -24,11 +24,18 @@
 <div id="cabinetRightFrame" aria-hidden="true">
   <div id="statusDock">
     <div id="dockQuickTools">
-      <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
-      <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
-      <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
-      <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Developer Tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
-      <button id="handToggleBtn" type="button" aria-pressed="false" aria-label="Toggle handed controls" title="Standard controls"><span class="dockIcon" aria-hidden="true">⇆</span></button>
+      <div class="dockToolGroup dockToolGroupPrimary">
+        <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
+        <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
+        <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
+        <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
+        <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
+      </div>
+      <div class="dockToolGroup dockToolGroupUtility">
+        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
+        <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
+        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Developer Tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
+      </div>
     </div>
   </div>
 </div>
@@ -38,7 +45,6 @@
   <h3>Developer Tools</h3>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
-    <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
@@ -64,6 +70,57 @@
     <span id="settingsNotesLabel">Latest Note</span>
     <span id="settingsNotesTitle">{{LATEST_RELEASE_TITLE}}</span>
     <span id="settingsNotesBody">{{LATEST_RELEASE_BODY}}</span>
+  </div>
+</div>
+<div id="helpModal" aria-hidden="true">
+  <div id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div id="helpHead">
+      <div>
+        <h2 id="helpTitle">Pilot Reference</h2>
+        <div id="helpSubtitle">Keep the game in view while you check controls and the guide.</div>
+      </div>
+      <button type="button" id="helpClose" aria-label="Close reference">×</button>
+    </div>
+    <div id="helpTabs" role="tablist" aria-label="Reference tabs">
+      <button type="button" id="helpTabControls" data-help-tab="controls" aria-selected="true" aria-controls="helpControlsPanel">Controls</button>
+      <button type="button" id="helpTabGuide" data-help-tab="guide" aria-selected="false" aria-controls="helpGuidePanel">Guide</button>
+    </div>
+    <div id="helpPanels">
+      <section id="helpControlsPanel" class="helpSection visible" data-help-panel="controls">
+        <div id="controlsLegend">
+          <div class="controlCard">
+            <span class="controlCardIcon" aria-hidden="true">🕹</span>
+            <span class="controlCardTitle">Movement</span>
+            <span class="controlCardBody">Use <strong>Arrow Left/Right</strong> or <strong>A / D</strong>. For cabinet-style play, <strong>Fn or Ctrl</strong> moves left and <strong>Option</strong> moves right.</span>
+          </div>
+          <div class="controlCard">
+            <span class="controlCardIcon" aria-hidden="true">🚀</span>
+            <span class="controlCardTitle">Fire</span>
+            <span class="controlCardBody">Press <strong>Space</strong> to fire. The game supports both-handed movement layouts at the same time.</span>
+          </div>
+          <div class="controlCard">
+            <span class="controlCardIcon" aria-hidden="true">⏸</span>
+            <span class="controlCardTitle">Pause</span>
+            <span class="controlCardBody"><strong>P</strong> pauses the run. <strong>T</strong> opens Developer Tools. <strong>L</strong> exports the log and <strong>X</strong> exports and returns to wait mode.</span>
+          </div>
+        </div>
+        <div id="controlsIndex">
+          <div class="controlRow"><span class="controlKeys">Arrow Left / A / Fn / Ctrl</span><span class="controlAction">Move left</span></div>
+          <div class="controlRow"><span class="controlKeys">Arrow Right / D / Option</span><span class="controlAction">Move right</span></div>
+          <div class="controlRow"><span class="controlKeys">Space</span><span class="controlAction">Fire</span></div>
+          <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
+          <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
+          <div class="controlRow"><span class="controlKeys">L</span><span class="controlAction">Export session log</span></div>
+          <div class="controlRow"><span class="controlKeys">X</span><span class="controlAction">Export and return to wait mode</span></div>
+        </div>
+      </section>
+      <section id="helpGuidePanel" class="helpSection" data-help-panel="guide" hidden>
+        <div id="helpGuideActions">
+          <button type="button" id="helpOpenWindowBtn">Open in New Window</button>
+        </div>
+        <iframe id="helpGuideFrame" title="Aurora Galactica guide" loading="lazy"></iframe>
+      </section>
+    </div>
   </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
