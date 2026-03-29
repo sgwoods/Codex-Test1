@@ -779,14 +779,8 @@ function update(dt){
  else if(!S.attract&&harnessPersona&&manualFire)shoot();
 
  const alive=S.e.filter(e=>e.hp>0);
+ const normalStageCleared=!alive.length&&!S.challenge;
  S.liveCount=alive.length;
- if(!alive.length&&!S.challenge){
-  if(S.attract){logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'stage_clear'});enterAttractScores();return}
-  logEvent('stage_clear',{stage:S.stage,score:S.score});
-  S.stage++;
-  queueStageTransition();
-  return
- }
  if(S.challenge&&!alive.length&&!S.ch.done){
   logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(S.ch.upperBandY||PLAY_H*.5),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
   S.ch.done=1;
@@ -932,6 +926,17 @@ function update(dt){
    if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;
    else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2)});sfx.rescue();sfx.join()}
   }
+ }
+ if(normalStageCleared){
+  // Let a released captured fighter finish its return/join flow before the
+  // stage transition starts. Without this, killing the last carrying boss on
+  // descent can queue stage clear immediately and skip the dual-fighter join.
+  if(S.cap)return;
+  if(S.attract){logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'stage_clear'});enterAttractScores();return}
+  logEvent('stage_clear',{stage:S.stage,score:S.score});
+  S.stage++;
+  queueStageTransition();
+  return
  }
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }

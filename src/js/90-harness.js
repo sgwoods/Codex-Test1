@@ -258,6 +258,20 @@ window.__galagaHarness__={
   logEvent('harness_trigger_carried_boss_kill',{boss:boss.id,dive:boss.dive});
   return true;
  },
+ clearNonCarryingEnemies(){
+  const carryingBoss=S.e.find(e=>e.hp>0&&e.t==='boss'&&e.carry);
+  if(!carryingBoss)return false;
+  let cleared=0;
+  for(const e of S.e){
+   if(e.id===carryingBoss.id)continue;
+   if(e.hp>0){
+    e.hp=0;
+    cleared++;
+   }
+  }
+  logEvent('harness_clear_non_carrying_enemies',{boss:carryingBoss.id,cleared});
+  return true;
+ },
  triggerBossFirstHit(){
   const boss=S.e.find(e=>e.hp>1&&e.t==='boss');
   if(!boss)return false;

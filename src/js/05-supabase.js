@@ -12,22 +12,44 @@ const leaderboardDockBtn=document.getElementById('leaderboardDockBtn');
 const accountDockBtn=document.getElementById('accountDockBtn');
 const accountPanel=document.getElementById('accountPanel');
 const accountPanelClose=document.getElementById('accountPanelClose');
+const accountCredentials=document.getElementById('accountCredentials');
 const accountEmail=document.getElementById('accountEmail');
+const accountEmailLabel=document.getElementById('accountEmailLabel');
 const accountPassword=document.getElementById('accountPassword');
+const accountPasswordLabel=document.getElementById('accountPasswordLabel');
+const accountRecoveryFields=document.getElementById('accountRecoveryFields');
+const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
 const accountLoginBtn=document.getElementById('accountLoginBtn');
+const accountResetBtn=document.getElementById('accountResetBtn');
+const accountApplyResetBtn=document.getElementById('accountApplyResetBtn');
 const accountLogoutBtn=document.getElementById('accountLogoutBtn');
+const accountInitialsSection=document.getElementById('accountInitialsSection');
 const accountInitials=document.getElementById('accountInitials');
 const accountSaveInitialsBtn=document.getElementById('accountSaveInitialsBtn');
+const accountInitialsDisplay=document.getElementById('accountInitialsDisplay');
 const accountSummary=document.getElementById('accountSummary');
 const accountBest=document.getElementById('accountBest');
 const accountRecent=document.getElementById('accountRecent');
 const resetTestPilotScoresBtn=document.getElementById('resetTestPilotScoresBtn');
 const pilotStamp=document.getElementById('pilotStamp');
+const accountPanelTitle=document.getElementById('accountPanelTitle');
+const accountPanelSub=document.getElementById('accountPanelSub');
+const accountDockIcon=document.getElementById('accountDockIcon');
+const accountDockLabel=document.getElementById('accountDockLabel');
+const accountDockStatus=document.getElementById('accountDockStatus');
+const accountPilotCallsign=document.getElementById('accountPilotCallsign');
+const accountPilotStatus=document.getElementById('accountPilotStatus');
+const accountIdentityEmail=document.getElementById('accountIdentityEmail');
+const accountIdentityUserId=document.getElementById('accountIdentityUserId');
+const accountFlightStats=document.getElementById('accountFlightStats');
+const accountRecordsTop5=document.getElementById('accountRecordsTop5');
 const SUPABASE_URL='{{SUPABASE_URL}}';
 const SUPABASE_ANON_KEY='{{SUPABASE_ANON_KEY}}';
 const TEST_ACCOUNT_EMAIL='{{TEST_ACCOUNT_EMAIL}}';
 const TEST_ACCOUNT_USER_ID='{{TEST_ACCOUNT_USER_ID}}';
+const TEST_ACCOUNT_EMAILS={{TEST_ACCOUNT_EMAILS_JSON}};
+const TEST_ACCOUNT_USER_IDS={{TEST_ACCOUNT_USER_IDS_JSON}};
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
@@ -52,8 +74,9 @@ const LEADERBOARD={
  profile:null,
  accountNotice:'',
   lastRemoteOk:0,
-  submitBusy:0,
+ submitBusy:0,
  authBusy:0,
+ recoveryMode:0,
  primed:0,
  refreshTimer:0,
  panelOpen:0,
@@ -66,7 +89,7 @@ function remoteLeaderboardPolicyLabel(){
  return remoteWriteEnabled()?'live':'read-only mirror';
 }
 function nonProductionAccountSummary(){
- if(testAccountEnabled())return `Test pilot lane active for ${TEST_ACCOUNT_EMAIL}. Shared scores stay read-only unless that pilot is signed in.`;
+ if(testAccountEnabled())return `Test pilot lane active for ${configuredTestPilotLabel()}. Shared scores stay read-only unless one of those pilots is signed in.`;
  return 'Pilot account is disabled in this lane. Shared scores are read-only; your runs save locally on this device.';
 }
 function setAccountNotice(text=''){
@@ -75,15 +98,43 @@ function setAccountNotice(text=''){
 function normalizeTestAccountEmail(value=''){
  return String(value||'').trim().toLowerCase();
 }
+function configuredTestAccountEmails(){
+ const values=Array.isArray(TEST_ACCOUNT_EMAILS)?TEST_ACCOUNT_EMAILS:[];
+ const normalized=values.map(normalizeTestAccountEmail).filter(Boolean);
+ if(normalized.length)return Array.from(new Set(normalized));
+ const single=normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL);
+ return single?[single]:[];
+}
+function configuredTestAccountUserIds(){
+ const values=Array.isArray(TEST_ACCOUNT_USER_IDS)?TEST_ACCOUNT_USER_IDS:[];
+ const normalized=values.map(value=>String(value||'').trim()).filter(Boolean);
+ if(normalized.length)return Array.from(new Set(normalized));
+ return TEST_ACCOUNT_USER_ID?[String(TEST_ACCOUNT_USER_ID).trim()]:[];
+}
+function primaryTestAccountEmail(){
+ return configuredTestAccountEmails()[0]||'';
+}
+function configuredTestPilotLabel(){
+ const emails=configuredTestAccountEmails();
+ if(!emails.length)return 'configured test pilot';
+ if(emails.length===1)return emails[0];
+ if(emails.length===2)return `${emails[0]} or ${emails[1]}`;
+ return `${emails[0]}, ${emails[1]}, +${emails.length-2} more`;
+}
+function deriveInitialsFromEmail(email=''){
+ const local=String(email||'').split('@')[0]||'';
+ return sanitizeInitials(local);
+}
 function testAccountEnabled(){
- return NON_PRODUCTION_LANE&&!!normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL);
+ return NON_PRODUCTION_LANE&&configuredTestAccountEmails().length>0;
 }
 function isConfiguredTestAccountEmail(value=''){
- return !!normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL)&&normalizeTestAccountEmail(value)===normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL);
+ return configuredTestAccountEmails().includes(normalizeTestAccountEmail(value));
 }
 function isSignedInAsTestAccount(){
  const email=normalizeTestAccountEmail(LEADERBOARD.user?.email||'');
- if(TEST_ACCOUNT_USER_ID&&LEADERBOARD.user?.id)return LEADERBOARD.user.id===TEST_ACCOUNT_USER_ID;
+ const userIds=configuredTestAccountUserIds();
+ if(userIds.length&&LEADERBOARD.user?.id)return userIds.includes(LEADERBOARD.user.id);
  return !!email&&isConfiguredTestAccountEmail(email);
 }
 function remoteAuthEnabled(){
@@ -94,11 +145,86 @@ function remoteWriteEnabled(){
  return isSignedInAsTestAccount();
 }
 function shouldHideTestAccountScores(){
- return !!TEST_ACCOUNT_USER_ID;
+ return configuredTestAccountUserIds().length>0;
 }
 function normalizeLeaderboardViewForLane(view){
  if(view==='mine'&&!remoteAuthEnabled())return 'local';
  return view;
+}
+function pilotDisplayId(){
+ const initials=preferredInitialsFromUser();
+ if(initials)return initials;
+ const email=String(LEADERBOARD.user?.email||'').trim();
+ if(email){
+  const local=email.split('@')[0]||email;
+  return sanitizeInitials(local).slice(0,3)||local.slice(0,10).toUpperCase();
+ }
+ return 'GUEST';
+}
+function rowsForPilotProfile(){
+ if(LEADERBOARD.user&&remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine))return LEADERBOARD.remote.mine.slice();
+ return localLeaderboardRows();
+}
+function formatWhenShort(value=''){
+ if(!value)return '--';
+ const at=Date.parse(value);
+ if(!Number.isFinite(at))return '--';
+ const delta=Math.max(0,Date.now()-at);
+ const minutes=Math.round(delta/60000);
+ if(minutes<1)return 'just now';
+ if(minutes<60)return `${minutes}m ago`;
+ const hours=Math.round(minutes/60);
+ if(hours<24)return `${hours}h ago`;
+ const days=Math.round(hours/24);
+ return `${days}d ago`;
+}
+function renderPilotFlightStats(rows,signedIn){
+ if(!accountFlightStats)return;
+ if(!rows.length){
+  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flight history yet. Finish a run to start building this pilot record.</div>';
+  return;
+ }
+ const latest=[...rows].sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))[0]||rows[0];
+ const bestScore=Math.max(...rows.map(row=>+row.score||0),0);
+ const bestStage=Math.max(...rows.map(row=>+row.stage||0),0);
+ const verifiedRuns=rows.filter(row=>row.verified).length;
+ const cards=[
+  ['Sorties Logged', String(rows.length)],
+  ['Best Score', formatScore(bestScore)],
+  ['Last Stage Reached', `STG ${String(+latest.stage||0).padStart(2,'0')}`],
+  ['Latest Score', formatScore(+latest.score||0)],
+  ['Latest Flight', formatWhenShort(latest.at)],
+  ['Verified Runs', signedIn?String(verifiedRuns):'--']
+ ];
+ accountFlightStats.innerHTML=cards.map(([label,value])=>`<div class="accountStatCard"><span class="accountStatLabel">${label}</span><span class="accountStatValue">${value}</span></div>`).join('');
+}
+function renderPilotRecords(rows){
+ if(!accountRecordsTop5)return;
+ if(!rows.length){
+  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
+  return;
+ }
+ const replayRuns=Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
+  const topRows=[...rows]
+  .sort((a,b)=>(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0)||(Date.parse(b.at||0)-Date.parse(a.at||0)))
+  .slice(0,5);
+ const replayForRow=(row)=>{
+  const rowStamp=Date.parse(row.at||'');
+  return replayRuns.find(run=>{
+   if((+run.score||0)!== (+row.score||0))return false;
+   if((+run.stage||0)!== (+row.stage||0))return false;
+   if(!Number.isFinite(rowStamp))return true;
+   const replayStamp=Date.parse(run.createdAt||'');
+   if(!Number.isFinite(replayStamp))return false;
+   return Math.abs(replayStamp-rowStamp)<=120000;
+  })||null;
+ };
+ accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
+  const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
+  const stamp=formatWhenShort(row.at);
+  const replay=replayForRow(row);
+  return `<div class="accountRecordRow"><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
+ }).join('');
 }
 
 function normalizeRemoteScoreRow(row){
@@ -112,7 +238,7 @@ function normalizeRemoteScoreRow(row){
  };
 }
 function preferredInitialsFromUser(user=LEADERBOARD.user){
- return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||'').slice(0,3);
+ return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||deriveInitialsFromEmail(user?.email||'')||'').slice(0,3);
 }
 function localLeaderboardRows(){
  return loadScoreboard().map(row=>Object.assign({verified:0},row));
@@ -279,6 +405,7 @@ function openAccountPanel(){
  syncLeaderboardPanelVisibility();
  syncAccountPanelVisibility();
  syncAccountUi();
+ if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
  syncOverlayPause();
 }
 function closeAccountPanel(){
@@ -302,46 +429,111 @@ function buildStartAccountPrompt(){
   const initials=preferredInitialsFromUser();
   if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
   if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
- if(!remoteAuthEnabled())return testAccountEnabled()?`TEST PILOT ${TEST_ACCOUNT_EMAIL.toUpperCase()} AVAILABLE IN THIS LANE`:'LOCAL SCORES ACTIVE   PRODUCTION SCORES READ ONLY';
- if(NON_PRODUCTION_LANE&&!signedIn)return `SIGN IN AS TEST PILOT <span class="k">${TEST_ACCOUNT_EMAIL}</span>`;
+ if(!remoteAuthEnabled())return testAccountEnabled()?`TEST PILOT ${configuredTestPilotLabel().toUpperCase()} AVAILABLE IN THIS LANE`:'LOCAL SCORES ACTIVE   PRODUCTION SCORES READ ONLY';
+ if(NON_PRODUCTION_LANE&&!signedIn)return `SIGN IN AS TEST PILOT <span class="k">${configuredTestPilotLabel()}</span>`;
   if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
   if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
   return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
 }
+function enterRecoveryMode(){
+ LEADERBOARD.recoveryMode=1;
+ LEADERBOARD.accountPanelOpen=1;
+ LEADERBOARD.panelOpen=0;
+ setAccountNotice('Choose a new password for your pilot account, then save it here.');
+ syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
+ syncAccountUi();
+ syncOverlayPause();
+}
+function exitRecoveryMode(){
+ LEADERBOARD.recoveryMode=0;
+ if(accountPassword)accountPassword.value='';
+ if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ setAccountNotice('');
+ syncAccountUi();
+}
 function syncAccountUi(){
   const configured=!!LEADERBOARD.configured;
-  const signedIn=!!LEADERBOARD.user;
-  const verified=!!LEADERBOARD.user?.email_confirmed_at;
+ const signedIn=!!LEADERBOARD.user;
+ const verified=!!LEADERBOARD.user?.email_confirmed_at;
   const pending=LEADERBOARD.configured===null;
- if(accountSignupBtn)accountSignupBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn;
- if(accountLoginBtn)accountLoginBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn;
- if(accountLogoutBtn)accountLogoutBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn;
- if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn;
- if(accountEmail)accountEmail.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||signedIn;
- if(accountPassword)accountPassword.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||signedIn;
-  if(accountInitials){
-  accountInitials.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!signedIn;
-  if(document.activeElement!==accountInitials)accountInitials.value=signedIn?preferredInitialsFromUser():'';
+ const recovering=!!LEADERBOARD.recoveryMode;
+ const initials=preferredInitialsFromUser();
+ const dockId=pilotDisplayId();
+ const hasLockedInitials=!!signedIn;
+ if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'IDENTITY, RECORDS, AND FLIGHT HISTORY';
+ if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
+ if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
+ if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
+ if(accountPasswordLabel)accountPasswordLabel.hidden=signedIn&&!recovering;
+ if(accountSignupBtn){
+  accountSignupBtn.hidden=recovering||signedIn;
+  accountSignupBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn||recovering;
+ }
+ if(accountLoginBtn){
+  accountLoginBtn.hidden=recovering||signedIn;
+  accountLoginBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn||recovering;
+ }
+ if(accountResetBtn){
+  accountResetBtn.hidden=recovering||signedIn;
+  accountResetBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn||recovering;
+ }
+ if(accountApplyResetBtn){
+  accountApplyResetBtn.hidden=!recovering;
+  accountApplyResetBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!recovering;
+ }
+ if(accountLogoutBtn){
+  accountLogoutBtn.hidden=!signedIn;
+  accountLogoutBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn;
+ }
+ if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn||hasLockedInitials;
+ if(accountEmail)accountEmail.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||signedIn||recovering;
+ if(accountPassword){
+  accountPassword.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||(signedIn&&!recovering);
+  accountPassword.placeholder=recovering?'New password':'Password';
+  accountPassword.autocomplete=recovering?'new-password':'current-password';
+ }
+ if(accountPasswordConfirm)accountPasswordConfirm.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!recovering;
+ if(accountEmail&&testAccountEnabled()&&!signedIn&&document.activeElement!==accountEmail&&String(accountEmail.value||'').trim()===''){
+  accountEmail.value=primaryTestAccountEmail();
+ }
+ if(accountInitialsSection)accountInitialsSection.hidden=!signedIn||hasLockedInitials;
+ if(accountInitialsDisplay){
+  accountInitialsDisplay.hidden=!(signedIn&&hasLockedInitials);
+  if(hasLockedInitials)accountInitialsDisplay.textContent=`Pilot ID locked: ${dockId}`;
+ }
+ if(accountInitials){
+  accountInitials.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!signedIn||hasLockedInitials;
+  if(document.activeElement!==accountInitials)accountInitials.value=signedIn?initials:'';
   }
   if(accountSummary){
    if(pending)accountSummary.textContent='Connecting leaderboard...';
    else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
+  else if(recovering)accountSummary.textContent='Recovery link accepted. Save a new password to finish signing back into this pilot account.';
    else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
    else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
   }
- const best=LEADERBOARD.remote.mine[0]?.score||0;
- if(accountBest)accountBest.textContent=signedIn?`Best: ${best?formatScore(best):'--'}`:'Best: --';
- if(accountRecent){
-  if(!signedIn)accountRecent.textContent='Recent: --';
-  else{
-   const recent=LEADERBOARD.remote.mine.slice(0,3).map(row=>`${formatScore(row.score)} · STG ${String(row.stage).padStart(2,'0')}`).join('   /   ');
-   accountRecent.textContent=`Recent: ${recent||'--'}`;
-  }
+ const rows=rowsForPilotProfile();
+ if(accountDockBtn){
+  accountDockBtn.dataset.signedIn=signedIn?'true':'false';
+  accountDockBtn.classList.toggle('open',!!LEADERBOARD.accountPanelOpen);
+  accountDockBtn.title=signedIn?`${dockId} onboard`:'Pilot Sign In';
  }
- const initials=preferredInitialsFromUser();
- const hudInitials=signedIn&&initials?initials:'---';
+ if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
+ if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
+ if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Flight history and records are synced below.':'Sign in, create a pilot, or keep playing locally and track records on this device.');
+ if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
+ if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
+ if(accountPanel){
+  accountPanel.dataset.signedIn=signedIn?'true':'false';
+ }
+ renderPilotFlightStats(rows,signedIn);
+ renderPilotRecords(rows);
+ const hudInitials=signedIn?dockId:'---';
  window.__auroraPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
  if(resetTestPilotScoresBtn){
   const show=testAccountEnabled();
@@ -413,7 +605,11 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  syncLeaderboardUi();
  let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
- if(shouldHideTestAccountScores()&&view!=='mine')query=query.neq('user_id',TEST_ACCOUNT_USER_ID);
+ if(shouldHideTestAccountScores()&&view!=='mine'){
+  const hiddenIds=configuredTestAccountUserIds();
+  if(hiddenIds.length===1)query=query.neq('user_id',hiddenIds[0]);
+  else query=query.not('user_id','in',`(${hiddenIds.join(',')})`);
+ }
  if(view==='mine')query=query.eq('user_id',LEADERBOARD.user.id);
  const {data,error}=await query;
  LEADERBOARD.loading[view]=0;
@@ -518,6 +714,25 @@ function submitGameOverScore(){
 function authRedirectUrl(){
  return `${location.origin}${location.pathname}`;
 }
+function friendlyAuthError(action,error){
+ const message=String(error?.message||'').trim();
+ const lower=message.toLowerCase();
+ if(lower.includes('email rate limit exceeded')){
+  if(action==='reset'){
+   return 'Too many reset emails were requested recently. Use the newest reset email you already received, or wait a bit before requesting another.';
+  }
+  if(action==='signup'){
+   return 'Too many email actions were requested recently. Wait a bit, then try creating the account again.';
+  }
+ }
+ if(lower.includes('invalid login credentials')){
+  return 'Invalid email or password.';
+ }
+ if(lower.includes('email not confirmed')){
+  return 'Your email is not verified yet. Use the newest verification email, then try logging in again.';
+ }
+ return message||'Unknown authentication error.';
+}
 async function signUpAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const email=String(accountEmail?.value||'').trim();
@@ -529,7 +744,7 @@ async function signUpAccount(){
   return;
  }
  if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
-  setAccountNotice(`Only test pilot ${TEST_ACCOUNT_EMAIL} can create an account from this lane.`);
+  setAccountNotice(`Only configured test pilots (${configuredTestPilotLabel()}) can create an account from this lane.`);
   syncAccountUi();
   return;
  }
@@ -546,7 +761,7 @@ async function signUpAccount(){
  });
  LEADERBOARD.authBusy=0;
  if(error){
-  setAccountNotice(`Signup failed: ${error.message}`);
+  setAccountNotice(`Signup failed: ${friendlyAuthError('signup',error)}`);
   syncAccountUi();
   return;
  }
@@ -563,7 +778,7 @@ async function loginAccount(){
   return;
  }
  if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
-  setAccountNotice(`Only test pilot ${TEST_ACCOUNT_EMAIL} can sign in from this lane.`);
+  setAccountNotice(`Only configured test pilots (${configuredTestPilotLabel()}) can sign in from this lane.`);
   syncAccountUi();
   return;
  }
@@ -573,13 +788,79 @@ async function loginAccount(){
  const {error}=await LEADERBOARD.client.auth.signInWithPassword({email,password});
  LEADERBOARD.authBusy=0;
  if(error){
-  setAccountNotice(`Login failed: ${error.message}`);
+  setAccountNotice(`Login failed: ${friendlyAuthError('login',error)}`);
   syncAccountUi();
   return;
  }
  if(accountPassword)accountPassword.value='';
  setAccountNotice('');
  syncAccountUi();
+}
+async function resetAccountPassword(){
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
+ const email=String(accountEmail?.value||'').trim();
+ if(!email){
+  setAccountNotice('Enter your email first so we know where to send the reset link.');
+  syncAccountUi();
+  return;
+ }
+ if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
+  setAccountNotice(`Only configured test pilots (${configuredTestPilotLabel()}) can reset a password from this lane.`);
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice('');
+ LEADERBOARD.authBusy=1;
+ syncAccountUi();
+ const {error}=await LEADERBOARD.client.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
+ LEADERBOARD.authBusy=0;
+ if(error){
+  setAccountNotice(`Reset password failed: ${friendlyAuthError('reset',error)}`);
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice(`Password reset email sent to ${email}. Check your inbox and spam folder.`);
+ syncAccountUi();
+}
+async function applyRecoveredPassword(){
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
+ const password=String(accountPassword?.value||'');
+ const confirm=String(accountPasswordConfirm?.value||'');
+ if(!password){
+  setAccountNotice('Enter a new password first.');
+  syncAccountUi();
+  return;
+ }
+ if(password.length<6){
+  setAccountNotice('Use a password with at least 6 characters.');
+  syncAccountUi();
+  return;
+ }
+ if(password!==confirm){
+  setAccountNotice('New password and confirmation do not match.');
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice('');
+ LEADERBOARD.authBusy=1;
+ syncAccountUi();
+ const {error}=await LEADERBOARD.client.auth.updateUser({password});
+ LEADERBOARD.authBusy=0;
+ if(error){
+  setAccountNotice(`Could not update password: ${error.message}`);
+  syncAccountUi();
+  return;
+ }
+ const {data:{session}}=await LEADERBOARD.client.auth.getSession();
+ LEADERBOARD.user=session?.user||LEADERBOARD.user;
+ if(LEADERBOARD.user)await loadOwnProfile();
+ setAccountNotice('Password updated. You can now keep using this pilot account.');
+ LEADERBOARD.recoveryMode=0;
+ if(accountPassword)accountPassword.value='';
+ if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ syncLeaderboardBest();
+ syncAccountUi();
+ syncLeaderboardUi();
 }
 async function logoutAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
@@ -659,6 +940,7 @@ async function initLeaderboard(){
   hydrateLeaderboardCache('validated');
   if(!remoteAuthEnabled()&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
   const hadAuthHash=remoteAuthEnabled()&&location.hash.includes('access_token=');
+  const hadRecoveryHash=remoteAuthEnabled()&&location.hash.includes('type=recovery');
   if(remoteAuthEnabled()){
    const {data:{session}}=await LEADERBOARD.client.auth.getSession();
    LEADERBOARD.user=session?.user||null;
@@ -670,6 +952,7 @@ async function initLeaderboard(){
    if(LEADERBOARD.user){
     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
     await loadOwnProfile();
+    if(hadRecoveryHash)enterRecoveryMode();
    }
   }else{
    LEADERBOARD.user=null;
@@ -685,19 +968,22 @@ async function initLeaderboard(){
   primeLeaderboard();
   scheduleLeaderboardRefresh();
   if(remoteAuthEnabled()){
-   LEADERBOARD.client.auth.onAuthStateChange(async(_event,sessionState)=>{
+  LEADERBOARD.client.auth.onAuthStateChange(async(event,sessionState)=>{
     LEADERBOARD.user=sessionState?.user||null;
+    if(event==='PASSWORD_RECOVERY')LEADERBOARD.recoveryMode=1;
+    else if(sessionState?.user)LEADERBOARD.recoveryMode=0;
     if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
      await LEADERBOARD.client.auth.signOut();
      LEADERBOARD.user=null;
      setAccountNotice('The test pilot account is disabled in production.');
     }
     if(LEADERBOARD.user){
-     setAccountNotice('');
+     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
      hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
      await loadOwnProfile();
     }
     else{
+     LEADERBOARD.recoveryMode=0;
      setAccountNotice('');
      LEADERBOARD.profile=null;
      LEADERBOARD.remote.mine=[];
@@ -729,9 +1015,17 @@ if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPane
 if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
+if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword);
+if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
+if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
+ const btn=e.target.closest('.accountRecordReplayBtn');
+ if(!btn)return;
+ const replayId=btn.dataset.replayId||'';
+ if(replayId&&typeof window.openMovieReplayById==='function')window.openMovieReplayById(replayId);
+});
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
  const inLeaderboard=LEADERBOARD.panelOpen&&leaderboardPanel&&(e.target===leaderboardDockBtn||leaderboardPanel.contains(e.target)||leaderboardViews.contains(e.target));

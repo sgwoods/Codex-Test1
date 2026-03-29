@@ -69,6 +69,26 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/README.md'
 ]);
 
+function loadEnvFile(file){
+  if(!fs.existsSync(file)) return;
+  const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
+  for(const rawLine of lines){
+    const line = rawLine.trim();
+    if(!line || line.startsWith('#')) continue;
+    const match = line.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
+    if(!match) continue;
+    const [, key, rawValue] = match;
+    if(Object.prototype.hasOwnProperty.call(process.env, key)) continue;
+    let value = rawValue.trim();
+    if((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))){
+      value = value.slice(1, -1);
+    }
+    process.env[key] = value;
+  }
+}
+
+loadEnvFile(path.join(ROOT, '.env.local'));
+
 function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 }
@@ -1293,8 +1313,20 @@ function build(options = {}){
   };
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://iddyodcknmxupavnuuwg.supabase.co';
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || 'sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
-  const testAccountEmail = (process.env.TEST_ACCOUNT_EMAIL || '').trim().toLowerCase();
-  const testAccountUserId = (process.env.TEST_ACCOUNT_USER_ID || '').trim();
+  const parseListEnv = (value) => String(value || '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const testAccountEmails = Array.from(new Set([
+    ...parseListEnv(process.env.TEST_ACCOUNT_EMAILS).map((email) => email.toLowerCase()),
+    ...parseListEnv(process.env.TEST_ACCOUNT_EMAIL).map((email) => email.toLowerCase())
+  ]));
+  const testAccountUserIds = Array.from(new Set([
+    ...parseListEnv(process.env.TEST_ACCOUNT_USER_IDS),
+    ...parseListEnv(process.env.TEST_ACCOUNT_USER_ID)
+  ]));
+  const testAccountEmail = testAccountEmails[0] || '';
+  const testAccountUserId = testAccountUserIds[0] || '';
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_LABEL: buildLabel,
@@ -1308,6 +1340,8 @@ function build(options = {}){
     SUPABASE_ANON_KEY: supabaseAnonKey,
     TEST_ACCOUNT_EMAIL: testAccountEmail,
     TEST_ACCOUNT_USER_ID: testAccountUserId,
+    TEST_ACCOUNT_EMAILS_JSON: JSON.stringify(testAccountEmails),
+    TEST_ACCOUNT_USER_IDS_JSON: JSON.stringify(testAccountUserIds),
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary
   };

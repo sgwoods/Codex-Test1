@@ -1,5 +1,10 @@
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 const playfieldFrame=document.getElementById('playfieldFrame');
+const renderHelpModal=document.getElementById('helpModal');
+const renderHelpPanel=document.getElementById('helpPanel');
+const renderFeedbackModal=document.getElementById('feedbackModal');
+const renderFeedbackPanel=document.getElementById('feedbackPanel');
+const renderSettingsPanel=document.getElementById('settingsPanel');
 window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
 const DISPLAY_SHELL=Object.freeze({
  hudInsetX:12,
@@ -402,9 +407,9 @@ function draw(){
   movieOverlayPanel.style.width=`${viewW}px`;
   movieOverlayPanel.style.height=`${viewH}px`;
  }
- const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
+ const railH=Math.max(220,viewH);
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
- const railTop=oy+Math.floor((viewH-railH)/2);
+ const railTop=oy;
  if(cabinetShell){
   cabinetShell.style.display='block';
   cabinetShell.style.left=`${shellX}px`;
@@ -426,25 +431,65 @@ function draw(){
   }else cabinetRightFrame.style.display='none';
  }
  const waitScoreOverlay=!started&&typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD.panelOpen;
+ const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!waitScoreOverlay&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
  if(statusPanels){
   statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
+  statusPanels.style.setProperty('--overlay-max-height','none');
   if(waitScoreOverlay){
    const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
    statusPanels.style.width=`${panelW}px`;
    statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
    statusPanels.style.right='auto';
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
+   statusPanels.style.bottom='auto';
+ }else if(framedOverlayOpen){
+   const panelW=Math.min(Math.max(420,Math.floor(viewW*.84)),660);
+   const top=Math.floor(oy+12);
+   const maxHeight=Math.max(180,Math.floor(viewH-24));
+   statusPanels.style.width=`${panelW}px`;
+   statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
+   statusPanels.style.right='auto';
+   statusPanels.style.top=`${top}px`;
+   statusPanels.style.bottom='auto';
+   statusPanels.style.setProperty('--overlay-max-height',`${maxHeight}px`);
   }else{
    statusPanels.style.width='';
    statusPanels.style.left='auto';
    statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
    statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+   statusPanels.style.bottom='auto';
   }
  }
- if(settingsPanel){
-  settingsPanel.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
-  settingsPanel.style.top=`${Math.max(14,oy+14)}px`;
+ if(renderSettingsPanel){
+  const settingsW=Math.min(Math.max(420,Math.floor(viewW*.58)),680);
+  const top=Math.floor(oy+12);
+  const maxHeight=Math.max(220,Math.floor(viewH-24));
+  renderSettingsPanel.style.width=`${settingsW}px`;
+  renderSettingsPanel.style.left=`${Math.floor(ox+viewW/2-settingsW/2)}px`;
+  renderSettingsPanel.style.right='auto';
+  renderSettingsPanel.style.top=`${top}px`;
+  renderSettingsPanel.style.maxHeight=`${maxHeight}px`;
  }
+ if(renderHelpModal){
+  renderHelpModal.style.left=`${ox}px`;
+  renderHelpModal.style.top=`${oy}px`;
+  renderHelpModal.style.width=`${viewW}px`;
+  renderHelpModal.style.height=`${viewH}px`;
+ }
+ if(renderHelpPanel){
+  renderHelpPanel.style.width=`${Math.min(Math.max(340,Math.floor(viewW-24)),820)}px`;
+  renderHelpPanel.style.height=`${Math.max(220,Math.min(Math.floor(viewH-24),720))}px`;
+ }
+ if(renderFeedbackModal){
+  renderFeedbackModal.style.left=`${ox}px`;
+  renderFeedbackModal.style.top=`${oy}px`;
+  renderFeedbackModal.style.width=`${viewW}px`;
+  renderFeedbackModal.style.height=`${viewH}px`;
+ }
+ if(renderFeedbackPanel){
+  renderFeedbackPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),720)}px`;
+  renderFeedbackPanel.style.maxHeight=`${Math.max(220,Math.min(Math.floor(viewH-24),720))}px`;
+  }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
   buildStamp.style.width=`${stampW}px`;
@@ -488,7 +533,10 @@ function draw(){
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
- right.innerHTML=window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`;
+ const pilotHudHtml=(typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
+  ? `<span class="hudLabel">PILOT</span> <span class="hudValue">${pilotDisplayId()}</span>`
+  : (window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`);
+ right.innerHTML=pilotHudHtml;
 const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();

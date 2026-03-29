@@ -45,7 +45,9 @@
     "harness:check:replay-exit-audio": "node tools/harness/check-replay-exit-wait-audio.js",
     "harness:check:board-messages": "node tools/harness/check-board-messages.js",
     "harness:check:wait-score-overlay": "node tools/harness/check-wait-score-overlay.js",
+    "harness:check:popup-surfaces": "node tools/harness/check-popup-surfaces.js",
     "harness:check:close-shot-hit": "node tools/harness/check-close-shot-hit.js",
+    "harness:check:rescue-join-stage-clear": "node tools/harness/check-rescue-join-on-stage-clear.js",
     "harness": "node tools/harness/run-gameplay.js",
     "log-viewer": "node tools/log-viewer/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

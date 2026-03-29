@@ -1,6 +1,6 @@
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
-const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
+const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel'),settingsPanelClose=document.getElementById('settingsPanelClose');
 const cabinetShell=document.getElementById('cabinetShell');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
@@ -10,7 +10,7 @@ const controlsDockBtn=document.getElementById('controlsDockBtn');
 const feedbackDockBtn=document.getElementById('feedbackDockBtn');
 const helpModal=document.getElementById('helpModal'),helpClose=document.getElementById('helpClose'),helpGuideFrame=document.getElementById('helpGuideFrame'),helpOpenWindowBtn=document.getElementById('helpOpenWindowBtn');
 const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),helpPanels=Array.from(document.querySelectorAll('[data-help-panel]'));
-const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
+const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
@@ -278,8 +278,8 @@ function buildResultsHtml(stats,score,stage){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${String(stage).padStart(2,'0')}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
-function recordScore(score,stage){
- const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:'YOU',score:score|0,stage:stage|0,at:new Date().toISOString()};
+function recordScore(score,stage,initials='YOU'){
+ const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString()};
  const board=loadScoreboard();
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
@@ -322,8 +322,10 @@ function buildAttractScoreboardHtml(){
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
 function buildGameOverState(score,stage){
- const res=recordScore(score,stage);
- const editing=!!res.rank;
+ const pilotInitials=(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'').padEnd(3,'-').slice(0,3);
+ const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
+ const res=recordScore(score,stage,lockedPilotInitials?pilotInitials:'YOU');
+ const editing=!!res.rank&&!lockedPilotInitials;
  return{
   entryId:res.entry.id,
   rank:res.rank,
@@ -331,7 +333,7 @@ function buildGameOverState(score,stage){
   score:score|0,
   stage:stage|0,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
-  initials:['Y','O','U'],
+  initials:(lockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
   editing,
   remoteSubmitted:0
@@ -945,6 +947,7 @@ function rs(){
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
+if(settingsPanelClose)settingsPanelClose.addEventListener('click',closeSettings);
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
 if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
 if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
@@ -966,6 +969,7 @@ for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
+if(feedbackClose)feedbackClose.addEventListener('click',()=>closeFeedback());
 if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)closeHelp();});
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());

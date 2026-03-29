@@ -24,12 +24,18 @@
 <div id="cabinetRightFrame" aria-hidden="true">
   <div id="statusDock">
     <div id="dockQuickTools">
+      <div class="dockToolGroup dockToolGroupPilot">
+        <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot information" title="Pilot Information">
+          <span id="accountDockIcon" class="dockIcon dockPilotIcon" aria-hidden="true">🧑‍🚀</span>
+          <span id="accountDockLabel">SIGN IN</span>
+          <span id="accountDockStatus">Pilot offline</span>
+        </button>
+      </div>
       <div class="dockToolGroup dockToolGroupPrimary">
         <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
         <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
         <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Recent Replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
         <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
-        <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
         <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
       </div>
       <div class="dockToolGroup dockToolGroupUtility">
@@ -43,7 +49,13 @@
 <div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
 <div id="settingsPanel" aria-hidden="true">
-  <h3>Developer Tools</h3>
+  <div id="settingsPanelHead" class="framePopupHead">
+    <div>
+      <span id="settingsPanelTitle" class="framePopupTitle">Developer Tools</span>
+      <span id="settingsPanelSub" class="framePopupSub">Local tools and diagnostic controls for this build.</span>
+    </div>
+    <button type="button" id="settingsPanelClose" aria-label="Close developer tools">×</button>
+  </div>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
@@ -77,7 +89,7 @@
 </div>
 <div id="helpModal" aria-hidden="true">
   <div id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-    <div id="helpHead">
+    <div id="helpHead" class="framePopupHead">
       <div>
         <h2 id="helpTitle">Pilot Reference</h2>
         <div id="helpSubtitle">Keep the game in view while you check controls and the guide.</div>
@@ -129,7 +141,13 @@
 </div>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
-    <h2 id="feedbackTitle">Send Feedback</h2>
+    <div id="feedbackHead" class="framePopupHead">
+      <div>
+        <h2 id="feedbackTitle">Send Feedback</h2>
+        <div id="feedbackSubtitle" class="framePopupSub">Report a bug or send a feature idea without leaving the game board.</div>
+      </div>
+      <button type="button" id="feedbackClose" aria-label="Close feedback panel">×</button>
+    </div>
     <form id="feedbackForm">
       <label for="fbType">Type</label>
       <select id="fbType" required>
@@ -181,30 +199,65 @@
 <div id="statusPanels">
   <div id="accountPanel" aria-live="polite" hidden>
     <div id="accountPanelHead">
-      <div>
-        <span id="accountPanelTitle">PILOT PROFILE</span>
-        <span id="accountPanelSub">SIGN IN FOR VALIDATED SCORES</span>
+      <div id="accountPanelHero">
+        <div id="accountPanelPortraitWrap">
+          <span id="accountPanelPortrait" aria-hidden="true">🧑‍🚀</span>
+        </div>
+        <div id="accountPanelHeroText">
+        <span id="accountPanelTitle">PILOT INFORMATION</span>
+        <span id="accountPanelSub">IDENTITY, RECORDS, AND FLIGHT HISTORY</span>
+          <span id="accountPilotCallsign">PILOT OFFLINE</span>
+          <span id="accountPilotStatus">Sign in to board a pilot identity.</span>
+        </div>
       </div>
       <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
     </div>
-    <label for="accountEmail">Email</label>
-    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-    <label for="accountPassword">Password</label>
-    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
-    <div id="accountActions">
-      <button id="accountSignupBtn" type="button">Create Account</button>
-      <button id="accountLoginBtn" type="button">Log In</button>
-      <button id="accountLogoutBtn" type="button">Log Out</button>
+    <div id="accountIdentityGrid">
+      <div class="accountIdentityCard">
+        <span class="accountIdentityLabel">Identity</span>
+        <span id="accountIdentityEmail">Email: --</span>
+        <span id="accountIdentityUserId">User ID: --</span>
+      </div>
+      <div class="accountIdentityCard">
+        <span class="accountIdentityLabel">Access</span>
+        <span id="accountSummary">Not signed in. Anonymous scores still work.</span>
+      </div>
     </div>
-    <label for="accountInitials">Display Initials</label>
-    <div id="accountInitialsRow">
-      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
-      <button id="accountSaveInitialsBtn" type="button">Save</button>
+    <div class="accountSection">
+      <span class="accountSectionTitle">Pilot Access</span>
+      <div id="accountCredentials">
+        <label id="accountEmailLabel" for="accountEmail">Email</label>
+        <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+        <label id="accountPasswordLabel" for="accountPassword">Password</label>
+        <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+        <div id="accountRecoveryFields" hidden>
+          <label for="accountPasswordConfirm">Confirm New Password</label>
+          <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+        </div>
+      </div>
+      <div id="accountActions">
+        <button id="accountSignupBtn" type="button">Create New Pilot</button>
+        <button id="accountLoginBtn" type="button">Sign In</button>
+        <button id="accountResetBtn" type="button">Reset Password</button>
+        <button id="accountApplyResetBtn" type="button" hidden>Set New Password</button>
+        <button id="accountLogoutBtn" type="button">Sign Out</button>
+      </div>
+      <div id="accountInitialsSection">
+        <label for="accountInitials">Display Initials</label>
+        <div id="accountInitialsRow">
+          <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
+          <button id="accountSaveInitialsBtn" type="button">Save</button>
+        </div>
+      </div>
+      <div id="accountInitialsDisplay" hidden></div>
     </div>
-    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
-    <div id="accountMeta">
-      <span id="accountBest">Best: --</span>
-      <span id="accountRecent">Recent: --</span>
+    <div class="accountSection">
+      <span class="accountSectionTitle">Flight History</span>
+      <div id="accountFlightStats"></div>
+    </div>
+    <div class="accountSection">
+      <span class="accountSectionTitle">Flight Records</span>
+      <div id="accountRecordsTop5"></div>
     </div>
   </div>
   <div id="leaderboardPanel" aria-live="polite" hidden>

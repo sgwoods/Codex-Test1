@@ -1,0 +1,16 @@
+{
+  "name": "rescue-join-stage-clear",
+  "seed": 9107,
+  "duration": 9,
+  "config": {
+    "stage": 2,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "harness", "method": "setupNaturalCaptureCycleTest", "args": { "stage": 2, "playerX": 140, "keepAlive": 0 } },
+    { "t": 3.3, "action": "harness", "method": "clearNonCarryingEnemies" },
+    { "t": 3.4, "action": "harness", "method": "launchCarryingBossAttack", "args": { "playerX": 140, "bossX": 140, "bossY": 126, "vy": 24 } },
+    { "t": 4.1, "action": "harness", "method": "triggerCarriedBossRescueKill" }
+  ]
+}

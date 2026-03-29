@@ -17,6 +17,7 @@ const movieDeleteBtn=document.getElementById('movieDeleteBtn');
 const movieTimeline=document.getElementById('movieTimeline');
 
 const MOVIE={panelOpen:0,prevPaused:0,runs:[],selectedId:'',pendingId:'',current:null,loading:0,objectUrl:'',status:''};
+window.__auroraReplayCatalog=[];
 
 function movieStoreAvailable(){
  return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
@@ -88,6 +89,10 @@ function renderMovieRuns(){
  movieRunSelect.innerHTML=MOVIE.runs.map(run=>`<option value="${run.id}">STG ${String(run.stage||0).padStart(2,'0')} · ${formatScore(run.score||0)} · ${movieDurationLabel(run.duration||0)} · ${movieAgeLabel(run.createdAt)}</option>`).join('');
  movieRunSelect.value=MOVIE.pendingId||MOVIE.selectedId||MOVIE.runs[0].id;
 }
+function publishReplayCatalog(){
+ window.__auroraReplayCatalog=MOVIE.runs.slice();
+ if(typeof syncAccountUi==='function')syncAccountUi();
+}
 function syncMoviePanelVisibility(){
  if(!moviePanel||!movieDockBtn)return;
  const show=!!MOVIE.panelOpen;
@@ -147,12 +152,14 @@ async function refreshMovieCatalog(opts={}){
  if(!movieStoreAvailable()){
   MOVIE.runs=[];
   clearMovieSelection();
+  publishReplayCatalog();
   setMovieStatus('Local replays need browser storage support.');
   return;
  }
  try{
   if(!opts.silent)setMovieStatus('Loading recent replays...');
   MOVIE.runs=await window.AuroraReplayStore.listReplays();
+  publishReplayCatalog();
   renderMovieRuns();
   if(!MOVIE.runs.length){
     clearMovieSelection();
@@ -166,8 +173,21 @@ async function refreshMovieCatalog(opts={}){
  }catch(err){
   MOVIE.runs=[];
   clearMovieSelection();
+  publishReplayCatalog();
   setMovieStatus(err.message||'Could not load local replays');
  }
+}
+async function openMovieReplayById(id){
+ if(!id)return;
+ if(!MOVIE.panelOpen)openMoviePanel();
+ await refreshMovieCatalog({silent:1});
+ if(!MOVIE.runs.some(run=>run.id===id)){
+  setMovieStatus('That replay is no longer available on this device.');
+  return;
+ }
+ MOVIE.pendingId=id;
+ renderMovieRuns();
+ await loadMovieReplay(id);
 }
 function openMoviePanel(){
  if(MOVIE.panelOpen)return;
@@ -205,6 +225,7 @@ function isMoviePanelOpen(){return !!MOVIE.panelOpen}
 window.refreshMovieCatalog=refreshMovieCatalog;
 window.closeMoviePanel=closeMoviePanel;
 window.isMoviePanelOpen=isMoviePanelOpen;
+window.openMovieReplayById=openMovieReplayById;
 
 if(movieDockBtn)movieDockBtn.addEventListener('click',e=>{e.stopPropagation();if(MOVIE.panelOpen)closeMoviePanel();else openMoviePanel();});
 if(moviePanelClose)moviePanelClose.addEventListener('click',()=>closeMoviePanel());
