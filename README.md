@@ -241,6 +241,8 @@ npm run local:stop
   - `release-notes.json`
 - Release/versioning policy:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+- Release-readiness review:
+  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
 - Product roadmap:
   - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
 - Shared authenticated pilot video publishing is currently planned as a
