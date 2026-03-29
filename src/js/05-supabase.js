@@ -325,18 +325,17 @@ function renderPilotRecords(rows){
  const bindReplayAction=(node,opts={})=>{
   if(!node||node.__replayBound)return;
   node.__replayBound=1;
-  node.addEventListener('click',e=>{
+  const trigger=e=>{
    if(opts.row&&e.target.closest('.accountRecordReplayBtn'))return;
    e.preventDefault();
    e.stopPropagation();
    openReplayFromPilotRecordsTarget(node);
-  });
+  };
+  node.addEventListener('pointerdown',trigger);
+  node.addEventListener('click',trigger);
   node.addEventListener('keydown',e=>{
    if(e.key!=='Enter'&&e.key!==' ')return;
-   if(opts.row&&e.target.closest('.accountRecordReplayBtn'))return;
-   e.preventDefault();
-   e.stopPropagation();
-   openReplayFromPilotRecordsTarget(node);
+   trigger(e);
   });
  };
  accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
@@ -1144,10 +1143,11 @@ if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecov
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
-function openReplayFromPilotRecordsTarget(target){
+async function openReplayFromPilotRecordsTarget(target){
  const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';
  if(replayId&&typeof window.openMovieReplayById==='function'){
-  window.openMovieReplayById(replayId);
+  if(typeof closeAccountPanel==='function')closeAccountPanel();
+  await window.openMovieReplayById(replayId);
   return true;
  }
  return false;

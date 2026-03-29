@@ -75,22 +75,32 @@ async function main(){
     });
     const replayBtns = page.locator('#accountRecordsTop5 .accountRecordReplayBtn');
     const replayCount = await replayBtns.count();
-    const targetIndex = Math.max(0, replayCount - 1);
-    const replayBtn = replayBtns.nth(targetIndex);
-    const clickedReplayId = await replayBtn.getAttribute('data-replay-id') || '';
-    await replayBtn.click();
-    await page.waitForTimeout(350);
-    const replayOpenState = await page.evaluate(() => ({
-      movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
-      movieReady: document.getElementById('moviePanel')?.classList.contains('ready') || false,
-      selectedReplay: document.getElementById('movieRunSelect')?.value || '',
-      accountClosed: !!document.getElementById('accountPanel')?.hidden,
-      playCalls: window.__auroraPlayCalls || 0
-    }));
-    replayOpenState.clickedReplayId = clickedReplayId;
+    const clickResults = [];
+    for(let i = 0; i < replayCount; i++){
+      const replayBtn = replayBtns.nth(i);
+      const clickedReplayId = await replayBtn.getAttribute('data-replay-id') || '';
+      await replayBtn.click();
+      await page.waitForTimeout(350);
+      clickResults.push(await page.evaluate(clickedId => ({
+        clickedReplayId: clickedId,
+        movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
+        movieReady: document.getElementById('moviePanel')?.classList.contains('ready') || false,
+        selectedReplay: document.getElementById('movieRunSelect')?.value || '',
+        accountClosed: !!document.getElementById('accountPanel')?.hidden,
+        playCalls: window.__auroraPlayCalls || 0
+      }), clickedReplayId));
+      if(i < replayCount - 1){
+        await page.evaluate(() => {
+          if(typeof window.closeMoviePanel === 'function') window.closeMoviePanel(1);
+        });
+        await page.waitForTimeout(150);
+        await page.locator('#accountDockBtn').click();
+        await page.waitForTimeout(150);
+      }
+    }
 
     await page.screenshot({ path: ARTIFACT });
-    return Object.assign({}, snapshot, replayOpenState);
+    return Object.assign({}, snapshot, { clickResults });
   });
 
   if(!result.panelOpen){
@@ -114,13 +124,13 @@ async function main(){
   if(!result.rowStamps.some(stamp => stamp === '1m ago' || stamp === 'just now')){
     fail('pilot records panel did not show the freshest local replay row', result);
   }
-  if(!result.movieOpen || !result.accountClosed){
+  if(result.clickResults.some(step => !step.movieOpen || !step.accountClosed)){
     fail('clicking Replay from pilot records did not switch into the replay surface', result);
   }
-  if(result.selectedReplay !== result.clickedReplayId){
+  if(result.clickResults.some(step => step.selectedReplay !== step.clickedReplayId)){
     fail('clicking Replay from pilot records did not open the exact replay row that was clicked', result);
   }
-  if(result.playCalls < 1){
+  if(result.clickResults.some(step => step.playCalls < 1)){
     fail('clicking Replay from pilot records did not attempt autoplay', result);
   }
 
@@ -129,10 +139,7 @@ async function main(){
     latestFlightValue: result.latestFlightValue,
     replayText: result.replayText,
     replayId: result.replayId,
-    movieOpen: result.movieOpen,
-    movieReady: result.movieReady,
-    selectedReplay: result.selectedReplay,
-    playCalls: result.playCalls,
+    clickResults: result.clickResults,
     screenshot: ARTIFACT
   }, null, 2));
 }

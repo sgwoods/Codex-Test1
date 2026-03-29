@@ -415,17 +415,17 @@ function activeEscortCount(e){
 function specialSquadronTuning(stage=S.stage){
  if(stage===4){
   return {
-   escortOffset:34,
-   escortTrackX:6.4,
-   escortTrackY:32,
-   escortLift:18
+   escortOffset:28,
+   escortTrackX:7.2,
+   escortTrackY:34,
+   escortLift:16
   };
  }
  return {
-  escortOffset:36,
-   escortTrackX:6.8,
-  escortTrackY:28,
-  escortLift:20
+  escortOffset:30,
+   escortTrackX:7.4,
+  escortTrackY:30,
+  escortLift:18
  };
 }
 

@@ -90,8 +90,8 @@ function assertScenario(name, result, expectedOffset, expectedLift){
 async function main(){
   const stage4 = await runScenario(4, 9045);
   const later = await runScenario(5, 9046);
-  const stage4Summary = assertScenario('stage4', stage4, 34, 18);
-  const laterSummary = assertScenario('later', later, 36, 20);
+  const stage4Summary = assertScenario('stage4', stage4, 28, 16);
+  const laterSummary = assertScenario('later', later, 30, 18);
 
   console.log(JSON.stringify({
     ok: true,
