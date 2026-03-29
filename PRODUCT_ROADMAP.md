@@ -191,6 +191,31 @@ Suggested versioning:
 - `1.1.x`
 - `1.2.x`
 
+## Milestone H: Shared Pilot Media And Publishing
+
+Target outcome:
+
+- authenticated pilot runs can become canonical shared run records
+- selected validated runs can be published through the Aurora-owned YouTube channel
+- pilot history can show official runs plus replay/watch links where available
+- local replay remains the immediate playback path and fallback
+
+Key issue groups:
+
+- `#121` shared authenticated pilot media and YouTube publishing
+- canonical Supabase run/video metadata for authenticated runs
+- pilot-safe public identity rules using pilot ID / initials / callsign instead of email
+- selected-run publish workflow and publish-state tracking
+- Aurora-owned YouTube mirroring for approved runs
+- fuller pilot scorebook/history with replay/watch links where available
+
+Suggested versioning:
+
+- `1.3.x`
+- `1.4.x`
+- potentially `1.5.x`
+- explicitly before any future `2.0.0`
+
 ## Post-1.0 Architecture Themes
 
 These are the architectural themes we should keep capturing incrementally during
@@ -213,6 +238,9 @@ plan.
 - evolve the log viewer from a local artifact tree toward an optional remote
   catalog after `1.0`, while keeping the current local-first debugging flow as
   the default
+- add shared authenticated pilot media as a pre-`2.0` stretch goal only after
+  pilot identity, local replay, and the early post-`1.0` platform seams are
+  stable enough to support it cleanly
 - use Aurora's ongoing work to reduce the eventual cost of supporting Galaxian
   and other future variants without pausing product progress now
 

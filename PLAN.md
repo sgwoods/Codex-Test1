@@ -292,17 +292,21 @@ Recent additions since the last review:
 | Post-1.0 | `#19` / `#62` | Shared | Watch | Later-run and self-play balance regressions remain useful signals, but not launch-critical if manual play remains healthy. | Keep measuring them without promoting them over visible polish. | Post-1.0 |
 | Post-1.0 | `#89` / `#90` / `#92` / `#97` | Shared | Open | Tooling, artifact workflow, and broader harness/platform improvements are useful leverage, but they are not required to ship the four-stage slice. | Keep them in the post-`1.0` tooling/platform lane. | Post-1.0 |
 | Post-1.0 | `#99` / `#84` / `#83` / `#30` / `#26`-`#29` | Shared | Open | Theme/package/custom-stage work is strategically important, but it is platform expansion, not launch work. | Keep capturing seams now; do the full abstraction after launch. | Post-1.0 |
+| Post-1.0 | `#121` | Shared | Planned pre-2.0 stretch goal | Shared authenticated pilot media and Aurora-owned YouTube publishing are strategically valuable, but they depend on stable pilot identity, local replay, and post-`1.0` platform seams. | Keep this out of the `1.0` blocker path and target it as a pre-`2.0` milestone after the early platform extraction work. | Post-1.0 |
 
 Items currently treated as post-`1.0` unless they become necessary for
 external playtesting or operational stability:
 
 - `#69` remote gameplay logs and optional video artifacts
 - `#70` homepage recent plays / watch links
+- `#121` shared authenticated pilot media and Aurora-owned YouTube publishing
 - `#17` broader reference baseline work
 - `#18` / `#32` experimental Stage `2` / `4` tuning for `1.1`
 - `#9` broader challenge-stage fidelity / variation work
 - `#19` later-run collision-chain regression outside the four-stage slice
 - replay, submission, theme-system, and broader public-workflow enhancements
+- treat shared authenticated video publishing as a post-`1.0`, pre-`2.0`
+  stretch goal rather than a launch requirement
 
 ### Track A. Autonomous Original-Galaga Baseline
 

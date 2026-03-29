@@ -243,6 +243,11 @@ npm run local:stop
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 - Product roadmap:
   - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+- Shared authenticated pilot video publishing is currently planned as a
+  post-`1.0`, pre-`2.0` stretch goal:
+  - canonical run metadata in Supabase
+  - optional Aurora-owned YouTube mirroring for selected validated runs
+  - pilot-safe public identity using pilot ID / initials instead of email
 - Project guide source:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
 - Generated local dev project guide:
