@@ -273,4 +273,5 @@ document.addEventListener('keydown',e=>{
  if(e.code==='ArrowLeft'){e.preventDefault();movieBackBtn.click();return;}
  if(e.code==='ArrowRight'){e.preventDefault();movieForwardBtn.click();return;}
 });
+if(movieStoreAvailable())setTimeout(()=>{refreshMovieCatalog({silent:1});},0);
 updateMovieControls();

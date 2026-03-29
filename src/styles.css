@@ -277,6 +277,8 @@ canvas{display:block;width:100vw;height:100vh}
 .accountStatValue{font:700 13px/1.2 "Courier New",Consolas,monospace;color:#f4fbff}
 #accountRecordsTop5{display:flex;flex-direction:column;gap:6px}
 .accountRecordRow{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 8px;border:1px solid rgba(136,245,255,.12);background:rgba(10,18,34,.76)}
+.accountRecordRow.hasReplay{cursor:pointer}
+.accountRecordRow.hasReplay:hover,.accountRecordRow.hasReplay:focus-within{border-color:rgba(255,217,128,.28);background:rgba(18,24,40,.86)}
 .accountRecordRank{color:#7ef2ff;font:700 11px/1 "Courier New",Consolas,monospace}
 .accountRecordMain{display:flex;flex-direction:column;gap:2px;min-width:0}
 .accountRecordScore{font:700 13px/1.1 "Courier New",Consolas,monospace;color:#f4fbff}

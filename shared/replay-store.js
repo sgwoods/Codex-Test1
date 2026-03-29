@@ -94,7 +94,10 @@
       challenge: !!record.challenge,
       build: record.build || '',
       stats: record.stats || { shots: 0, hits: 0 },
-      source: record.source || 'local'
+      source: record.source || 'local',
+      pilotUserId: record.pilotUserId || '',
+      pilotEmail: record.pilotEmail || '',
+      pilotInitials: record.pilotInitials || ''
     }));
   }
 

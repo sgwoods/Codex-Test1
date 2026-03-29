@@ -161,8 +161,58 @@ function pilotDisplayId(){
  }
  return 'GUEST';
 }
+function replayMatchesActivePilot(run){
+ const activePilotUserId=String(LEADERBOARD.user?.id||'');
+ const activePilotEmail=String(LEADERBOARD.user?.email||'').trim().toLowerCase();
+ const activePilotInitials=preferredInitialsFromUser();
+ const runUserId=String(run?.pilotUserId||'');
+ const runEmail=String(run?.pilotEmail||'').trim().toLowerCase();
+ const runInitials=sanitizeInitials(run?.pilotInitials||'');
+ if(activePilotUserId&&runUserId&&runUserId===activePilotUserId)return true;
+ if(activePilotEmail&&runEmail&&runEmail===activePilotEmail)return true;
+ return !!(activePilotInitials&&runInitials&&runInitials===activePilotInitials);
+}
+function pilotLocalReplayRows(){
+ if(!LEADERBOARD.user)return [];
+ return replayCatalogRows()
+  .filter(replayMatchesActivePilot)
+  .map(run=>({
+   id:`local-replay:${run.id}`,
+   initials:sanitizeInitials(run.pilotInitials||preferredInitialsFromUser()||'YOU').padEnd(3,'-').slice(0,3),
+   score:+run.score||0,
+   stage:+run.stage||0,
+   at:String(run.createdAt||''),
+   verified:0,
+   replayId:String(run.id||''),
+   localReplay:1
+  }));
+}
+function mergePilotProfileRows(remoteRows,localRows){
+ const merged=remoteRows.map(row=>Object.assign({},row));
+ for(const localRow of localRows){
+  const localStamp=Date.parse(localRow.at||'');
+  const existing=merged.find(row=>{
+   if((+row.score||0)!== (+localRow.score||0))return false;
+   if((+row.stage||0)!== (+localRow.stage||0))return false;
+   const rowStamp=Date.parse(resolveRowTimestamp(row)||row.at||'');
+   if(Number.isFinite(localStamp)&&Number.isFinite(rowStamp))return Math.abs(localStamp-rowStamp)<=120000;
+   return false;
+  });
+  if(existing){
+   if(localRow.replayId)existing.replayId=localRow.replayId;
+   if(localRow.at&&!existing.at)existing.at=localRow.at;
+   continue;
+  }
+  merged.push(localRow);
+ }
+ return merged;
+}
 function rowsForPilotProfile(){
- if(LEADERBOARD.user&&remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine))return LEADERBOARD.remote.mine.slice();
+ if(LEADERBOARD.user){
+  const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)?LEADERBOARD.remote.mine.slice():[];
+  const localRows=pilotLocalReplayRows();
+  if(remoteRows.length||localRows.length)return mergePilotProfileRows(remoteRows,localRows);
+ }
  return localLeaderboardRows();
 }
 function formatWhenShort(value=''){
@@ -229,15 +279,22 @@ function renderPilotRecords(rows){
   accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
   return;
  }
-  const topRows=[...rows]
-  .sort((a,b)=>(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0)||(Date.parse(b.at||0)-Date.parse(a.at||0)))
+ const topRows=[...rows]
+  .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)||row.at||''}))
+  .sort((a,b)=>(Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))||(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0))
   .slice(0,5);
  const replayForRow=(row)=>{
   const runs=replayCatalogRows();
+  if(row?.replayId){
+   const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
+   if(directRun)return directRun;
+  }
+  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run));
+  const runPool=pilotMatchedRuns.length?pilotMatchedRuns:runs;
   const rowScore=+row.score||0;
   const rowStage=+row.stage||0;
   const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
-  const byScoreStage=runs.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+  const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
   if(Number.isFinite(rowStamp)){
    const exactTimed=byScoreStage.find(run=>{
     const replayStamp=Date.parse(run.createdAt||'');
@@ -247,23 +304,43 @@ function renderPilotRecords(rows){
   }
   if(byScoreStage.length)return byScoreStage[0];
   if(Number.isFinite(rowStamp)){
-   const sameStageTimed=runs.find(run=>{
+   const sameStageTimed=runPool.find(run=>{
     if((+run.stage||0)!==rowStage)return false;
     const replayStamp=Date.parse(run.createdAt||'');
     return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
    });
    if(sameStageTimed)return sameStageTimed;
   }
-  const sameStageRuns=runs.filter(run=>(+run.stage||0)===rowStage);
+  const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
   if(sameStageRuns.length===1)return sameStageRuns[0];
+  if(pilotMatchedRuns.length===1)return pilotMatchedRuns[0];
   return null;
  };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
-  const stamp=formatWhenShort(resolveRowTimestamp(row)||row.at);
+  const stamp=formatWhenShort(row.resolvedAt||resolveRowTimestamp(row)||row.at);
   const replay=replayForRow(row);
-  return `<div class="accountRecordRow"><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
+  return `<div class="accountRecordRow${replay?' hasReplay':''}"${replay?` data-replay-id="${replay.id}" tabindex="0" role="button" aria-label="Replay this flight"`:''}><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}" title="Replay this flight">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
+ const bindReplayAction=(node,opts={})=>{
+  if(!node||node.__replayBound)return;
+  node.__replayBound=1;
+  node.addEventListener('click',e=>{
+   if(opts.row&&e.target.closest('.accountRecordReplayBtn'))return;
+   e.preventDefault();
+   e.stopPropagation();
+   openReplayFromPilotRecordsTarget(node);
+  });
+  node.addEventListener('keydown',e=>{
+   if(e.key!=='Enter'&&e.key!==' ')return;
+   if(opts.row&&e.target.closest('.accountRecordReplayBtn'))return;
+   e.preventDefault();
+   e.stopPropagation();
+   openReplayFromPilotRecordsTarget(node);
+  });
+ };
+ accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
+ accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
 
 function normalizeRemoteScoreRow(row){
@@ -1067,11 +1144,36 @@ if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecov
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
+function openReplayFromPilotRecordsTarget(target){
+ const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';
+ if(replayId&&typeof window.openMovieReplayById==='function'){
+  window.openMovieReplayById(replayId);
+  return true;
+ }
+ return false;
+}
 if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
- const btn=e.target.closest('.accountRecordReplayBtn');
+ const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
  if(!btn)return;
- const replayId=btn.dataset.replayId||'';
- if(replayId&&typeof window.openMovieReplayById==='function')window.openMovieReplayById(replayId);
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromPilotRecordsTarget(btn);
+});
+if(accountRecordsTop5)accountRecordsTop5.addEventListener('pointerup',e=>{
+ const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
+ if(!btn)return;
+ if(typeof e.button==='number'&&e.button!==0)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromPilotRecordsTarget(btn);
+});
+if(accountRecordsTop5)accountRecordsTop5.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const row=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
+ if(!row)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromPilotRecordsTarget(row);
 });
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));

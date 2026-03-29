@@ -118,6 +118,9 @@ window.__galagaHarness__={
    build: (window.BUILD && window.BUILD.version) || '',
    stats: cfg.stats || { shots: 6, hits: 4 },
    source: cfg.source || 'local',
+   pilotUserId: cfg.pilotUserId || '',
+   pilotEmail: cfg.pilotEmail || '',
+   pilotInitials: cfg.pilotInitials || '',
    blob
   });
   return true;
@@ -139,6 +142,9 @@ window.__galagaHarness__={
     build: (window.BUILD && window.BUILD.version) || '',
     stats: cfg.stats || { shots: 12, hits: 8 },
     source: 'local',
+    pilotUserId: cfg.userId || 'pilot-swd',
+    pilotEmail: cfg.email || 'sgwoods@gmail.com',
+    pilotInitials: cfg.initials || 'SWD',
     blob: new Blob([new Uint8Array(cfg.blobBytes || [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88])], { type: cfg.type || 'video/webm' })
    });
   }
@@ -147,7 +153,10 @@ window.__galagaHarness__={
    score: +cfg.score || 654321,
    stage: +cfg.stage || 7,
    createdAt: replayCreatedAt,
-   duration: +cfg.duration || 113
+   duration: +cfg.duration || 113,
+   pilotUserId: cfg.userId || 'pilot-swd',
+   pilotEmail: cfg.email || 'sgwoods@gmail.com',
+   pilotInitials: cfg.initials || 'SWD'
   }];
   LEADERBOARD.configured=1;
   LEADERBOARD.user={

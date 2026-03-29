@@ -711,6 +711,9 @@ function syncRecordUi(){
  recordBtn.textContent=supported?(VIDEO_REC.active?(VIDEO_REC.enabled?'Recording Video...':'Recording Replay...'):`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
 }
 function currentReplayMeta(){
+ const pilotUserId=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.id?String(LEADERBOARD.user.id):'';
+ const pilotEmail=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email?String(LEADERBOARD.user.email):'';
+ const pilotInitials=typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'';
  return {
   id:VIDEO_REC.sessionId||REC?.id||`replay-${Date.now()}`,
   source:'game_native',
@@ -723,6 +726,9 @@ function currentReplayMeta(){
   attract:!!S.attract,
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
+  pilotUserId,
+  pilotEmail,
+  pilotInitials,
   stats:{shots:S.stats?.shots|0,hits:S.stats?.hits|0}
  };
 }
