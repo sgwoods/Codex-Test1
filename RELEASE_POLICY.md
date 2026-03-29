@@ -139,7 +139,9 @@ Optional test-pilot override for non-production:
    - plus whatever harness/manual checks are appropriate for the release
 3. Promote and review the beta candidate first:
    - `npm run publish:beta`
-4. Once that beta candidate is explicitly approved, promote the matching release into the stable production artifact:
+4. Once that beta candidate is explicitly approved, mark that exact beta snapshot as approved:
+   - `npm run approve:beta`
+5. Only then promote the matching release into the stable production artifact:
    - `npm run publish:production`
 5. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/`
@@ -148,8 +150,8 @@ Optional test-pilot override for non-production:
 Tracked hardening item:
 
 - `#113`
-  - enforce dev -> beta -> production as the only supported publish chain
-  - production preflight should eventually fail if the current production publish is not sourced from the approved beta candidate
+  - enforce dev -> beta -> approve -> production as the only supported publish chain
+  - production preflight fails if the current production publish is not sourced from the approved beta candidate
 
 ## Public Project Status Sync Workflow
 

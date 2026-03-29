@@ -6,7 +6,8 @@ const {
   DIST_PRODUCTION,
   DIST_BETA,
   PRODUCTION_BUILD_INFO,
-  BETA_BUILD_INFO
+  BETA_BUILD_INFO,
+  BETA_APPROVED_BUILD_INFO
 } = require('./paths');
 
 const REQUIRED_PRODUCTION = [
@@ -117,12 +118,30 @@ function checkBuildInfo(cfg){
   return info;
 }
 
+function checkApprovedBetaForProduction(productionInfo){
+  if(!fs.existsSync(BETA_BUILD_INFO)){
+    throw new Error('Publish preflight failed: missing dist/beta/build-info.json. Promote and review beta first.');
+  }
+  if(!fs.existsSync(BETA_APPROVED_BUILD_INFO)){
+    throw new Error('Publish preflight failed: missing dist/beta/approved-build-info.json. Run "npm run approve:beta" after approving the beta candidate.');
+  }
+  const betaInfo = loadJson(BETA_BUILD_INFO);
+  const approvedInfo = loadJson(BETA_APPROVED_BUILD_INFO);
+  if(betaInfo.label !== approvedInfo.label || betaInfo.commit !== approvedInfo.commit){
+    throw new Error(`Publish preflight failed: approved beta candidate (${approvedInfo.label}) does not match current beta artifacts (${betaInfo.label}). Re-approve the current beta candidate first.`);
+  }
+  if(productionInfo.promotedFromApprovedBeta !== approvedInfo.label){
+    throw new Error(`Publish preflight failed: production artifacts were not promoted from the approved beta candidate (${approvedInfo.label}). Run "npm run promote:production" again.`);
+  }
+}
+
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const cfg = laneConfig(String(args.lane || '').toLowerCase());
   checkGitClean();
   checkArtifacts(cfg);
   const info = checkBuildInfo(cfg);
+  if(cfg.lane === 'production') checkApprovedBetaForProduction(info);
   console.log(JSON.stringify({
     ok: true,
     lane: cfg.lane,

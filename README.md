@@ -329,17 +329,30 @@ npm run local:stop
 - Then GitHub Pages updates:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
+### 5a. Approve The Beta Candidate
+
+- After reviewing the hosted beta candidate and deciding it is the one production should come from, run:
+  ```bash
+  npm run approve:beta
+  ```
+- This writes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/approved-build-info.json`
+- Production promotion is now gated on that approval marker.
+
 ### 6. Publish Hosted Production
 
 - Preferred:
   ```bash
   npm run publish:production
   ```
-- This command now refreshes the production lane from the current `HEAD` automatically:
+- This command now refreshes the production lane from the approved beta candidate:
   - rebuilds `dist/dev`
-  - promotes to `dist/production`
+  - expects an already promoted and approved `dist/beta`
+  - promotes approved beta artifacts to `dist/production`
   - runs production preflight
   - publishes the lane
+- Production publish now fails unless the current beta snapshot has been explicitly approved with:
+  - `npm run approve:beta`
 - `Aurora-Galactica` Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.
 - Optional manual inspection steps still exist:
   ```bash

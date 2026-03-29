@@ -7,6 +7,7 @@
     "build": "node tools/build/build-index.js",
     "build:production": "node tools/build/build-index.js --lane production",
     "promote:production": "node tools/build/promote-production.js",
+    "approve:beta": "node tools/build/approve-beta.js",
     "publish:check:beta": "node tools/build/check-publish-ready.js --lane beta",
     "publish:check:production": "node tools/build/check-publish-ready.js --lane production",
     "publish:verify:beta": "node tools/build/verify-live-lane.js --lane beta",

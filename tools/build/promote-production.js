@@ -3,9 +3,10 @@ const fs = require('fs');
 const path = require('path');
 const {
   ROOT,
-  DIST_DEV,
+  DIST_BETA,
   DIST_PRODUCTION,
-  DEV_BUILD_INFO,
+  BETA_BUILD_INFO,
+  BETA_APPROVED_BUILD_INFO,
   PRODUCTION_BUILD_INFO
 } = require('./paths');
 
@@ -64,17 +65,32 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
 fs.rmSync(DIST_PRODUCTION, { recursive: true, force: true });
 fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
 
+if(!fs.existsSync(BETA_BUILD_INFO)){
+  throw new Error('Missing dist/beta/build-info.json. Promote and approve a beta candidate first.');
+}
+if(!fs.existsSync(BETA_APPROVED_BUILD_INFO)){
+  throw new Error('Missing dist/beta/approved-build-info.json. Run "npm run approve:beta" after reviewing the beta candidate.');
+}
+
+const betaInfo = JSON.parse(fs.readFileSync(BETA_BUILD_INFO, 'utf8'));
+const approvedInfo = JSON.parse(fs.readFileSync(BETA_APPROVED_BUILD_INFO, 'utf8'));
+if(betaInfo.label !== approvedInfo.label || betaInfo.commit !== approvedInfo.commit){
+  throw new Error(`Approved beta candidate mismatch. Current beta is ${betaInfo.label}, but approved beta is ${approvedInfo.label}. Re-approve the current beta candidate before promoting production.`);
+}
+
 for(const file of FILES){
   const src = file === 'release-notes.json' || file === 'README.md'
     ? path.join(ROOT, file)
-    : path.join(DIST_DEV, file);
+    : path.join(DIST_BETA, file);
   if(!fs.existsSync(src)) continue;
   fs.copyFileSync(src, path.join(DIST_PRODUCTION, path.basename(file)));
 }
 
-if(fs.existsSync(DEV_BUILD_INFO) && fs.existsSync(PRODUCTION_BUILD_INFO)){
-  const sourceInfo = JSON.parse(fs.readFileSync(DEV_BUILD_INFO, 'utf8'));
+if(fs.existsSync(BETA_BUILD_INFO)){
+  const sourceInfo = betaInfo;
   const productionInfo = buildProductionInfo(sourceInfo);
+  productionInfo.promotedFromApprovedBeta = approvedInfo.label;
+  productionInfo.promotedFromApprovedAt = approvedInfo.approvedAt || '';
   fs.writeFileSync(PRODUCTION_BUILD_INFO, JSON.stringify(productionInfo, null, 2) + '\n');
   rewriteProductionText(path.join(DIST_PRODUCTION, 'index.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'project-guide.html'), sourceInfo, productionInfo);
@@ -82,4 +98,4 @@ if(fs.existsSync(DEV_BUILD_INFO) && fs.existsSync(PRODUCTION_BUILD_INFO)){
   rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo);
 }
 
-console.log(`Promoted current dev artifacts to ${DIST_PRODUCTION}`);
+console.log(`Promoted approved beta artifacts to ${DIST_PRODUCTION}`);

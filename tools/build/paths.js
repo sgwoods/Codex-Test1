@@ -28,5 +28,6 @@ module.exports = {
   BETA_DASHBOARD: path.join(DIST_BETA, 'release-dashboard.html'),
   BETA_PROJECT_GUIDE: path.join(DIST_BETA, 'project-guide.html'),
   BETA_PLAYER_GUIDE: path.join(DIST_BETA, 'player-guide.html'),
-  BETA_BUILD_INFO: path.join(DIST_BETA, 'build-info.json')
+  BETA_BUILD_INFO: path.join(DIST_BETA, 'build-info.json'),
+  BETA_APPROVED_BUILD_INFO: path.join(DIST_BETA, 'approved-build-info.json')
 };
