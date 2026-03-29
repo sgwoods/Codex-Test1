@@ -99,6 +99,13 @@ function startSequence(mode,duration,title,subtitle=''){
 
 function start(){
  stopAttractLoop();
+ try{document.activeElement?.blur?.()}catch{}
+ if(typeof closeAccountPanel==='function')closeAccountPanel();
+ if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+ if(typeof closeSettings==='function')closeSettings();
+ if(typeof closeHelp==='function'&&helpOpen)closeHelp(1);
+ if(typeof closeFeedback==='function'&&feedbackOpen)closeFeedback(1);
+ if(typeof closeMoviePanel==='function'&&typeof isMoviePanelOpen==='function'&&isMoviePanelOpen())closeMoviePanel(1);
  resetSession('game_start');
  autoExportedSessionId='';
  const cfg=saveTestCfg();
@@ -113,6 +120,7 @@ function start(){
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
+ c?.focus?.();
 }
 
 function fillPat(px,py,s,pat,col){if(!pat||!col)return;ctx.fillStyle=col;for(const p of pat)ctx.fillRect(px+p[0]*s,py+p[1]*s,s,s)}

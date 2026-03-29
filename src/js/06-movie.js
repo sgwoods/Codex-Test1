@@ -47,6 +47,16 @@ function revokeMovieObjectUrl(){
   MOVIE.objectUrl='';
  }
 }
+async function tryMovieAutoplay(){
+ if(!movieVideo)return 0;
+ try{
+  const maybe=movieVideo.play();
+  if(maybe&&typeof maybe.then==='function')await maybe;
+  return true;
+ }catch{
+  return false;
+ }
+}
 function updateMovieControls(){
  const ready=!!MOVIE.current;
  moviePanel.classList.toggle('ready',ready);
@@ -126,7 +136,7 @@ function clearMovieSelection(){
  syncMovieBuildStamp();
  updateMovieControls();
 }
-async function loadMovieReplay(id){
+async function loadMovieReplay(id,opts={}){
  if(!movieStoreAvailable())return;
  try{
   setMovieStatus('Loading replay...');
@@ -143,6 +153,11 @@ async function loadMovieReplay(id){
   renderMovieRuns();
   moviePanel.classList.add('ready');
   updateMovieTimeline();
+  if(opts.autoplay){
+   const playing=await tryMovieAutoplay();
+   setMovieStatus(playing?`Playing local replay from ${movieAgeLabel(replay.createdAt)}.`:`Showing local replay from ${movieAgeLabel(replay.createdAt)}.`);
+   updateMovieControls();
+  }
  }catch(err){
   setMovieStatus(err.message||'Could not load replay');
   clearMovieSelection();
@@ -187,7 +202,7 @@ async function openMovieReplayById(id){
  }
  MOVIE.pendingId=id;
  renderMovieRuns();
- await loadMovieReplay(id);
+ await loadMovieReplay(id,{autoplay:true});
 }
 function openMoviePanel(){
  if(MOVIE.panelOpen)return;
@@ -232,7 +247,7 @@ if(moviePanelClose)moviePanelClose.addEventListener('click',()=>closeMoviePanel(
 if(movieCloseToWaitBtn)movieCloseToWaitBtn.addEventListener('click',()=>closeMoviePanel());
 if(moviePanel)moviePanel.addEventListener('click',e=>e.stopPropagation());
 if(movieRunSelect)movieRunSelect.addEventListener('change',()=>{MOVIE.pendingId=movieRunSelect.value||'';updateMovieControls();});
-if(movieStartBtn)movieStartBtn.addEventListener('click',()=>{if(MOVIE.pendingId)loadMovieReplay(MOVIE.pendingId);});
+if(movieStartBtn)movieStartBtn.addEventListener('click',()=>{if(MOVIE.pendingId)loadMovieReplay(MOVIE.pendingId,{autoplay:true});});
 if(movieBackBtn)movieBackBtn.addEventListener('click',()=>{if(MOVIE.current)movieVideo.currentTime=Math.max(0,(movieVideo.currentTime||0)-5);});
 if(movieForwardBtn)movieForwardBtn.addEventListener('click',()=>{if(MOVIE.current)movieVideo.currentTime=Math.min(movieVideo.duration||MOVIE.current.duration||0,(movieVideo.currentTime||0)+5);});
 if(moviePlayPauseBtn)moviePlayPauseBtn.addEventListener('click',()=>{if(!MOVIE.current)return;if(movieVideo.paused)movieVideo.play();else movieVideo.pause();});

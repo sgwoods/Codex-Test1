@@ -178,13 +178,38 @@ function formatWhenShort(value=''){
  const days=Math.round(hours/24);
  return `${days}d ago`;
 }
+function replayCatalogRows(){
+ return Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
+}
+function resolveRowTimestamp(row){
+ const direct=String(row?.at||'').trim();
+ if(direct&&Number.isFinite(Date.parse(direct)))return direct;
+ const score=+row?.score||0;
+ const stage=+row?.stage||0;
+ const localMatch=localLeaderboardRows().find(localRow=>{
+  if((+localRow.score||0)!==score)return false;
+  if((+localRow.stage||0)!==stage)return false;
+  const stamp=String(localRow.at||'').trim();
+  return !!stamp&&Number.isFinite(Date.parse(stamp));
+ });
+ if(localMatch)return localMatch.at;
+ const replayMatch=replayCatalogRows().find(run=>{
+  if((+run.score||0)!==score)return false;
+  if((+run.stage||0)!==stage)return false;
+  const stamp=String(run.createdAt||'').trim();
+  return !!stamp&&Number.isFinite(Date.parse(stamp));
+ });
+ return replayMatch?.createdAt||'';
+}
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
   accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flight history yet. Finish a run to start building this pilot record.</div>';
   return;
  }
- const latest=[...rows].sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))[0]||rows[0];
+ const latest=[...rows]
+  .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)}))
+  .sort((a,b)=>Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))[0]||rows[0];
  const bestScore=Math.max(...rows.map(row=>+row.score||0),0);
  const bestStage=Math.max(...rows.map(row=>+row.stage||0),0);
  const verifiedRuns=rows.filter(row=>row.verified).length;
@@ -193,7 +218,7 @@ function renderPilotFlightStats(rows,signedIn){
   ['Best Score', formatScore(bestScore)],
   ['Last Stage Reached', `STG ${String(+latest.stage||0).padStart(2,'0')}`],
   ['Latest Score', formatScore(+latest.score||0)],
-  ['Latest Flight', formatWhenShort(latest.at)],
+  ['Latest Flight', formatWhenShort(latest.resolvedAt||latest.at)],
   ['Verified Runs', signedIn?String(verifiedRuns):'--']
  ];
  accountFlightStats.innerHTML=cards.map(([label,value])=>`<div class="accountStatCard"><span class="accountStatLabel">${label}</span><span class="accountStatValue">${value}</span></div>`).join('');
@@ -204,24 +229,38 @@ function renderPilotRecords(rows){
   accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
   return;
  }
- const replayRuns=Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
   const topRows=[...rows]
   .sort((a,b)=>(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0)||(Date.parse(b.at||0)-Date.parse(a.at||0)))
   .slice(0,5);
  const replayForRow=(row)=>{
-  const rowStamp=Date.parse(row.at||'');
-  return replayRuns.find(run=>{
-   if((+run.score||0)!== (+row.score||0))return false;
-   if((+run.stage||0)!== (+row.stage||0))return false;
-   if(!Number.isFinite(rowStamp))return true;
-   const replayStamp=Date.parse(run.createdAt||'');
-   if(!Number.isFinite(replayStamp))return false;
-   return Math.abs(replayStamp-rowStamp)<=120000;
-  })||null;
+  const runs=replayCatalogRows();
+  const rowScore=+row.score||0;
+  const rowStage=+row.stage||0;
+  const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
+  const byScoreStage=runs.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+  if(Number.isFinite(rowStamp)){
+   const exactTimed=byScoreStage.find(run=>{
+    const replayStamp=Date.parse(run.createdAt||'');
+    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+   });
+   if(exactTimed)return exactTimed;
+  }
+  if(byScoreStage.length)return byScoreStage[0];
+  if(Number.isFinite(rowStamp)){
+   const sameStageTimed=runs.find(run=>{
+    if((+run.stage||0)!==rowStage)return false;
+    const replayStamp=Date.parse(run.createdAt||'');
+    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+   });
+   if(sameStageTimed)return sameStageTimed;
+  }
+  const sameStageRuns=runs.filter(run=>(+run.stage||0)===rowStage);
+  if(sameStageRuns.length===1)return sameStageRuns[0];
+  return null;
  };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
-  const stamp=formatWhenShort(row.at);
+  const stamp=formatWhenShort(resolveRowTimestamp(row)||row.at);
   const replay=replayForRow(row);
   return `<div class="accountRecordRow"><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
@@ -646,6 +685,11 @@ async function prefetchLeaderboards(force=0){
  if(['all','validated','mine'].includes(LEADERBOARD.view))setLeaderboardStatus(leaderboardStatusLabel(LEADERBOARD.view,'ready'));
  syncLeaderboardUi();
 }
+async function refreshSignedInPilotRecords(force=1){
+ if(!remoteAuthEnabled()||!LEADERBOARD.user)return;
+ await refreshLeaderboard('mine',{silent:1,force});
+ syncAccountUi();
+}
 function primeLeaderboard(){
  if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
  if(started&&!paused)return;
@@ -794,6 +838,7 @@ async function loginAccount(){
  }
  if(accountPassword)accountPassword.value='';
  setAccountNotice('');
+ await refreshSignedInPilotRecords(1);
  syncAccountUi();
 }
 async function resetAccountPassword(){
@@ -854,6 +899,7 @@ async function applyRecoveredPassword(){
  const {data:{session}}=await LEADERBOARD.client.auth.getSession();
  LEADERBOARD.user=session?.user||LEADERBOARD.user;
  if(LEADERBOARD.user)await loadOwnProfile();
+ await refreshSignedInPilotRecords(1);
  setAccountNotice('Password updated. You can now keep using this pilot account.');
  LEADERBOARD.recoveryMode=0;
  if(accountPassword)accountPassword.value='';
@@ -977,11 +1023,12 @@ async function initLeaderboard(){
      LEADERBOARD.user=null;
      setAccountNotice('The test pilot account is disabled in production.');
     }
-    if(LEADERBOARD.user){
-     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
-     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
-     await loadOwnProfile();
-    }
+  if(LEADERBOARD.user){
+    if(!LEADERBOARD.recoveryMode)setAccountNotice('');
+    hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+    await loadOwnProfile();
+    await refreshSignedInPilotRecords(1);
+   }
     else{
      LEADERBOARD.recoveryMode=0;
      setAccountNotice('');

@@ -108,7 +108,7 @@ window.__galagaHarness__={
    ? cfg.blobBytes
    : [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88];
   const blob = new Blob([new Uint8Array(bytes)], { type: cfg.type || 'video/webm' });
-  await window.AuroraReplayStore.saveReplay({
+ await window.AuroraReplayStore.saveReplay({
    id: cfg.id || `harness-replay-${Date.now()}`,
    createdAt: cfg.createdAt || new Date().toISOString(),
    duration: +cfg.duration || 12,
@@ -120,6 +120,67 @@ window.__galagaHarness__={
    source: cfg.source || 'local',
    blob
   });
+  return true;
+ },
+ async setupPilotRecordsPanelTest(cfg={}){
+  const replayCreatedAt=cfg.createdAt || new Date(Date.now()-18*60*1000).toISOString();
+  if(window.AuroraReplayStore?.supported?.()){
+   const existing=await window.AuroraReplayStore.listReplays();
+   for(const replay of existing){
+    if(replay.id=== (cfg.replayId || 'replay-stage7-local'))await window.AuroraReplayStore.deleteReplay(replay.id);
+   }
+   await window.AuroraReplayStore.saveReplay({
+    id: cfg.replayId || 'replay-stage7-local',
+    createdAt: replayCreatedAt,
+    duration: +cfg.duration || 113,
+    score: +cfg.score || 654321,
+    stage: +cfg.stage || 7,
+    challenge: !!cfg.challenge,
+    build: (window.BUILD && window.BUILD.version) || '',
+    stats: cfg.stats || { shots: 12, hits: 8 },
+    source: 'local',
+    blob: new Blob([new Uint8Array(cfg.blobBytes || [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88])], { type: cfg.type || 'video/webm' })
+   });
+  }
+  window.__auroraReplayCatalog=[{
+   id: cfg.replayId || 'replay-stage7-local',
+   score: +cfg.score || 654321,
+   stage: +cfg.stage || 7,
+   createdAt: replayCreatedAt,
+   duration: +cfg.duration || 113
+  }];
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user={
+   id: cfg.userId || 'pilot-swd',
+   email: cfg.email || 'sgwoods@gmail.com',
+   email_confirmed_at: new Date().toISOString(),
+   user_metadata: { display_initials: cfg.initials || 'SWD' }
+  };
+  LEADERBOARD.profile={user_id:LEADERBOARD.user.id,display_initials:cfg.initials || 'SWD'};
+  LEADERBOARD.remote.mine=[
+   {
+    id:'remote-top-run',
+    initials:cfg.initials || 'SWD',
+    score:+cfg.score || 654321,
+    stage:+cfg.stage || 7,
+    at:'',
+    verified:true
+   },
+   {
+    id:'remote-backup-run',
+    initials:cfg.initials || 'SWD',
+    score:100020,
+    stage:4,
+    at:'',
+    verified:true
+   }
+  ];
+  LEADERBOARD.cacheStamp.mine=Date.now();
+  LEADERBOARD.accountPanelOpen=1;
+  LEADERBOARD.panelOpen=0;
+  syncLeaderboardPanelVisibility();
+  syncAccountPanelVisibility();
+  syncAccountUi();
   return true;
  },
  openMoviePanel(){
