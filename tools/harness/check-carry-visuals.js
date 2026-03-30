@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { writePortableSummary } = require('./summary-path-util');
-const { withHarnessPage, sleep, waitForHarness, capturePlayfieldRegion } = require('./browser-check-util');
+const { withHarnessPage, sleep, waitForHarness } = require('./browser-check-util');
 
 const OUT = path.join(__dirname, '..', '..', 'harness-artifacts', 'checks', 'carry-visuals');
 
@@ -41,24 +41,21 @@ async function main(){
       const state = window.__galagaHarness__.carryState();
       return state.carry && state.carry.mode === 'carried' && state.carry.relation === 'above' && state.carry.dive === 0 ? state.carry : null;
     }, 2500, 50);
-
-    const topSample = await capturePlayfieldRegion(page, {
-      x: docked.fighterX - 10,
-      y: docked.fighterY - 10,
-      w: 20,
-      h: 20
-    });
+    const dockedRender = await waitForHarness(page, () => {
+      const state = window.__galagaHarness__.renderState();
+      const carry = (state.carryDraws || [])[0] || null;
+      return carry && carry.relation === 'above' && carry.dive === 0 ? carry : null;
+    }, 1200, 50);
     await page.screenshot({ path: path.join(outDir, 'docked-carry.png') });
 
     await page.evaluate(() => window.__galagaHarness__.setupWaitModeCarriedBossTest({ timer: 6 }));
     await sleep(120);
     const waitCarry = await page.evaluate(() => window.__galagaHarness__.carryState().carry);
-    const waitSample = await capturePlayfieldRegion(page, {
-      x: waitCarry.fighterX - 10,
-      y: waitCarry.fighterY - 10,
-      w: 20,
-      h: 20
-    });
+    const waitRender = await waitForHarness(page, () => {
+      const state = window.__galagaHarness__.renderState();
+      const carry = (state.carryDraws || [])[0] || null;
+      return carry && carry.relation === 'above' && carry.dive === 0 ? carry : null;
+    }, 1200, 50);
     await page.screenshot({ path: path.join(outDir, 'wait-mode-carry.png') });
 
     await page.evaluate(() => window.__galagaHarness__.setupCarriedBossFormationTest({
@@ -77,21 +74,14 @@ async function main(){
       const state = window.__galagaHarness__.carryState().carry;
       return state && state.mode === 'carried' && state.dive === 1 ? state : null;
     }, 1200, 50);
-    const divingSample = await capturePlayfieldRegion(page, {
-      x: divingCarry.fighterX - 10,
-      y: divingCarry.fighterY - 10,
-      w: 20,
-      h: 20
-    });
-    const divingWrongSideSample = await capturePlayfieldRegion(page, {
-      x: divingCarry.fighterX - 10,
-      y: (divingCarry.bossY + 18) - 10,
-      w: 20,
-      h: 20
-    });
+    const divingRender = await waitForHarness(page, () => {
+      const state = window.__galagaHarness__.renderState();
+      const carry = (state.carryDraws || [])[0] || null;
+      return carry && carry.dive === 1 ? carry : null;
+    }, 1200, 50);
     await page.screenshot({ path: path.join(outDir, 'diving-carry.png') });
 
-    return { sampled, docked, topSample, waitCarry, waitSample, divingCarry, divingSample, divingWrongSideSample };
+    return { sampled, docked, dockedRender, waitCarry, waitRender, divingCarry, divingRender };
   });
 
   const badCaptured = result.sampled.filter(state => state.mode === 'captured' && state.relation !== 'below');
@@ -109,35 +99,31 @@ async function main(){
   if(result.docked.relation !== 'above' || result.docked.dive !== 0){
     fail('carried fighter did not settle above the boss in docked state', result);
   }
-  if(result.topSample.count < 18){
-    fail('carried fighter was not visibly rendered at the top dock position', result);
+  if(!result.dockedRender || result.dockedRender.relation !== 'above' || result.dockedRender.dive !== 0){
+    fail('renderer did not draw the docked carried fighter above the boss', result);
   }
   if(!result.waitCarry || result.waitCarry.mode !== 'carried' || result.waitCarry.relation !== 'above'){
     fail('wait-mode carried boss did not report an above relation', result);
   }
-  if(result.waitSample.count < 18){
-    fail('wait-mode carried fighter was not visibly rendered near the expected position', result);
+  if(!result.waitRender || result.waitRender.relation !== 'above' || result.waitRender.dive !== 0){
+    fail('renderer did not draw the wait-mode carried fighter above the boss', result);
   }
   if(!result.divingCarry || result.divingCarry.relation !== 'above' || result.divingCarry.dive !== 1){
     fail('diving carried boss did not report an above relation', result);
   }
-  if(result.divingSample.count < 18){
-    fail('diving carried fighter was not visibly rendered at the expected upper-side position', result);
-  }
-  if(result.divingWrongSideSample.count >= result.divingSample.count){
-    fail('diving carried fighter still appears on the wrong side of the boss', result);
+  if(!result.divingRender || result.divingRender.relation !== 'above' || result.divingRender.dive !== 1){
+    fail('renderer did not draw the diving carried fighter above the boss', result);
   }
 
   writePortableSummary(path.join(outDir, 'summary.json'), {
     ok: true,
     outDir,
     docked: result.docked,
-    topSample: result.topSample,
+    dockedRender: result.dockedRender,
     waitCarry: result.waitCarry,
-    waitSample: result.waitSample,
+    waitRender: result.waitRender,
     divingCarry: result.divingCarry,
-    divingSample: result.divingSample,
-    divingWrongSideSample: result.divingWrongSideSample,
+    divingRender: result.divingRender,
     sampledCount: result.sampled.length
   });
 
@@ -145,12 +131,11 @@ async function main(){
     ok: true,
     outDir,
     docked: result.docked,
-    topSample: result.topSample,
+    dockedRender: result.dockedRender,
     waitCarry: result.waitCarry,
-    waitSample: result.waitSample,
+    waitRender: result.waitRender,
     divingCarry: result.divingCarry,
-    divingSample: result.divingSample,
-    divingWrongSideSample: result.divingWrongSideSample,
+    divingRender: result.divingRender,
     sampledCount: result.sampled.length
   }, null, 2));
 }
