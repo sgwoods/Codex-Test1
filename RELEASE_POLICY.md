@@ -186,11 +186,16 @@ Required process:
 7. Publish to beta first:
    - `npm run publish:beta`
 8. Manually verify the exact failure in hosted beta
-9. Approve beta and only then publish production:
+9. If the hotfix changes behavior that can remain stale in an already-open tab,
+   provide an in-app refresh reminder:
+   - tell the player that a new fix is available
+   - tell them how to refresh
+   - prefer a direct refresh action when the UI allows it
+10. Approve beta and only then publish production:
    - `npm run approve:beta`
    - `npm run publish:production`
-10. Verify the original user flow in production after release
-11. Record the fix, regression coverage, and any production data correction
+11. Verify the original user flow in production after release
+12. Record the fix, regression coverage, and any production data correction
 
 Production data rule:
 

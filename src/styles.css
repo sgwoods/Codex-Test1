@@ -370,11 +370,17 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 #buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
+#buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
+#buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
 #buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
 #buildStamp.replay #buildStampChannel{color:#ffe39a}
 #buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
+#buildStamp.updateAvailable{pointer-events:auto;border-color:rgba(255,216,109,.55);box-shadow:inset 0 0 0 1px rgba(255,229,122,.1),0 0 16px rgba(255,216,109,.14)}
+#buildStamp.updateAvailable #buildStampRelease{display:block;color:#ffe39a}
+#buildStamp.updateAvailable #buildStampRefreshBtn{display:inline-block}
+#buildStamp.production.updateAvailable #buildStampRelease{display:block}
 .k{color:var(--a)}
 @media (max-width:980px){
  #cabinetRightFrame{display:none!important}

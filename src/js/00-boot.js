@@ -19,6 +19,7 @@ const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
+const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
@@ -170,6 +171,9 @@ const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
 const BUILD_INFO={version:'{{BUILD_VERSION}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}'};
 const BUILD=BUILD_INFO.label;
+const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
+const BUILD_REFRESH_CHECK_MS=60000;
+const BUILD_UPDATE={available:0,label:'',notified:0,timer:0,checking:0};
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -647,19 +651,60 @@ function syncBuildStampUi(){
  const override=window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
+  buildStamp.classList.remove('updateAvailable');
   buildStamp.classList.add('replay');
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
+ buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=`Lane ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
- if(buildStampRelease)buildStampRelease.textContent=production?'':BUILD_INFO.released;
+ if(buildStampRelease){
+  buildStampRelease.textContent=BUILD_UPDATE.available
+   ? 'New build available. Refresh this tab to get the latest fix.'
+   : (production?'':BUILD_INFO.released);
+ }
+ if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
+}
+async function checkForHostedBuildUpdate(){
+ if(BUILD_UPDATE.checking||location.protocol==='file:')return;
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ BUILD_UPDATE.checking=1;
+ try{
+  const response=await fetch(`${BUILD_INFO_URL}?t=${Date.now()}`,{cache:'no-store'});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const live=await response.json();
+  const nextLabel=String(live?.label||'').trim();
+  const available=!!nextLabel&&nextLabel!==BUILD_INFO.label;
+  BUILD_UPDATE.available=available?1:0;
+  BUILD_UPDATE.label=available?nextLabel:'';
+  syncBuildStampUi();
+  if(available&&!BUILD_UPDATE.notified){
+   BUILD_UPDATE.notified=1;
+   showToast('New build available. Use Refresh Now below or refresh the tab.');
+  }
+ }catch(err){
+  logEvent('build_update_check_failed',{message:String(err?.message||err||'build update check failed')});
+ }finally{
+  BUILD_UPDATE.checking=0;
+ }
+}
+function startHostedBuildUpdateChecks(){
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ clearInterval(BUILD_UPDATE.timer);
+ checkForHostedBuildUpdate();
+ BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
+ addEventListener('focus',()=>{checkForHostedBuildUpdate();});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkForHostedBuildUpdate();});
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
@@ -1083,6 +1128,7 @@ if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)clos
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
  return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
@@ -1200,3 +1246,4 @@ addEventListener('pointerdown',e=>{
 });
 syncTestUi();
 syncBuildStampUi();
+startHostedBuildUpdateChecks();
