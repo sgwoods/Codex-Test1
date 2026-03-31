@@ -182,6 +182,14 @@ const BUILD_REFRESH_HINT=(()=>{
   return false;
  }
 })();
+function clearBuildRefreshHintUrl(){
+ if(!BUILD_REFRESH_HINT)return;
+ try{
+  const url=new URL(location.href);
+  url.searchParams.delete('refreshHint');
+  history.replaceState(null,'',url.toString());
+ }catch{}
+}
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -741,7 +749,10 @@ function startHostedBuildUpdateChecks(){
  clearInterval(BUILD_UPDATE.timer);
  applySeenBuildReminder();
  markHostedBuildSeen();
- if(BUILD_REFRESH_HINT&&channel==='production beta')return;
+ if(BUILD_REFRESH_HINT&&channel==='production beta'){
+  clearBuildRefreshHintUrl();
+  return;
+ }
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
