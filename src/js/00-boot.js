@@ -173,7 +173,15 @@ const BUILD_INFO={version:'{{BUILD_VERSION}}',label:'{{BUILD_LABEL}}',commit:'{{
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
-const BUILD_UPDATE={available:0,label:'',notified:0,timer:0,checking:0};
+const BUILD_SEEN_KEY=`${STORAGE_PREFIX}LastSeenBuild:${String(BUILD_INFO.releaseChannel||'development').toLowerCase().replace(/[^a-z0-9]+/g,'-')}`;
+const BUILD_UPDATE={available:0,label:'',mode:'',notified:0,timer:0,checking:0};
+const BUILD_REFRESH_HINT=(()=>{
+ try{
+  return new URLSearchParams(location.search).get('refreshHint')==='1';
+ }catch{
+  return false;
+ }
+})();
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -668,10 +676,38 @@ function syncBuildStampUi(){
  if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
-   ? 'New build available. Refresh this tab to get the latest fix.'
+   ? (BUILD_UPDATE.mode==='seen'
+     ? 'This build updated since your last visit. Refresh once if anything looks stale.'
+     : 'New build available. Refresh this tab to get the latest fix.')
    : (production?'':BUILD_INFO.released);
  }
  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
+}
+function markHostedBuildSeen(){
+ writePref(BUILD_SEEN_KEY,BUILD_INFO.label);
+}
+function applySeenBuildReminder(){
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
+ const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
+ if(testHint){
+  BUILD_UPDATE.available=1;
+  BUILD_UPDATE.label=BUILD_INFO.label;
+  BUILD_UPDATE.mode='seen';
+  BUILD_UPDATE.notified=1;
+  syncBuildStampUi();
+  showToast('Refresh reminder test active. Use Refresh Now below or refresh the tab.');
+  return;
+ }
+ if(seenLabel&&seenLabel!==BUILD_INFO.label){
+  BUILD_UPDATE.available=1;
+  BUILD_UPDATE.label=BUILD_INFO.label;
+  BUILD_UPDATE.mode='seen';
+  BUILD_UPDATE.notified=1;
+  syncBuildStampUi();
+  showToast('This build updated since your last visit. Use Refresh Now below or refresh the tab.');
+ }
 }
 async function checkForHostedBuildUpdate(){
  if(BUILD_UPDATE.checking||location.protocol==='file:')return;
@@ -686,6 +722,7 @@ async function checkForHostedBuildUpdate(){
   const available=!!nextLabel&&nextLabel!==BUILD_INFO.label;
   BUILD_UPDATE.available=available?1:0;
   BUILD_UPDATE.label=available?nextLabel:'';
+  BUILD_UPDATE.mode=available?'remote':'';
   syncBuildStampUi();
   if(available&&!BUILD_UPDATE.notified){
    BUILD_UPDATE.notified=1;
@@ -701,6 +738,8 @@ function startHostedBuildUpdateChecks(){
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  if(!['production','production beta'].includes(channel))return;
  clearInterval(BUILD_UPDATE.timer);
+ applySeenBuildReminder();
+ markHostedBuildSeen();
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
