@@ -2,9 +2,9 @@
 
 Current state:
 
-- the four-stage `1.0` slice is now ready for the formal `1.0.0` launch push
-- the beta -> approve -> production release path is proven
-- the production leaderboard baseline has been reset cleanly
+- `1.0.0` is now live in production
+- the beta -> approve -> production release path is proven in real release use
+- the production leaderboard baseline is clean for official post-launch scoring
 
 Recently completed:
 
@@ -17,11 +17,12 @@ Recently completed:
   fields
 - the production leaderboard reset for the true `1.0` baseline was completed
 
-What remains before the true `1.0` launch:
+Immediate post-launch focus:
 
-- publish the official `1.0.0` beta candidate
-- approve that beta candidate
-- promote the approved `1.0.0` build to production
+- begin the structured `1.x` refinement track without reopening `1.0` scope
+- keep the live production scoreboard and pilot flows stable
+- move planned identity, admin, and media improvements into their tracked `1.x`
+  issues
 
 What is intentionally moving to `1.x`:
 
@@ -43,9 +44,9 @@ What is intentionally moving to `1.x`:
 Release lanes right now:
 
 - beta:
-  - next target: `1.0.0-beta.1`
+  - `1.0.0-beta.1+build.276.sha.a59c5ad.beta`
 - production:
-  - current live: `0.5.0+build.273.sha.d168628`
+  - `1.0.0+build.276.sha.a59c5ad`
 
 Guiding principle:
 

@@ -183,31 +183,28 @@ Expansion beyond Stage `4`, new theme systems, and broader content breadth are
 still valuable, but they are now explicitly post-`1.0` work unless they are
 needed to support this smaller shipped slice.
 
-### Launch Blocking List
+### Post-Launch View
 
-This is the maintained release view for the scoped four-stage `1.0` launch.
-Use it as the default triage order until launch unless a new regression clearly
-overrides it.
+`1.0.0` is now live.
 
-Current launch checkpoint:
+Current release checkpoint:
 
-- beta refreshed to:
-  - `0.5.0-beta.1+build.273.sha.d168628.beta`
-- production approval path has been exercised successfully:
+- beta:
+  - `1.0.0-beta.1+build.276.sha.a59c5ad.beta`
+- production:
+  - `1.0.0+build.276.sha.a59c5ad`
+- production promotion path was used successfully:
   - `publish:beta -> approve:beta -> publish:production`
-- final release-readiness signoff is complete
+- final release-readiness signoff was completed
 - public build metadata no longer exposes non-production test-pilot identity
   fields
-- most former launch blockers are now closed
-- the only explicit pre-`1.0` release operation left is the production
-  leaderboard reset for the true launch baseline
+- the production leaderboard baseline reset for `#130` is complete
 
 Current coding priority:
 
-1. execute `#130` production leaderboard reset before the final `1.0` push
-2. make the final production launch decision from the current reviewed
-   candidate
-3. move `#44` and the broader refinement/admin/identity work into `1.x`
+1. keep `1.0.0` stable in production
+2. move `#44` and the broader refinement/admin/identity work into `1.x`
+3. start the structured post-launch quality and platform track deliberately
 
 What changed since the last full review:
 
@@ -229,12 +226,11 @@ What changed since the last full review:
   - `#44`
 - release-path hardening is now proven in a real rehearsal, not just implemented
 - remaining pilot/admin/email/platform work is now clearly tracked as post-`1.0`
-- the production leaderboard reset is now an explicit release operation:
+- the production leaderboard reset is complete:
   - `#130`
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
-| Must Fix Now | `#130` | Shared | Required pre-launch operation | The current production leaderboard still contains pre-`1.0` scores from a moving rules/tuning baseline. A true `1.0` launch should start from a clean official scoreboard. | Reset the production leaderboard before the final `1.0` production push. | Phase 4 |
 | Can Slip | `#96` / `#98` | Shared | Watch / close candidate | Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers. | Keep the checks green and close if no new regression appears during final signoff. | Phase 4 |
 | Can Slip | `#103` / `#105` / `#110` / `#114` / `#115` / `#116` / `#117` / `#119` / `#120` | Shared | Post-blocker polish | The shell, pilot, popup, and replay surfaces are all much stronger now. Remaining work is polish/expansion unless a new trust bug appears. | Keep improving in `1.x` unless a concrete launch issue reappears. | Phase 3 |
 | Post-1.0 | `#44` / `#121` / `#124` / `#126` / `#127` / `#128` / `#129` | Shared | Planned | Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, and version-aware leaderboard tracking all belong to the `1.x` refinement track. | Keep them in the structured `1.x` program, not the `1.0` blocker path. | Post-1.0 |

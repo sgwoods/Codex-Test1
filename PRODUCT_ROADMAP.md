@@ -3,12 +3,12 @@
 ## Current Release Train
 
 - Current line:
-  - `1.0.0`
+  - `1.0.x`
 - Current phase:
-  - `launch`
+  - `post-launch stabilization`
 - Goal of this phase:
-  - ship the polished four-stage arcade slice cleanly and begin the `1.x`
-    refinement track without reopening the launch scope
+  - keep the shipped four-stage arcade slice stable while moving the broader
+    identity, admin, and media work into the planned `1.x` track
 
 ## Immediate Target: 1.0 Four-Stage Slice
 
