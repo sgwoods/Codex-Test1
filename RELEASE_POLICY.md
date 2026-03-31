@@ -147,6 +147,69 @@ Optional test-pilot override for non-production:
    - `https://sgwoods.github.io/Aurora-Galactica/`
      serves the promoted production build
 
+## Hotfix Process
+
+A hotfix is a small, controlled production repair. It is not a fast path around
+the release process.
+
+Goals:
+
+- fix the live issue without widening scope
+- preserve evidence before mutating data
+- add a regression when the failure can recur
+- validate the exact fix in beta before promoting production
+
+Required process:
+
+1. Freeze scope to the specific production failure:
+   - do not combine unrelated cleanup, refactor, or opportunistic polish
+2. Preserve evidence first:
+   - screenshots
+   - user-visible symptoms
+   - timestamps
+   - score/account identifiers if relevant
+   - production data inspection before mutation
+3. Assess blast radius:
+   - gameplay
+   - auth
+   - leaderboard/data integrity
+   - replay/media
+   - release tooling
+4. Patch source in `Codex-Test1` first:
+   - never treat direct production editing as the real fix
+5. Add or update a focused regression:
+   - especially for score submit, auth, replay, and game-over flows
+6. Verify locally:
+   - `npm run build`
+   - focused harness checks
+   - adjacent sanity checks for nearby behavior
+7. Publish to beta first:
+   - `npm run publish:beta`
+8. Manually verify the exact failure in hosted beta
+9. Approve beta and only then publish production:
+   - `npm run approve:beta`
+   - `npm run publish:production`
+10. Verify the original user flow in production after release
+11. Record the fix, regression coverage, and any production data correction
+
+Production data rule:
+
+- If a stopgap production data correction is required, inspect first and mutate
+  minimally.
+- Record exactly what changed.
+- Still ship the real source fix through the normal hotfix path.
+
+Aurora hotfix checklist:
+
+```bash
+npm run build
+# run focused harness checks
+npm run publish:beta
+# manual hosted beta verification
+npm run approve:beta
+npm run publish:production
+```
+
 ### True 1.0 Launch Baseline Reset
 
 - `#130` is a required pre-`1.0` release operation.

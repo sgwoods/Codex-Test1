@@ -141,6 +141,29 @@ npm run approve:beta
 npm run publish:production
 ```
 
+### Current hotfix candidate evidence
+
+For the current score-submit hotfix candidate on `431ee08`, the following
+evidence is already in place before manual beta review:
+
+- build passes on the current source line:
+  - `npm run build`
+- focused regression passes for the repaired score-submit path:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
+  - evidence captured by the check:
+    - immediate remote submit at game over for a locked signed-in pilot
+    - payload includes expected score and stage
+    - successful submit marks `remoteSubmitted = 1`
+    - failed submit writes a persistent local diagnostics entry
+    - failed submit preserves a bug-report-ready diagnostics payload
+- adjacent production account feedback regression still passes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-production-account-feedback.js`
+- beta publish succeeded for the candidate:
+  - `1.0.0-beta.1+build.278.sha.431ee08.beta`
+
+That means the current beta is already a legitimate manual-review candidate,
+not an untested patch.
+
 ### Launch-significant operational checks
 
 Before final `1.0` sign-off, confirm:
