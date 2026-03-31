@@ -1,6 +1,12 @@
 {
   "notes": [
     {
+      "version": "1.0.0+build.284",
+      "date": "2026-03-31",
+      "title": "Post-launch score-submit and refresh-reminder hotfix",
+      "summary": "Fixed a production issue where signed-in runs could save locally without inserting into the shared leaderboard, moved remote score submission into the main game-over path with diagnostics-backed failure reporting, and added a hosted refresh reminder with a one-click action so players on stale tabs can pick up live fixes cleanly."
+    },
+    {
       "version": "1.0.0",
       "date": "2026-03-30",
       "title": "Aurora Galactica 1.0 launch",

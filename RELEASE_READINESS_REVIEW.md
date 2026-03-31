@@ -143,8 +143,8 @@ npm run publish:production
 
 ### Current hotfix candidate evidence
 
-For the current score-submit hotfix candidate on `431ee08`, the following
-evidence is already in place before manual beta review:
+For the shipped score-submit and refresh-reminder hotfix line on `f77ca58`,
+the following evidence was in place before production promotion:
 
 - build passes on the current source line:
   - `npm run build`
@@ -158,11 +158,18 @@ evidence is already in place before manual beta review:
     - failed submit preserves a bug-report-ready diagnostics payload
 - adjacent production account feedback regression still passes:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-production-account-feedback.js`
-- beta publish succeeded for the candidate:
-  - `1.0.0-beta.1+build.278.sha.431ee08.beta`
+- beta review path succeeded for the refresh reminder:
+  - hosted beta review link showed the reminder state
+  - `Refresh Now` was confirmed visible and clickable
+  - the one-shot beta hint cleared after refresh so the reminder disappeared on
+    the next load
+- beta publish succeeded for the approved candidate:
+  - `1.0.0-beta.1+build.284.sha.f77ca58.beta`
+- production publish succeeded from the approved beta artifact:
+  - `1.0.0+build.284.sha.f77ca58`
 
-That means the current beta is already a legitimate manual-review candidate,
-not an untested patch.
+That means the hotfix was promoted through the normal path with both automated
+and manual evidence, not rushed directly into production.
 
 ### Launch-significant operational checks
 
