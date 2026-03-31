@@ -160,7 +160,7 @@ function loseShip(cause={}){
  ex(p.x,p.y,42,'#86c7ff');
  ex(p.x,p.y,28,'#f4f8ff');
  ex(p.x,p.y,14,'#ff7f9f');
- const shipsRemaining=Math.max(0,S.lives+1);
+ const shipsRemaining=Math.max(0,S.lives);
  S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();

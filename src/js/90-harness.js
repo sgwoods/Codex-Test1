@@ -239,6 +239,27 @@ window.__galagaHarness__={
   }
   return false;
  },
+ triggerShipLoss(cfg={}){
+  const reserveLives = Math.max(0, Number.isFinite(+cfg.reserveLives) ? (+cfg.reserveLives|0) : 1);
+  S.lives = reserveLives;
+  S.alertTxt = '';
+  S.alertT = 0;
+  S.eb.length = 0;
+  S.recoverT = 0;
+  S.attackGapT = 0;
+  const p = S.p;
+  p.inv = 0;
+  p.spawn = 0;
+  p.captured = 0;
+  p.dual = 0;
+  loseShip({ cause: cfg.cause || 'harness_ship_loss' });
+  return {
+   alertTxt: S.alertTxt || '',
+   livesAfter: S.lives,
+   spawn: +(+p.spawn || 0).toFixed(3),
+   inv: +(+p.inv || 0).toFixed(3)
+  };
+ },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
