@@ -492,9 +492,12 @@ function draw(){
   }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
+  const compactStampH=56;
+  const stampH=buildStamp.offsetHeight||compactStampH;
+  const anchorTop=shellY+shellH-Math.max(66,Math.floor(shellPadB*.78));
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
-  buildStamp.style.top=`${shellY+shellH-Math.max(66,Math.floor(shellPadB*.78))}px`;
+  buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
   buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
   }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
