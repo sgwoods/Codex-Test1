@@ -713,6 +713,7 @@ async function checkForHostedBuildUpdate(){
  if(BUILD_UPDATE.checking||location.protocol==='file:')return;
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  if(!['production','production beta'].includes(channel))return;
+ if(BUILD_REFRESH_HINT&&channel==='production beta')return;
  BUILD_UPDATE.checking=1;
  try{
   const response=await fetch(`${BUILD_INFO_URL}?t=${Date.now()}`,{cache:'no-store'});
@@ -740,6 +741,7 @@ function startHostedBuildUpdateChecks(){
  clearInterval(BUILD_UPDATE.timer);
  applySeenBuildReminder();
  markHostedBuildSeen();
+ if(BUILD_REFRESH_HINT&&channel==='production beta')return;
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
