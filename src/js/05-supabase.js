@@ -141,6 +141,7 @@ function remoteAuthEnabled(){
  return RELEASE_CHANNEL==='production'||testAccountEnabled();
 }
 function remoteWriteEnabled(){
+ if(window.__auroraHarnessForceRemoteWrite)return true;
  if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
  return isSignedInAsTestAccount();
 }
@@ -795,6 +796,14 @@ async function submitScoreRemote(entry){
  if(!remoteWriteEnabled()){
   setLeaderboardStatus('Saved locally · production submit disabled in this lane');
   syncLeaderboardUi();
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_blocked','Remote score submit blocked by lane policy',{
+    score:+entry.score|0,
+    stage:+entry.stage|0,
+    initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+    releaseChannel:RELEASE_CHANNEL
+   },{level:'info'});
+  }
   return 0;
  }
  const payload={
@@ -807,9 +816,63 @@ async function submitScoreRemote(entry){
   payload.user_id=LEADERBOARD.user.id;
   payload.is_verified=!!LEADERBOARD.user.email_confirmed_at;
  }
- const {error}=await LEADERBOARD.client.from('scores').insert(payload);
- if(error){
-  setLeaderboardStatus('Saved locally · online submit unavailable');
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_attempt','Attempting remote score submit',{
+   score:payload.score,
+   stage:payload.stage,
+   initials:payload.initials,
+   verified:!!payload.is_verified,
+   userId:payload.user_id||''
+  },{level:'info'});
+ }
+ try{
+  const {error}=await LEADERBOARD.client.from('scores').insert(payload);
+  if(error){
+   if(typeof recordSystemIssue==='function'){
+    recordSystemIssue('score_submit_failed',String(error.message||error)||'Remote score insert failed',{
+     score:payload.score,
+     stage:payload.stage,
+     initials:payload.initials,
+     verified:!!payload.is_verified,
+     userId:payload.user_id||''
+    },{
+     level:'error',
+     suggestBugReport:1,
+     summary:'Online score save failed',
+     description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+     prompt:'Online score save failed. Please submit a bug report.'
+    });
+   }
+   setLeaderboardStatus('Saved locally only · online submit failed');
+   syncLeaderboardUi();
+   return 0;
+  }
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_ok','Remote score submit succeeded',{
+    score:payload.score,
+    stage:payload.stage,
+    initials:payload.initials,
+    verified:!!payload.is_verified,
+    userId:payload.user_id||''
+   },{level:'info'});
+  }
+ }catch(err){
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit threw unexpectedly'),{
+    score:payload.score,
+    stage:payload.stage,
+    initials:payload.initials,
+    verified:!!payload.is_verified,
+    userId:payload.user_id||''
+   },{
+    level:'error',
+    suggestBugReport:1,
+    summary:'Online score save failed',
+    description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+    prompt:'Online score save failed. Please submit a bug report.'
+   });
+  }
+  setLeaderboardStatus('Saved locally only · online submit failed');
   syncLeaderboardUi();
   return 0;
  }
@@ -826,9 +889,31 @@ function submitGameOverScore(){
  if(!entry)return;
  gameOverState.remoteSubmitted='pending';
  LEADERBOARD.submitBusy=1;
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_queued','Queued game-over score for remote submit',{
+   score:+entry.score|0,
+   stage:+entry.stage|0,
+   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3)
+  },{level:'info'});
+ }
  submitScoreRemote(entry)
   .then(ok=>{gameOverState.remoteSubmitted=ok?1:0;})
-  .catch(()=>{gameOverState.remoteSubmitted=0;})
+  .catch(err=>{
+   gameOverState.remoteSubmitted=0;
+   if(typeof recordSystemIssue==='function'){
+    recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit promise rejected'),{
+     score:+entry.score|0,
+     stage:+entry.stage|0,
+     initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3)
+    },{
+     level:'error',
+     suggestBugReport:1,
+     summary:'Online score save failed',
+     description:'A signed-in score was saved locally but the online leaderboard submit rejected unexpectedly.',
+     prompt:'Online score save failed. Please submit a bug report.'
+    });
+   }
+  })
   .finally(()=>{LEADERBOARD.submitBusy=0;});
 }
 function authRedirectUrl(){
@@ -881,6 +966,7 @@ async function signUpAccount(){
  });
  LEADERBOARD.authBusy=0;
  if(error){
+  if(typeof recordSystemIssue==='function')recordSystemIssue('auth_signup_failed',friendlyAuthError('signup',error),{emailDomain:email.split('@')[1]||'', lane:RELEASE_CHANNEL},{level:'warn'});
   setAccountNotice(`Signup failed: ${friendlyAuthError('signup',error)}`);
   syncAccountUi();
   return;
@@ -908,6 +994,7 @@ async function loginAccount(){
  const {error}=await LEADERBOARD.client.auth.signInWithPassword({email,password});
  LEADERBOARD.authBusy=0;
  if(error){
+  if(typeof recordSystemIssue==='function')recordSystemIssue('auth_login_failed',friendlyAuthError('login',error),{emailDomain:email.split('@')[1]||'', lane:RELEASE_CHANNEL},{level:'warn'});
   setAccountNotice(`Login failed: ${friendlyAuthError('login',error)}`);
   syncAccountUi();
   return;
@@ -936,6 +1023,7 @@ async function resetAccountPassword(){
  const {error}=await LEADERBOARD.client.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
  LEADERBOARD.authBusy=0;
  if(error){
+  if(typeof recordSystemIssue==='function')recordSystemIssue('auth_reset_failed',friendlyAuthError('reset',error),{emailDomain:email.split('@')[1]||'', lane:RELEASE_CHANNEL},{level:'warn'});
   setAccountNotice(`Reset password failed: ${friendlyAuthError('reset',error)}`);
   syncAccountUi();
   return;

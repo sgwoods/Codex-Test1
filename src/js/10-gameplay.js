@@ -184,6 +184,7 @@ function gameOver(){
  stopRunRecording();
  gameOverState=buildGameOverState(S.score,S.stage);
  gameOverHtml=buildGameOverHtmlFromState();
+ if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
  sfx.over();
 }
 function bulletsMax(){return S.p.dual?4:2}

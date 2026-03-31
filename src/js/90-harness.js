@@ -260,6 +260,77 @@ window.__galagaHarness__={
    inv: +(+p.inv || 0).toFixed(3)
   };
  },
+ setupRemoteScoreSubmitTest(cfg={}){
+  window.__auroraHarnessForceRemoteWrite=1;
+  localStorage.removeItem(SCOREBOARD_KEY);
+  localStorage.removeItem(SYSTEM_LOG_KEY);
+  const initials=sanitizeInitials(cfg.initials||'SGW').padEnd(3,'-').slice(0,3);
+  const harnessState={
+   mode:cfg.mode==='failure'?'failure':'success',
+   calls:[],
+   errorMessage:String(cfg.errorMessage||'Harness remote submit failed')
+  };
+  window.__auroraScoreSubmitHarness=harnessState;
+  window.__auroraRefreshLeaderboardReal=window.__auroraRefreshLeaderboardReal||refreshLeaderboard;
+  refreshLeaderboard=async()=>[];
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user={
+   id:String(cfg.userId||'pilot-harness'),
+   email:String(cfg.email||'pilot@example.com'),
+   email_confirmed_at:new Date().toISOString(),
+   user_metadata:{display_initials:initials}
+  };
+  LEADERBOARD.profile={user_id:LEADERBOARD.user.id,display_initials:initials};
+  LEADERBOARD.client={
+   from(table){
+    if(table!=='scores')throw new Error(`Unexpected table ${table}`);
+    return{
+     async insert(payload){
+      harnessState.calls.push(Object.assign({},payload));
+      if(harnessState.mode==='failure')return{error:{message:harnessState.errorMessage}};
+      return{error:null};
+     }
+    };
+   }
+  };
+  syncAccountUi();
+  return true;
+ },
+ triggerRemoteScoreGameOver(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  S.attract=0;
+  S.score=+cfg.score||76770;
+  S.stage=+cfg.stage||12;
+  S.lives=Math.max(0,(+cfg.reserveLives||0));
+  S.stats={shots:+cfg.shots||10,hits:+cfg.hits||8};
+  S.p.dual=0;
+  S.p.captured=0;
+  S.p.pending=0;
+  S.p.spawn=0;
+  S.p.inv=0;
+  S.p.capBoss=null;
+  gameOver();
+  return{
+   remoteSubmitted:gameOverState?.remoteSubmitted||0,
+   phase:gameOverState?.phase||'',
+   score:S.score,
+   stage:S.stage
+  };
+ },
+ remoteScoreSubmitState(){
+  return{
+   calls:(window.__auroraScoreSubmitHarness?.calls||[]).map(call=>Object.assign({},call)),
+   remoteSubmitted:gameOverState?.remoteSubmitted||0,
+   systemLog:typeof recentSystemLogEntries==='function'?recentSystemLogEntries(20):[],
+   summary:fbSummary?.value||'',
+   description:fbDescription?.value||'',
+   accountSummary:accountSummary?.textContent||'',
+   leaderboardStatus:leaderboardStatusEl?.textContent||''
+  };
+ },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},

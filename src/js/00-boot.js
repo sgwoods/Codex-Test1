@@ -12,6 +12,7 @@ const helpModal=document.getElementById('helpModal'),helpClose=document.getEleme
 const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),helpPanels=Array.from(document.querySelectorAll('[data-help-panel]'));
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
+const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -31,6 +32,7 @@ const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
+const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
  [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
  [TEST_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}TestCfg`,
@@ -38,8 +40,10 @@ const LEGACY_STORAGE_KEYS={
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
- [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
+ [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
+ [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
+const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 function readPref(key){
  try{
@@ -60,6 +64,94 @@ function writePref(key,value){
 function removePref(key){
  try{localStorage.removeItem(key)}catch{}
 }
+function loadSystemLog(){
+ try{
+  return JSON.parse(readPref(SYSTEM_LOG_KEY)||'[]')
+   .filter(entry=>entry&&entry.at&&entry.action)
+   .slice(-SYSTEM_LOG_LIMIT);
+ }catch{
+  return [];
+ }
+}
+function saveSystemLog(entries){
+ writePref(SYSTEM_LOG_KEY,JSON.stringify((entries||[]).slice(-SYSTEM_LOG_LIMIT)));
+}
+function recentSystemLogEntries(limit=20){
+ const count=Math.max(1,Math.min(SYSTEM_LOG_LIMIT,+limit||20));
+ return loadSystemLog().slice(-count);
+}
+function queueBugSuggestion(summary='',description=''){
+ pendingBugSuggestion={
+  summary:String(summary||'').trim(),
+  description:String(description||'').trim(),
+  at:Date.now()
+ };
+}
+function applyPendingBugSuggestion(){
+ if(!pendingBugSuggestion)return;
+ if(fbType)fbType.value='bug_report';
+ if(fbSummary&&!String(fbSummary.value||'').trim())fbSummary.value=pendingBugSuggestion.summary||'Unexpected game issue';
+ if(fbDescription&&!String(fbDescription.value||'').trim())fbDescription.value=pendingBugSuggestion.description||'Please describe what happened. Recent diagnostics will be attached automatically.';
+ pendingBugSuggestion=null;
+}
+function formatDiagnosticsLines(label,rows){
+ if(!rows.length)return [`${label}: none`];
+ return[
+  `${label}:`,
+  ...rows.map(row=>`- ${row.at||'--'} | ${row.level||'info'} | ${row.action||'event'} | ${row.message||''}${row.data?` | ${JSON.stringify(row.data)}`:''}`)
+ ];
+}
+function recentSessionDiagnostics(limit=20){
+ const count=Math.max(1,Math.min(200,+limit||20));
+ if(!REC)return [];
+ return REC.events.slice(-count).map(event=>({
+  at:`+${Number.isFinite(+event.t)?(+event.t).toFixed(3):'0.000'}s`,
+  level:'info',
+  action:event.type||'event',
+  message:event.type||'event',
+  data:event
+ }));
+}
+function getSystemDiagnosticsReport(limit=20){
+ return{
+  systemLog:recentSystemLogEntries(limit),
+  sessionEvents:recentSessionDiagnostics(limit)
+ };
+}
+function recordSystemIssue(action,message,data={},opts={}){
+ const entry={
+  at:new Date().toISOString(),
+  level:String(opts.level||'error'),
+  action:String(action||'issue'),
+  message:String(message||'').trim()||'Unexpected issue',
+  build:BUILD,
+  channel:String(BUILD_INFO?.releaseChannel||'development'),
+  url:location.href,
+  stage:S.stage,
+  score:S.score,
+  lives:Math.max(0,S.lives+1),
+  started:!!started,
+  paused:!!paused
+ };
+ if(data&&Object.keys(data).length)entry.data=data;
+ const rows=loadSystemLog();
+ rows.push(entry);
+ saveSystemLog(rows);
+ logEvent('system_issue',{level:entry.level,action:entry.action,message:entry.message});
+ if(opts.suggestBugReport){
+  queueBugSuggestion(
+   opts.summary||'Unexpected game issue',
+   opts.description||`${entry.message}\n\nPlease describe what you were doing when this happened.`
+  );
+  const prompt=opts.prompt||'Please submit a bug report. Recent diagnostics will be attached automatically.';
+  if(feedbackOpen)setFeedbackStatus(prompt,1);
+  showToast(prompt);
+ }
+ return entry;
+}
+window.recordSystemIssue=recordSystemIssue;
+window.getSystemDiagnosticsReport=getSystemDiagnosticsReport;
+window.recentSystemLogEntries=recentSystemLogEntries;
 function randUnit(){
  if(!RNG_SEED)return Math.random();
  RNG_STATE=(RNG_STATE+0x6D2B79F5)|0;
@@ -82,6 +174,7 @@ const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
 let settingsOpen=0,settingsPrevPaused=0;
 let REC=null,recShotT=0,sessionN=0;
@@ -845,6 +938,8 @@ function openFeedback(){
   feedbackDockBtn.classList.add('open');
   feedbackDockBtn.setAttribute('aria-expanded','true');
  }
+ if(feedbackSubtitle)feedbackSubtitle.textContent='Report a bug or send a feature idea without leaving the game board. Recent diagnostics are attached automatically.';
+ applyPendingBugSuggestion();
  setFeedbackStatus('');
  syncPauseUi();
  setTimeout(()=>fbSummary.focus(),0);
@@ -876,12 +971,13 @@ async function submitFeedback(ev){
  if(description.length<10){setFeedbackStatus('Description must be at least 10 characters.',1);return;}
  feedbackBusy=1;
  setFeedbackStatus('Sending feedback...');
-  const payload={
+ const payload={
   type,title,description,
   timestamp:new Date(now).toISOString(),
   game:{name:PRODUCT_NAME,version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge,attract:!!ATTRACT.active}
  };
+ const diagnostics=getSystemDiagnosticsReport(20);
  const kind=type==='feature_request'?'Feature Request':'Bug Report';
  const subject=`[${kind}] ${title}`;
  const lines=[
@@ -897,7 +993,11 @@ async function submitFeedback(ev){
   `Started: ${started?1:0}`,
   `Paused: ${paused?1:0}`,
   `Challenge: ${S.challenge?1:0}`,
-  `User-Agent: ${navigator.userAgent}`
+  `User-Agent: ${navigator.userAgent}`,
+  '',
+  ...formatDiagnosticsLines('Recent system log',diagnostics.systemLog),
+  '',
+  ...formatDiagnosticsLines('Recent session events',diagnostics.sessionEvents)
  ];
  try{
   const r=await fetch(FORMSUBMIT_ENDPOINT,{
@@ -920,6 +1020,8 @@ async function submitFeedback(ev){
     paused:paused?1:0,
     challenge:S.challenge?1:0,
     user_agent:navigator.userAgent,
+    system_log:JSON.stringify(diagnostics.systemLog),
+    recent_session_events:JSON.stringify(diagnostics.sessionEvents),
     message:lines.join('\n')
    })
   });
@@ -931,6 +1033,7 @@ async function submitFeedback(ev){
   showToast('Feedback sent');
   setTimeout(()=>closeFeedback(),220);
  }catch(err){
+  recordSystemIssue('feedback_submit_failed',String(err?.message||err||'Feedback submission failed'),{type,title},{level:'warn'});
   openMailFallback(subject,lines);
   setFeedbackStatus('FormSubmit could not send directly. Opened mail draft fallback.',1);
   showToast('Mail fallback opened');
