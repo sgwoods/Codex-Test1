@@ -192,22 +192,29 @@ overrides it.
 Current launch checkpoint:
 
 - beta refreshed to:
-  - `0.5.0-beta.1+build.271.sha.ab5bc3c.beta`
+  - `0.5.0-beta.1+build.273.sha.d168628.beta`
 - production approval path has been exercised successfully:
   - `publish:beta -> approve:beta -> publish:production`
+- final release-readiness signoff is complete
+- public build metadata no longer exposes non-production test-pilot identity
+  fields
 - most former launch blockers are now closed
-- the launch list is down to one fresh gameplay bug, the final signoff pass,
-  and two explicit “do or slip” visual decisions
+- the only explicit pre-`1.0` release operation left is the production
+  leaderboard reset for the true launch baseline
 
 Current coding priority:
 
-1. confirm `#125` on hosted beta and close it if clean
-2. run the final `#85` release-readiness/signoff pass
-3. decide whether `#48` and `#44` belong in `1.0` or should slip to `1.x`
+1. execute `#130` production leaderboard reset before the final `1.0` push
+2. make the final production launch decision from the current reviewed
+   candidate
+3. move `#44` and the broader refinement/admin/identity work into `1.x`
 
 What changed since the last full review:
 
 - closed:
+  - `#48`
+  - `#85`
+  - `#125`
   - `#61`
   - `#76`
   - `#79`
@@ -218,20 +225,19 @@ What changed since the last full review:
   - `#109`
   - `#112`
   - `#113`
-- fixed on dev and shipped to beta:
-  - `#125` ship-loss remaining-ships overcount
+- deferred from the `1.0` path:
+  - `#44`
 - release-path hardening is now proven in a real rehearsal, not just implemented
 - remaining pilot/admin/email/platform work is now clearly tracked as post-`1.0`
+- the production leaderboard reset is now an explicit release operation:
+  - `#130`
 
 | Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
 | --- | --- | --- | --- | --- | --- | --- |
-| Must Fix Now | `#125` | Codex | Fixed on dev + beta | The ship-loss alert used to count the ship being destroyed and could report too many remaining ships. Dedicated harness now proves `ONE SHIP REMAINING` in the one-reserve case, and beta now includes commit `ab5bc3c`. | Confirm once on hosted beta, then close. | Phase 2 |
-| Must Fix Now | `#85` | Shared | Implemented on dev | `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md` now exists and the broader launch blocker list has been reduced to a short, real set. | Run the final release-readiness/signoff pass. | Phase 4 |
-| Should Fix Before Launch | `#48` | Shared | Reassess | The playfield frame now feels much better than it did when filed, but it is still worth making a deliberate launch call rather than letting it linger by inertia. | Decide explicitly: close for `1.0` or slip to `1.x`. | Phase 2 |
-| Should Fix Before Launch | `#44` | Shared | Reassess | A bottom-right stage indicator is still attractive arcade polish, but it may no longer justify launch-path attention. | Decide explicitly: implement for `1.0` or slip to `1.x`. | Phase 2 |
+| Must Fix Now | `#130` | Shared | Required pre-launch operation | The current production leaderboard still contains pre-`1.0` scores from a moving rules/tuning baseline. A true `1.0` launch should start from a clean official scoreboard. | Reset the production leaderboard before the final `1.0` production push. | Phase 4 |
+| Can Slip | `#96` / `#98` | Shared | Watch / close candidate | Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers. | Keep the checks green and close if no new regression appears during final signoff. | Phase 4 |
 | Can Slip | `#103` / `#105` / `#110` / `#114` / `#115` / `#116` / `#117` / `#119` / `#120` | Shared | Post-blocker polish | The shell, pilot, popup, and replay surfaces are all much stronger now. Remaining work is polish/expansion unless a new trust bug appears. | Keep improving in `1.x` unless a concrete launch issue reappears. | Phase 3 |
-| Should Fix Before Launch | `#96` / `#98` | Shared | Watch / close candidate | Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers. | Keep the checks green and close if no new regression appears during final signoff. | Phase 4 |
-| Post-1.0 | `#121` / `#124` / `#126` / `#127` / `#128` | Shared | Planned | Shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, and richer email branding are all valuable next-phase work. | Keep them in the structured `1.x` program, not the `1.0` blocker path. | Post-1.0 |
+| Post-1.0 | `#44` / `#121` / `#124` / `#126` / `#127` / `#128` / `#129` | Shared | Planned | Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, and version-aware leaderboard tracking all belong to the `1.x` refinement track. | Keep them in the structured `1.x` program, not the `1.0` blocker path. | Post-1.0 |
 
 Items currently treated as post-`1.0` unless they become necessary for
 external playtesting or operational stability:
