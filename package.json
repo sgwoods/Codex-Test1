@@ -12,6 +12,8 @@
     "publish:check:production": "node tools/build/check-publish-ready.js --lane production",
     "publish:verify:beta": "node tools/build/verify-live-lane.js --lane beta",
     "publish:verify:production": "node tools/build/verify-live-lane.js --lane production",
+    "leaderboard:inspect:production": "node tools/build/reset-production-leaderboard.js",
+    "leaderboard:reset:production": "node tools/build/reset-production-leaderboard.js --execute --confirm 1.0-reset",
     "publish:beta:raw": "node tools/build/publish-lane.js --lane beta",
     "publish:production:raw": "node tools/build/publish-lane.js --lane production",
     "publish:beta": "npm run build && npm run promote:beta && npm run publish:check:beta && npm run publish:beta:raw && npm run publish:verify:beta",

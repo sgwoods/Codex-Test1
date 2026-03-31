@@ -149,6 +149,8 @@ Before final `1.0` sign-off, confirm:
 - the approved-beta gate is working in a real production rehearsal
 - non-production score/account behavior still matches the intended lane policy
 - live public version labels match the expected promoted build
+- the pre-`1.0` production leaderboard reset for `#130` has been inspected,
+  executed, and verified against the live shared score view
 
 ## Recommendation
 

@@ -147,6 +147,20 @@ Optional test-pilot override for non-production:
    - `https://sgwoods.github.io/Aurora-Galactica/`
      serves the promoted production build
 
+### True 1.0 Launch Baseline Reset
+
+- `#130` is a required pre-`1.0` release operation.
+- Before the true `1.0` production launch, reset the shared production
+  leaderboard so the official public scoreboard starts from zero.
+- Use a dry run first:
+  - `SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:inspect:production`
+- Then execute the reset when the launch candidate is approved:
+  - `SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:reset:production`
+- This operation deletes rows from the production `scores` table.
+- It does not delete pilot accounts.
+- It requires operator-only Supabase service-role access and should be treated
+  as an explicit release step, not a routine browser-side admin action.
+
 Tracked hardening item:
 
 - `#113`

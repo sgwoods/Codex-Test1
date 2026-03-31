@@ -386,6 +386,32 @@ npm run local:stop
   - challenge-stage baseline:
     - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
 
+### 8. Reset The Production Leaderboard For True 1.0
+
+- `#130` is an explicit pre-`1.0` release operation.
+- The goal is to start the official `1.0` production leaderboard from a clean
+  baseline rather than carrying forward pre-`1.0` scores from moving tuning and
+  rule sets.
+- This operation deletes rows from the shared production `scores` table. It
+  does not delete pilot accounts.
+- Dry-run inspection first:
+  ```bash
+  SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:inspect:production
+  ```
+- Execute the reset only when we are ready to launch from the approved `1.0`
+  candidate:
+  ```bash
+  SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:reset:production
+  ```
+- Expected order for the true `1.0` launch:
+  1. confirm the reviewed production candidate
+  2. inspect the current production leaderboard with the dry-run command
+  3. reset the production leaderboard
+  4. publish the final `1.0` production build
+  5. verify the live site and shared leaderboard start from zero
+- The reset command requires an operator-only Supabase service-role key and is
+  intentionally not runnable from the browser auth path.
+
 ## Versioning
 
 - Current versioning uses three release surfaces with build metadata:
