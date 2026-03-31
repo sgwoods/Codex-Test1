@@ -1,6 +1,6 @@
-# Aurora Galactica: 1.0 Launch Features
+# Aurora Galactica: 1.0.0 Launch Features
 
-Aurora Galactica is ready to launch as a polished four-stage arcade slice.
+Aurora Galactica is launching as a polished four-stage arcade slice.
 
 What’s in this launch:
 
@@ -40,4 +40,3 @@ Guide:
 
 - player guide:
   - [https://sgwoods.github.io/Aurora-Galactica/player-guide.html](https://sgwoods.github.io/Aurora-Galactica/player-guide.html)
-

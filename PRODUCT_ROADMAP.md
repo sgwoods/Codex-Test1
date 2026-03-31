@@ -3,12 +3,12 @@
 ## Current Release Train
 
 - Current line:
-  - `0.5.x-alpha`
+  - `1.0.0`
 - Current phase:
-  - `alpha`
+  - `launch`
 - Goal of this phase:
-  - turn the project from a strong tribute prototype into a polished, shippable
-    four-stage arcade slice
+  - ship the polished four-stage arcade slice cleanly and begin the `1.x`
+    refinement track without reopening the launch scope
 
 ## Immediate Target: 1.0 Four-Stage Slice
 
