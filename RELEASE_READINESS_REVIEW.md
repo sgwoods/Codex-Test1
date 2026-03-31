@@ -56,15 +56,13 @@ The canonical inventory lives in:
   after publishing
 - Player replay remains browser-local by default, which avoids introducing a
   new remote media surface into the `1.0` launch path
+- Public build metadata no longer exposes non-production test-pilot identity
+  fields such as test email or user id
 
 ### Accepted risks for 1.0
 
 - The current hosted product still depends on third-party auth/feedback
   services rather than a fully self-owned operational stack
-- The repo currently contains one stray untracked file on this machine:
-  - `/Users/stevenwoods/Documents/Codex-Test1/production`
-  - this is not part of the shipped product, but it should be removed or
-    ignored before final publish work so preflight stays clean
 - Beta/dev test-pilot support is still a launch-era compromise, not the final
   long-term account/admin model
 - A hosted admin/control centre does not yet exist

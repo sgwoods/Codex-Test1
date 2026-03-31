@@ -1379,8 +1379,6 @@ function build(options = {}){
     builtAtUtc: buildUtc,
     builtAtEt: buildReleaseEt,
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
-    testAccountEmail,
-    testAccountUserId,
     latestReleaseNote: latestNote
   };
 
