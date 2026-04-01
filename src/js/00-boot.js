@@ -1166,7 +1166,7 @@ async function submitFeedback(ev){
   fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
   setFeedbackStatus('Sent to Modem inbox.');
   showToast('Feedback sent');
-  setTimeout(()=>closeFeedback(),220);
+  setTimeout(()=>closeFeedback(),1200);
  }catch(err){
   recordSystemIssue('feedback_submit_failed',String(err?.message||err||'Feedback submission failed'),{type,title},{level:'warn'});
   openMailFallback(subject,lines);
