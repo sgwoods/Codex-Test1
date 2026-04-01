@@ -13,6 +13,10 @@
   - `surface-version+build.<number>.sha.<shortcommit>`
 - Dirty local builds append:
   - `.dirty`
+- After `1.0.0`, production hotfixes should bump `PATCH`:
+  - `1.0.1`
+  - `1.0.2`
+  - and so on
 
 Examples:
 
@@ -183,6 +187,8 @@ Required process:
    - `npm run build`
    - focused harness checks
    - adjacent sanity checks for nearby behavior
+   - when the hotfix touches an external runtime dependency, run a live probe of
+     that dependency before beta if the probe is available
 7. Publish to beta first:
    - `npm run publish:beta`
 8. Manually verify the exact failure in hosted beta
@@ -209,6 +215,7 @@ Aurora hotfix checklist:
 ```bash
 npm run build
 # run focused harness checks
+# run external dependency probes when the hotfix touches them
 npm run publish:beta
 # manual hosted beta verification
 npm run approve:beta

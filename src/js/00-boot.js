@@ -479,6 +479,7 @@ function startAttractDemo(opts={}){
  stopRunRecording();
  autoExportedSessionId='';
  resetSession('attract_demo');
+ resetActiveInputState('attract_demo');
  gameOverHtml='';gameOverState=null;
  aud=0;
  started=0;paused=0;
@@ -616,16 +617,25 @@ function loadTestCfg(){
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function movementLeftCodes(){
- return ['ArrowLeft','KeyA','ControlLeft'];
+ return ['ArrowLeft','KeyA','KeyZ'];
 }
 function movementRightCodes(){
- return ['ArrowRight','KeyD','MetaLeft'];
+ return ['ArrowRight','KeyD','KeyC'];
 }
 function movementControlCodes(){
  return [...movementLeftCodes(),...movementRightCodes()];
 }
 function controlMoveHelpHtml(){
- return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">CTRL</span> LEFT   <span class="k">COMMAND</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS OR <span class="k">A/Z</span> LEFT   <span class="k">D/C</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+}
+function resetActiveInputState(reason='manual'){
+ const hadKeys=Object.keys(keys).some(code=>!!keys[code]);
+ const hadState=Object.keys(keyState).length>0;
+ const hadMotion=!!(S?.p&&Math.abs(+S.p.vx||0)>0);
+ keys={};
+ keyState={};
+ if(S?.p&&Number.isFinite(+S.p.vx))S.p.vx=0;
+ if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
 }
 function syncAudioUi(){
  if(!muteToggleBtn)return;
@@ -756,7 +766,14 @@ function startHostedBuildUpdateChecks(){
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
- document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkForHostedBuildUpdate();});
+ addEventListener('blur',()=>resetActiveInputState('window_blur'));
+ document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden'){
+   resetActiveInputState('document_hidden');
+   return;
+  }
+  if(document.visibilityState==='visible')checkForHostedBuildUpdate();
+ });
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
@@ -807,6 +824,7 @@ function syncTestUi(){
 function closeSettings(){
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
+ resetActiveInputState('settings_close');
  syncSettingsUi();
  syncPauseUi();
 }
@@ -814,6 +832,7 @@ function openSettings(){
  settingsPrevPaused=paused;
  if(started&&!paused)paused=1;
  settingsOpen=1;
+ resetActiveInputState('settings_open');
  syncSettingsUi();
  syncPauseUi();
 }
@@ -848,7 +867,7 @@ function openHelp(mode='controls'){
  if(started&&!paused)paused=1;
  helpMode=mode==='guide'?'guide':'controls';
  helpOpen=1;
- keys={};keyState={};
+ resetActiveInputState('help_open');
  logEvent('help_open',{mode:helpMode});
  syncHelpUi();
  syncPauseUi();
@@ -861,6 +880,7 @@ function closeHelp(force=0){
  if(!helpOpen&&!force)return;
  helpOpen=0;
  if(started)paused=helpPrevPaused;
+ resetActiveInputState('help_close');
  logEvent('help_close',{force:!!force,mode:helpMode});
  syncHelpUi();
  syncPauseUi();
@@ -1027,7 +1047,7 @@ function openFeedback(){
  if(feedbackOpen)return;
  closeSettings();
  if(helpOpen)closeHelp(1);
- feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};keyState={};
+ feedbackPrevPaused=paused;paused=1;feedbackOpen=1;resetActiveInputState('feedback_open');
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
@@ -1044,6 +1064,7 @@ function openFeedback(){
 function closeFeedback(force=0){
  if(!feedbackOpen||(!force&&feedbackBusy))return;
  feedbackOpen=0;paused=feedbackPrevPaused;
+ resetActiveInputState('feedback_close');
  logEvent('feedback_close',{force:!!force});
  feedbackModal.classList.remove('open');
  feedbackModal.setAttribute('aria-hidden','true');
@@ -1054,7 +1075,27 @@ function closeFeedback(force=0){
  syncPauseUi();
 }
 function openMailFallback(subject,lines){
+ if(typeof window.__auroraOpenMailFallbackOverride==='function'){
+  window.__auroraOpenMailFallbackOverride(subject,lines);
+  return;
+ }
  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
+async function sendFeedbackDirect(fields){
+ const response=await fetch(FORMSUBMIT_ENDPOINT,{
+  method:'POST',
+  headers:{Accept:'application/json'},
+  body:fields
+ });
+ const contentType=String(response.headers?.get?.('content-type')||'').toLowerCase();
+ if(contentType.includes('application/json')){
+  const data=await response.json().catch(()=>null);
+  if(!response.ok||data?.success===false)throw new Error(data?.message||`HTTP ${response.status}`);
+  return {ok:1,status:response.status,data};
+ }
+ const text=(await response.text().catch(()=>'' )).trim();
+ if(!response.ok)throw new Error(text||`HTTP ${response.status}`);
+ return {ok:1,status:response.status,data:null,text};
 }
 async function submitFeedback(ev){
  ev.preventDefault();
@@ -1097,33 +1138,27 @@ async function submitFeedback(ev){
   ...formatDiagnosticsLines('Recent session events',diagnostics.sessionEvents)
  ];
  try{
-  const r=await fetch(FORMSUBMIT_ENDPOINT,{
-   method:'POST',
-   headers:{'Content-Type':'application/json','Accept':'application/json'},
-   body:JSON.stringify({
-    _subject:subject,
-    _template:'table',
-    product:PRODUCT_NAME,
-    type:kind,
-    title,
-    description,
-    build:BUILD,
-    timestamp:payload.timestamp,
-    url:location.href,
-    stage:S.stage,
-    score:S.score,
-    lives:Math.max(0,S.lives+1),
-    started:started?1:0,
-    paused:paused?1:0,
-    challenge:S.challenge?1:0,
-    user_agent:navigator.userAgent,
-    system_log:JSON.stringify(diagnostics.systemLog),
-    recent_session_events:JSON.stringify(diagnostics.sessionEvents),
-    message:lines.join('\n')
-   })
-  });
-  const data=await r.json().catch(()=>null);
-  if(!r.ok||data?.success===false)throw new Error(data?.message||`HTTP ${r.status}`);
+  const fields=new FormData();
+  fields.set('_subject',subject);
+  fields.set('_template','table');
+  fields.set('product',PRODUCT_NAME);
+  fields.set('type',kind);
+  fields.set('title',title);
+  fields.set('description',description);
+  fields.set('build',BUILD);
+  fields.set('timestamp',payload.timestamp);
+  fields.set('url',location.href);
+  fields.set('stage',String(S.stage));
+  fields.set('score',String(S.score));
+  fields.set('lives',String(Math.max(0,S.lives+1)));
+  fields.set('started',started?'1':'0');
+  fields.set('paused',paused?'1':'0');
+  fields.set('challenge',S.challenge?'1':'0');
+  fields.set('user_agent',navigator.userAgent);
+  fields.set('system_log',JSON.stringify(diagnostics.systemLog));
+  fields.set('recent_session_events',JSON.stringify(diagnostics.sessionEvents));
+  fields.set('message',lines.join('\n'));
+  await sendFeedbackDirect(fields);
   feedbackLastSubmit=now;
   fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
   setFeedbackStatus('Sent to Modem inbox.');

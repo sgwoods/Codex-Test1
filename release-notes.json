@@ -1,6 +1,12 @@
 {
   "notes": [
     {
+      "version": "1.0.1",
+      "date": "2026-03-31",
+      "title": "Input and feedback hotfix",
+      "summary": "Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, and tightened the in-game feedback transport and diagnostics while keeping mail fallback active until the current upstream FormSubmit outage clears."
+    },
+    {
       "version": "1.0.0+build.284",
       "date": "2026-03-31",
       "title": "Post-launch score-submit and refresh-reminder hotfix",

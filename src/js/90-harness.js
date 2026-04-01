@@ -257,8 +257,24 @@ window.__galagaHarness__={
    alertTxt: S.alertTxt || '',
    livesAfter: S.lives,
    spawn: +(+p.spawn || 0).toFixed(3),
-   inv: +(+p.inv || 0).toFixed(3)
+  inv: +(+p.inv || 0).toFixed(3)
   };
+ },
+ inputState(){
+  return{
+   leftCodes:typeof movementLeftCodes==='function'?[...movementLeftCodes()]:[],
+   rightCodes:typeof movementRightCodes==='function'?[...movementRightCodes()]:[],
+   playerX:+(+S.p.x||0).toFixed(2),
+   playerVx:+(+S.p.vx||0).toFixed(2),
+   spawn:+(+S.p.spawn||0).toFixed(3),
+   started:!!started,
+   keys:Object.keys(keys||{}).filter(code=>!!keys[code]),
+   keyStateCount:Object.keys(keyState||{}).length
+  };
+ },
+ resetInputState(reason='harness'){
+  if(typeof resetActiveInputState==='function')resetActiveInputState(reason);
+  return this.inputState();
  },
  setupRemoteScoreSubmitTest(cfg={}){
   window.__auroraHarnessForceRemoteWrite=1;

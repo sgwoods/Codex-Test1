@@ -100,6 +100,7 @@ function startSequence(mode,duration,title,subtitle=''){
 function start(){
  stopAttractLoop();
  try{document.activeElement?.blur?.()}catch{}
+ if(typeof resetActiveInputState==='function')resetActiveInputState('game_start');
  if(typeof closeAccountPanel==='function')closeAccountPanel();
  if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
  if(typeof closeSettings==='function')closeSettings();

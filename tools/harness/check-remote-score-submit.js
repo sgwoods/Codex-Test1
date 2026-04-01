@@ -79,8 +79,13 @@ async function runFailureCase(page){
     };
     window.__auroraFeedbackPayload = null;
     window.fetch = async (_url, options) => {
-      window.__auroraFeedbackPayload = JSON.parse(options.body);
-      return { ok: true, json: async () => ({ success: true }) };
+      window.__auroraFeedbackPayload = Object.fromEntries(Array.from(options.body.entries()));
+      return {
+        ok: true,
+        status: 200,
+        headers: { get: name => name.toLowerCase() === 'content-type' ? 'application/json' : '' },
+        json: async () => ({ success: true })
+      };
     };
     if(!fbSummary.value.trim()) fbSummary.value = 'Online score save failed';
     if(!fbDescription.value.trim()) fbDescription.value = 'Harness-triggered remote score failure.';
