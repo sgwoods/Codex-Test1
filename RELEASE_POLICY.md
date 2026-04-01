@@ -17,6 +17,10 @@
   - `1.0.1`
   - `1.0.2`
   - and so on
+- After `1.0.0`, any production promotion that changes shipped user-visible
+  behavior should bump `PATCH`, even if the change is a small hotfix.
+- Build metadata still changes on every publish, but build metadata alone is
+  not the public hotfix number.
 
 Examples:
 
@@ -265,6 +269,16 @@ Tracked hardening item:
 This gives every build a unique identity without forcing a SemVer bump for every commit.
 
 ## Bump Guidance
+
+- After `1.0.0`, use this production rule:
+  - every user-visible production fix or improvement gets the next `PATCH`
+    version
+  - examples:
+    - `1.0.1`
+    - `1.0.2`
+    - `1.0.3`
+  - do not keep shipping visible production changes forever under the same
+    public version with only `+build...` changing
 
 - Bump `PATCH` when:
   - we make a contained improvement that should be visible or testable
