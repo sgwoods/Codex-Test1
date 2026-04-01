@@ -11,8 +11,10 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html`
 - Styles:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/styles.css`
-- Boot / metadata / audio / UI / logging:
+- Boot / metadata / audio / storage / session logging:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+- Shared runtime input / build-stamp / shell helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js`
 - Gameplay / stage flow / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Rendering / HUD / overlays / sprites:
