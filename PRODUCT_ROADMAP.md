@@ -3,12 +3,13 @@
 ## Current Release Train
 
 - Current line:
-  - `1.0.x`
+  - `1.1.x` planning
 - Current phase:
-  - `post-launch stabilization`
+  - `post-launch stabilization and platform planning`
 - Goal of this phase:
-  - keep the shipped four-stage arcade slice stable while moving the broader
-    identity, admin, and media work into the planned `1.x` track
+  - keep the shipped four-stage arcade slice stable while turning the broader
+    identity, admin, and media work into a staged `1.1.x` / `1.2.x` platform
+    program
 
 ## Immediate Target: 1.0 Four-Stage Slice
 
@@ -171,7 +172,28 @@ Suggested versioning:
 - `1.0.x`
 - `1.1.x`
 
-## Milestone G: Early Post-1.0 Arcade Platform Extraction
+## Milestone G: `1.1.x` Aurora Runtime Stabilization
+
+Target outcome:
+
+- Aurora keeps shipping cleanly while its current one-off runtime is separated
+  into clearer internal layers
+- runtime, shell, replay/logging, and service boundaries become explicit
+- future extraction work can move modules without redesigning gameplay at the
+  same time
+
+Key issue groups:
+
+- `#111` extract a shared arcade platform for Galaga-family cabinet shooters
+- shell/replay/harness/input cleanup that creates real module seams
+- selective post-launch polish that supports stable extraction boundaries
+- `#44` bottom-right stage indicator only if it helps the stabilized HUD seam
+
+Suggested versioning:
+
+- `1.1.x`
+
+## Milestone H: `1.1.x` Early Arcade Platform Extraction
 
 Target outcome:
 
@@ -185,13 +207,37 @@ Key issue groups:
 - early `gameDef` / game-pack extraction
 - shared shell / replay / harness / build systems
 - shared left-right cabinet input model for sibling fixed-screen shooters
+- keep Aurora-specific gameplay rules local until a second game proves the seam
 
 Suggested versioning:
 
 - `1.1.x`
 - `1.2.x`
 
-## Milestone H: Shared Pilot Media And Publishing
+## Milestone I: `1.2.x` Shared Services And Operator Surfaces
+
+Target outcome:
+
+- pilot identity, scoreboards, feedback, and environment separation become
+  platform-owned services rather than Aurora-only assumptions
+- the project gains the first operator tooling needed to support a growing
+  game family
+
+Key issue groups:
+
+- `#126` separate non-production Supabase identities and score paths
+- `#127` require permanent pilot identity and support account deletion
+- `#128` brand and clarify account emails
+- `#129` track scores by exact version
+- `#124` control-centre/admin surface
+- `#133` replace third-party feedback relay with a Cloudflare-owned path and
+  evaluate free fallbacks as needed
+
+Suggested versioning:
+
+- `1.2.x`
+
+## Milestone J: Shared Pilot Media And Publishing
 
 Target outcome:
 
@@ -222,7 +268,8 @@ These are the architectural themes we should keep capturing incrementally during
 the `v1` push so they can become the basis of a focused post-`v1` platform
 plan.
 
-- move game rules and tuning further into data-driven `gameDef` structures
+- move game rules and tuning further into data-driven `gameDef` structures only
+  after Aurora already runs cleanly on the extracted runtime
 - use `#111` as the early post-`1.0` umbrella for turning Aurora into a shared
   arcade platform that can support Galaga variants, Galaxian, and other
   similar cabinet shooters
@@ -232,6 +279,8 @@ plan.
   runtime refactors
 - separate engine-like concerns from game-specific rules only when the seam is
   real and already helping Aurora
+- avoid building a generic physics engine or broad multi-genre engine layer too
+  early
 - decouple visual/stylistic assets toward a swappable brand-package only after
   the four-stage slice is stable enough that theming work does not destabilize
   launch

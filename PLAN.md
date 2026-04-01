@@ -185,26 +185,29 @@ needed to support this smaller shipped slice.
 
 ### Post-Launch View
 
-`1.0.0` is now live.
+`1.0.1` is now live.
 
 Current release checkpoint:
 
 - beta:
-  - `1.0.0-beta.1+build.276.sha.a59c5ad.beta`
+  - `1.0.1-beta.1+build.288.sha.14398e9.beta`
 - production:
-  - `1.0.0+build.276.sha.a59c5ad`
+  - `1.0.1+build.288.sha.14398e9`
 - production promotion path was used successfully:
   - `publish:beta -> approve:beta -> publish:production`
 - final release-readiness signoff was completed
 - public build metadata no longer exposes non-production test-pilot identity
   fields
 - the production leaderboard baseline reset for `#130` is complete
+- the first post-launch hotfix line is now established:
+  - production-visible fixes after `1.0.0` bump `PATCH`
+  - build metadata still identifies the exact artifact
 
 Current coding priority:
 
-1. keep `1.0.0` stable in production
-2. move `#44` and the broader refinement/admin/identity work into `1.x`
-3. start the structured post-launch quality and platform track deliberately
+1. keep `1.0.1` stable in production
+2. use `1.1.x` for architectural stabilization and early shared-runtime extraction
+3. use `1.2.x` for platform-owned services and operator-facing infrastructure
 
 What changed since the last full review:
 
@@ -233,7 +236,7 @@ What changed since the last full review:
 | --- | --- | --- | --- | --- | --- | --- |
 | Can Slip | `#96` / `#98` | Shared | Watch / close candidate | Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers. | Keep the checks green and close if no new regression appears during final signoff. | Phase 4 |
 | Can Slip | `#103` / `#105` / `#110` / `#114` / `#115` / `#116` / `#117` / `#119` / `#120` | Shared | Post-blocker polish | The shell, pilot, popup, and replay surfaces are all much stronger now. Remaining work is polish/expansion unless a new trust bug appears. | Keep improving in `1.x` unless a concrete launch issue reappears. | Phase 3 |
-| Post-1.0 | `#44` / `#121` / `#124` / `#126` / `#127` / `#128` / `#129` | Shared | Planned | Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, and version-aware leaderboard tracking all belong to the `1.x` refinement track. | Keep them in the structured `1.x` program, not the `1.0` blocker path. | Post-1.0 |
+| Post-1.0 | `#44` / `#121` / `#124` / `#126` / `#127` / `#128` / `#129` / `#133` | Shared | Planned | Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, version-aware leaderboard tracking, and a Cloudflare-owned feedback transport all belong to the structured `1.x` platform track. | Keep them in the staged `1.1.x` / `1.2.x` program, not the `1.0` blocker path. | Post-1.0 |
 
 Items currently treated as post-`1.0` unless they become necessary for
 external playtesting or operational stability:
@@ -248,6 +251,87 @@ external playtesting or operational stability:
 - replay, submission, theme-system, and broader public-workflow enhancements
 - treat shared authenticated video publishing as a post-`1.0`, pre-`2.0`
   stretch goal rather than a launch requirement
+
+### Structured `1.x` Release Path
+
+#### `1.1.x`: Architectural Stabilization And Shared Runtime Extraction
+
+Primary goal:
+
+- make Aurora the first clean game pack on a shared fixed-screen shooter runtime
+
+Execution order:
+
+1. stabilize Aurora into explicit internal layers:
+   - runtime core
+   - shell
+   - replay/logging/harness
+   - service boundaries
+   - Aurora-specific game rules
+2. extract shared modules inside the monorepo without changing behavior
+3. keep existing harnesses green through each extraction step
+4. move only proven seams:
+   - do not build a generic physics engine
+   - do not split repos
+   - do not generalize multi-genre abstractions yet
+
+Expected issue groups:
+
+- `#111`
+- `#44`
+- selected replay/shell polish items that support the extracted seam
+
+Definition of success:
+
+- Aurora still ships reliably
+- replay, shell, input, harness, and build systems are less one-off
+- shared module boundaries are real enough to support a sibling shooter later
+
+#### `1.2.x`: Shared Services And Operator Infrastructure
+
+Primary goal:
+
+- move from Aurora-only services toward platform-owned services
+
+Execution order:
+
+1. make player identity more explicit and permanent
+2. separate production and non-production backend paths more cleanly
+3. key scores and runs by version/game context
+4. replace third-party feedback relay dependence with a platform-owned path
+5. introduce the first operator/control-centre surfaces
+
+Expected issue groups:
+
+- `#126`
+- `#127`
+- `#128`
+- `#129`
+- `#124`
+- `#133`
+
+Definition of success:
+
+- identity, scoreboard, feedback, and operational tooling are no longer tightly
+  coupled to Aurora-only assumptions
+- the project is ready to support shared services across close sibling games
+
+#### Later `1.x`: Shared Media And Second-Game Proof
+
+Primary goal:
+
+- prove the platform with one close sibling and add optional shared media
+
+Expected issue groups:
+
+- `#121`
+- second-game extraction work under `#111`
+
+Definition of success:
+
+- Aurora runs cleanly on the shared runtime
+- one Galaxian-like sibling can reuse the runtime without changing its core
+- media and replay publishing sit on top of stable identity and service seams
 
 ### Track A. Autonomous Original-Galaga Baseline
 

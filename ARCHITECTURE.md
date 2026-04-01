@@ -195,3 +195,168 @@ The intended configurable/game-pack layer is:
 The goal is to reduce churn in mature infrastructure while letting future games
 such as Galaxian, Aurora variants, or similar fixed-screen cabinet shooters
 reuse the stable platform with smaller game-specific packs.
+
+## Platform Extraction Order
+
+The platform path should be incremental. Aurora remains the proof project while
+we extract stable seams out of the current one-off runtime.
+
+### Release-Line Mapping
+
+Use the extraction phases as release guidance, not just architecture guidance.
+
+- `1.1.x`
+  - stabilize Aurora into explicit layers
+  - extract shared monorepo modules without redesigning gameplay
+- `1.2.x`
+  - generalize shared services and add the first operator/control-centre
+    surfaces
+- later `1.x`
+  - prove reuse with one close sibling game
+  - add optional shared media/publishing on top of stable identity and service
+    seams
+
+### Phase 1: Stabilize Aurora Into Explicit Layers
+
+Do this before creating generalized packages.
+
+Separate the current runtime mentally and structurally into:
+
+- shared runtime core
+  - loop
+  - timing
+  - input primitives
+  - scene/state transitions
+  - deterministic event vocabulary
+- shared shell
+  - cabinet frame
+  - HUD slots
+  - popup/layout system
+  - build/update surfaces
+- shared play services
+  - score submission boundary
+  - identity boundary
+  - feedback boundary
+  - replay persistence boundary
+- Aurora game pack
+  - formations
+  - enemy families
+  - scoring tables
+  - stage cadence
+  - capture/rescue rules
+  - challenge rules
+  - sprites/theme
+
+### Phase 2: Extract Shared Modules Inside The Monorepo
+
+Keep one repo and extract modules only after Aurora already runs cleanly across
+the layer seams above.
+
+Target internal package/module boundaries:
+
+- `packages/arcade-runtime`
+- `packages/arcade-shell`
+- `packages/arcade-replay`
+- `packages/arcade-services`
+- `games/aurora`
+
+Important rule:
+
+- first extraction should be mostly relocation plus interface cleanup
+- do not redesign behavior during the extraction itself
+
+### Phase 3: Make Aurora Rules Data-Driven Enough To Reuse
+
+Once Aurora is stable on the extracted runtime, move Aurora-specific rules
+toward a `gamePack` or `gameDef` contract.
+
+Expected configurable areas:
+
+- formation definitions
+- enemy-family definitions
+- attack scripts
+- scoring tables
+- stage progression bands
+- optional mechanic flags
+  - capture/rescue
+  - challenge stages
+  - special squadrons
+  - dual-fighter mode
+
+Important rule:
+
+- do not force every future game to implement every optional mechanic
+
+### Phase 4: Generalize Shared Services
+
+Only after runtime seams stabilize:
+
+- make identity game-agnostic
+- make scores keyed by:
+  - `gameKey`
+  - `version`
+  - `playerId`
+  - `runId`
+- keep replay metadata independent of Aurora-specific assumptions
+- move feedback toward a platform-owned API rather than a game-specific form
+
+Expected first shared-service targets:
+
+- pilot identity
+- scoreboard and run records
+- feedback intake
+- environment-aware backend boundaries
+
+### Phase 5: Add Operator / Control Centre
+
+The first shared operational surface should come after the runtime and service
+seams are real.
+
+First control-centre scope:
+
+- score moderation
+- player account admin
+- replay/video publish status
+- release/lane status
+
+### Phase 6: Prove Reuse With A Second Game
+
+The first proof is not “many games.” The first proof is:
+
+- Aurora cleanly running on the shared runtime
+
+The second proof should be:
+
+- one close sibling fixed-screen shooter game pack
+
+Recommended first sibling:
+
+- Galaxian-like before Space Invaders
+
+That keeps the runtime honest without forcing broad abstraction too early.
+
+## What Not To Generalize Too Early
+
+Avoid premature platform work in these areas:
+
+- generic physics engine
+- broad multi-genre engine abstractions
+- repo splitting
+- full admin platform before service seams are stable
+- multiplayer/live-service assumptions
+
+The rule is simple:
+
+- extract only the seams that Aurora already proves are real
+
+## Platform Defaults
+
+Until the platform work is more mature, keep these defaults:
+
+- one monorepo
+- one primary proof game:
+  - Aurora
+- static-first client hosting
+- managed services where they reduce operational burden
+- reusable runtime and service seams proven by Aurora before they are made
+  generic
