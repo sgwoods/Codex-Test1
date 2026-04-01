@@ -20,25 +20,13 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 - Build token source:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
 
-### FormSubmit
+### Web3Forms
 
 - Service:
-  - `https://formsubmit.co/ajax/default-dimiglyd88@inbox.modem.dev`
+  - `https://api.web3forms.com/submit`
 - Used for:
   - in-game bug reports
   - in-game feature requests
-- Main runtime code:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
-
-### Modem Inbox
-
-- Destination inbox:
-  - `default-dimiglyd88@inbox.modem.dev`
-- Used for:
-  - receiving the bug reports and feature requests forwarded by FormSubmit
-- Notes:
-  - this is the destination, not the transport layer
-  - FormSubmit is the HTTP form transport used by the game
 - Main runtime code:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
 
@@ -122,8 +110,7 @@ These are not external services.
 ### Player-Facing External Runtime Dependencies
 
 - Supabase
-- FormSubmit
-- Modem inbox
+- Web3Forms
 
 ### Hosting Dependencies
 

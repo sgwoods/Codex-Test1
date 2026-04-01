@@ -192,7 +192,8 @@ function clearBuildRefreshHintUrl(){
 }
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
-const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
+const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY='{{WEB3FORMS_ACCESS_KEY}}';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
@@ -1082,7 +1083,7 @@ function openMailFallback(subject,lines){
  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
 }
 async function sendFeedbackDirect(fields){
- const response=await fetch(FORMSUBMIT_ENDPOINT,{
+ const response=await fetch(WEB3FORMS_ENDPOINT,{
   method:'POST',
   headers:{Accept:'application/json'},
   body:fields
@@ -1139,8 +1140,10 @@ async function submitFeedback(ev){
  ];
  try{
   const fields=new FormData();
-  fields.set('_subject',subject);
-  fields.set('_template','table');
+  fields.set('access_key',WEB3FORMS_ACCESS_KEY);
+  fields.set('subject',subject);
+  fields.set('from_name',PRODUCT_NAME);
+  fields.set('botcheck','');
   fields.set('product',PRODUCT_NAME);
   fields.set('type',kind);
   fields.set('title',title);
@@ -1167,7 +1170,7 @@ async function submitFeedback(ev){
  }catch(err){
   recordSystemIssue('feedback_submit_failed',String(err?.message||err||'Feedback submission failed'),{type,title},{level:'warn'});
   openMailFallback(subject,lines);
-  setFeedbackStatus('FormSubmit could not send directly. Opened mail draft fallback.',1);
+  setFeedbackStatus('Direct send could not complete. Opened mail draft fallback.',1);
   showToast('Mail fallback opened');
  }
  feedbackBusy=0;

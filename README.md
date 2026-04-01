@@ -609,11 +609,11 @@ npm run local:stop
 
 The game includes a floating `Feedback` button (top-right).
 
-- Both `Feature Request` and `Bug Report` submissions post to FormSubmit, which forwards them to `default-dimiglyd88@inbox.modem.dev`
-- If FormSubmit cannot send directly, the game falls back to opening a prefilled `mailto:` draft
+- Both `Feature Request` and `Bug Report` submissions post to Web3Forms using a local build-time access key
+- If direct send cannot complete, the game falls back to opening a prefilled `mailto:` draft
 - The submission body includes the report plus game metadata (build, timestamp, stage, score, lives, and user agent)
 
 One-time setup:
 
-- FormSubmit is free and does not require an account
-- The first submission to a destination email triggers a confirmation email from FormSubmit that must be clicked once for that exact inbox address
+- Create a Web3Forms access key for the destination inbox
+- Store that key locally in `.env.local` as `WEB3FORMS_ACCESS_KEY`

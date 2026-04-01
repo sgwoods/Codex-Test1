@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SOURCE = path.join(__dirname, '..', '..', 'src', 'js', '00-boot.js');
+const BUILT_INDEX = path.join(__dirname, '..', '..', 'dist', 'dev', 'index.html');
 
 function fail(message, payload){
   console.error(message);
@@ -11,22 +11,27 @@ function fail(message, payload){
 }
 
 function readFeedbackConfig(){
-  const src = fs.readFileSync(SOURCE, 'utf8');
-  const emailMatch = src.match(/const MODEM_FEATURE_EMAIL='([^']+)'/);
-  if(!emailMatch) throw new Error('Could not locate MODEM_FEATURE_EMAIL in 00-boot.js');
-  const email = emailMatch[1];
+  const src = fs.readFileSync(BUILT_INDEX, 'utf8');
+  const accessKeyMatch = src.match(/const WEB3FORMS_ACCESS_KEY='([^']+)'/);
+  if(!accessKeyMatch) throw new Error('Could not locate WEB3FORMS_ACCESS_KEY in built dev output');
+  const accessKey = accessKeyMatch[1];
   return {
-    email,
-    endpoint: `https://formsubmit.co/ajax/${email}`
+    accessKey,
+    endpoint: 'https://api.web3forms.com/submit'
   };
 }
 
 async function main(){
-  const { email, endpoint } = readFeedbackConfig();
+  const { accessKey, endpoint } = readFeedbackConfig();
+  if(!accessKey || accessKey.includes('{{')){
+    fail('Feedback transport probe is missing WEB3FORMS_ACCESS_KEY in the built source');
+  }
   const stamp = new Date().toISOString();
   const form = new FormData();
-  form.set('_subject', `[Harness Probe] Aurora feedback transport ${stamp}`);
-  form.set('_template', 'table');
+  form.set('access_key', accessKey);
+  form.set('subject', `[Harness Probe] Aurora feedback transport ${stamp}`);
+  form.set('from_name', 'Aurora Galactica');
+  form.set('botcheck', '');
   form.set('product', 'Aurora Galactica');
   form.set('type', 'Harness Probe');
   form.set('title', 'Feedback transport probe');
@@ -44,8 +49,7 @@ async function main(){
   const payload = {
     ok: response.ok,
     status: response.status,
-    endpoint,
-    email
+    endpoint
   };
 
   if(contentType.includes('application/json')){

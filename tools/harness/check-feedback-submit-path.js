@@ -157,7 +157,7 @@ async function main(){
     if(!failure.capture.fallback){
       fail('feedback failure path should open the fallback mail draft', failure);
     }
-    if(!/could not send directly/i.test(failure.status || '')){
+    if(!/direct send could not complete/i.test(failure.status || '')){
       fail('feedback failure path should explain that direct send failed and fallback opened', failure);
     }
     if(!(failure.systemLog || []).some(entry => entry.action === 'feedback_submit_failed')){

@@ -20,8 +20,8 @@
   - seeded scenario runs
   - batch execution
   - automatic artifact analysis and tuning reports
-- Feedback delivery currently uses FormSubmit to forward to `default-dimiglyd88@inbox.modem.dev`
-- If FormSubmit direct send fails, the game falls back to a prefilled `mailto:` draft
+- Feedback delivery currently uses Web3Forms as the direct-send transport
+- If direct send fails, the game falls back to a prefilled `mailto:` draft
 - High-score entry now supports Galaga-style three-letter initials with arcade-flavored cursor/input behavior
 - Public status export now follows the shared `public` repo contract:
   - this repo updates its own public project page
@@ -41,7 +41,7 @@
 
 ## Known Problems
 
-- We do not yet know whether the Modem inbox address can complete FormSubmit's one-time activation flow
+- We now depend on a valid local `WEB3FORMS_ACCESS_KEY` for direct feedback delivery
 - Stage 4 remains the main gameplay balance problem for the four-stage `1.0` slice
 - Stage 4 failures are now better localized:
   - early formation-shot fairness
