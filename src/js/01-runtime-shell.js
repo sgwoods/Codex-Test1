@@ -150,12 +150,4 @@ function startHostedBuildUpdateChecks(){
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
- addEventListener('blur',()=>resetActiveInputState('window_blur'));
- document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState==='hidden'){
-   resetActiveInputState('document_hidden');
-   return;
-  }
-  if(document.visibilityState==='visible')checkForHostedBuildUpdate();
- });
 }

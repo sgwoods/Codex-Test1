@@ -1,10 +1,16 @@
 {
   "notes": [
     {
+      "version": "1.0.2",
+      "date": "2026-04-02",
+      "title": "Movement regression hotfix",
+      "summary": "Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion."
+    },
+    {
       "version": "1.0.1",
       "date": "2026-03-31",
       "title": "Input and feedback hotfix",
-      "summary": "Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, and tightened the in-game feedback transport and diagnostics while keeping mail fallback active until the current upstream FormSubmit outage clears."
+      "summary": "Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, switched in-game feedback delivery from FormSubmit to Web3Forms, and slowed the success confirmation long enough to read before the panel closes."
     },
     {
       "version": "1.0.0+build.284",

@@ -193,6 +193,10 @@ Required process:
    - adjacent sanity checks for nearby behavior
    - when the hotfix touches an external runtime dependency, run a live probe of
      that dependency before beta if the probe is available
+   - when the hotfix touches obvious gameplay input or motion, run the hotfix smoke suite:
+     - `npm run harness:check:hotfix-smoke`
+   - when the hotfix affects controls, overlays, or input lifecycles, run a hosted-lane input probe:
+     - `npm run harness:check:live-input:beta`
 7. Publish to beta first:
    - `npm run publish:beta`
 8. Manually verify the exact failure in hosted beta
@@ -219,12 +223,26 @@ Aurora hotfix checklist:
 ```bash
 npm run build
 # run focused harness checks
+npm run harness:check:hotfix-smoke
+# if controls/input/overlay behavior changed
+npm run harness:check:live-input:beta
 # run external dependency probes when the hotfix touches them
 npm run publish:beta
 # manual hosted beta verification
 npm run approve:beta
 npm run publish:production
 ```
+
+Hotfix smoke suite contents:
+
+- `node tools/harness/check-input-mapping.js`
+  - verifies playable left/right movement distance, expected key mapping, and no repeated input resets during active movement
+- `node tools/harness/check-popup-surfaces.js`
+  - verifies settings/help/pilot/score/feedback surfaces still open and fit correctly after UI-adjacent hotfixes
+- `node tools/harness/check-feedback-submit-path.js`
+  - verifies direct feedback success and fallback diagnostics are still intact
+- `node tools/harness/check-remote-score-submit.js`
+  - verifies leaderboard submission still works online and still degrades cleanly to local-only on failure
 
 ### True 1.0 Launch Baseline Reset
 

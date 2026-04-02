@@ -171,6 +171,76 @@ the following evidence was in place before production promotion:
 That means the hotfix was promoted through the normal path with both automated
 and manual evidence, not rushed directly into production.
 
+### Current `1.0.1` hotfix evidence
+
+For the production `1.0.1` hotfix on `14398e9`, the following evidence was in
+place before production promotion:
+
+- build passes on the current source line:
+  - `npm run build`
+- focused input-mapping regression passes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
+  - evidence captured by the check:
+    - `A` and `Z` both move left
+    - `D` and `C` both move right
+    - arrow keys still work
+    - blur clears active movement and zeroes horizontal drift
+- focused feedback client regression passes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
+  - evidence captured by the check:
+    - direct send remains the intended primary path
+    - failure path still opens a mail fallback
+    - diagnostics persist in the local system log
+- adjacent score-submit regression still passes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
+- adjacent production account feedback regression still passes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-production-account-feedback.js`
+- hosted beta review confirmed:
+  - left/right controls no longer latch the ship after focus loss
+  - browser feedback submission succeeded using the new Web3Forms path
+  - feedback success confirmation remained visible long enough to read
+- beta publish succeeded for the approved candidate:
+  - `1.0.1-beta.1+build.288.sha.14398e9.beta`
+- production publish succeeded from the approved beta artifact:
+  - `1.0.1+build.288.sha.14398e9`
+
+That means `1.0.1` followed the documented hotfix process with a small scoped
+change set, focused regressions, hosted beta confirmation, approved beta
+promotion, and live production verification.
+
+### Current `1.0.2` hotfix evidence
+
+For the production `1.0.2` hotfix on `831a2c6`, the following evidence was in
+place before production promotion:
+
+- build passes on the current source line:
+  - `npm run build`
+- mandatory hotfix smoke suite passes:
+  - `npm run harness:check:hotfix-smoke`
+  - evidence captured by the suite:
+    - playable left and right movement distance for `ArrowLeft`, `A`, `Z`, `ArrowRight`, `D`, and `C`
+    - no repeated input-reset events during active movement
+    - popup surfaces still open and fit correctly
+    - direct feedback success and fallback diagnostics still behave correctly
+    - remote score submit still succeeds on the happy path and degrades cleanly on failure
+- hosted beta input probe passes:
+  - `npm run harness:check:live-input:beta`
+  - evidence captured by the probe:
+    - live beta movement mapping matches the intended control layout
+    - hosted beta movement distance is strong enough to be playable
+    - hosted beta movement is not interrupted by repeated input resets
+- beta preflight now verifies expected test-pilot emails are embedded when non-production auth is intended
+- hosted beta review confirmed:
+  - left and right movement works normally for both-hand mappings
+  - the beta artifact contains the intended test-pilot lane configuration
+- beta publish succeeded for the approved candidate:
+  - `1.0.2-beta.1+build.290.sha.831a2c6.beta`
+- production publish succeeded from the approved beta artifact:
+  - `1.0.2+build.290.sha.831a2c6`
+
+That means `1.0.2` closed the live movement regression with both stronger local
+gates and a hosted-lane verification step before production promotion.
+
 ### Launch-significant operational checks
 
 Before final `1.0` sign-off, confirm:

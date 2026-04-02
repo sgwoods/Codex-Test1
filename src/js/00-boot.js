@@ -553,6 +553,7 @@ function syncTestUi(){
  syncHelpUi();
 }
 function closeSettings(){
+ if(!settingsOpen)return;
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
  resetActiveInputState('settings_close');
@@ -916,6 +917,14 @@ addEventListener('keyup',e=>{
  if(!keyState[e.code])keyState[e.code]={downAt:0,upAt:performance.now()};
  else keyState[e.code].upAt=performance.now();
  logEvent('key_up',{code:e.code,key:e.key});
+});
+addEventListener('blur',()=>resetActiveInputState('window_blur'));
+document.addEventListener('visibilitychange',()=>{
+ if(document.visibilityState==='hidden'){
+  resetActiveInputState('document_hidden');
+  return;
+ }
+ if(document.visibilityState==='visible'&&typeof checkForHostedBuildUpdate==='function')checkForHostedBuildUpdate();
 });
 addEventListener('pointerdown',e=>{
  if(!settingsOpen)return;
