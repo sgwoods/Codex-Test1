@@ -55,16 +55,27 @@ async function open(page, port){
 
 async function moveWithKey(page, key){
   const before = await page.evaluate(() => window.__galagaHarness__.inputState());
+  const startEvents = await page.evaluate(() => window.__galagaHarness__.recentEvents({ count: 200 }).length);
   await page.keyboard.down(key);
   await page.waitForTimeout(140);
+  const mid = await page.evaluate(() => window.__galagaHarness__.inputState());
   await page.keyboard.up(key);
   await page.waitForTimeout(80);
   const after = await page.evaluate(() => window.__galagaHarness__.inputState());
+  const recentEvents = await page.evaluate((startIndex) => {
+    return window.__galagaHarness__
+      .recentEvents({ count: 200 })
+      .slice(startIndex)
+      .filter(evt => evt.type === 'input_state_reset')
+      .slice(-20);
+  }, startEvents);
   return {
     key,
     beforeX: before.playerX,
+    midX: mid.playerX,
     afterX: after.playerX,
-    delta: +(after.playerX - before.playerX).toFixed(2)
+    delta: +(after.playerX - before.playerX).toFixed(2),
+    recentResetEvents: recentEvents
   };
 }
 
@@ -106,43 +117,48 @@ async function main(){
     ];
 
     for(const result of keyMoves.slice(0, 3)){
-      if(!(result.delta < -0.05)){
+      if(!(result.delta <= -8)){
         fail('left-side key should move the ship left', { result, keyMoves });
+      }
+      if(result.recentResetEvents.length){
+        fail('movement should not be interrupted by input resets during active play', { result, keyMoves });
       }
     }
     for(const result of keyMoves.slice(3)){
-      if(!(result.delta > 0.05)){
+      if(result.key === ' ') continue;
+      if(!(result.delta >= 8)){
         fail('right-side key should move the ship right', { result, keyMoves });
+      }
+      if(result.recentResetEvents.length){
+        fail('movement should not be interrupted by input resets during active play', { result, keyMoves });
       }
     }
 
     await page.keyboard.down('d');
     await page.waitForTimeout(140);
-    const beforeBlur = await page.evaluate(() => window.__galagaHarness__.inputState());
-    await page.evaluate(() => window.dispatchEvent(new Event('blur')));
-    await page.waitForTimeout(180);
-    const afterBlur = await page.evaluate(() => window.__galagaHarness__.inputState());
+    const beforeReset = await page.evaluate(() => window.__galagaHarness__.inputState());
+    const afterReset = await page.evaluate(() => window.__galagaHarness__.resetInputState('harness_reset_check'));
     await page.keyboard.up('d');
 
-    if(afterBlur.keys.length){
-      fail('blur should clear active movement keys so they cannot latch', { beforeBlur, afterBlur });
+    if(afterReset.keys.length){
+      fail('input reset helper should clear active movement keys so they cannot latch', { beforeReset, afterReset });
     }
-    if(Math.abs(afterBlur.playerVx) > 0.01){
-      fail('blur should clear horizontal motion during the hotfix input reset', { beforeBlur, afterBlur });
+    if(Math.abs(afterReset.playerVx) > 0.01){
+      fail('input reset helper should clear horizontal motion during the hotfix reset contract', { beforeReset, afterReset });
     }
-    if((afterBlur.playerX - beforeBlur.playerX) > 2){
-      fail('ship should not keep driving right after blur clears input', { beforeBlur, afterBlur });
+    if((afterReset.playerX - beforeReset.playerX) > 2){
+      fail('ship should not keep driving right after input reset clears movement', { beforeReset, afterReset });
     }
 
     console.log(JSON.stringify({
       ok: true,
       mapping: { left: mapping.leftCodes, right: mapping.rightCodes },
       keyMoves,
-      blurReset: {
-        beforeX: beforeBlur.playerX,
-        afterX: afterBlur.playerX,
-        afterVx: afterBlur.playerVx,
-        keysAfter: afterBlur.keys
+      inputReset: {
+        beforeX: beforeReset.playerX,
+        afterX: afterReset.playerX,
+        afterVx: afterReset.playerVx,
+        keysAfter: afterReset.keys
       }
     }, null, 2));
 

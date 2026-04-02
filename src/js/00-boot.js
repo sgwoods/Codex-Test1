@@ -823,6 +823,7 @@ function syncTestUi(){
  syncHelpUi();
 }
 function closeSettings(){
+ if(!settingsOpen)return;
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
  resetActiveInputState('settings_close');

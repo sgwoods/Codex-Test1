@@ -544,7 +544,7 @@ const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
-if(!toolsVisible)closeSettings();
+if(!toolsVisible&&settingsOpen)closeSettings();
  else syncSettingsUi();
  const activeMessage=started?gameplayMessageState():null;
  msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):(activeMessage?.mode==='board'?'boardMessage':'');

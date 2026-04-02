@@ -1,6 +1,12 @@
 {
   "notes": [
     {
+      "version": "1.0.2",
+      "date": "2026-04-02",
+      "title": "Movement reset hotfix",
+      "summary": "Fixed a production regression where hidden tool-surface cleanup was repeatedly resetting active input during live play, restored full left and right movement on the 1.0.2 line, and strengthened the pre-release movement harness so tiny non-playable nudges and repeated input resets cannot pass as valid control behavior again."
+    },
+    {
       "version": "1.0.1",
       "date": "2026-03-31",
       "title": "Input and feedback hotfix",
