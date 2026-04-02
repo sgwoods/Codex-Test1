@@ -84,6 +84,28 @@ function loadJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+function parseListEnv(value){
+  return String(value || '')
+    .split(',')
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function loadText(file){
+  return fs.readFileSync(file, 'utf8');
+}
+
+function extractBuiltJsonConstant(html, name){
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = html.match(new RegExp(`const ${escaped}=([^;]+);`));
+  if(!match) return undefined;
+  try{
+    return JSON.parse(match[1]);
+  }catch{
+    return undefined;
+  }
+}
+
 function checkGitClean(){
   const status = git(['status', '--short']);
   if(status){
@@ -118,6 +140,26 @@ function checkBuildInfo(cfg){
   return info;
 }
 
+function checkBetaTestPilotConfig(cfg){
+  if(cfg.lane !== 'beta') return;
+  const expectedEmails = Array.from(new Set([
+    ...parseListEnv(process.env.TEST_ACCOUNT_EMAILS),
+    ...parseListEnv(process.env.TEST_ACCOUNT_EMAIL)
+  ]));
+  if(!expectedEmails.length) return;
+  const html = loadText(require('path').join(cfg.dir, 'index.html'));
+  const builtEmails = Array.isArray(extractBuiltJsonConstant(html, 'TEST_ACCOUNT_EMAILS'))
+    ? extractBuiltJsonConstant(html, 'TEST_ACCOUNT_EMAILS').map((email) => String(email || '').trim().toLowerCase()).filter(Boolean)
+    : [];
+  const missing = expectedEmails.filter((email) => !builtEmails.includes(email));
+  if(missing.length){
+    throw new Error(
+      `Publish preflight failed: beta artifact is missing expected test pilot config (${missing.join(', ')}). ` +
+      `Rebuild with TEST_ACCOUNT_EMAILS set before publishing beta.`
+    );
+  }
+}
+
 function checkApprovedBetaForProduction(productionInfo){
   if(!fs.existsSync(BETA_BUILD_INFO)){
     throw new Error('Publish preflight failed: missing dist/beta/build-info.json. Promote and review beta first.');
@@ -141,6 +183,7 @@ function main(){
   checkGitClean();
   checkArtifacts(cfg);
   const info = checkBuildInfo(cfg);
+  checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production') checkApprovedBetaForProduction(info);
   console.log(JSON.stringify({
     ok: true,
