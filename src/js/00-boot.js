@@ -686,29 +686,6 @@ function closeFeedback(force=0){
  }
  syncPauseUi();
 }
-function openMailFallback(subject,lines){
- if(typeof window.__auroraOpenMailFallbackOverride==='function'){
-  window.__auroraOpenMailFallbackOverride(subject,lines);
-  return;
- }
- window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
-}
-async function sendFeedbackDirect(fields){
- const response=await fetch(WEB3FORMS_ENDPOINT,{
-  method:'POST',
-  headers:{Accept:'application/json'},
-  body:fields
- });
- const contentType=String(response.headers?.get?.('content-type')||'').toLowerCase();
- if(contentType.includes('application/json')){
-  const data=await response.json().catch(()=>null);
-  if(!response.ok||data?.success===false)throw new Error(data?.message||`HTTP ${response.status}`);
-  return {ok:1,status:response.status,data};
- }
- const text=(await response.text().catch(()=>'' )).trim();
- if(!response.ok)throw new Error(text||`HTTP ${response.status}`);
- return {ok:1,status:response.status,data:null,text};
-}
 async function submitFeedback(ev){
  ev.preventDefault();
  if(feedbackBusy)return;
