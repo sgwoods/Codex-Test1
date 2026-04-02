@@ -21,6 +21,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js`
 - Shared leaderboard / account UI / panel-state helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
+- Aurora-specific capture / rescue / carried-fighter helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/07-capture-rescue.js`
 - Aurora-specific scoring / rescue-award / challenge-bonus helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/08-score-awards.js`
 - Aurora-specific stage setup / formation / transition helpers:
