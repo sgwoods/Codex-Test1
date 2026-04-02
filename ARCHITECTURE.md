@@ -21,6 +21,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js`
 - Shared leaderboard / account UI / panel-state helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
+- Aurora-specific player combat, bullet resolution, and rescue-return helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-combat.js`
 - Aurora-specific enemy dive / challenge motion / attack helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/06-enemy-behavior.js`
 - Aurora-specific capture / rescue / carried-fighter helpers:
