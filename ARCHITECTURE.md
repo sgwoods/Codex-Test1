@@ -19,6 +19,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js`
 - Shared platform service policy / identity / transport helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js`
+- Shared leaderboard / account UI / panel-state helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
 - Gameplay / stage flow / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Rendering / HUD / overlays / sprites:
