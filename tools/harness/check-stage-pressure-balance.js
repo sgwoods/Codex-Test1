@@ -64,6 +64,10 @@ function runScenario(scenario, seed, persona, attempts=2){
   });
 }
 
+function isUsableResult(result){
+  return result && result.artifactQuality && result.artifactQuality.ok === true;
+}
+
 function avg(nums){
   return nums.length ? nums.reduce((sum, n) => sum + n, 0) / nums.length : 0;
 }
@@ -84,9 +88,24 @@ function bulletDeaths(result){
   return (result.analysis?.lossCauseCounts || {}).enemy_bullet || 0;
 }
 
-function runScenarioSeries(scenario, seed, persona, repeats=2){
+function runScenarioSeries(scenario, seed, persona, repeats=2, maxTotalRuns=4){
   const results = [];
-  for(let i=0;i<repeats;i++) results.push(runScenario(scenario, seed, persona));
+  let totalRuns = 0;
+  while(results.length < repeats && totalRuns < maxTotalRuns){
+    const result = runScenario(scenario, seed, persona);
+    totalRuns++;
+    if(isUsableResult(result)) results.push(result);
+  }
+  if(results.length < repeats){
+    fail('stage pressure harness could not gather enough usable runs', {
+      scenario,
+      seed,
+      persona,
+      repeatsRequested: repeats,
+      usableRuns: results.length,
+      maxTotalRuns
+    });
+  }
   const losses = results.map(shipLossCount);
   const bulletPressure = results.map(r => r.analysis?.bulletPressure?.overall?.bulletsPerAttack || 0);
   const bulletDeathCounts = results.map(bulletDeaths);
@@ -96,6 +115,7 @@ function runScenarioSeries(scenario, seed, persona, repeats=2){
     representative: results[results.length - 1],
     stats: {
       repeats,
+      totalRuns,
       losses,
       bulletPressure,
       bulletDeathCounts,
@@ -111,9 +131,9 @@ function runScenarioSeries(scenario, seed, persona, repeats=2){
   };
 }
 
-const stage2Series = runScenarioSeries('stage2-opening', 2201, 'advanced', 2);
-const stage4FiveSeries = runScenarioSeries('stage4-five-ships', 4201, 'advanced', 2);
-const stage4SurvivalSeries = runScenarioSeries('stage4-survival', 4301, 'advanced', 2);
+const stage2Series = runScenarioSeries('stage2-opening', 2201, 'advanced', 2, 4);
+const stage4FiveSeries = runScenarioSeries('stage4-five-ships', 4201, 'advanced', 2, 4);
+const stage4SurvivalSeries = runScenarioSeries('stage4-survival', 4301, 'advanced', 2, 4);
 
 const stage2 = stage2Series.representative;
 const stage4Five = stage4FiveSeries.representative;
