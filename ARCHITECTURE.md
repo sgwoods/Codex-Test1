@@ -15,6 +15,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
 - Shared runtime input / build-stamp / shell helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js`
+- Shared replay / session telemetry / recording helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js`
 - Gameplay / stage flow / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Rendering / HUD / overlays / sprites:
