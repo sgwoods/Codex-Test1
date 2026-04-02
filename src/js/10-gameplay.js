@@ -349,116 +349,6 @@ function carriedFighterTarget(e){
  return {x:e.x+off.x,y:e.y+off.y,w:6,h:6};
 }
 
-function destroyCarriedFighter(e){
- if(!e?.carry)return 0;
- // Manual-backed rule from the 1981 Namco manual:
- // - 500 for destroying a carried fighter in standby/formation
- // - 1000 when the carried fighter is attacking
- // The boss survives; only the carried fighter is lost.
- const attacking=!!e.dive;
- const points=attacking?1000:500;
- const off=carriedFighterOffset(e);
- e.carry=0;
- S.score+=points;
- logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
- S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
- S.alertT=Math.max(S.alertT,1.45);
- S.bannerTxt='CAPTURED FIGHTER';
- S.bannerSub='DESTROYED';
- S.bannerMode='captureLoss';
- S.banner=1.05;
- ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
- sfx.hit();
- return points;
-}
-
-function releaseCapturedFighter(e){
- const carryPos=carriedFighterTarget(e);
- S.cap={
-  mode:'dock',
-  x:carryPos?.x??e.x,
-  y:carryPos?.y??e.y,
-  vx:0,
-  vy:78,
-  t:8,
-  spin:0,
-  side:S.p.x<PLAY_W/2?1:-1
- };
- logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+S.cap.x.toFixed(2),releaseY:+S.cap.y.toFixed(2)},enemyRef(e)));
- S.alertTxt='FIGHTER RELEASED';
- S.alertT=Math.max(S.alertT,1.5);
- S.bannerTxt='FIGHTER RELEASED';
- S.bannerSub='RETURNING TO SHIP';
- S.bannerMode='rescueReturn';
- S.banner=1.1;
- sfx.rescue();
-}
-
-function spawnHostileCapturedFighter(e){
- const rogue=makeEnemy('rogue',e.r,e.c,e.tx,e.ty,S.profile);
- const carryPos=carriedFighterTarget(e);
- rogue.form=1;
- rogue.spawn=0;
- rogue.en=3;
- rogue.x=carryPos?.x??e.tx;
- rogue.y=carryPos?.y??e.ty;
-  rogue.cool=.55;
-  rogue.hitT=.2;
-  S.e.push(rogue);
- logEvent('captured_fighter_hostile_spawned',Object.assign({stage:S.stage,hostileId:rogue.id,spawnX:+rogue.x.toFixed(2),spawnY:+rogue.y.toFixed(2)},enemyRef(e)));
- return rogue;
-}
-
-function awardKill(e,mode){
- const dive=mode===1||mode===2||mode===4||mode===5;
- let pts=0;
- if(S.challenge){
-  pts=100;
-  S.score+=pts;
-  S.ch.hits++;
-  if(Number.isInteger(e.group)&&S.ch.groups){
-   S.ch.groups[e.group]=(S.ch.groups[e.group]||0)+1;
-   if(S.ch.groups[e.group]===8){
-    const bonus=challengeGroupBonus(S.stage);
-    S.ch.bonus=(S.ch.bonus||0)+bonus;
-    S.score+=bonus;
-    logEvent('challenge_group_bonus',{stage:S.stage,group:e.group,bonus,hits:S.ch.hits,total:S.ch.total});
-   }
-  }
-  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:1,rescued:0,turnedHostile:0,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
- return
- }
- if(e.t==='bee')pts=dive?100:50;
- else if(e.t==='but')pts=dive?160:80;
- else if(e.t==='rogue')pts=dive?1000:500;
- else if(e.t==='boss'){
-  if(dive){
-   const escorts=activeEscortCount(e);
-   // Manual-backed Stage 4+ special attack squadron scoring:
-   // 400 / 800 / 1600 depending on how many escorts are still attached.
-   pts=escorts>=2?1600:escorts===1?800:400;
-   if(S.stage>=4&&escorts>0){
-    logEvent('special_attack_bonus',{stage:S.stage,bonus:pts,escorts});
-    S.alertTxt=`SPECIAL BONUS ${pts}`;
-    S.alertT=Math.max(S.alertT,1.1);
-   }
-  }else pts=150;
- }
- S.score+=pts;
- logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
- if(e.carry){
-  if(dive){
-   releaseCapturedFighter(e);
-  }
-  else{
-   const hostile=spawnHostileCapturedFighter(e);
-   logEvent('captured_fighter_turned_hostile',Object.assign({stage:S.stage,hostileId:hostile.id},enemyRef(e)));
-   S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';
-   S.alertT=2.2;
-  }
- }
-}
-
 function assignEscorts(boss){
  if(boss.t!=='boss')return;
  const maxEscorts=S.stage===1&&S.scriptMode?1:2;
@@ -695,30 +585,7 @@ function update(dt){
  const normalStageCleared=!alive.length&&!S.challenge;
  S.liveCount=alive.length;
  if(S.challenge&&!alive.length&&!S.ch.done){
-  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(S.ch.upperBandY||PLAY_H*.5),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
-  S.ch.done=1;
-  const perfect=S.ch.hits===S.ch.total?10000:0;
-  S.ch.perfect=perfect;
-  S.score+=perfect;
-  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';
-  S.bannerSub=`HITS ${S.ch.hits}/${S.ch.total}`;
-  const bonusTotal=(S.ch.bonus||0)+perfect;
-  if(bonusTotal)S.bannerSub+=`\nBONUS ${bonusTotal}`;
-  S.bannerMode='challengeResult';
-  S.banner=1.15;
-  S.pendingStage=S.stage+1;
-  S.lastChallengeClearT=S.stageClock;
-  S.challengeTransitionStallLogged=0;
-  S.postChallengeT=1.1;
-  logEvent('challenge_transition_queued',{
-   stage:S.stage,
-   pendingStage:S.pendingStage,
-   hits:S.ch.hits,
-   total:S.ch.total,
-   postChallengeT:+S.postChallengeT.toFixed(3),
-   bannerMode:S.bannerMode,
-   bonusTotal
-  });
+  finalizeChallengeClear();
   return;
  }
  if(S.challenge&&S.ch.done&&!alive.length&&S.pendingStage&&S.postChallengeT<=0&&S.nextStageT<=0&&!S.challengeTransitionStallLogged){
@@ -831,13 +698,11 @@ function update(dt){
    S.cap.y+=(targetY-S.cap.y)*Math.min(1,dt*2.8)+(S.cap.vy||0)*dt;
    S.cap.vy=Math.max(0,(S.cap.vy||0)-92*dt);
    if(S.cap.t<=0||S.cap.y>PLAY_H+32)S.cap=null;
-   else if(!p.captured&&p.spawn<=0&&Math.abs(S.cap.x-targetX)<5&&Math.abs(S.cap.y-targetY)<5){
-    S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),autoDock:1});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2),autoDock:1});sfx.rescue();sfx.join();
-   }
+   else if(!p.captured&&p.spawn<=0&&Math.abs(S.cap.x-targetX)<5&&Math.abs(S.cap.y-targetY)<5)awardRescueJoin(1);
   }else{
    S.cap.y+=S.cap.vy*dt;
    if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;
-   else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2)});sfx.rescue();sfx.join()}
+   else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0)awardRescueJoin(0)
   }
  }
  if(normalStageCleared){
