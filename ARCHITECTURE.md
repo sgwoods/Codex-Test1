@@ -359,6 +359,184 @@ This means `Space Invaders` should be treated as:
 - a design reference for broad fixed-screen shooter comparison
 - not the first target for a shared `gamePack` contract
 
+### Representative Mechanics Set
+
+For platform-shaping purposes, the most useful reference games are:
+
+- direct family targets
+  - `Galaxian`
+  - `Galaga`
+  - `Gaplus` / `Galaga 3`
+  - `Galaga '88`
+- nearby comparison games
+  - `Phoenix`
+  - `Pleiads`
+  - `Moon Cresta`
+  - `Terra Cresta`
+- contrast cases
+  - `Space Invaders`
+  - `Gorf`
+
+The goal is not to support all of these at once. The goal is to understand
+which mechanics are central to the first platform contract and which mechanics
+belong in later branches or capability families.
+
+### Mechanics Matrix
+
+Use this matrix as the design lens when deciding what belongs in the first
+shared runtime.
+
+- `Galaxian`
+  - formation rack:
+    - yes
+  - independent dive attacks:
+    - yes
+  - escort / flagship relationships:
+    - yes
+  - capture / rescue:
+    - no
+  - dual-fighter play:
+    - no
+  - challenge stages:
+    - no
+  - shield / barricade play:
+    - no
+  - platform fit:
+    - first sibling target
+
+- `Galaga`
+  - formation rack:
+    - yes
+  - independent dive attacks:
+    - yes
+  - escort / flagship relationships:
+    - yes
+  - capture / rescue:
+    - yes
+  - dual-fighter play:
+    - yes
+  - challenge stages:
+    - yes
+  - shield / barricade play:
+    - no
+  - platform fit:
+    - core proof family
+
+- `Gaplus` / `Galaga 3`
+  - formation rack:
+    - yes
+  - independent dive attacks:
+    - yes
+  - escort / flagship relationships:
+    - reduced / more varied
+  - capture / rescue:
+    - no in the Galaga sense
+  - dual-fighter play:
+    - altered upgrade/assist mechanics instead
+  - challenge stages:
+    - yes
+  - shield / barricade play:
+    - no
+  - platform fit:
+    - family stretch target once core contract is stable
+
+- `Galaga '88`
+  - formation rack:
+    - yes
+  - independent dive attacks:
+    - yes
+  - escort / flagship relationships:
+    - yes, with richer progression
+  - capture / rescue:
+    - yes
+  - dual-fighter play:
+    - yes
+  - challenge stages:
+    - yes
+  - shield / barricade play:
+    - no
+  - platform fit:
+    - advanced family target after baseline proof
+
+- `Phoenix`
+  - formation rack:
+    - partial / staged waves rather than pure Galaxian rack behavior
+  - independent dive attacks:
+    - some, but not the same family grammar
+  - escort / flagship relationships:
+    - limited
+  - capture / rescue:
+    - no
+  - dual-fighter play:
+    - no
+  - challenge stages:
+    - no
+  - shield / barricade play:
+    - no
+  - platform fit:
+    - nearby comparison only
+
+- `Moon Cresta` / `Terra Cresta`
+  - formation rack:
+    - mixed
+  - independent dive attacks:
+    - yes
+  - escort / flagship relationships:
+    - not central
+  - capture / rescue:
+    - no
+  - dual-fighter play:
+    - no, but ship-combination / transform mechanics matter
+  - challenge stages:
+    - limited or different in shape
+  - shield / barricade play:
+    - no
+  - platform fit:
+    - useful contrast for upgrade/combine mechanics, not first target
+
+- `Space Invaders`
+  - formation rack:
+    - no, marching grid instead
+  - independent dive attacks:
+    - no
+  - escort / flagship relationships:
+    - no
+  - capture / rescue:
+    - no
+  - dual-fighter play:
+    - no
+  - challenge stages:
+    - no
+  - shield / barricade play:
+    - yes
+  - platform fit:
+    - separate fixed-screen branch later, not first contract
+
+### Platform Implications
+
+This points to a practical first-platform boundary:
+
+- first-class in the initial shared contract
+  - formation-rack staging
+  - independent dive attacks
+  - escort / squad behavior
+  - stage-band progression
+  - optional challenge stages
+- optional capability modules
+  - capture / rescue
+  - dual-fighter mode
+  - upgrade / combine mechanics
+- explicitly out of first-scope contract
+  - marching-grid invasion logic
+  - shield / barricade systems
+  - broader multi-genre shooter assumptions
+
+That keeps the first platform honest:
+
+- broad enough for `Aurora`, `Galaxian`, and the closer Galaga-family lineage
+- narrow enough that `Space Invaders` does not distort the core contract too
+  early
+
 ## First Game-Pack Shape
 
 The first concrete `gamePack` should be Aurora itself, expressed in a way that
