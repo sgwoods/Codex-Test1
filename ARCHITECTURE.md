@@ -258,6 +258,25 @@ The next useful harness organization step should be:
 This separation will matter more, not less, as we start extending Platinum for
 new game packs.
 
+The first explicit platform-only proof harness is now:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
+
+Its role is to prove that:
+
+- Aurora can sit in wait mode as the active installed pack
+- the Platinum shell can switch to a preview sibling pack and back
+- the selected pack, not an Aurora-only fallback path, governs launch
+- Aurora still starts correctly after being launched through that selected-pack
+  path
+
+Current status:
+
+- this harness is now green on the current tree
+- that gives us the first explicit automated proof that Aurora can sit in the
+  Platinum shell, survive pack switching, and then launch again through the
+  selected-pack path
+
 ### Real Play
 
 - Player-generated `.json` and `.webm` are browser download artifacts first
