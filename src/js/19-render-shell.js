@@ -21,6 +21,19 @@ const DISPLAY_SHELL=Object.freeze({
  stageLabelGap:5
 });
 
+function applyStageChromeTheme(){
+ const theme=auroraFrameAccentTheme(S.stagePresentation);
+ const root=document.documentElement;
+ if(root){
+  root.style.setProperty('--shell-line',theme.shellLine);
+  root.style.setProperty('--shell-glow',theme.shellGlow);
+  root.style.setProperty('--frame-line',theme.frameLine);
+  root.style.setProperty('--frame-glow',theme.frameGlow);
+  root.style.setProperty('--marquee-border',theme.marqueeBorder);
+  root.style.setProperty('--marquee-glow',theme.marqueeGlow);
+ }
+}
+
 function escapeMessageHtml(value=''){
  return String(value)
   .replaceAll('&','&amp;')
@@ -116,6 +129,7 @@ function syncCabinetShellLayout({
  waitScoreOverlay,
  framedOverlayOpen
 }){
+ applyStageChromeTheme();
  if(hud){
   const hudLeft=ox+DISPLAY_SHELL.hudInsetX;
   const hudTop=oy+DISPLAY_SHELL.hudInsetTop;

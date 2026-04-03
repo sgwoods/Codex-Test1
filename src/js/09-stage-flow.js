@@ -14,10 +14,7 @@ function familyMotion(e){
 }
 
 function formationLayout(stage){
- if(stage>=8)return{gx:15.2,gy:12.4,oy:27};
- if(stage>=6)return{gx:15.8,gy:12.9,oy:27};
- if(stage>=4)return{gx:16.4,gy:13.4,oy:28};
- return{gx:VIS.gx,gy:VIS.gy,oy:VIS.formTop};
+ return auroraFormationLayout(stage);
 }
 
 function spawnFormation(){
@@ -62,8 +59,8 @@ function spawnStage(){
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
- if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challenge';S.banner=2.6}
- else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
+ if(S.challenge){spawnChallenge();S.bannerTxt=S.stagePresentation.challengeTitle;S.bannerSub=S.stagePresentation.stageLabel;S.bannerMode='challenge';S.banner=2.6}
+ else{spawnFormation();S.bannerTxt=S.stagePresentation.stageLabel;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
  logSnapshot('stage_spawn');
 }
 

@@ -279,6 +279,37 @@ function drawReserveShips(lives){
 
 function drawPostFx(){}
 
+function drawStageBackdrop(){
+ const mode=S.stagePresentation?.backgroundMode||'starfield';
+ if(mode==='starfield')return;
+ const time=performance.now()/1000;
+ if(mode==='aurora-hint'||mode==='aurora-borealis'){
+  const alpha=mode==='aurora-borealis'?.22:.12;
+  const ribbons=mode==='aurora-borealis'?3:2;
+  for(let i=0;i<ribbons;i++){
+   const baseY=28+i*44+Math.sin(time*.38+i*.9)*10;
+   const amp=10+i*3;
+   const hueA=i===0?'rgba(116,230,255,ALPHA)':'rgba(142,255,190,ALPHA)';
+   const hueB=i===2?'rgba(217,148,255,ALPHA)':'rgba(255,224,120,ALPHA)';
+   const g=ctx.createLinearGradient(0,baseY-amp,0,baseY+amp*2.6);
+   g.addColorStop(0,hueA.replace('ALPHA',(alpha*.18).toFixed(3)));
+   g.addColorStop(.35,hueB.replace('ALPHA',(alpha*.72).toFixed(3)));
+   g.addColorStop(1,hueA.replace('ALPHA','0'));
+   ctx.fillStyle=g;
+   ctx.beginPath();
+   ctx.moveTo(0,baseY);
+   for(let x=0;x<=PLAY_W;x+=18){
+    const y=baseY+Math.sin(time*1.2+x*.028+i*.7)*amp+Math.cos(time*.7+x*.014+i)*amp*.35;
+    ctx.lineTo(x,y);
+   }
+   ctx.lineTo(PLAY_W,0);
+   ctx.lineTo(0,0);
+   ctx.closePath();
+   ctx.fill();
+  }
+ }
+}
+
 function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.setTransform(1,0,0,1,0,0);
  ctx.clearRect(0,0,c.width,c.height);
@@ -298,6 +329,7 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
   ctx.fillRect(s.x,s.y,s.s,s.s);
  }
  ctx.globalAlpha=1;
+ drawStageBackdrop();
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
   if(f.flash){

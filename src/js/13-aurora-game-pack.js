@@ -15,6 +15,56 @@ const AURORA_STAGE_THEME_PROGRESSION=Object.freeze([
  {fromStage:16,id:'crown-aurora',frameAccent:'aurora-crown',backgroundMode:'aurora-borealis',challengeBrand:'crown',bossArchetype:'super-partner-pair'}
 ]);
 
+const AURORA_FORMATION_LAYOUTS=Object.freeze([
+ {fromStage:1,gx:VIS.gx,gy:VIS.gy,oy:VIS.formTop},
+ {fromStage:4,gx:16.4,gy:13.4,oy:28},
+ {fromStage:6,gx:15.8,gy:12.9,oy:27},
+ {fromStage:8,gx:15.2,gy:12.4,oy:27}
+]);
+
+const AURORA_FRAME_ACCENTS=Object.freeze({
+ 'classic-blue':Object.freeze({
+  frameLine:'rgba(171,214,255,.28)',
+  frameGlow:'rgba(255,220,122,.08)',
+  shellLine:'rgba(83,140,255,.32)',
+  shellGlow:'rgba(255,222,134,.08)',
+  marqueeBorder:'#f05e1d',
+  marqueeGlow:'#38d6a0'
+ }),
+ 'amber-blue':Object.freeze({
+  frameLine:'rgba(255,203,123,.3)',
+  frameGlow:'rgba(255,142,82,.12)',
+  shellLine:'rgba(255,187,96,.34)',
+  shellGlow:'rgba(255,224,154,.12)',
+  marqueeBorder:'#ff7f2f',
+  marqueeGlow:'#ffd15f'
+ }),
+ 'teal-gold':Object.freeze({
+  frameLine:'rgba(132,245,232,.32)',
+  frameGlow:'rgba(255,228,117,.12)',
+  shellLine:'rgba(94,232,214,.34)',
+  shellGlow:'rgba(167,255,239,.12)',
+  marqueeBorder:'#20d3b6',
+  marqueeGlow:'#ffd15f'
+ }),
+ 'violet-gold':Object.freeze({
+  frameLine:'rgba(205,168,255,.32)',
+  frameGlow:'rgba(255,210,129,.12)',
+  shellLine:'rgba(176,120,255,.34)',
+  shellGlow:'rgba(255,220,168,.12)',
+  marqueeBorder:'#b86cff',
+  marqueeGlow:'#ffd973'
+ }),
+ 'aurora-crown':Object.freeze({
+  frameLine:'rgba(143,255,220,.36)',
+  frameGlow:'rgba(188,143,255,.16)',
+  shellLine:'rgba(121,246,198,.36)',
+  shellGlow:'rgba(255,227,138,.16)',
+  marqueeBorder:'#48f0c3',
+  marqueeGlow:'#c98cff'
+ })
+});
+
 const AURORA_SCORING_RULES=Object.freeze({
  challengeEnemy:100,
  perfectChallengeClear:10000,
@@ -51,7 +101,9 @@ const AURORA_GAME_PACK=Object.freeze({
   usesBossArchetypeVariants:1
  }),
  stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
+ formationLayouts:AURORA_FORMATION_LAYOUTS,
  stageThemeProgression:AURORA_STAGE_THEME_PROGRESSION,
+ frameAccents:AURORA_FRAME_ACCENTS,
  scoring:AURORA_SCORING_RULES
 });
 
@@ -84,6 +136,21 @@ function auroraStagePresentation(stage,challenge){
   challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
   stageLabel:`STAGE ${stage}`
  });
+}
+
+function auroraFormationLayout(stage){
+ const layouts=auroraGamePack().formationLayouts;
+ let layout=layouts[0];
+ for(const candidate of layouts){
+  if(stage>=candidate.fromStage)layout=candidate;
+  else break;
+ }
+ return layout;
+}
+
+function auroraFrameAccentTheme(stagePresentation){
+ const frameAccent=stagePresentation?.frameAccent||'classic-blue';
+ return auroraGamePack().frameAccents[frameAccent]||auroraGamePack().frameAccents['classic-blue'];
 }
 
 function auroraEnemyKillPoints(enemy,dive){
