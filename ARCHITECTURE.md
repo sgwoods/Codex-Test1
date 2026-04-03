@@ -37,8 +37,10 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Shared cabinet render shell / HUD layout / board-message helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
-- Aurora-specific board rendering / sprites / entity draw routines:
+- Aurora render orchestration / scene composition:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js`
+- Aurora-specific board rendering / sprites / entity draw routines:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/21-render-board.js`
 - Harness hooks:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js`
 
