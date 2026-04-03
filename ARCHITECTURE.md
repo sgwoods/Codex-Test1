@@ -739,9 +739,23 @@ Reference inspiration sources for this family include:
 
 - [Galaga Soundboard](https://www.101soundboards.com/boards/28843-galaga-soundboard)
 - [Galaxian - Video Game Music](https://www.101soundboards.com/boards/643652-galaxian-video-game-music)
+- [Freesound - Galaxian Arcade Game.wav by portwain](https://freesound.org/s/261173/)
 
 These are useful as event and mood references, not as a mandate to replicate
 the exact sounds verbatim.
+
+For future sibling-pack work, the `Galaxian Arcade Game.wav` reference is
+particularly useful because it captures early-arcade pacing and cabinet feel in
+a way that can inform:
+
+- sparse attack-pressure cues
+- early-arcade loss and hit cadence
+- ambient attract or shell presence
+- UI and menu-era texture for a `Galaxian`-like front door
+
+The current published Freesound entry for that file is `CC0`, which makes it a
+good long-term reference and prototyping source for future `Galaxian`-family
+audio design.
 
 ### Front Door And Game Selection
 
