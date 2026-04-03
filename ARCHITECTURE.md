@@ -7,6 +7,8 @@ Related planning artifact:
 
 - audio planning and source manifest:
   - `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
+- curated splash/quote/content planning:
+  - `/Users/stevenwoods/Documents/Codex-Test1/CONTENT_PLAN.md`
 
 ## Runtime Layout
 
@@ -777,6 +779,36 @@ That means the shared shell should eventually support:
 
 For now, Aurora remains the only primary game entry. But the platform should
 avoid hard-coding a forever single-game front door.
+
+### Curated Quote Content
+
+The front door, attract surfaces, and future notice system should also be able
+to host curated approved quote content without hard-coding those lines into the
+game runtime.
+
+That means the platform should eventually support:
+
+- quote/content ingestion from an approved external JSON source
+- surface-aware filtering:
+  - splash page
+  - wait mode
+  - stage transition
+  - notice panel
+  - game picker
+- pack-aware filtering so each game can opt into the right tone and theme
+- dismissal/cooldown behavior so quotes stay occasional and intentional
+
+This content should live alongside the future splash/game-picker system, not as
+combat-time UI clutter.
+
+Canonical quote/content ingest rule:
+
+- consume only the approved export documented by:
+  - [APPROVED_QUOTES_INTERFACE.md](https://github.com/sgwoods/sci-fi-ai-dystopian-project/blob/main/APPROVED_QUOTES_INTERFACE.md)
+- do not ingest from editorial workflow folders such as:
+  - `data/review/`
+  - `data/candidates/`
+  - `data/discovery/`
 
 ## First Game-Pack Shape
 
