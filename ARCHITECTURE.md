@@ -655,6 +655,124 @@ Before we claim platform readiness, the code should prove that:
 - the shell and services do not need Aurora-specific knowledge to boot the
   game
 
+## First Non-Aurora Pack Target
+
+The first serious sibling target should be a minimal `Galaxian`-like pack.
+This is close enough to stress the contract honestly, but different enough to
+show where Aurora assumptions still leak through.
+
+### Minimal Galaxian-Like Pack Expectations
+
+A first non-Aurora pack should be able to define:
+
+- metadata
+  - `gameKey`
+  - `title`
+  - `versionLine`
+- stage cadence
+  - regular formation stages only
+  - no required challenge stage cadence
+- formations
+  - formation-rack layout
+  - entry order
+  - stage-to-stage spacing changes
+- enemy families
+  - baseline attacker family
+  - stronger mid-tier family
+  - flagship / boss family
+- attack behavior
+  - independent dive attacks
+  - flagship-led escort attacks
+  - no capture beam requirement
+- scoring tables
+  - formation kill values
+  - dive kill values
+  - flagship escort bonus values
+- presentation
+  - its own marquee/title treatment
+  - its own board sprite families
+  - optional stage-theme progression without Aurora-specific branding
+
+### Minimal Galaxian-Like Capability Profile
+
+The first sibling pack should look roughly like this:
+
+- `usesFormationRack`
+  - yes
+- `usesIndependentDiveAttacks`
+  - yes
+- `usesEscortPatterns`
+  - yes
+- `usesChallengeStages`
+  - no
+- `usesCaptureRescue`
+  - no
+- `usesDualFighterMode`
+  - no
+- `usesStageThemeProgression`
+  - optional
+- `usesBossArchetypeVariants`
+  - optional
+- `usesStaticShields`
+  - no
+
+That makes it a clean test of the family core without the richer Aurora/Galaga
+mechanics.
+
+### Current Aurora Assumptions A Galaxian-Like Pack Would Still Trip Over
+
+These are the most important remaining leaks in the current runtime:
+
+- enemy data shape still assumes Aurora/Galaga-era fields such as:
+  - `carry`
+  - `beam`
+  - `beamT`
+  - rescue-return state
+- gameplay flow still has challenge-stage assumptions woven into update and
+  transition logic
+- player lifecycle still carries capture/rescue-specific state in the core
+  player model
+- scoring helpers still assume Galaga-family special cases such as:
+  - captured-fighter destruction
+  - rescue join awards
+  - challenge-perfect awards
+- renderer still understands Aurora family names and Aurora-specific palette
+  identity directly
+- stage presentation currently supports pack-owned themes, but the shell still
+  assumes Aurora is the only loaded title
+
+### What A Galaxian Proof Should Force Us To Clean Up
+
+Before we can honestly claim a second pack is viable, the code should prove
+all of these:
+
+- capture/rescue can be completely disabled without leaving dead runtime state
+- challenge-stage cadence can be absent without special-case workarounds
+- enemy family naming can be supplied by the pack without Aurora-specific
+  palette assumptions
+- stage transitions and banners can be supplied by the pack without assuming
+  Aurora copy
+- scoring can be loaded from the pack without carrying unused Aurora award
+  branches
+- board rendering can consume pack-owned presentation metadata instead of only
+  Aurora identity
+
+### Immediate Refactor Priority After This
+
+The next contract-first priorities should therefore be:
+
+- separate the enemy/entity runtime model into:
+  - core shared fields
+  - optional capability-owned fields
+- separate stage/challenge transition orchestration from challenge-specific
+  rules
+- move more scoring branches behind capability gates
+- make board rendering choose palettes and sprite families through pack-owned
+  presentation data rather than hardcoded Aurora family names
+
+If we can do those four things, a minimal `Galaxian`-like pack becomes a real
+engineering target instead of only an architectural idea.
+
 ## Platform Extraction Order
 
 The platform path should be incremental. Aurora remains the proof project while
