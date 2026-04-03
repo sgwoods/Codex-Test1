@@ -41,7 +41,7 @@ function renderGamePicker(){
  const activeKey=typeof currentGamePackKey==='function'?currentGamePackKey():'';
   const activePack=typeof currentGamePack==='function'?currentGamePack():null;
   const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
- gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Arcade Platform'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • switch packs from wait mode':''
+ gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • switch packs from wait mode':''
  }</span>${renderShellThemeOptions()}`;
  gamePickerList.innerHTML=packs.map(pack=>{
   const isActive=pack.metadata?.gameKey===activeKey;

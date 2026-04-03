@@ -1,4 +1,4 @@
-// Aurora game-pack metadata, capability flags, stage themes, and scoring rules.
+// Platinum pack registry with Aurora-owned metadata, capability flags, themes, and scoring rules.
 
 const AURORA_STAGE_BAND_PROFILES=Object.freeze([
  {name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic',pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1,steer:1,jitter:1,diveVy:1,diveAccel:1},
@@ -332,8 +332,8 @@ function currentGamePackFrontDoor(){
  const pack=currentGamePack();
  const frontDoor=pack.frontDoor||{};
  return Object.freeze({
-  marqueeTitle:frontDoor.marqueeTitle||pack.metadata?.title||PRODUCT_NAME||'Arcade Platform',
-  title:frontDoor.title||String(pack.metadata?.title||PRODUCT_NAME||'Arcade Platform').toUpperCase(),
+  marqueeTitle:frontDoor.marqueeTitle||pack.metadata?.title||PRODUCT_NAME||'Platinum',
+  title:frontDoor.title||String(pack.metadata?.title||PRODUCT_NAME||'Platinum').toUpperCase(),
   subtitle:frontDoor.subtitle||'WAIT MODE',
   startPrompt:frontDoor.startPrompt||'PRESS <span class="k">ENTER</span> TO START',
   featureLine:frontDoor.featureLine||'',

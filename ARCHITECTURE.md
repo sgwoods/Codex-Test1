@@ -12,6 +12,25 @@ Related planning artifact:
 - architect review response baseline:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md`
 
+## Platform Naming
+
+The shared cabinet-shooter platform should now be referred to as:
+
+- `Platinum`
+
+This helps keep the language clear:
+
+- `Platinum`
+  - the shared platform, shell, services, and pack-hosting runtime
+- `Aurora Galactica`
+  - the first fully playable game pack running on Platinum
+- future sibling packs such as `Galaxian Signal`
+  - additional game packs hosted by Platinum
+
+Where older Aurora-branded storage keys, debug globals, or compatibility shims
+still exist, they should be treated as transitional implementation details, not
+as the platform name.
+
 ## Runtime Layout
 
 ### Source Files
@@ -517,15 +536,13 @@ Aurora-specific behavior:
 - replay / telemetry / artifact flow
 - auth / leaderboard / feedback adapter boundaries
 - input normalization and shell layout behavior
+- generic Platinum shell defaults in the bootstrap HTML
 
 #### Remaining Aurora-Specific Assumptions To Remove Or Gate
 
 The current codebase is close, but these still represent "Aurora is special"
 assumptions that should be reduced or intentionally gated:
 
-- static shell defaults in:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html`
-  - `Aurora Galactica` is still the initial `<title>` and marquee fallback
 - Aurora-specific fallback text and literals still exist in a few shell paths:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`

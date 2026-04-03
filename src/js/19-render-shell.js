@@ -288,11 +288,11 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
    const frontDoor=typeof currentGamePackFrontDoor==='function'
     ? currentGamePackFrontDoor()
    : {
-      title:'AURORA GALACTICA',
-      subtitle:'WAIT MODE',
-      startPrompt:'PRESS <span class="k">ENTER</span> TO START',
+      title:'PLATINUM',
+      subtitle:'SELECT A GAME',
+      startPrompt:'PRESS <span class="k">ENTER</span> TO LAUNCH',
       featureLine:'',
-      attractLine:'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
+      attractLine:'PLATFORM SHELL ONLINE   CHOOSE GAME ON THE LEFT',
       utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
       noticeHint:'',
       pickerHint:'',

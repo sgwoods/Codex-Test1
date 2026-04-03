@@ -32,7 +32,10 @@ const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
-let PRODUCT_NAME='Aurora Galactica';
+const PLATFORM_NAME='Platinum';
+let PRODUCT_NAME=PLATFORM_NAME;
+// Keep the existing browser storage namespace until we plan and ship an
+// explicit migration for live users and their historical local data.
 const STORAGE_PREFIX='auroraGalactica';
 const LEGACY_STORAGE_PREFIX='galagaTrib';
 const GAME_PACK_PREF_KEY=`${STORAGE_PREFIX}SelectedGamePack`;
