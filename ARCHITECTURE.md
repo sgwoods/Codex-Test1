@@ -537,6 +537,48 @@ That keeps the first platform honest:
 - narrow enough that `Space Invaders` does not distort the core contract too
   early
 
+### Stage Identity And Branded Progression
+
+The platform should not assume stages are only gameplay-number increments with
+flat cosmetic swaps. At least for Aurora-family games, stage identity should be
+able to affect the feel of play.
+
+That means the first `gamePack` contract should leave room for:
+
+- branded stage themes
+  - distinct iconography
+  - background treatments
+  - frame and shell accents
+- branded challenge-stage presentation
+  - themed challenge intros
+  - challenge-specific formation and attack styling
+- character-driven boss variants
+  - named or recognizable boss archetypes
+  - boss-specific visuals
+  - boss-specific behavior patterns
+- progression-linked presentation shifts
+  - more complex formations later in a run
+  - richer or more aggressive challenge stages later in a run
+  - staged escalation in background and shell identity
+
+Aurora-specific examples we should plan for now:
+
+- moving `aurora borealis` background treatment
+- stage/frame branding that evolves during progression
+- challenge waves that become visually and mechanically richer
+- `Super Bosses` or `Partners` with character-provided iconology and distinct
+  attack behavior
+
+The rule here is:
+
+- stage presentation is not only skin
+- stage presentation can be part of the gameplay contract
+
+So the future `gamePack` needs to support both:
+
+- mechanics definitions
+- progression-aware presentation definitions
+
 ## First Game-Pack Shape
 
 The first concrete `gamePack` should be Aurora itself, expressed in a way that
@@ -552,6 +594,11 @@ same.
   - capture/rescue
   - dual-fighter join flow
   - challenge stage rules
+- provide progression-aware stage presentation definitions:
+  - stage themes
+  - background motion treatments
+  - frame/shell accent variants
+  - boss iconography sets
 - provide Aurora-specific board rendering hooks
 
 ### First Shared Capability Flags
@@ -566,12 +613,14 @@ implements every mechanic.
 - `usesCaptureRescue`
 - `usesDualFighterMode`
 - `usesStaticShields`
+- `usesStageThemeProgression`
+- `usesBossArchetypeVariants`
 
 This should let us express:
 
 - Aurora:
   - formation rack, dives, escorts, challenge stages, capture/rescue, dual
-    fighter
+    fighter, evolving stage themes, boss variants
 - Galaxian-like:
   - formation rack, dives, escorts
 - Space Invaders-like:
