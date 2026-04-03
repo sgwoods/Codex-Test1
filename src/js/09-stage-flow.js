@@ -38,18 +38,21 @@ function spawnFormation(){
 
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
+ const layout=auroraChallengeLayout();
  S.e.length=0;
- const total=40;
- const upperBandY=PLAY_H*.5;
+ const total=layout.groups*layout.enemiesPerGroup;
+ const upperBandY=PLAY_H*layout.upperBandRatio;
  // Manual-backed structure: the first Galaga challenge stage is modeled as
  // 5 groups of 8 enemies. Motion fidelity is still being tuned in #9, but
  // the board structure and group bookkeeping are meant to stay stable.
  for(let i=0;i<total;i++){
-  const t=i%8<2?'boss':i%3?'but':'bee';
-  const wave=(i/8)|0,lane=i%8,side=lane<4?-1:1,slot=lane%4,row=slot<2?0:1;
-  S.e.push({id:(randUnit()*1e9)|0,t,fam:profile.challengeFamily,band:profile.name,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+44:-44,y:34+wave*13+row*8,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*1.52+slot*.18,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1,ub:0,upperBandY});
+  const lane=i%layout.enemiesPerGroup;
+  const wave=(i/layout.enemiesPerGroup)|0;
+  const t=layout.laneTypes[lane]||'bee';
+  const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
+  S.e.push({id:(randUnit()*1e9)|0,t,fam:profile.challengeFamily,band:profile.name,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+layout.spawnOffsetX:-layout.spawnOffsetX,y:34+wave*layout.waveSpacingY+row*layout.rowSpacingY,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*layout.waveDelay+slot*layout.slotDelay,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1,ub:0,upperBandY});
  }
- S.ch={hits:0,total:40,done:0,groups:Array.from({length:5},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
+ S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
 function spawnStage(){
@@ -67,10 +70,11 @@ function spawnStage(){
 function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
+ const nextStagePresentation=auroraStagePresentation(targetStage,nextIsChallenge);
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
  S.nextStageT=mode==='challengeResult'?(nextIsChallenge?1.8:1.25):(nextIsChallenge?2.8:2.2);
- S.bannerTxt=nextIsChallenge?'CHALLENGING STAGE':`STAGE ${targetStage}`;
- S.bannerSub=nextIsChallenge?`STAGE ${targetStage}`:'NEXT PHASE';
+ S.bannerTxt=nextStagePresentation.transitionTitle;
+ S.bannerSub=nextStagePresentation.transitionSub;
  S.bannerMode='stageTransition';
  S.banner=S.nextStageT;
  logEvent('challenge_transition_started',{

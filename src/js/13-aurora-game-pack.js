@@ -65,6 +65,23 @@ const AURORA_FRAME_ACCENTS=Object.freeze({
  })
 });
 
+const AURORA_STAGE_CADENCE=Object.freeze({
+ challengeFirstStage:3,
+ challengeEvery:4
+});
+
+const AURORA_CHALLENGE_LAYOUT=Object.freeze({
+ groups:5,
+ enemiesPerGroup:8,
+ upperBandRatio:.5,
+ spawnOffsetX:44,
+ waveSpacingY:13,
+ rowSpacingY:8,
+ waveDelay:1.52,
+ slotDelay:.18,
+ laneTypes:Object.freeze(['boss','boss','but','bee','but','bee','but','bee'])
+});
+
 const AURORA_SCORING_RULES=Object.freeze({
  challengeEnemy:100,
  perfectChallengeClear:10000,
@@ -100,8 +117,10 @@ const AURORA_GAME_PACK=Object.freeze({
   usesStageThemeProgression:1,
   usesBossArchetypeVariants:1
  }),
+ stageCadence:AURORA_STAGE_CADENCE,
  stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
  formationLayouts:AURORA_FORMATION_LAYOUTS,
+ challengeLayout:AURORA_CHALLENGE_LAYOUT,
  stageThemeProgression:AURORA_STAGE_THEME_PROGRESSION,
  frameAccents:AURORA_FRAME_ACCENTS,
  scoring:AURORA_SCORING_RULES
@@ -109,6 +128,11 @@ const AURORA_GAME_PACK=Object.freeze({
 
 function auroraGamePack(){
  return AURORA_GAME_PACK;
+}
+
+function auroraIsChallengeStage(stage){
+ const cadence=auroraGamePack().stageCadence;
+ return stage===cadence.challengeFirstStage||((stage-cadence.challengeFirstStage)%cadence.challengeEvery===0&&stage>cadence.challengeFirstStage);
 }
 
 function stageBandIndex(stage){
@@ -134,7 +158,9 @@ function auroraStagePresentation(stage,challenge){
  }
  return Object.assign({},theme,{
   challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
-  stageLabel:`STAGE ${stage}`
+  stageLabel:`STAGE ${stage}`,
+  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
+  transitionSub:challenge?`STAGE ${stage}`:'NEXT PHASE'
  });
 }
 
@@ -146,6 +172,10 @@ function auroraFormationLayout(stage){
   else break;
  }
  return layout;
+}
+
+function auroraChallengeLayout(){
+ return auroraGamePack().challengeLayout;
 }
 
 function auroraFrameAccentTheme(stagePresentation){
