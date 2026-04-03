@@ -35,6 +35,8 @@ async function readShellState(page){
       frontDoorTitle: typeof currentGamePackFrontDoor === 'function' ? (currentGamePackFrontDoor().title || '') : '',
       docTitle: document.title || '',
       marquee: document.getElementById('cabinetMarqueeTitle')?.textContent || '',
+      settingsRuntime: document.getElementById('settingsRuntime')?.textContent || '',
+      buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
       waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim(),
       snapshotGameKey: snap.gameKey || ''
     };
@@ -55,6 +57,8 @@ async function main(){
         frontDoorTitle: typeof currentGamePackFrontDoor === 'function' ? (currentGamePackFrontDoor().title || '') : '',
         docTitle: document.title || '',
         marquee: document.getElementById('cabinetMarqueeTitle')?.textContent || '',
+        settingsRuntime: document.getElementById('settingsRuntime')?.textContent || '',
+        buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim(),
         snapshotGameKey: snap.gameKey || ''
       };
@@ -70,6 +74,8 @@ async function main(){
         frontDoorTitle: typeof currentGamePackFrontDoor === 'function' ? (currentGamePackFrontDoor().title || '') : '',
         docTitle: document.title || '',
         marquee: document.getElementById('cabinetMarqueeTitle')?.textContent || '',
+        settingsRuntime: document.getElementById('settingsRuntime')?.textContent || '',
+        buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim()
       };
     }, 1200, 40);
@@ -95,6 +101,8 @@ async function main(){
         frontDoorTitle: typeof currentGamePackFrontDoor === 'function' ? (currentGamePackFrontDoor().title || '') : '',
         docTitle: document.title || '',
         marquee: document.getElementById('cabinetMarqueeTitle')?.textContent || '',
+        settingsRuntime: document.getElementById('settingsRuntime')?.textContent || '',
+        buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim()
       };
     }, 1200, 40);
@@ -113,6 +121,8 @@ async function main(){
         frontDoorTitle: typeof currentGamePackFrontDoor === 'function' ? (currentGamePackFrontDoor().title || '') : '',
         docTitle: document.title || '',
         marquee: document.getElementById('cabinetMarqueeTitle')?.textContent || '',
+        settingsRuntime: document.getElementById('settingsRuntime')?.textContent || '',
+        buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
         snapshotGameKey: snap.gameKey || '',
         player: snap.player || {}
       };
@@ -126,12 +136,21 @@ async function main(){
   if(!result.auroraWait.docTitle.includes('Aurora Galactica') || !result.auroraWait.marquee.includes('Aurora Galactica')){
     fail('Aurora wait mode was not rendering the selected pack shell identity', result);
   }
+  if(!result.auroraWait.settingsRuntime.includes('Platinum · Aurora Galactica')){
+    fail('Aurora wait mode was not visibly labelled as running on Platinum', result);
+  }
+  if(!result.auroraWait.buildStampChannel.includes('Platinum · Aurora Galactica')){
+    fail('build stamp was not visibly labelled with the Platinum runtime and active pack', result);
+  }
   if(!result.auroraWait.waitText.includes('AURORA GALACTICA')) fail('Aurora wait mode was not using pack-owned front-door copy', result);
   if(result.auroraWait.snapshotGameKey !== 'aurora-galactica') fail('Wait-mode snapshot did not preserve the active pack game key', result);
 
   if(result.previewWait.packKey !== 'galaxian-signal-preview') fail('Preview pack did not become the active installed pack', result);
   if(!result.previewWait.docTitle.includes('Galaxian Signal') || !result.previewWait.marquee.includes('Galaxian Signal')){
     fail('Preview pack did not update the Platinum shell identity', result);
+  }
+  if(!result.previewWait.settingsRuntime.includes('Platinum · Galaxian Signal')){
+    fail('Preview pack did not update the visible Platinum runtime label', result);
   }
   if(!result.previewWait.waitText.includes('GALAXIAN SIGNAL')) fail('Preview pack did not replace the wait-mode front-door copy', result);
   if(result.previewBlocked.started) fail('Preview-only pack should not launch gameplay', result);
@@ -140,6 +159,9 @@ async function main(){
   }
 
   if(result.restoredWait.packKey !== 'aurora-galactica') fail('Aurora was not restorable through the selected-pack path', result);
+  if(!result.restoredWait.settingsRuntime.includes('Platinum · Aurora Galactica')){
+    fail('Restoring Aurora did not restore the visible Platinum runtime label', result);
+  }
   if(!result.restoredWait.waitText.includes('AURORA GALACTICA')) fail('Aurora front door did not return after restoring the pack', result);
 
   if(result.launched.packKey !== 'aurora-galactica') fail('Aurora did not launch through the active installed pack path', result);
@@ -150,6 +172,7 @@ async function main(){
   console.log(JSON.stringify({
     ok: true,
     initialPack: result.auroraWait.packKey,
+    initialRuntime: result.auroraWait.settingsRuntime,
     previewPack: result.previewWait.packKey,
     restoredPack: result.restoredWait.packKey,
     launchedPack: result.launched.packKey,

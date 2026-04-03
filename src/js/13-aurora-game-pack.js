@@ -351,6 +351,11 @@ function currentGamePackFrontDoor(){
  });
 }
 
+function currentPlatformPackLabel(){
+ const pack=currentGamePack();
+ return `${PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'}`;
+}
+
 function currentGamePackShellThemes(){
  const themes=Array.isArray(currentGamePack().shellThemes)&&currentGamePack().shellThemes.length
   ? currentGamePack().shellThemes
@@ -397,6 +402,7 @@ function syncInstalledPackShellChrome(){
  try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
  const marquee=document.getElementById('cabinetMarqueeTitle');
   if(marquee)marquee.textContent=frontDoor.marqueeTitle;
+ if(settingsRuntime)settingsRuntime.textContent=`Platform ${currentPlatformPackLabel()}`;
  const root=document.documentElement;
  if(root&&theme){
   root.style.setProperty('--shell-line',theme.shellLine);
@@ -443,6 +449,7 @@ window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
+window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
 window.selectedShellThemeForPack=selectedShellThemeForPack;
 window.currentGamePackSelectedShellTheme=currentGamePackSelectedShellTheme;

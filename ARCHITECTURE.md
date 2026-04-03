@@ -545,10 +545,13 @@ Current status:
   - formation/challenge layout
   - frame accent theme
   - enemy scoring
+- the Platinum shell now exposes the active platform/pack pairing visibly in
+  the dev runtime surfaces
+- the explicit platform-only proof harness is green:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
 
-That means Aurora is now partially running through the platform path already.
-The next clean proof point is to let the shell/front-door flow explicitly boot
-the active installed pack rather than treating Aurora as an implicit default.
+That means Aurora is now dev-playable on Platinum through the selected-pack
+path, not just partially hosted by platform-oriented helpers.
 
 That front-door path is now beginning to move into pack ownership too:
 
@@ -666,8 +669,8 @@ assumptions that should be reduced or intentionally gated:
     the final migration/cutover policy is still a later concern
 
 These are no longer giant gameplay blockers, which is a sign of progress. They
-are now mostly shell/bootstrap/debug/storage cleanup items and should be
-handled before we claim the first fully hosted Aurora pack proof is complete.
+are now mostly shell/bootstrap/debug/storage cleanup items. They still matter,
+but they no longer block calling Aurora the first dev-playable Platinum pack.
 
 #### Exit Condition
 

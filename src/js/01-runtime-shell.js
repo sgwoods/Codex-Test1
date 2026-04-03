@@ -72,9 +72,13 @@ function syncBuildStampUi(){
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
+ let runtimeLabel='Platinum';
+ try{
+  if(typeof currentPlatformPackLabel==='function')runtimeLabel=currentPlatformPackLabel();
+ }catch{}
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
- if(buildStampChannel)buildStampChannel.textContent=`Lane ${BUILD_INFO.releaseChannel}`;
+ if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
