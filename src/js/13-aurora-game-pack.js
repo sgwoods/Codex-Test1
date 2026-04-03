@@ -106,6 +106,16 @@ const AURORA_GAME_PACK=Object.freeze({
   title:'Aurora Galactica',
   versionLine:'1.x'
  }),
+ frontDoor:Object.freeze({
+  marqueeTitle:'Aurora Galactica',
+  title:'AURORA GALACTICA',
+  subtitle:'WAIT MODE',
+  startPrompt:'PRESS <span class="k">ENTER</span> TO START',
+  attractLine:'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
+  utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
+  pickerHint:'',
+  quoteSurface:'wait-mode'
+ }),
  capabilities:Object.freeze({
   usesFormationRack:1,
   usesIndependentDiveAttacks:1,
@@ -155,6 +165,7 @@ function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
  ACTIVE_GAME_PACK_KEY=nextPack.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
  ACTIVE_GAME_PACK=nextPack;
  PRODUCT_NAME=nextPack.metadata?.title||PRODUCT_NAME;
+ syncInstalledPackShellChrome();
  if(opts.persist)writePref(GAME_PACK_PREF_KEY,ACTIVE_GAME_PACK_KEY);
  return ACTIVE_GAME_PACK;
 }
@@ -239,6 +250,28 @@ function currentGamePackChallengeGroupBonus(stage){
  return bonus;
 }
 
+function currentGamePackFrontDoor(){
+ const pack=currentGamePack();
+ const frontDoor=pack.frontDoor||{};
+ return Object.freeze({
+  marqueeTitle:frontDoor.marqueeTitle||pack.metadata?.title||PRODUCT_NAME||'Arcade Platform',
+  title:frontDoor.title||String(pack.metadata?.title||PRODUCT_NAME||'Arcade Platform').toUpperCase(),
+  subtitle:frontDoor.subtitle||'WAIT MODE',
+  startPrompt:frontDoor.startPrompt||'PRESS <span class="k">ENTER</span> TO START',
+  attractLine:frontDoor.attractLine||'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
+  utilityLine:frontDoor.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
+  pickerHint:frontDoor.pickerHint||'',
+  quoteSurface:frontDoor.quoteSurface||'wait-mode'
+ });
+}
+
+function syncInstalledPackShellChrome(){
+ try{document.title=currentGamePack().metadata?.title||PRODUCT_NAME||document.title}catch{}
+ const marquee=document.getElementById('cabinetMarqueeTitle');
+ const frontDoor=currentGamePackFrontDoor();
+ if(marquee)marquee.textContent=frontDoor.marqueeTitle;
+}
+
 function auroraIsChallengeStage(stage){
  return currentGamePackIsChallengeStage(stage);
 }
@@ -272,4 +305,5 @@ window.availableGamePacks=availableGamePacks;
 window.getGamePack=getGamePack;
 window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
+window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.installGamePack=installGamePack;

@@ -44,6 +44,52 @@ The platform should be able to map game-pack audio to these events:
 - `ui_confirm`
 - `ui_error`
 
+## Playback Model
+
+To support Galaga-family and Galaxian-family sound design cleanly, the runtime
+should eventually treat audio as three related categories:
+
+- one-shot events
+  - player shot
+  - enemy hit
+  - boss hit
+  - explosion
+  - extra life
+  - UI confirm/error
+- sequenced events
+  - stage start
+  - challenge intro
+  - rescue join
+  - perfect-bonus fanfare
+- state layers
+  - wait-mode/front-door ambience
+  - formation pressure bed
+  - captured-fighter tension layer
+  - challenge-stage layer
+
+This matters because the original family does not only use isolated sound
+effects. It also changes sound behavior based on:
+
+- game state
+- enemy pressure
+- stage progression
+- special mechanic phases such as capture and rescue
+
+We should also leave room for parameterized event playback where the cue may
+depend on runtime context, for example:
+
+- dive cue by enemy family or path type
+- pressure/ambient layer by remaining-enemy count
+- boss-hit cue by archetype and damage phase
+- capture beam by phase:
+  - deploy
+  - active
+  - capture
+  - release
+
+The goal is to keep the event vocabulary stable while letting each `gamePack`
+own how those events sound and how richly they are layered.
+
 ## Aurora Reference Sources
 
 Primary family references:

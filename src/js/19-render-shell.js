@@ -272,7 +272,19 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
-  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
+  else{
+   const frontDoor=typeof currentGamePackFrontDoor==='function'
+    ? currentGamePackFrontDoor()
+    : {
+      title:'AURORA GALACTICA',
+      subtitle:'WAIT MODE',
+      startPrompt:'PRESS <span class="k">ENTER</span> TO START',
+      attractLine:'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
+      utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS'
+     };
+   const pickerHint=frontDoor.pickerHint?`<span class="startMeta">${frontDoor.pickerHint}</span>`:'';
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span><span class="startHelp">${frontDoor.startPrompt}</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}`;
+  }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;
  else msg.textContent='';

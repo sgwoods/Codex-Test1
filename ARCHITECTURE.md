@@ -9,6 +9,8 @@ Related planning artifact:
   - `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
 - curated splash/quote/content planning:
   - `/Users/stevenwoods/Documents/Codex-Test1/CONTENT_PLAN.md`
+- architect review response baseline:
+  - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md`
 
 ## Runtime Layout
 
@@ -417,6 +419,25 @@ Current status:
 That means Aurora is now partially running through the platform path already.
 The next clean proof point is to let the shell/front-door flow explicitly boot
 the active installed pack rather than treating Aurora as an implicit default.
+
+That front-door path is now beginning to move into pack ownership too:
+
+- the installed pack now owns:
+  - marquee title
+  - wait-mode title/subtitle
+  - start prompt copy
+  - attract-line copy
+  - utility-line copy
+
+This keeps the next future steps aligned:
+
+- splash page
+- game picker
+- one-time notices
+- curated quotes
+
+All of those should be platform-hosted surfaces with pack-owned branding and
+copy rather than Aurora-only literals.
 
 ## Reference Mechanics Lens
 
