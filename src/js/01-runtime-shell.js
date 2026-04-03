@@ -58,7 +58,7 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
- const override=window.__auroraBuildStampOverride;
+ const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
   buildStamp.classList.remove('updateAvailable');

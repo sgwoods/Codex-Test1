@@ -153,7 +153,8 @@ function formatWhenShort(value=''){
  return `${days}d ago`;
 }
 function replayCatalogRows(){
- return Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
+ const rows=window.__platinumReplayCatalog||window.__auroraReplayCatalog;
+ return Array.isArray(rows)?rows:[];
 }
 function resolveRowTimestamp(row){
  const direct=String(row?.at||'').trim();

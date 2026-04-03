@@ -23,7 +23,8 @@ function logEvent(type,data={}){
 let carryDebugLastState='';
 let rescueDebugLastState='';
 function setCarryDebug(enabled,label='manual'){
- window.__auroraCarryDebug=enabled?1:0;
+ window.__platinumCarryDebug=enabled?1:0;
+ window.__auroraCarryDebug=window.__platinumCarryDebug;
  carryDebugLastState='';
  rescueDebugLastState='';
  logEvent('carry_debug_toggle',{enabled:!!enabled,label});
@@ -71,7 +72,7 @@ function rescuePodDebugState(){
  };
 }
 function logCarryDebugState(reason='tick'){
- if(!window.__auroraCarryDebug)return;
+ if(!(window.__platinumCarryDebug??window.__auroraCarryDebug))return;
  const state=carryRelationState();
  const key=state?`${state.mode}:${state.bossId}:${state.relation}:${state.dive}`:'none';
  if(key===carryDebugLastState&&reason==='tick')return;

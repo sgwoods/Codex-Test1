@@ -17,7 +17,8 @@ const movieDeleteBtn=document.getElementById('movieDeleteBtn');
 const movieTimeline=document.getElementById('movieTimeline');
 
 const MOVIE={panelOpen:0,prevPaused:0,runs:[],selectedId:'',pendingId:'',current:null,loading:0,objectUrl:'',status:''};
-window.__auroraReplayCatalog=[];
+window.__platinumReplayCatalog=window.__platinumReplayCatalog||window.__auroraReplayCatalog||[];
+window.__auroraReplayCatalog=window.__platinumReplayCatalog;
 
 function movieStoreAvailable(){
  return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
@@ -71,11 +72,12 @@ function updateMovieControls(){
  syncMovieBuildStamp();
 }
 function syncMovieBuildStamp(){
- window.__auroraBuildStampOverride=MOVIE.panelOpen&&MOVIE.current?{
+ window.__platinumBuildStampOverride=MOVIE.panelOpen&&MOVIE.current?{
   channel:`Replay Stage ${String(MOVIE.current.stage||0).padStart(2,'0')}`,
   version:`Score ${formatScore(MOVIE.current.score||0)}   Length ${movieDurationLabel(MOVIE.current.duration||0)}`,
   release:`${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(Number.isFinite(movieVideo.duration)?movieVideo.duration:(MOVIE.current.duration||0))}   •   ${movieAgeLabel(MOVIE.current.createdAt)}`
  }:null;
+ window.__auroraBuildStampOverride=window.__platinumBuildStampOverride;
  if(typeof syncBuildStampUi==='function')syncBuildStampUi();
 }
 function updateMovieTimeline(){
@@ -100,7 +102,8 @@ function renderMovieRuns(){
  movieRunSelect.value=MOVIE.pendingId||MOVIE.selectedId||MOVIE.runs[0].id;
 }
 function publishReplayCatalog(){
- window.__auroraReplayCatalog=MOVIE.runs.slice();
+ window.__platinumReplayCatalog=MOVIE.runs.slice();
+ window.__auroraReplayCatalog=window.__platinumReplayCatalog;
  if(typeof syncAccountUi==='function')syncAccountUi();
 }
 function syncMoviePanelVisibility(){

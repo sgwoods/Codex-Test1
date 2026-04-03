@@ -22,7 +22,7 @@ function start(){
  gameOverHtml='';gameOverState=null;
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
  if(typeof syncPauseUi==='function')syncPauseUi();
- S.harnessPersona=(window.__auroraHarnessPersona||'').toLowerCase();
+ S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null});
@@ -119,7 +119,7 @@ const HARNESS_PERSONAS={
 };
 
 function harnessPersonaCfg(){
- const key=(window.__auroraHarnessPersona||'').toLowerCase();
+ const key=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  return HARNESS_PERSONAS[key]||null;
 }
 

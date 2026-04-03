@@ -31,7 +31,8 @@ const buildStamp=document.getElementById('buildStamp'),buildStampChannel=documen
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
-window.__auroraCarryDebug=window.__auroraCarryDebug||0;
+window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
+window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
 let PRODUCT_NAME=PLATFORM_NAME;
 // Keep the existing browser storage namespace until we plan and ship an

@@ -14,7 +14,8 @@ window.__galagaHarness__={
   testChallenge.checked=!!cfg.challenge;
   saveTestCfg();
  }
- window.__auroraHarnessPersona=(cfg.persona||'').toLowerCase();
+ window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
+ window.__auroraHarnessPersona=window.__platinumHarnessPersona;
  if(!started)start();
 },
  setCarryDebug(cfg={}){
@@ -87,7 +88,7 @@ window.__galagaHarness__={
    stage:S.stage,
    attractPhase:ATTRACT.phase
   });
-  if(window.__auroraCarryDebug)logCarryDebugState('wait-mode-setup');
+  if(window.__platinumCarryDebug??window.__auroraCarryDebug)logCarryDebugState('wait-mode-setup');
   return true;
  },
  stop(label='harness'){
@@ -148,7 +149,7 @@ window.__galagaHarness__={
     blob: new Blob([new Uint8Array(cfg.blobBytes || [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88])], { type: cfg.type || 'video/webm' })
    });
   }
-  window.__auroraReplayCatalog=[{
+  window.__platinumReplayCatalog=[{
    id: cfg.replayId || 'replay-stage7-local',
    score: +cfg.score || 654321,
    stage: +cfg.stage || 7,
@@ -158,6 +159,7 @@ window.__galagaHarness__={
    pilotEmail: cfg.email || 'sgwoods@gmail.com',
    pilotInitials: cfg.initials || 'SWD'
   }];
+  window.__auroraReplayCatalog=window.__platinumReplayCatalog;
   LEADERBOARD.configured=1;
   LEADERBOARD.user={
    id: cfg.userId || 'pilot-swd',
@@ -277,6 +279,7 @@ window.__galagaHarness__={
   return this.inputState();
  },
  setupRemoteScoreSubmitTest(cfg={}){
+  window.__platinumHarnessForceRemoteWrite=1;
   window.__auroraHarnessForceRemoteWrite=1;
   localStorage.removeItem(SCOREBOARD_KEY);
   localStorage.removeItem(SYSTEM_LOG_KEY);
@@ -286,8 +289,10 @@ window.__galagaHarness__={
    calls:[],
    errorMessage:String(cfg.errorMessage||'Harness remote submit failed')
   };
-  window.__auroraScoreSubmitHarness=harnessState;
-  window.__auroraRefreshLeaderboardReal=window.__auroraRefreshLeaderboardReal||refreshLeaderboard;
+  window.__platinumScoreSubmitHarness=harnessState;
+  window.__auroraScoreSubmitHarness=window.__platinumScoreSubmitHarness;
+  window.__platinumRefreshLeaderboardReal=window.__platinumRefreshLeaderboardReal||window.__auroraRefreshLeaderboardReal||refreshLeaderboard;
+  window.__auroraRefreshLeaderboardReal=window.__platinumRefreshLeaderboardReal;
   refreshLeaderboard=async()=>[];
   LEADERBOARD.configured=1;
   LEADERBOARD.user={
@@ -338,7 +343,7 @@ window.__galagaHarness__={
  },
  remoteScoreSubmitState(){
   return{
-   calls:(window.__auroraScoreSubmitHarness?.calls||[]).map(call=>Object.assign({},call)),
+   calls:((window.__platinumScoreSubmitHarness||window.__auroraScoreSubmitHarness)?.calls||[]).map(call=>Object.assign({},call)),
    remoteSubmitted:gameOverState?.remoteSubmitted||0,
    systemLog:typeof recentSystemLogEntries==='function'?recentSystemLogEntries(20):[],
    summary:fbSummary?.value||'',
@@ -349,7 +354,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},
  uiState(){
   return {
    started: !!started,
@@ -380,7 +385,7 @@ window.__galagaHarness__={
   return { carry, rescue };
  },
  renderState(){
-  return window.__auroraRenderDebug||{carryDraws:[]};
+  return window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
  },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
@@ -613,7 +618,7 @@ window.__galagaHarness__={
    side:S.cap.side,
    mode:S.cap.mode
   });
-  if(window.__auroraCarryDebug)logCarryDebugState('wait-mode-rescue-setup');
+  if(window.__platinumCarryDebug??window.__auroraCarryDebug)logCarryDebugState('wait-mode-rescue-setup');
   return true;
  },
  setupCaptureRescueDualTest(cfg={}){

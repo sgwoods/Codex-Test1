@@ -168,6 +168,96 @@ as the platform name.
   - `neo-galaga-video-*.review.webm` when available
 - The viewer uses `summary.json` as the run index and then resolves the neighboring session/video files from the summary metadata.
 
+### Harness Separation Model
+
+As Platinum becomes a real platform, the harness model should separate
+platform-proof tests from game-pack behavior tests. We should stop treating all
+harnesses as one flat category.
+
+The intended harness families are:
+
+- platform-only harnesses
+  - prove shell, picker, layout, notices, replay plumbing, service adapters,
+    and active-pack install behavior without depending on Aurora-only mechanics
+- game-pack harnesses
+  - prove Aurora or future sibling gameplay behavior such as formations, dives,
+    capture/rescue, score rules, and stage progression
+- seam / contract harnesses
+  - prove that the boundary between Platinum and a `gamePack` is stable
+  - these should validate:
+    - required pack metadata
+    - capability flags
+    - entity contract compatibility
+    - stage/scoring/theme hooks
+    - graceful omission of unsupported mechanics
+- migration / compatibility harnesses
+  - prove that compatibility shims, storage migrations, and staged rollouts do
+    not silently destroy old user data or break downgrade-safe behavior
+
+### Architectural-Only Harnesses
+
+Yes, we should explicitly have architectural-only harnesses. These are
+different from normal gameplay harnesses.
+
+Architectural-only harnesses should answer questions like:
+
+- can Platinum install a selected pack and boot through that path cleanly
+- can the shell switch packs and shell themes without breaking wait mode
+- can a pack omit capture/rescue or challenge features and still render safely
+- do shared services still work when pack identity changes
+- does the runtime consume capability-gated entity fields through helpers
+  rather than assuming Aurora-only state
+
+These tests should not care whether Aurora cleared stage 4 correctly. They
+should care whether the platform boundary behaved correctly.
+
+### Seam Tests Are First-Class
+
+The seams themselves need harness coverage. That means the tests should not
+only validate outcomes on screen; they should also validate the contract shape.
+
+Examples:
+
+- a pack without `usesCaptureRescue` should not require `carry`, `beam`, or
+  related entity fields
+- a pack without challenge stages should still boot, render, and score
+- shell/front-door surfaces should render from pack-owned copy instead of
+  Aurora literals
+- score, auth, replay, and feedback flows should remain platform-owned even as
+  the active pack changes
+
+### Documentation Rule
+
+Documentation must mirror these separations.
+
+That means:
+
+- `ARCHITECTURE.md`
+  - owns the runtime/platform/game-pack boundary and the harness categories
+- `AUDIO_PLAN.md`
+  - owns the platform audio event vocabulary vs pack-owned audio identity
+- `CONTENT_PLAN.md`
+  - owns approved quote/splash/notice content boundaries
+- future harness docs should name which family a test belongs to:
+  - platform-only
+  - game-pack
+  - seam / contract
+  - migration / compatibility
+
+### Near-Term Testing Direction
+
+The next useful harness organization step should be:
+
+1. tag existing harnesses by family
+2. add the first explicit platform-only boot/install harness for Aurora on
+   Platinum
+3. add the first seam harness that boots a minimal capability-reduced sibling
+   fixture without capture/rescue
+4. keep hotfix smoke suites separate from architecture-proof suites
+
+This separation will matter more, not less, as we start extending Platinum for
+new game packs.
+
 ### Real Play
 
 - Player-generated `.json` and `.webm` are browser download artifacts first
@@ -546,11 +636,10 @@ assumptions that should be reduced or intentionally gated:
 - Aurora-specific fallback text and literals still exist in a few shell paths:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
-- debug and harness globals still use Aurora-specific names:
-  - `window.__auroraRenderDebug`
-  - `window.__auroraCarryDebug`
-  - `window.__auroraReplayCatalog`
-  - `window.__auroraHarnessPersona`
+- debug and harness globals are still partly in transition:
+  - Platinum-facing aliases should be preferred
+  - Aurora-named globals currently remain as legacy mirrors so existing harness
+    flows do not break during the transition
 - storage and cache prefixes are still Aurora-branded:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-supabase.js`

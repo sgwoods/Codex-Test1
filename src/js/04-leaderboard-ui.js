@@ -376,7 +376,8 @@ function syncAccountUi(){
  renderPilotFlightStats(rows,signedIn);
  renderPilotRecords(rows);
  const hudInitials=signedIn?dockId:'---';
- window.__auroraPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ window.__platinumPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ window.__auroraPilotHudHtml=window.__platinumPilotHudHtml;
  if(resetTestPilotScoresBtn){
   const show=testAccountEnabled();
   resetTestPilotScoresBtn.hidden=!show;

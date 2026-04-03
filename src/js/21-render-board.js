@@ -1,5 +1,6 @@
 // Aurora-specific board rendering, sprites, and hitbox helpers.
-window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
+window.__platinumRenderDebug=window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
+window.__auroraRenderDebug=window.__platinumRenderDebug;
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -87,7 +88,7 @@ function drawEnemy(e){
  }
  ctx.restore();
  if(carrying&&carryTarget&&carryOffset){
-  window.__auroraRenderDebug.carryDraws.push({
+  window.__platinumRenderDebug.carryDraws.push({
    bossId:e.id,
    bossX:+e.x.toFixed(2),
    bossY:+e.y.toFixed(2),
@@ -141,7 +142,7 @@ function drawCaptureTether(){
 }
 
 function drawCarryDebugOverlay(){
- if(!window.__auroraCarryDebug)return;
+ if(!(window.__platinumCarryDebug??window.__auroraCarryDebug))return;
  const p=S.p;
  ctx.save();
  ctx.font='10px monospace';
@@ -319,7 +320,7 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);
  ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
- window.__auroraRenderDebug.carryDraws.length=0;
+ window.__platinumRenderDebug.carryDraws.length=0;
  ctx.save();
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);

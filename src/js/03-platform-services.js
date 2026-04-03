@@ -56,7 +56,7 @@ function remoteAuthEnabled(){
  return RELEASE_CHANNEL==='production'||testAccountEnabled();
 }
 function remoteWriteEnabled(){
- if(window.__auroraHarnessForceRemoteWrite)return true;
+ if(window.__platinumHarnessForceRemoteWrite||window.__auroraHarnessForceRemoteWrite)return true;
  if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
  return isSignedInAsTestAccount();
 }
@@ -91,8 +91,9 @@ function preferredInitialsFromUser(user=LEADERBOARD.user){
  return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||deriveInitialsFromEmail(user?.email||'')||'').slice(0,3);
 }
 function openMailFallback(subject,lines){
- if(typeof window.__auroraOpenMailFallbackOverride==='function'){
-  window.__auroraOpenMailFallbackOverride(subject,lines);
+ const override=window.__platinumOpenMailFallbackOverride||window.__auroraOpenMailFallbackOverride;
+ if(typeof override==='function'){
+  override(subject,lines);
   return;
  }
  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;

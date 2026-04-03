@@ -266,7 +266,7 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
  const pilotHudHtml=(typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
   ? `<span class="hudLabel">PILOT</span> <span class="hudValue">${pilotDisplayId()}</span>`
-  : (window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`);
+  : (window.__platinumPilotHudHtml||window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`);
  right.innerHTML=pilotHudHtml;
  const toolsVisible=!started||paused||feedbackOpen;
  settingsBtn.style.display='block';
