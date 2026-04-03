@@ -404,6 +404,20 @@ At that point we should make Aurora launch through the pack-selected runtime,
 even if it is still the only available game. That gives us the baseline proof
 before we try a `Galaxian`-like sibling.
 
+Current status:
+
+- the installed pack registry and selection path now exist
+- the active installed pack now drives core helper paths for:
+  - challenge cadence
+  - stage presentation
+  - formation/challenge layout
+  - frame accent theme
+  - enemy scoring
+
+That means Aurora is now partially running through the platform path already.
+The next clean proof point is to let the shell/front-door flow explicitly boot
+the active installed pack rather than treating Aurora as an implicit default.
+
 ## Reference Mechanics Lens
 
 Future platform work needs to be informed by the real gameplay differences

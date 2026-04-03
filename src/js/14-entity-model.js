@@ -114,7 +114,7 @@ function enemyChallengeUpperBandY(e,fallback=PLAY_H*.5){
 }
 
 function makePackEnemyState({
- gamePack=auroraGamePack(),
+ gamePack=currentGamePack(),
  type,
  row,
  column,
@@ -148,7 +148,7 @@ function makePackEnemyState({
 }
 
 function makePackChallengeEnemyState({
- gamePack=auroraGamePack(),
+ gamePack=currentGamePack(),
  type,
  lane,
  profile=stageBandProfile(S.stage,1),

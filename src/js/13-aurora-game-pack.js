@@ -160,11 +160,11 @@ function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
 }
 
 function auroraGamePack(){
- return getGamePack(AURORA_GAME_PACK.metadata.gameKey);
+ return currentGamePack();
 }
 
-function auroraIsChallengeStage(stage){
- const cadence=auroraGamePack().stageCadence;
+function currentGamePackIsChallengeStage(stage){
+ const cadence=currentGamePack().stageCadence;
  return stage===cadence.challengeFirstStage||((stage-cadence.challengeFirstStage)%cadence.challengeEvery===0&&stage>cadence.challengeFirstStage);
 }
 
@@ -174,7 +174,7 @@ function stageBandIndex(stage){
 }
 
 function stageBandProfile(stage,challenge){
- const pack=auroraGamePack();
+ const pack=currentGamePack();
  const base=pack.stageBandProfiles[stageBandIndex(stage)]||pack.stageBandProfiles[0];
  if(!challenge)return base;
  if(stage>=19)return Object.assign({},base,{challengeFamily:'mosquito'});
@@ -182,8 +182,8 @@ function stageBandProfile(stage,challenge){
  return Object.assign({},base,{challengeFamily:'classic'});
 }
 
-function auroraStagePresentation(stage,challenge){
- const pack=auroraGamePack();
+function currentGamePackStagePresentation(stage,challenge){
+ const pack=currentGamePack();
  let theme=pack.stageThemeProgression[0];
  for(const candidate of pack.stageThemeProgression){
   if(stage>=candidate.fromStage)theme=candidate;
@@ -197,8 +197,8 @@ function auroraStagePresentation(stage,challenge){
  });
 }
 
-function auroraFormationLayout(stage){
- const layouts=auroraGamePack().formationLayouts;
+function currentGamePackFormationLayout(stage){
+ const layouts=currentGamePack().formationLayouts;
  let layout=layouts[0];
  for(const candidate of layouts){
   if(stage>=candidate.fromStage)layout=candidate;
@@ -207,17 +207,17 @@ function auroraFormationLayout(stage){
  return layout;
 }
 
-function auroraChallengeLayout(){
- return auroraGamePack().challengeLayout;
+function currentGamePackChallengeLayout(){
+ return currentGamePack().challengeLayout;
 }
 
-function auroraFrameAccentTheme(stagePresentation){
+function currentGamePackFrameAccentTheme(stagePresentation){
  const frameAccent=stagePresentation?.frameAccent||'classic-blue';
- return auroraGamePack().frameAccents[frameAccent]||auroraGamePack().frameAccents['classic-blue'];
+ return currentGamePack().frameAccents[frameAccent]||currentGamePack().frameAccents['classic-blue'];
 }
 
-function auroraEnemyKillPoints(enemy,dive){
- const table=auroraGamePack().scoring.enemyKills;
+function currentGamePackEnemyKillPoints(enemy,dive){
+ const table=currentGamePack().scoring.enemyKills;
  if(enemy?.t==='bee')return dive?table.bee.dive:table.bee.formation;
  if(enemy?.t==='but')return dive?table.but.dive:table.but.formation;
  if(enemy?.t==='rogue')return dive?table.rogue.dive:table.rogue.formation;
@@ -229,14 +229,42 @@ function auroraEnemyKillPoints(enemy,dive){
  return 0;
 }
 
-function challengeGroupBonus(stage){
- const tiers=auroraGamePack().scoring.challengeGroupBonuses;
+function currentGamePackChallengeGroupBonus(stage){
+ const tiers=currentGamePack().scoring.challengeGroupBonuses;
  let bonus=tiers[0]?.bonus||1000;
  for(const tier of tiers){
   if(stage>=tier.fromStage)bonus=tier.bonus;
   else break;
  }
  return bonus;
+}
+
+function auroraIsChallengeStage(stage){
+ return currentGamePackIsChallengeStage(stage);
+}
+
+function auroraStagePresentation(stage,challenge){
+ return currentGamePackStagePresentation(stage,challenge);
+}
+
+function auroraFormationLayout(stage){
+ return currentGamePackFormationLayout(stage);
+}
+
+function auroraChallengeLayout(){
+ return currentGamePackChallengeLayout();
+}
+
+function auroraFrameAccentTheme(stagePresentation){
+ return currentGamePackFrameAccentTheme(stagePresentation);
+}
+
+function auroraEnemyKillPoints(enemy,dive){
+ return currentGamePackEnemyKillPoints(enemy,dive);
+}
+
+function challengeGroupBonus(stage){
+ return currentGamePackChallengeGroupBonus(stage);
 }
 
 installGamePack(readPref(GAME_PACK_PREF_KEY)||DEFAULT_GAME_PACK_KEY);

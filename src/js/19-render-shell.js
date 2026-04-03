@@ -22,7 +22,7 @@ const DISPLAY_SHELL=Object.freeze({
 });
 
 function applyStageChromeTheme(){
- const theme=auroraFrameAccentTheme(S.stagePresentation);
+ const theme=currentGamePackFrameAccentTheme(S.stagePresentation);
  const root=document.documentElement;
  if(root){
   root.style.setProperty('--shell-line',theme.shellLine);

@@ -12,7 +12,7 @@ function familyMotion(e){
 }
 
 function formationLayout(stage){
- return auroraFormationLayout(stage);
+ return currentGamePackFormationLayout(stage);
 }
 
 function spawnFormation(){
@@ -25,7 +25,7 @@ function spawnFormation(){
   if(r===0)t=(c>=3&&c<=6)?'boss':'but';
   else if(r===1)t='but';
   const e=makePackEnemyState({
-   gamePack:auroraGamePack(),
+   gamePack:currentGamePack(),
    type:t,
    row:r,
    column:c,
@@ -39,7 +39,7 @@ function spawnFormation(){
  for(let i=0;i<S.rogue;i++){
   const c=2+i%6;
   const e=makePackEnemyState({
-   gamePack:auroraGamePack(),
+   gamePack:currentGamePack(),
    type:'rogue',
    row:1,
    column:c,
@@ -56,7 +56,7 @@ function spawnFormation(){
 
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
- const layout=auroraChallengeLayout();
+ const layout=currentGamePackChallengeLayout();
  S.e.length=0;
  const total=layout.groups*layout.enemiesPerGroup;
  const upperBandY=PLAY_H*layout.upperBandRatio;
@@ -69,7 +69,7 @@ function spawnChallenge(){
   const t=layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
   S.e.push(makePackChallengeEnemyState({
-   gamePack:auroraGamePack(),
+   gamePack:currentGamePack(),
    type:t,
    lane,
    profile,
@@ -90,7 +90,7 @@ function spawnChallenge(){
 
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
- S.stagePresentation=auroraStagePresentation(S.stage,S.challenge);
+ S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
  S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
@@ -103,7 +103,7 @@ function spawnStage(){
 function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
- const nextStagePresentation=auroraStagePresentation(targetStage,nextIsChallenge);
+ const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
  S.nextStageT=mode==='challengeResult'?(nextIsChallenge?1.8:1.25):(nextIsChallenge?2.8:2.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;

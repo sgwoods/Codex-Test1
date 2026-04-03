@@ -7,7 +7,7 @@ function destroyCarriedFighter(e){
  // - 1000 when the carried fighter is attacking
  // The boss survives; only the carried fighter is lost.
  const attacking=!!e.dive;
- const points=attacking?auroraGamePack().scoring.carriedFighter.attacking:auroraGamePack().scoring.carriedFighter.standby;
+ const points=attacking?currentGamePack().scoring.carriedFighter.attacking:currentGamePack().scoring.carriedFighter.standby;
  const off=carriedFighterOffset(e);
  if(enemyHasCaptureState(e))e.carry=0;
  S.score+=points;
@@ -47,7 +47,7 @@ function releaseCapturedFighter(e){
 
 function spawnHostileCapturedFighter(e){
  const rogue=makePackEnemyState({
-  gamePack:auroraGamePack(),
+  gamePack:currentGamePack(),
   type:'rogue',
   row:e.r,
   column:e.c,
@@ -74,7 +74,7 @@ function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
  if(S.challenge){
-  pts=auroraGamePack().scoring.challengeEnemy;
+  pts=currentGamePack().scoring.challengeEnemy;
   S.score+=pts;
   S.ch.hits++;
   if(enemyHasChallengeState(e)&&Number.isInteger(e.group)&&S.ch.groups){
@@ -89,7 +89,7 @@ function awardKill(e,mode){
   logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:1,rescued:0,turnedHostile:0,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
   return;
  }
- pts=auroraEnemyKillPoints(e,dive);
+ pts=currentGamePackEnemyKillPoints(e,dive);
  if(e.t==='boss'&&dive){
   const escorts=activeEscortCount(e);
   if(S.stage>=4&&escorts>0){
@@ -117,7 +117,7 @@ function awardRescueJoin(autoDock){
  const p=S.p;
  S.cap=null;
  p.dual=1;
- S.score+=auroraGamePack().scoring.rescueJoin;
+ S.score+=currentGamePack().scoring.rescueJoin;
  S.recoverT=Math.max(S.recoverT,1.15);
  S.attackGapT=Math.max(S.attackGapT,.9);
  startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');
@@ -138,7 +138,7 @@ function awardRescueJoin(autoDock){
 function finalizeChallengeClear(){
  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(enemyChallengeUpperBandY(S.ch)),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
  S.ch.done=1;
- const perfect=S.ch.hits===S.ch.total?auroraGamePack().scoring.perfectChallengeClear:0;
+ const perfect=S.ch.hits===S.ch.total?currentGamePack().scoring.perfectChallengeClear:0;
  S.ch.perfect=perfect;
  S.score+=perfect;
  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';
