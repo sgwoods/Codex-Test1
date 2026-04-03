@@ -1,7 +1,7 @@
 // Aurora-specific scoring, rescue-award, and challenge-bonus helpers.
 
 function destroyCarriedFighter(e){
- if(!e?.carry)return 0;
+ if(!enemyIsCarryingFighter(e))return 0;
  // Manual-backed rule from the 1981 Namco manual:
  // - 500 for destroying a carried fighter in standby/formation
  // - 1000 when the carried fighter is attacking
@@ -9,7 +9,7 @@ function destroyCarriedFighter(e){
  const attacking=!!e.dive;
  const points=attacking?auroraGamePack().scoring.carriedFighter.attacking:auroraGamePack().scoring.carriedFighter.standby;
  const off=carriedFighterOffset(e);
- e.carry=0;
+ if(enemyHasCaptureState(e))e.carry=0;
  S.score+=points;
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
@@ -77,7 +77,7 @@ function awardKill(e,mode){
   pts=auroraGamePack().scoring.challengeEnemy;
   S.score+=pts;
   S.ch.hits++;
-  if(Number.isInteger(e.group)&&S.ch.groups){
+  if(enemyHasChallengeState(e)&&Number.isInteger(e.group)&&S.ch.groups){
    S.ch.groups[e.group]=(S.ch.groups[e.group]||0)+1;
    if(S.ch.groups[e.group]===8){
     const bonus=challengeGroupBonus(S.stage);
@@ -99,8 +99,9 @@ function awardKill(e,mode){
   }
  }
  S.score+=pts;
- logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
- if(e.carry){
+ const carrying=enemyIsCarryingFighter(e);
+ logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(carrying&&dive),turnedHostile:!!(carrying&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+ if(carrying){
   if(dive){
    releaseCapturedFighter(e);
   }else{
@@ -135,7 +136,7 @@ function awardRescueJoin(autoDock){
 }
 
 function finalizeChallengeClear(){
- logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(S.ch.upperBandY||PLAY_H*.5),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
+ logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(enemyChallengeUpperBandY(S.ch)),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
  S.ch.done=1;
  const perfect=S.ch.hits===S.ch.total?auroraGamePack().scoring.perfectChallengeClear:0;
  S.ch.perfect=perfect;

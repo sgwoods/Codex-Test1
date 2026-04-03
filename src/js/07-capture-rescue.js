@@ -1,7 +1,7 @@
 // Aurora-specific capture, rescue, and carried-fighter helpers.
 
 function hasCarriedFighter(){
- return S.e.some(e=>e.hp>0&&e.carry);
+ return S.e.some(e=>e.hp>0&&enemyIsCarryingFighter(e));
 }
 
 function canCapture(){
@@ -15,8 +15,10 @@ function capturePlayer(e){
  p.captured=1;
  p.capBoss=e;
  p.capT=1.2;
- e.beam=1;
- e.beamT=Math.max(.5,e.beamT);
+ if(enemyHasCaptureState(e)){
+  e.beam=1;
+  e.beamT=Math.max(.5,e.beamT||0);
+ }
  S.lastCaptureStartT=S.stageClock;
  logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));
  sfx.beam();
@@ -27,15 +29,17 @@ function finishCapture(){
  if(!e||e.hp<=0){
   p.captured=0;
   p.capBoss=null;
-  p.inv=1.2;
+ p.inv=1.2;
   return;
  }
- e.carry=1;
- e.beam=0;
+ if(enemyHasCaptureState(e)){
+  e.carry=1;
+  e.beam=0;
+ }
  e.dive=3;
  e.vx=0;
  e.vy=0;
- e.esc=0;
+ if(enemyHasEscortState(e))e.esc=0;
  p.captured=0;
  p.capBoss=null;
  p.pending=1;
@@ -88,7 +92,7 @@ function breakCapture(reason='boss_destroyed'){
 }
 
 function activeEscortCount(e){
- if(!e?.squadId)return Math.max(0,e?.esc|0);
+ if(!enemyHasEscortState(e)||!e?.squadId)return Math.max(0,e?.esc|0);
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
@@ -110,7 +114,7 @@ function specialSquadronTuning(stage=S.stage){
 }
 
 function carriedFighterOffset(e){
- if(!e?.carry)return {x:0,y:18};
+ if(!enemyIsCarryingFighter(e))return {x:0,y:18};
  // Keep the fighter below the boss while the boss is still retreating upward
  // after a capture. Only flip it to the docked/attached side once the boss is
  // actually back in formation. Active carried attacks stay on the upper side.
@@ -119,13 +123,13 @@ function carriedFighterOffset(e){
 }
 
 function carriedFighterTarget(e){
- if(!e?.carry)return null;
+ if(!enemyIsCarryingFighter(e))return null;
  const off=carriedFighterOffset(e);
  return {x:e.x+off.x,y:e.y+off.y,w:6,h:6};
 }
 
 function assignEscorts(boss){
- if(boss.t!=='boss')return;
+ if(boss.t!=='boss'||!enemyHasEscortState(boss))return;
  const maxEscorts=S.stage===1&&S.scriptMode?1:2;
  const squadId=++S.squadSeq;
  const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
@@ -133,6 +137,7 @@ function assignEscorts(boss){
  boss.squadId=cand.length?squadId:0;
  const { escortOffset }=specialSquadronTuning(S.stage);
  for(const [i,e] of cand.entries()){
+  if(!enemyHasEscortState(e))continue;
   e.dive=5;
   e.lead=boss.id;
   e.off=(i?1:-1)*escortOffset;

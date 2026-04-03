@@ -373,6 +373,30 @@ The important platform rule is:
 - runtime systems should ask for those capabilities through helpers instead of
   assuming every enemy has every mechanic
 
+### First Platform Run Milestone
+
+We should try to boot Aurora as a clearly hosted platform game once these
+conditions are true:
+
+- the runtime and render layers consume pack-owned enemy/entity helpers rather
+  than raw Aurora-only assumptions in the major mechanic surfaces
+- stage flow, scoring, challenge cadence, and presentation are all sourced from
+  the Aurora pack
+- service wiring is already split behind platform service seams
+- `00-boot.js` can load a single selected `gamePack` instead of assuming Aurora
+  implicitly
+
+That means the first serious "Aurora running on the platform" attempt should
+happen after the current contract work extends through:
+
+1. capture / rescue helpers
+2. score / challenge award helpers
+3. one thin runtime boot path that selects and installs the Aurora pack
+
+At that point we should make Aurora launch through the pack-selected runtime,
+even if it is still the only available game. That gives us the baseline proof
+before we try a `Galaxian`-like sibling.
+
 ## Reference Mechanics Lens
 
 Future platform work needs to be informed by the real gameplay differences
