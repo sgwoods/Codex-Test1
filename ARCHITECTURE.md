@@ -453,6 +453,109 @@ This keeps the next future steps aligned:
 All of those should be platform-hosted surfaces with pack-owned branding and
 copy rather than Aurora-only literals.
 
+### Aurora Platform Proof Checklist
+
+Before we treat a non-Aurora gameplay slice as the next major proof, Aurora
+itself should satisfy the following checklist as the first clearly hosted pack.
+
+#### 1.0.2 Fidelity Baseline
+
+Aurora running on the platform must still preserve the player-visible contract
+of the shipped `1.0.2` line:
+
+- movement, firing, and ship-loss flow still feel the same
+- scoring and challenge progression still behave the same
+- capture / rescue and dual-fighter flow still behave the same
+- feedback, account, leaderboard, and replay surfaces still behave the same
+- hotfix smoke checks and targeted gameplay harnesses remain green
+
+This is the player-proof half of the milestone. The platform does not count if
+Aurora only works after changing the expected `1.0.2` experience by accident.
+
+#### Explicit Pack-Owned Boot Path
+
+Aurora must start through the normal installed-pack path:
+
+- the selected pack is installed intentionally, not as an implicit fallback
+- wait mode, start flow, and transition flow all resolve through the active
+  pack helpers
+- the shell treats Aurora as the active loaded pack, not as special-case app
+  root state
+
+This is the architectural-proof half of the milestone.
+
+#### Pack-Owned Presentation
+
+The active pack should own the presentation identity for the experience:
+
+- browser title
+- marquee title
+- wait-mode title/subtitle/call to action
+- frame and cabinet chrome
+- stage presentation bands and front-door copy
+- future splash copy, notices, and approved quote surfaces
+
+#### Pack-Owned Gameplay Configuration
+
+The active pack should supply the major gameplay configuration inputs:
+
+- stage cadence
+- formation layouts
+- challenge layout and challenge cadence
+- scoring tables
+- stage theme progression
+- capability flags
+- entity defaults through shared entity helpers
+
+#### Platform-Owned Shell And Services
+
+The platform should own the cross-game infrastructure without depending on
+Aurora-specific behavior:
+
+- picker and shell theme surfaces
+- refresh / notice / reminder surfaces
+- replay / telemetry / artifact flow
+- auth / leaderboard / feedback adapter boundaries
+- input normalization and shell layout behavior
+
+#### Remaining Aurora-Specific Assumptions To Remove Or Gate
+
+The current codebase is close, but these still represent "Aurora is special"
+assumptions that should be reduced or intentionally gated:
+
+- static shell defaults in:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html`
+  - `Aurora Galactica` is still the initial `<title>` and marquee fallback
+- Aurora-specific fallback text and literals still exist in a few shell paths:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+- debug and harness globals still use Aurora-specific names:
+  - `window.__auroraRenderDebug`
+  - `window.__auroraCarryDebug`
+  - `window.__auroraReplayCatalog`
+  - `window.__auroraHarnessPersona`
+- storage and cache prefixes are still Aurora-branded:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-supabase.js`
+
+These are no longer giant gameplay blockers, which is a sign of progress. They
+are now mostly shell/bootstrap/debug/storage cleanup items and should be
+handled before we claim the first fully hosted Aurora pack proof is complete.
+
+#### Exit Condition
+
+Aurora counts as "running on the platform" when:
+
+1. the `1.0.2` player contract is still preserved
+2. the selected installed pack is the normal runtime path
+3. shell identity and framing are pack-owned
+4. gameplay configuration resolves through the pack and shared entity contract
+5. the remaining Aurora-only assumptions are reduced to debug names or clearly
+   intentional legacy compatibility shims
+
+Once that is true, a minimal `Galaxian` gameplay slice becomes the right next
+proof instead of a premature mixed experiment.
+
 ## Reference Mechanics Lens
 
 Future platform work needs to be informed by the real gameplay differences
