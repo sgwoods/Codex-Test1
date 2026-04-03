@@ -224,6 +224,192 @@ The goal is to reduce churn in mature infrastructure while letting future games
 such as Galaxian, Aurora variants, or similar fixed-screen cabinet shooters
 reuse the stable platform with smaller game-specific packs.
 
+## First Platform Contract
+
+The next phase should stop extracting only by file size and start extracting
+toward a real platform contract. The first contract should stay small and
+practical.
+
+### runtimeState
+
+Owns the cross-game runtime state that should not depend on Aurora rules:
+
+- lane, build, and release metadata
+- frame clock and scene lifecycle
+- pause / wait / attract / active / results states
+- normalized input state
+- replay / telemetry session state
+- panel and overlay visibility state
+- durable local storage handles and cached settings
+
+### shellState
+
+Owns the cabinet shell and presentation surfaces that should be reusable across
+close sibling games:
+
+- board layout and viewport metrics
+- HUD slots and score banner placement
+- build stamp and refresh-reminder state
+- popup and modal placement
+- wait-mode and board-message surfaces
+- cabinet control rail state
+
+### serviceAdapters
+
+Defines the small set of platform-owned service boundaries. These should be
+consumed as interfaces, even if the current implementation is still thin.
+
+- `authService`
+  - sign in
+  - sign out
+  - sign up
+  - reset password
+  - load session
+- `scoreService`
+  - submit score
+  - fetch leaderboard
+  - fetch pilot records
+- `replayService`
+  - save local run
+  - list runs
+  - load run
+  - export artifacts
+- `feedbackService`
+  - submit report
+  - preserve diagnostics
+  - expose fallback behavior cleanly
+
+### gamePack
+
+Defines the game-owned behavior and content that the runtime loads.
+
+- metadata
+  - `gameKey`
+  - `title`
+  - `versionLine`
+- rules/config
+  - formations
+  - enemy families
+  - scoring tables
+  - stage flow
+  - attack scripts
+- mechanics capabilities
+  - capture/rescue
+  - challenge stages
+  - escort/squad bonuses
+  - dual-fighter support
+- rendering hooks
+  - board entity draw
+  - theme assets
+  - game-specific HUD additions
+- lifecycle hooks
+  - new game setup
+  - per-frame gameplay update
+  - stage transition handling
+  - results/stat mapping
+
+The key rule is:
+
+- the runtime should host a `gamePack`
+- the `gamePack` should not need to own the whole application shell
+
+## Reference Mechanics Lens
+
+Future platform work needs to be informed by the real gameplay differences
+between close sibling games, not just by visual similarity.
+
+### Aurora / Galaga-Family Shape
+
+Aurora currently proves this family well:
+
+- enemies begin in a staged formation
+- enemies break formation into scripted dives
+- the player moves freely along the bottom lane
+- rescue/capture and dual-fighter play are optional advanced mechanics
+- challenge waves and special squad bonuses are part of progression
+
+This is the right baseline for the current runtime extraction work.
+
+### Galaxian-Like Shape
+
+Galaxian is the nearest sibling we should plan around first:
+
+- staged formation play still matters
+- independent enemy dives still matter
+- flagship/escort relationships still matter
+- scoring and attack timing differ, but the overall combat grammar is close
+- there is no need to force capture/rescue if the game does not use it
+
+This makes `Galaxian` a good second proof because it should reuse the runtime
+while forcing us to keep optional mechanics truly optional.
+
+### Space Invaders-Like Shape
+
+Space Invaders is still a useful reference, but it should not define the first
+platform contract:
+
+- enemies behave as a marching grid rather than as independent divers
+- pressure comes from synchronized descent and projectile tempo
+- shields/barricades are core playfield mechanics
+- the player-combat rhythm is simpler and more constrained
+- capture/rescue, escort patterns, and return-to-formation flow do not apply
+
+This means `Space Invaders` should be treated as:
+
+- a design reference for broad fixed-screen shooter comparison
+- not the first target for a shared `gamePack` contract
+
+## First Game-Pack Shape
+
+The first concrete `gamePack` should be Aurora itself, expressed in a way that
+could later host a Galaxian-like sibling without pretending both games are the
+same.
+
+### Aurora Game-Pack Responsibilities
+
+- provide formation and stage-band definitions
+- provide enemy family and attack-script definitions
+- provide scoring tables and award hooks
+- provide optional mechanics:
+  - capture/rescue
+  - dual-fighter join flow
+  - challenge stage rules
+- provide Aurora-specific board rendering hooks
+
+### First Shared Capability Flags
+
+The first contract should use capability flags instead of assuming every game
+implements every mechanic.
+
+- `usesFormationRack`
+- `usesIndependentDiveAttacks`
+- `usesEscortPatterns`
+- `usesChallengeStages`
+- `usesCaptureRescue`
+- `usesDualFighterMode`
+- `usesStaticShields`
+
+This should let us express:
+
+- Aurora:
+  - formation rack, dives, escorts, challenge stages, capture/rescue, dual
+    fighter
+- Galaxian-like:
+  - formation rack, dives, escorts
+- Space Invaders-like:
+  - no independent dives, no escort patterns, yes static shields
+
+### What The Next Refactor Should Prove
+
+Before we claim platform readiness, the code should prove that:
+
+- stage flow can be supplied from a `gamePack`
+- scoring tables can be supplied from a `gamePack`
+- optional mechanics are enabled through capabilities, not hardwired runtime
+  assumptions
+- the shell and services do not need Aurora-specific knowledge to boot the
+  game
+
 ## Platform Extraction Order
 
 The platform path should be incremental. Aurora remains the proof project while
