@@ -37,6 +37,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/11-leaderboard-service.js`
 - Shared account auth / session / Supabase init helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js`
+- Aurora game-pack metadata / capabilities / stage themes / scoring tables:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - Gameplay / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Shared cabinet render shell / HUD layout / board-message helpers:
@@ -578,6 +580,22 @@ So the future `gamePack` needs to support both:
 
 - mechanics definitions
 - progression-aware presentation definitions
+
+### Front Door And Game Selection
+
+The platform should also assume that the game does not always boot directly
+into a single title. Over time we want a better first-impression surface and a
+way to select between multiple playable experiences.
+
+That means the shared shell should eventually support:
+
+- a high-quality slash / launch page before entering a run
+- a game picker surface once multiple game packs exist
+- a shell-level button that can reopen that picker from inside the cabinet
+- room for one-time notices, feature reminders, and release explanations
+
+For now, Aurora remains the only primary game entry. But the platform should
+avoid hard-coding a forever single-game front door.
 
 ## First Game-Pack Shape
 

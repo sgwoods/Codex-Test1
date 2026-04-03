@@ -7,7 +7,7 @@ function destroyCarriedFighter(e){
  // - 1000 when the carried fighter is attacking
  // The boss survives; only the carried fighter is lost.
  const attacking=!!e.dive;
- const points=attacking?1000:500;
+ const points=attacking?auroraGamePack().scoring.carriedFighter.attacking:auroraGamePack().scoring.carriedFighter.standby;
  const off=carriedFighterOffset(e);
  e.carry=0;
  S.score+=points;
@@ -64,7 +64,7 @@ function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
  if(S.challenge){
-  pts=100;
+  pts=auroraGamePack().scoring.challengeEnemy;
   S.score+=pts;
   S.ch.hits++;
   if(Number.isInteger(e.group)&&S.ch.groups){
@@ -79,21 +79,14 @@ function awardKill(e,mode){
   logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:1,rescued:0,turnedHostile:0,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
   return;
  }
- if(e.t==='bee')pts=dive?100:50;
- else if(e.t==='but')pts=dive?160:80;
- else if(e.t==='rogue')pts=dive?1000:500;
- else if(e.t==='boss'){
-  if(dive){
-   const escorts=activeEscortCount(e);
-   // Manual-backed Stage 4+ special attack squadron scoring:
-   // 400 / 800 / 1600 depending on how many escorts are still attached.
-   pts=escorts>=2?1600:escorts===1?800:400;
-   if(S.stage>=4&&escorts>0){
-    logEvent('special_attack_bonus',{stage:S.stage,bonus:pts,escorts});
-    S.alertTxt=`SPECIAL BONUS ${pts}`;
-    S.alertT=Math.max(S.alertT,1.1);
-   }
-  }else pts=150;
+ pts=auroraEnemyKillPoints(e,dive);
+ if(e.t==='boss'&&dive){
+  const escorts=activeEscortCount(e);
+  if(S.stage>=4&&escorts>0){
+   logEvent('special_attack_bonus',{stage:S.stage,bonus:pts,escorts});
+   S.alertTxt=`SPECIAL BONUS ${pts}`;
+   S.alertT=Math.max(S.alertT,1.1);
+  }
  }
  S.score+=pts;
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(e.carry&&dive),turnedHostile:!!(e.carry&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
@@ -113,7 +106,7 @@ function awardRescueJoin(autoDock){
  const p=S.p;
  S.cap=null;
  p.dual=1;
- S.score+=1000;
+ S.score+=auroraGamePack().scoring.rescueJoin;
  S.recoverT=Math.max(S.recoverT,1.15);
  S.attackGapT=Math.max(S.attackGapT,.9);
  startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');
@@ -134,7 +127,7 @@ function awardRescueJoin(autoDock){
 function finalizeChallengeClear(){
  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(S.ch.upperBandY||PLAY_H*.5),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
  S.ch.done=1;
- const perfect=S.ch.hits===S.ch.total?10000:0;
+ const perfect=S.ch.hits===S.ch.total?auroraGamePack().scoring.perfectChallengeClear:0;
  S.ch.perfect=perfect;
  S.score+=perfect;
  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';
