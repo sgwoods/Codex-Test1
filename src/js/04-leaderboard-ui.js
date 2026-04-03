@@ -353,6 +353,7 @@ function syncAccountUi(){
   else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
+  else if(NON_PRODUCTION_LANE&&!signedIn)accountSummary.textContent=nonProductionAccountSummary();
   else if(recovering)accountSummary.textContent='Recovery link accepted. Save a new password to finish signing back into this pilot account.';
   else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
