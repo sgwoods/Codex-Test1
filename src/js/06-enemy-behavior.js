@@ -96,7 +96,7 @@ function updateChallengeEnemy(e,dt){
   e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
   e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
  }
- if(e.y<=(e.upperBandY||PLAY_H*.5)){
+ if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){
    S.ch.upperBandTime+=dt;
@@ -156,7 +156,7 @@ function updateEnemy(e,dt,t,T,p){
   S.att++;
   e.x+=Math.sin(t*6.4+e.ph)*6*dt;
   e.beamT-=dt;
-  if(e.beam&&canCapture()&&Math.abs(p.x-e.x)<8&&p.y>e.y+12&&p.y<e.y+VIS.beamLen)capturePlayer(e);
+  if(enemyHasActiveBeam(e)&&canCapture()&&Math.abs(p.x-e.x)<8&&p.y>e.y+12&&p.y<e.y+VIS.beamLen)capturePlayer(e);
   if(e.beamT<=0){
    e.beam=0;
    e.dive=1;

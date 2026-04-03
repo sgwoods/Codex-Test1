@@ -317,6 +317,62 @@ The key rule is:
 - the runtime should host a `gamePack`
 - the `gamePack` should not need to own the whole application shell
 
+### Shared Enemy / Entity Contract
+
+The first reusable runtime contract for enemy entities should now be treated as
+two layers:
+
+- core shared fields
+  - `id`
+  - `t` enemy type
+  - `fam` family/archetype
+  - `band` stage-band label
+  - `r` / `c` logical grid position
+  - `hp` / `max`
+  - `x` / `y`
+  - `tx` / `ty`
+  - `form`
+  - `dive`
+  - `vx` / `vy`
+  - `cool`
+  - `spawn`
+  - `targetX` / `targetY`
+  - `shot`
+  - `en`
+  - `miss`
+  - `low`
+  - `hitT`
+- optional capability-owned fields
+  - escort pattern fields
+    - `lead`
+    - `off`
+    - `esc`
+    - `squadId`
+  - capture/rescue fields
+    - `carry`
+    - `beam`
+    - `beamT`
+  - challenge-stage fields
+    - `ch`
+    - `wave`
+    - `side`
+    - `slot`
+    - `group`
+    - `sweep`
+    - `upperBandY`
+
+The runtime should increasingly consume these through shared helpers rather than
+direct Aurora-only assumptions. That is the purpose of:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js`
+
+The important platform rule is:
+
+- a sibling pack should be able to omit capture, escort, or challenge fields
+  entirely when its capabilities do not use them
+- runtime systems should ask for those capabilities through helpers instead of
+  assuming every enemy has every mechanic
+
 ## Reference Mechanics Lens
 
 Future platform work needs to be informed by the real gameplay differences

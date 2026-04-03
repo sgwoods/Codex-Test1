@@ -88,6 +88,31 @@ function enemyChallengeState({
  };
 }
 
+function enemyHasEscortState(e){
+ return !!e&&('lead' in e||'off' in e||'esc' in e||'squadId' in e);
+}
+
+function enemyHasCaptureState(e){
+ return !!e&&('carry' in e||'beam' in e||'beamT' in e);
+}
+
+function enemyHasChallengeState(e){
+ return !!e&&('ch' in e||'wave' in e||'group' in e||'upperBandY' in e);
+}
+
+function enemyIsCarryingFighter(e){
+ return !!(enemyHasCaptureState(e)&&e.carry);
+}
+
+function enemyHasActiveBeam(e){
+ return !!(enemyHasCaptureState(e)&&e.beam);
+}
+
+function enemyChallengeUpperBandY(e,fallback=PLAY_H*.5){
+ if(!enemyHasChallengeState(e))return fallback;
+ return e.upperBandY||fallback;
+}
+
 function makePackEnemyState({
  gamePack=auroraGamePack(),
  type,

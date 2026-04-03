@@ -58,8 +58,9 @@ function drawEnemy(e){
  const ps=2;
  const flap=Math.sin(e.tm*11+e.ph)>.12,hot=e.dive===1||e.dive===4;
  const pal=enemyPalette(e,flap,hot);
- const carryTarget=e.carry?carriedFighterTarget(e):null;
- const carryOffset=e.carry?carriedFighterOffset(e):null;
+ const carrying=enemyIsCarryingFighter(e);
+ const carryTarget=carrying?carriedFighterTarget(e):null;
+ const carryOffset=carrying?carriedFighterOffset(e):null;
  ctx.save();
  ctx.translate(Math.round(e.x),Math.round(e.y));
  if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
@@ -73,7 +74,7 @@ function drawEnemy(e){
   ctx.fillRect(-12,-10,24,20);
   ctx.globalAlpha=1;
  }
- if(e.beam){
+ if(enemyHasActiveBeam(e)){
   const len=Math.max(24,Math.min(VIS.beamLen,PLAY_H-e.y-8)),bw=10;
   const g=ctx.createLinearGradient(0,14,0,len);g.addColorStop(0,'rgba(136,245,255,.98)');g.addColorStop(.55,'rgba(110,229,255,.32)');g.addColorStop(1,'rgba(136,245,255,.03)');
   ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-bw,12);ctx.lineTo(bw,12);ctx.lineTo(bw*2.35,len);ctx.lineTo(-bw*2.35,len);ctx.closePath();ctx.fill();
@@ -85,7 +86,7 @@ function drawEnemy(e){
   }
  }
  ctx.restore();
- if(e.carry&&carryTarget&&carryOffset){
+ if(carrying&&carryTarget&&carryOffset){
   window.__auroraRenderDebug.carryDraws.push({
    bossId:e.id,
    bossX:+e.x.toFixed(2),
@@ -158,7 +159,7 @@ function drawCarryDebugOverlay(){
   ctx.fillText(`CAPTURE ${relation.toUpperCase()} d${p.capBoss.dive||0}`,Math.round(p.capBoss.x),Math.round(p.capBoss.y-24));
  }
  for(const e of S.e){
-  if(e.hp<=0||!e.carry)continue;
+  if(e.hp<=0||!enemyIsCarryingFighter(e))continue;
   const target=carriedFighterTarget(e);
   if(!target)continue;
   const relation=target.y<e.y?'above':'below';
