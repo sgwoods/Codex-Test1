@@ -663,6 +663,86 @@ So the future `gamePack` needs to support both:
 - mechanics definitions
 - progression-aware presentation definitions
 
+### Audio Identity And Event Vocabulary
+
+The platform should treat sound as part of the game contract, not as a late
+polish pass. For this family of games, audio is tightly connected to:
+
+- game-state transitions
+- attack pressure
+- challenge-stage identity
+- boss/archetype presence
+- score and rescue feedback
+
+The shared runtime should therefore own an event vocabulary for audio, while
+the actual palette and styling should belong to the `gamePack`.
+
+Shared audio events should include at least:
+
+- credit / start
+- formation march / ambient cadence
+- player shot
+- enemy shot
+- enemy hit
+- boss hit
+- boss destroyed
+- ship lost
+- capture beam start
+- fighter captured
+- capture broken
+- fighter released
+- rescue join
+- stage transition
+- challenge intro
+- challenge clear
+- bonus / special squad bonus
+- extra life
+- game over
+- UI tick / confirm / error
+
+The design rules should be:
+
+- each game pack defines its own audio palette and event mapping
+- sounds should be clearly inspired by original arcade lineage
+- sounds should generally not be direct copies of the originals
+- stage bands, challenge phases, boss archetypes, and branded worlds should be
+  allowed to alter the sound palette during a run
+
+That means the future `gamePack` should own:
+
+- an `audioProfile`
+  - synth or sample family
+  - event-to-sound mapping
+  - stage-band or theme variants
+  - boss/archetype variants
+  - UI palette
+- optional `audioThemes`
+  - intro theme
+  - challenge theme
+  - stage progression themes
+  - branded world or chapter treatments
+
+For Aurora specifically, this leaves room for:
+
+- an `aurora borealis` stage audio identity
+- distinct `Super Boss` / `Partner` sonic signatures
+- richer challenge-stage transitions as the run escalates
+
+For sibling games, this should remain pack-owned:
+
+- `Galaga` / Aurora-like packs can emphasize rescue, challenge, and escort cues
+- `Galaxian`-like packs can emphasize spare, early-arcade attack and loss cues
+- later games can vary by world, chapter, or boss family without changing the
+  shared runtime vocabulary
+
+Reference inspiration sources for this family include:
+
+- [Galaga Soundboard](https://www.101soundboards.com/boards/28843-galaga-soundboard)
+- [Galaxian - Video Game Music](https://www.101soundboards.com/boards/643652-galaxian-video-game-music)
+
+These are useful as event and mood references, not as a mandate to replicate
+the exact sounds verbatim.
+
 ### Front Door And Game Selection
 
 The platform should also assume that the game does not always boot directly
