@@ -54,6 +54,7 @@ const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_P
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
 const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';
+const PLATFORM_LEADERBOARD_CACHE_PREFIX='platinumLeaderboardCache.v1.';
 const LEGACY_LEADERBOARD_CACHE_PREFIX='neoGalagaLeaderboardCache.v1.';
 const LEADERBOARD_STALE_MS=45000;
 const LEADERBOARD_REFRESH_MS=120000;
@@ -182,6 +183,9 @@ function localLeaderboardRows(){
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+}
+function platformLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
+ return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
 }
 function legacyLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEGACY_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;

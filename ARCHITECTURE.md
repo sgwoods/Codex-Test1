@@ -662,6 +662,8 @@ assumptions that should be reduced or intentionally gated:
 - storage and cache prefixes are still Aurora-branded:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-supabase.js`
+  - Platinum-prefixed aliases are now supported alongside the legacy names, but
+    the final migration/cutover policy is still a later concern
 
 These are no longer giant gameplay blockers, which is a sign of progress. They
 are now mostly shell/bootstrap/debug/storage cleanup items and should be

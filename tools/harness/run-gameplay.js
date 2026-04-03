@@ -243,6 +243,9 @@ async function main(){
       localStorage.setItem('auroraGalacticaAutoVideo', '1');
       localStorage.setItem('auroraGalacticaTestCfg', JSON.stringify(cfg));
       localStorage.setItem('auroraGalacticaHarnessSeed', String(cfg.seed >>> 0));
+      localStorage.setItem('platinumAutoVideo', '1');
+      localStorage.setItem('platinumTestCfg', JSON.stringify(cfg));
+      localStorage.setItem('platinumHarnessSeed', String(cfg.seed >>> 0));
     }, Object.assign({}, spec.config, { seed: spec.seed }));
 
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });

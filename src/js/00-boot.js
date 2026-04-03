@@ -38,6 +38,7 @@ let PRODUCT_NAME=PLATFORM_NAME;
 // Keep the existing browser storage namespace until we plan and ship an
 // explicit migration for live users and their historical local data.
 const STORAGE_PREFIX='auroraGalactica';
+const PLATFORM_STORAGE_PREFIX='platinum';
 const LEGACY_STORAGE_PREFIX='galagaTrib';
 const GAME_PACK_PREF_KEY=`${STORAGE_PREFIX}SelectedGamePack`;
 const RECORD_PREF_KEY=`${STORAGE_PREFIX}AutoVideo`;
@@ -58,26 +59,49 @@ const LEGACY_STORAGE_KEYS={
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
+const PLATFORM_STORAGE_KEYS={
+ [GAME_PACK_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}SelectedGamePack`,
+ [RECORD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AutoVideo`,
+ [TEST_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}TestCfg`,
+ [SEED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}HarnessSeed`,
+ [SCOREBOARD_KEY]:`${PLATFORM_STORAGE_PREFIX}Top10`,
+ [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
+ [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
+ [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
+ [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
+};
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
   if(current!=null)return current;
-  const legacy=LEGACY_STORAGE_KEYS[key];
-  if(!legacy)return null;
-  const fallback=localStorage.getItem(legacy);
-  if(fallback!=null)localStorage.setItem(key,fallback);
-  return fallback;
+  const fallbackKeys=[PLATFORM_STORAGE_KEYS[key],LEGACY_STORAGE_KEYS[key]].filter(Boolean);
+  for(const fallbackKey of fallbackKeys){
+   const fallback=localStorage.getItem(fallbackKey);
+   if(fallback!=null){
+    localStorage.setItem(key,fallback);
+    return fallback;
+   }
+  }
+  return null;
  }catch{
   return null;
  }
 }
 function writePref(key,value){
- try{localStorage.setItem(key,value)}catch{}
+ try{
+  localStorage.setItem(key,value);
+  const platformKey=PLATFORM_STORAGE_KEYS[key];
+  if(platformKey)localStorage.setItem(platformKey,value);
+ }catch{}
 }
 function removePref(key){
- try{localStorage.removeItem(key)}catch{}
+ try{
+  localStorage.removeItem(key);
+  const platformKey=PLATFORM_STORAGE_KEYS[key];
+  if(platformKey)localStorage.removeItem(platformKey);
+ }catch{}
 }
 function loadSystemLog(){
  try{

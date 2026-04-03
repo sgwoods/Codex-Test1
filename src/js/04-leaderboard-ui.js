@@ -119,13 +119,17 @@ function leaderboardStatusLabel(view,mode='ready'){
 function persistLeaderboardCache(view){
  if(view==='local')return;
  try{
-  localStorage.setItem(leaderboardCacheKey(view),JSON.stringify({fetchedAt:LEADERBOARD.cacheStamp[view]||Date.now(),rows:LEADERBOARD.remote[view]||[]}));
+  const payload=JSON.stringify({fetchedAt:LEADERBOARD.cacheStamp[view]||Date.now(),rows:LEADERBOARD.remote[view]||[]});
+  localStorage.setItem(leaderboardCacheKey(view),payload);
+  localStorage.setItem(platformLeaderboardCacheKey(view),payload);
  }catch{}
 }
 function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
  if(view==='local')return 0;
  try{
-  const raw=localStorage.getItem(leaderboardCacheKey(view,userId))||localStorage.getItem(legacyLeaderboardCacheKey(view,userId));
+  const raw=localStorage.getItem(leaderboardCacheKey(view,userId))
+   ||localStorage.getItem(platformLeaderboardCacheKey(view,userId))
+   ||localStorage.getItem(legacyLeaderboardCacheKey(view,userId));
   if(!raw)return 0;
   const parsed=JSON.parse(raw);
   const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow):[];

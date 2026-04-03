@@ -67,6 +67,9 @@ async function withHarnessPage(cfg, fn){
       localStorage.setItem('auroraGalacticaAutoVideo', '0');
       localStorage.setItem('auroraGalacticaTestCfg', JSON.stringify(local.testCfg));
       localStorage.setItem('auroraGalacticaHarnessSeed', String(local.seed >>> 0));
+      localStorage.setItem('platinumAutoVideo', '0');
+      localStorage.setItem('platinumTestCfg', JSON.stringify(local.testCfg));
+      localStorage.setItem('platinumHarnessSeed', String(local.seed >>> 0));
     }, { testCfg, seed });
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__galagaHarness__);
