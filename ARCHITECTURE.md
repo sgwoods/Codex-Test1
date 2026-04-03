@@ -35,7 +35,9 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/09-stage-flow.js`
 - Gameplay / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
-- Rendering / HUD / overlays / sprites:
+- Shared cabinet render shell / HUD layout / board-message helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
+- Aurora-specific board rendering / sprites / entity draw routines:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js`
 - Harness hooks:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js`

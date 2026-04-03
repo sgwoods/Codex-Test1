@@ -1,25 +1,5 @@
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
-const playfieldFrame=document.getElementById('playfieldFrame');
-const renderHelpModal=document.getElementById('helpModal');
-const renderHelpPanel=document.getElementById('helpPanel');
-const renderFeedbackModal=document.getElementById('feedbackModal');
-const renderFeedbackPanel=document.getElementById('feedbackPanel');
-const renderSettingsPanel=document.getElementById('settingsPanel');
 window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
-const DISPLAY_SHELL=Object.freeze({
- hudInsetX:12,
- hudInsetTop:6,
- hudInsetBottom:38,
- hudMinWidth:220,
- frameOuterInset:2,
- frameInnerInset:11,
- stageBadgeRight:12,
- stageBadgeBottom:12,
- stageBadgeGap:9,
- reserveLeft:12,
- reserveBottom:8,
- stageLabelGap:5
-});
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
