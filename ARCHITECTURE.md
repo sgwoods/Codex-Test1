@@ -33,6 +33,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/08-score-awards.js`
 - Aurora-specific stage setup / formation / transition helpers:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/09-stage-flow.js`
+- Shared remote leaderboard fetch / cache / score-submit helpers:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/11-leaderboard-service.js`
 - Gameplay / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Shared cabinet render shell / HUD layout / board-message helpers:
