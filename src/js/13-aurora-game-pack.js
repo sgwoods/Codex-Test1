@@ -62,6 +62,14 @@ const AURORA_FRAME_ACCENTS=Object.freeze({
   shellGlow:'rgba(255,227,138,.16)',
   marqueeBorder:'#48f0c3',
   marqueeGlow:'#c98cff'
+ }),
+ 'signal-crimson':Object.freeze({
+  frameLine:'rgba(255,120,120,.34)',
+  frameGlow:'rgba(255,214,115,.12)',
+  shellLine:'rgba(255,112,94,.34)',
+  shellGlow:'rgba(255,232,150,.12)',
+  marqueeBorder:'#ff5b5b',
+  marqueeGlow:'#ffd86d'
  })
 });
 
@@ -104,18 +112,31 @@ const AURORA_GAME_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'aurora-galactica',
   title:'Aurora Galactica',
-  versionLine:'1.x'
+  versionLine:'1.x',
+  playable:1
  }),
  frontDoor:Object.freeze({
   marqueeTitle:'Aurora Galactica',
   title:'AURORA GALACTICA',
   subtitle:'WAIT MODE',
   startPrompt:'PRESS <span class="k">ENTER</span> TO START',
+  featureLine:'AURORA BOREALIS STAGES   SUPER BOSSES   PARTNER WINGS',
   attractLine:'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
   utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
-  pickerHint:'',
+  noticeHint:'Future game picker, release notes, and approved quote moments route through this shell surface.',
+  pickerHint:'GAME PICKER COMING SOON',
+  frameAccent:'classic-blue',
+  quotePlaceholder:Object.freeze({
+   kicker:'SIGNAL',
+   text:'Approved AI dystopian quotes will rotate here once the shared content loader is wired.',
+   attribution:'CURATED FRONT-DOOR PLACEHOLDER'
+  }),
   quoteSurface:'wait-mode'
  }),
+ shellThemes:Object.freeze([
+  Object.freeze({id:'classic-blue',label:'Classic Blue',frameAccent:'classic-blue',default:1}),
+  Object.freeze({id:'aurora-crown',label:'Aurora Crown',frameAccent:'aurora-crown'})
+ ]),
  capabilities:Object.freeze({
   usesFormationRack:1,
   usesIndependentDiveAttacks:1,
@@ -136,13 +157,66 @@ const AURORA_GAME_PACK=Object.freeze({
  scoring:AURORA_SCORING_RULES
 });
 
+const GALAXIAN_SIGNAL_PACK=Object.freeze({
+ metadata:Object.freeze({
+  gameKey:'galaxian-signal-preview',
+  title:'Galaxian Signal',
+  versionLine:'preview',
+  playable:0
+ }),
+ frontDoor:Object.freeze({
+  marqueeTitle:'Galaxian Signal',
+  title:'GALAXIAN SIGNAL',
+  subtitle:'PACK PREVIEW',
+  startPrompt:'PREVIEW ONLY   FULL RUNTIME COMING SOON',
+  featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   SPARE ARCADE PRESSURE',
+  attractLine:'SELECTED THROUGH THE PLATFORM GAME PICKER',
+  utilityLine:'<span class="k">SELECT</span> TO RESTYLE THE CABINET   <span class="k">PLAY</span> COMES LATER',
+  noticeHint:'This sibling pack is a shell-and-identity preview while the shared runtime contract is still being proved.',
+  pickerHint:'USE CHOOSE GAME TO SWITCH BACK TO AURORA',
+  frameAccent:'signal-crimson',
+  quotePlaceholder:Object.freeze({
+   kicker:'GALAXIAN SIGNAL',
+   text:'A future sibling pack should be able to own its own shell identity, score feel, and audio profile before gameplay goes live.',
+   attribution:'PLATFORM PREVIEW'
+  }),
+  quoteSurface:'wait-mode'
+ }),
+ shellThemes:Object.freeze([
+  Object.freeze({id:'signal-crimson',label:'Signal Crimson',frameAccent:'signal-crimson',default:1}),
+  Object.freeze({id:'classic-blue',label:'Classic Blue',frameAccent:'classic-blue'})
+ ]),
+ capabilities:Object.freeze({
+  usesFormationRack:1,
+  usesIndependentDiveAttacks:1,
+  usesEscortPatterns:1,
+  usesChallengeStages:0,
+  usesCaptureRescue:0,
+  usesDualFighterMode:0,
+  usesStaticShields:0,
+  usesStageThemeProgression:0,
+  usesBossArchetypeVariants:0
+ }),
+ stageCadence:AURORA_STAGE_CADENCE,
+ stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
+ formationLayouts:AURORA_FORMATION_LAYOUTS,
+ challengeLayout:AURORA_CHALLENGE_LAYOUT,
+ stageThemeProgression:Object.freeze([
+  {fromStage:1,id:'signal-rack',frameAccent:'signal-crimson',backgroundMode:'starfield',challengeBrand:'signal',bossArchetype:'flagship'}
+ ]),
+ frameAccents:AURORA_FRAME_ACCENTS,
+ scoring:AURORA_SCORING_RULES
+});
+
 const GAME_PACK_REGISTRY=Object.freeze({
- [AURORA_GAME_PACK.metadata.gameKey]:AURORA_GAME_PACK
+ [AURORA_GAME_PACK.metadata.gameKey]:AURORA_GAME_PACK,
+ [GALAXIAN_SIGNAL_PACK.metadata.gameKey]:GALAXIAN_SIGNAL_PACK
 });
 
 const DEFAULT_GAME_PACK_KEY=AURORA_GAME_PACK.metadata.gameKey;
 let ACTIVE_GAME_PACK_KEY=DEFAULT_GAME_PACK_KEY;
 let ACTIVE_GAME_PACK=AURORA_GAME_PACK;
+const GAME_PACK_THEME_PREF_PREFIX=`${STORAGE_PREFIX}GamePackTheme:`;
 
 function availableGamePacks(){
  return GAME_PACK_REGISTRY;
@@ -158,6 +232,10 @@ function currentGamePackKey(){
 
 function currentGamePack(){
  return ACTIVE_GAME_PACK;
+}
+
+function currentGamePackPlayable(){
+ return currentGamePack().metadata?.playable!==0&&currentGamePack().metadata?.playable!==false;
 }
 
 function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
@@ -258,18 +336,70 @@ function currentGamePackFrontDoor(){
   title:frontDoor.title||String(pack.metadata?.title||PRODUCT_NAME||'Arcade Platform').toUpperCase(),
   subtitle:frontDoor.subtitle||'WAIT MODE',
   startPrompt:frontDoor.startPrompt||'PRESS <span class="k">ENTER</span> TO START',
+  featureLine:frontDoor.featureLine||'',
   attractLine:frontDoor.attractLine||'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
   utilityLine:frontDoor.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
+  noticeHint:frontDoor.noticeHint||'',
   pickerHint:frontDoor.pickerHint||'',
+  frameAccent:frontDoor.frameAccent||'classic-blue',
+  quotePlaceholder:Object.freeze({
+   kicker:frontDoor.quotePlaceholder?.kicker||'',
+   text:frontDoor.quotePlaceholder?.text||'',
+   attribution:frontDoor.quotePlaceholder?.attribution||''
+  }),
   quoteSurface:frontDoor.quoteSurface||'wait-mode'
  });
 }
 
+function currentGamePackShellThemes(){
+ const themes=Array.isArray(currentGamePack().shellThemes)&&currentGamePack().shellThemes.length
+  ? currentGamePack().shellThemes
+  : [Object.freeze({id:currentGamePackFrontDoor().frameAccent,label:'Default',frameAccent:currentGamePackFrontDoor().frameAccent,default:1})];
+ return themes;
+}
+
+function currentGamePackShellThemePrefKey(gameKey=currentGamePackKey()){
+ return `${GAME_PACK_THEME_PREF_PREFIX}${gameKey}`;
+}
+
+function currentGamePackSelectedShellTheme(){
+ const themes=currentGamePackShellThemes();
+ const prefId=String(readPref(currentGamePackShellThemePrefKey())||'').trim();
+ return themes.find(theme=>theme.id===prefId)
+  || themes.find(theme=>theme.default)
+  || themes[0];
+}
+
+function currentGamePackFrontDoorFrameAccent(){
+ const selected=currentGamePackSelectedShellTheme();
+ return selected?.frameAccent||currentGamePackFrontDoor().frameAccent||'classic-blue';
+}
+
+function setCurrentGamePackShellTheme(themeId=''){
+ const themes=currentGamePackShellThemes();
+ const next=themes.find(theme=>theme.id===themeId)||themes.find(theme=>theme.default)||themes[0];
+ if(!next)return null;
+ writePref(currentGamePackShellThemePrefKey(),next.id);
+ syncInstalledPackShellChrome();
+ return next;
+}
+
 function syncInstalledPackShellChrome(){
- try{document.title=currentGamePack().metadata?.title||PRODUCT_NAME||document.title}catch{}
- const marquee=document.getElementById('cabinetMarqueeTitle');
+ const pack=currentGamePack();
  const frontDoor=currentGamePackFrontDoor();
- if(marquee)marquee.textContent=frontDoor.marqueeTitle;
+ const theme=currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue'];
+ try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
+ const marquee=document.getElementById('cabinetMarqueeTitle');
+  if(marquee)marquee.textContent=frontDoor.marqueeTitle;
+ const root=document.documentElement;
+ if(root&&theme){
+  root.style.setProperty('--shell-line',theme.shellLine);
+  root.style.setProperty('--shell-glow',theme.shellGlow);
+  root.style.setProperty('--frame-line',theme.frameLine);
+  root.style.setProperty('--frame-glow',theme.frameGlow);
+  root.style.setProperty('--marquee-border',theme.marqueeBorder);
+  root.style.setProperty('--marquee-glow',theme.marqueeGlow);
+ }
 }
 
 function auroraIsChallengeStage(stage){
@@ -305,5 +435,9 @@ window.availableGamePacks=availableGamePacks;
 window.getGamePack=getGamePack;
 window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
+window.currentGamePackPlayable=currentGamePackPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
+window.currentGamePackShellThemes=currentGamePackShellThemes;
+window.currentGamePackSelectedShellTheme=currentGamePackSelectedShellTheme;
+window.setCurrentGamePackShellTheme=setCurrentGamePackShellTheme;
 window.installGamePack=installGamePack;

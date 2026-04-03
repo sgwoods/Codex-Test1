@@ -22,7 +22,9 @@ const DISPLAY_SHELL=Object.freeze({
 });
 
 function applyStageChromeTheme(){
- const theme=currentGamePackFrameAccentTheme(S.stagePresentation);
+ const theme=!started&&typeof currentGamePack==='function'
+  ? currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue']
+  : currentGamePackFrameAccentTheme(S.stagePresentation);
  const root=document.documentElement;
  if(root){
   root.style.setProperty('--shell-line',theme.shellLine);
@@ -179,6 +181,16 @@ function syncCabinetShellLayout({
    cabinetRightFrame.style.height=`${railH}px`;
   }else cabinetRightFrame.style.display='none';
  }
+ if(cabinetLeftFrame){
+  if(railW>0){
+   const leftRail=Math.floor(shellX+Math.max(0,(shellPadL-railW)/2));
+   cabinetLeftFrame.style.display='block';
+   cabinetLeftFrame.style.left=`${leftRail}px`;
+   cabinetLeftFrame.style.top=`${railTop}px`;
+   cabinetLeftFrame.style.width=`${railW}px`;
+   cabinetLeftFrame.style.height=`${railH}px`;
+  }else cabinetLeftFrame.style.display='none';
+ }
  if(statusPanels){
   statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
   statusPanels.style.setProperty('--overlay-max-height','none');
@@ -275,15 +287,24 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
   else{
    const frontDoor=typeof currentGamePackFrontDoor==='function'
     ? currentGamePackFrontDoor()
-    : {
+   : {
       title:'AURORA GALACTICA',
       subtitle:'WAIT MODE',
       startPrompt:'PRESS <span class="k">ENTER</span> TO START',
+      featureLine:'',
       attractLine:'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
-      utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS'
+      utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
+      noticeHint:'',
+      pickerHint:'',
+      quotePlaceholder:{kicker:'',text:'',attribution:''}
      };
-   const pickerHint=frontDoor.pickerHint?`<span class="startMeta">${frontDoor.pickerHint}</span>`:'';
-   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span><span class="startHelp">${frontDoor.startPrompt}</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}`;
+   const featureLine=frontDoor.featureLine?`<span class="startFeature">${frontDoor.featureLine}</span>`:'';
+   const noticeHint=frontDoor.noticeHint?`<span class="startNotice">${frontDoor.noticeHint}</span>`:'';
+   const pickerHint=frontDoor.pickerHint?`<span class="startMeta startPickerHint">${frontDoor.pickerHint}</span>`:'';
+   const quoteBlock=frontDoor.quotePlaceholder?.text
+    ? `<span class="startQuoteWrap"><span class="startQuoteKicker">${frontDoor.quotePlaceholder.kicker||'SIGNAL'}</span><span class="startQuoteText">${frontDoor.quotePlaceholder.text}</span>${frontDoor.quotePlaceholder.attribution?`<span class="startQuoteAttribution">${frontDoor.quotePlaceholder.attribution}</span>`:''}</span>`
+    : '';
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}${noticeHint}`;
   }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;

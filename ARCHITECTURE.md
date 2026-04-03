@@ -50,6 +50,8 @@ Related planning artifact:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - Shared enemy/entity model helpers for pack-owned core and optional fields:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js`
+- Shared game-picker shell surface for installed and preview pack selection:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/15-game-picker.js`
 - Gameplay / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Shared cabinet render shell / HUD layout / board-message helpers:
@@ -428,6 +430,18 @@ That front-door path is now beginning to move into pack ownership too:
   - start prompt copy
   - attract-line copy
   - utility-line copy
+  - front-door frame accent
+  - available shell theme variants
+
+- the shell now supports:
+  - a visible left-rail `Choose Game` control
+  - installed-pack switching in wait mode
+  - preview-only sibling packs that can restyle the cabinet before gameplay is wired
+
+- the shell-theme path now leaves room for:
+  - per-pack dynamic cabinet framing
+  - game-branded frame graphics
+  - future per-user theme preference by game pack
 
 This keeps the next future steps aligned:
 

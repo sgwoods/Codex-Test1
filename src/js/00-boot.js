@@ -2,7 +2,16 @@
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
 const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel'),settingsPanelClose=document.getElementById('settingsPanelClose');
 const cabinetShell=document.getElementById('cabinetShell');
+const cabinetLeftFrame=document.getElementById('cabinetLeftFrame');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
+const gamePickerDockBtn=document.getElementById('gamePickerDockBtn');
+const gamePickerDockStatus=document.getElementById('gamePickerDockStatus');
+const gamePickerModal=document.getElementById('gamePickerModal');
+const gamePickerPanel=document.getElementById('gamePickerPanel');
+const gamePickerClose=document.getElementById('gamePickerClose');
+const gamePickerCurrent=document.getElementById('gamePickerCurrent');
+const gamePickerList=document.getElementById('gamePickerList');
+const gamePickerStatus=document.getElementById('gamePickerStatus');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
@@ -196,6 +205,7 @@ const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY='{{WEB3FORMS_ACCESS_KEY}}';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let gamePickerOpen=0,gamePickerPrevPaused=0;
 let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
 let settingsOpen=0,settingsPrevPaused=0;
@@ -796,6 +806,7 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(helpOpen){if(e.code==='Escape'){e.preventDefault();closeHelp();}return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
+ if(gamePickerOpen){if(e.code==='Escape'){e.preventDefault();closeGamePicker();}return;}
  if(typeof isMoviePanelOpen==='function'&&isMoviePanelOpen()){if(e.code==='Escape'){e.preventDefault();closeMoviePanel();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
@@ -880,6 +891,11 @@ addEventListener('keydown',e=>{
   }
  }
  if(!started&&e.code==='Enter'){
+  if(typeof currentGamePackPlayable==='function'&&!currentGamePackPlayable()){
+   e.preventDefault();
+   showToast('This pack is a shell preview only for now.');
+   return;
+  }
   if(gameOverState&&!gameOverState.editing)submitGameOverScore();
   stopAttractLoop();start();
  }

@@ -1,6 +1,10 @@
 // Aurora-specific player lifecycle, harness control, and manual movement helpers.
 
 function start(){
+ if(typeof currentGamePackPlayable==='function'&&!currentGamePackPlayable()){
+  showToast('This pack is a shell preview only for now.');
+  return;
+ }
  stopAttractLoop();
  try{document.activeElement?.blur?.()}catch{}
  if(typeof resetActiveInputState==='function')resetActiveInputState('game_start');
