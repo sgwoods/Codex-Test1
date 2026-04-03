@@ -126,8 +126,41 @@ const AURORA_GAME_PACK=Object.freeze({
  scoring:AURORA_SCORING_RULES
 });
 
+const GAME_PACK_REGISTRY=Object.freeze({
+ [AURORA_GAME_PACK.metadata.gameKey]:AURORA_GAME_PACK
+});
+
+const DEFAULT_GAME_PACK_KEY=AURORA_GAME_PACK.metadata.gameKey;
+let ACTIVE_GAME_PACK_KEY=DEFAULT_GAME_PACK_KEY;
+let ACTIVE_GAME_PACK=AURORA_GAME_PACK;
+
+function availableGamePacks(){
+ return GAME_PACK_REGISTRY;
+}
+
+function getGamePack(key=DEFAULT_GAME_PACK_KEY){
+ return GAME_PACK_REGISTRY[key]||GAME_PACK_REGISTRY[DEFAULT_GAME_PACK_KEY];
+}
+
+function currentGamePackKey(){
+ return ACTIVE_GAME_PACK_KEY;
+}
+
+function currentGamePack(){
+ return ACTIVE_GAME_PACK;
+}
+
+function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
+ const nextPack=getGamePack(key);
+ ACTIVE_GAME_PACK_KEY=nextPack.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
+ ACTIVE_GAME_PACK=nextPack;
+ PRODUCT_NAME=nextPack.metadata?.title||PRODUCT_NAME;
+ if(opts.persist)writePref(GAME_PACK_PREF_KEY,ACTIVE_GAME_PACK_KEY);
+ return ACTIVE_GAME_PACK;
+}
+
 function auroraGamePack(){
- return AURORA_GAME_PACK;
+ return getGamePack(AURORA_GAME_PACK.metadata.gameKey);
 }
 
 function auroraIsChallengeStage(stage){
@@ -205,3 +238,10 @@ function challengeGroupBonus(stage){
  }
  return bonus;
 }
+
+installGamePack(readPref(GAME_PACK_PREF_KEY)||DEFAULT_GAME_PACK_KEY);
+window.availableGamePacks=availableGamePacks;
+window.getGamePack=getGamePack;
+window.currentGamePack=currentGamePack;
+window.currentGamePackKey=currentGamePackKey;
+window.installGamePack=installGamePack;

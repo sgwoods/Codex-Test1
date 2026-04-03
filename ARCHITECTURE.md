@@ -3,6 +3,11 @@
 This document is the short technical map for how the project is organized and
 how work should flow through it.
 
+Related planning artifact:
+
+- audio planning and source manifest:
+  - `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
+
 ## Runtime Layout
 
 ### Source Files
