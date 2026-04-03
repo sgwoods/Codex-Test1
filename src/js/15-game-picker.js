@@ -27,14 +27,22 @@ function syncGamePickerDock(){
  }
 }
 
+function renderShellThemeOptions(){
+ if(typeof currentGamePackShellThemes!=='function'||typeof currentGamePackSelectedShellTheme!=='function')return '';
+ const themes=currentGamePackShellThemes();
+ const activeTheme=currentGamePackSelectedShellTheme();
+ if(!themes.length)return '';
+ return `<div class="gamePickerThemeGroup"><span class="gamePickerThemeLabel">Shell Theme</span><div class="gamePickerThemeOptions">${themes.map(theme=>`<button class="gamePickerThemeBtn${theme.id===activeTheme?.id?' isSelected':''}" data-theme-id="${theme.id}">${theme.label}</button>`).join('')}</div></div>`;
+}
+
 function renderGamePicker(){
  if(!gamePickerList||!gamePickerCurrent||!gamePickerStatus||typeof availableGamePacks!=='function')return;
  const packs=Object.values(availableGamePacks());
  const activeKey=typeof currentGamePackKey==='function'?currentGamePackKey():'';
- const activePack=typeof currentGamePack==='function'?currentGamePack():null;
- const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
+  const activePack=typeof currentGamePack==='function'?currentGamePack():null;
+  const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
  gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Arcade Platform'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • switch packs from wait mode':''
- }</span>`;
+ }</span>${renderShellThemeOptions()}`;
  gamePickerList.innerHTML=packs.map(pack=>{
   const isActive=pack.metadata?.gameKey===activeKey;
   const caps=describePackCaps(pack);
@@ -42,7 +50,8 @@ function renderGamePicker(){
   const playable=pack.metadata?.playable!==0&&pack.metadata?.playable!==false;
   const actionLabel=isActive?'Selected':(playable?'Select Game':'Preview Shell');
   const disabled=isActive?' disabled':'';
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':'Shell preview only while gameplay integration is still in progress'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':'Shell preview only while gameplay integration is still in progress'}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Return to wait mode before switching to a different game pack.'
@@ -91,6 +100,15 @@ function chooseGamePack(key=''){
  }
 }
 
+function chooseCurrentPackTheme(themeId=''){
+ if(!themeId||typeof setCurrentGamePackShellTheme!=='function')return;
+ const applied=setCurrentGamePackShellTheme(themeId);
+ if(!applied)return;
+ if(!started&&typeof draw==='function')draw();
+ renderGamePicker();
+ showToast(`Shell theme: ${applied.label}`);
+}
+
 if(gamePickerDockBtn)gamePickerDockBtn.addEventListener('click',e=>{
  e.stopPropagation();
  if(gamePickerOpen)closeGamePicker();
@@ -103,6 +121,11 @@ if(gamePickerList)gamePickerList.addEventListener('click',e=>{
  const btn=e.target.closest('[data-pack-key]');
  if(!btn)return;
  chooseGamePack(btn.dataset.packKey||'');
+});
+if(gamePickerCurrent)gamePickerCurrent.addEventListener('click',e=>{
+ const btn=e.target.closest('[data-theme-id]');
+ if(!btn)return;
+ chooseCurrentPackTheme(btn.dataset.themeId||'');
 });
 renderGamePicker();
 window.openGamePicker=openGamePicker;

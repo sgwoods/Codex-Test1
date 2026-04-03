@@ -978,6 +978,49 @@ The first sibling pack should look roughly like this:
 - `usesStaticShields`
   - no
 
+### First Real Galaxian Gameplay Slice
+
+Before we attempt a fuller sibling game, the first honest gameplay slice should
+stay narrow and intentionally incomplete.
+
+That first slice should include:
+
+- front door and shell identity
+  - marquee/title
+  - frame theme
+  - picker presence
+- stage 1 formation start
+  - pack-owned formation layout
+  - entry sequencing
+- enemy families
+  - baseline attacker
+  - stronger attacker
+  - flagship / escort leader
+- attack behavior
+  - independent dives
+  - flagship-led escort dives
+- scoring
+  - formation kill values
+  - dive kill values
+  - flagship/escort bonus values
+- run flow
+  - start
+  - life loss
+  - game over
+  - results/high-score summary
+
+That first slice should explicitly exclude:
+
+- capture / rescue
+- dual-fighter join logic
+- challenge stages
+- Aurora-style boss archetype escalation
+- Aurora-specific stage-theme progression
+
+The point of this slice is not feature parity. The point is to prove that a
+non-Aurora pack can own a real playable combat loop through the shared runtime
+without inheriting Aurora-only mechanics by accident.
+
 That makes it a clean test of the family core without the richer Aurora/Galaga
 mechanics.
 

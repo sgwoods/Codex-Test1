@@ -362,12 +362,18 @@ function currentGamePackShellThemePrefKey(gameKey=currentGamePackKey()){
  return `${GAME_PACK_THEME_PREF_PREFIX}${gameKey}`;
 }
 
-function currentGamePackSelectedShellTheme(){
- const themes=currentGamePackShellThemes();
- const prefId=String(readPref(currentGamePackShellThemePrefKey())||'').trim();
+function selectedShellThemeForPack(pack=currentGamePack(),gameKey=currentGamePackKey()){
+ const themes=Array.isArray(pack?.shellThemes)&&pack.shellThemes.length
+  ? pack.shellThemes
+  : [Object.freeze({id:pack?.frontDoor?.frameAccent||'classic-blue',label:'Default',frameAccent:pack?.frontDoor?.frameAccent||'classic-blue',default:1})];
+ const prefId=String(readPref(currentGamePackShellThemePrefKey(gameKey))||'').trim();
  return themes.find(theme=>theme.id===prefId)
   || themes.find(theme=>theme.default)
   || themes[0];
+}
+
+function currentGamePackSelectedShellTheme(){
+ return selectedShellThemeForPack(currentGamePack(),currentGamePackKey());
 }
 
 function currentGamePackFrontDoorFrameAccent(){
@@ -438,6 +444,7 @@ window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
+window.selectedShellThemeForPack=selectedShellThemeForPack;
 window.currentGamePackSelectedShellTheme=currentGamePackSelectedShellTheme;
 window.setCurrentGamePackShellTheme=setCurrentGamePackShellTheme;
 window.installGamePack=installGamePack;

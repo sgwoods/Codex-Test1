@@ -50,6 +50,25 @@ async function main(){
         : null;
     }, 1200, 40);
 
+    const beforeTheme = await page.evaluate(() =>
+      getComputedStyle(document.documentElement).getPropertyValue('--marquee-border').trim()
+    );
+
+    await page.evaluate(() => {
+      const btns = Array.from(document.querySelectorAll('#gamePickerCurrent [data-theme-id]'));
+      const classic = btns.find(btn => btn.dataset.themeId === 'classic-blue');
+      if(!classic) throw new Error('missing classic-blue theme button');
+      classic.click();
+    });
+
+    const themed = await waitForHarness(page, () => {
+      const themeLine = document.getElementById('gamePickerCurrent')?.innerText || '';
+      const border = getComputedStyle(document.documentElement).getPropertyValue('--marquee-border').trim();
+      return themeLine.includes('Classic Blue') && border
+        ? { themeLine: themeLine.replace(/\s+/g, ' ').trim(), border }
+        : null;
+    }, 1200, 40);
+
     await page.keyboard.press('Escape');
     await page.waitForTimeout(120);
     await page.keyboard.press('Enter');
@@ -60,7 +79,7 @@ async function main(){
       toast: document.getElementById('feedbackToast')?.innerText || ''
     }));
 
-    return { opened, preview, blocked };
+    return { opened, preview, beforeTheme, themed, blocked };
   });
 
   if(!result.opened?.railVisible) fail('left-side game picker rail did not render', result);
@@ -72,6 +91,12 @@ async function main(){
   if(!result.preview?.msg.includes('GALAXIAN SIGNAL') || !result.preview?.msg.includes('PACK PREVIEW')){
     fail('preview pack selection did not update the wait-mode shell copy', result);
   }
+  if(result.beforeTheme === result.themed?.border){
+    fail('switching shell theme did not change the cabinet chrome treatment', result);
+  }
+  if(!result.themed?.themeLine.includes('Classic Blue')){
+    fail('shell theme picker did not update the current theme label', result);
+  }
   if(result.blocked?.started) fail('preview-only pack should not be startable yet', result);
   if(!String(result.blocked?.toast || '').toLowerCase().includes('shell preview only')){
     fail('preview-only pack did not explain why gameplay is blocked', result);
@@ -82,6 +107,7 @@ async function main(){
     packCount: result.opened.packCount,
     previewTitle: result.preview.title,
     previewMarquee: result.preview.marquee,
+    themedBorder: result.themed.border,
     blockedToast: result.blocked.toast
   }, null, 2));
 }

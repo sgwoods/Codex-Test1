@@ -346,6 +346,12 @@ canvas{display:block;width:100vw;height:100vh}
 #gamePickerCurrent,#gamePickerStatus{padding:10px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
 #gamePickerCurrent{display:flex;flex-direction:column;gap:4px}
 #gamePickerCurrent strong{font:700 12px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;color:#7ef2ff;text-transform:uppercase}
+#gamePickerCurrent .gamePickerThemeGroup{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.gamePickerThemeLabel{font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(223,247,255,.76)}
+.gamePickerThemeOptions{display:flex;flex-wrap:wrap;gap:6px}
+.gamePickerThemeBtn{border:1px solid rgba(136,245,255,.22);background:rgba(8,18,35,.78);color:#dff7ff;padding:6px 8px;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer}
+.gamePickerThemeBtn:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82)}
+.gamePickerThemeBtn.isSelected{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.76);color:#ffe39a}
 #gamePickerList{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
 .gamePickerCard{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid rgba(136,245,255,.18);background:rgba(8,18,35,.78)}
 .gamePickerCard.isActive{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92))}
