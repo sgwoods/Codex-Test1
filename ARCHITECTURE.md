@@ -39,6 +39,8 @@ how work should flow through it.
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js`
 - Aurora game-pack metadata / capabilities / stage themes / scoring tables:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+- Shared enemy/entity model helpers for pack-owned core and optional fields:
+  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js`
 - Gameplay / scoring / capture / enemy logic:
   - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Shared cabinet render shell / HUD layout / board-message helpers:

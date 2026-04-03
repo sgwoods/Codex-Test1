@@ -1,7 +1,5 @@
 // Aurora-specific stage setup, formation, and transition helpers.
 
-function makeEnemy(t,r,c,tx,ty,profile=stageBandProfile(S.stage,S.challenge)){const boss=t==='boss';return{id:(randUnit()*1e9)|0,t,r,c,fam:enemyFamilyForType(profile,t),band:profile.name,hp:boss?2:1,max:boss?2:1,x:PLAY_W/2+rnd(180,-180),y:-80-r*16,tx,ty,form:0,dive:0,vx:0,vy:0,tm:rnd(6),ph:rnd(8),cool:rnd(2.3,.8),carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:r*.06+c*.02,en:0,lead:null,off:0,esc:0,squadId:0,ch:0,miss:0,low:0,hitT:0};}
-
 function familyMotion(e){
  switch(e?.fam){
   case 'scorpion': return { pulseX:.95,pulseY:.8,entryX:.92,entryY:.9,weave:1.18,steer:.96,jitter:1.1,diveVy:.98,diveAccel:1,challengeSweep:1,challengeDrop:1 };
@@ -26,12 +24,32 @@ function spawnFormation(){
   let t='bee';
   if(r===0)t=(c>=3&&c<=6)?'boss':'but';
   else if(r===1)t='but';
-  const e=makeEnemy(t,r,c,ox+c*gx,oy+r*gy,profile);
+  const e=makePackEnemyState({
+   gamePack:auroraGamePack(),
+   type:t,
+   row:r,
+   column:c,
+   tx:ox+c*gx,
+   ty:oy+r*gy,
+   profile
+  });
   e.spawn=S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03;
   S.e.push(e);
  }
  for(let i=0;i<S.rogue;i++){
-  const c=2+i%6,e=makeEnemy('rogue',1,c,ox+c*gx,oy+gy,profile);e.hp=1;e.max=1;S.e.push(e);
+  const c=2+i%6;
+  const e=makePackEnemyState({
+   gamePack:auroraGamePack(),
+   type:'rogue',
+   row:1,
+   column:c,
+   tx:ox+c*gx,
+   ty:oy+gy,
+   profile,
+   hp:1,
+   max:1
+  });
+  S.e.push(e);
  }
  S.rogue=0;
 }
@@ -50,7 +68,22 @@ function spawnChallenge(){
   const wave=(i/layout.enemiesPerGroup)|0;
   const t=layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
-  S.e.push({id:(randUnit()*1e9)|0,t,fam:profile.challengeFamily,band:profile.name,r:0,c:lane,hp:1,max:1,x:side>0?PLAY_W+layout.spawnOffsetX:-layout.spawnOffsetX,y:34+wave*layout.waveSpacingY+row*layout.rowSpacingY,tx:0,ty:0,form:1,dive:9,vx:0,vy:0,tm:0,ph:rnd(8),cool:99,carry:0,beam:0,beamT:0,targetX:0,targetY:0,shot:0,spawn:wave*layout.waveDelay+slot*layout.slotDelay,en:0,lead:null,off:0,esc:0,ch:1,miss:0,wave,side,slot,row,group:wave,sweep:wave%2?-1:1,ub:0,upperBandY});
+  S.e.push(makePackChallengeEnemyState({
+   gamePack:auroraGamePack(),
+   type:t,
+   lane,
+   profile,
+   x:side>0?PLAY_W+layout.spawnOffsetX:-layout.spawnOffsetX,
+   y:34+wave*layout.waveSpacingY+row*layout.rowSpacingY,
+   wave,
+   side,
+   slot,
+   row,
+   group:wave,
+   sweep:wave%2?-1:1,
+   upperBandY,
+   spawn:wave*layout.waveDelay+slot*layout.slotDelay
+  }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }

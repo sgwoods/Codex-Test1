@@ -1,0 +1,161 @@
+// Shared enemy/entity state helpers for fixed-screen shooter game packs.
+
+function enemyCoreState({
+ id,
+ type,
+ family,
+ band,
+ row,
+ column,
+ hp,
+ max,
+ x,
+ y,
+ tx,
+ ty,
+ spawn
+}){
+ return {
+  id,
+  t:type,
+  fam:family,
+  band,
+  r:row,
+  c:column,
+  hp,
+  max,
+  x,
+  y,
+  tx,
+  ty,
+  form:0,
+  dive:0,
+  vx:0,
+  vy:0,
+  tm:rnd(6),
+  ph:rnd(8),
+  cool:rnd(2.3,.8),
+  targetX:0,
+  targetY:0,
+  shot:0,
+  spawn,
+  en:0,
+  ch:0,
+  miss:0,
+  low:0,
+  hitT:0
+ };
+}
+
+function enemyEscortState(gamePack){
+ if(!gamePack?.capabilities?.usesEscortPatterns)return {};
+ return {
+  lead:null,
+  off:0,
+  esc:0,
+  squadId:0
+ };
+}
+
+function enemyCaptureState(gamePack){
+ if(!gamePack?.capabilities?.usesCaptureRescue)return {};
+ return {
+  carry:0,
+  beam:0,
+  beamT:0
+ };
+}
+
+function enemyChallengeState({
+ wave=0,
+ side=0,
+ slot=0,
+ row=0,
+ group=0,
+ sweep=0,
+ upperBandY=0
+}={}){
+ return {
+  ch:1,
+  wave,
+  side,
+  slot,
+  row,
+  group,
+  sweep,
+  ub:0,
+  upperBandY
+ };
+}
+
+function makePackEnemyState({
+ gamePack=auroraGamePack(),
+ type,
+ row,
+ column,
+ tx,
+ ty,
+ profile=stageBandProfile(S.stage,S.challenge),
+ hp,
+ max,
+ spawn
+}){
+ const boss=type==='boss';
+ return Object.assign(
+  enemyCoreState({
+   id:(randUnit()*1e9)|0,
+   type,
+   family:enemyFamilyForType(profile,type),
+   band:profile.name,
+   row,
+   column,
+   hp:hp==null?(boss?2:1):hp,
+   max:max==null?(boss?2:1):max,
+   x:PLAY_W/2+rnd(180,-180),
+   y:-80-row*16,
+   tx,
+   ty,
+   spawn:spawn==null?(row*.06+column*.02):spawn
+  }),
+  enemyEscortState(gamePack),
+  enemyCaptureState(gamePack)
+ );
+}
+
+function makePackChallengeEnemyState({
+ gamePack=auroraGamePack(),
+ type,
+ lane,
+ profile=stageBandProfile(S.stage,1),
+ x,
+ y,
+ wave=0,
+ side=0,
+ slot=0,
+ row=0,
+ group=0,
+ sweep=0,
+ upperBandY=PLAY_H*.5,
+ spawn=0
+}){
+ const base=makePackEnemyState({
+  gamePack,
+  type,
+  row:0,
+  column:lane,
+  tx:0,
+  ty:0,
+  profile,
+  hp:1,
+  max:1,
+  spawn
+ });
+ base.x=x;
+ base.y=y;
+ base.tx=0;
+ base.ty=0;
+ base.form=1;
+ base.dive=9;
+ base.cool=99;
+ return Object.assign(base,enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY}));
+}

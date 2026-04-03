@@ -46,10 +46,20 @@ function releaseCapturedFighter(e){
 }
 
 function spawnHostileCapturedFighter(e){
- const rogue=makeEnemy('rogue',e.r,e.c,e.tx,e.ty,S.profile);
+ const rogue=makePackEnemyState({
+  gamePack:auroraGamePack(),
+  type:'rogue',
+  row:e.r,
+  column:e.c,
+  tx:e.tx,
+  ty:e.ty,
+  profile:S.profile,
+  hp:1,
+  max:1,
+  spawn:0
+ });
  const carryPos=carriedFighterTarget(e);
  rogue.form=1;
- rogue.spawn=0;
  rogue.en=3;
  rogue.x=carryPos?.x??e.tx;
  rogue.y=carryPos?.y??e.ty;
