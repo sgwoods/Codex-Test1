@@ -182,6 +182,9 @@ The intended harness families are:
 - game-pack harnesses
   - prove Aurora or future sibling gameplay behavior such as formations, dives,
     capture/rescue, score rules, and stage progression
+  - include role/persona outcome-distribution checks so we can catch
+    unintended difficulty or timing drift even when the structural rules still
+    look valid
 - seam / contract harnesses
   - prove that the boundary between Platinum and a `gamePack` is stable
   - these should validate:
@@ -220,6 +223,10 @@ Examples:
 
 - a pack without `usesCaptureRescue` should not require `carry`, `beam`, or
   related entity fields
+- a challenge-stage layout change should be caught both by:
+  - a seam harness that checks the planned wave composition and cadence
+  - and a game-pack outcome harness that compares persona success/failure
+    distribution against the known-good baseline
 - a pack without challenge stages should still boot, render, and score
 - shell/front-door surfaces should render from pack-owned copy instead of
   Aurora literals

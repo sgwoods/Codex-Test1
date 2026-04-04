@@ -30,6 +30,7 @@
     "harness:tune": "node tools/harness/tuning-report.js",
     "harness:check:challenge-collision": "node tools/harness/check-challenge-collision.js",
     "harness:check:challenge-layout": "node tools/harness/check-challenge-layout-sequence.js",
+    "harness:check:challenge-outcomes": "node tools/harness/check-challenge-outcome-distribution.js",
     "harness:check:capture-escape": "node tools/harness/check-capture-escape.js",
     "harness:check:capture-shot-window": "node tools/harness/check-capture-shot-window.js",
     "harness:check:boss-first-hit": "node tools/harness/check-boss-first-hit-visual.js",
