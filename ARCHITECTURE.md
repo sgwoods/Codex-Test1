@@ -52,8 +52,15 @@ This helps keep the language clear:
   - the shared platform, shell, services, and pack-hosting runtime
 - `Aurora Galactica`
   - the first fully playable game pack running on Platinum
-- future sibling packs such as `Galaxian Signal`
+- future sibling packs such as `Galaxy Guardians`
   - additional game packs hosted by Platinum
+
+Naming rule for sibling planning:
+
+- `Galaxian`
+  - the original game/reference lineage
+- `Galaxy Guardians`
+  - the planned future Platinum game title inspired in part by that lineage
 
 Where older Aurora-branded storage keys, debug globals, or compatibility shims
 still exist, they should be treated as transitional implementation details, not

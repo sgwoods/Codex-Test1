@@ -13,6 +13,8 @@ This directory stores durable reference material used to tune the game toward or
 - `analyses/challenge-stage-reference/`: reusable challenge-stage video notes
   covering non-firing bonus behavior, moving starfield, reserve-ships drawer,
   and perfect-result presentation
+- `analyses/galaxian-mechanics/`: early sibling-pack mechanics archive for
+  future Platinum Galaxian-family work
 
 ## Storage Policy
 

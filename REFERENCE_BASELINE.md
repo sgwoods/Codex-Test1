@@ -164,6 +164,24 @@ Important near-term exception:
   - borrow ideas about structure or presentation when useful
   - do not treat them as fidelity evidence
 
+### Future Galaxian Sibling Archive
+
+- This project now also keeps a growing sibling-reference archive for future
+  Platinum `Galaxian`-family work:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaxian-mechanics/README.md`
+- Naming rule:
+  - `Galaxian`
+    - the original reference lineage
+  - `Galaxy Guardians`
+    - the future game project that may draw from those references
+- Current status:
+  - planning-grade developer reference
+  - not yet canonical arcade-rule evidence
+- Use case:
+  - collect likely scoring, dive, escort, and formation rules for the future
+    sibling pack
+  - clearly mark what still needs promotion to stronger source-backed evidence
+
 ## What To Add Next
 
 High-value future baseline additions:

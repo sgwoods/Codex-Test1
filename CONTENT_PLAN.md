@@ -13,6 +13,7 @@ This currently covers:
 - functionality reminders
 - curated quote moments
 - future game-picker copy and game descriptions
+- short game-information pages for individual game projects
 
 ## Curated Quote System
 
@@ -172,6 +173,17 @@ Each `gamePack` should own:
 - whether quotes are active during that game
 - branded copy around those quotes
 - preview copy and preview art for non-playable future titles
+- its own short game-information page copy and supporting art
+
+Naming rule for future game-information pages:
+
+- `Aurora Galactica`
+  - the Galaga-family shipped game on Platinum
+- `Galaxy Guardians`
+  - the future sibling project
+- `Galaxian`
+  - reference lineage and mechanics source, not the same thing as the future
+    game title
 
 ## Aurora Notes
 
