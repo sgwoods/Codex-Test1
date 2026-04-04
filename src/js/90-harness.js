@@ -389,6 +389,7 @@ window.__galagaHarness__={
    side:e.side,
    spawn:+(+e.spawn||0).toFixed(2),
    spawnPlan:+(+e.spawnPlan||0).toFixed(2),
+   tm:+(+e.tm||0).toFixed(3),
    x:+(+e.x||0).toFixed(2),
    y:+(+e.y||0).toFixed(2)
   }))

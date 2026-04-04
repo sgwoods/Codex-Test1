@@ -6,35 +6,35 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const HARNESS = path.join(__dirname, 'run-gameplay.js');
 const OUT = path.join(ROOT, 'harness-artifacts', 'checks', 'challenge-outcome-distribution');
 
-// Frozen from the known-good persona challenge batch:
-// /Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/batch-personas-2026-03-23T18-08-42-722Z
+// Frozen from the shipped 1.0.2 production source baseline:
+// commit 831a2c6, sampled on 2026-04-04 via the detached baseline worktree.
 const BASELINE = Object.freeze({
   novice: Object.freeze({
     seed: 3101,
     endingStage: 4,
-    lives: 3,
-    shipLost: 0,
-    challengeShipLosses: 0,
-    challengeHitRate: 0.725,
-    challengeDuration: 12.662
+    lives: 2,
+    shipLost: 1,
+    challengeShipLosses: 1,
+    challengeHitRate: 0.475,
+    challengeDuration: 12.7
   }),
   advanced: Object.freeze({
     seed: 3201,
     endingStage: 4,
-    lives: 2,
-    shipLost: 1,
+    lives: 3,
+    shipLost: 0,
     challengeShipLosses: 0,
     challengeHitRate: 1,
-    challengeDuration: 11.01
+    challengeDuration: 11.377
   }),
   expert: Object.freeze({
     seed: 3301,
     endingStage: 4,
-    lives: 2,
-    shipLost: 1,
+    lives: 3,
+    shipLost: 0,
     challengeShipLosses: 0,
     challengeHitRate: 1,
-    challengeDuration: 11.071
+    challengeDuration: 11.238
   })
 });
 

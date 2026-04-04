@@ -227,6 +227,8 @@ Examples:
   - a seam harness that checks the planned wave composition and cadence
   - and a game-pack outcome harness that compares persona success/failure
     distribution against the known-good baseline
+- a challenge-stage motion change should also be caught by a motion-profile
+  harness that samples fixed wave positions against the shipped baseline
 - a pack without challenge stages should still boot, render, and score
 - shell/front-door surfaces should render from pack-owned copy instead of
   Aurora literals

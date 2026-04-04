@@ -164,24 +164,41 @@ function makePackChallengeEnemyState({
  upperBandY=PLAY_H*.5,
  spawn=0
 }){
- const base=makePackEnemyState({
-  gamePack,
-  type,
-  row:0,
-  column:lane,
-  tx:0,
-  ty:0,
-  profile,
+ return Object.assign({
+  id:(randUnit()*1e9)|0,
+  t:type,
+  fam:profile.challengeFamily,
+  band:profile.name,
+  r:0,
+  c:lane,
   hp:1,
   max:1,
-  spawn
- });
- base.x=x;
- base.y=y;
- base.tx=0;
- base.ty=0;
- base.form=1;
- base.dive=9;
- base.cool=99;
- return Object.assign(base,enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY}));
+  x,
+  y,
+  tx:0,
+  ty:0,
+  form:1,
+  dive:9,
+  vx:0,
+  vy:0,
+  tm:0,
+  ph:rnd(8),
+  cool:99,
+  carry:0,
+  beam:0,
+  beamT:0,
+  targetX:0,
+  targetY:0,
+  shot:0,
+  spawn,
+  spawnPlan:spawn,
+  en:0,
+  lead:null,
+  off:0,
+  esc:0,
+  squadId:0,
+  miss:0,
+  low:0,
+  hitT:0
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY}));
 }
