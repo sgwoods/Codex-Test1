@@ -355,6 +355,25 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ formationState(){
+  const active=S.e.filter(e=>e.hp>0&&!e.ch);
+  return {
+   stage:S.stage,
+   challenge:!!S.challenge,
+   layout:typeof formationLayout==='function'?formationLayout(S.stage):null,
+   targets:active.map(e=>({
+    id:e.id,
+    type:e.t,
+    row:e.r,
+    column:e.c,
+    tx:+(+e.tx||0).toFixed(2),
+    ty:+(+e.ty||0).toFixed(2),
+    x:+(+e.x||0).toFixed(2),
+    y:+(+e.y||0).toFixed(2),
+    spawn:+(+e.spawn||0).toFixed(2)
+   }))
+  };
+ },
  uiState(){
   return {
    started: !!started,

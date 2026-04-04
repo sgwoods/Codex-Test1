@@ -16,7 +16,7 @@ const AURORA_STAGE_THEME_PROGRESSION=Object.freeze([
 ]);
 
 const AURORA_FORMATION_LAYOUTS=Object.freeze([
- {fromStage:1,gx:VIS.gx,gy:VIS.gy,oy:VIS.formTop},
+ {fromStage:1,gx:17,gy:14,oy:28},
  {fromStage:4,gx:16.4,gy:13.4,oy:28},
  {fromStage:6,gx:15.8,gy:12.9,oy:27},
  {fromStage:8,gx:15.2,gy:12.4,oy:27}
