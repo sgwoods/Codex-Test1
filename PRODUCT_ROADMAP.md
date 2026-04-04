@@ -5,11 +5,41 @@
 - Current line:
   - `1.1.x` planning
 - Current phase:
-  - `post-launch stabilization and platform planning`
+  - `post-launch stabilization and Platinum rerelease planning`
 - Goal of this phase:
-  - keep the shipped four-stage arcade slice stable while turning the broader
-    identity, admin, and media work into a staged `1.1.x` / `1.2.x` platform
-    program
+  - keep the shipped four-stage Aurora arcade slice stable while turning the
+    broader identity, admin, and media work into a staged `1.1.x` / `1.2.x`
+    Platinum platform program
+
+## Immediate Platform Milestone: Aurora Rerelease On Platinum
+
+Target outcome:
+
+- Aurora remains the same shipped game in play feel and trust terms
+- Platinum becomes visible as the host platform rather than only an internal
+  architecture name
+- the shell can advertise future games without pretending they are playable
+
+Definition:
+
+- rerelease the existing Aurora build path with Platinum host framing
+- keep the shipped `1.0.2` gameplay contract intact
+- add a platform-owned Platinum splash surface
+- use the game picker to show a dismissable `Coming Soon` splash for
+  `Galaxy Guardians`
+
+Key issue groups:
+
+- platform shell identity and copy cleanup
+- picker / splash / notice surfaces
+- Aurora-on-Platinum proof harnesses
+- public-facing wording that distinguishes host platform vs active game
+- `#140` bonus-stage numbering so challenge stages read like bonus
+  opportunities instead of ordinary numbered progression
+
+Suggested versioning:
+
+- `1.1.x`
 
 ## Immediate Target: 1.0 Four-Stage Slice
 
@@ -181,6 +211,7 @@ Target outcome:
 - runtime, shell, replay/logging, and service boundaries become explicit
 - future extraction work can move modules without redesigning gameplay at the
   same time
+- Aurora can be described and shipped clearly as a Platinum-hosted game pack
 
 Key issue groups:
 
@@ -200,6 +231,8 @@ Target outcome:
 - Aurora keeps shipping as the first game pack on a more stable shared runtime
 - replay, shell, harness, input, build, and logging systems become less one-off
 - similar cabinet shooters can reuse mature systems with less churn
+- future-title previews can exist in the shell before their gameplay slices are
+  ready
 
 Key issue groups:
 
@@ -236,6 +269,13 @@ Key issue groups:
 Suggested versioning:
 
 - `1.2.x`
+
+## Current Next-Step Read
+
+1. finish the Aurora rerelease framing on Platinum
+2. keep Aurora gameplay baseline aligned with shipped `1.0.2`
+3. continue separating platform harnesses from game-pack harnesses
+4. only then begin the first dev-playable sibling gameplay slice
 
 ## Milestone J: Shared Pilot Media And Publishing
 

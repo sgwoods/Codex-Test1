@@ -12,6 +12,34 @@ Related planning artifact:
 - architect review response baseline:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md`
 
+## Current Migration State
+
+The architecture migration is now in the middle phase, not the speculative
+phase.
+
+What is already true:
+
+- Platinum exists as the named host platform
+- Aurora is the first fully playable game pack on Platinum in dev
+- the selected-pack path, picker shell, shell themes, and platform-only boot
+  proof harness are all real
+- major gameplay, render, replay, service, and entity seams have already been
+  extracted into explicit modules
+
+What is not done yet:
+
+- public rerelease framing still needs to make Platinum versus Aurora clearer
+- some shell/bootstrap/debug/storage compatibility shims are still Aurora-named
+- future-game shell previews still need more intentional splash/coming-soon
+  treatment
+
+This means the current work is no longer "extract modules until something looks
+like a platform." The current work is:
+
+1. finish the Aurora-on-Platinum rerelease baseline
+2. keep Aurora behavior aligned with the shipped `1.0.2` contract
+3. only then start the first truly playable sibling game slice
+
 ## Platform Naming
 
 The shared cabinet-shooter platform should now be referred to as:
@@ -562,6 +590,12 @@ Current status:
 That means Aurora is now dev-playable on Platinum through the selected-pack
 path, not just partially hosted by platform-oriented helpers.
 
+The next public-facing milestone should be narrower than "new game gameplay":
+
+- rerelease Aurora clearly as a Platinum-hosted title
+- preserve the existing Aurora play contract
+- let the picker preview future titles with explicit non-playable splash states
+
 That front-door path is now beginning to move into pack ownership too:
 
 - the installed pack now owns:
@@ -589,6 +623,16 @@ This keeps the next future steps aligned:
 - game picker
 - one-time notices
 - curated quotes
+
+Near-term shell requirement for the rerelease milestone:
+
+- the shell should expose a Platinum identity button with hover copy:
+  - `Platinum Arcade Game Platform`
+- clicking it should open a dismissable Platinum splash in the play area
+- the game picker should support a dismissable `Coming Soon` splash for future
+  titles rather than pretending they already boot
+- the first named future-title preview should be:
+  - `Galaxy Guardians`
 
 All of those should be platform-hosted surfaces with pack-owned branding and
 copy rather than Aurora-only literals.
@@ -694,6 +738,22 @@ Aurora counts as "running on the platform" when:
 
 Once that is true, a minimal `Galaxian` gameplay slice becomes the right next
 proof instead of a premature mixed experiment.
+
+### Post-Rerelease Next Steps
+
+Once Aurora is rereleased cleanly on Platinum, the next sensible order is:
+
+1. fix standing Aurora gameplay/product bugs without platform ambiguity:
+   - bonus-stage numbering
+   - extra-ship visibility/audio
+   - dual-ship last-life edge cases
+2. finish the Platinum shell surfaces:
+   - notices
+   - approved quote rotation
+   - AI quote viewer
+   - future-game coming-soon splash surfaces
+3. then start the first dev-playable sibling slice using the established
+   harness separation model
 
 ## Reference Mechanics Lens
 

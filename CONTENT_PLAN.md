@@ -8,6 +8,7 @@ or pack-owned without being buried directly in gameplay logic.
 This currently covers:
 
 - front-door slash / splash presentation
+- platform identity splash surfaces
 - one-time notices and release explanations
 - functionality reminders
 - curated quote moments
@@ -65,6 +66,12 @@ The platform should eventually support these quote surfaces:
 - one-time post-refresh notice panel
 - game-picker descriptive copy
 
+The platform should also support these non-quote shell content surfaces:
+
+- a Platinum identity splash opened from a dedicated shell button
+- future-title preview splashes shown from the game picker
+- dismissable `Coming Soon` title cards for non-playable packs
+
 Near-term Platinum shell quote rules:
 
 - do not mix approved AI dystopian quotes into the primary splash-title block
@@ -80,6 +87,17 @@ Near-term Platinum shell quote rules:
   other info panels
 - the `AI` panel should support scrolling through approved quotes and include a
   link that opens the Sci-Fi AI Dystopian project page in a new tab
+
+Near-term Platinum shell splash rules:
+
+- the shell should expose a Platinum identity button with hover copy:
+  - `Platinum Arcade Game Platform`
+- clicking it should open a centered Platinum splash with dismiss `X`
+- future non-playable game picks should open a dismissable splash instead of
+  pretending to start gameplay
+- the first named future-title preview should be:
+  - `Galaxy Guardians`
+- that preview should render under a visible `Coming Soon` banner
 
 Quotes should not appear:
 
@@ -144,6 +162,8 @@ The shared platform should own:
 - quote eligibility filtering
 - surface placement rules
 - dismissal / cooldown behavior
+- platform identity splash surfaces
+- future-title preview shell surfaces
 
 Each `gamePack` should own:
 
@@ -151,6 +171,7 @@ Each `gamePack` should own:
 - which surfaces are allowed
 - whether quotes are active during that game
 - branded copy around those quotes
+- preview copy and preview art for non-playable future titles
 
 ## Aurora Notes
 

@@ -2,6 +2,8 @@
 
 ## Current State
 
+- `Platinum` now names the shared arcade-game platform
+- `Aurora Galactica` is the first fully playable game pack running on Platinum
 - Browser-based fixed-screen arcade shooter built from readable source modules and served from `dist/production/index.html`
 - Build identity is now part of the product:
   - prerelease SemVer in `package.json` for the pre-production engineering line
@@ -28,6 +30,9 @@
 - this repo updates its canonical public status manifest in `data/projects/aurora-galactica.json`
 - and keeps the legacy compatibility alias in `data/projects/codex-test1.json`
   - this repo no longer rewrites the shared public homepage directly
+- Aurora is now dev-playable through the explicit Platinum selected-pack path
+- Platform-only harness coverage now exists alongside game-pack and seam
+  harnesses
 
 ## Working Assumptions
 
@@ -41,6 +46,11 @@
 
 ## Known Problems
 
+- Public production still presents Aurora as the whole product rather than as
+  the first shipped game on Platinum
+- `#140` challenge stages still count as numbered stages in the current Aurora
+  HUD flow even though they should behave like bonus opportunities in the
+  Galaga model
 - We now depend on a valid local `WEB3FORMS_ACCESS_KEY` for direct feedback delivery
 - Stage 4 remains the main gameplay balance problem for the four-stage `1.0` slice
 - Stage 4 failures are now better localized:
@@ -185,14 +195,14 @@ needed to support this smaller shipped slice.
 
 ### Post-Launch View
 
-`1.0.1` is now live.
+`1.0.2` is now live.
 
 Current release checkpoint:
 
 - beta:
-  - `1.0.1-beta.1+build.288.sha.14398e9.beta`
+  - `1.0.2-beta.1+build.290.sha.831a2c6.beta`
 - production:
-  - `1.0.1+build.288.sha.14398e9`
+  - `1.0.2+build.290.sha.831a2c6`
 - production promotion path was used successfully:
   - `publish:beta -> approve:beta -> publish:production`
 - final release-readiness signoff was completed
@@ -205,9 +215,10 @@ Current release checkpoint:
 
 Current coding priority:
 
-1. keep `1.0.1` stable in production
-2. use `1.1.x` for architectural stabilization and early shared-runtime extraction
-3. use `1.2.x` for platform-owned services and operator-facing infrastructure
+1. keep Aurora `1.0.2` stable in production
+2. complete the Platinum rerelease milestone for the existing Aurora game
+3. use `1.1.x` for architectural stabilization and early shared-runtime extraction
+4. use `1.2.x` for platform-owned services and operator-facing infrastructure
 
 What changed since the last full review:
 
@@ -254,6 +265,33 @@ external playtesting or operational stability:
 
 ### Structured `1.x` Release Path
 
+#### Immediate Platinum Milestone: Aurora Rerelease On Platinum
+
+Primary goal:
+
+- rerelease the existing Aurora game explicitly as a Platinum-hosted title
+  without changing the shipped `1.0.2` gameplay contract
+
+Execution order:
+
+1. keep Aurora behavior matched to the shipped `1.0.2` baseline
+2. finish clarifying public shell language so Platinum is the host platform and
+   Aurora is the current game pack
+3. make the game-picker path feel intentional for the rerelease:
+   - Platinum branding button in the shell
+   - dismissable Platinum splash surface
+   - game-picker preview with a dismissable `Coming Soon` splash for
+     `Galaxy Guardians`
+4. only after the rerelease, start dev-playable sibling gameplay work
+
+Definition of success:
+
+- Aurora still plays like the shipped game
+- Platinum is visible as the host platform rather than hidden implementation
+  terminology
+- the picker can advertise future games without implying they are already
+  playable
+
 #### `1.1.x`: Architectural Stabilization And Shared Runtime Extraction
 
 Primary goal:
@@ -286,6 +324,8 @@ Definition of success:
 - Aurora still ships reliably
 - replay, shell, input, harness, and build systems are less one-off
 - shared module boundaries are real enough to support a sibling shooter later
+- Aurora can be rereleased publicly as a Platinum-hosted title without losing
+  player trust
 
 #### `1.2.x`: Shared Services And Operator Infrastructure
 
@@ -332,6 +372,24 @@ Definition of success:
 - Aurora runs cleanly on the shared runtime
 - one Galaxian-like sibling can reuse the runtime without changing its core
 - media and replay publishing sit on top of stable identity and service seams
+
+### Current Next Steps
+
+1. finish the Platinum-vs-Aurora documentation cleanup across public-facing and
+   planning docs
+2. ship the Platinum rerelease milestone for Aurora with clearer shell
+   branding, Platinum splash, and future-game preview behavior
+3. tag and continue strengthening harness coverage by family:
+   - platform-only
+   - game-pack
+   - seam / contract
+   - migration / compatibility
+4. return to game development after the rerelease baseline feels trustworthy,
+   starting with:
+   - standing Aurora gameplay bugs such as `#140`
+   - extra-ship visibility/audio
+   - dual-ship survival edge cases
+   - only then the first playable sibling slice
 
 ### Track A. Autonomous Original-Galaga Baseline
 
