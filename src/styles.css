@@ -215,7 +215,8 @@ canvas{display:block;width:100vw;height:100vh}
 #helpHead h2{margin:0;font-size:20px;letter-spacing:.03em}
 #helpSubtitle{margin-top:4px;font-size:12px;line-height:1.3;color:#bfefff}
 #helpClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
-#helpTabs{display:flex;gap:8px}
+#helpToolbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#helpTabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 #helpTabs button{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;padding:8px 12px;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer;letter-spacing:.05em}
 #helpTabs button[aria-selected="true"]{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.72);color:#ffe39a}
 #helpPanels{min-height:0;flex:1}
@@ -230,7 +231,7 @@ canvas{display:block;width:100vw;height:100vh}
 .controlRow{display:contents}
 .controlKeys{color:#7ef2ff;font:700 13px/1.3 "Courier New",Consolas,monospace}
 .controlAction{color:#f4f7ff;font-size:13px;line-height:1.35}
-#helpGuideActions{display:flex;justify-content:flex-end}
+#helpGuideActions{display:flex;justify-content:flex-end;align-items:center;flex:0 0 auto}
 #helpGuideActions button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:8px 13px;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #helpGuideFrame{width:100%;height:100%;min-height:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14}
 #feedbackPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
@@ -461,6 +462,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #helpPanel{height:min(84vh,760px)}
  #controlsLegend{grid-template-columns:1fr}
  #controlsIndex{grid-template-columns:1fr}
+ #helpToolbar{flex-direction:column;align-items:flex-start}
  #helpTabs{flex-wrap:wrap}
 }
 #accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel{max-height:var(--overlay-max-height);overflow:auto}

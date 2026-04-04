@@ -1092,6 +1092,19 @@ Canonical quote/content ingest rule:
   - `data/candidates/`
   - `data/discovery/`
 
+Near-term Platinum shell quote rules:
+
+- do not mix approved AI dystopian quotes directly into the main splash-title
+  treatment
+- rotate a single approved quote through wait mode before the high-score panel
+  rotation resumes
+- show a single approved quote during pause, beneath the `Press P to resume`
+  guidance with enough spacing to keep the resume prompt readable
+- add a lower-left dock `AI` button that opens a dedicated quote-browser panel
+- the `AI` panel should use the same shell-panel format as guide/scores and
+  support scrolling plus a link out to the Sci-Fi AI Dystopian project page in
+  a new tab
+
 ## First Game-Pack Shape
 
 The first concrete `gamePack` should be Aurora itself, expressed in a way that

@@ -106,9 +106,14 @@
       </div>
       <button type="button" id="helpClose" aria-label="Close reference">×</button>
     </div>
-    <div id="helpTabs" role="tablist" aria-label="Reference tabs">
-      <button type="button" id="helpTabControls" data-help-tab="controls" aria-selected="true" aria-controls="helpControlsPanel">Controls</button>
-      <button type="button" id="helpTabGuide" data-help-tab="guide" aria-selected="false" aria-controls="helpGuidePanel">Guide</button>
+    <div id="helpToolbar">
+      <div id="helpTabs" role="tablist" aria-label="Reference tabs">
+        <button type="button" id="helpTabControls" data-help-tab="controls" aria-selected="true" aria-controls="helpControlsPanel">Controls</button>
+        <button type="button" id="helpTabGuide" data-help-tab="guide" aria-selected="false" aria-controls="helpGuidePanel">Guide</button>
+      </div>
+      <div id="helpGuideActions" hidden>
+        <button type="button" id="helpOpenWindowBtn">Open in New Window</button>
+      </div>
     </div>
     <div id="helpPanels">
       <section id="helpControlsPanel" class="helpSection visible" data-help-panel="controls">
@@ -141,9 +146,6 @@
         </div>
       </section>
       <section id="helpGuidePanel" class="helpSection" data-help-panel="guide" hidden>
-        <div id="helpGuideActions">
-          <button type="button" id="helpOpenWindowBtn">Open in New Window</button>
-        </div>
         <iframe id="helpGuideFrame" title="Active game guide" loading="lazy"></iframe>
       </section>
     </div>

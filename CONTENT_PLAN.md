@@ -65,6 +65,22 @@ The platform should eventually support these quote surfaces:
 - one-time post-refresh notice panel
 - game-picker descriptive copy
 
+Near-term Platinum shell quote rules:
+
+- do not mix approved AI dystopian quotes into the primary splash-title block
+- instead, rotate one approved quote during wait mode before the high-score
+  rotation resumes
+- include citation details with the quote:
+  - speaker or author
+  - work title
+  - year when available
+- show one approved quote during pause with breathing room beneath the
+  `Press P to resume` guidance
+- add a lower-left dock `AI` button that opens a shell panel matching the
+  other info panels
+- the `AI` panel should support scrolling through approved quotes and include a
+  link that opens the Sci-Fi AI Dystopian project page in a new tab
+
 Quotes should not appear:
 
 - during dense active combat

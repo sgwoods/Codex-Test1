@@ -19,11 +19,7 @@ function inside(frame, rect, tolerance = TOLERANCE){
 }
 
 async function inspectSurface(page, spec){
-  await page.evaluate(selector => {
-    const el = document.querySelector(selector);
-    if(!el) throw new Error(`missing open control ${selector}`);
-    el.click();
-  }, spec.open);
+  await page.locator(spec.open).click();
   await page.waitForTimeout(240);
   try{
     await page.waitForFunction(current => {
@@ -111,11 +107,7 @@ async function inspectSurface(page, spec){
     fail(`${spec.name} popup did not open on the ${spec.expectedHelpTab} tab`, result);
   }
 
-  await page.evaluate(selector => {
-    const el = document.querySelector(selector);
-    if(!el) throw new Error(`missing close control ${selector}`);
-    el.click();
-  }, spec.close);
+  await page.locator(spec.close).click();
   await page.waitForTimeout(180);
   const closed = await page.evaluate(selector => {
     const panel = document.querySelector(selector);
@@ -133,6 +125,13 @@ async function inspectSurface(page, spec){
 async function main(){
   const specs = [
     {
+      name: 'game-picker',
+      open: '#gamePickerDockBtn',
+      panel: '#gamePickerPanel',
+      close: '#gamePickerClose',
+      closedSelector: '#gamePickerModal'
+    },
+    {
       name: 'settings',
       open: '#settingsBtn',
       panel: '#settingsPanel',
@@ -143,6 +142,13 @@ async function main(){
       open: '#accountDockBtn',
       panel: '#accountPanel',
       close: '#accountPanelClose'
+    },
+    {
+      name: 'movie',
+      open: '#movieDockBtn',
+      panel: '#moviePanel',
+      close: '#moviePanelClose',
+      closedSelector: '#movieModal'
     },
     {
       name: 'scores',

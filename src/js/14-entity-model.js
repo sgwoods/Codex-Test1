@@ -39,6 +39,7 @@ function enemyCoreState({
   targetY:0,
   shot:0,
   spawn,
+  spawnPlan:spawn,
   en:0,
   ch:0,
   miss:0,

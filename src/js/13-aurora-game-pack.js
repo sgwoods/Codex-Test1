@@ -87,7 +87,7 @@ const AURORA_CHALLENGE_LAYOUT=Object.freeze({
  rowSpacingY:8,
  waveDelay:1.52,
  slotDelay:.18,
- laneTypes:Object.freeze(['boss','boss','but','bee','but','bee','but','bee'])
+ laneTypes:Object.freeze(['boss','boss','but','bee','but','but','bee','but'])
 });
 
 const AURORA_SCORING_RULES=Object.freeze({

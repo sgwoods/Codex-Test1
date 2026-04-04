@@ -30,6 +30,7 @@ const statusPanels=document.getElementById('statusPanels');
 const settingsRuntime=document.getElementById('settingsRuntime');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
+const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -557,6 +558,7 @@ function syncHelpUi(){
   panel.hidden=!active;
   panel.classList.toggle('visible',active);
  });
+ if(helpGuideActions)helpGuideActions.hidden=!(helpOpen&&helpMode==='guide');
  if(helpGuideFrame&&helpMode==='guide'&&!helpGuideFrame.src)helpGuideFrame.src=playersGuideUrl();
 }
 function syncTestUi(){

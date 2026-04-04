@@ -374,6 +374,26 @@ window.__galagaHarness__={
    }))
   };
  },
+ challengeFormationState(){
+  const active=S.e.filter(e=>e.hp>0&&e.ch).sort((a,b)=>(a.wave-b.wave)||(a.c-b.c));
+  return {
+   stage:S.stage,
+   challenge:!!S.challenge,
+   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout():null,
+  enemies:active.map(e=>({
+   id:e.id,
+   type:e.t,
+   lane:e.c,
+   wave:e.wave,
+   row:e.row,
+   side:e.side,
+   spawn:+(+e.spawn||0).toFixed(2),
+   spawnPlan:+(+e.spawnPlan||0).toFixed(2),
+   x:+(+e.x||0).toFixed(2),
+   y:+(+e.y||0).toFixed(2)
+  }))
+ };
+},
  uiState(){
   return {
    started: !!started,
