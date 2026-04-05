@@ -32,6 +32,19 @@ async function main(){
       '#gamePickerClose'
     );
 
+    const platform = await expectOpen(
+      page,
+      '#platformSplashBtn',
+      () => {
+        const modal = document.querySelector('#platformSplashModal');
+        return modal && modal.classList.contains('open') ? {
+          expanded: document.querySelector('#platformSplashBtn')?.getAttribute('aria-expanded') || '',
+          title: document.querySelector('#platformSplashTitle')?.textContent || ''
+        } : null;
+      },
+      '#platformSplashClose'
+    );
+
     const pilot = await expectOpen(
       page,
       '#accountDockBtn',
@@ -155,6 +168,7 @@ async function main(){
 
     return {
       gamePicker,
+      platform,
       pilot,
       guide,
       controls,
@@ -168,6 +182,7 @@ async function main(){
   });
 
   if(result.gamePicker.expanded !== 'true') fail('game picker dock button did not open via a real click', result);
+  if(result.platform.expanded !== 'true') fail('Platinum dock button did not open via a real click', result);
   if(result.pilot.expanded !== 'true') fail('pilot dock button did not open via a real click', result);
   if(result.guide.expanded !== 'true' || result.guide.activeTab !== 'guide' || !result.guide.actionVisible){
     fail('guide dock button did not open the guide tab correctly', result);

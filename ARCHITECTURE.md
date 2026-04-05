@@ -9,6 +9,8 @@ Related planning artifact:
   - `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
 - curated splash/quote/content planning:
   - `/Users/stevenwoods/Documents/Codex-Test1/CONTENT_PLAN.md`
+- Aurora-specific game designer inventory:
+  - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
 - architect review response baseline:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md`
 
@@ -39,6 +41,14 @@ like a platform." The current work is:
 1. finish the Aurora-on-Platinum rerelease baseline
 2. keep Aurora behavior aligned with the shipped `1.0.2` contract
 3. only then start the first truly playable sibling game slice
+
+The next game-owned design phase should use:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
+
+as the planning baseline for expanding Aurora stages, challenge-stage themes,
+boss personality, and game-owned content definitions without re-entangling
+those decisions with Platinum core platform work.
 
 ## Platform Naming
 

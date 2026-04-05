@@ -4,6 +4,10 @@ const renderHelpModal=document.getElementById('helpModal');
 const renderHelpPanel=document.getElementById('helpPanel');
 const renderFeedbackModal=document.getElementById('feedbackModal');
 const renderFeedbackPanel=document.getElementById('feedbackPanel');
+const renderPlatformSplashModal=document.getElementById('platformSplashModal');
+const renderPlatformSplashPanel=document.getElementById('platformSplashPanel');
+const renderGamePreviewModal=document.getElementById('gamePreviewModal');
+const renderGamePreviewPanel=document.getElementById('gamePreviewPanel');
 const renderSettingsPanel=document.getElementById('settingsPanel');
 
 const DISPLAY_SHELL=Object.freeze({
@@ -248,6 +252,26 @@ function syncCabinetShellLayout({
  if(renderFeedbackPanel){
   renderFeedbackPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),720)}px`;
   renderFeedbackPanel.style.maxHeight=`${Math.max(220,Math.min(Math.floor(viewH-24),720))}px`;
+ }
+ if(renderPlatformSplashModal){
+  renderPlatformSplashModal.style.left=`${ox}px`;
+  renderPlatformSplashModal.style.top=`${oy}px`;
+  renderPlatformSplashModal.style.width=`${viewW}px`;
+  renderPlatformSplashModal.style.height=`${viewH}px`;
+ }
+ if(renderPlatformSplashPanel){
+  renderPlatformSplashPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),760)}px`;
+  renderPlatformSplashPanel.style.maxHeight=`${Math.max(240,Math.min(Math.floor(viewH-24),720))}px`;
+ }
+ if(renderGamePreviewModal){
+  renderGamePreviewModal.style.left=`${ox}px`;
+  renderGamePreviewModal.style.top=`${oy}px`;
+  renderGamePreviewModal.style.width=`${viewW}px`;
+  renderGamePreviewModal.style.height=`${viewH}px`;
+ }
+ if(renderGamePreviewPanel){
+  renderGamePreviewPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),780)}px`;
+  renderGamePreviewPanel.style.maxHeight=`${Math.max(240,Math.min(Math.floor(viewH-24),720))}px`;
  }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));

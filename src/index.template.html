@@ -29,6 +29,12 @@
       <span id="gamePickerDockStatus">shell ready</span>
     </button>
   </div>
+  <div id="platformDock">
+    <button id="platformSplashBtn" type="button" aria-expanded="false" aria-controls="platformSplashModal" aria-label="Open Platinum platform splash" title="Platinum Arcade Game Platform">
+      <img id="platformSplashDockIcon" src="assets/platinum-platform-mark.png" alt="" aria-hidden="true" />
+      <span id="platformSplashDockLabel">PLATINUM</span>
+    </button>
+  </div>
 </div>
 <div id="cabinetRightFrame" aria-hidden="true">
   <div id="statusDock">
@@ -191,6 +197,44 @@
     <div id="gamePickerCurrent"></div>
     <div id="gamePickerList"></div>
     <div id="gamePickerStatus"></div>
+  </div>
+</div>
+<div id="platformSplashModal" aria-hidden="true">
+  <div id="platformSplashPanel" role="dialog" aria-modal="true" aria-labelledby="platformSplashTitle">
+    <div id="platformSplashHead" class="framePopupHead">
+      <div>
+        <h2 id="platformSplashTitle">PLATINUM</h2>
+        <div id="platformSplashSubtitle" class="framePopupSub">ARCADE GAME PLATFORM</div>
+      </div>
+      <button type="button" id="platformSplashClose" aria-label="Close Platinum platform splash">×</button>
+    </div>
+    <div id="platformSplashBody">
+      <img id="platformSplashImage" src="assets/platinum-platform-mark.png" alt="Platinum platform mark" />
+      <div id="platformSplashCopy">
+        <span class="platformSplashEyebrow">HOST PLATFORM</span>
+        <p>Platinum is the shared cabinet shell, runtime, services, and harness boundary that now hosts <strong>Aurora Galactica</strong> as its first shipped game.</p>
+        <p>The goal is to keep the existing Aurora experience trustworthy while giving future titles a cleaner home on the same arcade platform.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="gamePreviewModal" aria-hidden="true">
+  <div id="gamePreviewPanel" role="dialog" aria-modal="true" aria-labelledby="gamePreviewTitle">
+    <div id="gamePreviewHead" class="framePopupHead">
+      <div>
+        <span id="gamePreviewBanner">COMING SOON</span>
+        <h2 id="gamePreviewTitle">Galaxy Guardians</h2>
+        <div id="gamePreviewSubtitle" class="framePopupSub">NEXT GAME PROJECT ON PLATINUM</div>
+      </div>
+      <button type="button" id="gamePreviewClose" aria-label="Close game preview">×</button>
+    </div>
+    <div id="gamePreviewBody">
+      <img id="gamePreviewImage" src="assets/galaxy-guardians-coming-soon.png" alt="Galaxy Guardians coming soon splash art" />
+      <div id="gamePreviewCopy">
+        <p id="gamePreviewSummary">Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. The shell preview is live now; gameplay arrives later.</p>
+        <p id="gamePreviewDetail">Aurora Galactica remains the current playable cabinet while we finish the rerelease framing and platform surfaces.</p>
+      </div>
+    </div>
   </div>
 </div>
 <div id="movieModal" aria-hidden="true">

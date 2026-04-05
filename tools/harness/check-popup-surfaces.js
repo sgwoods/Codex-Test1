@@ -132,6 +132,13 @@ async function main(){
       closedSelector: '#gamePickerModal'
     },
     {
+      name: 'platform',
+      open: '#platformSplashBtn',
+      panel: '#platformSplashPanel',
+      close: '#platformSplashClose',
+      closedSelector: '#platformSplashModal'
+    },
+    {
       name: 'settings',
       open: '#settingsBtn',
       panel: '#settingsPanel',

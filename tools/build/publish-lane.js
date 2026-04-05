@@ -29,7 +29,9 @@ const PRODUCTION_FILES = [
   'build-info.json',
   'release-notes.json',
   'README.md',
-  'export.mov.png'
+  'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png'
 ];
 
 const BETA_FILES = [
@@ -40,6 +42,8 @@ const BETA_FILES = [
   'build-info.json',
   'release-notes.json',
   'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png',
   'README.md',
   'README.txt'
 ];

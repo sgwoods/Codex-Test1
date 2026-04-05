@@ -28,6 +28,7 @@ const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
 const PLAYER_GUIDE_TEMPLATE = path.join(SRC, 'player-guide.template.html');
 const STYLES = path.join(SRC, 'styles.css');
+const ASSETS_DIR = path.join(SRC, 'assets');
 const SHARED_REPLAY_STORE = path.join(ROOT, 'shared', 'replay-store.js');
 const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
@@ -41,18 +42,24 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/player-guide.html',
   'dist/dev/build-info.json',
   'dist/dev/export.mov.png',
+  'dist/dev/assets/platinum-platform-mark.png',
+  'dist/dev/assets/galaxy-guardians-coming-soon.png',
   'dist/production/index.html',
   'dist/production/release-dashboard.html',
   'dist/production/project-guide.html',
   'dist/production/player-guide.html',
   'dist/production/build-info.json',
   'dist/production/export.mov.png',
+  'dist/production/assets/platinum-platform-mark.png',
+  'dist/production/assets/galaxy-guardians-coming-soon.png',
   'dist/beta/index.html',
   'dist/beta/release-dashboard.html',
   'dist/beta/project-guide.html',
   'dist/beta/player-guide.html',
   'dist/beta/build-info.json',
   'dist/beta/export.mov.png',
+  'dist/beta/assets/platinum-platform-mark.png',
+  'dist/beta/assets/galaxy-guardians-coming-soon.png',
   'dist/beta/README.md',
   'dist/beta/README.txt',
   'index.html',
@@ -91,6 +98,24 @@ loadEnvFile(path.join(ROOT, '.env.local'));
 
 function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+}
+
+function copyAssetTree(srcDir, destDir){
+  if(!fs.existsSync(srcDir)) return [];
+  fs.mkdirSync(destDir, { recursive: true });
+  const copied = [];
+  for(const entry of fs.readdirSync(srcDir, { withFileTypes: true })){
+    const src = path.join(srcDir, entry.name);
+    const dest = path.join(destDir, entry.name);
+    if(entry.isDirectory()){
+      copied.push(...copyAssetTree(src, dest));
+      continue;
+    }
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.copyFileSync(src, dest);
+    copied.push(dest);
+  }
+  return copied;
 }
 
 function fillBuildTokens(input, tokens){
@@ -1392,13 +1417,15 @@ function build(options = {}){
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
     fs.copyFileSync(path.join(ROOT, 'export.mov.png'), out.screenshot);
   }
+  const copiedAssets = copyAssetTree(ASSETS_DIR, path.join(path.dirname(out.index), 'assets'));
   return [
     out.index,
     out.dashboard,
     out.projectGuide,
     out.playerGuide,
     out.buildInfo,
-    out.screenshot
+    out.screenshot,
+    ...copiedAssets
   ];
 }
 

@@ -18,7 +18,9 @@ const FILES = [
   'build-info.json',
   'release-notes.json',
   'README.md',
-  'export.mov.png'
+  'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png'
 ];
 
 function normalizeProductionVersion(version){
@@ -83,7 +85,9 @@ for(const file of FILES){
     ? path.join(ROOT, file)
     : path.join(DIST_BETA, file);
   if(!fs.existsSync(src)) continue;
-  fs.copyFileSync(src, path.join(DIST_PRODUCTION, path.basename(file)));
+  const dest = path.join(DIST_PRODUCTION, file);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
 }
 
 if(fs.existsSync(BETA_BUILD_INFO)){

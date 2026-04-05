@@ -225,7 +225,7 @@ function drawBadges(stage){
  const rightEdge=PLAY_W-DISPLAY_SHELL.stageBadgeRight;
  const minX=PLAY_W-88;
  let x=rightEdge;
- let y=PLAY_H-DISPLAY_SHELL.stageBadgeBottom;
+ let y=PLAY_H-DISPLAY_SHELL.reserveBottom;
  const layout=[...Array(bigCount).fill('big'),...Array(smallCount).fill('small')];
  for(const size of layout){
   const step=size==='big'?13:DISPLAY_SHELL.stageBadgeGap;
@@ -233,11 +233,9 @@ function drawBadges(stage){
   x-=step;
   if(x<minX){
    x=rightEdge;
-   y-=14;
+   y-=12;
   }
  }
- const right=badges.reduce((m,b)=>Math.max(m,b.x+(b.size==='big'?5.5:4)),0);
- const bottom=badges.reduce((m,b)=>Math.max(m,b.y),0);
  ctx.save();
  for(const badge of badges){
   ctx.save();
@@ -255,13 +253,6 @@ function drawBadges(stage){
   ctx.fillStyle=big?'rgba(24,68,136,.5)':'rgba(120,36,24,.46)';
   ctx.fillRect(big?-4:-3,big?-6:-4,big?8:6,1);
   ctx.restore();
- }
- if(badges.length){
-  ctx.textAlign='right';
-  ctx.textBaseline='top';
-  ctx.font='7px "Courier New",Consolas,monospace';
-  ctx.fillStyle='rgba(169,216,255,.72)';
-  ctx.fillText('STAGE',right,bottom+DISPLAY_SHELL.stageLabelGap);
  }
  ctx.restore();
 }

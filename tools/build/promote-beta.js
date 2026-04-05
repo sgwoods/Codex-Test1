@@ -18,7 +18,9 @@ const FILES = [
   'build-info.json',
   'release-notes.json',
   'export.mov.png',
-  'README.md'
+  'README.md',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png'
 ];
 
 function toBetaVersion(version){
@@ -80,7 +82,8 @@ for(const file of FILES){
     ? path.join(ROOT, file)
     : path.join(DIST_DEV, file);
   if(!fs.existsSync(src)) continue;
-  const dest = path.join(BETA_DIR, file === 'index.html' ? 'index.html' : path.basename(file));
+  const dest = path.join(BETA_DIR, file);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.copyFileSync(src, dest);
 }
 

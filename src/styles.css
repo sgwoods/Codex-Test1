@@ -75,7 +75,7 @@ canvas{display:block;width:100vw;height:100vh}
 #cabinetMarqueeTitle{font:900 clamp(18px,2.4vw,40px)/1 "Georgia","Times New Roman",serif;font-style:italic;letter-spacing:.02em;text-transform:none;color:#f4ad1d;text-shadow:-2px 0 #d41f27,0 2px #d41f27,2px 0 #d41f27,0 -2px #d41f27,3px 3px 0 #2bd5a0,0 0 18px rgba(255,232,102,.18);white-space:nowrap}
 #playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;--frame-inner-inset:11px;border:1px solid var(--frame-line);box-shadow:0 10px 34px rgba(0,0,0,.34),inset 0 0 0 1px var(--frame-glow)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;pointer-events:none}
-#playfieldFrame::before{inset:var(--frame-inner-inset);border:1px solid rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(28,53,116,.58)}
+#playfieldFrame::before{display:none}
 #playfieldFrame::after{inset:0;background:linear-gradient(180deg,rgba(7,14,30,.18),transparent 12%,transparent 88%,rgba(7,14,30,.14));box-shadow:inset 0 0 28px rgba(5,10,24,.54)}
 #cabinetRightFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid rgba(127,183,255,.18);background:
  radial-gradient(circle at 26% 12%,rgba(255,226,111,.55) 0 7%,transparent 8%),
@@ -209,12 +209,12 @@ canvas{display:block;width:100vw;height:100vh}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
 #settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72);overflow-wrap:anywhere;word-break:break-word}
-#helpModal,#feedbackModal{position:fixed;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);overflow:hidden}
-#helpModal.open,#feedbackModal.open{display:flex}
+#helpModal,#feedbackModal,#platformSplashModal,#gamePreviewModal{position:fixed;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);overflow:hidden}
+#helpModal.open,#feedbackModal.open,#platformSplashModal.open,#gamePreviewModal.open{display:flex}
 #helpPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #helpHead h2{margin:0;font-size:20px;letter-spacing:.03em}
 #helpSubtitle{margin-top:4px;font-size:12px;line-height:1.3;color:#bfefff}
-#helpClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#helpClose,#platformSplashClose,#gamePreviewClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #helpToolbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
 #helpTabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 #helpTabs button{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;padding:8px 12px;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer;letter-spacing:.05em}
@@ -235,6 +235,12 @@ canvas{display:block;width:100vw;height:100vh}
 #helpGuideActions button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:8px 13px;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #helpGuideFrame{width:100%;height:100%;min-height:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14}
 #feedbackPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#platformSplashPanel,#gamePreviewPanel{display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#platformSplashBody,#gamePreviewBody{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:18px;align-items:center}
+#platformSplashImage,#gamePreviewImage{display:block;width:100%;height:auto;object-fit:contain;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.62);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+#platformSplashCopy,#gamePreviewCopy{display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:#e8f4ff}
+.platformSplashEyebrow{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#7ef2ff}
+#gamePreviewBanner{display:inline-flex;align-self:flex-start;padding:4px 8px;border:1px solid rgba(255,216,109,.64);background:rgba(60,44,8,.76);font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#ffe39a}
 #feedbackPanel h2{margin:0;font-size:20px;letter-spacing:.03em}
 #feedbackPanel label{display:block;margin:8px 0 5px;font-size:14px;color:#bfefff}
 #feedbackForm{display:flex;flex-direction:column;min-height:0}
@@ -253,6 +259,12 @@ canvas{display:block;width:100vw;height:100vh}
 #gamePickerDockBtn.active,#gamePickerDockBtn.open{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
 #gamePickerDockLabel{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
 #gamePickerDockStatus{display:block;font:700 12px/1.1 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
+#platformDock{position:absolute;left:12px;right:12px;bottom:12px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
+#platformSplashBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:78px;padding:10px 8px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
+#platformSplashBtn:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
+#platformSplashBtn.open,#platformSplashBtn.active{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
+#platformSplashDockIcon{display:block;width:min(100%,58px);height:auto;object-fit:contain;filter:drop-shadow(0 0 10px rgba(116,230,255,.28))}
+#platformSplashDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;text-transform:uppercase}
 #statusDock{position:absolute;left:12px;top:12px;right:12px;bottom:12px;z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px}
 #statusDock{pointer-events:auto}
 #dockQuickTools{display:flex;flex-direction:column;justify-content:flex-start;gap:18px;width:100%;height:100%}
@@ -460,10 +472,12 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #left,#center,#right{text-align:left}
  #right{display:none}
  #helpPanel{height:min(84vh,760px)}
+ #platformSplashPanel,#gamePreviewPanel{width:min(calc(100% - 24px),760px)!important}
+ #platformSplashBody,#gamePreviewBody{grid-template-columns:1fr}
  #controlsLegend{grid-template-columns:1fr}
  #controlsIndex{grid-template-columns:1fr}
  #helpToolbar{flex-direction:column;align-items:flex-start}
  #helpTabs{flex-wrap:wrap}
 }
-#accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel{max-height:var(--overlay-max-height);overflow:auto}
+#accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel,#platformSplashPanel,#gamePreviewPanel{max-height:var(--overlay-max-height);overflow:auto}
 #accountPanelHead,#leaderboardPanelHead{position:sticky;top:0;z-index:1;padding-bottom:8px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.9))}

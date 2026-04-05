@@ -36,7 +36,7 @@ async function main(){
     }
 
     await page.evaluate(() => {
-      const btn = document.querySelector('[data-pack-key="galaxian-signal-preview"]');
+      const btn = document.querySelector('[data-pack-key="galaxy-guardians-preview"]');
       if(!btn) throw new Error('missing preview pack entry');
       btn.click();
     });
@@ -45,10 +45,16 @@ async function main(){
       const title = document.title;
       const marquee = document.getElementById('cabinetMarqueeTitle')?.textContent || '';
       const msg = document.getElementById('msg')?.innerText || '';
-      return title.includes('Galaxian Signal') && marquee.includes('Galaxian Signal') && msg.includes('GALAXIAN SIGNAL')
-        ? { title, marquee, msg: msg.replace(/\s+/g, ' ').trim() }
+      const modalOpen = document.getElementById('gamePreviewModal')?.classList.contains('open');
+      const previewTitle = document.getElementById('gamePreviewTitle')?.textContent || '';
+      const banner = document.getElementById('gamePreviewBanner')?.textContent || '';
+      return title.includes('Galaxy Guardians') && marquee.includes('Galaxy Guardians') && msg.includes('GALAXY GUARDIANS') && modalOpen
+        ? { title, marquee, msg: msg.replace(/\s+/g, ' ').trim(), previewTitle, banner }
         : null;
     }, 1200, 40);
+
+    await page.locator('#gamePreviewClose').click();
+    await page.waitForTimeout(160);
 
     const beforeTheme = await page.evaluate(() =>
       getComputedStyle(document.documentElement).getPropertyValue('--marquee-border').trim()
@@ -72,12 +78,12 @@ async function main(){
     await page.keyboard.press('Escape');
     await page.waitForTimeout(120);
     await page.keyboard.press('Enter');
-    await page.waitForTimeout(180);
-
-    const blocked = await page.evaluate(() => ({
-      started: !!window.__galagaHarness__.snapshot().started,
-      toast: document.getElementById('feedbackToast')?.innerText || ''
-    }));
+    const blocked = await waitForHarness(page, () => {
+      const started = !!window.__galagaHarness__.snapshot().started;
+      const modalOpen = !!document.getElementById('gamePreviewModal')?.classList.contains('open');
+      const previewTitle = document.getElementById('gamePreviewTitle')?.textContent || '';
+      return modalOpen ? { started, modalOpen, previewTitle } : null;
+    }, 1200, 40);
 
     return { opened, preview, beforeTheme, themed, blocked };
   });
@@ -85,11 +91,14 @@ async function main(){
   if(!result.opened?.railVisible) fail('left-side game picker rail did not render', result);
   if(!result.opened?.buttonExpanded || !result.opened?.modalOpen) fail('game picker did not open from the left rail control', result);
   if((result.opened?.packCount || 0) < 2) fail('game picker did not list both the live pack and the preview pack', result);
-  if(!result.preview?.title.includes('Galaxian Signal') || !result.preview?.marquee.includes('Galaxian Signal')){
+  if(!result.preview?.title.includes('Galaxy Guardians') || !result.preview?.marquee.includes('Galaxy Guardians')){
     fail('preview pack selection did not update the shell title and marquee', result);
   }
-  if(!result.preview?.msg.includes('GALAXIAN SIGNAL') || !result.preview?.msg.includes('PACK PREVIEW')){
+  if(!result.preview?.msg.includes('GALAXY GUARDIANS') || !result.preview?.msg.includes('COMING SOON')){
     fail('preview pack selection did not update the wait-mode shell copy', result);
+  }
+  if(!result.preview?.previewTitle.includes('Galaxy Guardians') || !result.preview?.banner.includes('COMING SOON')){
+    fail('preview pack selection did not open the coming-soon splash', result);
   }
   if(result.beforeTheme === result.themed?.border){
     fail('switching shell theme did not change the cabinet chrome treatment', result);
@@ -98,8 +107,8 @@ async function main(){
     fail('shell theme picker did not update the current theme label', result);
   }
   if(result.blocked?.started) fail('preview-only pack should not be startable yet', result);
-  if(!String(result.blocked?.toast || '').toLowerCase().includes('shell preview only')){
-    fail('preview-only pack did not explain why gameplay is blocked', result);
+  if(!result.blocked?.modalOpen || !result.blocked?.previewTitle.includes('Galaxy Guardians')){
+    fail('preview-only pack did not reopen the coming-soon splash when launch was attempted', result);
   }
 
   console.log(JSON.stringify({
@@ -108,7 +117,7 @@ async function main(){
     previewTitle: result.preview.title,
     previewMarquee: result.preview.marquee,
     themedBorder: result.themed.border,
-    blockedToast: result.blocked.toast
+    blockedPreviewTitle: result.blocked.previewTitle
   }, null, 2));
 }
 

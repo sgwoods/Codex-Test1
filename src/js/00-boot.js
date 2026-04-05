@@ -12,6 +12,13 @@ const gamePickerClose=document.getElementById('gamePickerClose');
 const gamePickerCurrent=document.getElementById('gamePickerCurrent');
 const gamePickerList=document.getElementById('gamePickerList');
 const gamePickerStatus=document.getElementById('gamePickerStatus');
+const platformSplashBtn=document.getElementById('platformSplashBtn');
+const platformSplashModal=document.getElementById('platformSplashModal');
+const platformSplashPanel=document.getElementById('platformSplashPanel');
+const platformSplashClose=document.getElementById('platformSplashClose');
+const gamePreviewModal=document.getElementById('gamePreviewModal');
+const gamePreviewPanel=document.getElementById('gamePreviewPanel');
+const gamePreviewClose=document.getElementById('gamePreviewClose');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
@@ -236,6 +243,8 @@ const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY='{{WEB3FORMS_ACCESS_KEY}}';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let gamePickerOpen=0,gamePickerPrevPaused=0;
+let platformSplashOpen=0,platformSplashPrevPaused=0;
+let gamePreviewOpen=0,gamePreviewPrevPaused=0;
 let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
 let settingsOpen=0,settingsPrevPaused=0;
@@ -561,6 +570,21 @@ function syncHelpUi(){
  if(helpGuideActions)helpGuideActions.hidden=!(helpOpen&&helpMode==='guide');
  if(helpGuideFrame&&helpMode==='guide'&&!helpGuideFrame.src)helpGuideFrame.src=playersGuideUrl();
 }
+function syncPlatformSplashUi(){
+ if(!platformSplashModal)return;
+ platformSplashModal.classList.toggle('open',platformSplashOpen);
+ platformSplashModal.setAttribute('aria-hidden',platformSplashOpen?'false':'true');
+ if(platformSplashBtn){
+  platformSplashBtn.classList.toggle('open',platformSplashOpen);
+  platformSplashBtn.classList.toggle('active',platformSplashOpen);
+  platformSplashBtn.setAttribute('aria-expanded',platformSplashOpen?'true':'false');
+ }
+}
+function syncGamePreviewUi(){
+ if(!gamePreviewModal)return;
+ gamePreviewModal.classList.toggle('open',gamePreviewOpen);
+ gamePreviewModal.setAttribute('aria-hidden',gamePreviewOpen?'false':'true');
+}
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
@@ -568,6 +592,8 @@ function syncTestUi(){
  syncPauseUi();
  syncSettingsUi();
  syncHelpUi();
+ syncPlatformSplashUi();
+ syncGamePreviewUi();
 }
 function closeSettings(){
  if(!settingsOpen)return;
@@ -612,6 +638,8 @@ function openHelp(mode='controls'){
  if(helpOpen&&helpMode===mode)return;
  closeSettings();
  if(feedbackOpen)closeFeedback(1);
+ if(platformSplashOpen)closePlatformSplash(1);
+ if(gamePreviewOpen)closeGamePreview(1);
  helpPrevPaused=paused;
  if(started&&!paused)paused=1;
  helpMode=mode==='guide'?'guide':'controls';
@@ -624,6 +652,56 @@ function openHelp(mode='controls'){
   const target=helpMode==='guide'?helpOpenWindowBtn:helpTabButtons.find(btn=>btn.dataset.helpTab===helpMode);
   target?.focus?.();
  },0);
+}
+function openPlatformSplash(){
+ if(platformSplashOpen)return;
+ closeSettings();
+ if(helpOpen)closeHelp(1);
+ if(feedbackOpen)closeFeedback(1);
+ if(gamePickerOpen)closeGamePicker(1);
+ if(gamePreviewOpen)closeGamePreview(1);
+ platformSplashPrevPaused=paused;
+ if(started&&!paused)paused=1;
+ platformSplashOpen=1;
+ resetActiveInputState('platform_splash_open');
+ logEvent('platform_splash_open',{pack:typeof currentGamePackKey==='function'?currentGamePackKey():''});
+ syncPlatformSplashUi();
+ syncPauseUi();
+ setTimeout(()=>platformSplashClose?.focus?.(),0);
+}
+function closePlatformSplash(force=0){
+ if(!platformSplashOpen&&!force)return;
+ platformSplashOpen=0;
+ if(started)paused=platformSplashPrevPaused;
+ resetActiveInputState('platform_splash_close');
+ logEvent('platform_splash_close',{force:!!force});
+ syncPlatformSplashUi();
+ syncPauseUi();
+}
+function openGamePreview(){
+ if(gamePreviewOpen)return;
+ closeSettings();
+ if(helpOpen)closeHelp(1);
+ if(feedbackOpen)closeFeedback(1);
+ if(platformSplashOpen)closePlatformSplash(1);
+ if(gamePickerOpen)closeGamePicker(1);
+ gamePreviewPrevPaused=paused;
+ if(started&&!paused)paused=1;
+ gamePreviewOpen=1;
+ resetActiveInputState('game_preview_open');
+ logEvent('game_preview_open',{pack:typeof currentGamePackKey==='function'?currentGamePackKey():''});
+ syncGamePreviewUi();
+ syncPauseUi();
+ setTimeout(()=>gamePreviewClose?.focus?.(),0);
+}
+function closeGamePreview(force=0){
+ if(!gamePreviewOpen&&!force)return;
+ gamePreviewOpen=0;
+ if(started)paused=gamePreviewPrevPaused;
+ resetActiveInputState('game_preview_close');
+ logEvent('game_preview_close',{force:!!force});
+ syncGamePreviewUi();
+ syncPauseUi();
 }
 function closeHelp(force=0){
  if(!helpOpen&&!force)return;
@@ -796,10 +874,17 @@ function rs(){
 }
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
-settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
+settingsBtn.addEventListener('click',()=>{if(settingsOpen)closeSettings();else openSettings();});
 if(settingsPanelClose)settingsPanelClose.addEventListener('click',closeSettings);
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
 if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
+if(platformSplashBtn)platformSplashBtn.addEventListener('click',()=>{if(platformSplashOpen)closePlatformSplash();else openPlatformSplash();});
+if(platformSplashClose)platformSplashClose.addEventListener('click',()=>closePlatformSplash());
+if(platformSplashModal)platformSplashModal.addEventListener('click',e=>{if(e.target===platformSplashModal)closePlatformSplash();});
+if(platformSplashPanel)platformSplashPanel.addEventListener('click',e=>e.stopPropagation());
+if(gamePreviewClose)gamePreviewClose.addEventListener('click',()=>closeGamePreview());
+if(gamePreviewModal)gamePreviewModal.addEventListener('click',e=>{if(e.target===gamePreviewModal)closeGamePreview();});
+if(gamePreviewPanel)gamePreviewPanel.addEventListener('click',e=>e.stopPropagation());
 if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
 if(controlsDockBtn)controlsDockBtn.addEventListener('click',()=>openHelp('controls'));
 if(feedbackDockBtn)feedbackDockBtn.addEventListener('click',openFeedback);
@@ -835,6 +920,8 @@ addEventListener('keydown',e=>{
  const now=performance.now();
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
+ if(platformSplashOpen){if(e.code==='Escape'){e.preventDefault();closePlatformSplash();}return;}
+ if(gamePreviewOpen){if(e.code==='Escape'){e.preventDefault();closeGamePreview();}return;}
  if(helpOpen){if(e.code==='Escape'){e.preventDefault();closeHelp();}return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(gamePickerOpen){if(e.code==='Escape'){e.preventDefault();closeGamePicker();}return;}
@@ -924,7 +1011,7 @@ addEventListener('keydown',e=>{
  if(!started&&e.code==='Enter'){
   if(typeof currentGamePackPlayable==='function'&&!currentGamePackPlayable()){
    e.preventDefault();
-   showToast('This pack is a shell preview only for now.');
+   openGamePreview();
    return;
   }
   if(gameOverState&&!gameOverState.editing)submitGameOverScore();
@@ -957,3 +1044,7 @@ addEventListener('pointerdown',e=>{
 syncTestUi();
 syncBuildStampUi();
 startHostedBuildUpdateChecks();
+window.openPlatformSplash=openPlatformSplash;
+window.closePlatformSplash=closePlatformSplash;
+window.openGamePreview=openGamePreview;
+window.closeGamePreview=closeGamePreview;

@@ -94,8 +94,10 @@ function chooseGamePack(key=''){
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
  if(!currentGamePackPlayable()){
-  showToast('Preview shell selected. Full gameplay runtime comes later.');
+  closeGamePicker(1);
+  if(typeof openGamePreview==='function')openGamePreview();
  }else{
+  closeGamePicker(1);
   showToast(`${currentGamePack().metadata?.title||'Game pack'} selected.`);
  }
 }

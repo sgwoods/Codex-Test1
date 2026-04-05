@@ -18,7 +18,9 @@ const REQUIRED_PRODUCTION = [
   'build-info.json',
   'release-notes.json',
   'README.md',
-  'export.mov.png'
+  'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png'
 ];
 
 const REQUIRED_BETA = [
@@ -29,6 +31,8 @@ const REQUIRED_BETA = [
   'build-info.json',
   'release-notes.json',
   'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png',
   'README.md',
   'README.txt'
 ];

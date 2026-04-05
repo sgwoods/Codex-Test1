@@ -219,6 +219,8 @@ Current coding priority:
 2. complete the Platinum rerelease milestone for the existing Aurora game
 3. use `1.1.x` for architectural stabilization and early shared-runtime extraction
 4. use `1.2.x` for platform-owned services and operator-facing infrastructure
+5. begin the Aurora-specific `Game Designer` planning phase using:
+  - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
 
 What changed since the last full review:
 

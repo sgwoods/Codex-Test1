@@ -157,26 +157,26 @@ const AURORA_GAME_PACK=Object.freeze({
  scoring:AURORA_SCORING_RULES
 });
 
-const GALAXIAN_SIGNAL_PACK=Object.freeze({
+const GALAXY_GUARDIANS_PACK=Object.freeze({
  metadata:Object.freeze({
-  gameKey:'galaxian-signal-preview',
-  title:'Galaxian Signal',
+  gameKey:'galaxy-guardians-preview',
+  title:'Galaxy Guardians',
   versionLine:'preview',
   playable:0
  }),
  frontDoor:Object.freeze({
-  marqueeTitle:'Galaxian Signal',
-  title:'GALAXIAN SIGNAL',
-  subtitle:'PACK PREVIEW',
+  marqueeTitle:'Galaxy Guardians',
+  title:'GALAXY GUARDIANS',
+  subtitle:'COMING SOON',
   startPrompt:'PREVIEW ONLY   FULL RUNTIME COMING SOON',
-  featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   SPARE ARCADE PRESSURE',
+  featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   ARCADE PRESSURE',
   attractLine:'SELECTED THROUGH THE PLATFORM GAME PICKER',
   utilityLine:'<span class="k">SELECT</span> TO RESTYLE THE CABINET   <span class="k">PLAY</span> COMES LATER',
   noticeHint:'This sibling pack is a shell-and-identity preview while the shared runtime contract is still being proved.',
   pickerHint:'USE CHOOSE GAME TO SWITCH BACK TO AURORA',
   frameAccent:'signal-crimson',
   quotePlaceholder:Object.freeze({
-   kicker:'GALAXIAN SIGNAL',
+   kicker:'GALAXY GUARDIANS',
    text:'A future sibling pack should be able to own its own shell identity, score feel, and audio profile before gameplay goes live.',
    attribution:'PLATFORM PREVIEW'
   }),
@@ -210,7 +210,7 @@ const GALAXIAN_SIGNAL_PACK=Object.freeze({
 
 const GAME_PACK_REGISTRY=Object.freeze({
  [AURORA_GAME_PACK.metadata.gameKey]:AURORA_GAME_PACK,
- [GALAXIAN_SIGNAL_PACK.metadata.gameKey]:GALAXIAN_SIGNAL_PACK
+ [GALAXY_GUARDIANS_PACK.metadata.gameKey]:GALAXY_GUARDIANS_PACK
 });
 
 const DEFAULT_GAME_PACK_KEY=AURORA_GAME_PACK.metadata.gameKey;
