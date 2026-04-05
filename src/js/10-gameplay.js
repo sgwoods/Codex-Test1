@@ -14,7 +14,7 @@ function update(dt){
  recShotT-=dt;
  if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
- S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);S.nextStageT=Math.max(0,S.nextStageT-dt);
+ S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
@@ -28,7 +28,8 @@ function update(dt){
   }
  }
  if(S.nextStageT>0){
-  if(S.nextStageT<=dt){
+  const remaining=S.nextStageT-dt;
+  if(remaining<=0){
    logEvent('challenge_transition_spawn_commit',{
     stage:S.stage,
     pendingStage:S.pendingStage||null,
@@ -38,7 +39,7 @@ function update(dt){
    S.nextStageT=0;
    if(S.pendingStage){S.stage=S.pendingStage;S.pendingStage=0;}
    spawnStage();
-  }
+  }else S.nextStageT=remaining;
   return
  }
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}

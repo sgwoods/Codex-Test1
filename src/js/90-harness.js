@@ -666,6 +666,65 @@ window.__galagaHarness__={
   });
   return this.challengeFormationState();
  },
+ setupTransitionOvershootTest(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  ATTRACT.timer=0;
+  S.attract=0;
+  S.stage=Math.max(1,+cfg.stage||3);
+  S.pendingStage=0;
+  S.forceChallenge=0;
+  S.nextStageT=0;
+  S.postChallengeT=0;
+  S.challenge=0;
+  S.challengeTransitionStallLogged=0;
+  S.lastChallengeClearT=null;
+  S.banner=0;
+  S.bannerTxt='';
+  S.bannerSub='';
+  S.bannerMode='';
+  S.alertT=0;
+  S.alertTxt='';
+  S.shake=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.e.length=0;
+  const p=S.p;
+  p.x=PLAY_W/2;
+  p.y=PLAY_H-VIS.playerBottom;
+  p.vx=0;
+  p.cd=0;
+  p.inv=0;
+  p.spawn=0;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  queueStageTransition('normal');
+  const overshoot=Math.max(0.05,+cfg.overshoot||0.05);
+  const dt=S.nextStageT+overshoot;
+  const before={stage:S.stage,nextStageT:+S.nextStageT.toFixed(3),challenge:!!S.challenge};
+  update(dt);
+  const alive=S.e.filter(e=>e.hp>0);
+  return {
+   before,
+   dt:+dt.toFixed(3),
+   after:{
+    stage:S.stage,
+    challenge:!!S.challenge,
+    nextStageT:+S.nextStageT.toFixed(3),
+    enemies:alive.length,
+    challengeEnemies:alive.filter(e=>!!e.ch).length,
+    bannerMode:S.bannerMode,
+    bannerTxt:S.bannerTxt
+   }
+  };
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
