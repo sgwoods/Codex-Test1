@@ -16,6 +16,7 @@ window.__galagaHarness__={
  }
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
+ if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(!started)start();
 },
  setCarryDebug(cfg={}){
@@ -356,7 +357,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
   return {
@@ -541,7 +542,7 @@ window.__galagaHarness__={
   S.recoverT=0;
   S.attackGapT=0;
   S.stage=Math.max(1,+cfg.stage||1);
-  S.stageClock=0;
+  S.stageClock=0;S.simT=0;
   for(const e of S.e)if(e.id!==enemy.id)e.hp=0;
   enemy.hp=1;
   enemy.max=1;
@@ -774,7 +775,7 @@ window.__galagaHarness__={
   const spare=S.e.find(e=>e.hp>0&&e.t==='bee'&&e.id!==boss?.id);
   if(!boss||!spare)return false;
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;S.simT=0;
   S.captureCountStage=1;S.lastCaptureStartT=0;S.lastFighterCapturedT=.5;
   for(const e of S.e)if(e.id!==boss.id&&e.id!==spare.id)e.hp=0;
   spare.hp=1;spare.max=1;spare.form=1;spare.dive=0;spare.carry=0;spare.beam=0;spare.beamT=0;spare.low=0;spare.x=spare.tx;spare.y=spare.ty;
@@ -791,7 +792,7 @@ window.__galagaHarness__={
   if(!boss||!spare)return false;
   const keepAlive=Math.max(0,+cfg.keepAlive||0);
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;S.simT=0;
   S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;
   const extra=S.e.filter(e=>e.hp>0&&e.id!==boss.id&&e.id!==spare.id).slice(0,keepAlive);
   const keep=new Set([boss.id,spare.id,...extra.map(e=>e.id)]);
@@ -810,7 +811,7 @@ window.__galagaHarness__={
   if(!boss)return false;
   const keepAlive=Math.max(0,+cfg.keepAlive||0);
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=+cfg.playerY||186;p.dual=0;p.captured=1;p.pending=0;p.spawn=0;p.capBoss=boss;p.capT=+cfg.capT||0.95;p.inv=0;p.cd=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||4);S.stageClock=0;S.challenge=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||4);S.stageClock=0;S.simT=0;S.challenge=0;
   S.lastCaptureStartT=0;S.lastFighterCapturedT=null;
   const extra=S.e.filter(e=>e.hp>0&&e.id!==boss.id).slice(0,keepAlive);
   const keep=new Set([boss.id,...extra.map(e=>e.id)]);
@@ -839,7 +840,7 @@ window.__galagaHarness__={
   const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
   if(!boss)return false;
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||2);S.stageClock=0;S.simT=0;
   for(const e of S.e)if(e.id!==boss.id)e.hp=0;
   boss.hp=1;boss.max=2;boss.form=1;boss.dive=0;boss.carry=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.shot=0;
   boss.x=cl(+cfg.bossX||boss.tx||PLAY_W/2,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;
@@ -892,7 +893,7 @@ window.__galagaHarness__={
   if(escorts.length<2)return false;
   const stage=Math.max(4,+cfg.stage||4);
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=stage;S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=stage;S.stageClock=0;S.simT=0;
  const keep=new Set([boss.id,...escorts.map(e=>e.id)]);
  for(const e of S.e)if(!keep.has(e.id))e.hp=0;
   const squadId=++S.squadSeq;
@@ -913,7 +914,7 @@ window.__galagaHarness__={
   if(!boss)return false;
   const attacking=!!cfg.attacking;
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;S.simT=0;
   for(const e of S.e)if(e.id!==boss.id)e.hp=0;
   boss.hp=2;boss.max=2;boss.form=1;boss.carry=1;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=p.x;boss.shot=0;
   if(attacking){
@@ -930,7 +931,7 @@ window.__galagaHarness__={
   const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
   if(!boss)return false;
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
-  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||1);S.stageClock=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||1);S.stageClock=0;S.simT=0;
   for(const e of S.e)if(e.id!==boss.id)e.hp=0;
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=0;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;boss.hitT=0;
   logEvent('harness_boss_first_hit_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
@@ -939,7 +940,23 @@ window.__galagaHarness__={
 };
 
 setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
-function loop(ts){const dt=Math.min(.033,(ts-t0)/1000||0);t0=ts;update(dt);draw();requestAnimationFrame(loop)}
+function loop(ts){
+ const dt=Math.min(.033,(ts-t0)/1000||0);
+ t0=ts;
+ if(useDeterministicHarnessClock()){
+  const step=1/60;
+  harnessFrameAccum=Math.min(.1,harnessFrameAccum+dt);
+  while(harnessFrameAccum>=step){
+   update(step);
+   harnessFrameAccum-=step;
+  }
+ }else{
+  harnessFrameAccum=0;
+  update(dt);
+ }
+ draw();
+ requestAnimationFrame(loop);
+}
 resetSession();
 logEvent('boot');
 logSnapshot('boot');

@@ -170,25 +170,33 @@ async function waitForDownloads(list, count, timeoutMs){
 }
 
 async function waitForRun(page, spec, replayTime){
-  const finishAt = Date.now() + Math.max(0, spec.duration) * 1000;
+  const finishAt = Date.now() + Math.max(15000, Math.max(0, spec.duration) * 3000);
+  const targetSimT = Math.max(0, spec.duration);
   let state = await page.evaluate(() => window.__galagaHarness__.state());
   if(!spec.stopOnGameOver){
-    const remain = Math.max(0, spec.duration - replayTime);
-    if(remain) await sleep(remain * 1000);
+    while(Date.now() < finishAt){
+      if((state.simT || 0) >= targetSimT) return state;
+      await sleep(100);
+      state = await page.evaluate(() => window.__galagaHarness__.state());
+    }
     return page.evaluate(() => window.__galagaHarness__.state());
   }
   while(Date.now() < finishAt){
     await sleep(250);
     state = await page.evaluate(() => window.__galagaHarness__.state());
     if(!state.started) return state;
+    if((state.simT || 0) >= targetSimT) return state;
   }
   return page.evaluate(() => window.__galagaHarness__.state());
 }
 
 async function finalizeArtifacts(page, downloads, spec, state){
-  const wanted = 2;
+  const wanted = spec.autoVideo === false ? 1 : 2;
   if(state.started){
     await page.evaluate(name => window.__galagaHarness__.stop(name), spec.name);
+    if(spec.autoVideo === false){
+      await page.evaluate(() => window.__galagaHarness__.export());
+    }
   }
   if(await waitForDownloads(downloads, wanted, 15000)) return;
 
@@ -205,6 +213,7 @@ async function main(){
     console.log('   or: npm run harness -- --scenario /absolute/path/to/scenario.json');
     console.log('   or: npm run harness -- --scenario stage3-challenge');
     console.log('Optional: --persona novice|advanced|expert');
+    console.log('Optional: --auto-video 0|1');
     process.exit(args.help ? 0 : 1);
   }
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
@@ -216,6 +225,7 @@ async function main(){
   const spec = args.session ? specFromSession(path.resolve(args.session)) : specFromScenario(path.resolve(scenarioPath));
   if(args.seed) spec.seed = (+args.seed >>> 0) || spec.seed;
   if(args.persona) spec.config.persona = String(args.persona).toLowerCase();
+  if(args['auto-video'] !== undefined) spec.autoVideo = !['0','false','no'].includes(String(args['auto-video']).toLowerCase());
   const outBase = path.resolve(args.out || DEFAULT_OUT);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const runTag = `${process.pid}-${Math.random().toString(36).slice(2,8)}`;
@@ -251,7 +261,8 @@ async function main(){
 
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__galagaHarness__);
-    await page.evaluate(cfg => window.__galagaHarness__.start(Object.assign({ autoVideo: true }, cfg)), Object.assign({}, spec.config, { seed: spec.seed }));
+    const autoVideo = spec.autoVideo !== false;
+    await page.evaluate(cfg => window.__galagaHarness__.start(cfg), Object.assign({}, spec.config, { seed: spec.seed, autoVideo }));
 
     const replayTime = await replay(page, spec);
     const state = await waitForRun(page, spec, replayTime);

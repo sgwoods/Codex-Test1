@@ -18,6 +18,7 @@ function update(dt){
  S.sequenceT=Math.max(0,S.sequenceT-dt);
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
+ const simT=advanceGameplayClock(dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
@@ -60,7 +61,7 @@ function update(dt){
   return;
  }
  if(p.captured&&p.capBoss&&p.capBoss.hp>0){
-  const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;
+  const capY=p.capBoss.y+26+Math.sin((simT*1000)/140)*2.5;
   p.capT-=dt;
   p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);
   p.y+=(capY-p.y)*Math.min(1,dt*3.9);
@@ -112,7 +113,7 @@ function update(dt){
   }
  }
 
- const t=performance.now()/1000;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
+ const t=simT;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
  const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
  if(sequenceLock)return;
  S.att=0;

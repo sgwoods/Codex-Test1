@@ -369,7 +369,7 @@ async function main(){
       for(let pIndex=0;pIndex<personas.length;pIndex++){
         const persona = personas[pIndex];
         const seed = item.seedBase + i + 1 + (persona ? pIndex * 100 : 0);
-        const harnessArgs = ['--scenario', item.scenario, '--seed', String(seed), '--out', outDir];
+        const harnessArgs = ['--scenario', item.scenario, '--seed', String(seed), '--out', outDir, '--auto-video', '0'];
         if(persona) harnessArgs.push('--persona', persona);
         const result = await runHarness(harnessArgs);
         batch.runs.push({ scenario: item.scenario, persona, seed });
