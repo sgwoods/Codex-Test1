@@ -96,6 +96,18 @@ flowchart TB
     G2 -. hosted by .-> P2
 ```
 
+## Maintained Graphics
+
+The following SVG graphics are maintained alongside this overview and are meant
+to be reused in docs, release briefings, and planning artifacts:
+
+- platform stack:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-platform-stack.svg`
+- platform versus game-pack ownership:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-pack-separation.svg`
+- migration state and next-step framing:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-migration-state.svg`
+
 ## Separation Summary
 
 ### Platinum owns

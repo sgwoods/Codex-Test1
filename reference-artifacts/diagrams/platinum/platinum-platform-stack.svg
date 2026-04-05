@@ -1,0 +1,73 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#121d35"/>
+    </linearGradient>
+    <linearGradient id="plat" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7EE7FF"/>
+      <stop offset="1" stop-color="#2F89FF"/>
+    </linearGradient>
+    <linearGradient id="aurora" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFCC6E"/>
+      <stop offset="1" stop-color="#F06A2A"/>
+    </linearGradient>
+    <linearGradient id="future" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D69BFF"/>
+      <stop offset="1" stop-color="#7B5BFF"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1280" cy="170" r="220" fill="#183258" opacity="0.35"/>
+  <circle cx="260" cy="840" r="260" fill="#14304A" opacity="0.35"/>
+
+  <text x="96" y="100" fill="#F3F8FF" font-size="54" font-family="Menlo, Monaco, monospace" font-weight="700">Platinum Architectural Overview</text>
+  <text x="96" y="146" fill="#A7B7D8" font-size="24" font-family="Menlo, Monaco, monospace">Platform layers, game-pack ownership, and the current hosting model for Aurora Galactica.</text>
+
+  <g filter="url(#glow)">
+    <rect x="96" y="210" width="1408" height="520" rx="34" fill="#0D1730" stroke="#2A4F80" stroke-width="2"/>
+    <rect x="140" y="260" width="1320" height="110" rx="24" fill="#12233F" stroke="#58D6FF" stroke-width="2"/>
+    <rect x="140" y="392" width="1320" height="110" rx="24" fill="#142944" stroke="#6BC4FF" stroke-width="2"/>
+    <rect x="140" y="524" width="1320" height="160" rx="24" fill="#162D48" stroke="#88B5FF" stroke-width="2"/>
+
+    <text x="176" y="306" fill="#8BE8FF" font-size="34" font-family="Menlo, Monaco, monospace" font-weight="700">Platinum Shell</text>
+    <text x="176" y="344" fill="#EAF3FF" font-size="24" font-family="Menlo, Monaco, monospace">Cabinet frame, marquee, side rails, popup framing, build stamp, picker surfaces, platform splash.</text>
+
+    <text x="176" y="438" fill="#92D5FF" font-size="34" font-family="Menlo, Monaco, monospace" font-weight="700">Platinum Runtime and Services</text>
+    <text x="176" y="476" fill="#EAF3FF" font-size="24" font-family="Menlo, Monaco, monospace">Pack install path, wait mode, pause, scaling, auth/session, leaderboard transport, replay plumbing, feedback.</text>
+
+    <text x="176" y="570" fill="#A7C6FF" font-size="34" font-family="Menlo, Monaco, monospace" font-weight="700">Game Pack Layer</text>
+    <text x="176" y="608" fill="#EAF3FF" font-size="24" font-family="Menlo, Monaco, monospace">Each game owns its identity, rules, mechanics, assets, audio, content, and game-specific harnesses.</text>
+
+    <rect x="190" y="626" width="390" height="42" rx="14" fill="url(#aurora)" opacity="0.95"/>
+    <text x="214" y="655" fill="#081019" font-size="22" font-family="Menlo, Monaco, monospace" font-weight="700">Aurora Galactica: live playable pack</text>
+
+    <rect x="608" y="626" width="415" height="42" rx="14" fill="url(#future)" opacity="0.95"/>
+    <text x="632" y="655" fill="#F6F0FF" font-size="22" font-family="Menlo, Monaco, monospace" font-weight="700">Galaxy Guardians: preview sibling pack</text>
+
+    <rect x="1052" y="626" width="322" height="42" rx="14" fill="url(#plat)" opacity="0.95"/>
+    <text x="1076" y="655" fill="#07111F" font-size="22" font-family="Menlo, Monaco, monospace" font-weight="700">Shared contracts and harnesses</text>
+  </g>
+
+  <g>
+    <rect x="96" y="778" width="678" height="154" rx="28" fill="#101D34" stroke="#58D6FF" stroke-width="2"/>
+    <text x="128" y="830" fill="#8BE8FF" font-size="30" font-family="Menlo, Monaco, monospace" font-weight="700">What belongs to Platinum</text>
+    <text x="128" y="870" fill="#EAF3FF" font-size="23" font-family="Menlo, Monaco, monospace">Shell, runtime, platform splash, picker, service adapters,</text>
+    <text x="128" y="902" fill="#EAF3FF" font-size="23" font-family="Menlo, Monaco, monospace">publish/release checks, platform-only harnesses.</text>
+  </g>
+
+  <g>
+    <rect x="822" y="778" width="682" height="154" rx="28" fill="#20162B" stroke="#F09143" stroke-width="2"/>
+    <text x="854" y="830" fill="#FFC982" font-size="30" font-family="Menlo, Monaco, monospace" font-weight="700">What belongs to a game pack</text>
+    <text x="854" y="870" fill="#FFF2E8" font-size="23" font-family="Menlo, Monaco, monospace">Stages, enemies, boss behavior, scoring, challenge logic,</text>
+    <text x="854" y="902" fill="#FFF2E8" font-size="23" font-family="Menlo, Monaco, monospace">sprites, text, audio identity, designer-owned definitions.</text>
+  </g>
+</svg>
