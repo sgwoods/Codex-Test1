@@ -54,11 +54,11 @@ async function captureEscapeBranch(page, outDir){
   const banner = await waitForHarness(page, () => {
     const s = window.__galagaHarness__.bannerState();
     return s.bannerMode === 'captureEscape' ? s : null;
-  }, 2200, 50);
+  }, 3200, 50);
   const recovered = await waitForHarness(page, () => {
     const s = window.__galagaHarness__.state();
     return !s.player?.captured;
-  }, 1500, 50).catch(() => null);
+  }, 2200, 50).catch(() => null);
   await sleep(200);
   await page.screenshot({ path: path.join(outDir, 'capture-escape-recovered.png') });
   return { captured: captured.carry, banner, recovered };

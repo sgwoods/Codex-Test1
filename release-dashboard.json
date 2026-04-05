@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.0.2",
-  "currentFocus": "Post-launch hotfixes for production controls, feedback delivery, and release trust",
-  "strapline": "A stable 1.0 line with tight hotfix discipline, clear release identity, and trustworthy player-facing recovery paths.",
+  "currentFocus": "Aurora-on-Platinum rerelease hardening, platform framing, and stable shell verification",
+  "strapline": "A stable Aurora baseline hosted visibly on Platinum, with shell identity, pack selection, and release trust hardened before the next promotion.",
   "timeline": [
     {
       "id": "foundation",
@@ -55,13 +55,13 @@
       "id": "ship-polish",
       "title": "Ship-Ready Polish",
       "status": "in_progress",
-      "summary": "Native replay, player guide, icon-rail controls, wait-mode polish, release notes, and production publish correctness are the current prelaunch finish work."
+      "summary": "Native replay, player guide, icon-rail controls, Platinum splash and picker surfaces, and production publish correctness are the current rerelease finish work."
     },
     {
       "id": "release",
       "title": "1.0 Release",
       "status": "up_next",
-      "summary": "Republish production from the current beta candidate once the environment split and final release-readiness pass are confirmed."
+      "summary": "Republish Aurora as a clearly Platinum-hosted title once the shell hardening pass and final rerelease review are confirmed."
     }
   ],
   "legend": [
@@ -84,6 +84,10 @@
     {
       "label": "Player Finish",
       "detail": "High scores, replays, guide/help, results flow, and public pages should feel finished and trustworthy."
+    },
+    {
+      "label": "Platinum Framing",
+      "detail": "Aurora should read clearly as a game pack running on Platinum, with stable shell surfaces and picker behavior before we expand into sibling games."
     }
   ]
 }

@@ -12,10 +12,11 @@ It is meant to answer one question clearly:
 Current status:
 
 - implemented on the dev line
-- not the active coding priority while higher-risk gameplay and presentation
-  blockers remain open
-- intended to be rechecked one last time immediately before final `1.0`
-  production sign-off
+- now in an active `Aurora-on-Platinum` rerelease hardening pass
+- no longer a speculative architecture exercise; the immediate goal is a stable
+  Platinum-framed rerelease baseline for the existing playable Aurora game
+- intended to be rechecked one last time immediately before the next public
+  production promotion
 
 ## Scope Covered
 
@@ -241,6 +242,46 @@ place before production promotion:
 That means `1.0.2` closed the live movement regression with both stronger local
 gates and a hosted-lane verification step before production promotion.
 
+### Current Aurora-on-Platinum rerelease hardening evidence
+
+The current dev line is being hardened as:
+
+- `Aurora Galactica`
+- running as the first playable game pack on:
+  - `Platinum`
+
+The current rerelease hardening pass has explicit evidence for:
+
+- core gameplay and reset behavior:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
+- capture/rescue lifecycle stability:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
+- first challenge-stage motion stability:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
+- remote score submit and pilot-panel integrity:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
+- feedback path integrity:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
+- platform-shell boot/install path:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
+
+The current Platinum-framed shell surfaces now include:
+
+- a lower-left Platinum button
+- a centered Platinum splash
+- a `Choose Game` rail with pack preview
+- a dismissable `Galaxy Guardians` coming-soon splash
+
+The current rerelease hardening pass also corrected two harness regressions so
+the gate reflects the product rather than test pollution:
+
+- input-mapping now recenters before each key assertion instead of stacking all
+  six movement checks against the left wall
+- pilot replay-panel checks now clear prior replay state so click-to-open
+  assertions verify the intended seeded rows only
+
 ### Launch-significant operational checks
 
 Before final `1.0` sign-off, confirm:
@@ -251,6 +292,8 @@ Before final `1.0` sign-off, confirm:
 - live public version labels match the expected promoted build
 - the pre-`1.0` production leaderboard reset for `#130` has been inspected,
   executed, and verified against the live shared score view
+- one manual dev verification pass confirms the new Platinum shell surfaces
+  feel correct in-browser
 
 ## Recommendation
 

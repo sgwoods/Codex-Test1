@@ -5,6 +5,8 @@ how work should flow through it.
 
 Related planning artifact:
 
+- maintained platform/game separation diagram:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 - audio planning and source manifest:
   - `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
 - curated splash/quote/content planning:

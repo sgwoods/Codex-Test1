@@ -14,6 +14,7 @@ async function main(){
   const result = await withHarnessPage({ stage: 2, ships: 3, challenge: false, seed: 49031 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupPilotRecordsPanelTest({
       replayId: 'replay-stage7-local',
+      clearExisting: true,
       email: 'sgwoods@gmail.com',
       userId: 'pilot-swd',
       initials: 'SWD',
@@ -25,6 +26,7 @@ async function main(){
     await page.evaluate(async () => {
       await window.__galagaHarness__.seedLocalReplay({
         id: 'replay-stage2-fresh',
+        clearExisting: false,
         email: 'sgwoods@gmail.com',
         pilotEmail: 'sgwoods@gmail.com',
         userId: 'pilot-swd',

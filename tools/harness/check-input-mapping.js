@@ -54,6 +54,14 @@ async function open(page, port){
 }
 
 async function moveWithKey(page, key){
+  await page.evaluate(() => {
+    if(window.__galagaHarness__?.resetInputState) window.__galagaHarness__.resetInputState('input-mapping-recenter');
+    if(window.S?.p){
+      window.S.p.x = window.PLAY_W / 2;
+      window.S.p.vx = 0;
+    }
+  });
+  await page.waitForTimeout(50);
   const before = await page.evaluate(() => window.__galagaHarness__.inputState());
   await page.keyboard.down(key);
   await page.waitForTimeout(140);

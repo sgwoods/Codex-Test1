@@ -131,7 +131,9 @@ window.__galagaHarness__={
   if(window.AuroraReplayStore?.supported?.()){
    const existing=await window.AuroraReplayStore.listReplays();
    for(const replay of existing){
-    if(replay.id=== (cfg.replayId || 'replay-stage7-local'))await window.AuroraReplayStore.deleteReplay(replay.id);
+    if(cfg.clearExisting!==false || replay.id=== (cfg.replayId || 'replay-stage7-local')){
+     await window.AuroraReplayStore.deleteReplay(replay.id);
+    }
    }
    await window.AuroraReplayStore.saveReplay({
     id: cfg.replayId || 'replay-stage7-local',
@@ -617,6 +619,52 @@ window.__galagaHarness__={
    enemyTm:+enemy.tm.toFixed(3)
   });
   return true;
+ },
+ setupChallengeMotionProfileTest(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  ATTRACT.timer=0;
+  S.attract=0;
+  S.stage=Math.max(1,+cfg.stage||3);
+  S.pendingStage=0;
+  S.forceChallenge=1;
+  S.nextStageT=0;
+  S.postChallengeT=0;
+  S.challengeTransitionStallLogged=0;
+  S.lastChallengeClearT=null;
+  S.banner=0;
+  S.bannerTxt='';
+  S.bannerSub='';
+  S.bannerMode='';
+  S.alertT=0;
+  S.alertTxt='';
+  S.shake=0;
+  const p=S.p;
+  p.x=PLAY_W/2;
+  p.y=PLAY_H-VIS.playerBottom;
+  p.vx=0;
+  p.cd=0;
+  p.inv=0;
+  p.spawn=0;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  spawnStage();
+  for(const e of S.e){
+   if(!e?.ch||e.hp<=0)continue;
+   e.tm=0;
+   e.spawn=e.spawnPlan||0;
+  }
+  logEvent('harness_challenge_motion_profile_setup',{
+   stage:S.stage,
+   enemies:S.e.filter(e=>e.hp>0&&e.ch).length
+  });
+  return this.challengeFormationState();
  },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
