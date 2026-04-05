@@ -44,6 +44,41 @@ Immediate next steps:
    blockers
 4. promote the next stable Aurora build with explicit Platinum framing
 
+Current stabilization artifact:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/AURORA_PLATINUM_STABILIZATION_CHECKLIST.md`
+
+## Minimal Second-Game Dev Slice: Galaxy Guardians
+
+Target outcome:
+
+- a dev-only second game pack that proves Platinum can host a clearly different
+  ruleset without shipping that second game publicly yet
+
+Minimal scope:
+
+- formation rack
+- enemy dives
+- flagship/escort scoring behavior
+- single-shot constraint
+- wrap-around threat
+- life loss / game over / results
+
+Explicitly not required in the first dev-only slice:
+
+- capture/rescue
+- dual fighter
+- challenge stages
+- production polish
+- rich designer/content systems
+
+Why this matters:
+
+- it proves the platform seam with a smaller and different game
+- it keeps the second-game effort narrow enough to be useful rather than
+  sprawling
+- it avoids rushing a second public release before Platinum is truly ready
+
 Key issue groups:
 
 - platform shell identity and copy cleanup

@@ -17,6 +17,8 @@ Related planning artifact:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md`
 - Platinum-focused forward architecture review:
   - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`
+- Aurora stabilization gate for the Platinum rerelease:
+  - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_PLATINUM_STABILIZATION_CHECKLIST.md`
 
 ## Current Migration State
 

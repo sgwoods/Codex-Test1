@@ -237,6 +237,10 @@ The immediate Platinum path is:
 3. release Aurora publicly as a clearly Platinum-hosted game
 4. then start preparation for the first playable `Galaxy Guardians` slice
 
+The current stabilization gate lives in:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/AURORA_PLATINUM_STABILIZATION_CHECKLIST.md`
+
 What changed since the last full review:
 
 - closed:
