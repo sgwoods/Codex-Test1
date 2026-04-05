@@ -266,6 +266,21 @@ The current rerelease hardening pass has explicit evidence for:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
 - platform-shell boot/install path:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
+- shell/popup/dock interaction integrity:
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
+  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
+
+Current automated status on `2026-04-05`:
+
+- all required Aurora-on-Platinum rerelease evidence checks are green on the
+  current dev line
+- no current automated failures are blocking the Platinum-framed Aurora
+  rerelease candidate
+- the remaining release decision is now about:
+  - whether any known Aurora gameplay follow-up should be upgraded to
+    rerelease-blocker status
+  - one final promotion rehearsal and public-lane verification pass
 
 The current Platinum-framed shell surfaces now include:
 
@@ -312,14 +327,14 @@ Manual shell verification now completed on the current dev line:
 
 ## Recommendation
 
-`#85` should remain in the launch list until the remaining higher-priority
-gameplay/presentation blockers are reduced to a short final pass.
+`#85` should remain in the launch list until the team decides whether any of
+the remaining known Aurora gameplay issues should block the Platinum-framed
+rerelease.
 
-At that point, this review should be reopened for one deliberate final sweep,
-not treated as an always-open vague blocker.
-
-Practical interpretation:
+Practical interpretation today:
 
 - implemented on dev as a concrete review/checklist artifact
+- automated rerelease hardening is green
 - final sign-off still pending
-- should be revisited immediately before the last production launch decision
+- next meaningful step is a deliberate rerelease decision, not more vague
+  architecture work

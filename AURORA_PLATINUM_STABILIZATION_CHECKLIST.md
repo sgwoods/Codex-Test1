@@ -26,6 +26,31 @@ Target public state:
   - preview only
   - not playable in production
 
+## Current Status Snapshot
+
+As of `2026-04-05`, the current dev line meets the full automated evidence bar
+for the Platinum-framed Aurora rerelease:
+
+- `npm run build`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
+- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
+
+That means the remaining Aurora stabilization work is now about:
+
+- final production-equivalence judgment
+- choosing which gameplay follow-ups are rerelease blockers versus planned
+  post-rerelease fixes
+- one final promotion rehearsal and public-lane verification
+
 ## Definition Of Equivalent To Production
 
 Aurora should match the current shipped production contract on:

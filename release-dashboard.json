@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.0.2",
-  "currentFocus": "Aurora-on-Platinum rerelease hardening, platform framing, and stable shell verification",
-  "strapline": "A stable Aurora baseline hosted visibly on Platinum, with shell identity, pack selection, and release trust hardened before the next promotion.",
+  "currentFocus": "Aurora-on-Platinum rerelease decision: automated hardening green, remaining work is blocker triage and promotion rehearsal",
+  "strapline": "Aurora now clears the Platinum rerelease evidence gate locally; the next move is deciding which remaining Aurora follow-ups block promotion and then rehearsing the public release path.",
   "timeline": [
     {
       "id": "foundation",
@@ -54,14 +54,14 @@
     {
       "id": "ship-polish",
       "title": "Ship-Ready Polish",
-      "status": "in_progress",
-      "summary": "Native replay, player guide, icon-rail controls, Platinum splash and picker surfaces, and production publish correctness are the current rerelease finish work."
+      "status": "done",
+      "summary": "Native replay, player guide, icon-rail controls, Platinum splash and picker surfaces, and the core rerelease evidence suite are now in place."
     },
     {
       "id": "release",
       "title": "1.0 Release",
-      "status": "up_next",
-      "summary": "Republish Aurora as a clearly Platinum-hosted title once the shell hardening pass and final rerelease review are confirmed."
+      "status": "in_progress",
+      "summary": "Republish Aurora as a clearly Platinum-hosted title once we finish the blocker call, promotion rehearsal, and final public-lane verification."
     }
   ],
   "legend": [
