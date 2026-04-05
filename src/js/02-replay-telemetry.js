@@ -122,6 +122,7 @@ function localReplaySupported(){
  return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
 }
 function shouldCaptureRunVideo(){
+ if(window.__platinumHarnessDisableRecording||window.__auroraHarnessDisableRecording)return false;
  return videoRecordSupported()&&(VIDEO_REC.enabled||localReplaySupported());
 }
 function pickVideoMime(){

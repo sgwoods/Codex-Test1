@@ -128,6 +128,19 @@ function harnessTargetScore(e,p,cfg){
  return (e.dive?cfg.diveBias:0)+(e.carry?cfg.carryBias:0)+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
 }
 
+function compareHarnessTargets(a,b,p,cfg){
+ const scoreDiff=harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg);
+ if(Math.abs(scoreDiff)>1e-9)return scoreDiff;
+ if((b.dive|0)!==(a.dive|0))return (b.dive|0)-(a.dive|0);
+ if((b.carry|0)!==(a.carry|0))return (b.carry|0)-(a.carry|0);
+ if((b.t==='boss')!==(a.t==='boss'))return (b.t==='boss')-(a.t==='boss');
+ if(b.y!==a.y)return b.y-a.y;
+ if(Math.abs(b.x-p.x)!==Math.abs(a.x-p.x))return Math.abs(a.x-p.x)-Math.abs(b.x-p.x);
+ if((a.c??0)!==(b.c??0))return (a.c??0)-(b.c??0);
+ if((a.r??0)!==(b.r??0))return (a.r??0)-(b.r??0);
+ return (a.id??0)-(b.id??0);
+}
+
 function logProfessionalDecision(p,cfg,reason,extra={}){
  if(cfg?.name!=='professional')return;
  if(p.hDebugT>0)return;
@@ -175,7 +188,7 @@ function keyHeldMs(...codes){
 }
 
 function harnessSelectTarget(p,cfg){
- return S.e.filter(e=>e.hp>0).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||null;
+ return S.e.filter(e=>e.hp>0).sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||null;
 }
 
 function harnessMoveAxis(p,cfg){
@@ -200,7 +213,7 @@ function runHarnessPlayer(dt,p,cfg){
  const axis=harnessMoveAxis(p,cfg);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
- const target=attackables.sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||harnessSelectTarget(p,cfg);
+ const target=attackables.sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||harnessSelectTarget(p,cfg);
  logProfessionalDecision(p,cfg,'tick',{
   attackables:attackables.length,
   targetId:target?target.id:null,

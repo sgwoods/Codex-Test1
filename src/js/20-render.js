@@ -1,6 +1,6 @@
 // Render orchestration for the active Aurora scene.
 function draw(){
- const sh=S.shake*8,dx=rnd(sh,-sh),dy=rnd(sh,-sh);
+ const sh=S.shake*8,dx=auxRnd(sh,-sh),dy=auxRnd(sh,-sh);
  const compactCabinet=innerWidth<1500||innerHeight<980;
  const outerPadX=Math.max(10,Math.floor(innerWidth*(compactCabinet?.012:.016)));
  const outerPadTop=Math.max(10,Math.floor(innerHeight*(compactCabinet?.01:.014)));

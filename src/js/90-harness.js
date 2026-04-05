@@ -2,10 +2,13 @@
 window.__galagaHarness__={
  start(cfg={}){
   if(cfg.seed!==undefined)setSeed(cfg.seed);
+  window.__platinumHarnessDisableRecording=cfg.autoVideo===false?1:0;
+  window.__auroraHarnessDisableRecording=window.__platinumHarnessDisableRecording;
  if(typeof cfg.autoVideo==='boolean'){
    VIDEO_REC.enabled=!!cfg.autoVideo;
    localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
    syncRecordUi();
+   if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
  if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
@@ -16,9 +19,28 @@ window.__galagaHarness__={
  }
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
+ if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(!started)start();
 },
+ setControlledClock(enabled=1){
+  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!enabled);
+  return !!enabled;
+ },
+ advanceFor(seconds=0,opts={}){
+  const total=Math.max(0,+seconds||0);
+  const step=Math.max(1/240,Math.min(1/30,+opts.step||1/60));
+  const stopOnGameOver=!!opts.stopOnGameOver;
+  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(1);
+  let elapsed=0;
+  while(elapsed<total){
+   if(stopOnGameOver&&!started)break;
+   update(step);
+   elapsed+=step;
+  }
+  draw();
+  return this.state();
+ },
  setCarryDebug(cfg={}){
   const enabled=typeof cfg.enabled==='boolean'?cfg.enabled:!!cfg;
   window.setCarryDebug(enabled,'harness');
@@ -943,7 +965,11 @@ setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
 function loop(ts){
  const dt=Math.min(.033,(ts-t0)/1000||0);
  t0=ts;
- if(useDeterministicHarnessClock()){
+ if(harnessClockControlled){
+  harnessFrameAccum=0;
+  requestAnimationFrame(loop);
+  return;
+ }else if(useDeterministicHarnessClock()){
   const step=1/60;
   harnessFrameAccum=Math.min(.1,harnessFrameAccum+dt);
   while(harnessFrameAccum>=step){

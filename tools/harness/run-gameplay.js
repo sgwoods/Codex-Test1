@@ -160,6 +160,14 @@ async function replay(page, spec){
   return at;
 }
 
+async function deterministicAdvance(page, spec){
+  return page.evaluate(({ duration, stopOnGameOver }) => {
+    const api = window.__galagaHarness__;
+    if(!api || typeof api.advanceFor !== 'function') throw new Error('Harness advanceFor is not available');
+    return api.advanceFor(duration, { stopOnGameOver, step: 1/60 });
+  }, { duration: spec.duration, stopOnGameOver: !!spec.stopOnGameOver });
+}
+
 async function waitForDownloads(list, count, timeoutMs){
   const until = Date.now() + timeoutMs;
   while(Date.now() < until){
@@ -233,6 +241,7 @@ async function main(){
   const seedTag = spec.seed ? `-seed${spec.seed}` : '';
   const outDir = path.join(outBase, `${spec.name}${personaTag}${seedTag}-${stamp}-${runTag}`);
   fs.mkdirSync(outDir, { recursive: true });
+  const initAutoVideo = spec.autoVideo === false ? '0' : '1';
 
   const { server, port } = await serve(APP_ROOT);
   const browser = await chromium.launch({
@@ -251,21 +260,27 @@ async function main(){
     page.on('download', d => downloads.push(d));
 
     await page.addInitScript(cfg => {
-      localStorage.setItem('auroraGalacticaAutoVideo', '1');
+      localStorage.setItem('auroraGalacticaAutoVideo', cfg.autoVideo);
       localStorage.setItem('auroraGalacticaTestCfg', JSON.stringify(cfg));
       localStorage.setItem('auroraGalacticaHarnessSeed', String(cfg.seed >>> 0));
-      localStorage.setItem('platinumAutoVideo', '1');
+      localStorage.setItem('platinumAutoVideo', cfg.autoVideo);
       localStorage.setItem('platinumTestCfg', JSON.stringify(cfg));
       localStorage.setItem('platinumHarnessSeed', String(cfg.seed >>> 0));
-    }, Object.assign({}, spec.config, { seed: spec.seed }));
+    }, Object.assign({}, spec.config, { seed: spec.seed, autoVideo: initAutoVideo }));
 
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__galagaHarness__);
     const autoVideo = spec.autoVideo !== false;
-    await page.evaluate(cfg => window.__galagaHarness__.start(cfg), Object.assign({}, spec.config, { seed: spec.seed, autoVideo }));
+    const deterministicFastPath = !autoVideo && !!spec.config?.persona && (!spec.actions || spec.actions.length === 0);
+    await page.evaluate(cfg => window.__galagaHarness__.start(cfg), Object.assign({}, spec.config, { seed: spec.seed, autoVideo, controlledClock: deterministicFastPath }));
 
-    const replayTime = await replay(page, spec);
-    const state = await waitForRun(page, spec, replayTime);
+    let state;
+    if(deterministicFastPath){
+      state = await deterministicAdvance(page, spec);
+    }else{
+      const replayTime = await replay(page, spec);
+      state = await waitForRun(page, spec, replayTime);
+    }
     await finalizeArtifacts(page, downloads, spec, state);
     const saved = [];
     for(const download of downloads){

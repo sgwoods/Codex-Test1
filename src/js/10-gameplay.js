@@ -3,7 +3,7 @@
 function fillPat(px,py,s,pat,col){if(!pat||!col)return;ctx.fillStyle=col;for(const p of pat)ctx.fillRect(px+p[0]*s,py+p[1]*s,s,s)}
 function drawPix(px,py,s,pat,col,col2,pat2=null,col3='',pat3=null){fillPat(px,py,s,pat,col);if(pat2)fillPat(px,py,s,pat2,col2);else if(col2){ctx.fillStyle=col2;ctx.fillRect(px-s,py+s*2,s*2,s);ctx.fillRect(px+s*3,py+s*2,s*2,s)}if(pat3)fillPat(px,py,s,pat3,col3)}
 function ex(x,y,n=10,col='#fff'){
- for(let i=0;i<n;i++)S.fx.push({x,y,vx:rnd(178,-178),vy:rnd(178,-178),t:rnd(.22,.08),r:rnd(n>14?2.1:1.5,.55),c:col,sq:randUnit()>.25});
+ for(let i=0;i<n;i++)S.fx.push({x,y,vx:auxRnd(178,-178),vy:auxRnd(178,-178),t:auxRnd(.22,.08),r:auxRnd(n>14?2.1:1.5,.55),c:col,sq:auxRandUnit()>.25});
  S.fx.push({x,y,vx:0,vy:0,t:n>14?.11:.08,r:n>14?10:7,c:'#fff',flash:1});
 }
 
@@ -23,7 +23,7 @@ function update(dt){
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
   if(ATTRACT.phase==='scores'){
-   for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(10+s.z*18)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
+   for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(10+s.z*18)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
    if(!ATTRACT.timer)startAttractDemo();
    return;
   }
@@ -43,7 +43,7 @@ function update(dt){
   }else S.nextStageT=remaining;
   return
  }
- for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=rnd(PLAY_W)}}
+ for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
