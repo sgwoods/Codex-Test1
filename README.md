@@ -3,6 +3,8 @@
 `Aurora Galactica` is the first fully playable game pack running on the
 `Platinum` arcade game platform.
 
+![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
+
 - `Platinum`
   - the shared cabinet-shooter platform, shell, services, harness boundary,
     and pack-hosting runtime
@@ -183,6 +185,29 @@ The next major platform milestone is:
 - keep Aurora behavior aligned with the shipped `1.0.2` baseline
 - use the game picker to preview future titles without pretending they are
   playable before they are ready
+
+### What Is Next On Platform Work
+
+The immediate platform sequence is now:
+
+1. complete the `Aurora-on-Platinum` rerelease hardening pass
+2. verify the Platinum shell surfaces manually in dev one more time
+3. ship Aurora clearly as a Platinum-hosted title
+4. return to the tracked Aurora gameplay follow-ups that affect trust and
+   clarity
+5. only then begin the first truly playable `Galaxy Guardians` slice
+
+### Platform Visuals
+
+Maintained Platinum and pack-separation graphics:
+
+![Platinum Platform Stack](reference-artifacts/diagrams/platinum/platinum-platform-stack.svg)
+
+![Platinum vs Game Packs](reference-artifacts/diagrams/platinum/platinum-pack-separation.svg)
+
+![Aurora Pack Card](reference-artifacts/diagrams/platinum/aurora-pack-card.svg)
+
+![Galaxy Guardians Pack Card](reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg)
 
 - Editable source files live in:
   - `src/index.template.html`

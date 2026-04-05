@@ -1,0 +1,78 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heroBg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111E"/>
+      <stop offset="0.55" stop-color="#0B1830"/>
+      <stop offset="1" stop-color="#101C37"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1130 210) rotate(90) scale(260 260)">
+      <stop offset="0" stop-color="#6AE9FF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#6AE9FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F5FBFF"/>
+      <stop offset="0.45" stop-color="#B8D4F6"/>
+      <stop offset="1" stop-color="#5EA6FF"/>
+    </linearGradient>
+    <linearGradient id="arc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8BF0FF"/>
+      <stop offset="1" stop-color="#238CFF"/>
+    </linearGradient>
+    <filter id="heroGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#heroBg)"/>
+  <circle cx="1130" cy="210" r="260" fill="url(#orb)"/>
+  <circle cx="260" cy="720" r="220" fill="#18304B" opacity="0.25"/>
+
+  <g opacity="0.24" stroke="#4AA3D8" stroke-width="2">
+    <path d="M1230 72C1282 86 1340 124 1390 176"/>
+    <path d="M1270 134C1344 140 1416 188 1490 260"/>
+    <path d="M1284 220C1374 230 1450 286 1510 370"/>
+    <path d="M86 742C190 710 282 668 364 604"/>
+    <path d="M118 812C212 776 314 722 404 636"/>
+  </g>
+
+  <g filter="url(#heroGlow)">
+    <path d="M1004 170L1092 96L1172 96L1090 186L1174 278L1094 278L1006 204H940L874 264L814 264L900 184L818 104L898 104L970 170H1004Z" fill="url(#metal)"/>
+    <path d="M1152 114C1248 126 1310 200 1310 292C1310 378 1258 450 1178 484" stroke="url(#arc)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M1186 88C1298 108 1370 194 1370 300C1370 396 1316 478 1230 522" stroke="url(#arc)" stroke-width="8" stroke-linecap="round" opacity="0.95"/>
+    <rect x="1064" y="194" width="74" height="74" rx="18" stroke="#D9F8FF" stroke-width="8"/>
+    <path d="M1101 210V252" stroke="#D9F8FF" stroke-width="8" stroke-linecap="round"/>
+    <path d="M1080 231H1122" stroke="#D9F8FF" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <text x="110" y="226" fill="#ECF7FF" font-size="86" font-family="Menlo, Monaco, monospace" font-weight="700">PLATINUM</text>
+  <text x="116" y="286" fill="#8BE8FF" font-size="34" font-family="Menlo, Monaco, monospace" font-weight="700">Arcade Game Platform</text>
+  <text x="116" y="356" fill="#D8E8FF" font-size="28" font-family="Menlo, Monaco, monospace">Hosts the cabinet shell, runtime, service adapters, and shared contracts</text>
+  <text x="116" y="396" fill="#D8E8FF" font-size="28" font-family="Menlo, Monaco, monospace">that let multiple fixed-screen shooters live on one coherent platform.</text>
+
+  <g>
+    <rect x="110" y="484" width="456" height="164" rx="28" fill="#12223C" stroke="#58D6FF" stroke-width="2"/>
+    <text x="144" y="536" fill="#8BE8FF" font-size="30" font-family="Menlo, Monaco, monospace" font-weight="700">Platinum owns</text>
+    <text x="144" y="580" fill="#EAF3FF" font-size="23" font-family="Menlo, Monaco, monospace">shell framing, picker, splash, auth,</text>
+    <text x="144" y="612" fill="#EAF3FF" font-size="23" font-family="Menlo, Monaco, monospace">leaderboards, feedback, replay, release gates</text>
+  </g>
+
+  <g>
+    <rect x="596" y="484" width="398" height="164" rx="28" fill="#261A1E" stroke="#F09143" stroke-width="2"/>
+    <text x="630" y="536" fill="#FFC982" font-size="30" font-family="Menlo, Monaco, monospace" font-weight="700">Aurora today</text>
+    <text x="630" y="580" fill="#FFF2E8" font-size="23" font-family="Menlo, Monaco, monospace">first playable pack,</text>
+    <text x="630" y="612" fill="#FFF2E8" font-size="23" font-family="Menlo, Monaco, monospace">already running on Platinum in dev</text>
+  </g>
+
+  <g>
+    <rect x="1024" y="484" width="466" height="164" rx="28" fill="#211B35" stroke="#B38BFF" stroke-width="2"/>
+    <text x="1058" y="536" fill="#E7D7FF" font-size="30" font-family="Menlo, Monaco, monospace" font-weight="700">What comes next</text>
+    <text x="1058" y="580" fill="#F4EDFF" font-size="23" font-family="Menlo, Monaco, monospace">stabilize the Aurora rerelease baseline,</text>
+    <text x="1058" y="612" fill="#F4EDFF" font-size="23" font-family="Menlo, Monaco, monospace">then begin the first playable Galaxy Guardians slice</text>
+  </g>
+
+  <text x="110" y="768" fill="#9DB1D6" font-size="22" font-family="Menlo, Monaco, monospace">Documentation graphic · editable SVG · keep aligned with /PLATINUM_ARCHITECTURE_OVERVIEW.md</text>
+</svg>

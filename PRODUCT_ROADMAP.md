@@ -20,6 +20,14 @@ Target outcome:
   architecture name
 - the shell can advertise future games without pretending they are playable
 
+Current status:
+
+- in progress
+- dev-visible Platinum shell framing is now real
+- Aurora is already playable on Platinum in dev
+- the main remaining work is rerelease hardening, manual shell verification,
+  and public-facing wording/identity polish
+
 Definition:
 
 - rerelease the existing Aurora build path with Platinum host framing
@@ -27,6 +35,14 @@ Definition:
 - add a platform-owned Platinum splash surface
 - use the game picker to show a dismissable `Coming Soon` splash for
   `Galaxy Guardians`
+
+Immediate next steps:
+
+1. keep the Platinum shell and platform harnesses green
+2. verify the Platinum-framed Aurora experience manually in dev
+3. decide which Aurora gameplay follow-ups are post-rerelease rather than
+   blockers
+4. promote the next stable Aurora build with explicit Platinum framing
 
 Key issue groups:
 

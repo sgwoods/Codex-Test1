@@ -101,12 +101,18 @@ flowchart TB
 The following SVG graphics are maintained alongside this overview and are meant
 to be reused in docs, release briefings, and planning artifacts:
 
+- public-facing platform hero:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-hero.svg`
 - platform stack:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-platform-stack.svg`
 - platform versus game-pack ownership:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-pack-separation.svg`
 - migration state and next-step framing:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-migration-state.svg`
+- Aurora pack card:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/aurora-pack-card.svg`
+- Galaxy Guardians pack card:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg`
 
 ## Separation Summary
 

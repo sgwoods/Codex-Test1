@@ -4,6 +4,11 @@
 
 - `Platinum` now names the shared arcade-game platform
 - `Aurora Galactica` is the first fully playable game pack running on Platinum
+- the Platinum shell now has a real public-facing identity:
+  - Platinum button
+  - Platinum splash
+  - game picker
+  - `Galaxy Guardians` coming-soon preview
 - Browser-based fixed-screen arcade shooter built from readable source modules and served from `dist/production/index.html`
 - Build identity is now part of the product:
   - prerelease SemVer in `package.json` for the pre-production engineering line
@@ -217,10 +222,20 @@ Current coding priority:
 
 1. keep Aurora `1.0.2` stable in production
 2. complete the Platinum rerelease milestone for the existing Aurora game
-3. use `1.1.x` for architectural stabilization and early shared-runtime extraction
-4. use `1.2.x` for platform-owned services and operator-facing infrastructure
-5. begin the Aurora-specific `Game Designer` planning phase using:
+3. close the most visible Aurora trust/clarity follow-ups after the platform rerelease baseline is stable
+4. use `1.1.x` for architectural stabilization and early shared-runtime extraction
+5. use `1.2.x` for platform-owned services and operator-facing infrastructure
+6. begin the Aurora-specific `Game Designer` planning phase using:
   - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
+
+### Current platform next steps
+
+The immediate Platinum path is:
+
+1. finish and verify the Aurora-on-Platinum rerelease baseline
+2. keep the selected-pack shell, splash, picker, and platform-only harnesses green
+3. release Aurora publicly as a clearly Platinum-hosted game
+4. then start preparation for the first playable `Galaxy Guardians` slice
 
 What changed since the last full review:
 
