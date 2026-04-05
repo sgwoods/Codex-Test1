@@ -15,6 +15,8 @@ Related planning artifact:
   - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
 - architect review response baseline:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md`
+- Platinum-focused forward architecture review:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`
 
 ## Current Migration State
 

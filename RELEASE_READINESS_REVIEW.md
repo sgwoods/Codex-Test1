@@ -295,6 +295,21 @@ Before final `1.0` sign-off, confirm:
 - one manual dev verification pass confirms the new Platinum shell surfaces
   feel correct in-browser
 
+Manual shell verification now completed on the current dev line:
+
+- local game server responds on:
+  - `http://127.0.0.1:8000/`
+- local log-viewer responds on:
+  - `http://127.0.0.1:4311/`
+- Platinum shell surfaces were checked visually against current screenshots for:
+  - Platinum splash
+  - game picker
+  - guide/help popup framing
+- current read:
+  - shell framing is coherent
+  - Platinum identity is visible without overwhelming Aurora
+  - picker and preview-pack treatment read as intentional, not accidental
+
 ## Recommendation
 
 `#85` should remain in the launch list until the remaining higher-priority
