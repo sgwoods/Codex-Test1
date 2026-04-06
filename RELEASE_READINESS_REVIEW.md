@@ -271,10 +271,17 @@ The current rerelease hardening pass has explicit evidence for:
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
   - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
 
-Current automated status on `2026-04-05`:
+Current automated status on `2026-04-06`:
 
 - all required Aurora-on-Platinum rerelease evidence checks are green on the
   current dev line
+- seeded persona repeatability is green again
+- the full-run seeded distribution is back on the clean `1.0.2` reference
+  results for:
+  - novice
+  - advanced
+  - expert
+  - professional
 - no current automated failures are blocking the Platinum-framed Aurora
   rerelease candidate
 - the remaining release decision is now about:
@@ -325,16 +332,33 @@ Manual shell verification now completed on the current dev line:
   - Platinum identity is visible without overwhelming Aurora
   - picker and preview-pack treatment read as intentional, not accidental
 
+Manual gameplay verification now also completed on the current dev line:
+
+- Aurora was played locally through the Platinum-framed dev build
+- current read:
+  - Stage `1` and Stage `2` feel good
+  - the first challenge stage feels about right again
+  - no fresh manual evidence suggests the earlier severe gameplay-parity drift
+    is still present
+- one follow-up visual bug was observed during game-over/results:
+  - a captured/carried fighter can appear to hang in an odd end-state relation
+    to the carrying boss during the results screen
+  - this should be tracked as Aurora polish follow-up, but it does not currently
+    look like a release-blocking regression
+
 ## Recommendation
 
-`#85` should remain in the launch list until the team decides whether any of
-the remaining known Aurora gameplay issues should block the Platinum-framed
-rerelease.
+`#85` should remain in the launch list until the team completes one final
+promotion rehearsal and public-lane verification pass.
 
 Practical interpretation today:
 
 - implemented on dev as a concrete review/checklist artifact
 - automated rerelease hardening is green
-- final sign-off still pending
-- next meaningful step is a deliberate rerelease decision, not more vague
-  architecture work
+- manual feel-check now supports the automated parity read
+- no current evidence suggests that `#140` or `#141` should block the Platinum
+  rerelease baseline
+- final sign-off is now a release-operations decision, not an architecture or
+  broad gameplay-fidelity investigation
+- next meaningful step is a beta/production promotion rehearsal and final
+  public-lane verification

@@ -396,21 +396,20 @@ Definition of success:
 
 ### Current Next Steps
 
-1. finish the Platinum-vs-Aurora documentation cleanup across public-facing and
-   planning docs
-2. ship the Platinum rerelease milestone for Aurora with clearer shell
-   branding, Platinum splash, and future-game preview behavior
-3. tag and continue strengthening harness coverage by family:
-   - platform-only
-   - game-pack
-   - seam / contract
-   - migration / compatibility
-4. return to game development after the rerelease baseline feels trustworthy,
-   starting with:
-   - standing Aurora gameplay bugs such as `#140`
+1. run the Platinum beta/production promotion rehearsal for the current Aurora
+   rerelease candidate
+2. verify the promoted public-lane build metadata, shell framing, and
+   lane-specific service behavior
+3. ship the Platinum rerelease milestone for Aurora with:
+   - Aurora playable
+   - `Galaxy Guardians` clearly marked as coming soon
+4. return to Aurora gameplay and polish follow-up work after the rerelease
+   baseline is public and trusted, starting with:
+   - `#140`
+   - carried-fighter/results-screen visual cleanup
    - extra-ship visibility/audio
    - dual-ship survival edge cases
-   - only then the first playable sibling slice
+5. only then begin the first dev-only playable `Galaxy Guardians` slice
 
 ### Track A. Autonomous Original-Galaga Baseline
 
