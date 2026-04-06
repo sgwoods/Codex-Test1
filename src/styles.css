@@ -2,7 +2,28 @@
 :root{--fg:#f4f7ff;--a:#74e6ff;--shell-line:rgba(122,215,255,.28);--shell-glow:rgba(178,236,255,.12);--frame-line:rgba(171,214,255,.28);--frame-glow:rgba(255,220,122,.08);--marquee-border:#8ce8ff;--marquee-glow:rgba(122,215,255,.34);--marquee-bg:linear-gradient(180deg,#f7fbff,#dde8f5);--shell-top-bg:radial-gradient(circle at 14% 26%,rgba(189,221,255,.28) 0 10%,transparent 11%),radial-gradient(circle at 86% 30%,rgba(112,216,255,.24) 0 10%,transparent 11%),linear-gradient(135deg,rgba(255,255,255,.16) 0 10%,transparent 10% 22%,rgba(126,189,255,.12) 22% 33%,transparent 33% 46%,rgba(255,255,255,.08) 46% 56%,transparent 56%),linear-gradient(180deg,rgba(10,16,32,.97),rgba(18,28,48,.9));--shell-side-bg:radial-gradient(circle at 50% 14%,rgba(163,236,255,.2) 0 9%,transparent 10%),radial-gradient(circle at 22% 82%,rgba(255,235,171,.14) 0 10%,transparent 11%),linear-gradient(150deg,rgba(116,167,225,.16) 0 14%,transparent 14% 28%,rgba(255,255,255,.06) 28% 34%,transparent 34% 48%,rgba(116,167,225,.12) 48% 62%,transparent 62%),linear-gradient(180deg,rgba(6,12,26,.98),rgba(12,20,39,.96));--shell-bottom-bg:radial-gradient(circle at 20% 62%,rgba(164,229,255,.16) 0 11%,transparent 12%),radial-gradient(circle at 82% 58%,rgba(255,224,147,.14) 0 10%,transparent 11%),linear-gradient(150deg,rgba(116,167,225,.14) 0 14%,transparent 14% 28%,rgba(255,255,255,.05) 28% 34%,transparent 34% 48%,rgba(116,167,225,.1) 48% 62%,transparent 62%),linear-gradient(180deg,rgba(10,16,32,.98),rgba(4,8,20,.98));--shell-unified-bg:radial-gradient(circle at 8% 12%,rgba(170,214,255,.24) 0 10%,transparent 11%),radial-gradient(circle at 92% 8%,rgba(142,210,255,.18) 0 12%,transparent 13%),radial-gradient(circle at 12% 86%,rgba(255,221,148,.12) 0 9%,transparent 10%),radial-gradient(circle at 88% 90%,rgba(178,226,255,.12) 0 10%,transparent 11%),linear-gradient(146deg,rgba(125,176,228,.12) 0 10%,transparent 10% 22%,rgba(255,255,255,.04) 22% 30%,transparent 30% 42%,rgba(125,176,228,.08) 42% 56%,transparent 56%),linear-gradient(180deg,rgba(9,16,31,.98),rgba(13,22,40,.96));--shell-unified-stars:radial-gradient(circle at 10% 24%,rgba(255,255,255,.84) 0 1px,transparent 2px),radial-gradient(circle at 84% 18%,rgba(255,255,255,.7) 0 1px,transparent 2px),radial-gradient(circle at 18% 68%,rgba(255,255,255,.62) 0 1px,transparent 2px),radial-gradient(circle at 76% 74%,rgba(255,255,255,.58) 0 1px,transparent 2px),radial-gradient(circle at 52% 88%,rgba(255,255,255,.54) 0 1px,transparent 2px);--shell-panel-border:rgba(188,226,255,.18);--shell-panel-shadow:inset 0 -8px 18px rgba(0,0,0,.28);--left-rail-border:rgba(142,206,255,.22);--left-rail-bg:radial-gradient(circle at 72% 14%,rgba(145,224,255,.24) 0 8%,transparent 9%),radial-gradient(circle at 24% 84%,rgba(255,224,151,.12) 0 9%,transparent 10%),linear-gradient(200deg,rgba(16,24,46,.78),rgba(6,11,24,.86)),repeating-linear-gradient(24deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px);--right-rail-border:rgba(142,206,255,.22);--right-rail-bg:radial-gradient(circle at 72% 14%,rgba(145,224,255,.22) 0 8%,transparent 9%),radial-gradient(circle at 76% 86%,rgba(255,224,151,.12) 0 9%,transparent 10%),linear-gradient(160deg,rgba(16,24,46,.78),rgba(6,11,24,.86)),repeating-linear-gradient(156deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px);--rail-inner-border:rgba(255,255,255,.06);--rail-inner-glow:rgba(255,229,122,.04)}
 html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:"Courier New",Consolas,monospace;color:var(--fg)}
 canvas{display:block;width:100vw;height:100vh}
-#cabinetShell{position:fixed;display:none;pointer-events:none;z-index:4;overflow:hidden;background:var(--shell-unified-bg);--shell-left:40px;--shell-top:132px;--shell-right:168px;--shell-bottom:84px}
+#cabinetShell{
+position:fixed;
+display:none;
+pointer-events:none;
+z-index:4;
+overflow:hidden;
+background:var(--shell-unified-bg);
+--shell-left:40px;
+--shell-top:132px;
+--shell-right:168px;
+--shell-bottom:84px;
+-webkit-mask:
+ linear-gradient(#000 0 0) top/100% var(--shell-top) no-repeat,
+ linear-gradient(#000 0 0) left var(--shell-top)/var(--shell-left) calc(100% - var(--shell-top) - var(--shell-bottom)) no-repeat,
+ linear-gradient(#000 0 0) right var(--shell-top)/var(--shell-right) calc(100% - var(--shell-top) - var(--shell-bottom)) no-repeat,
+ linear-gradient(#000 0 0) bottom/100% var(--shell-bottom) no-repeat;
+mask:
+ linear-gradient(#000 0 0) top/100% var(--shell-top) no-repeat,
+ linear-gradient(#000 0 0) left var(--shell-top)/var(--shell-left) calc(100% - var(--shell-top) - var(--shell-bottom)) no-repeat,
+ linear-gradient(#000 0 0) right var(--shell-top)/var(--shell-right) calc(100% - var(--shell-top) - var(--shell-bottom)) no-repeat,
+ linear-gradient(#000 0 0) bottom/100% var(--shell-bottom) no-repeat
+}
 #cabinetShell::before{content:"";position:absolute;inset:0;border:1px solid var(--shell-line);box-shadow:0 14px 48px rgba(0,0,0,.42),inset 0 0 0 1px var(--shell-glow)}
 #cabinetShell::after{content:"";position:absolute;inset:0;background:var(--shell-unified-stars);opacity:.88;pointer-events:none}
 .shellPanel{position:absolute;overflow:hidden}
