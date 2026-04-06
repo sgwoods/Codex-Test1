@@ -87,7 +87,7 @@ for(const file of FILES){
   fs.copyFileSync(src, dest);
 }
 
-if(fs.existsSync(DEV_BUILD_INFO) && fs.existsSync(BETA_BUILD_INFO)){
+if(fs.existsSync(DEV_BUILD_INFO)){
   const sourceInfo = JSON.parse(fs.readFileSync(DEV_BUILD_INFO, 'utf8'));
   const betaInfo = buildBetaInfo(sourceInfo);
   fs.writeFileSync(BETA_BUILD_INFO, JSON.stringify(betaInfo, null, 2) + '\n');
