@@ -44,6 +44,185 @@ window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDeb
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
 let PRODUCT_NAME=PLATFORM_NAME;
+const PLATINUM_SHELL_FRAME_THEMES=Object.freeze({
+ 'platinum-release':Object.freeze({
+  shellLine:'rgba(122,215,255,.28)',
+  shellGlow:'rgba(178,236,255,.12)',
+  marqueeBorder:'#8ce8ff',
+  marqueeGlow:'rgba(122,215,255,.34)',
+  marqueeBackground:'linear-gradient(180deg,#f7fbff,#dde8f5)',
+  shellTopBackground:[
+   'radial-gradient(circle at 14% 26%,rgba(189,221,255,.28) 0 10%,transparent 11%)',
+   'radial-gradient(circle at 86% 30%,rgba(112,216,255,.24) 0 10%,transparent 11%)',
+   'linear-gradient(135deg,rgba(255,255,255,.16) 0 10%,transparent 10% 22%,rgba(126,189,255,.12) 22% 33%,transparent 33% 46%,rgba(255,255,255,.08) 46% 56%,transparent 56%)',
+   'linear-gradient(180deg,rgba(10,16,32,.97),rgba(18,28,48,.9))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 50% 14%,rgba(163,236,255,.2) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 22% 82%,rgba(255,235,171,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(116,167,225,.16) 0 14%,transparent 14% 28%,rgba(255,255,255,.06) 28% 34%,transparent 34% 48%,rgba(116,167,225,.12) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(6,12,26,.98),rgba(12,20,39,.96))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 20% 62%,rgba(164,229,255,.16) 0 11%,transparent 12%)',
+   'radial-gradient(circle at 82% 58%,rgba(255,224,147,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(116,167,225,.14) 0 14%,transparent 14% 28%,rgba(255,255,255,.05) 28% 34%,transparent 34% 48%,rgba(116,167,225,.1) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(10,16,32,.98),rgba(4,8,20,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(188,226,255,.18)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(142,206,255,.22)',
+  leftRailBackground:[
+   'radial-gradient(circle at 72% 14%,rgba(145,224,255,.24) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 24% 84%,rgba(255,224,151,.12) 0 9%,transparent 10%)',
+   'linear-gradient(200deg,rgba(16,24,46,.78),rgba(6,11,24,.86))',
+   'repeating-linear-gradient(24deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  rightRailBorder:'rgba(142,206,255,.22)',
+  rightRailBackground:[
+   'radial-gradient(circle at 72% 14%,rgba(145,224,255,.22) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 76% 86%,rgba(255,224,151,.12) 0 9%,transparent 10%)',
+   'linear-gradient(160deg,rgba(16,24,46,.78),rgba(6,11,24,.86))',
+   'repeating-linear-gradient(156deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.04)'
+ }),
+ 'aurora-crown':Object.freeze({
+  shellLine:'rgba(121,246,198,.34)',
+  shellGlow:'rgba(255,227,138,.14)',
+  marqueeBorder:'#48f0c3',
+  marqueeGlow:'rgba(201,140,255,.32)',
+  marqueeBackground:'linear-gradient(180deg,#fbfcff,#eef8f7)',
+  shellTopBackground:[
+   'radial-gradient(circle at 14% 24%,rgba(121,246,198,.24) 0 10%,transparent 11%)',
+   'radial-gradient(circle at 86% 28%,rgba(201,140,255,.2) 0 10%,transparent 11%)',
+   'linear-gradient(140deg,rgba(121,246,198,.12) 0 12%,transparent 12% 24%,rgba(201,140,255,.1) 24% 38%,transparent 38% 52%,rgba(255,231,138,.08) 52% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(8,18,32,.96),rgba(18,28,48,.88))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 46% 14%,rgba(121,246,198,.18) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 28% 82%,rgba(201,140,255,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(121,246,198,.12) 0 14%,transparent 14% 28%,rgba(201,140,255,.08) 28% 34%,transparent 34% 48%,rgba(255,231,138,.08) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(5,12,24,.98),rgba(11,20,34,.96))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 18% 62%,rgba(121,246,198,.14) 0 11%,transparent 12%)',
+   'radial-gradient(circle at 84% 58%,rgba(201,140,255,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(121,246,198,.12) 0 14%,transparent 14% 28%,rgba(201,140,255,.08) 28% 34%,transparent 34% 48%,rgba(255,231,138,.08) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(8,15,28,.98),rgba(4,8,20,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(173,255,229,.16)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(121,246,198,.2)',
+  leftRailBackground:[
+   'radial-gradient(circle at 72% 16%,rgba(121,246,198,.2) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 24% 86%,rgba(201,140,255,.12) 0 9%,transparent 10%)',
+   'linear-gradient(200deg,rgba(12,22,36,.8),rgba(4,9,20,.86))',
+   'repeating-linear-gradient(24deg,rgba(121,246,198,.14) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  rightRailBorder:'rgba(201,140,255,.2)',
+  rightRailBackground:[
+   'radial-gradient(circle at 74% 16%,rgba(201,140,255,.2) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 76% 84%,rgba(255,231,138,.12) 0 9%,transparent 10%)',
+   'linear-gradient(160deg,rgba(12,22,36,.8),rgba(4,9,20,.86))',
+   'repeating-linear-gradient(156deg,rgba(201,140,255,.14) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.04)'
+ }),
+ 'guardians-preview':Object.freeze({
+  shellLine:'rgba(255,124,116,.32)',
+  shellGlow:'rgba(255,215,133,.12)',
+  marqueeBorder:'#ff6c57',
+  marqueeGlow:'rgba(255,216,109,.28)',
+  marqueeBackground:'linear-gradient(180deg,#fffaf6,#ffe8db)',
+  shellTopBackground:[
+   'radial-gradient(circle at 16% 24%,rgba(255,108,87,.26) 0 10%,transparent 11%)',
+   'radial-gradient(circle at 86% 24%,rgba(255,216,109,.18) 0 10%,transparent 11%)',
+   'linear-gradient(142deg,rgba(255,108,87,.12) 0 14%,transparent 14% 28%,rgba(255,216,109,.08) 28% 40%,transparent 40% 54%,rgba(255,255,255,.08) 54% 64%,transparent 64%)',
+   'linear-gradient(180deg,rgba(20,10,16,.97),rgba(40,14,18,.9))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 50% 14%,rgba(255,124,116,.16) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 24% 82%,rgba(255,216,109,.12) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(255,124,116,.1) 0 14%,transparent 14% 28%,rgba(255,216,109,.08) 28% 34%,transparent 34% 48%,rgba(255,255,255,.05) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(18,8,14,.98),rgba(26,10,18,.96))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 18% 62%,rgba(255,124,116,.14) 0 11%,transparent 12%)',
+   'radial-gradient(circle at 84% 56%,rgba(255,216,109,.12) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(255,124,116,.1) 0 14%,transparent 14% 28%,rgba(255,216,109,.08) 28% 34%,transparent 34% 48%,rgba(255,255,255,.05) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(18,8,14,.98),rgba(10,4,10,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(255,181,151,.16)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(255,124,116,.2)',
+  leftRailBackground:[
+   'radial-gradient(circle at 72% 16%,rgba(255,124,116,.18) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 24% 84%,rgba(255,216,109,.12) 0 9%,transparent 10%)',
+   'linear-gradient(200deg,rgba(35,14,18,.8),rgba(14,6,12,.86))',
+   'repeating-linear-gradient(24deg,rgba(255,124,116,.12) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  rightRailBorder:'rgba(255,181,151,.2)',
+  rightRailBackground:[
+   'radial-gradient(circle at 74% 16%,rgba(255,216,109,.16) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 76% 84%,rgba(255,124,116,.14) 0 9%,transparent 10%)',
+   'linear-gradient(160deg,rgba(35,14,18,.8),rgba(14,6,12,.86))',
+   'repeating-linear-gradient(156deg,rgba(255,181,151,.12) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.04)'
+ }),
+ 'classic-blue':Object.freeze({
+  shellLine:'rgba(83,140,255,.32)',
+  shellGlow:'rgba(255,222,134,.08)',
+  marqueeBorder:'#f05e1d',
+  marqueeGlow:'#38d6a0',
+  marqueeBackground:'linear-gradient(180deg,#fbfcff,#edf4ff)',
+  shellTopBackground:[
+   'radial-gradient(circle at 12% 22%,rgba(255,232,102,.38) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 88% 24%,rgba(242,181,78,.3) 0 11%,transparent 12%)',
+   'repeating-linear-gradient(150deg,rgba(42,66,201,.48) 0 24px,transparent 24px 54px)',
+   'linear-gradient(180deg,rgba(5,8,24,.95),rgba(8,14,32,.82))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 38% 12%,rgba(228,214,89,.74) 0 8%,rgba(165,138,48,.38) 9%,transparent 18%)',
+   'radial-gradient(circle at 28% 78%,rgba(110,126,255,.34) 0 11%,transparent 18%)',
+   'repeating-linear-gradient(150deg,rgba(40,64,198,.68) 0 24px,transparent 24px 54px)',
+   'linear-gradient(180deg,rgba(2,4,12,.98),rgba(4,6,18,.98))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 16% 70%,rgba(110,126,255,.24) 0 11%,transparent 17%)',
+   'radial-gradient(circle at 86% 66%,rgba(229,208,86,.36) 0 10%,transparent 16%)',
+   'repeating-linear-gradient(150deg,rgba(40,64,198,.58) 0 24px,transparent 24px 54px)',
+   'linear-gradient(180deg,rgba(4,6,18,.98),rgba(2,4,12,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(171,214,255,.18)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(127,183,255,.18)',
+  leftRailBackground:[
+   'radial-gradient(circle at 74% 12%,rgba(115,200,255,.42) 0 7%,transparent 8%)',
+   'radial-gradient(circle at 26% 88%,rgba(255,214,104,.34) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 78% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%)',
+   'linear-gradient(200deg,rgba(13,18,42,.72),rgba(4,8,20,.8))',
+   'repeating-linear-gradient(25deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px)'
+  ].join(','),
+  rightRailBorder:'rgba(127,183,255,.18)',
+  rightRailBackground:[
+   'radial-gradient(circle at 70% 12%,rgba(242,181,78,.74) 0 9%,rgba(171,84,34,.32) 10%,transparent 18%)',
+   'radial-gradient(circle at 74% 86%,rgba(229,208,86,.58) 0 10%,rgba(143,94,28,.22) 11%,transparent 18%)',
+   'radial-gradient(circle at 22% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%)',
+   'linear-gradient(160deg,rgba(13,18,42,.72),rgba(4,8,20,.8))',
+   'repeating-linear-gradient(155deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.05)'
+ })
+});
+function platinumShellFrameTheme(id='platinum-release'){
+ return PLATINUM_SHELL_FRAME_THEMES[id]||PLATINUM_SHELL_FRAME_THEMES['platinum-release'];
+}
 // Keep the existing browser storage namespace until we plan and ship an
 // explicit migration for live users and their historical local data.
 const STORAGE_PREFIX='auroraGalactica';

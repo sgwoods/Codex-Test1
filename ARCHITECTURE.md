@@ -456,6 +456,15 @@ close sibling games:
 - popup and modal placement
 - wait-mode and board-message surfaces
 - cabinet control rail state
+- platform-owned shell frame themes:
+  - top / left / right / bottom frame styling
+  - marquee chrome
+  - rail backgrounds and trim
+  - release vs preview shell looks
+
+The active game pack should be able to select a default shell frame theme, but
+the frame theme definition itself belongs to Platinum rather than to Aurora or
+future sibling games.
 
 ### serviceAdapters
 

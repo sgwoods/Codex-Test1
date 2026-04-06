@@ -119,6 +119,10 @@ to be reused in docs, release briefings, and planning artifacts:
 ### Platinum owns
 
 - the cabinet shell and frame metaphor
+- the reusable shell frame theme catalog:
+  - `platinum-release`
+  - preview / sibling frame looks
+  - marquee / rail / cabinet chrome treatment
 - the pack picker and platform identity surfaces
 - the runtime boot/install path for the active pack
 - shared services:

@@ -1,5 +1,5 @@
 /* UI and cabinet-style presentation for the generated game page. */
-:root{--fg:#f4f7ff;--a:#74e6ff;--shell-line:rgba(83,140,255,.32);--shell-glow:rgba(255,222,134,.08);--frame-line:rgba(171,214,255,.28);--frame-glow:rgba(255,220,122,.08);--marquee-border:#f05e1d;--marquee-glow:#38d6a0}
+:root{--fg:#f4f7ff;--a:#74e6ff;--shell-line:rgba(122,215,255,.28);--shell-glow:rgba(178,236,255,.12);--frame-line:rgba(171,214,255,.28);--frame-glow:rgba(255,220,122,.08);--marquee-border:#8ce8ff;--marquee-glow:rgba(122,215,255,.34);--marquee-bg:linear-gradient(180deg,#f7fbff,#dde8f5);--shell-top-bg:radial-gradient(circle at 14% 26%,rgba(189,221,255,.28) 0 10%,transparent 11%),radial-gradient(circle at 86% 30%,rgba(112,216,255,.24) 0 10%,transparent 11%),linear-gradient(135deg,rgba(255,255,255,.16) 0 10%,transparent 10% 22%,rgba(126,189,255,.12) 22% 33%,transparent 33% 46%,rgba(255,255,255,.08) 46% 56%,transparent 56%),linear-gradient(180deg,rgba(10,16,32,.97),rgba(18,28,48,.9));--shell-side-bg:radial-gradient(circle at 50% 14%,rgba(163,236,255,.2) 0 9%,transparent 10%),radial-gradient(circle at 22% 82%,rgba(255,235,171,.14) 0 10%,transparent 11%),linear-gradient(150deg,rgba(116,167,225,.16) 0 14%,transparent 14% 28%,rgba(255,255,255,.06) 28% 34%,transparent 34% 48%,rgba(116,167,225,.12) 48% 62%,transparent 62%),linear-gradient(180deg,rgba(6,12,26,.98),rgba(12,20,39,.96));--shell-bottom-bg:radial-gradient(circle at 20% 62%,rgba(164,229,255,.16) 0 11%,transparent 12%),radial-gradient(circle at 82% 58%,rgba(255,224,147,.14) 0 10%,transparent 11%),linear-gradient(150deg,rgba(116,167,225,.14) 0 14%,transparent 14% 28%,rgba(255,255,255,.05) 28% 34%,transparent 34% 48%,rgba(116,167,225,.1) 48% 62%,transparent 62%),linear-gradient(180deg,rgba(10,16,32,.98),rgba(4,8,20,.98));--shell-panel-border:rgba(188,226,255,.18);--shell-panel-shadow:inset 0 -8px 18px rgba(0,0,0,.28);--left-rail-border:rgba(142,206,255,.22);--left-rail-bg:radial-gradient(circle at 72% 14%,rgba(145,224,255,.24) 0 8%,transparent 9%),radial-gradient(circle at 24% 84%,rgba(255,224,151,.12) 0 9%,transparent 10%),linear-gradient(200deg,rgba(16,24,46,.78),rgba(6,11,24,.86)),repeating-linear-gradient(24deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px);--right-rail-border:rgba(142,206,255,.22);--right-rail-bg:radial-gradient(circle at 72% 14%,rgba(145,224,255,.22) 0 8%,transparent 9%),radial-gradient(circle at 76% 86%,rgba(255,224,151,.12) 0 9%,transparent 10%),linear-gradient(160deg,rgba(16,24,46,.78),rgba(6,11,24,.86)),repeating-linear-gradient(156deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px);--rail-inner-border:rgba(255,255,255,.06);--rail-inner-glow:rgba(255,229,122,.04)}
 html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:"Courier New",Consolas,monospace;color:var(--fg)}
 canvas{display:block;width:100vw;height:100vh}
 #cabinetShell{position:fixed;display:none;pointer-events:none;z-index:4;--shell-left:40px;--shell-top:132px;--shell-right:168px;--shell-bottom:84px}
@@ -29,61 +29,35 @@ canvas{display:block;width:100vw;height:100vh}
   radial-gradient(circle at 53% 87%,rgba(255,255,255,.6) 0 1px,transparent 2px);
  opacity:.92
 }
-.shellTop::before,.shellTop::after{border-bottom:1px solid rgba(171,214,255,.18)}
-.shellLeft::before,.shellLeft::after{border-right:1px solid rgba(171,214,255,.18)}
-.shellRight::before,.shellRight::after{border-left:1px solid rgba(171,214,255,.18)}
-.shellBottom::before,.shellBottom::after{border-top:1px solid rgba(171,214,255,.18)}
+.shellTop::before,.shellTop::after{border-bottom:1px solid var(--shell-panel-border)}
+.shellLeft::before,.shellLeft::after{border-right:1px solid var(--shell-panel-border)}
+.shellRight::before,.shellRight::after{border-left:1px solid var(--shell-panel-border)}
+.shellBottom::before,.shellBottom::after{border-top:1px solid var(--shell-panel-border)}
 .shellTop::before{
- background:
-  radial-gradient(circle at 12% 22%,rgba(255,232,102,.38) 0 9%,transparent 10%),
-  radial-gradient(circle at 88% 24%,rgba(242,181,78,.3) 0 11%,transparent 12%),
-  repeating-linear-gradient(150deg,rgba(42,66,201,.48) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(5,8,24,.95),rgba(8,14,32,.82));
+ background:var(--shell-top-bg);
 }
 .shellTop::after{
  background:none;
- border-bottom:1px solid rgba(171,214,255,.14);
- box-shadow:inset 0 -8px 18px rgba(0,0,0,.28);
+ border-bottom:1px solid var(--shell-panel-border);
+ box-shadow:var(--shell-panel-shadow);
  opacity:1
 }
 .shellLeft::before{
- background:
-  radial-gradient(circle at 38% 12%,rgba(228,214,89,.74) 0 8%,rgba(165,138,48,.38) 9%,transparent 18%),
-  radial-gradient(circle at 28% 78%,rgba(110,126,255,.34) 0 11%,transparent 18%),
-  radial-gradient(circle at 70% 30%,rgba(255,255,255,.92) 0 1px,transparent 2px),
-  radial-gradient(circle at 40% 62%,rgba(255,255,255,.78) 0 1px,transparent 2px),
-  repeating-linear-gradient(150deg,rgba(40,64,198,.68) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(2,4,12,.98),rgba(4,6,18,.98));
+ background:var(--shell-side-bg);
 }
 .shellRight::before{
- background:
-  radial-gradient(circle at 70% 12%,rgba(242,181,78,.74) 0 9%,rgba(171,84,34,.32) 10%,transparent 18%),
-  radial-gradient(circle at 74% 86%,rgba(229,208,86,.58) 0 10%,rgba(143,94,28,.22) 11%,transparent 18%),
-  radial-gradient(circle at 28% 26%,rgba(255,255,255,.84) 0 1px,transparent 2px),
-  radial-gradient(circle at 66% 74%,rgba(255,255,255,.78) 0 1px,transparent 2px),
-  repeating-linear-gradient(150deg,rgba(40,64,198,.68) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(2,4,12,.98),rgba(4,6,18,.98));
+ background:var(--shell-side-bg);
 }
 .shellBottom::before{
- background:
-  radial-gradient(circle at 16% 70%,rgba(110,126,255,.24) 0 11%,transparent 17%),
-  radial-gradient(circle at 86% 66%,rgba(229,208,86,.36) 0 10%,transparent 16%),
-  repeating-linear-gradient(150deg,rgba(40,64,198,.58) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(4,6,18,.98),rgba(2,4,12,.98));
+ background:var(--shell-bottom-bg);
 }
-#cabinetMarquee{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:min(62%,520px);max-width:62%;padding:.12em .7em .1em;border:3px solid var(--marquee-border);background:linear-gradient(180deg,#fbfcff,#edf4ff);clip-path:polygon(5% 0,95% 0,100% 22%,96% 100%,4% 100%,0 22%);box-shadow:0 0 0 4px var(--marquee-glow),inset 0 0 0 2px rgba(255,255,255,.75),0 8px 20px rgba(0,0,0,.3)}
+#cabinetMarquee{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:min(62%,520px);max-width:62%;padding:.12em .7em .1em;border:3px solid var(--marquee-border);background:var(--marquee-bg);clip-path:polygon(5% 0,95% 0,100% 22%,96% 100%,4% 100%,0 22%);box-shadow:0 0 0 4px var(--marquee-glow),inset 0 0 0 2px rgba(255,255,255,.75),0 8px 20px rgba(0,0,0,.3)}
 #cabinetMarqueeTitle{font:900 clamp(18px,2.4vw,40px)/1 "Georgia","Times New Roman",serif;font-style:italic;letter-spacing:.02em;text-transform:none;color:#f4ad1d;text-shadow:-2px 0 #d41f27,0 2px #d41f27,2px 0 #d41f27,0 -2px #d41f27,3px 3px 0 #2bd5a0,0 0 18px rgba(255,232,102,.18);white-space:nowrap}
 #playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;--frame-inner-inset:11px;border:1px solid var(--frame-line);box-shadow:0 10px 34px rgba(0,0,0,.34),inset 0 0 0 1px var(--frame-glow)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;pointer-events:none}
 #playfieldFrame::before{display:none}
 #playfieldFrame::after{inset:0;background:linear-gradient(180deg,rgba(7,14,30,.18),transparent 12%,transparent 88%,rgba(7,14,30,.14));box-shadow:inset 0 0 28px rgba(5,10,24,.54)}
-#cabinetRightFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid rgba(127,183,255,.18);background:
- radial-gradient(circle at 26% 12%,rgba(255,226,111,.55) 0 7%,transparent 8%),
- radial-gradient(circle at 78% 88%,rgba(255,217,88,.46) 0 8%,transparent 9%),
- radial-gradient(circle at 22% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%),
- linear-gradient(160deg,rgba(13,18,42,.72),rgba(4,8,20,.8)),
- repeating-linear-gradient(155deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px);
- box-shadow:inset 0 0 0 1px rgba(255,229,122,.05)}
+#cabinetRightFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid var(--right-rail-border);background:var(--right-rail-bg);box-shadow:inset 0 0 0 1px var(--rail-inner-glow)}
 #cabinetRightFrame::before,#cabinetRightFrame::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.06)}
 #cabinetRightFrame::after{inset:0;background:
  radial-gradient(circle at 34% 20%,rgba(255,255,255,.86) 0 1px,transparent 2px),
@@ -93,14 +67,9 @@ canvas{display:block;width:100vw;height:100vh}
  radial-gradient(circle at 84% 14%,rgba(255,255,255,.76) 0 1px,transparent 2px);
  opacity:.95}
 #cabinetRightFrame::before,#cabinetRightFrame::after{pointer-events:none}
-#cabinetLeftFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid rgba(127,183,255,.18);background:
- radial-gradient(circle at 74% 12%,rgba(115,200,255,.42) 0 7%,transparent 8%),
- radial-gradient(circle at 26% 88%,rgba(255,214,104,.34) 0 8%,transparent 9%),
- radial-gradient(circle at 78% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%),
- linear-gradient(200deg,rgba(13,18,42,.72),rgba(4,8,20,.8)),
- repeating-linear-gradient(25deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px);
- box-shadow:inset 0 0 0 1px rgba(255,229,122,.05)}
-#cabinetLeftFrame::before,#cabinetLeftFrame::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.06)}
+#cabinetLeftFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid var(--left-rail-border);background:var(--left-rail-bg);box-shadow:inset 0 0 0 1px var(--rail-inner-glow)}
+#cabinetLeftFrame::before,#cabinetLeftFrame::after{content:"";position:absolute;inset:14px;border:1px solid var(--rail-inner-border)}
+#cabinetLeftFrame::before,#cabinetLeftFrame::after,#cabinetRightFrame::before,#cabinetRightFrame::after{border-color:var(--rail-inner-border)}
 #cabinetLeftFrame::after{inset:0;background:
  radial-gradient(circle at 66% 20%,rgba(255,255,255,.86) 0 1px,transparent 2px),
  radial-gradient(circle at 30% 34%,rgba(255,255,255,.66) 0 1px,transparent 2px),

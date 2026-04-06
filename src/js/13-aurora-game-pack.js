@@ -125,6 +125,7 @@ const AURORA_GAME_PACK=Object.freeze({
   utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
   noticeHint:'Future game picker, release notes, and approved quote moments route through this shell surface.',
   pickerHint:'GAME PICKER COMING SOON',
+  shellFrameTheme:'platinum-release',
   frameAccent:'classic-blue',
   quotePlaceholder:Object.freeze({
    kicker:'SIGNAL',
@@ -134,8 +135,9 @@ const AURORA_GAME_PACK=Object.freeze({
   quoteSurface:'wait-mode'
  }),
  shellThemes:Object.freeze([
-  Object.freeze({id:'classic-blue',label:'Classic Blue',frameAccent:'classic-blue',default:1}),
-  Object.freeze({id:'aurora-crown',label:'Aurora Crown',frameAccent:'aurora-crown'})
+  Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'classic-blue',default:1}),
+  Object.freeze({id:'aurora-crown',label:'Aurora Crown',shellFrameTheme:'aurora-crown',frameAccent:'aurora-crown'}),
+  Object.freeze({id:'classic-blue',label:'Classic Blue',shellFrameTheme:'classic-blue',frameAccent:'classic-blue'})
  ]),
  capabilities:Object.freeze({
   usesFormationRack:1,
@@ -174,6 +176,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   utilityLine:'<span class="k">SELECT</span> TO RESTYLE THE CABINET   <span class="k">PLAY</span> COMES LATER',
   noticeHint:'This sibling pack is a shell-and-identity preview while the shared runtime contract is still being proved.',
   pickerHint:'USE CHOOSE GAME TO SWITCH BACK TO AURORA',
+  shellFrameTheme:'guardians-preview',
   frameAccent:'signal-crimson',
   quotePlaceholder:Object.freeze({
    kicker:'GALAXY GUARDIANS',
@@ -183,8 +186,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   quoteSurface:'wait-mode'
  }),
  shellThemes:Object.freeze([
-  Object.freeze({id:'signal-crimson',label:'Signal Crimson',frameAccent:'signal-crimson',default:1}),
-  Object.freeze({id:'classic-blue',label:'Classic Blue',frameAccent:'classic-blue'})
+  Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
+  Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'signal-crimson'}),
+  Object.freeze({id:'classic-blue',label:'Classic Blue',shellFrameTheme:'classic-blue',frameAccent:'classic-blue'})
  ]),
  capabilities:Object.freeze({
   usesFormationRack:1,
@@ -341,6 +345,7 @@ function currentGamePackFrontDoor(){
   utilityLine:frontDoor.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
   noticeHint:frontDoor.noticeHint||'',
   pickerHint:frontDoor.pickerHint||'',
+  shellFrameTheme:frontDoor.shellFrameTheme||'platinum-release',
   frameAccent:frontDoor.frameAccent||'classic-blue',
   quotePlaceholder:Object.freeze({
    kicker:frontDoor.quotePlaceholder?.kicker||'',
@@ -359,7 +364,13 @@ function currentPlatformPackLabel(){
 function currentGamePackShellThemes(){
  const themes=Array.isArray(currentGamePack().shellThemes)&&currentGamePack().shellThemes.length
   ? currentGamePack().shellThemes
-  : [Object.freeze({id:currentGamePackFrontDoor().frameAccent,label:'Default',frameAccent:currentGamePackFrontDoor().frameAccent,default:1})];
+  : [Object.freeze({
+   id:currentGamePackFrontDoor().shellFrameTheme||currentGamePackFrontDoor().frameAccent,
+   label:'Default',
+   shellFrameTheme:currentGamePackFrontDoor().shellFrameTheme||'platinum-release',
+   frameAccent:currentGamePackFrontDoor().frameAccent,
+   default:1
+  })];
  return themes;
 }
 
@@ -370,7 +381,13 @@ function currentGamePackShellThemePrefKey(gameKey=currentGamePackKey()){
 function selectedShellThemeForPack(pack=currentGamePack(),gameKey=currentGamePackKey()){
  const themes=Array.isArray(pack?.shellThemes)&&pack.shellThemes.length
   ? pack.shellThemes
-  : [Object.freeze({id:pack?.frontDoor?.frameAccent||'classic-blue',label:'Default',frameAccent:pack?.frontDoor?.frameAccent||'classic-blue',default:1})];
+  : [Object.freeze({
+   id:pack?.frontDoor?.shellFrameTheme||pack?.frontDoor?.frameAccent||'classic-blue',
+   label:'Default',
+   shellFrameTheme:pack?.frontDoor?.shellFrameTheme||'platinum-release',
+   frameAccent:pack?.frontDoor?.frameAccent||'classic-blue',
+   default:1
+  })];
  const prefId=String(readPref(currentGamePackShellThemePrefKey(gameKey))||'').trim();
  return themes.find(theme=>theme.id===prefId)
   || themes.find(theme=>theme.default)
@@ -386,6 +403,11 @@ function currentGamePackFrontDoorFrameAccent(){
  return selected?.frameAccent||currentGamePackFrontDoor().frameAccent||'classic-blue';
 }
 
+function currentGamePackFrontDoorShellFrameTheme(){
+ const selected=currentGamePackSelectedShellTheme();
+ return selected?.shellFrameTheme||currentGamePackFrontDoor().shellFrameTheme||'platinum-release';
+}
+
 function setCurrentGamePackShellTheme(themeId=''){
  const themes=currentGamePackShellThemes();
  const next=themes.find(theme=>theme.id===themeId)||themes.find(theme=>theme.default)||themes[0];
@@ -398,19 +420,32 @@ function setCurrentGamePackShellTheme(themeId=''){
 function syncInstalledPackShellChrome(){
  const pack=currentGamePack();
  const frontDoor=currentGamePackFrontDoor();
- const theme=currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue'];
+ const frameTheme=currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue'];
+ const shellTheme=platinumShellFrameTheme(currentGamePackFrontDoorShellFrameTheme());
  try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
  const marquee=document.getElementById('cabinetMarqueeTitle');
   if(marquee)marquee.textContent=frontDoor.marqueeTitle;
  if(settingsRuntime)settingsRuntime.textContent=`Platform ${currentPlatformPackLabel()}`;
  const root=document.documentElement;
- if(root&&theme){
-  root.style.setProperty('--shell-line',theme.shellLine);
-  root.style.setProperty('--shell-glow',theme.shellGlow);
-  root.style.setProperty('--frame-line',theme.frameLine);
-  root.style.setProperty('--frame-glow',theme.frameGlow);
-  root.style.setProperty('--marquee-border',theme.marqueeBorder);
-  root.style.setProperty('--marquee-glow',theme.marqueeGlow);
+ if(root&&frameTheme&&shellTheme){
+  root.style.setProperty('--shell-line',shellTheme.shellLine);
+  root.style.setProperty('--shell-glow',shellTheme.shellGlow);
+  root.style.setProperty('--frame-line',frameTheme.frameLine);
+  root.style.setProperty('--frame-glow',frameTheme.frameGlow);
+  root.style.setProperty('--marquee-border',shellTheme.marqueeBorder);
+  root.style.setProperty('--marquee-glow',shellTheme.marqueeGlow);
+  root.style.setProperty('--marquee-bg',shellTheme.marqueeBackground);
+  root.style.setProperty('--shell-top-bg',shellTheme.shellTopBackground);
+  root.style.setProperty('--shell-side-bg',shellTheme.shellSideBackground);
+  root.style.setProperty('--shell-bottom-bg',shellTheme.shellBottomBackground);
+  root.style.setProperty('--shell-panel-border',shellTheme.shellPanelBorder);
+  root.style.setProperty('--shell-panel-shadow',shellTheme.shellPanelShadow);
+  root.style.setProperty('--left-rail-border',shellTheme.leftRailBorder);
+  root.style.setProperty('--left-rail-bg',shellTheme.leftRailBackground);
+  root.style.setProperty('--right-rail-border',shellTheme.rightRailBorder);
+  root.style.setProperty('--right-rail-bg',shellTheme.rightRailBackground);
+  root.style.setProperty('--rail-inner-border',shellTheme.railInnerBorder);
+  root.style.setProperty('--rail-inner-glow',shellTheme.railInnerGlow);
  }
 }
 

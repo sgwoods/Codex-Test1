@@ -26,17 +26,32 @@ const DISPLAY_SHELL=Object.freeze({
 });
 
 function applyStageChromeTheme(){
- const theme=!started&&typeof currentGamePack==='function'
+ const frameTheme=!started&&typeof currentGamePack==='function'
   ? currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue']
   : currentGamePackFrameAccentTheme(S.stagePresentation);
+ const shellTheme=typeof currentGamePackFrontDoorShellFrameTheme==='function'
+  ? platinumShellFrameTheme(currentGamePackFrontDoorShellFrameTheme())
+  : platinumShellFrameTheme('platinum-release');
  const root=document.documentElement;
- if(root){
-  root.style.setProperty('--shell-line',theme.shellLine);
-  root.style.setProperty('--shell-glow',theme.shellGlow);
-  root.style.setProperty('--frame-line',theme.frameLine);
-  root.style.setProperty('--frame-glow',theme.frameGlow);
-  root.style.setProperty('--marquee-border',theme.marqueeBorder);
-  root.style.setProperty('--marquee-glow',theme.marqueeGlow);
+ if(root&&frameTheme&&shellTheme){
+  root.style.setProperty('--shell-line',shellTheme.shellLine);
+  root.style.setProperty('--shell-glow',shellTheme.shellGlow);
+  root.style.setProperty('--frame-line',frameTheme.frameLine);
+  root.style.setProperty('--frame-glow',frameTheme.frameGlow);
+  root.style.setProperty('--marquee-border',shellTheme.marqueeBorder);
+  root.style.setProperty('--marquee-glow',shellTheme.marqueeGlow);
+  root.style.setProperty('--marquee-bg',shellTheme.marqueeBackground);
+  root.style.setProperty('--shell-top-bg',shellTheme.shellTopBackground);
+  root.style.setProperty('--shell-side-bg',shellTheme.shellSideBackground);
+  root.style.setProperty('--shell-bottom-bg',shellTheme.shellBottomBackground);
+  root.style.setProperty('--shell-panel-border',shellTheme.shellPanelBorder);
+  root.style.setProperty('--shell-panel-shadow',shellTheme.shellPanelShadow);
+  root.style.setProperty('--left-rail-border',shellTheme.leftRailBorder);
+  root.style.setProperty('--left-rail-bg',shellTheme.leftRailBackground);
+  root.style.setProperty('--right-rail-border',shellTheme.rightRailBorder);
+  root.style.setProperty('--right-rail-bg',shellTheme.rightRailBackground);
+  root.style.setProperty('--rail-inner-border',shellTheme.railInnerBorder);
+  root.style.setProperty('--rail-inner-glow',shellTheme.railInnerGlow);
  }
 }
 
