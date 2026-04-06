@@ -113,6 +113,8 @@ to be reused in docs, release briefings, and planning artifacts:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/aurora-pack-card.svg`
 - Galaxy Guardians pack card:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg`
+- launch shell art direction:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
 
 ## Separation Summary
 

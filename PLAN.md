@@ -9,6 +9,9 @@
   - Platinum splash
   - game picker
   - `Galaxy Guardians` coming-soon preview
+  - platform-owned frame themes
+- launch shell review and refinement should follow:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
 - Browser-based fixed-screen arcade shooter built from readable source modules and served from `dist/production/index.html`
 - Build identity is now part of the product:
   - prerelease SemVer in `package.json` for the pre-production engineering line
