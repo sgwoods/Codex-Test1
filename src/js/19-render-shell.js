@@ -212,6 +212,7 @@ function syncCabinetShellLayout({
  }
  if(statusPanels){
   statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
+  statusPanels.classList.toggle('framedOverlay',framedOverlayOpen);
   statusPanels.style.setProperty('--overlay-max-height','none');
   if(waitScoreOverlay){
    const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
@@ -221,7 +222,7 @@ function syncCabinetShellLayout({
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
    statusPanels.style.bottom='auto';
   }else if(framedOverlayOpen){
-   const panelW=Math.min(Math.max(420,Math.floor(viewW*.84)),660);
+   const panelW=Math.min(Math.max(620,Math.floor(viewW*.9)),940);
    const top=Math.floor(oy+12);
    const maxHeight=Math.max(180,Math.floor(viewH-24));
    statusPanels.style.width=`${panelW}px`;

@@ -26,8 +26,8 @@ function draw(){
  const railH=Math.max(220,viewH);
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
  const railTop=oy;
- const waitScoreOverlay=!started&&typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD.panelOpen;
- const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!waitScoreOverlay&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
+ const waitScoreOverlay=0;
+ const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
 
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,
