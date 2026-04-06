@@ -212,6 +212,7 @@ function syncOverlayPause(){
  }
 }
 function openLeaderboardPanel(view=LEADERBOARD.view){
+ closeDockOverlays('leaderboard');
  LEADERBOARD.panelOpen=1;
  LEADERBOARD.accountPanelOpen=0;
  if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
@@ -245,6 +246,7 @@ function syncAccountPanelVisibility(){
  }
 }
 function openAccountPanel(){
+ closeDockOverlays('account');
  LEADERBOARD.accountPanelOpen=1;
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();

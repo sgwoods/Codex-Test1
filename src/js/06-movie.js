@@ -209,11 +209,7 @@ async function openMovieReplayById(id){
 }
 function openMoviePanel(){
  if(MOVIE.panelOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
- if(feedbackOpen)closeFeedback(1);
- if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
- if(typeof closeAccountPanel==='function')closeAccountPanel();
+ closeDockOverlays('movie');
  MOVIE.prevPaused=paused;
  if(started&&!paused)paused=1;
  MOVIE.panelOpen=1;

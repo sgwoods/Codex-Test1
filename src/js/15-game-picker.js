@@ -62,6 +62,7 @@ function renderGamePicker(){
 function openGamePicker(force=0){
  if(!gamePickerModal)return;
  if(gamePickerOpen&&!force)return;
+ closeDockOverlays('gamePicker');
  gamePickerOpen=1;
  gamePickerPrevPaused=paused;
  if(started)paused=1;

@@ -807,6 +807,7 @@ function closeSettings(){
  syncPauseUi();
 }
 function openSettings(){
+ closeDockOverlays('settings');
  settingsPrevPaused=paused;
  if(started&&!paused)paused=1;
  settingsOpen=1;
@@ -839,10 +840,7 @@ function openPlayersGuideWindow(){
 }
 function openHelp(mode='controls'){
  if(helpOpen&&helpMode===mode)return;
- closeSettings();
- if(feedbackOpen)closeFeedback(1);
- if(platformSplashOpen)closePlatformSplash(1);
- if(gamePreviewOpen)closeGamePreview(1);
+ closeDockOverlays('help');
  helpPrevPaused=paused;
  if(started&&!paused)paused=1;
  helpMode=mode==='guide'?'guide':'controls';
@@ -858,11 +856,7 @@ function openHelp(mode='controls'){
 }
 function openPlatformSplash(){
  if(platformSplashOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
- if(feedbackOpen)closeFeedback(1);
- if(gamePickerOpen)closeGamePicker(1);
- if(gamePreviewOpen)closeGamePreview(1);
+ closeDockOverlays('platformSplash');
  platformSplashPrevPaused=paused;
  if(started&&!paused)paused=1;
  platformSplashOpen=1;
@@ -883,11 +877,7 @@ function closePlatformSplash(force=0){
 }
 function openGamePreview(){
  if(gamePreviewOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
- if(feedbackOpen)closeFeedback(1);
- if(platformSplashOpen)closePlatformSplash(1);
- if(gamePickerOpen)closeGamePicker(1);
+ closeDockOverlays('gamePreview');
  gamePreviewPrevPaused=paused;
  if(started&&!paused)paused=1;
  gamePreviewOpen=1;
@@ -956,8 +946,7 @@ function showToast(t){
 }
 function openFeedback(){
  if(feedbackOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
+ closeDockOverlays('feedback');
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;resetActiveInputState('feedback_open');
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
