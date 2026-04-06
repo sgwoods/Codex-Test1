@@ -163,7 +163,7 @@ async function replay(page, spec){
 async function deterministicAdvance(page, spec){
   return page.evaluate(({ duration, stopOnGameOver }) => {
     const api = window.__galagaHarness__;
-    if(!api || typeof api.advanceFor !== 'function') throw new Error('Harness advanceFor is not available');
+    if(!api || typeof api.advanceFor !== 'function') return null;
     return api.advanceFor(duration, { stopOnGameOver, step: 1/60 });
   }, { duration: spec.duration, stopOnGameOver: !!spec.stopOnGameOver });
 }
@@ -183,6 +183,7 @@ async function waitForRun(page, spec, replayTime){
   let state = await page.evaluate(() => window.__galagaHarness__.state());
   if(!spec.stopOnGameOver){
     while(Date.now() < finishAt){
+      if(!state.started) return state;
       if((state.simT || 0) >= targetSimT) return state;
       await sleep(100);
       state = await page.evaluate(() => window.__galagaHarness__.state());
@@ -225,8 +226,9 @@ async function main(){
     process.exit(args.help ? 0 : 1);
   }
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
-  if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))){
-    throw new Error(`Built app not found at ${APP_ROOT}. Run "npm run build" first.`);
+  const appRoot = args.root ? path.resolve(String(args.root)) : APP_ROOT;
+  if(!fs.existsSync(path.join(appRoot, 'index.html'))){
+    throw new Error(`Built app not found at ${appRoot}. Run "npm run build" first.`);
   }
 
   const scenarioPath = args.scenario && !String(args.scenario).includes(path.sep) ? path.join(SCENARIOS, `${args.scenario}.json`) : args.scenario;
@@ -243,7 +245,7 @@ async function main(){
   fs.mkdirSync(outDir, { recursive: true });
   const initAutoVideo = spec.autoVideo === false ? '0' : '1';
 
-  const { server, port } = await serve(APP_ROOT);
+  const { server, port } = await serve(appRoot);
   const browser = await chromium.launch({
     executablePath: CHROME,
     headless: args.headed ? false : true,
@@ -272,11 +274,23 @@ async function main(){
     await page.waitForFunction(() => !!window.__galagaHarness__);
     const autoVideo = spec.autoVideo !== false;
     const deterministicFastPath = !autoVideo && !!spec.config?.persona && (!spec.actions || spec.actions.length === 0);
-    await page.evaluate(cfg => window.__galagaHarness__.start(cfg), Object.assign({}, spec.config, { seed: spec.seed, autoVideo, controlledClock: deterministicFastPath }));
+    const startConfig = Object.assign({}, spec.config, {
+      seed: spec.seed,
+      autoVideo,
+      controlledClock: deterministicFastPath
+    });
+    const initialSimTArg = args['initial-sim-t'];
+    if(initialSimTArg !== undefined && Number.isFinite(+initialSimTArg)){
+      startConfig.initialSimT = +initialSimTArg;
+    }
+    await page.evaluate(cfg => window.__galagaHarness__.start(cfg), startConfig);
 
     let state;
     if(deterministicFastPath){
       state = await deterministicAdvance(page, spec);
+      if(!state){
+        state = await waitForRun(page, spec, 0);
+      }
     }else{
       const replayTime = await replay(page, spec);
       state = await waitForRun(page, spec, replayTime);

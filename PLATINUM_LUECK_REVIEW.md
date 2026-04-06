@@ -248,6 +248,19 @@ They should not bloat the core runtime path casually.
 3. deepen the designer/admin surfaces without mixing them into the core
    Platinum runtime
 
+### After Aurora is stable again
+
+1. run a brief retrospective on how a materially different Aurora gameplay
+   shape was able to survive this long while Platinum shell checks still looked
+   healthy
+2. document which testing layers were missing or too weak:
+   - production-vs-dev artifact comparison
+   - deterministic persona repeatability
+   - stage carryover parity
+   - outcome-distribution gating
+3. promote the strongest new gates into normal release-readiness, so future
+   platform or game-pack work cannot drift this far before we notice
+
 ## Bottom Line
 
 `Platinum` is in a healthy early-platform state.

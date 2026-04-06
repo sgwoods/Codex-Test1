@@ -61,6 +61,8 @@
     "harness:check:replay-exit-audio": "node tools/harness/check-replay-exit-wait-audio.js",
     "harness:check:board-messages": "node tools/harness/check-board-messages.js",
     "harness:check:opening-formation": "node tools/harness/check-opening-formation-layout.js",
+    "harness:check:stage1-late-parity": "node tools/harness/check-stage1-late-clear-parity.js",
+    "harness:check:stage2-carryover": "node tools/harness/check-stage2-carryover-parity.js",
     "harness:check:platinum-pack-boot": "node tools/harness/check-platinum-pack-boot.js",
     "harness:check:persona-repeatability": "node tools/harness/check-persona-repeatability.js",
     "harness:check:wait-score-overlay": "node tools/harness/check-wait-score-overlay.js",

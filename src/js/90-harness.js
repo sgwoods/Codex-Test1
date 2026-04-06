@@ -20,6 +20,9 @@ window.__galagaHarness__={
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
+ if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
+  S.simT=+cfg.initialSimT;
+ }
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(!started)start();
 },
@@ -382,7 +385,7 @@ window.__galagaHarness__={
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
-  return {
+ return {
    stage:S.stage,
    challenge:!!S.challenge,
    layout:typeof formationLayout==='function'?formationLayout(S.stage):null,
@@ -395,7 +398,21 @@ window.__galagaHarness__={
     ty:+(+e.ty||0).toFixed(2),
     x:+(+e.x||0).toFixed(2),
     y:+(+e.y||0).toFixed(2),
-    spawn:+(+e.spawn||0).toFixed(2)
+    spawn:+(+e.spawn||0).toFixed(2),
+    spawnPlan:+(+e.spawnPlan||0).toFixed(2),
+    tm:+(+e.tm||0).toFixed(3),
+    ph:+(+e.ph||0).toFixed(3),
+    cool:+(+e.cool||0).toFixed(3),
+    en:+(+e.en||0).toFixed(3),
+    dive:+(+e.dive||0).toFixed(2),
+    form:!!e.form,
+    low:!!e.low,
+    carry:!!e.carry,
+    beam:!!e.beam,
+    lead:e.lead||null,
+    off:+(+e.off||0).toFixed(2),
+    esc:+(+e.esc||0).toFixed(2),
+    squadId:+(+e.squadId||0).toFixed(2)
    }))
   };
  },

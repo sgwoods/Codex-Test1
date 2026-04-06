@@ -41,10 +41,11 @@ function sleep(ms){
 
 async function withHarnessPage(cfg, fn){
   if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
-  if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))){
-    throw new Error(`Built app not found at ${APP_ROOT}. Run "npm run build" first.`);
+  const appRoot = cfg.root ? path.resolve(cfg.root) : APP_ROOT;
+  if(!fs.existsSync(path.join(appRoot, 'index.html'))){
+    throw new Error(`Built app not found at ${appRoot}. Run "npm run build" first.`);
   }
-  const { server, port } = await serve(APP_ROOT);
+  const { server, port } = await serve(appRoot);
   const browser = await chromium.launch({
     executablePath: CHROME,
     headless: cfg.headed ? false : true,
@@ -73,14 +74,16 @@ async function withHarnessPage(cfg, fn){
     }, { testCfg, seed });
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__galagaHarness__);
-    await page.evaluate(startCfg => window.__galagaHarness__.start(Object.assign({ autoVideo: false }, startCfg)), {
-      stage: testCfg.stage,
-      ships: testCfg.ships,
-      challenge: testCfg.challenge,
-      seed,
-      persona: cfg.persona || null
-    });
-    const result = await fn({ page, context, browser, port, root: APP_ROOT });
+    if(!cfg.skipStart){
+      await page.evaluate(startCfg => window.__galagaHarness__.start(Object.assign({ autoVideo: false }, startCfg)), {
+        stage: testCfg.stage,
+        ships: testCfg.ships,
+        challenge: testCfg.challenge,
+        seed,
+        persona: cfg.persona || null
+      });
+    }
+    const result = await fn({ page, context, browser, port, root: appRoot });
     await context.close();
     return result;
   } finally {

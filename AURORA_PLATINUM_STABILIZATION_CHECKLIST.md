@@ -165,3 +165,32 @@ If a change mostly affects Aurora’s own rules, content, stage logic, boss
 identity, or scoring:
 
 - it should stay in the Aurora/game-pack lane
+
+## Post-Stability Retrospective
+
+Once Aurora is stable again, we should do a short explicit review of how the
+dev line moved from “apparently okay on Platinum” to “serious gameplay
+regression discovered late.”
+
+That retrospective should answer:
+
+- which regression escaped first:
+  - stage-shape drift
+  - role/outcome drift
+  - harness determinism drift
+  - or shell/UI drift
+- which test layer should have caught it earlier:
+  - seam/contract harness
+  - motion/profile harness
+  - role/outcome distribution harness
+  - or release-readiness replay/manual review
+- which comparisons were missing from the normal workflow:
+  - clean production-vs-dev artifact checks
+  - seeded persona repeatability checks
+  - stage carryover parity checks
+- what gating rule should be added so we do not repeat the same failure mode
+  on future Platinum or game-pack work
+
+The goal of that review is not blame. It is to improve the testing ladder so
+we catch “game still runs, but no longer feels/shapes like production” much
+earlier.
