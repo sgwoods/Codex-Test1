@@ -51,7 +51,7 @@ const PLATINUM_SHELL_FRAME_THEMES=Object.freeze({
   marqueeBorder:'#8ce8ff',
   marqueeGlow:'rgba(122,215,255,.34)',
   marqueeBackground:'linear-gradient(180deg,#f7fbff,#dde8f5)',
-  shellTopBackground:[
+ shellTopBackground:[
    'radial-gradient(circle at 14% 26%,rgba(189,221,255,.28) 0 10%,transparent 11%)',
    'radial-gradient(circle at 86% 30%,rgba(112,216,255,.24) 0 10%,transparent 11%)',
    'linear-gradient(135deg,rgba(255,255,255,.16) 0 10%,transparent 10% 22%,rgba(126,189,255,.12) 22% 33%,transparent 33% 46%,rgba(255,255,255,.08) 46% 56%,transparent 56%)',
@@ -69,24 +69,24 @@ const PLATINUM_SHELL_FRAME_THEMES=Object.freeze({
    'linear-gradient(150deg,rgba(116,167,225,.14) 0 14%,transparent 14% 28%,rgba(255,255,255,.05) 28% 34%,transparent 34% 48%,rgba(116,167,225,.1) 48% 62%,transparent 62%)',
    'linear-gradient(180deg,rgba(10,16,32,.98),rgba(4,8,20,.98))'
   ].join(','),
-  shellPanelBorder:'rgba(188,226,255,.18)',
-  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
-  leftRailBorder:'rgba(142,206,255,.22)',
+  shellPanelBorder:'rgba(188,226,255,.08)',
+  shellPanelShadow:'inset 0 -6px 14px rgba(0,0,0,.18)',
+  leftRailBorder:'rgba(142,206,255,.1)',
   leftRailBackground:[
    'radial-gradient(circle at 72% 14%,rgba(145,224,255,.24) 0 8%,transparent 9%)',
    'radial-gradient(circle at 24% 84%,rgba(255,224,151,.12) 0 9%,transparent 10%)',
    'linear-gradient(200deg,rgba(16,24,46,.78),rgba(6,11,24,.86))',
    'repeating-linear-gradient(24deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px)'
   ].join(','),
-  rightRailBorder:'rgba(142,206,255,.22)',
+  rightRailBorder:'rgba(142,206,255,.1)',
   rightRailBackground:[
    'radial-gradient(circle at 72% 14%,rgba(145,224,255,.22) 0 8%,transparent 9%)',
    'radial-gradient(circle at 76% 86%,rgba(255,224,151,.12) 0 9%,transparent 10%)',
    'linear-gradient(160deg,rgba(16,24,46,.78),rgba(6,11,24,.86))',
    'repeating-linear-gradient(156deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px)'
   ].join(','),
-  railInnerBorder:'rgba(255,255,255,.06)',
-  railInnerGlow:'rgba(255,229,122,.04)'
+  railInnerBorder:'rgba(255,255,255,0)',
+  railInnerGlow:'rgba(255,229,122,.015)'
  }),
  'aurora-crown':Object.freeze({
   shellLine:'rgba(121,246,198,.34)',
