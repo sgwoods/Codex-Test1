@@ -3,13 +3,14 @@
 ## Current Release Train
 
 - Current line:
-  - `1.1.x` planning
+  - `1.2.0`
 - Current phase:
-  - `post-launch stabilization and Platinum rerelease planning`
+  - `Platinum Release 1 promotion`
 - Goal of this phase:
-  - keep the shipped four-stage Aurora arcade slice stable while turning the
-    broader identity, admin, and media work into a staged `1.1.x` / `1.2.x`
-    Platinum platform program
+  - keep the shipped four-stage Aurora arcade slice stable while promoting the
+    first public Platinum-hosted release and keeping the
+    `localhost` -> hosted `/dev` -> hosted `/beta` -> hosted `/production`
+    lane model disciplined
 
 ## Immediate Platform Milestone: Aurora Rerelease On Platinum
 
@@ -90,7 +91,7 @@ Key issue groups:
 
 Suggested versioning:
 
-- `1.1.x`
+- `1.2.0`
 
 ## Immediate Target: 1.0 Four-Stage Slice
 

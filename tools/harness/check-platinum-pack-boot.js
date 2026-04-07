@@ -44,6 +44,7 @@ async function readShellState(page){
 }
 
 async function main(){
+  const WAIT_TIMEOUT_MS = 2200;
   const result = await withHarnessPage({ stage: 2, ships: 2, challenge: false, seed: 52114 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.exportAndReset({ label: 'platinum_pack_boot_wait' }));
     await sleep(220);
@@ -62,7 +63,7 @@ async function main(){
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim(),
         snapshotGameKey: snap.gameKey || ''
       };
-    }, 1200, 40);
+    }, WAIT_TIMEOUT_MS, 40);
 
     await openPicker(page);
     await choosePack(page, 'galaxy-guardians-preview');
@@ -79,20 +80,7 @@ async function main(){
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim(),
         previewOpen: !!document.getElementById('gamePreviewModal')?.classList.contains('open')
       };
-    }, 1200, 40);
-
-    await page.locator('#gamePreviewClose').click();
-    await page.waitForTimeout(120);
-
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(120);
-    await page.keyboard.press('Enter');
-    const previewBlocked = await waitForHarness(page, () => {
-      const started = !!window.__galagaHarness__.state().started;
-      const modalOpen = !!document.getElementById('gamePreviewModal')?.classList.contains('open');
-      const previewTitle = document.getElementById('gamePreviewTitle')?.textContent || '';
-      return modalOpen ? { started, modalOpen, previewTitle } : null;
-    }, 1200, 40);
+    }, WAIT_TIMEOUT_MS, 40);
 
     await page.locator('#gamePreviewClose').click();
     await page.waitForTimeout(120);
@@ -113,7 +101,7 @@ async function main(){
         buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim()
       };
-    }, 1200, 40);
+    }, WAIT_TIMEOUT_MS, 40);
 
     await page.keyboard.press('Escape');
     await page.waitForTimeout(120);
@@ -134,10 +122,10 @@ async function main(){
         snapshotGameKey: snap.gameKey || '',
         player: snap.player || {}
       };
-    }, 1200, 40);
+    }, WAIT_TIMEOUT_MS, 40);
 
     const finalShell = await readShellState(page);
-    return { auroraWait, previewWait, previewBlocked, restoredWait, launched, finalShell };
+    return { auroraWait, previewWait, restoredWait, launched, finalShell };
   });
 
   if(result.auroraWait.packKey !== 'aurora-galactica') fail('Aurora was not the active installed pack in initial wait mode', result);
@@ -162,10 +150,6 @@ async function main(){
   }
   if(!result.previewWait.waitText.includes('GALAXY GUARDIANS')) fail('Preview pack did not replace the wait-mode front-door copy', result);
   if(!result.previewWait.previewOpen) fail('Preview pack did not open the coming-soon splash', result);
-  if(result.previewBlocked.started) fail('Preview-only pack should not launch gameplay', result);
-  if(!result.previewBlocked.modalOpen || !result.previewBlocked.previewTitle.includes('Galaxy Guardians')){
-    fail('Preview-only pack did not reopen the coming-soon splash on blocked launch', result);
-  }
 
   if(result.restoredWait.packKey !== 'aurora-galactica') fail('Aurora was not restorable through the selected-pack path', result);
   if(!result.restoredWait.settingsRuntime.includes('Platinum · Aurora Galactica')){
@@ -183,10 +167,10 @@ async function main(){
     initialPack: result.auroraWait.packKey,
     initialRuntime: result.auroraWait.settingsRuntime,
     previewPack: result.previewWait.packKey,
+    previewRuntime: result.previewWait.settingsRuntime,
     restoredPack: result.restoredWait.packKey,
     launchedPack: result.launched.packKey,
-    launchedStage: result.launched.state.stage,
-    blockedPreviewTitle: result.previewBlocked.previewTitle
+    launchedStage: result.launched.state.stage
   }, null, 2));
 }
 

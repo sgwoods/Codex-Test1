@@ -207,9 +207,13 @@ needed to support this smaller shipped slice.
 
 Current release checkpoint:
 
-- beta:
+- local `localhost`:
+  - `1.2.0` candidate in active integration
+- hosted `/dev`:
+  - current integrated Platinum candidate once published
+- hosted `/beta`:
   - `1.0.2-beta.1+build.290.sha.831a2c6.beta`
-- production:
+- hosted `/production`:
   - `1.0.2+build.290.sha.831a2c6`
 - production promotion path was used successfully:
   - `publish:beta -> approve:beta -> publish:production`
@@ -226,8 +230,8 @@ Current coding priority:
 1. keep Aurora `1.0.2` stable in production
 2. complete the Platinum rerelease milestone for the existing Aurora game
 3. close the most visible Aurora trust/clarity follow-ups after the platform rerelease baseline is stable
-4. use `1.1.x` for architectural stabilization and early shared-runtime extraction
-5. use `1.2.x` for platform-owned services and operator-facing infrastructure
+4. use `1.2.0` for the Platinum platform release milestone
+5. use `1.2.x` patch releases for Aurora-on-Platinum stabilization after launch
 6. begin the Aurora-specific `Game Designer` planning phase using:
   - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
 

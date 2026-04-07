@@ -1,7 +1,7 @@
 {
-  "targetVersion": "1.0.2",
-  "currentFocus": "Aurora-on-Platinum rerelease rehearsal: parity and shell checks are green, manual play now feels right, and the next move is promotion rehearsal plus final public-lane verification",
-  "strapline": "Aurora now clears the Platinum rerelease evidence gate with both automated and manual checks; the remaining work is operational release rehearsal rather than open-ended parity debugging.",
+  "targetVersion": "1.2.0",
+  "currentFocus": "Platinum Release 1: local localhost and hosted /dev now represent the integrated Platinum-framed Aurora candidate, while hosted /beta remains the next promotion lane before hosted /production.",
+  "strapline": "Aurora now reads as the first playable game pack on Platinum, and the remaining work is disciplined lane promotion, documentation consistency, and final hosted verification rather than open-ended platform extraction.",
   "timeline": [
     {
       "id": "foundation",
@@ -59,9 +59,9 @@
     },
     {
       "id": "release",
-      "title": "1.0 Release",
+      "title": "1.2 Platinum Release 1",
       "status": "in_progress",
-      "summary": "Republish Aurora as a clearly Platinum-hosted title once we finish the promotion rehearsal and final public-lane verification."
+      "summary": "Promote Aurora as the first clearly Platinum-hosted title once hosted /dev review, hosted /beta verification, and release-documentation refresh are complete."
     }
   ],
   "legend": [
@@ -91,7 +91,7 @@
     },
     {
       "label": "Release Rehearsal",
-      "detail": "Current focus is the operational beta-to-production promotion path, not open-ended parity investigation."
+      "detail": "Current focus is the operational localhost -> hosted /dev -> hosted /beta -> hosted /production path, not open-ended parity investigation."
     }
   ]
 }

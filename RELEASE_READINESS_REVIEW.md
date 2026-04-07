@@ -1,29 +1,30 @@
-# Aurora Galactica 1.0 Release Readiness Review
+# Aurora Galactica 1.2.0 Platinum Release 1 Readiness Review
 
-This document is the explicit final-release review artifact for `#85`.
+This document is the explicit final-release review artifact for the
+`1.2.0 — Platinum Release 1` promotion.
 
 It is meant to answer one question clearly:
 
-- are we ready to ship the scoped four-stage `1.0` slice with acceptable
+- are we ready to ship the Platinum-framed four-stage Aurora slice as `1.2.0`
+  with acceptable
   product trust, documentation, and operational safety?
 
 ## Status
 
 Current status:
 
-- implemented on the dev line
-- now in an active `Aurora-on-Platinum` rerelease hardening pass
-- no longer a speculative architecture exercise; the immediate goal is a stable
-  Platinum-framed rerelease baseline for the existing playable Aurora game
-- intended to be rechecked one last time immediately before the next public
-  production promotion
+- local `localhost` and hosted `/dev` now represent the integrated Platinum
+  candidate
+- hosted `/beta` is the next release-candidate promotion lane
+- hosted `/production` still holds the older `1.0.2` public build until the
+  `1.2.0` candidate is approved and promoted
 
 ## Scope Covered
 
 This review tracks the release-readiness scope promised in `#85`:
 
 - security review of the codebase and deployment posture
-- code and documentation consistency for the shipped `1.0` slice
+- code and documentation consistency for the shipped `1.2.0` slice
 - public-facing naming and release-language consistency
 - presence of a concise player-facing guide in the shipped experience
 
@@ -36,7 +37,7 @@ The shipped game currently relies on:
 - Supabase for pilot auth and shared score data
 - FormSubmit to send bug reports / feature requests
 - a Modem inbox destination behind that feedback path
-- GitHub Pages for beta and production hosting
+- GitHub Pages for hosted `/dev`, hosted `/beta`, and hosted `/production`
 
 The canonical inventory lives in:
 
@@ -99,10 +100,10 @@ Primary maintained docs:
 Consistent today:
 
 - product name: `Aurora Galactica`
-- lane naming: `development`, `production beta`, `production`
+- lane naming: `localhost`, hosted `/dev`, hosted `/beta`, hosted `/production`
 - player guide is distinct from project/developer documentation
 - release path is documented as:
-  - dev -> beta -> approve -> production
+  - localhost -> hosted `/dev` -> hosted `/beta` -> approve -> hosted `/production`
 
 Still worth a final check before production sign-off:
 

@@ -71,17 +71,18 @@ Repository roles:
 
 After GitHub Pages deploys, play at:
 
+- hosted `/dev`:
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/`
+- hosted `/beta`:
+  - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 - production:
   - `https://sgwoods.github.io/Aurora-Galactica/`
-- beta:
-  - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
-The root Aurora build is the official public production lane, even while the
-product is still prerelease in SemVer terms. The `/beta/` lane is a manually
-promoted public checkpoint used for less-frequent milestone playtesting.
-Day-to-day engineering work continues in `Codex-Test1` as the pre-production
-development line where Platinum platform work and Aurora pack work are both
-evolving together.
+The root Aurora build is the official hosted `/production` lane. Hosted
+`/beta` is the release-candidate checkpoint, and hosted `/dev` is the shared
+integration preview of the current local `localhost` candidate. Day-to-day
+engineering work continues in `Codex-Test1`, where Platinum platform work and
+Aurora pack work evolve together before promotion.
 
 Current score/data policy:
 
@@ -181,7 +182,7 @@ npm run local:stop
 
 The next major platform milestone is:
 
-- rerelease Aurora as the existing public game on explicitly branded Platinum
+- ship `1.2.0 — Platinum Release 1`
 - keep Aurora behavior aligned with the shipped `1.0.2` baseline
 - use the game picker to preview future titles without pretending they are
   playable before they are ready

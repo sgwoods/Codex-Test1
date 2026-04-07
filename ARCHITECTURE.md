@@ -36,15 +36,15 @@ What is already true:
 
 What is not done yet:
 
-- public rerelease framing still needs to make Platinum versus Aurora clearer
+- the final public `1.2.0` promotion still needs hosted `/beta` and hosted
+  `/production` verification
 - some shell/bootstrap/debug/storage compatibility shims are still Aurora-named
-- future-game shell previews still need more intentional splash/coming-soon
-  treatment
+- future-game shell previews can still be polished further
 
 This means the current work is no longer "extract modules until something looks
 like a platform." The current work is:
 
-1. finish the Aurora-on-Platinum rerelease baseline
+1. finish the `1.2.0` Platinum Release 1 promotion path
 2. keep Aurora behavior aligned with the shipped `1.0.2` contract
 3. only then start the first truly playable sibling game slice
 
@@ -172,6 +172,7 @@ as the platform name.
 - In practice:
   - `Codex-Test1` produces generated artifacts in `dist/`
   - `Aurora-Galactica` is the public artifact host for:
+    - `/dev/`
     - `/`
     - `/beta/`
   - lane publishing is now scripted through:

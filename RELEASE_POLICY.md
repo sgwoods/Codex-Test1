@@ -19,6 +19,10 @@
   - and so on
 - After `1.0.0`, any production promotion that changes shipped user-visible
   behavior should bump `PATCH`, even if the change is a small hotfix.
+- Use `MINOR` for meaningful public platform milestones even when the core
+  Aurora gameplay contract intentionally stays close to the previous shipped
+  baseline. The Platinum platform launch is the reference case:
+  - `1.2.0` = `Platinum Release 1`
 - Build metadata still changes on every publish, but build metadata alone is
   not the public hotfix number.
 
@@ -42,10 +46,10 @@ Examples:
 - `MINOR`
   - use for meaningful product milestones
   - examples:
-    - major gameplay fidelity improvement
-    - large systems addition
-    - new stage/content breadth milestone
-    - public playtest readiness
+    - Platinum platform release milestones
+    - large systems additions
+    - new stage/content breadth milestones
+    - public lane or platform hosting expansions
 - `PATCH`
   - use for smaller compatible improvements inside the current milestone
   - examples:
@@ -60,18 +64,26 @@ Examples:
 
 ## Hosted Release Lanes
 
+- `localhost`
+  - local engineering and debugging lane
+  - typically served from:
+    - `http://127.0.0.1:8000/`
+- `dev`
+  - manually published integration preview at:
+    - `https://sgwoods.github.io/Aurora-Galactica/dev/`
+  - this is the hosted mirror of the current local `localhost` candidate once
+    it is stable enough to share
 - `production`
   - published at:
     - `https://sgwoods.github.io/Aurora-Galactica/`
-  - this is the official shared build, even while SemVer remains prerelease before `1.0`
+  - this is the official shared build
 - `beta`
   - manually promoted at:
     - `https://sgwoods.github.io/Aurora-Galactica/beta/`
   - this is a distinct public checkpoint lane for less-frequent milestone playtesting
-- `pre-production`
+- `pre-production source`
   - day-to-day development happens in:
     - `https://github.com/sgwoods/Codex-Test1`
-  - this is the active engineering line and not the canonical shared play URL
 
 ## Repository Roles
 
@@ -93,16 +105,18 @@ Examples:
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
    - recommended local service startup:
      - `npm run local:resume`
-4. Promote the current dev build into the beta lane:
+4. Optionally publish the current local candidate into hosted `/dev`:
+   - `npm run publish:dev`
+5. Promote the current dev build into the beta lane:
    - `npm run promote:beta`
-5. Review the generated output in:
+6. Review the generated output in:
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/`
    - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
-6. Run the beta preflight:
+7. Run the beta preflight:
    - `npm run publish:check:beta`
-7. Publish the promoted beta snapshot with:
+8. Publish the promoted beta snapshot with:
    - `npm run publish:beta`
-8. Let GitHub Pages deploy from `Aurora-Galactica` so:
+9. Let GitHub Pages deploy from `Aurora-Galactica` so:
    - `https://sgwoods.github.io/Aurora-Galactica/beta/`
      serves the promoted checkpoint
 
