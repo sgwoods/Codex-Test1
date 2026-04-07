@@ -1,5 +1,5 @@
 // Aurora-specific board rendering, sprites, and hitbox helpers.
-window.__platinumRenderDebug=window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
+window.__platinumRenderDebug=window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[],captureTetherVisible:false,capturedGhostVisible:false,renderTick:0};
 window.__auroraRenderDebug=window.__platinumRenderDebug;
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
@@ -55,11 +55,16 @@ function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  drawPix(-ps*2.5,-ps*2.2,ps,P.ship.a,colA,colB,P.ship.b,'#ff4658',P.ship.c);
 }
 
+function endOfRunOverlayActive(){
+ return !started&&!!gameOverState;
+}
+
 function drawEnemy(e){
  const ps=2;
  const flap=Math.sin(e.tm*11+e.ph)>.12,hot=e.dive===1||e.dive===4;
  const pal=enemyPalette(e,flap,hot);
- const carrying=enemyIsCarryingFighter(e);
+ const carryVisible=!endOfRunOverlayActive();
+ const carrying=carryVisible&&enemyIsCarryingFighter(e);
  const carryTarget=carrying?carriedFighterTarget(e):null;
  const carryOffset=carrying?carriedFighterOffset(e):null;
  ctx.save();
@@ -129,8 +134,16 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
 }
 
 function drawCaptureTether(){
+ if(endOfRunOverlayActive()){
+  window.__platinumRenderDebug.captureTetherVisible=false;
+  return;
+ }
  const p=S.p,b=p.capBoss;
- if(!p.captured||!b||b.hp<=0)return;
+ if(!p.captured||!b||b.hp<=0){
+  window.__platinumRenderDebug.captureTetherVisible=false;
+  return;
+ }
+ window.__platinumRenderDebug.captureTetherVisible=true;
  const bx=Math.round(b.x),by=Math.round(b.y+12),px=Math.round(p.x),py=Math.round(p.y-8);
  const g=ctx.createLinearGradient(bx,by,px,py);
  g.addColorStop(0,'rgba(155,246,255,.78)');
@@ -311,7 +324,10 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);
  ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ window.__platinumRenderDebug.renderTick=(window.__platinumRenderDebug.renderTick||0)+1;
  window.__platinumRenderDebug.carryDraws.length=0;
+ window.__platinumRenderDebug.captureTetherVisible=false;
+ window.__platinumRenderDebug.capturedGhostVisible=false;
  ctx.save();
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);
@@ -355,10 +371,14 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  drawCaptureTether();
  drawCarryDebugOverlay();
  const p=S.p;
+ const suppressCaptureOverlay=endOfRunOverlayActive();
  if((!p.pending||p.spawn<=.3)&&!p.spawn){
   if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0);
  }
- if(p.captured)drawPlayerBody(p.x,p.y,0,1);
+ if(p.captured&&!suppressCaptureOverlay){
+  window.__platinumRenderDebug.capturedGhostVisible=true;
+  drawPlayerBody(p.x,p.y,0,1);
+ }
  drawReserveShips(S.lives);
  drawBadges(S.stage);
  drawPostFx();
