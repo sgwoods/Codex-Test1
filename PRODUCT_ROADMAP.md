@@ -385,6 +385,58 @@ plan.
 - use Aurora's ongoing work to reduce the eventual cost of supporting Galaxian
   and other future variants without pausing product progress now
 
+## Immediate Post-`1.2.0` Bundles
+
+This is the practical grouping for the next work after `1.2.0 — Platinum Release 1`.
+
+### Bundle A: `1.2.1` Aurora Trust Fixes
+
+Target outcome:
+
+- close the smallest player-visible correctness issues without reopening the whole product
+
+Key issue groups:
+
+- `#143` dual-fighter surviving-ship rule
+- `#140` challenge stages should behave like bonus stages
+- `#142` captured-fighter game-over/results presentation
+
+Suggested versioning:
+
+- `1.2.1`
+
+### Bundle B: Aurora Moment Polish
+
+Target outcome:
+
+- improve arcade readability and emotional clarity around rewards, loss, and special moments
+
+Key issue groups:
+
+- extra-ship visibility/audio
+- capture/carry clarity
+- results and game-over presentation polish
+
+Suggested versioning:
+
+- `1.2.2`
+
+### Bundle C: Platinum Shell And Release-Flow Polish
+
+Target outcome:
+
+- keep the `Platinum` host shell coherent while making future patch promotion more boring and reliable
+
+Key issue groups:
+
+- remaining frame/popup/picker polish
+- hosted lane documentation and release-ops boringness
+- preview-pack and shell-surface refinement
+
+Suggested versioning:
+
+- later `1.2.x`
+
 ## How We Should Use This Roadmap
 
 - Use it to decide when a `PATCH` bump is enough versus when a `MINOR` bump is justified

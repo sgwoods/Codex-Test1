@@ -227,21 +227,21 @@ Current release checkpoint:
 
 Current coding priority:
 
-1. keep Aurora `1.0.2` stable in production
-2. complete the Platinum rerelease milestone for the existing Aurora game
-3. close the most visible Aurora trust/clarity follow-ups after the platform rerelease baseline is stable
-4. use `1.2.0` for the Platinum platform release milestone
-5. use `1.2.x` patch releases for Aurora-on-Platinum stabilization after launch
-6. begin the Aurora-specific `Game Designer` planning phase using:
+1. keep `1.2.0 — Platinum Release 1` stable on hosted `/production`
+2. close the most visible Aurora trust/clarity follow-ups in a small `1.2.1` patch line
+3. keep hosted `/dev` as the current integration lane for post-release gameplay fixes
+4. use hosted `/beta` only for reviewed patch candidates rather than day-to-day polish
+5. begin the Aurora-specific `Game Designer` planning phase using:
   - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
+6. only after the first Aurora patch bundle is stable, deepen Platinum shell polish and the first playable `Galaxy Guardians` dev slice
 
 ### Current platform next steps
 
 The immediate Platinum path is:
 
-1. finish and verify the Aurora-on-Platinum rerelease baseline
-2. keep the selected-pack shell, splash, picker, and platform-only harnesses green
-3. release Aurora publicly as a clearly Platinum-hosted game
+1. keep the selected-pack shell, splash, picker, and platform-only harnesses green
+2. ship Aurora trust/correctness fixes through hosted `/dev` first
+3. promote only reviewed patch candidates through hosted `/beta`
 4. then start preparation for the first playable `Galaxy Guardians` slice
 
 The current stabilization gate lives in:
@@ -319,6 +319,26 @@ Definition of success:
   terminology
 - the picker can advertise future games without implying they are already
   playable
+
+### Post-`1.2.0` Patch Bundles
+
+This is the current recommended bundling after `1.2.0 — Platinum Release 1`.
+
+| Bundle | Issues / Focus | Why it belongs together | Recommended Version |
+| --- | --- | --- | --- |
+| `1.2.1 Aurora Trust Fixes` | `#143` dual-fighter surviving-ship rule, `#140` challenge stages as bonus stages, `#142` captured-fighter game-over/results visual | Small, player-visible correctness fixes in core Aurora flow | `1.2.1` |
+| Aurora Moment Polish | extra-ship visibility/audio, capture/carry clarity, results/game-over presentation polish | Improves arcade clarity and first-session trust without reopening platform work | `1.2.2` or later |
+| Platinum Shell Polish | frame smoothing, popup-fit consistency, preview-card polish, remaining shell copy cleanup | Platform-facing refinement after the successful `1.2.0` launch | `1.2.x` |
+| Release Pipeline Hardening | keep `localhost` -> hosted `/dev` -> hosted `/beta` -> hosted `/production` boring and reliable | Protects future release work and lowers manual overhead | `1.2.x` |
+| Aurora Designer Foundations | stage/boss/theme catalogs and authoring-facing structure | Makes later Aurora expansion deliberate instead of ad hoc | `1.3.x` |
+| Galaxy Guardians Dev Slice | formation rack, dives, flagship/escort scoring, single-shot constraint, wrap-around threat | Second-pack proof for Platinum, but not part of the immediate Aurora patch line | `1.3.x` or later |
+
+Recommended execution order:
+
+1. complete the `1.2.1 Aurora Trust Fixes` bundle
+2. take the small Aurora moment-polish cluster
+3. then return to Platinum shell and release-pipeline polish
+4. only then deepen the authoring layer and the first real `Galaxy Guardians` gameplay slice
 
 #### `1.1.x`: Architectural Stabilization And Shared Runtime Extraction
 
