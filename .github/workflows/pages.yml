@@ -71,6 +71,10 @@ jobs:
           cp release-notes.json _site/
           cp export.mov.png _site/
           cp README.md _site/
+          if [ -d dev ]; then
+            mkdir -p _site/dev
+            cp -R dev/. _site/dev/
+          fi
           if [ -d beta ]; then
             mkdir -p _site/beta
             cp -R beta/. _site/beta/
