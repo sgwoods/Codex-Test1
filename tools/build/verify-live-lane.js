@@ -28,19 +28,22 @@ function laneConfig(lane){
   if(lane === 'dev'){
     return {
       buildInfo: DEV_BUILD_INFO,
-      url: 'https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json'
+      url: 'https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json',
+      assetUrl: 'https://sgwoods.github.io/Aurora-Galactica/dev/assets/platinum-platform-mark.png'
     };
   }
   if(lane === 'beta'){
     return {
       buildInfo: BETA_BUILD_INFO,
-      url: 'https://sgwoods.github.io/Aurora-Galactica/beta/build-info.json'
+      url: 'https://sgwoods.github.io/Aurora-Galactica/beta/build-info.json',
+      assetUrl: 'https://sgwoods.github.io/Aurora-Galactica/beta/assets/platinum-platform-mark.png'
     };
   }
   if(lane === 'production'){
     return {
       buildInfo: PRODUCTION_BUILD_INFO,
-      url: 'https://sgwoods.github.io/Aurora-Galactica/build-info.json'
+      url: 'https://sgwoods.github.io/Aurora-Galactica/build-info.json',
+      assetUrl: 'https://sgwoods.github.io/Aurora-Galactica/assets/platinum-platform-mark.png'
     };
   }
   throw new Error('Use --lane dev, --lane beta, or --lane production.');
@@ -76,6 +79,20 @@ function fetchJson(url){
   });
 }
 
+function fetchOk(url){
+  return new Promise((resolve, reject) => {
+    https.get(url, res => {
+      const status = res.statusCode || 0;
+      res.resume();
+      if(status === 200){
+        resolve(true);
+        return;
+      }
+      reject(new Error(`HTTP ${status} from ${url}`));
+    }).on('error', reject);
+  });
+}
+
 async function main(){
   const args = parseArgs(process.argv.slice(2));
   const lane = String(args.lane || '').toLowerCase();
@@ -96,10 +113,12 @@ async function main(){
         live.commit === expected.commit &&
         live.releaseChannel === expected.releaseChannel
       ){
+        await fetchOk(cfg.assetUrl);
         console.log(JSON.stringify({
           ok: true,
           lane,
           url: cfg.url,
+          assetUrl: cfg.assetUrl,
           label: live.label,
           commit: live.shortCommit || String(live.commit || '').slice(0, 7),
           releaseChannel: live.releaseChannel
