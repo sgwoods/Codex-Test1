@@ -2,6 +2,7 @@
 const fs = require('fs');
 const https = require('https');
 const {
+  DEV_BUILD_INFO,
   BETA_BUILD_INFO,
   PRODUCTION_BUILD_INFO
 } = require('./paths');
@@ -24,6 +25,12 @@ function parseArgs(argv){
 }
 
 function laneConfig(lane){
+  if(lane === 'dev'){
+    return {
+      buildInfo: DEV_BUILD_INFO,
+      url: 'https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json'
+    };
+  }
   if(lane === 'beta'){
     return {
       buildInfo: BETA_BUILD_INFO,
@@ -36,7 +43,7 @@ function laneConfig(lane){
       url: 'https://sgwoods.github.io/Aurora-Galactica/build-info.json'
     };
   }
-  throw new Error('Use --lane beta or --lane production.');
+  throw new Error('Use --lane dev, --lane beta, or --lane production.');
 }
 
 function sleep(ms){

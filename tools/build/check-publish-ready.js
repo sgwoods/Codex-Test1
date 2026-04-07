@@ -3,12 +3,27 @@ const fs = require('fs');
 const { execFileSync } = require('child_process');
 const {
   ROOT,
+  DIST_DEV,
   DIST_PRODUCTION,
   DIST_BETA,
+  DEV_BUILD_INFO,
   PRODUCTION_BUILD_INFO,
   BETA_BUILD_INFO,
   BETA_APPROVED_BUILD_INFO
 } = require('./paths');
+
+const REQUIRED_DEV = [
+  'index.html',
+  'release-dashboard.html',
+  'project-guide.html',
+  'player-guide.html',
+  'build-info.json',
+  'release-notes.json',
+  'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg'
+];
 
 const REQUIRED_PRODUCTION = [
   'index.html',
@@ -20,7 +35,8 @@ const REQUIRED_PRODUCTION = [
   'README.md',
   'export.mov.png',
   'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png'
+  'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg'
 ];
 
 const REQUIRED_BETA = [
@@ -33,6 +49,7 @@ const REQUIRED_BETA = [
   'export.mov.png',
   'assets/platinum-platform-mark.png',
   'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg',
   'README.md',
   'README.txt'
 ];
@@ -63,6 +80,15 @@ function git(args){
 }
 
 function laneConfig(lane){
+  if(lane === 'dev'){
+    return {
+      lane,
+      dir: DIST_DEV,
+      buildInfo: DEV_BUILD_INFO,
+      required: REQUIRED_DEV,
+      nextStep: 'Run "npm run build" first.'
+    };
+  }
   if(lane === 'beta'){
     return {
       lane,
@@ -81,7 +107,7 @@ function laneConfig(lane){
       nextStep: 'Run "npm run build && npm run promote:production" first.'
     };
   }
-  throw new Error('Use --lane beta or --lane production.');
+  throw new Error('Use --lane dev, --lane beta, or --lane production.');
 }
 
 function loadJson(file){

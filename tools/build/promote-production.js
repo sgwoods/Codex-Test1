@@ -20,7 +20,8 @@ const FILES = [
   'README.md',
   'export.mov.png',
   'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png'
+  'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg'
 ];
 
 function normalizeProductionVersion(version){

@@ -5,8 +5,10 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 const {
   ROOT,
+  DIST_DEV,
   DIST_PRODUCTION,
   DIST_BETA,
+  DEV_BUILD_INFO,
   PRODUCTION_BUILD_INFO,
   BETA_BUILD_INFO
 } = require('./paths');
@@ -21,6 +23,19 @@ const OWNER = process.env.AURORA_PUBLIC_OWNER || 'sgwoods';
 const REPO = process.env.AURORA_PUBLIC_REPO || 'Aurora-Galactica';
 const DEFAULT_BRANCH = process.env.AURORA_PUBLIC_BRANCH || 'main';
 
+const DEV_FILES = [
+  'index.html',
+  'release-dashboard.html',
+  'project-guide.html',
+  'player-guide.html',
+  'build-info.json',
+  'release-notes.json',
+  'export.mov.png',
+  'assets/platinum-platform-mark.png',
+  'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg'
+];
+
 const PRODUCTION_FILES = [
   'index.html',
   'release-dashboard.html',
@@ -31,7 +46,8 @@ const PRODUCTION_FILES = [
   'README.md',
   'export.mov.png',
   'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png'
+  'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg'
 ];
 
 const BETA_FILES = [
@@ -44,6 +60,7 @@ const BETA_FILES = [
   'export.mov.png',
   'assets/platinum-platform-mark.png',
   'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg',
   'README.md',
   'README.txt'
 ];
@@ -92,6 +109,17 @@ function loadJson(file){
 }
 
 function laneConfig(lane){
+  if(lane === 'dev'){
+    return {
+      lane,
+      sourceDir: DIST_DEV,
+      buildInfo: DEV_BUILD_INFO,
+      targetDir: 'dev',
+      files: DEV_FILES,
+      rootFiles: ['.github/workflows/pages.yml'],
+      commitPrefix: 'Update dev lane from local build'
+    };
+  }
   if(lane === 'beta'){
     return {
       lane,
@@ -114,7 +142,7 @@ function laneConfig(lane){
       commitPrefix: 'Update production lane from dev build'
     };
   }
-  throw new Error(`Unsupported lane "${lane}". Use --lane beta or --lane production.`);
+  throw new Error(`Unsupported lane "${lane}". Use --lane dev, --lane beta, or --lane production.`);
 }
 
 function stageArtifacts(repoDir, cfg){

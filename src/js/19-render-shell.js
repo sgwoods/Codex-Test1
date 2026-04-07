@@ -8,6 +8,8 @@ const renderPlatformSplashModal=document.getElementById('platformSplashModal');
 const renderPlatformSplashPanel=document.getElementById('platformSplashPanel');
 const renderGamePreviewModal=document.getElementById('gamePreviewModal');
 const renderGamePreviewPanel=document.getElementById('gamePreviewPanel');
+const renderGamePickerModal=document.getElementById('gamePickerModal');
+const renderGamePickerPanel=document.getElementById('gamePickerPanel');
 const renderSettingsPanel=document.getElementById('settingsPanel');
 
 const DISPLAY_SHELL=Object.freeze({
@@ -288,6 +290,16 @@ function syncCabinetShellLayout({
  if(renderGamePreviewPanel){
   renderGamePreviewPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),780)}px`;
   renderGamePreviewPanel.style.maxHeight=`${Math.max(240,Math.min(Math.floor(viewH-24),720))}px`;
+ }
+ if(renderGamePickerModal){
+  renderGamePickerModal.style.left=`${ox}px`;
+  renderGamePickerModal.style.top=`${oy}px`;
+  renderGamePickerModal.style.width=`${viewW}px`;
+  renderGamePickerModal.style.height=`${viewH}px`;
+ }
+ if(renderGamePickerPanel){
+  renderGamePickerPanel.style.width=`${Math.min(Math.max(560,Math.floor(viewW*.9)),940)}px`;
+  renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));

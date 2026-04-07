@@ -20,7 +20,8 @@ const FILES = [
   'export.mov.png',
   'README.md',
   'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png'
+  'assets/galaxy-guardians-coming-soon.png',
+  'assets/galaxy-guardians-coming-soon.svg'
 ];
 
 function toBetaVersion(version){
