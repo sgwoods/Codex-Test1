@@ -82,7 +82,11 @@ async function main(){
       const started = !!window.__galagaHarness__.snapshot().started;
       const modalOpen = !!document.getElementById('gamePreviewModal')?.classList.contains('open');
       const previewTitle = document.getElementById('gamePreviewTitle')?.textContent || '';
-      return modalOpen ? { started, modalOpen, previewTitle } : null;
+      const marquee = document.getElementById('cabinetMarqueeTitle')?.textContent || '';
+      const packKey = typeof window.currentGamePackKey === 'function' ? window.currentGamePackKey() : '';
+      return started && packKey === 'aurora-galactica'
+        ? { started, modalOpen, previewTitle, marquee, packKey }
+        : null;
     }, 1200, 40);
 
     return { opened, preview, beforeTheme, themed, blocked };
@@ -106,9 +110,14 @@ async function main(){
   if(!result.themed?.themeLine.includes('Classic Blue')){
     fail('shell theme picker did not update the current theme label', result);
   }
-  if(result.blocked?.started) fail('preview-only pack should not be startable yet', result);
-  if(!result.blocked?.modalOpen || !result.blocked?.previewTitle.includes('Galaxy Guardians')){
-    fail('preview-only pack did not reopen the coming-soon splash when launch was attempted', result);
+  if(!result.blocked?.started){
+    fail('launching from the preview shell did not fall back to Aurora gameplay', result);
+  }
+  if(result.blocked?.modalOpen){
+    fail('preview modal stayed open instead of launching Aurora', result);
+  }
+  if(result.blocked?.packKey !== 'aurora-galactica' || !result.blocked?.marquee.includes('Aurora Galactica')){
+    fail('launch fallback did not restore Aurora as the active playable pack', result);
   }
 
   console.log(JSON.stringify({
@@ -117,7 +126,7 @@ async function main(){
     previewTitle: result.preview.title,
     previewMarquee: result.preview.marquee,
     themedBorder: result.themed.border,
-    blockedPreviewTitle: result.blocked.previewTitle
+    launchPackKey: result.blocked.packKey
   }, null, 2));
 }
 

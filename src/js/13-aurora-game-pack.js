@@ -242,6 +242,10 @@ function currentGamePackPlayable(){
  return currentGamePack().metadata?.playable!==0&&currentGamePack().metadata?.playable!==false;
 }
 
+function packIsPlayable(pack=null){
+ return !!(pack&&pack.metadata?.playable!==0&&pack.metadata?.playable!==false);
+}
+
 function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
  const nextPack=getGamePack(key);
  ACTIVE_GAME_PACK_KEY=nextPack.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
@@ -477,12 +481,22 @@ function challengeGroupBonus(stage){
  return currentGamePackChallengeGroupBonus(stage);
 }
 
-installGamePack(readPref(GAME_PACK_PREF_KEY)||DEFAULT_GAME_PACK_KEY);
+{
+ const savedGamePackKey=readPref(GAME_PACK_PREF_KEY)||DEFAULT_GAME_PACK_KEY;
+ const savedPack=getGamePack(savedGamePackKey);
+ if(packIsPlayable(savedPack)){
+  installGamePack(savedGamePackKey);
+ }else{
+  removePref(GAME_PACK_PREF_KEY);
+  installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
+ }
+}
 window.availableGamePacks=availableGamePacks;
 window.getGamePack=getGamePack;
 window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
+window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;

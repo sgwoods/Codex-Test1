@@ -91,7 +91,9 @@ function chooseGamePack(key=''){
   showToast('Return to wait mode before switching games.');
   return;
  }
- installGamePack(key,{persist:1});
+ const nextPack=getGamePack(key);
+ const playable=typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false);
+ installGamePack(key,{persist:playable?1:0});
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
  if(!currentGamePackPlayable()){

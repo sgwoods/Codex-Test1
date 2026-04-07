@@ -896,6 +896,14 @@ function closeGamePreview(force=0){
  syncGamePreviewUi();
  syncPauseUi();
 }
+function restorePlayableGamePackForLaunch(){
+ if(typeof currentGamePackPlayable!=='function'||currentGamePackPlayable())return 0;
+ if(typeof installGamePack==='function')installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
+ closeGamePreview(1);
+ if(typeof draw==='function')draw();
+ showToast('Galaxy Guardians is preview-only. Launching Aurora Galactica.');
+ return 1;
+}
 function closeHelp(force=0){
  if(!helpOpen&&!force)return;
  helpOpen=0;
@@ -1203,8 +1211,7 @@ addEventListener('keydown',e=>{
  if(!started&&e.code==='Enter'){
   if(typeof currentGamePackPlayable==='function'&&!currentGamePackPlayable()){
    e.preventDefault();
-   openGamePreview();
-   return;
+   restorePlayableGamePackForLaunch();
   }
   if(gameOverState&&!gameOverState.editing)submitGameOverScore();
   stopAttractLoop();start();
