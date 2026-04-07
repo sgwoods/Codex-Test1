@@ -17,6 +17,7 @@ module.exports = {
   DEV_PROJECT_GUIDE: path.join(DIST_DEV, 'project-guide.html'),
   DEV_PLAYER_GUIDE: path.join(DIST_DEV, 'player-guide.html'),
   DEV_BUILD_INFO: path.join(DIST_DEV, 'build-info.json'),
+  DEV_RELEASE_NOTES: path.join(DIST_DEV, 'release-notes.json'),
   DEV_SCREENSHOT: path.join(DIST_DEV, 'export.mov.png'),
   DEV_README: path.join(DIST_DEV, 'README.txt'),
   PRODUCTION_INDEX: path.join(DIST_PRODUCTION, 'index.html'),

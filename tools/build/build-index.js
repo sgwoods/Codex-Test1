@@ -11,6 +11,7 @@ const {
   DEV_PROJECT_GUIDE,
   DEV_PLAYER_GUIDE,
   DEV_BUILD_INFO,
+  DEV_RELEASE_NOTES,
   DEV_SCREENSHOT,
   PRODUCTION_INDEX,
   PRODUCTION_DASHBOARD,
@@ -41,6 +42,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/project-guide.html',
   'dist/dev/player-guide.html',
   'dist/dev/build-info.json',
+  'dist/dev/release-notes.json',
   'dist/dev/export.mov.png',
   'dist/dev/assets/platinum-platform-mark.png',
   'dist/dev/assets/galaxy-guardians-coming-soon.png',
@@ -1301,6 +1303,7 @@ function lanePaths(lane){
     projectGuide: DEV_PROJECT_GUIDE,
     playerGuide: DEV_PLAYER_GUIDE,
     buildInfo: DEV_BUILD_INFO,
+    releaseNotes: DEV_RELEASE_NOTES,
     screenshot: DEV_SCREENSHOT
   };
 }
@@ -1423,6 +1426,7 @@ function build(options = {}){
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
   fs.writeFileSync(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
   fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
+  fs.writeFileSync(out.releaseNotes, JSON.stringify({ notes: releaseNotes }, null, 2) + '\n');
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
     fs.copyFileSync(path.join(ROOT, 'export.mov.png'), out.screenshot);
   }
@@ -1433,6 +1437,7 @@ function build(options = {}){
     out.projectGuide,
     out.playerGuide,
     out.buildInfo,
+    out.releaseNotes,
     out.screenshot,
     ...copiedAssets
   ];
