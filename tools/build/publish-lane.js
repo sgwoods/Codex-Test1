@@ -15,6 +15,7 @@ const {
 const {
   laneConfig: preflightLaneConfig,
   checkGitClean,
+  checkSourceDocs,
   checkArtifacts,
   checkBuildInfo
 } = require('./check-publish-ready');
@@ -27,6 +28,7 @@ const DEV_FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -40,6 +42,7 @@ const PRODUCTION_FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -54,6 +57,7 @@ const BETA_FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -185,6 +189,7 @@ function main(){
   const cfg = laneConfig(lane);
   const preflightCfg = preflightLaneConfig(lane);
   checkGitClean();
+  checkSourceDocs();
   checkArtifacts(preflightCfg);
   checkBuildInfo(preflightCfg);
 

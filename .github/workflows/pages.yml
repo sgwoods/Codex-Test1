@@ -52,6 +52,9 @@ jobs:
           cat > _site/project-guide.html <<'HTML'
           <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/project-guide.html"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/project-guide.html');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html">Redirecting to the Aurora Galactica project guide…</a></p></body></html>
           HTML
+          cat > _site/platinum-guide.html <<'HTML'
+          <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html">Redirecting to the Platinum platform guide…</a></p></body></html>
+          HTML
           cat > _site/404.html <<'HTML'
           <!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=https://sgwoods.github.io/Aurora-Galactica/"><link rel="canonical" href="https://sgwoods.github.io/Aurora-Galactica/"><script>location.replace('https://sgwoods.github.io/Aurora-Galactica/');</script></head><body><p><a href="https://sgwoods.github.io/Aurora-Galactica/">Redirecting to Aurora Galactica…</a></p></body></html>
           HTML
@@ -66,6 +69,7 @@ jobs:
           cp index.html _site/
           cp release-dashboard.html _site/
           cp project-guide.html _site/
+          cp platinum-guide.html _site/
           cp player-guide.html _site/
           cp build-info.json _site/
           cp release-notes.json _site/

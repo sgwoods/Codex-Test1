@@ -1,365 +1,78 @@
-# Aurora Galactica 1.2.0 Platinum Release 1 Readiness Review
+# Release Readiness Review
 
-This document is the explicit final-release review artifact for the
-`1.2.0 — Platinum Release 1` promotion.
+## Current Read
 
-It is meant to answer one question clearly:
+`1.2.0 - Platinum Release 1` is already live on hosted `/production`.
 
-- are we ready to ship the Platinum-framed four-stage Aurora slice as `1.2.0`
-  with acceptable
-  product trust, documentation, and operational safety?
+That means this document is now serving two jobs:
 
-## Status
+1. record the current release-readiness posture of the shipped line
+2. record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted `/beta` and hosted `/production`
 
-Current status:
+## What Is Now True
 
-- local `localhost` and hosted `/dev` now represent the integrated Platinum
-  candidate
-- hosted `/beta` is the next release-candidate promotion lane
-- hosted `/production` still holds the older `1.0.2` public build until the
-  `1.2.0` candidate is approved and promoted
+- `Platinum` is a real shipped platform
+- `Aurora Galactica` is the first shipped playable application on Platinum
+- hosted lanes exist for local `localhost`, hosted `/dev`, hosted `/beta`, and hosted `/production`
+- the current release ladder is proven end-to-end
+- the hosted documentation set now needs to be treated as part of the release surface rather than a nice-to-have side artifact
 
-## Scope Covered
+## Documentation Lesson From `1.2.0`
 
-This review tracks the release-readiness scope promised in `#85`:
+The major miss in the original `1.2.0` promotion was not broad product failure.
 
-- security review of the codebase and deployment posture
-- code and documentation consistency for the shipped `1.2.0` slice
-- public-facing naming and release-language consistency
-- presence of a concise player-facing guide in the shipped experience
+It was that the documentation pass was not strong enough or explicit enough.
 
-## Security Review
+The correction is:
 
-### Current external/runtime surfaces
+- make the Platinum guide a first-class hosted page
+- keep platform docs and application docs separate
+- require the hosted docs set in publish preflight
+- require a complete docs refresh for meaningful `x.y` releases before hosted `/production` promotion
 
-The shipped game currently relies on:
+## Current Documentation Contract
 
-- Supabase for pilot auth and shared score data
-- FormSubmit to send bug reports / feature requests
-- a Modem inbox destination behind that feedback path
-- GitHub Pages for hosted `/dev`, hosted `/beta`, and hosted `/production`
+Hosted docs that should exist per lane:
 
-The canonical inventory lives in:
+- `project-guide.html`
+- `platinum-guide.html`
+- `player-guide.html`
+- `release-dashboard.html`
+- `release-notes.json`
+- `build-info.json`
 
-- `/Users/stevenwoods/Documents/Codex-Test1/EXTERNAL_SERVICES.md`
-
-### Resolved or mitigated
-
-- Production and non-production score writes are no longer mixed by default:
-  - beta/dev use a read-only production-score mirror with local score save
-    behavior unless an explicitly configured non-production test pilot is
-    signed in
-- Production promotion is now gated on an explicitly approved beta candidate:
-  - `npm run publish:beta`
-  - review beta
-  - `npm run approve:beta`
-  - `npm run publish:production`
-- Public Pages deploy verification now checks the live lane label/build info
-  after publishing
-- Player replay remains browser-local by default, which avoids introducing a
-  new remote media surface into the `1.0` launch path
-- Public build metadata no longer exposes non-production test-pilot identity
-  fields such as test email or user id
-
-### Accepted risks for 1.0
-
-- The current hosted product still depends on third-party auth/feedback
-  services rather than a fully self-owned operational stack
-- Beta/dev test-pilot support is still a launch-era compromise, not the final
-  long-term account/admin model
-- A hosted admin/control centre does not yet exist
-
-## Documentation And Public Surface Review
-
-### Current shipped player-facing documentation
-
-- Player guide source:
-  - `/Users/stevenwoods/Documents/Codex-Test1/player-guide.json`
-- Generated local player guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html`
-- Public production player guide:
-  - `https://sgwoods.github.io/Aurora-Galactica/player-guide.html`
-
-The in-game guide icon is already wired to the player-facing guide rather than
-the developer/project guide.
-
-### Current developer/project documentation
-
-Primary maintained docs:
+Core maintained source docs behind that hosted set:
 
 - `/Users/stevenwoods/Documents/Codex-Test1/README.md`
 - `/Users/stevenwoods/Documents/Codex-Test1/PLAN.md`
 - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
 - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/EXTERNAL_SERVICES.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md`
+- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+- `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+- `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+- `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
+- `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
+- `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
+- `/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json`
+- `/Users/stevenwoods/Documents/Codex-Test1/player-guide.json`
 
-### Consistency status
+## Current Release Risk View
 
-Consistent today:
+Main remaining risks are now smaller and more operational than architectural:
 
-- product name: `Aurora Galactica`
-- lane naming: `localhost`, hosted `/dev`, hosted `/beta`, hosted `/production`
-- player guide is distinct from project/developer documentation
-- release path is documented as:
-  - localhost -> hosted `/dev` -> hosted `/beta` -> approve -> hosted `/production`
+- small Aurora trust-fix issues in the `1.2.x` patch line
+- keeping docs and hosted lanes aligned after source changes
+- strengthening the platform/application boundary as the second game becomes more real
 
-Still worth a final check before production sign-off:
+## Recommended Rule Going Forward
 
-- all public pages use consistent version and lane language
-- player-facing text avoids leaking development/testing phrasing
-- auth/reset email branding is still generic third-party mail and is tracked
-  separately for future polish
+For every meaningful `x.y` release:
 
-## Player Guide Readiness
-
-The player guide requirement for `#85` is already satisfied in substance:
-
-- a concise player-facing guide exists
-- it is generated in the normal build
-- it is linked from the shipped in-game experience
-
-The remaining work here is not creation, but final wording polish if we choose
-to do one short prelaunch pass.
-
-## Operational Readiness
-
-### Release chain
-
-The supported release chain is now:
-
-1. build dev output
-2. publish beta
-3. review beta
-4. approve beta
-5. publish production from that approved beta artifact
-
-Key commands:
-
-```bash
-npm run publish:beta
-npm run approve:beta
-npm run publish:production
-```
-
-### Current hotfix candidate evidence
-
-For the shipped score-submit and refresh-reminder hotfix line on `f77ca58`,
-the following evidence was in place before production promotion:
-
-- build passes on the current source line:
-  - `npm run build`
-- focused regression passes for the repaired score-submit path:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
-  - evidence captured by the check:
-    - immediate remote submit at game over for a locked signed-in pilot
-    - payload includes expected score and stage
-    - successful submit marks `remoteSubmitted = 1`
-    - failed submit writes a persistent local diagnostics entry
-    - failed submit preserves a bug-report-ready diagnostics payload
-- adjacent production account feedback regression still passes:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-production-account-feedback.js`
-- beta review path succeeded for the refresh reminder:
-  - hosted beta review link showed the reminder state
-  - `Refresh Now` was confirmed visible and clickable
-  - the one-shot beta hint cleared after refresh so the reminder disappeared on
-    the next load
-- beta publish succeeded for the approved candidate:
-  - `1.0.0-beta.1+build.284.sha.f77ca58.beta`
-- production publish succeeded from the approved beta artifact:
-  - `1.0.0+build.284.sha.f77ca58`
-
-That means the hotfix was promoted through the normal path with both automated
-and manual evidence, not rushed directly into production.
-
-### Current `1.0.1` hotfix evidence
-
-For the production `1.0.1` hotfix on `14398e9`, the following evidence was in
-place before production promotion:
-
-- build passes on the current source line:
-  - `npm run build`
-- focused input-mapping regression passes:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
-  - evidence captured by the check:
-    - `A` and `Z` both move left
-    - `D` and `C` both move right
-    - arrow keys still work
-    - blur clears active movement and zeroes horizontal drift
-- focused feedback client regression passes:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
-  - evidence captured by the check:
-    - direct send remains the intended primary path
-    - failure path still opens a mail fallback
-    - diagnostics persist in the local system log
-- adjacent score-submit regression still passes:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
-- adjacent production account feedback regression still passes:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-production-account-feedback.js`
-- hosted beta review confirmed:
-  - left/right controls no longer latch the ship after focus loss
-  - browser feedback submission succeeded using the new Web3Forms path
-  - feedback success confirmation remained visible long enough to read
-- beta publish succeeded for the approved candidate:
-  - `1.0.1-beta.1+build.288.sha.14398e9.beta`
-- production publish succeeded from the approved beta artifact:
-  - `1.0.1+build.288.sha.14398e9`
-
-That means `1.0.1` followed the documented hotfix process with a small scoped
-change set, focused regressions, hosted beta confirmation, approved beta
-promotion, and live production verification.
-
-### Current `1.0.2` hotfix evidence
-
-For the production `1.0.2` hotfix on `831a2c6`, the following evidence was in
-place before production promotion:
-
-- build passes on the current source line:
-  - `npm run build`
-- mandatory hotfix smoke suite passes:
-  - `npm run harness:check:hotfix-smoke`
-  - evidence captured by the suite:
-    - playable left and right movement distance for `ArrowLeft`, `A`, `Z`, `ArrowRight`, `D`, and `C`
-    - no repeated input-reset events during active movement
-    - popup surfaces still open and fit correctly
-    - direct feedback success and fallback diagnostics still behave correctly
-    - remote score submit still succeeds on the happy path and degrades cleanly on failure
-- hosted beta input probe passes:
-  - `npm run harness:check:live-input:beta`
-  - evidence captured by the probe:
-    - live beta movement mapping matches the intended control layout
-    - hosted beta movement distance is strong enough to be playable
-    - hosted beta movement is not interrupted by repeated input resets
-- beta preflight now verifies expected test-pilot emails are embedded when non-production auth is intended
-- hosted beta review confirmed:
-  - left and right movement works normally for both-hand mappings
-  - the beta artifact contains the intended test-pilot lane configuration
-- beta publish succeeded for the approved candidate:
-  - `1.0.2-beta.1+build.290.sha.831a2c6.beta`
-- production publish succeeded from the approved beta artifact:
-  - `1.0.2+build.290.sha.831a2c6`
-
-That means `1.0.2` closed the live movement regression with both stronger local
-gates and a hosted-lane verification step before production promotion.
-
-### Current Aurora-on-Platinum rerelease hardening evidence
-
-The current dev line is being hardened as:
-
-- `Aurora Galactica`
-- running as the first playable game pack on:
-  - `Platinum`
-
-The current rerelease hardening pass has explicit evidence for:
-
-- core gameplay and reset behavior:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
-- capture/rescue lifecycle stability:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
-- first challenge-stage motion stability:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
-- remote score submit and pilot-panel integrity:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
-- feedback path integrity:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
-- platform-shell boot/install path:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
-- shell/popup/dock interaction integrity:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
-
-Current automated status on `2026-04-06`:
-
-- all required Aurora-on-Platinum rerelease evidence checks are green on the
-  current dev line
-- seeded persona repeatability is green again
-- the full-run seeded distribution is back on the clean `1.0.2` reference
-  results for:
-  - novice
-  - advanced
-  - expert
-  - professional
-- no current automated failures are blocking the Platinum-framed Aurora
-  rerelease candidate
-- the remaining release decision is now about:
-  - whether any known Aurora gameplay follow-up should be upgraded to
-    rerelease-blocker status
-  - one final promotion rehearsal and public-lane verification pass
-
-The current Platinum-framed shell surfaces now include:
-
-- a lower-left Platinum button
-- a centered Platinum splash
-- a `Choose Game` rail with pack preview
-- a dismissable `Galaxy Guardians` coming-soon splash
-
-The current rerelease hardening pass also corrected two harness regressions so
-the gate reflects the product rather than test pollution:
-
-- input-mapping now recenters before each key assertion instead of stacking all
-  six movement checks against the left wall
-- pilot replay-panel checks now clear prior replay state so click-to-open
-  assertions verify the intended seeded rows only
-
-### Launch-significant operational checks
-
-Before final `1.0` sign-off, confirm:
-
-- beta is the reviewed candidate we intend to ship
-- the approved-beta gate is working in a real production rehearsal
-- non-production score/account behavior still matches the intended lane policy
-- live public version labels match the expected promoted build
-- the pre-`1.0` production leaderboard reset for `#130` has been inspected,
-  executed, and verified against the live shared score view
-- one manual dev verification pass confirms the new Platinum shell surfaces
-  feel correct in-browser
-
-Manual shell verification now completed on the current dev line:
-
-- local game server responds on:
-  - `http://127.0.0.1:8000/`
-- local log-viewer responds on:
-  - `http://127.0.0.1:4311/`
-- Platinum shell surfaces were checked visually against current screenshots for:
-  - Platinum splash
-  - game picker
-  - guide/help popup framing
-- current read:
-  - shell framing is coherent
-  - Platinum identity is visible without overwhelming Aurora
-  - picker and preview-pack treatment read as intentional, not accidental
-
-Manual gameplay verification now also completed on the current dev line:
-
-- Aurora was played locally through the Platinum-framed dev build
-- current read:
-  - Stage `1` and Stage `2` feel good
-  - the first challenge stage feels about right again
-  - no fresh manual evidence suggests the earlier severe gameplay-parity drift
-    is still present
-- one follow-up visual bug was observed during game-over/results:
-  - a captured/carried fighter can appear to hang in an odd end-state relation
-    to the carrying boss during the results screen
-  - this should be tracked as Aurora polish follow-up, but it does not currently
-    look like a release-blocking regression
-
-## Recommendation
-
-`#85` should remain in the launch list until the team completes one final
-promotion rehearsal and public-lane verification pass.
-
-Practical interpretation today:
-
-- implemented on dev as a concrete review/checklist artifact
-- automated rerelease hardening is green
-- manual feel-check now supports the automated parity read
-- no current evidence suggests that `#140` or `#141` should block the Platinum
-  rerelease baseline
-- final sign-off is now a release-operations decision, not an architecture or
-  broad gameplay-fidelity investigation
-- next meaningful step is a beta/production promotion rehearsal and final
-  public-lane verification
+1. finish the code candidate
+2. verify local `localhost`
+3. verify hosted `/dev`
+4. promote and verify hosted `/beta`
+5. complete the full documentation refresh
+6. approve hosted `/beta`
+7. only then publish hosted `/production`

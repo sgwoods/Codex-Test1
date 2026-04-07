@@ -1,83 +1,42 @@
 # Platinum Architectural Overview
 
-This document is the maintained high-level picture of how `Platinum` relates to
-the games it hosts, starting with `Aurora Galactica`.
+This document is the maintained short visual overview of how `Platinum` relates
+to the applications it hosts.
 
-Use this as the short visual explanation for:
+Use it for the fast answer to:
 
-- what `Platinum` is
-- what it owns
-- what the game packs own
+- what Platinum is
+- what Platinum owns
+- what applications own
 - where the current migration stands
+
+For the canonical full platform guide, use:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
 
 ## Diagram
 
 ```mermaid
 flowchart TB
     subgraph "Platinum Platform"
-        P1["Cabinet Shell and Layout
-        - marquee
-        - side rails
-        - build stamp
-        - popup framing"]
-        P2["Runtime and Input
-        - boot path
-        - active pack selection
-        - pause / wait mode
-        - fullscreen / scaling"]
-        P3["Shared Services
-        - auth/session adapters
-        - leaderboard/score service
-        - feedback transport
-        - replay plumbing"]
-        P4["Platform Harnesses
-        - pack boot proof
-        - shell/popup checks
-        - dock button checks
-        - lane/publish checks"]
-        P5["Shared Contracts
-        - gamePack
-        - shell themes
-        - entity contract
-        - content surfaces"]
+        P1["Cabinet Shell and Layout\n- marquee\n- side rails\n- build stamp\n- popup framing"]
+        P2["Runtime and Input\n- boot path\n- active pack selection\n- pause and wait mode\n- fullscreen and scaling"]
+        P3["Shared Services\n- auth and session adapters\n- leaderboard policy\n- feedback transport\n- replay plumbing"]
+        P4["Platform Harnesses\n- pack boot proof\n- shell and popup checks\n- dock button checks\n- lane and publish checks"]
+        P5["Shared Contracts\n- gamePack\n- shell themes\n- entity contract\n- content surfaces"]
     end
 
-    subgraph "Aurora Galactica Game Pack"
-        A1["Game Identity
-        - title
-        - front-door copy
-        - shell themes
-        - stage branding"]
-        A2["Gameplay Rules
-        - formations
-        - stage flow
-        - challenge cadence
-        - scoring"]
-        A3["Aurora Mechanics
-        - capture/rescue
-        - dual fighter
-        - boss/escort behavior
-        - challenge-stage motion"]
-        A4["Aurora Assets and Content
-        - sprites
-        - boss concepts
-        - quotes/content fit
-        - audio identity"]
-        A5["Aurora Harnesses
-        - challenge motion/profile
-        - capture lifecycle
-        - scoring and outcome checks"]
+    subgraph "Aurora Galactica Application"
+        A1["Application Identity\n- title\n- front-door copy\n- shell accents\n- stage branding"]
+        A2["Gameplay Rules\n- formations\n- stage flow\n- challenge cadence\n- scoring"]
+        A3["Aurora Mechanics\n- capture and rescue\n- dual fighter\n- boss and escort behavior\n- challenge-stage motion"]
+        A4["Aurora Assets and Content\n- sprites\n- audio identity\n- stage text\n- game-owned polish"]
+        A5["Aurora Harnesses\n- challenge profile\n- capture lifecycle\n- scoring and outcome checks"]
     end
 
-    subgraph "Future Game Packs"
-        G1["Galaxy Guardians
-        - future sibling title
-        - Galaxian-inspired
-        - currently shell preview / coming soon"]
-        G2["Other Future Packs
-        - their own themes
-        - their own mechanics
-        - their own content and assets"]
+    subgraph "Future Applications"
+        G1["Galaxy Guardians\n- future sibling title\n- currently preview only"]
+        G2["Other Future Packs\n- their own rules\n- their own content\n- their own harnesses"]
     end
 
     P5 --> A1
@@ -96,107 +55,26 @@ flowchart TB
     G2 -. hosted by .-> P2
 ```
 
-## Maintained Graphics
+## Current Read
 
-The following SVG graphics are maintained alongside this overview and are meant
-to be reused in docs, release briefings, and planning artifacts:
+Today the architecture is in this state:
 
-- public-facing platform hero:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-hero.svg`
-- platform stack:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-platform-stack.svg`
-- platform versus game-pack ownership:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-pack-separation.svg`
-- migration state and next-step framing:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/platinum-migration-state.svg`
-- Aurora pack card:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/aurora-pack-card.svg`
-- Galaxy Guardians pack card:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg`
-- launch shell art direction:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
-
-## Separation Summary
-
-### Platinum owns
-
-- the cabinet shell and frame metaphor
-- the reusable shell frame theme catalog:
-  - `platinum-release`
-  - preview / sibling frame looks
-  - marquee / rail / cabinet chrome treatment
-- the pack picker and platform identity surfaces
-- the runtime boot/install path for the active pack
-- shared services:
-  - auth/session
-  - score transport
-  - feedback transport
-  - replay plumbing
-- platform-only harnesses and release/publish checks
-- the generic contracts that packs plug into
-
-### Aurora owns
-
-- the actual game identity and presentation
-- stage themes and stage progression
-- enemy families and boss identity
-- scoring rules
-- challenge-stage behavior
-- capture/rescue and dual-fighter logic
-- game-specific content such as future boss personality, themed stage text,
-  audio identity, and designer-facing definitions
-
-### Future packs own
-
-- their own shell identity within Platinum
-- their own gameplay rules
-- their own stage, boss, text, and audio definitions
-- their own game-pack harnesses
-
-## Current Migration State
-
-Today, the architecture is in this state:
-
-- `Platinum` is real and visible in the product
-- `Aurora Galactica` is the first playable game pack hosted on Platinum
-- `Galaxy Guardians` exists as a non-playable preview pack in the shell
-- platform-only harnesses now exist alongside Aurora gameplay harnesses
-
-This means we are past the “just refactoring Aurora internally” phase.
-
-We are now in the “stabilize the first real platform-hosted game and prepare
-for a second pack” phase.
-
-## Current Proof Points
-
-The following are already true:
-
-- Aurora boots through the selected-pack path
-- the shell can switch between Aurora and the preview sibling pack
-- the shell supports per-pack themes
-- the Platinum button and splash are real shell surfaces
-- the future-pack preview uses a proper dismissable `Coming Soon` splash
-- platform shell behavior is backed by dedicated harnesses
-
-## Remaining Near-Term Goal
-
-Before we move deeply back into game expansion work, the next milestone is:
-
-- rerelease `Aurora Galactica` clearly as a `Platinum`-hosted title on a stable
-  platform baseline
-
-After that:
-
-- return to the tracked Aurora gameplay follow-ups
-- then prepare the first truly playable sibling pack slice
+- `Platinum` is real and visible in the shipped product
+- `Aurora Galactica` is the first playable application on Platinum
+- `Galaxy Guardians` exists as a preview-only sibling application shell
+- hosted docs now need to describe the platform separately from the applications it hosts
 
 ## Related Docs
 
-- core architecture map:
+- canonical platform guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+- application-layer guide:
+  - `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- repo technical map:
   - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
-- Aurora design-authoring view:
-  - `/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md`
-- content and quote surfaces:
-  - `/Users/stevenwoods/Documents/Codex-Test1/CONTENT_PLAN.md`
-- audio/event planning:
-  - `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
+- release and testing discipline:
+  - `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+- launch art direction:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
+- forward-looking review:
+  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`

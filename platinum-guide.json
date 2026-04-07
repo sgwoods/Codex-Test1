@@ -1,0 +1,164 @@
+{
+  "title": "Platinum Platform Guide",
+  "strapline": "A first-class hosted guide to Platinum: why it exists, what it owns, how applications use it, where the seams still need work, and what should improve as the second game firms up.",
+  "currentGoal": "Keep Platinum Release 1 stable while strengthening the platform and application boundary, keeping the hosted documentation set aligned, and preparing the smallest useful second-application proof.",
+  "sections": [
+    {
+      "id": "purpose",
+      "title": "Platform Purpose",
+      "summary": "What Platinum is supposed to solve.",
+      "cards": [
+        {
+          "title": "Shared Host",
+          "body": "Platinum is the reusable browser-arcade host. It owns the shell, hosted lanes, release identity, pack selection path, shared services, and the platform-side documentation and release discipline that should not be reinvented per game."
+        },
+        {
+          "title": "Not The Game",
+          "body": "Platinum should not quietly absorb Aurora gameplay rules. Scoring, stage progression, capture and rescue, challenge cadence, enemy behavior, and game-specific content remain application responsibilities."
+        },
+        {
+          "title": "Current Proof",
+          "body": "The platform is now real because it ships one playable application, hosts a preview-only sibling application, carries a full hosted lane model, and has dedicated platform-only checks instead of only Aurora gameplay checks."
+        }
+      ]
+    },
+    {
+      "id": "structure",
+      "title": "Structure",
+      "summary": "The main platform responsibilities today.",
+      "cards": [
+        {
+          "title": "Shell And Presentation",
+          "body": "Platinum owns the cabinet frame, marquee housing, rails, lower band, overlay framing, and reusable shell frame themes."
+        },
+        {
+          "title": "Runtime And Hosting",
+          "body": "Platinum owns pack selection, preview-only application behavior, shell start behavior, wait-mode hosting, and shared runtime control surfaces."
+        },
+        {
+          "title": "Shared Services",
+          "body": "Auth, leaderboard policy, feedback transport, and replay/session plumbing are shared platform services so applications do not each build their own service stack."
+        },
+        {
+          "title": "Shared Contracts",
+          "body": "Platinum depends on a game-pack contract for identity, shell preferences, capability flags, content surfaces, and entity compatibility. The contract is real now but should become more explicit as the second game firms up."
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Applications On Platinum",
+      "summary": "What currently runs on the platform and how to think about ownership.",
+      "bullets": [
+        "`Aurora Galactica` is the first shipped playable application on Platinum.",
+        "`Galaxy Guardians` is currently a preview-only sibling application shell.",
+        "Applications own gameplay rules, scoring, progression, and game-specific content.",
+        "Platinum owns the shell, lanes, release tooling, docs discipline, and shared services.",
+        "The best next platform proof is a small playable second-application slice, not a rushed second public launch."
+      ]
+    },
+    {
+      "id": "boundary-notes",
+      "title": "Remaining Boundary Notes",
+      "summary": "The platform separation is real, but these seams still need to be managed deliberately.",
+      "bullets": [
+        "Some storage, debug, and compatibility names are still Aurora-shaped even when the underlying behavior is now platform-owned.",
+        "The pack contract is practical in code but still needs stronger versioning and clearer required-versus-optional capability rules.",
+        "Some shell copy and application copy still live too close together, which can blur ownership.",
+        "The second application is still preview-only, so the platform contract has one full gameplay implementation and one partial proof rather than two complete applications."
+      ]
+    },
+    {
+      "id": "future",
+      "title": "Platform Future Areas Of Improvement",
+      "summary": "The most important next platform improvements as the project matures.",
+      "bullets": [
+        "Formalize the game-pack schema and capability validation.",
+        "Make storage and migration policy more explicit and less name-driven.",
+        "Keep platform docs and application docs separate and make the docs pass a real release gate for every meaningful x.y release.",
+        "Prove the platform with the smallest useful playable second application before expanding into a much larger multi-game roadmap."
+      ]
+    },
+    {
+      "id": "docs-index",
+      "title": "Documentation Index",
+      "summary": "The best next links depending on what question you are asking.",
+      "links": [
+        {
+          "label": "Project Guide",
+          "href": "project-guide.html",
+          "detail": "Project-wide release, workflow, documentation, and source-of-truth guide."
+        },
+        {
+          "label": "Player Guide",
+          "href": "player-guide.html",
+          "detail": "Player-facing controls and in-game usage guide."
+        },
+        {
+          "label": "Release Dashboard",
+          "href": "release-dashboard.html",
+          "detail": "Current milestone and release-train status."
+        },
+        {
+          "label": "Platinum Overview Diagrams",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PLATINUM_ARCHITECTURE_OVERVIEW.md",
+          "detail": "Maintained diagrams and ownership visuals."
+        },
+        {
+          "label": "Applications On Platinum",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/APPLICATIONS_ON_PLATINUM.md",
+          "detail": "Application-layer responsibilities and remaining boundary notes."
+        },
+        {
+          "label": "Testing And Release Gates",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md",
+          "detail": "Automation-first release discipline and documentation gate expectations."
+        }
+      ]
+    }
+  ],
+  "sourceDocs": [
+    {
+      "id": "platinum-doc",
+      "title": "Platinum Platform Source",
+      "summary": "Canonical platform purpose, ownership, usage, boundary notes, and future improvement areas.",
+      "file": "PLATINUM.md"
+    },
+    {
+      "id": "platinum-overview-doc",
+      "title": "Platinum Overview Source",
+      "summary": "Maintained diagrams and short ownership summary for Platinum and the game packs it hosts.",
+      "file": "PLATINUM_ARCHITECTURE_OVERVIEW.md"
+    },
+    {
+      "id": "applications-doc",
+      "title": "Applications On Platinum Source",
+      "summary": "Application-layer responsibilities, current packs, and remaining platform-application seam notes.",
+      "file": "APPLICATIONS_ON_PLATINUM.md"
+    },
+    {
+      "id": "architecture-doc",
+      "title": "Architecture Source",
+      "summary": "Repo-level technical layout and implementation map.",
+      "file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "testing-doc",
+      "title": "Testing And Release Gates Source",
+      "summary": "Automation-first lane gating and documentation pass expectations.",
+      "file": "TESTING_AND_RELEASE_GATES.md"
+    },
+    {
+      "id": "launch-art-doc",
+      "title": "Launch Art Direction Source",
+      "summary": "Current Platinum launch framing and shell treatment notes.",
+      "file": "PLATINUM_LAUNCH_ART_DIRECTION.md"
+    },
+    {
+      "id": "review-doc",
+      "title": "Lueck Review Source",
+      "summary": "Forward-looking Platinum review with remaining design pressure points and next structural concerns.",
+      "file": "PLATINUM_LUECK_REVIEW.md"
+    }
+  ]
+}

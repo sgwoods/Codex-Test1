@@ -1,348 +1,129 @@
 {
-  "title": "Aurora Galactica Project Guide",
-  "strapline": "A readable, current map of the project: what we are building, how the code and tooling fit together, and what still matters before the polished four-stage 1.0 launch.",
-  "currentGoal": "Ship a polished four-stage 1.0 slice with native replays, a player-ready in-game guide, and a corrected production publish path that matches beta.",
+  "title": "Aurora Galactica And Platinum Project Guide",
+  "strapline": "A current, hosted map of the project: what Platinum is, what Aurora owns, how the release lanes work, what is automated, and which maintained docs are the source of truth.",
+  "currentGoal": "Keep Platinum Release 1 stable, close the small Aurora trust-fix cluster, and keep the platform, applications, hosted docs, and release lanes aligned as one disciplined system.",
   "sections": [
     {
       "id": "snapshot",
       "title": "Project Snapshot",
-      "summary": "The high-level state of the game and release effort right now.",
+      "summary": "The short current-state read.",
       "cards": [
         {
-          "title": "Current Product Target",
-          "body": "The current target is a consciously scoped 1.0: four playable stages, one reliable capture/rescue loop, clean high-score/results flow, a polished cabinet-like shell, and public hosting that is trustworthy enough to share."
+          "title": "What Shipped",
+          "body": "`1.2.0 - Platinum Release 1` shipped Aurora Galactica as the first playable game on Platinum, established hosted `/dev`, kept hosted `/beta` and hosted `/production` explicit, and made the shell, picker, and shared docs part of the product rather than internal scaffolding."
         },
         {
-          "title": "Where The Game Is Strong",
-          "body": "Manual play says the core slice is healthy enough to launch if the final trust items land cleanly: capture/rescue is guarded end-to-end, the shell/control rail is much stronger, native replay is in the game, and the remaining release work is mostly production correctness plus final presentation confidence."
+          "title": "What The Platform Owns",
+          "body": "Platinum owns the shell, release framing, hosted lanes, pack selection path, shared services, and the first-class hosted documentation surfaces that explain the platform and release model."
         },
         {
-          "title": "Main Remaining Gameplay Blocker",
-          "body": "The center of gravity has shifted from broad gameplay tuning to visible shell, feedback, and trust polish. Stage 2 and Stage 4 tuning are still important, but they are now intentionally treated as likely 1.1 work unless new regressions appear."
+          "title": "What The Application Owns",
+          "body": "Aurora owns Aurora gameplay: scoring, stage flow, challenge cadence, capture and rescue, dual-fighter behavior, enemy behavior, and game-specific content."
         },
         {
-          "title": "How Decisions Are Made",
-          "body": "Reference material, harness evidence, and real play all matter. The current rule is to prefer original/manual-backed evidence when a fidelity question exists, then use harness runs and player captures to tune what the game feels like in practice without losing architectural clarity."
+          "title": "Current Focus",
+          "body": "The main work is now post-release discipline: small Aurora trust fixes, a stronger platform-versus-application documentation split, and keeping localhost, hosted `/dev`, hosted `/beta`, and hosted `/production` aligned."
         }
       ]
     },
     {
-      "id": "release",
-      "title": "Release Scope And Status",
-      "summary": "What 1.0 means now that the project is prioritizing shell polish, public trust, and player-facing finish work.",
+      "id": "release-ladder",
+      "title": "Release Ladder",
+      "summary": "How work is expected to move through the system.",
       "bullets": [
-        "1.0 is the four-stage slice, not a full recreation of all Galaga content.",
-        "Stage 1 through Stage 4 manual play is healthy enough that visual finish and trust work now outrank experimental balance tuning.",
-        "Stage 2 and Stage 4 fairness work is now intentionally treated as likely 1.1 tuning unless fresh regressions push it back into the launch path.",
-        "The active 1.0 work is the cabinet shell, icon/control surface, score/guide surfaces, and a short player-focused guide.",
-        "Capture/rescue now has meaningful automation coverage, but the remaining launch question is mostly whether the live presentation reads clearly enough.",
-        "The special boss-with-two-escorts bonus attack still needs one more readability pass before 1.0 is called done.",
-        "The production-vs-beta operational split, the public production deploy path, and the final release-readiness pass remain the real launch-significant items."
+        "local `localhost` is the active engineering lane and the source of the current candidate.",
+        "hosted `/dev` is the shared integration preview of the current stable local candidate.",
+        "hosted `/beta` is the reviewed release-candidate lane.",
+        "hosted `/production` is the public promise and should move only from an approved hosted `/beta` candidate.",
+        "A meaningful `x.y` release should now include a complete documentation pass before hosted `/production` promotion."
       ]
     },
     {
-      "id": "launch-blockers",
-      "title": "Launch Blocking View",
-      "summary": "Compact release-triage view for the scoped four-stage 1.0 launch after the latest reprioritization toward shell polish, trust, and player-facing finish work.",
-      "table": {
-        "columns": [
-          "Bucket",
-          "Issue",
-          "Owner",
-          "Status",
-          "Evidence",
-          "Next",
-          "Phase"
-        ],
-        "rows": [
-          [
-            "[#61](https://github.com/sgwoods/Codex-Test1/issues/61)",
-            "Shared",
-            "Watching",
-            "Hosted Stage 3->4 can still hit the empty-playfield edge case",
-            "Keep telemetry live and treat the next reproducible bad run as launch-blocking",
-            "Phase 1"
-          ],
-          [
-            "Must",
-            "[#76](https://github.com/sgwoods/Codex-Test1/issues/76)",
-            "Shared",
-            "Implemented on dev",
-            "Non-production lanes now use a production-score read-only mirror with local-only score saves by default",
-            "Refresh beta, confirm the read-only lane messaging and blocked submit path, then close if it holds",
-            "Phase 4"
-          ],
-          [
-            "Must",
-            "[#85](https://github.com/sgwoods/Codex-Test1/issues/85)",
-            "Shared",
-            "Open",
-            "Final release-readiness still needs security review, code/docs consistency, and a short player guide",
-            "Schedule the final release-readiness cycle once the shell/polish list is short",
-            "Phase 4"
-          ],
-          [
-            "Must",
-            "[#86](https://github.com/sgwoods/Codex-Test1/issues/86) / [#103](https://github.com/sgwoods/Codex-Test1/issues/103) / [#105](https://github.com/sgwoods/Codex-Test1/issues/105)",
-            "Codex",
-            "Active",
-            "The shell/control surface now owns guide, controls, scores, account, bug report, mute, pause, and settings",
-            "Finish and verify the compact icon rail, in-game help surfaces, and settings pause/resume behavior",
-            "Phase 3"
-          ],
-          [
-            "Must",
-            "[#91](https://github.com/sgwoods/Codex-Test1/issues/91) / [#48](https://github.com/sgwoods/Codex-Test1/issues/48) / [#44](https://github.com/sgwoods/Codex-Test1/issues/44)",
-            "Codex",
-            "Active",
-            "Top HUD, frame/bezel, and stage indicator now form one display-shell system",
-            "Tighten the cabinet-like display language and verify it across common desktop sizes",
-            "Phase 2"
-          ],
-          [
-            "Must",
-            "[#82](https://github.com/sgwoods/Codex-Test1/issues/82) / [#49](https://github.com/sgwoods/Codex-Test1/issues/49) / [#60](https://github.com/sgwoods/Codex-Test1/issues/60)",
-            "Codex",
-            "Queued",
-            "Wait-mode and score-view surfaces still need clearer, less fragile presentation",
-            "Rework score-panel layout and make scoreboard state changes more explicit",
-            "Phase 2"
-          ],
-          [
-            "Must",
-            "[#74](https://github.com/sgwoods/Codex-Test1/issues/74) / [#47](https://github.com/sgwoods/Codex-Test1/issues/47) / [#38](https://github.com/sgwoods/Codex-Test1/issues/38) / [#45](https://github.com/sgwoods/Codex-Test1/issues/45)",
-            "Codex",
-            "Open",
-            "Three-ship squadron readability and combat-feedback finish work still visibly affect perceived quality",
-            "Tighten squadron geometry and verify ship-loss / boss-hit feedback in beta",
-            "Phase 2"
-          ],
-          [
-            "Must",
-            "[#87](https://github.com/sgwoods/Codex-Test1/issues/87) / [#106](https://github.com/sgwoods/Codex-Test1/issues/106)",
-            "Codex",
-            "Open",
-            "Wait-mode/demo visual stability and between-level message presentation still read as unfinished",
-            "Stabilize attract presentation and standardize message display",
-            "Phase 2"
-          ],
-          [
-            "Must",
-            "[#40](https://github.com/sgwoods/Codex-Test1/issues/40) / [#80](https://github.com/sgwoods/Codex-Test1/issues/80) / [#88](https://github.com/sgwoods/Codex-Test1/issues/88)",
-            "Codex",
-            "Beta review",
-            "Capture/carry presentation is much healthier, but the remaining visible confidence pass still matters",
-            "Keep one more live confirmation while closing the capture presentation cluster",
-            "Phase 3"
-          ],
-          [
-            "Should",
-            "[#71](https://github.com/sgwoods/Codex-Test1/issues/71) / [#78](https://github.com/sgwoods/Codex-Test1/issues/78) / [#77](https://github.com/sgwoods/Codex-Test1/issues/77) / [#73](https://github.com/sgwoods/Codex-Test1/issues/73)",
-            "Codex",
-            "Low risk",
-            "Mute landed cleanly and the challenge/capture mechanic checks are mostly in confirmation territory now",
-            "Keep the mechanic checks green and close them as live confidence comes in",
-            "Phase 3"
-          ],
-          [
-            "Post-1.0",
-            "[#18](https://github.com/sgwoods/Codex-Test1/issues/18) / [#32](https://github.com/sgwoods/Codex-Test1/issues/32) / [#9](https://github.com/sgwoods/Codex-Test1/issues/9)",
-            "Shared",
-            "Deferred",
-            "Stage 2 and Stage 4 tuning plus broader challenge-stage fidelity are now intentionally treated as 1.1 or later work",
-            "Revisit as an experimental balance/reference pass after 1.0 ships",
-            "Post-1.0"
-          ]
-        ]
-      }
-    },
-    {
-      "id": "architecture",
-      "title": "Architecture Map",
-      "summary": "The main files and what they own.",
+      "id": "platform-vs-applications",
+      "title": "Platform Versus Applications",
+      "summary": "The architectural split we need to preserve.",
       "cards": [
         {
-          "title": "Game Shell",
-          "body": "`src/index.template.html` and `src/styles.css` define the page shell, settings UI, icon rail, in-game guide/controls overlays, layout, and in-game presentation. The served local development build is generated into `dist/dev/index.html` during build."
+          "title": "Platinum",
+          "body": "Platinum owns shared shell framing, runtime hosting, pack selection, shared services, release tooling, and the hosted documentation and release surfaces that apply to more than one game."
         },
         {
-          "title": "Boot / State / Metadata",
-          "body": "`src/js/00-boot.js` owns constants, build metadata, score/high-score state, audio, input handling, logging, and the UI state that surrounds the game loop."
+          "title": "Aurora Galactica",
+          "body": "Aurora is the first shipped application on Platinum. It owns game rules, challenge and scoring behavior, capture and rescue, and Aurora-specific content and gameplay harnesses."
         },
         {
-          "title": "Gameplay Systems",
-          "body": "`src/js/10-gameplay.js` owns stage spawning, enemy movement, scoring, dive logic, capture/rescue, carried-fighter interactions, ship loss, and the main simulation loop."
-        },
-        {
-          "title": "Rendering",
-          "body": "`src/js/20-render.js` owns sprite drawing, overlays, stage banners, HUD rendering, and the visual language that explains what is happening in play."
-        },
-        {
-          "title": "Harness Hooks",
-          "body": "`src/js/90-harness.js` exposes deterministic setup helpers used by local Chrome harness scenarios so we can reproduce challenge, rescue, boss, and Stage 4 cases without depending only on random live play."
-        },
-        {
-          "title": "Build / Public Sync",
-          "body": "`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces and the Pages workflow contract into `Aurora-Galactica`, where Pages should package committed artifacts rather than rebuild stale source. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff."
-        },
-        {
-          "title": "Log Viewer",
-          "body": "`tools/log-viewer/` serves the local artifact review app so repaired session videos, synced event streams, Codex prompts, and issue drafting stay in one place while debugging gameplay. It reads the recursive `harness-artifacts/` tree and expects each reviewable run folder to keep a `summary.json` beside its session log and repaired review video."
+          "title": "Galaxy Guardians",
+          "body": "Galaxy Guardians is currently a preview-only sibling application shell. Its job right now is to prove the pack-selection and identity path without pretending the gameplay is already there."
         }
       ]
     },
     {
-      "id": "harness",
-      "title": "Harness Coverage",
-      "summary": "What is currently measured automatically and why it matters.",
+      "id": "automation",
+      "title": "Automation-First Gating",
+      "summary": "The release process should prefer automation over memory or manual estimation whenever practical.",
       "bullets": [
-        "Opening and pacing scenarios: `stage1-opening`, `stage2-opening`, `stage1-descent`.",
-        "Challenge fidelity scenario: `stage3-challenge`, including hit rate and upper-band dwell time.",
-        "Stage 4 guardrails: `stage4-five-ships` and `stage4-survival`.",
-        "Capture/rescue coverage: `rescue-dual`, `capture-rescue-dual`, `second-capture-current`, `repeat-capture-stage`, `carried-fighter-standby`, and `carried-fighter-attacking`.",
-        "Boss clarity coverage: `boss-first-hit`.",
-        "Special arcade-moment coverage: `stage4-squadron-bonus` and `stage12-variety`.",
-        "Run analysis now includes challenge, rescue, carried-fighter, later-stage, audio, and measured squadron-spacing metrics so regressions are easier to spot.",
-        "Artifact review coverage now includes repaired `.review.webm` playback, quality checks, clip extraction, synced event browsing, and direct issue drafting through the local log viewer."
-      ]
-    },
-    {
-      "id": "references",
-      "title": "Reference Baseline",
-      "summary": "The evidence sources the project treats as authoritative or useful.",
-      "cards": [
-        {
-          "title": "Primary Rule Sources",
-          "body": "The 1981 Namco manual and curated original gameplay footage are the first stop for rule questions, scoring behavior, challenge structure, capture/rescue behavior, and visible arcade moments."
-        },
-        {
-          "title": "Secondary Sources",
-          "body": "Walkthroughs and written references are used carefully for later-stage breadth, progression feel, and confirming that the game experience expands beyond the first few stages, but they do not override primary sources on rules."
-        },
-        {
-          "title": "Durable Analyses",
-          "body": "The project already keeps focused notes for the first challenge stage, Stage 4 fairness, manual observations, and capture/debug cases so we stop rediscovering the same lessons from scratch."
-        }
-      ]
-    },
-    {
-      "id": "workflow",
-      "title": "Working Workflow",
-      "summary": "How changes are expected to move from idea to confidence.",
-      "bullets": [
-        "Edit source files in `src/` and rebuild with `npm run build`.",
-        "After switching machines or refreshing a workstation, use `npm run local:resume` so the local game and the log viewer come back up together before resuming debugging.",
-        "Use harness scenarios or imported real-play sessions to validate behavior before treating a tuning pass as complete.",
-        "Use `npm run log-viewer` when a video-backed review loop is faster than reading raw JSON; the local viewer keeps repaired video, events, clips, and issue drafting aligned, but it only sees runs that live inside the expected `harness-artifacts/` folder structure.",
-        "Push `main` only when the maintained source, docs, and release metadata are current and the repo is clean.",
-        "Use the release dashboard for milestone-level status, release notes for player-visible changes, and the public status export for the separate public project page.",
-        "When a behavior question is unclear, preserve the lesson in a durable note under `reference-artifacts/` or `reference-analysis/` instead of relying on chat history."
+        "Build and publish preflight should fail if the hosted docs set is incomplete.",
+        "Gameplay, shell, and platform boot behavior should be covered by focused harnesses whenever the behavior is stable enough to automate.",
+        "Hosted lane verification should confirm live labels and, when relevant, live input behavior.",
+        "Manual review should mostly be reserved for feel, visual quality, and presentation clarity where automation is still weaker."
       ]
     },
     {
       "id": "docs-index",
       "title": "Documentation Index",
-      "summary": "The best entry points for different kinds of work.",
+      "summary": "The best entry points depending on the question you are trying to answer.",
       "links": [
         {
-          "label": "Log Viewer",
-          "href": "http://127.0.0.1:4311/",
-          "detail": "Local artifact review app. Start it with `npm run log-viewer` to inspect repaired videos, synced events, and draft issues. Runs must live under `harness-artifacts/` with a `summary.json` and neighboring session/video files."
+          "label": "Hosted Platinum Guide",
+          "href": "platinum-guide.html",
+          "detail": "First-class hosted platform guide covering Platinum purpose, ownership, structure, boundary notes, and future areas of improvement."
         },
         {
-          "label": "Player Guide",
-          "href": "https://sgwoods.github.io/Aurora-Galactica/player-guide.html",
-          "detail": "Player-facing manual used by the in-game guide icon. This is the right place for controls, HUD reading, survival tips, and capture/rescue explanations."
+          "label": "Hosted Player Guide",
+          "href": "player-guide.html",
+          "detail": "Player-facing guide used by the in-game help surface."
         },
         {
-          "label": "README",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/README.md",
-          "detail": "Quick start, local run, harness commands, and repo-level overview."
+          "label": "Hosted Release Dashboard",
+          "href": "release-dashboard.html",
+          "detail": "Current milestone and release-train status."
         },
         {
-          "label": "Plan",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PLAN.md",
-          "detail": "Current working plan, known problems, and active priorities."
+          "label": "Platinum Platform Source",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PLATINUM.md",
+          "detail": "Canonical platform source document."
         },
         {
-          "label": "Product Roadmap",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PRODUCT_ROADMAP.md",
-          "detail": "Release milestones and what belongs to 1.0 versus later."
+          "label": "Applications On Platinum",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/APPLICATIONS_ON_PLATINUM.md",
+          "detail": "Application-layer responsibilities and remaining platform/application seam notes."
         },
         {
-          "label": "Release Readiness Review",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_READINESS_REVIEW.md",
-          "detail": "Explicit final-release review for 1.0 covering security posture, docs/public-surface consistency, lane discipline, and accepted launch risks."
+          "label": "Testing And Release Gates",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md",
+          "detail": "Automation-first release gate policy and lane expectations."
         },
         {
           "label": "Architecture",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/ARCHITECTURE.md",
-          "detail": "Short system layout and how build, deploy, harness, and reference flows fit together."
+          "detail": "Repo-level technical layout and implementation map."
         },
         {
-          "label": "Source Map",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/SOURCE_MAP.md",
-          "detail": "Where specific gameplay systems live in code."
-        },
-        {
-          "label": "External Services",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/EXTERNAL_SERVICES.md",
-          "detail": "Current inventory of runtime, hosting, feedback, and release services, plus what stays browser-local."
-        },
-        {
-          "label": "Reference Baseline",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md",
-          "detail": "How fidelity questions are grounded in durable source material and issues."
-        },
-        {
-          "label": "Contributing",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/CONTRIBUTING.md",
-          "detail": "Collaborator onboarding and workflow expectations."
-        },
-        {
-          "label": "Home Machine Setup",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/HOME_MACHINE_SETUP.md",
-          "detail": "How to clone the dev repo on a second machine, stay in sync cleanly, and publish from either workstation."
-        },
-        {
-          "label": "Home Codex Prompt",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/HOME_CODEX_PROMPT.md",
-          "detail": "Maintained prompt text for starting a home-machine Codex session with the correct repo roles, sync flow, and local service startup commands."
-        },
-        {
-          "label": "Release Policy",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_POLICY.md",
-          "detail": "Versioning and release recommendation rules."
-        },
-        {
-          "label": "Release Dashboard",
-          "href": "https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html",
-          "detail": "Visual timeline of completed, in-progress, and upcoming release steps."
+          "label": "Release Readiness Review",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_READINESS_REVIEW.md",
+          "detail": "Current release-readiness and documentation-discipline review artifact."
         }
       ]
     },
     {
-      "id": "cadence",
-      "title": "Update Cadence",
-      "summary": "What updates automatically and what should be intentionally maintained.",
-      "bullets": [
-        "Build identity updates on every build and appears in the game, settings, public pages, and generated status surfaces.",
-        "This project guide is regenerated on every build from maintained source content so the hosted page stays aligned with the current repository state.",
-        "The player guide is also regenerated on every build as a separate shipped page so the in-game guide can stay player-focused without mixing in developer workflow material.",
-        "The release dashboard page is regenerated on every build, but its milestone data only changes when `release-dashboard.json` is updated after a meaningful step.",
-        "Release notes should change only when there is a player-visible or milestone-relevant update worth calling out.",
-        "Public project status should update on pushes to `main` through the sync workflow, using the public status interface rather than direct homepage edits."
-      ]
-    },
-    {
       "id": "next",
-      "title": "Likely Next Polish Steps",
-      "summary": "The most likely next moves based on current project state.",
+      "title": "Likely Next Steps",
+      "summary": "The work that most naturally follows the current shipped state.",
       "bullets": [
-        "Finish the shell/control-surface cluster: score-panel clarity, wait-mode layout, and remaining message polish.",
-        "Do one more live-play polish pass on the special boss-and-two-escorts bonus attack now that spacing is tighter.",
-        "Land the short player-focused guide and final release-readiness pass so the game can ship with cleaner public-facing support surfaces.",
-        "Protect the current launch slice and move broader Stage 2/Stage 4 balancing and challenge variation work into the post-1.0 lane."
+        "Bundle the small Aurora trust fixes into the `1.2.1` patch line.",
+        "Keep Platinum shell and docs discipline boring and reliable.",
+        "Strengthen the platform/application contract before the second application becomes fully playable.",
+        "Use the smallest useful `Galaxy Guardians` gameplay slice to prove the platform seam rather than rushing a second public launch."
       ]
     }
   ],
@@ -350,68 +131,62 @@
     {
       "id": "readme-doc",
       "title": "README Source",
-      "summary": "Quick-start, run/build commands, harness commands, and the repo-level overview are pulled directly from the maintained README.",
+      "summary": "Top-level repo overview, live URLs, local run instructions, and major documentation links.",
       "file": "README.md"
-    },
-    {
-      "id": "home-machine-setup-doc",
-      "title": "Home Machine Setup Source",
-      "summary": "Second-machine setup, sync strategy, and publish workflow are documented in the dedicated home-machine guide.",
-      "file": "HOME_MACHINE_SETUP.md"
     },
     {
       "id": "plan-doc",
       "title": "Plan Source",
-      "summary": "Current state, known problems, active workstreams, and release-critical priorities come directly from the working plan.",
+      "summary": "Current working plan and active follow-up bundles.",
       "file": "PLAN.md"
     },
     {
       "id": "roadmap-doc",
       "title": "Roadmap Source",
-      "summary": "Release milestones and what belongs to 1.0 versus later are pulled from the product roadmap.",
+      "summary": "Milestones, release lines, and what belongs to platform work versus later application expansion.",
       "file": "PRODUCT_ROADMAP.md"
+    },
+    {
+      "id": "platinum-doc",
+      "title": "Platinum Source",
+      "summary": "Canonical platform purpose, ownership, usage, and future-area notes.",
+      "file": "PLATINUM.md"
+    },
+    {
+      "id": "applications-doc",
+      "title": "Applications Source",
+      "summary": "Current application layer and remaining boundary notes.",
+      "file": "APPLICATIONS_ON_PLATINUM.md"
     },
     {
       "id": "architecture-doc",
       "title": "Architecture Source",
-      "summary": "System layout, build flow, deploy flow, and harness boundaries come directly from the architecture notes.",
+      "summary": "Technical layout and implementation map.",
       "file": "ARCHITECTURE.md"
     },
     {
-      "id": "source-map-doc",
-      "title": "Source Map",
-      "summary": "Gameplay ownership and where to edit specific systems are pulled from the source map.",
-      "file": "SOURCE_MAP.md"
+      "id": "testing-doc",
+      "title": "Testing And Release Gates Source",
+      "summary": "Automation-first release discipline and documentation pass expectations.",
+      "file": "TESTING_AND_RELEASE_GATES.md"
     },
     {
       "id": "external-services-doc",
       "title": "External Services Source",
-      "summary": "Runtime dependencies, hosting, feedback transport, and local-only systems are pulled from the external services inventory.",
+      "summary": "Runtime dependencies, hosting, feedback transport, and local-only systems.",
       "file": "EXTERNAL_SERVICES.md"
-    },
-    {
-      "id": "artifact-policy-doc",
-      "title": "Artifact Policy Source",
-      "summary": "The formal distinction between browser-local replay state, browser download exports, and the canonical harness-artifacts review archive is documented in the artifact policy.",
-      "file": "ARTIFACT_POLICY.md"
-    },
-    {
-      "id": "baseline-doc",
-      "title": "Reference Baseline Source",
-      "summary": "Reference priorities, baseline topics, and the evidence model are pulled directly from the fidelity baseline document.",
-      "file": "REFERENCE_BASELINE.md"
-    },
-    {
-      "id": "contributing-doc",
-      "title": "Contributing Source",
-      "summary": "Collaborator guidance, build expectations, and review defaults are pulled from the contributing guide.",
-      "file": "CONTRIBUTING.md"
     },
     {
       "id": "release-policy-doc",
       "title": "Release Policy Source",
-      "summary": "Versioning and release recommendation rules are pulled directly from the release policy document.",
+      "summary": "Versioning, lane model, and release recommendation rules.",
       "file": "RELEASE_POLICY.md"
+    },
+    {
+      "id": "readiness-doc",
+      "title": "Release Readiness Source",
+      "summary": "Release-readiness and documentation-discipline review artifact.",
+      "file": "RELEASE_READINESS_REVIEW.md"
     }
   ]
 }

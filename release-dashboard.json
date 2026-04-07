@@ -1,97 +1,65 @@
 {
-  "targetVersion": "1.2.0",
-  "currentFocus": "Platinum Release 1: local localhost and hosted /dev now represent the integrated Platinum-framed Aurora candidate, while hosted /beta remains the next promotion lane before hosted /production.",
-  "strapline": "Aurora now reads as the first playable game pack on Platinum, and the remaining work is disciplined lane promotion, documentation consistency, and final hosted verification rather than open-ended platform extraction.",
+  "targetVersion": "1.2.1",
+  "currentFocus": "Post-1.2.0 follow-through: keep Platinum Release 1 stable, complete the missing documentation hardening pass, and bundle the small Aurora trust fixes into the first 1.2.x patch line.",
+  "strapline": "The big platform step is shipped. The current work is now disciplined follow-through: documentation, trust fixes, and a healthier platform/application boundary before the second game becomes truly playable.",
   "timeline": [
     {
       "id": "foundation",
       "title": "Foundation",
       "status": "done",
-      "summary": "Browser build, local harness, release identity, and public deployment are in place."
+      "summary": "Browser build, harness, public hosting, and release identity are in place."
     },
     {
-      "id": "baseline",
-      "title": "Reference Baseline",
+      "id": "platinum-release",
+      "title": "1.2.0 Platinum Release 1",
       "status": "done",
-      "summary": "Manuals, footage, and challenge-stage reference notes now drive fidelity decisions."
+      "summary": "Aurora now ships as the first playable application on Platinum, with hosted `/dev`, hosted `/beta`, and hosted `/production` established as distinct lanes."
     },
     {
-      "id": "stage1",
-      "title": "Stage 1 Feel",
-      "status": "done",
-      "summary": "Opening pacing and descent timing are much closer to original Galaga."
-    },
-    {
-      "id": "stage2",
-      "title": "Stage 2 Opening",
-      "status": "done",
-      "summary": "The cramped opening was reduced by softening early attack pressure instead of moving the formation."
-    },
-    {
-      "id": "challenge",
-      "title": "Stage 3 Challenge",
-      "status": "done",
-      "summary": "The current launch slice uses an acceptable challenge-stage baseline, with broader variation and fidelity work intentionally deferred unless a fresh regression appears."
-    },
-    {
-      "id": "stage4",
-      "title": "Stage 4 Fairness",
-      "status": "done",
-      "summary": "The launch path now treats further Stage 4 retuning as a post-1.0 tuning pass unless a fresh regression makes it launch-critical again."
-    },
-    {
-      "id": "capture",
-      "title": "Capture / Rescue",
-      "status": "done",
-      "summary": "Core loop is stable enough for the Platinum rerelease baseline; one carried-fighter game-over presentation bug remains as follow-up polish."
-    },
-    {
-      "id": "squadron",
-      "title": "Special Squadron Bonus",
+      "id": "docs-hardening",
+      "title": "Documentation Hardening",
       "status": "in_progress",
-      "summary": "Manual-backed bonus logic exists, the attack now appears naturally in real play, and escort spacing was tightened, but the bonus moment still needs one more live-play polish pass for 1.0."
+      "summary": "The hosted docs set is being refreshed and elevated into a real release gate so every meaningful x.y release carries aligned project, platform, player, and release documentation."
     },
     {
-      "id": "ship-polish",
-      "title": "Ship-Ready Polish",
-      "status": "done",
-      "summary": "Native replay, player guide, icon-rail controls, Platinum splash and picker surfaces, and the core rerelease evidence suite are now in place."
-    },
-    {
-      "id": "release",
-      "title": "1.2 Platinum Release 1",
+      "id": "trust-fixes",
+      "title": "1.2.1 Aurora Trust Fixes",
       "status": "in_progress",
-      "summary": "Promote Aurora as the first clearly Platinum-hosted title once hosted /dev review, hosted /beta verification, and release-documentation refresh are complete."
+      "summary": "Small player-visible correctness fixes are being grouped into the first 1.2.x patch line without reopening broad gameplay churn."
+    },
+    {
+      "id": "platform-contract",
+      "title": "Platform Contract Cleanup",
+      "status": "planned",
+      "summary": "Strengthen pack-schema thinking, clarify remaining platform/application seams, and keep the shared docs model healthy as the second application becomes more real."
+    },
+    {
+      "id": "second-application",
+      "title": "Second Application Proof",
+      "status": "planned",
+      "summary": "Use a small playable Galaxy Guardians slice to prove the platform seam before any second-game public release."
     }
   ],
   "legend": [
     {
-      "label": "Foundation",
-      "detail": "Build, deploy, automation, and reference infrastructure."
+      "label": "Shipped Milestone",
+      "detail": "A meaningful product step that is already live on hosted `/production`."
     },
     {
-      "label": "Four-Stage Slice",
-      "detail": "Stages 1, 2, 3 challenge, and 4 as the current shippable game."
+      "label": "Release Discipline",
+      "detail": "Docs, hosted lanes, automation, and release tooling that keep the public surface trustworthy."
     },
     {
-      "label": "Fair Finish",
-      "detail": "The launch slice is currently considered healthy enough to ship; further Stage 2 and Stage 4 tuning is now a post-1.0 lane unless new regressions surface."
+      "label": "Trust Fixes",
+      "detail": "Small player-visible correctness and clarity fixes that belong in a focused patch line."
     },
     {
-      "label": "Arcade Moments",
-      "detail": "Capture/rescue and special squadron bonus moments should read clearly in normal play, not only in harness scenarios."
+      "label": "Platform Boundary",
+      "detail": "Work that strengthens the separation between Platinum and the applications it hosts."
     },
     {
-      "label": "Player Finish",
-      "detail": "High scores, replays, guide/help, results flow, and public pages should feel finished and trustworthy."
-    },
-    {
-      "label": "Platinum Framing",
-      "detail": "Aurora should read clearly as a game pack running on Platinum, with stable shell surfaces and picker behavior before we expand into sibling games."
-    },
-    {
-      "label": "Release Rehearsal",
-      "detail": "Current focus is the operational localhost -> hosted /dev -> hosted /beta -> hosted /production path, not open-ended parity investigation."
+      "label": "Second-Application Proof",
+      "detail": "The smallest useful gameplay slice that proves Platinum can host a meaningfully different game."
     }
   ]
 }

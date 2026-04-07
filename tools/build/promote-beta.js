@@ -14,6 +14,7 @@ const FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -94,6 +95,7 @@ if(fs.existsSync(DEV_BUILD_INFO)){
   fs.writeFileSync(BETA_BUILD_INFO, JSON.stringify(betaInfo, null, 2) + '\n');
   rewriteBetaText(path.join(BETA_DIR, 'index.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'project-guide.html'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'platinum-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'player-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'release-dashboard.html'), sourceInfo, betaInfo);
 }

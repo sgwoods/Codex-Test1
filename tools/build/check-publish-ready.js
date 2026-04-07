@@ -16,6 +16,7 @@ const REQUIRED_DEV = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -29,6 +30,7 @@ const REQUIRED_PRODUCTION = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -43,6 +45,7 @@ const REQUIRED_BETA = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'release-notes.json',
@@ -52,6 +55,26 @@ const REQUIRED_BETA = [
   'assets/galaxy-guardians-coming-soon.svg',
   'README.md',
   'README.txt'
+];
+
+const REQUIRED_SOURCE_DOCS = [
+  'README.md',
+  'PLAN.md',
+  'PRODUCT_ROADMAP.md',
+  'PLATINUM.md',
+  'PLATINUM_ARCHITECTURE_OVERVIEW.md',
+  'APPLICATIONS_ON_PLATINUM.md',
+  'ARCHITECTURE.md',
+  'TESTING_AND_RELEASE_GATES.md',
+  'RELEASE_POLICY.md',
+  'RELEASE_READINESS_REVIEW.md',
+  'PLATINUM_LAUNCH_ART_DIRECTION.md',
+  'PLATINUM_LUECK_REVIEW.md',
+  'project-guide.json',
+  'platinum-guide.json',
+  'player-guide.json',
+  'release-dashboard.json',
+  'release-notes.json'
 ];
 
 function parseArgs(argv){
@@ -158,6 +181,15 @@ function checkArtifacts(cfg){
   }
 }
 
+function checkSourceDocs(){
+  for(const file of REQUIRED_SOURCE_DOCS){
+    const full = require('path').join(ROOT, file);
+    if(!fs.existsSync(full)){
+      throw new Error(`Publish preflight failed: missing required maintained doc ${full}. Restore the source doc before publishing.`);
+    }
+  }
+}
+
 function checkBuildInfo(cfg){
   const info = loadJson(cfg.buildInfo);
   const head = git(['rev-parse', 'HEAD']);
@@ -211,6 +243,7 @@ function main(){
   const args = parseArgs(process.argv.slice(2));
   const cfg = laneConfig(String(args.lane || '').toLowerCase());
   checkGitClean();
+  checkSourceDocs();
   checkArtifacts(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
@@ -236,6 +269,7 @@ if(require.main === module){
 module.exports = {
   laneConfig,
   checkGitClean,
+  checkSourceDocs,
   checkArtifacts,
   checkBuildInfo
 };
