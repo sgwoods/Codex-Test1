@@ -574,6 +574,21 @@ const stageTune=(s,ch)=>{
  return typeof tune==='function'?tune(s):tune;
 };
 const stageFlightTune=s=>stageRuleSet(s).flight;
+function challengeStagesBefore(stage){
+ const n=Math.max(1, stage|0);
+ const cadence=currentGamePack()?.stageCadence||{};
+ const first=Math.max(1, cadence.challengeFirstStage||3);
+ const every=Math.max(1, cadence.challengeEvery||4);
+ if(n<=first)return 0;
+ return 1+Math.floor((n-1-first)/every);
+}
+function displayStageNumber(stage,challenge=isChallengeStage(stage)){
+ const n=Math.max(1, stage|0);
+ return Math.max(1, n-challengeStagesBefore(n)-(challenge?1:0));
+}
+function formatDisplayedStage(stage,challenge=isChallengeStage(stage),pad=2){
+ return String(displayStageNumber(stage,challenge)).padStart(pad,'0');
+}
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 function useDeterministicHarnessClock(){
@@ -615,9 +630,9 @@ function hitMissRatio(stats){
  if(!stats?.shots)return 0;
  return Math.round((stats.hits/stats.shots)*100);
 }
-function buildResultsHtml(stats,score,stage){
+function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${String(stage).padStart(2,'0')}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString()};
@@ -641,7 +656,7 @@ function saveGameOverInitials(){
 }
 function buildGameOverHtmlFromState(){
  if(!gameOverState)return '';
- if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage);
+ if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge);
  const board=leaderboardRowsForView();
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
@@ -662,10 +677,11 @@ function buildAttractScoreboardHtml(){
  const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
-function buildGameOverState(score,stage){
+function buildGameOverState(score,stage,challenge=0){
  const pilotInitials=(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'').padEnd(3,'-').slice(0,3);
  const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
- const res=recordScore(score,stage,lockedPilotInitials?pilotInitials:'YOU');
+ const shownStage=displayStageNumber(stage,challenge);
+ const res=recordScore(score,shownStage,lockedPilotInitials?pilotInitials:'YOU');
  const editing=!!res.rank&&!lockedPilotInitials;
  return{
   entryId:res.entry.id,
@@ -673,6 +689,8 @@ function buildGameOverState(score,stage){
   phase:'results',
   score:score|0,
   stage:stage|0,
+  challenge:!!challenge,
+  shownStage,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
   initials:(lockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,

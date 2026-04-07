@@ -382,6 +382,16 @@ window.__galagaHarness__={
    leaderboardStatus:leaderboardStatusEl?.textContent||''
   };
  },
+ gameOverView(){
+  return{
+   html:gameOverHtml||'',
+   phase:gameOverState?.phase||'',
+   stage:+(gameOverState?.stage||0),
+   shownStage:+(gameOverState?.shownStage||0),
+   challenge:!!gameOverState?.challenge,
+   rank:+(gameOverState?.rank||0)
+  };
+ },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},

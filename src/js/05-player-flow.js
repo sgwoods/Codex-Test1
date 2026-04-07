@@ -88,7 +88,7 @@ function gameOver(){
  if(typeof syncPauseUi==='function')syncPauseUi();
  if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
  stopRunRecording();
- gameOverState=buildGameOverState(S.score,S.stage);
+ gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
  sfx.over();

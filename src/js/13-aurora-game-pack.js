@@ -286,11 +286,12 @@ function currentGamePackStagePresentation(stage,challenge){
   if(stage>=candidate.fromStage)theme=candidate;
   else break;
  }
+ const shownStage=formatDisplayedStage(stage,challenge);
  return Object.assign({},theme,{
-  challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
-  stageLabel:`STAGE ${stage}`,
-  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
-  transitionSub:challenge?`STAGE ${stage}`:'NEXT PHASE'
+  challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
+  stageLabel:challenge?'BONUS STAGE':`STAGE ${shownStage}`,
+  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
+  transitionSub:challenge?'BONUS STAGE':'NEXT PHASE'
  });
 }
 
