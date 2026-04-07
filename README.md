@@ -89,7 +89,7 @@ Current score/data policy:
 - production:
   - live shared leaderboard reads and writes
   - pilot account actions enabled
-- beta and local pre-production:
+- hosted `/beta`, hosted `/dev`, and local `localhost`:
   - production leaderboard reads only
   - score submission disabled by default
   - pilot account/profile writes disabled unless a configured non-production test pilot is signed in
@@ -470,13 +470,15 @@ Maintained Platinum and pack-separation graphics:
 
 ## Versioning
 
-- Current versioning uses three release surfaces with build metadata:
-  - pre-production:
-    - prerelease SemVer from `package.json`
-  - production:
-    - stable public label without the prerelease suffix
-  - production beta:
-    - promoted public beta label
+- Current versioning uses four release surfaces with build metadata:
+  - local `localhost`:
+    - source SemVer from `package.json`, plus build metadata
+  - hosted `/dev`:
+    - current integrated candidate label
+  - hosted `/beta`:
+    - promoted release-candidate label
+  - hosted `/production`:
+    - stable public label
 - Local and deployed builds carry:
   - version
   - build number
@@ -490,9 +492,9 @@ Maintained Platinum and pack-separation graphics:
 - The separate public project pages repo is synced from `dist/production/build-info.json` and `release-notes.json`
   - CI uses the `PUBLIC_REPO_SYNC_TOKEN` secret when available
   - The token should have `contents:write` access to `sgwoods/public`
-- Example production build label:
+- Example hosted `/production` build label:
   - `0.5.0+build.9.sha.457df28`
-- Example production beta build label:
+- Example hosted `/beta` build label:
   - `0.5.0-beta.1+build.9.sha.457df28.beta`
 - See:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`

@@ -28,12 +28,14 @@
 
 Examples:
 
-- pre-production:
-  - `0.5.0-alpha.1+build.115.sha.b0d812c`
-- production:
-  - `0.5.0+build.9.sha.457df28`
-- production beta:
-  - `0.5.0-beta.1+build.9.sha.457df28.beta`
+- local `localhost`:
+  - `1.2.0+build.363.sha.67c60e2.dirty`
+- hosted `/dev`:
+  - `1.2.0+build.363.sha.67c60e2`
+- hosted `/beta`:
+  - `1.2.0-beta.1+build.363.sha.67c60e2.beta`
+- hosted `/production`:
+  - `1.2.0+build.363.sha.67c60e2`
 
 ## Meaning
 
@@ -134,7 +136,7 @@ The beta lane is intentionally a snapshot of selected generated artifacts under 
   - score submission disabled
   - pilot account/auth/profile writes disabled
   - local device scores still save normally
-- `pre-production`
+- `localhost` and hosted `/dev`
   - production-score read-only mirror by default
   - score submission disabled
   - pilot account/auth/profile writes disabled
@@ -275,7 +277,7 @@ Hotfix smoke suite contents:
 Tracked hardening item:
 
 - `#113`
-  - enforce dev -> beta -> approve -> production as the only supported publish chain
+  - enforce localhost -> hosted `/dev` -> hosted `/beta` -> approve -> hosted `/production` as the only supported publish chain
   - production preflight fails if the current production publish is not sourced from the approved beta candidate
 
 ## Public Project Status Sync Workflow
