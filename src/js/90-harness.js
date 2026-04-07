@@ -281,11 +281,13 @@ window.__galagaHarness__={
   p.inv = 0;
   p.spawn = 0;
   p.captured = 0;
-  p.dual = 0;
+  p.dual = cfg.dual ? 1 : 0;
   loseShip({ cause: cfg.cause || 'harness_ship_loss' });
   return {
    alertTxt: S.alertTxt || '',
    livesAfter: S.lives,
+   dualAfter: !!p.dual,
+   started: !!started,
    spawn: +(+p.spawn || 0).toFixed(3),
   inv: +(+p.inv || 0).toFixed(3)
   };

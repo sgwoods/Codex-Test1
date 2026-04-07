@@ -34,6 +34,7 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
 
 function loseShip(cause={}){
  const p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
+ const dualLoss=!!p.dual;
  const hp=playerHitbox();
  logEvent('ship_lost',Object.assign({
   stage:S.stage,
@@ -62,11 +63,14 @@ function loseShip(cause={}){
  ex(p.x,p.y,42,'#86c7ff');
  ex(p.x,p.y,28,'#f4f8ff');
  ex(p.x,p.y,14,'#ff7f9f');
- const shipsRemaining=Math.max(0,S.lives);
+ const shipsRemaining=dualLoss?Math.max(0,S.lives+1):Math.max(0,S.lives);
  S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();
- if(p.dual)p.dual=0;
+ if(dualLoss){
+  p.dual=0;
+  return;
+ }
  S.lives--;p.spawn=1.32;
  if(S.lives<0)gameOver();
 }
