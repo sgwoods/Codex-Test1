@@ -2,7 +2,7 @@
 
 ## Current Read
 
-`1.2.0 - Platinum Release 1` is already live on hosted `/production`.
+`1.2.1 - Aurora trust-fix and copy-boundary patch` is now live on hosted `/production`.
 
 That means this document is now serving two jobs:
 
@@ -65,11 +65,10 @@ Main remaining risks are now smaller and more operational than architectural:
 - keeping docs and hosted lanes aligned after source changes
 - strengthening the platform/application boundary as the second game becomes more real
 
-## Current `1.2.1` Candidate Shape
+## What `1.2.1` Shipped
+`1.2.1` shipped as a narrow and Aurora-scoped fast-follow patch.
 
-The current `1.2.1` patch candidate is intended to be narrow and Aurora-scoped.
-
-It currently bundles:
+It bundles:
 
 - dual-fighter surviving-ship correctness
 - challenge stages treated as bonus stages in visible numbering
@@ -77,7 +76,7 @@ It currently bundles:
 - broader carry-state overlay coverage
 - clearer ownership of startup and wait-mode shell copy between Platinum and the hosted applications
 
-The goal is to promote these as a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.
+This was the intended shape: a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.
 
 ## Recommended Rule Going Forward
 
