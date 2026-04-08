@@ -65,6 +65,20 @@ Main remaining risks are now smaller and more operational than architectural:
 - keeping docs and hosted lanes aligned after source changes
 - strengthening the platform/application boundary as the second game becomes more real
 
+## Current `1.2.1` Candidate Shape
+
+The current `1.2.1` patch candidate is intended to be narrow and Aurora-scoped.
+
+It currently bundles:
+
+- dual-fighter surviving-ship correctness
+- challenge stages treated as bonus stages in visible numbering
+- suppression of carry/capture visuals under game-over/results
+- broader carry-state overlay coverage
+- clearer ownership of startup and wait-mode shell copy between Platinum and the hosted applications
+
+The goal is to promote these as a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.
+
 ## Recommended Rule Going Forward
 
 For every meaningful `x.y` release:

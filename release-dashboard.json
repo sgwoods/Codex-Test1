@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.2.1",
-  "currentFocus": "Post-1.2.0 follow-through: keep Platinum Release 1 stable, complete the missing documentation hardening pass, and bundle the small Aurora trust fixes into the first 1.2.x patch line.",
-  "strapline": "The big platform step is shipped. The current work is now disciplined follow-through: documentation, trust fixes, and a healthier platform/application boundary before the second game becomes truly playable.",
+  "currentFocus": "Prepare and review the 1.2.1 fast-follow patch: keep Platinum Release 1 stable while promoting the Aurora trust fixes and front-door copy-boundary cleanup through hosted `/beta` toward hosted `/production`.",
+  "strapline": "The platform launch is shipped. The current work is disciplined follow-through: trust fixes, clearer platform/application copy ownership, and a boring release path for the first 1.2.x patch.",
   "timeline": [
     {
       "id": "foundation",
@@ -18,14 +18,14 @@
     {
       "id": "docs-hardening",
       "title": "Documentation Hardening",
-      "status": "in_progress",
-      "summary": "The hosted docs set is being refreshed and elevated into a real release gate so every meaningful x.y release carries aligned project, platform, player, and release documentation."
+      "status": "done",
+      "summary": "The hosted docs set is now part of the release contract, with first-class project, platform, player, and release pages required for meaningful x.y releases."
     },
     {
       "id": "trust-fixes",
       "title": "1.2.1 Aurora Trust Fixes",
       "status": "in_progress",
-      "summary": "Small player-visible correctness fixes are being grouped into the first 1.2.x patch line without reopening broad gameplay churn."
+      "summary": "The current 1.2.1 patch candidate bundles the dual-fighter survivor fix, challenge-stage bonus-stage numbering, game-over carry suppression, expanded carry-state coverage, and a clearer platform/application front-door copy boundary."
     },
     {
       "id": "platform-contract",
