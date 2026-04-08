@@ -64,6 +64,8 @@ async function withHarnessPage(cfg, fn){
       challenge: !!cfg.challenge,
       seed
     };
+    if(cfg.extendFirst !== undefined) testCfg.extendFirst = Math.max(0, cfg.extendFirst || 0);
+    if(cfg.extendRecurring !== undefined) testCfg.extendRecurring = Math.max(0, cfg.extendRecurring || 0);
     await page.addInitScript(local => {
       localStorage.setItem('auroraGalacticaAutoVideo', '0');
       localStorage.setItem('auroraGalacticaTestCfg', JSON.stringify(local.testCfg));
@@ -75,13 +77,13 @@ async function withHarnessPage(cfg, fn){
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__galagaHarness__);
     if(!cfg.skipStart){
-      await page.evaluate(startCfg => window.__galagaHarness__.start(Object.assign({ autoVideo: false }, startCfg)), {
+      await page.evaluate(startCfg => window.__galagaHarness__.start(Object.assign({ autoVideo: false }, startCfg)), Object.assign({
         stage: testCfg.stage,
         ships: testCfg.ships,
         challenge: testCfg.challenge,
         seed,
         persona: cfg.persona || null
-      });
+      }, testCfg.extendFirst !== undefined ? { extendFirst: testCfg.extendFirst } : {}, testCfg.extendRecurring !== undefined ? { extendRecurring: testCfg.extendRecurring } : {}));
     }
     const result = await fn({ page, context, browser, port, root: appRoot });
     await context.close();

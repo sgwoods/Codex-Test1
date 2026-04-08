@@ -84,11 +84,15 @@
     <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
     <label for="testShips">Starting Ships</label>
     <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+    <label for="testExtendFirst">First Bonus Ship Score</label>
+    <input id="testExtendFirst" type="number" min="0" max="999999" step="1000" value="20000" />
+    <label for="testExtendRecurring">Recurring Bonus Ship Score</label>
+    <input id="testExtendRecurring" type="number" min="0" max="999999" step="1000" value="70000" />
     <div id="testRow">
       <input id="testChallenge" type="checkbox" />
       <label for="testChallenge">Force challenge opening</label>
     </div>
-    <div id="testHint">Applies on next game start only.</div>
+    <div id="testHint">Applies on next game start only. Set either score to 0 to disable that bonus-ship award.</div>
   </div>
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>

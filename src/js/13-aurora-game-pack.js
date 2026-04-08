@@ -94,6 +94,7 @@ const AURORA_SCORING_RULES=Object.freeze({
  challengeEnemy:100,
  perfectChallengeClear:10000,
  rescueJoin:1000,
+ extends:Object.freeze({first:20000,recurring:70000}),
  carriedFighter:{standby:500,attacking:1000},
  enemyKills:Object.freeze({
   bee:Object.freeze({formation:50,dive:100}),

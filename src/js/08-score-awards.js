@@ -1,5 +1,54 @@
 // Aurora-specific scoring, rescue-award, and challenge-bonus helpers.
 
+function nextExtendThresholdAfter(threshold){
+ const recurring=Math.max(0,+S.extendRecurring||0);
+ if(recurring<=0)return 0;
+ return (Math.floor((threshold||0)/recurring)+1)*recurring;
+}
+
+function awardExtendShips(beforeScore,afterScore){
+ let threshold=Math.max(0,+S.nextExtendScore||0);
+ if(afterScore<=beforeScore||threshold<=0)return 0;
+ let awarded=0;
+ let lastThreshold=0;
+ while(threshold>0&&afterScore>=threshold){
+  S.lives++;
+  S.extendAwards=(S.extendAwards|0)+1;
+  awarded++;
+  lastThreshold=threshold;
+  threshold=nextExtendThresholdAfter(threshold);
+ }
+ if(!awarded)return 0;
+ S.nextExtendScore=threshold;
+ const totalShips=Math.max(0,S.lives+1);
+ const title=awarded===1?'BONUS SHIP AWARDED':`${awarded} BONUS SHIPS AWARDED`;
+ S.alertTxt=`${title}\n${totalShips===1?'ONE SHIP READY':`${totalShips} SHIPS READY`}`;
+ S.alertT=Math.max(S.alertT,1.45);
+ S.bannerTxt=awarded===1?'BONUS SHIP':'BONUS SHIPS';
+ S.bannerSub=`SCORE ${formatScore(lastThreshold)}\n${totalShips===1?'ONE SHIP READY':`${totalShips} SHIPS READY`}`;
+ S.bannerMode='extendAward';
+ S.banner=Math.max(S.banner,1.15);
+ logEvent('extend_awarded',{
+  stage:S.stage,
+  score:afterScore,
+  awarded,
+  threshold:lastThreshold,
+  totalShips,
+  nextThreshold:threshold||0
+ });
+ sfx.join();
+ return awarded;
+}
+
+function awardScorePoints(points){
+ const value=Math.max(0,+points|0);
+ if(!value)return 0;
+ const before=S.score|0;
+ S.score=before+value;
+ awardExtendShips(before,S.score|0);
+ return value;
+}
+
 function destroyCarriedFighter(e){
  if(!enemyIsCarryingFighter(e))return 0;
  // Manual-backed rule from the 1981 Namco manual:
@@ -10,7 +59,7 @@ function destroyCarriedFighter(e){
  const points=attacking?currentGamePack().scoring.carriedFighter.attacking:currentGamePack().scoring.carriedFighter.standby;
  const off=carriedFighterOffset(e);
  if(enemyHasCaptureState(e))e.carry=0;
- S.score+=points;
+ awardScorePoints(points);
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
  S.alertT=Math.max(S.alertT,1.45);
@@ -75,17 +124,17 @@ function awardKill(e,mode){
  let pts=0;
  if(S.challenge){
   pts=currentGamePack().scoring.challengeEnemy;
-  S.score+=pts;
+  awardScorePoints(pts);
   S.ch.hits++;
   if(enemyHasChallengeState(e)&&Number.isInteger(e.group)&&S.ch.groups){
    S.ch.groups[e.group]=(S.ch.groups[e.group]||0)+1;
    if(S.ch.groups[e.group]===8){
-    const bonus=challengeGroupBonus(S.stage);
-    S.ch.bonus=(S.ch.bonus||0)+bonus;
-    S.score+=bonus;
-    logEvent('challenge_group_bonus',{stage:S.stage,group:e.group,bonus,hits:S.ch.hits,total:S.ch.total});
+     const bonus=challengeGroupBonus(S.stage);
+     S.ch.bonus=(S.ch.bonus||0)+bonus;
+     awardScorePoints(bonus);
+     logEvent('challenge_group_bonus',{stage:S.stage,group:e.group,bonus,hits:S.ch.hits,total:S.ch.total});
+    }
    }
-  }
   logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:1,rescued:0,turnedHostile:0,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
   return;
  }
@@ -98,7 +147,7 @@ function awardKill(e,mode){
    S.alertT=Math.max(S.alertT,1.1);
   }
  }
- S.score+=pts;
+ awardScorePoints(pts);
  const carrying=enemyIsCarryingFighter(e);
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(carrying&&dive),turnedHostile:!!(carrying&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  if(carrying){
@@ -117,7 +166,7 @@ function awardRescueJoin(autoDock){
  const p=S.p;
  S.cap=null;
  p.dual=1;
- S.score+=currentGamePack().scoring.rescueJoin;
+ awardScorePoints(currentGamePack().scoring.rescueJoin);
  S.recoverT=Math.max(S.recoverT,1.15);
  S.attackGapT=Math.max(S.attackGapT,.9);
  startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');
@@ -140,7 +189,7 @@ function finalizeChallengeClear(){
  S.ch.done=1;
  const perfect=S.ch.hits===S.ch.total?currentGamePack().scoring.perfectChallengeClear:0;
  S.ch.perfect=perfect;
- S.score+=perfect;
+ awardScorePoints(perfect);
  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';
  S.bannerSub=`HITS ${S.ch.hits}/${S.ch.total}`;
  const bonusTotal=(S.ch.bonus||0)+perfect;

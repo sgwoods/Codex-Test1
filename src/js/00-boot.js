@@ -30,7 +30,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -547,7 +547,7 @@ const P={
  }
 };
 
-const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
+const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
@@ -725,7 +725,7 @@ function startAttractDemo(opts={}){
  ATTRACT.phase='demo';
  ATTRACT.timer=11.5;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
@@ -749,12 +749,30 @@ if((initialBoard[0]?.score||0)>S.best){
 function loadTestCfg(){
  try{
   const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
-  return{stage:cl(+raw.stage||1,1,99)|0,ships:cl(+raw.ships||3,1,9)|0,challenge:!!raw.challenge};
- }catch{return{stage:1,ships:3,challenge:0}}
+  const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:20000;
+  const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:70000;
+  return{
+   stage:cl(+raw.stage||1,1,99)|0,
+   ships:cl(+raw.ships||3,1,9)|0,
+   extendFirst,
+   extendRecurring,
+   challenge:!!raw.challenge
+  };
+ }catch{return{stage:1,ships:3,extendFirst:20000,extendRecurring:70000,challenge:0}}
 }
 function saveTestCfg(){
- const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
- testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ const cfg={
+  stage:cl(+testStage.value||1,1,99)|0,
+  ships:cl(+testShips.value||3,1,9)|0,
+  extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
+  extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
+  challenge:!!testChallenge.checked
+ };
+ testStage.value=cfg.stage;
+ testShips.value=cfg.ships;
+ testExtendFirst.value=cfg.extendFirst;
+ testExtendRecurring.value=cfg.extendRecurring;
+ testChallenge.checked=cfg.challenge;
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
  return cfg;
 }
@@ -808,7 +826,11 @@ function syncGamePreviewUi(){
 }
 function syncTestUi(){
  const cfg=loadTestCfg();
- testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ testStage.value=cfg.stage;
+ testShips.value=cfg.ships;
+ testExtendFirst.value=cfg.extendFirst;
+ testExtendRecurring.value=cfg.extendRecurring;
+ testChallenge.checked=cfg.challenge;
  syncAudioUi();
  syncPauseUi();
  syncSettingsUi();
@@ -1117,8 +1139,8 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
-for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
-for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge])el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());

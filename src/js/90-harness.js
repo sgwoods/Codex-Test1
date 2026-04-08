@@ -11,9 +11,12 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined){
+  const currentCfg=loadTestCfg();
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   testShips.value=cl(+cfg.ships||3,1,9)|0;
+  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
+  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
   testChallenge.checked=!!cfg.challenge;
   saveTestCfg();
  }
@@ -283,13 +286,26 @@ window.__galagaHarness__={
   p.captured = 0;
   p.dual = cfg.dual ? 1 : 0;
   loseShip({ cause: cfg.cause || 'harness_ship_loss' });
-  return {
-   alertTxt: S.alertTxt || '',
-   livesAfter: S.lives,
-   dualAfter: !!p.dual,
-   started: !!started,
-   spawn: +(+p.spawn || 0).toFixed(3),
+ return {
+  alertTxt: S.alertTxt || '',
+  livesAfter: S.lives,
+  dualAfter: !!p.dual,
+  started: !!started,
+  spawn: +(+p.spawn || 0).toFixed(3),
   inv: +(+p.inv || 0).toFixed(3)
+  };
+ },
+ awardScore(cfg={}){
+  const points=Math.max(0,+cfg.points||0);
+  if(points>0)awardScorePoints(points);
+  return{
+   score:S.score,
+   lives:Math.max(0,S.lives+1),
+   nextExtendScore:+(S.nextExtendScore||0),
+   extendAwards:+(S.extendAwards||0),
+   alertTxt:S.alertTxt||'',
+   bannerTxt:S.bannerTxt||'',
+   bannerSub:S.bannerSub||''
   };
  },
  inputState(){
@@ -394,7 +410,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0)}}},
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {
@@ -787,8 +803,11 @@ window.__galagaHarness__={
   syncRecordUi();
  },
  setTest(cfg={}){
+  const currentCfg=loadTestCfg();
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   testShips.value=cl(+cfg.ships||3,1,9)|0;
+  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
+  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
   testChallenge.checked=!!cfg.challenge;
   saveTestCfg();
  },
