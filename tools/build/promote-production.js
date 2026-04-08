@@ -32,11 +32,13 @@ function normalizeProductionVersion(version){
 function buildProductionInfo(sourceInfo){
   const version = normalizeProductionVersion(sourceInfo.version);
   const sourceState = sourceInfo.state || `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`;
+  const productionBranch = 'main';
   return {
     ...sourceInfo,
     version,
     label: `${version}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}`,
-    state: `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit} clean`,
+    branch: productionBranch,
+    state: `${productionBranch}@${sourceInfo.shortCommit} clean`,
     releaseChannel: 'production',
     dirty: false,
     dirtyFiles: [],
@@ -54,7 +56,10 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), productionInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${productionInfo.version}'`],
+    [new RegExp(`branch:'${escapeRegex(sourceInfo.branch || '')}'`, 'g'), `branch:'${productionInfo.branch}'`],
+    [/branch:'[^']*'/g, `branch:'${productionInfo.branch}'`],
     [new RegExp(`state:'${escapeRegex(sourceInfo.state || '')}'`, 'g'), `state:'${productionInfo.state}'`],
+    [/state:'[^']*'/g, `state:'${productionInfo.state}'`],
     [new RegExp(`releaseChannel:'${escapeRegex(sourceInfo.releaseChannel)}'`, 'g'), `releaseChannel:'${productionInfo.releaseChannel}'`],
     [new RegExp(`dirty:${sourceInfo.dirty ? 'true' : 'false'}`, 'g'), 'dirty:false'],
     [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${productionInfo.label}`],
