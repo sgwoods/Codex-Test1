@@ -481,6 +481,10 @@ window.__galagaHarness__={
  renderState(){
   return window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
  },
+ redraw(){
+  if(typeof draw==='function')draw();
+  return this.renderState();
+ },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
   if(!boss)return null;

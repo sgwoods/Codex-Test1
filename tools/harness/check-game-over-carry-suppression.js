@@ -39,25 +39,24 @@ async function main(){
       });
     });
 
-    let after = null;
-    const deadline = Date.now() + 1800;
-    while(Date.now() < deadline){
-      const sample = await page.evaluate(() => {
-        const gameOver = window.__galagaHarness__.gameOverView();
-        const render = window.__galagaHarness__.renderState();
-        return {
-          carry: window.__galagaHarness__.carryState().carry,
-          render,
-          gameOver
-        };
-      });
-      if(sample.gameOver?.phase && (sample.render?.renderTick || 0) > beforeRenderTick){
-        after = sample;
-        break;
-      }
-      await sleep(50);
-    }
+    const gameOverReady = await waitForHarness(page, () => {
+      const gameOver = window.__galagaHarness__.gameOverView();
+      return gameOver?.phase ? gameOver : null;
+    }, 1800, 50);
+    if(!gameOverReady) return { error: 'game_over_phase_not_observed', before, loss };
+
+    const after = await page.evaluate(() => {
+      window.__galagaHarness__.redraw();
+      const gameOver = window.__galagaHarness__.gameOverView();
+      const render = window.__galagaHarness__.renderState();
+      return {
+        carry: window.__galagaHarness__.carryState().carry,
+        render,
+        gameOver
+      };
+    });
     if(!after) return { error: 'post_game_over_render_not_observed', before, loss };
+    if((after.render?.renderTick || 0) <= beforeRenderTick) return { error: 'post_game_over_render_not_advanced', before, after, loss };
 
     after.loss = loss;
 
