@@ -57,6 +57,7 @@ A Platinum application should own:
 - gameplay rules
 - scoring and stage progression
 - game-specific presentation and content
+- application identity on the front door such as title and feature line
 - its own harnesses for game behavior
 - optional shell preferences that remain within the platform shell contract
 
@@ -68,6 +69,7 @@ A Platinum application should not own:
 - shell layout regions
 - lane publishing rules
 - platform-only boot and pack-selection behavior
+- startup and wait-mode shell copy that promotes the platform or other applications
 
 ## Current Boundary Notes
 
@@ -83,15 +85,16 @@ Current expected behavior:
 - shell can show its promo surface
 - `Enter` should fall back to a playable application when preview-only content cannot start gameplay
 
-### Shared copy surfaces
+### Front-door copy ownership
 
-Some shell copy and application copy still live near each other in ways that
-can make ownership unclear.
+The shell front door now needs a firmer split than it had during the
+single-game era.
 
-The direction should be:
+The direction is:
 
-- platform copy explains the host, lanes, and shared docs
-- application copy explains gameplay, scoring, and identity
+- platform copy explains the host, hosted lanes, docs, and cross-application surfaces
+- application copy explains gameplay, identity, and game-specific flavor
+- preview-only applications may override platform copy only when the override is still about preview status rather than gameplay rules
 
 ### Shared naming residue
 

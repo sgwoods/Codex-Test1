@@ -118,21 +118,12 @@ const AURORA_GAME_PACK=Object.freeze({
  frontDoor:Object.freeze({
   marqueeTitle:'Aurora Galactica',
   title:'AURORA GALACTICA',
-  subtitle:'WAIT MODE',
-  startPrompt:'PRESS <span class="k">ENTER</span> TO START',
   featureLine:'AURORA BOREALIS STAGES   SUPER BOSSES   PARTNER WINGS',
-  attractLine:'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
-  utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
-  noticeHint:'Future game picker, release notes, and approved quote moments route through this shell surface.',
-  pickerHint:'GAME PICKER COMING SOON',
   shellFrameTheme:'platinum-release',
-  frameAccent:'classic-blue',
-  quotePlaceholder:Object.freeze({
-   kicker:'SIGNAL',
-   text:'Approved AI dystopian quotes will rotate here once the shared content loader is wired.',
-   attribution:'CURATED FRONT-DOOR PLACEHOLDER'
-  }),
-  quoteSurface:'wait-mode'
+  frameAccent:'classic-blue'
+ }),
+ platformFrontDoor:Object.freeze({
+  noticeHint:'PLATINUM RELEASE 1   GALAXY GUARDIANS PREVIEW AVAILABLE IN CHOOSE GAME'
  }),
  shellThemes:Object.freeze([
   Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'classic-blue',default:1}),
@@ -169,21 +160,13 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',
   title:'GALAXY GUARDIANS',
-  subtitle:'COMING SOON',
-  startPrompt:'PREVIEW ONLY   FULL RUNTIME COMING SOON',
   featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   ARCADE PRESSURE',
-  attractLine:'SELECTED THROUGH THE PLATFORM GAME PICKER',
-  utilityLine:'<span class="k">SELECT</span> TO RESTYLE THE CABINET   <span class="k">PLAY</span> COMES LATER',
-  noticeHint:'This sibling pack is a shell-and-identity preview while the shared runtime contract is still being proved.',
-  pickerHint:'USE CHOOSE GAME TO SWITCH BACK TO AURORA',
   shellFrameTheme:'guardians-preview',
-  frameAccent:'signal-crimson',
-  quotePlaceholder:Object.freeze({
-   kicker:'GALAXY GUARDIANS',
-   text:'A future sibling pack should be able to own its own shell identity, score feel, and audio profile before gameplay goes live.',
-   attribution:'PLATFORM PREVIEW'
-  }),
-  quoteSurface:'wait-mode'
+  frameAccent:'signal-crimson'
+ }),
+ platformFrontDoor:Object.freeze({
+  noticeHint:'Galaxy Guardians is a shell preview for the next Platinum application.',
+  pickerHint:'CHOOSE GAME TO SWITCH BACK TO AURORA'
  }),
  shellThemes:Object.freeze([
   Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
@@ -339,25 +322,28 @@ function currentGamePackChallengeGroupBonus(stage){
 
 function currentGamePackFrontDoor(){
  const pack=currentGamePack();
- const frontDoor=pack.frontDoor||{};
+ const appFrontDoor=pack.frontDoor||{};
+ const platformCopy=typeof platformFrontDoorCopyForPack==='function'
+  ? platformFrontDoorCopyForPack(pack)
+  : {};
  return Object.freeze({
-  marqueeTitle:frontDoor.marqueeTitle||pack.metadata?.title||PRODUCT_NAME||'Platinum',
-  title:frontDoor.title||String(pack.metadata?.title||PRODUCT_NAME||'Platinum').toUpperCase(),
-  subtitle:frontDoor.subtitle||'WAIT MODE',
-  startPrompt:frontDoor.startPrompt||'PRESS <span class="k">ENTER</span> TO START',
-  featureLine:frontDoor.featureLine||'',
-  attractLine:frontDoor.attractLine||'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
-  utilityLine:frontDoor.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
-  noticeHint:frontDoor.noticeHint||'',
-  pickerHint:frontDoor.pickerHint||'',
-  shellFrameTheme:frontDoor.shellFrameTheme||'platinum-release',
-  frameAccent:frontDoor.frameAccent||'classic-blue',
+  marqueeTitle:appFrontDoor.marqueeTitle||pack.metadata?.title||PRODUCT_NAME||'Platinum',
+  title:appFrontDoor.title||String(pack.metadata?.title||PRODUCT_NAME||'Platinum').toUpperCase(),
+  subtitle:appFrontDoor.subtitle||platformCopy.subtitle||'WAIT MODE',
+  startPrompt:appFrontDoor.startPrompt||platformCopy.startPrompt||'PRESS <span class="k">ENTER</span> TO START',
+  featureLine:appFrontDoor.featureLine||'',
+  attractLine:appFrontDoor.attractLine||platformCopy.attractLine||'AUTO DEMO IN PROGRESS   HIGH SCORES NEXT',
+  utilityLine:appFrontDoor.utilityLine||platformCopy.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
+  noticeHint:appFrontDoor.noticeHint||platformCopy.noticeHint||'',
+  pickerHint:appFrontDoor.pickerHint||platformCopy.pickerHint||'',
+  shellFrameTheme:appFrontDoor.shellFrameTheme||'platinum-release',
+  frameAccent:appFrontDoor.frameAccent||'classic-blue',
   quotePlaceholder:Object.freeze({
-   kicker:frontDoor.quotePlaceholder?.kicker||'',
-   text:frontDoor.quotePlaceholder?.text||'',
-   attribution:frontDoor.quotePlaceholder?.attribution||''
+   kicker:appFrontDoor.quotePlaceholder?.kicker||platformCopy.quotePlaceholder?.kicker||'',
+   text:appFrontDoor.quotePlaceholder?.text||platformCopy.quotePlaceholder?.text||'',
+   attribution:appFrontDoor.quotePlaceholder?.attribution||platformCopy.quotePlaceholder?.attribution||''
   }),
-  quoteSurface:frontDoor.quoteSurface||'wait-mode'
+  quoteSurface:appFrontDoor.quoteSurface||platformCopy.quoteSurface||'wait-mode'
  });
 }
 

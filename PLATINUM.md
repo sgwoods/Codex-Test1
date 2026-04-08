@@ -69,6 +69,8 @@ Platinum owns the outer cabinet treatment:
 - popup framing
 - shell frame themes
 - platform identity marks
+- platform-owned startup and wait-mode shell copy
+- release-cycle shell messaging that can span more than one application
 
 This is implemented primarily through:
 
@@ -123,7 +125,8 @@ The main contract areas are:
 - supported capabilities
 - entity model compatibility
 - stage and scoring hooks
-- content surfaces shown by the shell
+- application-owned front-door identity surfaces shown by the shell
+- platform-owned startup, wait-mode, and release-cycle shell copy
 
 See also:
 
@@ -183,7 +186,7 @@ Current remaining seams to keep visible:
 - some storage and compatibility names are still Aurora-shaped even when they are effectively platform-owned
 - some debug globals and legacy naming still reflect the older single-game architecture
 - the game-pack contract is practical but not yet strongly versioned
-- some shell copy and application copy still share the same source surfaces more than they should
+- some shell copy and application copy still need stronger structural validation so release-time regressions are caught automatically
 - the second application is still preview-only, so the contract is proven with one real game and one shell-only preview rather than two full implementations
 
 These are not reasons to collapse the separation again.

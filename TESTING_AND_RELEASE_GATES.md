@@ -55,6 +55,21 @@ This was not enforced strongly enough before `1.2.0` reached hosted
 
 From now on, it should be treated as part of the release contract.
 
+## Front-Door Copy Gate
+
+Startup, initiation, and wait-mode copy is part of the release surface.
+
+For any candidate where front-door copy changes, we should verify:
+
+- platform-owned shell copy still appears on the front door
+- stale release placeholders are gone
+- application-owned identity copy still appears correctly
+- platform splash copy remains aligned with the current Platinum docs
+
+The current automated front-door copy gate is:
+
+- `node tools/harness/check-front-door-copy-surface.js`
+
 ## Required Automated Gates
 
 ### Local `localhost`
@@ -80,6 +95,7 @@ Typical current examples include:
 - `node tools/harness/check-popup-surfaces.js`
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-persona-repeatability.js`
+- `node tools/harness/check-front-door-copy-surface.js`
 
 ### Hosted `/dev`
 

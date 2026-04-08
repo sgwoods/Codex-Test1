@@ -98,8 +98,12 @@ async function main(){
   if(!result.preview?.title.includes('Galaxy Guardians') || !result.preview?.marquee.includes('Galaxy Guardians')){
     fail('preview pack selection did not update the shell title and marquee', result);
   }
-  if(!result.preview?.msg.includes('GALAXY GUARDIANS') || !result.preview?.msg.includes('COMING SOON')){
-    fail('preview pack selection did not update the wait-mode shell copy', result);
+  if(
+    !result.preview?.msg.includes('GALAXY GUARDIANS')
+    || !result.preview?.msg.includes('PREVIEW SHELL')
+    || !result.preview?.msg.includes('PRESS ENTER TO RETURN TO AURORA')
+  ){
+    fail('preview pack selection did not update the split app/platform wait-mode copy', result);
   }
   if(!result.preview?.previewTitle.includes('Galaxy Guardians') || !result.preview?.banner.includes('COMING SOON')){
     fail('preview pack selection did not open the coming-soon splash', result);
