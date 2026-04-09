@@ -273,10 +273,25 @@ function drawBadges(stage){
 function drawReserveShips(lives){
  let reserve=Math.max(0,lives|0);
  let x=DISPLAY_SHELL.reserveLeft,y=PLAY_H-DISPLAY_SHELL.reserveBottom;
+ const flashActive=(+S.extendFlashT||0)>0;
+ const highlightCount=flashActive?Math.max(0,+S.extendFlashShips||0):0;
+ const totalReserve=reserve;
+ const pulse=flashActive?.72+Math.sin((performance.now()/1000)*16)*.28:0;
  while(reserve>0){
+  const idxFromRight=reserve-1;
+  const highlight=flashActive&&idxFromRight<highlightCount&&idxFromRight<totalReserve;
   ctx.save();
   ctx.translate(x,y);
-  drawMiniShip(.82,'#f4f8ff','#ff3347');
+  if(highlight){
+   ctx.globalAlpha=.78+.22*pulse;
+   ctx.fillStyle=`rgba(255,229,122,${(0.12+.16*pulse).toFixed(3)})`;
+   ctx.beginPath();
+   ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
+   ctx.fill();
+   drawMiniShip(.88,'#fff6d2','#ffd34d');
+  }else{
+   drawMiniShip(.82,'#f4f8ff','#ff3347');
+  }
   ctx.restore();
   reserve--;
   x+=18;

@@ -298,11 +298,14 @@ window.__galagaHarness__={
  awardScore(cfg={}){
   const points=Math.max(0,+cfg.points||0);
   if(points>0)awardScorePoints(points);
-  return{
+ return{
    score:S.score,
    lives:Math.max(0,S.lives+1),
    nextExtendScore:+(S.nextExtendScore||0),
    extendAwards:+(S.extendAwards||0),
+   extendFlashT:+(+S.extendFlashT||0).toFixed(3),
+   extendFlashShips:+(S.extendFlashShips||0),
+   bannerMode:S.bannerMode||'',
    alertTxt:S.alertTxt||'',
    bannerTxt:S.bannerTxt||'',
    bannerSub:S.bannerSub||''
@@ -410,7 +413,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0)}}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}}},
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {

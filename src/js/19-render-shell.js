@@ -116,6 +116,10 @@ function gameplayMessageState(){
    return {mode:'board',html:buildBoardMessageHtml({title:'FIGHTER RELEASED',lines:['RETURNING TO SHIP']}),topRatio:.48};
   case 'rescueBeat':
    return {mode:'board',html:buildBoardMessageHtml({title:'DUAL FIGHTER',lines:['JOINED']}),topRatio:.48};
+  case 'extendAward':{
+   const parts=collectMessageLines(S.bannerSub);
+   return {mode:'board',html:buildBoardMessageHtml({title:S.bannerTxt,score:parts[0]||'',lines:parts.slice(1)}),topRatio:.46};
+  }
   case 'challenge':
    return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
   case 'challengeResult':{

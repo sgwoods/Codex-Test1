@@ -52,7 +52,7 @@ function update(dt){
   return
  }
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
- p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
+ p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);S.extendFlashT=Math.max(0,S.extendFlashT-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
    logEvent('challenge_transition_timer_elapsed',{

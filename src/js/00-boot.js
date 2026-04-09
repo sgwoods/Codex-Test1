@@ -496,6 +496,11 @@ const sfx={
  boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
  beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
  rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
+ extend(){
+  this.seq([659,880,1175],.055,'triangle',.014,55,4300);
+  this.play(1568,.11,'square',.008,-60,.004,5200,.05);
+  this.play(2093,.08,'triangle',.006,-40,.003,5600,.11);
+ },
  over(){this.seq([294,262,220,196],.11,'triangle',.017,-45,2300);this.play(147,.32,'sawtooth',.016,-120,.01,1900,.018);this.noise(.09,.004,1100,.1)},
  march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)},
  uiTick(){this.play(920,.024,'square',.004,-110,.001,5400);this.play(1320,.016,'triangle',.0025,-70,.001,5200,.004)},
@@ -547,7 +552,7 @@ const P={
  }
 };
 
-const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,
+const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
@@ -726,7 +731,7 @@ function startAttractDemo(opts={}){
  ATTRACT.phase='demo';
  ATTRACT.timer=11.5;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});

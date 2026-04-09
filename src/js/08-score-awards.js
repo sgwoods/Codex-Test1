@@ -23,11 +23,13 @@ function awardExtendShips(beforeScore,afterScore){
  const totalShips=Math.max(0,S.lives+1);
  const title=awarded===1?'BONUS SHIP AWARDED':`${awarded} BONUS SHIPS AWARDED`;
  S.alertTxt=`${title}\n${totalShips===1?'ONE SHIP READY':`${totalShips} SHIPS READY`}`;
- S.alertT=Math.max(S.alertT,1.45);
+ S.alertT=Math.max(S.alertT,1.75);
  S.bannerTxt=awarded===1?'BONUS SHIP':'BONUS SHIPS';
  S.bannerSub=`SCORE ${formatScore(lastThreshold)}\n${totalShips===1?'ONE SHIP READY':`${totalShips} SHIPS READY`}`;
  S.bannerMode='extendAward';
- S.banner=Math.max(S.banner,1.15);
+ S.banner=Math.max(S.banner,1.45);
+ S.extendFlashT=Math.max(S.extendFlashT,1.9);
+ S.extendFlashShips=Math.max(1,awarded|0);
  logEvent('extend_awarded',{
   stage:S.stage,
   score:afterScore,
@@ -36,7 +38,7 @@ function awardExtendShips(beforeScore,afterScore){
   totalShips,
   nextThreshold:threshold||0
  });
- sfx.join();
+ sfx.extend();
  return awarded;
 }
 

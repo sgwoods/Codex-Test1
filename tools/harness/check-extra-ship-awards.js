@@ -53,14 +53,19 @@ async function main(){
   if(result.firstAward.extendAwards !== 1) fail('first threshold did not increment the extend counter once', result);
   if(result.firstAward.nextExtendScore !== 5000) fail('next extend threshold after the first award was not set to the recurring milestone', result);
   if(!String(result.firstAward.alertTxt || '').includes('BONUS SHIP AWARDED')) fail('first threshold did not surface the bonus-ship alert', result);
+  if(result.firstAward.bannerMode !== 'extendAward') fail('first threshold did not keep the bonus-ship banner mode active', result);
+  if(result.firstAward.extendFlashT <= 0) fail('first threshold did not trigger reserve-ship flash state', result);
+  if(result.firstAward.extendFlashShips !== 1) fail('first threshold did not flash the newly awarded reserve ship', result);
   if(result.nearRecurring.lives !== 4) fail('score just below the recurring threshold still awarded an extra ship', result);
   if(result.nearRecurring.extendAwards !== 1) fail('score just below the recurring threshold incremented the extend counter', result);
   if(result.secondAward.lives !== 5) fail('crossing the recurring threshold did not award the second extra ship', result);
   if(result.secondAward.extendAwards !== 2) fail('recurring threshold did not increment the extend counter twice total', result);
   if(result.secondAward.nextExtendScore !== 10000) fail('next extend threshold after the second award was not advanced correctly', result);
+  if(result.secondAward.extendFlashShips !== 1) fail('single recurring threshold award should flash one new reserve ship', result);
   if(result.largeJump.lives !== 6) fail('large score jump did not award every crossed threshold', result);
   if(result.largeJump.extendAwards !== 3) fail('large score jump did not count all crossed thresholds', result);
   if(result.largeJump.nextExtendScore !== 15000) fail('large score jump did not leave the next recurring threshold in the right place', result);
+  if(result.largeJump.extendFlashShips !== 3) fail('large score jump should flash all newly awarded reserve ships', result);
 
   console.log(JSON.stringify({
     ok: true,
