@@ -5,6 +5,7 @@ function start(){
   showToast('This pack is a shell preview only for now.');
   return;
  }
+ if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  stopAttractLoop();
  try{document.activeElement?.blur?.()}catch{}
  if(typeof resetActiveInputState==='function')resetActiveInputState('game_start');

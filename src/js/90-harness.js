@@ -1014,9 +1014,67 @@ window.__galagaHarness__={
 };
 
 setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
+let runtimeLoopFault=null;
+let runtimeLoopCrashInject='';
+function clearRuntimeLoopFault(){
+ runtimeLoopFault=null;
+}
+window.clearRuntimeLoopFault=clearRuntimeLoopFault;
+function armRuntimeLoopCrash(phase='draw'){
+ runtimeLoopCrashInject=String(phase||'draw');
+ return runtimeLoopCrashInject;
+}
+window.armRuntimeLoopCrash=armRuntimeLoopCrash;
+function describeLoopError(error){
+ const name=String(error?.name||'Error');
+ const message=String(error?.message||error||'Unknown runtime loop failure');
+ return `${name}: ${message}`;
+}
+function captureLoopError(phase,error){
+ const detail={
+  phase:String(phase||'frame'),
+  errorName:String(error?.name||'Error'),
+  errorMessage:String(error?.message||error||'Unknown runtime loop failure'),
+  stage:S.stage,
+  score:S.score,
+  lives:Math.max(0,S.lives+1),
+  started:!!started,
+  paused:!!paused,
+  simT:+(+S.simT||0).toFixed(3),
+  stageClock:+(+S.stageClock||0).toFixed(3)
+ };
+ if(error?.stack)detail.stack=String(error.stack).split('\n').slice(0,8).join('\n');
+ const signature=`${detail.phase}|${detail.errorName}|${detail.errorMessage}`;
+ if(runtimeLoopFault?.signature===signature)return runtimeLoopFault;
+ runtimeLoopFault={signature,detail};
+ paused=1;
+ if(typeof syncPauseUi==='function')syncPauseUi();
+ S.alertT=Math.max(S.alertT||0,3);
+ S.alertTxt='RUNTIME ISSUE DETECTED';
+ msg.textContent='Runtime issue detected. Press X to export diagnostics.';
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('runtime_loop_crash',describeLoopError(error),detail,{
+   level:'error',
+   suggestBugReport:1,
+   summary:'Runtime loop crashed',
+   description:'The active run hit an unexpected runtime error and was paused. Export diagnostics with X and attach the session/video if it happens again.',
+   prompt:'Runtime issue detected. Press X to export diagnostics or open feedback.'
+  });
+ }
+ try{
+  if(typeof showToast==='function')showToast('Runtime issue detected. Press X to export diagnostics.');
+ }catch{}
+ return runtimeLoopFault;
+}
 function loop(ts){
  const dt=Math.min(.033,(ts-t0)/1000||0);
  t0=ts;
+ if(runtimeLoopFault){
+  requestAnimationFrame(loop);
+  return;
+ }
+ let phase='frame';
+ try{
  if(harnessClockControlled){
   harnessFrameAccum=0;
   requestAnimationFrame(loop);
@@ -1025,14 +1083,32 @@ function loop(ts){
   const step=1/60;
   harnessFrameAccum=Math.min(.1,harnessFrameAccum+dt);
   while(harnessFrameAccum>=step){
+   phase='update';
+   if(runtimeLoopCrashInject==='update'){
+    runtimeLoopCrashInject='';
+    throw new Error('Harness forced update crash');
+   }
    update(step);
    harnessFrameAccum-=step;
   }
  }else{
   harnessFrameAccum=0;
+  phase='update';
+  if(runtimeLoopCrashInject==='update'){
+   runtimeLoopCrashInject='';
+   throw new Error('Harness forced update crash');
+  }
   update(dt);
  }
+ phase='draw';
+ if(runtimeLoopCrashInject==='draw'){
+  runtimeLoopCrashInject='';
+  throw new Error('Harness forced draw crash');
+ }
  draw();
+ }catch(error){
+ captureLoopError(phase,error);
+ }
  requestAnimationFrame(loop);
 }
 resetSession();

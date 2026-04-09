@@ -715,6 +715,7 @@ function startAttractDemo(opts={}){
  const record=opts.record!==false;
  stopRunRecording();
  autoExportedSessionId='';
+ if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  resetSession('attract_demo');
  resetActiveInputState('attract_demo');
  gameOverHtml='';gameOverState=null;

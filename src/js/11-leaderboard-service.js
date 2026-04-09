@@ -196,9 +196,10 @@ async function submitScoreRemote(entry){
 }
 function submitGameOverScore(){
  if(!gameOverState||gameOverState.editing||gameOverState.remoteSubmitted||LEADERBOARD.submitBusy)return;
+ const targetState=gameOverState;
  const entry=resolveGameOverScoreEntry();
  if(!entry)return;
- gameOverState.remoteSubmitted='pending';
+ targetState.remoteSubmitted='pending';
  LEADERBOARD.submitBusy=1;
  if(typeof recordSystemIssue==='function'){
   recordSystemIssue('score_submit_queued','Queued game-over score for remote submit',{
@@ -208,9 +209,9 @@ function submitGameOverScore(){
   },{level:'info'});
  }
  submitScoreRemote(entry)
-  .then(ok=>{gameOverState.remoteSubmitted=ok?1:0;})
+  .then(ok=>{targetState.remoteSubmitted=ok?1:0;})
   .catch(err=>{
-   gameOverState.remoteSubmitted=0;
+   targetState.remoteSubmitted=0;
    if(typeof recordSystemIssue==='function'){
     recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit promise rejected'),{
      score:+entry.score|0,
