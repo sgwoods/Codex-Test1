@@ -83,6 +83,7 @@ Release planning and readiness docs:
 
 Current public milestone:
 
+- `1.2.2 - Runtime freeze hardening patch` candidate
 - `1.2.1 - Aurora trust-fix and copy-boundary patch`
 
 What that means:

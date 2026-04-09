@@ -1,7 +1,7 @@
 {
-  "targetVersion": "1.2.1",
-  "currentFocus": "Stabilize the shipped 1.2.1 patch, keep the documentation set aligned with the live lanes, and choose the next narrow Aurora or platform-boundary follow-through bundle deliberately.",
-  "strapline": "The first Platinum patch is now live. The work ahead is smaller and more disciplined: polish, correctness follow-through, and clearer contracts between Platinum and the applications it hosts.",
+  "targetVersion": "1.2.2",
+  "currentFocus": "Ship the 1.2.2 runtime hardening patch cleanly across hosted `/beta` and hosted `/production`, keep the public docs aligned with the live lane state, and continue tightening the boundary between Platinum and Aurora without slowing day-to-day development.",
+  "strapline": "The next Platinum patch is about trust under pressure: runtime stability, exportable diagnostics, and a stronger long-run soak gate before production promotion.",
   "timeline": [
     {
       "id": "foundation",
@@ -28,6 +28,12 @@
       "summary": "The 1.2.1 patch shipped the dual-fighter survivor fix, challenge-stage bonus-stage numbering, game-over carry suppression, expanded carry-state coverage, and a clearer platform/application front-door copy boundary."
     },
     {
+      "id": "runtime-hardening",
+      "title": "1.2.2 Runtime Hardening",
+      "status": "in_progress",
+      "summary": "The current patch candidate hardens the runtime loop against silent frame crashes, fixes restart-time async score-submit faults, and adds a late-run ship-loss soak gate before production promotion."
+    },
+    {
       "id": "platform-contract",
       "title": "Platform Contract Cleanup",
       "status": "planned",
@@ -52,6 +58,10 @@
     {
       "label": "Trust Fixes",
       "detail": "Small player-visible correctness and clarity fixes that belong in a focused patch line."
+    },
+    {
+      "label": "Runtime Hardening",
+      "detail": "Stability and diagnostics work that keeps late-run failures visible, exportable, and safer before they ever reach public production."
     },
     {
       "label": "Platform Boundary",

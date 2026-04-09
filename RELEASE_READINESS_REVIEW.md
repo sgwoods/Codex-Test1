@@ -2,7 +2,9 @@
 
 ## Current Read
 
-`1.2.1 - Aurora trust-fix and copy-boundary patch` is now live on hosted `/production`.
+`1.2.1 - Aurora trust-fix and copy-boundary patch` is currently live on hosted `/production`.
+
+`1.2.2 - Runtime freeze hardening patch` is the current hosted `/beta` candidate for promotion.
 
 That means this document is now serving two jobs:
 
@@ -61,9 +63,25 @@ Core maintained source docs behind that hosted set:
 
 Main remaining risks are now smaller and more operational than architectural:
 
-- small Aurora trust-fix issues in the `1.2.x` patch line
+- late-run runtime exceptions that can still exist even though the loop now traps and surfaces them
 - keeping docs and hosted lanes aligned after source changes
 - strengthening the platform/application boundary as the second game becomes more real
+
+## What `1.2.2` Is Intended To Ship
+`1.2.2` is a narrow runtime-stability patch.
+
+It bundles:
+
+- runtime loop hardening so one-frame update or draw exceptions no longer silently dead-frame the run
+- visible export guidance when a runtime fault is trapped
+- a fix for restart-time async score-submit crashes
+- a targeted late-run ship-loss soak gate for beta-to-production promotion
+
+This is the right shape for the patch:
+
+- small surface area
+- high trust value
+- better diagnostics if the remaining underlying freeze trigger still exists
 
 ## What `1.2.1` Shipped
 `1.2.1` shipped as a narrow and Aurora-scoped fast-follow patch.

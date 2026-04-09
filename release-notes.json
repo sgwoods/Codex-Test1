@@ -1,6 +1,12 @@
 {
   "notes": [
     {
+      "version": "1.2.2",
+      "date": "2026-04-09",
+      "title": "Runtime freeze hardening patch",
+      "summary": "Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, and adding a targeted late-run ship-loss soak gate to the release process."
+    },
+    {
       "version": "1.2.1",
       "date": "2026-04-07",
       "title": "Aurora trust-fix and copy-boundary patch",
