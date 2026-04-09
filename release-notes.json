@@ -3,8 +3,8 @@
     {
       "version": "1.2.2",
       "date": "2026-04-09",
-      "title": "Runtime freeze hardening patch",
-      "summary": "Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, and adding a targeted late-run ship-loss soak gate to the release process."
+      "title": "Runtime freeze hardening and bonus-ship patch",
+      "summary": "Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds."
     },
     {
       "version": "1.2.1",

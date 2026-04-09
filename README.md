@@ -83,7 +83,7 @@ Release planning and readiness docs:
 
 Current public milestone:
 
-- `1.2.2 - Runtime freeze hardening patch` candidate
+- `1.2.2 - Runtime freeze hardening and bonus-ship patch`
 - `1.2.1 - Aurora trust-fix and copy-boundary patch`
 
 What that means:
@@ -92,8 +92,9 @@ What that means:
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
 - the shell, picker, and shared docs are part of the product rather than just engineering scaffolding
 
-Immediate follow-through after `1.2.1`:
+Immediate follow-through after `1.2.2`:
 
+- watch `#146` and keep exportable freeze diagnostics useful if late-run faults recur
 - keep the next Aurora polish and correctness bundle tight
 - keep the documentation set aligned across source and hosted pages
 - strengthen the platform versus application boundary before the second game becomes truly playable

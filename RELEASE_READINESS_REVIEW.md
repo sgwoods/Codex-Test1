@@ -2,9 +2,9 @@
 
 ## Current Read
 
-`1.2.1 - Aurora trust-fix and copy-boundary patch` is currently live on hosted `/production`.
+`1.2.2 - Runtime freeze hardening and bonus-ship patch` is currently live on hosted `/production`.
 
-`1.2.2 - Runtime freeze hardening patch` is the current hosted `/beta` candidate for promotion.
+There is no newer hosted `/beta` candidate under review right now. The current post-release work is about monitoring the `1.2.2` line, keeping the hosted docs aligned, and deciding the next focused Aurora bundle deliberately.
 
 That means this document is now serving two jobs:
 
@@ -67,8 +67,8 @@ Main remaining risks are now smaller and more operational than architectural:
 - keeping docs and hosted lanes aligned after source changes
 - strengthening the platform/application boundary as the second game becomes more real
 
-## What `1.2.2` Is Intended To Ship
-`1.2.2` is a narrow runtime-stability patch.
+## What `1.2.2` Shipped
+`1.2.2` shipped as a narrow runtime-stability patch with one additional Aurora-scoped gameplay rule improvement.
 
 It bundles:
 
@@ -76,12 +76,14 @@ It bundles:
 - visible export guidance when a runtime fault is trapped
 - a fix for restart-time async score-submit crashes
 - a targeted late-run ship-loss soak gate for beta-to-production promotion
+- score-based Aurora bonus-ship awards with configurable first and recurring thresholds in Developer Tools
 
 This is the right shape for the patch:
 
 - small surface area
 - high trust value
 - better diagnostics if the remaining underlying freeze trigger still exists
+- the bonus-ship rule stays Aurora-scoped rather than leaking into Platinum
 
 ## What `1.2.1` Shipped
 `1.2.1` shipped as a narrow and Aurora-scoped fast-follow patch.

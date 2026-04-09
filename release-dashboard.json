@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.2.2",
-  "currentFocus": "Ship the 1.2.2 runtime hardening patch cleanly across hosted `/beta` and hosted `/production`, keep the public docs aligned with the live lane state, and continue tightening the boundary between Platinum and Aurora without slowing day-to-day development.",
-  "strapline": "The next Platinum patch is about trust under pressure: runtime stability, exportable diagnostics, and a stronger long-run soak gate before production promotion.",
+  "currentFocus": "Keep the live 1.2.2 line trustworthy, keep the hosted docs aligned with the shipped lane state, monitor `#146` with the new exportable diagnostics and soak gate, and resume Aurora moment polish without weakening the Platinum boundary.",
+  "strapline": "The current Platinum patch line is about trust under pressure: runtime stability, exportable diagnostics, and Aurora-scoped gameplay rules that stay contained inside the hosted application.",
   "timeline": [
     {
       "id": "foundation",
@@ -30,8 +30,14 @@
     {
       "id": "runtime-hardening",
       "title": "1.2.2 Runtime Hardening",
-      "status": "in_progress",
-      "summary": "The current patch candidate hardens the runtime loop against silent frame crashes, fixes restart-time async score-submit faults, and adds a late-run ship-loss soak gate before production promotion."
+      "status": "done",
+      "summary": "The 1.2.2 patch shipped runtime-loop hardening, restart-time async score-submit safety, a late-run ship-loss soak gate in the release process, and Aurora-scoped configurable bonus-ship awards."
+    },
+    {
+      "id": "aurora-moment-polish",
+      "title": "Aurora Moment Polish",
+      "status": "planned",
+      "summary": "Tighten player-facing clarity around carries, bonus moments, extra-life presentation, and other high-trust gameplay feedback without letting Aurora-specific changes leak into Platinum."
     },
     {
       "id": "platform-contract",
