@@ -70,6 +70,139 @@ The current automated front-door copy gate is:
 
 - `node tools/harness/check-front-door-copy-surface.js`
 
+## Harness Classification
+
+To keep development fluid while still protecting release quality, harnesses
+should be thought of in three buckets:
+
+1. `platform`
+- protects `Platinum` shell behavior
+- protects hosted lane surfaces and release framing
+- should not require deep application gameplay validation unless the platform
+  change could affect gameplay hosting
+
+Typical examples:
+- `node tools/harness/check-popup-surfaces.js`
+- `node tools/harness/check-dock-button-actions.js`
+- `node tools/harness/check-front-door-copy-surface.js`
+- `node tools/harness/check-platinum-pack-boot.js`
+
+2. `application`
+- protects game-specific rules and progression
+- should stay contained to the application layer whenever possible
+
+Typical examples:
+- `node tools/harness/check-dual-final-life-survivor.js`
+- `node tools/harness/check-challenge-bonus-stage-numbering.js`
+- `node tools/harness/check-extra-ship-awards.js`
+- `node tools/harness/check-late-run-ship-loss-soak.js`
+
+3. `boundary`
+- protects the seam between platform and applications
+- answers:
+  - did a game change leak into platform behavior?
+  - did a platform change alter game behavior unintentionally?
+
+Typical examples:
+- `node tools/harness/check-platinum-pack-boot.js`
+- `node tools/harness/check-game-picker-shell.js`
+- `node tools/harness/check-front-door-copy-surface.js`
+
+The release process should prefer running the smallest relevant set of checks
+that covers the actual risk, rather than running every check for every change.
+
+## Gate Profiles By Change Type
+
+We want:
+
+- fast iteration on `main`
+- meaningful integration confidence on hosted `/dev`
+- disciplined promotion into hosted `/beta`
+- cautious promotion into hosted `/production`
+
+The way to do that is to choose a gate profile based on the type of change.
+
+### Profile A: Application-only change
+
+Use this when the change is primarily inside a hosted game such as `Aurora`
+and should not alter `Platinum` platform behavior.
+
+Examples:
+- scoring changes
+- life and death rules
+- stage sequencing
+- capture/carry gameplay fixes
+- enemy behavior tuning
+
+Required:
+- targeted application harnesses for the changed behavior
+- one adjacent regression check for the same gameplay family
+- at least one boundary check proving the application change did not leak into
+  the platform
+
+Typical boundary checks:
+- `node tools/harness/check-platinum-pack-boot.js`
+- `node tools/harness/check-game-picker-shell.js`
+
+### Profile B: Platform-only change
+
+Use this when the change is primarily in `Platinum` hosting behavior and should
+not alter application gameplay rules.
+
+Examples:
+- shell layout
+- popup framework
+- dock behavior
+- front-door platform surfaces
+- hosted docs and lane surfaces
+
+Required:
+- platform harnesses for the changed area
+- one quick application smoke or boot check proving the platform still hosts
+  games correctly
+
+Typical application containment checks:
+- `node tools/harness/check-platinum-pack-boot.js`
+- `node tools/harness/check-new-game-reset.js`
+
+### Profile C: Boundary change
+
+Use this when the change explicitly crosses between platform and application
+responsibility.
+
+Examples:
+- startup / wait-mode copy ownership
+- game picker launch / preview behavior
+- pack contracts
+- shell surfaces that combine platform and app-owned data
+
+Required:
+- at least one platform check
+- at least one application check
+- one or more explicit boundary checks
+
+This is the highest-leakage-risk category and should be treated accordingly.
+
+### Profile D: Release / pipeline change
+
+Use this when the change affects build, publish, release metadata, hosted docs,
+or lane verification rather than gameplay or shell behavior directly.
+
+Examples:
+- publish tooling
+- production metadata rewrite
+- asset copy policy
+- documentation gate enforcement
+
+Required:
+- publish preflight
+- live lane verification
+- asset and metadata validation
+- docs presence checks where relevant
+
+This profile should not automatically pull in deep gameplay suites unless the
+change also affects gameplay delivery.
+
 ## Required Automated Gates
 
 ### Local `localhost`
@@ -99,6 +232,12 @@ Typical current examples include:
 - `node tools/harness/check-runtime-loop-crash-capture.js`
 - `node tools/harness/check-late-run-ship-loss-soak.js` for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions
 
+Selection rule:
+
+- choose the smallest harness set that matches the active gate profile
+- avoid dragging platform-wide or gameplay-wide suites into every change unless
+  the change actually crosses those boundaries
+
 ### Hosted `/dev`
 
 Hosted `/dev` exists to catch "worked locally but not when hosted" problems.
@@ -110,6 +249,12 @@ have:
 - hosted `/dev` publish success
 - hosted `/dev` label verification
 - a short hosted `/dev` review for visual and feel checks
+
+Hosted `/dev` is the preferred place to catch:
+
+- local-versus-hosted differences
+- platform/application boundary drift
+- shell or copy regressions that are awkward to judge from local-only runs
 
 ### Hosted `/beta`
 
@@ -125,6 +270,14 @@ Before moving hosted `/beta` to hosted `/production`, we expect:
 - for the current late-run freeze family, that means:
   - `node tools/harness/check-late-run-ship-loss-soak.js`
 - completed documentation refresh for any meaningful `x.y` release
+
+Hosted `/beta` should be strict by risk, not strict by volume:
+
+- application-only candidates should primarily run application and boundary
+  gates
+- platform-only candidates should primarily run platform and boundary gates
+- boundary candidates should run both
+- release/pipeline candidates should emphasize publish and lane verification
 
 ### Hosted `/production`
 
@@ -159,9 +312,12 @@ The release gate is stronger than it used to be, but there is still room to
 improve:
 
 - make more live-lane checks automatic instead of relying on memory
-- keep platform-only and application-only harnesses clearly separated
+- keep platform-only, application-only, and boundary harnesses clearly separated
 - add stronger pack-contract validation as the second application becomes real
 - keep docs refresh discipline boring and routine rather than exceptional
+- formalize check ownership so every application-level change proves it did not
+  leak into `Platinum`, and every platform-level change proves it did not alter
+  hosted game rules unintentionally
 
 ## Related Docs
 
