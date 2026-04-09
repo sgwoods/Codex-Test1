@@ -96,6 +96,8 @@ Typical current examples include:
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-persona-repeatability.js`
 - `node tools/harness/check-front-door-copy-surface.js`
+- `node tools/harness/check-runtime-loop-crash-capture.js`
+- `node tools/harness/check-late-run-ship-loss-soak.js` for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions
 
 ### Hosted `/dev`
 
@@ -119,6 +121,9 @@ Before moving hosted `/beta` to hosted `/production`, we expect:
 - hosted `/beta` publish success
 - hosted `/beta` live label verification
 - hosted `/beta` live-input verification when input or gameplay start behavior could be affected
+- targeted soak coverage for any open freeze or long-session stability risk
+- for the current late-run freeze family, that means:
+  - `node tools/harness/check-late-run-ship-loss-soak.js`
 - completed documentation refresh for any meaningful `x.y` release
 
 ### Hosted `/production`
