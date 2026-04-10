@@ -10,6 +10,7 @@
       "cue": "uiTick",
       "phase": "frontDoor",
       "audioTheme": "aurora-crown",
+      "listenFor": "Light Aurora shell tick, not gameplay urgency.",
       "description": "Subtle front-door navigation tick for Aurora-owned shell identity surfaces.",
       "preview": { "cue": "uiTick", "phase": "frontDoor", "atmosphereTheme": "aurora-crown" }
     },
@@ -20,6 +21,7 @@
       "cue": "uiConfirm",
       "phase": "frontDoor",
       "audioTheme": "aurora-crown",
+      "listenFor": "Short confirm flourish with a polished shell feel.",
       "description": "Confirmation cue for front-door and shell-level Aurora selections.",
       "preview": { "cue": "uiConfirm", "phase": "frontDoor", "atmosphereTheme": "aurora-crown" }
     },
@@ -30,6 +32,7 @@
       "cue": "attractEnter",
       "phase": "wait",
       "audioTheme": "aurora-crown",
+      "listenFor": "A small rising motif that feels like the board is waking up.",
       "description": "Entry sting when Aurora transitions into the score-focused wait-mode surface.",
       "preview": { "cue": "attractEnter", "phase": "wait", "atmosphereTheme": "aurora-crown" }
     },
@@ -40,6 +43,7 @@
       "cue": "attractPulse",
       "phase": "wait",
       "audioTheme": "aurora-crown",
+      "listenFor": "Gentle repeating pulse that stays ambient rather than mechanical.",
       "description": "Recurring pulse that keeps the score rotation alive without sounding like gameplay.",
       "preview": { "cue": "attractPulse", "phase": "wait", "atmosphereTheme": "aurora-crown", "variant": 0 }
     },
@@ -50,6 +54,7 @@
       "cue": "attractEnter",
       "phase": "demo",
       "audioTheme": "aurora-crown",
+      "listenFor": "Aurora identity at the handoff from shell to autoplay.",
       "description": "Bridge from the Aurora shell identity into autoplay demo mode.",
       "preview": { "cue": "attractEnter", "phase": "demo", "atmosphereTheme": "aurora-crown" }
     },
@@ -60,6 +65,7 @@
       "cue": "attractPulse",
       "phase": "demo",
       "audioTheme": "classic-arcade",
+      "listenFor": "Classic arcade cadence once motion on the board begins.",
       "description": "Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.",
       "preview": { "cue": "attractPulse", "phase": "demo", "atmosphereTheme": "classic-arcade", "variant": 0 }
     },
@@ -70,6 +76,7 @@
       "cue": "gameStart",
       "phase": "stage",
       "audioTheme": "classic-arcade",
+      "listenFor": "A crisp arcade rise that feels close to classic stage-start energy.",
       "description": "Opening cue for classic early-stage Aurora presentation.",
       "preview": { "cue": "gameStart", "phase": "stage", "atmosphereTheme": "classic-arcade" }
     },
@@ -80,6 +87,7 @@
       "cue": "gameStart",
       "phase": "stage",
       "audioTheme": "aurora-surge",
+      "listenFor": "A brighter upward flourish that feels more expansive than the classic set.",
       "description": "Opening cue for the later Aurora surge/borealis stage family.",
       "preview": { "cue": "gameStart", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
     },
@@ -90,6 +98,7 @@
       "cue": "stagePulse",
       "phase": "stage",
       "audioTheme": "classic-arcade",
+      "listenFor": "Clear march-like pulse that supports classic board pressure.",
       "description": "Formation march/pulse for classic early-stage cadence.",
       "preview": { "cue": "stagePulse", "phase": "stage", "atmosphereTheme": "classic-arcade", "variant": 0 }
     },
@@ -100,6 +109,7 @@
       "cue": "stagePulse",
       "phase": "stage",
       "audioTheme": "aurora-surge",
+      "listenFor": "A more glassy pulse that still reads as rhythm, not ambience.",
       "description": "Formation pulse for the Aurora-themed later-stage family.",
       "preview": { "cue": "stagePulse", "phase": "stage", "atmosphereTheme": "aurora-borealis", "variant": 0 }
     },
@@ -240,6 +250,7 @@
       "cue": "stageTransition",
       "phase": "stage",
       "audioTheme": "aurora-surge",
+      "listenFor": "A short rising handoff with more melodic identity than a simple beep.",
       "description": "Transition cue between standard stages.",
       "preview": { "cue": "stageTransition", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
     },
@@ -250,6 +261,7 @@
       "cue": "challengeTransition",
       "phase": "challenge",
       "audioTheme": "aurora-surge",
+      "listenFor": "A distinct bonus-stage announcement with more lift and ceremony.",
       "description": "Transition cue into challenge/bonus stage presentation.",
       "preview": { "cue": "challengeTransition", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
     },
@@ -260,6 +272,7 @@
       "cue": "gameOver",
       "phase": "results",
       "audioTheme": "aurora-surge",
+      "listenFor": "A readable downward ending phrase, not just an impact effect.",
       "description": "End-of-run cue used by Aurora results/game-over flow.",
       "preview": { "cue": "gameOver", "phase": "results", "atmosphereTheme": "aurora-borealis" }
     }

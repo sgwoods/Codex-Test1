@@ -1404,6 +1404,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td><code>${esc(entry.cue || '')}</code></td>
       <td><code>${esc(entry.phase || '')}</code></td>
       <td><code>${esc(entry.audioTheme || '')}</code></td>
+      <td>${esc(entry.listenFor || '')}</td>
       <td>${esc(entry.description || '')}</td>
       <td><button class="audioAction" type="button" data-audio-index="${index}">Play Sound</button></td>
     </tr>
@@ -1526,6 +1527,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                   <th>Cue</th>
                   <th>Phase</th>
                   <th>Theme</th>
+                  <th>Listen For</th>
                   <th>Description</th>
                   <th>Preview</th>
                 </tr>
