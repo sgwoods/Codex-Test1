@@ -21,7 +21,7 @@
     "publish:production:raw": "node tools/build/publish-lane.js --lane production",
     "publish:dev": "npm run build && npm run publish:check:dev && npm run publish:dev:raw && npm run publish:verify:dev",
     "publish:beta": "npm run build && npm run promote:beta && npm run publish:check:beta && npm run publish:beta:raw && npm run publish:verify:beta",
-    "publish:production": "npm run build && npm run promote:production && npm run publish:check:production && npm run publish:production:raw && npm run publish:verify:production",
+    "publish:production": "npm run build && npm run promote:production && npm run publish:check:production && npm run publish:production:raw && npm run publish:verify:production && npm run sync:public && npm run verify:public",
     "sync:public": "node tools/build/sync-public-pages.js",
     "verify:public": "node tools/build/verify-public-sync.js",
     "promote:beta": "node tools/build/promote-beta.js",

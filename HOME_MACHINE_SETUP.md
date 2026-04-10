@@ -194,7 +194,12 @@ This publishes:
 
 - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
 
-into the public Aurora production surface.
+into the public Aurora production surface, then syncs the top-level `sgwoods/public` Aurora project page and verifies that public sync.
+
+Important:
+
+- production promotion should begin from a clean source tree
+- if the approved beta candidate was built/promoted from a dirty source state, re-run the beta path from a clean tree before promoting production
 
 ## Important Defaults
 

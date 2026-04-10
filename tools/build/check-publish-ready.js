@@ -234,6 +234,9 @@ function checkApprovedBetaForProduction(productionInfo){
   if(betaInfo.label !== approvedInfo.label || betaInfo.commit !== approvedInfo.commit){
     throw new Error(`Publish preflight failed: approved beta candidate (${approvedInfo.label}) does not match current beta artifacts (${betaInfo.label}). Re-approve the current beta candidate first.`);
   }
+  if(/\bdirty\b/i.test(betaInfo.promotedFromState || '') || /\bdirty\b/i.test(approvedInfo.promotedFromState || '')){
+    throw new Error('Publish preflight failed: approved beta candidate was promoted from a dirty source state. Rebuild from a clean tree, re-promote beta, and re-approve it before publishing production.');
+  }
   if(productionInfo.promotedFromApprovedBeta !== approvedInfo.label){
     throw new Error(`Publish preflight failed: production artifacts were not promoted from the approved beta candidate (${approvedInfo.label}). Run "npm run promote:production" again.`);
   }

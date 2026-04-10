@@ -9,6 +9,7 @@ const {
   BETA_APPROVED_BUILD_INFO,
   PRODUCTION_BUILD_INFO
 } = require('./paths');
+const { checkGitClean } = require('./check-publish-ready');
 
 const FILES = [
   'index.html',
@@ -74,6 +75,8 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
 fs.rmSync(DIST_PRODUCTION, { recursive: true, force: true });
 fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
 
+checkGitClean();
+
 if(!fs.existsSync(BETA_BUILD_INFO)){
   throw new Error('Missing dist/beta/build-info.json. Promote and approve a beta candidate first.');
 }
@@ -85,6 +88,9 @@ const betaInfo = JSON.parse(fs.readFileSync(BETA_BUILD_INFO, 'utf8'));
 const approvedInfo = JSON.parse(fs.readFileSync(BETA_APPROVED_BUILD_INFO, 'utf8'));
 if(betaInfo.label !== approvedInfo.label || betaInfo.commit !== approvedInfo.commit){
   throw new Error(`Approved beta candidate mismatch. Current beta is ${betaInfo.label}, but approved beta is ${approvedInfo.label}. Re-approve the current beta candidate before promoting production.`);
+}
+if(/\bdirty\b/i.test(betaInfo.promotedFromState || '') || /\bdirty\b/i.test(approvedInfo.promotedFromState || '')){
+  throw new Error('Approved beta candidate was promoted from a dirty source state. Rebuild from a clean tree, re-promote beta, and re-approve it before promoting production.');
 }
 
 for(const file of FILES){

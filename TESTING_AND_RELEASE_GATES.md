@@ -290,6 +290,16 @@ Required path:
 3. `node tools/build/check-publish-ready.js --lane production`
 4. hosted `/production` publish
 5. hosted `/production` label verification
+6. `npm run sync:public`
+7. `npm run verify:public`
+
+The public `sgwoods/public` sync is part of the production release contract, not a manual follow-up.
+
+Production promotion must also start from a clean tree:
+
+- the local source tree must be clean before `promote:production`
+- the approved beta candidate must not have been promoted from a dirty source state
+- if either condition fails, production promotion should stop
 
 ## First-Class Hosted Documentation Requirement
 

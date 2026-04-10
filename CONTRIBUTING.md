@@ -63,6 +63,11 @@ reference-backed fidelity work, and safe collaboration.
   npm run publish:check:production
   npm run publish:production
   ```
+- `npm run publish:production` now includes:
+  - hosted production publish verification
+  - `npm run sync:public`
+  - `npm run verify:public`
+- Production promotion is expected to start from a clean tree; dirty source state should be fixed before promoting.
 - The main local playable build is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
 - Preferred local handoff/startup command:
