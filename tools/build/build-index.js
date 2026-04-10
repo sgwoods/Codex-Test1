@@ -1420,8 +1420,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="aurora">Play Aurora</button>
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="triple">Compare All Three</button>
         </div>
+        <div class="docMeta">${esc(entry.referenceLabel || '')}</div>
       </td>
     </tr>
   `).join('\n');
@@ -1566,7 +1569,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           <div class="buttonRow" style="margin-bottom:16px;">
             <button class="audioAction" type="button" data-compare-set="aurora">Play Aurora Set</button>
             <button class="audioAction" type="button" data-compare-set="galaga">Play Galaga Set</button>
+            <button class="audioAction" type="button" data-compare-set="reference">Play Reference Set</button>
             <button class="audioAction" type="button" data-compare-set="ab">Compare Full Set</button>
+            <button class="audioAction" type="button" data-compare-set="triple">Compare All Three</button>
           </div>
           <div class="tableWrap">
             <table class="dataTable">
@@ -1701,6 +1706,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         const status = document.getElementById('audioPreviewStatus');
         let ready = false;
         let pendingTimers = [];
+        let referenceAudio = null;
         function setStatus(text, isError){
           status.textContent = text;
           status.classList.toggle('error', !!isError);
@@ -1708,6 +1714,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         function clearQueue(){
           pendingTimers.forEach(id => clearTimeout(id));
           pendingTimers = [];
+          if(referenceAudio){
+            referenceAudio.pause();
+            referenceAudio.currentTime = 0;
+          }
         }
         function previewApi(){
           const win = frame && frame.contentWindow;
@@ -1727,11 +1737,35 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           api.playCue(payloadForTheme(entry, themeKey));
           return true;
         }
+        function playReferenceClip(item){
+          if(!item || !item.referenceClip){
+            setStatus('No reference clip is configured for this comparison yet.', true);
+            return false;
+          }
+          try{
+            if(!referenceAudio) referenceAudio = new Audio();
+            referenceAudio.pause();
+            referenceAudio.src = item.referenceClip;
+            referenceAudio.currentTime = 0;
+            referenceAudio.play();
+            return true;
+          }catch(err){
+            setStatus('Reference clip failed: ' + (err && err.message ? err.message : String(err)), true);
+            return false;
+          }
+        }
         function playCompareEntry(entry){
           clearQueue();
           if(!playEntry(entry, 'aurora')) return;
           pendingTimers.push(setTimeout(function(){ playEntry(entry, 'galaga'); }, 1100));
           setStatus('Playing Aurora then Galaga for ' + (entry.label || entry.cue || 'comparison') + '.');
+        }
+        function playTripleCompare(entry, item){
+          clearQueue();
+          if(!playEntry(entry, 'aurora')) return;
+          pendingTimers.push(setTimeout(function(){ playEntry(entry, 'galaga'); }, 1100));
+          pendingTimers.push(setTimeout(function(){ playReferenceClip(item); }, 2200));
+          setStatus('Playing Aurora, then Galaga, then the labeled reference clip for ' + (entry.label || entry.cue || 'comparison') + '.');
         }
         function playSet(mode){
           const api = previewApi();
@@ -1740,7 +1774,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             return;
           }
           const entryById = new Map((data.audioContexts || []).map(entry => [entry.id, entry]));
-          const setEntries = (data.comparisonSets || []).map(item => entryById.get(item.entryId)).filter(Boolean);
+          const setEntries = (data.comparisonSets || []).map(item => ({ item, entry: entryById.get(item.entryId) })).filter(row => row.entry);
           clearQueue();
           if(!setEntries.length){
             setStatus('No comparison set entries are configured yet.', true);
@@ -1748,12 +1782,24 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           }
           let delay = 0;
           const gap = 1250;
-          setEntries.forEach(function(entry){
+          setEntries.forEach(function(row){
+            const entry = row.entry;
+            const item = row.item;
             if(mode === 'ab'){
               pendingTimers.push(setTimeout(function(){ playEntry(entry, 'aurora'); }, delay));
               delay += gap;
               pendingTimers.push(setTimeout(function(){ playEntry(entry, 'galaga'); }, delay));
               delay += gap;
+            }else if(mode === 'reference'){
+              pendingTimers.push(setTimeout(function(){ playReferenceClip(item); }, delay));
+              delay += gap + 250;
+            }else if(mode === 'triple'){
+              pendingTimers.push(setTimeout(function(){ playEntry(entry, 'aurora'); }, delay));
+              delay += gap;
+              pendingTimers.push(setTimeout(function(){ playEntry(entry, 'galaga'); }, delay));
+              delay += gap;
+              pendingTimers.push(setTimeout(function(){ playReferenceClip(item); }, delay));
+              delay += gap + 250;
             }else{
               pendingTimers.push(setTimeout(function(){ playEntry(entry, mode); }, delay));
               delay += gap;
@@ -1762,7 +1808,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           setStatus(
             mode === 'ab'
               ? 'Playing full Aurora vs Galaga comparison set.'
-              : 'Playing ' + (mode === 'aurora' ? 'Aurora' : 'Galaga') + ' comparison set.'
+              : mode === 'reference'
+                ? 'Playing full labeled reference clip set.'
+                : mode === 'triple'
+                  ? 'Playing Aurora, Galaga, and labeled reference clips for the full set.'
+                  : 'Playing ' + (mode === 'aurora' ? 'Aurora' : 'Galaga') + ' comparison set.'
           );
         }
         function markReady(){
@@ -1789,9 +1839,20 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             const entryId = compareButton.getAttribute('data-compare-entry-id');
             const mode = compareButton.getAttribute('data-theme-play');
             const entry = (data.audioContexts || []).find(item => item.id === entryId);
+            const item = (data.comparisonSets || []).find(row => row.entryId === entryId);
             if(!entry) return;
             if(mode === 'ab'){
               playCompareEntry(entry);
+              return;
+            }
+            if(mode === 'triple'){
+              playTripleCompare(entry, item);
+              return;
+            }
+            if(mode === 'reference'){
+              if(playReferenceClip(item)){
+                setStatus('Played labeled reference clip for ' + (item?.label || entry.label || entry.cue || 'comparison') + '.');
+              }
               return;
             }
             if(!playEntry(entry, mode === 'galaga' ? 'galaga' : 'aurora')){
@@ -1803,7 +1864,13 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           const compareSetButton = event.target.closest('[data-compare-set]');
           if(compareSetButton){
             const mode = compareSetButton.getAttribute('data-compare-set');
-            playSet(mode === 'galaga' ? 'galaga' : mode === 'ab' ? 'ab' : 'aurora');
+            playSet(
+              mode === 'galaga' ? 'galaga'
+              : mode === 'ab' ? 'ab'
+              : mode === 'reference' ? 'reference'
+              : mode === 'triple' ? 'triple'
+              : 'aurora'
+            );
             return;
           }
         });

@@ -282,43 +282,57 @@
       "id": "demo-pulse-compare",
       "label": "Demo Pulse",
       "entryId": "demo-pulse",
-      "focus": "Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio."
+      "focus": "Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio.",
+      "referenceLabel": "Opening Theme",
+      "referenceClip": "assets/reference-audio/galaga-opening-theme.m4a"
     },
     {
       "id": "stage-start-compare",
       "label": "Stage Start",
       "entryId": "stage-start-aurora",
-      "focus": "Compare whether the opening announcement feels like an exciting arcade start or just a functional cue."
+      "focus": "Compare whether the opening announcement feels like an exciting arcade start or just a functional cue.",
+      "referenceLabel": "Level Flag V1",
+      "referenceClip": "assets/reference-audio/galaga-level-flag-v1.m4a"
     },
     {
       "id": "formation-pulse-compare",
       "label": "Formation Pulse",
       "entryId": "formation-pulse-aurora",
-      "focus": "Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play."
+      "focus": "Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play.",
+      "referenceLabel": "Sample Gameplay",
+      "referenceClip": "assets/reference-audio/galaga-sample-gameplay.m4a"
     },
     {
       "id": "player-shot-compare",
       "label": "Player Shot",
       "entryId": "player-shot-aurora",
-      "focus": "Compare shot energy and how clearly the player weapon reads in the mix."
+      "focus": "Compare shot energy and how clearly the player weapon reads in the mix.",
+      "referenceLabel": "Sample Gameplay",
+      "referenceClip": "assets/reference-audio/galaga-sample-gameplay.m4a"
     },
     {
       "id": "enemy-shot-compare",
       "label": "Enemy Shot",
       "entryId": "enemy-shot-aurora",
-      "focus": "Compare threat clarity and whether the enemy projectile cue has enough arcade bite."
+      "focus": "Compare threat clarity and whether the enemy projectile cue has enough arcade bite.",
+      "referenceLabel": "Sample Gameplay",
+      "referenceClip": "assets/reference-audio/galaga-sample-gameplay.m4a"
     },
     {
       "id": "challenge-transition-compare",
       "label": "Challenge Transition",
       "entryId": "challenge-transition",
-      "focus": "Compare how ceremonial and distinct the bonus-stage announcement feels."
+      "focus": "Compare how ceremonial and distinct the bonus-stage announcement feels.",
+      "referenceLabel": "Bonus Stage Results",
+      "referenceClip": "assets/reference-audio/galaga-bonus-stage-results.m4a"
     },
     {
       "id": "game-over-compare",
       "label": "Game Over",
       "entryId": "game-over",
-      "focus": "Compare whether the ending cue feels final, readable, and emotionally complete."
+      "focus": "Compare whether the ending cue feels final, readable, and emotionally complete.",
+      "referenceLabel": "Last Ship Destroyed Ambience",
+      "referenceClip": "assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a"
     }
   ],
   "graphicsThemes": [
