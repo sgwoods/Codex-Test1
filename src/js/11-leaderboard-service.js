@@ -41,7 +41,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  LEADERBOARD.loading[view]=1;
  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'loading'));
  syncLeaderboardUi();
- let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
+ let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified,build').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
  if(shouldHideTestAccountScores()&&view!=='mine'){
   const hiddenIds=configuredTestAccountUserIds();

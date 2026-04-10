@@ -251,6 +251,24 @@ window.__galagaHarness__={
   if(typeof openLeaderboardPanel === 'function')openLeaderboardPanel(view);
   return true;
  },
+ seedLocalLeaderboard(rows=[]){
+  const seeded=(Array.isArray(rows)?rows:[]).map((row,idx)=>({
+   id:String(row?.id||`seed-${idx+1}`),
+   initials:sanitizeInitials(row?.initials||'YOU').padEnd(3,'-').slice(0,3),
+   score:+row?.score|0,
+   stage:+row?.stage|0,
+   at:String(row?.at||new Date().toISOString()),
+   build:String(row?.build||BUILD||'')
+  }));
+  if(typeof saveScoreboard==='function')saveScoreboard(seeded);
+  return seeded.length;
+ },
+ setLeaderboardDateFilter(value=''){
+  LEADERBOARD.filterAfterDate=String(value||'').trim();
+  writePref(LEADERBOARD_DATE_FILTER_KEY,LEADERBOARD.filterAfterDate);
+  if(typeof renderLeaderboardPanel==='function')renderLeaderboardPanel();
+  return LEADERBOARD.filterAfterDate;
+ },
  restartCurrentConfig(){
   S.lives = -1;
   gameOver();
@@ -433,7 +451,19 @@ window.__galagaHarness__={
    timer:+(+ATTRACT.timer||0).toFixed(3),
    viewTimer:+(+ATTRACT.scoreViewTimer||0).toFixed(3),
    views:[...(ATTRACT.scoreViews||[])],
-   html:msg?.innerHTML||''
+  html:msg?.innerHTML||''
+  };
+ },
+ leaderboardPanelState(){
+  const cells=Array.from(document.querySelectorAll('#leaderboardPanelTable .scoreCell')).map(node=>node.textContent||'');
+  return{
+   open:!!LEADERBOARD.panelOpen,
+   status:leaderboardStatusEl?.textContent||'',
+   filterAfter:leaderboardFilterAfterInput?.value||'',
+   title:leaderboardPanelTitle?.textContent||'',
+   sub:leaderboardPanelSub?.textContent||'',
+   empty:document.getElementById('leaderboardPanelEmpty')?.textContent||'',
+   cells
   };
  },
  formationState(){

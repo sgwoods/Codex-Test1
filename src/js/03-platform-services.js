@@ -84,6 +84,7 @@ function normalizeRemoteScoreRow(row){
   score:+row?.score|0,
   stage:+row?.stage|0,
   at:String(row?.achieved_at||''),
+  build:String(row?.build||''),
   verified:!!row?.is_verified
  };
 }

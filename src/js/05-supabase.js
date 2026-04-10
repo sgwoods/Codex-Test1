@@ -7,6 +7,7 @@ const leaderboardPanelTable=document.getElementById('leaderboardPanelTable');
 const leaderboardPanelClose=document.getElementById('leaderboardPanelClose');
 const leaderboardViews=document.getElementById('leaderboardViews');
 const leaderboardStatusEl=document.getElementById('leaderboardStatus');
+const leaderboardFilterAfterInput=document.getElementById('leaderboardFilterAfter');
 const leaderboardViewButtons=Array.from(document.querySelectorAll('#leaderboardViewButtons button'));
 const leaderboardDockBtn=document.getElementById('leaderboardDockBtn');
 const accountDockBtn=document.getElementById('accountDockBtn');
@@ -71,6 +72,12 @@ const LEADERBOARD={
  remote:{all:[],validated:[],mine:[]},
  cacheStamp:{all:0,validated:0,mine:0},
  loading:{all:0,validated:0,mine:0},
+ filterAfterDate:(()=>{
+  try{
+   const raw=String(readPref(LEADERBOARD_DATE_FILTER_KEY)||'').trim();
+   return /^\d{4}-\d{2}-\d{2}$/.test(raw)?raw:'';
+  }catch{return''}
+ })(),
  user:null,
  profile:null,
  accountNotice:'',
@@ -205,6 +212,11 @@ function setLeaderboardView(view){
 for(const btn of leaderboardViewButtons){
  btn.addEventListener('click',()=>openLeaderboardPanel(btn.dataset.view||'all'));
 }
+if(leaderboardFilterAfterInput)leaderboardFilterAfterInput.addEventListener('input',()=>{
+ LEADERBOARD.filterAfterDate=String(leaderboardFilterAfterInput.value||'').trim();
+ writePref(LEADERBOARD_DATE_FILTER_KEY,LEADERBOARD.filterAfterDate);
+ if(typeof renderLeaderboardPanel==='function')renderLeaderboardPanel();
+});
 if(leaderboardPanelClose)leaderboardPanelClose.addEventListener('click',closeLeaderboardPanel);
 if(leaderboardDockBtn)leaderboardDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleLeaderboardPanel();syncOverlayPause();});
 if(accountDockBtn)accountDockBtn.addEventListener('click',e=>{e.stopPropagation();toggleAccountPanel();});

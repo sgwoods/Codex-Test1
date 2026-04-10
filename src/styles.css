@@ -304,6 +304,7 @@ mask:
 #statusPanels.waitOverlay #leaderboardPanel,
 #statusPanels.waitOverlay #leaderboardViews{width:100%;max-width:none}
 #statusPanels.waitOverlay #leaderboardViewsHead{align-items:flex-start;flex-direction:column;gap:6px}
+#statusPanels.waitOverlay #leaderboardFilterWrap{align-items:flex-start}
 #statusPanels.waitOverlay #leaderboardStatus{text-align:left;max-width:none}
 #statusPanels.waitOverlay #leaderboardViewButtons{flex-direction:column;align-items:stretch}
 #statusPanels.waitOverlay #leaderboardViewButtons button{width:100%;min-width:0;text-align:left}
@@ -369,26 +370,33 @@ mask:
 #statusPanels.framedOverlay #leaderboardPanelClose{width:36px;height:36px;font-size:24px}
 #leaderboardPanelStatus{min-height:18px;color:rgba(218,236,255,.74);font:700 11px/1.3 "Courier New",Consolas,monospace}
 #statusPanels.framedOverlay #leaderboardPanelStatus{font-size:13px}
-#leaderboardPanelTable{display:grid;grid-template-columns:44px minmax(56px,1fr) minmax(120px,1.6fr) 52px;gap:6px 12px;align-items:baseline}
-#statusPanels.framedOverlay #leaderboardPanelTable{grid-template-columns:56px minmax(90px,1fr) minmax(180px,1.8fr) 68px;gap:12px 18px;align-content:start;flex:1}
+#leaderboardPanelTable{display:grid;grid-template-columns:44px minmax(56px,1fr) minmax(120px,1.8fr) minmax(92px,1.1fr) 52px;gap:6px 12px;align-items:baseline}
+#statusPanels.framedOverlay #leaderboardPanelTable{grid-template-columns:56px minmax(90px,1fr) minmax(220px,2.1fr) minmax(120px,1.2fr) 68px;gap:12px 18px;align-content:start;flex:1}
 #leaderboardPanelTable .scoreCellHead{color:#dff7ff;font:700 12px/1 "Courier New",Consolas,monospace;letter-spacing:.08em}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCellHead{font-size:16px}
 #leaderboardPanelTable .scoreCell{color:#f7fbff;font:400 13px/1.1 "Courier New",Consolas,monospace}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell{font-size:18px;line-height:1.2}
 #leaderboardPanelTable .scoreCell.rank{color:#f0f4ff}
 #leaderboardPanelTable .scoreCell.initials{letter-spacing:.08em}
+#leaderboardPanelTable .scoreCell.meta{display:flex;flex-direction:column;gap:2px;color:#dff7ff}
+#leaderboardPanelTable .scoreCell.meta .scoreBuild{color:#8defff}
+#leaderboardPanelTable .scoreCell.meta .scoreDate{color:rgba(223,247,255,.78);font-size:.88em}
 #leaderboardPanelTable .scoreCell.score{text-align:right}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
 #leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
+#leaderboardViewsMeta{display:flex;flex-direction:column;gap:4px}
 #leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,400px);padding:12px 14px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
 #statusPanels.framedOverlay #leaderboardViews{width:100%;max-width:none;margin-top:auto;padding:14px 0 0;border:0;border-top:1px solid rgba(136,245,255,.18);background:none;box-shadow:none}
 #statusPanels.framedOverlay #leaderboardViewsHead{align-items:flex-start;justify-content:space-between}
+#statusPanels.framedOverlay #leaderboardFilterWrap{align-items:flex-end}
 #statusPanels.framedOverlay #leaderboardViewButtons{gap:10px;justify-content:flex-start}
 #statusPanels.framedOverlay #leaderboardViewButtons button{padding:10px 14px;font-size:16px;min-width:132px}
 #statusPanels.framedOverlay #leaderboardStatus{text-align:left;max-width:none}
 #leaderboardViewsHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 #leaderboardViewsLabel{color:rgba(218,236,255,.68);text-transform:uppercase}
+#leaderboardFilterWrap{display:flex;flex-direction:column;gap:6px;align-items:flex-end;color:rgba(218,236,255,.68);text-transform:uppercase}
+#leaderboardFilterAfter{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.7);color:#dff7ff;padding:6px 8px;font:700 11px/1 "Courier New",Consolas,monospace}
 #leaderboardViewButtons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 #leaderboardViewButtons button{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.7);color:#dff7ff;padding:6px 8px;font:700 11px/1 "Courier New",Consolas,monospace;cursor:pointer;min-width:72px}
 #leaderboardViewButtons button.active{border-color:rgba(255,216,109,.72);color:#ffd86d;background:rgba(60,44,8,.72)}

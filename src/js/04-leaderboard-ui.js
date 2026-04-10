@@ -149,6 +149,30 @@ function leaderboardCacheFresh(view){
  const stamp=LEADERBOARD.cacheStamp[view]||0;
  return !!stamp&&(Date.now()-stamp)<LEADERBOARD_STALE_MS;
 }
+function leaderboardFilterTimestamp(){
+ const raw=String(LEADERBOARD.filterAfterDate||'').trim();
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(raw))return 0;
+ const stamp=Date.parse(`${raw}T00:00:00`);
+ return Number.isFinite(stamp)?stamp:0;
+}
+function leaderboardRowIncludedByDate(row){
+ const threshold=leaderboardFilterTimestamp();
+ if(!threshold)return true;
+ const stamp=Date.parse(resolveRowTimestamp(row)||row?.at||'');
+ return Number.isFinite(stamp)&&stamp>=threshold;
+}
+function formatLeaderboardRowMeta(row){
+ const build=String(row?.build||'').trim()||'legacy';
+ const stamp=resolveRowTimestamp(row)||row?.at||'';
+ const parsed=Date.parse(stamp);
+ const dateLabel=Number.isFinite(parsed)
+  ? new Intl.DateTimeFormat(undefined,{month:'short',day:'2-digit',year:'2-digit'}).format(parsed)
+  : '--';
+ return { build, dateLabel };
+}
+function syncLeaderboardFilterUi(){
+ if(leaderboardFilterAfterInput&&leaderboardFilterAfterInput.value!==String(LEADERBOARD.filterAfterDate||''))leaderboardFilterAfterInput.value=String(LEADERBOARD.filterAfterDate||'');
+}
 function scheduleLeaderboardRefresh(){
  if(LEADERBOARD.refreshTimer)clearInterval(LEADERBOARD.refreshTimer);
  if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
@@ -166,9 +190,10 @@ function renderLeaderboardPanel(){
  if(!leaderboardPanel||!leaderboardPanelTable)return;
  if(leaderboardPanelTitle)leaderboardPanelTitle.textContent='HIGH SCORES';
  if(leaderboardPanelSub)leaderboardPanelSub.textContent=currentLeaderboardTitle();
- const rows=leaderboardRowsForView(LEADERBOARD.view);
+ syncLeaderboardFilterUi();
+ const rows=leaderboardRowsForView(LEADERBOARD.view).filter(leaderboardRowIncludedByDate);
  if(!rows.length){
-  leaderboardPanelTable.innerHTML='<div id="leaderboardPanelEmpty">No scores loaded for this view yet.</div>';
+  leaderboardPanelTable.innerHTML=`<div id="leaderboardPanelEmpty">${LEADERBOARD.filterAfterDate?'No scores match the current date filter.':'No scores loaded for this view yet.'}</div>`;
   return;
  }
  const filled=rows.length?rows:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1,verified:0}));
@@ -176,13 +201,16 @@ function renderLeaderboardPanel(){
  const body=[
   '<span class="scoreCellHead">NO</span>',
   '<span class="scoreCellHead">ID</span>',
+  '<span class="scoreCellHead">BUILD/DATE</span>',
   '<span class="scoreCellHead" style="text-align:right">SCORE</span>',
   '<span class="scoreCellHead" style="text-align:right">STG</span>'
  ];
  for(let i=0;i<10;i++){
   const row=limited[i]||{initials:'---',score:0,stage:0,idx:i+1,verified:0};
+  const meta=formatLeaderboardRowMeta(row);
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
+  body.push(`<span class="scoreCell meta"><span class="scoreBuild">${meta.build}</span><span class="scoreDate">${meta.dateLabel}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }

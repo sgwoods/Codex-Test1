@@ -234,6 +234,7 @@ const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
+const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
@@ -619,7 +620,7 @@ const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
-  return JSON.parse(readPref(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
+  return JSON.parse(readPref(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||''),build:String(x.build||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
  }catch{return[]}
 }
 function saveScoreboard(list){
@@ -640,7 +641,7 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
- const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString()};
+ const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString(),build:BUILD};
  const board=loadScoreboard();
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));

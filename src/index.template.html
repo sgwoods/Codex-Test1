@@ -346,8 +346,14 @@
     <div id="leaderboardPanelTable"></div>
     <div id="leaderboardViews" aria-label="Leaderboard view selector">
       <div id="leaderboardViewsHead">
-        <span id="leaderboardViewsLabel">Score View</span>
-        <span id="leaderboardStatus">Local fallback</span>
+        <div id="leaderboardViewsMeta">
+          <span id="leaderboardViewsLabel">Score View</span>
+          <span id="leaderboardStatus">Local fallback</span>
+        </div>
+        <label id="leaderboardFilterWrap">
+          <span id="leaderboardFilterLabel">After Date</span>
+          <input type="date" id="leaderboardFilterAfter">
+        </label>
       </div>
       <div id="leaderboardViewButtons">
         <button type="button" data-view="all">All</button>
