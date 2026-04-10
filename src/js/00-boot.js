@@ -480,8 +480,79 @@ const AC=()=>{
  sfx.bus.connect(sfx.tap);
  return A;
 };
+window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
+window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
  a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,
+ resolveAtmosphere(opts={}){
+  const attractPhase=opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'');
+  const frontDoor=opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract);
+  const challenge=opts.challenge!==undefined?!!opts.challenge:!!S.challenge;
+  const phase=String(opts.phase||'').trim()||(
+   frontDoor?'frontDoor'
+    : attractPhase==='scores'?'wait'
+    : attractPhase==='demo'?'demo'
+    : challenge?'challenge'
+    : 'stage'
+  );
+  if(typeof currentGamePackResolvedAtmosphere==='function'){
+   return currentGamePackResolvedAtmosphere({
+    stagePresentation:opts.stagePresentation||S.stagePresentation,
+    atmosphereTheme:opts.atmosphereTheme||'',
+    phase,
+    challenge,
+    frontDoor,
+    attractPhase
+   });
+  }
+  return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
+ },
+ recordCue(name,atmosphere,opts={}){
+  const entry=Object.freeze({
+   cue:String(name||''),
+   atmosphereId:atmosphere?.id||'classic-arcade',
+   audioTheme:atmosphere?.audioTheme||'classic-arcade',
+   phase:atmosphere?.phase||opts.phase||'stage',
+   variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
+   stage:+(S.stage||0),
+   challenge:!!S.challenge,
+   at:+(performance.now()/1000).toFixed(3)
+  });
+  window.__platinumAudioDebug.lastCue=entry;
+  window.__platinumAudioDebug.history.push(entry);
+  if(window.__platinumAudioDebug.history.length>24)window.__platinumAudioDebug.history.shift();
+  return entry;
+ },
+ cueDef(name,opts={}){
+  const atmosphere=this.resolveAtmosphere(opts);
+  const cue=typeof currentGamePackAudioCue==='function'
+   ? currentGamePackAudioCue(name,{
+    stagePresentation:opts.stagePresentation||S.stagePresentation,
+    atmosphereTheme:atmosphere.id,
+    phase:atmosphere.phase,
+    challenge:opts.challenge!==undefined?!!opts.challenge:!!S.challenge,
+    attractPhase:opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||''),
+    frontDoor:opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract)
+   })
+   : null;
+  this.recordCue(name,atmosphere,opts);
+  if(!cue)return null;
+  if(Array.isArray(cue.variants)&&cue.variants.length){
+   return cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
+  }
+  return cue;
+ },
+ playCue(name,opts={}){
+  const cue=this.cueDef(name,opts);
+  if(!cue)return;
+  if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600);
+  if(Array.isArray(cue.tones))for(const tone of cue.tones){
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0);
+  }
+  if(Array.isArray(cue.noise))for(const burst of cue.noise){
+   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0);
+  }
+ },
  play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
@@ -492,41 +563,23 @@ const sfx={
   src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(this.bus);src.start(tm);src.stop(tm+d+.01);
  },
  seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92)},
- start(){this.seq([523,659,784],.055,'square',.02,24,3600);this.play(392,.18,'triangle',.018,110,.005,2500,.02)},
- shot(){this.play(1140,.028,'square',.006,-620,.006,6200);this.play(1520,.018,'square',.003,-480,-.004,6800,.006)},
- enemyShot(){this.play(338,.075,'triangle',.009,-130,.002,3000);this.play(258,.05,'square',.004,-90,.002,2600,.012)},
- hit(){this.play(228,.05,'square',.013,-180,.008,3200);this.play(146,.1,'sawtooth',.015,-220,.012,2300,.02);this.noise(.05,.006,1600,.012)},
- bossHit(){this.play(312,.06,'square',.015,-120,.004,3600);this.play(202,.12,'triangle',.012,-80,.003,2500,.014);this.noise(.04,.004,1900,.01)},
- shipHit(){this.play(228,.11,'square',.022,-300,.012,2600);this.play(176,.19,'sawtooth',.024,-320,.016,2100,.016);this.play(124,.28,'triangle',.022,-150,.009,1600,.028);this.noise(.16,.016,1120,.012);this.noise(.08,.01,760,.03)},
- boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
- beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
- rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
- extend(){
-  this.seq([659,880,1175],.055,'triangle',.014,55,4300);
-  this.play(1568,.11,'square',.008,-60,.004,5200,.05);
-  this.play(2093,.08,'triangle',.006,-40,.003,5600,.11);
- },
- over(){this.seq([294,262,220,196],.11,'triangle',.017,-45,2300);this.play(147,.32,'sawtooth',.016,-120,.01,1900,.018);this.noise(.09,.004,1100,.1)},
- march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)},
- uiTick(){this.play(920,.024,'square',.004,-110,.001,5400);this.play(1320,.016,'triangle',.0025,-70,.001,5200,.004)},
- uiConfirm(){this.seq([660,880],.04,'triangle',.008,30,4200)},
- captureRetreat(){
-  this.seq([247,294,370,494],.06,'triangle',.012,18,2600);
-  this.play(620,.18,'square',.006,-70,.08,3400);
- },
- join(){
-  this.seq([523,659,784,1047],.05,'triangle',.013,42,4200);
-  this.play(1318,.09,'square',.006,-80,.08,5000);
- },
- transition(challenge=0){
-  if(challenge){
-   this.seq([392,523,659,784],.055,'triangle',.012,40,3600);
-   this.play(988,.12,'square',.006,-70,.12,4600);
-  }else{
-   this.seq([440,554,659],.06,'triangle',.011,24,3400);
-   this.play(880,.09,'square',.005,-80,.1,4300);
-  }
- }
+ start(){this.playCue('gameStart',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
+ shot(){this.playCue('playerShot',{phase:S.challenge?'challenge':'stage'})},
+ enemyShot(){this.playCue('enemyShot',{phase:S.challenge?'challenge':'stage'})},
+ hit(){this.playCue('enemyHit',{phase:S.challenge?'challenge':'stage'})},
+ bossHit(){this.playCue('bossHit',{phase:S.challenge?'challenge':'stage'})},
+ shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage'})},
+ boom(k='bee'){this.playCue(k==='boss'||k==='rogue'?'bossBoom':'enemyBoom',{phase:S.challenge?'challenge':'stage'})},
+ beam(){this.playCue('captureBeam',{phase:S.challenge?'challenge':'stage'})},
+ rescue(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
+ extend(){this.playCue('extendAward',{phase:'stage'})},
+ over(){this.playCue('gameOver',{phase:'results'})},
+ march(i=0){this.playCue('stagePulse',{phase:S.challenge?'challenge':'stage',variant:i})},
+ uiTick(){this.playCue('uiTick',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
+ uiConfirm(){this.playCue('uiConfirm',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
+ captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
+ join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
+ transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})}
 };
 
 const P={

@@ -300,9 +300,21 @@ function drawReserveShips(lives){
 
 function drawPostFx(){}
 
+function resolvedBoardAtmosphere(){
+ if(typeof currentGamePackResolvedAtmosphere==='function'){
+  return currentGamePackResolvedAtmosphere({
+   stagePresentation:S.stagePresentation,
+   challenge:!!S.challenge,
+   attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
+   frontDoor:!started&&!S.attract
+  });
+ }
+ return Object.freeze({backgroundMode:S.stagePresentation?.backgroundMode||'classic-stars'});
+}
+
 function drawStageBackdrop(){
- const mode=S.stagePresentation?.backgroundMode||'starfield';
- if(mode==='starfield')return;
+ const mode=resolvedBoardAtmosphere().backgroundMode||S.stagePresentation?.backgroundMode||'classic-stars';
+ if(mode==='classic-stars'||mode==='starfield')return;
  const time=performance.now()/1000;
  if(mode==='aurora-hint'||mode==='aurora-borealis'){
   const alpha=mode==='aurora-borealis'?.22:.12;
@@ -354,6 +366,7 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  }
  ctx.globalAlpha=1;
  drawStageBackdrop();
+ window.__platinumRenderDebug.backgroundMode=resolvedBoardAtmosphere().backgroundMode||'classic-stars';
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
   if(f.flash){
