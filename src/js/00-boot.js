@@ -35,6 +35,10 @@ const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const settingsRuntime=document.getElementById('settingsRuntime');
+const settingsChannel=document.getElementById('settingsChannel');
+const settingsVersion=document.getElementById('settingsVersion');
+const settingsRelease=document.getElementById('settingsRelease');
+const settingsState=document.getElementById('settingsState');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
@@ -801,6 +805,10 @@ function syncSettingsUi(){
  settingsPanel.setAttribute('aria-hidden',settingsOpen?'false':'true');
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
+ if(settingsChannel)settingsChannel.textContent=`Lane ${String(BUILD_INFO.releaseChannel||'development').toUpperCase()}`;
+ if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
+ if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
+ if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
 }
 function syncHelpUi(){
  if(!helpModal)return;

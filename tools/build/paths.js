@@ -27,6 +27,7 @@ module.exports = {
   PRODUCTION_PLATINUM_GUIDE: path.join(DIST_PRODUCTION, 'platinum-guide.html'),
   PRODUCTION_PLAYER_GUIDE: path.join(DIST_PRODUCTION, 'player-guide.html'),
   PRODUCTION_BUILD_INFO: path.join(DIST_PRODUCTION, 'build-info.json'),
+  PRODUCTION_RELEASE_NOTES: path.join(DIST_PRODUCTION, 'release-notes.json'),
   PRODUCTION_SCREENSHOT: path.join(DIST_PRODUCTION, 'export.mov.png'),
   BETA_INDEX: path.join(DIST_BETA, 'index.html'),
   BETA_DASHBOARD: path.join(DIST_BETA, 'release-dashboard.html'),

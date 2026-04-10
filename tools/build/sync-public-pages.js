@@ -104,6 +104,7 @@ function buildProjectPage(buildInfo, latestNote, pushedAt){
   return fill(template, {
     PUBLIC_DATE_LONG: publicDateLong(pushedAt),
     BUILD_VERSION: buildInfo.version,
+    BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
     BUILD_LABEL: buildInfo.label,
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary

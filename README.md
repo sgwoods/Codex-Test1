@@ -86,6 +86,10 @@ Current public milestone:
 - `1.2.2 - Runtime freeze hardening and bonus-ship patch`
 - `1.2.1 - Aurora trust-fix and copy-boundary patch`
 
+Current prepared candidate:
+
+- `1.2.3 - Aurora score-surface polish patch`
+
 What that means:
 
 - Aurora now ships as the first playable application on Platinum
@@ -95,7 +99,7 @@ What that means:
 Immediate follow-through after `1.2.2`:
 
 - watch `#146` and keep exportable freeze diagnostics useful if late-run faults recur
-- keep the next Aurora polish and correctness bundle tight
+- review the `1.2.3` Aurora score-surface polish candidate on hosted `/beta`
 - keep the documentation set aligned across source and hosted pages
 - strengthen the platform versus application boundary before the second game becomes truly playable
 

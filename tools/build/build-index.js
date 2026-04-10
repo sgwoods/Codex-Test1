@@ -20,6 +20,7 @@ const {
   PRODUCTION_PLATINUM_GUIDE,
   PRODUCTION_PLAYER_GUIDE,
   PRODUCTION_BUILD_INFO,
+  PRODUCTION_RELEASE_NOTES,
   PRODUCTION_SCREENSHOT
 } = require('./paths');
 const pkg = require(path.resolve(ROOT, 'package.json'));
@@ -936,8 +937,8 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
             <span class="metaValue">${esc(dashboard.currentFocus || 'Release planning')}</span>
           </div>
           <div class="metaCard">
-            <span class="metaLabel">Current Build</span>
-            <span class="metaValue">${esc(buildInfo.label)}</span>
+            <span class="metaLabel">Current Release</span>
+            <span class="metaValue">${esc(buildInfo.version)}</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
@@ -1177,12 +1178,12 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           <div class="goal"><strong>Current goal:</strong> ${esc(guide.currentGoal || '')}</div>
           <div class="meta">
             <div class="metaCard">
-              <span class="metaLabel">Current Build</span>
-              <span class="metaValue">${esc(buildInfo.label)}</span>
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">${esc(buildInfo.version)}</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Release Line</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
@@ -1212,7 +1213,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Build: ${esc(buildInfo.label)}
+          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -1246,12 +1247,12 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
           <div class="goal"><strong>Guide focus:</strong> ${esc(guide.currentGoal || '')}</div>
           <div class="meta">
             <div class="metaCard">
-              <span class="metaLabel">Current Build</span>
-              <span class="metaValue">${esc(buildInfo.label)}</span>
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">${esc(buildInfo.version)}</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Release Line</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
@@ -1281,7 +1282,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Build: ${esc(buildInfo.label)}
+          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -1312,12 +1313,12 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
           <div class="goal"><strong>Guide focus:</strong> ${esc(guide.currentGoal || '')}</div>
           <div class="meta">
             <div class="metaCard">
-              <span class="metaLabel">Current Build</span>
-              <span class="metaValue">${esc(buildInfo.label)}</span>
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">${esc(buildInfo.version)}</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Release Line</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
@@ -1346,7 +1347,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Build: ${esc(buildInfo.label)}
+          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -1390,6 +1391,7 @@ function lanePaths(lane){
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
       playerGuide: PRODUCTION_PLAYER_GUIDE,
       buildInfo: PRODUCTION_BUILD_INFO,
+      releaseNotes: PRODUCTION_RELEASE_NOTES,
       screenshot: PRODUCTION_SCREENSHOT
     };
   }

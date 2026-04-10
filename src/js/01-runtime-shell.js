@@ -90,7 +90,7 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
- if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
+ if(buildStampVersion)buildStampVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'

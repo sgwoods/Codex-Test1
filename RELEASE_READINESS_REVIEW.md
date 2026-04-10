@@ -4,7 +4,9 @@
 
 `1.2.2 - Runtime freeze hardening and bonus-ship patch` is currently live on hosted `/production`.
 
-There is no newer hosted `/beta` candidate under review right now. The current post-release work is about monitoring the `1.2.2` line, keeping the hosted docs aligned, and deciding the next focused Aurora bundle deliberately.
+`1.2.3 - Aurora score-surface polish patch` is the current hosted `/beta` candidate under review.
+
+The current post-release work is about keeping the live `1.2.2` line trustworthy while evaluating whether the narrower `1.2.3` Aurora polish bundle is ready for hosted `/production`.
 
 That means this document is now serving two jobs:
 
@@ -66,6 +68,24 @@ Main remaining risks are now smaller and more operational than architectural:
 - late-run runtime exceptions that can still exist even though the loop now traps and surfaces them
 - keeping docs and hosted lanes aligned after source changes
 - strengthening the platform/application boundary as the second game becomes more real
+- making sure score-surface polish remains readable and trustworthy before the next production promotion
+
+## What `1.2.3` Contains
+`1.2.3` is a narrow Aurora presentation patch candidate, not a platform rewrite.
+
+It currently bundles:
+
+- wait-mode high-score rotation in the clearer `Validated -> Local -> All -> demo` sequence
+- shorter wait/demo pacing to reach score presentation sooner
+- leaderboard row trust context via `BUILD/DATE`
+- a lightweight `After Date` filter in the Aurora leaderboard panel
+
+Why this candidate fits the patch line:
+
+- narrow surface area
+- Aurora-only scope
+- meaningful trust/readability improvement
+- no intentional Platinum shell contract expansion
 
 ## What `1.2.2` Shipped
 `1.2.2` shipped as a narrow runtime-stability patch with one additional Aurora-scoped gameplay rule improvement.
