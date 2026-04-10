@@ -710,7 +710,7 @@ function currentGamePackAudioTheme(id=''){
 }
 
 function currentGamePackAudioCue(cueName,opts={}){
- const atmosphere=currentGamePackResolvedAtmosphere(opts);
+ const atmosphere=opts.resolvedAtmosphere||currentGamePackResolvedAtmosphere(opts);
  const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
  const theme=currentGamePackAudioTheme(atmosphere.audioTheme);
  const fallback=currentGamePackAudioTheme('classic-arcade');

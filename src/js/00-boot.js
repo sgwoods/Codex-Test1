@@ -30,7 +30,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -496,8 +496,8 @@ const sfx={
     : challenge?'challenge'
     : 'stage'
   );
-  if(typeof currentGamePackResolvedAtmosphere==='function'){
-   return currentGamePackResolvedAtmosphere({
+  if(typeof resolvedAudioAtmosphere==='function'){
+   return resolvedAudioAtmosphere({
     stagePresentation:opts.stagePresentation||S.stagePresentation,
     atmosphereTheme:opts.atmosphereTheme||'',
     phase,
@@ -530,6 +530,7 @@ const sfx={
    ? currentGamePackAudioCue(name,{
     stagePresentation:opts.stagePresentation||S.stagePresentation,
     atmosphereTheme:atmosphere.id,
+    resolvedAtmosphere:atmosphere,
     phase:atmosphere.phase,
     challenge:opts.challenge!==undefined?!!opts.challenge:!!S.challenge,
     attractPhase:opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||''),
@@ -987,11 +988,16 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
  challenge:false,
+ audioTheme:'auto',
  graphicsTheme:'auto',
  starfieldIntensity:1,
  starfieldSpeed:1
 });
 let testCfgCache=null;
+function sanitizeAudioThemeValue(value=''){
+ const next=String(value||'').trim()||'auto';
+ return ['auto','aurora-application','galaga-original-reference'].includes(next)?next:'auto';
+}
 function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
  if(next==='auto')return 'auto';
@@ -1010,9 +1016,29 @@ function applyTestCfgToControls(cfg){
  if(testExtendFirst)testExtendFirst.value=cfg.extendFirst;
  if(testExtendRecurring)testExtendRecurring.value=cfg.extendRecurring;
  if(testChallenge)testChallenge.checked=cfg.challenge;
+ if(audioTheme)audioTheme.value=cfg.audioTheme;
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
+}
+function currentAudioOverrides(){
+ const cfg=testCfgCache||loadTestCfg();
+ return{
+  audioTheme:sanitizeAudioThemeValue(cfg.audioTheme)
+ };
+}
+function resolvedAudioAtmosphere(opts={}){
+ const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
+  ? currentGamePackResolvedAtmosphere(opts)
+  : Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase:String(opts.phase||'stage').trim()||'stage'});
+ const selection=currentAudioOverrides().audioTheme;
+ if(selection==='auto'||selection==='aurora-application')return atmosphere;
+ const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
+ const useGalagaReference=phase==='demo'||phase==='stage'||phase==='challenge'||phase==='results';
+ return Object.freeze(Object.assign({},atmosphere,{
+  audioTheme:useGalagaReference?'classic-arcade':(atmosphere?.audioTheme||'aurora-crown'),
+  audioThemeOverride:selection
+ }));
 }
 function currentGraphicsOverrides(){
  const cfg=testCfgCache||loadTestCfg();
@@ -1065,6 +1091,7 @@ function loadTestCfg(){
    extendFirst,
    extendRecurring,
    challenge:!!raw.challenge,
+   audioTheme:sanitizeAudioThemeValue(raw.audioTheme),
    graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme),
    starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,1),
    starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,1)
@@ -1081,6 +1108,7 @@ function saveTestCfg(){
   extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
   extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
   challenge:!!testChallenge.checked,
+  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||'auto'),
   graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||'auto'),
   starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,1),
   starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,1)
@@ -1450,7 +1478,7 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);

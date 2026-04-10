@@ -83,6 +83,26 @@ For each fidelity topic:
   - Aurora classic and aurora-themed backgrounds should continue to be checked
     against this reference as Bundle A evolves
 
+### Classic Audio / Phase Motifs
+
+- Source:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/README.md`
+- Current use:
+  - compare:
+    - opening/title motif feel
+    - stage/round announcement cues
+    - capture/rescue cue identity
+    - challenge perfect/result phrasing
+    - last-ship / game-over descent and tension handling
+    - high-score/result cue separation
+- Current rule note:
+  - original Galaga should remain the strongest reference for gameplay-phase
+    sound identity, while Aurora may still own shell/front-door flavor where the
+    product now has application-specific surfaces
+- Active gap:
+  - Aurora currently has improved phase routing and stronger motifs, but it is
+    still not yet a full Galaga-faithful selectable gameplay sound theme
+
 ### Challenge Stage Fidelity
 
 - Source:

@@ -1,7 +1,7 @@
 {
   "title": "Aurora Application Guide",
-  "strapline": "A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing graphics controls that shape the live game presentation.",
-  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum.",
+  "strapline": "A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing presentation controls that shape the live game presentation.",
+  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, and treat the original Galaga labeled-sound catalog as a gameplay-phase reference theme family (`galaga-original-reference`) for future selectable audio work.",
   "audioContexts": [
     {
       "id": "front-door-tick",
@@ -491,6 +491,11 @@
   ],
   "graphicsControls": [
     {
+      "label": "Audio Theme",
+      "values": "auto, aurora-application, galaga-original-reference",
+      "description": "Developer override for phase-resolved audio routing. The Galaga reference option keeps Aurora shell identity in front-door and wait surfaces while pushing gameplay, challenge, and results toward the classic-reference audio family."
+    },
+    {
       "label": "Graphics Theme",
       "values": "auto, classic-arcade, aurora-hint, aurora-borealis, aurora-crown",
       "description": "Developer override for the visual atmosphere family. It changes rendered backgrounds and starfield profiles without changing the resolved audio theme."
@@ -525,7 +530,7 @@
     {
       "label": "Galaga Reference Baseline",
       "href": "https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md",
-      "detail": "Catalog of visual and motion references used for Aurora tuning, including the stage-play reference video stills."
+      "detail": "Catalog of visual, motion, and audio references used for Aurora tuning, including stage-play stills and the labeled Galaga sound reference video."
     }
   ]
 }

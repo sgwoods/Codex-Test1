@@ -1392,7 +1392,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'visual-contexts', title: 'Graphics Contexts' },
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
     { id: 'stage-families', title: 'Stage Family Progression' },
-    { id: 'graphics-controls', title: 'Graphics Controls' },
+    { id: 'graphics-controls', title: 'Presentation Controls' },
     { id: 'guide-links', title: 'Related Guides' }
   ];
   const toc = tocItems.map(section => `
@@ -1606,8 +1606,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
 
         <section class="section" id="graphics-controls">
           <div class="sectionHeader">
-            <h2>Developer Graphics Controls</h2>
-            <p>The current developer-facing graphics controls that let us tune and compare Aurora presentation without changing the application-owned audio resolution.</p>
+            <h2>Developer Presentation Controls</h2>
+            <p>The current developer-facing audio and graphics controls that let us tune and compare Aurora presentation while keeping the application-owned theme model explicit.</p>
           </div>
           <div class="tableWrap">
             <table class="dataTable">

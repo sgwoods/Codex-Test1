@@ -11,13 +11,14 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   testShips.value=cl(+cfg.ships||3,1,9)|0;
   testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
   testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
   testChallenge.checked=!!cfg.challenge;
+  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
   if(typeof graphicsStarfieldSpeed!=='undefined'&&graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=cfg.starfieldSpeed!==undefined?String(cfg.starfieldSpeed):String(currentCfg.starfieldSpeed);
@@ -453,8 +454,8 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){
- const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
-  ? currentGamePackResolvedAtmosphere({
+  const atmosphere=typeof resolvedAudioAtmosphere==='function'
+   ? resolvedAudioAtmosphere({
     stagePresentation:S.stagePresentation,
     challenge:!!S.challenge,
     attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
@@ -522,10 +523,13 @@ window.__galagaHarness__={
     starfieldIntensityScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldIntensityScale||0),
     starfieldSpeedScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldSpeedScale||0)
    },
-   graphics:graphics?{
+  graphics:graphics?{
     graphicsTheme:graphics.graphicsTheme||'auto',
     starfieldIntensity:+(graphics.starfieldIntensity||1),
     starfieldSpeed:+(graphics.starfieldSpeed||1)
+   }:null,
+   audio:typeof currentAudioOverrides==='function'?{
+    audioTheme:currentAudioOverrides().audioTheme||'auto'
    }:null,
    extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}
   };
@@ -963,6 +967,7 @@ window.__galagaHarness__={
  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
  testChallenge.checked=!!cfg.challenge;
+  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
   if(typeof graphicsStarfieldSpeed!=='undefined'&&graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=cfg.starfieldSpeed!==undefined?String(cfg.starfieldSpeed):String(currentCfg.starfieldSpeed);

@@ -10,7 +10,7 @@ function fail(message, payload){
 async function main(){
   const result = await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 24138, skipStart: true }, async ({ page }) => {
     const defaults = await page.evaluate(() => {
-      window.__galagaHarness__.setTest({ stage: 1, ships: 3, challenge: false, graphicsTheme: 'auto', starfieldIntensity: 1, starfieldSpeed: 1 });
+      window.__galagaHarness__.setTest({ stage: 1, ships: 3, challenge: false, audioTheme: 'auto', graphicsTheme: 'auto', starfieldIntensity: 1, starfieldSpeed: 1 });
       window.__galagaHarness__.restartCurrentConfig();
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
     });
@@ -19,11 +19,16 @@ async function main(){
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
     });
     const forcedClassic = await page.evaluate(() => {
-      window.__galagaHarness__.setTest({ stage: 8, ships: 3, challenge: false, graphicsTheme: 'classic-arcade', starfieldIntensity: 1, starfieldSpeed: 1 });
+      window.__galagaHarness__.setTest({ stage: 8, ships: 3, challenge: false, audioTheme: 'auto', graphicsTheme: 'classic-arcade', starfieldIntensity: 1, starfieldSpeed: 1 });
       window.__galagaHarness__.restartCurrentConfig();
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
     });
-    return { defaults, vividAurora, forcedClassic };
+    const galagaReference = await page.evaluate(() => {
+      window.__galagaHarness__.setTest({ stage: 8, ships: 3, challenge: false, audioTheme: 'galaga-original-reference', graphicsTheme: 'auto', starfieldIntensity: 1, starfieldSpeed: 1 });
+      window.__galagaHarness__.restartCurrentConfig();
+      return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
+    });
+    return { defaults, vividAurora, forcedClassic, galagaReference };
   });
 
   if(result.defaults.visualAtmosphere?.backgroundMode !== 'classic-stars') fail('default graphics settings no longer preserve the stage 1 classic stars background', result);
@@ -39,6 +44,10 @@ async function main(){
   if(result.forcedClassic.visualAtmosphere?.id !== 'classic-arcade') fail('forced classic graphics theme did not switch the visual atmosphere', result);
   if(result.forcedClassic.renderDebug?.backgroundMode !== 'classic-stars') fail('forced classic graphics theme did not switch the rendered background back to classic stars', result);
 
+  if(result.galagaReference.audio?.audioTheme !== 'galaga-original-reference') fail('audio theme override did not persist into developer settings state', result);
+  if(result.galagaReference.atmosphere?.audioTheme !== 'classic-arcade') fail('Galaga original reference audio theme did not force classic gameplay audio resolution', result);
+  if(result.galagaReference.visualAtmosphere?.id !== 'aurora-borealis') fail('audio theme override leaked into visual atmosphere selection; it should stay audio-only', result);
+
   console.log(JSON.stringify({
     ok: true,
     defaults: result.defaults.graphics,
@@ -51,6 +60,11 @@ async function main(){
       stageAtmosphere: result.forcedClassic.atmosphere,
       visualAtmosphere: result.forcedClassic.visualAtmosphere,
       renderDebug: result.forcedClassic.renderDebug
+    },
+    galagaReference: {
+      audio: result.galagaReference.audio,
+      stageAtmosphere: result.galagaReference.atmosphere,
+      visualAtmosphere: result.galagaReference.visualAtmosphere
     }
   }, null, 2));
 }
