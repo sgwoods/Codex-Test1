@@ -436,7 +436,7 @@ let gameOverHtml='';
 let gameOverState=null;
 let harnessFrameAccum=0;
 let harnessClockControlled=0;
-const ATTRACT={active:0,phase:'',timer:0,cycle:0};
+const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=1;
@@ -677,8 +677,9 @@ function buildGameOverHtmlFromState(){
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
- const board=leaderboardRowsForView();
- const boardTitle=currentLeaderboardTitle();
+ const activeView=(ATTRACT.phase==='scores'&&ATTRACT.active)?(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'):LEADERBOARD.view;
+ const board=leaderboardRowsForView(activeView);
+ const boardTitle=currentLeaderboardTitle(activeView);
  const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
@@ -711,9 +712,14 @@ function resetAttractBackdrop(){
 function enterAttractScores(){
  ATTRACT.active=1;
  ATTRACT.phase='scores';
- ATTRACT.timer=7.5;
+ ATTRACT.scoreViews=typeof attractLeaderboardViews==='function'?attractLeaderboardViews():['all','validated'];
+ ATTRACT.scoreViewIndex=0;
+ ATTRACT.scoreViewDwell=4.5;
+ ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell;
+ ATTRACT.timer=Math.max(ATTRACT.scoreViewDwell*ATTRACT.scoreViews.length,9);
  S.attract=1;
  resetAttractBackdrop();
+ if(typeof prefetchLeaderboards==='function')prefetchLeaderboards(1);
  logEvent('attract_scores',{cycle:ATTRACT.cycle});
 }
 function startAttractDemo(opts={}){
@@ -729,7 +735,10 @@ function startAttractDemo(opts={}){
  syncPauseUi();
  ATTRACT.active=1;
  ATTRACT.phase='demo';
- ATTRACT.timer=11.5;
+ ATTRACT.timer=9.5;
+ ATTRACT.scoreViews=['all','validated'];
+ ATTRACT.scoreViewIndex=0;
+ ATTRACT.scoreViewTimer=0;
  ATTRACT.cycle++;
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
@@ -744,9 +753,13 @@ function stopAttractLoop(){
  ATTRACT.active=0;
  ATTRACT.phase='';
  ATTRACT.timer=0;
+ ATTRACT.scoreViews=['all','validated'];
+ ATTRACT.scoreViewIndex=0;
+ ATTRACT.scoreViewTimer=0;
  S.attract=0;
  syncPauseUi();
 }
+window.enterAttractScores=enterAttractScores;
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;

@@ -90,8 +90,8 @@ function renderPilotRecords(rows){
  accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
  accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
-function currentLeaderboardTitle(){
- switch(LEADERBOARD.view){
+function currentLeaderboardTitle(view=LEADERBOARD.view){
+ switch(view){
   case 'validated': return 'VALIDATED PILOTS';
   case 'mine': return LEADERBOARD.user?'MY SCORES':'MY SCORES · LOCAL';
   case 'local': return 'LOCAL DEVICE SCORES';
@@ -115,6 +115,9 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='local')return 'Local device scores';
  if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
+}
+function attractLeaderboardViews(){
+ return ['validated','local','all'];
 }
 function persistLeaderboardCache(view){
  if(view==='local')return;

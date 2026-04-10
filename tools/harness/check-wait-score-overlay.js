@@ -17,14 +17,14 @@ async function main(){
       const buttons = document.getElementById('leaderboardViewButtons');
       const frame = document.getElementById('playfieldFrame');
       if(!statusPanels || !leaderboardPanel || !leaderboardViews || !buttons || !frame) return null;
-      if(!statusPanels.classList.contains('waitOverlay')) return null;
+      if(!statusPanels.classList.contains('framedOverlay')) return null;
       if(leaderboardPanel.hidden) return null;
       const rect = statusPanels.getBoundingClientRect();
       const frameRect = frame.getBoundingClientRect();
       const buttonsStyle = getComputedStyle(buttons);
       const viewsStyle = getComputedStyle(leaderboardViews);
       return {
-        waitOverlay: true,
+        framedOverlay: true,
         rect: { left: rect.left, top: rect.top, width: rect.width, height: rect.height },
         frameRect: { left: frameRect.left, top: frameRect.top, width: frameRect.width, height: frameRect.height },
         buttonsFlexDirection: buttonsStyle.flexDirection,
@@ -36,19 +36,19 @@ async function main(){
   const center = result.rect.left + result.rect.width / 2;
   const frameCenter = result.frameRect.left + result.frameRect.width / 2;
   if(Math.abs(center - frameCenter) > 8){
-    fail('wait-mode score overlay is no longer centered over the playfield', result);
+    fail('wait-mode leaderboard overlay is no longer centered over the playfield', result);
   }
-  if(result.rect.width > 424){
-    fail('wait-mode score overlay grew wider than the intended compact overlay size', result);
+  if(result.rect.width < 600 || result.rect.width > 960){
+    fail('wait-mode leaderboard overlay no longer matches the intended framed overlay width', result);
   }
-  if(result.rect.top < result.frameRect.top + 40){
-    fail('wait-mode score overlay sits too high and risks colliding with the HUD band', result);
+  if(result.rect.top > result.frameRect.top + 24){
+    fail('wait-mode leaderboard overlay dropped too low inside the playfield frame', result);
   }
-  if(result.buttonsFlexDirection !== 'column'){
-    fail('wait-mode score view buttons are no longer stacked vertically in overlay mode', result);
+  if(result.buttonsFlexDirection !== 'row'){
+    fail('wait-mode score view buttons are no longer laid out horizontally in framed overlay mode', result);
   }
   if(result.viewsDisplay !== 'flex'){
-    fail('wait-mode score view panel did not remain visible in overlay mode', result);
+    fail('wait-mode score view panel did not remain visible in framed overlay mode', result);
   }
 
   console.log(JSON.stringify({

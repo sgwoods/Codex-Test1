@@ -57,6 +57,14 @@ window.__galagaHarness__={
   window.startAttractDemo({record:cfg.record!==false});
   return true;
  },
+ enterAttractScores(){
+  if(typeof window.enterAttractScores==='function')window.enterAttractScores();
+  return{
+   active:!!ATTRACT.active,
+   phase:ATTRACT.phase||'',
+   timer:+(+ATTRACT.timer||0).toFixed(3)
+  };
+ },
  exportAndReset(cfg={}){
   const label=typeof cfg==='string'?cfg:(cfg.label||'harness_export_reset');
   exportAndReturnToWaitMode(label);
@@ -414,6 +422,20 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}}},
+ attractScoreState(){
+  const title=document.querySelector('.gameOverSub')?.textContent||'';
+  return{
+   active:!!ATTRACT.active,
+   phase:ATTRACT.phase||'',
+   title,
+   view:(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'),
+   index:+(ATTRACT.scoreViewIndex||0),
+   timer:+(+ATTRACT.timer||0).toFixed(3),
+   viewTimer:+(+ATTRACT.scoreViewTimer||0).toFixed(3),
+   views:[...(ATTRACT.scoreViews||[])],
+   html:msg?.innerHTML||''
+  };
+ },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {

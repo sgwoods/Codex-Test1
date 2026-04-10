@@ -25,6 +25,12 @@ function update(dt){
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
   if(ATTRACT.phase==='scores'){
+   ATTRACT.scoreViewTimer=Math.max(0,(+ATTRACT.scoreViewTimer||0)-dt);
+   if(!ATTRACT.scoreViewTimer&&ATTRACT.scoreViews.length>1){
+    ATTRACT.scoreViewIndex=(ATTRACT.scoreViewIndex+1)%ATTRACT.scoreViews.length;
+    ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell||4.5;
+    logEvent('attract_score_view',{cycle:ATTRACT.cycle,view:ATTRACT.scoreViews[ATTRACT.scoreViewIndex],index:ATTRACT.scoreViewIndex});
+   }
    for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(10+s.z*18)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
    if(!ATTRACT.timer)startAttractDemo();
    return;
