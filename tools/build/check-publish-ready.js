@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const path = require('path');
 const { execFileSync } = require('child_process');
 const {
   ROOT,
@@ -242,6 +243,31 @@ function checkApprovedBetaForProduction(productionInfo){
   }
 }
 
+function checkProductionReleaseDocs(productionInfo){
+  const dashboard = loadJson(path.join(ROOT, 'release-dashboard.json'));
+  const readiness = loadText(path.join(ROOT, 'RELEASE_READINESS_REVIEW.md'));
+  const version = String(productionInfo.version || '');
+  const versionStep = Array.isArray(dashboard.timeline)
+    ? dashboard.timeline.find((step) => String(step.title || '').includes(version))
+    : null;
+
+  if(!versionStep){
+    throw new Error(`Publish preflight failed: release-dashboard.json is missing a timeline entry for ${version}. Update the release dashboard before publishing production.`);
+  }
+  if(versionStep.status !== 'done'){
+    throw new Error(`Publish preflight failed: release-dashboard.json still marks ${version} as "${versionStep.status}". Mark the shipped release as done before publishing production.`);
+  }
+  if(/hosted `\/beta` candidate under review/i.test(readiness)){
+    throw new Error('Publish preflight failed: RELEASE_READINESS_REVIEW.md still says a beta candidate is under review. Update the readiness review to reflect the shipped production state before publishing production.');
+  }
+  if(/Review the hosted `\/beta`/i.test(String(dashboard.currentFocus || ''))){
+    throw new Error('Publish preflight failed: release-dashboard.json currentFocus still describes beta review. Update the release dashboard to the shipped production posture before publishing production.');
+  }
+  if(!readiness.includes(`\`${version}`) || !readiness.includes('currently live on hosted `/production`')){
+    throw new Error(`Publish preflight failed: RELEASE_READINESS_REVIEW.md does not clearly describe ${version} as the live hosted /production release. Update it before publishing production.`);
+  }
+}
+
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const cfg = laneConfig(String(args.lane || '').toLowerCase());
@@ -250,7 +276,10 @@ function main(){
   checkArtifacts(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
-  if(cfg.lane === 'production') checkApprovedBetaForProduction(info);
+  if(cfg.lane === 'production'){
+    checkApprovedBetaForProduction(info);
+    checkProductionReleaseDocs(info);
+  }
   console.log(JSON.stringify({
     ok: true,
     lane: cfg.lane,
@@ -274,5 +303,6 @@ module.exports = {
   checkGitClean,
   checkSourceDocs,
   checkArtifacts,
-  checkBuildInfo
+  checkBuildInfo,
+  checkProductionReleaseDocs
 };

@@ -99,13 +99,14 @@ async function putContent(filePath, content, sha, message){
   return res.json();
 }
 
-function buildProjectPage(buildInfo, latestNote, pushedAt){
+function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
   const template = read(PROJECT_TEMPLATE);
   return fill(template, {
     PUBLIC_DATE_LONG: publicDateLong(pushedAt),
     BUILD_VERSION: buildInfo.version,
     BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
     BUILD_LABEL: buildInfo.label,
+    PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary
   }).trimEnd() + '\n';
@@ -152,7 +153,7 @@ async function main(){
     summary: 'No release summary available for this build.'
   };
   const pushedAt = repoPushedAt(buildInfo);
-  const projectHtml = buildProjectPage(buildInfo, latestNote, pushedAt);
+  const projectHtml = buildProjectPage(buildInfo, latestNote, dashboard, pushedAt);
   const canonicalStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
     projectId: CANONICAL_PROJECT_SLUG,
     projectPagePath: `${CANONICAL_PROJECT_SLUG}.html`,

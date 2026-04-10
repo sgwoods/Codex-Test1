@@ -7,13 +7,15 @@ We use a SemVer-style public version plus build metadata.
 Examples:
 
 - local `localhost`:
-  - `1.2.0+build.364.sha.106adfd.dirty`
+  - `x.y.z+build.NNN.sha.abcdef0.dirty`
 - hosted `/dev`:
-  - `1.2.0+build.364.sha.106adfd`
+  - `x.y.z+build.NNN.sha.abcdef0`
 - hosted `/beta`:
-  - `1.2.0-beta.1+build.364.sha.106adfd.beta`
+  - `x.y.z-beta.1+build.NNN.sha.abcdef0.beta`
 - hosted `/production`:
-  - `1.2.0+build.364.sha.106adfd`
+  - `x.y.z+build.NNN.sha.abcdef0`
+
+These are format examples, not current live lane values.
 
 ## Meaning
 

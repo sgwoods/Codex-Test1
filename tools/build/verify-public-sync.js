@@ -85,9 +85,11 @@ async function main(){
 
   ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, `public/${CANONICAL_PROJECT_SLUG}.html date`);
   ensureIncludes(projectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `public/${CANONICAL_PROJECT_SLUG}.html release version`);
+  ensureIncludes(projectHtml, expectedFocus, `public/${CANONICAL_PROJECT_SLUG}.html current focus`);
   ensureIncludes(projectHtml, 'release-dashboard.html', `public/${CANONICAL_PROJECT_SLUG}.html dashboard link`);
   ensureIncludes(projectHtml, 'project-guide.html', `public/${CANONICAL_PROJECT_SLUG}.html project guide link`);
   ensureIncludes(legacyProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `public/${LEGACY_PROJECT_SLUG}.html release version`);
+  ensureIncludes(legacyProjectHtml, expectedFocus, `public/${LEGACY_PROJECT_SLUG}.html current focus`);
 
   if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
   if(manifest.project_id !== CANONICAL_PROJECT_SLUG) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json project_id: expected "${CANONICAL_PROJECT_SLUG}" got "${manifest.project_id}"`);
