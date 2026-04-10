@@ -3,6 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { ROOT, PRODUCTION_BUILD_INFO } = require('./paths');
+const {
+  checkGitClean,
+  checkProductionCheckoutCurrent,
+  checkPublicProjectTemplate
+} = require('./check-publish-ready');
 
 const BUILD_INFO = PRODUCTION_BUILD_INFO;
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
@@ -142,7 +147,20 @@ async function syncFile(filePath, content, message){
 }
 
 async function main(){
+  checkGitClean();
+  checkProductionCheckoutCurrent();
+  checkPublicProjectTemplate();
   const buildInfo = readJson(BUILD_INFO);
+  const head = execSync(`git -C ${JSON.stringify(ROOT)} rev-parse HEAD`, {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore']
+  }).trim();
+  if(buildInfo.commit !== head){
+    throw new Error(
+      `Refusing to sync public pages from production build ${buildInfo.shortCommit || buildInfo.commit}; ` +
+      `current checkout is ${head.slice(0, 7)}. Rebuild/promote production from this exact clean checkout first.`
+    );
+  }
   if(buildInfo.dirty && process.env.ALLOW_DIRTY_PUBLIC_SYNC !== '1'){
     throw new Error('Refusing to sync public pages from a dirty local build. Commit or rebuild from a clean tree first, or set ALLOW_DIRTY_PUBLIC_SYNC=1 to override.');
   }

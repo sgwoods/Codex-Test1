@@ -68,6 +68,10 @@ reference-backed fidelity work, and safe collaboration.
   - `npm run sync:public`
   - `npm run verify:public`
 - Production promotion is expected to start from a clean tree; dirty source state should be fixed before promoting.
+- Production release/public sync is also expected to run from a current Aurora checkout:
+  - branch must be `main`
+  - local `main` must match `origin/main`
+  - the current `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` must be the template being synced
 - The main local playable build is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
 - Preferred local handoff/startup command:

@@ -298,7 +298,9 @@ The public `sgwoods/public` sync is part of the production release contract, not
 Production promotion must also start from a clean tree:
 
 - the local source tree must be clean before `promote:production`
+- the release machine must be on `main`, and local `main` must match `origin/main`
 - the approved beta candidate must not have been promoted from a dirty source state
+- the public sync step must validate the current `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` and the production artifact must have been rebuilt from that exact clean checkout
 - if either condition fails, production promotion should stop
 
 ## First-Class Hosted Documentation Requirement

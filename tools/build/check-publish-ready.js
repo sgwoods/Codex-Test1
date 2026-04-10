@@ -107,6 +107,42 @@ function git(args){
   return typeof out === 'string' ? out.trim() : '';
 }
 
+function checkProductionCheckoutCurrent(){
+  const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']);
+  if(branch !== 'main'){
+    throw new Error(`Publish preflight failed: production release must run from the main branch. Current branch is "${branch}".`);
+  }
+  try{
+    execFileSync('git', ['-C', ROOT, 'fetch', 'origin'], {
+      stdio: ['ignore', 'ignore', 'ignore']
+    });
+  }catch(err){
+    throw new Error('Publish preflight failed: unable to fetch origin before production release. Pull/fetch the latest Aurora main on this machine and try again.');
+  }
+  const head = git(['rev-parse', 'HEAD']);
+  const originMain = git(['rev-parse', 'origin/main']);
+  if(head !== originMain){
+    throw new Error(
+      `Publish preflight failed: local main (${head.slice(0, 7)}) is not current with origin/main (${originMain.slice(0, 7)}). ` +
+      'Pull the latest Aurora main on this machine, rebuild, and rerun the production release.'
+    );
+  }
+}
+
+function checkPublicProjectTemplate(){
+  const templatePath = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
+  const template = loadText(templatePath);
+  const requiredTokens = ['{{BUILD_VERSION}}', '{{BUILD_RELEASE_ET}}', '{{PUBLIC_CURRENT_FOCUS}}', '{{LATEST_RELEASE_TITLE}}'];
+  for(const token of requiredTokens){
+    if(!template.includes(token)){
+      throw new Error(`Publish preflight failed: ${templatePath} is missing required token ${token}. Restore the current public template before publishing production.`);
+    }
+  }
+  if(/\b0\.5\.0\b/.test(template)){
+    throw new Error(`Publish preflight failed: ${templatePath} still contains stale hardcoded release content. Refresh the public template before publishing production.`);
+  }
+}
+
 function laneConfig(lane){
   if(lane === 'dev'){
     return {
@@ -281,6 +317,8 @@ function main(){
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production'){
+    checkProductionCheckoutCurrent();
+    checkPublicProjectTemplate();
     checkApprovedBetaForProduction(info);
     checkProductionReleaseDocs(info);
   }
@@ -308,5 +346,7 @@ module.exports = {
   checkSourceDocs,
   checkArtifacts,
   checkBuildInfo,
-  checkProductionReleaseDocs
+  checkProductionReleaseDocs,
+  checkProductionCheckoutCurrent,
+  checkPublicProjectTemplate
 };

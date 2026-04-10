@@ -199,6 +199,8 @@ into the public Aurora production surface, then syncs the top-level `sgwoods/pub
 Important:
 
 - production promotion should begin from a clean source tree
+- production release/public sync should run from a machine whose Aurora checkout is on `main` and current with `origin/main`
+- the production artifact and `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` should come from that exact clean checkout before `npm run sync:public`
 - if the approved beta candidate was built/promoted from a dirty source state, re-run the beta path from a clean tree before promoting production
 
 ## Important Defaults
