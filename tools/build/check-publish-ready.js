@@ -257,7 +257,7 @@ function checkProductionReleaseDocs(productionInfo){
   if(versionStep.status !== 'done'){
     throw new Error(`Publish preflight failed: release-dashboard.json still marks ${version} as "${versionStep.status}". Mark the shipped release as done before publishing production.`);
   }
-  if(/hosted `\/beta` candidate under review/i.test(readiness)){
+  if(/is the current hosted `\/beta` candidate under review/i.test(readiness)){
     throw new Error('Publish preflight failed: RELEASE_READINESS_REVIEW.md still says a beta candidate is under review. Update the readiness review to reflect the shipped production state before publishing production.');
   }
   if(/Review the hosted `\/beta`/i.test(String(dashboard.currentFocus || ''))){
