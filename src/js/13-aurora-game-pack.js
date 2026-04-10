@@ -12,6 +12,19 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
   id:'classic-arcade',
   label:'Classic Arcade',
   group:'classic',
+  starfield:Object.freeze({
+   id:'classic-arcade-stars',
+   count:108,
+   sizeMin:.95,
+   sizeMax:1.55,
+   alphaMin:.52,
+   alphaMax:.96,
+   twinkleMin:.88,
+   twinkleAmp:.2,
+   speedMin:11,
+   speedMax:27,
+   palette:Object.freeze(['#ffffff','#d8ecff','#8bb8ff','#1e52ff','#fff36a','#ffb21f','#9cff71','#ff3b33','#db38ff','#3fe7ff','#d7a4ff'])
+  }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
    wait:'classic-stars',
@@ -25,6 +38,19 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
   id:'aurora-hint',
   label:'Aurora Hint',
   group:'aurora',
+  starfield:Object.freeze({
+   id:'aurora-hint-stars',
+   count:92,
+   sizeMin:.88,
+   sizeMax:1.35,
+   alphaMin:.34,
+   alphaMax:.7,
+   twinkleMin:.84,
+   twinkleAmp:.16,
+   speedMin:8,
+   speedMax:20,
+   palette:Object.freeze(['#f7f9ff','#8fd7ff','#72e18c','#f0c766','#d27cff','#ff8b7a','#3fe7ff','#c8ffcf'])
+  }),
   backgrounds:Object.freeze({
    frontDoor:'aurora-borealis',
    wait:'aurora-borealis',
@@ -38,6 +64,19 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
   id:'aurora-borealis',
   label:'Aurora Borealis',
   group:'aurora',
+  starfield:Object.freeze({
+   id:'aurora-borealis-stars',
+   count:88,
+   sizeMin:.88,
+   sizeMax:1.28,
+   alphaMin:.28,
+   alphaMax:.64,
+   twinkleMin:.82,
+   twinkleAmp:.14,
+   speedMin:8,
+   speedMax:18,
+   palette:Object.freeze(['#f7fbff','#9edfff','#6bf5bf','#ffe27a','#cf92ff','#38dfff','#ffb5cf'])
+  }),
   backgrounds:Object.freeze({
    frontDoor:'aurora-borealis',
    wait:'aurora-borealis',
@@ -51,6 +90,19 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
   id:'aurora-crown',
   label:'Aurora Crown',
   group:'aurora',
+  starfield:Object.freeze({
+   id:'aurora-crown-stars',
+   count:84,
+   sizeMin:.9,
+   sizeMax:1.26,
+   alphaMin:.3,
+   alphaMax:.68,
+   twinkleMin:.84,
+   twinkleAmp:.15,
+   speedMin:8,
+   speedMax:18,
+   palette:Object.freeze(['#ffffff','#aef1ff','#8dffd5','#ffe38f','#d5a0ff','#3fe7ff','#ffc7d8'])
+  }),
   backgrounds:Object.freeze({
    frontDoor:'aurora-borealis',
    wait:'aurora-borealis',
@@ -487,7 +539,8 @@ function currentGamePackResolvedAtmosphere(opts={}){
   group:theme.group||'default',
   phase,
   backgroundMode:resolvePackAtmosphereBackground({pack,atmosphereTheme:theme.id,phase}),
-  audioTheme:theme.audioTheme||'classic-arcade'
+  audioTheme:theme.audioTheme||'classic-arcade',
+  starfield:theme.starfield||null
  });
 }
 

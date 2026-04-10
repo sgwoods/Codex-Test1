@@ -106,6 +106,17 @@ If a change is fidelity-driven, tie it back to:
 - an open GitHub issue
 - a measurable harness target where possible
 
+When adding a new durable video/image reference, catalog it under:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/`
+
+and include:
+
+- a short `README.md`
+- source path or provenance
+- what kinds of comparisons it is safe to use for
+- extracted stills if they help repeated review
+
 ## Release / Build Identity
 
 - Versioning policy:

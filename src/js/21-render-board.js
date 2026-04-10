@@ -301,8 +301,8 @@ function drawReserveShips(lives){
 function drawPostFx(){}
 
 function resolvedBoardAtmosphere(){
- if(typeof currentGamePackResolvedAtmosphere==='function'){
-  return currentGamePackResolvedAtmosphere({
+ if(typeof resolvedVisualAtmosphere==='function'){
+  return resolvedVisualAtmosphere({
    stagePresentation:S.stagePresentation,
    challenge:!!S.challenge,
    attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
@@ -359,14 +359,25 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);
  ctx.clip();
+ const starfield=typeof syncStarfieldProfile==='function'?syncStarfieldProfile({
+  stagePresentation:S.stagePresentation,
+  challenge:!!S.challenge,
+  attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
+  frontDoor:!started&&!S.attract
+ }):null;
  for(const s of S.st){
-  ctx.globalAlpha=.04+s.z*.22*(.3+Math.sin(s.tw)*.58);
+  const pulse=(s.twMin||.88)+Math.sin(s.tw)*(s.twAmp||.16);
+  ctx.globalAlpha=Math.max(.08,Math.min(1,(s.alpha||.62)*pulse));
   ctx.fillStyle=s.c;
   ctx.fillRect(s.x,s.y,s.s,s.s);
  }
  ctx.globalAlpha=1;
  drawStageBackdrop();
  window.__platinumRenderDebug.backgroundMode=resolvedBoardAtmosphere().backgroundMode||'classic-stars';
+ window.__platinumRenderDebug.starfieldProfile=starfield?.id||'classic-arcade-stars';
+ window.__platinumRenderDebug.starfieldCount=S.st.length;
+ window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
+ window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
   if(f.flash){

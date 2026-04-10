@@ -78,33 +78,79 @@
     <button id="recordBtn" type="button">Auto Video: On</button>
     <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
-  <div id="testPanel">
-    <h4>Developer Start State</h4>
-    <label for="testStage">Start Stage</label>
-    <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
-    <label for="testShips">Starting Ships</label>
-    <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
-    <label for="testExtendFirst">First Bonus Ship Score</label>
-    <input id="testExtendFirst" type="number" min="0" max="999999" step="1000" value="20000" />
-    <label for="testExtendRecurring">Recurring Bonus Ship Score</label>
-    <input id="testExtendRecurring" type="number" min="0" max="999999" step="1000" value="70000" />
-    <div id="testRow">
-      <input id="testChallenge" type="checkbox" />
-      <label for="testChallenge">Force challenge opening</label>
+  <div id="settingsSections">
+    <div id="graphicsPanel" class="settingsSection">
+      <h4>Graphics Options</h4>
+      <div class="settingsFieldGrid">
+        <div class="settingsField">
+          <label for="graphicsTheme">Graphics Theme</label>
+          <select id="graphicsTheme">
+            <option value="auto">Auto</option>
+            <option value="classic-arcade">Classic Arcade</option>
+            <option value="aurora-hint">Aurora Hint</option>
+            <option value="aurora-borealis">Aurora Borealis</option>
+            <option value="aurora-crown">Aurora Crown</option>
+          </select>
+        </div>
+        <div class="settingsField">
+          <label for="graphicsStarfieldIntensity">Starfield Intensity</label>
+          <select id="graphicsStarfieldIntensity">
+            <option value="0.75">Soft</option>
+            <option value="1" selected>Reference</option>
+            <option value="1.25">Bright</option>
+            <option value="1.5">Vivid</option>
+          </select>
+        </div>
+        <div class="settingsField">
+          <label for="graphicsStarfieldSpeed">Starfield Speed</label>
+          <select id="graphicsStarfieldSpeed">
+            <option value="0.8">Calm</option>
+            <option value="1" selected>Reference</option>
+            <option value="1.15">Arcade</option>
+            <option value="1.3">Fast</option>
+          </select>
+        </div>
+      </div>
+      <div class="settingsHint">Graphics options apply live so we can tune look and feel without restarting the run.</div>
     </div>
-    <div id="testHint">Applies on next game start only. Set either score to 0 to disable that bonus-ship award.</div>
-  </div>
-  <div id="settingsMeta">
-    <span id="settingsRuntime">Platform Platinum · Pack pending</span>
-    <span id="settingsChannel">Lane {{BUILD_CHANNEL}}</span>
-    <span id="settingsVersion">Version {{BUILD_VERSION}}</span>
-    <span id="settingsRelease">{{BUILD_RELEASE_ET}}</span>
-    <span id="settingsState">{{BUILD_STATE}}</span>
-  </div>
-  <div id="settingsNotes">
-    <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">{{LATEST_RELEASE_TITLE}}</span>
-    <span id="settingsNotesBody">{{LATEST_RELEASE_BODY}}</span>
+    <div id="testPanel" class="settingsSection">
+      <h4>Developer Start State</h4>
+      <div class="settingsFieldGrid">
+        <div class="settingsField settingsFieldCompact">
+          <label for="testStage">Start Stage</label>
+          <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+        </div>
+        <div class="settingsField settingsFieldCompact">
+          <label for="testShips">Starting Ships</label>
+          <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+        </div>
+        <div class="settingsField">
+          <label for="testExtendFirst">First Bonus Ship Score</label>
+          <input id="testExtendFirst" type="number" min="0" max="999999" step="1000" value="20000" />
+        </div>
+        <div class="settingsField">
+          <label for="testExtendRecurring">Recurring Bonus Ship Score</label>
+          <input id="testExtendRecurring" type="number" min="0" max="999999" step="1000" value="70000" />
+        </div>
+      </div>
+      <div id="testRow">
+        <input id="testChallenge" type="checkbox" />
+        <label for="testChallenge">Force challenge opening</label>
+      </div>
+      <div id="testHint">Applies on next game start only. Set either score to 0 to disable that bonus-ship award.</div>
+    </div>
+    <div id="settingsMeta">
+      <span id="settingsRuntime">Platform Platinum · Pack pending</span>
+      <span id="settingsChannel">Lane {{BUILD_CHANNEL}}</span>
+      <span id="settingsVersion">Version {{BUILD_VERSION}}</span>
+      <span id="settingsRelease">{{BUILD_RELEASE_ET}}</span>
+      <span id="settingsState">{{BUILD_STATE}}</span>
+    </div>
+    <div id="settingsNotes">
+      <span id="settingsNotesLabel">Latest Note</span>
+      <span id="settingsNotesTitle">{{LATEST_RELEASE_TITLE}}</span>
+      <span id="settingsNotesBody">{{LATEST_RELEASE_BODY}}</span>
+    </div>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">

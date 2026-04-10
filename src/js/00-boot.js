@@ -30,7 +30,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -614,6 +614,90 @@ const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[]
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
+const DEFAULT_STARFIELD_PROFILE=Object.freeze({
+ id:'classic-arcade-stars',
+ count:108,
+ sizeMin:.95,
+ sizeMax:1.55,
+ alphaMin:.52,
+ alphaMax:.96,
+ twinkleMin:.88,
+ twinkleAmp:.2,
+ speedMin:9,
+ speedMax:23,
+ palette:Object.freeze(['#ffffff','#d8ecff','#8bb8ff','#1e52ff','#fff36a','#ffb21f','#9cff71','#ff3b33','#db38ff','#3fe7ff','#d7a4ff'])
+});
+
+function resolvedStarfieldProfile(opts={}){
+ const atmosphere=typeof resolvedVisualAtmosphere==='function'
+  ? resolvedVisualAtmosphere({
+   stagePresentation:opts.stagePresentation||S.stagePresentation,
+   atmosphereTheme:opts.atmosphereTheme||'',
+   phase:opts.phase||'',
+   challenge:opts.challenge!==undefined?!!opts.challenge:!!S.challenge,
+   frontDoor:opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract),
+   attractPhase:opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'')
+  })
+  : null;
+ const graphics=currentGraphicsOverrides();
+ const intensityScale=sanitizeStarfieldMultiplier(graphics.starfieldIntensity,1);
+ const speedScale=sanitizeStarfieldMultiplier(graphics.starfieldSpeed,1);
+ const profile=Object.assign({},DEFAULT_STARFIELD_PROFILE,atmosphere?.starfield||{});
+ profile.alphaMin=Math.min(1,Math.max(.08,profile.alphaMin*intensityScale));
+ profile.alphaMax=Math.min(1,Math.max(profile.alphaMin,profile.alphaMax*intensityScale));
+ profile.speedMin=Math.max(2,profile.speedMin*speedScale);
+ profile.speedMax=Math.max(profile.speedMin,profile.speedMax*speedScale);
+ profile.intensityScale=intensityScale;
+ profile.speedScale=speedScale;
+ return profile;
+}
+
+function syncStarfieldProfile(opts={}){
+ const profile=resolvedStarfieldProfile(opts);
+ const sig=JSON.stringify({
+  id:profile.id||'classic-arcade-stars',
+  count:+(profile.count||DEFAULT_STARFIELD_PROFILE.count),
+  sizeMin:+(profile.sizeMin||DEFAULT_STARFIELD_PROFILE.sizeMin),
+  sizeMax:+(profile.sizeMax||DEFAULT_STARFIELD_PROFILE.sizeMax),
+  alphaMin:+(profile.alphaMin||DEFAULT_STARFIELD_PROFILE.alphaMin),
+  alphaMax:+(profile.alphaMax||DEFAULT_STARFIELD_PROFILE.alphaMax),
+  twinkleMin:+(profile.twinkleMin||DEFAULT_STARFIELD_PROFILE.twinkleMin),
+  twinkleAmp:+(profile.twinkleAmp||DEFAULT_STARFIELD_PROFILE.twinkleAmp),
+  speedMin:+(profile.speedMin||DEFAULT_STARFIELD_PROFILE.speedMin),
+  speedMax:+(profile.speedMax||DEFAULT_STARFIELD_PROFILE.speedMax),
+  intensityScale:+(profile.intensityScale||1),
+  speedScale:+(profile.speedScale||1),
+  palette:[...(profile.palette||DEFAULT_STARFIELD_PROFILE.palette)]
+ });
+ if(S.starfieldSig===sig&&S.st.length===profile.count)return profile;
+ S.starfieldSig=sig;
+ S.st.length=0;
+ const palette=(profile.palette&&profile.palette.length)?profile.palette:DEFAULT_STARFIELD_PROFILE.palette;
+ const count=Math.max(24,+profile.count||DEFAULT_STARFIELD_PROFILE.count);
+ const sizeMin=Math.max(.5,+profile.sizeMin||DEFAULT_STARFIELD_PROFILE.sizeMin);
+ const sizeMax=Math.max(sizeMin,+profile.sizeMax||DEFAULT_STARFIELD_PROFILE.sizeMax);
+ const alphaMin=Math.max(.08,Math.min(.98,+profile.alphaMin||DEFAULT_STARFIELD_PROFILE.alphaMin));
+ const alphaMax=Math.max(alphaMin,Math.min(1,+profile.alphaMax||DEFAULT_STARFIELD_PROFILE.alphaMax));
+ const twinkleMin=Math.max(.2,Math.min(1,+profile.twinkleMin||DEFAULT_STARFIELD_PROFILE.twinkleMin));
+ const twinkleAmp=Math.max(0,Math.min(.5,+profile.twinkleAmp||DEFAULT_STARFIELD_PROFILE.twinkleAmp));
+ const speedMin=Math.max(2,+profile.speedMin||DEFAULT_STARFIELD_PROFILE.speedMin);
+ const speedMax=Math.max(speedMin,+profile.speedMax||DEFAULT_STARFIELD_PROFILE.speedMax);
+ for(let i=0;i<count;i++){
+  S.st.push({
+   x:auxRnd(PLAY_W),
+   y:auxRnd(PLAY_H),
+   s:auxRnd(sizeMax,sizeMin),
+   c:palette[(auxRandUnit()*palette.length)|0],
+   tw:auxRnd(6.28),
+   alpha:auxRnd(alphaMax,alphaMin),
+   twMin:auxRnd(Math.min(1,twinkleMin+.04),Math.max(.18,twinkleMin-.04)),
+   twAmp:auxRnd(Math.min(.4,twinkleAmp+.04),Math.max(.04,twinkleAmp-.04)),
+   vy:auxRnd(speedMax,speedMin)
+  });
+ }
+ return profile;
+}
+
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
 const CHALLENGE_STAGE_TUNE={shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2};
 const STAGE_RULES={
@@ -823,19 +907,98 @@ if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;
  writePref(BEST_SCORE_KEY,String(S.best));
 }
+const DEFAULT_TEST_CFG=Object.freeze({
+ stage:1,
+ ships:3,
+ extendFirst:20000,
+ extendRecurring:70000,
+ challenge:false,
+ graphicsTheme:'auto',
+ starfieldIntensity:1,
+ starfieldSpeed:1
+});
+let testCfgCache=null;
+function sanitizeGraphicsThemeValue(value=''){
+ const next=String(value||'').trim()||'auto';
+ if(next==='auto')return 'auto';
+ if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
+ const resolved=currentGamePackAtmosphereTheme(next);
+ return resolved?.id===next?next:'auto';
+}
+function sanitizeStarfieldMultiplier(value,fallback=1){
+ const next=+value;
+ if(!Number.isFinite(next))return fallback;
+ return Math.round(cl(next,.5,1.8)*100)/100;
+}
+function applyTestCfgToControls(cfg){
+ if(testStage)testStage.value=cfg.stage;
+ if(testShips)testShips.value=cfg.ships;
+ if(testExtendFirst)testExtendFirst.value=cfg.extendFirst;
+ if(testExtendRecurring)testExtendRecurring.value=cfg.extendRecurring;
+ if(testChallenge)testChallenge.checked=cfg.challenge;
+ if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
+ if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
+ if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
+}
+function currentGraphicsOverrides(){
+ const cfg=testCfgCache||loadTestCfg();
+ return{
+  graphicsTheme:sanitizeGraphicsThemeValue(cfg.graphicsTheme),
+  starfieldIntensity:sanitizeStarfieldMultiplier(cfg.starfieldIntensity,1),
+  starfieldSpeed:sanitizeStarfieldMultiplier(cfg.starfieldSpeed,1)
+ };
+}
+function resolvedVisualAtmosphere(opts={}){
+ const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
+  ? currentGamePackResolvedAtmosphere(opts)
+  : null;
+ const graphics=currentGraphicsOverrides();
+ if(graphics.graphicsTheme==='auto'||typeof currentGamePackAtmosphereTheme!=='function')return atmosphere;
+ const theme=currentGamePackAtmosphereTheme(graphics.graphicsTheme);
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const phase=String(
+  atmosphere?.phase
+  || opts.phase
+  || (opts.frontDoor?'frontDoor':'')
+  || (opts.challenge?'challenge':'')
+  || (opts.attractPhase==='scores'?'wait':'')
+  || (opts.attractPhase==='demo'?'demo':'')
+  || 'stage'
+ ).trim()||'stage';
+ return Object.freeze({
+  id:theme.id,
+  label:theme.label||theme.id,
+  group:theme.group||'default',
+  phase,
+  backgroundMode:typeof resolvePackAtmosphereBackground==='function'
+   ? resolvePackAtmosphereBackground({pack,atmosphereTheme:theme.id,phase})
+   : atmosphere?.backgroundMode||'classic-stars',
+  audioTheme:atmosphere?.audioTheme||theme.audioTheme||'classic-arcade',
+  starfield:theme.starfield||atmosphere?.starfield||null,
+  baseThemeId:atmosphere?.id||'',
+  overrideThemeId:theme.id
+ });
+}
 function loadTestCfg(){
+ if(testCfgCache)return Object.assign({},testCfgCache);
  try{
   const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
   const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:20000;
   const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:70000;
-  return{
+  testCfgCache={
    stage:cl(+raw.stage||1,1,99)|0,
    ships:cl(+raw.ships||3,1,9)|0,
    extendFirst,
    extendRecurring,
-   challenge:!!raw.challenge
+   challenge:!!raw.challenge,
+   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme),
+   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,1),
+   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,1)
   };
- }catch{return{stage:1,ships:3,extendFirst:20000,extendRecurring:70000,challenge:0}}
+ }catch{
+  testCfgCache=Object.assign({},DEFAULT_TEST_CFG);
+ }
+ return Object.assign({},testCfgCache);
 }
 function saveTestCfg(){
  const cfg={
@@ -843,15 +1006,15 @@ function saveTestCfg(){
   ships:cl(+testShips.value||3,1,9)|0,
   extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
   extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
-  challenge:!!testChallenge.checked
+  challenge:!!testChallenge.checked,
+  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||'auto'),
+  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,1),
+  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,1)
  };
- testStage.value=cfg.stage;
- testShips.value=cfg.ships;
- testExtendFirst.value=cfg.extendFirst;
- testExtendRecurring.value=cfg.extendRecurring;
- testChallenge.checked=cfg.challenge;
+ testCfgCache=cfg;
+ applyTestCfgToControls(cfg);
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
- return cfg;
+ return Object.assign({},cfg);
 }
 function syncSettingsUi(){
  settingsPanel.classList.toggle('open',settingsOpen);
@@ -907,11 +1070,7 @@ function syncGamePreviewUi(){
 }
 function syncTestUi(){
  const cfg=loadTestCfg();
- testStage.value=cfg.stage;
- testShips.value=cfg.ships;
- testExtendFirst.value=cfg.extendFirst;
- testExtendRecurring.value=cfg.extendRecurring;
- testChallenge.checked=cfg.challenge;
+ applyTestCfgToControls(cfg);
  syncAudioUi();
  syncPauseUi();
  syncSettingsUi();
@@ -1186,10 +1345,7 @@ function rs(){
  DPR=window.devicePixelRatio||1;
  c.width=innerWidth*DPR;c.height=innerHeight*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
  ctx.imageSmoothingEnabled=false;
- if(!S.st.length){
-  const cols=['#f7f9ff','#8bb8ff','#72e18c','#f0c766','#d27cff','#ff8b7a'];
-  for(let i=0;i<156;i++)S.st.push({x:auxRnd(PLAY_W),y:auxRnd(PLAY_H),z:auxRnd(.88,.16),s:auxRnd(1.05,.45),c:cols[(auxRandUnit()*cols.length)|0],tw:auxRnd(6.28)});
- }
+ syncStarfieldProfile();
  VIS.gx=17;VIS.gy=14;VIS.playerBottom=20;VIS.beamLen=300;VIS.formTop=28;
  S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;
 }
@@ -1220,8 +1376,8 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge])el.addEventListener('change',saveTestCfg);
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])el.addEventListener('input',saveTestCfg);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());

@@ -59,10 +59,29 @@ For each fidelity topic:
 
 - Source:
   - original gameplay video
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/README.md`
 - Current metric:
   - `stage1-descent` harness scenario
 - Current use:
   - compare first dive timing and lower-field crossing against original footage
+
+### Classic Starfield / Visual Intensity
+
+- Source:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/README.md`
+- Current use:
+  - compare:
+    - starfield density
+    - star brightness
+    - color mix
+    - downward motion speed
+    - sprite readability against the field
+- Current rule note:
+  - classic gameplay starfield should stay clearly visible during play and read
+    as active motion, not as a barely-there ambient texture
+- Active gap:
+  - Aurora classic and aurora-themed backgrounds should continue to be checked
+    against this reference as Bundle A evolves
 
 ### Challenge Stage Fidelity
 
@@ -192,6 +211,7 @@ High-value future baseline additions:
    - first capture
    - first rescue
    - later-stage pressure
+   - classic starfield / board readability
 3. Issue-by-issue reference mapping so open fidelity issues point directly at evidence
 
 Current focused release pack:

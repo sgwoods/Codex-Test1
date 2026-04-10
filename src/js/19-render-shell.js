@@ -246,9 +246,9 @@ function syncCabinetShellLayout({
   }
  }
  if(renderSettingsPanel){
-  const settingsW=Math.min(Math.max(420,Math.floor(viewW*.58)),680);
+  const settingsW=Math.min(Math.max(560,Math.floor(viewW*.9)),940);
   const top=Math.floor(oy+12);
-  const maxHeight=Math.max(220,Math.floor(viewH-24));
+  const maxHeight=Math.max(240,Math.min(Math.floor(viewH-24),760));
   renderSettingsPanel.style.width=`${settingsW}px`;
   renderSettingsPanel.style.left=`${Math.floor(ox+viewW/2-settingsW/2)}px`;
   renderSettingsPanel.style.right='auto';

@@ -38,6 +38,8 @@ async function main(){
   if(result.stageOne.stagePresentation?.atmosphereTheme !== 'classic-arcade') fail('stage 1 did not resolve the classic arcade atmosphere theme', result);
   if(result.stageOne.atmosphere?.backgroundMode !== 'classic-stars') fail('stage 1 did not keep the classic moving-stars background', result);
   if(result.stageOne.atmosphere?.audioTheme !== 'classic-arcade') fail('stage 1 did not use the classic arcade audio theme', result);
+  if(result.stageOne.atmosphere?.starfield?.count < 100) fail('stage 1 classic starfield is no longer using the brighter arcade density profile', result);
+  if(result.stageOne.atmosphere?.starfield?.alphaMin < 0.5) fail('stage 1 classic starfield minimum alpha drifted below the intended arcade intensity', result);
   if(result.stageOne.audioCue?.cue !== 'gameStart') fail('stage 1 start did not record the expected game-start cue', result);
 
   if(result.stageEight.stagePresentation?.atmosphereTheme !== 'aurora-borealis') fail('stage 8 did not resolve the Aurora borealis atmosphere theme', result);
