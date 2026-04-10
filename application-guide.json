@@ -1,0 +1,518 @@
+{
+  "title": "Aurora Application Guide",
+  "strapline": "A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing graphics controls that shape the live game presentation.",
+  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum.",
+  "audioContexts": [
+    {
+      "id": "front-door-tick",
+      "context": "Front Door",
+      "label": "Navigation Tick",
+      "cue": "uiTick",
+      "phase": "frontDoor",
+      "audioTheme": "aurora-crown",
+      "description": "Subtle front-door navigation tick for Aurora-owned shell identity surfaces.",
+      "preview": { "cue": "uiTick", "phase": "frontDoor", "atmosphereTheme": "aurora-crown" }
+    },
+    {
+      "id": "front-door-confirm",
+      "context": "Front Door",
+      "label": "Confirm",
+      "cue": "uiConfirm",
+      "phase": "frontDoor",
+      "audioTheme": "aurora-crown",
+      "description": "Confirmation cue for front-door and shell-level Aurora selections.",
+      "preview": { "cue": "uiConfirm", "phase": "frontDoor", "atmosphereTheme": "aurora-crown" }
+    },
+    {
+      "id": "wait-enter",
+      "context": "Wait Mode",
+      "label": "Score Rotation Enter",
+      "cue": "attractEnter",
+      "phase": "wait",
+      "audioTheme": "aurora-crown",
+      "description": "Entry sting when Aurora transitions into the score-focused wait-mode surface.",
+      "preview": { "cue": "attractEnter", "phase": "wait", "atmosphereTheme": "aurora-crown" }
+    },
+    {
+      "id": "wait-pulse",
+      "context": "Wait Mode",
+      "label": "Score Rotation Pulse",
+      "cue": "attractPulse",
+      "phase": "wait",
+      "audioTheme": "aurora-crown",
+      "description": "Recurring pulse that keeps the score rotation alive without sounding like gameplay.",
+      "preview": { "cue": "attractPulse", "phase": "wait", "atmosphereTheme": "aurora-crown", "variant": 0 }
+    },
+    {
+      "id": "demo-enter",
+      "context": "Demo",
+      "label": "Demo Entry",
+      "cue": "attractEnter",
+      "phase": "demo",
+      "audioTheme": "aurora-crown",
+      "description": "Bridge from the Aurora shell identity into autoplay demo mode.",
+      "preview": { "cue": "attractEnter", "phase": "demo", "atmosphereTheme": "aurora-crown" }
+    },
+    {
+      "id": "demo-pulse",
+      "context": "Demo",
+      "label": "Demo Pulse",
+      "cue": "attractPulse",
+      "phase": "demo",
+      "audioTheme": "classic-arcade",
+      "description": "Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.",
+      "preview": { "cue": "attractPulse", "phase": "demo", "atmosphereTheme": "classic-arcade", "variant": 0 }
+    },
+    {
+      "id": "stage-start-classic",
+      "context": "Stage Start",
+      "label": "Stage 1 Start",
+      "cue": "gameStart",
+      "phase": "stage",
+      "audioTheme": "classic-arcade",
+      "description": "Opening cue for classic early-stage Aurora presentation.",
+      "preview": { "cue": "gameStart", "phase": "stage", "atmosphereTheme": "classic-arcade" }
+    },
+    {
+      "id": "stage-start-aurora",
+      "context": "Stage Start",
+      "label": "Aurora Surge Start",
+      "cue": "gameStart",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Opening cue for the later Aurora surge/borealis stage family.",
+      "preview": { "cue": "gameStart", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "formation-pulse-classic",
+      "context": "Gameplay Loop",
+      "label": "Formation Pulse Classic",
+      "cue": "stagePulse",
+      "phase": "stage",
+      "audioTheme": "classic-arcade",
+      "description": "Formation march/pulse for classic early-stage cadence.",
+      "preview": { "cue": "stagePulse", "phase": "stage", "atmosphereTheme": "classic-arcade", "variant": 0 }
+    },
+    {
+      "id": "formation-pulse-aurora",
+      "context": "Gameplay Loop",
+      "label": "Formation Pulse Aurora",
+      "cue": "stagePulse",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Formation pulse for the Aurora-themed later-stage family.",
+      "preview": { "cue": "stagePulse", "phase": "stage", "atmosphereTheme": "aurora-borealis", "variant": 0 }
+    },
+    {
+      "id": "player-shot-classic",
+      "context": "Combat",
+      "label": "Player Shot Classic",
+      "cue": "playerShot",
+      "phase": "stage",
+      "audioTheme": "classic-arcade",
+      "description": "Early-stage player shot reference aligned to the classic arcade mix.",
+      "preview": { "cue": "playerShot", "phase": "stage", "atmosphereTheme": "classic-arcade" }
+    },
+    {
+      "id": "player-shot-aurora",
+      "context": "Combat",
+      "label": "Player Shot Aurora",
+      "cue": "playerShot",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Later-stage Aurora shot variant with a slightly sleeker synth edge.",
+      "preview": { "cue": "playerShot", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "enemy-shot-classic",
+      "context": "Combat",
+      "label": "Enemy Shot Classic",
+      "cue": "enemyShot",
+      "phase": "stage",
+      "audioTheme": "classic-arcade",
+      "description": "Enemy projectile cue for classic stages.",
+      "preview": { "cue": "enemyShot", "phase": "stage", "atmosphereTheme": "classic-arcade" }
+    },
+    {
+      "id": "enemy-shot-aurora",
+      "context": "Combat",
+      "label": "Enemy Shot Aurora",
+      "cue": "enemyShot",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Enemy projectile cue for Aurora-leaning later stages.",
+      "preview": { "cue": "enemyShot", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "enemy-hit-aurora",
+      "context": "Combat",
+      "label": "Enemy Hit",
+      "cue": "enemyHit",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Standard enemy hit cue used across Aurora combat.",
+      "preview": { "cue": "enemyHit", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "boss-hit-aurora",
+      "context": "Combat",
+      "label": "Boss Hit",
+      "cue": "bossHit",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Heavier impact cue for boss and stronger target hits.",
+      "preview": { "cue": "bossHit", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "enemy-boom-aurora",
+      "context": "Combat",
+      "label": "Enemy Boom",
+      "cue": "enemyBoom",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Standard enemy destruction cue.",
+      "preview": { "cue": "enemyBoom", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "boss-boom-aurora",
+      "context": "Combat",
+      "label": "Boss Boom",
+      "cue": "bossBoom",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Larger destruction cue for boss enemies and rogue fighter losses.",
+      "preview": { "cue": "bossBoom", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "capture-beam",
+      "context": "Capture / Rescue",
+      "label": "Capture Beam",
+      "cue": "captureBeam",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Beam/deploy cue for the capture sequence.",
+      "preview": { "cue": "captureBeam", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "capture-retreat",
+      "context": "Capture / Rescue",
+      "label": "Capture Retreat",
+      "cue": "captureRetreat",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Recovery cue when the capture sequence resolves and retreats.",
+      "preview": { "cue": "captureRetreat", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "rescue-join",
+      "context": "Capture / Rescue",
+      "label": "Rescue Join",
+      "cue": "rescueJoin",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Join cue for dual-fighter reunification and rescue success.",
+      "preview": { "cue": "rescueJoin", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "extend-award",
+      "context": "Scoring",
+      "label": "Bonus Ship Award",
+      "cue": "extendAward",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Extra-ship award cue used when Aurora score extends trigger.",
+      "preview": { "cue": "extendAward", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "player-hit",
+      "context": "Player State",
+      "label": "Ship Loss",
+      "cue": "playerHit",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Player ship destruction cue during live play.",
+      "preview": { "cue": "playerHit", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "stage-transition",
+      "context": "Transitions",
+      "label": "Stage Transition",
+      "cue": "stageTransition",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "description": "Transition cue between standard stages.",
+      "preview": { "cue": "stageTransition", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "challenge-transition",
+      "context": "Transitions",
+      "label": "Challenge Transition",
+      "cue": "challengeTransition",
+      "phase": "challenge",
+      "audioTheme": "aurora-surge",
+      "description": "Transition cue into challenge/bonus stage presentation.",
+      "preview": { "cue": "challengeTransition", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
+    },
+    {
+      "id": "game-over",
+      "context": "Results",
+      "label": "Game Over",
+      "cue": "gameOver",
+      "phase": "results",
+      "audioTheme": "aurora-surge",
+      "description": "End-of-run cue used by Aurora results/game-over flow.",
+      "preview": { "cue": "gameOver", "phase": "results", "atmosphereTheme": "aurora-borealis" }
+    }
+  ],
+  "graphicsThemes": [
+    {
+      "id": "classic-arcade",
+      "label": "Classic Arcade",
+      "group": "Classic",
+      "audioTheme": "classic-arcade",
+      "backgrounds": "frontDoor classic-stars · wait classic-stars · demo classic-stars · stage classic-stars · challenge classic-stars",
+      "starfieldProfile": "classic-arcade-stars",
+      "starfieldCount": 108,
+      "alpha": "0.52 to 0.96",
+      "speed": "11 to 27",
+      "swatches": ["#ffffff", "#8bb8ff", "#1e52ff", "#fff36a", "#ff3b33", "#db38ff"],
+      "description": "The closest Aurora gets to the original Galaga look: bright, readable stars on a black field with classic cadence and no aurora ribbon wash."
+    },
+    {
+      "id": "aurora-hint",
+      "label": "Aurora Hint",
+      "group": "Aurora",
+      "audioTheme": "aurora-rise",
+      "backgrounds": "frontDoor aurora-borealis · wait aurora-borealis · demo aurora-hint · stage aurora-hint · challenge aurora-hint",
+      "starfieldProfile": "aurora-hint-stars",
+      "starfieldCount": 92,
+      "alpha": "0.34 to 0.70",
+      "speed": "8 to 20",
+      "swatches": ["#f7f9ff", "#8fd7ff", "#72e18c", "#f0c766", "#d27cff", "#ff8b7a"],
+      "description": "Bridge theme where the classic field remains visible but the Aurora wash starts to become part of the stage identity."
+    },
+    {
+      "id": "aurora-borealis",
+      "label": "Aurora Borealis",
+      "group": "Aurora",
+      "audioTheme": "aurora-surge",
+      "backgrounds": "frontDoor aurora-borealis · wait aurora-borealis · demo aurora-borealis · stage aurora-borealis · challenge aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "alpha": "0.28 to 0.64",
+      "speed": "8 to 18",
+      "swatches": ["#f7fbff", "#9edfff", "#6bf5bf", "#ffe27a", "#cf92ff", "#ffb5cf"],
+      "description": "Full Aurora stage theme with softer stars under a stronger ribbon treatment and the main later-stage audio palette."
+    },
+    {
+      "id": "aurora-crown",
+      "label": "Aurora Crown",
+      "group": "Aurora",
+      "audioTheme": "aurora-crown",
+      "backgrounds": "frontDoor aurora-borealis · wait aurora-borealis · demo aurora-borealis · stage aurora-borealis · challenge aurora-borealis",
+      "starfieldProfile": "aurora-crown-stars",
+      "starfieldCount": 84,
+      "alpha": "0.30 to 0.68",
+      "speed": "8 to 18",
+      "swatches": ["#ffffff", "#aef1ff", "#8dffd5", "#ffe38f", "#d5a0ff", "#ffc7d8"],
+      "description": "Aurora-owned shell/front-door theme used to establish the application identity before gameplay falls back toward classic or surge contexts."
+    }
+  ],
+  "graphicsContexts": [
+    {
+      "id": "front-door-atmosphere",
+      "label": "Front Door Atmosphere",
+      "phase": "frontDoor",
+      "theme": "aurora-crown",
+      "backgroundMode": "aurora-borealis",
+      "frameAccent": "classic-blue",
+      "description": "The front door keeps Aurora-owned identity with a fuller ribbon field and crown audio theme while still living inside the Platinum shell."
+    },
+    {
+      "id": "wait-mode-atmosphere",
+      "label": "Wait Mode Surface",
+      "phase": "wait",
+      "theme": "aurora-crown",
+      "backgroundMode": "aurora-borealis",
+      "frameAccent": "classic-blue",
+      "description": "Score rotation/wait mode shares the Aurora front-door family so the shell remains coherent between idle states."
+    },
+    {
+      "id": "stage-one-classic",
+      "label": "Stage 1 Classic Gameplay",
+      "phase": "stage",
+      "theme": "classic-arcade",
+      "backgroundMode": "classic-stars",
+      "frameAccent": "classic-blue",
+      "description": "Stage 1 keeps the classic stars look as the gameplay baseline, with the brighter starfield tuned against Galaga references."
+    },
+    {
+      "id": "stage-eight-surge",
+      "label": "Stage 8 Aurora Surge",
+      "phase": "stage",
+      "theme": "aurora-borealis",
+      "backgroundMode": "aurora-borealis",
+      "frameAccent": "aurora-crown",
+      "description": "Later stages shift into the stronger Aurora visual family with softer star density and ribbon emphasis."
+    },
+    {
+      "id": "challenge-stage",
+      "label": "Challenge / Bonus Stage",
+      "phase": "challenge",
+      "theme": "aurora-borealis",
+      "backgroundMode": "aurora-borealis",
+      "frameAccent": "aurora-crown",
+      "description": "Challenge stages keep the configured Aurora background family rather than reverting to a special hardcoded board."
+    }
+  ],
+  "shipCatalog": [
+    {
+      "id": "player-fighter",
+      "name": "Player Fighter",
+      "type": "player",
+      "families": "player ship",
+      "appears": "Every standard and challenge stage as the main player ship.",
+      "context": "Primary player-controlled ship. Can be captured, rescued, and rejoined into dual-fighter mode.",
+      "notes": "The visual baseline for reserve pips, ship loss, rescue, and extra-ship award feedback."
+    },
+    {
+      "id": "dual-fighter",
+      "name": "Dual Fighter",
+      "type": "player state",
+      "families": "joined player pair",
+      "appears": "After a successful rescue join during normal Aurora play.",
+      "context": "A paired player state rather than a separate enemy or pack. Central to Aurora's rescue and trust-fix behavior.",
+      "notes": "Should be documented separately because it changes shot spread, survival logic, and recovery expectations."
+    },
+    {
+      "id": "bee-line",
+      "name": "Bee Line",
+      "type": "enemy",
+      "families": "classic, scorpion, stingray, galboss",
+      "appears": "Lower-pressure enemy line across standard stages, with family reskins tied to stage bands.",
+      "context": "Fast, lighter-value formation and dive enemy. Forms part of the classic opening pressure and remains present through later bands.",
+      "notes": "Uses `type: bee` in gameplay state and changes family art with stage-band progression."
+    },
+    {
+      "id": "but-line",
+      "name": "Butterfly Line",
+      "type": "enemy",
+      "families": "classic, scorpion, stingray, galboss",
+      "appears": "Main non-boss formation rows across standard stages.",
+      "context": "Mid-tier enemy line with higher scoring and more visible board presence than bees.",
+      "notes": "Uses `type: but` in gameplay state and shares family progression with the stage band."
+    },
+    {
+      "id": "boss-line",
+      "name": "Boss / Super Boss",
+      "type": "enemy",
+      "families": "classic, stingray, galboss",
+      "appears": "Top formation row in standard stages, with later themed boss families and archetypes.",
+      "context": "Higher-health enemy that can dive solo or with escorts and is central to capture/rescue flow.",
+      "notes": "Uses `type: boss`, starts with extra health, and picks up named archetypes like `command-core`, `super-boss-scorpion`, `partner-wing-stingray`, `council-boss`, and `super-partner-pair` through stage presentation."
+    },
+    {
+      "id": "rogue-fighter",
+      "name": "Rogue Fighter",
+      "type": "enemy",
+      "families": "rogue",
+      "appears": "When a captured fighter is converted into an enemy state.",
+      "context": "High-value special case enemy tied directly to the capture lifecycle.",
+      "notes": "Uses `type: rogue` and its own dedicated family/visual treatment rather than the standard band families."
+    },
+    {
+      "id": "challenge-dragonfly",
+      "name": "Challenge Dragonfly Family",
+      "type": "challenge enemy family",
+      "families": "dragonfly",
+      "appears": "Challenge stages from stage 11 onward until the mosquito family takes over.",
+      "context": "Challenge-only presentation family used to make bonus-stage waves feel distinct from the normal rack.",
+      "notes": "Not a separate gameplay `type`; it is a challenge-family skin applied to challenge enemies."
+    },
+    {
+      "id": "challenge-mosquito",
+      "name": "Challenge Mosquito Family",
+      "type": "challenge enemy family",
+      "families": "mosquito",
+      "appears": "Late challenge stages from stage 19 onward.",
+      "context": "Late challenge-family visual used for stronger bonus-stage identity deeper into the Aurora progression.",
+      "notes": "Like dragonfly, this is a challenge-family presentation layer rather than a new base gameplay type."
+    }
+  ],
+  "stageFamilies": [
+    {
+      "band": "quiet-skies",
+      "fromStage": "1",
+      "families": "bee classic · but classic · boss classic · challenge classic",
+      "bossArchetype": "command-core",
+      "description": "Classic opening Aurora band. Closest to original Galaga feel in stars, enemy look, and cadence."
+    },
+    {
+      "band": "scorpion-dawn",
+      "fromStage": "4",
+      "families": "bee scorpion · but scorpion · boss classic · challenge classic",
+      "bossArchetype": "super-boss-scorpion",
+      "description": "First Aurora-flavored band. Adds scorpion family visuals while keeping the challenge family conservative."
+    },
+    {
+      "band": "stingray-surge",
+      "fromStage": "8",
+      "families": "bee stingray · but stingray · boss stingray · challenge dragonfly",
+      "bossArchetype": "partner-wing-stingray",
+      "description": "Main later-stage Aurora band where both background and audio identity shift clearly away from the classic opening."
+    },
+    {
+      "band": "galboss-veil",
+      "fromStage": "12",
+      "families": "bee galboss · but galboss · boss galboss · challenge dragonfly",
+      "bossArchetype": "council-boss",
+      "description": "Heavier late-stage band with the galboss family and stronger aurora presentation."
+    },
+    {
+      "band": "crown-aurora",
+      "fromStage": "16",
+      "families": "bee galboss · but galboss · boss galboss · challenge mosquito",
+      "bossArchetype": "super-partner-pair",
+      "description": "Late Aurora crown band tying the strongest shell/front-door identity back into the deeper stage family."
+    }
+  ],
+  "graphicsControls": [
+    {
+      "label": "Graphics Theme",
+      "values": "auto, classic-arcade, aurora-hint, aurora-borealis, aurora-crown",
+      "description": "Developer override for the visual atmosphere family. It changes rendered backgrounds and starfield profiles without changing the resolved audio theme."
+    },
+    {
+      "label": "Starfield Intensity",
+      "values": "0.5 to 1.8",
+      "description": "Multiplier applied to star brightness so we can tune classic visibility against reference material without rewriting the base theme."
+    },
+    {
+      "label": "Starfield Speed",
+      "values": "0.5 to 1.8",
+      "description": "Multiplier applied to live starfield speed so we can compare Aurora against classic Galaga movement references."
+    }
+  ],
+  "links": [
+    {
+      "label": "Hosted Project Guide",
+      "href": "project-guide.html",
+      "detail": "Overall project, release, and platform/application boundary guide."
+    },
+    {
+      "label": "Hosted Platinum Guide",
+      "href": "platinum-guide.html",
+      "detail": "Platform-owned structure, responsibilities, and release lane model."
+    },
+    {
+      "label": "Hosted Player Guide",
+      "href": "player-guide.html",
+      "detail": "Current user-facing play and controls guide."
+    },
+    {
+      "label": "Galaga Reference Baseline",
+      "href": "https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md",
+      "detail": "Catalog of visual and motion references used for Aurora tuning, including the stage-play reference video stills."
+    }
+  ]
+}

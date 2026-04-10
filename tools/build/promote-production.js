@@ -15,6 +15,7 @@ const FILES = [
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'application-guide.html',
   'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
@@ -111,6 +112,7 @@ if(fs.existsSync(BETA_BUILD_INFO)){
   fs.writeFileSync(PRODUCTION_BUILD_INFO, JSON.stringify(productionInfo, null, 2) + '\n');
   rewriteProductionText(path.join(DIST_PRODUCTION, 'index.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'project-guide.html'), sourceInfo, productionInfo);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'application-guide.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'platinum-guide.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'player-guide.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo);

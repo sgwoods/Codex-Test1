@@ -556,6 +556,15 @@ window.__galagaHarness__={
    cells
   };
  },
+ audioHistory(limit=12){
+  const history=(window.__platinumAudioDebug||window.__auroraAudioDebug)?.history||[];
+  return history.slice(Math.max(0,history.length-Math.max(1,+limit||12)));
+ },
+ triggerAudioCue(name,opts={}){
+  if(!name)return null;
+  if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  return (window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null;
+ },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {

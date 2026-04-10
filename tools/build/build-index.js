@@ -9,6 +9,7 @@ const {
   DEV_INDEX,
   DEV_DASHBOARD,
   DEV_PROJECT_GUIDE,
+  DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
   DEV_PLAYER_GUIDE,
   DEV_BUILD_INFO,
@@ -17,6 +18,7 @@ const {
   PRODUCTION_INDEX,
   PRODUCTION_DASHBOARD,
   PRODUCTION_PROJECT_GUIDE,
+  PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
   PRODUCTION_PLAYER_GUIDE,
   PRODUCTION_BUILD_INFO,
@@ -30,6 +32,7 @@ const SCRIPT_DIR = path.join(SRC, 'js');
 const TEMPLATE = path.join(SRC, 'index.template.html');
 const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
+const APPLICATION_GUIDE_TEMPLATE = path.join(SRC, 'application-guide.template.html');
 const PLATINUM_GUIDE_TEMPLATE = path.join(SRC, 'platinum-guide.template.html');
 const PLAYER_GUIDE_TEMPLATE = path.join(SRC, 'player-guide.template.html');
 const STYLES = path.join(SRC, 'styles.css');
@@ -39,12 +42,14 @@ const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js',
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
+const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
   'dist/dev/project-guide.html',
+  'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
   'dist/dev/player-guide.html',
   'dist/dev/build-info.json',
@@ -56,6 +61,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/index.html',
   'dist/production/release-dashboard.html',
   'dist/production/project-guide.html',
+  'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
   'dist/production/player-guide.html',
   'dist/production/build-info.json',
@@ -66,6 +72,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/index.html',
   'dist/beta/release-dashboard.html',
   'dist/beta/project-guide.html',
+  'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
   'dist/beta/player-guide.html',
   'dist/beta/build-info.json',
@@ -78,12 +85,14 @@ const GENERATED_BUILD_PATHS = new Set([
   'index.html',
   'release-dashboard.html',
   'project-guide.html',
+  'application-guide.html',
   'platinum-guide.html',
   'player-guide.html',
   'build-info.json',
   'dev/index.html',
   'dev/release-dashboard.html',
   'dev/project-guide.html',
+  'dev/application-guide.html',
   'dev/platinum-guide.html',
   'dev/player-guide.html',
   'dev/build-info.json',
@@ -91,6 +100,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/index.html',
   'beta/release-dashboard.html',
   'beta/project-guide.html',
+  'beta/application-guide.html',
   'beta/platinum-guide.html',
   'beta/player-guide.html',
   'beta/build-info.json',
@@ -207,6 +217,37 @@ function loadPlatinumGuide(){
   );
 }
 
+function loadApplicationGuide(){
+  try{
+    const raw = JSON.parse(read(APPLICATION_GUIDE));
+    return {
+      title: raw.title || 'Aurora Application Guide',
+      strapline: raw.strapline || '',
+      currentGoal: raw.currentGoal || '',
+      audioContexts: Array.isArray(raw.audioContexts) ? raw.audioContexts : [],
+      graphicsThemes: Array.isArray(raw.graphicsThemes) ? raw.graphicsThemes : [],
+      graphicsContexts: Array.isArray(raw.graphicsContexts) ? raw.graphicsContexts : [],
+      shipCatalog: Array.isArray(raw.shipCatalog) ? raw.shipCatalog : [],
+      stageFamilies: Array.isArray(raw.stageFamilies) ? raw.stageFamilies : [],
+      graphicsControls: Array.isArray(raw.graphicsControls) ? raw.graphicsControls : [],
+      links: Array.isArray(raw.links) ? raw.links : []
+    };
+  }catch{
+    return {
+      title: 'Aurora Application Guide',
+      strapline: 'Add application-guide.json to restore the generated application catalog.',
+      currentGoal: '',
+      audioContexts: [],
+      graphicsThemes: [],
+      graphicsContexts: [],
+      shipCatalog: [],
+      stageFamilies: [],
+      graphicsControls: [],
+      links: []
+    };
+  }
+}
+
 function loadPlayerGuide(){
   try{
     const raw = JSON.parse(read(PLAYER_GUIDE));
@@ -224,6 +265,13 @@ function loadPlayerGuide(){
       sections: []
     };
   }
+}
+
+function escJsonForScript(value){
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
 }
 
 function git(args, fallback = ''){
@@ -895,6 +943,116 @@ function projectGuideStyles(){
   `.trim();
 }
 
+function applicationGuideStyles(){
+  return `
+    .previewNote{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      color:var(--soft);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .audioAction{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:106px;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(105,226,167,0.34);
+      background:rgba(105,226,167,0.14);
+      color:var(--text);
+      font:inherit;
+      font-size:13px;
+      letter-spacing:.04em;
+      cursor:pointer;
+    }
+    .audioAction:hover{
+      background:rgba(105,226,167,0.2);
+    }
+    .audioStatus{
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(6,15,24,0.72);
+      border:1px solid rgba(122,195,255,0.18);
+      color:#d9f6ff;
+      font-size:14px;
+      line-height:1.55;
+    }
+    .audioStatus.error{
+      border-color:rgba(255,128,128,0.3);
+      color:#ffd8d8;
+    }
+    .toneTag,.swatchTag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      font-size:12px;
+      color:#eef8ff;
+      margin:0 8px 8px 0;
+    }
+    .toneTag code,.swatchTag code{
+      background:none;
+      padding:0;
+      color:inherit;
+    }
+    .swatch{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.35);
+      box-shadow:0 0 0 4px rgba(255,255,255,0.04);
+    }
+    .visualGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
+    }
+    .visualCard{
+      padding:18px;
+      border-radius:20px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .visualCard h3{
+      margin:0 0 10px;
+      font-size:18px;
+    }
+    .visualCard p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .visualMeta{
+      display:grid;
+      gap:8px;
+      font-size:13px;
+      color:var(--soft);
+    }
+    .visualMeta strong{
+      color:#eff7ff;
+      font-weight:600;
+    }
+    .previewFrame{
+      position:absolute;
+      width:1px;
+      height:1px;
+      opacity:0;
+      pointer-events:none;
+      border:0;
+      inset:auto auto 0 0;
+    }
+  `.trim();
+}
+
 function statusLabel(status){
   if(status === 'done') return 'Completed';
   if(status === 'in_progress') return 'In Progress';
@@ -1196,6 +1354,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
@@ -1222,6 +1381,317 @@ function buildProjectGuide(buildInfo, latestNote, guide){
     .replace('{{PROJECT_GUIDE_TITLE}}', esc(guide.title || 'Project Guide'))
     .replace('{{PROJECT_GUIDE_STYLES}}', projectGuideStyles())
     .replace('{{PROJECT_GUIDE_BODY}}', body)
+    .trimEnd() + '\n';
+}
+
+function buildApplicationGuide(buildInfo, latestNote, guide){
+  const template = read(APPLICATION_GUIDE_TEMPLATE);
+  const tocItems = [
+    { id: 'audio-catalog', title: 'Audio Catalog' },
+    { id: 'visual-themes', title: 'Visual Themes' },
+    { id: 'visual-contexts', title: 'Graphics Contexts' },
+    { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
+    { id: 'stage-families', title: 'Stage Family Progression' },
+    { id: 'graphics-controls', title: 'Graphics Controls' },
+    { id: 'guide-links', title: 'Related Guides' }
+  ];
+  const toc = tocItems.map(section => `
+    <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
+  `).join('\n');
+  const audioRows = (guide.audioContexts || []).map((entry, index) => `
+    <tr>
+      <td><strong>${esc(entry.context || '')}</strong><br><span class="docMeta">${esc(entry.label || '')}</span></td>
+      <td><code>${esc(entry.cue || '')}</code></td>
+      <td><code>${esc(entry.phase || '')}</code></td>
+      <td><code>${esc(entry.audioTheme || '')}</code></td>
+      <td>${esc(entry.description || '')}</td>
+      <td><button class="audioAction" type="button" data-audio-index="${index}">Play Sound</button></td>
+    </tr>
+  `).join('\n');
+  const themeCards = (guide.graphicsThemes || []).map((entry) => `
+    <article class="visualCard">
+      <h3>${esc(entry.label || entry.id || '')}</h3>
+      <p>${esc(entry.description || '')}</p>
+      <div>
+        ${(entry.swatches || []).map(color => `
+          <span class="swatchTag"><span class="swatch" style="background:${esc(color)}"></span><code>${esc(color)}</code></span>
+        `).join('')}
+      </div>
+      <div class="visualMeta">
+        <div><strong>Theme Id:</strong> <code>${esc(entry.id || '')}</code></div>
+        <div><strong>Group:</strong> ${esc(entry.group || '')}</div>
+        <div><strong>Audio Theme:</strong> <code>${esc(entry.audioTheme || '')}</code></div>
+        <div><strong>Backgrounds:</strong> ${esc(entry.backgrounds || '')}</div>
+        <div><strong>Starfield:</strong> <code>${esc(entry.starfieldProfile || '')}</code> · ${esc(String(entry.starfieldCount || ''))} stars</div>
+        <div><strong>Alpha:</strong> ${esc(entry.alpha || '')}</div>
+        <div><strong>Speed:</strong> ${esc(entry.speed || '')}</div>
+      </div>
+    </article>
+  `).join('\n');
+  const contextCards = (guide.graphicsContexts || []).map((entry) => `
+    <article class="visualCard">
+      <h3>${esc(entry.label || '')}</h3>
+      <p>${esc(entry.description || '')}</p>
+      <div class="visualMeta">
+        <div><strong>Phase:</strong> <code>${esc(entry.phase || '')}</code></div>
+        <div><strong>Theme:</strong> <code>${esc(entry.theme || '')}</code></div>
+        <div><strong>Background Mode:</strong> <code>${esc(entry.backgroundMode || '')}</code></div>
+        <div><strong>Frame Accent:</strong> <code>${esc(entry.frameAccent || '')}</code></div>
+      </div>
+    </article>
+  `).join('\n');
+  const shipRows = (guide.shipCatalog || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.type || '')}</span></td>
+      <td>${esc(entry.families || '')}</td>
+      <td>${esc(entry.appears || '')}</td>
+      <td>${esc(entry.context || '')}</td>
+      <td>${esc(entry.notes || '')}</td>
+    </tr>
+  `).join('\n');
+  const stageFamilyRows = (guide.stageFamilies || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.band || '')}</strong><br><span class="docMeta">from stage ${esc(entry.fromStage || '')}</span></td>
+      <td>${esc(entry.families || '')}</td>
+      <td><code>${esc(entry.bossArchetype || '')}</code></td>
+      <td>${esc(entry.description || '')}</td>
+    </tr>
+  `).join('\n');
+  const controlRows = (guide.graphicsControls || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || '')}</strong></td>
+      <td>${esc(entry.values || '')}</td>
+      <td>${esc(entry.description || '')}</td>
+    </tr>
+  `).join('\n');
+  const linkCards = (guide.links || []).map((link) => `
+    <article class="linkCard">
+      <h3><a href="${esc(link.href || '#')}">${esc(link.label || '')}</a></h3>
+      <p>${esc(link.detail || '')}</p>
+    </article>
+  `).join('\n');
+  const guideDataJson = escJsonForScript({ audioContexts: guide.audioContexts || [] });
+  const body = `
+    <main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">Aurora Application Guide</span>
+            <a class="homeLink" href="index.html">Open current lane build</a>
+            <a class="homeLink" href="project-guide.html">Project guide</a>
+          </div>
+          <h1>${esc(guide.title || 'Aurora Application Guide')}</h1>
+          <p>${esc(guide.strapline || '')}</p>
+          <div class="goal"><strong>Guide focus:</strong> ${esc(guide.currentGoal || '')}</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">${esc(buildInfo.version)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">${esc(publicDateLong(buildInfo))}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Latest Note</span>
+              <span class="metaValue">${esc(latestNote.title)}</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="platinum-guide.html">Open Platinum guide</a>
+            <a class="button" href="player-guide.html">Open player guide</a>
+          </div>
+          <div class="previewNote">
+            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora cues through the real in-game audio engine instead of a separate mock player. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
+          </div>
+          <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
+        </section>
+
+        <section class="section" id="audio-catalog">
+          <div class="sectionHeader">
+            <h2>Audio Catalog</h2>
+            <p>Every currently documented Aurora sound context, grouped by where it appears in the application and playable directly from this page.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Context</th>
+                  <th>Cue</th>
+                  <th>Phase</th>
+                  <th>Theme</th>
+                  <th>Description</th>
+                  <th>Preview</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${audioRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="visual-themes">
+          <div class="sectionHeader">
+            <h2>Visual Themes</h2>
+            <p>The main atmosphere families that Aurora currently uses for front-door identity, classic play, and later-stage Aurora presentation.</p>
+          </div>
+          <div class="visualGrid">
+            ${themeCards}
+          </div>
+        </section>
+
+        <section class="section" id="visual-contexts">
+          <div class="sectionHeader">
+            <h2>Graphics Contexts</h2>
+            <p>How the visual themes are actually applied across front door, wait mode, standard stages, and challenge stages.</p>
+          </div>
+          <div class="visualGrid">
+            ${contextCards}
+          </div>
+        </section>
+
+        <section class="section" id="ship-catalog">
+          <div class="sectionHeader">
+            <h2>Ship And Enemy Catalog</h2>
+            <p>The player ship, dual-fighter state, base enemy types, and challenge-family presentations that currently make up Aurora's live board.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Ship / Type</th>
+                  <th>Families / Presentation</th>
+                  <th>Where It Appears</th>
+                  <th>Gameplay Context</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${shipRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="stage-families">
+          <div class="sectionHeader">
+            <h2>Stage Family Progression</h2>
+            <p>How Aurora changes the visible enemy families and named boss archetypes as stage bands advance.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Stage Band</th>
+                  <th>Families In Use</th>
+                  <th>Boss Archetype</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${stageFamilyRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="graphics-controls">
+          <div class="sectionHeader">
+            <h2>Developer Graphics Controls</h2>
+            <p>The current developer-facing graphics controls that let us tune and compare Aurora presentation without changing the application-owned audio resolution.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Control</th>
+                  <th>Values</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${controlRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="guide-links">
+          <div class="sectionHeader">
+            <h2>Related Guides</h2>
+            <p>Cross-links to the rest of the generated documentation and the maintained reference baseline.</p>
+          </div>
+          <div class="linkGrid">
+            ${linkCards}
+          </div>
+        </section>
+      </div>
+      <aside class="toc">
+        <h2>Application Index</h2>
+        <p>This page is generated during the normal build so the Aurora application guide stays aligned with the current lane build and the maintained application documentation manifest.</p>
+        <ul>
+          ${toc}
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>${esc(latestNote.title)}</strong><br>
+          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+        </p>
+      </aside>
+    </main>
+    <iframe id="audioPreviewFrame" class="previewFrame" title="Aurora audio preview frame" src="index.html?docsPreview=1"></iframe>
+    <script id="applicationGuideData" type="application/json">${guideDataJson}</script>
+    <script>
+      (function(){
+        const data = JSON.parse(document.getElementById('applicationGuideData').textContent || '{}');
+        const frame = document.getElementById('audioPreviewFrame');
+        const status = document.getElementById('audioPreviewStatus');
+        let ready = false;
+        function setStatus(text, isError){
+          status.textContent = text;
+          status.classList.toggle('error', !!isError);
+        }
+        function previewApi(){
+          const win = frame && frame.contentWindow;
+          return win && win.__auroraDocsPreview ? win.__auroraDocsPreview : null;
+        }
+        function markReady(){
+          ready = !!previewApi();
+          if(ready) setStatus('Preview frame ready. Sound buttons will play Aurora cues through the current lane build.');
+          else setStatus('Preview frame loaded, but the audio preview bridge is not ready yet.', true);
+        }
+        frame.addEventListener('load', markReady);
+        window.addEventListener('load', function(){ setTimeout(markReady, 300); });
+        document.addEventListener('click', function(event){
+          const button = event.target.closest('[data-audio-index]');
+          if(!button) return;
+          const index = Number(button.getAttribute('data-audio-index'));
+          const entry = (data.audioContexts || [])[index];
+          if(!entry) return;
+          const api = previewApi();
+          if(!api || typeof api.playCue !== 'function'){
+            setStatus('Preview frame is not ready yet. Let the page finish loading and try again.', true);
+            return;
+          }
+          try{
+            api.playCue(entry.preview || {});
+            setStatus('Played ' + (entry.label || entry.cue || 'preview') + ' from the Aurora application guide.');
+          }catch(err){
+            setStatus('Audio preview failed: ' + (err && err.message ? err.message : String(err)), true);
+          }
+        });
+      })();
+    </script>
+  `.trim();
+  return template
+    .replace('{{APPLICATION_GUIDE_STYLES}}', `${projectGuideStyles()}\n${applicationGuideStyles()}`)
+    .replace('{{APPLICATION_GUIDE_BODY}}', body)
     .trimEnd() + '\n';
 }
 
@@ -1266,6 +1736,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -1333,6 +1804,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Play production build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Play beta build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/issues">Report or track issues</a>
           </div>
@@ -1388,6 +1860,7 @@ function lanePaths(lane){
       index: PRODUCTION_INDEX,
       dashboard: PRODUCTION_DASHBOARD,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
+      applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
       playerGuide: PRODUCTION_PLAYER_GUIDE,
       buildInfo: PRODUCTION_BUILD_INFO,
@@ -1400,6 +1873,7 @@ function lanePaths(lane){
     index: DEV_INDEX,
     dashboard: DEV_DASHBOARD,
     projectGuide: DEV_PROJECT_GUIDE,
+    applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
     playerGuide: DEV_PLAYER_GUIDE,
     buildInfo: DEV_BUILD_INFO,
@@ -1443,6 +1917,7 @@ function build(options = {}){
   const releaseNotes = loadReleaseNotes();
   const releaseDashboard = loadReleaseDashboard();
   const projectGuide = loadProjectGuide();
+  const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
   const playerGuide = loadPlayerGuide();
   const latestNote = releaseNotes[0] || {
@@ -1525,6 +2000,7 @@ function build(options = {}){
   fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
   fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
+  fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
   fs.writeFileSync(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
   fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
@@ -1537,6 +2013,7 @@ function build(options = {}){
     out.index,
     out.dashboard,
     out.projectGuide,
+    out.applicationGuide,
     out.platinumGuide,
     out.playerGuide,
     out.buildInfo,

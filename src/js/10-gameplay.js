@@ -24,6 +24,12 @@ function update(dt){
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
+  ATTRACT.audioPulseTimer=Math.max(0,(+ATTRACT.audioPulseTimer||0)-dt);
+  if(!ATTRACT.audioPulseTimer){
+   const phase=ATTRACT.phase==='scores'?'wait':'demo';
+   sfx.attractPulse(phase,ATTRACT.audioPulseIndex++);
+   ATTRACT.audioPulseTimer=phase==='wait'?2.6:2.15;
+  }
   if(ATTRACT.phase==='scores'){
    ATTRACT.scoreViewTimer=Math.max(0,(+ATTRACT.scoreViewTimer||0)-dt);
    if(!ATTRACT.scoreViewTimer&&ATTRACT.scoreViews.length>1){

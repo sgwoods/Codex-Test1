@@ -44,6 +44,7 @@ const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
+const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
@@ -441,7 +442,7 @@ let gameOverHtml='';
 let gameOverState=null;
 let harnessFrameAccum=0;
 let harnessClockControlled=0;
-const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5};
+const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5,audioPulseTimer:0,audioPulseIndex:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=1;
@@ -543,26 +544,28 @@ const sfx={
   return cue;
  },
  playCue(name,opts={}){
+  if(DOCS_PREVIEW_MODE&&!opts.docsPreview)return;
   const cue=this.cueDef(name,opts);
   if(!cue)return;
-  if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600);
+  const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
+  if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
-   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0);
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
   }
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
-   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0);
+   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0,allowIdle);
   }
  },
- play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
+ play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
   o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);
   o.connect(lp);o2.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);
  },
- noise(d=.08,v=.02,hp=900,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
+ noise(d=.08,v=.02,hp=900,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
   src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(this.bus);src.start(tm);src.stop(tm+d+.01);
  },
- seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92)},
+ seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600,allowIdle=0){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92,allowIdle)},
  start(){this.playCue('gameStart',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
  shot(){this.playCue('playerShot',{phase:S.challenge?'challenge':'stage'})},
  enemyShot(){this.playCue('enemyShot',{phase:S.challenge?'challenge':'stage'})},
@@ -579,7 +582,70 @@ const sfx={
  uiConfirm(){this.playCue('uiConfirm',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
  captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
  join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
- transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})}
+ transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})},
+ attractEnter(phase='demo'){
+  const frontDoorTheme=currentGamePack()?.frontDoor?.atmosphereTheme||'';
+  this.playCue('attractEnter',{
+   phase,
+   allowIdle:1,
+   atmosphereTheme:(phase==='wait'||phase==='demo')?frontDoorTheme:''
+  });
+ },
+ attractPulse(phase='demo',variant=0){this.playCue('attractPulse',{phase,variant,allowIdle:1})}
+};
+
+window.__auroraDocsPreview=window.__platinumDocsPreview={
+ ready(){
+  return typeof currentGamePackAudioCue==='function';
+ },
+ playCue(payload={}){
+  const cue=String(payload.cue||'').trim();
+  if(!cue)throw new Error('Missing cue for Aurora docs preview.');
+  if(typeof installGamePack==='function'&&typeof currentGamePackKey==='function'&&currentGamePackKey()!=='aurora-galactica'){
+   installGamePack('aurora-galactica',{persist:false});
+  }
+  try{
+   AC();
+   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
+  }catch{}
+  const phase=String(payload.phase||'stage').trim()||'stage';
+  const atmosphereTheme=String(payload.atmosphereTheme||'').trim();
+  const attractPhase=payload.attractPhase!==undefined
+   ? String(payload.attractPhase||'')
+   : phase==='wait'?'scores':phase==='demo'?'demo':'';
+  const frontDoor=payload.frontDoor!==undefined?!!payload.frontDoor:phase==='frontDoor';
+  const challenge=!!payload.challenge;
+  const variant=Number.isFinite(+payload.variant)?(+payload.variant|0):0;
+  const pack=typeof currentGamePack==='function'?currentGamePack():null;
+  const stagePresentation=payload.stagePresentation||(
+   atmosphereTheme
+    ? {
+      atmosphereTheme,
+      backgroundMode:typeof resolvePackAtmosphereBackground==='function'
+       ? resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:phase==='frontDoor'?'frontDoor':phase})
+       : ''
+     }
+    : null
+  );
+  sfx.playCue(cue,{
+   phase,
+   atmosphereTheme,
+   stagePresentation,
+   challenge,
+   variant,
+   frontDoor,
+   attractPhase,
+   allowIdle:1,
+   docsPreview:1
+  });
+  return Object.freeze({
+   cue,
+   phase,
+   atmosphereTheme:atmosphereTheme||stagePresentation?.atmosphereTheme||'',
+   challenge,
+   variant
+  });
+ }
 };
 
 const P={
@@ -858,10 +924,13 @@ function enterAttractScores(){
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewDwell=4.5;
  ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell;
+ ATTRACT.audioPulseTimer=.95;
+ ATTRACT.audioPulseIndex=0;
  ATTRACT.timer=Math.max(ATTRACT.scoreViewDwell*ATTRACT.scoreViews.length,9);
  S.attract=1;
  resetAttractBackdrop();
  if(typeof prefetchLeaderboards==='function')prefetchLeaderboards(1);
+ sfx.attractEnter('wait');
  logEvent('attract_scores',{cycle:ATTRACT.cycle});
 }
 function startAttractDemo(opts={}){
@@ -881,12 +950,15 @@ function startAttractDemo(opts={}){
  ATTRACT.scoreViews=['all','validated'];
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewTimer=0;
+ ATTRACT.audioPulseTimer=.8;
+ ATTRACT.audioPulseIndex=0;
  ATTRACT.cycle++;
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
  logEvent('attract_demo_start',{cycle:ATTRACT.cycle,record});
+ sfx.attractEnter('demo');
  if(record)startRunRecording();
  spawnStage();
 }
@@ -898,6 +970,8 @@ function stopAttractLoop(){
  ATTRACT.scoreViews=['all','validated'];
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewTimer=0;
+ ATTRACT.audioPulseTimer=0;
+ ATTRACT.audioPulseIndex=0;
  S.attract=0;
  syncPauseUi();
 }
