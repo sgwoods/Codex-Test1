@@ -76,14 +76,14 @@ async function main(){
   const buildInfo = readJson(BUILD_INFO);
   const dashboard = readJson(RELEASE_DASHBOARD);
   const pushedAt = repoPushedAt(buildInfo);
-  const dateLong = publicDateLong(pushedAt);
+  const releaseStamp = buildInfo.builtAtEt || buildInfo.released || publicDateLong(pushedAt);
   const expectedFocus = dashboard.currentFocus || '';
   const projectHtml = await getContent(`${CANONICAL_PROJECT_SLUG}.html`);
   const legacyProjectHtml = await getContent(`${LEGACY_PROJECT_SLUG}.html`);
   const manifest = JSON.parse(await getContent(`data/projects/${CANONICAL_PROJECT_SLUG}.json`));
   const legacyManifest = JSON.parse(await getContent(`data/projects/${LEGACY_PROJECT_SLUG}.json`));
 
-  ensureIncludes(projectHtml, `<span class="metaValue">${dateLong}</span>`, `public/${CANONICAL_PROJECT_SLUG}.html date`);
+  ensureIncludes(projectHtml, `<span class="metaValue">${releaseStamp}</span>`, `public/${CANONICAL_PROJECT_SLUG}.html release stamp`);
   ensureIncludes(projectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `public/${CANONICAL_PROJECT_SLUG}.html release version`);
   ensureIncludes(projectHtml, expectedFocus, `public/${CANONICAL_PROJECT_SLUG}.html current focus`);
   ensureIncludes(projectHtml, 'release-dashboard.html', `public/${CANONICAL_PROJECT_SLUG}.html dashboard link`);
@@ -111,7 +111,7 @@ async function main(){
   if(legacyManifest.dashboard_url !== 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html') throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json dashboard_url`);
   if(legacyManifest.experience_url !== 'https://sgwoods.github.io/Aurora-Galactica/') throw new Error(`Public sync verification failed for data/projects/${LEGACY_PROJECT_SLUG}.json experience_url`);
 
-  console.log(`Verified Aurora canonical and legacy public assets match release ${buildInfo.version} dated ${dateLong}`);
+  console.log(`Verified Aurora canonical and legacy public assets match release ${buildInfo.version} stamped ${releaseStamp}`);
 }
 
 main().catch(err => {
