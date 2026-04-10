@@ -225,6 +225,7 @@ function loadApplicationGuide(){
       strapline: raw.strapline || '',
       currentGoal: raw.currentGoal || '',
       audioContexts: Array.isArray(raw.audioContexts) ? raw.audioContexts : [],
+      comparisonSets: Array.isArray(raw.comparisonSets) ? raw.comparisonSets : [],
       graphicsThemes: Array.isArray(raw.graphicsThemes) ? raw.graphicsThemes : [],
       graphicsContexts: Array.isArray(raw.graphicsContexts) ? raw.graphicsContexts : [],
       shipCatalog: Array.isArray(raw.shipCatalog) ? raw.shipCatalog : [],
@@ -238,6 +239,7 @@ function loadApplicationGuide(){
       strapline: 'Add application-guide.json to restore the generated application catalog.',
       currentGoal: '',
       audioContexts: [],
+      comparisonSets: [],
       graphicsThemes: [],
       graphicsContexts: [],
       shipCatalog: [],
@@ -1388,6 +1390,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
     { id: 'audio-catalog', title: 'Audio Catalog' },
+    { id: 'theme-comparison', title: 'Theme Comparison' },
     { id: 'visual-themes', title: 'Visual Themes' },
     { id: 'visual-contexts', title: 'Graphics Contexts' },
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
@@ -1407,6 +1410,19 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.listenFor || '')}</td>
       <td>${esc(entry.description || '')}</td>
       <td><button class="audioAction" type="button" data-audio-index="${index}">Play Sound</button></td>
+    </tr>
+  `).join('\n');
+  const comparisonRows = (guide.comparisonSets || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || '')}</strong></td>
+      <td>${esc(entry.focus || '')}</td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="ab">Compare A/B</button>
+        </div>
+      </td>
     </tr>
   `).join('\n');
   const themeCards = (guide.graphicsThemes || []).map((entry) => `
@@ -1471,7 +1487,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <p>${esc(link.detail || '')}</p>
     </article>
   `).join('\n');
-  const guideDataJson = escJsonForScript({ audioContexts: guide.audioContexts || [] });
+  const guideDataJson = escJsonForScript({
+    audioContexts: guide.audioContexts || [],
+    comparisonSets: guide.comparisonSets || []
+  });
   const body = `
     <main class="shell">
       <div class="main">
@@ -1534,6 +1553,32 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${audioRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="theme-comparison">
+          <div class="sectionHeader">
+            <h2>Theme Comparison</h2>
+            <p>Compare the same gameplay moments side by side. Aurora uses the application-owned mix, while Galaga uses the dedicated reference family for the same cue and phase.</p>
+          </div>
+          <div class="buttonRow" style="margin-bottom:16px;">
+            <button class="audioAction" type="button" data-compare-set="aurora">Play Aurora Set</button>
+            <button class="audioAction" type="button" data-compare-set="galaga">Play Galaga Set</button>
+            <button class="audioAction" type="button" data-compare-set="ab">Compare Full Set</button>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Gameplay Element</th>
+                  <th>What To Compare</th>
+                  <th>Review Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${comparisonRows}
               </tbody>
             </table>
           </div>
@@ -1655,13 +1700,70 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         const frame = document.getElementById('audioPreviewFrame');
         const status = document.getElementById('audioPreviewStatus');
         let ready = false;
+        let pendingTimers = [];
         function setStatus(text, isError){
           status.textContent = text;
           status.classList.toggle('error', !!isError);
         }
+        function clearQueue(){
+          pendingTimers.forEach(id => clearTimeout(id));
+          pendingTimers = [];
+        }
         function previewApi(){
           const win = frame && frame.contentWindow;
           return win && win.__auroraDocsPreview ? win.__auroraDocsPreview : null;
+        }
+        function payloadForTheme(entry, themeKey){
+          const payload = Object.assign({}, entry.preview || {});
+          if(themeKey === 'galaga') payload.audioTheme = 'galaga-original-reference';
+          return payload;
+        }
+        function playEntry(entry, themeKey){
+          const api = previewApi();
+          if(!api || typeof api.playCue !== 'function'){
+            setStatus('Preview frame is not ready yet. Let the page finish loading and try again.', true);
+            return false;
+          }
+          api.playCue(payloadForTheme(entry, themeKey));
+          return true;
+        }
+        function playCompareEntry(entry){
+          clearQueue();
+          if(!playEntry(entry, 'aurora')) return;
+          pendingTimers.push(setTimeout(function(){ playEntry(entry, 'galaga'); }, 1100));
+          setStatus('Playing Aurora then Galaga for ' + (entry.label || entry.cue || 'comparison') + '.');
+        }
+        function playSet(mode){
+          const api = previewApi();
+          if(!api || typeof api.playCue !== 'function'){
+            setStatus('Preview frame is not ready yet. Let the page finish loading and try again.', true);
+            return;
+          }
+          const entryById = new Map((data.audioContexts || []).map(entry => [entry.id, entry]));
+          const setEntries = (data.comparisonSets || []).map(item => entryById.get(item.entryId)).filter(Boolean);
+          clearQueue();
+          if(!setEntries.length){
+            setStatus('No comparison set entries are configured yet.', true);
+            return;
+          }
+          let delay = 0;
+          const gap = 1250;
+          setEntries.forEach(function(entry){
+            if(mode === 'ab'){
+              pendingTimers.push(setTimeout(function(){ playEntry(entry, 'aurora'); }, delay));
+              delay += gap;
+              pendingTimers.push(setTimeout(function(){ playEntry(entry, 'galaga'); }, delay));
+              delay += gap;
+            }else{
+              pendingTimers.push(setTimeout(function(){ playEntry(entry, mode); }, delay));
+              delay += gap;
+            }
+          });
+          setStatus(
+            mode === 'ab'
+              ? 'Playing full Aurora vs Galaga comparison set.'
+              : 'Playing ' + (mode === 'aurora' ? 'Aurora' : 'Galaga') + ' comparison set.'
+          );
         }
         function markReady(){
           ready = !!previewApi();
@@ -1672,20 +1774,37 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         window.addEventListener('load', function(){ setTimeout(markReady, 300); });
         document.addEventListener('click', function(event){
           const button = event.target.closest('[data-audio-index]');
-          if(!button) return;
-          const index = Number(button.getAttribute('data-audio-index'));
-          const entry = (data.audioContexts || [])[index];
-          if(!entry) return;
-          const api = previewApi();
-          if(!api || typeof api.playCue !== 'function'){
-            setStatus('Preview frame is not ready yet. Let the page finish loading and try again.', true);
+          if(button){
+            const index = Number(button.getAttribute('data-audio-index'));
+            const entry = (data.audioContexts || [])[index];
+            if(!entry) return;
+            if(!playEntry(entry, 'aurora')){
+              return;
+            }
+            setStatus('Played ' + (entry.label || entry.cue || 'preview') + ' from the Aurora application guide.');
             return;
           }
-          try{
-            api.playCue(entry.preview || {});
-            setStatus('Played ' + (entry.label || entry.cue || 'preview') + ' from the Aurora application guide.');
-          }catch(err){
-            setStatus('Audio preview failed: ' + (err && err.message ? err.message : String(err)), true);
+          const compareButton = event.target.closest('[data-compare-entry-id]');
+          if(compareButton){
+            const entryId = compareButton.getAttribute('data-compare-entry-id');
+            const mode = compareButton.getAttribute('data-theme-play');
+            const entry = (data.audioContexts || []).find(item => item.id === entryId);
+            if(!entry) return;
+            if(mode === 'ab'){
+              playCompareEntry(entry);
+              return;
+            }
+            if(!playEntry(entry, mode === 'galaga' ? 'galaga' : 'aurora')){
+              return;
+            }
+            setStatus('Played ' + (mode === 'galaga' ? 'Galaga' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
+            return;
+          }
+          const compareSetButton = event.target.closest('[data-compare-set]');
+          if(compareSetButton){
+            const mode = compareSetButton.getAttribute('data-compare-set');
+            playSet(mode === 'galaga' ? 'galaga' : mode === 'ab' ? 'ab' : 'aurora');
+            return;
           }
         });
       })();

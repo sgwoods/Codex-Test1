@@ -277,6 +277,50 @@
       "preview": { "cue": "gameOver", "phase": "results", "atmosphereTheme": "aurora-borealis" }
     }
   ],
+  "comparisonSets": [
+    {
+      "id": "demo-pulse-compare",
+      "label": "Demo Pulse",
+      "entryId": "demo-pulse",
+      "focus": "Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio."
+    },
+    {
+      "id": "stage-start-compare",
+      "label": "Stage Start",
+      "entryId": "stage-start-aurora",
+      "focus": "Compare whether the opening announcement feels like an exciting arcade start or just a functional cue."
+    },
+    {
+      "id": "formation-pulse-compare",
+      "label": "Formation Pulse",
+      "entryId": "formation-pulse-aurora",
+      "focus": "Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play."
+    },
+    {
+      "id": "player-shot-compare",
+      "label": "Player Shot",
+      "entryId": "player-shot-aurora",
+      "focus": "Compare shot energy and how clearly the player weapon reads in the mix."
+    },
+    {
+      "id": "enemy-shot-compare",
+      "label": "Enemy Shot",
+      "entryId": "enemy-shot-aurora",
+      "focus": "Compare threat clarity and whether the enemy projectile cue has enough arcade bite."
+    },
+    {
+      "id": "challenge-transition-compare",
+      "label": "Challenge Transition",
+      "entryId": "challenge-transition",
+      "focus": "Compare how ceremonial and distinct the bonus-stage announcement feels."
+    },
+    {
+      "id": "game-over-compare",
+      "label": "Game Over",
+      "entryId": "game-over",
+      "focus": "Compare whether the ending cue feels final, readable, and emotionally complete."
+    }
+  ],
   "graphicsThemes": [
     {
       "id": "classic-arcade",

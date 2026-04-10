@@ -525,7 +525,7 @@ const sfx={
   return entry;
  },
  cueDef(name,opts={}){
-  const atmosphere=this.resolveAtmosphere(opts);
+  const atmosphere=opts.resolvedAtmosphere||this.resolveAtmosphere(opts);
   const cue=typeof currentGamePackAudioCue==='function'
    ? currentGamePackAudioCue(name,{
     stagePresentation:opts.stagePresentation||S.stagePresentation,
@@ -617,6 +617,7 @@ window.__auroraDocsPreview=window.__platinumDocsPreview={
   const frontDoor=payload.frontDoor!==undefined?!!payload.frontDoor:phase==='frontDoor';
   const challenge=!!payload.challenge;
   const variant=Number.isFinite(+payload.variant)?(+payload.variant|0):0;
+  const audioTheme=String(payload.audioTheme||'').trim();
   const pack=typeof currentGamePack==='function'?currentGamePack():null;
   const stagePresentation=payload.stagePresentation||(
    atmosphereTheme
@@ -628,10 +629,20 @@ window.__auroraDocsPreview=window.__platinumDocsPreview={
      }
     : null
   );
+  const resolvedAtmosphere=audioTheme
+   ? Object.freeze({
+      id:atmosphereTheme||stagePresentation?.atmosphereTheme||'classic-arcade',
+      phase,
+      audioTheme,
+      backgroundMode:stagePresentation?.backgroundMode||'',
+      group:'docs-preview'
+     })
+   : null;
   sfx.playCue(cue,{
    phase,
    atmosphereTheme,
    stagePresentation,
+   resolvedAtmosphere,
    challenge,
    variant,
    frontDoor,
@@ -643,6 +654,7 @@ window.__auroraDocsPreview=window.__platinumDocsPreview={
    cue,
    phase,
    atmosphereTheme:atmosphereTheme||stagePresentation?.atmosphereTheme||'',
+   audioTheme:audioTheme||resolvedAtmosphere?.audioTheme||'',
    challenge,
    variant
   });
