@@ -1036,7 +1036,7 @@ function resolvedAudioAtmosphere(opts={}){
  const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
  const useGalagaReference=phase==='demo'||phase==='stage'||phase==='challenge'||phase==='results';
  return Object.freeze(Object.assign({},atmosphere,{
-  audioTheme:useGalagaReference?'classic-arcade':(atmosphere?.audioTheme||'aurora-crown'),
+  audioTheme:useGalagaReference?'galaga-original-reference':(atmosphere?.audioTheme||'aurora-crown'),
   audioThemeOverride:selection
  }));
 }

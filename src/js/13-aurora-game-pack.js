@@ -369,6 +369,43 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    }),
    playerHit:Object.freeze({tones:Object.freeze([{freq:262,duration:.12,wave:'triangle',volume:.02,slide:-220,lpHz:2500},{freq:196,duration:.22,wave:'sawtooth',volume:.018,slide:-235,lpHz:1950,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
    gameOver:Object.freeze({seq:[440,349,294,247,196,156],step:.088,wave:'triangle',volume:.0162,slide:-56,lpHz:2320,tones:Object.freeze([{freq:220,duration:.11,wave:'triangle',volume:.0054,slide:-18,lpHz:2600,delay:.01},{freq:165,duration:.18,wave:'triangle',volume:.0062,slide:-26,lpHz:2060,delay:.176},{freq:124,duration:.4,wave:'sawtooth',volume:.0146,slide:-92,lpHz:1780,delay:.258}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])})
+ })
+ }),
+ 'galaga-original-reference':Object.freeze({
+  id:'galaga-original-reference',
+  label:'Galaga Original Reference',
+  cues:Object.freeze({
+   gameStart:Object.freeze({seq:[392,523,659,784,1047],step:.041,wave:'square',volume:.024,slide:20,lpHz:3200,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0052,slide:6,lpHz:1700,delay:0},{freq:392,duration:.08,wave:'square',volume:.0102,slide:10,lpHz:2500,delay:0},{freq:523,duration:.08,wave:'square',volume:.0108,slide:10,lpHz:2800,delay:.041},{freq:784,duration:.1,wave:'triangle',volume:.0072,slide:20,lpHz:3600,delay:.123},{freq:1047,duration:.22,wave:'triangle',volume:.018,slide:62,lpHz:3900,delay:.164}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1240,duration:.038,wave:'square',volume:.0092,slide:-760,detune:.002,lpHz:6600},{freq:1660,duration:.022,wave:'square',volume:.0046,slide:-560,detune:-.003,lpHz:7200,delay:.006}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:306,duration:.09,wave:'square',volume:.0112,slide:-170,detune:.002,lpHz:2800},{freq:228,duration:.06,wave:'triangle',volume:.0054,slide:-120,detune:.001,lpHz:2300,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.058,wave:'square',volume:.014,slide:-240,detune:.004,lpHz:3400},{freq:154,duration:.11,wave:'sawtooth',volume:.016,slide:-220,detune:.008,lpHz:2300,delay:.018}]),noise:Object.freeze([{duration:.05,volume:.0066,hp:1700,delay:.012}])}),
+   stagePulse:Object.freeze({
+    variants:Object.freeze([
+     Object.freeze({tones:Object.freeze([{freq:196,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:392,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:523,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:659,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:165,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:330,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:440,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:523,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:220,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:440,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:587,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:698,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:147,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:294,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:392,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:523,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])})
+    ])
+   }),
+   stageTransition:Object.freeze({seq:[330,440,587,784,988],step:.046,wave:'square',volume:.0136,slide:20,lpHz:3400,tones:Object.freeze([{freq:196,duration:.17,wave:'square',volume:.0038,slide:8,lpHz:1700,delay:0},{freq:659,duration:.08,wave:'square',volume:.0058,slide:-24,lpHz:4200,delay:.046},{freq:988,duration:.14,wave:'triangle',volume:.0066,slide:-34,lpHz:4600,delay:.138}])}),
+   challengeTransition:Object.freeze({seq:[523,659,784,988,1318,1760],step:.042,wave:'square',volume:.0152,slide:28,lpHz:3600,tones:Object.freeze([{freq:262,duration:.18,wave:'square',volume:.0038,slide:10,lpHz:1760,delay:0},{freq:784,duration:.082,wave:'square',volume:.0062,slide:-14,lpHz:4400,delay:.042},{freq:1568,duration:.16,wave:'triangle',volume:.0076,slide:-38,lpHz:4900,delay:.168}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     demo:Object.freeze({seq:[294,392,494,659,784],step:.056,wave:'square',volume:.0108,slide:14,lpHz:3100,tones:Object.freeze([{freq:147,duration:.15,wave:'square',volume:.0032,slide:6,lpHz:1680,delay:0},{freq:784,duration:.086,wave:'square',volume:.0044,slide:-18,lpHz:3900,delay:.168},{freq:988,duration:.074,wave:'triangle',volume:.0044,slide:-8,lpHz:4300,delay:.224}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:294,duration:.07,wave:'square',volume:.0062,slide:8,lpHz:2400},{freq:440,duration:.044,wave:'square',volume:.0034,slide:-12,lpHz:3600,delay:.02},{freq:587,duration:.032,wave:'triangle',volume:.0024,slide:-8,lpHz:4300,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.07,wave:'square',volume:.0062,slide:8,lpHz:2400},{freq:494,duration:.044,wave:'square',volume:.0034,slide:-12,lpHz:3600,delay:.02},{freq:659,duration:.032,wave:'triangle',volume:.0024,slide:-8,lpHz:4300,delay:.042}])})
+      ])
+     })
+    })
+   }),
+   gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.084,wave:'square',volume:.018,slide:-60,lpHz:2200,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0068,slide:-24,lpHz:2500,delay:.01},{freq:124,duration:.2,wave:'triangle',volume:.0072,slide:-34,lpHz:1900,delay:.17},{freq:98,duration:.44,wave:'sawtooth',volume:.0162,slide:-120,lpHz:1720,delay:.254}]),noise:Object.freeze([{duration:.11,volume:.0048,hp:1040,delay:.12}])})
   })
  })
 });

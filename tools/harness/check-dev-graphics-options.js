@@ -45,7 +45,7 @@ async function main(){
   if(result.forcedClassic.renderDebug?.backgroundMode !== 'classic-stars') fail('forced classic graphics theme did not switch the rendered background back to classic stars', result);
 
   if(result.galagaReference.audio?.audioTheme !== 'galaga-original-reference') fail('audio theme override did not persist into developer settings state', result);
-  if(result.galagaReference.atmosphere?.audioTheme !== 'classic-arcade') fail('Galaga original reference audio theme did not force classic gameplay audio resolution', result);
+  if(result.galagaReference.atmosphere?.audioTheme !== 'galaga-original-reference') fail('Galaga original reference audio theme did not force the dedicated Galaga gameplay audio resolution', result);
   if(result.galagaReference.visualAtmosphere?.id !== 'aurora-borealis') fail('audio theme override leaked into visual atmosphere selection; it should stay audio-only', result);
 
   console.log(JSON.stringify({
