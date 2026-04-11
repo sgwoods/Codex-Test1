@@ -1,7 +1,7 @@
 {
   "title": "Aurora Application Guide",
   "strapline": "A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing presentation controls that shape the live game presentation.",
-  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, and treat the original Galaga labeled-sound catalog as a gameplay-phase reference theme family (`galaga-original-reference`) for future selectable audio work.",
+  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, use the Galaga cue matrix to map real reference clips against Aurora states, and treat the current `galaga-original-reference` runtime option as a synthetic approximation rather than true asset playback.",
   "audioContexts": [
     {
       "id": "front-door-tick",
@@ -12,7 +12,11 @@
       "audioTheme": "aurora-crown",
       "listenFor": "Light Aurora shell tick, not gameplay urgency.",
       "description": "Subtle front-door navigation tick for Aurora-owned shell identity surfaces.",
-      "preview": { "cue": "uiTick", "phase": "frontDoor", "atmosphereTheme": "aurora-crown" }
+      "preview": {
+        "cue": "uiTick",
+        "phase": "frontDoor",
+        "atmosphereTheme": "aurora-crown"
+      }
     },
     {
       "id": "front-door-confirm",
@@ -23,7 +27,11 @@
       "audioTheme": "aurora-crown",
       "listenFor": "Short confirm flourish with a polished shell feel.",
       "description": "Confirmation cue for front-door and shell-level Aurora selections.",
-      "preview": { "cue": "uiConfirm", "phase": "frontDoor", "atmosphereTheme": "aurora-crown" }
+      "preview": {
+        "cue": "uiConfirm",
+        "phase": "frontDoor",
+        "atmosphereTheme": "aurora-crown"
+      }
     },
     {
       "id": "wait-enter",
@@ -34,7 +42,11 @@
       "audioTheme": "aurora-crown",
       "listenFor": "A small rising motif that feels like the board is waking up.",
       "description": "Entry sting when Aurora transitions into the score-focused wait-mode surface.",
-      "preview": { "cue": "attractEnter", "phase": "wait", "atmosphereTheme": "aurora-crown" }
+      "preview": {
+        "cue": "attractEnter",
+        "phase": "wait",
+        "atmosphereTheme": "aurora-crown"
+      }
     },
     {
       "id": "wait-pulse",
@@ -45,7 +57,12 @@
       "audioTheme": "aurora-crown",
       "listenFor": "Gentle repeating pulse that stays ambient rather than mechanical.",
       "description": "Recurring pulse that keeps the score rotation alive without sounding like gameplay.",
-      "preview": { "cue": "attractPulse", "phase": "wait", "atmosphereTheme": "aurora-crown", "variant": 0 }
+      "preview": {
+        "cue": "attractPulse",
+        "phase": "wait",
+        "atmosphereTheme": "aurora-crown",
+        "variant": 0
+      }
     },
     {
       "id": "demo-enter",
@@ -56,7 +73,11 @@
       "audioTheme": "aurora-crown",
       "listenFor": "Aurora identity at the handoff from shell to autoplay.",
       "description": "Bridge from the Aurora shell identity into autoplay demo mode.",
-      "preview": { "cue": "attractEnter", "phase": "demo", "atmosphereTheme": "aurora-crown" }
+      "preview": {
+        "cue": "attractEnter",
+        "phase": "demo",
+        "atmosphereTheme": "aurora-crown"
+      }
     },
     {
       "id": "demo-pulse",
@@ -67,7 +88,12 @@
       "audioTheme": "classic-arcade",
       "listenFor": "Classic arcade cadence once motion on the board begins.",
       "description": "Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.",
-      "preview": { "cue": "attractPulse", "phase": "demo", "atmosphereTheme": "classic-arcade", "variant": 0 }
+      "preview": {
+        "cue": "attractPulse",
+        "phase": "demo",
+        "atmosphereTheme": "classic-arcade",
+        "variant": 0
+      }
     },
     {
       "id": "stage-start-classic",
@@ -78,7 +104,11 @@
       "audioTheme": "classic-arcade",
       "listenFor": "A crisp arcade rise that feels close to classic stage-start energy.",
       "description": "Opening cue for classic early-stage Aurora presentation.",
-      "preview": { "cue": "gameStart", "phase": "stage", "atmosphereTheme": "classic-arcade" }
+      "preview": {
+        "cue": "gameStart",
+        "phase": "stage",
+        "atmosphereTheme": "classic-arcade"
+      }
     },
     {
       "id": "stage-start-aurora",
@@ -89,7 +119,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A brighter upward flourish that feels more expansive than the classic set.",
       "description": "Opening cue for the later Aurora surge/borealis stage family.",
-      "preview": { "cue": "gameStart", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "gameStart",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "formation-pulse-classic",
@@ -100,7 +134,12 @@
       "audioTheme": "classic-arcade",
       "listenFor": "Clear march-like pulse that supports classic board pressure.",
       "description": "Formation march/pulse for classic early-stage cadence.",
-      "preview": { "cue": "stagePulse", "phase": "stage", "atmosphereTheme": "classic-arcade", "variant": 0 }
+      "preview": {
+        "cue": "stagePulse",
+        "phase": "stage",
+        "atmosphereTheme": "classic-arcade",
+        "variant": 0
+      }
     },
     {
       "id": "formation-pulse-aurora",
@@ -111,7 +150,12 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A more glassy pulse that still reads as rhythm, not ambience.",
       "description": "Formation pulse for the Aurora-themed later-stage family.",
-      "preview": { "cue": "stagePulse", "phase": "stage", "atmosphereTheme": "aurora-borealis", "variant": 0 }
+      "preview": {
+        "cue": "stagePulse",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis",
+        "variant": 0
+      }
     },
     {
       "id": "player-shot-classic",
@@ -121,7 +165,11 @@
       "phase": "stage",
       "audioTheme": "classic-arcade",
       "description": "Early-stage player shot reference aligned to the classic arcade mix.",
-      "preview": { "cue": "playerShot", "phase": "stage", "atmosphereTheme": "classic-arcade" }
+      "preview": {
+        "cue": "playerShot",
+        "phase": "stage",
+        "atmosphereTheme": "classic-arcade"
+      }
     },
     {
       "id": "player-shot-aurora",
@@ -131,7 +179,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Later-stage Aurora shot variant with a slightly sleeker synth edge.",
-      "preview": { "cue": "playerShot", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "playerShot",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "enemy-shot-classic",
@@ -141,7 +193,11 @@
       "phase": "stage",
       "audioTheme": "classic-arcade",
       "description": "Enemy projectile cue for classic stages.",
-      "preview": { "cue": "enemyShot", "phase": "stage", "atmosphereTheme": "classic-arcade" }
+      "preview": {
+        "cue": "enemyShot",
+        "phase": "stage",
+        "atmosphereTheme": "classic-arcade"
+      }
     },
     {
       "id": "enemy-shot-aurora",
@@ -151,7 +207,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Enemy projectile cue for Aurora-leaning later stages.",
-      "preview": { "cue": "enemyShot", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "enemyShot",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "enemy-hit-aurora",
@@ -161,7 +221,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Standard enemy hit cue used across Aurora combat.",
-      "preview": { "cue": "enemyHit", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "enemyHit",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "boss-hit-aurora",
@@ -171,7 +235,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Heavier impact cue for boss and stronger target hits.",
-      "preview": { "cue": "bossHit", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "bossHit",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "enemy-boom-aurora",
@@ -181,7 +249,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Standard enemy destruction cue.",
-      "preview": { "cue": "enemyBoom", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "enemyBoom",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "boss-boom-aurora",
@@ -191,7 +263,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Larger destruction cue for boss enemies and rogue fighter losses.",
-      "preview": { "cue": "bossBoom", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "bossBoom",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "capture-beam",
@@ -201,7 +277,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Beam/deploy cue for the capture sequence.",
-      "preview": { "cue": "captureBeam", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "captureBeam",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "capture-retreat",
@@ -211,7 +291,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Recovery cue when the capture sequence resolves and retreats.",
-      "preview": { "cue": "captureRetreat", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "captureRetreat",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "capture-success",
@@ -222,7 +306,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A clear loss-state handoff before the boss retreats with the captured ship.",
       "description": "Distinct cue for the exact moment the player's fighter is fully captured.",
-      "preview": { "cue": "captureSuccess", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "captureSuccess",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "captured-fighter-destroyed",
@@ -233,7 +321,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A sharp, regrettable destruction cue distinct from ordinary enemy hits.",
       "description": "Cue used when the carried/captured fighter itself is destroyed for points.",
-      "preview": { "cue": "capturedFighterDestroyed", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "capturedFighterDestroyed",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "rescue-join",
@@ -243,7 +335,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Join cue for dual-fighter reunification and rescue success.",
-      "preview": { "cue": "rescueJoin", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "rescueJoin",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "extend-award",
@@ -253,7 +349,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Extra-ship award cue used when Aurora score extends trigger.",
-      "preview": { "cue": "extendAward", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "extendAward",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "player-hit",
@@ -263,7 +363,11 @@
       "phase": "stage",
       "audioTheme": "aurora-surge",
       "description": "Player ship destruction cue during live play.",
-      "preview": { "cue": "playerHit", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "playerHit",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "stage-transition",
@@ -274,7 +378,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A short rising handoff with more melodic identity than a simple beep.",
       "description": "Transition cue between standard stages.",
-      "preview": { "cue": "stageTransition", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "stageTransition",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "challenge-transition",
@@ -285,7 +393,12 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A distinct bonus-stage announcement with more lift and ceremony.",
       "description": "Transition cue into challenge/bonus stage presentation.",
-      "preview": { "cue": "challengeTransition", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
+      "preview": {
+        "cue": "challengeTransition",
+        "phase": "challenge",
+        "atmosphereTheme": "aurora-borealis",
+        "challenge": true
+      }
     },
     {
       "id": "challenge-results",
@@ -296,7 +409,12 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A clean wrap-up phrase that feels like challenge scoring has concluded.",
       "description": "Result cue for challenge-stage completion when the run was not perfect.",
-      "preview": { "cue": "challengeResults", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
+      "preview": {
+        "cue": "challengeResults",
+        "phase": "challenge",
+        "atmosphereTheme": "aurora-borealis",
+        "challenge": true
+      }
     },
     {
       "id": "challenge-perfect",
@@ -307,7 +425,12 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A more celebratory result than the standard challenge wrap-up.",
       "description": "Distinct challenge-stage result cue for perfect clears.",
-      "preview": { "cue": "challengePerfect", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
+      "preview": {
+        "cue": "challengePerfect",
+        "phase": "challenge",
+        "atmosphereTheme": "aurora-borealis",
+        "challenge": true
+      }
     },
     {
       "id": "game-over",
@@ -318,7 +441,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A readable downward ending phrase, not just an impact effect.",
       "description": "End-of-run cue used by Aurora results/game-over flow.",
-      "preview": { "cue": "gameOver", "phase": "results", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "gameOver",
+        "phase": "results",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "high-score-first",
@@ -329,7 +456,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A stronger celebratory placement cue for first place entry.",
       "description": "Rank-specific scoreboard cue when a run enters first place.",
-      "preview": { "cue": "highScoreFirst", "phase": "results", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "highScoreFirst",
+        "phase": "results",
+        "atmosphereTheme": "aurora-borealis"
+      }
     },
     {
       "id": "high-score-other",
@@ -340,7 +471,11 @@
       "audioTheme": "aurora-surge",
       "listenFor": "A positive but smaller placement cue for non-first leaderboard entries.",
       "description": "Rank-specific scoreboard cue when a run enters the board outside first place.",
-      "preview": { "cue": "highScoreOther", "phase": "results", "atmosphereTheme": "aurora-borealis" }
+      "preview": {
+        "cue": "highScoreOther",
+        "phase": "results",
+        "atmosphereTheme": "aurora-borealis"
+      }
     }
   ],
   "comparisonSets": [
@@ -348,57 +483,141 @@
       "id": "demo-pulse-compare",
       "label": "Demo Pulse",
       "entryId": "demo-pulse",
-      "focus": "Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio.",
-      "referenceLabel": "Opening Theme",
-      "referenceClip": "assets/reference-audio/galaga-opening-theme.m4a"
+      "focus": "Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.",
+      "referenceLabel": "Ambience / Convoy",
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "mappingStatus": "Synthetic Galaga runtime cue vs actual indexed reference clip.",
+      "mappingConfidence": "high"
     },
     {
       "id": "stage-start-compare",
       "label": "Stage Start",
-      "entryId": "stage-start-aurora",
-      "focus": "Compare whether the opening announcement feels like an exciting arcade start or just a functional cue.",
-      "referenceLabel": "Level Flag V1",
-      "referenceClip": "assets/reference-audio/galaga-level-flag-v1.m4a"
+      "entryId": "stage-start-classic",
+      "focus": "Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.",
+      "referenceLabel": "Start",
+      "referenceClip": "assets/reference-audio/galaga3-start.m4a",
+      "mappingStatus": "Best current stage-start mapping from the cue matrix.",
+      "mappingConfidence": "medium"
     },
     {
       "id": "formation-pulse-compare",
       "label": "Formation Pulse",
-      "entryId": "formation-pulse-aurora",
-      "focus": "Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play.",
-      "referenceLabel": "Sample Gameplay",
-      "referenceClip": "assets/reference-audio/galaga-sample-gameplay.m4a"
+      "entryId": "formation-pulse-classic",
+      "focus": "Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.",
+      "referenceLabel": "Ambience / Convoy",
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "mappingStatus": "Strongest current reference for the board cadence bed.",
+      "mappingConfidence": "high"
     },
     {
-      "id": "player-shot-compare",
-      "label": "Player Shot",
-      "entryId": "player-shot-aurora",
-      "focus": "Compare shot energy and how clearly the player weapon reads in the mix.",
-      "referenceLabel": "Sample Gameplay",
-      "referenceClip": "assets/reference-audio/galaga-sample-gameplay.m4a"
+      "id": "capture-beam-compare",
+      "label": "Capture Beam",
+      "entryId": "capture-beam",
+      "focus": "Compare whether the beam deploy moment reads clearly as tractor-beam danger.",
+      "referenceLabel": "Tractor Beam",
+      "referenceClip": "assets/reference-audio/galaga3-tractor-beam.m4a",
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high"
     },
     {
-      "id": "enemy-shot-compare",
-      "label": "Enemy Shot",
-      "entryId": "enemy-shot-aurora",
-      "focus": "Compare threat clarity and whether the enemy projectile cue has enough arcade bite.",
-      "referenceLabel": "Sample Gameplay",
-      "referenceClip": "assets/reference-audio/galaga-sample-gameplay.m4a"
+      "id": "capture-success-compare",
+      "label": "Fighter Captured",
+      "entryId": "capture-success",
+      "focus": "Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.",
+      "referenceLabel": "Fighter Captured",
+      "referenceClip": "assets/reference-audio/galaga3-fighter-captured.m4a",
+      "mappingStatus": "New Aurora cue slot added from the cue matrix.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "captured-fighter-destroyed-compare",
+      "label": "Captured Fighter Destroyed",
+      "entryId": "captured-fighter-destroyed",
+      "focus": "Compare the regret/penalty moment when the carried fighter is destroyed.",
+      "referenceLabel": "Captured Fighter Destroyed",
+      "referenceClip": "assets/reference-audio/galaga3-captured-fighter-destroyed.m4a",
+      "mappingStatus": "New Aurora cue slot added from the cue matrix.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "rescue-join-compare",
+      "label": "Rescue Join",
+      "entryId": "rescue-join",
+      "focus": "Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.",
+      "referenceLabel": "Fighter Rescued (Double Ship)",
+      "referenceClip": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "ship-loss-compare",
+      "label": "Ship Loss",
+      "entryId": "player-hit",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "referenceLabel": "Death",
+      "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high"
     },
     {
       "id": "challenge-transition-compare",
       "label": "Challenge Transition",
       "entryId": "challenge-transition",
-      "focus": "Compare how ceremonial and distinct the bonus-stage announcement feels.",
-      "referenceLabel": "Bonus Stage Results",
-      "referenceClip": "assets/reference-audio/galaga-bonus-stage-results.m4a"
+      "focus": "Compare how distinct and ceremonial the challenge-stage announcement feels.",
+      "referenceLabel": "Challenging Stage",
+      "referenceClip": "assets/reference-audio/galaga3-challenging-stage.m4a",
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "challenge-results-compare",
+      "label": "Challenge Results",
+      "entryId": "challenge-results",
+      "focus": "Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.",
+      "referenceLabel": "Challenging Stage Results",
+      "referenceClip": "assets/reference-audio/galaga2-challenging-stage-results.m4a",
+      "mappingStatus": "New Aurora cue slot added from the cue matrix.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "challenge-perfect-compare",
+      "label": "Challenge Perfect",
+      "entryId": "challenge-perfect",
+      "focus": "Compare whether a perfect challenge result feels more celebratory than the standard results cue.",
+      "referenceLabel": "Challenging Stage Perfect",
+      "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+      "mappingStatus": "New Aurora cue slot added from the cue matrix.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "high-score-first-compare",
+      "label": "High Score 1st",
+      "entryId": "high-score-first",
+      "focus": "Compare whether first place entry feels distinct and more important than a lower board placement.",
+      "referenceLabel": "Name Entry (1st)",
+      "referenceClip": "assets/reference-audio/galaga3-name-entry-1st.m4a",
+      "mappingStatus": "New Aurora cue slot added from the cue matrix.",
+      "mappingConfidence": "high"
+    },
+    {
+      "id": "high-score-other-compare",
+      "label": "High Score 2nd-10th",
+      "entryId": "high-score-other",
+      "focus": "Compare whether non-first leaderboard entry feels positive but smaller than first place.",
+      "referenceLabel": "Name Entry (2nd-5th)",
+      "referenceClip": "assets/reference-audio/galaga3-name-entry-2nd-5th.m4a",
+      "mappingStatus": "New Aurora cue slot added from the cue matrix.",
+      "mappingConfidence": "high"
     },
     {
       "id": "game-over-compare",
       "label": "Game Over",
       "entryId": "game-over",
-      "focus": "Compare whether the ending cue feels final, readable, and emotionally complete.",
+      "focus": "Compare whether the ending cue feels final and emotionally complete enough.",
       "referenceLabel": "Last Ship Destroyed Ambience",
-      "referenceClip": "assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a"
+      "referenceClip": "assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a",
+      "mappingStatus": "Best current end-state reference; still broader than Aurora's single slot.",
+      "mappingConfidence": "medium"
     }
   ],
   "graphicsThemes": [
@@ -407,12 +626,19 @@
       "label": "Classic Arcade",
       "group": "Classic",
       "audioTheme": "classic-arcade",
-      "backgrounds": "frontDoor classic-stars · wait classic-stars · demo classic-stars · stage classic-stars · challenge classic-stars",
+      "backgrounds": "frontDoor classic-stars \u00b7 wait classic-stars \u00b7 demo classic-stars \u00b7 stage classic-stars \u00b7 challenge classic-stars",
       "starfieldProfile": "classic-arcade-stars",
       "starfieldCount": 108,
       "alpha": "0.52 to 0.96",
       "speed": "11 to 27",
-      "swatches": ["#ffffff", "#8bb8ff", "#1e52ff", "#fff36a", "#ff3b33", "#db38ff"],
+      "swatches": [
+        "#ffffff",
+        "#8bb8ff",
+        "#1e52ff",
+        "#fff36a",
+        "#ff3b33",
+        "#db38ff"
+      ],
       "description": "The closest Aurora gets to the original Galaga look: bright, readable stars on a black field with classic cadence and no aurora ribbon wash."
     },
     {
@@ -420,12 +646,19 @@
       "label": "Aurora Hint",
       "group": "Aurora",
       "audioTheme": "aurora-rise",
-      "backgrounds": "frontDoor aurora-borealis · wait aurora-borealis · demo aurora-hint · stage aurora-hint · challenge aurora-hint",
+      "backgrounds": "frontDoor aurora-borealis \u00b7 wait aurora-borealis \u00b7 demo aurora-hint \u00b7 stage aurora-hint \u00b7 challenge aurora-hint",
       "starfieldProfile": "aurora-hint-stars",
       "starfieldCount": 92,
       "alpha": "0.34 to 0.70",
       "speed": "8 to 20",
-      "swatches": ["#f7f9ff", "#8fd7ff", "#72e18c", "#f0c766", "#d27cff", "#ff8b7a"],
+      "swatches": [
+        "#f7f9ff",
+        "#8fd7ff",
+        "#72e18c",
+        "#f0c766",
+        "#d27cff",
+        "#ff8b7a"
+      ],
       "description": "Bridge theme where the classic field remains visible but the Aurora wash starts to become part of the stage identity."
     },
     {
@@ -433,12 +666,19 @@
       "label": "Aurora Borealis",
       "group": "Aurora",
       "audioTheme": "aurora-surge",
-      "backgrounds": "frontDoor aurora-borealis · wait aurora-borealis · demo aurora-borealis · stage aurora-borealis · challenge aurora-borealis",
+      "backgrounds": "frontDoor aurora-borealis \u00b7 wait aurora-borealis \u00b7 demo aurora-borealis \u00b7 stage aurora-borealis \u00b7 challenge aurora-borealis",
       "starfieldProfile": "aurora-borealis-stars",
       "starfieldCount": 88,
       "alpha": "0.28 to 0.64",
       "speed": "8 to 18",
-      "swatches": ["#f7fbff", "#9edfff", "#6bf5bf", "#ffe27a", "#cf92ff", "#ffb5cf"],
+      "swatches": [
+        "#f7fbff",
+        "#9edfff",
+        "#6bf5bf",
+        "#ffe27a",
+        "#cf92ff",
+        "#ffb5cf"
+      ],
       "description": "Full Aurora stage theme with softer stars under a stronger ribbon treatment and the main later-stage audio palette."
     },
     {
@@ -446,12 +686,19 @@
       "label": "Aurora Crown",
       "group": "Aurora",
       "audioTheme": "aurora-crown",
-      "backgrounds": "frontDoor aurora-borealis · wait aurora-borealis · demo aurora-borealis · stage aurora-borealis · challenge aurora-borealis",
+      "backgrounds": "frontDoor aurora-borealis \u00b7 wait aurora-borealis \u00b7 demo aurora-borealis \u00b7 stage aurora-borealis \u00b7 challenge aurora-borealis",
       "starfieldProfile": "aurora-crown-stars",
       "starfieldCount": 84,
       "alpha": "0.30 to 0.68",
       "speed": "8 to 18",
-      "swatches": ["#ffffff", "#aef1ff", "#8dffd5", "#ffe38f", "#d5a0ff", "#ffc7d8"],
+      "swatches": [
+        "#ffffff",
+        "#aef1ff",
+        "#8dffd5",
+        "#ffe38f",
+        "#d5a0ff",
+        "#ffc7d8"
+      ],
       "description": "Aurora-owned shell/front-door theme used to establish the application identity before gameplay falls back toward classic or surge contexts."
     }
   ],
@@ -580,35 +827,35 @@
     {
       "band": "quiet-skies",
       "fromStage": "1",
-      "families": "bee classic · but classic · boss classic · challenge classic",
+      "families": "bee classic \u00b7 but classic \u00b7 boss classic \u00b7 challenge classic",
       "bossArchetype": "command-core",
       "description": "Classic opening Aurora band. Closest to original Galaga feel in stars, enemy look, and cadence."
     },
     {
       "band": "scorpion-dawn",
       "fromStage": "4",
-      "families": "bee scorpion · but scorpion · boss classic · challenge classic",
+      "families": "bee scorpion \u00b7 but scorpion \u00b7 boss classic \u00b7 challenge classic",
       "bossArchetype": "super-boss-scorpion",
       "description": "First Aurora-flavored band. Adds scorpion family visuals while keeping the challenge family conservative."
     },
     {
       "band": "stingray-surge",
       "fromStage": "8",
-      "families": "bee stingray · but stingray · boss stingray · challenge dragonfly",
+      "families": "bee stingray \u00b7 but stingray \u00b7 boss stingray \u00b7 challenge dragonfly",
       "bossArchetype": "partner-wing-stingray",
       "description": "Main later-stage Aurora band where both background and audio identity shift clearly away from the classic opening."
     },
     {
       "band": "galboss-veil",
       "fromStage": "12",
-      "families": "bee galboss · but galboss · boss galboss · challenge dragonfly",
+      "families": "bee galboss \u00b7 but galboss \u00b7 boss galboss \u00b7 challenge dragonfly",
       "bossArchetype": "council-boss",
       "description": "Heavier late-stage band with the galboss family and stronger aurora presentation."
     },
     {
       "band": "crown-aurora",
       "fromStage": "16",
-      "families": "bee galboss · but galboss · boss galboss · challenge mosquito",
+      "families": "bee galboss \u00b7 but galboss \u00b7 boss galboss \u00b7 challenge mosquito",
       "bossArchetype": "super-partner-pair",
       "description": "Late Aurora crown band tying the strongest shell/front-door identity back into the deeper stage family."
     }
@@ -617,7 +864,7 @@
     {
       "label": "Audio Theme",
       "values": "auto, aurora-application, galaga-original-reference",
-      "description": "Developer override for phase-resolved audio routing. The Galaga reference option keeps Aurora shell identity in front-door and wait surfaces while pushing gameplay, challenge, and results toward the classic-reference audio family."
+      "description": "Developer override for phase-resolved audio routing. `aurora-application` uses Aurora's current synthetic application mix. `galaga-original-reference` currently uses a separate synthetic classic-leaning cue family for gameplay/challenge/results; it does not yet play actual extracted Galaga assets in the live game."
     },
     {
       "label": "Graphics Theme",
@@ -655,6 +902,11 @@
       "label": "Galaga Reference Baseline",
       "href": "https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md",
       "detail": "Catalog of visual, motion, and audio references used for Aurora tuning, including stage-play stills and the labeled Galaga sound reference video."
+    },
+    {
+      "label": "Galaga Audio Cue Matrix",
+      "href": "https://github.com/sgwoods/Codex-Test1/blob/main/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md",
+      "detail": "Canonical mapping from Aurora cue slots to the strongest current Galaga reference clips, including missing game-owned slots."
     }
   ]
 }

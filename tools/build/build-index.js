@@ -1415,7 +1415,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const comparisonRows = (guide.comparisonSets || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong></td>
-      <td>${esc(entry.focus || '')}</td>
+      <td>
+        <div>${esc(entry.focus || '')}</div>
+        ${entry.mappingStatus ? `<div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> ${esc(entry.mappingStatus)}</div>` : ''}
+        ${entry.mappingConfidence ? `<div class="docMeta"><strong>Confidence:</strong> ${esc(entry.mappingConfidence)}</div>` : ''}
+      </td>
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="aurora">Play Aurora</button>
@@ -1530,8 +1534,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
           </div>
-          <div class="previewNote">
-            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora cues through the real in-game audio engine instead of a separate mock player. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
+        <div class="previewNote">
+            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora and Galaga-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
           </div>
           <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
         </section>
@@ -1564,7 +1568,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         <section class="section" id="theme-comparison">
           <div class="sectionHeader">
             <h2>Theme Comparison</h2>
-            <p>Compare the same gameplay moments side by side. Aurora uses the application-owned mix, while Galaga uses the dedicated reference family for the same cue and phase.</p>
+            <p>Compare the same gameplay moments side by side. Aurora uses the application-owned mix, Galaga uses the current synthetic classic-leaning runtime family for the same cue and phase, and Reference plays the actual extracted Galaga clip we currently treat as the best mapping target.</p>
           </div>
           <div class="buttonRow" style="margin-bottom:16px;">
             <button class="audioAction" type="button" data-compare-set="aurora">Play Aurora Set</button>

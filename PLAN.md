@@ -39,9 +39,18 @@
 - keep `Galaxy Guardians` preview-only until a minimal playable slice is real
 - prove the platform with a narrow second-application gameplay slice rather than a rushed public launch
 
+### 5. Audio Generation Tooling Exploration
+
+- evaluate `AudioLDM 2` as an offline content-generation tool for themed sound-effect variation
+- keep this explicitly outside `Platinum` runtime responsibilities
+- test whether a small reference-guided workflow can produce useful Aurora-family variants from classic arcade cue roles
+- first pilot targets should be higher-salience atmospheric/event cues rather than the smallest micro-effects
+- if the workflow is simple enough and the results are good enough, treat it as a reusable tool for future hosted games as well
+
 ## Immediate Priorities
 
 1. complete the documentation refresh and publish-path hardening
 2. close the small Aurora trust-fix bundle for `1.2.1`
 3. keep hosted `/dev`, hosted `/beta`, and hosted `/production` aligned with the source docs and release metadata
 4. then deepen the second-application proof deliberately
+5. prototype reference-guided audio-generation tooling only after the current Aurora cue-state review surface is trustworthy enough to judge results clearly
