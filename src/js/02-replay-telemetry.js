@@ -107,10 +107,14 @@ function exportSession(opts={}){
  if(opts.auto&&autoExportedSessionId===REC.id)return;
  logSnapshot('export');
  const out=JSON.stringify({session:Object.assign({},REC,{duration:recTime(),eventCount:REC.events.length,snapshotCount:REC.snapshots.length})},null,2);
- const file=`neo-galaga-session-${REC.id}.json`;
- downloadBlob(new Blob([out],{type:'application/json'}),file);
+ const fileBase=`neo-galaga-session-${REC.id}`;
+ downloadBlob(new Blob([out],{type:'application/json'}),`${fileBase}.json`);
+ if(typeof getSystemStatusReport==='function'){
+  const systemOut=JSON.stringify(getSystemStatusReport(40),null,2);
+  downloadBlob(new Blob([systemOut],{type:'application/json'}),`${fileBase}-system-status.json`);
+ }
  if(opts.auto)autoExportedSessionId=REC.id;
- if(!opts.silent)showToast('Session log downloaded');
+ if(!opts.silent)showToast('Session log and system status downloaded');
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');

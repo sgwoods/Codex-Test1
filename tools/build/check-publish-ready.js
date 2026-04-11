@@ -12,54 +12,7 @@ const {
   BETA_BUILD_INFO,
   BETA_APPROVED_BUILD_INFO
 } = require('./paths');
-
-const REQUIRED_DEV = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg'
-];
-
-const REQUIRED_PRODUCTION = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'README.md',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg'
-];
-
-const REQUIRED_BETA = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg',
-  'README.md',
-  'README.txt'
-];
+const { devFiles, betaFiles, productionFiles } = require('./lane-files');
 
 const REQUIRED_SOURCE_DOCS = [
   'README.md',
@@ -149,7 +102,7 @@ function laneConfig(lane){
       lane,
       dir: DIST_DEV,
       buildInfo: DEV_BUILD_INFO,
-      required: REQUIRED_DEV,
+      required: devFiles(DIST_DEV),
       nextStep: 'Run "npm run build" first.'
     };
   }
@@ -158,7 +111,7 @@ function laneConfig(lane){
       lane,
       dir: DIST_BETA,
       buildInfo: BETA_BUILD_INFO,
-      required: REQUIRED_BETA,
+      required: betaFiles(DIST_BETA),
       nextStep: 'Run "npm run build && npm run promote:beta" first.'
     };
   }
@@ -167,7 +120,7 @@ function laneConfig(lane){
       lane,
       dir: DIST_PRODUCTION,
       buildInfo: PRODUCTION_BUILD_INFO,
-      required: REQUIRED_PRODUCTION,
+      required: productionFiles(DIST_PRODUCTION),
       nextStep: 'Run "npm run build && npm run promote:production" first.'
     };
   }

@@ -10,22 +10,9 @@ const {
   PRODUCTION_BUILD_INFO
 } = require('./paths');
 const { checkGitClean } = require('./check-publish-ready');
+const { productionFiles } = require('./lane-files');
 
-const FILES = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'README.md',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg'
-];
+const FILES = productionFiles(DIST_BETA);
 
 function normalizeProductionVersion(version){
   return String(version || '').replace(/-(alpha|beta|rc)(\.[0-9]+)?$/, '');

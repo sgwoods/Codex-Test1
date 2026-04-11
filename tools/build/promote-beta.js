@@ -8,23 +8,10 @@ const {
   DEV_BUILD_INFO,
   BETA_BUILD_INFO
 } = require('./paths');
+const { betaFiles } = require('./lane-files');
 
 const BETA_DIR = DIST_BETA;
-const FILES = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'export.mov.png',
-  'README.md',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg'
-];
+const FILES = betaFiles(DIST_DEV).filter(file => file !== 'README.txt');
 
 function toBetaVersion(version){
   if(/-beta(?:\.\d+)?$/.test(version)) return version;

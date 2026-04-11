@@ -19,58 +19,11 @@ const {
   checkArtifacts,
   checkBuildInfo
 } = require('./check-publish-ready');
+const { devFiles, betaFiles, productionFiles } = require('./lane-files');
 
 const OWNER = process.env.AURORA_PUBLIC_OWNER || 'sgwoods';
 const REPO = process.env.AURORA_PUBLIC_REPO || 'Aurora-Galactica';
 const DEFAULT_BRANCH = process.env.AURORA_PUBLIC_BRANCH || 'main';
-
-const DEV_FILES = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg'
-];
-
-const PRODUCTION_FILES = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'README.md',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg'
-];
-
-const BETA_FILES = [
-  'index.html',
-  'release-dashboard.html',
-  'project-guide.html',
-  'application-guide.html',
-  'platinum-guide.html',
-  'player-guide.html',
-  'build-info.json',
-  'release-notes.json',
-  'export.mov.png',
-  'assets/platinum-platform-mark.png',
-  'assets/galaxy-guardians-coming-soon.png',
-  'assets/galaxy-guardians-coming-soon.svg',
-  'README.md',
-  'README.txt'
-];
 
 function parseArgs(argv){
   const args = {};
@@ -122,7 +75,7 @@ function laneConfig(lane){
       sourceDir: DIST_DEV,
       buildInfo: DEV_BUILD_INFO,
       targetDir: 'dev',
-      files: DEV_FILES,
+      files: devFiles(DIST_DEV),
       rootFiles: ['.github/workflows/pages.yml'],
       commitPrefix: 'Update dev lane from local build'
     };
@@ -133,7 +86,7 @@ function laneConfig(lane){
       sourceDir: DIST_BETA,
       buildInfo: BETA_BUILD_INFO,
       targetDir: 'beta',
-      files: BETA_FILES,
+      files: betaFiles(DIST_BETA),
       rootFiles: ['.github/workflows/pages.yml'],
       commitPrefix: 'Update beta lane from dev build'
     };
@@ -144,7 +97,7 @@ function laneConfig(lane){
       sourceDir: DIST_PRODUCTION,
       buildInfo: PRODUCTION_BUILD_INFO,
       targetDir: '.',
-      files: PRODUCTION_FILES,
+      files: productionFiles(DIST_PRODUCTION),
       rootFiles: ['.github/workflows/pages.yml'],
       commitPrefix: 'Update production lane from dev build'
     };

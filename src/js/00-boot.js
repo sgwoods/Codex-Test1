@@ -352,6 +352,39 @@ function getSystemDiagnosticsReport(limit=20){
   sessionEvents:recentSessionDiagnostics(limit)
  };
 }
+function getSystemStatusReport(limit=40){
+ const count=Math.max(1,Math.min(SYSTEM_LOG_LIMIT,+limit||40));
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug||{};
+ const audioReference=debug.reference||{};
+ return{
+  generatedAt:new Date().toISOString(),
+  build:BUILD_INFO,
+  location:location.href,
+  game:{
+   stage:S.stage,
+   score:S.score,
+   lives:Math.max(0,S.lives+1),
+   started:!!started,
+   paused:!!paused,
+   challenge:!!S.challenge,
+   attract:!!ATTRACT.active
+  },
+  audioDebug:{
+   theme:(typeof currentAudioOverrides==='function'&&currentAudioOverrides().audioTheme)||'auto',
+   lastCue:debug.lastCue||null,
+   reference:{
+    lastRequested:audioReference.lastRequested||'',
+    lastLoaded:audioReference.lastLoaded||'',
+    lastStarted:audioReference.lastStarted||'',
+    lastError:audioReference.lastError||'',
+    activeCount:Number.isFinite(+audioReference.activeCount)?+audioReference.activeCount:0
+   },
+   statusLine:String(window.__auroraAudioStatusLine||'').trim()
+  },
+  systemLog:recentSystemLogEntries(count),
+  sessionEvents:recentSessionDiagnostics(Math.min(40,count))
+ };
+}
 function recordSystemIssue(action,message,data={},opts={}){
  const entry={
   at:new Date().toISOString(),
@@ -385,6 +418,7 @@ function recordSystemIssue(action,message,data={},opts={}){
 }
 window.recordSystemIssue=recordSystemIssue;
 window.getSystemDiagnosticsReport=getSystemDiagnosticsReport;
+window.getSystemStatusReport=getSystemStatusReport;
 window.recentSystemLogEntries=recentSystemLogEntries;
 function randUnit(){
  if(!RNG_SEED)return Math.random();
@@ -1257,11 +1291,21 @@ function syncAudioDebugUi(){
   if(ref.lastError)parts.push(`error ${ref.lastError}`);
   if(Number.isFinite(+ref.activeCount))parts.push(`active ${+ref.activeCount}`);
  }
- settingsAudioDebugBody.textContent=parts.join(' · ');
+ const text=parts.join(' · ');
+ settingsAudioDebugBody.textContent=text;
+ window.__auroraAudioStatusLine=text;
 }
 function playCurrentAudioThemeTest(){
  unlockAudioFromInteraction();
  const selection=currentAudioOverrides().audioTheme||'auto';
+ const beforeRef=(window.__platinumAudioDebug||window.__auroraAudioDebug||{}).reference||{};
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('audio_test_requested','Developer audio test requested',{
+   audioTheme:selection,
+   priorRequested:beforeRef.lastRequested||'',
+   priorError:beforeRef.lastError||''
+  },{level:'info'});
+ }
  if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(selection);
  if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function'){
   sfx.playCue('gameStart',{
@@ -1529,6 +1573,7 @@ async function submitFeedback(ev){
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge,attract:!!ATTRACT.active}
  };
  const diagnostics=getSystemDiagnosticsReport(20);
+ const systemStatus=getSystemStatusReport(40);
  const kind=type==='feature_request'?'Feature Request':'Bug Report';
  const subject=`[${kind}] ${title}`;
  const lines=[
@@ -1545,6 +1590,9 @@ async function submitFeedback(ev){
   `Paused: ${paused?1:0}`,
   `Challenge: ${S.challenge?1:0}`,
   `User-Agent: ${navigator.userAgent}`,
+  '',
+  'System status:',
+  JSON.stringify(systemStatus,null,2),
   '',
   ...formatDiagnosticsLines('Recent system log',diagnostics.systemLog),
   '',
@@ -1572,6 +1620,7 @@ async function submitFeedback(ev){
   fields.set('user_agent',navigator.userAgent);
   fields.set('system_log',JSON.stringify(diagnostics.systemLog));
   fields.set('recent_session_events',JSON.stringify(diagnostics.sessionEvents));
+  fields.set('system_status_report',JSON.stringify(systemStatus));
   fields.set('message',lines.join('\n'));
   await sendFeedbackDirect(fields);
   feedbackLastSubmit=now;
