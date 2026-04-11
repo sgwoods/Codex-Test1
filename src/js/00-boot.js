@@ -484,7 +484,7 @@ const AC=()=>{
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
- a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),
+ a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
  resolveAtmosphere(opts={}){
   const attractPhase=opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'');
   const frontDoor=opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract);
@@ -577,23 +577,59 @@ const sfx={
   const lastAt=+this.referenceCooldowns[clip]||0;
   if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
   this.referenceCooldowns[clip]=now;
-  try{
-   const audio=new Audio(clip);
-   audio.preload='auto';
-   audio.volume=audioMuted?0:Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
-   const cleanup=()=>{
-    this.referenceActive=this.referenceActive.filter(entry=>entry!==audio);
-   };
-   audio.addEventListener('ended',cleanup,{once:true});
-   audio.addEventListener('error',cleanup,{once:true});
-   this.referenceActive.push(audio);
-   if(this.referenceActive.length>24){
-    const stale=this.referenceActive.splice(0,this.referenceActive.length-24);
-    stale.forEach(entry=>{try{entry.pause();}catch{}});
-   }
-   const started=audio.play();
-   if(started&&typeof started.catch==='function')started.catch(cleanup);
-  }catch{}
+  const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
+  this.loadReferenceBuffer(clip).then(buffer=>{
+   if(!buffer||audioMuted)return;
+   try{
+    const A=AC();
+    if(typeof A.resume==='function'&&A.state==='suspended')A.resume().catch(()=>{});
+    const source=A.createBufferSource();
+    const gain=A.createGain();
+    gain.gain.value=volume;
+    source.buffer=buffer;
+    source.connect(gain);
+    gain.connect(this.bus);
+    source.start();
+    this.referenceActive.push(source);
+    if(this.referenceActive.length>24)this.referenceActive.splice(0,this.referenceActive.length-24);
+    const cleanup=()=>{
+     this.referenceActive=this.referenceActive.filter(entry=>entry!==source);
+    };
+    source.addEventListener('ended',cleanup,{once:true});
+   }catch{}
+  }).catch(()=>{});
+ },
+ loadReferenceBuffer(src=''){
+  const clip=String(src||'').trim();
+  if(!clip)return Promise.resolve(null);
+  if(this.referenceBuffers[clip])return this.referenceBuffers[clip];
+  const url=new URL(clip,location.href).toString();
+  this.referenceBuffers[clip]=fetch(url)
+   .then(response=>{
+    if(!response.ok)throw new Error(`Failed to load reference audio: ${response.status}`);
+    return response.arrayBuffer();
+   })
+   .then(bytes=>AC().decodeAudioData(bytes.slice(0)))
+   .catch(err=>{
+    delete this.referenceBuffers[clip];
+    recordSystemIssue('reference_audio_load_failed',`Reference audio failed to load for ${clip}`,{clip,error:String(err&&err.message||err)},{level:'warn'});
+    return null;
+   });
+  return this.referenceBuffers[clip];
+ },
+ primeReferenceTheme(themeId=''){
+  if(String(themeId||'').trim()!=='galaga-reference-assets')return;
+  [
+   'assets/reference-audio/galaga3-start.m4a',
+   'assets/reference-audio/galaga3-ambience-convoy.m4a',
+   'assets/reference-audio/galaga3-tractor-beam.m4a',
+   'assets/reference-audio/galaga3-fighter-captured.m4a',
+   'assets/reference-audio/galaga3-death.m4a',
+   'assets/reference-audio/galaga3-challenging-stage.m4a',
+   'assets/reference-audio/galaga2-challenging-stage-results.m4a',
+   'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+   'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a'
+  ].forEach(clip=>{this.loadReferenceBuffer(clip).catch(()=>{});});
  },
  play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
@@ -637,6 +673,14 @@ const sfx={
  attractPulse(phase='demo',variant=0){this.playCue('attractPulse',{phase,variant,allowIdle:1})}
 };
 
+function unlockAudioFromInteraction(){
+ aud=1;
+ try{
+  AC();
+  if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
+ }catch{}
+}
+
 window.__auroraDocsPreview=window.__platinumDocsPreview={
  ready(){
   return typeof currentGamePackAudioCue==='function';
@@ -647,10 +691,7 @@ window.__auroraDocsPreview=window.__platinumDocsPreview={
   if(typeof installGamePack==='function'&&typeof currentGamePackKey==='function'&&currentGamePackKey()!=='aurora-galactica'){
    installGamePack('aurora-galactica',{persist:false});
   }
-  try{
-   AC();
-   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
-  }catch{}
+  unlockAudioFromInteraction();
   const phase=String(payload.phase||'stage').trim()||'stage';
   const atmosphereTheme=String(payload.atmosphereTheme||'').trim();
   const attractPhase=payload.attractPhase!==undefined
@@ -1173,6 +1214,7 @@ function saveTestCfg(){
  testCfgCache=cfg;
  applyTestCfgToControls(cfg);
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
+ if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(cfg.audioTheme);
  return Object.assign({},cfg);
 }
 function syncSettingsUi(){
@@ -1546,6 +1588,7 @@ feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeed
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
 if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
+addEventListener('pointerdown',()=>unlockAudioFromInteraction(),{passive:true});
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
  return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
@@ -1656,7 +1699,7 @@ addEventListener('keydown',e=>{
  if(started&&e.code==='KeyP'){
   toggleGameplayPause();
  }
- if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
+ if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code))unlockAudioFromInteraction();
 });
 addEventListener('keyup',e=>{
  keys[e.code]=0;
