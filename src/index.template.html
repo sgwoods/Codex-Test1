@@ -76,6 +76,7 @@
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
+    <button id="playAudioTestBtn" type="button" aria-label="Play audio test cue">🎵 Play Audio Test</button>
     <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
   <div id="settingsSections">
@@ -154,6 +155,10 @@
       <span id="settingsVersion">Version {{BUILD_VERSION}}</span>
       <span id="settingsRelease">{{BUILD_RELEASE_ET}}</span>
       <span id="settingsState">{{BUILD_STATE}}</span>
+    </div>
+    <div id="settingsAudioDebug">
+      <span id="settingsAudioDebugLabel">Audio Test Status</span>
+      <span id="settingsAudioDebugBody">No audio test has been played in this session.</span>
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>

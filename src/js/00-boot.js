@@ -29,7 +29,7 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
@@ -39,6 +39,7 @@ const settingsChannel=document.getElementById('settingsChannel');
 const settingsVersion=document.getElementById('settingsVersion');
 const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
+const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
@@ -1237,6 +1238,41 @@ function syncSettingsUi(){
  if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
+ syncAudioDebugUi();
+}
+function syncAudioDebugUi(){
+ if(!settingsAudioDebugBody)return;
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ const lastCue=debug?.lastCue;
+ const ref=debug?.reference;
+ const selection=currentAudioOverrides().audioTheme||'auto';
+ const parts=[
+  `Theme: ${selection}`,
+  lastCue?.cue?`last cue ${lastCue.cue} (${lastCue.audioTheme||'no-theme'})`:'no cue yet'
+ ];
+ if(ref){
+  if(ref.lastRequested)parts.push(`requested ${ref.lastRequested.split('/').pop()}`);
+  if(ref.lastLoaded)parts.push(`loaded ${ref.lastLoaded.split('/').pop()}`);
+  if(ref.lastStarted)parts.push(`started ${ref.lastStarted.split('/').pop()}`);
+  if(ref.lastError)parts.push(`error ${ref.lastError}`);
+  if(Number.isFinite(+ref.activeCount))parts.push(`active ${+ref.activeCount}`);
+ }
+ settingsAudioDebugBody.textContent=parts.join(' · ');
+}
+function playCurrentAudioThemeTest(){
+ unlockAudioFromInteraction();
+ const selection=currentAudioOverrides().audioTheme||'auto';
+ if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(selection);
+ if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function'){
+  sfx.playCue('gameStart',{
+   phase:'stage',
+   atmosphereTheme:'aurora-borealis',
+   allowIdle:1
+  });
+  setTimeout(()=>syncAudioDebugUi(),80);
+  setTimeout(()=>syncAudioDebugUi(),500);
+  setTimeout(()=>syncAudioDebugUi(),1200);
+ }
 }
 function syncHelpUi(){
  if(!helpModal)return;
@@ -1588,6 +1624,7 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
+if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
