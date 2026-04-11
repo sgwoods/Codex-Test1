@@ -187,7 +187,7 @@ function main(){
 
     const short = currentBuildShort(cfg);
     const message = `${cfg.commitPrefix} ${short}`;
-    run('git', ['-C', repoDir, 'add', '-f', ...stagedPaths(cfg)], { stdio: ['ignore', 'inherit', 'inherit'] });
+    run('git', ['-C', repoDir, 'add', '-A', '.'], { stdio: ['ignore', 'inherit', 'inherit'] });
     run('git', ['-C', repoDir, 'commit', '-m', message], { stdio: ['ignore', 'inherit', 'inherit'] });
     if(!dryRun){
       run('git', ['-C', repoDir, 'push', 'origin', branch], { stdio: ['ignore', 'inherit', 'inherit'] });
