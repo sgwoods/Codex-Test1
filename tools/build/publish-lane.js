@@ -148,6 +148,7 @@ function currentBuildShort(cfg){
 function stagedPaths(cfg){
   const paths = cfg.files.map(file => cfg.targetDir === '.' ? file : path.join(cfg.targetDir, file));
   for(const file of cfg.rootFiles || []) paths.push(file);
+  for(const file of cfg.prunePaths || []) paths.push(file);
   return paths;
 }
 
