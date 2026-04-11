@@ -482,6 +482,8 @@ const AC=()=>{
  return A;
 };
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
+if(!Array.isArray(window.__platinumAudioDebug.history))window.__platinumAudioDebug.history=[];
+if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0};
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
  a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
@@ -577,26 +579,30 @@ const sfx={
   const lastAt=+this.referenceCooldowns[clip]||0;
   if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
   this.referenceCooldowns[clip]=now;
+  window.__platinumAudioDebug.reference.lastRequested=clip;
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
   this.loadReferenceBuffer(clip).then(buffer=>{
    if(!buffer||audioMuted)return;
    try{
-    const A=AC();
+      const A=AC();
     if(typeof A.resume==='function'&&A.state==='suspended')A.resume().catch(()=>{});
     const source=A.createBufferSource();
     const gain=A.createGain();
     gain.gain.value=volume;
     source.buffer=buffer;
-    source.connect(gain);
-    gain.connect(this.bus);
-    source.start();
-    this.referenceActive.push(source);
-    if(this.referenceActive.length>24)this.referenceActive.splice(0,this.referenceActive.length-24);
-    const cleanup=()=>{
-     this.referenceActive=this.referenceActive.filter(entry=>entry!==source);
-    };
-    source.addEventListener('ended',cleanup,{once:true});
-   }catch{}
+      source.connect(gain);
+      gain.connect(this.bus);
+      source.start();
+      this.referenceActive.push(source);
+      window.__platinumAudioDebug.reference.lastStarted=clip;
+      window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
+      if(this.referenceActive.length>24)this.referenceActive.splice(0,this.referenceActive.length-24);
+      const cleanup=()=>{
+       this.referenceActive=this.referenceActive.filter(entry=>entry!==source);
+       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
+      };
+      source.addEventListener('ended',cleanup,{once:true});
+    }catch{}
   }).catch(()=>{});
  },
  loadReferenceBuffer(src=''){
@@ -607,14 +613,19 @@ const sfx={
   this.referenceBuffers[clip]=fetch(url)
    .then(response=>{
     if(!response.ok)throw new Error(`Failed to load reference audio: ${response.status}`);
-    return response.arrayBuffer();
-   })
-   .then(bytes=>AC().decodeAudioData(bytes.slice(0)))
-   .catch(err=>{
+   return response.arrayBuffer();
+  })
+  .then(bytes=>AC().decodeAudioData(bytes.slice(0)))
+  .then(buffer=>{
+   if(buffer)window.__platinumAudioDebug.reference.lastLoaded=clip;
+   return buffer;
+  })
+  .catch(err=>{
     delete this.referenceBuffers[clip];
+    window.__platinumAudioDebug.reference.lastError=`${clip}: ${String(err&&err.message||err)}`;
     recordSystemIssue('reference_audio_load_failed',`Reference audio failed to load for ${clip}`,{clip,error:String(err&&err.message||err)},{level:'warn'});
     return null;
-   });
+  });
   return this.referenceBuffers[clip];
  },
  primeReferenceTheme(themeId=''){
