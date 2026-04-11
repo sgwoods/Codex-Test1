@@ -19,8 +19,8 @@ const REFERENCE_CLIPS = {
   playerHit: path.join(ROOT, 'src', 'assets', 'reference-audio', 'galaga3-death.m4a')
 };
 
-function git(args){
-  return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8' }).trim();
+function git(...args){
+  return execFileSync('git', ['-C', ROOT, ...args.flat()], { encoding: 'utf8' }).trim();
 }
 
 function ffprobeDuration(file){

@@ -206,6 +206,8 @@ function finalizeChallengeClear(){
  if(usesRuntimeGalagaReferenceAudio()){
   S.challengeResultPerfect=perfect>0?1:0;
   S.challengeResultCueT=0.22;
+  // Let the result phrase own the beat before any ambient cadence returns.
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.postChallengeT+.4);
  }else sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,

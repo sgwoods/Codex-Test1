@@ -128,6 +128,8 @@ function queueStageTransition(mode='normal'){
   S.transitionCueT=mode==='challengeResult'
    ? (nextIsChallenge?Math.max(.25,S.nextStageT-.62):.22)
    : (nextIsChallenge?Math.max(.25,S.nextStageT-.58):.18);
+  // Keep the periodic convoy pulse from stacking on transition clips.
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?.34:.18));
  }else sfx.transition(nextIsChallenge?1:0);
 }
 

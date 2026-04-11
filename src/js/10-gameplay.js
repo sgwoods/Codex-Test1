@@ -18,6 +18,7 @@ function update(dt){
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
+ S.audioPulseHoldT=Math.max(0,(+S.audioPulseHoldT||0)-dt);
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
  if(S.transitionCueT>0){
@@ -147,7 +148,12 @@ function update(dt){
   }
  }
 
- const t=simT;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
+ const t=simT;
+ S.seqT=Math.max(0,S.seqT-dt);
+ if(!S.challenge&&!S.audioPulseHoldT&&S.seqT<=0){
+  S.seqT=.38;
+  sfx.march(S.seq++);
+ }
  const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
  if(sequenceLock)return;
  S.att=0;
