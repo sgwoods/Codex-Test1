@@ -70,6 +70,7 @@ function destroyCarriedFighter(e){
  S.bannerMode='captureLoss';
  S.banner=1.05;
  ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
+ sfx.capturedFighterDestroyed();
  sfx.hit();
  return points;
 }
@@ -202,6 +203,7 @@ function finalizeChallengeClear(){
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=1.1;
+ sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,
   pendingStage:S.pendingStage,

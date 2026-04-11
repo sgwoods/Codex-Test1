@@ -214,6 +214,28 @@
       "preview": { "cue": "captureRetreat", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
     },
     {
+      "id": "capture-success",
+      "context": "Capture / Rescue",
+      "label": "Fighter Captured",
+      "cue": "captureSuccess",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "listenFor": "A clear loss-state handoff before the boss retreats with the captured ship.",
+      "description": "Distinct cue for the exact moment the player's fighter is fully captured.",
+      "preview": { "cue": "captureSuccess", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "captured-fighter-destroyed",
+      "context": "Capture / Rescue",
+      "label": "Captured Fighter Destroyed",
+      "cue": "capturedFighterDestroyed",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "listenFor": "A sharp, regrettable destruction cue distinct from ordinary enemy hits.",
+      "description": "Cue used when the carried/captured fighter itself is destroyed for points.",
+      "preview": { "cue": "capturedFighterDestroyed", "phase": "stage", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
       "id": "rescue-join",
       "context": "Capture / Rescue",
       "label": "Rescue Join",
@@ -266,6 +288,28 @@
       "preview": { "cue": "challengeTransition", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
     },
     {
+      "id": "challenge-results",
+      "context": "Challenge Results",
+      "label": "Challenge Results",
+      "cue": "challengeResults",
+      "phase": "challenge",
+      "audioTheme": "aurora-surge",
+      "listenFor": "A clean wrap-up phrase that feels like challenge scoring has concluded.",
+      "description": "Result cue for challenge-stage completion when the run was not perfect.",
+      "preview": { "cue": "challengeResults", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
+    },
+    {
+      "id": "challenge-perfect",
+      "context": "Challenge Results",
+      "label": "Challenge Perfect",
+      "cue": "challengePerfect",
+      "phase": "challenge",
+      "audioTheme": "aurora-surge",
+      "listenFor": "A more celebratory result than the standard challenge wrap-up.",
+      "description": "Distinct challenge-stage result cue for perfect clears.",
+      "preview": { "cue": "challengePerfect", "phase": "challenge", "atmosphereTheme": "aurora-borealis", "challenge": true }
+    },
+    {
       "id": "game-over",
       "context": "Results",
       "label": "Game Over",
@@ -275,6 +319,28 @@
       "listenFor": "A readable downward ending phrase, not just an impact effect.",
       "description": "End-of-run cue used by Aurora results/game-over flow.",
       "preview": { "cue": "gameOver", "phase": "results", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "high-score-first",
+      "context": "Results",
+      "label": "High Score 1st",
+      "cue": "highScoreFirst",
+      "phase": "results",
+      "audioTheme": "aurora-surge",
+      "listenFor": "A stronger celebratory placement cue for first place entry.",
+      "description": "Rank-specific scoreboard cue when a run enters first place.",
+      "preview": { "cue": "highScoreFirst", "phase": "results", "atmosphereTheme": "aurora-borealis" }
+    },
+    {
+      "id": "high-score-other",
+      "context": "Results",
+      "label": "High Score 2nd-10th",
+      "cue": "highScoreOther",
+      "phase": "results",
+      "audioTheme": "aurora-surge",
+      "listenFor": "A positive but smaller placement cue for non-first leaderboard entries.",
+      "description": "Rank-specific scoreboard cue when a run enters the board outside first place.",
+      "preview": { "cue": "highScoreOther", "phase": "results", "atmosphereTheme": "aurora-borealis" }
     }
   ],
   "comparisonSets": [

@@ -575,14 +575,18 @@ const sfx={
  shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage'})},
  boom(k='bee'){this.playCue(k==='boss'||k==='rogue'?'bossBoom':'enemyBoom',{phase:S.challenge?'challenge':'stage'})},
  beam(){this.playCue('captureBeam',{phase:S.challenge?'challenge':'stage'})},
+ captureSuccess(){this.playCue('captureSuccess',{phase:S.challenge?'challenge':'stage'})},
  rescue(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
  extend(){this.playCue('extendAward',{phase:'stage'})},
  over(){this.playCue('gameOver',{phase:'results'})},
+ capturedFighterDestroyed(){this.playCue('capturedFighterDestroyed',{phase:S.challenge?'challenge':'stage'})},
+ challengeResult(perfect=0){this.playCue(perfect?'challengePerfect':'challengeResults',{phase:'challenge',challenge:1})},
  march(i=0){this.playCue('stagePulse',{phase:S.challenge?'challenge':'stage',variant:i})},
  uiTick(){this.playCue('uiTick',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
  uiConfirm(){this.playCue('uiConfirm',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
  captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
  join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
+ highScore(rank=0){this.playCue(rank===1?'highScoreFirst':'highScoreOther',{phase:'results'})},
  transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})},
  attractEnter(phase='demo'){
   const frontDoorTheme=currentGamePack()?.frontDoor?.atmosphereTheme||'';
@@ -1542,6 +1546,7 @@ addEventListener('keydown',e=>{
     e.preventDefault();
     gameOverState.phase='scoreboard';
     if(!gameOverState.editing)submitGameOverScore();
+    if(gameOverState.rank)sfx.highScore(gameOverState.rank);
     gameOverHtml=buildGameOverHtmlFromState();
    }
    return;

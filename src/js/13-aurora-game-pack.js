@@ -128,10 +128,16 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.026,wave:'square',volume:.008,slide:-340,detune:.004,lpHz:4200},{freq:360,duration:.04,wave:'square',volume:.006,slide:-280,detune:-.003,lpHz:3600,delay:.012},{freq:240,duration:.075,wave:'triangle',volume:.006,slide:-90,detune:-.004,lpHz:2100,delay:.018}])}),
    bossBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.026,wave:'square',volume:.011,slide:-340,detune:.004,lpHz:4200},{freq:280,duration:.04,wave:'square',volume:.008,slide:-280,detune:-.003,lpHz:3600,delay:.012},{freq:180,duration:.11,wave:'triangle',volume:.011,slide:-90,detune:-.004,lpHz:2100,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.004,hp:1400,delay:.016}])}),
    captureBeam:Object.freeze({tones:Object.freeze([{freq:92,duration:.34,wave:'sawtooth',volume:.018,slide:48,detune:.018,lpHz:3000},{freq:138,duration:.28,wave:'triangle',volume:.009,slide:30,detune:.01,lpHz:2400,delay:.04}]),noise:Object.freeze([{duration:.11,volume:.004,hp:1900,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[370,330,294,247],step:.055,wave:'square',volume:.0125,slide:-18,lpHz:2600,tones:Object.freeze([{freq:185,duration:.14,wave:'triangle',volume:.0058,slide:-40,lpHz:2200,delay:.11}])}),
    captureRetreat:Object.freeze({seq:[247,294,370,494],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:620,duration:.18,wave:'square',volume:.006,slide:-70,detune:.08,lpHz:3400,delay:.06}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:310,duration:.04,wave:'square',volume:.012,slide:-260,detune:.004,lpHz:3400},{freq:188,duration:.09,wave:'triangle',volume:.009,slide:-140,detune:-.003,lpHz:2200,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.006,hp:1550,delay:.01}])}),
    rescueJoin:Object.freeze({seq:[523,659,784,1047],step:.05,wave:'triangle',volume:.013,slide:42,lpHz:4200,tones:Object.freeze([{freq:1318,duration:.09,wave:'square',volume:.006,slide:-80,detune:.08,lpHz:5000,delay:.08}])}),
    extendAward:Object.freeze({seq:[659,880,1175],step:.055,wave:'triangle',volume:.014,slide:55,lpHz:4300,tones:Object.freeze([{freq:1568,duration:.11,wave:'square',volume:.008,slide:-60,detune:.004,lpHz:5200,delay:.05},{freq:2093,duration:.08,wave:'triangle',volume:.006,slide:-40,detune:.003,lpHz:5600,delay:.11}])}),
+   challengeResults:Object.freeze({seq:[392,523,659,784],step:.06,wave:'triangle',volume:.0132,slide:22,lpHz:3600,tones:Object.freeze([{freq:988,duration:.12,wave:'triangle',volume:.0054,slide:10,lpHz:4300,delay:.18}])}),
+   challengePerfect:Object.freeze({seq:[659,880,1175,1568,2093],step:.052,wave:'triangle',volume:.015,slide:40,lpHz:4300,tones:Object.freeze([{freq:2637,duration:.14,wave:'triangle',volume:.0068,slide:18,lpHz:5200,delay:.208}])}),
    gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.088,wave:'triangle',volume:.017,slide:-56,lpHz:2300,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0062,slide:-28,detune:.006,lpHz:2800,delay:.01},{freq:147,duration:.18,wave:'triangle',volume:.0068,slide:-42,detune:.004,lpHz:2100,delay:.176},{freq:110,duration:.42,wave:'sawtooth',volume:.0158,slide:-112,detune:.01,lpHz:1820,delay:.27}]),noise:Object.freeze([{duration:.1,volume:.0044,hp:1100,delay:.12}])}),
+   highScoreFirst:Object.freeze({seq:[523,659,880,1175,1568],step:.05,wave:'triangle',volume:.0148,slide:36,lpHz:4300,tones:Object.freeze([{freq:2093,duration:.12,wave:'triangle',volume:.0062,slide:18,lpHz:5200,delay:.19}])}),
+   highScoreOther:Object.freeze({seq:[392,523,659,880],step:.056,wave:'triangle',volume:.0126,slide:24,lpHz:3900,tones:Object.freeze([{freq:1175,duration:.1,wave:'triangle',volume:.0048,slide:12,lpHz:4700,delay:.16}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:196,duration:.082,wave:'square',volume:.0028,slide:8,detune:.002,lpHz:1700},{freq:392,duration:.07,wave:'triangle',volume:.0102,slide:-12,detune:.002,lpHz:2900},{freq:523,duration:.052,wave:'square',volume:.0048,slide:-10,detune:-.002,lpHz:4050,delay:.016},{freq:659,duration:.04,wave:'square',volume:.0032,slide:-14,detune:.002,lpHz:4700,delay:.034}])}),
@@ -249,6 +255,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:494,duration:.03,wave:'triangle',volume:.0088,slide:-290,lpHz:3900},{freq:340,duration:.05,wave:'triangle',volume:.0054,slide:-170,lpHz:3200,delay:.014},{freq:228,duration:.085,wave:'sine',volume:.0052,slide:-62,lpHz:2000,delay:.024}])}),
    bossBoom:Object.freeze({tones:Object.freeze([{freq:410,duration:.03,wave:'triangle',volume:.0105,slide:-270,lpHz:4100},{freq:276,duration:.054,wave:'triangle',volume:.0072,slide:-176,lpHz:3400,delay:.014},{freq:184,duration:.112,wave:'sine',volume:.0082,slide:-72,lpHz:2200,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1320,delay:.016}])}),
    captureBeam:Object.freeze({tones:Object.freeze([{freq:118,duration:.34,wave:'sawtooth',volume:.0165,slide:54,detune:.014,lpHz:2750},{freq:176,duration:.28,wave:'sine',volume:.0074,slide:34,detune:.01,lpHz:2300,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1820,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[415,370,330,294],step:.054,wave:'triangle',volume:.0126,slide:-16,lpHz:2800,tones:Object.freeze([{freq:220,duration:.14,wave:'sine',volume:.0056,slide:-36,lpHz:2400,delay:.108}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:196,duration:.092,wave:'triangle',volume:.0028,slide:10,lpHz:1760},{freq:392,duration:.068,wave:'triangle',volume:.0106,slide:22,lpHz:2800},{freq:587,duration:.052,wave:'sine',volume:.0048,slide:18,lpHz:3600,delay:.018},{freq:880,duration:.042,wave:'triangle',volume:.0038,slide:14,lpHz:4700,delay:.038}])}),
@@ -260,6 +267,9 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    stageTransition:Object.freeze({seq:[523,659,880,1175,1568],step:.05,wave:'triangle',volume:.0134,slide:50,lpHz:4040,tones:Object.freeze([{freq:262,duration:.17,wave:'triangle',volume:.0034,slide:10,lpHz:1860,delay:0},{freq:1318,duration:.074,wave:'sine',volume:.0044,slide:12,lpHz:4600,delay:.05},{freq:1760,duration:.12,wave:'sine',volume:.0065,slide:22,lpHz:5000,delay:.16}])}),
    challengeTransition:Object.freeze({seq:[587,784,1047,1318,1760,2349],step:.047,wave:'triangle',volume:.0142,slide:54,lpHz:4240,tones:Object.freeze([{freq:294,duration:.17,wave:'triangle',volume:.0034,slide:10,lpHz:1900,delay:0},{freq:1397,duration:.072,wave:'sine',volume:.0046,slide:14,lpHz:4700,delay:.047},{freq:2093,duration:.13,wave:'sine',volume:.007,slide:20,lpHz:5200,delay:.188}])}),
    extendAward:Object.freeze({seq:[880,1175,1568],step:.058,wave:'triangle',volume:.015,slide:54,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.08}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:340,duration:.042,wave:'triangle',volume:.0118,slide:-250,lpHz:3500},{freq:208,duration:.092,wave:'sine',volume:.0088,slide:-130,lpHz:2360,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0056,hp:1500,delay:.01}])}),
+   challengeResults:Object.freeze({seq:[440,587,784,988],step:.058,wave:'triangle',volume:.0134,slide:24,lpHz:3800,tones:Object.freeze([{freq:1245,duration:.12,wave:'sine',volume:.0054,slide:12,lpHz:4500,delay:.174}])}),
+   challengePerfect:Object.freeze({seq:[698,932,1175,1568,2093],step:.05,wave:'triangle',volume:.0152,slide:42,lpHz:4500,tones:Object.freeze([{freq:2637,duration:.14,wave:'sine',volume:.0068,slide:18,lpHz:5400,delay:.2}])}),
    rescueJoin:Object.freeze({seq:[659,784,1047,1397],step:.05,wave:'triangle',volume:.014,slide:48,lpHz:4500,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:20,lpHz:5200,delay:.08}])}),
    captureRetreat:Object.freeze({seq:[330,392,494,587],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:784,duration:.18,wave:'sawtooth',volume:.005,slide:-70,lpHz:3200,delay:.08}])}),
    attractEnter:Object.freeze({
@@ -301,7 +311,9 @@ const AURORA_AUDIO_THEMES=Object.freeze({
     })
    }),
    playerHit:Object.freeze({tones:Object.freeze([{freq:247,duration:.12,wave:'triangle',volume:.02,slide:-230,lpHz:2400},{freq:185,duration:.22,wave:'sawtooth',volume:.018,slide:-240,lpHz:1900,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
-   gameOver:Object.freeze({seq:[392,330,262,220,175,147],step:.09,wave:'triangle',volume:.016,slide:-60,lpHz:2220,tones:Object.freeze([{freq:196,duration:.11,wave:'triangle',volume:.0054,slide:-20,lpHz:2500,delay:.01},{freq:147,duration:.18,wave:'triangle',volume:.006,slide:-28,lpHz:1950,delay:.18},{freq:110,duration:.4,wave:'sawtooth',volume:.0144,slide:-94,lpHz:1720,delay:.264}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])})
+   gameOver:Object.freeze({seq:[392,330,262,220,175,147],step:.09,wave:'triangle',volume:.016,slide:-60,lpHz:2220,tones:Object.freeze([{freq:196,duration:.11,wave:'triangle',volume:.0054,slide:-20,lpHz:2500,delay:.01},{freq:147,duration:.18,wave:'triangle',volume:.006,slide:-28,lpHz:1950,delay:.18},{freq:110,duration:.4,wave:'sawtooth',volume:.0144,slide:-94,lpHz:1720,delay:.264}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])}),
+   highScoreFirst:Object.freeze({seq:[659,880,1175,1568,2093],step:.048,wave:'triangle',volume:.0152,slide:38,lpHz:4500,tones:Object.freeze([{freq:2794,duration:.12,wave:'sine',volume:.0064,slide:16,lpHz:5400,delay:.192}])}),
+   highScoreOther:Object.freeze({seq:[523,698,932,1175],step:.054,wave:'triangle',volume:.0132,slide:24,lpHz:4100,tones:Object.freeze([{freq:1568,duration:.1,wave:'sine',volume:.0048,slide:10,lpHz:4900,delay:.168}])})
   })
  }),
  'aurora-crown':Object.freeze({
@@ -316,6 +328,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.03,wave:'triangle',volume:.009,slide:-300,lpHz:4100},{freq:356,duration:.05,wave:'triangle',volume:.0055,slide:-176,lpHz:3300,delay:.014},{freq:240,duration:.086,wave:'sine',volume:.0054,slide:-64,lpHz:2060,delay:.024}])}),
    bossBoom:Object.freeze({tones:Object.freeze([{freq:432,duration:.03,wave:'triangle',volume:.0108,slide:-278,lpHz:4300},{freq:290,duration:.054,wave:'triangle',volume:.0074,slide:-178,lpHz:3500,delay:.014},{freq:196,duration:.114,wave:'sine',volume:.0084,slide:-74,lpHz:2260,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1340,delay:.016}])}),
    captureBeam:Object.freeze({tones:Object.freeze([{freq:126,duration:.34,wave:'sawtooth',volume:.0168,slide:56,detune:.014,lpHz:2850},{freq:188,duration:.28,wave:'sine',volume:.0076,slide:34,detune:.01,lpHz:2380,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1840,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[466,415,370,330],step:.052,wave:'triangle',volume:.0128,slide:-14,lpHz:2920,tones:Object.freeze([{freq:247,duration:.14,wave:'sine',volume:.0058,slide:-30,lpHz:2500,delay:.106}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:220,duration:.094,wave:'triangle',volume:.0028,slide:10,lpHz:1820},{freq:440,duration:.07,wave:'triangle',volume:.0108,slide:22,lpHz:3000},{freq:698,duration:.054,wave:'sine',volume:.0049,slide:18,lpHz:3800,delay:.018},{freq:1047,duration:.044,wave:'triangle',volume:.0039,slide:14,lpHz:4900,delay:.038}])}),
@@ -368,7 +381,12 @@ const AURORA_AUDIO_THEMES=Object.freeze({
     })
    }),
    playerHit:Object.freeze({tones:Object.freeze([{freq:262,duration:.12,wave:'triangle',volume:.02,slide:-220,lpHz:2500},{freq:196,duration:.22,wave:'sawtooth',volume:.018,slide:-235,lpHz:1950,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
-   gameOver:Object.freeze({seq:[440,349,294,247,196,156],step:.088,wave:'triangle',volume:.0162,slide:-56,lpHz:2320,tones:Object.freeze([{freq:220,duration:.11,wave:'triangle',volume:.0054,slide:-18,lpHz:2600,delay:.01},{freq:165,duration:.18,wave:'triangle',volume:.0062,slide:-26,lpHz:2060,delay:.176},{freq:124,duration:.4,wave:'sawtooth',volume:.0146,slide:-92,lpHz:1780,delay:.258}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])})
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:356,duration:.042,wave:'triangle',volume:.012,slide:-250,lpHz:3600},{freq:220,duration:.094,wave:'sine',volume:.009,slide:-130,lpHz:2440,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0058,hp:1540,delay:.01}])}),
+   challengeResults:Object.freeze({seq:[494,659,880,1175],step:.056,wave:'triangle',volume:.0138,slide:24,lpHz:3960,tones:Object.freeze([{freq:1480,duration:.12,wave:'sine',volume:.0056,slide:12,lpHz:4700,delay:.17}])}),
+   challengePerfect:Object.freeze({seq:[784,1047,1397,1865,2349],step:.048,wave:'triangle',volume:.0156,slide:42,lpHz:4700,tones:Object.freeze([{freq:3136,duration:.14,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.192}])}),
+   gameOver:Object.freeze({seq:[440,349,294,247,196,156],step:.088,wave:'triangle',volume:.0162,slide:-56,lpHz:2320,tones:Object.freeze([{freq:220,duration:.11,wave:'triangle',volume:.0054,slide:-18,lpHz:2600,delay:.01},{freq:165,duration:.18,wave:'triangle',volume:.0062,slide:-26,lpHz:2060,delay:.176},{freq:124,duration:.4,wave:'sawtooth',volume:.0146,slide:-92,lpHz:1780,delay:.258}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])}),
+   highScoreFirst:Object.freeze({seq:[784,1047,1397,1865,2349],step:.046,wave:'triangle',volume:.0154,slide:38,lpHz:4700,tones:Object.freeze([{freq:3136,duration:.12,wave:'sine',volume:.0066,slide:16,lpHz:5700,delay:.186}])}),
+   highScoreOther:Object.freeze({seq:[587,784,1047,1397],step:.052,wave:'triangle',volume:.0134,slide:24,lpHz:4300,tones:Object.freeze([{freq:1865,duration:.1,wave:'sine',volume:.005,slide:10,lpHz:5100,delay:.164}])})
  })
  }),
  'galaga-original-reference':Object.freeze({
@@ -379,6 +397,9 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    playerShot:Object.freeze({tones:Object.freeze([{freq:1240,duration:.038,wave:'square',volume:.0092,slide:-760,detune:.002,lpHz:6600},{freq:1660,duration:.022,wave:'square',volume:.0046,slide:-560,detune:-.003,lpHz:7200,delay:.006}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:306,duration:.09,wave:'square',volume:.0112,slide:-170,detune:.002,lpHz:2800},{freq:228,duration:.06,wave:'triangle',volume:.0054,slide:-120,detune:.001,lpHz:2300,delay:.014}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.058,wave:'square',volume:.014,slide:-240,detune:.004,lpHz:3400},{freq:154,duration:.11,wave:'sawtooth',volume:.016,slide:-220,detune:.008,lpHz:2300,delay:.018}]),noise:Object.freeze([{duration:.05,volume:.0066,hp:1700,delay:.012}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:98,duration:.34,wave:'sawtooth',volume:.019,slide:54,detune:.014,lpHz:2800},{freq:147,duration:.28,wave:'triangle',volume:.0088,slide:32,detune:.01,lpHz:2400,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1820,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[415,370,330,277],step:.052,wave:'square',volume:.0132,slide:-18,lpHz:2800,tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0062,slide:-44,lpHz:2360,delay:.104}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:330,duration:.044,wave:'square',volume:.0134,slide:-270,detune:.004,lpHz:3500},{freq:196,duration:.096,wave:'triangle',volume:.0096,slide:-150,detune:-.002,lpHz:2320,delay:.014}]),noise:Object.freeze([{duration:.052,volume:.0062,hp:1560,delay:.01}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:196,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:392,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:523,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:659,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
@@ -389,6 +410,8 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    }),
    stageTransition:Object.freeze({seq:[330,440,587,784,988],step:.046,wave:'square',volume:.0136,slide:20,lpHz:3400,tones:Object.freeze([{freq:196,duration:.17,wave:'square',volume:.0038,slide:8,lpHz:1700,delay:0},{freq:659,duration:.08,wave:'square',volume:.0058,slide:-24,lpHz:4200,delay:.046},{freq:988,duration:.14,wave:'triangle',volume:.0066,slide:-34,lpHz:4600,delay:.138}])}),
    challengeTransition:Object.freeze({seq:[523,659,784,988,1318,1760],step:.042,wave:'square',volume:.0152,slide:28,lpHz:3600,tones:Object.freeze([{freq:262,duration:.18,wave:'square',volume:.0038,slide:10,lpHz:1760,delay:0},{freq:784,duration:.082,wave:'square',volume:.0062,slide:-14,lpHz:4400,delay:.042},{freq:1568,duration:.16,wave:'triangle',volume:.0076,slide:-38,lpHz:4900,delay:.168}])}),
+   challengeResults:Object.freeze({seq:[392,523,659,784],step:.058,wave:'square',volume:.0138,slide:18,lpHz:3500,tones:Object.freeze([{freq:988,duration:.13,wave:'triangle',volume:.0058,slide:10,lpHz:4300,delay:.176}])}),
+   challengePerfect:Object.freeze({seq:[659,880,1175,1568,2093],step:.048,wave:'square',volume:.016,slide:30,lpHz:3900,tones:Object.freeze([{freq:2637,duration:.15,wave:'triangle',volume:.0072,slide:16,lpHz:5000,delay:.192}])}),
    attractEnter:Object.freeze({
     byPhase:Object.freeze({
      demo:Object.freeze({seq:[294,392,494,659,784],step:.056,wave:'square',volume:.0108,slide:14,lpHz:3100,tones:Object.freeze([{freq:147,duration:.15,wave:'square',volume:.0032,slide:6,lpHz:1680,delay:0},{freq:784,duration:.086,wave:'square',volume:.0044,slide:-18,lpHz:3900,delay:.168},{freq:988,duration:.074,wave:'triangle',volume:.0044,slide:-8,lpHz:4300,delay:.224}]),allowIdle:1})
@@ -405,7 +428,9 @@ const AURORA_AUDIO_THEMES=Object.freeze({
      })
     })
    }),
-   gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.084,wave:'square',volume:.018,slide:-60,lpHz:2200,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0068,slide:-24,lpHz:2500,delay:.01},{freq:124,duration:.2,wave:'triangle',volume:.0072,slide:-34,lpHz:1900,delay:.17},{freq:98,duration:.44,wave:'sawtooth',volume:.0162,slide:-120,lpHz:1720,delay:.254}]),noise:Object.freeze([{duration:.11,volume:.0048,hp:1040,delay:.12}])})
+   gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.084,wave:'square',volume:.018,slide:-60,lpHz:2200,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0068,slide:-24,lpHz:2500,delay:.01},{freq:124,duration:.2,wave:'triangle',volume:.0072,slide:-34,lpHz:1900,delay:.17},{freq:98,duration:.44,wave:'sawtooth',volume:.0162,slide:-120,lpHz:1720,delay:.254}]),noise:Object.freeze([{duration:.11,volume:.0048,hp:1040,delay:.12}])}),
+   highScoreFirst:Object.freeze({seq:[523,659,880,1175,1568],step:.046,wave:'square',volume:.0158,slide:26,lpHz:3800,tones:Object.freeze([{freq:2093,duration:.12,wave:'triangle',volume:.0068,slide:14,lpHz:5000,delay:.184}])}),
+   highScoreOther:Object.freeze({seq:[392,523,659,880],step:.052,wave:'square',volume:.0138,slide:20,lpHz:3500,tones:Object.freeze([{freq:1175,duration:.1,wave:'triangle',volume:.0052,slide:10,lpHz:4600,delay:.16}])})
   })
  })
 });

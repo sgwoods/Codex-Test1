@@ -59,6 +59,7 @@ function finishCapture(){
   timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)
  },enemyRef(e)));
  logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});
+ sfx.captureSuccess();
  sfx.captureRetreat();
  if(S.lives<0)gameOver();
 }
