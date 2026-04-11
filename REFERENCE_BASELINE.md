@@ -104,6 +104,16 @@ For each fidelity topic:
   - original Galaga should remain the strongest reference for gameplay-phase
     sound identity, while Aurora may still own shell/front-door flavor where the
     product now has application-specific surfaces
+- Later trueness goal:
+  - Aurora should gradually align its gameplay-state and cue mapping more
+    closely with original Galaga, but that fidelity work should remain
+    application-owned.
+  - `Platinum` should provide the extension points needed to host richer
+    game-specific state, phase, and cue models without absorbing that behavior
+    into the platform itself.
+  - This is expected to matter again for the next hosted game, so the reference
+    archive should continue to be curated with reusable game-owned mappings in
+    mind rather than platform-owned special cases.
 - Active gap:
   - Aurora currently has improved phase routing and stronger motifs, but it is
     still not yet a full Galaga-faithful selectable gameplay sound theme

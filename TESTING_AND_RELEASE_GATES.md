@@ -102,6 +102,9 @@ Typical examples:
 - answers:
   - did a game change leak into platform behavior?
   - did a platform change alter game behavior unintentionally?
+- future fidelity/trueness work should deepen game-owned state and cue models
+  without moving game-specific rules, audiovisual mapping, or reference logic
+  into `Platinum`
 
 Typical examples:
 - `node tools/harness/check-platinum-pack-boot.js`
@@ -139,6 +142,8 @@ Required:
 - one adjacent regression check for the same gameplay family
 - at least one boundary check proving the application change did not leak into
   the platform
+- for fidelity work, prefer expanding application-owned state/cue granularity
+  instead of adding platform-owned exceptions for one game
 
 Typical boundary checks:
 - `node tools/harness/check-platinum-pack-boot.js`
