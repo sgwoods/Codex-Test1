@@ -117,6 +117,11 @@ For each fidelity topic:
 - Active gap:
   - Aurora currently has improved phase routing and stronger motifs, but it is
     still not yet a full Galaga-faithful selectable gameplay sound theme
+- Cue matrix:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md`
+  - use this to map Aurora cue slots against the strongest current Galaga
+    reference clips and identify missing game-owned slots before deeper audio
+    fidelity work
 
 ### Challenge Stage Fidelity
 
