@@ -69,6 +69,14 @@ function loadJson(file){
 }
 
 function laneConfig(lane){
+  const legacyRootPrune = [
+    '.github/workflows/sync-public-pages.yml',
+    'package.json',
+    'package-lock.json',
+    'tools',
+    'src',
+    'reference-artifacts'
+  ];
   if(lane === 'dev'){
     return {
       lane,
@@ -77,6 +85,7 @@ function laneConfig(lane){
       targetDir: 'dev',
       files: devFiles(DIST_DEV),
       rootFiles: ['.github/workflows/pages.yml'],
+      prunePaths: legacyRootPrune,
       commitPrefix: 'Update dev lane from local build'
     };
   }
@@ -88,6 +97,7 @@ function laneConfig(lane){
       targetDir: 'beta',
       files: betaFiles(DIST_BETA),
       rootFiles: ['.github/workflows/pages.yml'],
+      prunePaths: legacyRootPrune,
       commitPrefix: 'Update beta lane from dev build'
     };
   }
@@ -99,6 +109,7 @@ function laneConfig(lane){
       targetDir: '.',
       files: productionFiles(DIST_PRODUCTION),
       rootFiles: ['.github/workflows/pages.yml'],
+      prunePaths: legacyRootPrune,
       commitPrefix: 'Update production lane from dev build'
     };
   }
@@ -108,6 +119,9 @@ function laneConfig(lane){
 function stageArtifacts(repoDir, cfg){
   const targetBase = path.join(repoDir, cfg.targetDir);
   ensureDir(targetBase);
+  for(const file of cfg.prunePaths || []){
+    removeEntry(path.join(repoDir, file));
+  }
   for(const file of cfg.files){
     const src = path.join(cfg.sourceDir, file);
     const dest = path.join(targetBase, file);
