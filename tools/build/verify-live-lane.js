@@ -29,21 +29,30 @@ function laneConfig(lane){
     return {
       buildInfo: DEV_BUILD_INFO,
       url: 'https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json',
-      assetUrl: 'https://sgwoods.github.io/Aurora-Galactica/dev/assets/platinum-platform-mark.png'
+      assetUrls: [
+        'https://sgwoods.github.io/Aurora-Galactica/dev/assets/platinum-platform-mark.png',
+        'https://sgwoods.github.io/Aurora-Galactica/dev/assets/reference-audio/galaga3-start.m4a'
+      ]
     };
   }
   if(lane === 'beta'){
     return {
       buildInfo: BETA_BUILD_INFO,
       url: 'https://sgwoods.github.io/Aurora-Galactica/beta/build-info.json',
-      assetUrl: 'https://sgwoods.github.io/Aurora-Galactica/beta/assets/platinum-platform-mark.png'
+      assetUrls: [
+        'https://sgwoods.github.io/Aurora-Galactica/beta/assets/platinum-platform-mark.png',
+        'https://sgwoods.github.io/Aurora-Galactica/beta/assets/reference-audio/galaga3-start.m4a'
+      ]
     };
   }
   if(lane === 'production'){
     return {
       buildInfo: PRODUCTION_BUILD_INFO,
       url: 'https://sgwoods.github.io/Aurora-Galactica/build-info.json',
-      assetUrl: 'https://sgwoods.github.io/Aurora-Galactica/assets/platinum-platform-mark.png'
+      assetUrls: [
+        'https://sgwoods.github.io/Aurora-Galactica/assets/platinum-platform-mark.png',
+        'https://sgwoods.github.io/Aurora-Galactica/assets/reference-audio/galaga3-start.m4a'
+      ]
     };
   }
   throw new Error('Use --lane dev, --lane beta, or --lane production.');
@@ -113,12 +122,14 @@ async function main(){
         live.commit === expected.commit &&
         live.releaseChannel === expected.releaseChannel
       ){
-        await fetchOk(cfg.assetUrl);
+        for(const assetUrl of (cfg.assetUrls || [])){
+          await fetchOk(assetUrl);
+        }
         console.log(JSON.stringify({
           ok: true,
           lane,
           url: cfg.url,
-          assetUrl: cfg.assetUrl,
+          assetUrls: cfg.assetUrls || [],
           label: live.label,
           commit: live.shortCommit || String(live.commit || '').slice(0, 7),
           releaseChannel: live.releaseChannel

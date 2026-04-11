@@ -67,11 +67,17 @@ reference-backed fidelity work, and safe collaboration.
   - hosted production publish verification
   - `npm run sync:public`
   - `npm run verify:public`
+- `node tools/build/verify-live-lane.js --lane ...` should be treated as a
+  runtime-asset check too, not just a build-info check. If a lane uses files
+  under `assets/` at runtime, those files are part of the publish contract.
 - Production promotion is expected to start from a clean tree; dirty source state should be fixed before promoting.
 - Production release/public sync is also expected to run from a current Aurora checkout:
   - branch must be `main`
   - local `main` must match `origin/main`
   - the current `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` must be the template being synced
+- If the public Aurora project page still shows stale release/build/focus data
+  after a production publish, treat that as a release-path failure, not a
+  cosmetic follow-up.
 - The main local playable build is generated at:
   - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
 - Preferred local handoff/startup command:

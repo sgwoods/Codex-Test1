@@ -198,12 +198,23 @@ Examples:
 - production metadata rewrite
 - asset copy policy
 - documentation gate enforcement
+- runtime-loaded media under `assets/`
+- top-level public project page sync freshness
 
 Required:
 - publish preflight
 - live lane verification
 - asset and metadata validation
 - docs presence checks where relevant
+
+For this profile, asset validation should include runtime-loaded files, not
+just shell-visible images. If a lane uses files under `assets/` at runtime,
+publish and verify should treat those files as part of the release contract.
+
+For production, the release contract also includes the top-level
+`sgwoods/public` Aurora project page. A production release is not complete if
+the public page still shows stale release/build/focus content after the publish
+and sync steps.
 
 This profile should not automatically pull in deep gameplay suites unless the
 change also affects gameplay delivery.
@@ -260,6 +271,8 @@ Hosted `/dev` is the preferred place to catch:
 - local-versus-hosted differences
 - platform/application boundary drift
 - shell or copy regressions that are awkward to judge from local-only runs
+- missing runtime-loaded assets that do not show up until the hosted lane is
+  exercised
 
 ### Hosted `/beta`
 

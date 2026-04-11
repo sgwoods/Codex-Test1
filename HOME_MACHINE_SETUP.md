@@ -202,6 +202,11 @@ Important:
 - production release/public sync should run from a machine whose Aurora checkout is on `main` and current with `origin/main`
 - the production artifact and `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` should come from that exact clean checkout before `npm run sync:public`
 - if the approved beta candidate was built/promoted from a dirty source state, re-run the beta path from a clean tree before promoting production
+- if hosted lanes depend on runtime-loaded media under `assets/`, verify those
+  files are present after publish instead of assuming the image-only checks are
+  enough
+- if the top-level Aurora project page still shows stale release/build/focus
+  data after production publish, stop and treat that as a release-path failure
 
 ## Important Defaults
 
