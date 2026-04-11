@@ -1,0 +1,335 @@
+{
+  "commit": "8411cb9",
+  "version": "1.2.3",
+  "items": [
+    {
+      "id": "demo-pulse",
+      "label": "Demo Pulse",
+      "focus": "Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio.",
+      "cue": "attractPulse",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/demo-pulse-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0089,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1147.0,
+            "zero_crossings_per_s": 148.7
+          },
+          "waveform": "plots/demo-pulse-aurora-waveform.png",
+          "spectrogram": "plots/demo-pulse-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/demo-pulse-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1880.2,
+            "zero_crossings_per_s": 50.0
+          },
+          "waveform": "plots/demo-pulse-galaga-waveform.png",
+          "spectrogram": "plots/demo-pulse-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Opening Theme",
+          "wav": "samples/demo-pulse-reference.wav",
+          "metrics": {
+            "duration_s": 4.017,
+            "peak": 0.9498,
+            "rms": 0.2802,
+            "spectral_centroid_hz": 1325.7,
+            "zero_crossings_per_s": 2229.0
+          },
+          "waveform": "plots/demo-pulse-reference-waveform.png",
+          "spectrogram": "plots/demo-pulse-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "stage-start",
+      "label": "Stage Start",
+      "focus": "Compare whether the opening announcement feels like an exciting arcade start or just a functional cue.",
+      "cue": "gameStart",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/stage-start-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.009,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1187.6,
+            "zero_crossings_per_s": 150.0
+          },
+          "waveform": "plots/stage-start-aurora-waveform.png",
+          "spectrogram": "plots/stage-start-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/stage-start-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1914.2,
+            "zero_crossings_per_s": 48.7
+          },
+          "waveform": "plots/stage-start-galaga-waveform.png",
+          "spectrogram": "plots/stage-start-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Level Flag V1",
+          "wav": "samples/stage-start-reference.wav",
+          "metrics": {
+            "duration_s": 4.017,
+            "peak": 0.963,
+            "rms": 0.1574,
+            "spectral_centroid_hz": 1646.1,
+            "zero_crossings_per_s": 1039.6
+          },
+          "waveform": "plots/stage-start-reference-waveform.png",
+          "spectrogram": "plots/stage-start-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "formation-pulse",
+      "label": "Formation Pulse",
+      "focus": "Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play.",
+      "cue": "stagePulse",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/formation-pulse-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1905.3,
+            "zero_crossings_per_s": 48.7
+          },
+          "waveform": "plots/formation-pulse-aurora-waveform.png",
+          "spectrogram": "plots/formation-pulse-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/formation-pulse-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0091,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1159.0,
+            "zero_crossings_per_s": 147.4
+          },
+          "waveform": "plots/formation-pulse-galaga-waveform.png",
+          "spectrogram": "plots/formation-pulse-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Sample Gameplay",
+          "wav": "samples/formation-pulse-reference.wav",
+          "metrics": {
+            "duration_s": 9.009,
+            "peak": 0.4738,
+            "rms": 0.0945,
+            "spectral_centroid_hz": 2595.6,
+            "zero_crossings_per_s": 3925.6
+          },
+          "waveform": "plots/formation-pulse-reference-waveform.png",
+          "spectrogram": "plots/formation-pulse-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "player-shot",
+      "label": "Player Shot",
+      "focus": "Compare shot energy and how clearly the player weapon reads in the mix.",
+      "cue": "playerShot",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/player-shot-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1903.3,
+            "zero_crossings_per_s": 48.7
+          },
+          "waveform": "plots/player-shot-aurora-waveform.png",
+          "spectrogram": "plots/player-shot-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/player-shot-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1913.6,
+            "zero_crossings_per_s": 47.4
+          },
+          "waveform": "plots/player-shot-galaga-waveform.png",
+          "spectrogram": "plots/player-shot-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Sample Gameplay",
+          "wav": "samples/player-shot-reference.wav",
+          "metrics": {
+            "duration_s": 9.009,
+            "peak": 0.4738,
+            "rms": 0.0945,
+            "spectral_centroid_hz": 2595.6,
+            "zero_crossings_per_s": 3925.6
+          },
+          "waveform": "plots/player-shot-reference-waveform.png",
+          "spectrogram": "plots/player-shot-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "enemy-shot",
+      "label": "Enemy Shot",
+      "focus": "Compare threat clarity and whether the enemy projectile cue has enough arcade bite.",
+      "cue": "enemyShot",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/enemy-shot-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0007,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1764.9,
+            "zero_crossings_per_s": 75.6
+          },
+          "waveform": "plots/enemy-shot-aurora-waveform.png",
+          "spectrogram": "plots/enemy-shot-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/enemy-shot-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 2064.4,
+            "zero_crossings_per_s": 46.2
+          },
+          "waveform": "plots/enemy-shot-galaga-waveform.png",
+          "spectrogram": "plots/enemy-shot-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Sample Gameplay",
+          "wav": "samples/enemy-shot-reference.wav",
+          "metrics": {
+            "duration_s": 9.009,
+            "peak": 0.4738,
+            "rms": 0.0945,
+            "spectral_centroid_hz": 2595.6,
+            "zero_crossings_per_s": 3925.6
+          },
+          "waveform": "plots/enemy-shot-reference-waveform.png",
+          "spectrogram": "plots/enemy-shot-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "challenge-transition",
+      "label": "Challenge Transition",
+      "focus": "Compare how ceremonial and distinct the bonus-stage announcement feels.",
+      "cue": "challengeTransition",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-transition-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0089,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1152.0,
+            "zero_crossings_per_s": 150.0
+          },
+          "waveform": "plots/challenge-transition-aurora-waveform.png",
+          "spectrogram": "plots/challenge-transition-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-transition-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 2008.5,
+            "zero_crossings_per_s": 47.4
+          },
+          "waveform": "plots/challenge-transition-galaga-waveform.png",
+          "spectrogram": "plots/challenge-transition-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Bonus Stage Results",
+          "wav": "samples/challenge-transition-reference.wav",
+          "metrics": {
+            "duration_s": 9.009,
+            "peak": 0.6517,
+            "rms": 0.155,
+            "spectral_centroid_hz": 1676.0,
+            "zero_crossings_per_s": 3072.1
+          },
+          "waveform": "plots/challenge-transition-reference-waveform.png",
+          "spectrogram": "plots/challenge-transition-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "game-over",
+      "label": "Game Over",
+      "focus": "Compare whether the ending cue feels final, readable, and emotionally complete.",
+      "cue": "gameOver",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/game-over-aurora.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1647.0,
+            "zero_crossings_per_s": 48.8
+          },
+          "waveform": "plots/game-over-aurora-waveform.png",
+          "spectrogram": "plots/game-over-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/game-over-galaga.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.0091,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1168.4,
+            "zero_crossings_per_s": 147.6
+          },
+          "waveform": "plots/game-over-galaga-waveform.png",
+          "spectrogram": "plots/game-over-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Last Ship Destroyed Ambience",
+          "wav": "samples/game-over-reference.wav",
+          "metrics": {
+            "duration_s": 14.002,
+            "peak": 0.7676,
+            "rms": 0.1931,
+            "spectral_centroid_hz": 1455.1,
+            "zero_crossings_per_s": 840.5
+          },
+          "waveform": "plots/game-over-reference-waveform.png",
+          "spectrogram": "plots/game-over-reference-spectrogram.png"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "generatedAt": "2026-04-11T01:04:04.554Z",
+  "commit": "8411cb9",
+  "version": "1.2.3",
+  "items": [
+    {
+      "id": "demo-pulse",
+      "label": "Demo Pulse",
+      "focus": "Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio.",
+      "cue": "attractPulse",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/demo-pulse-aurora.wav",
+        "webm": "samples/demo-pulse-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.463
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/demo-pulse-galaga.wav",
+        "webm": "samples/demo-pulse-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 2.346
+        }
+      },
+      "reference": {
+        "label": "Opening Theme",
+        "source": "src/assets/reference-audio/galaga-opening-theme.m4a",
+        "wav": "samples/demo-pulse-reference.wav"
+      }
+    },
+    {
+      "id": "stage-start",
+      "label": "Stage Start",
+      "focus": "Compare whether the opening announcement feels like an exciting arcade start or just a functional cue.",
+      "cue": "gameStart",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/stage-start-aurora.wav",
+        "webm": "samples/stage-start-aurora.webm",
+        "audioCue": {
+          "cue": "attractPulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "demo",
+          "variant": 1,
+          "stage": 1,
+          "challenge": false,
+          "at": 3.138
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/stage-start-galaga.wav",
+        "webm": "samples/stage-start-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 3.996
+        }
+      },
+      "reference": {
+        "label": "Level Flag V1",
+        "source": "src/assets/reference-audio/galaga-level-flag-v1.m4a",
+        "wav": "samples/stage-start-reference.wav"
+      }
+    },
+    {
+      "id": "formation-pulse",
+      "label": "Formation Pulse",
+      "focus": "Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/formation-pulse-aurora.wav",
+        "webm": "samples/formation-pulse-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 4.871
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/formation-pulse-galaga.wav",
+        "webm": "samples/formation-pulse-galaga.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 13,
+          "stage": 1,
+          "challenge": false,
+          "at": 5.621
+        }
+      },
+      "reference": {
+        "label": "Sample Gameplay",
+        "source": "src/assets/reference-audio/galaga-sample-gameplay.m4a",
+        "wav": "samples/formation-pulse-reference.wav"
+      }
+    },
+    {
+      "id": "player-shot",
+      "label": "Player Shot",
+      "focus": "Compare shot energy and how clearly the player weapon reads in the mix.",
+      "cue": "playerShot",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/player-shot-aurora.wav",
+        "webm": "samples/player-shot-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 6.53
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/player-shot-galaga.wav",
+        "webm": "samples/player-shot-galaga.webm",
+        "audioCue": {
+          "cue": "attractPulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "demo",
+          "variant": 3,
+          "stage": 1,
+          "challenge": false,
+          "at": 7.438
+        }
+      },
+      "reference": {
+        "label": "Sample Gameplay",
+        "source": "src/assets/reference-audio/galaga-sample-gameplay.m4a",
+        "wav": "samples/player-shot-reference.wav"
+      }
+    },
+    {
+      "id": "enemy-shot",
+      "label": "Enemy Shot",
+      "focus": "Compare threat clarity and whether the enemy projectile cue has enough arcade bite.",
+      "cue": "enemyShot",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/enemy-shot-aurora.wav",
+        "webm": "samples/enemy-shot-aurora.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 20,
+          "stage": 1,
+          "challenge": false,
+          "at": 8.305
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/enemy-shot-galaga.wav",
+        "webm": "samples/enemy-shot-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 9.13
+        }
+      },
+      "reference": {
+        "label": "Sample Gameplay",
+        "source": "src/assets/reference-audio/galaga-sample-gameplay.m4a",
+        "wav": "samples/enemy-shot-reference.wav"
+      }
+    },
+    {
+      "id": "challenge-transition",
+      "label": "Challenge Transition",
+      "focus": "Compare how ceremonial and distinct the bonus-stage announcement feels.",
+      "cue": "challengeTransition",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/challenge-transition-aurora.wav",
+        "webm": "samples/challenge-transition-aurora.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 24,
+          "stage": 1,
+          "challenge": false,
+          "at": 9.838
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/challenge-transition-galaga.wav",
+        "webm": "samples/challenge-transition-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 10.688
+        }
+      },
+      "reference": {
+        "label": "Bonus Stage Results",
+        "source": "src/assets/reference-audio/galaga-bonus-stage-results.m4a",
+        "wav": "samples/challenge-transition-reference.wav"
+      }
+    },
+    {
+      "id": "game-over",
+      "label": "Game Over",
+      "focus": "Compare whether the ending cue feels final, readable, and emotionally complete.",
+      "cue": "gameOver",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/game-over-aurora.wav",
+        "webm": "samples/game-over-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 11.563
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/game-over-galaga.wav",
+        "webm": "samples/game-over-galaga.webm",
+        "audioCue": {
+          "cue": "enemyBoom",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 12.563
+        }
+      },
+      "reference": {
+        "label": "Last Ship Destroyed Ambience",
+        "source": "src/assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a",
+        "wav": "samples/game-over-reference.wav"
+      }
+    }
+  ]
+}

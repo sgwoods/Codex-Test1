@@ -569,6 +569,68 @@ window.__galagaHarness__={
   if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
   return (window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null;
  },
+ estimateAudioCueDuration(name,opts={}){
+  if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return .9;
+  const cue=sfx.cueDef(String(name),opts||{});
+  if(!cue)return .9;
+  let endT=.12;
+  if(Array.isArray(cue.seq)&&cue.seq.length){
+   const step=Math.max(.01,+cue.step||.05);
+   endT=Math.max(endT,((cue.seq.length-1)*step*.92)+step+.06);
+  }
+  if(Array.isArray(cue.tones))for(const tone of cue.tones){
+   endT=Math.max(endT,Math.max(0,+tone.delay||0)+Math.max(.01,+tone.duration||.08)+.06);
+  }
+  if(Array.isArray(cue.noise))for(const burst of cue.noise){
+   endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
+  }
+  return Math.max(.8,Math.min(4,endT+.12));
+ },
+ async captureAudioCue(name,opts={}){
+  if(!name)return null;
+  if(typeof window.MediaRecorder!=='function'||typeof sfx==='undefined'||!sfx.tap?.stream){
+   return { ok:false, error:'Audio capture is not supported in this runtime.' };
+  }
+  try{
+   AC();
+   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')await sfx.a.resume().catch(()=>{});
+  }catch{}
+  const mimeCandidates=['audio/webm;codecs=opus','audio/webm'];
+  const mimeType=mimeCandidates.find(type=>!window.MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(type))||'';
+  const chunks=[];
+  const recorder=mimeType?new MediaRecorder(sfx.tap.stream,{mimeType}):new MediaRecorder(sfx.tap.stream);
+  const captureMs=Math.max(250,Math.round(1000*(opts.captureSeconds||this.estimateAudioCueDuration(name,opts))));
+  const done=new Promise(resolve=>{
+   recorder.ondataavailable=e=>{ if(e?.data?.size)chunks.push(e.data); };
+   recorder.onerror=e=>resolve({ ok:false, error:e?.error?.message||'MediaRecorder failed.' });
+   recorder.onstop=async()=>{
+    try{
+     const blob=new Blob(chunks,{type:recorder.mimeType||mimeType||'audio/webm'});
+     const buffer=await blob.arrayBuffer();
+     const bytes=new Uint8Array(buffer);
+     let binary='';
+     const chunkSize=0x8000;
+     for(let i=0;i<bytes.length;i+=chunkSize){
+      binary+=String.fromCharCode(...bytes.subarray(i,i+chunkSize));
+     }
+     resolve({
+      ok:true,
+      mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
+      captureMs,
+      base64:btoa(binary),
+      audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+     });
+    }catch(err){
+     resolve({ ok:false, error:err?.message||String(err) });
+    }
+   };
+  });
+  recorder.start();
+  if(typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  await new Promise(resolve=>setTimeout(resolve,captureMs));
+  if(recorder.state!=='inactive')recorder.stop();
+  return done;
+ },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {
