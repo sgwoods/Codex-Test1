@@ -202,12 +202,13 @@ function finalizeChallengeClear(){
  S.pendingStage=S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
- S.postChallengeT=1.1;
+ S.postChallengeT=1.45;
  if(usesRuntimeGalagaReferenceAudio()){
+  sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition']);
   S.challengeResultPerfect=perfect>0?1:0;
-  S.challengeResultCueT=0.22;
+  S.challengeResultCueT=0.34;
   // Let the result phrase own the beat before any ambient cadence returns.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.postChallengeT+.4);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.postChallengeT+.9);
  }else sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,

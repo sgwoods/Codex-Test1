@@ -19,6 +19,10 @@ function update(dt){
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
  S.audioPulseHoldT=Math.max(0,(+S.audioPulseHoldT||0)-dt);
+ if(S.startCueT>0){
+  S.startCueT=Math.max(0,S.startCueT-dt);
+  if(!S.startCueT)sfx.start();
+ }
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
  if(S.transitionCueT>0){

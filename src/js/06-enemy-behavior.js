@@ -41,6 +41,7 @@ function startDive(e,p,opts={}){
  e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
  e.shot=e.t==='boss'?2:1;
  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
+ sfx.attackCharge();
  if(opts.escort&&e.t==='boss')assignEscorts(e);
 }
 
@@ -241,6 +242,7 @@ function updateEnemy(e,dt,t,T,p){
    e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);
    e.shot=e.t==='boss'?2:1;
    logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});
+   sfx.attackCharge();
    if(e.t==='boss')assignEscorts(e);
   }
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);

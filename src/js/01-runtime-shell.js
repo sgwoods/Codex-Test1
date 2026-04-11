@@ -58,6 +58,13 @@ function syncPauseUi(){
 function toggleGameplayPause(){
  if(!started)return;
  paused=!paused;
+ try{
+  const A=sfx?.a;
+  if(A&&typeof A.suspend==='function'&&typeof A.resume==='function'){
+   if(paused&&A.state==='running')A.suspend().catch(()=>{});
+   else if(!paused&&A.state==='suspended')A.resume().catch(()=>{});
+  }
+ }catch{}
  if(!paused&&settingsOpen)closeSettings();
  syncPauseUi();
 }
