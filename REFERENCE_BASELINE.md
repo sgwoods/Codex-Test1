@@ -88,6 +88,7 @@ For each fidelity topic:
 - Source:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/README.md`
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-3/README.md`
 - Current use:
   - compare:
     - opening/title motif feel
@@ -98,6 +99,7 @@ For each fidelity topic:
     - high-score/result cue separation
     - fighter-capturing / captured-ship-destruction variants
     - challenging-stage announcement / result / perfect variants
+    - coin / start / extra-fighter / enemy-family indexed cue variants
 - Current rule note:
   - original Galaga should remain the strongest reference for gameplay-phase
     sound identity, while Aurora may still own shell/front-door flavor where the
