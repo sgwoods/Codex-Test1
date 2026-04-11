@@ -20,6 +20,20 @@ function update(dt){
  S.sequenceT=Math.max(0,S.sequenceT-dt);
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
+ if(S.transitionCueT>0){
+  S.transitionCueT=Math.max(0,S.transitionCueT-dt);
+  if(!S.transitionCueT){
+   sfx.transition(S.transitionCueKind?1:0);
+   S.transitionCueKind=0;
+  }
+ }
+ if(S.challengeResultCueT>0){
+  S.challengeResultCueT=Math.max(0,S.challengeResultCueT-dt);
+  if(!S.challengeResultCueT){
+   sfx.challengeResult(S.challengeResultPerfect?1:0);
+   S.challengeResultPerfect=0;
+  }
+ }
  const simT=advanceGameplayClock(dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.attract){

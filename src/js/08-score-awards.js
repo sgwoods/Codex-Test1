@@ -203,7 +203,10 @@ function finalizeChallengeClear(){
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=1.1;
- sfx.challengeResult(perfect>0);
+ if(usesRuntimeGalagaReferenceAudio()){
+  S.challengeResultPerfect=perfect>0?1:0;
+  S.challengeResultCueT=0.22;
+ }else sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,
   pendingStage:S.pendingStage,

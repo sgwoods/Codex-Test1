@@ -168,6 +168,16 @@ reference library we now have.
 - `Platinum` should host richer application audio models through extension
   points, not game-specific rules.
 
+5. Fidelity work should include timing alignment, not just clip selection.
+- The same mapping can still feel wrong if it lands too early, too late, or on
+  the wrong gameplay beat.
+- Ongoing polish should therefore compare Aurora against Galaga for:
+  - game-start delay and handoff
+  - inter-stage pause length
+  - challenge-stage setup timing
+  - formation / convoy cadence
+  - enemy-group and attack-pattern pacing where those cues interact with motion
+
 ## Recommended Next Implementation Order
 
 1. Add first-class Aurora slots for:

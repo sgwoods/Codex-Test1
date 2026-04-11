@@ -82,6 +82,15 @@ For each fidelity topic:
 - Active gap:
   - Aurora classic and aurora-themed backgrounds should continue to be checked
     against this reference as Bundle A evolves
+- Timing-alignment note:
+  - polish should continue to treat original Galaga timing as part of the same
+    fidelity target as visual intensity
+  - that includes:
+    - starfield motion cadence
+    - inter-stage gaps
+    - formation arrival pacing
+    - enemy-group movement timing
+    - opening/game-start handoff timing
 
 ### Classic Audio / Phase Motifs
 
@@ -117,6 +126,15 @@ For each fidelity topic:
 - Active gap:
   - Aurora currently has improved phase routing and stronger motifs, but it is
     still not yet a full Galaga-faithful selectable gameplay sound theme
+- Timing-alignment note:
+  - audio fidelity work should be judged together with gameplay timing
+  - a cue is not "true enough" if it exists but lands at the wrong moment
+  - polish work should therefore compare Aurora against Galaga for:
+    - game-start timing
+    - inter-stage timing
+    - challenge-stage setup timing
+    - active-play cadence timing
+    - results / perfect-clear timing
 - Cue matrix:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md`
   - use this to map Aurora cue slots against the strongest current Galaga

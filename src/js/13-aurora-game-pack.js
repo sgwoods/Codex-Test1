@@ -123,12 +123,12 @@ function referenceAudioCue(referenceClip, opts={}){
 }
 
 const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
- gameStart:referenceAudioCue('assets/reference-audio/galaga3-start.m4a',{cooldownMs:2400}),
+ gameStart:referenceAudioCue('assets/reference-audio/galaga2-game-start.m4a',{cooldownMs:2400}),
  stagePulse:Object.freeze({
   byPhase:Object.freeze({
    demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95}),
    stage:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95}),
-   challenge:referenceAudioCue('assets/reference-audio/galaga3-challenging-stage.m4a',{cooldownMs:2600})
+   challenge:Object.freeze({referenceClip:'',cooldownMs:0})
   })
  }),
  playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160}),
@@ -144,7 +144,7 @@ const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
  extendAward:referenceAudioCue('assets/reference-audio/galaga3-extra-fighter.m4a',{cooldownMs:2200}),
  playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800}),
  capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600}),
- challengeTransition:referenceAudioCue('assets/reference-audio/galaga3-challenging-stage.m4a',{cooldownMs:2600}),
+ challengeTransition:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage.m4a',{cooldownMs:2600}),
  challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{cooldownMs:2400}),
  challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{cooldownMs:2400}),
  stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{cooldownMs:1800}),
