@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-04-11T17:59:47.682Z",
+  "commit": "0549c6f40dd107e86111873a8fe6839ffeb32863",
+  "shortCommit": "0549c6f",
+  "referenceDurations": {
+    "gameStart": 4,
+    "stagePulse": 8,
+    "challengeEntry": 4,
+    "challengeResults": 4,
+    "challengePerfect": 4,
+    "playerHit": 2
+  },
+  "aurora": {
+    "stage1": {
+      "stageSpawnAt": null,
+      "gameStartCueAfterSpawn": 0,
+      "firstStagePulseAfterSpawn": 0.817,
+      "firstAttackAfterSpawn": 8.2,
+      "firstLowerFieldAfterSpawn": 9.35
+    },
+    "challengeEntry": {
+      "probeAt": 0.106,
+      "challengeCueAfterProbe": 2.219,
+      "challengeSpawnAfterProbe": 2.802,
+      "challengeSpawnAfterCue": 0.583,
+      "firstChallengePulseAfterSpawn": null
+    },
+    "challengePerfect": {
+      "challengeClearAt": 1.212,
+      "challengePerfectCueAfterClear": 0.225,
+      "nextStageCueAfterClear": 1.324,
+      "nextStageSpawnAfterClear": 2.35,
+      "nextStageSpawnAfterCue": 1.026
+    },
+    "shipLoss": {
+      "shipLostAt": 0.234,
+      "playerHitCueRelativeToLoss": 0
+    }
+  },
+  "files": {
+    "contactSheet": "/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png",
+    "metrics": "/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json",
+    "readme": "/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md",
+    "runRoot": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/timing-alignment"
+  },
+  "runs": {
+    "stage1": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/timing-alignment/timing-stage1-descent-seed2003-2026-04-11T17-58-37-557Z-4280-y9wgcc"
+    },
+    "challengeEntry": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/timing-alignment/timing-stage2-to-stage3-challenge-seed9203-2026-04-11T17-59-23-322Z-4422-o1pypt"
+    },
+    "challengePerfect": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/timing-alignment/timing-stage3-perfect-transition-seed3011-2026-04-11T17-59-29-852Z-4454-bie428"
+    },
+    "shipLoss": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/timing-alignment/timing-close-shot-loss-seed9211-2026-04-11T17-59-41-330Z-4505-q84x15"
+    }
+  }
+}

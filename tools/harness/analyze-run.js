@@ -468,7 +468,7 @@ function findRunFiles(target){
   }
   const files = fs.readdirSync(target);
   const summary = files.includes('summary.json') ? path.join(target, 'summary.json') : null;
-  const sessionFile = files.find(f => /^neo-galaga-session-.*\.json$/.test(f));
+  const sessionFile = files.find(f => /^neo-galaga-session-.*\.json$/.test(f) && !f.endsWith('-system-status.json'));
   const videoFile = files.find(f => /^neo-galaga-video-.*\.webm$/.test(f));
   return {
     dir: target,

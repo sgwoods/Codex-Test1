@@ -107,16 +107,23 @@ function specFromSession(file){
 
 function specFromScenario(file){
   const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const cfg = raw.config || {};
   return {
     name: raw.name || path.basename(file, path.extname(file)),
     source: file,
     duration: Math.max(5, raw.duration || 20),
     stopOnGameOver: !!raw.stopOnGameOver,
     config: {
-      stage: Math.max(1, raw.config?.stage || 1),
-      ships: Math.max(1, Math.min(9, raw.config?.ships || 3)),
-      challenge: !!raw.config?.challenge,
-      persona: raw.config?.persona || null
+      stage: Math.max(1, cfg.stage || 1),
+      ships: Math.max(1, Math.min(9, cfg.ships || 3)),
+      challenge: !!cfg.challenge,
+      persona: cfg.persona || null,
+      extendFirst: cfg.extendFirst,
+      extendRecurring: cfg.extendRecurring,
+      audioTheme: cfg.audioTheme,
+      graphicsTheme: cfg.graphicsTheme,
+      starfieldIntensity: cfg.starfieldIntensity,
+      starfieldSpeed: cfg.starfieldSpeed
     },
     seed: (raw.seed >>> 0) || hashString(raw.name || path.basename(file)),
     actions: (raw.actions || []).map(a => ({
@@ -302,7 +309,7 @@ async function main(){
       await download.saveAs(file);
       saved.push(file);
     }
-    const sessionFile = saved.find(file => file.endsWith('.json'));
+    const sessionFile = saved.find(file => file.endsWith('.json') && !file.endsWith('-system-status.json'));
     const session = sessionFile ? JSON.parse(fs.readFileSync(sessionFile, 'utf8')).session : null;
     const rawVideoFile = pickPrimaryVideoFile(saved, session);
     let artifactQuality = null;

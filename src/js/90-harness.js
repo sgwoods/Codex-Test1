@@ -1017,6 +1017,62 @@ window.__galagaHarness__={
    }
   };
  },
+ setupStageTransitionProbe(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  ATTRACT.timer=0;
+  S.attract=0;
+ S.stage=Math.max(1,+cfg.stage||2);
+  S.pendingStage=S.stage+1;
+  S.forceChallenge=!!cfg.forceChallenge;
+  S.nextStageT=0;
+  S.postChallengeT=0;
+  S.challenge=!!cfg.challenge;
+  S.challengeTransitionStallLogged=0;
+  S.lastChallengeClearT=null;
+  S.banner=0;
+  S.bannerTxt='';
+  S.bannerSub='';
+  S.bannerMode='';
+  S.alertT=0;
+  S.alertTxt='';
+  S.shake=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.e.length=0;
+  const p=S.p;
+  p.x=PLAY_W/2;
+  p.y=PLAY_H-VIS.playerBottom;
+  p.vx=0;
+  p.cd=0;
+  p.inv=0;
+  p.spawn=0;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  queueStageTransition(String(cfg.mode||'normal'));
+  logEvent('harness_stage_transition_probe_setup',{
+   stage:S.stage,
+   nextStage:S.pendingStage,
+   nextStageIsChallenge:isChallengeStage(S.pendingStage),
+   nextStageT:+S.nextStageT.toFixed(3),
+   transitionCueT:+S.transitionCueT.toFixed(3),
+   mode:String(cfg.mode||'normal')
+  });
+  return {
+   stage:S.stage,
+   pendingStage:S.pendingStage,
+   challenge:!!S.challenge,
+   nextStageT:+S.nextStageT.toFixed(3),
+   transitionCueT:+S.transitionCueT.toFixed(3)
+  };
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');

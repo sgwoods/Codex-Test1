@@ -562,6 +562,19 @@ const sfx={
   if(window.__platinumAudioDebug.history.length>24)window.__platinumAudioDebug.history.shift();
   return entry;
  },
+ logCueEvent(entry=null){
+  if(!entry||typeof logEvent!=='function')return;
+  logEvent('audio_cue',{
+   cue:entry.cue,
+   atmosphereId:entry.atmosphereId,
+   audioTheme:entry.audioTheme,
+   phase:entry.phase,
+   variant:entry.variant,
+   referenceClip:entry.referenceClip||'',
+   challenge:!!entry.challenge,
+   stage:+(entry.stage||0)
+  });
+ },
  cueDef(name,opts={}){
   const atmosphere=opts.resolvedAtmosphere||this.resolveAtmosphere(opts);
   const cue=typeof currentGamePackAudioCue==='function'
@@ -590,14 +603,17 @@ const sfx={
   const cue=this.cueDef(name,opts);
   if(!cue)return;
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
+  const cueEntry=window.__platinumAudioDebug.lastCue||null;
   if(cue.referenceClip){
    this.playReferenceClip(cue.referenceClip,{
     allowIdle,
     volume:cue.referenceVolume,
-    cooldownMs:cue.cooldownMs
+    cooldownMs:cue.cooldownMs,
+    cueEntry
    });
    return;
   }
+  this.logCueEvent(cueEntry);
   if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
    this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
@@ -615,6 +631,7 @@ const sfx={
   if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
   this.referenceCooldowns[clip]=now;
   window.__platinumAudioDebug.reference.lastRequested=clip;
+  this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
   this.loadReferenceBuffer(clip).then(buffer=>{
    if(!buffer||audioMuted)return;

@@ -28,6 +28,7 @@
     "local:resume": "node tools/dev/local-resume.js",
     "local:stop": "node tools/dev/local-stop.js",
     "harness:analyze": "node tools/harness/analyze-run.js",
+    "harness:analyze:timing-alignment": "node tools/harness/analyze-galaga-timing-alignment.js",
     "harness:batch": "node tools/harness/run-batch.js",
     "harness:check-latest": "node tools/harness/check-latest-run.js",
     "harness:import-latest": "node tools/harness/import-latest-run.js",

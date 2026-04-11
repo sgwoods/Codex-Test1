@@ -123,7 +123,11 @@ function queueStageTransition(mode='normal'){
  });
  if(usesRuntimeGalagaReferenceAudio()){
   S.transitionCueKind=nextIsChallenge?1:0;
-  S.transitionCueT=mode==='challengeResult'?(nextIsChallenge?0.36:0.22):(nextIsChallenge?0.32:0.18);
+  // Galaga's challenge-stage announcement wants to land near the setup
+  // handoff, not at the beginning of the whole transition window.
+  S.transitionCueT=mode==='challengeResult'
+   ? (nextIsChallenge?Math.max(.25,S.nextStageT-.62):.22)
+   : (nextIsChallenge?Math.max(.25,S.nextStageT-.58):.18);
  }else sfx.transition(nextIsChallenge?1:0);
 }
 
