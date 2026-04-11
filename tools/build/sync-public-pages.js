@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { execSync } = require('child_process');
 const { ROOT, PRODUCTION_BUILD_INFO } = require('./paths');
 const {
@@ -68,6 +69,10 @@ function fill(template, tokens){
   );
 }
 
+function sha256(text){
+  return crypto.createHash('sha256').update(String(text)).digest('hex');
+}
+
 function publicDateLong(source){
   return new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/New_York',
@@ -118,18 +123,23 @@ async function putContent(filePath, content, sha, message){
 
 function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
   const template = read(PROJECT_TEMPLATE);
+  const syncedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+  const templateSha = sha256(template).slice(0, 12);
   return fill(template, {
     PUBLIC_DATE_LONG: publicDateLong(pushedAt),
     BUILD_VERSION: buildInfo.version,
     BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
     BUILD_LABEL: buildInfo.label,
+    PUBLIC_SOURCE_COMMIT: buildInfo.commit,
+    PUBLIC_TEMPLATE_SHA: templateSha,
+    PUBLIC_SYNCED_AT: syncedAt,
     PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary
   }).trimEnd() + '\n';
 }
 
-function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projectPagePath, active }){
+function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projectPagePath, active }, syncedAt, templateSha){
   const latestNote = (readJson(RELEASE_NOTES).notes || [])[0] || buildInfo.latestReleaseNote || {};
   const status = {
     schema_version: '1.0',
@@ -142,6 +152,10 @@ function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projec
     experience_url: 'https://sgwoods.github.io/Aurora-Galactica/',
     repo_pushed_at: pushedAt,
     status_generated_at: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+    source_build_label: buildInfo.label,
+    source_commit: buildInfo.commit,
+    source_template_sha: templateSha,
+    public_sync_generated_at: syncedAt,
     status_label: 'Current release',
     status_value: buildInfo.version,
     focus_label: 'Current focus',
@@ -156,6 +170,23 @@ async function syncFile(filePath, content, message){
   if(current === content) return false;
   await putContent(filePath, content, remote?.sha, message);
   return true;
+}
+
+function ensureGeneratedProjectPageLooksCurrent(projectHtml, buildInfo, dashboard){
+  const expectedFocus = dashboard.currentFocus || '';
+  const requiredBits = [
+    `public-sync: release=${buildInfo.version}`,
+    `label=${buildInfo.label}`,
+    `commit=${buildInfo.commit}`,
+    `<span class="metaValue">${buildInfo.version}</span>`,
+    expectedFocus
+  ];
+  for(const needle of requiredBits){
+    if(!needle) continue;
+    if(!projectHtml.includes(needle)){
+      throw new Error(`Refusing to sync public pages: generated project HTML is missing "${needle}" and does not look current.`);
+    }
+  }
 }
 
 async function main(){
@@ -185,17 +216,20 @@ async function main(){
     summary: 'No release summary available for this build.'
   };
   const pushedAt = repoPushedAt(buildInfo);
+  const syncedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+  const templateSha = sha256(read(PROJECT_TEMPLATE)).slice(0, 12);
   const projectHtml = buildProjectPage(buildInfo, latestNote, dashboard, pushedAt);
+  ensureGeneratedProjectPageLooksCurrent(projectHtml, buildInfo, dashboard);
   const canonicalStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
     projectId: CANONICAL_PROJECT_SLUG,
     projectPagePath: `${CANONICAL_PROJECT_SLUG}.html`,
     active: true
-  });
+  }, syncedAt, templateSha);
   const legacyStatusManifest = buildStatusManifest(buildInfo, dashboard, pushedAt, {
     projectId: LEGACY_PROJECT_SLUG,
     projectPagePath: `${LEGACY_PROJECT_SLUG}.html`,
     active: false
-  });
+  }, syncedAt, templateSha);
 
   const changedCanonicalProject = await syncFile(
     `${CANONICAL_PROJECT_SLUG}.html`,

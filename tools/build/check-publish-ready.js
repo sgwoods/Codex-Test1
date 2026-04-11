@@ -85,7 +85,7 @@ function checkProductionCheckoutCurrent(){
 function checkPublicProjectTemplate(){
   const templatePath = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
   const template = loadText(templatePath);
-  const requiredTokens = ['{{BUILD_VERSION}}', '{{BUILD_RELEASE_ET}}', '{{PUBLIC_CURRENT_FOCUS}}', '{{LATEST_RELEASE_TITLE}}'];
+  const requiredTokens = ['{{BUILD_VERSION}}', '{{BUILD_RELEASE_ET}}', '{{BUILD_LABEL}}', '{{PUBLIC_CURRENT_FOCUS}}', '{{LATEST_RELEASE_TITLE}}', '{{PUBLIC_SOURCE_COMMIT}}', '{{PUBLIC_TEMPLATE_SHA}}', '{{PUBLIC_SYNCED_AT}}'];
   for(const token of requiredTokens){
     if(!template.includes(token)){
       throw new Error(`Publish preflight failed: ${templatePath} is missing required token ${token}. Restore the current public template before publishing production.`);
