@@ -28,7 +28,14 @@ async function main(){
       window.__galagaHarness__.restartCurrentConfig();
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
     });
-    return { defaults, vividAurora, forcedClassic, galagaReference };
+    const galagaReferenceAssets = await page.evaluate(() => {
+      window.__galagaHarness__.setTest({ stage: 8, ships: 3, challenge: false, audioTheme: 'galaga-reference-assets', graphicsTheme: 'auto', starfieldIntensity: 1, starfieldSpeed: 1 });
+      window.__galagaHarness__.restartCurrentConfig();
+      const state = window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
+      const cue = window.__galagaHarness__.triggerAudioCue('gameStart', { phase: 'stage', atmosphereTheme: 'aurora-borealis' });
+      return { state, cue };
+    });
+    return { defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
   });
 
   if(result.defaults.visualAtmosphere?.backgroundMode !== 'classic-stars') fail('default graphics settings no longer preserve the stage 1 classic stars background', result);
@@ -47,6 +54,10 @@ async function main(){
   if(result.galagaReference.audio?.audioTheme !== 'galaga-original-reference') fail('audio theme override did not persist into developer settings state', result);
   if(result.galagaReference.atmosphere?.audioTheme !== 'galaga-original-reference') fail('Galaga original reference audio theme did not force the dedicated Galaga gameplay audio resolution', result);
   if(result.galagaReference.visualAtmosphere?.id !== 'aurora-borealis') fail('audio theme override leaked into visual atmosphere selection; it should stay audio-only', result);
+  if(result.galagaReferenceAssets.state?.audio?.audioTheme !== 'galaga-reference-assets') fail('Galaga reference assets override did not persist into developer settings state', result);
+  if(result.galagaReferenceAssets.state?.atmosphere?.audioTheme !== 'galaga-reference-assets') fail('Galaga reference assets audio theme did not force the dedicated reference-audio gameplay resolution', result);
+  if(!result.galagaReferenceAssets.cue?.referenceClip) fail('Galaga reference assets mode did not resolve an actual reference clip through the live audio system', result);
+  if(result.galagaReferenceAssets.state?.visualAtmosphere?.id !== 'aurora-borealis') fail('Galaga reference assets override leaked into visual atmosphere selection; it should stay audio-only', result);
 
   console.log(JSON.stringify({
     ok: true,
@@ -65,6 +76,12 @@ async function main(){
       audio: result.galagaReference.audio,
       stageAtmosphere: result.galagaReference.atmosphere,
       visualAtmosphere: result.galagaReference.visualAtmosphere
+    },
+    galagaReferenceAssets: {
+      audio: result.galagaReferenceAssets.state.audio,
+      stageAtmosphere: result.galagaReferenceAssets.state.atmosphere,
+      visualAtmosphere: result.galagaReferenceAssets.state.visualAtmosphere,
+      cue: result.galagaReferenceAssets.cue
     }
   }, null, 2));
 }

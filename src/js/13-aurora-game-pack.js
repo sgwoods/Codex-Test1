@@ -114,6 +114,55 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
  })
 });
 
+function referenceAudioCue(referenceClip, opts={}){
+ return Object.freeze(Object.assign({
+  referenceClip,
+  referenceVolume:1,
+  cooldownMs:0
+ }, opts||{}));
+}
+
+const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
+ gameStart:referenceAudioCue('assets/reference-audio/galaga3-start.m4a',{cooldownMs:2400}),
+ stagePulse:Object.freeze({
+  byPhase:Object.freeze({
+   demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95}),
+   stage:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95}),
+   challenge:referenceAudioCue('assets/reference-audio/galaga3-challenging-stage.m4a',{cooldownMs:2600})
+  })
+ }),
+ playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160}),
+ enemyShot:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:280}),
+ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
+ bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240}),
+ enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
+ bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360}),
+ captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800}),
+ captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400}),
+ captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200}),
+ rescueJoin:referenceAudioCue('assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',{cooldownMs:1800}),
+ extendAward:referenceAudioCue('assets/reference-audio/galaga3-extra-fighter.m4a',{cooldownMs:2200}),
+ playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800}),
+ capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600}),
+ challengeTransition:referenceAudioCue('assets/reference-audio/galaga3-challenging-stage.m4a',{cooldownMs:2600}),
+ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{cooldownMs:2400}),
+ challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{cooldownMs:2400}),
+ stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{cooldownMs:1800}),
+ attractEnter:Object.freeze({
+  byPhase:Object.freeze({
+   demo:referenceAudioCue('assets/reference-audio/galaga-opening-theme.m4a',{cooldownMs:3200})
+  })
+ }),
+ attractPulse:Object.freeze({
+  byPhase:Object.freeze({
+   demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95})
+  })
+ }),
+ gameOver:referenceAudioCue('assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',{cooldownMs:3600}),
+ highScoreFirst:referenceAudioCue('assets/reference-audio/galaga3-name-entry-1st.m4a',{cooldownMs:2000}),
+ highScoreOther:referenceAudioCue('assets/reference-audio/galaga3-name-entry-2nd-5th.m4a',{cooldownMs:1800})
+});
+
 const AURORA_AUDIO_THEMES=Object.freeze({
  'classic-arcade':Object.freeze({
   id:'classic-arcade',
@@ -390,7 +439,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
  })
  }),
  'galaga-original-reference':Object.freeze({
-  id:'galaga-original-reference',
+ id:'galaga-original-reference',
   label:'Galaga Original Reference',
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[392,523,659,784,1047],step:.041,wave:'square',volume:.024,slide:20,lpHz:3200,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0052,slide:6,lpHz:1700,delay:0},{freq:392,duration:.08,wave:'square',volume:.0102,slide:10,lpHz:2500,delay:0},{freq:523,duration:.08,wave:'square',volume:.0108,slide:10,lpHz:2800,delay:.041},{freq:784,duration:.1,wave:'triangle',volume:.0072,slide:20,lpHz:3600,delay:.123},{freq:1047,duration:.22,wave:'triangle',volume:.018,slide:62,lpHz:3900,delay:.164}])}),
@@ -430,8 +479,13 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    }),
    gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.084,wave:'square',volume:.018,slide:-60,lpHz:2200,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0068,slide:-24,lpHz:2500,delay:.01},{freq:124,duration:.2,wave:'triangle',volume:.0072,slide:-34,lpHz:1900,delay:.17},{freq:98,duration:.44,wave:'sawtooth',volume:.0162,slide:-120,lpHz:1720,delay:.254}]),noise:Object.freeze([{duration:.11,volume:.0048,hp:1040,delay:.12}])}),
    highScoreFirst:Object.freeze({seq:[523,659,880,1175,1568],step:.046,wave:'square',volume:.0158,slide:26,lpHz:3800,tones:Object.freeze([{freq:2093,duration:.12,wave:'triangle',volume:.0068,slide:14,lpHz:5000,delay:.184}])}),
-   highScoreOther:Object.freeze({seq:[392,523,659,880],step:.052,wave:'square',volume:.0138,slide:20,lpHz:3500,tones:Object.freeze([{freq:1175,duration:.1,wave:'triangle',volume:.0052,slide:10,lpHz:4600,delay:.16}])})
+  highScoreOther:Object.freeze({seq:[392,523,659,880],step:.052,wave:'square',volume:.0138,slide:20,lpHz:3500,tones:Object.freeze([{freq:1175,duration:.1,wave:'triangle',volume:.0052,slide:10,lpHz:4600,delay:.16}])})
   })
+ }),
+ 'galaga-reference-assets':Object.freeze({
+  id:'galaga-reference-assets',
+  label:'Galaga Reference Audio',
+  cues:GALAGA_REFERENCE_AUDIO_CUES
  })
 });
 

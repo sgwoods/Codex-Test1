@@ -1,7 +1,7 @@
 {
   "title": "Aurora Application Guide",
   "strapline": "A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing presentation controls that shape the live game presentation.",
-  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, use the Galaga cue matrix to map real reference clips against Aurora states, and treat the current `galaga-original-reference` runtime option as a synthetic approximation rather than true asset playback.",
+  "currentGoal": "Keep Aurora's atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, use the Galaga cue matrix to map real reference clips against Aurora states, and distinguish clearly between Aurora's own synthetic mix, the Galaga-style synthetic approximation, and the new runtime reference-audio mode that plays actual extracted Galaga clips.",
   "audioContexts": [
     {
       "id": "front-door-tick",
@@ -863,8 +863,8 @@
   "graphicsControls": [
     {
       "label": "Audio Theme",
-      "values": "auto, aurora-application, galaga-original-reference",
-      "description": "Developer override for phase-resolved audio routing. `aurora-application` uses Aurora's current synthetic application mix. `galaga-original-reference` currently uses a separate synthetic classic-leaning cue family for gameplay/challenge/results; it does not yet play actual extracted Galaga assets in the live game."
+      "values": "auto, aurora-application, galaga-original-reference, galaga-reference-assets",
+      "description": "Developer override for phase-resolved audio routing. `aurora-application` uses Aurora's current synthetic application mix. `galaga-original-reference` uses the synthetic classic-leaning approximation. `galaga-reference-assets` plays the extracted Galaga reference clips for the mapped gameplay/challenge/results moments."
     },
     {
       "label": "Graphics Theme",

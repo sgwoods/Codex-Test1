@@ -484,7 +484,7 @@ const AC=()=>{
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
- a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,
+ a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),
  resolveAtmosphere(opts={}){
   const attractPhase=opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'');
   const frontDoor=opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract);
@@ -508,13 +508,14 @@ const sfx={
   }
   return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
  },
- recordCue(name,atmosphere,opts={}){
+ recordCue(name,atmosphere,opts={},cue=null){
   const entry=Object.freeze({
    cue:String(name||''),
    atmosphereId:atmosphere?.id||'classic-arcade',
    audioTheme:atmosphere?.audioTheme||'classic-arcade',
    phase:atmosphere?.phase||opts.phase||'stage',
    variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
+   referenceClip:String(cue?.referenceClip||'').trim(),
    stage:+(S.stage||0),
    challenge:!!S.challenge,
    at:+(performance.now()/1000).toFixed(3)
@@ -537,8 +538,11 @@ const sfx={
     frontDoor:opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract)
    })
    : null;
-  this.recordCue(name,atmosphere,opts);
-  if(!cue)return null;
+  if(!cue){
+   this.recordCue(name,atmosphere,opts,null);
+   return null;
+  }
+  this.recordCue(name,atmosphere,opts,cue);
   if(Array.isArray(cue.variants)&&cue.variants.length){
    return cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
   }
@@ -549,6 +553,14 @@ const sfx={
   const cue=this.cueDef(name,opts);
   if(!cue)return;
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
+  if(cue.referenceClip){
+   this.playReferenceClip(cue.referenceClip,{
+    allowIdle,
+    volume:cue.referenceVolume,
+    cooldownMs:cue.cooldownMs
+   });
+   return;
+  }
   if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
    this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
@@ -556,6 +568,32 @@ const sfx={
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
    this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0,allowIdle);
   }
+ },
+ playReferenceClip(src='',opts={}){
+  const clip=String(src||'').trim();
+  if(!clip||(!(aud||opts.allowIdle)))return;
+  const now=performance.now();
+  const cooldown=Math.max(0,+opts.cooldownMs||0);
+  const lastAt=+this.referenceCooldowns[clip]||0;
+  if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
+  this.referenceCooldowns[clip]=now;
+  try{
+   const audio=new Audio(clip);
+   audio.preload='auto';
+   audio.volume=audioMuted?0:Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
+   const cleanup=()=>{
+    this.referenceActive=this.referenceActive.filter(entry=>entry!==audio);
+   };
+   audio.addEventListener('ended',cleanup,{once:true});
+   audio.addEventListener('error',cleanup,{once:true});
+   this.referenceActive.push(audio);
+   if(this.referenceActive.length>24){
+    const stale=this.referenceActive.splice(0,this.referenceActive.length-24);
+    stale.forEach(entry=>{try{entry.pause();}catch{}});
+   }
+   const started=audio.play();
+   if(started&&typeof started.catch==='function')started.catch(cleanup);
+  }catch{}
  },
  play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
@@ -1012,7 +1050,7 @@ const DEFAULT_TEST_CFG=Object.freeze({
 let testCfgCache=null;
 function sanitizeAudioThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
- return ['auto','aurora-application','galaga-original-reference'].includes(next)?next:'auto';
+ return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:'auto';
 }
 function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
@@ -1051,8 +1089,11 @@ function resolvedAudioAtmosphere(opts={}){
  if(selection==='auto'||selection==='aurora-application')return atmosphere;
  const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
  const useGalagaReference=phase==='demo'||phase==='stage'||phase==='challenge'||phase==='results';
+ const overrideTheme=selection==='galaga-reference-assets'
+  ? 'galaga-reference-assets'
+  : 'galaga-original-reference';
  return Object.freeze(Object.assign({},atmosphere,{
-  audioTheme:useGalagaReference?'galaga-original-reference':(atmosphere?.audioTheme||'aurora-crown'),
+  audioTheme:useGalagaReference?overrideTheme:(atmosphere?.audioTheme||'aurora-crown'),
   audioThemeOverride:selection
  }));
 }

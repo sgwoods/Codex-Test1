@@ -1423,7 +1423,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="${esc(entry.entryId || '')}" data-theme-play="triple">Compare All Three</button>
@@ -1535,7 +1536,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <a class="button" href="player-guide.html">Open player guide</a>
           </div>
         <div class="previewNote">
-            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora and Galaga-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
+            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora, Galaga synth, and Galaga reference-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
           </div>
           <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
         </section>
@@ -1572,7 +1573,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="buttonRow" style="margin-bottom:16px;">
             <button class="audioAction" type="button" data-compare-set="aurora">Play Aurora Set</button>
-            <button class="audioAction" type="button" data-compare-set="galaga">Play Galaga Set</button>
+            <button class="audioAction" type="button" data-compare-set="galaga">Play Galaga Synth Set</button>
+            <button class="audioAction" type="button" data-compare-set="galaga-assets">Play Runtime Ref Set</button>
             <button class="audioAction" type="button" data-compare-set="reference">Play Reference Set</button>
             <button class="audioAction" type="button" data-compare-set="ab">Compare Full Set</button>
             <button class="audioAction" type="button" data-compare-set="triple">Compare All Three</button>
@@ -1730,6 +1732,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         function payloadForTheme(entry, themeKey){
           const payload = Object.assign({}, entry.preview || {});
           if(themeKey === 'galaga') payload.audioTheme = 'galaga-original-reference';
+          if(themeKey === 'galaga-assets') payload.audioTheme = 'galaga-reference-assets';
           return payload;
         }
         function playEntry(entry, themeKey){
@@ -1816,7 +1819,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 ? 'Playing full labeled reference clip set.'
                 : mode === 'triple'
                   ? 'Playing Aurora, Galaga, and labeled reference clips for the full set.'
-                  : 'Playing ' + (mode === 'aurora' ? 'Aurora' : 'Galaga') + ' comparison set.'
+                  : 'Playing ' + (mode === 'aurora' ? 'Aurora' : mode === 'galaga-assets' ? 'Galaga runtime reference' : 'Galaga synth') + ' comparison set.'
           );
         }
         function markReady(){

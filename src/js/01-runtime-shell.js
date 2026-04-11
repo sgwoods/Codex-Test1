@@ -41,6 +41,17 @@ function syncAudioUi(){
  const icon=muteToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
+ if(Array.isArray(sfx.referenceActive)){
+  sfx.referenceActive=sfx.referenceActive.filter(audio=>{
+   if(!audio)return false;
+   try{
+    audio.volume=audioMuted?0:1;
+    return !audio.ended;
+   }catch{
+    return false;
+   }
+  });
+ }
 }
 function syncPauseUi(){
  if(!pauseToggleBtn)return;
