@@ -103,6 +103,33 @@ voice. In practice this suggests:
 - gameplay/challenge/results:
   - switchable between Aurora mix and Galaga-reference mix
 
+## Extracted clip inventory
+
+All 13 labeled Galaga sound/music contexts cataloged above are now available as
+standalone extracted clip files in:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/clips/`
+
+Mirrored app-asset copies are also available in:
+
+- `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/`
+
+Current extracted clip set:
+
+- `galaga-insert-coin.m4a`
+- `galaga-opening-theme.m4a`
+- `galaga-level-flag-v1.m4a`
+- `galaga-tractor-beam.m4a`
+- `galaga-ship-captured.m4a`
+- `galaga-ship-rescued.m4a`
+- `galaga-bonus-stage-perfect-score.m4a`
+- `galaga-level-flag-v2.m4a`
+- `galaga-sample-gameplay.m4a`
+- `galaga-bonus-stage-results.m4a`
+- `galaga-last-ship-destroyed-ambience.m4a`
+- `galaga-high-score-1st-place.m4a`
+- `galaga-high-score-2nd-5th-place.m4a`
+
 ## Current project use
 
 Use this artifact when reviewing or tuning:
