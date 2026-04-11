@@ -75,6 +75,10 @@ reference-backed fidelity work, and safe collaboration.
   - branch must be `main`
   - local `main` must match `origin/main`
   - the current `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` must be the template being synced
+- If you need to rerun only the top-level public sync after production is already live:
+  - stay on current clean `main`
+  - keep the current tokenized public template
+  - make sure local `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json` matches the live production lane exactly before `npm run sync:public`
 - If the public Aurora project page still shows stale release/build/focus data
   after a production publish, treat that as a release-path failure, not a
   cosmetic follow-up.

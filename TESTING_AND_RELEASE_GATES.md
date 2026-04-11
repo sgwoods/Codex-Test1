@@ -216,6 +216,12 @@ For production, the release contract also includes the top-level
 the public page still shows stale release/build/focus content after the publish
 and sync steps.
 
+If public sync must be rerun after production is already live, it should run
+from current clean `main` and a current tokenized public template, while also
+proving that local `dist/production` still matches the live production lane
+exactly. That keeps the public page current without silently inventing a new
+"production" build that has not actually been released.
+
 This profile should not automatically pull in deep gameplay suites unless the
 change also affects gameplay delivery.
 

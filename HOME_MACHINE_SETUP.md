@@ -207,6 +207,9 @@ Important:
   enough
 - if the top-level Aurora project page still shows stale release/build/focus
   data after production publish, stop and treat that as a release-path failure
+- if you are rerunning only `npm run sync:public` after production is already
+  live, verify local `dist/production/build-info.json` still matches the live
+  production lane exactly before syncing
 
 ## Important Defaults
 

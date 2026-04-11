@@ -20,6 +20,7 @@ const OWNER = process.env.PUBLIC_REPO_OWNER || 'sgwoods';
 const REPO = process.env.PUBLIC_REPO_NAME || 'public';
 const TOKEN = process.env.PUBLIC_REPO_SYNC_TOKEN || process.env.GH_TOKEN || loadGhToken();
 const API_ROOT = `https://api.github.com/repos/${OWNER}/${REPO}/contents`;
+const LIVE_PRODUCTION_BUILD_INFO_URL = 'https://sgwoods.github.io/Aurora-Galactica/build-info.json';
 
 function loadGhToken(){
   try{
@@ -35,6 +36,17 @@ function readJson(file){
 
 function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+}
+
+async function fetchJson(url){
+  const res = await fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'User-Agent': 'Aurora-Galactica-public-sync'
+    }
+  });
+  if(!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+  return res.json();
 }
 
 function repoPushedAt(buildInfo){
@@ -151,18 +163,20 @@ async function main(){
   checkProductionCheckoutCurrent();
   checkPublicProjectTemplate();
   const buildInfo = readJson(BUILD_INFO);
-  const head = execSync(`git -C ${JSON.stringify(ROOT)} rev-parse HEAD`, {
-    encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'ignore']
-  }).trim();
-  if(buildInfo.commit !== head){
-    throw new Error(
-      `Refusing to sync public pages from production build ${buildInfo.shortCommit || buildInfo.commit}; ` +
-      `current checkout is ${head.slice(0, 7)}. Rebuild/promote production from this exact clean checkout first.`
-    );
-  }
   if(buildInfo.dirty && process.env.ALLOW_DIRTY_PUBLIC_SYNC !== '1'){
     throw new Error('Refusing to sync public pages from a dirty local build. Commit or rebuild from a clean tree first, or set ALLOW_DIRTY_PUBLIC_SYNC=1 to override.');
+  }
+  const liveProduction = await fetchJson(LIVE_PRODUCTION_BUILD_INFO_URL);
+  if(
+    liveProduction.label !== buildInfo.label ||
+    liveProduction.commit !== buildInfo.commit ||
+    liveProduction.releaseChannel !== buildInfo.releaseChannel
+  ){
+    throw new Error(
+      `Refusing to sync public pages from local dist/production ${buildInfo.label}; ` +
+      `live production is ${liveProduction.label}. Refresh local production so it matches the live production lane, ` +
+      'or complete a new production publish before syncing public.'
+    );
   }
   const releaseNotes = readJson(RELEASE_NOTES);
   const dashboard = readJson(RELEASE_DASHBOARD);
