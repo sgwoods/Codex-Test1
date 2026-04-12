@@ -90,6 +90,8 @@ function syncBuildStampUi(){
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
+ const showCommit=channel==='development'||channel==='production beta';
+ const shortCommit=String(BUILD_INFO.commit||'').trim();
  let runtimeLabel='Platinum';
  try{
   if(typeof currentPlatformPackLabel==='function')runtimeLabel=currentPlatformPackLabel();
@@ -97,7 +99,7 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
- if(buildStampVersion)buildStampVersion.textContent=`Version ${BUILD_INFO.version}`;
+ if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'
@@ -111,10 +113,9 @@ function markHostedBuildSeen(){
  writePref(BUILD_SEEN_KEY,BUILD_INFO.label);
 }
 function applySeenBuildReminder(){
- const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
- if(!['production','production beta'].includes(channel))return;
- const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
- const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
+  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+  const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
+  const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
  if(testHint){
   BUILD_UPDATE.available=1;
   BUILD_UPDATE.label=BUILD_INFO.label;
@@ -136,7 +137,6 @@ function applySeenBuildReminder(){
 async function checkForHostedBuildUpdate(){
  if(BUILD_UPDATE.checking||location.protocol==='file:')return;
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
- if(!['production','production beta'].includes(channel))return;
  if(BUILD_REFRESH_HINT&&channel==='production beta')return;
  BUILD_UPDATE.checking=1;
  try{
@@ -161,7 +161,6 @@ async function checkForHostedBuildUpdate(){
 }
 function startHostedBuildUpdateChecks(){
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
- if(!['production','production beta'].includes(channel))return;
  clearInterval(BUILD_UPDATE.timer);
  applySeenBuildReminder();
  markHostedBuildSeen();
