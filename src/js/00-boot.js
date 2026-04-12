@@ -1220,6 +1220,42 @@ function currentAudioOverrides(){
 function usesRuntimeGalagaReferenceAudio(){
  return currentAudioOverrides().audioTheme==='galaga-reference-assets';
 }
+const REFERENCE_TRANSITION_SENSITIVE_CUES=Object.freeze([
+ 'stagePulse',
+ 'attackCharge',
+ 'enemyShot',
+ 'enemyHit',
+ 'enemyBoom',
+ 'bossHit',
+ 'bossBoom',
+ 'stageTransition',
+ 'challengeTransition',
+ 'challengeResults',
+ 'challengePerfect'
+]);
+const REFERENCE_BOSS_MOMENT_CUES=Object.freeze([
+ 'stagePulse',
+ 'attackCharge',
+ 'enemyShot',
+ 'enemyHit',
+ 'enemyBoom',
+ 'bossHit'
+]);
+function stopReferenceCueSet(names=[]){
+ if(!usesRuntimeGalagaReferenceAudio()||typeof sfx==='undefined'||typeof sfx.stopCueNames!=='function')return;
+ sfx.stopCueNames(names);
+}
+function holdReferenceGameplayCadence(seconds=0){
+ if(!usesRuntimeGalagaReferenceAudio())return;
+ S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
+}
+function clearReferenceTransitionCueWindow(extra=[]){
+ stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])]);
+}
+function clearReferenceBossMomentCueWindow(){
+ stopReferenceCueSet(REFERENCE_BOSS_MOMENT_CUES);
+ holdReferenceGameplayCadence(.72);
+}
 function resolvedAudioAtmosphere(opts={}){
  const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
   ? currentGamePackResolvedAtmosphere(opts)

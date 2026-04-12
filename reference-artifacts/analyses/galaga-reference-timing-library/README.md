@@ -26,12 +26,14 @@ It is meant to shorten iteration cycles by giving us one place to look for:
 - `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md`
 - `reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md`
 - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md`
+- `reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604/README.md`
 
 ## Current latest measured artifacts
 
 - Timing alignment: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f`
 - Audio overlap: `reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba`
 - Stage opening timing: `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba`
+- Boss timing: `reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604`
 
 ## Canonical event families
 
@@ -44,7 +46,7 @@ It is meant to shorten iteration cycles by giving us one place to look for:
 | Ship Loss And Respawn | `playerHit`, `gameOver` | playerHitCueRelativeToLoss: 0 |
 | Stage Clear And Next Stage | `stageTransition`, `stagePulse` | transitionWindow: 3.204; transitionCueAfterProbe: 2.022; spawnAfterTransitionCue: 1.182 |
 | Challenge Entry, Results, And Perfect | `challengeTransition`, `challengeResults`, `challengePerfect`, `stageTransition` | challengeEntry.cueAfterProbe: 2.219; challengeEntry.spawnAfterCue: 0.583; challengePerfect.resultCueAfterClear: 0.342; challengePerfect.nextCueAfterClear: 2.85 |
-| Boss Hit And Boss Death | `bossHit`, `bossBoom` | Reference assets and notes only |
+| Boss Hit And Boss Death | `bossHit`, `bossBoom` | firstHit.damageToCue: 0; firstHit.triggerToCue: 0; death.killToCue: 0.001; death.pulseBeforeBossBoom: 0.226 |
 | High Score And Results Flow | `highScoreFirst`, `highScoreOther` | Reference assets and notes only |
 
 ## How to use this library
@@ -57,7 +59,6 @@ It is meant to shorten iteration cycles by giving us one place to look for:
 
 ## Recommended next extensions
 
-- add a boss-specific timing probe and feed it into the `boss-hit-and-boss-death` family
 - add visual sync measurements for ship loss and respawn
 - add capture-flow timing probes for beam deploy, successful capture, retreat, and rescue join
 - add a parallel `galaxian-reference-timing-library` when second-game work begins

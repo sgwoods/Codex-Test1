@@ -38,9 +38,11 @@ function maybeJson(file){
 const latestTimingDir = latestSubdir(path.join(ANALYSES, 'galaga-timing-alignment'));
 const latestOverlapDir = latestSubdir(path.join(ANALYSES, 'galaga-audio-overlap'));
 const latestOpeningDir = latestSubdir(path.join(ANALYSES, 'galaga-stage-opening-timing'));
+const latestBossDir = latestSubdir(path.join(ANALYSES, 'galaga-boss-timing'));
 
 const timingMetrics = maybeJson(latestTimingDir ? path.join(latestTimingDir, 'metrics.json') : '');
 const overlapMetrics = maybeJson(latestOverlapDir ? path.join(latestOverlapDir, 'metrics.json') : '');
+const bossMetrics = maybeJson(latestBossDir ? path.join(latestBossDir, 'metrics.json') : '');
 
 const library = {
   generatedAt: new Date().toISOString(),
@@ -54,12 +56,14 @@ const library = {
     rel(path.join(ANALYSES, 'galaga-audio-cue-matrix', 'README.md')),
     latestTimingDir ? rel(path.join(latestTimingDir, 'README.md')) : '',
     latestOverlapDir ? rel(path.join(latestOverlapDir, 'README.md')) : '',
-    latestOpeningDir ? rel(path.join(latestOpeningDir, 'README.md')) : ''
+    latestOpeningDir ? rel(path.join(latestOpeningDir, 'README.md')) : '',
+    latestBossDir ? rel(path.join(latestBossDir, 'README.md')) : ''
   ].filter(Boolean),
   latestArtifacts: {
     timingAlignment: latestTimingDir ? rel(latestTimingDir) : null,
     audioOverlap: latestOverlapDir ? rel(latestOverlapDir) : null,
-    stageOpening: latestOpeningDir ? rel(latestOpeningDir) : null
+    stageOpening: latestOpeningDir ? rel(latestOpeningDir) : null,
+    bossTiming: latestBossDir ? rel(latestBossDir) : null
   },
   eventFamilies: [
     {
@@ -213,11 +217,22 @@ const library = {
       focus: 'Boss damage identity, boss death audibility, and visual emphasis at destruction.',
       referenceAssets: [
         'src/assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
-        'src/assets/reference-audio/galaga3-boss-death-sasori.m4a'
-      ],
+        'src/assets/reference-audio/galaga3-boss-death-sasori.m4a',
+        latestBossDir ? rel(path.join(latestBossDir, 'README.md')) : null
+      ].filter(Boolean),
+      auroraCurrent: bossMetrics ? {
+        firstHit: {
+          damageToCue: bossMetrics.firstHit?.damageToCue ?? null,
+          triggerToCue: bossMetrics.firstHit?.triggerToCue ?? null
+        },
+        death: {
+          killToCue: bossMetrics.death?.killToCue ?? null,
+          pulseBeforeBossBoom: bossMetrics.death?.pulseBeforeBossBoom ?? null
+        }
+      } : {},
       notes: [
         'Boss destruction should read as a meaningful event both visually and audibly, not just a slightly larger ordinary kill.',
-        'A dedicated boss timing probe is still worth adding.'
+        'The boss timing probe should remain part of the standard library refresh as we tune audibility and pause/overlap policy.'
       ]
     },
     {
@@ -251,7 +266,8 @@ const library = {
 
 function familyTableRow(family){
   const cueSlots = family.auroraCueSlots.map(slot => `\`${slot}\``).join(', ');
-  const metrics = Object.entries(family.measuredTargets || family.auroraCurrent || {})
+  const metricSource = Object.assign({}, family.measuredTargets || {}, family.auroraCurrent || {});
+  const metrics = Object.entries(metricSource)
     .flatMap(([key, value]) => {
       if(value && typeof value === 'object' && !Array.isArray(value)){
         return Object.entries(value).map(([subKey, subValue]) => `${key}.${subKey}: ${String(subValue)}`);
@@ -296,6 +312,7 @@ function buildReadme(data){
     `- Timing alignment: \`${data.latestArtifacts.timingAlignment || 'missing'}\``,
     `- Audio overlap: \`${data.latestArtifacts.audioOverlap || 'missing'}\``,
     `- Stage opening timing: \`${data.latestArtifacts.stageOpening || 'missing'}\``,
+    `- Boss timing: \`${data.latestArtifacts.bossTiming || 'missing'}\``,
     '',
     '## Canonical event families',
     '',
@@ -317,7 +334,6 @@ function buildReadme(data){
     '',
     '## Recommended next extensions',
     '',
-    '- add a boss-specific timing probe and feed it into the `boss-hit-and-boss-death` family',
     '- add visual sync measurements for ship loss and respawn',
     '- add capture-flow timing probes for beam deploy, successful capture, retreat, and rescue join',
     '- add a parallel `galaxian-reference-timing-library` when second-game work begins',

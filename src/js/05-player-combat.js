@@ -51,6 +51,7 @@ function updatePlayerBullets(dt){
     if(e.hp<=0){
      awardKill(e,e.dive);
      if(e.t==='boss'){
+      clearReferenceBossMomentCueWindow();
       S.shake=Math.max(S.shake,.6);
       ex(e.x,e.y,28,'#fff5a6');
       ex(e.x,e.y,18,'#ff8cd7');
@@ -61,7 +62,12 @@ function updatePlayerBullets(dt){
     else{
      logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
      if(e.t==='boss'&&hpBefore>e.hp){
-      ex(e.x,e.y,8,'#fff4a8');
+      stopReferenceCueSet(['attackCharge','enemyShot','enemyHit']);
+      holdReferenceGameplayCadence(.2);
+      S.shake=Math.max(S.shake,.18);
+      ex(e.x,e.y,20,'#fff4a8');
+      ex(e.x,e.y,10,'#ff8cd7');
+      ex(e.x,e.y,6,'#d8f2ff');
       sfx.bossHit();
      }else sfx.hit();
     }

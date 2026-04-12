@@ -28,6 +28,7 @@
     "local:resume": "node tools/dev/local-resume.js",
     "local:stop": "node tools/dev/local-stop.js",
     "harness:analyze": "node tools/harness/analyze-run.js",
+    "harness:analyze:boss-timing": "node tools/harness/analyze-galaga-boss-timing.js",
     "harness:analyze:timing-alignment": "node tools/harness/analyze-galaga-timing-alignment.js",
     "harness:build:galaga-reference-library": "node tools/harness/build-galaga-reference-timing-library.js",
     "harness:batch": "node tools/harness/run-batch.js",

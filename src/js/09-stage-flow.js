@@ -126,7 +126,7 @@ function queueStageTransition(mode='normal'){
   enemies:S.e.filter(e=>e.hp>0).length
  });
  if(usesRuntimeGalagaReferenceAudio()){
-  sfx.stopCueNames(['stagePulse','challengeResults','challengePerfect']);
+  clearReferenceTransitionCueWindow();
   S.transitionCueKind=nextIsChallenge?1:0;
   // Galaga's challenge-stage announcement wants to land near the setup
   // handoff, not at the beginning of the whole transition window.
@@ -134,7 +134,7 @@ function queueStageTransition(mode='normal'){
    ? (nextIsChallenge?Math.max(.55,S.nextStageT-1.42):Math.max(.45,S.nextStageT-1.1))
    : (nextIsChallenge?Math.max(.7,S.nextStageT-1.52):Math.max(.55,S.nextStageT-1.18));
   // Keep the periodic convoy pulse from stacking on transition clips.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?1.1:.9));
+  holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?1.1:.9));
  }else sfx.transition(nextIsChallenge?1:0);
 }
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-12T13:29:12.548Z",
+  "generatedAt": "2026-04-12T13:40:01.618Z",
   "purpose": "Durable reference timing and audio-fidelity library for Galaga-aligned polish work in Aurora and future fixed-screen arcade packs.",
   "rule": "Use measured reference artifacts first for timing, motion, audio, pacing, and transition decisions. Manual listening/viewing is secondary validation.",
   "sourcePacks": [
@@ -10,12 +10,14 @@
     "reference-artifacts/analyses/galaga-audio-cue-matrix/README.md",
     "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md",
     "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md",
-    "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md"
+    "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md",
+    "reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604/README.md"
   ],
   "latestArtifacts": {
     "timingAlignment": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f",
     "audioOverlap": "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba",
-    "stageOpening": "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba"
+    "stageOpening": "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba",
+    "bossTiming": "reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604"
   },
   "eventFamilies": [
     {
@@ -199,11 +201,22 @@
       "focus": "Boss damage identity, boss death audibility, and visual emphasis at destruction.",
       "referenceAssets": [
         "src/assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "src/assets/reference-audio/galaga3-boss-death-sasori.m4a"
+        "src/assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604/README.md"
       ],
+      "auroraCurrent": {
+        "firstHit": {
+          "damageToCue": 0,
+          "triggerToCue": 0
+        },
+        "death": {
+          "killToCue": 0.001,
+          "pulseBeforeBossBoom": 0.226
+        }
+      },
       "notes": [
         "Boss destruction should read as a meaningful event both visually and audibly, not just a slightly larger ordinary kill.",
-        "A dedicated boss timing probe is still worth adding."
+        "The boss timing probe should remain part of the standard library refresh as we tune audibility and pause/overlap policy."
       ]
     },
     {
