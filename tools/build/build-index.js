@@ -225,6 +225,7 @@ function loadApplicationGuide(){
       strapline: raw.strapline || '',
       currentGoal: raw.currentGoal || '',
       audioContexts: Array.isArray(raw.audioContexts) ? raw.audioContexts : [],
+      audioEventMatrix: Array.isArray(raw.audioEventMatrix) ? raw.audioEventMatrix : [],
       comparisonSets: Array.isArray(raw.comparisonSets) ? raw.comparisonSets : [],
       graphicsThemes: Array.isArray(raw.graphicsThemes) ? raw.graphicsThemes : [],
       graphicsContexts: Array.isArray(raw.graphicsContexts) ? raw.graphicsContexts : [],
@@ -239,6 +240,7 @@ function loadApplicationGuide(){
       strapline: 'Add application-guide.json to restore the generated application catalog.',
       currentGoal: '',
       audioContexts: [],
+      audioEventMatrix: [],
       comparisonSets: [],
       graphicsThemes: [],
       graphicsContexts: [],
@@ -1389,6 +1391,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
 function buildApplicationGuide(buildInfo, latestNote, guide){
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
+    { id: 'audio-event-matrix', title: 'Audio Event Matrix' },
     { id: 'audio-catalog', title: 'Audio Catalog' },
     { id: 'theme-comparison', title: 'Theme Comparison' },
     { id: 'visual-themes', title: 'Visual Themes' },
@@ -1401,6 +1404,29 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const toc = tocItems.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
   `).join('\n');
+  const eventRows = (guide.audioEventMatrix || []).map((entry) => {
+    const actions = [];
+    if(entry.entryId){
+      actions.push(`<button class="audioAction" type="button" data-event-entry-id="${esc(entry.entryId)}" data-event-mode="current">Play Current</button>`);
+      actions.push(`<button class="audioAction" type="button" data-event-entry-id="${esc(entry.entryId)}" data-event-mode="aurora">Play Aurora</button>`);
+    }
+    if(entry.referenceClip){
+      actions.push(`<button class="audioAction" type="button" data-event-reference="${esc(entry.referenceClip)}" data-event-label="${esc(entry.event || entry.id || 'reference')}">Play Reference</button>`);
+    }
+    if(entry.entryId && entry.referenceClip){
+      actions.push(`<button class="audioAction" type="button" data-event-entry-id="${esc(entry.entryId)}" data-event-reference="${esc(entry.referenceClip)}" data-event-mode="compare">Compare</button>`);
+    }
+    return `
+    <tr>
+      <td><strong>${esc(entry.event || '')}</strong><br><span class="docMeta">${esc(entry.phase || '')}</span></td>
+      <td>${esc(entry.timing || '')}</td>
+      <td><code>${esc(entry.audioName || '')}</code><br><span class="docMeta">${esc(entry.status || '')}</span></td>
+      <td><strong>Start:</strong> ${esc(entry.trigger || '')}<br><strong>Stop:</strong> ${esc(entry.stop || '')}</td>
+      <td>${esc(entry.note || '')}</td>
+      <td>${actions.length ? `<div class="buttonRow">${actions.join('')}</div>` : '<span class="docMeta">No preview wired yet</span>'}</td>
+    </tr>
+  `;
+  }).join('\n');
   const audioRows = (guide.audioContexts || []).map((entry, index) => `
     <tr>
       <td><strong>${esc(entry.context || '')}</strong><br><span class="docMeta">${esc(entry.label || '')}</span></td>
@@ -1539,6 +1565,30 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora, Galaga synth, and Galaga reference-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
           </div>
           <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
+        </section>
+
+        <section class="section" id="audio-event-matrix">
+          <div class="sectionHeader">
+            <h2>Audio Event Matrix</h2>
+            <p>A refreshed event-by-event timing map for Aurora against the current Galaga alignment work. Use this to review what each event is, when the sound should land, which cue or reference excerpt we use, and what should interrupt or protect it.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Game Event</th>
+                  <th>Timing Of Activity</th>
+                  <th>Audio Name / Status</th>
+                  <th>How It Starts / Stops</th>
+                  <th>Comment / Gap</th>
+                  <th>Review Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${eventRows}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section class="section" id="audio-catalog">
@@ -1774,13 +1824,13 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           pendingTimers.push(setTimeout(function(){ playReferenceClip(item); }, 2200));
           setStatus('Playing Aurora, then Galaga, then the labeled reference clip for ' + (entry.label || entry.cue || 'comparison') + '.');
         }
+        const entryById = new Map((data.audioContexts || []).map(entry => [entry.id, entry]));
         function playSet(mode){
           const api = previewApi();
           if(!api || typeof api.playCue !== 'function'){
             setStatus('Preview frame is not ready yet. Let the page finish loading and try again.', true);
             return;
           }
-          const entryById = new Map((data.audioContexts || []).map(entry => [entry.id, entry]));
           const setEntries = (data.comparisonSets || []).map(item => ({ item, entry: entryById.get(item.entryId) })).filter(row => row.entry);
           clearQueue();
           if(!setEntries.length){
@@ -1879,6 +1929,41 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               : 'aurora'
             );
             return;
+          }
+          const eventButton = event.target.closest('[data-event-entry-id], [data-event-reference]');
+          if(eventButton){
+            const entryId = eventButton.getAttribute('data-event-entry-id');
+            const mode = eventButton.getAttribute('data-event-mode') || 'current';
+            const refClip = eventButton.getAttribute('data-event-reference');
+            const label = eventButton.getAttribute('data-event-label') || entryId || 'event';
+            const entry = entryId ? entryById.get(entryId) : null;
+            if(mode === 'compare'){
+              if(!entry || !refClip){
+                setStatus('This event does not have both a runtime cue and a reference clip yet.', true);
+                return;
+              }
+              clearQueue();
+              if(!playEntry(entry, 'galaga-assets')) return;
+              pendingTimers.push(setTimeout(function(){ playReferenceClip({ referenceClip: refClip }); }, 1500));
+              setStatus('Playing runtime reference cue and then the raw reference clip for ' + label + '.');
+              return;
+            }
+            if(mode === 'aurora'){
+              if(!entry || !playEntry(entry, 'aurora')) return;
+              setStatus('Played Aurora cue for ' + label + '.');
+              return;
+            }
+            if(mode === 'current'){
+              if(!entry || !playEntry(entry, 'galaga-assets')) return;
+              setStatus('Played current runtime reference cue for ' + label + '.');
+              return;
+            }
+            if(refClip){
+              if(playReferenceClip({ referenceClip: refClip })){
+                setStatus('Played reference clip for ' + label + '.');
+              }
+              return;
+            }
           }
         });
       })();
