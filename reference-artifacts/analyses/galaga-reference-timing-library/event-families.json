@@ -1,0 +1,239 @@
+{
+  "generatedAt": "2026-04-12T13:29:12.548Z",
+  "purpose": "Durable reference timing and audio-fidelity library for Galaga-aligned polish work in Aurora and future fixed-screen arcade packs.",
+  "rule": "Use measured reference artifacts first for timing, motion, audio, pacing, and transition decisions. Manual listening/viewing is secondary validation.",
+  "sourcePacks": [
+    "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+    "reference-artifacts/analyses/galaga-audio-reference-video/README.md",
+    "reference-artifacts/analyses/galaga-audio-reference-video-2/README.md",
+    "reference-artifacts/analyses/galaga-audio-reference-video-3/README.md",
+    "reference-artifacts/analyses/galaga-audio-cue-matrix/README.md",
+    "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md",
+    "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md",
+    "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md"
+  ],
+  "latestArtifacts": {
+    "timingAlignment": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f",
+    "audioOverlap": "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba",
+    "stageOpening": "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba"
+  },
+  "eventFamilies": [
+    {
+      "id": "opening-sequence",
+      "label": "Opening Sequence",
+      "auroraCueSlots": [
+        "gameStart",
+        "formationArrival",
+        "stagePulse"
+      ],
+      "focus": "Full start phrase, arrival signal, first visible alien arrivals, first convoy pulse.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga2-game-start.m4a",
+        "src/assets/reference-audio/galaga3-level-underscore.m4a",
+        "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png",
+        "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/game-start-waveform.png"
+      ],
+      "measuredTargets": {
+        "startPhraseDuration": 4,
+        "formationArrivalAfterStart": 4.18,
+        "firstVisibleAlienArrivalsAfterStart": 5.35,
+        "firstConvoyPulseAfterStart": 6.15
+      },
+      "auroraCurrent": {
+        "firstPulseAfterSpawn": 6.291,
+        "firstDiveAfterSpawn": 9.791,
+        "gameStartTailPastFirstPulse": -2.29
+      },
+      "notes": [
+        "Preserve the full canonical game-start phrase where feasible.",
+        "Widen the game window before shortening the phrase.",
+        "This family should be the default reference for shell-to-play handoff decisions."
+      ]
+    },
+    {
+      "id": "formation-arrival-and-convoy",
+      "label": "Formation Arrival And Convoy Cadence",
+      "auroraCueSlots": [
+        "formationArrival",
+        "stagePulse",
+        "attackCharge"
+      ],
+      "focus": "Arrival pacing, convoy cadence, first dive timing, and the relationship between movement and recurring board audio.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga3-level-underscore.m4a",
+        "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png"
+      ],
+      "auroraCurrent": {
+        "firstStagePulseAfterSpawn": 0.817,
+        "firstAttackAfterSpawn": 8.2,
+        "firstLowerFieldAfterSpawn": 9.35
+      },
+      "notes": [
+        "This is one of the main timing-sensitive areas for subjective “feel”.",
+        "Use measured board motion from the archived gameplay video before nudging cadence by ear."
+      ]
+    },
+    {
+      "id": "enemy-dive-and-charge",
+      "label": "Enemy Dive And Charge",
+      "auroraCueSlots": [
+        "attackCharge"
+      ],
+      "focus": "Dive-start timing versus visible enemy commitment and fall path.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga3-attack-charger.m4a",
+        "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md"
+      ],
+      "auroraCurrent": {
+        "firstChargeAfterDive": 0
+      },
+      "notes": [
+        "The charge cue should line up with the moment an alien visibly commits to the dive, not with bullets or later descent frames."
+      ]
+    },
+    {
+      "id": "capture-beam-and-capture-flow",
+      "label": "Capture Beam And Capture Flow",
+      "auroraCueSlots": [
+        "captureBeam",
+        "captureSuccess",
+        "captureRetreat",
+        "capturedFighterDestroyed",
+        "rescueJoin"
+      ],
+      "focus": "Beam deploy, successful capture, retreat with carried ship, destruction of captured ship, and rescue/join.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga3-tractor-beam.m4a",
+        "src/assets/reference-audio/galaga3-fighter-captured.m4a",
+        "src/assets/reference-audio/galaga3-capturing.m4a",
+        "src/assets/reference-audio/galaga3-captured-fighter-destroyed.m4a",
+        "src/assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a"
+      ],
+      "notes": [
+        "This family is already structurally split in Aurora and is a strong candidate for deeper timing probes later.",
+        "The same comparison pattern will transfer well to Galaxian-style special-state flows in future games."
+      ]
+    },
+    {
+      "id": "ship-loss-and-respawn",
+      "label": "Ship Loss And Respawn",
+      "auroraCueSlots": [
+        "playerHit",
+        "gameOver"
+      ],
+      "focus": "Immediate death cue, visual loss sync, last-ship tension, and return-to-control pacing.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga3-death.m4a",
+        "src/assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a"
+      ],
+      "auroraCurrent": {
+        "playerHitCueRelativeToLoss": 0
+      },
+      "notes": [
+        "Ordinary ship loss and terminal game-over ambience should remain separate concepts.",
+        "Future work should add more visual-timing measurements here, not just cue timestamps."
+      ]
+    },
+    {
+      "id": "stage-clear-and-next-stage",
+      "label": "Stage Clear And Next Stage",
+      "auroraCueSlots": [
+        "stageTransition",
+        "stagePulse"
+      ],
+      "focus": "Stage clear spacing, next-stage announcement, spawn handoff, and transition quiet windows.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga-level-flag-v1.m4a",
+        "src/assets/reference-audio/galaga-level-flag-v2.m4a",
+        "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md"
+      ],
+      "auroraCurrent": {
+        "transitionWindow": 3.204,
+        "transitionCueAfterProbe": 2.022,
+        "spawnAfterTransitionCue": 1.182
+      },
+      "notes": [
+        "This family should capture how much quiet space the player gets between stage completion and the next arrival."
+      ]
+    },
+    {
+      "id": "challenge-entry-results-perfect",
+      "label": "Challenge Entry, Results, And Perfect",
+      "auroraCueSlots": [
+        "challengeTransition",
+        "challengeResults",
+        "challengePerfect",
+        "stageTransition"
+      ],
+      "focus": "Challenge announcement timing, setup handoff, results timing, perfect timing, and next-stage recovery.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga2-challenging-stage.m4a",
+        "src/assets/reference-audio/galaga2-challenging-stage-results.m4a",
+        "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "src/assets/reference-audio/galaga3-challenging-stage.m4a"
+      ],
+      "auroraCurrent": {
+        "challengeEntry": {
+          "cueAfterProbe": 2.219,
+          "spawnAfterCue": 0.583
+        },
+        "challengePerfect": {
+          "resultCueAfterClear": 0.342,
+          "nextCueAfterClear": 2.85,
+          "spawnAfterClear": 3.95
+        }
+      },
+      "notes": [
+        "This is still one of the messiest live-feel families and should remain a primary tuning target.",
+        "Use the overlap budgets here before manual trimming or cue shortening."
+      ]
+    },
+    {
+      "id": "boss-hit-and-boss-death",
+      "label": "Boss Hit And Boss Death",
+      "auroraCueSlots": [
+        "bossHit",
+        "bossBoom"
+      ],
+      "focus": "Boss damage identity, boss death audibility, and visual emphasis at destruction.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "src/assets/reference-audio/galaga3-boss-death-sasori.m4a"
+      ],
+      "notes": [
+        "Boss destruction should read as a meaningful event both visually and audibly, not just a slightly larger ordinary kill.",
+        "A dedicated boss timing probe is still worth adding."
+      ]
+    },
+    {
+      "id": "high-score-and-results-flow",
+      "label": "High Score And Results Flow",
+      "auroraCueSlots": [
+        "highScoreFirst",
+        "highScoreOther"
+      ],
+      "focus": "Results-to-name-entry handoff and first-place versus non-first placement distinction.",
+      "referenceAssets": [
+        "src/assets/reference-audio/galaga3-name-entry-1st.m4a",
+        "src/assets/reference-audio/galaga3-name-entry-2nd-5th.m4a",
+        "src/assets/reference-audio/galaga-high-score-1st-place.m4a",
+        "src/assets/reference-audio/galaga-high-score-2nd-5th-place.m4a"
+      ],
+      "notes": [
+        "This family is already structurally represented in Aurora and should be easy to extend with richer timing checks later."
+      ]
+    }
+  ],
+  "futureReuse": {
+    "forAurora": [
+      "Use the library before changing cue timing, clip length, movement pacing, or transition windows.",
+      "When a new polish issue appears, map it into one event family and add measured evidence there first.",
+      "Prefer updating timing windows and arrival delays before cutting canonical phrases."
+    ],
+    "forFutureGames": [
+      "Copy the same structure for Galaxian or later games: canonical event families, measured reference artifacts, current runtime metrics, and comparison deltas.",
+      "Keep game-specific timing truth inside the game pack and use Platinum only for generic hooks and harness support."
+    ]
+  }
+}

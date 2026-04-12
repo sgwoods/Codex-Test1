@@ -155,6 +155,12 @@ For each fidelity topic:
   - use this to map Aurora cue slots against the strongest current Galaga
     reference clips and identify missing game-owned slots before deeper audio
     fidelity work
+- Durable timing library:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-reference-timing-library/README.md`
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-reference-timing-library/event-families.json`
+  - use this as the default starting point for event-family timing, pacing, and
+    audiovisual sync work
+  - this same pattern should later be reused for `Galaxian` and future packs
 
 ### Challenge Stage Fidelity
 
