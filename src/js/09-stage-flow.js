@@ -19,10 +19,12 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
- const openingTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&S.stage===1&&typeof currentGamePackReferenceTiming==='function'
-  ? currentGamePackReferenceTiming('stage1Opening')
+ const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
+ const openingTiming=usesReference&&S.stage===1?currentGamePackReferenceTiming('stage1Opening'):null;
+ const transitionTiming=usesReference&&S.stage>1
+  ? currentGamePackReferenceTiming(S.transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
   : null;
- const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||0;
+ const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||transitionTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
@@ -61,6 +63,10 @@ function spawnFormation(){
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout();
+ const challengeTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('challengeEntry')
+  : null;
+ const baseEntryDelay=challengeTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  const total=layout.groups*layout.enemiesPerGroup;
  const upperBandY=PLAY_H*layout.upperBandRatio;
@@ -86,16 +92,23 @@ function spawnChallenge(){
    group:wave,
    sweep:wave%2?-1:1,
    upperBandY,
-   spawn:wave*layout.waveDelay+slot*layout.slotDelay
+   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
   }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
 function spawnStage(){
+ const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesRuntimeGalagaReferenceAudio()?(S.challenge?1.85:3.05):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
+ const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1
+  ? currentGamePackReferenceTiming(transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
+  : null;
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
+ S.transitionMode='';
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
@@ -108,8 +121,17 @@ function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
+ const challengeEntryTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('challengeEntry')
+  : null;
+ const challengeResultsTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('challengeResults')
+  : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
- S.nextStageT=mode==='challengeResult'?(nextIsChallenge?3.05:2.5):(nextIsChallenge?3.75:3.2);
+ S.transitionMode=mode;
+ S.nextStageT=mode==='challengeResult'
+  ? (nextIsChallenge?(challengeResultsTiming?.nextChallengeWindow||3.05):(challengeResultsTiming?.nextStageWindow||2.5))
+  : (nextIsChallenge?(challengeEntryTiming?.transitionWindow||3.75):3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;
  S.bannerMode='stageTransition';
@@ -127,14 +149,15 @@ function queueStageTransition(mode='normal'){
  });
  if(usesRuntimeGalagaReferenceAudio()){
   clearReferenceTransitionCueWindow();
-  S.transitionCueKind=nextIsChallenge?1:0;
-  // Galaga's challenge-stage announcement wants to land near the setup
-  // handoff, not at the beginning of the whole transition window.
+ S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
-   ? (nextIsChallenge?Math.max(.55,S.nextStageT-1.42):Math.max(.45,S.nextStageT-1.1))
-   : (nextIsChallenge?Math.max(.7,S.nextStageT-1.52):Math.max(.55,S.nextStageT-1.18));
-  // Keep the periodic convoy pulse from stacking on transition clips.
-  holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?1.1:.9));
+   ? (nextIsChallenge
+      ? Math.max(.55,S.nextStageT-(challengeResultsTiming?.nextChallengeCueLeadBeforeSpawn||1.42))
+      : Math.max(.45,S.nextStageT-(challengeResultsTiming?.nextCueLeadBeforeSpawn||1.1)))
+   : (nextIsChallenge
+      ? Math.max(.7,S.nextStageT-(challengeEntryTiming?.cueLeadBeforeSpawn||1.52))
+      : Math.max(.55,S.nextStageT-1.18));
+  holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?(challengeEntryTiming?.cadenceHoldAfterSpawn||1.1):(challengeResultsTiming?.cadenceHoldAfterSpawn||.9)));
  }else sfx.transition(nextIsChallenge?1:0);
 }
 

@@ -798,10 +798,12 @@ window.__galagaHarness__={
   const boss=S.e.find(e=>e.hp>1&&e.t==='boss');
   if(!boss)return false;
   const hpBefore=boss.hp;
+  const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
   boss.hp--;
-  boss.hitT=.34;
+  boss.hitT=bossTiming?.hitFlashDuration??.46;
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
-  S.shake=Math.max(S.shake,.18);
+  holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
+  S.shake=Math.max(S.shake,.22);
   ex(boss.x,boss.y,20,'#fff4a8');
   ex(boss.x,boss.y,10,'#ff8cd7');
   ex(boss.x,boss.y,6,'#d8f2ff');

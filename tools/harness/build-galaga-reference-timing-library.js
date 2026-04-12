@@ -255,7 +255,8 @@ const library = {
     forAurora: [
       'Use the library before changing cue timing, clip length, movement pacing, or transition windows.',
       'When a new polish issue appears, map it into one event family and add measured evidence there first.',
-      'Prefer updating timing windows and arrival delays before cutting canonical phrases.'
+      'Prefer updating timing windows and arrival delays before cutting canonical phrases.',
+      'Keep logs, event traces, and timing artifacts structured enough that they could later support a reinforcement-learned player model using the same human controls.'
     ],
     forFutureGames: [
       'Copy the same structure for Galaxian or later games: canonical event families, measured reference artifacts, current runtime metrics, and comparison deltas.',

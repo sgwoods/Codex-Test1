@@ -1054,7 +1054,7 @@
       "id": "stage-pulse-event",
       "event": "Formation pulse / convoy cadence",
       "phase": "stage",
-      "timing": "Gameplay requests a pulse roughly every 0.38s, but Galaga reference mode throttles actual clip playback to about every 1.25s and suppresses it during hold windows. In the measured stage-1 opening it stays held until after the first-arrival window, around 6.15s from start input.",
+      "timing": "Gameplay requests a pulse roughly every 0.38s, but Galaga reference mode throttles actual clip playback to about every 1.25s and suppresses it during hold windows. In the measured stage-1 opening it stays held until after the first-arrival window, around 6.15s from start input, and later stage entries now use widened reference timing windows before cadence resumes.",
       "audioName": "stagePulse -> galaga3-ambience-convoy.m4a excerpt 0.18s-1.00s",
       "trigger": "Initiated by the ongoing gameplay cadence loop once the stage is active and no transition/result hold is in force.",
       "stop": "Stopped or held during stage transitions, challenge transitions, and challenge result windows.",
@@ -1066,7 +1066,7 @@
       "id": "attack-charge-event",
       "event": "Enemy dive / falling alien charge",
       "phase": "stage",
-      "timing": "At the exact start of an enemy dive or attack run.",
+      "timing": "In Galaga Reference Audio mode, the cue is intentionally delayed about 0.12s after dive start and after visible downward travel begins, instead of firing on the exact trigger frame.",
       "audioName": "attackCharge -> galaga3-attack-charger.m4a",
       "trigger": "Initiated from enemy dive start, including scripted and random dives.",
       "stop": "One-shot cue. No explicit stop rule.",
@@ -1119,9 +1119,9 @@
       "audioName": "bossHit -> galaga3-boss-damage-flagship-fighter-shot.m4a; bossBoom -> galaga3-boss-death-sasori.m4a",
       "trigger": "Initiated on boss damage and boss destruction events.",
       "stop": "One-shot cues. Cooldown-limited.",
-      "note": "Boss death has a dedicated clip, but bossHit still shares the mixed damage/shot clip and may need a cleaner mapping.",
+      "note": "Boss death has a dedicated clip. Boss first-hit now also gets a dedicated visual flash/emphasis pass, but bossHit still shares the mixed damage/shot clip and may need a cleaner mapping.",
       "entryId": "boss-hit-aurora",
-      "status": "Implemented, boss-hit mapping under review"
+      "status": "Implemented, visual emphasis improved and mapping still under review"
     },
     {
       "id": "capture-beam-event",
@@ -1215,39 +1215,39 @@
       "audioName": "stageTransition -> galaga-level-flag-v1.m4a excerpt 0.00s-0.86s",
       "trigger": "Initiated during the inter-stage handoff once the board has cleared and the transition timer reaches its cue point.",
       "stop": "Stops stagePulse, challengeResults, and challengePerfect before playback.",
-      "note": "Now cue-budgeted, but still subjectively clunky in some cases.",
+      "note": "Now cue-budgeted and backed by reference timing windows, with later-stage entry delays used to keep arrival/cadence from stepping on the handoff.",
       "entryId": "stage-transition",
-      "status": "Implemented with excerpt policy"
+      "status": "Implemented with timing-budget policy"
     },
     {
       "id": "challenge-transition-event",
       "event": "Challenge-stage entry",
       "phase": "challenge",
-      "timing": "Queued late in the normal-to-challenge window. Transition window is about 3.75s; the reference excerpt used is 1.05s.",
+      "timing": "Queued late in the normal-to-challenge window. Transition window is now about 4.35s; the challenge cue lands about 1.72s before spawn, and challenge enemy arrivals are delayed by about 0.96s after stage spawn in reference mode.",
       "audioName": "challengeTransition -> galaga2-challenging-stage.m4a excerpt 0.00s-1.05s",
       "trigger": "Initiated when the next stage is a challenge stage and the transition timer reaches the challenge cue point.",
       "stop": "Stops stagePulse, stageTransition, challengeResults, and challengePerfect before playback.",
-      "note": "Still one of the most sensitive timing/problem areas in live play.",
+      "note": "Still one of the most sensitive timing/problem areas in live play, but it is now managed by a named reference timing window instead of a single hardcoded delay.",
       "entryId": "challenge-transition",
-      "status": "Implemented with excerpt policy, still under review"
+      "status": "Implemented with reference timing window"
     },
     {
       "id": "challenge-results-event",
       "event": "Challenge results",
       "phase": "challenge",
-      "timing": "Queued about 0.34s after challenge clear; post-challenge handoff window is about 1.45s before the next-stage transition is queued.",
+      "timing": "Queued about 0.34s after challenge clear; the post-challenge handoff is now widened so the next-stage cue lands about 4.38s after clear and the next stage spawns about 6.0s after clear in the measured perfect-clear path.",
       "audioName": "challengeResults -> galaga2-challenging-stage-results.m4a excerpt 0.00s-1.55s",
       "trigger": "Initiated when a challenge stage is cleared without a perfect result.",
       "stop": "Stops stagePulse, stageTransition, and challengeTransition before playback; also holds ambient cadence.",
-      "note": "Now separated from challengePerfect and given a hold window so it can own the beat.",
+      "note": "Now separated from challengePerfect and given a wider hold window so the result phrase can finish before the next-stage handoff.",
       "entryId": "challenge-results",
-      "status": "Implemented with hold policy"
+      "status": "Implemented with widened handoff policy"
     },
     {
       "id": "challenge-perfect-event",
       "event": "Challenge perfect result",
       "phase": "challenge",
-      "timing": "Queued about 0.34s after a perfect challenge clear; excerpt runs 1.7s with extra cadence hold before the next-stage handoff.",
+      "timing": "Queued about 0.34s after a perfect challenge clear; excerpt runs 1.7s with extra cadence hold before the next-stage handoff, which now uses the same widened measured window as challenge results.",
       "audioName": "challengePerfect -> galaga2-challenging-stage-perfect.m4a excerpt 0.00s-1.70s",
       "trigger": "Initiated when a challenge stage is cleared perfectly.",
       "stop": "Stops stagePulse, stageTransition, and challengeTransition before playback; also holds ambient cadence.",

@@ -75,9 +75,24 @@ function drawEnemy(e){
  else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
  else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
  if(e.hitT>0){
-  ctx.globalAlpha=Math.min(.9,e.hitT/.34);
-  ctx.fillStyle=e.t==='boss'?'rgba(255,248,196,.86)':'rgba(255,255,255,.72)';
-  ctx.fillRect(-12,-10,24,20);
+  const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
+  ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
+  if(e.t==='boss'){
+   ctx.fillStyle='#fff8c4';
+   ctx.fillRect(-17,-13,34,26);
+   ctx.fillStyle='#ffffff';
+   ctx.fillRect(-12,-3,24,6);
+   ctx.fillRect(-3,-10,6,20);
+   ctx.fillStyle='#ff92d8';
+   ctx.fillRect(-9,-1,18,2);
+   ctx.fillRect(-1,-7,2,14);
+   ctx.strokeStyle='#e2f7ff';
+   ctx.lineWidth=1;
+   ctx.strokeRect(-18.5,-14.5,37,29);
+  }else{
+   ctx.fillStyle='rgba(255,255,255,.72)';
+   ctx.fillRect(-12,-10,24,20);
+  }
   ctx.globalAlpha=1;
  }
  if(enemyHasActiveBeam(e)){

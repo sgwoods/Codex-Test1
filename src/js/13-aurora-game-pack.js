@@ -121,6 +121,35 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
   formationArrivalDelay:4.18,
   firstEnemyArrivalDelay:5.35,
   firstPulseDelay:6.15
+ }),
+ stageEntry:Object.freeze({
+  firstEnemyArrivalDelay:.82,
+  firstPulseDelay:1.9
+ }),
+ postChallengeStageEntry:Object.freeze({
+  firstEnemyArrivalDelay:1.08,
+  firstPulseDelay:2.35
+ }),
+ challengeEntry:Object.freeze({
+  transitionWindow:4.35,
+  cueLeadBeforeSpawn:1.72,
+  firstEnemyArrivalDelay:.96,
+  cadenceHoldAfterSpawn:1.28
+ }),
+ challengeResults:Object.freeze({
+  resultCueDelay:.34,
+  nextStageWindow:4.55,
+  nextCueLeadBeforeSpawn:1.62,
+  cadenceHoldAfterSpawn:1.24
+ }),
+ enemyDiveCharge:Object.freeze({
+  cueDelay:.12,
+  minTravelY:9
+ }),
+ bossMoments:Object.freeze({
+  hitCadenceHold:.28,
+  deathCadenceHold:.96,
+  hitFlashDuration:.46
  })
 });
 

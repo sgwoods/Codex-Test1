@@ -161,6 +161,17 @@ For each fidelity topic:
   - use this as the default starting point for event-family timing, pacing, and
     audiovisual sync work
   - this same pattern should later be reused for `Galaxian` and future packs
+  - medium-term observability goal:
+    - keep evolving gameplay logs, event traces, timing artifacts, and visual
+      analysis in a way that would later support training a reinforcement-learned
+      player model that uses the same human-facing controls and perceives
+      gameplay events from the same rendered experience
+    - this means favoring:
+      - durable event-family instrumentation
+      - reproducible timing artifacts
+      - input/state traces that can be compared against human or reference play
+      - analysis outputs that help explain not only what happened, but when and
+        why it happened
 
 ### Challenge Stage Fidelity
 

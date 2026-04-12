@@ -20,6 +20,9 @@ function pickScriptEnemy(type,c){
 
 function startDive(e,p,opts={}){
  if(!e)return;
+ const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('enemyDiveCharge')
+  : null;
  e.low=0;
  if(opts.capture&&e.t==='boss'&&canCapture()){
   e.dive=4;
@@ -37,12 +40,15 @@ function startDive(e,p,opts={}){
  const jitter=stage1Scripted?18:26;
  const vyRnd=stage1Scripted?5:(S.stage<=2?8:12);
  e.dive=1;
- e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
- e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
- e.shot=e.t==='boss'?2:1;
- logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
- sfx.attackCharge();
- if(opts.escort&&e.t==='boss')assignEscorts(e);
+  e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
+  e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
+  e.shot=e.t==='boss'?2:1;
+  e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
+  e.chargeCueT=chargeTiming?.cueDelay??0;
+  e.chargeCueStartY=e.y;
+  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
+  if(!e.chargeCuePending)sfx.attackCharge();
+  if(opts.escort&&e.t==='boss')assignEscorts(e);
 }
 
 function runStage1Script(dt,p,T){
@@ -186,6 +192,17 @@ function updateEnemy(e,dt,t,T,p){
   e.vy+=diveAccel(S.stage)*fm.diveAccel*dt;
   e.x+=e.vx*dt+Math.sin(e.tm*7+e.ph)*13*fm.weave*dt;
   e.y+=e.vy*dt;
+  if(e.chargeCuePending){
+   e.chargeCueT=Math.max(0,(+e.chargeCueT||0)-dt);
+   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+    ? currentGamePackReferenceTiming('enemyDiveCharge')
+    : null;
+   const minTravelY=chargeTiming?.minTravelY??0;
+   if(e.chargeCueT<=0&&(e.y-(+e.chargeCueStartY||0))>=minTravelY){
+    e.chargeCuePending=0;
+    sfx.attackCharge();
+   }
+  }
   if(!e.low&&e.y>=PLAY_H*.62){
    e.low=1;
    logEvent('enemy_lower_field',Object.assign({stage:S.stage,y:+e.y.toFixed(2),stageClock:+S.stageClock.toFixed(3),playerLane:playLane(p.x)},enemyRef(e)));
@@ -200,6 +217,7 @@ function updateEnemy(e,dt,t,T,p){
    e.y=-26;
    e.vx=e.vy=0;
    e.dive=3;
+   e.chargeCuePending=0;
    e.low=0;
    e.beam=0;
    e.esc=0;
@@ -223,6 +241,9 @@ function updateEnemy(e,dt,t,T,p){
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
  if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
+  const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+   ? currentGamePackReferenceTiming('enemyDiveCharge')
+   : null;
   if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){
    e.dive=4;
    e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);
@@ -241,8 +262,11 @@ function updateEnemy(e,dt,t,T,p){
    e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
    e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);
    e.shot=e.t==='boss'?2:1;
+   e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
+   e.chargeCueT=chargeTiming?.cueDelay??0;
+   e.chargeCueStartY=e.y;
    logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});
-   sfx.attackCharge();
+   if(!e.chargeCuePending)sfx.attackCharge();
    if(e.t==='boss')assignEscorts(e);
   }
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
