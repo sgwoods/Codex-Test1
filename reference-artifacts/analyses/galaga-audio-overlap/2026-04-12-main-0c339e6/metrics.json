@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-04-12T11:57:47.594Z",
+  "commit": "0c339e68b30cc93898cf606de08e8b120730f616",
+  "shortCommit": "0c339e6",
+  "stage1": {
+    "gameStartAfterSpawn": 0.719,
+    "firstPulseAfterSpawn": 1.552,
+    "firstDiveAfterSpawn": 8.194,
+    "firstChargeAfterDive": 0,
+    "gameStartTailPastFirstPulse": 3.167,
+    "gameStartTailPastFirstDive": -3.475,
+    "referenceDurations": {
+      "assets/reference-audio/galaga2-game-start.m4a": 4,
+      "assets/reference-audio/galaga3-ambience-convoy.m4a": 8,
+      "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a": 2,
+      "assets/reference-audio/galaga3-attack-charger.m4a": 3
+    }
+  },
+  "stage12": {
+    "transitionWindow": 2.848,
+    "pulseLeadBeforeProbe": -4.274,
+    "transitionCueAfterProbe": 1.89,
+    "spawnAfterTransitionCue": 0.958,
+    "pulseTailPastTransitionCue": 10.384,
+    "pulseTailPastSpawn": 9.426,
+    "transitionCueTailPastSpawn": 3.042,
+    "referenceDurations": {
+      "assets/reference-audio/galaga2-game-start.m4a": 4,
+      "assets/reference-audio/galaga-level-flag-v1.m4a": 4,
+      "assets/reference-audio/galaga3-ambience-convoy.m4a": 8,
+      "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a": 2
+    }
+  },
+  "stage23": {
+    "transitionWindow": 3.35,
+    "pulseLeadBeforeProbe": null,
+    "transitionCueAfterProbe": 2.116,
+    "spawnAfterTransitionCue": 1.234,
+    "pulseTailPastTransitionCue": null,
+    "pulseTailPastSpawn": null,
+    "transitionCueTailPastSpawn": 2.766,
+    "referenceDurations": {
+      "assets/reference-audio/galaga2-game-start.m4a": 4,
+      "assets/reference-audio/galaga2-challenging-stage.m4a": 4
+    }
+  },
+  "challengePerfect": {
+    "resultCueAfterClear": 0.342,
+    "nextCueAfterClear": 2.634,
+    "spawnAfterClear": 3.508,
+    "resultTailPastNextCue": 1.708,
+    "resultTailPastSpawn": 0.834,
+    "nextCueTailPastSpawn": 3.126,
+    "referenceDurations": {
+      "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a": 2,
+      "assets/reference-audio/galaga2-game-start.m4a": 4,
+      "assets/reference-audio/galaga2-challenging-stage-perfect.m4a": 4,
+      "assets/reference-audio/galaga-level-flag-v1.m4a": 4,
+      "assets/reference-audio/galaga3-ambience-convoy.m4a": 8,
+      "assets/reference-audio/galaga3-attack-charger.m4a": 3
+    }
+  },
+  "files": {
+    "metrics": "/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-0c339e6/metrics.json",
+    "readme": "/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-0c339e6/README.md",
+    "runRoot": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/audio-overlap"
+  },
+  "runs": {
+    "stage1": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/audio-overlap/audio-overlap-stage1-descent-seed2003-2026-04-12T11-56-34-573Z-39852-46jngg"
+    },
+    "stage12": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/audio-overlap/audio-overlap-stage1-normal-seed9311-2026-04-12T11-57-21-529Z-39931-tmukwq"
+    },
+    "stage23": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/audio-overlap/audio-overlap-stage2-normal-seed9312-2026-04-12T11-57-28-924Z-39957-oq3uns"
+    },
+    "challengePerfect": {
+      "outDir": "/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/audio-overlap/audio-overlap-stage3-perfect-transition-seed3011-2026-04-12T11-57-36-311Z-39976-8sgmwu"
+    }
+  }
+}
