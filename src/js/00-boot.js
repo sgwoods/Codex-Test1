@@ -553,6 +553,8 @@ const sfx={
    phase:atmosphere?.phase||opts.phase||'stage',
    variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
    referenceClip:String(cue?.referenceClip||'').trim(),
+   referenceClipStart:Number.isFinite(+cue?.clipStart)?+cue.clipStart:0,
+   referenceClipDuration:Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:0,
    stage:+(S.stage||0),
    challenge:!!S.challenge,
    at:+(performance.now()/1000).toFixed(3)
@@ -571,6 +573,8 @@ const sfx={
    phase:entry.phase,
    variant:entry.variant,
    referenceClip:entry.referenceClip||'',
+   referenceClipStart:Number.isFinite(+entry.referenceClipStart)?+entry.referenceClipStart:0,
+    referenceClipDuration:Number.isFinite(+entry.referenceClipDuration)?+entry.referenceClipDuration:0,
    challenge:!!entry.challenge,
    stage:+(entry.stage||0)
   });
@@ -605,10 +609,13 @@ const sfx={
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
   const cueEntry=window.__platinumAudioDebug.lastCue||null;
   if(cue.referenceClip){
+   if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
    this.playReferenceClip(cue.referenceClip,{
     allowIdle,
     volume:cue.referenceVolume,
     cooldownMs:cue.cooldownMs,
+    clipStart:cue.clipStart,
+    clipDuration:cue.clipDuration,
     cueEntry
    });
    return;
@@ -646,6 +653,8 @@ const sfx={
   window.__platinumAudioDebug.reference.lastRequested=clip;
   this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
+  const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
+  const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
   this.loadReferenceBuffer(clip).then(buffer=>{
    if(!buffer||audioMuted)return;
    try{
@@ -657,9 +666,13 @@ const sfx={
     source.buffer=buffer;
     source.__cue=String(opts?.cueEntry?.cue||'').trim();
     source.__clip=clip;
+    source.__clipStart=clipStart;
+    source.__clipDuration=clipDuration;
       source.connect(gain);
       gain.connect(this.bus);
-      source.start();
+      if(clipDuration>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
+      else if(clipStart>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
+      else source.start();
       this.referenceActive.push(source);
       window.__platinumAudioDebug.reference.lastStarted=clip;
       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;

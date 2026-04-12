@@ -36,8 +36,9 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  spawnStage();msg.textContent='';
  if(usesRuntimeGalagaReferenceAudio()){
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
-  S.startCueT=.72;
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,1.55);
+  S.startCueT=.62;
+  S.seqT=Math.max(+S.seqT||0,3.05);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
  }else sfx.start();
  c?.focus?.();
 }

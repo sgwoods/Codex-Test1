@@ -91,7 +91,7 @@ function spawnChallenge(){
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesRuntimeGalagaReferenceAudio()?(S.challenge?1.62:1.42):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesRuntimeGalagaReferenceAudio()?(S.challenge?1.85:3.05):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
@@ -105,7 +105,7 @@ function queueStageTransition(mode='normal'){
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
- S.nextStageT=mode==='challengeResult'?(nextIsChallenge?2.5:2.05):(nextIsChallenge?3.35:2.85);
+ S.nextStageT=mode==='challengeResult'?(nextIsChallenge?3.05:2.5):(nextIsChallenge?3.75:3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;
  S.bannerMode='stageTransition';
@@ -127,10 +127,10 @@ function queueStageTransition(mode='normal'){
   // Galaga's challenge-stage announcement wants to land near the setup
   // handoff, not at the beginning of the whole transition window.
   S.transitionCueT=mode==='challengeResult'
-   ? (nextIsChallenge?Math.max(.45,S.nextStageT-1.18):Math.max(.34,S.nextStageT-.88))
-   : (nextIsChallenge?Math.max(.55,S.nextStageT-1.24):Math.max(.42,S.nextStageT-.96));
+   ? (nextIsChallenge?Math.max(.55,S.nextStageT-1.42):Math.max(.45,S.nextStageT-1.1))
+   : (nextIsChallenge?Math.max(.7,S.nextStageT-1.52):Math.max(.55,S.nextStageT-1.18));
   // Keep the periodic convoy pulse from stacking on transition clips.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?.92:.72));
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?1.1:.9));
  }else sfx.transition(nextIsChallenge?1:0);
 }
 

@@ -573,6 +573,11 @@ window.__galagaHarness__={
   if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return .9;
   const cue=sfx.cueDef(String(name),opts||{});
   if(!cue)return .9;
+  if(cue.referenceClip){
+   const clipped=Math.max(0,+cue.clipDuration||0);
+   if(clipped>0)return Math.max(.08,Math.min(12,clipped+.04));
+   return 4;
+  }
   let endT=.12;
   if(Array.isArray(cue.seq)&&cue.seq.length){
    const step=Math.max(.01,+cue.step||.05);

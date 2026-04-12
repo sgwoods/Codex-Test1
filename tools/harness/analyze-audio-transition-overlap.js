@@ -48,11 +48,20 @@ function overrun(endAt, nextAt){
   return +(endAt - nextAt).toFixed(3);
 }
 
-function cueEnd(event, durationMap){
+function cueRuntimeDuration(event, durationMap){
   if(!event) return null;
+  const clipped = +event.referenceClipDuration || 0;
+  if(Number.isFinite(clipped) && clipped > 0) return clipped;
   const clip = String(event.referenceClip || '').trim();
   if(!clip) return null;
   const duration = durationMap[clip];
+  if(!Number.isFinite(duration)) return null;
+  return duration;
+}
+
+function cueEnd(event, durationMap){
+  if(!event) return null;
+  const duration = cueRuntimeDuration(event, durationMap);
   if(!Number.isFinite(duration)) return null;
   return +((event.t || 0) + duration).toFixed(3);
 }
