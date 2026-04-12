@@ -306,10 +306,10 @@ function syncCabinetShellLayout({
   renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
-  const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
-  const compactStampH=56;
+  const stampW=Math.min(560,Math.max(420,Math.floor(viewW*.46)));
+  const compactStampH=62;
   const stampH=buildStamp.offsetHeight||compactStampH;
-  const anchorTop=shellY+shellH-Math.max(66,Math.floor(shellPadB*.78));
+  const anchorTop=shellY+shellH-Math.max(44,Math.floor(shellPadB*.5));
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
   buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;

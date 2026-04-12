@@ -41,6 +41,7 @@ const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
+const buildStampDismissBtn=document.getElementById('buildStampDismissBtn');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
@@ -267,6 +268,7 @@ const PLATFORM_STORAGE_KEYS={
 };
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+let buildStampDismissed=0;
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1774,6 +1776,10 @@ feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeed
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
 if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
+if(buildStampDismissBtn)buildStampDismissBtn.addEventListener('click',()=>{
+ buildStampDismissed=1;
+ if(buildStamp)buildStamp.classList.add('dismissed');
+});
 addEventListener('pointerdown',()=>unlockAudioFromInteraction(),{passive:true});
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
