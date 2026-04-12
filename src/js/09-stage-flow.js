@@ -19,7 +19,10 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
- const baseEntryDelay=usesRuntimeGalagaReferenceAudio()&&!S.attract&&S.stage===1?3.85:0;
+ const openingTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&S.stage===1&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('stage1Opening')
+  : null;
+ const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';

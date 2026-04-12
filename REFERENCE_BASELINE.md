@@ -129,12 +129,27 @@ For each fidelity topic:
 - Timing-alignment note:
   - audio fidelity work should be judged together with gameplay timing
   - a cue is not "true enough" if it exists but lands at the wrong moment
+  - by default, timing and pacing decisions should come from measured reference
+    artifacts first:
+    - archived gameplay video
+    - extracted clips
+    - waveforms
+    - contact sheets
+    - generated timing-analysis reports
+  - manual listening/viewing should be used as validation after the measured
+    baseline is established, not as the primary source of truth
   - polish work should therefore compare Aurora against Galaga for:
     - game-start timing
     - inter-stage timing
     - challenge-stage setup timing
     - active-play cadence timing
     - results / perfect-clear timing
+- Stage 1 opening reference:
+  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md`
+  - preserve the full `4.0s` Galaga start phrase where feasible
+  - use the interstitial / arrival signal after the full phrase
+  - first visible alien arrivals should stay closer to the measured reference
+    window than to a convenience-driven shortened opening
 - Cue matrix:
   - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md`
   - use this to map Aurora cue slots against the strongest current Galaga

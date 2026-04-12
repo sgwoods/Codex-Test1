@@ -114,6 +114,16 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
  })
 });
 
+const AURORA_REFERENCE_TIMINGS=Object.freeze({
+ stage1Opening:Object.freeze({
+  startPreambleDelay:0,
+  startPhraseDuration:4,
+  formationArrivalDelay:4.18,
+  firstEnemyArrivalDelay:5.35,
+  firstPulseDelay:6.15
+ })
+});
+
 function referenceAudioCue(referenceClip, opts={}){
  return Object.freeze(Object.assign({
   referenceClip,
@@ -129,7 +139,7 @@ const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
  gameStart:referenceAudioCue('assets/reference-audio/galaga2-game-start.m4a',{
   cooldownMs:2400,
   clipStart:.08,
-  clipDuration:2.1,
+  clipDuration:0,
   stopCueNames:Object.freeze(['attractEnter','attractPulse','stagePulse'])
  }),
  formationArrival:referenceAudioCue('assets/reference-audio/galaga3-level-underscore.m4a',{
@@ -895,6 +905,10 @@ function currentGamePackAudioCue(cueName,opts={}){
   || null;
 }
 
+function currentGamePackReferenceTiming(key=''){
+ return AURORA_REFERENCE_TIMINGS[String(key||'').trim()]||null;
+}
+
 function currentGamePackFormationLayout(stage){
  const layouts=currentGamePack().formationLayouts;
  let layout=layouts[0];
@@ -1107,6 +1121,7 @@ window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
 window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
 window.currentGamePackAudioTheme=currentGamePackAudioTheme;
 window.currentGamePackAudioCue=currentGamePackAudioCue;
+window.currentGamePackReferenceTiming=currentGamePackReferenceTiming;
 window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
 window.selectedShellThemeForPack=selectedShellThemeForPack;
