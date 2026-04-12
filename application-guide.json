@@ -491,6 +491,21 @@
         "phase": "stage",
         "atmosphereTheme": "aurora-borealis"
       }
+    },
+    {
+      "id": "formation-arrival",
+      "context": "Stage Start",
+      "label": "Formation Arrival Signal",
+      "cue": "formationArrival",
+      "phase": "stage",
+      "audioTheme": "aurora-surge",
+      "listenFor": "Short interstitial signal after start music and before alien arrival begins.",
+      "description": "Pre-entry signal used to separate the opening start phrase from the first enemy formation arrival in Galaga reference mode.",
+      "preview": {
+        "cue": "formationArrival",
+        "phase": "stage",
+        "atmosphereTheme": "aurora-borealis"
+      }
     }
   ],
   "comparisonSets": [
@@ -1013,30 +1028,32 @@
       "id": "game-start-event",
       "event": "Game start / start preamble",
       "phase": "stage",
-      "timing": "In Galaga Reference Audio mode, gameStart fires after a 0.62s preamble; the opening board window is held to about 3.05s.",
+      "timing": "In Galaga Reference Audio mode, gameStart fires after a 0.62s preamble; the opening board cadence is then held until the new formation-arrival signal and first enemy entry window.",
       "audioName": "gameStart -> galaga2-game-start.m4a excerpt 0.08s-2.18s",
       "trigger": "Initiated after pressing Start and spawning the first stage. Uses a delayed start cue in reference mode so the board gets a preamble.",
       "stop": "Stops attractEnter, attractPulse, and stagePulse before playing. One-shot cue.",
-      "note": "We are intentionally using a shortened runtime-safe excerpt rather than the full reference clip.",
+      "note": "We are intentionally using a shortened runtime-safe excerpt and now separating it from alien arrival with a distinct formation-arrival beat.",
       "entryId": "stage-start-classic",
       "status": "Implemented with excerpt policy"
     },
     {
-      "id": "formation-arrival-missing",
-      "event": "Formation settled / ready-to-play handoff",
+      "id": "formation-arrival-event",
+      "event": "Formation arrival / stage-ready signal",
       "phase": "stage",
-      "timing": "Would belong after formation arrival and before the board settles into steady convoy cadence.",
-      "audioName": "No dedicated runtime slot today.",
-      "trigger": "Not currently modeled separately from gameStart and stagePulse.",
-      "stop": "N/A",
-      "note": "Likely missing gameplay event. Adding it could help match Galaga’s pre-combat pacing more faithfully.",
-      "status": "Missing event slot"
+      "timing": "In Galaga Reference Audio mode on stage 1, it lands after the opening start phrase and before the first enemy arrivals begin.",
+      "audioName": "formationArrival -> galaga3-level-underscore.m4a excerpt 0.00s-0.82s",
+      "trigger": "Initiated by a dedicated formation-arrival timer during the stage 1 opening handoff.",
+      "stop": "Stops stagePulse before playback. One-shot cue.",
+      "note": "New runtime slot added to separate start music from alien entry and better match Galaga’s staged opening feel.",
+      "entryId": "formation-arrival",
+      "referenceClip": "assets/reference-audio/galaga3-level-underscore.m4a",
+      "status": "Implemented with excerpt policy"
     },
     {
       "id": "stage-pulse-event",
       "event": "Formation pulse / convoy cadence",
       "phase": "stage",
-      "timing": "Gameplay requests a pulse roughly every 0.38s, but Galaga reference mode throttles actual clip playback to about every 1.25s and suppresses it during hold windows.",
+      "timing": "Gameplay requests a pulse roughly every 0.38s, but Galaga reference mode throttles actual clip playback to about every 1.25s and suppresses it during hold windows, including the new opening handoff.",
       "audioName": "stagePulse -> galaga3-ambience-convoy.m4a excerpt 0.18s-1.00s",
       "trigger": "Initiated by the ongoing gameplay cadence loop once the stage is active and no transition/result hold is in force.",
       "stop": "Stopped or held during stage transitions, challenge transitions, and challenge result windows.",

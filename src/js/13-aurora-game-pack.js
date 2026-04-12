@@ -132,6 +132,13 @@ const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
   clipDuration:2.1,
   stopCueNames:Object.freeze(['attractEnter','attractPulse','stagePulse'])
  }),
+ formationArrival:referenceAudioCue('assets/reference-audio/galaga3-level-underscore.m4a',{
+  cooldownMs:1800,
+  clipStart:0,
+  clipDuration:.82,
+  referenceVolume:1.02,
+  stopCueNames:Object.freeze(['stagePulse'])
+ }),
  stagePulse:Object.freeze({
   byPhase:Object.freeze({
    demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{
@@ -153,9 +160,9 @@ playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagshi
 enemyShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:220,referenceVolume:.88}),
 attackCharge:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:520,referenceVolume:.94}),
 enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
- bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240}),
+ bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.04}),
  enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
- bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360}),
+ bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.18}),
  captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800}),
  captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400}),
  captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200}),
@@ -208,6 +215,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
   label:'Classic Arcade',
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[392,494,523,659,784,988],step:.044,wave:'square',volume:.0205,slide:28,lpHz:3600,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0046,slide:10,detune:.003,lpHz:1800,delay:0},{freq:392,duration:.082,wave:'triangle',volume:.0094,slide:24,detune:.004,lpHz:2500,delay:0},{freq:523,duration:.082,wave:'triangle',volume:.0096,slide:30,detune:.004,lpHz:2600,delay:.044},{freq:784,duration:.11,wave:'square',volume:.0056,slide:16,detune:.002,lpHz:3600,delay:.132},{freq:988,duration:.2,wave:'triangle',volume:.0168,slide:92,detune:.005,lpHz:2850,delay:.176},{freq:1318,duration:.11,wave:'triangle',volume:.0058,slide:44,detune:.003,lpHz:4400,delay:.22}])}),
+   formationArrival:Object.freeze({seq:[330,440,587],step:.052,wave:'triangle',volume:.0112,slide:20,lpHz:3600,tones:Object.freeze([{freq:784,duration:.1,wave:'square',volume:.0048,slide:-22,lpHz:4200,delay:.104}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:1140,duration:.028,wave:'square',volume:.006,slide:-620,detune:.006,lpHz:6200},{freq:1520,duration:.018,wave:'square',volume:.003,slide:-480,detune:-.004,lpHz:6800,delay:.006}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.075,wave:'triangle',volume:.009,slide:-130,detune:.002,lpHz:3000},{freq:258,duration:.05,wave:'square',volume:.004,slide:-90,detune:.002,lpHz:2600,delay:.012}])}),
    playerHit:Object.freeze({tones:Object.freeze([{freq:228,duration:.11,wave:'square',volume:.022,slide:-300,detune:.012,lpHz:2600},{freq:176,duration:.19,wave:'sawtooth',volume:.024,slide:-320,detune:.016,lpHz:2100,delay:.016},{freq:124,duration:.28,wave:'triangle',volume:.022,slide:-150,detune:.009,lpHz:1600,delay:.028}]),noise:Object.freeze([{duration:.16,volume:.016,hp:1120,delay:.012},{duration:.08,volume:.01,hp:760,delay:.03}])}),
@@ -482,6 +490,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
   label:'Galaga Original Reference',
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[392,523,659,784,1047],step:.041,wave:'square',volume:.024,slide:20,lpHz:3200,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0052,slide:6,lpHz:1700,delay:0},{freq:392,duration:.08,wave:'square',volume:.0102,slide:10,lpHz:2500,delay:0},{freq:523,duration:.08,wave:'square',volume:.0108,slide:10,lpHz:2800,delay:.041},{freq:784,duration:.1,wave:'triangle',volume:.0072,slide:20,lpHz:3600,delay:.123},{freq:1047,duration:.22,wave:'triangle',volume:.018,slide:62,lpHz:3900,delay:.164}])}),
+   formationArrival:Object.freeze({seq:[392,523,698],step:.05,wave:'square',volume:.0122,slide:22,lpHz:3400,tones:Object.freeze([{freq:1047,duration:.11,wave:'triangle',volume:.0054,slide:-18,lpHz:4300,delay:.1}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:1240,duration:.038,wave:'square',volume:.0092,slide:-760,detune:.002,lpHz:6600},{freq:1660,duration:.022,wave:'square',volume:.0046,slide:-560,detune:-.003,lpHz:7200,delay:.006}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:306,duration:.09,wave:'square',volume:.0112,slide:-170,detune:.002,lpHz:2800},{freq:228,duration:.06,wave:'triangle',volume:.0054,slide:-120,detune:.001,lpHz:2300,delay:.014}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.058,wave:'square',volume:.014,slide:-240,detune:.004,lpHz:3400},{freq:154,duration:.11,wave:'sawtooth',volume:.016,slide:-220,detune:.008,lpHz:2300,delay:.018}]),noise:Object.freeze([{duration:.05,volume:.0066,hp:1700,delay:.012}])}),

@@ -48,7 +48,16 @@ function updatePlayerBullets(dt){
     const hpBefore=e.hp;
     e.hp--;
     e.hitT=.34;
-    if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}
+    if(e.hp<=0){
+     awardKill(e,e.dive);
+     if(e.t==='boss'){
+      S.shake=Math.max(S.shake,.6);
+      ex(e.x,e.y,28,'#fff5a6');
+      ex(e.x,e.y,18,'#ff8cd7');
+      ex(e.x,e.y,12,'#d8f2ff');
+     }else ex(e.x,e.y,16,e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');
+     sfx.boom(e.t);
+    }
     else{
      logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
      if(e.t==='boss'&&hpBefore>e.hp){

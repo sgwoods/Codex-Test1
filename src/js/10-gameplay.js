@@ -23,6 +23,10 @@ function update(dt){
   S.startCueT=Math.max(0,S.startCueT-dt);
   if(!S.startCueT)sfx.start();
  }
+ if(S.formationCueT>0){
+  S.formationCueT=Math.max(0,S.formationCueT-dt);
+  if(!S.formationCueT)sfx.formationArrival();
+ }
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
  if(S.transitionCueT>0){
