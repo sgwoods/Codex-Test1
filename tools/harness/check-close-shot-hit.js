@@ -13,7 +13,7 @@ function fail(message, payload){
   process.exit(1);
 }
 
-const run = spawnSync(process.execPath, [HARNESS, '--scenario', SCENARIO, '--out', OUT], {
+const run = spawnSync(process.execPath, [HARNESS, '--scenario', SCENARIO, '--auto-video', '0', '--deterministic-replay', '1', '--out', OUT], {
   cwd: ROOT,
   encoding: 'utf8'
 });

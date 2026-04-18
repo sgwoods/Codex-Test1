@@ -167,6 +167,53 @@ async function replay(page, spec){
   return at;
 }
 
+async function advanceDeterministically(page, seconds){
+  const total = Math.max(0, +seconds || 0);
+  if(!total) return await page.evaluate(() => window.__galagaHarness__.state());
+  return page.evaluate(duration => {
+    const api = window.__galagaHarness__;
+    return api.advanceFor(duration, { step: 1 / 60, stopOnGameOver: true });
+  }, total);
+}
+
+async function replayDeterministic(page, spec){
+  const down = new Set();
+  let at = 0;
+  for(const action of spec.actions){
+    const wait = Math.max(0, (action.t - at));
+    if(wait) await advanceDeterministically(page, wait);
+    if(action.action === 'harness'){
+      await page.evaluate(({ method, args }) => {
+        const api = window.__galagaHarness__;
+        if(!api || typeof api[method] !== 'function') throw new Error(`Harness method not found: ${method}`);
+        return api[method](args || {});
+      }, { method: action.method, args: action.args || {} });
+      at = action.t;
+      continue;
+    }
+
+    const key = keyName(action.code);
+    if(action.action === 'down'){
+      if(!down.has(key)){
+        await page.keyboard.down(key);
+        down.add(key);
+      }
+    }else if(action.action === 'up'){
+      if(down.has(key)){
+        await page.keyboard.up(key);
+        down.delete(key);
+      }
+    }else{
+      await page.keyboard.down(key);
+      await advanceDeterministically(page, action.hold || 0.08);
+      await page.keyboard.up(key);
+    }
+    at = action.t;
+  }
+  for(const key of down) await page.keyboard.up(key);
+  return at;
+}
+
 async function deterministicAdvance(page, spec){
   return page.evaluate(({ duration, stopOnGameOver }) => {
     const api = window.__galagaHarness__;
@@ -243,6 +290,7 @@ async function main(){
   if(args.seed) spec.seed = (+args.seed >>> 0) || spec.seed;
   if(args.persona) spec.config.persona = String(args.persona).toLowerCase();
   if(args['auto-video'] !== undefined) spec.autoVideo = !['0','false','no'].includes(String(args['auto-video']).toLowerCase());
+  const deterministicReplay = !args.session && ['1','true','yes'].includes(String(args['deterministic-replay'] || '').toLowerCase());
   const outBase = path.resolve(args.out || DEFAULT_OUT);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const runTag = `${process.pid}-${Math.random().toString(36).slice(2,8)}`;
@@ -284,7 +332,7 @@ async function main(){
     const startConfig = Object.assign({}, spec.config, {
       seed: spec.seed,
       autoVideo,
-      controlledClock: deterministicFastPath
+      controlledClock: deterministicFastPath || deterministicReplay
     });
     const initialSimTArg = args['initial-sim-t'];
     if(initialSimTArg !== undefined && Number.isFinite(+initialSimTArg)){
@@ -297,6 +345,13 @@ async function main(){
       state = await deterministicAdvance(page, spec);
       if(!state){
         state = await waitForRun(page, spec, 0);
+      }
+    }else if(deterministicReplay){
+      const replayTime = await replayDeterministic(page, spec);
+      const remaining = Math.max(0, spec.duration - replayTime);
+      state = await advanceDeterministically(page, remaining);
+      if(!state){
+        state = await page.evaluate(() => window.__galagaHarness__.state());
       }
     }else{
       const replayTime = await replay(page, spec);
