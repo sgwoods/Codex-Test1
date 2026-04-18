@@ -14,68 +14,80 @@ function shoot(){
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
  logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length,captureWindow});
+ for(let i=S.pb.length-1;i>=0;i--){
+  const b=S.pb[i];
+  if(!shotXs.includes(b.x)||Math.abs((+b.y||0)-y)>.001)continue;
+  resolvePlayerBulletHit(i,playerBulletSegment(b,b.y));
+ }
  sfx.shot();
 }
 
-function playerBulletSegment(b){
+function playerBulletSegment(b,previousY=null){
  const x=+b.x||0,y=+b.y||0;
- return {x,top:y-16,bottom:y+2};
+ const py=Number.isFinite(+previousY)?+previousY:y;
+ return {x,top:Math.min(py,y)-16,bottom:Math.max(py,y)+2};
 }
 
 function segmentHitsTarget(seg,targetX,targetY,targetW,targetH){
  return Math.abs(seg.x-targetX)<targetW && seg.bottom>targetY-targetH && seg.top<targetY+targetH;
 }
 
-function updatePlayerBullets(dt){
- for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
-  const seg=playerBulletSegment(b);
-  for(const e of S.e){
-   if(e.hp<=0)continue;
-   const cf=carriedFighterTarget(e);
-   // Check the carried fighter before the boss body so manual scoring can
-   // distinguish "shot the rescued fighter" from "killed the boss."
-   if(cf&&segmentHitsTarget(seg,cf.x,cf.y,cf.w,cf.h)){
-    S.stats.hits++;
-    S.pb.splice(i,1);
-    destroyCarriedFighter(e);
-    break;
-   }
-   const h=enemyHitbox(e);
-   if(e.carry&&seg.top>=e.y+8)continue;
-   if(segmentHitsTarget(seg,e.x,e.y,h.w,h.h)){
-    S.stats.hits++;
-    S.pb.splice(i,1);
-    const hpBefore=e.hp;
-    e.hp--;
-    e.hitT=.34;
-    if(e.hp<=0){
-     awardKill(e,e.dive);
-     if(e.t==='boss'){
-      clearReferenceBossMomentCueWindow();
-      S.shake=Math.max(S.shake,.6);
-      ex(e.x,e.y,28,'#fff5a6');
-      ex(e.x,e.y,18,'#ff8cd7');
-      ex(e.x,e.y,12,'#d8f2ff');
-     }else ex(e.x,e.y,16,e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');
-     sfx.boom(e.t);
-    }
-    else{
-     logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
-     if(e.t==='boss'&&hpBefore>e.hp){
-      const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
-      stopReferenceCueSet(['attackCharge','enemyShot','enemyHit']);
-      holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
-      e.hitT=Math.max(e.hitT,bossTiming?.hitFlashDuration??.46);
-      S.shake=Math.max(S.shake,.22);
-      ex(e.x,e.y,20,'#fff4a8');
-      ex(e.x,e.y,10,'#ff8cd7');
-      ex(e.x,e.y,6,'#d8f2ff');
-      sfx.bossHit();
-     }else sfx.hit();
-    }
-    break;
-   }
+function resolvePlayerBulletHit(i,seg){
+ if(i<0||i>=S.pb.length)return false;
+ for(const e of S.e){
+  if(e.hp<=0)continue;
+  const cf=carriedFighterTarget(e);
+  // Check the carried fighter before the boss body so manual scoring can
+  // distinguish "shot the rescued fighter" from "killed the boss."
+  if(cf&&segmentHitsTarget(seg,cf.x,cf.y,cf.w,cf.h)){
+   S.stats.hits++;
+   S.pb.splice(i,1);
+   destroyCarriedFighter(e);
+   return true;
   }
+  const h=enemyHitbox(e);
+  if(e.carry&&seg.top>=e.y+8)continue;
+  if(segmentHitsTarget(seg,e.x,e.y,h.w,h.h)){
+   S.stats.hits++;
+   S.pb.splice(i,1);
+   const hpBefore=e.hp;
+   e.hp--;
+   e.hitT=.34;
+   if(e.hp<=0){
+    awardKill(e,e.dive);
+    if(e.t==='boss'){
+     clearReferenceBossMomentCueWindow();
+     S.shake=Math.max(S.shake,.6);
+     ex(e.x,e.y,28,'#fff5a6');
+     ex(e.x,e.y,18,'#ff8cd7');
+     ex(e.x,e.y,12,'#d8f2ff');
+    }else ex(e.x,e.y,16,e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');
+    sfx.boom(e.t);
+   }
+   else{
+    logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+    if(e.t==='boss'&&hpBefore>e.hp){
+     const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
+     stopReferenceCueSet(['attackCharge','enemyShot','enemyHit']);
+     holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
+     e.hitT=Math.max(e.hitT,bossTiming?.hitFlashDuration??.46);
+     S.shake=Math.max(S.shake,.22);
+     ex(e.x,e.y,20,'#fff4a8');
+     ex(e.x,e.y,10,'#ff8cd7');
+     ex(e.x,e.y,6,'#d8f2ff');
+     sfx.bossHit();
+    }else sfx.hit();
+   }
+   return true;
+  }
+ }
+ return false;
+}
+
+function updatePlayerBullets(dt){
+ for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i],previousY=+b.y||0;b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
+  const seg=playerBulletSegment(b,previousY);
+  resolvePlayerBulletHit(i,seg);
  }
 }
 
