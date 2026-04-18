@@ -17,6 +17,11 @@ For a maintained first-session prompt you can paste into the home Codex instance
 
 - `/Users/stevenwoods/Documents/Codex-Test1/HOME_CODEX_PROMPT.md`
 
+For the special case where another machine holds uncommitted work that may be
+ahead of GitHub or ahead of `hosted-dev`, also use:
+
+- `RECOVERY_SAFE_COLLABORATION.md`
+
 ## Prerequisites
 
 Install on the home machine:
@@ -145,6 +150,20 @@ Recommended pattern:
    git push origin main
    ```
 5. On the other machine, pull again before continuing
+
+## Recovery Mode When Another Machine Is Ahead
+
+If another machine has meaningful uncommitted work:
+
+- treat this machine as `local-support`, not the release authority
+- do not push directly to `main`
+- do not promote `/beta` or `/production` from this machine
+- work only on isolated `codex/recovery-*` or `codex/safe-*` branches
+- let the other machine fetch and decide how to integrate those branches later
+
+Detailed workflow:
+
+- `RECOVERY_SAFE_COLLABORATION.md`
 
 ## Branching
 
