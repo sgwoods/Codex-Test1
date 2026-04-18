@@ -170,6 +170,9 @@ Until laptop reconciliation is complete:
 - `hosted-dev` is informational, not authoritative
 - `local-support` branches are inputs to review, not release candidates
 
+For the current release-state picture, see
+[RELEASE_STATE_MAP.md](/Users/steven/Documents/Codex-Test1/RELEASE_STATE_MAP.md).
+
 ## Session Handoff Note
 
 When Codex works from `local-support`, include this note in the final summary
