@@ -1,0 +1,41 @@
+{
+  "id": "persona-progression-correspondence",
+  "title": "Persona Progression Correspondence",
+  "purpose": "Compare shipped local baseline and current candidate progression outcomes across personas while checking that more skilled personas still travel farther and perform better on challenge and full-run evidence.",
+  "candidateRoots": {
+    "baseline": "dist/production",
+    "current": "dist/dev"
+  },
+  "personas": [
+    {
+      "id": "novice",
+      "challengeSeed": 3101,
+      "fullRunSeed": 51001
+    },
+    {
+      "id": "advanced",
+      "challengeSeed": 3201,
+      "fullRunSeed": 51101
+    },
+    {
+      "id": "expert",
+      "challengeSeed": 3301,
+      "fullRunSeed": 51201
+    },
+    {
+      "id": "professional",
+      "challengeSeed": 3401,
+      "fullRunSeed": 51301
+    }
+  ],
+  "scenarios": {
+    "challenge": "stage3-challenge-persona",
+    "fullRun": "full-run-persona"
+  },
+  "tolerances": {
+    "fullRunStageDrop": 1,
+    "fullRunScoreDropRatio": 0.25,
+    "challengeHitRateDrop": 0.15,
+    "challengeLossIncrease": 1
+  }
+}

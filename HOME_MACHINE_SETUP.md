@@ -22,6 +22,11 @@ ahead of GitHub or ahead of `hosted-dev`, also use:
 
 - `RECOVERY_SAFE_COLLABORATION.md`
 
+For the persistent machine capability checklist and current verified tool
+baseline, also use:
+
+- `DEVELOPER_MACHINE_BASELINE.md`
+
 ## Prerequisites
 
 Install on the home machine:
@@ -34,6 +39,16 @@ Install on the home machine:
 Optional but useful:
 
 - Python 3 for a simple local static server
+
+Record the actual installed versions during bring-up:
+
+```bash
+node -v
+npm -v
+python3 --version
+gh --version | head -n 1
+'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --version
+```
 
 ## First-Time Setup
 
@@ -49,6 +64,11 @@ Optional but useful:
 3. Authenticate GitHub CLI if you plan to publish beta or production from this machine:
    ```bash
    gh auth login
+   ```
+4. Verify remotes and auth:
+   ```bash
+   git remote -v
+   gh auth status
    ```
 
 ## Local Development Loop
@@ -96,6 +116,15 @@ Run a batch:
 
 ```bash
 npm run harness:batch -- --profile quick
+```
+
+Representative correspondence checks:
+
+```bash
+npm run harness:check:stage1-opening-correspondence
+npm run harness:check:stage1-opening-spacing
+npm run harness:check:capture-rescue-correspondence
+npm run harness:check:challenge-stage-correspondence
 ```
 
 ### Log Viewer
