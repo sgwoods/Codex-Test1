@@ -187,6 +187,17 @@ Useful evidence sources:
 - score flow
 - challenge outcomes
 
+Current active finding:
+
+- the first persona/progression correspondence pass preserved all per-persona
+  baseline guardrails but did not preserve a strict current progression ladder
+- on the current `full-run-persona` seeds, `advanced` outperformed `expert`
+- the clearest concrete difference in the current evidence is that `expert`
+  loses two early stage-2 lives to boss-collision events, while `advanced`
+  survives that early window and carries farther
+- treat this as an active tuning and persona-definition investigation item
+  before using current progression evidence as a clean signal of skill ordering
+
 Manual play should still validate feel, but the evidence should make difficulty
 claims explicit.
 
