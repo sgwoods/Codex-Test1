@@ -26,6 +26,11 @@ function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
 }
 
+function logProgress(message, payload){
+  if(payload !== undefined) console.error(`[persona-progression] ${message} ${JSON.stringify(payload)}`);
+  else console.error(`[persona-progression] ${message}`);
+}
+
 function parseArgs(argv){
   const args = {};
   for(let i = 0; i < argv.length; i++){
@@ -106,8 +111,12 @@ function summarizeFullRun(run){
 }
 
 function summarizePersona(rootDir, profilePersona, scenarios){
+  logProgress('run-start', { rootDir: path.relative(ROOT, rootDir), persona: profilePersona.id, scenario: scenarios.challenge, seed: profilePersona.challengeSeed });
   const challengeRun = runScenario(rootDir, scenarios.challenge, profilePersona.id, profilePersona.challengeSeed);
+  logProgress('run-complete', { rootDir: path.relative(ROOT, rootDir), persona: profilePersona.id, scenario: scenarios.challenge, seed: profilePersona.challengeSeed });
+  logProgress('run-start', { rootDir: path.relative(ROOT, rootDir), persona: profilePersona.id, scenario: scenarios.fullRun, seed: profilePersona.fullRunSeed });
   const fullRun = runScenario(rootDir, scenarios.fullRun, profilePersona.id, profilePersona.fullRunSeed);
+  logProgress('run-complete', { rootDir: path.relative(ROOT, rootDir), persona: profilePersona.id, scenario: scenarios.fullRun, seed: profilePersona.fullRunSeed });
   return {
     files: {
       challenge: challengeRun.files || [],
@@ -202,15 +211,24 @@ function buildReadme(report){
     const current = report.current[id];
     const checks = report.checks[id];
     lines.push(`### ${id}`);
+    if(!baseline || !current){
+      lines.push('- Status: pending');
+      lines.push('');
+      continue;
+    }
     lines.push(`- Baseline full run: stage=${baseline.fullRun.endingStage}, score=${baseline.fullRun.score}, lives=${baseline.fullRun.lives}, shipLost=${baseline.fullRun.shipLost}`);
     lines.push(`- Current full run: stage=${current.fullRun.endingStage}, score=${current.fullRun.score}, lives=${current.fullRun.lives}, shipLost=${current.fullRun.shipLost}`);
     lines.push(`- Baseline challenge: hitRate=${baseline.challenge.challengeHitRate}, losses=${baseline.challenge.challengeShipLosses}, cleared=${baseline.challenge.challengeCleared ? 'yes' : 'no'}`);
     lines.push(`- Current challenge: hitRate=${current.challenge.challengeHitRate}, losses=${current.challenge.challengeShipLosses}, cleared=${current.challenge.challengeCleared ? 'yes' : 'no'}`);
-    lines.push(`- Check challenge cleared: ${checks.challengeCleared.ok ? 'yes' : 'no'}`);
-    lines.push(`- Check full-run stage: ${checks.fullRunStage.ok ? 'yes' : 'no'}`);
-    lines.push(`- Check full-run score: ${checks.fullRunScore.ok ? 'yes' : 'no'}`);
-    lines.push(`- Check challenge hit rate: ${checks.challengeHitRate.ok ? 'yes' : 'no'}`);
-    lines.push(`- Check challenge losses: ${checks.challengeLosses.ok ? 'yes' : 'no'}`);
+    if(checks){
+      lines.push(`- Check challenge cleared: ${checks.challengeCleared.ok ? 'yes' : 'no'}`);
+      lines.push(`- Check full-run stage: ${checks.fullRunStage.ok ? 'yes' : 'no'}`);
+      lines.push(`- Check full-run score: ${checks.fullRunScore.ok ? 'yes' : 'no'}`);
+      lines.push(`- Check challenge hit rate: ${checks.challengeHitRate.ok ? 'yes' : 'no'}`);
+      lines.push(`- Check challenge losses: ${checks.challengeLosses.ok ? 'yes' : 'no'}`);
+    }else{
+      lines.push('- Checks: pending');
+    }
     lines.push('');
   }
   lines.push('## Progression Order');
@@ -228,6 +246,13 @@ function buildReadme(report){
   return `${lines.join('\n')}\n`;
 }
 
+function writeIncrementalArtifacts(outDir, report){
+  const reportFile = path.join(outDir, 'report.json');
+  const readmeFile = path.join(outDir, 'README.md');
+  writeJson(reportFile, report);
+  fs.writeFileSync(readmeFile, buildReadme(report));
+}
+
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const profile = readJson(PROFILE);
@@ -235,11 +260,38 @@ function main(){
   const currentRoot = path.resolve(ROOT, args['current-root'] || profile.candidateRoots.current);
 
   ensureDir(OUT_ROOT);
+  const outDir = path.join(OUT_ROOT, `${new Date().toISOString().slice(0, 10)}-${gitShortCommit()}`);
+  ensureDir(outDir);
   const baseline = {};
   const current = {};
+  const report = {
+    generatedAt: new Date().toISOString(),
+    profile,
+    baselineRoot: path.relative(ROOT, baselineRoot),
+    currentRoot: path.relative(ROOT, currentRoot),
+    baseline,
+    current,
+    checks: {},
+    progression: {
+      baseline: [],
+      current: []
+    },
+    summary: {
+      passedPersonaChecks: 0,
+      totalPersonaChecks: 0,
+      baselineProgressionOrderPreserved: false,
+      currentProgressionOrderPreserved: false
+    },
+    status: 'running'
+  };
+  writeIncrementalArtifacts(outDir, report);
   for(const persona of profile.personas){
+    logProgress('persona-start', { persona: persona.id });
     baseline[persona.id] = summarizePersona(baselineRoot, persona, profile.scenarios);
     current[persona.id] = summarizePersona(currentRoot, persona, profile.scenarios);
+    report.generatedAt = new Date().toISOString();
+    writeIncrementalArtifacts(outDir, report);
+    logProgress('persona-complete', { persona: persona.id });
   }
 
   const checks = {};
@@ -265,27 +317,17 @@ function main(){
     currentProgressionOrderPreserved: currentProgression.every(entry => entry.fullRunStage && entry.fullRunScore && entry.challengeHitRate)
   };
 
-  const outDir = path.join(OUT_ROOT, `${new Date().toISOString().slice(0, 10)}-${gitShortCommit()}`);
-  ensureDir(outDir);
-  const report = {
-    generatedAt: new Date().toISOString(),
-    profile,
-    baselineRoot: path.relative(ROOT, baselineRoot),
-    currentRoot: path.relative(ROOT, currentRoot),
-    baseline,
-    current,
-    checks,
-    progression: {
-      baseline: baselineProgression,
-      current: currentProgression
-    },
-    summary
+  report.generatedAt = new Date().toISOString();
+  report.checks = checks;
+  report.progression = {
+    baseline: baselineProgression,
+    current: currentProgression
   };
-
+  report.summary = summary;
+  report.status = 'complete';
+  writeIncrementalArtifacts(outDir, report);
   const reportFile = path.join(outDir, 'report.json');
   const readmeFile = path.join(outDir, 'README.md');
-  writeJson(reportFile, report);
-  fs.writeFileSync(readmeFile, buildReadme(report));
   console.log(JSON.stringify({
     ok: summary.passedPersonaChecks === summary.totalPersonaChecks && summary.currentProgressionOrderPreserved,
     outDir,
