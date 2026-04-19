@@ -131,6 +131,10 @@ Preferred artifact outputs:
 - waveforms
 - reference README summaries
 
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/CORRESPONDENCE_FRAMEWORK.md`
+
 ### Second-Game / Galaxian Track
 
 Start a parallel but staged reference program for the `Galaxian`-inspired
@@ -224,6 +228,10 @@ Recommended order:
 1. continue Galaga timing / audiovisual / rules analysis
 2. build comparable artifact patterns for the future Galaxian-inspired game
 3. keep reference outputs durable and reusable
+4. build correspondence reports that compare:
+   - reference vs candidate
+   - shipped baseline vs candidate
+   - forward line vs recovered work
 
 ### Phase 4: Release Movement
 

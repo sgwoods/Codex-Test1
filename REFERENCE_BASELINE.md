@@ -6,6 +6,7 @@ for this project.
 For the broader development philosophy behind this reference work, also see:
 
 - `/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
+- `/Users/steven/Documents/Codex-Test1/CORRESPONDENCE_FRAMEWORK.md`
 
 ## Goal
 
