@@ -1,0 +1,51 @@
+{
+  "id": "capture-rescue-correspondence",
+  "title": "Capture / Rescue Correspondence",
+  "purpose": "Compare core capture-window and escape-recovery behavior between the shipped local baseline and the current candidate while enforcing expected rule outcomes.",
+  "candidateRoots": {
+    "baseline": "dist/production",
+    "current": "dist/dev"
+  },
+  "scenarios": [
+    {
+      "id": "capture-shot-early",
+      "path": "tools/harness/scenarios/capture-shot-early.json",
+      "expectations": {
+        "mustHave": ["harness_capture_escape_setup", "player_shot", "capture_escape"],
+        "mustNotHave": ["fighter_captured"],
+        "timingAnchor": "harness_capture_escape_setup",
+        "trackedTimes": [
+          { "type": "player_shot", "measure": "sinceAnchor" },
+          { "type": "capture_escape", "measure": "field", "field": "timeSinceCaptureStart" }
+        ]
+      }
+    },
+    {
+      "id": "capture-shot-late",
+      "path": "tools/harness/scenarios/capture-shot-late.json",
+      "expectations": {
+        "mustHave": ["harness_capture_escape_setup", "fighter_captured"],
+        "mustNotHave": ["capture_escape"],
+        "timingAnchor": "harness_capture_escape_setup",
+        "trackedTimes": [
+          { "type": "fighter_captured", "measure": "field", "field": "timeSinceCaptureStart" }
+        ]
+      }
+    },
+    {
+      "id": "capture-escape-recovery",
+      "path": "tools/harness/scenarios/capture-escape-recovery.json",
+      "expectations": {
+        "mustHave": ["capture_escape", "player_shot"],
+        "mustNotHave": ["fighter_captured", "ship_lost"],
+        "timingAnchor": "harness_capture_escape_setup",
+        "trackedTimes": [
+          { "type": "capture_escape", "measure": "field", "field": "timeSinceCaptureStart" }
+        ]
+      }
+    }
+  ],
+  "tolerances": {
+    "maxTrackedTimeDrift": 0.35
+  }
+}
