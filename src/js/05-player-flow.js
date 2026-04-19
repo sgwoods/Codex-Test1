@@ -168,8 +168,9 @@ function compareHarnessTargets(a,b,p,cfg){
 
 function logProfessionalDecision(p,cfg,reason,extra={}){
  if(cfg?.name!=='professional')return;
- if(p.hDebugT>0)return;
- p.hDebugT=.75;
+ const detailedReason=reason&&reason!=='tick';
+ if(!detailedReason&&p.hDebugT>0)return;
+ if(!detailedReason)p.hDebugT=.75;
  logEvent('harness_professional_decision',Object.assign({
   stage:S.stage,
   score:S.score,

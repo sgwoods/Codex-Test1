@@ -197,6 +197,15 @@ Current active finding:
   survives that early window and carries farther
 - treat this as an active tuning and persona-definition investigation item
   before using current progression evidence as a clean signal of skill ordering
+- that `advanced -> expert` issue has since been repaired with the expert
+  stage-2 safety guardrail and targeted expert tuning
+- the remaining progression issue is now `expert -> professional`
+- current stage-2 throughput evidence says the gap is concentrated on shared
+  seed `51101`, where `professional` stays alive but misses the highest-value
+  dive conversions that `expert` turns into `1600`-point awards
+- keep the improved `professional` decision logging in place and use that
+  evidence to shape the next narrow tuning pass around high-value dive
+  conversion rather than generic aggression or survivability
 
 Manual play should still validate feel, but the evidence should make difficulty
 claims explicit.
