@@ -69,6 +69,7 @@ Best repo technical map:
 Best release and testing gate doc:
 
 - `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+- `/Users/stevenwoods/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
 
 Release planning and readiness docs:
 

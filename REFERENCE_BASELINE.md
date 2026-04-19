@@ -3,11 +3,16 @@
 This document defines how we turn original Galaga behavior into actionable work
 for this project.
 
+For the broader development philosophy behind this reference work, also see:
+
+- `/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
+
 ## Goal
 
 Create a durable, repeatable baseline for:
 
 - how original Galaga behaves
+- how original `Galaxian` should later be studied for the second hosted game
 - how our game differs
 - what issue or milestone that difference should map to
 - how improvement will be measured
@@ -32,6 +37,21 @@ For each fidelity topic:
    - a harness scenario or metric
    - a target release / roadmap milestone if applicable
 
+Where possible, the comparison should produce durable reference artifacts such
+as:
+
+- timing reports
+- event-family libraries
+- contact sheets
+- captured clips
+- cue matrices
+- waveforms
+- scenario logs
+- reproducible written summaries
+
+Measured artifacts should be the default starting point. Manual judgment should
+validate the result, not replace the baseline.
+
 ## Current Baseline Topics
 
 ### Player Control Principles
@@ -54,6 +74,45 @@ For each fidelity topic:
   - can a player line up under descending enemies with small corrections?
   - does the ship still cross the playfield quickly enough for evasive play?
   - does manual control feel smoother than the old full-speed-per-frame step?
+
+### Persona And Progression Evidence
+
+- Source:
+  - original arcade progression feel as observed in footage and manual-backed
+    play expectations
+  - our own persona-driven harness traces and run analyses
+- Current rule:
+  - the game should support novice, intermediate, and advanced play without
+    collapsing into flat difficulty or unfair noise
+- Current implementation target:
+  - use persona-oriented checks and run evidence to show:
+    - novice play can enter and survive meaningfully
+    - intermediate play can progress deeper by learning patterns
+    - advanced play can demonstrate that later stages are survivable with
+      stronger skill
+    - later stages become appropriately harder, not merely more chaotic
+- Validation questions:
+  - do deeper runs reflect increased mastery rather than lucky variance alone?
+  - do stage metrics and loss patterns show a real progression curve?
+  - can persona evidence explain where pacing or fairness still needs tuning?
+
+### Galaxian Reference Program
+
+- Source:
+  - original `Galaxian` manuals, footage, and later emulator captures when
+    available
+- Current rule:
+  - the same reference-artifact discipline used for `Galaga` should later be
+    reused for the second hosted game
+- Current implementation target:
+  - study:
+    - single-shot pressure
+    - wrap-around threat
+    - flagship / escort behavior
+    - pacing and formation rhythm
+    - audiovisual identity
+  - produce comparable artifacts so `Galaxian`-inspired work can be judged with
+    the same rigor as Aurora
 
 ### Stage 1 Dive Timing
 

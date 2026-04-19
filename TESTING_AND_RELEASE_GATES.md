@@ -8,6 +8,29 @@ The rule is simple:
 - automate the gate whenever we reasonably can
 - use manual review for feel and presentation only where automation is weak
 
+## Bug-Fix Discipline
+
+We should not address a bug without also deciding how the fix is protected in
+the appropriate staging harness.
+
+Default rule:
+
+1. identify the bug family:
+   - platform
+   - application
+   - boundary
+   - release / pipeline
+2. add or update a targeted automated check when the behavior is stable enough
+   to measure
+3. if automation is not yet practical, record the manual gate explicitly and
+   leave a clear follow-up path toward automation
+
+This is how we stay agile without relying on memory-only fixes.
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
+
 ## Lane Model
 
 The expected lane model is:
@@ -113,6 +136,12 @@ Typical examples:
 
 The release process should prefer running the smallest relevant set of checks
 that covers the actual risk, rather than running every check for every change.
+
+Harness work should also follow the project reference program:
+
+- bug fixes should gain coverage in the right harness family
+- fidelity changes should use measured reference artifacts where possible
+- platform/application seam changes should prove that the boundary still holds
 
 ## Gate Profiles By Change Type
 
