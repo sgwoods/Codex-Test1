@@ -1,0 +1,32 @@
+{
+  "id": "stage1-opening-spacing",
+  "title": "Stage 1 Opening Spacing / Formation Geometry",
+  "purpose": "Compare the current stage-1 opening geometry against the shipped local baseline and expected rack layout constraints.",
+  "candidateRoots": {
+    "baseline": "dist/production",
+    "current": "dist/dev"
+  },
+  "capture": {
+    "stage": 1,
+    "ships": 4,
+    "seed": 51301,
+    "persona": "professional",
+    "time": 0.517,
+    "step": 0.016666666666666666,
+    "eventCount": 16
+  },
+  "layoutTargets": {
+    "gx": 17,
+    "gy": 14,
+    "minTx": 40,
+    "maxTx": 240,
+    "minTy": 20,
+    "maxTy": 90
+  },
+  "tolerances": {
+    "maxTargetPositionDrift": 2.5,
+    "maxAverageTargetPositionDrift": 1.25,
+    "maxChangedTargets": 8,
+    "maxLayoutDrift": 0.25
+  }
+}
