@@ -1,0 +1,44 @@
+{
+  "id": "stage1-opening-first-dive",
+  "title": "Stage 1 Opening / First Dive Timing",
+  "purpose": "Measure the first repeatable stage-1 timing family for Aurora against shipped baseline and Galaga-aligned reference targets.",
+  "scenario": "stage1-descent",
+  "referenceSource": {
+    "timingMetrics": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json",
+    "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+  },
+  "candidateRoots": {
+    "baseline": "dist/production",
+    "current": "dist/dev"
+  },
+  "metrics": [
+    {
+      "id": "gameStartCueAfterSpawn",
+      "label": "Game start cue after spawn",
+      "target": 0,
+      "tolerance": 0.05,
+      "severity": "strict"
+    },
+    {
+      "id": "firstStagePulseAfterSpawn",
+      "label": "First stage pulse after spawn",
+      "target": 0.817,
+      "tolerance": 0.2,
+      "severity": "moderate"
+    },
+    {
+      "id": "firstAttackAfterSpawn",
+      "label": "First attack after spawn",
+      "target": 8.2,
+      "tolerance": 0.35,
+      "severity": "moderate"
+    },
+    {
+      "id": "firstLowerFieldAfterSpawn",
+      "label": "First lower-field crossing after spawn",
+      "target": 9.35,
+      "tolerance": 0.45,
+      "severity": "moderate"
+    }
+  ]
+}
