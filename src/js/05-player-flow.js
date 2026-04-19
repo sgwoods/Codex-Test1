@@ -140,7 +140,7 @@ function attractMoveAxis(p){
 const HARNESS_PERSONAS={
  novice:{name:'novice',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:150,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
  advanced:{name:'advanced',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:220,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
- expert:{name:'expert',moveMul:.92,urgentDx:40,urgentLook:188,deadZone:6,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:64,diveBias:560,carryBias:320,bossBias:160,activeBias:120,heightBias:1.08,distanceBias:.9},
+ expert:{name:'expert',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:290,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
  professional:{name:'professional',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:350,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
 };
 
@@ -216,11 +216,39 @@ function harnessSelectTarget(p,cfg){
  return S.e.filter(e=>e.hp>0).sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||null;
 }
 
+function harnessLowerFieldThreat(p,cfg){
+ if(!cfg?.lowerDiveEvadeDx||!cfg?.lowerDiveEvadeY)return null;
+ if(S.challenge)return null;
+ const playerLane=playLane(p.x);
+ const earlyStage=(S.stage|0)<=(cfg.cautiousUntilStage||0);
+  return S.e
+  .filter(e=>{
+   if(!(e.hp>0&&e.dive&&e.y<p.y))return 0;
+   const laneGap=Math.abs(playLane(e.x)-playerLane);
+   if(earlyStage&&e.y>=cfg.lowerDiveEvadeY&&laneGap<=(cfg.lowerDiveEvadeLaneGap??1)){
+    return Math.abs(e.x-p.x)<cfg.lowerDiveEvadeDx+(e.t==='boss'?6:0);
+   }
+   if(cfg.diveEmergencyY&&cfg.diveEmergencyDx&&e.y>=cfg.diveEmergencyY&&laneGap===0){
+    return Math.abs(e.x-p.x)<cfg.diveEmergencyDx+(e.t==='boss'?4:0);
+   }
+   return 0;
+  })
+  .sort((a,b)=>{
+   if(b.y!==a.y)return b.y-a.y;
+   return Math.abs(a.x-p.x)-Math.abs(b.x-p.x);
+  })[0]||null;
+}
+
 function harnessMoveAxis(p,cfg){
  const hp=playerHitbox();
  const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&p.y-b.y<cfg.urgentLook&&Math.abs(b.x-p.x)<cfg.urgentDx).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
  if(urgent){
   const away=urgent.x>=p.x?-1:1;
+  if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
+ }
+ const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
+ if(lowerFieldThreat){
+  const away=lowerFieldThreat.x>=p.x?-1:1;
   if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
  }
  const target=harnessSelectTarget(p,cfg);
@@ -235,6 +263,7 @@ function runHarnessPlayer(dt,p,cfg){
  p.hNoShotT=(p.hNoShotT||0)+dt;
  p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
+ const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
  const axis=harnessMoveAxis(p,cfg);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
@@ -248,6 +277,17 @@ function runHarnessPlayer(dt,p,cfg){
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
  });
+ if(lowerFieldThreat){
+  logProfessionalDecision(p,cfg,'lower_field_evade',{
+   attackables:attackables.length,
+   axis,
+   threatId:lowerFieldThreat.id,
+   threatType:lowerFieldThreat.t,
+   threatX:+lowerFieldThreat.x.toFixed(2),
+   threatY:+lowerFieldThreat.y.toFixed(2),
+   threatLane:playLane(lowerFieldThreat.x)
+  });
+ }
  if(!target){
   logProfessionalDecision(p,cfg,'no_target',{attackables:attackables.length});
   return;
