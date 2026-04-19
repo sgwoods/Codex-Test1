@@ -1,0 +1,64 @@
+{
+  "id": "challenge-stage-timing",
+  "title": "Challenge Stage Timing Correspondence",
+  "purpose": "Compare challenge entry and perfect-transition timing between the shipped local baseline, the current candidate, and the preserved historical Aurora timing target derived from Galaga-aligned analysis.",
+  "candidateRoots": {
+    "baseline": "dist/production",
+    "current": "dist/dev"
+  },
+  "referenceSource": {
+    "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+  },
+  "historicalAuroraBaseline": {
+    "eventFamilyId": "challenge-entry-results-perfect"
+  },
+  "scenarios": {
+    "challengeEntry": "tools/harness/scenarios/challenge-entry-probe.json",
+    "challengePerfect": "tools/harness/scenarios/stage3-perfect-transition.json"
+  },
+  "metrics": [
+    {
+      "id": "challengeCueAfterProbe",
+      "label": "Challenge Cue After Probe",
+      "source": "challengeEntry",
+      "path": ["challengeEntry", "cueAfterProbe"],
+      "tolerance": 0.5,
+      "severity": "high"
+    },
+    {
+      "id": "challengeSpawnAfterCue",
+      "label": "Challenge Spawn After Cue",
+      "source": "challengeEntry",
+      "path": ["challengeEntry", "spawnAfterCue"],
+      "tolerance": 0.4,
+      "severity": "high"
+    },
+    {
+      "id": "resultCueAfterClear",
+      "label": "Challenge Result Cue After Clear",
+      "source": "challengePerfect",
+      "runtimePath": ["challengePerfect", "challengePerfectCueAfterClear"],
+      "path": ["challengePerfect", "resultCueAfterClear"],
+      "tolerance": 0.4,
+      "severity": "high"
+    },
+    {
+      "id": "nextCueAfterClear",
+      "label": "Next-Stage Cue After Clear",
+      "source": "challengePerfect",
+      "runtimePath": ["challengePerfect", "nextStageCueAfterClear"],
+      "path": ["challengePerfect", "nextCueAfterClear"],
+      "tolerance": 0.6,
+      "severity": "medium"
+    },
+    {
+      "id": "spawnAfterClear",
+      "label": "Next-Stage Spawn After Clear",
+      "source": "challengePerfect",
+      "runtimePath": ["challengePerfect", "nextStageSpawnAfterClear"],
+      "path": ["challengePerfect", "spawnAfterClear"],
+      "tolerance": 0.8,
+      "severity": "medium"
+    }
+  ]
+}
