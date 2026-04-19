@@ -7,6 +7,9 @@
     "timingMetrics": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json",
     "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
   },
+  "historicalAuroraBaseline": {
+    "eventFamilyId": "formation-arrival-and-convoy"
+  },
   "candidateRoots": {
     "baseline": "dist/production",
     "current": "dist/dev"

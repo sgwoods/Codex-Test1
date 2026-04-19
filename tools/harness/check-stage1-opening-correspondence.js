@@ -131,11 +131,28 @@ function compareMetric(metric, baseline, current){
   };
 }
 
+function loadHistoricalBaseline(profile){
+  const libraryPath = path.resolve(ROOT, profile.referenceSource.timingLibrary);
+  const familyId = profile.historicalAuroraBaseline?.eventFamilyId || '';
+  if(!fs.existsSync(libraryPath) || !familyId) return null;
+  const library = readJson(libraryPath);
+  const family = (library.eventFamilies || []).find(entry => entry.id === familyId);
+  if(!family) return null;
+  return Object.assign({
+    id: family.id,
+    label: family.label
+  }, family.auroraCurrent || {});
+}
+
 function buildReadme(report){
   const lines = [
     '# Stage 1 Opening Correspondence',
     '',
-    'This artifact compares the current local candidate against the shipped local production baseline and the current Galaga-aligned reference targets for the first stage-1 timing family.',
+    'This artifact compares the current local candidate against:',
+    '',
+    '- the shipped local production baseline',
+    '- the preserved historical Aurora timing baseline',
+    '- the current Galaga-aligned reference targets',
     '',
     '## Sources',
     '',
@@ -144,12 +161,14 @@ function buildReadme(report){
     `- Reference timing library: \`${report.profile.referenceSource.timingLibrary}\``,
     `- Baseline root: \`${report.baselineRoot}\``,
     `- Current root: \`${report.currentRoot}\``,
+    report.historicalBaseline ? `- Historical Aurora baseline family: \`${report.historicalBaseline.id}\`` : '- Historical Aurora baseline family: missing',
     '',
     '## Summary',
     '',
     `- Passed metrics: ${report.summary.passed}/${report.summary.total}`,
     `- Worst current delta: ${String(report.summary.worstCurrentDelta)}`,
     `- Worst drift from baseline: ${String(report.summary.worstDriftFromBaseline)}`,
+    `- Worst drift from historical Aurora baseline: ${String(report.summary.worstDriftFromHistoricalBaseline)}`,
     '',
     '## Metrics',
     ''
@@ -158,10 +177,13 @@ function buildReadme(report){
     lines.push(`### ${metric.label}`);
     lines.push(`- Target: ${String(metric.target)}`);
     lines.push(`- Tolerance: ${String(metric.tolerance)}`);
+    lines.push(`- Historical Aurora baseline: ${String(metric.historicalBaseline)}`);
     lines.push(`- Baseline: ${String(metric.baseline)}`);
     lines.push(`- Current: ${String(metric.current)}`);
+    lines.push(`- Historical baseline delta: ${String(metric.historicalBaselineDelta)}`);
     lines.push(`- Baseline delta: ${String(metric.baselineDelta)}`);
     lines.push(`- Current delta: ${String(metric.currentDelta)}`);
+    lines.push(`- Drift from historical Aurora baseline: ${String(metric.driftFromHistoricalBaseline)}`);
     lines.push(`- Drift from baseline: ${String(metric.driftFromBaseline)}`);
     lines.push(`- Within tolerance: ${metric.withinTolerance ? 'yes' : 'no'}`);
     lines.push('');
@@ -194,17 +216,30 @@ function main(){
 
   const baseline = runScenarioForRoot(baselineRoot, profile.scenario);
   const current = runScenarioForRoot(currentRoot, profile.scenario);
-  const metrics = profile.metrics.map(metric => compareMetric(metric, baseline.metrics, current.metrics));
+  const historicalBaseline = loadHistoricalBaseline(profile);
+  const metrics = profile.metrics.map(metric => {
+    const base = compareMetric(metric, baseline.metrics, current.metrics);
+    const historicalValue = historicalBaseline ? historicalBaseline[metric.id] ?? null : null;
+    const historicalBaselineDelta = historicalValue == null ? null : +(historicalValue - metric.target).toFixed(3);
+    const driftFromHistoricalBaseline = historicalValue == null || base.current == null ? null : +(base.current - historicalValue).toFixed(3);
+    return Object.assign(base, {
+      historicalBaseline: historicalValue,
+      historicalBaselineDelta,
+      driftFromHistoricalBaseline
+    });
+  });
   const passed = metrics.filter(metric => metric.withinTolerance).length;
   const summary = {
     passed,
     total: metrics.length,
     worstCurrentDelta: metrics.reduce((max, metric) => Math.max(max, Math.abs(metric.currentDelta || 0)), 0),
-    worstDriftFromBaseline: metrics.reduce((max, metric) => Math.max(max, Math.abs(metric.driftFromBaseline || 0)), 0)
+    worstDriftFromBaseline: metrics.reduce((max, metric) => Math.max(max, Math.abs(metric.driftFromBaseline || 0)), 0),
+    worstDriftFromHistoricalBaseline: metrics.reduce((max, metric) => Math.max(max, Math.abs(metric.driftFromHistoricalBaseline || 0)), 0)
   };
   const report = {
     generatedAt: new Date().toISOString(),
     profile,
+    historicalBaseline,
     baselineRoot: path.relative(ROOT, baselineRoot),
     currentRoot: path.relative(ROOT, currentRoot),
     baselineRun: {
