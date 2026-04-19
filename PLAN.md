@@ -54,3 +54,17 @@
 3. keep hosted `/dev`, hosted `/beta`, and hosted `/production` aligned with the source docs and release metadata
 4. then deepen the second-application proof deliberately
 5. prototype reference-guided audio-generation tooling only after the current Aurora cue-state review surface is trustworthy enough to judge results clearly
+
+## Current Operating Plan
+
+The principles are now translated into a concrete execution plan in:
+
+- `/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md`
+
+That document should be used as the working bridge between:
+
+- development principles
+- bug-fix discipline
+- reference-artifact generation
+- persona and progression evidence
+- release-candidate assembly
