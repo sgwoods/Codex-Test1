@@ -209,6 +209,10 @@ Current active finding:
 - the newer `professional-stage2-boss-window` harness shows the gap starts even
   earlier: on seed `51101`, `expert` produces `3` boss attack starts in the key
   window while `professional` produces only `1`
+- the `professional-stage2-pre-boss-clear` harness narrows the cause again:
+  before the boss window opens, `professional` matches `expert` on total
+  pre-boss kill count and even exceeds it on pre-boss points, but fails to
+  remove the one formation boss that `expert` clears for `150`
 - keep the improved `professional` decision logging in place and use that
   evidence to shape the next narrow tuning pass around high-value dive
   conversion and pre-boss sequencing rather than generic aggression or
