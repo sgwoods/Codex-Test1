@@ -206,9 +206,13 @@ Current active finding:
 - the focused `professional-stage2-dive-awards` harness now captures that
   difference directly on seed `51101` as `3600` high-value boss-dive points
   for `expert` versus `800` for `professional`
+- the newer `professional-stage2-boss-window` harness shows the gap starts even
+  earlier: on seed `51101`, `expert` produces `3` boss attack starts in the key
+  window while `professional` produces only `1`
 - keep the improved `professional` decision logging in place and use that
   evidence to shape the next narrow tuning pass around high-value dive
-  conversion rather than generic aggression or survivability
+  conversion and pre-boss sequencing rather than generic aggression or
+  survivability
 
 Manual play should still validate feel, but the evidence should make difficulty
 claims explicit.
