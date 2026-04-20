@@ -203,6 +203,9 @@ Current active finding:
 - current stage-2 throughput evidence says the gap is concentrated on shared
   seed `51101`, where `professional` stays alive but misses the highest-value
   dive conversions that `expert` turns into `1600`-point awards
+- the focused `professional-stage2-dive-awards` harness now captures that
+  difference directly on seed `51101` as `3600` high-value boss-dive points
+  for `expert` versus `800` for `professional`
 - keep the improved `professional` decision logging in place and use that
   evidence to shape the next narrow tuning pass around high-value dive
   conversion rather than generic aggression or survivability
