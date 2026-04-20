@@ -213,6 +213,9 @@ Current active finding:
   before the boss window opens, `professional` matches `expert` on total
   pre-boss kill count and even exceeds it on pre-boss points, but fails to
   remove the one formation boss that `expert` clears for `150`
+- the newer `professional-stage2-shot-window` diagnostic harness should be used
+  to compare early shot cadence, bullet occupancy, and cooldown state around
+  that missing formation-boss conversion on seed `51101`
 - keep the improved `professional` decision logging in place and use that
   evidence to shape the next narrow tuning pass around high-value dive
   conversion and pre-boss sequencing rather than generic aggression or
