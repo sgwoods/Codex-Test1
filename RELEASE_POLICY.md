@@ -53,6 +53,25 @@ Meaning:
 - hosted `/production`
   - public stable promise
 
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md`
+
+## Replacement Rule For Hosted `/dev`
+
+Hosted `/dev` is already a published integration surface.
+
+That means a new hosted `/dev` publish should not happen just because a branch
+contains additional work.
+
+Before replacing hosted `/dev`, we should be able to answer:
+
+1. what is concretely better than the current published hosted `/dev`
+2. what supporting gate evidence backs that claim
+3. what known issues remain and why they are acceptable for `/dev`
+
+This is the core professionalism rule for the next release phase.
+
 ## Major `x.y` Documentation Gate
 
 For every meaningful `x.y` release, the gate between hosted `/beta` and hosted

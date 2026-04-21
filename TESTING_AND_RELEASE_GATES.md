@@ -42,6 +42,8 @@ The expected lane model is:
 2. hosted `/dev`
 - shared integration preview
 - hosted mirror of the current stable local candidate
+- should only be replaced when the new candidate is intentionally better than
+  the currently published hosted `/dev`
 
 3. hosted `/beta`
 - reviewed release-candidate lane
@@ -253,6 +255,39 @@ exactly. That keeps the public page current without silently inventing a new
 
 This profile should not automatically pull in deep gameplay suites unless the
 change also affects gameplay delivery.
+
+## Lane-Specific Rigor
+
+Use the lane purpose to decide how rigorous the gate set must be.
+
+### Local `localhost`
+
+- targeted checks only
+- adjacent regression check
+- manual inspection where needed
+
+### Hosted `/dev`
+
+- enough confidence to justify replacing the current live hosted `/dev`
+- targeted checks for changed areas
+- at least one boundary or containment check
+- live verify after publish
+- manual comparison against the current published hosted `/dev`
+
+### Hosted `/beta`
+
+- stronger gate set than hosted `/dev`
+- candidate should be intentionally assembled and stable
+- live verify after publish
+- review of release-facing deltas
+- docs refresh where required for the release family
+
+### Hosted `/production`
+
+- approved hosted `/beta` only
+- full production preflight
+- live verify
+- top-level public project page sync and verify
 
 ## Required Automated Gates
 

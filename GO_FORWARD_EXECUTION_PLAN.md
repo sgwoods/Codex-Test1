@@ -244,6 +244,11 @@ Recommended order:
 7. only after hosted `/dev` is trustworthy, consider `/beta`
 8. only after approved `/beta`, consider `/production`
 
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md`
+- `/Users/steven/Documents/Codex-Test1/NEXT_DEV_CANDIDATE_MAP.md`
+
 ## Immediate Execution Sequence
 
 ### Phase 1: Validation And Candidate Hygiene
@@ -273,13 +278,15 @@ Recommended order:
 ### Phase 4: Release Movement
 
 1. refresh local candidate
-2. publish hosted `/dev`
-3. verify hosted `/dev`
-4. promote hosted `/beta`
-5. verify hosted `/beta`
-6. complete docs pass when required
-7. approve hosted `/beta`
-8. promote hosted `/production`
+2. decide whether the candidate is actually better than the current published
+   hosted `/dev`
+3. publish hosted `/dev`
+4. verify hosted `/dev`
+5. promote hosted `/beta`
+6. verify hosted `/beta`
+7. complete docs pass when required
+8. approve hosted `/beta`
+9. promote hosted `/production`
 
 ## Decision Rule
 
