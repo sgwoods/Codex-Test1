@@ -216,6 +216,9 @@ Current active finding:
 - the newer `professional-stage2-shot-window` diagnostic harness should be used
   to compare early shot cadence, bullet occupancy, and cooldown state around
   that missing formation-boss conversion on seed `51101`
+- the `professional-stage2-shot-cadence` diagnostic harness should be used
+  alongside it to compare pre-boss shot count, shot spacing, and the timing of
+  first boss damage between `expert` and `professional`
 - keep the improved `professional` decision logging in place and use that
   evidence to shape the next narrow tuning pass around high-value dive
   conversion and pre-boss sequencing rather than generic aggression or
