@@ -256,3 +256,7 @@ Long-term goal:
 
 - keep release movement professional enough that each lane has a clear purpose,
   clear quality bar, and clear documentation contract
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/DEV_CANDIDATE_REVIEW_CHECKLIST.md`

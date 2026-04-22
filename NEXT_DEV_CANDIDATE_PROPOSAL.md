@@ -147,6 +147,10 @@ Manual comparison against current hosted `/dev` should explicitly review:
 - stage-1 dive collision feel
 - whether the candidate still feels clearly stable as an integration lane
 
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/DEV_CANDIDATE_REVIEW_CHECKLIST.md`
+
 ## Promotion Decision Rule
 
 Publish a new hosted `/dev` only if:
