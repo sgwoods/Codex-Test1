@@ -9,6 +9,29 @@ Use it when deciding:
 - how reference fidelity work should be structured
 - how release candidates should be assembled and promoted
 
+## Current Release Posture
+
+As of April 22, 2026:
+
+- hosted `/dev` now points at:
+  - `1.2.3+build.463.sha.e7ec04f`
+  - branch `codex/document-project-principles`
+  - commit `e7ec04f`
+- hosted `/beta` remains:
+  - `1.2.3-beta.1+build.388.sha.13c8421.beta`
+- hosted `/production` remains:
+  - `1.2.3+build.388.sha.13c8421`
+
+This means:
+
+- the current working branch and hosted `/dev` are now aligned
+- we no longer need to spend the next cycle trying to catch `/dev` up to local
+- the next cycle can focus on improving gameplay and fidelity from a current
+  formal integration lane
+- the next release question is no longer "should we refresh `/dev`?" but
+  "what work should graduate from the current `/dev` line toward the next
+  defensible `/beta` candidate?"
+
 ## Current Working Reality
 
 We are operating in a post-release stewardship phase.
@@ -27,6 +50,79 @@ The project is therefore not in a "ship fast from wherever we are" mode.
 
 It is in a "continue deliberately without losing agility" mode.
 
+## Go-Forward Branching And Lane Plan
+
+### Active Code Line
+
+For the next cycle, the active working line should be:
+
+- branch: `codex/document-project-principles`
+
+Use that branch as the current integration branch because:
+
+- it now matches hosted `/dev`
+- it contains the current release policy, scorecard, correspondence framework,
+  and confidence tooling
+- it is the cleanest base for the next narrow gameplay/fidelity branches
+
+### Day-To-Day Development Branching
+
+For new work, branch from the current integration line into short-lived topic
+branches, then merge back into `codex/document-project-principles`.
+
+Recommended branch families:
+
+- `codex/timing-*`
+- `codex/audio-*`
+- `codex/fidelity-*`
+- `codex/bugfix-*`
+
+Default rule:
+
+- work in topic branches
+- merge back into `codex/document-project-principles`
+- republish hosted `/dev` only when the integrated branch is again coherent and
+  worth sharing
+
+### When To Republish Hosted `/dev`
+
+Republish hosted `/dev` when one of these is true:
+
+- a topic bundle materially improves one of the weak scorecard categories
+- a bug fix changes the shared integration experience enough that reviewers
+  should use the hosted lane
+- the current integration branch has changed enough that local-only review is
+  becoming a liability
+
+For the immediate next cycle, that means:
+
+- do not republish `/dev` for every single small change
+- group the next meaningful fidelity work into a small bundle
+- refresh the scorecard and lane metadata when that bundle is ready
+
+### When To Shape The Next Hosted `/beta`
+
+Do not move current hosted `/dev` to hosted `/beta` immediately just because
+`/dev` is now current.
+
+The next hosted `/beta` should wait until we have:
+
+- at least one real improvement bundle beyond simple `/dev` parity
+- clearer progress on the weakest scorecard categories
+  - stage-1 timing fidelity
+  - challenge-stage timing fidelity
+  - audio identity and cue alignment
+- a refreshed scorecard that shows a more defensible quality step over the
+  current stable beta/prod line
+- release notes and docs that can honestly explain why this is the next serious
+  candidate
+
+Practical standard:
+
+- current hosted `/dev` is our stabilized integration base
+- the next hosted `/beta` should come only after one or two deliberate fidelity
+  cycles, not immediately after the `/dev` refresh
+
 ## Operating Priorities
 
 ### 1. Keep The Live Line Trustworthy
@@ -41,6 +137,12 @@ Always preserve:
 
 No work should overwrite those baselines unless we are intentionally performing
 a new promotion cycle.
+
+Current interpretation:
+
+- hosted `/dev` can now move forward from a stable updated base
+- hosted `/beta` and hosted `/production` should stay fixed until the next
+  improvement cycle is assembled intentionally
 
 ### 2. Require Harness Thinking For Bug Fixes
 
@@ -258,6 +360,45 @@ See also:
 2. continue repairing any untrusted harnesses that block confidence
 3. manually validate recovered Aurora gameplay changes
 4. decide the next candidate foundation explicitly
+
+### Phase 1 Status
+
+This phase is now complete enough to change posture:
+
+- hosted `/dev` has been refreshed and verified
+- the current integration branch is aligned with the hosted lane
+- the quality score is now part of the release record
+
+The next phase should therefore shift from recovery and lane catch-up into
+deliberate improvement work.
+
+### Phase 2: Improve From The New `/dev` Baseline
+
+Work order for the next cycle:
+
+1. stage-1 timing fidelity
+2. challenge-stage timing fidelity
+3. audio identity and cue alignment
+4. movement smoothness, if it still remains noticeable after the timing/audio
+   work
+
+Execution rule:
+
+- each topic should land first on a short-lived topic branch
+- then merge into `codex/document-project-principles`
+- then refresh hosted `/dev` only when the integrated bundle is worth sharing
+
+### Phase 3: Assemble The Next `/beta` Candidate
+
+Only after Phase 2 yields a stronger scorecard should we begin the next hosted
+`/beta` cycle.
+
+The next `/beta` candidate should aim to be:
+
+- clearly ahead of current hosted `/beta` / `/production`
+- more than simple parity with hosted `/dev`
+- stronger in at least the current weakest fidelity categories
+- accompanied by refreshed release notes, dashboard language, and scorecard
 
 ### Phase 2: Controlled Candidate Construction
 
