@@ -199,3 +199,7 @@ The next real decision is:
 
 Only after that should we publish a new hosted `/dev` and begin the path toward
 the next stable hosted `/beta`.
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/NEXT_DEV_CANDIDATE_PROPOSAL.md`

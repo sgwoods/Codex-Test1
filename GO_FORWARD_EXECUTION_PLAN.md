@@ -248,6 +248,7 @@ See also:
 
 - `/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md`
 - `/Users/steven/Documents/Codex-Test1/NEXT_DEV_CANDIDATE_MAP.md`
+- `/Users/steven/Documents/Codex-Test1/NEXT_DEV_CANDIDATE_PROPOSAL.md`
 
 ## Immediate Execution Sequence
 
