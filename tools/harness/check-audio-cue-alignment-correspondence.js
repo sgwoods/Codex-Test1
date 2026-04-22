@@ -60,9 +60,14 @@ function delta(from, to){
 }
 
 function runScenario(rootDir, scenarioFile, allowFailure = false){
+  const scenario = readJson(scenarioFile);
+  scenario.config = Object.assign({}, scenario.config || {}, { audioTheme: 'galaga-reference-assets' });
+  const tempScenario = path.join(OUT_ROOT, `tmp-${path.basename(scenarioFile)}`);
+  ensureDir(path.dirname(tempScenario));
+  fs.writeFileSync(tempScenario, `${JSON.stringify(scenario, null, 2)}\n`);
   const run = spawnSync(process.execPath, [
     HARNESS,
-    '--scenario', scenarioFile,
+    '--scenario', tempScenario,
     '--root', rootDir,
     '--out', OUT_ROOT,
     '--auto-video', '0',
