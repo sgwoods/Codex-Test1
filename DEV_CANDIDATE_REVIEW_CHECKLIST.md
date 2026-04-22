@@ -232,3 +232,13 @@ Before deciding to replace hosted `/dev`, write down:
 5. whether this candidate is strong enough to continue shaping toward `/beta`
 
 If those answers are weak or vague, do not replace hosted `/dev` yet.
+
+## 8. Current Automation Support
+
+- `npm run harness:check:dev-candidate-surfaces`
+  - broad shell, panel, graphics, and audio surface sweep
+- `npm run harness:check:player-movement-conformance`
+  - movement feel proxy for tap correction, hold travel, reversal, and firing
+    while moving
+- `npm run harness:score:quality-conformance`
+  - ten-category roll-up score to show the biggest current quality gaps

@@ -75,6 +75,11 @@ validate the result, not replace the baseline.
   - can a player line up under descending enemies with small corrections?
   - does the ship still cross the playfield quickly enough for evasive play?
   - does manual control feel smoother than the old full-speed-per-frame step?
+- Current persistent checks:
+  - `tools/harness/check-player-movement-conformance.js`
+  - `reference-artifacts/analyses/correspondence/player-movement/*`
+  - first-phase movement evidence currently measures tap correction, hold
+    travel, reversal, movement-while-firing, and frame-step smoothness
 
 ### Persona And Progression Evidence
 
