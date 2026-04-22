@@ -79,5 +79,7 @@ Going forward:
   three remaining gaps
 - `/production` release notes should include the approved-beta quality score and
   what was intentionally accepted for ship
+- the scorecard itself should be committed whenever it materially changes
+- the score should be treated as a release artifact, not just a local report
 
 This scorecard should evolve as more direct live-lane scoring becomes available.

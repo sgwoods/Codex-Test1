@@ -98,6 +98,8 @@ Documentation expectations:
   - `release-notes.json`
 - the current quality score and scorecard should be refreshed for any serious
   candidate replacement of hosted `/dev`
+- all core release definitions and reference inputs used to justify the publish
+  should already be committed
 - source docs do not need a full release refresh for every `/dev` publish
 - but any change to release framing, lane meaning, or operator workflow should
   be documented before or with the publish
@@ -138,6 +140,8 @@ Documentation expectations:
 - lane metadata refreshed
 - release dashboard and notes refreshed
 - quality score and scorecard refreshed, with the top remaining gaps called out
+- all core release/testing/reference artifacts used to approve the candidate are
+  committed or summarized in committed docs
 - if this is a meaningful `x.y` candidate or a substantial release-family
   update, complete the full documentation pass before approval
 
@@ -180,6 +184,29 @@ Promotion rule:
 
 - do not publish hosted `/production` from local enthusiasm
 - publish only when the candidate has already proven itself on hosted `/beta`
+
+## Artifact Persistence Rule
+
+Release confidence should never depend on uncommitted core artifacts.
+
+What must be committed:
+
+- runtime source
+- harness and release scripts
+- reference profiles
+- scorecards and release-facing docs
+- curated reference assets or their committed source manifests
+
+What may stay generated-only:
+
+- reproducible transient outputs under `reference-artifacts/analyses/...`
+
+But if a generated output is needed later to explain or defend a release, its
+important conclusions should be copied into committed docs such as:
+
+- `QUALITY_RELEASE_SCORECARD.md`
+- `RELEASE_READINESS_REVIEW.md`
+- `release-notes.json`
 
 ## Release Hygiene Rules
 
@@ -227,6 +254,17 @@ They should usually be treated as:
 
 Only promote them when they accompany a candidate that is also meaningfully
 better as a hosted surface.
+
+### Rule 5: Hosted `/dev` Usually Moves Forward In Place
+
+We should normally replace hosted `/dev` in place and preserve the history in
+git and committed release artifacts.
+
+We should create a dedicated archived `/dev` snapshot only when:
+
+- the build is milestone-worthy
+- we need side-by-side hosted comparison for a major tuning effort
+- we need a preserved recovery or incident snapshot
 
 ## Recommended Promotion Flow
 

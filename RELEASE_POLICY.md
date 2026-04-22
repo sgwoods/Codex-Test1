@@ -96,6 +96,33 @@ That refresh should cover at least:
 
 This should be treated as a real release artifact pass, not optional cleanup.
 
+## Core Artifact Commit Rule
+
+We should assume that any core artifact used to produce, validate, explain, or
+approve a release must be committed at some stage of the process.
+
+Core artifacts include:
+
+- source code used in the lane being published
+- release scripts and harness scripts
+- reference profiles and correspondence check definitions
+- scorecards, release notes, dashboards, and readiness docs
+- curated reference inputs that the project depends on for tuning or review
+
+Generated artifacts do not all need to live in git, but they must not be
+ephemeral in practice.
+
+Rule:
+
+- the definitions, inputs, and documentation for a release must be committed
+- generated outputs may stay uncommitted only when they are reproducible from
+  committed code and committed reference inputs
+- if a generated artifact is being relied on as a durable release record, it
+  should itself be committed or copied into a committed summary document
+
+This is the rule that keeps release knowledge out of chat-only or machine-only
+ state.
+
 ## Promotion Workflow
 
 1. build the local `localhost` candidate
@@ -107,6 +134,28 @@ This should be treated as a real release artifact pass, not optional cleanup.
 7. complete any required docs pass for the release line
 8. approve hosted `/beta`
 9. promote and publish hosted `/production`
+
+## Hosted `/dev` History Rule
+
+By default, we should move hosted `/dev` forward in place rather than maintain a
+separate public archive lane for every `/dev` build.
+
+We already preserve `/dev` history through:
+
+- git commits and branches
+- build metadata
+- release notes and dashboards
+- the quality scorecard
+- committed docs explaining why a new `/dev` replaced the prior one
+
+Create a dedicated `/dev` archive only when:
+
+- a milestone build needs to stay publicly inspectable
+- a comparison build is needed for a major tuning effort
+- a recovery or incident review needs a preserved hosted snapshot
+
+Otherwise, move `/dev` forward and keep the record in git and committed release
+artifacts.
 
 ## Policy Intention
 
