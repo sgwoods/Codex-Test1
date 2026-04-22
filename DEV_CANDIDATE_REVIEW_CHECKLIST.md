@@ -89,6 +89,8 @@ How:
 
 - manual click-through of all visible panels
 - any relevant popup or shell harnesses
+- preferred bundle:
+  - `npm run harness:check:dev-candidate-surfaces`
 
 ## 3. Audio Fidelity And Consistency
 
@@ -116,6 +118,8 @@ How:
 
 - manual audio comparison between localhost and hosted `/dev`
 - use existing waveform / timing reference artifacts for targeted review
+- automated shell/audio smoke in:
+  - `npm run harness:check:dev-candidate-surfaces`
 
 ## 4. Graphics And Visual Integrity
 
@@ -132,6 +136,8 @@ How:
 - manual visual sweep
 - local build output review
 - release/publish asset verification for lane work
+- graphics and shell surface smoke in:
+  - `npm run harness:check:dev-candidate-surfaces`
 
 ### UI polish
 
