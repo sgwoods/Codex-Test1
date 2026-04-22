@@ -96,6 +96,8 @@ Documentation expectations:
   - `build-info.json`
   - `release-dashboard.html`
   - `release-notes.json`
+- the current quality score and scorecard should be refreshed for any serious
+  candidate replacement of hosted `/dev`
 - source docs do not need a full release refresh for every `/dev` publish
 - but any change to release framing, lane meaning, or operator workflow should
   be documented before or with the publish
@@ -135,6 +137,7 @@ Documentation expectations:
 
 - lane metadata refreshed
 - release dashboard and notes refreshed
+- quality score and scorecard refreshed, with the top remaining gaps called out
 - if this is a meaningful `x.y` candidate or a substantial release-family
   update, complete the full documentation pass before approval
 
@@ -144,6 +147,7 @@ Approval rule:
 - approval should mean:
   - the candidate is stable
   - docs and release framing are honest
+  - the quality score and largest remaining gaps are explicitly recorded
   - major known issues are either fixed or explicitly accepted
 
 ### 4. Hosted `/production`

@@ -81,6 +81,7 @@ That refresh should cover at least:
 
 - `release-notes.json`
 - `release-dashboard.json`
+- `QUALITY_RELEASE_SCORECARD.md`
 - `README.md`
 - `PLAN.md`
 - `PRODUCT_ROADMAP.md`
@@ -99,12 +100,13 @@ This should be treated as a real release artifact pass, not optional cleanup.
 
 1. build the local `localhost` candidate
 2. verify local `localhost` gates
-3. publish hosted `/dev` for integrated hosted review
-4. promote hosted `/beta`
-5. verify hosted `/beta`
-6. complete any required docs pass for the release line
-7. approve hosted `/beta`
-8. promote and publish hosted `/production`
+3. refresh the quality score and scorecard for the candidate
+4. publish hosted `/dev` for integrated hosted review
+5. promote hosted `/beta`
+6. verify hosted `/beta`
+7. complete any required docs pass for the release line
+8. approve hosted `/beta`
+9. promote and publish hosted `/production`
 
 ## Policy Intention
 
@@ -115,3 +117,4 @@ The goal is to make sure:
 - automation catches what it can
 - hosted lanes are explicit
 - docs and release surfaces stay aligned with the product we actually ship
+- the quality score becomes part of release notes, not just a local experiment
