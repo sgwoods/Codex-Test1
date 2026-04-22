@@ -122,6 +122,8 @@ Practical standard:
 - current hosted `/dev` is our stabilized integration base
 - the next hosted `/beta` should come only after one or two deliberate fidelity
   cycles, not immediately after the `/dev` refresh
+- the next serious public milestone should likely be a `MINOR` release in the
+  `1.3.0` family, not a new `MAJOR`
 
 ## Operating Priorities
 

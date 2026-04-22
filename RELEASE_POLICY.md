@@ -25,6 +25,9 @@ These are format examples, not current live lane values.
   - use for meaningful public milestones
   - example:
     - `1.2.0` = `Platinum Release 1`
+  - current planning read:
+    - the next serious Aurora quality/fidelity release should likely be a
+      `MINOR` step such as `1.3.0`, not a new `MAJOR`
 - `PATCH`
   - use for smaller compatible improvements inside the current milestone
   - examples:
@@ -71,6 +74,22 @@ Before replacing hosted `/dev`, we should be able to answer:
 3. what known issues remain and why they are acceptable for `/dev`
 
 This is the core professionalism rule for the next release phase.
+
+## Current Promotion Reality
+
+As of April 22, 2026:
+
+- hosted `/dev` is the real forward line
+- hosted `/beta` and hosted `/production` are still the same shipped code line
+  at `13c8421`
+
+That means:
+
+- there is no meaningful value in promoting the current hosted `/beta` to
+  hosted `/production`
+- the next release cycle should work from the current hosted `/dev` line
+- the next serious candidate should be a new hosted `/beta` built from the
+  improved `/dev` line, not a delayed approval of the older beta/prod family
 
 ## Major `x.y` Documentation Gate
 

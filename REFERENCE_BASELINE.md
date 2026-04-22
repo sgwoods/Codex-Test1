@@ -226,6 +226,13 @@ validate the result, not replace the baseline.
   - use this as the default starting point for event-family timing, pacing, and
     audiovisual sync work
   - this same pattern should later be reused for `Galaxian` and future packs
+  - current persistent audio cue-timing check:
+    - `tools/harness/check-audio-cue-alignment-correspondence.js`
+    - `tools/harness/reference-profiles/audio-cue-alignment.json`
+    - `reference-artifacts/analyses/correspondence/audio-cue-alignment/*`
+  - use this dedicated cue-alignment report when deciding whether gameplay
+    audio is becoming more Galaga-faithful in timing, not just in timbre or
+    cue coverage
   - medium-term observability goal:
     - keep evolving gameplay logs, event traces, timing artifacts, and visual
       analysis in a way that would later support training a reinforcement-learned

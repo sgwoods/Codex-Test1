@@ -69,6 +69,15 @@
 4. then shape the next hosted `/beta` deliberately from the improved `/dev` line
 5. deepen the second-application proof deliberately after the current Aurora fidelity cycle is in better shape
 
+## Release Direction
+
+- the next serious Aurora candidate should come from the current hosted `/dev`
+  line, not from promoting the older hosted `/beta` line in place
+- hosted `/beta` and hosted `/production` are still the same shipped code line,
+  so promoting the current beta would not meaningfully advance production
+- the next meaningful public milestone should likely be a `MINOR` release in
+  the `1.3.0` family after the current fidelity cycle improves timing and audio
+
 ## Current Operating Plan
 
 The principles are now translated into a concrete execution plan in:
