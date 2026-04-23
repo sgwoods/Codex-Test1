@@ -1,0 +1,160 @@
+{
+  "id": "audio-cue-alignment",
+  "title": "Audio Cue Alignment Correspondence",
+  "purpose": "Compare the most timing-sensitive Aurora gameplay audio cues against the shipped local baseline and the preserved Galaga-aligned timing targets.",
+  "candidateRoots": {
+    "baseline": "dist/production",
+    "current": "dist/dev"
+  },
+  "referenceSource": {
+    "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+  },
+  "historicalAuroraBaselines": {
+    "stage1": "formation-arrival-and-convoy",
+    "challenge": "challenge-entry-results-perfect"
+  },
+  "scenarios": {
+    "stage1": "tools/harness/scenarios/stage1-descent.json",
+    "challengeEntry": "tools/harness/scenarios/challenge-entry-probe.json",
+    "challengePerfect": "tools/harness/scenarios/stage3-perfect-transition.json"
+  },
+  "metrics": [
+    {
+      "id": "gameStartCueAfterSpawn",
+      "label": "Game Start Cue After Spawn",
+      "source": "stage1",
+      "runtimePath": [
+        "stage1",
+        "gameStartCueAfterSpawn"
+      ],
+      "mode": "target",
+      "target": 0,
+      "tolerance": 0.05,
+      "severity": "strict"
+    },
+    {
+      "id": "firstStagePulseAfterFormationArrival",
+      "label": "First Stage Pulse After Formation Arrival",
+      "source": "stage1",
+      "runtimePath": [
+        "stage1",
+        "firstStagePulseAfterFormationArrival"
+      ],
+      "mode": "target",
+      "target": 1.97,
+      "tolerance": 0.35,
+      "severity": "high"
+    },
+    {
+      "id": "gameStartTailPastFirstPulse",
+      "label": "Game Start Tail Past First Pulse",
+      "source": "stage1",
+      "runtimePath": [
+        "stage1",
+        "gameStartTailPastFirstPulse"
+      ],
+      "mode": "max",
+      "maxAllowed": 0,
+      "tolerance": 0.15,
+      "severity": "medium"
+    },
+    {
+      "id": "challengeCueAfterProbe",
+      "label": "Challenge Cue After Probe",
+      "source": "challengeEntry",
+      "runtimePath": [
+        "challengeEntry",
+        "challengeCueAfterProbe"
+      ],
+      "mode": "familyTarget",
+      "family": "challenge",
+      "targetPath": [
+        "auroraCurrent",
+        "challengeEntry",
+        "cueAfterProbe"
+      ],
+      "tolerance": 0.5,
+      "severity": "high"
+    },
+    {
+      "id": "challengeSpawnAfterCue",
+      "label": "Challenge Spawn After Cue",
+      "source": "challengeEntry",
+      "runtimePath": [
+        "challengeEntry",
+        "challengeSpawnAfterCue"
+      ],
+      "mode": "familyTarget",
+      "family": "challenge",
+      "targetPath": [
+        "auroraCurrent",
+        "challengeEntry",
+        "spawnAfterCue"
+      ],
+      "tolerance": 0.4,
+      "severity": "high"
+    },
+    {
+      "id": "challengeTransitionTailPastSpawn",
+      "label": "Challenge Transition Tail Past Spawn",
+      "source": "challengeEntry",
+      "runtimePath": [
+        "challengeEntry",
+        "transitionCueTailPastSpawn"
+      ],
+      "mode": "target",
+      "target": 0.467,
+      "tolerance": 0.15,
+      "severity": "medium"
+    },
+    {
+      "id": "challengePerfectCueAfterClear",
+      "label": "Challenge Perfect Cue After Clear",
+      "source": "challengePerfect",
+      "runtimePath": [
+        "challengePerfect",
+        "challengePerfectCueAfterClear"
+      ],
+      "mode": "familyTarget",
+      "family": "challenge",
+      "targetPath": [
+        "auroraCurrent",
+        "challengePerfect",
+        "resultCueAfterClear"
+      ],
+      "tolerance": 0.35,
+      "severity": "high"
+    },
+    {
+      "id": "nextStageCueAfterClear",
+      "label": "Next Stage Cue After Clear",
+      "source": "challengePerfect",
+      "runtimePath": [
+        "challengePerfect",
+        "nextStageCueAfterClear"
+      ],
+      "mode": "familyTarget",
+      "family": "challenge",
+      "targetPath": [
+        "auroraCurrent",
+        "challengePerfect",
+        "nextCueAfterClear"
+      ],
+      "tolerance": 0.55,
+      "severity": "medium"
+    },
+    {
+      "id": "resultTailPastNextCue",
+      "label": "Result Cue Tail Past Next Cue",
+      "source": "challengePerfect",
+      "runtimePath": [
+        "challengePerfect",
+        "resultTailPastNextCue"
+      ],
+      "mode": "max",
+      "maxAllowed": 0,
+      "tolerance": 0.2,
+      "severity": "medium"
+    }
+  ]
+}

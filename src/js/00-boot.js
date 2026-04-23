@@ -996,7 +996,13 @@ function formatDisplayedStage(stage,challenge=isChallengeStage(stage),pad=2){
  return String(displayStageNumber(stage,challenge)).padStart(pad,'0');
 }
 const shotCap=()=>S.t?S.t.shotCap:0;
-const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
+const recTime=()=>{
+ if(!REC)return 0;
+ if(isHarnessClockControlled()||useDeterministicHarnessClock()){
+  return +(+S.simT||0).toFixed(3);
+ }
+ return +((performance.now()-REC.t0)/1000).toFixed(3);
+};
 function useDeterministicHarnessClock(){
  return !!(window.__platinumHarnessPersona||window.__auroraHarnessPersona);
 }

@@ -118,7 +118,15 @@ function scoreProgressionReport(report){
   return round(clamp(10 * ((0.7 * ratio) + (0.3 * order)), 1, 10), 1);
 }
 
-function scoreAudio(metricsTheme, metricsOverlap){
+function scoreAudioAlignmentReport(report){
+  const ratio = report.summary.total ? report.summary.passed / report.summary.total : 0;
+  const worst = report.summary.worstCurrentDelta || 0;
+  const drift = report.summary.worstDriftFromBaseline == null ? 1 : clamp(1 - ((report.summary.worstDriftFromBaseline || 0) / 1.5), 0, 1);
+  const score = 10 * ((0.6 * ratio) + (0.25 * clamp(1 - worst / 4, 0, 1)) + (0.15 * drift));
+  return round(clamp(score, 1, 10), 1);
+}
+
+function scoreAudio(metricsTheme, metricsOverlap, alignmentReport){
   const items = metricsTheme.items || [];
   const cueSimilarity = items.map(item => {
     const aurora = item.variants?.aurora?.metrics || {};
@@ -135,7 +143,8 @@ function scoreAudio(metricsTheme, metricsOverlap){
     closeness(metricsOverlap.stage1?.firstDiveAfterSpawn, 8.202, 2.0)
   ];
   const overlapAverage = overlapStage1.reduce((sum, value) => sum + value, 0) / overlapStage1.length;
-  return round(clamp(10 * ((0.65 * cueAverage) + (0.35 * overlapAverage)), 1, 10), 1);
+  const alignmentAverage = scoreAudioAlignmentReport(alignmentReport) / 10;
+  return round(clamp(10 * ((0.45 * cueAverage) + (0.2 * overlapAverage) + (0.35 * alignmentAverage)), 1, 10), 1);
 }
 
 function buildReadme(report){
@@ -176,6 +185,7 @@ function main(){
   const closeShotRun = runScript('check-close-shot-hit.js');
   const stage2SafetyRun = runScript('check-persona-stage2-safety.js');
   const surfaceRun = runScript('check-dev-candidate-surface-suite.js');
+  const audioAlignmentRun = runScript('check-audio-cue-alignment-correspondence.js');
 
   const movementReport = readJson(latestReport('reference-artifacts/analyses/correspondence/player-movement'));
   const stage1TimingReport = readJson(latestReport('reference-artifacts/analyses/correspondence/stage1-opening-first-dive'));
@@ -183,6 +193,7 @@ function main(){
   const captureReport = readJson(latestReport('reference-artifacts/analyses/correspondence/capture-rescue'));
   const challengeReport = readJson(latestReport('reference-artifacts/analyses/correspondence/challenge-stage-timing'));
   const progressionReport = readJson(latestReport('reference-artifacts/analyses/correspondence/persona-progression'));
+  const audioAlignmentReport = readJson(latestReport('reference-artifacts/analyses/correspondence/audio-cue-alignment'));
   const audioThemeMetrics = readJson(latestMetrics('reference-artifacts/analyses/aurora-audio-theme-comparison'));
   const audioOverlapMetrics = readJson(latestMetrics('reference-artifacts/analyses/galaga-audio-overlap'));
 
@@ -248,9 +259,9 @@ function main(){
     {
       id: 'audio',
       label: 'Audio identity and cue alignment',
-      score10: scoreAudio(audioThemeMetrics, audioOverlapMetrics),
-      evidence: ['aurora-audio-theme-comparison', 'galaga-audio-overlap'],
-      read: 'Audio score blends cue-identity similarity against the preserved Galaga-inspired reference mix with the overlap/timing windows captured in the audio-overlap analysis.'
+      score10: scoreAudio(audioThemeMetrics, audioOverlapMetrics, audioAlignmentReport),
+      evidence: ['audio-cue-alignment correspondence', 'aurora-audio-theme-comparison', 'galaga-audio-overlap'],
+      read: `Audio score blends cue identity with measured cue timing. The dedicated cue-alignment report passed ${audioAlignmentReport.summary.passed}/${audioAlignmentReport.summary.total} metrics, with worst current delta ${audioAlignmentReport.summary.worstCurrentDelta}.`
     },
     {
       id: 'ui-shell',
@@ -275,6 +286,7 @@ function main(){
     closeShotRun,
     stage2SafetyRun,
     surfaceRun,
+    audioAlignmentRun,
     categories,
     summary: {
       overallScore10,

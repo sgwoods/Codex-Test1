@@ -16,10 +16,10 @@ As of April 22, 2026:
   - branch `codex/document-project-principles`
   - quality score `7.4/10`
   - source:
-    - `reference-artifacts/analyses/quality-conformance/2026-04-22-22221ed`
+    - `reference-artifacts/analyses/quality-conformance/2026-04-22-e7ec04f`
 - hosted `/dev`:
-  - `1.2.3+build.432.sha.9d7b2a8`
-  - built `Apr 12 2026, 10:36 AM EDT`
+  - `1.2.3+build.463.sha.e7ec04f`
+  - built `Apr 22 2026, 1:06 PM EDT`
 - hosted `/beta`:
   - `1.2.3-beta.1+build.388.sha.13c8421.beta`
   - built `Apr 10 2026, 8:56 AM EDT`
@@ -83,3 +83,9 @@ Going forward:
 - the score should be treated as a release artifact, not just a local report
 
 This scorecard should evolve as more direct live-lane scoring becomes available.
+
+Current note:
+
+- the dedicated `audio-cue-alignment` correspondence check is now part of the
+  active fidelity program on the forward line
+- use it to shape the next scorecard refresh before the next hosted `/beta`
