@@ -131,15 +131,15 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
   firstPulseDelay:2.35
  }),
  challengeEntry:Object.freeze({
-  transitionWindow:4.35,
-  cueLeadBeforeSpawn:1.72,
+  transitionWindow:2.8,
+  cueLeadBeforeSpawn:0.58,
   firstEnemyArrivalDelay:.96,
   cadenceHoldAfterSpawn:1.28
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  nextStageWindow:4.55,
-  nextCueLeadBeforeSpawn:1.62,
+  nextStageWindow:2.95,
+  nextCueLeadBeforeSpawn:1.55,
   cadenceHoldAfterSpawn:1.24
  }),
  enemyDiveCharge:Object.freeze({
