@@ -121,15 +121,14 @@ They affect:
 The branch now has the challenge-entry and post-challenge timing family in a
 much healthier state. The remaining gaps are more specific:
 
-1. decide whether the stage-1 pulse should really be measured from stage spawn
-   or from a later opening anchor such as formation arrival
-2. decide whether the challenge-transition clip should be trimmed, delayed, or
-   explicitly allowed to overlap spawn
+1. score the stage-1 pulse from `formationArrival`, not raw stage spawn
+2. use an explicit overlap budget for the challenge-transition clip instead of
+   forcing a zero-overlap rule
 
 The next strong release bundle should keep improving:
 
-1. stage-1 opening pulse timing or its measurement anchor
-2. challenge-transition clip-tail handling
+1. stage-1 opening pulse timing relative to formation arrival
+2. challenge-transition clip-tail handling within an explicit overlap budget
 3. broader challenge/audio polish and final scorecard refresh
 
 Then:

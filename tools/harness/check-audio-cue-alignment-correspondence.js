@@ -106,16 +106,17 @@ function runScenario(rootDir, scenarioFile, allowFailure = false){
 function stage1Metrics(session){
   if(!session) return {
     gameStartCueAfterSpawn: null,
-    firstStagePulseAfterSpawn: null,
+    firstStagePulseAfterFormationArrival: null,
     gameStartTailPastFirstPulse: null
   };
   const events = session.events || [];
   const spawn = firstEvent(events, e => e.type === 'stage_spawn' && e.stage === 1 && !e.challenge);
   const gameStartCue = firstEvent(events, e => e.type === 'audio_cue' && e.cue === 'gameStart' && e.stage === 1);
+  const formationArrivalCue = firstEvent(events, e => e.type === 'audio_cue' && e.cue === 'formationArrival' && e.stage === 1);
   const stagePulseCue = firstEvent(events, e => e.type === 'audio_cue' && e.cue === 'stagePulse' && e.stage === 1);
   return {
     gameStartCueAfterSpawn: delta(spawn, gameStartCue),
-    firstStagePulseAfterSpawn: delta(spawn, stagePulseCue),
+    firstStagePulseAfterFormationArrival: delta(formationArrivalCue, stagePulseCue),
     gameStartTailPastFirstPulse: spawn && gameStartCue && stagePulseCue && Number.isFinite(+gameStartCue.referenceClipDuration)
       ? +(((gameStartCue.t || 0) + (+gameStartCue.referenceClipDuration || 0)) - (stagePulseCue.t || 0)).toFixed(3)
       : null

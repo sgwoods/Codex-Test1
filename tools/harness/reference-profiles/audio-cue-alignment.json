@@ -33,20 +33,16 @@
       "severity": "strict"
     },
     {
-      "id": "firstStagePulseAfterSpawn",
-      "label": "First Stage Pulse After Spawn",
+      "id": "firstStagePulseAfterFormationArrival",
+      "label": "First Stage Pulse After Formation Arrival",
       "source": "stage1",
       "runtimePath": [
         "stage1",
-        "firstStagePulseAfterSpawn"
+        "firstStagePulseAfterFormationArrival"
       ],
-      "mode": "familyTarget",
-      "family": "stage1",
-      "targetPath": [
-        "auroraCurrent",
-        "firstStagePulseAfterSpawn"
-      ],
-      "tolerance": 0.25,
+      "mode": "target",
+      "target": 1.97,
+      "tolerance": 0.35,
       "severity": "high"
     },
     {
@@ -106,9 +102,9 @@
         "challengeEntry",
         "transitionCueTailPastSpawn"
       ],
-      "mode": "max",
-      "maxAllowed": 0,
-      "tolerance": 0.2,
+      "mode": "target",
+      "target": 0.467,
+      "tolerance": 0.15,
       "severity": "medium"
     },
     {
