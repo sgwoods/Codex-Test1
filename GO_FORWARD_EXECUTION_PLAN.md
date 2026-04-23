@@ -11,12 +11,12 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of April 22, 2026:
+As of April 23, 2026:
 
 - hosted `/dev` now points at:
-  - `1.2.3+build.463.sha.e7ec04f`
+  - `1.2.3+build.470.sha.e4732eb`
   - branch `codex/document-project-principles`
-  - commit `e7ec04f`
+  - commit `e4732eb`
 - hosted `/beta` remains:
   - `1.2.3-beta.1+build.388.sha.13c8421.beta`
 - hosted `/production` remains:
@@ -31,6 +31,12 @@ This means:
 - the next release question is no longer "should we refresh `/dev`?" but
   "what work should graduate from the current `/dev` line toward the next
   defensible `/beta` candidate?"
+
+The forward line has also now absorbed the first audio cue alignment pass:
+
+- dedicated audio cue correspondence is green at `9/9`
+- challenge entry and post-challenge cue timing are effectively on target
+- the reference-audio session reset fix is part of the current `/dev` line
 
 ## Current Working Reality
 
@@ -124,6 +130,10 @@ Practical standard:
   cycles, not immediately after the `/dev` refresh
 - the next serious public milestone should likely be a `MINOR` release in the
   `1.3.0` family, not a new `MAJOR`
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md`
 
 ## Operating Priorities
 

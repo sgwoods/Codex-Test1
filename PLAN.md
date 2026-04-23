@@ -3,7 +3,7 @@
 ## Current State
 
 - hosted `/dev` is now current with the active integration branch:
-  - `1.2.3+build.463.sha.e7ec04f`
+  - `1.2.3+build.470.sha.e4732eb`
 - hosted `/beta` remains on:
   - `1.2.3-beta.1+build.388.sha.13c8421.beta`
 - hosted `/production` remains on:
@@ -77,6 +77,19 @@
   so promoting the current beta would not meaningfully advance production
 - the next meaningful public milestone should likely be a `MINOR` release in
   the `1.3.0` family after the current fidelity cycle improves timing and audio
+
+## Beta Planning
+
+- the next hosted `/beta` should be cut from the current forward `/dev` line,
+  not by advancing the old `13c8421` beta/prod line in place
+- the current `/dev` line now includes the audio cue alignment improvements and
+  the reference-audio session reset fix
+- the next `/beta` should follow one more focused broader timing/fidelity pass
+  plus a refreshed quality score and scorecard
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md`
 
 ## Current Operating Plan
 
