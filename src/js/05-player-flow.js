@@ -34,22 +34,22 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';
+ const openingTiming=(!cfg.challenge&&cfg.stage===1&&usesReferenceTimingModel())
+  ? currentGamePackReferenceTiming('stage1Opening')
+  : null;
  if(usesRuntimeGalagaReferenceAudio()){
-  const openingTiming=(!cfg.challenge&&cfg.stage===1&&typeof currentGamePackReferenceTiming==='function')
-   ? currentGamePackReferenceTiming('stage1Opening')
-   : null;
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
-  sfx.start();
-  S.startCueT=0;
-  if(openingTiming){
-   S.formationCueT=openingTiming.formationArrivalDelay;
-   S.seqT=Math.max(+S.seqT||0,openingTiming.firstPulseDelay);
-   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,openingTiming.firstPulseDelay+.15);
-  }else{
-   S.seqT=Math.max(+S.seqT||0,3.05);
-   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
-  }
- }else sfx.start();
+ }
+ sfx.start();
+ S.startCueT=0;
+ if(openingTiming){
+  S.formationCueT=openingTiming.formationArrivalDelay;
+  S.seqT=Math.max(+S.seqT||0,openingTiming.firstPulseDelay);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,openingTiming.firstPulseDelay+.15);
+ }else if(usesRuntimeGalagaReferenceAudio()){
+  S.seqT=Math.max(+S.seqT||0,3.05);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
+ }
  c?.focus?.();
 }
 

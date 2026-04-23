@@ -1225,6 +1225,9 @@ function currentAudioOverrides(){
   audioTheme:sanitizeAudioThemeValue(cfg.audioTheme)
  };
 }
+function usesReferenceTimingModel(){
+ return typeof currentGamePackReferenceTiming==='function';
+}
 function usesRuntimeGalagaReferenceAudio(){
  return currentAudioOverrides().audioTheme==='galaga-reference-assets';
 }
@@ -1254,7 +1257,6 @@ function stopReferenceCueSet(names=[]){
  sfx.stopCueNames(names);
 }
 function holdReferenceGameplayCadence(seconds=0){
- if(!usesRuntimeGalagaReferenceAudio())return;
  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
 }
 function clearReferenceTransitionCueWindow(extra=[]){

@@ -203,8 +203,8 @@ function finalizeChallengeClear(){
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=1.45;
- if(usesRuntimeGalagaReferenceAudio()){
-  const challengeResultsTiming=typeof currentGamePackReferenceTiming==='function'
+ if(usesReferenceTimingModel()){
+  const challengeResultsTiming=usesReferenceTimingModel()
    ? currentGamePackReferenceTiming('challengeResults')
    : null;
   clearReferenceTransitionCueWindow();
