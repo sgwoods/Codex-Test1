@@ -19,12 +19,12 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
- const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
+ const usesReference=usesReferenceTimingModel()&&!S.attract;
  const openingTiming=usesReference&&S.stage===1?currentGamePackReferenceTiming('stage1Opening'):null;
- const transitionTiming=usesReference&&S.stage>1
-  ? currentGamePackReferenceTiming(S.transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
+ const transitionTiming=usesReference&&S.stage>1&&S.transitionMode==='challengeResult'
+  ? currentGamePackReferenceTiming('postChallengeStageEntry')
   : null;
- const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||transitionTiming?.firstEnemyArrivalDelay||0;
+ const baseEntryDelay=transitionTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
@@ -63,7 +63,7 @@ function spawnFormation(){
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout();
- const challengeTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function'
+ const challengeTiming=usesReferenceTimingModel()&&!S.attract
   ? currentGamePackReferenceTiming('challengeEntry')
   : null;
  const baseEntryDelay=challengeTiming?.firstEnemyArrivalDelay||0;
@@ -102,9 +102,9 @@ function spawnStage(){
  const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
- const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1
-  ? currentGamePackReferenceTiming(transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
+ const usesReference=usesReferenceTimingModel()&&!S.attract;
+ const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1&&transitionMode==='challengeResult'
+  ? currentGamePackReferenceTiming('postChallengeStageEntry')
   : null;
  S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
@@ -121,10 +121,10 @@ function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
- const challengeEntryTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+ const challengeEntryTiming=usesReferenceTimingModel()
   ? currentGamePackReferenceTiming('challengeEntry')
   : null;
- const challengeResultsTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+ const challengeResultsTiming=usesReferenceTimingModel()
   ? currentGamePackReferenceTiming('challengeResults')
   : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
@@ -147,9 +147,9 @@ function queueStageTransition(mode='normal'){
   challenge:!!S.challenge,
   enemies:S.e.filter(e=>e.hp>0).length
  });
- if(usesRuntimeGalagaReferenceAudio()){
+ if(usesReferenceTimingModel()){
   clearReferenceTransitionCueWindow();
- S.transitionCueKind=nextIsChallenge?1:0;
+  S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
    ? (nextIsChallenge
       ? Math.max(.55,S.nextStageT-(challengeResultsTiming?.nextChallengeCueLeadBeforeSpawn||1.42))
@@ -158,7 +158,7 @@ function queueStageTransition(mode='normal'){
       ? Math.max(.7,S.nextStageT-(challengeEntryTiming?.cueLeadBeforeSpawn||1.52))
       : Math.max(.55,S.nextStageT-1.18));
   holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?(challengeEntryTiming?.cadenceHoldAfterSpawn||1.1):(challengeResultsTiming?.cadenceHoldAfterSpawn||.9)));
- }else sfx.transition(nextIsChallenge?1:0);
+}else sfx.transition(nextIsChallenge?1:0);
 }
 
 function startSequence(mode,duration,title,subtitle=''){
