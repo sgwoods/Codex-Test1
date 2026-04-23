@@ -53,17 +53,19 @@ fidelity pass in these areas:
 
 The quality score and scorecard are now refreshed on the current forward line:
 
-- overall quality score: `7.5/10`
+- overall quality score: `8.3/10`
 - strongest category: combat responsiveness
 - weakest category: stage-1 opening timing fidelity
 
 These are still the release-shaping gaps:
 
 - stage-1 opening timing fidelity remains the weakest scored category
-- challenge-stage timing still needs the broader non-audio timing family
-  refreshed, even though cue timing is now much better
-- the refreshed quality score confirms that the biggest remaining release-shaping
-  gaps are stage-1 timing, challenge timing, and broader audio identity polish
+- broader audio identity polish still needs another deliberate pass even though
+  cue alignment is now green
+- movement conformance still sits in the mid-pack and is worth improving before
+  a serious public candidate
+- the refreshed quality score now shows challenge timing as a strength rather
+  than one of the main blocking gaps
 
 ## Proposed Beta Candidate Scope
 
@@ -71,6 +73,7 @@ The next hosted `/beta` candidate should include:
 
 - the current hosted `/dev` runtime line
 - the merged audio cue alignment improvements
+- the merged challenge timing cadence improvements
 - the session-timing fix for deterministic/harness runs
 - the reference-audio cooldown reset fix
 - refreshed release notes and quality scorecard
@@ -108,6 +111,11 @@ And for the release ceremony:
 4. write the candidate delta in release-facing terms
 5. promote hosted `/beta` only when the candidate is clearly better than the
    current hosted `/beta` and defensible as the next stable public candidate
+
+At this point, the next most valuable focused pass is:
+
+- stage-1 timing refinement around the convoy-pulse anchor
+- or movement conformance smoothing
 
 ## Decision Rule
 

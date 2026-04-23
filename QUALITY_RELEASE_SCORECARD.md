@@ -14,9 +14,9 @@ As of April 23, 2026:
 
 - local current line:
   - branch `codex/document-project-principles`
-  - quality score `7.5/10`
+  - quality score `8.3/10`
   - source:
-    - `reference-artifacts/analyses/quality-conformance/2026-04-23-e4732eb`
+    - `reference-artifacts/analyses/quality-conformance/2026-04-23-21b5d8e`
 - hosted `/dev`:
   - `1.2.3+build.470.sha.e4732eb`
   - built `Apr 23 2026, 3:15 PM EDT`
@@ -41,14 +41,14 @@ As of April 23, 2026:
 
 | Category | Current local line | Hosted `/dev` | Hosted `/beta` | Hosted `/production` | Reference gameplay |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Overall quality score | `7.5` | `~7.5` | stable baseline line | stable baseline line | `10` |
+| Overall quality score | `8.3` | `~8.3` | stable baseline line | stable baseline line | `10` |
 | Player movement conformance | `5.9` | `~5.9` | `4.6` | `4.6` | `10` |
 | Shot and hit responsiveness | `10.0` | `~10.0` | not yet lane-rescored | not yet lane-rescored | `10` |
-| Stage-1 opening timing fidelity | `2.1` | `~2.1` | `~1.0` | `~1.0` | `10` |
+| Stage-1 opening timing fidelity | `5.6` | `~5.6` | `~1.0` | `~1.0` | `10` |
 | Stage-1 opening geometry fidelity | `10.0` | `~10.0` | `10.0` | `10.0` | `10` |
 | Dive fairness and safety | `9.1` | `~9.1` | pre-expert-safety fix | pre-expert-safety fix | `10` |
 | Capture and rescue rule fidelity | `10.0` | `~10.0` | `10.0` | `10.0` | `10` |
-| Challenge-stage timing fidelity | `4.2` | `~4.2` | `~1.0` | `~1.0` | `10` |
+| Challenge-stage timing fidelity | `8.4` | `~8.4` | `~1.0` | `~1.0` | `10` |
 | Progression and persona depth | `8.8` | `~8.8` | `10.0` | `10.0` | `10` |
 | Audio identity and cue alignment | `5.6` | `~5.6` | shared gap, not lane-rescored | shared gap, not lane-rescored | `10` |
 | UI, shell, and graphics integrity | `9.2` | `~9.2` | stable live line | stable live line | `10` |
@@ -66,9 +66,14 @@ Current local line strengths:
 Current local line biggest gaps:
 
 - stage-1 timing fidelity
-- challenge-stage timing fidelity
 - audio identity and cue alignment
 - movement is only mid-pack and still worth smoothing, even after modest improvement over the shipped local baseline
+
+Most meaningful recent step forward:
+
+- challenge-stage timing fidelity is now in a much healthier place on the
+  forward line after the challenge timing cadence pass
+- that moved the rolled-up score from `7.5/10` to `8.3/10`
 
 ## Release Use
 
@@ -90,3 +95,5 @@ Current note:
   active fidelity program on the forward line
 - it now passes `9/9` on the current `/dev` line and is reflected in the
   refreshed `5.6/10` audio category score
+- the merged timing pass also lifted challenge-stage timing to `8.4/10` and
+  stage-1 timing to `5.6/10` on the current local line
