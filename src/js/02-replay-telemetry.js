@@ -14,6 +14,10 @@ function resetSession(reason='boot'){
  REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
  REC.t0=performance.now();
  recShotT=0;
+ if(typeof sfx!=='undefined'&&sfx){
+  if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips();
+  if(sfx.referenceCooldowns)sfx.referenceCooldowns=Object.create(null);
+ }
  if(RNG_SEED)REC.seed=RNG_SEED;
 }
 function logEvent(type,data={}){
