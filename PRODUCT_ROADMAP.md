@@ -45,6 +45,7 @@ Why this bundle:
 Scope:
 
 - further audio identity polish
+- serious player-ship movement refinement against real Galaga footage
 - continued Platinum/Aurora boundary cleanup
 - richer reference-video ingestion and event-log extraction
 - stronger persona annotation and eventual player-versus-persona scaffolding
@@ -53,6 +54,9 @@ Why this bundle:
 
 - it keeps the next public step focused on measurable fidelity and platform
   maturity rather than a rushed second-game launch
+- ship movement is still one of the clearest places where Aurora can feel less
+  authentic than the arcade reference when lateral motion reads as too jerky or
+  too fast
 
 ### Historical `1.2.1` Aurora Trust Fixes
 

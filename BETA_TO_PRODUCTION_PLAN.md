@@ -93,6 +93,8 @@ Current likely target:
 Focus:
 
 - stronger audio identity
+- ship-movement refinement that aligns more closely with real Galaga motion
+  instead of the current sometimes-jerky, sometimes-too-fast feel
 - continued Platinum/Aurora boundary cleanup
 - deeper reference-video ingestion and event-log extraction
 - better persona annotation and future player-versus-persona scaffolding

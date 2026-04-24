@@ -141,6 +141,9 @@ Practical standard:
   or even the narrower manual-control path both regressed movement conformance,
   so the next movement cycle should start from reference-trace extraction and
   tighter diagnostics rather than more blind constant tuning
+- next polish reminder: get much more serious about player-ship motion against
+  the real Galaga reference, because Aurora lateral movement still feels too
+  jerky and too fast at times
 
 See also:
 
@@ -476,6 +479,9 @@ The next `/beta` candidate should aim to be:
    - [tools/harness/reference-profiles/reference-video-event-log.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-video-event-log.json)
    - [tools/harness/reference-profiles/reference-visual-artifact-catalog.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-visual-artifact-catalog.json)
    to keep waveform analysis, labeled video windows, Aurora-like reference logs, and visual artifact catalogs part of the normal fidelity workflow
+7. use those preserved traces and labels to tighten player-ship movement until
+   it no longer reads as noticeably too jerky or too fast relative to the real
+   arcade footage
 
 ### Phase 4: Release Movement
 
