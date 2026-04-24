@@ -29,7 +29,7 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
@@ -1254,7 +1254,7 @@ function syncDeveloperToolsUi(){
  if(openViewerBtn)openViewerBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
- if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.hidden=1;
+ if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
 }
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();

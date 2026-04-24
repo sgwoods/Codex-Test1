@@ -41,6 +41,11 @@ const CHECKS = [
     script: 'check-dev-graphics-options.js'
   },
   {
+    id: 'production-developer-lock',
+    description: 'Production developer lock and Root backdoor',
+    script: 'check-production-developer-lock.js'
+  },
+  {
     id: 'attract-score-cycle',
     description: 'Attract/wait score cycling surface',
     script: 'check-attract-score-cycle.js'

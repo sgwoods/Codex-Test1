@@ -97,6 +97,7 @@
     "harness:check:audio-cue-slots": "node tools/harness/check-audio-cue-slots.js",
     "harness:check:audio-cue-alignment": "node tools/harness/check-audio-cue-alignment-correspondence.js",
     "harness:check:dev-graphics-options": "node tools/harness/check-dev-graphics-options.js",
+    "harness:check:production-developer-lock": "node tools/harness/check-production-developer-lock.js",
     "harness:check:extra-ship-awards": "node tools/harness/check-extra-ship-awards.js",
     "harness:check:late-run-ship-loss-soak": "node tools/harness/check-late-run-ship-loss-soak.js",
     "harness:check:runtime-loop-crash": "node tools/harness/check-runtime-loop-crash-capture.js",

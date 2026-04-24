@@ -10,7 +10,6 @@ function fail(message, payload){
 async function main(){
   const result = await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 24138, skipStart: true }, async ({ page }) => {
     const defaults = await page.evaluate(() => {
-      window.__galagaHarness__.setTest({ stage: 1, ships: 3, challenge: false, audioTheme: 'auto', graphicsTheme: 'auto', starfieldIntensity: 1, starfieldSpeed: 1 });
       window.__galagaHarness__.restartCurrentConfig();
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
     });
@@ -38,8 +37,10 @@ async function main(){
     return { defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
   });
 
-  if(result.defaults.visualAtmosphere?.backgroundMode !== 'classic-stars') fail('default graphics settings no longer preserve the stage 1 classic stars background', result);
-  if(result.defaults.renderDebug?.starfieldIntensityScale !== 1) fail('default graphics settings no longer resolve the reference starfield intensity', result);
+  if(result.defaults.audio?.audioTheme !== 'galaga-reference-assets') fail('default audio theme no longer resolves to Galaga reference assets', result);
+  if(result.defaults.visualAtmosphere?.id !== 'aurora-borealis') fail('default graphics settings no longer resolve the Aurora Borealis visual atmosphere', result);
+  if(result.defaults.visualAtmosphere?.backgroundMode !== 'aurora-borealis') fail('default graphics settings no longer preserve the Aurora Borealis background mode', result);
+  if(result.defaults.renderDebug?.starfieldIntensityScale !== 1.25) fail('default graphics settings no longer resolve the bright starfield intensity', result);
   if(result.defaults.renderDebug?.starfieldSpeedScale !== 1) fail('default graphics settings no longer resolve the reference starfield speed', result);
 
   if(result.vividAurora.visualAtmosphere?.id !== 'aurora-borealis') fail('graphics theme override did not switch the live visual atmosphere to Aurora Borealis', result);
