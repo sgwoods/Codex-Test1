@@ -1,7 +1,7 @@
 {
-  "targetVersion": "1.2.3-beta.1+build.484.sha.baa1726.beta",
-  "currentFocus": "Promote the current materially improved hosted beta to production from the approved artifact set, keeping release docs, committed analysis artifacts, and the Platinum-versus-application boundary review current as part of the gate.",
-  "strapline": "Aurora now has a real production candidate: stronger timing, stronger movement evidence, stronger audio correspondence, and a release package that is documented and committed rather than reconstructed from memory.",
+  "targetVersion": "1.2.3+build.489.sha.f6ba6c2",
+  "currentFocus": "Stabilize the newly refreshed 1.2.3 production line, keep the release docs and committed quality artifacts current, and begin the next polish cycle around movement fidelity, audio identity, and Platinum/application boundary cleanup.",
+  "strapline": "Aurora now ships its refreshed 1.2.3 production line with stronger timing, stronger movement evidence, stronger audio correspondence, and a release package that is documented and committed rather than reconstructed from memory.",
   "timeline": [
     {
       "id": "foundation",
@@ -40,16 +40,16 @@
       "summary": "The 1.2.3 patch shipped clearer wait-mode score rotation, leaderboard trust context, and lightweight score filtering without changing Platinum shell ownership or broad gameplay rules."
     },
     {
-      "id": "beta-candidate-484",
-      "title": "Current Beta Candidate",
+      "id": "beta-candidate-489",
+      "title": "1.2.3 Beta Refresh",
       "status": "done",
-      "summary": "Hosted `/beta` now runs the `baa1726` candidate line with refreshed timing, movement evidence, audio correspondence, and committed quality artifacts."
+      "summary": "Hosted `/beta` now runs the `f6ba6c2` candidate line with refreshed timing, movement evidence, audio correspondence, production-ready defaults, and committed quality artifacts."
     },
     {
       "id": "production-promotion",
-      "title": "Production Promotion",
-      "status": "planned",
-      "summary": "Approve the current beta, promote production from the approved artifact set, verify the public lane, and keep the synced docs and quality record current."
+      "title": "1.2.3 Production Refresh",
+      "status": "done",
+      "summary": "Hosted `/production` now runs the `f6ba6c2` release line with refreshed beta evidence, synced public project pages, and committed release-readiness documentation."
     },
     {
       "id": "platform-contract",
