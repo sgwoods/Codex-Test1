@@ -4,8 +4,8 @@
 
 - hosted `/dev` is now current with the active integration branch:
   - `1.2.3+build.470.sha.e4732eb`
-- hosted `/beta` remains on:
-  - `1.2.3-beta.1+build.388.sha.13c8421.beta`
+- hosted `/beta` is now current with the promoted forward candidate:
+  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
 - hosted `/production` remains on:
   - `1.2.3+build.388.sha.13c8421`
 - `Platinum` is now a real shipped host platform rather than an internal refactor story
@@ -20,14 +20,12 @@
 
 ## Active Workstreams
 
-### 1. Fidelity Improvement From The New `/dev` Baseline
+### 1. Production Readiness From The New `/beta` Baseline
 
-- improve the weakest quality-score categories first:
-  - stage-1 timing fidelity
-  - challenge-stage timing fidelity
-  - audio identity and cue alignment
-- use hosted `/dev` as the current formal integration base while this work
-  advances
+- prepare the current live beta for production promotion
+- keep documentation, analysis artifacts, and release evidence current
+- complete the approval and production-publish sequence from the approved beta
+  state
 
 ### 2. Documentation Hardening
 
@@ -63,11 +61,13 @@
 
 ## Immediate Priorities
 
-1. use the refreshed hosted `/dev` as the stable integration base
-2. improve stage-1 timing, challenge timing, and audio fidelity from that base
-3. keep hosted `/beta` and hosted `/production` stable until a real next candidate is assembled
-4. then shape the next hosted `/beta` deliberately from the improved `/dev` line
-5. deepen the second-application proof deliberately after the current Aurora fidelity cycle is in better shape
+1. use the current hosted `/beta` as the production candidate
+2. complete the beta-to-production documentation and approval pass
+3. promote hosted `/production` from the approved beta candidate
+4. then continue the next minor-cycle polish from the refreshed production and
+   `/dev` baselines
+5. deepen the second-application proof deliberately after the current Aurora
+   release is stabilized
 
 ## Release Direction
 
@@ -80,16 +80,16 @@
 
 ## Beta Planning
 
-- the next hosted `/beta` should be cut from the current forward `/dev` line,
-  not by advancing the old `13c8421` beta/prod line in place
-- the current `/dev` line now includes the audio cue alignment improvements and
-  the reference-audio session reset fix
-- the next `/beta` should follow one more focused broader timing/fidelity pass
-  plus a refreshed quality score and scorecard
+- the current hosted `/beta` has now been cut from the forward line
+- the next immediate release move is production promotion from that approved
+  beta candidate
+- the next beta after that should belong to the next minor-cycle candidate
+  family, not to the just-published current beta
 
 See also:
 
 - `/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md`
+- `/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md`
 
 ## Current Operating Plan
 

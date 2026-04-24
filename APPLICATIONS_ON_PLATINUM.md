@@ -104,6 +104,10 @@ of the platform.
 These should be treated as transitional, not as permission to blur the
 boundary again.
 
+The current code-review snapshot for this seam is also captured in:
+
+- `/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md`
+
 ## How Future Applications Should Arrive
 
 A new Platinum application should ideally arrive in stages:

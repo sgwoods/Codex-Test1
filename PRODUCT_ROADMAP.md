@@ -3,13 +3,17 @@
 ## Current Release Line
 
 - shipped public line:
-  - `1.2.0`
+  - `1.2.3`
 - release name:
-  - `Platinum Release 1`
+  - `Aurora score-surface polish patch`
+
+Current beta candidate:
+
+- `1.2.3-beta.1+build.484.sha.baa1726.beta`
 
 ## Where We Are
 
-The major platform milestone is now shipped.
+The first major platform milestone is now shipped.
 
 That means the roadmap is no longer centered on "can we separate Platinum from
 Aurora at all." It is centered on:
@@ -17,10 +21,40 @@ Aurora at all." It is centered on:
 - keeping the shipped platform credible
 - keeping Aurora stable as the first application on Platinum
 - preparing the smallest useful second-application proof
+- promoting the current materially improved beta to production
 
 ## Near-Term Roadmap
 
-### `1.2.1` Aurora Trust Fixes
+### Current Production Promotion
+
+Scope:
+
+- approve the current hosted beta candidate
+- promote it to hosted production from the approved artifact set
+- verify the public release surfaces and synced docs
+
+Why this bundle:
+
+- production is materially stale relative to beta
+- the current beta already carries the latest timing, movement, audio, and
+  release-discipline work
+- this closes the current release cycle cleanly before the next minor cycle
+
+### `1.3.0` Aurora And Platinum Minor
+
+Scope:
+
+- further audio identity polish
+- continued Platinum/Aurora boundary cleanup
+- richer reference-video ingestion and event-log extraction
+- stronger persona annotation and eventual player-versus-persona scaffolding
+
+Why this bundle:
+
+- it keeps the next public step focused on measurable fidelity and platform
+  maturity rather than a rushed second-game launch
+
+### Historical `1.2.1` Aurora Trust Fixes
 
 Scope:
 
@@ -34,7 +68,7 @@ Why this bundle:
 - all fit naturally into a focused patch line
 - none require reopening broad gameplay churn
 
-### `1.2.x` Documentation And Platform Discipline
+### Historical `1.2.x` Documentation And Platform Discipline
 
 Scope:
 
@@ -74,3 +108,5 @@ an immediate second public game release.
 - clearer storage and migration policy
 - cleaner platform/application naming residue cleanup
 - continued automation-first gating across hosted lanes and docs surfaces
+- same-control compliance across multiple shipped games
+- persona-opponent support and simulation-trained persona experimentation

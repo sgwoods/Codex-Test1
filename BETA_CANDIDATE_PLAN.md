@@ -1,24 +1,23 @@
 # Beta Candidate Plan
 
-This plan defines the next serious hosted `/beta` candidate after the hosted
-`/dev` refresh to `1.2.3+build.470.sha.e4732eb`.
+This document now records the beta candidate that has been promoted and the
+remaining work before that beta becomes production.
 
 ## Current Release Position
 
 - hosted `/production`
   - `1.2.3+build.388.sha.13c8421`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.388.sha.13c8421.beta`
+  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
 - hosted `/dev`
   - `1.2.3+build.470.sha.e4732eb`
-  - refreshed from the forward integration line on April 23, 2026
+  - still the active forward integration lane
 
 This means:
 
-- `/dev` is now materially ahead of both hosted `/beta` and hosted
-  `/production`
-- the next hosted `/beta` should come from the current forward line, not from
-  the older shipped beta/prod line
+- hosted `/beta` is now materially ahead of hosted `/production`
+- the promoted beta came from the current forward line rather than the older
+  shipped beta/prod line
 - the next serious milestone still looks like a `MINOR` release family, likely
   `1.3.0`
 
@@ -47,11 +46,12 @@ The audio work is especially important:
   category to a working `7.8/10`, which means audio identity is no longer one
   of the weakest release-shaping areas
 
-## What Still Needs Work Before Hosted `/beta`
+## What Still Needs Work Before Hosted `/production`
 
-We should not cut hosted `/beta` immediately after the `/dev` refresh.
+We have now cut hosted `/beta`.
 
-The branch is now closer to `/beta` than it was at the last `/dev` refresh.
+The remaining question is whether this beta should move to hosted
+`/production` soon.
 
 The new movement-analysis work matters here:
 
@@ -62,10 +62,9 @@ The new movement-analysis work matters here:
 - the direct movement rerun on the current line now scores `9.7/10` against
   those trace-backed targets, versus `8.6/10` for the shipped local baseline
 
-That means movement is no longer the clearest reason to delay `/beta`.
+That means movement is no longer the clearest reason to delay production.
 
-The main remaining improvement area before or immediately after the next
-`/beta` candidate is:
+The main remaining improvement area before or immediately after production is:
 
 1. audio identity polish beyond cue alignment
 
@@ -88,9 +87,9 @@ These are still the release-shaping gaps:
 - stage-1 opening timing is no longer one of the main blockers after the
   convoy-pulse refinement
 
-## Proposed Beta Candidate Scope
+## Shipped Beta Candidate Scope
 
-The next hosted `/beta` candidate should include:
+The live hosted `/beta` candidate includes:
 
 - the current hosted `/dev` runtime line
 - the merged audio cue alignment improvements
@@ -101,14 +100,15 @@ The next hosted `/beta` candidate should include:
 - the reference-audio cooldown reset fix
 - refreshed release notes and quality scorecard
 
-The next hosted `/beta` candidate should not be blocked by:
+The live hosted `/beta` candidate should not be blocked by:
 
 - the already-documented marginal `expert -> professional` ordering edge case
 - unrelated exploratory diagnostics that are not player-facing
 
-## Required Gate Set Before Hosted `/beta`
+## Required Gate Set Before Hosted `/production`
 
-Before promoting hosted `/beta`, the candidate should pass:
+Before promoting hosted `/production`, the candidate should still be able to
+point back to:
 
 - `npm run build`
 - `npm run harness:check:close-shot-hit`
@@ -125,24 +125,24 @@ And for the release ceremony:
 - build metadata and dashboard refreshed
 - hosted `/beta` publish verification
 - explicit `/beta` approval before any `/production` move
+- production publish preflight from the approved beta artifact set
 
 ## Immediate Next Steps
 
-1. refresh the release-facing candidate delta using the current movement and
-   quality artifacts
-2. do a final manual compare of the local candidate against hosted `/dev`
-3. refresh release notes and candidate summary docs
-4. promote hosted `/beta` when that package is staged and the trusted gates are
-   still green
-5. continue audio identity polish on top of the new `/beta` line if needed
+1. approve the current hosted `/beta`
+2. stage `dist/production` from that approved beta candidate
+3. rerun production preflight
+4. publish hosted `/production`
+5. continue audio identity polish on top of the new production baseline if
+   needed
 
 ## Decision Rule
 
-We should promote hosted `/beta` when all of the following are true:
+We should promote hosted `/production` when all of the following are true:
 
-- current hosted `/dev` feels stable
+- current hosted `/beta` still matches the approved candidate
 - cue timing and shell integrity remain green
 - the refreshed quality score supports the release story
-- the next candidate is clearly ahead of hosted `/beta` / `/production`
-- we can explain in a short paragraph what makes this candidate the right next
-  public release
+- the current beta is clearly ahead of the still-live hosted `/production`
+- we can explain in a short paragraph why the current beta is ready to become
+  the live public release

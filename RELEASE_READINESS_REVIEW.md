@@ -2,130 +2,149 @@
 
 ## Current Read
 
-`1.2.3 - Aurora score-surface polish patch` is currently live on hosted `/production`.
+Hosted `/beta` is now live on the forward Aurora line:
 
-There is no newer hosted `/beta` candidate under review right now.
+- hosted `/beta`
+  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
+  - verified live on April 24, 2026
+- hosted `/production`
+  - `1.2.3+build.388.sha.13c8421`
 
-The current post-release work is about keeping the live `1.2.3` line trustworthy, watching score-surface feedback in production, and choosing the next narrow Aurora moment-polish bundle without weakening the Platinum boundary.
-
-That means this document is now serving two jobs:
-
-1. record the current release-readiness posture of the shipped line
-2. record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted `/beta` and hosted `/production`
+That means Aurora is no longer in a pre-beta planning posture. It is now in a
+beta-to-production readiness posture.
 
 ## What Is Now True
 
-- `Platinum` is a real shipped platform
+- `Platinum` is a real shipped browser-arcade host platform
 - `Aurora Galactica` is the first shipped playable application on Platinum
-- hosted lanes exist for local `localhost`, hosted `/dev`, hosted `/beta`, and hosted `/production`
-- the current release ladder is proven end-to-end
-- the hosted documentation set now needs to be treated as part of the release surface rather than a nice-to-have side artifact
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are now clearly
+  separated in both code and docs
+- hosted `/beta` is materially ahead of hosted `/production`
+- the current beta candidate is backed by committed test and analysis artifacts,
+  not just local notes
 
-## Documentation Lesson From `1.2.0`
+## Current Beta Candidate
 
-The major miss in the original `1.2.0` promotion was not broad product failure.
+Current live beta:
 
-It was that the documentation pass was not strong enough or explicit enough.
+- label:
+  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
+- source commit:
+  - `baa1726`
+- release channel:
+  - `production beta`
 
-The correction is:
+Current quality position for that candidate:
 
-- make the Platinum guide a first-class hosted page
-- keep platform docs and application docs separate
-- require the hosted docs set in publish preflight
-- require a complete docs refresh for meaningful `x.y` releases before hosted `/production` promotion
+- overall quality score:
+  - `8.8/10`
+- strongest category:
+  - combat responsiveness
+- weakest category:
+  - audio identity and cue alignment at `6.1/10`
 
-## Current Documentation Contract
+## Evidence Supporting Production Consideration
 
-Hosted docs that should exist per lane:
+The current beta candidate is supported by these committed evidence sources:
+
+- quality rollup:
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
+- movement correspondence:
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65`
+- audio cue alignment:
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65`
+- audio identity comparison:
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
+- reference video alignment:
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
+
+The current candidate also has direct verification evidence:
+
+- `npm run build`
+- `npm run harness:check:close-shot-hit`
+- `npm run harness:check:persona-stage2-safety`
+- `npm run harness:check:platinum-pack-boot`
+- `npm run publish:beta`
+- hosted `/beta` live verification against `build-info.json`
+
+## Code Review And Boundary Read
+
+The current production decision should treat the code boundary as strong enough
+for Aurora production, but not "finished forever."
+
+The dedicated boundary review is captured in:
+
+- `/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md`
+
+Current read from that review:
+
+- shared service ownership is reasonably clean
+- pack selection and shell ownership are meaningfully separated from Aurora
+  rules
+- two non-blocking boundary seams remain visible:
+  - platform-owned storage keys still use some Aurora-shaped compatibility names
+  - the preview `Galaxy Guardians` pack still borrows Aurora-owned gameplay data
+    for shell-preview purposes
+
+These are not blockers for promoting the current Aurora beta to production, but
+they should remain explicit in the next release cycle.
+
+## Documentation Contract For Production
+
+Production promotion is not complete unless these are current and committed:
+
+- `/Users/steven/Documents/Codex-Test1/PLAN.md`
+- `/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+- `/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md`
+- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
+- `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+- `/Users/steven/Documents/Codex-Test1/QUALITY_RELEASE_SCORECARD.md`
+- `/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md`
+- `/Users/steven/Documents/Codex-Test1/release-dashboard.json`
+- `/Users/steven/Documents/Codex-Test1/release-notes.json`
+
+Hosted docs that should match the shipped production line:
 
 - `project-guide.html`
+- `application-guide.html`
 - `platinum-guide.html`
 - `player-guide.html`
 - `release-dashboard.html`
 - `release-notes.json`
 - `build-info.json`
 
-Core maintained source docs behind that hosted set:
+## Remaining Steps Before Production
 
-- `/Users/stevenwoods/Documents/Codex-Test1/README.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/PLAN.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/player-guide.json`
+The current beta is close to production, but these steps still remain:
 
-## Current Release Risk View
+1. explicitly approve hosted `/beta`
+2. stage `dist/production` from the approved beta candidate
+3. rerun production publish preflight against that staged production artifact
+4. publish hosted `/production`
+5. verify hosted `/production`
+6. verify the synced public project page
+7. capture the production release summary and the next-cycle plan in committed
+   docs
 
-Main remaining risks are now smaller and more operational than architectural:
+One direct reminder from current preflight:
 
-- late-run runtime exceptions that can still exist even though the loop now traps and surfaces them
-- keeping docs and hosted lanes aligned after source changes
-- strengthening the platform/application boundary as the second game becomes more real
-- making sure score-surface polish remains readable and trustworthy in live production
+- `npm run publish:check:production` currently fails until `dist/production` is
+  refreshed from the approved beta line
 
-## What `1.2.3` Contains
-`1.2.3` shipped as a narrow Aurora presentation patch, not a platform rewrite.
+That is expected at this stage and should be treated as a release-order check,
+not as a product regression.
 
-It bundles:
+## Recommendation
 
-- wait-mode high-score rotation in the clearer `Validated -> Local -> All -> demo` sequence
-- shorter wait/demo pacing to reach score presentation sooner
-- leaderboard row trust context via `BUILD/DATE`
-- a lightweight `After Date` filter in the Aurora leaderboard panel
+Recommendation: prepare a production push as soon as practical from the current
+live beta, provided we complete the approval and production-promotion sequence
+from the same committed source state.
 
-Why this patch fits the line:
+The strongest argument for doing that soon is:
 
-- narrow surface area
-- Aurora-only scope
-- meaningful trust/readability improvement
-- no intentional Platinum shell contract expansion
-
-## What `1.2.2` Shipped
-`1.2.2` shipped as a narrow runtime-stability patch with one additional Aurora-scoped gameplay rule improvement.
-
-It bundles:
-
-- runtime loop hardening so one-frame update or draw exceptions no longer silently dead-frame the run
-- visible export guidance when a runtime fault is trapped
-- a fix for restart-time async score-submit crashes
-- a targeted late-run ship-loss soak gate for beta-to-production promotion
-- score-based Aurora bonus-ship awards with configurable first and recurring thresholds in Developer Tools
-
-This is the right shape for the patch:
-
-- small surface area
-- high trust value
-- better diagnostics if the remaining underlying freeze trigger still exists
-- the bonus-ship rule stays Aurora-scoped rather than leaking into Platinum
-
-## What `1.2.1` Shipped
-`1.2.1` shipped as a narrow and Aurora-scoped fast-follow patch.
-
-It bundles:
-
-- dual-fighter surviving-ship correctness
-- challenge stages treated as bonus stages in visible numbering
-- suppression of carry/capture visuals under game-over/results
-- broader carry-state overlay coverage
-- clearer ownership of startup and wait-mode shell copy between Platinum and the hosted applications
-
-This was the intended shape: a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.
-
-## Recommended Rule Going Forward
-
-For every meaningful `x.y` release:
-
-1. finish the code candidate
-2. verify local `localhost`
-3. verify hosted `/dev`
-4. promote and verify hosted `/beta`
-5. complete the full documentation refresh
-6. approve hosted `/beta`
-7. only then publish hosted `/production`
+- hosted `/production` is stale relative to the current forward line
+- hosted `/beta` is now materially better documented and better evidenced
+- the main remaining gaps are quality-improvement opportunities for the next
+  cycle, not obvious correctness blockers for the current Aurora release

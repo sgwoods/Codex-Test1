@@ -11,28 +11,24 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of April 23, 2026:
+As of April 24, 2026:
 
-- hosted `/dev` now points at:
+- hosted `/dev` points at:
   - `1.2.3+build.470.sha.e4732eb`
-  - branch `codex/document-project-principles`
-  - commit `e4732eb`
-- hosted `/beta` remains:
-  - `1.2.3-beta.1+build.388.sha.13c8421.beta`
+- hosted `/beta` now points at:
+  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
 - hosted `/production` remains:
   - `1.2.3+build.388.sha.13c8421`
 
 This means:
 
-- the current working branch and hosted `/dev` are now aligned
-- we no longer need to spend the next cycle trying to catch `/dev` up to local
-- the next cycle can focus on improving gameplay and fidelity from a current
-  formal integration lane
-- the next release question is no longer "should we refresh `/dev`?" but
-  "what work should graduate from the current `/dev` line toward the next
-  defensible `/beta` candidate?"
+- the current working branch has now produced the live beta candidate
+- the next immediate release question is no longer "how do we get to beta?"
+- it is now "how do we move this approved beta to production cleanly?"
+- the next minor-cycle question after that is "what belongs in the `1.3.0`
+  family?"
 
-The forward line has also now absorbed the first audio cue alignment pass:
+The forward line and the current beta candidate now include:
 
 - dedicated audio cue correspondence is green at `9/9`
 - challenge entry and post-challenge cue timing are effectively on target
