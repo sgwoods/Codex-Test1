@@ -30,7 +30,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -47,6 +47,10 @@ const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
+const INITIAL_BUILD_CHANNEL='{{BUILD_CHANNEL}}';
+const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
+const ROOT_UNLOCK_CODE='n00b';
+let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
@@ -1186,22 +1190,39 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
  challenge:false,
- audioTheme:'auto',
- graphicsTheme:'auto',
- starfieldIntensity:1,
+ audioTheme:'galaga-reference-assets',
+ graphicsTheme:'aurora-borealis',
+ starfieldIntensity:1.25,
  starfieldSpeed:1
 });
 let testCfgCache=null;
+function productionRootModeEnabled(){
+ return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
+}
+function productionStartStateLocked(){
+ return PRODUCTION_RELEASE_LANE&&!productionRootModeEnabled();
+}
+function effectiveStartStateCfg(cfg){
+ const base=Object.assign({},cfg||DEFAULT_TEST_CFG);
+ if(!productionStartStateLocked())return base;
+ return Object.assign(base,{
+  stage:DEFAULT_TEST_CFG.stage,
+  ships:DEFAULT_TEST_CFG.ships,
+  extendFirst:DEFAULT_TEST_CFG.extendFirst,
+  extendRecurring:DEFAULT_TEST_CFG.extendRecurring,
+  challenge:DEFAULT_TEST_CFG.challenge
+ });
+}
 function sanitizeAudioThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
- return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:'auto';
+ return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:DEFAULT_TEST_CFG.audioTheme;
 }
 function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
  if(next==='auto')return 'auto';
  if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
  const resolved=currentGamePackAtmosphereTheme(next);
- return resolved?.id===next?next:'auto';
+ return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
 }
 function sanitizeStarfieldMultiplier(value,fallback=1){
  const next=+value;
@@ -1209,15 +1230,31 @@ function sanitizeStarfieldMultiplier(value,fallback=1){
  return Math.round(cl(next,.5,1.8)*100)/100;
 }
 function applyTestCfgToControls(cfg){
- if(testStage)testStage.value=cfg.stage;
- if(testShips)testShips.value=cfg.ships;
- if(testExtendFirst)testExtendFirst.value=cfg.extendFirst;
- if(testExtendRecurring)testExtendRecurring.value=cfg.extendRecurring;
- if(testChallenge)testChallenge.checked=cfg.challenge;
+ const startCfg=effectiveStartStateCfg(cfg);
+ if(testStage)testStage.value=startCfg.stage;
+ if(testShips)testShips.value=startCfg.ships;
+ if(testExtendFirst)testExtendFirst.value=startCfg.extendFirst;
+ if(testExtendRecurring)testExtendRecurring.value=startCfg.extendRecurring;
+ if(testChallenge)testChallenge.checked=startCfg.challenge;
  if(audioTheme)audioTheme.value=cfg.audioTheme;
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
+}
+function syncDeveloperToolsUi(){
+ const locked=productionStartStateLocked();
+ if(rootModeRow)rootModeRow.hidden=!PRODUCTION_RELEASE_LANE;
+ if(rootModeStatus)rootModeStatus.textContent=locked
+  ? 'Start-state controls locked to shipped defaults.'
+  : 'Root mode active. Start-state controls restored.';
+ if(testPanel)testPanel.classList.toggle('locked',locked);
+ for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
+  if(el)el.disabled=locked;
+ }
+ if(openViewerBtn)openViewerBtn.hidden=PRODUCTION_RELEASE_LANE;
+ if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
+ if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
+ if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.hidden=1;
 }
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();
@@ -1326,18 +1363,18 @@ function loadTestCfg(){
  if(testCfgCache)return Object.assign({},testCfgCache);
  try{
   const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
-  const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:20000;
-  const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:70000;
+  const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:DEFAULT_TEST_CFG.extendFirst;
+  const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:DEFAULT_TEST_CFG.extendRecurring;
   testCfgCache={
-   stage:cl(+raw.stage||1,1,99)|0,
-   ships:cl(+raw.ships||3,1,9)|0,
+   stage:cl(+raw.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+   ships:cl(+raw.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
    extendFirst,
    extendRecurring,
    challenge:!!raw.challenge,
-   audioTheme:sanitizeAudioThemeValue(raw.audioTheme),
-   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme),
-   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,1),
-   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,1)
+   audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
+   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
+   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
+   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
   };
  }catch{
   testCfgCache=Object.assign({},DEFAULT_TEST_CFG);
@@ -1345,19 +1382,29 @@ function loadTestCfg(){
  return Object.assign({},testCfgCache);
 }
 function saveTestCfg(){
+ const startCfg=productionStartStateLocked()
+  ? DEFAULT_TEST_CFG
+  : {
+    stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
+    ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
+    extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
+    extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
+    challenge:!!testChallenge.checked
+   };
  const cfg={
-  stage:cl(+testStage.value||1,1,99)|0,
-  ships:cl(+testShips.value||3,1,9)|0,
-  extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
-  extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
-  challenge:!!testChallenge.checked,
-  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||'auto'),
-  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||'auto'),
-  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,1),
-  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,1)
+  stage:startCfg.stage,
+  ships:startCfg.ships,
+  extendFirst:startCfg.extendFirst,
+  extendRecurring:startCfg.extendRecurring,
+  challenge:startCfg.challenge,
+  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme),
+  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
+  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
+  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,DEFAULT_TEST_CFG.starfieldSpeed)
  };
  testCfgCache=cfg;
  applyTestCfgToControls(cfg);
+ syncDeveloperToolsUi();
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
  if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(cfg.audioTheme);
  return Object.assign({},cfg);
@@ -1371,6 +1418,7 @@ function syncSettingsUi(){
  if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
+ syncDeveloperToolsUi();
  syncAudioDebugUi();
 }
 function syncAudioDebugUi(){
@@ -1775,6 +1823,12 @@ recordBtn.addEventListener('click',()=>{
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
+if(rootMode)rootMode.addEventListener('input',()=>{
+ developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;
+ testCfgCache=null;
+ applyTestCfgToControls(loadTestCfg());
+ syncDeveloperToolsUi();
+});
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());

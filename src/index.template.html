@@ -89,7 +89,7 @@
             <option value="auto">Auto</option>
             <option value="aurora-application">Aurora Application Mix</option>
             <option value="galaga-original-reference">Galaga Synth Approximation</option>
-            <option value="galaga-reference-assets">Galaga Reference Audio</option>
+            <option value="galaga-reference-assets" selected>Galaga Reference Audio</option>
           </select>
         </div>
         <div class="settingsField">
@@ -98,7 +98,7 @@
             <option value="auto">Auto</option>
             <option value="classic-arcade">Classic Arcade</option>
             <option value="aurora-hint">Aurora Hint</option>
-            <option value="aurora-borealis">Aurora Borealis</option>
+            <option value="aurora-borealis" selected>Aurora Borealis</option>
             <option value="aurora-crown">Aurora Crown</option>
           </select>
         </div>
@@ -106,8 +106,8 @@
           <label for="graphicsStarfieldIntensity">Starfield Intensity</label>
           <select id="graphicsStarfieldIntensity">
             <option value="0.75">Soft</option>
-            <option value="1" selected>Reference</option>
-            <option value="1.25">Bright</option>
+            <option value="1">Reference</option>
+            <option value="1.25" selected>Bright</option>
             <option value="1.5">Vivid</option>
           </select>
         </div>
@@ -125,6 +125,12 @@
     </div>
     <div id="testPanel" class="settingsSection">
       <h4>Developer Start State</h4>
+      <div id="rootModeRow" class="settingsField settingsFieldCompact" hidden>
+        <label for="rootMode">Root</label>
+        <input id="rootMode" type="text" value="" autocomplete="off" autocapitalize="off" spellcheck="false" />
+        <div id="rootModeHint">Production keeps start-state and test controls locked unless Root mode is enabled.</div>
+        <div id="rootModeStatus">Start-state controls locked to shipped defaults.</div>
+      </div>
       <div class="settingsFieldGrid">
         <div class="settingsField settingsFieldCompact">
           <label for="testStage">Start Stage</label>

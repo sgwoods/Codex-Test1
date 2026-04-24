@@ -162,6 +162,14 @@ mask:
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
 #testPanel input{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
 #testStage,#testShips{max-width:240px}
+#rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
+#rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
+#rootModeHint{color:#9fd0af}
+#rootModeStatus{color:#d8ffe4}
+#testPanel.locked .settingsFieldGrid,
+#testPanel.locked #testRow,
+#testPanel.locked #testHint{opacity:.52}
+#testPanel.locked input:disabled{cursor:not-allowed}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint,.settingsHint{font-size:11px;line-height:1.25}
