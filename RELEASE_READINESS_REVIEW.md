@@ -2,16 +2,19 @@
 
 ## Current Read
 
-Hosted `/beta` is now live on the forward Aurora line:
+Aurora `1.2.3` is the release currently live on hosted `/production`.
 
-- hosted `/beta`
-  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
-  - verified live on April 24, 2026
 - hosted `/production`
-  - `1.2.3+build.388.sha.13c8421`
+  - current live label: `1.2.3+build.388.sha.13c8421`
+  - current live version: `1.2.3`
+- hosted `/beta`
+  - current live label: `1.2.3-beta.1+build.488.sha.b06cbb2.beta`
+  - verified live on April 24, 2026
+- production candidate staged from approved beta
+  - target label: `1.2.3+build.488.sha.b06cbb2`
 
-That means Aurora is no longer in a pre-beta planning posture. It is now in a
-beta-to-production readiness posture.
+That means Aurora is in an active beta-to-production release posture, with a
+newer `1.2.3` production build staged from the current approved beta line.
 
 ## What Is Now True
 
@@ -28,9 +31,9 @@ beta-to-production readiness posture.
 Current live beta:
 
 - label:
-  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
+  - `1.2.3-beta.1+build.488.sha.b06cbb2.beta`
 - source commit:
-  - `baa1726`
+  - `b06cbb2`
 - release channel:
   - `production beta`
 
@@ -138,9 +141,9 @@ not as a product regression.
 
 ## Recommendation
 
-Recommendation: prepare a production push as soon as practical from the current
-live beta, provided we complete the approval and production-promotion sequence
-from the same committed source state.
+Recommendation: complete the production push as soon as practical from the
+current live beta, provided we complete the approval and production-promotion
+sequence from the same committed source state.
 
 The strongest argument for doing that soon is:
 
