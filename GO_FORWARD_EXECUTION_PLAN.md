@@ -194,6 +194,10 @@ The rule is:
 
 - no bug fix should disappear into code history without a corresponding test or
   a documented reason it is still manual
+- movement tuning now follows the same principle:
+  - start from [MOVEMENT_REFERENCE_TRACE_PLAN.md](/Users/steven/Documents/Codex-Test1/MOVEMENT_REFERENCE_TRACE_PLAN.md)
+  - use [tools/harness/reference-profiles/player-movement-reference-traces.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/player-movement-reference-traces.json)
+  - avoid further blind movement-constant tuning before trace-backed evidence exists
 
 ### 3. Keep Change Scope Small
 
@@ -443,6 +447,10 @@ The next `/beta` candidate should aim to be:
    - reference vs candidate
    - shipped baseline vs candidate
    - forward line vs recovered work
+5. maintain:
+   - [REFERENCE_MEDIA_INVENTORY.md](/Users/steven/Documents/Codex-Test1/REFERENCE_MEDIA_INVENTORY.md)
+   - [ANALYSIS_ROADMAP.md](/Users/steven/Documents/Codex-Test1/ANALYSIS_ROADMAP.md)
+   as the persistent index of what evidence already exists and what analysis should be attempted next
 
 ### Phase 4: Release Movement
 
