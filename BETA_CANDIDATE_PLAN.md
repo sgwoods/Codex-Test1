@@ -40,6 +40,8 @@ The audio work is especially important:
 - challenge result and next-stage cue timing is effectively on target
 - stage-1 pulse is now scored from `formationArrival`, which is the better
   runtime anchor for current Aurora reference-audio behavior
+- the broader stage-1 opening correspondence report is now `4/4` green after
+  the convoy-pulse anchor refinement
 
 ## What Still Needs Work Before Hosted `/beta`
 
@@ -48,24 +50,25 @@ We should not cut hosted `/beta` immediately after the `/dev` refresh.
 The next `/beta` candidate should first include at least one more focused
 fidelity pass in these areas:
 
-1. broader stage-1 timing fidelity
-2. broader challenge-stage timing fidelity
+1. audio identity polish beyond cue alignment
+2. movement conformance smoothing
 
 The quality score and scorecard are now refreshed on the current forward line:
 
-- overall quality score: `8.3/10`
+- overall quality score: `8.5/10`
 - strongest category: combat responsiveness
-- weakest category: stage-1 opening timing fidelity
+- weakest category: movement
 
 These are still the release-shaping gaps:
 
-- stage-1 opening timing fidelity remains the weakest scored category
+- movement is now the weakest scored category and still worth improving before
+  a serious public candidate
 - broader audio identity polish still needs another deliberate pass even though
   cue alignment is now green
-- movement conformance still sits in the mid-pack and is worth improving before
-  a serious public candidate
 - the refreshed quality score now shows challenge timing as a strength rather
   than one of the main blocking gaps
+- stage-1 opening timing is no longer one of the main blockers after the
+  convoy-pulse refinement
 
 ## Proposed Beta Candidate Scope
 
@@ -114,7 +117,7 @@ And for the release ceremony:
 
 At this point, the next most valuable focused pass is:
 
-- stage-1 timing refinement around the convoy-pulse anchor
+- audio identity polish beyond cue alignment
 - or movement conformance smoothing
 
 ## Decision Rule
