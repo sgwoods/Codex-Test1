@@ -1,0 +1,55 @@
+{
+  "id": "reference-visual-artifact-catalog",
+  "title": "Reference Visual Artifact Catalog",
+  "purpose": "Define the core image and board-state artifacts that should be preserved and labeled when analyzing gameplay footage for Aurora fidelity work.",
+  "artifactFamilies": [
+    {
+      "id": "player-ship",
+      "examples": [
+        "neutral ship frame",
+        "moving-left frame",
+        "moving-right frame",
+        "ship while firing"
+      ]
+    },
+    {
+      "id": "core-aliens",
+      "examples": [
+        "small enemy family close crop",
+        "escort / red alien close crop",
+        "boss / flagship close crop"
+      ]
+    },
+    {
+      "id": "formation-and-board",
+      "examples": [
+        "opening formation spacing",
+        "challenge group layout",
+        "boss and escort attack setup",
+        "capture beam board state"
+      ]
+    },
+    {
+      "id": "presentation",
+      "examples": [
+        "challenge title screen",
+        "results screen",
+        "perfect presentation",
+        "reserve ships drawer",
+        "HUD and score framing"
+      ]
+    }
+  ],
+  "requiredFields": [
+    "artifactId",
+    "artifactFamily",
+    "sourceWindowId",
+    "t",
+    "description"
+  ],
+  "optionalFields": [
+    "boundingBox",
+    "tags",
+    "notes"
+  ]
+}

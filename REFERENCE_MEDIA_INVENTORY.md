@@ -53,6 +53,8 @@ These are the most important missing reference structures, not missing media fil
 2. Later-stage cadence trace families beyond the current Stage 1 and challenge emphasis.
 3. Visual cadence traces linking board motion to cue and stage-flow targets.
 4. A stronger Galaxian sibling timing library to match the current Aurora / Galaga baseline maturity.
+5. Reference-side event logs that align preserved video timestamps with Aurora-like event families.
+6. A durable labeled catalog of core ship/enemy/presentation image artifacts for comparison and documentation.
 
 ## Working Rule
 

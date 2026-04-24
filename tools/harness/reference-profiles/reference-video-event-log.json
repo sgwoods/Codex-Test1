@@ -1,0 +1,58 @@
+{
+  "id": "reference-video-event-log",
+  "title": "Reference Video Event Log Schema",
+  "purpose": "Define the durable event families and fields used to convert preserved gameplay footage into log-like artifacts that can be compared with Aurora harness logs.",
+  "requiredFields": [
+    "eventId",
+    "eventFamily",
+    "t",
+    "confidence",
+    "sourceWindowId"
+  ],
+  "optionalFields": [
+    "tEnd",
+    "audioCueId",
+    "visualArtifactIds",
+    "notes",
+    "tags"
+  ],
+  "eventFamilies": [
+    "game_start",
+    "formation_arrival",
+    "stage_pulse",
+    "enemy_dive_start",
+    "enemy_lower_field",
+    "player_shot",
+    "enemy_hit",
+    "boss_hit",
+    "boss_kill",
+    "player_loss",
+    "challenge_transition",
+    "challenge_spawn",
+    "challenge_results",
+    "challenge_perfect",
+    "stage_transition",
+    "capture_beam",
+    "capture_success",
+    "rescue_join"
+  ],
+  "confidenceLevels": [
+    "high",
+    "medium",
+    "low"
+  ],
+  "firstPriorityWindows": [
+    {
+      "id": "stage1-opening-cadence",
+      "goal": "Map stage-opening event sequence against the existing timing library."
+    },
+    {
+      "id": "movement-opening-window",
+      "goal": "Map movement corrections, reversals, and firing windows for the next movement conformance pass."
+    },
+    {
+      "id": "challenge-entry-window",
+      "goal": "Map challenge intro and spawn cadence against Aurora's current challenge timing checks."
+    }
+  ]
+}

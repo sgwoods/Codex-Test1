@@ -107,6 +107,17 @@ Current movement conformance is useful but still abstract. The next step is to t
 
 This is now the highest-value movement-analysis extension because blind constant tuning already regressed conformance twice.
 
+### 1b. Reference Video Event Logs
+
+We should convert the most important preserved gameplay windows into durable, Aurora-like reference logs with:
+
+- event families
+- aligned timestamps
+- cue labels where audio matters
+- links to extracted visual artifacts
+
+This is the missing bridge between preserved video and Aurora harness logs.
+
 ### 2. Later-Stage Trace Families
 
 We should expand beyond stage-1 and challenge timing into reusable trace families for:
@@ -137,6 +148,17 @@ We should extract a small set of visual cadence traces from preserved footage fo
 - challenge-group spacing and sweep
 
 This will strengthen both movement and stage-flow work by linking timing to visible board rhythm.
+
+### 4b. Visual Artifact Catalogs
+
+We should also preserve labeled image artifacts for:
+
+- core enemy families
+- player ship movement states
+- boss and escort windows
+- challenge/result presentation states
+
+These support docs, release notes, and future automated comparisons.
 
 ### 5. Galaxian Sibling Reference Library
 

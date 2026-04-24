@@ -257,8 +257,10 @@ Preferred artifact outputs:
 
 - timing reports
 - event-family libraries
+- reference video event logs
 - scenario logs
 - contact sheets
+- labeled image crops
 - captured clips
 - cue matrices
 - waveforms
@@ -451,6 +453,10 @@ The next `/beta` candidate should aim to be:
    - [REFERENCE_MEDIA_INVENTORY.md](/Users/steven/Documents/Codex-Test1/REFERENCE_MEDIA_INVENTORY.md)
    - [ANALYSIS_ROADMAP.md](/Users/steven/Documents/Codex-Test1/ANALYSIS_ROADMAP.md)
    as the persistent index of what evidence already exists and what analysis should be attempted next
+6. use [VIDEO_ALIGNMENT_PROGRAM.md](/Users/steven/Documents/Codex-Test1/VIDEO_ALIGNMENT_PROGRAM.md) plus:
+   - [tools/harness/reference-profiles/reference-video-event-log.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-video-event-log.json)
+   - [tools/harness/reference-profiles/reference-visual-artifact-catalog.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-visual-artifact-catalog.json)
+   to keep waveform analysis, labeled video windows, Aurora-like reference logs, and visual artifact catalogs part of the normal fidelity workflow
 
 ### Phase 4: Release Movement
 
