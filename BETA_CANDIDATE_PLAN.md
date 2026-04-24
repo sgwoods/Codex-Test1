@@ -32,6 +32,7 @@ These areas are now in much better shape on the forward line:
 - release and machine-setup documentation
 - quality score model and release scorecard
 - audio cue correspondence
+- reference-video alignment scaffolding for trace-backed movement work
 
 The audio work is especially important:
 
@@ -50,25 +51,38 @@ The audio work is especially important:
 
 We should not cut hosted `/beta` immediately after the `/dev` refresh.
 
-The next `/beta` candidate should first include at least one more focused
-fidelity pass in these areas:
+The branch is now closer to `/beta` than it was at the last `/dev` refresh.
+
+The new movement-analysis work matters here:
+
+- the repo now includes a first committed stage-opening reference alignment
+  window
+- movement targets are no longer purely provisional; they are now tied to
+  that opening-window artifact set
+- the direct movement rerun on the current line now scores `9.7/10` against
+  those trace-backed targets, versus `8.6/10` for the shipped local baseline
+
+That means movement is no longer the clearest reason to delay `/beta`.
+
+The main remaining improvement area before or immediately after the next
+`/beta` candidate is:
 
 1. audio identity polish beyond cue alignment
-2. movement conformance smoothing
 
 The quality score and scorecard are now refreshed on the current forward line:
 
-- overall quality score: `8.5/10`
-- working next score after refreshed audio comparison: `8.7/10`
+- overall quality score: `8.8/10`
 - strongest category: combat responsiveness
-- weakest category: movement
+- weakest category in the bundled report: audio
 
 These are still the release-shaping gaps:
 
-- movement is now the weakest scored category and still worth improving before
-  a serious public candidate
-- broader audio identity polish can continue, but it is no longer the clearest
-  blocker after the refreshed comparison evidence
+- broader audio identity polish should continue, but it no longer blocks a
+  serious public candidate by itself
+- the bundled quality report still reads audio as the weakest current category
+  at `6.1/10`
+- movement now reads as `8.4/10` in the refreshed bundled score, which is a
+  material improvement over the older provisional movement read
 - the refreshed quality score now shows challenge timing as a strength rather
   than one of the main blocking gaps
 - stage-1 opening timing is no longer one of the main blockers after the
@@ -81,6 +95,8 @@ The next hosted `/beta` candidate should include:
 - the current hosted `/dev` runtime line
 - the merged audio cue alignment improvements
 - the merged challenge timing cadence improvements
+- the committed reference-video alignment pass and trace-backed movement
+  evidence
 - the session-timing fix for deterministic/harness runs
 - the reference-audio cooldown reset fix
 - refreshed release notes and quality scorecard
@@ -112,18 +128,13 @@ And for the release ceremony:
 
 ## Immediate Next Steps
 
-1. do one focused broader timing/fidelity pass beyond cue alignment
-2. rerun the trusted gate set
-3. refresh the release-facing candidate delta in quality-score terms
-4. write the candidate delta in release-facing terms
-5. promote hosted `/beta` only when the candidate is clearly better than the
-   current hosted `/beta` and defensible as the next stable public candidate
-
-At this point, the next most valuable focused pass is:
-
-- movement conformance smoothing
-- then another narrower audio identity polish pass only if the refreshed score
-  stops moving
+1. refresh the release-facing candidate delta using the current movement and
+   quality artifacts
+2. do a final manual compare of the local candidate against hosted `/dev`
+3. refresh release notes and candidate summary docs
+4. promote hosted `/beta` when that package is staged and the trusted gates are
+   still green
+5. continue audio identity polish on top of the new `/beta` line if needed
 
 ## Decision Rule
 

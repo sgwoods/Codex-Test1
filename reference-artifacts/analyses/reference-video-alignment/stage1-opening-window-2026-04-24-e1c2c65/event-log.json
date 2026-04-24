@@ -1,0 +1,54 @@
+{
+  "id": "stage1-opening-window",
+  "generatedAt": "2026-04-24T23:59:00Z",
+  "sourceWindowId": "stage1-opening-window",
+  "sourceFamilies": [
+    "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+    "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json",
+    "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md"
+  ],
+  "events": [
+    {
+      "eventId": "opening.game_start",
+      "eventFamily": "game_start",
+      "t": 0,
+      "confidence": "high",
+      "notes": "Start phrase anchor from the Galaga reference timing library."
+    },
+    {
+      "eventId": "opening.formation_arrival",
+      "eventFamily": "formation_arrival",
+      "t": 4.18,
+      "confidence": "high",
+      "notes": "Formation-arrival anchor from the opening-sequence event family."
+    },
+    {
+      "eventId": "opening.first_visible_aliens",
+      "eventFamily": "enemy_dive_start",
+      "t": 5.35,
+      "confidence": "medium",
+      "notes": "Used here as a visible opening-arrival anchor for the first movement-response window."
+    },
+    {
+      "eventId": "opening.first_convoy_pulse",
+      "eventFamily": "stage_pulse",
+      "t": 6.15,
+      "confidence": "high",
+      "notes": "First convoy pulse after the game-start phrase."
+    },
+    {
+      "eventId": "opening.first_dive_commitment",
+      "eventFamily": "enemy_dive_start",
+      "t": 8.2,
+      "confidence": "high",
+      "notes": "First dive commitment anchor from the formation-arrival-and-convoy event family."
+    },
+    {
+      "eventId": "opening.first_lower_field_cross",
+      "eventFamily": "enemy_lower_field",
+      "t": 9.35,
+      "confidence": "high",
+      "notes": "Lower-field crossing anchor from the current timing library."
+    }
+  ]
+}

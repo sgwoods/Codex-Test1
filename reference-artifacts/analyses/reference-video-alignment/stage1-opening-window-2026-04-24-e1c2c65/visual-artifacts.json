@@ -1,0 +1,55 @@
+{
+  "id": "stage1-opening-visual-artifacts",
+  "generatedAt": "2026-04-24T23:59:00Z",
+  "sourceWindowId": "stage1-opening-window",
+  "artifacts": [
+    {
+      "artifactId": "opening.board.00m12s",
+      "artifactFamily": "formation-and-board",
+      "t": 12,
+      "description": "Early score/title-state board useful for framing, text, and starfield contrast.",
+      "source": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+      "tags": [
+        "presentation",
+        "opening",
+        "starfield"
+      ]
+    },
+    {
+      "artifactId": "opening.board.05m00s",
+      "artifactFamily": "formation-and-board",
+      "t": 300,
+      "description": "Sparse live gameplay board useful for ship readability and movement against a lightly populated field.",
+      "source": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png",
+      "tags": [
+        "movement",
+        "ship",
+        "gameplay"
+      ]
+    },
+    {
+      "artifactId": "opening.board.10m00s",
+      "artifactFamily": "formation-and-board",
+      "t": 600,
+      "description": "Fuller active board state useful for core alien identity extraction and density comparison.",
+      "source": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+      "tags": [
+        "core-aliens",
+        "density",
+        "board-state"
+      ]
+    },
+    {
+      "artifactId": "opening.presentation.20m00s",
+      "artifactFamily": "presentation",
+      "t": 1200,
+      "description": "Results-style framing useful for HUD and text treatment comparison.",
+      "source": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png",
+      "tags": [
+        "presentation",
+        "hud",
+        "results"
+      ]
+    }
+  ]
+}

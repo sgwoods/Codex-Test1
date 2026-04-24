@@ -141,6 +141,10 @@ Practical standard:
 - after refreshing the audio theme comparison, movement smoothing now looks like
   the clearest next beta-shaping pass, with audio identity no longer one of the
   weakest categories
+- first-pass movement smoothing attempts that changed the shared player physics
+  or even the narrower manual-control path both regressed movement conformance,
+  so the next movement cycle should start from reference-trace extraction and
+  tighter diagnostics rather than more blind constant tuning
 
 See also:
 
@@ -190,6 +194,10 @@ The rule is:
 
 - no bug fix should disappear into code history without a corresponding test or
   a documented reason it is still manual
+- movement tuning now follows the same principle:
+  - start from [MOVEMENT_REFERENCE_TRACE_PLAN.md](/Users/steven/Documents/Codex-Test1/MOVEMENT_REFERENCE_TRACE_PLAN.md)
+  - use [tools/harness/reference-profiles/player-movement-reference-traces.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/player-movement-reference-traces.json)
+  - avoid further blind movement-constant tuning before trace-backed evidence exists
 
 ### 3. Keep Change Scope Small
 
@@ -249,8 +257,10 @@ Preferred artifact outputs:
 
 - timing reports
 - event-family libraries
+- reference video event logs
 - scenario logs
 - contact sheets
+- labeled image crops
 - captured clips
 - cue matrices
 - waveforms
@@ -278,6 +288,19 @@ The goal is not immediate implementation.
 
 The goal is to build the same kind of durable reference base we now expect for
 Aurora.
+
+Longer-term platform goal:
+
+- ingest a second classic fixed-screen shooter reference lineage with minimal
+  user intervention once the source footage, manuals, and comparative
+  artifacts are in place
+- use those artifacts to:
+  - analyze the game in all major aspects
+  - propose the Platinum extension points required to host it cleanly
+  - generate and refine a playable pack iteratively rather than by starting
+    from an empty design pass
+- preserve same-control compliance across hosted games so the player can move
+  between Platinum experiences without relearning the basic control contract
 
 ### Variation Rule
 
@@ -311,6 +334,16 @@ Useful evidence sources:
 - stage metrics
 - score flow
 - challenge outcomes
+
+Longer-term persona goal:
+
+- annotate gameplay and player actions richly enough that personas can be used
+  for more than passive regression testing
+- support a viable `Player 2`-style experience where a human player can
+  compete against curated persona play styles
+- eventually support a persona that can learn by playing through simulation,
+  with its behavior evaluated against the same fidelity, fairness, and
+  progression evidence we already use for Aurora
 
 Current active finding:
 
@@ -439,6 +472,14 @@ The next `/beta` candidate should aim to be:
    - reference vs candidate
    - shipped baseline vs candidate
    - forward line vs recovered work
+5. maintain:
+   - [REFERENCE_MEDIA_INVENTORY.md](/Users/steven/Documents/Codex-Test1/REFERENCE_MEDIA_INVENTORY.md)
+   - [ANALYSIS_ROADMAP.md](/Users/steven/Documents/Codex-Test1/ANALYSIS_ROADMAP.md)
+   as the persistent index of what evidence already exists and what analysis should be attempted next
+6. use [VIDEO_ALIGNMENT_PROGRAM.md](/Users/steven/Documents/Codex-Test1/VIDEO_ALIGNMENT_PROGRAM.md) plus:
+   - [tools/harness/reference-profiles/reference-video-event-log.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-video-event-log.json)
+   - [tools/harness/reference-profiles/reference-visual-artifact-catalog.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-visual-artifact-catalog.json)
+   to keep waveform analysis, labeled video windows, Aurora-like reference logs, and visual artifact catalogs part of the normal fidelity workflow
 
 ### Phase 4: Release Movement
 

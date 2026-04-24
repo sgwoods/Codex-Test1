@@ -1,0 +1,77 @@
+{
+  "id": "player-movement-reference-traces",
+  "title": "Player Movement Reference Trace Extraction",
+  "purpose": "Define the first preserved gameplay windows and measurement families for extracting movement traces from Galaga reference footage before the next Aurora movement-tuning pass.",
+  "sourceFamilies": [
+    {
+      "id": "stage-reference-video",
+      "anchor": "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+      "role": "Preferred first-pass source for opening movement windows and visible ship motion."
+    },
+    {
+      "id": "release-reference-pack",
+      "anchor": "reference-artifacts/analyses/release-reference-pack/README.md",
+      "role": "Secondary source for later-stage movement and lane-correction windows once the opening trace family is established."
+    }
+  ],
+  "traceFamilies": [
+    {
+      "id": "tap-correction",
+      "question": "How far does the ship move on a short directional tap, and how quickly does it settle?",
+      "measures": [
+        "tapDisplacementPx",
+        "settleMsAfterRelease",
+        "maxVisibleFrameStepPx"
+      ]
+    },
+    {
+      "id": "hold-travel",
+      "question": "How quickly does the ship cover lane distance under a held input?",
+      "measures": [
+        "holdDisplacementPx",
+        "holdTravelRatePxPerS",
+        "timeToCruiseMs"
+      ]
+    },
+    {
+      "id": "reversal",
+      "question": "How quickly can the ship reverse through center and stabilize?",
+      "measures": [
+        "reversalLatencyMs",
+        "centerCrossMs",
+        "overshootPx"
+      ]
+    },
+    {
+      "id": "move-fire",
+      "question": "Does firing interrupt movement cadence or visible travel?",
+      "measures": [
+        "shotDelayMsWhileMoving",
+        "postShotTravelPx",
+        "stallFramesAfterShot"
+      ]
+    }
+  ],
+  "firstPassWindows": [
+    {
+      "id": "opening-lane-correction",
+      "sourceFamily": "stage-reference-video",
+      "notes": "Early opening correction in a low-pressure lane setup before the first strong dive-response moment."
+    },
+    {
+      "id": "opening-hold-travel",
+      "sourceFamily": "stage-reference-video",
+      "notes": "Sustained lateral move in the same opening family to establish baseline cruise travel."
+    },
+    {
+      "id": "opening-reversal",
+      "sourceFamily": "stage-reference-video",
+      "notes": "Single reversal window around an early visible dive-response setup."
+    },
+    {
+      "id": "opening-move-fire",
+      "sourceFamily": "stage-reference-video",
+      "notes": "Movement plus firing window in the opening family to measure shot-interrupt effects."
+    }
+  ]
+}

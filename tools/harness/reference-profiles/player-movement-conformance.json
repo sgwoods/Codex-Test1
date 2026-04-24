@@ -12,39 +12,41 @@
     "seed": 2201,
     "intervalMs": 16,
     "tapHoldMs": 60,
-    "tapReleaseMs": 140,
+    "tapReleaseMs": 240,
     "holdMs": 220,
-    "holdReleaseMs": 140,
+    "holdReleaseMs": 240,
     "reversalFirstMs": 140,
     "reversalSecondMs": 180,
-    "reversalReleaseMs": 140,
+    "reversalReleaseMs": 240,
     "moveFireLeadMs": 100,
     "moveFirePostMs": 140,
-    "moveFireReleaseMs": 100
+    "moveFireReleaseMs": 180,
+    "settleVxThreshold": 8
   },
+  "referenceTraceSource": "reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65/movement-traces.json",
   "targets": {
     "tapAbsDelta": {
-      "min": 1.5,
-      "max": 12
+      "min": 11.5,
+      "max": 19.5
     },
     "holdDelta": {
-      "min": 18,
-      "max": 80
+      "min": 67,
+      "max": 97
     },
     "settleMsAfterRelease": {
-      "max": 220
+      "max": 320
     },
     "reversalCrossMs": {
-      "max": 220
+      "max": 280
     },
     "shotDelayMsWhileMoving": {
-      "max": 140
+      "max": 80
     },
     "postShotTravel": {
-      "min": 3
+      "min": 35
     },
     "maxFrameStep": {
-      "max": 4
+      "max": 17
     }
   }
 }

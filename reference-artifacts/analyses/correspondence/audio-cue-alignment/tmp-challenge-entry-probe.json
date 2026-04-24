@@ -1,0 +1,22 @@
+{
+  "name": "challenge-entry-probe",
+  "seed": 9203,
+  "duration": 4,
+  "config": {
+    "stage": 2,
+    "ships": 3,
+    "challenge": false,
+    "audioTheme": "galaga-reference-assets"
+  },
+  "actions": [
+    {
+      "t": 0.1,
+      "action": "harness",
+      "method": "setupStageTransitionProbe",
+      "args": {
+        "stage": 2,
+        "mode": "normal"
+      }
+    }
+  ]
+}

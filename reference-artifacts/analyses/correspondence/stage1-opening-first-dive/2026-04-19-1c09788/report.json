@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-04-19T15:50:18.232Z",
+  "profile": {
+    "id": "stage1-opening-first-dive",
+    "title": "Stage 1 Opening / First Dive Timing",
+    "purpose": "Measure the first repeatable stage-1 timing family for Aurora against shipped baseline and Galaga-aligned reference targets.",
+    "scenario": "stage1-descent",
+    "referenceSource": {
+      "timingMetrics": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json",
+      "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+    },
+    "historicalAuroraBaseline": {
+      "eventFamilyId": "formation-arrival-and-convoy"
+    },
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "metrics": [
+      {
+        "id": "gameStartCueAfterSpawn",
+        "label": "Game start cue after spawn",
+        "target": 0,
+        "tolerance": 0.05,
+        "severity": "strict"
+      },
+      {
+        "id": "firstStagePulseAfterSpawn",
+        "label": "First stage pulse after spawn",
+        "target": 0.817,
+        "tolerance": 0.2,
+        "severity": "moderate"
+      },
+      {
+        "id": "firstAttackAfterSpawn",
+        "label": "First attack after spawn",
+        "target": 8.2,
+        "tolerance": 0.35,
+        "severity": "moderate"
+      },
+      {
+        "id": "firstLowerFieldAfterSpawn",
+        "label": "First lower-field crossing after spawn",
+        "target": 9.35,
+        "tolerance": 0.45,
+        "severity": "moderate"
+      }
+    ]
+  },
+  "historicalBaseline": {
+    "id": "formation-arrival-and-convoy",
+    "label": "Formation Arrival And Convoy Cadence",
+    "firstStagePulseAfterSpawn": 0.817,
+    "firstAttackAfterSpawn": 8.2,
+    "firstLowerFieldAfterSpawn": 9.35
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "baselineRun": {
+    "sessionPath": "reference-artifacts/analyses/correspondence/stage1-opening-first-dive/stage1-descent-seed2003-2026-04-19T15-49-55-213Z-64297-2z7u9s/neo-galaga-session-ngt-1776613801176-3.json",
+    "metrics": {
+      "stageSpawnAt": 2.799,
+      "gameStartCueAfterSpawn": null,
+      "firstStagePulseAfterSpawn": null,
+      "firstAttackAfterSpawn": 0.466,
+      "firstLowerFieldAfterSpawn": 0.497
+    }
+  },
+  "currentRun": {
+    "sessionPath": "reference-artifacts/analyses/correspondence/stage1-opening-first-dive/stage1-descent-seed2003-2026-04-19T15-50-10-474Z-64502-cx41k1/neo-galaga-session-ngt-1776613815825-3.json",
+    "metrics": {
+      "stageSpawnAt": 0.001,
+      "gameStartCueAfterSpawn": 0,
+      "firstStagePulseAfterSpawn": 0.063,
+      "firstAttackAfterSpawn": 0.238,
+      "firstLowerFieldAfterSpawn": 0.29
+    }
+  },
+  "metrics": [
+    {
+      "id": "gameStartCueAfterSpawn",
+      "label": "Game start cue after spawn",
+      "severity": "strict",
+      "target": 0,
+      "tolerance": 0.05,
+      "baseline": null,
+      "current": 0,
+      "baselineDelta": null,
+      "currentDelta": 0,
+      "driftFromBaseline": null,
+      "withinTolerance": true,
+      "historicalBaseline": null,
+      "historicalBaselineDelta": null,
+      "driftFromHistoricalBaseline": null
+    },
+    {
+      "id": "firstStagePulseAfterSpawn",
+      "label": "First stage pulse after spawn",
+      "severity": "moderate",
+      "target": 0.817,
+      "tolerance": 0.2,
+      "baseline": null,
+      "current": 0.063,
+      "baselineDelta": null,
+      "currentDelta": -0.754,
+      "driftFromBaseline": null,
+      "withinTolerance": false,
+      "historicalBaseline": 0.817,
+      "historicalBaselineDelta": 0,
+      "driftFromHistoricalBaseline": -0.754
+    },
+    {
+      "id": "firstAttackAfterSpawn",
+      "label": "First attack after spawn",
+      "severity": "moderate",
+      "target": 8.2,
+      "tolerance": 0.35,
+      "baseline": 0.466,
+      "current": 0.238,
+      "baselineDelta": -7.734,
+      "currentDelta": -7.962,
+      "driftFromBaseline": -0.228,
+      "withinTolerance": false,
+      "historicalBaseline": 8.2,
+      "historicalBaselineDelta": 0,
+      "driftFromHistoricalBaseline": -7.962
+    },
+    {
+      "id": "firstLowerFieldAfterSpawn",
+      "label": "First lower-field crossing after spawn",
+      "severity": "moderate",
+      "target": 9.35,
+      "tolerance": 0.45,
+      "baseline": 0.497,
+      "current": 0.29,
+      "baselineDelta": -8.853,
+      "currentDelta": -9.06,
+      "driftFromBaseline": -0.207,
+      "withinTolerance": false,
+      "historicalBaseline": 9.35,
+      "historicalBaselineDelta": 0,
+      "driftFromHistoricalBaseline": -9.06
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "total": 4,
+    "worstCurrentDelta": 9.06,
+    "worstDriftFromBaseline": 0.228,
+    "worstDriftFromHistoricalBaseline": 9.06
+  }
+}

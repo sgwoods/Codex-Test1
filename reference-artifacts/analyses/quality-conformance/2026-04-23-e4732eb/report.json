@@ -1,0 +1,641 @@
+{
+  "generatedAt": "2026-04-23T19:20:02.932Z",
+  "movementRun": {
+    "ok": true,
+    "outDir": "/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/player-movement/2026-04-23-e4732eb",
+    "baselineScore10": 4,
+    "currentScore10": 5.7
+  },
+  "closeShotRun": {
+    "ok": true,
+    "files": [
+      "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/close-shot-hit/close-shot-hit-seed9048-2026-04-23T19-18-19-920Z-62721-jfvxjw/neo-galaga-session-ngt-1776971902496-3.json",
+      "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/close-shot-hit/close-shot-hit-seed9048-2026-04-23T19-18-19-920Z-62721-jfvxjw/neo-galaga-session-ngt-1776971902496-3-system-status.json"
+    ],
+    "shotAt": 0.083,
+    "killAt": 0.083,
+    "delay": 0,
+    "enemy": {
+      "id": 799329204,
+      "type": "but",
+      "lane": 4
+    }
+  },
+  "stage2SafetyRun": {
+    "ok": true,
+    "seeds": {
+      "51101": {
+        "advanced": {
+          "score": 2480,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-04-23T19-18-38-741Z-62751-cpsq0p/neo-galaga-session-ngt-1776971921285-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-04-23T19-18-38-741Z-62751-cpsq0p/neo-galaga-session-ngt-1776971921285-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 6190,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-04-23T19-18-42-217Z-62768-4rxjdt/neo-galaga-session-ngt-1776971924978-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-04-23T19-18-42-217Z-62768-4rxjdt/neo-galaga-session-ngt-1776971924978-3-system-status.json"
+          ]
+        }
+      },
+      "51201": {
+        "advanced": {
+          "score": 5300,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-04-23T19-18-46-129Z-62783-e10lbz/neo-galaga-session-ngt-1776971928757-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-04-23T19-18-46-129Z-62783-e10lbz/neo-galaga-session-ngt-1776971928757-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 6860,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-04-23T19-18-50-321Z-62814-bld2l6/neo-galaga-session-ngt-1776971933218-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-04-23T19-18-50-321Z-62814-bld2l6/neo-galaga-session-ngt-1776971933218-3-system-status.json"
+          ]
+        }
+      }
+    }
+  },
+  "surfaceRun": {
+    "ok": true,
+    "checks": [
+      {
+        "id": "front-door-copy",
+        "description": "Front-door shell copy and startup framing",
+        "script": "check-front-door-copy-surface.js"
+      },
+      {
+        "id": "popup-surfaces",
+        "description": "Help, settings, leaderboard, account, and feedback panels",
+        "script": "check-popup-surfaces.js"
+      },
+      {
+        "id": "dock-buttons",
+        "description": "Dock buttons and toggle actions",
+        "script": "check-dock-button-actions.js"
+      },
+      {
+        "id": "pilot-records-panel",
+        "description": "Pilot records and account replay panel surface",
+        "script": "check-pilot-records-panel.js"
+      },
+      {
+        "id": "wait-score-overlay",
+        "description": "Wait-mode score overlay surface",
+        "script": "check-wait-score-overlay.js"
+      },
+      {
+        "id": "leaderboard-build-date-filter",
+        "description": "Leaderboard build/date trust context and filtering",
+        "script": "check-leaderboard-build-date-filter.js"
+      },
+      {
+        "id": "dev-graphics-options",
+        "description": "Graphics options and visible rendering controls",
+        "script": "check-dev-graphics-options.js"
+      },
+      {
+        "id": "attract-score-cycle",
+        "description": "Attract/wait score cycling surface",
+        "script": "check-attract-score-cycle.js"
+      },
+      {
+        "id": "audio-theme-phases",
+        "description": "Audio theme selection by phase",
+        "script": "check-audio-theme-phases.js"
+      },
+      {
+        "id": "audio-cue-slots",
+        "description": "Audio cue slot consistency",
+        "script": "check-audio-cue-slots.js"
+      }
+    ]
+  },
+  "audioAlignmentRun": {
+    "generatedAt": "2026-04-23T19:20:02.842Z",
+    "commit": "e4732eb",
+    "profile": {
+      "id": "audio-cue-alignment",
+      "title": "Audio Cue Alignment Correspondence",
+      "purpose": "Compare the most timing-sensitive Aurora gameplay audio cues against the shipped local baseline and the preserved Galaga-aligned timing targets.",
+      "candidateRoots": {
+        "baseline": "dist/production",
+        "current": "dist/dev"
+      },
+      "referenceSource": {
+        "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+      },
+      "historicalAuroraBaselines": {
+        "stage1": "formation-arrival-and-convoy",
+        "challenge": "challenge-entry-results-perfect"
+      },
+      "scenarios": {
+        "stage1": "tools/harness/scenarios/stage1-descent.json",
+        "challengeEntry": "tools/harness/scenarios/challenge-entry-probe.json",
+        "challengePerfect": "tools/harness/scenarios/stage3-perfect-transition.json"
+      },
+      "metrics": [
+        {
+          "id": "gameStartCueAfterSpawn",
+          "label": "Game Start Cue After Spawn",
+          "source": "stage1",
+          "runtimePath": [
+            "stage1",
+            "gameStartCueAfterSpawn"
+          ],
+          "mode": "target",
+          "target": 0,
+          "tolerance": 0.05,
+          "severity": "strict"
+        },
+        {
+          "id": "firstStagePulseAfterFormationArrival",
+          "label": "First Stage Pulse After Formation Arrival",
+          "source": "stage1",
+          "runtimePath": [
+            "stage1",
+            "firstStagePulseAfterFormationArrival"
+          ],
+          "mode": "target",
+          "target": 1.97,
+          "tolerance": 0.35,
+          "severity": "high"
+        },
+        {
+          "id": "gameStartTailPastFirstPulse",
+          "label": "Game Start Tail Past First Pulse",
+          "source": "stage1",
+          "runtimePath": [
+            "stage1",
+            "gameStartTailPastFirstPulse"
+          ],
+          "mode": "max",
+          "maxAllowed": 0,
+          "tolerance": 0.15,
+          "severity": "medium"
+        },
+        {
+          "id": "challengeCueAfterProbe",
+          "label": "Challenge Cue After Probe",
+          "source": "challengeEntry",
+          "runtimePath": [
+            "challengeEntry",
+            "challengeCueAfterProbe"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengeEntry",
+            "cueAfterProbe"
+          ],
+          "tolerance": 0.5,
+          "severity": "high"
+        },
+        {
+          "id": "challengeSpawnAfterCue",
+          "label": "Challenge Spawn After Cue",
+          "source": "challengeEntry",
+          "runtimePath": [
+            "challengeEntry",
+            "challengeSpawnAfterCue"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengeEntry",
+            "spawnAfterCue"
+          ],
+          "tolerance": 0.4,
+          "severity": "high"
+        },
+        {
+          "id": "challengeTransitionTailPastSpawn",
+          "label": "Challenge Transition Tail Past Spawn",
+          "source": "challengeEntry",
+          "runtimePath": [
+            "challengeEntry",
+            "transitionCueTailPastSpawn"
+          ],
+          "mode": "target",
+          "target": 0.467,
+          "tolerance": 0.15,
+          "severity": "medium"
+        },
+        {
+          "id": "challengePerfectCueAfterClear",
+          "label": "Challenge Perfect Cue After Clear",
+          "source": "challengePerfect",
+          "runtimePath": [
+            "challengePerfect",
+            "challengePerfectCueAfterClear"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengePerfect",
+            "resultCueAfterClear"
+          ],
+          "tolerance": 0.35,
+          "severity": "high"
+        },
+        {
+          "id": "nextStageCueAfterClear",
+          "label": "Next Stage Cue After Clear",
+          "source": "challengePerfect",
+          "runtimePath": [
+            "challengePerfect",
+            "nextStageCueAfterClear"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengePerfect",
+            "nextCueAfterClear"
+          ],
+          "tolerance": 0.55,
+          "severity": "medium"
+        },
+        {
+          "id": "resultTailPastNextCue",
+          "label": "Result Cue Tail Past Next Cue",
+          "source": "challengePerfect",
+          "runtimePath": [
+            "challengePerfect",
+            "resultTailPastNextCue"
+          ],
+          "mode": "max",
+          "maxAllowed": 0,
+          "tolerance": 0.2,
+          "severity": "medium"
+        }
+      ]
+    },
+    "baselineRoot": "dist/production",
+    "currentRoot": "dist/dev",
+    "historicalFamilies": {
+      "stage1": "formation-arrival-and-convoy",
+      "challenge": "challenge-entry-results-perfect"
+    },
+    "runs": {
+      "baseline": {
+        "stage1": null,
+        "challengeEntry": null,
+        "challengePerfect": null,
+        "challengeEntryError": "page.evaluate: Error: Harness method not found: setupStageTransitionProbe\n    at eval (eval at evaluate (:290:30), <anonymous>:3:61)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at replayDeterministic (/Users/steven/Documents/Codex-Test1/tools/harness/run-gameplay.js:186:18)\n    at async main (/Users/steven/Documents/Codex-Test1/tools/harness/run-gameplay.js:350:26)\n"
+      },
+      "current": {
+        "stage1": null,
+        "challengeEntry": null,
+        "challengePerfect": null,
+        "challengeEntryError": null
+      }
+    },
+    "baselineMetrics": {
+      "stage1": {
+        "gameStartCueAfterSpawn": null,
+        "firstStagePulseAfterFormationArrival": null,
+        "gameStartTailPastFirstPulse": null
+      },
+      "challengeEntry": {
+        "challengeCueAfterProbe": null,
+        "challengeSpawnAfterCue": null,
+        "transitionCueTailPastSpawn": null
+      },
+      "challengePerfect": {
+        "challengePerfectCueAfterClear": null,
+        "nextStageCueAfterClear": null,
+        "resultTailPastNextCue": null
+      }
+    },
+    "currentMetrics": {
+      "stage1": {
+        "gameStartCueAfterSpawn": 0,
+        "firstStagePulseAfterFormationArrival": 2.15,
+        "gameStartTailPastFirstPulse": -6.317
+      },
+      "challengeEntry": {
+        "challengeCueAfterProbe": 2.216,
+        "challengeSpawnAfterCue": 0.584,
+        "transitionCueTailPastSpawn": 0.466
+      },
+      "challengePerfect": {
+        "challengePerfectCueAfterClear": 0.333,
+        "nextStageCueAfterClear": 2.866,
+        "resultTailPastNextCue": -0.833
+      }
+    },
+    "metrics": [
+      {
+        "id": "gameStartCueAfterSpawn",
+        "label": "Game Start Cue After Spawn",
+        "source": "stage1",
+        "mode": "target",
+        "severity": "strict",
+        "target": 0,
+        "tolerance": 0.05,
+        "baseline": null,
+        "current": 0,
+        "baselineDelta": null,
+        "currentDelta": 0,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "firstStagePulseAfterFormationArrival",
+        "label": "First Stage Pulse After Formation Arrival",
+        "source": "stage1",
+        "mode": "target",
+        "severity": "high",
+        "target": 1.97,
+        "tolerance": 0.35,
+        "baseline": null,
+        "current": 2.15,
+        "baselineDelta": null,
+        "currentDelta": 0.18,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "gameStartTailPastFirstPulse",
+        "label": "Game Start Tail Past First Pulse",
+        "source": "stage1",
+        "mode": "max",
+        "severity": "medium",
+        "target": 0,
+        "tolerance": 0.15,
+        "baseline": null,
+        "current": -6.317,
+        "baselineDelta": null,
+        "currentDelta": -6.317,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengeCueAfterProbe",
+        "label": "Challenge Cue After Probe",
+        "source": "challengeEntry",
+        "mode": "familyTarget",
+        "severity": "high",
+        "target": 2.219,
+        "tolerance": 0.5,
+        "baseline": null,
+        "current": 2.216,
+        "baselineDelta": null,
+        "currentDelta": -0.003,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengeSpawnAfterCue",
+        "label": "Challenge Spawn After Cue",
+        "source": "challengeEntry",
+        "mode": "familyTarget",
+        "severity": "high",
+        "target": 0.583,
+        "tolerance": 0.4,
+        "baseline": null,
+        "current": 0.584,
+        "baselineDelta": null,
+        "currentDelta": 0.001,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengeTransitionTailPastSpawn",
+        "label": "Challenge Transition Tail Past Spawn",
+        "source": "challengeEntry",
+        "mode": "target",
+        "severity": "medium",
+        "target": 0.467,
+        "tolerance": 0.15,
+        "baseline": null,
+        "current": 0.466,
+        "baselineDelta": null,
+        "currentDelta": -0.001,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengePerfectCueAfterClear",
+        "label": "Challenge Perfect Cue After Clear",
+        "source": "challengePerfect",
+        "mode": "familyTarget",
+        "severity": "high",
+        "target": 0.342,
+        "tolerance": 0.35,
+        "baseline": null,
+        "current": 0.333,
+        "baselineDelta": null,
+        "currentDelta": -0.009,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "nextStageCueAfterClear",
+        "label": "Next Stage Cue After Clear",
+        "source": "challengePerfect",
+        "mode": "familyTarget",
+        "severity": "medium",
+        "target": 2.85,
+        "tolerance": 0.55,
+        "baseline": null,
+        "current": 2.866,
+        "baselineDelta": null,
+        "currentDelta": 0.016,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "resultTailPastNextCue",
+        "label": "Result Cue Tail Past Next Cue",
+        "source": "challengePerfect",
+        "mode": "max",
+        "severity": "medium",
+        "target": 0,
+        "tolerance": 0.2,
+        "baseline": null,
+        "current": -0.833,
+        "baselineDelta": null,
+        "currentDelta": -0.833,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      }
+    ],
+    "summary": {
+      "passed": 9,
+      "total": 9,
+      "worstCurrentDelta": 6.317,
+      "worstDriftFromBaseline": null
+    }
+  },
+  "categories": [
+    {
+      "id": "movement",
+      "label": "Player movement conformance",
+      "score10": 5.9,
+      "evidence": [
+        "player-movement report"
+      ],
+      "read": "Current movement scored 5.9/10 against the control-principles profile, versus 4.6/10 for the shipped local baseline."
+    },
+    {
+      "id": "combat-responsiveness",
+      "label": "Shot and hit responsiveness",
+      "score10": 10,
+      "evidence": [
+        "close-shot-hit",
+        "movement fire window"
+      ],
+      "read": "Close-shot responsiveness passed, and movement-fire post-shot travel was 49.61, with shot delay 16ms."
+    },
+    {
+      "id": "stage1-timing",
+      "label": "Stage-1 opening timing fidelity",
+      "score10": 2.1,
+      "evidence": [
+        "stage1-opening-first-dive report"
+      ],
+      "read": "1/4 metrics were within tolerance; worst current delta was 8.338."
+    },
+    {
+      "id": "stage1-geometry",
+      "label": "Stage-1 opening geometry fidelity",
+      "score10": 10,
+      "evidence": [
+        "stage1-opening-spacing report"
+      ],
+      "read": "Geometry held steady with 0 changed targets and max drift 0."
+    },
+    {
+      "id": "dive-safety",
+      "label": "Dive fairness and safety",
+      "score10": 9.1,
+      "evidence": [
+        "persona-stage2-safety"
+      ],
+      "read": "Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail."
+    },
+    {
+      "id": "capture-rescue",
+      "label": "Capture and rescue rule fidelity",
+      "score10": 10,
+      "evidence": [
+        "capture-rescue correspondence"
+      ],
+      "read": "3/3 capture scenarios matched, with worst tracked-time drift 0.004."
+    },
+    {
+      "id": "challenge-timing",
+      "label": "Challenge-stage timing fidelity",
+      "score10": 4.2,
+      "evidence": [
+        "challenge-stage correspondence"
+      ],
+      "read": "1/5 challenge timing metrics were within tolerance; worst current delta was 3.938."
+    },
+    {
+      "id": "progression",
+      "label": "Progression and persona depth",
+      "score10": 8.8,
+      "evidence": [
+        "persona-progression correspondence"
+      ],
+      "read": "20/20 persona checks passed; progression ordering is still missing one ordering edge case."
+    },
+    {
+      "id": "audio",
+      "label": "Audio identity and cue alignment",
+      "score10": 5.6,
+      "evidence": [
+        "audio-cue-alignment correspondence",
+        "aurora-audio-theme-comparison",
+        "galaga-audio-overlap"
+      ],
+      "read": "Audio score blends cue identity with measured cue timing. The dedicated cue-alignment report passed 9/9 metrics, with worst current delta 6.317."
+    },
+    {
+      "id": "ui-shell",
+      "label": "UI, shell, and graphics integrity",
+      "score10": 9.2,
+      "evidence": [
+        "dev candidate surface suite"
+      ],
+      "read": "The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed."
+    }
+  ],
+  "summary": {
+    "overallScore10": 7.5,
+    "strongestCategory": {
+      "id": "combat-responsiveness",
+      "label": "Shot and hit responsiveness",
+      "score10": 10,
+      "evidence": [
+        "close-shot-hit",
+        "movement fire window"
+      ],
+      "read": "Close-shot responsiveness passed, and movement-fire post-shot travel was 49.61, with shot delay 16ms."
+    },
+    "weakestCategory": {
+      "id": "stage1-timing",
+      "label": "Stage-1 opening timing fidelity",
+      "score10": 2.1,
+      "evidence": [
+        "stage1-opening-first-dive report"
+      ],
+      "read": "1/4 metrics were within tolerance; worst current delta was 8.338."
+    },
+    "priorityGaps": [
+      {
+        "id": "stage1-timing",
+        "label": "Stage-1 opening timing fidelity",
+        "score10": 2.1,
+        "evidence": [
+          "stage1-opening-first-dive report"
+        ],
+        "read": "1/4 metrics were within tolerance; worst current delta was 8.338."
+      },
+      {
+        "id": "challenge-timing",
+        "label": "Challenge-stage timing fidelity",
+        "score10": 4.2,
+        "evidence": [
+          "challenge-stage correspondence"
+        ],
+        "read": "1/5 challenge timing metrics were within tolerance; worst current delta was 3.938."
+      },
+      {
+        "id": "audio",
+        "label": "Audio identity and cue alignment",
+        "score10": 5.6,
+        "evidence": [
+          "audio-cue-alignment correspondence",
+          "aurora-audio-theme-comparison",
+          "galaga-audio-overlap"
+        ],
+        "read": "Audio score blends cue identity with measured cue timing. The dedicated cue-alignment report passed 9/9 metrics, with worst current delta 6.317."
+      }
+    ]
+  }
+}
