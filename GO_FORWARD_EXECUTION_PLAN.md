@@ -141,6 +141,10 @@ Practical standard:
 - after refreshing the audio theme comparison, movement smoothing now looks like
   the clearest next beta-shaping pass, with audio identity no longer one of the
   weakest categories
+- first-pass movement smoothing attempts that changed the shared player physics
+  or even the narrower manual-control path both regressed movement conformance,
+  so the next movement cycle should start from reference-trace extraction and
+  tighter diagnostics rather than more blind constant tuning
 
 See also:
 
