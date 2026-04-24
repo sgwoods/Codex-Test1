@@ -39,6 +39,9 @@ The forward line has also now absorbed the first audio cue alignment pass:
 - the reference-audio session reset fix is part of the current `/dev` line
 - the follow-on stage-1 convoy-pulse refinement has now brought the broader
   stage-1 opening correspondence report to `4/4`
+- the refreshed audio theme comparison harness now captures each cue in a fresh
+  harness session, which gives us current branch-local audio identity evidence
+  again on this machine
 
 ## Current Working Reality
 
@@ -135,6 +138,9 @@ Practical standard:
 - after the convoy-pulse refinement, the next clearest fidelity targets are
   audio identity polish and movement smoothing rather than broader stage-1
   cadence repair
+- after refreshing the audio theme comparison, movement smoothing now looks like
+  the clearest next beta-shaping pass, with audio identity no longer one of the
+  weakest categories
 
 See also:
 

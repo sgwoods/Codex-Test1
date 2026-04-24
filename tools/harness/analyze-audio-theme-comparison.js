@@ -59,64 +59,66 @@ async function main(){
 
   const manifest = [];
 
-  await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
-    for(const row of comparisonSets){
-      const id = slug(row.item.label || row.entry.label || row.entry.id);
-      const auroraPayload = { ...row.entry.preview };
-      const cue = String(auroraPayload.cue || '').trim();
-      delete auroraPayload.cue;
-      if(!cue) fail('Missing cue in comparison entry preview payload', row);
+  for(const row of comparisonSets){
+    const id = slug(row.item.label || row.entry.label || row.entry.id);
+    const auroraPayload = { ...row.entry.preview };
+    const cue = String(auroraPayload.cue || '').trim();
+    delete auroraPayload.cue;
+    if(!cue) fail('Missing cue in comparison entry preview payload', row);
 
-      const aurora = await page.evaluate(async payload => {
+    const aurora = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
+      return await page.evaluate(async payload => {
         return await window.__galagaHarness__.captureAudioCue(payload.cue, payload.opts);
       }, { cue, opts: auroraPayload });
-      if(!aurora?.ok) fail('Aurora cue capture failed', { row, aurora });
+    });
+    if(!aurora?.ok) fail('Aurora cue capture failed', { row, aurora });
 
-      const galaga = await page.evaluate(async payload => {
+    const galaga = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
+      return await page.evaluate(async payload => {
         return await window.__galagaHarness__.captureAudioCue(payload.cue, payload.opts);
       }, { cue, opts: { ...auroraPayload, audioTheme: 'galaga-original-reference' } });
-      if(!galaga?.ok) fail('Galaga cue capture failed', { row, galaga });
+    });
+    if(!galaga?.ok) fail('Galaga cue capture failed', { row, galaga });
 
-      const auroraWebm = path.join(samplesDir, `${id}-aurora.webm`);
-      const galagaWebm = path.join(samplesDir, `${id}-galaga.webm`);
-      const auroraWav = path.join(samplesDir, `${id}-aurora.wav`);
-      const galagaWav = path.join(samplesDir, `${id}-galaga.wav`);
-      decodeToFile(aurora.base64, auroraWebm);
-      decodeToFile(galaga.base64, galagaWebm);
-      toWav(auroraWebm, auroraWav);
-      toWav(galagaWebm, galagaWav);
+    const auroraWebm = path.join(samplesDir, `${id}-aurora.webm`);
+    const galagaWebm = path.join(samplesDir, `${id}-galaga.webm`);
+    const auroraWav = path.join(samplesDir, `${id}-aurora.wav`);
+    const galagaWav = path.join(samplesDir, `${id}-galaga.wav`);
+    decodeToFile(aurora.base64, auroraWebm);
+    decodeToFile(galaga.base64, galagaWebm);
+    toWav(auroraWebm, auroraWav);
+    toWav(galagaWebm, galagaWav);
 
-      const referenceRel = row.item.referenceClip;
-      const referenceSource = path.join(ROOT, 'src', referenceRel.replace(/^assets\//, 'assets/'));
-      if(!fs.existsSync(referenceSource)) fail('Reference clip missing', { referenceSource, row });
-      const referenceWav = path.join(samplesDir, `${id}-reference.wav`);
-      toWav(referenceSource, referenceWav);
+    const referenceRel = row.item.referenceClip;
+    const referenceSource = path.join(ROOT, 'src', referenceRel.replace(/^assets\//, 'assets/'));
+    if(!fs.existsSync(referenceSource)) fail('Reference clip missing', { referenceSource, row });
+    const referenceWav = path.join(samplesDir, `${id}-reference.wav`);
+    toWav(referenceSource, referenceWav);
 
-      manifest.push({
-        id,
-        label: row.item.label || row.entry.label || row.entry.id,
-        focus: row.item.focus || '',
-        cue,
-        aurora: {
-          label: 'Aurora Application Mix',
-          wav: path.relative(outRoot, auroraWav),
-          webm: path.relative(outRoot, auroraWebm),
-          audioCue: aurora.audioCue || null
-        },
-        galaga: {
-          label: 'Galaga Original Reference (synthetic)',
-          wav: path.relative(outRoot, galagaWav),
-          webm: path.relative(outRoot, galagaWebm),
-          audioCue: galaga.audioCue || null
-        },
-        reference: {
-          label: row.item.referenceLabel || 'Reference',
-          source: path.relative(ROOT, referenceSource),
-          wav: path.relative(outRoot, referenceWav)
-        }
-      });
-    }
-  });
+    manifest.push({
+      id,
+      label: row.item.label || row.entry.label || row.entry.id,
+      focus: row.item.focus || '',
+      cue,
+      aurora: {
+        label: 'Aurora Application Mix',
+        wav: path.relative(outRoot, auroraWav),
+        webm: path.relative(outRoot, auroraWebm),
+        audioCue: aurora.audioCue || null
+      },
+      galaga: {
+        label: 'Galaga Original Reference (synthetic)',
+        wav: path.relative(outRoot, galagaWav),
+        webm: path.relative(outRoot, galagaWebm),
+        audioCue: galaga.audioCue || null
+      },
+      reference: {
+        label: row.item.referenceLabel || 'Reference',
+        source: path.relative(ROOT, referenceSource),
+        wav: path.relative(outRoot, referenceWav)
+      }
+    });
+  }
 
   const manifestPath = path.join(outRoot, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify({
