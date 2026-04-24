@@ -1,0 +1,129 @@
+{
+  "generatedAt": "2026-04-19T15:47:26.141Z",
+  "profile": {
+    "id": "stage1-opening-first-dive",
+    "title": "Stage 1 Opening / First Dive Timing",
+    "purpose": "Measure the first repeatable stage-1 timing family for Aurora against shipped baseline and Galaga-aligned reference targets.",
+    "scenario": "stage1-descent",
+    "referenceSource": {
+      "timingMetrics": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json",
+      "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+    },
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "metrics": [
+      {
+        "id": "gameStartCueAfterSpawn",
+        "label": "Game start cue after spawn",
+        "target": 0,
+        "tolerance": 0.05,
+        "severity": "strict"
+      },
+      {
+        "id": "firstStagePulseAfterSpawn",
+        "label": "First stage pulse after spawn",
+        "target": 0.817,
+        "tolerance": 0.2,
+        "severity": "moderate"
+      },
+      {
+        "id": "firstAttackAfterSpawn",
+        "label": "First attack after spawn",
+        "target": 8.2,
+        "tolerance": 0.35,
+        "severity": "moderate"
+      },
+      {
+        "id": "firstLowerFieldAfterSpawn",
+        "label": "First lower-field crossing after spawn",
+        "target": 9.35,
+        "tolerance": 0.45,
+        "severity": "moderate"
+      }
+    ]
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "baselineRun": {
+    "sessionPath": "reference-artifacts/analyses/correspondence/stage1-opening-first-dive/stage1-descent-seed2003-2026-04-19T15-47-18-395Z-63342-rx5zk5/neo-galaga-session-ngt-1776613640737-3.json",
+    "metrics": {
+      "stageSpawnAt": 0.327,
+      "gameStartCueAfterSpawn": null,
+      "firstStagePulseAfterSpawn": null,
+      "firstAttackAfterSpawn": 0.117,
+      "firstLowerFieldAfterSpawn": 0.124
+    }
+  },
+  "currentRun": {
+    "sessionPath": "reference-artifacts/analyses/correspondence/stage1-opening-first-dive/stage1-descent-seed2003-2026-04-19T15-47-22-464Z-63387-rd8y5a/neo-galaga-session-ngt-1776613644736-3.json",
+    "metrics": {
+      "stageSpawnAt": 0,
+      "gameStartCueAfterSpawn": 0,
+      "firstStagePulseAfterSpawn": 0.007,
+      "firstAttackAfterSpawn": 1.001,
+      "firstLowerFieldAfterSpawn": 1.012
+    }
+  },
+  "metrics": [
+    {
+      "id": "gameStartCueAfterSpawn",
+      "label": "Game start cue after spawn",
+      "severity": "strict",
+      "target": 0,
+      "tolerance": 0.05,
+      "baseline": null,
+      "current": 0,
+      "baselineDelta": null,
+      "currentDelta": 0,
+      "driftFromBaseline": null,
+      "withinTolerance": true
+    },
+    {
+      "id": "firstStagePulseAfterSpawn",
+      "label": "First stage pulse after spawn",
+      "severity": "moderate",
+      "target": 0.817,
+      "tolerance": 0.2,
+      "baseline": null,
+      "current": 0.007,
+      "baselineDelta": null,
+      "currentDelta": -0.81,
+      "driftFromBaseline": null,
+      "withinTolerance": false
+    },
+    {
+      "id": "firstAttackAfterSpawn",
+      "label": "First attack after spawn",
+      "severity": "moderate",
+      "target": 8.2,
+      "tolerance": 0.35,
+      "baseline": 0.117,
+      "current": 1.001,
+      "baselineDelta": -8.083,
+      "currentDelta": -7.199,
+      "driftFromBaseline": 0.884,
+      "withinTolerance": false
+    },
+    {
+      "id": "firstLowerFieldAfterSpawn",
+      "label": "First lower-field crossing after spawn",
+      "severity": "moderate",
+      "target": 9.35,
+      "tolerance": 0.45,
+      "baseline": 0.124,
+      "current": 1.012,
+      "baselineDelta": -9.226,
+      "currentDelta": -8.338,
+      "driftFromBaseline": 0.888,
+      "withinTolerance": false
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "total": 4,
+    "worstCurrentDelta": 8.338,
+    "worstDriftFromBaseline": 0.888
+  }
+}

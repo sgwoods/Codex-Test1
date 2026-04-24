@@ -1,0 +1,664 @@
+{
+  "commit": "ca481f2",
+  "version": "1.2.3",
+  "items": [
+    {
+      "id": "demo-pulse",
+      "label": "Demo Pulse",
+      "focus": "Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.",
+      "cue": "attractPulse",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/demo-pulse-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0091,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1159.2,
+            "zero_crossings_per_s": 153.8
+          },
+          "waveform": "plots/demo-pulse-aurora-waveform.png",
+          "spectrogram": "plots/demo-pulse-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/demo-pulse-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0084,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1160.0,
+            "zero_crossings_per_s": 157.7
+          },
+          "waveform": "plots/demo-pulse-galaga-waveform.png",
+          "spectrogram": "plots/demo-pulse-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Ambience / Convoy",
+          "wav": "samples/demo-pulse-reference.wav",
+          "metrics": {
+            "duration_s": 8.034,
+            "peak": 0.2267,
+            "rms": 0.0848,
+            "spectral_centroid_hz": 1175.0,
+            "zero_crossings_per_s": 577.3
+          },
+          "waveform": "plots/demo-pulse-reference-waveform.png",
+          "spectrogram": "plots/demo-pulse-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "stage-start",
+      "label": "Stage Start",
+      "focus": "Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.",
+      "cue": "gameStart",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/stage-start-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0086,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1154.5,
+            "zero_crossings_per_s": 151.3
+          },
+          "waveform": "plots/stage-start-aurora-waveform.png",
+          "spectrogram": "plots/stage-start-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/stage-start-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0093,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1159.1,
+            "zero_crossings_per_s": 144.9
+          },
+          "waveform": "plots/stage-start-galaga-waveform.png",
+          "spectrogram": "plots/stage-start-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Start",
+          "wav": "samples/stage-start-reference.wav",
+          "metrics": {
+            "duration_s": 7.012,
+            "peak": 0.8508,
+            "rms": 0.2606,
+            "spectral_centroid_hz": 1392.3,
+            "zero_crossings_per_s": 2234.5
+          },
+          "waveform": "plots/stage-start-reference-waveform.png",
+          "spectrogram": "plots/stage-start-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "formation-pulse",
+      "label": "Formation Pulse",
+      "focus": "Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.",
+      "cue": "stagePulse",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/formation-pulse-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0087,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1152.3,
+            "zero_crossings_per_s": 150.0
+          },
+          "waveform": "plots/formation-pulse-aurora-waveform.png",
+          "spectrogram": "plots/formation-pulse-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/formation-pulse-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0087,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1160.6,
+            "zero_crossings_per_s": 143.6
+          },
+          "waveform": "plots/formation-pulse-galaga-waveform.png",
+          "spectrogram": "plots/formation-pulse-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Ambience / Convoy",
+          "wav": "samples/formation-pulse-reference.wav",
+          "metrics": {
+            "duration_s": 8.034,
+            "peak": 0.2267,
+            "rms": 0.0848,
+            "spectral_centroid_hz": 1175.0,
+            "zero_crossings_per_s": 577.3
+          },
+          "waveform": "plots/formation-pulse-reference-waveform.png",
+          "spectrogram": "plots/formation-pulse-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "capture-beam",
+      "label": "Capture Beam",
+      "focus": "Compare whether the beam deploy moment reads clearly as tractor-beam danger.",
+      "cue": "captureBeam",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/capture-beam-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0094,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1149.2,
+            "zero_crossings_per_s": 141.0
+          },
+          "waveform": "plots/capture-beam-aurora-waveform.png",
+          "spectrogram": "plots/capture-beam-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/capture-beam-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0086,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1162.9,
+            "zero_crossings_per_s": 147.4
+          },
+          "waveform": "plots/capture-beam-galaga-waveform.png",
+          "spectrogram": "plots/capture-beam-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Tractor Beam",
+          "wav": "samples/capture-beam-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.8581,
+            "rms": 0.3136,
+            "spectral_centroid_hz": 1829.9,
+            "zero_crossings_per_s": 2144.4
+          },
+          "waveform": "plots/capture-beam-reference-waveform.png",
+          "spectrogram": "plots/capture-beam-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "fighter-captured",
+      "label": "Fighter Captured",
+      "focus": "Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.",
+      "cue": "captureSuccess",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/fighter-captured-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0065,
+            "rms": 0.0005,
+            "spectral_centroid_hz": 1319.1,
+            "zero_crossings_per_s": 153.8
+          },
+          "waveform": "plots/fighter-captured-aurora-waveform.png",
+          "spectrogram": "plots/fighter-captured-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/fighter-captured-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0087,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1161.1,
+            "zero_crossings_per_s": 137.2
+          },
+          "waveform": "plots/fighter-captured-galaga-waveform.png",
+          "spectrogram": "plots/fighter-captured-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Fighter Captured",
+          "wav": "samples/fighter-captured-reference.wav",
+          "metrics": {
+            "duration_s": 6.037,
+            "peak": 0.6662,
+            "rms": 0.1487,
+            "spectral_centroid_hz": 1966.8,
+            "zero_crossings_per_s": 1901.7
+          },
+          "waveform": "plots/fighter-captured-reference-waveform.png",
+          "spectrogram": "plots/fighter-captured-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "captured-fighter-destroyed",
+      "label": "Captured Fighter Destroyed",
+      "focus": "Compare the regret/penalty moment when the carried fighter is destroyed.",
+      "cue": "capturedFighterDestroyed",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/captured-fighter-destroyed-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0067,
+            "rms": 0.0006,
+            "spectral_centroid_hz": 1318.5,
+            "zero_crossings_per_s": 148.7
+          },
+          "waveform": "plots/captured-fighter-destroyed-aurora-waveform.png",
+          "spectrogram": "plots/captured-fighter-destroyed-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/captured-fighter-destroyed-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1918.4,
+            "zero_crossings_per_s": 48.7
+          },
+          "waveform": "plots/captured-fighter-destroyed-galaga-waveform.png",
+          "spectrogram": "plots/captured-fighter-destroyed-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Captured Fighter Destroyed",
+          "wav": "samples/captured-fighter-destroyed-reference.wav",
+          "metrics": {
+            "duration_s": 3.019,
+            "peak": 0.8836,
+            "rms": 0.1949,
+            "spectral_centroid_hz": 1393.9,
+            "zero_crossings_per_s": 2037.7
+          },
+          "waveform": "plots/captured-fighter-destroyed-reference-waveform.png",
+          "spectrogram": "plots/captured-fighter-destroyed-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "rescue-join",
+      "label": "Rescue Join",
+      "focus": "Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.",
+      "cue": "rescueJoin",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/rescue-join-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0007,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1805.2,
+            "zero_crossings_per_s": 57.7
+          },
+          "waveform": "plots/rescue-join-aurora-waveform.png",
+          "spectrogram": "plots/rescue-join-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/rescue-join-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0084,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1161.5,
+            "zero_crossings_per_s": 184.6
+          },
+          "waveform": "plots/rescue-join-galaga-waveform.png",
+          "spectrogram": "plots/rescue-join-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Fighter Rescued (Double Ship)",
+          "wav": "samples/rescue-join-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.429,
+            "rms": 0.0979,
+            "spectral_centroid_hz": 1532.1,
+            "zero_crossings_per_s": 1374.4
+          },
+          "waveform": "plots/rescue-join-reference-waveform.png",
+          "spectrogram": "plots/rescue-join-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "ship-loss",
+      "label": "Ship Loss",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "cue": "playerHit",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/ship-loss-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0087,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1157.9,
+            "zero_crossings_per_s": 142.3
+          },
+          "waveform": "plots/ship-loss-aurora-waveform.png",
+          "spectrogram": "plots/ship-loss-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/ship-loss-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1897.8,
+            "zero_crossings_per_s": 47.4
+          },
+          "waveform": "plots/ship-loss-galaga-waveform.png",
+          "spectrogram": "plots/ship-loss-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Death",
+          "wav": "samples/ship-loss-reference.wav",
+          "metrics": {
+            "duration_s": 2.043,
+            "peak": 0.9449,
+            "rms": 0.1443,
+            "spectral_centroid_hz": 962.1,
+            "zero_crossings_per_s": 1201.9
+          },
+          "waveform": "plots/ship-loss-reference-waveform.png",
+          "spectrogram": "plots/ship-loss-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "challenge-transition",
+      "label": "Challenge Transition",
+      "focus": "Compare how distinct and ceremonial the challenge-stage announcement feels.",
+      "cue": "challengeTransition",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-transition-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0017,
+            "rms": 0.0003,
+            "spectral_centroid_hz": 1587.0,
+            "zero_crossings_per_s": 105.1
+          },
+          "waveform": "plots/challenge-transition-aurora-waveform.png",
+          "spectrogram": "plots/challenge-transition-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-transition-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 2006.4,
+            "zero_crossings_per_s": 44.9
+          },
+          "waveform": "plots/challenge-transition-galaga-waveform.png",
+          "spectrogram": "plots/challenge-transition-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Challenging Stage",
+          "wav": "samples/challenge-transition-reference.wav",
+          "metrics": {
+            "duration_s": 3.019,
+            "peak": 0.9491,
+            "rms": 0.1601,
+            "spectral_centroid_hz": 1474.2,
+            "zero_crossings_per_s": 1296.0
+          },
+          "waveform": "plots/challenge-transition-reference-waveform.png",
+          "spectrogram": "plots/challenge-transition-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "challenge-results",
+      "label": "Challenge Results",
+      "focus": "Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.",
+      "cue": "challengeResults",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-results-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0086,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1161.7,
+            "zero_crossings_per_s": 139.7
+          },
+          "waveform": "plots/challenge-results-aurora-waveform.png",
+          "spectrogram": "plots/challenge-results-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-results-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1902.7,
+            "zero_crossings_per_s": 48.7
+          },
+          "waveform": "plots/challenge-results-galaga-waveform.png",
+          "spectrogram": "plots/challenge-results-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Challenging Stage Results",
+          "wav": "samples/challenge-results-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.2975,
+            "rms": 0.0868,
+            "spectral_centroid_hz": 1900.3,
+            "zero_crossings_per_s": 2277.3
+          },
+          "waveform": "plots/challenge-results-reference-waveform.png",
+          "spectrogram": "plots/challenge-results-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "challenge-perfect",
+      "label": "Challenge Perfect",
+      "focus": "Compare whether a perfect challenge result feels more celebratory than the standard results cue.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-perfect-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0037,
+            "rms": 0.0004,
+            "spectral_centroid_hz": 1341.2,
+            "zero_crossings_per_s": 141.0
+          },
+          "waveform": "plots/challenge-perfect-aurora-waveform.png",
+          "spectrogram": "plots/challenge-perfect-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-perfect-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0091,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1158.1,
+            "zero_crossings_per_s": 148.7
+          },
+          "waveform": "plots/challenge-perfect-galaga-waveform.png",
+          "spectrogram": "plots/challenge-perfect-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.438,
+            "rms": 0.1263,
+            "spectral_centroid_hz": 2423.0,
+            "zero_crossings_per_s": 2978.8
+          },
+          "waveform": "plots/challenge-perfect-reference-waveform.png",
+          "spectrogram": "plots/challenge-perfect-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "high-score-1st",
+      "label": "High Score 1st",
+      "focus": "Compare whether first place entry feels distinct and more important than a lower board placement.",
+      "cue": "highScoreFirst",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/high-score-1st-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1938.4,
+            "zero_crossings_per_s": 47.4
+          },
+          "waveform": "plots/high-score-1st-aurora-waveform.png",
+          "spectrogram": "plots/high-score-1st-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/high-score-1st-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0086,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1157.7,
+            "zero_crossings_per_s": 153.8
+          },
+          "waveform": "plots/high-score-1st-galaga-waveform.png",
+          "spectrogram": "plots/high-score-1st-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Name Entry (1st)",
+          "wav": "samples/high-score-1st-reference.wav",
+          "metrics": {
+            "duration_s": 8.034,
+            "peak": 0.9478,
+            "rms": 0.1954,
+            "spectral_centroid_hz": 1766.9,
+            "zero_crossings_per_s": 2077.4
+          },
+          "waveform": "plots/high-score-1st-reference-waveform.png",
+          "spectrogram": "plots/high-score-1st-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "high-score-2nd-10th",
+      "label": "High Score 2nd-10th",
+      "focus": "Compare whether non-first leaderboard entry feels positive but smaller than first place.",
+      "cue": "highScoreOther",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/high-score-2nd-10th-aurora.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0004,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 2116.6,
+            "zero_crossings_per_s": 44.9
+          },
+          "waveform": "plots/high-score-2nd-10th-aurora-waveform.png",
+          "spectrogram": "plots/high-score-2nd-10th-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/high-score-2nd-10th-galaga.wav",
+          "metrics": {
+            "duration_s": 0.78,
+            "peak": 0.0092,
+            "rms": 0.0009,
+            "spectral_centroid_hz": 1163.2,
+            "zero_crossings_per_s": 152.6
+          },
+          "waveform": "plots/high-score-2nd-10th-galaga-waveform.png",
+          "spectrogram": "plots/high-score-2nd-10th-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Name Entry (2nd-5th)",
+          "wav": "samples/high-score-2nd-10th-reference.wav",
+          "metrics": {
+            "duration_s": 15.0,
+            "peak": 1.0,
+            "rms": 0.2555,
+            "spectral_centroid_hz": 1707.1,
+            "zero_crossings_per_s": 2641.1
+          },
+          "waveform": "plots/high-score-2nd-10th-reference-waveform.png",
+          "spectrogram": "plots/high-score-2nd-10th-reference-spectrogram.png"
+        }
+      }
+    },
+    {
+      "id": "game-over",
+      "label": "Game Over",
+      "focus": "Compare whether the ending cue feels final and emotionally complete enough.",
+      "cue": "gameOver",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/game-over-aurora.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.0041,
+            "rms": 0.0004,
+            "spectral_centroid_hz": 1707.3,
+            "zero_crossings_per_s": 132.1
+          },
+          "waveform": "plots/game-over-aurora-waveform.png",
+          "spectrogram": "plots/game-over-aurora-spectrogram.png"
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/game-over-galaga.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.0006,
+            "rms": 0.0002,
+            "spectral_centroid_hz": 1430.7,
+            "zero_crossings_per_s": 56.0
+          },
+          "waveform": "plots/game-over-galaga-waveform.png",
+          "spectrogram": "plots/game-over-galaga-spectrogram.png"
+        },
+        "reference": {
+          "label": "Last Ship Destroyed Ambience",
+          "wav": "samples/game-over-reference.wav",
+          "metrics": {
+            "duration_s": 14.002,
+            "peak": 0.7676,
+            "rms": 0.1931,
+            "spectral_centroid_hz": 1455.1,
+            "zero_crossings_per_s": 840.5
+          },
+          "waveform": "plots/game-over-reference-waveform.png",
+          "spectrogram": "plots/game-over-reference-spectrogram.png"
+        }
+      }
+    }
+  ]
+}

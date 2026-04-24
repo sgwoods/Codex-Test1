@@ -289,6 +289,19 @@ The goal is not immediate implementation.
 The goal is to build the same kind of durable reference base we now expect for
 Aurora.
 
+Longer-term platform goal:
+
+- ingest a second classic fixed-screen shooter reference lineage with minimal
+  user intervention once the source footage, manuals, and comparative
+  artifacts are in place
+- use those artifacts to:
+  - analyze the game in all major aspects
+  - propose the Platinum extension points required to host it cleanly
+  - generate and refine a playable pack iteratively rather than by starting
+    from an empty design pass
+- preserve same-control compliance across hosted games so the player can move
+  between Platinum experiences without relearning the basic control contract
+
 ### Variation Rule
 
 Variation is allowed when it is:
@@ -321,6 +334,16 @@ Useful evidence sources:
 - stage metrics
 - score flow
 - challenge outcomes
+
+Longer-term persona goal:
+
+- annotate gameplay and player actions richly enough that personas can be used
+  for more than passive regression testing
+- support a viable `Player 2`-style experience where a human player can
+  compete against curated persona play styles
+- eventually support a persona that can learn by playing through simulation,
+  with its behavior evaluated against the same fidelity, fairness, and
+  progression evidence we already use for Aurora
 
 Current active finding:
 

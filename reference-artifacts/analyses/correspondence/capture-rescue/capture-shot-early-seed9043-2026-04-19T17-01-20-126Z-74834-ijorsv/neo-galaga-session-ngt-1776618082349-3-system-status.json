@@ -1,0 +1,437 @@
+{
+  "generatedAt": "2026-04-19T17:01:37.487Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.435.sha.d3b9657.dirty",
+    "commit": "d3b96570ab21acef6e783a68bca2372e4132970b",
+    "branch": "codex/safe-close-shot-hit-harness",
+    "dirty": true,
+    "released": "Apr 18 2026, 6:02 PM EDT",
+    "state": "codex/safe-close-shot-hit-harness@d3b9657 dirty",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:60885/index.html",
+  "game": {
+    "stage": 4,
+    "score": 400,
+    "lives": 5,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "auto",
+    "lastCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-hint",
+      "audioTheme": "aurora-rise",
+      "phase": "stage",
+      "variant": 4,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 4,
+      "challenge": false,
+      "at": 1.044
+    },
+    "reference": {
+      "lastRequested": "",
+      "lastLoaded": "",
+      "lastStarted": "",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: auto · last cue stagePulse (aurora-rise) · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0,
+        "type": "game_start",
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 4,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 4,
+        "challenge": false,
+        "band": "scorpion",
+        "challengeFamily": "classic",
+        "beeFamily": "scorpion",
+        "butFamily": "scorpion",
+        "bossFamily": "classic",
+        "themeId": "scorpion-dawn",
+        "backgroundMode": "aurora-hint",
+        "frameAccent": "amber-blue",
+        "bossArchetype": "super-boss-scorpion"
+      }
+    },
+    {
+      "at": "+0.001s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.001,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.019s",
+      "level": "info",
+      "action": "harness_capture_escape_setup",
+      "message": "harness_capture_escape_setup",
+      "data": {
+        "t": 0.019,
+        "type": "harness_capture_escape_setup",
+        "boss": 553398549,
+        "playerX": 140,
+        "playerY": 186,
+        "bossX": 140,
+        "bossY": 110,
+        "capT": 0.95,
+        "stage": 4,
+        "keepAlive": 1
+      }
+    },
+    {
+      "at": "+0.019s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.019,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "capture",
+        "x": 140,
+        "y": 110,
+        "originLane": 5,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 553398549,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 2,
+        "carry": false,
+        "targetX": 140,
+        "targetY": 136,
+        "scripted": 0,
+        "harness": 1,
+        "captureEscape": 1
+      }
+    },
+    {
+      "at": "+0.027s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.027,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.030s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.03,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 139.83,
+        "y": 146.25,
+        "shotXs": [
+          139.83
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": true
+      }
+    },
+    {
+      "at": "+0.030s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.03,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.031s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.031,
+        "type": "enemy_killed",
+        "points": 400,
+        "dive": 2,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 553398549,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 4,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.031s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.031,
+        "type": "audio_cue",
+        "cue": "bossBoom",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.033s",
+      "level": "info",
+      "action": "capture_escape",
+      "message": "capture_escape",
+      "data": {
+        "t": 0.033,
+        "type": "capture_escape",
+        "stage": 4,
+        "reason": "boss_destroyed",
+        "playerX": 139.79,
+        "playerY": 162.55,
+        "playerLane": 4,
+        "bossId": 553398549,
+        "timeSinceCaptureStart": 0.183
+      }
+    },
+    {
+      "at": "+0.033s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.033,
+        "type": "audio_cue",
+        "cue": "rescueJoin",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.041s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.041,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+0.047s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.047,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.048s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.048,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 1,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.049s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.049,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 2,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.049s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.049,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 3,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.050s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.05,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 4,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.055s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 0.055,
+        "type": "harness_stop",
+        "label": "capture-shot-early"
+      }
+    },
+    {
+      "at": "+15.135s",
+      "level": "info",
+      "action": "capture_export_reset",
+      "message": "capture_export_reset",
+      "data": {
+        "t": 15.135,
+        "type": "capture_export_reset",
+        "reason": "capture-shot-early_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 4,
+        "score": 400,
+        "lives": 5
+      }
+    }
+  ]
+}

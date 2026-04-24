@@ -50,6 +50,20 @@ Examples:
 - `player_shot`
 - `player_loss`
 
+Where practical, these logs should also annotate:
+
+- player movement intent
+- firing actions
+- visible lane corrections
+- enemy group identity
+- challenge / boss / capture state
+
+That richer annotation is what will eventually let the same evidence support:
+
+- more detailed personas
+- persona-vs-player competition
+- future learn-by-playing personas in simulation
+
 ### 2. Audio-Aligned Windows
 
 Each important window should support:
@@ -71,6 +85,13 @@ Each window should also support reusable visual comparison artifacts such as:
 - board-state snapshots
 - boss / escort / capture / challenge group examples
 - player ship frames in movement windows
+
+This should include labeled examples of:
+
+- core alien families
+- boss / escort combinations
+- player ship movement states
+- challenge / result presentation states
 
 These should be tied to timestamps and notes so they can support both docs and future harness work.
 

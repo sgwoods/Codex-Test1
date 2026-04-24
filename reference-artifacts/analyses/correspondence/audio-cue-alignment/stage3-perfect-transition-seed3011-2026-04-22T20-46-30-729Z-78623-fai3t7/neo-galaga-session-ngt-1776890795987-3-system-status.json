@@ -1,0 +1,850 @@
+{
+  "generatedAt": "2026-04-22T20:46:36.323Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.463.sha.e7ec04f",
+    "commit": "e7ec04f7e4506d614ab1f0d9897d08b38a818bfd",
+    "branch": "codex/document-project-principles",
+    "dirty": false,
+    "released": "Apr 22 2026, 1:06 PM EDT",
+    "state": "codex/document-project-principles@e7ec04f clean",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:62437/index.html",
+  "game": {
+    "stage": 4,
+    "score": 19000,
+    "lives": 3,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "auto",
+    "lastCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-hint",
+      "audioTheme": "aurora-rise",
+      "phase": "stage",
+      "variant": 11,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 4,
+      "challenge": false,
+      "at": 2.578
+    },
+    "reference": {
+      "lastRequested": "",
+      "lastLoaded": "",
+      "lastStarted": "",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: auto · last cue stagePulse (aurora-rise) · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 615960667,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 1244880,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 975042114,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 0.133,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 3,
+        "bonus": 1000,
+        "hits": 32,
+        "total": 40
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 69267974,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 548291699,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 6295706,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 982910593,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 464158685,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 978436648,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 106303374,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 240325508,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 0.133,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 4,
+        "bonus": 1000,
+        "hits": 40,
+        "total": 40
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.133,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 345367200,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.133s",
+      "level": "info",
+      "action": "harness_force_perfect_challenge_clear",
+      "message": "harness_force_perfect_challenge_clear",
+      "data": {
+        "t": 0.133,
+        "type": "harness_force_perfect_challenge_clear",
+        "stage": 3,
+        "cleared": 40,
+        "hits": 40,
+        "total": 40
+      }
+    },
+    {
+      "at": "+0.152s",
+      "level": "info",
+      "action": "challenge_clear",
+      "message": "challenge_clear",
+      "data": {
+        "t": 0.152,
+        "type": "challenge_clear",
+        "stage": 3,
+        "hits": 40,
+        "total": 40,
+        "upperBandY": 180,
+        "upperBandTime": 7.4,
+        "avgUpperBandTime": 0.185
+      }
+    },
+    {
+      "at": "+0.152s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.152,
+        "type": "audio_cue",
+        "cue": "challengePerfect",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.152s",
+      "level": "info",
+      "action": "challenge_transition_queued",
+      "message": "challenge_transition_queued",
+      "data": {
+        "t": 0.152,
+        "type": "challenge_transition_queued",
+        "stage": 3,
+        "pendingStage": 4,
+        "hits": 40,
+        "total": 40,
+        "postChallengeT": 1.45,
+        "bannerMode": "challengeResult",
+        "bonusTotal": 15000
+      }
+    },
+    {
+      "at": "+0.213s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.213,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+0.252s",
+      "level": "info",
+      "action": "challenge_transition_timer_elapsed",
+      "message": "challenge_transition_timer_elapsed",
+      "data": {
+        "t": 0.252,
+        "type": "challenge_transition_timer_elapsed",
+        "stage": 3,
+        "pendingStage": 4,
+        "postChallengeT": 0,
+        "nextStageT": 0,
+        "challenge": true,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+0.253s",
+      "level": "info",
+      "action": "challenge_transition_started",
+      "message": "challenge_transition_started",
+      "data": {
+        "t": 0.253,
+        "type": "challenge_transition_started",
+        "stage": 3,
+        "pendingStage": 4,
+        "targetStage": 4,
+        "mode": "challengeResult",
+        "nextIsChallenge": false,
+        "nextStageT": 2.5,
+        "postChallengeT": 0,
+        "challenge": true,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+0.253s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.253,
+        "type": "audio_cue",
+        "cue": "stageTransition",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.253s",
+      "level": "info",
+      "action": "challenge_transition_spawn_commit",
+      "message": "challenge_transition_spawn_commit",
+      "data": {
+        "t": 0.253,
+        "type": "challenge_transition_spawn_commit",
+        "stage": 3,
+        "pendingStage": 4,
+        "nextStageT": 0,
+        "challenge": true
+      }
+    },
+    {
+      "at": "+0.253s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0.253,
+        "type": "stage_spawn",
+        "stage": 4,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.253s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0.253,
+        "type": "stage_profile",
+        "stage": 4,
+        "challenge": false,
+        "band": "scorpion",
+        "challengeFamily": "classic",
+        "beeFamily": "scorpion",
+        "butFamily": "scorpion",
+        "bossFamily": "classic",
+        "themeId": "scorpion-dawn",
+        "backgroundMode": "aurora-hint",
+        "frameAccent": "amber-blue",
+        "bossArchetype": "super-boss-scorpion"
+      }
+    },
+    {
+      "at": "+0.256s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.256,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.258s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.258,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 1,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.259s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.259,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 2,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.260s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.26,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 3,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.261s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.261,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 4,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.262s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.262,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 5,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.264s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.264,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 6,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.265s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.265,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 7,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.266s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.266,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 8,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.267s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.267,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "dive",
+        "x": 191.25,
+        "y": 43.2,
+        "originLane": 6,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 579240636,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 7,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false,
+        "targetX": 140,
+        "scripted": 0
+      }
+    },
+    {
+      "at": "+0.268s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.268,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 9,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.269s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.269,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 10,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.270s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.27,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 11,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.270s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.27,
+        "type": "enemy_lower_field",
+        "stage": 4,
+        "y": 226.39,
+        "stageClock": 4.767,
+        "playerLane": 5,
+        "id": 579240636,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 7,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.298s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 0.298,
+        "type": "harness_stop",
+        "label": "stage3-perfect-transition"
+      }
+    }
+  ]
+}

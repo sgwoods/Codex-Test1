@@ -1,0 +1,278 @@
+{
+  "generatedAt": "2026-04-22T10:51:27.731Z",
+  "movementRun": {
+    "ok": true,
+    "outDir": "/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/player-movement/2026-04-22-22221ed",
+    "baselineScore10": 4.6,
+    "currentScore10": 6
+  },
+  "closeShotRun": {
+    "ok": true,
+    "files": [
+      "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/close-shot-hit/close-shot-hit-seed9048-2026-04-22T10-49-28-912Z-89537-kkbl8f/neo-galaga-session-ngt-1776854972117-3.json",
+      "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/close-shot-hit/close-shot-hit-seed9048-2026-04-22T10-49-28-912Z-89537-kkbl8f/neo-galaga-session-ngt-1776854972117-3-system-status.json"
+    ],
+    "shotAt": 0.024,
+    "killAt": 0.025,
+    "delay": 0.001,
+    "enemy": {
+      "id": 799329204,
+      "type": "but",
+      "lane": 4
+    }
+  },
+  "stage2SafetyRun": {
+    "ok": true,
+    "seeds": {
+      "51101": {
+        "advanced": {
+          "score": 2480,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-04-22T10-49-48-588Z-89752-3whj94/neo-galaga-session-ngt-1776854990882-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-04-22T10-49-48-588Z-89752-3whj94/neo-galaga-session-ngt-1776854990882-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 6190,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-04-22T10-49-52-205Z-89768-87ggf8/neo-galaga-session-ngt-1776854994441-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-04-22T10-49-52-205Z-89768-87ggf8/neo-galaga-session-ngt-1776854994441-3-system-status.json"
+          ]
+        }
+      },
+      "51201": {
+        "advanced": {
+          "score": 5300,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-04-22T10-49-55-789Z-89784-oq0hnd/neo-galaga-session-ngt-1776854998249-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-04-22T10-49-55-789Z-89784-oq0hnd/neo-galaga-session-ngt-1776854998249-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 6860,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-04-22T10-50-02-460Z-89878-fr5w12/neo-galaga-session-ngt-1776855006756-3.json",
+            "/Users/steven/Documents/Codex-Test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-04-22T10-50-02-460Z-89878-fr5w12/neo-galaga-session-ngt-1776855006756-3-system-status.json"
+          ]
+        }
+      }
+    }
+  },
+  "surfaceRun": {
+    "ok": true,
+    "checks": [
+      {
+        "id": "front-door-copy",
+        "description": "Front-door shell copy and startup framing",
+        "script": "check-front-door-copy-surface.js"
+      },
+      {
+        "id": "popup-surfaces",
+        "description": "Help, settings, leaderboard, account, and feedback panels",
+        "script": "check-popup-surfaces.js"
+      },
+      {
+        "id": "dock-buttons",
+        "description": "Dock buttons and toggle actions",
+        "script": "check-dock-button-actions.js"
+      },
+      {
+        "id": "pilot-records-panel",
+        "description": "Pilot records and account replay panel surface",
+        "script": "check-pilot-records-panel.js"
+      },
+      {
+        "id": "wait-score-overlay",
+        "description": "Wait-mode score overlay surface",
+        "script": "check-wait-score-overlay.js"
+      },
+      {
+        "id": "leaderboard-build-date-filter",
+        "description": "Leaderboard build/date trust context and filtering",
+        "script": "check-leaderboard-build-date-filter.js"
+      },
+      {
+        "id": "dev-graphics-options",
+        "description": "Graphics options and visible rendering controls",
+        "script": "check-dev-graphics-options.js"
+      },
+      {
+        "id": "attract-score-cycle",
+        "description": "Attract/wait score cycling surface",
+        "script": "check-attract-score-cycle.js"
+      },
+      {
+        "id": "audio-theme-phases",
+        "description": "Audio theme selection by phase",
+        "script": "check-audio-theme-phases.js"
+      },
+      {
+        "id": "audio-cue-slots",
+        "description": "Audio cue slot consistency",
+        "script": "check-audio-cue-slots.js"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "movement",
+      "label": "Player movement conformance",
+      "score10": 6,
+      "evidence": [
+        "player-movement report"
+      ],
+      "read": "Current movement scored 6/10 against the control-principles profile, versus 4.6/10 for the shipped local baseline."
+    },
+    {
+      "id": "combat-responsiveness",
+      "label": "Shot and hit responsiveness",
+      "score10": 10,
+      "evidence": [
+        "close-shot-hit",
+        "movement fire window"
+      ],
+      "read": "Close-shot responsiveness passed, and movement-fire post-shot travel was 43.13, with shot delay 5ms."
+    },
+    {
+      "id": "stage1-timing",
+      "label": "Stage-1 opening timing fidelity",
+      "score10": 2.1,
+      "evidence": [
+        "stage1-opening-first-dive report"
+      ],
+      "read": "1/4 metrics were within tolerance; worst current delta was 8.338."
+    },
+    {
+      "id": "stage1-geometry",
+      "label": "Stage-1 opening geometry fidelity",
+      "score10": 10,
+      "evidence": [
+        "stage1-opening-spacing report"
+      ],
+      "read": "Geometry held steady with 0 changed targets and max drift 0."
+    },
+    {
+      "id": "dive-safety",
+      "label": "Dive fairness and safety",
+      "score10": 9.1,
+      "evidence": [
+        "persona-stage2-safety"
+      ],
+      "read": "Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail."
+    },
+    {
+      "id": "capture-rescue",
+      "label": "Capture and rescue rule fidelity",
+      "score10": 10,
+      "evidence": [
+        "capture-rescue correspondence"
+      ],
+      "read": "3/3 capture scenarios matched, with worst tracked-time drift 0.004."
+    },
+    {
+      "id": "challenge-timing",
+      "label": "Challenge-stage timing fidelity",
+      "score10": 4.2,
+      "evidence": [
+        "challenge-stage correspondence"
+      ],
+      "read": "1/5 challenge timing metrics were within tolerance; worst current delta was 3.938."
+    },
+    {
+      "id": "progression",
+      "label": "Progression and persona depth",
+      "score10": 8.8,
+      "evidence": [
+        "persona-progression correspondence"
+      ],
+      "read": "20/20 persona checks passed; progression ordering is still missing one ordering edge case."
+    },
+    {
+      "id": "audio",
+      "label": "Audio identity and cue alignment",
+      "score10": 4.4,
+      "evidence": [
+        "aurora-audio-theme-comparison",
+        "galaga-audio-overlap"
+      ],
+      "read": "Audio score blends cue-identity similarity against the preserved Galaga-inspired reference mix with the overlap/timing windows captured in the audio-overlap analysis."
+    },
+    {
+      "id": "ui-shell",
+      "label": "UI, shell, and graphics integrity",
+      "score10": 9.2,
+      "evidence": [
+        "dev candidate surface suite"
+      ],
+      "read": "The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed."
+    }
+  ],
+  "summary": {
+    "overallScore10": 7.4,
+    "strongestCategory": {
+      "id": "combat-responsiveness",
+      "label": "Shot and hit responsiveness",
+      "score10": 10,
+      "evidence": [
+        "close-shot-hit",
+        "movement fire window"
+      ],
+      "read": "Close-shot responsiveness passed, and movement-fire post-shot travel was 43.13, with shot delay 5ms."
+    },
+    "weakestCategory": {
+      "id": "stage1-timing",
+      "label": "Stage-1 opening timing fidelity",
+      "score10": 2.1,
+      "evidence": [
+        "stage1-opening-first-dive report"
+      ],
+      "read": "1/4 metrics were within tolerance; worst current delta was 8.338."
+    },
+    "priorityGaps": [
+      {
+        "id": "stage1-timing",
+        "label": "Stage-1 opening timing fidelity",
+        "score10": 2.1,
+        "evidence": [
+          "stage1-opening-first-dive report"
+        ],
+        "read": "1/4 metrics were within tolerance; worst current delta was 8.338."
+      },
+      {
+        "id": "challenge-timing",
+        "label": "Challenge-stage timing fidelity",
+        "score10": 4.2,
+        "evidence": [
+          "challenge-stage correspondence"
+        ],
+        "read": "1/5 challenge timing metrics were within tolerance; worst current delta was 3.938."
+      },
+      {
+        "id": "audio",
+        "label": "Audio identity and cue alignment",
+        "score10": 4.4,
+        "evidence": [
+          "aurora-audio-theme-comparison",
+          "galaga-audio-overlap"
+        ],
+        "read": "Audio score blends cue-identity similarity against the preserved Galaga-inspired reference mix with the overlap/timing windows captured in the audio-overlap analysis."
+      }
+    ]
+  }
+}

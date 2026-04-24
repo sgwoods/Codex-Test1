@@ -1,0 +1,876 @@
+{
+  "generatedAt": "2026-04-22T20:45:10.376Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.463.sha.e7ec04f",
+    "commit": "e7ec04f7e4506d614ab1f0d9897d08b38a818bfd",
+    "branch": "codex/document-project-principles",
+    "dirty": false,
+    "released": "Apr 22 2026, 1:06 PM EDT",
+    "state": "codex/document-project-principles@e7ec04f clean",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:62028/index.html",
+  "game": {
+    "stage": 1,
+    "score": 0,
+    "lives": 5,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "auto",
+    "lastCue": {
+      "cue": "enemyShot",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "classic-arcade",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 1,
+      "challenge": false,
+      "at": 2.785
+    },
+    "reference": {
+      "lastRequested": "",
+      "lastLoaded": "",
+      "lastStarted": "",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: auto · last cue enemyShot (classic-arcade) · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.516s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.516,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 141.43,
+        "y": 96.06,
+        "vx": 10.37,
+        "vy": 156,
+        "bulletLane": 5,
+        "playerLane": 9,
+        "id": 693105450,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 3,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.516s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.516,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.548s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.548,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      }
+    },
+    {
+      "at": "+0.558s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.558,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.563s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.563,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 42,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.563s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.563,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 43,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.564s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.564,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 137.93,
+        "y": 40.73,
+        "originLane": 4,
+        "targetLane": 1,
+        "playerLane": 1,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 35.4,
+        "scripted": 1
+      }
+    },
+    {
+      "at": "+0.564s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.564,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 44,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.565s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.565,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 45,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.565s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.565,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 46,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.565s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.565,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 106.12,
+        "y": 92.74,
+        "vx": -7.77,
+        "vy": 156,
+        "bulletLane": 3,
+        "playerLane": 0,
+        "id": 251377273,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 3,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.565s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.565,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.566s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.566,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 226.04,
+        "stageClock": 18.433,
+        "playerLane": 0,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.566s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.566,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 47,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.566s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.566,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 48,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.567s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.567,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 49,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.568s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.568,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 50,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.568s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.568,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 51,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.568s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.568,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 123.05,
+        "y": 94.58,
+        "vx": -9.12,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 0,
+        "id": 505724415,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.568s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.568,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.594s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.594,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      }
+    },
+    {
+      "at": "+0.600s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.6,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 52,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.601s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.601,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 135.97,
+        "y": 25.33,
+        "originLane": 4,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 1
+      }
+    },
+    {
+      "at": "+0.601s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.601,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "escort",
+        "x": 120.19,
+        "y": 39.33,
+        "originLane": 4,
+        "targetLane": null,
+        "playerLane": 0,
+        "id": 495474296,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 4,
+        "dive": 5,
+        "carry": false,
+        "lead": 955225200,
+        "offset": -30
+      }
+    },
+    {
+      "at": "+0.602s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.602,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 53,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.603s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.603,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 54,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.604s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.604,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 55,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.604s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.604,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 223.37,
+        "stageClock": 21.583,
+        "playerLane": 0,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.605s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.605,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 56,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.605s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.605,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 54.11,
+        "y": 90.88,
+        "vx": -3.61,
+        "vy": 156,
+        "bulletLane": 2,
+        "playerLane": 0,
+        "id": 736338577,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 3,
+        "lane": 2,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.605s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.605,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.605s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.605,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 364.98,
+        "stageClock": 22.167,
+        "playerLane": 0,
+        "id": 495474296,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 1,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.606s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.606,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 57,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.607s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.607,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 58,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.607s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.607,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 59,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.607s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.607,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 60,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.607s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.607,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 61,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.608s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.608,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 156.04,
+        "y": 97.3,
+        "vx": -11,
+        "vy": 156,
+        "bulletLane": 5,
+        "playerLane": 0,
+        "id": 890707246,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 3,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.608s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.608,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.623s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 0.623,
+        "type": "harness_stop",
+        "label": "stage1-descent"
+      }
+    }
+  ]
+}

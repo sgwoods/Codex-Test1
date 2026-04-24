@@ -1,0 +1,350 @@
+{
+  "generatedAt": "2026-04-19T17:02:50.940Z",
+  "profile": {
+    "id": "capture-rescue-correspondence",
+    "title": "Capture / Rescue Correspondence",
+    "purpose": "Compare core capture-window and escape-recovery behavior between the shipped local baseline and the current candidate while enforcing expected rule outcomes.",
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "scenarios": [
+      {
+        "id": "capture-shot-early",
+        "path": "tools/harness/scenarios/capture-shot-early.json",
+        "expectations": {
+          "mustHave": [
+            "harness_capture_escape_setup",
+            "player_shot",
+            "capture_escape"
+          ],
+          "mustNotHave": [
+            "fighter_captured"
+          ],
+          "timingAnchor": "harness_capture_escape_setup",
+          "trackedTimes": [
+            {
+              "type": "player_shot",
+              "measure": "sinceAnchor"
+            },
+            {
+              "type": "capture_escape",
+              "measure": "field",
+              "field": "timeSinceCaptureStart"
+            }
+          ]
+        }
+      },
+      {
+        "id": "capture-shot-late",
+        "path": "tools/harness/scenarios/capture-shot-late.json",
+        "expectations": {
+          "mustHave": [
+            "harness_capture_escape_setup",
+            "fighter_captured"
+          ],
+          "mustNotHave": [
+            "capture_escape"
+          ],
+          "timingAnchor": "harness_capture_escape_setup",
+          "trackedTimes": [
+            {
+              "type": "fighter_captured",
+              "measure": "field",
+              "field": "timeSinceCaptureStart"
+            }
+          ]
+        }
+      },
+      {
+        "id": "capture-escape-recovery",
+        "path": "tools/harness/scenarios/capture-escape-recovery.json",
+        "expectations": {
+          "mustHave": [
+            "capture_escape",
+            "player_shot"
+          ],
+          "mustNotHave": [
+            "fighter_captured",
+            "ship_lost"
+          ],
+          "timingAnchor": "harness_capture_escape_setup",
+          "trackedTimes": [
+            {
+              "type": "capture_escape",
+              "measure": "field",
+              "field": "timeSinceCaptureStart"
+            }
+          ]
+        }
+      }
+    ],
+    "tolerances": {
+      "maxTrackedTimeDrift": 0.35
+    }
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "scenarios": [
+    {
+      "id": "capture-shot-early",
+      "baseline": {
+        "sessionPath": "reference-artifacts/analyses/correspondence/capture-rescue/capture-shot-early-seed9043-2026-04-19T17-01-01-573Z-74665-1yh79s/neo-galaga-session-ngt-1776618063845-3.json",
+        "counts": {
+          "game_start": 1,
+          "stage_spawn": 1,
+          "stage_profile": 1,
+          "harness_capture_escape_setup": 1,
+          "enemy_attack_start": 1,
+          "key_down": 1,
+          "player_shot": 1,
+          "enemy_killed": 1,
+          "capture_escape": 1,
+          "key_up": 1,
+          "harness_stop": 1,
+          "capture_export_reset": 1
+        },
+        "tracked": {
+          "player_shot": 0.007,
+          "capture_escape": 0.183
+        }
+      },
+      "current": {
+        "sessionPath": "reference-artifacts/analyses/correspondence/capture-rescue/capture-shot-early-seed9043-2026-04-19T17-01-20-126Z-74834-ijorsv/neo-galaga-session-ngt-1776618082349-3.json",
+        "counts": {
+          "game_start": 1,
+          "stage_spawn": 1,
+          "stage_profile": 1,
+          "audio_cue": 9,
+          "harness_capture_escape_setup": 1,
+          "enemy_attack_start": 1,
+          "key_down": 1,
+          "player_shot": 1,
+          "enemy_killed": 1,
+          "capture_escape": 1,
+          "key_up": 1,
+          "harness_stop": 1,
+          "capture_export_reset": 1
+        },
+        "tracked": {
+          "player_shot": 0.011,
+          "capture_escape": 0.183
+        }
+      },
+      "checks": [
+        {
+          "type": "mustHave:harness_capture_escape_setup",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustHave:player_shot",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustHave:capture_escape",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustNotHave:fighter_captured",
+          "baselineHas": false,
+          "currentHas": false,
+          "ok": true
+        }
+      ],
+      "timing": [
+        {
+          "type": "player_shot",
+          "measure": "sinceAnchor",
+          "field": null,
+          "anchor": "harness_capture_escape_setup",
+          "baselineAt": 0.007,
+          "currentAt": 0.011,
+          "drift": 0.004,
+          "withinTolerance": true
+        },
+        {
+          "type": "capture_escape",
+          "measure": "field",
+          "field": "timeSinceCaptureStart",
+          "anchor": "harness_capture_escape_setup",
+          "baselineAt": 0.183,
+          "currentAt": 0.183,
+          "drift": 0,
+          "withinTolerance": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "id": "capture-shot-late",
+      "baseline": {
+        "sessionPath": "reference-artifacts/analyses/correspondence/capture-rescue/capture-shot-late-seed9044-2026-04-19T17-01-38-358Z-74959-qgorvy/neo-galaga-session-ngt-1776618100274-3.json",
+        "counts": {
+          "game_start": 1,
+          "stage_spawn": 1,
+          "stage_profile": 1,
+          "harness_capture_escape_setup": 1,
+          "enemy_attack_start": 1,
+          "key_down": 1,
+          "key_up": 1,
+          "fighter_captured": 1,
+          "capture_retreat_phase": 1,
+          "harness_stop": 1,
+          "capture_export_reset": 1
+        },
+        "tracked": {
+          "fighter_captured": 0.45
+        }
+      },
+      "current": {
+        "sessionPath": "reference-artifacts/analyses/correspondence/capture-rescue/capture-shot-late-seed9044-2026-04-19T17-01-56-425Z-75143-5e9fsf/neo-galaga-session-ngt-1776618118617-3.json",
+        "counts": {
+          "game_start": 1,
+          "stage_spawn": 1,
+          "stage_profile": 1,
+          "audio_cue": 9,
+          "harness_capture_escape_setup": 1,
+          "enemy_attack_start": 1,
+          "key_down": 1,
+          "key_up": 1,
+          "fighter_captured": 1,
+          "capture_retreat_phase": 1,
+          "harness_stop": 1,
+          "capture_export_reset": 1
+        },
+        "tracked": {
+          "fighter_captured": 0.45
+        }
+      },
+      "checks": [
+        {
+          "type": "mustHave:harness_capture_escape_setup",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustHave:fighter_captured",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustNotHave:capture_escape",
+          "baselineHas": false,
+          "currentHas": false,
+          "ok": true
+        }
+      ],
+      "timing": [
+        {
+          "type": "fighter_captured",
+          "measure": "field",
+          "field": "timeSinceCaptureStart",
+          "anchor": "harness_capture_escape_setup",
+          "baselineAt": 0.45,
+          "currentAt": 0.45,
+          "drift": 0,
+          "withinTolerance": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "id": "capture-escape-recovery",
+      "baseline": {
+        "sessionPath": "reference-artifacts/analyses/correspondence/capture-rescue/capture-escape-recovery-seed9032-2026-04-19T17-02-14-654Z-75524-avlk9j/neo-galaga-session-ngt-1776618136851-3.json",
+        "counts": {
+          "game_start": 1,
+          "stage_spawn": 1,
+          "stage_profile": 1,
+          "harness_capture_escape_setup": 1,
+          "enemy_attack_start": 1,
+          "harness_spawn_player_bullet": 1,
+          "enemy_killed": 1,
+          "capture_escape": 1,
+          "key_down": 1,
+          "player_shot": 1,
+          "key_up": 1,
+          "harness_stop": 1,
+          "capture_export_reset": 1
+        },
+        "tracked": {
+          "capture_escape": 0.267
+        }
+      },
+      "current": {
+        "sessionPath": "reference-artifacts/analyses/correspondence/capture-rescue/capture-escape-recovery-seed9032-2026-04-19T17-02-33-327Z-75657-ge2xyj/neo-galaga-session-ngt-1776618155558-3.json",
+        "counts": {
+          "game_start": 1,
+          "stage_spawn": 1,
+          "stage_profile": 1,
+          "audio_cue": 12,
+          "harness_capture_escape_setup": 1,
+          "enemy_attack_start": 1,
+          "harness_spawn_player_bullet": 1,
+          "enemy_killed": 1,
+          "capture_escape": 1,
+          "key_down": 1,
+          "player_shot": 1,
+          "key_up": 1,
+          "harness_stop": 1,
+          "capture_export_reset": 1
+        },
+        "tracked": {
+          "capture_escape": 0.267
+        }
+      },
+      "checks": [
+        {
+          "type": "mustHave:capture_escape",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustHave:player_shot",
+          "baselineHas": true,
+          "currentHas": true,
+          "ok": true
+        },
+        {
+          "type": "mustNotHave:fighter_captured",
+          "baselineHas": false,
+          "currentHas": false,
+          "ok": true
+        },
+        {
+          "type": "mustNotHave:ship_lost",
+          "baselineHas": false,
+          "currentHas": false,
+          "ok": true
+        }
+      ],
+      "timing": [
+        {
+          "type": "capture_escape",
+          "measure": "field",
+          "field": "timeSinceCaptureStart",
+          "anchor": "harness_capture_escape_setup",
+          "baselineAt": 0.267,
+          "currentAt": 0.267,
+          "drift": 0,
+          "withinTolerance": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "total": 3,
+    "worstTrackedTimeDrift": 0.004
+  }
+}

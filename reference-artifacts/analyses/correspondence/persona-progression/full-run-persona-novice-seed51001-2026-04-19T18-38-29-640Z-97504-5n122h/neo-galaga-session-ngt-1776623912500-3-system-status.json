@@ -1,0 +1,878 @@
+{
+  "generatedAt": "2026-04-19T18:38:47.837Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.446.sha.6f8198b.dirty",
+    "commit": "6f8198b4d84b5d7d37924bae93b88914b604391a",
+    "branch": "codex/document-project-principles",
+    "dirty": true,
+    "released": "Apr 19 2026, 2:37 PM EDT",
+    "state": "codex/document-project-principles@6f8198b dirty",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:60801/index.html",
+  "game": {
+    "stage": 3,
+    "score": 13400,
+    "lives": 0,
+    "started": false,
+    "paused": false,
+    "challenge": true,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "auto",
+    "lastCue": {
+      "cue": "gameOver",
+      "atmosphereId": "aurora-crown",
+      "audioTheme": "aurora-crown",
+      "phase": "results",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 3,
+      "challenge": true,
+      "at": 1.351
+    },
+    "reference": {
+      "lastRequested": "",
+      "lastLoaded": "",
+      "lastStarted": "",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: auto · last cue gameOver (aurora-crown) · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.224s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.224,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.225,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 196,
+        "y": 322,
+        "shotXs": [
+          196
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.225,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 0.225,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 0,
+        "bonus": 1000,
+        "hits": 27,
+        "total": 40
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.225,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 183789885,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.225,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.225,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 214.33,
+        "y": 322,
+        "shotXs": [
+          214.33
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.225,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.225,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 808842280,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 7,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.225,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.225,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 214.33,
+        "y": 322,
+        "shotXs": [
+          214.33
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.225s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.225,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 0.226,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 2,
+        "bonus": 1000,
+        "hits": 29,
+        "total": 40
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.226,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 320534306,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 7,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.226,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.226,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 214.33,
+        "y": 322,
+        "shotXs": [
+          214.33
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.226,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.226,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 93040798,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 7,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.226,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.226,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 236.33,
+        "y": 322,
+        "shotXs": [
+          236.33
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.226,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.226,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 285991708,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.226s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.226,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.227,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 240,
+        "y": 322,
+        "shotXs": [
+          240
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.227,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.227,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 631138538,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.227,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.227,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 240,
+        "y": 322,
+        "shotXs": [
+          240
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.227,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.227,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 837700136,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.227,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 0.227,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 251,
+        "y": 322,
+        "shotXs": [
+          251
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.227,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.227,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 435702481,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.227s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.227,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.228s",
+      "level": "info",
+      "action": "ship_lost",
+      "message": "ship_lost",
+      "data": {
+        "t": 0.228,
+        "type": "ship_lost",
+        "stage": 3,
+        "score": 13400,
+        "livesBefore": 1,
+        "stageClock": 11.5,
+        "attackers": 0,
+        "enemyBullets": 0,
+        "enemies": 6,
+        "playerX": 271,
+        "playerY": 340,
+        "playerLane": 9,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 310287187,
+        "enemyType": "but",
+        "enemyDive": 9,
+        "enemyX": 282.01,
+        "enemyY": 329.74,
+        "enemyLane": 9,
+        "enemyForm": true,
+        "challenge": true
+      }
+    },
+    {
+      "at": "+0.228s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.228,
+        "type": "audio_cue",
+        "cue": "playerHit",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.228s",
+      "level": "info",
+      "action": "game_over",
+      "message": "game_over",
+      "data": {
+        "t": 0.228,
+        "type": "game_over",
+        "score": 13400,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+0.229s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.229,
+        "type": "audio_cue",
+        "cue": "gameOver",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "aurora-crown",
+        "phase": "results",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+15.330s",
+      "level": "info",
+      "action": "capture_export_reset",
+      "message": "capture_export_reset",
+      "data": {
+        "t": 15.33,
+        "type": "capture_export_reset",
+        "reason": "full-run-persona_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 3,
+        "score": 13400,
+        "lives": 0
+      }
+    }
+  ]
+}

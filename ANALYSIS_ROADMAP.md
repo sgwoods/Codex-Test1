@@ -168,6 +168,13 @@ The `galaxian-mechanics` archive is useful, but it is still mostly planning-leve
 - formation/layout baselines
 - flagship/escort scoring and dive traces
 
+That library should support more than design understanding. It should support:
+
+- planning the minimum Platinum extensions needed for the second game
+- iterative pack construction from preserved evidence
+- keeping the new game compatible with the same core player controls
+- richer persona creation and eventual simulated-opponent work
+
 ## Recommended Analysis Order From Here
 
 1. Build movement reference traces from preserved gameplay footage.

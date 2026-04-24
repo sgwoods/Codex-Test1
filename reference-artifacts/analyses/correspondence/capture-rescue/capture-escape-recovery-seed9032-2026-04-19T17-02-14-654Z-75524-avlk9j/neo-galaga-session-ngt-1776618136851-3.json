@@ -1,0 +1,676 @@
+{
+  "session": {
+    "id": "ngt-1776618136851-3",
+    "build": "1.2.3+build.388.sha.13c8421",
+    "reason": "game_start",
+    "createdAt": "2026-04-19T17:02:16.851Z",
+    "url": "http://127.0.0.1:61132/index.html",
+    "viewport": {
+      "w": 1440,
+      "h": 1800,
+      "dpr": 1
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.0.0 Safari/537.36",
+    "events": [
+      {
+        "t": 0.296,
+        "type": "game_start",
+        "persona": null
+      },
+      {
+        "t": 0.296,
+        "type": "stage_spawn",
+        "stage": 4,
+        "challenge": false,
+        "persona": null
+      },
+      {
+        "t": 0.296,
+        "type": "stage_profile",
+        "stage": 4,
+        "challenge": false,
+        "band": "scorpion",
+        "challengeFamily": "classic",
+        "beeFamily": "scorpion",
+        "butFamily": "scorpion",
+        "bossFamily": "classic",
+        "themeId": "scorpion-dawn",
+        "backgroundMode": "aurora-hint",
+        "frameAccent": "amber-blue",
+        "bossArchetype": "super-boss-scorpion"
+      },
+      {
+        "t": 0.386,
+        "type": "harness_capture_escape_setup",
+        "boss": 916235726,
+        "playerX": 140,
+        "playerY": 186,
+        "bossX": 140,
+        "bossY": 110,
+        "capT": 0.95,
+        "stage": 4,
+        "keepAlive": 1
+      },
+      {
+        "t": 0.386,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "capture",
+        "x": 140,
+        "y": 110,
+        "originLane": 5,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 916235726,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 2,
+        "carry": false,
+        "targetX": 140,
+        "targetY": 136,
+        "scripted": 0,
+        "harness": 1,
+        "captureEscape": 1
+      },
+      {
+        "t": 0.389,
+        "type": "harness_spawn_player_bullet",
+        "x": 140,
+        "y": 156,
+        "v": 560
+      },
+      {
+        "t": 0.39,
+        "type": "enemy_killed",
+        "points": 400,
+        "dive": 2,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 916235726,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 0.391,
+        "type": "capture_escape",
+        "stage": 4,
+        "reason": "boss_destroyed",
+        "playerX": 140.33,
+        "playerY": 155.83,
+        "playerLane": 5,
+        "bossId": 916235726,
+        "timeSinceCaptureStart": 0.267
+      },
+      {
+        "t": 0.4,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 0.401,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 140.33,
+        "y": 322,
+        "shotXs": [
+          140.33
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 0.403,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 0.409,
+        "type": "harness_stop",
+        "label": "capture-escape-recovery"
+      },
+      {
+        "t": 15.489,
+        "type": "capture_export_reset",
+        "reason": "capture-escape-recovery_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 4,
+        "score": 400,
+        "lives": 5
+      }
+    ],
+    "snapshots": [
+      {
+        "t": 0.296,
+        "tag": "stage_spawn",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.635,
+          "recoverT": 1.34,
+          "attackGapT": 1.42,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.381,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.635,
+          "recoverT": 1.34,
+          "attackGapT": 1.42,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.393,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 0.367,
+        "stageClock": 0.367,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 248.94,
+          "vx": 0,
+          "cd": 0.06,
+          "inv": 1.1,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.119,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 20,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.394,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 0.883,
+        "stageClock": 0.883,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0.583,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 1.602,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.395,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 1.4,
+        "stageClock": 1.4,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0.067,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 1.085,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.396,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 1.917,
+        "stageClock": 1.917,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0.569,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.404,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 2.433,
+        "stageClock": 2.433,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.04,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0.052,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.405,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 2.95,
+        "stageClock": 2.95,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.409,
+        "tag": "harness_stop",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 3.15,
+        "stageClock": 3.15,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 15.489,
+        "tag": "export",
+        "gameKey": "aurora-galactica",
+        "started": false,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "scorpion",
+        "theme": "scorpion-dawn",
+        "simT": 3.15,
+        "stageClock": 3.15,
+        "rngState": 3072517285,
+        "player": {
+          "x": 140.33,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 243492965,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 1,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      }
+    ],
+    "t0": 703.5,
+    "seed": 9032,
+    "duration": 15.489,
+    "eventCount": 13,
+    "snapshotCount": 10
+  }
+}

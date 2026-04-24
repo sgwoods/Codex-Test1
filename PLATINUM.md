@@ -30,6 +30,8 @@ multiple games:
 - shared services such as auth, leaderboard transport, and feedback transport
 - shared documentation and release discipline
 - platform-only harnesses and publish checks
+- a stable control contract that lets players move between hosted games with
+  the same core input model
 
 At the same time, Platinum should stay out of application-specific rules.
 
@@ -168,6 +170,8 @@ Treat a change as Platinum work when it affects:
 - release tooling
 - shared docs and project pages
 - pack-loading or pack-contract behavior
+- same-control compliance across multiple hosted games
+- persona-vs-player orchestration that should work for more than one pack
 
 Treat a change as application work when it affects:
 
@@ -209,6 +213,21 @@ Desired outcome:
 - forward-compatible pack evolution
 - earlier validation failures during boot
 
+### 1b. Multi-game ingestion workflow
+
+We should get better at ingesting a second classic game lineage by turning
+preserved footage, manuals, timing libraries, and comparison artifacts into a
+repeatable pack-construction workflow.
+
+Desired outcome:
+
+- a new game can be analyzed in all major aspects with minimal user
+  intervention once the reference corpus exists
+- Platinum can propose its own extension points where needed instead of
+  forcing every new mechanic into Aurora-shaped structures
+- the second game grows from a durable reference program rather than from
+  ad hoc interpretation
+
 ### 2. Storage and migration policy
 
 We should decide more intentionally what is:
@@ -217,6 +236,29 @@ We should decide more intentionally what is:
 - migrated once
 - never migrated
 - clearly platform-owned versus application-owned data
+
+### 3. Shared control compliance
+
+As additional games come online, Platinum should protect a common player-input
+contract:
+
+- same basic move / fire semantics
+- pack-specific variation only where it is intentional and documented
+- harness coverage for any platform-level input differences
+
+This matters both for human players and for future persona-driven play.
+
+### 4. Persona and simulated opponents
+
+Platinum should eventually support more than passive replay personas.
+
+Desired outcome:
+
+- game packs can expose enough action/state annotation for richer personas
+- a player can compete against curated persona styles as a `Player 2`-like
+  experience
+- future learn-by-playing personas can train through simulation while still
+  respecting platform contracts and pack-specific rules
 
 ### 3. Platform-first documentation discipline
 

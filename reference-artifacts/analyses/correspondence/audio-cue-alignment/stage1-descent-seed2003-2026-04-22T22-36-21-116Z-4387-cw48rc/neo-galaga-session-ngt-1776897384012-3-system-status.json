@@ -1,0 +1,825 @@
+{
+  "generatedAt": "2026-04-22T22:36:24.319Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.463.sha.e7ec04f",
+    "commit": "e7ec04f7e4506d614ab1f0d9897d08b38a818bfd",
+    "branch": "codex/document-project-principles",
+    "dirty": false,
+    "released": "Apr 22 2026, 1:06 PM EDT",
+    "state": "codex/document-project-principles@e7ec04f clean",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:64242/index.html",
+  "game": {
+    "stage": 1,
+    "score": 0,
+    "lives": 4,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 46,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 1,
+      "challenge": false,
+      "at": 1.163
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-death.m4a",
+      "lastLoaded": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "lastStarted": "assets/reference-audio/galaga3-death.m4a",
+      "lastError": "",
+      "activeCount": 6
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue stagePulse (galaga-reference-assets) · requested galaga3-death.m4a · loaded galaga3-boss-damage-flagship-fighter-shot.m4a · started galaga3-boss-damage-flagship-fighter-shot.m4a · active 5"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.001s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0.001,
+        "type": "game_start",
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.001s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0.001,
+        "type": "stage_spawn",
+        "stage": 1,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.001s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0.001,
+        "type": "stage_profile",
+        "stage": 1,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+0.006s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.006,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.067s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.067,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.079s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.079,
+        "type": "audio_cue",
+        "cue": "formationArrival",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-level-underscore.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.109s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.109,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      }
+    },
+    {
+      "at": "+0.156s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.156,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.160s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.16,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.183s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.183,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      }
+    },
+    {
+      "at": "+0.200s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.2,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.207s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.207,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 169.56,
+        "y": 41.09,
+        "originLane": 5,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 1
+      }
+    },
+    {
+      "at": "+0.207s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.207,
+        "type": "audio_cue",
+        "cue": "attackCharge",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.209s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.209,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "dive",
+        "x": 136.92,
+        "y": 134.25,
+        "vx": -10.26,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 0,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 4,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.209s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.209,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.211s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.211,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 224.79,
+        "stageClock": 10.9,
+        "playerLane": 0,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.212s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.212,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 129.34,
+        "y": 53.87,
+        "vx": -9.63,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 0,
+        "id": 54585824,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.228s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.228,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      }
+    },
+    {
+      "at": "+0.241s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.241,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.261s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.261,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 203.37,
+        "y": 62.62,
+        "vx": 5.41,
+        "vy": 156,
+        "bulletLane": 7,
+        "playerLane": 9,
+        "id": 564026307,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 7,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.261s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.261,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 183.97,
+        "y": 52.92,
+        "originLane": 6,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 809063590,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 2,
+        "lane": 6,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      }
+    },
+    {
+      "at": "+0.261s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.261,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 227.21,
+        "stageClock": 15.267,
+        "playerLane": 9,
+        "id": 809063590,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 2,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.262s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.262,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 157.45,
+        "y": 92.13,
+        "vx": 9.08,
+        "vy": 156,
+        "bulletLane": 5,
+        "playerLane": 9,
+        "id": 251377273,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 3,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.275s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.275,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      }
+    },
+    {
+      "at": "+0.280s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.28,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.282s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.282,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 169.43,
+        "y": 40.05,
+        "originLane": 5,
+        "targetLane": 1,
+        "playerLane": 1,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 35.4,
+        "scripted": 1
+      }
+    },
+    {
+      "at": "+0.283s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.283,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 173.93,
+        "y": 90.88,
+        "vx": -11,
+        "vy": 156,
+        "bulletLane": 6,
+        "playerLane": 0,
+        "id": 505724415,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.283s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.283,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 224.83,
+        "stageClock": 18.417,
+        "playerLane": 0,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.283s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.283,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 105.9,
+        "y": 96.93,
+        "vx": -7.75,
+        "vy": 156,
+        "bulletLane": 3,
+        "playerLane": 0,
+        "id": 736338577,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 3,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.288s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.288,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      }
+    },
+    {
+      "at": "+0.289s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.289,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 147.69,
+        "y": 27.77,
+        "originLane": 5,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 1
+      }
+    },
+    {
+      "at": "+0.290s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0.29,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "escort",
+        "x": 152.43,
+        "y": 41.77,
+        "originLane": 5,
+        "targetLane": null,
+        "playerLane": 0,
+        "id": 495474296,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 5,
+        "dive": 5,
+        "carry": false,
+        "lead": 955225200,
+        "offset": -30
+      }
+    },
+    {
+      "at": "+0.291s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 0.291,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 226.07,
+        "stageClock": 21.567,
+        "playerLane": 0,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 2,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.291s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.291,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 207.71,
+        "y": 91.4,
+        "vx": -11,
+        "vy": 156,
+        "bulletLane": 7,
+        "playerLane": 0,
+        "id": 890707246,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 3,
+        "lane": 7,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.291s",
+      "level": "info",
+      "action": "ship_lost",
+      "message": "ship_lost",
+      "data": {
+        "t": 0.291,
+        "type": "ship_lost",
+        "stage": 1,
+        "score": 0,
+        "livesBefore": 5,
+        "stageClock": 22.017,
+        "attackers": 2,
+        "enemyBullets": 1,
+        "enemies": 40,
+        "playerX": 9,
+        "playerY": 340,
+        "playerLane": 0,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 495474296,
+        "enemyType": "but",
+        "enemyDive": 5,
+        "enemyX": 18.16,
+        "enemyY": 333.77,
+        "enemyLane": 1,
+        "enemyForm": true,
+        "challenge": false
+      }
+    },
+    {
+      "at": "+0.292s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.292,
+        "type": "audio_cue",
+        "cue": "playerHit",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.294s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 0.294,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 139.64,
+        "y": 93.74,
+        "vx": -10.45,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 0,
+        "id": 214987562,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 3,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.302s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 0.302,
+        "type": "harness_stop",
+        "label": "stage1-descent"
+      }
+    }
+  ]
+}

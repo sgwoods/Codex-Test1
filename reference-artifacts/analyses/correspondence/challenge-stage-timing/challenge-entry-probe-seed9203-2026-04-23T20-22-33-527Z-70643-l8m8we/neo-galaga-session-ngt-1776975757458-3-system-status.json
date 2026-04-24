@@ -1,0 +1,229 @@
+{
+  "generatedAt": "2026-04-23T20:22:37.505Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.471.sha.eda2821.dirty",
+    "commit": "eda2821924adbb2165533e1b732a26cfb27cd2b2",
+    "branch": "codex/timing-stage-flow-pass",
+    "dirty": true,
+    "released": "Apr 23 2026, 4:22 PM EDT",
+    "state": "codex/timing-stage-flow-pass@eda2821 dirty",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:61718/index.html",
+  "game": {
+    "stage": 3,
+    "score": 0,
+    "lives": 3,
+    "started": false,
+    "paused": false,
+    "challenge": true,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "auto",
+    "lastCue": {
+      "cue": "challengeTransition",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "classic-arcade",
+      "phase": "challenge",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 2,
+      "challenge": false,
+      "at": 1.483
+    },
+    "reference": {
+      "lastRequested": "",
+      "lastLoaded": "",
+      "lastStarted": "",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: auto · last cue challengeTransition (classic-arcade) · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0,
+        "type": "game_start",
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 2,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 2,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 2
+      }
+    },
+    {
+      "at": "+0.117s",
+      "level": "info",
+      "action": "challenge_transition_started",
+      "message": "challenge_transition_started",
+      "data": {
+        "t": 0.117,
+        "type": "challenge_transition_started",
+        "stage": 2,
+        "pendingStage": 3,
+        "targetStage": 3,
+        "mode": "normal",
+        "nextIsChallenge": true,
+        "nextStageT": 2.8,
+        "postChallengeT": 0,
+        "challenge": false,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+0.117s",
+      "level": "info",
+      "action": "harness_stage_transition_probe_setup",
+      "message": "harness_stage_transition_probe_setup",
+      "data": {
+        "t": 0.117,
+        "type": "harness_stage_transition_probe_setup",
+        "stage": 2,
+        "nextStage": 3,
+        "nextStageIsChallenge": true,
+        "nextStageT": 2.8,
+        "transitionCueT": 2.22,
+        "mode": "normal"
+      }
+    },
+    {
+      "at": "+2.333s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 2.333,
+        "type": "audio_cue",
+        "cue": "challengeTransition",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 2
+      }
+    },
+    {
+      "at": "+2.933s",
+      "level": "info",
+      "action": "challenge_transition_spawn_commit",
+      "message": "challenge_transition_spawn_commit",
+      "data": {
+        "t": 2.933,
+        "type": "challenge_transition_spawn_commit",
+        "stage": 2,
+        "pendingStage": 3,
+        "nextStageT": 0,
+        "challenge": false
+      }
+    },
+    {
+      "at": "+2.917s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 2.917,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": null
+      }
+    },
+    {
+      "at": "+2.917s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 2.917,
+        "type": "stage_profile",
+        "stage": 3,
+        "challenge": true,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+5.017s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 5.017,
+        "type": "harness_stop",
+        "label": "challenge-entry-probe"
+      }
+    }
+  ]
+}

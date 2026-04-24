@@ -101,6 +101,12 @@ validate the result, not replace the baseline.
   - do deeper runs reflect increased mastery rather than lucky variance alone?
   - do stage metrics and loss patterns show a real progression curve?
   - can persona evidence explain where pacing or fairness still needs tuning?
+- Longer-term extension:
+  - annotate gameplay and user-action windows richly enough to support:
+    - finer-grained personas
+    - persona-vs-player competition
+    - a future learn-by-playing persona trained through simulation against the
+      same reference and fairness evidence used for release work
 
 ### Galaxian Reference Program
 
@@ -119,6 +125,12 @@ validate the result, not replace the baseline.
     - audiovisual identity
   - produce comparable artifacts so `Galaxian`-inspired work can be judged with
     the same rigor as Aurora
+  - use those artifacts to plan:
+    - which mechanics belong in the game pack
+    - which extensions belong in Platinum
+    - how the second game can stay compliant with the same shared control model
+  - move toward a workflow where a second pack can be generated iteratively
+    from the preserved evidence base with minimal manual restatement of rules
 
 ### Stage 1 Dive Timing
 
