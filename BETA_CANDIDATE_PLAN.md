@@ -42,6 +42,9 @@ The audio work is especially important:
   runtime anchor for current Aurora reference-audio behavior
 - the broader stage-1 opening correspondence report is now `4/4` green after
   the convoy-pulse anchor refinement
+- the refreshed audio theme comparison on the current branch lifts the audio
+  category to a working `7.8/10`, which means audio identity is no longer one
+  of the weakest release-shaping areas
 
 ## What Still Needs Work Before Hosted `/beta`
 
@@ -56,6 +59,7 @@ fidelity pass in these areas:
 The quality score and scorecard are now refreshed on the current forward line:
 
 - overall quality score: `8.5/10`
+- working next score after refreshed audio comparison: `8.7/10`
 - strongest category: combat responsiveness
 - weakest category: movement
 
@@ -63,8 +67,8 @@ These are still the release-shaping gaps:
 
 - movement is now the weakest scored category and still worth improving before
   a serious public candidate
-- broader audio identity polish still needs another deliberate pass even though
-  cue alignment is now green
+- broader audio identity polish can continue, but it is no longer the clearest
+  blocker after the refreshed comparison evidence
 - the refreshed quality score now shows challenge timing as a strength rather
   than one of the main blocking gaps
 - stage-1 opening timing is no longer one of the main blockers after the
@@ -117,8 +121,9 @@ And for the release ceremony:
 
 At this point, the next most valuable focused pass is:
 
-- audio identity polish beyond cue alignment
-- or movement conformance smoothing
+- movement conformance smoothing
+- then another narrower audio identity polish pass only if the refreshed score
+  stops moving
 
 ## Decision Rule
 

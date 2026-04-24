@@ -13,11 +13,12 @@ Purpose:
 As of April 24, 2026:
 
 - local current line:
-  - branch `codex/stage1-convoy-pulse-pass`
-  - quality score `8.5/10`
+  - branch `codex/audio-identity-polish-pass`
+  - quality score `8.7/10` working roll-up
   - source:
     - `reference-artifacts/analyses/quality-conformance/2026-04-24-530c229`
     - `reference-artifacts/analyses/correspondence/stage1-opening-first-dive/2026-04-24-530c229`
+    - `reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
 - hosted `/dev`:
   - `1.2.3+build.470.sha.e4732eb`
   - built `Apr 23 2026, 3:15 PM EDT`
@@ -42,7 +43,7 @@ As of April 24, 2026:
 
 | Category | Current local line | Hosted `/dev` | Hosted `/beta` | Hosted `/production` | Reference gameplay |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Overall quality score | `8.5` | `~8.3` | stable baseline line | stable baseline line | `10` |
+| Overall quality score | `8.7` | `~8.3` | stable baseline line | stable baseline line | `10` |
 | Player movement conformance | `5.4` | `~5.9` | `4.6` | `4.6` | `10` |
 | Shot and hit responsiveness | `10.0` | `~10.0` | not yet lane-rescored | not yet lane-rescored | `10` |
 | Stage-1 opening timing fidelity | `8.5` | `~5.6` | `~1.0` | `~1.0` | `10` |
@@ -51,7 +52,7 @@ As of April 24, 2026:
 | Capture and rescue rule fidelity | `10.0` | `~10.0` | `10.0` | `10.0` | `10` |
 | Challenge-stage timing fidelity | `8.4` | `~8.4` | `~1.0` | `~1.0` | `10` |
 | Progression and persona depth | `8.8` | `~8.8` | `10.0` | `10.0` | `10` |
-| Audio identity and cue alignment | `5.6` | `~5.6` | shared gap, not lane-rescored | shared gap, not lane-rescored | `10` |
+| Audio identity and cue alignment | `7.8` | `~5.6` | shared gap, not lane-rescored | shared gap, not lane-rescored | `10` |
 | UI, shell, and graphics integrity | `9.2` | `~9.2` | stable live line | stable live line | `10` |
 
 ## Read
@@ -68,8 +69,8 @@ Current local line strengths:
 Current local line biggest gaps:
 
 - movement is only mid-pack and is now the weakest scored category
-- audio identity and cue alignment still needs more identity polish even though cue timing is green
-- the next release gains are now more likely to come from smoothing and polish than from broad timing repair
+- audio identity is now materially healthier, so the next release gains are more likely to come from smoothing and polish than from broad timing repair
+- the current beta-shaping priority has shifted from audio timing to movement quality and feel
 
 Most meaningful recent step forward:
 
@@ -79,6 +80,9 @@ Most meaningful recent step forward:
   current delta `0.18`
 - taken together with the already-merged challenge timing cadence pass, that
   lifts the rolled-up score from `8.3/10` to `8.5/10`
+- the refreshed audio theme comparison on the current branch also shows a much
+  healthier cue-identity picture, which lifts the working roll-up again to
+  `8.7/10`
 
 ## Release Use
 
@@ -99,9 +103,12 @@ Current note:
 - the dedicated `audio-cue-alignment` correspondence check is now part of the
   active fidelity program on the forward line
 - it now passes `9/9` on the current `/dev` line and is reflected in the
-  refreshed `5.6/10` audio category score
+  refreshed `7.8/10` audio category score on the current branch
 - the merged timing pass lifted challenge-stage timing to `8.4/10`
 - the latest stage-1 convoy-pulse refinement lifted stage-1 timing to an
   `8.5/10` on the current local line
 - the full bundled quality runner now completes again and currently scores the
   local line at `8.5/10`, with `movement` the weakest category at `5.4/10`
+- the dedicated audio comparison harness was hardened to capture each cue in a
+  fresh harness session, which resolved a `MediaRecorder` lifecycle failure on
+  this machine and produced the new `2026-04-24-main-ca481f2` comparison set
