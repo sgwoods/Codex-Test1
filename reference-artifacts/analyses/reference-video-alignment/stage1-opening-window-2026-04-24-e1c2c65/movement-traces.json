@@ -1,0 +1,50 @@
+{
+  "id": "stage1-opening-movement-traces",
+  "generatedAt": "2026-04-24T23:59:00Z",
+  "sourceWindowId": "stage1-opening-window",
+  "confidence": "medium",
+  "traceFamilies": {
+    "tapCorrection": {
+      "target": 15.5,
+      "tolerance": 4,
+      "unit": "px",
+      "notes": "First-pass moderate lane-correction target for a short tap in the opening window."
+    },
+    "holdTravel": {
+      "target": 82,
+      "tolerance": 15,
+      "unit": "px",
+      "notes": "First-pass sustained lateral travel target for the opening window."
+    },
+    "settleAfterRelease": {
+      "target": 240,
+      "tolerance": 80,
+      "unit": "ms",
+      "notes": "First-pass settle window for returning to neutral after release."
+    },
+    "reversalCross": {
+      "target": 235,
+      "tolerance": 45,
+      "unit": "ms",
+      "notes": "First-pass center-cross target for a quick evasive reversal."
+    },
+    "shotDelayWhileMoving": {
+      "target": 20,
+      "tolerance": 60,
+      "unit": "ms",
+      "notes": "First-pass movement-plus-fire delay target for an opening-window shot."
+    },
+    "postShotTravel": {
+      "target": 55,
+      "tolerance": 20,
+      "unit": "px",
+      "notes": "First-pass travel target after firing while moving."
+    },
+    "maxFrameStep": {
+      "target": 13,
+      "tolerance": 4,
+      "unit": "px",
+      "notes": "First-pass smoothness anchor for visible per-sample travel."
+    }
+  }
+}

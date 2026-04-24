@@ -1,0 +1,883 @@
+{
+  "generatedAt": "2026-04-24T21:25:57.315Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.482.sha.e1c2c65.dirty",
+    "commit": "e1c2c65d84e6bbf09bd79cd60d0a5bad874db2c0",
+    "branch": "codex/movement-conformance-pass",
+    "dirty": true,
+    "released": "Apr 24 2026, 5:23 PM EDT",
+    "state": "codex/movement-conformance-pass@e1c2c65 dirty",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:54459/index.html",
+  "game": {
+    "stage": 4,
+    "score": 19000,
+    "lives": 3,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-hint",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 4,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 4,
+      "challenge": false,
+      "at": 0.83
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-attack-charger.m4a",
+      "lastLoaded": "assets/reference-audio/galaga-level-flag-v1.m4a",
+      "lastStarted": "assets/reference-audio/galaga-level-flag-v1.m4a",
+      "lastError": "",
+      "activeCount": 5
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue stagePulse (galaga-reference-assets) · requested galaga3-attack-charger.m4a · loaded galaga-last-ship-destroyed-ambience.m4a · started galaga2-challenging-stage-perfect.m4a · active 3"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 563023749,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 308831506,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 433359425,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 249091851,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 61271865,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 1.2,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 2,
+        "bonus": 1000,
+        "hits": 24,
+        "total": 40
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 904188487,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 799777639,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 410004288,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 974912704,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 605720820,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 615960667,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 1244880,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 975042114,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 1.2,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 3,
+        "bonus": 1000,
+        "hits": 32,
+        "total": 40
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 69267974,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 548291699,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 6295706,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 982910593,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 464158685,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 978436648,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 106303374,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 240325508,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "challenge_group_bonus",
+      "message": "challenge_group_bonus",
+      "data": {
+        "t": 1.2,
+        "type": "challenge_group_bonus",
+        "stage": 3,
+        "group": 4,
+        "bonus": 1000,
+        "hits": 40,
+        "total": 40
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 1.2,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 2,
+        "enemyBullets": 0,
+        "id": 345367200,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      }
+    },
+    {
+      "at": "+1.200s",
+      "level": "info",
+      "action": "harness_force_perfect_challenge_clear",
+      "message": "harness_force_perfect_challenge_clear",
+      "data": {
+        "t": 1.2,
+        "type": "harness_force_perfect_challenge_clear",
+        "stage": 3,
+        "cleared": 40,
+        "hits": 40,
+        "total": 40
+      }
+    },
+    {
+      "at": "+1.217s",
+      "level": "info",
+      "action": "challenge_clear",
+      "message": "challenge_clear",
+      "data": {
+        "t": 1.217,
+        "type": "challenge_clear",
+        "stage": 3,
+        "hits": 40,
+        "total": 40,
+        "upperBandY": 180,
+        "upperBandTime": 0.567,
+        "avgUpperBandTime": 0.014
+      }
+    },
+    {
+      "at": "+1.217s",
+      "level": "info",
+      "action": "challenge_transition_queued",
+      "message": "challenge_transition_queued",
+      "data": {
+        "t": 1.217,
+        "type": "challenge_transition_queued",
+        "stage": 3,
+        "pendingStage": 4,
+        "hits": 40,
+        "total": 40,
+        "postChallengeT": 1.45,
+        "bannerMode": "challengeResult",
+        "bonusTotal": 15000
+      }
+    },
+    {
+      "at": "+1.550s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 1.55,
+        "type": "audio_cue",
+        "cue": "challengePerfect",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 1.7,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+2.000s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 2,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+2.683s",
+      "level": "info",
+      "action": "challenge_transition_timer_elapsed",
+      "message": "challenge_transition_timer_elapsed",
+      "data": {
+        "t": 2.683,
+        "type": "challenge_transition_timer_elapsed",
+        "stage": 3,
+        "pendingStage": 4,
+        "postChallengeT": 0,
+        "nextStageT": 0,
+        "challenge": true,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+2.683s",
+      "level": "info",
+      "action": "challenge_transition_started",
+      "message": "challenge_transition_started",
+      "data": {
+        "t": 2.683,
+        "type": "challenge_transition_started",
+        "stage": 3,
+        "pendingStage": 4,
+        "targetStage": 4,
+        "mode": "challengeResult",
+        "nextIsChallenge": false,
+        "nextStageT": 2.95,
+        "postChallengeT": 0,
+        "challenge": true,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+4.083s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 4.083,
+        "type": "audio_cue",
+        "cue": "stageTransition",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga-level-flag-v1.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0.86,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+5.650s",
+      "level": "info",
+      "action": "challenge_transition_spawn_commit",
+      "message": "challenge_transition_spawn_commit",
+      "data": {
+        "t": 5.65,
+        "type": "challenge_transition_spawn_commit",
+        "stage": 3,
+        "pendingStage": 4,
+        "nextStageT": 0,
+        "challenge": true
+      }
+    },
+    {
+      "at": "+5.650s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 5.65,
+        "type": "stage_spawn",
+        "stage": 4,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+5.650s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 5.65,
+        "type": "stage_profile",
+        "stage": 4,
+        "challenge": false,
+        "band": "scorpion",
+        "challengeFamily": "classic",
+        "beeFamily": "scorpion",
+        "butFamily": "scorpion",
+        "bossFamily": "classic",
+        "themeId": "scorpion-dawn",
+        "backgroundMode": "aurora-hint",
+        "frameAccent": "amber-blue",
+        "bossArchetype": "super-boss-scorpion"
+      }
+    },
+    {
+      "at": "+8.167s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 8.167,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+9.383s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 9.383,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "dive",
+        "x": 211.24,
+        "y": 39.39,
+        "originLane": 7,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 579240636,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 7,
+        "row": 1,
+        "lane": 7,
+        "dive": 1,
+        "carry": false,
+        "targetX": 140,
+        "scripted": 0
+      }
+    },
+    {
+      "at": "+9.517s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 9.517,
+        "type": "audio_cue",
+        "cue": "attackCharge",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+10.017s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 10.017,
+        "type": "harness_stop",
+        "label": "stage3-perfect-transition"
+      }
+    }
+  ]
+}

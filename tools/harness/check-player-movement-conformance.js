@@ -76,9 +76,9 @@ function maxFrameStep(samples){
   return round(max, 3);
 }
 
-function settleMs(samples, releaseAt){
+function settleMs(samples, releaseAt, threshold = 0.05){
   if(releaseAt == null) return null;
-  const settled = samples.find(sample => sample.t >= releaseAt && Math.abs(sample.playerVx || 0) <= 0.05);
+  const settled = samples.find(sample => sample.t >= releaseAt && Math.abs(sample.playerVx || 0) <= threshold);
   if(!settled) return null;
   return round((settled.t - releaseAt) * 1000, 1);
 }
@@ -231,13 +231,13 @@ async function runSequence(page, cfg){
       endX: holdEnd.playerX,
       delta: round((holdEnd.playerX || 0) - (holdStart.playerX || 0), 3),
       maxFrameStep: maxFrameStep(holdSamples),
-      settleMsAfterRelease: settleMs(holdSamples, holdReleaseAt.t)
+      settleMsAfterRelease: settleMs(holdSamples, holdReleaseAt.t, cfg.settleVxThreshold ?? 0.05)
     },
     reversal: {
       centerX,
       reversalCrossMs: crossMs(reversalSamples, reversalPivot.t, centerX),
       maxFrameStep: maxFrameStep(reversalSamples),
-      settleMsAfterRelease: settleMs(reversalSamples, reversalReleaseAt.t)
+      settleMsAfterRelease: settleMs(reversalSamples, reversalReleaseAt.t, cfg.settleVxThreshold ?? 0.05)
     },
     moveFire: {
       shotDelayMs,
@@ -283,6 +283,7 @@ function buildReadme(report){
     '## Sources',
     '',
     `- Profile: \`${path.relative(ROOT, PROFILE)}\``,
+    `- Reference trace source: \`${report.profile.referenceTraceSource || 'none'}\``,
     `- Baseline root: \`${report.baselineRoot}\``,
     `- Current root: \`${report.currentRoot}\``,
     '',
@@ -304,9 +305,9 @@ function buildReadme(report){
     '',
     '## Read',
     '',
-    '- This is a first-phase movement conformance check based on the documented control principles and not yet a direct trace extraction from reference footage.',
+    '- This movement conformance check now uses first-pass trace-backed targets derived from the preserved stage-opening alignment window.',
     '- Use it to catch jerkiness, sluggish release, weak lane travel, or movement-plus-fire regressions.',
-    '- Tighten the targets later once we extract direct movement traces from the preserved Galaga gameplay footage.',
+    '- Tighten the targets again once direct frame-level movement extraction is automated from the preserved Galaga gameplay footage.',
     ''
   ];
   return `${lines.join('\n')}\n`;
