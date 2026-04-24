@@ -10,13 +10,14 @@ Purpose:
 - show where the biggest quality gaps are right now
 - make the quality score part of release discussion, not a side note
 
-As of April 23, 2026:
+As of April 24, 2026:
 
 - local current line:
-  - branch `codex/document-project-principles`
-  - quality score `8.3/10`
+  - branch `codex/stage1-convoy-pulse-pass`
+  - quality score `8.5/10`
   - source:
-    - `reference-artifacts/analyses/quality-conformance/2026-04-23-21b5d8e`
+    - `reference-artifacts/analyses/quality-conformance/2026-04-24-530c229`
+    - `reference-artifacts/analyses/correspondence/stage1-opening-first-dive/2026-04-24-530c229`
 - hosted `/dev`:
   - `1.2.3+build.470.sha.e4732eb`
   - built `Apr 23 2026, 3:15 PM EDT`
@@ -41,10 +42,10 @@ As of April 23, 2026:
 
 | Category | Current local line | Hosted `/dev` | Hosted `/beta` | Hosted `/production` | Reference gameplay |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Overall quality score | `8.3` | `~8.3` | stable baseline line | stable baseline line | `10` |
-| Player movement conformance | `5.9` | `~5.9` | `4.6` | `4.6` | `10` |
+| Overall quality score | `8.5` | `~8.3` | stable baseline line | stable baseline line | `10` |
+| Player movement conformance | `5.4` | `~5.9` | `4.6` | `4.6` | `10` |
 | Shot and hit responsiveness | `10.0` | `~10.0` | not yet lane-rescored | not yet lane-rescored | `10` |
-| Stage-1 opening timing fidelity | `5.6` | `~5.6` | `~1.0` | `~1.0` | `10` |
+| Stage-1 opening timing fidelity | `8.5` | `~5.6` | `~1.0` | `~1.0` | `10` |
 | Stage-1 opening geometry fidelity | `10.0` | `~10.0` | `10.0` | `10.0` | `10` |
 | Dive fairness and safety | `9.1` | `~9.1` | pre-expert-safety fix | pre-expert-safety fix | `10` |
 | Capture and rescue rule fidelity | `10.0` | `~10.0` | `10.0` | `10.0` | `10` |
@@ -59,21 +60,25 @@ Current local line strengths:
 
 - combat responsiveness
 - opening geometry
+- opening timing cadence
 - capture/rescue behavior
 - shell and panel integrity
 - early dive safety
 
 Current local line biggest gaps:
 
-- stage-1 timing fidelity
-- audio identity and cue alignment
-- movement is only mid-pack and still worth smoothing, even after modest improvement over the shipped local baseline
+- movement is only mid-pack and is now the weakest scored category
+- audio identity and cue alignment still needs more identity polish even though cue timing is green
+- the next release gains are now more likely to come from smoothing and polish than from broad timing repair
 
 Most meaningful recent step forward:
 
-- challenge-stage timing fidelity is now in a much healthier place on the
-  forward line after the challenge timing cadence pass
-- that moved the rolled-up score from `7.5/10` to `8.3/10`
+- the stage-1 convoy-pulse refinement aligned the stage-1 correspondence report
+  with the reference-audio timing anchor at `formationArrival`
+- the dedicated stage-1 correspondence report is now `4/4` passing with worst
+  current delta `0.18`
+- taken together with the already-merged challenge timing cadence pass, that
+  lifts the rolled-up score from `8.3/10` to `8.5/10`
 
 ## Release Use
 
@@ -95,5 +100,8 @@ Current note:
   active fidelity program on the forward line
 - it now passes `9/9` on the current `/dev` line and is reflected in the
   refreshed `5.6/10` audio category score
-- the merged timing pass also lifted challenge-stage timing to `8.4/10` and
-  stage-1 timing to `5.6/10` on the current local line
+- the merged timing pass lifted challenge-stage timing to `8.4/10`
+- the latest stage-1 convoy-pulse refinement lifted stage-1 timing to an
+  `8.5/10` on the current local line
+- the full bundled quality runner now completes again and currently scores the
+  local line at `8.5/10`, with `movement` the weakest category at `5.4/10`

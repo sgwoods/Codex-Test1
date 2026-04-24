@@ -37,6 +37,8 @@ The forward line has also now absorbed the first audio cue alignment pass:
 - dedicated audio cue correspondence is green at `9/9`
 - challenge entry and post-challenge cue timing are effectively on target
 - the reference-audio session reset fix is part of the current `/dev` line
+- the follow-on stage-1 convoy-pulse refinement has now brought the broader
+  stage-1 opening correspondence report to `4/4`
 
 ## Current Working Reality
 
@@ -130,6 +132,9 @@ Practical standard:
   cycles, not immediately after the `/dev` refresh
 - the next serious public milestone should likely be a `MINOR` release in the
   `1.3.0` family, not a new `MAJOR`
+- after the convoy-pulse refinement, the next clearest fidelity targets are
+  audio identity polish and movement smoothing rather than broader stage-1
+  cadence repair
 
 See also:
 

@@ -57,13 +57,15 @@ function stage1Metrics(session){
   const events = session.events || [];
   const spawn = firstEvent(events, e => e.type === 'stage_spawn' && e.stage === 1 && !e.challenge);
   const gameStartCue = firstEvent(events, e => e.type === 'audio_cue' && e.cue === 'gameStart' && e.stage === 1);
+  const formationArrivalCue = firstEvent(events, e => e.type === 'audio_cue' && e.cue === 'formationArrival' && e.stage === 1);
   const stagePulseCue = firstEvent(events, e => e.type === 'audio_cue' && e.cue === 'stagePulse' && e.stage === 1);
   const firstAttack = firstEvent(events, e => e.type === 'enemy_attack_start' && e.stage === 1);
   const firstLowerField = firstEvent(events, e => e.type === 'enemy_lower_field' && e.stage === 1);
   return {
     stageSpawnAt: spawn ? +(spawn.t || 0).toFixed(3) : null,
     gameStartCueAfterSpawn: delta(spawn, gameStartCue),
-    firstStagePulseAfterSpawn: delta(spawn, stagePulseCue),
+    formationArrivalAfterSpawn: delta(spawn, formationArrivalCue),
+    firstStagePulseAfterFormationArrival: delta(formationArrivalCue, stagePulseCue),
     firstAttackAfterSpawn: delta(spawn, firstAttack),
     firstLowerFieldAfterSpawn: delta(spawn, firstLowerField)
   };
