@@ -94,6 +94,8 @@ This means:
   into hosted `/dev` deliberately
 - the next meaningful public milestone should likely be a `MINOR` release in
   the `1.3.0` family
+- the longer release-family phasing plan is tracked in
+  [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 
 ## Long-Term Direction
 

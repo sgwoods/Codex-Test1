@@ -55,6 +55,21 @@ That release family should focus on:
 - shell/pilot-surface polish
 - Platinum/application seam cleanup
 
+### Long-Term Release Families
+
+The first high-level phasing pass for the next major Aurora and Platinum
+milestones is tracked in:
+
+- [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
+
+Current decision:
+
+- keep `1.x` focused on making Aurora excellent and preparing Platinum for a
+  second real game
+- reserve `2.0` for the first genuinely multi-game Platinum milestone
+- treat `1.3` as the next measurement-backed quality release rather than a
+  broad feature bundle
+
 ## Main Investment Themes
 
 ### 1. Movement and control fidelity
