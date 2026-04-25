@@ -1059,15 +1059,17 @@ function recordScore(score,stage,initials='YOU'){
  saveScoreboard(top);
  S.best=top[0]?.score||0;
  writePref(BEST_SCORE_KEY,String(S.best));
+ if(typeof syncAccountUi==='function')syncAccountUi();
  return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
 }
 function saveGameOverInitials(){
  if(!gameOverState?.entryId)return;
  const board=loadScoreboard();
  const row=board.find(x=>x.id===gameOverState.entryId);
-  if(row){
+ if(row){
   row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
   saveScoreboard(board);
+  if(typeof syncAccountUi==='function')syncAccountUi();
  }
 }
 function buildGameOverHtmlFromState(){

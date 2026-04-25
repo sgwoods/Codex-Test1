@@ -119,6 +119,18 @@ function pilotLocalReplayRows(){
    localReplay:1
   }));
 }
+function pilotLocalScoreRows(){
+ if(!LEADERBOARD.user)return [];
+ const activePilotInitials=sanitizeInitials(preferredInitialsFromUser()||'');
+ if(!activePilotInitials)return [];
+ return loadScoreboard()
+  .filter(row=>{
+   const rowInitials=sanitizeInitials(row?.initials||'');
+   if(rowInitials&&rowInitials===activePilotInitials)return true;
+   return !!(gameOverState?.entryId&&String(row?.id||'')===String(gameOverState.entryId));
+  })
+  .map(row=>Object.assign({verified:0,localScore:1},row));
+}
 function mergePilotProfileRows(remoteRows,localRows){
  const merged=remoteRows.map(row=>Object.assign({},row));
  for(const localRow of localRows){
@@ -142,7 +154,7 @@ function mergePilotProfileRows(remoteRows,localRows){
 function rowsForPilotProfile(){
  if(LEADERBOARD.user){
   const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)?LEADERBOARD.remote.mine.slice():[];
-  const localRows=pilotLocalReplayRows();
+  const localRows=mergePilotProfileRows(pilotLocalScoreRows(),pilotLocalReplayRows());
   if(remoteRows.length||localRows.length)return mergePilotProfileRows(remoteRows,localRows);
  }
  return localLeaderboardRows();

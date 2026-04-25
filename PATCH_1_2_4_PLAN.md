@@ -47,6 +47,19 @@ Verification:
 
 - `npm run harness:check:input-mapping`
 
+2. Pilot recent-flight score refresh fix
+
+- signed-in pilot records now merge remote rows with fresh local scoreboard rows,
+  not just remote rows and replay rows
+- that lets `Pilot Information` show the newest local flight score immediately
+  even when replay generation or remote score refresh has not caught up yet
+- issue family:
+  - `#171` pilot recent flight scores not updating
+
+Verification:
+
+- `npm run harness:check:pilot-recent-scores-refresh`
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -97,6 +110,7 @@ Minimum patch verification:
 
 - `npm run build`
 - `npm run harness:check:input-mapping`
+- `npm run harness:check:pilot-recent-scores-refresh`
 - `npm run harness:check:dual-final-life-survivor`
 - `npm run harness:check:game-over-carry-suppression`
 - `npm run harness:check:close-shot-hit`
