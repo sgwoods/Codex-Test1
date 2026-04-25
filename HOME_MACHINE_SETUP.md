@@ -60,11 +60,15 @@ gh --version | head -n 1
 Preferred one-command installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
+mkdir -p "$HOME/Development"
+cd "$HOME/Development"
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
 ```
 
-If you want to use a unique iCloud-backed location instead, pass that folder
-path as the argument instead of `$HOME/Development/Codex-Test1`.
+That creates or reuses `./Codex-Test1` in the folder where you run it.
+
+If you want to use a unique iCloud-backed location instead, `cd` into that
+parent folder first and run the same command there.
 
 Important:
 

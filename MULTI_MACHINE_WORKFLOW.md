@@ -21,12 +21,14 @@ After cloning the repo and installing the required system tools, the preferred
 startup path is:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
+mkdir -p "$HOME/Development"
+cd "$HOME/Development"
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
 ```
 
 That installer:
 
-- clones the repo into the target directory if needed
+- clones the repo into `./Codex-Test1` if needed
 - reuses the clone if it already exists
 - then runs `npm run machine:bootstrap`
 

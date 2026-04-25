@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_URL="${AURORA_REPO_URL:-https://github.com/sgwoods/Codex-Test1.git}"
-DEFAULT_TARGET="$HOME/Development/Codex-Test1"
+DEFAULT_TARGET="$PWD/Codex-Test1"
 TARGET_DIR="${1:-$DEFAULT_TARGET}"
 TARGET_DIR="${TARGET_DIR/#\~/$HOME}"
 
@@ -16,12 +16,18 @@ Usage:
   bash setup-machine.sh [target-dir]
 
 Examples:
-  bash setup-machine.sh "$HOME/Development/Codex-Test1"
+  cd "$HOME/Development"
+  bash setup-machine.sh
+
+  cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/MacBookPro"
+  bash setup-machine.sh
+
   bash setup-machine.sh "$HOME/Library/Mobile Documents/com~apple~CloudDocs/MacBookPro/Codex-Test1"
 
 Notes:
   - The target directory is optional. Default:
-      ~/Development/Codex-Test1
+      ./Codex-Test1
+    under the folder where you run the script.
   - iCloud-backed locations are allowed only if each machine uses its own
     distinct clone path. Do not use the same working tree across machines.
 EOF

@@ -42,18 +42,20 @@ On any machine that already has `git`, `node`, `npm`, `python3`, Chrome, and
 `gh` installed:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
+mkdir -p "$HOME/Development"
+cd "$HOME/Development"
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
 ```
 
 That one command will:
 
-- clone `sgwoods/Codex-Test1` into the target folder if it is not there yet
+- clone `sgwoods/Codex-Test1` into `./Codex-Test1` if it is not there yet
 - reuse the clone if it already exists
 - run `npm run machine:bootstrap` inside it
 
-If you prefer a unique iCloud-backed path on a second machine, pass that target
-path instead. Just make sure it is a machine-specific clone path, not the same
-working tree used on another machine.
+If you prefer a unique iCloud-backed path on a second machine, `cd` into that
+machine-specific parent folder first, then run the same command there. Do not
+use the same working tree path across multiple machines.
 
 For a read-only startup check:
 
@@ -148,7 +150,9 @@ The next polish cycle should prioritize:
 1. Run the installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
+mkdir -p "$HOME/Development"
+cd "$HOME/Development"
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
 ```
 
 2. If bootstrap is blocked, use:

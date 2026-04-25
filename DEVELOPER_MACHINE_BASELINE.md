@@ -56,17 +56,20 @@ gh --version | head -n 1
 Preferred one-command setup:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
+mkdir -p "$HOME/Development"
+cd "$HOME/Development"
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
 ```
 
 This command:
 
-- clones `sgwoods/Codex-Test1` into the target directory if needed
+- clones `sgwoods/Codex-Test1` into `./Codex-Test1` if needed
 - reuses the clone if it already exists
 - runs `npm run machine:bootstrap`
 
-If you choose an iCloud-backed target path, make it unique to that machine.
-Do not use one shared working tree across two machines.
+If you choose an iCloud-backed target path, `cd` into that machine-specific
+parent folder first, then run the same command there. Do not use one shared
+working tree across two machines.
 
 1. Clone the repo:
    ```bash
