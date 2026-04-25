@@ -38,6 +38,17 @@ These are format examples, not current live lane values.
 
 ## Hosted Release Lanes
 
+Repository roles:
+
+- source of truth for engineering, issues, and planning:
+  - [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
+- public release host and GitHub Pages deployment:
+  - [sgwoods/Aurora-Galactica](https://github.com/sgwoods/Aurora-Galactica)
+
+See also:
+
+- [REPOSITORY_ROLE_MAP.md](/Users/steven/Documents/Codex-Test1/REPOSITORY_ROLE_MAP.md)
+
 The intended lane model is:
 
 1. local `localhost`

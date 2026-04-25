@@ -10,8 +10,12 @@ multi-machine workflow refresh.
   - `/Users/steven/Documents/Codex-Test1`
 - primary Git remote:
   - `origin -> https://github.com/sgwoods/Codex-Test1.git`
+- public release host remote:
+  - `public -> https://github.com/sgwoods/Aurora-Galactica.git`
 - active integration branch going forward:
   - `main`
+- repo role clarification:
+  - [REPOSITORY_ROLE_MAP.md](/Users/steven/Documents/Codex-Test1/REPOSITORY_ROLE_MAP.md)
 
 ## Live Lane State
 

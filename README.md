@@ -21,6 +21,33 @@ Think about the product in two layers:
 - `Aurora Galactica`
   - gameplay rules, stage flow, scoring, capture and rescue, challenge behavior, and Aurora-specific content
 
+## Repository Roles
+
+Aurora currently uses two public GitHub repos, but they do not have the same
+job:
+
+- active source repo, issue tracker, planning docs, and engineering workflow:
+  - `https://github.com/sgwoods/Codex-Test1`
+- public release host and GitHub Pages deployment surface:
+  - `https://github.com/sgwoods/Aurora-Galactica`
+
+Use `sgwoods/Codex-Test1` for:
+
+- active issues and bug triage
+- planning, roadmap, and release workflow docs
+- coding, testing, harnesses, and release scripts
+- multi-machine development and release authority
+
+Use `sgwoods/Aurora-Galactica` for:
+
+- hosted `/dev`, `/beta`, and `/production`
+- public-facing mirrored release assets
+- the public landing surface for the live game
+
+If you are looking for the active issue tracker, use:
+
+- `https://github.com/sgwoods/Codex-Test1/issues`
+
 ## Live Lanes
 
 - local `localhost`:
@@ -55,41 +82,45 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 
 Best platform overview:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
+- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 
 Best application-boundary doc:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 
 Best repo technical map:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+- `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
 
 Best release and testing gate doc:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
+- `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+- `/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
 
 Release planning and readiness docs:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/PLAN.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/release-notes.json`
+- `/Users/steven/Documents/Codex-Test1/PLAN.md`
+- `/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+- `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
+- `/Users/steven/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
+- `/Users/steven/Documents/Codex-Test1/release-dashboard.json`
+- `/Users/steven/Documents/Codex-Test1/release-notes.json`
+
+Best repo-role clarification:
+
+- `/Users/steven/Documents/Codex-Test1/REPOSITORY_ROLE_MAP.md`
 
 ## Current Release State
 
-Current public milestone:
+Current live release family:
 
-- `1.2.2 - Runtime freeze hardening and bonus-ship patch`
-- `1.2.1 - Aurora trust-fix and copy-boundary patch`
-
-Current prepared candidate:
-
-- `1.2.3 - Aurora score-surface polish patch`
+- hosted `/dev`:
+  - `1.2.3+build.470.sha.e4732eb`
+- hosted `/beta`:
+  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/production`:
+  - `1.2.3+build.489.sha.f6ba6c2`
 
 What that means:
 
@@ -97,19 +128,20 @@ What that means:
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
 - the shell, picker, and shared docs are part of the product rather than just engineering scaffolding
 
-Immediate follow-through after `1.2.2`:
+Current go-forward focus:
 
-- watch `#146` and keep exportable freeze diagnostics useful if late-run faults recur
-- review the `1.2.3` Aurora score-surface polish candidate on hosted `/beta`
-- keep the documentation set aligned across source and hosted pages
-- strengthen the platform versus application boundary before the second game becomes truly playable
+- keep the refreshed `1.2.3` production family stable
+- use the multi-machine bootstrap and release-authority workflow
+- improve movement fidelity against real Galaga footage
+- continue audio identity polish beyond cue timing
+- keep the platform/application boundary strong before deeper multi-game growth
 
 ## Run Locally
 
 1. Build the current local candidate:
 
 ```bash
-cd /Users/stevenwoods/Documents/Codex-Test1
+cd /Users/steven/Documents/Codex-Test1
 npm run build
 ```
 
@@ -162,8 +194,8 @@ That means refreshing:
 
 See:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+- `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+- `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
 
 ## Related Visuals
 
