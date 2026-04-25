@@ -41,15 +41,15 @@ Current quality position for the shipped `f6ba6c2` family:
 The current shipped family is supported by these committed evidence sources:
 
 - quality rollup:
-  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
+  - `reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
 - movement correspondence:
-  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65`
+  - `reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65`
 - audio cue alignment:
-  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65`
+  - `reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65`
 - audio identity comparison:
-  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
+  - `reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
 - reference video alignment:
-  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
+  - `reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
 
 The current shipped family also has direct verification evidence:
 
@@ -67,7 +67,7 @@ for Aurora production, but not "finished forever."
 
 The dedicated boundary review is captured in:
 
-- `/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md`
+- [PLATINUM_INTERFACE_REVIEW.md](PLATINUM_INTERFACE_REVIEW.md)
 
 Current read from that review:
 
@@ -86,17 +86,17 @@ important next-cycle cleanup targets.
 
 The current shipped line depends on these docs being current and committed:
 
-- `/Users/steven/Documents/Codex-Test1/PLAN.md`
-- `/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
-- `/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md`
-- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
-- `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
-- `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
-- `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
-- `/Users/steven/Documents/Codex-Test1/QUALITY_RELEASE_SCORECARD.md`
-- `/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md`
-- `/Users/steven/Documents/Codex-Test1/release-dashboard.json`
-- `/Users/steven/Documents/Codex-Test1/release-notes.json`
+- [PLAN.md](PLAN.md)
+- [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
+- [GO_FORWARD_EXECUTION_PLAN.md](GO_FORWARD_EXECUTION_PLAN.md)
+- [PLATINUM.md](PLATINUM.md)
+- [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md)
+- [RELEASE_POLICY.md](RELEASE_POLICY.md)
+- [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
+- [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md)
+- [BETA_TO_PRODUCTION_PLAN.md](BETA_TO_PRODUCTION_PLAN.md)
+- [release-dashboard.json](release-dashboard.json)
+- [release-notes.json](release-notes.json)
 
 ## Current Follow-Up Work
 

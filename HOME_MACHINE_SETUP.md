@@ -16,11 +16,11 @@ Use `Codex-Test1` as the only development repo on both machines.
 For a maintained first-session prompt you can paste into the home Codex
 instance, use:
 
-- `/Users/steven/Documents/Codex-Test1/HOME_CODEX_PROMPT.md`
+- [HOME_CODEX_PROMPT.md](HOME_CODEX_PROMPT.md)
 
 For the new canonical cross-machine workflow, use:
 
-- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
+- [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
 
 For the special case where another machine holds uncommitted work that may be
 ahead of GitHub or ahead of `hosted-dev`, also use:
@@ -155,7 +155,7 @@ Open:
 
 The viewer expects artifacts under:
 
-- `/Users/steven/Documents/Codex-Test1/harness-artifacts/`
+- `harness-artifacts/` inside your local Aurora clone
 
 Player-triggered exported logs and videos are different:
 
@@ -168,7 +168,7 @@ Player-triggered exported logs and videos are different:
 
 See:
 
-- `/Users/steven/Documents/Codex-Test1/ARTIFACT_POLICY.md`
+- [ARTIFACT_POLICY.md](ARTIFACT_POLICY.md)
 
 On the home machine that means the same repo-relative folder inside your local clone.
 
@@ -241,7 +241,7 @@ npm run publish:beta
 
 This publishes:
 
-- `/Users/steven/Documents/Codex-Test1/dist/beta/`
+- `dist/beta/`
 
 into the public Aurora beta surface.
 
@@ -258,7 +258,7 @@ npm run publish:production
 
 This publishes:
 
-- `/Users/steven/Documents/Codex-Test1/dist/production/`
+- `dist/production/`
 
 into the public Aurora production surface, then syncs the top-level `sgwoods/public` Aurora project page and verifies that public sync.
 
@@ -269,7 +269,7 @@ Important:
   machine
 - production release/public sync should run from a machine whose Aurora checkout
   is on `main` and current with `origin/main`
-- the production artifact and `/Users/steven/Documents/Codex-Test1/src/public/aurora-galactica.template.html` should come from that exact clean checkout before `npm run sync:public`
+- the production artifact and `src/public/aurora-galactica.template.html` should come from that exact clean checkout before `npm run sync:public`
 - if the approved beta candidate was built/promoted from a dirty source state, re-run the beta path from a clean tree before promoting production
 - if hosted lanes depend on runtime-loaded media under `assets/`, verify those
   files are present after publish instead of assuming the image-only checks are

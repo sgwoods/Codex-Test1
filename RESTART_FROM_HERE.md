@@ -7,7 +7,8 @@ multi-machine workflow refresh.
 ## Authoritative Repo
 
 - repo:
-  - `/Users/steven/Documents/Codex-Test1`
+  - current authority-machine clone: `/Users/steven/Documents/Codex-Test1`
+  - on a new machine: use your own local clone path after `git clone`
 - primary Git remote:
   - `origin -> https://github.com/sgwoods/Codex-Test1.git`
 - public release host remote:
@@ -15,7 +16,7 @@ multi-machine workflow refresh.
 - active integration branch going forward:
   - `main`
 - repo role clarification:
-  - [REPOSITORY_ROLE_MAP.md](/Users/steven/Documents/Codex-Test1/REPOSITORY_ROLE_MAP.md)
+  - [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
 
 ## Live Lane State
 
@@ -96,16 +97,16 @@ The important project state is committed and pushed:
 
 Important docs to read first:
 
-- [PLAN.md](/Users/steven/Documents/Codex-Test1/PLAN.md)
-- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
-- [GO_FORWARD_EXECUTION_PLAN.md](/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md)
-- [PRODUCT_ROADMAP.md](/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md)
-- [QUALITY_RELEASE_SCORECARD.md](/Users/steven/Documents/Codex-Test1/QUALITY_RELEASE_SCORECARD.md)
-- [BETA_TO_PRODUCTION_PLAN.md](/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md)
-- [PLATINUM_INTERFACE_REVIEW.md](/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md)
-- [VIDEO_ALIGNMENT_PROGRAM.md](/Users/steven/Documents/Codex-Test1/VIDEO_ALIGNMENT_PROGRAM.md)
-- [REFERENCE_MEDIA_INVENTORY.md](/Users/steven/Documents/Codex-Test1/REFERENCE_MEDIA_INVENTORY.md)
-- [DEVELOPER_MACHINE_BASELINE.md](/Users/steven/Documents/Codex-Test1/DEVELOPER_MACHINE_BASELINE.md)
+- [PLAN.md](PLAN.md)
+- [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
+- [GO_FORWARD_EXECUTION_PLAN.md](GO_FORWARD_EXECUTION_PLAN.md)
+- [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
+- [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md)
+- [BETA_TO_PRODUCTION_PLAN.md](BETA_TO_PRODUCTION_PLAN.md)
+- [PLATINUM_INTERFACE_REVIEW.md](PLATINUM_INTERFACE_REVIEW.md)
+- [VIDEO_ALIGNMENT_PROGRAM.md](VIDEO_ALIGNMENT_PROGRAM.md)
+- [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)
+- [DEVELOPER_MACHINE_BASELINE.md](DEVELOPER_MACHINE_BASELINE.md)
 
 ## What Was Just Shipped
 

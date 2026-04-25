@@ -87,7 +87,7 @@ Aurora now uses a committed release-authority contract.
 
 Source of truth:
 
-- [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+- [release-authority.json](release-authority.json)
 
 Useful commands:
 

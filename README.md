@@ -82,34 +82,34 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 
 Best platform overview:
 
-- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
-- `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
+- [PLATINUM.md](PLATINUM.md)
+- [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md)
 
 Best application-boundary doc:
 
-- `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md)
 
 Best repo technical map:
 
-- `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
+- [ARCHITECTURE.md](ARCHITECTURE.md)
 
 Best release and testing gate doc:
 
-- `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
-- `/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
+- [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
+- [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
 
 Release planning and readiness docs:
 
-- `/Users/steven/Documents/Codex-Test1/PLAN.md`
-- `/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
-- `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
-- `/Users/steven/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
-- `/Users/steven/Documents/Codex-Test1/release-dashboard.json`
-- `/Users/steven/Documents/Codex-Test1/release-notes.json`
+- [PLAN.md](PLAN.md)
+- [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
+- [RELEASE_POLICY.md](RELEASE_POLICY.md)
+- [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [release-dashboard.json](release-dashboard.json)
+- [release-notes.json](release-notes.json)
 
 Best repo-role clarification:
 
-- `/Users/steven/Documents/Codex-Test1/REPOSITORY_ROLE_MAP.md`
+- [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
 
 ## Current Release State
 
@@ -141,7 +141,7 @@ Current go-forward focus:
 1. Build the current local candidate:
 
 ```bash
-cd /Users/steven/Documents/Codex-Test1
+cd <repo-root>
 npm run build
 ```
 
@@ -194,8 +194,8 @@ That means refreshing:
 
 See:
 
-- `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
-- `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
+- [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
+- [RELEASE_POLICY.md](RELEASE_POLICY.md)
 
 ## Related Visuals
 

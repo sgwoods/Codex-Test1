@@ -47,7 +47,7 @@ Repository roles:
 
 See also:
 
-- [REPOSITORY_ROLE_MAP.md](/Users/steven/Documents/Codex-Test1/REPOSITORY_ROLE_MAP.md)
+- [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
 
 The intended lane model is:
 
@@ -69,7 +69,7 @@ Meaning:
 
 See also:
 
-- `/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md`
+- [RELEASE_LANE_MODEL.md](RELEASE_LANE_MODEL.md)
 
 ## Release Authority Rule
 
@@ -81,7 +81,7 @@ That means:
 - `main` remains the only integration branch
 - hosted `/beta` and hosted `/production` may only be published from the
   machine recorded in
-  [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+  [release-authority.json](release-authority.json)
 
 Useful commands:
 

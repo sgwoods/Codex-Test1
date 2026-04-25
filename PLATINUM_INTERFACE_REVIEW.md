@@ -6,11 +6,11 @@ Reviewed with a production-readiness lens on April 24, 2026.
 
 Primary files:
 
-- `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
-- `/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js`
-- `/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js`
-- `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
-- `/Users/steven/Documents/Codex-Test1/src/js/90-harness.js`
+- `src/js/00-boot.js`
+- `src/js/01-runtime-shell.js`
+- `src/js/03-platform-services.js`
+- `src/js/13-aurora-game-pack.js`
+- `src/js/90-harness.js`
 
 ## Current Read
 

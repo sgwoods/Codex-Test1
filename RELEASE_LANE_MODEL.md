@@ -190,6 +190,10 @@ The public mirror remains:
 
 - [sgwoods/Aurora-Galactica](https://github.com/sgwoods/Aurora-Galactica)
 
+See also:
+
+- [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
+
 ## Current Working Rule
 
 Near-term:

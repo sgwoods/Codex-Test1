@@ -48,7 +48,7 @@ This is how we stay agile without relying on memory-only fixes.
 
 See also:
 
-- `/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md`
+- [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
 
 ## Lane Model
 
@@ -74,8 +74,8 @@ The expected lane model is:
 
 See also:
 
-- `/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md`
-- `/Users/steven/Documents/Codex-Test1/release-authority.json`
+- [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
+- [release-authority.json](release-authority.json)
 
 ## Documentation Gate For Major `x.y` Releases
 
@@ -412,7 +412,7 @@ Production promotion must also start from a clean tree:
 - the local source tree must be clean before `promote:production`
 - the release machine must be on `main`, and local `main` must match `origin/main`
 - the approved beta candidate must not have been promoted from a dirty source state
-- the public sync step must validate the current `/Users/steven/Documents/Codex-Test1/src/public/aurora-galactica.template.html` and the production artifact must have been rebuilt from that exact clean checkout
+- the public sync step must validate the current `src/public/aurora-galactica.template.html` template and the production artifact must have been rebuilt from that exact clean checkout
 - if either condition fails, production promotion should stop
 
 ## First-Class Hosted Documentation Requirement
@@ -446,10 +446,10 @@ improve:
 ## Related Docs
 
 - platform guide:
-  - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
+  - [PLATINUM.md](PLATINUM.md)
 - application-layer guide:
-  - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+  - [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md)
 - release policy:
-  - `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
+  - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - release readiness review:
-  - `/Users/steven/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
+  - [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)

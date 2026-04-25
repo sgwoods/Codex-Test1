@@ -6,7 +6,7 @@ of the hosted `/dev` lane.
 
 The normal day-to-day workflow is now:
 
-- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
+- [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
 
 Use this document only when the normal one-authority, topic-branch workflow is
 not safe enough because unpublished work already exists on another machine.
@@ -178,7 +178,7 @@ Until laptop reconciliation is complete:
 - `local-support` branches are inputs to review, not release candidates
 
 For the current release-state picture, see
-[RELEASE_STATE_MAP.md](/Users/steven/Documents/Codex-Test1/RELEASE_STATE_MAP.md).
+[RELEASE_STATE_MAP.md](RELEASE_STATE_MAP.md).
 
 ## Session Handoff Note
 

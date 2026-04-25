@@ -56,11 +56,11 @@ And then verify:
 The following artifact families should remain committed as part of the release
 record for this cycle:
 
-- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
-- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65`
-- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65`
-- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
-- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
+- `reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
+- `reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65`
+- `reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65`
+- `reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
+- `reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
 
 These are now part of the durable release story, not just development scratch
 material.

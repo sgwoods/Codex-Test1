@@ -80,8 +80,8 @@ For startup and daily work:
 
 See:
 
-- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
-- [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+- [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
+- [release-authority.json](release-authority.json)
 
 ## Go-Forward Branching And Lane Plan
 
@@ -184,7 +184,7 @@ Practical standard:
 
 See also:
 
-- `/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md`
+- [BETA_CANDIDATE_PLAN.md](BETA_CANDIDATE_PLAN.md)
 
 ## Operating Priorities
 
@@ -231,8 +231,8 @@ The rule is:
 - no bug fix should disappear into code history without a corresponding test or
   a documented reason it is still manual
 - movement tuning now follows the same principle:
-  - start from [MOVEMENT_REFERENCE_TRACE_PLAN.md](/Users/steven/Documents/Codex-Test1/MOVEMENT_REFERENCE_TRACE_PLAN.md)
-  - use [tools/harness/reference-profiles/player-movement-reference-traces.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/player-movement-reference-traces.json)
+  - start from [MOVEMENT_REFERENCE_TRACE_PLAN.md](MOVEMENT_REFERENCE_TRACE_PLAN.md)
+  - use `tools/harness/reference-profiles/player-movement-reference-traces.json`
   - avoid further blind movement-constant tuning before trace-backed evidence exists
 
 ### 3. Keep Change Scope Small
@@ -304,7 +304,7 @@ Preferred artifact outputs:
 
 See also:
 
-- `/Users/steven/Documents/Codex-Test1/CORRESPONDENCE_FRAMEWORK.md`
+- [CORRESPONDENCE_FRAMEWORK.md](CORRESPONDENCE_FRAMEWORK.md)
 
 ### Second-Game / Galaxian Track
 
@@ -440,9 +440,9 @@ Recommended order:
 
 See also:
 
-- `/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md`
-- `/Users/steven/Documents/Codex-Test1/NEXT_DEV_CANDIDATE_MAP.md`
-- `/Users/steven/Documents/Codex-Test1/NEXT_DEV_CANDIDATE_PROPOSAL.md`
+- [RELEASE_LANE_MODEL.md](RELEASE_LANE_MODEL.md)
+- [NEXT_DEV_CANDIDATE_MAP.md](NEXT_DEV_CANDIDATE_MAP.md)
+- [NEXT_DEV_CANDIDATE_PROPOSAL.md](NEXT_DEV_CANDIDATE_PROPOSAL.md)
 
 ## Immediate Execution Sequence
 
@@ -509,12 +509,12 @@ The next `/beta` candidate should aim to be:
    - shipped baseline vs candidate
    - forward line vs recovered work
 5. maintain:
-   - [REFERENCE_MEDIA_INVENTORY.md](/Users/steven/Documents/Codex-Test1/REFERENCE_MEDIA_INVENTORY.md)
-   - [ANALYSIS_ROADMAP.md](/Users/steven/Documents/Codex-Test1/ANALYSIS_ROADMAP.md)
+   - [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)
+   - [ANALYSIS_ROADMAP.md](ANALYSIS_ROADMAP.md)
    as the persistent index of what evidence already exists and what analysis should be attempted next
-6. use [VIDEO_ALIGNMENT_PROGRAM.md](/Users/steven/Documents/Codex-Test1/VIDEO_ALIGNMENT_PROGRAM.md) plus:
-   - [tools/harness/reference-profiles/reference-video-event-log.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-video-event-log.json)
-   - [tools/harness/reference-profiles/reference-visual-artifact-catalog.json](/Users/steven/Documents/Codex-Test1/tools/harness/reference-profiles/reference-visual-artifact-catalog.json)
+6. use [VIDEO_ALIGNMENT_PROGRAM.md](VIDEO_ALIGNMENT_PROGRAM.md) plus:
+   - `tools/harness/reference-profiles/reference-video-event-log.json`
+   - `tools/harness/reference-profiles/reference-visual-artifact-catalog.json`
    to keep waveform analysis, labeled video windows, Aurora-like reference logs, and visual artifact catalogs part of the normal fidelity workflow
 7. use those preserved traces and labels to tighten player-ship movement until
    it no longer reads as noticeably too jerky or too fast relative to the real

@@ -13,7 +13,7 @@ one machine.
 
 The source of truth for release authority is:
 
-- [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+- [release-authority.json](release-authority.json)
 
 ## One-Command Startup
 
@@ -157,6 +157,6 @@ the normal workflow above is no longer sufficient.
 
 That is when to use:
 
-- [RECOVERY_SAFE_COLLABORATION.md](/Users/steven/Documents/Codex-Test1/RECOVERY_SAFE_COLLABORATION.md)
+- [RECOVERY_SAFE_COLLABORATION.md](RECOVERY_SAFE_COLLABORATION.md)
 
 Treat that document as the exception path, not the day-to-day default.
