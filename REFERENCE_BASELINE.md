@@ -136,7 +136,7 @@ validate the result, not replace the baseline.
 
 - Source:
   - original gameplay video
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/README.md`
 - Current metric:
   - `stage1-descent` harness scenario
 - Current use:
@@ -145,7 +145,7 @@ validate the result, not replace the baseline.
 ### Classic Starfield / Visual Intensity
 
 - Source:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/README.md`
 - Current use:
   - compare:
     - starfield density
@@ -172,9 +172,9 @@ validate the result, not replace the baseline.
 ### Classic Audio / Phase Motifs
 
 - Source:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/README.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-3/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-3/README.md`
 - Current use:
   - compare:
     - opening/title motif feel
@@ -222,19 +222,19 @@ validate the result, not replace the baseline.
     - active-play cadence timing
     - results / perfect-clear timing
 - Stage 1 opening reference:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md`
   - preserve the full `4.0s` Galaga start phrase where feasible
   - use the interstitial / arrival signal after the full phrase
   - first visible alien arrivals should stay closer to the measured reference
     window than to a convenience-driven shortened opening
 - Cue matrix:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md`
   - use this to map Aurora cue slots against the strongest current Galaga
     reference clips and identify missing game-owned slots before deeper audio
     fidelity work
 - Durable timing library:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-reference-timing-library/README.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-reference-timing-library/event-families.json`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-reference-timing-library/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaga-reference-timing-library/event-families.json`
   - use this as the default starting point for event-family timing, pacing, and
     audiovisual sync work
   - this same pattern should later be reused for `Galaxian` and future packs
@@ -262,8 +262,8 @@ validate the result, not replace the baseline.
 - Source:
   - manual-backed structure
   - original challenge-stage footage
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/challenge-stage-reference/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/challenge-stage-reference/README.md`
 - Current metrics:
   - `stage3-challenge`
   - `stage6-regular`
@@ -281,7 +281,7 @@ validate the result, not replace the baseline.
 - Sources:
   - manual
   - gameplay footage
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
 - Current metrics:
   - `rescue-dual`
   - `capture-rescue-dual`
@@ -339,8 +339,8 @@ Important near-term exception:
 - Sources:
   - original gameplay footage
   - our harness diagnostics
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
 - Current metrics:
   - `stage4-five-ships`
   - `stage4-survival`
@@ -352,7 +352,7 @@ Important near-term exception:
 - These are architecture/presentation references, not original-Galaga rules
   sources.
 - Current external reference:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/external-galaga5/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/external-galaga5/README.md`
 - Use case:
   - borrow ideas about structure or presentation when useful
   - do not treat them as fidelity evidence
@@ -361,7 +361,7 @@ Important near-term exception:
 
 - This project now also keeps a growing sibling-reference archive for future
   Platinum `Galaxian`-family work:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaxian-mechanics/README.md`
+  - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/galaxian-mechanics/README.md`
 - Naming rule:
   - `Galaxian`
     - the original reference lineage
@@ -390,11 +390,11 @@ High-value future baseline additions:
 
 Current focused release pack:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
+- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/README.md`
 
 ## Collaboration Rule
 
 When a gameplay-fidelity issue is opened or worked, it should eventually point
 back to at least one entry in this document or to a durable source under:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
+- `/Users/steven/Documents/Codex-Test1/reference-artifacts/`

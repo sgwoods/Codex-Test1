@@ -6,12 +6,12 @@ reference-backed fidelity work, and safe collaboration.
 ## Core Rules
 
 - Edit source files under:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/`
+  - `/Users/steven/Documents/Codex-Test1/src/`
 - Do not hand-edit generated build output under:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/`
+  - `/Users/steven/Documents/Codex-Test1/dist/`
 - Rebuild after source changes:
   ```bash
-  cd /Users/stevenwoods/Documents/Codex-Test1
+  cd /Users/steven/Documents/Codex-Test1
   npm run build
   ```
 - Prefer evidence-backed gameplay changes:
@@ -23,16 +23,16 @@ reference-backed fidelity work, and safe collaboration.
 ## Useful Orientation
 
 - Project overview:
-  - `/Users/stevenwoods/Documents/Codex-Test1/README.md`
+  - `/Users/steven/Documents/Codex-Test1/README.md`
 - Source orientation:
-  - `/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md`
+  - `/Users/steven/Documents/Codex-Test1/SOURCE_MAP.md`
 - Architecture:
-  - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+  - `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
 - Reference-to-behavior baseline:
-  - `/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md`
+  - `/Users/steven/Documents/Codex-Test1/REFERENCE_BASELINE.md`
 - Roadmap:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLAN.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+  - `/Users/steven/Documents/Codex-Test1/PLAN.md`
+  - `/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
 
 ## Branching
 
@@ -74,24 +74,24 @@ reference-backed fidelity work, and safe collaboration.
 - Production release/public sync is also expected to run from a current Aurora checkout:
   - branch must be `main`
   - local `main` must match `origin/main`
-  - the current `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` must be the template being synced
+  - the current `/Users/steven/Documents/Codex-Test1/src/public/aurora-galactica.template.html` must be the template being synced
 - If you need to rerun only the top-level public sync after production is already live:
   - stay on current clean `main`
   - keep the current tokenized public template
-  - make sure local `/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json` matches the live production lane exactly before `npm run sync:public`
+  - make sure local `/Users/steven/Documents/Codex-Test1/dist/production/build-info.json` matches the live production lane exactly before `npm run sync:public`
 - If the public Aurora project page still shows stale release/build/focus data
   after a production publish, treat that as a release-path failure, not a
   cosmetic follow-up.
 - The main local playable build is generated at:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
+  - `/Users/steven/Documents/Codex-Test1/dist/dev/index.html`
 - Preferred local handoff/startup command:
   ```bash
   npm run local:resume
   ```
 - The beta-ready snapshot is generated at:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+  - `/Users/steven/Documents/Codex-Test1/dist/beta/`
 - The stable production artifact is generated at:
-  - `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+  - `/Users/steven/Documents/Codex-Test1/dist/production/`
 - Replay a saved gameplay session:
   ```bash
   npm run harness -- --session /absolute/path/to/neo-galaga-session.json
@@ -116,13 +116,13 @@ If a change touches gameplay, include at least one of:
 
 If a change is fidelity-driven, tie it back to:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/`
+- `/Users/steven/Documents/Codex-Test1/reference-artifacts/`
 - an open GitHub issue
 - a measurable harness target where possible
 
 When adding a new durable video/image reference, catalog it under:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/`
+- `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/`
 
 and include:
 
@@ -134,7 +134,7 @@ and include:
 ## Release / Build Identity
 
 - Versioning policy:
-  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+  - `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
 - Every build carries:
   - version
   - build number

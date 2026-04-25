@@ -12,7 +12,7 @@ Use it for the fast answer to:
 
 For the canonical full platform guide, use:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 
 ## Diagram
 
@@ -67,14 +67,14 @@ Today the architecture is in this state:
 ## Related Docs
 
 - canonical platform guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 - application-layer guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 - repo technical map:
-  - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+  - `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
 - release and testing discipline:
-  - `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+  - `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
 - launch art direction:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
 - forward-looking review:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`

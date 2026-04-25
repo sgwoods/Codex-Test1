@@ -32,17 +32,17 @@ As of `2026-04-05`, the current dev line meets the full automated evidence bar
 for the Platinum-framed Aurora rerelease:
 
 - `npm run build`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
 
 That means the remaining Aurora stabilization work is now about:
 
@@ -111,17 +111,17 @@ rerelease unless they regress further:
 
 ### Core automated checks
 
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-input-mapping.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-new-game-reset.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-capture-lifecycle.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-challenge-motion-profile.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-remote-score-submit.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-pilot-records-panel.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-feedback-submit-path.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-game-picker-shell.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-popup-surfaces.js`
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-dock-button-actions.js`
 
 ### Manual checks
 

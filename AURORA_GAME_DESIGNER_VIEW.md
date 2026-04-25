@@ -267,7 +267,7 @@ Aurora-specific audio design should eventually be defined against:
 
 See:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md`
+- `/Users/steven/Documents/Codex-Test1/AUDIO_PLAN.md`
 
 ## What Is Already Data-Driven
 
@@ -283,7 +283,7 @@ Aurora already has meaningful data-driven structure in:
 
 This lives mainly in:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 
 ## What Is Still Too Code-Bound
 

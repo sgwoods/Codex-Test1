@@ -39,7 +39,7 @@ Response:
   - pack metadata
   - entity model
 - The platform contract in
-  `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+  `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
   now explicitly names:
   - `runtimeState`
   - `shellState`
@@ -62,7 +62,7 @@ Response:
   - challenge layout
   - frame accent themes
 - This is visible in:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - We have not finished this work.
 - Remaining magic values still exist in movement tuning, render spacing,
   animation timing, and some gameplay update paths.
@@ -122,8 +122,8 @@ Response:
 - We are not using a database yet, but we are moving in that direction through
   pack-owned entity construction and shared entity contracts.
 - Current progress:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js`
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - The current enemy model now distinguishes:
   - core shared enemy fields
   - escort fields

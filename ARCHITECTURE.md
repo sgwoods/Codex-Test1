@@ -11,11 +11,11 @@ Use it when the question is:
 
 For the canonical platform document, start with:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 
 For the application-layer view, use:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 
 ## Current State
 
@@ -39,80 +39,80 @@ What is still transitional:
 ### Platform-oriented files
 
 - shell, metadata, build identity, shared UI state:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
 - runtime shell helpers:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js`
 - replay and session plumbing:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js`
 - shared service policy:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js`
 - shared leaderboard and account UI helpers:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
 - shared auth/session helpers:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js`
 - shared pack selection:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/15-game-picker.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js`
 - shared shell rendering:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js`
 - harness hooks and deterministic controls:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/90-harness.js`
 
 ### Aurora application files
 
 - Aurora player flow and lifecycle:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-flow.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/05-player-flow.js`
 - Aurora combat and bullet behavior:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-combat.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/05-player-combat.js`
 - Aurora enemy behavior:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/06-enemy-behavior.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/06-enemy-behavior.js`
 - Aurora capture and rescue:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/07-capture-rescue.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/07-capture-rescue.js`
 - Aurora scoring and bonus helpers:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/08-score-awards.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/08-score-awards.js`
 - Aurora stage flow:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/09-stage-flow.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/09-stage-flow.js`
 - Aurora gameplay orchestration:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Aurora pack metadata:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - shared entity model used by packs:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
 - Aurora render orchestration:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/20-render.js`
 - Aurora board and sprite rendering:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/21-render-board.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/21-render-board.js`
 
 ## Build And Hosted Docs Flow
 
 Build script:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
+- `/Users/steven/Documents/Codex-Test1/tools/build/build-index.js`
 
 Generated local `localhost` artifacts:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html`
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html`
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/platinum-guide.html`
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html`
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/release-dashboard.html`
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/dev/release-notes.json`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/index.html`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/project-guide.html`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/platinum-guide.html`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/player-guide.html`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/release-dashboard.html`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/build-info.json`
+- `/Users/steven/Documents/Codex-Test1/dist/dev/release-notes.json`
 
 Promotion scripts:
 
 - promote hosted `/beta` candidate:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-beta.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/promote-beta.js`
 - promote hosted `/production` candidate:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/promote-production.js`
 
 Publish and verification scripts:
 
 - publish lane:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/publish-lane.js`
 - lane preflight:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/check-publish-ready.js`
 - live lane verification:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/verify-live-lane.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/verify-live-lane.js`
 
 ## Hosted Lane Contract
 
@@ -133,11 +133,11 @@ contract.
 Core harness tools:
 
 - scenario runner:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-gameplay.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/harness/run-gameplay.js`
 - batch runner:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-batch.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/harness/run-batch.js`
 - run analysis:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/harness/analyze-run.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/harness/analyze-run.js`
 
 Harness families should now be thought of in categories:
 
@@ -154,10 +154,10 @@ The intended release rule is automation-first:
 ## Related Docs
 
 - platform guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 - application guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 - platform diagrams:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 - testing and release discipline:
-  - `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+  - `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`

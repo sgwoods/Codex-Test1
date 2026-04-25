@@ -143,7 +143,7 @@ Primary family references:
 When we start wiring real sample-backed audio, the first clean platform move
 should be:
 
-- add `audioProfile` to `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+- add `audioProfile` to `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - keep the runtime event vocabulary stable
 - let the runtime choose between:
   - synthesized fallback sounds

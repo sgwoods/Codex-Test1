@@ -2,7 +2,7 @@
 
 Date: March 26, 2026
 Project: Aurora Galactica
-Working repo: `/Users/stevenwoods/Documents/Codex-Test1`
+Working repo: `/Users/steven/Documents/Codex-Test1`
 
 ## Purpose
 

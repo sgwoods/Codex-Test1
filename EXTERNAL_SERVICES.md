@@ -16,9 +16,9 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - validated score views
   - player-specific score views such as `mine`
 - Main runtime code:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/05-supabase.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/05-supabase.js`
 - Build token source:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/build-index.js`
 
 ### Web3Forms
 
@@ -28,7 +28,7 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - in-game bug reports
   - in-game feature requests
 - Main runtime code:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+  - `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
 
 ## Hosting And Delivery
 
@@ -45,8 +45,8 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 - Used for:
   - public delivery of the playable game and public documentation surfaces
 - Main policy docs:
-  - `/Users/stevenwoods/Documents/Codex-Test1/README.md`
-  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+  - `/Users/steven/Documents/Codex-Test1/README.md`
+  - `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
 
 ## Development And Release Tooling
 
@@ -69,8 +69,8 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - public sync verification
   - public project-page sync tooling
 - Main scripts:
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js`
-  - `/Users/stevenwoods/Documents/Codex-Test1/tools/build/verify-public-sync.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/sync-public-pages.js`
+  - `/Users/steven/Documents/Codex-Test1/tools/build/verify-public-sync.js`
 
 ## Local-Only Or Browser-Native Systems
 
