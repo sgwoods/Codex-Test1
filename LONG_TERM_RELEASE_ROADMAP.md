@@ -1,6 +1,6 @@
 # Long-Term Aurora Release Roadmap
 
-This is a first-shot release-family roadmap for Aurora Galactica and Platinum
+This is the working release-family roadmap for Aurora Galactica and Platinum
 after the `1.2.3` production refresh.
 
 It groups the large open themes and issue families into coherent future release
@@ -19,6 +19,12 @@ work from becoming a loose bag of good ideas.
 - Hosted `/dev` can move for coherent bundles before a public beta.
 - Hosted `/beta` and `/production` should move only through the release-authority
   workflow.
+- Treat level-by-level Aurora expansion as a major product pillar, not as
+  background polish.
+- Treat shared game-video publishing as a product and evidence capability, not
+  just a debugging convenience.
+- Bring a second-game Platinum sneak peek forward early enough to pressure-test
+  the platform layer before the full multi-game milestone.
 
 ## Current Baseline
 
@@ -33,6 +39,29 @@ As of April 25, 2026:
 The current shipped line is strong enough that the next cycle should not be a
 recovery release. It should be the first intentional polish-and-platform cycle
 toward the next era.
+
+## Major Roadmap Adjustment
+
+The first roadmap pass correctly identified fidelity, trust, replay, pilot
+identity, and Platinum boundaries as major streams. The next refinement is about
+weighting:
+
+- Aurora needs a real level-by-level expansion pass earlier than originally
+  placed.
+- Challenging stages should become much more interesting, with new alien types,
+  movement families, challenge patterns, and presentation states.
+- Later levels should vary entry styles, attack pacing, movement texture, and
+  challenge pressure in ways that can be compared against original Galaga
+  behavior.
+- Published gameplay videos should become a shared reference layer for users,
+  issues, score records, and release decisions.
+- A preliminary second-game sneak peek should arrive before the full Platinum
+  `2.0` milestone so the platform boundary is tested by real product pressure.
+
+This means `1.4` becomes the first major arcade-depth release family, and
+`1.5` becomes the shared-video evidence and replay-publishing release family.
+The `Message to Pilot` work remains important, but moves after those two
+foundation-setting product capabilities.
 
 ## Release Family 1.3: Fidelity And Trust Reset
 
@@ -52,6 +81,10 @@ Bundle:
 - polish audio identity beyond cue timing
 - close high-confidence gameplay trust bugs around boss injury, capture/carry
   rendering, dual-fighter final-life behavior, and late-run freeze diagnostics
+- create the first level-by-level expansion blueprint before implementation
+  gets broad
+- identify which original Galaga stage families, challenge stages, alien types,
+  and movement patterns Aurora should model first
 - refresh scorecard and release notes around the actual measured improvements
 
 Representative issue families:
@@ -62,18 +95,106 @@ Representative issue families:
 - capture/rescue and close-combat correctness: `#58`, `#73`, `#77`, `#78`,
   `#94`, `#55`
 - self-play survivability measurements: `#18`, `#19`, `#62`
+- level-depth planning against reference evidence: `#4`, `#9`, `#17`, `#100`,
+  `#101`, `#140`
 
 Exit standard:
 
 - quality conformance roll-up is green or explicitly documented
 - movement and audio claims are backed by committed reference artifacts
+- a first level-by-level expansion plan is committed
 - the next `/dev` refresh is coherent enough for sustained review
 
-## Release Family 1.4: Pilot-Facing Shell Polish
+## Release Family 1.4: Level-By-Level Arcade Expansion
 
 Working title:
 
-- `1.4.0` "Message to Pilot"
+- `1.4.0` "Arcade Depth"
+
+Primary goal:
+
+- make Aurora's game progression richer and more comparable to original Galaga
+  across stages, not only in the Stage 1 opening
+
+Bundle:
+
+- build a stage-family map for Aurora progression
+- make challenging stages more interesting and less uniform
+- add new challenge-stage alien types, movement patterns, and scoring pressure
+- introduce later-level entry variation and movement texture
+- vary formation arrival, convoy pulse, escort behavior, dive commitment, and
+  regrouping patterns where reference evidence supports it
+- mature capture retreat, rescue join, between-stage pause/music, and stage
+  indicator behavior
+- improve progressive difficulty and survivability without making self-play
+  collapse too early
+- add harnesses and reference artifacts for at least one expanded challenge
+  stage and one later-level movement/entry family
+
+Representative issue families:
+
+- challenge-stage identity and behavior: `#9`, `#100`, `#140`
+- progressive difficulty and stage elaboration: `#101`, `#32`
+- stage and opening fidelity: `#4`, `#17`
+- between-stage, capture, and rescue presentation: `#41`, `#42`, `#43`, `#44`
+- self-play and later-stage fairness: `#18`, `#19`, `#62`, `#95`
+- harness stage metrics correctness: `#35`, `#46`
+
+Exit standard:
+
+- Stage 1, Stage 2, at least one challenge stage, and one later-stage path have
+  stable correspondence reports
+- challenge stages read as intentional bonus stages with distinct content
+- at least one new alien/movement/challenge family is visible in normal play
+- gameplay depth improves without sacrificing early-run trust
+
+## Release Family 1.5: Shared Videos And Flight Recorder
+
+Working title:
+
+- `1.5.0` "Flight Recorder"
+
+Primary goal:
+
+- make Aurora gameplay videos easy to publish, share, inspect, and use as
+  reference evidence between users
+
+Bundle:
+
+- improve local replay/movie viewing
+- publish selected run videos to a shareable repository or catalog
+- connect video artifacts to issue reports, score records, and release notes
+- support better export paths for session logs and optional videos
+- add targeted auto-test scenarios that drive to meaningful states
+- support a remote artifact catalog for log viewer workflows
+- repair and harden video/audio artifact capture
+- expand reference-video event logging and visual artifact extraction
+- make published videos useful to both players and developers, not only to the
+  local harness
+
+Representative issue families:
+
+- replay/watch mode and movie viewer: `#5`, `#110`, `#119`
+- export and submit-run workflows: `#8`, `#90`, `#69`
+- targeted evidence harnesses: `#89`, `#92`
+- artifact catalog and video repair: `#97`, `#96`, `#13`
+- commentary-ready telemetry: `#81`
+- reference baseline and event logs: `#17`
+- recent plays and public run links: `#70`
+
+Exit standard:
+
+- a meaningful run can be exported, inspected, replayed, published, and linked
+  from a score or issue
+- selected gameplay videos are available through a shared catalog or repository
+- reference and Aurora event logs are closer in shape
+- artifact paths are portable across machines
+
+## Release Family 1.6: Pilot-Facing Shell Polish
+
+Working title:
+
+- `1.6.0` "Message to Pilot"
 
 Primary goal:
 
@@ -87,6 +208,8 @@ Bundle:
 - make settings, account, bug report, score, and help entry points feel
   consistent and contained inside the cabinet frame
 - preserve release information as one message type rather than the whole panel
+- use published-run and scorebook signals as future message sources once those
+  systems exist
 
 Representative issue families:
 
@@ -104,75 +227,6 @@ Exit standard:
 - message queue and rotation behavior are harnessed
 - the main cabinet frame has fewer one-off panel behaviors
 
-## Release Family 1.5: Arcade Rules And Stage Depth
-
-Working title:
-
-- `1.5.0` "Arcade Depth"
-
-Primary goal:
-
-- deepen the Galaga-like game loop after the core release line is stable
-
-Bundle:
-
-- treat challenge stages as bonus stages in presentation and progression
-- add more authentic challenge-stage variation
-- improve progressive stage difficulty and survivability
-- mature capture retreat, rescue join, between-stage pause/music, and stage
-  indicator behavior
-- continue later-stage fairness work with better harness evidence
-
-Representative issue families:
-
-- challenge-stage identity and behavior: `#9`, `#100`, `#140`
-- progressive difficulty and stage elaboration: `#101`, `#32`
-- between-stage, capture, and rescue presentation: `#41`, `#42`, `#43`, `#44`
-- self-play and later-stage fairness: `#18`, `#19`, `#62`, `#95`
-- harness stage metrics correctness: `#35`, `#46`
-
-Exit standard:
-
-- Stage 1, Stage 2, challenge, and one later-stage path have stable
-  correspondence reports
-- challenge stages read as intentional bonus stages
-- gameplay depth improves without sacrificing early-run trust
-
-## Release Family 1.6: Replay, Evidence, And Artifact Operations
-
-Working title:
-
-- `1.6.0` "Flight Recorder"
-
-Primary goal:
-
-- make Aurora runs easier to inspect, replay, narrate, and use as evidence
-
-Bundle:
-
-- improve local replay/movie viewing
-- support better export paths for session logs and optional videos
-- add targeted auto-test scenarios that drive to meaningful states
-- support a remote artifact catalog for log viewer workflows
-- repair and harden video/audio artifact capture
-- expand reference-video event logging and visual artifact extraction
-
-Representative issue families:
-
-- replay/watch mode and movie viewer: `#5`, `#110`, `#119`
-- export and submit-run workflows: `#8`, `#90`, `#69`
-- targeted evidence harnesses: `#89`, `#92`
-- artifact catalog and video repair: `#97`, `#96`, `#13`
-- commentary-ready telemetry: `#81`
-- reference baseline and event logs: `#17`
-
-Exit standard:
-
-- a meaningful run can be exported, inspected, replayed, and linked from a
-  score or issue
-- reference and Aurora event logs are closer in shape
-- artifact paths are portable across machines
-
 ## Release Family 1.7: Pilot Identity And Scorebook
 
 Working title:
@@ -181,16 +235,19 @@ Working title:
 
 Primary goal:
 
-- turn player identity, scores, and run history into a durable product surface
+- turn player identity, scores, videos, and run history into a durable product
+  surface
 
 Bundle:
 
 - require or migrate toward permanent pilot IDs
 - support account lifecycle and deletion
 - track leaderboards by version, season, or release family
-- expand pilot records into a scorebook with replay links
+- expand pilot records into a scorebook with replay and video links
 - clarify account-confirmation and Aurora-branded auth emails
 - add better date/build filtering to high-score surfaces
+- connect shared gameplay videos to pilot records where privacy and storage
+  policy allow it
 
 Representative issue families:
 
@@ -207,19 +264,66 @@ Exit standard:
 - a player can understand which scores belong to which release context
 - pilot records feel like a real cabinet history rather than a debug list
 - auth and account flows carry Aurora branding clearly
+- run videos can become part of a pilot history when appropriate
 
-## Release Family 1.8: Operations, Environments, And Admin Control
+## Release Family 1.8: Platinum Sneak Peek
 
 Working title:
 
-- `1.8.0` "Control Centre"
+- `1.8.0` "Second Cabinet Preview"
 
 Primary goal:
 
-- make operating Aurora safer as a live public product
+- expose a preliminary second-game experience early enough to strengthen the
+  Platinum layer before the full multi-game release
 
 Bundle:
 
+- add a dev-preview or limited public sneak peek for a second Platinum game
+- likely candidate: a `Galaxian`-style sibling proof, because it shares enough
+  mechanics to validate the platform without requiring a wholly different genre
+- keep the preview honest: playable slice, explicit preview labeling, and no
+  overclaiming
+- define what belongs to Platinum versus the game pack when a second app is
+  present
+- pressure-test pack metadata, controls, shell copy, storage, score policy, and
+  visual theme loading
+- keep `Galaxy Guardians` preview-only unless it has its own durable data model
+  and real mechanics
+
+Representative issue families:
+
+- Platinum multi-game extraction: `#111`
+- Galaxian mechanics archive and future ingestion planning
+- game picker and pack metadata work from `#144`
+- theme/brand package work from `#99`, `#30`, `#84`
+- future game-pack designer foundations from `#141`
+
+Exit standard:
+
+- the second-game preview can launch through Platinum without breaking Aurora
+- the preview reveals real platform seams that need fixing before `2.0`
+- the preview is honest about what is playable and what is placeholder
+
+## Release Family 1.9: Operations And Pack Contract
+
+Working title:
+
+- `1.9.0` "Platinum Readiness"
+
+Primary goal:
+
+- finish enough operational and platform separation that the next release can
+  honestly become multi-game
+
+Bundle:
+
+- formalize a pack contract for game identity, controls, stages, assets,
+  storage, score policy, shell copy, videos, and admin artifacts
+- migrate Aurora-shaped platform storage names toward neutral Platinum
+  namespaces
+- decouple brand/style assets into a swappable package
+- support alternate visual themes without confusing them with distinct games
 - separate non-production and production identity and score paths more cleanly
 - strengthen preflight checks for promotion and public verification
 - replace fragile feedback transport with a controlled backend option
@@ -230,6 +334,10 @@ Bundle:
 
 Representative issue families:
 
+- shared arcade platform extraction: `#111`
+- brand package and theme system: `#99`, `#30`, `#84`
+- Windigo/Aurora theme work: `#26`, `#27`, `#28`, `#29`
+- custom stages and visual themes: `#83`, `#84`
 - non-production Supabase separation: `#126`
 - reset or strip test-oriented state before production: `#122`
 - feedback transport: `#133`, `#53`, `#7`
@@ -240,47 +348,13 @@ Representative issue families:
 
 Exit standard:
 
-- operational actions have clearer admin surfaces and safer lane boundaries
-- release and public sync checks are harder to misuse
-- generated artifacts are less confusing as source-control material
-
-## Release Family 1.9: Platinum Pack Contract And Theme System
-
-Working title:
-
-- `1.9.0` "Platinum Pack Contract"
-
-Primary goal:
-
-- finish enough platform separation that the next release can honestly become
-  multi-game
-
-Bundle:
-
-- formalize a pack contract for game identity, controls, stages, assets,
-  storage, score policy, and shell copy
-- migrate Aurora-shaped platform storage names toward neutral Platinum
-  namespaces
-- decouple brand/style assets into a swappable package
-- support alternate visual themes without confusing them with distinct games
-- keep `Galaxy Guardians` preview-only unless it has its own durable data model
-- document same-control compliance as a platform rule
-
-Representative issue families:
-
-- shared arcade platform extraction: `#111`
-- brand package and theme system: `#99`, `#30`, `#84`
-- Windigo/Aurora theme work: `#26`, `#27`, `#28`, `#29`
-- custom stages and visual themes: `#83`, `#84`
-- game picker / shell preview responsibilities from `#144` and `#150`
-
-Exit standard:
-
 - Aurora is one pack hosted by Platinum, not the hidden shape of the whole
   platform
-- second-game preview data no longer borrows Aurora gameplay collections in a
-  way that could become accidental architecture
+- operational actions have clearer admin surfaces and safer lane boundaries
+- release and public sync checks are harder to misuse
 - same-control expectations are documented and testable
+- the second-game preview has produced concrete pack-contract requirements for
+  `2.0`
 
 ## Release Family 2.0: First Multi-Game Platinum Release
 
@@ -294,14 +368,13 @@ Primary goal:
 
 Bundle:
 
-- add a second meaningful playable game slice
-- likely candidate: a `Galaxian`-style sibling proof, because it shares enough
-  mechanics to validate the platform without requiring a wholly different genre
-- keep `Galaxy Guardians` as either a branded preview, a later pack, or a small
-  playable proof only when its own mechanics are real
+- promote the second-game preview into a meaningful playable game slice
 - add game-picker behavior only when there is something real to pick
 - ensure both games comply with shared control and cabinet expectations
+- keep storage, scores, shell copy, videos, and release metadata separated by
+  game pack
 - grow reference-media ingestion for the second game before fidelity claims
+- make the public product promise about Platinum, not only Aurora
 
 Representative issue families:
 
@@ -315,7 +388,8 @@ Exit standard:
 
 - at least two Platinum applications can be launched through the shell
 - the second application is playable enough to validate the pack contract
-- controls, storage, scores, and shell copy do not leak Aurora assumptions
+- controls, storage, scores, videos, and shell copy do not leak Aurora
+  assumptions
 
 ## Release Family 2.1: Personas And Simulated Opponents
 
@@ -333,7 +407,8 @@ Bundle:
 - make self-play and simulated players more durable and measurable
 - prepare persona-vs-player experiences
 - explore Player 2 style opponent behavior
-- connect reference event logs, player telemetry, and replay records
+- connect reference event logs, player telemetry, published videos, and replay
+  records
 - keep "learn by playing" tied to simulation evidence, not just aspiration
 
 Representative issue families:
@@ -386,13 +461,19 @@ Exit standard:
 ## First Decisions From This Roadmap
 
 1. Do not jump straight to `2.0`; use `1.3` through `1.9` to earn it.
-2. Make `1.3` a measurement-backed quality release, not a feature grab bag.
-3. Put `Message to Pilot` in `1.4`, after the quality gates are healthy.
-4. Keep deeper stage and challenge elaboration in `1.5`, after trust fixes.
-5. Treat replay/artifact work as a release family, not background plumbing.
+2. Make `1.3` a measurement-backed quality release and level-expansion planning
+   pass, not a feature grab bag.
+3. Promote level-by-level arcade depth to `1.4`, because Aurora needs richer
+   stage progression, challenge stages, alien types, and movement variety.
+4. Promote shared gameplay-video publishing to `1.5`, because shared evidence
+   and player-facing run memory are important product capabilities.
+5. Move `Message to Pilot` after the arcade-depth and video foundations so it
+   can eventually surface richer live events.
 6. Treat pilot identity and score history as their own product milestone.
-7. Finish Platinum pack boundaries before claiming multi-game status.
-8. Reserve the first true major-version moment for a real second playable
+7. Bring a second-game sneak peek forward before `2.0` so Platinum gets real
+   pressure from more than one app.
+8. Finish Platinum pack boundaries before claiming full multi-game status.
+9. Reserve the first true major-version moment for a real second playable
    application under Platinum.
 
 ## Near-Term Branch Implications
@@ -400,10 +481,13 @@ Exit standard:
 Recommended next branches from `main`:
 
 1. `codex/macbook-pro-audio-phase-gate`
-2. `codex/macbook-pro-movement-traces`
-3. `codex/macbook-pro-gameplay-trust`
-4. `codex/macbook-pro-message-to-pilot`
-5. `codex/macbook-pro-platinum-copy-boundary`
+2. `codex/macbook-pro-level-expansion-plan`
+3. `codex/macbook-pro-movement-traces`
+4. `codex/macbook-pro-gameplay-trust`
+5. `codex/macbook-pro-shared-video-catalog`
+6. `codex/macbook-pro-second-game-preview`
+7. `codex/macbook-pro-message-to-pilot`
+8. `codex/macbook-pro-platinum-copy-boundary`
 
 These branches do not need to map one-to-one to public releases. They are the
 first small steps toward the release families above.

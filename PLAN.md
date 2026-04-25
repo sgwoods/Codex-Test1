@@ -45,6 +45,14 @@ This means:
 - keep reference-video extraction and correspondence work growing in a durable
   way
 
+### 3a. Level-By-Level Arcade Depth
+
+- expand Aurora stage progression beyond the current early-stage emphasis
+- make challenging stages richer with new alien types, movement families, and
+  challenge patterns
+- use original Galaga reference evidence to shape later-level entry styles,
+  attack pacing, and movement variation
+
 ### 4. Gameplay Trust And Edge-Case Correctness
 
 - continue addressing boss/capture/carry edge cases
@@ -58,6 +66,13 @@ This means:
 - improve pilot, leaderboard, and replay surfaces where they are still rough
 - keep production-safe defaults and developer restrictions disciplined
 
+### 5a. Shared Video Evidence
+
+- make exported gameplay videos publishable to a shared catalog or repository
+- connect videos to issues, score records, release review, and player-facing
+  history
+- use shared videos as durable reference material between users and machines
+
 ### 6. Platform Boundary Cleanup
 
 - keep pack contract thinking explicit
@@ -69,6 +84,8 @@ This means:
 - keep `Galaxy Guardians` preview-only until a minimal playable slice is real
 - prepare the longer-range `Galaxian`-style ingestion path through durable
   reference analysis and platform extension planning
+- bring a preliminary second-game Platinum sneak peek forward before the full
+  multi-game release so the platform layer is tested by real product pressure
 
 ### 8. Personas And Simulated Opponents
 
@@ -82,8 +99,10 @@ This means:
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
 3. prioritize movement fidelity, audio identity polish, and boundary cleanup
-4. continue narrow trust fixes from the open issue stream
-5. decide when the next coherent polish bundle is strong enough to refresh
+4. prioritize level-by-level arcade depth as the next major product pillar
+5. make shared gameplay-video publishing an early evidence/product capability
+6. continue narrow trust fixes from the open issue stream
+7. decide when the next coherent polish bundle is strong enough to refresh
    hosted `/dev`
 
 ## Release Direction

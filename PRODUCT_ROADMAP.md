@@ -52,8 +52,9 @@ That release family should focus on:
 - movement fidelity
 - audio identity polish
 - gameplay trust fixes
-- shell/pilot-surface polish
-- Platinum/application seam cleanup
+- level-by-level expansion planning
+- challenging-stage and later-level depth
+- shared-video evidence and publishing foundations
 
 ### Long-Term Release Families
 
@@ -69,6 +70,11 @@ Current decision:
 - reserve `2.0` for the first genuinely multi-game Platinum milestone
 - treat `1.3` as the next measurement-backed quality release rather than a
   broad feature bundle
+- promote level-by-level arcade depth to the next major product pillar after
+  the `1.3` quality reset
+- make shared gameplay-video publishing an early roadmap capability
+- bring a preliminary second-game Platinum sneak peek forward before the full
+  `2.0` multi-game release
 
 ## Main Investment Themes
 
@@ -107,7 +113,33 @@ Examples:
 - replay-flow smoothness
 - runtime hardening and freeze follow-up
 
-### 4. UI, shell, and overlay polish
+### 4. Level-by-level arcade depth
+
+Target:
+
+- expand Aurora level progression with richer challenge stages, later-level
+  entry variation, new alien types, movement families, and challenge patterns
+
+Why:
+
+- Aurora needs enough stage-by-stage detail and complexity to stand beside the
+  original arcade reference, not just a strong early-stage loop
+- challenging stages and later levels are highly visible proof that the game is
+  maturing beyond the first release family
+
+### 5. Shared videos and evidence
+
+Target:
+
+- publish selected gameplay videos into a shareable catalog or repository that
+  users and developers can reference
+
+Why:
+
+- shared videos turn runs into durable evidence, player memory, issue context,
+  and release-review material
+
+### 6. UI, shell, and overlay polish
 
 Target:
 
@@ -117,7 +149,7 @@ Why:
 
 - cabinet presentation and panel consistency are highly visible quality signals
 
-### 5. Pilot, leaderboard, replay, and operations
+### 7. Pilot, leaderboard, replay, and operations
 
 Target:
 
@@ -131,7 +163,7 @@ Themes:
 - account lifecycle and deletion
 - replay/media and admin/control-centre growth
 
-### 6. Environment and release separation
+### 8. Environment and release separation
 
 Target:
 
@@ -143,7 +175,7 @@ Themes:
 - stronger preflights
 - safer production promotions
 
-### 7. Platinum and multi-game growth
+### 9. Platinum and multi-game growth
 
 Target:
 
@@ -154,10 +186,11 @@ Themes:
 - stronger pack contract
 - cleaner storage/schema seam
 - same-control compliance
+- early second-game sneak peek before the full multi-game release
 - second-game proof slice
 - future `Galaxian` ingestion planning
 
-### 8. Personas and simulated opponents
+### 10. Personas and simulated opponents
 
 Target:
 
