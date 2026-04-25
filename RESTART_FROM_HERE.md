@@ -42,10 +42,18 @@ On any machine that already has `git`, `node`, `npm`, `python3`, Chrome, and
 `gh` installed:
 
 ```bash
-git clone https://github.com/sgwoods/Codex-Test1.git
-cd Codex-Test1
-npm run machine:bootstrap
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
 ```
+
+That one command will:
+
+- clone `sgwoods/Codex-Test1` into the target folder if it is not there yet
+- reuse the clone if it already exists
+- run `npm run machine:bootstrap` inside it
+
+If you prefer a unique iCloud-backed path on a second machine, pass that target
+path instead. Just make sure it is a machine-specific clone path, not the same
+working tree used on another machine.
 
 For a read-only startup check:
 
@@ -137,20 +145,13 @@ The next polish cycle should prioritize:
 
 ## How To Restart On A New Machine
 
-1. Clone the repo:
+1. Run the installer:
 
 ```bash
-git clone https://github.com/sgwoods/Codex-Test1.git
-cd Codex-Test1
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
 ```
 
-2. Use the new startup command:
-
-```bash
-npm run machine:bootstrap
-```
-
-3. If bootstrap is blocked, use:
+2. If bootstrap is blocked, use:
 
 ```bash
 npm run machine:doctor
@@ -158,7 +159,7 @@ npm run machine:doctor
 
 and resolve the missing prerequisites it reports.
 
-4. Run the representative checks:
+3. Run the representative checks:
 
 ```bash
 npm run harness:check:close-shot-hit
@@ -168,7 +169,7 @@ npm run harness:check:player-movement-conformance
 npm run harness:score:quality-conformance
 ```
 
-5. Verify live/public state if release work is continuing:
+4. Verify live/public state if release work is continuing:
 
 ```bash
 npm run publish:verify:beta

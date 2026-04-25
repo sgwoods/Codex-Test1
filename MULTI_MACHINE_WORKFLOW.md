@@ -21,10 +21,16 @@ After cloning the repo and installing the required system tools, the preferred
 startup path is:
 
 ```bash
-npm run machine:bootstrap
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash -s -- "$HOME/Development/Codex-Test1"
 ```
 
-This command:
+That installer:
+
+- clones the repo into the target directory if needed
+- reuses the clone if it already exists
+- then runs `npm run machine:bootstrap`
+
+The repo bootstrap itself:
 
 - verifies `node`, `npm`, `python3`, `gh`, and Chrome
 - verifies the repo remote and branch
