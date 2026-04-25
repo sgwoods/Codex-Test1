@@ -72,6 +72,24 @@ async function fetchText(url){
   return res.text();
 }
 
+function sleep(ms){
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchTextEventually(url, requiredBits, context, attempts = 10, delayMs = 3000){
+  let last = '';
+  for(let attempt = 0; attempt < attempts; attempt += 1){
+    last = await fetchText(url);
+    if(requiredBits.every((needle) => last.includes(needle))){
+      return last;
+    }
+    if(attempt < attempts - 1){
+      await sleep(delayMs);
+    }
+  }
+  throw new Error(`Public sync verification failed for ${context}: missing ${requiredBits.map((needle) => `"${needle}"`).join(', ')}`);
+}
+
 async function getContent(filePath){
   const res = await request(`${API_ROOT}/${filePath}`);
   if(!res.ok) throw new Error(`Failed to fetch ${filePath}: ${res.status} ${res.statusText}`);
@@ -92,12 +110,28 @@ async function main(){
   const releaseStamp = buildInfo.builtAtEt || buildInfo.released || publicDateLong(pushedAt);
   const expectedFocus = dashboard.currentFocus || '';
   const expectedMarker = `public-sync: release=${buildInfo.version} label=${buildInfo.label} commit=${buildInfo.commit}`;
+  const expectedRootRelease = `<strong>Current release</strong> ${buildInfo.version}`;
+  const expectedRootFocus = `<strong>Current focus</strong> ${expectedFocus}`;
   const projectHtml = await getContent(`${CANONICAL_PROJECT_SLUG}.html`);
   const legacyProjectHtml = await getContent(`${LEGACY_PROJECT_SLUG}.html`);
   const rawProjectHtml = await fetchText(`${RAW_ROOT}/${CANONICAL_PROJECT_SLUG}.html?cb=${Date.now()}`);
   const rawLegacyProjectHtml = await fetchText(`${RAW_ROOT}/${LEGACY_PROJECT_SLUG}.html?cb=${Date.now()}`);
-  const renderedProjectHtml = await fetchText(`${RENDERED_ROOT}/${CANONICAL_PROJECT_SLUG}.html?cb=${Date.now()}`);
-  const renderedLegacyProjectHtml = await fetchText(`${RENDERED_ROOT}/${LEGACY_PROJECT_SLUG}.html?cb=${Date.now()}`);
+  const renderedProjectHtml = await fetchTextEventually(
+    `${RENDERED_ROOT}/${CANONICAL_PROJECT_SLUG}.html?cb=${Date.now()}`,
+    [`<span class="metaValue">${buildInfo.version}</span>`, expectedFocus, expectedMarker],
+    `rendered ${CANONICAL_PROJECT_SLUG}.html`
+  );
+  const renderedLegacyProjectHtml = await fetchTextEventually(
+    `${RENDERED_ROOT}/${LEGACY_PROJECT_SLUG}.html?cb=${Date.now()}`,
+    [`<span class="metaValue">${buildInfo.version}</span>`, expectedMarker],
+    `rendered ${LEGACY_PROJECT_SLUG}.html`
+  );
+  const rawRootHtml = await fetchText(`${RAW_ROOT}/index.html?cb=${Date.now()}`);
+  const renderedRootHtml = await fetchTextEventually(
+    `${RENDERED_ROOT}/?cb=${Date.now()}`,
+    ['Aurora Galactica', expectedRootRelease, expectedRootFocus],
+    'rendered public index'
+  );
   const manifest = JSON.parse(await getContent(`data/projects/${CANONICAL_PROJECT_SLUG}.json`));
   const legacyManifest = JSON.parse(await getContent(`data/projects/${LEGACY_PROJECT_SLUG}.json`));
 
@@ -114,11 +148,16 @@ async function main(){
   ensureIncludes(rawProjectHtml, expectedMarker, `raw ${CANONICAL_PROJECT_SLUG}.html provenance marker`);
   ensureIncludes(rawLegacyProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `raw ${LEGACY_PROJECT_SLUG}.html release version`);
   ensureIncludes(rawLegacyProjectHtml, expectedMarker, `raw ${LEGACY_PROJECT_SLUG}.html provenance marker`);
+  ensureIncludes(rawRootHtml, 'Aurora Galactica', 'raw public index aurora card');
+  ensureIncludes(rawRootHtml, expectedRootRelease, 'raw public index release');
+  ensureIncludes(rawRootHtml, expectedRootFocus, 'raw public index current focus');
   ensureIncludes(renderedProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `rendered ${CANONICAL_PROJECT_SLUG}.html release version`);
   ensureIncludes(renderedProjectHtml, expectedFocus, `rendered ${CANONICAL_PROJECT_SLUG}.html current focus`);
   ensureIncludes(renderedProjectHtml, expectedMarker, `rendered ${CANONICAL_PROJECT_SLUG}.html provenance marker`);
   ensureIncludes(renderedLegacyProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `rendered ${LEGACY_PROJECT_SLUG}.html release version`);
   ensureIncludes(renderedLegacyProjectHtml, expectedMarker, `rendered ${LEGACY_PROJECT_SLUG}.html provenance marker`);
+  ensureIncludes(renderedRootHtml, expectedRootRelease, 'rendered public index release');
+  ensureIncludes(renderedRootHtml, expectedRootFocus, 'rendered public index current focus');
 
   if(manifest.schema_version !== '1.0') throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json schema_version: expected "1.0" got "${manifest.schema_version}"`);
   if(manifest.project_id !== CANONICAL_PROJECT_SLUG) throw new Error(`Public sync verification failed for data/projects/${CANONICAL_PROJECT_SLUG}.json project_id: expected "${CANONICAL_PROJECT_SLUG}" got "${manifest.project_id}"`);
