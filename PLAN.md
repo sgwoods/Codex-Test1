@@ -111,6 +111,8 @@ This means:
   `f6ba6c2` family
 - the next serious candidate should be assembled from `main` and then refreshed
   into hosted `/dev` deliberately
+- if a very small production-safe trust patch accumulates first, use the
+  narrower `1.2.4` path defined in [PATCH_1_2_4_PLAN.md](PATCH_1_2_4_PLAN.md)
 - the next meaningful public milestone should likely be a `MINOR` release in
   the `1.3.0` family
 - the longer release-family phasing plan is tracked in

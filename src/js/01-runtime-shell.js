@@ -18,7 +18,12 @@ function resetActiveInputState(reason='manual'){
  const hadMotion=!!(S?.p&&Math.abs(+S.p.vx||0)>0);
  keys={};
  keyState={};
- if(S?.p&&Number.isFinite(+S.p.vx))S.p.vx=0;
+ if(S?.p&&Number.isFinite(+S.p.vx)){
+  S.p.vx=0;
+  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'){
+   S.p.inputResetHoldT=Math.max(+S.p.inputResetHoldT||0,.24);
+  }
+ }
  if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
 }
 function closeDockOverlays(except=''){
