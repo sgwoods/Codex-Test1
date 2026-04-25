@@ -65,6 +65,37 @@ record for this cycle:
 These are now part of the durable release story, not just development scratch
 material.
 
+## Beta And Production Replication Expectation
+
+For beta and production, the release-host repo should receive the full public
+release package, not just the compiled game files.
+
+That public package includes:
+
+- shipped runtime and assets
+- hosted guides
+- release dashboard and release notes
+- build metadata
+- release-facing public context
+
+It does not need to duplicate the entire engineering repo.
+
+The authoritative source for:
+
+- issues
+- planning
+- harnesses
+- engineering history
+
+remains:
+
+- [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
+
+The beta/production replication rule is therefore:
+
+- mirror the full public release surface
+- do not mirror the full internal engineering surface
+
 ## Current Risk View
 
 Main acceptable risks for this production push:

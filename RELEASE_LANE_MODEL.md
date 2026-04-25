@@ -166,6 +166,30 @@ What may stay generated-only:
 But if a generated output is needed later to explain or defend a release, its
 important conclusions should also be present in committed docs.
 
+## Mirror Expectations By Lane
+
+The public release host repo does not need to mirror every engineering artifact
+for every lane.
+
+Lane-by-lane expectation:
+
+- local `localhost`
+  - no public-repo replication
+- hosted `/dev`
+  - runtime plus minimal hosted docs and metadata
+- hosted `/beta`
+  - full candidate public package
+- hosted `/production`
+  - full public package and polished hosted docs
+
+The active engineering source of truth remains:
+
+- [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
+
+The public mirror remains:
+
+- [sgwoods/Aurora-Galactica](https://github.com/sgwoods/Aurora-Galactica)
+
 ## Current Working Rule
 
 Near-term:

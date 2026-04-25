@@ -105,6 +105,70 @@ Before replacing hosted `/dev`, we should be able to answer:
 
 This is the core professionalism rule for the next release phase.
 
+## Replication Policy Between Repos
+
+Aurora uses selective replication between:
+
+- source repo:
+  - [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
+- public release host:
+  - [sgwoods/Aurora-Galactica](https://github.com/sgwoods/Aurora-Galactica)
+
+This is intentional. We should not mirror the full engineering repo into the
+release host on every publish.
+
+Working model:
+
+- `Codex-Test1`
+  - factory
+  - contains full engineering context
+- `Aurora-Galactica`
+  - showroom
+  - contains the public release package
+
+### What Must Stay In `Codex-Test1`
+
+- active source code history
+- issues
+- planning and roadmap docs
+- harnesses and experimental tooling
+- internal analyses unless they are part of the public release story
+- machine bootstrap, release authority, and engineering workflow internals
+
+### What Should Replicate To `Aurora-Galactica`
+
+- production-ready built code and assets
+- hosted documentation for the live lane being published
+- release notes, dashboard, and build metadata
+- public-facing guides
+- enough mirrored context that the release host makes sense as a public repo
+
+### Replication Levels
+
+1. `dev mirror`
+   - hosted runtime
+   - minimal hosted docs
+   - build metadata
+   - enough release context to explain the lane
+2. `beta mirror`
+   - full candidate runtime
+   - release docs
+   - release dashboard
+   - public guides
+   - candidate metadata
+3. `production mirror`
+   - full public package
+   - polished hosted docs
+   - stable release metadata
+   - public release-facing context
+
+Rule:
+
+- no replication is needed for ordinary local or topic-branch work
+- selective replication is appropriate for hosted `/dev`
+- full public-package replication is expected for hosted `/beta` and hosted
+  `/production`
+
 ## Current Promotion Reality
 
 As of April 25, 2026:
