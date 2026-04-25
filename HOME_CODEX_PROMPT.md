@@ -9,7 +9,9 @@ You are working on Aurora Galactica on this machine.
 Use the local Codex-Test1 clone as the only development repo, and treat Aurora-Galactica as release-only.
 
 Before doing anything else, read these files from the local clone and use them as the workflow source of truth:
+- ~/Documents/Codex-Test1/RESTART_FROM_HERE.md
 - ~/Documents/Codex-Test1/HOME_MACHINE_SETUP.md
+- ~/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md
 - ~/Documents/Codex-Test1/HOME_CODEX_PROMPT.md
 - ~/Documents/Codex-Test1/README.md
 - ~/Documents/Codex-Test1/RELEASE_POLICY.md
@@ -19,10 +21,12 @@ Before doing anything else, read these files from the local clone and use them a
 
 Important rules:
 - Develop only in Codex-Test1.
+- Treat `main` as the only integration branch.
+- Respect the committed release authority in `release-authority.json`.
 - Do not hand-edit generated files in dist/.
 - Build from source with npm run build.
 - Use the generated local dev output in dist/dev for local play.
-- Follow the documented sync workflow: pull before starting, push before switching machines.
+- Follow the documented machine workflow: prefer npm run machine:bootstrap or npm run machine:doctor before starting work.
 - Use the documented beta and production publish flow when publishing.
 - Prefer npm run local:resume to bring the machine back into a ready local development state with both the game and the log viewer available.
 - If any docs disagree, call that out clearly and propose the smallest fix.
@@ -35,17 +39,13 @@ At the start of this session:
 2. If it does not exist, tell me the exact clone/setup commands to run.
 3. If it does exist:
    - confirm git status
-   - confirm whether dependencies are installed
-   - confirm whether gh auth is available
-   - confirm whether Chrome is installed
+   - run npm run machine:doctor if possible
+   - report whether this machine is release authority
    - recommend the exact next commands to refresh this machine to a ready development state
 4. Keep the response concise and practical.
 
 When refreshing the machine, prefer this workflow:
-- git pull --rebase origin main
-- npm install
-- npm run build
-- npm run local:resume
+- npm run machine:bootstrap
 
 If I ask for a clean shutdown of the local development services, use:
 - npm run local:stop
@@ -63,10 +63,7 @@ If you only want a shorter starter prompt, use:
 
 ```text
 Read ~/Documents/Codex-Test1/HOME_MACHINE_SETUP.md, HOME_CODEX_PROMPT.md, README.md, RELEASE_POLICY.md, CONTRIBUTING.md, ARCHITECTURE.md, and SOURCE_MAP.md, then refresh this machine for Aurora Galactica development using:
-git pull --rebase origin main
-npm install
-npm run build
-npm run local:resume
+npm run machine:bootstrap
 
 Use Codex-Test1 as the only development repo, treat Aurora-Galactica as release-only, do not hand-edit dist/, and use npm run local:stop when I want to shut down the local game and viewer cleanly.
 ```

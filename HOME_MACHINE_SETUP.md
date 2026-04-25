@@ -13,9 +13,14 @@ Use `Codex-Test1` as the only development repo on both machines.
   - public release host only
   - do not use it as the normal day-to-day development repo
 
-For a maintained first-session prompt you can paste into the home Codex instance, use:
+For a maintained first-session prompt you can paste into the home Codex
+instance, use:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/HOME_CODEX_PROMPT.md`
+- `/Users/steven/Documents/Codex-Test1/HOME_CODEX_PROMPT.md`
+
+For the new canonical cross-machine workflow, use:
+
+- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
 
 For the special case where another machine holds uncommitted work that may be
 ahead of GitHub or ahead of `hosted-dev`, also use:
@@ -57,34 +62,43 @@ gh --version | head -n 1
    git clone https://github.com/sgwoods/Codex-Test1.git
    cd Codex-Test1
    ```
-2. Install dependencies:
+2. Preferred bring-up:
    ```bash
-   npm install
+   npm run machine:bootstrap
    ```
-3. Authenticate GitHub CLI if you plan to publish beta or production from this machine:
+3. If bootstrap reports blockers, inspect them with:
+   ```bash
+   npm run machine:doctor
+   ```
+4. Authenticate GitHub CLI if you plan to publish beta or production from this machine:
    ```bash
    gh auth login
    ```
-4. Verify remotes and auth:
+5. Verify remotes and auth:
    ```bash
    git remote -v
    gh auth status
    ```
 
+The startup commands now also write a local-only machine profile:
+
+- `.machine-profile.json`
+
+Do not commit that file.
+
 ## Local Development Loop
 
-1. Start each session by syncing:
+1. Start each session with:
    ```bash
-   git pull --rebase origin main
-   npm install
+   npm run machine:bootstrap
    ```
-2. Build the current local dev output:
+2. If you only want a read-only readiness check:
    ```bash
-   npm run build
+   npm run machine:doctor
    ```
-3. Bring the local game and viewer back up:
+3. For a compact status summary:
    ```bash
-   npm run local:resume
+   npm run machine:status
    ```
 4. Open:
    - `http://localhost:8000`
@@ -141,7 +155,7 @@ Open:
 
 The viewer expects artifacts under:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/`
+- `/Users/steven/Documents/Codex-Test1/harness-artifacts/`
 
 Player-triggered exported logs and videos are different:
 
@@ -154,7 +168,7 @@ Player-triggered exported logs and videos are different:
 
 See:
 
-- `~/Documents/Codex-Test1/ARTIFACT_POLICY.md`
+- `/Users/steven/Documents/Codex-Test1/ARTIFACT_POLICY.md`
 
 On the home machine that means the same repo-relative folder inside your local clone.
 
@@ -166,19 +180,17 @@ The simplest rule is:
 
 Recommended pattern:
 
-1. Pull before starting work:
-   ```bash
-   git pull --rebase origin main
-   ```
-2. Make a small unit of change
+1. Start with `npm run machine:bootstrap` or `npm run machine:doctor`
+2. Make a small unit of change on a topic branch
 3. Build and test
 4. Commit and push:
    ```bash
    git add ...
    git commit -m "..."
-   git push origin main
+   git push origin codex/<machine-id>-<topic>
    ```
-5. On the other machine, pull again before continuing
+5. Merge back into `main` intentionally
+6. On the other machine, bootstrap or doctor again before continuing
 
 ## Recovery Mode When Another Machine Is Ahead
 
@@ -199,16 +211,22 @@ Detailed workflow:
 For larger changes:
 
 ```bash
-git checkout -b codex/my-feature
-git push -u origin codex/my-feature
+git switch -c codex/<machine-id>-my-feature
+git push -u origin codex/<machine-id>-my-feature
 ```
 
 Recommended use:
 
 - small safe changes:
-  - `main`
+  - `codex/<machine-id>-...` then merge into `main`
 - bigger or riskier changes:
   - `codex/...`
+
+Release authority is separate from ordinary development. Inspect it with:
+
+```bash
+npm run release:show-authority
+```
 
 ## Publishing Beta
 
@@ -223,7 +241,7 @@ npm run publish:beta
 
 This publishes:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/`
+- `/Users/steven/Documents/Codex-Test1/dist/beta/`
 
 into the public Aurora beta surface.
 
@@ -240,15 +258,18 @@ npm run publish:production
 
 This publishes:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/dist/production/`
+- `/Users/steven/Documents/Codex-Test1/dist/production/`
 
 into the public Aurora production surface, then syncs the top-level `sgwoods/public` Aurora project page and verifies that public sync.
 
 Important:
 
 - production promotion should begin from a clean source tree
-- production release/public sync should run from a machine whose Aurora checkout is on `main` and current with `origin/main`
-- the production artifact and `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` should come from that exact clean checkout before `npm run sync:public`
+- beta and production release work must run from the current release-authority
+  machine
+- production release/public sync should run from a machine whose Aurora checkout
+  is on `main` and current with `origin/main`
+- the production artifact and `/Users/steven/Documents/Codex-Test1/src/public/aurora-galactica.template.html` should come from that exact clean checkout before `npm run sync:public`
 - if the approved beta candidate was built/promoted from a dirty source state, re-run the beta path from a clean tree before promoting production
 - if hosted lanes depend on runtime-loaded media under `assets/`, verify those
   files are present after publish instead of assuming the image-only checks are

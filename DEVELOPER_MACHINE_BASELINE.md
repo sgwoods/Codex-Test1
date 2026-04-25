@@ -2,6 +2,8 @@
 
 This guide captures the persistent machine setup Aurora needs so a new machine
 can become a real developer workstation without rediscovering local conventions.
+The practical startup path now runs through `npm run machine:bootstrap` and
+`npm run machine:doctor`.
 
 ## Goal
 
@@ -56,11 +58,15 @@ gh --version | head -n 1
    git clone https://github.com/sgwoods/Codex-Test1.git
    cd Codex-Test1
    ```
-2. Install dependencies:
+2. Preferred bring-up:
    ```bash
-   npm install
+   npm run machine:bootstrap
    ```
-3. Verify remotes:
+3. If that reports blockers, inspect them with:
+   ```bash
+   npm run machine:doctor
+   ```
+4. Verify remotes manually if needed:
    ```bash
    git remote -v
    ```
@@ -74,6 +80,24 @@ Expected day-to-day:
 
 If this machine will publish live Aurora lanes directly, also confirm the
 public host remote strategy used by the repo at that time.
+
+## Release Authority
+
+Aurora now uses a committed release-authority contract.
+
+Source of truth:
+
+- [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+
+Useful commands:
+
+```bash
+npm run release:show-authority
+npm run release:claim-authority -- --machine-id <id> --label "<label>"
+```
+
+Only the current authority machine may publish hosted `/beta` or hosted
+`/production`.
 
 ## GitHub Auth
 
@@ -157,20 +181,22 @@ truth needed to recreate the file on a new machine.
 
 Use this as a practical bring-up list:
 
-1. `npm install`
-2. `npm run build`
-3. `npm run local:resume`
-4. open local game and viewer
-5. run one small harness check
-6. run one correspondence check
-7. confirm `gh auth status`
-8. confirm `git remote -v`
+1. `npm run machine:bootstrap`
+2. if blocked, run `npm run machine:doctor`
+3. open local game and viewer
+4. run one small harness check
+5. run one correspondence check
+6. confirm `gh auth status`
+7. confirm `git remote -v`
+8. confirm `npm run release:show-authority`
 9. record the actual tool versions for this machine
 
 ## Relationship To Other Docs
 
 - machine bring-up workflow:
   - `HOME_MACHINE_SETUP.md`
+- multi-machine day-to-day workflow:
+  - `MULTI_MACHINE_WORKFLOW.md`
 - cross-machine recovery and branch hygiene:
   - `RECOVERY_SAFE_COLLABORATION.md`
 - release-state orientation:

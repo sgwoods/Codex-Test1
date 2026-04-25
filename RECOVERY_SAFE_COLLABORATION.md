@@ -1,8 +1,15 @@
 # Recovery-Safe Collaboration
 
-This guide is the default workflow when two machines are active but one machine
-holds meaningful uncommitted work that may be ahead of GitHub and ahead of the
-hosted `/dev` lane.
+This guide is the exception workflow when two machines are active and one
+machine holds meaningful uncommitted work that may be ahead of GitHub and ahead
+of the hosted `/dev` lane.
+
+The normal day-to-day workflow is now:
+
+- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
+
+Use this document only when the normal one-authority, topic-branch workflow is
+not safe enough because unpublished work already exists on another machine.
 
 On this machine, use the following names to avoid confusion:
 

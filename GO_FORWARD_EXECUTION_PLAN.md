@@ -60,6 +60,29 @@ The project is therefore not in a "ship fast from wherever we are" mode.
 
 It is in a "continue deliberately without losing agility" mode.
 
+## Multi-Machine Operating Rule
+
+Aurora now has a standard multi-machine workflow.
+
+Default:
+
+- `main` is the only integration branch
+- either machine may develop and push topic branches
+- one machine holds release authority at a time
+- hosted `/beta` and hosted `/production` may only be published from that
+  authority machine
+
+For startup and daily work:
+
+- `npm run machine:bootstrap`
+- `npm run machine:doctor`
+- `npm run machine:status`
+
+See:
+
+- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
+- [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+
 ## Go-Forward Branching And Lane Plan
 
 ### Active Code Line
@@ -82,10 +105,10 @@ branches, then merge back into `main`.
 
 Recommended branch families:
 
-- `codex/timing-*`
-- `codex/audio-*`
-- `codex/fidelity-*`
-- `codex/bugfix-*`
+- `codex/<machine-id>-timing-*`
+- `codex/<machine-id>-audio-*`
+- `codex/<machine-id>-fidelity-*`
+- `codex/<machine-id>-bugfix-*`
 
 Default rule:
 

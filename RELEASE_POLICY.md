@@ -60,6 +60,25 @@ See also:
 
 - `/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md`
 
+## Release Authority Rule
+
+Aurora now uses a one-authority release model.
+
+That means:
+
+- topic branches and ordinary development may happen from more than one machine
+- `main` remains the only integration branch
+- hosted `/beta` and hosted `/production` may only be published from the
+  machine recorded in
+  [release-authority.json](/Users/steven/Documents/Codex-Test1/release-authority.json)
+
+Useful commands:
+
+```bash
+npm run release:show-authority
+npm run release:claim-authority -- --machine-id <id> --label "<label>"
+```
+
 ## Replacement Rule For Hosted `/dev`
 
 Hosted `/dev` is already a published integration surface.
@@ -77,19 +96,18 @@ This is the core professionalism rule for the next release phase.
 
 ## Current Promotion Reality
 
-As of April 22, 2026:
+As of April 25, 2026:
 
-- hosted `/dev` is the real forward line
-- hosted `/beta` and hosted `/production` are still the same shipped code line
-  at `13c8421`
+- hosted `/dev` remains the older integration lane at `1.2.3+build.470.sha.e4732eb`
+- hosted `/beta` is live at `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/production` is live at `1.2.3+build.489.sha.f6ba6c2`
 
 That means:
 
-- there is no meaningful value in promoting the current hosted `/beta` to
-  hosted `/production`
-- the next release cycle should work from the current hosted `/dev` line
-- the next serious candidate should be a new hosted `/beta` built from the
-  improved `/dev` line, not a delayed approval of the older beta/prod family
+- the current shipped beta and production families are aligned
+- the next release cycle should work from `main`
+- hosted `/dev` can move again during the next polish cycle when there is a
+  coherent improvement bundle worth sharing
 
 ## Major `x.y` Documentation Gate
 
@@ -151,8 +169,9 @@ This is the rule that keeps release knowledge out of chat-only or machine-only
 5. promote hosted `/beta`
 6. verify hosted `/beta`
 7. complete any required docs pass for the release line
-8. approve hosted `/beta`
-9. promote and publish hosted `/production`
+8. confirm or hand off release authority intentionally
+9. approve hosted `/beta`
+10. promote and publish hosted `/production`
 
 ## Hosted `/dev` History Rule
 

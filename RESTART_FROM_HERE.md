@@ -1,8 +1,8 @@
 # Restart From Here
 
-This document is the durable handoff point for restarting Aurora and Platinum
-work from a new machine or a new Codex thread after the April 24, 2026 release
-push.
+This is the durable handoff point for restarting Aurora and Platinum work from
+a new machine or a new Codex thread after the April 24-25, 2026 release and
+multi-machine workflow refresh.
 
 ## Authoritative Repo
 
@@ -15,7 +15,7 @@ push.
 
 ## Live Lane State
 
-Verified on April 24, 2026:
+Verified on April 25, 2026:
 
 - hosted `/dev`
   - `1.2.3+build.470.sha.e4732eb`
@@ -27,24 +27,40 @@ Verified on April 24, 2026:
   - `1.2.3+build.489.sha.f6ba6c2`
   - [production build-info](https://sgwoods.github.io/Aurora-Galactica/build-info.json)
 
-This means hosted `/beta` and hosted `/production` are now aligned to the same
-release commit family, while hosted `/dev` remains older and can be refreshed
-later as part of the next polish cycle.
+This means hosted `/beta` and hosted `/production` are aligned to the same
+release commit family, while hosted `/dev` remains the older integration lane
+that can move again during the next polish cycle.
+
+## Canonical Startup Path
+
+On any machine that already has `git`, `node`, `npm`, `python3`, Chrome, and
+`gh` installed:
+
+```bash
+git clone https://github.com/sgwoods/Codex-Test1.git
+cd Codex-Test1
+npm run machine:bootstrap
+```
+
+For a read-only startup check:
+
+```bash
+npm run machine:doctor
+```
+
+For a compact current-state summary:
+
+```bash
+npm run machine:status
+```
+
+These commands are now the primary machine bring-up path. They replace the
+older manual sequence as the recommended way to restart work.
 
 ## Public Project Page State
 
-The raw `sgwoods/public` Aurora page has already been synced to the shipped
-production posture and includes the new current-focus text and provenance
-marker.
-
-Known note from this checkpoint:
-
-- the rendered GitHub Pages copy at
-  [sgwoods.github.io/public/aurora-galactica.html](https://sgwoods.github.io/public/aurora-galactica.html)
-  was still showing the older beta-promotion focus text immediately after sync
-- the raw GitHub content already reflects the shipped production posture
-- treat this as a propagation/cache follow-up first, not as a missing source
-  sync
+The `sgwoods/public` Aurora project page and the rendered root homepage card are
+part of the formal release verification path now.
 
 First follow-up check on a fresh machine/thread:
 
@@ -52,12 +68,13 @@ First follow-up check on a fresh machine/thread:
 npm run verify:public
 ```
 
-If that still fails only on rendered current-focus text, compare:
+This check now covers:
 
-- raw:
-  - `https://raw.githubusercontent.com/sgwoods/public/main/aurora-galactica.html`
-- rendered:
-  - `https://sgwoods.github.io/public/aurora-galactica.html`
+- the raw Aurora project page
+- the raw manifest JSON
+- the rendered Aurora project page
+- the rendered root [sgwoods.github.io/public](https://sgwoods.github.io/public/)
+  homepage card
 
 ## What Is Persisted
 
@@ -76,6 +93,7 @@ The important project state is committed and pushed:
 Important docs to read first:
 
 - [PLAN.md](/Users/steven/Documents/Codex-Test1/PLAN.md)
+- [MULTI_MACHINE_WORKFLOW.md](/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md)
 - [GO_FORWARD_EXECUTION_PLAN.md](/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md)
 - [PRODUCT_ROADMAP.md](/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md)
 - [QUALITY_RELEASE_SCORECARD.md](/Users/steven/Documents/Codex-Test1/QUALITY_RELEASE_SCORECARD.md)
@@ -121,44 +139,21 @@ git clone https://github.com/sgwoods/Codex-Test1.git
 cd Codex-Test1
 ```
 
-2. Install dependencies:
+2. Use the new startup command:
 
 ```bash
-npm install
+npm run machine:bootstrap
 ```
 
-3. Verify toolchain and auth:
+3. If bootstrap is blocked, use:
 
 ```bash
-node -v
-npm -v
-python3 --version
-gh auth status
-git remote -v
+npm run machine:doctor
 ```
 
-4. Make sure you are on the current integration line:
+and resolve the missing prerequisites it reports.
 
-```bash
-git switch main
-git pull origin main
-```
-
-5. Run the local app:
-
-```bash
-npm run build
-npm run local:resume
-```
-
-Confirm:
-
-- game:
-  - `http://127.0.0.1:8000/`
-- viewer:
-  - `http://127.0.0.1:4311/`
-
-6. Run the representative checks:
+4. Run the representative checks:
 
 ```bash
 npm run harness:check:close-shot-hit
@@ -168,7 +163,7 @@ npm run harness:check:player-movement-conformance
 npm run harness:score:quality-conformance
 ```
 
-7. Verify live/public state if release work is continuing:
+5. Verify live/public state if release work is continuing:
 
 ```bash
 npm run publish:verify:beta
@@ -181,8 +176,8 @@ npm run verify:public
 For new work:
 
 - branch from `main`
-- use short-lived `codex/*` topic branches
-- merge back into `main`
+- use short-lived `codex/<machine-id>-<topic>` topic branches
+- merge back into `main` intentionally
 
 Recommended branch families:
 
@@ -191,6 +186,25 @@ Recommended branch families:
 - `codex/fidelity-*`
 - `codex/platform-*`
 - `codex/galaxian-*`
+
+## Release Authority Reminder
+
+Only one machine should hold Aurora release authority at a time.
+
+Inspect authority with:
+
+```bash
+npm run release:show-authority
+```
+
+Hand it off intentionally with:
+
+```bash
+npm run release:claim-authority -- --machine-id <id> --label "<label>"
+```
+
+Hosted `/beta` and `/production` promotion flows are now guarded by this
+authority contract.
 
 ## Release Process Reminder
 

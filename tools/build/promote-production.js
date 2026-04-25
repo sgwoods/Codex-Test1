@@ -10,6 +10,7 @@ const {
   PRODUCTION_BUILD_INFO
 } = require('./paths');
 const { checkGitClean } = require('./check-publish-ready');
+const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
 const { productionFiles } = require('./lane-files');
 
 const FILES = productionFiles(DIST_BETA);
@@ -63,6 +64,8 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
 fs.rmSync(DIST_PRODUCTION, { recursive: true, force: true });
 fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
 
+assertReleaseAuthority('promote:production');
+assertReleaseMainCurrent('Production promotion');
 checkGitClean();
 
 if(!fs.existsSync(BETA_BUILD_INFO)){

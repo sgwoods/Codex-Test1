@@ -13,6 +13,7 @@ const {
   BETA_APPROVED_BUILD_INFO
 } = require('./paths');
 const { devFiles, betaFiles, productionFiles } = require('./lane-files');
+const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
 
 const REQUIRED_SOURCE_DOCS = [
   'README.md',
@@ -61,24 +62,18 @@ function git(args){
 }
 
 function checkProductionCheckoutCurrent(){
-  const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']);
-  if(branch !== 'main'){
-    throw new Error(`Publish preflight failed: production release must run from the main branch. Current branch is "${branch}".`);
-  }
   try{
-    execFileSync('git', ['-C', ROOT, 'fetch', 'origin'], {
-      stdio: ['ignore', 'ignore', 'ignore']
-    });
+    assertReleaseMainCurrent('Production release');
   }catch(err){
-    throw new Error('Publish preflight failed: unable to fetch origin before production release. Pull/fetch the latest Aurora main on this machine and try again.');
+    throw new Error(`Publish preflight failed: ${err.message}`);
   }
-  const head = git(['rev-parse', 'HEAD']);
-  const originMain = git(['rev-parse', 'origin/main']);
-  if(head !== originMain){
-    throw new Error(
-      `Publish preflight failed: local main (${head.slice(0, 7)}) is not current with origin/main (${originMain.slice(0, 7)}). ` +
-      'Pull the latest Aurora main on this machine, rebuild, and rerun the production release.'
-    );
+}
+
+function checkBetaCheckoutCurrent(){
+  try{
+    assertReleaseMainCurrent('Beta release');
+  }catch(err){
+    throw new Error(`Publish preflight failed: ${err.message}`);
   }
 }
 
@@ -264,13 +259,28 @@ function checkProductionReleaseDocs(productionInfo){
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const cfg = laneConfig(String(args.lane || '').toLowerCase());
+  if(cfg.lane === 'beta'){
+    try{
+      assertReleaseAuthority('publish:beta');
+    }catch(err){
+      throw new Error(`Publish preflight failed: ${err.message}`);
+    }
+    checkBetaCheckoutCurrent();
+  }
+  if(cfg.lane === 'production'){
+    try{
+      assertReleaseAuthority('publish:production');
+    }catch(err){
+      throw new Error(`Publish preflight failed: ${err.message}`);
+    }
+    checkProductionCheckoutCurrent();
+  }
   checkGitClean();
   checkSourceDocs();
   checkArtifacts(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production'){
-    checkProductionCheckoutCurrent();
     checkPublicProjectTemplate();
     checkApprovedBetaForProduction(info);
     checkProductionReleaseDocs(info);
@@ -301,5 +311,6 @@ module.exports = {
   checkBuildInfo,
   checkProductionReleaseDocs,
   checkProductionCheckoutCurrent,
+  checkBetaCheckoutCurrent,
   checkPublicProjectTemplate
 };
