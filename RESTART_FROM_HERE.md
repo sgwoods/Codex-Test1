@@ -54,6 +54,7 @@ That one command will:
 - on fresh macOS machines, try to install missing prerequisites through Apple
   Command Line Tools and Homebrew
 - those fresh-machine install steps may request administrator approval
+- the setup command should be run as the normal user, not with `sudo` or `su`
 - run `npm run machine:bootstrap` inside it
 - leave the local game and viewer ready when bootstrap succeeds
 

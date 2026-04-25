@@ -47,6 +47,17 @@ if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
   exit 0
 fi
 
+if [[ "${EUID:-$(id -u)}" -eq 0 ]]; then
+  cat <<'EOF'
+Do not run Aurora machine setup as root.
+
+Use a normal macOS user account with administrator rights, then rerun the same
+setup command from that user shell. Homebrew and the Aurora setup flow will
+request admin approval when needed.
+EOF
+  exit 1
+fi
+
 require_tool() {
   local name="$1"
   local hint="$2"
@@ -120,7 +131,14 @@ ensure_homebrew() {
   ensure_command_line_tools
 
   echo "Homebrew not found. Installing Homebrew..."
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo "Homebrew may request administrator approval in this terminal."
+  echo "Do not rerun this Aurora setup script with sudo or su."
+  if [[ ! -r /dev/tty ]]; then
+    echo "No interactive terminal is available for Homebrew installation."
+    echo "Open a normal Terminal session as your regular user and rerun the same Aurora setup command."
+    exit 1
+  fi
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   if brew_bin="$(find_brew_bin)"; then
     activate_brew_path "$brew_bin"

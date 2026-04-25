@@ -69,6 +69,7 @@ This command:
 - and, on fresh macOS machines, attempts to install missing Aurora
   prerequisites through Apple Command Line Tools plus Homebrew
 - those prerequisite installs may request administrator approval
+- the installer should be run as the normal user, not with `sudo` or `su`
 
 If you choose an iCloud-backed target path, `cd` into that machine-specific
 parent folder first, then run the same command there. Do not use one shared
