@@ -70,6 +70,9 @@ This command:
   prerequisites through Apple Command Line Tools plus Homebrew
 - those prerequisite installs may request administrator approval
 - the installer should be run as the normal user, not with `sudo` or `su`
+- if Homebrew is missing, Aurora downloads the Homebrew installer locally and
+  reruns it with your terminal attached so interactive admin prompts still
+  work from the one-command setup flow
 
 If you choose an iCloud-backed target path, `cd` into that machine-specific
 parent folder first, then run the same command there. Do not use one shared

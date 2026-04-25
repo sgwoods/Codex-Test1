@@ -38,8 +38,7 @@ that can move again during the next polish cycle.
 
 ## Canonical Startup Path
 
-On any machine that already has `git`, `node`, `npm`, `python3`, Chrome, and
-`gh` installed:
+On any machine, use this as the canonical startup command:
 
 ```bash
 mkdir -p "$HOME/Development"
@@ -55,6 +54,9 @@ That one command will:
   Command Line Tools and Homebrew
 - those fresh-machine install steps may request administrator approval
 - the setup command should be run as the normal user, not with `sudo` or `su`
+- if Homebrew is missing, the Aurora installer will download the Homebrew
+  installer locally and rerun it with your terminal attached so admin prompts
+  still work even when Aurora itself was launched through `curl ... | bash`
 - run `npm run machine:bootstrap` inside it
 - leave the local game and viewer ready when bootstrap succeeds
 

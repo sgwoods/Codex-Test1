@@ -85,6 +85,9 @@ On a fresh Mac, the installer will try to help with missing prerequisites:
 - those steps may request administrator approval on the machine
 - run the installer from your normal macOS user shell
 - do not rerun it with `sudo` or `su`
+- if Homebrew is missing, the Aurora installer will download the Homebrew
+  installer locally and rerun it with your terminal attached so admin prompts
+  still work even though Aurora itself was started through `curl ... | bash`
 
 If Apple Command Line Tools need a manual confirmation dialog, complete that
 step and then rerun the same installer command.

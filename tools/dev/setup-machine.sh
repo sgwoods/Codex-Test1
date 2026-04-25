@@ -117,6 +117,8 @@ EOF
 
 ensure_homebrew() {
   local brew_bin
+  local homebrew_installer_url="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+  local homebrew_installer=""
   if brew_bin="$(find_brew_bin)"; then
     activate_brew_path "$brew_bin"
     return 0
@@ -138,7 +140,18 @@ ensure_homebrew() {
     echo "Open a normal Terminal session as your regular user and rerun the same Aurora setup command."
     exit 1
   fi
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  homebrew_installer="$(mktemp "${TMPDIR:-/tmp}/aurora-homebrew-install.XXXXXX.sh")"
+  trap 'rm -f "$homebrew_installer"' RETURN
+  curl -fsSL "$homebrew_installer_url" -o "$homebrew_installer"
+  chmod +x "$homebrew_installer"
+
+  # Aurora is often installed with `curl ... | bash`, which makes stdin a pipe.
+  # Homebrew needs a real terminal so it can prompt for administrator approval.
+  echo "Running the Homebrew installer with your terminal attached for prompts..."
+  /bin/bash "$homebrew_installer" </dev/tty
+  trap - RETURN
+  rm -f "$homebrew_installer"
 
   if brew_bin="$(find_brew_bin)"; then
     activate_brew_path "$brew_bin"
