@@ -82,6 +82,7 @@ On a fresh Mac, the installer will try to help with missing prerequisites:
 - it can install Homebrew if needed
 - it can install missing Aurora dependencies like `git`, `node`, `python3`,
   `gh`, and Google Chrome through Homebrew/Homebrew Cask
+- those steps may request administrator approval on the machine
 
 If Apple Command Line Tools need a manual confirmation dialog, complete that
 step and then rerun the same installer command.

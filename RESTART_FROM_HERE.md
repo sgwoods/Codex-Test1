@@ -53,6 +53,7 @@ That one command will:
 - reuse the clone if it already exists
 - on fresh macOS machines, try to install missing prerequisites through Apple
   Command Line Tools and Homebrew
+- those fresh-machine install steps may request administrator approval
 - run `npm run machine:bootstrap` inside it
 - leave the local game and viewer ready when bootstrap succeeds
 

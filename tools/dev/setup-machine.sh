@@ -35,6 +35,8 @@ Notes:
     under the folder where you run the script.
   - On a fresh macOS machine, this script will try to install missing Aurora
     prerequisites using Homebrew.
+  - Fresh-machine dependency setup may request administrator approval for
+    Apple Command Line Tools, Homebrew, or package installation.
   - iCloud-backed locations are allowed only if each machine uses its own
     distinct clone path. Do not use the same working tree across machines.
 EOF
@@ -161,6 +163,15 @@ ensure_mac_prerequisites() {
   if [[ "$needs_brew" == "no" ]]; then
     return 0
   fi
+
+  cat <<'EOF'
+Fresh-machine Aurora setup detected missing macOS prerequisites.
+This step may request administrator approval for:
+- Apple Command Line Tools
+- Homebrew installation
+- package or application installs
+EOF
+  echo
 
   ensure_homebrew
 
