@@ -7,6 +7,11 @@ TARGET_DIR="${1:-$DEFAULT_TARGET}"
 TARGET_DIR="${TARGET_DIR/#\~/$HOME}"
 
 CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+OS_NAME="$(uname -s)"
+BrewBinCandidates=(
+  "/opt/homebrew/bin/brew"
+  "/usr/local/bin/brew"
+)
 
 usage() {
   cat <<'EOF'
@@ -28,6 +33,8 @@ Notes:
   - The target directory is optional. Default:
       ./Codex-Test1
     under the folder where you run the script.
+  - On a fresh macOS machine, this script will try to install missing Aurora
+    prerequisites using Homebrew.
   - iCloud-backed locations are allowed only if each machine uses its own
     distinct clone path. Do not use the same working tree across machines.
 EOF
@@ -47,6 +54,131 @@ require_tool() {
     exit 1
   fi
 }
+
+have_tool() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+find_brew_bin() {
+  for candidate in "${BrewBinCandidates[@]}"; do
+    if [[ -x "$candidate" ]]; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+  done
+  if have_tool brew; then
+    command -v brew
+    return 0
+  fi
+  return 1
+}
+
+activate_brew_path() {
+  local brew_bin="$1"
+  local brew_prefix
+  brew_prefix="$("$brew_bin" --prefix)"
+  eval "$("$brew_bin" shellenv)"
+  export PATH="$brew_prefix/bin:$brew_prefix/sbin:$PATH"
+}
+
+ensure_command_line_tools() {
+  if [[ "$OS_NAME" != "Darwin" ]]; then
+    return 0
+  fi
+  if xcode-select -p >/dev/null 2>&1; then
+    return 0
+  fi
+
+  echo "Apple Command Line Tools are required before Aurora can install dependencies."
+  echo "Requesting Apple Command Line Tools now..."
+  if xcode-select --install >/dev/null 2>&1; then
+    :
+  fi
+  cat <<'EOF'
+
+Finish the Apple Command Line Tools installation dialog, then rerun this setup
+command.
+EOF
+  exit 1
+}
+
+ensure_homebrew() {
+  local brew_bin
+  if brew_bin="$(find_brew_bin)"; then
+    activate_brew_path "$brew_bin"
+    return 0
+  fi
+
+  if [[ "$OS_NAME" != "Darwin" ]]; then
+    echo "Missing required package manager: Homebrew"
+    echo "Install the Aurora prerequisites manually on this OS, then rerun this setup script."
+    exit 1
+  fi
+
+  ensure_command_line_tools
+
+  echo "Homebrew not found. Installing Homebrew..."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  if brew_bin="$(find_brew_bin)"; then
+    activate_brew_path "$brew_bin"
+    return 0
+  fi
+
+  echo "Homebrew install completed, but brew is still not on PATH."
+  echo "Try adding Homebrew to your shell and rerun this setup script."
+  exit 1
+}
+
+brew_install_if_missing() {
+  local kind="$1"
+  local package="$2"
+  local present="$3"
+
+  if [[ "$present" == "yes" ]]; then
+    return 0
+  fi
+
+  if [[ "$kind" == "formula" ]]; then
+    echo "Installing missing dependency with Homebrew: $package"
+    brew install "$package"
+  else
+    echo "Installing missing application with Homebrew Cask: $package"
+    brew install --cask "$package"
+  fi
+}
+
+ensure_mac_prerequisites() {
+  local needs_brew="no"
+  local node_present="no"
+  local python_present="no"
+  [[ "$OS_NAME" == "Darwin" ]] || return 0
+
+  if ! have_tool git || ! have_tool node || ! have_tool npm || ! have_tool python3 || ! have_tool gh || [[ ! -x "$CHROME_PATH" ]]; then
+    needs_brew="yes"
+  fi
+
+  if [[ "$needs_brew" == "no" ]]; then
+    return 0
+  fi
+
+  ensure_homebrew
+
+  brew_install_if_missing formula git "$(have_tool git && echo yes || echo no)"
+  if have_tool node && have_tool npm; then
+    node_present="yes"
+  fi
+  brew_install_if_missing formula node "$node_present"
+  if have_tool python3; then
+    python_present="yes"
+  fi
+  brew_install_if_missing formula python "$python_present"
+  brew_install_if_missing formula gh "$(have_tool gh && echo yes || echo no)"
+  brew_install_if_missing cask google-chrome "$([[ -x "$CHROME_PATH" ]] && echo yes || echo no)"
+  hash -r
+}
+
+ensure_mac_prerequisites
 
 require_tool git "Install Git, then rerun this setup script."
 require_tool node "Install Node.js, then rerun this setup script."

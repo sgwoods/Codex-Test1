@@ -66,6 +66,8 @@ This command:
 - clones `sgwoods/Codex-Test1` into `./Codex-Test1` if needed
 - reuses the clone if it already exists
 - runs `npm run machine:bootstrap`
+- and, on fresh macOS machines, attempts to install missing Aurora
+  prerequisites through Apple Command Line Tools plus Homebrew
 
 If you choose an iCloud-backed target path, `cd` into that machine-specific
 parent folder first, then run the same command there. Do not use one shared

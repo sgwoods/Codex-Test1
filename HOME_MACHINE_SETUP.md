@@ -76,6 +76,16 @@ If it succeeds cleanly, localhost should be ready immediately afterward:
 If you want to use a unique iCloud-backed location instead, `cd` into that
 parent folder first and run the same command there.
 
+On a fresh Mac, the installer will try to help with missing prerequisites:
+
+- it can trigger Apple Command Line Tools installation if needed
+- it can install Homebrew if needed
+- it can install missing Aurora dependencies like `git`, `node`, `python3`,
+  `gh`, and Google Chrome through Homebrew/Homebrew Cask
+
+If Apple Command Line Tools need a manual confirmation dialog, complete that
+step and then rerun the same installer command.
+
 Important:
 
 - use a machine-specific clone path

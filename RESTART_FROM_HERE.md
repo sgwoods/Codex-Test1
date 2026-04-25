@@ -51,6 +51,8 @@ That one command will:
 
 - clone `sgwoods/Codex-Test1` into `./Codex-Test1` if it is not there yet
 - reuse the clone if it already exists
+- on fresh macOS machines, try to install missing prerequisites through Apple
+  Command Line Tools and Homebrew
 - run `npm run machine:bootstrap` inside it
 - leave the local game and viewer ready when bootstrap succeeds
 
