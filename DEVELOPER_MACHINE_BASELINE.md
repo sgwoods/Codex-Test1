@@ -26,7 +26,7 @@ A valid Aurora developer machine should be able to:
 
 ## Required Tools
 
-Verified on this machine on `2026-04-19`:
+Verified on this machine on `2026-04-24`:
 
 - `node`: `v25.8.2`
 - `npm`: `11.11.1`
@@ -68,6 +68,9 @@ gh --version | head -n 1
 Expected day-to-day:
 
 - `origin` should point at `sgwoods/Codex-Test1`
+- daily development should start from `main` after the `1.2.3+build.489.sha.f6ba6c2`
+  production refresh unless a release-specific hotfix branch is explicitly in
+  use
 
 If this machine will publish live Aurora lanes directly, also confirm the
 public host remote strategy used by the repo at that time.
@@ -130,6 +133,16 @@ Preserve these repo-local folders:
 Do not commit generated artifact trees by default unless the work explicitly
 calls for a preserved checked-in artifact.
 
+Current Aurora exception:
+
+- the reference-video alignment pack
+- current quality-conformance rollups
+- current correspondence bundles used for release decisions
+- refreshed audio identity comparison artifacts
+
+have all been committed in this repo because they now serve as durable release
+evidence and restart context.
+
 ## Local-Only Files
 
 Some machines may also require local-only files such as:
@@ -164,3 +177,5 @@ Use this as a practical bring-up list:
   - `RELEASE_STATE_MAP.md`
 - long-term execution plan:
   - `GO_FORWARD_EXECUTION_PLAN.md`
+- restart checkpoint after the April 24, 2026 production push:
+  - `RESTART_FROM_HERE.md`

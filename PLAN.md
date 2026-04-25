@@ -2,12 +2,12 @@
 
 ## Current State
 
-- hosted `/dev` is now current with the active integration branch:
+- hosted `/dev` remains on:
   - `1.2.3+build.470.sha.e4732eb`
-- hosted `/beta` is now current with the promoted forward candidate:
-  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
-- hosted `/production` remains on:
-  - `1.2.3+build.388.sha.13c8421`
+- hosted `/beta` is now current with the shipped forward candidate:
+  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/production` is now current with the refreshed shipped line:
+  - `1.2.3+build.489.sha.f6ba6c2`
 - `Platinum` is now a real shipped host platform rather than an internal refactor story
 - `Aurora Galactica` is the first shipped playable application on Platinum
 - hosted lane model is now explicit:
@@ -20,12 +20,12 @@
 
 ## Active Workstreams
 
-### 1. Production Readiness From The New `/beta` Baseline
+### 1. Post-Production Stabilization And Next `/dev` Refresh
 
-- prepare the current live beta for production promotion
+- keep the refreshed `1.2.3` production line and matching beta line stable
 - keep documentation, analysis artifacts, and release evidence current
-- complete the approval and production-publish sequence from the approved beta
-  state
+- decide when the next meaningful polish bundle is strong enough to refresh
+  hosted `/dev`
 
 ### 2. Documentation Hardening
 
@@ -61,13 +61,14 @@
 
 ## Immediate Priorities
 
-1. use the current hosted `/beta` as the production candidate
-2. complete the beta-to-production documentation and approval pass
-3. promote hosted `/production` from the approved beta candidate
-4. then continue the next minor-cycle polish from the refreshed production and
-   `/dev` baselines
-5. deepen the second-application proof deliberately after the current Aurora
-   release is stabilized
+1. treat `main` as the authoritative post-production integration line
+2. verify the public project page finishes propagating the shipped production
+   posture
+3. begin the next polish cycle from `main`
+4. prioritize movement fidelity, audio identity polish, and Platinum/application
+   boundary cleanup
+5. deepen the second-application proof deliberately after the refreshed
+   production line is stabilized
 
 ## Release Direction
 
@@ -80,11 +81,13 @@
 
 ## Beta Planning
 
-- the current hosted `/beta` has now been cut from the forward line
-- the next immediate release move is production promotion from that approved
-  beta candidate
-- the next beta after that should belong to the next minor-cycle candidate
-  family, not to the just-published current beta
+- the current hosted `/beta` now matches the refreshed production-quality line
+- the next beta after this one should belong to the next minor-cycle candidate
+  family, not to the just-shipped `1.2.3` refresh
+- the next beta should most likely come from a `1.3.0` polish cycle after:
+  - movement fidelity improves against the real Galaga reference
+  - audio identity polish moves beyond cue timing
+  - Platinum/application seams are documented and tightened further
 
 See also:
 

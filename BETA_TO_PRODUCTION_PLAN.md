@@ -5,15 +5,16 @@
 As of April 24, 2026:
 
 - hosted `/beta`
-  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
+  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
 - hosted `/production`
-  - `1.2.3+build.388.sha.13c8421`
+  - `1.2.3+build.489.sha.f6ba6c2`
 
-This means the current beta is the real production candidate.
+This means the production refresh is complete and the shipped beta/production
+pair now comes from the same committed source state.
 
-## Why Promote Soon
+## Why This Promotion Mattered
 
-The case for a near-term production push is:
+The case for performing this production push was:
 
 - hosted `/production` is materially stale relative to the current Aurora line
 - hosted `/beta` now includes the timing, audio, movement, and release-discipline
@@ -35,7 +36,7 @@ same committed source state:
 6. `dist/production` is promoted from the approved beta candidate rather than
    rebuilt from a drifting source state later
 
-## Required Commands
+## Commands Used
 
 From the authoritative Aurora repo:
 
@@ -73,14 +74,15 @@ Main acceptable risks for this production push:
 - the preview second-application pack still borrows Aurora data in ways that
   should be cleaned before it becomes playable
 
-These should not block the current Aurora production move, but they should stay
-visible in the next cycle.
+These did not block the `1.2.3+build.489.sha.f6ba6c2` production move, but they
+should stay visible in the next cycle.
 
 ## Next-Cycle Release Direction
 
 ### Immediate After Production
 
-- keep hosted `/dev` moving for post-release polish and platform cleanup
+- refresh hosted `/dev` only when the next polish bundle is coherent enough to
+  justify a new shared integration lane
 - keep hosted `/beta` as the proving lane for the next candidate family
 - continue audio identity refinement if it remains the weakest quality category
 
@@ -121,7 +123,8 @@ Current directly observed checks for this production plan:
 - `npm run harness:check:platinum-pack-boot`
 - hosted `/beta` live verification
 
-Current release-order warning:
+Current release-order note:
 
-- `npm run publish:check:production` still correctly fails until
-  `dist/production` is promoted from the approved beta candidate
+- the release chain now succeeded from approved beta to shipped production
+- the remaining follow-up is public-page rendered propagation, not a missing
+  source promotion step

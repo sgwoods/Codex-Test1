@@ -16,16 +16,19 @@ As of April 24, 2026:
 - hosted `/dev` points at:
   - `1.2.3+build.470.sha.e4732eb`
 - hosted `/beta` now points at:
-  - `1.2.3-beta.1+build.484.sha.baa1726.beta`
-- hosted `/production` remains:
-  - `1.2.3+build.388.sha.13c8421`
+  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/production` now points at:
+  - `1.2.3+build.489.sha.f6ba6c2`
 
 This means:
 
-- the current working branch has now produced the live beta candidate
-- the next immediate release question is no longer "how do we get to beta?"
-- it is now "how do we move this approved beta to production cleanly?"
-- the next minor-cycle question after that is "what belongs in the `1.3.0`
+- the forward release line has now been shipped to both hosted `/beta` and
+  hosted `/production`
+- the immediate release question is no longer "how do we move beta to
+  production?"
+- it is now "what belongs in the next polish cycle and when should hosted
+  `/dev` move again?"
+- the next minor-cycle question is still "what belongs in the `1.3.0`
   family?"
 
 The forward line and the current beta candidate now include:
@@ -63,19 +66,19 @@ It is in a "continue deliberately without losing agility" mode.
 
 For the next cycle, the active working line should be:
 
-- branch: `codex/document-project-principles`
+- branch: `main`
 
-Use that branch as the current integration branch because:
+Use `main` as the current integration branch because:
 
-- it now matches hosted `/dev`
-- it contains the current release policy, scorecard, correspondence framework,
-  and confidence tooling
-- it is the cleanest base for the next narrow gameplay/fidelity branches
+- it now contains the shipped `1.2.3+build.489.sha.f6ba6c2` production line
+- it includes the current release policy, scorecard, correspondence framework,
+  committed analysis artifacts, and production-ready defaults
+- it is now the cleanest base for the next narrow gameplay/fidelity branches
 
 ### Day-To-Day Development Branching
 
 For new work, branch from the current integration line into short-lived topic
-branches, then merge back into `codex/document-project-principles`.
+branches, then merge back into `main`.
 
 Recommended branch families:
 
@@ -87,7 +90,7 @@ Recommended branch families:
 Default rule:
 
 - work in topic branches
-- merge back into `codex/document-project-principles`
+- merge back into `main`
 - republish hosted `/dev` only when the integrated branch is again coherent and
   worth sharing
 
