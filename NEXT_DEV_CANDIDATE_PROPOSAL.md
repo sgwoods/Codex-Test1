@@ -1,5 +1,12 @@
 # Next Hosted Dev Candidate Proposal
 
+Historical note:
+
+- this document records the pre-`f6ba6c2` proposal for refreshing hosted `/dev`
+- it remains useful as a record of the reasoning that led into the shipped
+  `1.2.3` refresh
+- it is not the current active candidate plan anymore
+
 This document proposes the smallest credible next hosted `/dev` candidate that
 would improve on the current live hosted `/dev` lane at `main@9d7b2a8`.
 

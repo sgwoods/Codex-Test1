@@ -2,108 +2,107 @@
 
 ## Current State
 
-- hosted `/dev` remains on:
+Verified April 25, 2026:
+
+- hosted `/dev`
   - `1.2.3+build.470.sha.e4732eb`
-- hosted `/beta` is now current with the shipped forward candidate:
+- hosted `/beta`
   - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
-- hosted `/production` is now current with the refreshed shipped line:
+- hosted `/production`
   - `1.2.3+build.489.sha.f6ba6c2`
-- `Platinum` is now a real shipped host platform rather than an internal refactor story
-- `Aurora Galactica` is the first shipped playable application on Platinum
-- hosted lane model is now explicit:
-  - local `localhost`
-  - hosted `/dev`
-  - hosted `/beta`
-  - hosted `/production`
-- the major missing discipline that slipped past the original `1.2.0` promotion was a full documentation pass and first-class hosted platform docs
-- that is now being corrected and formalized as a real release gate
+- `main`
+  - authoritative integration branch for the next cycle
+
+This means:
+
+- Aurora has completed the `1.2.3` production refresh
+- beta and production are aligned on the same shipped release family
+- dev remains the older integration surface for comparison and future refresh
+- the next question is no longer "how do we push beta to production?"
+- the next question is "what belongs in the next polish cycle and next `/dev` refresh?"
 
 ## Active Workstreams
 
-### 1. Post-Production Stabilization And Next `/dev` Refresh
+### 1. Post-Production Stabilization
 
-- keep the refreshed `1.2.3` production line and matching beta line stable
-- keep documentation, analysis artifacts, and release evidence current
-- decide when the next meaningful polish bundle is strong enough to refresh
-  hosted `/dev`
+- keep the refreshed `1.2.3` production line trustworthy
+- keep release docs, scorecards, and committed evidence current
+- keep the public project surfaces in sync with the real shipped state
 
-### 2. Documentation Hardening
+### 2. Multi-Machine Release Discipline
 
-- make Platinum a first-class hosted documentation surface
-- keep platform docs and application docs separate
-- keep project, platform, player, and release docs aligned on every meaningful `x.y` release
-- make missing docs a real publish-preflight failure instead of a soft reminder
+- make new-machine bring-up one practical bootstrap command
+- keep a committed one-authority release model
+- keep beta and production promotion blocked unless the authority contract is
+  satisfied
+- keep public project-page and rendered-homepage verification inside the
+  release workflow
 
-### 3. `1.2.1` Aurora Trust Fixes
+### 3. Fidelity And Feel Improvement
 
-- `#143` dual-fighter surviving-ship rule
-- `#140` challenge-stage bonus-stage numbering
-- `#142` carried/captured-fighter game-over presentation
+- improve ship movement feel against real Galaga footage
+- continue audio identity polish beyond cue timing
+- keep reference-video extraction and correspondence work growing in a durable
+  way
 
-### 4. Platform Boundary Cleanup
+### 4. Gameplay Trust And Edge-Case Correctness
+
+- continue addressing boss/capture/carry edge cases
+- continue runtime-hardening follow-up where exact root causes are still being
+  narrowed
+- keep replay and late-run trust issues visible until closed
+
+### 5. Shell, Overlay, And Pilot-Surface Polish
+
+- keep popup, dock, and panel presentation unified and contained
+- improve pilot, leaderboard, and replay surfaces where they are still rough
+- keep production-safe defaults and developer restrictions disciplined
+
+### 6. Platform Boundary Cleanup
 
 - keep pack contract thinking explicit
-- keep remaining Aurora-shaped compatibility residue visible
-- avoid letting shell copy and application copy drift back into a blur
+- reduce remaining Aurora-shaped platform residue
+- improve the storage and schema seam before a second real playable game
 
-### 5. Second-Application Proof
+### 7. Second-Application Proof
 
 - keep `Galaxy Guardians` preview-only until a minimal playable slice is real
-- prove the platform with a narrow second-application gameplay slice rather than a rushed public launch
+- prepare the longer-range `Galaxian`-style ingestion path through durable
+  reference analysis and platform extension planning
 
-### 6. Audio Generation Tooling Exploration
+### 8. Personas And Simulated Opponents
 
-- evaluate `AudioLDM 2` as an offline content-generation tool for themed sound-effect variation
-- keep this explicitly outside `Platinum` runtime responsibilities
-- test whether a small reference-guided workflow can produce useful Aurora-family variants from classic arcade cue roles
-- first pilot targets should be higher-salience atmospheric/event cues rather than the smallest micro-effects
-- if the workflow is simple enough and the results are good enough, treat it as a reusable tool for future hosted games as well
+- deepen action/event annotation so personas can become richer
+- prepare for future player-versus-persona experiences
+- keep "learn by playing" persona ideas tied to simulation and durable logs,
+  not just aspiration
 
 ## Immediate Priorities
 
 1. treat `main` as the authoritative post-production integration line
-2. verify the public project page finishes propagating the shipped production
-   posture
-3. begin the next polish cycle from `main`
-4. prioritize movement fidelity, audio identity polish, and Platinum/application
-   boundary cleanup
-5. deepen the second-application proof deliberately after the refreshed
-   production line is stabilized
+2. keep the multi-machine bootstrap and release-authority workflow healthy
+3. prioritize movement fidelity, audio identity polish, and boundary cleanup
+4. continue narrow trust fixes from the open issue stream
+5. decide when the next coherent polish bundle is strong enough to refresh
+   hosted `/dev`
 
 ## Release Direction
 
-- the next serious Aurora candidate should come from the current hosted `/dev`
-  line, not from promoting the older hosted `/beta` line in place
-- hosted `/beta` and hosted `/production` are still the same shipped code line,
-  so promoting the current beta would not meaningfully advance production
+- hosted `/beta` and hosted `/production` already reflect the current shipped
+  `f6ba6c2` family
+- the next serious candidate should be assembled from `main` and then refreshed
+  into hosted `/dev` deliberately
 - the next meaningful public milestone should likely be a `MINOR` release in
-  the `1.3.0` family after the current fidelity cycle improves timing and audio
+  the `1.3.0` family
 
-## Beta Planning
+## Long-Term Direction
 
-- the current hosted `/beta` now matches the refreshed production-quality line
-- the next beta after this one should belong to the next minor-cycle candidate
-  family, not to the just-shipped `1.2.3` refresh
-- the next beta should most likely come from a `1.3.0` polish cycle after:
-  - movement fidelity improves against the real Galaga reference
-  - audio identity polish moves beyond cue timing
-  - Platinum/application seams are documented and tightened further
+The long-term platform goal is:
 
-See also:
+- a durable Platinum host for multiple arcade experiences
+- same-control compliance across those experiences
+- richer reference-video ingestion and analysis
+- stronger personas, replay annotation, and future simulated-opponent support
 
-- `/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md`
-- `/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md`
-
-## Current Operating Plan
-
-The principles are now translated into a concrete execution plan in:
-
-- `/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md`
-
-That document should be used as the working bridge between:
-
-- development principles
-- bug-fix discipline
-- reference-artifact generation
-- persona and progression evidence
-- release-candidate assembly
+That is the route to the next genuinely major era, not just incrementing a
+major version number early.

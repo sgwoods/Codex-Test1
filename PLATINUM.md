@@ -76,10 +76,10 @@ Platinum owns the outer cabinet treatment:
 
 This is implemented primarily through:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/styles.css`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
+- `/Users/steven/Documents/Codex-Test1/src/index.template.html`
+- `/Users/steven/Documents/Codex-Test1/src/styles.css`
+- `/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
 
 ### Runtime and pack hosting
 
@@ -93,9 +93,9 @@ Platinum owns the pack selection and boot contract:
 
 This is implemented primarily through:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/15-game-picker.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js`
 
 ### Shared services
 
@@ -109,11 +109,11 @@ pack:
 
 This is implemented primarily through:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/11-leaderboard-service.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js`
 
 ### Shared contracts
 
@@ -132,8 +132,8 @@ The main contract areas are:
 
 See also:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+- `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
 - `/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md`
 
 ## Applications On Platinum
@@ -153,7 +153,7 @@ Current application set:
 
 The application-side separation is documented in:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 
 ## How To Use Platinum In Practice
 
@@ -302,14 +302,14 @@ of the normal release flow.
 ## Related Docs
 
 - maintained platform overview and diagrams:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 - application-side separation and usage:
-  - `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 - repo technical map:
-  - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+  - `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
 - release and testing gate discipline:
-  - `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+  - `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
 - launch art direction:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
 - forward-looking architecture review:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`

@@ -130,14 +130,15 @@ A new Platinum application should ideally arrive in stages:
 
 ## Current Application Outlook
 
-### Aurora fast-follow work
+### Aurora next application work
 
-Near-term application work for Aurora belongs in the `1.2.x` patch line:
+Near-term Aurora application work should now focus on:
 
-- dual-fighter surviving-ship correctness
-- challenge-stage bonus-stage numbering
-- carried/captured-fighter game-over presentation
-- smaller readability and polish improvements
+- movement fidelity
+- audio identity polish
+- gameplay trust fixes such as boss/capture/carry edge cases
+- replay and pilot-surface improvements
+- shell and overlay polish that remains application-owned
 
 ### Galaxy Guardians next proof
 
@@ -156,10 +157,10 @@ That is enough to test the platform without prematurely shipping a second game.
 ## Related Docs
 
 - platform overview and ownership:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 - platform diagrams:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 - repo technical map:
-  - `/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md`
+  - `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
 - release and testing discipline:
-  - `/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+  - `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`

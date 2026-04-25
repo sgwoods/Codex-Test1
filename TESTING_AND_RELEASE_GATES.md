@@ -8,6 +8,25 @@ The rule is simple:
 - automate the gate whenever we reasonably can
 - use manual review for feel and presentation only where automation is weak
 
+## Machine And Authority Gate
+
+Aurora now assumes:
+
+- `main` is the only integration branch
+- one machine holds release authority at a time
+- hosted `/beta` and hosted `/production` may only be published from that
+  authority machine
+
+The practical startup and readiness commands are now:
+
+- `npm run machine:bootstrap`
+- `npm run machine:doctor`
+- `npm run machine:status`
+- `npm run release:show-authority`
+
+This means machine readiness and release authority are now part of release
+discipline, not just local convention.
+
 ## Bug-Fix Discipline
 
 We should not address a bug without also deciding how the fix is protected in
@@ -52,6 +71,11 @@ The expected lane model is:
 4. hosted `/production`
 - official public promise
 - should only move from an approved hosted `/beta` candidate
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/MULTI_MACHINE_WORKFLOW.md`
+- `/Users/steven/Documents/Codex-Test1/release-authority.json`
 
 ## Documentation Gate For Major `x.y` Releases
 
@@ -388,7 +412,7 @@ Production promotion must also start from a clean tree:
 - the local source tree must be clean before `promote:production`
 - the release machine must be on `main`, and local `main` must match `origin/main`
 - the approved beta candidate must not have been promoted from a dirty source state
-- the public sync step must validate the current `/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html` and the production artifact must have been rebuilt from that exact clean checkout
+- the public sync step must validate the current `/Users/steven/Documents/Codex-Test1/src/public/aurora-galactica.template.html` and the production artifact must have been rebuilt from that exact clean checkout
 - if either condition fails, production promotion should stop
 
 ## First-Class Hosted Documentation Requirement
@@ -422,10 +446,10 @@ improve:
 ## Related Docs
 
 - platform guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 - application-layer guide:
-  - `/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+  - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 - release policy:
-  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+  - `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
 - release readiness review:
-  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
+  - `/Users/steven/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`

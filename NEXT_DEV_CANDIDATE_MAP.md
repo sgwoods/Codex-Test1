@@ -1,5 +1,12 @@
 # Next Hosted Dev Candidate Map
 
+Historical note:
+
+- this document records the pre-`f6ba6c2` planning pass that led toward the
+  refreshed `1.2.3` beta and production family
+- it remains useful as historical release reasoning
+- it is not the current live release picture anymore
+
 This document inventories the work currently available on
 `codex/document-project-principles` relative to the current published hosted
 `/dev` lane at commit `9d7b2a8`.

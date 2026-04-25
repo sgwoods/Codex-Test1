@@ -31,7 +31,7 @@ This means:
 - the next minor-cycle question is still "what belongs in the `1.3.0`
   family?"
 
-The forward line and the current beta candidate now include:
+The forward line and the current shipped family now include:
 
 - dedicated audio cue correspondence is green at `9/9`
 - challenge entry and post-challenge cue timing are effectively on target
@@ -109,6 +109,9 @@ Recommended branch families:
 - `codex/<machine-id>-audio-*`
 - `codex/<machine-id>-fidelity-*`
 - `codex/<machine-id>-bugfix-*`
+- `codex/<machine-id>-pilot-*`
+- `codex/<machine-id>-platform-*`
+- `codex/<machine-id>-galaxian-*`
 
 Default rule:
 
@@ -170,6 +173,14 @@ Practical standard:
 - next polish reminder: get much more serious about player-ship motion against
   the real Galaga reference, because Aurora lateral movement still feels too
   jerky and too fast at times
+- next-cycle work should be grouped deliberately into:
+  - movement and control fidelity
+  - audio identity and atmosphere
+  - gameplay trust and edge-case correctness
+  - shell, overlay, and dock polish
+  - pilot, leaderboard, replay, and admin operations
+  - non-production versus production environment separation
+  - Platinum multi-game and pack-contract maturation
 
 See also:
 

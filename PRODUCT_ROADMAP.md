@@ -1,116 +1,171 @@
 # Product Roadmap
 
-## Current Release Line
+## Current Shipped State
 
-- shipped public line:
-  - `1.2.3`
-- release name:
-  - `Aurora score-surface polish patch`
+Verified April 25, 2026:
 
-Current beta candidate:
+- hosted `/dev`
+  - `1.2.3+build.470.sha.e4732eb`
+- hosted `/beta`
+  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/production`
+  - `1.2.3+build.489.sha.f6ba6c2`
 
-- `1.2.3-beta.1+build.484.sha.baa1726.beta`
+Aurora is in a post-production-refresh posture:
 
-## Where We Are
+- production is current
+- beta matches the current production family
+- dev is the older comparison lane
+- `main` is the forward line for the next cycle
 
-The first major platform milestone is now shipped.
+## Roadmap Frame
 
-That means the roadmap is no longer centered on "can we separate Platinum from
-Aurora at all." It is centered on:
+The roadmap is no longer centered on whether Platinum can host Aurora at all.
 
-- keeping the shipped platform credible
-- keeping Aurora stable as the first application on Platinum
-- preparing the smallest useful second-application proof
-- promoting the current materially improved beta to production
+It is centered on:
 
-## Near-Term Roadmap
+- keeping the shipped line trustworthy
+- improving fidelity where the game still feels less authentic than the arcade
+  reference
+- maturing Aurora as a product with durable pilot, replay, and release
+  operations
+- growing Platinum into a host for more than one serious game experience
 
-### Current Production Promotion
+## Near-Term Release Direction
 
-Scope:
+### Stabilize `1.2.3`
 
-- approve the current hosted beta candidate
-- promote it to hosted production from the approved artifact set
-- verify the public release surfaces and synced docs
+Goals:
 
-Why this bundle:
+- keep hosted `/production` and hosted `/beta` aligned and trustworthy
+- keep release docs, scorecards, and committed evidence current
+- make new-machine and two-machine development simple and safe
 
-- production is materially stale relative to beta
-- the current beta already carries the latest timing, movement, audio, and
-  release-discipline work
-- this closes the current release cycle cleanly before the next minor cycle
+### Shape `1.3.0`
 
-### `1.3.0` Aurora And Platinum Minor
+The next serious public step should likely be:
 
-Scope:
+- `1.3.0`
 
-- further audio identity polish
-- serious player-ship movement refinement against real Galaga footage
-- continued Platinum/Aurora boundary cleanup
-- richer reference-video ingestion and event-log extraction
-- stronger persona annotation and eventual player-versus-persona scaffolding
+That release family should focus on:
 
-Why this bundle:
+- movement fidelity
+- audio identity polish
+- gameplay trust fixes
+- shell/pilot-surface polish
+- Platinum/application seam cleanup
 
-- it keeps the next public step focused on measurable fidelity and platform
-  maturity rather than a rushed second-game launch
-- ship movement is still one of the clearest places where Aurora can feel less
-  authentic than the arcade reference when lateral motion reads as too jerky or
-  too fast
+## Main Investment Themes
 
-### Historical `1.2.1` Aurora Trust Fixes
-
-Scope:
-
-- dual-fighter surviving-ship correctness
-- challenge-stage bonus-stage numbering
-- carried/captured-fighter game-over presentation
-
-Why this bundle:
-
-- all are small player-visible trust fixes
-- all fit naturally into a focused patch line
-- none require reopening broad gameplay churn
-
-### Historical `1.2.x` Documentation And Platform Discipline
-
-Scope:
-
-- first-class hosted Platinum guide
-- explicit platform versus application docs
-- updated project guide, release dashboard, and readiness docs
-- stronger docs gate between hosted `/beta` and hosted `/production`
-
-Why this matters:
-
-- the release process should not let a major platform step ship without a matching docs pass again
-
-## Next Platform Milestone
-
-### Second-Application Proof
+### 1. Movement and control fidelity
 
 Target:
 
-- a small playable `Galaxy Guardians` slice in dev only
+- make player-ship motion feel smoother, calmer, and closer to real Galaga
 
-Minimum useful proof:
+Why:
 
-- formation rack
-- dives
-- flagship and escort behavior
-- scoring
-- single-shot constraint
-- wrap-around threat
-- life loss and game-over flow
+- movement remains one of the clearest remaining feel gaps
+- it directly affects player trust and cabinet authenticity
 
-This is the right next platform test because it proves the seam without forcing
-an immediate second public game release.
+### 2. Audio and atmosphere
 
-## Longer-Term Platform Improvement Areas
+Target:
 
-- stronger pack schema and capability validation
-- clearer storage and migration policy
-- cleaner platform/application naming residue cleanup
-- continued automation-first gating across hosted lanes and docs surfaces
-- same-control compliance across multiple shipped games
-- persona-opponent support and simulation-trained persona experimentation
+- improve audio identity beyond cue timing
+
+Why:
+
+- cue alignment is strong now
+- the remaining opportunity is personality, phrase feel, and atmosphere
+
+### 3. Gameplay trust fixes
+
+Target:
+
+- continue closing player-visible correctness bugs and edge cases
+
+Examples:
+
+- boss/capture injury rules
+- carry/captured-fighter render correctness
+- replay-flow smoothness
+- runtime hardening and freeze follow-up
+
+### 4. UI, shell, and overlay polish
+
+Target:
+
+- unify popup, dock, and panel behavior and keep all surfaces well-contained
+
+Why:
+
+- cabinet presentation and panel consistency are highly visible quality signals
+
+### 5. Pilot, leaderboard, replay, and operations
+
+Target:
+
+- mature Aurora’s player identity and operations surfaces
+
+Themes:
+
+- version-aware score history
+- richer pilot scorebook and replay views
+- permanent pilot identity
+- account lifecycle and deletion
+- replay/media and admin/control-centre growth
+
+### 6. Environment and release separation
+
+Target:
+
+- keep non-production and production easier to reason about
+
+Themes:
+
+- cleaner identity and score-path separation
+- stronger preflights
+- safer production promotions
+
+### 7. Platinum and multi-game growth
+
+Target:
+
+- turn Platinum into a durable multi-game arcade host
+
+Themes:
+
+- stronger pack contract
+- cleaner storage/schema seam
+- same-control compliance
+- second-game proof slice
+- future `Galaxian` ingestion planning
+
+### 8. Personas and simulated opponents
+
+Target:
+
+- support richer personas and future player-versus-persona play
+
+Themes:
+
+- stronger action/state annotation
+- richer test personas
+- eventual learn-by-playing simulation work
+
+## Platform Milestones
+
+### Next platform milestone
+
+- a stronger pack contract
+- clearer platform/application seams
+- a dev-only second-game proof slice
+- stronger multi-machine and release portability
+
+### Long-term platform milestone
+
+- at least two meaningfully playable Platinum applications
+- same-control compliance clearly documented and tested
+- cleaner pack, storage, and naming boundaries
+- richer persona/opponent support

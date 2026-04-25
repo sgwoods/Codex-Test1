@@ -4,14 +4,14 @@
 
 Aurora `1.2.3` is the release currently live on hosted `/production`.
 
+Verified April 25, 2026:
+
 - hosted `/production`
   - current live label: `1.2.3+build.489.sha.f6ba6c2`
-  - current live version: `1.2.3`
 - hosted `/beta`
-  - current live label: `1.2.3-beta.1+build.488.sha.b06cbb2.beta`
-  - verified live on April 24, 2026
-- hosted `/beta` refreshed again from the final release source state
   - current live label: `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/dev`
+  - current live label: `1.2.3+build.470.sha.e4732eb`
 
 That means Aurora has completed the `1.2.3` production refresh and is now in a
 post-release stabilization posture for the next cycle.
@@ -20,35 +20,25 @@ post-release stabilization posture for the next cycle.
 
 - `Platinum` is a real shipped browser-arcade host platform
 - `Aurora Galactica` is the first shipped playable application on Platinum
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are now clearly
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are clearly
   separated in both code and docs
-- hosted `/beta` is materially ahead of hosted `/production`
-- the current beta candidate is backed by committed test and analysis artifacts,
-  not just local notes
+- hosted `/beta` and hosted `/production` now match
+- the shipped release family is backed by committed test and analysis artifacts
 
-## Current Beta Candidate
+## Current Shipped Candidate Quality
 
-Current live beta:
-
-- label:
-  - `1.2.3-beta.1+build.488.sha.b06cbb2.beta`
-- source commit:
-  - `b06cbb2`
-- release channel:
-  - `production beta`
-
-Current quality position for that candidate:
+Current quality position for the shipped `f6ba6c2` family:
 
 - overall quality score:
   - `8.8/10`
 - strongest category:
   - combat responsiveness
-- weakest category:
+- weakest bundled category:
   - audio identity and cue alignment at `6.1/10`
 
-## Evidence Supporting Production Consideration
+## Evidence Supporting The Shipped Release
 
-The current beta candidate is supported by these committed evidence sources:
+The current shipped family is supported by these committed evidence sources:
 
 - quality rollup:
   - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
@@ -61,14 +51,14 @@ The current beta candidate is supported by these committed evidence sources:
 - reference video alignment:
   - `/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
 
-The current candidate also has direct verification evidence:
+The current shipped family also has direct verification evidence:
 
 - `npm run build`
 - `npm run harness:check:close-shot-hit`
 - `npm run harness:check:persona-stage2-safety`
 - `npm run harness:check:platinum-pack-boot`
-- `npm run publish:beta`
-- hosted `/beta` live verification against `build-info.json`
+- hosted `/beta` live verification
+- hosted `/production` live verification
 
 ## Code Review And Boundary Read
 
@@ -86,15 +76,15 @@ Current read from that review:
   rules
 - two non-blocking boundary seams remain visible:
   - platform-owned storage keys still use some Aurora-shaped compatibility names
-  - the preview `Galaxy Guardians` pack still borrows Aurora-owned gameplay data
-    for shell-preview purposes
+  - the preview `Galaxy Guardians` pack still borrows Aurora-owned gameplay
+    data for shell-preview purposes
 
-These are not blockers for promoting the current Aurora beta to production, but
-they should remain explicit in the next release cycle.
+These did not block the shipped Aurora beta-to-production move, but they remain
+important next-cycle cleanup targets.
 
 ## Documentation Contract For Production
 
-Production promotion is not complete unless these are current and committed:
+The current shipped line depends on these docs being current and committed:
 
 - `/Users/steven/Documents/Codex-Test1/PLAN.md`
 - `/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
@@ -108,37 +98,25 @@ Production promotion is not complete unless these are current and committed:
 - `/Users/steven/Documents/Codex-Test1/release-dashboard.json`
 - `/Users/steven/Documents/Codex-Test1/release-notes.json`
 
-Hosted docs that should match the shipped production line:
+## Current Follow-Up Work
 
-- `project-guide.html`
-- `application-guide.html`
-- `platinum-guide.html`
-- `player-guide.html`
-- `release-dashboard.html`
-- `release-notes.json`
-- `build-info.json`
+The production push is complete. The follow-up work now is:
 
-## Remaining Steps Before Production
-
-The production push is complete, but these release follow-ups still remain:
-
-1. confirm the rendered `sgwoods/public` Aurora page finishes propagating the
-   shipped production current-focus text
-2. keep the release summary and next-cycle plan current in committed docs
-3. treat the next `/dev` refresh as a deliberate polish bundle rather than a
+1. keep the release summary and next-cycle plan current in committed docs
+2. treat the next `/dev` refresh as a deliberate polish bundle rather than a
    casual forward sync
+3. continue the next-cycle fidelity and platform work from `main`
 
 ## Recommendation
 
 Recommendation: keep the refreshed `1.2.3+build.489.sha.f6ba6c2` production line
-stable, monitor the public-page propagation note, and begin the next polish
-cycle from `main`.
+stable and begin the next polish cycle from `main`.
 
-The strongest argument for doing that soon is:
+The strongest argument for doing that now is:
 
-- hosted `/production` and hosted `/beta` are now aligned to the refreshed
-  forward release line
+- hosted `/production` and hosted `/beta` are aligned to the refreshed release
+  line
 - the release package is materially better documented and better evidenced than
   the prior `13c8421` production line
-- the main remaining gaps are quality-improvement opportunities for the next
-  cycle, not obvious correctness blockers for the current Aurora release
+- the main remaining gaps are next-cycle quality opportunities, not current
+  ship blockers

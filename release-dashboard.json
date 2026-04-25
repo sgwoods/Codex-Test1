@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.2.3+build.489.sha.f6ba6c2",
-  "currentFocus": "Stabilize the newly refreshed 1.2.3 production line, keep the release docs and committed quality artifacts current, and begin the next polish cycle around movement fidelity, audio identity, and Platinum/application boundary cleanup.",
-  "strapline": "Aurora now ships its refreshed 1.2.3 production line with stronger timing, stronger movement evidence, stronger audio correspondence, and a release package that is documented and committed rather than reconstructed from memory.",
+  "currentFocus": "Keep the refreshed 1.2.3 production family stable, use the new multi-machine bootstrap and release-authority workflow to keep development consistent across machines, and begin the next 1.3.0 polish cycle around movement fidelity, audio identity, gameplay trust fixes, and Platinum/application boundary cleanup.",
+  "strapline": "Aurora now ships its refreshed 1.2.3 production line with stronger timing, stronger movement evidence, stronger audio correspondence, durable release artifacts, and a machine-portable workflow for continuing development without reconstructing the project from memory.",
   "timeline": [
     {
       "id": "foundation",
@@ -50,6 +50,12 @@
       "title": "1.2.3 Production Refresh",
       "status": "done",
       "summary": "Hosted `/production` now runs the `f6ba6c2` release line with refreshed beta evidence, synced public project pages, and committed release-readiness documentation."
+    },
+    {
+      "id": "multi-machine-discipline",
+      "title": "Multi-Machine Bootstrap And Release Control",
+      "status": "done",
+      "summary": "Aurora now has a one-command machine bootstrap path, a committed release-authority contract, and public-sync verification that includes the rendered root project homepage."
     },
     {
       "id": "platform-contract",
