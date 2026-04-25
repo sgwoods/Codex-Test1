@@ -52,6 +52,7 @@ That one command will:
 - clone `sgwoods/Codex-Test1` into `./Codex-Test1` if it is not there yet
 - reuse the clone if it already exists
 - run `npm run machine:bootstrap` inside it
+- leave the local game and viewer ready when bootstrap succeeds
 
 If you prefer a unique iCloud-backed path on a second machine, `cd` into that
 machine-specific parent folder first, then run the same command there. Do not
@@ -71,6 +72,13 @@ npm run machine:status
 
 These commands are now the primary machine bring-up path. They replace the
 older manual sequence as the recommended way to restart work.
+
+For later sessions on that same machine, the one-step refresh command is:
+
+```bash
+cd Codex-Test1
+npm run machine:bootstrap
+```
 
 ## Public Project Page State
 

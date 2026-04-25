@@ -66,6 +66,12 @@ curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/
 ```
 
 That creates or reuses `./Codex-Test1` in the folder where you run it.
+If it succeeds cleanly, localhost should be ready immediately afterward:
+
+- game:
+  - `http://127.0.0.1:8000/`
+- viewer:
+  - `http://127.0.0.1:4311/`
 
 If you want to use a unique iCloud-backed location instead, `cd` into that
 parent folder first and run the same command there.
@@ -110,6 +116,7 @@ Do not commit that file.
 
 1. Start each session with:
    ```bash
+   cd Codex-Test1
    npm run machine:bootstrap
    ```
 2. If you only want a read-only readiness check:
