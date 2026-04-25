@@ -292,12 +292,11 @@ function closeAccountPanel(){
  syncOverlayPause();
 }
 function toggleAccountPanel(){
- LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
- if(LEADERBOARD.accountPanelOpen)LEADERBOARD.panelOpen=0;
- syncLeaderboardPanelVisibility();
- syncAccountPanelVisibility();
- syncAccountUi();
- syncOverlayPause();
+ if(LEADERBOARD.accountPanelOpen){
+  closeAccountPanel();
+  return;
+ }
+ openAccountPanel();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;

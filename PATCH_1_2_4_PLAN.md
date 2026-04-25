@@ -60,6 +60,20 @@ Verification:
 
 - `npm run harness:check:pilot-recent-scores-refresh`
 
+3. Overlay screen-switch dismissal fix
+
+- switching directly between dock surfaces now routes `Pilot Information`
+  through the same overlay-closing path as the other dock panels
+- that makes the previously focused overlay dismiss cleanly before the next one
+  opens, instead of allowing the account panel to remain in focus while a new
+  panel is selected
+- issue family:
+  - `#173` screen switch doesn't dismiss in-focus info
+
+Verification:
+
+- `npm run harness:check:overlay-screen-switching`
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -111,6 +125,7 @@ Minimum patch verification:
 - `npm run build`
 - `npm run harness:check:input-mapping`
 - `npm run harness:check:pilot-recent-scores-refresh`
+- `npm run harness:check:overlay-screen-switching`
 - `npm run harness:check:dual-final-life-survivor`
 - `npm run harness:check:game-over-carry-suppression`
 - `npm run harness:check:close-shot-hit`
