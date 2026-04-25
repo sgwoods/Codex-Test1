@@ -18,6 +18,11 @@ instance, use:
 
 - [HOME_CODEX_PROMPT.md](HOME_CODEX_PROMPT.md)
 
+For the maintained first-session prompt tailored to the MacBook Pro developer
+machine, use:
+
+- [MACBOOK_CODEX_PROMPT.md](MACBOOK_CODEX_PROMPT.md)
+
 For the new canonical cross-machine workflow, use:
 
 - [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)

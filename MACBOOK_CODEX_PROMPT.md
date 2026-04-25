@@ -1,0 +1,135 @@
+# MacBook Codex Prompt
+
+Use this prompt when you first start a Codex session on the MacBook Pro and
+want it to follow the current Aurora Galactica multi-machine workflow.
+
+```text
+You are working on Aurora Galactica / Platinum in the authoritative source repo:
+
+- Repo: sgwoods/Codex-Test1
+- Local clone: use the current local workspace open in Codex
+- Integration branch: main
+
+Important repo roles:
+- Codex-Test1 = source of truth for code, docs, issues, planning, harnesses, release control
+- Aurora-Galactica = public release-host repo only
+- Do not treat Aurora-Galactica as the engineering source repo
+- Active issues and planning belong in Codex-Test1
+
+Multi-machine workflow:
+- This machine is fully set up for development and testing
+- Release authority is intentionally NOT on this machine right now
+- Release authority remains on:
+  - machine_id: imacm1
+  - machine_label: iMacM1
+- So this machine MAY:
+  - develop
+  - run harnesses
+  - create topic branches
+  - commit and push
+  - merge normal development work back toward main when appropriate
+- This machine MUST NOT:
+  - approve beta
+  - publish beta
+  - promote production
+  - publish production
+  unless release authority is explicitly transferred here
+
+Current expected startup routine:
+1. Start every session from the Aurora repo root
+2. Run:
+   npm run machine:bootstrap
+3. If needed, inspect:
+   npm run machine:status
+   npm run machine:doctor
+   npm run release:show-authority
+
+Branching rules:
+- Start from main
+- Use short-lived topic branches
+- Branch naming pattern:
+  codex/<machine-id>-<topic>
+- On this machine, prefer:
+  codex/macbook-pro-<topic>
+
+Examples:
+- codex/macbook-pro-movement-polish
+- codex/macbook-pro-audio-pass
+- codex/macbook-pro-platform-cleanup
+
+Normal development workflow:
+1. git switch main
+2. npm run machine:bootstrap
+3. git switch -c codex/macbook-pro-<topic>
+4. Make changes
+5. Run relevant checks
+6. Commit and push
+7. Merge back intentionally
+
+Key local services:
+- Game: http://127.0.0.1:8000/
+- Viewer: http://127.0.0.1:4311/
+
+Important docs to read first before major work:
+- RESTART_FROM_HERE.md
+- MULTI_MACHINE_WORKFLOW.md
+- DEVELOPER_MACHINE_BASELINE.md
+- RELEASE_POLICY.md
+- PLAN.md
+- PRODUCT_ROADMAP.md
+- GO_FORWARD_EXECUTION_PLAN.md
+- QUALITY_RELEASE_SCORECARD.md
+- BETA_TO_PRODUCTION_PLAN.md
+- PLATINUM_INTERFACE_REVIEW.md
+- VIDEO_ALIGNMENT_PROGRAM.md
+- REFERENCE_MEDIA_INVENTORY.md
+- REPOSITORY_ROLE_MAP.md
+
+Current live lane state to keep in mind:
+- /dev: 1.2.3+build.470.sha.e4732eb
+- /beta: 1.2.3-beta.1+build.489.sha.f6ba6c2.beta
+- /production: 1.2.3+build.489.sha.f6ba6c2
+
+Current product/release posture:
+- beta and production are aligned to the same release family
+- dev is the older forward integration lane and can move again in the next polish cycle
+- public verification matters and includes:
+  - raw project page
+  - manifest JSON
+  - rendered Aurora public page
+  - rendered sgwoods/public homepage card
+
+Current priority themes for future work:
+1. Player-ship movement fidelity against real Galaga footage
+2. Audio identity polish beyond cue timing
+3. Platinum/application boundary cleanup
+4. Expanded reference-video event logging and visual artifact extraction
+5. Future-game ingestion planning for a second game such as Galaxian
+6. Longer-term persona growth, including richer simulated play and future Player 2 style opponent behavior
+
+Operational rules:
+- Prefer repo-grounded verification before conclusions
+- Persist important plans and decisions in repo docs, not just chat
+- Keep docs current when workflows or release state changes
+- All meaningful work should end up committed to GitHub
+- Do not use sudo or su for normal Aurora development
+- Do not share one live git working tree across machines
+- Use GitHub, not iCloud syncing of the same working tree, as the sync mechanism
+
+If asked to do release work:
+- First run:
+  npm run release:show-authority
+- If authority does not match this machine, stop before any beta/production publish steps and say so clearly
+
+If asked to orient or restart:
+- Begin with:
+  npm run machine:bootstrap
+  npm run machine:status
+  npm run machine:doctor
+
+When in doubt:
+- Treat Codex-Test1/main as the authoritative line
+- Treat Aurora-Galactica as the public mirror/release host
+- Treat this machine as dev/test/push capable, but not release-authority capable
+```
+
