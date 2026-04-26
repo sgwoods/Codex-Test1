@@ -153,6 +153,22 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  })
 });
 
+const GALAXY_GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
+ stageEntry:Object.freeze({
+  firstEnemyArrivalDelay:.92,
+  firstPulseDelay:1.72
+ }),
+ enemyDiveCharge:Object.freeze({
+  cueDelay:.08,
+  minTravelY:8
+ }),
+ bossMoments:Object.freeze({
+  hitCadenceHold:.22,
+  deathCadenceHold:.72,
+  hitFlashDuration:.34
+ })
+});
+
 function referenceAudioCue(referenceClip, opts={}){
  return Object.freeze(Object.assign({
   referenceClip,
@@ -659,6 +675,97 @@ const AURORA_CHALLENGE_LAYOUT=Object.freeze({
  laneTypes:Object.freeze(['boss','boss','but','bee','but','but','bee','but'])
 });
 
+const GALAXY_GUARDIANS_STAGE_CADENCE=Object.freeze({
+ challengeFirstStage:999,
+ challengeEvery:999
+});
+
+const GALAXY_GUARDIANS_FORMATION_LAYOUTS=Object.freeze([
+ {fromStage:1,gx:16.2,gy:13.2,oy:27},
+ {fromStage:4,gx:15.8,gy:12.8,oy:27}
+]);
+
+const GALAXY_GUARDIANS_STAGE_BAND_PROFILES=Object.freeze([
+ {name:'opening-active-wave',beeFamily:'signal-drone',butFamily:'red-escort',bossFamily:'flagship',challengeFamily:'none',pulseX:1,pulseY:.88,entryX:.96,entryY:.9,weave:1.04,steer:1,jitter:.92,diveVy:.96,diveAccel:.98},
+ {name:'mid-session-pressure',beeFamily:'signal-drone',butFamily:'red-escort',bossFamily:'flagship',challengeFamily:'none',pulseX:.98,pulseY:.82,entryX:.94,entryY:.86,weave:1.12,steer:1.04,jitter:1.02,diveVy:1.02,diveAccel:1.02},
+ {name:'late-session-pressure',beeFamily:'signal-drone',butFamily:'red-escort',bossFamily:'flagship',challengeFamily:'none',pulseX:.96,pulseY:.78,entryX:.92,entryY:.82,weave:1.18,steer:1.08,jitter:1.08,diveVy:1.06,diveAccel:1.04}
+]);
+
+const GALAXY_GUARDIANS_STAGE_THEME_PROGRESSION=Object.freeze([
+ {fromStage:1,id:'opening-active-wave',frameAccent:'signal-crimson',atmosphereTheme:'classic-arcade',challengeBrand:'none',bossArchetype:'flagship'},
+ {fromStage:4,id:'mid-session-pressure',frameAccent:'signal-crimson',atmosphereTheme:'classic-arcade',challengeBrand:'none',bossArchetype:'flagship'},
+ {fromStage:8,id:'late-session-pressure',frameAccent:'signal-crimson',atmosphereTheme:'classic-arcade',challengeBrand:'none',bossArchetype:'flagship'}
+]);
+
+const GALAXY_GUARDIANS_SCORING_RULES=Object.freeze({
+ challengeEnemy:0,
+ perfectChallengeClear:0,
+ rescueJoin:0,
+ extends:Object.freeze({first:7000,recurring:0}),
+ carriedFighter:{standby:0,attacking:0},
+ enemyKills:Object.freeze({
+  bee:Object.freeze({formation:30,dive:60}),
+  but:Object.freeze({formation:40,dive:80}),
+  rogue:Object.freeze({formation:150,dive:300}),
+  boss:Object.freeze({formation:60,dive:Object.freeze({solo:150,oneEscort:200,twoEscort:300})})
+ }),
+ challengeGroupBonuses:Object.freeze([
+  {fromStage:1,bonus:0}
+ ])
+});
+
+const AURORA_COMBAT_RULES=Object.freeze({
+ playerBulletCap:Object.freeze({single:2,dual:4})
+});
+
+const GALAXY_GUARDIANS_COMBAT_RULES=Object.freeze({
+ playerBulletCap:Object.freeze({single:1,dual:1})
+});
+
+const GALAXY_GUARDIANS_PREVIEW_MODEL=Object.freeze({
+ status:'first-playable-scout-slice',
+ evidence:Object.freeze({
+ spec:'reference-artifacts/analyses/galaxian-reference/GALAXY_GUARDIANS_FIRST_PLAYABLE_PREVIEW_SPEC.md',
+ evidenceMap:'reference-artifacts/analyses/galaxian-reference/FIRST_GALAXIAN_PREVIEW_EVIDENCE_MAP.md',
+ pressureCurve:'reference-artifacts/analyses/galaxian-reference/GALAXIAN_PROGRESSION_PRESSURE_CURVE.md',
+ promotedWindows:'reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/reference-windows.json'
+ }),
+ player:Object.freeze({
+ movement:'horizontal-only',
+ shotModel:'one-active-shot',
+ dualFighter:false,
+ captureRescue:false
+ }),
+ enemyFamilies:Object.freeze([
+ Object.freeze({id:'signal-drone',runtimeType:'bee',role:'regular-dive-family'}),
+ Object.freeze({id:'red-escort',runtimeType:'but',role:'escort-family-placeholder'}),
+ Object.freeze({id:'flagship',runtimeType:'boss',role:'flagship-family-placeholder'})
+ ]),
+ pressureBands:Object.freeze([
+ Object.freeze({id:'opening-active-wave',sourceWindow:'opening-active-wave'}),
+ Object.freeze({id:'mid-session-pressure',sourceWindow:'mid-session-pressure'}),
+ Object.freeze({id:'late-session-pressure',sourceWindow:'late-session-pressure'})
+ ]),
+ eventFamilies:Object.freeze([
+  'game_start',
+  'wave_setup',
+  'player_move',
+  'player_shot',
+  'regular_dive_start',
+  'enemy_projectile',
+  'enemy_hit',
+  'player_hit',
+  'wave_clear'
+ ]),
+ nonGoals:Object.freeze([
+  'capture_rescue',
+  'dual_fighter',
+  'challenge_stage',
+  'full_15_wave_progression',
+  'exact_flagship_escort_scoring'
+ ])
+});
+
 const AURORA_SCORING_RULES=Object.freeze({
  challengeEnemy:100,
  perfectChallengeClear:10000,
@@ -720,15 +827,17 @@ const AURORA_GAME_PACK=Object.freeze({
  challengeLayout:AURORA_CHALLENGE_LAYOUT,
  stageThemeProgression:AURORA_STAGE_THEME_PROGRESSION,
  frameAccents:AURORA_FRAME_ACCENTS,
- scoring:AURORA_SCORING_RULES
+ scoring:AURORA_SCORING_RULES,
+ combat:AURORA_COMBAT_RULES,
+ referenceTimings:AURORA_REFERENCE_TIMINGS
 });
 
 const GALAXY_GUARDIANS_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'galaxy-guardians-preview',
   title:'Galaxy Guardians',
-  versionLine:'preview',
-  playable:0
+  versionLine:'playable preview',
+  playable:1
  }),
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',
@@ -743,26 +852,26 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   pickerHint:'CHOOSE GAME TO SWITCH BACK TO AURORA'
  }),
  preview:Object.freeze({
-  banner:'SNEAK PEEK',
+  banner:'PLAYABLE PREVIEW',
   title:'Galaxy Guardians',
-  subtitle:'SECOND GAME PREVIEW ON PLATINUM',
+  subtitle:'FIRST SCOUT-WAVE SLICE ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity; gameplay integration remains offline.',
-  summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.',
+  cardLine:'Playable scout-wave slice with pack-owned rules, evidence links, and Platinum shell boundaries.',
+  summary:'Galaxy Guardians is the Galaxian-inspired sibling title used to pressure-test Platinum as a real multi-game host.',
+  detail:'The current slice boots through Platinum with horizontal Galaxip movement, one-shot pressure, a settled rack, regular dives, projectiles, and no Aurora capture/rescue or dual-fighter rules.',
   highlights:Object.freeze([
-   'Scout-wave formation pressure with flagship escorts',
-   'Single-shot arcade pacing and wrap-around threat planning',
-   'Shared Platinum controls, services, replay, and release shell'
+   'Evidence-backed scout-wave formation pressure',
+   'Single-shot arcade pacing and regular dive pressure',
+   'Shared Platinum controls and shell with pack-owned rules'
   ]),
   milestones:Object.freeze([
    Object.freeze({label:'Pack identity and shell preview',state:'online'}),
-   Object.freeze({label:'Reference footage and movement map',state:'next'}),
-   Object.freeze({label:'Minimal scout-wave playable slice',state:'planned'}),
-   Object.freeze({label:'Application-owned scoring harness',state:'planned'})
+   Object.freeze({label:'Reference footage and movement map',state:'online'}),
+   Object.freeze({label:'Minimal scout-wave playable slice',state:'online'}),
+   Object.freeze({label:'Application-owned scoring harness',state:'next'})
   ]),
-  launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
+  launchFallbackToast:'Galaxy Guardians is playable now. Launching scout-wave preview.'
  }),
  shellThemes:Object.freeze([
   Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
@@ -782,15 +891,16 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  }),
  atmosphereThemes:AURORA_ATMOSPHERE_THEMES,
  audioThemes:AURORA_AUDIO_THEMES,
- stageCadence:AURORA_STAGE_CADENCE,
- stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
- formationLayouts:AURORA_FORMATION_LAYOUTS,
+ stageCadence:GALAXY_GUARDIANS_STAGE_CADENCE,
+ stageBandProfiles:GALAXY_GUARDIANS_STAGE_BAND_PROFILES,
+ formationLayouts:GALAXY_GUARDIANS_FORMATION_LAYOUTS,
  challengeLayout:AURORA_CHALLENGE_LAYOUT,
- stageThemeProgression:Object.freeze([
-  {fromStage:1,id:'signal-rack',frameAccent:'signal-crimson',atmosphereTheme:'classic-arcade',challengeBrand:'signal',bossArchetype:'flagship'}
- ]),
+ stageThemeProgression:GALAXY_GUARDIANS_STAGE_THEME_PROGRESSION,
  frameAccents:AURORA_FRAME_ACCENTS,
- scoring:AURORA_SCORING_RULES
+ scoring:GALAXY_GUARDIANS_SCORING_RULES,
+ combat:GALAXY_GUARDIANS_COMBAT_RULES,
+ referenceTimings:GALAXY_GUARDIANS_REFERENCE_TIMINGS,
+ previewModel:GALAXY_GUARDIANS_PREVIEW_MODEL
 });
 
 const GAME_PACK_REGISTRY=Object.freeze({
@@ -957,7 +1067,15 @@ function currentGamePackAudioCue(cueName,opts={}){
 }
 
 function currentGamePackReferenceTiming(key=''){
- return AURORA_REFERENCE_TIMINGS[String(key||'').trim()]||null;
+ const nextKey=String(key||'').trim();
+ const timings=currentGamePack().referenceTimings||AURORA_REFERENCE_TIMINGS;
+ return timings[nextKey]||AURORA_REFERENCE_TIMINGS[nextKey]||null;
+}
+
+function currentGamePackPlayerBulletCap(dual=false){
+ const cap=currentGamePack().combat?.playerBulletCap||AURORA_COMBAT_RULES.playerBulletCap;
+ const value=dual?cap.dual:cap.single;
+ return Math.max(1,+value||1);
 }
 
 function currentGamePackFormationLayout(stage){
@@ -1043,8 +1161,12 @@ function currentGamePackPreview(pack=currentGamePack()){
   detail:preview.detail||'Aurora Galactica remains the current playable cabinet while this pack is being prepared.',
   highlights:Array.isArray(preview.highlights)?preview.highlights:[],
   milestones:Array.isArray(preview.milestones)?preview.milestones:[],
-  launchFallbackToast:preview.launchFallbackToast||`${pack?.metadata?.title||'This pack'} is preview-only. Launching Aurora Galactica.`
+ launchFallbackToast:preview.launchFallbackToast||`${pack?.metadata?.title||'This pack'} is preview-only. Launching Aurora Galactica.`
  });
+}
+
+function currentGamePackPreviewModel(pack=currentGamePack()){
+ return pack?.previewModel||Object.freeze({});
 }
 
 function currentPlatformPackLabel(){
@@ -1186,11 +1308,13 @@ window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentGamePackPreview=currentGamePackPreview;
+window.currentGamePackPreviewModel=currentGamePackPreviewModel;
 window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
 window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
 window.currentGamePackAudioTheme=currentGamePackAudioTheme;
 window.currentGamePackAudioCue=currentGamePackAudioCue;
 window.currentGamePackReferenceTiming=currentGamePackReferenceTiming;
+window.currentGamePackPlayerBulletCap=currentGamePackPlayerBulletCap;
 window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
 window.selectedShellThemeForPack=selectedShellThemeForPack;

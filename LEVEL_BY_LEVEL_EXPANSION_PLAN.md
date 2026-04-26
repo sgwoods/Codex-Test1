@@ -90,6 +90,7 @@ challenge-stage candidate, a mid-run pressure window, and a late-run cleanup or
 failure window. The bridge document is:
 
 - [CLASSIC_ARCADE_ANALYSIS_TO_AURORA_EXPANSION_BRIDGE.md](CLASSIC_ARCADE_ANALYSIS_TO_AURORA_EXPANSION_BRIDGE.md)
+- [AURORA_LEVEL_EXPANSION_EVIDENCE_CYCLE_PLAN.md](AURORA_LEVEL_EXPANSION_EVIDENCE_CYCLE_PLAN.md)
 
 ### 3. `codex/macbook-pro-challenge-stage-depth`
 
@@ -315,3 +316,4 @@ It should be updated whenever:
 - a challenge-stage expansion slice lands
 - the shared video storage decision is made
 - the second-game preview target changes
+- the Aurora four-window evidence cycle promotes new artifacts

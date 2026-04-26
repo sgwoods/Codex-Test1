@@ -46,17 +46,13 @@ async function main(){
       const marquee = document.getElementById('cabinetMarqueeTitle')?.textContent || '';
       const msg = document.getElementById('msg')?.innerText || '';
       const modalOpen = document.getElementById('gamePreviewModal')?.classList.contains('open');
-      const previewTitle = document.getElementById('gamePreviewTitle')?.textContent || '';
-      const banner = document.getElementById('gamePreviewBanner')?.textContent || '';
-      const summary = document.getElementById('gamePreviewSummary')?.textContent || '';
-      const milestones = document.getElementById('gamePreviewMilestones')?.innerText || '';
-      return title.includes('Galaxy Guardians') && marquee.includes('Galaxy Guardians') && msg.includes('GALAXY GUARDIANS') && modalOpen
-        ? { title, marquee, msg: msg.replace(/\s+/g, ' ').trim(), previewTitle, banner, summary, milestones: milestones.replace(/\s+/g, ' ').trim() }
+      const packKey = typeof currentGamePackKey === 'function' ? currentGamePackKey() : '';
+      const playable = typeof currentGamePackPlayable === 'function' ? !!currentGamePackPlayable() : false;
+      const model = typeof currentGamePackPreviewModel === 'function' ? currentGamePackPreviewModel() : {};
+      return title.includes('Galaxy Guardians') && marquee.includes('Galaxy Guardians') && msg.includes('GALAXY GUARDIANS') && packKey === 'galaxy-guardians-preview'
+        ? { title, marquee, msg: msg.replace(/\s+/g, ' ').trim(), modalOpen, packKey, playable, modelStatus: model?.status || '', eventFamilies: model?.eventFamilies || [] }
         : null;
     }, 1200, 40);
-
-    await page.locator('#gamePreviewClose').click();
-    await page.waitForTimeout(160);
 
     const beforeTheme = await page.evaluate(() =>
       getComputedStyle(document.documentElement).getPropertyValue('--marquee-border').trim()
@@ -80,18 +76,19 @@ async function main(){
     await page.keyboard.press('Escape');
     await page.waitForTimeout(120);
     await page.keyboard.press('Enter');
-    const blocked = await waitForHarness(page, () => {
-      const started = !!window.__galagaHarness__.snapshot().started;
+    const launched = await waitForHarness(page, () => {
+      const snap = window.__galagaHarness__.snapshot();
+      const started = !!snap.started;
       const modalOpen = !!document.getElementById('gamePreviewModal')?.classList.contains('open');
-      const previewTitle = document.getElementById('gamePreviewTitle')?.textContent || '';
       const marquee = document.getElementById('cabinetMarqueeTitle')?.textContent || '';
       const packKey = typeof window.currentGamePackKey === 'function' ? window.currentGamePackKey() : '';
-      return started && packKey === 'aurora-galactica'
-        ? { started, modalOpen, previewTitle, marquee, packKey }
+      const formation = window.__galagaHarness__.formationState();
+      return started && packKey === 'galaxy-guardians-preview' && snap.gameKey === 'galaxy-guardians-preview'
+        ? { started, modalOpen, marquee, packKey, snapshotGameKey: snap.gameKey, formation }
         : null;
     }, 1200, 40);
 
-    return { opened, preview, beforeTheme, themed, blocked };
+    return { opened, preview, beforeTheme, themed, launched };
   });
 
   if(!result.opened?.railVisible) fail('left-side game picker rail did not render', result);
@@ -102,18 +99,15 @@ async function main(){
   }
   if(
     !result.preview?.msg.includes('GALAXY GUARDIANS')
-    || !result.preview?.msg.includes('PREVIEW SHELL')
-    || !result.preview?.msg.includes('PRESS ENTER TO RETURN TO AURORA')
+    || !result.preview?.msg.includes('PRESS ENTER')
   ){
     fail('preview pack selection did not update the split app/platform wait-mode copy', result);
   }
-  if(
-    !result.preview?.previewTitle.includes('Galaxy Guardians')
-    || !result.preview?.banner.includes('SNEAK PEEK')
-    || !result.preview?.summary.includes('pack-owned content')
-    || !result.preview?.milestones.includes('Pack identity and shell preview')
-  ){
-    fail('preview pack selection did not open the pack-owned sneak-peek splash', result);
+  if(!result.preview?.playable || result.preview?.modalOpen){
+    fail('Galaxy Guardians should be a playable pack without the preview-only splash', result);
+  }
+  if(result.preview?.modelStatus !== 'first-playable-scout-slice' || !result.preview?.eventFamilies.includes('regular_dive_start')){
+    fail('Galaxy Guardians playable model did not expose the expected scout-wave contract', result);
   }
   if(result.beforeTheme === result.themed?.border){
     fail('switching shell theme did not change the cabinet chrome treatment', result);
@@ -121,14 +115,17 @@ async function main(){
   if(!result.themed?.themeLine.includes('Classic Blue')){
     fail('shell theme picker did not update the current theme label', result);
   }
-  if(!result.blocked?.started){
-    fail('launching from the preview shell did not fall back to Aurora gameplay', result);
+  if(!result.launched?.started){
+    fail('launching Galaxy Guardians did not start gameplay', result);
   }
-  if(result.blocked?.modalOpen){
-    fail('preview modal stayed open instead of launching Aurora', result);
+  if(result.launched?.modalOpen){
+    fail('preview modal stayed open instead of launching Galaxy Guardians', result);
   }
-  if(result.blocked?.packKey !== 'aurora-galactica' || !result.blocked?.marquee.includes('Aurora Galactica')){
-    fail('launch fallback did not restore Aurora as the active playable pack', result);
+  if(result.launched?.packKey !== 'galaxy-guardians-preview' || !result.launched?.marquee.includes('Galaxy Guardians')){
+    fail('Galaxy Guardians did not remain the active playable pack at launch', result);
+  }
+  if((result.launched?.formation?.targets || []).some(enemy => enemy.carry || enemy.beam)){
+    fail('Galaxy Guardians launch leaked Aurora capture/beam state', result);
   }
 
   console.log(JSON.stringify({
@@ -137,7 +134,7 @@ async function main(){
     previewTitle: result.preview.title,
     previewMarquee: result.preview.marquee,
     themedBorder: result.themed.border,
-    launchPackKey: result.blocked.packKey
+    launchPackKey: result.launched.packKey
   }, null, 2));
 }
 

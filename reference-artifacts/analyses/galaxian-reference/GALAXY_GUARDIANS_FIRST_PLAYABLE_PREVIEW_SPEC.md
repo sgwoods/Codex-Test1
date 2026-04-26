@@ -1,10 +1,10 @@
 # Galaxy Guardians First Playable Preview Spec
 
-Status: `evidence-backed-preview-draft`
+Status: `first-playable-preview-online`
 
 Target pack: `galaxy-guardians-preview`
 
-This spec defines the first playable slice to build from the current Galaxian
+This spec defines the first playable slice built from the current Galaxian
 reference evidence. It is intentionally small: enough to pressure-test Platinum
 as a second-game host without pretending the whole game has been modeled.
 
@@ -15,6 +15,8 @@ as a second-game host without pretending the whole game has been modeled.
 - `nenriki-15-wave-session/promoted-windows/reference-windows.json`
 - `arcades-lounge-level-5/traces/trace-summary.json`
 - Matt Hawkins intro / rack / score-table artifacts
+- `GALAXY_GUARDIANS_PACK_CONTRACT.md`
+- `GALAXY_GUARDIANS_EVENT_SCHEMA_PLAN.md`
 
 ## Preview Promise
 
@@ -26,6 +28,14 @@ The first preview should feel like a distinct Galaxian-family sibling:
 - alien dives and projectile pressure
 - a small progression hook that can later separate opening, mid, and late waves
 - no Aurora-specific capture / rescue assumptions
+
+Runtime status:
+
+- `galaxy-guardians-preview` is now marked playable
+- it uses pack-owned scoring, pressure bands, formation layout, and capability
+  flags
+- the shared fixed-screen engine still supplies the first movement / rack / shot
+  loop
 
 ## First Mechanics Slice
 
@@ -72,14 +82,10 @@ The first preview should feel like a distinct Galaxian-family sibling:
 
 ## First Harness Targets
 
-- pack boots through Platinum without Aurora-only assumptions
-- player is horizontal-only and constrained to the Galaxip playfield
-- one-shot rule is enforced
-- regular dive family can launch, cross the lower field, and resolve
-- enemy projectile pressure is present and bounded
-- wave state can reset without leaking Aurora capture/rescue state
-- event log emits player movement, player shot, alien dive, enemy projectile,
-  enemy hit, player hit, and wave-clear families
+- `npm run harness:check:platinum-pack-boot`
+- `npm run harness:check:game-picker-shell`
+- `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxian-preview-evidence`
 
 ## Explicit Non-Goals
 
