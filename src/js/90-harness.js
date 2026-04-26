@@ -550,6 +550,8 @@ window.__galagaHarness__={
  },
  leaderboardPanelState(){
   const cells=Array.from(document.querySelectorAll('#leaderboardPanelTable .scoreCell')).map(node=>node.textContent||'');
+  const activeView=document.querySelector('#leaderboardViewButtons button.active')?.dataset?.view||'';
+  const latestBanner=document.getElementById('leaderboardLatestLocalBanner')?.textContent||'';
   return{
    open:!!LEADERBOARD.panelOpen,
    status:leaderboardStatusEl?.textContent||'',
@@ -557,7 +559,10 @@ window.__galagaHarness__={
    title:leaderboardPanelTitle?.textContent||'',
    sub:leaderboardPanelSub?.textContent||'',
    empty:document.getElementById('leaderboardPanelEmpty')?.textContent||'',
-   cells
+   cells,
+   activeView,
+   latestBanner,
+   scrollTop:document.getElementById('leaderboardPanel')?.scrollTop||0
   };
  },
  audioHistory(limit=12){

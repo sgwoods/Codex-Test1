@@ -152,6 +152,18 @@ Verification:
 - issue family:
   - `#174` refactor Pilot reference screen with excessive text
 
+10. Local leaderboard clarity and reopen behavior
+
+- the local leaderboard now makes its scope explicit as a local top-10 surface
+  for completed runs
+- if the newest completed local run does not make that top 10, the panel now
+  surfaces it in a dedicated "Latest completed run" banner instead of making it
+  disappear silently
+- reopening the leaderboard after switching score views now resets the panel
+  scroll position so the active view and controls are easier to understand
+- issue family:
+  - beta-local leaderboard confusion / score-view reopen regression
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -204,6 +216,7 @@ Minimum patch verification:
 - `npm run harness:check:input-mapping`
 - `npm run harness:check:pilot-recent-scores-refresh`
 - `npm run harness:check:leaderboard-build-info`
+- `npm run harness:check:leaderboard-local-view`
 - `npm run harness:check:password-visibility-toggle`
 - `npm run harness:check:overlay-screen-switching`
 - `npm run harness:check:dock-buttons`
