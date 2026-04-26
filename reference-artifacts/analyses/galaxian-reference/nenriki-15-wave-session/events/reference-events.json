@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "window_id": "nenriki-15-wave-session",
+  "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+  "status": "event-skeleton",
+  "timebase": {
+    "units": "seconds",
+    "source_start_time_s": null,
+    "source_end_time_s": null,
+    "frame_rate": null,
+    "notes": "Fill after local review of the Nenriki 15-wave source and selected sub-window extraction."
+  },
+  "events": [
+    {
+      "event_id": "evt-001",
+      "event_family": "session_start_or_first_wave",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "progression",
+      "entity_id": "session-start",
+      "position_hint": "pending observation",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Anchor the first identifiable wave or session start."
+    },
+    {
+      "event_id": "evt-002",
+      "event_family": "wave_transition",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "progression",
+      "entity_id": "transition-1",
+      "position_hint": "pending observation",
+      "motion_hint": "wave clear into next setup pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use a clean transition as the first progression-timing anchor."
+    },
+    {
+      "event_id": "evt-003",
+      "event_family": "mid_session_pressure",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "alien_group",
+      "entity_id": "mid-session-pressure-1",
+      "position_hint": "pending observation",
+      "motion_hint": "attack density pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use for wave 5-8 style pressure if identifiable."
+    },
+    {
+      "event_id": "evt-004",
+      "event_family": "late_session_pressure",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "alien_group",
+      "entity_id": "late-session-pressure-1",
+      "position_hint": "pending observation",
+      "motion_hint": "attack density and player response pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use for wave 12-15 style pressure if identifiable."
+    },
+    {
+      "event_id": "evt-005",
+      "event_family": "player_survival_pattern",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "player",
+      "entity_id": "galaxip",
+      "position_hint": "lower field",
+      "motion_hint": "repeated movement / firing strategy pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to capture player strategy across a longer session."
+    }
+  ],
+  "open_questions": [
+    "Can the source waves be reliably segmented into opening, early, mid, and late windows?",
+    "Which wave transitions are clean enough for timing correspondence?",
+    "Does the source show escalating attack density clearly?",
+    "Should this source become the primary progression reference for Galaxy Guardians?"
+  ]
+}
