@@ -71,12 +71,15 @@ Key local services:
 - Viewer: http://127.0.0.1:4311/
 
 Important docs to read first before major work:
+- NEXT_CODEX_ACCOUNT_HANDOFF.md
 - RESTART_FROM_HERE.md
 - MULTI_MACHINE_WORKFLOW.md
 - DEVELOPER_MACHINE_BASELINE.md
 - RELEASE_POLICY.md
 - PLAN.md
 - PRODUCT_ROADMAP.md
+- LONG_TERM_RELEASE_ROADMAP.md
+- LEVEL_BY_LEVEL_EXPANSION_PLAN.md
 - GO_FORWARD_EXECUTION_PLAN.md
 - QUALITY_RELEASE_SCORECARD.md
 - BETA_TO_PRODUCTION_PLAN.md
@@ -100,12 +103,13 @@ Current product/release posture:
   - rendered sgwoods/public homepage card
 
 Current priority themes for future work:
-1. Player-ship movement fidelity against real Galaga footage
-2. Audio identity polish beyond cue timing
-3. Platinum/application boundary cleanup
-4. Expanded reference-video event logging and visual artifact extraction
-5. Future-game ingestion planning for a second game such as Galaxian
-6. Longer-term persona growth, including richer simulated play and future Player 2 style opponent behavior
+1. Restore the audio phase / quality-conformance gate so measurement is trustworthy
+2. Build the first level-by-level Aurora expansion blueprint
+3. Expand challenge stages with richer alien types, movement patterns, scoring pressure, and presentation states
+4. Add later-level entry and movement variation against original Galaga reference evidence
+5. Make gameplay videos publishable and shareable as durable run/reference evidence
+6. Prepare an earlier second-game Platinum sneak peek, likely a Galaxian-style sibling proof
+7. Continue player-ship movement fidelity, audio identity polish, gameplay trust fixes, and Platinum/application boundary cleanup
 
 Operational rules:
 - Prefer repo-grounded verification before conclusions
@@ -132,4 +136,3 @@ When in doubt:
 - Treat Aurora-Galactica as the public mirror/release host
 - Treat this machine as dev/test/push capable, but not release-authority capable
 ```
-
