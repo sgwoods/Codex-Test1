@@ -1,6 +1,10 @@
-// Aurora-specific player combat, bullet resolution, and rescue-return helpers.
+// Player combat, bullet resolution, and rescue-return helpers.
 
-function bulletsMax(){return S.p.dual?4:2}
+function bulletsMax(){
+ return typeof currentGamePackPlayerBulletCap==='function'
+  ? currentGamePackPlayerBulletCap(!!S.p.dual)
+  : S.p.dual?4:2;
+}
 function dualShotOffsets(){return S.p.dual?[-10,10]:[0]}
 
 function shoot(){
