@@ -63,6 +63,10 @@ This means `1.4` becomes the first major arcade-depth release family, and
 The `Message to Pilot` work remains important, but moves after those two
 foundation-setting product capabilities.
 
+The concrete execution plan for the first level-expansion cycle is:
+
+- [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
+
 ## Release Family 1.3: Fidelity And Trust Reset
 
 Working title:

@@ -63,6 +63,10 @@ milestones is tracked in:
 
 - [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 
+The concrete first execution plan for level-by-level arcade depth is tracked in:
+
+- [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
+
 Current decision:
 
 - keep `1.x` focused on making Aurora excellent and preparing Platinum for a

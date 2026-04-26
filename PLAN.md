@@ -115,6 +115,8 @@ This means:
   the `1.3.0` family
 - the longer release-family phasing plan is tracked in
   [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
+- the concrete first level-expansion execution plan is tracked in
+  [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
 
 ## Long-Term Direction
 
