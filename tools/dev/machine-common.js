@@ -140,6 +140,8 @@ function toolChecks(){
     npm: { ok: false, version: null },
     python3: { ok: false, version: null },
     gh: { ok: false, version: null, authenticated: false },
+    ffmpeg: { ok: false, version: null },
+    ffprobe: { ok: false, version: null },
     chrome: { ok: false, version: null, path: CHROME_PATH }
   };
 
@@ -155,6 +157,12 @@ function toolChecks(){
     const auth = spawnSync('gh', ['auth', 'status'], { encoding: 'utf8' });
     checks.gh.authenticated = auth.status === 0;
   }
+
+  checks.ffmpeg.version = commandVersion('ffmpeg', ['-version']);
+  checks.ffmpeg.ok = Boolean(checks.ffmpeg.version);
+
+  checks.ffprobe.version = commandVersion('ffprobe', ['-version']);
+  checks.ffprobe.ok = Boolean(checks.ffprobe.version);
 
   if(fs.existsSync(CHROME_PATH)){
     checks.chrome.version = commandVersion(CHROME_PATH, ['--version']);
@@ -175,6 +183,8 @@ function buildMachineProfile(identity, checks, lastSuccessfulBootstrapAt = null)
       npm: checks.npm.version,
       python3: checks.python3.version,
       gh: checks.gh.version,
+      ffmpeg: checks.ffmpeg.version,
+      ffprobe: checks.ffprobe.version,
       chrome: checks.chrome.version
     },
     gh_auth: checks.gh.authenticated,

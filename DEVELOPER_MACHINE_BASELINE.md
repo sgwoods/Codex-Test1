@@ -34,6 +34,8 @@ Verified on this machine on `2026-04-24`:
 - `npm`: `11.11.1`
 - `python3`: `3.12.1`
 - `gh`: `2.37.0`
+- `ffmpeg` / `ffprobe`: required for reference-video clip extraction, contact
+  sheets, still frames, and audio waveforms
 - `Google Chrome`: `147.0.7727.56`
 
 The exact versions do not need to match perfectly, but a new machine should
@@ -48,6 +50,8 @@ node -v
 npm -v
 python3 --version
 gh --version | head -n 1
+ffmpeg -version | head -n 1
+ffprobe -version | head -n 1
 '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --version
 ```
 
@@ -67,7 +71,8 @@ This command:
 - reuses the clone if it already exists
 - runs `npm run machine:bootstrap`
 - and, on fresh macOS machines, attempts to install missing Aurora
-  prerequisites through Apple Command Line Tools plus Homebrew
+  prerequisites through Apple Command Line Tools plus Homebrew, including
+  `ffmpeg` for reference-video analysis
 - those prerequisite installs may request administrator approval
 - the installer should be run as the normal user, not with `sudo` or `su`
 - if Homebrew is missing, Aurora downloads the Homebrew installer locally and

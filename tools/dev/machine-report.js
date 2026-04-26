@@ -37,6 +37,8 @@ async function gatherMachineSnapshot({ includePublic = false } = {}){
   if(!tools.npm.ok) developmentBlocked.push('npm');
   if(!tools.python3.ok) developmentBlocked.push('python3');
   if(!tools.chrome.ok) developmentBlocked.push('chrome');
+  if(!tools.ffmpeg.ok) developmentBlocked.push('ffmpeg');
+  if(!tools.ffprobe.ok) developmentBlocked.push('ffprobe');
   if(!remotes.ok) developmentBlocked.push('origin remote');
 
   const releaseBlocked = [];

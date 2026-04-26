@@ -185,9 +185,10 @@ ensure_mac_prerequisites() {
   local needs_brew="no"
   local node_present="no"
   local python_present="no"
+  local ffmpeg_present="no"
   [[ "$OS_NAME" == "Darwin" ]] || return 0
 
-  if ! have_tool git || ! have_tool node || ! have_tool npm || ! have_tool python3 || ! have_tool gh || [[ ! -x "$CHROME_PATH" ]]; then
+  if ! have_tool git || ! have_tool node || ! have_tool npm || ! have_tool python3 || ! have_tool gh || ! have_tool ffmpeg || ! have_tool ffprobe || [[ ! -x "$CHROME_PATH" ]]; then
     needs_brew="yes"
   fi
 
@@ -216,6 +217,10 @@ EOF
   fi
   brew_install_if_missing formula python "$python_present"
   brew_install_if_missing formula gh "$(have_tool gh && echo yes || echo no)"
+  if have_tool ffmpeg && have_tool ffprobe; then
+    ffmpeg_present="yes"
+  fi
+  brew_install_if_missing formula ffmpeg "$ffmpeg_present"
   brew_install_if_missing cask google-chrome "$([[ -x "$CHROME_PATH" ]] && echo yes || echo no)"
   hash -r
 }
@@ -227,6 +232,8 @@ require_tool node "Install Node.js, then rerun this setup script."
 require_tool npm "Install npm, then rerun this setup script."
 require_tool python3 "Install Python 3, then rerun this setup script."
 require_tool gh "Install GitHub CLI (gh), then rerun this setup script."
+require_tool ffmpeg "Install ffmpeg, then rerun this setup script."
+require_tool ffprobe "Install ffmpeg / ffprobe, then rerun this setup script."
 
 if [[ ! -x "$CHROME_PATH" ]]; then
   echo "Missing required browser: Google Chrome"
