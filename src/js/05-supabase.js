@@ -17,9 +17,11 @@ const accountCredentials=document.getElementById('accountCredentials');
 const accountEmail=document.getElementById('accountEmail');
 const accountEmailLabel=document.getElementById('accountEmailLabel');
 const accountPassword=document.getElementById('accountPassword');
+const accountPasswordToggle=document.getElementById('accountPasswordToggle');
 const accountPasswordLabel=document.getElementById('accountPasswordLabel');
 const accountRecoveryFields=document.getElementById('accountRecoveryFields');
 const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
+const accountPasswordConfirmToggle=document.getElementById('accountPasswordConfirmToggle');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
 const accountLoginBtn=document.getElementById('accountLoginBtn');
 const accountResetBtn=document.getElementById('accountResetBtn');
@@ -240,6 +242,8 @@ if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+if(accountPasswordToggle)accountPasswordToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPassword,accountPasswordToggle,'password'));
+if(accountPasswordConfirmToggle)accountPasswordConfirmToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password'));
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
 async function openReplayFromPilotRecordsTarget(target){
  const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';

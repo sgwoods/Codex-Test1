@@ -290,6 +290,12 @@ mask:
 #accountCredentials{display:flex;flex-direction:column;gap:8px}
 #accountRecoveryFields{display:flex;flex-direction:column;gap:8px}
 #accountRecoveryFields[hidden]{display:none}
+#accountPanel .accountPasswordRow{display:flex;align-items:stretch;gap:8px}
+#accountPanel .accountPasswordRow input{flex:1}
+.accountPasswordToggle{flex:0 0 auto;min-width:42px;border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.78);color:#dff7ff;padding:0 10px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+.accountPasswordToggle:hover,.accountPasswordToggle:focus-visible{outline:none;border-color:rgba(255,216,109,.72);color:#ffe39a;background:rgba(19,43,84,.9)}
+.accountPasswordToggle[disabled]{opacity:.45;cursor:default}
+.accountPasswordToggle[disabled]:hover,.accountPasswordToggle[disabled]:focus-visible{border-color:rgba(136,245,255,.24);color:#dff7ff;background:rgba(8,18,35,.78)}
 #accountActions,#accountInitialsRow{display:flex;gap:8px}
 #accountActions{flex-wrap:wrap}
 #accountActions button,#accountInitialsRow button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:7px 10px;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer}

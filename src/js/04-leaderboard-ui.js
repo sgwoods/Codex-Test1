@@ -162,13 +162,32 @@ function leaderboardRowIncludedByDate(row){
  return Number.isFinite(stamp)&&stamp>=threshold;
 }
 function formatLeaderboardRowMeta(row){
- const build=String(row?.build||'').trim()||'legacy';
+ const buildRaw=String(row?.build||'').trim();
+ const buildCore=(buildRaw.split('+')[0]||'').trim();
+ const build=buildCore||buildRaw||'legacy';
  const stamp=resolveRowTimestamp(row)||row?.at||'';
  const parsed=Date.parse(stamp);
  const dateLabel=Number.isFinite(parsed)
   ? new Intl.DateTimeFormat(undefined,{month:'short',day:'2-digit',year:'2-digit'}).format(parsed)
   : '--';
- return { build, dateLabel };
+ return { build:`Build ${build}`, dateLabel };
+}
+function syncPasswordToggleButton(input,button,label='password'){
+ if(!button)return;
+ const hidden=!input;
+ button.hidden=hidden;
+ if(hidden)return;
+ const masked=input.type!=='text';
+ button.textContent=masked?'👁':'🙈';
+ const action=masked?`Show ${label}`:`Hide ${label}`;
+ button.setAttribute('aria-label',action);
+ button.title=action;
+ button.disabled=!!input.disabled;
+}
+function toggleAccountPasswordVisibility(input,button,label='password'){
+ if(!input||input.disabled)return;
+ input.type=input.type==='password'?'text':'password';
+ syncPasswordToggleButton(input,button,label);
 }
 function syncLeaderboardFilterUi(){
  if(leaderboardFilterAfterInput&&leaderboardFilterAfterInput.value!==String(LEADERBOARD.filterAfterDate||''))leaderboardFilterAfterInput.value=String(LEADERBOARD.filterAfterDate||'');
@@ -372,6 +391,8 @@ function syncAccountUi(){
   accountPassword.autocomplete=recovering?'new-password':'current-password';
  }
  if(accountPasswordConfirm)accountPasswordConfirm.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!recovering;
+ syncPasswordToggleButton(accountPassword,accountPasswordToggle,recovering?'password':'password');
+ syncPasswordToggleButton(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password');
  if(accountEmail&&testAccountEnabled()&&!signedIn&&document.activeElement!==accountEmail&&String(accountEmail.value||'').trim()===''){
   accountEmail.value=primaryTestAccountEmail();
  }

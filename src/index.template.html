@@ -367,10 +367,16 @@
         <label id="accountEmailLabel" for="accountEmail">Email</label>
         <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
         <label id="accountPasswordLabel" for="accountPassword">Password</label>
-        <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+        <div class="accountPasswordRow">
+          <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+          <button id="accountPasswordToggle" class="accountPasswordToggle" type="button" aria-label="Show password" title="Show password">👁</button>
+        </div>
         <div id="accountRecoveryFields" hidden>
           <label for="accountPasswordConfirm">Confirm New Password</label>
-          <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+          <div class="accountPasswordRow">
+            <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+            <button id="accountPasswordConfirmToggle" class="accountPasswordToggle" type="button" aria-label="Show confirmation password" title="Show confirmation password">👁</button>
+          </div>
         </div>
       </div>
       <div id="accountActions">

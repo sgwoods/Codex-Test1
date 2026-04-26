@@ -119,6 +119,30 @@ Verification:
 
 - `npm run harness:check:build-stamp-persistence`
 
+7. High-score build info simplification
+
+- the high-score panel no longer surfaces the full verbose build metadata
+- each row now shows the clean release build identifier and the score date only
+- this keeps the leaderboard readable while still preserving release context
+- issue family:
+  - `#172` simplify high score screen build info
+
+Verification:
+
+- `npm run harness:check:leaderboard-build-info`
+
+8. Password visibility toggle on pilot sign-in
+
+- the pilot access form now includes an eye button beside the password field
+- recovery mode also gets the same treatment for confirmation input
+- the toggle state stays aligned with the field disabled/recovery state
+- issue family:
+  - `#178` add show password eye icon on Aurora Galactica login
+
+Verification:
+
+- `npm run harness:check:password-visibility-toggle`
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -170,6 +194,8 @@ Minimum patch verification:
 - `npm run build`
 - `npm run harness:check:input-mapping`
 - `npm run harness:check:pilot-recent-scores-refresh`
+- `npm run harness:check:leaderboard-build-info`
+- `npm run harness:check:password-visibility-toggle`
 - `npm run harness:check:overlay-screen-switching`
 - `npm run harness:check:dock-buttons`
 - `npm run harness:check:production-developer-lock`
