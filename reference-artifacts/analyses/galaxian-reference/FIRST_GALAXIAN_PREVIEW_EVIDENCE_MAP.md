@@ -22,6 +22,25 @@ trace artifacts, semantic notes, then implementation.
 | Nenriki 15-wave session | long-session progression scouting, opening / mid / late candidate windows, player strategy bands | exact wave boundaries, exact transition timing, tuning metrics |
 | Hamster / Nintendo official summaries | naming, core rules, score-doubling and escort behavior descriptions | frame timing, motion envelopes, audio shape |
 
+## Promoted Review Windows
+
+The second local evidence cycle promotes these windows for deeper review:
+
+| Window | Time | Best Use |
+| --- | ---: | --- |
+| `opening-active-wave` | `48.000-90.000s` | first active rack, early player start, first visible pressure |
+| `early-progression-pressure` | `90.000-145.000s` | early repeated pressure after the first active setup |
+| `mid-session-pressure` | `180.000-240.000s` | middle-session pressure and player survival movement |
+| `late-session-pressure` | `660.000-720.000s` | later-session depleted rack, dives, and pressure |
+| `endgame-cleanup` | `870.000-930.000s` | lifecycle, depletion, game-over / failure-state evidence |
+| `arcades-level-5-active-reference` | `8.000-40.000s` | compact comparison against the strongest active-play source |
+
+See:
+
+- `nenriki-15-wave-session/promoted-windows/reference-windows.json`
+- `nenriki-15-wave-session/promoted-windows/TRACE_SUMMARY.md`
+- `GALAXIAN_PROGRESSION_PRESSURE_CURVE.md`
+
 ## First Playable Preview Scope
 
 The first `Galaxy Guardians` preview should stay intentionally narrow:
@@ -49,6 +68,11 @@ ARCADE'S LOUNGE Level 5 is currently the strongest active-gameplay reference.
 These metrics are first-pass heuristic traces. They should select and constrain
 the next implementation experiment, not close the subject.
 
+The promoted-window trace cycle exposed an important caveat: dense rack pixels
+can inflate pressure-like component counts, especially in opening windows. Use
+the pressure score to choose review order, then confirm with contact sheets and
+event logs before tuning.
+
 ## Long-Session Evidence
 
 The Nenriki 15-wave session now has these coarse anchors:
@@ -66,8 +90,8 @@ producing large trace folders for unclear segments.
 1. Promote one Nenriki opening or transition subwindow after visual review.
 2. Pick one ARCADE'S LOUNGE trace window as the first movement / pressure tuning
    authority.
-3. Add a `Galaxy Guardians` preview spec that names the exact mechanics in the
-   first playable slice.
+3. Use `GALAXY_GUARDIANS_FIRST_PLAYABLE_PREVIEW_SPEC.md` as the first playable
+   scope.
 4. Implement the preview only after the spec points back to specific artifacts
    in this evidence map.
 5. Reuse this same ingestion shape for future Platinum game candidates.
