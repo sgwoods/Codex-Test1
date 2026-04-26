@@ -2,66 +2,73 @@
 
 Window id: `matt-hawkins-arcade-intro`
 
-Status: `scaffold`
+Status: `events-observed`
 
 This profile translates the locally provided beginning-phase `Galaxian` intro
 source into questions and candidate semantics for the future `Galaxy Guardians`
 scout-wave model.
 
-It should not be treated as implementation authority until the event log has
-timestamps and confidence labels.
+It should not be treated as movement or player-control implementation authority
+until the late action is classified against an active gameplay source.
 
 ## Intro / Title Contract
 
-To verify:
+Observed in `title-mission` (`0.000s` to `6.000s`):
 
-- whether the clip begins on a title, attract, credit, or already-started game
-  surface
-- whether any title or intro timing should inform a future `Galaxy Guardians`
-  front-door or pack preview
-- whether the source includes audio cues worth preserving as cabinet-feel
-  evidence
+- the clip begins on score labels, credits, and a starfield
+- title/mission text appears after the opening starfield
+- score-table presentation begins near the end of this subwindow
+- the source does not provide useful audio cue evidence because the encoded
+  audio track is effectively silent
 
 ## Formation Handoff
 
-To verify:
+Observed across `score-advance-table` (`5.000s` to `29.000s`) and
+`rack-handoff` (`34.000s` to `42.000s`):
 
-- whether the source reaches formation entry
-- whether the formation is already settled at first visible gameplay
-- whether row composition and top-rank enemies are readable enough for tagging
-- whether this source should be used for the first formation-entry window or
-  only for intro/presentation evidence
+- the score table and Namco presentation precede the rack view
+- the source reaches a readable full rack
+- the rack appears with `GAME OVER`, so this is not a clean formation-entry
+  gameplay window
+- row composition and enemy-family colors are readable enough for semantic
+  tagging
 
 ## Player Contract
 
-To verify if gameplay appears:
+Observed in `late-attract-pressure` (`48.000s` to `59.133333s`):
 
-- Galaxip start position
-- first visible movement
-- first shot timing
-- whether the source is clear enough for player-position tracing
+- Galaxip appears in the lower field
+- attacker, shot/projectile, and explosion states appear
+- `GAME OVER` remains visible, so this likely represents attract/demo or
+  post-game presentation
+- use this for vocabulary and visual-state discovery before using it for motion
+  or player-control tracing
 
 ## Enemy Family Readability
 
-To verify:
+Observed:
 
-- top-rank / flagship visibility
-- red escort visibility
-- mid-rank and lower-rank visibility
-- whether 720p source quality supports contact-sheet based labeling
+- top-rank / flagship-like enemies are visible
+- red escort-like enemies are visible
+- mid-rank and lower-rank alien families are visible
+- source quality supports contact-sheet based semantic labeling
 
 ## First Harness Implications
 
-Draft targets if the source includes gameplay:
+Draft targets from this source:
 
-- intro or title handoff event can be logged
-- formation entry or rack-complete event can be logged
-- first player-visible event can be aligned to the semantic scout-wave profile
-- source can either complement or replace the generic `seed-window-formation-entry`
-  candidate
+- title/mission presentation can be logged
+- score-table and enemy-family naming semantics can be logged
+- rack composition can be logged as attract/presentation evidence
+- late pressure can seed entity vocabulary for Galaxip, attacker, projectile,
+  and explosion states
+- this source should complement, not replace, the generic
+  `seed-window-formation-entry` candidate until an active gameplay source is
+  analyzed
 
 ## Open Questions
 
-- Does this clip include enough gameplay to become the primary first window?
-- Does it contain audio clean enough for start/intro cue notes?
-- Should its best role be intro semantics, formation semantics, or both?
+- Which late-pressure frames are attract/demo versus active gameplay?
+- Which active gameplay source should provide the first player-control trace?
+- Should Galaxian preview implementation start with presentation/rack semantics
+  before gameplay movement?

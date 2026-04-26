@@ -9,86 +9,86 @@
     "source_start_time_s": 0,
     "source_end_time_s": 59.267438,
     "frame_rate": 30,
-    "notes": "First-pass event timing is contact-sheet level only. Use frame-accurate review before implementation tuning."
+    "notes": "Event timing is based on 1 fps, 2 fps, and 4 fps contact-sheet review. Use frame-exact still sequences before implementation tuning."
   },
   "events": [
     {
       "event_id": "evt-001",
       "event_family": "intro_surface_visible",
-      "time_s": 0,
-      "duration_s": null,
+      "time_s": 2,
+      "duration_s": 4,
       "entity_family": "presentation",
       "entity_id": "intro-surface",
       "position_hint": "full screen",
       "motion_hint": "starfield with red title/mission presentation text",
       "audio_hint": "",
       "confidence": "medium",
-      "source_note": "Contact sheet shows opening title/mission text: WE ARE THE GALAXIANS / MISSION: DESTROY ALIENS."
+      "source_note": "4 fps subwindow review shows title/mission presentation becoming visible after the opening starfield/score header."
     },
     {
       "event_id": "evt-002",
       "event_family": "score_table_visible",
       "time_s": 5,
-      "duration_s": null,
+      "duration_s": 24,
       "entity_family": "presentation",
       "entity_id": "score-table",
       "position_hint": "center field",
       "motion_hint": "score advance table and convoy charger labels visible",
       "audio_hint": "",
       "confidence": "medium",
-      "source_note": "Contact-sheet timing only; score-table sequence appears across multiple sampled frames."
+      "source_note": "Score-table subwindow covers 5.000s to 29.000s with 2 fps review cadence."
     },
     {
       "event_id": "evt-003",
       "event_family": "namco_presentation_visible",
-      "time_s": 25,
-      "duration_s": null,
+      "time_s": 24,
+      "duration_s": 12,
       "entity_family": "presentation",
       "entity_id": "namco",
       "position_hint": "lower center",
       "motion_hint": "Namco text visible below score advance table",
       "audio_hint": "",
       "confidence": "medium",
-      "source_note": "Approximate contact-sheet timestamp."
+      "source_note": "Namco presentation is visible near the end of the score-table sequence and before the rack handoff."
     },
     {
       "event_id": "evt-004",
       "event_family": "formation_rack_visible",
-      "time_s": 30,
-      "duration_s": null,
+      "time_s": 38,
+      "duration_s": 21.133333,
       "entity_family": "formation",
       "entity_id": "formation-1",
       "position_hint": "upper and middle field",
       "motion_hint": "full rack visible with top-rank and lower-rank alien families",
       "audio_hint": "",
       "confidence": "medium",
-      "source_note": "Use to judge whether this source can replace or complement the seed formation-entry window."
+      "source_note": "Rack becomes visible in the 34.000s to 42.000s handoff subwindow and remains visible through the late attract-pressure window."
     },
     {
       "event_id": "evt-005",
       "event_family": "game_over_state_visible",
-      "time_s": 45,
-      "duration_s": null,
+      "time_s": 38,
+      "duration_s": 21.133333,
       "entity_family": "presentation",
       "entity_id": "game-over",
       "position_hint": "center field",
       "motion_hint": "game over text with player Galaxip visible near lower field",
       "audio_hint": "",
       "confidence": "medium",
-      "source_note": "Contact sheet shows a game-over state after rack presentation."
+      "source_note": "GAME OVER remains visible during the rack and late-pressure windows, so late action should be treated as attract/demo or post-game evidence until classified."
     },
     {
       "event_id": "evt-006",
       "event_family": "player_pressure_moment_visible",
-      "time_s": 55,
-      "duration_s": null,
+      "time_s": 48,
+      "duration_s": 11.133333,
       "entity_family": "player",
       "entity_id": "galaxip-1",
       "position_hint": "lower field",
       "motion_hint": "player Galaxip and a visible shot or threat marker appear near the end of the clip",
       "audio_hint": "",
-      "confidence": "low",
-      "source_note": "Needs frame-accurate review; this may be an attract/demo moment rather than live player control."
+      "confidence": "medium",
+      "source_note": "Late-attract-pressure subwindow shows Galaxip, attacker/projectile or shot states, and explosions. Do not use as player-control authority yet because GAME OVER remains visible."
     }
   ],
   "open_questions": [

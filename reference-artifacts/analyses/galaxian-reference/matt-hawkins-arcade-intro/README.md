@@ -64,15 +64,31 @@ This source is currently strong for visual sequencing and beginning-phase
 semantic mapping. It is weak for audio identity because the encoded audio track
 is effectively silent in the first probe.
 
+## Subwindow Decision
+
+The first useful split is:
+
+- `title-mission`: `0.000s` to `6.000s`
+  - presentation/title semantics only
+- `score-advance-table`: `5.000s` to `29.000s`
+  - scoring and enemy-family naming semantics
+- `rack-handoff`: `34.000s` to `42.000s`
+  - rack composition and attract/game-over presentation
+- `late-attract-pressure`: `48.000s` to `59.133333s`
+  - visible Galaxip, attacker, shot/projectile, and explosion states
+
+The late pressure window is not yet safe as player-control authority because
+`GAME OVER` remains visible. Treat it as attract/demo evidence until compared
+against an active gameplay source.
+
 ## Remaining Required Artifacts
 
 Before this source becomes implementation evidence, add:
 
-- exact source window timestamps
-- clipped media or reproducible capture instructions for canonical subwindows
-- frame-accurate first-pass event log
-- confidence notes
+- frame-exact still sequences for the rack and late-pressure windows
+- clipped media or reproducible capture instructions only if rights are cleared
 - semantic profile updates
+- comparison against an active gameplay source
 
 ## Current Files
 
@@ -80,6 +96,17 @@ Before this source becomes implementation evidence, add:
   - exact `ffprobe` stream and format metadata
 - `frames/contact-sheet-0-59s.png`
   - 12-frame visual contact sheet sampled every 5 seconds
+- `frames/contact-sheet-1fps-0-59s.png`
+  - 60-frame visual contact sheet sampled every 1 second
+- `frames/subwindow-title-mission-0-6s.png`
+- `frames/subwindow-title-mission-0-6s-4fps.png`
+- `frames/subwindow-score-table-5-29s.png`
+- `frames/subwindow-score-table-5-29s-2fps.png`
+- `frames/subwindow-rack-display-28-42s.png`
+- `frames/subwindow-rack-handoff-34-42s-4fps.png`
+- `frames/subwindow-late-pressure-42-59s.png`
+- `frames/subwindow-late-pressure-48-59s-4fps.png`
+  - subwindow review contact sheets
 - `frames/still-000s.png`
 - `frames/still-005s.png`
 - `frames/still-010s.png`
@@ -96,6 +123,9 @@ Before this source becomes implementation evidence, add:
   - log-scaled waveform render for low-level audio review
 - `events/reference-events.json`
   - event-log scaffold with first-pass visual observations
+- `subwindows/reference-subwindows.json`
+  - subwindow boundaries, nominal frame ranges, tile cadence, observations, and
+    implementation-use notes
 
 The `clips` folder remains available for canonical subwindow extraction after
-frame-accurate review.
+rights review.
