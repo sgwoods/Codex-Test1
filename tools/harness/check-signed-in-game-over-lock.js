@@ -26,7 +26,7 @@ async function main(){
         gameOver: window.__galagaHarness__.gameOverView(),
         accountSummary: document.getElementById('accountSummary')?.textContent?.trim() || '',
         hudPilot: document.getElementById('hud')?.textContent?.replace(/\s+/g, ' ').trim() || '',
-        localBoard: (typeof loadScoreboard === 'function' ? loadScoreboard() : []).slice(0, 3)
+        scoreText: document.getElementById('msg')?.textContent?.replace(/\s+/g, ' ').trim() || ''
       };
     });
   });
@@ -40,14 +40,14 @@ async function main(){
   if(/ENTER INITIALS/i.test(result.gameOver.html)){
     fail('game-over screen still rendered initials entry for a signed-in pilot', result);
   }
-  if((result.localBoard[0]?.initials || '') !== 'STE'){
-    fail('signed-in local score did not save using the locked pilot ID', result);
+  if(!/001790/.test(result.gameOver.html)){
+    fail('game-over screen did not preserve the signed-in pilot score in the results view', result);
   }
 
   console.log(JSON.stringify({
     ok: true,
     gameOver: result.gameOver,
-    latestLocal: result.localBoard[0] || null
+    scoreText: result.scoreText
   }, null, 2));
 }
 

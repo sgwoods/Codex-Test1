@@ -1135,10 +1135,10 @@ function buildAttractScoreboardHtml(){
 }
 function buildGameOverState(score,stage,challenge=0){
  const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
- const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
+ const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
- const res=recordScore(score,shownStage,lockedPilotInitials?pilotInitials:'YOU');
- const editing=!!res.rank&&!lockedPilotInitials;
+ const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
+ const editing=!!res.rank&&!hasLockedPilotInitials;
  return{
   entryId:res.entry.id,
   rank:res.rank,
@@ -1148,7 +1148,7 @@ function buildGameOverState(score,stage,challenge=0){
   challenge:!!challenge,
   shownStage,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
-  initials:(lockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
+  initials:(hasLockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
   editing,
   remoteSubmitted:0
