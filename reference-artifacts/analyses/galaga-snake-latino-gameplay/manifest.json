@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaga-reference",
+  "source_id": "galaga-snake-latino-gameplay-360p-h264",
+  "title": "Galaga (1981) - Gameplay Arcade - Snake Latino",
+  "local_anchor": "/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4",
+  "catalog_date": "2026-04-26",
+  "source_type": "local gameplay video",
+  "file_observed": true,
+  "file_size_bytes": 15329343,
+  "container": "MP4 / ISO Base Media",
+  "video_codec": "H.264 / avc1",
+  "audio_codec": "AAC / mp4a",
+  "declared_resolution": "360p",
+  "duration_seconds": null,
+  "frame_rate": null,
+  "analysis_status": "cataloged-local-source",
+  "confidence": "medium",
+  "license_or_usage_note": "Local user-provided gameplay example. Use for internal reference analysis until provenance and redistribution rights are clarified.",
+  "best_use": [
+    "stage-opening timing",
+    "player movement traces",
+    "shot cadence",
+    "first-dive pressure",
+    "later gameplay review if the clip covers enough stages"
+  ],
+  "selected_windows": [
+    {
+      "window_id": "stage-1-opening",
+      "status": "planned",
+      "start_time_s": null,
+      "end_time_s": null,
+      "target_duration_s": 20,
+      "analysis_questions": [
+        "When does the first formation begin entering?",
+        "When does the formation settle?",
+        "When does the first dive begin?",
+        "What player movement and firing pattern appears before the first dive?"
+      ]
+    },
+    {
+      "window_id": "player-movement-sample",
+      "status": "planned",
+      "start_time_s": null,
+      "end_time_s": null,
+      "target_duration_s": 12,
+      "analysis_questions": [
+        "Can this source show tap correction, hold travel, reversal, and movement while firing?",
+        "Is the 360p source clear enough for player-position tracing?"
+      ]
+    }
+  ],
+  "notes": "Catalog entry only. The source video is intentionally not committed in this pass."
+}
