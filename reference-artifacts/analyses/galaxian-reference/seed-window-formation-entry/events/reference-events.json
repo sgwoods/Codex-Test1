@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "window_id": "seed-window-formation-entry",
+  "source_id": "yt-redsevennine-galaxian-1979-arcade-gameplay-720p60",
+  "status": "event-skeleton",
+  "timebase": {
+    "units": "seconds",
+    "source_start_time_s": null,
+    "source_end_time_s": null,
+    "frame_rate": null,
+    "notes": "Fill after local review or reproducible emulator capture."
+  },
+  "events": [
+    {
+      "event_id": "evt-001",
+      "event_family": "formation_entry_start",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "formation",
+      "entity_id": "formation-1",
+      "position_hint": "upper field",
+      "motion_hint": "entry path pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Expected first anchor for the scout-wave slice."
+    },
+    {
+      "event_id": "evt-002",
+      "event_family": "formation_rack_complete",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "formation",
+      "entity_id": "formation-1",
+      "position_hint": "upper field",
+      "motion_hint": "settled rack pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to measure entry-to-stable timing."
+    },
+    {
+      "event_id": "evt-003",
+      "event_family": "alien_dive_start",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "alien",
+      "entity_id": "first-diver",
+      "position_hint": "formation row pending observation",
+      "motion_hint": "dive path pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "First pressure event for scout-wave harness planning."
+    },
+    {
+      "event_id": "evt-004",
+      "event_family": "player_move_start",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "player",
+      "entity_id": "galaxip",
+      "position_hint": "lower field",
+      "motion_hint": "left/right pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to understand first movement correction."
+    },
+    {
+      "event_id": "evt-005",
+      "event_family": "player_shot",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "player_shot",
+      "entity_id": "shot-1",
+      "position_hint": "lower field upward",
+      "motion_hint": "single-shot cadence pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to establish first-shot cadence and cooldown model."
+    },
+    {
+      "event_id": "evt-006",
+      "event_family": "alien_dive_exit_or_return",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "alien",
+      "entity_id": "first-diver",
+      "position_hint": "pending observation",
+      "motion_hint": "return, exit, wrap, or hit pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Close the first-dive sequence."
+    }
+  ],
+  "open_questions": [
+    "Does the first selected window show a flagship or only lower-rank aliens?",
+    "Can player shot cooldown be measured from visible projectile lifetime?",
+    "Does the source frame rate allow reliable movement timing?",
+    "Should this window be replaced by a local emulator capture for repeatability?"
+  ]
+}
