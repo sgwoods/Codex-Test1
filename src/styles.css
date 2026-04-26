@@ -217,6 +217,11 @@ mask:
 #platformSplashCopy,#gamePreviewCopy{display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:#e8f4ff}
 .platformSplashEyebrow{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#7ef2ff}
 #gamePreviewBanner{display:inline-flex;align-self:flex-start;padding:4px 8px;border:1px solid rgba(255,216,109,.64);background:rgba(60,44,8,.76);font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#ffe39a}
+#gamePreviewHighlights{display:grid;gap:6px}
+#gamePreviewHighlights span{display:block;border-left:2px solid rgba(255,216,109,.72);padding:5px 8px;background:rgba(255,216,109,.08);color:#f9fbff}
+#gamePreviewMilestones{display:grid;gap:6px;margin-top:2px}
+.gamePreviewMilestone{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(136,245,255,.14);background:rgba(8,18,35,.62);padding:7px 9px;font:400 11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff}
+.gamePreviewMilestone b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#ffe39a}
 #feedbackPanel h2{margin:0;font-size:20px;letter-spacing:.03em}
 #feedbackPanel label{display:block;margin:8px 0 5px;font-size:14px;color:#bfefff}
 #feedbackForm{display:flex;flex-direction:column;min-height:0}

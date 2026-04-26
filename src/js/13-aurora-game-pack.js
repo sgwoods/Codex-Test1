@@ -742,6 +742,28 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   noticeHint:'Galaxy Guardians is a shell preview for the next Platinum application.',
   pickerHint:'CHOOSE GAME TO SWITCH BACK TO AURORA'
  }),
+ preview:Object.freeze({
+  banner:'SNEAK PEEK',
+  title:'Galaxy Guardians',
+  subtitle:'SECOND GAME PREVIEW ON PLATINUM',
+  image:'assets/galaxy-guardians-coming-soon.svg',
+  imageAlt:'Galaxy Guardians sneak peek splash art',
+  cardLine:'Sneak peek shell with pack-owned preview identity; gameplay integration remains offline.',
+  summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.',
+  highlights:Object.freeze([
+   'Scout-wave formation pressure with flagship escorts',
+   'Single-shot arcade pacing and wrap-around threat planning',
+   'Shared Platinum controls, services, replay, and release shell'
+  ]),
+  milestones:Object.freeze([
+   Object.freeze({label:'Pack identity and shell preview',state:'online'}),
+   Object.freeze({label:'Reference footage and movement map',state:'next'}),
+   Object.freeze({label:'Minimal scout-wave playable slice',state:'planned'}),
+   Object.freeze({label:'Application-owned scoring harness',state:'planned'})
+  ]),
+  launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
+ }),
  shellThemes:Object.freeze([
   Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
   Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'signal-crimson'}),
@@ -1008,6 +1030,23 @@ function currentGamePackFrontDoor(){
  });
 }
 
+function currentGamePackPreview(pack=currentGamePack()){
+ const preview=pack?.preview||{};
+ return Object.freeze({
+  banner:preview.banner||'PREVIEW',
+  title:preview.title||pack?.metadata?.title||'Game Preview',
+  subtitle:preview.subtitle||'PACK PREVIEW ON PLATINUM',
+  image:preview.image||'',
+  imageAlt:preview.imageAlt||`${preview.title||pack?.metadata?.title||'Game'} preview art`,
+  cardLine:preview.cardLine||'Preview shell while gameplay integration is still in progress.',
+  summary:preview.summary||`${pack?.metadata?.title||'This game'} is a preview-only Platinum application right now.`,
+  detail:preview.detail||'Aurora Galactica remains the current playable cabinet while this pack is being prepared.',
+  highlights:Array.isArray(preview.highlights)?preview.highlights:[],
+  milestones:Array.isArray(preview.milestones)?preview.milestones:[],
+  launchFallbackToast:preview.launchFallbackToast||`${pack?.metadata?.title||'This pack'} is preview-only. Launching Aurora Galactica.`
+ });
+}
+
 function currentPlatformPackLabel(){
  const pack=currentGamePack();
  return `${PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'}`;
@@ -1146,6 +1185,7 @@ window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
+window.currentGamePackPreview=currentGamePackPreview;
 window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
 window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
 window.currentGamePackAudioTheme=currentGamePackAudioTheme;

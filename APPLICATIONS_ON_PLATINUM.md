@@ -33,7 +33,8 @@ Aurora should remain the reference application when we ask:
 
 ### Galaxy Guardians
 
-`Galaxy Guardians` is currently a preview-only application shell.
+`Galaxy Guardians` is currently a preview-only application shell and second-game
+sneak peek.
 
 Right now it proves:
 
@@ -41,6 +42,8 @@ Right now it proves:
 - preview-only behavior inside the platform
 - alternate identity and framing
 - future second-game positioning
+- pack-owned preview content for the picker and preview modal
+- safe fallback to `Aurora Galactica` when a player tries to launch gameplay
 
 It does not yet prove:
 
@@ -142,6 +145,10 @@ Near-term Aurora application work should now focus on:
 
 ### Galaxy Guardians next proof
 
+The current sneak peek is intentionally still non-playable. It should be used to
+keep the Platinum pack contract honest while the second game is still being
+specified.
+
 The best next application proof is a dev-only playable slice that includes:
 
 - formation rack
@@ -153,6 +160,15 @@ The best next application proof is a dev-only playable slice that includes:
 - life loss and game over flow
 
 That is enough to test the platform without prematurely shipping a second game.
+
+Before that slice starts, capture the reference evidence needed for a Galaxian-
+style ruleset:
+
+- preserved gameplay clips
+- formation-entry and dive timing notes
+- flagship and escort behavior notes
+- scoring table and single-shot constraints
+- a small harness plan for the first scout-wave slice
 
 ## Related Docs
 

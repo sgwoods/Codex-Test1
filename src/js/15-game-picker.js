@@ -48,10 +48,11 @@ function renderGamePicker(){
   const caps=describePackCaps(pack);
   const flagHtml=caps.length?`<div class="gamePickerCardFlags">${caps.map(label=>`<span class="gamePickerFlag">${label}</span>`).join('')}</div>`:'';
   const playable=pack.metadata?.playable!==0&&pack.metadata?.playable!==false;
-  const actionLabel=isActive?'Selected':(playable?'Select Game':'Preview Shell');
+  const actionLabel=isActive?'Selected':(playable?'Select Game':'Preview Sneak Peek');
+  const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':'Shell preview only while gameplay integration is still in progress'}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Return to wait mode before switching to a different game pack.'

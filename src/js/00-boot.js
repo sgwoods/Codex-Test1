@@ -19,6 +19,14 @@ const platformSplashClose=document.getElementById('platformSplashClose');
 const gamePreviewModal=document.getElementById('gamePreviewModal');
 const gamePreviewPanel=document.getElementById('gamePreviewPanel');
 const gamePreviewClose=document.getElementById('gamePreviewClose');
+const gamePreviewBanner=document.getElementById('gamePreviewBanner');
+const gamePreviewTitle=document.getElementById('gamePreviewTitle');
+const gamePreviewSubtitle=document.getElementById('gamePreviewSubtitle');
+const gamePreviewImage=document.getElementById('gamePreviewImage');
+const gamePreviewSummary=document.getElementById('gamePreviewSummary');
+const gamePreviewDetail=document.getElementById('gamePreviewDetail');
+const gamePreviewHighlights=document.getElementById('gamePreviewHighlights');
+const gamePreviewMilestones=document.getElementById('gamePreviewMilestones');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
@@ -1506,6 +1514,35 @@ function syncGamePreviewUi(){
  if(!gamePreviewModal)return;
  gamePreviewModal.classList.toggle('open',gamePreviewOpen);
  gamePreviewModal.setAttribute('aria-hidden',gamePreviewOpen?'false':'true');
+ if(!gamePreviewOpen)return;
+ const preview=typeof currentGamePackPreview==='function'?currentGamePackPreview():null;
+ if(!preview)return;
+ if(gamePreviewBanner)gamePreviewBanner.textContent=preview.banner||'PREVIEW';
+ if(gamePreviewTitle)gamePreviewTitle.textContent=preview.title||'Game Preview';
+ if(gamePreviewSubtitle)gamePreviewSubtitle.textContent=preview.subtitle||'PACK PREVIEW ON PLATINUM';
+ if(gamePreviewImage){
+  if(preview.image){
+   gamePreviewImage.src=preview.image;
+   gamePreviewImage.hidden=false;
+  }else gamePreviewImage.hidden=true;
+  gamePreviewImage.alt=preview.imageAlt||`${preview.title||'Game'} preview art`;
+ }
+ if(gamePreviewSummary)gamePreviewSummary.textContent=preview.summary||'Preview-only Platinum application.';
+ if(gamePreviewDetail)gamePreviewDetail.textContent=preview.detail||'Aurora Galactica remains the current playable cabinet.';
+ if(gamePreviewHighlights){
+  const highlights=Array.isArray(preview.highlights)?preview.highlights:[];
+  gamePreviewHighlights.innerHTML=highlights.map(item=>`<span>${String(item).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}</span>`).join('');
+  gamePreviewHighlights.hidden=!highlights.length;
+ }
+ if(gamePreviewMilestones){
+  const milestones=Array.isArray(preview.milestones)?preview.milestones:[];
+  gamePreviewMilestones.innerHTML=milestones.map(item=>{
+   const label=String(item?.label||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+   const state=String(item?.state||'planned').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+   return `<div class="gamePreviewMilestone"><span>${label}</span><b>${state}</b></div>`;
+  }).join('');
+  gamePreviewMilestones.hidden=!milestones.length;
+ }
 }
 function syncTestUi(){
  const cfg=loadTestCfg();
@@ -1617,10 +1654,11 @@ function closeGamePreview(force=0){
 }
 function restorePlayableGamePackForLaunch(){
  if(typeof currentGamePackPlayable!=='function'||currentGamePackPlayable())return 0;
+ const preview=typeof currentGamePackPreview==='function'?currentGamePackPreview():null;
  if(typeof installGamePack==='function')installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
  closeGamePreview(1);
  if(typeof draw==='function')draw();
- showToast('Galaxy Guardians is preview-only. Launching Aurora Galactica.');
+ showToast(preview?.launchFallbackToast||'Preview pack is not playable yet. Launching Aurora Galactica.');
  return 1;
 }
 function closeHelp(force=0){

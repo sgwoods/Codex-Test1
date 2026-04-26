@@ -55,7 +55,9 @@ Current proof points:
   - hosted `/beta`
   - hosted `/production`
 - the shell supports pack selection and pack-owned framing accents
-- `Galaxy Guardians` exists as a preview-only application shell on top of the same platform
+- `Galaxy Guardians` exists as a preview-only second-game sneak peek on top of the same platform
+- the second-game preview content is now pack-owned instead of hardcoded into
+  the shell surface
 - platform-only harnesses exist alongside Aurora gameplay harnesses
 - the build pipeline now generates hosted documentation pages as first-class release artifacts
 
@@ -149,7 +151,8 @@ Current application set:
   - owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content
 - `Galaxy Guardians`
   - current preview-only application shell
-  - useful for proving the pack-selection path and future identity surfaces without pretending gameplay exists yet
+  - useful for proving the pack-selection path, preview-modal contract, alternate
+    shell identity, and safe launch fallback without pretending gameplay exists yet
 
 The application-side separation is documented in:
 
@@ -276,7 +279,15 @@ Every meaningful `x.y` release should have:
 
 The best next platform proof is not a huge second-game launch.
 
-It is a small but playable second application slice that proves:
+The current first step is a pack-owned `Galaxy Guardians` sneak peek that proves:
+
+- the picker can expose a second application
+- preview content can live in the pack contract
+- the shell can show alternate identity and status without persisting a
+  preview-only trap state
+- launch fallback can return players to the playable Aurora cabinet
+
+The next step is a small but playable second application slice that proves:
 
 - the pack contract is real
 - platform services stay shared
