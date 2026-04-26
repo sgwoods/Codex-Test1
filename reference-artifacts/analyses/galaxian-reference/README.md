@@ -9,7 +9,7 @@ It follows the process in:
 
 ## Status
 
-Current status: `source-discovery-seed`
+Current status: `validator-backed-source-discovery-seed`
 
 This is not yet a canonical gameplay baseline. It is the first manifest and
 window scaffold we will use to automate the rest of the process.
@@ -21,6 +21,17 @@ window scaffold we will use to automate the rest of the process.
 3. Create an event-log skeleton before implementing a playable slice.
 4. Convert the first analyzed window into a semantic scout-wave profile.
 5. Use that profile to define harness targets for `Galaxy Guardians`.
+
+## Validation
+
+Run:
+
+```sh
+npm run harness:check:classic-arcade-ingestion
+```
+
+The validator checks the source manifest, selected windows, event-log schema,
+confidence labels, artifact target folders, and semantic profile anchors.
 
 ## Folder Layout
 
