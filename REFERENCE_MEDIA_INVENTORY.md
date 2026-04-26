@@ -53,7 +53,7 @@ future Platinum game ingestion.
 | Stage 4 fairness findings | `reference-artifacts/analyses/stage4-fairness/README.md` | durable record of what did and did not help Stage 4 fairness |
 | External `Galaga5` reference | `reference-artifacts/analyses/external-galaga5/README.md` | implementation-pattern comparison, not canonical fidelity evidence |
 | Galaxian mechanics archive | `reference-artifacts/analyses/galaxian-mechanics/README.md` | early sibling-project archive for future `Galaxian`-derived work |
-| Galaxian reference ingestion seed | `reference-artifacts/analyses/galaxian-reference/README.md` | first source manifest, formation-entry window scaffold, Matt Hawkins arcade-intro scaffold, ARCADE'S LOUNGE Level 5 scaffold, event-log skeletons, and semantic scout-wave profiles for `Galaxy Guardians` |
+| Galaxian reference ingestion seed | `reference-artifacts/analyses/galaxian-reference/README.md` | first source manifest, formation-entry window scaffold, Matt Hawkins arcade-intro scaffold, ARCADE'S LOUNGE Level 5 scaffold, Nenriki 15-wave session scaffold, event-log skeletons, and semantic scout-wave profiles for `Galaxy Guardians` |
 
 ## Current Gaps
 

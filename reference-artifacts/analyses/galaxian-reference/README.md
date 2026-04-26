@@ -49,6 +49,10 @@ confidence labels, artifact target folders, and semantic profile anchors.
   - local later-pressure / Level 5 source scaffold
 - `arcades-lounge-level-5/events/reference-events.json`
   - progression and later-pressure event-log skeleton
+- `nenriki-15-wave-session/`
+  - local long-session / 15-wave source scaffold
+- `nenriki-15-wave-session/events/reference-events.json`
+  - wave progression and pressure-scaling event-log skeleton
 - `seed-window-formation-entry/semantic-scout-wave-profile.md`
   - first semantic model scaffold
 
