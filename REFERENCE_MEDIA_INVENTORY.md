@@ -23,6 +23,7 @@ future Platinum game ingestion.
 | Challenge stage reference pack | `reference-artifacts/analyses/challenge-stage-reference/README.md` | challenge-stage contact sheet and stable observations | non-attacking bonus-stage behavior, readability, results framing |
 | First challenge-stage baseline | `reference-artifacts/analyses/first-challenge-stage/README.md` | focused challenge-stage baseline from original capture | early challenge motion, group readability, scoreable windows |
 | Release reference pack | `reference-artifacts/analyses/release-reference-pack/README.md` | curated windows for capture, transition, Stage 4, later pressure | release-shaping comparisons beyond stage 1 |
+| Galaga Gameplay Arcade - Snake Latino | `reference-artifacts/analyses/galaga-snake-latino-gameplay/README.md` | local 360p H.264 gameplay video catalog entry | future stage-opening, player-movement, shot-cadence, and later-pressure windows |
 | Galaga manual / cabinet-era material | `reference-artifacts/manuals/galaga-1981-namco/README.md` | manual-backed rules and presentation anchors | source-of-truth rule checking before tuning or release claims |
 | Reference audio clips | `src/assets/reference-audio/` | clipped reference cues mirrored into app assets | cue alignment, phrase comparison, reference-theme playback |
 
