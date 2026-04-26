@@ -2,33 +2,48 @@
 
 Window id: `nenriki-15-wave-session`
 
-Status: `scaffold`
+Status: `candidate-subwindows`
 
 This profile translates the locally provided 15-wave `Galaxian` source into
 questions and candidate semantics for future `Galaxy Guardians` progression,
 wave-transition, and later-pressure work.
 
-It should not be treated as implementation authority until selected sub-windows
-have event timestamps and confidence labels.
+It should not be treated as implementation authority until selected subwindows
+have exact event timestamps, clips or reproducible extraction commands, and
+confidence labels.
+
+## First-Pass Source Read
+
+- Duration: `944.093583s`
+- Video: 1080x1234 H.264, 60 fps
+- Audio: AAC stereo 44.1 kHz
+- Full-source waveform probe: mean `-19.8 dB`, max `-0.2 dB`
+- Overview artifacts show a long playable session arc with readable repeated
+  wave states, active lower-field player behavior, and late-session pressure.
+- Best current use is progression scouting and window selection, not direct
+  tuning.
 
 ## Long-Session Contract
 
-To verify:
+Current interpretation:
 
-- whether all 15 waves are visible and segmentable
-- how wave setup repeats after each clear
-- how pressure changes from opening to mid-run to late-session windows
-- whether score, lives, or wave indicators are readable enough for tagging
+- the source appears long enough to support opening, middle, and later pressure
+  comparisons
+- wave setup and player survival are visible at overview scale
+- exact wave segmentation is still pending
+- score, lives, and some state changes appear readable enough for candidate
+  tagging, but they need frame-level review
 
 ## Progression Semantics
 
-To verify:
+Candidate semantics:
 
-- repeated wave-entry cadence
-- wave-clear to next-wave timing
-- whether formation composition changes
-- whether dive density, enemy shot density, or player survival pressure
-  increases in clear bands
+- repeated settled-rack states should become explicit `wave_setup` events
+- clean clears should become `wave_transition` events with source timestamps
+- opening, mid-session, and late-session pressure bands should stay separate so
+  the first `Galaxy Guardians` preview can grow without flattening progression
+- attack density and projectile pressure should be compared with ARCADE'S LOUNGE
+  Level 5 traces before any tuning decision
 
 ## Flagship / Escort Frequency
 
@@ -41,17 +56,17 @@ To verify:
 
 ## Player Strategy Over Time
 
-To verify:
+Candidate questions:
 
-- opening wave movement style
-- mid-run evasive movement style
-- late-session survival movement style
+- opening wave movement style from `0.000-60.000s`
+- mid-run evasive movement style from `180.000-240.000s`
+- late-session survival movement style from `660.866-720.866s`
 - shot cadence under escalating pressure
 - whether player behavior suggests persona profiles for future automated play
 
 ## First Harness Implications
 
-Draft targets if the source has clear progression evidence:
+Draft targets if the source passes exact subwindow review:
 
 - wave transitions emit distinct progression events
 - pressure bands can be described separately from opening-wave behavior
@@ -62,7 +77,8 @@ Draft targets if the source has clear progression evidence:
 
 ## Open Questions
 
-- Which sub-window should be extracted first?
+- Which generated subwindow should be promoted first?
 - Can the clip support both timing analysis and semantic review?
-- Is this the best source for long-session progression, or only one comparison
+- Is this the best source for long-session progression, or one comparison
   example among several?
+- Which exact wave-transition timestamp is cleanest?

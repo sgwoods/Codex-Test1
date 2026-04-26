@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/harness/run-galaxian-reference-cycle.js",
+  "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
+  "window_id": "arcades-lounge-level-5",
+  "created_date": "2026-04-26T20:22:28.244Z",
+  "purpose": "Compare active-play Galaxip x-position and pressure-component traces across all first-pass Level 5 subwindows.",
+  "summaries": [
+    {
+      "subwindow_id": "opening-rack-pressure",
+      "start_time_s": 0,
+      "duration_s": 8,
+      "trace_dir": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/traces/opening-rack-pressure-galaxip-x",
+      "summary": {
+        "sample_count": 201,
+        "player_sample_count": 201,
+        "player_detection_rate": 1,
+        "player_x_norm_min": 0.2235,
+        "player_x_norm_max": 0.6558,
+        "player_x_norm_range": 0.4323,
+        "mean_abs_player_delta_per_sample": 0.0105,
+        "max_colored_component_count": 73,
+        "max_lower_pressure_component_count": 14,
+        "max_projectile_like_count": 14,
+        "max_attacker_like_count": 60
+      }
+    },
+    {
+      "subwindow_id": "early-attacks",
+      "start_time_s": 8,
+      "duration_s": 12,
+      "trace_dir": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/traces/early-attacks-galaxip-x",
+      "summary": {
+        "sample_count": 300,
+        "player_sample_count": 300,
+        "player_detection_rate": 1,
+        "player_x_norm_min": 0.2246,
+        "player_x_norm_max": 0.6556,
+        "player_x_norm_range": 0.431,
+        "mean_abs_player_delta_per_sample": 0.0083,
+        "max_colored_component_count": 68,
+        "max_lower_pressure_component_count": 20,
+        "max_projectile_like_count": 14,
+        "max_attacker_like_count": 55
+      }
+    },
+    {
+      "subwindow_id": "mid-pressure",
+      "start_time_s": 20,
+      "duration_s": 20,
+      "trace_dir": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/traces/mid-pressure-galaxip-x",
+      "summary": {
+        "sample_count": 501,
+        "player_sample_count": 487,
+        "player_detection_rate": 0.972,
+        "player_x_norm_min": 0.2576,
+        "player_x_norm_max": 0.768,
+        "player_x_norm_range": 0.5104,
+        "mean_abs_player_delta_per_sample": 0.0104,
+        "max_colored_component_count": 86,
+        "max_lower_pressure_component_count": 18,
+        "max_projectile_like_count": 68,
+        "max_attacker_like_count": 43
+      }
+    },
+    {
+      "subwindow_id": "late-cleanup",
+      "start_time_s": 40,
+      "duration_s": 18.24,
+      "trace_dir": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/traces/late-cleanup-galaxip-x",
+      "summary": {
+        "sample_count": 456,
+        "player_sample_count": 456,
+        "player_detection_rate": 1,
+        "player_x_norm_min": 0.2235,
+        "player_x_norm_max": 0.7707,
+        "player_x_norm_range": 0.5472,
+        "mean_abs_player_delta_per_sample": 0.0082,
+        "max_colored_component_count": 30,
+        "max_lower_pressure_component_count": 17,
+        "max_projectile_like_count": 9,
+        "max_attacker_like_count": 24
+      }
+    }
+  ]
+}

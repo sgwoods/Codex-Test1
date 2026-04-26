@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+  "parent_window_id": "nenriki-15-wave-session",
+  "status": "candidate-subwindows",
+  "source_format_duration_s": 944.093583,
+  "created_date": "2026-04-26T20:22:28.372Z",
+  "notes": "Long-session candidate windows are derived from coarse overview artifacts and require visual review before event promotion.",
+  "subwindows": [
+    {
+      "subwindow_id": "opening-progression-scout",
+      "start_time_s": 0,
+      "end_time_s": 60,
+      "role": "long-session-opening-map",
+      "review_artifacts": [
+        "frames/contact-sheet-10s-opening-0-180s.png",
+        "frames/still-000s.png",
+        "frames/still-030s.png"
+      ],
+      "implementation_use": "Scout opening progression and decide whether a shorter first active-play window should be extracted."
+    },
+    {
+      "subwindow_id": "mid-session-candidate",
+      "start_time_s": 180,
+      "end_time_s": 240,
+      "role": "mid-session-pressure-map",
+      "review_artifacts": [
+        "frames/contact-sheet-30s-overview.png"
+      ],
+      "implementation_use": "Candidate mid-run pressure window; exact timing pending visual review."
+    },
+    {
+      "subwindow_id": "late-session-candidate",
+      "start_time_s": 660.8655080999999,
+      "end_time_s": 720.8655080999999,
+      "role": "late-session-pressure-map",
+      "review_artifacts": [
+        "frames/contact-sheet-30s-overview.png"
+      ],
+      "implementation_use": "Candidate late-run pressure window; exact timing pending visual review."
+    }
+  ],
+  "next_review_steps": [
+    "Inspect 30 second overview sheet and opening 10 second sheet.",
+    "Promote the best opening, mid-session, and late-session windows into exact subwindows.",
+    "Run trace-classic-arcade-video.js only on selected 20-60 second windows to avoid huge generated files."
+  ]
+}

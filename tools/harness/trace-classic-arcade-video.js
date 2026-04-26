@@ -342,7 +342,7 @@ function main(){
     '-'
   ], {
     encoding: null,
-    maxBuffer: 1024 * 1024 * 128
+    maxBuffer: 1024 * 1024 * 512
   });
 
   if(ffmpeg.status !== 0){

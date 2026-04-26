@@ -1,0 +1,5297 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/harness/trace-classic-arcade-video.js",
+  "source": "/Users/sgwoods/Downloads/GALAXIAN (1979) - LEVEL 5 passed ! Video game - ARCADE'S LOUNGE (1080p, h264).mp4",
+  "window_id": "arcades-lounge-level-5/opening-rack-pressure",
+  "start_time_s": 0,
+  "duration_s": 8,
+  "sample_fps": 25,
+  "analysis_resolution": {
+    "width": 270,
+    "height": 480
+  },
+  "confidence_note": "First-pass color/component heuristic. Use for review prioritization, not final implementation tuning until manually spot-checked.",
+  "summary": {
+    "sample_count": 201,
+    "player_sample_count": 201,
+    "player_detection_rate": 1,
+    "player_x_norm_min": 0.2235,
+    "player_x_norm_max": 0.6558,
+    "player_x_norm_range": 0.4323,
+    "mean_abs_player_delta_per_sample": 0.0105,
+    "max_colored_component_count": 73,
+    "max_lower_pressure_component_count": 14,
+    "max_projectile_like_count": 14,
+    "max_attacker_like_count": 60
+  },
+  "samples": [
+    {
+      "frame_index": 0,
+      "time_s": 0,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 1,
+      "time_s": 0.04,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 2,
+      "time_s": 0.08,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 11,
+        "colored": 52,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 3,
+      "time_s": 0.12,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 6,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 4,
+      "time_s": 0.16,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 10,
+        "colored": 51,
+        "yellow-orange": 1,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 5,
+      "time_s": 0.2,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 70,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 11,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 10,
+        "colored": 54,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 6,
+      "time_s": 0.24,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 10,
+        "colored": 52,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 7,
+      "time_s": 0.28,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 10,
+        "colored": 52,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 8,
+      "time_s": 0.32,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 71,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 12,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 10,
+        "colored": 54,
+        "cyan-blue": 6,
+        "yellow-orange": 1
+      }
+    },
+    {
+      "frame_index": 9,
+      "time_s": 0.36,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 10,
+        "colored": 53,
+        "yellow-orange": 1,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 10,
+      "time_s": 0.4,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 73,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 14,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 11,
+        "colored": 56,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 11,
+      "time_s": 0.44,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 10,
+        "colored": 53,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 12,
+      "time_s": 0.48,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 13,
+      "time_s": 0.52,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 14,
+      "time_s": 0.56,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 8,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 15,
+      "time_s": 0.6,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 71,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 14,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 10,
+        "colored": 56,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 16,
+      "time_s": 0.64,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 71,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 14,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 56,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 17,
+      "time_s": 0.68,
+      "player": {
+        "x_px": 89.68,
+        "y_px": 365.32,
+        "x_norm": 0.3322,
+        "y_norm": 0.7611,
+        "pixel_count": 41,
+        "bbox": [
+          84,
+          363,
+          95,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 12,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 54,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 18,
+      "time_s": 0.72,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 10,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 11,
+        "colored": 52,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 19,
+      "time_s": 0.76,
+      "player": {
+        "x_px": 93.5,
+        "y_px": 364.96,
+        "x_norm": 0.3463,
+        "y_norm": 0.7603,
+        "pixel_count": 50,
+        "bbox": [
+          88,
+          360,
+          99,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "purple": 1,
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 20,
+      "time_s": 0.8,
+      "player": {
+        "x_px": 95.48,
+        "y_px": 364.94,
+        "x_norm": 0.3536,
+        "y_norm": 0.7603,
+        "pixel_count": 52,
+        "bbox": [
+          90,
+          360,
+          101,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "purple": 1,
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 21,
+      "time_s": 0.84,
+      "player": {
+        "x_px": 96.3,
+        "y_px": 366.2,
+        "x_norm": 0.3567,
+        "y_norm": 0.7629,
+        "pixel_count": 20,
+        "bbox": [
+          94,
+          363,
+          99,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 22,
+      "time_s": 0.88,
+      "player": {
+        "x_px": 98.4,
+        "y_px": 365.76,
+        "x_norm": 0.3644,
+        "y_norm": 0.762,
+        "pixel_count": 25,
+        "bbox": [
+          96,
+          360,
+          101,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 23,
+      "time_s": 0.92,
+      "player": {
+        "x_px": 100.32,
+        "y_px": 366.41,
+        "x_norm": 0.3715,
+        "y_norm": 0.7634,
+        "pixel_count": 22,
+        "bbox": [
+          98,
+          363,
+          103,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 11,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 53,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 24,
+      "time_s": 0.96,
+      "player": {
+        "x_px": 104.08,
+        "y_px": 365.39,
+        "x_norm": 0.3855,
+        "y_norm": 0.7612,
+        "pixel_count": 36,
+        "bbox": [
+          100,
+          360,
+          107,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 25,
+      "time_s": 1,
+      "player": {
+        "x_px": 105.81,
+        "y_px": 364.84,
+        "x_norm": 0.3919,
+        "y_norm": 0.7601,
+        "pixel_count": 31,
+        "bbox": [
+          102,
+          360,
+          108,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 26,
+      "time_s": 1.04,
+      "player": {
+        "x_px": 110.31,
+        "y_px": 365.23,
+        "x_norm": 0.4085,
+        "y_norm": 0.7609,
+        "pixel_count": 39,
+        "bbox": [
+          106,
+          360,
+          115,
+          370
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 52,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 27,
+      "time_s": 1.08,
+      "player": {
+        "x_px": 114.89,
+        "y_px": 364.89,
+        "x_norm": 0.4255,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          114,
+          360,
+          117,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 28,
+      "time_s": 1.12,
+      "player": {
+        "x_px": 114.56,
+        "y_px": 364.92,
+        "x_norm": 0.4243,
+        "y_norm": 0.7602,
+        "pixel_count": 36,
+        "bbox": [
+          110,
+          360,
+          119,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 13,
+        "colored": 46,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 29,
+      "time_s": 1.16,
+      "player": {
+        "x_px": 115.86,
+        "y_px": 364.76,
+        "x_norm": 0.4291,
+        "y_norm": 0.7599,
+        "pixel_count": 29,
+        "bbox": [
+          112,
+          360,
+          118,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 30,
+      "time_s": 1.2,
+      "player": {
+        "x_px": 117.79,
+        "y_px": 364.82,
+        "x_norm": 0.4362,
+        "y_norm": 0.76,
+        "pixel_count": 28,
+        "bbox": [
+          114,
+          360,
+          120,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 13,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 31,
+      "time_s": 1.24,
+      "player": {
+        "x_px": 125.54,
+        "y_px": 365,
+        "x_norm": 0.465,
+        "y_norm": 0.7604,
+        "pixel_count": 24,
+        "bbox": [
+          124,
+          360,
+          129,
+          369
+        ]
+      },
+      "colored_component_count": 70,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 12,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 54,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 32,
+      "time_s": 1.28,
+      "player": {
+        "x_px": 127.88,
+        "y_px": 365.48,
+        "x_norm": 0.4736,
+        "y_norm": 0.7614,
+        "pixel_count": 25,
+        "bbox": [
+          126,
+          361,
+          131,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 11,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 53,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 33,
+      "time_s": 1.32,
+      "player": {
+        "x_px": 129.6,
+        "y_px": 365.5,
+        "x_norm": 0.48,
+        "y_norm": 0.7615,
+        "pixel_count": 20,
+        "bbox": [
+          128,
+          363,
+          133,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 34,
+      "time_s": 1.36,
+      "player": {
+        "x_px": 127.7,
+        "y_px": 364.87,
+        "x_norm": 0.4729,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          124,
+          360,
+          129,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 35,
+      "time_s": 1.4,
+      "player": {
+        "x_px": 129.7,
+        "y_px": 364.87,
+        "x_norm": 0.4804,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          126,
+          360,
+          131,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 36,
+      "time_s": 1.44,
+      "player": {
+        "x_px": 137.56,
+        "y_px": 364.88,
+        "x_norm": 0.5095,
+        "y_norm": 0.7602,
+        "pixel_count": 25,
+        "bbox": [
+          136,
+          360,
+          141,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 37,
+      "time_s": 1.48,
+      "player": {
+        "x_px": 139.7,
+        "y_px": 365.26,
+        "x_norm": 0.5174,
+        "y_norm": 0.761,
+        "pixel_count": 23,
+        "bbox": [
+          138,
+          362,
+          143,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 5,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 38,
+      "time_s": 1.52,
+      "player": {
+        "x_px": 138.1,
+        "y_px": 364.8,
+        "x_norm": 0.5115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          136,
+          360,
+          139,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 46,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 39,
+      "time_s": 1.56,
+      "player": {
+        "x_px": 140.1,
+        "y_px": 364.8,
+        "x_norm": 0.5189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          138,
+          360,
+          141,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 5,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 40,
+      "time_s": 1.6,
+      "player": {
+        "x_px": 146.91,
+        "y_px": 365.31,
+        "x_norm": 0.5441,
+        "y_norm": 0.7611,
+        "pixel_count": 32,
+        "bbox": [
+          144,
+          362,
+          151,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 5,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 41,
+      "time_s": 1.64,
+      "player": {
+        "x_px": 147.36,
+        "y_px": 364.9,
+        "x_norm": 0.5458,
+        "y_norm": 0.7602,
+        "pixel_count": 50,
+        "bbox": [
+          142,
+          360,
+          153,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 42,
+      "time_s": 1.68,
+      "player": {
+        "x_px": 148.1,
+        "y_px": 364.8,
+        "x_norm": 0.5485,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          146,
+          360,
+          149,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 5,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 43,
+      "time_s": 1.72,
+      "player": {
+        "x_px": 150.11,
+        "y_px": 364.89,
+        "x_norm": 0.5559,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          148,
+          360,
+          151,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 44,
+      "time_s": 1.76,
+      "player": {
+        "x_px": 152.11,
+        "y_px": 364.89,
+        "x_norm": 0.5634,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          150,
+          360,
+          153,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 13,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 45,
+      "time_s": 1.8,
+      "player": {
+        "x_px": 157.36,
+        "y_px": 365.13,
+        "x_norm": 0.5828,
+        "y_norm": 0.7607,
+        "pixel_count": 47,
+        "bbox": [
+          152,
+          361,
+          163,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 11,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 46,
+      "time_s": 1.84,
+      "player": {
+        "x_px": 157.97,
+        "y_px": 365.06,
+        "x_norm": 0.5851,
+        "y_norm": 0.7605,
+        "pixel_count": 35,
+        "bbox": [
+          154,
+          361,
+          161,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 11,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 47,
+      "time_s": 1.88,
+      "player": {
+        "x_px": 159.69,
+        "y_px": 365.25,
+        "x_norm": 0.5914,
+        "y_norm": 0.7609,
+        "pixel_count": 16,
+        "bbox": [
+          158,
+          363,
+          161,
+          368
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 48,
+      "time_s": 1.92,
+      "player": {
+        "x_px": 161.65,
+        "y_px": 365.47,
+        "x_norm": 0.5987,
+        "y_norm": 0.7614,
+        "pixel_count": 17,
+        "bbox": [
+          160,
+          363,
+          163,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 49,
+      "time_s": 1.96,
+      "player": {
+        "x_px": 163.65,
+        "y_px": 365.47,
+        "x_norm": 0.6061,
+        "y_norm": 0.7614,
+        "pixel_count": 17,
+        "bbox": [
+          162,
+          363,
+          165,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 50,
+      "time_s": 2,
+      "player": {
+        "x_px": 167.63,
+        "y_px": 365,
+        "x_norm": 0.6209,
+        "y_norm": 0.7604,
+        "pixel_count": 30,
+        "bbox": [
+          164,
+          361,
+          170,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 51,
+      "time_s": 2.04,
+      "player": {
+        "x_px": 169.7,
+        "y_px": 365.1,
+        "x_norm": 0.6285,
+        "y_norm": 0.7606,
+        "pixel_count": 30,
+        "bbox": [
+          166,
+          361,
+          172,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 5,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 13,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 52,
+      "time_s": 2.08,
+      "player": {
+        "x_px": 177,
+        "y_px": 365.41,
+        "x_norm": 0.6556,
+        "y_norm": 0.7613,
+        "pixel_count": 17,
+        "bbox": [
+          176,
+          362,
+          179,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 6,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 53,
+      "time_s": 2.12,
+      "player": {
+        "x_px": 177.06,
+        "y_px": 365.63,
+        "x_norm": 0.6558,
+        "y_norm": 0.7617,
+        "pixel_count": 16,
+        "bbox": [
+          176,
+          363,
+          179,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 6,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 54,
+      "time_s": 2.16,
+      "player": {
+        "x_px": 177.06,
+        "y_px": 365.63,
+        "x_norm": 0.6558,
+        "y_norm": 0.7617,
+        "pixel_count": 16,
+        "bbox": [
+          176,
+          363,
+          179,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 4,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 45,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 55,
+      "time_s": 2.2,
+      "player": {
+        "x_px": 177.06,
+        "y_px": 365.63,
+        "x_norm": 0.6558,
+        "y_norm": 0.7617,
+        "pixel_count": 16,
+        "bbox": [
+          176,
+          363,
+          179,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 5,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 11,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 56,
+      "time_s": 2.24,
+      "player": {
+        "x_px": 177.06,
+        "y_px": 365.63,
+        "x_norm": 0.6558,
+        "y_norm": 0.7617,
+        "pixel_count": 16,
+        "bbox": [
+          176,
+          363,
+          179,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 5,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 13,
+        "colored": 45,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 57,
+      "time_s": 2.28,
+      "player": {
+        "x_px": 169.74,
+        "y_px": 364.94,
+        "x_norm": 0.6287,
+        "y_norm": 0.7603,
+        "pixel_count": 31,
+        "bbox": [
+          166,
+          360,
+          172,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 58,
+      "time_s": 2.32,
+      "player": {
+        "x_px": 167.74,
+        "y_px": 364.94,
+        "x_norm": 0.6213,
+        "y_norm": 0.7603,
+        "pixel_count": 31,
+        "bbox": [
+          164,
+          360,
+          170,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 59,
+      "time_s": 2.36,
+      "player": {
+        "x_px": 163.61,
+        "y_px": 365.72,
+        "x_norm": 0.606,
+        "y_norm": 0.7619,
+        "pixel_count": 18,
+        "bbox": [
+          162,
+          363,
+          165,
+          370
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 60,
+      "time_s": 2.4,
+      "player": {
+        "x_px": 161.65,
+        "y_px": 365.47,
+        "x_norm": 0.5987,
+        "y_norm": 0.7614,
+        "pixel_count": 17,
+        "bbox": [
+          160,
+          363,
+          163,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 9,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 61,
+      "time_s": 2.44,
+      "player": {
+        "x_px": 159.85,
+        "y_px": 365.47,
+        "x_norm": 0.592,
+        "y_norm": 0.7614,
+        "pixel_count": 34,
+        "bbox": [
+          156,
+          361,
+          162,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 62,
+      "time_s": 2.48,
+      "player": {
+        "x_px": 159.3,
+        "y_px": 365.32,
+        "x_norm": 0.59,
+        "y_norm": 0.7611,
+        "pixel_count": 50,
+        "bbox": [
+          154,
+          361,
+          165,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 63,
+      "time_s": 2.52,
+      "player": {
+        "x_px": 157.35,
+        "y_px": 365.08,
+        "x_norm": 0.5828,
+        "y_norm": 0.7606,
+        "pixel_count": 49,
+        "bbox": [
+          152,
+          360,
+          163,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 64,
+      "time_s": 2.56,
+      "player": {
+        "x_px": 152.11,
+        "y_px": 364.89,
+        "x_norm": 0.5634,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          150,
+          360,
+          153,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 65,
+      "time_s": 2.6,
+      "player": {
+        "x_px": 150.11,
+        "y_px": 364.89,
+        "x_norm": 0.5559,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          148,
+          360,
+          151,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 6,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 46,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 66,
+      "time_s": 2.64,
+      "player": {
+        "x_px": 150.71,
+        "y_px": 365.06,
+        "x_norm": 0.5582,
+        "y_norm": 0.7605,
+        "pixel_count": 35,
+        "bbox": [
+          148,
+          361,
+          155,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 67,
+      "time_s": 2.68,
+      "player": {
+        "x_px": 149.03,
+        "y_px": 364.71,
+        "x_norm": 0.552,
+        "y_norm": 0.7598,
+        "pixel_count": 31,
+        "bbox": [
+          146,
+          361,
+          153,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 68,
+      "time_s": 2.72,
+      "player": {
+        "x_px": 147.3,
+        "y_px": 365.15,
+        "x_norm": 0.5455,
+        "y_norm": 0.7607,
+        "pixel_count": 27,
+        "bbox": [
+          145,
+          362,
+          151,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 69,
+      "time_s": 2.76,
+      "player": {
+        "x_px": 140,
+        "y_px": 364.76,
+        "x_norm": 0.5185,
+        "y_norm": 0.7599,
+        "pixel_count": 21,
+        "bbox": [
+          138,
+          360,
+          141,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 70,
+      "time_s": 2.8,
+      "player": {
+        "x_px": 138.1,
+        "y_px": 364.8,
+        "x_norm": 0.5115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          136,
+          360,
+          139,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 71,
+      "time_s": 2.84,
+      "player": {
+        "x_px": 139.54,
+        "y_px": 365.25,
+        "x_norm": 0.5168,
+        "y_norm": 0.7609,
+        "pixel_count": 24,
+        "bbox": [
+          137,
+          363,
+          143,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 72,
+      "time_s": 2.88,
+      "player": {
+        "x_px": 137.77,
+        "y_px": 365.41,
+        "x_norm": 0.5103,
+        "y_norm": 0.7613,
+        "pixel_count": 22,
+        "bbox": [
+          136,
+          363,
+          141,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 73,
+      "time_s": 2.92,
+      "player": {
+        "x_px": 135.77,
+        "y_px": 365.41,
+        "x_norm": 0.5029,
+        "y_norm": 0.7613,
+        "pixel_count": 22,
+        "bbox": [
+          134,
+          363,
+          139,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 74,
+      "time_s": 2.96,
+      "player": {
+        "x_px": 127.7,
+        "y_px": 364.87,
+        "x_norm": 0.4729,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          124,
+          360,
+          129,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 75,
+      "time_s": 3,
+      "player": {
+        "x_px": 125.7,
+        "y_px": 364.87,
+        "x_norm": 0.4655,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          122,
+          360,
+          127,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 50,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 76,
+      "time_s": 3.04,
+      "player": {
+        "x_px": 123.58,
+        "y_px": 364.88,
+        "x_norm": 0.4577,
+        "y_norm": 0.7602,
+        "pixel_count": 24,
+        "bbox": [
+          120,
+          360,
+          125,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 77,
+      "time_s": 3.08,
+      "player": {
+        "x_px": 123.7,
+        "y_px": 364.87,
+        "x_norm": 0.4581,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          120,
+          360,
+          125,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 78,
+      "time_s": 3.12,
+      "player": {
+        "x_px": 125.7,
+        "y_px": 364.87,
+        "x_norm": 0.4655,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          122,
+          360,
+          127,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 79,
+      "time_s": 3.16,
+      "player": {
+        "x_px": 133.59,
+        "y_px": 365.27,
+        "x_norm": 0.4948,
+        "y_norm": 0.761,
+        "pixel_count": 22,
+        "bbox": [
+          132,
+          362,
+          137,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 4,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 80,
+      "time_s": 3.2,
+      "player": {
+        "x_px": 164.3,
+        "y_px": 338.9,
+        "x_norm": 0.6085,
+        "y_norm": 0.706,
+        "pixel_count": 30,
+        "bbox": [
+          162,
+          336,
+          167,
+          342
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 13,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 81,
+      "time_s": 3.24,
+      "player": {
+        "x_px": 135.59,
+        "y_px": 365.27,
+        "x_norm": 0.5022,
+        "y_norm": 0.761,
+        "pixel_count": 22,
+        "bbox": [
+          134,
+          362,
+          139,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 82,
+      "time_s": 3.28,
+      "player": {
+        "x_px": 159.31,
+        "y_px": 348.62,
+        "x_norm": 0.59,
+        "y_norm": 0.7263,
+        "pixel_count": 26,
+        "bbox": [
+          157,
+          346,
+          161,
+          352
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 83,
+      "time_s": 3.32,
+      "player": {
+        "x_px": 100.5,
+        "y_px": 371.08,
+        "x_norm": 0.3722,
+        "y_norm": 0.7731,
+        "pixel_count": 26,
+        "bbox": [
+          96,
+          368,
+          105,
+          373
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 84,
+      "time_s": 3.36,
+      "player": {
+        "x_px": 98.39,
+        "y_px": 374.87,
+        "x_norm": 0.3644,
+        "y_norm": 0.781,
+        "pixel_count": 23,
+        "bbox": [
+          94,
+          372,
+          103,
+          377
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 5,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 46,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 85,
+      "time_s": 3.4,
+      "player": {
+        "x_px": 153.38,
+        "y_px": 360.42,
+        "x_norm": 0.5681,
+        "y_norm": 0.7509,
+        "pixel_count": 24,
+        "bbox": [
+          151,
+          358,
+          155,
+          364
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 86,
+      "time_s": 3.44,
+      "player": {
+        "x_px": 150.73,
+        "y_px": 363.64,
+        "x_norm": 0.5582,
+        "y_norm": 0.7576,
+        "pixel_count": 33,
+        "bbox": [
+          147,
+          361,
+          153,
+          367
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 87,
+      "time_s": 3.48,
+      "player": {
+        "x_px": 147.96,
+        "y_px": 369.09,
+        "x_norm": 0.548,
+        "y_norm": 0.7689,
+        "pixel_count": 23,
+        "bbox": [
+          145,
+          367,
+          150,
+          371
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 10,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 11,
+        "colored": 52,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 88,
+      "time_s": 3.52,
+      "player": {
+        "x_px": 147.23,
+        "y_px": 373.14,
+        "x_norm": 0.5453,
+        "y_norm": 0.7774,
+        "pixel_count": 22,
+        "bbox": [
+          145,
+          371,
+          149,
+          376
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 14,
+      "projectile_like_count": 9,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 12,
+        "colored": 50,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 89,
+      "time_s": 3.56,
+      "player": {
+        "x_px": 144.78,
+        "y_px": 376.63,
+        "x_norm": 0.5362,
+        "y_norm": 0.7846,
+        "pixel_count": 32,
+        "bbox": [
+          141,
+          374,
+          147,
+          380
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 9,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 48,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 90,
+      "time_s": 3.6,
+      "player": {
+        "x_px": 118.21,
+        "y_px": 365.12,
+        "x_norm": 0.4378,
+        "y_norm": 0.7607,
+        "pixel_count": 33,
+        "bbox": [
+          114,
+          360,
+          121,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 91,
+      "time_s": 3.64,
+      "player": {
+        "x_px": 115.86,
+        "y_px": 364.76,
+        "x_norm": 0.4291,
+        "y_norm": 0.7599,
+        "pixel_count": 29,
+        "bbox": [
+          112,
+          360,
+          118,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 8,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 48,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 92,
+      "time_s": 3.68,
+      "player": {
+        "x_px": 96.39,
+        "y_px": 386.35,
+        "x_norm": 0.357,
+        "y_norm": 0.8049,
+        "pixel_count": 23,
+        "bbox": [
+          92,
+          383,
+          101,
+          389
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 10,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 93,
+      "time_s": 3.72,
+      "player": {
+        "x_px": 114.95,
+        "y_px": 365.05,
+        "x_norm": 0.4257,
+        "y_norm": 0.7605,
+        "pixel_count": 20,
+        "bbox": [
+          114,
+          360,
+          117,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 13,
+      "projectile_like_count": 11,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 12,
+        "colored": 49,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 94,
+      "time_s": 3.76,
+      "player": {
+        "x_px": 112.95,
+        "y_px": 365.05,
+        "x_norm": 0.4183,
+        "y_norm": 0.7605,
+        "pixel_count": 20,
+        "bbox": [
+          112,
+          360,
+          115,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 7,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 13,
+        "colored": 46,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 95,
+      "time_s": 3.8,
+      "player": {
+        "x_px": 106.08,
+        "y_px": 365.28,
+        "x_norm": 0.3929,
+        "y_norm": 0.761,
+        "pixel_count": 36,
+        "bbox": [
+          102,
+          360,
+          109,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 15,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 96,
+      "time_s": 3.84,
+      "player": {
+        "x_px": 104.09,
+        "y_px": 365.17,
+        "x_norm": 0.3855,
+        "y_norm": 0.7608,
+        "pixel_count": 35,
+        "bbox": [
+          100,
+          360,
+          107,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 15,
+        "colored": 46,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 97,
+      "time_s": 3.88,
+      "player": {
+        "x_px": 105.42,
+        "y_px": 365.63,
+        "x_norm": 0.3904,
+        "y_norm": 0.7617,
+        "pixel_count": 19,
+        "bbox": [
+          104,
+          363,
+          107,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 5,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 98,
+      "time_s": 3.92,
+      "player": {
+        "x_px": 103.42,
+        "y_px": 365.63,
+        "x_norm": 0.383,
+        "y_norm": 0.7617,
+        "pixel_count": 19,
+        "bbox": [
+          102,
+          363,
+          105,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 99,
+      "time_s": 3.96,
+      "player": {
+        "x_px": 96.05,
+        "y_px": 365.05,
+        "x_norm": 0.3557,
+        "y_norm": 0.7605,
+        "pixel_count": 20,
+        "bbox": [
+          94,
+          360,
+          97,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 15,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 100,
+      "time_s": 4,
+      "player": {
+        "x_px": 95.33,
+        "y_px": 365.1,
+        "x_norm": 0.3531,
+        "y_norm": 0.7606,
+        "pixel_count": 48,
+        "bbox": [
+          90,
+          361,
+          101,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 11,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 16,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 101,
+      "time_s": 4.04,
+      "player": {
+        "x_px": 90.11,
+        "y_px": 364.89,
+        "x_norm": 0.3337,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          88,
+          360,
+          91,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 15,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 102,
+      "time_s": 4.08,
+      "player": {
+        "x_px": 88.11,
+        "y_px": 364.89,
+        "x_norm": 0.3263,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 103,
+      "time_s": 4.12,
+      "player": {
+        "x_px": 86.11,
+        "y_px": 364.89,
+        "x_norm": 0.3189,
+        "y_norm": 0.7602,
+        "pixel_count": 19,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 7,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 104,
+      "time_s": 4.16,
+      "player": {
+        "x_px": 87.48,
+        "y_px": 364.8,
+        "x_norm": 0.324,
+        "y_norm": 0.76,
+        "pixel_count": 25,
+        "bbox": [
+          86,
+          360,
+          91,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 105,
+      "time_s": 4.2,
+      "player": {
+        "x_px": 85.42,
+        "y_px": 364.88,
+        "x_norm": 0.3164,
+        "y_norm": 0.7602,
+        "pixel_count": 24,
+        "bbox": [
+          84,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 6,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 46,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 106,
+      "time_s": 4.24,
+      "player": {
+        "x_px": 78,
+        "y_px": 364.76,
+        "x_norm": 0.2889,
+        "y_norm": 0.7599,
+        "pixel_count": 21,
+        "bbox": [
+          76,
+          360,
+          79,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 7,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 107,
+      "time_s": 4.28,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 108,
+      "time_s": 4.32,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 109,
+      "time_s": 4.36,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 13,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 110,
+      "time_s": 4.4,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 6,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 46,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 111,
+      "time_s": 4.44,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 112,
+      "time_s": 4.48,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 47,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 113,
+      "time_s": 4.52,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 5,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 14,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 114,
+      "time_s": 4.56,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 115,
+      "time_s": 4.6,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 5,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 44,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 116,
+      "time_s": 4.64,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 13,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 117,
+      "time_s": 4.68,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 13,
+        "colored": 49,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 118,
+      "time_s": 4.72,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 13,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 119,
+      "time_s": 4.76,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 44,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 120,
+      "time_s": 4.8,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 6,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 13,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 121,
+      "time_s": 4.84,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 13,
+        "colored": 46,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 122,
+      "time_s": 4.88,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 14,
+        "colored": 44,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 123,
+      "time_s": 4.92,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 43,
+        "purple": 1,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 124,
+      "time_s": 4.96,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 6,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 44,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 125,
+      "time_s": 5,
+      "player": {
+        "x_px": 75.77,
+        "y_px": 364.91,
+        "x_norm": 0.2806,
+        "y_norm": 0.7602,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 15,
+        "colored": 45,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 126,
+      "time_s": 5.04,
+      "player": {
+        "x_px": 75.95,
+        "y_px": 364.86,
+        "x_norm": 0.2813,
+        "y_norm": 0.7601,
+        "pixel_count": 21,
+        "bbox": [
+          73,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 16,
+        "colored": 44,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 127,
+      "time_s": 5.08,
+      "player": {
+        "x_px": 75.95,
+        "y_px": 364.86,
+        "x_norm": 0.2813,
+        "y_norm": 0.7601,
+        "pixel_count": 21,
+        "bbox": [
+          73,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 15,
+        "colored": 45,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 128,
+      "time_s": 5.12,
+      "player": {
+        "x_px": 75.95,
+        "y_px": 364.86,
+        "x_norm": 0.2813,
+        "y_norm": 0.7601,
+        "pixel_count": 21,
+        "bbox": [
+          73,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 15,
+        "colored": 45,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 129,
+      "time_s": 5.16,
+      "player": {
+        "x_px": 81.77,
+        "y_px": 365.41,
+        "x_norm": 0.3029,
+        "y_norm": 0.7613,
+        "pixel_count": 22,
+        "bbox": [
+          80,
+          363,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 16,
+        "colored": 47,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 130,
+      "time_s": 5.2,
+      "player": {
+        "x_px": 80.1,
+        "y_px": 364.8,
+        "x_norm": 0.2967,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          78,
+          360,
+          81,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 48,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 131,
+      "time_s": 5.24,
+      "player": {
+        "x_px": 83.44,
+        "y_px": 365.33,
+        "x_norm": 0.309,
+        "y_norm": 0.7611,
+        "pixel_count": 39,
+        "bbox": [
+          78,
+          363,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 15,
+        "colored": 47,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 132,
+      "time_s": 5.28,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 50,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 133,
+      "time_s": 5.32,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 14,
+        "colored": 50,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 134,
+      "time_s": 5.36,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 50,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 135,
+      "time_s": 5.4,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 136,
+      "time_s": 5.44,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "yellow-orange": 1,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 137,
+      "time_s": 5.48,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "yellow-orange": 1,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 138,
+      "time_s": 5.52,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 48,
+        "yellow-orange": 1,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 139,
+      "time_s": 5.56,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 13,
+        "colored": 50,
+        "yellow-orange": 1,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 140,
+      "time_s": 5.6,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "yellow-orange": 1,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 141,
+      "time_s": 5.64,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 15,
+        "yellow-orange": 1,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 142,
+      "time_s": 5.68,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 15,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 143,
+      "time_s": 5.72,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 144,
+      "time_s": 5.76,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 145,
+      "time_s": 5.8,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 15,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 146,
+      "time_s": 5.84,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 15,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 147,
+      "time_s": 5.88,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 60,
+      "color_families": {
+        "red": 17,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 148,
+      "time_s": 5.92,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 14,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 149,
+      "time_s": 5.96,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 68,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 15,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 150,
+      "time_s": 6,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 15,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 151,
+      "time_s": 6.04,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 15,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 152,
+      "time_s": 6.08,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 10,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 15,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 153,
+      "time_s": 6.12,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 59,
+      "color_families": {
+        "red": 15,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 154,
+      "time_s": 6.16,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 12,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 155,
+      "time_s": 6.2,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 12,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 156,
+      "time_s": 6.24,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 6,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 12,
+        "colored": 43,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 157,
+      "time_s": 6.28,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 11,
+        "colored": 45,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 158,
+      "time_s": 6.32,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 54,
+      "color_families": {
+        "red": 11,
+        "colored": 45,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 159,
+      "time_s": 6.36,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 11,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 160,
+      "time_s": 6.4,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 11,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 51,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 161,
+      "time_s": 6.44,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 69,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 14,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 11,
+        "colored": 53,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 162,
+      "time_s": 6.48,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 163,
+      "time_s": 6.52,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 164,
+      "time_s": 6.56,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 165,
+      "time_s": 6.6,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 10,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 50,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 166,
+      "time_s": 6.64,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 66,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 11,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 50,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 167,
+      "time_s": 6.68,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 168,
+      "time_s": 6.72,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 49,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 169,
+      "time_s": 6.76,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 11,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 170,
+      "time_s": 6.8,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 10,
+        "colored": 48,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 171,
+      "time_s": 6.84,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 172,
+      "time_s": 6.88,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 7,
+      "attacker_like_count": 58,
+      "color_families": {
+        "red": 15,
+        "colored": 45,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 173,
+      "time_s": 6.92,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 174,
+      "time_s": 6.96,
+      "player": {
+        "x_px": 88.1,
+        "y_px": 364.8,
+        "x_norm": 0.3263,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          86,
+          360,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 14,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 175,
+      "time_s": 7,
+      "player": {
+        "x_px": 86.1,
+        "y_px": 364.8,
+        "x_norm": 0.3189,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          84,
+          360,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 15,
+        "colored": 44,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 176,
+      "time_s": 7.04,
+      "player": {
+        "x_px": 84.1,
+        "y_px": 364.8,
+        "x_norm": 0.3115,
+        "y_norm": 0.76,
+        "pixel_count": 20,
+        "bbox": [
+          82,
+          360,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 67,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 57,
+      "color_families": {
+        "red": 15,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 177,
+      "time_s": 7.08,
+      "player": {
+        "x_px": 85.29,
+        "y_px": 365.25,
+        "x_norm": 0.3159,
+        "y_norm": 0.7609,
+        "pixel_count": 24,
+        "bbox": [
+          83,
+          363,
+          89,
+          369
+        ]
+      },
+      "colored_component_count": 70,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 14,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 15,
+        "colored": 51,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 178,
+      "time_s": 7.12,
+      "player": {
+        "x_px": 83.54,
+        "y_px": 365.33,
+        "x_norm": 0.3094,
+        "y_norm": 0.7611,
+        "pixel_count": 24,
+        "bbox": [
+          81,
+          363,
+          87,
+          369
+        ]
+      },
+      "colored_component_count": 60,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 5,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 42,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 179,
+      "time_s": 7.16,
+      "player": {
+        "x_px": 81.65,
+        "y_px": 365.35,
+        "x_norm": 0.3024,
+        "y_norm": 0.7611,
+        "pixel_count": 23,
+        "bbox": [
+          79,
+          363,
+          85,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 6,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 43,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 180,
+      "time_s": 7.2,
+      "player": {
+        "x_px": 73.86,
+        "y_px": 364.82,
+        "x_norm": 0.2736,
+        "y_norm": 0.76,
+        "pixel_count": 22,
+        "bbox": [
+          71,
+          360,
+          75,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 9,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 16,
+        "colored": 44,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 181,
+      "time_s": 7.24,
+      "player": {
+        "x_px": 71.86,
+        "y_px": 364.82,
+        "x_norm": 0.2662,
+        "y_norm": 0.76,
+        "pixel_count": 22,
+        "bbox": [
+          69,
+          360,
+          73,
+          369
+        ]
+      },
+      "colored_component_count": 60,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 5,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 43,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 182,
+      "time_s": 7.28,
+      "player": {
+        "x_px": 73.67,
+        "y_px": 365.43,
+        "x_norm": 0.2728,
+        "y_norm": 0.7613,
+        "pixel_count": 21,
+        "bbox": [
+          72,
+          363,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 6,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 44,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 183,
+      "time_s": 7.32,
+      "player": {
+        "x_px": 71.67,
+        "y_px": 365.43,
+        "x_norm": 0.2654,
+        "y_norm": 0.7613,
+        "pixel_count": 21,
+        "bbox": [
+          70,
+          363,
+          75,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 42,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 184,
+      "time_s": 7.36,
+      "player": {
+        "x_px": 63.86,
+        "y_px": 364.82,
+        "x_norm": 0.2365,
+        "y_norm": 0.76,
+        "pixel_count": 22,
+        "bbox": [
+          61,
+          360,
+          65,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 185,
+      "time_s": 7.4,
+      "player": {
+        "x_px": 61.74,
+        "y_px": 364.83,
+        "x_norm": 0.2287,
+        "y_norm": 0.7601,
+        "pixel_count": 23,
+        "bbox": [
+          59,
+          360,
+          63,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 7,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 45,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 186,
+      "time_s": 7.44,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 44,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 187,
+      "time_s": 7.48,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 9,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 45,
+        "cyan-blue": 6
+      }
+    },
+    {
+      "frame_index": 188,
+      "time_s": 7.52,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 61,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 6,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 43,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 189,
+      "time_s": 7.56,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 9,
+      "projectile_like_count": 10,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 47,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 190,
+      "time_s": 7.6,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 10,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 48,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 191,
+      "time_s": 7.64,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 44,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 192,
+      "time_s": 7.68,
+      "player": {
+        "x_px": 60.33,
+        "y_px": 364.72,
+        "x_norm": 0.2235,
+        "y_norm": 0.7598,
+        "pixel_count": 18,
+        "bbox": [
+          59,
+          360,
+          61,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 45,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 193,
+      "time_s": 7.72,
+      "player": {
+        "x_px": 65.93,
+        "y_px": 365.22,
+        "x_norm": 0.2442,
+        "y_norm": 0.7609,
+        "pixel_count": 27,
+        "bbox": [
+          64,
+          360,
+          69,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 9,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 46,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 194,
+      "time_s": 7.76,
+      "player": {
+        "x_px": 63.86,
+        "y_px": 364.82,
+        "x_norm": 0.2365,
+        "y_norm": 0.76,
+        "pixel_count": 22,
+        "bbox": [
+          61,
+          360,
+          65,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 7,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 16,
+        "colored": 43,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 195,
+      "time_s": 7.8,
+      "player": {
+        "x_px": 65.86,
+        "y_px": 364.82,
+        "x_norm": 0.2439,
+        "y_norm": 0.76,
+        "pixel_count": 22,
+        "bbox": [
+          63,
+          360,
+          67,
+          369
+        ]
+      },
+      "colored_component_count": 65,
+      "lower_pressure_component_count": 12,
+      "projectile_like_count": 9,
+      "attacker_like_count": 56,
+      "color_families": {
+        "red": 14,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 196,
+      "time_s": 7.84,
+      "player": {
+        "x_px": 73.77,
+        "y_px": 365.41,
+        "x_norm": 0.2732,
+        "y_norm": 0.7613,
+        "pixel_count": 22,
+        "bbox": [
+          72,
+          363,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 64,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 9,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 46,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 197,
+      "time_s": 7.88,
+      "player": {
+        "x_px": 75.63,
+        "y_px": 365.08,
+        "x_norm": 0.2801,
+        "y_norm": 0.7606,
+        "pixel_count": 24,
+        "bbox": [
+          74,
+          361,
+          79,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 13,
+        "colored": 44,
+        "cyan-blue": 5,
+        "yellow-orange": 1
+      }
+    },
+    {
+      "frame_index": 198,
+      "time_s": 7.92,
+      "player": {
+        "x_px": 77.77,
+        "y_px": 365.41,
+        "x_norm": 0.288,
+        "y_norm": 0.7613,
+        "pixel_count": 22,
+        "bbox": [
+          76,
+          363,
+          81,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 11,
+      "projectile_like_count": 8,
+      "attacker_like_count": 55,
+      "color_families": {
+        "red": 14,
+        "colored": 44,
+        "yellow-orange": 1,
+        "cyan-blue": 4
+      }
+    },
+    {
+      "frame_index": 199,
+      "time_s": 7.96,
+      "player": {
+        "x_px": 76,
+        "y_px": 364.76,
+        "x_norm": 0.2815,
+        "y_norm": 0.7599,
+        "pixel_count": 21,
+        "bbox": [
+          74,
+          360,
+          77,
+          369
+        ]
+      },
+      "colored_component_count": 62,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 8,
+      "attacker_like_count": 54,
+      "color_families": {
+        "red": 14,
+        "colored": 43,
+        "cyan-blue": 5
+      }
+    },
+    {
+      "frame_index": 200,
+      "time_s": 8,
+      "player": {
+        "x_px": 78,
+        "y_px": 364.76,
+        "x_norm": 0.2889,
+        "y_norm": 0.7599,
+        "pixel_count": 21,
+        "bbox": [
+          76,
+          360,
+          79,
+          369
+        ]
+      },
+      "colored_component_count": 63,
+      "lower_pressure_component_count": 10,
+      "projectile_like_count": 9,
+      "attacker_like_count": 54,
+      "color_families": {
+        "red": 15,
+        "colored": 43,
+        "cyan-blue": 5
+      }
+    }
+  ]
+}
