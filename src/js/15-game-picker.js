@@ -15,16 +15,12 @@ function describePackCaps(pack){
 
 function syncGamePickerDock(){
  if(!gamePickerDockBtn)return;
- const pack=typeof currentGamePack==='function'?currentGamePack():null;
  const active=!!gamePickerOpen;
  gamePickerDockBtn.classList.toggle('open',active);
  gamePickerDockBtn.classList.toggle('active',active);
  gamePickerDockBtn.setAttribute('aria-expanded',active?'true':'false');
  if(gamePickerDockStatus){
-  const playable=typeof currentGamePackPlayable==='function'&&currentGamePackPlayable();
-  gamePickerDockStatus.textContent=playable
-   ? (pack?.metadata?.versionLine||'cabinet ready')
-   : 'preview shell';
+  gamePickerDockStatus.textContent='';
  }
 }
 
