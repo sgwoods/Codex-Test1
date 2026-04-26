@@ -1,6 +1,6 @@
 # Next 20x Galaxy Guardians And Aurora Cycle
 
-Status: `proposed-next-long-cycle`
+Status: `in-progress`
 
 This is the next long unattended work plan after the first Galaxy Guardians
 playable preview foundation. It assumes this MacBook remains a development and
@@ -32,6 +32,12 @@ multi-game ingestion loop that helps both:
   `wave_clear`
 - export a compact JSON event log from harness runs
 - compare runtime event names against promoted reference scaffolds
+
+First implementation note:
+
+- runtime aliases now map shared events to Galaxy Guardians semantic events
+- `npm run harness:check:galaxy-guardians-event-log` verifies the first event
+  family set
 
 ### 3. Galaxy Guardians Gameplay Slice
 
@@ -83,6 +89,13 @@ The next long cycle is successful when it leaves behind:
 - an Aurora four-window evidence cycle plan or generated artifact set
 - a selected Aurora challenge-stage or later-level expansion slice
 - no beta or production release actions from this MacBook
+
+Current documents:
+
+- `PLATINUM_RUNTIME_BOUNDARY_SPLIT_PLAN.md`
+- `GALAXY_GUARDIANS_EVENT_SCHEMA_PLAN.md`
+- `AURORA_LEVEL_EXPANSION_EVIDENCE_CYCLE_PLAN.md`
+- `reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-four-window-cycle.plan.json`
 
 ## Suggested Validation
 

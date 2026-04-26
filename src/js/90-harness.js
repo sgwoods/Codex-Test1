@@ -755,6 +755,14 @@ window.__galagaHarness__={
   S.pb.push({x,y,v});
   logEvent('harness_spawn_player_bullet',{x:+x.toFixed(2),y:+y.toFixed(2),v:+v.toFixed(2)});
  },
+ forceEnemyProjectile(cfg={}){
+  const enemy=S.e.find(e=>e.hp>0)||null;
+  if(!enemy)return false;
+  const vx=Number.isFinite(+cfg.vx)?+cfg.vx:0;
+  const vy=Number.isFinite(+cfg.vy)?+cfg.vy:180;
+  fireEnemyBullet(enemy,vx,vy,String(cfg.kind||'harness'));
+  return true;
+ },
  triggerCarriedFighterHit(){
   const boss=S.e.find(e=>e.hp>0&&e.carry);
   if(!boss)return false;
@@ -873,6 +881,7 @@ window.__galagaHarness__={
   enemy.y=+cfg.enemyY||(p.y-18);
   enemy.vx=+cfg.enemyVx||0;
   enemy.vy=+cfg.enemyVy||20;
+  if(typeof logEnemyAttackStart==='function')logEnemyAttackStart(enemy,'harness_close_shot',{targetX:p.x,targetY:p.y,harness:1});
   logEvent('harness_close_shot_setup',{
    stage:S.stage,
    enemyId:enemy.id,

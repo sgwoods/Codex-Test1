@@ -11,9 +11,12 @@ function flushAfterRecordingStops(){
 }
 function resetSession(reason='boot'){
  sessionN++;
- REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
+ const gameKey=typeof currentGamePackKey==='function'?currentGamePackKey():'aurora-galactica';
+ REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,gameKey,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
  REC.t0=performance.now();
  recShotT=0;
+ lastPlayerMoveEventT=-99;
+ lastPlayerMoveEventAxis=0;
  if(typeof sfx!=='undefined'&&sfx){
   if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips();
   if(sfx.referenceCooldowns)sfx.referenceCooldowns=Object.create(null);
@@ -22,7 +25,47 @@ function resetSession(reason='boot'){
 }
 function logEvent(type,data={}){
  if(!REC)resetSession();
- REC.events.push(Object.assign({t:recTime(),type},data));
+ const t=recTime();
+ const gameKey=typeof currentGamePackKey==='function'?currentGamePackKey():(REC.gameKey||'aurora-galactica');
+ const event=Object.assign({t,type,gameKey},data);
+ REC.events.push(event);
+ const alias=gamePackSemanticEventType(type,gameKey);
+ if(alias&&alias!==type){
+  REC.events.push(Object.assign({},event,{t:recTime(),type:alias,sourceEvent:type}));
+ }
+}
+function gamePackSemanticEventType(type,gameKey){
+ if(gameKey!=='galaxy-guardians-preview')return '';
+ switch(type){
+  case 'stage_spawn': return 'wave_setup';
+  case 'enemy_attack_start': return 'regular_dive_start';
+  case 'enemy_bullet_fired': return 'enemy_projectile';
+  case 'enemy_killed':
+  case 'enemy_damaged': return 'enemy_hit';
+  case 'ship_lost': return 'player_hit';
+  case 'stage_clear': return 'wave_clear';
+  default: return '';
+ }
+}
+let lastPlayerMoveEventT=-99;
+let lastPlayerMoveEventAxis=0;
+function logPlayerMoveEvent(axis,p,source='manual'){
+ const nextAxis=axis<0?-1:axis>0?1:0;
+ if(!nextAxis)return;
+ if(typeof currentGamePackKey!=='function'||currentGamePackKey()!=='galaxy-guardians-preview')return;
+ const t=recTime();
+ if(nextAxis===lastPlayerMoveEventAxis&&t-lastPlayerMoveEventT<.32)return;
+ lastPlayerMoveEventT=t;
+ lastPlayerMoveEventAxis=nextAxis;
+ logEvent('player_move',{
+  stage:S.stage,
+  stageClock:+(+S.stageClock||0).toFixed(3),
+  axis:nextAxis,
+  source,
+  playerX:+p.x.toFixed(2),
+  playerY:+p.y.toFixed(2),
+  playerLane:playLane(p.x)
+ });
 }
 let carryDebugLastState='';
 let rescueDebugLastState='';

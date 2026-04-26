@@ -1,6 +1,6 @@
 # Galaxy Guardians Event Schema Plan
 
-Status: `first-playable-event-plan`
+Status: `runtime-aliased-event-plan`
 
 The first playable preview uses the shared Platinum/Aurora event substrate, but
 the event vocabulary below belongs to `Galaxy Guardians`.
@@ -26,6 +26,30 @@ the event vocabulary below belongs to `Galaxy Guardians`.
 2. Promote only visually confirmed events to `events-observed`.
 3. Add exact timestamps and confidence labels.
 4. Turn promoted events into harness correspondence targets.
+
+## Runtime Alias Map
+
+The first implementation keeps the shared fixed-screen event stream intact and
+adds Galaxy Guardians semantic aliases when the active pack is
+`galaxy-guardians-preview`.
+
+| Shared Runtime Event | Galaxy Guardians Alias |
+| --- | --- |
+| `stage_spawn` | `wave_setup` |
+| `enemy_attack_start` | `regular_dive_start` |
+| `enemy_bullet_fired` | `enemy_projectile` |
+| `enemy_killed` / `enemy_damaged` | `enemy_hit` |
+| `ship_lost` | `player_hit` |
+| `stage_clear` | `wave_clear` |
+
+`game_start`, `player_move`, and `player_shot` are already logged directly as
+semantic events.
+
+Harness:
+
+```sh
+npm run harness:check:galaxy-guardians-event-log
+```
 
 ## Aurora Expansion Reuse
 
