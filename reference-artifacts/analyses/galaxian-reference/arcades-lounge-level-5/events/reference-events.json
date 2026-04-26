@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "window_id": "arcades-lounge-level-5",
+  "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
+  "status": "event-skeleton",
+  "timebase": {
+    "units": "seconds",
+    "source_start_time_s": null,
+    "source_end_time_s": null,
+    "frame_rate": null,
+    "notes": "Fill after local review of the ARCADE'S LOUNGE Level 5 source."
+  },
+  "events": [
+    {
+      "event_id": "evt-001",
+      "event_family": "level_or_wave_visible",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "progression",
+      "entity_id": "level-5",
+      "position_hint": "stage indicator or inferred source context",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Anchor the clip as later-progression evidence if Level 5 is directly visible or strongly inferable."
+    },
+    {
+      "event_id": "evt-002",
+      "event_family": "formation_rack_observed",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "formation",
+      "entity_id": "formation-level-5",
+      "position_hint": "upper field if visible",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to compare later-wave formation state against opening-wave formation state."
+    },
+    {
+      "event_id": "evt-003",
+      "event_family": "multi_attacker_pressure",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "alien_group",
+      "entity_id": "attack-group-1",
+      "position_hint": "pending observation",
+      "motion_hint": "simultaneous attackers pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to capture later-pressure dive density."
+    },
+    {
+      "event_id": "evt-004",
+      "event_family": "flagship_or_escort_attack",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "flagship_or_escort",
+      "entity_id": "convoy-1",
+      "position_hint": "pending observation",
+      "motion_hint": "flagship / escort path pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Include if the Level 5 source shows top-rank or escort attack behavior."
+    },
+    {
+      "event_id": "evt-005",
+      "event_family": "player_pressure_response",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "player",
+      "entity_id": "galaxip",
+      "position_hint": "lower field",
+      "motion_hint": "movement / firing response pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to understand how player behavior changes under later-wave pressure."
+    }
+  ],
+  "open_questions": [
+    "Is Level 5 directly visible in the clip or inferred from title/provenance?",
+    "How many attackers are visible during the densest observed moment?",
+    "Does the source show flagship / escort attacks clearly?",
+    "Is this source suitable for progression targets or only qualitative review?"
+  ]
+}

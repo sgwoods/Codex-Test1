@@ -45,6 +45,10 @@ confidence labels, artifact target folders, and semantic profile anchors.
   - local beginning-phase source scaffold
 - `matt-hawkins-arcade-intro/events/reference-events.json`
   - intro / formation handoff event-log skeleton
+- `arcades-lounge-level-5/`
+  - local later-pressure / Level 5 source scaffold
+- `arcades-lounge-level-5/events/reference-events.json`
+  - progression and later-pressure event-log skeleton
 - `seed-window-formation-entry/semantic-scout-wave-profile.md`
   - first semantic model scaffold
 

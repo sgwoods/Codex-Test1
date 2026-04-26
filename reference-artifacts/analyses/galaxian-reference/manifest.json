@@ -23,6 +23,21 @@
       "notes": "Beginning-phase Galaxian look provided for the ingestion library. Observed locally as a 5,429,248 byte MP4 with avc1 video and mp4a audio."
     },
     {
+      "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
+      "game_lineage": "galaxian-reference",
+      "title": "GALAXIAN (1979) - LEVEL 5 passed ! Video game - ARCADE'S LOUNGE",
+      "url_or_local_anchor": "/Users/sgwoods/Downloads/GALAXIAN (1979) - LEVEL 5 passed ! Video game - ARCADE'S LOUNGE (1080p, h264).mp4",
+      "creator_or_archive": "ARCADE'S LOUNGE",
+      "capture_type": "local arcade gameplay video",
+      "duration": "unknown",
+      "video_quality": "filename declares 1080p H.264; local file uses avc1 video",
+      "audio_quality": "local file uses mp4a audio; quality not yet reviewed",
+      "license_or_usage_note": "Local user-provided gameplay example. Use for internal reference analysis until provenance and redistribution rights are clarified.",
+      "analysis_status": "confirmed-candidate",
+      "confidence": "medium",
+      "notes": "Later-progression Galaxian sample provided for the ingestion library. Observed locally as a 4,701,332 byte MP4 with avc1 video and mp4a audio; filename indicates Level 5 is passed."
+    },
+    {
       "source_id": "hamster-arcade-archives-galaxian",
       "game_lineage": "galaxian-reference",
       "title": "Arcade Archives GALAXIAN",
@@ -138,6 +153,34 @@
       ],
       "confidence": "unknown",
       "notes": "Exact timestamps are pending local clip review. This may become the preferred first beginning-phase source if it contains formation-entry evidence."
+    },
+    {
+      "window_id": "arcades-lounge-level-5",
+      "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
+      "status": "planned",
+      "start_time_s": null,
+      "end_time_s": null,
+      "target_duration_s": 30,
+      "window_family": "level-5-later-pressure",
+      "why_it_matters": "This local Level 5 sample should help establish later-wave pressure, dive density, flagship/escort behavior under progression, and whether the first playable Galaxy Guardians slice needs hooks for escalating pressure even before full later-level support.",
+      "visible_entities": [
+        "player_galaxip",
+        "formation_aliens",
+        "flagship_or_top_rank_if_visible",
+        "red_escort_aliens_if_visible",
+        "multiple_attackers_if_visible",
+        "player_shot",
+        "enemy_projectiles"
+      ],
+      "analysis_questions": [
+        "How does Level 5 pressure differ from the opening wave?",
+        "How many attackers are visible at once during denser moments?",
+        "Are flagship and escort attack patterns visible?",
+        "Does player movement become more continuous under later pressure?",
+        "Can this source inform progression hooks for the scout-wave profile?"
+      ],
+      "confidence": "unknown",
+      "notes": "Exact timestamps are pending local clip review. This source is a later-pressure complement to the intro and first-formation windows."
     },
     {
       "window_id": "seed-window-formation-entry",
