@@ -2,55 +2,58 @@
 
 Window id: `arcades-lounge-level-5`
 
-Status: `scaffold`
+Status: `events-observed`
 
 This profile translates the locally provided Level 5 `Galaxian` source into
 questions and candidate semantics for future `Galaxy Guardians` progression and
 later-pressure work.
 
-It should not be treated as implementation authority until the event log has
-timestamps and confidence labels.
+It should not be treated as final tuning authority until at least one subwindow
+has frame-exact Galaxip and attacker traces. It is already strong enough to
+guide the next active-gameplay analysis pass.
 
 ## Progression Contract
 
-To verify:
+Observed:
 
-- whether Level 5 is directly visible or only inferred from the source title
-- whether enemy speed, dive density, or shot pressure has clearly changed from
-  opening-wave behavior
-- whether the player is dealing with broader simultaneous threat coverage
+- Level 5 is inferred from source title/provenance rather than directly
+  confirmed by an on-screen stage indicator in the first pass
+- the clip opens on active play with a settled rack
+- pressure is continuous across the full source window
+- the player is dealing with broader threat coverage than the Matt Hawkins
+  presentation source can establish
 
 ## Formation And Attack Pressure
 
-To verify:
+Observed:
 
-- formation state at the start of the selected window
-- maximum visible simultaneous attackers
-- whether attackers return to formation or continue pressure
-- whether pressure clusters around edges, corners, or the center lane
+- formation is settled and active at the start of the clip
+- attackers and projectiles are visible from the opening seconds
+- pressure appears from sides and center lanes across the early and mid windows
+- the rack visibly thins over time while attacks continue
 
 ## Flagship / Escort Semantics
 
-To verify:
+Observed:
 
-- whether top-rank / flagship behavior is visible
-- whether red escorts are readable
-- whether flagship / escort attacks occur as a distinct convoy family
-- whether scoring opportunities are visible enough to inform a future rule
-  profile
+- top-rank / flagship-like enemies remain visible in the formation
+- red/pink escort-like attackers are visible
+- distinct convoy grouping needs frame-exact review before implementation
+- score changes and explosions are visible enough to support future rule
+  profiling
 
 ## Player Contract Under Pressure
 
-To verify:
+Observed:
 
-- whether movement is more continuous than opening-wave movement
-- whether player shot cadence appears constrained by one-shot pressure
-- whether the player uses lane holds, reversals, or emergency dodges
-- whether the source is clean enough for player-position tracing
+- player movement is continuous and reactive across the clip
+- player shot and projectile states are visible
+- player uses lane corrections and dodges rather than static lane holding
+- the source is clean enough to become the first Galaxip x-position trace
 
 ## First Harness Implications
 
-Draft targets if the source has clear later-pressure evidence:
+Draft targets from this source:
 
 - progression profile can represent increased dive density
 - multi-attacker pressure is a distinct event family
@@ -61,8 +64,9 @@ Draft targets if the source has clear later-pressure evidence:
 
 ## Open Questions
 
-- Should Level 5 behavior influence the first playable slice or only future
-  progression hooks?
-- Does this source show enough direct evidence for timing, or only qualitative
-  difficulty pressure?
-- Which event families overlap with the opening-phase Matt Hawkins source?
+- Should Level 5 pressure influence the first playable slice or stay as a
+  later-wave extension hook?
+- Which window should be traced first: `early-attacks` or `mid-pressure`?
+- What is the maximum simultaneous attacker/projectile count in the densest
+  frame-exact window?
+- Which event families overlap with the Matt Hawkins presentation/rack source?
