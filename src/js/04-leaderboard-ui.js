@@ -94,9 +94,13 @@ function currentLeaderboardTitle(view=LEADERBOARD.view){
  switch(view){
   case 'validated': return 'VALIDATED PILOTS';
   case 'mine': return LEADERBOARD.user?'MY SCORES':'MY SCORES · LOCAL';
-  case 'local': return 'LOCAL DEVICE SCORES';
+  case 'local': return 'LOCAL TOP 10 DEVICE SCORES';
   default: return 'TOP 10 PILOTS';
  }
+}
+function latestCompletedLocalScoreRow(){
+ const history=typeof loadScoreHistory==='function'?loadScoreHistory():[];
+ return history[0]||null;
 }
 function leaderboardRowsForView(view=LEADERBOARD.view){
  if(view==='local')return localLeaderboardRows();
@@ -112,7 +116,7 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='fallback')return view==='mine'?'My Scores unavailable · showing local':'Remote unavailable · showing local';
  if(mode==='cached')return view==='validated'?'Validated scores cached · refreshing':view==='mine'?'My scores cached · refreshing':'Shared scores cached · refreshing';
  if(mode==='signed_out')return remoteAuthEnabled()?'Sign in required · showing local':'Pilot account disabled in this lane · showing local';
- if(mode==='local')return 'Local device scores';
+ if(mode==='local')return 'Local top 10 on this device · completed runs only';
  if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
 }
@@ -210,7 +214,9 @@ function renderLeaderboardPanel(){
  if(leaderboardPanelTitle)leaderboardPanelTitle.textContent='HIGH SCORES';
  if(leaderboardPanelSub)leaderboardPanelSub.textContent=currentLeaderboardTitle();
  syncLeaderboardFilterUi();
- const rows=leaderboardRowsForView(LEADERBOARD.view).filter(leaderboardRowIncludedByDate);
+  const rows=leaderboardRowsForView(LEADERBOARD.view).filter(leaderboardRowIncludedByDate);
+ const latestLocal=LEADERBOARD.view==='local'?latestCompletedLocalScoreRow():null;
+ const latestShown=!!(latestLocal&&rows.some(row=>String(row?.id||'')===String(latestLocal.id||'')));
  if(!rows.length){
   leaderboardPanelTable.innerHTML=`<div id="leaderboardPanelEmpty">${LEADERBOARD.filterAfterDate?'No scores match the current date filter.':'No scores loaded for this view yet.'}</div>`;
   return;
@@ -233,7 +239,13 @@ function renderLeaderboardPanel(){
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }
- leaderboardPanelTable.innerHTML=body.join('');
+ const latestBanner=latestLocal&&!latestShown
+  ? `<div id="leaderboardLatestLocalBanner"><span class="leaderboardLatestLabel">Latest completed run</span><span class="leaderboardLatestValue">${latestLocal.initials} · ${formatScore(+latestLocal.score||0)} · STG ${String(+latestLocal.stage||0).padStart(2,'0')} · ${formatWhenShort(latestLocal.at)}</span></div>`
+  : '';
+ leaderboardPanelTable.innerHTML=`${latestBanner}${body.join('')}`;
+}
+function resetLeaderboardPanelScroll(){
+ if(leaderboardPanel)leaderboardPanel.scrollTop=0;
 }
 function syncLeaderboardPanelVisibility(){
  if(!leaderboardPanel)return;
@@ -241,6 +253,7 @@ function syncLeaderboardPanelVisibility(){
  leaderboardPanel.hidden=!show;
  leaderboardPanel.classList.toggle('visible',show);
  if(leaderboardViews)leaderboardViews.style.display=show?'flex':'none';
+ if(show)resetLeaderboardPanelScroll();
  if(leaderboardDockBtn){
   leaderboardDockBtn.classList.toggle('active',show);
   leaderboardDockBtn.setAttribute('aria-expanded',show?'true':'false');

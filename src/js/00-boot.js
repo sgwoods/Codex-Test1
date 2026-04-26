@@ -251,6 +251,7 @@ const RECORD_PREF_KEY=`${STORAGE_PREFIX}AutoVideo`;
 const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
+const SCORE_HISTORY_KEY=`${STORAGE_PREFIX}ScoreHistory`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
@@ -261,6 +262,7 @@ const LEGACY_STORAGE_KEYS={
  [TEST_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}TestCfg`,
  [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
+ [SCORE_HISTORY_KEY]:`${LEGACY_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
@@ -272,6 +274,7 @@ const PLATFORM_STORAGE_KEYS={
  [TEST_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}TestCfg`,
  [SEED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${PLATFORM_STORAGE_PREFIX}Top10`,
+ [SCORE_HISTORY_KEY]:`${PLATFORM_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
@@ -1042,6 +1045,25 @@ function loadScoreboard(){
 function saveScoreboard(list){
  writePref(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
 }
+function loadScoreHistory(){
+ try{
+  return JSON.parse(readPref(SCORE_HISTORY_KEY)||'[]')
+   .filter(x=>x&&Number.isFinite(+x.score))
+   .map(x=>({
+    id:String(x.id||''),
+    initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),
+    score:+x.score|0,
+    stage:+x.stage|0,
+    at:String(x.at||''),
+    build:String(x.build||'')
+   }))
+   .sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))
+   .slice(0,50);
+ }catch{return[]}
+}
+function saveScoreHistory(list){
+ writePref(SCORE_HISTORY_KEY,JSON.stringify(list.slice(0,50)));
+}
 function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
 function sanitizeInitials(txt=''){return String(txt).toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)}
 function cycleInitial(ch='A',dir=1){
@@ -1059,8 +1081,11 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
 function recordScore(score,stage,initials='YOU'){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString(),build:BUILD};
  const board=loadScoreboard();
+ const history=loadScoreHistory();
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
+ history.unshift(entry);
+ saveScoreHistory(history);
  const top=board.slice(0,10);
  saveScoreboard(top);
  S.best=top[0]?.score||0;
@@ -1076,6 +1101,12 @@ function saveGameOverInitials(){
   row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
   saveScoreboard(board);
   if(typeof syncAccountUi==='function')syncAccountUi();
+ }
+ const history=loadScoreHistory();
+ const historyRow=history.find(x=>x.id===gameOverState.entryId);
+ if(historyRow){
+  historyRow.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
+  saveScoreHistory(history);
  }
 }
 function buildGameOverHtmlFromState(){

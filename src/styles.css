@@ -428,10 +428,13 @@ mask:
 #leaderboardPanelTable .scoreCell.score{text-align:right}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
+#leaderboardLatestLocalBanner{grid-column:1 / -1;display:flex;flex-direction:column;gap:3px;margin:2px 0 10px;padding:8px 10px;border:1px solid rgba(255,216,109,.24);background:rgba(60,44,8,.18)}
+.leaderboardLatestLabel{color:#ffe39a;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
+.leaderboardLatestValue{color:#f4fbff;font:700 12px/1.25 "Courier New",Consolas,monospace}
 #leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
 #leaderboardViewsMeta{display:flex;flex-direction:column;gap:4px}
 #leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,400px);padding:12px 14px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
-#statusPanels.framedOverlay #leaderboardViews{width:100%;max-width:none;margin-top:auto;padding:14px 0 0;border:0;border-top:1px solid rgba(136,245,255,.18);background:none;box-shadow:none}
+#statusPanels.framedOverlay #leaderboardViews{position:sticky;bottom:0;z-index:1;width:100%;max-width:none;margin-top:auto;padding:14px 0 0;border:0;border-top:1px solid rgba(136,245,255,.18);background:linear-gradient(180deg,rgba(7,12,24,0),rgba(7,12,24,.94) 16px,rgba(7,12,24,.98));box-shadow:none}
 #statusPanels.framedOverlay #leaderboardViewsHead{align-items:flex-start;justify-content:space-between}
 #statusPanels.framedOverlay #leaderboardFilterWrap{align-items:flex-end}
 #statusPanels.framedOverlay #leaderboardViewButtons{gap:10px;justify-content:flex-start}
