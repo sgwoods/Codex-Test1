@@ -314,6 +314,12 @@ Near-term tools should support:
 - producing a slice-profile summary
 - comparing a Platinum harness log to a reference event log
 
+Current seed automation:
+
+- `npm run harness:check:classic-arcade-ingestion`
+  - validates the `galaxian-reference` manifest, selected window scaffold,
+    reference event log, artifact folders, and semantic profile anchors
+
 Future tools should support:
 
 - optical board-state detection
