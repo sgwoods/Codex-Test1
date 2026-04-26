@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "tools/harness/run-galaxian-preview-evidence-cycle.js",
-  "generated_at": "2026-04-26T20:39:14.065Z",
+  "generated_at": "2026-04-26T20:55:03.472Z",
   "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
   "source_anchor": "/Users/sgwoods/Downloads/Galaxian (Arcade) original video game  15-wave session for 1 Player 👾🌌🕹️ - Nenriki Gaming Channel (1080p, h264).mp4",
   "status": "promoted-review-windows",
@@ -12,6 +12,7 @@
       "start_time_s": 48,
       "duration_s": 42,
       "trace_fps": 15,
+      "trace_profile": "galaxian-portrait",
       "window_family": "opening-active-play",
       "why_it_matters": "First active rack and early player control evidence after intro and score-table surfaces.",
       "end_time_s": 90,
@@ -26,24 +27,27 @@
       },
       "trace_summary": {
         "sample_count": 630,
-        "player_sample_count": 107,
-        "player_detection_rate": 0.17,
-        "player_x_norm_min": 0.2693,
-        "player_x_norm_max": 0.767,
-        "player_x_norm_range": 0.4977,
-        "mean_abs_player_delta_per_sample": 0.0383,
-        "max_colored_component_count": 102,
-        "max_lower_pressure_component_count": 50,
-        "max_projectile_like_count": 51,
-        "max_attacker_like_count": 67
+        "player_sample_count": 626,
+        "player_detection_rate": 0.994,
+        "player_x_norm_min": 0.1243,
+        "player_x_norm_max": 0.8876,
+        "player_x_norm_range": 0.7633,
+        "mean_abs_player_delta_per_sample": 0.0158,
+        "max_colored_component_count": 105,
+        "max_lower_pressure_component_count": 56,
+        "max_projectile_like_count": 52,
+        "max_attacker_like_count": 73,
+        "max_rack_region_component_count": 92,
+        "max_active_pressure_component_count": 55
       },
-      "pressure_score": 62.367
+      "pressure_score": 65.983
     },
     {
       "window_id": "early-progression-pressure",
       "start_time_s": 90,
       "duration_s": 55,
       "trace_fps": 15,
+      "trace_profile": "galaxian-portrait",
       "window_family": "early-progression",
       "why_it_matters": "Early repeated pressure after the first active setup, useful for first playable pressure bands.",
       "end_time_s": 145,
@@ -58,24 +62,27 @@
       },
       "trace_summary": {
         "sample_count": 825,
-        "player_sample_count": 75,
-        "player_detection_rate": 0.091,
-        "player_x_norm_min": 0.249,
-        "player_x_norm_max": 0.7286,
-        "player_x_norm_range": 0.4796,
-        "mean_abs_player_delta_per_sample": 0.0429,
-        "max_colored_component_count": 103,
-        "max_lower_pressure_component_count": 26,
-        "max_projectile_like_count": 51,
-        "max_attacker_like_count": 57
+        "player_sample_count": 824,
+        "player_detection_rate": 0.999,
+        "player_x_norm_min": 0.0833,
+        "player_x_norm_max": 0.9088,
+        "player_x_norm_range": 0.8255,
+        "mean_abs_player_delta_per_sample": 0.0204,
+        "max_colored_component_count": 105,
+        "max_lower_pressure_component_count": 29,
+        "max_projectile_like_count": 53,
+        "max_attacker_like_count": 60,
+        "max_rack_region_component_count": 93,
+        "max_active_pressure_component_count": 29
       },
-      "pressure_score": 52.265
+      "pressure_score": 57.337
     },
     {
       "window_id": "mid-session-pressure",
       "start_time_s": 180,
       "duration_s": 60,
       "trace_fps": 15,
+      "trace_profile": "galaxian-portrait",
       "window_family": "mid-session-pressure",
       "why_it_matters": "Middle-session pressure candidate for comparing stage progression and player survival movement.",
       "end_time_s": 240,
@@ -90,24 +97,27 @@
       },
       "trace_summary": {
         "sample_count": 900,
-        "player_sample_count": 69,
-        "player_detection_rate": 0.077,
-        "player_x_norm_min": 0.2463,
-        "player_x_norm_max": 0.7668,
-        "player_x_norm_range": 0.5205,
-        "mean_abs_player_delta_per_sample": 0.0605,
-        "max_colored_component_count": 100,
-        "max_lower_pressure_component_count": 20,
-        "max_projectile_like_count": 48,
-        "max_attacker_like_count": 59
+        "player_sample_count": 900,
+        "player_detection_rate": 1,
+        "player_x_norm_min": 0.1112,
+        "player_x_norm_max": 0.9117,
+        "player_x_norm_range": 0.8005,
+        "mean_abs_player_delta_per_sample": 0.0165,
+        "max_colored_component_count": 104,
+        "max_lower_pressure_component_count": 22,
+        "max_projectile_like_count": 51,
+        "max_attacker_like_count": 61,
+        "max_rack_region_component_count": 91,
+        "max_active_pressure_component_count": 22
       },
-      "pressure_score": 53.938
+      "pressure_score": 51.888
     },
     {
       "window_id": "late-session-pressure",
       "start_time_s": 660,
       "duration_s": 60,
       "trace_fps": 15,
+      "trace_profile": "galaxian-portrait",
       "window_family": "late-session-pressure",
       "why_it_matters": "Late-session pressure candidate for later stage hooks and player movement under higher threat.",
       "end_time_s": 720,
@@ -122,24 +132,27 @@
       },
       "trace_summary": {
         "sample_count": 900,
-        "player_sample_count": 103,
-        "player_detection_rate": 0.114,
-        "player_x_norm_min": 0.2241,
-        "player_x_norm_max": 0.7449,
-        "player_x_norm_range": 0.5208,
-        "mean_abs_player_delta_per_sample": 0.0622,
-        "max_colored_component_count": 102,
-        "max_lower_pressure_component_count": 30,
-        "max_projectile_like_count": 47,
-        "max_attacker_like_count": 58
+        "player_sample_count": 876,
+        "player_detection_rate": 0.973,
+        "player_x_norm_min": 0.1389,
+        "player_x_norm_max": 0.8653,
+        "player_x_norm_range": 0.7264,
+        "mean_abs_player_delta_per_sample": 0.0192,
+        "max_colored_component_count": 106,
+        "max_lower_pressure_component_count": 34,
+        "max_projectile_like_count": 50,
+        "max_attacker_like_count": 61,
+        "max_rack_region_component_count": 96,
+        "max_active_pressure_component_count": 33
       },
-      "pressure_score": 58.52
+      "pressure_score": 55.31
     },
     {
       "window_id": "endgame-cleanup",
       "start_time_s": 870,
       "duration_s": 60,
       "trace_fps": 15,
+      "trace_profile": "galaxian-portrait",
       "window_family": "late-cleanup-or-game-over",
       "why_it_matters": "Endgame and depletion-state evidence for lifecycle, failure presentation, and long-run comparison.",
       "end_time_s": 930,
@@ -154,24 +167,27 @@
       },
       "trace_summary": {
         "sample_count": 900,
-        "player_sample_count": 79,
-        "player_detection_rate": 0.088,
-        "player_x_norm_min": 0.2231,
-        "player_x_norm_max": 0.7717,
-        "player_x_norm_range": 0.5486,
-        "mean_abs_player_delta_per_sample": 0.0601,
-        "max_colored_component_count": 82,
+        "player_sample_count": 781,
+        "player_detection_rate": 0.868,
+        "player_x_norm_min": 0.1616,
+        "player_x_norm_max": 0.9157,
+        "player_x_norm_range": 0.7541,
+        "mean_abs_player_delta_per_sample": 0.0195,
+        "max_colored_component_count": 86,
         "max_lower_pressure_component_count": 29,
-        "max_projectile_like_count": 46,
-        "max_attacker_like_count": 46
+        "max_projectile_like_count": 47,
+        "max_attacker_like_count": 47,
+        "max_rack_region_component_count": 77,
+        "max_active_pressure_component_count": 28
       },
-      "pressure_score": 57.89
+      "pressure_score": 52.777
     },
     {
       "window_id": "arcades-level-5-active-reference",
       "start_time_s": 8,
       "duration_s": 32,
       "trace_fps": 15,
+      "trace_profile": "default",
       "window_family": "external-active-play-comparison",
       "why_it_matters": "Compact comparison pass over the strongest active-play Level 5 reference.",
       "end_time_s": 40,
@@ -191,13 +207,15 @@
         "player_x_norm_min": 0.2246,
         "player_x_norm_max": 0.768,
         "player_x_norm_range": 0.5434,
-        "mean_abs_player_delta_per_sample": 0.0148,
+        "mean_abs_player_delta_per_sample": 0.0147,
         "max_colored_component_count": 86,
         "max_lower_pressure_component_count": 20,
         "max_projectile_like_count": 68,
-        "max_attacker_like_count": 55
+        "max_attacker_like_count": 55,
+        "max_rack_region_component_count": 73,
+        "max_active_pressure_component_count": 19
       },
-      "pressure_score": 50.085
+      "pressure_score": 49.61
     }
   ]
 }

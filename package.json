@@ -88,6 +88,7 @@
     "harness:check:stage2-carryover": "node tools/harness/check-stage2-carryover-parity.js",
     "harness:check:platinum-pack-boot": "node tools/harness/check-platinum-pack-boot.js",
     "harness:check:classic-arcade-ingestion": "node tools/harness/check-classic-arcade-ingestion.js",
+    "harness:cycle:classic-arcade-reference": "node tools/harness/run-classic-arcade-reference-cycle.js",
     "harness:trace:classic-arcade": "node tools/harness/trace-classic-arcade-video.js",
     "harness:cycle:galaxian-reference": "node tools/harness/run-galaxian-reference-cycle.js",
     "harness:cycle:galaxian-preview-evidence": "node tools/harness/run-galaxian-preview-evidence-cycle.js",

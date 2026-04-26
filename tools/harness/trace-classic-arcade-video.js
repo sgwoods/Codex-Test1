@@ -8,7 +8,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 function usage(){
   console.error([
     'Usage:',
-    '  node tools/harness/trace-classic-arcade-video.js --source <video> --out <dir> --window-id <id> --start <seconds> --duration <seconds> [--fps 5] [--width 270] [--height 480]',
+    '  node tools/harness/trace-classic-arcade-video.js --source <video> --out <dir> --window-id <id> --start <seconds> --duration <seconds> [--fps 5] [--width 270] [--height 480] [--profile default|galaxian-portrait]',
     '',
     'Outputs:',
     '  trace.json',
@@ -46,6 +46,67 @@ function requireArg(args, key){
   return args[key];
 }
 
+function optionalNumberArg(args, key, fallback){
+  if(args[key] == null) return fallback;
+  const value = Number(args[key]);
+  if(!Number.isFinite(value)) throw new Error(`--${key} must be numeric`);
+  return value;
+}
+
+function profileConfig(args){
+  const profile = args.profile || 'default';
+  const base = {
+    profile,
+    playerColorMode: 'cyan',
+    playerTop: 0.68,
+    playerBottom: 0.86,
+    playerLeft: 0.22,
+    playerRight: 0.78,
+    playerTargetY: 0.79,
+    playerTargetX: 0.5,
+    objectTop: 0.05,
+    objectBottom: 0.86,
+    minPlayerPixels: 4,
+    maxPlayerPixels: 180,
+    maxPlayerWidth: 28,
+    maxPlayerHeight: 24
+  };
+  if(profile === 'galaxian-portrait'){
+    Object.assign(base, {
+      playerColorMode: 'galaxian',
+      playerTop: 0.58,
+      playerBottom: 0.9,
+      playerLeft: 0.08,
+      playerRight: 0.92,
+      playerTargetY: 0.75,
+      objectTop: 0.04,
+      objectBottom: 0.9,
+      minPlayerPixels: 3,
+      maxPlayerPixels: 240,
+      maxPlayerWidth: 36,
+      maxPlayerHeight: 30
+    });
+  }else if(profile !== 'default'){
+    throw new Error(`Unsupported --profile ${profile}`);
+  }
+  return {
+    ...base,
+    playerColorMode: args['player-color-mode'] || base.playerColorMode,
+    playerTop: optionalNumberArg(args, 'player-top', base.playerTop),
+    playerBottom: optionalNumberArg(args, 'player-bottom', base.playerBottom),
+    playerLeft: optionalNumberArg(args, 'player-left', base.playerLeft),
+    playerRight: optionalNumberArg(args, 'player-right', base.playerRight),
+    playerTargetY: optionalNumberArg(args, 'player-target-y', base.playerTargetY),
+    playerTargetX: optionalNumberArg(args, 'player-target-x', base.playerTargetX),
+    objectTop: optionalNumberArg(args, 'object-top', base.objectTop),
+    objectBottom: optionalNumberArg(args, 'object-bottom', base.objectBottom),
+    minPlayerPixels: optionalNumberArg(args, 'min-player-pixels', base.minPlayerPixels),
+    maxPlayerPixels: optionalNumberArg(args, 'max-player-pixels', base.maxPlayerPixels),
+    maxPlayerWidth: optionalNumberArg(args, 'max-player-width', base.maxPlayerWidth),
+    maxPlayerHeight: optionalNumberArg(args, 'max-player-height', base.maxPlayerHeight)
+  };
+}
+
 function pixelOffset(width, x, y){
   return (y * width + x) * 3;
 }
@@ -58,6 +119,23 @@ function isBrightColored(r, g, b){
 
 function isPlayerCyan(r, g, b){
   return b >= 105 && g >= 80 && r <= 95 && (b - r) >= 40;
+}
+
+function isPlayerRedOrOrange(r, g, b){
+  return r >= 120 && g <= 120 && b <= 110 && (r - b) >= 40;
+}
+
+function isPlayerWhite(r, g, b){
+  return r >= 140 && g >= 140 && b >= 140 && Math.max(r, g, b) - Math.min(r, g, b) <= 55;
+}
+
+function isPlayerPixel(r, g, b, mode){
+  if(mode === 'cyan') return isPlayerCyan(r, g, b);
+  if(mode === 'bright-lower') return isBrightColored(r, g, b);
+  if(mode === 'galaxian'){
+    return isPlayerCyan(r, g, b) || isPlayerRedOrOrange(r, g, b) || isPlayerWhite(r, g, b);
+  }
+  throw new Error(`Unsupported player color mode ${mode}`);
 }
 
 function classifyColor(sumR, sumG, sumB, count){
@@ -133,15 +211,15 @@ function connectedComponents(mask, width, height){
   return components;
 }
 
-function analyzeFrame(frame, width, height, frameIndex, start, fps){
+function analyzeFrame(frame, width, height, frameIndex, start, fps, config){
   const playerMask = new Uint8Array(width * height);
   const coloredMask = new Uint8Array(width * height);
-  const playerTop = Math.floor(height * 0.68);
-  const playerBottom = Math.floor(height * 0.86);
-  const playerLeft = Math.floor(width * 0.22);
-  const playerRight = Math.floor(width * 0.78);
-  const objectTop = Math.floor(height * 0.05);
-  const objectBottom = Math.floor(height * 0.86);
+  const playerTop = Math.floor(height * config.playerTop);
+  const playerBottom = Math.floor(height * config.playerBottom);
+  const playerLeft = Math.floor(width * config.playerLeft);
+  const playerRight = Math.floor(width * config.playerRight);
+  const objectTop = Math.floor(height * config.objectTop);
+  const objectBottom = Math.floor(height * config.objectBottom);
 
   for(let y = 0; y < height; y += 1){
     for(let x = 0; x < width; x += 1){
@@ -155,7 +233,7 @@ function analyzeFrame(frame, width, height, frameIndex, start, fps){
         x <= playerRight &&
         y >= playerTop &&
         y <= playerBottom &&
-        isPlayerCyan(r, g, b)
+        isPlayerPixel(r, g, b, config.playerColorMode)
       ){
         playerMask[index] = 1;
       }
@@ -167,16 +245,16 @@ function analyzeFrame(frame, width, height, frameIndex, start, fps){
 
   const playerComponents = connectedComponents(playerMask, width, height)
     .filter(component => (
-      component.count >= 4 &&
-      component.count <= 180 &&
-      component.width <= 28 &&
-      component.height <= 24
+      component.count >= config.minPlayerPixels &&
+      component.count <= config.maxPlayerPixels &&
+      component.width <= config.maxPlayerWidth &&
+      component.height <= config.maxPlayerHeight
     ))
     .sort((a, b) => {
-      const targetY = height * 0.79;
-      const targetX = width * 0.5;
-      const scoreA = a.count * 2 - Math.abs(a.cy - targetY) * 0.25 - Math.abs(a.cx - targetX) * 0.05;
-      const scoreB = b.count * 2 - Math.abs(b.cy - targetY) * 0.25 - Math.abs(b.cx - targetX) * 0.05;
+      const targetY = height * config.playerTargetY;
+      const targetX = width * config.playerTargetX;
+      const scoreA = a.count * 2 - Math.abs(a.cy - targetY) * 0.35 - Math.abs(a.cx - targetX) * 0.04;
+      const scoreB = b.count * 2 - Math.abs(b.cy - targetY) * 0.35 - Math.abs(b.cx - targetX) * 0.04;
       return scoreB - scoreA;
     });
   const player = playerComponents[0] || null;
@@ -187,6 +265,8 @@ function analyzeFrame(frame, width, height, frameIndex, start, fps){
   let projectileLikeCount = 0;
   let attackerLikeCount = 0;
   let lowerPressureCount = 0;
+  let rackRegionCount = 0;
+  let activePressureCount = 0;
   const colorFamilies = {};
 
   for(const component of coloredComponents){
@@ -208,7 +288,11 @@ function analyzeFrame(frame, width, height, frameIndex, start, fps){
     const small = component.count <= 18 && component.width <= 8 && component.height <= 18;
     if(small) projectileLikeCount += 1;
     else attackerLikeCount += 1;
+    if(component.cy < height * 0.42) rackRegionCount += 1;
     if(component.cy >= height * 0.45) lowerPressureCount += 1;
+    if(component.cy >= height * 0.45 && component.cy <= height * 0.9 && component.width <= 24 && component.height <= 32){
+      activePressureCount += 1;
+    }
   }
 
   return {
@@ -224,6 +308,8 @@ function analyzeFrame(frame, width, height, frameIndex, start, fps){
     } : null,
     colored_component_count: coloredComponents.length,
     lower_pressure_component_count: lowerPressureCount,
+    rack_region_component_count: rackRegionCount,
+    active_pressure_component_count: activePressureCount,
     projectile_like_count: projectileLikeCount,
     attacker_like_count: attackerLikeCount,
     color_families: colorFamilies
@@ -248,7 +334,9 @@ function summarize(samples){
     max_colored_component_count: Math.max(...samples.map(sample => sample.colored_component_count)),
     max_lower_pressure_component_count: Math.max(...samples.map(sample => sample.lower_pressure_component_count)),
     max_projectile_like_count: Math.max(...samples.map(sample => sample.projectile_like_count)),
-    max_attacker_like_count: Math.max(...samples.map(sample => sample.attacker_like_count))
+    max_attacker_like_count: Math.max(...samples.map(sample => sample.attacker_like_count)),
+    max_rack_region_component_count: Math.max(...samples.map(sample => sample.rack_region_component_count || 0)),
+    max_active_pressure_component_count: Math.max(...samples.map(sample => sample.active_pressure_component_count || 0))
   };
 }
 
@@ -262,6 +350,8 @@ function toCsv(samples){
     'player_y_px',
     'colored_component_count',
     'lower_pressure_component_count',
+    'rack_region_component_count',
+    'active_pressure_component_count',
     'projectile_like_count',
     'attacker_like_count'
   ];
@@ -276,6 +366,8 @@ function toCsv(samples){
       sample.player ? sample.player.y_px : '',
       sample.colored_component_count,
       sample.lower_pressure_component_count,
+      sample.rack_region_component_count,
+      sample.active_pressure_component_count,
       sample.projectile_like_count,
       sample.attacker_like_count
     ].join(','));
@@ -327,6 +419,7 @@ function main(){
   const fps = numberArg(args, 'fps', 5);
   const width = numberArg(args, 'width', 270);
   const height = numberArg(args, 'height', 480);
+  const config = profileConfig(args);
   const frameSize = width * height * 3;
 
   fs.mkdirSync(outDir, { recursive: true });
@@ -356,7 +449,7 @@ function main(){
   const samples = [];
   for(let index = 0; index < frameCount; index += 1){
     const frame = buffer.subarray(index * frameSize, (index + 1) * frameSize);
-    samples.push(analyzeFrame(frame, width, height, index, start, fps));
+    samples.push(analyzeFrame(frame, width, height, index, start, fps, config));
   }
 
   const summary = summarize(samples);
@@ -369,6 +462,7 @@ function main(){
     duration_s: duration,
     sample_fps: fps,
     analysis_resolution: { width, height },
+    analysis_profile: config,
     confidence_note: 'First-pass color/component heuristic. Use for review prioritization, not final implementation tuning until manually spot-checked.',
     summary,
     samples

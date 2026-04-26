@@ -111,6 +111,12 @@ The deeper preview-evidence cycle currently promotes:
 These windows have per-window contact sheets, stills, waveforms, and traces.
 They are promoted review windows, not final canonical wave boundaries.
 
+The trace cycle uses the `galaxian-portrait` detector profile for this source.
+That profile widens the player search band and recognizes the Galaxip's mixed
+cyan, red/orange, and bright components. It substantially improves player
+detection on this portrait capture, while still requiring contact-sheet review
+before tuning.
+
 ## Required Next Artifacts
 
 Before this source becomes implementation evidence, add:
@@ -135,5 +141,7 @@ Before this source becomes implementation evidence, add:
   - promoted preview-evidence windows and trace summaries
 - `promoted-windows/TRACE_SUMMARY.md`
   - pressure and player-movement comparison for promoted windows
+- `promoted-windows/*/events/reference-events.json`
+  - generated event scaffolds for manual promotion to observed events
 
 The `clips`, `frames`, and `audio` folders are present as artifact targets.

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "window_id": "early-progression-pressure",
+  "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+  "status": "promoted-event-scaffold",
+  "timebase": {
+    "units": "seconds",
+    "source_start_time_s": 90,
+    "source_end_time_s": 145,
+    "frame_rate": 60,
+    "notes": "Generated from promoted evidence window. Replace with exact observed events after visual review."
+  },
+  "events": [
+    {
+      "event_id": "evt-001",
+      "event_family": "early_pressure",
+      "time_s": 90,
+      "duration_s": 5,
+      "entity_family": "alien_group",
+      "entity_id": "early_pressure",
+      "position_hint": "promoted review window; exact frame anchor pending manual review",
+      "motion_hint": "Early repeated pressure after the first active setup, useful for first playable pressure bands.",
+      "audio_hint": "waveform artifact present; cue attribution pending",
+      "confidence": "medium",
+      "source_note": "Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review."
+    },
+    {
+      "event_id": "evt-002",
+      "event_family": "alien_dive",
+      "time_s": 108.333,
+      "duration_s": null,
+      "entity_family": "alien_group",
+      "entity_id": "alien_dive",
+      "position_hint": "promoted review window; exact frame anchor pending manual review",
+      "motion_hint": "Early repeated pressure after the first active setup, useful for first playable pressure bands.",
+      "audio_hint": "waveform artifact present; cue attribution pending",
+      "confidence": "low",
+      "source_note": "Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review."
+    },
+    {
+      "event_id": "evt-003",
+      "event_family": "player_shot_cadence",
+      "time_s": 126.667,
+      "duration_s": null,
+      "entity_family": "player",
+      "entity_id": "galaxip",
+      "position_hint": "promoted review window; exact frame anchor pending manual review",
+      "motion_hint": "Early repeated pressure after the first active setup, useful for first playable pressure bands.",
+      "audio_hint": "waveform artifact present; cue attribution pending",
+      "confidence": "low",
+      "source_note": "Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review."
+    }
+  ],
+  "open_questions": [
+    "Which frames show the clearest rack, dive, projectile, and player movement events?",
+    "Which events should become implementation correspondence targets?",
+    "Does this window belong to first playable tuning or later progression planning?"
+  ]
+}

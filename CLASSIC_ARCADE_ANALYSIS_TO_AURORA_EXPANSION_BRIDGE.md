@@ -20,6 +20,14 @@ Before adding a major behavior family, capture the evidence shape first:
 
 This is the same path now used by the Galaxian preview cycle.
 
+For future branches, prefer a manifest-driven plan file so the same local CPU
+cycle can run against a second game, a Galaga reference clip, or an Aurora
+harness video:
+
+```sh
+npm run harness:cycle:classic-arcade-reference -- --plan <plan.json>
+```
+
 ## Aurora Stage Expansion Evidence Set
 
 For each Aurora expansion branch, collect at least four windows:
@@ -45,6 +53,7 @@ trying to improve before tuning begins.
 - per-window still frames
 - per-window movement / pressure traces
 - semantic event log
+- generated event scaffold for each promoted window
 - pressure curve summary
 - playable-slice spec
 - harness target list

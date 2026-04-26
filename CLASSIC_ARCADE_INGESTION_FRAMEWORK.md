@@ -152,6 +152,16 @@ implementation. A promoted review window should have contact sheets, stills,
 waveform when audio matters, a trace summary, and a written reason why it maps
 to opening, challenge, mid-run, late-run, cleanup, or failure-state semantics.
 
+The preferred reusable entry point is a manifest-driven reference cycle:
+
+```sh
+npm run harness:cycle:classic-arcade-reference -- --plan <plan.json>
+```
+
+Plan files should declare sources, source-specific trace profiles, promoted
+windows, output roots, and why each window matters. This keeps second-game work
+and Aurora level-expansion work on the same evidence path.
+
 ### 4. Event Logging
 
 Convert selected windows into reference-side event logs.
