@@ -246,12 +246,20 @@ mask:
 #dockQuickTools .dockToolGroup{display:flex;flex-direction:column;gap:8px}
 #dockQuickTools .dockToolGroupPilot{margin-bottom:28px}
 #dockQuickTools .dockToolGroupUtility{margin-top:auto}
-#dockQuickTools button{display:flex;align-items:center;justify-content:center;gap:0;min-height:46px;padding:0;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
-#dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
-#dockQuickTools button.active,#dockQuickTools button.open{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
-#dockQuickTools button:disabled{opacity:.45;cursor:default;transform:none}
-#dockQuickTools button:disabled:hover{background:rgba(8,18,35,.78);border-color:rgba(136,245,255,.28)}
-#dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;transform:translateY(-1px)}
+#dockQuickTools button{display:flex;align-items:center;justify-content:center;gap:0;min-height:46px;padding:0;border:0;background:transparent;color:#f4fbff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:none;box-shadow:none;transition:color .14s,transform .14s,filter .14s,opacity .14s;position:relative}
+#dockQuickTools button:hover,#dockQuickTools button:focus-visible{color:#ffe39a;transform:translateY(-1px);filter:drop-shadow(0 0 14px rgba(126,242,255,.24));outline:none}
+#dockQuickTools button.active,#dockQuickTools button.open{color:#ffe39a;filter:drop-shadow(0 0 18px rgba(255,216,109,.24))}
+#dockQuickTools button:disabled{opacity:.45;cursor:default;transform:none;filter:none}
+#dockQuickTools button:disabled:hover,#dockQuickTools button:disabled:focus-visible{color:#f4fbff;transform:none;filter:none}
+#dockQuickTools .dockToolGroupPrimary button,
+#dockQuickTools .dockToolGroupUtility button{min-height:60px}
+#dockQuickTools .dockToolGroupPrimary button::after,
+#dockQuickTools .dockToolGroupUtility button::after{content:attr(data-action-tip);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);padding:5px 8px;border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.92);color:#dff7ff;font:700 10px/1.1 "Courier New",Consolas,monospace;letter-spacing:.04em;white-space:nowrap;opacity:0;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.28);transition:opacity .12s,transform .12s}
+#dockQuickTools .dockToolGroupPrimary button:hover::after,
+#dockQuickTools .dockToolGroupPrimary button:focus-visible::after,
+#dockQuickTools .dockToolGroupUtility button:hover::after,
+#dockQuickTools .dockToolGroupUtility button:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(-2px)}
+#dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transform:none;filter:drop-shadow(0 0 10px rgba(126,242,255,.18))}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
@@ -259,7 +267,7 @@ mask:
 #accountDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
 #accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
-#muteToggleBtn[data-muted="true"]{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.72);color:#ffe39a}
+#muteToggleBtn[data-muted="true"]{color:#ffe39a}
 #accountPanel{display:none;flex-direction:column;gap:12px;width:min(100%,620px);padding:16px 18px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
 #accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}

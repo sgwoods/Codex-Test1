@@ -42,7 +42,8 @@ function syncAudioUi(){
  muteToggleBtn.dataset.muted=audioMuted?'true':'false';
  muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
  muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
- muteToggleBtn.title=audioMuted?'Game audio muted':'Game audio on';
+ muteToggleBtn.title=audioMuted?'Unmute game audio':'Mute game audio';
+ muteToggleBtn.dataset.actionTip=audioMuted?'Unmute game audio':'Mute game audio';
  const icon=muteToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
@@ -56,6 +57,7 @@ function syncPauseUi(){
  pauseToggleBtn.setAttribute('aria-pressed',active?'true':'false');
  pauseToggleBtn.setAttribute('aria-label',active?'Resume game':'Pause game');
  pauseToggleBtn.title=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
+ pauseToggleBtn.dataset.actionTip=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
  const icon=pauseToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=active?'▶':'⏸';
  pauseToggleBtn.classList.toggle('active',active);
