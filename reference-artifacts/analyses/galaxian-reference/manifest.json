@@ -167,7 +167,7 @@
         "Does the intro window contain first movement, first shot, or first dive evidence?"
       ],
       "confidence": "medium",
-      "notes": "Contact-sheet review confirms title/mission text, score table, Namco presentation, full rack, game-over state, visible player Galaxip, and at least one visible shot/player-pressure moment. Exact event timestamps still need frame-accurate review before implementation."
+      "notes": "Contact-sheet review confirms title/mission text, score table, Namco presentation, full rack, game-over state, visible player Galaxip, and visible late pressure/explosion moments. Subwindow metadata now splits title-mission, score-advance-table, rack-handoff, and late-attract-pressure. Treat late action as attract/demo evidence until compared against an active gameplay source."
     },
     {
       "window_id": "arcades-lounge-level-5",

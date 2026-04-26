@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "source_id": "matt-hawkins-galaxian-arcade-intro-720p-h264",
+  "parent_window_id": "matt-hawkins-arcade-intro",
+  "status": "review-subwindows",
+  "source_video_duration_s": 59.133333,
+  "source_format_duration_s": 59.267438,
+  "nominal_frame_rate": 30,
+  "created_date": "2026-04-26",
+  "notes": "Subwindows are derived from review contact sheets, not committed source video clips. Frame numbers use nominal 30 fps source timing. The installed ffmpeg build does not expose drawtext, so tile time labels are recorded here instead of burned into images.",
+  "subwindows": [
+    {
+      "subwindow_id": "title-mission",
+      "role": "presentation-title-mission",
+      "start_time_s": 0,
+      "end_time_s": 6,
+      "start_frame_nominal": 0,
+      "end_frame_nominal": 180,
+      "review_artifacts": [
+        "frames/subwindow-title-mission-0-6s.png",
+        "frames/subwindow-title-mission-0-6s-4fps.png"
+      ],
+      "tile_cadence": "4 fps sheet uses 0.25 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Opening begins on a starfield with score labels and credits.",
+        "Title text appears before mission text.",
+        "Score advance table presentation begins near the end of this window."
+      ],
+      "implementation_use": "Good for title and mission presentation sequencing; not gameplay conformance.",
+      "confidence": "medium"
+    },
+    {
+      "subwindow_id": "score-advance-table",
+      "role": "presentation-scoring-semantics",
+      "start_time_s": 5,
+      "end_time_s": 29,
+      "start_frame_nominal": 150,
+      "end_frame_nominal": 870,
+      "review_artifacts": [
+        "frames/subwindow-score-table-5-29s.png",
+        "frames/subwindow-score-table-5-29s-2fps.png"
+      ],
+      "tile_cadence": "2 fps sheet uses 0.5 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Score advance table is presented progressively.",
+        "Convoy and charger labels are readable.",
+        "Enemy-value rows and Namco presentation are visible before the rack handoff."
+      ],
+      "implementation_use": "Good for semantic naming of Galaxian score and enemy families; not a movement window.",
+      "confidence": "medium"
+    },
+    {
+      "subwindow_id": "rack-handoff",
+      "role": "formation-rack-presentation",
+      "start_time_s": 34,
+      "end_time_s": 42,
+      "start_frame_nominal": 1020,
+      "end_frame_nominal": 1260,
+      "review_artifacts": [
+        "frames/subwindow-rack-display-28-42s.png",
+        "frames/subwindow-rack-handoff-34-42s-4fps.png"
+      ],
+      "tile_cadence": "4 fps sheet uses 0.25 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Score table and Namco presentation give way to a full alien rack.",
+        "Game-over text appears with the rack rather than a clean active wave start.",
+        "Top-rank and lower-rank alien families are readable enough for semantic tagging."
+      ],
+      "implementation_use": "Useful for rack composition, enemy-family readability, and attract-mode presentation; needs a separate active-gameplay source for true formation-entry motion.",
+      "confidence": "medium"
+    },
+    {
+      "subwindow_id": "late-attract-pressure",
+      "role": "attract-demo-pressure",
+      "start_time_s": 48,
+      "end_time_s": 59.133333,
+      "start_frame_nominal": 1440,
+      "end_frame_nominal": 1774,
+      "review_artifacts": [
+        "frames/subwindow-late-pressure-42-59s.png",
+        "frames/subwindow-late-pressure-48-59s-4fps.png"
+      ],
+      "tile_cadence": "4 fps sheet uses 0.25 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Player Galaxip, attacker movement, projectiles or shots, and explosion states are visible.",
+        "Game-over text remains visible, so this is likely attract/demo or post-game presentation rather than clean live player control.",
+        "This window is promising for first semantic pressure examples but not yet safe for player-control tuning."
+      ],
+      "implementation_use": "Use for early enemy/projectile/explosion vocabulary and as a candidate for future trace tooling; avoid using it as player movement authority until classified.",
+      "confidence": "medium"
+    }
+  ],
+  "next_review_steps": [
+    "Create frame-exact still sequences for rack-handoff and late-attract-pressure before deriving motion curves.",
+    "Compare late-attract-pressure against an active gameplay source to separate attract/demo behavior from live play.",
+    "Use ARCADE'S LOUNGE and Nenriki sources for higher-confidence gameplay and progression windows."
+  ]
+}

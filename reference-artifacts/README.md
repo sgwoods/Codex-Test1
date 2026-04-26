@@ -27,6 +27,9 @@ npm run machine:bootstrap
 ```
 
 Use them for clipped windows, still frames, contact sheets, and waveform images.
+If the local `ffmpeg` build does not include an overlay filter such as
+`drawtext`, record contact-sheet tile cadence and subwindow timing in adjacent
+metadata instead of adding another image-annotation dependency.
 
 ## Storage Policy
 
