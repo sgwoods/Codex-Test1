@@ -74,6 +74,36 @@ Verification:
 
 - `npm run harness:check:overlay-screen-switching`
 
+4. Game picker wording and Platinum dock cleanup
+
+- the game-picker selector no longer surfaces the confusing `online • wait mode`
+  wording on the dock status line
+- the in-run guard text now tells the player to finish the current run instead
+  of talking about wait mode
+- the lower-left Platinum dock button now uses the platform mark by itself so
+  the icon fits the space cleanly without extra overlapping text
+- issue families:
+  - `#175` remove Online Wait Mode text from game selector
+  - `#177` fix Platinum icon text overlap
+
+Verification:
+
+- `npm run harness:check:dock-buttons`
+
+5. Production Root-mode ship-adjustment preservation fix
+
+- production still locks the visible start-state controls to the shipped
+  defaults
+- leaving Root mode now preserves the hidden custom ship-adjustment values
+  instead of wiping them back to defaults
+- re-entering Root mode restores those saved adjustments cleanly
+- issue family:
+  - `#179` developer tools Root mode defaults on ship adjustments
+
+Verification:
+
+- `npm run harness:check:production-developer-lock`
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -126,6 +156,8 @@ Minimum patch verification:
 - `npm run harness:check:input-mapping`
 - `npm run harness:check:pilot-recent-scores-refresh`
 - `npm run harness:check:overlay-screen-switching`
+- `npm run harness:check:dock-buttons`
+- `npm run harness:check:production-developer-lock`
 - `npm run harness:check:dual-final-life-survivor`
 - `npm run harness:check:game-over-carry-suppression`
 - `npm run harness:check:close-shot-hit`

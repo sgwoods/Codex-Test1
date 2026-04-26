@@ -236,11 +236,10 @@ mask:
 #gamePickerDockLabel{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
 #gamePickerDockStatus{display:block;font:700 12px/1.1 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #platformDock{position:absolute;left:12px;right:12px;bottom:12px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
-#platformSplashBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:78px;padding:10px 8px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
+#platformSplashBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:100%;min-height:78px;padding:12px 8px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
 #platformSplashBtn:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
 #platformSplashBtn.open,#platformSplashBtn.active{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
-#platformSplashDockIcon{display:block;width:min(100%,58px);height:auto;object-fit:contain;filter:drop-shadow(0 0 10px rgba(116,230,255,.28))}
-#platformSplashDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;text-transform:uppercase}
+#platformSplashDockIcon{display:block;width:min(100%,72px);max-height:44px;height:auto;object-fit:contain;filter:drop-shadow(0 0 10px rgba(116,230,255,.28))}
 #statusDock{position:absolute;left:12px;top:12px;right:12px;bottom:12px;z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px}
 #statusDock{pointer-events:auto}
 #dockQuickTools{display:flex;flex-direction:column;justify-content:flex-start;gap:18px;width:100%;height:100%}

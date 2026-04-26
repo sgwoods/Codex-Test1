@@ -1384,8 +1384,15 @@ function loadTestCfg(){
  return Object.assign({},testCfgCache);
 }
 function saveTestCfg(){
+ const currentCfg=testCfgCache||loadTestCfg();
  const startCfg=productionStartStateLocked()
-  ? DEFAULT_TEST_CFG
+  ? {
+    stage:cl(+currentCfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+    ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
+    extendFirst:cl(Math.max(0,+currentCfg.extendFirst||0),0,999999)|0,
+    extendRecurring:cl(Math.max(0,+currentCfg.extendRecurring||0),0,999999)|0,
+    challenge:!!currentCfg.challenge
+   }
   : {
     stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
     ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
