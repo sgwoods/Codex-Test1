@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
+  "parent_window_id": "arcades-lounge-level-5",
+  "status": "review-subwindows",
+  "source_video_duration_s": 58.24,
+  "source_format_duration_s": 58.322086,
+  "nominal_frame_rate": 25,
+  "created_date": "2026-04-26",
+  "notes": "Subwindows are derived from review contact sheets, not committed source video clips. Frame numbers use nominal 25 fps source timing. This source is currently the strongest active-gameplay Galaxian reference in the local library.",
+  "subwindows": [
+    {
+      "subwindow_id": "opening-rack-pressure",
+      "role": "settled-rack-active-play",
+      "start_time_s": 0,
+      "end_time_s": 8,
+      "start_frame_nominal": 0,
+      "end_frame_nominal": 200,
+      "review_artifacts": [
+        "frames/contact-sheet-1fps-0-58s.png",
+        "frames/subwindow-opening-rack-0-8s-4fps.png"
+      ],
+      "tile_cadence": "4 fps sheet uses 0.25 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Clip opens on a settled active rack rather than an attract/game-over presentation.",
+        "Player Galaxip is visible in the lower playfield with reserve ships at the bottom.",
+        "Early enemy dives and projectiles are already present."
+      ],
+      "implementation_use": "Good initial active-play window for formation state, player lane position, and first later-wave pressure.",
+      "confidence": "high"
+    },
+    {
+      "subwindow_id": "early-attacks",
+      "role": "multi-attacker-pressure",
+      "start_time_s": 8,
+      "end_time_s": 20,
+      "start_frame_nominal": 200,
+      "end_frame_nominal": 500,
+      "review_artifacts": [
+        "frames/subwindow-early-attacks-8-20s-4fps.png"
+      ],
+      "tile_cadence": "4 fps sheet uses 0.25 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Multiple attackers and projectiles appear in the lower and mid playfield.",
+        "Player movement visibly corrects under pressure.",
+        "Explosions and score changes are visible."
+      ],
+      "implementation_use": "Useful for later-wave dive density, player evasive movement, and shot/projectile vocabulary.",
+      "confidence": "high"
+    },
+    {
+      "subwindow_id": "mid-pressure",
+      "role": "dense-active-pressure",
+      "start_time_s": 20,
+      "end_time_s": 40,
+      "start_frame_nominal": 500,
+      "end_frame_nominal": 1000,
+      "review_artifacts": [
+        "frames/subwindow-mid-pressure-20-40s-2fps.png"
+      ],
+      "tile_cadence": "2 fps sheet uses 0.5 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Formation is thinned while attackers continue from both sides and center lanes.",
+        "Player stays active across the lower field rather than holding a single lane.",
+        "Projectile and dive coverage spans enough of the screen to inform later-pressure hooks."
+      ],
+      "implementation_use": "Best current candidate for active gameplay pressure tracing and progression behavior.",
+      "confidence": "high"
+    },
+    {
+      "subwindow_id": "late-cleanup",
+      "role": "late-wave-cleanup-pressure",
+      "start_time_s": 40,
+      "end_time_s": 58.24,
+      "start_frame_nominal": 1000,
+      "end_frame_nominal": 1456,
+      "review_artifacts": [
+        "frames/subwindow-late-cleanup-40-58s-2fps.png"
+      ],
+      "tile_cadence": "2 fps sheet uses 0.5 second cadence, left-to-right then top-to-bottom.",
+      "observations": [
+        "Rack is heavily depleted and attack pressure continues with fewer enemies.",
+        "Player movement remains visible and reactive.",
+        "This window may help model late-wave cleanup rather than opening formation behavior."
+      ],
+      "implementation_use": "Useful for future progression and late-wave cleanup semantics; lower priority for the first scout-wave preview.",
+      "confidence": "medium"
+    }
+  ],
+  "next_review_steps": [
+    "Generate frame-exact still sequences for early-attacks and mid-pressure.",
+    "Trace Galaxip x-position over early-attacks or mid-pressure before tuning movement.",
+    "Use this source as the active-gameplay complement to the Matt Hawkins presentation/rack source."
+  ]
+}

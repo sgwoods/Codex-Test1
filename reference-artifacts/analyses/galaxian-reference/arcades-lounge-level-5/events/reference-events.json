@@ -3,85 +3,98 @@
   "game_lineage": "galaxian-reference",
   "window_id": "arcades-lounge-level-5",
   "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
-  "status": "event-skeleton",
+  "status": "events-observed",
   "timebase": {
     "units": "seconds",
-    "source_start_time_s": null,
-    "source_end_time_s": null,
-    "frame_rate": null,
-    "notes": "Fill after local review of the ARCADE'S LOUNGE Level 5 source."
+    "source_start_time_s": 0,
+    "source_end_time_s": 58.322086,
+    "frame_rate": 25,
+    "notes": "Event timing is based on 1 fps, 2 fps, and 4 fps contact-sheet review. Use frame-exact still sequences before implementation tuning."
   },
   "events": [
     {
       "event_id": "evt-001",
       "event_family": "level_or_wave_visible",
-      "time_s": null,
-      "duration_s": null,
+      "time_s": 0,
+      "duration_s": 58.322086,
       "entity_family": "progression",
       "entity_id": "level-5",
       "position_hint": "stage indicator or inferred source context",
-      "motion_hint": "pending observation",
-      "audio_hint": "",
-      "confidence": "unknown",
-      "source_note": "Anchor the clip as later-progression evidence if Level 5 is directly visible or strongly inferable."
+      "motion_hint": "active later-wave gameplay throughout the clip",
+      "audio_hint": "usable audio present, mean -19.3 dB, max -4.8 dB",
+      "confidence": "medium",
+      "source_note": "Level 5 is inferred from source filename/provenance; the clip itself provides active later-pressure gameplay evidence."
     },
     {
       "event_id": "evt-002",
       "event_family": "formation_rack_observed",
-      "time_s": null,
-      "duration_s": null,
+      "time_s": 0,
+      "duration_s": 8,
       "entity_family": "formation",
       "entity_id": "formation-level-5",
-      "position_hint": "upper field if visible",
-      "motion_hint": "pending observation",
+      "position_hint": "upper field",
+      "motion_hint": "settled rack with early dives and projectiles",
       "audio_hint": "",
-      "confidence": "unknown",
-      "source_note": "Use to compare later-wave formation state against opening-wave formation state."
+      "confidence": "high",
+      "source_note": "Opening-rack-pressure subwindow shows settled active rack and early pressure."
     },
     {
       "event_id": "evt-003",
       "event_family": "multi_attacker_pressure",
-      "time_s": null,
-      "duration_s": null,
+      "time_s": 8,
+      "duration_s": 12,
       "entity_family": "alien_group",
       "entity_id": "attack-group-1",
-      "position_hint": "pending observation",
-      "motion_hint": "simultaneous attackers pending observation",
+      "position_hint": "mid and lower playfield",
+      "motion_hint": "multiple attackers and projectiles visible while player corrects laterally",
       "audio_hint": "",
-      "confidence": "unknown",
-      "source_note": "Use to capture later-pressure dive density."
+      "confidence": "high",
+      "source_note": "Early-attacks subwindow provides the first strong active-gameplay pressure evidence."
     },
     {
       "event_id": "evt-004",
-      "event_family": "flagship_or_escort_attack",
-      "time_s": null,
-      "duration_s": null,
-      "entity_family": "flagship_or_escort",
-      "entity_id": "convoy-1",
-      "position_hint": "pending observation",
-      "motion_hint": "flagship / escort path pending observation",
-      "audio_hint": "",
-      "confidence": "unknown",
-      "source_note": "Include if the Level 5 source shows top-rank or escort attack behavior."
-    },
-    {
-      "event_id": "evt-005",
       "event_family": "player_pressure_response",
-      "time_s": null,
-      "duration_s": null,
+      "time_s": 8,
+      "duration_s": 50.322086,
       "entity_family": "player",
       "entity_id": "galaxip",
       "position_hint": "lower field",
-      "motion_hint": "movement / firing response pending observation",
+      "motion_hint": "continuous lateral corrections and firing under later-wave pressure",
       "audio_hint": "",
-      "confidence": "unknown",
-      "source_note": "Use to understand how player behavior changes under later-wave pressure."
+      "confidence": "high",
+      "source_note": "The player remains visible and reactive across early-attacks, mid-pressure, and late-cleanup windows."
+    },
+    {
+      "event_id": "evt-005",
+      "event_family": "flagship_or_escort_attack",
+      "time_s": 20,
+      "duration_s": 20,
+      "entity_family": "flagship_or_escort",
+      "entity_id": "convoy-1",
+      "position_hint": "upper and mid playfield",
+      "motion_hint": "top-rank and colored attackers remain visible during dense pressure",
+      "audio_hint": "",
+      "confidence": "medium",
+      "source_note": "Mid-pressure subwindow appears to include top-rank/escort-like behavior, but exact grouping needs frame-exact review."
+    },
+    {
+      "event_id": "evt-006",
+      "event_family": "late_wave_cleanup",
+      "time_s": 40,
+      "duration_s": 18.322086,
+      "entity_family": "progression",
+      "entity_id": "cleanup-level-5",
+      "position_hint": "full playfield",
+      "motion_hint": "depleted rack with continued attacks and player dodges",
+      "audio_hint": "",
+      "confidence": "medium",
+      "source_note": "Late-cleanup subwindow is useful for progression hooks but lower priority than early active pressure for the first preview."
     }
   ],
   "open_questions": [
-    "Is Level 5 directly visible in the clip or inferred from title/provenance?",
-    "How many attackers are visible during the densest observed moment?",
-    "Does the source show flagship / escort attacks clearly?",
-    "Is this source suitable for progression targets or only qualitative review?"
+    "Can Level 5 be directly confirmed from on-screen stage indicators, or only from source provenance?",
+    "How many attackers are visible during the densest observed moment after frame-exact review?",
+    "Which top-rank/escort moments are distinct convoy attacks versus ordinary dives?",
+    "Which subwindow should become the first Galaxip x-position trace?"
   ]
 }
