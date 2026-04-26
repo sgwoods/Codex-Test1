@@ -49,7 +49,10 @@ Observed:
 - player movement is continuous and reactive across the clip
 - player shot and projectile states are visible
 - player uses lane corrections and dodges rather than static lane holding
-- the source is clean enough to become the first Galaxip x-position trace
+- the source is clean enough to produce the first Galaxip x-position trace
+- the `early-attacks` trace sampled `300` frames from `8.000s` to `20.000s`
+  at `25 fps`, with `300` player detections and normalized x range `0.2246`
+  to `0.6556`
 
 ## First Harness Implications
 
@@ -66,7 +69,8 @@ Draft targets from this source:
 
 - Should Level 5 pressure influence the first playable slice or stay as a
   later-wave extension hook?
-- Which window should be traced first: `early-attacks` or `mid-pressure`?
+- Should `mid-pressure` receive the next frame-level trace, or should
+  `early-attacks` be manually spot-checked first?
 - What is the maximum simultaneous attacker/projectile count in the densest
   frame-exact window?
 - Which event families overlap with the Matt Hawkins presentation/rack source?

@@ -86,8 +86,8 @@ The first useful split is:
 
 Before this source becomes implementation evidence, add:
 
-- frame-exact still sequences for `early-attacks` and `mid-pressure`
-- Galaxip x-position trace for one active subwindow
+- manual spot-check of the first Galaxip x-position trace
+- frame-exact still sequences for `mid-pressure`
 - projectile / attacker-count pass for dense moments
 - clipped media or reproducible capture instructions only if rights are cleared
 
@@ -123,6 +123,9 @@ Before this source becomes implementation evidence, add:
 - `subwindows/reference-subwindows.json`
   - subwindow boundaries, nominal frame ranges, tile cadence, observations, and
     implementation-use notes
+- `traces/early-attacks-galaxip-x/`
+  - first-pass frame-level Galaxip x-position and lower-pressure component
+    trace for the `8.000s` to `20.000s` early-attacks window
 
 The `clips` folder remains available for canonical subwindow extraction after
 rights review.

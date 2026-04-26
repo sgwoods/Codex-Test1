@@ -38,7 +38,10 @@
       "start_frame_nominal": 200,
       "end_frame_nominal": 500,
       "review_artifacts": [
-        "frames/subwindow-early-attacks-8-20s-4fps.png"
+        "frames/subwindow-early-attacks-8-20s-4fps.png",
+        "traces/early-attacks-galaxip-x/trace.json",
+        "traces/early-attacks-galaxip-x/trace.csv",
+        "traces/early-attacks-galaxip-x/player-x.svg"
       ],
       "tile_cadence": "4 fps sheet uses 0.25 second cadence, left-to-right then top-to-bottom.",
       "observations": [
@@ -46,7 +49,7 @@
         "Player movement visibly corrects under pressure.",
         "Explosions and score changes are visible."
       ],
-      "implementation_use": "Useful for later-wave dive density, player evasive movement, and shot/projectile vocabulary.",
+      "implementation_use": "Useful for later-wave dive density, player evasive movement, and shot/projectile vocabulary. First-pass frame-level Galaxip x trace now exists and should be manually spot-checked before tuning.",
       "confidence": "high"
     },
     {
@@ -89,8 +92,8 @@
     }
   ],
   "next_review_steps": [
-    "Generate frame-exact still sequences for early-attacks and mid-pressure.",
-    "Trace Galaxip x-position over early-attacks or mid-pressure before tuning movement.",
+    "Manually spot-check the early-attacks Galaxip x-position trace.",
+    "Generate frame-exact still sequences for mid-pressure.",
     "Use this source as the active-gameplay complement to the Matt Hawkins presentation/rack source."
   ]
 }
