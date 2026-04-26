@@ -167,6 +167,9 @@ The `galaxian-mechanics` archive is useful, but it is still mostly planning-leve
 - a Galaxian event-family timing library
 - formation/layout baselines
 - flagship/escort scoring and dive traces
+- source manifests for discovered or local reference footage
+- clipped windows with event logs and confidence notes
+- semantic slice profiles that can produce harness targets
 
 That library should support more than design understanding. It should support:
 
@@ -174,6 +177,11 @@ That library should support more than design understanding. It should support:
 - iterative pack construction from preserved evidence
 - keeping the new game compatible with the same core player controls
 - richer persona creation and eventual simulated-opponent work
+- a repeatable ingestion process for future classic arcade variants
+
+The governing process is now captured in:
+
+- `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
 
 ## Recommended Analysis Order From Here
 
@@ -192,4 +200,5 @@ Use this roadmap as the current default:
 - for `/beta` shaping:
   - require both existing checks and at least one extended fidelity analysis in the weak categories
 - for future Platinum sibling work:
-  - start by creating a reference library and trace inventory before tuning game behavior
+  - start by creating source manifests, clipped windows, reference event logs,
+    and semantic slice profiles before tuning game behavior

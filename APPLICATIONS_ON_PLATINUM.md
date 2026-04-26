@@ -170,6 +170,15 @@ style ruleset:
 - scoring table and single-shot constraints
 - a small harness plan for the first scout-wave slice
 
+Use the reusable ingestion process in:
+
+- `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
+
+That means the first scout-wave slice should be traceable through source
+manifest, clipped window, event log, semantic model, correspondence target, and
+harness evidence. The point is to learn `Galaxy Guardians` and also prove the
+method we will reuse for later games.
+
 ## Related Docs
 
 - platform overview and ownership:

@@ -4,6 +4,14 @@ This program defines how preserved gameplay footage should be turned into durabl
 
 The goal is not just to keep videos around. The goal is to extract structured evidence from them in forms that line up with Aurora's own runtime logs, timing libraries, and quality scorecards.
 
+For future sibling games, this program feeds the broader ingestion process in:
+
+- `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
+
+That framework describes how source discovery, manifests, event logs, semantic
+models, correspondence targets, and harness plans should become a repeatable
+way to build future Platinum game packs.
+
 ## Why This Matters
 
 For the next fidelity cycle, preserved gameplay footage is most valuable when it gives us all of these together:
@@ -21,6 +29,8 @@ This is especially important for:
 - audio identity and cue timing
 - challenge-stage choreography
 - boss and escort behavior
+- future `Galaxian` / `Galaxy Guardians` scout-wave modeling
+- reusable ingestion of later classic arcade variants
 
 ## Output Types We Want From Preserved Video
 

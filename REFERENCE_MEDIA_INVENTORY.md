@@ -4,6 +4,14 @@ This inventory lists the preserved gameplay footage, reference media, and derive
 
 It exists so future work does not depend on memory or chat history when deciding what evidence is already available.
 
+For the repeatable source-to-game-pack process, pair this inventory with:
+
+- `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
+
+That framework defines the manifest, window, event-log, semantic-model, and
+harness-planning chain that should govern `Galaxian` / `Galaxy Guardians` and
+future Platinum game ingestion.
+
 ## Core Aurora / Galaga Reference Sources
 
 | Source family | Local analysis anchor | What it contains | Best use |
@@ -55,6 +63,10 @@ These are the most important missing reference structures, not missing media fil
 4. A stronger Galaxian sibling timing library to match the current Aurora / Galaga baseline maturity.
 5. Reference-side event logs that align preserved video timestamps with Aurora-like event families.
 6. A durable labeled catalog of core ship/enemy/presentation image artifacts for comparison and documentation.
+7. Source manifests that record provenance, license notes, analysis status, and
+   confidence before a discovered video becomes implementation evidence.
+8. Semantic slice profiles that translate reference windows into game-pack rules
+   and harness targets.
 
 ## Working Rule
 
