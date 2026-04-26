@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "platinum_target_pack": "galaxy-guardians-preview",
+  "status": "source-discovery-seed",
+  "created_date": "2026-04-26",
+  "purpose": "Seed the repeatable classic-arcade ingestion pipeline for a small Galaxian-style formation-entry and first-dive slice.",
+  "governing_process": "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
+  "candidate_sources": [
+    {
+      "source_id": "yt-redsevennine-galaxian-1979-arcade-gameplay-720p60",
+      "game_lineage": "galaxian-reference",
+      "title": "Galaxian | 1979 | Arcade | Gameplay | HD 720p 60FPS",
+      "url_or_local_anchor": "https://www.youtube.com/watch?v=C8g9a45A2W8",
+      "creator_or_archive": "RedSevenNine",
+      "capture_type": "MAME arcade gameplay capture",
+      "duration": "unknown",
+      "video_quality": "reported HD 720p 60fps",
+      "audio_quality": "unknown",
+      "license_or_usage_note": "External gameplay video; use as review/reference only until download and reuse permissions are clarified.",
+      "analysis_status": "candidate",
+      "confidence": "medium",
+      "notes": "Search result describes emulated arcade version captured at 60fps on default arcade difficulty. Good first candidate for formation-entry and first-dive timing if frame quality is stable."
+    },
+    {
+      "source_id": "nintendoeverything-arcade-archives-galaxian-gameplay",
+      "game_lineage": "galaxian-reference",
+      "title": "Arcade Archives Galaxian gameplay",
+      "url_or_local_anchor": "https://nintendoeverything.com/arcade-archives-galaxian-gameplay/",
+      "creator_or_archive": "Nintendo Everything summary of Hamster Arcade Archiver stream",
+      "capture_type": "Publisher gameplay stream reference",
+      "duration": "stream window starts around 3:30:41 per article",
+      "video_quality": "unknown",
+      "audio_quality": "unknown",
+      "license_or_usage_note": "External article and embedded stream reference; use as citation and manual review source unless separate permission exists.",
+      "analysis_status": "candidate",
+      "confidence": "medium",
+      "notes": "Useful because it points to a publisher-hosted Arcade Archives gameplay segment and summarizes core mechanics."
+    },
+    {
+      "source_id": "nintendo-uk-arcade-archives-galaxian",
+      "game_lineage": "galaxian-reference",
+      "title": "Arcade Archives GALAXIAN",
+      "url_or_local_anchor": "https://www.nintendo.com/en-gb/Games/Nintendo-Switch-download-software/Arcade-Archives-GALAXIAN-2305901.html",
+      "creator_or_archive": "Nintendo UK / Hamster / Bandai Namco",
+      "capture_type": "Official product and rules summary",
+      "duration": "not applicable",
+      "video_quality": "not applicable",
+      "audio_quality": "not applicable",
+      "license_or_usage_note": "Use as citation for official release and high-level mechanic descriptions; not a media extraction source.",
+      "analysis_status": "supporting-source",
+      "confidence": "high",
+      "notes": "Official description names Galaxip, eerie-curving aliens, assault score doubling, Galboss, Red Alien escort order, and large formation destruction."
+    },
+    {
+      "source_id": "arcade-history-galaxian-901",
+      "game_lineage": "galaxian-reference",
+      "title": "Galaxian, Arcade Video game by NAMCO, Ltd. (1979)",
+      "url_or_local_anchor": "https://www.arcade-history.com/game/901/galaxian",
+      "creator_or_archive": "Arcade History",
+      "capture_type": "Historical and mechanic summary",
+      "duration": "not applicable",
+      "video_quality": "not applicable",
+      "audio_quality": "not applicable",
+      "license_or_usage_note": "Secondary reference; use for cross-checking, not as sole implementation authority.",
+      "analysis_status": "supporting-source",
+      "confidence": "medium",
+      "notes": "Useful for enemy family naming, dive-bomb behavior, and groups of one or three attackers."
+    },
+    {
+      "source_id": "gamefaqs-galaxian-video-index",
+      "game_lineage": "galaxian-reference",
+      "title": "Galaxian Videos for Arcade Games",
+      "url_or_local_anchor": "https://gamefaqs.gamespot.com/arcade/583825-galaxian/videos",
+      "creator_or_archive": "GameFAQs video index",
+      "capture_type": "Video discovery index",
+      "duration": "multiple indexed videos",
+      "video_quality": "varies",
+      "audio_quality": "varies",
+      "license_or_usage_note": "Discovery index only; follow through to individual sources before analysis.",
+      "analysis_status": "discovery-index",
+      "confidence": "low",
+      "notes": "Useful for locating longer 60fps captures and longplays after the first seed window is ready."
+    }
+  ],
+  "selected_windows": [
+    {
+      "window_id": "seed-window-formation-entry",
+      "source_id": "yt-redsevennine-galaxian-1979-arcade-gameplay-720p60",
+      "status": "planned",
+      "start_time_s": null,
+      "end_time_s": null,
+      "target_duration_s": 25,
+      "window_family": "formation-entry-first-dive",
+      "why_it_matters": "This window should capture the first playable formation entry, rack completion, first alien dive, player movement, and first shot cadence needed for the scout-wave slice.",
+      "visible_entities": [
+        "player_galaxip",
+        "formation_aliens",
+        "flagship_or_top_rank_if_visible",
+        "escorts_or_red_aliens_if_visible",
+        "player_shot",
+        "enemy_projectile"
+      ],
+      "analysis_questions": [
+        "How long does the formation take to settle?",
+        "When does the first dive begin relative to formation completion?",
+        "Does the first dive involve one alien or an escort group?",
+        "How strict does the single-shot cadence feel in the first exchange?",
+        "How much lateral correction does the player use before the first shot?"
+      ],
+      "confidence": "unknown",
+      "notes": "Exact timestamps are intentionally pending until the source is locally reviewed or replaced by a reproducible emulator capture."
+    }
+  ],
+  "next_steps": [
+    "Confirm whether the first candidate video can be locally clipped for analysis.",
+    "If not, create a local emulator capture with stable frame rate and documented settings.",
+    "Fill seed-window-formation-entry timestamps.",
+    "Generate contact sheet and first-pass event log.",
+    "Promote high-confidence observations into the semantic scout-wave profile."
+  ]
+}
