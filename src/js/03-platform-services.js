@@ -91,6 +91,10 @@ function normalizeRemoteScoreRow(row){
 function preferredInitialsFromUser(user=LEADERBOARD.user){
  return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||deriveInitialsFromEmail(user?.email||'')||'').slice(0,3);
 }
+function lockedPilotInitials(){
+ if(!LEADERBOARD?.user)return '';
+ return sanitizeInitials(pilotDisplayId()||'').slice(0,3);
+}
 function openMailFallback(subject,lines){
  const override=window.__platinumOpenMailFallbackOverride||window.__auroraOpenMailFallbackOverride;
  if(typeof override==='function'){

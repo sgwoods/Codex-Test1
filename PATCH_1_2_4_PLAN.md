@@ -164,6 +164,16 @@ Verification:
 - issue family:
   - beta-local leaderboard confusion / score-view reopen regression
 
+11. Signed-in pilot game-over lock fix
+
+- the game-over score-entry path now uses the same locked pilot ID source as
+  the HUD and pilot account surfaces
+- if the cabinet shows a signed-in pilot like `STE`, game over now records that
+  pilot ID directly instead of dropping back to `YOU` and prompting for initials
+- this keeps local score rows, pilot records, and the end-of-run flow aligned
+- issue family:
+  - signed-in pilot still prompted for initials at game over
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -217,6 +227,7 @@ Minimum patch verification:
 - `npm run harness:check:pilot-recent-scores-refresh`
 - `npm run harness:check:leaderboard-build-info`
 - `npm run harness:check:leaderboard-local-view`
+- `npm run harness:check:signed-in-game-over-lock`
 - `npm run harness:check:password-visibility-toggle`
 - `npm run harness:check:overlay-screen-switching`
 - `npm run harness:check:dock-buttons`

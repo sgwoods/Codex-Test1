@@ -448,7 +448,9 @@ window.__galagaHarness__={
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
-   rank:+(gameOverState?.rank||0)
+   rank:+(gameOverState?.rank||0),
+   editing:!!gameOverState?.editing,
+   initials:Array.isArray(gameOverState?.initials)?gameOverState.initials.join(''):''
   };
  },
  export(){exportSession({silent:1})},
