@@ -44,13 +44,13 @@
       "url_or_local_anchor": "/Users/sgwoods/Downloads/Galaxian (Arcade) original video game  15-wave session for 1 Player 👾🌌🕹️ - Nenriki Gaming Channel (1080p, h264).mp4",
       "creator_or_archive": "Nenriki Gaming Channel",
       "capture_type": "local long-session arcade gameplay video",
-      "duration": "unknown",
-      "video_quality": "filename declares 1080p H.264; local file uses avc1 video",
-      "audio_quality": "local file uses mp4a audio; quality not yet reviewed",
+      "duration": "944.093583 seconds",
+      "video_quality": "1080x1234 H.264 / avc1, 60 fps; source filename declares 1080p",
+      "audio_quality": "AAC stereo 44.1 kHz, usable first full-source probe: mean -19.8 dB, max -0.2 dB",
       "license_or_usage_note": "Local user-provided gameplay example. Use for internal reference analysis until provenance and redistribution rights are clarified. Source video is too large for normal git storage.",
       "analysis_status": "confirmed-candidate",
       "confidence": "medium",
-      "notes": "Long-session progression source provided for the ingestion library. Observed locally as a 152,204,417 byte MP4 with avc1 video and mp4a audio; filename indicates a 15-wave one-player session."
+      "notes": "Long-session progression source provided for the ingestion library. First-pass artifacts include source metadata JSON, 30 second full-session overview sheet, 10 second opening sheet, representative still frames, full-source waveforms, and coarse candidate subwindows."
     },
     {
       "source_id": "hamster-arcade-archives-galaxian",
@@ -200,10 +200,10 @@
     {
       "window_id": "nenriki-15-wave-session",
       "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
-      "status": "planned",
-      "start_time_s": null,
-      "end_time_s": null,
-      "target_duration_s": 60,
+      "status": "source-selected",
+      "start_time_s": 0,
+      "end_time_s": 944.093583,
+      "target_duration_s": 944.093583,
       "window_family": "long-session-progression",
       "why_it_matters": "This local 15-wave source should help map progression cadence, wave transitions, repeated formation setup, pressure scaling, player survival strategies, and later-wave attack density for future Galaxy Guardians progression work.",
       "visible_entities": [
@@ -223,8 +223,8 @@
         "How does player movement strategy change over repeated waves?",
         "Which windows should become canonical examples for opening, mid-run, and late-session pressure?"
       ],
-      "confidence": "unknown",
-      "notes": "Exact timestamps are pending local clip review. This source should likely be split into multiple smaller canonical windows rather than analyzed as one monolithic clip."
+      "confidence": "medium",
+      "notes": "First-pass artifacts identify opening 0-60s, mid-session 180-240s, and late-session 660.866-720.866s candidate review windows. Exact wave boundaries, transition timestamps, and trace windows are still pending, so use this source for progression scouting rather than gameplay tuning."
     },
     {
       "window_id": "seed-window-formation-entry",
