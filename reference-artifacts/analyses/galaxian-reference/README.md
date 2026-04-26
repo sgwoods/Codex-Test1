@@ -41,6 +41,10 @@ confidence labels, artifact target folders, and semantic profile anchors.
   - first planned analysis window
 - `seed-window-formation-entry/events/reference-events.json`
   - editable event-log skeleton
+- `matt-hawkins-arcade-intro/`
+  - local beginning-phase source scaffold
+- `matt-hawkins-arcade-intro/events/reference-events.json`
+  - intro / formation handoff event-log skeleton
 - `seed-window-formation-entry/semantic-scout-wave-profile.md`
   - first semantic model scaffold
 

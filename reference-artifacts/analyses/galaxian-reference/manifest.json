@@ -8,6 +8,21 @@
   "governing_process": "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
   "candidate_sources": [
     {
+      "source_id": "matt-hawkins-galaxian-arcade-intro-720p-h264",
+      "game_lineage": "galaxian-reference",
+      "title": "Galaxian (Namco 1979) - Arcade Intro - Matt Hawkins",
+      "url_or_local_anchor": "/Users/sgwoods/Downloads/Galaxian (Namco 1979) - Arcade Intro - Matt Hawkins (720p, h264).mp4",
+      "creator_or_archive": "Matt Hawkins",
+      "capture_type": "local arcade intro gameplay video",
+      "duration": "unknown",
+      "video_quality": "filename declares 720p H.264; local file uses avc1 video",
+      "audio_quality": "local file uses mp4a audio; quality not yet reviewed",
+      "license_or_usage_note": "Local user-provided gameplay example. Use for internal reference analysis until provenance and redistribution rights are clarified.",
+      "analysis_status": "confirmed-candidate",
+      "confidence": "medium",
+      "notes": "Beginning-phase Galaxian look provided for the ingestion library. Observed locally as a 5,429,248 byte MP4 with avc1 video and mp4a audio."
+    },
+    {
       "source_id": "hamster-arcade-archives-galaxian",
       "game_lineage": "galaxian-reference",
       "title": "Arcade Archives GALAXIAN",
@@ -99,6 +114,31 @@
     }
   ],
   "selected_windows": [
+    {
+      "window_id": "matt-hawkins-arcade-intro",
+      "source_id": "matt-hawkins-galaxian-arcade-intro-720p-h264",
+      "status": "planned",
+      "start_time_s": null,
+      "end_time_s": null,
+      "target_duration_s": 20,
+      "window_family": "intro-formation-entry",
+      "why_it_matters": "This local intro-focused source should help establish the opening phase, title/attract handoff, first formation presentation, and earliest visible player-pressure cues for the scout-wave profile.",
+      "visible_entities": [
+        "title_or_intro_surface",
+        "player_galaxip_if_visible",
+        "formation_aliens_if_visible",
+        "flagship_or_top_rank_if_visible",
+        "escorts_or_red_aliens_if_visible"
+      ],
+      "analysis_questions": [
+        "What intro or title surface appears before gameplay?",
+        "How does the beginning phase hand off into formation presentation?",
+        "Are formation rows and flagship/escort families readable at 720p?",
+        "Does the intro window contain first movement, first shot, or first dive evidence?"
+      ],
+      "confidence": "unknown",
+      "notes": "Exact timestamps are pending local clip review. This may become the preferred first beginning-phase source if it contains formation-entry evidence."
+    },
     {
       "window_id": "seed-window-formation-entry",
       "source_id": "yt-redsevennine-galaxian-1979-arcade-gameplay-720p60",

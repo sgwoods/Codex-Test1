@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "window_id": "matt-hawkins-arcade-intro",
+  "source_id": "matt-hawkins-galaxian-arcade-intro-720p-h264",
+  "status": "event-skeleton",
+  "timebase": {
+    "units": "seconds",
+    "source_start_time_s": null,
+    "source_end_time_s": null,
+    "frame_rate": null,
+    "notes": "Fill after local review of the Matt Hawkins arcade intro source."
+  },
+  "events": [
+    {
+      "event_id": "evt-001",
+      "event_family": "intro_surface_visible",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "presentation",
+      "entity_id": "intro-surface",
+      "position_hint": "full screen",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Opening anchor for beginning-phase analysis."
+    },
+    {
+      "event_id": "evt-002",
+      "event_family": "gameplay_or_formation_handoff",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "presentation",
+      "entity_id": "handoff-1",
+      "position_hint": "pending observation",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to mark transition from intro/title surface into gameplay or formation presentation."
+    },
+    {
+      "event_id": "evt-003",
+      "event_family": "formation_entry_start",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "formation",
+      "entity_id": "formation-1",
+      "position_hint": "upper field if visible",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Include only if this intro source reaches formation entry."
+    },
+    {
+      "event_id": "evt-004",
+      "event_family": "formation_rack_complete",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": "formation",
+      "entity_id": "formation-1",
+      "position_hint": "upper field if visible",
+      "motion_hint": "pending observation",
+      "audio_hint": "",
+      "confidence": "unknown",
+      "source_note": "Use to judge whether this source can replace or complement the seed formation-entry window."
+    }
+  ],
+  "open_questions": [
+    "Does the intro source include playable formation entry or only pre-game presentation?",
+    "Are enemy families readable enough for semantic tagging?",
+    "Is audio useful for title or start-cue analysis?",
+    "Should this become the preferred first beginning-phase source?"
+  ]
+}
