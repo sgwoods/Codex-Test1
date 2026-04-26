@@ -49,7 +49,6 @@ const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
-const buildStampDismissBtn=document.getElementById('buildStampDismissBtn');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
@@ -280,7 +279,6 @@ const PLATFORM_STORAGE_KEYS={
 };
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
-let buildStampDismissed=0;
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -882,7 +880,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
@@ -1067,15 +1065,17 @@ function recordScore(score,stage,initials='YOU'){
  saveScoreboard(top);
  S.best=top[0]?.score||0;
  writePref(BEST_SCORE_KEY,String(S.best));
+ if(typeof syncAccountUi==='function')syncAccountUi();
  return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
 }
 function saveGameOverInitials(){
  if(!gameOverState?.entryId)return;
  const board=loadScoreboard();
  const row=board.find(x=>x.id===gameOverState.entryId);
-  if(row){
+ if(row){
   row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
   saveScoreboard(board);
+  if(typeof syncAccountUi==='function')syncAccountUi();
  }
 }
 function buildGameOverHtmlFromState(){
@@ -1126,7 +1126,7 @@ function buildGameOverState(score,stage,challenge=0){
 function resetAttractBackdrop(){
  S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.alertT=0;S.alertTxt='';S.banner=0;S.bannerTxt='';S.bannerMode='';S.bannerSub='';
  for(const e of S.e)e.hp=0;
- S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.returning=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;S.p.hNoShotT=0;S.p.hDebugT=0;S.p.demoTargetId=null;S.p.demoTargetT=0;
+ S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.returning=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;S.p.inputResetHoldT=0;S.p.hNoShotT=0;S.p.hDebugT=0;S.p.demoTargetId=null;S.p.demoTargetT=0;
 }
 function enterAttractScores(){
  ATTRACT.active=1;
@@ -1390,8 +1390,15 @@ function loadTestCfg(){
  return Object.assign({},testCfgCache);
 }
 function saveTestCfg(){
+ const currentCfg=testCfgCache||loadTestCfg();
  const startCfg=productionStartStateLocked()
-  ? DEFAULT_TEST_CFG
+  ? {
+    stage:cl(+currentCfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+    ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
+    extendFirst:cl(Math.max(0,+currentCfg.extendFirst||0),0,999999)|0,
+    extendRecurring:cl(Math.max(0,+currentCfg.extendRecurring||0),0,999999)|0,
+    challenge:!!currentCfg.challenge
+   }
   : {
     stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
     ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1875,10 +1882,21 @@ if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)clos
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
-if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
-if(buildStampDismissBtn)buildStampDismissBtn.addEventListener('click',()=>{
- buildStampDismissed=1;
- if(buildStamp)buildStamp.classList.add('dismissed');
+if(buildStamp){
+ buildStamp.addEventListener('click',e=>{
+  if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
+  openProjectGuide();
+ });
+ buildStamp.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
+  e.preventDefault();
+  openProjectGuide();
+ });
+}
+if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',e=>{
+ e.stopPropagation();
+ location.reload();
 });
 addEventListener('pointerdown',()=>unlockAudioFromInteraction(),{passive:true});
 function keyboardTargetIsEditable(target){

@@ -17,9 +17,11 @@ const accountCredentials=document.getElementById('accountCredentials');
 const accountEmail=document.getElementById('accountEmail');
 const accountEmailLabel=document.getElementById('accountEmailLabel');
 const accountPassword=document.getElementById('accountPassword');
+const accountPasswordToggle=document.getElementById('accountPasswordToggle');
 const accountPasswordLabel=document.getElementById('accountPasswordLabel');
 const accountRecoveryFields=document.getElementById('accountRecoveryFields');
 const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
+const accountPasswordConfirmToggle=document.getElementById('accountPasswordConfirmToggle');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
 const accountLoginBtn=document.getElementById('accountLoginBtn');
 const accountResetBtn=document.getElementById('accountResetBtn');
@@ -41,6 +43,7 @@ const accountDockLabel=document.getElementById('accountDockLabel');
 const accountDockStatus=document.getElementById('accountDockStatus');
 const accountPilotCallsign=document.getElementById('accountPilotCallsign');
 const accountPilotStatus=document.getElementById('accountPilotStatus');
+const accountGuideBtn=document.getElementById('accountGuideBtn');
 const accountIdentityEmail=document.getElementById('accountIdentityEmail');
 const accountIdentityUserId=document.getElementById('accountIdentityUserId');
 const accountFlightStats=document.getElementById('accountFlightStats');
@@ -119,6 +122,18 @@ function pilotLocalReplayRows(){
    localReplay:1
   }));
 }
+function pilotLocalScoreRows(){
+ if(!LEADERBOARD.user)return [];
+ const activePilotInitials=sanitizeInitials(preferredInitialsFromUser()||'');
+ if(!activePilotInitials)return [];
+ return loadScoreboard()
+  .filter(row=>{
+   const rowInitials=sanitizeInitials(row?.initials||'');
+   if(rowInitials&&rowInitials===activePilotInitials)return true;
+   return !!(gameOverState?.entryId&&String(row?.id||'')===String(gameOverState.entryId));
+  })
+  .map(row=>Object.assign({verified:0,localScore:1},row));
+}
 function mergePilotProfileRows(remoteRows,localRows){
  const merged=remoteRows.map(row=>Object.assign({},row));
  for(const localRow of localRows){
@@ -142,7 +157,7 @@ function mergePilotProfileRows(remoteRows,localRows){
 function rowsForPilotProfile(){
  if(LEADERBOARD.user){
   const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)?LEADERBOARD.remote.mine.slice():[];
-  const localRows=pilotLocalReplayRows();
+  const localRows=mergePilotProfileRows(pilotLocalScoreRows(),pilotLocalReplayRows());
   if(remoteRows.length||localRows.length)return mergePilotProfileRows(remoteRows,localRows);
  }
  return localLeaderboardRows();
@@ -228,6 +243,11 @@ if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
+ if(typeof openPlayersGuideWindow==='function')openPlayersGuideWindow();
+});
+if(accountPasswordToggle)accountPasswordToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPassword,accountPasswordToggle,'password'));
+if(accountPasswordConfirmToggle)accountPasswordConfirmToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password'));
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
 async function openReplayFromPilotRecordsTarget(target){
  const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';

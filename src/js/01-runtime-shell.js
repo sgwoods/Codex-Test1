@@ -18,7 +18,12 @@ function resetActiveInputState(reason='manual'){
  const hadMotion=!!(S?.p&&Math.abs(+S.p.vx||0)>0);
  keys={};
  keyState={};
- if(S?.p&&Number.isFinite(+S.p.vx))S.p.vx=0;
+ if(S?.p&&Number.isFinite(+S.p.vx)){
+  S.p.vx=0;
+  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'){
+   S.p.inputResetHoldT=Math.max(+S.p.inputResetHoldT||0,.24);
+  }
+ }
  if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
 }
 function closeDockOverlays(except=''){
@@ -37,7 +42,8 @@ function syncAudioUi(){
  muteToggleBtn.dataset.muted=audioMuted?'true':'false';
  muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
  muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
- muteToggleBtn.title=audioMuted?'Game audio muted':'Game audio on';
+ muteToggleBtn.title=audioMuted?'Unmute game audio':'Mute game audio';
+ muteToggleBtn.dataset.actionTip=audioMuted?'Unmute game audio':'Mute game audio';
  const icon=muteToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
@@ -51,6 +57,7 @@ function syncPauseUi(){
  pauseToggleBtn.setAttribute('aria-pressed',active?'true':'false');
  pauseToggleBtn.setAttribute('aria-label',active?'Resume game':'Pause game');
  pauseToggleBtn.title=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
+ pauseToggleBtn.dataset.actionTip=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
  const icon=pauseToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=active?'▶':'⏸';
  pauseToggleBtn.classList.toggle('active',active);
@@ -76,7 +83,6 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
- buildStamp.classList.toggle('dismissed',!!buildStampDismissed);
  const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
@@ -85,7 +91,6 @@ function syncBuildStampUi(){
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
-  if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
   if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
@@ -102,7 +107,6 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
- if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'

@@ -26,13 +26,11 @@
     <button id="gamePickerDockBtn" type="button" aria-expanded="false" aria-controls="gamePickerModal" aria-label="Choose game" title="Choose Game">
       <span id="gamePickerDockIcon" class="dockIcon" aria-hidden="true">🚀</span>
       <span id="gamePickerDockLabel">CHOOSE GAME</span>
-      <span id="gamePickerDockStatus">shell ready</span>
     </button>
   </div>
   <div id="platformDock">
     <button id="platformSplashBtn" type="button" aria-expanded="false" aria-controls="platformSplashModal" aria-label="Open Platinum platform splash" title="Platinum Arcade Game Platform">
       <img id="platformSplashDockIcon" src="assets/platinum-platform-mark.png" alt="" aria-hidden="true" />
-      <span id="platformSplashDockLabel">PLATINUM</span>
     </button>
   </div>
 </div>
@@ -47,16 +45,16 @@
         </button>
       </div>
       <div class="dockToolGroup dockToolGroupPrimary">
-        <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
-        <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
-        <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Recent Replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
-        <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
-        <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
+        <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Open game guide" data-action-tip="Open game guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
+        <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Open controls help" data-action-tip="Open controls help"><span class="dockIcon" aria-hidden="true">🕹</span></button>
+        <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Open recent replays" data-action-tip="Open recent replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
+        <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="Open high scores" data-action-tip="Open high scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
+        <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report a bug or send feedback" data-action-tip="Report a bug or send feedback"><span class="dockIcon" aria-hidden="true">🐞</span></button>
       </div>
       <div class="dockToolGroup dockToolGroupUtility">
-        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
-        <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
-        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Developer Tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
+        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio" data-action-tip="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
+        <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game" data-action-tip="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
+        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Open developer tools" data-action-tip="Open developer tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
       </div>
     </div>
   </div>
@@ -347,9 +345,12 @@
         </div>
         <div id="accountPanelHeroText">
         <span id="accountPanelTitle">PILOT INFORMATION</span>
-        <span id="accountPanelSub">IDENTITY, RECORDS, AND FLIGHT HISTORY</span>
+        <span id="accountPanelSub">QUICK PILOT REFERENCE</span>
           <span id="accountPilotCallsign">PILOT OFFLINE</span>
           <span id="accountPilotStatus">Sign in to board a pilot identity.</span>
+          <div id="accountPanelHeroActions">
+            <button id="accountGuideBtn" type="button">Open Player Guide</button>
+          </div>
         </div>
       </div>
       <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
@@ -371,10 +372,16 @@
         <label id="accountEmailLabel" for="accountEmail">Email</label>
         <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
         <label id="accountPasswordLabel" for="accountPassword">Password</label>
-        <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+        <div class="accountPasswordRow">
+          <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+          <button id="accountPasswordToggle" class="accountPasswordToggle" type="button" aria-label="Show password" title="Show password">👁</button>
+        </div>
         <div id="accountRecoveryFields" hidden>
           <label for="accountPasswordConfirm">Confirm New Password</label>
-          <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+          <div class="accountPasswordRow">
+            <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+            <button id="accountPasswordConfirmToggle" class="accountPasswordToggle" type="button" aria-label="Show confirmation password" title="Show confirmation password">👁</button>
+          </div>
         </div>
       </div>
       <div id="accountActions">
@@ -432,8 +439,7 @@
     </div>
   </div>
 </div>
-<div id="buildStamp">
-  <button type="button" id="buildStampDismissBtn" aria-label="Hide build stamp until refresh" title="Hide until refresh">×</button>
+<div id="buildStamp" role="button" tabindex="0" aria-label="Open project guide and release notes" title="Open project guide and release notes">
   <div id="buildStampBody">
     <span id="buildStampChannel">Lane {{BUILD_CHANNEL}}</span>
     <span id="buildStampVersion">Version {{BUILD_VERSION}}</span>

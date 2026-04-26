@@ -15,15 +15,12 @@ function describePackCaps(pack){
 
 function syncGamePickerDock(){
  if(!gamePickerDockBtn)return;
- const pack=typeof currentGamePack==='function'?currentGamePack():null;
- const frontDoor=typeof currentGamePackFrontDoor==='function'?currentGamePackFrontDoor():null;
  const active=!!gamePickerOpen;
  gamePickerDockBtn.classList.toggle('open',active);
  gamePickerDockBtn.classList.toggle('active',active);
  gamePickerDockBtn.setAttribute('aria-expanded',active?'true':'false');
  if(gamePickerDockStatus){
-  const state=typeof currentGamePackPlayable==='function'&&currentGamePackPlayable()?'online':'preview';
-  gamePickerDockStatus.textContent=frontDoor?.subtitle?`${state} • ${frontDoor.subtitle}`:`${pack?.metadata?.versionLine||'live'}`;
+  gamePickerDockStatus.textContent='';
  }
 }
 
@@ -41,7 +38,7 @@ function renderGamePicker(){
  const activeKey=typeof currentGamePackKey==='function'?currentGamePackKey():'';
   const activePack=typeof currentGamePack==='function'?currentGamePack():null;
   const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
- gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • switch packs from wait mode':''
+ gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • finish the current run before switching':''
  }</span>${renderShellThemeOptions()}`;
  gamePickerList.innerHTML=packs.map(pack=>{
   const isActive=pack.metadata?.gameKey===activeKey;
@@ -55,7 +52,7 @@ function renderGamePicker(){
   return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
-  ? 'Return to wait mode before switching to a different game pack.'
+  ? 'Finish the current run before switching to a different game pack.'
   : 'Selecting a pack updates the marquee, frame treatment, and front-door shell immediately.';
  syncGamePickerDock();
 }
@@ -88,8 +85,8 @@ function closeGamePicker(force=0){
 function chooseGamePack(key=''){
  if(!key||typeof getGamePack!=='function')return;
  if(started&&key!==currentGamePackKey()){
-  if(gamePickerStatus)gamePickerStatus.textContent='Return to wait mode before switching games.';
-  showToast('Return to wait mode before switching games.');
+  if(gamePickerStatus)gamePickerStatus.textContent='Finish the current run before switching games.';
+  showToast('Finish the current run before switching games.');
   return;
  }
  const nextPack=getGamePack(key);

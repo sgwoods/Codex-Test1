@@ -57,11 +57,11 @@ async function moveWithKey(page, key){
   await page.evaluate(() => {
     if(window.__galagaHarness__?.resetInputState) window.__galagaHarness__.resetInputState('input-mapping-recenter');
     if(window.S?.p){
-      window.S.p.x = window.PLAY_W / 2;
       window.S.p.vx = 0;
     }
+    return window.__galagaHarness__?.inputState?.() || null;
   });
-  await page.waitForTimeout(50);
+  await page.waitForTimeout(40);
   const before = await page.evaluate(() => window.__galagaHarness__.inputState());
   await page.keyboard.down(key);
   await page.waitForTimeout(140);
@@ -106,21 +106,23 @@ async function main(){
 
     const keyMoves = [
       await moveWithKey(page, 'a'),
-      await moveWithKey(page, 'z'),
-      await moveWithKey(page, 'ArrowLeft'),
       await moveWithKey(page, 'd'),
+      await moveWithKey(page, 'z'),
       await moveWithKey(page, 'c'),
+      await moveWithKey(page, 'ArrowLeft'),
       await moveWithKey(page, 'ArrowRight')
     ];
+    const leftMoves = keyMoves.filter(result => ['a', 'z', 'ArrowLeft'].includes(result.key));
+    const rightMoves = keyMoves.filter(result => ['d', 'c', 'ArrowRight'].includes(result.key));
 
-    for(const result of keyMoves.slice(0, 3)){
+    for(const result of leftMoves){
       if(!(result.delta < -0.05)){
-        fail('left-side key should move the ship left', { result, keyMoves });
+        fail('left-side key should move the ship left', { result, leftMoves, rightMoves });
       }
     }
-    for(const result of keyMoves.slice(3)){
+    for(const result of rightMoves){
       if(!(result.delta > 0.05)){
-        fail('right-side key should move the ship right', { result, keyMoves });
+        fail('right-side key should move the ship right', { result, leftMoves, rightMoves });
       }
     }
 

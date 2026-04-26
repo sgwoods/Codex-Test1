@@ -19,6 +19,23 @@ async function expectOpen(page, buttonSelector, stateFn, closeSelector){
 
 async function main(){
   const result = await withHarnessPage({ stage: 2, ships: 3, challenge: false, seed: 49028 }, async ({ page }) => {
+    const dockState = await page.evaluate(() => {
+      const status = document.querySelector('#gamePickerDockStatus');
+      const platformBtn = document.querySelector('#platformSplashBtn');
+      const platformIcon = document.querySelector('#platformSplashDockIcon');
+      const platformLabel = document.querySelector('#platformSplashDockLabel');
+      const iconRect = platformIcon?.getBoundingClientRect();
+      const btnRect = platformBtn?.getBoundingClientRect();
+      return {
+        gamePickerStatus: status?.textContent?.trim() || '',
+        platformLabelPresent: !!platformLabel,
+        platformIconWidth: iconRect?.width || 0,
+        platformIconHeight: iconRect?.height || 0,
+        platformButtonWidth: btnRect?.width || 0,
+        platformButtonHeight: btnRect?.height || 0
+      };
+    });
+
     const gamePicker = await expectOpen(
       page,
       '#gamePickerDockBtn',
@@ -167,6 +184,7 @@ async function main(){
     );
 
     return {
+      dockState,
       gamePicker,
       platform,
       pilot,
@@ -182,6 +200,18 @@ async function main(){
   });
 
   if(result.gamePicker.expanded !== 'true') fail('game picker dock button did not open via a real click', result);
+  if(/wait mode|online/i.test(result.dockState.gamePickerStatus || '')){
+    fail('game picker dock button still exposed the old online/wait-mode wording', result);
+  }
+  if(result.dockState.platformLabelPresent){
+    fail('Platinum dock button still rendered a separate text label over the platform mark', result);
+  }
+  if(!result.dockState.platformIconWidth || !result.dockState.platformIconHeight){
+    fail('Platinum dock button no longer rendered a visible platform mark', result);
+  }
+  if(result.dockState.platformIconWidth > result.dockState.platformButtonWidth || result.dockState.platformIconHeight > result.dockState.platformButtonHeight){
+    fail('Platinum dock mark no longer fits cleanly inside the dock button', result);
+  }
   if(result.platform.expanded !== 'true') fail('Platinum dock button did not open via a real click', result);
   if(result.pilot.expanded !== 'true') fail('pilot dock button did not open via a real click', result);
   if(result.guide.expanded !== 'true' || result.guide.activeTab !== 'guide' || !result.guide.actionVisible){

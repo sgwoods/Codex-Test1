@@ -13,8 +13,8 @@ const renderGamePickerPanel=document.getElementById('gamePickerPanel');
 const renderSettingsPanel=document.getElementById('settingsPanel');
 
 const DISPLAY_SHELL=Object.freeze({
- hudInsetX:12,
- hudInsetTop:6,
+ hudInsetX:18,
+ hudInsetTop:8,
  hudInsetBottom:38,
  hudMinWidth:220,
  frameOuterInset:2,
