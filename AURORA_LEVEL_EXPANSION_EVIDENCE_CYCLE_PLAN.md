@@ -80,6 +80,10 @@ The reusable command should remain manifest-driven:
 npm run harness:cycle:classic-arcade-reference -- --plan <plan.json>
 ```
 
+Seed plan:
+
+- `reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-four-window-cycle.plan.json`
+
 For Aurora-generated recordings, the plan file should identify:
 
 - the source video or generated recording

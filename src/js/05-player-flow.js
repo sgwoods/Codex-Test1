@@ -267,6 +267,7 @@ function runHarnessPlayer(dt,p,cfg){
  const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
  const axis=harnessMoveAxis(p,cfg);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
+ if(axis&&typeof logPlayerMoveEvent==='function')logPlayerMoveEvent(axis,p,'harness');
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
  const target=attackables.sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||harnessSelectTarget(p,cfg);
  logProfessionalDecision(p,cfg,'tick',{
@@ -362,6 +363,7 @@ function updatePlayerControl(dt,p){
    if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;
    p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
    if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+   if(manualAxis&&typeof logPlayerMoveEvent==='function')logPlayerMoveEvent(manualAxis,p,'manual');
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();

@@ -1,0 +1,81 @@
+{
+  "plan_id": "aurora-four-window-level-expansion-cycle",
+  "status": "seed-plan-only",
+  "target_game": "aurora-galactica",
+  "output_root": "reference-artifacts/analyses/aurora-level-expansion-cycle",
+  "purpose": "Create the first measured Aurora evidence set before implementing challenge-stage and later-level expansion work.",
+  "windows": [
+    {
+      "window_id": "stage-1-baseline",
+      "role": "opening_baseline",
+      "source_kind": "aurora_harness_or_reference_video",
+      "needs_waveform": true,
+      "event_families": [
+        "stage_start",
+        "formation_entry",
+        "player_move",
+        "player_shot",
+        "enemy_dive_start",
+        "enemy_projectile",
+        "wave_clear"
+      ],
+      "selection_note": "Preserve the trusted opening, first rack settling, first player shot, and early dive feel."
+    },
+    {
+      "window_id": "challenge-stage-candidate",
+      "role": "challenge_stage_expansion_candidate",
+      "source_kind": "aurora_harness_or_reference_video",
+      "needs_waveform": true,
+      "event_families": [
+        "challenge_wave_start",
+        "challenge_enemy_path",
+        "challenge_enemy_hit",
+        "challenge_result"
+      ],
+      "selection_note": "Use this to choose the first richer challenge-stage movement family and scoring presentation."
+    },
+    {
+      "window_id": "mid-run-pressure",
+      "role": "mid_run_pressure",
+      "source_kind": "aurora_harness_or_self_play_video",
+      "needs_waveform": false,
+      "event_families": [
+        "formation_entry",
+        "enemy_dive_start",
+        "escort_dive_start",
+        "enemy_projectile",
+        "player_hit",
+        "wave_clear"
+      ],
+      "selection_note": "Measure settled-run attack density and survivability before adding later-level variation."
+    },
+    {
+      "window_id": "late-run-cleanup-or-failure",
+      "role": "late_run_cleanup_or_failure",
+      "source_kind": "aurora_harness_or_self_play_video",
+      "needs_waveform": false,
+      "event_families": [
+        "enemy_dive_start",
+        "enemy_projectile",
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "selection_note": "Catch unfair collapse, depletion, last-life pressure, and end-of-wave behavior."
+    }
+  ],
+  "required_artifacts": [
+    "manifest.json",
+    "contact-sheet.png",
+    "stills/",
+    "trace.json",
+    "events/reference-events.json",
+    "events/events-observed.json",
+    "stage-slice-spec.md"
+  ],
+  "implementation_candidate": {
+    "preferred_first_slice": "challenge-stage-depth",
+    "branch": "codex/macbook-pro-challenge-stage-depth",
+    "first_harness_expectation": "prove one distinct challenge-stage movement family appears and remains non-lethal"
+  }
+}
