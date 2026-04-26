@@ -268,12 +268,12 @@ mask:
 #accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
 #muteToggleBtn[data-muted="true"]{color:#ffe39a}
-#accountPanel{display:none;flex-direction:column;gap:12px;width:min(100%,620px);padding:16px 18px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#accountPanel{display:none;flex-direction:column;gap:10px;width:min(100%,620px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.32 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
 #accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 #accountPanelHero{display:flex;align-items:flex-start;gap:12px;min-width:0}
-#accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:96px;height:96px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
-#accountPanelPortrait{font-size:64px;line-height:1;filter:grayscale(1);opacity:.68}
+#accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+#accountPanelPortrait{font-size:54px;line-height:1;filter:grayscale(1);opacity:.68}
 #accountPanel[data-signed-in="true"] #accountPanelPortrait{filter:none;opacity:1}
 #accountPanelHeroText{display:flex;flex-direction:column;gap:3px;min-width:0}
 #accountPanelTitle,#accountPanelSub{display:block}
@@ -281,9 +281,12 @@ mask:
 #accountPanelSub{margin-top:4px;font:400 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.1em;color:#dff7ff}
 #accountPilotCallsign{font:700 14px/1.1 "Courier New",Consolas,monospace;letter-spacing:.08em;color:#ffe39a;text-transform:uppercase}
 #accountPilotStatus{font-size:11px;line-height:1.3;color:rgba(223,247,255,.76)}
+#accountPanelHeroActions{display:flex;gap:8px;margin-top:2px;flex-wrap:wrap}
+#accountGuideBtn{border:1px solid rgba(255,216,109,.42);background:rgba(60,44,8,.72);color:#ffe39a;padding:6px 9px;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer}
+#accountGuideBtn:hover,#accountGuideBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
 #accountPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountIdentityGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.accountIdentityCard,.accountSection{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
+.accountIdentityCard,.accountSection{display:flex;flex-direction:column;gap:5px;padding:8px 9px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
 .accountIdentityLabel,.accountSectionTitle{font:700 11px/1.1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#7ef2ff}
 #accountPanel label{font-size:11px;line-height:1.2;color:rgba(218,236,255,.72)}
 #accountPanel input{width:100%;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:7px 8px;font:13px/1.25 "Courier New",Consolas,monospace;box-sizing:border-box}
@@ -302,8 +305,8 @@ mask:
 #accountActions button[disabled],#accountInitialsRow button[disabled]{opacity:.5;cursor:default}
 #accountInitialsRow input{width:90px;text-transform:uppercase}
 #accountInitialsDisplay{padding:8px 10px;border:1px solid rgba(136,245,255,.14);background:rgba(10,18,34,.82);font:700 13px/1.25 "Courier New",Consolas,monospace;color:#f4fbff}
-#accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
-#accountIdentityEmail,#accountIdentityUserId{font-size:11px;line-height:1.35;color:#dff7ff;overflow-wrap:anywhere}
+#accountSummary{font-size:11px;line-height:1.28;color:#dff7ff}
+#accountIdentityEmail,#accountIdentityUserId{font-size:11px;line-height:1.28;color:#dff7ff;overflow-wrap:anywhere}
 #accountFlightStats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .accountStatCard{display:flex;flex-direction:column;gap:2px;padding:8px;border:1px solid rgba(136,245,255,.14);background:rgba(10,18,34,.82)}
 .accountStatLabel{font-size:10px;line-height:1.1;letter-spacing:.1em;text-transform:uppercase;color:rgba(223,247,255,.62)}
@@ -320,7 +323,7 @@ mask:
 .accountRecordReplayBtn{border:1px solid rgba(255,217,128,.36);background:rgba(61,46,9,.72);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;padding:5px 8px;cursor:pointer}
 .accountRecordReplayBtn:hover,.accountRecordReplayBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
 .accountRecordStamp{font-size:10px;line-height:1.2;color:#ffe39a;text-align:right}
-.accountRecordEmpty{font-size:11px;line-height:1.35;color:rgba(223,247,255,.68)}
+.accountRecordEmpty{font-size:11px;line-height:1.28;color:rgba(223,247,255,.68)}
 #accountCredentials[hidden],
 #accountEmailLabel[hidden],
 #accountPasswordLabel[hidden],

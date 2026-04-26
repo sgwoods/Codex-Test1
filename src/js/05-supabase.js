@@ -43,6 +43,7 @@ const accountDockLabel=document.getElementById('accountDockLabel');
 const accountDockStatus=document.getElementById('accountDockStatus');
 const accountPilotCallsign=document.getElementById('accountPilotCallsign');
 const accountPilotStatus=document.getElementById('accountPilotStatus');
+const accountGuideBtn=document.getElementById('accountGuideBtn');
 const accountIdentityEmail=document.getElementById('accountIdentityEmail');
 const accountIdentityUserId=document.getElementById('accountIdentityUserId');
 const accountFlightStats=document.getElementById('accountFlightStats');
@@ -242,6 +243,9 @@ if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
+ if(typeof openPlayersGuideWindow==='function')openPlayersGuideWindow();
+});
 if(accountPasswordToggle)accountPasswordToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPassword,accountPasswordToggle,'password'));
 if(accountPasswordConfirmToggle)accountPasswordConfirmToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password'));
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);

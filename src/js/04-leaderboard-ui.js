@@ -3,7 +3,7 @@
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
-  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flight history yet. Finish a run to start building this pilot record.</div>';
+  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flights logged yet. Finish a run to start this pilot record.</div>';
   return;
  }
  const latest=[...rows]
@@ -25,7 +25,7 @@ function renderPilotFlightStats(rows,signedIn){
 function renderPilotRecords(rows){
  if(!accountRecordsTop5)return;
  if(!rows.length){
-  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
+  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs appear here after this pilot logs a game.</div>';
   return;
  }
  const topRows=[...rows]
@@ -358,7 +358,7 @@ function syncAccountUi(){
  const dockId=pilotDisplayId();
  const hasLockedInitials=!!signedIn;
  if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
- if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'IDENTITY, RECORDS, AND FLIGHT HISTORY';
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'QUICK PILOT REFERENCE';
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
@@ -411,8 +411,8 @@ function syncAccountUi(){
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
   else if(NON_PRODUCTION_LANE&&!signedIn)accountSummary.textContent=nonProductionAccountSummary();
-  else if(recovering)accountSummary.textContent='Recovery link accepted. Save a new password to finish signing back into this pilot account.';
-  else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
+  else if(recovering)accountSummary.textContent='Recovery accepted. Save a new password to finish signing back in.';
+  else if(!signedIn)accountSummary.textContent='Not signed in. Local scores still work.';
   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
  }
  const rows=rowsForPilotProfile();
@@ -424,7 +424,7 @@ function syncAccountUi(){
  if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
  if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
  if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
- if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Flight history and records are synced below.':'Sign in, create a pilot, or keep playing locally and track records on this device.');
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.');
  if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
  if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
  if(accountPanel){

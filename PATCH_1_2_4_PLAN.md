@@ -143,6 +143,15 @@ Verification:
 
 - `npm run harness:check:password-visibility-toggle`
 
+9. Pilot Information reference cleanup
+
+- the Pilot Information panel now reads as a tighter quick-reference surface
+  instead of a text-heavy mini-manual
+- copy is shorter, the panel spacing is tighter, and a direct player-guide
+  button is available for deeper reading
+- issue family:
+  - `#174` refactor Pilot reference screen with excessive text
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
