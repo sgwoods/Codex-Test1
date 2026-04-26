@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "game_lineage": "galaxian-reference",
+  "window_id": "endgame-cleanup",
+  "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+  "status": "promoted-event-scaffold",
+  "timebase": {
+    "units": "seconds",
+    "source_start_time_s": 870,
+    "source_end_time_s": 930,
+    "frame_rate": 60,
+    "notes": "Generated from promoted evidence window. Replace with exact observed events after visual review."
+  },
+  "events": [
+    {
+      "event_id": "evt-001",
+      "event_family": "late_cleanup",
+      "time_s": 870,
+      "duration_s": 5,
+      "entity_family": "alien_group",
+      "entity_id": "late_cleanup",
+      "position_hint": "promoted review window; exact frame anchor pending manual review",
+      "motion_hint": "Endgame and depletion-state evidence for lifecycle, failure presentation, and long-run comparison.",
+      "audio_hint": "waveform artifact present; cue attribution pending",
+      "confidence": "medium",
+      "source_note": "Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review."
+    },
+    {
+      "event_id": "evt-002",
+      "event_family": "failure_or_game_over_risk",
+      "time_s": 890,
+      "duration_s": null,
+      "entity_family": "alien_group",
+      "entity_id": "failure_or_game_over_risk",
+      "position_hint": "promoted review window; exact frame anchor pending manual review",
+      "motion_hint": "Endgame and depletion-state evidence for lifecycle, failure presentation, and long-run comparison.",
+      "audio_hint": "waveform artifact present; cue attribution pending",
+      "confidence": "low",
+      "source_note": "Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review."
+    },
+    {
+      "event_id": "evt-003",
+      "event_family": "depletion_state",
+      "time_s": 910,
+      "duration_s": null,
+      "entity_family": "alien_group",
+      "entity_id": "depletion_state",
+      "position_hint": "promoted review window; exact frame anchor pending manual review",
+      "motion_hint": "Endgame and depletion-state evidence for lifecycle, failure presentation, and long-run comparison.",
+      "audio_hint": "waveform artifact present; cue attribution pending",
+      "confidence": "low",
+      "source_note": "Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review."
+    }
+  ],
+  "open_questions": [
+    "Which frames show the clearest rack, dive, projectile, and player movement events?",
+    "Which events should become implementation correspondence targets?",
+    "Does this window belong to first playable tuning or later progression planning?"
+  ]
+}

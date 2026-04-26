@@ -59,6 +59,15 @@ Validate that evidence package with:
 npm run harness:check:galaxian-preview-evidence
 ```
 
+The reusable manifest-driven version is:
+
+```sh
+npm run harness:cycle:classic-arcade-reference -- --plan reference-artifacts/analyses/galaxian-reference/galaxian-preview-reference-cycle.plan.json --validate-only
+```
+
+Remove `--validate-only` when intentionally generating a separate
+manifest-driven evidence package.
+
 ## Folder Layout
 
 - `manifest.json`
@@ -69,6 +78,8 @@ npm run harness:check:galaxian-preview-evidence
   - first evidence-backed playable preview scope
 - `GALAXIAN_PROGRESSION_PRESSURE_CURVE.md`
   - promoted-window pressure comparison and Aurora expansion note
+- `galaxian-preview-reference-cycle.plan.json`
+  - example manifest-driven cycle plan for future games and Aurora expansion
 - `local-cycle-summary.json`
   - last local long-cycle summary
 - `seed-window-formation-entry/`
@@ -94,6 +105,8 @@ npm run harness:check:galaxian-preview-evidence
 - `nenriki-15-wave-session/promoted-windows/`
   - promoted review windows with contact sheets, stills, waveforms, traces, and
     pressure summaries
+- `nenriki-15-wave-session/promoted-windows/*/events/reference-events.json`
+  - generated event scaffolds for each promoted review window
 - `seed-window-formation-entry/semantic-scout-wave-profile.md`
   - first semantic model scaffold
 

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "title": "Galaxian Preview Evidence Cycle",
+  "game_lineage": "galaxian-reference",
+  "output_root": "reference-artifacts/analyses/galaxian-reference/manifest-driven-preview-cycle",
+  "trace_fps": 15,
+  "trace_width": 270,
+  "trace_height": 480,
+  "notes": "Example manifest-driven cycle plan for the reusable classic arcade ingestion platform. The dedicated Galaxian preview script currently writes the canonical promoted-window package.",
+  "sources": {
+    "nenriki-galaxian-15-wave-session-1080p-h264": {
+      "path": "/Users/sgwoods/Downloads/Galaxian (Arcade) original video game  15-wave session for 1 Player 👾🌌🕹️ - Nenriki Gaming Channel (1080p, h264).mp4",
+      "frame_rate": 60,
+      "trace_profile": "galaxian-portrait"
+    },
+    "arcades-lounge-galaxian-level-5-passed-1080p-h264": {
+      "path": "/Users/sgwoods/Downloads/GALAXIAN (1979) - LEVEL 5 passed ! Video game - ARCADE'S LOUNGE (1080p, h264).mp4",
+      "frame_rate": 25,
+      "trace_profile": "default"
+    }
+  },
+  "windows": [
+    {
+      "window_id": "opening-active-wave",
+      "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+      "start_time_s": 48,
+      "duration_s": 42,
+      "window_family": "opening-active-play",
+      "why_it_matters": "First active rack and early player control evidence after intro and score-table surfaces."
+    },
+    {
+      "window_id": "mid-session-pressure",
+      "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+      "start_time_s": 180,
+      "duration_s": 60,
+      "window_family": "mid-session-pressure",
+      "why_it_matters": "Middle-session pressure candidate for comparing stage progression and player survival movement."
+    },
+    {
+      "window_id": "late-session-pressure",
+      "source_id": "nenriki-galaxian-15-wave-session-1080p-h264",
+      "start_time_s": 660,
+      "duration_s": 60,
+      "window_family": "late-session-pressure",
+      "why_it_matters": "Late-session pressure candidate for later stage hooks and player movement under higher threat."
+    },
+    {
+      "window_id": "arcades-level-5-active-reference",
+      "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
+      "start_time_s": 8,
+      "duration_s": 32,
+      "window_family": "external-active-play-comparison",
+      "why_it_matters": "Compact comparison pass over the strongest active-play Level 5 reference."
+    }
+  ]
+}

@@ -73,6 +73,11 @@ can inflate pressure-like component counts, especially in opening windows. Use
 the pressure score to choose review order, then confirm with contact sheets and
 event logs before tuning.
 
+The current trace profile now uses `galaxian-portrait` for the Nenriki source,
+which raises player detection from weak first-pass rates to strong promoted
+window coverage. The pressure metric now reports active pressure separately
+from rack-region density, but contact-sheet review remains mandatory.
+
 ## Long-Session Evidence
 
 The Nenriki 15-wave session now has these coarse anchors:

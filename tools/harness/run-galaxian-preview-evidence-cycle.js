@@ -98,7 +98,8 @@ function traceWindow(win){
     '--duration', String(win.duration_s),
     '--fps', String(win.trace_fps),
     '--width', '270',
-    '--height', '480'
+    '--height', '480',
+    '--profile', win.trace_profile || 'default'
   ], { maxBuffer: 1024 * 1024 * 16 });
   return readJson(path.join(out, 'trace.json')).summary;
 }
@@ -107,6 +108,7 @@ function buildArtifacts(win){
   const base = path.join(OUTPUT_ROOT, win.window_id);
   ensureDir(abs(path.join(base, 'frames')));
   ensureDir(abs(path.join(base, 'audio')));
+  ensureDir(abs(path.join(base, 'events')));
   const mid = win.start_time_s + win.duration_s / 2;
   const nearEnd = win.start_time_s + Math.max(0, win.duration_s - 1);
   ffmpegContactSheet({
@@ -152,9 +154,61 @@ function buildArtifacts(win){
   };
 }
 
+function eventFamilyForWindow(win){
+  if(win.window_family === 'opening-active-play') return ['wave_setup', 'first_active_pressure', 'player_opening_movement'];
+  if(win.window_family === 'early-progression') return ['early_pressure', 'alien_dive', 'player_shot_cadence'];
+  if(win.window_family === 'mid-session-pressure') return ['mid_session_pressure', 'alien_dive', 'projectile_pressure'];
+  if(win.window_family === 'late-session-pressure') return ['late_session_pressure', 'depleted_rack_pressure', 'player_survival_movement'];
+  if(win.window_family === 'late-cleanup-or-game-over') return ['late_cleanup', 'failure_or_game_over_risk', 'depletion_state'];
+  return ['active_play_reference', 'alien_dive', 'projectile_pressure'];
+}
+
+function buildEventLog(win){
+  const families = eventFamilyForWindow(win);
+  const events = families.map((family, index) => {
+    const offset = index === 0 ? 0 : Number(((win.duration_s / families.length) * index).toFixed(3));
+    return {
+      event_id: `evt-${String(index + 1).padStart(3, '0')}`,
+      event_family: family,
+      time_s: Number((win.start_time_s + offset).toFixed(3)),
+      duration_s: index === 0 ? Number(Math.min(5, win.duration_s).toFixed(3)) : null,
+      entity_family: family.includes('player') ? 'player' : family.includes('projectile') ? 'projectile' : 'alien_group',
+      entity_id: family.includes('player') ? 'galaxip' : family,
+      position_hint: 'promoted review window; exact frame anchor pending manual review',
+      motion_hint: win.why_it_matters,
+      audio_hint: 'waveform artifact present; cue attribution pending',
+      confidence: index === 0 ? 'medium' : 'low',
+      source_note: 'Generated semantic scaffold from promoted-window cycle. Promote to observed only after visual review.'
+    };
+  });
+  return {
+    schema_version: 1,
+    game_lineage: 'galaxian-reference',
+    window_id: win.window_id,
+    source_id: win.window_id === 'arcades-level-5-active-reference'
+      ? 'arcades-lounge-galaxian-level-5-passed-1080p-h264'
+      : 'nenriki-galaxian-15-wave-session-1080p-h264',
+    status: 'promoted-event-scaffold',
+    timebase: {
+      units: 'seconds',
+      source_start_time_s: win.start_time_s,
+      source_end_time_s: Number((win.start_time_s + win.duration_s).toFixed(3)),
+      frame_rate: win.window_id === 'arcades-level-5-active-reference' ? 25 : 60,
+      notes: 'Generated from promoted evidence window. Replace with exact observed events after visual review.'
+    },
+    events,
+    open_questions: [
+      'Which frames show the clearest rack, dive, projectile, and player movement events?',
+      'Which events should become implementation correspondence targets?',
+      'Does this window belong to first playable tuning or later progression planning?'
+    ]
+  };
+}
+
 function pressureScore(summary){
+  const activePressure = summary.max_active_pressure_component_count ?? summary.max_lower_pressure_component_count;
   return Number((
-    summary.max_lower_pressure_component_count * 0.45 +
+    activePressure * 0.45 +
     summary.max_projectile_like_count * 0.35 +
     summary.player_x_norm_range * 25 +
     summary.mean_abs_player_delta_per_sample * 250
@@ -163,12 +217,12 @@ function pressureScore(summary){
 
 function markdownTable(windows){
   const lines = [
-    '| Window | Time | Detection | X Range | Mean Abs Delta | Lower Pressure | Projectiles | Pressure Score |',
+    '| Window | Time | Detection | X Range | Mean Abs Delta | Active Pressure | Projectiles | Pressure Score |',
     '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |'
   ];
   for(const win of windows){
     const s = win.trace_summary;
-    lines.push(`| \`${win.window_id}\` | ${win.start_time_s.toFixed(3)}-${win.end_time_s.toFixed(3)}s | ${s.player_sample_count}/${s.sample_count} | ${s.player_x_norm_range} | ${s.mean_abs_player_delta_per_sample} | ${s.max_lower_pressure_component_count} | ${s.max_projectile_like_count} | ${win.pressure_score} |`);
+    lines.push(`| \`${win.window_id}\` | ${win.start_time_s.toFixed(3)}-${win.end_time_s.toFixed(3)}s | ${s.player_sample_count}/${s.sample_count} | ${s.player_x_norm_range} | ${s.mean_abs_player_delta_per_sample} | ${s.max_active_pressure_component_count ?? s.max_lower_pressure_component_count} | ${s.max_projectile_like_count} | ${win.pressure_score} |`);
   }
   return lines;
 }
@@ -195,8 +249,7 @@ function buildReports(windows){
     '',
     ...markdownTable(windows),
     '',
-    'The pressure score is a project-local heuristic combining lower-field component pressure, projectile-like component count, player x-range, and player movement delta. Use it to rank windows for implementation review, not as arcade truth.',
-    ''
+    'The pressure score is a project-local heuristic combining lower-field component pressure, projectile-like component count, player x-range, and player movement delta. Use it to rank windows for implementation review, not as arcade truth.'
   ];
   fs.writeFileSync(abs(path.join(OUTPUT_ROOT, 'TRACE_SUMMARY.md')), `${md.join('\n')}\n`);
 
@@ -219,10 +272,12 @@ function buildReports(windows){
     '',
     '## Aurora Expansion Relevance',
     '',
-    'The same curve shape should be used when expanding Aurora: pick one opening-stage baseline, one challenge-stage evidence window, one mid-run pressure window, and one late-run cleanup or failure window before adding new aliens or movement families.',
-    ''
+    'The same curve shape should be used when expanding Aurora: pick one opening-stage baseline, one challenge-stage evidence window, one mid-run pressure window, and one late-run cleanup or failure window before adding new aliens or movement families.'
   ];
   fs.writeFileSync(abs(path.join(GALAXIAN_ROOT, 'GALAXIAN_PROGRESSION_PRESSURE_CURVE.md')), `${curve.join('\n')}\n`);
+  for(const win of windows){
+    writeJson(path.join(OUTPUT_ROOT, win.window_id, 'events', 'reference-events.json'), buildEventLog(win));
+  }
 }
 
 function main(){
@@ -233,6 +288,7 @@ function main(){
       start_time_s: 48,
       duration_s: 42,
       trace_fps: 15,
+      trace_profile: 'galaxian-portrait',
       window_family: 'opening-active-play',
       why_it_matters: 'First active rack and early player control evidence after intro and score-table surfaces.'
     },
@@ -242,6 +298,7 @@ function main(){
       start_time_s: 90,
       duration_s: 55,
       trace_fps: 15,
+      trace_profile: 'galaxian-portrait',
       window_family: 'early-progression',
       why_it_matters: 'Early repeated pressure after the first active setup, useful for first playable pressure bands.'
     },
@@ -251,6 +308,7 @@ function main(){
       start_time_s: 180,
       duration_s: 60,
       trace_fps: 15,
+      trace_profile: 'galaxian-portrait',
       window_family: 'mid-session-pressure',
       why_it_matters: 'Middle-session pressure candidate for comparing stage progression and player survival movement.'
     },
@@ -260,6 +318,7 @@ function main(){
       start_time_s: 660,
       duration_s: 60,
       trace_fps: 15,
+      trace_profile: 'galaxian-portrait',
       window_family: 'late-session-pressure',
       why_it_matters: 'Late-session pressure candidate for later stage hooks and player movement under higher threat.'
     },
@@ -269,6 +328,7 @@ function main(){
       start_time_s: 870,
       duration_s: 60,
       trace_fps: 15,
+      trace_profile: 'galaxian-portrait',
       window_family: 'late-cleanup-or-game-over',
       why_it_matters: 'Endgame and depletion-state evidence for lifecycle, failure presentation, and long-run comparison.'
     },
@@ -278,6 +338,7 @@ function main(){
       start_time_s: 8,
       duration_s: 32,
       trace_fps: 15,
+      trace_profile: 'default',
       window_family: 'external-active-play-comparison',
       why_it_matters: 'Compact comparison pass over the strongest active-play Level 5 reference.'
     }

@@ -6,14 +6,14 @@ This curve compares promoted Nenriki long-session windows with ARCADE'S LOUNGE L
 
 ## Nenriki Promoted Windows
 
-| Window | Time | Detection | X Range | Mean Abs Delta | Lower Pressure | Projectiles | Pressure Score |
+| Window | Time | Detection | X Range | Mean Abs Delta | Active Pressure | Projectiles | Pressure Score |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `opening-active-wave` | 48.000-90.000s | 107/630 | 0.4977 | 0.0383 | 50 | 51 | 62.367 |
-| `early-progression-pressure` | 90.000-145.000s | 75/825 | 0.4796 | 0.0429 | 26 | 51 | 52.265 |
-| `mid-session-pressure` | 180.000-240.000s | 69/900 | 0.5205 | 0.0605 | 20 | 48 | 53.938 |
-| `late-session-pressure` | 660.000-720.000s | 103/900 | 0.5208 | 0.0622 | 30 | 47 | 58.52 |
-| `endgame-cleanup` | 870.000-930.000s | 79/900 | 0.5486 | 0.0601 | 29 | 46 | 57.89 |
-| `arcades-level-5-active-reference` | 8.000-40.000s | 471/480 | 0.5434 | 0.0148 | 20 | 68 | 50.085 |
+| `opening-active-wave` | 48.000-90.000s | 626/630 | 0.7633 | 0.0158 | 55 | 52 | 65.983 |
+| `early-progression-pressure` | 90.000-145.000s | 824/825 | 0.8255 | 0.0204 | 29 | 53 | 57.337 |
+| `mid-session-pressure` | 180.000-240.000s | 900/900 | 0.8005 | 0.0165 | 22 | 51 | 51.888 |
+| `late-session-pressure` | 660.000-720.000s | 876/900 | 0.7264 | 0.0192 | 33 | 50 | 55.31 |
+| `endgame-cleanup` | 870.000-930.000s | 781/900 | 0.7541 | 0.0195 | 28 | 47 | 52.777 |
+| `arcades-level-5-active-reference` | 8.000-40.000s | 471/480 | 0.5434 | 0.0147 | 19 | 68 | 49.61 |
 
 ## Interpretation
 

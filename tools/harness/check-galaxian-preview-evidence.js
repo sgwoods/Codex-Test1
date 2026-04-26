@@ -30,6 +30,7 @@ const REQUIRED_SUMMARY_FIELDS = [
   'player_x_norm_range',
   'mean_abs_player_delta_per_sample',
   'max_lower_pressure_component_count',
+  'max_active_pressure_component_count',
   'max_projectile_like_count'
 ];
 
@@ -90,6 +91,15 @@ function validateWindow(win, issues){
 
   if(win.trace_summary && win.trace_summary.player_detection_rate < 0.2){
     addIssue(issues, 'warning', `${win.window_id} has low player detection rate ${win.trace_summary.player_detection_rate}`);
+  }
+
+  const eventLog = path.join(
+    path.dirname((win.artifacts && win.artifacts.trace_dir) || ''),
+    'events',
+    'reference-events.json'
+  );
+  if(!exists(eventLog)){
+    addIssue(issues, 'error', `${win.window_id} missing promoted event scaffold ${eventLog}`);
   }
 }
 
