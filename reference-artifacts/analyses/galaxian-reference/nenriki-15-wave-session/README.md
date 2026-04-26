@@ -74,6 +74,9 @@ Use it to answer:
   - log-scale full-source waveform
 - `subwindows/reference-subwindows.json`
   - generated coarse window candidates for later review
+- `promoted-windows/`
+  - promoted first-preview review windows with contact sheets, stills,
+    waveforms, movement / pressure traces, and `TRACE_SUMMARY.md`
 
 ## Candidate Window Split
 
@@ -89,6 +92,24 @@ candidate split is:
 3. `late-session-candidate`
    - `660.866-720.866s`
    - use for candidate late-session pressure review
+
+## Promoted Review Windows
+
+The deeper preview-evidence cycle currently promotes:
+
+1. `opening-active-wave`
+   - `48.000-90.000s`
+2. `early-progression-pressure`
+   - `90.000-145.000s`
+3. `mid-session-pressure`
+   - `180.000-240.000s`
+4. `late-session-pressure`
+   - `660.000-720.000s`
+5. `endgame-cleanup`
+   - `870.000-930.000s`
+
+These windows have per-window contact sheets, stills, waveforms, and traces.
+They are promoted review windows, not final canonical wave boundaries.
 
 ## Required Next Artifacts
 
@@ -110,5 +131,9 @@ Before this source becomes implementation evidence, add:
   - progression semantic scaffold updated from the first-pass artifacts
 - `subwindows/reference-subwindows.json`
   - coarse generated candidate windows
+- `promoted-windows/reference-windows.json`
+  - promoted preview-evidence windows and trace summaries
+- `promoted-windows/TRACE_SUMMARY.md`
+  - pressure and player-movement comparison for promoted windows
 
 The `clips`, `frames`, and `audio` folders are present as artifact targets.

@@ -84,6 +84,13 @@ Expected outputs:
 This should not be a giant implementation branch. It should produce the
 blueprint that makes the implementation branch small enough to review.
 
+Use the same promoted-window method now being built for the Galaxian preview.
+Before adding new Aurora stage content, collect an opening baseline, a
+challenge-stage candidate, a mid-run pressure window, and a late-run cleanup or
+failure window. The bridge document is:
+
+- [CLASSIC_ARCADE_ANALYSIS_TO_AURORA_EXPANSION_BRIDGE.md](CLASSIC_ARCADE_ANALYSIS_TO_AURORA_EXPANSION_BRIDGE.md)
+
 ### 3. `codex/macbook-pro-challenge-stage-depth`
 
 Purpose:
@@ -223,6 +230,15 @@ Every implemented expansion slice should have at least one evidence anchor:
 - Aurora harness output
 - generated video or contact-sheet artifact
 - scorecard or roadmap note describing the intended impact
+
+For larger behavior-family changes, prefer the stronger evidence set:
+
+- promoted window catalog
+- contact sheets and still frames
+- movement / pressure trace summary
+- semantic event log
+- first playable or stage-slice spec
+- harness target list
 
 ## Shared Gameplay Video Direction
 

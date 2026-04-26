@@ -44,12 +44,31 @@ npm run harness:cycle:galaxian-reference
 This requires the locally supplied source videos under `/Users/sgwoods/Downloads`
 and a working `ffmpeg` / `ffprobe` install.
 
+To regenerate the promoted first-preview evidence windows, run:
+
+```sh
+npm run harness:cycle:galaxian-preview-evidence
+```
+
+This writes per-window contact sheets, stills, waveforms, traces, and pressure
+summaries for the first `Galaxy Guardians` preview spec.
+
+Validate that evidence package with:
+
+```sh
+npm run harness:check:galaxian-preview-evidence
+```
+
 ## Folder Layout
 
 - `manifest.json`
   - candidate sources, source status, and first window plan
 - `FIRST_GALAXIAN_PREVIEW_EVIDENCE_MAP.md`
   - current source roles and implementation evidence map for the preview slice
+- `GALAXY_GUARDIANS_FIRST_PLAYABLE_PREVIEW_SPEC.md`
+  - first evidence-backed playable preview scope
+- `GALAXIAN_PROGRESSION_PRESSURE_CURVE.md`
+  - promoted-window pressure comparison and Aurora expansion note
 - `local-cycle-summary.json`
   - last local long-cycle summary
 - `seed-window-formation-entry/`
@@ -72,6 +91,9 @@ and a working `ffmpeg` / `ffprobe` install.
   - wave progression and pressure-scaling candidate anchors
 - `nenriki-15-wave-session/subwindows/reference-subwindows.json`
   - generated opening, mid-session, and late-session candidate windows
+- `nenriki-15-wave-session/promoted-windows/`
+  - promoted review windows with contact sheets, stills, waveforms, traces, and
+    pressure summaries
 - `seed-window-formation-entry/semantic-scout-wave-profile.md`
   - first semantic model scaffold
 
@@ -87,5 +109,6 @@ Do not treat a source as implementation evidence until it has:
 
 ## Next Action
 
-Promote one exact Nenriki progression or wave-transition subwindow, then draft
-the `Galaxy Guardians` first playable preview spec against the evidence map.
+Create the pack-facing config and event-schema plan for the
+`Galaxy Guardians` first playable preview, then begin implementation on a clean
+branch after syncing with current `main`.

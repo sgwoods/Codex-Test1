@@ -27,6 +27,11 @@ The first proof does not need to cover a whole game.
 It should cover one small slice completely enough that the same pattern can be
 reused for other games.
 
+The same pattern should also feed Aurora's own level-by-level expansion. New
+challenge stages, later-level entry variation, alien families, and pressure
+bands should come from promoted evidence windows and harness traces before
+subjective tuning.
+
 ## First Target
 
 The first target is a small `Galaxy Guardians` scout-wave preview derived from
@@ -141,6 +146,11 @@ Each window should have:
 - visible entities
 - analysis questions
 - confidence notes
+
+For long-session work, promote coarse windows into exact review windows before
+implementation. A promoted review window should have contact sheets, stills,
+waveform when audio matters, a trace summary, and a written reason why it maps
+to opening, challenge, mid-run, late-run, cleanup, or failure-state semantics.
 
 ### 4. Event Logging
 
