@@ -50,7 +50,8 @@ That one command will:
 - clone `sgwoods/Codex-Test1` into `./Codex-Test1` if it is not there yet
 - reuse the clone if it already exists
 - on fresh macOS machines, try to install missing prerequisites through Apple
-  Command Line Tools and Homebrew
+  Command Line Tools and Homebrew, including `ffmpeg` / `ffprobe` for
+  reference-video extraction, contact sheets, and waveforms
 - those fresh-machine install steps may request administrator approval
 - the setup command should be run as the normal user, not with `sudo` or `su`
 - if Homebrew is missing, the Aurora installer will download the Homebrew

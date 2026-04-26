@@ -16,6 +16,18 @@ This directory stores durable reference material used to tune the game toward or
 - `analyses/galaxian-mechanics/`: early sibling-pack mechanics archive for
   future Platinum Galaxian-family work
 
+## Media Tooling
+
+Reference-video extraction uses `ffmpeg` and `ffprobe`.
+
+The normal machine setup flow installs these through Homebrew on macOS:
+
+```bash
+npm run machine:bootstrap
+```
+
+Use them for clipped windows, still frames, contact sheets, and waveform images.
+
 ## Storage Policy
 
 - Source documents that are reasonably sized and useful long-term can be committed here.

@@ -14,13 +14,13 @@
       "url_or_local_anchor": "/Users/sgwoods/Downloads/Galaxian (Namco 1979) - Arcade Intro - Matt Hawkins (720p, h264).mp4",
       "creator_or_archive": "Matt Hawkins",
       "capture_type": "local arcade intro gameplay video",
-      "duration": "unknown",
-      "video_quality": "filename declares 720p H.264; local file uses avc1 video",
-      "audio_quality": "local file uses mp4a audio; quality not yet reviewed",
+      "duration": "59.267438 seconds",
+      "video_quality": "560x720 H.264 / avc1, 30 fps, progressive, bt709; source filename declares 720p",
+      "audio_quality": "AAC stereo 44.1 kHz, effectively silent in first probe: mean -91.0 dB, max -90.3 dB",
       "license_or_usage_note": "Local user-provided gameplay example. Use for internal reference analysis until provenance and redistribution rights are clarified.",
       "analysis_status": "confirmed-candidate",
       "confidence": "medium",
-      "notes": "Beginning-phase Galaxian look provided for the ingestion library. Observed locally as a 5,429,248 byte MP4 with avc1 video and mp4a audio."
+      "notes": "Beginning-phase Galaxian look provided for the ingestion library. First-pass artifacts include source metadata JSON, a 0-59s contact sheet, representative still frames, and a waveform image. Best current use is visual/presentation sequencing, not audio identity."
     },
     {
       "source_id": "arcades-lounge-galaxian-level-5-passed-1080p-h264",
@@ -147,10 +147,10 @@
     {
       "window_id": "matt-hawkins-arcade-intro",
       "source_id": "matt-hawkins-galaxian-arcade-intro-720p-h264",
-      "status": "planned",
-      "start_time_s": null,
-      "end_time_s": null,
-      "target_duration_s": 20,
+      "status": "events-observed",
+      "start_time_s": 0,
+      "end_time_s": 59.267438,
+      "target_duration_s": 59.267438,
       "window_family": "intro-formation-entry",
       "why_it_matters": "This local intro-focused source should help establish the opening phase, title/attract handoff, first formation presentation, and earliest visible player-pressure cues for the scout-wave profile.",
       "visible_entities": [
@@ -166,8 +166,8 @@
         "Are formation rows and flagship/escort families readable at 720p?",
         "Does the intro window contain first movement, first shot, or first dive evidence?"
       ],
-      "confidence": "unknown",
-      "notes": "Exact timestamps are pending local clip review. This may become the preferred first beginning-phase source if it contains formation-entry evidence."
+      "confidence": "medium",
+      "notes": "Contact-sheet review confirms title/mission text, score table, Namco presentation, full rack, game-over state, visible player Galaxip, and at least one visible shot/player-pressure moment. Exact event timestamps still need frame-accurate review before implementation."
     },
     {
       "window_id": "arcades-lounge-level-5",

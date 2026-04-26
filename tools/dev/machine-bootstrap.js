@@ -21,6 +21,8 @@ async function main(){
   if(!checks.python3.ok) missing.push('python3');
   if(!checks.chrome.ok) missing.push('chrome');
   if(!checks.gh.ok) missing.push('gh');
+  if(!checks.ffmpeg.ok) missing.push('ffmpeg');
+  if(!checks.ffprobe.ok) missing.push('ffprobe');
 
   if(missing.length){
     const summary = {
