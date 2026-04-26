@@ -104,6 +104,21 @@ Verification:
 
 - `npm run harness:check:production-developer-lock`
 
+6. Persistent bottom build-stamp guide entry point
+
+- the bottom-center version/build indicator no longer exposes a hide button
+  that lets it disappear during normal play
+- it now stays persistent on the main screen and acts as a direct entry point
+  into the in-game project guide / release-notes surface
+- keyboard activation is supported as well, so the stamp works as an accessible
+  bottom-of-screen guide affordance rather than just passive text
+- issue family:
+  - `#176` keep main-screen version indicator persistent and dismissable
+
+Verification:
+
+- `npm run harness:check:build-stamp-persistence`
+
 ### Already green and likely better treated as verified closures
 
 These do not currently need new code for `1.2.4`, but they are useful to cite
@@ -158,6 +173,7 @@ Minimum patch verification:
 - `npm run harness:check:overlay-screen-switching`
 - `npm run harness:check:dock-buttons`
 - `npm run harness:check:production-developer-lock`
+- `npm run harness:check:build-stamp-persistence`
 - `npm run harness:check:dual-final-life-survivor`
 - `npm run harness:check:game-over-carry-suppression`
 - `npm run harness:check:close-shot-hit`

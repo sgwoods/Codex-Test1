@@ -81,7 +81,6 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
- buildStamp.classList.toggle('dismissed',!!buildStampDismissed);
  const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
@@ -90,7 +89,6 @@ function syncBuildStampUi(){
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
-  if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
   if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
@@ -107,7 +105,6 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
- if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'
