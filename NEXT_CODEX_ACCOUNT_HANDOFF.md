@@ -85,6 +85,7 @@ Start with:
 
 Then read as needed:
 
+- [CODEX_MAC_BROWSER_WORKFLOW.md](CODEX_MAC_BROWSER_WORKFLOW.md)
 - [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
 - [DEVELOPER_MACHINE_BASELINE.md](DEVELOPER_MACHINE_BASELINE.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
@@ -190,6 +191,7 @@ Immediate next recommended work:
 Important docs to read first:
 - NEXT_CODEX_ACCOUNT_HANDOFF.md
 - MACBOOK_CODEX_PROMPT.md
+- CODEX_MAC_BROWSER_WORKFLOW.md
 - LEVEL_BY_LEVEL_EXPANSION_PLAN.md
 - LONG_TERM_RELEASE_ROADMAP.md
 - PRODUCT_ROADMAP.md
@@ -201,6 +203,10 @@ Operational rules:
 - Prefer repo-grounded verification before conclusions
 - Persist important plans and decisions in repo docs, not just chat
 - Keep docs current when workflows or release state changes
+- Use CODEX_MAC_BROWSER_WORKFLOW.md for local browser work: Codex in-app
+  browser for non-disruptive localhost inspection, Playwright harnesses for
+  deterministic checks, and harness:doctor:browser to classify Chrome launch
+  failures before debugging gameplay
 - All meaningful work should end up committed to GitHub
 - Do not use sudo or su for normal Aurora development
 - Use GitHub, not iCloud syncing of the same working tree across machines, as the sync mechanism
@@ -216,4 +222,7 @@ Operational rules:
   because `local:resume` starts that endpoint.
 - If harnesses fail with localhost bind errors, rerun with normal local network
   permissions.
+- If browser harnesses fail in Codex but pass locally/elevated, follow
+  [CODEX_MAC_BROWSER_WORKFLOW.md](CODEX_MAC_BROWSER_WORKFLOW.md) and classify
+  the run as `codex-sandbox-browser-launch`.
 - If Git push fails after the account switch, run `gh auth setup-git`.

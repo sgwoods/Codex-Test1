@@ -175,6 +175,12 @@ than a gameplay regression. Rerun that browser harness with local/elevated
 execution. If it fails from a normal Terminal too, update or reinstall Google
 Chrome and rerun `npm run machine:doctor`.
 
+For MacBook Codex sessions, use
+[CODEX_MAC_BROWSER_WORKFLOW.md](CODEX_MAC_BROWSER_WORKFLOW.md) as the durable
+browser policy: Codex in-app browser for non-disruptive localhost inspection,
+repo Playwright harnesses for deterministic checks, and the browser doctor to
+classify sandbox-only Chrome launch failures.
+
 The machine should be able to run at least one representative check from each family:
 
 ```bash

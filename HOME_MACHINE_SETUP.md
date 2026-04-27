@@ -180,6 +180,11 @@ the machine is not necessarily broken; rerun the browser harness with
 local/elevated execution. If it also fails from Terminal, update or reinstall
 Google Chrome before treating gameplay harness output as authoritative.
 
+For the MacBook Codex app, follow
+[CODEX_MAC_BROWSER_WORKFLOW.md](CODEX_MAC_BROWSER_WORKFLOW.md): inspect
+localhost in the Codex in-app browser, keep Playwright harnesses deterministic,
+and classify sandbox-only Chrome launch failures before changing gameplay code.
+
 Run a scenario:
 
 ```bash

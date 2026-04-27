@@ -70,8 +70,19 @@ Key local services:
 - Game: http://127.0.0.1:8000/
 - Viewer: http://127.0.0.1:4311/
 
+Mac browser workflow:
+- Use CODEX_MAC_BROWSER_WORKFLOW.md as the browser-inspection source of truth
+- Use the Codex in-app browser for localhost visual inspection so the user's
+  normal Chrome session is not disturbed
+- Run npm run harness:doctor:browser before interpreting Chrome/Playwright
+  harness failures
+- If the browser doctor fails only inside sandboxed Codex but passes from normal
+  Terminal or local/elevated execution, classify it as codex-sandbox-browser-launch
+  and rerun that browser harness locally/elevated
+
 Important docs to read first before major work:
 - NEXT_CODEX_ACCOUNT_HANDOFF.md
+- CODEX_MAC_BROWSER_WORKFLOW.md
 - RESTART_FROM_HERE.md
 - MULTI_MACHINE_WORKFLOW.md
 - DEVELOPER_MACHINE_BASELINE.md
