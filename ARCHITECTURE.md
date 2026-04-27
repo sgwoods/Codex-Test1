@@ -84,6 +84,8 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
 - Galaxy Guardians preview pack metadata:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-game-pack.js`
+- Galaxy Guardians disabled gameplay adapter skeleton:
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-gameplay-adapter.js`
 - shared entity model used by packs:
   - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
 - Aurora render orchestration:
@@ -165,6 +167,10 @@ Pack-boundary harness:
   verifies that Aurora is the only registered gameplay adapter, Galaxy
   Guardians cannot start gameplay without its own adapter, and preview launch
   fallback starts through the Aurora adapter.
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-guardians-adapter-skeleton.js`
+  verifies that the Galaxy Guardians skeleton exists, stays disabled, exposes a
+  single-shot scout-wave state shape, and fails closed until measured evidence
+  exists.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

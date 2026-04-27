@@ -45,6 +45,8 @@ Right now it proves:
 - pack-owned preview content for the picker and preview modal
 - pack-owned placeholder timing, audio, visual, cadence, layout, and scoring
   tables that do not directly borrow Aurora tables
+- a disabled, evidence-gated gameplay adapter skeleton with its own initial
+  state shape
 - safe fallback to `Aurora Galactica` when a player tries to launch gameplay
 
 It does not yet prove:
@@ -52,7 +54,7 @@ It does not yet prove:
 - a second full gameplay ruleset
 - a second complete scoring and stage-flow implementation
 - a second complete application harness family
-- a registered gameplay adapter
+- a public registered gameplay adapter
 
 That is intentional.
 
@@ -118,10 +120,11 @@ The boundary is real, but these coupling areas still deserve attention:
 
 The current second-game preview is safe because it is not playable, and its
 preview pack now owns placeholder data instead of borrowing Aurora-owned tables.
-It also has no gameplay adapter, so it cannot start through Aurora's gameplay
-implementation by accident. A playable Galaxy Guardians slice still needs
-measured, game-specific pack data and its own gameplay adapter, with any true
-common behavior promoted into Platinum.
+It also has no public gameplay adapter, so it cannot start through Aurora's
+gameplay implementation by accident. Its disabled adapter skeleton records the
+first state-shape contract for the future scout-wave slice, but a playable
+Galaxy Guardians slice still needs measured, game-specific pack data and its own
+registered adapter, with any true common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
