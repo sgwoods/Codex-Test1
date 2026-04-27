@@ -124,10 +124,10 @@ The current second-game preview is safe because it is not playable, and its
 preview pack now owns placeholder data instead of borrowing Aurora-owned tables.
 It also has no public gameplay adapter, so it cannot start through Aurora's
 gameplay implementation by accident. Its disabled adapter skeleton now cites the
-first source-manifested Galaxian profile for the future scout-wave slice, but a
-playable Galaxy Guardians slice still needs promoted event timing, measured
-game-specific pack data, and its own registered adapter, with any true common
-behavior promoted into Platinum.
+first source-manifested Galaxian profile and a promoted reviewed event log for
+the future scout-wave slice, but a playable Galaxy Guardians slice still needs
+frame-level timing, measured game-specific pack data, and its own registered
+adapter, with any true common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
@@ -212,14 +212,14 @@ The best next application proof is a dev-only playable slice that includes:
 
 That is enough to test the platform without prematurely shipping a second game.
 
-Before that slice starts, capture the reference evidence needed for a Galaxian-
-style ruleset:
+Before that slice starts, refine the existing Galaxian evidence into
+runtime-ready rules:
 
-- preserved gameplay clips
-- formation-entry and dive timing notes
-- flagship and escort behavior notes
+- frame-level formation-entry and dive timing bands
+- flagship and escort behavior windows
 - scoring table and single-shot constraints
-- a small harness plan for the first scout-wave slice
+- an application-owned harness plan for the first scout-wave slice
+- visual/audio identity notes that are distinct from Aurora
 
 Use the reusable ingestion process in:
 

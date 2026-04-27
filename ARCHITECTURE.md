@@ -159,25 +159,25 @@ Harness families should now be thought of in categories:
 
 Pack-boundary harness:
 
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-pack-registry-boundaries.js`
+- `tools/harness/check-pack-registry-boundaries.js`
   verifies that the Galaxy Guardians preview pack owns separate placeholder
   tables, stays non-playable, and does not inherit Aurora challenge cadence,
   challenge layout, or reference timings.
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-gameplay-adapter-boundaries.js`
+- `tools/harness/check-gameplay-adapter-boundaries.js`
   verifies that Aurora is the only registered gameplay adapter, Galaxy
   Guardians cannot start gameplay without its own adapter, and preview launch
   fallback starts through the Aurora adapter.
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-guardians-adapter-skeleton.js`
+- `tools/harness/check-guardians-adapter-skeleton.js`
   verifies that the Galaxy Guardians skeleton exists, stays disabled, exposes a
-  single-shot scout-wave state shape, and fails closed until measured evidence
-  exists.
-- `/Users/steven/Documents/Codex-Test1/tools/harness/build-galaxian-reference-profile.js`
+  single-shot scout-wave state shape, cites the promoted event log, and fails
+  closed until measured runtime implementation exists.
+- `tools/harness/build-galaxian-reference-profile.js`
   probes the local Galaxian videos and generates source manifests, contact
-  sheets, waveforms, and the initial measured profile used by the disabled
-  Galaxy Guardians skeleton.
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-galaxian-reference-profile.js`
+  sheets, waveforms, the initial measured profile, and the promoted reviewed
+  event log used by the disabled Galaxy Guardians skeleton.
+- `tools/harness/check-galaxian-reference-profile.js`
   verifies that the generated Galaxian profile has the expected source roles,
-  artifacts, and first-slice scout-wave baseline.
+  artifacts, promoted event targets, and first-slice scout-wave baseline.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

@@ -42,6 +42,119 @@ const SOURCES = [
   }
 ];
 
+const PROMOTED_EVENT_WINDOWS = [
+  {
+    event_id: 'galaxian-attract-mission-text',
+    promotion_target: 'attract_mission_text',
+    family: 'attract_and_rules_language',
+    source_id: 'matt-hawkins-arcade-intro',
+    observed_window_seconds: [0, 10],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'Attract mode opens with the mission language and red title text before score-table display.',
+    implementation_note: 'Guardians should keep its own attract/rules identity separate from Aurora stage messaging.'
+  },
+  {
+    event_id: 'galaxian-score-advance-table',
+    promotion_target: 'score_advance_table',
+    family: 'alien_catalog_and_scoring',
+    source_id: 'matt-hawkins-arcade-intro',
+    observed_window_seconds: [10, 35],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'The source shows four ranked alien/charger rows with distinct point bands rather than Aurora enemy families.',
+    implementation_note: 'Guardians needs an owned alien catalog and score table before public preview enablement.'
+  },
+  {
+    event_id: 'galaxian-formation-rack-complete',
+    promotion_target: 'formation_rack_complete',
+    family: 'formation_state',
+    source_id: 'nenriki-15-wave-session',
+    observed_window_seconds: [60, 75],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'The formation appears as a completed rack with top flagship/escort ranks and lower rows of repeated scouts.',
+    implementation_note: 'Use a Galaxian rack profile, not Aurora stage formation defaults.'
+  },
+  {
+    event_id: 'galaxian-formation-entry-start',
+    promotion_target: 'formation_entry_start',
+    family: 'formation_state',
+    source_id: 'matt-hawkins-arcade-intro',
+    observed_window_seconds: [40, 45],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'The intro source first shows the demo/playfield rack after attract scoring screens, giving the earliest broad entry window.',
+    implementation_note: 'Frame-level extraction should refine how the first visible rack/entry moment differs from Aurora opening flow.'
+  },
+  {
+    event_id: 'galaxian-formation-entry-settle',
+    promotion_target: 'formation_entry_settle',
+    family: 'formation_state',
+    source_id: 'matt-hawkins-arcade-intro',
+    observed_window_seconds: [45, 55],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'The rack is visibly present and stable across the later demo/playfield samples before game-over return.',
+    implementation_note: 'Guardians should model rack settling as a Galaxian-owned stage-ready state, not Aurora formation arrival.'
+  },
+  {
+    event_id: 'galaxian-alien-dive-start',
+    promotion_target: 'alien_dive_start',
+    family: 'alien_attack_motion',
+    source_id: 'arcades-lounge-level-5',
+    observed_window_seconds: [20, 30],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'Mid-wave pressure shows independent aliens leaving the rack and occupying lower-field attack paths.',
+    implementation_note: 'Preview motion should emphasize solo diving pressure and lower-field traversal.'
+  },
+  {
+    event_id: 'galaxian-flagship-escort-pressure',
+    promotion_target: 'flagship_dive_start',
+    family: 'flagship_and_escort_motion',
+    source_id: 'nenriki-15-wave-session',
+    observed_window_seconds: [90, 135],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'The long-session source shows top-rank pressure with flagship-colored enemies and escorts in active dive windows.',
+    implementation_note: 'Represent flagship/escort attack as a Guardians-owned pressure model, not capture/rescue behavior.'
+  },
+  {
+    event_id: 'galaxian-escort-join',
+    promotion_target: 'escort_join',
+    family: 'flagship_and_escort_motion',
+    source_id: 'nenriki-15-wave-session',
+    observed_window_seconds: [90, 135],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'Escort pressure is visible alongside flagship movement during the same lower-field attack windows.',
+    implementation_note: 'Keep escort joins as attack grouping only; no Aurora tractor/capture semantics.'
+  },
+  {
+    event_id: 'galaxian-player-shot-fired',
+    promotion_target: 'player_shot_fired',
+    family: 'player_fire_model',
+    source_id: 'arcades-lounge-level-5',
+    observed_window_seconds: [0, 20],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'The player fire read is narrow and single-shot oriented, with shot cadence distinct from Aurora dual-fighter possibility.',
+    implementation_note: 'Guardians 0.1 must enforce a single in-flight player shot.'
+  },
+  {
+    event_id: 'galaxian-player-shot-resolved',
+    promotion_target: 'player_shot_resolved',
+    family: 'player_fire_model',
+    source_id: 'arcades-lounge-level-5',
+    observed_window_seconds: [20, 40],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'Shot resolution occurs amid ongoing dive pressure and formation depletion, without capture/rescue branching.',
+    implementation_note: 'Resolve hits/misses against Guardians alien families and keep scoring independent from Aurora.'
+  },
+  {
+    event_id: 'galaxian-enemy-wrap-or-return',
+    promotion_target: 'enemy_wrap_or_return',
+    family: 'alien_attack_motion',
+    source_id: 'nenriki-15-wave-session',
+    observed_window_seconds: [105, 150],
+    confidence: 'reviewed-contact-sheet',
+    interpretation: 'Enemies continue threat movement through lower-field windows and appear to re-enter/return as pressure cycles continue.',
+    implementation_note: 'Treat bottom exits/returns as an explicit preview rule pending frame-level timing extraction.'
+  }
+];
+
 function rel(p){
   return path.relative(ROOT, p).split(path.sep).join('/');
 }
@@ -108,6 +221,57 @@ function generateWaveform(source, sourceDir){
 function writeJson(file, data){
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+}
+
+function writePromotedEventLog(sourceRecords, generatedAt){
+  const sourceById = new Map(sourceRecords.map(source => [source.source_id, source]));
+  const events = PROMOTED_EVENT_WINDOWS.map((event, index) => {
+    const source = sourceById.get(event.source_id);
+    if(!source) throw new Error(`Promoted event references unknown source: ${event.source_id}`);
+    const contact = source.contact_sheet;
+    const waveform = source.waveform;
+    return Object.assign({
+      order: index + 1,
+      evidence_artifacts: {
+        contact_sheet: contact,
+        waveform
+      }
+    }, event);
+  });
+  const log = {
+    schema_version: 1,
+    generated_by: 'tools/harness/build-galaxian-reference-profile.js',
+    generated_at: generatedAt,
+    status: 'promoted-reviewed-event-windows',
+    lineage: 'galaxian-reference',
+    application_target: 'galaxy-guardians-preview',
+    review_method: 'manual-review-of-generated-contact-sheets-and-waveforms',
+    event_count: events.length,
+    promoted_targets: events.map(event => event.promotion_target),
+    events
+  };
+  const out = path.join(OUT_ROOT, 'promoted-event-log.json');
+  writeJson(out, log);
+  fs.writeFileSync(path.join(OUT_ROOT, 'promoted-event-log.md'), `# Galaxian Promoted Event Log
+
+Status: \`${log.status}\`
+
+This log promotes the first reviewed Galaxian windows from the generated contact
+sheets and waveforms into named semantic events for the future Galaxy Guardians
+0.1 scout-wave preview. These are broad observed windows, not frame-accurate
+runtime timings yet.
+
+## Events
+
+${events.map(event => `- \`${event.promotion_target}\` (${event.source_id}, ${event.observed_window_seconds[0]}-${event.observed_window_seconds[1]}s): ${event.interpretation}`).join('\n')}
+
+## Next Use
+
+- Convert these broad windows into frame-level timings where needed.
+- Use the promoted target names as the first Guardians event vocabulary.
+- Keep Aurora-specific capture, dual-fighter, challenge-stage, and scoring rules out of the Guardians preview.
+`);
+  return rel(out);
 }
 
 function writeSourceReadme(source, sourceDir, measured, contactSheet, waveform){
@@ -186,6 +350,7 @@ function main(){
     };
   });
 
+  const promotedEventLog = writePromotedEventLog(sourceRecords, generatedAt);
   const profile = {
     schema_version: 1,
     generated_by: 'tools/harness/build-galaxian-reference-profile.js',
@@ -195,6 +360,7 @@ function main(){
     application_target: 'galaxy-guardians-preview',
     source_count: sourceRecords.length,
     sources: sourceRecords,
+    promoted_event_log: promotedEventLog,
     measured_baseline: {
       source_count: sourceRecords.length,
       has_intro_source: sourceRecords.some(source => source.role === 'arcade_intro_attract_and_opening'),
@@ -204,8 +370,8 @@ function main(){
         player_fire_model: 'single-shot',
         formation_model: 'rack-with-independent-dives',
         flagship_model: 'flagship-with-escort-pressure',
-        wrap_threat_model: 'bottom-exit-remains-threat-pending-promotion',
-        evidence_state: 'source-manifested-contact-sheets-awaiting-promoted-event-log'
+        wrap_threat_model: 'bottom-exit-or-return-explicit-preview-rule',
+        evidence_state: 'promoted-event-log-awaiting-runtime-implementation'
       }
     },
     next_promotion_targets: [
@@ -243,6 +409,7 @@ ${sourceRecords.map(source => `- \`${source.source_id}\`: ${source.title}`).join
 
 - \`${rel(path.join(OUT_ROOT, 'source-manifest.json'))}\`
 - \`${rel(path.join(OUT_ROOT, 'initial-measured-profile.json'))}\`
+- \`${promotedEventLog}\`
 
 ## Current Baseline
 
@@ -251,14 +418,17 @@ ${sourceRecords.map(source => `- \`${source.source_id}\`: ${source.title}`).join
 - flagship model: \`${profile.measured_baseline.first_slice.flagship_model}\`
 - evidence state: \`${profile.measured_baseline.first_slice.evidence_state}\`
 
-The current profile is a source-manifest/contact-sheet/waveform baseline. The
-next promotion step is manually reviewed event timing from these artifacts.
+The current profile includes source manifests, contact sheets, waveforms, and
+the first promoted semantic event log. The next promotion step is frame-level
+timing extraction for the event windows that directly drive the playable
+Galaxy Guardians 0.1 scout-wave preview.
 `);
   console.log(JSON.stringify({
     ok: true,
     sourceCount: sourceRecords.length,
     profile: rel(path.join(OUT_ROOT, 'initial-measured-profile.json')),
-    manifest: rel(path.join(OUT_ROOT, 'source-manifest.json'))
+    manifest: rel(path.join(OUT_ROOT, 'source-manifest.json')),
+    promotedEventLog
   }, null, 2));
 }
 

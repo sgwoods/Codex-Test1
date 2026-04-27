@@ -52,7 +52,7 @@ What is not yet ready for a playable second game:
 - Galaxy Guardians now has a disabled adapter skeleton that is evidence-gated
   and not registered as playable
 - the skeleton now cites a three-source Galaxian reference profile with contact
-  sheets and waveforms
+  sheets, waveforms, and a promoted reviewed event log
 - the Galaxy Guardians preview pack now owns placeholder atmosphere, audio,
   timing, stage cadence, stage band, formation, challenge, frame accent, and
   scoring tables while it remains non-playable
@@ -233,18 +233,18 @@ The first platform boundary slice is now in place:
 - Guardians adapter skeleton harness proving the disabled skeleton cannot start
   gameplay and does not include Aurora-only state
 - Galaxian source profile builder/checker for the three local reference videos,
-  including contact sheets and waveform artifacts
+  including contact sheets, waveform artifacts, and promoted event windows
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice
 
-The next implementation slice should promote reviewed Galaxian events from the
-new source profile into timing bands:
+The next implementation slice should refine the promoted Galaxian event log
+into frame-level timing bands and runtime rules:
 
-- extract the first scout-wave formation, dive, flagship, escort, firing, and
-  scoring facts from the contact sheets and source videos
+- extract frame-level formation, dive, flagship, escort, firing, and scoring
+  facts from the promoted windows and source videos
 - replace placeholder formation slot counts and entry/dive labels with promoted
   observed values
-- add a semantic event log with timestamps for the skeleton state transitions
+- convert broad semantic event windows into skeleton state transition targets
 - add a contract harness that fails if measured Galaxy Guardians state uses
   Aurora capture, challenge, dual-fighter, or scoring functions by default

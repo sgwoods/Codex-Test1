@@ -15,13 +15,16 @@ the future Galaxy Guardians scout-wave slice.
 
 - `reference-artifacts/analyses/galaxian-reference/source-manifest.json`
 - `reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json`
+- `reference-artifacts/analyses/galaxian-reference/promoted-event-log.json`
 
 ## Current Baseline
 
 - player fire model: `single-shot`
 - formation model: `rack-with-independent-dives`
 - flagship model: `flagship-with-escort-pressure`
-- evidence state: `source-manifested-contact-sheets-awaiting-promoted-event-log`
+- evidence state: `promoted-event-log-awaiting-runtime-implementation`
 
-The current profile is a source-manifest/contact-sheet/waveform baseline. The
-next promotion step is manually reviewed event timing from these artifacts.
+The current profile includes source manifests, contact sheets, waveforms, and
+the first promoted semantic event log. The next promotion step is frame-level
+timing extraction for the event windows that directly drive the playable
+Galaxy Guardians 0.1 scout-wave preview.

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "tools/harness/build-galaxian-reference-profile.js",
-  "generated_at": "2026-04-27T22:58:21.281Z",
+  "generated_at": "2026-04-27T23:28:45.422Z",
   "status": "source-manifested-contact-sheets-and-waveforms",
   "lineage": "galaxian-reference",
   "application_target": "galaxy-guardians-preview",
@@ -53,6 +53,7 @@
       "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
     }
   ],
+  "promoted_event_log": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
   "measured_baseline": {
     "source_count": 3,
     "has_intro_source": true,
@@ -62,8 +63,8 @@
       "player_fire_model": "single-shot",
       "formation_model": "rack-with-independent-dives",
       "flagship_model": "flagship-with-escort-pressure",
-      "wrap_threat_model": "bottom-exit-remains-threat-pending-promotion",
-      "evidence_state": "source-manifested-contact-sheets-awaiting-promoted-event-log"
+      "wrap_threat_model": "bottom-exit-or-return-explicit-preview-rule",
+      "evidence_state": "promoted-event-log-awaiting-runtime-implementation"
     }
   },
   "next_promotion_targets": [

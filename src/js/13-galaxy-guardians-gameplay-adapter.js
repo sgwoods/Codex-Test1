@@ -11,7 +11,10 @@ const GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES=Object.freeze({
 const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
  profile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
  manifest:'reference-artifacts/analyses/galaxian-reference/source-manifest.json',
+ promotedEventLog:'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json',
  status:'source-manifested-contact-sheets-and-waveforms',
+ promotedEventStatus:'promoted-reviewed-event-windows',
+ promotedEventCount:11,
  sourceCount:3,
  sources:Object.freeze([
   Object.freeze({
@@ -57,19 +60,19 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
 
 const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
  id:'scout-wave-preview',
- evidenceState:'source-manifested-contact-sheets-awaiting-promoted-event-log',
+ evidenceState:'promoted-event-log-awaiting-runtime-implementation',
  referenceProfile:GALAXY_GUARDIANS_REFERENCE_PROFILE,
  playerFireMode:'single-shot',
  formationModel:'rack-with-independent-dives',
  flagshipModel:'flagship-with-escort-pressure',
- wrapThreatModel:'bottom-exit-remains-threat-pending-promotion',
+ wrapThreatModel:'bottom-exit-or-return-explicit-preview-rule',
  firstWave:Object.freeze({
   formationRows:5,
   flagshipSlots:2,
   escortSlots:6,
   scoutSlots:30,
-  entryStyle:'staggered-top-entry-placeholder',
-  diveStyle:'curving-independent-dive-placeholder'
+  entryStyle:'galaxian-rack-entry-awaiting-frame-timing',
+  diveStyle:'solo-dive-and-flagship-escort-pressure'
  })
 });
 
@@ -86,6 +89,7 @@ function createGalaxyGuardiansInitialState(opts={}){
   wrapThreatModel:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.wrapThreatModel,
   evidenceState:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.evidenceState,
   sourceProfile:GALAXY_GUARDIANS_REFERENCE_PROFILE.profile,
+  promotedEventLog:GALAXY_GUARDIANS_REFERENCE_PROFILE.promotedEventLog,
   eventVocabulary:GALAXY_GUARDIANS_REFERENCE_PROFILE.nextPromotionTargets,
   captureRescue:null,
   dualFighter:null,
