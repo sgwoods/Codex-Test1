@@ -33,6 +33,9 @@ What is still transitional:
 - some naming and compatibility residue is still Aurora-shaped
 - the game-pack contract is still practical rather than strongly versioned
 - the second application is still preview-only rather than fully playable
+- the second-game preview still borrows Aurora-owned tables while non-playable;
+  playable second-game work must either own its own game data or use Platinum
+  APIs
 
 ## Runtime Layout
 
@@ -146,6 +149,11 @@ Harness families should now be thought of in categories:
 - seam and contract harnesses
 - migration and compatibility harnesses
 
+Application/gameplay harnesses must stay game-owned. A harness that proves
+Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does
+not prove Galaxy Guardians behavior. Shared harness helpers belong in Platinum;
+game behavior assertions belong to the owning game.
+
 The intended release rule is automation-first:
 
 - automate when the behavior is stable enough to measure
@@ -157,6 +165,8 @@ The intended release rule is automation-first:
   - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
 - application guide:
   - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- game boundary audit:
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md`
 - platform diagrams:
   - `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 - testing and release discipline:

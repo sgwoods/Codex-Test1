@@ -42,6 +42,32 @@ It should not own:
 - Aurora challenge-stage structure
 - Aurora-specific copy, stage identity, or boss personality
 
+## Architectural Invariant: No Direct Game-To-Game Sharing
+
+Games on Platinum should not share game-specific code, rule tables, state,
+assets, mechanics, or capabilities directly with each other.
+
+If a behavior is common to more than one game, that commonality belongs in
+Platinum as a named API, interface, service, capability flag, harness substrate,
+or versioned contract. Applications may depend on Platinum contracts; they
+should not depend on another application's implementation.
+
+In practical terms:
+
+- Aurora changes must not affect Galaxy Guardians except through intentional
+  Platinum contract changes
+- Galaxy Guardians changes must not affect Aurora except through intentional
+  Platinum contract changes
+- future games must receive reusable behavior through Platinum extension points,
+  not sideways imports from Aurora or Galaxy Guardians
+- game-owned mechanics such as capture/rescue, dual-fighter mode, challenge
+  stages, flagship escorts, alien movement, scoring, visual identity, sound
+  cues, and event vocabulary stay inside the owning game pack
+
+The current audit for this boundary is:
+
+- `/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md`
+
 ## What Platinum Is Today
 
 Today Platinum is a real shipped platform, not a speculative refactor.
@@ -194,6 +220,9 @@ Current remaining seams to keep visible:
 - some storage and compatibility names are still Aurora-shaped even when they are effectively platform-owned
 - some debug globals and legacy naming still reflect the older single-game architecture
 - the game-pack contract is practical but not yet strongly versioned
+- the current second-game preview still borrows Aurora-owned rule and theme
+  tables while it is non-playable; those must become Galaxy Guardians-owned or
+  Platinum-owned before a playable second-game preview
 - some shell copy and application copy still need stronger structural validation so release-time regressions are caught automatically
 - the second application is still preview-only, so the contract is proven with one real game and one shell-only preview rather than two full implementations
 
@@ -316,6 +345,8 @@ of the normal release flow.
   - `/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md`
 - application-side separation and usage:
   - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+- game boundary audit:
+  - `/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md`
 - repo technical map:
   - `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
 - release and testing gate discipline:
