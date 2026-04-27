@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "planned-event-scaffold",
+  "generated_by": "tools/harness/build-evidence-cycle-dashboard.js",
+  "game_lineage": "aurora-galactica",
+  "target_game": "aurora-galactica",
+  "window_id": "challenge-stage-candidate",
+  "window_role": "challenge_stage_expansion_candidate",
+  "source_kind": "aurora_harness_or_reference_video",
+  "needs_waveform": true,
+  "note": "Source-pending scaffold. Replace null timestamps with reviewed observations after the window is recorded or ingested.",
+  "events": [
+    {
+      "event_id": "challenge-stage-candidate-01-challenge_wave_start",
+      "event_family": "challenge_wave_start",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "challenge-stage-candidate-02-challenge_enemy_path",
+      "event_family": "challenge_enemy_path",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "challenge-stage-candidate-03-challenge_enemy_hit",
+      "event_family": "challenge_enemy_hit",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "challenge-stage-candidate-04-challenge_result",
+      "event_family": "challenge_result",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    }
+  ]
+}

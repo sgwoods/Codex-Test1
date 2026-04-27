@@ -94,6 +94,8 @@
     "harness:check:classic-arcade-ingestion": "node tools/harness/check-classic-arcade-ingestion.js",
     "harness:cycle:classic-arcade-reference": "node tools/harness/run-classic-arcade-reference-cycle.js",
     "harness:trace:classic-arcade": "node tools/harness/trace-classic-arcade-video.js",
+    "harness:build:evidence-cycle-dashboard": "node tools/harness/build-evidence-cycle-dashboard.js",
+    "harness:check:evidence-cycle-dashboard": "node tools/harness/check-evidence-cycle-dashboard.js",
     "harness:cycle:galaxian-reference": "node tools/harness/run-galaxian-reference-cycle.js",
     "harness:cycle:galaxian-preview-evidence": "node tools/harness/run-galaxian-preview-evidence-cycle.js",
     "harness:check:galaxian-preview-evidence": "node tools/harness/check-galaxian-preview-evidence.js",
