@@ -1691,9 +1691,12 @@ function closeGamePreview(force=0){
  syncPauseUi();
 }
 function restorePlayableGamePackForLaunch(){
- if(typeof currentGamePackPlayable!=='function'||currentGamePackPlayable())return 0;
+ if(typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter())return 0;
+ if(typeof currentGamePackHasPlayableAdapter!=='function'&&(typeof currentGamePackPlayable!=='function'||currentGamePackPlayable()))return 0;
  const preview=typeof currentGamePackPreview==='function'?currentGamePackPreview():null;
- if(typeof installGamePack==='function')installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
+ const fallback=typeof firstPlayableGamePackWithAdapter==='function'?firstPlayableGamePackWithAdapter():null;
+ const fallbackKey=fallback?.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
+ if(typeof installGamePack==='function')installGamePack(fallbackKey,{persist:1});
  closeGamePreview(1);
  if(typeof draw==='function')draw();
  showToast(preview?.launchFallbackToast||'Preview pack is not playable yet. Launching Aurora Galactica.');
@@ -2030,7 +2033,10 @@ addEventListener('keydown',e=>{
   }
  }
  if(!started&&e.code==='Enter'){
-  if(typeof currentGamePackPlayable==='function'&&!currentGamePackPlayable()){
+  const packCanStart=typeof currentGamePackHasPlayableAdapter==='function'
+   ? currentGamePackHasPlayableAdapter()
+   : (typeof currentGamePackPlayable!=='function'||currentGamePackPlayable());
+  if(!packCanStart){
    e.preventDefault();
    restorePlayableGamePackForLaunch();
   }

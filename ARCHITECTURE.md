@@ -33,9 +33,9 @@ What is still transitional:
 - some naming and compatibility residue is still Aurora-shaped
 - the game-pack contract is still practical rather than strongly versioned
 - the second application is still preview-only rather than fully playable
-- the second-game preview still borrows Aurora-owned tables while non-playable;
-  playable second-game work must either own its own game data or use Platinum
-  APIs
+- the second-game preview now owns placeholder pack data, but playable
+  second-game work still needs measured game data and a gameplay adapter rather
+  than Aurora gameplay reuse
 
 ## Runtime Layout
 
@@ -55,6 +55,10 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js`
 - shared pack selection:
   - `/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js`
+- shared pack registry and active-pack helpers:
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-game-pack-registry.js`
+- shared gameplay adapter registry:
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-gameplay-adapter-registry.js`
 - shared shell rendering:
   - `/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js`
 - harness hooks and deterministic controls:
@@ -78,6 +82,8 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/10-gameplay.js`
 - Aurora pack metadata:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
+- Galaxy Guardians preview pack metadata:
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-game-pack.js`
 - shared entity model used by packs:
   - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
 - Aurora render orchestration:
@@ -148,6 +154,17 @@ Harness families should now be thought of in categories:
 - application/gameplay harnesses
 - seam and contract harnesses
 - migration and compatibility harnesses
+
+Pack-boundary harness:
+
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-pack-registry-boundaries.js`
+  verifies that the Galaxy Guardians preview pack owns separate placeholder
+  tables, stays non-playable, and does not inherit Aurora challenge cadence,
+  challenge layout, or reference timings.
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-gameplay-adapter-boundaries.js`
+  verifies that Aurora is the only registered gameplay adapter, Galaxy
+  Guardians cannot start gameplay without its own adapter, and preview launch
+  fallback starts through the Aurora adapter.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

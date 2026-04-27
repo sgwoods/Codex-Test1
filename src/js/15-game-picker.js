@@ -90,11 +90,14 @@ function chooseGamePack(key=''){
   return;
  }
  const nextPack=getGamePack(key);
- const playable=typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false);
+ const playable=typeof gamePackHasPlayableAdapter==='function'
+  ? gamePackHasPlayableAdapter(nextPack)
+  : (typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false));
  installGamePack(key,{persist:playable?1:0});
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
- if(!currentGamePackPlayable()){
+ const canStart=typeof currentGamePackHasPlayableAdapter==='function'?currentGamePackHasPlayableAdapter():currentGamePackPlayable();
+ if(!canStart){
   closeGamePicker(1);
   if(typeof openGamePreview==='function')openGamePreview();
  }else{
