@@ -199,6 +199,19 @@ Themes:
 - active Galaxians-style sibling proof and platform-pressure work on the other
   development machine
 
+Current near-term preview target:
+
+- [GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md](GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md)
+
+Decision:
+
+- treat `Galaxy Guardians Preview 0.1: Scout Wave` as the first explicit
+  second-cabinet milestone
+- keep it preview-labeled and narrow: one playable scout-wave loop, distinct
+  pack rules, semantic events, and evidence-backed release gates
+- do not broaden it into flagship/escort progression until the preview shell,
+  picker, event log, and no-Aurora-mechanic exclusions are polished and green
+
 ### 10. Personas and simulated opponents
 
 Target:

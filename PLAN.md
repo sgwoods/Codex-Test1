@@ -87,6 +87,8 @@ This means:
   machine's parallel work
 - bring a preliminary second-game Platinum sneak peek forward before the full
   multi-game release so the platform layer is tested by real product pressure
+- use [GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md](GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md)
+  as the near-term contract for `Galaxy Guardians Preview 0.1: Scout Wave`
 
 ### 8. Personas And Simulated Opponents
 
