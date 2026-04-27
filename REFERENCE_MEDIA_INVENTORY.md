@@ -37,6 +37,8 @@ future Platinum game ingestion.
 | Galaga boss timing | `reference-artifacts/analyses/galaga-boss-timing` | how boss-hit and boss-death timing families should behave |
 | Galaga audio cue matrix | `reference-artifacts/analyses/galaga-audio-cue-matrix/README.md` | how cue families map to original reference sounds |
 | Aurora audio theme comparison | `reference-artifacts/analyses/aurora-audio-theme-comparison` | how closely Aurora cue identity tracks the preserved Galaga reference clips |
+| Aurora level-expansion evidence cycle | `reference-artifacts/analyses/aurora-level-expansion-cycle/README.md` | what deterministic local Aurora gameplay windows show about stage baseline, challenge pressure, mid-run pressure, and late-run cleanup/failure patterns |
+| Evidence cycle dashboard | `reference-artifacts/analyses/evidence-cycle-dashboard/README.md` | whether curated evidence windows have manifests, frames, events, traces, audio timelines, and harness targets |
 | Stage 1 opening correspondence | `reference-artifacts/analyses/correspondence/stage1-opening-first-dive` | how closely Aurora opening timing matches the reference timing library |
 | Stage 1 opening spacing | `reference-artifacts/analyses/correspondence/stage1-opening-spacing` | whether formation geometry and spacing remain on target |
 | Challenge-stage correspondence | `reference-artifacts/analyses/correspondence/challenge-stage-timing` | whether challenge entry and result timing matches the target model |
@@ -67,6 +69,8 @@ These are the most important missing reference structures, not missing media fil
    confidence before a discovered video becomes implementation evidence.
 8. Semantic slice profiles that translate reference windows into game-pack rules
    and harness targets.
+9. A formal promoted-evidence index that ties gameplay captures to quality
+   conformance, player-profile training, and future Player 2 simulation needs.
 
 ## Working Rule
 
@@ -75,5 +79,6 @@ When we add a new preserved video, manual, clip pack, or reference window, we sh
 - committed reference profile
 - committed harness
 - committed roadmap or scorecard note
+- committed evidence dashboard or source manifest
 
 That keeps the evidence usable for future release decisions.

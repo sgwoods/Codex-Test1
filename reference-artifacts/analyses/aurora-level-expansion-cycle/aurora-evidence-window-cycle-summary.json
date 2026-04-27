@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "aurora-evidence-windows-captured",
+  "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
+  "generated_at": "2026-04-27T11:15:17.910Z",
+  "window_count": 4,
+  "results": [
+    {
+      "window_id": "stage-1-baseline",
+      "scenario": "stage1-descent",
+      "seed": 2003,
+      "sample_count": 25,
+      "event_count": 49,
+      "promoted_event_count": 24,
+      "trace_summary": {
+        "sample_count": 25,
+        "player_x_min": 9,
+        "player_x_max": 271,
+        "player_x_range": 262,
+        "max_attackers": 2,
+        "max_enemy_bullets": 1,
+        "max_player_bullets": 0,
+        "max_challenge_enemies": 0,
+        "final_score": 0,
+        "final_lives": 5,
+        "final_stage": 1,
+        "final_challenge": false
+      }
+    },
+    {
+      "window_id": "challenge-stage-candidate",
+      "scenario": "stage3-challenge",
+      "seed": 3003,
+      "sample_count": 25,
+      "event_count": 143,
+      "promoted_event_count": 95,
+      "trace_summary": {
+        "sample_count": 25,
+        "player_x_min": 9,
+        "player_x_max": 271,
+        "player_x_range": 262,
+        "max_attackers": 1,
+        "max_enemy_bullets": 1,
+        "max_player_bullets": 2,
+        "max_challenge_enemies": 40,
+        "final_score": 3000,
+        "final_lives": 2,
+        "final_stage": 4,
+        "final_challenge": false
+      }
+    },
+    {
+      "window_id": "mid-run-pressure",
+      "scenario": "stage6-regular",
+      "seed": 6006,
+      "sample_count": 9,
+      "event_count": 64,
+      "promoted_event_count": 14,
+      "trace_summary": {
+        "sample_count": 9,
+        "player_x_min": 9,
+        "player_x_max": 271,
+        "player_x_range": 262,
+        "max_attackers": 3,
+        "max_enemy_bullets": 2,
+        "max_player_bullets": 2,
+        "max_challenge_enemies": 0,
+        "final_score": 250,
+        "final_lives": 2,
+        "final_stage": 6,
+        "final_challenge": false
+      }
+    },
+    {
+      "window_id": "late-run-cleanup-or-failure",
+      "scenario": "stage12-variety",
+      "seed": 12003,
+      "sample_count": 11,
+      "event_count": 83,
+      "promoted_event_count": 17,
+      "trace_summary": {
+        "sample_count": 11,
+        "player_x_min": 9,
+        "player_x_max": 271,
+        "player_x_range": 262,
+        "max_attackers": 3,
+        "max_enemy_bullets": 3,
+        "max_player_bullets": 2,
+        "max_challenge_enemies": 0,
+        "final_score": 840,
+        "final_lives": 5,
+        "final_stage": 12,
+        "final_challenge": false
+      }
+    }
+  ]
+}

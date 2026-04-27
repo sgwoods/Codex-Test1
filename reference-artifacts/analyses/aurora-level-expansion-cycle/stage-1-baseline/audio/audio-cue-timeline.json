@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "audio-cue-event-timeline",
+  "note": "The deterministic evidence cycle captures audio cue timing from runtime events. Browser video capture did not provide a reliable audio stream on this MacBook cycle.",
+  "audio_cues": [
+    {
+      "t": 0,
+      "cue": "gameStart",
+      "referenceClip": "assets/reference-audio/galaga2-game-start.m4a"
+    },
+    {
+      "t": 4.167,
+      "cue": "formationArrival",
+      "referenceClip": "assets/reference-audio/galaga3-level-underscore.m4a"
+    },
+    {
+      "t": 5.917,
+      "cue": "enemyShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 6.317,
+      "cue": "stagePulse",
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a"
+    },
+    {
+      "t": 8.017,
+      "cue": "enemyShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 8.35,
+      "cue": "attackCharge",
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a"
+    },
+    {
+      "t": 10.183,
+      "cue": "enemyShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 14.317,
+      "cue": "enemyShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 17.433,
+      "cue": "attackCharge",
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a"
+    },
+    {
+      "t": 18.133,
+      "cue": "enemyShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 21.95,
+      "cue": "enemyShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 22.417,
+      "cue": "stagePulse",
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a"
+    }
+  ]
+}

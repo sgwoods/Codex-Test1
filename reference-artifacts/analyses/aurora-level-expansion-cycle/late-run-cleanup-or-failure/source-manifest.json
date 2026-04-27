@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "status": "deterministic-harness-capture",
+  "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
+  "window_id": "late-run-cleanup-or-failure",
+  "scenario": "stage12-variety",
+  "scenario_path": "tools/harness/scenarios/stage12-variety.json",
+  "seed": 12003,
+  "duration_s": 10,
+  "config": {
+    "stage": 12,
+    "ships": 5,
+    "challenge": false
+  },
+  "output_root": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure",
+  "final_state": {
+    "started": 1,
+    "paused": 0,
+    "stage": 12,
+    "score": 840,
+    "lives": 5,
+    "challenge": false,
+    "recording": false,
+    "seed": 12003,
+    "simT": 10.117,
+    "stageClock": 10.117,
+    "persona": null,
+    "atmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-surge",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "galboss-veil",
+      "atmosphereTheme": "aurora-borealis",
+      "backgroundMode": "aurora-borealis"
+    },
+    "audioCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 15,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 12,
+      "challenge": false,
+      "at": 2.089
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "trace_summary": {
+    "sample_count": 11,
+    "player_x_min": 9,
+    "player_x_max": 271,
+    "player_x_range": 262,
+    "max_attackers": 3,
+    "max_enemy_bullets": 3,
+    "max_player_bullets": 2,
+    "max_challenge_enemies": 0,
+    "final_score": 840,
+    "final_lives": 5,
+    "final_stage": 12,
+    "final_challenge": false
+  },
+  "event_count": 83,
+  "promoted_event_count": 17,
+  "artifacts": {
+    "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/contact-sheet-1s.png",
+    "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-start.png",
+    "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-mid.png",
+    "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-end.png",
+    "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/trace.json",
+    "trace_csv": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/trace.csv",
+    "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/player-pressure.svg",
+    "audio_timeline_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/audio/audio-cue-timeline.svg",
+    "audio_timeline_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/audio/audio-cue-timeline.json"
+  }
+}
