@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "status": "deterministic-harness-capture",
+  "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
+  "window_id": "stage-1-baseline",
+  "scenario": "stage1-descent",
+  "scenario_path": "tools/harness/scenarios/stage1-descent.json",
+  "seed": 2003,
+  "duration_s": 24,
+  "config": {
+    "stage": 1,
+    "ships": 5,
+    "challenge": false
+  },
+  "output_root": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline",
+  "final_state": {
+    "started": 1,
+    "paused": 0,
+    "stage": 1,
+    "score": 0,
+    "lives": 5,
+    "challenge": false,
+    "recording": false,
+    "seed": 2003,
+    "simT": 24.083,
+    "stageClock": 24.083,
+    "persona": null,
+    "atmosphere": {
+      "id": "classic-arcade",
+      "group": "classic",
+      "phase": "stage",
+      "backgroundMode": "classic-stars",
+      "audioTheme": "galaga-reference-assets",
+      "starfield": {
+        "id": "classic-arcade-stars",
+        "count": 108,
+        "alphaMin": 0.52,
+        "alphaMax": 0.96
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "classic-arcade",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "quiet-skies",
+      "atmosphereTheme": "classic-arcade",
+      "backgroundMode": "classic-stars"
+    },
+    "audioCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 46,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 1,
+      "challenge": false,
+      "at": 2.987
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "trace_summary": {
+    "sample_count": 25,
+    "player_x_min": 9,
+    "player_x_max": 271,
+    "player_x_range": 262,
+    "max_attackers": 2,
+    "max_enemy_bullets": 1,
+    "max_player_bullets": 0,
+    "max_challenge_enemies": 0,
+    "final_score": 0,
+    "final_lives": 5,
+    "final_stage": 1,
+    "final_challenge": false
+  },
+  "event_count": 49,
+  "promoted_event_count": 24,
+  "artifacts": {
+    "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/contact-sheet-1s.png",
+    "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/still-start.png",
+    "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/still-mid.png",
+    "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/still-end.png",
+    "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/trace.json",
+    "trace_csv": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/trace.csv",
+    "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/player-pressure.svg",
+    "audio_timeline_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/audio/audio-cue-timeline.svg",
+    "audio_timeline_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/audio/audio-cue-timeline.json"
+  }
+}

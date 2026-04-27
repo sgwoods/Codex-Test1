@@ -1,92 +1,289 @@
 {
   "schema_version": 1,
-  "status": "planned-event-scaffold",
-  "generated_by": "tools/harness/build-evidence-cycle-dashboard.js",
+  "status": "events-observed",
+  "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
   "game_lineage": "aurora-galactica",
   "target_game": "aurora-galactica",
   "window_id": "mid-run-pressure",
-  "window_role": "mid_run_pressure",
+  "scenario": "stage6-regular",
+  "seed": 6006,
+  "duration_s": 8,
   "source_kind": "aurora_harness_or_self_play_video",
   "needs_waveform": false,
-  "note": "Source-pending scaffold. Replace null timestamps with reviewed observations after the window is recorded or ingested.",
+  "event_family_coverage": [
+    {
+      "family": "formation_entry",
+      "observed": true
+    },
+    {
+      "family": "enemy_dive_start",
+      "observed": true
+    },
+    {
+      "family": "escort_dive_start",
+      "observed": false
+    },
+    {
+      "family": "enemy_projectile",
+      "observed": true
+    },
+    {
+      "family": "player_hit",
+      "observed": true
+    },
+    {
+      "family": "wave_clear",
+      "observed": false
+    }
+  ],
   "events": [
     {
-      "event_id": "mid-run-pressure-01-formation_entry",
+      "event_id": "mid-run-pressure-001-formation_entry",
       "event_family": "formation_entry",
-      "time_s": null,
+      "runtime_type": "stage_spawn",
+      "time_s": 0,
       "duration_s": null,
-      "entity_family": null,
+      "entity_family": "stage_spawn",
       "entity_id": null,
       "position_hint": null,
       "motion_hint": null,
-      "audio_hint": "not-required-for-first-pass",
-      "confidence": "unknown",
-      "source_note": "planned from aurora-four-window-cycle.plan.json"
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event stage_spawn"
     },
     {
-      "event_id": "mid-run-pressure-02-enemy_dive_start",
-      "event_family": "enemy_dive_start",
-      "time_s": null,
-      "duration_s": null,
-      "entity_family": null,
-      "entity_id": null,
-      "position_hint": null,
-      "motion_hint": null,
-      "audio_hint": "not-required-for-first-pass",
-      "confidence": "unknown",
-      "source_note": "planned from aurora-four-window-cycle.plan.json"
-    },
-    {
-      "event_id": "mid-run-pressure-03-escort_dive_start",
-      "event_family": "escort_dive_start",
-      "time_s": null,
-      "duration_s": null,
-      "entity_family": null,
-      "entity_id": null,
-      "position_hint": null,
-      "motion_hint": null,
-      "audio_hint": "not-required-for-first-pass",
-      "confidence": "unknown",
-      "source_note": "planned from aurora-four-window-cycle.plan.json"
-    },
-    {
-      "event_id": "mid-run-pressure-04-enemy_projectile",
+      "event_id": "mid-run-pressure-002-enemy_projectile",
       "event_family": "enemy_projectile",
-      "time_s": null,
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 1.983,
       "duration_s": null,
-      "entity_family": null,
+      "entity_family": "but",
       "entity_id": null,
-      "position_hint": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
       "motion_hint": null,
-      "audio_hint": "not-required-for-first-pass",
-      "confidence": "unknown",
-      "source_note": "planned from aurora-four-window-cycle.plan.json"
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "mid-run-pressure-05-player_hit",
+      "event_id": "mid-run-pressure-003-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 2.75,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 4,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-pressure-004-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 2.75,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 4,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-pressure-005-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 2.75,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 4,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-pressure-006-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 3.367,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-pressure-007-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 3.817,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-pressure-008-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 4.45,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-pressure-009-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 5.2,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-pressure-010-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 5.45,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-pressure-011-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 6.35,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-pressure-012-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 6.483,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-pressure-013-player_hit",
       "event_family": "player_hit",
-      "time_s": null,
+      "runtime_type": "ship_lost",
+      "time_s": 6.9,
       "duration_s": null,
-      "entity_family": null,
-      "entity_id": null,
-      "position_hint": null,
+      "entity_family": "bee",
+      "entity_id": 737565809,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
       "motion_hint": null,
-      "audio_hint": "not-required-for-first-pass",
-      "confidence": "unknown",
-      "source_note": "planned from aurora-four-window-cycle.plan.json"
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event ship_lost"
     },
     {
-      "event_id": "mid-run-pressure-06-wave_clear",
-      "event_family": "wave_clear",
-      "time_s": null,
+      "event_id": "mid-run-pressure-014-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 7.1,
       "duration_s": null,
-      "entity_family": null,
+      "entity_family": "bee",
       "entity_id": null,
-      "position_hint": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
       "motion_hint": null,
-      "audio_hint": "not-required-for-first-pass",
-      "confidence": "unknown",
-      "source_note": "planned from aurora-four-window-cycle.plan.json"
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     }
   ]
 }

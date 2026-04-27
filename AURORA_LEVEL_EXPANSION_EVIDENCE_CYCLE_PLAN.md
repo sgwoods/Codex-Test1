@@ -10,6 +10,7 @@ entry patterns, or later-level pressure.
 Local inspection dashboard:
 
 - `npm run build`
+- `npm run harness:cycle:aurora-evidence-windows`
 - `npm run harness:build:evidence-cycle-dashboard`
 - `npm run harness:check:evidence-cycle-dashboard`
 - `http://127.0.0.1:8000/dist/dev/evidence-dashboard.html` when served from
@@ -97,6 +98,7 @@ Dashboard and generated scaffolds:
 - `reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json`
 - `reference-artifacts/analyses/evidence-cycle-dashboard/README.md`
 - `reference-artifacts/analyses/aurora-level-expansion-cycle/*/events/reference-events.json`
+- `reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-evidence-window-cycle-summary.json`
 
 For Aurora-generated recordings, the plan file should identify:
 
@@ -105,6 +107,17 @@ For Aurora-generated recordings, the plan file should identify:
 - whether waveform extraction is required
 - the event vocabulary to scaffold
 - expected output directory
+
+The first deterministic Aurora cycle now captures local harness windows
+directly, including contact sheets, stills, traces, event logs, playable notes,
+and audio-cue timelines. This is a runtime evidence pass, not final arcade
+correspondence; compare it against archived reference footage before gameplay
+tuning.
+
+MacBook note: sandboxed Playwright/Chrome failed with `SIGABRT` / `kill EPERM`
+on 2026-04-27. The successful cycle ran outside the sandbox. Browser video
+captures did not include reliable audio streams, so the first pass stores
+runtime audio-cue timelines and explicit waveform capture notes.
 
 ## Exit Standard
 

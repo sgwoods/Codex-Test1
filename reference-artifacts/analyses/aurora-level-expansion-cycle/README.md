@@ -1,10 +1,10 @@
 # Aurora Level Expansion Evidence Cycle
 
-Status: `seed-plan-only`
+Status: `deterministic-harness-evidence-captured`
 
 This directory is the artifact home for Aurora's first level-by-level expansion
-evidence cycle. It intentionally starts as a plan so the next long run can
-generate artifacts into a stable location.
+evidence cycle. It now contains the first deterministic local harness capture
+for all four planned windows.
 
 ## Planned Windows
 
@@ -13,26 +13,43 @@ generate artifacts into a stable location.
 3. `mid-run-pressure`
 4. `late-run-cleanup-or-failure`
 
-## Expected Outputs
+## Captured Outputs
 
-Each promoted window should eventually contain:
+Each promoted window now contains:
 
 - source manifest
 - contact sheet
 - still frames
-- waveform if audio timing matters
+- audio-cue timeline, plus a waveform capture note when browser video audio was
+  unavailable
 - movement / pressure trace
-- semantic event scaffold
 - reviewed observed-event log
 - stage-slice note
+- harness target list
 
 ## Command Shape
 
-The intended reusable entry point is:
+The reusable Aurora evidence entry point is:
 
 ```sh
-npm run harness:cycle:classic-arcade-reference -- --plan reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-four-window-cycle.plan.json
+npm run build
+npm run harness:cycle:aurora-evidence-windows
+npm run harness:build:evidence-cycle-dashboard
+npm run harness:check:evidence-cycle-dashboard
 ```
 
-The first generated run should keep the resulting files under this directory,
-then link promoted windows back to `AURORA_LEVEL_EXPANSION_EVIDENCE_CYCLE_PLAN.md`.
+The classic-arcade reference cycle remains the right path for external source
+video ingestion. The Aurora-specific command captures local runtime evidence
+directly from the harness.
+
+## Local Chrome Note
+
+On the MacBook cycle from 2026-04-27, Playwright/Chrome repeatedly aborted
+inside the sandbox with `SIGABRT` and `kill EPERM`. Running the deterministic
+Aurora evidence cycle outside the sandbox succeeded. Browser MediaRecorder
+video captures still lacked reliable audio streams, so each window preserves
+runtime audio-cue timing instead of claiming waveform parity.
+
+User-provided crash log anchor:
+
+- https://docs.google.com/document/d/1fQUfU4lzruooT2Ljpf6gj8f94fBuExGPvc0KEXBxw6k/edit?usp=sharing
