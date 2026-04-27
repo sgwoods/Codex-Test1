@@ -1199,6 +1199,75 @@ window.__galagaHarness__={
  logEnemyAttackStart(boss,'capture',{targetX:+boss.targetX.toFixed(2),targetY:boss.targetY,scripted:0,harness:1,naturalCapture:1});
  return true;
 },
+ setupGuardiansCaptureBoundaryProbe(){
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  const spare=S.e.find(e=>e.hp>0&&e.id!==boss?.id);
+  if(!boss||!spare)return false;
+  const p=S.p;
+  Object.assign(p,{
+   x:PLAY_W/2,
+   y:PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:0,
+   captured:0,
+   pending:0,
+   returning:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  S.stage=2;
+  S.stageClock=0;
+  S.captureCountStage=0;
+  S.lastCaptureStartT=null;
+  S.lastFighterCapturedT=null;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=0;
+  S.attackGapT=0;
+  const keep=new Set([boss.id,spare.id]);
+  for(const e of S.e){
+   if(!keep.has(e.id)){
+    e.hp=0;
+    continue;
+   }
+   e.form=1;
+   e.dive=0;
+   e.low=0;
+   e.shot=0;
+   e.x=e.tx;
+   e.y=e.ty;
+   e.vx=0;
+   e.vy=0;
+   e.cool=99;
+   e.carry=0;
+   e.beam=0;
+   e.beamT=0;
+  }
+  boss.hp=1;
+  boss.max=2;
+  boss.dive=4;
+  boss.x=PLAY_W/2;
+  boss.y=78;
+  boss.targetX=p.x;
+  boss.targetY=138;
+  boss.vx=0;
+  boss.vy=116;
+  boss.beam=1;
+  boss.beamT=2.2;
+  logEvent('harness_guardians_capture_boundary_setup',{
+   bossId:boss.id,
+   playerX:+p.x.toFixed(2),
+   bossX:+boss.x.toFixed(2),
+   bossY:+boss.y.toFixed(2),
+   stage:S.stage
+  });
+  return true;
+ },
  setupCaptureEscapeTest(cfg={}){
   const p=S.p;
   const boss=S.e.find(e=>e.hp>0&&e.t==='boss');

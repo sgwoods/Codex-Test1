@@ -92,6 +92,7 @@ preview language in any player-facing copy.
 
 Primary reference artifacts:
 
+- `GAMEPLAY_AUDIO_VISUAL_CATALOG.md`
 - `reference-artifacts/analyses/galaxian-reference/GALAXY_GUARDIANS_FIRST_PLAYABLE_PREVIEW_SPEC.md`
 - `reference-artifacts/analyses/galaxian-reference/FIRST_GALAXIAN_PREVIEW_EVIDENCE_MAP.md`
 - `reference-artifacts/analyses/galaxian-reference/GALAXIAN_PROGRESSION_PRESSURE_CURVE.md`
@@ -126,10 +127,13 @@ projectile density, and the degree of visual distinction needed for a preview.
 - player movement is responsive and bounded
 - one-shot rule is enforced
 - enemy rack is stable and readable
+- enemy families have a documented visual baseline before deeper art polish
 - at least one regular dive pressure family appears
 - enemy projectiles appear without immediate unfair collapse
 - one wave can clear or reset through an intentional path
 - scoring feedback differs from Aurora where the pack contract says it should
+- sound cue families have a documented preview baseline before final audio
+  identity polish
 
 ### Platform
 
@@ -144,6 +148,8 @@ projectile density, and the degree of visual distinction needed for a preview.
 
 - the required harness set passes
 - `galaxy-guardians-event-log` observes all first-slice semantic events
+- `galaxy-guardians-no-capture-leak` proves capture/rescue state cannot leak
+  through live pressure or stale lower-level enemy state
 - `galaxian-preview-evidence` remains green
 - at least one local preview screenshot or contact sheet exists before public
   release review
@@ -159,8 +165,8 @@ Recommended next branch:
 Preferred first implementation slice:
 
 1. tighten picker/front-door preview copy and labels
-2. add one Galaxy-specific visual or audio identity cue that does not disturb
-   Aurora
+2. implement the documented first visual/audio identity cue set from
+   `GAMEPLAY_AUDIO_VISUAL_CATALOG.md` without disturbing Aurora
 3. add or strengthen one harness proving the preview tile, pack boot, event log,
    and no-Aurora-mechanic exclusions together
 4. regenerate the dashboard so the preview release target is visible locally

@@ -9,6 +9,7 @@ pretending the full Galaxian-like design is finished.
 Preview release target:
 
 - [GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md](GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md)
+- [GAMEPLAY_AUDIO_VISUAL_CATALOG.md](GAMEPLAY_AUDIO_VISUAL_CATALOG.md)
 
 ## Pack Identity
 
@@ -37,6 +38,8 @@ Preview release target:
 - formation layout bands
 - stage pressure bands
 - enemy family semantics
+- visual identity catalog for enemy and player families
+- sound cue family catalog
 - first playable preview model
 - game-specific event vocabulary
 
@@ -73,6 +76,7 @@ The preview must not use:
 - `npm run harness:check:platinum-pack-boot`
 - `npm run harness:check:game-picker-shell`
 - `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxy-guardians-no-capture-leak`
 - `npm run harness:check:galaxy-guardians-event-log`
 - `npm run harness:check:platinum-pack-rule-adapters`
 - `npm run harness:check:galaxian-preview-evidence`

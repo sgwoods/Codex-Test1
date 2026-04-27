@@ -1,6 +1,18 @@
 #!/usr/bin/env node
 const { withHarnessPage, waitForHarness } = require('./browser-check-util');
 
+const FORBIDDEN_CAPTURE_EVENTS = [
+  'capture_started',
+  'fighter_captured',
+  'fighter_rescued',
+  'capture_escape',
+  'rescue_pod_spawned',
+  'captured_fighter_released',
+  'captured_fighter_destroyed',
+  'captured_fighter_hostile_spawned',
+  'captured_fighter_turned_hostile'
+];
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -51,10 +63,26 @@ async function main(){
     const afterPressure = await page.evaluate(() => ({
       snap: window.__galagaHarness__.snapshot(),
       formation: window.__galagaHarness__.formationState(),
-      state: window.__galagaHarness__.state()
+      state: window.__galagaHarness__.state(),
+      events: window.__galagaHarness__.recentEvents({ count: 200 }),
+      carry: window.__galagaHarness__.carryState(),
+      render: window.__galagaHarness__.renderState()
     }));
 
-    return { waitState, launched, afterShot, afterPressure };
+    const forcedSetup = await page.evaluate(() => window.__galagaHarness__.setupGuardiansCaptureBoundaryProbe());
+    if(!forcedSetup) throw new Error('Unable to set up forced capture boundary probe');
+
+    await page.evaluate(() => window.__galagaHarness__.advanceFor(3.4, { step: 1 / 60 }));
+    const afterForcedCaptureProbe = await page.evaluate(() => ({
+      snap: window.__galagaHarness__.snapshot(),
+      formation: window.__galagaHarness__.formationState(),
+      state: window.__galagaHarness__.state(),
+      events: window.__galagaHarness__.recentEvents({ count: 200 }),
+      carry: window.__galagaHarness__.carryState(),
+      render: window.__galagaHarness__.renderState()
+    }));
+
+    return { waitState, launched, afterShot, afterPressure, afterForcedCaptureProbe };
   });
 
   if(result.waitState.packKey !== 'galaxy-guardians-preview') fail('Galaxy Guardians was not installed in wait mode', result);
@@ -84,6 +112,30 @@ async function main(){
   if(activeDives <= 0 && (result.afterPressure.snap.counts.enemyBullets || 0) <= 0){
     fail('Galaxy Guardians did not produce dive or projectile pressure during the scout slice', result);
   }
+  for(const [label, probe] of [
+    ['pressure window', result.afterPressure],
+    ['forced capture boundary probe', result.afterForcedCaptureProbe]
+  ]){
+    if(probe.snap.player.dual || probe.snap.player.captured || probe.snap.player.pending){
+      fail(`Galaxy Guardians player leaked Aurora capture/dual state during ${label}`, result);
+    }
+    const leakingEnemies = (probe.formation.targets || []).filter(enemy => enemy.carry || enemy.beam);
+    if(leakingEnemies.length){
+      fail(`Galaxy Guardians enemies leaked capture state during ${label}`, { leakingEnemies, result });
+    }
+    const forbiddenEvents = (probe.events || []).filter(event =>
+      event.gameKey === 'galaxy-guardians-preview' && FORBIDDEN_CAPTURE_EVENTS.includes(event.type)
+    );
+    if(forbiddenEvents.length){
+      fail(`Galaxy Guardians emitted Aurora capture/rescue events during ${label}`, { forbiddenEvents, result });
+    }
+    if(probe.carry?.carry || probe.carry?.rescue){
+      fail(`Galaxy Guardians exposed carry/rescue debug state during ${label}`, result);
+    }
+    if(probe.render?.captureTetherVisible || probe.render?.capturedGhostVisible){
+      fail(`Galaxy Guardians rendered capture overlays during ${label}`, result);
+    }
+  }
 
   console.log(JSON.stringify({
     ok: true,
@@ -92,7 +144,8 @@ async function main(){
     playerBulletsAfterShot: result.afterShot.counts.playerBullets,
     activeDives,
     enemyBullets: result.afterPressure.snap.counts.enemyBullets,
-    stageTheme: result.afterPressure.snap.theme
+    stageTheme: result.afterPressure.snap.theme,
+    noCaptureLeakChecked: true
   }, null, 2));
 }
 

@@ -161,6 +161,15 @@ function updateEnemy(e,dt,t,T,p){
  }
  if(e.dive===2){
   S.att++;
+  if(!currentPackUsesCaptureRescue()){
+   clearEnemyCaptureState(e);
+   e.dive=1;
+   e.vx=rnd(28,-28);
+   e.vy=S.stage<=2?102:112;
+   e.shot=e.t==='boss'?2:1;
+   e.esc=0;
+   return;
+  }
   e.x+=Math.sin(t*6.4+e.ph)*6*dt;
   e.beamT-=dt;
   if(enemyHasActiveBeam(e)&&canCapture()&&Math.abs(p.x-e.x)<8&&p.y>e.y+12&&p.y<e.y+VIS.beamLen)capturePlayer(e);
@@ -176,6 +185,15 @@ function updateEnemy(e,dt,t,T,p){
  }
  if(e.dive===4){
   S.att++;
+  if(!currentPackUsesCaptureRescue()){
+   clearEnemyCaptureState(e);
+   e.dive=1;
+   e.vx=(p.x-e.x)*.42+rnd(18,-18);
+   e.vy=S.stage<=2?104:114;
+   e.shot=e.t==='boss'?2:1;
+   e.esc=0;
+   return;
+  }
   e.x+=(e.targetX-e.x)*Math.min(1,dt*3);
   e.y+=e.vy*dt;
   if(e.y>=e.targetY){

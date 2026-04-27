@@ -4,13 +4,29 @@ function hasCarriedFighter(){
  return S.e.some(e=>e.hp>0&&enemyIsCarryingFighter(e));
 }
 
+function currentPackUsesCaptureRescue(){
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ return !!pack?.capabilities?.usesCaptureRescue;
+}
+
+function clearEnemyCaptureState(e){
+ if(!enemyHasCaptureState(e))return;
+ e.carry=0;
+ e.beam=0;
+ e.beamT=0;
+}
+
 function canCapture(){
+ if(!currentPackUsesCaptureRescue())return false;
  const p=S.p;
  return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0;
 }
 
 function capturePlayer(e){
- if(!canCapture())return;
+ if(!canCapture()){
+  clearEnemyCaptureState(e);
+  return;
+ }
  const p=S.p;
  p.captured=1;
  p.capBoss=e;
