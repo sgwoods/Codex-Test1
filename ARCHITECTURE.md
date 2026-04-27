@@ -171,6 +171,13 @@ Pack-boundary harness:
   verifies that the Galaxy Guardians skeleton exists, stays disabled, exposes a
   single-shot scout-wave state shape, and fails closed until measured evidence
   exists.
+- `/Users/steven/Documents/Codex-Test1/tools/harness/build-galaxian-reference-profile.js`
+  probes the local Galaxian videos and generates source manifests, contact
+  sheets, waveforms, and the initial measured profile used by the disabled
+  Galaxy Guardians skeleton.
+- `/Users/steven/Documents/Codex-Test1/tools/harness/check-galaxian-reference-profile.js`
+  verifies that the generated Galaxian profile has the expected source roles,
+  artifacts, and first-slice scout-wave baseline.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

@@ -8,13 +8,61 @@ const GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES=Object.freeze({
  usesAuroraEnemyFamilies:0
 });
 
+const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
+ profile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
+ manifest:'reference-artifacts/analyses/galaxian-reference/source-manifest.json',
+ status:'source-manifested-contact-sheets-and-waveforms',
+ sourceCount:3,
+ sources:Object.freeze([
+  Object.freeze({
+   id:'matt-hawkins-arcade-intro',
+   role:'arcade_intro_attract_and_opening',
+   durationSeconds:59.267,
+   frameRate:'30/1',
+   dimensions:'560x720',
+   contactSheet:'reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg',
+   waveform:'reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/audio/waveform-reference-window.png'
+  }),
+  Object.freeze({
+   id:'arcades-lounge-level-5',
+   role:'mid_wave_pressure_and_level_5_clear',
+   durationSeconds:58.322,
+   frameRate:'25/1',
+   dimensions:'1080x1920',
+   contactSheet:'reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/frames/contact-sheet-reference-window.jpg',
+   waveform:'reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/audio/waveform-reference-window.png'
+  }),
+  Object.freeze({
+   id:'nenriki-15-wave-session',
+   role:'long_session_wave_progression',
+   durationSeconds:944.094,
+   frameRate:'60/1',
+   dimensions:'1080x1234',
+   contactSheet:'reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg',
+   waveform:'reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png'
+  })
+ ]),
+ nextPromotionTargets:Object.freeze([
+  'formation_entry_start',
+  'formation_entry_settle',
+  'formation_rack_complete',
+  'alien_dive_start',
+  'flagship_dive_start',
+  'escort_join',
+  'player_shot_fired',
+  'player_shot_resolved',
+  'enemy_wrap_or_return'
+ ])
+});
+
 const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
  id:'scout-wave-preview',
- evidenceState:'placeholder-awaiting-measured-galaxian-reference',
+ evidenceState:'source-manifested-contact-sheets-awaiting-promoted-event-log',
+ referenceProfile:GALAXY_GUARDIANS_REFERENCE_PROFILE,
  playerFireMode:'single-shot',
  formationModel:'rack-with-independent-dives',
  flagshipModel:'flagship-with-escort-pressure',
- wrapThreatModel:'planned',
+ wrapThreatModel:'bottom-exit-remains-threat-pending-promotion',
  firstWave:Object.freeze({
   formationRows:5,
   flagshipSlots:2,
@@ -35,6 +83,10 @@ function createGalaxyGuardiansInitialState(opts={}){
   fireMode:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.playerFireMode,
   formationModel:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.formationModel,
   flagshipModel:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.flagshipModel,
+  wrapThreatModel:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.wrapThreatModel,
+  evidenceState:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.evidenceState,
+  sourceProfile:GALAXY_GUARDIANS_REFERENCE_PROFILE.profile,
+  eventVocabulary:GALAXY_GUARDIANS_REFERENCE_PROFILE.nextPromotionTargets,
   captureRescue:null,
   dualFighter:null,
   challengeStage:null,
@@ -51,6 +103,7 @@ const GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON=Object.freeze({
  enabled:0,
  publicPlayable:0,
  evidenceRequired:1,
+ referenceProfile:GALAXY_GUARDIANS_REFERENCE_PROFILE,
  profile:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE,
  forbiddenAuroraCapabilities:GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES,
  createInitialState:createGalaxyGuardiansInitialState,

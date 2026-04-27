@@ -46,6 +46,7 @@ future Platinum game ingestion.
 | Persona progression correspondence | `reference-artifacts/analyses/correspondence/persona-progression` | whether progression depth and persona ordering remain healthy |
 | Player movement correspondence | `reference-artifacts/analyses/correspondence/player-movement` | whether movement still matches current joystick-translation principles |
 | Quality conformance roll-up | `reference-artifacts/analyses/quality-conformance` | what the current weighted quality picture looks like across all major categories |
+| Galaxian reference profile | `reference-artifacts/analyses/galaxian-reference/README.md` | source manifests, contact sheets, waveforms, and first scout-wave profile for Galaxy Guardians |
 
 ## Supporting Comparative Archives
 
@@ -62,7 +63,8 @@ These are the most important missing reference structures, not missing media fil
 1. Player-movement trace windows derived directly from preserved gameplay footage.
 2. Later-stage cadence trace families beyond the current Stage 1 and challenge emphasis.
 3. Visual cadence traces linking board motion to cue and stage-flow targets.
-4. A stronger Galaxian sibling timing library to match the current Aurora / Galaga baseline maturity.
+4. Promoted Galaxian event logs and timing bands to build on the new source
+   manifest, contact sheet, and waveform profile.
 5. Reference-side event logs that align preserved video timestamps with Aurora-like event families.
 6. A durable labeled catalog of core ship/enemy/presentation image artifacts for comparison and documentation.
 7. Source manifests that record provenance, license notes, analysis status, and

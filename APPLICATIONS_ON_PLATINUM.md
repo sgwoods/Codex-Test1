@@ -47,6 +47,8 @@ Right now it proves:
   tables that do not directly borrow Aurora tables
 - a disabled, evidence-gated gameplay adapter skeleton with its own initial
   state shape
+- a source-manifested Galaxian reference profile with three local source videos,
+  contact sheets, and waveforms
 - safe fallback to `Aurora Galactica` when a player tries to launch gameplay
 
 It does not yet prove:
@@ -121,10 +123,11 @@ The boundary is real, but these coupling areas still deserve attention:
 The current second-game preview is safe because it is not playable, and its
 preview pack now owns placeholder data instead of borrowing Aurora-owned tables.
 It also has no public gameplay adapter, so it cannot start through Aurora's
-gameplay implementation by accident. Its disabled adapter skeleton records the
-first state-shape contract for the future scout-wave slice, but a playable
-Galaxy Guardians slice still needs measured, game-specific pack data and its own
-registered adapter, with any true common behavior promoted into Platinum.
+gameplay implementation by accident. Its disabled adapter skeleton now cites the
+first source-manifested Galaxian profile for the future scout-wave slice, but a
+playable Galaxy Guardians slice still needs promoted event timing, measured
+game-specific pack data, and its own registered adapter, with any true common
+behavior promoted into Platinum.
 
 ### Preview pack persistence
 
