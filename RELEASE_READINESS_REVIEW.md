@@ -4,17 +4,17 @@
 
 Aurora `1.2.3` is the release currently live on hosted `/production`.
 
-Verified April 25, 2026:
+Verified April 26, 2026:
 
 - hosted `/production`
-  - current live label: `1.2.3+build.489.sha.f6ba6c2`
+  - current live label: `1.2.3+build.532.sha.b959491`
 - hosted `/beta`
-  - current live label: `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - current live label: `1.2.3-beta.1+build.532.sha.b959491.beta`
 - hosted `/dev`
-  - current live label: `1.2.3+build.470.sha.e4732eb`
+  - current live label: `1.2.3+build.532.sha.b959491`
 
-That means Aurora has completed the `1.2.3` production refresh and is now in a
-post-release stabilization posture for the next cycle.
+That means Aurora has completed the `1.2.3` trust-and-pilot production refresh
+and is now in a post-release stabilization posture for the next cycle.
 
 ## What Is Now True
 
@@ -22,15 +22,16 @@ post-release stabilization posture for the next cycle.
 - `Aurora Galactica` is the first shipped playable application on Platinum
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are clearly
   separated in both code and docs
-- hosted `/beta` and hosted `/production` now match
+- hosted `/dev`, hosted `/beta`, and hosted `/production` now match
 - the shipped release family is backed by committed test and analysis artifacts
 
 ## Current Shipped Candidate Quality
 
-Current quality position for the shipped `f6ba6c2` family:
+Current quality position for the shipped `b959491` family:
 
 - overall quality score:
-  - `8.8/10`
+  - `8.8/10` from the latest full bundled rollup, with the current patch line
+    additionally covered by focused trust, pilot, and runtime checks
 - strongest category:
   - combat responsiveness
 - weakest bundled category:
@@ -103,14 +104,16 @@ The current shipped line depends on these docs being current and committed:
 The production push is complete. The follow-up work now is:
 
 1. keep the release summary and next-cycle plan current in committed docs
-2. treat the next `/dev` refresh as a deliberate polish bundle rather than a
-   casual forward sync
+2. treat the next public step as a real `1.3.0` fidelity candidate rather than
+   another fast-follow patch
 3. continue the next-cycle fidelity and platform work from `main`
+4. fold in the other machine's Galaxians-style sibling and harness-analysis
+   work through reviewed merges
 
 ## Recommendation
 
-Recommendation: keep the refreshed `1.2.3+build.489.sha.f6ba6c2` production line
-stable and begin the next polish cycle from `main`.
+Recommendation: keep the refreshed `1.2.3+build.532.sha.b959491` production
+line stable and begin the next polish cycle from `main`.
 
 The strongest argument for doing that now is:
 

@@ -99,7 +99,7 @@ working tree across two machines.
 Expected day-to-day:
 
 - `origin` should point at `sgwoods/Codex-Test1`
-- daily development should start from `main` after the `1.2.3+build.489.sha.f6ba6c2`
+- daily development should start from `main` after the `1.2.3+build.532.sha.b959491`
   production refresh unless a release-specific hotfix branch is explicitly in
   use
 

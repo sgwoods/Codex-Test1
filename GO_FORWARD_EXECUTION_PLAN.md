@@ -11,23 +11,23 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of April 24, 2026:
+As of April 26, 2026:
 
 - hosted `/dev` points at:
-  - `1.2.3+build.470.sha.e4732eb`
+  - `1.2.3+build.532.sha.b959491`
 - hosted `/beta` now points at:
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
 - hosted `/production` now points at:
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
 
 This means:
 
-- the forward release line has now been shipped to both hosted `/beta` and
-  hosted `/production`
+- the current trust-and-pilot patch line has now been shipped across dev, beta,
+  and production
 - the immediate release question is no longer "how do we move beta to
   production?"
-- it is now "what belongs in the next polish cycle and when should hosted
-  `/dev` move again?"
+- it is now "what belongs in the next `1.3.0` polish cycle, and how do we
+  integrate the parallel second-game and harness work cleanly?"
 - the next minor-cycle question is still "what belongs in the `1.3.0`
   family?"
 
@@ -93,7 +93,7 @@ For the next cycle, the active working line should be:
 
 Use `main` as the current integration branch because:
 
-- it now contains the shipped `1.2.3+build.489.sha.f6ba6c2` production line
+- it now contains the shipped `1.2.3+build.532.sha.b959491` production line
 - it includes the current release policy, scorecard, correspondence framework,
   committed analysis artifacts, and production-ready defaults
 - it is now the cleanest base for the next narrow gameplay/fidelity branches
@@ -205,9 +205,10 @@ a new promotion cycle.
 
 Current interpretation:
 
-- hosted `/dev` can now move forward from a stable updated base
-- hosted `/beta` and hosted `/production` should stay fixed until the next
-  improvement cycle is assembled intentionally
+- hosted `/dev`, hosted `/beta`, and hosted `/production` now share the same
+  stable post-patch base
+- the next improvement cycle should be assembled intentionally on `main` before
+  the lanes diverge again
 
 ### 2. Require Harness Thinking For Bug Fixes
 

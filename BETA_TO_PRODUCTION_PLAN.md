@@ -2,15 +2,15 @@
 
 ## Current Release State
 
-As of April 24, 2026:
+As of April 26, 2026:
 
 - hosted `/beta`
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
 - hosted `/production`
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
 
-This means the production refresh is complete and the shipped beta/production
-pair now comes from the same committed source state.
+This means the current trust-and-pilot production refresh is complete and the
+shipped beta/production pair now comes from the same committed source state.
 
 ## Why This Promotion Mattered
 
@@ -105,15 +105,15 @@ Main acceptable risks for this production push:
 - the preview second-application pack still borrows Aurora data in ways that
   should be cleaned before it becomes playable
 
-These did not block the `1.2.3+build.489.sha.f6ba6c2` production move, but they
+These did not block the `1.2.3+build.532.sha.b959491` production move, but they
 should stay visible in the next cycle.
 
 ## Next-Cycle Release Direction
 
 ### Immediate After Production
 
-- refresh hosted `/dev` only when the next polish bundle is coherent enough to
-  justify a new shared integration lane
+- keep hosted `/dev` aligned with the current production family until the next
+  coherent polish bundle is ready
 - keep hosted `/beta` as the proving lane for the next candidate family
 - continue audio identity refinement if it remains the weakest quality category
 
@@ -156,6 +156,7 @@ Current directly observed checks for this production plan:
 
 Current release-order note:
 
-- the release chain now succeeded from approved beta to shipped production
+- the release chain now succeeded from approved beta to shipped production on
+  the `b959491` source state
 - the remaining follow-up is public-page rendered propagation, not a missing
   source promotion step

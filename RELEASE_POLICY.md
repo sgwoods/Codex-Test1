@@ -171,18 +171,18 @@ Rule:
 
 ## Current Promotion Reality
 
-As of April 25, 2026:
+As of April 26, 2026:
 
-- hosted `/dev` remains the older integration lane at `1.2.3+build.470.sha.e4732eb`
-- hosted `/beta` is live at `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
-- hosted `/production` is live at `1.2.3+build.489.sha.f6ba6c2`
+- hosted `/dev` is live at `1.2.3+build.532.sha.b959491`
+- hosted `/beta` is live at `1.2.3-beta.1+build.532.sha.b959491.beta`
+- hosted `/production` is live at `1.2.3+build.532.sha.b959491`
 
 That means:
 
-- the current shipped beta and production families are aligned
+- the current shipped dev, beta, and production families are aligned
 - the next release cycle should work from `main`
-- hosted `/dev` can move again during the next polish cycle when there is a
-  coherent improvement bundle worth sharing
+- the next release cycle should let the lanes diverge again only when there is
+  a coherent improvement bundle worth sharing
 
 ## Major `x.y` Documentation Gate
 

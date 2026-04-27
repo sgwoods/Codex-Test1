@@ -28,13 +28,14 @@ work from becoming a loose bag of good ideas.
 
 ## Current Baseline
 
-As of April 25, 2026:
+As of April 26, 2026:
 
 - shipped production family:
-  - `1.2.3+build.489.sha.f6ba6c2`
-- hosted `/beta` and hosted `/production` are aligned
-- hosted `/dev` is the older comparison lane
+  - `1.2.3+build.532.sha.b959491`
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned
 - `main` is the authoritative forward integration line
+- the other machine is already advancing a Galaxians-style sibling track and
+  stronger harness/reference analysis
 
 The current shipped line is strong enough that the next cycle should not be a
 recovery release. It should be the first intentional polish-and-platform cycle

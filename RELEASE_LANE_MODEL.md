@@ -5,22 +5,21 @@ documentation refresh rules for every Aurora / Platinum release lane.
 
 ## Current Published State
 
-As of April 25, 2026:
+As of April 26, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.470.sha.e4732eb`
-  - commit `e4732eb`
+  - `1.2.3+build.532.sha.b959491`
+  - commit `b959491`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
-  - commit `f6ba6c2`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
+  - commit `b959491`
 - hosted `/production`
-  - `1.2.3+build.489.sha.f6ba6c2`
-  - commit `f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
+  - commit `b959491`
 
 This means:
 
-- beta and production are aligned on the current shipped family
-- dev remains the older shared integration lane
+- dev, beta, and production are aligned on the current shipped family
 - `main` is the forward integration branch for the next cycle
 
 ## Release Authority Model
@@ -138,13 +137,13 @@ Documentation expectation:
 
 ## Current Promotion Interpretation
 
-Current live `/beta` and `/production` already match.
+Current live `/dev`, `/beta`, and `/production` already match.
 
 So the next release question is not "how do we promote this beta now?"
 
 It is:
 
-- when should hosted `/dev` move again
+- when should the aligned lanes intentionally diverge again
 - what should define the next `1.3.0` beta family
 
 ## Artifact Persistence Rule

@@ -2,20 +2,20 @@
 
 ## Current Shipped State
 
-Verified April 25, 2026:
+Verified April 26, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.470.sha.e4732eb`
+  - `1.2.3+build.532.sha.b959491`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
 - hosted `/production`
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
 
 Aurora is in a post-production-refresh posture:
 
 - production is current
 - beta matches the current production family
-- dev is the older comparison lane
+- dev also matches the current production family
 - `main` is the forward line for the next cycle
 
 ## Roadmap Frame
@@ -37,7 +37,8 @@ It is centered on:
 
 Goals:
 
-- keep hosted `/production` and hosted `/beta` aligned and trustworthy
+- keep hosted `/production`, hosted `/beta`, and hosted `/dev` aligned and
+  trustworthy after the trust-and-pilot refresh
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
@@ -55,6 +56,8 @@ That release family should focus on:
 - level-by-level expansion planning
 - challenging-stage and later-level depth
 - shared-video evidence and publishing foundations
+- incorporate the other machine's Galaxians-style sibling work and stronger
+  harness/reference analysis into the main line deliberately
 
 ### Long-Term Release Families
 
@@ -193,6 +196,8 @@ Themes:
 - early second-game sneak peek before the full multi-game release
 - second-game proof slice
 - future `Galaxian` ingestion planning
+- active Galaxians-style sibling proof and platform-pressure work on the other
+  development machine
 
 ### 10. Personas and simulated opponents
 

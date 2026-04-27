@@ -2,30 +2,30 @@
 
 ## Current State
 
-Verified April 25, 2026:
+Verified April 26, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.470.sha.e4732eb`
+  - `1.2.3+build.532.sha.b959491`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
 - hosted `/production`
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
 - `main`
   - authoritative integration branch for the next cycle
 
 This means:
 
-- Aurora has completed the `1.2.3` production refresh
-- beta and production are aligned on the same shipped release family
-- dev remains the older integration surface for comparison and future refresh
+- Aurora has completed the `1.2.3` trust-and-pilot production refresh
+- dev, beta, and production are now aligned on the same shipped release family
 - the next question is no longer "how do we push beta to production?"
-- the next question is "what belongs in the next polish cycle and next `/dev` refresh?"
+- the next question is "what belongs in the next `1.3.0` fidelity cycle, and
+  how do we use the parallel second-game and harness work well?"
 
 ## Active Workstreams
 
 ### 1. Post-Production Stabilization
 
-- keep the refreshed `1.2.3` production line trustworthy
+- keep the refreshed `1.2.3+build.532.sha.b959491` production line trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
 
@@ -82,8 +82,9 @@ This means:
 ### 7. Second-Application Proof
 
 - keep `Galaxy Guardians` preview-only until a minimal playable slice is real
-- prepare the longer-range `Galaxian`-style ingestion path through durable
-  reference analysis and platform extension planning
+- actively advance the longer-range `Galaxian`-style ingestion path through
+  durable reference analysis, platform extension planning, and the other
+  machine's parallel work
 - bring a preliminary second-game Platinum sneak peek forward before the full
   multi-game release so the platform layer is tested by real product pressure
 
@@ -99,20 +100,18 @@ This means:
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
 3. prioritize movement fidelity, audio identity polish, and boundary cleanup
-4. prioritize level-by-level arcade depth as the next major product pillar
-5. make shared gameplay-video publishing an early evidence/product capability
-6. continue narrow trust fixes from the open issue stream
-7. decide when the next coherent polish bundle is strong enough to refresh
-   hosted `/dev`
+4. incorporate the other machine's Galaxians-style second-game, harness, and
+   analysis progress into the main roadmap
+5. prioritize level-by-level arcade depth as the next major product pillar
+6. make shared gameplay-video publishing an early evidence/product capability
+7. continue narrow trust fixes from the open issue stream
 
 ## Release Direction
 
-- hosted `/beta` and hosted `/production` already reflect the current shipped
-  `f6ba6c2` family
-- the next serious candidate should be assembled from `main` and then refreshed
-  into hosted `/dev` deliberately
-- if a very small production-safe trust patch accumulates first, use the
-  narrower `1.2.4` path defined in [PATCH_1_2_4_PLAN.md](PATCH_1_2_4_PLAN.md)
+- hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
+  shipped `b959491` family
+- the next serious candidate should be assembled from `main` as a real
+  `1.3.0` fidelity-and-depth step, not another immediate fast-follow patch
 - the next meaningful public milestone should likely be a `MINOR` release in
   the `1.3.0` family
 - the longer release-family phasing plan is tracked in

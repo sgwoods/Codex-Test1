@@ -20,21 +20,20 @@ multi-machine workflow refresh.
 
 ## Live Lane State
 
-Verified on April 25, 2026:
+Verified on April 26, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.470.sha.e4732eb`
+  - `1.2.3+build.532.sha.b959491`
   - [dev build-info](https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json)
 - hosted `/beta`
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
   - [beta build-info](https://sgwoods.github.io/Aurora-Galactica/beta/build-info.json)
 - hosted `/production`
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
   - [production build-info](https://sgwoods.github.io/Aurora-Galactica/build-info.json)
 
-This means hosted `/beta` and hosted `/production` are aligned to the same
-release commit family, while hosted `/dev` remains the older integration lane
-that can move again during the next polish cycle.
+This means hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned
+to the same current trust-and-pilot release family.
 
 ## Canonical Startup Path
 
@@ -139,12 +138,16 @@ Important docs to read first:
 
 ## What Was Just Shipped
 
-The `1.2.3+build.489.sha.f6ba6c2` production refresh includes:
+The `1.2.3+build.532.sha.b959491` production refresh includes:
 
 - stage timing and challenge timing improvements
 - audio cue alignment improvements
 - refreshed audio identity evidence
 - trace-backed movement analysis improvements
+- signed-in end-of-run pilot locking
+- pilot recent-flight and local-score visibility fixes
+- last-life game-over runtime-freeze repair
+- dock, build-stamp, login, and pilot-surface polish
 - production-safe defaults in the developer/settings surfaces:
   - `Galaga Reference Audio`
   - `Aurora Borealis`
@@ -163,6 +166,8 @@ The next polish cycle should prioritize:
 3. Platinum/application boundary cleanup
 4. expanded reference-video event logging and visual artifact extraction
 5. future-game ingestion planning for a second game such as `Galaxian`
+6. integrate the other machine's active Galaxians-style sibling and
+   harness-analysis work back into `main`
 
 ## How To Restart On A New Machine
 

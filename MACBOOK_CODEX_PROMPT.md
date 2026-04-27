@@ -89,13 +89,13 @@ Important docs to read first before major work:
 - REPOSITORY_ROLE_MAP.md
 
 Current live lane state to keep in mind:
-- /dev: 1.2.3+build.470.sha.e4732eb
-- /beta: 1.2.3-beta.1+build.489.sha.f6ba6c2.beta
-- /production: 1.2.3+build.489.sha.f6ba6c2
+- /dev: 1.2.3+build.532.sha.b959491
+- /beta: 1.2.3-beta.1+build.532.sha.b959491.beta
+- /production: 1.2.3+build.532.sha.b959491
 
 Current product/release posture:
-- beta and production are aligned to the same release family
-- dev is the older forward integration lane and can move again in the next polish cycle
+- dev, beta, and production are aligned to the same current release family
+- the other machine is already advancing a Galaxians-style sibling and stronger harness/reference-analysis work
 - public verification matters and includes:
   - raw project page
   - manifest JSON
@@ -108,7 +108,7 @@ Current priority themes for future work:
 3. Expand challenge stages with richer alien types, movement patterns, scoring pressure, and presentation states
 4. Add later-level entry and movement variation against original Galaga reference evidence
 5. Make gameplay videos publishable and shareable as durable run/reference evidence
-6. Prepare an earlier second-game Platinum sneak peek, likely a Galaxian-style sibling proof
+6. Advance the Galaxians-style sibling proof and merge its platform implications back cleanly
 7. Continue player-ship movement fidelity, audio identity polish, gameplay trust fixes, and Platinum/application boundary cleanup
 
 Operational rules:
