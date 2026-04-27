@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "generated_by": "tools/harness/build-evidence-cycle-dashboard.js",
-  "generated_at": "2026-04-27T00:37:23.415Z",
+  "generated_at": "2026-04-27T11:15:28.236Z",
   "git": {
-    "branch": "codex/macbook-pro-gg-aurora-20x-cycle"
+    "branch": "codex/macbook-pro-aurora-evidence-windows"
   },
   "status": "cross-game-evidence-cycle-v1",
   "purpose": "Give Aurora level expansion, Galaxy Guardians preview work, and future Platinum game ingestion one inspectable evidence surface.",
@@ -40,45 +40,58 @@
         "artifact_targets": [
           {
             "name": "source_or_run_manifest",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "contact_sheet",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "notable_stills",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "motion_pressure_trace",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "semantic_event_scaffold",
-            "status": "scaffolded"
+            "status": "events-observed"
           },
           {
             "name": "promoted_event_log",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "playable_slice_note",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "harness_target_list",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "waveform",
-            "status": "source-pending"
+            "status": "audio-cue-timeline"
           }
         ],
         "generated_paths": {
           "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/README.md",
           "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/events/reference-events.json"
-        }
+        },
+        "artifacts": {
+          "source_manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/source-manifest.json",
+          "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/contact-sheet-1s.png",
+          "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/frames/still-end.png",
+          "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/trace.json",
+          "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/player-pressure.svg",
+          "audio_timeline": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/audio/audio-cue-timeline.svg",
+          "playable_slice_note": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/PLAYABLE_SLICE_NOTE.md",
+          "harness_targets": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/HARNESS_TARGETS.md"
+        },
+        "event_status": "events-observed"
       },
       {
         "window_id": "challenge-stage-candidate",
@@ -94,45 +107,58 @@
         "artifact_targets": [
           {
             "name": "source_or_run_manifest",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "contact_sheet",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "notable_stills",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "motion_pressure_trace",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "semantic_event_scaffold",
-            "status": "scaffolded"
+            "status": "events-observed"
           },
           {
             "name": "promoted_event_log",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "playable_slice_note",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "harness_target_list",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "waveform",
-            "status": "source-pending"
+            "status": "audio-cue-timeline"
           }
         ],
         "generated_paths": {
           "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/README.md",
           "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/events/reference-events.json"
-        }
+        },
+        "artifacts": {
+          "source_manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/source-manifest.json",
+          "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/contact-sheet-1s.png",
+          "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/still-end.png",
+          "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/trace/trace.json",
+          "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/trace/player-pressure.svg",
+          "audio_timeline": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/audio/audio-cue-timeline.svg",
+          "playable_slice_note": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/PLAYABLE_SLICE_NOTE.md",
+          "harness_targets": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/HARNESS_TARGETS.md"
+        },
+        "event_status": "events-observed"
       },
       {
         "window_id": "mid-run-pressure",
@@ -150,41 +176,54 @@
         "artifact_targets": [
           {
             "name": "source_or_run_manifest",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "contact_sheet",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "notable_stills",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "motion_pressure_trace",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "semantic_event_scaffold",
-            "status": "scaffolded"
+            "status": "events-observed"
           },
           {
             "name": "promoted_event_log",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "playable_slice_note",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "harness_target_list",
-            "status": "source-pending"
+            "status": "generated"
           }
         ],
         "generated_paths": {
           "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/README.md",
           "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/events/reference-events.json"
-        }
+        },
+        "artifacts": {
+          "source_manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/source-manifest.json",
+          "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/frames/contact-sheet-1s.png",
+          "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/frames/still-end.png",
+          "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/trace/trace.json",
+          "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/trace/player-pressure.svg",
+          "audio_timeline": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/audio/audio-cue-timeline.svg",
+          "playable_slice_note": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/PLAYABLE_SLICE_NOTE.md",
+          "harness_targets": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/HARNESS_TARGETS.md"
+        },
+        "event_status": "events-observed"
       },
       {
         "window_id": "late-run-cleanup-or-failure",
@@ -201,41 +240,54 @@
         "artifact_targets": [
           {
             "name": "source_or_run_manifest",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "contact_sheet",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "notable_stills",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "motion_pressure_trace",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "semantic_event_scaffold",
-            "status": "scaffolded"
+            "status": "events-observed"
           },
           {
             "name": "promoted_event_log",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "playable_slice_note",
-            "status": "source-pending"
+            "status": "generated"
           },
           {
             "name": "harness_target_list",
-            "status": "source-pending"
+            "status": "generated"
           }
         ],
         "generated_paths": {
           "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/README.md",
           "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/events/reference-events.json"
-        }
+        },
+        "artifacts": {
+          "source_manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/source-manifest.json",
+          "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/contact-sheet-1s.png",
+          "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-end.png",
+          "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/trace.json",
+          "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/player-pressure.svg",
+          "audio_timeline": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/audio/audio-cue-timeline.svg",
+          "playable_slice_note": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/PLAYABLE_SLICE_NOTE.md",
+          "harness_targets": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/HARNESS_TARGETS.md"
+        },
+        "event_status": "events-observed"
       }
     ]
   },

@@ -41,6 +41,7 @@ const REQUIRED_ARTIFACT_TARGETS = [
   'playable_slice_note',
   'harness_target_list'
 ];
+const ALLOWED_EVENT_STATUSES = new Set(['planned-event-scaffold', 'events-observed']);
 
 function rel(file){
   return path.relative(ROOT, file).replace(/\\/g, '/');
@@ -90,9 +91,18 @@ function validateAurora(model, issues){
     }else{
       const eventLog = readJson(path.join(ROOT, scaffold));
       if(eventLog.window_id !== win.window_id) addIssue(issues, 'error', `${win.window_id} scaffold window_id mismatch`);
-      if(eventLog.status !== 'planned-event-scaffold') addIssue(issues, 'error', `${win.window_id} scaffold status mismatch`);
-      if(!Array.isArray(eventLog.events) || eventLog.events.length !== win.event_families.length){
-        addIssue(issues, 'error', `${win.window_id} scaffold event count mismatch`);
+      if(!ALLOWED_EVENT_STATUSES.has(eventLog.status)) addIssue(issues, 'error', `${win.window_id} event log status mismatch`);
+      if(!Array.isArray(eventLog.events) || eventLog.events.length < win.event_families.length){
+        addIssue(issues, 'error', `${win.window_id} event log has too few events`);
+      }
+      if(eventLog.status === 'events-observed' && (!Array.isArray(eventLog.event_family_coverage) || !eventLog.event_family_coverage.length)){
+        addIssue(issues, 'error', `${win.window_id} observed event log missing event_family_coverage`);
+      }
+    }
+    if(win.artifacts){
+      for(const key of ['source_manifest', 'contact_sheet_1s', 'still_start', 'still_mid', 'still_end', 'trace_json', 'trace_svg', 'audio_timeline', 'playable_slice_note', 'harness_targets']){
+        if(!win.artifacts[key]) addIssue(issues, 'error', `${win.window_id} missing generated artifact ${key}`);
+        else if(!existsRepoPath(win.artifacts[key])) addIssue(issues, 'error', `${win.window_id} generated artifact path missing on disk: ${win.artifacts[key]}`);
       }
     }
   }

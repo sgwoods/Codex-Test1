@@ -75,6 +75,16 @@ First implementation note:
 - keep the local evidence dashboard current with
   `npm run harness:build:evidence-cycle-dashboard`
 
+Current result:
+
+- `npm run harness:cycle:aurora-evidence-windows` captures all four planned
+  Aurora windows with deterministic harness frames, contact sheets, stills,
+  traces, event logs, playable notes, harness targets, and audio-cue timelines
+- the first MacBook run completed outside the sandbox after sandboxed
+  Playwright/Chrome failed with `SIGABRT` / `kill EPERM`
+- runtime audio-cue timelines are preserved because browser video captures did
+  not provide reliable audio streams for waveform extraction
+
 ### 6. Aurora First Expansion Candidate
 
 - choose one implementation target from the evidence cycle
@@ -119,6 +129,7 @@ Run at minimum:
 
 ```sh
 npm run build
+npm run harness:cycle:aurora-evidence-windows
 npm run harness:build:evidence-cycle-dashboard
 npm run harness:check:evidence-cycle-dashboard
 npm run harness:check:platinum-pack-boot
