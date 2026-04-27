@@ -112,6 +112,7 @@ Recommended branch families:
 - `codex/<machine-id>-pilot-*`
 - `codex/<machine-id>-platform-*`
 - `codex/<machine-id>-galaxian-*`
+- `codex/<machine-id>-galaxy-guardians-*`
 
 Default rule:
 
@@ -187,6 +188,7 @@ See also:
 - [BETA_CANDIDATE_PLAN.md](BETA_CANDIDATE_PLAN.md)
 - [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
+- [GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md](GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md)
 
 ## Operating Priorities
 

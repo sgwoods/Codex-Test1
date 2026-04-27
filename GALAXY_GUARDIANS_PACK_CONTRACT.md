@@ -6,6 +6,10 @@ This is the pack-facing contract for the first playable `Galaxy Guardians`
 preview. It is intentionally narrow so Platinum can prove a second game without
 pretending the full Galaxian-like design is finished.
 
+Preview release target:
+
+- [GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md](GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md)
+
 ## Pack Identity
 
 - pack key: `galaxy-guardians-preview`
@@ -69,9 +73,14 @@ The preview must not use:
 - `npm run harness:check:platinum-pack-boot`
 - `npm run harness:check:game-picker-shell`
 - `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxy-guardians-event-log`
+- `npm run harness:check:platinum-pack-rule-adapters`
 - `npm run harness:check:galaxian-preview-evidence`
+- `npm run harness:check:evidence-cycle-dashboard`
 
 ## Next Contract Step
 
-Split the shared fixed-screen runtime into clearer host hooks and pack-owned
-rule modules before adding flagship / escort scoring or deeper progression.
+Make the first preview release feel intentional before adding flagship / escort
+scoring or deeper progression. The next branch should focus on preview copy,
+picker polish, a small game-specific identity cue, and a harness that proves
+the preview remains separate from Aurora-only mechanics.

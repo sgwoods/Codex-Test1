@@ -295,6 +295,19 @@ Bundle:
 - keep `Galaxy Guardians` preview-only unless it has its own durable data model
   and real mechanics
 
+Current preview planning anchor:
+
+- [GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md](GALAXY_GUARDIANS_PREVIEW_RELEASE_PLAN.md)
+
+First preview target:
+
+- `Galaxy Guardians Preview 0.1: Scout Wave`
+
+This preview can arrive before the full `1.8` release family if it is clearly
+preview-labeled and released through the normal authority workflow. Its purpose
+is to pressure-test Platinum with a real second-game slice while Aurora arcade
+depth continues in parallel.
+
 Representative issue families:
 
 - Platinum multi-game extraction: `#111`
