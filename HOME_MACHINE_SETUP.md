@@ -168,6 +168,18 @@ npm run local:stop
 
 ### Harness
 
+Check browser-harness health first when Chrome or Playwright checks keep
+failing:
+
+```bash
+npm run harness:doctor:browser
+```
+
+If the browser doctor passes from normal Terminal but fails only inside Codex,
+the machine is not necessarily broken; rerun the browser harness with
+local/elevated execution. If it also fails from Terminal, update or reinstall
+Google Chrome before treating gameplay harness output as authoritative.
+
 Run a scenario:
 
 ```bash

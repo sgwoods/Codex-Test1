@@ -39,6 +39,7 @@
     "harness:batch": "node tools/harness/run-batch.js",
     "harness:check-latest": "node tools/harness/check-latest-run.js",
     "harness:import-latest": "node tools/harness/import-latest-run.js",
+    "harness:doctor:browser": "node tools/harness/check-browser-launch.js",
     "harness:tune": "node tools/harness/tuning-report.js",
     "harness:check:challenge-collision": "node tools/harness/check-challenge-collision.js",
     "harness:check:challenge-layout": "node tools/harness/check-challenge-layout-sequence.js",

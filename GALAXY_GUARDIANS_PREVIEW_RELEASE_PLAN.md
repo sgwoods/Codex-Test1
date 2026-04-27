@@ -43,6 +43,7 @@ Already in place:
 Current proof commands:
 
 ```sh
+npm run harness:doctor:browser
 npm run harness:check:platinum-pack-boot
 npm run harness:check:game-picker-shell
 npm run harness:check:galaxy-guardians-playable-preview

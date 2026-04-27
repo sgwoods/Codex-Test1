@@ -6,7 +6,8 @@ const { DIST_DEV } = require('../build/paths');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const APP_ROOT = DIST_DEV;
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const DEFAULT_CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const CHROME = process.env.AURORA_CHROME_PATH || DEFAULT_CHROME;
 
 function mime(file){
   if(file.endsWith('.html')) return 'text/html; charset=utf-8';
@@ -46,11 +47,24 @@ async function withHarnessPage(cfg, fn){
     throw new Error(`Built app not found at ${appRoot}. Run "npm run build" first.`);
   }
   const { server, port } = await serve(appRoot);
-  const browser = await chromium.launch({
-    executablePath: CHROME,
-    headless: cfg.headed ? false : true,
-    args: ['--autoplay-policy=no-user-gesture-required']
-  });
+  let browser;
+  try{
+    browser = await chromium.launch({
+      executablePath: CHROME,
+      headless: cfg.headed ? false : true,
+      args: ['--autoplay-policy=no-user-gesture-required']
+    });
+  }catch(err){
+    const message = [
+      'Aurora browser harness could not launch Google Chrome.',
+      `Chrome path: ${CHROME}`,
+      'Run "npm run harness:doctor:browser" from a normal local shell to isolate Chrome launch health.',
+      'If this is running inside Codex and the doctor only fails there, rerun the browser harness with elevated/local execution.'
+    ].join('\n');
+    const wrapped = new Error(`${message}\n\n${err && err.stack ? err.stack : String(err)}`);
+    wrapped.cause = err;
+    throw wrapped;
+  }
   try{
     const context = await browser.newContext({
       acceptDownloads: true,

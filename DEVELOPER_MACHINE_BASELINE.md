@@ -162,6 +162,19 @@ npm run local:stop
 
 ## Harness Verification
 
+Before chasing an individual browser-harness failure, verify that the machine
+can launch the harness browser itself:
+
+```bash
+npm run harness:doctor:browser
+```
+
+If this passes from a normal Terminal but fails only from a sandboxed Codex
+execution, treat the red check as a local execution-permission problem rather
+than a gameplay regression. Rerun that browser harness with local/elevated
+execution. If it fails from a normal Terminal too, update or reinstall Google
+Chrome and rerun `npm run machine:doctor`.
+
 The machine should be able to run at least one representative check from each family:
 
 ```bash
