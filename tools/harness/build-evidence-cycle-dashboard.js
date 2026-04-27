@@ -165,10 +165,34 @@ function buildAuroraWindowState(plan){
     const windowRoot = path.join(outputRoot, win.window_id);
     const eventsPath = path.join(windowRoot, 'events', 'reference-events.json');
     const readmePath = path.join(windowRoot, 'README.md');
-    const scaffold = eventScaffoldForWindow(plan, win);
-    writeJson(eventsPath, scaffold);
+    let eventStatus = 'planned-event-scaffold';
+    if(fs.existsSync(eventsPath)){
+      try{
+        const existing = readJson(eventsPath);
+        eventStatus = existing.status || eventStatus;
+        if(existing.status === 'planned-event-scaffold'){
+          writeJson(eventsPath, eventScaffoldForWindow(plan, win));
+        }
+      }catch(_err){
+        writeJson(eventsPath, eventScaffoldForWindow(plan, win));
+      }
+    }else{
+      writeJson(eventsPath, eventScaffoldForWindow(plan, win));
+    }
     writeText(readmePath, windowReadme(plan, win, eventsPath));
 
+    const artifactPaths = {
+      source_manifest: path.join(windowRoot, 'source-manifest.json'),
+      contact_sheet_1s: path.join(windowRoot, 'frames', 'contact-sheet-1s.png'),
+      still_start: path.join(windowRoot, 'frames', 'still-start.png'),
+      still_mid: path.join(windowRoot, 'frames', 'still-mid.png'),
+      still_end: path.join(windowRoot, 'frames', 'still-end.png'),
+      trace_json: path.join(windowRoot, 'trace', 'trace.json'),
+      trace_svg: path.join(windowRoot, 'trace', 'player-pressure.svg'),
+      audio_timeline: path.join(windowRoot, 'audio', 'audio-cue-timeline.svg'),
+      playable_slice_note: path.join(windowRoot, 'PLAYABLE_SLICE_NOTE.md'),
+      harness_targets: path.join(windowRoot, 'HARNESS_TARGETS.md')
+    };
     const requiredArtifacts = REQUIRED_ARTIFACTS.concat(win.needs_waveform ? ['waveform'] : []);
     return {
       window_id: win.window_id,
@@ -178,14 +202,54 @@ function buildAuroraWindowState(plan){
       event_families: win.event_families || [],
       artifact_targets: requiredArtifacts.map(name => ({
         name,
-        status: ['semantic_event_scaffold'].includes(name) ? 'scaffolded' : 'source-pending'
+        status: name === 'semantic_event_scaffold'
+          ? eventStatus
+          : artifactStatus(name, artifactPaths, win)
       })),
       generated_paths: {
         readme: repoPath(readmePath),
         event_scaffold: repoPath(eventsPath)
-      }
+      },
+      artifacts: Object.fromEntries(Object.entries(artifactPaths)
+        .filter(([, file]) => fs.existsSync(file))
+        .map(([key, file]) => [key, repoPath(file)])),
+      event_status: eventStatus
     };
   });
+}
+
+function artifactStatus(name, paths, win){
+  if(name === 'source_or_run_manifest') return fs.existsSync(paths.source_manifest) ? 'generated' : 'source-pending';
+  if(name === 'contact_sheet') return fs.existsSync(paths.contact_sheet_1s) ? 'generated' : 'source-pending';
+  if(name === 'notable_stills') return fs.existsSync(paths.still_start) && fs.existsSync(paths.still_mid) && fs.existsSync(paths.still_end) ? 'generated' : 'source-pending';
+  if(name === 'motion_pressure_trace') return fs.existsSync(paths.trace_json) && fs.existsSync(paths.trace_svg) ? 'generated' : 'source-pending';
+  if(name === 'promoted_event_log') return fs.existsSync(paths.trace_json) ? 'generated' : 'source-pending';
+  if(name === 'playable_slice_note') return fs.existsSync(paths.playable_slice_note) ? 'generated' : 'source-pending';
+  if(name === 'harness_target_list') return fs.existsSync(paths.harness_targets) ? 'generated' : 'source-pending';
+  if(name === 'waveform'){
+    if(fs.existsSync(paths.audio_timeline)) return 'audio-cue-timeline';
+    return win.needs_waveform ? 'capture-audio-pending' : 'not-required';
+  }
+  return 'source-pending';
+}
+
+function renderAuroraMedia(win){
+  const image = win.artifacts && (win.artifacts.contact_sheet_1s || win.artifacts.trace_svg || win.artifacts.audio_timeline);
+  if(!image) return '';
+  return `<div class="media-grid"><a href="../../${escapeHtml(image)}"><img src="../../${escapeHtml(image)}" alt="${escapeHtml(win.window_id)} evidence image"></a></div>`;
+}
+
+function renderAuroraArtifactLinks(win){
+  const artifacts = win.artifacts || {};
+  const links = [
+    ['manifest', artifacts.source_manifest],
+    ['trace', artifacts.trace_json],
+    ['audio timeline', artifacts.audio_timeline],
+    ['playable note', artifacts.playable_slice_note],
+    ['harness targets', artifacts.harness_targets]
+  ].filter(([, target]) => target);
+  if(!links.length) return '';
+  return links.map(([label, target]) => `<a href="../../${escapeHtml(target)}">${escapeHtml(label)}</a>`).join(' ');
 }
 
 function summarizeGalaxianReference(manifest, promotedWindows){
@@ -332,11 +396,12 @@ function renderAuroraWindow(win){
       </div>
       <span class="state">${win.needs_waveform ? 'waveform' : 'visual'}</span>
     </div>
+    ${renderAuroraMedia(win)}
     <div class="chips">${win.event_families.map(family => `<span>${escapeHtml(family)}</span>`).join('')}</div>
     <ul class="artifact-list">
       ${win.artifact_targets.map(target => `<li><span>${escapeHtml(target.name)}</span><strong>${escapeHtml(target.status)}</strong></li>`).join('')}
     </ul>
-    <p class="links"><a href="../../${escapeHtml(win.generated_paths.readme)}">window folder</a> <a href="../../${escapeHtml(win.generated_paths.event_scaffold)}">event scaffold</a></p>
+    <p class="links"><a href="../../${escapeHtml(win.generated_paths.readme)}">window folder</a> <a href="../../${escapeHtml(win.generated_paths.event_scaffold)}">event log</a> ${renderAuroraArtifactLinks(win)}</p>
   </article>`;
 }
 

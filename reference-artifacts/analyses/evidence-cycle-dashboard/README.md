@@ -2,9 +2,9 @@
 
 Status: `cross-game-evidence-cycle-v1`
 
-Generated: `2026-04-27T00:37:23.415Z`
+Generated: `2026-04-27T11:15:28.236Z`
 
-Branch: `codex/macbook-pro-gg-aurora-20x-cycle`
+Branch: `codex/macbook-pro-aurora-evidence-windows`
 
 This dashboard is the inspectable local surface for the shared Aurora / Galaxy Guardians / future Platinum ingestion loop.
 

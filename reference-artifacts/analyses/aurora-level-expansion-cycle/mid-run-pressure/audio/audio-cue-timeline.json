@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "status": "audio-cue-event-timeline",
+  "note": "The deterministic evidence cycle captures audio cue timing from runtime events. Browser video capture did not provide a reliable audio stream on this MacBook cycle.",
+  "audio_cues": [
+    {
+      "t": 0,
+      "cue": "gameStart",
+      "referenceClip": "assets/reference-audio/galaga2-game-start.m4a"
+    },
+    {
+      "t": 0.433,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 0.867,
+      "cue": "enemyBoom",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a"
+    },
+    {
+      "t": 2.067,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 2.883,
+      "cue": "attackCharge",
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a"
+    },
+    {
+      "t": 3.1,
+      "cue": "enemyBoom",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a"
+    },
+    {
+      "t": 3.167,
+      "cue": "stagePulse",
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a"
+    },
+    {
+      "t": 4.217,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 6.117,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 6.9,
+      "cue": "playerHit",
+      "referenceClip": "assets/reference-audio/galaga3-death.m4a"
+    }
+  ]
+}
