@@ -1,6 +1,6 @@
 # Platinum Runtime Boundary Split Plan
 
-Status: `first-pass-map`
+Status: `adapter-layer-online`
 
 This plan records the current fixed-screen runtime seams before a larger
 refactor. The intent is to let Aurora and Galaxy Guardians share Platinum's
@@ -61,18 +61,33 @@ For Aurora:
 
 ## Next Code Step
 
-Create a small pack-rule adapter before moving full modules:
+The first small pack-rule adapter is now online:
 
 ```js
 currentGamePackCombatRules()
 currentGamePackProgressionRules()
 currentGamePackEnemyFamilyRules()
+currentGamePackScoringRules()
 currentGamePackEventSchema()
+currentGamePackSemanticEventType()
 ```
 
 The adapter should return frozen data from `src/js/13-aurora-game-pack.js` at
 first. Only after harness coverage proves the rule lookups should runtime code
 move into separate application modules.
+
+Harness:
+
+```sh
+npm run harness:check:platinum-pack-rule-adapters
+```
+
+Next refactor step:
+
+- move more direct runtime reads to adapter helpers
+- keep render loop and entity update flow stable
+- add pack-owned enemy-family behavior hooks only after adapter coverage stays
+  green on both Aurora and Galaxy Guardians
 
 ## Harness Expectations
 
@@ -82,6 +97,7 @@ Boundary cleanup should keep these checks green:
 - `npm run harness:check:game-picker-shell`
 - `npm run harness:check:galaxy-guardians-playable-preview`
 - `npm run harness:check:galaxy-guardians-event-log`
+- `npm run harness:check:platinum-pack-rule-adapters`
 - `npm run harness:check:player-movement-conformance`
 - `npm run harness:check:challenge-stage-correspondence`
 

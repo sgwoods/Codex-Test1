@@ -18,7 +18,9 @@ function start(){
  resetSession('game_start');
  autoExportedSessionId='';
  const cfg=saveTestCfg();
- const extendRules=currentGamePack()?.scoring?.extends||{};
+ const extendRules=typeof currentGamePackScoringRules==='function'
+  ? currentGamePackScoringRules().extends||{}
+  : currentGamePack()?.scoring?.extends||{};
  const extendFirst=Math.max(0,Number.isFinite(+cfg.extendFirst)?(+cfg.extendFirst|0):(+extendRules.first||0));
  const extendRecurring=Math.max(0,Number.isFinite(+cfg.extendRecurring)?(+cfg.extendRecurring|0):(+extendRules.recurring||0));
  const nextExtendScore=extendFirst>0?extendFirst:(extendRecurring>0?extendRecurring:0);

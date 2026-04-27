@@ -58,7 +58,8 @@ function destroyCarriedFighter(e){
  // - 1000 when the carried fighter is attacking
  // The boss survives; only the carried fighter is lost.
  const attacking=!!e.dive;
- const points=attacking?currentGamePack().scoring.carriedFighter.attacking:currentGamePack().scoring.carriedFighter.standby;
+ const scoring=currentGamePackScoringRules();
+ const points=attacking?scoring.carriedFighter.attacking:scoring.carriedFighter.standby;
  const off=carriedFighterOffset(e);
  if(enemyHasCaptureState(e))e.carry=0;
  awardScorePoints(points);
@@ -126,7 +127,8 @@ function awardKill(e,mode){
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
  if(S.challenge){
-  pts=currentGamePack().scoring.challengeEnemy;
+  const scoring=currentGamePackScoringRules();
+  pts=scoring.challengeEnemy;
   awardScorePoints(pts);
   S.ch.hits++;
   if(enemyHasChallengeState(e)&&Number.isInteger(e.group)&&S.ch.groups){
@@ -169,7 +171,7 @@ function awardRescueJoin(autoDock){
  const p=S.p;
  S.cap=null;
  p.dual=1;
- awardScorePoints(currentGamePack().scoring.rescueJoin);
+ awardScorePoints(currentGamePackScoringRules().rescueJoin);
  S.recoverT=Math.max(S.recoverT,1.15);
  S.attackGapT=Math.max(S.attackGapT,.9);
  startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');
@@ -190,7 +192,7 @@ function awardRescueJoin(autoDock){
 function finalizeChallengeClear(){
  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(enemyChallengeUpperBandY(S.ch)),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
  S.ch.done=1;
- const perfect=S.ch.hits===S.ch.total?currentGamePack().scoring.perfectChallengeClear:0;
+ const perfect=S.ch.hits===S.ch.total?currentGamePackScoringRules().perfectChallengeClear:0;
  S.ch.perfect=perfect;
  awardScorePoints(perfect);
  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';

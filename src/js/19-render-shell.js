@@ -29,7 +29,7 @@ const DISPLAY_SHELL=Object.freeze({
 
 function applyStageChromeTheme(){
  const frameTheme=!started&&typeof currentGamePack==='function'
-  ? currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue']
+  ? currentGamePackFrameAccentTheme({frameAccent:currentGamePackFrontDoorFrameAccent()})
   : currentGamePackFrameAccentTheme(S.stagePresentation);
  const shellTheme=typeof currentGamePackFrontDoorShellFrameTheme==='function'
   ? platinumShellFrameTheme(currentGamePackFrontDoorShellFrameTheme())
