@@ -29,7 +29,9 @@ function logEvent(type,data={}){
  const gameKey=typeof currentGamePackKey==='function'?currentGamePackKey():(REC.gameKey||'aurora-galactica');
  const event=Object.assign({t,type,gameKey},data);
  REC.events.push(event);
- const alias=gamePackSemanticEventType(type,gameKey);
+ const alias=typeof currentGamePackSemanticEventType==='function'
+  ? currentGamePackSemanticEventType(type,gameKey)
+  : gamePackSemanticEventType(type,gameKey);
  if(alias&&alias!==type){
   REC.events.push(Object.assign({},event,{t:recTime(),type:alias,sourceEvent:type}));
  }

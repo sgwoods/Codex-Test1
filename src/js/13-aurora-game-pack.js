@@ -722,6 +722,22 @@ const GALAXY_GUARDIANS_COMBAT_RULES=Object.freeze({
  playerBulletCap:Object.freeze({single:1,dual:1})
 });
 
+const AURORA_EVENT_SCHEMA=Object.freeze({
+ aliases:Object.freeze({})
+});
+
+const GALAXY_GUARDIANS_EVENT_SCHEMA=Object.freeze({
+ aliases:Object.freeze({
+  stage_spawn:'wave_setup',
+  enemy_attack_start:'regular_dive_start',
+  enemy_bullet_fired:'enemy_projectile',
+  enemy_killed:'enemy_hit',
+  enemy_damaged:'enemy_hit',
+  ship_lost:'player_hit',
+  stage_clear:'wave_clear'
+ })
+});
+
 const GALAXY_GUARDIANS_PREVIEW_MODEL=Object.freeze({
  status:'first-playable-scout-slice',
  evidence:Object.freeze({
@@ -829,6 +845,7 @@ const AURORA_GAME_PACK=Object.freeze({
  frameAccents:AURORA_FRAME_ACCENTS,
  scoring:AURORA_SCORING_RULES,
  combat:AURORA_COMBAT_RULES,
+ eventSchema:AURORA_EVENT_SCHEMA,
  referenceTimings:AURORA_REFERENCE_TIMINGS
 });
 
@@ -899,6 +916,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  frameAccents:AURORA_FRAME_ACCENTS,
  scoring:GALAXY_GUARDIANS_SCORING_RULES,
  combat:GALAXY_GUARDIANS_COMBAT_RULES,
+ eventSchema:GALAXY_GUARDIANS_EVENT_SCHEMA,
  referenceTimings:GALAXY_GUARDIANS_REFERENCE_TIMINGS,
  previewModel:GALAXY_GUARDIANS_PREVIEW_MODEL
 });
@@ -929,6 +947,42 @@ function currentGamePack(){
  return ACTIVE_GAME_PACK;
 }
 
+function currentGamePackCombatRules(pack=currentGamePack()){
+ return pack?.combat||AURORA_COMBAT_RULES;
+}
+
+function currentGamePackProgressionRules(pack=currentGamePack()){
+ return Object.freeze({
+  stageCadence:pack?.stageCadence||AURORA_STAGE_CADENCE,
+  formationLayouts:pack?.formationLayouts||AURORA_FORMATION_LAYOUTS,
+  challengeLayout:pack?.challengeLayout||AURORA_CHALLENGE_LAYOUT,
+  stageThemeProgression:pack?.stageThemeProgression||AURORA_STAGE_THEME_PROGRESSION,
+  referenceTimings:pack?.referenceTimings||AURORA_REFERENCE_TIMINGS
+ });
+}
+
+function currentGamePackEnemyFamilyRules(pack=currentGamePack()){
+ return Object.freeze({
+  stageBandProfiles:pack?.stageBandProfiles||AURORA_STAGE_BAND_PROFILES,
+  capabilities:pack?.capabilities||Object.freeze({}),
+  frameAccents:pack?.frameAccents||AURORA_FRAME_ACCENTS
+ });
+}
+
+function currentGamePackScoringRules(pack=currentGamePack()){
+ return pack?.scoring||AURORA_SCORING_RULES;
+}
+
+function currentGamePackEventSchema(pack=currentGamePack()){
+ return pack?.eventSchema||AURORA_EVENT_SCHEMA;
+}
+
+function currentGamePackSemanticEventType(type,gameKey=currentGamePackKey()){
+ const pack=getGamePack(gameKey||currentGamePackKey());
+ const schema=currentGamePackEventSchema(pack);
+ return schema.aliases?.[String(type||'')]||'';
+}
+
 function currentGamePackPlayable(){
  return currentGamePack().metadata?.playable!==0&&currentGamePack().metadata?.playable!==false;
 }
@@ -952,7 +1006,7 @@ function auroraGamePack(){
 }
 
 function currentGamePackIsChallengeStage(stage){
- const cadence=currentGamePack().stageCadence;
+ const cadence=currentGamePackProgressionRules().stageCadence;
  return stage===cadence.challengeFirstStage||((stage-cadence.challengeFirstStage)%cadence.challengeEvery===0&&stage>cadence.challengeFirstStage);
 }
 
@@ -962,8 +1016,9 @@ function stageBandIndex(stage){
 }
 
 function stageBandProfile(stage,challenge){
- const pack=currentGamePack();
- const base=pack.stageBandProfiles[stageBandIndex(stage)]||pack.stageBandProfiles[0];
+ const familyRules=currentGamePackEnemyFamilyRules();
+ const profiles=familyRules.stageBandProfiles;
+ const base=profiles[stageBandIndex(stage)]||profiles[0];
  if(!challenge)return base;
  if(stage>=19)return Object.assign({},base,{challengeFamily:'mosquito'});
  if(stage>=11)return Object.assign({},base,{challengeFamily:'dragonfly'});
@@ -972,8 +1027,9 @@ function stageBandProfile(stage,challenge){
 
 function currentGamePackStagePresentation(stage,challenge){
  const pack=currentGamePack();
- let theme=pack.stageThemeProgression[0];
- for(const candidate of pack.stageThemeProgression){
+ const progression=currentGamePackProgressionRules(pack);
+ let theme=progression.stageThemeProgression[0];
+ for(const candidate of progression.stageThemeProgression){
   if(stage>=candidate.fromStage)theme=candidate;
   else break;
  }
@@ -1068,18 +1124,18 @@ function currentGamePackAudioCue(cueName,opts={}){
 
 function currentGamePackReferenceTiming(key=''){
  const nextKey=String(key||'').trim();
- const timings=currentGamePack().referenceTimings||AURORA_REFERENCE_TIMINGS;
+ const timings=currentGamePackProgressionRules().referenceTimings;
  return timings[nextKey]||AURORA_REFERENCE_TIMINGS[nextKey]||null;
 }
 
 function currentGamePackPlayerBulletCap(dual=false){
- const cap=currentGamePack().combat?.playerBulletCap||AURORA_COMBAT_RULES.playerBulletCap;
+ const cap=currentGamePackCombatRules().playerBulletCap||AURORA_COMBAT_RULES.playerBulletCap;
  const value=dual?cap.dual:cap.single;
  return Math.max(1,+value||1);
 }
 
 function currentGamePackFormationLayout(stage){
- const layouts=currentGamePack().formationLayouts;
+ const layouts=currentGamePackProgressionRules().formationLayouts;
  let layout=layouts[0];
  for(const candidate of layouts){
   if(stage>=candidate.fromStage)layout=candidate;
@@ -1089,16 +1145,17 @@ function currentGamePackFormationLayout(stage){
 }
 
 function currentGamePackChallengeLayout(){
- return currentGamePack().challengeLayout;
+ return currentGamePackProgressionRules().challengeLayout;
 }
 
 function currentGamePackFrameAccentTheme(stagePresentation){
  const frameAccent=stagePresentation?.frameAccent||'classic-blue';
- return currentGamePack().frameAccents[frameAccent]||currentGamePack().frameAccents['classic-blue'];
+ const accents=currentGamePackEnemyFamilyRules().frameAccents;
+ return accents[frameAccent]||accents['classic-blue'];
 }
 
 function currentGamePackEnemyKillPoints(enemy,dive){
- const table=currentGamePack().scoring.enemyKills;
+ const table=currentGamePackScoringRules().enemyKills;
  if(enemy?.t==='bee')return dive?table.bee.dive:table.bee.formation;
  if(enemy?.t==='but')return dive?table.but.dive:table.but.formation;
  if(enemy?.t==='rogue')return dive?table.rogue.dive:table.rogue.formation;
@@ -1111,7 +1168,7 @@ function currentGamePackEnemyKillPoints(enemy,dive){
 }
 
 function currentGamePackChallengeGroupBonus(stage){
- const tiers=currentGamePack().scoring.challengeGroupBonuses;
+ const tiers=currentGamePackScoringRules().challengeGroupBonuses;
  let bonus=tiers[0]?.bonus||1000;
  for(const tier of tiers){
   if(stage>=tier.fromStage)bonus=tier.bonus;
@@ -1233,7 +1290,7 @@ function setCurrentGamePackShellTheme(themeId=''){
 function syncInstalledPackShellChrome(){
  const pack=currentGamePack();
  const frontDoor=currentGamePackFrontDoor();
- const frameTheme=currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue'];
+ const frameTheme=currentGamePackFrameAccentTheme({frameAccent:currentGamePackFrontDoorFrameAccent()});
  const shellTheme=platinumShellFrameTheme(currentGamePackFrontDoorShellFrameTheme());
  try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
  const marquee=document.getElementById('cabinetMarqueeTitle');
@@ -1304,8 +1361,15 @@ window.availableGamePacks=availableGamePacks;
 window.getGamePack=getGamePack;
 window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
+window.currentGamePackCombatRules=currentGamePackCombatRules;
+window.currentGamePackProgressionRules=currentGamePackProgressionRules;
+window.currentGamePackEnemyFamilyRules=currentGamePackEnemyFamilyRules;
+window.currentGamePackScoringRules=currentGamePackScoringRules;
+window.currentGamePackEventSchema=currentGamePackEventSchema;
+window.currentGamePackSemanticEventType=currentGamePackSemanticEventType;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
+window.currentGamePackIsChallengeStage=currentGamePackIsChallengeStage;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentGamePackPreview=currentGamePackPreview;
 window.currentGamePackPreviewModel=currentGamePackPreviewModel;

@@ -39,6 +39,13 @@ First implementation note:
 - `npm run harness:check:galaxy-guardians-event-log` verifies the first event
   family set
 
+### 2a. Pack Rule Adapter
+
+- pack-owned combat, progression, enemy-family, scoring, and event-schema
+  adapters now sit in front of the shared runtime
+- `npm run harness:check:platinum-pack-rule-adapters` proves Aurora and Galaxy
+  Guardians resolve different rules through the same adapter surface
+
 ### 3. Galaxy Guardians Gameplay Slice
 
 - replace more Aurora-flavored enemy behavior with pack-owned pressure values
@@ -84,6 +91,7 @@ First implementation note:
 The next long cycle is successful when it leaves behind:
 
 - a documented runtime boundary split plan
+- a working pack-rule adapter layer with harness coverage
 - Galaxy Guardians runtime event logging or a ready-to-implement event hook map
 - at least one new Galaxy Guardians gameplay harness beyond boot/picker
 - an Aurora four-window evidence cycle plan or generated artifact set

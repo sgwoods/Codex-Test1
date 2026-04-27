@@ -49,6 +49,7 @@ Harness:
 
 ```sh
 npm run harness:check:galaxy-guardians-event-log
+npm run harness:check:platinum-pack-rule-adapters
 ```
 
 ## Aurora Expansion Reuse
