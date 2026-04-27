@@ -49,6 +49,8 @@ What is not yet ready for a playable second game:
 - the pack registry is now separated from Aurora and Galaxy Guardians pack data
 - the gameplay adapter registry now registers Aurora as the only playable
   gameplay adapter
+- Galaxy Guardians now has a disabled adapter skeleton that is evidence-gated
+  and not registered as playable
 - the Galaxy Guardians preview pack now owns placeholder atmosphere, audio,
   timing, stage cadence, stage band, formation, challenge, frame accent, and
   scoring tables while it remains non-playable
@@ -69,6 +71,7 @@ Current files:
 
 - `src/js/13-aurora-game-pack.js`
 - `src/js/13-galaxy-guardians-game-pack.js`
+- `src/js/13-galaxy-guardians-gameplay-adapter.js`
 - `src/js/13-game-pack-registry.js`
 - `src/js/13-gameplay-adapter-registry.js`
 
@@ -79,6 +82,9 @@ Current status:
 - `src/js/13-galaxy-guardians-game-pack.js` stores preview-owned placeholder
   rule, timing, theme, audio, visual, and scoring tables plus
   `GALAXY_GUARDIANS_PACK`
+- `src/js/13-galaxy-guardians-gameplay-adapter.js` stores a disabled
+  Galaxy Guardians adapter skeleton with a single-shot scout-wave state shape
+  and explicit Aurora-capability exclusions
 - `src/js/13-game-pack-registry.js` exposes shared pack registry functions and
   active-pack runtime helpers
 - `src/js/13-gameplay-adapter-registry.js` exposes shared gameplay adapter
@@ -88,6 +94,9 @@ Current status:
   Guardians does not directly share game-owned table references with Aurora
 - `npm run harness:check:gameplay-adapter-boundaries` verifies that Galaxy
   Guardians cannot start gameplay until it owns an adapter
+- `npm run harness:check:guardians-adapter-skeleton` verifies that the disabled
+  skeleton exists, fails closed, and does not carry Aurora capture, dual,
+  challenge, scoring, or enemy-family state
 
 Required direction:
 
@@ -213,17 +222,21 @@ The first platform boundary slice is now in place:
 - gameplay adapter registry that starts only registered playable adapters
 - gameplay adapter boundary harness proving Galaxy Guardians preview falls back
   to Aurora instead of routing through Aurora directly
+- disabled Galaxy Guardians adapter skeleton with a first scout-wave state
+  contract and evidence gate
+- Guardians adapter skeleton harness proving the disabled skeleton cannot start
+  gameplay and does not include Aurora-only state
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice
 
-The next implementation slice should begin shaping the Galaxy Guardians `0.1`
-adapter, but keep it non-public until measured rules exist:
+The next implementation slice should feed measured Galaxian reference data into
+the disabled Galaxy Guardians adapter skeleton:
 
-- define the minimal adapter state and rendering hooks that a second game must
-  own
-- add a disabled Galaxy Guardians adapter skeleton only when it cannot start
-  public gameplay
-- wire the first measured scout-wave data into that skeleton
-- add a contract harness that fails if Galaxy Guardians uses Aurora capture,
-  challenge, dual-fighter, or scoring functions by default
+- extract the first scout-wave formation, dive, flagship, escort, firing, and
+  scoring facts from the promoted Galaxian references
+- replace placeholder skeleton profile values with measured values and source
+  artifact links
+- add a semantic event vocabulary for the skeleton state transitions
+- add a contract harness that fails if measured Galaxy Guardians state uses
+  Aurora capture, challenge, dual-fighter, or scoring functions by default

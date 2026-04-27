@@ -10,6 +10,10 @@ const GAMEPLAY_ADAPTER_REGISTRY=Object.freeze({
  [AURORA_GAMEPLAY_ADAPTER.gameKey]:AURORA_GAMEPLAY_ADAPTER
 });
 
+const GAMEPLAY_ADAPTER_SKELETON_REGISTRY=Object.freeze({
+ [GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON.gameKey]:GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON
+});
+
 function gameplayAdapterKey(packOrKey=currentGamePack()){
  if(typeof packOrKey==='string')return packOrKey;
  return packOrKey?.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
@@ -19,9 +23,18 @@ function availableGameplayAdapters(){
  return GAMEPLAY_ADAPTER_REGISTRY;
 }
 
+function availableGameplayAdapterSkeletons(){
+ return GAMEPLAY_ADAPTER_SKELETON_REGISTRY;
+}
+
 function getGameplayAdapter(packOrKey=currentGamePack()){
  const key=gameplayAdapterKey(packOrKey);
  return GAMEPLAY_ADAPTER_REGISTRY[key]||null;
+}
+
+function getGameplayAdapterSkeleton(packOrKey=currentGamePack()){
+ const key=gameplayAdapterKey(packOrKey);
+ return GAMEPLAY_ADAPTER_SKELETON_REGISTRY[key]||null;
 }
 
 function currentGameplayAdapter(){
@@ -63,7 +76,9 @@ function start(){
 }
 
 window.availableGameplayAdapters=availableGameplayAdapters;
+window.availableGameplayAdapterSkeletons=availableGameplayAdapterSkeletons;
 window.getGameplayAdapter=getGameplayAdapter;
+window.getGameplayAdapterSkeleton=getGameplayAdapterSkeleton;
 window.currentGameplayAdapter=currentGameplayAdapter;
 window.gamePackHasPlayableAdapter=gamePackHasPlayableAdapter;
 window.currentGamePackHasPlayableAdapter=currentGamePackHasPlayableAdapter;
