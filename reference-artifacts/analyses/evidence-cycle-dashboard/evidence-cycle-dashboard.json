@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/harness/build-evidence-cycle-dashboard.js",
+  "generated_at": "2026-04-27T00:37:23.415Z",
+  "git": {
+    "branch": "codex/macbook-pro-gg-aurora-20x-cycle"
+  },
+  "status": "cross-game-evidence-cycle-v1",
+  "purpose": "Give Aurora level expansion, Galaxy Guardians preview work, and future Platinum game ingestion one inspectable evidence surface.",
+  "local_inspection": {
+    "serve_from_repo_root": "python3 -m http.server 8000 --bind 127.0.0.1",
+    "dashboard_url": "http://127.0.0.1:8000/dist/dev/evidence-dashboard.html",
+    "game_url": "http://127.0.0.1:8000/dist/dev/index.html"
+  },
+  "aurora_level_expansion": {
+    "plan_path": "reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-four-window-cycle.plan.json",
+    "status": "seed-plan-only",
+    "plan_kind": "source-pending-evidence-cycle",
+    "output_root": "reference-artifacts/analyses/aurora-level-expansion-cycle",
+    "preferred_first_slice": "challenge-stage-depth",
+    "candidate_branch": "codex/macbook-pro-challenge-stage-depth",
+    "harness_expectation": "prove one distinct challenge-stage movement family appears and remains non-lethal",
+    "window_count": 4,
+    "waveform_window_count": 2,
+    "windows": [
+      {
+        "window_id": "stage-1-baseline",
+        "role": "opening_baseline",
+        "source_kind": "aurora_harness_or_reference_video",
+        "needs_waveform": true,
+        "event_families": [
+          "stage_start",
+          "formation_entry",
+          "player_move",
+          "player_shot",
+          "enemy_dive_start",
+          "enemy_projectile",
+          "wave_clear"
+        ],
+        "artifact_targets": [
+          {
+            "name": "source_or_run_manifest",
+            "status": "source-pending"
+          },
+          {
+            "name": "contact_sheet",
+            "status": "source-pending"
+          },
+          {
+            "name": "notable_stills",
+            "status": "source-pending"
+          },
+          {
+            "name": "motion_pressure_trace",
+            "status": "source-pending"
+          },
+          {
+            "name": "semantic_event_scaffold",
+            "status": "scaffolded"
+          },
+          {
+            "name": "promoted_event_log",
+            "status": "source-pending"
+          },
+          {
+            "name": "playable_slice_note",
+            "status": "source-pending"
+          },
+          {
+            "name": "harness_target_list",
+            "status": "source-pending"
+          },
+          {
+            "name": "waveform",
+            "status": "source-pending"
+          }
+        ],
+        "generated_paths": {
+          "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/README.md",
+          "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/events/reference-events.json"
+        }
+      },
+      {
+        "window_id": "challenge-stage-candidate",
+        "role": "challenge_stage_expansion_candidate",
+        "source_kind": "aurora_harness_or_reference_video",
+        "needs_waveform": true,
+        "event_families": [
+          "challenge_wave_start",
+          "challenge_enemy_path",
+          "challenge_enemy_hit",
+          "challenge_result"
+        ],
+        "artifact_targets": [
+          {
+            "name": "source_or_run_manifest",
+            "status": "source-pending"
+          },
+          {
+            "name": "contact_sheet",
+            "status": "source-pending"
+          },
+          {
+            "name": "notable_stills",
+            "status": "source-pending"
+          },
+          {
+            "name": "motion_pressure_trace",
+            "status": "source-pending"
+          },
+          {
+            "name": "semantic_event_scaffold",
+            "status": "scaffolded"
+          },
+          {
+            "name": "promoted_event_log",
+            "status": "source-pending"
+          },
+          {
+            "name": "playable_slice_note",
+            "status": "source-pending"
+          },
+          {
+            "name": "harness_target_list",
+            "status": "source-pending"
+          },
+          {
+            "name": "waveform",
+            "status": "source-pending"
+          }
+        ],
+        "generated_paths": {
+          "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/README.md",
+          "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/events/reference-events.json"
+        }
+      },
+      {
+        "window_id": "mid-run-pressure",
+        "role": "mid_run_pressure",
+        "source_kind": "aurora_harness_or_self_play_video",
+        "needs_waveform": false,
+        "event_families": [
+          "formation_entry",
+          "enemy_dive_start",
+          "escort_dive_start",
+          "enemy_projectile",
+          "player_hit",
+          "wave_clear"
+        ],
+        "artifact_targets": [
+          {
+            "name": "source_or_run_manifest",
+            "status": "source-pending"
+          },
+          {
+            "name": "contact_sheet",
+            "status": "source-pending"
+          },
+          {
+            "name": "notable_stills",
+            "status": "source-pending"
+          },
+          {
+            "name": "motion_pressure_trace",
+            "status": "source-pending"
+          },
+          {
+            "name": "semantic_event_scaffold",
+            "status": "scaffolded"
+          },
+          {
+            "name": "promoted_event_log",
+            "status": "source-pending"
+          },
+          {
+            "name": "playable_slice_note",
+            "status": "source-pending"
+          },
+          {
+            "name": "harness_target_list",
+            "status": "source-pending"
+          }
+        ],
+        "generated_paths": {
+          "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/README.md",
+          "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/events/reference-events.json"
+        }
+      },
+      {
+        "window_id": "late-run-cleanup-or-failure",
+        "role": "late_run_cleanup_or_failure",
+        "source_kind": "aurora_harness_or_self_play_video",
+        "needs_waveform": false,
+        "event_families": [
+          "enemy_dive_start",
+          "enemy_projectile",
+          "player_hit",
+          "wave_clear",
+          "game_over"
+        ],
+        "artifact_targets": [
+          {
+            "name": "source_or_run_manifest",
+            "status": "source-pending"
+          },
+          {
+            "name": "contact_sheet",
+            "status": "source-pending"
+          },
+          {
+            "name": "notable_stills",
+            "status": "source-pending"
+          },
+          {
+            "name": "motion_pressure_trace",
+            "status": "source-pending"
+          },
+          {
+            "name": "semantic_event_scaffold",
+            "status": "scaffolded"
+          },
+          {
+            "name": "promoted_event_log",
+            "status": "source-pending"
+          },
+          {
+            "name": "playable_slice_note",
+            "status": "source-pending"
+          },
+          {
+            "name": "harness_target_list",
+            "status": "source-pending"
+          }
+        ],
+        "generated_paths": {
+          "readme": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/README.md",
+          "event_scaffold": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/events/reference-events.json"
+        }
+      }
+    ]
+  },
+  "galaxy_guardians_preview": {
+    "contract_doc": "GALAXY_GUARDIANS_PACK_CONTRACT.md",
+    "event_schema_doc": "GALAXY_GUARDIANS_EVENT_SCHEMA_PLAN.md",
+    "semantic_events": [
+      "game_start",
+      "wave_setup",
+      "player_move",
+      "player_shot",
+      "regular_dive_start",
+      "enemy_projectile",
+      "enemy_hit",
+      "player_hit",
+      "wave_clear"
+    ],
+    "pack_harnesses": [
+      "npm run harness:check:platinum-pack-boot",
+      "npm run harness:check:game-picker-shell",
+      "npm run harness:check:galaxy-guardians-playable-preview",
+      "npm run harness:check:galaxy-guardians-event-log",
+      "npm run harness:check:platinum-pack-rule-adapters",
+      "npm run harness:check:galaxian-preview-evidence"
+    ],
+    "explicit_preview_exclusions": [
+      "Aurora capture/rescue",
+      "dual fighter mode",
+      "challenge stages",
+      "full 15-wave progression",
+      "exact flagship/escort score reproduction"
+    ]
+  },
+  "galaxian_reference": {
+    "manifest_path": "reference-artifacts/analyses/galaxian-reference/manifest.json",
+    "promoted_windows_path": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/reference-windows.json",
+    "candidate_source_count": 9,
+    "local_media_source_count": 3,
+    "selected_window_count": 4,
+    "supporting_source_count": 4,
+    "promoted_window_count": 6,
+    "promoted_windows": [
+      {
+        "window_id": "opening-active-wave",
+        "window_family": "opening-active-play",
+        "start_time_s": 48,
+        "end_time_s": 90,
+        "duration_s": 42,
+        "pressure_score": 65.983,
+        "player_detection_rate": 0.994,
+        "mean_abs_player_delta_per_sample": 0.0158,
+        "artifacts": {
+          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/contact-sheet-1s.png",
+          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/contact-sheet-5s.png",
+          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/still-end.png",
+          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/audio/waveform.png",
+          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/trace"
+        }
+      },
+      {
+        "window_id": "early-progression-pressure",
+        "window_family": "early-progression",
+        "start_time_s": 90,
+        "end_time_s": 145,
+        "duration_s": 55,
+        "pressure_score": 57.337,
+        "player_detection_rate": 0.999,
+        "mean_abs_player_delta_per_sample": 0.0204,
+        "artifacts": {
+          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/contact-sheet-1s.png",
+          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/contact-sheet-5s.png",
+          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/still-end.png",
+          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/audio/waveform.png",
+          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/trace"
+        }
+      },
+      {
+        "window_id": "mid-session-pressure",
+        "window_family": "mid-session-pressure",
+        "start_time_s": 180,
+        "end_time_s": 240,
+        "duration_s": 60,
+        "pressure_score": 51.888,
+        "player_detection_rate": 1,
+        "mean_abs_player_delta_per_sample": 0.0165,
+        "artifacts": {
+          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/contact-sheet-1s.png",
+          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/contact-sheet-5s.png",
+          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/still-end.png",
+          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/audio/waveform.png",
+          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/trace"
+        }
+      },
+      {
+        "window_id": "late-session-pressure",
+        "window_family": "late-session-pressure",
+        "start_time_s": 660,
+        "end_time_s": 720,
+        "duration_s": 60,
+        "pressure_score": 55.31,
+        "player_detection_rate": 0.973,
+        "mean_abs_player_delta_per_sample": 0.0192,
+        "artifacts": {
+          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/contact-sheet-1s.png",
+          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/contact-sheet-5s.png",
+          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/still-end.png",
+          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/audio/waveform.png",
+          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/trace"
+        }
+      },
+      {
+        "window_id": "endgame-cleanup",
+        "window_family": "late-cleanup-or-game-over",
+        "start_time_s": 870,
+        "end_time_s": 930,
+        "duration_s": 60,
+        "pressure_score": 52.777,
+        "player_detection_rate": 0.868,
+        "mean_abs_player_delta_per_sample": 0.0195,
+        "artifacts": {
+          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/contact-sheet-1s.png",
+          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/contact-sheet-5s.png",
+          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/still-end.png",
+          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/audio/waveform.png",
+          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/trace"
+        }
+      },
+      {
+        "window_id": "arcades-level-5-active-reference",
+        "window_family": "external-active-play-comparison",
+        "start_time_s": 8,
+        "end_time_s": 40,
+        "duration_s": 32,
+        "pressure_score": 49.61,
+        "player_detection_rate": 0.981,
+        "mean_abs_player_delta_per_sample": 0.0147,
+        "artifacts": {
+          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/contact-sheet-1s.png",
+          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/contact-sheet-5s.png",
+          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/still-start.png",
+          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/still-mid.png",
+          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/still-end.png",
+          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/audio/waveform.png",
+          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/trace"
+        }
+      }
+    ]
+  },
+  "reusable_ingestion_loop": [
+    "discover and register source media",
+    "select time-bounded windows",
+    "generate contact sheets, stills, waveform, and trace artifacts",
+    "scaffold semantic events",
+    "promote visually confirmed observations",
+    "convert observations into pack/runtime harnesses",
+    "inspect the result on the evidence dashboard"
+  ],
+  "next_actions": [
+    "Record or ingest Aurora stage-1 baseline and challenge-stage candidate windows.",
+    "Promote the planned Aurora event scaffolds from null timestamps to reviewed events.",
+    "Use Galaxian promoted-window pressure scores to tune the Galaxy Guardians scout-wave pressure bands.",
+    "Add one Aurora challenge-stage-depth harness after the first measured challenge window exists.",
+    "Keep this branch isolated until the other workstation finishes the current beta/production repair cycle."
+  ],
+  "generated_files": {
+    "dashboard_json": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json",
+    "dashboard_readme": "reference-artifacts/analyses/evidence-cycle-dashboard/README.md",
+    "dist_json": "dist/dev/evidence-dashboard.json",
+    "dist_html": "dist/dev/evidence-dashboard.html"
+  }
+}

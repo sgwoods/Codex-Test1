@@ -6,6 +6,11 @@ This is the next long unattended work plan after the first Galaxy Guardians
 playable preview foundation. It assumes this MacBook remains a development and
 test machine only, while release authority remains on `imacm1` / `iMacM1`.
 
+Current 100x direction: make the evidence process inspectable and repeatable by
+generating a local dashboard that combines the Aurora four-window expansion
+plan, Galaxy Guardians preview contract, Galaxian promoted windows, waveforms,
+contact sheets, pressure traces, and next harness targets.
+
 ## Working Goal
 
 Turn the current scout-wave preview and analysis tooling into a reusable
@@ -67,6 +72,8 @@ First implementation note:
   cleanup/failure
 - produce contact sheets, stills, traces, and waveform where relevant
 - write the first Aurora stage-slice spec from those artifacts
+- keep the local evidence dashboard current with
+  `npm run harness:build:evidence-cycle-dashboard`
 
 ### 6. Aurora First Expansion Candidate
 
@@ -104,6 +111,7 @@ Current documents:
 - `GALAXY_GUARDIANS_EVENT_SCHEMA_PLAN.md`
 - `AURORA_LEVEL_EXPANSION_EVIDENCE_CYCLE_PLAN.md`
 - `reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-four-window-cycle.plan.json`
+- `reference-artifacts/analyses/evidence-cycle-dashboard/README.md`
 
 ## Suggested Validation
 
@@ -111,6 +119,8 @@ Run at minimum:
 
 ```sh
 npm run build
+npm run harness:build:evidence-cycle-dashboard
+npm run harness:check:evidence-cycle-dashboard
 npm run harness:check:platinum-pack-boot
 npm run harness:check:game-picker-shell
 npm run harness:check:galaxy-guardians-playable-preview

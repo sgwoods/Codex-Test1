@@ -7,6 +7,14 @@ Aurora's own level-by-level expansion. The goal is to make the coming Aurora
 stage-depth work measurable before adding new aliens, challenge-stage behavior,
 entry patterns, or later-level pressure.
 
+Local inspection dashboard:
+
+- `npm run build`
+- `npm run harness:build:evidence-cycle-dashboard`
+- `npm run harness:check:evidence-cycle-dashboard`
+- `http://127.0.0.1:8000/dist/dev/evidence-dashboard.html` when served from
+  the repo root
+
 ## Decision
 
 The next major Aurora gameplay expansion should start with an evidence cycle,
@@ -83,6 +91,12 @@ npm run harness:cycle:classic-arcade-reference -- --plan <plan.json>
 Seed plan:
 
 - `reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-four-window-cycle.plan.json`
+
+Dashboard and generated scaffolds:
+
+- `reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json`
+- `reference-artifacts/analyses/evidence-cycle-dashboard/README.md`
+- `reference-artifacts/analyses/aurora-level-expansion-cycle/*/events/reference-events.json`
 
 For Aurora-generated recordings, the plan file should identify:
 
