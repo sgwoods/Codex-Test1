@@ -1,6 +1,6 @@
 # Platinum Game Boundary Audit
 
-Status: `architecture-principle-and-current-main-audit`
+Status: `architecture-principle-pack-registry-split`
 
 Date: 2026-04-27
 
@@ -28,7 +28,10 @@ This creates three hard rules:
 
 ## Current Mainline Read
 
-Current `main` is still in a transitional but understandable state.
+The current implementation is still in a transitional but understandable state.
+The first pack-boundary split is in place: Aurora pack data, Galaxy Guardians
+preview data, and shared registry helpers are separated into their own source
+modules.
 
 What is safe today:
 
@@ -43,11 +46,12 @@ What is safe today:
 
 What is not yet ready for a playable second game:
 
-- the pack registry and Aurora pack data still live together in
-  `src/js/13-aurora-game-pack.js`
-- the Galaxy Guardians preview pack currently reuses Aurora atmosphere, audio,
-  stage cadence, stage band, formation, challenge, frame accent, and scoring
-  tables
+- the pack registry is now separated from Aurora and Galaxy Guardians pack data
+- the gameplay adapter registry now registers Aurora as the only playable
+  gameplay adapter
+- the Galaxy Guardians preview pack now owns placeholder atmosphere, audio,
+  timing, stage cadence, stage band, formation, challenge, frame accent, and
+  scoring tables while it remains non-playable
 - core gameplay files are still Aurora application files, not a routed
   multi-game gameplay adapter layer
 - `src/js/90-harness.js` is still mostly an Aurora gameplay harness surface even
@@ -61,23 +65,36 @@ Guardians `0.1` gameplay.
 
 ### Pack Registry And Pack Data
 
-Current file:
+Current files:
 
 - `src/js/13-aurora-game-pack.js`
+- `src/js/13-galaxy-guardians-game-pack.js`
+- `src/js/13-game-pack-registry.js`
+- `src/js/13-gameplay-adapter-registry.js`
 
 Current status:
 
-- contains both `AURORA_GAME_PACK` and `GALAXY_GUARDIANS_PACK`
-- exposes shared pack registry functions
-- stores Aurora rule tables and theme tables
-- lets the preview pack reuse Aurora tables while it is non-playable
+- `src/js/13-aurora-game-pack.js` stores Aurora-owned rule, timing, theme, and
+  scoring tables plus `AURORA_GAME_PACK`
+- `src/js/13-galaxy-guardians-game-pack.js` stores preview-owned placeholder
+  rule, timing, theme, audio, visual, and scoring tables plus
+  `GALAXY_GUARDIANS_PACK`
+- `src/js/13-game-pack-registry.js` exposes shared pack registry functions and
+  active-pack runtime helpers
+- `src/js/13-gameplay-adapter-registry.js` exposes shared gameplay adapter
+  registration and start routing; Aurora is currently the only registered
+  playable adapter
+- `npm run harness:check:pack-registry-boundaries` verifies that Galaxy
+  Guardians does not directly share game-owned table references with Aurora
+- `npm run harness:check:gameplay-adapter-boundaries` verifies that Galaxy
+  Guardians cannot start gameplay until it owns an adapter
 
 Required direction:
 
-- split platform registry behavior from game-owned pack definitions
+- keep platform registry behavior separate from game-owned pack definitions
 - keep Aurora tables in an Aurora-owned pack module
-- create Galaxy Guardians-owned rule, movement, audio, visual, and scoring
-  tables before its playable preview
+- replace Galaxy Guardians placeholder tables with measured Galaxian-inspired
+  rule, movement, audio, visual, and scoring data before its playable preview
 - reject direct reuse of another game's tables unless the reused behavior has
   first been promoted into a Platinum contract
 
@@ -183,15 +200,30 @@ must prove:
 - Guardians harnesses fail if Aurora-only mechanics appear in the Guardians
   runtime
 
+## Completed Boundary Slice
+
+The first platform boundary slice is now in place:
+
+- platform-owned pack registry module
+- Aurora pack data split out of the registry
+- placeholder Galaxy Guardians pack-data module that does not reuse Aurora rule
+  tables for future playable fields
+- cross-pack isolation harness for shared table references, preview-only state,
+  disabled challenge cadence, and pack-owned reference timings
+- gameplay adapter registry that starts only registered playable adapters
+- gameplay adapter boundary harness proving Galaxy Guardians preview falls back
+  to Aurora instead of routing through Aurora directly
+- architecture docs updated after the split
+
 ## Recommended Next Code Slice
 
-The next implementation slice should be a platform boundary slice, not a large
-gameplay slice:
+The next implementation slice should begin shaping the Galaxy Guardians `0.1`
+adapter, but keep it non-public until measured rules exist:
 
-- create a platform-owned pack registry module
-- split Aurora pack data out of the registry
-- add a placeholder Galaxy Guardians pack-data module that does not reuse Aurora
-  rule tables for future playable fields
-- add a cross-pack isolation harness for disabled capabilities
-- update the architecture docs after the split
-
+- define the minimal adapter state and rendering hooks that a second game must
+  own
+- add a disabled Galaxy Guardians adapter skeleton only when it cannot start
+  public gameplay
+- wire the first measured scout-wave data into that skeleton
+- add a contract harness that fails if Galaxy Guardians uses Aurora capture,
+  challenge, dual-fighter, or scoring functions by default

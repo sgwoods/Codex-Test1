@@ -43,6 +43,8 @@ Right now it proves:
 - alternate identity and framing
 - future second-game positioning
 - pack-owned preview content for the picker and preview modal
+- pack-owned placeholder timing, audio, visual, cadence, layout, and scoring
+  tables that do not directly borrow Aurora tables
 - safe fallback to `Aurora Galactica` when a player tries to launch gameplay
 
 It does not yet prove:
@@ -50,6 +52,7 @@ It does not yet prove:
 - a second full gameplay ruleset
 - a second complete scoring and stage-flow implementation
 - a second complete application harness family
+- a registered gameplay adapter
 
 That is intentional.
 
@@ -113,10 +116,12 @@ The boundary is real, but these coupling areas still deserve attention:
 
 ### Direct game-to-game sharing risk
 
-The current second-game preview is safe because it is not playable, but it still
-borrows Aurora-owned tables in the mainline pack file. That must remain a
-preview-only shortcut. A playable Galaxy Guardians slice needs its own pack data
-and gameplay adapter, with any true common behavior promoted into Platinum.
+The current second-game preview is safe because it is not playable, and its
+preview pack now owns placeholder data instead of borrowing Aurora-owned tables.
+It also has no gameplay adapter, so it cannot start through Aurora's gameplay
+implementation by accident. A playable Galaxy Guardians slice still needs
+measured, game-specific pack data and its own gameplay adapter, with any true
+common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
