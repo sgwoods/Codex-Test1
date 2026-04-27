@@ -27,6 +27,25 @@ Each promoted window now contains:
 - stage-slice note
 - harness target list
 
+## Raw Run Records
+
+This cycle also retains selected deterministic raw harness run folders under
+`*/runs/` as audit anchors for issue `#188`.
+
+Those folders contain:
+
+- `summary.json`
+- `neo-galaga-session-*.json`
+- `neo-galaga-video-*.webm`
+- `neo-galaga-video-*.review.webm`
+- `neo-galaga-session-*-system-status.json`
+
+They are not the preferred first-read evidence surface. The promoted manifests,
+events, frames, traces, audio timelines, slice notes, and dashboard are the
+review surface. Raw runs are retained here only to preserve provenance for the
+first MacBook Aurora level-expansion capture and to support later quality,
+conformance, player-profile, and Player 2 analysis.
+
 ## Command Shape
 
 The reusable Aurora evidence entry point is:

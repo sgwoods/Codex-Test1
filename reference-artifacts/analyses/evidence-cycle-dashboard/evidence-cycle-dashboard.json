@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "generated_by": "tools/harness/build-evidence-cycle-dashboard.js",
-  "generated_at": "2026-04-27T11:15:28.236Z",
+  "generated_at": "2026-04-27T14:41:54.374Z",
   "git": {
-    "branch": "codex/macbook-pro-aurora-evidence-windows"
+    "branch": "codex/macbook-pro-evidence-artifact-discipline"
   },
   "status": "cross-game-evidence-cycle-v1",
   "purpose": "Give Aurora level expansion, Galaxy Guardians preview work, and future Platinum game ingestion one inspectable evidence surface.",
@@ -322,129 +322,15 @@
     ]
   },
   "galaxian_reference": {
+    "available": false,
     "manifest_path": "reference-artifacts/analyses/galaxian-reference/manifest.json",
     "promoted_windows_path": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/reference-windows.json",
-    "candidate_source_count": 9,
-    "local_media_source_count": 3,
-    "selected_window_count": 4,
-    "supporting_source_count": 4,
-    "promoted_window_count": 6,
-    "promoted_windows": [
-      {
-        "window_id": "opening-active-wave",
-        "window_family": "opening-active-play",
-        "start_time_s": 48,
-        "end_time_s": 90,
-        "duration_s": 42,
-        "pressure_score": 65.983,
-        "player_detection_rate": 0.994,
-        "mean_abs_player_delta_per_sample": 0.0158,
-        "artifacts": {
-          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/contact-sheet-1s.png",
-          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/contact-sheet-5s.png",
-          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/still-start.png",
-          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/still-mid.png",
-          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/frames/still-end.png",
-          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/audio/waveform.png",
-          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/opening-active-wave/trace"
-        }
-      },
-      {
-        "window_id": "early-progression-pressure",
-        "window_family": "early-progression",
-        "start_time_s": 90,
-        "end_time_s": 145,
-        "duration_s": 55,
-        "pressure_score": 57.337,
-        "player_detection_rate": 0.999,
-        "mean_abs_player_delta_per_sample": 0.0204,
-        "artifacts": {
-          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/contact-sheet-1s.png",
-          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/contact-sheet-5s.png",
-          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/still-start.png",
-          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/still-mid.png",
-          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/frames/still-end.png",
-          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/audio/waveform.png",
-          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/early-progression-pressure/trace"
-        }
-      },
-      {
-        "window_id": "mid-session-pressure",
-        "window_family": "mid-session-pressure",
-        "start_time_s": 180,
-        "end_time_s": 240,
-        "duration_s": 60,
-        "pressure_score": 51.888,
-        "player_detection_rate": 1,
-        "mean_abs_player_delta_per_sample": 0.0165,
-        "artifacts": {
-          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/contact-sheet-1s.png",
-          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/contact-sheet-5s.png",
-          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/still-start.png",
-          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/still-mid.png",
-          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/frames/still-end.png",
-          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/audio/waveform.png",
-          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/mid-session-pressure/trace"
-        }
-      },
-      {
-        "window_id": "late-session-pressure",
-        "window_family": "late-session-pressure",
-        "start_time_s": 660,
-        "end_time_s": 720,
-        "duration_s": 60,
-        "pressure_score": 55.31,
-        "player_detection_rate": 0.973,
-        "mean_abs_player_delta_per_sample": 0.0192,
-        "artifacts": {
-          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/contact-sheet-1s.png",
-          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/contact-sheet-5s.png",
-          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/still-start.png",
-          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/still-mid.png",
-          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/frames/still-end.png",
-          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/audio/waveform.png",
-          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/late-session-pressure/trace"
-        }
-      },
-      {
-        "window_id": "endgame-cleanup",
-        "window_family": "late-cleanup-or-game-over",
-        "start_time_s": 870,
-        "end_time_s": 930,
-        "duration_s": 60,
-        "pressure_score": 52.777,
-        "player_detection_rate": 0.868,
-        "mean_abs_player_delta_per_sample": 0.0195,
-        "artifacts": {
-          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/contact-sheet-1s.png",
-          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/contact-sheet-5s.png",
-          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/still-start.png",
-          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/still-mid.png",
-          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/frames/still-end.png",
-          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/audio/waveform.png",
-          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/endgame-cleanup/trace"
-        }
-      },
-      {
-        "window_id": "arcades-level-5-active-reference",
-        "window_family": "external-active-play-comparison",
-        "start_time_s": 8,
-        "end_time_s": 40,
-        "duration_s": 32,
-        "pressure_score": 49.61,
-        "player_detection_rate": 0.981,
-        "mean_abs_player_delta_per_sample": 0.0147,
-        "artifacts": {
-          "contact_sheet_1s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/contact-sheet-1s.png",
-          "contact_sheet_5s": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/contact-sheet-5s.png",
-          "still_start": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/still-start.png",
-          "still_mid": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/still-mid.png",
-          "still_end": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/frames/still-end.png",
-          "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/audio/waveform.png",
-          "trace_dir": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/promoted-windows/arcades-level-5-active-reference/trace"
-        }
-      }
-    ]
+    "candidate_source_count": 0,
+    "local_media_source_count": 0,
+    "selected_window_count": 0,
+    "supporting_source_count": 0,
+    "promoted_window_count": 0,
+    "promoted_windows": []
   },
   "reusable_ingestion_loop": [
     "discover and register source media",

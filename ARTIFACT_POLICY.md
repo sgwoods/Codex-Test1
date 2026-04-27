@@ -1,6 +1,6 @@
 # Artifact Policy
 
-This project has three distinct artifact locations. Treating them as separate on purpose avoids the recurring confusion between player exports, browser-local replay state, and the developer review archive.
+This project has four distinct artifact locations. Treating them as separate on purpose avoids the recurring confusion between player exports, browser-local replay state, developer review archives, and curated evidence packs.
 
 ## Policy
 
@@ -53,6 +53,41 @@ This is the source of truth for:
 - tuning reports
 - durable review evidence inside the repo workspace
 
+### 4. Promoted Reference / Gameplay Evidence Packs
+
+This is the curated evidence layer used for durable quality and conformance
+decisions.
+
+- Root:
+  - `<workspace>/reference-artifacts/analyses/`
+- Examples:
+  - `reference-artifacts/analyses/correspondence/`
+  - `reference-artifacts/analyses/quality-conformance/`
+  - `reference-artifacts/analyses/aurora-level-expansion-cycle/`
+- Contents may include:
+  - source manifests
+  - reviewed event logs
+  - semantic traces
+  - still frames and contact sheets
+  - audio-cue timelines or waveform notes
+  - harness target notes
+  - selected raw run folders only when the run itself is part of the evidence
+    record
+
+Promoted evidence packs are the right place for information that should support:
+
+- release quality assessment
+- reference conformance scoring
+- level-by-level expansion planning
+- improved player profile modeling
+- future simulated play and Player 2 behavior
+- future game ingestion workflows
+
+Raw harness `runs/` directories under a promoted evidence pack are local capture
+staging by default and are ignored unless deliberately retained. Keep a raw run
+in git only when it is linked from a manifest, README, dashboard, or issue and
+has a clear quality/conformance purpose.
+
 ## Formal Workflow
 
 ### Dev
@@ -65,6 +100,35 @@ This is the source of truth for:
    npm run harness:import-latest
    ```
 4. Review it in the viewer or analyzer from the imported run folder.
+5. If the run should become release or conformance evidence, promote only the
+   reviewed outputs into `reference-artifacts/analyses/` and link them from an
+   inventory, dashboard, scorecard, or issue.
+
+### Evidence Cycles
+
+Deterministic evidence cycles may write local raw runs while generating curated
+outputs.
+
+For Aurora level expansion:
+
+```bash
+npm run build
+npm run harness:cycle:aurora-evidence-windows
+npm run harness:build:evidence-cycle-dashboard
+npm run harness:check:evidence-cycle-dashboard
+```
+
+The promoted artifact home is:
+
+```text
+reference-artifacts/analyses/aurora-level-expansion-cycle/
+```
+
+The dashboard home is:
+
+```text
+reference-artifacts/analyses/evidence-cycle-dashboard/
+```
 
 ### Beta / Production
 
@@ -83,6 +147,8 @@ There is no separate filesystem export location for `beta` or `production`.
 - `dist/dev/`, `dist/beta/`, and `dist/production/` are not runtime capture archives.
 - `export.mov.png` is a build snapshot artifact, not a session/replay artifact.
 - The game should not imply that exported logs/videos automatically land in `<workspace>/harness-artifacts/`.
+- Raw local `runs/` folders are not automatically release evidence. They become
+  evidence only after promotion, review, and linkage from an index or manifest.
 
 ## Source of Truth
 
@@ -91,5 +157,7 @@ Going forward, use this distinction:
 - `IndexedDB` = native local replay feature for players
 - browser download directory = exported log/video files
 - `<workspace>/harness-artifacts/` = canonical developer review archive after import/normalization
+- `<workspace>/reference-artifacts/analyses/` = curated evidence packs for
+  quality, conformance, player-profile, and future-game research
 
 If documentation or UI text blurs those boundaries, treat it as a documentation bug and correct it.

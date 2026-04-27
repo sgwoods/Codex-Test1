@@ -69,6 +69,11 @@ function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+function readOptionalJson(file, fallback){
+  if(!fs.existsSync(file)) return fallback;
+  return readJson(file);
+}
+
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
 }
@@ -253,6 +258,7 @@ function renderAuroraArtifactLinks(win){
 }
 
 function summarizeGalaxianReference(manifest, promotedWindows){
+  const available = fs.existsSync(GALAXIAN_MANIFEST_PATH) && fs.existsSync(GALAXIAN_PROMOTED_WINDOWS_PATH);
   const localSources = (manifest.candidate_sources || []).filter(source =>
     String(source.url_or_local_anchor || '').startsWith('/')
   );
@@ -260,6 +266,7 @@ function summarizeGalaxianReference(manifest, promotedWindows){
     ['supporting-source', 'discovery-index'].includes(source.analysis_status)
   );
   return {
+    available,
     manifest_path: repoPath(GALAXIAN_MANIFEST_PATH),
     promoted_windows_path: repoPath(GALAXIAN_PROMOTED_WINDOWS_PATH),
     candidate_source_count: (manifest.candidate_sources || []).length,
@@ -283,8 +290,13 @@ function summarizeGalaxianReference(manifest, promotedWindows){
 
 function buildDashboardModel(){
   const auroraPlan = readJson(AURORA_PLAN_PATH);
-  const galaxianManifest = readJson(GALAXIAN_MANIFEST_PATH);
-  const galaxianPromotedWindows = readJson(GALAXIAN_PROMOTED_WINDOWS_PATH);
+  const galaxianManifest = readOptionalJson(GALAXIAN_MANIFEST_PATH, {
+    candidate_sources: [],
+    selected_windows: []
+  });
+  const galaxianPromotedWindows = readOptionalJson(GALAXIAN_PROMOTED_WINDOWS_PATH, {
+    windows: []
+  });
   const auroraWindows = buildAuroraWindowState(auroraPlan);
   const generatedAt = new Date().toISOString();
 

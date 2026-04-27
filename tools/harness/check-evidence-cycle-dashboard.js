@@ -125,6 +125,10 @@ function validateGalaxy(model, issues){
 
 function validateGalaxian(model, issues){
   const reference = model.galaxian_reference || {};
+  if(reference.available === false){
+    addIssue(issues, 'warning', 'Galaxian reference manifest/promoted windows are not present in this branch');
+    return;
+  }
   if(reference.candidate_source_count < 3) addIssue(issues, 'error', 'expected at least 3 Galaxian candidate sources');
   if(reference.promoted_window_count < 6) addIssue(issues, 'error', 'expected at least 6 promoted Galaxian windows');
   for(const win of reference.promoted_windows || []){

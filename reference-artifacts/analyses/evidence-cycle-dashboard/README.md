@@ -2,9 +2,9 @@
 
 Status: `cross-game-evidence-cycle-v1`
 
-Generated: `2026-04-27T11:15:28.236Z`
+Generated: `2026-04-27T14:41:54.374Z`
 
-Branch: `codex/macbook-pro-aurora-evidence-windows`
+Branch: `codex/macbook-pro-evidence-artifact-discipline`
 
 This dashboard is the inspectable local surface for the shared Aurora / Galaxy Guardians / future Platinum ingestion loop.
 
@@ -28,7 +28,7 @@ Open:
 
 - Aurora planned windows: 4
 - Aurora waveform windows: 2
-- Galaxian promoted windows: 6
+- Galaxian promoted windows: 0
 - Galaxy Guardians semantic events: 9
 
 ## Generated Files
