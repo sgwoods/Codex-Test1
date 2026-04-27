@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "status": "planned-event-scaffold",
+  "generated_by": "tools/harness/build-evidence-cycle-dashboard.js",
+  "game_lineage": "aurora-galactica",
+  "target_game": "aurora-galactica",
+  "window_id": "late-run-cleanup-or-failure",
+  "window_role": "late_run_cleanup_or_failure",
+  "source_kind": "aurora_harness_or_self_play_video",
+  "needs_waveform": false,
+  "note": "Source-pending scaffold. Replace null timestamps with reviewed observations after the window is recorded or ingested.",
+  "events": [
+    {
+      "event_id": "late-run-cleanup-or-failure-01-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": "not-required-for-first-pass",
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-02-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": "not-required-for-first-pass",
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-03-player_hit",
+      "event_family": "player_hit",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": "not-required-for-first-pass",
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-04-wave_clear",
+      "event_family": "wave_clear",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": "not-required-for-first-pass",
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-05-game_over",
+      "event_family": "game_over",
+      "time_s": null,
+      "duration_s": null,
+      "entity_family": null,
+      "entity_id": null,
+      "position_hint": null,
+      "motion_hint": null,
+      "audio_hint": "not-required-for-first-pass",
+      "confidence": "unknown",
+      "source_note": "planned from aurora-four-window-cycle.plan.json"
+    }
+  ]
+}
