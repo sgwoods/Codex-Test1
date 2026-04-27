@@ -74,9 +74,49 @@ A Platinum application should not own:
 - platform-only boot and pack-selection behavior
 - startup and wait-mode shell copy that promotes the platform or other applications
 
+## Game-To-Game Isolation Rule
+
+Applications must not depend on each other's game-specific implementation.
+
+Aurora Galactica may not be the hidden source of Galaxy Guardians mechanics,
+scoring, aliens, sound cues, visual identity, event vocabulary, or gameplay
+harness behavior. Galaxy Guardians should likewise never become a source of
+Aurora behavior. If both applications need the same thing, we should raise that
+thing into Platinum and expose it through a deliberate platform contract.
+
+Allowed reuse:
+
+- Platinum shell APIs
+- Platinum input contracts
+- Platinum audio engine capabilities
+- Platinum event/replay/session substrate
+- Platinum service adapters
+- Platinum pack schema and capability flags
+- documented platform harness helpers
+
+Disallowed reuse:
+
+- one game's scoring table inside another game
+- one game's enemy movement model inside another game
+- one game's capture, rescue, dual-fighter, challenge, flagship, escort, or
+  stage progression logic inside another game
+- one game's visual or sound identity catalog as another game's default
+- one game's application harnesses as proof of another game's behavior
+
+See also:
+
+- `/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md`
+
 ## Current Boundary Notes
 
 The boundary is real, but these coupling areas still deserve attention:
+
+### Direct game-to-game sharing risk
+
+The current second-game preview is safe because it is not playable, but it still
+borrows Aurora-owned tables in the mainline pack file. That must remain a
+preview-only shortcut. A playable Galaxy Guardians slice needs its own pack data
+and gameplay adapter, with any true common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
