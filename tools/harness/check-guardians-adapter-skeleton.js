@@ -31,6 +31,9 @@ async function main(){
         promotedEventLog:skeleton?.referenceProfile?.promotedEventLog || '',
         promotedEventStatus:skeleton?.referenceProfile?.promotedEventStatus || '',
         promotedEventCount:skeleton?.referenceProfile?.promotedEventCount || 0,
+        devRuntime:skeleton?.referenceProfile?.devRuntime || '',
+        devRuntimeStatus:skeleton?.referenceProfile?.devRuntimeStatus || '',
+        devRuntimeHarness:skeleton?.referenceProfile?.devRuntimeHarness || '',
         referenceSourceCount:skeleton?.referenceProfile?.sourceCount || 0,
         fireMode:skeleton?.profile?.playerFireMode || '',
         formationModel:skeleton?.profile?.formationModel || '',
@@ -74,6 +77,12 @@ async function main(){
   if(result.skeleton.promotedEventCount < 11){
     fail('Galaxy Guardians skeleton does not carry the promoted scout-wave event count', result);
   }
+  if(result.skeleton.devRuntime !== 'src/js/13-galaxy-guardians-runtime.js' || result.skeleton.devRuntimeStatus !== 'dev-runtime-slice-not-public-release'){
+    fail('Galaxy Guardians skeleton is not linked to the dev runtime slice', result);
+  }
+  if(result.skeleton.devRuntimeHarness !== 'tools/harness/check-galaxy-guardians-runtime-slice.js'){
+    fail('Galaxy Guardians skeleton does not cite the runtime slice harness', result);
+  }
   if(result.skeleton.wrapThreatModel !== 'bottom-exit-or-return-explicit-preview-rule'){
     fail('Galaxy Guardians skeleton lost the explicit wrap/return preview rule', result);
   }
@@ -103,6 +112,9 @@ async function main(){
   }
   if(result.initialState.promotedEventLog !== 'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json'){
     fail('Galaxy Guardians initial state does not cite the promoted event log', result);
+  }
+  if(result.initialState.devRuntime !== 'src/js/13-galaxy-guardians-runtime.js'){
+    fail('Galaxy Guardians initial state does not cite the dev runtime slice', result);
   }
   if(!result.startError.includes('disabled until measured 0.1 scout-wave evidence exists')){
     fail('Galaxy Guardians skeleton start did not fail closed with the expected evidence gate', result);

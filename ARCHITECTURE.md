@@ -178,6 +178,13 @@ Pack-boundary harness:
 - `tools/harness/check-galaxian-reference-profile.js`
   verifies that the generated Galaxian profile has the expected source roles,
   artifacts, promoted event targets, and first-slice scout-wave baseline.
+- `tools/harness/check-galaxy-guardians-runtime-slice.js`
+  verifies the dev-only Galaxy Guardians scout-wave runtime model: 38-slot rack,
+  flagship/escort/scout roles, single-shot firing, promoted event emission,
+  Guardians-owned scoring, and no Aurora capture/challenge/dual-fighter state.
+- `tools/harness/check-compact-cabinet-rails.js`
+  verifies that both side-frame icon rails remain visible and inside the
+  cabinet frame at the compact in-app browser scale.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

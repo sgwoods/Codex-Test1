@@ -200,7 +200,14 @@ The current sneak peek is intentionally still non-playable. It should be used to
 keep the Platinum pack contract honest while the second game is still being
 specified.
 
-The best next application proof is a dev-only playable slice that includes:
+The first dev-only runtime slice is now underway as an application-owned model,
+not a public adapter. It creates a Galaxian-inspired scout-wave rack, enforces
+single-shot firing, emits promoted event names, scores against a Guardians-owned
+alien catalog, and keeps Aurora capture, challenge, dual-fighter, and scoring
+state out of the model.
+
+The next application proof is turning that runtime model into a dev-only
+playable slice that includes:
 
 - formation rack
 - dives
@@ -212,7 +219,7 @@ The best next application proof is a dev-only playable slice that includes:
 
 That is enough to test the platform without prematurely shipping a second game.
 
-Before that slice starts, refine the existing Galaxian evidence into
+Before the slice becomes playable, refine the existing Galaxian evidence into
 runtime-ready rules:
 
 - frame-level formation-entry and dive timing bands

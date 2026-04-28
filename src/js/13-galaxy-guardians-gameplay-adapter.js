@@ -15,6 +15,9 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
  status:'source-manifested-contact-sheets-and-waveforms',
  promotedEventStatus:'promoted-reviewed-event-windows',
  promotedEventCount:11,
+ devRuntime:'src/js/13-galaxy-guardians-runtime.js',
+ devRuntimeStatus:'dev-runtime-slice-not-public-release',
+ devRuntimeHarness:'tools/harness/check-galaxy-guardians-runtime-slice.js',
  sourceCount:3,
  sources:Object.freeze([
   Object.freeze({
@@ -90,6 +93,7 @@ function createGalaxyGuardiansInitialState(opts={}){
   evidenceState:GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE.evidenceState,
   sourceProfile:GALAXY_GUARDIANS_REFERENCE_PROFILE.profile,
   promotedEventLog:GALAXY_GUARDIANS_REFERENCE_PROFILE.promotedEventLog,
+  devRuntime:GALAXY_GUARDIANS_REFERENCE_PROFILE.devRuntime,
   eventVocabulary:GALAXY_GUARDIANS_REFERENCE_PROFILE.nextPromotionTargets,
   captureRescue:null,
   dualFighter:null,

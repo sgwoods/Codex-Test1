@@ -234,17 +234,20 @@ The first platform boundary slice is now in place:
   gameplay and does not include Aurora-only state
 - Galaxian source profile builder/checker for the three local reference videos,
   including contact sheets, waveform artifacts, and promoted event windows
+- dev-only Galaxy Guardians runtime model with an owned alien catalog, 38-slot
+  scout-wave rack, single-shot firing, promoted event emission, and no Aurora
+  capture/challenge/dual-fighter state
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice
 
-The next implementation slice should refine the promoted Galaxian event log
-into frame-level timing bands and runtime rules:
+The next implementation slice should refine the dev runtime into a visible
+dev-only playable preview:
 
 - extract frame-level formation, dive, flagship, escort, firing, and scoring
   facts from the promoted windows and source videos
-- replace placeholder formation slot counts and entry/dive labels with promoted
-  observed values
-- convert broad semantic event windows into skeleton state transition targets
+- render the Guardians runtime with owned ship/alien art and audio identity
+- add life loss, game over, and reset flow without importing Aurora rules
+- convert broad semantic event windows into tighter runtime timing bands
 - add a contract harness that fails if measured Galaxy Guardians state uses
   Aurora capture, challenge, dual-fighter, or scoring functions by default
