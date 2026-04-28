@@ -206,6 +206,15 @@ single-shot firing, emits promoted event names, scores against a Guardians-owned
 alien catalog, and keeps Aurora capture, challenge, dual-fighter, and scoring
 state out of the model.
 
+Galaxy Guardians also now owns its first identity catalogs rather than borrowing
+Aurora's look or sound names. The visual catalog names the `Signal Flagship`,
+`Signal Escort`, `Signal Scout`, and `Guardian Interceptor` silhouettes. The
+audio cue catalog names the start chirp, formation pulse, single-shot player
+fire, enemy shot, scout/flagship dive pressure, escort join, hit cues,
+wrap/return cue, and future player-loss cue. These are still synthesized
+starting points, but they give the 0.1 slice separate application-owned
+contracts before any public playability.
+
 The next application proof is turning that runtime model into a dev-only
 playable slice that includes:
 
@@ -226,7 +235,9 @@ runtime-ready rules:
 - flagship and escort behavior windows
 - scoring table and single-shot constraints
 - an application-owned harness plan for the first scout-wave slice
-- visual/audio identity notes that are distinct from Aurora
+- visual/audio identity notes that are distinct from Aurora, with the current
+  catalog entries refined by frame-level and waveform evidence before public
+  playability
 
 Use the reusable ingestion process in:
 

@@ -7,6 +7,9 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
   role:'flagship',
   color:'#ffdb58',
   accent:'#ff5b5b',
+  visualId:'signal-flagship',
+  diveAudioCue:'guardians-flagship-dive',
+  hitAudioCue:'guardians-flagship-hit',
   formationPoints:150,
   divePoints:300,
   escortDivePoints:Object.freeze({one:500,two:800})
@@ -17,6 +20,9 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
   role:'escort',
   color:'#ff5b5b',
   accent:'#7bd6ff',
+  visualId:'signal-escort',
+  diveAudioCue:'guardians-scout-dive',
+  hitAudioCue:'guardians-escort-hit',
   formationPoints:50,
   divePoints:100
  }),
@@ -26,6 +32,9 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
   role:'scout',
   color:'#4b7dff',
   accent:'#49f27a',
+  visualId:'signal-scout',
+  diveAudioCue:'guardians-scout-dive',
+  hitAudioCue:'guardians-scout-hit',
   formationPoints:30,
   divePoints:60
  })
@@ -65,6 +74,9 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   })
  }),
  alienCatalog:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG,
+ visualCatalog:GALAXY_GUARDIANS_PACK.alienVisualCatalog,
+ audioCueCatalog:GALAXY_GUARDIANS_PACK.audioCueCatalog,
+ playerVisualId:'player-interceptor',
  forbiddenAuroraCapabilities:GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES
 });
 
@@ -84,6 +96,7 @@ function createGalaxyGuardiansFormation(){
    id:`gg-${type}-${row}-${col}`,
    type,
    role:spec.role,
+   visualId:spec.visualId,
    row,
    col,
    rackX:x,
@@ -137,7 +150,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   eventVocabulary:GALAXY_GUARDIANS_RUNTIME_PROFILE.eventVocabulary.slice()
  };
  state.rng=guardiansRuntimeRng(seed);
- guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime'});
+ guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime',audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id});
  guardiansRuntimeEvent(state,'formation_entry_settle',{source:'dev-runtime'});
  guardiansRuntimeEvent(state,'formation_rack_complete',{aliens:state.aliens.length});
  return state;
@@ -169,9 +182,11 @@ function startGuardiansDive(state,alien,escortCount=0){
  guardiansRuntimeEvent(state,alien.role==='flagship'?'flagship_dive_start':'alien_dive_start',{
   id:alien.id,
   role:alien.role,
+  visualId:alien.visualId,
+  audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.diveAudioCue||'',
   escorts:escortCount
  });
- if(escortCount>0)guardiansRuntimeEvent(state,'escort_join',{flagship:alien.id,escorts:escortCount});
+ if(escortCount>0)guardiansRuntimeEvent(state,'escort_join',{flagship:alien.id,escorts:escortCount,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.escortJoin.id});
  return alien;
 }
 
@@ -180,7 +195,7 @@ function fireGuardiansPlayerShot(state){
  if(p.shot||p.cooldown>0)return false;
  p.shot={x:p.x,y:p.y-8,vy:-178,active:1};
  p.cooldown=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.singleShotCooldown;
- guardiansRuntimeEvent(state,'player_shot_fired',{x:+p.x.toFixed(2),y:+p.shot.y.toFixed(2)});
+ guardiansRuntimeEvent(state,'player_shot_fired',{x:+p.x.toFixed(2),y:+p.shot.y.toFixed(2),audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.playerShot.id,visualId:GALAXY_GUARDIANS_RUNTIME_PROFILE.playerVisualId});
  return true;
 }
 
@@ -230,7 +245,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    alien.diveT=0;
    alien.x=alien.rackX;
    alien.y=alien.rackY;
-   guardiansRuntimeEvent(state,'enemy_wrap_or_return',{id:alien.id,role:alien.role});
+   guardiansRuntimeEvent(state,'enemy_wrap_or_return',{id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.wrapReturn.id});
   }
  }
  if(p.shot){
@@ -242,7 +257,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
     alien.hp=0;
     const points=guardiansAlienPoints(alien);
     state.score+=points;
-    guardiansRuntimeEvent(state,'player_shot_resolved',{result:'hit',id:alien.id,role:alien.role,points,score:state.score});
+    guardiansRuntimeEvent(state,'player_shot_resolved',{result:'hit',id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.hitAudioCue||'',points,score:state.score});
     resolved=1;
     break;
    }
@@ -274,6 +289,8 @@ function summarizeGalaxyGuardiansRuntime(state){
   liveRoles:counts,
   hasPlayerShot:!!state.player.shot,
   eventTypes:Array.from(new Set(state.events.map(event=>event.type))),
+  visualIds:Array.from(new Set(state.aliens.filter(alien=>alien.hp>0).map(alien=>alien.visualId))),
+  audioCueIds:Array.from(new Set(state.events.map(event=>event.audioCue).filter(Boolean))),
   events:state.events.slice()
  };
 }

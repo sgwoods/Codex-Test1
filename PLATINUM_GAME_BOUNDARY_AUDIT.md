@@ -237,6 +237,10 @@ The first platform boundary slice is now in place:
 - dev-only Galaxy Guardians runtime model with an owned alien catalog, 38-slot
   scout-wave rack, single-shot firing, promoted event emission, and no Aurora
   capture/challenge/dual-fighter state
+- Galaxy Guardians now owns a first visual catalog for flagship, escort, scout,
+  and player interceptor identities plus a separate sound cue catalog for start,
+  formation pulse, single-shot firing, dive pressure, escort joins, hits,
+  wrap/return, and future player loss
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice
@@ -246,7 +250,8 @@ dev-only playable preview:
 
 - extract frame-level formation, dive, flagship, escort, firing, and scoring
   facts from the promoted windows and source videos
-- render the Guardians runtime with owned ship/alien art and audio identity
+- render the Guardians runtime with the owned ship/alien art and audio identity
+  catalogs now present in the pack and dev runtime
 - add life loss, game over, and reset flow without importing Aurora rules
 - convert broad semantic event windows into tighter runtime timing bands
 - add a contract harness that fails if measured Galaxy Guardians state uses

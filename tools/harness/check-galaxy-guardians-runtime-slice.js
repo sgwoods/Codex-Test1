@@ -26,12 +26,21 @@ async function main(){
     }
     const summary = window.summarizeGalaxyGuardiansRuntime(state);
     const playableAdapters = typeof availableGameplayAdapters === 'function' ? availableGameplayAdapters() : {};
+    const pack = window.getGamePack ? window.getGamePack('galaxy-guardians-preview') : null;
+    const visualCatalog = pack?.alienVisualCatalog || {};
+    const audioCueCatalog = pack?.audioCueCatalog || {};
     return {
       profile,
       initial,
       firstShot: !!firstShot,
       secondShotBlocked,
       summary,
+      visualCatalogKeys: Object.keys(visualCatalog),
+      audioCueCatalogKeys: Object.keys(audioCueCatalog),
+      runtimeAlienCatalog: profile?.alienCatalog || {},
+      runtimeVisualCatalogKeys: Object.keys(profile?.visualCatalog || {}),
+      runtimeAudioCueCatalogKeys: Object.keys(profile?.audioCueCatalog || {}),
+      playerVisualId: profile?.playerVisualId || '',
       playableAdapterKeys: Object.keys(playableAdapters),
       forbidden: state.forbiddenAuroraCapabilities,
       hasAuroraState: ['captureRescue','dualFighter','challengeStage','auroraScoring'].some(key => Object.prototype.hasOwnProperty.call(state, key))
@@ -53,6 +62,33 @@ async function main(){
   if(result.initial.liveRoles.flagship !== 2 || result.initial.liveRoles.escort !== 6 || result.initial.liveRoles.scout !== 30){
     fail('Galaxy Guardians runtime rack roles do not match the promoted scout-wave baseline', result);
   }
+  for(const visualId of ['signal-flagship','signal-escort','signal-scout','player-interceptor']){
+    if(!result.visualCatalogKeys.includes(visualId)){
+      fail(`Galaxy Guardians pack is missing owned visual catalog entry ${visualId}`, result);
+    }
+  }
+  for(const cueName of ['gameStart','formationPulse','playerShot','enemyShot','scoutDive','flagshipDive','escortJoin','scoutHit','escortHit','flagshipHit','wrapReturn','playerLoss']){
+    if(!result.audioCueCatalogKeys.includes(cueName)){
+      fail(`Galaxy Guardians pack is missing owned audio cue catalog entry ${cueName}`, result);
+    }
+  }
+  for(const key of ['flagship','escort','scout']){
+    const entry = result.runtimeAlienCatalog[key] || {};
+    if(!entry.visualId || !result.runtimeVisualCatalogKeys.includes(entry.visualId)){
+      fail(`Galaxy Guardians runtime alien ${key} does not map to an owned visual catalog entry`, result);
+    }
+    if(!entry.diveAudioCue || !entry.hitAudioCue){
+      fail(`Galaxy Guardians runtime alien ${key} does not map to owned audio cue ids`, result);
+    }
+  }
+  if(result.playerVisualId !== 'player-interceptor' || !result.runtimeVisualCatalogKeys.includes(result.playerVisualId)){
+    fail('Galaxy Guardians runtime does not expose an owned player visual identity', result);
+  }
+  for(const forbiddenName of ['bee','but','boss','capture','dual','challenge']){
+    if(result.summary.visualIds.some(id => String(id).includes(forbiddenName))){
+      fail(`Galaxy Guardians runtime visual id leaked Aurora-oriented naming: ${forbiddenName}`, result);
+    }
+  }
   if(!result.firstShot || !result.secondShotBlocked){
     fail('Galaxy Guardians runtime did not enforce the single-shot player fire model', result);
   }
@@ -71,11 +107,18 @@ async function main(){
   if(result.summary.gameKey !== 'galaxy-guardians-preview' || result.summary.publicPlayable !== 0 || result.summary.devPlayable !== 1){
     fail('Galaxy Guardians runtime summary does not preserve the dev-only game identity', result);
   }
+  for(const cueId of ['guardians-formation-pulse','guardians-player-single-shot','guardians-scout-dive','guardians-flagship-dive','guardians-escort-join','guardians-wrap-return']){
+    if(!result.summary.audioCueIds.includes(cueId)){
+      fail(`Galaxy Guardians runtime did not emit owned audio cue id ${cueId}`, result);
+    }
+  }
 
   console.log(JSON.stringify({
     ok: true,
     alienCount: result.summary.alienCount,
     liveRoles: result.summary.liveRoles,
+    visualIds: result.summary.visualIds,
+    audioCueIds: result.summary.audioCueIds,
     eventTypes: result.summary.eventTypes,
     score: result.summary.score
   }, null, 2));

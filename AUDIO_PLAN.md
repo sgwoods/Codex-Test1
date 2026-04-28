@@ -138,6 +138,26 @@ Primary family references:
 5. When a `Galaxian`-like sibling pack is introduced, define a separate
    `audioProfile` rather than sharing Aurora’s full palette.
 
+`Galaxy Guardians` now has an initial pack-owned sound cue catalog for the
+preview/runtime slice. It names synthesized starting points for:
+
+- `guardians-start-rise`
+- `guardians-formation-pulse`
+- `guardians-player-single-shot`
+- `guardians-enemy-shot`
+- `guardians-scout-dive`
+- `guardians-flagship-dive`
+- `guardians-escort-join`
+- `guardians-scout-hit`
+- `guardians-escort-hit`
+- `guardians-flagship-hit`
+- `guardians-wrap-return`
+- `guardians-player-loss`
+
+These cues are not final audio assets. They are the first application-owned
+contract that keeps a Galaxian-inspired sibling from silently inheriting
+Aurora's audio identity while the shared Platinum audio engine remains common.
+
 ## Next Implementation Milestone
 
 When we start wiring real sample-backed audio, the first clean platform move

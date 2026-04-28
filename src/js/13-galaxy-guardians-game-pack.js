@@ -41,6 +41,88 @@ const GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
  })
 });
 
+const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
+ 'signal-flagship':Object.freeze({
+  id:'signal-flagship',
+  label:'Signal Flagship',
+  role:'flagship',
+  silhouette:'crowned-command-ship',
+  palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2'}),
+  pixelRows:Object.freeze([
+   '....X....',
+   '...XXX...',
+   '..XXXXX..',
+   '.XX.X.XX.',
+   'XXXXXXXXX',
+   'X.XXXXX.X',
+   '..X...X..'
+  ]),
+  notes:'Wide crowned command silhouette for flagship-with-escort dives; intentionally not an Aurora boss/capture ship.'
+ }),
+ 'signal-escort':Object.freeze({
+  id:'signal-escort',
+  label:'Signal Escort',
+  role:'escort',
+  silhouette:'red-arrow-escort',
+  palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff'}),
+  pixelRows:Object.freeze([
+   '..X.X..',
+   '.XXXXX.',
+   'XXX.XXX',
+   '.XXXXX.',
+   'X.X.X.X',
+   '..X.X..'
+  ]),
+  notes:'Small red escort marker for paired flagship pressure rather than Aurora butterfly behavior.'
+ }),
+ 'signal-scout':Object.freeze({
+  id:'signal-scout',
+  label:'Signal Scout',
+  role:'scout',
+  silhouette:'cyan-wing-scout',
+  palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff'}),
+  pixelRows:Object.freeze([
+   '...X...',
+   '.X.X.X.',
+   'XXXXXXX',
+   '..XXX..',
+   '.X.X.X.',
+   'X.....X'
+  ]),
+  notes:'Cyan-green rank-and-file scout for sparse Galaxian-like solo dives.'
+ }),
+ 'player-interceptor':Object.freeze({
+  id:'player-interceptor',
+  label:'Guardian Interceptor',
+  role:'player',
+  silhouette:'single-shot-interceptor',
+  palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',flare:'#ff5b5b'}),
+  pixelRows:Object.freeze([
+   '...X...',
+   '..XXX..',
+   '.XXXXX.',
+   'XXX.XXX',
+   '..X.X..'
+  ]),
+  notes:'Single-fighter player craft sized for one-shot precision; no Aurora dual-fighter silhouette.'
+ })
+});
+
+const GUARDIANS_AUDIO_CUE_CATALOG=Object.freeze({
+ gameStart:Object.freeze({id:'guardians-start-rise',event:'game_start',profile:'ascending-square-signal',referenceIntent:'brief cabinet start chirp, not Aurora opening theme'}),
+ formationPulse:Object.freeze({id:'guardians-formation-pulse',event:'formation_entry_start',profile:'thin-rack-pulse',referenceIntent:'sparse Galaxian rack energy'}),
+ playerShot:Object.freeze({id:'guardians-player-single-shot',event:'player_shot_fired',profile:'short-high-square-zap',referenceIntent:'single-shot precision cue'}),
+ enemyShot:Object.freeze({id:'guardians-enemy-shot',event:'enemy_shot',profile:'low-descending-square',referenceIntent:'separate alien shot tick'}),
+ scoutDive:Object.freeze({id:'guardians-scout-dive',event:'alien_dive_start',profile:'two-step-siren-dip',referenceIntent:'solo scout dive pressure'}),
+ flagshipDive:Object.freeze({id:'guardians-flagship-dive',event:'flagship_dive_start',profile:'longer-command-siren',referenceIntent:'flagship dive with escort warning'}),
+ escortJoin:Object.freeze({id:'guardians-escort-join',event:'escort_join',profile:'paired-red-escort-clicks',referenceIntent:'escort attachment cue'}),
+ scoutHit:Object.freeze({id:'guardians-scout-hit',event:'player_shot_resolved',profile:'tight-green-pop',referenceIntent:'small alien hit'}),
+ escortHit:Object.freeze({id:'guardians-escort-hit',event:'player_shot_resolved',profile:'red-blue-snap',referenceIntent:'escort hit'}),
+ flagshipHit:Object.freeze({id:'guardians-flagship-hit',event:'player_shot_resolved',profile:'gold-command-break',referenceIntent:'flagship hit / score moment'}),
+ wrapReturn:Object.freeze({id:'guardians-wrap-return',event:'enemy_wrap_or_return',profile:'soft-bottom-return-sweep',referenceIntent:'bottom-exit or return warning'}),
+ playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'future life-loss cue'})
+});
+
 const GUARDIANS_AUDIO_THEMES=Object.freeze({
  'guardians-signal':Object.freeze({
   id:'guardians-signal',
@@ -160,6 +242,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   milestones:Object.freeze([
    Object.freeze({label:'Pack identity and shell preview',state:'online'}),
    Object.freeze({label:'Reference footage and movement map',state:'next'}),
+   Object.freeze({label:'Visual and audio identity catalog',state:'online'}),
    Object.freeze({label:'Minimal scout-wave playable slice',state:'planned'}),
    Object.freeze({label:'Application-owned scoring harness',state:'planned'})
   ]),
@@ -183,6 +266,8 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  }),
  atmosphereThemes:GUARDIANS_ATMOSPHERE_THEMES,
  audioThemes:GUARDIANS_AUDIO_THEMES,
+ alienVisualCatalog:GUARDIANS_ALIEN_VISUAL_CATALOG,
+ audioCueCatalog:GUARDIANS_AUDIO_CUE_CATALOG,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,

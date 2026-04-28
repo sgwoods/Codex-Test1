@@ -181,10 +181,12 @@ Pack-boundary harness:
 - `tools/harness/check-galaxy-guardians-runtime-slice.js`
   verifies the dev-only Galaxy Guardians scout-wave runtime model: 38-slot rack,
   flagship/escort/scout roles, single-shot firing, promoted event emission,
-  Guardians-owned scoring, and no Aurora capture/challenge/dual-fighter state.
+  Guardians-owned scoring, Guardians-owned visual/audio catalog bindings, and
+  no Aurora capture/challenge/dual-fighter state.
 - `tools/harness/check-compact-cabinet-rails.js`
   verifies that both side-frame icon rails remain visible and inside the
-  cabinet frame at the compact in-app browser scale.
+  cabinet frame at the compact in-app browser scale, and that the Galaxy
+  Guardians preview modal stays readable in that compact layout.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does
