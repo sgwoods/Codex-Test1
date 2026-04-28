@@ -1,4 +1,30 @@
-// Render orchestration for the active Aurora scene.
+// Platform render orchestration for the active game board.
+const GAME_BOARD_RENDERERS=Object.create(null);
+
+function registerGameBoardRenderer(gameKey,renderer){
+ const key=String(gameKey||'').trim();
+ if(!key||!renderer||typeof renderer.draw!=='function')return null;
+ GAME_BOARD_RENDERERS[key]=Object.freeze({
+  gameKey:key,
+  label:renderer.label||key,
+  previewOnly:!!renderer.previewOnly,
+  canDraw:typeof renderer.canDraw==='function'?renderer.canDraw:()=>true,
+  draw:renderer.draw
+ });
+ return GAME_BOARD_RENDERERS[key];
+}
+
+function availableGameBoardRenderers(){
+ return GAME_BOARD_RENDERERS;
+}
+
+function currentGameBoardRenderer(){
+ const key=typeof currentGamePackKey==='function'?currentGamePackKey():DEFAULT_GAME_PACK_KEY;
+ const candidate=GAME_BOARD_RENDERERS[key];
+ if(candidate&&candidate.canDraw())return candidate;
+ return GAME_BOARD_RENDERERS[DEFAULT_GAME_PACK_KEY]||null;
+}
+
 function draw(){
  const sh=S.shake*8,dx=auxRnd(sh,-sh),dy=auxRnd(sh,-sh);
  const compactCabinet=innerWidth<1500||innerHeight<980;
@@ -31,16 +57,19 @@ function draw(){
 
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,
-  shellPadL,shellPadT,shellPadR,shellPadB,railLeft,railTop,railW,railH,
+ shellPadL,shellPadT,shellPadR,shellPadB,railLeft,railTop,railW,railH,
   waitScoreOverlay,framedOverlayOpen
  });
- const guardiansPreviewReady=typeof shouldDrawGalaxyGuardiansPreviewBoard==='function'
-  && shouldDrawGalaxyGuardiansPreviewBoard();
- const guardiansPreviewPlayable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();
- if(guardiansPreviewReady&&(!started||!guardiansPreviewPlayable)){
-  drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy});
+ const boardRenderer=currentGameBoardRenderer();
+ if(boardRenderer){
+  if(window.__platinumRenderDebug)window.__platinumRenderDebug.boardRendererKey=boardRenderer.gameKey;
+  boardRenderer.draw({ox,oy,scale,dx,dy});
  }else{
-  drawAuroraBoard({ox,oy,scale,dx,dy});
+  throw new Error('No Platinum game board renderer is registered.');
  }
  syncHudAndShellMessages({ox,oy,viewW,viewH});
 }
+
+window.registerGameBoardRenderer=registerGameBoardRenderer;
+window.availableGameBoardRenderers=availableGameBoardRenderers;
+window.currentGameBoardRenderer=currentGameBoardRenderer;

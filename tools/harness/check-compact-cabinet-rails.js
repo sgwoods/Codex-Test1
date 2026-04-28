@@ -21,7 +21,7 @@ async function main(){
     seed: 673810,
     viewport: { width: 673, height: 810 }
   }, async ({ page }) => page.evaluate(() => {
-    if(typeof window.__galagaHarness__?.redraw === 'function') window.__galagaHarness__.redraw();
+    if(typeof window.__platinumHarness__?.redraw === 'function') window.__platinumHarness__.redraw();
     const rectFor = id => {
       const el = document.getElementById(id);
       if(!el) return null;
@@ -54,8 +54,8 @@ async function main(){
     if(typeof installGamePack === 'function') installGamePack('galaxy-guardians-preview');
     if(typeof openGamePreview === 'function') openGamePreview();
     if(typeof resetGalaxyGuardiansPreviewRenderState === 'function') resetGalaxyGuardiansPreviewRenderState(1979);
-    if(typeof window.__galagaHarness__?.redraw === 'function'){
-      for(let i = 0; i < 16; i++) window.__galagaHarness__.redraw();
+    if(typeof window.__platinumHarness__?.redraw === 'function'){
+      for(let i = 0; i < 16; i++) window.__platinumHarness__.redraw();
     }
     const canvas = document.getElementById('c');
     const canvasCtx = canvas.getContext('2d');
@@ -111,7 +111,12 @@ async function main(){
         packKey: typeof currentGamePackKey === 'function' ? currentGamePackKey() : '',
         shouldDraw: typeof shouldDrawGalaxyGuardiansPreviewBoard === 'function' ? shouldDrawGalaxyGuardiansPreviewBoard() : null,
         started: typeof started === 'undefined' ? null : !!started,
+        rendererKeys: typeof availableGameBoardRenderers === 'function' ? Object.keys(availableGameBoardRenderers()) : [],
+        renderer: typeof currentGameBoardRenderer === 'function' ? currentGameBoardRenderer()?.gameKey || '' : '',
+        rendererPreviewOnly: typeof currentGameBoardRenderer === 'function' ? !!currentGameBoardRenderer()?.previewOnly : null,
+        platinumHarnessAlias: window.__platinumHarness__ === window.__galagaHarness__,
         renderDebug: Object.assign({}, window.__galaxyGuardiansPreviewRenderDebug || {}),
+        platinumRenderDebug: Object.assign({}, window.__platinumRenderDebug || {}),
         palette,
         playable: typeof currentGamePackHasPlayableAdapter === 'function' ? currentGamePackHasPlayableAdapter() : null
       }
@@ -151,6 +156,18 @@ async function main(){
   }
   if(result.preview.playable !== false){
     fail('Galaxy Guardians preview renderer made the preview pack look playable through an adapter', result);
+  }
+  if(!result.preview.rendererKeys.includes('aurora-galactica') || !result.preview.rendererKeys.includes('galaxy-guardians-preview')){
+    fail('Compact harness could not see both registered game board renderers', result);
+  }
+  if(result.preview.platinumHarnessAlias !== true){
+    fail('Platinum harness alias is not wired to the legacy Galaga harness object', result);
+  }
+  if(result.preview.renderer !== 'galaxy-guardians-preview' || result.preview.rendererPreviewOnly !== true){
+    fail('Galaxy Guardians preview did not route through its registered preview-only board renderer', result);
+  }
+  if(result.preview.platinumRenderDebug.boardRendererKey !== 'galaxy-guardians-preview'){
+    fail('Platinum render debug did not record the Galaxy Guardians renderer key', result);
   }
   if(result.preview.renderDebug.renderMode !== 'galaxy-guardians-dev-preview'){
     fail('Galaxy Guardians preview renderer did not claim the compact preview board', result);
@@ -197,6 +214,7 @@ async function main(){
       bodyColumns: result.preview.body.gridTemplateColumns,
       copy: result.preview.copy,
       milestoneCount: result.preview.milestones.length,
+      renderer: result.preview.renderer,
       renderMode: result.preview.renderDebug.renderMode,
       visualIds: result.preview.renderDebug.visualIds,
       audioCueIds: result.preview.renderDebug.audioCueIds,

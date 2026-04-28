@@ -1334,6 +1334,7 @@ window.__galagaHarness__={
   return true;
  }
 };
+window.__platinumHarness__=window.__galagaHarness__;
 
 setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
 let runtimeLoopFault=null;

@@ -222,7 +222,10 @@ The runtime model now has a visible dev-only preview renderer. It draws the
 Guardians scout-wave board, single player shot, alien silhouettes, and preview
 HUD from Guardians-owned runtime state and catalog IDs while keeping the pack
 non-playable. The compact cabinet harness verifies the renderer by checking the
-preview mode, visual IDs, audio cue IDs, and distinct signal palette.
+preview mode, registered renderer key, visual IDs, audio cue IDs, and distinct
+signal palette. The renderer is now registered through a Platinum game-board
+renderer registry, so the top-level render loop no longer branches on a
+specific game by name.
 
 The next application proof is turning that runtime model into a dev-only
 playable slice that includes:

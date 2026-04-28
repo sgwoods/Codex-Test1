@@ -126,6 +126,7 @@ Current files:
 - `src/js/10-gameplay.js`
 - `src/js/20-render.js`
 - `src/js/21-render-board.js`
+- `src/js/22-galaxy-guardians-preview-renderer.js`
 
 Current status:
 
@@ -134,11 +135,17 @@ Current status:
 - they are safe while Aurora is the only playable pack
 - they should not become the hidden runtime for a playable Galaxy Guardians
   slice
+- board rendering now has a Platinum registry and dispatch seam:
+  `src/js/20-render.js` is game-agnostic orchestration, while Aurora and
+  Galaxy Guardians register their own board renderers from application-owned
+  files
 
 Required direction:
 
 - introduce a gameplay adapter boundary before a second playable ruleset ships
 - let Platinum call the active game's adapter through a stable interface
+- keep the renderer registry as the model for additional game-facing platform
+  extension points
 - keep Aurora capture/rescue, dual fighter, challenge-stage behavior, and
   Aurora scoring in the Aurora adapter
 - keep Galaxy Guardians scout-wave, flagship, escort, single-shot, dive, and
@@ -192,6 +199,8 @@ Current status:
 - contains both platform-facing hooks and Aurora-specific gameplay controls
 - still uses Aurora-shaped capture, challenge, rescue, and dual-fighter setup
   helpers
+- exposes `window.__platinumHarness__` as the forward-compatible platform alias
+  for the legacy `window.__galagaHarness__` object
 
 Required direction:
 
@@ -244,6 +253,11 @@ The first platform boundary slice is now in place:
 - visible dev-only Galaxy Guardians preview renderer that draws the owned
   scout-wave runtime, visual catalog IDs, audio cue IDs, and preview HUD while
   keeping the pack non-playable
+- Platinum game-board renderer registry so `draw()` no longer branches on
+  Aurora or Galaxy Guardians by name
+- static renderer-boundary harness and compact runtime harness coverage for
+  game-board renderer registration, renderer dispatch, preview-only state, and
+  the `__platinumHarness__` compatibility alias
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice

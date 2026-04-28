@@ -61,6 +61,8 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-gameplay-adapter-registry.js`
 - shared shell rendering:
   - `/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js`
+- shared game-board renderer registry and dispatch:
+  - `/Users/steven/Documents/Codex-Test1/src/js/20-render.js`
 - harness hooks and deterministic controls:
   - `/Users/steven/Documents/Codex-Test1/src/js/90-harness.js`
 
@@ -88,10 +90,10 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-gameplay-adapter.js`
 - shared entity model used by packs:
   - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
-- Aurora render orchestration:
-  - `/Users/steven/Documents/Codex-Test1/src/js/20-render.js`
 - Aurora board and sprite rendering:
   - `/Users/steven/Documents/Codex-Test1/src/js/21-render-board.js`
+- Galaxy Guardians dev-only preview board rendering:
+  - `/Users/steven/Documents/Codex-Test1/src/js/22-galaxy-guardians-preview-renderer.js`
 
 ## Build And Hosted Docs Flow
 
@@ -188,8 +190,12 @@ Pack-boundary harness:
   cabinet frame at the compact in-app browser scale, and that the Galaxy
   Guardians preview modal stays readable in that compact layout. It also
   verifies the dev-only Guardians preview renderer by checking its render mode,
-  visual catalog IDs, audio cue IDs, signal palette, and non-playable adapter
-  state.
+  registered renderer key, visual catalog IDs, audio cue IDs, signal palette,
+  Platinum harness alias, and non-playable adapter state.
+- `tools/harness/check-platinum-renderer-boundaries.js`
+  verifies statically that platform render orchestration is game-agnostic,
+  board renderers register themselves through the Platinum renderer registry,
+  and the Galaxy Guardians renderer remains preview-only and adapter-gated.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

@@ -439,3 +439,8 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
 }
+
+registerGameBoardRenderer(AURORA_GAME_PACK.metadata.gameKey,{
+ label:'Aurora Galactica board renderer',
+ draw:drawAuroraBoard
+});

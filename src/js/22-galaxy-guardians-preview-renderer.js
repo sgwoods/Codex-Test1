@@ -195,3 +195,13 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
 window.shouldDrawGalaxyGuardiansPreviewBoard=shouldDrawGalaxyGuardiansPreviewBoard;
 window.resetGalaxyGuardiansPreviewRenderState=resetGalaxyGuardiansPreviewRenderState;
 window.drawGalaxyGuardiansPreviewBoard=drawGalaxyGuardiansPreviewBoard;
+
+registerGameBoardRenderer(GALAXY_GUARDIANS_PACK.metadata.gameKey,{
+ label:'Galaxy Guardians dev preview board renderer',
+ previewOnly:true,
+ canDraw(){
+  const playable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();
+  return shouldDrawGalaxyGuardiansPreviewBoard()&&(!started||!playable);
+ },
+ draw:drawGalaxyGuardiansPreviewBoard
+});
