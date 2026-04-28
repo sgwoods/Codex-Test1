@@ -213,7 +213,7 @@ mask:
 #feedbackPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #platformSplashPanel,#gamePreviewPanel,#gamePickerPanel{display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #platformSplashBody,#gamePreviewBody{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:18px;align-items:center}
-#platformSplashImage,#gamePreviewImage{display:block;width:100%;height:auto;object-fit:contain;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.62);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+#platformSplashImage,#gamePreviewImage{display:block;width:100%;height:auto;object-fit:contain;box-sizing:border-box;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.62);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
 #platformSplashCopy,#gamePreviewCopy{display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:#e8f4ff}
 .platformSplashEyebrow{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#7ef2ff}
 #gamePreviewBanner{display:inline-flex;align-self:flex-start;padding:4px 8px;border:1px solid rgba(255,216,109,.64);background:rgba(60,44,8,.76);font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#ffe39a}
@@ -222,6 +222,23 @@ mask:
 #gamePreviewMilestones{display:grid;gap:6px;margin-top:2px}
 .gamePreviewMilestone{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(136,245,255,.14);background:rgba(8,18,35,.62);padding:7px 9px;font:400 11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff}
 .gamePreviewMilestone b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#ffe39a}
+@media (max-width:980px),(max-height:800px){
+ #gamePreviewPanel{gap:10px;padding:12px 14px}
+ #gamePreviewHead{align-items:flex-start;gap:10px}
+ #gamePreviewHead h2{font-size:22px;line-height:1.05;letter-spacing:.02em}
+ #gamePreviewSubtitle{font-size:11px;line-height:1.25;letter-spacing:.08em}
+ #gamePreviewClose{flex:0 0 auto;width:36px;height:36px}
+ #gamePreviewBody{grid-template-columns:1fr;gap:10px;align-items:stretch}
+ #gamePreviewImage{height:72px;max-height:72px;object-fit:contain}
+ #gamePreviewCopy{gap:6px;font-size:11px;line-height:1.24}
+ #gamePreviewSummary,#gamePreviewDetail{margin:0}
+ #gamePreviewHighlights{grid-template-columns:1fr;gap:5px}
+ #gamePreviewHighlights span{padding:3px 6px;line-height:1.2}
+ #gamePreviewMilestones{gap:4px}
+ .gamePreviewMilestone{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:5px 7px;font-size:10px;line-height:1.15}
+ .gamePreviewMilestone span{min-width:0;overflow-wrap:anywhere}
+ .gamePreviewMilestone b{justify-self:end;white-space:nowrap;font-size:9px;letter-spacing:.08em}
+}
 #feedbackPanel h2{margin:0;font-size:20px;letter-spacing:.03em}
 #feedbackPanel label{display:block;margin:8px 0 5px;font-size:14px;color:#bfefff}
 #feedbackForm{display:flex;flex-direction:column;min-height:0}
