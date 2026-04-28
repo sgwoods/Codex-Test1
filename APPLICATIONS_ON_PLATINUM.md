@@ -47,6 +47,9 @@ Right now it proves:
   tables that do not directly borrow Aurora tables
 - a disabled, evidence-gated gameplay adapter skeleton with its own initial
   state shape
+- a dev-only visible preview board renderer that drives the Guardians-owned
+  scout-wave runtime, visual catalog, and audio cue catalog without registering
+  a playable adapter
 - a source-manifested Galaxian reference profile with three local source videos,
   contact sheets, and waveforms
 - safe fallback to `Aurora Galactica` when a player tries to launch gameplay
@@ -214,6 +217,12 @@ fire, enemy shot, scout/flagship dive pressure, escort join, hit cues,
 wrap/return cue, and future player-loss cue. These are still synthesized
 starting points, but they give the 0.1 slice separate application-owned
 contracts before any public playability.
+
+The runtime model now has a visible dev-only preview renderer. It draws the
+Guardians scout-wave board, single player shot, alien silhouettes, and preview
+HUD from Guardians-owned runtime state and catalog IDs while keeping the pack
+non-playable. The compact cabinet harness verifies the renderer by checking the
+preview mode, visual IDs, audio cue IDs, and distinct signal palette.
 
 The next application proof is turning that runtime model into a dev-only
 playable slice that includes:

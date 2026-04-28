@@ -241,18 +241,21 @@ The first platform boundary slice is now in place:
   and player interceptor identities plus a separate sound cue catalog for start,
   formation pulse, single-shot firing, dive pressure, escort joins, hits,
   wrap/return, and future player loss
+- visible dev-only Galaxy Guardians preview renderer that draws the owned
+  scout-wave runtime, visual catalog IDs, audio cue IDs, and preview HUD while
+  keeping the pack non-playable
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice
 
-The next implementation slice should refine the dev runtime into a visible
+The next implementation slice should refine the visible dev runtime into a
 dev-only playable preview:
 
 - extract frame-level formation, dive, flagship, escort, firing, and scoring
   facts from the promoted windows and source videos
-- render the Guardians runtime with the owned ship/alien art and audio identity
-  catalogs now present in the pack and dev runtime
 - add life loss, game over, and reset flow without importing Aurora rules
+- route player input into the Guardians runtime behind an explicit dev-only
+  playable-preview gate while keeping the public pack non-playable
 - convert broad semantic event windows into tighter runtime timing bands
 - add a contract harness that fails if measured Galaxy Guardians state uses
   Aurora capture, challenge, dual-fighter, or scoring functions by default

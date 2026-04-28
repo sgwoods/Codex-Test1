@@ -186,7 +186,10 @@ Pack-boundary harness:
 - `tools/harness/check-compact-cabinet-rails.js`
   verifies that both side-frame icon rails remain visible and inside the
   cabinet frame at the compact in-app browser scale, and that the Galaxy
-  Guardians preview modal stays readable in that compact layout.
+  Guardians preview modal stays readable in that compact layout. It also
+  verifies the dev-only Guardians preview renderer by checking its render mode,
+  visual catalog IDs, audio cue IDs, signal palette, and non-playable adapter
+  state.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

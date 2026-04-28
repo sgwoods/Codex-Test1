@@ -34,6 +34,13 @@ function draw(){
   shellPadL,shellPadT,shellPadR,shellPadB,railLeft,railTop,railW,railH,
   waitScoreOverlay,framedOverlayOpen
  });
- drawAuroraBoard({ox,oy,scale,dx,dy});
+ const guardiansPreviewReady=typeof shouldDrawGalaxyGuardiansPreviewBoard==='function'
+  && shouldDrawGalaxyGuardiansPreviewBoard();
+ const guardiansPreviewPlayable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();
+ if(guardiansPreviewReady&&(!started||!guardiansPreviewPlayable)){
+  drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy});
+ }else{
+  drawAuroraBoard({ox,oy,scale,dx,dy});
+ }
  syncHudAndShellMessages({ox,oy,viewW,viewH});
 }
