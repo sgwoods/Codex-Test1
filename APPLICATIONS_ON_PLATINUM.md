@@ -47,6 +47,11 @@ Right now it proves:
   tables that do not directly borrow Aurora tables
 - a disabled, evidence-gated gameplay adapter skeleton with its own initial
   state shape
+- a dev-only visible preview board renderer that drives the Guardians-owned
+  scout-wave runtime, visual catalog, and audio cue catalog without registering
+  a playable adapter
+- a source-manifested Galaxian reference profile with three local source videos,
+  contact sheets, and waveforms
 - safe fallback to `Aurora Galactica` when a player tries to launch gameplay
 
 It does not yet prove:
@@ -121,10 +126,11 @@ The boundary is real, but these coupling areas still deserve attention:
 The current second-game preview is safe because it is not playable, and its
 preview pack now owns placeholder data instead of borrowing Aurora-owned tables.
 It also has no public gameplay adapter, so it cannot start through Aurora's
-gameplay implementation by accident. Its disabled adapter skeleton records the
-first state-shape contract for the future scout-wave slice, but a playable
-Galaxy Guardians slice still needs measured, game-specific pack data and its own
-registered adapter, with any true common behavior promoted into Platinum.
+gameplay implementation by accident. Its disabled adapter skeleton now cites the
+first source-manifested Galaxian profile and a promoted reviewed event log for
+the future scout-wave slice, but a playable Galaxy Guardians slice still needs
+frame-level timing, measured game-specific pack data, and its own registered
+adapter, with any true common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
@@ -197,7 +203,32 @@ The current sneak peek is intentionally still non-playable. It should be used to
 keep the Platinum pack contract honest while the second game is still being
 specified.
 
-The best next application proof is a dev-only playable slice that includes:
+The first dev-only runtime slice is now underway as an application-owned model,
+not a public adapter. It creates a Galaxian-inspired scout-wave rack, enforces
+single-shot firing, emits promoted event names, scores against a Guardians-owned
+alien catalog, and keeps Aurora capture, challenge, dual-fighter, and scoring
+state out of the model.
+
+Galaxy Guardians also now owns its first identity catalogs rather than borrowing
+Aurora's look or sound names. The visual catalog names the `Signal Flagship`,
+`Signal Escort`, `Signal Scout`, and `Guardian Interceptor` silhouettes. The
+audio cue catalog names the start chirp, formation pulse, single-shot player
+fire, enemy shot, scout/flagship dive pressure, escort join, hit cues,
+wrap/return cue, and future player-loss cue. These are still synthesized
+starting points, but they give the 0.1 slice separate application-owned
+contracts before any public playability.
+
+The runtime model now has a visible dev-only preview renderer. It draws the
+Guardians scout-wave board, single player shot, alien silhouettes, and preview
+HUD from Guardians-owned runtime state and catalog IDs while keeping the pack
+non-playable. The compact cabinet harness verifies the renderer by checking the
+preview mode, registered renderer key, visual IDs, audio cue IDs, and distinct
+signal palette. The renderer is now registered through a Platinum game-board
+renderer registry, so the top-level render loop no longer branches on a
+specific game by name.
+
+The next application proof is turning that runtime model into a dev-only
+playable slice that includes:
 
 - formation rack
 - dives
@@ -209,14 +240,16 @@ The best next application proof is a dev-only playable slice that includes:
 
 That is enough to test the platform without prematurely shipping a second game.
 
-Before that slice starts, capture the reference evidence needed for a Galaxian-
-style ruleset:
+Before the slice becomes playable, refine the existing Galaxian evidence into
+runtime-ready rules:
 
-- preserved gameplay clips
-- formation-entry and dive timing notes
-- flagship and escort behavior notes
+- frame-level formation-entry and dive timing bands
+- flagship and escort behavior windows
 - scoring table and single-shot constraints
-- a small harness plan for the first scout-wave slice
+- an application-owned harness plan for the first scout-wave slice
+- visual/audio identity notes that are distinct from Aurora, with the current
+  catalog entries refined by frame-level and waveform evidence before public
+  playability
 
 Use the reusable ingestion process in:
 

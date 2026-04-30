@@ -61,6 +61,8 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-gameplay-adapter-registry.js`
 - shared shell rendering:
   - `/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js`
+- shared game-board renderer registry and dispatch:
+  - `/Users/steven/Documents/Codex-Test1/src/js/20-render.js`
 - harness hooks and deterministic controls:
   - `/Users/steven/Documents/Codex-Test1/src/js/90-harness.js`
 
@@ -88,10 +90,10 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-gameplay-adapter.js`
 - shared entity model used by packs:
   - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
-- Aurora render orchestration:
-  - `/Users/steven/Documents/Codex-Test1/src/js/20-render.js`
 - Aurora board and sprite rendering:
   - `/Users/steven/Documents/Codex-Test1/src/js/21-render-board.js`
+- Galaxy Guardians dev-only preview board rendering:
+  - `/Users/steven/Documents/Codex-Test1/src/js/22-galaxy-guardians-preview-renderer.js`
 
 ## Build And Hosted Docs Flow
 
@@ -159,18 +161,41 @@ Harness families should now be thought of in categories:
 
 Pack-boundary harness:
 
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-pack-registry-boundaries.js`
+- `tools/harness/check-pack-registry-boundaries.js`
   verifies that the Galaxy Guardians preview pack owns separate placeholder
   tables, stays non-playable, and does not inherit Aurora challenge cadence,
   challenge layout, or reference timings.
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-gameplay-adapter-boundaries.js`
+- `tools/harness/check-gameplay-adapter-boundaries.js`
   verifies that Aurora is the only registered gameplay adapter, Galaxy
   Guardians cannot start gameplay without its own adapter, and preview launch
   fallback starts through the Aurora adapter.
-- `/Users/steven/Documents/Codex-Test1/tools/harness/check-guardians-adapter-skeleton.js`
+- `tools/harness/check-guardians-adapter-skeleton.js`
   verifies that the Galaxy Guardians skeleton exists, stays disabled, exposes a
-  single-shot scout-wave state shape, and fails closed until measured evidence
-  exists.
+  single-shot scout-wave state shape, cites the promoted event log, and fails
+  closed until measured runtime implementation exists.
+- `tools/harness/build-galaxian-reference-profile.js`
+  probes the local Galaxian videos and generates source manifests, contact
+  sheets, waveforms, the initial measured profile, and the promoted reviewed
+  event log used by the disabled Galaxy Guardians skeleton.
+- `tools/harness/check-galaxian-reference-profile.js`
+  verifies that the generated Galaxian profile has the expected source roles,
+  artifacts, promoted event targets, and first-slice scout-wave baseline.
+- `tools/harness/check-galaxy-guardians-runtime-slice.js`
+  verifies the dev-only Galaxy Guardians scout-wave runtime model: 38-slot rack,
+  flagship/escort/scout roles, single-shot firing, promoted event emission,
+  Guardians-owned scoring, Guardians-owned visual/audio catalog bindings, and
+  no Aurora capture/challenge/dual-fighter state.
+- `tools/harness/check-compact-cabinet-rails.js`
+  verifies that both side-frame icon rails remain visible and inside the
+  cabinet frame at the compact in-app browser scale, and that the Galaxy
+  Guardians preview modal stays readable in that compact layout. It also
+  verifies the dev-only Guardians preview renderer by checking its render mode,
+  registered renderer key, visual catalog IDs, audio cue IDs, signal palette,
+  Platinum harness alias, and non-playable adapter state.
+- `tools/harness/check-platinum-renderer-boundaries.js`
+  verifies statically that platform render orchestration is game-agnostic,
+  board renderers register themselves through the Platinum renderer registry,
+  and the Galaxy Guardians renderer remains preview-only and adapter-gated.
 
 Application/gameplay harnesses must stay game-owned. A harness that proves
 Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does

@@ -51,6 +51,8 @@ What is not yet ready for a playable second game:
   gameplay adapter
 - Galaxy Guardians now has a disabled adapter skeleton that is evidence-gated
   and not registered as playable
+- the skeleton now cites a three-source Galaxian reference profile with contact
+  sheets, waveforms, and a promoted reviewed event log
 - the Galaxy Guardians preview pack now owns placeholder atmosphere, audio,
   timing, stage cadence, stage band, formation, challenge, frame accent, and
   scoring tables while it remains non-playable
@@ -84,7 +86,8 @@ Current status:
   `GALAXY_GUARDIANS_PACK`
 - `src/js/13-galaxy-guardians-gameplay-adapter.js` stores a disabled
   Galaxy Guardians adapter skeleton with a single-shot scout-wave state shape
-  and explicit Aurora-capability exclusions
+  and explicit Aurora-capability exclusions; it cites
+  `reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json`
 - `src/js/13-game-pack-registry.js` exposes shared pack registry functions and
   active-pack runtime helpers
 - `src/js/13-gameplay-adapter-registry.js` exposes shared gameplay adapter
@@ -97,6 +100,9 @@ Current status:
 - `npm run harness:check:guardians-adapter-skeleton` verifies that the disabled
   skeleton exists, fails closed, and does not carry Aurora capture, dual,
   challenge, scoring, or enemy-family state
+- `npm run harness:build:galaxian-reference-profile` and
+  `npm run harness:check:galaxian-reference-profile` generate and verify the
+  first source-manifested Galaxian profile used by the skeleton
 
 Required direction:
 
@@ -120,6 +126,7 @@ Current files:
 - `src/js/10-gameplay.js`
 - `src/js/20-render.js`
 - `src/js/21-render-board.js`
+- `src/js/22-galaxy-guardians-preview-renderer.js`
 
 Current status:
 
@@ -128,11 +135,17 @@ Current status:
 - they are safe while Aurora is the only playable pack
 - they should not become the hidden runtime for a playable Galaxy Guardians
   slice
+- board rendering now has a Platinum registry and dispatch seam:
+  `src/js/20-render.js` is game-agnostic orchestration, while Aurora and
+  Galaxy Guardians register their own board renderers from application-owned
+  files
 
 Required direction:
 
 - introduce a gameplay adapter boundary before a second playable ruleset ships
 - let Platinum call the active game's adapter through a stable interface
+- keep the renderer registry as the model for additional game-facing platform
+  extension points
 - keep Aurora capture/rescue, dual fighter, challenge-stage behavior, and
   Aurora scoring in the Aurora adapter
 - keep Galaxy Guardians scout-wave, flagship, escort, single-shot, dive, and
@@ -186,6 +199,8 @@ Current status:
 - contains both platform-facing hooks and Aurora-specific gameplay controls
 - still uses Aurora-shaped capture, challenge, rescue, and dual-fighter setup
   helpers
+- exposes `window.__platinumHarness__` as the forward-compatible platform alias
+  for the legacy `window.__galagaHarness__` object
 
 Required direction:
 
@@ -223,20 +238,38 @@ The first platform boundary slice is now in place:
 - gameplay adapter boundary harness proving Galaxy Guardians preview falls back
   to Aurora instead of routing through Aurora directly
 - disabled Galaxy Guardians adapter skeleton with a first scout-wave state
-  contract and evidence gate
+  contract, source-manifested Galaxian profile, and evidence gate
 - Guardians adapter skeleton harness proving the disabled skeleton cannot start
   gameplay and does not include Aurora-only state
+- Galaxian source profile builder/checker for the three local reference videos,
+  including contact sheets, waveform artifacts, and promoted event windows
+- dev-only Galaxy Guardians runtime model with an owned alien catalog, 38-slot
+  scout-wave rack, single-shot firing, promoted event emission, and no Aurora
+  capture/challenge/dual-fighter state
+- Galaxy Guardians now owns a first visual catalog for flagship, escort, scout,
+  and player interceptor identities plus a separate sound cue catalog for start,
+  formation pulse, single-shot firing, dive pressure, escort joins, hits,
+  wrap/return, and future player loss
+- visible dev-only Galaxy Guardians preview renderer that draws the owned
+  scout-wave runtime, visual catalog IDs, audio cue IDs, and preview HUD while
+  keeping the pack non-playable
+- Platinum game-board renderer registry so `draw()` no longer branches on
+  Aurora or Galaxy Guardians by name
+- static renderer-boundary harness and compact runtime harness coverage for
+  game-board renderer registration, renderer dispatch, preview-only state, and
+  the `__platinumHarness__` compatibility alias
 - architecture docs updated after the split
 
 ## Recommended Next Code Slice
 
-The next implementation slice should feed measured Galaxian reference data into
-the disabled Galaxy Guardians adapter skeleton:
+The next implementation slice should refine the visible dev runtime into a
+dev-only playable preview:
 
-- extract the first scout-wave formation, dive, flagship, escort, firing, and
-  scoring facts from the promoted Galaxian references
-- replace placeholder skeleton profile values with measured values and source
-  artifact links
-- add a semantic event vocabulary for the skeleton state transitions
+- extract frame-level formation, dive, flagship, escort, firing, and scoring
+  facts from the promoted windows and source videos
+- add life loss, game over, and reset flow without importing Aurora rules
+- route player input into the Guardians runtime behind an explicit dev-only
+  playable-preview gate while keeping the public pack non-playable
+- convert broad semantic event windows into tighter runtime timing bands
 - add a contract harness that fails if measured Galaxy Guardians state uses
   Aurora capture, challenge, dual-fighter, or scoring functions by default

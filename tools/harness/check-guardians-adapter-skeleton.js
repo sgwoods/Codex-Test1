@@ -27,9 +27,20 @@ async function main(){
         enabled:skeleton?.enabled,
         publicPlayable:skeleton?.publicPlayable,
         evidenceRequired:skeleton?.evidenceRequired,
+        referenceStatus:skeleton?.referenceProfile?.status || '',
+        promotedEventLog:skeleton?.referenceProfile?.promotedEventLog || '',
+        promotedEventStatus:skeleton?.referenceProfile?.promotedEventStatus || '',
+        promotedEventCount:skeleton?.referenceProfile?.promotedEventCount || 0,
+        devRuntime:skeleton?.referenceProfile?.devRuntime || '',
+        devRuntimeStatus:skeleton?.referenceProfile?.devRuntimeStatus || '',
+        devRuntimeHarness:skeleton?.referenceProfile?.devRuntimeHarness || '',
+        referenceSourceCount:skeleton?.referenceProfile?.sourceCount || 0,
         fireMode:skeleton?.profile?.playerFireMode || '',
         formationModel:skeleton?.profile?.formationModel || '',
         flagshipModel:skeleton?.profile?.flagshipModel || '',
+        wrapThreatModel:skeleton?.profile?.wrapThreatModel || '',
+        evidenceState:skeleton?.profile?.evidenceState || '',
+        nextPromotionTargets:skeleton?.referenceProfile?.nextPromotionTargets || [],
         forbiddenAuroraCapabilities:skeleton?.forbiddenAuroraCapabilities || null
       }),
       initialState,
@@ -54,8 +65,34 @@ async function main(){
   if(result.skeleton.fireMode !== 'single-shot'){
     fail('Galaxy Guardians skeleton does not preserve the single-shot baseline', result);
   }
+  if(result.skeleton.referenceStatus !== 'source-manifested-contact-sheets-and-waveforms' || result.skeleton.referenceSourceCount !== 3){
+    fail('Galaxy Guardians skeleton is not linked to the measured Galaxian reference profile', result);
+  }
   if(!result.skeleton.formationModel.includes('rack') || !result.skeleton.flagshipModel.includes('flagship')){
     fail('Galaxy Guardians skeleton is missing its scout-wave/flagship model labels', result);
+  }
+  if(result.skeleton.promotedEventLog !== 'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json' || result.skeleton.promotedEventStatus !== 'promoted-reviewed-event-windows'){
+    fail('Galaxy Guardians skeleton is not linked to the promoted Galaxian event log', result);
+  }
+  if(result.skeleton.promotedEventCount < 11){
+    fail('Galaxy Guardians skeleton does not carry the promoted scout-wave event count', result);
+  }
+  if(result.skeleton.devRuntime !== 'src/js/13-galaxy-guardians-runtime.js' || result.skeleton.devRuntimeStatus !== 'dev-runtime-slice-not-public-release'){
+    fail('Galaxy Guardians skeleton is not linked to the dev runtime slice', result);
+  }
+  if(result.skeleton.devRuntimeHarness !== 'tools/harness/check-galaxy-guardians-runtime-slice.js'){
+    fail('Galaxy Guardians skeleton does not cite the runtime slice harness', result);
+  }
+  if(result.skeleton.wrapThreatModel !== 'bottom-exit-or-return-explicit-preview-rule'){
+    fail('Galaxy Guardians skeleton lost the explicit wrap/return preview rule', result);
+  }
+  if(result.skeleton.evidenceState !== 'promoted-event-log-awaiting-runtime-implementation'){
+    fail('Galaxy Guardians skeleton lost its promoted-event-log evidence state', result);
+  }
+  for(const eventName of ['formation_entry_start','alien_dive_start','flagship_dive_start','escort_join','enemy_wrap_or_return']){
+    if(!result.skeleton.nextPromotionTargets.includes(eventName)){
+      fail(`Galaxy Guardians skeleton missing promotion event ${eventName}`, result);
+    }
   }
   const forbidden = result.skeleton.forbiddenAuroraCapabilities || {};
   for(const key of ['usesCaptureRescue','usesDualFighterMode','usesChallengeStages','usesAuroraScoring','usesAuroraEnemyFamilies']){
@@ -69,6 +106,15 @@ async function main(){
   }
   if(result.initialState.fireMode !== 'single-shot' || result.initialState.stage !== 2 || result.initialState.lives !== 4){
     fail('Galaxy Guardians initial state did not preserve configured skeleton state', result);
+  }
+  if(result.initialState.sourceProfile !== 'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json'){
+    fail('Galaxy Guardians initial state does not cite the measured profile', result);
+  }
+  if(result.initialState.promotedEventLog !== 'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json'){
+    fail('Galaxy Guardians initial state does not cite the promoted event log', result);
+  }
+  if(result.initialState.devRuntime !== 'src/js/13-galaxy-guardians-runtime.js'){
+    fail('Galaxy Guardians initial state does not cite the dev runtime slice', result);
   }
   if(!result.startError.includes('disabled until measured 0.1 scout-wave evidence exists')){
     fail('Galaxy Guardians skeleton start did not fail closed with the expected evidence gate', result);
