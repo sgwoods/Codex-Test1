@@ -134,9 +134,9 @@ function drawGalaxyGuardiansPreviewHud(summary){
  ctx.fillStyle='#dff7ff';
  ctx.fillText(String(summary.score||0).padStart(6,'0'),48,16);
  ctx.fillStyle='#ffdf6f';
- ctx.fillText('GUARDIANS DEV PREVIEW',76,PLAY_H-26);
+ ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'GUARDIANS DEV PREVIEW',76,PLAY_H-26);
  ctx.fillStyle='#7bd6ff';
- ctx.fillText('SINGLE SHOT  FLAGSHIP ESCORTS  WRAP THREAT',32,PLAY_H-15);
+ ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  WRAP THREAT',32,PLAY_H-15);
  ctx.restore();
 }
 
@@ -159,8 +159,11 @@ function stepGalaxyGuardiansPreviewState(now){
 }
 
 function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
+ const activeState=typeof currentGalaxyGuardiansDevPreviewState==='function'
+  ? currentGalaxyGuardiansDevPreviewState()
+  : null;
  const now=performance.now();
- const state=stepGalaxyGuardiansPreviewState(now);
+ const state=activeState||stepGalaxyGuardiansPreviewState(now);
  const summary=summarizeGalaxyGuardiansRuntime(state);
  ctx.setTransform(1,0,0,1,0,0);
  ctx.clearRect(0,0,c.width,c.height);
@@ -175,7 +178,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  const starfield=typeof syncStarfieldProfile==='function'?syncStarfieldProfile({frontDoor:1,attractPhase:'guardians-preview'}):null;
  drawGalaxyGuardiansPreviewBackdrop(t);
  for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t);
- drawGalaxyGuardiansPlayer(state.player);
+ if(state.player.visible!==false)drawGalaxyGuardiansPlayer(state.player);
  drawGalaxyGuardiansPreviewHud(summary);
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
@@ -201,7 +204,9 @@ registerGameBoardRenderer(GALAXY_GUARDIANS_PACK.metadata.gameKey,{
  previewOnly:true,
  canDraw(){
   const playable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();
-  return shouldDrawGalaxyGuardiansPreviewBoard()&&(!started||!playable);
+  const devPreview=typeof currentGalaxyGuardiansDevPreviewState==='function'
+   && !!currentGalaxyGuardiansDevPreviewState();
+  return shouldDrawGalaxyGuardiansPreviewBoard()&&(!started||!playable||devPreview);
  },
  draw:drawGalaxyGuardiansPreviewBoard
 });

@@ -50,9 +50,13 @@ Right now it proves:
 - a dev-only visible preview board renderer that drives the Guardians-owned
   scout-wave runtime, visual catalog, and audio cue catalog without registering
   a playable adapter
+- a development-only playable-preview adapter that routes keyboard movement,
+  single-shot fire, life loss, reset, and game-over flow into the
+  Guardians-owned runtime while keeping the public playable adapter disabled
 - a source-manifested Galaxian reference profile with three local source videos,
   contact sheets, and waveforms
-- safe fallback to `Aurora Galactica` when a player tries to launch gameplay
+- safe public-pack behavior because `Galaxy Guardians` still has no public
+  registered gameplay adapter
 
 It does not yet prove:
 
@@ -60,6 +64,7 @@ It does not yet prove:
 - a second complete scoring and stage-flow implementation
 - a second complete application harness family
 - a public registered gameplay adapter
+- release-ready public playability
 
 That is intentional.
 
@@ -134,13 +139,19 @@ adapter, with any true common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
-Preview-only applications must not become a durable trap state.
+Preview-only applications must not become a durable trap state. During
+development a preview application may also expose an explicit dev-only playable
+adapter so we can test the runtime slice before public playability.
 
 Current expected behavior:
 
 - preview application can be opened
 - shell can show its promo surface
-- `Enter` should fall back to a playable application when preview-only content cannot start gameplay
+- `Enter` should fall back to a playable application when preview-only content
+  cannot start gameplay
+- `Enter` may start a dev-only preview only when the development build exposes
+  an explicit dev-preview adapter and the pack still remains publicly
+  non-playable
 
 ### Front-door copy ownership
 
@@ -227,8 +238,9 @@ signal palette. The renderer is now registered through a Platinum game-board
 renderer registry, so the top-level render loop no longer branches on a
 specific game by name.
 
-The next application proof is turning that runtime model into a dev-only
-playable slice that includes:
+The next application proof is maturing the first dev-only playable slice. It
+now has the initial lifecycle path, but the behavior is still intentionally
+development-scoped until the measured 0.1 scout-wave evidence is stronger.
 
 - formation rack
 - dives
@@ -237,6 +249,18 @@ playable slice that includes:
 - single-shot constraint
 - wrap-around threat
 - life loss and game over flow
+
+Current development-only playable-preview coverage:
+
+- `src/js/13-galaxy-guardians-gameplay-adapter.js` owns the dev-only start and
+  update adapter for `Galaxy Guardians`
+- `src/js/13-galaxy-guardians-runtime.js` owns the runtime state, events, player
+  shot, life-loss, reset, and game-over mechanics
+- `src/js/13-gameplay-adapter-registry.js` keeps public playable adapters and
+  dev-preview adapters in separate registries
+- `tools/harness/check-galaxy-guardians-playable-preview.js` proves keyboard
+  fire, life loss, reset, game over, owned audio cue IDs, and public-adapter
+  isolation
 
 That is enough to test the platform without prematurely shipping a second game.
 

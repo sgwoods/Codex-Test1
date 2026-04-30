@@ -32,7 +32,9 @@ What is still transitional:
 
 - some naming and compatibility residue is still Aurora-shaped
 - the game-pack contract is still practical rather than strongly versioned
-- the second application is still preview-only rather than fully playable
+- the second application is still public-preview-only rather than fully
+  playable; it now has a development-only playable-preview adapter for local
+  runtime proof
 - the second-game preview now owns placeholder pack data, but playable
   second-game work still needs measured game data and a gameplay adapter rather
   than Aurora gameplay reuse
@@ -88,6 +90,8 @@ What is still transitional:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-game-pack.js`
 - Galaxy Guardians disabled gameplay adapter skeleton:
   - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-gameplay-adapter.js`
+- Galaxy Guardians dev-only scout-wave runtime:
+  - `/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-runtime.js`
 - shared entity model used by packs:
   - `/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js`
 - Aurora board and sprite rendering:
@@ -166,9 +170,10 @@ Pack-boundary harness:
   tables, stays non-playable, and does not inherit Aurora challenge cadence,
   challenge layout, or reference timings.
 - `tools/harness/check-gameplay-adapter-boundaries.js`
-  verifies that Aurora is the only registered gameplay adapter, Galaxy
-  Guardians cannot start gameplay without its own adapter, and preview launch
-  fallback starts through the Aurora adapter.
+  verifies that Aurora is the only registered public gameplay adapter, Galaxy
+  Guardians remains blocked from public playability, and the explicit
+  development-only preview adapter starts only the Guardians-owned runtime
+  slice.
 - `tools/harness/check-guardians-adapter-skeleton.js`
   verifies that the Galaxy Guardians skeleton exists, stays disabled, exposes a
   single-shot scout-wave state shape, cites the promoted event log, and fails
@@ -185,6 +190,10 @@ Pack-boundary harness:
   flagship/escort/scout roles, single-shot firing, promoted event emission,
   Guardians-owned scoring, Guardians-owned visual/audio catalog bindings, and
   no Aurora capture/challenge/dual-fighter state.
+- `tools/harness/check-galaxy-guardians-playable-preview.js`
+  verifies the development-only Galaxy Guardians playable-preview adapter:
+  keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and
+  isolation from the public playable adapter registry.
 - `tools/harness/check-compact-cabinet-rails.js`
   verifies that both side-frame icon rails remain visible and inside the
   cabinet frame at the compact in-app browser scale, and that the Galaxy

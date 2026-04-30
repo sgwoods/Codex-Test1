@@ -78,12 +78,17 @@ async function main(){
         settingsRuntime: document.getElementById('settingsRuntime')?.textContent || '',
         buildStampChannel: document.getElementById('buildStampChannel')?.textContent || '',
         waitText: (document.getElementById('msg')?.innerText || '').replace(/\s+/g, ' ').trim(),
-        previewOpen: !!document.getElementById('gamePreviewModal')?.classList.contains('open')
+        previewOpen: !!document.getElementById('gamePreviewModal')?.classList.contains('open'),
+        hasPlayableAdapter: typeof currentGamePackHasPlayableAdapter === 'function' ? currentGamePackHasPlayableAdapter() : null,
+        hasDevPreviewAdapter: typeof currentGamePackHasDevPreviewAdapter === 'function' ? currentGamePackHasDevPreviewAdapter() : null,
+        canStart: typeof currentGamePackCanStart === 'function' ? currentGamePackCanStart() : null
       };
     }, WAIT_TIMEOUT_MS, 40);
 
-    await page.locator('#gamePreviewClose').click();
-    await page.waitForTimeout(120);
+    if(previewWait.previewOpen){
+      await page.locator('#gamePreviewClose').click();
+      await page.waitForTimeout(120);
+    }
 
     await openPicker(page);
     await choosePack(page, 'aurora-galactica');
@@ -149,7 +154,10 @@ async function main(){
     fail('Preview pack did not update the visible Platinum runtime label', result);
   }
   if(!result.previewWait.waitText.includes('GALAXY GUARDIANS')) fail('Preview pack did not replace the wait-mode front-door copy', result);
-  if(!result.previewWait.previewOpen) fail('Preview pack did not open the coming-soon splash', result);
+  if(result.previewWait.previewOpen) fail('Dev-preview pack opened the coming-soon splash instead of selecting the playable preview path', result);
+  if(result.previewWait.hasPlayableAdapter !== false || result.previewWait.hasDevPreviewAdapter !== true || result.previewWait.canStart !== true){
+    fail('Preview pack did not expose the expected dev-only playable-preview boundary in wait mode', result);
+  }
 
   if(result.restoredWait.packKey !== 'aurora-galactica') fail('Aurora was not restorable through the selected-pack path', result);
   if(!result.restoredWait.settingsRuntime.includes('Platinum · Aurora Galactica')){

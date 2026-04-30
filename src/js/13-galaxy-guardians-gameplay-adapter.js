@@ -57,7 +57,10 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
   'escort_join',
   'player_shot_fired',
   'player_shot_resolved',
-  'enemy_wrap_or_return'
+  'enemy_wrap_or_return',
+  'player_lost',
+  'game_over',
+  'wave_reset'
  ])
 });
 
@@ -119,3 +122,140 @@ const GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON=Object.freeze({
   throw new Error('Galaxy Guardians gameplay adapter is disabled until measured 0.1 scout-wave evidence exists.');
  }
 });
+
+let GALAXY_GUARDIANS_ACTIVE_DEV_STATE=null;
+
+function galaxyGuardiansDevPreviewAllowed(){
+ return typeof BUILD_INFO!=='undefined'
+  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development'
+  && !!GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable
+  && !GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable;
+}
+
+function syncGalaxyGuardiansShellState(state){
+ if(!state)return;
+ S.score=state.score|0;
+ S.stage=state.stage|0;
+ S.lives=Math.max(0,(state.lives|0)-1);
+ S.stageClock=+state.t||0;
+ S.simT=+state.t||0;
+ S.challenge=0;
+ S.liveCount=state.aliens.filter(alien=>alien.hp>0).length;
+ if(state.gameOver){
+  gameOverHtml=`<span class="gameOverTitle">GALAXY GUARDIANS</span><span class="gameOverSub">DEV PREVIEW COMPLETE</span><span class="gameOverLine">SCORE ${String(state.score|0).padStart(6,'0')}</span><span class="gameOverHint">CHOOSE GAME TO RETURN TO AURORA</span>`;
+ }
+}
+
+function closeGalaxyGuardiansDevOverlays(){
+ if(typeof closeAccountPanel==='function')closeAccountPanel();
+ if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+ if(typeof closeSettings==='function')closeSettings();
+ if(typeof closeHelp==='function'&&helpOpen)closeHelp(1);
+ if(typeof closeFeedback==='function'&&feedbackOpen)closeFeedback(1);
+ if(typeof closeGamePreview==='function')closeGamePreview(1);
+ if(typeof closeMoviePanel==='function'&&typeof isMoviePanelOpen==='function'&&isMoviePanelOpen())closeMoviePanel(1);
+}
+
+function startGalaxyGuardiansDevPreview(cfg={}){
+ if(!galaxyGuardiansDevPreviewAllowed()){
+  showToast('Galaxy Guardians playable preview is available only in development builds.');
+  return false;
+ }
+ if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
+ stopAttractLoop();
+ try{document.activeElement?.blur?.()}catch{}
+ if(typeof resetActiveInputState==='function')resetActiveInputState('guardians_dev_preview_start');
+ closeGalaxyGuardiansDevOverlays();
+ resetSession('guardians_dev_preview_start');
+ autoExportedSessionId='';
+ const testCfg=saveTestCfg();
+ setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
+ aud=1;AC().resume?.();
+ gameOverHtml='';gameOverState=null;
+ started=1;paused=0;
+ Object.assign(S,{
+  score:0,
+  lives:Math.max(0,(+cfg.ships||+testCfg.ships||3)-1),
+  stage:Math.max(1,+cfg.stage||+testCfg.stage||1),
+  shake:0,
+  banner:0,
+  bannerTxt:'',
+  bannerMode:'',
+  bannerSub:'',
+  alertT:0,
+  alertTxt:'',
+  challenge:0,
+  forceChallenge:0,
+  liveCount:0,
+  recoverT:0,
+  attackGapT:0,
+  nextStageT:0,
+  postChallengeT:0,
+  pendingStage:0,
+  transitionMode:'',
+  sequenceT:0,
+  sequenceMode:'',
+  attract:0,
+  simT:0,
+  stageClock:0
+ });
+ GALAXY_GUARDIANS_ACTIVE_DEV_STATE=createGalaxyGuardiansRuntimeState({
+  stage:S.stage,
+  ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
+  seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719
+ });
+ syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
+ if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
+ if(typeof syncPauseUi==='function')syncPauseUi();
+ logEvent('game_start',{gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,devPreview:1});
+ startRunRecording();
+ sfx.playCue('gameStart',{phase:'stage'});
+ msg.textContent='';
+ c?.focus?.();
+ return true;
+}
+
+function galaxyGuardiansInputFromKeys(){
+ return {
+  left:!!(keys.ArrowLeft||keys.KeyA||keys.KeyZ),
+  right:!!(keys.ArrowRight||keys.KeyD||keys.KeyC),
+  fire:!!keys.Space
+ };
+}
+
+function updateGalaxyGuardiansDevPreview(dt){
+ if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
+ stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,galaxyGuardiansInputFromKeys());
+ syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
+ if(GALAXY_GUARDIANS_ACTIVE_DEV_STATE.gameOver){
+  started=0;
+  paused=0;
+  if(typeof syncPauseUi==='function')syncPauseUi();
+  stopRunRecording();
+ }
+}
+
+function currentGalaxyGuardiansDevPreviewState(){
+ return GALAXY_GUARDIANS_ACTIVE_DEV_STATE;
+}
+
+function summarizeGalaxyGuardiansDevPreview(){
+ return GALAXY_GUARDIANS_ACTIVE_DEV_STATE
+  ? summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
+  : null;
+}
+
+const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
+ gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+ label:'Galaxy Guardians dev-only playable preview',
+ enabled:1,
+ devOnly:1,
+ publicPlayable:0,
+ start:startGalaxyGuardiansDevPreview,
+ update:updateGalaxyGuardiansDevPreview,
+ snapshot:summarizeGalaxyGuardiansDevPreview
+});
+
+window.galaxyGuardiansDevPreviewAllowed=galaxyGuardiansDevPreviewAllowed;
+window.currentGalaxyGuardiansDevPreviewState=currentGalaxyGuardiansDevPreviewState;
+window.summarizeGalaxyGuardiansDevPreview=summarizeGalaxyGuardiansDevPreview;

@@ -17,6 +17,7 @@ async function main(){
     window.stepGalaxyGuardiansRuntime(state, .016, { fire: true });
     const afterSecondShotCount = state.events.filter(event => event.type === 'player_shot_fired').length;
     const secondShotBlocked = afterSecondShotCount === afterFirstShotCount;
+    state.player.inv = 999;
     for(let i=0;i<520;i++){
       window.stepGalaxyGuardiansRuntime(state, 1/60, {
         left: i%180 < 90,
@@ -29,6 +30,14 @@ async function main(){
     const pack = window.getGamePack ? window.getGamePack('galaxy-guardians-preview') : null;
     const visualCatalog = pack?.alienVisualCatalog || {};
     const audioCueCatalog = pack?.audioCueCatalog || {};
+    const timingState = window.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 42719 });
+    timingState.player.inv = 999;
+    for(let i=0;i<430;i++){
+      window.stepGalaxyGuardiansRuntime(timingState, 1/60, {});
+    }
+    const firstDiveEvent = timingState.events.find(event => event.type === 'alien_dive_start');
+    const flagshipDiveEvent = timingState.events.find(event => event.type === 'flagship_dive_start');
+    const escortJoinEvent = timingState.events.find(event => event.type === 'escort_join');
     return {
       profile,
       initial,
@@ -41,6 +50,14 @@ async function main(){
       runtimeVisualCatalogKeys: Object.keys(profile?.visualCatalog || {}),
       runtimeAudioCueCatalogKeys: Object.keys(profile?.audioCueCatalog || {}),
       playerVisualId: profile?.playerVisualId || '',
+      timing: {
+        firstScoutDiveDelay: profile?.rules?.firstScoutDiveDelay,
+        flagshipEscortDelay: profile?.rules?.flagshipEscortDelay,
+        singleShotCooldown: profile?.rules?.singleShotCooldown,
+        firstDiveT: firstDiveEvent?.t,
+        flagshipDiveT: flagshipDiveEvent?.t,
+        escortJoinT: escortJoinEvent?.t
+      },
       playableAdapterKeys: Object.keys(playableAdapters),
       forbidden: state.forbiddenAuroraCapabilities,
       hasAuroraState: ['captureRescue','dualFighter','challengeStage','auroraScoring'].some(key => Object.prototype.hasOwnProperty.call(state, key))
@@ -92,6 +109,15 @@ async function main(){
   if(!result.firstShot || !result.secondShotBlocked){
     fail('Galaxy Guardians runtime did not enforce the single-shot player fire model', result);
   }
+  if(Math.abs(result.timing.firstDiveT - result.timing.firstScoutDiveDelay) > .08){
+    fail('Galaxy Guardians runtime first scout dive timing drifted outside the first timing pass band', result);
+  }
+  if(Math.abs(result.timing.flagshipDiveT - result.timing.flagshipEscortDelay) > .08 || Math.abs(result.timing.escortJoinT - result.timing.flagshipDiveT) > .001){
+    fail('Galaxy Guardians runtime flagship/escort timing drifted outside the first timing pass band', result);
+  }
+  if(Math.abs(result.timing.singleShotCooldown - .72) > .001){
+    fail('Galaxy Guardians runtime single-shot cooldown drifted from the first timing pass baseline', result);
+  }
   for(const eventName of ['formation_entry_start','formation_entry_settle','formation_rack_complete','alien_dive_start','flagship_dive_start','escort_join','player_shot_fired','player_shot_resolved']){
     if(!result.summary.eventTypes.includes(eventName)){
       fail(`Galaxy Guardians runtime did not emit ${eventName}`, result);
@@ -120,6 +146,7 @@ async function main(){
     visualIds: result.summary.visualIds,
     audioCueIds: result.summary.audioCueIds,
     eventTypes: result.summary.eventTypes,
+    timing: result.timing,
     score: result.summary.score
   }, null, 2));
 }

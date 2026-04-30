@@ -10,7 +10,7 @@ function ex(x,y,n=10,col='#fff'){
 }
 
 
-function update(dt){
+function updateAuroraGameplay(dt){
  if((!started&&!S.attract)||paused)return;
  logCarryDebugState();
  recShotT-=dt;
@@ -208,4 +208,17 @@ function update(dt){
   return
  }
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
+}
+
+function update(dt){
+ if(
+  typeof currentGamePackHasPlayableAdapter==='function'
+  && !currentGamePackHasPlayableAdapter()
+  && typeof currentGamePackHasDevPreviewAdapter==='function'
+  && currentGamePackHasDevPreviewAdapter()
+  && typeof updateActiveGamePack==='function'
+ ){
+  return updateActiveGamePack(dt);
+ }
+ return updateAuroraGameplay(dt);
 }

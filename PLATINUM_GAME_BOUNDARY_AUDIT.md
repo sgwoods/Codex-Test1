@@ -36,9 +36,11 @@ modules.
 What is safe today:
 
 - Aurora Galactica remains the only playable application.
-- Galaxy Guardians is a preview-only pack.
+- Galaxy Guardians is a public preview-only pack, with a development-only
+  playable-preview adapter for local runtime proof.
 - `start()` blocks non-playable packs before gameplay starts.
-- preview launch fallback restores the playable default pack.
+- preview launch fallback restores the playable default pack when no explicit
+  development preview adapter exists.
 - pack capability flags already distinguish Aurora-only mechanics such as
   capture/rescue, challenge stages, and dual-fighter mode.
 - the shared entity helper only attaches capture state when the active pack
@@ -47,8 +49,10 @@ What is safe today:
 What is not yet ready for a playable second game:
 
 - the pack registry is now separated from Aurora and Galaxy Guardians pack data
-- the gameplay adapter registry now registers Aurora as the only playable
-  gameplay adapter
+- the gameplay adapter registry now registers Aurora as the only public
+  playable gameplay adapter
+- the dev-preview gameplay adapter registry separately exposes the local-only
+  Galaxy Guardians playable preview path in development builds
 - Galaxy Guardians now has a disabled adapter skeleton that is evidence-gated
   and not registered as playable
 - the skeleton now cites a three-source Galaxian reference profile with contact
@@ -92,11 +96,16 @@ Current status:
   active-pack runtime helpers
 - `src/js/13-gameplay-adapter-registry.js` exposes shared gameplay adapter
   registration and start routing; Aurora is currently the only registered
-  playable adapter
+  public playable adapter, while Galaxy Guardians has a separate
+  development-only preview adapter
 - `npm run harness:check:pack-registry-boundaries` verifies that Galaxy
   Guardians does not directly share game-owned table references with Aurora
 - `npm run harness:check:gameplay-adapter-boundaries` verifies that Galaxy
-  Guardians cannot start gameplay until it owns an adapter
+  Guardians remains blocked from the public playable adapter registry while its
+  explicit development-only preview adapter can start the owned runtime slice
+- `npm run harness:check:galaxy-guardians-playable-preview` verifies the
+  Guardians development preview adapter, keyboard fire routing, life loss,
+  reset, game over, owned audio cue IDs, and public-adapter isolation
 - `npm run harness:check:guardians-adapter-skeleton` verifies that the disabled
   skeleton exists, fails closed, and does not carry Aurora capture, dual,
   challenge, scoring, or enemy-family state
@@ -178,15 +187,18 @@ Current files:
 
 Current status:
 
-- non-playable packs cannot start gameplay
+- non-playable packs cannot start public gameplay
 - preview selection is not persisted as the durable playable pack
-- launching from a preview-only state returns to the playable default
+- launching from a preview-only state returns to the playable default unless an
+  explicit development-only preview adapter is present in a development build
 
 Required direction:
 
 - keep this as Platinum behavior
 - when there is more than one playable game, replace single default fallback
   assumptions with an explicit "first playable/default playable pack" policy
+- keep dev-preview adapters separate from public playable adapters so local
+  proofs cannot accidentally become release playability
 
 ### Harnesses
 
@@ -250,6 +262,9 @@ The first platform boundary slice is now in place:
   and player interceptor identities plus a separate sound cue catalog for start,
   formation pulse, single-shot firing, dive pressure, escort joins, hits,
   wrap/return, and future player loss
+- dev-only Galaxy Guardians playable-preview adapter with keyboard movement,
+  single-shot fire, life loss, reset, and game-over lifecycle routed into the
+  Guardians-owned runtime while public playability remains disabled
 - visible dev-only Galaxy Guardians preview renderer that draws the owned
   scout-wave runtime, visual catalog IDs, audio cue IDs, and preview HUD while
   keeping the pack non-playable
@@ -262,14 +277,15 @@ The first platform boundary slice is now in place:
 
 ## Recommended Next Code Slice
 
-The next implementation slice should refine the visible dev runtime into a
-dev-only playable preview:
+The next implementation slice should refine the dev-only playable preview into
+a stronger measured 0.1 scout-wave candidate:
 
 - extract frame-level formation, dive, flagship, escort, firing, and scoring
   facts from the promoted windows and source videos
-- add life loss, game over, and reset flow without importing Aurora rules
-- route player input into the Guardians runtime behind an explicit dev-only
-  playable-preview gate while keeping the public pack non-playable
+- tune life loss, game over, reset, and player invulnerability windows against
+  reference footage without importing Aurora rules
+- keep player input routed into the Guardians runtime behind the explicit
+  dev-only playable-preview gate while the public pack remains non-playable
 - convert broad semantic event windows into tighter runtime timing bands
 - add a contract harness that fails if measured Galaxy Guardians state uses
   Aurora capture, challenge, dual-fighter, or scoring functions by default
