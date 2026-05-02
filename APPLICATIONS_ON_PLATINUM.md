@@ -261,6 +261,12 @@ Current development-only playable-preview coverage:
   shot, life-loss, reset, and game-over mechanics
 - `src/js/13-gameplay-adapter-registry.js` keeps public playable adapters and
   dev-preview adapters in separate registries
+- `reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json`
+  persists the first cue-shape and runtime-audio coverage contract for the
+  Guardians signal theme
+- `tools/harness/check-galaxy-guardians-audio-character.js` proves the required
+  cue names, cue IDs, cue-shape metrics, role-hit separation, and runtime cue
+  coverage for the first playable-preview slice
 - `reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json`
   persists the first 0.1 visual/audio identity contract so future sprite,
   movement, and cue edits have a durable artifact trail

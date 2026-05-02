@@ -234,6 +234,9 @@ Typical application containment checks:
 - `node tools/harness/check-galaxy-guardians-0-1-candidate.js` when the changed
   surface touches the `Galaxy Guardians` dev-preview identity, runtime events,
   cue IDs, scoring, or preview/public boundary.
+- `node tools/harness/check-galaxy-guardians-audio-character.js` when the
+  changed surface touches Guardians cue definitions, audio theme identity,
+  runtime cue IDs, or role-specific hit/loss/game-over sound behavior.
 - `node tools/harness/check-galaxy-guardians-formation-entry.js` when the changed
   surface touches Guardians stage start, rack-entry, rack-settle, or first-dive
   timing.

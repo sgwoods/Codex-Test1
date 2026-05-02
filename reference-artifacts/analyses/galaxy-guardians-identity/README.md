@@ -10,6 +10,8 @@ than living only in chat or in transient harness output.
 
 Current artifacts:
 
+- `audio-character-0.1.json` - first cue-shape and runtime-audio coverage
+  contract for the Guardians signal theme.
 - `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
   movement, threat, visual, audio, runtime-event, and public-boundary
   requirements together.

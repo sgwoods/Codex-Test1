@@ -1,0 +1,103 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "audio-character-conformance",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "dev-preview-audio-character-contract-not-public-release-mix",
+  "purpose": "Keep the first Galaxy Guardians playable-preview audio cues distinct, event-owned, and separate from Aurora while deeper waveform/reference extraction continues.",
+  "sourceEvidence": {
+    "identityBaseline": "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "notes": "This is an internal cue-shape conformance contract. It validates runtime event coverage and synthetic cue character; it is not a final acoustic match to Galaxian hardware."
+  },
+  "themeId": "guardians-signal",
+  "requiredCueNames": [
+    "gameStart",
+    "formationPulse",
+    "playerShot",
+    "enemyShot",
+    "scoutDive",
+    "flagshipDive",
+    "escortJoin",
+    "scoutHit",
+    "escortHit",
+    "flagshipHit",
+    "wrapReturn",
+    "playerLoss",
+    "gameOver"
+  ],
+  "cueCharacter": {
+    "playerShot": {
+      "minPeakFrequencyHz": 1500,
+      "maxTotalDurationSeconds": 0.055,
+      "mustDescend": true
+    },
+    "enemyShot": {
+      "maxPeakFrequencyHz": 300,
+      "minTotalDurationSeconds": 0.09,
+      "mustDescend": true
+    },
+    "scoutDive": {
+      "minToneCount": 2,
+      "mustDescend": true
+    },
+    "flagshipDive": {
+      "minToneCount": 3,
+      "minTotalDurationSeconds": 0.35,
+      "mustBeLongerThan": "scoutDive"
+    },
+    "escortJoin": {
+      "minSequenceLength": 4,
+      "maxStepSeconds": 0.035
+    },
+    "wrapReturn": {
+      "mustAscend": true,
+      "minTotalDurationSeconds": 0.18
+    },
+    "playerLoss": {
+      "requiresNoise": true,
+      "minToneCount": 3,
+      "minTotalDurationSeconds": 0.30
+    },
+    "gameOver": {
+      "minSequenceLength": 5,
+      "mustDescend": true
+    }
+  },
+  "roleHitSeparation": {
+    "requiredCueNames": [
+      "scoutHit",
+      "escortHit",
+      "flagshipHit"
+    ],
+    "minimumPairwisePeakDeltaHz": 45,
+    "minimumPairwiseDurationDeltaSeconds": 0.015
+  },
+  "runtimeCoverage": {
+    "requiredRuntimeCueIds": [
+      "guardians-formation-pulse",
+      "guardians-player-single-shot",
+      "guardians-enemy-shot",
+      "guardians-scout-dive",
+      "guardians-flagship-dive",
+      "guardians-escort-join",
+      "guardians-scout-hit",
+      "guardians-escort-hit",
+      "guardians-flagship-hit",
+      "guardians-wrap-return",
+      "guardians-player-loss",
+      "guardians-game-over-fall"
+    ],
+    "forbiddenCueIdFragments": [
+      "aurora",
+      "galaga",
+      "capture",
+      "dual"
+    ]
+  },
+  "harness": {
+    "audioCharacterCheck": "tools/harness/check-galaxy-guardians-audio-character.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-audio-character"
+  }
+}
