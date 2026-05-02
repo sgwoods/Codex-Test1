@@ -277,6 +277,12 @@ Current development-only playable-preview coverage:
 - `reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json`
   persists the first lower-field threat and application-owned scoring contract
   for enemy shots, player loss, and formation/dive hit values
+- `reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json`
+  persists the first gameplay-scale readability contract for the flagship,
+  escort, scout, player, and role-specific hit flashes
+- `tools/harness/check-galaxy-guardians-visual-readability.js` proves the
+  Guardians visual rows stay distinct, use enough palette channels, appear
+  during entry/formation/dive snapshots, and create owned hit flashes
 - `reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json`
   persists the first aggregate 0.1 candidate gate for owned visual IDs, runtime
   cue IDs, promoted event names, public-playable boundaries, and forbidden

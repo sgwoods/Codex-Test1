@@ -49,15 +49,16 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'crowned-command-ship',
   palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '.....A.....',
-   '...AWEWA...',
-   '..WWCCCWW..',
-   '.WCCECECCW.',
-   'WWCCCCCCCWW',
-   'W.CCAACC.W',
-   '...W...W...'
+   '.....AAA.....',
+   '...AAWEWAA...',
+   '..WWCCCCCWW..',
+   '.WWCECECEWW.',
+   'WWCCCCCCCCCWW',
+   'W.CCAAAAACC.W',
+   '..WACCCCCAW..',
+   '....W...W....'
   ]),
-  notes:'Wide crowned command silhouette for flagship-with-escort dives; intentionally not an Aurora boss/capture ship.'
+  notes:'Wide crowned command silhouette for flagship-with-escort dives; intentionally its own Guardians command craft.'
  }),
  'signal-escort':Object.freeze({
   id:'signal-escort',
@@ -67,13 +68,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
    '...A...',
-   '..WCW..',
+   '..WAW..',
    '.WCCCW.',
-   'WWCEWW',
-   '.ACCA.',
-   'W..W..W'
+   'WWCECEW',
+   '.ACCCA.',
+   '..WAW..',
+   'W.....W'
   ]),
-  notes:'Small red escort marker for paired flagship pressure rather than Aurora butterfly behavior.'
+  notes:'Small red escort marker for paired flagship pressure with a sharp arrow profile.'
  }),
  'signal-scout':Object.freeze({
   id:'signal-scout',
@@ -82,11 +84,12 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'cyan-wing-scout',
   palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '...A...',
+   '..A.A..',
    '.WACAW.',
    'WWCCCWW',
-   '..ECE..',
-   '.WCCAW.',
+   '.WECEW.',
+   '..CCC..',
+   '.W.A.W.',
    'W.....W'
   ]),
   notes:'Cyan-green rank-and-file scout for sparse Galaxian-like solo dives.'
@@ -99,13 +102,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
    '...A...',
-   '..CCC..',
-   '.WCECW.',
-   'WWCCCWW',
-   '..WAW..',
-   '...F...'
+   '..ACA..',
+   '.ACCCA.',
+   'WACCCAW',
+   '.WCFW.',
+   '..FFF..',
+   '..AFA..'
   ]),
-  notes:'Single-fighter player craft sized for one-shot precision; no Aurora dual-fighter silhouette.'
+  notes:'Single-fighter player craft sized for one-shot precision with a compact interceptor profile.'
  })
 });
 

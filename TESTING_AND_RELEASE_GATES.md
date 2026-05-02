@@ -237,6 +237,9 @@ Typical application containment checks:
 - `node tools/harness/check-galaxy-guardians-formation-entry.js` when the changed
   surface touches Guardians stage start, rack-entry, rack-settle, or first-dive
   timing.
+- `node tools/harness/check-galaxy-guardians-visual-readability.js` when the
+  changed surface touches Guardians sprites, role palettes, preview rendering,
+  hit feedback, or gameplay-scale visual identity.
 
 ### Profile C: Boundary change
 

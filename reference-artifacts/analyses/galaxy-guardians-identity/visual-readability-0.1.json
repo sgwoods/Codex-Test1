@@ -1,0 +1,58 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "visual-readability-conformance",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "dev-preview-visual-readability-contract-not-public-release-art",
+  "purpose": "Keep the first Galaxy Guardians playable-preview sprites visibly distinct from Aurora and from each other at gameplay scale.",
+  "sourceEvidence": {
+    "identityBaseline": "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
+    "formationEntry": "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "notes": "This first pass is a runtime readability contract. It is deliberately separate from final frame-accurate sprite extraction."
+  },
+  "visualRequirements": {
+    "requiredVisualIds": [
+      "signal-flagship",
+      "signal-escort",
+      "signal-scout",
+      "player-interceptor"
+    ],
+    "requiredRoles": [
+      "flagship",
+      "escort",
+      "scout",
+      "player"
+    ],
+    "minimumFilledPixels": {
+      "signal-flagship": 48,
+      "signal-escort": 26,
+      "signal-scout": 27,
+      "player-interceptor": 25
+    },
+    "minimumPaletteChannelsPerSprite": 4,
+    "minimumPairwiseRowDifference": 18,
+    "forbiddenAuroraNameFragments": [
+      "bee",
+      "butterfly",
+      "boss",
+      "capture",
+      "dual"
+    ]
+  },
+  "runtimeRequirements": {
+    "entryFrameMustContainEnteringAliens": true,
+    "formationFrameMustContainAllRoles": true,
+    "firstDiveFrameMustContainActiveDive": true,
+    "hitResolutionMustCreateFlash": true,
+    "requiredHitFlashRoles": [
+      "flagship",
+      "escort",
+      "scout"
+    ]
+  },
+  "harness": {
+    "visualReadabilityCheck": "tools/harness/check-galaxy-guardians-visual-readability.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-visual-readability"
+  }
+}

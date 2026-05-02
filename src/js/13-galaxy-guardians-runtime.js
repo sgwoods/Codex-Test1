@@ -194,6 +194,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   },
   aliens:createGalaxyGuardiansFormation(),
   enemyShots:[],
+  hitFlashes:[],
   events:[],
   forbiddenAuroraCapabilities:GALAXY_GUARDIANS_RUNTIME_PROFILE.forbiddenAuroraCapabilities,
   evidenceProfile:GALAXY_GUARDIANS_RUNTIME_PROFILE.evidenceProfile,
@@ -279,6 +280,7 @@ function fireGuardiansPlayerShot(state){
 function resetGalaxyGuardiansWave(state,reason='wave_reset'){
  state.aliens=createGalaxyGuardiansFormation();
  state.enemyShots.length=0;
+ state.hitFlashes.length=0;
  state.player.shot=null;
  state.player.x=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2;
  state.player.y=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-28;
@@ -392,6 +394,11 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  state.t+=dt;
  p.cooldown=Math.max(0,p.cooldown-dt);
  p.inv=Math.max(0,(+p.inv||0)-dt);
+ if(Array.isArray(state.hitFlashes)&&state.hitFlashes.length){
+  state.hitFlashes=state.hitFlashes
+   .map(flash=>Object.assign({},flash,{t:Math.max(0,(+flash.t||0)-dt)}))
+   .filter(flash=>flash.t>0);
+ }
  if(state.gameOver)return state;
  if(state.resetT>0){
   state.resetT=Math.max(0,state.resetT-dt);
@@ -481,6 +488,16 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
     alien.hp=0;
     const points=guardiansAlienPoints(alien);
     state.score+=points;
+    const hitDuration=alien.role==='flagship' ? .34 : (alien.role==='escort' ? .24 : .18);
+    state.hitFlashes.push({
+     role:alien.role,
+     visualId:alien.visualId,
+     x:alien.x,
+     y:alien.y,
+     t:hitDuration,
+     duration:hitDuration,
+     color:alien.role==='flagship'?'#ffdf6f':alien.role==='escort'?'#ff5b5b':'#42f285'
+    });
     guardiansRuntimeEvent(state,'player_shot_resolved',{result:'hit',id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.hitAudioCue||'',points,score:state.score});
     resolved=1;
     break;
@@ -516,6 +533,8 @@ function summarizeGalaxyGuardiansRuntime(state){
   liveRoles:counts,
   hasPlayerShot:!!state.player.shot,
   enemyShotCount:state.enemyShots.filter(shot=>shot&&shot.active!==0).length,
+  hitFlashCount:(state.hitFlashes||[]).length,
+  hitFlashes:(state.hitFlashes||[]).map(flash=>({role:flash.role,visualId:flash.visualId,x:+flash.x.toFixed(2),y:+flash.y.toFixed(2),t:+flash.t.toFixed(3),duration:+flash.duration.toFixed(3)})),
   enemyShots:state.enemyShots.filter(shot=>shot&&shot.active!==0).map(shot=>({id:shot.id,role:shot.role,x:+shot.x.toFixed(2),y:+shot.y.toFixed(2)})),
   playerVisible:!!state.player.visible,
   playerInv:+(+state.player.inv||0).toFixed(3),

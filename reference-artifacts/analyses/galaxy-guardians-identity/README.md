@@ -22,3 +22,6 @@ Current artifacts:
   contract for solo dives, flagship/escort dives, and wrap/return pressure.
 - `threat-scoring-0.1.json` - first lower-field threat and application-owned
   scoring contract for enemy shots, player loss, and hit values.
+- `visual-readability-0.1.json` - first gameplay-scale readability contract for
+  role-specific sprites, palette channels, entry/formation/dive snapshots, and
+  hit flashes.
