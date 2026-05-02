@@ -237,6 +237,9 @@ Typical application containment checks:
 - `node tools/harness/check-galaxy-guardians-audio-character.js` when the
   changed surface touches Guardians cue definitions, audio theme identity,
   runtime cue IDs, or role-specific hit/loss/game-over sound behavior.
+- `node tools/harness/check-galaxy-guardians-reference-conformance.js` when the
+  changed surface touches Guardians reference evidence, 0.1 metric scoring,
+  promoted Galaxian event coverage, or beta-preview readiness language.
 - `node tools/harness/check-galaxy-guardians-formation-entry.js` when the changed
   surface touches Guardians stage start, rack-entry, rack-settle, or first-dive
   timing.

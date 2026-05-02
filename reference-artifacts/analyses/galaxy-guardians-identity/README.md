@@ -22,6 +22,10 @@ Current artifacts:
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
   contract for solo dives, flagship/escort dives, and wrap/return pressure.
+- `reference-conformance-0.1.json` - first scored Guardians reference
+  conformance metric set tying the Galaxian source profile, promoted event log,
+  preview gates, and platform-boundary evidence into a weighted development
+  score.
 - `threat-scoring-0.1.json` - first lower-field threat and application-owned
   scoring contract for enemy shots, player loss, and hit values.
 - `visual-readability-0.1.json` - first gameplay-scale readability contract for
