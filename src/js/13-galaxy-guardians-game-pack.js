@@ -35,8 +35,8 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
 
 const GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
  previewEntry:Object.freeze({
-  firstScoutDiveDelay:2.2,
-  flagshipEscortDelay:6.4,
+  firstScoutDiveDelay:3.1,
+  flagshipEscortDelay:8.45,
   singleShotCooldown:.72
  })
 });
@@ -49,16 +49,16 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'crowned-command-ship',
   palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '.....AAA.....',
-   '...AAWEWAA...',
-   '..WWCCCCCWW..',
-   '.WWCECECEWW.',
-   'WWCCCCCCCCCWW',
-   'W.CCAAAAACC.W',
-   '..WACCCCCAW..',
-   '....W...W....'
+   '.....A.....',
+   '....ACA....',
+   '...WCCCW...',
+   '..WCECEW..',
+   '.WWCCCCCWW.',
+   'W.WCCCCCW.W',
+   '...AACAA...',
+   '..A.....A..'
   ]),
-  notes:'Wide crowned command silhouette for flagship-with-escort dives; intentionally its own Guardians command craft.'
+  notes:'Small crowned command silhouette tuned from Galaxian contact-sheet proportions for flagship-with-escort dives.'
  }),
  'signal-escort':Object.freeze({
   id:'signal-escort',
@@ -68,14 +68,13 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
    '...A...',
-   '..WAW..',
+   '..ACA..',
    '.WCCCW.',
-   'WWCECEW',
-   '.ACCCA.',
-   '..WAW..',
-   'W.....W'
+   'WWECEWW',
+   '..CCC..',
+   '.A...A.'
   ]),
-  notes:'Small red escort marker for paired flagship pressure with a sharp arrow profile.'
+  notes:'Compact red/magenta escort marker tuned toward the charger rows visible in the Galaxian reference sheets.'
  }),
  'signal-scout':Object.freeze({
   id:'signal-scout',
@@ -85,14 +84,13 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
    '..A.A..',
-   '.WACAW.',
+   '.WAWAW.',
    'WWCCCWW',
-   '.WECEW.',
-   '..CCC..',
-   '.W.A.W.',
+   '..ECE..',
+   '.WCCCW.',
    'W.....W'
   ]),
-  notes:'Cyan-green rank-and-file scout for sparse Galaxian-like solo dives.'
+  notes:'Small blue/cyan convoy scout shaped for a tighter Galaxian-like rack.'
  }),
  'player-interceptor':Object.freeze({
   id:'player-interceptor',
@@ -103,13 +101,13 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   pixelRows:Object.freeze([
    '...A...',
    '..ACA..',
-   '.ACCCA.',
-   'WACCCAW',
-   '.WCFW.',
+   '..CCC..',
+   '.WCCCW.',
+   'WACFCAW',
    '..FFF..',
-   '..AFA..'
+   '.A...A.'
   ]),
-  notes:'Single-fighter player craft sized for one-shot precision with a compact interceptor profile.'
+  notes:'Compact single fighter tuned toward the cyan/red Galaxian player ship proportions.'
  })
 });
 

@@ -98,7 +98,7 @@ function main(){
   }
   const entry = roleSnapshot(runtime, .25);
   const formation = roleSnapshot(runtime, 1.45);
-  const dive = roleSnapshot(runtime, 2.25);
+  const dive = roleSnapshot(runtime, artifact.runtimeRequirements.firstDiveSnapshotSeconds || 3.25);
   const hitSummaries = {
     flagship: forceHit(runtime, 'flagship'),
     escort: forceHit(runtime, 'escort'),

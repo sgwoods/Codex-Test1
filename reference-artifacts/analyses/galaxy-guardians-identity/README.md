@@ -22,6 +22,10 @@ Current artifacts:
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
   contract for solo dives, flagship/escort dives, and wrap/return pressure.
+- `quick-peek-source-fidelity-0.2.json` - playtest-driven quick-peek
+  recalibration that moves timing, pacing, rack footprint, backdrop, and sprites
+  closer to the Galaxian reference sheets while preserving the need for future
+  frame extraction.
 - `reference-conformance-0.1.json` - first scored Guardians reference
   conformance metric set tying the Galaxian source profile, promoted event log,
   preview gates, and platform-boundary evidence into a weighted development

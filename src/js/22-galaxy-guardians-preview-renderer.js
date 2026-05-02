@@ -73,11 +73,7 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
 }
 
 function drawGalaxyGuardiansPreviewBackdrop(t){
- const g=ctx.createLinearGradient(0,0,0,PLAY_H);
- g.addColorStop(0,'#030610');
- g.addColorStop(.55,'#071025');
- g.addColorStop(1,'#02040a');
- ctx.fillStyle=g;
+ ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
  for(const s of S.st){
   const pulse=(s.twMin||.88)+Math.sin(s.tw+t*.9)*(s.twAmp||.16);
@@ -86,7 +82,7 @@ function drawGalaxyGuardiansPreviewBackdrop(t){
   ctx.fillRect(s.x,s.y,s.s,s.s);
  }
  ctx.globalAlpha=1;
- ctx.strokeStyle='rgba(255,91,91,.24)';
+ ctx.strokeStyle='rgba(255,91,91,.08)';
  ctx.lineWidth=1;
  for(let i=0;i<5;i++){
   const y=46+i*28+Math.sin(t*.8+i)*2;
@@ -95,7 +91,7 @@ function drawGalaxyGuardiansPreviewBackdrop(t){
   ctx.lineTo(PLAY_W-24,y+Math.sin(t*.6+i)*4);
   ctx.stroke();
  }
- ctx.fillStyle='rgba(255,216,109,.08)';
+ ctx.fillStyle='rgba(255,216,109,.05)';
  ctx.fillRect(0,PLAY_H-34,PLAY_W,1);
 }
 
@@ -103,8 +99,8 @@ function drawGalaxyGuardiansPlayer(player){
  const visual=galaxyGuardiansPreviewVisual(GALAXY_GUARDIANS_RUNTIME_PROFILE.playerVisualId);
  ctx.save();
  ctx.shadowColor='#7bd6ff';
- ctx.shadowBlur=5;
- drawGalaxyGuardiansPixelRows(visual,player.x,player.y,2.2);
+ ctx.shadowBlur=3;
+ drawGalaxyGuardiansPixelRows(visual,player.x,player.y,1.8);
  ctx.restore();
  if(player.shot){
   ctx.fillStyle='#ffe06d';
@@ -156,11 +152,11 @@ function drawGalaxyGuardiansEnemyShots(state){
 function drawGalaxyGuardiansAlien(alien,t){
  const visual=galaxyGuardiansPreviewVisual(alien.visualId);
  if(!visual)return;
- const cell=alien.role==='flagship'?2.25:alien.role==='escort'?2.05:1.95;
+ const cell=alien.role==='flagship'?1.65:alien.role==='escort'?1.45:1.4;
  ctx.save();
  ctx.translate(Math.round(alien.x),Math.round(alien.y));
  ctx.shadowColor=alien.role==='flagship'?'#ffdf6f':alien.role==='escort'?'#ff5b5b':'#42f285';
- ctx.shadowBlur=alien.mode==='diving'?7:3;
+ ctx.shadowBlur=alien.mode==='diving'?4:1.5;
  if(alien.mode==='diving'){
   const lean=Math.sin(alien.diveT*5)*.18+alien.diveSide*.08;
   ctx.rotate(lean);

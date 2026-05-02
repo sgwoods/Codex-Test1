@@ -67,34 +67,34 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   playfieldHeight:360,
   playerFireMode:'single-shot',
   singleShotCooldown:.72,
-  firstScoutDiveDelay:2.2,
-  flagshipEscortDelay:6.4,
-  formationEntrySettleAt:.72,
-  formationEntryCompleteAt:1.28,
-  formationEntryTravelY:34,
-  formationEntrySideSpread:10,
-  formationEntryRowLag:.055,
-  playerSpeed:118,
-  formationDriftAmplitude:2.7,
-  formationDriftHz:2.05,
-  scoutDiveIntervalBase:1.72,
-  scoutDiveIntervalJitter:.95,
-  flagshipDiveIntervalBase:6.6,
-  flagshipDiveIntervalJitter:1.65,
-  diveSwayAmplitude:29,
-  diveSwayHz:4.45,
-  diveSideDrift:13,
-  diveBaseVy:74,
-  diveAccel:16,
-  escortSpacing:14,
-  escortLag:.1,
+  firstScoutDiveDelay:3.1,
+  flagshipEscortDelay:8.45,
+  formationEntrySettleAt:.52,
+  formationEntryCompleteAt:.92,
+  formationEntryTravelY:18,
+  formationEntrySideSpread:6,
+  formationEntryRowLag:.035,
+  playerSpeed:108,
+  formationDriftAmplitude:1.35,
+  formationDriftHz:1.15,
+  scoutDiveIntervalBase:2.35,
+  scoutDiveIntervalJitter:1.2,
+  flagshipDiveIntervalBase:8.05,
+  flagshipDiveIntervalJitter:2.1,
+  diveSwayAmplitude:22,
+  diveSwayHz:2.6,
+  diveSideDrift:8,
+  diveBaseVy:60,
+  diveAccel:10,
+  escortSpacing:11,
+  escortLag:.14,
   escortYOffset:7,
   bottomExitPadding:12,
-  firstEnemyShotDelay:3.1,
-  enemyShotIntervalBase:1.15,
-  enemyShotIntervalJitter:.75,
-  enemyShotVy:94,
-  enemyShotMaxLive:3,
+  firstEnemyShotDelay:4.1,
+  enemyShotIntervalBase:1.75,
+  enemyShotIntervalJitter:1.05,
+  enemyShotVy:82,
+  enemyShotMaxLive:2,
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
   enemyShotBottomPadding:10,
@@ -155,10 +155,10 @@ function createGalaxyGuardiansFormation(){
    linkedTo:''
   });
  };
- for(let col=4;col<=5;col++)push('flagship',0,col,44+col*21,52);
- for(let col=2;col<=7;col++)push('escort',1,col,44+col*21,74);
+ for(let col=4;col<=5;col++)push('flagship',0,col,68+col*16,48);
+ for(let col=2;col<=7;col++)push('escort',1,col,68+col*16,68);
  for(let row=2;row<=4;row++){
-  for(let col=0;col<10;col++)push('scout',row,col,44+col*21,74+row*22);
+  for(let col=0;col<10;col++)push('scout',row,col,68+col*16,52+row*20);
  }
  return aliens;
 }
@@ -186,7 +186,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   nextEnemyShotAt:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.firstEnemyShotDelay,
   player:{
    x:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2,
-   y:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-28,
+   y:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-40,
    shot:null,
    cooldown:0,
    inv:0,
@@ -283,7 +283,7 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset'){
  state.hitFlashes.length=0;
  state.player.shot=null;
  state.player.x=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2;
- state.player.y=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-28;
+ state.player.y=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-40;
  state.player.cooldown=0;
  state.player.inv=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playerInvulnerability;
  state.player.visible=1;

@@ -50,9 +50,10 @@ function main(){
   const firstScoutStart = { x: firstScout.x, y: firstScout.y, rackX: firstScout.rackX, rackY: firstScout.rackY };
   const samples = [];
 
-  for(let i = 0; i < 150; i++){
+  const frameCount = Math.ceil((rules.firstScoutDiveDelay + .35) * 60);
+  for(let i = 0; i < frameCount; i++){
     runtime.stepGalaxyGuardiansRuntime(state, 1 / 60, {});
-    if([12, 44, 78, 132].includes(i)){
+    if([12, 44, 78, 132, Math.ceil(rules.firstScoutDiveDelay * 60)].includes(i)){
       const summary = runtime.summarizeGalaxyGuardiansRuntime(state);
       const scout = state.aliens.find(alien => alien.id === firstScout.id);
       samples.push({

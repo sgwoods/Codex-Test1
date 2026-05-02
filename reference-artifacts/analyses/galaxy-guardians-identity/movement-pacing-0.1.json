@@ -29,26 +29,26 @@
     ]
   },
   "runtimeRules": {
-    "playerSpeedPxPerSecond": 118,
-    "formationDriftAmplitudePx": 2.7,
-    "formationDriftHz": 2.05,
-    "scoutDiveIntervalBaseSeconds": 1.72,
-    "scoutDiveIntervalJitterSeconds": 0.95,
-    "flagshipDiveIntervalBaseSeconds": 6.6,
-    "flagshipDiveIntervalJitterSeconds": 1.65,
-    "diveSwayAmplitudePx": 29,
-    "diveSwayHz": 4.45,
-    "diveSideDriftPxPerSecond": 13,
-    "diveBaseVyPxPerSecond": 74,
-    "diveAccelPxPerSecondSquared": 16,
-    "escortSpacingPx": 14,
-    "escortLagSeconds": 0.1,
+    "playerSpeedPxPerSecond": 108,
+    "formationDriftAmplitudePx": 1.35,
+    "formationDriftHz": 1.15,
+    "scoutDiveIntervalBaseSeconds": 2.35,
+    "scoutDiveIntervalJitterSeconds": 1.2,
+    "flagshipDiveIntervalBaseSeconds": 8.05,
+    "flagshipDiveIntervalJitterSeconds": 2.1,
+    "diveSwayAmplitudePx": 22,
+    "diveSwayHz": 2.6,
+    "diveSideDriftPxPerSecond": 8,
+    "diveBaseVyPxPerSecond": 60,
+    "diveAccelPxPerSecondSquared": 10,
+    "escortSpacingPx": 11,
+    "escortLagSeconds": 0.14,
     "escortYOffsetPx": 7,
     "bottomExitPaddingPx": 12
   },
   "runtimeExpectations": {
-    "firstScoutDiveBandSeconds": [2.18, 2.28],
-    "firstFlagshipDiveBandSeconds": [6.38, 6.48],
+    "firstScoutDiveBandSeconds": [3.08, 3.15],
+    "firstFlagshipDiveBandSeconds": [8.43, 8.48],
     "escortJoinDeltaSeconds": [0, 0.001],
     "minimumLinkedEscortCountOnFirstFlagshipDive": 2,
     "minimumWrapEventsByNineSeconds": 1
@@ -58,4 +58,3 @@
     "runtimeCheck": "tools/harness/check-galaxy-guardians-runtime-slice.js"
   }
 }
-

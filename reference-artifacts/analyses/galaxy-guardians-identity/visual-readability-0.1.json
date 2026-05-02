@@ -9,7 +9,7 @@
     "identityBaseline": "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
     "formationEntry": "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
     "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
-    "notes": "This first pass is a runtime readability contract. It is deliberately separate from final frame-accurate sprite extraction."
+    "notes": "This first pass is still a runtime readability contract, but the 2026-05-02 quick-peek playtest moved the sprites smaller, darker, and closer to the Galaxian contact-sheet proportions. It remains separate from final frame-accurate sprite extraction."
   },
   "visualRequirements": {
     "requiredVisualIds": [
@@ -25,10 +25,10 @@
       "player"
     ],
     "minimumFilledPixels": {
-      "signal-flagship": 48,
-      "signal-escort": 26,
-      "signal-scout": 27,
-      "player-interceptor": 25
+      "signal-flagship": 38,
+      "signal-escort": 20,
+      "signal-scout": 22,
+      "player-interceptor": 24
     },
     "minimumPaletteChannelsPerSprite": 4,
     "minimumPairwiseRowDifference": 18,
@@ -44,6 +44,7 @@
     "entryFrameMustContainEnteringAliens": true,
     "formationFrameMustContainAllRoles": true,
     "firstDiveFrameMustContainActiveDive": true,
+    "firstDiveSnapshotSeconds": 3.25,
     "hitResolutionMustCreateFlash": true,
     "requiredHitFlashRoles": [
       "flagship",

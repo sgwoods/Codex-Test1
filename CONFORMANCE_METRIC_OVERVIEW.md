@@ -21,7 +21,7 @@ Latest artifact:
 | Strongest category | `10/10` | Protected | Combat responsiveness, stage-1 geometry, and capture/rescue rules are the safest parts of the current model. |
 | Weakest category | `6.1/10` | Needs work | Audio identity and cue alignment remain the biggest measurable quality gap. |
 | Next visible feel gap | `8.0/10` | Needs work | Player movement is playable, but tap correction and hold travel need more reference-led tuning. |
-| Guardians 0.1 preview | `7.3/10` reference conformance | Dev-preview | The preview now has a separate Guardians score; it is not part of the Aurora numeric quality roll-up. |
+| Guardians 0.1 preview | `6.9/10` reference conformance | Dev-preview | Local gameplay review showed the score needed to be more conservative on timing, pacing, and sprite fidelity. |
 
 ### Aurora Category Detail
 
@@ -67,7 +67,7 @@ Current reference metric artifact:
 
 | Metric | Score | Read |
 | --- | ---: | --- |
-| Reference conformance | `7.3/10` | Useful development-preview fidelity, with real reference lineage but coarse evidence. |
+| Reference conformance | `6.9/10` | Useful development-preview baseline, with the timing/pace/visual feel gap now scored more conservatively. |
 | Reference maturity | `5.8/10` | Contact sheets, waveforms, and promoted event windows exist; frame-level extraction is still needed. |
 | Implementation gate coverage | `9.0/10` | Most 0.1 runtime/visual/audio/platform gates are durable and rerunnable. |
 | Public release readiness | `3.5/10` | The preview remains intentionally dev-only and should not be treated as public playable yet. |
@@ -78,10 +78,10 @@ Current reference metric artifact:
 | --- | ---: | --- | --- |
 | Reference source coverage | `8.5/10` | Good | Three Galaxian sources are committed with manifests, contact sheets, and waveform windows. |
 | Promoted semantic event coverage | `7.0/10` | Partial | Core runtime events are covered; attract mission text and score-advance table remain gaps. |
-| Formation and rack timing | `6.8/10` | Partial | Entry, settle, rack complete, and first-dive delay are gated but not frame-extracted. |
-| Movement and pressure model | `6.5/10` | Partial | Scout, flagship, escort, and wrap pressure exist but need measured path/timing extraction. |
+| Formation and rack timing | `5.8/10` | Partial | Entry, settle, rack complete, and first-dive delay are gated and calmer, but not frame-extracted. |
+| Movement and pressure model | `5.2/10` | Weak | Scout, flagship, escort, and wrap pressure exist, but local play still reads approximate without measured path/timing extraction. |
 | Single-shot threat and scoring | `7.0/10` | Partial | Single-shot play, enemy shots, player loss, and role scoring are game-owned. |
-| Visual alien identity | `7.5/10` | Good preview | Gameplay-scale visual roles are distinct; not yet pixel-faithful extracted assets. |
+| Visual alien identity | `6.4/10` | Better preview, still partial | Sprites are smaller and closer to Galaxian contact-sheet proportions; not yet pixel-faithful extracted assets. |
 | Audio character and reference fit | `4.5/10` | Weakest Guardians category | Runtime cue IDs are gated, but acoustic comparison against Galaxian footage is not automated. |
 | Platform and game boundaries | `10.0/10` | Strong | Guardians remains dev-only and does not inherit Aurora capture/dual/challenge/scoring behavior. |
 | Evidence durability | `8.5/10` | Good | Reference profile, event log, identity artifacts, and gates are source-controlled and rerunnable. |

@@ -12,11 +12,11 @@
     "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets and waveform windows rather than frame-level automated extraction."
   },
   "summary": {
-    "referenceConformanceScore10": 7.3,
+    "referenceConformanceScore10": 6.9,
     "referenceMaturityScore10": 5.8,
     "implementationGateCoverageScore10": 9.0,
     "publicReleaseReadinessScore10": 3.5,
-    "releaseRead": "Useful development preview evidence, not enough for public playable release. The highest-leverage next work is frame-level Galaxian timing extraction, acoustic cue comparison, and a real score-table/attract-language implementation."
+    "releaseRead": "Useful development preview evidence, but local gameplay review showed that timing, pacing, and sprite fidelity are still not convincing enough for a public quick peek. The highest-leverage next work is frame-level Galaxian timing extraction, closer sprite extraction/authoring, acoustic cue comparison, and a real score-table/attract-language implementation."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -47,19 +47,19 @@
       "id": "formation-rack-timing",
       "label": "Formation and rack timing",
       "weight": 12,
-      "score10": 6.8,
+      "score10": 5.8,
       "evidenceLevel": "promoted-events-with-runtime-bands",
-      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated.",
-      "remainingGap": "Timing is not yet derived from direct frame-level Galaxian extraction."
+      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated, with the quick peek adjusted to a tighter and calmer rack.",
+      "remainingGap": "Timing is still not derived from direct frame-level Galaxian extraction, so the score remains conservative."
     },
     {
       "id": "movement-pressure",
       "label": "Movement and pressure model",
       "weight": 14,
-      "score10": 6.5,
+      "score10": 5.2,
       "evidenceLevel": "reference-window-inspired-runtime-contract",
-      "currentRead": "Scout dives, flagship dives, escort joins, and wrap/return pressure are implemented and gated.",
-      "remainingGap": "Dive curves, lower-field traversal, and wave-to-wave pacing still need direct measurement from the source videos."
+      "currentRead": "Scout dives, flagship dives, escort joins, and wrap/return pressure are implemented and gated, and this pass slowed the first pressure cycle.",
+      "remainingGap": "Local play still reads as approximate; dive curves, lower-field traversal, and wave-to-wave pacing need direct measurement from the source videos."
     },
     {
       "id": "single-shot-threat-scoring",
@@ -74,10 +74,10 @@
       "id": "visual-alien-identity",
       "label": "Visual alien identity",
       "weight": 10,
-      "score10": 7.5,
+      "score10": 6.4,
       "evidenceLevel": "game-owned-visual-catalog-and-readability-gate",
-      "currentRead": "Flagship, escort, scout, and player interceptor visuals are distinct and gated at gameplay scale.",
-      "remainingGap": "Sprites are still a preview interpretation rather than extracted pixel-faithful reference assets."
+      "currentRead": "Flagship, escort, scout, and player interceptor visuals are smaller and closer to Galaxian contact-sheet proportions while remaining distinct and gated.",
+      "remainingGap": "Sprites are still hand-authored preview approximations rather than extracted pixel-faithful reference assets."
     },
     {
       "id": "audio-reference-character",
@@ -113,6 +113,7 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/quick-peek-source-fidelity-0.2.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json",
     "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
