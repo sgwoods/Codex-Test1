@@ -199,6 +199,10 @@ Pack-boundary harness:
   verifies that the persistent movement/pacing artifact matches runtime rules
   and that sampled scout/flagship/escort dive behavior exposes real linked
   escort craft and wrap/return pressure.
+- `tools/harness/check-galaxy-guardians-threat-scoring.js`
+  verifies that the persistent lower-field threat/scoring artifact matches
+  runtime rules and that enemy shots, player loss, and owned point values stay
+  in the Galaxy Guardians application layer.
 - `tools/harness/check-galaxy-guardians-playable-preview.js`
   verifies the development-only Galaxy Guardians playable-preview adapter:
   keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and

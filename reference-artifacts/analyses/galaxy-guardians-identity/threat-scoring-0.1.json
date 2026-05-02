@@ -1,0 +1,62 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "threat-scoring-baseline",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "dev-preview-threat-scoring-contract-not-public-release-tuning",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "threatWindows": [
+      {
+        "event": "enemy_shot",
+        "sourceId": "arcades-lounge-level-5",
+        "observedWindowSeconds": [20, 30],
+        "intent": "thin lower-field shot pressure while solo dives begin"
+      },
+      {
+        "event": "player_lost",
+        "sourceId": "nenriki-15-wave-session",
+        "observedWindowSeconds": [105, 150],
+        "intent": "bottom pressure can convert into player loss without Aurora capture or dual-fighter state"
+      },
+      {
+        "event": "player_shot_resolved",
+        "sourceId": "nenriki-15-wave-session",
+        "observedWindowSeconds": [90, 135],
+        "intent": "application-owned scoring for formation, dive, and escorted flagship hits"
+      }
+    ]
+  },
+  "runtimeRules": {
+    "firstEnemyShotDelaySeconds": 3.1,
+    "enemyShotIntervalBaseSeconds": 1.15,
+    "enemyShotIntervalJitterSeconds": 0.75,
+    "enemyShotVyPxPerSecond": 94,
+    "enemyShotMaxLive": 3,
+    "enemyShotStartYOffsetPx": 8,
+    "enemyShotPlayerHitboxPx": 7,
+    "enemyShotBottomPaddingPx": 10
+  },
+  "scoringRules": {
+    "scoutFormationPoints": 30,
+    "scoutDivePoints": 60,
+    "escortFormationPoints": 50,
+    "escortDivePoints": 100,
+    "flagshipFormationPoints": 150,
+    "flagshipDivePoints": 300,
+    "flagshipOneEscortDivePoints": 500,
+    "flagshipTwoEscortDivePoints": 800
+  },
+  "runtimeExpectations": {
+    "firstEnemyShotBandSeconds": [3.08, 3.13],
+    "minimumEnemyShotsBySixSeconds": 2,
+    "maximumLiveEnemyShots": 3,
+    "requiredAudioCueId": "guardians-enemy-shot",
+    "requiredPlayerLossCause": "enemy_shot"
+  },
+  "harness": {
+    "threatScoringCheck": "tools/harness/check-galaxy-guardians-threat-scoring.js",
+    "runtimeCheck": "tools/harness/check-galaxy-guardians-runtime-slice.js"
+  }
+}
