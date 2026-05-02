@@ -1,0 +1,37 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "formation-entry-conformance",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "promoted-galaxian-entry-events-modeled-in-runtime",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "promotedEvents": [
+      "formation_entry_start",
+      "formation_entry_settle",
+      "formation_rack_complete"
+    ],
+    "notes": "The first 0.1 runtime model turns the promoted Galaxian entry events into an actual short entry and rack-settle phase. The timing is intentionally a first playable-preview approximation, not final frame-accurate extraction."
+  },
+  "runtimeRules": {
+    "formationEntrySettleAtSeconds": 0.72,
+    "formationEntryCompleteAtSeconds": 1.28,
+    "formationEntryTravelYPx": 34,
+    "formationEntrySideSpreadPx": 10,
+    "formationEntryRowLagSeconds": 0.055,
+    "firstScoutDiveDelaySeconds": 2.2,
+    "diveMayStartOnlyAfterRackComplete": true
+  },
+  "conformanceBands": {
+    "formationEntrySettleAtSeconds": [0.68, 0.78],
+    "formationRackCompleteAtSeconds": [1.24, 1.34],
+    "firstScoutDiveAfterRackCompleteDeltaSeconds": [0.82, 1.02],
+    "enteringAlienCountAtStart": 38,
+    "enteringAlienCountAfterComplete": 0
+  },
+  "harness": {
+    "entryCheck": "tools/harness/check-galaxy-guardians-formation-entry.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-formation-entry"
+  }
+}

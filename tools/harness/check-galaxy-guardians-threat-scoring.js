@@ -37,6 +37,9 @@ function loadGuardiansRuntime(){
 function hitScore(runtime, type, mode, escorts=0){
   const state = runtime.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 9001 });
   state.player.inv = 999;
+  if(mode === 'formation'){
+    for(let i=0;i<90;i++) runtime.stepGalaxyGuardiansRuntime(state, 1/60, {});
+  }
   const alien = state.aliens.find(entry => entry.type === type);
   if(!alien) throw new Error(`Missing alien type ${type}`);
   alien.mode = mode;

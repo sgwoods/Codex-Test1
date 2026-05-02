@@ -264,6 +264,13 @@ Current development-only playable-preview coverage:
 - `reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json`
   persists the first 0.1 visual/audio identity contract so future sprite,
   movement, and cue edits have a durable artifact trail
+- `reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json`
+  persists the first runtime entry/settle contract for promoted Galaxian entry
+  events, including start, settle, rack-complete, and first-dive-after-rack
+  bands
+- `tools/harness/check-galaxy-guardians-formation-entry.js` proves the runtime
+  starts aliens off-rack, settles them into the scout-wave rack, and prevents
+  the first dive from starting before rack completion
 - `reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json`
   persists the first movement and pressure pacing contract for solo dives,
   flagship/escort attacks, and bottom wrap/return cycles
