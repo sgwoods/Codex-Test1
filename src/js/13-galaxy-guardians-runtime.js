@@ -238,7 +238,7 @@ function loseGalaxyGuardiansPlayer(state,cause='collision'){
  });
  if(state.lives<=0){
   state.gameOver=1;
-  guardiansRuntimeEvent(state,'game_over',{score:state.score,stage:state.stage});
+  guardiansRuntimeEvent(state,'game_over',{score:state.score,stage:state.stage,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.gameOver.id});
  }
  return true;
 }

@@ -190,6 +190,11 @@ Pack-boundary harness:
   flagship/escort/scout roles, single-shot firing, promoted event emission,
   Guardians-owned scoring, Guardians-owned visual/audio catalog bindings, and
   no Aurora capture/challenge/dual-fighter state.
+- `tools/harness/check-galaxy-guardians-identity-baseline.js`
+  verifies that the persistent 0.1 identity artifact in
+  `reference-artifacts/analyses/galaxy-guardians-identity/` matches the
+  pack-owned sprite glyphs, audio cue catalog, theme cues, runtime cue map, and
+  dev-preview audio history.
 - `tools/harness/check-galaxy-guardians-playable-preview.js`
   verifies the development-only Galaxy Guardians playable-preview adapter:
   keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and
