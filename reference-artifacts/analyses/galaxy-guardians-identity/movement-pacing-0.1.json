@@ -1,0 +1,61 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "movement-pacing-baseline",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "dev-preview-pacing-contract-not-public-release-tuning",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "movementWindows": [
+      {
+        "event": "alien_dive_start",
+        "sourceId": "arcades-lounge-level-5",
+        "observedWindowSeconds": [20, 30],
+        "intent": "solo lower-field pressure from independent rack exits"
+      },
+      {
+        "event": "flagship_dive_start",
+        "sourceId": "nenriki-15-wave-session",
+        "observedWindowSeconds": [90, 135],
+        "intent": "top-rank flagship pressure with escorts"
+      },
+      {
+        "event": "enemy_wrap_or_return",
+        "sourceId": "nenriki-15-wave-session",
+        "observedWindowSeconds": [105, 150],
+        "intent": "bottom-exit/return pressure cycles"
+      }
+    ]
+  },
+  "runtimeRules": {
+    "playerSpeedPxPerSecond": 118,
+    "formationDriftAmplitudePx": 2.7,
+    "formationDriftHz": 2.05,
+    "scoutDiveIntervalBaseSeconds": 1.72,
+    "scoutDiveIntervalJitterSeconds": 0.95,
+    "flagshipDiveIntervalBaseSeconds": 6.6,
+    "flagshipDiveIntervalJitterSeconds": 1.65,
+    "diveSwayAmplitudePx": 29,
+    "diveSwayHz": 4.45,
+    "diveSideDriftPxPerSecond": 13,
+    "diveBaseVyPxPerSecond": 74,
+    "diveAccelPxPerSecondSquared": 16,
+    "escortSpacingPx": 14,
+    "escortLagSeconds": 0.1,
+    "escortYOffsetPx": 7,
+    "bottomExitPaddingPx": 12
+  },
+  "runtimeExpectations": {
+    "firstScoutDiveBandSeconds": [2.18, 2.28],
+    "firstFlagshipDiveBandSeconds": [6.38, 6.48],
+    "escortJoinDeltaSeconds": [0, 0.001],
+    "minimumLinkedEscortCountOnFirstFlagshipDive": 2,
+    "minimumWrapEventsByNineSeconds": 1
+  },
+  "harness": {
+    "movementPacingCheck": "tools/harness/check-galaxy-guardians-movement-pacing.js",
+    "runtimeCheck": "tools/harness/check-galaxy-guardians-runtime-slice.js"
+  }
+}
+

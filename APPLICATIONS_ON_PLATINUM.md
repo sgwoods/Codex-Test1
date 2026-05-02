@@ -261,9 +261,15 @@ Current development-only playable-preview coverage:
 - `reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json`
   persists the first 0.1 visual/audio identity contract so future sprite,
   movement, and cue edits have a durable artifact trail
+- `reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json`
+  persists the first movement and pressure pacing contract for solo dives,
+  flagship/escort attacks, and bottom wrap/return cycles
 - `tools/harness/check-galaxy-guardians-identity-baseline.js` proves the
   identity artifact matches the pack-owned sprite rows, audio cue catalog, audio
   theme cues, runtime cue map, and dev-preview audio history
+- `tools/harness/check-galaxy-guardians-movement-pacing.js` proves the runtime
+  rules match the persistent movement artifact and that flagship dives attach
+  real escort craft in sampled runtime state
 - `tools/harness/check-galaxy-guardians-playable-preview.js` proves keyboard
   fire, life loss, reset, game over, owned audio cue IDs, and public-adapter
   isolation
