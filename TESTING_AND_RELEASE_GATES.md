@@ -231,6 +231,9 @@ Required:
 Typical application containment checks:
 - `node tools/harness/check-platinum-pack-boot.js`
 - `node tools/harness/check-new-game-reset.js`
+- `node tools/harness/check-galaxy-guardians-0-1-candidate.js` when the changed
+  surface touches the `Galaxy Guardians` dev-preview identity, runtime events,
+  cue IDs, scoring, or preview/public boundary.
 
 ### Profile C: Boundary change
 

@@ -10,6 +10,9 @@ than living only in chat or in transient harness output.
 
 Current artifacts:
 
+- `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
+  movement, threat, visual, audio, runtime-event, and public-boundary
+  requirements together.
 - `identity-baseline-0.1.json` - first application-owned sprite, palette, audio,
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing

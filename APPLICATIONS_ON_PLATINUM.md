@@ -240,7 +240,10 @@ specific game by name.
 
 The next application proof is maturing the first dev-only playable slice. It
 now has the initial lifecycle path, but the behavior is still intentionally
-development-scoped until the measured 0.1 scout-wave evidence is stronger.
+development-scoped until the measured 0.1 scout-wave evidence is stronger. The
+first aggregate 0.1 candidate gate is now source-controlled so future preview
+readiness claims can cite one durable artifact instead of reassembling the
+visual, audio, movement, threat, and boundary evidence from memory.
 
 - formation rack
 - dives
@@ -267,6 +270,14 @@ Current development-only playable-preview coverage:
 - `reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json`
   persists the first lower-field threat and application-owned scoring contract
   for enemy shots, player loss, and formation/dive hit values
+- `reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json`
+  persists the first aggregate 0.1 candidate gate for owned visual IDs, runtime
+  cue IDs, promoted event names, public-playable boundaries, and forbidden
+  Aurora capabilities
+- `tools/harness/check-galaxy-guardians-0-1-candidate.js` proves the aggregate
+  0.1 gate without launching a browser by deterministically forcing scout,
+  escort, flagship, enemy-shot, wrap-return, player-loss, and game-over runtime
+  evidence
 - `tools/harness/check-galaxy-guardians-identity-baseline.js` proves the
   identity artifact matches the pack-owned sprite rows, audio cue catalog, audio
   theme cues, runtime cue map, and dev-preview audio history

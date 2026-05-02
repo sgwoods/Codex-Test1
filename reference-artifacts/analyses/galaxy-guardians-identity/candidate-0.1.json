@@ -1,0 +1,67 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-0.1-candidate-gate",
+  "version": "0.1-dev-preview-candidate",
+  "createdOn": "2026-05-02",
+  "status": "candidate-gate-dev-only-not-public-release",
+  "purpose": "Provide one durable gate for the first Galaxy Guardians preview candidate by tying the visual catalog, audio catalog, runtime events, public-playable boundary, and Aurora/platform separation checks together.",
+  "inputs": {
+    "identityBaseline": "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
+    "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "threatScoring": "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+  },
+  "candidateGate": {
+    "harness": "tools/harness/check-galaxy-guardians-0-1-candidate.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-0-1-candidate",
+    "requiredVisualIds": [
+      "signal-flagship",
+      "signal-escort",
+      "signal-scout",
+      "player-interceptor"
+    ],
+    "requiredRuntimeEvents": [
+      "formation_entry_start",
+      "formation_entry_settle",
+      "formation_rack_complete",
+      "alien_dive_start",
+      "flagship_dive_start",
+      "escort_join",
+      "player_shot_fired",
+      "player_shot_resolved",
+      "enemy_shot",
+      "enemy_wrap_or_return",
+      "player_lost",
+      "game_over"
+    ],
+    "requiredRuntimeCueIds": [
+      "guardians-formation-pulse",
+      "guardians-player-single-shot",
+      "guardians-enemy-shot",
+      "guardians-scout-dive",
+      "guardians-flagship-dive",
+      "guardians-escort-join",
+      "guardians-scout-hit",
+      "guardians-escort-hit",
+      "guardians-flagship-hit",
+      "guardians-wrap-return",
+      "guardians-player-loss",
+      "guardians-game-over-fall"
+    ],
+    "forbiddenPublicCapabilities": {
+      "usesCaptureRescue": 0,
+      "usesDualFighterMode": 0,
+      "usesChallengeStages": 0,
+      "usesAuroraScoring": 0,
+      "usesAuroraEnemyFamilies": 0
+    },
+    "publicPlayableMustRemain": 0,
+    "devPlayableMustRemain": 1
+  },
+  "releaseUse": {
+    "dev": "Required before treating the Guardians preview as a 0.1 candidate on the development lane.",
+    "beta": "May support beta preview discussion only if paired with browser-backed playable-preview, compact-cabinet, pack-boundary, and release gate checks.",
+    "production": "Not sufficient for public production promotion because this is still explicitly dev-only candidate evidence."
+  }
+}
