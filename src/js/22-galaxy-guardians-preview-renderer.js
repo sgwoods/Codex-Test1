@@ -110,6 +110,24 @@ function drawGalaxyGuardiansPlayer(player){
  }
 }
 
+function drawGalaxyGuardiansEnemyShots(state){
+ ctx.save();
+ ctx.lineWidth=1.2;
+ ctx.strokeStyle='#ffdf6f';
+ ctx.shadowColor='#ff5b5b';
+ ctx.shadowBlur=7;
+ for(const shot of state.enemyShots||[]){
+  if(!shot||shot.active===0)continue;
+  ctx.beginPath();
+  ctx.moveTo(shot.x,shot.y-4);
+  ctx.lineTo(shot.x,shot.y+5);
+  ctx.stroke();
+  ctx.fillStyle='#fff7c2';
+  ctx.fillRect(shot.x-1,shot.y+4,2,2);
+ }
+ ctx.restore();
+}
+
 function drawGalaxyGuardiansAlien(alien,t){
  const visual=galaxyGuardiansPreviewVisual(alien.visualId);
  if(!visual)return;
@@ -188,6 +206,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  const starfield=typeof syncStarfieldProfile==='function'?syncStarfieldProfile({frontDoor:1,attractPhase:'guardians-preview'}):null;
  drawGalaxyGuardiansPreviewBackdrop(t);
  for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t);
+ drawGalaxyGuardiansEnemyShots(state);
  if(state.player.visible!==false)drawGalaxyGuardiansPlayer(state.player);
  drawGalaxyGuardiansPreviewHud(summary);
  ctx.restore();
@@ -201,6 +220,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
   visualIds:summary.visualIds,
   audioCueIds:summary.audioCueIds,
   alienCount:summary.alienCount,
+  enemyShotCount:summary.enemyShotCount,
   score:summary.score
  });
 }

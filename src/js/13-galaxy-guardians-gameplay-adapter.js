@@ -57,6 +57,7 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
   'escort_join',
   'player_shot_fired',
   'player_shot_resolved',
+  'enemy_shot',
   'enemy_wrap_or_return',
   'player_lost',
   'game_over',
@@ -240,6 +241,7 @@ function updateGalaxyGuardiansDevPreview(dt){
 function galaxyGuardiansCueNameForRuntimeEvent(event){
  if(!event)return '';
  if(event.type==='player_shot_fired')return 'playerShot';
+ if(event.type==='enemy_shot')return 'enemyShot';
  if(event.type==='alien_dive_start')return 'scoutDive';
  if(event.type==='flagship_dive_start')return 'flagshipDive';
  if(event.type==='escort_join')return 'escortJoin';
