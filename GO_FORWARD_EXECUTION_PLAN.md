@@ -145,9 +145,9 @@ The next hosted `/beta` should wait until we have:
 
 - at least one real improvement bundle beyond simple `/dev` parity
 - clearer progress on the weakest scorecard categories
-  - stage-1 timing fidelity
-  - challenge-stage timing fidelity
   - audio identity and cue alignment
+  - player movement conformance
+  - challenge-stage timing/content depth
 - a refreshed scorecard that shows a more defensible quality step over the
   current stable beta/prod line
 - release notes and docs that can honestly explain why this is the next serious
@@ -160,12 +160,10 @@ Practical standard:
   cycles, not immediately after the `/dev` refresh
 - the next serious public milestone should likely be a `MINOR` release in the
   `1.3.0` family, not a new `MAJOR`
-- after the convoy-pulse refinement, the next clearest fidelity targets are
-  audio identity polish and movement smoothing rather than broader stage-1
-  cadence repair
-- after refreshing the audio theme comparison, movement smoothing now looks like
-  the clearest next beta-shaping pass, with audio identity no longer one of the
-  weakest categories
+- after refreshing the conformance roll-up, audio identity is clearly the
+  weakest category at `6.1/10`
+- movement smoothing remains the next visible feel target at `8.0/10`, but it
+  should follow trace-backed diagnosis rather than blind constant changes
 - first-pass movement smoothing attempts that changed the shared player physics
   or even the narrower manual-control path both regressed movement conformance,
   so the next movement cycle should start from reference-trace extraction and
@@ -184,6 +182,7 @@ Practical standard:
 
 See also:
 
+- [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 - [BETA_CANDIDATE_PLAN.md](BETA_CANDIDATE_PLAN.md)
 - [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)

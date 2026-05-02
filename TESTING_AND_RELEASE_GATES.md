@@ -240,6 +240,16 @@ Typical application containment checks:
 - `node tools/harness/check-galaxy-guardians-formation-entry.js` when the changed
   surface touches Guardians stage start, rack-entry, rack-settle, or first-dive
   timing.
+
+Quality/conformance reporting:
+
+- `npm run harness:score:quality-conformance` is the current Aurora numeric
+  roll-up gate.
+- The readable current table and next-gap interpretation live in
+  [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md).
+- When this roll-up changes materially, update
+  [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md) and keep the
+  generated artifact under `reference-artifacts/analyses/quality-conformance/`.
 - `node tools/harness/check-galaxy-guardians-visual-readability.js` when the
   changed surface touches Guardians sprites, role palettes, preview rendering,
   hit feedback, or gameplay-scale visual identity.

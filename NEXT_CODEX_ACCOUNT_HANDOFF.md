@@ -96,21 +96,38 @@ Then read as needed:
 
 ## Immediate Next Work
 
-The recommended next branch is:
+The current active branch is:
+
+```bash
+codex/macbook-pro-guardians-identity-0-1-candidate
+```
+
+Current conformance state:
+
+- `harness:check:audio-theme-phases` is green again
+- `harness:score:quality-conformance` is green at `8.8/10`
+- audio identity and cue alignment is still the weakest category at `6.1/10`
+- player movement is the next visible feel gap at `8.0/10`
+- the readable source of truth is
+  [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
+
+Recommended next work:
 
 ```bash
 git switch main
+git pull --rebase origin main
 npm run machine:bootstrap
-git switch -c codex/macbook-pro-audio-phase-gate
+git switch -c codex/macbook-pro-reference-audio-identity
 ```
 
 Goal:
 
-- fix or recalibrate the failing `harness:check:audio-theme-phases`
+- use measured reference clips/waveforms before subjective tuning
+- improve Aurora audio identity and cue alignment beyond the restored phase gate
 - rerun `harness:score:quality-conformance`
-- update scorecard/docs if the quality model changes
+- update scorecard/docs if the numeric model changes
 
-After that:
+After that, create the level-expansion branch:
 
 ```bash
 git switch main
@@ -177,8 +194,10 @@ Current product direction:
 - Bring a second-game Platinum sneak peek forward after those foundations, before full 2.0
 
 Immediate next recommended work:
-1. Branch: codex/macbook-pro-audio-phase-gate
-   - fix or recalibrate harness:check:audio-theme-phases
+1. Branch: codex/macbook-pro-reference-audio-identity
+   - start from CONFORMANCE_METRIC_OVERVIEW.md
+   - use measured reference clips/waveforms before subjective tuning
+   - improve the weakest scorecard category: audio identity and cue alignment
    - rerun harness:score:quality-conformance
    - update scorecard/docs if the quality model changes
 2. Branch: codex/macbook-pro-level-expansion-plan

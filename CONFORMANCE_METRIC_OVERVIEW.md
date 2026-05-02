@@ -5,20 +5,30 @@ scored numerically, what is gated as pass/fail, and where the next measurement
 cycle should focus.
 
 Last refreshed: May 2, 2026 on
-`codex/macbook-pro-guardians-identity-0-1-candidate` at commit `1fb6e44`.
+`codex/macbook-pro-guardians-identity-0-1-candidate`.
 
 ## Current Aurora Score
 
 Latest artifact:
 
-- `reference-artifacts/analyses/quality-conformance/2026-05-02-1fb6e44/`
+- `reference-artifacts/analyses/quality-conformance/2026-05-02-7ef349b/`
 
-Current roll-up:
+### At A Glance
+
+| Area | Score | Status | What It Means |
+| --- | ---: | --- | --- |
+| Overall Aurora quality | `8.8/10` | Strong | Public-quality baseline; still needs fidelity polish before the next serious beta claim. |
+| Strongest category | `10/10` | Protected | Combat responsiveness, stage-1 geometry, and capture/rescue rules are the safest parts of the current model. |
+| Weakest category | `6.1/10` | Needs work | Audio identity and cue alignment remain the biggest measurable quality gap. |
+| Next visible feel gap | `8.0/10` | Needs work | Player movement is playable, but tap correction and hold travel need more reference-led tuning. |
+| Guardians 0.1 preview | Pass/fail gates | Green | The preview has durable gates, but it is not yet part of the Aurora numeric quality roll-up. |
+
+### Aurora Category Detail
 
 | Category | Current score | Evidence posture | Read |
 | --- | ---: | --- | --- |
 | Overall quality | `8.8/10` | Numeric roll-up | Strong public-quality baseline, but not yet a fidelity finish line. |
-| Player movement | `8.1/10` | Trace-backed harness | Still one of the main feel gaps; tap correction and hold travel need more reference-led work. |
+| Player movement | `8.0/10` | Trace-backed harness | Still one of the main feel gaps; tap correction and hold travel need more reference-led work. |
 | Shot and hit responsiveness | `10/10` | Harness-backed | Strong. Keep this protected while tuning movement and pacing. |
 | Stage-1 opening timing | `8.5/10` | Reference timing harness | Healthy, but still not perfect. |
 | Stage-1 opening geometry | `10/10` | Reference geometry harness | Strong. Preserve during level expansion. |
@@ -28,6 +38,16 @@ Current roll-up:
 | Progression and persona depth | `8.8/10` | Persona progression harness | Solid, with one remaining ordering edge case noted by the scorecard. |
 | Audio identity and cue alignment | `6.1/10` | Audio comparison and correspondence artifacts | Weakest category. Cue phase gates are green again, but identity and acoustic fit remain the biggest quality gap. |
 | UI, shell, graphics integrity | `9.2/10` | Dev-candidate surface suite | Strong after refreshing stale leaderboard/attract/audio phase expectations. |
+
+### Release Read
+
+| Rank | Opportunity | Current score | Release implication |
+| ---: | --- | ---: | --- |
+| 1 | Audio identity and cue alignment | `6.1/10` | Do not claim a major fidelity step until reference-derived acoustic/cue work improves. |
+| 2 | Player movement conformance | `8.0/10` | Tune from measured traces; avoid blind control-constant changes. |
+| 3 | Challenge-stage timing and content | `8.4/10` | Timing is decent, but content variety needs the level-expansion program. |
+| 4 | Progression/persona depth | `8.8/10` | Good base; remaining edge cases should stay visible. |
+| 5 | UI/shell/graphics integrity | `9.2/10` | Good enough for beta support when paired with game-fidelity gains. |
 
 ## Galaxy Guardians Preview Gates
 
@@ -39,7 +59,7 @@ Current candidate artifact:
 
 - `reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json`
 
-Current Guardians 0.1 gates:
+### Guardians 0.1 Gate Detail
 
 | Gate | Artifact / harness | Current posture |
 | --- | --- | --- |
@@ -60,7 +80,7 @@ Current Guardians 0.1 gates:
   and game-over/loss behavior.
 
 2. Player movement is the next most visible feel gap.
-- Current score is `8.1/10`.
+- Current score is `8.0/10`.
 - The next tuning cycle should use preserved traces and direct frame-level
   reference extraction rather than blind constants.
 

@@ -30,9 +30,9 @@ Branch-local refresh on May 2, 2026:
 - branch:
   - `codex/macbook-pro-guardians-identity-0-1-candidate`
 - commit:
-  - `1fb6e44`
+  - `7ef349b`
 - generated artifact:
-  - `reference-artifacts/analyses/quality-conformance/2026-05-02-1fb6e44/`
+  - `reference-artifacts/analyses/quality-conformance/2026-05-02-7ef349b/`
 - overall quality score:
   - `8.8/10`
 - weakest category:
@@ -40,9 +40,13 @@ Branch-local refresh on May 2, 2026:
 - notes:
   - the dev-candidate surface suite is green again after refreshing stale
     leaderboard, attract-score, and audio phase expectations
-  - the current player movement score from the refreshed artifact is `8.1/10`
+  - the current player movement score from the refreshed artifact is `8.0/10`
   - this branch-local refresh does not by itself approve or publish beta or
     production
+
+Readable project-level overview:
+
+- [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 
 ## Legend
 
@@ -52,7 +56,29 @@ Branch-local refresh on May 2, 2026:
   - inferred from preserved baseline report sections or from comparison to a
     nearby current line
 
-## Current Comparison Table
+## Branch-Local Conformance Table
+
+This is the current local development read from the May 2, 2026 artifact above.
+It is the best table to use when discussing what to improve next.
+
+| Category | Branch-local score | Status | Next read |
+| --- | ---: | --- | --- |
+| Overall quality score | `8.8` | Strong | Good base, not a fidelity finish line. |
+| Player movement conformance | `8.0` | Needs work | Main feel gap after audio; use reference traces before tuning. |
+| Shot and hit responsiveness | `10.0` | Strong | Preserve while changing movement and pacing. |
+| Stage-1 opening timing fidelity | `8.5` | Good | Healthy but still measurable room remains. |
+| Stage-1 opening geometry fidelity | `10.0` | Strong | Preserve during level expansion. |
+| Dive fairness and safety | `9.1` | Strong | Keep watching collision pressure. |
+| Capture and rescue rule fidelity | `10.0` | Strong | Preserve during platform/game separation work. |
+| Challenge-stage timing fidelity | `8.4` | Needs work | Timing is decent; content depth still needs expansion. |
+| Progression and persona depth | `8.8` | Good | One ordering edge case remains visible. |
+| Audio identity and cue alignment | `6.1` | Weakest | Highest-priority conformance gap. |
+| UI, shell, and graphics integrity | `9.2` | Strong | Surface gates are green again. |
+
+## Hosted Lane Comparison Table
+
+This table describes the current hosted shipped family, not the branch-local
+Guardians/conformance work.
 
 | Category | Current shipped line | Hosted `/dev` | Hosted `/beta` | Hosted `/production` | Reference gameplay |
 | --- | ---: | ---: | ---: | ---: | ---: |
