@@ -30,6 +30,7 @@
     "machine:bootstrap": "node tools/dev/machine-bootstrap.js",
     "machine:doctor": "node tools/dev/machine-doctor.js",
     "machine:status": "node tools/dev/machine-status.js",
+    "machine:ensure-browser": "node tools/dev/ensure-playwright-browser.js",
     "local:resume": "node tools/dev/local-resume.js",
     "local:stop": "node tools/dev/local-stop.js",
     "harness:analyze": "node tools/harness/analyze-run.js",

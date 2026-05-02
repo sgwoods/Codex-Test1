@@ -1,12 +1,12 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const { chromium } = require('playwright-core');
 const { DIST_DEV } = require('../build/paths');
+const { SYSTEM_CHROME, launchHarnessBrowser } = require('./browser-launch');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const APP_ROOT = DIST_DEV;
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const CHROME = SYSTEM_CHROME;
 
 function mime(file){
   if(file.endsWith('.html')) return 'text/html; charset=utf-8';
@@ -40,17 +40,12 @@ function sleep(ms){
 }
 
 async function withHarnessPage(cfg, fn){
-  if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
   const appRoot = cfg.root ? path.resolve(cfg.root) : APP_ROOT;
   if(!fs.existsSync(path.join(appRoot, 'index.html'))){
     throw new Error(`Built app not found at ${appRoot}. Run "npm run build" first.`);
   }
   const { server, port } = await serve(appRoot);
-  const browser = await chromium.launch({
-    executablePath: CHROME,
-    headless: cfg.headed ? false : true,
-    args: ['--autoplay-policy=no-user-gesture-required']
-  });
+  const browser = await launchHarnessBrowser(cfg);
   try{
     const context = await browser.newContext({
       acceptDownloads: true,

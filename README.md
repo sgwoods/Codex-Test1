@@ -144,6 +144,7 @@ Current go-forward focus:
 
 ```bash
 cd <repo-root>
+npm run machine:ensure-browser
 npm run build
 ```
 
@@ -163,6 +164,11 @@ To stop the tracked local services cleanly:
 ```bash
 npm run local:stop
 ```
+
+Automated browser harnesses use Playwright-managed Chromium, not the user's
+installed Google Chrome. In Codex Desktop on macOS, run browser-backed harnesses
+with escalated sandbox permissions so Chromium can register its macOS Mach port
+without triggering crash dialogs.
 
 ## Release Ladder
 

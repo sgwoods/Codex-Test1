@@ -19,7 +19,6 @@ async function main(){
   const missing = [];
   if(!checks.npm.ok) missing.push('npm');
   if(!checks.python3.ok) missing.push('python3');
-  if(!checks.chrome.ok) missing.push('chrome');
   if(!checks.gh.ok) missing.push('gh');
 
   if(missing.length){
@@ -48,6 +47,8 @@ async function main(){
 
   runCommandOrThrow('npm', ['install'], 'npm install');
   actions.push('npm install');
+  runCommandOrThrow('npm', ['run', 'machine:ensure-browser'], 'npm run machine:ensure-browser');
+  actions.push('npm run machine:ensure-browser');
   runCommandOrThrow('npm', ['run', 'build'], 'npm run build');
   actions.push('npm run build');
   runCommandOrThrow('npm', ['run', 'local:resume'], 'npm run local:resume');

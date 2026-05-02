@@ -2,11 +2,10 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const { chromium } = require('playwright-core');
+const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_DEV } = require('../build/paths');
 
 const APP_ROOT = DIST_DEV;
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 function fail(message, payload){
   console.error(message);
@@ -77,17 +76,12 @@ async function moveWithKey(page, key){
 }
 
 async function main(){
-  if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
   if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))){
     throw new Error(`Built dev app not found at ${APP_ROOT}. Run "npm run build" first.`);
   }
 
   const { server, port } = await serve(APP_ROOT);
-  const browser = await chromium.launch({
-    executablePath: CHROME,
-    headless: true,
-    args: ['--autoplay-policy=no-user-gesture-required']
-  });
+  const browser = await launchHarnessBrowser();
 
   try{
     const context = await browser.newContext({ viewport: { width: 1440, height: 1600 } });

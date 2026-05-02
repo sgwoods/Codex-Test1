@@ -36,7 +36,7 @@ async function gatherMachineSnapshot({ includePublic = false } = {}){
   const developmentBlocked = [];
   if(!tools.npm.ok) developmentBlocked.push('npm');
   if(!tools.python3.ok) developmentBlocked.push('python3');
-  if(!tools.chrome.ok) developmentBlocked.push('chrome');
+  if(!tools.harness_browser.ok) developmentBlocked.push('playwright-managed chromium');
   if(!remotes.ok) developmentBlocked.push('origin remote');
 
   const releaseBlocked = [];

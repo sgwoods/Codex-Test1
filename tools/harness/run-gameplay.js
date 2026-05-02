@@ -5,12 +5,11 @@ const path = require('path');
 const { analyze } = require('./analyze-run');
 const { writePortableSummary } = require('./summary-path-util');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
-const { chromium } = require('playwright-core');
+const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_DEV } = require('../build/paths');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const APP_ROOT = DIST_DEV;
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const DEFAULT_OUT = path.join(ROOT, 'harness-artifacts');
 const SCENARIOS = path.join(__dirname, 'scenarios');
 
@@ -279,7 +278,6 @@ async function main(){
     console.log('Optional: --auto-video 0|1');
     process.exit(args.help ? 0 : 1);
   }
-  if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
   const appRoot = args.root ? path.resolve(String(args.root)) : APP_ROOT;
   if(!fs.existsSync(path.join(appRoot, 'index.html'))){
     throw new Error(`Built app not found at ${appRoot}. Run "npm run build" first.`);
@@ -301,11 +299,7 @@ async function main(){
   const initAutoVideo = spec.autoVideo === false ? '0' : '1';
 
   const { server, port } = await serve(appRoot);
-  const browser = await chromium.launch({
-    executablePath: CHROME,
-    headless: args.headed ? false : true,
-    args: ['--autoplay-policy=no-user-gesture-required']
-  });
+  const browser = await launchHarnessBrowser({ headed: !!args.headed });
 
   try{
     const context = await browser.newContext({

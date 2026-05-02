@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const { chromium } = require('playwright-core');
+const { launchHarnessBrowser } = require('./browser-launch');
 
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 function parseArgs(argv){
   const args = {};
@@ -77,12 +76,7 @@ async function main(){
   const args = parseArgs(process.argv.slice(2));
   const lane = String(args.lane || 'production').toLowerCase();
   const url = laneUrl(lane);
-  if(!fs.existsSync(CHROME)) throw new Error(`Chrome not found at ${CHROME}`);
-  const browser = await chromium.launch({
-    executablePath: CHROME,
-    headless: true,
-    args: ['--autoplay-policy=no-user-gesture-required']
-  });
+  const browser = await launchHarnessBrowser();
   try{
     const context = await browser.newContext({ viewport: { width: 1600, height: 1700 } });
     const page = await context.newPage();

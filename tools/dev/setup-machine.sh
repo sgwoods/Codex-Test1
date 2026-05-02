@@ -6,7 +6,6 @@ DEFAULT_TARGET="$PWD/Codex-Test1"
 TARGET_DIR="${1:-$DEFAULT_TARGET}"
 TARGET_DIR="${TARGET_DIR/#\~/$HOME}"
 
-CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 OS_NAME="$(uname -s)"
 BrewBinCandidates=(
   "/opt/homebrew/bin/brew"
@@ -187,7 +186,7 @@ ensure_mac_prerequisites() {
   local python_present="no"
   [[ "$OS_NAME" == "Darwin" ]] || return 0
 
-  if ! have_tool git || ! have_tool node || ! have_tool npm || ! have_tool python3 || ! have_tool gh || [[ ! -x "$CHROME_PATH" ]]; then
+  if ! have_tool git || ! have_tool node || ! have_tool npm || ! have_tool python3 || ! have_tool gh; then
     needs_brew="yes"
   fi
 
@@ -216,7 +215,6 @@ EOF
   fi
   brew_install_if_missing formula python "$python_present"
   brew_install_if_missing formula gh "$(have_tool gh && echo yes || echo no)"
-  brew_install_if_missing cask google-chrome "$([[ -x "$CHROME_PATH" ]] && echo yes || echo no)"
   hash -r
 }
 
@@ -227,12 +225,6 @@ require_tool node "Install Node.js, then rerun this setup script."
 require_tool npm "Install npm, then rerun this setup script."
 require_tool python3 "Install Python 3, then rerun this setup script."
 require_tool gh "Install GitHub CLI (gh), then rerun this setup script."
-
-if [[ ! -x "$CHROME_PATH" ]]; then
-  echo "Missing required browser: Google Chrome"
-  echo "Expected at: $CHROME_PATH"
-  exit 1
-fi
 
 if [[ "$TARGET_DIR" == "$HOME/Library/Mobile Documents/"* ]]; then
   echo "Using an iCloud-backed Aurora clone path:"
@@ -295,6 +287,7 @@ echo "  npm run machine:bootstrap"
 echo
 echo "Next useful commands:"
 echo "  cd \"$TARGET_DIR\""
+echo "  npm run machine:ensure-browser"
 echo "  npm run machine:status"
 echo "  npm run machine:doctor"
 echo "  npm run release:show-authority"
