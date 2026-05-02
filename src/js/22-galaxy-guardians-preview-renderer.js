@@ -43,14 +43,24 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
  const wing=opts.wing||palette.wing||core;
  const accent=opts.accent||palette.accent||core;
  const eye=opts.eye||palette.eye||'#ffffff';
+ const flare=opts.flare||palette.flare||accent;
+ const colorForPixel=(ch,edge,center)=>{
+  if(ch==='C')return core;
+  if(ch==='W')return wing;
+  if(ch==='A')return accent;
+  if(ch==='E')return eye;
+  if(ch==='F')return flare;
+  return edge?wing:(center?accent:core);
+ };
  ctx.save();
  ctx.translate(Math.round(x-width*cell/2),Math.round(y-height*cell/2));
  for(let row=0;row<rows.length;row++){
   for(let col=0;col<rows[row].length;col++){
-   if(rows[row][col]!== 'X')continue;
+   const pixel=rows[row][col];
+   if(pixel==='.')continue;
    const edge=col===0||col===rows[row].length-1||row===0||row===rows.length-1;
    const center=Math.abs(col-(rows[row].length-1)/2)<1.1;
-   ctx.fillStyle=edge?wing:(center?accent:core);
+   ctx.fillStyle=colorForPixel(pixel,edge,center);
    ctx.fillRect(col*cell,row*cell,cell,cell);
   }
  }

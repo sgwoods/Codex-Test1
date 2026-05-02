@@ -47,15 +47,15 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Flagship',
   role:'flagship',
   silhouette:'crowned-command-ship',
-  palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2'}),
+  palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '....X....',
-   '...XXX...',
-   '..XXXXX..',
-   '.XX.X.XX.',
-   'XXXXXXXXX',
-   'X.XXXXX.X',
-   '..X...X..'
+   '.....A.....',
+   '...AWEWA...',
+   '..WWCCCWW..',
+   '.WCCECECCW.',
+   'WWCCCCCCCWW',
+   'W.CCAACC.W',
+   '...W...W...'
   ]),
   notes:'Wide crowned command silhouette for flagship-with-escort dives; intentionally not an Aurora boss/capture ship.'
  }),
@@ -64,14 +64,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Escort',
   role:'escort',
   silhouette:'red-arrow-escort',
-  palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff'}),
+  palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '..X.X..',
-   '.XXXXX.',
-   'XXX.XXX',
-   '.XXXXX.',
-   'X.X.X.X',
-   '..X.X..'
+   '...A...',
+   '..WCW..',
+   '.WCCCW.',
+   'WWCEWW',
+   '.ACCA.',
+   'W..W..W'
   ]),
   notes:'Small red escort marker for paired flagship pressure rather than Aurora butterfly behavior.'
  }),
@@ -80,14 +80,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Scout',
   role:'scout',
   silhouette:'cyan-wing-scout',
-  palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff'}),
+  palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '...X...',
-   '.X.X.X.',
-   'XXXXXXX',
-   '..XXX..',
-   '.X.X.X.',
-   'X.....X'
+   '...A...',
+   '.WACAW.',
+   'WWCCCWW',
+   '..ECE..',
+   '.WCCAW.',
+   'W.....W'
   ]),
   notes:'Cyan-green rank-and-file scout for sparse Galaxian-like solo dives.'
  }),
@@ -96,13 +96,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Guardian Interceptor',
   role:'player',
   silhouette:'single-shot-interceptor',
-  palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',flare:'#ff5b5b'}),
+  palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '...X...',
-   '..XXX..',
-   '.XXXXX.',
-   'XXX.XXX',
-   '..X.X..'
+   '...A...',
+   '..CCC..',
+   '.WCECW.',
+   'WWCCCWW',
+   '..WAW..',
+   '...F...'
   ]),
   notes:'Single-fighter player craft sized for one-shot precision; no Aurora dual-fighter silhouette.'
  })
@@ -120,7 +121,8 @@ const GUARDIANS_AUDIO_CUE_CATALOG=Object.freeze({
  escortHit:Object.freeze({id:'guardians-escort-hit',event:'player_shot_resolved',profile:'red-blue-snap',referenceIntent:'escort hit'}),
  flagshipHit:Object.freeze({id:'guardians-flagship-hit',event:'player_shot_resolved',profile:'gold-command-break',referenceIntent:'flagship hit / score moment'}),
  wrapReturn:Object.freeze({id:'guardians-wrap-return',event:'enemy_wrap_or_return',profile:'soft-bottom-return-sweep',referenceIntent:'bottom-exit or return warning'}),
- playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'future life-loss cue'})
+ playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the dev playable preview'}),
+ gameOver:Object.freeze({id:'guardians-game-over-fall',event:'game_over',profile:'low-falling-square-stair',referenceIntent:'short game-over descent distinct from Aurora'})
 });
 
 const GUARDIANS_AUDIO_THEMES=Object.freeze({
@@ -128,9 +130,18 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
   id:'guardians-signal',
   label:'Guardians Signal',
   cues:Object.freeze({
-   gameStart:Object.freeze({seq:[330,392,523,659],step:.05,wave:'square',volume:.015,slide:18,lpHz:3400}),
-   playerShot:Object.freeze({tones:Object.freeze([{freq:1180,duration:.032,wave:'square',volume:.007,slide:-700,lpHz:6200}])}),
+   gameStart:Object.freeze({seq:[294,370,494,659],step:.052,wave:'square',volume:.014,slide:22,lpHz:3300}),
+   formationPulse:Object.freeze({tones:Object.freeze([{freq:196,duration:.08,wave:'square',volume:.0035,slide:4,lpHz:1700},{freq:392,duration:.058,wave:'square',volume:.008,slide:-10,lpHz:3000,delay:.012}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1240,duration:.03,wave:'square',volume:.0075,slide:-820,lpHz:6400},{freq:1680,duration:.018,wave:'square',volume:.0032,slide:-520,lpHz:7200,delay:.006}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:286,duration:.085,wave:'square',volume:.009,slide:-140,lpHz:2700}])}),
+   scoutDive:Object.freeze({tones:Object.freeze([{freq:392,duration:.09,wave:'square',volume:.006,slide:-120,lpHz:2600},{freq:294,duration:.12,wave:'square',volume:.005,slide:-90,lpHz:2300,delay:.055}])}),
+   flagshipDive:Object.freeze({tones:Object.freeze([{freq:262,duration:.16,wave:'square',volume:.0075,slide:-80,lpHz:2400},{freq:196,duration:.22,wave:'triangle',volume:.006,slide:-70,lpHz:1900,delay:.06}])}),
+   escortJoin:Object.freeze({seq:[660,587,660],step:.032,wave:'square',volume:.006,slide:-24,lpHz:4300}),
+   wrapReturn:Object.freeze({tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0055,slide:120,lpHz:2200}])}),
+   playerLoss:Object.freeze({tones:Object.freeze([{freq:240,duration:.12,wave:'square',volume:.017,slide:-190,lpHz:2200},{freq:170,duration:.18,wave:'sawtooth',volume:.014,slide:-120,lpHz:1700,delay:.04}]),noise:Object.freeze([{duration:.09,volume:.007,hp:950,delay:.015}])}),
+   scoutHit:Object.freeze({tones:Object.freeze([{freq:282,duration:.045,wave:'square',volume:.011,slide:-230,lpHz:3600}])}),
+   escortHit:Object.freeze({tones:Object.freeze([{freq:340,duration:.052,wave:'square',volume:.012,slide:-210,lpHz:3800},{freq:220,duration:.05,wave:'triangle',volume:.005,slide:-120,lpHz:2600,delay:.012}])}),
+   flagshipHit:Object.freeze({tones:Object.freeze([{freq:420,duration:.07,wave:'square',volume:.013,slide:-150,lpHz:3900},{freq:260,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2600,delay:.018}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.055,wave:'square',volume:.012,slide:-210,lpHz:3300}])}),
    bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.068,wave:'square',volume:.013,slide:-120,lpHz:3600}])}),
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.04,wave:'square',volume:.009,slide:-320,lpHz:3900},{freq:220,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2100,delay:.014}])}),

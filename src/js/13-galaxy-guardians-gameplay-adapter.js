@@ -204,6 +204,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
   seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719
  });
+ GALAXY_GUARDIANS_ACTIVE_DEV_STATE.audioEventIndex=GALAXY_GUARDIANS_ACTIVE_DEV_STATE.events.length;
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
@@ -226,6 +227,7 @@ function galaxyGuardiansInputFromKeys(){
 function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,galaxyGuardiansInputFromKeys());
+ playGalaxyGuardiansRuntimeCues(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(GALAXY_GUARDIANS_ACTIVE_DEV_STATE.gameOver){
   started=0;
@@ -233,6 +235,35 @@ function updateGalaxyGuardiansDevPreview(dt){
   if(typeof syncPauseUi==='function')syncPauseUi();
   stopRunRecording();
  }
+}
+
+function galaxyGuardiansCueNameForRuntimeEvent(event){
+ if(!event)return '';
+ if(event.type==='player_shot_fired')return 'playerShot';
+ if(event.type==='alien_dive_start')return 'scoutDive';
+ if(event.type==='flagship_dive_start')return 'flagshipDive';
+ if(event.type==='escort_join')return 'escortJoin';
+ if(event.type==='enemy_wrap_or_return')return 'wrapReturn';
+ if(event.type==='player_lost')return 'playerLoss';
+ if(event.type==='game_over')return 'gameOver';
+ if(event.type==='player_shot_resolved'){
+  if(event.result!=='hit')return '';
+  if(event.role==='flagship')return 'flagshipHit';
+  if(event.role==='escort')return 'escortHit';
+  return 'scoutHit';
+ }
+ return '';
+}
+
+function playGalaxyGuardiansRuntimeCues(state){
+ if(!state||!Array.isArray(state.events)||typeof sfx==='undefined'||typeof sfx.playCue!=='function')return;
+ const start=Math.max(0,+state.audioEventIndex||0);
+ for(let i=start;i<state.events.length;i++){
+  const cueName=galaxyGuardiansCueNameForRuntimeEvent(state.events[i]);
+  if(!cueName)continue;
+  sfx.playCue(cueName,{phase:'stage',gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey});
+ }
+ state.audioEventIndex=state.events.length;
 }
 
 function currentGalaxyGuardiansDevPreviewState(){
