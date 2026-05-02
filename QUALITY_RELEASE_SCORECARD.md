@@ -25,6 +25,25 @@ As of April 26, 2026:
   - `1.2.3+build.532.sha.b959491`
   - built `Apr 26 2026, 7:27 PM EDT`
 
+Branch-local refresh on May 2, 2026:
+
+- branch:
+  - `codex/macbook-pro-guardians-identity-0-1-candidate`
+- commit:
+  - `1fb6e44`
+- generated artifact:
+  - `reference-artifacts/analyses/quality-conformance/2026-05-02-1fb6e44/`
+- overall quality score:
+  - `8.8/10`
+- weakest category:
+  - audio identity and cue alignment, `6.1/10`
+- notes:
+  - the dev-candidate surface suite is green again after refreshing stale
+    leaderboard, attract-score, and audio phase expectations
+  - the current player movement score from the refreshed artifact is `8.1/10`
+  - this branch-local refresh does not by itself approve or publish beta or
+    production
+
 ## Legend
 
 - plain number:

@@ -165,6 +165,15 @@ function leaderboardRowIncludedByDate(row){
  const stamp=Date.parse(resolveRowTimestamp(row)||row?.at||'');
  return Number.isFinite(stamp)&&stamp>=threshold;
 }
+function escapeLeaderboardHtml(value){
+ return String(value||'').replace(/[&<>"']/g,ch=>({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+ }[ch]));
+}
 function formatLeaderboardRowMeta(row){
  const buildRaw=String(row?.build||'').trim();
  const buildCore=(buildRaw.split('+')[0]||'').trim();
@@ -174,7 +183,7 @@ function formatLeaderboardRowMeta(row){
  const dateLabel=Number.isFinite(parsed)
   ? new Intl.DateTimeFormat(undefined,{month:'short',day:'2-digit',year:'2-digit'}).format(parsed)
   : '--';
- return { build:`Build ${build}`, dateLabel };
+ return { build:`Build ${build}`, buildRaw:buildRaw||build, dateLabel };
 }
 function syncPasswordToggleButton(input,button,label='password'){
  if(!button)return;
@@ -235,7 +244,8 @@ function renderLeaderboardPanel(){
   const meta=formatLeaderboardRowMeta(row);
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
-  body.push(`<span class="scoreCell meta"><span class="scoreBuild">${meta.build}</span><span class="scoreDate">${meta.dateLabel}</span></span>`);
+  const fullMeta=`${meta.buildRaw} ${meta.dateLabel}`.trim();
+  body.push(`<span class="scoreCell meta" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreDate">${meta.dateLabel}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }

@@ -31,7 +31,7 @@ async function main(){
   if(result.third.phase !== 'scores' || result.third.view !== 'all') fail('attract score cycle did not rotate to All before returning to demo mode', result);
   if(result.fourth.phase !== 'demo') fail('attract score cycle did not return to demo after showing the three boards', result);
   if(!String(result.first.title||'').includes('VALIDATED PILOTS')) fail('validated attract title did not render first', result);
-  if(!String(result.second.title||'').includes('LOCAL DEVICE SCORES')) fail('local attract title did not render during rotation', result);
+  if(!String(result.second.title||'').includes('LOCAL TOP 10 DEVICE SCORES')) fail('local attract title did not render during rotation', result);
   if(!String(result.third.title||'').includes('TOP 10 PILOTS')) fail('all-scores attract title did not render during rotation', result);
 
   console.log(JSON.stringify({
