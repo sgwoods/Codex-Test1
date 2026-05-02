@@ -20,12 +20,19 @@ Aurora now assumes:
 The practical startup and readiness commands are now:
 
 - `npm run machine:bootstrap`
+- `npm run machine:ensure-browser`
 - `npm run machine:doctor`
 - `npm run machine:status`
 - `npm run release:show-authority`
 
 This means machine readiness and release authority are now part of release
 discipline, not just local convention.
+
+Browser-backed gates use Playwright-managed Chromium. They must not launch the
+user's installed Google Chrome by default. In Codex Desktop on macOS, run these
+browser-backed commands with escalated sandbox permissions; the harness launcher
+will refuse sandboxed browser starts to avoid macOS Chromium/Chrome SIGABRT
+crash dialogs.
 
 ## Bug-Fix Discipline
 

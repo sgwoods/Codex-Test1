@@ -70,6 +70,14 @@ Key local services:
 - Game: http://127.0.0.1:8000/
 - Viewer: http://127.0.0.1:4311/
 
+Browser harness rule:
+- Run `npm run machine:ensure-browser` through bootstrap before browser checks.
+- Browser-backed harnesses use Playwright-managed Chromium, not the user's
+  installed Google Chrome.
+- In Codex Desktop on macOS, run browser-backed harness commands with escalated
+  sandbox permissions; sandboxed browser starts can trigger Chromium/Chrome
+  SIGABRT crash dialogs.
+
 Important docs to read first before major work:
 - NEXT_CODEX_ACCOUNT_HANDOFF.md
 - RESTART_FROM_HERE.md

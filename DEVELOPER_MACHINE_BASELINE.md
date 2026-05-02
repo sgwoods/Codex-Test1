@@ -34,7 +34,8 @@ Verified on this machine on `2026-04-24`:
 - `npm`: `11.11.1`
 - `python3`: `3.12.1`
 - `gh`: `2.37.0`
-- `Google Chrome`: `147.0.7727.56`
+- `Google Chrome`: useful for manual local review
+- Playwright-managed Chromium: required for automated browser harnesses
 
 The exact versions do not need to match perfectly, but a new machine should
 record its actual versions in a setup note when first verified.
@@ -48,8 +49,15 @@ node -v
 npm -v
 python3 --version
 gh --version | head -n 1
-'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --version
+npm run machine:ensure-browser
+npm run machine:doctor
 ```
+
+Browser-backed harnesses intentionally use Playwright-managed Chromium instead
+of the user's installed Google Chrome. In Codex Desktop on macOS, run those
+harness commands outside the filesystem sandbox / with escalated sandbox
+permissions; the launcher refuses sandboxed browser starts because macOS denies
+Chromium Mach-port registration there and can raise crash dialogs.
 
 ## Repo Setup
 
@@ -66,6 +74,7 @@ This command:
 - clones `sgwoods/Codex-Test1` into `./Codex-Test1` if needed
 - reuses the clone if it already exists
 - runs `npm run machine:bootstrap`
+- installs Playwright-managed Chromium for browser-backed harnesses
 - and, on fresh macOS machines, attempts to install missing Aurora
   prerequisites through Apple Command Line Tools plus Homebrew
 - those prerequisite installs may request administrator approval

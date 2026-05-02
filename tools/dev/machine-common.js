@@ -135,12 +135,19 @@ function commandVersion(command, args = ['--version']){
 }
 
 function toolChecks(){
+  let harnessBrowser = { ok: false, kind: 'unknown', path: '', message: '' };
+  try{
+    harnessBrowser = require('../harness/browser-launch').resolveHarnessBrowser();
+  }catch(err){
+    harnessBrowser = { ok: false, kind: 'error', path: '', message: String(err && err.message || err) };
+  }
   const checks = {
     node: { ok: true, version: process.version },
     npm: { ok: false, version: null },
     python3: { ok: false, version: null },
     gh: { ok: false, version: null, authenticated: false },
-    chrome: { ok: false, version: null, path: CHROME_PATH }
+    chrome: { ok: false, version: null, path: CHROME_PATH },
+    harness_browser: harnessBrowser
   };
 
   checks.npm.version = commandVersion('npm', ['-v']);
@@ -175,7 +182,8 @@ function buildMachineProfile(identity, checks, lastSuccessfulBootstrapAt = null)
       npm: checks.npm.version,
       python3: checks.python3.version,
       gh: checks.gh.version,
-      chrome: checks.chrome.version
+      chrome: checks.chrome.version,
+      harness_browser: checks.harness_browser.kind
     },
     gh_auth: checks.gh.authenticated,
     last_successful_bootstrap_at: lastSuccessfulBootstrapAt
