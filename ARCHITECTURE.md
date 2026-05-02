@@ -195,6 +195,10 @@ Pack-boundary harness:
   `reference-artifacts/analyses/galaxy-guardians-identity/` matches the
   pack-owned sprite glyphs, audio cue catalog, theme cues, runtime cue map, and
   dev-preview audio history.
+- `tools/harness/check-galaxy-guardians-movement-pacing.js`
+  verifies that the persistent movement/pacing artifact matches runtime rules
+  and that sampled scout/flagship/escort dive behavior exposes real linked
+  escort craft and wrap/return pressure.
 - `tools/harness/check-galaxy-guardians-playable-preview.js`
   verifies the development-only Galaxy Guardians playable-preview adapter:
   keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and

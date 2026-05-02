@@ -68,6 +68,22 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   singleShotCooldown:.72,
   firstScoutDiveDelay:2.2,
   flagshipEscortDelay:6.4,
+  playerSpeed:118,
+  formationDriftAmplitude:2.7,
+  formationDriftHz:2.05,
+  scoutDiveIntervalBase:1.72,
+  scoutDiveIntervalJitter:.95,
+  flagshipDiveIntervalBase:6.6,
+  flagshipDiveIntervalJitter:1.65,
+  diveSwayAmplitude:29,
+  diveSwayHz:4.45,
+  diveSideDrift:13,
+  diveBaseVy:74,
+  diveAccel:16,
+  escortSpacing:14,
+  escortLag:.1,
+  escortYOffset:7,
+  bottomExitPadding:12,
   playerRespawnDelay:1.35,
   playerInvulnerability:.95,
   wrapThreatModel:'bottom-exit-or-return-explicit-preview-rule',
@@ -112,7 +128,9 @@ function createGalaxyGuardiansFormation(){
    mode:'formation',
    diveT:0,
    diveSide:col<5?-1:1,
-   escorts:0
+   escorts:0,
+   escortSlot:0,
+   linkedTo:''
   });
  };
  for(let col=4;col<=5;col++)push('flagship',0,col,44+col*21,52);
@@ -180,22 +198,49 @@ function pickGuardiansAlien(state,role=''){
  return candidates[index];
 }
 
+function pickGuardiansEscortAliens(state,count=0,leader=null){
+ const escorts=liveGuardiansAliens(state,'escort')
+  .filter(alien=>alien.mode==='formation')
+  .sort((a,b)=>Math.abs(a.x-(leader?.x||a.x))-Math.abs(b.x-(leader?.x||b.x)));
+ return escorts.slice(0,Math.max(0,count|0));
+}
+
 function startGuardiansDive(state,alien,escortCount=0){
  if(!alien||alien.hp<=0)return null;
+ const rules=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules;
  alien.mode='diving';
  alien.diveT=0;
  alien.diveStartX=alien.x;
  alien.diveStartY=alien.y;
  alien.diveSide=alien.x<GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2?-1:1;
  alien.escorts=escortCount;
+ alien.linkedTo='';
+ alien.escortSlot=0;
+ const escorts=alien.role==='flagship'?pickGuardiansEscortAliens(state,escortCount,alien):[];
+ alien.escorts=escorts.length;
  guardiansRuntimeEvent(state,alien.role==='flagship'?'flagship_dive_start':'alien_dive_start',{
   id:alien.id,
   role:alien.role,
   visualId:alien.visualId,
   audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.diveAudioCue||'',
-  escorts:escortCount
+  escorts:escorts.length
  });
- if(escortCount>0)guardiansRuntimeEvent(state,'escort_join',{flagship:alien.id,escorts:escortCount,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.escortJoin.id});
+ escorts.forEach((escort,index)=>{
+  escort.mode='diving';
+  escort.diveT=-rules.escortLag*(index+1);
+  escort.diveStartX=escort.x;
+  escort.diveStartY=escort.y;
+  escort.diveSide=alien.diveSide;
+  escort.linkedTo=alien.id;
+  escort.escortSlot=index===0?-1:1;
+  escort.escorts=0;
+ });
+ if(escorts.length>0)guardiansRuntimeEvent(state,'escort_join',{
+  flagship:alien.id,
+  escorts:escorts.length,
+  escortIds:escorts.map(escort=>escort.id),
+  audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.escortJoin.id
+ });
  return alien;
 }
 
@@ -268,35 +313,44 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   if(!state.resetT)resetGalaxyGuardiansWave(state,'life_reset');
   return state;
  }
- p.x=Math.max(12,Math.min(rules.playfieldWidth-12,p.x+move*112*dt));
+ p.x=Math.max(12,Math.min(rules.playfieldWidth-12,p.x+move*rules.playerSpeed*dt));
  if(input.fire)fireGuardiansPlayerShot(state);
  if(state.t>=state.nextDiveAt){
   const alien=pickGuardiansAlien(state,'scout')||pickGuardiansAlien(state);
   startGuardiansDive(state,alien,0);
-  state.nextDiveAt=state.t+1.85+state.rng()*1.1;
+  state.nextDiveAt=state.t+rules.scoutDiveIntervalBase+state.rng()*rules.scoutDiveIntervalJitter;
  }
  if(state.t>=state.nextFlagshipAt){
   const flagship=pickGuardiansAlien(state,'flagship');
   startGuardiansDive(state,flagship,Math.min(2,liveGuardiansAliens(state,'escort').length));
-  state.nextFlagshipAt=state.t+7.2+state.rng()*2.2;
+  state.nextFlagshipAt=state.t+rules.flagshipDiveIntervalBase+state.rng()*rules.flagshipDiveIntervalJitter;
  }
  for(const alien of state.aliens){
   if(alien.hp<=0)continue;
   if(alien.mode==='formation'){
-   const drift=Math.sin(state.t*2.2+alien.row*.7)*2.4;
+   const drift=Math.sin(state.t*rules.formationDriftHz+alien.row*.7)*rules.formationDriftAmplitude;
    alien.x=alien.rackX+drift;
    alien.y=alien.rackY;
    continue;
   }
   alien.diveT+=dt;
-  const q=alien.diveT;
-  alien.x=alien.diveStartX+Math.sin(q*4.2)*24*alien.diveSide+alien.diveSide*q*10;
-  alien.y=alien.diveStartY+q*68+q*q*13;
-  if(alien.y>rules.playfieldHeight+12){
+  const leader=alien.linkedTo?state.aliens.find(candidate=>candidate.id===alien.linkedTo&&candidate.hp>0):null;
+  if(leader&&leader.mode==='diving'){
+   const slot=alien.escortSlot||1;
+   alien.x=leader.x+slot*rules.escortSpacing;
+   alien.y=leader.y+rules.escortYOffset+Math.max(0,alien.diveT)*4;
+  }else{
+   const q=Math.max(0,alien.diveT);
+   alien.x=alien.diveStartX+Math.sin(q*rules.diveSwayHz)*rules.diveSwayAmplitude*alien.diveSide+alien.diveSide*q*rules.diveSideDrift;
+   alien.y=alien.diveStartY+q*rules.diveBaseVy+q*q*rules.diveAccel;
+  }
+  if(alien.y>rules.playfieldHeight+rules.bottomExitPadding){
    alien.mode='formation';
    alien.diveT=0;
    alien.x=alien.rackX;
    alien.y=alien.rackY;
+   alien.linkedTo='';
+   alien.escortSlot=0;
    guardiansRuntimeEvent(state,'enemy_wrap_or_return',{id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.wrapReturn.id});
   }
   if(alien.mode==='diving'&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=10&&Math.abs(alien.y-p.y)<=10){
@@ -347,6 +401,7 @@ function summarizeGalaxyGuardiansRuntime(state){
   playerInv:+(+state.player.inv||0).toFixed(3),
   resetT:+(+state.resetT||0).toFixed(3),
   gameOver:!!state.gameOver,
+  activeDives:state.aliens.filter(alien=>alien.hp>0&&alien.mode==='diving').map(alien=>({id:alien.id,role:alien.role,linkedTo:alien.linkedTo||'',escortSlot:alien.escortSlot||0,x:+alien.x.toFixed(2),y:+alien.y.toFixed(2)})),
   eventTypes:Array.from(new Set(state.events.map(event=>event.type))),
   visualIds:Array.from(new Set(state.aliens.filter(alien=>alien.hp>0).map(alien=>alien.visualId))),
   audioCueIds:Array.from(new Set(state.events.map(event=>event.audioCue).filter(Boolean))),

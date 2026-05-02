@@ -12,4 +12,5 @@ Current artifacts:
 
 - `identity-baseline-0.1.json` - first application-owned sprite, palette, audio,
   and timing contract for the development-only playable preview.
-
+- `movement-pacing-0.1.json` - first runtime movement and pressure pacing
+  contract for solo dives, flagship/escort dives, and wrap/return pressure.
