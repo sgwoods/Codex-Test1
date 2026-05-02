@@ -45,11 +45,12 @@ function renderGamePicker(){
   const caps=describePackCaps(pack);
   const flagHtml=caps.length?`<div class="gamePickerCardFlags">${caps.map(label=>`<span class="gamePickerFlag">${label}</span>`).join('')}</div>`:'';
   const playable=pack.metadata?.playable!==0&&pack.metadata?.playable!==false;
-  const actionLabel=isActive?'Selected':(playable?'Select Game':'Preview Sneak Peek');
+  const devPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(pack);
+  const actionLabel=isActive?'Selected':(playable?'Select Game':devPlayable?'Select Dev Preview':'Preview Sneak Peek');
   const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':devPlayable?'Dev-only playable preview in this development runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Finish the current run before switching to a different game pack.'
@@ -93,16 +94,17 @@ function chooseGamePack(key=''){
  const playable=typeof gamePackHasPlayableAdapter==='function'
   ? gamePackHasPlayableAdapter(nextPack)
   : (typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false));
+ const devPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(nextPack);
  installGamePack(key,{persist:playable?1:0});
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
- const canStart=typeof currentGamePackHasPlayableAdapter==='function'?currentGamePackHasPlayableAdapter():currentGamePackPlayable();
+ const canStart=typeof currentGamePackCanStart==='function'?currentGamePackCanStart():typeof currentGamePackHasPlayableAdapter==='function'?currentGamePackHasPlayableAdapter():currentGamePackPlayable();
  if(!canStart){
   closeGamePicker(1);
   if(typeof openGamePreview==='function')openGamePreview();
  }else{
   closeGamePicker(1);
-  showToast(`${currentGamePack().metadata?.title||'Game pack'} selected.`);
+  showToast(devPlayable?`${currentGamePack().metadata?.title||'Game pack'} dev preview selected. Press Enter to start.`:`${currentGamePack().metadata?.title||'Game pack'} selected.`);
  }
 }
 

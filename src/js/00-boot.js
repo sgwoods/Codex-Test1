@@ -2033,7 +2033,9 @@ addEventListener('keydown',e=>{
   }
  }
  if(!started&&e.code==='Enter'){
-  const packCanStart=typeof currentGamePackHasPlayableAdapter==='function'
+  const packCanStart=typeof currentGamePackCanStart==='function'
+   ? currentGamePackCanStart()
+   : typeof currentGamePackHasPlayableAdapter==='function'
    ? currentGamePackHasPlayableAdapter()
    : (typeof currentGamePackPlayable!=='function'||currentGamePackPlayable());
   if(!packCanStart){

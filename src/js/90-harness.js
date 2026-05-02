@@ -729,6 +729,22 @@ window.__galagaHarness__={
  renderState(){
   return window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
  },
+ guardiansState(){
+  return typeof summarizeGalaxyGuardiansDevPreview==='function'
+   ? summarizeGalaxyGuardiansDevPreview()
+   : null;
+ },
+ forceGuardiansPlayerLoss(cause='harness_guardians_loss'){
+  const state=typeof currentGalaxyGuardiansDevPreviewState==='function'
+   ? currentGalaxyGuardiansDevPreviewState()
+   : null;
+  if(!state||typeof loseGalaxyGuardiansPlayer!=='function')return null;
+  loseGalaxyGuardiansPlayer(state,cause);
+  if(typeof updateActiveGamePack==='function')updateActiveGamePack(0);
+  return typeof summarizeGalaxyGuardiansDevPreview==='function'
+   ? summarizeGalaxyGuardiansDevPreview()
+   : null;
+ },
  redraw(){
   if(typeof draw==='function')draw();
   return this.renderState();
