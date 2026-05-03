@@ -148,7 +148,9 @@ function main(){
     }])),
     forbidden,
     packCapabilities: pack.capabilities,
-    runtimeForbidden: profile.forbiddenAuroraCapabilities
+    runtimeForbidden: profile.forbiddenAuroraCapabilities,
+    attractMission: pack.attractMission || null,
+    scoreAdvanceTable: pack.scoreAdvanceTable || []
   };
 
   if(payload.gameKey !== 'galaxy-guardians-preview' || identity.gameKey !== payload.gameKey || candidate.gameKey !== payload.gameKey){
@@ -188,6 +190,19 @@ function main(){
     const seen = runtime.eventTypes.includes(eventType)
       || Object.values(forced).some(summary => summary.eventTypes.includes(eventType));
     if(!seen) fail(`Galaxy Guardians 0.1 candidate did not emit required event ${eventType}`, payload);
+  }
+  for(const surface of candidate.candidateGate.requiredRuntimeSurfaces || []){
+    if(surface === 'attract_mission_text'){
+      const lines = Array.from(pack.attractMission?.lines || []);
+      if(pack.attractMission?.title !== 'WE ARE THE GALAXY GUARDIANS' || lines.length < 3){
+        fail('Galaxy Guardians 0.1 candidate is missing the pack-owned attract mission surface', payload);
+      }
+    }else if(surface === 'score_advance_table'){
+      const rows = Array.from(pack.scoreAdvanceTable || []).filter(row => row.role !== 'player');
+      if(rows.length < 3 || !rows.some(row => row.role === 'flagship' && row.twoEscortDivePoints === 800)){
+        fail('Galaxy Guardians 0.1 candidate is missing the pack-owned score-advance table surface', payload);
+      }
+    }else fail(`Galaxy Guardians 0.1 candidate declares an unknown runtime surface ${surface}`, payload);
   }
   for(const [capability, expected] of Object.entries(forbidden)){
     if(pack.capabilities?.[capability] !== expected && profile.forbiddenAuroraCapabilities?.[capability] !== expected){

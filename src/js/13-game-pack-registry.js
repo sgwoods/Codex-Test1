@@ -292,7 +292,9 @@ function currentWaitModeFrontDoor(){
    text:preview.summary||'A second Platinum game preview is in development.',
    attribution:''
   }),
-  quoteSurface:'wait-mode-showcase'
+  quoteSurface:'wait-mode-showcase',
+  attractMission:preview.attractMission,
+  scoreAdvanceTable:preview.scoreAdvanceTable
  });
 }
 
@@ -309,6 +311,8 @@ function currentGamePackPreview(pack=currentGamePack()){
   detail:preview.detail||'Aurora Galactica remains the current playable cabinet while this pack is being prepared.',
   highlights:Array.isArray(preview.highlights)?preview.highlights:[],
   milestones:Array.isArray(preview.milestones)?preview.milestones:[],
+  attractMission:pack?.attractMission||null,
+  scoreAdvanceTable:Array.isArray(pack?.scoreAdvanceTable)?pack.scoreAdvanceTable:[],
   launchFallbackToast:preview.launchFallbackToast||`${pack?.metadata?.title||'This pack'} is preview-only. Launching Aurora Galactica.`
  });
 }

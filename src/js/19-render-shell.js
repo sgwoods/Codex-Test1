@@ -88,6 +88,29 @@ function buildBoardMessageHtml({title='',accent='',score='',lines=[]}={}){
  return body.join('');
 }
 
+function buildStartMissionHtml(mission=null){
+ if(!mission)return '';
+ const lines=Array.isArray(mission.lines)?mission.lines:[];
+ const title=mission.title||'MISSION';
+ return `<span class="startMissionWrap"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
+}
+
+function buildStartScoreAdvanceHtml(rows=[]){
+ const scoreRows=Array.isArray(rows)?rows.filter(row=>row&&row.role!=='player'):[];
+ if(!scoreRows.length)return '';
+ const value=valueIn=>{
+  const number=+valueIn;
+  return Number.isFinite(number)?String(number):'-';
+ };
+ return `<span class="startScoreAdvance"><span class="scoreHead scoreLabel">Alien</span><span class="scoreHead">Rack</span><span class="scoreHead">Dive</span><span class="scoreHead">+1</span><span class="scoreHead">+2</span>${scoreRows.map(row=>[
+  `<span class="scoreLabel">${escapeMessageHtml(row.label||row.role||'Signal')}</span>`,
+  `<span>${escapeMessageHtml(value(row.formationPoints))}</span>`,
+  `<span>${escapeMessageHtml(value(row.divePoints))}</span>`,
+  `<span class="${row.oneEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.oneEscortDivePoints))}</span>`,
+  `<span class="${row.twoEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.twoEscortDivePoints))}</span>`
+ ].join('')).join('')}</span>`;
+}
+
 function gameplayMessageState(){
  if(paused){
   return {mode:'board',html:buildBoardMessageHtml({title:'PAUSED',lines:['Press P to resume']}),topRatio:.48};
@@ -366,7 +389,9 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
    const quoteBlock=frontDoor.quotePlaceholder?.text
     ? `<span class="startQuoteWrap"><span class="startQuoteKicker">${frontDoor.quotePlaceholder.kicker||'SIGNAL'}</span><span class="startQuoteText">${frontDoor.quotePlaceholder.text}</span>${frontDoor.quotePlaceholder.attribution?`<span class="startQuoteAttribution">${frontDoor.quotePlaceholder.attribution}</span>`:''}</span>`
     : '';
-   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}${noticeHint}`;
+   const missionBlock=buildStartMissionHtml(frontDoor.attractMission);
+   const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable);
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}${missionBlock}${scoreAdvanceBlock}<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}${noticeHint}`;
   }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;

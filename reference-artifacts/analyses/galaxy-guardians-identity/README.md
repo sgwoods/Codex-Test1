@@ -12,6 +12,8 @@ Current artifacts:
 
 - `audio-character-0.1.json` - first cue-shape and runtime-audio coverage
   contract for the Guardians signal theme.
+- `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal
+  surface contract for Guardians mission language and score-table presentation.
 - `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
   movement, threat, visual, audio, runtime-event, and public-boundary
   requirements together.

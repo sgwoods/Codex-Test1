@@ -48,11 +48,13 @@ function main(){
   const requiredScripts = (artifact.requiredHarnesses || []).map(scriptName).filter(Boolean);
   const promotedTargets = new Set(promotedLog.promoted_targets || []);
   const candidateEvents = new Set(candidate.candidateGate?.requiredRuntimeEvents || []);
+  const candidateSurfaces = new Set(candidate.candidateGate?.requiredRuntimeSurfaces || []);
   const runtimePromotedTargets = Array.from(promotedTargets).filter(target => candidateEvents.has(target));
   const requiredInputs = artifact.requiredInputArtifacts || [];
   const hasScoreProgressionArtifact = requiredInputs.includes('reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json');
   const implementedPromotedTargets = new Set(runtimePromotedTargets);
   if(hasScoreProgressionArtifact) implementedPromotedTargets.add('score_advance_table');
+  for(const surface of candidateSurfaces) implementedPromotedTargets.add(surface);
   const missingRuntimePromotions = Array.from(promotedTargets).filter(target => !implementedPromotedTargets.has(target));
   const payload = {
     artifact: ARTIFACT,
@@ -64,6 +66,7 @@ function main(){
     eventCount: promotedLog.event_count,
     promotedTargets: Array.from(promotedTargets),
     runtimePromotedTargets,
+    candidateSurfaces: Array.from(candidateSurfaces),
     implementedPromotedTargets: Array.from(implementedPromotedTargets),
     missingRuntimePromotions,
     hasScoreProgressionArtifact,
@@ -117,8 +120,11 @@ function main(){
       fail(`Guardians reference conformance is missing promoted runtime event coverage: ${eventName}`, payload);
     }
   }
-  if(!missingRuntimePromotions.includes('attract_mission_text')){
-    fail('Guardians reference conformance should keep attract text visible as a not-yet-runtime-scored gap', payload);
+  if(!candidateSurfaces.has('attract_mission_text') || !candidateSurfaces.has('score_advance_table')){
+    fail('Guardians reference conformance requires visible attract mission and score-table surfaces', payload);
+  }
+  if(missingRuntimePromotions.length){
+    fail('Guardians reference conformance still has unimplemented promoted targets', payload);
   }
   if(!hasScoreProgressionArtifact){
     fail('Guardians reference conformance must include the score/progression artifact now that the score table is implemented', payload);
