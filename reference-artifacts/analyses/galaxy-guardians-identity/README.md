@@ -31,6 +31,9 @@ Current artifacts:
 - `object-track-conformance-0.1.json` - CPU-only connected-component and
   lower-field tracklet proxy over the Galaxian frame windows, used to set the
   next runtime-vs-reference tuning bands without changing constants by feel.
+- `playtest-conformance-review-0.1.json` - playtest-weighted score layer that
+  records the current audio, motion, and graphics gaps separately from
+  evidence-coverage scoring so beta-facing preview decisions stay honest.
 - `quick-peek-source-fidelity-0.2.json` - playtest-driven quick-peek
   recalibration that moves timing, pacing, rack footprint, backdrop, and sprites
   closer to the Galaxian reference sheets while preserving the need for future

@@ -12,11 +12,12 @@
     "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets and waveform windows rather than frame-level automated extraction."
   },
   "summary": {
-    "referenceConformanceScore10": 7.6,
-    "referenceMaturityScore10": 7.1,
-    "implementationGateCoverageScore10": 9.4,
-    "publicReleaseReadinessScore10": 4.4,
-    "releaseRead": "Useful development preview evidence, but local gameplay review showed that timing, pacing, and sprite fidelity are still not convincing enough for a public quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, sprite-reference extraction, and waveform/spectrogram audio comparison now exist as dev-preview contracts; the highest-leverage next work is final sprite recognition, isolated cue matching, and a browser-reviewed beta-candidate pass."
+    "referenceConformanceScore10": 7.1,
+    "playtestWeightedConformanceScore10": 5.7,
+    "referenceMaturityScore10": 6.4,
+    "implementationGateCoverageScore10": 9.2,
+    "publicReleaseReadinessScore10": 3.5,
+    "releaseRead": "Useful development preview evidence, but local gameplay review showed that sound, timing, pacing, and sprite fidelity are still not convincing enough for a beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, sprite-reference extraction, waveform/spectrogram audio comparison, and playtest-weighted conformance review now exist as dev-preview contracts; the highest-leverage next work is isolated cue matching, final sprite recognition, and a browser-reviewed motion-feel pass."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -47,19 +48,19 @@
       "id": "formation-rack-timing",
       "label": "Formation and rack timing",
       "weight": 12,
-      "score10": 6.5,
+      "score10": 6.2,
       "evidenceLevel": "promoted-events-runtime-bands-frame-motion-proxy-and-object-track-proxy",
-      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated. The frame and object proxies now cover opening rack entry and complete-rack reference windows.",
-      "remainingGap": "The object proxy is still connected-component tracking rather than final sprite recognition, so runtime timing remains conservative until compared against instrumented runtime tracks."
+      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated. The latest runtime pass shortened entry and first-dive timing after playtest review found the preview too slow.",
+      "remainingGap": "The object proxy is still connected-component tracking rather than final sprite recognition, so runtime timing needs browser-reviewed feel scoring beside instrumented reference tracks."
     },
     {
       "id": "movement-pressure",
       "label": "Movement and pressure model",
       "weight": 14,
-      "score10": 6.7,
+      "score10": 5.9,
       "evidenceLevel": "reference-window-inspired-runtime-contract-plus-runtime-vs-reference-track-comparison",
-      "currentRead": "Scout dives, flagship dives, escort joins, and wrap/return pressure are implemented and gated. Runtime movement was tuned against the object-track proxy, improving lower-field duration and lateral span while preserving first-dive, flagship, escort, and wrap events.",
-      "remainingGap": "Local play still needs browser review and final sprite-recognition targets before making the preview public-facing."
+      "currentRead": "Scout dives, flagship dives, escort joins, enemy shots, and wrap/return pressure are implemented and gated. The latest pass increases dive speed, dive acceleration, enemy-shot pressure, and wrap cadence in response to playtest feedback.",
+      "remainingGap": "The preview still feels proxy-tuned rather than Galaxian-tight; browser review and sprite-recognized dive-path targets are needed before beta-facing release."
     },
     {
       "id": "single-shot-threat-scoring",
@@ -74,19 +75,19 @@
       "id": "visual-alien-identity",
       "label": "Visual alien identity",
       "weight": 10,
-      "score10": 7.0,
+      "score10": 5.4,
       "evidenceLevel": "game-owned-visual-catalog-readability-gate-frame-crops-object-proxies-and-sprite-extraction",
-      "currentRead": "Flagship, escort, scout, and player interceptor visuals are smaller and closer to Galaxian contact-sheet proportions while remaining distinct and gated. The sprite extraction pass now measures 27 rack/diver/player crops and confirms the runtime sprites cover the reference color families.",
-      "remainingGap": "Sprites are still hand-authored preview approximations rather than extracted pixel-faithful reference assets."
+      "currentRead": "Flagship, escort, scout, and player interceptor visuals are smaller, separate from Aurora, and gated for role readability. The latest pass separates escort and scout silhouettes after playtest review, and sprite extraction measures 27 rack/diver/player crops.",
+      "remainingGap": "Sprites are still hand-authored preview approximations; final pixel-grid targets from reference crops are needed before the graphics can feel close to Galaxian."
     },
     {
       "id": "audio-reference-character",
       "label": "Audio character and reference fit",
       "weight": 10,
-      "score10": 5.3,
+      "score10": 3.8,
       "evidenceLevel": "internal-cue-shape-contract-plus-waveform-spectrogram-pcm-proxy",
-      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, and the audio comparison now analyzes 9 Galaxian waveform/spectrogram windows with PCM proxy metrics.",
-      "remainingGap": "This is still the least reference-faithful Guardians area: isolated acoustic matching against Galaxian hardware cues is not yet automated."
+      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, and the latest pass makes shots and dives lower, raspier, and less Aurora-musical. The audio comparison analyzes 9 Galaxian waveform/spectrogram windows with PCM proxy metrics.",
+      "remainingGap": "This is the weakest Guardians area: isolated acoustic matching against Galaxian hardware cues is not yet automated, and playtest review says the current sound is not close enough."
     },
     {
       "id": "platform-and-game-boundaries",
@@ -117,6 +118,7 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/quick-peek-source-fidelity-0.2.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
@@ -144,6 +146,7 @@
     "npm run harness:check:galaxy-guardians-audio-character",
     "npm run harness:check:galaxy-guardians-formation-entry",
     "npm run harness:check:galaxy-guardians-movement-pacing",
+    "npm run harness:check:galaxy-guardians-playtest-conformance-review",
     "npm run harness:check:galaxy-guardians-score-progression",
     "npm run harness:check:galaxy-guardians-threat-scoring",
     "npm run harness:check:galaxy-guardians-visual-readability"

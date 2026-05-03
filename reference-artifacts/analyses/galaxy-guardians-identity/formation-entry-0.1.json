@@ -12,21 +12,21 @@
       "formation_entry_settle",
       "formation_rack_complete"
     ],
-    "notes": "The first 0.1 runtime model turns the promoted Galaxian entry events into an actual short entry and rack-settle phase. The timing is intentionally a first playable-preview approximation, not final frame-accurate extraction."
+    "notes": "The first 0.1 runtime model turns the promoted Galaxian entry events into an actual short entry and rack-settle phase. The 2026-05-03 playtest-weighted pass shortened entry and first-dive timing because local review found the previous preview too slow; this remains a playable-preview approximation, not final frame-accurate extraction."
   },
   "runtimeRules": {
-    "formationEntrySettleAtSeconds": 0.52,
-    "formationEntryCompleteAtSeconds": 0.92,
+    "formationEntrySettleAtSeconds": 0.42,
+    "formationEntryCompleteAtSeconds": 0.76,
     "formationEntryTravelYPx": 18,
     "formationEntrySideSpreadPx": 6,
     "formationEntryRowLagSeconds": 0.035,
-    "firstScoutDiveDelaySeconds": 3.1,
+    "firstScoutDiveDelaySeconds": 2.55,
     "diveMayStartOnlyAfterRackComplete": true
   },
   "conformanceBands": {
-    "formationEntrySettleAtSeconds": [0.5, 0.56],
-    "formationRackCompleteAtSeconds": [0.9, 0.96],
-    "firstScoutDiveAfterRackCompleteDeltaSeconds": [2.14, 2.24],
+    "formationEntrySettleAtSeconds": [0.4, 0.46],
+    "formationRackCompleteAtSeconds": [0.74, 0.8],
+    "firstScoutDiveAfterRackCompleteDeltaSeconds": [1.74, 1.84],
     "enteringAlienCountAtStart": 38,
     "enteringAlienCountAfterComplete": 0
   },

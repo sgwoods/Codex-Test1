@@ -88,7 +88,7 @@ async function main(){
   if(result.guardianState.audioTheme !== 'guardians-signal'){
     fail('Galaxy Guardians preview did not resolve its pack-owned audio theme', result);
   }
-  if(!result.guardianState.referenceTiming || result.guardianState.referenceTiming.firstScoutDiveDelay !== 2.2){
+  if(!result.guardianState.referenceTiming || result.guardianState.referenceTiming.firstScoutDiveDelay !== 2.55){
     fail('Galaxy Guardians preview did not resolve pack-owned reference timing data', result);
   }
   if(result.auroraState.key !== 'aurora-galactica' || result.auroraState.playable !== true){

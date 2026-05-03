@@ -7,7 +7,7 @@
   "sourceEvidence": {
     "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
-    "notes": "First baseline derives from the measured Galaxian reference profile and is deliberately stored as a reviewable contract before deeper frame-accurate sprite and audio extraction. The 2026-05-02 quick-peek pass reduced sprite scale and moved the rows closer to the Galaxian contact sheets."
+    "notes": "First baseline derives from the measured Galaxian reference profile and is deliberately stored as a reviewable contract before deeper frame-accurate sprite and audio extraction. The 2026-05-03 playtest-weighted pass reduced sprite scale, separated escort/scout silhouettes, and accelerated runtime timing toward the Galaxian reference sheets."
   },
   "visualLanguage": {
     "pixelAlphabet": {
@@ -26,14 +26,14 @@
         "role": "flagship",
         "silhouette": "small command crown with red outriggers and gold core",
         "rows": [
-          ".....A.....",
-          "....ACA....",
-          "...WCCCW...",
-          "..WCECEW..",
-          ".WWCCCCCWW.",
-          "W.WCCCCCW.W",
-          "...AACAA...",
-          "..A.....A.."
+          "....A....",
+          "...ACA...",
+          "..WCCCW..",
+          ".WCECEW.",
+          "WWCCCCCWW",
+          ".WCCCCCW.",
+          "..AACAA..",
+          ".A.....A."
         ]
       },
       {
@@ -41,12 +41,12 @@
         "role": "escort",
         "silhouette": "red arrow escort with blue wing tips",
         "rows": [
-          "...A...",
-          "..ACA..",
-          ".WCCCW.",
-          "WWECEWW",
-          "..CCC..",
-          ".A...A."
+          "..A.A..",
+          ".ACCCA.",
+          "WCECECW",
+          ".CCCCC.",
+          "..W.W..",
+          "A.....A"
         ]
       },
       {
@@ -55,11 +55,11 @@
         "silhouette": "green-cyan wing scout",
         "rows": [
           "..A.A..",
-          ".WAWAW.",
+          ".WACAW.",
           "WWCCCWW",
-          "..ECE..",
-          ".WCCCW.",
-          "W.....W"
+          ".WECEW.",
+          "..CCC..",
+          ".A...A."
         ]
       },
       {
@@ -69,9 +69,9 @@
         "rows": [
           "...A...",
           "..ACA..",
-          "..CCC..",
           ".WCCCW.",
-          "WACFCAW",
+          "WCCCCCW",
+          ".WCFW.",
           "..FFF..",
           ".A...A."
         ]
@@ -108,8 +108,8 @@
     }
   },
   "timingBaseline": {
-    "firstScoutDiveDelaySeconds": 3.1,
-    "flagshipEscortDelaySeconds": 8.45,
+    "firstScoutDiveDelaySeconds": 2.55,
+    "flagshipEscortDelaySeconds": 6.65,
     "singleShotCooldownSeconds": 0.72,
     "playerRespawnDelaySeconds": 1.35,
     "playerInvulnerabilitySeconds": 0.95
