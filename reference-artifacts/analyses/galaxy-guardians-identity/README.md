@@ -30,6 +30,8 @@ Current artifacts:
   conformance metric set tying the Galaxian source profile, promoted event log,
   preview gates, and platform-boundary evidence into a weighted development
   score.
+- `score-progression-0.1.json` - first score-advance table, mission-language,
+  wave-clear, and stage-advance contract for the dev-only playable preview.
 - `threat-scoring-0.1.json` - first lower-field threat and application-owned
   scoring contract for enemy shots, player loss, and hit values.
 - `visual-readability-0.1.json` - first gameplay-scale readability contract for

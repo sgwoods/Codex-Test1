@@ -60,6 +60,8 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   'enemy_wrap_or_return',
   'player_lost',
   'game_over',
+  'wave_clear',
+  'stage_advance',
   'wave_reset'
  ]),
  rules:Object.freeze({
@@ -100,6 +102,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotBottomPadding:10,
   playerRespawnDelay:1.35,
   playerInvulnerability:.95,
+  waveClearDelay:1.2,
   wrapThreatModel:'bottom-exit-or-return-explicit-preview-rule',
   formation:Object.freeze({
    flagshipSlots:2,
@@ -177,6 +180,8 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   t:0,
   gameOver:0,
   resetT:0,
+  waveClearT:0,
+  waveClearStage:0,
   seed,
   rngSeed:seed,
   formationEntry:Object.assign({started:1,startedAt:0,settled:0,complete:0},GALAXY_GUARDIANS_RUNTIME_PROFILE.rules),
@@ -281,6 +286,8 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset'){
  state.aliens=createGalaxyGuardiansFormation();
  state.enemyShots.length=0;
  state.hitFlashes.length=0;
+ state.waveClearT=0;
+ state.waveClearStage=0;
  state.player.shot=null;
  state.player.x=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2;
  state.player.y=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-40;
@@ -294,6 +301,24 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset'){
  state.nextEnemyShotAt=state.t+GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.firstEnemyShotDelay;
  guardiansRuntimeEvent(state,'wave_reset',{reason,aliens:state.aliens.length});
  guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime',reason,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id});
+}
+
+function clearGalaxyGuardiansWave(state){
+ if(state.gameOver||state.waveClearT>0)return false;
+ if(liveGuardiansAliens(state).length>0)return false;
+ state.waveClearT=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.waveClearDelay;
+ state.waveClearStage=state.stage;
+ state.player.shot=null;
+ state.enemyShots.length=0;
+ guardiansRuntimeEvent(state,'wave_clear',{stage:state.stage,score:state.score,clearDelay:state.waveClearT});
+ return true;
+}
+
+function advanceGalaxyGuardiansStage(state){
+ state.stage=Math.max(1,(state.stage|0)+1);
+ guardiansRuntimeEvent(state,'stage_advance',{stage:state.stage,score:state.score,fromStage:state.waveClearStage||state.stage-1});
+ resetGalaxyGuardiansWave(state,'stage_advance');
+ return state.stage;
 }
 
 function loseGalaxyGuardiansPlayer(state,cause='collision'){
@@ -405,6 +430,11 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   if(!state.resetT)resetGalaxyGuardiansWave(state,'life_reset');
   return state;
  }
+ if(state.waveClearT>0){
+  state.waveClearT=Math.max(0,state.waveClearT-dt);
+  if(!state.waveClearT)advanceGalaxyGuardiansStage(state);
+  return state;
+ }
  const entry=updateGalaxyGuardiansFormationEntry(state);
  p.x=Math.max(12,Math.min(rules.playfieldWidth-12,p.x+move*rules.playerSpeed*dt));
  if(input.fire)fireGuardiansPlayerShot(state);
@@ -509,6 +539,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   }
   if(resolved)p.shot=null;
  }
+ clearGalaxyGuardiansWave(state);
  return state;
 }
 
@@ -533,6 +564,8 @@ function summarizeGalaxyGuardiansRuntime(state){
   liveRoles:counts,
   hasPlayerShot:!!state.player.shot,
   enemyShotCount:state.enemyShots.filter(shot=>shot&&shot.active!==0).length,
+  waveClearPending:state.waveClearT>0,
+  waveClearT:+(+state.waveClearT||0).toFixed(3),
   hitFlashCount:(state.hitFlashes||[]).length,
   hitFlashes:(state.hitFlashes||[]).map(flash=>({role:flash.role,visualId:flash.visualId,x:+flash.x.toFixed(2),y:+flash.y.toFixed(2),t:+flash.t.toFixed(3),duration:+flash.duration.toFixed(3)})),
   enemyShots:state.enemyShots.filter(shot=>shot&&shot.active!==0).map(shot=>({id:shot.id,role:shot.role,x:+shot.x.toFixed(2),y:+shot.y.toFixed(2)})),
@@ -554,3 +587,5 @@ window.stepGalaxyGuardiansRuntime=stepGalaxyGuardiansRuntime;
 window.summarizeGalaxyGuardiansRuntime=summarizeGalaxyGuardiansRuntime;
 window.loseGalaxyGuardiansPlayer=loseGalaxyGuardiansPlayer;
 window.resetGalaxyGuardiansWave=resetGalaxyGuardiansWave;
+window.clearGalaxyGuardiansWave=clearGalaxyGuardiansWave;
+window.advanceGalaxyGuardiansStage=advanceGalaxyGuardiansStage;

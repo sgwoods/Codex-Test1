@@ -38,6 +38,7 @@ function loadGuardiansContext(){
     this.summarizeGalaxyGuardiansRuntime = summarizeGalaxyGuardiansRuntime;
     this.startGuardiansDive = startGuardiansDive;
     this.loseGalaxyGuardiansPlayer = loseGalaxyGuardiansPlayer;
+    this.stepGalaxyGuardiansRuntime = stepGalaxyGuardiansRuntime;
   `, sandbox);
   return sandbox;
 }
@@ -75,6 +76,18 @@ function forceLossAndGameOver(ctx){
   return ctx.summarizeGalaxyGuardiansRuntime(state);
 }
 
+function forceWaveAdvance(ctx){
+  const state = ctx.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 1979 });
+  state.player.inv = 999;
+  state.score = 1230;
+  for(const alien of state.aliens) alien.hp = 0;
+  ctx.stepGalaxyGuardiansRuntime(state, 1 / 60, {});
+  for(let i = 0; i < Math.ceil((ctx.GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.waveClearDelay + .1) * 60); i++){
+    ctx.stepGalaxyGuardiansRuntime(state, 1 / 60, {});
+  }
+  return ctx.summarizeGalaxyGuardiansRuntime(state);
+}
+
 function simulateRuntime(ctx){
   const state = ctx.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 42719 });
   state.player.inv = 999;
@@ -107,7 +120,8 @@ function main(){
     escortHit: forceHit(ctx, 'escort'),
     scoutHit: forceHit(ctx, 'scout'),
     wrap: forceWrap(ctx),
-    loss: forceLossAndGameOver(ctx)
+    loss: forceLossAndGameOver(ctx),
+    waveAdvance: forceWaveAdvance(ctx)
   };
   const allAudioCueIds = unique([
     ...runtime.audioCueIds,

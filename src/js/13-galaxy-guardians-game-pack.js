@@ -219,6 +219,54 @@ const GUARDIANS_SCORING_RULES=Object.freeze({
  challengeGroupBonuses:Object.freeze([])
 });
 
+const GUARDIANS_SCORE_ADVANCE_TABLE=Object.freeze([
+ Object.freeze({
+  id:'signal-scout',
+  role:'scout',
+  label:'Signal Scout',
+  formationPoints:30,
+  divePoints:60,
+  referenceIntent:'lowest rank, repeated lower rows, higher value when diving'
+ }),
+ Object.freeze({
+  id:'signal-escort',
+  role:'escort',
+  label:'Signal Escort',
+  formationPoints:50,
+  divePoints:100,
+  referenceIntent:'red escort/charger rank with doubled attack value'
+ }),
+ Object.freeze({
+  id:'signal-flagship',
+  role:'flagship',
+  label:'Signal Flagship',
+  formationPoints:150,
+  divePoints:300,
+  oneEscortDivePoints:500,
+  twoEscortDivePoints:800,
+  referenceIntent:'top command ship with escalating escorted-dive value'
+ }),
+ Object.freeze({
+  id:'player-interceptor',
+  role:'player',
+  label:'Guardian Interceptor',
+  fireMode:'single-shot',
+  referenceIntent:'single in-flight shot; no Aurora dual-fighter scoring branch'
+ })
+]);
+
+const GUARDIANS_ATTRACT_MISSION=Object.freeze({
+ id:'guardians-attract-mission-0.1',
+ title:'WE ARE THE GALAXY GUARDIANS',
+ lines:Object.freeze([
+  'MISSION: BREAK THE SIGNAL RACK',
+  'WATCH FOR FLAGSHIP ESCORT DIVES',
+  'SINGLE SHOT ONLY - MAKE IT COUNT'
+ ]),
+ scoreAdvanceTableId:'guardians-score-advance-table-0.1',
+ referenceIntent:'Guardians-owned mission and score-table language derived from Galaxian attract/score-table promoted windows, not Aurora wait-mode copy.'
+});
+
 const GALAXY_GUARDIANS_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'galaxy-guardians-preview',
@@ -256,8 +304,8 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
    Object.freeze({label:'Pack identity and shell preview',state:'online'}),
    Object.freeze({label:'Reference footage and movement map',state:'next'}),
    Object.freeze({label:'Visual and audio identity catalog',state:'online'}),
-   Object.freeze({label:'Minimal scout-wave playable slice',state:'planned'}),
-   Object.freeze({label:'Application-owned scoring harness',state:'planned'})
+   Object.freeze({label:'Minimal scout-wave playable slice',state:'online'}),
+   Object.freeze({label:'Application-owned scoring harness',state:'online'})
   ]),
   launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
  }),
@@ -281,6 +329,8 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  audioThemes:GUARDIANS_AUDIO_THEMES,
  alienVisualCatalog:GUARDIANS_ALIEN_VISUAL_CATALOG,
  audioCueCatalog:GUARDIANS_AUDIO_CUE_CATALOG,
+ attractMission:GUARDIANS_ATTRACT_MISSION,
+ scoreAdvanceTable:GUARDIANS_SCORE_ADVANCE_TABLE,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,

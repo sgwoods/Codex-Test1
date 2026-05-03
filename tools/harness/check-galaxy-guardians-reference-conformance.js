@@ -49,7 +49,11 @@ function main(){
   const promotedTargets = new Set(promotedLog.promoted_targets || []);
   const candidateEvents = new Set(candidate.candidateGate?.requiredRuntimeEvents || []);
   const runtimePromotedTargets = Array.from(promotedTargets).filter(target => candidateEvents.has(target));
-  const missingRuntimePromotions = Array.from(promotedTargets).filter(target => !candidateEvents.has(target));
+  const requiredInputs = artifact.requiredInputArtifacts || [];
+  const hasScoreProgressionArtifact = requiredInputs.includes('reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json');
+  const implementedPromotedTargets = new Set(runtimePromotedTargets);
+  if(hasScoreProgressionArtifact) implementedPromotedTargets.add('score_advance_table');
+  const missingRuntimePromotions = Array.from(promotedTargets).filter(target => !implementedPromotedTargets.has(target));
   const payload = {
     artifact: ARTIFACT,
     status: artifact.status,
@@ -60,7 +64,9 @@ function main(){
     eventCount: promotedLog.event_count,
     promotedTargets: Array.from(promotedTargets),
     runtimePromotedTargets,
+    implementedPromotedTargets: Array.from(implementedPromotedTargets),
     missingRuntimePromotions,
+    hasScoreProgressionArtifact,
     requiredScripts
   };
 
@@ -90,7 +96,7 @@ function main(){
       fail('Every Guardians category must explain evidence, current read, and remaining gap', { category, payload });
     }
   }
-  for(const relPath of artifact.requiredInputArtifacts || []){
+  for(const relPath of requiredInputs){
     if(!exists(relPath)) fail(`Required Guardians reference input artifact is missing: ${relPath}`, payload);
   }
   for(const script of requiredScripts){
@@ -111,8 +117,11 @@ function main(){
       fail(`Guardians reference conformance is missing promoted runtime event coverage: ${eventName}`, payload);
     }
   }
-  if(!missingRuntimePromotions.includes('attract_mission_text') || !missingRuntimePromotions.includes('score_advance_table')){
-    fail('Guardians reference conformance should keep attract text and score table visible as not-yet-runtime-scored gaps', payload);
+  if(!missingRuntimePromotions.includes('attract_mission_text')){
+    fail('Guardians reference conformance should keep attract text visible as a not-yet-runtime-scored gap', payload);
+  }
+  if(!hasScoreProgressionArtifact){
+    fail('Guardians reference conformance must include the score/progression artifact now that the score table is implemented', payload);
   }
   if(artifact.summary.publicReleaseReadinessScore10 >= 5){
     fail('Guardians reference conformance must not imply public-release readiness yet', payload);
@@ -131,6 +140,7 @@ function main(){
     publicReleaseReadinessScore10: artifact.summary.publicReleaseReadinessScore10,
     sourceCount: referenceProfile.source_count,
     promotedEventCount: promotedLog.event_count,
+    promotedCoverage: `${implementedPromotedTargets.size}/${promotedTargets.size}`,
     runtimePromotedCoverage: `${runtimePromotedTargets.length}/${promotedTargets.size}`,
     missingRuntimePromotions
   }, null, 2));

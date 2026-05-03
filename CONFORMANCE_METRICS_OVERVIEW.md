@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-03T13:29:27.414Z`
+Generated: `2026-05-03T14:16:49.436Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses a reference-conformance preview metric set that is intentionally more conservative because its Galaxian evidence is still being promoted from source footage into frame-level measurements.
 
@@ -9,7 +9,7 @@ This document summarizes the current conformance scoring model for both the ship
 | Game / scope | Primary score | Secondary scores | Status | Weakest current area | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | Aurora Galactica current dev line | 8.8/10 | strongest Shot and hit responsiveness 10/10; weakest Audio identity and cue alignment 6.1/10 | release-quality conformance score | Audio identity and cue alignment (6.1/10) | reference-artifacts/analyses/quality-conformance/2026-05-03-5f92eab/report.json |
-| Galaxy Guardians 0.1 dev preview | 6.9/10 | maturity 5.8/10; gate coverage 9/10; public readiness 3.5/10 | dev-preview-reference-conformance-model-not-public-release-score | Audio character and reference fit | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
+| Galaxy Guardians 0.1 dev preview | 7/10 | maturity 5.8/10; gate coverage 9/10; public readiness 3.5/10 | dev-preview-reference-conformance-model-not-public-release-score | Audio character and reference fit | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
 
 ## Release Cluster Conformance Targets
 
@@ -17,7 +17,7 @@ These are planning targets, not release promises. They give each upcoming cluste
 
 | Release cluster / focus | Aurora target | Aurora focus metrics | Guardians target | Guardians focus metrics | Release decision meaning |
 | --- | --- | --- | --- | --- | --- |
-| Current dev baseline | 8.8/10 | audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2 | 6.9/10 | maturity 5.8; gate coverage 9.0; public readiness 3.5; audio fit 4.5 | Baseline for the next beta-candidate discussion. |
+| Current dev baseline | 8.8/10 | audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2 | 7.0/10 | maturity 5.8; gate coverage 9.0; public readiness 3.5; audio fit 4.5 | Baseline for the next beta-candidate discussion. |
 | `1.3` Fidelity and Trust | 9.0/10 | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | 7.2/10 | rack timing >= 6.4; movement pressure >= 5.8; visual identity >= 6.8; audio fit >= 5.2 | Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible. |
 | `1.4` Arcade Depth / Guardians 0.1 Preview | 9.2/10 | level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6 | 7.8/10 | frame-derived rack timing >= 7.2; dive paths >= 6.8; alien visuals >= 7.6; scoring model >= 7.5 | Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora. |
 | `1.5` Flight Recorder and Shared Evidence | 9.3/10 | replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6 | 8.2/10 | source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0 | Shared video and evidence become release infrastructure for both applications. |
@@ -30,7 +30,7 @@ xychart-beta
   x-axis ["Current", "1.3", "1.4", "1.5", "1.6", "2.0"]
   y-axis "Score / 10" 0 --> 10
   line "Aurora Galactica" [8.8, 9.0, 9.2, 9.3, 9.4, 9.5]
-  line "Galaxy Guardians" [6.9, 7.2, 7.8, 8.2, 8.5, 9.0]
+  line "Galaxy Guardians" [7.0, 7.2, 7.8, 8.2, 8.5, 9.0]
 ```
 
 ## Application Metric Target Matrix
@@ -50,14 +50,14 @@ xychart-beta
 | Metric | Weight | Score | Evidence level | Current read | Remaining gap |
 | --- | --- | --- | --- | --- | --- |
 | Reference source coverage | 8 | 8.5/10 | source-manifested-contact-sheets-waveforms | Three Galaxian sources are committed with manifests, contact sheets, and waveform windows. | Promote more windows into frame-level timing measurements. |
-| Promoted semantic event coverage | 14 | 7/10 | promoted-event-log-plus-runtime-events | The preview covers the core runtime promoted events: formation entry, rack complete, dives, flagship/escort pressure, single-shot fire, shot resolution, and wrap/return. | Attract mission text and score-advance-table behavior are not yet first-class playable-preview systems. |
+| Promoted semantic event coverage | 14 | 7.4/10 | promoted-event-log-plus-runtime-events | The preview covers the core runtime promoted events: formation entry, rack complete, dives, flagship/escort pressure, single-shot fire, shot resolution, wrap/return, plus an owned score table and stage-advance progression contract. | Attract mission text is not yet rendered as a first-class runtime/wait-mode screen, and score-table evidence still needs frame-level extraction. |
 | Formation and rack timing | 12 | 5.8/10 | promoted-events-with-runtime-bands | Formation entry, settle, rack complete, and first-dive delay are modeled and gated, with the quick peek adjusted to a tighter and calmer rack. | Timing is still not derived from direct frame-level Galaxian extraction, so the score remains conservative. |
 | Movement and pressure model | 14 | 5.2/10 | reference-window-inspired-runtime-contract | Scout dives, flagship dives, escort joins, and wrap/return pressure are implemented and gated, and this pass slowed the first pressure cycle. | Local play still reads as approximate; dive curves, lower-field traversal, and wave-to-wave pacing need direct measurement from the source videos. |
-| Single-shot threat and scoring | 12 | 7/10 | game-owned-runtime-and-score-contract | Single-shot firing, enemy shots, role-specific score values, player loss, and game-over behavior are implemented without Aurora capture/dual-fighter semantics. | The Galaxian score table and level progression scoring are not yet fully modeled. |
+| Single-shot threat and scoring | 12 | 7.5/10 | game-owned-runtime-and-score-contract | Single-shot firing, enemy shots, role-specific score values, player loss, game-over behavior, owned score table, wave clear, and stage advance are implemented without Aurora capture/dual-fighter semantics. | The score table remains a dev-preview contract rather than a frame-extracted Galaxian table, and persistent public scoring is still intentionally blocked. |
 | Visual alien identity | 10 | 6.4/10 | game-owned-visual-catalog-and-readability-gate | Flagship, escort, scout, and player interceptor visuals are smaller and closer to Galaxian contact-sheet proportions while remaining distinct and gated. | Sprites are still hand-authored preview approximations rather than extracted pixel-faithful reference assets. |
 | Audio character and reference fit | 10 | 4.5/10 | internal-cue-shape-contract | Runtime cue IDs and role-separated cue shapes are gated. | This is the least reference-faithful Guardians area: acoustic comparison against Galaxian footage is not yet automated. |
 | Platform and game boundaries | 10 | 10/10 | pack-adapter-renderer-boundary-gates | The preview remains dev-only, does not inherit Aurora capture/dual/challenge/scoring mechanics, and uses Platinum only through shared capability boundaries. | Keep this mandatory as Guardians gets more real gameplay. |
-| Evidence durability | 10 | 8.5/10 | source-controlled-artifacts-and-harnesses | The reference profile, event log, identity artifacts, and 0.1 gates are committed and rerunnable. | Add a generated Guardians numeric score artifact per run once the metrics are less manually calibrated. |
+| Evidence durability | 10 | 8.7/10 | source-controlled-artifacts-and-harnesses | The reference profile, event log, identity artifacts, score/progression artifact, and 0.1 gates are committed and rerunnable. | Add a generated Guardians numeric score artifact per run once the metrics are less manually calibrated. |
 
 ## Aurora Galactica Current Metrics
 
@@ -82,7 +82,6 @@ Guardians preview scoring should exist locally now, and it does: the dev runtime
 
 - automated frame-level rack-entry timing from matt-hawkins-arcade-intro
 - automated dive-path extraction from arcades-lounge-level-5 and nenriki-15-wave-session
-- Galaxian score-advance-table implementation and scoring conformance
 - Guardians attract mission-language conformance
 - acoustic cue comparison against waveform windows
 

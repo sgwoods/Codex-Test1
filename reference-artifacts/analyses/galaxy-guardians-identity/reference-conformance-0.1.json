@@ -12,11 +12,11 @@
     "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets and waveform windows rather than frame-level automated extraction."
   },
   "summary": {
-    "referenceConformanceScore10": 6.9,
+    "referenceConformanceScore10": 7.0,
     "referenceMaturityScore10": 5.8,
     "implementationGateCoverageScore10": 9.0,
     "publicReleaseReadinessScore10": 3.5,
-    "releaseRead": "Useful development preview evidence, but local gameplay review showed that timing, pacing, and sprite fidelity are still not convincing enough for a public quick peek. The highest-leverage next work is frame-level Galaxian timing extraction, closer sprite extraction/authoring, acoustic cue comparison, and a real score-table/attract-language implementation."
+    "releaseRead": "Useful development preview evidence, but local gameplay review showed that timing, pacing, and sprite fidelity are still not convincing enough for a public quick peek. The score table and wave progression now exist as dev-preview contracts; the highest-leverage next work is frame-level Galaxian timing extraction, closer sprite extraction/authoring, acoustic cue comparison, and attract-language implementation."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -38,10 +38,10 @@
       "id": "promoted-semantic-event-coverage",
       "label": "Promoted semantic event coverage",
       "weight": 14,
-      "score10": 7.0,
+      "score10": 7.4,
       "evidenceLevel": "promoted-event-log-plus-runtime-events",
-      "currentRead": "The preview covers the core runtime promoted events: formation entry, rack complete, dives, flagship/escort pressure, single-shot fire, shot resolution, and wrap/return.",
-      "remainingGap": "Attract mission text and score-advance-table behavior are not yet first-class playable-preview systems."
+      "currentRead": "The preview covers the core runtime promoted events: formation entry, rack complete, dives, flagship/escort pressure, single-shot fire, shot resolution, wrap/return, plus an owned score table and stage-advance progression contract.",
+      "remainingGap": "Attract mission text is not yet rendered as a first-class runtime/wait-mode screen, and score-table evidence still needs frame-level extraction."
     },
     {
       "id": "formation-rack-timing",
@@ -65,10 +65,10 @@
       "id": "single-shot-threat-scoring",
       "label": "Single-shot threat and scoring",
       "weight": 12,
-      "score10": 7.0,
+      "score10": 7.5,
       "evidenceLevel": "game-owned-runtime-and-score-contract",
-      "currentRead": "Single-shot firing, enemy shots, role-specific score values, player loss, and game-over behavior are implemented without Aurora capture/dual-fighter semantics.",
-      "remainingGap": "The Galaxian score table and level progression scoring are not yet fully modeled."
+      "currentRead": "Single-shot firing, enemy shots, role-specific score values, player loss, game-over behavior, owned score table, wave clear, and stage advance are implemented without Aurora capture/dual-fighter semantics.",
+      "remainingGap": "The score table remains a dev-preview contract rather than a frame-extracted Galaxian table, and persistent public scoring is still intentionally blocked."
     },
     {
       "id": "visual-alien-identity",
@@ -101,9 +101,9 @@
       "id": "evidence-durability",
       "label": "Evidence durability",
       "weight": 10,
-      "score10": 8.5,
+      "score10": 8.7,
       "evidenceLevel": "source-controlled-artifacts-and-harnesses",
-      "currentRead": "The reference profile, event log, identity artifacts, and 0.1 gates are committed and rerunnable.",
+      "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, and 0.1 gates are committed and rerunnable.",
       "remainingGap": "Add a generated Guardians numeric score artifact per run once the metrics are less manually calibrated."
     }
   ],
@@ -114,6 +114,7 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/quick-peek-source-fidelity-0.2.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json",
     "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
@@ -126,13 +127,13 @@
     "npm run harness:check:galaxy-guardians-audio-character",
     "npm run harness:check:galaxy-guardians-formation-entry",
     "npm run harness:check:galaxy-guardians-movement-pacing",
+    "npm run harness:check:galaxy-guardians-score-progression",
     "npm run harness:check:galaxy-guardians-threat-scoring",
     "npm run harness:check:galaxy-guardians-visual-readability"
   ],
   "nextMetricPromotions": [
     "automated frame-level rack-entry timing from matt-hawkins-arcade-intro",
     "automated dive-path extraction from arcades-lounge-level-5 and nenriki-15-wave-session",
-    "Galaxian score-advance-table implementation and scoring conformance",
     "Guardians attract mission-language conformance",
     "acoustic cue comparison against waveform windows"
   ]

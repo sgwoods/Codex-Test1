@@ -57,7 +57,7 @@ function releaseTargetSections(){
   const releaseTargets = buildTable(
     ['Release cluster / focus', 'Aurora target', 'Aurora focus metrics', 'Guardians target', 'Guardians focus metrics', 'Release decision meaning'],
     [
-      ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', '6.9/10', 'maturity 5.8; gate coverage 9.0; public readiness 3.5; audio fit 4.5', 'Baseline for the next beta-candidate discussion.'],
+      ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', '7.0/10', 'maturity 5.8; gate coverage 9.0; public readiness 3.5; audio fit 4.5', 'Baseline for the next beta-candidate discussion.'],
       ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', '7.2/10', 'rack timing >= 6.4; movement pressure >= 5.8; visual identity >= 6.8; audio fit >= 5.2', 'Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible.'],
       ['`1.4` Arcade Depth / Guardians 0.1 Preview', '9.2/10', 'level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6', '7.8/10', 'frame-derived rack timing >= 7.2; dive paths >= 6.8; alien visuals >= 7.6; scoring model >= 7.5', 'Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora.'],
       ['`1.5` Flight Recorder and Shared Evidence', '9.3/10', 'replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6', '8.2/10', 'source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0', 'Shared video and evidence become release infrastructure for both applications.'],
@@ -92,7 +92,7 @@ function releaseTargetSections(){
     '  x-axis ["Current", "1.3", "1.4", "1.5", "1.6", "2.0"]',
     '  y-axis "Score / 10" 0 --> 10',
     '  line "Aurora Galactica" [8.8, 9.0, 9.2, 9.3, 9.4, 9.5]',
-    '  line "Galaxy Guardians" [6.9, 7.2, 7.8, 8.2, 8.5, 9.0]',
+    '  line "Galaxy Guardians" [7.0, 7.2, 7.8, 8.2, 8.5, 9.0]',
     '```',
     '',
     '## Application Metric Target Matrix',
