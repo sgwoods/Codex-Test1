@@ -139,6 +139,7 @@ should be thought of in three buckets:
 
 Typical examples:
 - `node tools/harness/check-popup-surfaces.js`
+- `node tools/harness/check-framed-popout-bounds.js`
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-front-door-copy-surface.js`
 - `node tools/harness/check-platinum-pack-boot.js`
@@ -368,6 +369,7 @@ Typical current examples include:
 - `node tools/harness/check-platinum-pack-boot.js`
 - `node tools/harness/check-game-picker-shell.js`
 - `node tools/harness/check-popup-surfaces.js`
+- `node tools/harness/check-framed-popout-bounds.js`
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-persona-repeatability.js`
 - `node tools/harness/check-front-door-copy-surface.js`

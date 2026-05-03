@@ -16,6 +16,11 @@ const CHECKS = [
     script: 'check-popup-surfaces.js'
   },
   {
+    id: 'framed-popout-bounds',
+    description: 'Frame-sized popout bounds and one-open-overlay switching',
+    script: 'check-framed-popout-bounds.js'
+  },
+  {
     id: 'dock-buttons',
     description: 'Dock buttons and toggle actions',
     script: 'check-dock-button-actions.js'

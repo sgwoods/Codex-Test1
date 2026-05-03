@@ -133,7 +133,7 @@ mask:
 #msg.startScreen .startSub{color:#ffd86d}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
-#settingsPanel{position:fixed;z-index:30;display:none;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);padding:16px 18px;box-shadow:0 16px 36px rgba(0,0,0,.34);backdrop-filter:blur(4px);color:#eaf6ff;overflow:auto}
+#settingsPanel{position:fixed;z-index:30;display:none;flex-direction:column;gap:12px;box-sizing:border-box;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);padding:16px 18px;box-shadow:0 16px 36px rgba(0,0,0,.34);backdrop-filter:blur(4px);color:#eaf6ff;overflow:auto}
 #settingsPanel.open{display:flex}
 #settingsPanel h3{margin:0}
 #settingsPanelClose,#feedbackClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
@@ -187,7 +187,7 @@ mask:
 #settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72);overflow-wrap:anywhere;word-break:break-word}
 #helpModal,#feedbackModal,#platformSplashModal,#gamePreviewModal,#gamePickerModal{position:fixed;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);overflow:hidden}
 #helpModal.open,#feedbackModal.open,#platformSplashModal.open,#gamePreviewModal.open,#gamePickerModal.open{display:flex}
-#helpPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#helpPanel{display:flex;flex-direction:column;gap:12px;box-sizing:border-box;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #helpHead h2{margin:0;font-size:20px;letter-spacing:.03em}
 #helpSubtitle{margin-top:4px;font-size:12px;line-height:1.3;color:#bfefff}
 #helpClose,#platformSplashClose,#gamePreviewClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
@@ -210,8 +210,8 @@ mask:
 #helpGuideActions{display:flex;justify-content:flex-end;align-items:center;flex:0 0 auto}
 #helpGuideActions button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:8px 13px;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #helpGuideFrame{width:100%;height:100%;min-height:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14}
-#feedbackPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
-#platformSplashPanel,#gamePreviewPanel,#gamePickerPanel{display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#feedbackPanel{display:flex;flex-direction:column;gap:12px;box-sizing:border-box;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#platformSplashPanel,#gamePreviewPanel,#gamePickerPanel{display:flex;flex-direction:column;gap:14px;box-sizing:border-box;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #platformSplashBody,#gamePreviewBody{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:18px;align-items:center}
 #platformSplashImage,#gamePreviewImage{display:block;width:100%;height:auto;object-fit:contain;box-sizing:border-box;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.62);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
 #platformSplashCopy,#gamePreviewCopy{display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:#e8f4ff}
@@ -228,10 +228,11 @@ mask:
  #gamePreviewHead h2{font-size:22px;line-height:1.05;letter-spacing:.02em}
  #gamePreviewSubtitle{font-size:11px;line-height:1.25;letter-spacing:.08em}
  #gamePreviewClose{flex:0 0 auto;width:36px;height:36px}
- #gamePreviewBody{grid-template-columns:1fr;gap:10px;align-items:stretch}
- #gamePreviewImage{height:72px;max-height:72px;object-fit:contain}
+ #gamePreviewBody{grid-template-columns:1fr;gap:10px;align-items:stretch;min-height:0;overflow:auto}
+ #gamePreviewImage{height:64px;max-height:64px;object-fit:contain}
  #gamePreviewCopy{gap:6px;font-size:11px;line-height:1.24}
  #gamePreviewSummary,#gamePreviewDetail{margin:0}
+ #gamePreviewDetail{display:none}
  #gamePreviewHighlights{grid-template-columns:1fr;gap:5px}
  #gamePreviewHighlights span{padding:3px 6px;line-height:1.2}
  #gamePreviewMilestones{gap:4px}
@@ -359,10 +360,10 @@ mask:
 #accountInitialsDisplay[hidden]{display:none!important}
 #statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,680px);--overlay-max-height:none}
 #statusPanels.waitOverlay{align-items:stretch;gap:8px;max-width:min(84vw,420px)}
-#statusPanels.framedOverlay{align-items:stretch;max-width:min(92vw,940px)}
+#statusPanels.framedOverlay{align-items:stretch;max-width:none}
 #statusPanels.framedOverlay #accountPanel,
 #statusPanels.framedOverlay #leaderboardPanel,
-#statusPanels.framedOverlay #platformMessagePanel{width:100%;max-width:none}
+#statusPanels.framedOverlay #platformMessagePanel{width:100%;max-width:none;height:100%;max-height:var(--overlay-max-height);box-sizing:border-box;overflow:auto}
 #statusPanels.waitOverlay #leaderboardPanel,
 #statusPanels.waitOverlay #leaderboardViews{width:100%;max-width:none}
 #statusPanels.waitOverlay #leaderboardViewsHead{align-items:flex-start;flex-direction:column;gap:6px}
@@ -421,7 +422,7 @@ mask:
 #movieTimeline{width:100%;margin:0;height:12px}
 #leaderboardPanel{display:none;flex-direction:column;gap:12px;width:min(100%,400px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
-#statusPanels.framedOverlay #leaderboardPanel{min-height:min(720px,var(--overlay-max-height));padding:18px 20px 16px}
+#statusPanels.framedOverlay #leaderboardPanel{min-height:0;padding:18px 20px 16px}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 #leaderboardPanelTitle,#leaderboardPanelSub{display:block}
 #leaderboardPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#ff4b43}
@@ -469,7 +470,7 @@ mask:
 #leaderboardStatus{color:rgba(218,236,255,.68);text-align:right;max-width:170px;line-height:1.3}
 #platformMessagePanel{display:none;flex-direction:column;gap:12px;width:min(100%,400px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #platformMessagePanel.visible{display:flex}
-#statusPanels.framedOverlay #platformMessagePanel{min-height:min(520px,var(--overlay-max-height));padding:18px 20px 16px}
+#statusPanels.framedOverlay #platformMessagePanel{min-height:0;padding:18px 20px 16px}
 #platformMessagePanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 #platformMessagePanelTitle,#platformMessagePanelSub{display:block}
 #platformMessagePanelTitle{font:700 20px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
@@ -480,10 +481,11 @@ mask:
 #statusPanels.framedOverlay #platformMessagePanelClose{width:36px;height:36px;font-size:24px}
 #platformMessagePanelStatus{min-height:18px;color:rgba(218,236,255,.74);font:700 11px/1.3 "Courier New",Consolas,monospace}
 #platformMessagePanelList{display:grid;gap:10px;align-content:start}
-.platformMessageRow{display:grid;grid-template-columns:minmax(82px,.4fr) minmax(160px,1.1fr) minmax(180px,1.3fr);gap:10px;align-items:start;padding:10px 12px;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.68)}
+.platformMessageRow{display:grid;grid-template-columns:minmax(82px,.4fr) minmax(120px,1fr) minmax(120px,1.2fr);gap:10px;align-items:start;min-width:0;padding:10px 12px;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.68)}
 .platformMessageKicker{color:#ffe39a;font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
 .platformMessageMain{color:#f4fbff;font:700 13px/1.25 "Courier New",Consolas,monospace}
 .platformMessageMeta{color:rgba(223,247,255,.78);font:400 12px/1.35 "Courier New",Consolas,monospace}
+.platformMessageKicker,.platformMessageMain,.platformMessageMeta{min-width:0;overflow-wrap:anywhere}
 #buildStamp{position:fixed;z-index:18;pointer-events:auto;display:flex;align-items:stretch;justify-content:flex-start;min-width:0;max-width:none;min-height:36px;padding:7px 10px;border:1px solid rgba(136,245,255,.18);box-sizing:border-box;overflow:hidden;background:
  linear-gradient(180deg,rgba(11,20,42,.94),rgba(7,12,27,.9)),
  repeating-linear-gradient(150deg,rgba(58,76,255,.12) 0 16px,transparent 16px 34px);
@@ -530,17 +532,16 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 }
 @media (max-width:620px){
  #cabinetRightFrame,#cabinetLeftFrame{display:none!important}
- #statusDock,#statusPanels,#settingsPanel,#buildStamp{left:14px!important;right:14px!important;top:auto!important;bottom:14px!important;transform:none!important;width:auto!important}
+ #statusDock,#buildStamp{left:14px!important;right:14px!important;top:auto!important;bottom:14px!important;transform:none!important;width:auto!important}
  #statusDock{position:fixed;display:block}
  #dockQuickTools{max-width:none;display:grid;grid-template-columns:repeat(2,minmax(0,60px));justify-content:start;height:auto}
  #dockQuickTools .dockToolGroup{display:contents}
  #dockQuickTools button{justify-content:center}
  #accountDockBtn{min-height:72px;padding:6px}
  #accountDockLabel,#accountDockStatus{display:none}
- #settingsPanel{bottom:126px!important}
  #settingsActions{grid-template-columns:1fr}
  #settingsFieldGrid{grid-template-columns:1fr}
- #statusPanels{align-items:stretch;bottom:126px!important}
+ #statusPanels:not(.framedOverlay):not(.waitOverlay){left:14px!important;right:14px!important;top:auto!important;bottom:126px!important;transform:none!important;width:auto!important;align-items:stretch}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#platformMessagePanel,#buildStamp{width:100%;max-width:none}
  #accountIdentityGrid,#accountFlightStats{grid-template-columns:1fr}
  .platformMessageRow{grid-template-columns:1fr;gap:4px}
