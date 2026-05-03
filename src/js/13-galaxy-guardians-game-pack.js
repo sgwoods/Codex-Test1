@@ -244,9 +244,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity; gameplay integration remains offline.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a dev-only scout-wave slice.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and dev-only scout-wave runtime while Aurora remains the primary public cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',

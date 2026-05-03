@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2026-05-03T13:02:55.654Z",
+  "profile": {
+    "id": "player-movement-conformance",
+    "title": "Player Movement Conformance",
+    "purpose": "Measure whether Aurora player movement still matches the documented joystick-translation principles for tap correction, hold travel, reversal, and firing while moving.",
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "capture": {
+      "stage": 1,
+      "ships": 3,
+      "seed": 2201,
+      "intervalMs": 16,
+      "tapHoldMs": 60,
+      "tapReleaseMs": 240,
+      "holdMs": 220,
+      "holdReleaseMs": 240,
+      "reversalFirstMs": 140,
+      "reversalSecondMs": 180,
+      "reversalReleaseMs": 240,
+      "moveFireLeadMs": 100,
+      "moveFirePostMs": 140,
+      "moveFireReleaseMs": 180,
+      "settleVxThreshold": 8
+    },
+    "referenceTraceSource": "reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65/movement-traces.json",
+    "targets": {
+      "tapAbsDelta": {
+        "min": 11.5,
+        "max": 19.5
+      },
+      "holdDelta": {
+        "min": 67,
+        "max": 97
+      },
+      "settleMsAfterRelease": {
+        "max": 320
+      },
+      "reversalCrossMs": {
+        "max": 280
+      },
+      "shotDelayMsWhileMoving": {
+        "max": 80
+      },
+      "postShotTravel": {
+        "min": 35
+      },
+      "maxFrameStep": {
+        "max": 17
+      }
+    }
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "baseline": {
+    "tapLeft": {
+      "startX": 140,
+      "endX": 123.16,
+      "absDelta": 16.84,
+      "maxFrameStep": 3.24
+    },
+    "holdRight": {
+      "startX": 123.16,
+      "endX": 214.24,
+      "delta": 91.08,
+      "maxFrameStep": 9.79,
+      "settleMsAfterRelease": 208
+    },
+    "reversal": {
+      "centerX": 214.24,
+      "reversalCrossMs": 258,
+      "maxFrameStep": 9.26,
+      "settleMsAfterRelease": 199
+    },
+    "moveFire": {
+      "shotDelayMs": -15,
+      "postShotTravel": 45.04,
+      "maxFrameStep": 16.72
+    },
+    "global": {
+      "maxFrameStep": 16.72
+    },
+    "subScores": {
+      "tapScore": 1,
+      "holdScore": 1,
+      "releaseScore": 1,
+      "reversalScore": 1,
+      "shotDelayScore": 1,
+      "postShotTravelScore": 1,
+      "frameStepScore": 1
+    },
+    "score10": 10
+  },
+  "current": {
+    "tapLeft": {
+      "startX": 140,
+      "endX": 140,
+      "absDelta": 0,
+      "maxFrameStep": 0
+    },
+    "holdRight": {
+      "startX": 140,
+      "endX": 184.91,
+      "delta": 44.91,
+      "maxFrameStep": 7.61,
+      "settleMsAfterRelease": 208
+    },
+    "reversal": {
+      "centerX": 184.91,
+      "reversalCrossMs": 108,
+      "maxFrameStep": 9.51,
+      "settleMsAfterRelease": 200
+    },
+    "moveFire": {
+      "shotDelayMs": 3,
+      "postShotTravel": 79.68,
+      "maxFrameStep": 9.92
+    },
+    "global": {
+      "maxFrameStep": 9.92
+    },
+    "subScores": {
+      "tapScore": 0,
+      "holdScore": 0.67,
+      "releaseScore": 1,
+      "reversalScore": 1,
+      "shotDelayScore": 1,
+      "postShotTravelScore": 1,
+      "frameStepScore": 1
+    },
+    "score10": 8.1
+  },
+  "summary": {
+    "baselineScore10": 10,
+    "currentScore10": 8.1,
+    "scoreDelta": -1.9
+  }
+}

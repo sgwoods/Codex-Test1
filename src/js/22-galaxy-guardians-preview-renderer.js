@@ -12,8 +12,11 @@ let galaxyGuardiansPreviewLastT=0;
 let galaxyGuardiansPreviewFireT=0;
 
 function shouldDrawGalaxyGuardiansPreviewBoard(){
- return typeof currentGamePackKey==='function'
-  && currentGamePackKey()==='galaxy-guardians-preview'
+ const activePreview=typeof currentGamePackKey==='function'
+  && currentGamePackKey()==='galaxy-guardians-preview';
+ const waitShowcase=typeof currentWaitModeShowcasePackKey==='function'
+  && currentWaitModeShowcasePackKey()==='galaxy-guardians-preview';
+ return (activePreview||waitShowcase)
   && typeof createGalaxyGuardiansRuntimeState==='function'
   && typeof stepGalaxyGuardiansRuntime==='function'
   && typeof summarizeGalaxyGuardiansRuntime==='function';

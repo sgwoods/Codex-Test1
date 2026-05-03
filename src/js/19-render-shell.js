@@ -343,7 +343,9 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
   else{
-   const frontDoor=typeof currentGamePackFrontDoor==='function'
+   const frontDoor=typeof currentWaitModeFrontDoor==='function'
+    ? currentWaitModeFrontDoor()
+    : typeof currentGamePackFrontDoor==='function'
     ? currentGamePackFrontDoor()
    : {
       title:'PLATINUM',

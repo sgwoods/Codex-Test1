@@ -20,6 +20,13 @@ function availableGameBoardRenderers(){
 
 function currentGameBoardRenderer(){
  const key=typeof currentGamePackKey==='function'?currentGamePackKey():DEFAULT_GAME_PACK_KEY;
+ const showcaseKey=!started&&typeof currentWaitModeShowcasePackKey==='function'
+  ? currentWaitModeShowcasePackKey()
+  : '';
+ if(showcaseKey){
+  const showcase=GAME_BOARD_RENDERERS[showcaseKey];
+  if(showcase&&showcase.canDraw())return showcase;
+ }
  const candidate=GAME_BOARD_RENDERERS[key];
  if(candidate&&candidate.canDraw())return candidate;
  return GAME_BOARD_RENDERERS[DEFAULT_GAME_PACK_KEY]||null;

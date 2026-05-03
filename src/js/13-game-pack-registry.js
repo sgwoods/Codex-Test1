@@ -9,6 +9,7 @@ const DEFAULT_GAME_PACK_KEY=AURORA_GAME_PACK.metadata.gameKey;
 let ACTIVE_GAME_PACK_KEY=DEFAULT_GAME_PACK_KEY;
 let ACTIVE_GAME_PACK=AURORA_GAME_PACK;
 const GAME_PACK_THEME_PREF_PREFIX=`${STORAGE_PREFIX}GamePackTheme:`;
+const WAIT_MODE_GAME_SHOWCASE_INTERVAL_MS=9000;
 
 function availableGamePacks(){
  return GAME_PACK_REGISTRY;
@@ -212,6 +213,10 @@ function currentGamePackChallengeGroupBonus(stage){
 
 function currentGamePackFrontDoor(){
  const pack=currentGamePack();
+ return frontDoorForGamePack(pack);
+}
+
+function frontDoorForGamePack(pack=currentGamePack(),opts={}){
  const appFrontDoor=pack.frontDoor||{};
  const platformCopy=typeof platformFrontDoorCopyForPack==='function'
   ? platformFrontDoorCopyForPack(pack)
@@ -235,6 +240,59 @@ function currentGamePackFrontDoor(){
    attribution:appFrontDoor.quotePlaceholder?.attribution||platformCopy.quotePlaceholder?.attribution||''
   }),
   quoteSurface:appFrontDoor.quoteSurface||platformCopy.quoteSurface||'wait-mode'
+ });
+}
+
+function waitModeShowcasePacks(){
+ return Object.values(GAME_PACK_REGISTRY).filter(pack => {
+  const key=pack?.metadata?.gameKey||'';
+  return key&&key!==DEFAULT_GAME_PACK_KEY&&pack.preview;
+ });
+}
+
+function currentWaitModeShowcasePack(nowMs=null){
+ if(typeof currentGamePackKey==='function'&&currentGamePackKey()!==DEFAULT_GAME_PACK_KEY)return null;
+ const forced=typeof window!=='undefined'?String(window.__platinumWaitModeShowcaseForce||'').trim():'';
+ if(forced){
+  const forcedPack=getGamePack(forced);
+  return forcedPack?.metadata?.gameKey!==DEFAULT_GAME_PACK_KEY?forcedPack:null;
+ }
+ const packs=waitModeShowcasePacks();
+ if(!packs.length)return null;
+ const now=Number.isFinite(+nowMs)?+nowMs:(typeof performance!=='undefined'?performance.now():Date.now());
+ const segment=Math.floor(now/WAIT_MODE_GAME_SHOWCASE_INTERVAL_MS);
+ if(segment%3!==2)return null;
+ return packs[Math.floor(segment/3)%packs.length]||null;
+}
+
+function currentWaitModeShowcasePackKey(nowMs=null){
+ return currentWaitModeShowcasePack(nowMs)?.metadata?.gameKey||'';
+}
+
+function currentWaitModeFrontDoor(){
+ const showcase=currentWaitModeShowcasePack();
+ if(!showcase)return currentGamePackFrontDoor();
+ const preview=currentGamePackPreview(showcase);
+ const active=currentGamePackFrontDoor();
+ return Object.freeze({
+  marqueeTitle:active.marqueeTitle,
+  title:String(preview.title||showcase.metadata?.title||'Game Preview').toUpperCase(),
+  subtitle:'SNEAK PEEK ON PLATINUM',
+  startPrompt:'PRESS <span class="k">ENTER</span> TO START AURORA',
+  featureLine:preview.cardLine||showcase.frontDoor?.featureLine||'',
+  attractLine:'PREVIEW ROTATION ACTIVE   CHOOSE GAME TO SWITCH CABINETS',
+  utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
+  noticeHint:'AURORA REMAINS THE PRIMARY PLAYABLE GAME',
+  pickerHint:`${showcase.metadata?.title||'Preview game'} preview available in Choose Game`,
+  atmosphereTheme:showcase.frontDoor?.atmosphereTheme||active.atmosphereTheme,
+  shellFrameTheme:active.shellFrameTheme,
+  frameAccent:active.frameAccent,
+  quotePlaceholder:Object.freeze({
+   kicker:'NEXT GAME',
+   text:preview.summary||'A second Platinum game preview is in development.',
+   attribution:''
+  }),
+  quoteSurface:'wait-mode-showcase'
  });
 }
 
@@ -393,6 +451,9 @@ window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
+window.currentWaitModeFrontDoor=currentWaitModeFrontDoor;
+window.currentWaitModeShowcasePack=currentWaitModeShowcasePack;
+window.currentWaitModeShowcasePackKey=currentWaitModeShowcasePackKey;
 window.currentGamePackPreview=currentGamePackPreview;
 window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
 window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
