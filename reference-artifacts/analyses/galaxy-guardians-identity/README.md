@@ -14,6 +14,9 @@ Current artifacts:
   contract for the Guardians signal theme.
 - `audio-cue-targets-0.1.json` - stricter playtest-weighted cue target
   contract for dry square/noise shot, enemy-shot, dive, hit, and loss cues.
+- `audio-isolated-cue-candidates-0.1.json` - CPU-only mixed-source cue
+  candidate detector that finds short/high-energy Galaxian shot, hit, dive, and
+  loss-like windows for the next manual labeling/export pass.
 - `audio-reference-comparison-0.1.json` - waveform/spectrogram and PCM proxy
   comparison between the Galaxian reference windows and Guardians cue shapes.
 - `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal
@@ -52,6 +55,9 @@ Current artifacts:
 - `stage-rank-pressure-0.1.json` - bounded multi-stage pressure contract that
   preserves the measured stage-one timing while making stages three and five
   measurably faster and denser for dives, shots, drift, and wrap pressure.
+- `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
+  for flagship, escort, scout, and player silhouettes. These grids are not final
+  exact sprites; they guide the next tighter component-crop pass.
 - `sprite-reference-extraction-0.1.json` - extracted crop color-family and
   proportion baseline for authored Guardians alien/player sprites.
 - `threat-scoring-0.1.json` - first lower-field threat and application-owned

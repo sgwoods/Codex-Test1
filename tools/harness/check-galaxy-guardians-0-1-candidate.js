@@ -22,6 +22,10 @@ function readJson(relPath){
   return JSON.parse(fs.readFileSync(path.join(ROOT, relPath), 'utf8'));
 }
 
+function exists(relPath){
+  return fs.existsSync(path.join(ROOT, relPath));
+}
+
 function loadGuardiansContext(){
   const sandbox = { console };
   sandbox.window = sandbox;
@@ -158,6 +162,11 @@ function main(){
   }
   if(candidate.status !== 'candidate-gate-dev-only-not-public-release'){
     fail('Galaxy Guardians 0.1 candidate artifact is not marked as dev-only candidate evidence', payload);
+  }
+  for(const [inputName, relPath] of Object.entries(candidate.inputs || {})){
+    if(!exists(relPath)){
+      fail(`Galaxy Guardians 0.1 candidate references a missing input artifact: ${inputName}`, { inputName, relPath, payload });
+    }
   }
   if(pack.metadata?.playable !== 0 || profile.publicPlayable !== 0 || profile.devPlayable !== 1){
     fail('Galaxy Guardians 0.1 candidate crossed the public playable boundary', payload);

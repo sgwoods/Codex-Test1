@@ -93,13 +93,14 @@ Current conformance read:
 - player movement conformance is the next visible feel gap at `8.1/10`
 - Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
   yet part of the Aurora numeric roll-up
-- Guardians evidence-weighted reference conformance is now `7.3/10`, but the
-  stricter playtest-weighted score is only `5.9/10` after local review found
+- Guardians evidence-weighted reference conformance is now `7.4/10`, but the
+  stricter playtest-weighted score is only `6.1/10` after local review found
   audio, pace, and graphic likeness still short of a compelling Galaxian-style
-  preview; cue-target gates now require square/noise hardware character and
-  stage-rank gates now require denser later-wave pressure
-- current cluster targets are `9.0/10` for Aurora and `7.3/10` reference /
-  `5.9/10` playtest for Guardians in the `1.3` Fidelity and Trust lane, rising
+  preview; cue-target gates now require square/noise hardware character,
+  mixed-source cue candidates and broad sprite-grid targets are now persisted,
+  and stage-rank gates now require denser later-wave pressure
+- current cluster targets are `9.0/10` for Aurora and `7.4/10` reference /
+  `6.1/10` playtest for Guardians in the `1.3` Fidelity and Trust lane, rising
   toward `9.5/10` and `9.0/10` reference / `8.8/10` playtest by the `2.0`
   multi-game Platinum candidate lane
 

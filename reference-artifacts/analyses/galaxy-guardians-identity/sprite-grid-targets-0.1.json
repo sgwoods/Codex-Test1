@@ -1,0 +1,220 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "sprite-grid-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "reference-crop-grid-targets-not-final-pixel-copy",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-sprite-grid-targets.js",
+  "sourceEvidence": {
+    "spriteReferenceExtraction": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
+    "note": "These grids are downsampled from broad crop regions and are target scaffolding, not copyright-sensitive exact sprite copies."
+  },
+  "targets": [
+    {
+      "id": "signal-flagship",
+      "role": "flagship",
+      "sourceCropFamily": "rack-upper-aliens",
+      "cols": 9,
+      "rows": 8,
+      "minSimilarity": 0.38,
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/rack-upper-aliens.jpg",
+      "extractedRows": [
+        "....AA...",
+        "....A.C..",
+        "...CCWCC.",
+        "..WWWWWWW",
+        ".WWWWWWWW",
+        "WWWWWCWWW",
+        "WWWWW.WWW",
+        "WWWWWW.WW"
+      ],
+      "runtimeRows": [
+        "....A....",
+        "...ACA...",
+        "..WCCCW..",
+        ".WCECEW.",
+        "WWCCCCCWW",
+        ".WCCCCCW.",
+        "..AACAA..",
+        ".A.....A."
+      ],
+      "extractedMetrics": {
+        "width": 9,
+        "height": 8,
+        "filledPixels": 49,
+        "fillRatio": 0.681,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 9,
+        "height": 8,
+        "filledPixels": 38,
+        "fillRatio": 0.535,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 0.703
+    },
+    {
+      "id": "signal-escort",
+      "role": "escort",
+      "sourceCropFamily": "lower-field-divers",
+      "cols": 7,
+      "rows": 6,
+      "minSimilarity": 0.34,
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/sprite-crops/lower-field-divers.jpg",
+      "extractedRows": [
+        ".......",
+        ".......",
+        "EEEEEEE",
+        "WWW.WWW",
+        ".WW..WW",
+        ".WW..WW"
+      ],
+      "runtimeRows": [
+        "..A.A..",
+        ".ACCCA.",
+        "WCECECW",
+        ".CCCCC.",
+        "..W.W..",
+        "A.....A"
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 21,
+        "fillRatio": 0.5,
+        "tokenChannels": [
+          "E",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 23,
+        "fillRatio": 0.548,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 0.571
+    },
+    {
+      "id": "signal-scout",
+      "role": "scout",
+      "sourceCropFamily": "rack-upper-aliens",
+      "cols": 7,
+      "rows": 6,
+      "minSimilarity": 0.34,
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/rack-upper-aliens.jpg",
+      "extractedRows": [
+        "...AA..",
+        "..CCCCC",
+        ".WWWWWW",
+        ".WWWWWW",
+        "WWWWWWW",
+        "WWWWWWW"
+      ],
+      "runtimeRows": [
+        "..A.A..",
+        ".WACAW.",
+        "WWCCCWW",
+        ".WECEW.",
+        "..CCC..",
+        ".A...A."
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 33,
+        "fillRatio": 0.786,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 24,
+        "fillRatio": 0.571,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 0.643
+    },
+    {
+      "id": "player-interceptor",
+      "role": "player",
+      "sourceCropFamily": "player-and-shot",
+      "cols": 7,
+      "rows": 7,
+      "minSimilarity": 0.34,
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/sprite-crops/player-and-shot.jpg",
+      "extractedRows": [
+        ".......",
+        "...CC..",
+        "..CC...",
+        "..WW...",
+        ".......",
+        ".......",
+        "......."
+      ],
+      "runtimeRows": [
+        "...A...",
+        "..ACA..",
+        ".WCCCW.",
+        "WCCCCCW",
+        ".WCFW.",
+        "..FFF..",
+        ".A...A."
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 7,
+        "filledPixels": 6,
+        "fillRatio": 0.122,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 7,
+        "filledPixels": 25,
+        "fillRatio": 0.521,
+        "tokenChannels": [
+          "A",
+          "C",
+          "F",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 0.571
+    }
+  ],
+  "summary": {
+    "targetCount": 4,
+    "averageSilhouetteSimilarity": 0.622,
+    "weakestTarget": "signal-escort"
+  },
+  "nextAuthoringStep": "Use tighter manually reviewed component crops to replace these broad downsampled grids, then tune pack-owned sprites against the checked target metrics."
+}

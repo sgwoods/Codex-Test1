@@ -10,8 +10,10 @@
     "playtestContext": "Local browser review of the development-only Galaxy Guardians preview on the MacBook workstation.",
     "referenceEvidence": [
       "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
       "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
       "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
@@ -29,10 +31,10 @@
     "10": "Reference-faithful enough for public conformance claims."
   },
   "summary": {
-    "evidenceWeightedReferenceScore10": 7.3,
-    "playtestWeightedConformanceScore10": 5.9,
+    "evidenceWeightedReferenceScore10": 7.4,
+    "playtestWeightedConformanceScore10": 6.1,
     "compellingPreviewTargetScore10": 7.0,
-    "releaseRead": "Not yet compelling enough for beta-facing preview. The runtime now has measured stage-rank pressure and is faster, more threatening, and better separated from Aurora, but audio and pixel-faithful visual identity remain the largest gaps."
+    "releaseRead": "Not yet compelling enough for beta-facing preview. The runtime now has measured stage-rank pressure and is faster, more threatening, and better separated from Aurora, with stronger cue-candidate and sprite-grid evidence. Audio and pixel-faithful visual identity remain the largest gaps."
   },
   "categories": [
     {
@@ -41,17 +43,18 @@
       "weight": 28,
       "previousOfficialScore10": 5.3,
       "playtestAdjustedBeforePass10": 2.5,
-      "playtestWeightedScore10": 4.4,
+      "playtestWeightedScore10": 4.7,
       "compellingPreviewTarget10": 7.0,
       "metricSet": [
         "hardware-like square/noise timbre",
         "short dry shot envelopes",
         "dive siren descent character",
         "event mix density during live play",
-        "waveform/spectrogram proxy fit"
+        "waveform/spectrogram proxy fit",
+        "isolated cue candidate family coverage"
       ],
-      "currentRead": "Cue ownership and shape are harnessed, and the latest pass adds filtered-noise layers plus stricter square-wave cue targets for player shot, enemy shot, dive, hit, and loss cues. This is more hardware-like than the previous musical cue set, but still needs isolated Galaxian cue matching.",
-      "nextEvidenceNeeded": "Extract isolated cue windows from source clips, compare synthetic envelopes/frequency bands cue-by-cue, and tune against real playback review rather than only catalog shape."
+      "currentRead": "Cue ownership and shape are harnessed, the latest pass adds filtered-noise layers plus stricter square-wave cue targets, and CPU analysis now finds 64 mixed-source cue candidates across short shot/hit and dive/loss-like families. This is more evidence-rich than the previous musical cue set, but still does not sound close enough in live play.",
+      "nextEvidenceNeeded": "Manually label/export the strongest cue candidates, compare synthetic envelopes/frequency bands cue-by-cue, and tune against real playback review rather than only catalog shape."
     },
     {
       "id": "motion-pressure",
@@ -79,7 +82,7 @@
       "weight": 28,
       "previousOfficialScore10": 7.0,
       "playtestAdjustedBeforePass10": 4.5,
-      "playtestWeightedScore10": 5.4,
+      "playtestWeightedScore10": 5.8,
       "compellingPreviewTarget10": 7.0,
       "metricSet": [
         "alien silhouette family likeness",
@@ -87,10 +90,11 @@
         "palette family match",
         "sprite scale and rack density",
         "player ship likeness",
-        "score/attract visual layout"
+        "score/attract visual layout",
+        "broad crop-grid silhouette similarity"
       ],
-      "currentRead": "Sprites are smaller and more distinct after the escort/scout separation pass, and sprite-reference extraction covers color families and proportions. They remain hand-authored approximations, not close visual copies of the reference sprites.",
-      "nextEvidenceNeeded": "Derive a final pixel-grid target from representative reference crops, then hand-author or generate pack-owned sprites against that target."
+      "currentRead": "Sprites are smaller and more distinct after the escort/scout separation pass, sprite-reference extraction covers color families/proportions, and broad crop-grid targets now compare flagship, escort, scout, and player silhouettes. They remain hand-authored approximations, not close visual copies of the reference sprites.",
+      "nextEvidenceNeeded": "Replace the broad crop-grid scaffold with tighter manually reviewed component crops, then hand-author pack-owned sprites against those target silhouettes."
     },
     {
       "id": "platform-boundary-readiness",
@@ -111,8 +115,8 @@
     }
   ],
   "recommendedNext": [
-    "Extract isolated Galaxian shot, dive, enemy-shot, life-loss, and game-over audio windows and tune Guardians cues against those windows.",
-    "Promote sprite crop extraction into final pixel-grid reference targets for flagship, escort, scout, and player ship.",
+    "Manually label and export the best detected Galaxian shot, dive, enemy-shot, life-loss, and game-over cue candidates, then tune Guardians cues against those windows.",
+    "Promote broad sprite-grid targets into tighter manually reviewed component crops for flagship, escort, scout, and player ship.",
     "Run a browser-reviewed pacing pass after the current faster runtime is built, with perceived urgency scored beside runtime trace metrics.",
     "Keep Guardians beta-facing preview blocked until playtest-weighted score reaches at least 7.0/10."
   ]

@@ -8,8 +8,9 @@
   "sourceEvidence": {
     "playtestReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
     "audioCharacter": "reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json",
+    "audioIsolatedCueCandidates": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
     "audioReferenceComparison": "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
-    "notes": "These targets are still synthetic and should be replaced by isolated cue matching once clean Galaxian shot, dive, hit, and loss windows are extracted."
+    "notes": "These targets are still synthetic. The cue-candidate pass now identifies mixed-source shot, hit, dive, and loss-like windows, but they need manual labeling and export before they can replace the synthetic bands."
   },
   "globalTargets": {
     "requiredNoisyCueNames": [
@@ -95,5 +96,5 @@
     "audioCueTargetCheck": "tools/harness/check-galaxy-guardians-audio-cue-targets.js",
     "npmScript": "npm run harness:check:galaxy-guardians-audio-cue-targets"
   },
-  "nextPromotion": "Extract isolated cue windows from the Galaxian videos and replace the synthetic bands with measured envelope/frequency targets."
+  "nextPromotion": "Manually label and export the strongest cue candidates from the Galaxian videos, then replace the synthetic bands with measured envelope/frequency targets."
 }
