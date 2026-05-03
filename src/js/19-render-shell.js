@@ -306,13 +306,15 @@ function syncCabinetShellLayout({
   renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
-  const stampW=Math.min(560,Math.max(420,Math.floor(viewW*.46)));
-  const compactStampH=62;
+  const stampW=Math.floor(viewW);
+  const compactStampH=42;
   const stampH=buildStamp.offsetHeight||compactStampH;
-  const anchorTop=shellY+shellH-Math.max(44,Math.floor(shellPadB*.5));
+  const targetTop=Math.floor(oy+viewH+Math.max(6,Math.floor(scale*8)));
+  const maxTop=Math.floor(shellY+shellH-stampH-8);
   buildStamp.style.width=`${stampW}px`;
-  buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
-  buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
+  buildStamp.style.left=`${Math.floor(ox)}px`;
+  buildStamp.style.right='auto';
+  buildStamp.style.top=`${Math.max(8,Math.min(targetTop,maxTop))}px`;
   buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
  }
 }

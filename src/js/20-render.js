@@ -53,7 +53,8 @@ function draw(){
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
  const railTop=oy;
  const waitScoreOverlay=0;
- const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
+ const platformMessageOpen=typeof platformMessagePanelOpen!=='undefined'&&!!platformMessagePanelOpen;
+ const framedOverlayOpen=!!((typeof LEADERBOARD!=='undefined'&&(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen))||platformMessageOpen);
 
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,

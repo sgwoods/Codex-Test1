@@ -50,6 +50,10 @@ const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
+const platformMessagePanel=document.getElementById('platformMessagePanel');
+const platformMessagePanelClose=document.getElementById('platformMessagePanelClose');
+const platformMessagePanelStatus=document.getElementById('platformMessagePanelStatus');
+const platformMessagePanelList=document.getElementById('platformMessagePanelList');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
@@ -1919,15 +1923,16 @@ feedbackForm.addEventListener('submit',submitFeedback);
 if(buildStamp){
  buildStamp.addEventListener('click',e=>{
   if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
-  openProjectGuide();
+  togglePlatformMessagePanel();
  });
  buildStamp.addEventListener('keydown',e=>{
   if(e.key!=='Enter'&&e.key!==' ')return;
   if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
   e.preventDefault();
-  openProjectGuide();
+  togglePlatformMessagePanel();
  });
 }
+if(platformMessagePanelClose)platformMessagePanelClose.addEventListener('click',closePlatformMessagePanel);
 if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',e=>{
  e.stopPropagation();
  location.reload();
@@ -2076,3 +2081,5 @@ window.openPlatformSplash=openPlatformSplash;
 window.closePlatformSplash=closePlatformSplash;
 window.openGamePreview=openGamePreview;
 window.closeGamePreview=closeGamePreview;
+window.openPlatformMessagePanel=openPlatformMessagePanel;
+window.closePlatformMessagePanel=closePlatformMessagePanel;

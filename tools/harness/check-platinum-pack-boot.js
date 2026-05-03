@@ -140,8 +140,8 @@ async function main(){
   if(!result.auroraWait.settingsRuntime.includes('Platinum · Aurora Galactica')){
     fail('Aurora wait mode was not visibly labelled as running on Platinum', result);
   }
-  if(!result.auroraWait.buildStampChannel.includes('Platinum · Aurora Galactica')){
-    fail('build stamp was not visibly labelled with the Platinum runtime and active pack', result);
+  if(!/DEVELOPMENT|PRODUCTION|BETA/i.test(result.auroraWait.buildStampChannel)){
+    fail('build stamp was not visibly labelled with the active release channel', result);
   }
   if(!result.auroraWait.waitText.includes('AURORA GALACTICA')) fail('Aurora wait mode was not using pack-owned front-door copy', result);
   if(result.auroraWait.snapshotGameKey !== 'aurora-galactica') fail('Wait-mode snapshot did not preserve the active pack game key', result);

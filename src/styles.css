@@ -361,7 +361,8 @@ mask:
 #statusPanels.waitOverlay{align-items:stretch;gap:8px;max-width:min(84vw,420px)}
 #statusPanels.framedOverlay{align-items:stretch;max-width:min(92vw,940px)}
 #statusPanels.framedOverlay #accountPanel,
-#statusPanels.framedOverlay #leaderboardPanel{width:100%;max-width:none}
+#statusPanels.framedOverlay #leaderboardPanel,
+#statusPanels.framedOverlay #platformMessagePanel{width:100%;max-width:none}
 #statusPanels.waitOverlay #leaderboardPanel,
 #statusPanels.waitOverlay #leaderboardViews{width:100%;max-width:none}
 #statusPanels.waitOverlay #leaderboardViewsHead{align-items:flex-start;flex-direction:column;gap:6px}
@@ -466,7 +467,24 @@ mask:
 #leaderboardViewButtons button.active{border-color:rgba(255,216,109,.72);color:#ffd86d;background:rgba(60,44,8,.72)}
 #leaderboardViewButtons button[disabled]{opacity:.5;cursor:default}
 #leaderboardStatus{color:rgba(218,236,255,.68);text-align:right;max-width:170px;line-height:1.3}
-#buildStamp{position:fixed;z-index:18;pointer-events:auto;display:flex;align-items:stretch;justify-content:flex-start;min-width:248px;max-width:min(calc(100vw - 240px),780px);min-height:40px;padding:8px 18px 8px;border:1px solid rgba(136,245,255,.18);background:
+#platformMessagePanel{display:none;flex-direction:column;gap:12px;width:min(100%,400px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#platformMessagePanel.visible{display:flex}
+#statusPanels.framedOverlay #platformMessagePanel{min-height:min(520px,var(--overlay-max-height));padding:18px 20px 16px}
+#platformMessagePanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#platformMessagePanelTitle,#platformMessagePanelSub{display:block}
+#platformMessagePanelTitle{font:700 20px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
+#platformMessagePanelSub{margin-top:4px;font:400 12px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;color:#dff7ff}
+#statusPanels.framedOverlay #platformMessagePanelTitle{font-size:26px}
+#statusPanels.framedOverlay #platformMessagePanelSub{font-size:15px}
+#platformMessagePanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#statusPanels.framedOverlay #platformMessagePanelClose{width:36px;height:36px;font-size:24px}
+#platformMessagePanelStatus{min-height:18px;color:rgba(218,236,255,.74);font:700 11px/1.3 "Courier New",Consolas,monospace}
+#platformMessagePanelList{display:grid;gap:10px;align-content:start}
+.platformMessageRow{display:grid;grid-template-columns:minmax(82px,.4fr) minmax(160px,1.1fr) minmax(180px,1.3fr);gap:10px;align-items:start;padding:10px 12px;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.68)}
+.platformMessageKicker{color:#ffe39a;font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
+.platformMessageMain{color:#f4fbff;font:700 13px/1.25 "Courier New",Consolas,monospace}
+.platformMessageMeta{color:rgba(223,247,255,.78);font:400 12px/1.35 "Courier New",Consolas,monospace}
+#buildStamp{position:fixed;z-index:18;pointer-events:auto;display:flex;align-items:stretch;justify-content:flex-start;min-width:0;max-width:none;min-height:36px;padding:7px 10px;border:1px solid rgba(136,245,255,.18);box-sizing:border-box;overflow:hidden;background:
  linear-gradient(180deg,rgba(11,20,42,.94),rgba(7,12,27,.9)),
  repeating-linear-gradient(150deg,rgba(58,76,255,.12) 0 16px,transparent 16px 34px);
 box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:left;text-shadow:0 0 6px rgba(0,0,0,.92);cursor:pointer}
@@ -474,15 +492,16 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 #buildStamp::before,#buildStamp::after{content:"";position:absolute;pointer-events:none}
 #buildStamp::before{inset:8px;border:1px solid rgba(255,255,255,.05)}
 #buildStamp::after{left:14px;right:14px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,229,122,.22),transparent)}
-#buildStampBody{display:flex;flex:1;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding-right:0}
-#buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+#buildStampBody{display:grid;grid-template-columns:minmax(82px,.75fr) minmax(48px,.35fr) minmax(132px,1.05fr) auto;flex:1;align-items:center;gap:10px;min-width:0;padding-right:0}
+#buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;overflow-wrap:normal;word-break:normal}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
-#buildStampVersion{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
+#buildStampVersion{text-align:center;color:#f0f5ff}
+#buildStampRelease{text-align:right}
+#buildStampRefreshBtn{display:none;margin-top:0;justify-self:end;padding:4px 8px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer;white-space:nowrap}
 #buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
-#buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
-#buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
+#buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:block}
+#buildStamp.production #buildStampVersion{font-size:10px;letter-spacing:.08em;color:#f0f5ff}
 #buildStamp.replay{pointer-events:none;cursor:default;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
 #buildStamp.replay #buildStampChannel{color:#ffe39a}
 #buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
@@ -522,15 +541,17 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #settingsActions{grid-template-columns:1fr}
  #settingsFieldGrid{grid-template-columns:1fr}
  #statusPanels{align-items:stretch;bottom:126px!important}
- #accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #accountPanel,#leaderboardPanel,#leaderboardViews,#platformMessagePanel,#buildStamp{width:100%;max-width:none}
  #accountIdentityGrid,#accountFlightStats{grid-template-columns:1fr}
+ .platformMessageRow{grid-template-columns:1fr;gap:4px}
  #movieSelectionOverlay{width:min(calc(100% - 24px),420px)}
  #movieTopBar{left:10px;right:46px;top:48px;padding:7px 8px}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
  #buildStamp{align-items:stretch}
- #buildStampBody{padding-right:22px}
+ #buildStampBody{grid-template-columns:minmax(64px,.8fr) minmax(44px,.35fr) minmax(98px,1fr);gap:6px;padding-right:0}
+ #buildStampRefreshBtn{grid-column:1 / -1;justify-self:start;margin-top:2px}
  #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 0}
  #left,#center,#right{text-align:left}
  #right{display:none}

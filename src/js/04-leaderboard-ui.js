@@ -270,7 +270,8 @@ function syncLeaderboardPanelVisibility(){
  }
 }
 function syncOverlayPause(){
- const overlayOpen=!!(LEADERBOARD.panelOpen||LEADERBOARD.accountPanelOpen);
+ const platformMessageOpen=typeof platformMessagePanelOpen!=='undefined'&&!!platformMessagePanelOpen;
+ const overlayOpen=!!(LEADERBOARD.panelOpen||LEADERBOARD.accountPanelOpen||platformMessageOpen);
  if(overlayOpen){
   if(started&&!paused&&!LEADERBOARD.overlayPauseApplied){
    LEADERBOARD.overlayPausePrev=0;

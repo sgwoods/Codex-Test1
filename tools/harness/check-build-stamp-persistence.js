@@ -35,14 +35,22 @@ async function main(){
     await page.locator('#buildStamp').click();
     await page.waitForTimeout(150);
     const afterClick = await page.evaluate(() => ({
-      openCalls: window.__buildStampOpenCalls.slice()
+      openCalls: window.__buildStampOpenCalls.slice(),
+      panelVisible: !!document.getElementById('platformMessagePanel')?.classList.contains('visible'),
+      panelHidden: !!document.getElementById('platformMessagePanel')?.hidden,
+      panelRows: document.querySelectorAll('#platformMessagePanelList .platformMessageRow').length
     }));
 
+    await page.locator('#platformMessagePanelClose').click();
+    await page.waitForTimeout(150);
     await page.locator('#buildStamp').focus();
     await page.keyboard.press('Enter');
     await page.waitForTimeout(150);
     const afterKeyboard = await page.evaluate(() => ({
-      openCalls: window.__buildStampOpenCalls.slice()
+      openCalls: window.__buildStampOpenCalls.slice(),
+      panelVisible: !!document.getElementById('platformMessagePanel')?.classList.contains('visible'),
+      panelHidden: !!document.getElementById('platformMessagePanel')?.hidden,
+      panelRows: document.querySelectorAll('#platformMessagePanelList .platformMessageRow').length
     }));
 
     return { before, afterClick, afterKeyboard };
@@ -57,15 +65,17 @@ async function main(){
   if(result.before.role !== 'button' || result.before.tabIndex !== 0){
     fail('build stamp is not keyboard-accessible as a clickable guide entry point', result);
   }
-  if(result.afterClick.openCalls.length < 1){
-    fail('clicking the build stamp did not open the project guide', result);
+  if(result.afterClick.openCalls.length > 0){
+    fail('clicking the build stamp still opens a popup instead of the platform message panel', result);
   }
-  if(result.afterKeyboard.openCalls.length < 2){
-    fail('keyboard activation did not open the project guide from the build stamp', result);
+  if(!result.afterClick.panelVisible || result.afterClick.panelHidden || result.afterClick.panelRows < 1){
+    fail('clicking the build stamp did not open the platform message panel', result);
   }
-  const firstUrl = result.afterClick.openCalls[0]?.url || '';
-  if(!/project-guide\.html$/i.test(firstUrl)){
-    fail('build stamp click did not target the project guide surface', result);
+  if(result.afterKeyboard.openCalls.length > 0){
+    fail('keyboard activation still opens a popup instead of the platform message panel', result);
+  }
+  if(!result.afterKeyboard.panelVisible || result.afterKeyboard.panelHidden || result.afterKeyboard.panelRows < 1){
+    fail('keyboard activation did not open the platform message panel from the build stamp', result);
   }
 
   console.log(JSON.stringify({ ok: true, result }, null, 2));
