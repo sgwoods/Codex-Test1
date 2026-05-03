@@ -1,0 +1,668 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "runtime-reference-movement-comparison",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "runtime-vs-reference-track-comparison-not-public-release",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-runtime-reference-movement.js",
+  "sourceEvidence": {
+    "objectTrackConformance": "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+    "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json"
+  },
+  "referenceTargetBands": {
+    "medianCandidateDurationSeconds": 5.5,
+    "medianCandidateXSpan": 0.372,
+    "medianCandidateYSpan": 0.416,
+    "minimumDescendingTrackletsPerPressureWindow": 3
+  },
+  "runtimeRules": {
+    "firstScoutDiveDelay": 3.1,
+    "flagshipEscortDelay": 8.45,
+    "scoutDiveIntervalBase": 2.35,
+    "flagshipDiveIntervalBase": 8.05,
+    "diveSwayAmplitude": 36,
+    "diveSwayHz": 1.7,
+    "diveSideDrift": 14,
+    "diveBaseVy": 26,
+    "diveAccel": 3.5,
+    "bottomExitPadding": 12
+  },
+  "runtimeStats": {
+    "trackletCount": 7,
+    "descendingTrackletCount": 7,
+    "medianCandidateDurationSeconds": 2.867,
+    "medianCandidateXSpan": 0.356,
+    "medianCandidateYSpan": 0.457,
+    "firstScoutDiveT": 3.117,
+    "firstFlagshipDiveT": 8.45,
+    "firstWrapT": 8.467,
+    "wrapCountByFourteenSeconds": 3
+  },
+  "comparison": {
+    "referenceMedianDurationSeconds": 5.5,
+    "referenceMedianXSpan": 0.372,
+    "referenceMedianYSpan": 0.416,
+    "runtimeMedianDurationSeconds": 2.867,
+    "runtimeMedianXSpan": 0.356,
+    "runtimeMedianYSpan": 0.457,
+    "durationRatio": 0.521,
+    "xSpanRatio": 0.957,
+    "ySpanRatio": 1.099
+  },
+  "scoreParts": {
+    "durationFit": 6,
+    "xSpanFit": 7.6,
+    "ySpanFit": 6.3,
+    "pressureAvailability": 10,
+    "eventCoverage": 10
+  },
+  "runtimeReferenceMovementScore10": 8,
+  "tuningRead": {
+    "constantsTunedFromReferenceProxy": true,
+    "remainingGap": "Comparison uses connected-component target bands and runtime entity tracks. The next improvement should use final sprite recognition from extracted Galaxian assets."
+  },
+  "tracklets": [
+    {
+      "id": "gg-scout-4-3",
+      "role": "scout",
+      "linkedTo": "",
+      "sampleCount": 226,
+      "startSeconds": 3.783,
+      "endSeconds": 7.533,
+      "durationSeconds": 3.75,
+      "xSpan": 0.337,
+      "ySpan": 0.457,
+      "descent": 0.457,
+      "first": {
+        "x": 0.263,
+        "y": 0.421
+      },
+      "last": {
+        "x": 0.071,
+        "y": 0.878
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 3.783,
+          "x": 0.263,
+          "y": 0.421
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 4.25,
+          "x": 0.238,
+          "y": 0.463
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 4.717,
+          "x": 0.285,
+          "y": 0.509
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 5.183,
+          "x": 0.361,
+          "y": 0.559
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 5.65,
+          "x": 0.407,
+          "y": 0.614
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 6.117,
+          "x": 0.381,
+          "y": 0.673
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 6.583,
+          "x": 0.286,
+          "y": 0.736
+        },
+        {
+          "id": "gg-scout-4-3",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 7.05,
+          "x": 0.163,
+          "y": 0.804
+        }
+      ]
+    },
+    {
+      "id": "gg-scout-2-4",
+      "role": "scout",
+      "linkedTo": "",
+      "sampleCount": 198,
+      "startSeconds": 7.35,
+      "endSeconds": 10.633,
+      "durationSeconds": 3.283,
+      "xSpan": 0.357,
+      "ySpan": 0.459,
+      "descent": 0.459,
+      "first": {
+        "x": 0.381,
+        "y": 0.421
+      },
+      "last": {
+        "x": 0.135,
+        "y": 0.88
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 7.35,
+          "x": 0.381,
+          "y": 0.421
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 7.75,
+          "x": 0.443,
+          "y": 0.465
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 8.15,
+          "x": 0.47,
+          "y": 0.513
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 8.55,
+          "x": 0.441,
+          "y": 0.564
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 8.95,
+          "x": 0.36,
+          "y": 0.618
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 9.35,
+          "x": 0.255,
+          "y": 0.675
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 9.75,
+          "x": 0.163,
+          "y": 0.736
+        },
+        {
+          "id": "gg-scout-2-4",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 10.15,
+          "x": 0.116,
+          "y": 0.799
+        }
+      ]
+    },
+    {
+      "id": "gg-scout-2-9",
+      "role": "scout",
+      "linkedTo": "",
+      "sampleCount": 198,
+      "startSeconds": 9.8,
+      "endSeconds": 13.083,
+      "durationSeconds": 3.283,
+      "xSpan": 0.357,
+      "ySpan": 0.459,
+      "descent": 0.459,
+      "first": {
+        "x": 0.848,
+        "y": 0.421
+      },
+      "last": {
+        "x": 1.094,
+        "y": 0.88
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 9.8,
+          "x": 0.848,
+          "y": 0.421
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 10.2,
+          "x": 0.786,
+          "y": 0.465
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 10.6,
+          "x": 0.759,
+          "y": 0.513
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 11,
+          "x": 0.788,
+          "y": 0.564
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 11.4,
+          "x": 0.869,
+          "y": 0.618
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 11.8,
+          "x": 0.974,
+          "y": 0.675
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 12.2,
+          "x": 1.066,
+          "y": 0.736
+        },
+        {
+          "id": "gg-scout-2-9",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 12.6,
+          "x": 1.113,
+          "y": 0.799
+        }
+      ]
+    },
+    {
+      "id": "gg-escort-1-5",
+      "role": "escort",
+      "linkedTo": "gg-flagship-0-5",
+      "sampleCount": 173,
+      "startSeconds": 10.933,
+      "endSeconds": 13.8,
+      "durationSeconds": 2.867,
+      "xSpan": 0.356,
+      "ySpan": 0.458,
+      "descent": 0.458,
+      "first": {
+        "x": 0.498,
+        "y": 0.42
+      },
+      "last": {
+        "x": 0.795,
+        "y": 0.878
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.933,
+          "x": 0.498,
+          "y": 0.42
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 11.283,
+          "x": 0.503,
+          "y": 0.468
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 11.633,
+          "x": 0.552,
+          "y": 0.517
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 11.983,
+          "x": 0.634,
+          "y": 0.57
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 12.333,
+          "x": 0.727,
+          "y": 0.624
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 12.683,
+          "x": 0.804,
+          "y": 0.681
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 13.033,
+          "x": 0.846,
+          "y": 0.74
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 13.383,
+          "x": 0.844,
+          "y": 0.802
+        }
+      ]
+    },
+    {
+      "id": "gg-escort-1-6",
+      "role": "escort",
+      "linkedTo": "gg-flagship-0-5",
+      "sampleCount": 172,
+      "startSeconds": 10.95,
+      "endSeconds": 13.8,
+      "durationSeconds": 2.85,
+      "xSpan": 0.357,
+      "ySpan": 0.456,
+      "descent": 0.456,
+      "first": {
+        "x": 0.576,
+        "y": 0.421
+      },
+      "last": {
+        "x": 0.873,
+        "y": 0.877
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.95,
+          "x": 0.576,
+          "y": 0.421
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 11.3,
+          "x": 0.583,
+          "y": 0.468
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 11.65,
+          "x": 0.634,
+          "y": 0.518
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 12,
+          "x": 0.717,
+          "y": 0.571
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 12.35,
+          "x": 0.81,
+          "y": 0.625
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 12.7,
+          "x": 0.886,
+          "y": 0.682
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 13.05,
+          "x": 0.926,
+          "y": 0.742
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 13.4,
+          "x": 0.922,
+          "y": 0.803
+        }
+      ]
+    },
+    {
+      "id": "gg-flagship-0-5",
+      "role": "flagship",
+      "linkedTo": "",
+      "sampleCount": 163,
+      "startSeconds": 11.3,
+      "endSeconds": 14,
+      "durationSeconds": 2.7,
+      "xSpan": 0.346,
+      "ySpan": 0.417,
+      "descent": 0.417,
+      "first": {
+        "x": 0.544,
+        "y": 0.42
+      },
+      "last": {
+        "x": 0.801,
+        "y": 0.837
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 11.3,
+          "x": 0.544,
+          "y": 0.42
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 11.633,
+          "x": 0.591,
+          "y": 0.464
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 11.967,
+          "x": 0.669,
+          "y": 0.51
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 12.3,
+          "x": 0.757,
+          "y": 0.558
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 12.633,
+          "x": 0.834,
+          "y": 0.608
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 12.967,
+          "x": 0.881,
+          "y": 0.661
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 13.3,
+          "x": 0.888,
+          "y": 0.715
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 13.633,
+          "x": 0.858,
+          "y": 0.772
+        }
+      ]
+    },
+    {
+      "id": "gg-scout-4-6",
+      "role": "scout",
+      "linkedTo": "",
+      "sampleCount": 128,
+      "startSeconds": 11.883,
+      "endSeconds": 14,
+      "durationSeconds": 2.117,
+      "xSpan": 0.171,
+      "ySpan": 0.224,
+      "descent": 0.224,
+      "first": {
+        "x": 0.738,
+        "y": 0.421
+      },
+      "last": {
+        "x": 0.597,
+        "y": 0.645
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 11.883,
+          "x": 0.738,
+          "y": 0.421
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 12.15,
+          "x": 0.762,
+          "y": 0.444
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 12.417,
+          "x": 0.76,
+          "y": 0.469
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 12.683,
+          "x": 0.735,
+          "y": 0.495
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 12.95,
+          "x": 0.695,
+          "y": 0.523
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 13.217,
+          "x": 0.65,
+          "y": 0.552
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 13.483,
+          "x": 0.613,
+          "y": 0.582
+        },
+        {
+          "id": "gg-scout-4-6",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 13.75,
+          "x": 0.594,
+          "y": 0.614
+        }
+      ]
+    }
+  ]
+}

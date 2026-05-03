@@ -1,0 +1,616 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "audio-reference-comparison",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "waveform-spectrogram-proxy-not-final-acoustic-match",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-audio-reference-comparison.js",
+  "sourceEvidence": {
+    "frameReferenceSummary": "reference-artifacts/analyses/galaxian-frame-reference/frame-reference-summary.json",
+    "analyzedWindowCount": 9,
+    "sampleRateHz": 8000
+  },
+  "referenceAudioSummary": {
+    "averageZeroCrossingsPerSecond": 1234.2,
+    "averageEnvelopeContrast": 0.906,
+    "windows": [
+      {
+        "sourceId": "matt-hawkins-arcade-intro",
+        "windowId": "attract-mission-text",
+        "windowKey": "matt-hawkins-arcade-intro/attract-mission-text",
+        "startSeconds": 0,
+        "durationSeconds": 12,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 11.967,
+          "rms": 0,
+          "peak": 0,
+          "zeroCrossingsPerSecond": 0,
+          "burstFrameShare": 0,
+          "envelopeContrast": 0,
+          "frameRmsSamples": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "sourceId": "matt-hawkins-arcade-intro",
+        "windowId": "score-advance-table",
+        "windowKey": "matt-hawkins-arcade-intro/score-advance-table",
+        "startSeconds": 10,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 18,
+          "rms": 0,
+          "peak": 0,
+          "zeroCrossingsPerSecond": 0,
+          "burstFrameShare": 0,
+          "envelopeContrast": 0,
+          "frameRmsSamples": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "sourceId": "matt-hawkins-arcade-intro",
+        "windowId": "opening-rack-entry",
+        "windowKey": "matt-hawkins-arcade-intro/opening-rack-entry",
+        "startSeconds": 40,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 18,
+          "rms": 0,
+          "peak": 0,
+          "zeroCrossingsPerSecond": 0,
+          "burstFrameShare": 0,
+          "envelopeContrast": 0,
+          "frameRmsSamples": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "sourceId": "arcades-lounge-level-5",
+        "windowId": "player-single-shot-pressure",
+        "windowKey": "arcades-lounge-level-5/player-single-shot-pressure",
+        "startSeconds": 0,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 17.96,
+          "rms": 0.10234,
+          "peak": 0.38541,
+          "zeroCrossingsPerSecond": 1882.9,
+          "burstFrameShare": 0.178,
+          "envelopeContrast": 1.179,
+          "frameRmsSamples": [
+            0.08722,
+            0.10109,
+            0.11018,
+            0.10853,
+            0.09711,
+            0.10768,
+            0.08784,
+            0.10014,
+            0.1054,
+            0.1076
+          ]
+        }
+      },
+      {
+        "sourceId": "arcades-lounge-level-5",
+        "windowId": "lower-field-dive-curves",
+        "windowKey": "arcades-lounge-level-5/lower-field-dive-curves",
+        "startSeconds": 18,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 18,
+          "rms": 0.10164,
+          "peak": 0.37225,
+          "zeroCrossingsPerSecond": 1757.3,
+          "burstFrameShare": 0.039,
+          "envelopeContrast": 1.255,
+          "frameRmsSamples": [
+            0.09308,
+            0.10467,
+            0.10371,
+            0.01049,
+            0.10055,
+            0.10427,
+            0.10024,
+            0.10585,
+            0.09866,
+            0.10428
+          ]
+        }
+      },
+      {
+        "sourceId": "arcades-lounge-level-5",
+        "windowId": "level-clear-transition",
+        "windowKey": "arcades-lounge-level-5/level-clear-transition",
+        "startSeconds": 44,
+        "durationSeconds": 12,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 12,
+          "rms": 0.07492,
+          "peak": 0.32648,
+          "zeroCrossingsPerSecond": 2163.9,
+          "burstFrameShare": 0.267,
+          "envelopeContrast": 1.51,
+          "frameRmsSamples": [
+            0.10455,
+            0.09624,
+            0.10085,
+            0.08929,
+            0.07134,
+            0.07453,
+            0.05811,
+            0.07666,
+            0.04089,
+            0.04182
+          ]
+        }
+      },
+      {
+        "sourceId": "nenriki-15-wave-session",
+        "windowId": "complete-rack-reference",
+        "windowKey": "nenriki-15-wave-session/complete-rack-reference",
+        "startSeconds": 60,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 18,
+          "rms": 0.10026,
+          "peak": 0.38614,
+          "zeroCrossingsPerSecond": 1755.9,
+          "burstFrameShare": 0.217,
+          "envelopeContrast": 1.182,
+          "frameRmsSamples": [
+            0.10311,
+            0.08684,
+            0.09251,
+            0.09129,
+            0.09836,
+            0.09165,
+            0.0769,
+            0.10079,
+            0.11025,
+            0.10329
+          ]
+        }
+      },
+      {
+        "sourceId": "nenriki-15-wave-session",
+        "windowId": "flagship-escort-pressure",
+        "windowKey": "nenriki-15-wave-session/flagship-escort-pressure",
+        "startSeconds": 90,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 18,
+          "rms": 0.10167,
+          "peak": 0.39453,
+          "zeroCrossingsPerSecond": 1695,
+          "burstFrameShare": 0.133,
+          "envelopeContrast": 1.229,
+          "frameRmsSamples": [
+            0.104,
+            0.11054,
+            0.10853,
+            0.09126,
+            0.10833,
+            0.10485,
+            0.10982,
+            0.09167,
+            0.09543,
+            0.08264
+          ]
+        }
+      },
+      {
+        "sourceId": "nenriki-15-wave-session",
+        "windowId": "wrap-return-pressure",
+        "windowKey": "nenriki-15-wave-session/wrap-return-pressure",
+        "startSeconds": 105,
+        "durationSeconds": 18,
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 18,
+          "rms": 0.07908,
+          "peak": 0.37341,
+          "zeroCrossingsPerSecond": 1853.2,
+          "burstFrameShare": 0.25,
+          "envelopeContrast": 1.795,
+          "frameRmsSamples": [
+            0.09666,
+            0.0711,
+            0.05692,
+            0.05782,
+            0,
+            0,
+            0.0936,
+            0.10966,
+            0.1141,
+            0.10832
+          ]
+        }
+      }
+    ]
+  },
+  "guardiansCueSummary": {
+    "themeId": "guardians-signal",
+    "cueCount": 24,
+    "shortCueCount": 16,
+    "longCueCount": 3,
+    "noisyCueCount": 1,
+    "cues": {
+      "gameStart": {
+        "toneCount": 5,
+        "sequenceLength": 5,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.23,
+        "minFrequencyHz": 262,
+        "peakFrequencyHz": 880,
+        "frequencySpanHz": 618,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "formationPulse": {
+        "toneCount": 3,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.096,
+        "minFrequencyHz": 174,
+        "peakFrequencyHz": 522,
+        "frequencySpanHz": 348,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "playerShot": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.031,
+        "minFrequencyHz": 1568,
+        "peakFrequencyHz": 2093,
+        "frequencySpanHz": 525,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "enemyShot": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.095,
+        "minFrequencyHz": 188,
+        "peakFrequencyHz": 252,
+        "frequencySpanHz": 64,
+        "waveFamilies": [
+          "square",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "scoutDive": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.17,
+        "minFrequencyHz": 311,
+        "peakFrequencyHz": 466,
+        "frequencySpanHz": 155,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "flagshipDive": {
+        "toneCount": 3,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.365,
+        "minFrequencyHz": 123,
+        "peakFrequencyHz": 247,
+        "frequencySpanHz": 124,
+        "waveFamilies": [
+          "square",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "escortJoin": {
+        "toneCount": 4,
+        "sequenceLength": 4,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.112,
+        "minFrequencyHz": 523,
+        "peakFrequencyHz": 784,
+        "frequencySpanHz": 261,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "wrapReturn": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.18,
+        "minFrequencyHz": 196,
+        "peakFrequencyHz": 294,
+        "frequencySpanHz": 98,
+        "waveFamilies": [
+          "triangle",
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "playerLoss": {
+        "toneCount": 3,
+        "sequenceLength": 0,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.31,
+        "minFrequencyHz": 96,
+        "peakFrequencyHz": 230,
+        "frequencySpanHz": 134,
+        "waveFamilies": [
+          "square",
+          "sawtooth",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "scoutHit": {
+        "toneCount": 1,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.04,
+        "minFrequencyHz": 330,
+        "peakFrequencyHz": 330,
+        "frequencySpanHz": 0,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "escortHit": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.064,
+        "minFrequencyHz": 247,
+        "peakFrequencyHz": 392,
+        "frequencySpanHz": 145,
+        "waveFamilies": [
+          "square",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "flagshipHit": {
+        "toneCount": 3,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.114,
+        "minFrequencyHz": 196,
+        "peakFrequencyHz": 494,
+        "frequencySpanHz": 298,
+        "waveFamilies": [
+          "square",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "enemyHit": {
+        "toneCount": 1,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.055,
+        "minFrequencyHz": 246,
+        "peakFrequencyHz": 246,
+        "frequencySpanHz": 0,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "bossHit": {
+        "toneCount": 1,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.068,
+        "minFrequencyHz": 320,
+        "peakFrequencyHz": 320,
+        "frequencySpanHz": 0,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "enemyBoom": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.094,
+        "minFrequencyHz": 220,
+        "peakFrequencyHz": 420,
+        "frequencySpanHz": 200,
+        "waveFamilies": [
+          "square",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "bossBoom": {
+        "toneCount": 2,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.138,
+        "minFrequencyHz": 180,
+        "peakFrequencyHz": 360,
+        "frequencySpanHz": 180,
+        "waveFamilies": [
+          "square",
+          "triangle"
+        ],
+        "hasSlide": true
+      },
+      "stagePulse": {
+        "toneCount": 0,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0,
+        "minFrequencyHz": null,
+        "peakFrequencyHz": null,
+        "frequencySpanHz": null,
+        "waveFamilies": [],
+        "hasSlide": false
+      },
+      "stageTransition": {
+        "toneCount": 4,
+        "sequenceLength": 4,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.208,
+        "minFrequencyHz": 294,
+        "peakFrequencyHz": 784,
+        "frequencySpanHz": 490,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "attractEnter": {
+        "toneCount": 0,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0,
+        "minFrequencyHz": null,
+        "peakFrequencyHz": null,
+        "frequencySpanHz": null,
+        "waveFamilies": [],
+        "hasSlide": false
+      },
+      "attractPulse": {
+        "toneCount": 0,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0,
+        "minFrequencyHz": null,
+        "peakFrequencyHz": null,
+        "frequencySpanHz": null,
+        "waveFamilies": [],
+        "hasSlide": false
+      },
+      "uiTick": {
+        "toneCount": 1,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.024,
+        "minFrequencyHz": 920,
+        "peakFrequencyHz": 920,
+        "frequencySpanHz": 0,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "uiConfirm": {
+        "toneCount": 2,
+        "sequenceLength": 2,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.08,
+        "minFrequencyHz": 660,
+        "peakFrequencyHz": 880,
+        "frequencySpanHz": 220,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "playerHit": {
+        "toneCount": 1,
+        "sequenceLength": 0,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.13,
+        "minFrequencyHz": 210,
+        "peakFrequencyHz": 210,
+        "frequencySpanHz": 0,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      },
+      "gameOver": {
+        "toneCount": 5,
+        "sequenceLength": 5,
+        "noiseCount": 0,
+        "totalDurationSeconds": 0.43,
+        "minFrequencyHz": 147,
+        "peakFrequencyHz": 392,
+        "frequencySpanHz": 245,
+        "waveFamilies": [
+          "square"
+        ],
+        "hasSlide": true
+      }
+    }
+  },
+  "scoreParts": {
+    "waveformWindowCoverage": 9,
+    "spectrogramCoverage": 9,
+    "cueShapeCoverage": 10,
+    "acousticProxyFit": 5.3
+  },
+  "audioReferenceComparisonScore10": 8.3,
+  "tuningRead": {
+    "immediateCueChangeRecommended": false,
+    "reason": "This pass proves waveform/spectrogram coverage and compares cue-shape families, but it is still a proxy over mixed gameplay audio rather than isolated hardware cue matching.",
+    "nextCuePromotion": "Generate synthetic Guardians cue waveforms and compare them directly against isolated Galaxian cue windows."
+  }
+}

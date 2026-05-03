@@ -21,7 +21,7 @@ Latest artifact:
 | Strongest category | `10/10` | Protected | Combat responsiveness, stage-1 geometry, and capture/rescue rules are the safest parts of the current model. |
 | Weakest category | `6.1/10` | Needs work | Audio identity and cue alignment remain the biggest measurable quality gap. |
 | Next visible feel gap | `8.0/10` | Needs work | Player movement is playable, but tap correction and hold travel need more reference-led tuning. |
-| Guardians 0.1 preview | `7.4/10` reference conformance | Dev-preview | Score/progression, visible attract/score surfaces, frame-motion proxy, and first object-track proxy are now harnessed, but runtime-vs-reference tuning, audio, and sprite extraction still need reference-derived work. |
+| Guardians 0.1 preview | `7.6/10` reference conformance | Dev-preview | Score/progression, visible attract/score surfaces, frame/object proxies, runtime-vs-reference movement tuning, sprite crop extraction, and audio waveform/spectrogram comparison are now harnessed. |
 
 ## Release Cluster Conformance Targets
 
@@ -33,8 +33,8 @@ scorecard until it becomes a public playable game.
 
 | Release cluster / focus | Aurora target | Aurora focus metrics | Guardians target | Guardians focus metrics | Release decision meaning |
 | --- | ---: | --- | ---: | --- | --- |
-| Current dev baseline | `8.8/10` | audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2 | `7.4/10` | maturity 6.7; gate coverage 9.2; public readiness 4.1; audio fit 4.8 | Baseline for the next beta-candidate discussion. |
-| `1.3` Fidelity and Trust | `9.0/10` | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | `7.4/10` | rack timing >= 6.4; movement pressure >= 6.1; visual identity >= 6.8; audio fit >= 5.2 | Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible. |
+| Current dev baseline | `8.8/10` | audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2 | `7.6/10` | maturity 7.1; gate coverage 9.4; public readiness 4.4; audio fit 5.3 | Baseline for the next beta-candidate discussion. |
+| `1.3` Fidelity and Trust | `9.0/10` | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | `7.6/10` | rack timing >= 6.5; movement pressure >= 6.7; visual identity >= 7.0; audio fit >= 5.3 | Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible. |
 | `1.4` Arcade Depth / Guardians 0.1 Preview | `9.2/10` | level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6 | `7.8/10` | frame-derived rack timing >= 7.2; dive paths >= 6.8; alien visuals >= 7.6; scoring model >= 7.5 | Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora. |
 | `1.5` Flight Recorder and Shared Evidence | `9.3/10` | replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6 | `8.2/10` | source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0 | Shared video and evidence become release infrastructure for both applications. |
 | `1.6` Message to Pilot / Platform Shell | `9.4/10` | popup containment >= 9.6; message channel >= 8.8; shell copy ownership >= 9.5 | `8.5/10` | platform integration >= 9.5; preview messaging >= 8.8; pack-boundary durability 10.0 | Platinum feels like a coherent cabinet shell across multiple games. |
@@ -46,19 +46,19 @@ xychart-beta
   x-axis ["Current", "1.3", "1.4", "1.5", "1.6", "2.0"]
   y-axis "Score / 10" 0 --> 10
   line "Aurora Galactica" [8.8, 9.0, 9.2, 9.3, 9.4, 9.5]
-  line "Galaxy Guardians" [7.4, 7.4, 7.8, 8.2, 8.5, 9.0]
+  line "Galaxy Guardians" [7.6, 7.6, 7.8, 8.2, 8.5, 9.0]
 ```
 
 ### Application Metric Target Matrix
 
 | Metric family | Aurora current | Aurora next target | Guardians current | Guardians next target | Why it matters |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Movement and pressure | `8.1/10` | `8.6/10` in `1.3`; `8.8/10` in `1.4` | `6.1/10` | runtime-vs-reference track comparison in `1.3`; `6.8/10` in `1.4` | This is the strongest direct feel signal during live play. |
-| Audio identity / acoustic fit | `6.1/10` | `7.2/10` in `1.3`; `7.6/10` in `1.4` | `4.8/10` | `5.2/10` in `1.3`; `6.8/10` in `1.5` | Audio is the weakest shared conformance area today. |
-| Visual identity | `9.2/10` shell integrity; game sprites not separately scored in the roll-up | add a visible arcade-depth visual score in `1.4` | `6.7/10` | `6.8/10` in `1.3`; `7.6/10` in `1.4` | Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview. |
-| Stage / rack / wave timing | stage opening 8.5; challenge timing 8.4 | challenge and later-stage targets >= 8.6 in `1.4` | rack timing `6.4/10` | runtime-vs-reference rack timing in `1.3`; `7.2/10` in `1.4` | Timing separates authentic arcade pressure from approximate motion. |
+| Movement and pressure | `8.1/10` | `8.6/10` in `1.3`; `8.8/10` in `1.4` | `6.7/10` | browser-reviewed runtime tuning in `1.3`; `6.8/10` in `1.4` | This is the strongest direct feel signal during live play. |
+| Audio identity / acoustic fit | `6.1/10` | `7.2/10` in `1.3`; `7.6/10` in `1.4` | `5.3/10` | isolated cue comparison in `1.3`; `6.8/10` in `1.5` | Audio is the weakest shared conformance area today. |
+| Visual identity | `9.2/10` shell integrity; game sprites not separately scored in the roll-up | add a visible arcade-depth visual score in `1.4` | `7.0/10` | final sprite recognition in `1.3`; `7.6/10` in `1.4` | Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview. |
+| Stage / rack / wave timing | stage opening 8.5; challenge timing 8.4 | challenge and later-stage targets >= 8.6 in `1.4` | rack timing `6.5/10` | browser-reviewed rack timing in `1.3`; `7.2/10` in `1.4` | Timing separates authentic arcade pressure from approximate motion. |
 | Scoring and progression | progression/persona 8.8; shot/hit 10.0 | level-depth and scoring stability >= 9.0 by `2.0` | single-shot threat/scoring `7.5/10` | 7.6 in `1.4`; 8.8 by `2.0` | Guardians should not publish persistent scoreboards until scoring is reference-aligned. |
-| Evidence and replay durability | scorecard artifacts exist; video publishing is not yet a full product surface | replay/video evidence >= 8.8 in `1.5` | evidence durability `9.1/10` | runtime-vs-reference tracking durability >= 9.2 in `1.5` | Shared videos and source-controlled artifacts should become normal release evidence. |
+| Evidence and replay durability | scorecard artifacts exist; video publishing is not yet a full product surface | replay/video evidence >= 8.8 in `1.5` | evidence durability `9.3/10` | final sprite/cue extraction durability >= 9.4 in `1.5` | Shared videos and source-controlled artifacts should become normal release evidence. |
 | Platform boundaries and shell containment | shell integrity `9.2/10` | popup/message/shell containment >= 9.6 in `1.6` | platform boundaries `10.0/10` | keep `10.0/10` through `2.0` | Game work must not leak mechanics across applications; shared behavior belongs in Platinum. |
 
 ### Aurora Category Detail
@@ -105,24 +105,24 @@ Current reference metric artifact:
 
 | Metric | Score | Read |
 | --- | ---: | --- |
-| Reference conformance | `7.4/10` | Useful development-preview baseline, with score/progression, attract/score surfaces, frame-motion proxy, and object-track proxy evidence now harnessed while final feel still scores conservatively. |
-| Reference maturity | `6.7/10` | Contact sheets, waveforms, spectrograms, frame indexes, proxy frame-motion metrics, and connected-component object-track metrics exist; runtime-vs-reference extraction is still needed. |
-| Implementation gate coverage | `9.2/10` | Most 0.1 runtime/visual/audio/platform gates are durable and rerunnable. |
-| Public release readiness | `4.1/10` | The preview remains intentionally dev-only and should not be treated as public playable yet. |
+| Reference conformance | `7.6/10` | Useful development-preview baseline, with score/progression, attract/score surfaces, frame/object proxies, runtime movement tuning, sprite extraction, and audio reference comparison now harnessed. |
+| Reference maturity | `7.1/10` | Contact sheets, waveforms, spectrograms, frame indexes, frame/object metrics, runtime comparison, sprite crop metrics, and audio PCM proxies exist; final extraction is still needed. |
+| Implementation gate coverage | `9.4/10` | Most 0.1 runtime/visual/audio/platform gates are durable and rerunnable. |
+| Public release readiness | `4.4/10` | The preview remains intentionally dev-only and should not be treated as public playable yet. |
 
 ### Guardians Reference Category Detail
 
 | Category | Score | Status | Read |
 | --- | ---: | --- | --- |
-| Reference source coverage | `8.5/10` | Good | Three Galaxian sources are committed with manifests, contact sheets, and waveform windows. |
+| Reference source coverage | `9.2/10` | Good | Three Galaxian sources are committed with manifests, contact sheets, waveforms, spectrograms, frame/object metrics, sprite crop extraction, runtime comparison, and audio comparison. |
 | Promoted semantic event coverage | `7.8/10` | Partial | Core runtime events are covered, and the owned score table, wave/stage progression contract, and visible attract surfaces now exist. |
-| Formation and rack timing | `6.4/10` | Partial | Entry, settle, rack complete, and first-dive delay are gated, with rack-entry/stable-rack frame and object proxy evidence now committed. |
-| Movement and pressure model | `6.1/10` | Weak but improving | Scout, flagship, escort, and wrap pressure exist, and the object-track proxy extracts lower-field candidate tracklets for the next tuning pass. |
+| Formation and rack timing | `6.5/10` | Partial | Entry, settle, rack complete, and first-dive delay are gated, with rack-entry/stable-rack frame and object proxy evidence now committed. |
+| Movement and pressure model | `6.7/10` | Improving | Scout, flagship, escort, and wrap pressure exist, and the runtime movement was tuned against reference track bands. |
 | Single-shot threat and scoring | `7.5/10` | Partial | Single-shot play, enemy shots, player loss, role scoring, score table, wave clear, and stage advance are game-owned. |
-| Visual alien identity | `6.7/10` | Better preview, still partial | Sprites are smaller and closer to Galaxian contact-sheet proportions, and frame/object crop context is now preserved for extraction. |
-| Audio character and reference fit | `4.8/10` | Weakest Guardians category | Runtime cue IDs are gated, and waveform/spectrogram windows are preserved, but acoustic comparison is not automated. |
+| Visual alien identity | `7.0/10` | Better preview, still partial | Sprites are smaller and closer to Galaxian contact-sheet proportions, and 27 crop references now feed a sprite extraction artifact. |
+| Audio character and reference fit | `5.3/10` | Weakest Guardians category | Runtime cue IDs are gated, and 9 waveform/spectrogram windows now feed an audio comparison artifact; isolated cue matching is still pending. |
 | Platform and game boundaries | `10.0/10` | Strong | Guardians remains dev-only and does not inherit Aurora capture/dual/challenge/scoring behavior. |
-| Evidence durability | `9.1/10` | Good | Reference profile, event log, identity artifacts, score/progression, attract/score-surface, frame-motion artifact, object-track artifact, and gates are source-controlled and rerunnable. |
+| Evidence durability | `9.3/10` | Good | Reference profile, event log, identity artifacts, movement tuning, sprite extraction, audio comparison, and gates are source-controlled and rerunnable. |
 
 ### Guardians 0.1 Gate Detail
 
@@ -132,6 +132,9 @@ Current reference metric artifact:
 | Formation entry | `formation-entry-0.1.json`, `check-galaxy-guardians-formation-entry.js` | Passes; rack entry, settle, and first-dive timing are explicit. |
 | Frame motion proxy | `frame-motion-conformance-0.1.json`, `analyze/check-galaxy-guardians-frame-motion-conformance.js` | Passes; five Galaxian frame windows now produce rack and lower-field motion proxy metrics. |
 | Object-track proxy | `object-track-conformance-0.1.json`, `analyze/check-galaxy-guardians-object-track-conformance.js` | Passes; five Galaxian frame windows now produce rack object signals and lower-field candidate tracklets. |
+| Runtime-reference movement | `runtime-reference-movement-0.1.json`, `analyze/check-galaxy-guardians-runtime-reference-movement.js` | Passes; tuned dive speed/lateral span and wrap pressure from the object-track bands. |
+| Sprite extraction | `sprite-reference-extraction-0.1.json`, `analyze/check-galaxy-guardians-sprite-reference-extraction.js` | Passes; 27 rack/diver/player crops now anchor runtime sprite authoring. |
+| Audio reference comparison | `audio-reference-comparison-0.1.json`, `analyze/check-galaxy-guardians-audio-reference-comparison.js` | Passes; 9 waveform/spectrogram windows now feed PCM proxy comparison. |
 | Movement pacing | `movement-pacing-0.1.json`, `check-galaxy-guardians-movement-pacing.js` | Passes; scout/flagship/escort pressure is measurable. |
 | Attract / score surface | `attract-score-surface-0.1.json`, `check-galaxy-guardians-attract-score-surface.js` | Passes; wait-mode showcase and preview modal expose mission text and score table inside the frame. |
 | Score progression | `score-progression-0.1.json`, `check-galaxy-guardians-score-progression.js` | Passes; score table, mission text, wave clear, and stage advance are game-owned. |

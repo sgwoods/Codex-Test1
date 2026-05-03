@@ -12,6 +12,8 @@ Current artifacts:
 
 - `audio-character-0.1.json` - first cue-shape and runtime-audio coverage
   contract for the Guardians signal theme.
+- `audio-reference-comparison-0.1.json` - waveform/spectrogram and PCM proxy
+  comparison between the Galaxian reference windows and Guardians cue shapes.
 - `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal
   surface contract for Guardians mission language and score-table presentation.
 - `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
@@ -37,8 +39,13 @@ Current artifacts:
   conformance metric set tying the Galaxian source profile, promoted event log,
   preview gates, and platform-boundary evidence into a weighted development
   score.
+- `runtime-reference-movement-0.1.json` - runtime-vs-reference movement
+  comparison that tuned the dev-preview dive speed, lateral span, and wrap
+  pressure from the object-track proxy.
 - `score-progression-0.1.json` - first score-advance table, mission-language,
   wave-clear, and stage-advance contract for the dev-only playable preview.
+- `sprite-reference-extraction-0.1.json` - extracted crop color-family and
+  proportion baseline for authored Guardians alien/player sprites.
 - `threat-scoring-0.1.json` - first lower-field threat and application-owned
   scoring contract for enemy shots, player loss, and hit values.
 - `visual-readability-0.1.json` - first gameplay-scale readability contract for

@@ -36,11 +36,11 @@
     "scoutDiveIntervalJitterSeconds": 1.2,
     "flagshipDiveIntervalBaseSeconds": 8.05,
     "flagshipDiveIntervalJitterSeconds": 2.1,
-    "diveSwayAmplitudePx": 22,
-    "diveSwayHz": 2.6,
-    "diveSideDriftPxPerSecond": 8,
-    "diveBaseVyPxPerSecond": 60,
-    "diveAccelPxPerSecondSquared": 10,
+    "diveSwayAmplitudePx": 36,
+    "diveSwayHz": 1.7,
+    "diveSideDriftPxPerSecond": 14,
+    "diveBaseVyPxPerSecond": 26,
+    "diveAccelPxPerSecondSquared": 3.5,
     "escortSpacingPx": 11,
     "escortLagSeconds": 0.14,
     "escortYOffsetPx": 7,
@@ -51,7 +51,9 @@
     "firstFlagshipDiveBandSeconds": [8.43, 8.48],
     "escortJoinDeltaSeconds": [0, 0.001],
     "minimumLinkedEscortCountOnFirstFlagshipDive": 2,
-    "minimumWrapEventsByNineSeconds": 1
+    "minimumWrapEventsByNineSeconds": 1,
+    "runtimeReferenceMovementArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+    "runtimeReferenceMovementScoreFloor10": 7.2
   },
   "harness": {
     "movementPacingCheck": "tools/harness/check-galaxy-guardians-movement-pacing.js",
