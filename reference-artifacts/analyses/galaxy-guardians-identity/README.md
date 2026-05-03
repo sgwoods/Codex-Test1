@@ -20,10 +20,15 @@ Current artifacts:
 - `formation-entry-0.1.json` - first runtime entry/settle contract for the
   promoted Galaxian `formation_entry_start`, `formation_entry_settle`, and
   `formation_rack_complete` events.
+- `frame-motion-conformance-0.1.json` - first CPU-only frame-proxy analysis
+  over Galaxian rack, dive, flagship, and wrap reference windows.
 - `identity-baseline-0.1.json` - first application-owned sprite, palette, audio,
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
   contract for solo dives, flagship/escort dives, and wrap/return pressure.
+- `object-track-conformance-0.1.json` - CPU-only connected-component and
+  lower-field tracklet proxy over the Galaxian frame windows, used to set the
+  next runtime-vs-reference tuning bands without changing constants by feel.
 - `quick-peek-source-fidelity-0.2.json` - playtest-driven quick-peek
   recalibration that moves timing, pacing, rack footprint, backdrop, and sprites
   closer to the Galaxian reference sheets while preserving the need for future

@@ -12,11 +12,11 @@
     "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets and waveform windows rather than frame-level automated extraction."
   },
   "summary": {
-    "referenceConformanceScore10": 7.1,
-    "referenceMaturityScore10": 5.8,
-    "implementationGateCoverageScore10": 9.1,
-    "publicReleaseReadinessScore10": 3.7,
-    "releaseRead": "Useful development preview evidence, but local gameplay review showed that timing, pacing, and sprite fidelity are still not convincing enough for a public quick peek. The score table, wave progression, and visible attract/score-table surfaces now exist as dev-preview contracts; the highest-leverage next work is frame-level Galaxian timing extraction, closer sprite extraction/authoring, and acoustic cue comparison."
+    "referenceConformanceScore10": 7.4,
+    "referenceMaturityScore10": 6.7,
+    "implementationGateCoverageScore10": 9.2,
+    "publicReleaseReadinessScore10": 4.1,
+    "releaseRead": "Useful development preview evidence, but local gameplay review showed that timing, pacing, and sprite fidelity are still not convincing enough for a public quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, and first object-track proxy now exist as dev-preview contracts; the highest-leverage next work is runtime-vs-reference track comparison, closer sprite extraction/authoring, and acoustic cue comparison."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -29,10 +29,10 @@
       "id": "reference-source-coverage",
       "label": "Reference source coverage",
       "weight": 8,
-      "score10": 8.5,
-      "evidenceLevel": "source-manifested-contact-sheets-waveforms",
-      "currentRead": "Three Galaxian sources are committed with manifests, contact sheets, and waveform windows.",
-      "remainingGap": "Promote more windows into frame-level timing measurements."
+      "score10": 9.1,
+      "evidenceLevel": "source-manifested-contact-sheets-waveforms-frame-proxies-object-track-proxies",
+      "currentRead": "Three Galaxian sources are committed with manifests, contact sheets, waveform windows, spectrograms, frame indexes, frame-motion proxies, and a CPU-only connected-component/object-track proxy pass.",
+      "remainingGap": "Promote the object-track proxies into runtime-vs-reference comparison and measured sprite extraction."
     },
     {
       "id": "promoted-semantic-event-coverage",
@@ -47,19 +47,19 @@
       "id": "formation-rack-timing",
       "label": "Formation and rack timing",
       "weight": 12,
-      "score10": 5.8,
-      "evidenceLevel": "promoted-events-with-runtime-bands",
-      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated, with the quick peek adjusted to a tighter and calmer rack.",
-      "remainingGap": "Timing is still not derived from direct frame-level Galaxian extraction, so the score remains conservative."
+      "score10": 6.4,
+      "evidenceLevel": "promoted-events-runtime-bands-frame-motion-proxy-and-object-track-proxy",
+      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated. The frame and object proxies now cover opening rack entry and complete-rack reference windows.",
+      "remainingGap": "The object proxy is still connected-component tracking rather than final sprite recognition, so runtime timing remains conservative until compared against instrumented runtime tracks."
     },
     {
       "id": "movement-pressure",
       "label": "Movement and pressure model",
       "weight": 14,
-      "score10": 5.2,
-      "evidenceLevel": "reference-window-inspired-runtime-contract",
-      "currentRead": "Scout dives, flagship dives, escort joins, and wrap/return pressure are implemented and gated, and this pass slowed the first pressure cycle.",
-      "remainingGap": "Local play still reads as approximate; dive curves, lower-field traversal, and wave-to-wave pacing need direct measurement from the source videos."
+      "score10": 6.1,
+      "evidenceLevel": "reference-window-inspired-runtime-contract-plus-frame-and-object-proxies",
+      "currentRead": "Scout dives, flagship dives, escort joins, and wrap/return pressure are implemented and gated. The object-track proxy now extracts lower-field candidate tracks from dive, flagship, and wrap windows, giving the next runtime tuning pass concrete x/y span and duration bands.",
+      "remainingGap": "Local play still reads approximate; dive curves and wave-to-wave pacing need runtime-vs-reference track comparison before major constant changes."
     },
     {
       "id": "single-shot-threat-scoring",
@@ -74,19 +74,19 @@
       "id": "visual-alien-identity",
       "label": "Visual alien identity",
       "weight": 10,
-      "score10": 6.4,
-      "evidenceLevel": "game-owned-visual-catalog-and-readability-gate",
-      "currentRead": "Flagship, escort, scout, and player interceptor visuals are smaller and closer to Galaxian contact-sheet proportions while remaining distinct and gated.",
+      "score10": 6.7,
+      "evidenceLevel": "game-owned-visual-catalog-readability-gate-frame-crops-and-object-proxies",
+      "currentRead": "Flagship, escort, scout, and player interceptor visuals are smaller and closer to Galaxian contact-sheet proportions while remaining distinct and gated. The frame/object passes now preserve rack/diver/player crop context and object-cluster evidence needed for extraction.",
       "remainingGap": "Sprites are still hand-authored preview approximations rather than extracted pixel-faithful reference assets."
     },
     {
       "id": "audio-reference-character",
       "label": "Audio character and reference fit",
       "weight": 10,
-      "score10": 4.5,
-      "evidenceLevel": "internal-cue-shape-contract",
-      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated.",
-      "remainingGap": "This is the least reference-faithful Guardians area: acoustic comparison against Galaxian footage is not yet automated."
+      "score10": 4.8,
+      "evidenceLevel": "internal-cue-shape-contract-plus-waveform-spectrogram-windows",
+      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, and the selected Galaxian frame windows now preserve waveform and spectrogram evidence alongside the motion proxy.",
+      "remainingGap": "This is still the least reference-faithful Guardians area: acoustic comparison against Galaxian footage is not yet automated."
     },
     {
       "id": "platform-and-game-boundaries",
@@ -101,10 +101,10 @@
       "id": "evidence-durability",
       "label": "Evidence durability",
       "weight": 10,
-      "score10": 8.8,
+      "score10": 9.1,
       "evidenceLevel": "source-controlled-artifacts-and-harnesses",
-      "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, and 0.1 gates are committed and rerunnable.",
-      "remainingGap": "Add a generated Guardians numeric score artifact per run once the metrics are less manually calibrated."
+      "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, frame-motion artifact, object-track artifact, and 0.1 gates are committed and rerunnable.",
+      "remainingGap": "Add runtime-vs-reference track comparison and generated tuning bands once the metrics are less proxy-driven."
     }
   ],
   "requiredInputArtifacts": [
@@ -112,8 +112,10 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/frame-motion-conformance-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/quick-peek-source-fidelity-0.2.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
@@ -126,6 +128,10 @@
     "npm run harness:check:galaxy-guardians-0-1-candidate",
     "npm run harness:check:galaxy-guardians-reference-conformance",
     "npm run harness:check:galaxy-guardians-attract-score-surface",
+    "npm run harness:analyze:galaxy-guardians-frame-motion-conformance",
+    "npm run harness:check:galaxy-guardians-frame-motion-conformance",
+    "npm run harness:analyze:galaxy-guardians-object-track-conformance",
+    "npm run harness:check:galaxy-guardians-object-track-conformance",
     "npm run harness:check:galaxy-guardians-audio-character",
     "npm run harness:check:galaxy-guardians-formation-entry",
     "npm run harness:check:galaxy-guardians-movement-pacing",
@@ -134,8 +140,8 @@
     "npm run harness:check:galaxy-guardians-visual-readability"
   ],
   "nextMetricPromotions": [
-    "automated frame-level rack-entry timing from matt-hawkins-arcade-intro",
-    "automated dive-path extraction from arcades-lounge-level-5 and nenriki-15-wave-session",
+    "runtime-vs-reference rack-entry track comparison from matt-hawkins-arcade-intro",
+    "runtime-vs-reference dive-path comparison from arcades-lounge-level-5 and nenriki-15-wave-session",
     "Guardians attract and score-table pixel-layout comparison",
     "acoustic cue comparison against waveform windows"
   ]

@@ -93,9 +93,11 @@ Current conformance read:
 - player movement conformance is the next visible feel gap at `8.1/10`
 - Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
   yet part of the Aurora numeric roll-up
-- Guardians reference conformance is now `7.1/10` after adding the
-  score/progression contract plus visible attract/score-table surfaces
-- current cluster targets are `9.0/10` for Aurora and `7.2/10` for Guardians in
+- Guardians reference conformance is now `7.4/10` after adding the
+  score/progression contract, visible attract/score-table surfaces, the
+  first CPU-only Galaxian frame-motion proxy pass, and a connected-component
+  object-track proxy over the rack/dive/flagship/wrap evidence windows
+- current cluster targets are `9.0/10` for Aurora and `7.4/10` for Guardians in
   the `1.3` Fidelity and Trust lane, rising toward `9.5/10` and `9.0/10` by
   the `2.0` multi-game Platinum candidate lane
 
