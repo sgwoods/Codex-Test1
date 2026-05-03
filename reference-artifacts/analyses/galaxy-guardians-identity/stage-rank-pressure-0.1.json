@@ -1,0 +1,120 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-stage-rank-pressure-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "dev-preview-stage-pressure-contract-not-final-reference-match",
+  "purpose": "Keep the Galaxy Guardians preview from feeling like one static first-wave sketch by defining bounded stage-rank pressure for dives, shots, drift, and event density while preserving the measured stage-one scout-wave contract.",
+  "sourceEvidence": {
+    "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "runtimeReferenceMovement": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+    "playtestConformanceReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+    "initialMeasuredProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+  },
+  "rankModel": {
+    "stageOneRank": 0,
+    "maxPreviewRank": 4,
+    "reason": "The preview should preserve the stage-one evidence windows, then add modest pressure through stage five without pretending to be a complete late-game model."
+  },
+  "stageOneMustPreserve": {
+    "firstScoutDiveDelay": 2.55,
+    "flagshipEscortDelay": 6.65,
+    "scoutDiveIntervalBase": 1.6,
+    "firstEnemyShotDelay": 4.1,
+    "enemyShotIntervalBase": 1.25,
+    "enemyShotMaxLive": 3,
+    "enemyShotVy": 108,
+    "diveBaseVy": 36,
+    "diveAccel": 6.2,
+    "formationDriftHz": 1.15
+  },
+  "stageThreeTargets": {
+    "firstScoutDiveDelayBandSeconds": [
+      2.3,
+      2.36
+    ],
+    "scoutDiveIntervalBaseBandSeconds": [
+      1.35,
+      1.38
+    ],
+    "firstEnemyShotDelayBandSeconds": [
+      3.11,
+      3.12
+    ],
+    "enemyShotIntervalBaseBandSeconds": [
+      1.04,
+      1.06
+    ],
+    "enemyShotMaxLive": 4,
+    "enemyShotVyBandPxPerSecond": [
+      124,
+      126
+    ],
+    "diveBaseVyBandPxPerSecond": [
+      39,
+      40
+    ],
+    "diveAccelBandPxPerSecondSquared": [
+      7.1,
+      7.2
+    ],
+    "formationDriftHzBand": [
+      1.22,
+      1.24
+    ]
+  },
+  "stageFiveTargets": {
+    "firstScoutDiveDelayBandSeconds": [
+      2.14,
+      2.15
+    ],
+    "scoutDiveIntervalBaseBandSeconds": [
+      1.11,
+      1.12
+    ],
+    "firstEnemyShotDelayBandSeconds": [
+      2.13,
+      2.14
+    ],
+    "enemyShotIntervalBaseBandSeconds": [
+      0.84,
+      0.86
+    ],
+    "enemyShotMaxLive": 5,
+    "enemyShotVyBandPxPerSecond": [
+      142,
+      143
+    ],
+    "diveBaseVyBandPxPerSecond": [
+      42,
+      43
+    ],
+    "diveAccelBandPxPerSecondSquared": [
+      8,
+      8.1
+    ],
+    "formationDriftHzBand": [
+      1.31,
+      1.32
+    ]
+  },
+  "eventDensityTargets": {
+    "simulationWindowSeconds": 10,
+    "stageThreeMinimumExtraDiveEventsOverStageOne": 1,
+    "stageThreeMinimumExtraEnemyShotsOverStageOne": 1,
+    "stageFiveMinimumExtraDiveEventsOverStageOne": 2,
+    "stageFiveMinimumExtraEnemyShotsOverStageOne": 2
+  },
+  "runtimeHooks": {
+    "stageRankFunction": "window.guardiansStageRank",
+    "rulesFunction": "window.guardiansRuntimeRules",
+    "check": "tools/harness/check-galaxy-guardians-stage-rank-pressure.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-stage-rank-pressure"
+  },
+  "releaseUse": {
+    "dev": "Required before calling the preview pace meaningfully multi-stage.",
+    "beta": "Supports beta-preview discussion only as bounded pressure evidence; late-level arcade conformance still requires deeper reference-video timing.",
+    "production": "Not sufficient for production because this remains a first preview pressure model."
+  }
+}

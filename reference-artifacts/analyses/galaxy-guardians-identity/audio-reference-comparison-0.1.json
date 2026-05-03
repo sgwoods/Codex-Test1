@@ -282,7 +282,7 @@
     "cueCount": 24,
     "shortCueCount": 16,
     "longCueCount": 3,
-    "noisyCueCount": 1,
+    "noisyCueCount": 8,
     "cues": {
       "gameStart": {
         "toneCount": 4,
@@ -313,11 +313,11 @@
       "playerShot": {
         "toneCount": 2,
         "sequenceLength": 0,
-        "noiseCount": 0,
-        "totalDurationSeconds": 0.03,
-        "minFrequencyHz": 1780,
-        "peakFrequencyHz": 2350,
-        "frequencySpanHz": 570,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.028,
+        "minFrequencyHz": 1510,
+        "peakFrequencyHz": 2480,
+        "frequencySpanHz": 970,
         "waveFamilies": [
           "square"
         ],
@@ -326,24 +326,24 @@
       "enemyShot": {
         "toneCount": 2,
         "sequenceLength": 0,
-        "noiseCount": 0,
-        "totalDurationSeconds": 0.098,
-        "minFrequencyHz": 118,
-        "peakFrequencyHz": 238,
-        "frequencySpanHz": 120,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.1,
+        "minFrequencyHz": 116,
+        "peakFrequencyHz": 246,
+        "frequencySpanHz": 130,
         "waveFamilies": [
           "square"
         ],
         "hasSlide": true
       },
       "scoutDive": {
-        "toneCount": 2,
+        "toneCount": 3,
         "sequenceLength": 0,
-        "noiseCount": 0,
-        "totalDurationSeconds": 0.212,
-        "minFrequencyHz": 310,
-        "peakFrequencyHz": 620,
-        "frequencySpanHz": 310,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.26,
+        "minFrequencyHz": 165,
+        "peakFrequencyHz": 660,
+        "frequencySpanHz": 495,
         "waveFamilies": [
           "square",
           "sawtooth"
@@ -353,15 +353,14 @@
       "flagshipDive": {
         "toneCount": 3,
         "sequenceLength": 0,
-        "noiseCount": 0,
+        "noiseCount": 1,
         "totalDurationSeconds": 0.44,
-        "minFrequencyHz": 98,
-        "peakFrequencyHz": 392,
-        "frequencySpanHz": 294,
+        "minFrequencyHz": 96,
+        "peakFrequencyHz": 420,
+        "frequencySpanHz": 324,
         "waveFamilies": [
           "square",
-          "sawtooth",
-          "triangle"
+          "sawtooth"
         ],
         "hasSlide": true
       },
@@ -402,7 +401,6 @@
         "frequencySpanHz": 184,
         "waveFamilies": [
           "square",
-          "sawtooth",
           "triangle"
         ],
         "hasSlide": true
@@ -410,10 +408,10 @@
       "scoutHit": {
         "toneCount": 1,
         "sequenceLength": 0,
-        "noiseCount": 0,
-        "totalDurationSeconds": 0.035,
-        "minFrequencyHz": 360,
-        "peakFrequencyHz": 360,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.034,
+        "minFrequencyHz": 390,
+        "peakFrequencyHz": 390,
         "frequencySpanHz": 0,
         "waveFamilies": [
           "square"
@@ -423,25 +421,24 @@
       "escortHit": {
         "toneCount": 2,
         "sequenceLength": 0,
-        "noiseCount": 0,
-        "totalDurationSeconds": 0.065,
-        "minFrequencyHz": 220,
-        "peakFrequencyHz": 470,
-        "frequencySpanHz": 250,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.066,
+        "minFrequencyHz": 230,
+        "peakFrequencyHz": 510,
+        "frequencySpanHz": 280,
         "waveFamilies": [
-          "square",
-          "triangle"
+          "square"
         ],
         "hasSlide": true
       },
       "flagshipHit": {
         "toneCount": 3,
         "sequenceLength": 0,
-        "noiseCount": 0,
-        "totalDurationSeconds": 0.126,
-        "minFrequencyHz": 155,
-        "peakFrequencyHz": 620,
-        "frequencySpanHz": 465,
+        "noiseCount": 1,
+        "totalDurationSeconds": 0.128,
+        "minFrequencyHz": 156,
+        "peakFrequencyHz": 650,
+        "frequencySpanHz": 494,
         "waveFamilies": [
           "square",
           "triangle"

@@ -58,8 +58,8 @@ function releaseTargetSections(){
   const releaseTargets = buildTable(
     ['Release cluster / focus', 'Aurora target', 'Aurora focus metrics', 'Guardians target', 'Guardians focus metrics', 'Release decision meaning'],
     [
-      ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', '7.1/10 reference; 5.7/10 playtest', 'maturity 6.4; gate coverage 9.2; public readiness 3.5; audio feel 3.8', 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
-      ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', '7.1/10 reference; 5.7/10 playtest', 'rack timing >= 6.2; movement pressure >= 5.9; visual identity >= 5.4; audio feel >= 3.8', 'Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible.'],
+      ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', '7.3/10 reference; 5.9/10 playtest', 'maturity 6.5; gate coverage 9.2; public readiness 3.8; audio feel 4.4', 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
+      ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', '7.3/10 reference; 5.9/10 playtest', 'rack timing >= 6.2; movement pressure >= 6.2; visual identity >= 5.4; audio feel >= 4.4', 'Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible.'],
       ['`1.4` Arcade Depth / Guardians 0.1 Preview', '9.2/10', 'level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6', '7.8/10 reference; 7.0/10 playtest', 'frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0', 'Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora.'],
       ['`1.5` Flight Recorder and Shared Evidence', '9.3/10', 'replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6', '8.2/10', 'source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0', 'Shared video and evidence become release infrastructure for both applications.'],
       ['`1.6` Message to Pilot / Platform Shell', '9.4/10', 'popup containment >= 9.6; message channel >= 8.8; shell copy ownership >= 9.5', '8.5/10', 'platform integration >= 9.5; preview messaging >= 8.8; pack-boundary durability 10.0', 'Platinum feels like a coherent cabinet shell across multiple games.'],
@@ -70,12 +70,12 @@ function releaseTargetSections(){
   const metricTargets = buildTable(
     ['Metric family', 'Aurora current', 'Aurora next target', 'Guardians current', 'Guardians next target', 'Why it matters'],
     [
-      ['Movement and pressure', '8.1/10', '8.6/10 in `1.3`; 8.8/10 in `1.4`', '5.9/10 playtest; 5.9/10 reference category', 'browser-reviewed runtime tuning in `1.3`; 7.2/10 playtest in `1.4`', 'This is the strongest direct feel signal during live play.'],
-      ['Audio identity / acoustic fit', '6.1/10', '7.2/10 in `1.3`; 7.6/10 in `1.4`', '3.8/10 playtest; 3.8/10 reference category', 'isolated cue comparison in `1.3`; 7.0/10 playtest in `1.4`', 'Audio is the weakest shared conformance area today.'],
+      ['Movement and pressure', '8.1/10', '8.6/10 in `1.3`; 8.8/10 in `1.4`', '6.2/10 playtest; 6.2/10 reference category', 'browser-reviewed runtime tuning in `1.3`; 7.2/10 playtest in `1.4`', 'This is the strongest direct feel signal during live play.'],
+      ['Audio identity / acoustic fit', '6.1/10', '7.2/10 in `1.3`; 7.6/10 in `1.4`', '4.4/10 playtest; 4.4/10 reference category', 'isolated cue comparison in `1.3`; 7.0/10 playtest in `1.4`', 'Audio is the weakest shared conformance area today.'],
       ['Visual identity', '9.2/10 shell integrity; game sprites not separately scored in the roll-up', 'add a visible arcade-depth visual score in `1.4`', '5.4/10 playtest; 5.4/10 reference category', 'final sprite recognition in `1.3`; 7.0/10 playtest in `1.4`', 'Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview.'],
       ['Stage / rack / wave timing', 'stage opening 8.5; challenge timing 8.4', 'challenge and later-stage targets >= 8.6 in `1.4`', 'rack timing 6.2/10', 'browser-reviewed rack timing in `1.3`; 7.2/10 in `1.4`', 'Timing separates authentic arcade pressure from approximate motion.'],
       ['Scoring and progression', 'progression/persona 8.8; shot/hit 10.0', 'level-depth and scoring stability >= 9.0 by `2.0`', 'single-shot threat/scoring 7.5', '7.6 in `1.4`; 8.8 by `2.0`', 'Guardians should not publish persistent scoreboards until scoring is reference-aligned.'],
-      ['Evidence and replay durability', 'scorecard artifacts exist; video publishing is not yet a full product surface', 'replay/video evidence >= 8.8 in `1.5`', 'evidence durability 9.3', 'final sprite/cue extraction durability >= 9.4 in `1.5`', 'Shared videos and source-controlled artifacts should become normal release evidence.'],
+      ['Evidence and replay durability', 'scorecard artifacts exist; video publishing is not yet a full product surface', 'replay/video evidence >= 8.8 in `1.5`', 'evidence durability 9.4', 'final sprite/cue extraction durability >= 9.4 in `1.5`', 'Shared videos and source-controlled artifacts should become normal release evidence.'],
       ['Platform boundaries and shell containment', 'shell integrity 9.2', 'popup/message/shell containment >= 9.6 in `1.6`', 'platform boundaries 10.0', 'keep 10.0 through `2.0`', 'Game work must not leak mechanics across applications; shared behavior belongs in Platinum.']
     ]
   );
@@ -93,8 +93,8 @@ function releaseTargetSections(){
     '  x-axis ["Current", "1.3", "1.4", "1.5", "1.6", "2.0"]',
     '  y-axis "Score / 10" 0 --> 10',
     '  line "Aurora Galactica" [8.8, 9.0, 9.2, 9.3, 9.4, 9.5]',
-    '  line "Galaxy Guardians Reference" [7.1, 7.1, 7.8, 8.2, 8.5, 9.0]',
-    '  line "Galaxy Guardians Playtest" [5.7, 5.7, 7.0, 8.0, 8.4, 8.8]',
+    '  line "Galaxy Guardians Reference" [7.3, 7.3, 7.8, 8.2, 8.5, 9.0]',
+    '  line "Galaxy Guardians Playtest" [5.9, 5.9, 7.0, 8.0, 8.4, 8.8]',
     '```',
     '',
     '## Application Metric Target Matrix',

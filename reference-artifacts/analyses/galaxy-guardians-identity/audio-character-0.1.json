@@ -9,7 +9,7 @@
     "identityBaseline": "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
     "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
-    "notes": "This is an internal cue-shape conformance contract. It validates runtime event coverage and synthetic cue character; it is not a final acoustic match to Galaxian hardware."
+    "notes": "This is an internal cue-shape conformance contract. It validates runtime event coverage and synthetic cue character; it is paired with audio-cue-targets-0.1.json for stricter square/noise hardware feel, but it is not a final acoustic match to Galaxian hardware."
   },
   "themeId": "guardians-signal",
   "requiredCueNames": [

@@ -11,6 +11,7 @@
     "referenceEvidence": [
       "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
       "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
       "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
@@ -28,10 +29,10 @@
     "10": "Reference-faithful enough for public conformance claims."
   },
   "summary": {
-    "evidenceWeightedReferenceScore10": 7.1,
-    "playtestWeightedConformanceScore10": 5.7,
+    "evidenceWeightedReferenceScore10": 7.3,
+    "playtestWeightedConformanceScore10": 5.9,
     "compellingPreviewTargetScore10": 7.0,
-    "releaseRead": "Not yet compelling enough for beta-facing preview. The runtime is now faster, more threatening, and better separated from Aurora, but audio and pixel-faithful visual identity remain the largest gaps."
+    "releaseRead": "Not yet compelling enough for beta-facing preview. The runtime now has measured stage-rank pressure and is faster, more threatening, and better separated from Aurora, but audio and pixel-faithful visual identity remain the largest gaps."
   },
   "categories": [
     {
@@ -40,7 +41,7 @@
       "weight": 28,
       "previousOfficialScore10": 5.3,
       "playtestAdjustedBeforePass10": 2.5,
-      "playtestWeightedScore10": 3.8,
+      "playtestWeightedScore10": 4.4,
       "compellingPreviewTarget10": 7.0,
       "metricSet": [
         "hardware-like square/noise timbre",
@@ -49,8 +50,8 @@
         "event mix density during live play",
         "waveform/spectrogram proxy fit"
       ],
-      "currentRead": "Cue ownership and shape are harnessed, and the latest pass made shots and dives lower, raspier, and less Aurora-musical. This still does not yet sound like Galaxian hardware in play.",
-      "nextEvidenceNeeded": "Extract isolated cue windows from source clips, compare synthetic envelopes/frequency bands cue-by-cue, and tune against a real playback review rather than only catalog shape."
+      "currentRead": "Cue ownership and shape are harnessed, and the latest pass adds filtered-noise layers plus stricter square-wave cue targets for player shot, enemy shot, dive, hit, and loss cues. This is more hardware-like than the previous musical cue set, but still needs isolated Galaxian cue matching.",
+      "nextEvidenceNeeded": "Extract isolated cue windows from source clips, compare synthetic envelopes/frequency bands cue-by-cue, and tune against real playback review rather than only catalog shape."
     },
     {
       "id": "motion-pressure",
@@ -58,7 +59,7 @@
       "weight": 32,
       "previousOfficialScore10": 6.7,
       "playtestAdjustedBeforePass10": 4.8,
-      "playtestWeightedScore10": 5.9,
+      "playtestWeightedScore10": 6.2,
       "compellingPreviewTarget10": 7.2,
       "metricSet": [
         "formation entry duration",
@@ -69,7 +70,7 @@
         "enemy shot density",
         "bottom wrap/return cadence"
       ],
-      "currentRead": "The latest pass shortened formation entry, first dive, flagship pressure, scout intervals, shot cadence, and bottom wrap timing. It feels closer to urgent arcade pressure but remains proxy-tuned rather than frame-accurate.",
+      "currentRead": "The latest pass shortened formation entry, first dive, flagship pressure, scout intervals, shot cadence, and bottom wrap timing, then added measured stage-rank pressure so stages three and five carry earlier dives, faster dives, faster shots, and more event density while stage one remains anchored.",
       "nextEvidenceNeeded": "Use browser-reviewed runtime traces beside reference tracklets, then promote sprite-recognized dive paths and rack timing into target bands."
     },
     {
