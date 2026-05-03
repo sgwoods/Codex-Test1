@@ -86,11 +86,16 @@ Current decision:
 Current conformance read:
 
 - see [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
+- see the generated score/target roll-up in
+  [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
 - overall Aurora quality is `8.8/10`
 - audio identity and cue alignment is the weakest category at `6.1/10`
-- player movement conformance is the next visible feel gap at `8.0/10`
+- player movement conformance is the next visible feel gap at `8.1/10`
 - Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
   yet part of the Aurora numeric roll-up
+- current cluster targets are `9.0/10` for Aurora and `7.2/10` for Guardians in
+  the `1.3` Fidelity and Trust lane, rising toward `9.5/10` and `9.0/10` by
+  the `2.0` multi-game Platinum candidate lane
 
 ## Main Investment Themes
 
