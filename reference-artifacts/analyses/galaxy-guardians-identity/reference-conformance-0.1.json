@@ -3,7 +3,7 @@
   "artifactType": "reference-conformance-metric-set",
   "version": "0.1-dev-preview",
   "createdOn": "2026-05-02",
-  "status": "dev-preview-reference-conformance-model-not-public-release-score",
+  "status": "preview-reference-conformance-model-not-production-release-score",
   "purpose": "Define the first Galaxy Guardians reference conformance metric set by scoring the playable preview against the current Galaxian source profile, promoted semantic event log, game-owned runtime gates, and Platinum boundary rules.",
   "sourceEvidence": {
     "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
@@ -22,7 +22,7 @@
     "referenceMaturityScore10": 7.0,
     "implementationGateCoverageScore10": 9.5,
     "publicReleaseReadinessScore10": 3.9,
-    "releaseRead": "Useful development preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as dev-preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
+    "releaseRead": "Useful playable-preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -65,7 +65,7 @@
       "score10": 6.2,
       "evidenceLevel": "reference-window-inspired-runtime-contract-plus-runtime-vs-reference-track-comparison-plus-stage-rank-pressure-gate",
       "currentRead": "Scout dives, flagship dives, escort joins, enemy shots, and wrap/return pressure are implemented and gated. The latest pass increases dive speed, dive acceleration, enemy-shot pressure, wrap cadence, and bounded stage-rank pressure so stages three and five are measurably more urgent than stage one.",
-      "remainingGap": "The preview still feels proxy-tuned rather than Galaxian-tight; browser review and sprite-recognized dive-path targets are needed before beta-facing release."
+      "remainingGap": "The preview still feels proxy-tuned rather than Galaxian-tight; browser review and sprite-recognized dive-path targets are needed before broader production-facing release."
     },
     {
       "id": "single-shot-threat-scoring",
@@ -74,7 +74,7 @@
       "score10": 7.5,
       "evidenceLevel": "game-owned-runtime-and-score-contract",
       "currentRead": "Single-shot firing, enemy shots, role-specific score values, player loss, game-over behavior, owned score table, wave clear, and stage advance are implemented without Aurora capture/dual-fighter semantics.",
-      "remainingGap": "The score table remains a dev-preview contract rather than a frame-extracted Galaxian table, and persistent public scoring is still intentionally blocked."
+      "remainingGap": "The score table remains a playable-preview contract rather than a frame-extracted Galaxian table, and persistent public scoring is still intentionally blocked."
     },
     {
       "id": "visual-alien-identity",
@@ -100,7 +100,7 @@
       "weight": 10,
       "score10": 10.0,
       "evidenceLevel": "pack-adapter-renderer-boundary-gates",
-      "currentRead": "The preview remains dev-only, does not inherit Aurora capture/dual/challenge/scoring mechanics, and uses Platinum only through shared capability boundaries.",
+      "currentRead": "The preview remains non-production, does not inherit Aurora capture/dual/challenge/scoring mechanics, and uses Platinum only through shared capability boundaries.",
       "remainingGap": "Keep this mandatory as Guardians gets more real gameplay."
     },
     {

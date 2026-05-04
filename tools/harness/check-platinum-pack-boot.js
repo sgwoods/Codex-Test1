@@ -154,9 +154,9 @@ async function main(){
     fail('Preview pack did not update the visible Platinum runtime label', result);
   }
   if(!result.previewWait.waitText.includes('GALAXY GUARDIANS')) fail('Preview pack did not replace the wait-mode front-door copy', result);
-  if(result.previewWait.previewOpen) fail('Dev-preview pack opened the coming-soon splash instead of selecting the playable preview path', result);
+  if(result.previewWait.previewOpen) fail('Preview-enabled pack opened the coming-soon splash instead of selecting the playable preview path', result);
   if(result.previewWait.hasPlayableAdapter !== false || result.previewWait.hasDevPreviewAdapter !== true || result.previewWait.canStart !== true){
-    fail('Preview pack did not expose the expected dev-only playable-preview boundary in wait mode', result);
+    fail('Preview pack did not expose the expected non-production playable-preview boundary in wait mode', result);
   }
 
   if(result.restoredWait.packKey !== 'aurora-galactica') fail('Aurora was not restorable through the selected-pack path', result);

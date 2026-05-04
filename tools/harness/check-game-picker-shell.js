@@ -106,7 +106,7 @@ async function main(){
     fail('preview pack selection did not update the split app/platform wait-mode copy and dev-preview boundary', result);
   }
   if(result.preview?.modalOpen){
-    fail('dev-preview pack selection opened the sneak-peek splash instead of leaving Enter available for the dev playable preview', result);
+    fail('preview-enabled pack selection opened the sneak-peek splash instead of leaving Enter available for the playable preview', result);
   }
   if(result.beforeTheme === result.themed?.border){
     fail('switching shell theme did not change the cabinet chrome treatment', result);
@@ -115,13 +115,13 @@ async function main(){
     fail('shell theme picker did not update the current theme label', result);
   }
   if(!result.launched?.started){
-    fail('launching from the preview shell did not start the Guardians dev playable preview', result);
+    fail('launching from the preview shell did not start the Guardians playable preview', result);
   }
   if(result.launched?.modalOpen){
     fail('preview modal opened during Guardians dev playable launch', result);
   }
   if(result.launched?.packKey !== 'galaxy-guardians-preview' || !result.launched?.marquee.includes('Galaxy Guardians') || result.launched?.guardians?.gameKey !== 'galaxy-guardians-preview'){
-    fail('launch did not stay inside the Galaxy Guardians dev-preview pack', result);
+    fail('launch did not stay inside the Galaxy Guardians playable-preview pack', result);
   }
 
   console.log(JSON.stringify({

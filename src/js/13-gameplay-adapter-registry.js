@@ -1,4 +1,5 @@
-// Platinum gameplay adapter registry. Packs become playable only through an owned adapter.
+// Platinum gameplay adapter registry. Packs become playable only through an
+// owned adapter or an explicitly non-production preview adapter.
 
 const AURORA_GAMEPLAY_ADAPTER=Object.freeze({
  gameKey:AURORA_GAME_PACK.metadata.gameKey,
@@ -45,16 +46,18 @@ function getGameplayAdapterSkeleton(packOrKey=currentGamePack()){
  return GAMEPLAY_ADAPTER_SKELETON_REGISTRY[key]||null;
 }
 
-function developmentGameplayPreviewAllowed(){
- return typeof BUILD_INFO!=='undefined'
-  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development';
-}
-
 function getDevPreviewGameplayAdapter(packOrKey=currentGamePack()){
- if(!developmentGameplayPreviewAllowed())return null;
  const key=gameplayAdapterKey(packOrKey);
  const adapter=DEV_PREVIEW_GAMEPLAY_ADAPTER_REGISTRY[key]||null;
- return adapter&&adapter.enabled&&adapter.devOnly&&typeof adapter.start==='function'?adapter:null;
+ if(!adapter||!adapter.enabled||typeof adapter.start!=='function')return null;
+ if(!(adapter.previewOnly||adapter.devOnly))return null;
+ const channel=typeof BUILD_INFO!=='undefined'
+  ? String(BUILD_INFO.releaseChannel||'development').toLowerCase()
+  : 'development';
+ const allowedChannels=Array.isArray(adapter.allowedReleaseChannels)&&adapter.allowedReleaseChannels.length
+  ? adapter.allowedReleaseChannels.map(value=>String(value).toLowerCase())
+  : ['development'];
+ return allowedChannels.includes(channel)?adapter:null;
 }
 
 function currentGameplayAdapter(){

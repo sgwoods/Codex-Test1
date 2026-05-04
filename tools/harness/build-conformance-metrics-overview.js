@@ -66,7 +66,7 @@ function releaseTargetSections(guardians, guardiansPlaytest){
     ['Release cluster / focus', 'Aurora target', 'Aurora focus metrics', 'Guardians target', 'Guardians focus metrics', 'Release decision meaning'],
     [
       ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `maturity ${guardians.summary.referenceMaturityScore10}; gate coverage ${guardians.summary.implementationGateCoverageScore10}; public readiness ${guardians.summary.publicReleaseReadinessScore10}; audio feel ${guardiansAudio}`, 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
-      ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `rack timing >= 6.2; movement pressure ${guardiansMotion}; visual identity ${guardiansVisual}; audio feel ${guardiansAudio}`, 'Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible.'],
+      ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `rack timing >= 6.2; movement pressure ${guardiansMotion}; visual identity ${guardiansVisual}; audio feel ${guardiansAudio}`, 'Aurora can move beta if the weakest feel gaps improve and Guardians stays out of production but credible as a beta preview.'],
       ['`1.4` Arcade Depth / Guardians 0.1 Preview', '9.2/10', 'level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6', '7.8/10 reference; 7.0/10 playtest', 'frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0', 'Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora.'],
       ['`1.5` Flight Recorder and Shared Evidence', '9.3/10', 'replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6', '8.2/10', 'source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0', 'Shared video and evidence become release infrastructure for both applications.'],
       ['`1.6` Message to Pilot / Platform Shell', '9.4/10', 'popup containment >= 9.6; message channel >= 8.8; shell copy ownership >= 9.5', '8.5/10', 'platform integration >= 9.5; preview messaging >= 8.8; pack-boundary durability 10.0', 'Platinum feels like a coherent cabinet shell across multiple games.'],
@@ -129,7 +129,7 @@ function main(){
         rel(auroraReportPath)
       ],
       [
-        'Galaxy Guardians 0.1 dev preview',
+        'Galaxy Guardians 0.1 playable preview',
         score(guardians.summary.referenceConformanceScore10),
         `playtest weighted ${score(guardiansPlaytest.summary.playtestWeightedConformanceScore10)}; maturity ${score(guardians.summary.referenceMaturityScore10)}; gate coverage ${score(guardians.summary.implementationGateCoverageScore10)}; public readiness ${score(guardians.summary.publicReleaseReadinessScore10)}`,
         guardians.status,

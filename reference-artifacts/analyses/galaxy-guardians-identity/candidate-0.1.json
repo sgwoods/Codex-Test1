@@ -3,7 +3,7 @@
   "artifactType": "galaxy-guardians-0.1-candidate-gate",
   "version": "0.1-dev-preview-candidate",
   "createdOn": "2026-05-02",
-  "status": "candidate-gate-dev-only-not-public-release",
+  "status": "candidate-gate-preview-not-production-release",
   "purpose": "Provide one durable gate for the first Galaxy Guardians preview candidate by tying the visual catalog, audio catalog, runtime events, public-playable boundary, and Aurora/platform separation checks together.",
   "inputs": {
     "attractScoreSurface": "reference-artifacts/analyses/galaxy-guardians-identity/attract-score-surface-0.1.json",
@@ -81,11 +81,12 @@
       "usesAuroraEnemyFamilies": 0
     },
     "publicPlayableMustRemain": 0,
+    "previewPlayableMustRemain": 1,
     "devPlayableMustRemain": 1
   },
   "releaseUse": {
     "dev": "Required before treating the Guardians preview as a 0.1 candidate on the development lane.",
     "beta": "May support beta preview discussion only if paired with browser-backed playable-preview, compact-cabinet, pack-boundary, and release gate checks.",
-    "production": "Not sufficient for public production promotion because this is still explicitly dev-only candidate evidence."
+    "production": "Not sufficient for public production promotion because this is still explicitly non-production candidate evidence."
   }
 }

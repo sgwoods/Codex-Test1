@@ -69,8 +69,8 @@ async function main(){
   if(result.launched.publicPlayable !== false || result.launched.publicAdapter !== false || result.launched.devAdapter !== true){
     fail('Galaxy Guardians playable preview crossed the public gameplay adapter boundary', result);
   }
-  if(result.launched.guardians.publicPlayable !== 0 || result.launched.guardians.devPlayable !== 1){
-    fail('Galaxy Guardians runtime summary is not marked dev-only', result);
+  if(result.launched.guardians.publicPlayable !== 0 || result.launched.guardians.previewPlayable !== 1 || result.launched.guardians.devPlayable !== 1){
+    fail('Galaxy Guardians runtime summary is not marked as a non-production playable preview', result);
   }
   if(result.launched.guardians.alienCount !== 38 || result.launched.guardians.liveRoles.flagship !== 2){
     fail('Galaxy Guardians playable preview did not start from the expected scout-wave rack', result);
@@ -94,7 +94,7 @@ async function main(){
     fail('Galaxy Guardians final life-loss flow did not emit game over', result);
   }
   if(result.final.state.started){
-    fail('Galaxy Guardians dev preview stayed in active gameplay after game over', result);
+    fail('Galaxy Guardians playable preview stayed in active gameplay after game over', result);
   }
   for(const cueId of ['guardians-player-single-shot','guardians-player-loss']){
     if(!result.final.guardians.audioCueIds.includes(cueId)){

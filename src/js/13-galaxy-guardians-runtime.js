@@ -1,4 +1,4 @@
-// Dev-only Galaxy Guardians scout-wave runtime model.
+// Non-production Galaxy Guardians scout-wave runtime model.
 
 const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
  flagship:Object.freeze({
@@ -42,9 +42,11 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
 
 const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
  id:'galaxy-guardians-dev-scout-wave-runtime',
- status:'dev-runtime-slice-not-public-release',
+ status:'preview-runtime-slice-not-production-release',
  publicPlayable:0,
+ previewPlayable:1,
  devPlayable:1,
+ playablePreviewReleaseChannels:Object.freeze(['development','production beta']),
  evidenceProfile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
  promotedEventLog:'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json',
  eventVocabulary:Object.freeze([
@@ -205,7 +207,9 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
   runtimeState:'dev-scout-wave',
   publicPlayable:0,
+  previewPlayable:1,
   devPlayable:1,
+  playablePreviewReleaseChannels:GALAXY_GUARDIANS_RUNTIME_PROFILE.playablePreviewReleaseChannels.slice(),
   stage:Math.max(1,+opts.stage||1),
   score:0,
   lives,
@@ -591,7 +595,9 @@ function summarizeGalaxyGuardiansRuntime(state){
   gameKey:state.gameKey,
   runtimeState:state.runtimeState,
   publicPlayable:state.publicPlayable,
+  previewPlayable:state.previewPlayable,
   devPlayable:state.devPlayable,
+  playablePreviewReleaseChannels:Array.from(state.playablePreviewReleaseChannels||[]),
   stage:state.stage,
   score:state.score,
   lives:state.lives,

@@ -64,13 +64,13 @@ async function main(){
     fail('Galaxy Guardians registered a gameplay adapter before its owned gameplay slice exists', result);
   }
   if(!result.initial.devAdapterKeys.includes('galaxy-guardians-preview') || result.initial.devAdapterKeys.includes('aurora-galactica')){
-    fail('Galaxy Guardians dev-only preview adapter registry is not isolated from the public gameplay registry', result);
+    fail('Galaxy Guardians preview adapter registry is not isolated from the public gameplay registry', result);
   }
   if(result.initial.auroraPackPlayable !== true || result.initial.auroraHasAdapter !== true){
     fail('Aurora is not both metadata-playable and adapter-playable', result);
   }
   if(result.initial.guardiansPackPlayable !== false || result.initial.guardiansHasAdapter !== false || result.initial.guardiansHasDevAdapter !== true){
-    fail('Galaxy Guardians preview is not correctly split between public adapter blocking and dev-only preview routing', result);
+    fail('Galaxy Guardians preview is not correctly split between public adapter blocking and non-production preview routing', result);
   }
   if(result.previewInstalled.key !== 'galaxy-guardians-preview' || result.previewInstalled.hasAdapter !== false || result.previewInstalled.hasDevAdapter !== true || result.previewInstalled.canStart !== true){
     fail('Galaxy Guardians preview did not enter the expected dev-preview adapter state before launch', result);
@@ -82,10 +82,10 @@ async function main(){
     fail('Galaxy Guardians dev-preview launch did not stay inside the Guardians pack boundary', result);
   }
   if(result.launchDevPreview.hasAdapter !== false || result.launchDevPreview.hasDevAdapter !== true || !result.launchDevPreview.started){
-    fail('Galaxy Guardians dev-preview did not start through the dev-only adapter path', result);
+    fail('Galaxy Guardians preview did not start through the non-production adapter path', result);
   }
-  if(!result.launchDevPreview.guardians || result.launchDevPreview.guardians.publicPlayable !== 0 || result.launchDevPreview.guardians.devPlayable !== 1){
-    fail('Galaxy Guardians dev-preview launch did not expose the expected runtime summary', result);
+  if(!result.launchDevPreview.guardians || result.launchDevPreview.guardians.publicPlayable !== 0 || result.launchDevPreview.guardians.previewPlayable !== 1 || result.launchDevPreview.guardians.devPlayable !== 1){
+    fail('Galaxy Guardians preview launch did not expose the expected runtime summary', result);
   }
 
   console.log(JSON.stringify({

@@ -164,6 +164,7 @@ function main(){
     candidateStatus: candidate.status,
     publicPlayable: pack.metadata?.playable,
     runtimePublicPlayable: profile.publicPlayable,
+    runtimePreviewPlayable: profile.previewPlayable,
     runtimeDevPlayable: profile.devPlayable,
     requiredVisualIds,
     runtimeVisualIds: unique([profile.playerVisualId, ...Object.values(profile.alienCatalog || {}).map(entry => entry.visualId)]),
@@ -189,15 +190,15 @@ function main(){
   if(payload.gameKey !== 'galaxy-guardians-preview' || identity.gameKey !== payload.gameKey || candidate.gameKey !== payload.gameKey){
     fail('Galaxy Guardians 0.1 candidate artifacts are not linked to the preview pack', payload);
   }
-  if(candidate.status !== 'candidate-gate-dev-only-not-public-release'){
-    fail('Galaxy Guardians 0.1 candidate artifact is not marked as dev-only candidate evidence', payload);
+  if(candidate.status !== 'candidate-gate-preview-not-production-release'){
+    fail('Galaxy Guardians 0.1 candidate artifact is not marked as non-production candidate evidence', payload);
   }
   for(const [inputName, relPath] of Object.entries(candidate.inputs || {})){
     if(!exists(relPath)){
       fail(`Galaxy Guardians 0.1 candidate references a missing input artifact: ${inputName}`, { inputName, relPath, payload });
     }
   }
-  if(pack.metadata?.playable !== 0 || profile.publicPlayable !== 0 || profile.devPlayable !== 1){
+  if(pack.metadata?.playable !== 0 || profile.publicPlayable !== 0 || profile.previewPlayable !== 1 || profile.devPlayable !== 1){
     fail('Galaxy Guardians 0.1 candidate crossed the public playable boundary', payload);
   }
   for(const visualId of requiredVisualIds){
@@ -263,7 +264,7 @@ function main(){
     }
   }
   if(!forced.loss.gameOver || !forced.loss.eventTypes.includes('game_over')){
-    fail('Galaxy Guardians 0.1 candidate did not prove the dev-preview game-over flow', payload);
+    fail('Galaxy Guardians 0.1 candidate did not prove the playable-preview game-over flow', payload);
   }
 
   console.log(JSON.stringify({
@@ -277,6 +278,7 @@ function main(){
       ...Object.values(forced).flatMap(summary => summary.eventTypes)
     ]),
     publicPlayable: profile.publicPlayable,
+    previewPlayable: profile.previewPlayable,
     devPlayable: profile.devPlayable
   }, null, 2));
 }

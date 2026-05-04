@@ -123,7 +123,7 @@ const GUARDIANS_AUDIO_CUE_CATALOG=Object.freeze({
  escortHit:Object.freeze({id:'guardians-escort-hit',event:'player_shot_resolved',profile:'red-blue-snap',referenceIntent:'escort hit'}),
  flagshipHit:Object.freeze({id:'guardians-flagship-hit',event:'player_shot_resolved',profile:'gold-command-break',referenceIntent:'flagship hit / score moment'}),
  wrapReturn:Object.freeze({id:'guardians-wrap-return',event:'enemy_wrap_or_return',profile:'soft-bottom-return-sweep',referenceIntent:'bottom-exit or return warning'}),
- playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the dev playable preview'}),
+ playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the non-production playable preview'}),
  gameOver:Object.freeze({id:'guardians-game-over-fall',event:'game_over',profile:'low-falling-square-stair',referenceIntent:'short game-over descent distinct from Aurora'})
 });
 
@@ -292,9 +292,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity and a dev-only scout-wave slice.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on development and beta lanes.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and dev-only scout-wave runtime while Aurora remains the primary public cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a non-production scout-wave runtime while Aurora remains the primary public production cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',

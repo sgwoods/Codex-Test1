@@ -258,7 +258,7 @@ window.resetGalaxyGuardiansPreviewRenderState=resetGalaxyGuardiansPreviewRenderS
 window.drawGalaxyGuardiansPreviewBoard=drawGalaxyGuardiansPreviewBoard;
 
 registerGameBoardRenderer(GALAXY_GUARDIANS_PACK.metadata.gameKey,{
- label:'Galaxy Guardians dev preview board renderer',
+ label:'Galaxy Guardians preview board renderer',
  previewOnly:true,
  canDraw(){
   const playable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();

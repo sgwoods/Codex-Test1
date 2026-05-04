@@ -16,7 +16,7 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
  promotedEventStatus:'promoted-reviewed-event-windows',
  promotedEventCount:11,
  devRuntime:'src/js/13-galaxy-guardians-runtime.js',
- devRuntimeStatus:'dev-runtime-slice-not-public-release',
+   devRuntimeStatus:'preview-runtime-slice-not-production-release',
  devRuntimeHarness:'tools/harness/check-galaxy-guardians-runtime-slice.js',
  sourceCount:3,
  sources:Object.freeze([
@@ -85,6 +85,11 @@ const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
  })
 });
 
+const GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS=Object.freeze([
+ 'development',
+ 'production beta'
+]);
+
 function createGalaxyGuardiansInitialState(opts={}){
  return Object.freeze({
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
@@ -129,9 +134,14 @@ const GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON=Object.freeze({
 let GALAXY_GUARDIANS_ACTIVE_DEV_STATE=null;
 
 function galaxyGuardiansDevPreviewAllowed(){
+ const channel=typeof BUILD_INFO!=='undefined'
+  ? String(BUILD_INFO.releaseChannel||'development').toLowerCase()
+  : '';
+ const allowedChannels=Array.from(GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS)
+  .map(value=>String(value).toLowerCase());
  return typeof BUILD_INFO!=='undefined'
-  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development'
-  && !!GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable
+  && allowedChannels.includes(channel)
+  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable)
   && !GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable;
 }
 
@@ -161,7 +171,7 @@ function closeGalaxyGuardiansDevOverlays(){
 
 function startGalaxyGuardiansDevPreview(cfg={}){
  if(!galaxyGuardiansDevPreviewAllowed()){
-  showToast('Galaxy Guardians playable preview is available only in development builds.');
+  showToast('Galaxy Guardians playable preview is available only in development and beta builds.');
   return false;
  }
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
@@ -282,10 +292,12 @@ function summarizeGalaxyGuardiansDevPreview(){
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
- label:'Galaxy Guardians dev-only playable preview',
+ label:'Galaxy Guardians non-production playable preview',
  enabled:1,
- devOnly:1,
+ devOnly:0,
+ previewOnly:1,
  publicPlayable:0,
+ allowedReleaseChannels:Array.from(GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS),
  start:startGalaxyGuardiansDevPreview,
  update:updateGalaxyGuardiansDevPreview,
  snapshot:summarizeGalaxyGuardiansDevPreview

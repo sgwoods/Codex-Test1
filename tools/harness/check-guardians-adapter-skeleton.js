@@ -77,8 +77,8 @@ async function main(){
   if(result.skeleton.promotedEventCount < 11){
     fail('Galaxy Guardians skeleton does not carry the promoted scout-wave event count', result);
   }
-  if(result.skeleton.devRuntime !== 'src/js/13-galaxy-guardians-runtime.js' || result.skeleton.devRuntimeStatus !== 'dev-runtime-slice-not-public-release'){
-    fail('Galaxy Guardians skeleton is not linked to the dev runtime slice', result);
+  if(result.skeleton.devRuntime !== 'src/js/13-galaxy-guardians-runtime.js' || result.skeleton.devRuntimeStatus !== 'preview-runtime-slice-not-production-release'){
+    fail('Galaxy Guardians skeleton is not linked to the non-production runtime slice', result);
   }
   if(result.skeleton.devRuntimeHarness !== 'tools/harness/check-galaxy-guardians-runtime-slice.js'){
     fail('Galaxy Guardians skeleton does not cite the runtime slice harness', result);
