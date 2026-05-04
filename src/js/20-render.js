@@ -20,6 +20,13 @@ function availableGameBoardRenderers(){
 
 function currentGameBoardRenderer(){
  const key=typeof currentGamePackKey==='function'?currentGamePackKey():DEFAULT_GAME_PACK_KEY;
+ const showcaseKey=!started&&typeof currentWaitModeShowcasePackKey==='function'
+  ? currentWaitModeShowcasePackKey()
+  : '';
+ if(showcaseKey){
+  const showcase=GAME_BOARD_RENDERERS[showcaseKey];
+  if(showcase&&showcase.canDraw())return showcase;
+ }
  const candidate=GAME_BOARD_RENDERERS[key];
  if(candidate&&candidate.canDraw())return candidate;
  return GAME_BOARD_RENDERERS[DEFAULT_GAME_PACK_KEY]||null;
@@ -53,7 +60,8 @@ function draw(){
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
  const railTop=oy;
  const waitScoreOverlay=0;
- const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
+ const platformMessageOpen=typeof platformMessagePanelOpen!=='undefined'&&!!platformMessagePanelOpen;
+ const framedOverlayOpen=!!((typeof LEADERBOARD!=='undefined'&&(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen))||platformMessageOpen);
 
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,

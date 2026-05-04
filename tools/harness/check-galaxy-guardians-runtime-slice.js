@@ -32,7 +32,8 @@ async function main(){
     const audioCueCatalog = pack?.audioCueCatalog || {};
     const timingState = window.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 42719 });
     timingState.player.inv = 999;
-    for(let i=0;i<430;i++){
+    const timingFrameCount = Math.ceil(((profile?.rules?.flagshipEscortDelay || 8.5) + .45) * 60);
+    for(let i=0;i<timingFrameCount;i++){
       window.stepGalaxyGuardiansRuntime(timingState, 1/60, {});
     }
     const firstDiveEvent = timingState.events.find(event => event.type === 'alien_dive_start');
@@ -109,10 +110,10 @@ async function main(){
   if(!result.firstShot || !result.secondShotBlocked){
     fail('Galaxy Guardians runtime did not enforce the single-shot player fire model', result);
   }
-  if(Math.abs(result.timing.firstDiveT - result.timing.firstScoutDiveDelay) > .08){
+  if(!Number.isFinite(result.timing.firstDiveT) || Math.abs(result.timing.firstDiveT - result.timing.firstScoutDiveDelay) > .08){
     fail('Galaxy Guardians runtime first scout dive timing drifted outside the first timing pass band', result);
   }
-  if(Math.abs(result.timing.flagshipDiveT - result.timing.flagshipEscortDelay) > .08 || Math.abs(result.timing.escortJoinT - result.timing.flagshipDiveT) > .001){
+  if(!Number.isFinite(result.timing.flagshipDiveT) || !Number.isFinite(result.timing.escortJoinT) || Math.abs(result.timing.flagshipDiveT - result.timing.flagshipEscortDelay) > .08 || Math.abs(result.timing.escortJoinT - result.timing.flagshipDiveT) > .001){
     fail('Galaxy Guardians runtime flagship/escort timing drifted outside the first timing pass band', result);
   }
   if(Math.abs(result.timing.singleShotCooldown - .72) > .001){

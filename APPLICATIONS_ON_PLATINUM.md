@@ -240,7 +240,10 @@ specific game by name.
 
 The next application proof is maturing the first dev-only playable slice. It
 now has the initial lifecycle path, but the behavior is still intentionally
-development-scoped until the measured 0.1 scout-wave evidence is stronger.
+development-scoped until the measured 0.1 scout-wave evidence is stronger. The
+first aggregate 0.1 candidate gate is now source-controlled so future preview
+readiness claims can cite one durable artifact instead of reassembling the
+visual, audio, movement, threat, and boundary evidence from memory.
 
 - formation rack
 - dives
@@ -258,15 +261,42 @@ Current development-only playable-preview coverage:
   shot, life-loss, reset, and game-over mechanics
 - `src/js/13-gameplay-adapter-registry.js` keeps public playable adapters and
   dev-preview adapters in separate registries
+- `reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json`
+  persists the first cue-shape and runtime-audio coverage contract for the
+  Guardians signal theme
+- `tools/harness/check-galaxy-guardians-audio-character.js` proves the required
+  cue names, cue IDs, cue-shape metrics, role-hit separation, and runtime cue
+  coverage for the first playable-preview slice
 - `reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json`
   persists the first 0.1 visual/audio identity contract so future sprite,
   movement, and cue edits have a durable artifact trail
+- `reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json`
+  persists the first runtime entry/settle contract for promoted Galaxian entry
+  events, including start, settle, rack-complete, and first-dive-after-rack
+  bands
+- `tools/harness/check-galaxy-guardians-formation-entry.js` proves the runtime
+  starts aliens off-rack, settles them into the scout-wave rack, and prevents
+  the first dive from starting before rack completion
 - `reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json`
   persists the first movement and pressure pacing contract for solo dives,
   flagship/escort attacks, and bottom wrap/return cycles
 - `reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json`
   persists the first lower-field threat and application-owned scoring contract
   for enemy shots, player loss, and formation/dive hit values
+- `reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json`
+  persists the first gameplay-scale readability contract for the flagship,
+  escort, scout, player, and role-specific hit flashes
+- `tools/harness/check-galaxy-guardians-visual-readability.js` proves the
+  Guardians visual rows stay distinct, use enough palette channels, appear
+  during entry/formation/dive snapshots, and create owned hit flashes
+- `reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json`
+  persists the first aggregate 0.1 candidate gate for owned visual IDs, runtime
+  cue IDs, promoted event names, public-playable boundaries, and forbidden
+  Aurora capabilities
+- `tools/harness/check-galaxy-guardians-0-1-candidate.js` proves the aggregate
+  0.1 gate without launching a browser by deterministically forcing scout,
+  escort, flagship, enemy-shot, wrap-return, player-loss, and game-over runtime
+  evidence
 - `tools/harness/check-galaxy-guardians-identity-baseline.js` proves the
   identity artifact matches the pack-owned sprite rows, audio cue catalog, audio
   theme cues, runtime cue map, and dev-preview audio history

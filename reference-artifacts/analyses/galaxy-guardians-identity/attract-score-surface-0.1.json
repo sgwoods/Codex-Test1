@@ -1,0 +1,42 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "attract-score-surface-baseline",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "dev-preview-attract-and-score-table-surface-not-public-release-tuning",
+  "purpose": "Promote the Guardians mission language and score-advance table from pack-owned data into visible runtime shell surfaces without making the preview publicly playable.",
+  "sourceEvidence": {
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "scoreProgression": "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
+    "promotedTargets": [
+      "attract_mission_text",
+      "score_advance_table"
+    ],
+    "notes": "The text remains Guardians-owned rather than copied from Galaxian. The value here is a visible attract/rules surface and score-table structure, not yet pixel-perfect reproduction of the source attract screens."
+  },
+  "requiredSurfaces": {
+    "waitModeShowcase": {
+      "activePlayablePackMustRemain": "aurora-galactica",
+      "showcasePack": "galaxy-guardians-preview",
+      "requiredPhrases": [
+        "WE ARE THE GALAXY GUARDIANS",
+        "MISSION: BREAK THE SIGNAL RACK",
+        "WATCH FOR FLAGSHIP ESCORT DIVES",
+        "SINGLE SHOT ONLY - MAKE IT COUNT",
+        "Signal Scout",
+        "Signal Escort",
+        "Signal Flagship",
+        "800"
+      ]
+    },
+    "previewModal": {
+      "requiredMissionLines": 3,
+      "requiredScoreRows": 3,
+      "mustFitInsideGameplayFrame": true
+    }
+  },
+  "harness": {
+    "surfaceCheck": "tools/harness/check-galaxy-guardians-attract-score-surface.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-attract-score-surface"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "labeled-audio-cue-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "labeled-cue-windows-not-raw-audio-export",
+  "generatedBy": "tools/harness/promote-galaxy-guardians-audio-cue-labels.js",
+  "sourceEvidence": {
+    "cueCandidates": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "note": "This artifact stores reproducible source-video windows and waveform/spectrogram previews, not raw copyrighted audio snippets."
+  },
+  "promotedCueWindows": [
+    {
+      "cueName": "playerShot",
+      "semanticLabel": "player single shot / fire tick",
+      "candidateId": "arcades-lounge-level-5-player-single-shot-pressure-09",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "absoluteStartSeconds": 21.102,
+      "durationSeconds": 0.08,
+      "family": "short-hit-or-enemy-shot",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/playerShot-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/playerShot-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.08,
+      "measuredZeroCrossingFrequencyProxyHz": 2086,
+      "measuredEnvelopeContrast": 1.222,
+      "measuredDecayRatio": 0.971,
+      "measuredPeak": 0.42941,
+      "suggestedDurationBandSeconds": [
+        0.062,
+        0.098
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        1502,
+        2670
+      ],
+      "runtimeUse": "short high dry square/noise zap"
+    },
+    {
+      "cueName": "enemyShot",
+      "semanticLabel": "alien shot / low tick",
+      "candidateId": "arcades-lounge-level-5-player-single-shot-pressure-07",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "absoluteStartSeconds": 17.829,
+      "durationSeconds": 0.08,
+      "family": "short-hit-or-enemy-shot",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/enemyShot-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/enemyShot-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.08,
+      "measuredZeroCrossingFrequencyProxyHz": 927,
+      "measuredEnvelopeContrast": 1.696,
+      "measuredDecayRatio": 0.691,
+      "measuredPeak": 0.31335,
+      "suggestedDurationBandSeconds": [
+        0.055,
+        0.105
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        667,
+        1187
+      ],
+      "runtimeUse": "shorter low dry square/noise tick"
+    },
+    {
+      "cueName": "scoutDive",
+      "semanticLabel": "solo scout dive pressure",
+      "candidateId": "nenriki-15-wave-session-flagship-escort-pressure-10",
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "flagship-escort-pressure",
+      "absoluteStartSeconds": 102.342,
+      "durationSeconds": 0.08,
+      "family": "dive-pressure-mix",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/scoutDive-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/scoutDive-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.08,
+      "measuredZeroCrossingFrequencyProxyHz": 1190,
+      "measuredEnvelopeContrast": 1.545,
+      "measuredDecayRatio": 0.827,
+      "measuredPeak": 0.32391,
+      "suggestedDurationBandSeconds": [
+        0.045,
+        0.115
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        857,
+        1523
+      ],
+      "runtimeUse": "stacked descending square siren onset"
+    },
+    {
+      "cueName": "flagshipDive",
+      "semanticLabel": "flagship / escort dive pressure",
+      "candidateId": "arcades-lounge-level-5-lower-field-dive-curves-01",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "lower-field-dive-curves",
+      "absoluteStartSeconds": 21.233,
+      "durationSeconds": 0.08,
+      "family": "dive-pressure-mix",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/flagshipDive-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/flagshipDive-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.08,
+      "measuredZeroCrossingFrequencyProxyHz": 1610,
+      "measuredEnvelopeContrast": 1.418,
+      "measuredDecayRatio": 0.754,
+      "measuredPeak": 0.3479,
+      "suggestedDurationBandSeconds": [
+        0.04,
+        0.12
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        1159,
+        2061
+      ],
+      "runtimeUse": "longer descending command siren"
+    },
+    {
+      "cueName": "scoutHit",
+      "semanticLabel": "small alien hit click",
+      "candidateId": "nenriki-15-wave-session-wrap-return-pressure-10",
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "wrap-return-pressure",
+      "absoluteStartSeconds": 128.247,
+      "durationSeconds": 0.02,
+      "family": "shot-or-hit-click",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/scoutHit-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/scoutHit-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.02,
+      "measuredZeroCrossingFrequencyProxyHz": 1027,
+      "measuredEnvelopeContrast": 1.186,
+      "measuredDecayRatio": 0.687,
+      "measuredPeak": 0.38815,
+      "suggestedDurationBandSeconds": [
+        0.018,
+        0.035
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        739,
+        1315
+      ],
+      "runtimeUse": "tiny dry hit snap"
+    },
+    {
+      "cueName": "escortHit",
+      "semanticLabel": "escort hit snap",
+      "candidateId": "arcades-lounge-level-5-player-single-shot-pressure-06",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "absoluteStartSeconds": 16.852,
+      "durationSeconds": 0.08,
+      "family": "short-hit-or-enemy-shot",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/escortHit-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/escortHit-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.08,
+      "measuredZeroCrossingFrequencyProxyHz": 1629,
+      "measuredEnvelopeContrast": 1.567,
+      "measuredDecayRatio": 0.71,
+      "measuredPeak": 0.36938,
+      "suggestedDurationBandSeconds": [
+        0.056,
+        0.104
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        1173,
+        2085
+      ],
+      "runtimeUse": "short role-separated hit snap"
+    },
+    {
+      "cueName": "flagshipHit",
+      "semanticLabel": "flagship hit / score snap",
+      "candidateId": "arcades-lounge-level-5-lower-field-dive-curves-05",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "lower-field-dive-curves",
+      "absoluteStartSeconds": 34.562,
+      "durationSeconds": 0.08,
+      "family": "dive-pressure-mix",
+      "manualLabelConfidence": "candidate",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/flagshipHit-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/flagshipHit-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.08,
+      "measuredZeroCrossingFrequencyProxyHz": 2005,
+      "measuredEnvelopeContrast": 1.375,
+      "measuredDecayRatio": 0.779,
+      "measuredPeak": 0.40308,
+      "suggestedDurationBandSeconds": [
+        0.048,
+        0.112
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        1444,
+        2566
+      ],
+      "runtimeUse": "longer command hit break"
+    },
+    {
+      "cueName": "playerLoss",
+      "semanticLabel": "loss / descending failure sweep",
+      "candidateId": "arcades-lounge-level-5-level-clear-transition-07",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "level-clear-transition",
+      "absoluteStartSeconds": 47.392,
+      "durationSeconds": 0.21,
+      "family": "dive-or-loss-sweep",
+      "manualLabelConfidence": "medium",
+      "reviewStatus": "promoted-window-needs-human-audio-review",
+      "previews": {
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/playerLoss-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1/playerLoss-spectrogram.png"
+      },
+      "measuredDurationSeconds": 0.21,
+      "measuredZeroCrossingFrequencyProxyHz": 1852,
+      "measuredEnvelopeContrast": 1.289,
+      "measuredDecayRatio": 0.975,
+      "measuredPeak": 0.31607,
+      "suggestedDurationBandSeconds": [
+        0.155,
+        0.265
+      ],
+      "suggestedFrequencyProxyBandHz": [
+        1333,
+        2371
+      ],
+      "runtimeUse": "falling square/noise loss cue"
+    }
+  ],
+  "summary": {
+    "promotedCueCount": 8,
+    "sourceCount": 2,
+    "familyCount": 4,
+    "weakestPromotion": "playerLoss"
+  },
+  "nextPromotion": "Human-listen the promoted windows, mark clean/dirty cue labels, then replace synthetic runtime cue bands with measured cue-specific targets."
+}

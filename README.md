@@ -131,6 +131,8 @@ What that means:
 Current go-forward focus:
 
 - keep the current `1.2.3` trust-and-pilot refresh stable
+- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) for the
+  current readable quality table before shaping beta work
 - use the multi-machine bootstrap and release-authority workflow
 - keep folding in the other machine's Galaxians-style second-game work and
   stronger harness/reference analysis

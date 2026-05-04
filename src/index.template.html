@@ -302,6 +302,8 @@
         <p id="gamePreviewSummary">Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.</p>
         <p id="gamePreviewDetail">Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.</p>
         <div id="gamePreviewHighlights"></div>
+        <div id="gamePreviewMission" hidden></div>
+        <div id="gamePreviewScoreTable" hidden></div>
         <div id="gamePreviewMilestones"></div>
       </div>
     </div>
@@ -438,11 +440,22 @@
       </div>
     </div>
   </div>
+  <div id="platformMessagePanel" aria-live="polite" hidden>
+    <div id="platformMessagePanelHead">
+      <div>
+        <span id="platformMessagePanelTitle">PLATFORM MESSAGES</span>
+        <span id="platformMessagePanelSub">BUILD AND GAME NOTICES</span>
+      </div>
+      <button type="button" id="platformMessagePanelClose" aria-label="Close platform messages">×</button>
+    </div>
+    <div id="platformMessagePanelStatus">Current platform channel and build notices.</div>
+    <div id="platformMessagePanelList"></div>
+  </div>
 </div>
-<div id="buildStamp" role="button" tabindex="0" aria-label="Open project guide and release notes" title="Open project guide and release notes">
+<div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
-    <span id="buildStampChannel">Lane {{BUILD_CHANNEL}}</span>
-    <span id="buildStampVersion">Version {{BUILD_VERSION}}</span>
+    <span id="buildStampChannel">{{BUILD_CHANNEL}}</span>
+    <span id="buildStampVersion">{{BUILD_VERSION}}</span>
     <span id="buildStampRelease">{{BUILD_RELEASE_ET}}</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>

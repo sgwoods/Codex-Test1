@@ -61,6 +61,8 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
   'enemy_wrap_or_return',
   'player_lost',
   'game_over',
+  'wave_clear',
+  'stage_advance',
   'wave_reset'
  ])
 });

@@ -1,0 +1,43 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "quick-peek-source-fidelity-adjustment",
+  "version": "0.2-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "playtest-feedback-applied-not-frame-extracted",
+  "trigger": "A quick local gameplay review found the Guardians preview timing, pace, and sprite look were not close enough to Galaxian for the first reference quick peek.",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "contactSheets": [
+      "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg",
+      "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/frames/contact-sheet-reference-window.jpg",
+      "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg"
+    ],
+    "notes": "This pass was guided by committed contact sheets and runtime gates, not by automated sprite extraction or frame-level motion tracking."
+  },
+  "changes": {
+    "visuals": [
+      "Reduced gameplay sprite scale.",
+      "Moved flagship, escort, scout, and player pixel rows toward smaller classic Galaxian proportions.",
+      "Darkened the board backdrop and reduced decorative guide-line prominence."
+    ],
+    "timingAndPacing": [
+      "Moved first scout dive from 2.2s to 3.1s.",
+      "Moved first flagship/escort dive from 6.4s to 8.45s.",
+      "Reduced formation drift amplitude and frequency.",
+      "Slowed dive vertical speed, acceleration, sway frequency, side drift, enemy shots, and shot density.",
+      "Tightened the rack layout to better match the compact upper-field reference footprint."
+    ]
+  },
+  "remainingGaps": [
+    "Sprites are still hand-authored approximations rather than extracted reference sprites.",
+    "Dive paths are still runtime-shaped approximations rather than frame-tracked motion paths.",
+    "Attract mission text and score advance table are still not implemented as runtime systems.",
+    "Audio remains internally shaped rather than matched against Galaxian waveform features."
+  ],
+  "requiredHarnesses": [
+    "npm run harness:check:galaxy-guardians-formation-entry",
+    "npm run harness:check:galaxy-guardians-movement-pacing",
+    "npm run harness:check:galaxy-guardians-visual-readability",
+    "npm run harness:check:galaxy-guardians-reference-conformance"
+  ]
+}

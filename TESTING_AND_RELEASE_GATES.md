@@ -139,6 +139,7 @@ should be thought of in three buckets:
 
 Typical examples:
 - `node tools/harness/check-popup-surfaces.js`
+- `node tools/harness/check-framed-popout-bounds.js`
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-front-door-copy-surface.js`
 - `node tools/harness/check-platinum-pack-boot.js`
@@ -231,6 +232,31 @@ Required:
 Typical application containment checks:
 - `node tools/harness/check-platinum-pack-boot.js`
 - `node tools/harness/check-new-game-reset.js`
+- `node tools/harness/check-galaxy-guardians-0-1-candidate.js` when the changed
+  surface touches the `Galaxy Guardians` dev-preview identity, runtime events,
+  cue IDs, scoring, or preview/public boundary.
+- `node tools/harness/check-galaxy-guardians-audio-character.js` when the
+  changed surface touches Guardians cue definitions, audio theme identity,
+  runtime cue IDs, or role-specific hit/loss/game-over sound behavior.
+- `node tools/harness/check-galaxy-guardians-reference-conformance.js` when the
+  changed surface touches Guardians reference evidence, 0.1 metric scoring,
+  promoted Galaxian event coverage, or beta-preview readiness language.
+- `node tools/harness/check-galaxy-guardians-formation-entry.js` when the changed
+  surface touches Guardians stage start, rack-entry, rack-settle, or first-dive
+  timing.
+
+Quality/conformance reporting:
+
+- `npm run harness:score:quality-conformance` is the current Aurora numeric
+  roll-up gate.
+- The readable current table and next-gap interpretation live in
+  [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md).
+- When this roll-up changes materially, update
+  [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md) and keep the
+  generated artifact under `reference-artifacts/analyses/quality-conformance/`.
+- `node tools/harness/check-galaxy-guardians-visual-readability.js` when the
+  changed surface touches Guardians sprites, role palettes, preview rendering,
+  hit feedback, or gameplay-scale visual identity.
 
 ### Profile C: Boundary change
 
@@ -343,6 +369,7 @@ Typical current examples include:
 - `node tools/harness/check-platinum-pack-boot.js`
 - `node tools/harness/check-game-picker-shell.js`
 - `node tools/harness/check-popup-surfaces.js`
+- `node tools/harness/check-framed-popout-bounds.js`
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-persona-repeatability.js`
 - `node tools/harness/check-front-door-copy-surface.js`

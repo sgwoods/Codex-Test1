@@ -552,6 +552,12 @@ window.__galagaHarness__={
  },
  leaderboardPanelState(){
   const cells=Array.from(document.querySelectorAll('#leaderboardPanelTable .scoreCell')).map(node=>node.textContent||'');
+  const metadata=Array.from(document.querySelectorAll('#leaderboardPanelTable .scoreCell.meta')).map(node=>({
+   text:node.textContent||'',
+   build:node.dataset?.build||'',
+   date:node.dataset?.date||'',
+   title:node.getAttribute('title')||''
+  }));
   const activeView=document.querySelector('#leaderboardViewButtons button.active')?.dataset?.view||'';
   const latestBanner=document.getElementById('leaderboardLatestLocalBanner')?.textContent||'';
   return{
@@ -562,6 +568,7 @@ window.__galagaHarness__={
    sub:leaderboardPanelSub?.textContent||'',
    empty:document.getElementById('leaderboardPanelEmpty')?.textContent||'',
    cells,
+   metadata,
    activeView,
    latestBanner,
    scrollTop:document.getElementById('leaderboardPanel')?.scrollTop||0

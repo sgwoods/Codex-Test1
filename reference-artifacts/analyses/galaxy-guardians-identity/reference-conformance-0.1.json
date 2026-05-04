@@ -1,0 +1,180 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "reference-conformance-metric-set",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "dev-preview-reference-conformance-model-not-public-release-score",
+  "purpose": "Define the first Galaxy Guardians reference conformance metric set by scoring the playable preview against the current Galaxian source profile, promoted semantic event log, game-owned runtime gates, and Platinum boundary rules.",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "candidateGate": "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
+    "audioIsolatedCueCandidates": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "audioLabeledCueTargets": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+    "spriteComponentTargets": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
+    "spriteGridTargets": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
+    "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets, waveform windows, component sprite crop targets, and labeled cue candidates rather than final human-approved frame-level/acoustic extraction."
+  },
+  "summary": {
+    "referenceConformanceScore10": 7.6,
+    "playtestWeightedConformanceScore10": 6.6,
+    "referenceMaturityScore10": 7.0,
+    "implementationGateCoverageScore10": 9.5,
+    "publicReleaseReadinessScore10": 3.9,
+    "releaseRead": "Useful development preview evidence, but still not compelling enough for a beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, and playtest-weighted conformance review now exist as dev-preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
+  },
+  "metricScale": {
+    "0": "No implemented or measured relationship to the reference.",
+    "5": "Coarse semantic relationship exists, but evidence is mostly manual/internal.",
+    "8": "Runtime behavior is gated and traceable to committed reference evidence.",
+    "10": "Frame-level or acoustic reference measurement is automated and release-ready."
+  },
+  "categories": [
+    {
+      "id": "reference-source-coverage",
+      "label": "Reference source coverage",
+      "weight": 8,
+      "score10": 9.6,
+      "evidenceLevel": "source-manifested-contact-sheets-waveforms-frame-proxies-object-track-proxies-runtime-comparison-component-sprite-and-labeled-cue-analysis",
+      "currentRead": "Three Galaxian sources are committed with manifests, contact sheets, waveform windows, spectrograms, frame indexes, frame-motion proxies, a CPU-only connected-component/object-track proxy pass, runtime-vs-reference movement comparison, sprite crop extraction, component sprite target extraction, audio reference comparison, mixed-source cue-candidate analysis, and labeled waveform/spectrogram cue previews.",
+      "remainingGap": "Promote component sprite/cue proxies into human-approved sprite recognition and clean isolated acoustic cue matching."
+    },
+    {
+      "id": "promoted-semantic-event-coverage",
+      "label": "Promoted semantic event coverage",
+      "weight": 14,
+      "score10": 7.8,
+      "evidenceLevel": "promoted-event-log-plus-runtime-events-and-visible-surfaces",
+      "currentRead": "The preview covers the core runtime promoted events: formation entry, rack complete, dives, flagship/escort pressure, single-shot fire, shot resolution, wrap/return, plus an owned score table, stage-advance progression contract, and visible wait-mode/preview-modal attract surfaces.",
+      "remainingGap": "Score-table and attract-screen evidence still needs frame-level extraction and pixel-layout comparison against the reference footage."
+    },
+    {
+      "id": "formation-rack-timing",
+      "label": "Formation and rack timing",
+      "weight": 12,
+      "score10": 6.2,
+      "evidenceLevel": "promoted-events-runtime-bands-frame-motion-proxy-and-object-track-proxy",
+      "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated. The latest runtime pass shortened entry and first-dive timing after playtest review found the preview too slow.",
+      "remainingGap": "The object proxy is still connected-component tracking rather than final sprite recognition, so runtime timing needs browser-reviewed feel scoring beside instrumented reference tracks."
+    },
+    {
+      "id": "movement-pressure",
+      "label": "Movement and pressure model",
+      "weight": 14,
+      "score10": 6.2,
+      "evidenceLevel": "reference-window-inspired-runtime-contract-plus-runtime-vs-reference-track-comparison-plus-stage-rank-pressure-gate",
+      "currentRead": "Scout dives, flagship dives, escort joins, enemy shots, and wrap/return pressure are implemented and gated. The latest pass increases dive speed, dive acceleration, enemy-shot pressure, wrap cadence, and bounded stage-rank pressure so stages three and five are measurably more urgent than stage one.",
+      "remainingGap": "The preview still feels proxy-tuned rather than Galaxian-tight; browser review and sprite-recognized dive-path targets are needed before beta-facing release."
+    },
+    {
+      "id": "single-shot-threat-scoring",
+      "label": "Single-shot threat and scoring",
+      "weight": 12,
+      "score10": 7.5,
+      "evidenceLevel": "game-owned-runtime-and-score-contract",
+      "currentRead": "Single-shot firing, enemy shots, role-specific score values, player loss, game-over behavior, owned score table, wave clear, and stage advance are implemented without Aurora capture/dual-fighter semantics.",
+      "remainingGap": "The score table remains a dev-preview contract rather than a frame-extracted Galaxian table, and persistent public scoring is still intentionally blocked."
+    },
+    {
+      "id": "visual-alien-identity",
+      "label": "Visual alien identity",
+      "weight": 10,
+      "score10": 6.8,
+      "evidenceLevel": "game-owned-visual-catalog-readability-gate-frame-crops-object-proxies-sprite-extraction-grid-targets-and-component-targets",
+      "currentRead": "Flagship, escort, scout, and player interceptor visuals are now tuned from component crop targets, remain separate from Aurora, and are gated for role readability. The promoted component target artifact covers all four sprite roles with checked crop previews and silhouette target similarity.",
+      "remainingGap": "Sprites now read much closer to the reference family, but the component crops still need human visual review and browser play review before beta-facing confidence."
+    },
+    {
+      "id": "audio-reference-character",
+      "label": "Audio character and reference fit",
+      "weight": 10,
+      "score10": 5.5,
+      "evidenceLevel": "cue-shape-contract-plus-measured-square-noise-targets-plus-waveform-spectrogram-pcm-proxy-plus-labeled-cue-window-previews",
+      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, the cue target bands now use labeled Galaxian cue-window candidates, the runtime cues were retuned toward higher-register square/noise character, and the refreshed audio comparison scores 8.3/10 overall with acoustic proxy fit at 5.3/10.",
+      "remainingGap": "This remains the weakest Guardians area: the labels need human listening, dirty mixed-gameplay windows need replacement, and live playback still needs a subjective browser/audio review."
+    },
+    {
+      "id": "platform-and-game-boundaries",
+      "label": "Platform and game boundaries",
+      "weight": 10,
+      "score10": 10.0,
+      "evidenceLevel": "pack-adapter-renderer-boundary-gates",
+      "currentRead": "The preview remains dev-only, does not inherit Aurora capture/dual/challenge/scoring mechanics, and uses Platinum only through shared capability boundaries.",
+      "remainingGap": "Keep this mandatory as Guardians gets more real gameplay."
+    },
+    {
+      "id": "evidence-durability",
+      "label": "Evidence durability",
+      "weight": 10,
+      "score10": 9.7,
+      "evidenceLevel": "source-controlled-artifacts-and-harnesses",
+      "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, frame-motion artifact, object-track artifact, runtime-reference movement artifact, stage-rank pressure artifact, sprite extraction artifact, sprite-grid and component-target artifacts, audio comparison artifact, cue-candidate/labeled-cue artifacts, and 0.1 gates are committed and rerunnable.",
+      "remainingGap": "Add human-reviewed component sprite/cue approval and browser-reviewed beta-candidate evidence."
+    }
+  ],
+  "requiredInputArtifacts": [
+    "reference-artifacts/analyses/galaxy-guardians-identity/attract-score-surface-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/audio-cue-targets-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/frame-motion-conformance-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/quick-peek-source-fidelity-0.2.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json",
+    "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+  ],
+  "requiredHarnesses": [
+    "npm run harness:check:galaxian-reference-profile",
+    "npm run harness:check:galaxy-guardians-0-1-candidate",
+    "npm run harness:check:galaxy-guardians-reference-conformance",
+    "npm run harness:check:galaxy-guardians-attract-score-surface",
+    "npm run harness:analyze:galaxy-guardians-frame-motion-conformance",
+    "npm run harness:check:galaxy-guardians-frame-motion-conformance",
+    "npm run harness:analyze:galaxy-guardians-object-track-conformance",
+    "npm run harness:check:galaxy-guardians-object-track-conformance",
+    "npm run harness:analyze:galaxy-guardians-runtime-reference-movement",
+    "npm run harness:check:galaxy-guardians-runtime-reference-movement",
+    "npm run harness:analyze:galaxy-guardians-sprite-reference-extraction",
+    "npm run harness:check:galaxy-guardians-sprite-reference-extraction",
+    "npm run harness:analyze:galaxy-guardians-sprite-grid-targets",
+    "npm run harness:check:galaxy-guardians-sprite-grid-targets",
+    "npm run harness:promote:galaxy-guardians-sprite-component-targets",
+    "npm run harness:check:galaxy-guardians-sprite-component-targets",
+    "npm run harness:analyze:galaxy-guardians-audio-reference-comparison",
+    "npm run harness:check:galaxy-guardians-audio-reference-comparison",
+    "npm run harness:analyze:galaxy-guardians-isolated-cue-candidates",
+    "npm run harness:check:galaxy-guardians-isolated-cue-candidates",
+    "npm run harness:promote:galaxy-guardians-audio-cue-labels",
+    "npm run harness:check:galaxy-guardians-audio-cue-labels",
+    "npm run harness:check:galaxy-guardians-audio-cue-targets",
+    "npm run harness:check:galaxy-guardians-audio-character",
+    "npm run harness:check:galaxy-guardians-formation-entry",
+    "npm run harness:check:galaxy-guardians-movement-pacing",
+    "npm run harness:check:galaxy-guardians-stage-rank-pressure",
+    "npm run harness:check:galaxy-guardians-playtest-conformance-review",
+    "npm run harness:check:galaxy-guardians-score-progression",
+    "npm run harness:check:galaxy-guardians-threat-scoring",
+    "npm run harness:check:galaxy-guardians-visual-readability"
+  ],
+  "nextMetricPromotions": [
+    "human-reviewed sprite recognition from promoted Galaxian component crops",
+    "Guardians attract and score-table pixel-layout comparison",
+    "human-listened cleanup of labeled cue candidates into clean measured cue targets",
+    "browser-reviewed beta-candidate pass for the tuned movement slice"
+  ]
+}

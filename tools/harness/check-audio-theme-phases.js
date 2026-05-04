@@ -56,21 +56,21 @@ async function main(){
   }
 
   const demoEnterCue = result.demoEnter.find(entry => entry.cue === 'attractEnter' && entry.phase === 'demo');
-  if(!demoEnterCue || demoEnterCue.audioTheme !== 'aurora-crown'){
-    fail('demo entry did not record the Aurora demo attract cue', result);
+  if(!demoEnterCue || demoEnterCue.audioTheme !== 'galaga-reference-assets'){
+    fail('demo entry did not resolve through the dev-default Galaga reference asset theme', result);
   }
 
   const demoPulseCue = result.demoPulse.find(entry => entry.cue === 'attractPulse' && entry.phase === 'demo');
-  if(!demoPulseCue || demoPulseCue.audioTheme !== 'classic-arcade'){
-    fail('demo pulse did not resolve through the stage-1 classic arcade demo audio theme', result);
+  if(!demoPulseCue || demoPulseCue.audioTheme !== 'galaga-reference-assets'){
+    fail('demo pulse did not resolve through the dev-default Galaga reference asset theme', result);
   }
 
-  if(result.gameplayStart.audioCue?.cue !== 'gameStart' || result.gameplayStart.audioCue?.audioTheme !== 'aurora-surge'){
-    fail('stage 8 gameplay start did not use the Aurora surge game-start cue', result);
+  if(result.gameplayStart.audioCue?.cue !== 'gameStart' || result.gameplayStart.audioCue?.audioTheme !== 'galaga-reference-assets'){
+    fail('stage 8 gameplay start did not use the dev-default Galaga reference asset cue', result);
   }
 
-  if(result.challengeTransition.audioCue?.cue !== 'challengeTransition' || result.challengeTransition.audioCue?.phase !== 'challenge' || result.challengeTransition.audioCue?.audioTheme !== 'aurora-surge'){
-    fail('challenge transition did not resolve through the stage challenge audio theme', result);
+  if(result.challengeTransition.audioCue?.cue !== 'challengeTransition' || result.challengeTransition.audioCue?.phase !== 'challenge' || result.challengeTransition.audioCue?.audioTheme !== 'galaga-reference-assets'){
+    fail('challenge transition did not resolve through the dev-default Galaga reference asset theme', result);
   }
 
   console.log(JSON.stringify({

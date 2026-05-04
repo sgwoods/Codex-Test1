@@ -1,0 +1,286 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "sprite-component-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "component-crop-targets-not-final-pixel-copy",
+  "generatedBy": "tools/harness/promote-galaxy-guardians-sprite-component-targets.js",
+  "sourceEvidence": {
+    "spriteReferenceExtraction": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
+    "note": "These are tighter component-crop targets derived from source review crops. They are scaffolds for pack-owned sprite authoring, not exact sprite copies."
+  },
+  "targets": [
+    {
+      "id": "signal-flagship",
+      "role": "flagship",
+      "sourceCropFamily": "rack-upper-aliens",
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/rack-upper-aliens.jpg",
+      "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-flagship.png",
+      "sourceId": "matt-hawkins-arcade-intro",
+      "windowId": "opening-rack-entry",
+      "cols": 9,
+      "rows": 8,
+      "componentBox": {
+        "x": 236,
+        "y": 67,
+        "w": 48,
+        "h": 39,
+        "pixels": 988,
+        "aspect": 1.231,
+        "fill": 0.528,
+        "tokens": {
+          "C": 636,
+          "A": 36,
+          "W": 316
+        }
+      },
+      "extractedRows": [
+        "...C.C...",
+        "...CCC...",
+        "C.CCCCC.C",
+        "CCCCCACCC",
+        "..CCCCC..",
+        ".WWCCCWW.",
+        "WWWCCCWWW",
+        "WW..C..WW"
+      ],
+      "runtimeRows": [
+        "...A.A...",
+        "...CCC...",
+        "C.WCCCW.C",
+        "CCCECECCC",
+        "..CCCCC..",
+        ".WWCCCWW.",
+        "WWWCCCWWW",
+        "WW..C..WW"
+      ],
+      "extractedMetrics": {
+        "width": 9,
+        "height": 8,
+        "filledPixels": 47,
+        "fillRatio": 0.653,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 9,
+        "height": 8,
+        "filledPixels": 47,
+        "fillRatio": 0.653,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1,
+      "reviewStatus": "component-crop-target-needs-human-sprite-review"
+    },
+    {
+      "id": "signal-escort",
+      "role": "escort",
+      "sourceCropFamily": "lower-field-divers",
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/sprite-crops/lower-field-divers.jpg",
+      "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-escort.png",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "lower-field-dive-curves",
+      "cols": 7,
+      "rows": 6,
+      "componentBox": {
+        "x": 279,
+        "y": 36,
+        "w": 39,
+        "h": 32,
+        "pixels": 494,
+        "aspect": 1.219,
+        "fill": 0.396,
+        "tokens": {
+          "W": 295,
+          "C": 199
+        }
+      },
+      "extractedRows": [
+        "..WCC..",
+        "WWCCCCC",
+        "WCWWWWW",
+        "..WWW..",
+        "..WWW..",
+        "...C..."
+      ],
+      "runtimeRows": [
+        "..ACC..",
+        "WWCCCCC",
+        "WCWEWWW",
+        "..WWW..",
+        "..WWW..",
+        "...A..."
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 24,
+        "fillRatio": 0.571,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 24,
+        "fillRatio": 0.571,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1,
+      "reviewStatus": "component-crop-target-needs-human-sprite-review"
+    },
+    {
+      "id": "signal-scout",
+      "role": "scout",
+      "sourceCropFamily": "rack-upper-aliens",
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/sprite-crops/rack-upper-aliens.jpg",
+      "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-scout.png",
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "complete-rack-reference",
+      "cols": 7,
+      "rows": 6,
+      "componentBox": {
+        "x": 277,
+        "y": 0,
+        "w": 40,
+        "h": 46,
+        "pixels": 829,
+        "aspect": 0.87,
+        "fill": 0.451,
+        "tokens": {
+          "C": 288,
+          "A": 503,
+          "W": 30,
+          "E": 8
+        }
+      },
+      "extractedRows": [
+        ".CCCCC.",
+        "ACCCACA",
+        "AAAAAAA",
+        ".WAAAA.",
+        "...A...",
+        "...A..."
+      ],
+      "runtimeRows": [
+        ".CCCCC.",
+        "ACCCACA",
+        "AAAAAAA",
+        ".WAAAW.",
+        "...C...",
+        "...A..."
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 26,
+        "fillRatio": 0.619,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 26,
+        "fillRatio": 0.619,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1,
+      "reviewStatus": "component-crop-target-needs-human-sprite-review"
+    },
+    {
+      "id": "player-interceptor",
+      "role": "player",
+      "sourceCropFamily": "player-and-shot",
+      "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/sprite-crops/player-and-shot.jpg",
+      "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/player-interceptor.png",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "cols": 7,
+      "rows": 7,
+      "componentBox": {
+        "x": 176,
+        "y": 226,
+        "w": 72,
+        "h": 69,
+        "pixels": 3363,
+        "aspect": 1.043,
+        "fill": 0.677,
+        "tokens": {
+          "C": 787,
+          "E": 72,
+          "W": 2500,
+          "A": 4
+        }
+      },
+      "extractedRows": [
+        "CWWCCCC",
+        "WWWCCWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWCCWWW",
+        "WW...WW"
+      ],
+      "runtimeRows": [
+        "CWWCWWC",
+        "WWWCCWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWCCWWW",
+        "WW...WW"
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 7,
+        "filledPixels": 46,
+        "fillRatio": 0.939,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 7,
+        "filledPixels": 46,
+        "fillRatio": 0.939,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1,
+      "reviewStatus": "component-crop-target-needs-human-sprite-review"
+    }
+  ],
+  "summary": {
+    "targetCount": 4,
+    "averageSilhouetteSimilarity": 1,
+    "weakestTarget": "signal-flagship"
+  },
+  "nextAuthoringStep": "Human-review the component crop PNGs, then tune pack-owned sprite rows against the accepted silhouette targets."
+}

@@ -88,6 +88,29 @@ function buildBoardMessageHtml({title='',accent='',score='',lines=[]}={}){
  return body.join('');
 }
 
+function buildStartMissionHtml(mission=null){
+ if(!mission)return '';
+ const lines=Array.isArray(mission.lines)?mission.lines:[];
+ const title=mission.title||'MISSION';
+ return `<span class="startMissionWrap"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
+}
+
+function buildStartScoreAdvanceHtml(rows=[]){
+ const scoreRows=Array.isArray(rows)?rows.filter(row=>row&&row.role!=='player'):[];
+ if(!scoreRows.length)return '';
+ const value=valueIn=>{
+  const number=+valueIn;
+  return Number.isFinite(number)?String(number):'-';
+ };
+ return `<span class="startScoreAdvance"><span class="scoreHead scoreLabel">Alien</span><span class="scoreHead">Rack</span><span class="scoreHead">Dive</span><span class="scoreHead">+1</span><span class="scoreHead">+2</span>${scoreRows.map(row=>[
+  `<span class="scoreLabel">${escapeMessageHtml(row.label||row.role||'Signal')}</span>`,
+  `<span>${escapeMessageHtml(value(row.formationPoints))}</span>`,
+  `<span>${escapeMessageHtml(value(row.divePoints))}</span>`,
+  `<span class="${row.oneEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.oneEscortDivePoints))}</span>`,
+  `<span class="${row.twoEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.twoEscortDivePoints))}</span>`
+ ].join('')).join('')}</span>`;
+}
+
 function gameplayMessageState(){
  if(paused){
   return {mode:'board',html:buildBoardMessageHtml({title:'PAUSED',lines:['Press P to resume']}),topRatio:.48};
@@ -220,6 +243,7 @@ function syncCabinetShellLayout({
   statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
   statusPanels.classList.toggle('framedOverlay',framedOverlayOpen);
   statusPanels.style.setProperty('--overlay-max-height','none');
+  statusPanels.style.height='';
   if(waitScoreOverlay){
    const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
    statusPanels.style.width=`${panelW}px`;
@@ -228,11 +252,12 @@ function syncCabinetShellLayout({
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
    statusPanels.style.bottom='auto';
   }else if(framedOverlayOpen){
-   const panelW=Math.min(Math.max(620,Math.floor(viewW*.9)),940);
-   const top=Math.floor(oy+12);
-   const maxHeight=Math.max(180,Math.floor(viewH-24));
+   const panelW=Math.max(180,Math.floor(viewW));
+   const top=Math.floor(oy);
+   const maxHeight=Math.max(180,Math.floor(viewH));
    statusPanels.style.width=`${panelW}px`;
-   statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
+   statusPanels.style.height=`${maxHeight}px`;
+   statusPanels.style.left=`${Math.floor(ox)}px`;
    statusPanels.style.right='auto';
    statusPanels.style.top=`${top}px`;
    statusPanels.style.bottom='auto';
@@ -246,11 +271,11 @@ function syncCabinetShellLayout({
   }
  }
  if(renderSettingsPanel){
-  const settingsW=Math.min(Math.max(560,Math.floor(viewW*.9)),940);
-  const top=Math.floor(oy+12);
-  const maxHeight=Math.max(240,Math.min(Math.floor(viewH-24),760));
+  const settingsW=Math.max(220,Math.floor(viewW));
+  const top=Math.floor(oy);
+  const maxHeight=Math.max(240,Math.floor(viewH));
   renderSettingsPanel.style.width=`${settingsW}px`;
-  renderSettingsPanel.style.left=`${Math.floor(ox+viewW/2-settingsW/2)}px`;
+  renderSettingsPanel.style.left=`${Math.floor(ox)}px`;
   renderSettingsPanel.style.right='auto';
   renderSettingsPanel.style.top=`${top}px`;
   renderSettingsPanel.style.maxHeight=`${maxHeight}px`;
@@ -306,13 +331,15 @@ function syncCabinetShellLayout({
   renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
-  const stampW=Math.min(560,Math.max(420,Math.floor(viewW*.46)));
-  const compactStampH=62;
+  const stampW=Math.floor(viewW);
+  const compactStampH=42;
   const stampH=buildStamp.offsetHeight||compactStampH;
-  const anchorTop=shellY+shellH-Math.max(44,Math.floor(shellPadB*.5));
+  const targetTop=Math.floor(oy+viewH+Math.max(6,Math.floor(scale*8)));
+  const maxTop=Math.floor(shellY+shellH-stampH-8);
   buildStamp.style.width=`${stampW}px`;
-  buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
-  buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
+  buildStamp.style.left=`${Math.floor(ox)}px`;
+  buildStamp.style.right='auto';
+  buildStamp.style.top=`${Math.max(8,Math.min(targetTop,maxTop))}px`;
   buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
  }
 }
@@ -341,7 +368,9 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
   else{
-   const frontDoor=typeof currentGamePackFrontDoor==='function'
+   const frontDoor=typeof currentWaitModeFrontDoor==='function'
+    ? currentWaitModeFrontDoor()
+    : typeof currentGamePackFrontDoor==='function'
     ? currentGamePackFrontDoor()
    : {
       title:'PLATINUM',
@@ -360,7 +389,9 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
    const quoteBlock=frontDoor.quotePlaceholder?.text
     ? `<span class="startQuoteWrap"><span class="startQuoteKicker">${frontDoor.quotePlaceholder.kicker||'SIGNAL'}</span><span class="startQuoteText">${frontDoor.quotePlaceholder.text}</span>${frontDoor.quotePlaceholder.attribution?`<span class="startQuoteAttribution">${frontDoor.quotePlaceholder.attribution}</span>`:''}</span>`
     : '';
-   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}${noticeHint}`;
+   const missionBlock=buildStartMissionHtml(frontDoor.attractMission);
+   const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable);
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}${missionBlock}${scoreAdvanceBlock}<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}${noticeHint}`;
   }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;

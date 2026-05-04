@@ -1,0 +1,222 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "sprite-grid-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "reference-crop-grid-targets-not-final-pixel-copy",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-sprite-grid-targets.js",
+  "sourceEvidence": {
+    "spriteReferenceExtraction": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
+    "spriteComponentTargets": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
+    "note": "These grids are downsampled from broad crop regions or promoted component targets and are target scaffolding, not copyright-sensitive exact sprite copies."
+  },
+  "targets": [
+    {
+      "id": "signal-flagship",
+      "role": "flagship",
+      "sourceCropFamily": "rack-upper-aliens",
+      "cols": 9,
+      "rows": 8,
+      "minSimilarity": 0.38,
+      "sourceCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-flagship.png",
+      "sourceMode": "component-target-override",
+      "extractedRows": [
+        "...C.C...",
+        "...CCC...",
+        "C.CCCCC.C",
+        "CCCCCACCC",
+        "..CCCCC..",
+        ".WWCCCWW.",
+        "WWWCCCWWW",
+        "WW..C..WW"
+      ],
+      "runtimeRows": [
+        "...A.A...",
+        "...CCC...",
+        "C.WCCCW.C",
+        "CCCECECCC",
+        "..CCCCC..",
+        ".WWCCCWW.",
+        "WWWCCCWWW",
+        "WW..C..WW"
+      ],
+      "extractedMetrics": {
+        "width": 9,
+        "height": 8,
+        "filledPixels": 47,
+        "fillRatio": 0.653,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 9,
+        "height": 8,
+        "filledPixels": 47,
+        "fillRatio": 0.653,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1
+    },
+    {
+      "id": "signal-escort",
+      "role": "escort",
+      "sourceCropFamily": "lower-field-divers",
+      "cols": 7,
+      "rows": 6,
+      "minSimilarity": 0.34,
+      "sourceCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-escort.png",
+      "sourceMode": "component-target-override",
+      "extractedRows": [
+        "..WCC..",
+        "WWCCCCC",
+        "WCWWWWW",
+        "..WWW..",
+        "..WWW..",
+        "...C..."
+      ],
+      "runtimeRows": [
+        "..ACC..",
+        "WWCCCCC",
+        "WCWEWWW",
+        "..WWW..",
+        "..WWW..",
+        "...A..."
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 24,
+        "fillRatio": 0.571,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 24,
+        "fillRatio": 0.571,
+        "tokenChannels": [
+          "A",
+          "C",
+          "E",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1
+    },
+    {
+      "id": "signal-scout",
+      "role": "scout",
+      "sourceCropFamily": "rack-upper-aliens",
+      "cols": 7,
+      "rows": 6,
+      "minSimilarity": 0.34,
+      "sourceCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-scout.png",
+      "sourceMode": "component-target-override",
+      "extractedRows": [
+        ".CCCCC.",
+        "ACCCACA",
+        "AAAAAAA",
+        ".WAAAA.",
+        "...A...",
+        "...A..."
+      ],
+      "runtimeRows": [
+        ".CCCCC.",
+        "ACCCACA",
+        "AAAAAAA",
+        ".WAAAW.",
+        "...C...",
+        "...A..."
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 26,
+        "fillRatio": 0.619,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 6,
+        "filledPixels": 26,
+        "fillRatio": 0.619,
+        "tokenChannels": [
+          "A",
+          "C",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1
+    },
+    {
+      "id": "player-interceptor",
+      "role": "player",
+      "sourceCropFamily": "player-and-shot",
+      "cols": 7,
+      "rows": 7,
+      "minSimilarity": 0.34,
+      "sourceCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/player-interceptor.png",
+      "sourceMode": "component-target-override",
+      "extractedRows": [
+        "CWWCCCC",
+        "WWWCCWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWCCWWW",
+        "WW...WW"
+      ],
+      "runtimeRows": [
+        "CWWCWWC",
+        "WWWCCWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWWCWWW",
+        "WWCCWWW",
+        "WW...WW"
+      ],
+      "extractedMetrics": {
+        "width": 7,
+        "height": 7,
+        "filledPixels": 46,
+        "fillRatio": 0.939,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "runtimeMetrics": {
+        "width": 7,
+        "height": 7,
+        "filledPixels": 46,
+        "fillRatio": 0.939,
+        "tokenChannels": [
+          "C",
+          "W"
+        ]
+      },
+      "silhouetteSimilarity": 1
+    }
+  ],
+  "summary": {
+    "targetCount": 4,
+    "averageSilhouetteSimilarity": 1,
+    "weakestTarget": "signal-flagship"
+  },
+  "nextAuthoringStep": "Use tighter manually reviewed component crops to replace these broad downsampled grids, then tune pack-owned sprites against the checked target metrics."
+}

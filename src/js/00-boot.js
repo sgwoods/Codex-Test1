@@ -26,6 +26,8 @@ const gamePreviewImage=document.getElementById('gamePreviewImage');
 const gamePreviewSummary=document.getElementById('gamePreviewSummary');
 const gamePreviewDetail=document.getElementById('gamePreviewDetail');
 const gamePreviewHighlights=document.getElementById('gamePreviewHighlights');
+const gamePreviewMission=document.getElementById('gamePreviewMission');
+const gamePreviewScoreTable=document.getElementById('gamePreviewScoreTable');
 const gamePreviewMilestones=document.getElementById('gamePreviewMilestones');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
@@ -50,6 +52,10 @@ const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
+const platformMessagePanel=document.getElementById('platformMessagePanel');
+const platformMessagePanelClose=document.getElementById('platformMessagePanelClose');
+const platformMessagePanelStatus=document.getElementById('platformMessagePanelStatus');
+const platformMessagePanelList=document.getElementById('platformMessagePanelList');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
@@ -1548,6 +1554,16 @@ function syncPlatformSplashUi(){
   platformSplashBtn.setAttribute('aria-expanded',platformSplashOpen?'true':'false');
  }
 }
+function escapeGamePreviewHtml(value=''){
+ return String(value)
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;');
+}
+function previewScoreValue(value){
+ return Number.isFinite(+value)?String(+value):'';
+}
 function syncGamePreviewUi(){
  if(!gamePreviewModal)return;
  gamePreviewModal.classList.toggle('open',gamePreviewOpen);
@@ -1571,6 +1587,34 @@ function syncGamePreviewUi(){
   const highlights=Array.isArray(preview.highlights)?preview.highlights:[];
   gamePreviewHighlights.innerHTML=highlights.map(item=>`<span>${String(item).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}</span>`).join('');
   gamePreviewHighlights.hidden=!highlights.length;
+ }
+ if(gamePreviewMission){
+  const mission=preview.attractMission||null;
+  const lines=Array.isArray(mission?.lines)?mission.lines:[];
+  gamePreviewMission.innerHTML=mission
+   ? `<span class="gamePreviewMissionTitle">${escapeGamePreviewHtml(mission.title||'MISSION')}</span>${lines.map(line=>`<span class="gamePreviewMissionLine">${escapeGamePreviewHtml(line)}</span>`).join('')}`
+   : '';
+  gamePreviewMission.hidden=!mission;
+ }
+ if(gamePreviewScoreTable){
+  const rows=Array.isArray(preview.scoreAdvanceTable)?preview.scoreAdvanceTable.filter(row=>row&&row.role!=='player'):[];
+  gamePreviewScoreTable.innerHTML=rows.length
+   ? [
+    '<span class="gamePreviewScoreHead">Alien</span>',
+    '<span class="gamePreviewScoreHead gamePreviewScoreCell">Rack</span>',
+    '<span class="gamePreviewScoreHead gamePreviewScoreCell">Dive</span>',
+    '<span class="gamePreviewScoreHead gamePreviewScoreCell gamePreviewScoreEscort">+1</span>',
+    '<span class="gamePreviewScoreHead gamePreviewScoreCell">+2</span>',
+    ...rows.flatMap(row=>[
+     `<span class="gamePreviewScoreLabel">${escapeGamePreviewHtml(row.label||row.role||'Signal')}</span>`,
+     `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.formationPoints))}</span>`,
+     `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.divePoints))}</span>`,
+     `<span class="gamePreviewScoreCell gamePreviewScoreEscort">${escapeGamePreviewHtml(previewScoreValue(row.oneEscortDivePoints)||'-')}</span>`,
+     `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.twoEscortDivePoints)||'-')}</span>`
+    ])
+   ].join('')
+   : '';
+  gamePreviewScoreTable.hidden=!rows.length;
  }
  if(gamePreviewMilestones){
   const milestones=Array.isArray(preview.milestones)?preview.milestones:[];
@@ -1919,15 +1963,16 @@ feedbackForm.addEventListener('submit',submitFeedback);
 if(buildStamp){
  buildStamp.addEventListener('click',e=>{
   if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
-  openProjectGuide();
+  togglePlatformMessagePanel();
  });
  buildStamp.addEventListener('keydown',e=>{
   if(e.key!=='Enter'&&e.key!==' ')return;
   if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
   e.preventDefault();
-  openProjectGuide();
+  togglePlatformMessagePanel();
  });
 }
+if(platformMessagePanelClose)platformMessagePanelClose.addEventListener('click',closePlatformMessagePanel);
 if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',e=>{
  e.stopPropagation();
  location.reload();
@@ -2076,3 +2121,5 @@ window.openPlatformSplash=openPlatformSplash;
 window.closePlatformSplash=closePlatformSplash;
 window.openGamePreview=openGamePreview;
 window.closeGamePreview=closeGamePreview;
+window.openPlatformMessagePanel=openPlatformMessagePanel;
+window.closePlatformMessagePanel=closePlatformMessagePanel;

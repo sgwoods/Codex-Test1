@@ -1,0 +1,3151 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "frame-motion-conformance-baseline",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "frame-derived-reference-proxy-not-final-tracking",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-frame-motion-conformance.js",
+  "sourceEvidence": {
+    "frameReferenceSummary": "reference-artifacts/analyses/galaxian-frame-reference/frame-reference-summary.json",
+    "selectedWindowCount": 5,
+    "selectedWindows": [
+      "matt-hawkins-arcade-intro/opening-rack-entry",
+      "nenriki-15-wave-session/complete-rack-reference",
+      "arcades-lounge-level-5/lower-field-dive-curves",
+      "nenriki-15-wave-session/flagship-escort-pressure",
+      "nenriki-15-wave-session/wrap-return-pressure"
+    ],
+    "notes": "This is a CPU-only proxy pass over extracted Galaxian reference frames. It measures brightness and frame-difference motion regions from committed frame windows; it is not yet sprite tracking or optical flow."
+  },
+  "frameProxyScores": {
+    "referenceSourceCoverage": 9.2,
+    "formationRackTiming": 7.5,
+    "movementPressure": 7.1,
+    "visualAlienIdentity": 6.4,
+    "audioReferenceCharacter": 4.8,
+    "evidenceDurability": 9
+  },
+  "runtimeTuningRead": {
+    "currentRuntimeStillValid": true,
+    "immediateConstantChangeRecommended": false,
+    "reason": "The frame proxy confirms the right evidence windows and lower-field motion families, but it does not yet identify a single safer runtime constant change than the existing gated timing bands.",
+    "nextRuntimePromotion": "Use this artifact to add target bands for rack-entry duration, lower-field dive path curvature, and flagship/escort wrap timing after object-level tracking is added."
+  },
+  "windows": [
+    {
+      "id": "opening-rack-entry",
+      "sourceId": "matt-hawkins-arcade-intro",
+      "windowKey": "matt-hawkins-arcade-intro/opening-rack-entry",
+      "label": "Opening rack entry",
+      "startSeconds": 40,
+      "durationSeconds": 18,
+      "sampledFps": 6,
+      "decodedFrameCount": 108,
+      "frameSize": {
+        "width": 360,
+        "height": 463
+      },
+      "evidence": {
+        "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/frame-index.json",
+        "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/contact-sheet.jpg",
+        "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/motion-difference-sheet.jpg",
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/audio-spectrogram.png"
+      },
+      "motion": {
+        "activeMotionFrameCount": 107,
+        "activeMotionShare": 0.991,
+        "firstActiveMotionAtSeconds": 40.167,
+        "peakMotionAtSeconds": 49.167,
+        "peakMotionRatio": 0.05238,
+        "firstLowerMotionAtSeconds": 40.167,
+        "peakLowerMotionAtSeconds": 49,
+        "peakLowerMotionRatio": 0.01442,
+        "lowerMotionShareOfActive": 1,
+        "unionMotionBox": {
+          "x": 0,
+          "y": 0.002,
+          "w": 1,
+          "h": 0.996
+        }
+      },
+      "brightness": {
+        "medianBrightRatio": 0.0332,
+        "medianUpperBrightRatio": 0.02516,
+        "medianLowerBrightRatio": 0.00727,
+        "upperBrightStdev": 0.00155,
+        "upperCenterYStdev": 0.00417,
+        "unionBrightBox": {
+          "x": 0.003,
+          "y": 0.002,
+          "w": 0.994,
+          "h": 0.994
+        }
+      },
+      "sampledFrames": [
+        {
+          "index": 0,
+          "tSourceSeconds": 40,
+          "brightRatio": 0.0358,
+          "upperBrightRatio": 0.0284,
+          "lowerBrightRatio": 0.00741,
+          "brightCenter": {
+            "x": 0.497,
+            "y": 0.369
+          },
+          "upperCenter": {
+            "x": 0.528,
+            "y": 0.239
+          },
+          "lowerCenter": {
+            "x": 0.378,
+            "y": 0.866
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0.004,
+            "w": 0.981,
+            "h": 0.991
+          },
+          "upperBox": {
+            "x": 0.006,
+            "y": 0.004,
+            "w": 0.969,
+            "h": 0.46
+          },
+          "lowerBox": {
+            "x": 0.022,
+            "y": 0.462,
+            "w": 0.964,
+            "h": 0.533
+          },
+          "motionRatio": 0,
+          "lowerMotionRatio": 0,
+          "motionCenter": null,
+          "lowerMotionCenter": null,
+          "meanMotionMagnitude": 0
+        },
+        {
+          "index": 9,
+          "tSourceSeconds": 41.5,
+          "brightRatio": 0.03425,
+          "upperBrightRatio": 0.027,
+          "lowerBrightRatio": 0.00727,
+          "brightCenter": {
+            "x": 0.438,
+            "y": 0.368
+          },
+          "upperCenter": {
+            "x": 0.457,
+            "y": 0.232
+          },
+          "lowerCenter": {
+            "x": 0.365,
+            "y": 0.874
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0.004,
+            "w": 0.978,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.006,
+            "y": 0.004,
+            "w": 0.978,
+            "h": 0.464
+          },
+          "lowerBox": {
+            "x": 0.022,
+            "y": 0.464,
+            "w": 0.936,
+            "h": 0.527
+          },
+          "motionRatio": 0.03266,
+          "lowerMotionRatio": 0.00623,
+          "motionCenter": {
+            "x": 0.454,
+            "y": 0.389
+          },
+          "lowerMotionCenter": {
+            "x": 0.49,
+            "y": 0.809
+          },
+          "meanMotionMagnitude": 0.01232
+        },
+        {
+          "index": 18,
+          "tSourceSeconds": 43,
+          "brightRatio": 0.03393,
+          "upperBrightRatio": 0.02666,
+          "lowerBrightRatio": 0.00727,
+          "brightCenter": {
+            "x": 0.373,
+            "y": 0.37
+          },
+          "upperCenter": {
+            "x": 0.384,
+            "y": 0.233
+          },
+          "lowerCenter": {
+            "x": 0.334,
+            "y": 0.872
+          },
+          "brightBox": {
+            "x": 0.028,
+            "y": 0.004,
+            "w": 0.956,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.028,
+            "y": 0.004,
+            "w": 0.956,
+            "h": 0.467
+          },
+          "lowerBox": {
+            "x": 0.078,
+            "y": 0.469,
+            "w": 0.836,
+            "h": 0.523
+          },
+          "motionRatio": 0.03821,
+          "lowerMotionRatio": 0.00382,
+          "motionCenter": {
+            "x": 0.396,
+            "y": 0.332
+          },
+          "lowerMotionCenter": {
+            "x": 0.495,
+            "y": 0.735
+          },
+          "meanMotionMagnitude": 0.01384
+        },
+        {
+          "index": 27,
+          "tSourceSeconds": 44.5,
+          "brightRatio": 0.03387,
+          "upperBrightRatio": 0.0266,
+          "lowerBrightRatio": 0.00729,
+          "brightCenter": {
+            "x": 0.381,
+            "y": 0.372
+          },
+          "upperCenter": {
+            "x": 0.404,
+            "y": 0.235
+          },
+          "lowerCenter": {
+            "x": 0.299,
+            "y": 0.873
+          },
+          "brightBox": {
+            "x": 0.017,
+            "y": 0.004,
+            "w": 0.964,
+            "h": 0.991
+          },
+          "upperBox": {
+            "x": 0.017,
+            "y": 0.004,
+            "w": 0.769,
+            "h": 0.46
+          },
+          "lowerBox": {
+            "x": 0.036,
+            "y": 0.46,
+            "w": 0.944,
+            "h": 0.536
+          },
+          "motionRatio": 0.0204,
+          "lowerMotionRatio": 0.0035,
+          "motionCenter": {
+            "x": 0.552,
+            "y": 0.37
+          },
+          "lowerMotionCenter": {
+            "x": 0.515,
+            "y": 0.702
+          },
+          "meanMotionMagnitude": 0.00863
+        },
+        {
+          "index": 36,
+          "tSourceSeconds": 46,
+          "brightRatio": 0.03375,
+          "upperBrightRatio": 0.02586,
+          "lowerBrightRatio": 0.00805,
+          "brightCenter": {
+            "x": 0.424,
+            "y": 0.381
+          },
+          "upperCenter": {
+            "x": 0.467,
+            "y": 0.232
+          },
+          "lowerCenter": {
+            "x": 0.291,
+            "y": 0.862
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0.004,
+            "w": 0.967,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.075,
+            "y": 0.004,
+            "w": 0.753,
+            "h": 0.467
+          },
+          "lowerBox": {
+            "x": 0.006,
+            "y": 0.46,
+            "w": 0.967,
+            "h": 0.531
+          },
+          "motionRatio": 0.05003,
+          "lowerMotionRatio": 0.00943,
+          "motionCenter": {
+            "x": 0.456,
+            "y": 0.389
+          },
+          "lowerMotionCenter": {
+            "x": 0.347,
+            "y": 0.808
+          },
+          "meanMotionMagnitude": 0.01833
+        },
+        {
+          "index": 45,
+          "tSourceSeconds": 47.5,
+          "brightRatio": 0.034,
+          "upperBrightRatio": 0.02609,
+          "lowerBrightRatio": 0.00792,
+          "brightCenter": {
+            "x": 0.474,
+            "y": 0.379
+          },
+          "upperCenter": {
+            "x": 0.537,
+            "y": 0.229
+          },
+          "lowerCenter": {
+            "x": 0.267,
+            "y": 0.872
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0.004,
+            "w": 0.95,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.058,
+            "y": 0.004,
+            "w": 0.856,
+            "h": 0.464
+          },
+          "lowerBox": {
+            "x": 0.006,
+            "y": 0.467,
+            "w": 0.95,
+            "h": 0.525
+          },
+          "motionRatio": 0.04538,
+          "lowerMotionRatio": 0.00908,
+          "motionCenter": {
+            "x": 0.518,
+            "y": 0.38
+          },
+          "lowerMotionCenter": {
+            "x": 0.262,
+            "y": 0.824
+          },
+          "meanMotionMagnitude": 0.01775
+        },
+        {
+          "index": 54,
+          "tSourceSeconds": 49,
+          "brightRatio": 0.03333,
+          "upperBrightRatio": 0.02429,
+          "lowerBrightRatio": 0.00904,
+          "brightCenter": {
+            "x": 0.489,
+            "y": 0.387
+          },
+          "upperCenter": {
+            "x": 0.564,
+            "y": 0.231
+          },
+          "lowerCenter": {
+            "x": 0.286,
+            "y": 0.806
+          },
+          "brightBox": {
+            "x": 0.031,
+            "y": 0.004,
+            "w": 0.961,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.031,
+            "y": 0.004,
+            "w": 0.947,
+            "h": 0.467
+          },
+          "lowerBox": {
+            "x": 0.078,
+            "y": 0.469,
+            "w": 0.914,
+            "h": 0.523
+          },
+          "motionRatio": 0.04616,
+          "lowerMotionRatio": 0.01442,
+          "motionCenter": {
+            "x": 0.527,
+            "y": 0.412
+          },
+          "lowerMotionCenter": {
+            "x": 0.316,
+            "y": 0.685
+          },
+          "meanMotionMagnitude": 0.01743
+        },
+        {
+          "index": 63,
+          "tSourceSeconds": 50.5,
+          "brightRatio": 0.03429,
+          "upperBrightRatio": 0.02432,
+          "lowerBrightRatio": 0.00997,
+          "brightCenter": {
+            "x": 0.427,
+            "y": 0.418
+          },
+          "upperCenter": {
+            "x": 0.491,
+            "y": 0.232
+          },
+          "lowerCenter": {
+            "x": 0.27,
+            "y": 0.872
+          },
+          "brightBox": {
+            "x": 0.003,
+            "y": 0.004,
+            "w": 0.967,
+            "h": 0.989
+          },
+          "upperBox": {
+            "x": 0.031,
+            "y": 0.004,
+            "w": 0.939,
+            "h": 0.436
+          },
+          "lowerBox": {
+            "x": 0.003,
+            "y": 0.473,
+            "w": 0.908,
+            "h": 0.521
+          },
+          "motionRatio": 0.05115,
+          "lowerMotionRatio": 0.01357,
+          "motionCenter": {
+            "x": 0.445,
+            "y": 0.444
+          },
+          "lowerMotionCenter": {
+            "x": 0.26,
+            "y": 0.855
+          },
+          "meanMotionMagnitude": 0.0183
+        },
+        {
+          "index": 72,
+          "tSourceSeconds": 52,
+          "brightRatio": 0.02895,
+          "upperBrightRatio": 0.02315,
+          "lowerBrightRatio": 0.00581,
+          "brightCenter": {
+            "x": 0.412,
+            "y": 0.351
+          },
+          "upperCenter": {
+            "x": 0.435,
+            "y": 0.227
+          },
+          "lowerCenter": {
+            "x": 0.321,
+            "y": 0.846
+          },
+          "brightBox": {
+            "x": 0.053,
+            "y": 0.004,
+            "w": 0.897,
+            "h": 0.991
+          },
+          "upperBox": {
+            "x": 0.053,
+            "y": 0.004,
+            "w": 0.897,
+            "h": 0.451
+          },
+          "lowerBox": {
+            "x": 0.078,
+            "y": 0.503,
+            "w": 0.842,
+            "h": 0.492
+          },
+          "motionRatio": 0.04073,
+          "lowerMotionRatio": 0.00517,
+          "motionCenter": {
+            "x": 0.442,
+            "y": 0.343
+          },
+          "lowerMotionCenter": {
+            "x": 0.416,
+            "y": 0.687
+          },
+          "meanMotionMagnitude": 0.01417
+        },
+        {
+          "index": 81,
+          "tSourceSeconds": 53.5,
+          "brightRatio": 0.02952,
+          "upperBrightRatio": 0.02421,
+          "lowerBrightRatio": 0.00532,
+          "brightCenter": {
+            "x": 0.389,
+            "y": 0.339
+          },
+          "upperCenter": {
+            "x": 0.402,
+            "y": 0.224
+          },
+          "lowerCenter": {
+            "x": 0.327,
+            "y": 0.864
+          },
+          "brightBox": {
+            "x": 0.039,
+            "y": 0.004,
+            "w": 0.911,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.039,
+            "y": 0.004,
+            "w": 0.911,
+            "h": 0.464
+          },
+          "lowerBox": {
+            "x": 0.061,
+            "y": 0.467,
+            "w": 0.872,
+            "h": 0.525
+          },
+          "motionRatio": 0.03401,
+          "lowerMotionRatio": 0.00326,
+          "motionCenter": {
+            "x": 0.413,
+            "y": 0.325
+          },
+          "lowerMotionCenter": {
+            "x": 0.522,
+            "y": 0.729
+          },
+          "meanMotionMagnitude": 0.01251
+        },
+        {
+          "index": 90,
+          "tSourceSeconds": 55,
+          "brightRatio": 0.02927,
+          "upperBrightRatio": 0.02393,
+          "lowerBrightRatio": 0.00533,
+          "brightCenter": {
+            "x": 0.448,
+            "y": 0.345
+          },
+          "upperCenter": {
+            "x": 0.475,
+            "y": 0.229
+          },
+          "lowerCenter": {
+            "x": 0.326,
+            "y": 0.867
+          },
+          "brightBox": {
+            "x": 0.058,
+            "y": 0.004,
+            "w": 0.928,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.058,
+            "y": 0.004,
+            "w": 0.928,
+            "h": 0.419
+          },
+          "lowerBox": {
+            "x": 0.078,
+            "y": 0.579,
+            "w": 0.9,
+            "h": 0.413
+          },
+          "motionRatio": 0.03467,
+          "lowerMotionRatio": 0.0035,
+          "motionCenter": {
+            "x": 0.508,
+            "y": 0.336
+          },
+          "lowerMotionCenter": {
+            "x": 0.525,
+            "y": 0.746
+          },
+          "meanMotionMagnitude": 0.01263
+        },
+        {
+          "index": 99,
+          "tSourceSeconds": 56.5,
+          "brightRatio": 0.02925,
+          "upperBrightRatio": 0.02388,
+          "lowerBrightRatio": 0.00538,
+          "brightCenter": {
+            "x": 0.51,
+            "y": 0.345
+          },
+          "upperCenter": {
+            "x": 0.552,
+            "y": 0.228
+          },
+          "lowerCenter": {
+            "x": 0.327,
+            "y": 0.865
+          },
+          "brightBox": {
+            "x": 0.014,
+            "y": 0.004,
+            "w": 0.964,
+            "h": 0.987
+          },
+          "upperBox": {
+            "x": 0.058,
+            "y": 0.004,
+            "w": 0.906,
+            "h": 0.46
+          },
+          "lowerBox": {
+            "x": 0.014,
+            "y": 0.462,
+            "w": 0.964,
+            "h": 0.529
+          },
+          "motionRatio": 0.03957,
+          "lowerMotionRatio": 0.00334,
+          "motionCenter": {
+            "x": 0.576,
+            "y": 0.33
+          },
+          "lowerMotionCenter": {
+            "x": 0.512,
+            "y": 0.726
+          },
+          "meanMotionMagnitude": 0.01369
+        }
+      ]
+    },
+    {
+      "id": "complete-rack-reference",
+      "sourceId": "nenriki-15-wave-session",
+      "windowKey": "nenriki-15-wave-session/complete-rack-reference",
+      "label": "Complete rack reference",
+      "startSeconds": 60,
+      "durationSeconds": 20,
+      "sampledFps": 5,
+      "decodedFrameCount": 100,
+      "frameSize": {
+        "width": 360,
+        "height": 411
+      },
+      "evidence": {
+        "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/frame-index.json",
+        "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/contact-sheet.jpg",
+        "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/motion-difference-sheet.jpg",
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/audio-spectrogram.png"
+      },
+      "motion": {
+        "activeMotionFrameCount": 99,
+        "activeMotionShare": 0.99,
+        "firstActiveMotionAtSeconds": 60.2,
+        "peakMotionAtSeconds": 60.2,
+        "peakMotionRatio": 0.05136,
+        "firstLowerMotionAtSeconds": 60.2,
+        "peakLowerMotionAtSeconds": 64.8,
+        "peakLowerMotionRatio": 0.01314,
+        "lowerMotionShareOfActive": 0.848,
+        "unionMotionBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "brightness": {
+        "medianBrightRatio": 0.02026,
+        "medianUpperBrightRatio": 0.01621,
+        "medianLowerBrightRatio": 0.00416,
+        "upperBrightStdev": 0.00266,
+        "upperCenterYStdev": 0.01729,
+        "unionBrightBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "sampledFrames": [
+        {
+          "index": 0,
+          "tSourceSeconds": 60,
+          "brightRatio": 0.02582,
+          "upperBrightRatio": 0.02186,
+          "lowerBrightRatio": 0.00396,
+          "brightCenter": {
+            "x": 0.387,
+            "y": 0.339
+          },
+          "upperCenter": {
+            "x": 0.388,
+            "y": 0.232
+          },
+          "lowerCenter": {
+            "x": 0.378,
+            "y": 0.933
+          },
+          "brightBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.978,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.972,
+            "h": 0.47
+          },
+          "lowerBox": {
+            "x": 0.022,
+            "y": 0.467,
+            "w": 0.956,
+            "h": 0.533
+          },
+          "motionRatio": 0,
+          "lowerMotionRatio": 0,
+          "motionCenter": null,
+          "lowerMotionCenter": null,
+          "meanMotionMagnitude": 0
+        },
+        {
+          "index": 8,
+          "tSourceSeconds": 61.6,
+          "brightRatio": 0.02593,
+          "upperBrightRatio": 0.02147,
+          "lowerBrightRatio": 0.00447,
+          "brightCenter": {
+            "x": 0.467,
+            "y": 0.341
+          },
+          "upperCenter": {
+            "x": 0.463,
+            "y": 0.229
+          },
+          "lowerCenter": {
+            "x": 0.485,
+            "y": 0.885
+          },
+          "brightBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.969,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.969,
+            "h": 0.465
+          },
+          "lowerBox": {
+            "x": 0.039,
+            "y": 0.462,
+            "w": 0.947,
+            "h": 0.538
+          },
+          "motionRatio": 0.0441,
+          "lowerMotionRatio": 0.00375,
+          "motionCenter": {
+            "x": 0.477,
+            "y": 0.306
+          },
+          "lowerMotionCenter": {
+            "x": 0.634,
+            "y": 0.643
+          },
+          "meanMotionMagnitude": 0.01555
+        },
+        {
+          "index": 16,
+          "tSourceSeconds": 63.2,
+          "brightRatio": 0.02492,
+          "upperBrightRatio": 0.02067,
+          "lowerBrightRatio": 0.00426,
+          "brightCenter": {
+            "x": 0.495,
+            "y": 0.339
+          },
+          "upperCenter": {
+            "x": 0.507,
+            "y": 0.225
+          },
+          "lowerCenter": {
+            "x": 0.438,
+            "y": 0.895
+          },
+          "brightBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.972,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.906,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.028,
+            "y": 0.47,
+            "w": 0.972,
+            "h": 0.53
+          },
+          "motionRatio": 0.04872,
+          "lowerMotionRatio": 0.00681,
+          "motionCenter": {
+            "x": 0.521,
+            "y": 0.335
+          },
+          "lowerMotionCenter": {
+            "x": 0.603,
+            "y": 0.771
+          },
+          "meanMotionMagnitude": 0.01751
+        },
+        {
+          "index": 24,
+          "tSourceSeconds": 64.8,
+          "brightRatio": 0.02408,
+          "upperBrightRatio": 0.01782,
+          "lowerBrightRatio": 0.00627,
+          "brightCenter": {
+            "x": 0.516,
+            "y": 0.366
+          },
+          "upperCenter": {
+            "x": 0.53,
+            "y": 0.216
+          },
+          "lowerCenter": {
+            "x": 0.477,
+            "y": 0.791
+          },
+          "brightBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.969,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.044,
+            "y": 0,
+            "w": 0.942,
+            "h": 0.465
+          },
+          "lowerBox": {
+            "x": 0.028,
+            "y": 0.462,
+            "w": 0.969,
+            "h": 0.538
+          },
+          "motionRatio": 0.04463,
+          "lowerMotionRatio": 0.01314,
+          "motionCenter": {
+            "x": 0.577,
+            "y": 0.406
+          },
+          "lowerMotionCenter": {
+            "x": 0.555,
+            "y": 0.691
+          },
+          "meanMotionMagnitude": 0.01626
+        },
+        {
+          "index": 32,
+          "tSourceSeconds": 66.4,
+          "brightRatio": 0.02245,
+          "upperBrightRatio": 0.01778,
+          "lowerBrightRatio": 0.00467,
+          "brightCenter": {
+            "x": 0.448,
+            "y": 0.351
+          },
+          "upperCenter": {
+            "x": 0.463,
+            "y": 0.215
+          },
+          "lowerCenter": {
+            "x": 0.393,
+            "y": 0.869
+          },
+          "brightBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.947,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.947,
+            "h": 0.462
+          },
+          "lowerBox": {
+            "x": 0.028,
+            "y": 0.477,
+            "w": 0.922,
+            "h": 0.523
+          },
+          "motionRatio": 0.03857,
+          "lowerMotionRatio": 0.00743,
+          "motionCenter": {
+            "x": 0.496,
+            "y": 0.391
+          },
+          "lowerMotionCenter": {
+            "x": 0.493,
+            "y": 0.809
+          },
+          "meanMotionMagnitude": 0.01364
+        },
+        {
+          "index": 40,
+          "tSourceSeconds": 68,
+          "brightRatio": 0.02131,
+          "upperBrightRatio": 0.0174,
+          "lowerBrightRatio": 0.00391,
+          "brightCenter": {
+            "x": 0.397,
+            "y": 0.343
+          },
+          "upperCenter": {
+            "x": 0.387,
+            "y": 0.213
+          },
+          "lowerCenter": {
+            "x": 0.442,
+            "y": 0.922
+          },
+          "brightBox": {
+            "x": 0.036,
+            "y": 0,
+            "w": 0.961,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.042,
+            "y": 0,
+            "w": 0.872,
+            "h": 0.445
+          },
+          "lowerBox": {
+            "x": 0.036,
+            "y": 0.491,
+            "w": 0.961,
+            "h": 0.509
+          },
+          "motionRatio": 0.03225,
+          "lowerMotionRatio": 0.00232,
+          "motionCenter": {
+            "x": 0.392,
+            "y": 0.319
+          },
+          "lowerMotionCenter": {
+            "x": 0.521,
+            "y": 0.705
+          },
+          "meanMotionMagnitude": 0.01099
+        },
+        {
+          "index": 48,
+          "tSourceSeconds": 69.6,
+          "brightRatio": 0.02074,
+          "upperBrightRatio": 0.0168,
+          "lowerBrightRatio": 0.00393,
+          "brightCenter": {
+            "x": 0.414,
+            "y": 0.341
+          },
+          "upperCenter": {
+            "x": 0.406,
+            "y": 0.205
+          },
+          "lowerCenter": {
+            "x": 0.453,
+            "y": 0.92
+          },
+          "brightBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.986,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.039,
+            "y": 0,
+            "w": 0.956,
+            "h": 0.44
+          },
+          "lowerBox": {
+            "x": 0.008,
+            "y": 0.477,
+            "w": 0.947,
+            "h": 0.523
+          },
+          "motionRatio": 0.03483,
+          "lowerMotionRatio": 0.00615,
+          "motionCenter": {
+            "x": 0.438,
+            "y": 0.383
+          },
+          "lowerMotionCenter": {
+            "x": 0.6,
+            "y": 0.846
+          },
+          "meanMotionMagnitude": 0.01237
+        },
+        {
+          "index": 56,
+          "tSourceSeconds": 71.2,
+          "brightRatio": 0.019,
+          "upperBrightRatio": 0.01498,
+          "lowerBrightRatio": 0.00402,
+          "brightCenter": {
+            "x": 0.484,
+            "y": 0.367
+          },
+          "upperCenter": {
+            "x": 0.479,
+            "y": 0.217
+          },
+          "lowerCenter": {
+            "x": 0.502,
+            "y": 0.927
+          },
+          "brightBox": {
+            "x": 0.042,
+            "y": 0,
+            "w": 0.936,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.042,
+            "y": 0,
+            "w": 0.936,
+            "h": 0.453
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.491,
+            "w": 0.9,
+            "h": 0.509
+          },
+          "motionRatio": 0.03503,
+          "lowerMotionRatio": 0.00664,
+          "motionCenter": {
+            "x": 0.509,
+            "y": 0.376
+          },
+          "lowerMotionCenter": {
+            "x": 0.68,
+            "y": 0.855
+          },
+          "meanMotionMagnitude": 0.0131
+        },
+        {
+          "index": 64,
+          "tSourceSeconds": 72.8,
+          "brightRatio": 0.01867,
+          "upperBrightRatio": 0.01471,
+          "lowerBrightRatio": 0.00396,
+          "brightCenter": {
+            "x": 0.538,
+            "y": 0.366
+          },
+          "upperCenter": {
+            "x": 0.539,
+            "y": 0.214
+          },
+          "lowerCenter": {
+            "x": 0.531,
+            "y": 0.934
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0,
+            "w": 0.994,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.014,
+            "y": 0,
+            "w": 0.986,
+            "h": 0.46
+          },
+          "lowerBox": {
+            "x": 0.006,
+            "y": 0.491,
+            "w": 0.989,
+            "h": 0.509
+          },
+          "motionRatio": 0.03598,
+          "lowerMotionRatio": 0.00485,
+          "motionCenter": {
+            "x": 0.568,
+            "y": 0.341
+          },
+          "lowerMotionCenter": {
+            "x": 0.723,
+            "y": 0.849
+          },
+          "meanMotionMagnitude": 0.01313
+        },
+        {
+          "index": 72,
+          "tSourceSeconds": 74.4,
+          "brightRatio": 0.01844,
+          "upperBrightRatio": 0.01392,
+          "lowerBrightRatio": 0.00452,
+          "brightCenter": {
+            "x": 0.489,
+            "y": 0.379
+          },
+          "upperCenter": {
+            "x": 0.503,
+            "y": 0.211
+          },
+          "lowerCenter": {
+            "x": 0.446,
+            "y": 0.898
+          },
+          "brightBox": {
+            "x": 0.039,
+            "y": 0,
+            "w": 0.942,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.128,
+            "y": 0,
+            "w": 0.853,
+            "h": 0.455
+          },
+          "lowerBox": {
+            "x": 0.039,
+            "y": 0.472,
+            "w": 0.922,
+            "h": 0.528
+          },
+          "motionRatio": 0.03687,
+          "lowerMotionRatio": 0.00866,
+          "motionCenter": {
+            "x": 0.518,
+            "y": 0.395
+          },
+          "lowerMotionCenter": {
+            "x": 0.562,
+            "y": 0.811
+          },
+          "meanMotionMagnitude": 0.01392
+        },
+        {
+          "index": 80,
+          "tSourceSeconds": 76,
+          "brightRatio": 0.01795,
+          "upperBrightRatio": 0.01346,
+          "lowerBrightRatio": 0.00451,
+          "brightCenter": {
+            "x": 0.419,
+            "y": 0.376
+          },
+          "upperCenter": {
+            "x": 0.438,
+            "y": 0.196
+          },
+          "lowerCenter": {
+            "x": 0.363,
+            "y": 0.912
+          },
+          "brightBox": {
+            "x": 0.014,
+            "y": 0,
+            "w": 0.986,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.017,
+            "y": 0,
+            "w": 0.933,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.014,
+            "y": 0.47,
+            "w": 0.986,
+            "h": 0.53
+          },
+          "motionRatio": 0.03375,
+          "lowerMotionRatio": 0.00618,
+          "motionCenter": {
+            "x": 0.412,
+            "y": 0.345
+          },
+          "lowerMotionCenter": {
+            "x": 0.459,
+            "y": 0.817
+          },
+          "meanMotionMagnitude": 0.0122
+        },
+        {
+          "index": 88,
+          "tSourceSeconds": 77.6,
+          "brightRatio": 0.01755,
+          "upperBrightRatio": 0.01337,
+          "lowerBrightRatio": 0.00418,
+          "brightCenter": {
+            "x": 0.353,
+            "y": 0.377
+          },
+          "upperCenter": {
+            "x": 0.357,
+            "y": 0.206
+          },
+          "lowerCenter": {
+            "x": 0.341,
+            "y": 0.925
+          },
+          "brightBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.972,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.917,
+            "h": 0.467
+          },
+          "lowerBox": {
+            "x": 0.039,
+            "y": 0.465,
+            "w": 0.942,
+            "h": 0.535
+          },
+          "motionRatio": 0.0291,
+          "lowerMotionRatio": 0.00201,
+          "motionCenter": {
+            "x": 0.325,
+            "y": 0.292
+          },
+          "lowerMotionCenter": {
+            "x": 0.539,
+            "y": 0.743
+          },
+          "meanMotionMagnitude": 0.01063
+        }
+      ]
+    },
+    {
+      "id": "lower-field-dive-curves",
+      "sourceId": "arcades-lounge-level-5",
+      "windowKey": "arcades-lounge-level-5/lower-field-dive-curves",
+      "label": "Lower-field dive curves",
+      "startSeconds": 18,
+      "durationSeconds": 40.072,
+      "sampledFps": 6,
+      "decodedFrameCount": 242,
+      "frameSize": {
+        "width": 360,
+        "height": 640
+      },
+      "evidence": {
+        "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/frame-index.json",
+        "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/contact-sheet.jpg",
+        "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/motion-difference-sheet.jpg",
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/audio-spectrogram.png"
+      },
+      "motion": {
+        "activeMotionFrameCount": 203,
+        "activeMotionShare": 0.839,
+        "firstActiveMotionAtSeconds": 18.167,
+        "peakMotionAtSeconds": 24.167,
+        "peakMotionRatio": 0.02063,
+        "firstLowerMotionAtSeconds": 18.167,
+        "peakLowerMotionAtSeconds": 18.167,
+        "peakLowerMotionRatio": 0.00802,
+        "lowerMotionShareOfActive": 0.975,
+        "unionMotionBox": {
+          "x": 0.078,
+          "y": 0.183,
+          "w": 0.844,
+          "h": 0.634
+        }
+      },
+      "brightness": {
+        "medianBrightRatio": 0.00568,
+        "medianUpperBrightRatio": 0.0029,
+        "medianLowerBrightRatio": 0.0027,
+        "upperBrightStdev": 0.0013,
+        "upperCenterYStdev": 0.03521,
+        "unionBrightBox": {
+          "x": 0.089,
+          "y": 0.184,
+          "w": 0.833,
+          "h": 0.633
+        }
+      },
+      "sampledFrames": [
+        {
+          "index": 0,
+          "tSourceSeconds": 18,
+          "brightRatio": 0.00967,
+          "upperBrightRatio": 0.00597,
+          "lowerBrightRatio": 0.00387,
+          "brightCenter": {
+            "x": 0.443,
+            "y": 0.472
+          },
+          "upperCenter": {
+            "x": 0.49,
+            "y": 0.316
+          },
+          "lowerCenter": {
+            "x": 0.385,
+            "y": 0.712
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.747,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.3,
+            "y": 0.184,
+            "w": 0.453,
+            "h": 0.286
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.461,
+            "w": 0.747,
+            "h": 0.355
+          },
+          "motionRatio": 0,
+          "lowerMotionRatio": 0,
+          "motionCenter": null,
+          "lowerMotionCenter": null,
+          "meanMotionMagnitude": 0
+        },
+        {
+          "index": 20,
+          "tSourceSeconds": 21.333,
+          "brightRatio": 0.00906,
+          "upperBrightRatio": 0.00638,
+          "lowerBrightRatio": 0.00268,
+          "brightCenter": {
+            "x": 0.524,
+            "y": 0.444
+          },
+          "upperCenter": {
+            "x": 0.553,
+            "y": 0.301
+          },
+          "lowerCenter": {
+            "x": 0.457,
+            "y": 0.785
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.761,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.178,
+            "y": 0.184,
+            "w": 0.703,
+            "h": 0.225
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.48,
+            "w": 0.747,
+            "h": 0.336
+          },
+          "motionRatio": 0.01454,
+          "lowerMotionRatio": 0.00446,
+          "motionCenter": {
+            "x": 0.533,
+            "y": 0.445
+          },
+          "lowerMotionCenter": {
+            "x": 0.47,
+            "y": 0.692
+          },
+          "meanMotionMagnitude": 0.00544
+        },
+        {
+          "index": 40,
+          "tSourceSeconds": 24.667,
+          "brightRatio": 0.00689,
+          "upperBrightRatio": 0.00373,
+          "lowerBrightRatio": 0.00316,
+          "brightCenter": {
+            "x": 0.528,
+            "y": 0.494
+          },
+          "upperCenter": {
+            "x": 0.536,
+            "y": 0.261
+          },
+          "lowerCenter": {
+            "x": 0.519,
+            "y": 0.768
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.803,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.178,
+            "y": 0.184,
+            "w": 0.664,
+            "h": 0.225
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.5,
+            "w": 0.803,
+            "h": 0.316
+          },
+          "motionRatio": 0.01053,
+          "lowerMotionRatio": 0.00336,
+          "motionCenter": {
+            "x": 0.576,
+            "y": 0.42
+          },
+          "lowerMotionCenter": {
+            "x": 0.529,
+            "y": 0.615
+          },
+          "meanMotionMagnitude": 0.0038
+        },
+        {
+          "index": 60,
+          "tSourceSeconds": 28,
+          "brightRatio": 0.00615,
+          "upperBrightRatio": 0.00323,
+          "lowerBrightRatio": 0.00292,
+          "brightCenter": {
+            "x": 0.461,
+            "y": 0.496
+          },
+          "upperCenter": {
+            "x": 0.506,
+            "y": 0.256
+          },
+          "lowerCenter": {
+            "x": 0.411,
+            "y": 0.763
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.747,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.353,
+            "y": 0.184,
+            "w": 0.319,
+            "h": 0.222
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.486,
+            "w": 0.747,
+            "h": 0.33
+          },
+          "motionRatio": 0.01016,
+          "lowerMotionRatio": 0.00498,
+          "motionCenter": {
+            "x": 0.475,
+            "y": 0.469
+          },
+          "lowerMotionCenter": {
+            "x": 0.502,
+            "y": 0.632
+          },
+          "meanMotionMagnitude": 0.00415
+        },
+        {
+          "index": 80,
+          "tSourceSeconds": 31.333,
+          "brightRatio": 0.0059,
+          "upperBrightRatio": 0.00328,
+          "lowerBrightRatio": 0.00268,
+          "brightCenter": {
+            "x": 0.411,
+            "y": 0.495
+          },
+          "upperCenter": {
+            "x": 0.432,
+            "y": 0.258
+          },
+          "lowerCenter": {
+            "x": 0.383,
+            "y": 0.784
+          },
+          "brightBox": {
+            "x": 0.117,
+            "y": 0.184,
+            "w": 0.75,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.117,
+            "y": 0.184,
+            "w": 0.533,
+            "h": 0.286
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.461,
+            "w": 0.747,
+            "h": 0.355
+          },
+          "motionRatio": 0.009,
+          "lowerMotionRatio": 0.00346,
+          "motionCenter": {
+            "x": 0.39,
+            "y": 0.479
+          },
+          "lowerMotionCenter": {
+            "x": 0.406,
+            "y": 0.709
+          },
+          "meanMotionMagnitude": 0.00349
+        },
+        {
+          "index": 100,
+          "tSourceSeconds": 34.667,
+          "brightRatio": 0.00636,
+          "upperBrightRatio": 0.00336,
+          "lowerBrightRatio": 0.003,
+          "brightCenter": {
+            "x": 0.419,
+            "y": 0.483
+          },
+          "upperCenter": {
+            "x": 0.385,
+            "y": 0.235
+          },
+          "lowerCenter": {
+            "x": 0.457,
+            "y": 0.759
+          },
+          "brightBox": {
+            "x": 0.114,
+            "y": 0.184,
+            "w": 0.753,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.114,
+            "y": 0.184,
+            "w": 0.536,
+            "h": 0.195
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.478,
+            "w": 0.747,
+            "h": 0.338
+          },
+          "motionRatio": 0.00987,
+          "lowerMotionRatio": 0.00393,
+          "motionCenter": {
+            "x": 0.405,
+            "y": 0.435
+          },
+          "lowerMotionCenter": {
+            "x": 0.538,
+            "y": 0.648
+          },
+          "meanMotionMagnitude": 0.00407
+        },
+        {
+          "index": 120,
+          "tSourceSeconds": 38,
+          "brightRatio": 0.00623,
+          "upperBrightRatio": 0.00353,
+          "lowerBrightRatio": 0.0027,
+          "brightCenter": {
+            "x": 0.409,
+            "y": 0.476
+          },
+          "upperCenter": {
+            "x": 0.439,
+            "y": 0.239
+          },
+          "lowerCenter": {
+            "x": 0.37,
+            "y": 0.787
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.747,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.178,
+            "y": 0.184,
+            "w": 0.472,
+            "h": 0.195
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.498,
+            "w": 0.747,
+            "h": 0.317
+          },
+          "motionRatio": 0.0099,
+          "lowerMotionRatio": 0.0046,
+          "motionCenter": {
+            "x": 0.403,
+            "y": 0.483
+          },
+          "lowerMotionCenter": {
+            "x": 0.374,
+            "y": 0.683
+          },
+          "meanMotionMagnitude": 0.00383
+        },
+        {
+          "index": 140,
+          "tSourceSeconds": 41.333,
+          "brightRatio": 0.00505,
+          "upperBrightRatio": 0.00251,
+          "lowerBrightRatio": 0.00254,
+          "brightCenter": {
+            "x": 0.527,
+            "y": 0.515
+          },
+          "upperCenter": {
+            "x": 0.541,
+            "y": 0.236
+          },
+          "lowerCenter": {
+            "x": 0.514,
+            "y": 0.79
+          },
+          "brightBox": {
+            "x": 0.097,
+            "y": 0.184,
+            "w": 0.769,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.353,
+            "y": 0.184,
+            "w": 0.411,
+            "h": 0.195
+          },
+          "lowerBox": {
+            "x": 0.097,
+            "y": 0.605,
+            "w": 0.769,
+            "h": 0.211
+          },
+          "motionRatio": 0.00476,
+          "lowerMotionRatio": 0.00218,
+          "motionCenter": {
+            "x": 0.501,
+            "y": 0.464
+          },
+          "lowerMotionCenter": {
+            "x": 0.607,
+            "y": 0.689
+          },
+          "meanMotionMagnitude": 0.00222
+        },
+        {
+          "index": 160,
+          "tSourceSeconds": 44.667,
+          "brightRatio": 0.00532,
+          "upperBrightRatio": 0.00268,
+          "lowerBrightRatio": 0.00263,
+          "brightCenter": {
+            "x": 0.468,
+            "y": 0.496
+          },
+          "upperCenter": {
+            "x": 0.454,
+            "y": 0.212
+          },
+          "lowerCenter": {
+            "x": 0.482,
+            "y": 0.785
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.747,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.178,
+            "y": 0.184,
+            "w": 0.536,
+            "h": 0.195
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.55,
+            "w": 0.747,
+            "h": 0.266
+          },
+          "motionRatio": 0.00797,
+          "lowerMotionRatio": 0.00318,
+          "motionCenter": {
+            "x": 0.539,
+            "y": 0.457
+          },
+          "lowerMotionCenter": {
+            "x": 0.592,
+            "y": 0.692
+          },
+          "meanMotionMagnitude": 0.00323
+        },
+        {
+          "index": 180,
+          "tSourceSeconds": 48,
+          "brightRatio": 0.00555,
+          "upperBrightRatio": 0.0027,
+          "lowerBrightRatio": 0.00286,
+          "brightCenter": {
+            "x": 0.402,
+            "y": 0.507
+          },
+          "upperCenter": {
+            "x": 0.425,
+            "y": 0.215
+          },
+          "lowerCenter": {
+            "x": 0.381,
+            "y": 0.781
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.747,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.178,
+            "y": 0.184,
+            "w": 0.472,
+            "h": 0.209
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.503,
+            "w": 0.747,
+            "h": 0.313
+          },
+          "motionRatio": 0.00868,
+          "lowerMotionRatio": 0.00609,
+          "motionCenter": {
+            "x": 0.46,
+            "y": 0.552
+          },
+          "lowerMotionCenter": {
+            "x": 0.478,
+            "y": 0.64
+          },
+          "meanMotionMagnitude": 0.0032
+        },
+        {
+          "index": 200,
+          "tSourceSeconds": 51.333,
+          "brightRatio": 0.00463,
+          "upperBrightRatio": 0.00183,
+          "lowerBrightRatio": 0.0028,
+          "brightCenter": {
+            "x": 0.47,
+            "y": 0.547
+          },
+          "upperCenter": {
+            "x": 0.502,
+            "y": 0.192
+          },
+          "lowerCenter": {
+            "x": 0.45,
+            "y": 0.779
+          },
+          "brightBox": {
+            "x": 0.097,
+            "y": 0.184,
+            "w": 0.769,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.353,
+            "y": 0.184,
+            "w": 0.297,
+            "h": 0.016
+          },
+          "lowerBox": {
+            "x": 0.097,
+            "y": 0.483,
+            "w": 0.769,
+            "h": 0.333
+          },
+          "motionRatio": 0.00714,
+          "lowerMotionRatio": 0.00288,
+          "motionCenter": {
+            "x": 0.393,
+            "y": 0.419
+          },
+          "lowerMotionCenter": {
+            "x": 0.38,
+            "y": 0.601
+          },
+          "meanMotionMagnitude": 0.00284
+        },
+        {
+          "index": 220,
+          "tSourceSeconds": 54.667,
+          "brightRatio": 0.00453,
+          "upperBrightRatio": 0.00185,
+          "lowerBrightRatio": 0.00269,
+          "brightCenter": {
+            "x": 0.487,
+            "y": 0.545
+          },
+          "upperCenter": {
+            "x": 0.506,
+            "y": 0.194
+          },
+          "lowerCenter": {
+            "x": 0.476,
+            "y": 0.786
+          },
+          "brightBox": {
+            "x": 0.119,
+            "y": 0.184,
+            "w": 0.753,
+            "h": 0.631
+          },
+          "upperBox": {
+            "x": 0.353,
+            "y": 0.184,
+            "w": 0.519,
+            "h": 0.286
+          },
+          "lowerBox": {
+            "x": 0.119,
+            "y": 0.466,
+            "w": 0.753,
+            "h": 0.35
+          },
+          "motionRatio": 0.00433,
+          "lowerMotionRatio": 0.00289,
+          "motionCenter": {
+            "x": 0.618,
+            "y": 0.553
+          },
+          "lowerMotionCenter": {
+            "x": 0.638,
+            "y": 0.65
+          },
+          "meanMotionMagnitude": 0.00174
+        }
+      ]
+    },
+    {
+      "id": "flagship-escort-pressure",
+      "sourceId": "nenriki-15-wave-session",
+      "windowKey": "nenriki-15-wave-session/flagship-escort-pressure",
+      "label": "Flagship escort pressure",
+      "startSeconds": 90,
+      "durationSeconds": 45,
+      "sampledFps": 6,
+      "decodedFrameCount": 270,
+      "frameSize": {
+        "width": 360,
+        "height": 411
+      },
+      "evidence": {
+        "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/frame-index.json",
+        "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/contact-sheet.jpg",
+        "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/motion-difference-sheet.jpg",
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/audio-spectrogram.png"
+      },
+      "motion": {
+        "activeMotionFrameCount": 251,
+        "activeMotionShare": 0.93,
+        "firstActiveMotionAtSeconds": 90.167,
+        "peakMotionAtSeconds": 118,
+        "peakMotionRatio": 0.05353,
+        "firstLowerMotionAtSeconds": 90.167,
+        "peakLowerMotionAtSeconds": 126.167,
+        "peakLowerMotionRatio": 0.01068,
+        "lowerMotionShareOfActive": 0.737,
+        "unionMotionBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "brightness": {
+        "medianBrightRatio": 0.01269,
+        "medianUpperBrightRatio": 0.00861,
+        "medianLowerBrightRatio": 0.0042,
+        "upperBrightStdev": 0.00665,
+        "upperCenterYStdev": 0.07974,
+        "unionBrightBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "sampledFrames": [
+        {
+          "index": 0,
+          "tSourceSeconds": 90,
+          "brightRatio": 0.01371,
+          "upperBrightRatio": 0.00975,
+          "lowerBrightRatio": 0.00397,
+          "brightCenter": {
+            "x": 0.323,
+            "y": 0.368
+          },
+          "upperCenter": {
+            "x": 0.339,
+            "y": 0.138
+          },
+          "lowerCenter": {
+            "x": 0.285,
+            "y": 0.932
+          },
+          "brightBox": {
+            "x": 0.044,
+            "y": 0,
+            "w": 0.956,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.044,
+            "y": 0,
+            "w": 0.95,
+            "h": 0.44
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.509,
+            "w": 0.95,
+            "h": 0.491
+          },
+          "motionRatio": 0,
+          "lowerMotionRatio": 0,
+          "motionCenter": null,
+          "lowerMotionCenter": null,
+          "meanMotionMagnitude": 0
+        },
+        {
+          "index": 22,
+          "tSourceSeconds": 93.667,
+          "brightRatio": 0.01286,
+          "upperBrightRatio": 0.00873,
+          "lowerBrightRatio": 0.00414,
+          "brightCenter": {
+            "x": 0.392,
+            "y": 0.383
+          },
+          "upperCenter": {
+            "x": 0.375,
+            "y": 0.124
+          },
+          "lowerCenter": {
+            "x": 0.43,
+            "y": 0.93
+          },
+          "brightBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.978,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.969,
+            "h": 0.453
+          },
+          "lowerBox": {
+            "x": 0.022,
+            "y": 0.477,
+            "w": 0.978,
+            "h": 0.523
+          },
+          "motionRatio": 0.01674,
+          "lowerMotionRatio": 0.00554,
+          "motionCenter": {
+            "x": 0.43,
+            "y": 0.434
+          },
+          "lowerMotionCenter": {
+            "x": 0.567,
+            "y": 0.853
+          },
+          "meanMotionMagnitude": 0.00725
+        },
+        {
+          "index": 44,
+          "tSourceSeconds": 97.333,
+          "brightRatio": 0.01062,
+          "upperBrightRatio": 0.00649,
+          "lowerBrightRatio": 0.00414,
+          "brightCenter": {
+            "x": 0.442,
+            "y": 0.426
+          },
+          "upperCenter": {
+            "x": 0.486,
+            "y": 0.11
+          },
+          "lowerCenter": {
+            "x": 0.371,
+            "y": 0.921
+          },
+          "brightBox": {
+            "x": 0,
+            "y": 0,
+            "w": 0.997,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0,
+            "y": 0,
+            "w": 0.986,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.028,
+            "y": 0.47,
+            "w": 0.969,
+            "h": 0.53
+          },
+          "motionRatio": 0.01094,
+          "lowerMotionRatio": 0.00204,
+          "motionCenter": {
+            "x": 0.514,
+            "y": 0.352
+          },
+          "lowerMotionCenter": {
+            "x": 0.546,
+            "y": 0.705
+          },
+          "meanMotionMagnitude": 0.00451
+        },
+        {
+          "index": 66,
+          "tSourceSeconds": 101,
+          "brightRatio": 0.01046,
+          "upperBrightRatio": 0.00641,
+          "lowerBrightRatio": 0.00407,
+          "brightCenter": {
+            "x": 0.446,
+            "y": 0.421
+          },
+          "upperCenter": {
+            "x": 0.447,
+            "y": 0.103
+          },
+          "lowerCenter": {
+            "x": 0.445,
+            "y": 0.922
+          },
+          "brightBox": {
+            "x": 0,
+            "y": 0,
+            "w": 0.986,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.003,
+            "y": 0,
+            "w": 0.975,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0,
+            "y": 0.465,
+            "w": 0.986,
+            "h": 0.535
+          },
+          "motionRatio": 0.01463,
+          "lowerMotionRatio": 0.00604,
+          "motionCenter": {
+            "x": 0.546,
+            "y": 0.492
+          },
+          "lowerMotionCenter": {
+            "x": 0.62,
+            "y": 0.837
+          },
+          "meanMotionMagnitude": 0.00608
+        },
+        {
+          "index": 88,
+          "tSourceSeconds": 104.667,
+          "brightRatio": 0.0104,
+          "upperBrightRatio": 0.00604,
+          "lowerBrightRatio": 0.00437,
+          "brightCenter": {
+            "x": 0.33,
+            "y": 0.429
+          },
+          "upperCenter": {
+            "x": 0.39,
+            "y": 0.093
+          },
+          "lowerCenter": {
+            "x": 0.248,
+            "y": 0.893
+          },
+          "brightBox": {
+            "x": 0,
+            "y": 0,
+            "w": 0.978,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.006,
+            "y": 0,
+            "w": 0.908,
+            "h": 0.418
+          },
+          "lowerBox": {
+            "x": 0,
+            "y": 0.516,
+            "w": 0.978,
+            "h": 0.484
+          },
+          "motionRatio": 0.01198,
+          "lowerMotionRatio": 0.00672,
+          "motionCenter": {
+            "x": 0.273,
+            "y": 0.535
+          },
+          "lowerMotionCenter": {
+            "x": 0.301,
+            "y": 0.752
+          },
+          "meanMotionMagnitude": 0.00545
+        },
+        {
+          "index": 110,
+          "tSourceSeconds": 108.333,
+          "brightRatio": 0.00848,
+          "upperBrightRatio": 0.00468,
+          "lowerBrightRatio": 0.00382,
+          "brightCenter": {
+            "x": 0.392,
+            "y": 0.435
+          },
+          "upperCenter": {
+            "x": 0.487,
+            "y": 0.033
+          },
+          "lowerCenter": {
+            "x": 0.278,
+            "y": 0.927
+          },
+          "brightBox": {
+            "x": 0.003,
+            "y": 0,
+            "w": 0.994,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.031,
+            "y": 0,
+            "w": 0.967,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.003,
+            "y": 0.47,
+            "w": 0.983,
+            "h": 0.53
+          },
+          "motionRatio": 0.00955,
+          "lowerMotionRatio": 0.00624,
+          "motionCenter": {
+            "x": 0.355,
+            "y": 0.619
+          },
+          "lowerMotionCenter": {
+            "x": 0.315,
+            "y": 0.837
+          },
+          "meanMotionMagnitude": 0.00473
+        },
+        {
+          "index": 132,
+          "tSourceSeconds": 112,
+          "brightRatio": 0.00858,
+          "upperBrightRatio": 0.00464,
+          "lowerBrightRatio": 0.00393,
+          "brightCenter": {
+            "x": 0.462,
+            "y": 0.444
+          },
+          "upperCenter": {
+            "x": 0.483,
+            "y": 0.033
+          },
+          "lowerCenter": {
+            "x": 0.437,
+            "y": 0.93
+          },
+          "brightBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.975,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.042,
+            "y": 0,
+            "w": 0.864,
+            "h": 0.457
+          },
+          "lowerBox": {
+            "x": 0.022,
+            "y": 0.472,
+            "w": 0.975,
+            "h": 0.528
+          },
+          "motionRatio": 0.00496,
+          "lowerMotionRatio": 0.0019,
+          "motionCenter": {
+            "x": 0.401,
+            "y": 0.364
+          },
+          "lowerMotionCenter": {
+            "x": 0.513,
+            "y": 0.746
+          },
+          "meanMotionMagnitude": 0.00316
+        },
+        {
+          "index": 154,
+          "tSourceSeconds": 115.667,
+          "brightRatio": 0.02801,
+          "upperBrightRatio": 0.02376,
+          "lowerBrightRatio": 0.00425,
+          "brightCenter": {
+            "x": 0.491,
+            "y": 0.343
+          },
+          "upperCenter": {
+            "x": 0.505,
+            "y": 0.238
+          },
+          "lowerCenter": {
+            "x": 0.414,
+            "y": 0.931
+          },
+          "brightBox": {
+            "x": 0,
+            "y": 0,
+            "w": 0.956,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.947,
+            "h": 0.418
+          },
+          "lowerBox": {
+            "x": 0,
+            "y": 0.479,
+            "w": 0.95,
+            "h": 0.521
+          },
+          "motionRatio": 0.03898,
+          "lowerMotionRatio": 0.00201,
+          "motionCenter": {
+            "x": 0.485,
+            "y": 0.302
+          },
+          "lowerMotionCenter": {
+            "x": 0.508,
+            "y": 0.742
+          },
+          "meanMotionMagnitude": 0.01382
+        },
+        {
+          "index": 176,
+          "tSourceSeconds": 119.333,
+          "brightRatio": 0.02664,
+          "upperBrightRatio": 0.02236,
+          "lowerBrightRatio": 0.00427,
+          "brightCenter": {
+            "x": 0.508,
+            "y": 0.343
+          },
+          "upperCenter": {
+            "x": 0.523,
+            "y": 0.232
+          },
+          "lowerCenter": {
+            "x": 0.427,
+            "y": 0.928
+          },
+          "brightBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.986,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.972,
+            "h": 0.433
+          },
+          "lowerBox": {
+            "x": 0.008,
+            "y": 0.489,
+            "w": 0.942,
+            "h": 0.511
+          },
+          "motionRatio": 0.04501,
+          "lowerMotionRatio": 0.00216,
+          "motionCenter": {
+            "x": 0.528,
+            "y": 0.3
+          },
+          "lowerMotionCenter": {
+            "x": 0.498,
+            "y": 0.721
+          },
+          "meanMotionMagnitude": 0.01538
+        },
+        {
+          "index": 198,
+          "tSourceSeconds": 123,
+          "brightRatio": 0.02668,
+          "upperBrightRatio": 0.02159,
+          "lowerBrightRatio": 0.0051,
+          "brightCenter": {
+            "x": 0.402,
+            "y": 0.354
+          },
+          "upperCenter": {
+            "x": 0.387,
+            "y": 0.23
+          },
+          "lowerCenter": {
+            "x": 0.467,
+            "y": 0.882
+          },
+          "brightBox": {
+            "x": 0.014,
+            "y": 0,
+            "w": 0.981,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.028,
+            "y": 0,
+            "w": 0.967,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.014,
+            "y": 0.47,
+            "w": 0.969,
+            "h": 0.53
+          },
+          "motionRatio": 0.04877,
+          "lowerMotionRatio": 0.00766,
+          "motionCenter": {
+            "x": 0.413,
+            "y": 0.355
+          },
+          "lowerMotionCenter": {
+            "x": 0.546,
+            "y": 0.816
+          },
+          "meanMotionMagnitude": 0.01734
+        },
+        {
+          "index": 220,
+          "tSourceSeconds": 126.667,
+          "brightRatio": 0.02457,
+          "upperBrightRatio": 0.01886,
+          "lowerBrightRatio": 0.00571,
+          "brightCenter": {
+            "x": 0.403,
+            "y": 0.37
+          },
+          "upperCenter": {
+            "x": 0.456,
+            "y": 0.22
+          },
+          "lowerCenter": {
+            "x": 0.229,
+            "y": 0.865
+          },
+          "brightBox": {
+            "x": 0.05,
+            "y": 0,
+            "w": 0.922,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.083,
+            "y": 0,
+            "w": 0.842,
+            "h": 0.418
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.509,
+            "w": 0.922,
+            "h": 0.491
+          },
+          "motionRatio": 0.03796,
+          "lowerMotionRatio": 0.00915,
+          "motionCenter": {
+            "x": 0.406,
+            "y": 0.392
+          },
+          "lowerMotionCenter": {
+            "x": 0.221,
+            "y": 0.752
+          },
+          "meanMotionMagnitude": 0.01441
+        },
+        {
+          "index": 242,
+          "tSourceSeconds": 130.333,
+          "brightRatio": 0.02397,
+          "upperBrightRatio": 0.01982,
+          "lowerBrightRatio": 0.00415,
+          "brightCenter": {
+            "x": 0.523,
+            "y": 0.355
+          },
+          "upperCenter": {
+            "x": 0.548,
+            "y": 0.232
+          },
+          "lowerCenter": {
+            "x": 0.404,
+            "y": 0.94
+          },
+          "brightBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.931,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.919,
+            "h": 0.457
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.555,
+            "w": 0.903,
+            "h": 0.445
+          },
+          "motionRatio": 0.039,
+          "lowerMotionRatio": 0.00155,
+          "motionCenter": {
+            "x": 0.578,
+            "y": 0.3
+          },
+          "lowerMotionCenter": {
+            "x": 0.498,
+            "y": 0.751
+          },
+          "meanMotionMagnitude": 0.01315
+        }
+      ]
+    },
+    {
+      "id": "wrap-return-pressure",
+      "sourceId": "nenriki-15-wave-session",
+      "windowKey": "nenriki-15-wave-session/wrap-return-pressure",
+      "label": "Wrap or return pressure",
+      "startSeconds": 105,
+      "durationSeconds": 45,
+      "sampledFps": 6,
+      "decodedFrameCount": 270,
+      "frameSize": {
+        "width": 360,
+        "height": 411
+      },
+      "evidence": {
+        "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/frame-index.json",
+        "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg",
+        "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/motion-difference-sheet.jpg",
+        "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-spectrogram.png"
+      },
+      "motion": {
+        "activeMotionFrameCount": 251,
+        "activeMotionShare": 0.93,
+        "firstActiveMotionAtSeconds": 105.167,
+        "peakMotionAtSeconds": 118,
+        "peakMotionRatio": 0.05353,
+        "firstLowerMotionAtSeconds": 105.167,
+        "peakLowerMotionAtSeconds": 141.833,
+        "peakLowerMotionRatio": 0.0163,
+        "lowerMotionShareOfActive": 0.769,
+        "unionMotionBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "brightness": {
+        "medianBrightRatio": 0.01933,
+        "medianUpperBrightRatio": 0.01442,
+        "medianLowerBrightRatio": 0.00433,
+        "upperBrightStdev": 0.00585,
+        "upperCenterYStdev": 0.07559,
+        "unionBrightBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "sampledFrames": [
+        {
+          "index": 0,
+          "tSourceSeconds": 105,
+          "brightRatio": 0.01124,
+          "upperBrightRatio": 0.00618,
+          "lowerBrightRatio": 0.00506,
+          "brightCenter": {
+            "x": 0.308,
+            "y": 0.436
+          },
+          "upperCenter": {
+            "x": 0.389,
+            "y": 0.099
+          },
+          "lowerCenter": {
+            "x": 0.209,
+            "y": 0.848
+          },
+          "brightBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.964,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.964,
+            "h": 0.453
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.491,
+            "w": 0.9,
+            "h": 0.509
+          },
+          "motionRatio": 0,
+          "lowerMotionRatio": 0,
+          "motionCenter": null,
+          "lowerMotionCenter": null,
+          "meanMotionMagnitude": 0
+        },
+        {
+          "index": 22,
+          "tSourceSeconds": 108.667,
+          "brightRatio": 0.00963,
+          "upperBrightRatio": 0.00579,
+          "lowerBrightRatio": 0.00385,
+          "brightCenter": {
+            "x": 0.363,
+            "y": 0.387
+          },
+          "upperCenter": {
+            "x": 0.428,
+            "y": 0.032
+          },
+          "lowerCenter": {
+            "x": 0.267,
+            "y": 0.921
+          },
+          "brightBox": {
+            "x": 0.031,
+            "y": 0,
+            "w": 0.969,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.114,
+            "y": 0,
+            "w": 0.886,
+            "h": 0.457
+          },
+          "lowerBox": {
+            "x": 0.031,
+            "y": 0.56,
+            "w": 0.919,
+            "h": 0.44
+          },
+          "motionRatio": 0.00878,
+          "lowerMotionRatio": 0.00564,
+          "motionCenter": {
+            "x": 0.35,
+            "y": 0.619
+          },
+          "lowerMotionCenter": {
+            "x": 0.327,
+            "y": 0.833
+          },
+          "meanMotionMagnitude": 0.0044
+        },
+        {
+          "index": 44,
+          "tSourceSeconds": 112.333,
+          "brightRatio": 0.00977,
+          "upperBrightRatio": 0.00585,
+          "lowerBrightRatio": 0.00393,
+          "brightCenter": {
+            "x": 0.429,
+            "y": 0.39
+          },
+          "upperCenter": {
+            "x": 0.419,
+            "y": 0.03
+          },
+          "lowerCenter": {
+            "x": 0.444,
+            "y": 0.927
+          },
+          "brightBox": {
+            "x": 0,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0,
+            "y": 0,
+            "w": 0.981,
+            "h": 0.467
+          },
+          "lowerBox": {
+            "x": 0.014,
+            "y": 0.465,
+            "w": 0.986,
+            "h": 0.535
+          },
+          "motionRatio": 0.0036,
+          "lowerMotionRatio": 0.00183,
+          "motionCenter": {
+            "x": 0.484,
+            "y": 0.496
+          },
+          "lowerMotionCenter": {
+            "x": 0.538,
+            "y": 0.746
+          },
+          "meanMotionMagnitude": 0.00225
+        },
+        {
+          "index": 66,
+          "tSourceSeconds": 116,
+          "brightRatio": 0.02689,
+          "upperBrightRatio": 0.02265,
+          "lowerBrightRatio": 0.00424,
+          "brightCenter": {
+            "x": 0.518,
+            "y": 0.356
+          },
+          "upperCenter": {
+            "x": 0.538,
+            "y": 0.25
+          },
+          "lowerCenter": {
+            "x": 0.413,
+            "y": 0.923
+          },
+          "brightBox": {
+            "x": 0,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.019,
+            "y": 0,
+            "w": 0.939,
+            "h": 0.418
+          },
+          "lowerBox": {
+            "x": 0,
+            "y": 0.496,
+            "w": 1,
+            "h": 0.504
+          },
+          "motionRatio": 0.03911,
+          "lowerMotionRatio": 0.00223,
+          "motionCenter": {
+            "x": 0.514,
+            "y": 0.314
+          },
+          "lowerMotionCenter": {
+            "x": 0.46,
+            "y": 0.676
+          },
+          "meanMotionMagnitude": 0.01363
+        },
+        {
+          "index": 88,
+          "tSourceSeconds": 119.667,
+          "brightRatio": 0.02534,
+          "upperBrightRatio": 0.02107,
+          "lowerBrightRatio": 0.00426,
+          "brightCenter": {
+            "x": 0.513,
+            "y": 0.36
+          },
+          "upperCenter": {
+            "x": 0.535,
+            "y": 0.245
+          },
+          "lowerCenter": {
+            "x": 0.404,
+            "y": 0.93
+          },
+          "brightBox": {
+            "x": 0.014,
+            "y": 0,
+            "w": 0.986,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.014,
+            "y": 0,
+            "w": 0.969,
+            "h": 0.457
+          },
+          "lowerBox": {
+            "x": 0.036,
+            "y": 0.484,
+            "w": 0.964,
+            "h": 0.516
+          },
+          "motionRatio": 0.032,
+          "lowerMotionRatio": 0.00643,
+          "motionCenter": {
+            "x": 0.515,
+            "y": 0.4
+          },
+          "lowerMotionCenter": {
+            "x": 0.491,
+            "y": 0.835
+          },
+          "meanMotionMagnitude": 0.01214
+        },
+        {
+          "index": 110,
+          "tSourceSeconds": 123.333,
+          "brightRatio": 0.02459,
+          "upperBrightRatio": 0.01966,
+          "lowerBrightRatio": 0.00493,
+          "brightCenter": {
+            "x": 0.402,
+            "y": 0.365
+          },
+          "upperCenter": {
+            "x": 0.376,
+            "y": 0.235
+          },
+          "lowerCenter": {
+            "x": 0.504,
+            "y": 0.882
+          },
+          "brightBox": {
+            "x": 0.014,
+            "y": 0,
+            "w": 0.969,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.044,
+            "y": 0,
+            "w": 0.933,
+            "h": 0.46
+          },
+          "lowerBox": {
+            "x": 0.014,
+            "y": 0.474,
+            "w": 0.969,
+            "h": 0.526
+          },
+          "motionRatio": 0.04493,
+          "lowerMotionRatio": 0.00618,
+          "motionCenter": {
+            "x": 0.389,
+            "y": 0.347
+          },
+          "lowerMotionCenter": {
+            "x": 0.609,
+            "y": 0.783
+          },
+          "meanMotionMagnitude": 0.01601
+        },
+        {
+          "index": 132,
+          "tSourceSeconds": 127,
+          "brightRatio": 0.02328,
+          "upperBrightRatio": 0.01755,
+          "lowerBrightRatio": 0.00572,
+          "brightCenter": {
+            "x": 0.425,
+            "y": 0.394
+          },
+          "upperCenter": {
+            "x": 0.49,
+            "y": 0.238
+          },
+          "lowerCenter": {
+            "x": 0.228,
+            "y": 0.871
+          },
+          "brightBox": {
+            "x": 0.05,
+            "y": 0,
+            "w": 0.928,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.086,
+            "y": 0,
+            "w": 0.892,
+            "h": 0.462
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.491,
+            "w": 0.928,
+            "h": 0.509
+          },
+          "motionRatio": 0.03982,
+          "lowerMotionRatio": 0.00878,
+          "motionCenter": {
+            "x": 0.39,
+            "y": 0.376
+          },
+          "lowerMotionCenter": {
+            "x": 0.207,
+            "y": 0.791
+          },
+          "meanMotionMagnitude": 0.01481
+        },
+        {
+          "index": 154,
+          "tSourceSeconds": 130.667,
+          "brightRatio": 0.02126,
+          "upperBrightRatio": 0.01702,
+          "lowerBrightRatio": 0.00424,
+          "brightCenter": {
+            "x": 0.543,
+            "y": 0.375
+          },
+          "upperCenter": {
+            "x": 0.568,
+            "y": 0.235
+          },
+          "lowerCenter": {
+            "x": 0.444,
+            "y": 0.935
+          },
+          "brightBox": {
+            "x": 0.008,
+            "y": 0,
+            "w": 0.983,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.969,
+            "h": 0.44
+          },
+          "lowerBox": {
+            "x": 0.008,
+            "y": 0.547,
+            "w": 0.969,
+            "h": 0.453
+          },
+          "motionRatio": 0.04177,
+          "lowerMotionRatio": 0.00581,
+          "motionCenter": {
+            "x": 0.565,
+            "y": 0.36
+          },
+          "lowerMotionCenter": {
+            "x": 0.537,
+            "y": 0.854
+          },
+          "meanMotionMagnitude": 0.0147
+        },
+        {
+          "index": 176,
+          "tSourceSeconds": 134.333,
+          "brightRatio": 0.01984,
+          "upperBrightRatio": 0.01565,
+          "lowerBrightRatio": 0.00421,
+          "brightCenter": {
+            "x": 0.397,
+            "y": 0.37
+          },
+          "upperCenter": {
+            "x": 0.387,
+            "y": 0.22
+          },
+          "lowerCenter": {
+            "x": 0.436,
+            "y": 0.929
+          },
+          "brightBox": {
+            "x": 0.05,
+            "y": 0,
+            "w": 0.919,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.067,
+            "y": 0,
+            "w": 0.853,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.465,
+            "w": 0.919,
+            "h": 0.535
+          },
+          "motionRatio": 0.02984,
+          "lowerMotionRatio": 0.0057,
+          "motionCenter": {
+            "x": 0.402,
+            "y": 0.373
+          },
+          "lowerMotionCenter": {
+            "x": 0.53,
+            "y": 0.838
+          },
+          "meanMotionMagnitude": 0.01161
+        },
+        {
+          "index": 198,
+          "tSourceSeconds": 138,
+          "brightRatio": 0.0184,
+          "upperBrightRatio": 0.01398,
+          "lowerBrightRatio": 0.00442,
+          "brightCenter": {
+            "x": 0.458,
+            "y": 0.378
+          },
+          "upperCenter": {
+            "x": 0.445,
+            "y": 0.205
+          },
+          "lowerCenter": {
+            "x": 0.5,
+            "y": 0.926
+          },
+          "brightBox": {
+            "x": 0.05,
+            "y": 0,
+            "w": 0.936,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.114,
+            "y": 0,
+            "w": 0.842,
+            "h": 0.453
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.484,
+            "w": 0.936,
+            "h": 0.516
+          },
+          "motionRatio": 0.03411,
+          "lowerMotionRatio": 0.00637,
+          "motionCenter": {
+            "x": 0.453,
+            "y": 0.365
+          },
+          "lowerMotionCenter": {
+            "x": 0.629,
+            "y": 0.844
+          },
+          "meanMotionMagnitude": 0.01258
+        },
+        {
+          "index": 220,
+          "tSourceSeconds": 141.667,
+          "brightRatio": 0.01744,
+          "upperBrightRatio": 0.01016,
+          "lowerBrightRatio": 0.00745,
+          "brightCenter": {
+            "x": 0.55,
+            "y": 0.435
+          },
+          "upperCenter": {
+            "x": 0.578,
+            "y": 0.188
+          },
+          "lowerCenter": {
+            "x": 0.509,
+            "y": 0.772
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0,
+            "w": 0.986,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.006,
+            "y": 0,
+            "w": 0.986,
+            "h": 0.472
+          },
+          "lowerBox": {
+            "x": 0.05,
+            "y": 0.465,
+            "w": 0.936,
+            "h": 0.535
+          },
+          "motionRatio": 0.0323,
+          "lowerMotionRatio": 0.01604,
+          "motionCenter": {
+            "x": 0.584,
+            "y": 0.479
+          },
+          "lowerMotionCenter": {
+            "x": 0.592,
+            "y": 0.7
+          },
+          "meanMotionMagnitude": 0.01303
+        },
+        {
+          "index": 242,
+          "tSourceSeconds": 145.333,
+          "brightRatio": 0.01756,
+          "upperBrightRatio": 0.01226,
+          "lowerBrightRatio": 0.0053,
+          "brightCenter": {
+            "x": 0.413,
+            "y": 0.369
+          },
+          "upperCenter": {
+            "x": 0.433,
+            "y": 0.157
+          },
+          "lowerCenter": {
+            "x": 0.367,
+            "y": 0.859
+          },
+          "brightBox": {
+            "x": 0.006,
+            "y": 0,
+            "w": 0.947,
+            "h": 1
+          },
+          "upperBox": {
+            "x": 0.022,
+            "y": 0,
+            "w": 0.867,
+            "h": 0.438
+          },
+          "lowerBox": {
+            "x": 0.006,
+            "y": 0.504,
+            "w": 0.947,
+            "h": 0.496
+          },
+          "motionRatio": 0.02826,
+          "lowerMotionRatio": 0.00925,
+          "motionCenter": {
+            "x": 0.442,
+            "y": 0.411
+          },
+          "lowerMotionCenter": {
+            "x": 0.38,
+            "y": 0.732
+          },
+          "meanMotionMagnitude": 0.0105
+        }
+      ]
+    }
+  ]
+}

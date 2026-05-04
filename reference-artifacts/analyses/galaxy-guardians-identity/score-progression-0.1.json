@@ -1,0 +1,64 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "score-progression-baseline",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "dev-preview-score-table-and-wave-progression-contract-not-public-release-tuning",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "scoreAdvanceEvent": "galaxian-score-advance-table",
+    "scoreAdvanceObservedWindowSeconds": [10, 35],
+    "notes": "The Galaxian reference profile promotes an owned score-advance table with distinct alien/charger values. Guardians now stores an application-owned score table and proves that runtime hit values match it. Wave clear and stage advance remain dev-preview approximations until frame-level progression evidence is extracted."
+  },
+  "attractMission": {
+    "title": "WE ARE THE GALAXY GUARDIANS",
+    "requiredLines": [
+      "MISSION: BREAK THE SIGNAL RACK",
+      "WATCH FOR FLAGSHIP ESCORT DIVES",
+      "SINGLE SHOT ONLY - MAKE IT COUNT"
+    ]
+  },
+  "scoreAdvanceTable": [
+    {
+      "id": "signal-scout",
+      "role": "scout",
+      "formationPoints": 30,
+      "divePoints": 60
+    },
+    {
+      "id": "signal-escort",
+      "role": "escort",
+      "formationPoints": 50,
+      "divePoints": 100
+    },
+    {
+      "id": "signal-flagship",
+      "role": "flagship",
+      "formationPoints": 150,
+      "divePoints": 300,
+      "oneEscortDivePoints": 500,
+      "twoEscortDivePoints": 800
+    }
+  ],
+  "waveProgressionRules": {
+    "waveClearDelaySeconds": 1.2,
+    "waveClearEvent": "wave_clear",
+    "stageAdvanceEvent": "stage_advance",
+    "resetReason": "stage_advance",
+    "nextStageAlienCount": 38,
+    "scoreMustPersist": true,
+    "livesMustPersist": true
+  },
+  "forbiddenAuroraCarryover": {
+    "usesCaptureRescue": 0,
+    "usesDualFighterMode": 0,
+    "usesChallengeStages": 0,
+    "usesAuroraScoring": 0,
+    "usesAuroraEnemyFamilies": 0
+  },
+  "harness": {
+    "scoreProgressionCheck": "tools/harness/check-galaxy-guardians-score-progression.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-score-progression"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "playtest-weighted-conformance-review",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "playtest-weighted-preview-gap-review",
+  "purpose": "Score Galaxy Guardians against local playtest perception of Galaxian-like sound, pace, and visual identity, separate from evidence coverage. This artifact intentionally lowers the apparent preview score where the current build is measurable but not yet compelling.",
+  "sourceEvidence": {
+    "playtestDate": "2026-05-03",
+    "playtestContext": "Local browser review of the development-only Galaxy Guardians preview on the MacBook workstation.",
+    "referenceEvidence": [
+      "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
+      "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+      "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+    ],
+    "playtestFindings": [
+      "Sound is nothing like the original Galaxians.",
+      "Pace feels off and slow in various ways.",
+      "Graphics still feel pretty far from the original."
+    ]
+  },
+  "metricScale": {
+    "0": "No recognizable Galaxian relationship in play.",
+    "5": "Recognizable reference intent exists, but the player still reads it as a rough approximation.",
+    "7": "Compelling preview: a player immediately understands the Galaxian family resemblance even before final extraction.",
+    "10": "Reference-faithful enough for public conformance claims."
+  },
+  "summary": {
+    "evidenceWeightedReferenceScore10": 7.6,
+    "playtestWeightedConformanceScore10": 6.6,
+    "compellingPreviewTargetScore10": 7.0,
+    "releaseRead": "Closer, but still not yet compelling enough for beta-facing preview. The runtime now has measured stage-rank pressure, component-derived sprites, and labeled cue-window influenced audio. Audio and motion feel still need live browser/playback review before a beta-facing claim."
+  },
+  "categories": [
+    {
+      "id": "audio-character",
+      "label": "Audio character and Galaxian acoustic feel",
+      "weight": 28,
+      "previousOfficialScore10": 5.3,
+      "playtestAdjustedBeforePass10": 2.5,
+      "playtestWeightedScore10": 5.4,
+      "compellingPreviewTarget10": 7.0,
+      "metricSet": [
+        "hardware-like square/noise timbre",
+        "short dry shot envelopes",
+        "dive siren descent character",
+        "event mix density during live play",
+        "waveform/spectrogram proxy fit",
+        "isolated cue candidate family coverage",
+        "labeled cue-window waveform/spectrogram previews"
+      ],
+      "currentRead": "Cue ownership and shape are harnessed, CPU analysis finds 64 mixed-source cue candidates, 8 cue windows are now promoted with waveform/spectrogram previews, and the runtime cues were retuned toward the measured square/noise bands. This is much closer architecturally, but still needs human listening and live playback review.",
+      "nextEvidenceNeeded": "Human-listen the promoted cue windows, replace dirty mixed-gameplay windows, and score live playback against the target set."
+    },
+    {
+      "id": "motion-pressure",
+      "label": "Motion pace and lower-field pressure",
+      "weight": 32,
+      "previousOfficialScore10": 6.7,
+      "playtestAdjustedBeforePass10": 4.8,
+      "playtestWeightedScore10": 6.2,
+      "compellingPreviewTarget10": 7.2,
+      "metricSet": [
+        "formation entry duration",
+        "first scout dive timing",
+        "flagship/escort dive timing",
+        "dive vertical speed and acceleration",
+        "lateral curve shape",
+        "enemy shot density",
+        "bottom wrap/return cadence"
+      ],
+      "currentRead": "The latest pass shortened formation entry, first dive, flagship pressure, scout intervals, shot cadence, and bottom wrap timing, then added measured stage-rank pressure so stages three and five carry earlier dives, faster dives, faster shots, and more event density while stage one remains anchored.",
+      "nextEvidenceNeeded": "Use browser-reviewed runtime traces beside reference tracklets, then promote sprite-recognized dive paths and rack timing into target bands."
+    },
+    {
+      "id": "visual-identity",
+      "label": "Graphic alignment and alien/player likeness",
+      "weight": 28,
+      "previousOfficialScore10": 7.0,
+      "playtestAdjustedBeforePass10": 4.5,
+      "playtestWeightedScore10": 6.7,
+      "compellingPreviewTarget10": 7.0,
+      "metricSet": [
+        "alien silhouette family likeness",
+        "flagship/escort/scout separation",
+        "palette family match",
+        "sprite scale and rack density",
+        "player ship likeness",
+        "score/attract visual layout",
+        "broad crop-grid silhouette similarity",
+        "component crop target similarity"
+      ],
+      "currentRead": "Sprites are now tuned from component crop targets for flagship, escort, scout, and player ship while remaining pack-owned and separate from Aurora. They should read much more like the Galaxian family, but still need visual browser review at actual gameplay scale.",
+      "nextEvidenceNeeded": "Human-review the component crop PNGs and runtime playfield scale, then adjust any sprite that feels too dense or too literal."
+    },
+    {
+      "id": "platform-boundary-readiness",
+      "label": "Platform boundary and preview safety",
+      "weight": 12,
+      "previousOfficialScore10": 10.0,
+      "playtestAdjustedBeforePass10": 10.0,
+      "playtestWeightedScore10": 10.0,
+      "compellingPreviewTarget10": 10.0,
+      "metricSet": [
+        "no Aurora capture/dual/challenge leakage",
+        "game-owned runtime and scoring",
+        "Platinum APIs only for shared shell behavior",
+        "dev-only public release boundary"
+      ],
+      "currentRead": "The preview remains cleanly application-owned and dev-only while using Platinum as the shell/platform layer.",
+      "nextEvidenceNeeded": "Keep boundary gates mandatory as the gameplay slice becomes more complete."
+    }
+  ],
+  "recommendedNext": [
+    "Human-listen the promoted Galaxian shot, dive, enemy-shot, life-loss, and hit cue windows and replace dirty labels.",
+    "Browser-review the component-derived sprites at real gameplay scale and adjust density/readability where needed.",
+    "Run a browser-reviewed pacing pass after the current faster runtime is built, with perceived urgency scored beside runtime trace metrics.",
+    "Keep Guardians beta-facing preview blocked until playtest-weighted score reaches at least 7.0/10."
+  ]
+}

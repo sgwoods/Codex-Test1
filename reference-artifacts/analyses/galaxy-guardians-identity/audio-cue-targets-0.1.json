@@ -1,0 +1,101 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "audio-cue-target-contract",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-03",
+  "status": "playtest-weighted-hardware-cue-targets-not-final-isolated-match",
+  "purpose": "Translate the playtest finding that Guardians does not yet sound like Galaxian into stricter cue-level targets for dry square/noise character, descending dive pressure, short shot envelopes, and role-separated hit snaps.",
+  "sourceEvidence": {
+    "playtestReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+    "audioCharacter": "reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json",
+    "audioIsolatedCueCandidates": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "audioLabeledCueTargets": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+    "audioReferenceComparison": "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
+    "notes": "These targets are still synthetic. The cue-candidate pass now identifies mixed-source shot, hit, dive, and loss-like windows, but they need manual labeling and export before they can replace the synthetic bands."
+  },
+  "globalTargets": {
+    "requiredNoisyCueNames": [
+      "playerShot",
+      "enemyShot",
+      "scoutDive",
+      "flagshipDive",
+      "scoutHit",
+      "escortHit",
+      "flagshipHit",
+      "playerLoss"
+    ],
+    "minimumNoisyCueCount": 8,
+    "minimumSquareCueShare": 0.82,
+    "forbiddenDominantWaves": [
+      "sine"
+    ]
+  },
+  "cueTargets": {
+    "playerShot": {
+      "durationBandSeconds": [0.062, 0.098],
+      "peakFrequencyBandHz": [1502, 2670],
+      "minimumFrequencyDropHz": 600,
+      "mustDescend": true,
+      "requiresNoise": true,
+      "mustIncludeWave": "square"
+    },
+    "enemyShot": {
+      "durationBandSeconds": [0.055, 0.105],
+      "peakFrequencyBandHz": [667, 1187],
+      "minimumFrequencyDropHz": 300,
+      "mustDescend": true,
+      "requiresNoise": true,
+      "mustIncludeWave": "square"
+    },
+    "scoutDive": {
+      "durationBandSeconds": [0.18, 0.28],
+      "peakFrequencyBandHz": [857, 1523],
+      "minimumFrequencyDropHz": 500,
+      "mustDescend": true,
+      "requiresNoise": true,
+      "minimumToneCount": 3,
+      "mustIncludeWave": "square"
+    },
+    "flagshipDive": {
+      "durationBandSeconds": [0.28, 0.42],
+      "peakFrequencyBandHz": [1159, 2061],
+      "minimumFrequencyDropHz": 800,
+      "mustDescend": true,
+      "requiresNoise": true,
+      "minimumToneCount": 3,
+      "mustIncludeWave": "square"
+    },
+    "scoutHit": {
+      "durationBandSeconds": [0.018, 0.035],
+      "peakFrequencyBandHz": [739, 1315],
+      "requiresNoise": true,
+      "mustIncludeWave": "square"
+    },
+    "escortHit": {
+      "durationBandSeconds": [0.056, 0.104],
+      "peakFrequencyBandHz": [1173, 2085],
+      "requiresNoise": true,
+      "mustIncludeWave": "square"
+    },
+    "flagshipHit": {
+      "durationBandSeconds": [0.048, 0.14],
+      "peakFrequencyBandHz": [1444, 2566],
+      "requiresNoise": true,
+      "minimumToneCount": 3,
+      "mustIncludeWave": "square"
+    },
+    "playerLoss": {
+      "durationBandSeconds": [0.155, 0.265],
+      "peakFrequencyBandHz": [1333, 2371],
+      "minimumFrequencyDropHz": 700,
+      "mustDescend": true,
+      "requiresNoise": true,
+      "minimumToneCount": 3
+    }
+  },
+  "harness": {
+    "audioCueTargetCheck": "tools/harness/check-galaxy-guardians-audio-cue-targets.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-audio-cue-targets"
+  },
+  "nextPromotion": "Human-listen the labeled cue windows and adjust the measured target bands where a promoted window is dirty or overlaps unrelated gameplay audio."
+}

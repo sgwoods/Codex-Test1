@@ -24,12 +24,12 @@ async function main(){
   });
 
   if(!result.before.open) fail('leaderboard panel did not open for local score metadata check', result);
-  if(result.before.sub !== 'LOCAL DEVICE SCORES') fail('leaderboard panel did not open on the local score view', result);
-  if(!result.before.cells.some(cell => String(cell).includes('1.2.2+build.382.sha.ce59bb0'))) fail('leaderboard panel did not show build metadata for seeded local score rows', result);
+  if(result.before.activeView !== 'local') fail('leaderboard panel did not open on the local score view', result);
+  if(!result.before.metadata?.some(meta => String(meta.build).includes('1.2.2+build.382.sha.ce59bb0'))) fail('leaderboard panel did not expose full build metadata for seeded local score rows', result);
   if(!result.before.cells.some(cell => String(cell).includes('Apr'))) fail('leaderboard panel did not show a readable date label', result);
   if(result.after.filterAfter !== '2026-04-05') fail('leaderboard date filter did not persist in the panel control', result);
-  if(result.after.cells.some(cell => String(cell).includes('1.2.1+build.373.sha.a019a96'))) fail('leaderboard date filter did not hide older score rows', result);
-  if(!result.after.cells.some(cell => String(cell).includes('1.2.2+build.382.sha.ce59bb0'))) fail('leaderboard date filter removed the newer score row unexpectedly', result);
+  if(result.after.metadata?.some(meta => String(meta.build).includes('1.2.1+build.373.sha.a019a96'))) fail('leaderboard date filter did not hide older score rows', result);
+  if(!result.after.metadata?.some(meta => String(meta.build).includes('1.2.2+build.382.sha.ce59bb0'))) fail('leaderboard date filter removed the newer score row unexpectedly', result);
 
   console.log(JSON.stringify({ ok: true, before: result.before, after: result.after }, null, 2));
 }

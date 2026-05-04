@@ -214,6 +214,11 @@ Pack-boundary harness:
   verifies the dev-only Guardians preview renderer by checking its render mode,
   registered renderer key, visual catalog IDs, audio cue IDs, signal palette,
   Platinum harness alias, and non-playable adapter state.
+- `tools/harness/check-framed-popout-bounds.js`
+  verifies that frame-owned popouts stay inside the gameplay frame, that
+  platform messages, high scores, and pilot/account popouts share the same
+  framed footprint, and that opening another dock popout closes the current
+  one before showing the next surface.
 - `tools/harness/check-platinum-renderer-boundaries.js`
   verifies statically that platform render orchestration is game-agnostic,
   board renderers register themselves through the Platinum renderer registry,

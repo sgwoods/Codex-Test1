@@ -35,8 +35,8 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
 
 const GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
  previewEntry:Object.freeze({
-  firstScoutDiveDelay:2.2,
-  flagshipEscortDelay:6.4,
+  firstScoutDiveDelay:2.55,
+  flagshipEscortDelay:6.65,
   singleShotCooldown:.72
  })
 });
@@ -49,15 +49,16 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'crowned-command-ship',
   palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '.....A.....',
-   '...AWEWA...',
-   '..WWCCCWW..',
-   '.WCCECECCW.',
-   'WWCCCCCCCWW',
-   'W.CCAACC.W',
-   '...W...W...'
+   '...A.A...',
+   '...CCC...',
+   'C.WCCCW.C',
+   'CCCECECCC',
+   '..CCCCC..',
+   '.WWCCCWW.',
+   'WWWCCCWWW',
+   'WW..C..WW'
   ]),
-  notes:'Wide crowned command silhouette for flagship-with-escort dives; intentionally not an Aurora boss/capture ship.'
+  notes:'Small crowned command silhouette tuned from Galaxian contact-sheet proportions for flagship-with-escort dives.'
  }),
  'signal-escort':Object.freeze({
   id:'signal-escort',
@@ -66,14 +67,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'red-arrow-escort',
   palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '...A...',
-   '..WCW..',
-   '.WCCCW.',
-   'WWCEWW',
-   '.ACCA.',
-   'W..W..W'
+   '..ACC..',
+   'WWCCCCC',
+   'WCWEWWW',
+   '..WWW..',
+   '..WWW..',
+   '...A...'
   ]),
-  notes:'Small red escort marker for paired flagship pressure rather than Aurora butterfly behavior.'
+  notes:'Compact red/magenta escort marker tuned toward the charger rows visible in the Galaxian reference sheets.'
  }),
  'signal-scout':Object.freeze({
   id:'signal-scout',
@@ -82,14 +83,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'cyan-wing-scout',
   palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '...A...',
-   '.WACAW.',
-   'WWCCCWW',
-   '..ECE..',
-   '.WCCAW.',
-   'W.....W'
+   '.CCCCC.',
+   'ACCCACA',
+   'AAAAAAA',
+   '.WAAAW.',
+   '...C...',
+   '...A...'
   ]),
-  notes:'Cyan-green rank-and-file scout for sparse Galaxian-like solo dives.'
+  notes:'Small blue/cyan convoy scout shaped for a tighter Galaxian-like rack.'
  }),
  'player-interceptor':Object.freeze({
   id:'player-interceptor',
@@ -98,14 +99,15 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'single-shot-interceptor',
   palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '...A...',
-   '..CCC..',
-   '.WCECW.',
-   'WWCCCWW',
-   '..WAW..',
-   '...F...'
+   'CWWCWWC',
+   'WWWCCWW',
+   'WWWCWWW',
+   'WWWCWWW',
+   'WWWCWWW',
+   'WWCCWWW',
+   'WW...WW'
   ]),
-  notes:'Single-fighter player craft sized for one-shot precision; no Aurora dual-fighter silhouette.'
+  notes:'Compact single fighter tuned toward the cyan/red Galaxian player ship proportions.'
  })
 });
 
@@ -130,18 +132,18 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
   id:'guardians-signal',
   label:'Guardians Signal',
   cues:Object.freeze({
-   gameStart:Object.freeze({seq:[294,370,494,659],step:.052,wave:'square',volume:.014,slide:22,lpHz:3300}),
-   formationPulse:Object.freeze({tones:Object.freeze([{freq:196,duration:.08,wave:'square',volume:.0035,slide:4,lpHz:1700},{freq:392,duration:.058,wave:'square',volume:.008,slide:-10,lpHz:3000,delay:.012}])}),
-   playerShot:Object.freeze({tones:Object.freeze([{freq:1240,duration:.03,wave:'square',volume:.0075,slide:-820,lpHz:6400},{freq:1680,duration:.018,wave:'square',volume:.0032,slide:-520,lpHz:7200,delay:.006}])}),
-   enemyShot:Object.freeze({tones:Object.freeze([{freq:286,duration:.085,wave:'square',volume:.009,slide:-140,lpHz:2700}])}),
-   scoutDive:Object.freeze({tones:Object.freeze([{freq:392,duration:.09,wave:'square',volume:.006,slide:-120,lpHz:2600},{freq:294,duration:.12,wave:'square',volume:.005,slide:-90,lpHz:2300,delay:.055}])}),
-   flagshipDive:Object.freeze({tones:Object.freeze([{freq:262,duration:.16,wave:'square',volume:.0075,slide:-80,lpHz:2400},{freq:196,duration:.22,wave:'triangle',volume:.006,slide:-70,lpHz:1900,delay:.06}])}),
-   escortJoin:Object.freeze({seq:[660,587,660],step:.032,wave:'square',volume:.006,slide:-24,lpHz:4300}),
-   wrapReturn:Object.freeze({tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0055,slide:120,lpHz:2200}])}),
-   playerLoss:Object.freeze({tones:Object.freeze([{freq:240,duration:.12,wave:'square',volume:.017,slide:-190,lpHz:2200},{freq:170,duration:.18,wave:'sawtooth',volume:.014,slide:-120,lpHz:1700,delay:.04}]),noise:Object.freeze([{duration:.09,volume:.007,hp:950,delay:.015}])}),
-   scoutHit:Object.freeze({tones:Object.freeze([{freq:282,duration:.045,wave:'square',volume:.011,slide:-230,lpHz:3600}])}),
-   escortHit:Object.freeze({tones:Object.freeze([{freq:340,duration:.052,wave:'square',volume:.012,slide:-210,lpHz:3800},{freq:220,duration:.05,wave:'triangle',volume:.005,slide:-120,lpHz:2600,delay:.012}])}),
-   flagshipHit:Object.freeze({tones:Object.freeze([{freq:420,duration:.07,wave:'square',volume:.013,slide:-150,lpHz:3900},{freq:260,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2600,delay:.018}])}),
+   gameStart:Object.freeze({seq:[520,420,320,240],step:.035,wave:'square',volume:.011,slide:-42,lpHz:2500}),
+   formationPulse:Object.freeze({tones:Object.freeze([{freq:122,duration:.08,wave:'square',volume:.006,slide:18,lpHz:1400},{freq:244,duration:.05,wave:'square',volume:.007,slide:-28,lpHz:2200,delay:.018},{freq:366,duration:.032,wave:'square',volume:.0045,slide:-44,lpHz:2800,delay:.05}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:2140,duration:.045,wave:'square',volume:.0105,slide:-720,detune:.006,lpHz:6800},{freq:1320,duration:.072,wave:'square',volume:.012,slide:-560,detune:-.005,lpHz:5600,delay:.008}]),noise:Object.freeze([{duration:.04,volume:.0032,hp:3600,delay:0}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:940,duration:.052,wave:'square',volume:.0105,slide:-310,detune:.006,lpHz:3600},{freq:520,duration:.072,wave:'square',volume:.007,slide:-210,detune:-.004,lpHz:2500,delay:.008}]),noise:Object.freeze([{duration:.038,volume:.0038,hp:1200,delay:.004}])}),
+   scoutDive:Object.freeze({tones:Object.freeze([{freq:1180,duration:.09,wave:'square',volume:.0085,slide:-420,detune:.008,lpHz:3600},{freq:720,duration:.14,wave:'square',volume:.0068,slide:-330,detune:-.006,lpHz:2700,delay:.04},{freq:360,duration:.1,wave:'square',volume:.0042,slide:-130,detune:.004,lpHz:1700,delay:.13}]),noise:Object.freeze([{duration:.056,volume:.0032,hp:880,delay:.03}])}),
+   flagshipDive:Object.freeze({tones:Object.freeze([{freq:1600,duration:.11,wave:'square',volume:.0095,slide:-520,detune:.008,lpHz:4200},{freq:920,duration:.2,wave:'square',volume:.0078,slide:-360,detune:-.006,lpHz:3000,delay:.045},{freq:460,duration:.18,wave:'square',volume:.0055,slide:-170,detune:.004,lpHz:1900,delay:.16}]),noise:Object.freeze([{duration:.092,volume:.004,hp:840,delay:.02}])}),
+   escortJoin:Object.freeze({seq:[880,660,880,520],step:.024,wave:'square',volume:.0072,slide:-58,lpHz:4200}),
+   wrapReturn:Object.freeze({tones:Object.freeze([{freq:150,duration:.18,wave:'triangle',volume:.0065,slide:210,lpHz:2100},{freq:360,duration:.10,wave:'square',volume:.0045,slide:120,lpHz:3000,delay:.08}])}),
+   playerLoss:Object.freeze({tones:Object.freeze([{freq:1850,duration:.08,wave:'square',volume:.015,slide:-560,lpHz:4200},{freq:1020,duration:.13,wave:'square',volume:.013,slide:-360,detune:-.005,lpHz:3000,delay:.035},{freq:440,duration:.095,wave:'square',volume:.007,slide:-180,lpHz:1800,delay:.14}]),noise:Object.freeze([{duration:.12,volume:.009,hp:950,delay:.012}])}),
+   scoutHit:Object.freeze({tones:Object.freeze([{freq:1040,duration:.028,wave:'square',volume:.0125,slide:-460,detune:.006,lpHz:4700}]),noise:Object.freeze([{duration:.022,volume:.0027,hp:1800,delay:.004}])}),
+   escortHit:Object.freeze({tones:Object.freeze([{freq:1640,duration:.052,wave:'square',volume:.0135,slide:-560,detune:.006,lpHz:4700},{freq:820,duration:.06,wave:'square',volume:.0062,slide:-260,detune:-.005,lpHz:3000,delay:.018}]),noise:Object.freeze([{duration:.034,volume:.0032,hp:1550,delay:.006}])}),
+   flagshipHit:Object.freeze({tones:Object.freeze([{freq:2020,duration:.06,wave:'square',volume:.0145,slide:-620,detune:.006,lpHz:5200},{freq:1000,duration:.086,wave:'square',volume:.0074,slide:-340,detune:-.004,lpHz:3300,delay:.018},{freq:520,duration:.074,wave:'square',volume:.005,slide:-160,detune:.004,lpHz:2200,delay:.058}]),noise:Object.freeze([{duration:.052,volume:.004,hp:1300,delay:.008}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.055,wave:'square',volume:.012,slide:-210,lpHz:3300}])}),
    bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.068,wave:'square',volume:.013,slide:-120,lpHz:3600}])}),
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.04,wave:'square',volume:.009,slide:-320,lpHz:3900},{freq:220,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2100,delay:.014}])}),
@@ -153,7 +155,7 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
    uiTick:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'square',volume:.004,slide:-110,lpHz:5400}])}),
    uiConfirm:Object.freeze({seq:[660,880],step:.04,wave:'square',volume:.008,slide:30,lpHz:4200}),
    playerHit:Object.freeze({tones:Object.freeze([{freq:210,duration:.13,wave:'square',volume:.018,slide:-220,lpHz:2200}])}),
-   gameOver:Object.freeze({seq:[330,262,220,165],step:.092,wave:'square',volume:.014,slide:-58,lpHz:2120})
+   gameOver:Object.freeze({seq:[392,294,247,196,147],step:.086,wave:'square',volume:.014,slide:-72,lpHz:2200})
   })
  })
 });
@@ -217,6 +219,54 @@ const GUARDIANS_SCORING_RULES=Object.freeze({
  challengeGroupBonuses:Object.freeze([])
 });
 
+const GUARDIANS_SCORE_ADVANCE_TABLE=Object.freeze([
+ Object.freeze({
+  id:'signal-scout',
+  role:'scout',
+  label:'Signal Scout',
+  formationPoints:30,
+  divePoints:60,
+  referenceIntent:'lowest rank, repeated lower rows, higher value when diving'
+ }),
+ Object.freeze({
+  id:'signal-escort',
+  role:'escort',
+  label:'Signal Escort',
+  formationPoints:50,
+  divePoints:100,
+  referenceIntent:'red escort/charger rank with doubled attack value'
+ }),
+ Object.freeze({
+  id:'signal-flagship',
+  role:'flagship',
+  label:'Signal Flagship',
+  formationPoints:150,
+  divePoints:300,
+  oneEscortDivePoints:500,
+  twoEscortDivePoints:800,
+  referenceIntent:'top command ship with escalating escorted-dive value'
+ }),
+ Object.freeze({
+  id:'player-interceptor',
+  role:'player',
+  label:'Guardian Interceptor',
+  fireMode:'single-shot',
+  referenceIntent:'single in-flight shot; no Aurora dual-fighter scoring branch'
+ })
+]);
+
+const GUARDIANS_ATTRACT_MISSION=Object.freeze({
+ id:'guardians-attract-mission-0.1',
+ title:'WE ARE THE GALAXY GUARDIANS',
+ lines:Object.freeze([
+  'MISSION: BREAK THE SIGNAL RACK',
+  'WATCH FOR FLAGSHIP ESCORT DIVES',
+  'SINGLE SHOT ONLY - MAKE IT COUNT'
+ ]),
+ scoreAdvanceTableId:'guardians-score-advance-table-0.1',
+ referenceIntent:'Guardians-owned mission and score-table language derived from Galaxian attract/score-table promoted windows, not Aurora wait-mode copy.'
+});
+
 const GALAXY_GUARDIANS_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'galaxy-guardians-preview',
@@ -242,9 +292,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity; gameplay integration remains offline.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a dev-only scout-wave slice.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and dev-only scout-wave runtime while Aurora remains the primary public cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',
@@ -254,8 +304,8 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
    Object.freeze({label:'Pack identity and shell preview',state:'online'}),
    Object.freeze({label:'Reference footage and movement map',state:'next'}),
    Object.freeze({label:'Visual and audio identity catalog',state:'online'}),
-   Object.freeze({label:'Minimal scout-wave playable slice',state:'planned'}),
-   Object.freeze({label:'Application-owned scoring harness',state:'planned'})
+   Object.freeze({label:'Minimal scout-wave playable slice',state:'online'}),
+   Object.freeze({label:'Application-owned scoring harness',state:'online'})
   ]),
   launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
  }),
@@ -279,6 +329,8 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  audioThemes:GUARDIANS_AUDIO_THEMES,
  alienVisualCatalog:GUARDIANS_ALIEN_VISUAL_CATALOG,
  audioCueCatalog:GUARDIANS_AUDIO_CUE_CATALOG,
+ attractMission:GUARDIANS_ATTRACT_MISSION,
+ scoreAdvanceTable:GUARDIANS_SCORE_ADVANCE_TABLE,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,

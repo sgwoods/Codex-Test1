@@ -26,6 +26,7 @@ function resetActiveInputState(reason='manual'){
  }
  if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
 }
+var platformMessagePanelOpen=0;
 function closeDockOverlays(except=''){
  if(except!=='settings'&&typeof settingsOpen!=='undefined'&&settingsOpen&&typeof closeSettings==='function')closeSettings();
  if(except!=='help'&&typeof helpOpen!=='undefined'&&helpOpen&&typeof closeHelp==='function')closeHelp(1);
@@ -35,6 +36,7 @@ function closeDockOverlays(except=''){
  if(except!=='gamePicker'&&typeof gamePickerOpen!=='undefined'&&gamePickerOpen&&typeof closeGamePicker==='function')closeGamePicker(1);
  if(except!=='leaderboard'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.panelOpen&&typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
  if(except!=='account'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.accountPanelOpen&&typeof closeAccountPanel==='function')closeAccountPanel();
+ if(except!=='platformMessages'&&platformMessagePanelOpen&&typeof closePlatformMessagePanel==='function')closePlatformMessagePanel();
  if(except!=='movie'&&typeof isMoviePanelOpen==='function'&&isMoviePanelOpen()&&typeof closeMoviePanel==='function')closeMoviePanel(1);
 }
 function syncAudioUi(){
@@ -81,6 +83,106 @@ function setAudioMuted(next,opts={}){
  syncAudioUi();
  if(!opts.silent)showToast(audioMuted?'Game audio muted':'Game audio on');
 }
+function splitBuildStampDateTime(value=''){
+ const raw=String(value||'').trim().replace(/\s+/g,' ');
+ if(!raw)return {date:'--',time:'--'};
+ const month='Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
+ const dateMatch=raw.match(new RegExp(`\\b(?:${month})\\.?\\s+\\d{1,2},?\\s+\\d{4}\\b`,'i'))||raw.match(/\b\d{4}-\d{2}-\d{2}\b/);
+ const timeMatch=raw.match(/\b\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM)?(?:\s*(?:EDT|EST|UTC|GMT))?\b/i);
+ const date=dateMatch?dateMatch[0].replace(/\s+,/,','):raw.split(',')[0]||raw;
+ const time=timeMatch?timeMatch[0].replace(/\s+/g,' '):'';
+ return {date,time};
+}
+function buildStampDateTimeText(){
+ const parts=splitBuildStampDateTime(BUILD_INFO.released||'');
+ return parts.time?`${parts.date} · ${parts.time}`:parts.date;
+}
+function shellEscapeHtml(value){
+ return String(value??'').replace(/[&<>"']/g,ch=>({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+ }[ch]));
+}
+function currentPlatformMessageRows(){
+ const channel=String(BUILD_INFO.releaseChannel||'development').toUpperCase();
+ const runtime=typeof currentPlatformPackLabel==='function'?currentPlatformPackLabel():PLATFORM_NAME;
+ const rows=[];
+ if(BUILD_UPDATE.available){
+  rows.push({
+   kicker:'UPDATE',
+   main:BUILD_UPDATE.mode==='seen'?'This build updated since your last visit.':'A newer build is available.',
+   meta:'Use Refresh Now on the bottom message strip.'
+  });
+ }
+ rows.push({
+  kicker:'BUILD',
+  main:`${channel} · ${BUILD_INFO.version||'--'}`,
+  meta:buildStampDateTimeText()
+ });
+ rows.push({
+  kicker:'RUNTIME',
+  main:runtime,
+  meta:'Platform-owned shell, controls, score services, replay, and message delivery.'
+ });
+ if(typeof currentGamePack==='function'){
+  const pack=currentGamePack();
+  const title=pack?.metadata?.title||pack?.metadata?.gameKey||'Active game';
+  const state=pack?.metadata?.previewOnly?'Preview pack':'Playable pack';
+  rows.push({
+   kicker:'GAME',
+   main:title,
+   meta:state
+  });
+ }
+ rows.push({
+  kicker:'MESSAGES',
+  main:'Platform message channel ready.',
+  meta:'Future game notices and quality prompts will appear here.'
+ });
+ return rows;
+}
+function renderPlatformMessagePanel(){
+ if(!platformMessagePanel)return;
+ const rows=currentPlatformMessageRows();
+ if(platformMessagePanelStatus)platformMessagePanelStatus.textContent=`${rows.length} current platform notice${rows.length===1?'':'s'}.`;
+ if(platformMessagePanelList){
+  platformMessagePanelList.innerHTML=rows.map(row=>`
+   <div class="platformMessageRow">
+    <span class="platformMessageKicker">${shellEscapeHtml(row.kicker)}</span>
+    <span class="platformMessageMain">${shellEscapeHtml(row.main)}</span>
+    <span class="platformMessageMeta">${shellEscapeHtml(row.meta)}</span>
+   </div>
+  `).join('');
+ }
+}
+function syncPlatformMessagePanelVisibility(){
+ if(!platformMessagePanel)return;
+ const show=!!platformMessagePanelOpen;
+ platformMessagePanel.hidden=!show;
+ platformMessagePanel.classList.toggle('visible',show);
+}
+function openPlatformMessagePanel(){
+ if(!platformMessagePanel)return;
+ closeDockOverlays('platformMessages');
+ platformMessagePanelOpen=1;
+ renderPlatformMessagePanel();
+ syncPlatformMessagePanelVisibility();
+ if(typeof syncOverlayPause==='function')syncOverlayPause();
+ if(typeof syncPauseUi==='function')syncPauseUi();
+}
+function closePlatformMessagePanel(){
+ platformMessagePanelOpen=0;
+ syncPlatformMessagePanelVisibility();
+ if(typeof syncOverlayPause==='function')syncOverlayPause();
+ if(typeof syncPauseUi==='function')syncPauseUi();
+}
+function togglePlatformMessagePanel(){
+ if(platformMessagePanelOpen)closePlatformMessagePanel();
+ else openPlatformMessagePanel();
+}
 function syncBuildStampUi(){
  if(!buildStamp)return;
  const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
@@ -97,24 +199,13 @@ function syncBuildStampUi(){
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
- const showCommit=channel==='development'||channel==='production beta';
- const shortCommit=String(BUILD_INFO.commit||'').trim();
- let runtimeLabel='Platinum';
- try{
-  if(typeof currentPlatformPackLabel==='function')runtimeLabel=currentPlatformPackLabel();
- }catch{}
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
- if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
- if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
- if(buildStampRelease){
-  buildStampRelease.textContent=BUILD_UPDATE.available
-   ? (BUILD_UPDATE.mode==='seen'
-     ? 'This build updated since your last visit. Refresh once if anything looks stale.'
-     : 'New build available. Refresh this tab to get the latest fix.')
-   : (production?'':BUILD_INFO.released);
- }
+ if(buildStampChannel)buildStampChannel.textContent=String(BUILD_INFO.releaseChannel||'development').toUpperCase();
+ if(buildStampVersion)buildStampVersion.textContent=String(BUILD_INFO.version||'--');
+ if(buildStampRelease)buildStampRelease.textContent=buildStampDateTimeText();
  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
+ if(platformMessagePanelOpen)renderPlatformMessagePanel();
 }
 function markHostedBuildSeen(){
  writePref(BUILD_SEEN_KEY,BUILD_INFO.label);

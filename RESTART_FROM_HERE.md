@@ -110,6 +110,7 @@ The important project state is committed and pushed:
 
 - release and planning docs
 - quality scorecard
+- conformance metric overview
 - beta-to-production plan
 - Platinum/application boundary review
 - developer machine baseline
@@ -121,6 +122,7 @@ The important project state is committed and pushed:
 Important docs to read first:
 
 - [PLAN.md](PLAN.md)
+- [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 - [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
 - [HOME_CODEX_PROMPT.md](HOME_CODEX_PROMPT.md)
 - [MACBOOK_CODEX_PROMPT.md](MACBOOK_CODEX_PROMPT.md)
@@ -250,6 +252,7 @@ Keep this rule:
 That rule now applies to:
 
 - quality scores
+- conformance metric overview
 - correspondence evidence
 - reference-video alignment packs
 - audio identity comparisons

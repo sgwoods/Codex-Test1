@@ -1,0 +1,59 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "visual-readability-conformance",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-02",
+  "status": "dev-preview-visual-readability-contract-not-public-release-art",
+  "purpose": "Keep the first Galaxy Guardians playable-preview sprites visibly distinct from Aurora and from each other at gameplay scale.",
+  "sourceEvidence": {
+    "identityBaseline": "reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json",
+    "formationEntry": "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "notes": "This first pass is still a runtime readability contract, but the 2026-05-02 quick-peek playtest moved the sprites smaller, darker, and closer to the Galaxian contact-sheet proportions. It remains separate from final frame-accurate sprite extraction."
+  },
+  "visualRequirements": {
+    "requiredVisualIds": [
+      "signal-flagship",
+      "signal-escort",
+      "signal-scout",
+      "player-interceptor"
+    ],
+    "requiredRoles": [
+      "flagship",
+      "escort",
+      "scout",
+      "player"
+    ],
+    "minimumFilledPixels": {
+      "signal-flagship": 38,
+      "signal-escort": 20,
+      "signal-scout": 22,
+      "player-interceptor": 24
+    },
+    "minimumPaletteChannelsPerSprite": 4,
+    "minimumPairwiseRowDifference": 18,
+    "forbiddenAuroraNameFragments": [
+      "bee",
+      "butterfly",
+      "boss",
+      "capture",
+      "dual"
+    ]
+  },
+  "runtimeRequirements": {
+    "entryFrameMustContainEnteringAliens": true,
+    "formationFrameMustContainAllRoles": true,
+    "firstDiveFrameMustContainActiveDive": true,
+    "firstDiveSnapshotSeconds": 3.25,
+    "hitResolutionMustCreateFlash": true,
+    "requiredHitFlashRoles": [
+      "flagship",
+      "escort",
+      "scout"
+    ]
+  },
+  "harness": {
+    "visualReadabilityCheck": "tools/harness/check-galaxy-guardians-visual-readability.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-visual-readability"
+  }
+}

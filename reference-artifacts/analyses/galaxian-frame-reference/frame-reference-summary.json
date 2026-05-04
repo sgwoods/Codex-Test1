@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "tools/harness/build-galaxian-frame-reference-cycle.js",
+  "generatedAt": "2026-05-03T13:08:45.453Z",
+  "status": "frame-level-reference-extraction-first-pass",
+  "applicationTarget": "galaxy-guardians-preview",
+  "sourceCount": 3,
+  "windowCount": 9,
+  "extractedFrameCount": 1326,
+  "outputs": {
+    "summary": "reference-artifacts/analyses/galaxian-frame-reference/frame-reference-summary.json",
+    "readme": "reference-artifacts/analyses/galaxian-frame-reference/README.md"
+  },
+  "sources": [
+    {
+      "sourceId": "matt-hawkins-arcade-intro",
+      "title": "Galaxian arcade intro / attract",
+      "localPath": "/Users/sgwoods/Downloads/Galaxian (Namco 1979) - Arcade Intro - Matt Hawkins (720p, h264).mp4",
+      "measuredMedia": {
+        "durationSeconds": 59.267,
+        "width": 560,
+        "height": 720,
+        "frameRate": "30/1"
+      },
+      "windows": [
+        {
+          "id": "attract-mission-text",
+          "label": "Attract mission text",
+          "sourceId": "matt-hawkins-arcade-intro",
+          "startSeconds": 0,
+          "durationSeconds": 12,
+          "sampledFps": 4,
+          "extractedFrameCount": 48,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 6,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 6,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 6,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/audio-spectrogram.png"
+        },
+        {
+          "id": "score-advance-table",
+          "label": "Score advance table",
+          "sourceId": "matt-hawkins-arcade-intro",
+          "startSeconds": 10,
+          "durationSeconds": 25,
+          "sampledFps": 4,
+          "extractedFrameCount": 100,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 22.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 22.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 22.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/audio-spectrogram.png"
+        },
+        {
+          "id": "opening-rack-entry",
+          "label": "Opening rack entry",
+          "sourceId": "matt-hawkins-arcade-intro",
+          "startSeconds": 40,
+          "durationSeconds": 18,
+          "sampledFps": 6,
+          "extractedFrameCount": 108,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 49,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 49,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 49,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/audio-spectrogram.png"
+        }
+      ]
+    },
+    {
+      "sourceId": "arcades-lounge-level-5",
+      "title": "Level 5 pressure and clear",
+      "localPath": "/Users/sgwoods/Downloads/GALAXIAN (1979) - LEVEL 5 passed ! Video game - ARCADE'S LOUNGE (1080p, h264).mp4",
+      "measuredMedia": {
+        "durationSeconds": 58.322,
+        "width": 1080,
+        "height": 1920,
+        "frameRate": "25/1"
+      },
+      "windows": [
+        {
+          "id": "player-single-shot-pressure",
+          "label": "Player single-shot pressure",
+          "sourceId": "arcades-lounge-level-5",
+          "startSeconds": 0,
+          "durationSeconds": 28,
+          "sampledFps": 5,
+          "extractedFrameCount": 140,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 14,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 14,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 14,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/audio-spectrogram.png"
+        },
+        {
+          "id": "lower-field-dive-curves",
+          "label": "Lower-field dive curves",
+          "sourceId": "arcades-lounge-level-5",
+          "startSeconds": 18,
+          "durationSeconds": 40.072,
+          "sampledFps": 6,
+          "extractedFrameCount": 242,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 38.036,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 38.036,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 38.036,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/audio-spectrogram.png"
+        },
+        {
+          "id": "level-clear-transition",
+          "label": "Level clear transition",
+          "sourceId": "arcades-lounge-level-5",
+          "startSeconds": 44,
+          "durationSeconds": 12,
+          "sampledFps": 4,
+          "extractedFrameCount": 48,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 50,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 50,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 50,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/audio-spectrogram.png"
+        }
+      ]
+    },
+    {
+      "sourceId": "nenriki-15-wave-session",
+      "title": "15-wave long session",
+      "localPath": "/Users/sgwoods/Downloads/Galaxian (Arcade) original video game  15-wave session for 1 Player 👾🌌🕹️ - Nenriki Gaming Channel (1080p, h264).mp4",
+      "measuredMedia": {
+        "durationSeconds": 944.094,
+        "width": 1080,
+        "height": 1234,
+        "frameRate": "60/1"
+      },
+      "windows": [
+        {
+          "id": "complete-rack-reference",
+          "label": "Complete rack reference",
+          "sourceId": "nenriki-15-wave-session",
+          "startSeconds": 60,
+          "durationSeconds": 20,
+          "sampledFps": 5,
+          "extractedFrameCount": 100,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 70,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 70,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 70,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/audio-spectrogram.png"
+        },
+        {
+          "id": "flagship-escort-pressure",
+          "label": "Flagship escort pressure",
+          "sourceId": "nenriki-15-wave-session",
+          "startSeconds": 90,
+          "durationSeconds": 45,
+          "sampledFps": 6,
+          "extractedFrameCount": 270,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 112.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 112.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 112.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/audio-spectrogram.png"
+        },
+        {
+          "id": "wrap-return-pressure",
+          "label": "Wrap or return pressure",
+          "sourceId": "nenriki-15-wave-session",
+          "startSeconds": 105,
+          "durationSeconds": 45,
+          "sampledFps": 6,
+          "extractedFrameCount": 270,
+          "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/frame-index.json",
+          "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg",
+          "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/motion-difference-sheet.jpg",
+          "spriteReferenceCrops": [
+            {
+              "id": "rack-upper-aliens",
+              "label": "Upper rack alien sprite reference",
+              "tSourceSeconds": 127.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/sprite-crops/rack-upper-aliens.jpg"
+            },
+            {
+              "id": "lower-field-divers",
+              "label": "Lower-field diver reference",
+              "tSourceSeconds": 127.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/sprite-crops/lower-field-divers.jpg"
+            },
+            {
+              "id": "player-and-shot",
+              "label": "Player ship and shot reference",
+              "tSourceSeconds": 127.5,
+              "artifact": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/sprite-crops/player-and-shot.jpg"
+            }
+          ],
+          "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-waveform.png",
+          "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-spectrogram.png"
+        }
+      ]
+    }
+  ],
+  "promotionUse": [
+    "rack timing review from opening-rack-entry and complete-rack-reference frame indexes",
+    "dive path curve review from lower-field-dive-curves, flagship-escort-pressure, and wrap-return-pressure motion sheets",
+    "sprite-reference review from upper-rack, diver, and player crop sets",
+    "audio waveform/spectrogram comparison for shot, dive, and attract/rack timing cues"
+  ]
+}

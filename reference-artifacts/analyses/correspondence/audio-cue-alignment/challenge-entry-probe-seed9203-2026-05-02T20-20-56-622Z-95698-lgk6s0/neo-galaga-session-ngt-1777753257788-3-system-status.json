@@ -1,0 +1,229 @@
+{
+  "generatedAt": "2026-05-02T20:20:57.809Z",
+  "build": {
+    "version": "1.2.3",
+    "label": "1.2.3+build.549.sha.7ef349b.dirty",
+    "commit": "7ef349b3ad0cf83cbc60854219a1f7f602c17d17",
+    "branch": "codex/macbook-pro-guardians-identity-0-1-candidate",
+    "dirty": true,
+    "released": "May 02 2026, 4:19 PM EDT",
+    "state": "codex/macbook-pro-guardians-identity-0-1-candidate@7ef349b dirty",
+    "releaseChannel": "development"
+  },
+  "location": "http://127.0.0.1:56811/index.html",
+  "game": {
+    "stage": 3,
+    "score": 0,
+    "lives": 3,
+    "started": false,
+    "paused": false,
+    "challenge": true,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "challengeTransition",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "challenge",
+      "variant": 0,
+      "referenceClip": "assets/reference-audio/galaga2-challenging-stage.m4a",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 1.05,
+      "stage": 2,
+      "challenge": false,
+      "at": 0.591
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga2-challenging-stage.m4a",
+      "lastLoaded": "assets/reference-audio/galaga3-level-underscore.m4a",
+      "lastStarted": "assets/reference-audio/galaga2-game-start.m4a",
+      "lastError": "",
+      "activeCount": 1
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue challengeTransition (galaga-reference-assets) · requested galaga2-challenging-stage.m4a · loaded galaga3-tractor-beam.m4a · started galaga-opening-theme.m4a · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0,
+        "type": "game_start",
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 2,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 2,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 2
+      }
+    },
+    {
+      "at": "+0.117s",
+      "level": "info",
+      "action": "challenge_transition_started",
+      "message": "challenge_transition_started",
+      "data": {
+        "t": 0.117,
+        "type": "challenge_transition_started",
+        "stage": 2,
+        "pendingStage": 3,
+        "targetStage": 3,
+        "mode": "normal",
+        "nextIsChallenge": true,
+        "nextStageT": 2.8,
+        "postChallengeT": 0,
+        "challenge": false,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+0.117s",
+      "level": "info",
+      "action": "harness_stage_transition_probe_setup",
+      "message": "harness_stage_transition_probe_setup",
+      "data": {
+        "t": 0.117,
+        "type": "harness_stage_transition_probe_setup",
+        "stage": 2,
+        "nextStage": 3,
+        "nextStageIsChallenge": true,
+        "nextStageT": 2.8,
+        "transitionCueT": 2.22,
+        "mode": "normal"
+      }
+    },
+    {
+      "at": "+2.333s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 2.333,
+        "type": "audio_cue",
+        "cue": "challengeTransition",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-challenging-stage.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 1.05,
+        "challenge": false,
+        "stage": 2
+      }
+    },
+    {
+      "at": "+2.933s",
+      "level": "info",
+      "action": "challenge_transition_spawn_commit",
+      "message": "challenge_transition_spawn_commit",
+      "data": {
+        "t": 2.933,
+        "type": "challenge_transition_spawn_commit",
+        "stage": 2,
+        "pendingStage": 3,
+        "nextStageT": 0,
+        "challenge": false
+      }
+    },
+    {
+      "at": "+2.917s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 2.917,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": null
+      }
+    },
+    {
+      "at": "+2.917s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 2.917,
+        "type": "stage_profile",
+        "stage": 3,
+        "challenge": true,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+5.017s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 5.017,
+        "type": "harness_stop",
+        "label": "challenge-entry-probe"
+      }
+    }
+  ]
+}

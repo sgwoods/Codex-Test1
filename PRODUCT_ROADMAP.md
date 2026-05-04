@@ -83,6 +83,28 @@ Current decision:
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release
 
+Current conformance read:
+
+- see [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
+- see the generated score/target roll-up in
+  [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
+- overall Aurora quality is `8.8/10`
+- audio identity and cue alignment is the weakest category at `6.1/10`
+- player movement conformance is the next visible feel gap at `8.1/10`
+- Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
+  yet part of the Aurora numeric roll-up
+- Guardians evidence-weighted reference conformance is now `7.6/10`, but the
+  stricter playtest-weighted score is only `6.6/10` after local review found
+  audio, pace, and graphic likeness still short of a compelling Galaxian-style
+  preview; cue-target gates now require labeled square/noise windows,
+  mixed-source cue candidates, component sprite targets, and waveform/spectrogram
+  previews are now persisted, and stage-rank gates now require denser later-wave
+  pressure
+- current cluster targets are `9.0/10` for Aurora and `7.6/10` reference /
+  `6.6/10` playtest for Guardians in the `1.3` Fidelity and Trust lane, rising
+  toward `9.5/10` and `9.0/10` reference / `8.8/10` playtest by the `2.0`
+  multi-game Platinum candidate lane
+
 ## Main Investment Themes
 
 ### 1. Movement and control fidelity
@@ -104,8 +126,9 @@ Target:
 
 Why:
 
-- cue alignment is strong now
-- the remaining opportunity is personality, phrase feel, and atmosphere
+- audio identity and cue alignment is the weakest measured category
+- the remaining opportunity is personality, phrase feel, acoustic fit, and
+  better reference-derived timing/evidence
 
 ### 3. Gameplay trust fixes
 

@@ -29,10 +29,10 @@
     ]
   },
   "runtimeRules": {
-    "firstEnemyShotDelaySeconds": 3.1,
-    "enemyShotIntervalBaseSeconds": 1.15,
+    "firstEnemyShotDelaySeconds": 4.1,
+    "enemyShotIntervalBaseSeconds": 1.25,
     "enemyShotIntervalJitterSeconds": 0.75,
-    "enemyShotVyPxPerSecond": 94,
+    "enemyShotVyPxPerSecond": 108,
     "enemyShotMaxLive": 3,
     "enemyShotStartYOffsetPx": 8,
     "enemyShotPlayerHitboxPx": 7,
@@ -49,8 +49,8 @@
     "flagshipTwoEscortDivePoints": 800
   },
   "runtimeExpectations": {
-    "firstEnemyShotBandSeconds": [3.08, 3.13],
-    "minimumEnemyShotsBySixSeconds": 2,
+    "firstEnemyShotBandSeconds": [4.08, 4.14],
+    "minimumEnemyShotsBySixSeconds": 1,
     "maximumLiveEnemyShots": 3,
     "requiredAudioCueId": "guardians-enemy-shot",
     "requiredPlayerLossCause": "enemy_shot"

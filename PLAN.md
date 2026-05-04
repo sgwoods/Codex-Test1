@@ -28,6 +28,8 @@ This means:
 - keep the refreshed `1.2.3+build.532.sha.b959491` production line trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
+- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) as the
+  readable current quality map before choosing beta-shaping work
 
 ### 2. Multi-Machine Release Discipline
 
@@ -105,6 +107,14 @@ This means:
 5. prioritize level-by-level arcade depth as the next major product pillar
 6. make shared gameplay-video publishing an early evidence/product capability
 7. continue narrow trust fixes from the open issue stream
+
+Current conformance read:
+
+- overall Aurora quality is `8.8/10`
+- audio identity and cue alignment is the weakest category at `6.1/10`
+- player movement is the next visible feel gap at `8.0/10`
+- Galaxy Guardians 0.1 preview gates are green but pass/fail only, not part of
+  the Aurora numeric roll-up yet
 
 ## Release Direction
 
