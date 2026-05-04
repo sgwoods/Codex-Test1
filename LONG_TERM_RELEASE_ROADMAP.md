@@ -223,6 +223,9 @@ Bundle:
 - unify popup, dock, overlay, score, manual, and wait-mode surfaces
 - make settings, account, bug report, score, and help entry points feel
   consistent and contained inside the cabinet frame
+- split `Platform Developer Tools` from game-specific settings as separate
+  first-class surfaces, with game settings visually anchored near the
+  game-selection rocket instead of folded into global platform tools
 - preserve release information as one message type rather than the whole panel
 - use published-run and scorebook signals as future message sources once those
   systems exist

@@ -102,6 +102,13 @@ Once `1.3.0` is out, the roadmap pickup should be:
 That sequencing should be treated as intentional carry-forward planning, not
 something to rediscover after the release is already shipped.
 
+Specific deferred shell/UI cleanup to hold for that `1.6.0` family:
+
+- separate Platinum-owned developer tools from game-owned settings
+- keep a first-class platform developer-tools entry in the quick-tools cluster
+- add a first-class game-settings entry beside the game-selection/rocket area
+  so active-game controls visually live with cabinet choice, not platform tools
+
 Current conformance read:
 
 - see [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)

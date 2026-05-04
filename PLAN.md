@@ -145,6 +145,14 @@ After `1.3.0` ships, the plan should pick up in this order:
 That keeps the next cycle from collapsing back into unprioritized polish and
 preserves the release-family shape already captured in the roadmap docs.
 
+Deferred shell bug to carry into `1.6.0`:
+
+- split `Platform Developer Tools` from game-specific settings instead of
+  widening the current release scope
+- keep platform developer tools as a Platinum-owned quick-tools surface
+- place game settings with game identity/selection near the rocket so the
+  active game's controls feel first-class and cabinet-local
+
 ## Long-Term Direction
 
 The long-term platform goal is:
