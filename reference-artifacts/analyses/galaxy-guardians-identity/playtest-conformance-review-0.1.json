@@ -12,6 +12,7 @@
       "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+      "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
@@ -33,10 +34,10 @@
     "10": "Reference-faithful enough for public conformance claims."
   },
   "summary": {
-    "evidenceWeightedReferenceScore10": 7.6,
-    "playtestWeightedConformanceScore10": 6.6,
+    "evidenceWeightedReferenceScore10": 7.7,
+    "playtestWeightedConformanceScore10": 6.9,
     "compellingPreviewTargetScore10": 7.0,
-    "releaseRead": "Closer, but still not yet compelling enough for beta-facing preview. The runtime now has measured stage-rank pressure, component-derived sprites, and labeled cue-window influenced audio. Audio and motion feel still need live browser/playback review before a beta-facing claim."
+    "releaseRead": "Closer, but still just below the compelling-preview bar. The runtime now has measured stage-rank pressure, component-derived sprites, labeled cue-window influenced audio, and a reusable Platinum audio conformance lab that compares runtime cue synthesis to promoted reference windows. Audio and motion feel still need live browser/playback review before a beta-facing claim."
   },
   "categories": [
     {
@@ -45,7 +46,7 @@
       "weight": 28,
       "previousOfficialScore10": 5.3,
       "playtestAdjustedBeforePass10": 2.5,
-      "playtestWeightedScore10": 5.4,
+      "playtestWeightedScore10": 6.4,
       "compellingPreviewTarget10": 7.0,
       "metricSet": [
         "hardware-like square/noise timbre",
@@ -54,10 +55,11 @@
         "event mix density during live play",
         "waveform/spectrogram proxy fit",
         "isolated cue candidate family coverage",
-        "labeled cue-window waveform/spectrogram previews"
+        "labeled cue-window waveform/spectrogram previews",
+        "runtime cue versus promoted reference-window lab score"
       ],
-      "currentRead": "Cue ownership and shape are harnessed, CPU analysis finds 64 mixed-source cue candidates, 8 cue windows are now promoted with waveform/spectrogram previews, and the runtime cues were retuned toward the measured square/noise bands. This is much closer architecturally, but still needs human listening and live playback review.",
-      "nextEvidenceNeeded": "Human-listen the promoted cue windows, replace dirty mixed-gameplay windows, and score live playback against the target set."
+      "currentRead": "Cue ownership and shape are harnessed, CPU analysis finds 64 mixed-source cue candidates, 8 cue windows are promoted with waveform/spectrogram previews, and the reusable Platinum audio conformance lab now compares runtime cue synthesis against those windows. Runtime cues were retuned toward sharper, higher-register square/noise transients, lifting the measured cue-lab score while remaining short of a human-listened beta claim.",
+      "nextEvidenceNeeded": "Human-listen the generated runtime/reference cue preview pairs, replace dirty mixed-gameplay windows, and score live playback against the target set."
     },
     {
       "id": "motion-pressure",

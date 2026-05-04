@@ -1,0 +1,579 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "gameLabel": "Galaxy Guardians 0.1 Preview",
+  "artifactType": "platinum-audio-conformance-lab",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-04",
+  "status": "runtime-cue-to-promoted-reference-window-comparison",
+  "generatedBy": "tools/harness/analyze-platinum-audio-conformance-lab.js",
+  "sourceEvidence": {
+    "labeledCueArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+    "cueTargetArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/audio-cue-targets-0.1.json",
+    "cueCandidateArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "sampleRateHz": 22050,
+    "note": "The lab stores JSON metrics and waveform/spectrogram PNG previews. It does not commit raw reference audio snippets."
+  },
+  "summary": {
+    "cueCount": 8,
+    "overallAudioConformanceScore10": 8.3,
+    "compellingPreviewTarget10": 7,
+    "weakestCue": "enemyShot",
+    "strongestCue": "flagshipHit",
+    "reusablePlatformRead": "This lab is game-configured and can be registered for Aurora or future Platinum game packs."
+  },
+  "cues": [
+    {
+      "cueName": "playerShot",
+      "semanticLabel": "player single shot / fire tick",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "score10": 8.4,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 9.3,
+        "envelopeShape": 6.3,
+        "decayShape": 6.4,
+        "hardwareCharacter": 10,
+        "descent": 10
+      },
+      "recommendation": "sharpen the transient/envelope shape; adjust decay so the cue reads less sustained",
+      "reference": {
+        "startSeconds": 21.102,
+        "durationSeconds": 0.08,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerShot-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerShot-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.08,
+          "rms": 0.14547,
+          "peak": 0.46384,
+          "zeroCrossingsPerSecond": 7212.5,
+          "zeroCrossingFrequencyProxyHz": 3606.3,
+          "burstFrameShare": 0.273,
+          "envelopeContrast": 1.228,
+          "decayRatio": 0.952,
+          "attackPeakPosition": 0.8,
+          "frameRmsP10": 0.11984,
+          "frameRmsP50": 0.14247,
+          "frameRmsP90": 0.16308
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerShot-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerShot-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 2,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.064,
+          "firstFrequencyHz": 2660,
+          "lastFrequencyHz": 2050,
+          "peakFrequencyHz": 2660,
+          "minFrequencyHz": 2050,
+          "frequencyDropHz": 610,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.064,
+          "rms": 0.00991,
+          "peak": 0.02778,
+          "zeroCrossingsPerSecond": 3935.3,
+          "zeroCrossingFrequencyProxyHz": 1967.6,
+          "burstFrameShare": 0.222,
+          "envelopeContrast": 1.913,
+          "decayRatio": 0.339,
+          "attackPeakPosition": 0.125,
+          "frameRmsP10": 0.00223,
+          "frameRmsP50": 0.00813,
+          "frameRmsP90": 0.01337
+        }
+      }
+    },
+    {
+      "cueName": "enemyShot",
+      "semanticLabel": "alien shot / low tick",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "score10": 7.1,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 3.9,
+        "envelopeShape": 8.8,
+        "decayShape": 6.2,
+        "hardwareCharacter": 10,
+        "descent": 10
+      },
+      "recommendation": "lower the square/noise frequency proxy; adjust decay so the cue reads less sustained",
+      "reference": {
+        "startSeconds": 17.829,
+        "durationSeconds": 0.08,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/enemyShot-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/enemyShot-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.08,
+          "rms": 0.1178,
+          "peak": 0.3457,
+          "zeroCrossingsPerSecond": 3375,
+          "zeroCrossingFrequencyProxyHz": 1687.5,
+          "burstFrameShare": 0.091,
+          "envelopeContrast": 1.478,
+          "decayRatio": 1.023,
+          "attackPeakPosition": 0.8,
+          "frameRmsP10": 0.08396,
+          "frameRmsP50": 0.11285,
+          "frameRmsP90": 0.12955
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/enemyShot-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/enemyShot-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 2,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.062,
+          "firstFrequencyHz": 1080,
+          "lastFrequencyHz": 720,
+          "peakFrequencyHz": 1080,
+          "minFrequencyHz": 720,
+          "frequencyDropHz": 360,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.062,
+          "rms": 0.00765,
+          "peak": 0.02214,
+          "zeroCrossingsPerSecond": 2804.6,
+          "zeroCrossingFrequencyProxyHz": 1402.3,
+          "burstFrameShare": 0.375,
+          "envelopeContrast": 1.733,
+          "decayRatio": 0.322,
+          "attackPeakPosition": 0.143,
+          "frameRmsP10": 0.00262,
+          "frameRmsP50": 0.00787,
+          "frameRmsP90": 0.01049
+        }
+      }
+    },
+    {
+      "cueName": "scoutDive",
+      "semanticLabel": "solo scout dive pressure",
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "flagship-escort-pressure",
+      "score10": 8.4,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 8.3,
+        "envelopeShape": 6.9,
+        "decayShape": 7.5,
+        "hardwareCharacter": 10,
+        "descent": 10
+      },
+      "recommendation": "sharpen the transient/envelope shape",
+      "reference": {
+        "startSeconds": 102.342,
+        "durationSeconds": 0.08,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutDive-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutDive-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.08,
+          "rms": 0.10943,
+          "peak": 0.36243,
+          "zeroCrossingsPerSecond": 3325,
+          "zeroCrossingFrequencyProxyHz": 1662.5,
+          "burstFrameShare": 0.182,
+          "envelopeContrast": 1.45,
+          "decayRatio": 0.777,
+          "attackPeakPosition": 0.2,
+          "frameRmsP10": 0.07904,
+          "frameRmsP50": 0.10151,
+          "frameRmsP90": 0.12637
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutDive-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutDive-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 3,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.22,
+          "firstFrequencyHz": 1520,
+          "lastFrequencyHz": 860,
+          "peakFrequencyHz": 1520,
+          "minFrequencyHz": 860,
+          "frequencyDropHz": 660,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.22,
+          "rms": 0.00579,
+          "peak": 0.0162,
+          "zeroCrossingsPerSecond": 2045.5,
+          "zeroCrossingFrequencyProxyHz": 1022.7,
+          "burstFrameShare": 0.214,
+          "envelopeContrast": 2.124,
+          "decayRatio": 0.423,
+          "attackPeakPosition": 0.222,
+          "frameRmsP10": 0.00206,
+          "frameRmsP50": 0.00476,
+          "frameRmsP90": 0.00858
+        }
+      }
+    },
+    {
+      "cueName": "flagshipDive",
+      "semanticLabel": "flagship / escort dive pressure",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "lower-field-dive-curves",
+      "score10": 8.5,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 7.8,
+        "envelopeShape": 7.5,
+        "decayShape": 8.4,
+        "hardwareCharacter": 10,
+        "descent": 10
+      },
+      "recommendation": "flagshipDive is close enough for the next human-listening pass",
+      "reference": {
+        "startSeconds": 21.233,
+        "durationSeconds": 0.08,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipDive-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipDive-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.08,
+          "rms": 0.12864,
+          "peak": 0.45181,
+          "zeroCrossingsPerSecond": 4962.5,
+          "zeroCrossingFrequencyProxyHz": 2481.3,
+          "burstFrameShare": 0.182,
+          "envelopeContrast": 1.415,
+          "decayRatio": 0.694,
+          "attackPeakPosition": 0.2,
+          "frameRmsP10": 0.10233,
+          "frameRmsP50": 0.11346,
+          "frameRmsP90": 0.16679
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipDive-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipDive-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 3,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.32,
+          "firstFrequencyHz": 2060,
+          "lastFrequencyHz": 1120,
+          "peakFrequencyHz": 2060,
+          "minFrequencyHz": 1120,
+          "frequencyDropHz": 940,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.32,
+          "rms": 0.0064,
+          "peak": 0.02014,
+          "zeroCrossingsPerSecond": 2634.4,
+          "zeroCrossingFrequencyProxyHz": 1317.2,
+          "burstFrameShare": 0.22,
+          "envelopeContrast": 1.947,
+          "decayRatio": 0.495,
+          "attackPeakPosition": 0.175,
+          "frameRmsP10": 0.00187,
+          "frameRmsP50": 0.00548,
+          "frameRmsP90": 0.00959
+        }
+      }
+    },
+    {
+      "cueName": "scoutHit",
+      "semanticLabel": "small alien hit click",
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "wrap-return-pressure",
+      "score10": 8.2,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 9.8,
+        "envelopeShape": 5.7,
+        "decayShape": 5.9,
+        "hardwareCharacter": 10,
+        "descent": 8
+      },
+      "recommendation": "sharpen the transient/envelope shape; adjust decay so the cue reads less sustained",
+      "reference": {
+        "startSeconds": 128.247,
+        "durationSeconds": 0.02,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutHit-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutHit-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.02,
+          "rms": 0.15809,
+          "peak": 0.43387,
+          "zeroCrossingsPerSecond": 3550,
+          "zeroCrossingFrequencyProxyHz": 1775,
+          "burstFrameShare": 0,
+          "envelopeContrast": 1.108,
+          "decayRatio": 0.88,
+          "attackPeakPosition": 0.5,
+          "frameRmsP10": 0.12175,
+          "frameRmsP50": 0.16444,
+          "frameRmsP90": 0.16759
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutHit-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutHit-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 1,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.024,
+          "firstFrequencyHz": 1310,
+          "lastFrequencyHz": 1310,
+          "peakFrequencyHz": 1310,
+          "minFrequencyHz": 1310,
+          "frequencyDropHz": 0,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.024,
+          "rms": 0.00862,
+          "peak": 0.01708,
+          "zeroCrossingsPerSecond": 2080.2,
+          "zeroCrossingFrequencyProxyHz": 1040.1,
+          "burstFrameShare": 0.25,
+          "envelopeContrast": 1.83,
+          "decayRatio": 0.224,
+          "attackPeakPosition": 0,
+          "frameRmsP10": 0.00023,
+          "frameRmsP50": 0.00886,
+          "frameRmsP90": 0.01127
+        }
+      }
+    },
+    {
+      "cueName": "escortHit",
+      "semanticLabel": "escort hit snap",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "score10": 8.4,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 8.6,
+        "envelopeShape": 8.3,
+        "decayShape": 6.1,
+        "hardwareCharacter": 10,
+        "descent": 8
+      },
+      "recommendation": "adjust decay so the cue reads less sustained",
+      "reference": {
+        "startSeconds": 16.852,
+        "durationSeconds": 0.08,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/escortHit-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/escortHit-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.08,
+          "rms": 0.13412,
+          "peak": 0.40482,
+          "zeroCrossingsPerSecond": 5687.5,
+          "zeroCrossingFrequencyProxyHz": 2843.8,
+          "burstFrameShare": 0.273,
+          "envelopeContrast": 1.42,
+          "decayRatio": 0.96,
+          "attackPeakPosition": 0.8,
+          "frameRmsP10": 0.10265,
+          "frameRmsP50": 0.11827,
+          "frameRmsP90": 0.15966
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/escortHit-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/escortHit-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 2,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.066,
+          "firstFrequencyHz": 2080,
+          "lastFrequencyHz": 1520,
+          "peakFrequencyHz": 2080,
+          "minFrequencyHz": 1520,
+          "frequencyDropHz": 560,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.066,
+          "rms": 0.00828,
+          "peak": 0.02121,
+          "zeroCrossingsPerSecond": 3634.6,
+          "zeroCrossingFrequencyProxyHz": 1817.3,
+          "burstFrameShare": 0.333,
+          "envelopeContrast": 1.789,
+          "decayRatio": 0.291,
+          "attackPeakPosition": 0.125,
+          "frameRmsP10": 0.00172,
+          "frameRmsP50": 0.00682,
+          "frameRmsP90": 0.01178
+        }
+      }
+    },
+    {
+      "cueName": "flagshipHit",
+      "semanticLabel": "flagship hit / score snap",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "lower-field-dive-curves",
+      "score10": 8.7,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 9.7,
+        "envelopeShape": 7.6,
+        "decayShape": 6.9,
+        "hardwareCharacter": 10,
+        "descent": 8
+      },
+      "recommendation": "adjust decay so the cue reads less sustained",
+      "reference": {
+        "startSeconds": 34.562,
+        "durationSeconds": 0.08,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipHit-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipHit-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.08,
+          "rms": 0.14184,
+          "peak": 0.46506,
+          "zeroCrossingsPerSecond": 7662.5,
+          "zeroCrossingFrequencyProxyHz": 3831.3,
+          "burstFrameShare": 0.091,
+          "envelopeContrast": 1.419,
+          "decayRatio": 0.82,
+          "attackPeakPosition": 0.2,
+          "frameRmsP10": 0.12282,
+          "frameRmsP50": 0.12995,
+          "frameRmsP90": 0.15443
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipHit-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipHit-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 3,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.116,
+          "firstFrequencyHz": 2560,
+          "lastFrequencyHz": 1450,
+          "peakFrequencyHz": 2560,
+          "minFrequencyHz": 1450,
+          "frequencyDropHz": 1110,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.116,
+          "rms": 0.00832,
+          "peak": 0.02491,
+          "zeroCrossingsPerSecond": 4094.5,
+          "zeroCrossingFrequencyProxyHz": 2047.3,
+          "burstFrameShare": 0.267,
+          "envelopeContrast": 1.933,
+          "decayRatio": 0.362,
+          "attackPeakPosition": 0.071,
+          "frameRmsP10": 0.00158,
+          "frameRmsP50": 0.00623,
+          "frameRmsP90": 0.01333
+        }
+      }
+    },
+    {
+      "cueName": "playerLoss",
+      "semanticLabel": "loss / descending failure sweep",
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "level-clear-transition",
+      "score10": 8.6,
+      "scoreParts": {
+        "duration": 10,
+        "frequencyProxy": 9.6,
+        "envelopeShape": 6.4,
+        "decayShape": 6.8,
+        "hardwareCharacter": 10,
+        "descent": 10
+      },
+      "recommendation": "sharpen the transient/envelope shape; adjust decay so the cue reads less sustained",
+      "reference": {
+        "startSeconds": 47.392,
+        "durationSeconds": 0.21,
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerLoss-reference-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerLoss-reference-spectrogram.png",
+        "pcm": {
+          "durationSeconds": 0.21,
+          "rms": 0.12376,
+          "peak": 0.41788,
+          "zeroCrossingsPerSecond": 6670.7,
+          "zeroCrossingFrequencyProxyHz": 3335.4,
+          "burstFrameShare": 0.148,
+          "envelopeContrast": 1.245,
+          "decayRatio": 0.901,
+          "attackPeakPosition": 1,
+          "frameRmsP10": 0.10435,
+          "frameRmsP50": 0.12565,
+          "frameRmsP90": 0.13866
+        }
+      },
+      "runtime": {
+        "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerLoss-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerLoss-runtime-spectrogram.png",
+        "static": {
+          "toneCount": 3,
+          "noiseCount": 1,
+          "totalDurationSeconds": 0.225,
+          "firstFrequencyHz": 2370,
+          "lastFrequencyHz": 1100,
+          "peakFrequencyHz": 2370,
+          "minFrequencyHz": 1100,
+          "frequencyDropHz": 1270,
+          "waveFamilies": [
+            "square"
+          ],
+          "squareToneShare": 1,
+          "hasSlide": true
+        },
+        "pcm": {
+          "durationSeconds": 0.225,
+          "rms": 0.00971,
+          "peak": 0.03637,
+          "zeroCrossingsPerSecond": 3581.7,
+          "zeroCrossingFrequencyProxyHz": 1790.8,
+          "burstFrameShare": 0.241,
+          "envelopeContrast": 1.923,
+          "decayRatio": 0.387,
+          "attackPeakPosition": 0.036,
+          "frameRmsP10": 0.00318,
+          "frameRmsP50": 0.00779,
+          "frameRmsP90": 0.01529
+        }
+      }
+    }
+  ],
+  "nextPromotion": "Human-listen the generated runtime/reference preview pairs, mark dirty reference windows, then replace weak cue recipes or target windows before beta-facing audio claims."
+}

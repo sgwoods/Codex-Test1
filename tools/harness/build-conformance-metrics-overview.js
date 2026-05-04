@@ -4,6 +4,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT = path.join(ROOT, 'CONFORMANCE_METRICS_OVERVIEW.md');
+const LEGACY_OUT = path.join(ROOT, 'CONFORMANCE_METRIC_OVERVIEW.md');
 const AURORA_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'quality-conformance');
 const GUARDIANS_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'reference-conformance-0.1.json');
 const GUARDIANS_PLAYTEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'playtest-conformance-review-0.1.json');
@@ -54,12 +55,18 @@ function buildTable(headers, rows){
   return [head, rule, ...body].join('\n');
 }
 
-function releaseTargetSections(){
+function releaseTargetSections(guardians, guardiansPlaytest){
+  const guardiansReferenceScore = guardians.summary.referenceConformanceScore10;
+  const guardiansPlaytestScore = guardiansPlaytest.summary.playtestWeightedConformanceScore10;
+  const guardiansAudio = (guardiansPlaytest.categories || []).find(category => category.id === 'audio-character')?.playtestWeightedScore10 || 0;
+  const guardiansMotion = (guardiansPlaytest.categories || []).find(category => category.id === 'motion-pressure')?.playtestWeightedScore10 || 0;
+  const guardiansVisual = (guardiansPlaytest.categories || []).find(category => category.id === 'visual-identity')?.playtestWeightedScore10 || 0;
+  const guardiansAudioReference = (guardians.categories || []).find(category => category.id === 'audio-reference-character')?.score10 || 0;
   const releaseTargets = buildTable(
     ['Release cluster / focus', 'Aurora target', 'Aurora focus metrics', 'Guardians target', 'Guardians focus metrics', 'Release decision meaning'],
     [
-      ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', '7.6/10 reference; 6.6/10 playtest', 'maturity 7.0; gate coverage 9.5; public readiness 3.9; audio feel 5.4', 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
-      ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', '7.6/10 reference; 6.6/10 playtest', 'rack timing >= 6.2; movement pressure >= 6.2; visual identity >= 6.7; audio feel >= 5.4', 'Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible.'],
+      ['Current dev baseline', '8.8/10', 'audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2', `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `maturity ${guardians.summary.referenceMaturityScore10}; gate coverage ${guardians.summary.implementationGateCoverageScore10}; public readiness ${guardians.summary.publicReleaseReadinessScore10}; audio feel ${guardiansAudio}`, 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
+      ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `rack timing >= 6.2; movement pressure ${guardiansMotion}; visual identity ${guardiansVisual}; audio feel ${guardiansAudio}`, 'Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible.'],
       ['`1.4` Arcade Depth / Guardians 0.1 Preview', '9.2/10', 'level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6', '7.8/10 reference; 7.0/10 playtest', 'frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0', 'Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora.'],
       ['`1.5` Flight Recorder and Shared Evidence', '9.3/10', 'replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6', '8.2/10', 'source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0', 'Shared video and evidence become release infrastructure for both applications.'],
       ['`1.6` Message to Pilot / Platform Shell', '9.4/10', 'popup containment >= 9.6; message channel >= 8.8; shell copy ownership >= 9.5', '8.5/10', 'platform integration >= 9.5; preview messaging >= 8.8; pack-boundary durability 10.0', 'Platinum feels like a coherent cabinet shell across multiple games.'],
@@ -71,7 +78,7 @@ function releaseTargetSections(){
     ['Metric family', 'Aurora current', 'Aurora next target', 'Guardians current', 'Guardians next target', 'Why it matters'],
     [
       ['Movement and pressure', '8.1/10', '8.6/10 in `1.3`; 8.8/10 in `1.4`', '6.2/10 playtest; 6.2/10 reference category', 'browser-reviewed runtime tuning in `1.3`; 7.2/10 playtest in `1.4`', 'This is the strongest direct feel signal during live play.'],
-      ['Audio identity / acoustic fit', '6.1/10', '7.2/10 in `1.3`; 7.6/10 in `1.4`', '5.4/10 playtest; 5.5/10 reference category', 'human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4`', 'Audio is the weakest shared conformance area today.'],
+      ['Audio identity / acoustic fit', '6.1/10', '7.2/10 in `1.3`; 7.6/10 in `1.4`', `${guardiansAudio}/10 playtest; ${guardiansAudioReference}/10 reference category`, 'human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4`', 'Audio is the weakest shared conformance area today.'],
       ['Visual identity', '9.2/10 shell integrity; game sprites not separately scored in the roll-up', 'add a visible arcade-depth visual score in `1.4`', '6.7/10 playtest; 6.8/10 reference category', 'browser-reviewed component-sprite polish in `1.3`; 7.0/10 playtest in `1.4`', 'Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview.'],
       ['Stage / rack / wave timing', 'stage opening 8.5; challenge timing 8.4', 'challenge and later-stage targets >= 8.6 in `1.4`', 'rack timing 6.2/10', 'browser-reviewed rack timing in `1.3`; 7.2/10 in `1.4`', 'Timing separates authentic arcade pressure from approximate motion.'],
       ['Scoring and progression', 'progression/persona 8.8; shot/hit 10.0', 'level-depth and scoring stability >= 9.0 by `2.0`', 'single-shot threat/scoring 7.5', '7.6 in `1.4`; 8.8 by `2.0`', 'Guardians should not publish persistent scoreboards until scoring is reference-aligned.'],
@@ -93,8 +100,8 @@ function releaseTargetSections(){
     '  x-axis ["Current", "1.3", "1.4", "1.5", "1.6", "2.0"]',
     '  y-axis "Score / 10" 0 --> 10',
     '  line "Aurora Galactica" [8.8, 9.0, 9.2, 9.3, 9.4, 9.5]',
-    '  line "Galaxy Guardians Reference" [7.6, 7.6, 7.8, 8.2, 8.5, 9.0]',
-    '  line "Galaxy Guardians Playtest" [6.6, 6.6, 7.0, 8.0, 8.4, 8.8]',
+    `  line "Galaxy Guardians Reference" [${guardiansReferenceScore}, ${guardiansReferenceScore}, 7.8, 8.2, 8.5, 9.0]`,
+    `  line "Galaxy Guardians Playtest" [${guardiansPlaytestScore}, ${guardiansPlaytestScore}, 7.0, 8.0, 8.4, 8.8]`,
     '```',
     '',
     '## Application Metric Target Matrix',
@@ -178,7 +185,7 @@ function main(){
     '',
     overallTable,
     '',
-    ...releaseTargetSections(),
+    ...releaseTargetSections(guardians, guardiansPlaytest),
     '',
     '## Galaxy Guardians 0.1 Preview Metrics',
     '',
@@ -198,14 +205,16 @@ function main(){
     '',
     '## Current Guardians Promotion Priorities',
     '',
-    ...(guardians.nextMetricPromotions || []).map(item => `- ${item}`),
-    ''
+    ...(guardians.nextMetricPromotions || []).map(item => `- ${item}`)
   ];
 
-  fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
+  const output = `${lines.join('\n')}\n`;
+  fs.writeFileSync(OUT, output);
+  fs.writeFileSync(LEGACY_OUT, output);
   console.log(JSON.stringify({
     ok: true,
     output: rel(OUT),
+    legacyOutput: rel(LEGACY_OUT),
     auroraReport: rel(auroraReportPath),
     guardiansConformance: rel(GUARDIANS_CONFORMANCE),
     guardiansPlaytest: rel(GUARDIANS_PLAYTEST),

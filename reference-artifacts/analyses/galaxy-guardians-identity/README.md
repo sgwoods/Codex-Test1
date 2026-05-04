@@ -20,6 +20,10 @@ Current artifacts:
 - `audio-labeled-cue-targets-0.1.json` - promoted cue-window artifact with
   stable source timestamps plus waveform/spectrogram previews for eight
   runtime cue families. It does not export raw reference audio.
+- `../audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json`
+  - reusable Platinum audio lab output comparing deterministic runtime cue
+  synthesis to promoted reference cue windows, with waveform/spectrogram PNG
+  previews and cue-level recommendations.
 - `audio-reference-comparison-0.1.json` - waveform/spectrogram and PCM proxy
   comparison between the Galaxian reference windows and Guardians cue shapes.
 - `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal

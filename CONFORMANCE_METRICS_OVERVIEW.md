@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-04T01:22:46.419Z`
+Generated: `2026-05-04T11:27:55.553Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses both a reference-conformance preview metric set and a stricter playtest-weighted score because its Galaxian evidence is still being promoted from source footage into frame-level/audio-level measurements.
 
@@ -9,7 +9,7 @@ This document summarizes the current conformance scoring model for both the ship
 | Game / scope | Primary score | Secondary scores | Status | Weakest current area | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | Aurora Galactica current dev line | 8.8/10 | strongest Shot and hit responsiveness 10/10; weakest Audio identity and cue alignment 6.1/10 | release-quality conformance score | Audio identity and cue alignment (6.1/10) | reference-artifacts/analyses/quality-conformance/2026-05-03-5f92eab/report.json |
-| Galaxy Guardians 0.1 dev preview | 7.6/10 | playtest weighted 6.6/10; maturity 7/10; gate coverage 9.5/10; public readiness 3.9/10 | dev-preview-reference-conformance-model-not-public-release-score | Audio character and reference fit | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
+| Galaxy Guardians 0.1 dev preview | 7.7/10 | playtest weighted 6.9/10; maturity 7/10; gate coverage 9.5/10; public readiness 3.9/10 | dev-preview-reference-conformance-model-not-public-release-score | Formation and rack timing | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
 
 ## Release Cluster Conformance Targets
 
@@ -17,8 +17,8 @@ These are planning targets, not release promises. They give each upcoming cluste
 
 | Release cluster / focus | Aurora target | Aurora focus metrics | Guardians target | Guardians focus metrics | Release decision meaning |
 | --- | --- | --- | --- | --- | --- |
-| Current dev baseline | 8.8/10 | audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2 | 7.6/10 reference; 6.6/10 playtest | maturity 7.0; gate coverage 9.5; public readiness 3.9; audio feel 5.4 | Baseline for the next beta-candidate discussion, now weighted by local playtest feel. |
-| `1.3` Fidelity and Trust | 9.0/10 | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | 7.6/10 reference; 6.6/10 playtest | rack timing >= 6.2; movement pressure >= 6.2; visual identity >= 6.7; audio feel >= 5.4 | Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible. |
+| Current dev baseline | 8.8/10 | audio 6.1; movement 8.1; stage opening 8.5; challenge timing 8.4; shell integrity 9.2 | 7.7/10 reference; 6.9/10 playtest | maturity 7; gate coverage 9.5; public readiness 3.9; audio feel 6.4 | Baseline for the next beta-candidate discussion, now weighted by local playtest feel. |
+| `1.3` Fidelity and Trust | 9.0/10 | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | 7.7/10 reference; 6.9/10 playtest | rack timing >= 6.2; movement pressure 6.2; visual identity 6.7; audio feel 6.4 | Aurora can move beta if the weakest feel gaps improve and Guardians stays dev-only but credible. |
 | `1.4` Arcade Depth / Guardians 0.1 Preview | 9.2/10 | level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6 | 7.8/10 reference; 7.0/10 playtest | frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0 | Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora. |
 | `1.5` Flight Recorder and Shared Evidence | 9.3/10 | replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6 | 8.2/10 | source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0 | Shared video and evidence become release infrastructure for both applications. |
 | `1.6` Message to Pilot / Platform Shell | 9.4/10 | popup containment >= 9.6; message channel >= 8.8; shell copy ownership >= 9.5 | 8.5/10 | platform integration >= 9.5; preview messaging >= 8.8; pack-boundary durability 10.0 | Platinum feels like a coherent cabinet shell across multiple games. |
@@ -30,8 +30,8 @@ xychart-beta
   x-axis ["Current", "1.3", "1.4", "1.5", "1.6", "2.0"]
   y-axis "Score / 10" 0 --> 10
   line "Aurora Galactica" [8.8, 9.0, 9.2, 9.3, 9.4, 9.5]
-  line "Galaxy Guardians Reference" [7.6, 7.6, 7.8, 8.2, 8.5, 9.0]
-  line "Galaxy Guardians Playtest" [6.6, 6.6, 7.0, 8.0, 8.4, 8.8]
+  line "Galaxy Guardians Reference" [7.7, 7.7, 7.8, 8.2, 8.5, 9.0]
+  line "Galaxy Guardians Playtest" [6.9, 6.9, 7.0, 8.0, 8.4, 8.8]
 ```
 
 ## Application Metric Target Matrix
@@ -39,7 +39,7 @@ xychart-beta
 | Metric family | Aurora current | Aurora next target | Guardians current | Guardians next target | Why it matters |
 | --- | --- | --- | --- | --- | --- |
 | Movement and pressure | 8.1/10 | 8.6/10 in `1.3`; 8.8/10 in `1.4` | 6.2/10 playtest; 6.2/10 reference category | browser-reviewed runtime tuning in `1.3`; 7.2/10 playtest in `1.4` | This is the strongest direct feel signal during live play. |
-| Audio identity / acoustic fit | 6.1/10 | 7.2/10 in `1.3`; 7.6/10 in `1.4` | 5.4/10 playtest; 5.5/10 reference category | human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4` | Audio is the weakest shared conformance area today. |
+| Audio identity / acoustic fit | 6.1/10 | 7.2/10 in `1.3`; 7.6/10 in `1.4` | 6.4/10 playtest; 6.4/10 reference category | human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4` | Audio is the weakest shared conformance area today. |
 | Visual identity | 9.2/10 shell integrity; game sprites not separately scored in the roll-up | add a visible arcade-depth visual score in `1.4` | 6.7/10 playtest; 6.8/10 reference category | browser-reviewed component-sprite polish in `1.3`; 7.0/10 playtest in `1.4` | Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview. |
 | Stage / rack / wave timing | stage opening 8.5; challenge timing 8.4 | challenge and later-stage targets >= 8.6 in `1.4` | rack timing 6.2/10 | browser-reviewed rack timing in `1.3`; 7.2/10 in `1.4` | Timing separates authentic arcade pressure from approximate motion. |
 | Scoring and progression | progression/persona 8.8; shot/hit 10.0 | level-depth and scoring stability >= 9.0 by `2.0` | single-shot threat/scoring 7.5 | 7.6 in `1.4`; 8.8 by `2.0` | Guardians should not publish persistent scoreboards until scoring is reference-aligned. |
@@ -56,7 +56,7 @@ xychart-beta
 | Movement and pressure model | 14 | 6.2/10 | reference-window-inspired-runtime-contract-plus-runtime-vs-reference-track-comparison-plus-stage-rank-pressure-gate | Scout dives, flagship dives, escort joins, enemy shots, and wrap/return pressure are implemented and gated. The latest pass increases dive speed, dive acceleration, enemy-shot pressure, wrap cadence, and bounded stage-rank pressure so stages three and five are measurably more urgent than stage one. | The preview still feels proxy-tuned rather than Galaxian-tight; browser review and sprite-recognized dive-path targets are needed before beta-facing release. |
 | Single-shot threat and scoring | 12 | 7.5/10 | game-owned-runtime-and-score-contract | Single-shot firing, enemy shots, role-specific score values, player loss, game-over behavior, owned score table, wave clear, and stage advance are implemented without Aurora capture/dual-fighter semantics. | The score table remains a dev-preview contract rather than a frame-extracted Galaxian table, and persistent public scoring is still intentionally blocked. |
 | Visual alien identity | 10 | 6.8/10 | game-owned-visual-catalog-readability-gate-frame-crops-object-proxies-sprite-extraction-grid-targets-and-component-targets | Flagship, escort, scout, and player interceptor visuals are now tuned from component crop targets, remain separate from Aurora, and are gated for role readability. The promoted component target artifact covers all four sprite roles with checked crop previews and silhouette target similarity. | Sprites now read much closer to the reference family, but the component crops still need human visual review and browser play review before beta-facing confidence. |
-| Audio character and reference fit | 10 | 5.5/10 | cue-shape-contract-plus-measured-square-noise-targets-plus-waveform-spectrogram-pcm-proxy-plus-labeled-cue-window-previews | Runtime cue IDs and role-separated cue shapes are gated, the cue target bands now use labeled Galaxian cue-window candidates, the runtime cues were retuned toward higher-register square/noise character, and the refreshed audio comparison scores 8.3/10 overall with acoustic proxy fit at 5.3/10. | This remains the weakest Guardians area: the labels need human listening, dirty mixed-gameplay windows need replacement, and live playback still needs a subjective browser/audio review. |
+| Audio character and reference fit | 10 | 6.4/10 | cue-shape-contract-plus-measured-square-noise-targets-plus-waveform-spectrogram-pcm-proxy-plus-labeled-cue-window-previews-plus-runtime-reference-cue-lab | Runtime cue IDs and role-separated cue shapes are gated, the cue target bands use labeled Galaxian cue-window candidates, the new reusable Platinum audio conformance lab compares runtime cue synthesis against promoted reference windows, and runtime cues were retuned toward sharper, higher-register square/noise character. The lab reports 8.3/10 cue-shape fit while the older whole-window acoustic proxy still reads 5.3/10, so the conformance score is intentionally conservative. | This remains a key Guardians area: the labels need human listening, dirty mixed-gameplay windows need replacement, and live playback still needs a subjective browser/audio review before the preview can claim beta-ready sound. |
 | Platform and game boundaries | 10 | 10/10 | pack-adapter-renderer-boundary-gates | The preview remains dev-only, does not inherit Aurora capture/dual/challenge/scoring mechanics, and uses Platinum only through shared capability boundaries. | Keep this mandatory as Guardians gets more real gameplay. |
 | Evidence durability | 10 | 9.7/10 | source-controlled-artifacts-and-harnesses | The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, frame-motion artifact, object-track artifact, runtime-reference movement artifact, stage-rank pressure artifact, sprite extraction artifact, sprite-grid and component-target artifacts, audio comparison artifact, cue-candidate/labeled-cue artifacts, and 0.1 gates are committed and rerunnable. | Add human-reviewed component sprite/cue approval and browser-reviewed beta-candidate evidence. |
 
@@ -64,7 +64,7 @@ xychart-beta
 
 | Metric | Weight | Previous official | Playtest before pass | Current playtest score | Compelling target | Metric set |
 | --- | --- | --- | --- | --- | --- | --- |
-| Audio character and Galaxian acoustic feel | 28 | 5.3/10 | 2.5/10 | 5.4/10 | 7/10 | hardware-like square/noise timbre, short dry shot envelopes, dive siren descent character, event mix density during live play, waveform/spectrogram proxy fit, isolated cue candidate family coverage, labeled cue-window waveform/spectrogram previews |
+| Audio character and Galaxian acoustic feel | 28 | 5.3/10 | 2.5/10 | 6.4/10 | 7/10 | hardware-like square/noise timbre, short dry shot envelopes, dive siren descent character, event mix density during live play, waveform/spectrogram proxy fit, isolated cue candidate family coverage, labeled cue-window waveform/spectrogram previews, runtime cue versus promoted reference-window lab score |
 | Motion pace and lower-field pressure | 32 | 6.7/10 | 4.8/10 | 6.2/10 | 7.2/10 | formation entry duration, first scout dive timing, flagship/escort dive timing, dive vertical speed and acceleration, lateral curve shape, enemy shot density, bottom wrap/return cadence |
 | Graphic alignment and alien/player likeness | 28 | 7/10 | 4.5/10 | 6.7/10 | 7/10 | alien silhouette family likeness, flagship/escort/scout separation, palette family match, sprite scale and rack density, player ship likeness, score/attract visual layout, broad crop-grid silhouette similarity, component crop target similarity |
 | Platform boundary and preview safety | 12 | 10/10 | 10/10 | 10/10 | 10/10 | no Aurora capture/dual/challenge leakage, game-owned runtime and scoring, Platinum APIs only for shared shell behavior, dev-only public release boundary |
@@ -94,4 +94,3 @@ Guardians preview scoring should exist locally now, and it does: the dev runtime
 - Guardians attract and score-table pixel-layout comparison
 - human-listened cleanup of labeled cue candidates into clean measured cue targets
 - browser-reviewed beta-candidate pass for the tuned movement slice
-
