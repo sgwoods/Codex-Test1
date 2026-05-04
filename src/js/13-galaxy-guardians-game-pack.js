@@ -98,14 +98,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   role:'player',
   silhouette:'single-shot-interceptor',
   palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'}),
-  pixelRows:Object.freeze([
-   'CWWCWWC',
-   'WWWCCWW',
-   'WWWCWWW',
-   'WWWCWWW',
-   'WWWCWWW',
-   'WWCCWWW',
-   'WW...WW'
+ pixelRows:Object.freeze([
+   '...A...',
+   '..ACA..',
+   '.WCCCW.',
+   'WCC.CCW',
+   '.WCFCW.',
+   '..FFF..',
+   '.A...A.'
   ]),
   notes:'Compact single fighter tuned toward the cyan/red Galaxian player ship proportions.'
  })

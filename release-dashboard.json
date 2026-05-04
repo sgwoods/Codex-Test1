@@ -1,7 +1,7 @@
 {
-  "targetVersion": "1.2.3",
-  "currentFocus": "Stabilize the current 1.2.3 trust-and-pilot refresh in production, keep the multi-machine release workflow disciplined, and use the parallel Galaxians-style second-game and harness-analysis work to shape the next 1.3.0 fidelity cycle.",
-  "strapline": "Aurora's current release family now bundles trust fixes, pilot-score and game-over repairs, runtime hardening, dock and panel polish, and a healthier machine-portable workflow while the next Galaga-fidelity and second-game work advances in parallel.",
+  "targetVersion": "1.3.0",
+  "currentFocus": "Shape and validate the active 1.3.0 fidelity-and-second-cabinet candidate while preserving the shipped 1.2.3 production family, then pick up 1.4.0 arcade-depth work immediately after release.",
+  "strapline": "Aurora's active source line is now the 1.3.0 candidate family: movement, audio, trust, and second-cabinet proof are being bundled as one deliberate release step while the post-release pickup is already aimed at 1.4.0 arcade depth.",
   "timeline": [
     {
       "id": "foundation",
@@ -64,16 +64,22 @@
       "summary": "The current patch line fixes signed-in end-of-run pilot locking, recent-flight and local-score visibility, a last-life runtime freeze, and multiple dock, panel, and login-polish issues without reopening broad gameplay tuning."
     },
     {
+      "id": "fidelity-trust-reset",
+      "title": "1.3.0 Fidelity And Trust",
+      "status": "in_progress",
+      "summary": "The active source candidate now bundles Aurora fidelity and trust work with the first serious second-cabinet / Galaxy Guardians story, treating that combination as a new minor release family rather than a 1.2.4 patch."
+    },
+    {
       "id": "platform-contract",
-      "title": "Platform Contract Cleanup",
+      "title": "1.4.0 Platform Contract And Arcade Depth Pickup",
       "status": "planned",
-      "summary": "Strengthen pack-schema thinking, clarify remaining platform/application seams, and keep the shared docs model healthy as the second application becomes more real."
+      "summary": "After 1.3.0, strengthen pack-schema thinking, clarify remaining platform/application seams, and begin the first deliberate level-by-level arcade-depth release family."
     },
     {
       "id": "second-application",
-      "title": "Second Application Proof",
+      "title": "Post-1.3.0 Second Application Proof",
       "status": "planned",
-      "summary": "Use the active Galaxians-style sibling work and a small playable Galaxy Guardians slice to prove the platform seam before any second-game public release."
+      "summary": "Continue the Galaxians-style sibling work after 1.3.0 so Galaxy Guardians can move from second-cabinet proof toward a more durable standalone product promise."
     }
   ],
   "legend": [

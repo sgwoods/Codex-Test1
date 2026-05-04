@@ -11,25 +11,26 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of April 26, 2026:
+As of May 4, 2026:
 
 - hosted `/dev` points at:
-  - `1.2.3+build.532.sha.b959491`
+  - `1.2.3+build.565.sha.412f480`
 - hosted `/beta` now points at:
-  - `1.2.3-beta.1+build.532.sha.b959491.beta`
+  - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production` now points at:
   - `1.2.3+build.532.sha.b959491`
 
 This means:
 
-- the current trust-and-pilot patch line has now been shipped across dev, beta,
-  and production
+- the current trust-and-pilot production line remains the public baseline on
+  hosted `/production`
+- hosted `/dev` and hosted `/beta` already carry the later `412f480`
+  pre-`1.3.0` refresh line
+- the active source release family is now `1.3.0`
 - the immediate release question is no longer "how do we move beta to
   production?"
-- it is now "what belongs in the next `1.3.0` polish cycle, and how do we
-  integrate the parallel second-game and harness work cleanly?"
-- the next minor-cycle question is still "what belongs in the `1.3.0`
-  family?"
+- it is now "what belongs in the active `1.3.0` release bundle, and how do we
+  set up the post-release pickup cleanly?"
 
 The forward line and the current shipped family now include:
 
@@ -158,8 +159,8 @@ Practical standard:
 - current hosted `/dev` is our stabilized integration base
 - the next hosted `/beta` should come only after one or two deliberate fidelity
   cycles, not immediately after the `/dev` refresh
-- the next serious public milestone should likely be a `MINOR` release in the
-  `1.3.0` family, not a new `MAJOR`
+- the next serious public milestone is now the active `1.3.0` `MINOR` family,
+  not a new `MAJOR`
 - after refreshing the conformance roll-up, audio identity is clearly the
   weakest category at `6.1/10`
 - movement smoothing remains the next visible feel target at `8.0/10`, but it
@@ -179,6 +180,10 @@ Practical standard:
   - pilot, leaderboard, replay, and admin operations
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
+- after `1.3.0`, the pickup order should stay explicit:
+  - `1.4.0` arcade depth and platform-contract follow-through
+  - `1.5.0` shared-video evidence
+  - `1.6.0` pilot-facing cabinet polish
 
 See also:
 
@@ -493,6 +498,9 @@ The next `/beta` candidate should aim to be:
 - more than simple parity with hosted `/dev`
 - stronger in at least the current weakest fidelity categories
 - accompanied by refreshed release notes, dashboard language, and scorecard
+- versioned as the next intended `MINOR` family if it carries the first serious
+  second-cabinet / second-game story; do not present that candidate as a
+  `1.2.4` patch by default
 
 ### Phase 2: Controlled Candidate Construction
 

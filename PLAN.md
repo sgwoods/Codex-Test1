@@ -2,24 +2,26 @@
 
 ## Current State
 
-Verified April 26, 2026:
+Verified May 4, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.532.sha.b959491`
+  - `1.2.3+build.565.sha.412f480`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.532.sha.b959491.beta`
+  - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production`
   - `1.2.3+build.532.sha.b959491`
 - `main`
-  - authoritative integration branch for the next cycle
+  - authoritative integration branch for the active `1.3.0` candidate family
 
 This means:
 
 - Aurora has completed the `1.2.3` trust-and-pilot production refresh
-- dev, beta, and production are now aligned on the same shipped release family
-- the next question is no longer "how do we push beta to production?"
-- the next question is "what belongs in the next `1.3.0` fidelity cycle, and
-  how do we use the parallel second-game and harness work well?"
+- hosted `/dev` and hosted `/beta` are now ahead of hosted `/production` on the
+  pre-`1.3.0` build-565 line
+- the active source candidate is now the `1.3.0` family
+- the current question is no longer "should this be a `1.2.4` fast follow?"
+- the current question is "what must land for `1.3.0`, and what should be
+  deliberately picked up immediately after that release?"
 
 ## Active Workstreams
 
@@ -120,14 +122,27 @@ Current conformance read:
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
   shipped `b959491` family
-- the next serious candidate should be assembled from `main` as a real
-  `1.3.0` fidelity-and-depth step, not another immediate fast-follow patch
-- the next meaningful public milestone should likely be a `MINOR` release in
-  the `1.3.0` family
+- the active source line should now present itself as the `1.3.0` candidate
+  family
+- `1.3.0` is the intentional bundle for fidelity, trust, and the first
+  significant second-game Platinum story
+- the shipped `1.2.3` family remains the stable public baseline until a formal
+  `1.3.0` promotion path is completed
 - the longer release-family phasing plan is tracked in
   [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - the concrete first level-expansion execution plan is tracked in
   [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
+
+## Post-1.3.0 Pickup
+
+After `1.3.0` ships, the plan should pick up in this order:
+
+1. `1.4.0` arcade depth and platform-contract follow-through
+2. `1.5.0` shared-video evidence and flight-recorder capabilities
+3. `1.6.0` pilot-facing shell/message-to-pilot polish
+
+That keeps the next cycle from collapsing back into unprioritized polish and
+preserves the release-family shape already captured in the roadmap docs.
 
 ## Long-Term Direction
 

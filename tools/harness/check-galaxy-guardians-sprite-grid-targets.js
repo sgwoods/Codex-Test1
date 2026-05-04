@@ -19,6 +19,30 @@ function exists(relPath){
   return fs.existsSync(path.join(ROOT, relPath));
 }
 
+function litCount(row=''){
+  return Array.from(String(row)).filter(ch => ch !== '.').length;
+}
+
+function assertReviewedPlayerInterceptorTarget(target, payload){
+  const runtimeRows = Array.from(target.runtimeRows || []);
+  const extractedRows = Array.from(target.extractedRows || []);
+  const runtimeWidest = Math.max(0, ...runtimeRows.map(litCount));
+  const extractedWidest = Math.max(0, ...extractedRows.map(litCount));
+  const runtimeTop = litCount(runtimeRows[0] || '');
+  const runtimeBottom = litCount(runtimeRows[runtimeRows.length - 1] || '');
+  const extractedTop = litCount(extractedRows[0] || '');
+  const extractedBottom = litCount(extractedRows[extractedRows.length - 1] || '');
+  if(target.sourceMode !== 'manual-reviewed-override'){
+    fail('Guardians player-interceptor must use the reviewed sprite-grid target override until an isolated player crop exists', { target, payload });
+  }
+  if((target.runtimeMetrics?.fillRatio || 0) > 0.7 || (target.extractedMetrics?.fillRatio || 0) > 0.7){
+    fail('Guardians player-interceptor silhouette is too filled-in and reads like a block instead of a ship', { target, payload });
+  }
+  if(runtimeTop >= runtimeWidest || runtimeBottom >= runtimeWidest || extractedTop >= extractedWidest || extractedBottom >= extractedWidest){
+    fail('Guardians player-interceptor silhouette lost its nose/engine taper and no longer reads like a ship', { target, payload });
+  }
+}
+
 function main(){
   if(!exists(ARTIFACT)) fail(`Missing Guardians sprite-grid target artifact: ${ARTIFACT}`);
   const artifact = readJson(ARTIFACT);
@@ -48,6 +72,9 @@ function main(){
     }
     if((target.silhouetteSimilarity || 0) < target.minSimilarity){
       fail(`Guardians sprite-grid target ${id} is too far from the extracted crop scaffold`, { target, payload });
+    }
+    if(id === 'player-interceptor'){
+      assertReviewedPlayerInterceptorTarget(target, payload);
     }
   }
   if((artifact.summary?.averageSilhouetteSimilarity || 0) < .42){

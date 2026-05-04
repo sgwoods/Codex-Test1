@@ -11,6 +11,31 @@ const SOURCES = [
 ];
 const IDENTITY_ARTIFACT = 'reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json';
 const CANDIDATE_ARTIFACT = 'reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json';
+const DEFAULT_SPRITE_GRID_ARTIFACT = 'reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json';
+
+function litCount(row=''){
+  return Array.from(String(row)).filter(ch => ch !== '.').length;
+}
+
+function fillRatio(rows){
+  const joined = Array.from(rows || []).join('');
+  const filled = Array.from(joined).filter(ch => ch !== '.').length;
+  return joined.length ? filled / joined.length : 0;
+}
+
+function assertPlayerInterceptorReadable(rows, label, payload){
+  const shape = Array.from(rows || []);
+  const widest = Math.max(0, ...shape.map(litCount));
+  const top = litCount(shape[0] || '');
+  const bottom = litCount(shape[shape.length - 1] || '');
+  const ratio = fillRatio(shape);
+  if(ratio > 0.7){
+    fail(`Galaxy Guardians 0.1 candidate ${label} player-interceptor silhouette is too filled-in and reads like a block`, payload);
+  }
+  if(top >= widest || bottom >= widest){
+    fail(`Galaxy Guardians 0.1 candidate ${label} player-interceptor silhouette lost its ship taper`, payload);
+  }
+}
 
 function fail(message, payload){
   console.error(message);
@@ -108,6 +133,8 @@ function simulateRuntime(ctx){
 function main(){
   const identity = readJson(IDENTITY_ARTIFACT);
   const candidate = readJson(CANDIDATE_ARTIFACT);
+  const spriteGridArtifactPath = candidate.inputs?.spriteGridTargets || DEFAULT_SPRITE_GRID_ARTIFACT;
+  const spriteGrid = readJson(spriteGridArtifactPath);
   const ctx = loadGuardiansContext();
   const pack = ctx.GALAXY_GUARDIANS_PACK;
   const profile = ctx.GALAXY_GUARDIANS_RUNTIME_PROFILE;
@@ -118,6 +145,7 @@ function main(){
   const candidateCueIds = new Set(candidate.candidateGate.requiredRuntimeCueIds || []);
   const forbidden = candidate.candidateGate.forbiddenPublicCapabilities || {};
   const requiredVisualIds = candidate.candidateGate.requiredVisualIds || [];
+  const playerTarget = (spriteGrid.targets || []).find(target => target.id === 'player-interceptor') || null;
   const runtime = simulateRuntime(ctx);
   const forced = {
     flagshipHit: forceHit(ctx, 'flagship'),
@@ -140,6 +168,7 @@ function main(){
     requiredVisualIds,
     runtimeVisualIds: unique([profile.playerVisualId, ...Object.values(profile.alienCatalog || {}).map(entry => entry.visualId)]),
     visualCatalogKeys: Object.keys(visualCatalog),
+    playerSpriteGridSourceMode: playerTarget?.sourceMode || '',
     cueCatalogIds: Object.values(cueCatalog).map(entry => entry.id),
     themeCueNames,
     allAudioCueIds,
@@ -181,6 +210,16 @@ function main(){
     if(JSON.stringify(runtimeRows) !== JSON.stringify(sprite.rows)){
       fail(`Galaxy Guardians 0.1 candidate visual ${sprite.id} drifted from the identity artifact`, { sprite, runtimeRows });
     }
+  }
+  const runtimePlayerRows = Array.from(visualCatalog['player-interceptor']?.pixelRows || []);
+  assertPlayerInterceptorReadable(runtimePlayerRows, 'runtime', { payload, runtimePlayerRows });
+  if(!playerTarget){
+    fail('Galaxy Guardians 0.1 candidate is missing the player-interceptor sprite-grid target input', payload);
+  }
+  assertPlayerInterceptorReadable(playerTarget.runtimeRows || [], 'sprite-grid runtime target', { payload, playerTarget });
+  assertPlayerInterceptorReadable(playerTarget.extractedRows || [], 'sprite-grid extracted target', { payload, playerTarget });
+  if(playerTarget.sourceMode !== 'manual-reviewed-override'){
+    fail('Galaxy Guardians 0.1 candidate still relies on the raw component-target player silhouette instead of the reviewed ship target', payload);
   }
   for(const cueName of identity.audioLanguage?.requiredCueNames || []){
     if(!themeCueNames.includes(cueName)){

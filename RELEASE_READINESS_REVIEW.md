@@ -2,19 +2,20 @@
 
 ## Current Read
 
-Aurora `1.2.3` is the release currently live on hosted `/production`.
+Aurora `1.2.3` remains the release currently live on hosted `/production`.
 
-Verified April 26, 2026:
+Verified May 4, 2026:
 
 - hosted `/production`
   - current live label: `1.2.3+build.532.sha.b959491`
 - hosted `/beta`
-  - current live label: `1.2.3-beta.1+build.532.sha.b959491.beta`
+  - current live label: `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/dev`
-  - current live label: `1.2.3+build.532.sha.b959491`
+  - current live label: `1.2.3+build.565.sha.412f480`
 
-That means Aurora has completed the `1.2.3` trust-and-pilot production refresh
-and is now in a post-release stabilization posture for the next cycle.
+That means Aurora has completed the `1.2.3` trust-and-pilot production refresh,
+while hosted `/dev` and hosted `/beta` have already moved ahead to the
+pre-`1.3.0` build-565 line.
 
 ## What Is Now True
 
@@ -22,7 +23,8 @@ and is now in a post-release stabilization posture for the next cycle.
 - `Aurora Galactica` is the first shipped playable application on Platinum
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are clearly
   separated in both code and docs
-- hosted `/dev`, hosted `/beta`, and hosted `/production` now match
+- hosted `/dev` and hosted `/beta` now match each other
+- hosted `/production` remains the stable public baseline
 - the shipped release family is backed by committed test and analysis artifacts
 
 ## Current Shipped Candidate Quality

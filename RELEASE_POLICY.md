@@ -35,6 +35,9 @@ These are format examples, not current live lane values.
     - UI polish
     - harness hardening
     - documentation and release-discipline follow-through inside the same release family
+  - not the right bucket when the public candidate story changes materially,
+    such as adding a second cabinet or second-game surface that changes the
+    release promise even if it remains preview-scoped
 
 ## Hosted Release Lanes
 
@@ -82,6 +85,16 @@ That means:
 - hosted `/beta` and hosted `/production` may only be published from the
   machine recorded in
   [release-authority.json](release-authority.json)
+
+Current versioning read for the next cycle:
+
+- the shipped `1.2.3` family remains the stable public baseline
+- the next coherent public candidate should not be framed as a `1.2.4`
+  fast-follow patch if it includes the first serious second-cabinet / second-game
+  story
+- treat that kind of candidate as a `MINOR` family step, currently expected to
+  be `1.3.0`, and only change the actual runtime version when we intentionally
+  cut the candidate branch
 
 Useful commands:
 

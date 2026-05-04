@@ -2,21 +2,21 @@
 
 ## Current Shipped State
 
-Verified April 26, 2026:
+Verified May 4, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.532.sha.b959491`
+  - `1.2.3+build.565.sha.412f480`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.532.sha.b959491.beta`
+  - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production`
   - `1.2.3+build.532.sha.b959491`
 
 Aurora is in a post-production-refresh posture:
 
 - production is current
-- beta matches the current production family
-- dev also matches the current production family
-- `main` is the forward line for the next cycle
+- beta now matches dev on the refreshed `412f480` pre-`1.3.0` line
+- dev is ahead of the shipped production line while `production` remains stable
+- `main` is the forward line for the active `1.3.0` candidate
 
 ## Roadmap Frame
 
@@ -44,9 +44,17 @@ Goals:
 
 ### Shape `1.3.0`
 
-The next serious public step should likely be:
+The active source and candidate family is now:
 
 - `1.3.0`
+
+Reason:
+
+- a candidate that meaningfully introduces the first second-cabinet /
+  second-game Platinum story is more than a patch-sized continuation of
+  `1.2.3`, even if `Galaxy Guardians` remains preview-only
+- the public promise changes from "stronger Aurora only" to "stronger Aurora
+  plus the first real multi-game platform pressure"
 
 That release family should focus on:
 
@@ -75,13 +83,24 @@ Current decision:
 - keep `1.x` focused on making Aurora excellent and preparing Platinum for a
   second real game
 - reserve `2.0` for the first genuinely multi-game Platinum milestone
-- treat `1.3` as the next measurement-backed quality release rather than a
-  broad feature bundle
+- treat `1.3` as the next measurement-backed quality release and first serious
+  second-cabinet candidate family rather than a broad feature bundle
 - promote level-by-level arcade depth to the next major product pillar after
   the `1.3` quality reset
 - make shared gameplay-video publishing an early roadmap capability
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release
+
+### Pick Up After `1.3.0`
+
+Once `1.3.0` is out, the roadmap pickup should be:
+
+- `1.4.0` for level-by-level arcade depth plus platform-contract cleanup
+- `1.5.0` for shared-video evidence and flight-recorder publishing
+- `1.6.0` for pilot-facing shell, message, and cabinet-surface polish
+
+That sequencing should be treated as intentional carry-forward planning, not
+something to rediscover after the release is already shipped.
 
 Current conformance read:
 

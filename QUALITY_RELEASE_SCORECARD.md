@@ -10,36 +10,35 @@ Purpose:
 - show where the biggest quality gaps are right now
 - make the quality score part of release discussion, not a side note
 
-As of April 26, 2026:
+As of May 4, 2026:
 
 - current shipped family:
   - `1.2.3+build.532.sha.b959491`
   - bundled quality score `8.8/10`
 - hosted `/dev`:
-  - `1.2.3+build.532.sha.b959491`
-  - built `Apr 26 2026, 7:25 PM EDT`
+  - `1.2.3+build.565.sha.412f480`
 - hosted `/beta`:
-  - `1.2.3-beta.1+build.532.sha.b959491.beta`
-  - built `Apr 26 2026, 7:27 PM EDT`
+  - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production`:
   - `1.2.3+build.532.sha.b959491`
-  - built `Apr 26 2026, 7:27 PM EDT`
 
-Branch-local refresh on May 2, 2026:
+Branch-local refresh on May 4, 2026:
 
 - branch:
-  - `codex/macbook-pro-guardians-identity-0-1-candidate`
+  - `main`
 - commit:
-  - `7ef349b`
+  - `26ca77c`
 - generated artifact:
-  - `reference-artifacts/analyses/quality-conformance/2026-05-02-7ef349b/`
+  - `reference-artifacts/analyses/quality-conformance/2026-05-04-26ca77c/`
 - overall quality score:
   - `8.8/10`
 - weakest category:
   - audio identity and cue alignment, `6.1/10`
 - notes:
-  - the dev-candidate surface suite is green again after refreshing stale
-    leaderboard, attract-score, and audio phase expectations
+  - the dev-candidate surface suite is green again after correcting the
+    framed-overlay leaderboard footprint and rebuilding the dev shell
+  - `wait-score-overlay`, `framed-popout-bounds`, `front-door-copy`, and
+    `platinum-pack-boot` are green on the rebuilt `1.3.0` candidate
   - the current player movement score from the refreshed artifact is `8.0/10`
   - this branch-local refresh does not by itself approve or publish beta or
     production
@@ -58,7 +57,7 @@ Readable project-level overview:
 
 ## Branch-Local Conformance Table
 
-This is the current local development read from the May 2, 2026 artifact above.
+This is the current local development read from the May 4, 2026 artifact above.
 It is the best table to use when discussing what to improve next.
 
 | Category | Branch-local score | Status | Next read |
@@ -130,7 +129,8 @@ Current conclusion:
 
 - the shipped `1.2.3` family reads like a strong public release, not a recovery
   build
-- dev, beta, and production are now aligned on the same current line
+- hosted `/dev` and hosted `/beta` are aligned on the `412f480` build-565 line
+  while hosted `/production` remains on `b959491`
 - the next cycle should focus on movement feel, audio identity, gameplay trust
   follow-up, second-game/platform maturity, and stronger analysis/harness depth
   rather than broad emergency repair

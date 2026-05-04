@@ -86,6 +86,8 @@ Bundle:
 - polish audio identity beyond cue timing
 - close high-confidence gameplay trust bugs around boss injury, capture/carry
   rendering, dual-fighter final-life behavior, and late-run freeze diagnostics
+- carry the first serious second-cabinet / second-game preview story in a way
+  that is visibly intentional, not incidental shell residue
 - create the first level-by-level expansion blueprint before implementation
   gets broad
 - identify which original Galaga stage families, challenge stages, alien types,
@@ -107,8 +109,17 @@ Exit standard:
 
 - quality conformance roll-up is green or explicitly documented
 - movement and audio claims are backed by committed reference artifacts
+- if a second cabinet is present, it reads like a deliberate `1.3.0` product
+  statement rather than an accidental `1.2.4` patch add-on
 - a first level-by-level expansion plan is committed
 - the next `/dev` refresh is coherent enough for sustained review
+
+Post-release pickup:
+
+- once `1.3.0` is shipped, immediately move the active planning frame to
+  `1.4.0` arcade depth and platform-contract follow-through rather than letting
+  the roadmap drift back into generic polish
+- keep `1.5.0` and `1.6.0` queued behind that as the next explicit families
 
 ## Release Family 1.4: Level-By-Level Arcade Expansion
 

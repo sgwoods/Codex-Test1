@@ -252,12 +252,14 @@ function syncCabinetShellLayout({
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
    statusPanels.style.bottom='auto';
   }else if(framedOverlayOpen){
-   const panelW=Math.max(180,Math.floor(viewW));
+   const framedMaxW=Math.max(180,Math.min(960,Math.floor(viewW)));
+   const framedMinW=Math.min(600,framedMaxW);
+   const panelW=Math.max(framedMinW,Math.min(framedMaxW,Math.floor(viewW*.78)));
    const top=Math.floor(oy);
    const maxHeight=Math.max(180,Math.floor(viewH));
    statusPanels.style.width=`${panelW}px`;
    statusPanels.style.height=`${maxHeight}px`;
-   statusPanels.style.left=`${Math.floor(ox)}px`;
+   statusPanels.style.left=`${Math.floor(ox+(viewW-panelW)/2)}px`;
    statusPanels.style.right='auto';
    statusPanels.style.top=`${top}px`;
    statusPanels.style.bottom='auto';

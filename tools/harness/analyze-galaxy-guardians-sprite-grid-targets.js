@@ -9,6 +9,21 @@ const SPRITE_EXTRACTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'ga
 const COMPONENT_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-component-targets-0.1.json');
 const PACK_SOURCE = path.join(ROOT, 'src', 'js', '13-galaxy-guardians-game-pack.js');
 const OUT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-grid-targets-0.1.json');
+const MANUAL_REVIEWED_GRID_OVERRIDES = Object.freeze({
+  'player-interceptor': Object.freeze({
+    sourceMode: 'manual-reviewed-override',
+    extractedRows: Object.freeze([
+      '...A...',
+      '..ACA..',
+      '.WCCCW.',
+      'WCC.CCW',
+      '.WCFCW.',
+      '..FFF..',
+      '.A...A.'
+    ]),
+    note: 'The player-and-shot component crop overfills the interceptor into a block, so the player sprite stays on a human-reviewed ship silhouette target until isolated player-only crops are available.'
+  })
+});
 
 function fail(message, payload){
   console.error(message);
@@ -164,20 +179,24 @@ function main(){
     { id: 'player-interceptor', role: 'player', sourceCropFamily: 'player-and-shot', cols: 7, rows: 7, minSimilarity: .34 }
   ];
   const targets = targetSpecs.map(spec => {
+    const manualOverride = MANUAL_REVIEWED_GRID_OVERRIDES[spec.id] || null;
     const componentTarget = (componentTargets?.targets || []).find(target => target.id === spec.id);
     const crop = cropFor(extraction, spec.sourceCropFamily);
-    const extractedRows = componentTarget?.extractedRows
-      ? Array.from(componentTarget.extractedRows)
-      : (crop && fs.existsSync(crop) ? downsampleGrid(crop, spec.cols, spec.rows) : []);
+    const extractedRows = manualOverride?.extractedRows
+      ? Array.from(manualOverride.extractedRows)
+      : componentTarget?.extractedRows
+        ? Array.from(componentTarget.extractedRows)
+        : (crop && fs.existsSync(crop) ? downsampleGrid(crop, spec.cols, spec.rows) : []);
     const runtimeRows = Array.from(visualCatalog[spec.id]?.pixelRows || []);
     return Object.assign({}, spec, {
       sourceCrop: componentTarget?.componentCrop || (crop ? rel(crop) : ''),
-      sourceMode: componentTarget ? 'component-target-override' : 'broad-crop-grid',
+      sourceMode: manualOverride?.sourceMode || (componentTarget ? 'component-target-override' : 'broad-crop-grid'),
       extractedRows,
       runtimeRows,
       extractedMetrics: spriteMetrics(extractedRows),
       runtimeMetrics: spriteMetrics(runtimeRows),
-      silhouetteSimilarity: hamming(extractedRows, runtimeRows)
+      silhouetteSimilarity: hamming(extractedRows, runtimeRows),
+      reviewNote: manualOverride?.note || ''
     });
   });
   const artifact = {

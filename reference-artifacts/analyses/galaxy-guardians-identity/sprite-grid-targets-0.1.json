@@ -63,7 +63,8 @@
           "W"
         ]
       },
-      "silhouetteSimilarity": 1
+      "silhouetteSimilarity": 1,
+      "reviewNote": ""
     },
     {
       "id": "signal-escort",
@@ -112,7 +113,8 @@
           "W"
         ]
       },
-      "silhouetteSimilarity": 1
+      "silhouetteSimilarity": 1,
+      "reviewNote": ""
     },
     {
       "id": "signal-scout",
@@ -161,7 +163,8 @@
           "W"
         ]
       },
-      "silhouetteSimilarity": 1
+      "silhouetteSimilarity": 1,
+      "reviewNote": ""
     },
     {
       "id": "player-interceptor",
@@ -171,46 +174,51 @@
       "rows": 7,
       "minSimilarity": 0.34,
       "sourceCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/player-interceptor.png",
-      "sourceMode": "component-target-override",
+      "sourceMode": "manual-reviewed-override",
       "extractedRows": [
-        "CWWCCCC",
-        "WWWCCWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWCCWWW",
-        "WW...WW"
+        "...A...",
+        "..ACA..",
+        ".WCCCW.",
+        "WCC.CCW",
+        ".WCFCW.",
+        "..FFF..",
+        ".A...A."
       ],
       "runtimeRows": [
-        "CWWCWWC",
-        "WWWCCWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWCCWWW",
-        "WW...WW"
+        "...A...",
+        "..ACA..",
+        ".WCCCW.",
+        "WCC.CCW",
+        ".WCFCW.",
+        "..FFF..",
+        ".A...A."
       ],
       "extractedMetrics": {
         "width": 7,
         "height": 7,
-        "filledPixels": 46,
-        "fillRatio": 0.939,
+        "filledPixels": 25,
+        "fillRatio": 0.51,
         "tokenChannels": [
+          "A",
           "C",
+          "F",
           "W"
         ]
       },
       "runtimeMetrics": {
         "width": 7,
         "height": 7,
-        "filledPixels": 46,
-        "fillRatio": 0.939,
+        "filledPixels": 25,
+        "fillRatio": 0.51,
         "tokenChannels": [
+          "A",
           "C",
+          "F",
           "W"
         ]
       },
-      "silhouetteSimilarity": 1
+      "silhouetteSimilarity": 1,
+      "reviewNote": "The player-and-shot component crop overfills the interceptor into a block, so the player sprite stays on a human-reviewed ship silhouette target until isolated player-only crops are available."
     }
   ],
   "summary": {
