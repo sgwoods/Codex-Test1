@@ -55,6 +55,12 @@ For a quick current-state summary, use:
 npm run machine:status
 ```
 
+Important path rule:
+
+- prefer a non-iCloud local parent folder such as `$HOME/Development`
+- do not keep the active Aurora clone inside an iCloud-managed folder
+- do not rely on iCloud to synchronize `.git` state between machines
+
 ## Branch Naming
 
 Branch from `main` and use short-lived topic branches:
@@ -82,6 +88,7 @@ Default rule:
 
 - do not leave meaningful unpushed work on both machines at once without
   documenting it
+- do not use one shared working tree through iCloud or another sync layer
 
 Normal workflow:
 
@@ -168,3 +175,7 @@ That is when to use:
 - [RECOVERY_SAFE_COLLABORATION.md](RECOVERY_SAFE_COLLABORATION.md)
 
 Treat that document as the exception path, not the day-to-day default.
+
+For the active migration away from iCloud-backed Aurora clones, also use:
+
+- [NON_ICLOUD_CLONE_MIGRATION_PLAN.md](NON_ICLOUD_CLONE_MIGRATION_PLAN.md)

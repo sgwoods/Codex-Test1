@@ -59,9 +59,15 @@ That one command will:
 - run `npm run machine:bootstrap` inside it
 - leave the local game and viewer ready when bootstrap succeeds
 
-If you prefer a unique iCloud-backed path on a second machine, `cd` into that
-machine-specific parent folder first, then run the same command there. Do not
-use the same working tree path across multiple machines.
+Preferred rule:
+
+- use a non-iCloud local parent folder such as `$HOME/Development`
+- do not keep the active Aurora clone in an iCloud-managed folder
+- do not use the same working tree path across multiple machines
+
+For the current migration off iCloud-backed Aurora clones, use:
+
+- [NON_ICLOUD_CLONE_MIGRATION_PLAN.md](NON_ICLOUD_CLONE_MIGRATION_PLAN.md)
 
 For a read-only startup check:
 
@@ -137,6 +143,7 @@ Important docs to read first:
 - [VIDEO_ALIGNMENT_PROGRAM.md](VIDEO_ALIGNMENT_PROGRAM.md)
 - [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)
 - [DEVELOPER_MACHINE_BASELINE.md](DEVELOPER_MACHINE_BASELINE.md)
+- [NON_ICLOUD_CLONE_MIGRATION_PLAN.md](NON_ICLOUD_CLONE_MIGRATION_PLAN.md)
 
 ## What Was Just Shipped
 

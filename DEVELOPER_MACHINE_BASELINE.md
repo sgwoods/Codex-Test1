@@ -18,7 +18,8 @@ A valid Aurora developer machine should be able to:
 
 ## Preferred Local Shape
 
-- keep the working Aurora repo in an iCloud-backed `Documents` location when possible
+- keep the working Aurora repo in a non-iCloud local path such as
+  `$HOME/Development/Codex-Test1`
 - use `Codex-Test1` as the development repo
 - treat `Aurora-Galactica` as the public release host, not the main dev repo
 - preserve local-only runtime state under the repo:
@@ -83,9 +84,12 @@ This command:
   reruns it with your terminal attached so interactive admin prompts still
   work from the one-command setup flow
 
-If you choose an iCloud-backed target path, `cd` into that machine-specific
-parent folder first, then run the same command there. Do not use one shared
-working tree across two machines.
+Do not use an iCloud-backed target path for the active Aurora clone.
+If an older machine already does, migrate it using:
+
+- [NON_ICLOUD_CLONE_MIGRATION_PLAN.md](NON_ICLOUD_CLONE_MIGRATION_PLAN.md)
+
+Do not use one shared working tree across two machines.
 
 1. Clone the repo:
    ```bash

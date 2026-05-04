@@ -78,8 +78,14 @@ If it succeeds cleanly, localhost should be ready immediately afterward:
 - viewer:
   - `http://127.0.0.1:4311/`
 
-If you want to use a unique iCloud-backed location instead, `cd` into that
-parent folder first and run the same command there.
+Preferred rule:
+
+- use a non-iCloud local parent folder such as `$HOME/Development`
+- do not keep the active Aurora clone inside an iCloud-managed folder
+
+For the current migration away from iCloud-backed Aurora clones, use:
+
+- [NON_ICLOUD_CLONE_MIGRATION_PLAN.md](NON_ICLOUD_CLONE_MIGRATION_PLAN.md)
 
 On a fresh Mac, the installer will try to help with missing prerequisites:
 
@@ -101,6 +107,8 @@ Important:
 
 - use a machine-specific clone path
 - do not use the same git working tree on two machines, even through iCloud
+- do not use iCloud as the normal synchronization layer for an active Aurora
+  working tree
 
 Manual equivalent if you want to see the lower-level steps:
 
