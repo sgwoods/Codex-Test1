@@ -14,7 +14,7 @@ Use it when deciding:
 As of May 4, 2026:
 
 - hosted `/dev` points at:
-  - `1.2.3+build.565.sha.412f480`
+  - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta` now points at:
   - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production` now points at:
@@ -24,8 +24,8 @@ This means:
 
 - the current trust-and-pilot production line remains the public baseline on
   hosted `/production`
-- hosted `/dev` and hosted `/beta` already carry the later `412f480`
-  pre-`1.3.0` refresh line
+- hosted `/dev` now carries the active `1.3.0` candidate line
+- hosted `/beta` still carries the later `412f480` pre-`1.3.0` refresh line
 - the active source release family is now `1.3.0`
 - the immediate release question is no longer "how do we move beta to
   production?"

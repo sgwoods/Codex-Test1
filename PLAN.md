@@ -5,7 +5,7 @@
 Verified May 4, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.565.sha.412f480`
+  - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`
   - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production`
@@ -16,8 +16,9 @@ Verified May 4, 2026:
 This means:
 
 - Aurora has completed the `1.2.3` trust-and-pilot production refresh
-- hosted `/dev` and hosted `/beta` are now ahead of hosted `/production` on the
-  pre-`1.3.0` build-565 line
+- hosted `/dev` now carries the live `1.3.0` candidate line
+- hosted `/beta` still holds the pre-`1.3.0` build-565 proving line
+- hosted `/production` remains on the stable `1.2.3` public baseline
 - the active source candidate is now the `1.3.0` family
 - the current question is no longer "should this be a `1.2.4` fast follow?"
 - the current question is "what must land for `1.3.0`, and what should be

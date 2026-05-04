@@ -16,7 +16,7 @@ As of May 4, 2026:
   - `1.2.3+build.532.sha.b959491`
   - bundled quality score `8.8/10`
 - hosted `/dev`:
-  - `1.2.3+build.565.sha.412f480`
+  - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`:
   - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production`:
@@ -37,11 +37,11 @@ Branch-local refresh on May 4, 2026:
 - notes:
   - the dev-candidate surface suite is green again after correcting the
     framed-overlay leaderboard footprint and rebuilding the dev shell
-  - `wait-score-overlay`, `framed-popout-bounds`, `front-door-copy`, and
+- `wait-score-overlay`, `framed-popout-bounds`, `front-door-copy`, and
     `platinum-pack-boot` are green on the rebuilt `1.3.0` candidate
   - the current player movement score from the refreshed artifact is `8.0/10`
-  - this branch-local refresh does not by itself approve or publish beta or
-    production
+  - this branch-local refresh now underpins the live `/dev` publish, but does
+    not by itself approve beta or production
 
 Readable project-level overview:
 
@@ -129,8 +129,9 @@ Current conclusion:
 
 - the shipped `1.2.3` family reads like a strong public release, not a recovery
   build
-- hosted `/dev` and hosted `/beta` are aligned on the `412f480` build-565 line
-  while hosted `/production` remains on `b959491`
+- hosted `/dev` now carries the `d0d3bd6` `1.3.0` candidate line
+- hosted `/beta` and hosted `/production` still preserve the older `1.2.3`
+  public-family lanes
 - the next cycle should focus on movement feel, audio identity, gameplay trust
   follow-up, second-game/platform maturity, and stronger analysis/harness depth
   rather than broad emergency repair

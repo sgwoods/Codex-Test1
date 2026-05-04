@@ -11,11 +11,11 @@ Verified May 4, 2026:
 - hosted `/beta`
   - current live label: `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/dev`
-  - current live label: `1.2.3+build.565.sha.412f480`
+  - current live label: `1.3.0+build.567.sha.d0d3bd6`
 
 That means Aurora has completed the `1.2.3` trust-and-pilot production refresh,
-while hosted `/dev` and hosted `/beta` have already moved ahead to the
-pre-`1.3.0` build-565 line.
+while hosted `/dev` has now moved to the first live `1.3.0` candidate and
+hosted `/beta` remains on the pre-`1.3.0` build-565 line.
 
 ## What Is Now True
 
@@ -23,7 +23,8 @@ pre-`1.3.0` build-565 line.
 - `Aurora Galactica` is the first shipped playable application on Platinum
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are clearly
   separated in both code and docs
-- hosted `/dev` and hosted `/beta` now match each other
+- hosted `/dev` now carries the next candidate line
+- hosted `/beta` remains the held pre-`1.3.0` proving lane
 - hosted `/production` remains the stable public baseline
 - the shipped release family is backed by committed test and analysis artifacts
 

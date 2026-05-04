@@ -5,7 +5,7 @@
 Verified May 4, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.565.sha.412f480`
+  - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`
   - `1.2.3-beta.1+build.565.sha.412f480.beta`
 - hosted `/production`
@@ -14,8 +14,8 @@ Verified May 4, 2026:
 Aurora is in a post-production-refresh posture:
 
 - production is current
-- beta now matches dev on the refreshed `412f480` pre-`1.3.0` line
-- dev is ahead of the shipped production line while `production` remains stable
+- beta still holds the refreshed `412f480` pre-`1.3.0` line
+- dev now carries the active `1.3.0` candidate while `production` remains stable
 - `main` is the forward line for the active `1.3.0` candidate
 
 ## Roadmap Frame
