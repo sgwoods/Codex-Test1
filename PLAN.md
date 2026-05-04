@@ -7,7 +7,7 @@ Verified May 4, 2026:
 - hosted `/dev`
   - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.565.sha.412f480.beta`
+  - `1.3.0-beta.1+build.568.sha.e270d85.beta`
 - hosted `/production`
   - `1.2.3+build.532.sha.b959491`
 - `main`
@@ -17,7 +17,7 @@ This means:
 
 - Aurora has completed the `1.2.3` trust-and-pilot production refresh
 - hosted `/dev` now carries the live `1.3.0` candidate line
-- hosted `/beta` still holds the pre-`1.3.0` build-565 proving line
+- hosted `/beta` now carries the live `1.3.0` beta lane
 - hosted `/production` remains on the stable `1.2.3` public baseline
 - the active source candidate is now the `1.3.0` family
 - the current question is no longer "should this be a `1.2.4` fast follow?"

@@ -9,13 +9,13 @@ Verified May 4, 2026:
 - hosted `/production`
   - current live label: `1.2.3+build.532.sha.b959491`
 - hosted `/beta`
-  - current live label: `1.2.3-beta.1+build.565.sha.412f480.beta`
+  - current live label: `1.3.0-beta.1+build.568.sha.e270d85.beta`
 - hosted `/dev`
   - current live label: `1.3.0+build.567.sha.d0d3bd6`
 
 That means Aurora has completed the `1.2.3` trust-and-pilot production refresh,
-while hosted `/dev` has now moved to the first live `1.3.0` candidate and
-hosted `/beta` remains on the pre-`1.3.0` build-565 line.
+while hosted `/dev` and hosted `/beta` have now moved onto the `1.3.0`
+candidate family and hosted `/production` remains on the stable public line.
 
 ## What Is Now True
 
@@ -24,7 +24,7 @@ hosted `/beta` remains on the pre-`1.3.0` build-565 line.
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are clearly
   separated in both code and docs
 - hosted `/dev` now carries the next candidate line
-- hosted `/beta` remains the held pre-`1.3.0` proving lane
+- hosted `/beta` now carries the live beta candidate line
 - hosted `/production` remains the stable public baseline
 - the shipped release family is backed by committed test and analysis artifacts
 

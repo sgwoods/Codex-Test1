@@ -18,7 +18,7 @@ As of May 4, 2026:
 - hosted `/dev`:
   - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`:
-  - `1.2.3-beta.1+build.565.sha.412f480.beta`
+  - `1.3.0-beta.1+build.568.sha.e270d85.beta`
 - hosted `/production`:
   - `1.2.3+build.532.sha.b959491`
 
@@ -130,8 +130,8 @@ Current conclusion:
 - the shipped `1.2.3` family reads like a strong public release, not a recovery
   build
 - hosted `/dev` now carries the `d0d3bd6` `1.3.0` candidate line
-- hosted `/beta` and hosted `/production` still preserve the older `1.2.3`
-  public-family lanes
+- hosted `/beta` now carries the `e270d85` `1.3.0` beta lane
+- hosted `/production` still preserves the older `1.2.3` public-family lane
 - the next cycle should focus on movement feel, audio identity, gameplay trust
   follow-up, second-game/platform maturity, and stronger analysis/harness depth
   rather than broad emergency repair
