@@ -7,7 +7,7 @@ Verified May 4, 2026:
 - hosted `/dev`
   - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`
-  - `1.3.0-beta.1+build.568.sha.e270d85.beta`
+  - `1.3.0-beta.1+build.571.sha.230bfa5.beta`
 - hosted `/production`
   - `1.2.3+build.532.sha.b959491`
 - `main`
@@ -83,6 +83,10 @@ This means:
 - keep pack contract thinking explicit
 - reduce remaining Aurora-shaped platform residue
 - improve the storage and schema seam before a second real playable game
+- separate overall, platform, and per-game version tracking so release identity
+  does not collapse into one number
+- keep platform, application, and integrated-bundle candidate paths distinct so
+  unrelated work does not cause avoidable regressions
 
 ### 7. Second-Application Proof
 
@@ -92,6 +96,9 @@ This means:
   machine's parallel work
 - bring a preliminary second-game Platinum sneak peek forward before the full
   multi-game release so the platform layer is tested by real product pressure
+- treat the long-term target as a game-owned ingestible package built from
+  gameplay-video and reference-artifact analysis, not a Platinum-only special
+  case
 
 ### 8. Personas And Simulated Opponents
 
@@ -158,8 +165,12 @@ Deferred shell bug to carry into `1.6.0`:
 The long-term platform goal is:
 
 - a durable Platinum host for multiple arcade experiences
+- independent version and release tracking for the bundle, the platform, and
+  each game
 - same-control compliance across those experiences
 - richer reference-video ingestion and analysis
+- game-owned conformance packages that can support launch through Platinum now
+  and thinner hosts later if we choose
 - stronger personas, replay annotation, and future simulated-opponent support
 
 That is the route to the next genuinely major era, not just incrementing a

@@ -7,7 +7,7 @@ Verified May 4, 2026:
 - hosted `/dev`
   - `1.3.0+build.567.sha.d0d3bd6`
 - hosted `/beta`
-  - `1.3.0-beta.1+build.568.sha.e270d85.beta`
+  - `1.3.0-beta.1+build.571.sha.230bfa5.beta`
 - hosted `/production`
   - `1.2.3+build.532.sha.b959491`
 
@@ -30,6 +30,8 @@ It is centered on:
 - maturing Aurora as a product with durable pilot, replay, and release
   operations
 - growing Platinum into a host for more than one serious game experience
+- making release identity, testing, and tracking separable across the
+  integrated bundle, the platform, and each game
 
 ## Near-Term Release Direction
 
@@ -61,6 +63,7 @@ That release family should focus on:
 - movement fidelity
 - audio identity polish
 - gameplay trust fixes
+- clearer layered release and version tracking
 - level-by-level expansion planning
 - challenging-stage and later-level depth
 - shared-video evidence and publishing foundations
@@ -219,7 +222,24 @@ Themes:
 - account lifecycle and deletion
 - replay/media and admin/control-centre growth
 
-### 8. Environment and release separation
+### 8. Layered release and ingestible games
+
+Target:
+
+- treat the integrated release, the Platinum platform, and each game as
+  independently tracked release surfaces
+- make every serious game ingestion path produce game-owned conformance and
+  version artifacts from gameplay-video analysis and other primary evidence
+
+Why:
+
+- this reduces inadvertent regressions when work is concentrated in one layer
+- it prepares the repo for a future where a game can launch through Platinum
+  without being conceptually trapped inside it
+- it keeps the ingestion and conformance program focused on highly conformant
+  games built from durable source evidence
+
+### 9. Environment and release separation
 
 Target:
 
@@ -231,7 +251,7 @@ Themes:
 - stronger preflights
 - safer production promotions
 
-### 9. Platinum and multi-game growth
+### 10. Platinum and multi-game growth
 
 Target:
 
@@ -248,7 +268,7 @@ Themes:
 - active Galaxians-style sibling proof and platform-pressure work on the other
   development machine
 
-### 10. Personas and simulated opponents
+### 11. Personas and simulated opponents
 
 Target:
 
@@ -266,7 +286,7 @@ Themes:
 
 - a stronger pack contract
 - clearer platform/application seams
-- a dev-only second-game proof slice
+- a non-production second-game proof slice
 - stronger multi-machine and release portability
 
 ### Long-term platform milestone

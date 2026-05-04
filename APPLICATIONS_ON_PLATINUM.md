@@ -33,7 +33,7 @@ Aurora should remain the reference application when we ask:
 
 ### Galaxy Guardians
 
-`Galaxy Guardians` is currently a preview-only application shell and second-game
+`Galaxy Guardians` is currently a preview-first second-game application and
 sneak peek.
 
 Right now it proves:
@@ -47,12 +47,13 @@ Right now it proves:
   tables that do not directly borrow Aurora tables
 - a disabled, evidence-gated gameplay adapter skeleton with its own initial
   state shape
-- a dev-only visible preview board renderer that drives the Guardians-owned
-  scout-wave runtime, visual catalog, and audio cue catalog without registering
-  a playable adapter
-- a development-only playable-preview adapter that routes keyboard movement,
+- a visible preview board renderer that drives the Guardians-owned scout-wave
+  runtime, visual catalog, and audio cue catalog without registering a public
+  playable adapter
+- a non-production playable-preview adapter that routes keyboard movement,
   single-shot fire, life loss, reset, and game-over flow into the
-  Guardians-owned runtime while keeping the public playable adapter disabled
+  Guardians-owned runtime on development and beta lanes while keeping the
+  public playable adapter disabled
 - a source-manifested Galaxian reference profile with three local source videos,
   contact sheets, and waveforms
 - safe public-pack behavior because `Galaxy Guardians` still has no public
@@ -76,18 +77,36 @@ A Platinum application should own:
 - scoring and stage progression
 - game-specific presentation and content
 - application identity on the front door such as title and feature line
+- its own version line and changelog
+- its own conformance artifacts and readiness gates
 - its own harnesses for game behavior
 - optional shell preferences that remain within the platform shell contract
 
 A Platinum application should not own:
 
-- the release ladder
+- the shared hosted release ladder or authority mechanism
 - the shared hosted docs system
 - shared auth or score transport policy
 - shell layout regions
 - lane publishing rules
 - platform-only boot and pack-selection behavior
 - startup and wait-mode shell copy that promotes the platform or other applications
+
+## Application Release Identity
+
+Each application should be tracked as its own release surface even when it is
+currently shipped inside one Platinum bundle.
+
+At minimum, that means each application should eventually carry:
+
+- an application version
+- a declared compatibility target for the Platinum contract version
+- game-owned release notes or change history
+- game-owned conformance artifacts and scorecards where relevant
+- game-owned candidate and regression harness definitions
+
+The integrated bundle should then record which exact application versions it
+contains, rather than pretending the bundle version alone explains everything.
 
 ## Game-To-Game Isolation Rule
 
@@ -139,9 +158,10 @@ adapter, with any true common behavior promoted into Platinum.
 
 ### Preview pack persistence
 
-Preview-only applications must not become a durable trap state. During
-development a preview application may also expose an explicit dev-only playable
-adapter so we can test the runtime slice before public playability.
+Preview-first applications must not become a durable trap state. During
+development or beta a preview application may also expose an explicit
+non-production playable adapter so we can test the runtime slice before public
+production playability.
 
 Current expected behavior:
 
@@ -149,8 +169,8 @@ Current expected behavior:
 - shell can show its promo surface
 - `Enter` should fall back to a playable application when preview-only content
   cannot start gameplay
-- `Enter` may start a dev-only preview only when the development build exposes
-  an explicit dev-preview adapter and the pack still remains publicly
+- `Enter` may start a non-production preview only when the development or beta
+  build exposes an explicit preview adapter and the pack still remains publicly
   non-playable
 
 ### Front-door copy ownership
@@ -180,20 +200,31 @@ The current code-review snapshot for this seam is also captured in:
 
 A new Platinum application should ideally arrive in stages:
 
-1. shell preview
+1. reference-ingestion package
+- source gameplay videos
+- manuals or descriptive artifacts where available
+- game-owned manifests, contact sheets, timing windows, waveforms, and other
+  conformance evidence
+
+2. shell preview
 - name
 - framing
 - coming-soon or preview status
 
-2. minimal playable slice
+3. minimal playable slice
 - enough real rules to prove the platform seam
 - not a rushed full public release
 
-3. application-owned harnesses
+4. application-owned harnesses
 - rules and scoring checks
 - outcome/distribution checks if difficulty matters
 
-4. polished public release path
+5. independent application candidate path
+- explicit game version
+- explicit platform compatibility target
+- game-owned readiness and conformance evidence
+
+6. polished public release path
 - only after the application is truly ready
 
 ## Current Application Outlook
@@ -210,15 +241,15 @@ Near-term Aurora application work should now focus on:
 
 ### Galaxy Guardians next proof
 
-The current sneak peek is intentionally still non-playable. It should be used to
-keep the Platinum pack contract honest while the second game is still being
-specified.
+The current sneak peek is intentionally still production-non-playable. It
+should be used to keep the Platinum pack contract honest while the second game
+is still being specified.
 
-The first dev-only runtime slice is now underway as an application-owned model,
-not a public adapter. It creates a Galaxian-inspired scout-wave rack, enforces
-single-shot firing, emits promoted event names, scores against a Guardians-owned
-alien catalog, and keeps Aurora capture, challenge, dual-fighter, and scoring
-state out of the model.
+The first non-production runtime slice is now underway as an application-owned
+model, not a public adapter. It creates a Galaxian-inspired scout-wave rack,
+enforces single-shot firing, emits promoted event names, scores against a
+Guardians-owned alien catalog, and keeps Aurora capture, challenge,
+dual-fighter, and scoring state out of the model.
 
 Galaxy Guardians also now owns its first identity catalogs rather than borrowing
 Aurora's look or sound names. The visual catalog names the `Signal Flagship`,
@@ -229,21 +260,21 @@ wrap/return cue, and future player-loss cue. These are still synthesized
 starting points, but they give the 0.1 slice separate application-owned
 contracts before any public playability.
 
-The runtime model now has a visible dev-only preview renderer. It draws the
-Guardians scout-wave board, single player shot, alien silhouettes, and preview
-HUD from Guardians-owned runtime state and catalog IDs while keeping the pack
+The runtime model now has a visible preview renderer. It draws the Guardians
+scout-wave board, single player shot, alien silhouettes, and preview HUD from
+Guardians-owned runtime state and catalog IDs while keeping the pack publicly
 non-playable. The compact cabinet harness verifies the renderer by checking the
 preview mode, registered renderer key, visual IDs, audio cue IDs, and distinct
 signal palette. The renderer is now registered through a Platinum game-board
 renderer registry, so the top-level render loop no longer branches on a
 specific game by name.
 
-The next application proof is maturing the first dev-only playable slice. It
-now has the initial lifecycle path, but the behavior is still intentionally
-development-scoped until the measured 0.1 scout-wave evidence is stronger. The
-first aggregate 0.1 candidate gate is now source-controlled so future preview
-readiness claims can cite one durable artifact instead of reassembling the
-visual, audio, movement, threat, and boundary evidence from memory.
+The next application proof is maturing the first non-production playable slice.
+It now has the initial lifecycle path, but the behavior is still intentionally
+kept out of production until the measured 0.1 scout-wave evidence is stronger.
+The first aggregate 0.1 candidate gate is now source-controlled so future
+preview readiness claims can cite one durable artifact instead of reassembling
+the visual, audio, movement, threat, and boundary evidence from memory.
 
 - formation rack
 - dives
@@ -253,14 +284,14 @@ visual, audio, movement, threat, and boundary evidence from memory.
 - wrap-around threat
 - life loss and game over flow
 
-Current development-only playable-preview coverage:
+Current non-production playable-preview coverage:
 
-- `src/js/13-galaxy-guardians-gameplay-adapter.js` owns the dev-only start and
-  update adapter for `Galaxy Guardians`
+- `src/js/13-galaxy-guardians-gameplay-adapter.js` owns the non-production
+  start and update adapter for `Galaxy Guardians`
 - `src/js/13-galaxy-guardians-runtime.js` owns the runtime state, events, player
   shot, life-loss, reset, and game-over mechanics
 - `src/js/13-gameplay-adapter-registry.js` keeps public playable adapters and
-  dev-preview adapters in separate registries
+  non-production preview adapters in separate registries
 - `reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json`
   persists the first cue-shape and runtime-audio coverage contract for the
   Guardians signal theme
@@ -299,7 +330,7 @@ Current development-only playable-preview coverage:
   evidence
 - `tools/harness/check-galaxy-guardians-identity-baseline.js` proves the
   identity artifact matches the pack-owned sprite rows, audio cue catalog, audio
-  theme cues, runtime cue map, and dev-preview audio history
+  theme cues, runtime cue map, and preview audio history
 - `tools/harness/check-galaxy-guardians-movement-pacing.js` proves the runtime
   rules match the persistent movement artifact and that flagship dives attach
   real escort craft in sampled runtime state
@@ -331,6 +362,10 @@ That means the first scout-wave slice should be traceable through source
 manifest, clipped window, event log, semantic model, correspondence target, and
 harness evidence. The point is to learn `Galaxy Guardians` and also prove the
 method we will reuse for later games.
+
+Longer-term, that same game-owned evidence chain should support a world where a
+game can launch through Platinum or through a thinner dedicated host without
+rewriting the underlying conformance package.
 
 ## Related Docs
 

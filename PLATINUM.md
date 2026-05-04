@@ -25,6 +25,7 @@ multiple games:
 
 - shell framing and cabinet presentation
 - hosted lane model and release identity
+- platform contract versioning and compatibility policy
 - pack selection and boot path
 - common runtime, input, and session surfaces
 - shared services such as auth, leaderboard transport, and feedback transport
@@ -41,6 +42,8 @@ It should not own:
 - Aurora capture and rescue behavior
 - Aurora challenge-stage structure
 - Aurora-specific copy, stage identity, or boss personality
+- game-specific semantic version increments or conformance claims except as
+  displayed metadata sourced from the owning application
 
 ## Architectural Invariant: No Direct Game-To-Game Sharing
 
@@ -151,6 +154,7 @@ practice even though it still needs further formalization.
 The main contract areas are:
 
 - game-pack identity
+- game-pack version and platform-compatibility fields
 - shell theme selection
 - supported capabilities
 - entity model compatibility
@@ -176,13 +180,29 @@ Current application set:
   - first shipped playable application
   - owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content
 - `Galaxy Guardians`
-  - current preview-only application shell
+  - current preview-first application shell
   - useful for proving the pack-selection path, preview-modal contract, alternate
     shell identity, and safe launch fallback without pretending gameplay exists yet
 
 The application-side separation is documented in:
 
 - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+
+## Platform Is Host, Not Prison
+
+Platinum is the current host and public release shell.
+
+It should not become the only imaginable way a game can exist.
+
+The design goal is:
+
+- a game should be ingestible into Platinum through a strong pack contract
+- the game's own runtime, rules, identity, evidence, and versioning should stay
+  game-owned
+- those game-owned artifacts should be understandable and reusable outside the
+  Platinum shell if we later want a thinner host or standalone launch surface
+- Platinum should be the host layer that makes this easier, not a conceptual
+  trap that forces every game to be defined only in platform terms
 
 ## How To Use Platinum In Practice
 
@@ -243,6 +263,7 @@ Desired outcome:
 
 - clearer required fields
 - clearer optional capability flags
+- explicit platform-compatibility and game-version fields
 - forward-compatible pack evolution
 - earlier validation failures during boot
 
@@ -256,10 +277,14 @@ Desired outcome:
 
 - a new game can be analyzed in all major aspects with minimal user
   intervention once the reference corpus exists
+- the ingestion flow yields game-owned manifests, conformance artifacts, and
+  versioned runtime packages rather than only platform-specific glue
 - Platinum can propose its own extension points where needed instead of
   forcing every new mechanic into Aurora-shaped structures
 - the second game grows from a durable reference program rather than from
   ad hoc interpretation
+- a game can launch through Platinum now while remaining portable to a thinner
+  host later if we choose
 
 ### 2. Storage and migration policy
 

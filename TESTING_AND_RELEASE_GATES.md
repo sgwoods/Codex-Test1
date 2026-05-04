@@ -84,6 +84,31 @@ See also:
 - [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
 - [release-authority.json](release-authority.json)
 
+## Release Scope Model
+
+We now need to think about release work in three scopes, not one:
+
+1. `platform candidate`
+- shared Platinum shell, services, pack contract, tooling, and publish logic
+- should be able to move with platform-owned tests plus hosted-game boot/smoke
+  containment
+
+2. `application candidate`
+- one game's rules, assets, conformance evidence, and release notes
+- should be able to move with game-owned tests plus boundary checks, without
+  forcing unrelated game behavior to churn
+
+3. `integrated bundle candidate`
+- the specific overall combination promoted to hosted `/dev`, hosted `/beta`,
+  or hosted `/production`
+- should record which platform version and application versions are inside the
+  bundle
+
+Current public hosting still ships an integrated bundle on each lane.
+
+The discipline should still preserve these scopes independently so future
+release paths do not require a full-platform move every time one game changes.
+
 ## Documentation Gate For Major `x.y` Releases
 
 For every meaningful `x.y` release, we should complete a full documentation pass
@@ -176,6 +201,24 @@ Harness work should also follow the project reference program:
 - bug fixes should gain coverage in the right harness family
 - fidelity changes should use measured reference artifacts where possible
 - platform/application seam changes should prove that the boundary still holds
+
+## Ingestion And Conformance Rule
+
+For new-game work, the first serious gate should be game-owned reference
+evidence, not platform improvisation.
+
+Default direction:
+
+- ingest user gameplay videos and other primary source artifacts into
+  game-owned manifests
+- extract contact sheets, waveforms, timing windows, motion traces, and other
+  conformance evidence from those sources
+- preserve manuals, flyers, or descriptive rule artifacts where they help
+  explain mechanics the footage alone does not settle cleanly
+- keep the resulting analysis and conformance package tied to the owning game,
+  not buried only in Platinum-specific release logic
+- use Platinum as the host contract and tooling surface for launch, not as a
+  substitute for game-owned reference truth
 
 ## Gate Profiles By Change Type
 

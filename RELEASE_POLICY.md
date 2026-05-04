@@ -2,7 +2,8 @@
 
 ## Version Format
 
-We use a SemVer-style public version plus build metadata.
+We currently expose a SemVer-style integrated release version plus build
+metadata for the hosted bundle.
 
 Examples:
 
@@ -15,7 +16,58 @@ Examples:
 - hosted `/production`:
   - `x.y.z+build.NNN.sha.abcdef0`
 
-These are format examples, not current live lane values.
+These are bundle-version examples, not current live lane values.
+
+## Layered Version Domains
+
+Going forward, the repo should treat release identity as layered rather than
+single-track.
+
+The intended version domains are:
+
+- integrated release version
+  - the public version for the hosted bundle on a lane such as `1.3.0`
+- Platinum platform version
+  - the shared host contract, shell, services, tooling, and pack-compatibility
+    version
+- application version
+  - the game-owned version for each shipped or previewed application such as
+    `Aurora Galactica`, `Galaxy Guardians`, and future sibling games
+- build identity
+  - build number, commit hash, dirty state, and lane metadata
+
+Rules:
+
+- do not assume every version domain must move together
+- a platform-only fix may advance the platform version without forcing every
+  application version to change
+- a game-only release may advance one game's version and the integrated bundle
+  while the platform version stays compatible
+- a full product milestone may move the integrated release version while also
+  recording exactly which platform and application versions were bundled
+- current hosted labels are still bundle-oriented, but docs, dashboards, and
+  manifests should evolve toward showing platform and per-game versions
+  explicitly
+
+## Release Scope Direction
+
+Public hosting still publishes one integrated bundle per lane today.
+
+That does not mean we should flatten release discipline into one axis.
+
+The source-of-truth direction is to support three distinct candidate scopes:
+
+1. platform candidate
+   - shared shell, services, pack contract, tooling, and publish behavior
+2. application candidate
+   - one game's rules, content, conformance evidence, and game-owned release
+     story
+3. integrated bundle candidate
+   - the specific overall combination being promoted on hosted `/dev`,
+     hosted `/beta`, or hosted `/production`
+
+Each scope should be able to carry its own numbering, evidence, and test gate
+without forcing unrelated areas to churn.
 
 ## Meaning
 
@@ -95,6 +147,9 @@ Current versioning read for the next cycle:
 - treat that kind of candidate as a `MINOR` family step, currently expected to
   be `1.3.0`, and only change the actual runtime version when we intentionally
   cut the candidate branch
+- while the current build label still centers the integrated version, we should
+  also start treating the platform and each hosted game as independently
+  tracked release surfaces
 
 Useful commands:
 
@@ -184,18 +239,19 @@ Rule:
 
 ## Current Promotion Reality
 
-As of April 26, 2026:
+As of May 4, 2026:
 
-- hosted `/dev` is live at `1.2.3+build.532.sha.b959491`
-- hosted `/beta` is live at `1.2.3-beta.1+build.532.sha.b959491.beta`
+- hosted `/dev` is live at `1.3.0+build.567.sha.d0d3bd6`
+- hosted `/beta` is live at `1.3.0-beta.1+build.571.sha.230bfa5.beta`
 - hosted `/production` is live at `1.2.3+build.532.sha.b959491`
 
 That means:
 
-- the current shipped dev, beta, and production families are aligned
-- the next release cycle should work from `main`
-- the next release cycle should let the lanes diverge again only when there is
-  a coherent improvement bundle worth sharing
+- hosted `/beta` is now intentionally ahead of hosted `/production`
+- the next release cycle should keep platform, application, and bundle tracking
+  explicit instead of assuming one version line is enough to explain the state
+- the next release cycle should let lanes diverge only when there is a coherent
+  improvement bundle worth sharing
 
 ## Major `x.y` Documentation Gate
 
