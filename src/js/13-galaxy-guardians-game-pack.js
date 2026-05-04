@@ -267,12 +267,28 @@ const GUARDIANS_ATTRACT_MISSION=Object.freeze({
  referenceIntent:'Guardians-owned mission and score-table language derived from Galaxian attract/score-table promoted windows, not Aurora wait-mode copy.'
 });
 
+const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('galaxy-guardians-preview',{
+ title:'Galaxy Guardians',
+ version:'0.1.0-preview',
+ versionLine:'0.1.0 preview',
+ releaseTrack:'playable-preview',
+ runtimeStatus:'non-production-playable-preview',
+ platformCompatibility:buildPlatformInfo().compatibility||'',
+ launchPolicy:'development-and-beta-only'
+}));
+
 const GALAXY_GUARDIANS_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'galaxy-guardians-preview',
   title:'Galaxy Guardians',
-  versionLine:'preview',
-  playable:0
+  version:GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0-preview',
+  versionLine:GALAXY_GUARDIANS_APPLICATION_RELEASE.versionLine||GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0 preview',
+  releaseTrack:GALAXY_GUARDIANS_APPLICATION_RELEASE.releaseTrack||'playable-preview',
+  runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'non-production-playable-preview',
+  platformCompatibility:GALAXY_GUARDIANS_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
+  launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'development-and-beta-only',
+  playable:0,
+  previewOnly:1
  }),
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',

@@ -35,6 +35,19 @@ function packIsPlayable(pack=null){
  return !!(pack&&pack.metadata?.playable!==0&&pack.metadata?.playable!==false);
 }
 
+function gamePackVersionLine(pack=currentGamePack()){
+ const meta=pack?.metadata||{};
+ return String(meta.versionLine||meta.version||'--');
+}
+
+function gamePackReleaseTrackLine(pack=currentGamePack()){
+ return humanizeReleaseTrack(pack?.metadata?.releaseTrack||'');
+}
+
+function gamePackRuntimeStatusLine(pack=currentGamePack()){
+ return humanizeReleaseTrack(pack?.metadata?.runtimeStatus||'');
+}
+
 function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
  const nextPack=getGamePack(key);
  ACTIVE_GAME_PACK_KEY=nextPack.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
@@ -318,8 +331,9 @@ function currentGamePackPreview(pack=currentGamePack()){
 }
 
 function currentPlatformPackLabel(){
+ const platform=typeof buildPlatformInfo==='function'?buildPlatformInfo():{name:PLATFORM_NAME,version:BUILD_INFO.version||'--'};
  const pack=currentGamePack();
- return `${PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'}`;
+ return `${platform.name||PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'} · Platform ${platform.version||BUILD_INFO.version||'--'} · Game ${gamePackVersionLine(pack)}`;
 }
 
 function currentGamePackShellThemes(){
@@ -386,7 +400,7 @@ function syncInstalledPackShellChrome(){
  try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
  const marquee=document.getElementById('cabinetMarqueeTitle');
   if(marquee)marquee.textContent=frontDoor.marqueeTitle;
- if(settingsRuntime)settingsRuntime.textContent=`Platform ${currentPlatformPackLabel()}`;
+ if(settingsRuntime)settingsRuntime.textContent=currentPlatformPackLabel();
  const root=document.documentElement;
  if(root&&frameTheme&&shellTheme){
   root.style.setProperty('--shell-line',shellTheme.shellLine);
@@ -454,6 +468,9 @@ window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
+window.gamePackVersionLine=gamePackVersionLine;
+window.gamePackReleaseTrackLine=gamePackReleaseTrackLine;
+window.gamePackRuntimeStatusLine=gamePackRuntimeStatusLine;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentWaitModeFrontDoor=currentWaitModeFrontDoor;
 window.currentWaitModeShowcasePack=currentWaitModeShowcasePack;

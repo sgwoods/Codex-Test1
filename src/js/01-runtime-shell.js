@@ -108,7 +108,7 @@ function shellEscapeHtml(value){
 }
 function currentPlatformMessageRows(){
  const channel=String(BUILD_INFO.releaseChannel||'development').toUpperCase();
- const runtime=typeof currentPlatformPackLabel==='function'?currentPlatformPackLabel():PLATFORM_NAME;
+ const platform=typeof buildPlatformInfo==='function'?buildPlatformInfo():{name:PLATFORM_NAME,version:BUILD_INFO.version||'--'};
  const rows=[];
  if(BUILD_UPDATE.available){
   rows.push({
@@ -123,17 +123,18 @@ function currentPlatformMessageRows(){
   meta:buildStampDateTimeText()
  });
  rows.push({
-  kicker:'RUNTIME',
-  main:runtime,
-  meta:'Platform-owned shell, controls, score services, replay, and message delivery.'
+  kicker:'PLATFORM',
+  main:`${platform.name||PLATFORM_NAME} ${platform.version||BUILD_INFO.version||'--'}`,
+  meta:[humanizeReleaseTrack(platform.releaseTrack||''),platform.compatibility||''].filter(Boolean).join(' · ')||'Platform-owned shell, controls, score services, replay, and message delivery.'
  });
  if(typeof currentGamePack==='function'){
   const pack=currentGamePack();
   const title=pack?.metadata?.title||pack?.metadata?.gameKey||'Active game';
-  const state=pack?.metadata?.previewOnly?'Preview pack':'Playable pack';
+  const version=typeof gamePackVersionLine==='function'?gamePackVersionLine(pack):String(pack?.metadata?.versionLine||pack?.metadata?.version||'--');
+  const state=[typeof gamePackReleaseTrackLine==='function'?gamePackReleaseTrackLine(pack):humanizeReleaseTrack(pack?.metadata?.releaseTrack||''),typeof gamePackRuntimeStatusLine==='function'?gamePackRuntimeStatusLine(pack):humanizeReleaseTrack(pack?.metadata?.runtimeStatus||'')].filter(Boolean).join(' · ')||(pack?.metadata?.previewOnly?'Preview pack':'Playable pack');
   rows.push({
    kicker:'GAME',
-   main:title,
+   main:`${title} ${version}`,
    meta:state
   });
  }

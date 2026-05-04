@@ -33,6 +33,7 @@ const REQUIRED_SOURCE_DOCS = [
   'platinum-guide.json',
   'player-guide.json',
   'release-dashboard.json',
+  'release-manifest.json',
   'release-notes.json'
 ];
 
@@ -187,6 +188,12 @@ function checkBuildInfo(cfg){
   }
   if(info.commit !== head){
     throw new Error(`Publish preflight failed: ${cfg.buildInfo} was built from ${info.shortCommit || info.commit}, but HEAD is ${head.slice(0, 7)}. ${cfg.nextStep}`);
+  }
+  if(!info.platform || !String(info.platform.version || '').trim()){
+    throw new Error(`Publish preflight failed: ${cfg.buildInfo} is missing platform version metadata. Rebuild after restoring release-manifest.json.`);
+  }
+  if(!Array.isArray(info.applications) || !info.applications.length){
+    throw new Error(`Publish preflight failed: ${cfg.buildInfo} is missing application version metadata. Rebuild after restoring release-manifest.json.`);
   }
   return info;
 }

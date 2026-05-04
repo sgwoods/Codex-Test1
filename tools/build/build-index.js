@@ -41,6 +41,7 @@ const SHARED_REPLAY_STORE = path.join(ROOT, 'shared', 'replay-store.js');
 const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
+const RELEASE_MANIFEST = path.join(ROOT, 'release-manifest.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
@@ -178,6 +179,53 @@ function loadReleaseDashboard(){
       legend: []
     };
   }
+}
+
+function loadReleaseManifest(buildVersion = pkg.version){
+  let raw;
+  try{
+    raw = JSON.parse(read(RELEASE_MANIFEST));
+  }catch(err){
+    throw new Error(`Could not load ${path.relative(ROOT, RELEASE_MANIFEST)}: ${err.message}`);
+  }
+
+  const product = String(raw.product || 'Aurora Galactica').trim() || 'Aurora Galactica';
+  const rawPlatform = raw.platform && typeof raw.platform === 'object' ? raw.platform : {};
+  const platform = {
+    key: String(rawPlatform.key || 'platinum').trim() || 'platinum',
+    name: String(rawPlatform.name || 'Platinum').trim() || 'Platinum',
+    version: String(rawPlatform.version || buildVersion).trim() || buildVersion,
+    releaseTrack: String(rawPlatform.releaseTrack || 'bundle-aligned').trim() || 'bundle-aligned',
+    compatibility: String(rawPlatform.compatibility || '').trim(),
+    notes: String(rawPlatform.notes || '').trim()
+  };
+
+  const applications = Array.isArray(raw.applications) ? raw.applications : [];
+  const seenGameKeys = new Set();
+  const normalizedApplications = applications
+    .map((entry) => {
+      const gameKey = String(entry && entry.gameKey || '').trim();
+      if(!gameKey || seenGameKeys.has(gameKey)) return null;
+      seenGameKeys.add(gameKey);
+      const version = String(entry.version || '').trim() || '0.0.0';
+      return {
+        gameKey,
+        title: String(entry.title || gameKey).trim() || gameKey,
+        version,
+        versionLine: String(entry.versionLine || version).trim() || version,
+        releaseTrack: String(entry.releaseTrack || 'application-track').trim() || 'application-track',
+        runtimeStatus: String(entry.runtimeStatus || '').trim(),
+        platformCompatibility: String(entry.platformCompatibility || platform.compatibility || '').trim(),
+        launchPolicy: String(entry.launchPolicy || '').trim()
+      };
+    })
+    .filter(Boolean);
+
+  return {
+    product,
+    platform,
+    applications: normalizedApplications
+  };
 }
 
 function loadGuide(filePath, fallbackTitle, fallbackStrapline, includeSourceDocs = true){
@@ -331,6 +379,12 @@ function publicDateLong(buildInfo){
   }).format(new Date(source));
 }
 
+function humanizeReleaseLabel(value = ''){
+  return String(value || '')
+    .trim()
+    .replace(/-/g, ' ');
+}
+
 function dashboardStyles(){
   return `
     :root{
@@ -447,6 +501,90 @@ function dashboardStyles(){
       display:grid;
       gap:18px;
     }
+    .versionDomains{
+      margin-top:24px;
+      padding:28px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .versionDomains h2{
+      margin:0 0 8px;
+      font-size:24px;
+      letter-spacing:-0.02em;
+    }
+    .versionDomains p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .versionGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+    .versionCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(7,19,31,0.52);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .versionCard strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#cfe8fb;
+    }
+    .versionCard span{
+      display:block;
+      font-size:22px;
+      font-weight:600;
+    }
+    .versionCard small{
+      display:block;
+      margin-top:8px;
+      color:#8db0c8;
+      line-height:1.5;
+      font-size:13px;
+    }
+    .tableWrap{
+      margin-top:18px;
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(7,19,31,0.46);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+    }
+    .dataTable th{
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#9fc8e3;
+      background:rgba(255,255,255,0.03);
+    }
+    .dataTable td{
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+    .dataTable tr:last-child td{
+      border-bottom:none;
+    }
     .timeline::before{
       content:"";
       position:absolute;
@@ -553,11 +691,82 @@ function dashboardStyles(){
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
       .hero{padding:26px 22px 24px}
+      .versionDomains{padding:22px 20px}
       .step{margin-left:34px}
       .timeline::before{left:12px}
       .step::before{left:-28px}
       .stepHeader{flex-direction:column}
     }
+  `.trim();
+}
+
+function renderReleaseVersionDomains(buildInfo){
+  const platform = buildInfo.platform || {};
+  const applications = Array.isArray(buildInfo.applications) ? buildInfo.applications : [];
+  const versionCards = [
+    {
+      label: 'Integrated Release',
+      value: buildInfo.version || '--',
+      detail: `Lane ${buildInfo.releaseChannel || 'development'}${buildInfo.label ? ` · ${buildInfo.label}` : ''}`
+    },
+    {
+      label: 'Platinum Platform',
+      value: platform.version || '--',
+      detail: [platform.name || 'Platinum', humanizeReleaseLabel(platform.releaseTrack), platform.compatibility].filter(Boolean).join(' · ')
+    },
+    {
+      label: 'Application Tracks',
+      value: String(applications.length || 0),
+      detail: 'Game-owned version records carried inside this bundle.'
+    }
+  ].map((card) => `
+    <article class="versionCard">
+      <strong>${esc(card.label)}</strong>
+      <span>${esc(card.value)}</span>
+      <small>${esc(card.detail)}</small>
+    </article>
+  `).join('\n');
+  const applicationRows = applications.length
+    ? applications.map((app) => `
+        <tr>
+          <td>${esc(app.title || app.gameKey || 'Application')}</td>
+          <td>${esc(app.versionLine || app.version || '--')}</td>
+          <td>${esc(humanizeReleaseLabel(app.releaseTrack || ''))}</td>
+          <td>${esc(humanizeReleaseLabel(app.runtimeStatus || ''))}</td>
+          <td>${esc(humanizeReleaseLabel(app.launchPolicy || ''))}</td>
+          <td>${esc(app.platformCompatibility || platform.compatibility || '')}</td>
+        </tr>
+      `).join('\n')
+    : `
+        <tr>
+          <td colspan="6">No applications are currently declared in <code>release-manifest.json</code>.</td>
+        </tr>
+      `;
+  return `
+    <section class="versionDomains">
+      <h2>Version Domains</h2>
+      <p>The integrated release, the Platinum host, and each application now travel as separate version records so we can advance or verify them independently over time.</p>
+      <div class="versionGrid">
+        ${versionCards}
+      </div>
+      <div class="tableWrap">
+        <table class="dataTable">
+          <thead>
+            <tr>
+              <th>Application</th>
+              <th>Version</th>
+              <th>Track</th>
+              <th>Runtime Status</th>
+              <th>Launch Policy</th>
+              <th>Compatibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${applicationRows}
+          </tbody>
+        </table>
+      </div>
+    </section>
   `.trim();
 }
 
@@ -1087,7 +1296,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
           <span class="eyebrow">Release Dashboard</span>
           <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
         </div>
-        <h1>Aurora Galactica</h1>
+        <h1>${esc(buildInfo.product || 'Aurora Galactica')}</h1>
         <p>${esc(dashboard.strapline || '')}</p>
         <div class="meta">
           <div class="metaCard">
@@ -1108,6 +1317,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
           </div>
         </div>
       </section>
+      ${renderReleaseVersionDomains(buildInfo)}
       <section class="timeline">
         ${timeline}
       </section>
@@ -2196,6 +2406,7 @@ function build(options = {}){
   }).format(new Date()).replace(',', '');
   const releaseNotes = loadReleaseNotes();
   const releaseDashboard = loadReleaseDashboard();
+  const releaseManifest = loadReleaseManifest(buildVersion);
   const projectGuide = loadProjectGuide();
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
@@ -2230,6 +2441,9 @@ function build(options = {}){
     BUILD_DIRTY: buildDirty ? 'true' : 'false',
     BUILD_RELEASE_ET: buildReleaseEt,
     BUILD_STATE: buildState,
+    BUILD_PRODUCT_NAME_JSON: JSON.stringify(releaseManifest.product),
+    BUILD_PLATFORM_INFO_JSON: JSON.stringify(releaseManifest.platform),
+    BUILD_APPLICATIONS_INFO_JSON: JSON.stringify(releaseManifest.applications),
     SUPABASE_URL: supabaseUrl,
     SUPABASE_ANON_KEY: supabaseAnonKey,
     WEB3FORMS_ACCESS_KEY: web3FormsAccessKey,
@@ -2261,6 +2475,7 @@ function build(options = {}){
     .replace('{{INLINE_SCRIPT}}', `// Generated from src/js/*.js\n${builtScript}`);
 
   const buildInfo = {
+    product: releaseManifest.product,
     version: buildVersion,
     label: buildLabel,
     buildNumber,
@@ -2273,6 +2488,8 @@ function build(options = {}){
     dirtyFiles: buildDirtyFiles,
     builtAtUtc: buildUtc,
     builtAtEt: buildReleaseEt,
+    platform: releaseManifest.platform,
+    applications: releaseManifest.applications,
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
     latestReleaseNote: latestNote
   };
@@ -2284,7 +2501,12 @@ function build(options = {}){
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
   fs.writeFileSync(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
   fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
-  fs.writeFileSync(out.releaseNotes, JSON.stringify({ notes: releaseNotes }, null, 2) + '\n');
+  fs.writeFileSync(out.releaseNotes, JSON.stringify({
+    product: releaseManifest.product,
+    platform: releaseManifest.platform,
+    applications: releaseManifest.applications,
+    notes: releaseNotes
+  }, null, 2) + '\n');
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
     fs.copyFileSync(path.join(ROOT, 'export.mov.png'), out.screenshot);
   }

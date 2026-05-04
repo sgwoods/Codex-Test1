@@ -32,13 +32,20 @@ function renderShellThemeOptions(){
  return `<div class="gamePickerThemeGroup"><span class="gamePickerThemeLabel">Shell Theme</span><div class="gamePickerThemeOptions">${themes.map(theme=>`<button class="gamePickerThemeBtn${theme.id===activeTheme?.id?' isSelected':''}" data-theme-id="${theme.id}">${theme.label}</button>`).join('')}</div></div>`;
 }
 
+function describePackRelease(pack){
+ const version=typeof gamePackVersionLine==='function'?gamePackVersionLine(pack):String(pack?.metadata?.versionLine||pack?.metadata?.version||'--');
+ const track=typeof gamePackReleaseTrackLine==='function'?gamePackReleaseTrackLine(pack):humanizeReleaseTrack(pack?.metadata?.releaseTrack||'');
+ const runtime=typeof gamePackRuntimeStatusLine==='function'?gamePackRuntimeStatusLine(pack):humanizeReleaseTrack(pack?.metadata?.runtimeStatus||'');
+ return [version&&version!=='--'?`Version ${version}`:'',track,runtime].filter(Boolean).join(' · ');
+}
+
 function renderGamePicker(){
  if(!gamePickerList||!gamePickerCurrent||!gamePickerStatus||typeof availableGamePacks!=='function')return;
  const packs=Object.values(availableGamePacks());
  const activeKey=typeof currentGamePackKey==='function'?currentGamePackKey():'';
   const activePack=typeof currentGamePack==='function'?currentGamePack():null;
   const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
- gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • finish the current run before switching':''
+ gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>${describePackRelease(activePack)||'Version details unavailable'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • finish the current run before switching':''
  }</span>${renderShellThemeOptions()}`;
  gamePickerList.innerHTML=packs.map(pack=>{
   const isActive=pack.metadata?.gameKey===activeKey;
@@ -50,7 +57,7 @@ function renderGamePicker(){
   const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewPlayable?'Preview playable in development and beta runtimes':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${describePackRelease(pack)||'Version details unavailable'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewPlayable?'Preview playable in development and beta runtimes':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Finish the current run before switching to a different game pack.'

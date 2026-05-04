@@ -460,7 +460,34 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'{{BUILD_VERSION}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}'};
+const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+function humanizeReleaseTrack(value=''){
+ const raw=String(value||'').trim();
+ return raw?raw.replace(/-/g,' '):'';
+}
+function buildPlatformInfo(){
+ const platform=BUILD_INFO&&BUILD_INFO.platform&&typeof BUILD_INFO.platform==='object'?BUILD_INFO.platform:{};
+ return Object.assign({
+  key:'platinum',
+  name:PLATFORM_NAME,
+  version:BUILD_INFO.version||'--',
+  releaseTrack:'bundle-aligned',
+  compatibility:'',
+  notes:''
+ },platform||{});
+}
+function buildApplications(){
+ return Array.isArray(BUILD_INFO?.applications)?BUILD_INFO.applications:[];
+}
+function applicationReleaseRecord(gameKey='',fallback={}){
+ const target=String(gameKey||'').trim();
+ const record=buildApplications().find(app=>String(app?.gameKey||'').trim()===target);
+ return Object.assign({},fallback||{},record||{});
+}
+function applicationVersionLine(gameKey='',fallback='--'){
+ const record=applicationReleaseRecord(gameKey);
+ return String(record.versionLine||record.version||fallback);
+}
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;

@@ -68,7 +68,7 @@ fs.rmSync(BETA_DIR, { recursive: true, force: true });
 fs.mkdirSync(BETA_DIR, { recursive: true });
 
 for(const file of FILES){
-  const src = file === 'release-notes.json' || file === 'README.md'
+  const src = file === 'README.md'
     ? path.join(ROOT, file)
     : path.join(DIST_DEV, file);
   if(!fs.existsSync(src)) continue;

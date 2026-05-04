@@ -85,7 +85,7 @@ if(/\bdirty\b/i.test(betaInfo.promotedFromState || '') || /\bdirty\b/i.test(appr
 }
 
 for(const file of FILES){
-  const src = file === 'release-notes.json' || file === 'README.md'
+  const src = file === 'README.md'
     ? path.join(ROOT, file)
     : path.join(DIST_BETA, file);
   if(!fs.existsSync(src)) continue;
