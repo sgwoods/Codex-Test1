@@ -49,14 +49,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'crowned-command-ship',
   palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '....A....',
-   '...ACA...',
-   '..WCCCW..',
-   '.WCECEW.',
-   'WWCCCCCWW',
-   '.WCCCCCW.',
-   '..AACAA..',
-   '.A.....A.'
+   '...A.A...',
+   '...CCC...',
+   'C.WCCCW.C',
+   'CCCECECCC',
+   '..CCCCC..',
+   '.WWCCCWW.',
+   'WWWCCCWWW',
+   'WW..C..WW'
   ]),
   notes:'Small crowned command silhouette tuned from Galaxian contact-sheet proportions for flagship-with-escort dives.'
  }),
@@ -67,12 +67,12 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'red-arrow-escort',
   palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
   pixelRows:Object.freeze([
-   '..A.A..',
-   '.ACCCA.',
-   'WCECECW',
-   '.CCCCC.',
-   '..W.W..',
-   'A.....A'
+   '..ACC..',
+   'WWCCCCC',
+   'WCWEWWW',
+   '..WWW..',
+   '..WWW..',
+   '...A...'
   ]),
   notes:'Compact red/magenta escort marker tuned toward the charger rows visible in the Galaxian reference sheets.'
  }),
@@ -83,12 +83,12 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'cyan-wing-scout',
   palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '..A.A..',
-   '.WACAW.',
-   'WWCCCWW',
-   '.WECEW.',
-   '..CCC..',
-   '.A...A.'
+   '.CCCCC.',
+   'ACCCACA',
+   'AAAAAAA',
+   '.WAAAW.',
+   '...C...',
+   '...A...'
   ]),
   notes:'Small blue/cyan convoy scout shaped for a tighter Galaxian-like rack.'
  }),
@@ -99,13 +99,13 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   silhouette:'single-shot-interceptor',
   palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
-   '...A...',
-   '..ACA..',
-   '.WCCCW.',
-   'WCCCCCW',
-   '.WCFW.',
-   '..FFF..',
-   '.A...A.'
+   'CWWCWWC',
+   'WWWCCWW',
+   'WWWCWWW',
+   'WWWCWWW',
+   'WWWCWWW',
+   'WWCCWWW',
+   'WW...WW'
   ]),
   notes:'Compact single fighter tuned toward the cyan/red Galaxian player ship proportions.'
  })
@@ -134,16 +134,16 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[520,420,320,240],step:.035,wave:'square',volume:.011,slide:-42,lpHz:2500}),
    formationPulse:Object.freeze({tones:Object.freeze([{freq:122,duration:.08,wave:'square',volume:.006,slide:18,lpHz:1400},{freq:244,duration:.05,wave:'square',volume:.007,slide:-28,lpHz:2200,delay:.018},{freq:366,duration:.032,wave:'square',volume:.0045,slide:-44,lpHz:2800,delay:.05}])}),
-   playerShot:Object.freeze({tones:Object.freeze([{freq:2480,duration:.01,wave:'square',volume:.007,slide:-980,detune:.008,lpHz:7800},{freq:1510,duration:.024,wave:'square',volume:.011,slide:-1180,detune:-.006,lpHz:6800,delay:.004}]),noise:Object.freeze([{duration:.014,volume:.0024,hp:4200,delay:0}])}),
-   enemyShot:Object.freeze({tones:Object.freeze([{freq:246,duration:.088,wave:'square',volume:.0115,slide:-225,detune:.006,lpHz:1800},{freq:116,duration:.064,wave:'square',volume:.0062,slide:-88,detune:-.004,lpHz:1150,delay:.036}]),noise:Object.freeze([{duration:.046,volume:.0042,hp:880,delay:.006}])}),
-   scoutDive:Object.freeze({tones:Object.freeze([{freq:660,duration:.11,wave:'square',volume:.0082,slide:-285,detune:.01,lpHz:3100},{freq:330,duration:.15,wave:'sawtooth',volume:.0064,slide:-218,detune:-.008,lpHz:1850,delay:.048},{freq:165,duration:.09,wave:'square',volume:.0038,slide:-70,detune:.006,lpHz:1250,delay:.17}]),noise:Object.freeze([{duration:.052,volume:.0032,hp:720,delay:.035}])}),
-   flagshipDive:Object.freeze({tones:Object.freeze([{freq:420,duration:.17,wave:'square',volume:.0094,slide:-190,detune:.01,lpHz:2450},{freq:210,duration:.3,wave:'sawtooth',volume:.0078,slide:-140,detune:-.008,lpHz:1600,delay:.056},{freq:96,duration:.19,wave:'square',volume:.0054,slide:-48,detune:.006,lpHz:1000,delay:.25}]),noise:Object.freeze([{duration:.085,volume:.0038,hp:640,delay:.022}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:2140,duration:.045,wave:'square',volume:.0105,slide:-720,detune:.006,lpHz:6800},{freq:1320,duration:.072,wave:'square',volume:.012,slide:-560,detune:-.005,lpHz:5600,delay:.008}]),noise:Object.freeze([{duration:.04,volume:.0032,hp:3600,delay:0}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:940,duration:.052,wave:'square',volume:.0105,slide:-310,detune:.006,lpHz:3600},{freq:520,duration:.072,wave:'square',volume:.007,slide:-210,detune:-.004,lpHz:2500,delay:.008}]),noise:Object.freeze([{duration:.038,volume:.0038,hp:1200,delay:.004}])}),
+   scoutDive:Object.freeze({tones:Object.freeze([{freq:1180,duration:.09,wave:'square',volume:.0085,slide:-420,detune:.008,lpHz:3600},{freq:720,duration:.14,wave:'square',volume:.0068,slide:-330,detune:-.006,lpHz:2700,delay:.04},{freq:360,duration:.1,wave:'square',volume:.0042,slide:-130,detune:.004,lpHz:1700,delay:.13}]),noise:Object.freeze([{duration:.056,volume:.0032,hp:880,delay:.03}])}),
+   flagshipDive:Object.freeze({tones:Object.freeze([{freq:1600,duration:.11,wave:'square',volume:.0095,slide:-520,detune:.008,lpHz:4200},{freq:920,duration:.2,wave:'square',volume:.0078,slide:-360,detune:-.006,lpHz:3000,delay:.045},{freq:460,duration:.18,wave:'square',volume:.0055,slide:-170,detune:.004,lpHz:1900,delay:.16}]),noise:Object.freeze([{duration:.092,volume:.004,hp:840,delay:.02}])}),
    escortJoin:Object.freeze({seq:[880,660,880,520],step:.024,wave:'square',volume:.0072,slide:-58,lpHz:4200}),
    wrapReturn:Object.freeze({tones:Object.freeze([{freq:150,duration:.18,wave:'triangle',volume:.0065,slide:210,lpHz:2100},{freq:360,duration:.10,wave:'square',volume:.0045,slide:120,lpHz:3000,delay:.08}])}),
-   playerLoss:Object.freeze({tones:Object.freeze([{freq:260,duration:.12,wave:'square',volume:.019,slide:-260,lpHz:1900},{freq:150,duration:.24,wave:'square',volume:.016,slide:-190,detune:-.006,lpHz:1300,delay:.036},{freq:76,duration:.18,wave:'triangle',volume:.007,slide:-52,lpHz:900,delay:.18}]),noise:Object.freeze([{duration:.14,volume:.01,hp:800,delay:.01}])}),
-   scoutHit:Object.freeze({tones:Object.freeze([{freq:390,duration:.034,wave:'square',volume:.0125,slide:-360,detune:.006,lpHz:3800}]),noise:Object.freeze([{duration:.026,volume:.0025,hp:1800,delay:.004}])}),
-   escortHit:Object.freeze({tones:Object.freeze([{freq:510,duration:.052,wave:'square',volume:.0135,slide:-320,detune:.006,lpHz:4100},{freq:230,duration:.056,wave:'square',volume:.0062,slide:-170,detune:-.005,lpHz:2200,delay:.01}]),noise:Object.freeze([{duration:.032,volume:.003,hp:1550,delay:.006}])}),
-   flagshipHit:Object.freeze({tones:Object.freeze([{freq:650,duration:.07,wave:'square',volume:.0145,slide:-250,detune:.006,lpHz:4500},{freq:320,duration:.09,wave:'square',volume:.0074,slide:-160,detune:-.004,lpHz:2500,delay:.018},{freq:156,duration:.07,wave:'triangle',volume:.005,slide:-92,detune:.004,lpHz:1700,delay:.058}]),noise:Object.freeze([{duration:.05,volume:.0038,hp:1300,delay:.008}])}),
+   playerLoss:Object.freeze({tones:Object.freeze([{freq:1850,duration:.08,wave:'square',volume:.015,slide:-560,lpHz:4200},{freq:1020,duration:.13,wave:'square',volume:.013,slide:-360,detune:-.005,lpHz:3000,delay:.035},{freq:440,duration:.095,wave:'square',volume:.007,slide:-180,lpHz:1800,delay:.14}]),noise:Object.freeze([{duration:.12,volume:.009,hp:950,delay:.012}])}),
+   scoutHit:Object.freeze({tones:Object.freeze([{freq:1040,duration:.028,wave:'square',volume:.0125,slide:-460,detune:.006,lpHz:4700}]),noise:Object.freeze([{duration:.022,volume:.0027,hp:1800,delay:.004}])}),
+   escortHit:Object.freeze({tones:Object.freeze([{freq:1640,duration:.052,wave:'square',volume:.0135,slide:-560,detune:.006,lpHz:4700},{freq:820,duration:.06,wave:'square',volume:.0062,slide:-260,detune:-.005,lpHz:3000,delay:.018}]),noise:Object.freeze([{duration:.034,volume:.0032,hp:1550,delay:.006}])}),
+   flagshipHit:Object.freeze({tones:Object.freeze([{freq:2020,duration:.06,wave:'square',volume:.0145,slide:-620,detune:.006,lpHz:5200},{freq:1000,duration:.086,wave:'square',volume:.0074,slide:-340,detune:-.004,lpHz:3300,delay:.018},{freq:520,duration:.074,wave:'square',volume:.005,slide:-160,detune:.004,lpHz:2200,delay:.058}]),noise:Object.freeze([{duration:.052,volume:.004,hp:1300,delay:.008}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.055,wave:'square',volume:.012,slide:-210,lpHz:3300}])}),
    bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.068,wave:'square',volume:.013,slide:-120,lpHz:3600}])}),
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.04,wave:'square',volume:.009,slide:-320,lpHz:3900},{freq:220,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2100,delay:.014}])}),

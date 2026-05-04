@@ -9,6 +9,7 @@
     "playtestReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
     "audioCharacter": "reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json",
     "audioIsolatedCueCandidates": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "audioLabeledCueTargets": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
     "audioReferenceComparison": "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
     "notes": "These targets are still synthetic. The cue-candidate pass now identifies mixed-source shot, hit, dive, and loss-like windows, but they need manual labeling and export before they can replace the synthetic bands."
   },
@@ -31,62 +32,62 @@
   },
   "cueTargets": {
     "playerShot": {
-      "durationBandSeconds": [0.022, 0.045],
-      "peakFrequencyBandHz": [2200, 2700],
-      "minimumFrequencyDropHz": 900,
+      "durationBandSeconds": [0.062, 0.098],
+      "peakFrequencyBandHz": [1502, 2670],
+      "minimumFrequencyDropHz": 600,
       "mustDescend": true,
       "requiresNoise": true,
       "mustIncludeWave": "square"
     },
     "enemyShot": {
-      "durationBandSeconds": [0.09, 0.12],
-      "peakFrequencyBandHz": [180, 300],
-      "minimumFrequencyDropHz": 110,
+      "durationBandSeconds": [0.055, 0.105],
+      "peakFrequencyBandHz": [667, 1187],
+      "minimumFrequencyDropHz": 300,
       "mustDescend": true,
       "requiresNoise": true,
       "mustIncludeWave": "square"
     },
     "scoutDive": {
-      "durationBandSeconds": [0.22, 0.28],
-      "peakFrequencyBandHz": [560, 720],
-      "minimumFrequencyDropHz": 420,
+      "durationBandSeconds": [0.18, 0.28],
+      "peakFrequencyBandHz": [857, 1523],
+      "minimumFrequencyDropHz": 500,
       "mustDescend": true,
       "requiresNoise": true,
       "minimumToneCount": 3,
       "mustIncludeWave": "square"
     },
     "flagshipDive": {
-      "durationBandSeconds": [0.4, 0.48],
-      "peakFrequencyBandHz": [360, 470],
-      "minimumFrequencyDropHz": 290,
+      "durationBandSeconds": [0.28, 0.42],
+      "peakFrequencyBandHz": [1159, 2061],
+      "minimumFrequencyDropHz": 800,
       "mustDescend": true,
       "requiresNoise": true,
       "minimumToneCount": 3,
       "mustIncludeWave": "square"
     },
     "scoutHit": {
-      "durationBandSeconds": [0.03, 0.05],
-      "peakFrequencyBandHz": [340, 430],
+      "durationBandSeconds": [0.018, 0.035],
+      "peakFrequencyBandHz": [739, 1315],
       "requiresNoise": true,
       "mustIncludeWave": "square"
     },
     "escortHit": {
-      "durationBandSeconds": [0.055, 0.08],
-      "peakFrequencyBandHz": [460, 560],
+      "durationBandSeconds": [0.056, 0.104],
+      "peakFrequencyBandHz": [1173, 2085],
       "requiresNoise": true,
       "mustIncludeWave": "square"
     },
     "flagshipHit": {
-      "durationBandSeconds": [0.11, 0.15],
-      "peakFrequencyBandHz": [590, 700],
+      "durationBandSeconds": [0.048, 0.14],
+      "peakFrequencyBandHz": [1444, 2566],
       "requiresNoise": true,
       "minimumToneCount": 3,
       "mustIncludeWave": "square"
     },
     "playerLoss": {
-      "durationBandSeconds": [0.32, 0.4],
-      "peakFrequencyBandHz": [220, 300],
-      "minimumFrequencyDropHz": 150,
+      "durationBandSeconds": [0.155, 0.265],
+      "peakFrequencyBandHz": [1333, 2371],
+      "minimumFrequencyDropHz": 700,
       "mustDescend": true,
       "requiresNoise": true,
       "minimumToneCount": 3
@@ -96,5 +97,5 @@
     "audioCueTargetCheck": "tools/harness/check-galaxy-guardians-audio-cue-targets.js",
     "npmScript": "npm run harness:check:galaxy-guardians-audio-cue-targets"
   },
-  "nextPromotion": "Manually label and export the strongest cue candidates from the Galaxian videos, then replace the synthetic bands with measured envelope/frequency targets."
+  "nextPromotion": "Human-listen the labeled cue windows and adjust the measured target bands where a promoted window is dirty or overlaps unrelated gameplay audio."
 }

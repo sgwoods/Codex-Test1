@@ -7,7 +7,7 @@
   "sourceEvidence": {
     "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
-    "notes": "First baseline derives from the measured Galaxian reference profile and is deliberately stored as a reviewable contract before deeper frame-accurate sprite and audio extraction. The 2026-05-03 playtest-weighted pass reduced sprite scale, separated escort/scout silhouettes, and accelerated runtime timing toward the Galaxian reference sheets."
+    "notes": "First baseline derives from the measured Galaxian reference profile and is deliberately stored as a reviewable contract before deeper frame-accurate sprite and audio extraction. The 2026-05-03 playtest-weighted pass reduced sprite scale, separated escort/scout silhouettes, accelerated runtime timing, and the component-target pass moved the pack-owned sprites and audio cues closer to measured Galaxian component/cue windows."
   },
   "visualLanguage": {
     "pixelAlphabet": {
@@ -26,14 +26,14 @@
         "role": "flagship",
         "silhouette": "small command crown with red outriggers and gold core",
         "rows": [
-          "....A....",
-          "...ACA...",
-          "..WCCCW..",
-          ".WCECEW.",
-          "WWCCCCCWW",
-          ".WCCCCCW.",
-          "..AACAA..",
-          ".A.....A."
+          "...A.A...",
+          "...CCC...",
+          "C.WCCCW.C",
+          "CCCECECCC",
+          "..CCCCC..",
+          ".WWCCCWW.",
+          "WWWCCCWWW",
+          "WW..C..WW"
         ]
       },
       {
@@ -41,12 +41,12 @@
         "role": "escort",
         "silhouette": "red arrow escort with blue wing tips",
         "rows": [
-          "..A.A..",
-          ".ACCCA.",
-          "WCECECW",
-          ".CCCCC.",
-          "..W.W..",
-          "A.....A"
+          "..ACC..",
+          "WWCCCCC",
+          "WCWEWWW",
+          "..WWW..",
+          "..WWW..",
+          "...A..."
         ]
       },
       {
@@ -54,12 +54,12 @@
         "role": "scout",
         "silhouette": "green-cyan wing scout",
         "rows": [
-          "..A.A..",
-          ".WACAW.",
-          "WWCCCWW",
-          ".WECEW.",
-          "..CCC..",
-          ".A...A."
+          ".CCCCC.",
+          "ACCCACA",
+          "AAAAAAA",
+          ".WAAAW.",
+          "...C...",
+          "...A..."
         ]
       },
       {
@@ -67,20 +67,20 @@
         "role": "player",
         "silhouette": "single-shot interceptor with yellow nose and red engine flare",
         "rows": [
-          "...A...",
-          "..ACA..",
-          ".WCCCW.",
-          "WCCCCCW",
-          ".WCFW.",
-          "..FFF..",
-          ".A...A."
+          "CWWCWWC",
+          "WWWCCWW",
+          "WWWCWWW",
+          "WWWCWWW",
+          "WWWCWWW",
+          "WWCCWWW",
+          "WW...WW"
         ]
       }
     ]
   },
   "audioLanguage": {
     "themeId": "guardians-signal",
-    "intent": "short, dry cabinet-signal cue language with high player fire, low enemy shots, descending dives, paired escort chirps, role-separated noisy hits, noisy loss, and falling game-over cues",
+    "intent": "short, dry cabinet-signal cue language with measured cue-window influence: longer high player fire, higher alien shot ticks, descending high-register dives, paired escort chirps, role-separated noisy hits, noisy loss, and falling game-over cues",
     "requiredCueNames": [
       "gameStart",
       "formationPulse",

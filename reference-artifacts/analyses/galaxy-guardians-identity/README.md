@@ -17,6 +17,9 @@ Current artifacts:
 - `audio-isolated-cue-candidates-0.1.json` - CPU-only mixed-source cue
   candidate detector that finds short/high-energy Galaxian shot, hit, dive, and
   loss-like windows for the next manual labeling/export pass.
+- `audio-labeled-cue-targets-0.1.json` - promoted cue-window artifact with
+  stable source timestamps plus waveform/spectrogram previews for eight
+  runtime cue families. It does not export raw reference audio.
 - `audio-reference-comparison-0.1.json` - waveform/spectrogram and PCM proxy
   comparison between the Galaxian reference windows and Guardians cue shapes.
 - `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal
@@ -58,6 +61,9 @@ Current artifacts:
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.
+- `sprite-component-targets-0.1.json` - promoted component-crop target scaffold
+  with PNG crop previews for flagship, escort, scout, and player silhouettes,
+  used to tune the pack-owned runtime sprite rows.
 - `sprite-reference-extraction-0.1.json` - extracted crop color-family and
   proportion baseline for authored Guardians alien/player sprites.
 - `threat-scoring-0.1.json` - first lower-field threat and application-owned

@@ -6,6 +6,7 @@ const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const SPRITE_EXTRACTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-reference-extraction-0.1.json');
+const COMPONENT_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-component-targets-0.1.json');
 const PACK_SOURCE = path.join(ROOT, 'src', 'js', '13-galaxy-guardians-game-pack.js');
 const OUT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-grid-targets-0.1.json');
 
@@ -153,6 +154,7 @@ function cropFor(summary, key){
 function main(){
   if(!fs.existsSync(SPRITE_EXTRACTION)) fail('Missing Guardians sprite extraction artifact.');
   const extraction = readJson(SPRITE_EXTRACTION);
+  const componentTargets = fs.existsSync(COMPONENT_TARGETS) ? readJson(COMPONENT_TARGETS) : null;
   const pack = loadPack();
   const visualCatalog = pack.alienVisualCatalog || {};
   const targetSpecs = [
@@ -162,11 +164,15 @@ function main(){
     { id: 'player-interceptor', role: 'player', sourceCropFamily: 'player-and-shot', cols: 7, rows: 7, minSimilarity: .34 }
   ];
   const targets = targetSpecs.map(spec => {
+    const componentTarget = (componentTargets?.targets || []).find(target => target.id === spec.id);
     const crop = cropFor(extraction, spec.sourceCropFamily);
-    const extractedRows = crop && fs.existsSync(crop) ? downsampleGrid(crop, spec.cols, spec.rows) : [];
+    const extractedRows = componentTarget?.extractedRows
+      ? Array.from(componentTarget.extractedRows)
+      : (crop && fs.existsSync(crop) ? downsampleGrid(crop, spec.cols, spec.rows) : []);
     const runtimeRows = Array.from(visualCatalog[spec.id]?.pixelRows || []);
     return Object.assign({}, spec, {
-      sourceCrop: crop ? rel(crop) : '',
+      sourceCrop: componentTarget?.componentCrop || (crop ? rel(crop) : ''),
+      sourceMode: componentTarget ? 'component-target-override' : 'broad-crop-grid',
       extractedRows,
       runtimeRows,
       extractedMetrics: spriteMetrics(extractedRows),
@@ -183,7 +189,8 @@ function main(){
     generatedBy: 'tools/harness/analyze-galaxy-guardians-sprite-grid-targets.js',
     sourceEvidence: {
       spriteReferenceExtraction: rel(SPRITE_EXTRACTION),
-      note: 'These grids are downsampled from broad crop regions and are target scaffolding, not copyright-sensitive exact sprite copies.'
+      spriteComponentTargets: componentTargets ? rel(COMPONENT_TARGETS) : '',
+      note: 'These grids are downsampled from broad crop regions or promoted component targets and are target scaffolding, not copyright-sensitive exact sprite copies.'
     },
     targets,
     summary: {

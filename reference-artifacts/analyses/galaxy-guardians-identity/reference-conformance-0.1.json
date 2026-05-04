@@ -10,16 +10,18 @@
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
     "candidateGate": "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
     "audioIsolatedCueCandidates": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "audioLabeledCueTargets": "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
+    "spriteComponentTargets": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
     "spriteGridTargets": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
-    "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets, waveform windows, broad sprite crop targets, and mixed-source cue candidates rather than final frame-level/acoustic extraction."
+    "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets, waveform windows, component sprite crop targets, and labeled cue candidates rather than final human-approved frame-level/acoustic extraction."
   },
   "summary": {
-    "referenceConformanceScore10": 7.4,
-    "playtestWeightedConformanceScore10": 6.1,
-    "referenceMaturityScore10": 6.5,
-    "implementationGateCoverageScore10": 9.2,
-    "publicReleaseReadinessScore10": 3.8,
-    "releaseRead": "Useful development preview evidence, but local gameplay review showed that sound, timing, pacing, and sprite fidelity are still not convincing enough for a beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, broad sprite-grid targets, waveform/spectrogram audio comparison, stricter audio cue targets, mixed-source isolated cue candidates, and playtest-weighted conformance review now exist as dev-preview contracts; the highest-leverage next work is manually reviewed cue labeling/export, tighter component sprite crops, and a browser-reviewed motion-feel pass."
+    "referenceConformanceScore10": 7.6,
+    "playtestWeightedConformanceScore10": 6.6,
+    "referenceMaturityScore10": 7.0,
+    "implementationGateCoverageScore10": 9.5,
+    "publicReleaseReadinessScore10": 3.9,
+    "releaseRead": "Useful development preview evidence, but still not compelling enough for a beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, and playtest-weighted conformance review now exist as dev-preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -32,10 +34,10 @@
       "id": "reference-source-coverage",
       "label": "Reference source coverage",
       "weight": 8,
-      "score10": 9.3,
-      "evidenceLevel": "source-manifested-contact-sheets-waveforms-frame-proxies-object-track-proxies-runtime-comparison-sprite-grid-and-cue-candidate-analysis",
-      "currentRead": "Three Galaxian sources are committed with manifests, contact sheets, waveform windows, spectrograms, frame indexes, frame-motion proxies, a CPU-only connected-component/object-track proxy pass, runtime-vs-reference movement comparison, sprite crop extraction, broad sprite-grid target extraction, audio reference comparison, and mixed-source cue-candidate analysis.",
-      "remainingGap": "Promote broad object/crop/cue proxies into final sprite recognition and manually labeled isolated acoustic cue matching."
+      "score10": 9.6,
+      "evidenceLevel": "source-manifested-contact-sheets-waveforms-frame-proxies-object-track-proxies-runtime-comparison-component-sprite-and-labeled-cue-analysis",
+      "currentRead": "Three Galaxian sources are committed with manifests, contact sheets, waveform windows, spectrograms, frame indexes, frame-motion proxies, a CPU-only connected-component/object-track proxy pass, runtime-vs-reference movement comparison, sprite crop extraction, component sprite target extraction, audio reference comparison, mixed-source cue-candidate analysis, and labeled waveform/spectrogram cue previews.",
+      "remainingGap": "Promote component sprite/cue proxies into human-approved sprite recognition and clean isolated acoustic cue matching."
     },
     {
       "id": "promoted-semantic-event-coverage",
@@ -77,19 +79,19 @@
       "id": "visual-alien-identity",
       "label": "Visual alien identity",
       "weight": 10,
-      "score10": 5.8,
-      "evidenceLevel": "game-owned-visual-catalog-readability-gate-frame-crops-object-proxies-sprite-extraction-and-grid-targets",
-      "currentRead": "Flagship, escort, scout, and player interceptor visuals are smaller, separate from Aurora, and gated for role readability. The latest pass separates escort and scout silhouettes, measures 27 rack/diver/player crops, and derives four broad reference-crop grid targets with an average silhouette similarity of 0.622.",
-      "remainingGap": "Sprites are still hand-authored preview approximations; the broad crop grids need tighter manually reviewed component crops before the graphics can feel close to Galaxian."
+      "score10": 6.8,
+      "evidenceLevel": "game-owned-visual-catalog-readability-gate-frame-crops-object-proxies-sprite-extraction-grid-targets-and-component-targets",
+      "currentRead": "Flagship, escort, scout, and player interceptor visuals are now tuned from component crop targets, remain separate from Aurora, and are gated for role readability. The promoted component target artifact covers all four sprite roles with checked crop previews and silhouette target similarity.",
+      "remainingGap": "Sprites now read much closer to the reference family, but the component crops still need human visual review and browser play review before beta-facing confidence."
     },
     {
       "id": "audio-reference-character",
       "label": "Audio character and reference fit",
       "weight": 10,
-      "score10": 4.8,
-      "evidenceLevel": "cue-shape-contract-plus-noisy-hardware-targets-plus-waveform-spectrogram-pcm-proxy-plus-isolated-cue-candidates",
-      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, the latest pass adds filtered-noise layers to the player shot, enemy shot, dive, hit, and loss cues, the audio comparison analyzes 9 Galaxian waveform/spectrogram windows with PCM proxy metrics, and the new cue-candidate analysis finds 64 short/high-energy source candidates across shot, hit, dive, and loss-like families.",
-      "remainingGap": "This is still the weakest Guardians area: the detected candidates are mixed-source and need manual labeling/export before they can replace synthetic cue targets or support beta-facing audio claims."
+      "score10": 5.5,
+      "evidenceLevel": "cue-shape-contract-plus-measured-square-noise-targets-plus-waveform-spectrogram-pcm-proxy-plus-labeled-cue-window-previews",
+      "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, the cue target bands now use labeled Galaxian cue-window candidates, the runtime cues were retuned toward higher-register square/noise character, and the refreshed audio comparison scores 8.3/10 overall with acoustic proxy fit at 5.3/10.",
+      "remainingGap": "This remains the weakest Guardians area: the labels need human listening, dirty mixed-gameplay windows need replacement, and live playback still needs a subjective browser/audio review."
     },
     {
       "id": "platform-and-game-boundaries",
@@ -104,10 +106,10 @@
       "id": "evidence-durability",
       "label": "Evidence durability",
       "weight": 10,
-      "score10": 9.5,
+      "score10": 9.7,
       "evidenceLevel": "source-controlled-artifacts-and-harnesses",
-      "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, frame-motion artifact, object-track artifact, runtime-reference movement artifact, stage-rank pressure artifact, sprite extraction artifact, sprite-grid target artifact, audio comparison artifact, cue-candidate artifact, and 0.1 gates are committed and rerunnable.",
-      "remainingGap": "Add final component sprite/cue extraction and browser-reviewed beta-candidate evidence."
+      "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, frame-motion artifact, object-track artifact, runtime-reference movement artifact, stage-rank pressure artifact, sprite extraction artifact, sprite-grid and component-target artifacts, audio comparison artifact, cue-candidate/labeled-cue artifacts, and 0.1 gates are committed and rerunnable.",
+      "remainingGap": "Add human-reviewed component sprite/cue approval and browser-reviewed beta-candidate evidence."
     }
   ],
   "requiredInputArtifacts": [
@@ -115,6 +117,7 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/audio-cue-targets-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/audio-labeled-cue-targets-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/audio-reference-comparison-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json",
@@ -127,6 +130,7 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
@@ -149,10 +153,14 @@
     "npm run harness:check:galaxy-guardians-sprite-reference-extraction",
     "npm run harness:analyze:galaxy-guardians-sprite-grid-targets",
     "npm run harness:check:galaxy-guardians-sprite-grid-targets",
+    "npm run harness:promote:galaxy-guardians-sprite-component-targets",
+    "npm run harness:check:galaxy-guardians-sprite-component-targets",
     "npm run harness:analyze:galaxy-guardians-audio-reference-comparison",
     "npm run harness:check:galaxy-guardians-audio-reference-comparison",
     "npm run harness:analyze:galaxy-guardians-isolated-cue-candidates",
     "npm run harness:check:galaxy-guardians-isolated-cue-candidates",
+    "npm run harness:promote:galaxy-guardians-audio-cue-labels",
+    "npm run harness:check:galaxy-guardians-audio-cue-labels",
     "npm run harness:check:galaxy-guardians-audio-cue-targets",
     "npm run harness:check:galaxy-guardians-audio-character",
     "npm run harness:check:galaxy-guardians-formation-entry",
@@ -164,9 +172,9 @@
     "npm run harness:check:galaxy-guardians-visual-readability"
   ],
   "nextMetricPromotions": [
-    "tighter manually reviewed sprite recognition from representative Galaxian crop components",
+    "human-reviewed sprite recognition from promoted Galaxian component crops",
     "Guardians attract and score-table pixel-layout comparison",
-    "manual labeling/export of isolated cue candidates into measured cue targets",
+    "human-listened cleanup of labeled cue candidates into clean measured cue targets",
     "browser-reviewed beta-candidate pass for the tuned movement slice"
   ]
 }
