@@ -84,7 +84,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
    '.CCCCC.',
-   'ACCCACA',
+   'ACECECA',
    'AAAAAAA',
    '.WAAAW.',
    '...C...',
@@ -267,13 +267,19 @@ const GUARDIANS_ATTRACT_MISSION=Object.freeze({
  referenceIntent:'Guardians-owned mission and score-table language derived from Galaxian attract/score-table promoted windows, not Aurora wait-mode copy.'
 });
 
-const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('galaxy-guardians-preview',{
+function galaxyGuardiansPlatformInfo(){
+ return typeof buildPlatformInfo==='function'?buildPlatformInfo():{compatibility:''};
+}
+function galaxyGuardiansApplicationReleaseRecord(gameKey,fallback={}){
+ return typeof applicationReleaseRecord==='function'?applicationReleaseRecord(gameKey,fallback):Object.assign({},fallback||{});
+}
+const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(galaxyGuardiansApplicationReleaseRecord('galaxy-guardians-preview',{
  title:'Galaxy Guardians',
  version:'0.1.0-preview',
  versionLine:'0.1.0 preview',
  releaseTrack:'playable-preview',
  runtimeStatus:'non-production-playable-preview',
- platformCompatibility:buildPlatformInfo().compatibility||'',
+ platformCompatibility:galaxyGuardiansPlatformInfo().compatibility||'',
  launchPolicy:'development-and-beta-only'
 }));
 
@@ -285,7 +291,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   versionLine:GALAXY_GUARDIANS_APPLICATION_RELEASE.versionLine||GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0 preview',
   releaseTrack:GALAXY_GUARDIANS_APPLICATION_RELEASE.releaseTrack||'playable-preview',
   runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'non-production-playable-preview',
-  platformCompatibility:GALAXY_GUARDIANS_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
+  platformCompatibility:GALAXY_GUARDIANS_APPLICATION_RELEASE.platformCompatibility||galaxyGuardiansPlatformInfo().compatibility||'',
   launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'development-and-beta-only',
   playable:0,
   previewOnly:1

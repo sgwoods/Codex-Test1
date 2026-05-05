@@ -179,7 +179,7 @@
       ],
       "runtimeRows": [
         ".CCCCC.",
-        "ACCCACA",
+        "ACECECA",
         "AAAAAAA",
         ".WAAAW.",
         "...C...",
@@ -204,6 +204,7 @@
         "tokenChannels": [
           "A",
           "C",
+          "E",
           "W"
         ]
       },
@@ -221,66 +222,68 @@
       "cols": 7,
       "rows": 7,
       "componentBox": {
-        "x": 176,
-        "y": 226,
-        "w": 72,
-        "h": 69,
-        "pixels": 3363,
-        "aspect": 1.043,
-        "fill": 0.677,
+        "x": 224,
+        "y": 79,
+        "w": 78,
+        "h": 67,
+        "pixels": 3257,
+        "aspect": 1.164,
+        "fill": 0.623,
         "tokens": {
-          "C": 787,
-          "E": 72,
-          "W": 2500,
-          "A": 4
+          "C": 3025,
+          "A": 139,
+          "W": 92,
+          "E": 1
         }
       },
       "extractedRows": [
-        "CWWCCCC",
-        "WWWCCWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWCCWWW",
-        "WW...WW"
+        "..CCC..",
+        "CCCCCC.",
+        "CCCCCCC",
+        "CCCCCCC",
+        "CCCCCC.",
+        "CCCCCC.",
+        "CC.CAC."
       ],
       "runtimeRows": [
-        "CWWCWWC",
-        "WWWCCWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWCCWWW",
-        "WW...WW"
+        "...A...",
+        "..ACA..",
+        ".WCCCW.",
+        "WCC.CCW",
+        ".WCFCW.",
+        "..FFF..",
+        ".A...A."
       ],
       "extractedMetrics": {
         "width": 7,
         "height": 7,
-        "filledPixels": 46,
-        "fillRatio": 0.939,
+        "filledPixels": 40,
+        "fillRatio": 0.816,
         "tokenChannels": [
-          "C",
-          "W"
+          "A",
+          "C"
         ]
       },
       "runtimeMetrics": {
         "width": 7,
         "height": 7,
-        "filledPixels": 46,
-        "fillRatio": 0.939,
+        "filledPixels": 25,
+        "fillRatio": 0.51,
         "tokenChannels": [
+          "A",
           "C",
+          "F",
           "W"
         ]
       },
-      "silhouetteSimilarity": 1,
+      "silhouetteSimilarity": 0.694,
       "reviewStatus": "component-crop-target-needs-human-sprite-review"
     }
   ],
   "summary": {
     "targetCount": 4,
-    "averageSilhouetteSimilarity": 1,
-    "weakestTarget": "signal-flagship"
+    "averageSilhouetteSimilarity": 0.924,
+    "weakestTarget": "player-interceptor"
   },
   "nextAuthoringStep": "Human-review the component crop PNGs, then tune pack-owned sprite rows against the accepted silhouette targets."
 }

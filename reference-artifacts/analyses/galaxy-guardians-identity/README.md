@@ -8,6 +8,29 @@ preview is now part of the Platinum release planning path. Runtime tuning,
 visual glyph edits, and audio cue edits should cite durable files here rather
 than living only in chat or in transient harness output.
 
+## Latest Measured Rerun
+
+May 5, 2026 MacBook branch-local rerun:
+
+- restored standalone Guardians pack loading for CPU-only conformance harnesses
+  after layered application release metadata was added to the browser runtime
+- reran the Platinum audio conformance lab at `8.3/10`; `enemyShot` remains the
+  weakest measured cue and `flagshipHit` remains strongest
+- reran runtime-vs-reference movement at `8.0/10`; current runtime tracklets
+  are shorter than the promoted reference median, so pacing changes should wait
+  for browser-reviewed feel evidence beside the trace metrics
+- reran frame-motion, object-track, sprite extraction, sprite grid/component,
+  visual-readability, and attract/score checks
+- refreshed `sprite-reference-extraction-0.1.json` so current runtime sprite
+  filled-pixel and fill-ratio metrics match the authored component-derived
+  sprites
+- refreshed sprite grid/component target artifacts; component similarity now
+  records `0.924` average with `player-interceptor` weakest, preserving the
+  need for human review of player-only crops
+- restored the scout sprite eye/accent channel so all authored runtime sprites
+  preserve at least four visible token channels in the extraction and
+  readability gates
+
 Current artifacts:
 
 - `audio-character-0.1.json` - first cue-shape and runtime-audio coverage
