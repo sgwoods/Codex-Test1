@@ -140,13 +140,13 @@ That means:
 
 Current versioning read for the next cycle:
 
-- the shipped `1.2.3` family remains the stable public baseline
-- the next coherent public candidate should not be framed as a `1.2.4`
-  fast-follow patch if it includes the first serious second-cabinet / second-game
-  story
-- treat that kind of candidate as a `MINOR` family step, currently expected to
-  be `1.3.0`, and only change the actual runtime version when we intentionally
-  cut the candidate branch
+- the shipped `1.3.0` family is now the stable public baseline
+- the next coherent public candidate should not collapse back into a `1.3.1`
+  fast-follow patch if it is really the first deliberate post-release depth and
+  platform-contract bundle
+- treat that kind of candidate as the next `MINOR` family step, currently
+  expected to be `1.4.0`, and only change the actual runtime version when we
+  intentionally cut the candidate branch
 - while the current build label still centers the integrated version, we should
   also start treating the platform and each hosted game as independently
   tracked release surfaces
@@ -239,19 +239,20 @@ Rule:
 
 ## Current Promotion Reality
 
-As of May 4, 2026:
+As of May 5, 2026:
 
-- hosted `/dev` is live at `1.3.0+build.567.sha.d0d3bd6`
-- hosted `/beta` is live at `1.3.0-beta.1+build.571.sha.230bfa5.beta`
-- hosted `/production` is live at `1.2.3+build.532.sha.b959491`
+- hosted `/dev` is on the active `1.3.0` line
+- hosted `/beta` is on the approved `1.3.0` beta lane
+- hosted `/production` is on the shipped `1.3.0` public line
 
 That means:
 
-- hosted `/beta` is now intentionally ahead of hosted `/production`
-- the next release cycle should keep platform, application, and bundle tracking
-  explicit instead of assuming one version line is enough to explain the state
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are now aligned
+  around one coherent release family
+- platform, application, and bundle tracking should stay explicit even when the
+  lanes are aligned
 - the next release cycle should let lanes diverge only when there is a coherent
-  improvement bundle worth sharing
+  new improvement bundle worth sharing
 
 ## Major `x.y` Documentation Gate
 

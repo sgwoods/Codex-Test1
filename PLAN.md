@@ -2,33 +2,33 @@
 
 ## Current State
 
-Verified May 4, 2026:
+Verified May 5, 2026:
 
 - hosted `/dev`
-  - `1.3.0+build.567.sha.d0d3bd6`
+  - active `1.3.0` line
 - hosted `/beta`
-  - `1.3.0-beta.1+build.571.sha.230bfa5.beta`
+  - approved `1.3.0` beta lane
 - hosted `/production`
-  - `1.2.3+build.532.sha.b959491`
+  - shipped `1.3.0` public line
 - `main`
-  - authoritative integration branch for the active `1.3.0` candidate family
+  - authoritative integration branch for the `1.4.0` pickup after the `1.3.0` ship
 
 This means:
 
-- Aurora has completed the `1.2.3` trust-and-pilot production refresh
-- hosted `/dev` now carries the live `1.3.0` candidate line
-- hosted `/beta` now carries the live `1.3.0` beta lane
-- hosted `/production` remains on the stable `1.2.3` public baseline
-- the active source candidate is now the `1.3.0` family
-- the current question is no longer "should this be a `1.2.4` fast follow?"
-- the current question is "what must land for `1.3.0`, and what should be
-  deliberately picked up immediately after that release?"
+- the `1.3.0` fidelity-and-second-cabinet release is now the stable public
+  family
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned around
+  the same release family
+- the active source-planning question has moved from "what must land for `1.3.0`?"
+  to "what is the cleanest deliberate `1.4.0` pickup?"
+- the post-release work should now be treated as intentional carry-forward, not
+  as rediscovery after the ship is already done
 
 ## Active Workstreams
 
-### 1. Post-Production Stabilization
+### 1. `1.3.0` Production Stabilization
 
-- keep the refreshed `1.2.3+build.532.sha.b959491` production line trustworthy
+- keep the shipped `1.3.0` production line trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
 - use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) as the
@@ -43,7 +43,7 @@ This means:
 - keep public project-page and rendered-homepage verification inside the
   release workflow
 
-### 3. Fidelity And Feel Improvement
+### 3. `1.4.0` Fidelity And Feel Improvement
 
 - improve ship movement feel against real Galaga footage
 - continue audio identity polish beyond cue timing
@@ -129,13 +129,13 @@ Current conformance read:
 ## Release Direction
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
-  shipped `b959491` family
-- the active source line should now present itself as the `1.3.0` candidate
-  family
-- `1.3.0` is the intentional bundle for fidelity, trust, and the first
+  shipped `1.3.0` family
+- the active source line should now present itself as the deliberate `1.4.0`
+  pickup family
+- `1.3.0` was the intentional bundle for fidelity, trust, and the first
   significant second-game Platinum story
-- the shipped `1.2.3` family remains the stable public baseline until a formal
-  `1.3.0` promotion path is completed
+- the shipped `1.3.0` family is now the stable public baseline while `main`
+  begins the next minor-cycle work
 - the longer release-family phasing plan is tracked in
   [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - the concrete first level-expansion execution plan is tracked in

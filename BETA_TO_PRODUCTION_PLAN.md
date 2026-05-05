@@ -2,26 +2,25 @@
 
 ## Current Release State
 
-As of April 26, 2026:
+As of May 5, 2026:
 
 - hosted `/beta`
-  - `1.2.3-beta.1+build.532.sha.b959491.beta`
+  - approved `1.3.0` beta lane aligned with the production candidate source
 - hosted `/production`
-  - `1.2.3+build.532.sha.b959491`
+  - `1.3.0` public line after this promotion completes
 
-This means the current trust-and-pilot production refresh is complete and the
-shipped beta/production pair now comes from the same committed source state.
+This means the fidelity-and-second-cabinet production promotion should leave the
+shipped beta/production pair on the same committed `1.3.0` source state.
 
 ## Why This Promotion Mattered
 
-The case for performing this production push was:
+The case for performing this production push is:
 
-- hosted `/production` is materially stale relative to the current Aurora line
-- hosted `/beta` now includes the timing, audio, movement, and release-discipline
-  improvements accumulated on the forward branch
+- hosted `/production` still reflects the older `1.2.3` public line
+- hosted `/beta` now includes the shipped `1.3.0` improvement bundle
 - the supporting analysis is committed and durable
 - the remaining known issues are now mostly follow-up polish items for the next
-  minor cycle, not obvious ship blockers for Aurora
+  minor cycle, not obvious ship blockers for the `1.3.0` family
 
 ## Production Preconditions
 
@@ -105,7 +104,7 @@ Main acceptable risks for this production push:
 - the preview second-application pack still borrows Aurora data in ways that
   should be cleaned before it becomes playable
 
-These did not block the `1.2.3+build.532.sha.b959491` production move, but they
+These do not block the `1.3.0` production move, but they
 should stay visible in the next cycle.
 
 ## Next-Cycle Release Direction
@@ -121,7 +120,7 @@ should stay visible in the next cycle.
 
 Current likely target:
 
-- `1.3.0`
+- `1.4.0`
 
 Focus:
 
@@ -156,7 +155,7 @@ Current directly observed checks for this production plan:
 
 Current release-order note:
 
-- the release chain now succeeded from approved beta to shipped production on
-  the `b959491` source state
-- the remaining follow-up is public-page rendered propagation, not a missing
-  source promotion step
+- the release chain for `1.3.0` runs from approved beta on the authoritative
+  source repo through production publish and public-page verification
+- the release record is not complete unless the public project surfaces also
+  reflect the same shipped family

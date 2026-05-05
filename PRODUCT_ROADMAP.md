@@ -2,21 +2,21 @@
 
 ## Current Shipped State
 
-Verified May 4, 2026:
+Verified May 5, 2026:
 
 - hosted `/dev`
-  - `1.3.0+build.567.sha.d0d3bd6`
+  - active `1.3.0` line
 - hosted `/beta`
-  - `1.3.0-beta.1+build.571.sha.230bfa5.beta`
+  - approved `1.3.0` beta lane
 - hosted `/production`
-  - `1.2.3+build.532.sha.b959491`
+  - shipped `1.3.0` public line
 
-Aurora is in a post-production-refresh posture:
+Aurora is in a post-`1.3.0` ship posture:
 
-- production is current
-- beta now carries the live `1.3.0` beta lane
-- dev now carries the active `1.3.0` candidate while `production` remains stable
-- `main` is the forward line for the active `1.3.0` candidate
+- production now carries the current `1.3.0` public family
+- beta remains the proving lane for the next release step
+- dev remains the forward lane for the next coherent bundle
+- `main` is the forward line for the deliberate `1.4.0` pickup
 
 ## Roadmap Frame
 
@@ -35,35 +35,34 @@ It is centered on:
 
 ## Near-Term Release Direction
 
-### Stabilize `1.2.3`
+### Stabilize `1.3.0`
 
 Goals:
 
 - keep hosted `/production`, hosted `/beta`, and hosted `/dev` aligned and
-  trustworthy after the trust-and-pilot refresh
+  trustworthy after the fidelity-and-second-cabinet release
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### Shape `1.3.0`
+### Pick Up `1.4.0`
 
-The active source and candidate family is now:
+The active source and pickup family is now:
 
-- `1.3.0`
+- `1.4.0`
 
 Reason:
 
-- a candidate that meaningfully introduces the first second-cabinet /
-  second-game Platinum story is more than a patch-sized continuation of
-  `1.2.3`, even if `Galaxy Guardians` remains preview-only
-- the public promise changes from "stronger Aurora only" to "stronger Aurora
-  plus the first real multi-game platform pressure"
+- `1.3.0` already carried the first second-cabinet Platinum story into the
+  public product
+- the next release should now deepen arcade play and platform clarity rather
+  than simply repeating the same pitch
 
-That release family should focus on:
+That pickup should focus on:
 
 - movement fidelity
 - audio identity polish
 - gameplay trust fixes
-- clearer layered release and version tracking
+- platform-contract follow-through after the first layered release/version pass
 - level-by-level expansion planning
 - challenging-stage and later-level depth
 - shared-video evidence and publishing foundations
@@ -86,10 +85,9 @@ Current decision:
 - keep `1.x` focused on making Aurora excellent and preparing Platinum for a
   second real game
 - reserve `2.0` for the first genuinely multi-game Platinum milestone
-- treat `1.3` as the next measurement-backed quality release and first serious
-  second-cabinet candidate family rather than a broad feature bundle
+- treat `1.4` as the first post-ship arcade-depth and platform-boundary family
 - promote level-by-level arcade depth to the next major product pillar after
-  the `1.3` quality reset
+  the `1.3.0` release
 - make shared gameplay-video publishing an early roadmap capability
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release

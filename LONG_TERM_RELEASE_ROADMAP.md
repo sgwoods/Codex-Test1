@@ -1,7 +1,7 @@
 # Long-Term Aurora Release Roadmap
 
 This is the working release-family roadmap for Aurora Galactica and Platinum
-after the `1.2.3` production refresh.
+after the `1.3.0` production release.
 
 It groups the large open themes and issue families into coherent future release
 bundles. The specific issue list will change, but the phasing is meant to keep
@@ -28,11 +28,12 @@ work from becoming a loose bag of good ideas.
 
 ## Current Baseline
 
-As of April 26, 2026:
+As of May 5, 2026:
 
 - shipped production family:
-  - `1.2.3+build.532.sha.b959491`
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned
+  - `1.3.0`
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned around
+  the same family
 - `main` is the authoritative forward integration line
 - the other machine is already advancing a Galaxians-style sibling track and
   stronger harness/reference analysis
@@ -107,12 +108,12 @@ Representative issue families:
 
 Exit standard:
 
+- shipped on hosted `/production`
 - quality conformance roll-up is green or explicitly documented
 - movement and audio claims are backed by committed reference artifacts
 - if a second cabinet is present, it reads like a deliberate `1.3.0` product
   statement rather than an accidental `1.2.4` patch add-on
 - a first level-by-level expansion plan is committed
-- the next `/dev` refresh is coherent enough for sustained review
 
 Post-release pickup:
 

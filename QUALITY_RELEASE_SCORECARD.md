@@ -10,17 +10,17 @@ Purpose:
 - show where the biggest quality gaps are right now
 - make the quality score part of release discussion, not a side note
 
-As of May 4, 2026:
+As of May 5, 2026:
 
 - current shipped family:
-  - `1.2.3+build.532.sha.b959491`
+  - `1.3.0`
   - bundled quality score `8.8/10`
 - hosted `/dev`:
-  - `1.3.0+build.567.sha.d0d3bd6`
+  - `1.3.0`
 - hosted `/beta`:
-  - `1.3.0-beta.1+build.568.sha.e270d85.beta`
+  - `1.3.0 beta`
 - hosted `/production`:
-  - `1.2.3+build.532.sha.b959491`
+  - `1.3.0`
 
 Branch-local refresh on May 4, 2026:
 
@@ -127,11 +127,10 @@ Going forward:
 
 Current conclusion:
 
-- the shipped `1.2.3` family reads like a strong public release, not a recovery
-  build
-- hosted `/dev` now carries the `d0d3bd6` `1.3.0` candidate line
-- hosted `/beta` now carries the `e270d85` `1.3.0` beta lane
-- hosted `/production` still preserves the older `1.2.3` public-family lane
+- the shipped `1.3.0` family reads like a meaningful quality-and-platform
+  release, not a patch-sized follow-up
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are now aligned on
+  the same public-family story
 - the next cycle should focus on movement feel, audio identity, gameplay trust
   follow-up, second-game/platform maturity, and stronger analysis/harness depth
   rather than broad emergency repair

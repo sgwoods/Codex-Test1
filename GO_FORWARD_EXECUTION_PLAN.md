@@ -11,26 +11,25 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 4, 2026:
+As of May 5, 2026:
 
 - hosted `/dev` points at:
-  - `1.3.0+build.567.sha.d0d3bd6`
+  - the active `1.3.0` line
 - hosted `/beta` now points at:
-  - `1.3.0-beta.1+build.568.sha.e270d85.beta`
+  - the approved `1.3.0` beta lane
 - hosted `/production` now points at:
-  - `1.2.3+build.532.sha.b959491`
+  - the shipped `1.3.0` public line
 
 This means:
 
-- the current trust-and-pilot production line remains the public baseline on
+- the `1.3.0` quality-and-second-cabinet release is now the public baseline on
   hosted `/production`
-- hosted `/dev` now carries the active `1.3.0` candidate line
-- hosted `/beta` now carries the live `1.3.0` beta lane
-- the active source release family is now `1.3.0`
-- the immediate release question is no longer "how do we move beta to
-  production?"
-- it is now "what belongs in the active `1.3.0` release bundle, and how do we
-  set up the post-release pickup cleanly?"
+- hosted `/dev` and hosted `/beta` remain aligned with that same family while
+  the next bundle is assembled
+- the active source release family has moved on to the deliberate `1.4.0`
+  pickup
+- the immediate execution question is now "what belongs in the first true
+  post-1.3.0 arcade-depth and platform-contract cycle?"
 
 The forward line and the current shipped family now include:
 
@@ -45,14 +44,15 @@ The forward line and the current shipped family now include:
 
 ## Current Working Reality
 
-We are operating in a post-release stewardship phase.
+We are operating in a post-`1.3.0` stewardship phase.
 
 That means:
 
-- the live `1.2.3` line should remain trustworthy
+- the live `1.3.0` line should remain trustworthy
 - stable `beta` / `production` artifacts are preserved and should not be
   rewritten casually
-- current `main` contains forward work not yet reflected in stable beta
+- current `main` should now contain deliberate `1.4.0` pickup work, not
+  accidental spillover from the shipped family
 - recovered local work exists and should be integrated intentionally
 - release gates are important, but individual harnesses may need repair before
   they can be trusted again
@@ -94,7 +94,8 @@ For the next cycle, the active working line should be:
 
 Use `main` as the current integration branch because:
 
-- it now contains the shipped `1.2.3+build.532.sha.b959491` production line
+- it now contains the shipped `1.3.0` production line and the first
+  post-release layered-versioning contract
 - it includes the current release policy, scorecard, correspondence framework,
   committed analysis artifacts, and production-ready defaults
 - it is now the cleanest base for the next narrow gameplay/fidelity branches
