@@ -1,4 +1,4 @@
-// Non-production Galaxy Guardians scout-wave runtime model.
+// Hosted Galaxy Guardians scout-wave runtime model for the first public preview slice.
 
 const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
  flagship:Object.freeze({
@@ -42,11 +42,11 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
 
 const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
  id:'galaxy-guardians-dev-scout-wave-runtime',
- status:'preview-runtime-slice-not-production-release',
+ status:'preview-runtime-slice-production-enabled',
  publicPlayable:0,
  previewPlayable:1,
  devPlayable:1,
- playablePreviewReleaseChannels:Object.freeze(['development','production beta']),
+ playablePreviewReleaseChannels:Object.freeze(['development','production beta','production']),
  evidenceProfile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
  promotedEventLog:'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json',
  eventVocabulary:Object.freeze([
@@ -205,7 +205,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
  const seed=(+opts.seed>>>0)||42719;
  const state={
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
-  runtimeState:'dev-scout-wave',
+  runtimeState:'hosted-preview-scout-wave',
   publicPlayable:0,
   previewPlayable:1,
   devPlayable:1,

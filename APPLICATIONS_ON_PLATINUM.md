@@ -50,10 +50,10 @@ Right now it proves:
 - a visible preview board renderer that drives the Guardians-owned scout-wave
   runtime, visual catalog, and audio cue catalog without registering a public
   playable adapter
-- a non-production playable-preview adapter that routes keyboard movement,
+- a hosted-lane playable-preview adapter that routes keyboard movement,
   single-shot fire, life loss, reset, and game-over flow into the
-  Guardians-owned runtime on development and beta lanes while keeping the
-  public playable adapter disabled
+  Guardians-owned runtime on development, beta, and production lanes while
+  keeping the public playable adapter disabled
 - a source-manifested Galaxian reference profile with three local source videos,
   contact sheets, and waveforms
 - safe public-pack behavior because `Galaxy Guardians` still has no public
@@ -284,14 +284,14 @@ the visual, audio, movement, threat, and boundary evidence from memory.
 - wrap-around threat
 - life loss and game over flow
 
-Current non-production playable-preview coverage:
+Current hosted-lane playable-preview coverage:
 
-- `src/js/13-galaxy-guardians-gameplay-adapter.js` owns the non-production
+- `src/js/13-galaxy-guardians-gameplay-adapter.js` owns the hosted-preview
   start and update adapter for `Galaxy Guardians`
 - `src/js/13-galaxy-guardians-runtime.js` owns the runtime state, events, player
   shot, life-loss, reset, and game-over mechanics
 - `src/js/13-gameplay-adapter-registry.js` keeps public playable adapters and
-  non-production preview adapters in separate registries
+  hosted preview adapters in separate registries
 - `reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json`
   persists the first cue-shape and runtime-audio coverage contract for the
   Guardians signal theme

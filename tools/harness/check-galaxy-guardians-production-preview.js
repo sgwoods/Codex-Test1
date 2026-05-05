@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { DIST_BETA } = require('../build/paths');
+const { DIST_PRODUCTION } = require('../build/paths');
 const { withHarnessPage, waitForHarness } = require('./browser-check-util');
 
 function fail(message, payload){
@@ -10,7 +10,7 @@ function fail(message, payload){
 
 async function main(){
   const result = await withHarnessPage({
-    root: DIST_BETA,
+    root: DIST_PRODUCTION,
     skipStart: true,
     stage: 1,
     ships: 2,
@@ -61,29 +61,29 @@ async function main(){
     return { previewWait, launched };
   });
 
-  if(result.previewWait.buildChannel !== 'PRODUCTION BETA'){
-    fail('Beta preview check did not run against a promoted beta build artifact', result);
+  if(result.previewWait.buildChannel !== 'PRODUCTION'){
+    fail('Production preview check did not run against a promoted production build artifact', result);
   }
   if(!result.previewWait.docTitle.includes('Galaxy Guardians') || !result.previewWait.marquee.includes('Galaxy Guardians')){
-    fail('Beta preview pack selection did not update the shell identity', result);
+    fail('Production preview pack selection did not update the shell identity', result);
   }
   if(result.previewWait.modalOpen){
-    fail('Beta preview pack selection still opened the sneak-peek modal instead of exposing the playable preview path', result);
+    fail('Production preview pack selection still opened the sneak-peek modal instead of exposing the playable preview path', result);
   }
   if(result.previewWait.hasPlayableAdapter !== false || result.previewWait.hasDevPreviewAdapter !== true || result.previewWait.canStart !== true){
-    fail('Beta preview pack did not expose the expected hosted playable-preview boundary', result);
+    fail('Production preview pack did not expose the expected hosted playable-preview boundary', result);
   }
   if(!result.previewWait.waitText.includes('GALAXY GUARDIANS')){
-    fail('Beta preview pack did not replace the wait-mode front-door copy', result);
+    fail('Production preview pack did not replace the wait-mode front-door copy', result);
   }
-  if(result.launched.buildChannel !== 'PRODUCTION BETA' || result.launched.packKey !== 'galaxy-guardians-preview'){
-    fail('Beta preview launch did not stay inside the promoted beta build and Guardians pack', result);
+  if(result.launched.buildChannel !== 'PRODUCTION' || result.launched.packKey !== 'galaxy-guardians-preview'){
+    fail('Production preview launch did not stay inside the promoted production build and Guardians pack', result);
   }
   if(result.launched.guardians.publicPlayable !== 0 || result.launched.guardians.previewPlayable !== 1 || result.launched.guardians.devPlayable !== 1){
-    fail('Beta preview launch did not preserve the expected hosted-preview runtime identity', result);
+    fail('Production preview launch did not preserve the expected hosted-preview runtime identity', result);
   }
   if(JSON.stringify(result.launched.guardians.playablePreviewReleaseChannels || []) !== JSON.stringify(['development','production beta','production'])){
-    fail('Beta preview launch did not preserve the expected hosted preview channel contract', result);
+    fail('Production preview launch did not preserve the expected hosted preview channel contract', result);
   }
 
   console.log(JSON.stringify({

@@ -1,4 +1,4 @@
-// Disabled Galaxy Guardians gameplay adapter skeleton for the first owned 0.1 slice.
+// Galaxy Guardians gameplay adapter skeleton plus the owned hosted preview slice.
 
 const GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES=Object.freeze({
  usesCaptureRescue:0,
@@ -87,7 +87,8 @@ const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
 
 const GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS=Object.freeze([
  'development',
- 'production beta'
+ 'production beta',
+ 'production'
 ]);
 
 function createGalaxyGuardiansInitialState(opts={}){
@@ -141,8 +142,7 @@ function galaxyGuardiansDevPreviewAllowed(){
   .map(value=>String(value).toLowerCase());
  return typeof BUILD_INFO!=='undefined'
   && allowedChannels.includes(channel)
-  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable)
-  && !GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable;
+  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable);
 }
 
 function syncGalaxyGuardiansShellState(state){
@@ -171,7 +171,7 @@ function closeGalaxyGuardiansDevOverlays(){
 
 function startGalaxyGuardiansDevPreview(cfg={}){
  if(!galaxyGuardiansDevPreviewAllowed()){
-  showToast('Galaxy Guardians playable preview is available only in development and beta builds.');
+  showToast('Galaxy Guardians playable preview is unavailable in this build.');
   return false;
  }
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
@@ -292,7 +292,7 @@ function summarizeGalaxyGuardiansDevPreview(){
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
- label:'Galaxy Guardians non-production playable preview',
+ label:'Galaxy Guardians hosted playable preview',
  enabled:1,
  devOnly:0,
  previewOnly:1,

@@ -65,14 +65,14 @@ async function main(){
     };
   }));
 
-  if(!result.profile || result.profile.status !== 'preview-runtime-slice-not-production-release'){
-    fail('Galaxy Guardians runtime profile is missing or not marked as non-production preview evidence', result);
+  if(!result.profile || result.profile.status !== 'preview-runtime-slice-production-enabled'){
+    fail('Galaxy Guardians runtime profile is missing or not marked as a hosted preview slice', result);
   }
   if(result.profile.publicPlayable !== 0 || result.profile.previewPlayable !== 1 || result.profile.devPlayable !== 1){
-    fail('Galaxy Guardians runtime profile is not correctly scoped as beta-allowed but production-blocked', result);
+    fail('Galaxy Guardians runtime profile is not correctly scoped as a hosted preview runtime', result);
   }
-  if(JSON.stringify(result.profile.playablePreviewReleaseChannels || []) !== JSON.stringify(['development','production beta'])){
-    fail('Galaxy Guardians runtime profile does not preserve the expected development-and-beta preview channels', result);
+  if(JSON.stringify(result.profile.playablePreviewReleaseChannels || []) !== JSON.stringify(['development','production beta','production'])){
+    fail('Galaxy Guardians runtime profile does not preserve the expected hosted preview channels', result);
   }
   if(result.playableAdapterKeys.includes('galaxy-guardians-preview')){
     fail('Galaxy Guardians runtime leaked into the public playable adapter registry', result);
@@ -135,10 +135,10 @@ async function main(){
     fail('Galaxy Guardians runtime state includes Aurora-specific state fields', result);
   }
   if(result.summary.gameKey !== 'galaxy-guardians-preview' || result.summary.publicPlayable !== 0 || result.summary.previewPlayable !== 1 || result.summary.devPlayable !== 1){
-    fail('Galaxy Guardians runtime summary does not preserve the non-production playable-preview identity', result);
+    fail('Galaxy Guardians runtime summary does not preserve the hosted playable-preview identity', result);
   }
-  if(JSON.stringify(result.summary.playablePreviewReleaseChannels || []) !== JSON.stringify(['development','production beta'])){
-    fail('Galaxy Guardians runtime summary lost the expected development-and-beta preview channels', result);
+  if(JSON.stringify(result.summary.playablePreviewReleaseChannels || []) !== JSON.stringify(['development','production beta','production'])){
+    fail('Galaxy Guardians runtime summary lost the expected hosted preview channels', result);
   }
   for(const cueId of ['guardians-formation-pulse','guardians-player-single-shot','guardians-scout-dive','guardians-flagship-dive','guardians-escort-join','guardians-wrap-return']){
     if(!result.summary.audioCueIds.includes(cueId)){

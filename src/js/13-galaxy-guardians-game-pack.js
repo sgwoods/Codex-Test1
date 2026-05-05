@@ -272,9 +272,9 @@ const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecor
  version:'0.1.0-preview',
  versionLine:'0.1.0 preview',
  releaseTrack:'playable-preview',
- runtimeStatus:'non-production-playable-preview',
+ runtimeStatus:'production-playable-preview',
  platformCompatibility:buildPlatformInfo().compatibility||'',
- launchPolicy:'development-and-beta-only'
+ launchPolicy:'production-preview-playable'
 }));
 
 const GALAXY_GUARDIANS_PACK=Object.freeze({
@@ -284,9 +284,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   version:GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0-preview',
   versionLine:GALAXY_GUARDIANS_APPLICATION_RELEASE.versionLine||GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0 preview',
   releaseTrack:GALAXY_GUARDIANS_APPLICATION_RELEASE.releaseTrack||'playable-preview',
-  runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'non-production-playable-preview',
+  runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'production-playable-preview',
   platformCompatibility:GALAXY_GUARDIANS_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
-  launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'development-and-beta-only',
+  launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'production-preview-playable',
   playable:0,
   previewOnly:1
  }),
@@ -308,9 +308,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on development and beta lanes.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on the hosted release lanes.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a non-production scout-wave runtime while Aurora remains the primary public production cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a production-safe scout-wave runtime while Aurora remains the primary public production cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',
@@ -323,7 +323,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
    Object.freeze({label:'Minimal scout-wave playable slice',state:'online'}),
    Object.freeze({label:'Application-owned scoring harness',state:'online'})
   ]),
-  launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
+  launchFallbackToast:'Galaxy Guardians playable preview is unavailable in this build. Launching Aurora Galactica.'
  }),
  shellThemes:Object.freeze([
   Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),

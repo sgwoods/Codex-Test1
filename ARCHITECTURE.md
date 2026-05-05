@@ -33,7 +33,7 @@ What is still transitional:
 - some naming and compatibility residue is still Aurora-shaped
 - the game-pack contract is still practical rather than strongly versioned
 - the second application is still public-preview-only rather than fully
-  playable; it now has a development-only playable-preview adapter for local
+  shipped; it now has a hosted-lane playable-preview adapter for release-lane
   runtime proof
 - the second-game preview now owns placeholder pack data, but playable
   second-game work still needs measured game data and a gameplay adapter rather
@@ -204,16 +204,16 @@ Pack-boundary harness:
   runtime rules and that enemy shots, player loss, and owned point values stay
   in the Galaxy Guardians application layer.
 - `tools/harness/check-galaxy-guardians-playable-preview.js`
-  verifies the development-only Galaxy Guardians playable-preview adapter:
+  verifies the development-lane Galaxy Guardians playable-preview adapter:
   keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and
   isolation from the public playable adapter registry.
 - `tools/harness/check-compact-cabinet-rails.js`
   verifies that both side-frame icon rails remain visible and inside the
   cabinet frame at the compact in-app browser scale, and that the Galaxy
   Guardians preview modal stays readable in that compact layout. It also
-  verifies the dev-only Guardians preview renderer by checking its render mode,
+  verifies the hosted-preview Guardians renderer by checking its render mode,
   registered renderer key, visual catalog IDs, audio cue IDs, signal palette,
-  Platinum harness alias, and non-playable adapter state.
+  Platinum harness alias, and non-playable public adapter state.
 - `tools/harness/check-framed-popout-bounds.js`
   verifies that frame-owned popouts stay inside the gameplay frame, that
   platform messages, high scores, and pilot/account popouts share the same
