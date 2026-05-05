@@ -117,12 +117,17 @@ This means:
 5. prioritize level-by-level arcade depth as the next major product pillar
 6. make shared gameplay-video publishing an early evidence/product capability
 7. continue narrow trust fixes from the open issue stream
+8. execute the measured Galaga long-cycle quality plan in
+   [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
+   before broad gameplay, complexity, or graphical tuning
 
 Current conformance read:
 
 - overall Aurora quality is `8.8/10`
 - audio identity and cue alignment is the weakest category at `6.1/10`
 - player movement is the next visible feel gap at `8.0/10`
+- the current long-cycle baseline is captured in
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
 - Galaxy Guardians 0.1 preview gates are green but pass/fail only, not part of
   the Aurora numeric roll-up yet
 

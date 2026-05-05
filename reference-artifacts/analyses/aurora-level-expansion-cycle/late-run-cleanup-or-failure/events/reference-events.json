@@ -93,7 +93,7 @@
       "runtime_type": "enemy_attack_start",
       "time_s": 3.983,
       "duration_s": null,
-      "entity_family": "boss",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 9,
@@ -127,9 +127,9 @@
       "event_id": "late-run-cleanup-or-failure-006-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 4.95,
+      "time_s": 4.933,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "boss",
       "entity_id": null,
       "position_hint": {
         "player_lane": 9,
@@ -145,12 +145,12 @@
       "event_id": "late-run-cleanup-or-failure-007-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 5.85,
+      "time_s": 4.933,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 7,
+        "player_lane": 9,
         "source_lane": null,
         "source_column": null
       },
@@ -160,33 +160,33 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-008-enemy_projectile",
-      "event_family": "enemy_projectile",
-      "runtime_type": "enemy_bullet_fired",
-      "time_s": 6.5,
+      "event_id": "late-run-cleanup-or-failure-008-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 4.933,
       "duration_s": null,
-      "entity_family": "boss",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 7,
+        "player_lane": 9,
         "source_lane": null,
         "source_column": null
       },
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
       "event_id": "late-run-cleanup-or-failure-009-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 6.533,
+      "time_s": 5.633,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 7,
+        "player_lane": 6,
         "source_lane": null,
         "source_column": null
       },
@@ -196,12 +196,12 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-010-enemy_dive_start",
-      "event_family": "enemy_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 6.733,
+      "event_id": "late-run-cleanup-or-failure-010-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 5.983,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "bee",
       "entity_id": null,
       "position_hint": {
         "player_lane": 4,
@@ -211,15 +211,15 @@
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-011-enemy_projectile",
-      "event_family": "enemy_projectile",
-      "runtime_type": "enemy_bullet_fired",
-      "time_s": 6.933,
+      "event_id": "late-run-cleanup-or-failure-011-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 6.15,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 2,
@@ -229,13 +229,31 @@
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-012-enemy_projectile",
+      "event_id": "late-run-cleanup-or-failure-012-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 7.1,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-013-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 7.517,
+      "time_s": 7.783,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -250,10 +268,10 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-013-enemy_dive_start",
+      "event_id": "late-run-cleanup-or-failure-014-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 7.633,
+      "time_s": 7.967,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -268,12 +286,12 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-014-enemy_projectile",
+      "event_id": "late-run-cleanup-or-failure-015-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 8.383,
+      "time_s": 8.533,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -286,10 +304,10 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-015-enemy_dive_start",
+      "event_id": "late-run-cleanup-or-failure-016-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 8.583,
+      "time_s": 8.9,
       "duration_s": null,
       "entity_family": "boss",
       "entity_id": null,
@@ -304,10 +322,46 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-016-enemy_projectile",
+      "event_id": "late-run-cleanup-or-failure-017-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 8.9,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-018-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 8.9,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-019-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 9.4,
+      "time_s": 9.617,
       "duration_s": null,
       "entity_family": "bee",
       "entity_id": null,
@@ -322,12 +376,48 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-017-enemy_dive_start",
+      "event_id": "late-run-cleanup-or-failure-020-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 9.767,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-021-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 9.783,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "late-run-cleanup-or-failure-022-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 9.467,
+      "time_s": 9.8,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "artifact_type": "aurora-galaga-long-cycle-baseline",
+  "generated_on": "2026-05-05",
+  "source_commit": "478329a",
+  "branch": "codex/macbook-pro-aurora-galaga-quality-cycle-setup",
+  "status": "baseline-captured",
+  "purpose": "Set the baseline for a long Aurora Galaga conformance cycle focused on gameplay quality, gameplay complexity, and graphical quality.",
+  "primary_plan": "AURORA_GALAGA_LONG_CYCLE_REVIEW.md",
+  "quality_report": "reference-artifacts/analyses/quality-conformance/2026-05-05-478329a/report.json",
+  "evidence_window_summary": "reference-artifacts/analyses/aurora-level-expansion-cycle/aurora-evidence-window-cycle-summary.json",
+  "evidence_dashboard": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json",
+  "quality_scores": {
+    "overall": 8.8,
+    "movement": 8.0,
+    "combat_responsiveness": 10.0,
+    "stage1_timing": 8.5,
+    "stage1_geometry": 10.0,
+    "dive_safety": 9.1,
+    "capture_rescue": 10.0,
+    "challenge_timing": 8.4,
+    "progression": 8.8,
+    "audio": 6.1,
+    "ui_shell_graphics": 9.2
+  },
+  "priority_tracks": [
+    {
+      "id": "gameplay-quality",
+      "first_branch": "codex/macbook-pro-aurora-movement-shot-feel",
+      "target": "Raise movement conformance above 8.0 without reducing shot trust or persona safety."
+    },
+    {
+      "id": "gameplay-complexity",
+      "first_branch": "codex/macbook-pro-aurora-challenge-stage-depth",
+      "target": "Add one measured challenge-stage movement/content family and preserve bonus-stage safety."
+    },
+    {
+      "id": "graphical-quality",
+      "first_branch": "codex/macbook-pro-aurora-graphics-conformance-pass",
+      "target": "Improve gameplay-scale sprite/effect/HUD quality while keeping stage-1 geometry at 10.0."
+    }
+  ],
+  "aurora_evidence_windows": [
+    {
+      "window_id": "stage-1-baseline",
+      "scenario": "stage1-descent",
+      "seed": 2003,
+      "sample_count": 25,
+      "event_count": 47,
+      "promoted_event_count": 24,
+      "max_attackers": 2,
+      "max_enemy_bullets": 1,
+      "final_lives": 5,
+      "final_stage": 1
+    },
+    {
+      "window_id": "challenge-stage-candidate",
+      "scenario": "stage3-challenge",
+      "seed": 3003,
+      "sample_count": 25,
+      "event_count": 163,
+      "promoted_event_count": 112,
+      "max_attackers": 3,
+      "max_enemy_bullets": 1,
+      "max_challenge_enemies": 40,
+      "final_score": 5870,
+      "final_lives": 2,
+      "final_stage": 4
+    },
+    {
+      "window_id": "mid-run-pressure",
+      "scenario": "stage6-regular",
+      "seed": 6006,
+      "sample_count": 9,
+      "event_count": 63,
+      "promoted_event_count": 14,
+      "max_attackers": 4,
+      "max_enemy_bullets": 2,
+      "final_lives": 2,
+      "final_stage": 6
+    },
+    {
+      "window_id": "late-run-cleanup-or-failure",
+      "scenario": "stage12-variety",
+      "seed": 12003,
+      "sample_count": 11,
+      "event_count": 86,
+      "promoted_event_count": 22,
+      "max_attackers": 5,
+      "max_enemy_bullets": 3,
+      "final_lives": 5,
+      "final_stage": 12
+    }
+  ],
+  "setup_findings": [
+    "The first evidence-window rerun exposed a malformed enemy-bullet slot crash in deterministic capture.",
+    "Aurora now discards malformed enemy bullet entries before advancing them.",
+    "The evidence dashboard warning about missing Galaxian promoted windows is expected for this setup branch."
+  ],
+  "verification_commands": [
+    "npm run build:production",
+    "npm run harness:score:quality-conformance",
+    "npm run build",
+    "npm run harness:cycle:aurora-evidence-windows",
+    "npm run harness:build:evidence-cycle-dashboard",
+    "npm run harness:check:evidence-cycle-dashboard",
+    "npm run harness:build:conformance-metrics-overview"
+  ]
+}

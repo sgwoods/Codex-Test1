@@ -92,7 +92,7 @@ function updatePlayerBullets(dt){
 }
 
 function updateEnemyBullets(dt,p){
- for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
+ for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];if(!b){S.eb.splice(i,1);continue}b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
   // Reference note for #33: original Galaga challenge stages are treated as
   // non-attacking/non-lethal bonus rounds, so player deaths remain disabled
   // while S.challenge is active.

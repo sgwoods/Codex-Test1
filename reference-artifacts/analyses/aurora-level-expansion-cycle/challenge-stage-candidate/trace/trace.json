@@ -10,11 +10,11 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 1,
+    "max_attackers": 3,
     "max_enemy_bullets": 1,
     "max_player_bullets": 2,
     "max_challenge_enemies": 40,
-    "final_score": 3000,
+    "final_score": 5870,
     "final_lives": 2,
     "final_stage": 4,
     "final_challenge": false
@@ -147,7 +147,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.835
+        "at": 0.578
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -195,7 +195,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.115
+        "at": 0.658
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -222,106 +222,10 @@
       "t": 2,
       "stage": 3,
       "challenge": 1,
-      "score": 200,
-      "lives": 3,
-      "player_x": 9,
-      "player_vx": 0,
-      "enemies": 38,
-      "attackers": 0,
-      "enemy_bullets": 0,
-      "player_bullets": 2,
-      "challenge_enemies": 38,
-      "formation_active": 0,
-      "audioCue": {
-        "cue": "playerShot",
-        "atmosphereId": "classic-arcade",
-        "audioTheme": "galaga-reference-assets",
-        "phase": "challenge",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
-        "stage": 3,
-        "challenge": true,
-        "at": 1.209
-      },
-      "stagePresentation": {
-        "id": "quiet-skies",
-        "atmosphereTheme": "classic-arcade",
-        "backgroundMode": "classic-stars"
-      },
-      "visualAtmosphere": {
-        "id": "aurora-borealis",
-        "group": "aurora",
-        "phase": "challenge",
-        "backgroundMode": "aurora-borealis",
-        "audioTheme": "classic-arcade",
-        "overrideThemeId": "aurora-borealis",
-        "starfield": {
-          "id": "aurora-borealis-stars",
-          "count": 88,
-          "alphaMin": 0.28,
-          "alphaMax": 0.64
-        }
-      },
-      "challengeEnemyCount": 38
-    },
-    {
-      "t": 3,
-      "stage": 3,
-      "challenge": 1,
-      "score": 200,
-      "lives": 3,
-      "player_x": 9,
-      "player_vx": 0,
-      "enemies": 38,
-      "attackers": 0,
-      "enemy_bullets": 0,
-      "player_bullets": 2,
-      "challenge_enemies": 38,
-      "formation_active": 0,
-      "audioCue": {
-        "cue": "playerShot",
-        "atmosphereId": "classic-arcade",
-        "audioTheme": "galaga-reference-assets",
-        "phase": "challenge",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
-        "stage": 3,
-        "challenge": true,
-        "at": 1.287
-      },
-      "stagePresentation": {
-        "id": "quiet-skies",
-        "atmosphereTheme": "classic-arcade",
-        "backgroundMode": "classic-stars"
-      },
-      "visualAtmosphere": {
-        "id": "aurora-borealis",
-        "group": "aurora",
-        "phase": "challenge",
-        "backgroundMode": "aurora-borealis",
-        "audioTheme": "classic-arcade",
-        "overrideThemeId": "aurora-borealis",
-        "starfield": {
-          "id": "aurora-borealis-stars",
-          "count": 88,
-          "alphaMin": 0.28,
-          "alphaMax": 0.64
-        }
-      },
-      "challengeEnemyCount": 38
-    },
-    {
-      "t": 4,
-      "stage": 3,
-      "challenge": 1,
       "score": 300,
       "lives": 3,
-      "player_x": 153.67,
-      "player_vx": 247.96,
+      "player_x": 9,
+      "player_vx": 0,
       "enemies": 37,
       "attackers": 0,
       "enemy_bullets": 0,
@@ -339,7 +243,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.376
+        "at": 0.714
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -363,18 +267,18 @@
       "challengeEnemyCount": 37
     },
     {
-      "t": 5,
+      "t": 3,
       "stage": 3,
       "challenge": 1,
-      "score": 800,
+      "score": 300,
       "lives": 3,
-      "player_x": 271,
+      "player_x": 9,
       "player_vx": 0,
-      "enemies": 32,
+      "enemies": 37,
       "attackers": 0,
       "enemy_bullets": 0,
       "player_bullets": 2,
-      "challenge_enemies": 32,
+      "challenge_enemies": 37,
       "formation_active": 0,
       "audioCue": {
         "cue": "playerShot",
@@ -387,7 +291,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.459
+        "at": 0.771
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -408,21 +312,117 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 32
+      "challengeEnemyCount": 37
+    },
+    {
+      "t": 4,
+      "stage": 3,
+      "challenge": 1,
+      "score": 400,
+      "lives": 3,
+      "player_x": 153.67,
+      "player_vx": 247.96,
+      "enemies": 36,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 36,
+      "formation_active": 0,
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 3,
+        "challenge": true,
+        "at": 0.831
+      },
+      "stagePresentation": {
+        "id": "quiet-skies",
+        "atmosphereTheme": "classic-arcade",
+        "backgroundMode": "classic-stars"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "classic-arcade",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 36
+    },
+    {
+      "t": 5,
+      "stage": 3,
+      "challenge": 1,
+      "score": 900,
+      "lives": 3,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 31,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 31,
+      "formation_active": 0,
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 3,
+        "challenge": true,
+        "at": 0.887
+      },
+      "stagePresentation": {
+        "id": "quiet-skies",
+        "atmosphereTheme": "classic-arcade",
+        "backgroundMode": "classic-stars"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "classic-arcade",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 31
     },
     {
       "t": 6,
       "stage": 3,
       "challenge": 1,
-      "score": 1000,
+      "score": 1200,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 30,
+      "enemies": 28,
       "attackers": 0,
       "enemy_bullets": 0,
       "player_bullets": 2,
-      "challenge_enemies": 30,
+      "challenge_enemies": 28,
       "formation_active": 0,
       "audioCue": {
         "cue": "playerShot",
@@ -435,7 +435,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.534
+        "at": 0.946
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -456,7 +456,7 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 30
+      "challengeEnemyCount": 28
     },
     {
       "t": 7,
@@ -483,7 +483,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.609
+        "at": 1.006
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -510,58 +510,10 @@
       "t": 8,
       "stage": 3,
       "challenge": 1,
-      "score": 1600,
+      "score": 1700,
       "lives": 3,
       "player_x": 9,
       "player_vx": 0,
-      "enemies": 24,
-      "attackers": 0,
-      "enemy_bullets": 0,
-      "player_bullets": 2,
-      "challenge_enemies": 24,
-      "formation_active": 0,
-      "audioCue": {
-        "cue": "playerShot",
-        "atmosphereId": "classic-arcade",
-        "audioTheme": "galaga-reference-assets",
-        "phase": "challenge",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
-        "stage": 3,
-        "challenge": true,
-        "at": 1.688
-      },
-      "stagePresentation": {
-        "id": "quiet-skies",
-        "atmosphereTheme": "classic-arcade",
-        "backgroundMode": "classic-stars"
-      },
-      "visualAtmosphere": {
-        "id": "aurora-borealis",
-        "group": "aurora",
-        "phase": "challenge",
-        "backgroundMode": "aurora-borealis",
-        "audioTheme": "classic-arcade",
-        "overrideThemeId": "aurora-borealis",
-        "starfield": {
-          "id": "aurora-borealis-stars",
-          "count": 88,
-          "alphaMin": 0.28,
-          "alphaMax": 0.64
-        }
-      },
-      "challengeEnemyCount": 24
-    },
-    {
-      "t": 9,
-      "stage": 3,
-      "challenge": 1,
-      "score": 1700,
-      "lives": 3,
-      "player_x": 43.2,
-      "player_vx": 230.96,
       "enemies": 23,
       "attackers": 0,
       "enemy_bullets": 0,
@@ -579,7 +531,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.763
+        "at": 1.063
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -603,31 +555,31 @@
       "challengeEnemyCount": 23
     },
     {
-      "t": 10,
+      "t": 9,
       "stage": 3,
       "challenge": 1,
-      "score": 2200,
+      "score": 1800,
       "lives": 3,
-      "player_x": 271,
-      "player_vx": 0,
-      "enemies": 18,
+      "player_x": 43.2,
+      "player_vx": 230.96,
+      "enemies": 22,
       "attackers": 0,
       "enemy_bullets": 0,
-      "player_bullets": 2,
-      "challenge_enemies": 18,
+      "player_bullets": 1,
+      "challenge_enemies": 22,
       "formation_active": 0,
       "audioCue": {
-        "cue": "playerShot",
+        "cue": "enemyBoom",
         "atmosphereId": "classic-arcade",
         "audioTheme": "galaga-reference-assets",
         "phase": "challenge",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.836
+        "at": 1.125
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -648,21 +600,69 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 18
+      "challengeEnemyCount": 22
+    },
+    {
+      "t": 10,
+      "stage": 3,
+      "challenge": 1,
+      "score": 4800,
+      "lives": 3,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 12,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
+      "challenge_enemies": 12,
+      "formation_active": 0,
+      "audioCue": {
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 3,
+        "challenge": true,
+        "at": 1.188
+      },
+      "stagePresentation": {
+        "id": "quiet-skies",
+        "atmosphereTheme": "classic-arcade",
+        "backgroundMode": "classic-stars"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "classic-arcade",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 12
     },
     {
       "t": 11,
       "stage": 3,
       "challenge": 1,
-      "score": 2300,
+      "score": 5000,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 17,
+      "enemies": 10,
       "attackers": 0,
       "enemy_bullets": 0,
       "player_bullets": 2,
-      "challenge_enemies": 17,
+      "challenge_enemies": 10,
       "formation_active": 0,
       "audioCue": {
         "cue": "playerShot",
@@ -675,55 +675,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.905
-      },
-      "stagePresentation": {
-        "id": "quiet-skies",
-        "atmosphereTheme": "classic-arcade",
-        "backgroundMode": "classic-stars"
-      },
-      "visualAtmosphere": {
-        "id": "aurora-borealis",
-        "group": "aurora",
-        "phase": "challenge",
-        "backgroundMode": "aurora-borealis",
-        "audioTheme": "classic-arcade",
-        "overrideThemeId": "aurora-borealis",
-        "starfield": {
-          "id": "aurora-borealis-stars",
-          "count": 88,
-          "alphaMin": 0.28,
-          "alphaMax": 0.64
-        }
-      },
-      "challengeEnemyCount": 17
-    },
-    {
-      "t": 12,
-      "stage": 3,
-      "challenge": 1,
-      "score": 2600,
-      "lives": 2,
-      "player_x": 151.12,
-      "player_vx": -247.84,
-      "enemies": 10,
-      "attackers": 0,
-      "enemy_bullets": 0,
-      "player_bullets": 0,
-      "challenge_enemies": 10,
-      "formation_active": 0,
-      "audioCue": {
-        "cue": "playerHit",
-        "atmosphereId": "classic-arcade",
-        "audioTheme": "galaga-reference-assets",
-        "phase": "challenge",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
-        "stage": 3,
-        "challenge": true,
-        "at": 1.984
+        "at": 1.246
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -747,10 +699,58 @@
       "challengeEnemyCount": 10
     },
     {
+      "t": 12,
+      "stage": 3,
+      "challenge": 1,
+      "score": 5400,
+      "lives": 2,
+      "player_x": 151.12,
+      "player_vx": -247.84,
+      "enemies": 5,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
+      "challenge_enemies": 5,
+      "formation_active": 0,
+      "audioCue": {
+        "cue": "playerHit",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 3,
+        "challenge": true,
+        "at": 1.306
+      },
+      "stagePresentation": {
+        "id": "quiet-skies",
+        "atmosphereTheme": "classic-arcade",
+        "backgroundMode": "classic-stars"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "classic-arcade",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 5
+    },
+    {
       "t": 13,
       "stage": 3,
       "challenge": 1,
-      "score": 2600,
+      "score": 5400,
       "lives": 2,
       "player_x": 151.12,
       "player_vx": -247.84,
@@ -771,7 +771,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.984
+        "at": 1.306
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -798,7 +798,7 @@
       "t": 14,
       "stage": 3,
       "challenge": 1,
-      "score": 2600,
+      "score": 5400,
       "lives": 2,
       "player_x": 151.12,
       "player_vx": -247.84,
@@ -819,7 +819,7 @@
         "referenceClipDuration": 1.55,
         "stage": 3,
         "challenge": true,
-        "at": 2.133
+        "at": 1.422
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -846,7 +846,7 @@
       "t": 15,
       "stage": 3,
       "challenge": 1,
-      "score": 2600,
+      "score": 5400,
       "lives": 2,
       "player_x": 151.12,
       "player_vx": -247.84,
@@ -867,7 +867,7 @@
         "referenceClipDuration": 1.55,
         "stage": 3,
         "challenge": true,
-        "at": 2.133
+        "at": 1.422
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -894,7 +894,7 @@
       "t": 16,
       "stage": 3,
       "challenge": 1,
-      "score": 2600,
+      "score": 5400,
       "lives": 2,
       "player_x": 151.12,
       "player_vx": -247.84,
@@ -915,7 +915,7 @@
         "referenceClipDuration": 0.86,
         "stage": 3,
         "challenge": true,
-        "at": 2.271
+        "at": 1.537
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -942,7 +942,7 @@
       "t": 17,
       "stage": 3,
       "challenge": 1,
-      "score": 2600,
+      "score": 5400,
       "lives": 2,
       "player_x": 151.12,
       "player_vx": -247.84,
@@ -963,7 +963,7 @@
         "referenceClipDuration": 0.86,
         "stage": 3,
         "challenge": true,
-        "at": 2.271
+        "at": 1.537
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -990,7 +990,7 @@
       "t": 18,
       "stage": 4,
       "challenge": 0,
-      "score": 2760,
+      "score": 5560,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
@@ -1011,7 +1011,7 @@
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 2.42
+        "at": 1.657
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1038,28 +1038,28 @@
       "t": 19,
       "stage": 4,
       "challenge": 0,
-      "score": 3000,
+      "score": 5790,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
-      "enemies": 35,
+      "enemies": 34,
       "attackers": 0,
       "enemy_bullets": 0,
-      "player_bullets": 1,
+      "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 34,
       "audioCue": {
-        "cue": "enemyBoom",
+        "cue": "playerShot",
         "atmosphereId": "aurora-hint",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 2.498
+        "at": 1.716
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1086,16 +1086,16 @@
       "t": 20,
       "stage": 4,
       "challenge": 0,
-      "score": 3000,
+      "score": 5870,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
-      "enemies": 35,
+      "enemies": 33,
       "attackers": 0,
       "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 33,
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-hint",
@@ -1107,7 +1107,7 @@
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 2.571
+        "at": 1.773
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1134,16 +1134,16 @@
       "t": 21,
       "stage": 4,
       "challenge": 0,
-      "score": 3000,
+      "score": 5870,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
-      "enemies": 35,
-      "attackers": 1,
+      "enemies": 33,
+      "attackers": 0,
       "enemy_bullets": 0,
-      "player_bullets": 0,
+      "player_bullets": 1,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 33,
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -1155,7 +1155,7 @@
         "referenceClipDuration": 0.82,
         "stage": 4,
         "challenge": false,
-        "at": 2.647
+        "at": 1.831
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1182,16 +1182,16 @@
       "t": 22,
       "stage": 4,
       "challenge": 0,
-      "score": 3000,
+      "score": 5870,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
-      "enemies": 35,
-      "attackers": 1,
+      "enemies": 33,
+      "attackers": 3,
       "enemy_bullets": 0,
       "player_bullets": 0,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 33,
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -1203,7 +1203,7 @@
         "referenceClipDuration": 0.82,
         "stage": 4,
         "challenge": false,
-        "at": 2.725
+        "at": 1.889
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1230,28 +1230,28 @@
       "t": 23,
       "stage": 4,
       "challenge": 0,
-      "score": 3000,
+      "score": 5870,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
-      "enemies": 35,
+      "enemies": 33,
       "attackers": 1,
       "enemy_bullets": 1,
       "player_bullets": 0,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 33,
       "audioCue": {
-        "cue": "stagePulse",
+        "cue": "attackCharge",
         "atmosphereId": "aurora-hint",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 8,
-        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "referenceClipStart": 0.18,
-        "referenceClipDuration": 0.82,
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 2.804
+        "at": 1.947
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1278,16 +1278,16 @@
       "t": 24,
       "stage": 4,
       "challenge": 0,
-      "score": 3000,
+      "score": 5870,
       "lives": 2,
       "player_x": 239.93,
       "player_vx": 0,
-      "enemies": 35,
+      "enemies": 33,
       "attackers": 1,
       "enemy_bullets": 0,
       "player_bullets": 0,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 33,
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -1299,7 +1299,7 @@
         "referenceClipDuration": 0.82,
         "stage": 4,
         "challenge": false,
-        "at": 2.883
+        "at": 2.006
       },
       "stagePresentation": {
         "id": "scorpion-dawn",

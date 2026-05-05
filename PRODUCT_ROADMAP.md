@@ -117,7 +117,11 @@ Current conformance read:
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
 - overall Aurora quality is `8.8/10`
 - audio identity and cue alignment is the weakest category at `6.1/10`
-- player movement conformance is the next visible feel gap at `8.1/10`
+- player movement conformance is the next visible feel gap at `8.0/10`
+- the next major Aurora quality cycle is tracked in
+  [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md),
+  with a baseline artifact at
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
 - Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
   yet part of the Aurora numeric roll-up
 - Guardians evidence-weighted reference conformance is now `7.7/10`, while the

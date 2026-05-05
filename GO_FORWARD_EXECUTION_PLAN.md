@@ -175,6 +175,8 @@ Practical standard:
   jerky and too fast at times
 - next-cycle work should be grouped deliberately into:
   - movement and control fidelity
+  - gameplay complexity and challenge-stage depth
+  - graphical quality at gameplay scale
   - audio identity and atmosphere
   - gameplay trust and edge-case correctness
   - shell, overlay, and dock polish
@@ -188,6 +190,7 @@ Practical standard:
 
 See also:
 
+- [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
 - [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 - [BETA_CANDIDATE_PLAN.md](BETA_CANDIDATE_PLAN.md)
 - [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
