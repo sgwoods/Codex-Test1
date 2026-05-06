@@ -1041,6 +1041,27 @@ function displayStageNumber(stage,challenge=isChallengeStage(stage)){
 function formatDisplayedStage(stage,challenge=isChallengeStage(stage),pad=2){
  return String(displayStageNumber(stage,challenge)).padStart(pad,'0');
 }
+function internalRegularStageForDisplayedStage(stage){
+ const target=Math.max(1, stage|0);
+ for(let internal=1;internal<=240;internal++){
+  if(isChallengeStage(internal))continue;
+  if(displayStageNumber(internal,false)===target)return internal;
+ }
+ return target;
+}
+function currentStartStageMode(){
+ const mode=String(window.__platinumStartStageMode||window.__auroraStartStageMode||'display').toLowerCase();
+ return mode==='internal'?'internal':'display';
+}
+function resolveGameplayStartStage(cfg={}){
+ const requestedStage=cl(+cfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0;
+ const stageMode=currentStartStageMode();
+ const forceChallenge=!!cfg.challenge;
+ const stage=stageMode==='display'&&!forceChallenge
+  ? internalRegularStageForDisplayedStage(requestedStage)
+  : requestedStage;
+ return {requestedStage,stage,stageMode,forceChallenge};
+}
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>{
  if(!REC)return 0;

@@ -31,7 +31,20 @@ window.__galagaHarness__={
   S.simT=+cfg.initialSimT;
  }
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
- if(!started)start();
+ if(!started){
+  const startStageMode=String(cfg.stageMode||'internal').toLowerCase()==='display'?'display':'internal';
+  const previousPlatinumStageMode=window.__platinumStartStageMode;
+  const previousAuroraStageMode=window.__auroraStartStageMode;
+  window.__platinumStartStageMode=startStageMode;
+  window.__auroraStartStageMode=startStageMode;
+  try{start()}
+  finally{
+   if(previousPlatinumStageMode===undefined)delete window.__platinumStartStageMode;
+   else window.__platinumStartStageMode=previousPlatinumStageMode;
+   if(previousAuroraStageMode===undefined)delete window.__auroraStartStageMode;
+   else window.__auroraStartStageMode=previousAuroraStageMode;
+  }
+ }
 },
  setControlledClock(enabled=1){
   if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!enabled);
