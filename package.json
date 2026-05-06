@@ -62,6 +62,7 @@
     "harness:check:squadron-spacing": "node tools/harness/check-squadron-spacing.js",
     "harness:check:stage-pressure": "node tools/harness/check-stage-pressure-balance.js",
     "harness:check:stage4-pressure-loss-windows": "node tools/harness/check-stage4-pressure-loss-windows.js",
+    "harness:analyze:stage4-pressure-geometry": "node tools/harness/analyze-stage4-pressure-geometry.js",
     "harness:check:video-artifact": "node tools/harness/check-video-artifact.js",
     "harness:check:portable-paths": "node tools/harness/check-summary-portability.js",
     "harness:repair:videos": "node tools/harness/repair-video-artifacts.js",
