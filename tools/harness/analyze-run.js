@@ -270,6 +270,7 @@ function challengeRulesMetrics(session){
   const bulletsDuringChallenge = events.filter(e => e.type === 'enemy_bullet_fired' && !!e.challenge);
   const attacksDuringChallenge = events.filter(e => e.type === 'enemy_attack_start' && !!e.challenge);
   const shipLossesDuringChallenge = events.filter(e => e.type === 'ship_lost' && !!e.challenge);
+  const contactsDuringChallenge = events.filter(e => e.type === 'challenge_enemy_contact' && !!e.challenge);
   const challengeClears = events.filter(e => e.type === 'challenge_clear').map(e => e.stage);
   return {
     challengeStages,
@@ -278,6 +279,7 @@ function challengeRulesMetrics(session){
     bulletsDuringChallenge: bulletsDuringChallenge.length,
     attacksDuringChallenge: attacksDuringChallenge.length,
     shipLossesDuringChallenge: shipLossesDuringChallenge.length,
+    contactsDuringChallenge: contactsDuringChallenge.length,
     firstChallengeStage: challengeStages.length ? Math.min(...challengeStages) : null,
     cadenceLooksLikeFirstThenEveryFourthStage:
       challengeStages.length <= 1 ||

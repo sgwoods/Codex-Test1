@@ -187,6 +187,34 @@ function compareMetric(metric, historicalBaseline, baseline, current){
   };
 }
 
+function tailLines(value, count=8){
+  return String(value || '').split('\n').map(line => line.trim()).filter(Boolean).slice(-count);
+}
+
+function summarizeRunError(error){
+  if(!error) return null;
+  const stderrTail = tailLines(error.stderr);
+  const stdoutTail = tailLines(error.stdout);
+  const candidates = [...stderrTail].reverse();
+  const message = candidates.find(line => /error|failed|chromium|browser|executable|permission|sandbox/i.test(line))
+    || stderrTail[stderrTail.length - 1]
+    || stdoutTail[stdoutTail.length - 1]
+    || `status ${error.status}`;
+  return {
+    status: error.status,
+    signal: error.signal || null,
+    message,
+    stderrTail,
+    stdoutTail
+  };
+}
+
+function collectRunErrors(entries){
+  return entries
+    .map(entry => Object.assign({}, entry, { error: summarizeRunError(entry.error) }))
+    .filter(entry => entry.error);
+}
+
 function buildReadme(report){
   const lines = [
     '# Challenge Stage Timing Correspondence',
@@ -223,6 +251,14 @@ function buildReadme(report){
   ];
   if(report.runs.baseline.challengeEntryError){
     lines.push(`- Baseline challenge-entry probe error: \`${report.runs.baseline.challengeEntryError}\``);
+    lines.push('');
+  }
+  if(report.runErrors.length){
+    lines.push('## Run Errors');
+    lines.push('');
+    for(const entry of report.runErrors){
+      lines.push(`- ${entry.candidate} ${entry.scenario}: \`${entry.error.message}\``);
+    }
     lines.push('');
   }
   for(const metric of report.metrics){
@@ -278,6 +314,12 @@ function main(){
   };
   const historicalBaseline = loadHistoricalBaseline(profile);
   const metrics = profile.metrics.map(metric => compareMetric(metric, historicalBaseline, baselineMetrics, currentMetrics));
+  const runErrors = collectRunErrors([
+    { candidate: 'baseline', scenario: 'challengeEntry', error: baselineEntry.error },
+    { candidate: 'baseline', scenario: 'challengePerfect', error: baselinePerfect.error },
+    { candidate: 'current', scenario: 'challengeEntry', error: currentEntry.error },
+    { candidate: 'current', scenario: 'challengePerfect', error: currentPerfect.error }
+  ]);
   const summary = {
     passed: metrics.filter(metric => metric.withinTolerance).length,
     total: metrics.length,
@@ -295,16 +337,17 @@ function main(){
       baseline: {
         challengeEntry: baselineEntry.sessionPath ? path.relative(ROOT, baselineEntry.sessionPath) : null,
         challengePerfect: baselinePerfect.sessionPath ? path.relative(ROOT, baselinePerfect.sessionPath) : null,
-        challengeEntryError: baselineEntry.error ? String((baselineEntry.error.stderr || '').trim().split('\n').slice(-1)[0] || `status ${baselineEntry.error.status}`) : null,
-        challengePerfectError: baselinePerfect.error ? String((baselinePerfect.error.stderr || '').trim().split('\n').slice(-1)[0] || `status ${baselinePerfect.error.status}`) : null
+        challengeEntryError: summarizeRunError(baselineEntry.error)?.message || null,
+        challengePerfectError: summarizeRunError(baselinePerfect.error)?.message || null
       },
       current: {
         challengeEntry: currentEntry.sessionPath ? path.relative(ROOT, currentEntry.sessionPath) : null,
         challengePerfect: currentPerfect.sessionPath ? path.relative(ROOT, currentPerfect.sessionPath) : null,
-        challengeEntryError: currentEntry.error ? String((currentEntry.error.stderr || '').trim().split('\n').slice(-1)[0] || `status ${currentEntry.error.status}`) : null,
-        challengePerfectError: currentPerfect.error ? String((currentPerfect.error.stderr || '').trim().split('\n').slice(-1)[0] || `status ${currentPerfect.error.status}`) : null
+        challengeEntryError: summarizeRunError(currentEntry.error)?.message || null,
+        challengePerfectError: summarizeRunError(currentPerfect.error)?.message || null
       }
     },
+    runErrors,
     baselineMetrics,
     currentMetrics,
     metrics,
@@ -315,13 +358,22 @@ function main(){
   const readmeFile = path.join(outDir, 'README.md');
   writeJson(reportFile, report);
   fs.writeFileSync(readmeFile, buildReadme(report));
+  const ok = summary.passed === summary.total && runErrors.length === 0;
   console.log(JSON.stringify({
-    ok: summary.passed === summary.total,
+    ok,
     outDir,
     report: reportFile,
     readme: readmeFile,
     summary
   }, null, 2));
+  if(!ok){
+    fail('challenge stage timing correspondence failed', {
+      outDir,
+      report: reportFile,
+      summary,
+      runErrors
+    });
+  }
 }
 
 main();

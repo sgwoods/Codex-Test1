@@ -69,6 +69,37 @@ Aurora more convincing moment-to-moment beside Galaga reference play:
 - no regression in shot trust, capture/rescue rules, persona safety, or shell
   stability
 
+## Conformance Gap Evolution Plan
+
+Boundary checkpoint on May 6, 2026:
+
+- official current Aurora score: `9.0/10`
+- official score report:
+  `reference-artifacts/analyses/quality-conformance/2026-05-06-72fe7b0/report.json`
+- detailed metric-gap and automation agenda:
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/conformance-gap-evolution-plan-2026-05-06.json`
+
+Current score gaps to a truly convincing Galaga-family conformance target:
+
+| Metric | Current | Score gap | Primary next assessment move |
+| --- | ---: | ---: | --- |
+| Player movement conformance | `10.0` | `0.0` | Promote frame-derived player x/y traces so movement stays evidence-led before more tuning. |
+| Shot and hit responsiveness | `10.0` | `0.0` | Add video-frame shot/hit/explosion ordering and randomized edge-case fuzzing. |
+| Stage-1 opening timing fidelity | `8.5` | `1.5` | Compare full opening timelines with promoted reference events and dynamic trace distance. |
+| Stage-1 opening geometry fidelity | `10.0` | `0.0` | Keep target geometry as a hard gate and add sprite/pixel contact-sheet scoring. |
+| Dive fairness and safety | `9.1` | `0.9` | Run adversarial seed search and collision-risk heatmaps across later stages. |
+| Capture and rescue rule fidelity | `10.0` | `0.0` | Expand from covered scenarios into event-grammar and state-space checks. |
+| Challenge-stage timing fidelity | `8.4` | `1.6` | Add challenge path, hit-opportunity, non-lethal, and result-surface measurements. |
+| Progression and persona depth | `8.8` | `1.2` | Use long-run distributional persona batches and stage-band variety reports. |
+| Audio identity and cue alignment | `6.1` | `3.9` | Build cue-level waveform/spectral comparison and parameter-sweep optimization. |
+| UI, shell, and graphics integrity | `9.2` | `0.8` | Split gameplay visual conformance from shell integrity before Track 3. |
+
+The highest-value automation theme is to make Codex improve the assessment
+system first: classify reference windows, generate sharper metrics, inspect
+outliers, and create targeted harnesses. Runtime/gameplay changes should then
+come from measured gaps, parameter sweeps, and preserved regression scenarios
+instead of direct subjective requests for gameplay edits.
+
 ## Evidence Rule
 
 Every gameplay or graphics change in this cycle should preserve this chain:
@@ -138,6 +169,25 @@ Track 1 May 6 status:
 - no gameplay movement tuning applied
 - next implementation effort should move to Track 2 unless manual browser
   review finds a feel issue that the current metric family does not see
+
+Track 2 May 6 checkpoint:
+
+- artifact:
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/challenge-stage-safety-2026-05-06.json`
+- challenge-stage contact is now explicitly non-lethal and logged as
+  `challenge_enemy_contact`
+- `npm run harness:check:challenge-collision` passes with
+  `contactsDuringChallenge=1` and `shipLossesDuringChallenge=0`
+- `npm run harness:check:challenge-outcomes` passes with current average
+  challenge losses at `0` and current average hit rate at `0.942`
+- `npm run harness:check:challenge-stage-correspondence` passes `5/5`
+  timing metrics with worst current delta `0.483`
+- `npm run harness:check:stage-pressure` remains not green; Stage `4`
+  regular pressure is a separate measured blocker and should get a dedicated
+  collision-risk/scoreable-dive analysis pass before more tuning
+- a lower-field Stage `4` graze experiment was tried and backed out because it
+  did not make the pressure gate green and risked muddying regular-stage
+  collision semantics
 
 ### Track 2: Gameplay Complexity
 

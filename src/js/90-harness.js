@@ -935,6 +935,7 @@ window.__galagaHarness__={
   const enemy=candidates.sort((a,b)=>Math.abs(a.x-PLAY_W/2)-Math.abs(b.x-PLAY_W/2))[0];
   if(!enemy)return false;
   for(const e of S.e)if(e.id!==enemy.id)e.hp=0;
+  enemy.spawn=0;
   enemy.tm=+cfg.enemyTm||11.2;
   updateChallengeEnemy(enemy,0.016);
   p.x=cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:enemy.x,18,PLAY_W-18);
@@ -963,7 +964,8 @@ window.__galagaHarness__={
    enemyId:enemy.id,
    enemyX:+enemy.x.toFixed(2),
    enemyY:+enemy.y.toFixed(2),
-   enemyTm:+enemy.tm.toFixed(3)
+   enemyTm:+enemy.tm.toFixed(3),
+   enemySpawn:+(enemy.spawn||0).toFixed(3)
   });
   return true;
  },

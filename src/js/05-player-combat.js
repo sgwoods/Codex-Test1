@@ -100,7 +100,33 @@ function updateEnemyBullets(dt,p){
 }
 
 function updateEnemyBodyCollisions(p){
- for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured||p.returning)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form,challenge:!!S.challenge});}}
+ for(const e of S.e){
+  if(e.hp<=0||p.spawn>0||p.captured||p.returning)continue;
+  const he=enemyCollisionHitbox(e),hp=playerHitbox();
+  if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){
+   if(S.challenge){
+    if(!e.challengeContactLogged){
+     e.challengeContactLogged=1;
+     logEvent('challenge_enemy_contact',Object.assign({
+      stage:S.stage,
+      challenge:1,
+      nonLethal:1,
+      playerX:+p.x.toFixed(2),
+      playerY:+p.y.toFixed(2),
+      playerLane:playLane(p.x),
+      enemyX:+e.x.toFixed(2),
+      enemyY:+e.y.toFixed(2),
+      enemyLane:playLane(e.x),
+      enemyForm:!!e.form
+     },enemyRef(e)));
+    }
+    continue;
+   }
+   e.hp=0;
+   ex(e.x,e.y,12,'#fff');
+   loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form,challenge:!!S.challenge});
+  }
+ }
 }
 
 function updateReleasedCapture(dt,p){

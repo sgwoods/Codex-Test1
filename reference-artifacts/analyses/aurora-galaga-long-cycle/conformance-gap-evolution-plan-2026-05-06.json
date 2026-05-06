@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "artifact_type": "aurora-conformance-gap-evolution-plan",
+  "recorded_on": "2026-05-06",
+  "basis": {
+    "official_quality_report": "reference-artifacts/analyses/quality-conformance/2026-05-06-72fe7b0/report.json",
+    "official_overall_score10": 9.0,
+    "track1_progress_artifact": "reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json",
+    "status_note": "Track 2 challenge-stage work is in progress and is not part of the official score until its gates are repaired and rerun."
+  },
+  "meaning_of_gap": {
+    "score_gap10": "10 minus the current quality score for the metric.",
+    "conformance_gap_note": "Aurora is an Aurora-owned Galaga-family game, not an emulator. A true-conformance gap means the amount of better measurement, reference comparison, runtime behavior, and browser review still needed before the metric can credibly claim Galaga-like quality."
+  },
+  "track2_working_findings_not_yet_official": [
+    {
+      "finding": "Challenge-stage enemy body contact spent a ship in a measured advanced-persona seed.",
+      "evidence": "harness:check:challenge-outcomes, advanced persona seed 3201, ship_lost cause enemy_collision at t=11.917 on stage 3 challenge",
+      "implication": "Challenge stages must be enforced as non-lethal bonus rounds before adding richer challenge-stage choreography."
+    },
+    {
+      "finding": "Stage 4 pressure gate still found an enemy-collision loss in one repeat.",
+      "evidence": "harness:check:stage-pressure, stage4-five-ships seed 4201, ship_lost cause enemy_collision at t=15.25",
+      "implication": "Later-stage pressure should be assessed with collision-risk heatmaps and adversarial seed search, not only average loss counts."
+    },
+    {
+      "finding": "Challenge-stage correspondence could write ok:false artifacts without failing the npm command when browser runs failed.",
+      "evidence": "reference-artifacts/analyses/correspondence/challenge-stage-timing/2026-05-06-3216ba8/report.json",
+      "implication": "Evidence quality gates need hard failures and useful stderr/status summaries before long-cycle automation scales up."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "movement",
+      "label": "Player movement conformance",
+      "score10": 10.0,
+      "score_gap10": 0.0,
+      "current_read": "Measured movement is at target after Track 1 repaired the recenter/input-reset measurement artifact.",
+      "remaining_conformance_gap": "Low behavioral gap, moderate epistemic gap. The metric is still based on control-principles traces rather than full reference-video player x/y extraction.",
+      "automatic_assessment_course": [
+        "Extract player x/y traces from promoted Galaga movement windows using frame differencing and model-assisted object labeling.",
+        "Compare tap, hold, reversal, and movement-while-firing curves against reference distributions rather than single target bands.",
+        "Run property-based input sweeps and reject changes that improve one sample while making jerk, overshoot, or shot travel worse."
+      ],
+      "automatic_evolution_course": [
+        "Only tune movement constants from an optimizer when reference-derived trace gaps reappear.",
+        "Use Codex to review outlier traces and update the metric family before changing runtime movement."
+      ],
+      "effort_value_read": "High value already captured by harness repair; future value comes from better reference extraction, not more manual movement tuning."
+    },
+    {
+      "id": "combat-responsiveness",
+      "label": "Shot and hit responsiveness",
+      "score10": 10.0,
+      "score_gap10": 0.0,
+      "current_read": "Close-shot and movement-fire timing are trusted, with 6 ms shot delay and strong post-shot travel.",
+      "remaining_conformance_gap": "Low immediate gap, but current evidence is more about trust than reference-perfect bullet cadence and hit-flash timing.",
+      "automatic_assessment_course": [
+        "Measure shot spawn latency, bullet travel, enemy-hit latency, explosion onset, and scoring text onset from captured videos.",
+        "Add visual-frame assertions for shot/hit/explosion ordering across close, mid, and edge cases.",
+        "Create randomized shot-window fuzzing for moving enemies and carried-fighter rescue targets."
+      ],
+      "automatic_evolution_course": [
+        "Auto-search bullet speed, hitbox, and flash-duration parameters only against preserved timing windows and no-regression rescue tests.",
+        "Promote recurring failure cases into deterministic scenarios instead of hand-tuning from one replay."
+      ],
+      "effort_value_read": "Maintain as a guardrail; new compute should mostly expand edge coverage."
+    },
+    {
+      "id": "stage1-timing",
+      "label": "Stage-1 opening timing fidelity",
+      "score10": 8.5,
+      "score_gap10": 1.5,
+      "current_read": "4/4 opening metrics pass, with worst current delta 0.18, but this is still a narrow first-dive timing family.",
+      "remaining_conformance_gap": "Medium. Stage opening passes core timing but does not yet compare rich rack entrance, formation-settle, first-shot pressure, and sound/visual synchronization as one coupled sequence.",
+      "automatic_assessment_course": [
+        "Promote Galaga opening video into event families for rack entrance, settle, first attack, first lower-field crossing, first shot, and first kill.",
+        "Generate runtime timeline overlays and score dynamic time warping distance between reference and Aurora opening traces.",
+        "Use contact sheets to add visual checks for formation density and movement phase at key timestamps."
+      ],
+      "automatic_evolution_course": [
+        "Run bounded parameter sweeps for sequence timers, first attack cooldowns, and first lower-field speed, constrained by persona safety and shot trust.",
+        "Have Codex analyze failed timeline overlays and propose new metric dimensions before editing gameplay constants."
+      ],
+      "effort_value_read": "Good candidate for compute-heavy improvement because the target sequence is short and repeatable."
+    },
+    {
+      "id": "stage1-geometry",
+      "label": "Stage-1 opening geometry fidelity",
+      "score10": 10.0,
+      "score_gap10": 0.0,
+      "current_read": "Rack target geometry is stable with no changed targets and max drift 0.",
+      "remaining_conformance_gap": "Low layout gap, but visual sprite alignment is not yet separated from geometric target alignment.",
+      "automatic_assessment_course": [
+        "Keep target-position drift as a hard gate.",
+        "Add sprite-crop similarity, silhouette readability, and rack-density comparison from screenshot/contact-sheet analysis.",
+        "Track HUD and reserve-ship placement during stage start so geometry coverage extends beyond enemy centers."
+      ],
+      "automatic_evolution_course": [
+        "Let future graphics work change sprites/effects while geometry gates protect gameplay spacing.",
+        "Use pixel-level diff and crop similarity to steer art changes rather than asking for subjective sprite edits first."
+      ],
+      "effort_value_read": "Protect the win; use it as the stable frame for Track 3 graphics measurement."
+    },
+    {
+      "id": "dive-safety",
+      "label": "Dive fairness and safety",
+      "score10": 9.1,
+      "score_gap10": 0.9,
+      "current_read": "Stage-2 safety seeds pass, but Track 2 pressure evidence still shows collision deaths in later-stage/challenge contexts.",
+      "remaining_conformance_gap": "Medium-low in early play, medium in later pressure. We need more distributional proof that deaths are learnable and avoidable.",
+      "automatic_assessment_course": [
+        "Run larger deterministic seed grids for stages 2, 4, 5, 6, 8, and 12 with novice, advanced, and expert personas.",
+        "Build collision-risk heatmaps over player lane, attacker lane, enemy y, and recent bullet pressure.",
+        "Add adversarial seed search to find unfair collision clusters before human playtest sees them."
+      ],
+      "automatic_evolution_course": [
+        "Tune dive path, steering, attack-gap, and recovery windows through optimization against risk heatmaps.",
+        "Promote each discovered unfair collision into a fixed scenario with replay artifact and pass/fail threshold."
+      ],
+      "effort_value_read": "High value. This is where more compute can directly convert into fairer, more Galaga-like pressure."
+    },
+    {
+      "id": "capture-rescue",
+      "label": "Capture and rescue rule fidelity",
+      "score10": 10.0,
+      "score_gap10": 0.0,
+      "current_read": "3/3 capture scenarios match with worst tracked-time drift 0.004.",
+      "remaining_conformance_gap": "Low for covered branches, moderate for full state-space confidence because rescue, hostile fighter, and late-stage branches are complex.",
+      "automatic_assessment_course": [
+        "Represent capture/rescue as an event grammar and validate all allowed state transitions over randomized seeds.",
+        "Extract reference timing for beam onset, capture, retreat, rescue join, dual-fighter shot, and hostile branch windows.",
+        "Add model-checking style tests for impossible states: duplicate captures, missing rescue join, lost carried fighter ownership, and score inconsistencies."
+      ],
+      "automatic_evolution_course": [
+        "Use event-grammar violations to drive targeted runtime fixes, not broad capture rewrites.",
+        "Keep capture/rescue as a high-confidence guardrail while later-stage pressure and graphics evolve."
+      ],
+      "effort_value_read": "Mostly guardrail value now; expand only where new gameplay work touches the state machine."
+    },
+    {
+      "id": "challenge-timing",
+      "label": "Challenge-stage timing fidelity",
+      "score10": 8.4,
+      "score_gap10": 1.6,
+      "current_read": "Timing metrics pass, but Track 2 found challenge-stage body contact could still spend a ship and the correspondence harness needed hard-failure repair.",
+      "remaining_conformance_gap": "Medium-high. Challenge timing is acceptable, but challenge-stage identity, scoreability, non-lethality, path variety, and results presentation need richer measurement.",
+      "automatic_assessment_course": [
+        "Promote challenge reference clips into object tracks for group paths, upper-field scoreable windows, mirrored readability, and clear timing.",
+        "Add rule gates for zero bullets, zero attack starts, zero ship losses, visible reserve ships, moving starfield, and readable result text.",
+        "Measure hit-rate opportunity windows by persona and by challenge movement family."
+      ],
+      "automatic_evolution_course": [
+        "Use path-family parameter sweeps to maximize scoreable upper-field time and pattern readability while keeping non-lethal rules absolute.",
+        "Let Codex analyze failing path/contact sheets and add new metrics before proposing new choreography."
+      ],
+      "effort_value_read": "Very high value for Track 2 because it improves both gameplay depth and the assessment platform."
+    },
+    {
+      "id": "progression",
+      "label": "Progression and persona depth",
+      "score10": 8.8,
+      "score_gap10": 1.2,
+      "current_read": "20/20 persona checks pass, with one known ordering edge still missing.",
+      "remaining_conformance_gap": "Medium. The game has credible progression, but not yet a full Galaga-like difficulty curve with score distribution, stage variety, and long-run pressure shape.",
+      "automatic_assessment_course": [
+        "Run long-run batches over fixed seed families and compare score, stage reached, lives, deaths, bullets, attacks, captures, and challenge hit rates by persona.",
+        "Add ordering assertions for novice, advanced, and expert distributions, not only individual pass/fail runs.",
+        "Build stage-band variety reports that show which enemy families, dive shapes, and scoring opportunities appear over time."
+      ],
+      "automatic_evolution_course": [
+        "Tune stage-band pressure, challenge families, and scoring bonuses with multi-objective search constrained by fairness and reference event cadence.",
+        "Use compute to find plateau stages where variety or pressure stops changing, then add focused scenarios."
+      ],
+      "effort_value_read": "High value after challenge non-lethality is stable; this is the path from good demo to real arcade depth."
+    },
+    {
+      "id": "audio",
+      "label": "Audio identity and cue alignment",
+      "score10": 6.1,
+      "score_gap10": 3.9,
+      "current_read": "This is the weakest Aurora metric. Cue timing correspondence passes, but acoustic identity and overlap still lag.",
+      "remaining_conformance_gap": "High. Audio needs better isolated cue matching, spectral comparison, envelope matching, and runtime mix assessment.",
+      "automatic_assessment_course": [
+        "Build cue-level waveform, spectrogram, zero-crossing, spectral-centroid, transient, and envelope comparisons against promoted Galaga reference clips.",
+        "Separate timing score from acoustic identity score so cue alignment does not hide weak sound character.",
+        "Run isolated runtime cue synthesis captures and live-mix window captures for shot, hit, explosion, stage pulse, challenge, death, capture, and rescue."
+      ],
+      "automatic_evolution_course": [
+        "Auto-sweep synth envelope, oscillator, noise, filter, gain, and duration parameters against cue-family targets.",
+        "Use Codex to inspect spectral outliers and propose new feature metrics when numeric fit contradicts listening notes."
+      ],
+      "effort_value_read": "Highest score upside, but needs stronger ingestion first. Do not hand-tune by ear alone."
+    },
+    {
+      "id": "ui-shell",
+      "label": "UI, shell, and graphics integrity",
+      "score10": 9.2,
+      "score_gap10": 0.8,
+      "current_read": "Shell and surface suite passes, but gameplay sprite/visual conformance is not yet its own Aurora score.",
+      "remaining_conformance_gap": "Medium for gameplay visuals. Shell is strong; in-game sprite, explosion, score text, lives drawer, and attract/score surfaces need separate Galaga-family measurement.",
+      "automatic_assessment_course": [
+        "Split shell integrity from gameplay visual conformance in the scorecard.",
+        "Generate contact sheets for stage 1, challenge, mid-run, late-run, explosion, capture, result, attract, score, and HUD windows.",
+        "Use image segmentation, crop similarity, OCR/text-box checks, palette clustering, and sprite-scale measurements to score visual alignment."
+      ],
+      "automatic_evolution_course": [
+        "Use generated visual metrics to guide Track 3 sprite/effect/HUD changes while hard-gating rack geometry and shell stability.",
+        "Ask Codex to compare contact sheets and propose metric gaps first, then implement art/runtime changes only after the metric says what is missing."
+      ],
+      "effort_value_read": "High value as Track 3 foundation, especially if the scorecard gets a dedicated gameplay-visual category."
+    }
+  ],
+  "recommended_compute_sequence": [
+    "Finish Track 2 safety and harness repairs: non-lethal challenge contact, hard-failing challenge correspondence, and rerun challenge outcome/stage pressure gates.",
+    "Promote challenge-stage reference clips into path, hit-opportunity, and result-surface measurements.",
+    "Run adversarial later-stage pressure batches and build collision-risk heatmaps.",
+    "Split gameplay visual conformance from shell integrity before Track 3 begins.",
+    "Build audio cue-level comparison and optimization loops because audio remains the largest numeric gap.",
+    "Use Codex primarily to improve metric definitions, classify outliers, and generate targeted harnesses, then let compute drive candidate parameter searches."
+  ],
+  "next_step": "Complete Track 2 validation before starting Track 3; use this artifact as the boundary score-and-gap map for the next long-cycle review checkpoint."
+}

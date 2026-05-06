@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "artifact_type": "aurora-galaga-long-cycle-track-progress",
+  "track": "gameplay-complexity",
+  "branch": "codex/macbook-pro-aurora-challenge-stage-depth",
+  "recorded_on": "2026-05-06",
+  "status": "challenge-stage-nonlethal-rule-repaired-stage4-pressure-open",
+  "purpose": "Record the Track 2 challenge-stage safety result, harness-quality repair, and the effort/value lesson from the regular Stage 4 pressure probe.",
+  "basis": {
+    "parent_track": "codex/macbook-pro-aurora-movement-shot-feel",
+    "official_quality_report_before_track2": "reference-artifacts/analyses/quality-conformance/2026-05-06-72fe7b0/report.json",
+    "gap_plan": "reference-artifacts/analyses/aurora-galaga-long-cycle/conformance-gap-evolution-plan-2026-05-06.json"
+  },
+  "measured_problem": {
+    "challenge_stage": {
+      "finding": "Challenge-stage body contact could spend a ship, contradicting the preserved challenge-stage reference rule that bonus stages are non-attacking/non-lethal scoring rounds.",
+      "evidence": "harness:check:challenge-outcomes, advanced persona seed 3201, ship_lost cause enemy_collision at t=11.917 on stage 3 challenge before the fix",
+      "impact": "The first challenge stage was not safely separable from combat-stage pressure, which blocked deeper challenge-stage choreography."
+    },
+    "harness_quality": {
+      "finding": "Challenge-stage correspondence could write an ok:false report without failing the npm command when browser-backed runs failed.",
+      "evidence": "reference-artifacts/analyses/correspondence/challenge-stage-timing/2026-05-06-3216ba8 initially contained null metrics and run errors from the macOS sandboxed browser path",
+      "impact": "Long-cycle evidence could look complete while actually containing unsupported measurements."
+    },
+    "regular_stage_pressure": {
+      "finding": "Stage 4 regular pressure remains a separate blocker and should not be treated as solved by the challenge-stage fix.",
+      "evidence": "harness:check:stage-pressure still failed on stage4-five-ships and stage4-survival with regular-stage enemy_collision and occasional enemy_bullet losses",
+      "impact": "Track 2 should add a dedicated pressure-risk analysis/heatmap pass before tuning Stage 4."
+    }
+  },
+  "changes_kept": [
+    {
+      "area": "runtime",
+      "summary": "Challenge-stage enemy body contact now logs challenge_enemy_contact and does not call loseShip while S.challenge is active."
+    },
+    {
+      "area": "harness",
+      "summary": "check-challenge-collision now expects non-lethal contact, zero challenge ship losses, zero challenge bullets, and zero challenge attack starts."
+    },
+    {
+      "area": "harness",
+      "summary": "analyze-run now reports contactsDuringChallenge in challengeRules."
+    },
+    {
+      "area": "harness",
+      "summary": "check-challenge-stage-correspondence now summarizes run errors and exits nonzero when metrics or browser-backed runs fail."
+    },
+    {
+      "area": "documentation",
+      "summary": "A metric-by-metric conformance gap evolution plan now records the automation path before Track 3 graphics work begins."
+    }
+  ],
+  "changes_rejected": [
+    {
+      "area": "regular-stage collision handling",
+      "summary": "A lower-field Stage 4 graze experiment was tried and backed out.",
+      "reason": "It converted one five-ships collision into a graze but did not make stage-pressure pass; survival still showed multiple regular-stage collision/bullet losses. Keeping a questionable regular-stage non-lethal rule without a green pressure gate would be a poor effort/value trade."
+    }
+  ],
+  "verification": {
+    "passed": [
+      {
+        "command": "npm run build",
+        "result": "passed"
+      },
+      {
+        "command": "npm run harness:check:challenge-collision",
+        "result": "passed",
+        "key_read": "contactsDuringChallenge=1; shipLossesDuringChallenge=0; bulletsDuringChallenge=0; attacksDuringChallenge=0"
+      },
+      {
+        "command": "npm run harness:check:challenge-outcomes",
+        "result": "passed",
+        "key_read": "currentAverageChallengeLosses=0; currentAverageHitRate=0.942"
+      },
+      {
+        "command": "npm run harness:check:challenge-stage-correspondence",
+        "result": "passed",
+        "key_read": "5/5 metrics passed; worstCurrentDelta=0.483; worstDriftFromBaseline=0"
+      }
+    ],
+    "not_green": [
+      {
+        "command": "npm run harness:check:stage-pressure",
+        "result": "failed",
+        "key_read": "Stage 4 regular pressure still fails independently of challenge-stage non-lethality."
+      }
+    ]
+  },
+  "effort_value_read": {
+    "challenge_fix": {
+      "effort": "medium",
+      "value": "high",
+      "reason": "A focused runtime/harness repair removed challenge-stage ship losses across novice, advanced, and expert personas while preserving timing correspondence."
+    },
+    "stage4_graze_experiment": {
+      "effort": "low-to-medium",
+      "value": "low",
+      "reason": "The experiment produced one local graze but did not clear the broader pressure gate and risked muddying regular-stage Galaga collision semantics."
+    },
+    "next_best_compute": {
+      "effort": "medium-to-high",
+      "value": "high",
+      "reason": "Stage 4 needs collision-risk heatmaps, adversarial seed search, and scoreable-dive opportunity analysis before further gameplay tuning."
+    }
+  },
+  "next_step": "Build a Stage 4 pressure-risk analysis pass that mines recent stage-pressure artifacts into collision lanes, source roles, recent pressure, hit-before-collision, and video-quality status before applying any more regular-stage gameplay tuning."
+}

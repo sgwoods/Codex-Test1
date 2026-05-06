@@ -35,10 +35,12 @@ const rules = analysis.challengeRules || {};
 const losses = rules.shipLossesDuringChallenge || 0;
 const bullets = rules.bulletsDuringChallenge || 0;
 const attacks = rules.attacksDuringChallenge || 0;
+const contacts = rules.contactsDuringChallenge || 0;
 const lossCause = (analysis.lossCauseCounts || {}).enemy_collision || 0;
 
-if(losses < 1) fail('expected a lethal challenge-stage collision, but no challenge ship loss was recorded', result);
-if(lossCause < 1) fail('expected the challenge-stage loss to be caused by enemy_collision', result);
+if(losses !== 0) fail('challenge-stage collision regressed: bonus-stage contact spent a ship', result);
+if(lossCause !== 0) fail('challenge-stage collision regressed: enemy_collision was recorded as a ship-loss cause', result);
+if(contacts < 1) fail('expected at least one non-lethal challenge-stage enemy contact to be recorded', result);
 if(bullets !== 0) fail('challenge-stage automation regressed: enemy bullets were fired during challenge', result);
 if(attacks !== 0) fail('challenge-stage automation regressed: enemy attack starts were logged during challenge', result);
 
@@ -47,5 +49,6 @@ console.log(JSON.stringify({
   scenario: result.name,
   files: result.files,
   challengeRules: rules,
+  contactsDuringChallenge: contacts,
   lossCauseCounts: analysis.lossCauseCounts || {}
 }, null, 2));
