@@ -115,13 +115,17 @@ Current conformance read:
 - see [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
-- overall Aurora quality is `8.8/10`
+- overall Aurora quality is `9.0/10`
 - audio identity and cue alignment is the weakest category at `6.1/10`
-- player movement conformance is the next visible feel gap at `8.0/10`
+- player movement conformance now reads `10/10`; the prior `8.0/10` gap was
+  traced to harness recenter input suppression, not to gameplay movement
+  constants
 - the next major Aurora quality cycle is tracked in
   [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md),
   with a baseline artifact at
   `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
+  and the Track 1 movement finding at
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json`
 - Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
   yet part of the Aurora numeric roll-up
 - Guardians evidence-weighted reference conformance is now `7.7/10`, while the
@@ -142,11 +146,13 @@ Current conformance read:
 
 Target:
 
-- make player-ship motion feel smoother, calmer, and closer to real Galaga
+- keep player-ship motion inside the measured Galaga-derived control bands and
+  use manual/browser review to identify any remaining feel gaps
 
 Why:
 
-- movement remains one of the clearest remaining feel gaps
+- the numeric movement gap was a harness measurement issue, so further movement
+  work should be reference-trace backed rather than constant-tuning by instinct
 - it directly affects player trust and cabinet authenticity
 
 ### 2. Audio and atmosphere

@@ -19,7 +19,7 @@ Baseline generated on May 5, 2026 from commit `478329a`:
 - evidence dashboard:
   `reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json`
 
-Current quality read:
+Setup baseline quality read:
 
 | Area | Score / read |
 | --- | ---: |
@@ -34,6 +34,30 @@ Current quality read:
 | Progression and persona depth | `8.8/10` |
 | Audio identity and cue alignment | `6.1/10` |
 | UI, shell, and graphics integrity | `9.2/10` |
+
+## Track 1 Update
+
+Measured on May 6, 2026 from branch
+`codex/macbook-pro-aurora-movement-shot-feel`:
+
+- artifact:
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json`
+- player movement report:
+  `reference-artifacts/analyses/correspondence/player-movement/2026-05-06-72fe7b0/report.json`
+- quality report:
+  `reference-artifacts/analyses/quality-conformance/2026-05-06-72fe7b0/report.json`
+
+The Track 1 movement gap was primarily a measurement problem. The movement
+conformance harness reset input with a movement-specific recenter reason, which
+caused the runtime input-reset guard to suppress tap and early hold samples.
+After preserving recenter resets as no-hold harness actions, movement now
+scores `10/10`, close-shot trust remains `10/10`, persona stage-2 safety still
+passes, and overall Aurora quality reads `9.0/10`.
+
+No player movement constants were changed in this Track 1 pass. That is the
+right value/effort trade: preserve the measurement repair, avoid blind control
+tuning, and spend the next gameplay implementation effort on challenge-stage
+depth and later-stage pressure.
 
 The next product target is not just a higher average. The cycle should make
 Aurora more convincing moment-to-moment beside Galaga reference play:
@@ -107,6 +131,13 @@ Exit standard:
 - movement score rises above `8.0/10`
 - close-shot responsiveness stays at `10/10`
 - no added stage-2 persona safety failures
+
+Track 1 May 6 status:
+
+- satisfied by harness/platform measurement repair
+- no gameplay movement tuning applied
+- next implementation effort should move to Track 2 unless manual browser
+  review finds a feel issue that the current metric family does not see
 
 ### Track 2: Gameplay Complexity
 

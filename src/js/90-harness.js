@@ -357,6 +357,7 @@ window.__galagaHarness__={
    rightCodes:typeof movementRightCodes==='function'?[...movementRightCodes()]:[],
    playerX:+(+S.p.x||0).toFixed(2),
    playerVx:+(+S.p.vx||0).toFixed(2),
+   inputResetHoldT:+(+S.p.inputResetHoldT||0).toFixed(3),
    spawn:+(+S.p.spawn||0).toFixed(3),
    started:!!started,
    keys:Object.keys(keys||{}).filter(code=>!!keys[code]),

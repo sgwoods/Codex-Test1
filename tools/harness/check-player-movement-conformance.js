@@ -107,6 +107,26 @@ function metricBandScore(value, target){
   return 1;
 }
 
+function metricRead(value, target){
+  const score = metricBandScore(value, target);
+  const read = {
+    value,
+    target,
+    score: round(score, 3),
+    withinTolerance: score >= 1
+  };
+  if(value == null){
+    read.gap = 'missing';
+  }else if(target.min != null && value < target.min){
+    read.gapToMin = round(target.min - value, 3);
+  }else if(target.max != null && value > target.max){
+    read.gapPastMax = round(value - target.max, 3);
+  }else{
+    read.gap = 0;
+  }
+  return read;
+}
+
 function summariseRoot(result, targets){
   const tapScore = metricBandScore(result.tapLeft.absDelta, targets.tapAbsDelta);
   const holdScore = metricBandScore(result.holdRight.delta, targets.holdDelta);
@@ -126,6 +146,15 @@ function summariseRoot(result, targets){
       postShotTravelScore: round(postShotTravelScore, 3),
       frameStepScore: round(frameStepScore, 3)
     },
+    metricReads: {
+      tapAbsDelta: metricRead(result.tapLeft.absDelta, targets.tapAbsDelta),
+      holdDelta: metricRead(result.holdRight.delta, targets.holdDelta),
+      settleMsAfterRelease: metricRead(result.holdRight.settleMsAfterRelease, { max: targets.settleMsAfterRelease.max }),
+      reversalCrossMs: metricRead(result.reversal.reversalCrossMs, { max: targets.reversalCrossMs.max }),
+      shotDelayMsWhileMoving: metricRead(result.moveFire.shotDelayMs, { max: targets.shotDelayMsWhileMoving.max }),
+      postShotTravel: metricRead(result.moveFire.postShotTravel, { min: targets.postShotTravel.min }),
+      maxFrameStep: metricRead(result.global.maxFrameStep, { max: targets.maxFrameStep.max })
+    },
     score10: round(clamp(raw * 10, 1, 10), 1)
   };
 }
@@ -134,15 +163,20 @@ async function runSequence(page, cfg){
   const intervalMs = cfg.intervalMs;
 
   async function recenter(tag){
-    await page.evaluate(reason => {
-      if(window.__galagaHarness__?.resetInputState) window.__galagaHarness__.resetInputState(reason);
+    await page.evaluate(() => {
+      if(window.__galagaHarness__?.resetInputState) window.__galagaHarness__.resetInputState('input-mapping-recenter');
       if(window.S?.p){
         window.S.p.x = window.PLAY_W / 2;
         window.S.p.vx = 0;
         window.S.p.cd = 0;
+        window.S.p.inputResetHoldT = 0;
       }
-    }, `movement-${tag}-recenter`);
+    });
     await wait(page, 80);
+    await page.waitForFunction(() => {
+      const state = window.__galagaHarness__?.inputState?.();
+      return !state || (state.inputResetHoldT || 0) <= 0;
+    }, null, { timeout: 1000 });
     await page.locator('#c').focus();
   }
 
@@ -270,6 +304,9 @@ async function captureRoot(root, profile){
 }
 
 function buildReadme(report){
+  const misses = Object.entries(report.current.metricReads || {})
+    .filter(([, read]) => read && !read.withinTolerance)
+    .map(([id, read]) => `- ${id}: value ${String(read.value)}, target ${JSON.stringify(read.target)}, gap ${String(read.gapToMin ?? read.gapPastMax ?? read.gap)}`);
   const lines = [
     '# Player Movement Conformance',
     '',
@@ -302,6 +339,10 @@ function buildReadme(report){
     `- Shot delay while moving (ms): ${String(report.current.moveFire.shotDelayMs)}`,
     `- Post-shot travel: ${String(report.current.moveFire.postShotTravel)}`,
     `- Max frame step: ${String(report.current.global.maxFrameStep)}`,
+    '',
+    '## Current metric gaps',
+    '',
+    ...(misses.length ? misses : ['- none']),
     '',
     '## Read',
     '',

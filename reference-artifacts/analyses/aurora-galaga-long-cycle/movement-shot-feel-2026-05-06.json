@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "artifact_type": "aurora-galaga-long-cycle-track-progress",
+  "track": "gameplay-quality",
+  "branch": "codex/macbook-pro-aurora-movement-shot-feel",
+  "recorded_on": "2026-05-06",
+  "status": "movement-measurement-repaired-no-gameplay-tuning",
+  "base_setup_commit": "72fe7b0",
+  "purpose": "Record the Track 1 movement/shot-feel result and the effort/value lesson for the Aurora Galaga long-cycle conformance plan.",
+  "before": {
+    "setup_overall_score10": 8.8,
+    "setup_movement_score10": 8.0,
+    "setup_quality_report": "reference-artifacts/analyses/quality-conformance/2026-05-05-478329a/report.json"
+  },
+  "after": {
+    "overall_score10": 9.0,
+    "movement_score10": 10.0,
+    "shot_hit_responsiveness_score10": 10.0,
+    "dive_safety_score10": 9.1,
+    "weakest_category": "audio",
+    "movement_report": "reference-artifacts/analyses/correspondence/player-movement/2026-05-06-72fe7b0/report.json",
+    "quality_report": "reference-artifacts/analyses/quality-conformance/2026-05-06-72fe7b0/report.json"
+  },
+  "learning": [
+    "The prior 8.0 movement score was dominated by harness recenter behavior, not actual ship-control constants.",
+    "The movement harness reset input with movement-specific recenter reasons, which triggered the runtime input-reset hold and suppressed tap/early-hold samples.",
+    "Using no-hold recenter semantics restored measured tap correction and hold travel to their target bands.",
+    "Movement constants should not be changed until manual browser review or richer reference traces show a real feel gap outside the current metric family."
+  ],
+  "platform_and_harness_changes": [
+    "Runtime input reset now treats recenter-style reasons as no-hold resets.",
+    "Harness inputState now exposes inputResetHoldT for future diagnosis.",
+    "The player movement conformance report now includes per-metric target reads and current gap summaries.",
+    "The movement conformance recenter path now clears inputResetHoldT before measurement windows begin."
+  ],
+  "gameplay_changes": [],
+  "effort_value_read": {
+    "effort": "low-to-medium",
+    "value": "high",
+    "reason": "A small platform/harness repair corrected the movement score from 8.0 to 10.0 and raised the overall quality score to 9.0 without introducing gameplay-risky tuning."
+  },
+  "verification_commands": [
+    "npm run build",
+    "npm run harness:check:player-movement-conformance",
+    "npm run harness:check:close-shot-hit",
+    "npm run harness:check:persona-stage2-safety",
+    "npm run harness:score:quality-conformance",
+    "npm run harness:build:conformance-metrics-overview"
+  ],
+  "next_step": "Move to Track 2: challenge-stage depth and later-stage pressure, while keeping audio identity visible as the weakest scorecard category."
+}

@@ -20,7 +20,8 @@ function resetActiveInputState(reason='manual'){
  keyState={};
  if(S?.p&&Number.isFinite(+S.p.vx)){
   S.p.vx=0;
-  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'){
+  const recenterReason=/-recenter$/.test(String(reason||''));
+  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'&&!recenterReason){
    S.p.inputResetHoldT=Math.max(+S.p.inputResetHoldT||0,.24);
   }
  }

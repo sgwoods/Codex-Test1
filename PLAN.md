@@ -123,11 +123,14 @@ This means:
 
 Current conformance read:
 
-- overall Aurora quality is `8.8/10`
+- overall Aurora quality is `9.0/10`
 - audio identity and cue alignment is the weakest category at `6.1/10`
-- player movement is the next visible feel gap at `8.0/10`
+- player movement now scores `10/10` after repairing the movement conformance
+  harness recenter path; no gameplay movement constants were changed
 - the current long-cycle baseline is captured in
   `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
+- the Track 1 movement/shot-feel finding is captured in
+  `reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json`
 - Galaxy Guardians 0.1 preview gates are green but pass/fail only, not part of
   the Aurora numeric roll-up yet
 

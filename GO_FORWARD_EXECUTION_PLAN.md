@@ -164,15 +164,13 @@ Practical standard:
   not a new `MAJOR`
 - after refreshing the conformance roll-up, audio identity is clearly the
   weakest category at `6.1/10`
-- movement smoothing remains the next visible feel target at `8.0/10`, but it
-  should follow trace-backed diagnosis rather than blind constant changes
-- first-pass movement smoothing attempts that changed the shared player physics
-  or even the narrower manual-control path both regressed movement conformance,
-  so the next movement cycle should start from reference-trace extraction and
-  tighter diagnostics rather than more blind constant tuning
-- next polish reminder: get much more serious about player-ship motion against
-  the real Galaga reference, because Aurora lateral movement still feels too
-  jerky and too fast at times
+- movement now scores `10/10` after repairing the movement conformance harness
+  recenter path; the prior `8.0/10` read was measurement suppression, not a
+  gameplay-control regression
+- next movement work should be manual/browser review plus richer reference
+  trace extraction, not blind constant tuning
+- next implementation value is now higher in challenge-stage depth,
+  later-stage pressure, gameplay-scale graphics, and audio identity
 - next-cycle work should be grouped deliberately into:
   - movement and control fidelity
   - gameplay complexity and challenge-stage depth
