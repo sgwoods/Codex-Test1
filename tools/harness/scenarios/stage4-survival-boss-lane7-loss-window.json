@@ -1,0 +1,26 @@
+{
+  "name": "stage4-survival-boss-lane7-loss-window",
+  "seed": 4301,
+  "duration": 14.4,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false,
+    "persona": "advanced"
+  },
+  "actions": [
+    { "t": 0.5, "action": "down", "code": "Space" },
+    { "t": 0.6, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.81, "action": "down", "code": "ArrowRight" },
+    { "t": 6.0, "action": "up", "code": "ArrowRight" },
+    { "t": 6.01, "action": "up", "code": "Space" },
+    { "t": 6.4, "action": "down", "code": "ArrowLeft" },
+    { "t": 9.6, "action": "up", "code": "ArrowLeft" },
+    { "t": 10.2, "action": "down", "code": "Space" },
+    { "t": 10.25, "action": "down", "code": "ArrowRight" },
+    { "t": 13.4, "action": "up", "code": "ArrowRight" },
+    { "t": 13.41, "action": "up", "code": "Space" },
+    { "t": 13.8, "action": "down", "code": "ArrowLeft" }
+  ]
+}

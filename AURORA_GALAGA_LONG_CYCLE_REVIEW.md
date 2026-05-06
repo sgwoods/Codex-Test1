@@ -207,13 +207,41 @@ Track 2 Stage `4` pressure-risk checkpoint:
   quality, loss causes, source roles, lanes, recent pressure, nearby events,
   and hit-before-collision cases
 - strategy before tuning:
-  promote the top signatures into deterministic loss-window scenarios and add
+  promote the top signatures into loss-window scenarios and add
   path/contact-sheet extraction for boss and `but` dives around the `12s-19s`
-  Stage `4` window
+  Stage `4` window; fresh replay reproducibility must be measured separately
+  from archived source-window extraction
 - success measure for the next tuning pass:
   reduce dominant Stage `4` collision signatures and make
   `npm run harness:check:stage-pressure` green without regressing challenge
   non-lethality, challenge timing, movement, or shot trust
+
+Track 2 Stage `4` promoted loss-window checkpoint:
+
+- artifact:
+  `reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-06-6d7e05b/report.json`
+- assessment command:
+  `npm run harness:check:stage4-pressure-loss-windows`
+- problem shape:
+  the strongest pressure gap is scoreable dive pressure becoming body-contact
+  loss, especially boss/butterfly paths that cross the player lane around
+  shot windows
+- promoted source windows:
+  `stage4-survival` boss lane `7` at `13.85s` (`4` archived matches),
+  `stage4-five-ships` butterfly lane `2` at `15.25s` (`2` matches), and
+  `stage4-five-ships` boss lane `6` at `18.517s` (`2` matches)
+- fresh replay status:
+  realtime/no-video short replay reproduced `1/3` promoted windows; the
+  survival boss lane `7` window reproduced exactly, while the five-ships
+  butterfly and boss windows did not reproduce in the short probes
+- conformance advance:
+  the pressure blocker is now split into archived source evidence and replay
+  reproducibility evidence; this prevents premature subjective tuning and
+  identifies harness precision as the next platform gap
+- recommended next step:
+  add per-frame attacker path sampling for these promoted windows, then tune
+  one pressure lever at a time against both the promoted windows and the
+  aggregate `stage-pressure` gate
 
 ### Track 2: Gameplay Complexity
 

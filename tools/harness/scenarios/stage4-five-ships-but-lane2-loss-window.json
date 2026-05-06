@@ -1,0 +1,25 @@
+{
+  "name": "stage4-five-ships-but-lane2-loss-window",
+  "seed": 4201,
+  "duration": 15.7,
+  "config": {
+    "stage": 4,
+    "ships": 5,
+    "challenge": false,
+    "persona": "advanced"
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.6, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.2, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.21, "action": "down", "code": "ArrowRight" },
+    { "t": 5.4, "action": "up", "code": "ArrowRight" },
+    { "t": 5.41, "action": "down", "code": "ArrowLeft" },
+    { "t": 8.6, "action": "up", "code": "ArrowLeft" },
+    { "t": 8.61, "action": "down", "code": "ArrowRight" },
+    { "t": 11.7, "action": "up", "code": "ArrowRight" },
+    { "t": 11.71, "action": "down", "code": "ArrowLeft" },
+    { "t": 15.0, "action": "up", "code": "ArrowLeft" },
+    { "t": 15.01, "action": "down", "code": "ArrowRight" }
+  ]
+}
