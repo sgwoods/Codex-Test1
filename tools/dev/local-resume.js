@@ -21,6 +21,7 @@ const SERVICES = [
   {
     name: 'viewer',
     url: 'http://127.0.0.1:4311/api/runs',
+    port: 4311,
     log: path.join(STATE_DIR, 'viewer.log'),
     pid: path.join(STATE_DIR, 'viewer.pid'),
     command: [NODE, path.join(ROOT, 'tools', 'log-viewer', 'server.js')]
@@ -75,15 +76,30 @@ function listenerCwd(pid){
   }
 }
 
+function listenerDetails(service){
+  return listenerPids(service.port).map(pid => {
+    const cwd = listenerCwd(pid);
+    return {
+      pid,
+      cwd,
+      root_ok: path.resolve(cwd || '/') === ROOT
+    };
+  });
+}
+
+function serviceRootOk(service){
+  const listeners = listenerDetails(service);
+  return listeners.length > 0 && listeners.every(listener => listener.root_ok);
+}
+
 function reclaimWrongLocalService(service){
   if(!service.port) return [];
   const stopped = [];
-  for(const pid of listenerPids(service.port)){
-    const cwd = listenerCwd(pid);
-    if(path.resolve(cwd || '/') !== ROOT) continue;
+  for(const listener of listenerDetails(service)){
+    if(listener.root_ok) continue;
     try {
-      process.kill(pid, 'SIGTERM');
-      stopped.push(pid);
+      process.kill(listener.pid, 'SIGTERM');
+      stopped.push(listener);
     } catch {}
   }
   if(stopped.length) {
@@ -105,29 +121,34 @@ function startService(service){
   return child.pid;
 }
 
+function syncPidFile(service, listeners){
+  if(listeners.length === 1 && listeners[0].root_ok){
+    fs.writeFileSync(service.pid, String(listeners[0].pid));
+  }
+}
+
 async function startAndVerifyService(service){
   const pid = startService(service);
   await new Promise(resolve => setTimeout(resolve, 350));
-  const running = await probe(service.url, service.expect);
+  const running = await probe(service.url, service.expect) && serviceRootOk(service);
   return { pid, running };
 }
 
 async function main(){
   const results = [];
   for(const service of SERVICES){
-    let running = await probe(service.url, service.expect);
-    let reclaimed = [];
-    if(!running){
-      reclaimed = reclaimWrongLocalService(service);
-      if(reclaimed.length) await new Promise(resolve => setTimeout(resolve, 350));
-      running = await probe(service.url, service.expect);
-    }
+    const reclaimed = reclaimWrongLocalService(service);
+    if(reclaimed.length) await new Promise(resolve => setTimeout(resolve, 350));
+    let running = await probe(service.url, service.expect) && serviceRootOk(service);
     if(running){
+      const listeners = listenerDetails(service);
+      syncPidFile(service, listeners);
       results.push({
         name: service.name,
         status: 'running',
         url: service.url,
-        reclaimed
+        reclaimed,
+        listeners
       });
       continue;
     }
@@ -138,7 +159,8 @@ async function main(){
         status: 'blocked',
         pid: started.pid,
         url: service.url,
-        reclaimed
+        reclaimed,
+        listeners: listenerDetails(service)
       });
       continue;
     }
@@ -147,7 +169,8 @@ async function main(){
       status: 'started',
       pid: started.pid,
       url: service.url,
-      reclaimed
+      reclaimed,
+      listeners: listenerDetails(service)
     });
   }
 

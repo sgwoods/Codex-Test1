@@ -226,12 +226,68 @@ async function probe(url, attempts = 4, pauseMs = 750){
   return false;
 }
 
-async function localServiceStatus(){
-  const game = await probe('http://127.0.0.1:8000/');
-  const viewer = await probe('http://127.0.0.1:4311/api/runs');
+function listenerPids(port){
+  if(!port) return [];
+  try{
+    return execFileSync('lsof', [`-tiTCP:${port}`, '-sTCP:LISTEN'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    })
+      .split(/\s+/)
+      .map(value => +value)
+      .filter(Boolean);
+  }catch{
+    return [];
+  }
+}
+
+function listenerCwd(pid){
+  try{
+    const out = execFileSync('lsof', ['-a', '-p', String(pid), '-d', 'cwd', '-Fn'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    });
+    const line = out.split('\n').find(entry => entry.startsWith('n'));
+    return line ? line.slice(1).trim() : '';
+  }catch{
+    return '';
+  }
+}
+
+function listenerDetails(port){
+  return listenerPids(port).map(pid => {
+    const cwd = listenerCwd(pid);
+    return {
+      pid,
+      cwd,
+      root_ok: path.resolve(cwd || '/') === ROOT
+    };
+  });
+}
+
+async function localServiceDetail({ url, port }){
+  const reachable = await probe(url);
+  const listeners = listenerDetails(port);
+  const rootOk = listeners.length > 0 && listeners.every(listener => listener.root_ok);
   return {
-    game: { ok: game, url: 'http://127.0.0.1:8000/' },
-    viewer: { ok: viewer, url: 'http://127.0.0.1:4311/' },
+    ok: reachable && rootOk,
+    reachable,
+    root_ok: rootOk,
+    url,
+    listeners
+  };
+}
+
+async function localServiceStatus(){
+  return {
+    game: await localServiceDetail({
+      url: 'http://127.0.0.1:8000/',
+      port: 8000
+    }),
+    viewer: await localServiceDetail({
+      url: 'http://127.0.0.1:4311/api/runs',
+      port: 4311
+    }),
     state_dir: LOCAL_SERVICES_DIR
   };
 }

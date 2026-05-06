@@ -38,6 +38,8 @@ async function gatherMachineSnapshot({ includePublic = false } = {}){
   if(!tools.python3.ok) developmentBlocked.push('python3');
   if(!tools.harness_browser.ok) developmentBlocked.push('playwright-managed chromium');
   if(!remotes.ok) developmentBlocked.push('origin remote');
+  if(!services.game.ok) developmentBlocked.push('local game service');
+  if(!services.viewer.ok) developmentBlocked.push('local viewer service');
 
   const releaseBlocked = [];
   if(!tools.gh.ok) releaseBlocked.push('gh');
