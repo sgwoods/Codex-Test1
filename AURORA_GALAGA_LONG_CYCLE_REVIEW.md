@@ -189,6 +189,32 @@ Track 2 May 6 checkpoint:
   did not make the pressure gate green and risked muddying regular-stage
   collision semantics
 
+Track 2 Stage `4` pressure-risk checkpoint:
+
+- artifact:
+  `reference-artifacts/analyses/aurora-stage4-pressure-risk/2026-05-06-b666814/report.json`
+- analysis command:
+  `npm run harness:analyze:stage4-pressure-risk -- --limit 40`
+- problem shape:
+  Stage `4` pressure is not primarily a bullet-spam problem; recent artifacts
+  show `17` collision losses versus `2` bullet losses across `15` scanned
+  pressure runs
+- strongest signature:
+  `stage4-survival` boss collision in player/source lane `7`, source column
+  `5`, with `3` recent attack starts and a hit-before-loss pattern
+- assessment advance:
+  Stage `4` pressure now has a structured risk report covering artifact
+  quality, loss causes, source roles, lanes, recent pressure, nearby events,
+  and hit-before-collision cases
+- strategy before tuning:
+  promote the top signatures into deterministic loss-window scenarios and add
+  path/contact-sheet extraction for boss and `but` dives around the `12s-19s`
+  Stage `4` window
+- success measure for the next tuning pass:
+  reduce dominant Stage `4` collision signatures and make
+  `npm run harness:check:stage-pressure` green without regressing challenge
+  non-lethality, challenge timing, movement, or shot trust
+
 ### Track 2: Gameplay Complexity
 
 Goal:
