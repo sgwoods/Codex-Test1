@@ -232,11 +232,13 @@ function main(){
       strongestSubmetric: submetrics.reduce((best, metric) => metric.score10 > best.score10 ? metric : best, submetrics[0]),
       weakestSubmetric: submetrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, submetrics[0]),
       nextRecommendedWork: [
-        stageSignature.summary?.windowCount >= 6
-          ? 'implement one later-level entry or escort variation and require improved regular-stage signature separation'
-          : 'expand stage-signature distance coverage with more mid-run and late-run windows',
-        'implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback',
-        'add one later-level entry or escort variation family and measure whether mid-run versus late-run signatures separate without unfair collapse'
+        pressureReplayCoverage < 1
+          ? 'improve Stage 4 pressure replay precision so source loss windows reproduce as exact deterministic windows'
+          : 'keep pressure replay exactness as a release guardrail while expanding later-stage variation',
+        stageSignature.summary?.signatureScore10 >= 6.4
+          ? 'preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice'
+          : 'implement one mid-run or later-level variation and require improved regular-stage signature separation',
+        'implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback'
       ]
     },
     evidence: {

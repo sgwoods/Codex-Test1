@@ -22,6 +22,7 @@ Duration: 10s
 
 - `formation_entry`: observed
 - `enemy_dive_start`: observed
+- `flank_dive_start`: observed
 - `escort_dive_start`: not observed in this run
 - `enemy_projectile`: observed
 - `player_hit`: not observed in this run

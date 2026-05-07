@@ -10,6 +10,7 @@
 
 ## Missing Or Follow-Up Targets
 
+- create a scenario or source window that observes `flank_dive_start`
 - create a scenario or source window that observes `wave_clear`
 
 ## First Candidate Check

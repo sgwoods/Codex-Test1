@@ -1,0 +1,83 @@
+{
+  "generatedAt": "2026-05-07T16:34:34.228Z",
+  "commit": "2aeaafa",
+  "score10": 8.3,
+  "summary": {
+    "score10": 8.3,
+    "stageFamilyBlueprintCount": 6,
+    "challengeLayerBlueprintCount": 3,
+    "evidenceWindowCount": 6,
+    "priority": "high",
+    "strongestSubmetric": {
+      "id": "learning-mastery-windows",
+      "label": "Learning and mastery windows",
+      "score10": 9,
+      "read": "20/20 persona checks pass; progression ordering is not fully preserved."
+    },
+    "weakestSubmetric": {
+      "id": "pressure-curve-over-time",
+      "label": "Pressure curve over time",
+      "score10": 7.5,
+      "read": "3/3 source pressure/loss windows are found, but 0 reproduce as exact losses under replay."
+    },
+    "nextRecommendedWork": [
+      "improve Stage 4 pressure replay precision so source loss windows reproduce as exact deterministic windows",
+      "preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice",
+      "implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback"
+    ]
+  },
+  "evidence": {
+    "levelExpansionPlan": "LEVEL_BY_LEVEL_EXPANSION_PLAN.md",
+    "challengeReport": "reference-artifacts/analyses/correspondence/challenge-stage-timing/2026-05-06-3216ba8/report.json",
+    "progressionReport": "reference-artifacts/analyses/correspondence/persona-progression/2026-04-22-7e7f2e4/report.json",
+    "captureReport": "reference-artifacts/analyses/correspondence/capture-rescue/2026-04-19-7081c7a/report.json",
+    "pressureGeometryReport": "reference-artifacts/analyses/aurora-stage4-pressure-geometry/2026-05-07-b3bbb9c/report.json",
+    "pressureLossReport": "reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-2aeaafa/report.json",
+    "stageSignatureReport": "reference-artifacts/analyses/stage-signature-distance/2026-05-07-2aeaafa/report.json",
+    "levelExpansionCycle": "reference-artifacts/analyses/aurora-level-expansion-cycle"
+  },
+  "submetrics": [
+    {
+      "id": "stage-distinctiveness",
+      "label": "Stage distinctiveness",
+      "score10": 8.2,
+      "read": "6/6 stage families are blueprinted and 6/6 target evidence windows are present; stage-signature distinct pair ratio is 0.4."
+    },
+    {
+      "id": "challenge-stage-identity",
+      "label": "Challenge-stage identity",
+      "score10": 8.3,
+      "read": "5/5 challenge timing checks pass and 3/3 content layers are blueprinted; distinctive playable challenge content is still limited."
+    },
+    {
+      "id": "movement-grammar-expansion",
+      "label": "Movement grammar expansion",
+      "score10": 8.6,
+      "read": "Later-level entry, escort, regrouping, and challenge-path grammar is planned; the stage-signature distance score is 6.4/10."
+    },
+    {
+      "id": "pressure-curve-over-time",
+      "label": "Pressure curve over time",
+      "score10": 7.5,
+      "read": "3/3 source pressure/loss windows are found, but 0 reproduce as exact losses under replay."
+    },
+    {
+      "id": "boss-reward-opportunity",
+      "label": "Boss and reward opportunity design",
+      "score10": 8.1,
+      "read": "3/3 capture/rescue scenarios match, but boss-entry and bonus-opportunity learning windows need direct long-run measurements."
+    },
+    {
+      "id": "learning-mastery-windows",
+      "label": "Learning and mastery windows",
+      "score10": 9,
+      "read": "20/20 persona checks pass; progression ordering is not fully preserved."
+    },
+    {
+      "id": "long-run-non-repetition",
+      "label": "Long-run non-repetition",
+      "score10": 8.3,
+      "read": "Stage-signature repetition risk is 0.414; closest pair is late-run-cleanup-or-failure / mid-run-entry-variant."
+    }
+  ]
+}

@@ -254,6 +254,7 @@ function updateEnemy(e,dt,t,T,p){
    e.esc=0;
    logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});
   }else{
+   const midRunFlank=S.stage>=8&&S.stage<12&&!S.challenge&&e.t==='but'&&(e.c<=1||e.c>=8);
    const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:S.stage===1?.46:.56)*fm.steer;
    const jitter=(S.stage===2?22:S.stage===4?20:S.stage>=5?32:S.stage===1?24:38)*fm.jitter;
    const vyRnd=S.stage===4?14:S.stage>=5?20:S.stage===2?8:S.stage===1?6:12;
@@ -261,11 +262,15 @@ function updateEnemy(e,dt,t,T,p){
    e.low=0;
    e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
    e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);
+   if(midRunFlank){
+    e.vx+=(e.c<5?1:-1)*(42+rnd(8,-8));
+    e.vy*=.95;
+   }
    e.shot=e.t==='boss'?2:1;
    e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
    e.chargeCueT=chargeTiming?.cueDelay??0;
    e.chargeCueStartY=e.y;
-   logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});
+   logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0,pattern:midRunFlank?'mid-run-flank-dive':'standard-dive'});
    if(!e.chargeCuePending)sfx.attackCharge();
    if(e.t==='boss')assignEscorts(e);
   }

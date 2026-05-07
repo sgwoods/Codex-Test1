@@ -40,6 +40,12 @@ function spawnFormation(){
    profile
   });
   e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
+  if(S.stage>=8&&S.stage<12&&!S.challenge){
+   if(t==='but'&&(c<=1||c>=8))e.cool=.16+(c<=1?c:9-c)*.12;
+   else if(t==='but')e.cool+=.55;
+   else if(t==='boss')e.cool+=2.2;
+   else if(t==='bee'&&r>=2)e.cool+=1.35;
+  }
   if(S.stage>=14&&!S.challenge){
    if(t==='boss')e.cool=.72+(c-3)*.16;
    else if(t==='but'&&r<=1)e.cool+=.55;

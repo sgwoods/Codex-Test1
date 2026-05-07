@@ -4,6 +4,7 @@
 
 - assert `formation_entry` appears in the window event log
 - assert `enemy_dive_start` appears in the window event log
+- assert `flank_dive_start` appears in the window event log
 - assert `enemy_projectile` appears in the window event log
 
 ## Missing Or Follow-Up Targets

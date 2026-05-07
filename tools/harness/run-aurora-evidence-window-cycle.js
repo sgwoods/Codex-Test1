@@ -107,7 +107,10 @@ function eventFamilyForRuntimeEvent(event, scenario, sampleEvents){
   if(event.type === 'stage_spawn') return scenario.config.challenge ? 'challenge_wave_start' : 'formation_entry';
   if(event.type === 'key_down' && ['ArrowLeft', 'ArrowRight'].includes(event.code)) return 'player_move';
   if(event.type === 'player_shot') return scenario.config.challenge ? 'challenge_enemy_path' : 'player_shot';
-  if(event.type === 'enemy_attack_start') return event.escort || event.attackMode === 'escort' || event.mode === 'escort' ? 'escort_dive_start' : 'enemy_dive_start';
+  if(event.type === 'enemy_attack_start'){
+    if(event.pattern === 'mid-run-flank-dive') return 'flank_dive_start';
+    return event.escort || event.attackMode === 'escort' || event.mode === 'escort' ? 'escort_dive_start' : 'enemy_dive_start';
+  }
   if(event.type === 'enemy_bullet_fired') return 'enemy_projectile';
   if(event.type === 'enemy_killed') return scenario.config.challenge ? 'challenge_enemy_hit' : null;
   if(event.type === 'ship_lost') return 'player_hit';

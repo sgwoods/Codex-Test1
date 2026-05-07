@@ -9,14 +9,14 @@ content, alien behavior, movement texture, and shared gameplay evidence to stand
 beside the original Galaga reference with more confidence.
 
 This work is now represented directly in the quality scorecard as `Level arc
-and encounter shape`, currently `8.2/10`. That category is high priority for
+and encounter shape`, currently `8.3/10`. That category is high priority for
 `1.4` because it measures whether Aurora develops a Galaga-like learning and
 encounter arc over time rather than repeating a strong early-stage loop. The
-expanded six-window stage-signature distance pass scores `6.1/10` after adding
-attack-role features and a measured stage-14 escort variation. The former
-late-run cleanup/escort pair now separates to `0.204`; the closest remaining
-gap is late-run-cleanup-or-failure / mid-run-entry-variant at `0.087`, with
-mid-run-entry-variant / mid-run-pressure also too close at `0.097`.
+expanded six-window stage-signature distance pass scores `6.4/10` after adding
+attack-role features, a measured stage-14 escort variation, and a stage-8
+flank-dive grammar. The closest remaining mid/late gap is
+late-run-cleanup-or-failure / mid-run-entry-variant at `0.129`, with
+mid-run-entry-variant / mid-run-pressure at `0.174`.
 
 ## Decision
 
@@ -38,11 +38,11 @@ This means the immediate work is not just "tune the current loop." It is:
 5. use the second-game preview to keep Platinum honest
 
 The next assessment step should use the six-window stage-signature harness as a
-target for implementation. The next implementation step should be one
-mid-run entry/attack grammar variation plus pressure replay precision work,
-both measured against survivability, signature distance, and reproducible loss
-windows. A later-level escort variation has now been proven valuable enough to
-keep, so the next best return is to reduce mid-run and mid/late repetition.
+target for implementation. The next implementation step should be pressure
+replay precision work plus one challenge-stage reward/feedback slice, both
+measured against survivability, signature distance, and reproducible loss
+windows. The later-level escort and mid-run flank variations have now been
+proven valuable enough to keep.
 
 ## Why This Is Important
 
@@ -286,9 +286,9 @@ making Platinum stronger by giving it a real second client.
 
 Do next:
 
-1. branch: `codex/macbook-pro-aurora-midrun-signature-variation`
-2. implement one measured mid-run entry/attack grammar slice
-3. improve pressure replay precision for the Stage 4 collision-loss family
+1. branch: `codex/macbook-pro-aurora-pressure-replay-precision`
+2. improve pressure replay precision for the Stage 4 collision-loss family
+3. implement one measured challenge-stage result/reward feedback slice
 4. rerun the six-window evidence cycle, stage-signature distance, level arc,
    quality conformance, and targeted pressure/challenge guardrails
 5. update the scorecard with the value returned by the slice

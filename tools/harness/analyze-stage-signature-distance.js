@@ -13,6 +13,7 @@ const EVENT_FAMILIES = [
   'player_move',
   'player_shot',
   'enemy_dive_start',
+  'flank_dive_start',
   'escort_dive_start',
   'enemy_projectile',
   'player_hit',
@@ -161,6 +162,9 @@ function loadWindow(dir){
   for(const [family, rate] of Object.entries(eventRates(events, duration))){
     features[`eventRate:${family}`] = normalize(rate, 2);
   }
+  for(const family of EVENT_FAMILIES){
+    features[`eventPresent:${family}`] = families.has(family) ? 1 : 0;
+  }
 
   return {
     id: path.basename(dir),
@@ -182,10 +186,28 @@ function stageBand(stage, challenge){
   return 'late';
 }
 
+function featureWeight(key){
+  if(key.startsWith('eventPresent:')) return 0.35;
+  if(key.startsWith('eventRate:')) return 1.8;
+  if(key.endsWith('AttackRate') || key.endsWith('AttackShare')) return 1.7;
+  if(['maxAttackers', 'meanAttackers', 'maxEnemyBullets', 'meanEnemyBullets'].includes(key)) return 1.45;
+  if(['eventFamilyCoverage', 'firstAttackTime', 'stagePresentationVariety'].includes(key)) return 1.25;
+  if(['livesLost', 'finalScore', 'maxChallengeEnemies', 'meanChallengeEnemies'].includes(key)) return 1.0;
+  if(['stage', 'isChallenge', 'formationActiveMean', 'audioCueVariety'].includes(key)) return 0.75;
+  if(['duration', 'playerRange', 'playerStd', 'maxPlayerBullets'].includes(key)) return 0.45;
+  return 1;
+}
+
 function distance(a, b){
   const keys = [...new Set([...Object.keys(a.features), ...Object.keys(b.features)])].sort();
-  const squared = keys.map(key => ((a.features[key] || 0) - (b.features[key] || 0)) ** 2);
-  return round(Math.sqrt(squared.reduce((sum, value) => sum + value, 0) / Math.max(keys.length, 1)), 3);
+  let weightedSquared = 0;
+  let totalWeight = 0;
+  for(const key of keys){
+    const weight = featureWeight(key);
+    weightedSquared += weight * (((a.features[key] || 0) - (b.features[key] || 0)) ** 2);
+    totalWeight += weight;
+  }
+  return round(Math.sqrt(weightedSquared / Math.max(totalWeight, 1)), 3);
 }
 
 function main(){

@@ -167,21 +167,22 @@ Practical standard:
   stricter read that exposes `7/14` broad Aurora audio reference windows needing
   tighter segmentation and `22` candidate subwindows for review/promotion
 - level arc and encounter shape is now a first-class quality category at
-  `8.2/10`; this should be treated as a high-priority `1.4` workstream because
+  `8.3/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
   repeating a strong early loop
-- the six-window stage-signature read is now `6.1/10` after adding attack-role
-  features and a stage-14 late escort variation. This is a useful conformance
-  gain, but it exposes the next higher-return target: mid-run and mid/late
-  regular stages still cluster too closely
+- the six-window stage-signature read is now `6.4/10` after adding attack-role
+  features, a stage-14 late escort variation, stage-8 flank-dive grammar, and
+  calibrated event-family presence scoring. This is a useful conformance gain,
+  but the next higher-return target is pressure replay precision and richer
+  challenge/reward texture
 - movement now scores `10/10` after repairing the movement conformance harness
   recenter path; the prior `8.0/10` read was measurement suppression, not a
   gameplay-control regression
 - next movement work should be manual/browser review plus richer reference
   trace extraction, not blind constant tuning
-- next implementation value is now highest in level-arc shape: mid-run
-  signature separation, pressure replay precision, challenge-stage reward
-  texture, gameplay-scale graphics, and audio identity
+- next implementation value is now highest in level-arc shape: pressure replay
+  precision, challenge-stage reward texture, gameplay-scale graphics, and audio
+  identity
 - next-cycle work should be grouped deliberately into:
   - movement and control fidelity
   - gameplay complexity and challenge-stage depth

@@ -268,30 +268,12 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-cleanup-or-failure-014-enemy_dive_start",
-      "event_family": "enemy_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 8.583,
-      "duration_s": null,
-      "entity_family": "boss",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 0,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "late-run-cleanup-or-failure-015-enemy_projectile",
+      "event_id": "late-run-cleanup-or-failure-014-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 8.583,
+      "time_s": 8.4,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "bee",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -304,12 +286,30 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
+      "event_id": "late-run-cleanup-or-failure-015-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 8.583,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
       "event_id": "late-run-cleanup-or-failure-016-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 8.783,
+      "time_s": 9.333,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "bee",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -325,7 +325,7 @@
       "event_id": "late-run-cleanup-or-failure-017-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 9.583,
+      "time_s": 9.5,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,

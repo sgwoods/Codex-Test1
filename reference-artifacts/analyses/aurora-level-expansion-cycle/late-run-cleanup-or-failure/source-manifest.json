@@ -58,17 +58,17 @@
       "backgroundMode": "aurora-borealis"
     },
     "audioCue": {
-      "cue": "attackCharge",
+      "cue": "stagePulse",
       "atmosphereId": "aurora-borealis",
       "audioTheme": "galaga-reference-assets",
       "phase": "stage",
-      "variant": 0,
-      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
+      "variant": 17,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
       "stage": 12,
       "challenge": false,
-      "at": 1.2
+      "at": 1.34
     },
     "renderDebug": {
       "backgroundMode": "aurora-borealis",
@@ -99,8 +99,8 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 4,
-    "max_enemy_bullets": 3,
+    "max_attackers": 2,
+    "max_enemy_bullets": 2,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
     "final_score": 380,
@@ -108,7 +108,7 @@
     "final_stage": 12,
     "final_challenge": false
   },
-  "event_count": 79,
+  "event_count": 77,
   "promoted_event_count": 17,
   "artifacts": {
     "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/contact-sheet-1s.png",
