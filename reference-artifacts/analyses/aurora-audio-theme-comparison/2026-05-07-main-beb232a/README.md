@@ -25,6 +25,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `113.1Hz`; Aurora centroid delta vs reference = `113.3Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `3.093s`; centroid delta = `137.6Hz`.
+- Candidate reference subwindows: 2.299-6.001s score 0.544.
 
 ## Stage Start
 
@@ -41,6 +42,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `223.4Hz`; Aurora centroid delta vs reference = `171.6Hz`.
 - Active-window status: `direct-cue-comparison`.
 - Active quick read: Aurora vs reference duration delta = `3.852s`; centroid delta = `253.9Hz`.
+- Candidate reference subwindows: 0.000-1.975s score 0.582; 4.998-6.973s score 0.488; 2.799-4.774s score 0.484.
 
 ## Formation Pulse
 
@@ -57,6 +59,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `49.8Hz`; Aurora centroid delta vs reference = `47.0Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `5.955s`; centroid delta = `47.3Hz`.
+- Candidate reference subwindows: 1.649-2.489s score 0.584; 5.647-6.487s score 0.581; 2.599-3.439s score 0.577.
 
 ## Capture Beam
 
@@ -73,6 +76,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `548.2Hz`; Aurora centroid delta vs reference = `533.7Hz`.
 - Active-window status: `direct-cue-comparison`.
 - Active quick read: Aurora vs reference duration delta = `0.409s`; centroid delta = `536.2Hz`.
+- Candidate reference subwindows: 0.300-4.032s score 0.750.
 
 ## Fighter Captured
 
@@ -89,6 +93,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `680.5Hz`; Aurora centroid delta vs reference = `670.3Hz`.
 - Active-window status: `direct-cue-comparison`.
 - Active quick read: Aurora vs reference duration delta = `2.116s`; centroid delta = `669.4Hz`.
+- Candidate reference subwindows: 0.250-4.002s score 0.643.
 
 ## Captured Fighter Destroyed
 
@@ -121,6 +126,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `243.2Hz`; Aurora centroid delta vs reference = `250.3Hz`.
 - Active-window status: `direct-cue-comparison`.
 - Active quick read: Aurora vs reference duration delta = `0.369s`; centroid delta = `238.8Hz`.
+- Candidate reference subwindows: 0.050-3.692s score 0.535.
 
 ## Ship Loss
 
@@ -153,6 +159,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `275.7Hz`; Aurora centroid delta vs reference = `258.0Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `1.295s`; centroid delta = `257.0Hz`.
+- Candidate reference subwindows: 0.900-1.980s score 0.884.
 
 ## Challenge Results
 
@@ -169,6 +176,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `673.6Hz`; Aurora centroid delta vs reference = `646.2Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `2.461s`; centroid delta = `655.9Hz`.
+- Candidate reference subwindows: 0.000-1.560s score 0.630; 1.649-3.209s score 0.602.
 
 ## Challenge Perfect
 
@@ -185,6 +193,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `1170.6Hz`; Aurora centroid delta vs reference = `1155.1Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `2.300s`; centroid delta = `1155.1Hz`.
+- Candidate reference subwindows: 0.000-1.740s score 0.496; 1.799-3.539s score 0.299.
 
 ## High Score 1st
 
@@ -201,6 +210,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `473.5Hz`; Aurora centroid delta vs reference = `473.2Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `2.993s`; centroid delta = `469.5Hz`.
+- Candidate reference subwindows: 3.598-7.300s score 0.793.
 
 ## High Score 2nd-10th
 
@@ -217,6 +227,7 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `426.3Hz`; Aurora centroid delta vs reference = `419.0Hz`.
 - Active-window status: `broad-reference-window-needs-segmentation`.
 - Active quick read: Aurora vs reference duration delta = `10.396s`; centroid delta = `410.4Hz`.
+- Candidate reference subwindows: 11.295-14.997s score 0.786; 2.149-5.851s score 0.730; 7.547-11.249s score 0.681.
 
 ## Game Over
 
@@ -233,11 +244,13 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Quick read: synthetic Galaga centroid delta vs reference = `160.7Hz`; Aurora centroid delta vs reference = `171.1Hz`.
 - Active-window status: `direct-cue-comparison`.
 - Active quick read: Aurora vs reference duration delta = `6.598s`; centroid delta = `166.5Hz`.
+- Candidate reference subwindows: 2.449-6.081s score 0.805; 6.097-9.729s score 0.505; 10.295-13.927s score 0.459.
 
 ## Summary
 
 - Items: 14
 - Broad reference windows needing tighter segmentation: 7
+- Candidate reference subwindows found: 22
 - Average active Aurora-vs-synthetic-Galaga duration delta: `0.178s`
 - Average active Aurora-vs-reference duration delta: `3.236s`
 - Average active Aurora-vs-reference centroid delta: `387.7Hz`

@@ -180,6 +180,7 @@ function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport){
     alignmentAverage: round(alignmentAverage, 3),
     broadReferenceWindowCount,
     totalReferenceItems: items.length,
+    referenceSegmentCandidateCount: metricsTheme.summary?.referenceSegmentCandidateCount || 0,
     averageReferenceDurationDeltaS: metricsTheme.summary?.averageAuroraVsReferenceActiveDurationDeltaS ?? null,
     averageReferenceCentroidDeltaHz: metricsTheme.summary?.averageAuroraVsReferenceActiveCentroidDeltaHz ?? null
   };
@@ -305,7 +306,7 @@ function main(){
       score10: audioScore.score10,
       evidence: ['audio-cue-alignment correspondence', 'aurora-audio-theme-comparison', 'galaga-audio-overlap'],
       details: audioScore,
-      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, and cue alignment. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; active Aurora-vs-reference duration delta averages ${audioScore.averageReferenceDurationDeltaS}s.`
+      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, and cue alignment. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; ${audioScore.referenceSegmentCandidateCount} candidate subwindows were found; active Aurora-vs-reference duration delta averages ${audioScore.averageReferenceDurationDeltaS}s.`
     },
     {
       id: 'ui-shell',

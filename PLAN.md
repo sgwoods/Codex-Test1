@@ -124,10 +124,11 @@ This means:
 Current conformance read:
 
 - overall Aurora quality is `9.2/10`
-- audio identity and cue alignment is the weakest category at `6.4/10`
+- audio identity and cue alignment is the weakest category at `6.3/10`
 - the audio score is now stricter: it includes active reference-cue similarity
   and reference-window precision, with `7/14` Aurora audio reference windows
-  still needing tighter segmentation
+  still needing tighter segmentation and `22` candidate subwindows now proposed
+  for review/promotion
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current long-cycle baseline is captured in

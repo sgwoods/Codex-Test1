@@ -163,9 +163,9 @@ Practical standard:
 - the next serious public milestone is now the active `1.3.0` `MINOR` family,
   not a new `MAJOR`
 - after refreshing the conformance roll-up with active reference-cue matching,
-  audio identity is clearly the weakest category at `6.4/10`; this is a
+  audio identity is clearly the weakest category at `6.3/10`; this is a
   stricter read that exposes `7/14` broad Aurora audio reference windows needing
-  tighter segmentation
+  tighter segmentation and `22` candidate subwindows for review/promotion
 - movement now scores `10/10` after repairing the movement conformance harness
   recenter path; the prior `8.0/10` read was measurement suppression, not a
   gameplay-control regression

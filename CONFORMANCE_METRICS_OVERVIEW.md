@@ -8,7 +8,7 @@ This document summarizes the current conformance scoring model for both the ship
 
 | Game / scope | Primary score | Secondary scores | Status | Weakest current area | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| Aurora Galactica current dev line | 9.2/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 6.4/10 | stricter release-quality conformance score with active audio reference matching | Audio identity and cue alignment (6.4/10) | reference-artifacts/analyses/quality-conformance/2026-05-07-beb232a/report.json |
+| Aurora Galactica current dev line | 9.2/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 6.3/10 | stricter release-quality conformance score with active audio reference matching and candidate reference subwindows | Audio identity and cue alignment (6.3/10) | reference-artifacts/analyses/quality-conformance/2026-05-07-d953cca/report.json |
 | Galaxy Guardians 0.1 playable preview | 7.7/10 | playtest weighted 6.9/10; maturity 7/10; gate coverage 9.5/10; public readiness 3.9/10 | preview-reference-conformance-model-not-production-release-score | Formation and rack timing | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
 
 ## Release Cluster Conformance Targets
@@ -17,7 +17,7 @@ These are planning targets, not release promises. They give each upcoming cluste
 
 | Release cluster / focus | Aurora target | Aurora focus metrics | Guardians target | Guardians focus metrics | Release decision meaning |
 | --- | --- | --- | --- | --- | --- |
-| Current dev baseline | 9.2/10 | audio 6.4; movement 10; stage opening 8.5; challenge timing 9.9; shell integrity 9.2 | 7.7/10 reference; 6.9/10 playtest | maturity 7; gate coverage 9.5; public readiness 3.9; audio feel 6.4 | Baseline for the next beta-candidate discussion, now weighted by stricter audio reference evidence and local playtest feel. |
+| Current dev baseline | 9.2/10 | audio 6.3; movement 10; stage opening 8.5; challenge timing 9.9; shell integrity 9.2 | 7.7/10 reference; 6.9/10 playtest | maturity 7; gate coverage 9.5; public readiness 3.9; audio feel 6.4 | Baseline for the next beta-candidate discussion, now weighted by stricter audio reference evidence and local playtest feel. |
 | `1.3` Fidelity and Trust | 9.0/10 | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | 7.7/10 reference; 6.9/10 playtest | rack timing >= 6.2; movement pressure 6.2; visual identity 6.7; audio feel 6.4 | Aurora can move beta if the weakest feel gaps improve and Guardians stays out of production but credible as a beta preview. |
 | `1.4` Arcade Depth / Guardians 0.1 Preview | 9.2/10 | level-depth >= 8.4; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6 | 7.8/10 reference; 7.0/10 playtest | frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0 | Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora. |
 | `1.5` Flight Recorder and Shared Evidence | 9.3/10 | replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6 | 8.2/10 | source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0 | Shared video and evidence become release infrastructure for both applications. |
@@ -39,7 +39,7 @@ xychart-beta
 | Metric family | Aurora current | Aurora next target | Guardians current | Guardians next target | Why it matters |
 | --- | --- | --- | --- | --- | --- |
 | Movement and pressure | 10/10 | 8.6/10 in `1.3`; 8.8/10 in `1.4` | 6.2/10 playtest; 6.2/10 reference category | browser-reviewed runtime tuning in `1.3`; 7.2/10 playtest in `1.4` | This is the strongest direct feel signal during live play. |
-| Audio identity / acoustic fit | 6.4/10 | 7.2/10 in `1.3`; 7.6/10 in `1.4` | 6.4/10 playtest; 6.4/10 reference category | tighter Aurora reference-cue segmentation and human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4` | Audio is the weakest shared conformance area today. |
+| Audio identity / acoustic fit | 6.3/10 | 7.2/10 in `1.3`; 7.6/10 in `1.4` | 6.4/10 playtest; 6.4/10 reference category | promote the 22 Aurora reference-cue subwindow candidates, then human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4` | Audio is the weakest shared conformance area today. |
 | Visual identity | 9.2/10 shell integrity; game sprites not separately scored in the roll-up | add a visible arcade-depth visual score in `1.4` | 6.7/10 playtest; 6.8/10 reference category | browser-reviewed component-sprite polish in `1.3`; 7.0/10 playtest in `1.4` | Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview. |
 | Stage / rack / wave timing | stage opening 8.5; challenge timing 8.4 | challenge and later-stage targets >= 8.6 in `1.4` | rack timing 6.2/10 | browser-reviewed rack timing in `1.3`; 7.2/10 in `1.4` | Timing separates authentic arcade pressure from approximate motion. |
 | Scoring and progression | progression/persona 8.8; shot/hit 10.0 | level-depth and scoring stability >= 9.0 by `2.0` | single-shot threat/scoring 7.5 | 7.6 in `1.4`; 8.8 by `2.0` | Guardians should not publish persistent scoreboards until scoring is reference-aligned. |
@@ -81,7 +81,7 @@ xychart-beta
 | Capture and rescue rule fidelity | 10/10 | capture-rescue correspondence | 3/3 capture scenarios matched, with worst tracked-time drift 0.004. |
 | Challenge-stage timing fidelity | 9.9/10 | challenge-stage correspondence | 5/5 challenge timing metrics were within tolerance; worst current delta was 0.483. |
 | Progression and persona depth | 8.8/10 | persona-progression correspondence | 20/20 persona checks passed; progression ordering is still missing one ordering edge case. |
-| Audio identity and cue alignment | 6.4/10 | audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap | Audio score now blends cue identity, active reference similarity, reference-window precision, overlap timing, and cue alignment. 7/14 reference windows still need tighter segmentation; active Aurora-vs-reference duration delta averages 3.104s. |
+| Audio identity and cue alignment | 6.3/10 | audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap | Audio score now blends cue identity, active reference similarity, reference-window precision, overlap timing, and cue alignment. 7/14 reference windows still need tighter segmentation; 22 candidate subwindows were found; active Aurora-vs-reference duration delta averages 3.236s. |
 | UI, shell, and graphics integrity | 9.2/10 | dev candidate surface suite | The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed. |
 
 ## Guardians Scoring Decision

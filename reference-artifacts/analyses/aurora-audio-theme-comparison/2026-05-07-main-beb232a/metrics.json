@@ -110,7 +110,21 @@
           "rms": 0.1774
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 2.299,
+          "end_s": 6.001,
+          "score": 0.544,
+          "metrics": {
+            "duration_s": 3.702,
+            "peak": 0.2228,
+            "rms": 0.0838,
+            "spectral_centroid_hz": 1224.8,
+            "zero_crossings_per_s": 532.4
+          }
+        }
+      ]
     },
     {
       "id": "stage-start",
@@ -220,7 +234,45 @@
           "rms": 0.1989
         },
         "referenceWindowStatus": "direct-cue-comparison"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 1.975,
+          "score": 0.582,
+          "metrics": {
+            "duration_s": 1.975,
+            "peak": 0.7381,
+            "rms": 0.2259,
+            "spectral_centroid_hz": 1281.0,
+            "zero_crossings_per_s": 1726.1
+          }
+        },
+        {
+          "start_s": 4.998,
+          "end_s": 6.973,
+          "score": 0.488,
+          "metrics": {
+            "duration_s": 1.975,
+            "peak": 0.8508,
+            "rms": 0.258,
+            "spectral_centroid_hz": 1490.8,
+            "zero_crossings_per_s": 2424.9
+          }
+        },
+        {
+          "start_s": 2.799,
+          "end_s": 4.774,
+          "score": 0.484,
+          "metrics": {
+            "duration_s": 1.975,
+            "peak": 0.82,
+            "rms": 0.2772,
+            "spectral_centroid_hz": 1441.7,
+            "zero_crossings_per_s": 2486.6
+          }
+        }
+      ]
     },
     {
       "id": "formation-pulse",
@@ -330,7 +382,45 @@
           "rms": 0.1672
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 1.649,
+          "end_s": 2.489,
+          "score": 0.584,
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.2267,
+            "rms": 0.097,
+            "spectral_centroid_hz": 1160.0,
+            "zero_crossings_per_s": 604.8
+          }
+        },
+        {
+          "start_s": 5.647,
+          "end_s": 6.487,
+          "score": 0.581,
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.2264,
+            "rms": 0.0885,
+            "spectral_centroid_hz": 1142.0,
+            "zero_crossings_per_s": 594.0
+          }
+        },
+        {
+          "start_s": 2.599,
+          "end_s": 3.439,
+          "score": 0.577,
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.2194,
+            "rms": 0.0868,
+            "spectral_centroid_hz": 1149.0,
+            "zero_crossings_per_s": 597.6
+          }
+        }
+      ]
     },
     {
       "id": "capture-beam",
@@ -440,7 +530,21 @@
           "rms": 0.081
         },
         "referenceWindowStatus": "direct-cue-comparison"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.3,
+          "end_s": 4.032,
+          "score": 0.75,
+          "metrics": {
+            "duration_s": 3.732,
+            "peak": 0.8581,
+            "rms": 0.3237,
+            "spectral_centroid_hz": 1825.0,
+            "zero_crossings_per_s": 2271.2
+          }
+        }
+      ]
     },
     {
       "id": "fighter-captured",
@@ -550,7 +654,21 @@
           "rms": 0.1136
         },
         "referenceWindowStatus": "direct-cue-comparison"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.25,
+          "end_s": 4.002,
+          "score": 0.643,
+          "metrics": {
+            "duration_s": 3.752,
+            "peak": 0.6662,
+            "rms": 0.1566,
+            "spectral_centroid_hz": 2013.9,
+            "zero_crossings_per_s": 2028.8
+          }
+        }
+      ]
     },
     {
       "id": "captured-fighter-destroyed",
@@ -660,7 +778,8 @@
           "rms": 0.0675
         },
         "referenceWindowStatus": "direct-cue-comparison"
-      }
+      },
+      "referenceSegmentCandidates": []
     },
     {
       "id": "rescue-join",
@@ -770,7 +889,21 @@
           "rms": 0.1658
         },
         "referenceWindowStatus": "direct-cue-comparison"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.05,
+          "end_s": 3.692,
+          "score": 0.535,
+          "metrics": {
+            "duration_s": 3.642,
+            "peak": 0.429,
+            "rms": 0.0994,
+            "spectral_centroid_hz": 1533.0,
+            "zero_crossings_per_s": 1401.7
+          }
+        }
+      ]
     },
     {
       "id": "ship-loss",
@@ -880,7 +1013,8 @@
           "rms": 0.0654
         },
         "referenceWindowStatus": "active-segment-detected"
-      }
+      },
+      "referenceSegmentCandidates": []
     },
     {
       "id": "challenge-transition",
@@ -990,7 +1124,21 @@
           "rms": 0.074
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.9,
+          "end_s": 1.98,
+          "score": 0.884,
+          "metrics": {
+            "duration_s": 1.08,
+            "peak": 0.9491,
+            "rms": 0.2195,
+            "spectral_centroid_hz": 1489.0,
+            "zero_crossings_per_s": 1906.5
+          }
+        }
+      ]
     },
     {
       "id": "challenge-results",
@@ -1100,7 +1248,33 @@
           "rms": 0.1683
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 1.56,
+          "score": 0.63,
+          "metrics": {
+            "duration_s": 1.56,
+            "peak": 0.2912,
+            "rms": 0.0882,
+            "spectral_centroid_hz": 1904.7,
+            "zero_crossings_per_s": 2134.0
+          }
+        },
+        {
+          "start_s": 1.649,
+          "end_s": 3.209,
+          "score": 0.602,
+          "metrics": {
+            "duration_s": 1.56,
+            "peak": 0.2975,
+            "rms": 0.0867,
+            "spectral_centroid_hz": 1895.2,
+            "zero_crossings_per_s": 2226.9
+          }
+        }
+      ]
     },
     {
       "id": "challenge-perfect",
@@ -1210,7 +1384,33 @@
           "rms": 0.1306
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 1.74,
+          "score": 0.496,
+          "metrics": {
+            "duration_s": 1.74,
+            "peak": 0.4372,
+            "rms": 0.1375,
+            "spectral_centroid_hz": 2291.1,
+            "zero_crossings_per_s": 2422.4
+          }
+        },
+        {
+          "start_s": 1.799,
+          "end_s": 3.539,
+          "score": 0.299,
+          "metrics": {
+            "duration_s": 1.74,
+            "peak": 0.438,
+            "rms": 0.1176,
+            "spectral_centroid_hz": 2336.2,
+            "zero_crossings_per_s": 3410.9
+          }
+        }
+      ]
     },
     {
       "id": "high-score-1st",
@@ -1320,7 +1520,21 @@
           "rms": 0.0495
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 3.598,
+          "end_s": 7.3,
+          "score": 0.793,
+          "metrics": {
+            "duration_s": 3.702,
+            "peak": 0.9478,
+            "rms": 0.2084,
+            "spectral_centroid_hz": 1802.5,
+            "zero_crossings_per_s": 2141.8
+          }
+        }
+      ]
     },
     {
       "id": "high-score-2nd-10th",
@@ -1430,7 +1644,45 @@
           "rms": 0.0025
         },
         "referenceWindowStatus": "broad-reference-window-needs-segmentation"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 11.295,
+          "end_s": 14.997,
+          "score": 0.786,
+          "metrics": {
+            "duration_s": 3.702,
+            "peak": 0.9425,
+            "rms": 0.2391,
+            "spectral_centroid_hz": 1699.0,
+            "zero_crossings_per_s": 2379.5
+          }
+        },
+        {
+          "start_s": 2.149,
+          "end_s": 5.851,
+          "score": 0.73,
+          "metrics": {
+            "duration_s": 3.702,
+            "peak": 0.9313,
+            "rms": 0.2626,
+            "spectral_centroid_hz": 1684.2,
+            "zero_crossings_per_s": 2648.3
+          }
+        },
+        {
+          "start_s": 7.547,
+          "end_s": 11.249,
+          "score": 0.681,
+          "metrics": {
+            "duration_s": 3.702,
+            "peak": 0.9458,
+            "rms": 0.266,
+            "spectral_centroid_hz": 1719.4,
+            "zero_crossings_per_s": 2767.7
+          }
+        }
+      ]
     },
     {
       "id": "game-over",
@@ -1540,12 +1792,51 @@
           "rms": 0.0432
         },
         "referenceWindowStatus": "direct-cue-comparison"
-      }
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 2.449,
+          "end_s": 6.081,
+          "score": 0.805,
+          "metrics": {
+            "duration_s": 3.632,
+            "peak": 0.7676,
+            "rms": 0.2131,
+            "spectral_centroid_hz": 1760.1,
+            "zero_crossings_per_s": 2147.3
+          }
+        },
+        {
+          "start_s": 6.097,
+          "end_s": 9.729,
+          "score": 0.505,
+          "metrics": {
+            "duration_s": 3.632,
+            "peak": 0.4161,
+            "rms": 0.2122,
+            "spectral_centroid_hz": 627.8,
+            "zero_crossings_per_s": 415.5
+          }
+        },
+        {
+          "start_s": 10.295,
+          "end_s": 13.927,
+          "score": 0.459,
+          "metrics": {
+            "duration_s": 3.632,
+            "peak": 0.3344,
+            "rms": 0.2115,
+            "spectral_centroid_hz": 473.8,
+            "zero_crossings_per_s": 410.5
+          }
+        }
+      ]
     }
   ],
   "summary": {
     "itemCount": 14,
     "broadReferenceWindowCount": 7,
+    "referenceSegmentCandidateCount": 22,
     "averageAuroraVsSyntheticGalagaDurationDeltaS": 0.178,
     "averageAuroraVsReferenceActiveDurationDeltaS": 3.236,
     "averageAuroraVsReferenceActiveCentroidDeltaHz": 387.7

@@ -106,6 +106,55 @@ def metric_deltas(left, right):
     }
 
 
+def closeness(value, target, tolerance):
+    if value is None or target is None:
+        return 0.0
+    return max(0.0, min(1.0, 1.0 - (abs(value - target) / max(tolerance, 0.001))))
+
+
+def similarity_score(candidate, target):
+    duration = closeness(candidate.get("duration_s"), target.get("duration_s"), 0.2)
+    centroid = closeness(candidate.get("spectral_centroid_hz"), target.get("spectral_centroid_hz"), 1200)
+    crossings = closeness(candidate.get("zero_crossings_per_s"), target.get("zero_crossings_per_s"), 800)
+    rms = closeness(candidate.get("rms"), target.get("rms"), 0.2)
+    return round((0.2 * duration) + (0.35 * centroid) + (0.25 * crossings) + (0.2 * rms), 3)
+
+
+def reference_segment_candidates(sample_rate, data, target_metrics, max_candidates=3):
+    target_duration = target_metrics.get("duration_s") or 0
+    if target_duration <= 0 or data.size == 0:
+        return []
+    window_size = min(data.size, max(1, int(target_duration * sample_rate)))
+    if window_size >= data.size:
+        return []
+
+    hop = max(1, int(sample_rate * 0.05))
+    candidates = []
+    for start in range(0, data.size - window_size + 1, hop):
+        end = start + window_size
+        segment_metrics = metrics(sample_rate, data[start:end])
+        candidates.append({
+            "start_s": round(float(start) / float(sample_rate), 3),
+            "end_s": round(float(end) / float(sample_rate), 3),
+            "score": similarity_score(segment_metrics, target_metrics),
+            "metrics": segment_metrics,
+        })
+
+    candidates.sort(key=lambda candidate: (-candidate["score"], candidate["start_s"]))
+    picked = []
+    for candidate in candidates:
+        overlaps = any(
+            candidate["start_s"] < existing["end_s"] and candidate["end_s"] > existing["start_s"]
+            for existing in picked
+        )
+        if overlaps:
+            continue
+        picked.append(candidate)
+        if len(picked) >= max_candidates:
+            break
+    return picked
+
+
 def average_delta(items, path):
     values = []
     for item in items:
@@ -225,10 +274,12 @@ def main():
             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |",
         ])
 
+        loaded_variants = {}
         for key in ("aurora", "galaga", "reference"):
             variant = item[key]
             wav_path = os.path.join(out_root, variant["wav"])
             sample_rate, data = load_wav(wav_path)
+            loaded_variants[key] = {"sampleRate": sample_rate, "data": data}
             m = metrics(sample_rate, data)
             active, active_data = active_window(sample_rate, data)
             active_metrics = metrics(sample_rate, active_data)
@@ -266,14 +317,25 @@ def main():
                 gal,
             ),
         }
+        item_report["referenceSegmentCandidates"] = reference_segment_candidates(
+            loaded_variants["reference"]["sampleRate"],
+            loaded_variants["reference"]["data"],
+            aur_active,
+        )
         readme_lines.extend([
             "",
             f"- Quick read: synthetic Galaga duration delta vs reference = `{abs(gal['duration_s'] - ref['duration_s']):.3f}s`; Aurora duration delta vs reference = `{abs(aur['duration_s'] - ref['duration_s']):.3f}s`.",
             f"- Quick read: synthetic Galaga centroid delta vs reference = `{abs(gal['spectral_centroid_hz'] - ref['spectral_centroid_hz']):.1f}Hz`; Aurora centroid delta vs reference = `{abs(aur['spectral_centroid_hz'] - ref['spectral_centroid_hz']):.1f}Hz`.",
             f"- Active-window status: `{item_report['comparisons']['referenceWindowStatus']}`.",
             f"- Active quick read: Aurora vs reference duration delta = `{item_report['comparisons']['auroraVsReferenceActive']['duration_s']:.3f}s`; centroid delta = `{item_report['comparisons']['auroraVsReferenceActive']['spectral_centroid_hz']:.1f}Hz`.",
-            "",
         ])
+        if item_report["referenceSegmentCandidates"]:
+            candidate_text = "; ".join(
+                f"{candidate['start_s']:.3f}-{candidate['end_s']:.3f}s score {candidate['score']:.3f}"
+                for candidate in item_report["referenceSegmentCandidates"]
+            )
+            readme_lines.append(f"- Candidate reference subwindows: {candidate_text}.")
+        readme_lines.append("")
         report["items"].append(item_report)
 
     report["summary"] = {
@@ -282,6 +344,7 @@ def main():
             item for item in report["items"]
             if item["comparisons"]["referenceWindowStatus"] == "broad-reference-window-needs-segmentation"
         ]),
+        "referenceSegmentCandidateCount": sum(len(item.get("referenceSegmentCandidates") or []) for item in report["items"]),
         "averageAuroraVsSyntheticGalagaDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsSyntheticGalaga", "duration_s"]),
         "averageAuroraVsReferenceActiveDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "duration_s"]),
         "averageAuroraVsReferenceActiveCentroidDeltaHz": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "spectral_centroid_hz"]),
@@ -291,6 +354,7 @@ def main():
         "",
         f"- Items: {report['summary']['itemCount']}",
         f"- Broad reference windows needing tighter segmentation: {report['summary']['broadReferenceWindowCount']}",
+        f"- Candidate reference subwindows found: {report['summary']['referenceSegmentCandidateCount']}",
         f"- Average active Aurora-vs-synthetic-Galaga duration delta: `{report['summary']['averageAuroraVsSyntheticGalagaDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference duration delta: `{report['summary']['averageAuroraVsReferenceActiveDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference centroid delta: `{report['summary']['averageAuroraVsReferenceActiveCentroidDeltaHz']:.1f}Hz`",

@@ -89,11 +89,12 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `6.4/10` |
-| Active Aurora-vs-synthetic-Galaga duration delta | `0.050s` |
-| Active Aurora-vs-reference duration delta | `3.104s` |
-| Active Aurora-vs-reference centroid delta | `386.7Hz` |
+| Quality score audio category | `6.3/10` |
+| Active Aurora-vs-synthetic-Galaga duration delta | `0.178s` |
+| Active Aurora-vs-reference duration delta | `3.236s` |
+| Active Aurora-vs-reference centroid delta | `387.7Hz` |
 | Broad reference windows needing segmentation | `7/14` |
+| Candidate reference subwindows found | `22` |
 
 This means Aurora's internal synthetic theme comparison is close, but the
 reference-facing audio score remains intentionally conservative until the broad
