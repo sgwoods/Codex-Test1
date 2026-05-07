@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-07T19-48-08-799Z-95510",
-  "startedAt": "2026-05-07T19:48:08.799Z",
-  "endedAt": "2026-05-07T19:48:08.841Z",
-  "branch": "codex/macbook-pro-conformance-economics",
-  "commit": "f4e0d13",
+  "id": "2026-05-07T20-50-35-200Z-7213",
+  "startedAt": "2026-05-07T20:50:35.200Z",
+  "endedAt": "2026-05-07T20:50:35.391Z",
+  "branch": "codex/macbook-pro-stage4-butterfly-lane2-pressure",
+  "commit": "13704be",
   "command": [
-    "node",
-    "-e",
-    "console.log('economics ledger smoke')"
+    "npm",
+    "run",
+    "harness:compare:stage4-pressure-source-replay"
   ],
   "axes": [
-    "economics"
+    "stage4-pressure",
+    "conformance-economics"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "quick-ledger-smoke",
+  "notes": "Stage4 compare final no cue",
   "measurement": {
-    "wallSeconds": 0.042,
-    "timeRealSeconds": 0.03,
-    "timeUserSeconds": 0.03,
-    "timeSystemSeconds": 0,
-    "cpuSeconds": 0.03,
+    "wallSeconds": 0.191,
+    "timeRealSeconds": 0.18,
+    "timeUserSeconds": 0.14,
+    "timeSystemSeconds": 0.03,
+    "cpuSeconds": 0.17,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -38,8 +39,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 222290282,
-    "artifactBytesAfter": 222290282,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 223831838,
+    "artifactBytesAfter": 223830910,
+    "artifactBytesDelta": -928
   }
 }
