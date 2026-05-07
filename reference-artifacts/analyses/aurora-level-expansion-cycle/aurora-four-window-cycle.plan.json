@@ -53,6 +53,21 @@
       "selection_note": "Measure settled-run attack density and survivability before adding later-level variation."
     },
     {
+      "window_id": "mid-run-entry-variant",
+      "role": "mid_run_entry_variant",
+      "source_kind": "aurora_harness_or_self_play_video",
+      "needs_waveform": false,
+      "event_families": [
+        "formation_entry",
+        "enemy_dive_start",
+        "escort_dive_start",
+        "enemy_projectile",
+        "player_hit",
+        "wave_clear"
+      ],
+      "selection_note": "Add a second mid-run window so stage-signature distance can tell mid-run texture from a single seed artifact."
+    },
+    {
       "window_id": "late-run-cleanup-or-failure",
       "role": "late_run_cleanup_or_failure",
       "source_kind": "aurora_harness_or_self_play_video",
@@ -65,6 +80,22 @@
         "game_over"
       ],
       "selection_note": "Catch unfair collapse, depletion, last-life pressure, and end-of-wave behavior."
+    },
+    {
+      "window_id": "late-run-escort-variant",
+      "role": "late_run_escort_variant",
+      "source_kind": "aurora_harness_or_self_play_video",
+      "needs_waveform": false,
+      "event_families": [
+        "formation_entry",
+        "enemy_dive_start",
+        "escort_dive_start",
+        "enemy_projectile",
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "selection_note": "Add a second late-run window focused on higher-stage pressure and possible escort/body-contact signatures."
     }
   ],
   "required_artifacts": [

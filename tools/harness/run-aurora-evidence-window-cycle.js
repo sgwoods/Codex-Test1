@@ -15,8 +15,24 @@ const WINDOW_SCENARIOS = {
   'stage-1-baseline': 'stage1-descent',
   'challenge-stage-candidate': 'stage3-challenge',
   'mid-run-pressure': 'stage6-regular',
-  'late-run-cleanup-or-failure': 'stage12-variety'
+  'mid-run-entry-variant': 'stage8-entry-variant',
+  'late-run-cleanup-or-failure': 'stage12-variety',
+  'late-run-escort-variant': 'stage14-escort-variant'
 };
+
+function selectedWindowIds(argv){
+  const selected = new Set();
+  for(let i = 0; i < argv.length; i += 1){
+    const arg = argv[i];
+    if(arg === '--window' && argv[i + 1]){
+      selected.add(argv[i + 1]);
+      i += 1;
+    }else if(arg.startsWith('--window=')){
+      selected.add(arg.slice('--window='.length));
+    }
+  }
+  return selected;
+}
 
 function rel(file){
   return path.relative(ROOT, file).replace(/\\/g, '/');
@@ -477,22 +493,31 @@ function harnessTargets(win, eventLog){
 async function main(){
   if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))) throw new Error('Built app missing. Run npm run build first.');
   const plan = readJson(PLAN_PATH);
+  const selected = selectedWindowIds(process.argv.slice(2));
   const { server, port } = await serve(APP_ROOT);
   const browser = await launchHarnessBrowser();
   try{
     const results = [];
     for(const win of plan.windows || []){
+      if(selected.size && !selected.has(win.window_id)) continue;
       const scenarioName = WINDOW_SCENARIOS[win.window_id];
       if(!scenarioName) continue;
       results.push(await runWindow({ browser, serverPort: port, plan, win, scenarioName }));
     }
+    const previousSummaryPath = path.join(ROOT, plan.output_root, 'aurora-evidence-window-cycle-summary.json');
+    const previousSummary = selected.size && fs.existsSync(previousSummaryPath)
+      ? readJson(previousSummaryPath)
+      : null;
+    const resultMap = new Map((previousSummary?.results || []).map(result => [result.window_id, result]));
+    for(const result of results) resultMap.set(result.window_id, result);
     const summary = {
       schema_version: 1,
       status: 'aurora-evidence-windows-captured',
       generated_by: 'tools/harness/run-aurora-evidence-window-cycle.js',
       generated_at: new Date().toISOString(),
-      window_count: results.length,
-      results
+      window_count: resultMap.size,
+      captured_this_run: results.map(result => result.window_id),
+      results: [...resultMap.values()].sort((a, b) => a.window_id.localeCompare(b.window_id))
     };
     writeJson(path.join(ROOT, plan.output_root, 'aurora-evidence-window-cycle-summary.json'), summary);
     console.log(JSON.stringify(summary, null, 2));

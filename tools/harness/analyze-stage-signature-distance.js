@@ -135,12 +135,20 @@ function loadWindow(dir){
     id: path.basename(dir),
     scenario: manifest.scenario,
     stage: manifest.config?.stage || summary.final_stage || null,
+    stageBand: stageBand(manifest.config?.stage || summary.final_stage || 1, Boolean(manifest.config?.challenge || summary.final_challenge)),
     challenge: Boolean(manifest.config?.challenge || summary.final_challenge),
     duration,
     summary,
     observedEventFamilies: [...families].sort(),
     features
   };
+}
+
+function stageBand(stage, challenge){
+  if(challenge) return 'challenge';
+  if(stage <= 2) return 'early';
+  if(stage < 10) return 'mid';
+  return 'late';
 }
 
 function distance(a, b){
@@ -169,6 +177,10 @@ function main(){
       pairs.push({
         a: windows[i].id,
         b: windows[j].id,
+        aStage: windows[i].stage,
+        bStage: windows[j].stage,
+        aBand: windows[i].stageBand,
+        bBand: windows[j].stageBand,
         distance: distance(windows[i], windows[j])
       });
     }
@@ -180,6 +192,11 @@ function main(){
   const maxDistance = distances.length ? Math.max(...distances) : 0;
   const distinctPairRatio = pairs.length ? pairs.filter(pair => pair.distance >= 0.22).length / pairs.length : 0;
   const repetitionRisk = clamp(1 - (minDistance / 0.22));
+  const regularPairs = pairs.filter(pair => pair.aBand !== 'challenge' && pair.bBand !== 'challenge');
+  const midLatePairs = regularPairs.filter(pair => [pair.aBand, pair.bBand].sort().join('/') === 'late/mid');
+  const sameBandRegularPairs = regularPairs.filter(pair => pair.aBand === pair.bBand);
+  const meanRegularDistance = average(regularPairs.map(pair => pair.distance));
+  const meanMidLateDistance = average(midLatePairs.map(pair => pair.distance));
   const signatureScore10 = round(10 * (
     (0.45 * clamp(meanDistance / 0.32))
     + (0.35 * distinctPairRatio)
@@ -204,7 +221,15 @@ function main(){
       repetitionRisk: round(repetitionRisk),
       signatureScore10,
       closestPair: pairs[0] || null,
-      mostDistinctPair: pairs.at(-1) || null
+      mostDistinctPair: pairs.at(-1) || null,
+      regularWindowCount: windows.filter(window => window.stageBand !== 'challenge').length,
+      meanRegularDistance: round(meanRegularDistance),
+      minRegularDistance: regularPairs[0]?.distance || 0,
+      closestRegularPair: regularPairs[0] || null,
+      meanMidLateDistance: round(meanMidLateDistance),
+      minMidLateDistance: midLatePairs[0]?.distance || 0,
+      closestMidLatePair: midLatePairs[0] || null,
+      closestSameBandRegularPair: sameBandRegularPairs[0] || null
     },
     windows,
     pairs
@@ -225,6 +250,12 @@ function main(){
     `- Repetition risk: ${report.summary.repetitionRisk}`,
     `- Closest pair: ${report.summary.closestPair ? `${report.summary.closestPair.a} / ${report.summary.closestPair.b} (${report.summary.closestPair.distance})` : 'n/a'}`,
     `- Most distinct pair: ${report.summary.mostDistinctPair ? `${report.summary.mostDistinctPair.a} / ${report.summary.mostDistinctPair.b} (${report.summary.mostDistinctPair.distance})` : 'n/a'}`,
+    `- Regular windows: ${report.summary.regularWindowCount}`,
+    `- Mean regular distance: ${report.summary.meanRegularDistance}`,
+    `- Minimum regular distance: ${report.summary.minRegularDistance}`,
+    `- Minimum mid/late distance: ${report.summary.minMidLateDistance}`,
+    `- Closest mid/late pair: ${report.summary.closestMidLatePair ? `${report.summary.closestMidLatePair.a} / ${report.summary.closestMidLatePair.b} (${report.summary.closestMidLatePair.distance})` : 'n/a'}`,
+    `- Closest same-band regular pair: ${report.summary.closestSameBandRegularPair ? `${report.summary.closestSameBandRegularPair.a} / ${report.summary.closestSameBandRegularPair.b} (${report.summary.closestSameBandRegularPair.distance})` : 'n/a'}`,
     '',
     '## Windows',
     ''
@@ -233,6 +264,7 @@ function main(){
     lines.push(`### ${window.id}`);
     lines.push(`- Scenario: ${window.scenario}`);
     lines.push(`- Stage: ${window.stage}`);
+    lines.push(`- Stage band: ${window.stageBand}`);
     lines.push(`- Challenge: ${window.challenge}`);
     lines.push(`- Observed event families: ${window.observedEventFamilies.join(', ') || 'none'}`);
     lines.push(`- Pressure read: max attackers ${window.summary.max_attackers || 0}, max enemy bullets ${window.summary.max_enemy_bullets || 0}, max challenge enemies ${window.summary.max_challenge_enemies || 0}`);

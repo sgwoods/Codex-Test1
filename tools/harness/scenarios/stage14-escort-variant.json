@@ -1,0 +1,22 @@
+{
+  "name": "stage14-escort-variant",
+  "seed": 14014,
+  "duration": 12,
+  "config": {
+    "stage": 14,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.45, "action": "down", "code": "Space" },
+    { "t": 0.65, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.4, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.45, "action": "down", "code": "ArrowRight" },
+    { "t": 5.2, "action": "up", "code": "ArrowRight" },
+    { "t": 5.25, "action": "down", "code": "ArrowLeft" },
+    { "t": 8.7, "action": "up", "code": "ArrowLeft" },
+    { "t": 8.75, "action": "down", "code": "ArrowRight" },
+    { "t": 10.8, "action": "up", "code": "ArrowRight" },
+    { "t": 11.1, "action": "up", "code": "Space" }
+  ]
+}

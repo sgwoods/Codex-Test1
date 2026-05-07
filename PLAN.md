@@ -127,8 +127,9 @@ Current conformance read:
 - overall Aurora quality is `9.1/10` across eleven scored categories
 - audio identity and cue alignment is the weakest category at `6.3/10`
 - level arc and encounter shape is now a first-class high-priority category at
-  `7.9/10`; the new stage-signature distance harness scores `7.9/10` and shows
-  the main next gap is separating regular mid-run and late-run signatures
+  `8.2/10`; the expanded six-window stage-signature distance harness scores
+  `5.8/10` and shows the main next gap is separating repeated regular-stage
+  signatures, especially late-run and mid/late pairs
 - the audio score is now stricter: it includes active reference-cue similarity
   and reference-window precision, with `7/14` Aurora audio reference windows
   still needing tighter segmentation and `22` candidate subwindows now proposed
@@ -136,7 +137,7 @@ Current conformance read:
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in
-  `reference-artifacts/analyses/quality-conformance/2026-05-07-b22a3a2/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-07-53d37a8/report.json`
 - the current long-cycle baseline is captured in
   `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
 - the Track 1 movement/shot-feel finding is captured in

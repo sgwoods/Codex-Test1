@@ -232,7 +232,9 @@ function main(){
       strongestSubmetric: submetrics.reduce((best, metric) => metric.score10 > best.score10 ? metric : best, submetrics[0]),
       weakestSubmetric: submetrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, submetrics[0]),
       nextRecommendedWork: [
-        'expand stage-signature distance coverage with more mid-run and late-run windows',
+        stageSignature.summary?.windowCount >= 6
+          ? 'implement one later-level entry or escort variation and require improved regular-stage signature separation'
+          : 'expand stage-signature distance coverage with more mid-run and late-run windows',
         'implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback',
         'add one later-level entry or escort variation family and measure whether mid-run versus late-run signatures separate without unfair collapse'
       ]

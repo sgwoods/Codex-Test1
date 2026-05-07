@@ -117,9 +117,9 @@ Current conformance read:
 - overall Aurora quality is `9.1/10` across eleven scored categories
 - audio identity and cue alignment is the weakest category at `6.3/10`
 - level arc and encounter shape is now a high-priority scored category at
-  `7.9/10`, backed by first-pass stage-signature distance scoring; the main
-  gap is now regular mid-run versus regular late-run distinction, not the
-  challenge-stage window
+  `8.2/10`, backed by six-window stage-signature distance scoring; the main
+  gap is now regular-stage repetition, especially late-run windows and close
+  mid/late pairs, not the challenge-stage window
 - player movement conformance now reads `10/10`; the prior `8.0/10` gap was
   traced to harness recenter input suppression, not to gameplay movement
   constants

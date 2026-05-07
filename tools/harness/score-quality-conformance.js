@@ -313,7 +313,7 @@ function main(){
       id: 'level-arc',
       label: 'Level arc and encounter shape',
       score10: scoreLevelArcReport(levelArcReport),
-      evidence: ['level-arc-conformance report', 'level-expansion cycle evidence'],
+      evidence: ['level-arc-conformance report', 'stage-signature-distance report', 'level-expansion cycle evidence'],
       details: levelArcReport.summary,
       read: `Level arc score is ${levelArcReport.summary.score10}/10 with ${levelArcReport.summary.stageFamilyBlueprintCount}/6 stage families blueprinted and ${levelArcReport.summary.evidenceWindowCount}/6 evidence windows present; weakest submetric is ${levelArcReport.summary.weakestSubmetric.label} (${levelArcReport.summary.weakestSubmetric.score10}/10).`
     },
