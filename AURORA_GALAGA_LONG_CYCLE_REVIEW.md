@@ -75,7 +75,11 @@ Boundary checkpoint on May 6, 2026:
 
 - official current Aurora score: `9.0/10`
 - official score report:
-  `reference-artifacts/analyses/quality-conformance/2026-05-06-72fe7b0/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-07-cf7b7d2/report.json`
+- level arc and encounter shape is now a first-class high-priority category at
+  `7.4/10`
+- level arc report:
+  `reference-artifacts/analyses/level-arc-conformance/2026-05-07-cf7b7d2/report.json`
 - detailed metric-gap and automation agenda:
   `reference-artifacts/analyses/aurora-galaga-long-cycle/conformance-gap-evolution-plan-2026-05-06.json`
 
@@ -89,9 +93,10 @@ Current score gaps to a truly convincing Galaga-family conformance target:
 | Stage-1 opening geometry fidelity | `10.0` | `0.0` | Keep target geometry as a hard gate and add sprite/pixel contact-sheet scoring. |
 | Dive fairness and safety | `9.1` | `0.9` | Run adversarial seed search and collision-risk heatmaps across later stages. |
 | Capture and rescue rule fidelity | `10.0` | `0.0` | Expand from covered scenarios into event-grammar and state-space checks. |
-| Challenge-stage timing fidelity | `8.4` | `1.6` | Add challenge path, hit-opportunity, non-lethal, and result-surface measurements. |
+| Challenge-stage timing fidelity | `9.9` | `0.1` | Add challenge path, hit-opportunity, non-lethal, and result-surface measurements beyond timing. |
 | Progression and persona depth | `8.8` | `1.2` | Use long-run distributional persona batches and stage-band variety reports. |
-| Audio identity and cue alignment | `6.1` | `3.9` | Build cue-level waveform/spectral comparison and parameter-sweep optimization. |
+| Level arc and encounter shape | `7.4` | `2.6` | Build a stage-signature distance harness, then implement one challenge-stage movement/reward slice and one later-level entry/escort variation. |
+| Audio identity and cue alignment | `6.3` | `3.7` | Promote candidate reference subwindows, then build cue-level waveform/spectral comparison and parameter-sweep optimization. |
 | UI, shell, and graphics integrity | `9.2` | `0.8` | Split gameplay visual conformance from shell integrity before Track 3. |
 
 The highest-value automation theme is to make Codex improve the assessment
@@ -259,6 +264,7 @@ Primary questions:
 
 Required gates:
 
+- `npm run harness:analyze:level-arc-conformance`
 - `npm run harness:check:challenge-stage-correspondence`
 - `npm run harness:check:challenge-outcomes`
 - `npm run harness:check:stage-pressure`

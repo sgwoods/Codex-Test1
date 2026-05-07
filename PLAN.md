@@ -111,7 +111,8 @@ This means:
 
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
-3. prioritize movement fidelity, audio identity polish, and boundary cleanup
+3. prioritize level-arc shape, movement fidelity, audio identity polish, and
+   boundary cleanup
 4. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
 5. prioritize level-by-level arcade depth as the next major product pillar
@@ -123,8 +124,11 @@ This means:
 
 Current conformance read:
 
-- overall Aurora quality is `9.2/10`
+- overall Aurora quality is `9.0/10` across eleven scored categories
 - audio identity and cue alignment is the weakest category at `6.3/10`
+- level arc and encounter shape is now a first-class high-priority category at
+  `7.4/10`, with long-run non-repetition and movement-grammar expansion as the
+  most important next measurement gaps
 - the audio score is now stricter: it includes active reference-cue similarity
   and reference-window precision, with `7/14` Aurora audio reference windows
   still needing tighter segmentation and `22` candidate subwindows now proposed

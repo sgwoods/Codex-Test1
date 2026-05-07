@@ -12,6 +12,8 @@ The score is deliberately evidence-first:
 
 - use correspondence reports when they exist
 - use targeted harnesses for regression-sensitive behavior
+- use level-arc analysis for stage-family shape, encounter variety, pressure
+  over time, and long-run non-repetition
 - use reference-audio analyses where direct runtime reports are not yet richer
 - use surface integrity checks for shell, graphics, and panel stability
 
@@ -84,7 +86,19 @@ Each category scores from `1` to `10`.
      - ordering of the persona ladder
      - whether higher-skill personas still show deeper / stronger runs
 
-9. `Audio identity and cue alignment`
+9. `Level arc and encounter shape`
+   - Evidence:
+     - `reference-artifacts/analyses/level-arc-conformance/*/report.json`
+     - `reference-artifacts/analyses/aurora-level-expansion-cycle`
+   - Focus:
+     - stage distinctiveness over time
+     - challenge-stage identity and bonus-opportunity learning
+     - movement grammar expansion
+     - boss and reward opportunity design
+     - pressure curves across early, middle, later, and challenge windows
+     - long-run non-repetition
+
+10. `Audio identity and cue alignment`
    - Evidence:
      - `reference-artifacts/analyses/aurora-audio-theme-comparison/*/metrics.json`
      - `reference-artifacts/analyses/galaga-audio-overlap/*/metrics.json`
@@ -95,7 +109,7 @@ Each category scores from `1` to `10`.
        isolated cue matches
      - stage / challenge timing windows for cue overlap and handoff
 
-10. `UI, shell, and graphics integrity`
+11. `UI, shell, and graphics integrity`
     - Evidence:
       - `tools/harness/check-dev-candidate-surface-suite.js`
     - Focus:
@@ -114,7 +128,7 @@ Each category scores from `1` to `10`.
 - `3-4.9`: meaningfully behind the intended standard
 - `1-2.9`: clearly weak and likely release-shaping
 
-The roll-up score is the simple average of the ten category scores so that the
+The roll-up score is the simple average of the eleven category scores so that the
 low-scoring gaps stay visible.
 
 ## Current Caveats
@@ -124,6 +138,9 @@ low-scoring gaps stay visible.
   - it is not yet a full trace extraction from the preserved Galaga footage
 - `Audio identity and cue alignment` is partly reference-analysis based and not
   yet a full runtime cue-by-cue correspondence family
+- `Level arc and encounter shape` now has a first-pass score, but it is still
+  missing the stronger stage-signature distance harness that should penalize
+  repetitive long-run play directly
 - The model is meant to be expanded, not treated as finished
 
 The main rule is simple:

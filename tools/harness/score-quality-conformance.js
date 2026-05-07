@@ -190,11 +190,15 @@ function scoreAudio(metricsTheme, metricsOverlap, alignmentReport){
   return scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport).score10;
 }
 
+function scoreLevelArcReport(report){
+  return round(clamp(report.summary?.score10 || report.score10 || 1, 1, 10), 1);
+}
+
 function buildReadme(report){
   const lines = [
     '# Quality Conformance Score',
     '',
-    'This artifact rolls Aurora quality into ten evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.',
+    'This artifact rolls Aurora quality into eleven evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.',
     '',
     '## Overall',
     '',
@@ -229,6 +233,7 @@ function main(){
   const stage2SafetyRun = runScript('check-persona-stage2-safety.js');
   const surfaceRun = runScript('check-dev-candidate-surface-suite.js');
   const audioAlignmentRun = runScript('check-audio-cue-alignment-correspondence.js');
+  const levelArcRun = runScript('analyze-level-arc-conformance.js');
 
   const movementReport = readJson(latestReport('reference-artifacts/analyses/correspondence/player-movement'));
   const stage1TimingReport = readJson(latestReport('reference-artifacts/analyses/correspondence/stage1-opening-first-dive'));
@@ -236,6 +241,7 @@ function main(){
   const captureReport = readJson(latestReport('reference-artifacts/analyses/correspondence/capture-rescue'));
   const challengeReport = readJson(latestReport('reference-artifacts/analyses/correspondence/challenge-stage-timing'));
   const progressionReport = readJson(latestReport('reference-artifacts/analyses/correspondence/persona-progression'));
+  const levelArcReport = readJson(latestReport('reference-artifacts/analyses/level-arc-conformance'));
   const audioAlignmentReport = readJson(latestReport('reference-artifacts/analyses/correspondence/audio-cue-alignment'));
   const audioThemeMetrics = readJson(latestMetrics('reference-artifacts/analyses/aurora-audio-theme-comparison'));
   const audioOverlapMetrics = readJson(latestMetrics('reference-artifacts/analyses/galaga-audio-overlap'));
@@ -301,6 +307,14 @@ function main(){
       read: `${progressionReport.summary.passedPersonaChecks}/${progressionReport.summary.totalPersonaChecks} persona checks passed; progression ordering is ${progressionReport.summary.currentProgressionOrderPreserved ? 'fully preserved' : 'still missing one ordering edge case'}.`
     },
     {
+      id: 'level-arc',
+      label: 'Level arc and encounter shape',
+      score10: scoreLevelArcReport(levelArcReport),
+      evidence: ['level-arc-conformance report', 'level-expansion cycle evidence'],
+      details: levelArcReport.summary,
+      read: `Level arc score is ${levelArcReport.summary.score10}/10 with ${levelArcReport.summary.stageFamilyBlueprintCount}/6 stage families blueprinted and ${levelArcReport.summary.evidenceWindowCount}/6 evidence windows present; weakest submetric is ${levelArcReport.summary.weakestSubmetric.label} (${levelArcReport.summary.weakestSubmetric.score10}/10).`
+    },
+    {
       id: 'audio',
       label: 'Audio identity and cue alignment',
       score10: audioScore.score10,
@@ -332,6 +346,7 @@ function main(){
     stage2SafetyRun,
     surfaceRun,
     audioAlignmentRun,
+    levelArcRun,
     categories,
     summary: {
       overallScore10,
