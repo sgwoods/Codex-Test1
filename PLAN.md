@@ -127,10 +127,13 @@ Current conformance read:
 - overall Aurora quality is `9.1/10` across eleven scored categories
 - audio identity and cue alignment is the weakest category at `6.3/10`
 - level arc and encounter shape is now a first-class high-priority category at
-  `8.3/10`; the expanded six-window stage-signature distance harness scores
+  `8.4/10`; the expanded six-window stage-signature distance harness scores
   `6.4/10` after adding attack-role features, a stage-14 escort variation, and
   a measured stage-8 flank-dive grammar. The closest mid/late gap is now
-  `0.129`, and the closest same-band regular pair is now `0.174`
+  `0.129`, and the closest same-band regular pair is now `0.174`. The Stage 4
+  pressure replay harness now reads `1/3` exact source-window reproduction and
+  identifies the butterfly lane-2 window as the next high-value precision/tuning
+  target
 - the audio score is now stricter: it includes active reference-cue similarity
   and reference-window precision, with `7/14` Aurora audio reference windows
   still needing tighter segmentation and `22` candidate subwindows now proposed
@@ -138,7 +141,7 @@ Current conformance read:
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in
-  `reference-artifacts/analyses/quality-conformance/2026-05-07-2aeaafa/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-07-bfcc311/report.json`
 - the current stage-signature distance read is captured in
   `reference-artifacts/analyses/stage-signature-distance/2026-05-07-2aeaafa/report.json`
 - the current long-cycle baseline is captured in

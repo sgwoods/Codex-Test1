@@ -9,14 +9,17 @@ content, alien behavior, movement texture, and shared gameplay evidence to stand
 beside the original Galaga reference with more confidence.
 
 This work is now represented directly in the quality scorecard as `Level arc
-and encounter shape`, currently `8.3/10`. That category is high priority for
+and encounter shape`, currently `8.4/10`. That category is high priority for
 `1.4` because it measures whether Aurora develops a Galaga-like learning and
 encounter arc over time rather than repeating a strong early-stage loop. The
 expanded six-window stage-signature distance pass scores `6.4/10` after adding
 attack-role features, a measured stage-14 escort variation, and a stage-8
 flank-dive grammar. The closest remaining mid/late gap is
 late-run-cleanup-or-failure / mid-run-entry-variant at `0.129`, with
-mid-run-entry-variant / mid-run-pressure at `0.174`.
+mid-run-entry-variant / mid-run-pressure at `0.174`. The Stage 4 pressure
+window harness now separates exact replay, same-window collision pressure, and
+blocking pre-window losses; exact replay improved to `1/3`, while
+pressure-collision diagnostic coverage is `1/3`.
 
 ## Decision
 
@@ -42,7 +45,9 @@ target for implementation. The next implementation step should be pressure
 replay precision work plus one challenge-stage reward/feedback slice, both
 measured against survivability, signature distance, and reproducible loss
 windows. The later-level escort and mid-run flank variations have now been
-proven valuable enough to keep.
+proven valuable enough to keep. The next pressure target is the Stage 4
+butterfly lane-2 source window because it still classifies as
+`no-loss-near-window`.
 
 ## Why This Is Important
 

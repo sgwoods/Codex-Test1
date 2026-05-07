@@ -82,17 +82,17 @@ function shortCommit(){
   return git(['rev-parse', '--short', 'HEAD']) || 'unknown';
 }
 
-function runScenario(name){
+function runScenario(name, opts = {}){
   const args = [
     HARNESS,
     '--scenario', name,
-    '--out', RUN_OUT,
-    '--auto-video', '0'
+    '--out', RUN_OUT
   ];
+  if(opts.autoVideo === false) args.push('--auto-video', '0');
   const run = spawnSync(process.execPath, args, {
     cwd: ROOT,
     encoding: 'utf8',
-    timeout: 90000
+    timeout: opts.autoVideo === false ? 90000 : 140000
   });
   if(run.status !== 0){
     const err = new Error('loss-window scenario run failed');
@@ -280,6 +280,43 @@ function summarizeWindow(spec, summary){
   };
 }
 
+function collisionLossesInRange(losses, range){
+  return losses.filter(loss =>
+    loss.cause === 'enemy_collision' &&
+    Number.isFinite(+loss.stageClock) &&
+    loss.stageClock >= range[0] &&
+    loss.stageClock <= range[1]
+  );
+}
+
+function summarizeReplayDiagnostics(spec, replay){
+  const losses = replay.losses || [];
+  const sameWindowCollisionLosses = collisionLossesInRange(losses, spec.expected.stageClock);
+  const blockingLosses = losses.filter(loss =>
+    Number.isFinite(+loss.stageClock) &&
+    loss.stageClock < spec.expected.stageClock[0]
+  );
+  const blockingCollisionLosses = blockingLosses.filter(loss => loss.cause === 'enemy_collision');
+  const sourceWindowReached = (replay.state?.stage === 4 && (replay.state?.simT || 0) >= spec.expected.stageClock[0]) ||
+    (replay.state?.stage || 0) > 4;
+  let classification = 'no-loss-near-window';
+  if(replay.reproduced) classification = 'exact-source-loss';
+  else if(sameWindowCollisionLosses.length) classification = 'same-window-alternate-collision';
+  else if(blockingLosses.length) classification = 'blocked-before-source-window';
+  else if(!sourceWindowReached) classification = 'source-window-not-reached';
+  return {
+    classification,
+    exactSourceLoss: !!replay.reproduced,
+    sameWindowCollision: sameWindowCollisionLosses.length > 0,
+    blockedBeforeSourceWindow: blockingLosses.length > 0,
+    sourceWindowReached,
+    pressureCollisionReproduced: !!replay.reproduced || sameWindowCollisionLosses.length > 0,
+    sameWindowCollisionLosses,
+    blockingLosses,
+    blockingCollisionLosses
+  };
+}
+
 function compactSourceLoss(loss){
   if(!loss) return null;
   return {
@@ -341,7 +378,9 @@ function buildReadme(report){
     '## Success Criteria For This Phase',
     '',
     `- Source windows found: ${report.summary.sourceWindowsFound}/${report.summary.totalWindows}`,
-    `- Fresh replay probes reproduced: ${report.summary.replayReproducedWindows}/${report.summary.totalWindows}`,
+    `- Fresh replay probes reproduced exact source losses: ${report.summary.replayReproducedWindows}/${report.summary.totalWindows}`,
+    `- Fresh replay probes reproduced same-window collision pressure: ${report.summary.pressureCollisionReproducedWindows}/${report.summary.totalWindows}`,
+    `- Video-backed probes blocked before the target source window: ${report.summary.videoBackedBlockedBeforeSourceWindow}/${report.summary.totalWindows}`,
     `- Overall assessment gate: ${report.ok ? 'PASS' : 'FAIL'}`,
     '',
     'A pass here means the measurement problem improved and the replay reproducibility gap is measured. It does not mean gameplay conformance improved yet.',
@@ -353,15 +392,23 @@ function buildReadme(report){
     lines.push(`### ${result.id}`);
     lines.push(`- Scenario: \`${result.scenario}\``);
     lines.push(`- Archived source matches: ${result.source.found ? result.source.matchCount : 0}`);
-    lines.push(`- Fresh replay reproduced expected signature: ${result.replay.reproduced ? 'yes' : 'no'}`);
-    lines.push(`- Fresh replay loss count: ${result.replay.lossCount}`);
+    lines.push(`- No-video replay classification: ${result.replayDiagnostics.noVideo.classification}`);
+    lines.push(`- Video-backed replay classification: ${result.replayDiagnostics.videoBacked.classification}`);
+    lines.push(`- No-video replay reproduced expected signature: ${result.replay.reproduced ? 'yes' : 'no'}`);
+    lines.push(`- Video-backed replay reproduced expected signature: ${result.videoReplay.reproduced ? 'yes' : 'no'}`);
+    lines.push(`- No-video replay loss count: ${result.replay.lossCount}`);
+    lines.push(`- Video-backed replay loss count: ${result.videoReplay.lossCount}`);
     if(result.source.representativeLoss){
       const loss = result.source.representativeLoss;
       lines.push(`- Source loss: \`${loss.cause}|${loss.sourceType}|playerLane:${loss.playerLane}|sourceLane:${loss.sourceLane}|sourceColumn:${loss.sourceColumn}|t:${loss.stageClock}|hitBefore:${loss.hitBeforeCollision}\``);
     }
     if(result.replay.bestLoss){
       const loss = result.replay.bestLoss;
-      lines.push(`- Fresh replay nearest loss: \`${loss.cause}|${loss.sourceType}|playerLane:${loss.playerLane}|sourceLane:${loss.sourceLane}|sourceColumn:${loss.sourceColumn}|t:${loss.stageClock}|hitBefore:${loss.hitBeforeCollision}\``);
+      lines.push(`- No-video replay nearest loss: \`${loss.cause}|${loss.sourceType}|playerLane:${loss.playerLane}|sourceLane:${loss.sourceLane}|sourceColumn:${loss.sourceColumn}|t:${loss.stageClock}|hitBefore:${loss.hitBeforeCollision}\``);
+    }
+    if(result.videoReplay.bestLoss){
+      const loss = result.videoReplay.bestLoss;
+      lines.push(`- Video-backed replay nearest loss: \`${loss.cause}|${loss.sourceType}|playerLane:${loss.playerLane}|sourceLane:${loss.sourceLane}|sourceColumn:${loss.sourceColumn}|t:${loss.stageClock}|hitBefore:${loss.hitBeforeCollision}\``);
     }
     lines.push('');
   }
@@ -381,19 +428,39 @@ function main(){
   const results = [];
   for(const spec of WINDOWS){
     let summary;
+    let videoSummary;
     try{
-      summary = runScenario(spec.scenario);
+      summary = runScenario(spec.scenario, { autoVideo: false });
+      videoSummary = runScenario(spec.scenario, { autoVideo: true });
     }catch(err){
       fail(err.message || 'loss-window scenario failed', err.payload || { scenario: spec.scenario });
     }
+    const replay = summarizeWindow(spec, summary);
+    const videoReplay = summarizeWindow(spec, videoSummary);
     results.push({
       id: spec.id,
       scenario: spec.scenario,
       expected: spec.expected,
       source: summarizeSourceWindow(spec, riskReport),
-      replay: summarizeWindow(spec, summary)
+      replay,
+      videoReplay,
+      replayDiagnostics: {
+        noVideo: summarizeReplayDiagnostics(spec, replay),
+        videoBacked: summarizeReplayDiagnostics(spec, videoReplay)
+      }
     });
   }
+  const exactReplayWindows = results.filter(result =>
+    result.replayDiagnostics.noVideo.exactSourceLoss ||
+    result.replayDiagnostics.videoBacked.exactSourceLoss
+  ).length;
+  const pressureCollisionWindows = results.filter(result =>
+    result.replayDiagnostics.noVideo.pressureCollisionReproduced ||
+    result.replayDiagnostics.videoBacked.pressureCollisionReproduced
+  ).length;
+  const videoBlockedWindows = results.filter(result =>
+    result.replayDiagnostics.videoBacked.blockedBeforeSourceWindow
+  ).length;
   const report = {
     schema_version: 1,
     artifact_type: 'aurora-stage4-loss-window-assessment',
@@ -408,8 +475,13 @@ function main(){
     summary: {
       totalWindows: results.length,
       sourceWindowsFound: results.filter(result => result.source.found).length,
-      replayReproducedWindows: results.filter(result => result.replay.reproduced).length,
-      replayProbeMode: 'realtime-no-video'
+      replayReproducedWindows: exactReplayWindows,
+      noVideoReplayReproducedWindows: results.filter(result => result.replay.reproduced).length,
+      videoBackedReplayReproducedWindows: results.filter(result => result.videoReplay.reproduced).length,
+      pressureCollisionReproducedWindows: pressureCollisionWindows,
+      videoBackedBlockedBeforeSourceWindow: videoBlockedWindows,
+      replayProbeMode: 'realtime-no-video-plus-video-backed',
+      replayProbeModes: ['realtime-no-video', 'realtime-video-backed']
     },
     results
   };
@@ -432,6 +504,12 @@ function main(){
       sourceMatchCount: result.source.matchCount,
       replayReproduced: result.replay.reproduced,
       replayLossCount: result.replay.lossCount,
+      videoReplayReproduced: result.videoReplay.reproduced,
+      videoReplayLossCount: result.videoReplay.lossCount,
+      replayDiagnostics: {
+        noVideo: result.replayDiagnostics.noVideo.classification,
+        videoBacked: result.replayDiagnostics.videoBacked.classification
+      },
       sourceLoss: result.source.representativeLoss && {
         cause: result.source.representativeLoss.cause,
         sourceType: result.source.representativeLoss.sourceType,
@@ -449,6 +527,15 @@ function main(){
         sourceColumn: result.replay.bestLoss.sourceColumn,
         stageClock: result.replay.bestLoss.stageClock,
         hitBeforeCollision: result.replay.bestLoss.hitBeforeCollision
+      },
+      videoReplayBestLoss: result.videoReplay.bestLoss && {
+        cause: result.videoReplay.bestLoss.cause,
+        sourceType: result.videoReplay.bestLoss.sourceType,
+        playerLane: result.videoReplay.bestLoss.playerLane,
+        sourceLane: result.videoReplay.bestLoss.sourceLane,
+        sourceColumn: result.videoReplay.bestLoss.sourceColumn,
+        stageClock: result.videoReplay.bestLoss.stageClock,
+        hitBeforeCollision: result.videoReplay.bestLoss.hitBeforeCollision
       }
     }))
   }, null, 2));

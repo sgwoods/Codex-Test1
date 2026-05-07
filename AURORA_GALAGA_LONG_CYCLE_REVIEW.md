@@ -84,8 +84,8 @@ pass:
 - May 7 stage-signature distance update:
   - overall Aurora score: `9.1/10`
   - quality report:
-    `reference-artifacts/analyses/quality-conformance/2026-05-07-2aeaafa/report.json`
-  - level arc and encounter shape: `8.3/10`
+    `reference-artifacts/analyses/quality-conformance/2026-05-07-bfcc311/report.json`
+  - level arc and encounter shape: `8.4/10`
   - expanded stage-signature score: `6.4/10`
   - closest signature pair: `late-run-cleanup-or-failure / mid-run-entry-variant`
     at `0.129`
@@ -94,8 +94,9 @@ pass:
   - conformance read: challenge-stage identity separates clearly, evidence
     coverage is complete, stage-14 escort grammar registers as distinct
     late-stage behavior, and stage-8 flank grammar now registers as distinct
-    mid-run behavior; pressure replay precision remains the weakest level-arc
-    submetric
+    mid-run behavior; pressure replay precision improved from zero exact
+    promoted windows to `1/3` exact reproduction but remains the next
+    level-arc precision gap
 - detailed metric-gap and automation agenda:
   `reference-artifacts/analyses/aurora-galaga-long-cycle/conformance-gap-evolution-plan-2026-05-06.json`
 
@@ -111,7 +112,7 @@ Current score gaps to a truly convincing Galaga-family conformance target:
 | Capture and rescue rule fidelity | `10.0` | `0.0` | Expand from covered scenarios into event-grammar and state-space checks. |
 | Challenge-stage timing fidelity | `9.9` | `0.1` | Add challenge path, hit-opportunity, non-lethal, and result-surface measurements beyond timing. |
 | Progression and persona depth | `8.8` | `1.2` | Use long-run distributional persona batches and stage-band variety reports. |
-| Level arc and encounter shape | `8.3` | `1.7` | Improve Stage 4 pressure replay precision and add one challenge-stage reward/feedback slice without unfair collapse. |
+| Level arc and encounter shape | `8.4` | `1.6` | Close the remaining Stage 4 butterfly lane-2 replay miss and add one challenge-stage reward/feedback slice without unfair collapse. |
 | Audio identity and cue alignment | `6.3` | `3.7` | Promote candidate reference subwindows, then build cue-level waveform/spectral comparison and parameter-sweep optimization. |
 | UI, shell, and graphics integrity | `9.2` | `0.8` | Split gameplay visual conformance from shell integrity before Track 3. |
 
@@ -240,7 +241,7 @@ Track 2 Stage `4` pressure-risk checkpoint:
 Track 2 Stage `4` promoted loss-window checkpoint:
 
 - artifact:
-  `reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-06-6d7e05b/report.json`
+  `reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-bfcc311/report.json`
 - assessment command:
   `npm run harness:check:stage4-pressure-loss-windows`
 - problem shape:
@@ -252,17 +253,21 @@ Track 2 Stage `4` promoted loss-window checkpoint:
   `stage4-five-ships` butterfly lane `2` at `15.25s` (`2` matches), and
   `stage4-five-ships` boss lane `6` at `18.517s` (`2` matches)
 - fresh replay status:
-  realtime/no-video short replay reproduced `1/3` promoted windows; the
-  survival boss lane `7` window reproduced exactly, while the five-ships
-  butterfly and boss windows did not reproduce in the short probes
+  combined realtime/no-video and video-backed probes reproduced `1/3`
+  promoted windows exactly; survival boss lane `7` reproduced exactly in the
+  video-backed probe, butterfly lane `2` remains `no-loss-near-window`, and the
+  boss lane `6` probe can be blocked by the earlier butterfly lane `2`
+  collision
 - conformance advance:
   the pressure blocker is now split into archived source evidence and replay
-  reproducibility evidence; this prevents premature subjective tuning and
-  identifies harness precision as the next platform gap
+  reproducibility evidence, including exact-source, same-window alternate
+  collision, and blocked-before-source-window classifications; this prevents
+  premature subjective tuning and identifies the butterfly lane `2` source
+  window as the next gameplay/precision target
 - recommended next step:
-  add per-frame attacker path sampling for these promoted windows, then tune
-  one pressure lever at a time against both the promoted windows and the
-  aggregate `stage-pressure` gate
+  tune one narrow Stage `4` butterfly lane `2` pressure lever against the
+  promoted windows, source/replay geometry comparison, and aggregate
+  `stage-pressure` gate
 
 ### Track 2: Gameplay Complexity
 

@@ -124,6 +124,9 @@ function main(){
   const pressureReplayCoverage = pressureLoss.summary.sourceWindowsFound
     ? pressureLoss.summary.replayReproducedWindows / pressureLoss.summary.sourceWindowsFound
     : 0;
+  const pressureCollisionReplayCoverage = pressureLoss.summary.sourceWindowsFound
+    ? (pressureLoss.summary.pressureCollisionReproducedWindows || 0) / pressureLoss.summary.sourceWindowsFound
+    : 0;
   const stageSignatureScore = (stageSignature.summary.signatureScore10 || 0) / 10;
   const stageSignatureDistinctPairRatio = stageSignature.summary.distinctPairRatio || 0;
   const stageSignatureRepetitionSafety = 1 - (stageSignature.summary.repetitionRisk || 1);
@@ -170,6 +173,7 @@ function main(){
         { value: evidenceWindowCount / 6, weight: 0.15 }
       ]),
       read: `${pressureLoss.summary?.sourceWindowsFound || 0}/${pressureLoss.summary?.totalWindows || 0} source pressure/loss windows are found, but ${pressureLoss.summary?.replayReproducedWindows || 0} reproduce as exact losses under replay.`
+        + ` Pressure-collision replay diagnostics classify ${pressureLoss.summary?.pressureCollisionReproducedWindows || 0} as same-window or exact collision pressure.`
     },
     {
       id: 'boss-reward-opportunity',
@@ -228,6 +232,8 @@ function main(){
       stageFamilyBlueprintCount,
       challengeLayerBlueprintCount,
       evidenceWindowCount,
+      pressureReplayCoverage: round(pressureReplayCoverage, 3),
+      pressureCollisionReplayCoverage: round(pressureCollisionReplayCoverage, 3),
       priority: 'high',
       strongestSubmetric: submetrics.reduce((best, metric) => metric.score10 > best.score10 ? metric : best, submetrics[0]),
       weakestSubmetric: submetrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, submetrics[0]),

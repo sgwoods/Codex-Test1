@@ -167,13 +167,14 @@ Practical standard:
   stricter read that exposes `7/14` broad Aurora audio reference windows needing
   tighter segmentation and `22` candidate subwindows for review/promotion
 - level arc and encounter shape is now a first-class quality category at
-  `8.3/10`; this should be treated as a high-priority `1.4` workstream because
+  `8.4/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
   repeating a strong early loop
 - the six-window stage-signature read is now `6.4/10` after adding attack-role
   features, a stage-14 late escort variation, stage-8 flank-dive grammar, and
   calibrated event-family presence scoring. This is a useful conformance gain,
-  but the next higher-return target is pressure replay precision and richer
+  but the next higher-return target is the remaining Stage 4 pressure precision
+  gap, especially the butterfly lane-2 source window, plus richer
   challenge/reward texture
 - movement now scores `10/10` after repairing the movement conformance harness
   recenter path; the prior `8.0/10` read was measurement suppression, not a
