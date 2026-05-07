@@ -698,6 +698,60 @@ window.__galagaHarness__={
    }))
   };
  },
+ applyStage4Lane2SchedulingProbe(cfg={}){
+  if(S.stage!==4||S.challenge)return { applied:false, reason:'not-stage4-normal' };
+  const start=Number.isFinite(+cfg.start)?+cfg.start:13.1;
+  const end=Number.isFinite(+cfg.end)?+cfg.end:15.1;
+  if(S.stageClock<start||S.stageClock>end)return { applied:false, reason:'outside-window', stageClock:+(+S.stageClock||0).toFixed(3) };
+  const mode=String(cfg.mode||'cooldown-only');
+  const target=S.e.find(e=>e.hp>0&&!e.ch&&e.form&&!e.dive&&e.t==='but'&&e.c===5&&e.r===1);
+  if(!target)return { applied:false, reason:'target-unavailable', stageClock:+(+S.stageClock||0).toFixed(3) };
+  const beforeCool=+target.cool||0;
+  const beforeGap=+S.attackGapT||0;
+  const maxCool=Number.isFinite(+cfg.maxCool)?+cfg.maxCool:0;
+  target.cool=Math.min(beforeCool,maxCool);
+  if(mode.includes('rate')){
+   target.stage4Lane2ProbeDiveRateBoost=Math.max(1,+cfg.diveRateBoost||1);
+  }
+  if(mode.includes('gap')){
+   const maxGap=Number.isFinite(+cfg.maxGap)?+cfg.maxGap:0;
+   S.attackGapT=Math.min(beforeGap,maxGap);
+  }
+  if(mode.includes('recover')){
+   const maxRecover=Number.isFinite(+cfg.maxRecover)?+cfg.maxRecover:0;
+   S.recoverT=Math.min(+S.recoverT||0,maxRecover);
+  }
+  if(mode.includes('priority')&&!target.stage4Lane2PriorityStarted){
+   target.stage4Lane2PriorityStarted=1;
+   if(typeof startDive==='function')startDive(target,S.p,{});
+  }
+  if(!target.stage4Lane2ProbeLogged){
+   target.stage4Lane2ProbeLogged=1;
+   logEvent('harness_stage4_lane2_scheduling_probe',{
+    stage:S.stage,
+    mode,
+    start,
+    end,
+    stageClock:+(+S.stageClock||0).toFixed(3),
+    targetId:target.id,
+    diveRateBoost:+(+target.stage4Lane2ProbeDiveRateBoost||1).toFixed(3),
+    targetCoolBefore:+beforeCool.toFixed(3),
+    targetCoolAfter:+(+target.cool||0).toFixed(3),
+    attackGapBefore:+beforeGap.toFixed(3),
+    attackGapAfter:+(+S.attackGapT||0).toFixed(3)
+   });
+  }
+  return {
+   applied:true,
+   mode,
+   stageClock:+(+S.stageClock||0).toFixed(3),
+   targetId:target.id,
+   diveRateBoost:+(+target.stage4Lane2ProbeDiveRateBoost||1).toFixed(3),
+   targetCool:+(+target.cool||0).toFixed(3),
+   attackGap:+(+S.attackGapT||0).toFixed(3),
+   recoverT:+(+S.recoverT||0).toFixed(3)
+  };
+ },
  challengeFormationState(){
   const active=S.e.filter(e=>e.hp>0&&e.ch).sort((a,b)=>(a.wave-b.wave)||(a.c-b.c));
   return {

@@ -140,6 +140,14 @@ function shiftedFinalTurn(actions, shift){
 function loadVariants(){
   const raw = readJson(SCENARIO);
   const baseActions = (raw.actions || []).map(action => Object.assign({}, action));
+  const sourceActions = SOURCE_EXACT_ACTIONS.map(action => Object.assign({}, action));
+  const schedulingVariant = ({ id, description, probe }) => ({
+    id,
+    description,
+    actions: sourceActions.map(action => Object.assign({}, action)),
+    actionDeltasFromSource: actionDeltas(sourceActions),
+    schedulingProbe: probe
+  });
   const variants = [
     {
       id: 'current-scenario',
@@ -150,8 +158,8 @@ function loadVariants(){
     {
       id: 'source-exact-events',
       description: 'Key event timings copied from the archived source loss session.',
-      actions: SOURCE_EXACT_ACTIONS.map(action => Object.assign({}, action)),
-      actionDeltasFromSource: actionDeltas(SOURCE_EXACT_ACTIONS)
+      actions: sourceActions.map(action => Object.assign({}, action)),
+      actionDeltasFromSource: actionDeltas(sourceActions)
     },
     {
       id: 'source-exact-final-turn-minus-one-frame',
@@ -177,6 +185,73 @@ function loadVariants(){
       actionDeltasFromSource: actionDeltas(actions)
     });
   }
+  variants.push(
+    schedulingVariant({
+      id: 'source-exact-cooldown-only-12p8',
+      description: 'Source-exact actions with harness-only column-5 butterfly cooldown clamped ready from 12.8s to 15.1s.',
+      probe: { mode: 'cooldown-only', start: 12.8, end: 15.1, maxCool: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-only-13p2',
+      description: 'Source-exact actions with harness-only column-5 butterfly cooldown clamped ready from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-only', start: 13.2, end: 15.1, maxCool: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-only-13p6',
+      description: 'Source-exact actions with harness-only column-5 butterfly cooldown clamped ready from 13.6s to 15.1s.',
+      probe: { mode: 'cooldown-only', start: 13.6, end: 15.1, maxCool: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-gap-13p2',
+      description: 'Source-exact actions with target cooldown and global attack-gap clamped from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-gap', start: 13.2, end: 15.1, maxCool: 0, maxGap: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-gap-13p6',
+      description: 'Source-exact actions with target cooldown and global attack-gap clamped from 13.6s to 15.1s.',
+      probe: { mode: 'cooldown-gap', start: 13.6, end: 15.1, maxCool: 0, maxGap: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-gap-recover-13p2',
+      description: 'Source-exact actions with target cooldown, attack-gap, and recover timers clamped from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-gap-recover', start: 13.2, end: 15.1, maxCool: 0, maxGap: 0, maxRecover: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-rate4-13p2',
+      description: 'Source-exact actions with target cooldown ready and a harness-only 4x dive selection rate from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-rate', start: 13.2, end: 15.1, maxCool: 0, diveRateBoost: 4 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-rate8-13p2',
+      description: 'Source-exact actions with target cooldown ready and a harness-only 8x dive selection rate from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-rate', start: 13.2, end: 15.1, maxCool: 0, diveRateBoost: 8 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-rate16-13p2',
+      description: 'Source-exact actions with target cooldown ready and a harness-only 16x dive selection rate from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-rate', start: 13.2, end: 15.1, maxCool: 0, diveRateBoost: 16 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-cooldown-rate8-gap-13p2',
+      description: 'Source-exact actions with target cooldown, 8x selection rate, and attack-gap clamped from 13.2s to 15.1s.',
+      probe: { mode: 'cooldown-rate-gap', start: 13.2, end: 15.1, maxCool: 0, diveRateBoost: 8, maxGap: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-priority-13p2',
+      description: 'Source-exact actions with a harness-only priority selection benchmark at 13.2s.',
+      probe: { mode: 'priority', start: 13.2, end: 13.35, maxCool: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-priority-13p6',
+      description: 'Source-exact actions with a harness-only priority selection benchmark at 13.6s.',
+      probe: { mode: 'priority', start: 13.6, end: 13.75, maxCool: 0 }
+    }),
+    schedulingVariant({
+      id: 'source-exact-priority-13p85',
+      description: 'Source-exact actions with a harness-only priority selection benchmark near the archived attack-start time.',
+      probe: { mode: 'priority', start: 13.85, end: 14.0, maxCool: 0 }
+    })
+  );
   return {
     scenario: raw,
     variants
@@ -207,6 +282,17 @@ async function applyAction(page, action, down){
   await page.keyboard.down(key);
   await advance(page, Math.max(0, +action.hold || 0.08));
   await page.keyboard.up(key);
+}
+
+async function applySchedulingProbe(page, probe){
+  if(!probe) return null;
+  return page.evaluate(cfg => {
+    const api = window.__galagaHarness__;
+    if(!api || typeof api.applyStage4Lane2SchedulingProbe !== 'function'){
+      return { applied:false, reason:'probe-api-unavailable' };
+    }
+    return api.applyStage4Lane2SchedulingProbe(cfg);
+  }, probe);
 }
 
 async function sample(page){
@@ -245,7 +331,7 @@ async function sample(page){
     const sourceColumn = enemies.filter(e => e.type === expected.sourceType && e.column === expected.sourceColumn);
     const laneThreats = enemies.filter(e => e.dive && Math.abs(e.lane - expected.sourceLane) <= 1);
     const events = api.recentEvents({ count: 200 })
-      .filter(event => event.type === 'enemy_attack_start' || event.type === 'enemy_lower_field' || event.type === 'ship_lost' || event.type === 'player_shot')
+      .filter(event => event.type === 'enemy_attack_start' || event.type === 'enemy_lower_field' || event.type === 'ship_lost' || event.type === 'player_shot' || event.type === 'harness_stage4_lane2_scheduling_probe')
       .map(event => ({
         t: compact(event.t),
         type: event.type,
@@ -256,6 +342,7 @@ async function sample(page){
         originLane: event.originLane ?? null,
         targetLane: event.targetLane ?? null,
         mode: event.mode || null,
+        probeMode: event.mode || null,
         x: compact(event.x ?? event.playerX),
         enemyX: compact(event.enemyX),
         enemyY: compact(event.enemyY)
@@ -328,6 +415,8 @@ function diagnose(summary){
 async function runVariant(scenario, variant){
   const actions = variant.actions.slice().sort((a, b) => a.t - b.t);
   const duration = Math.max(+scenario.duration || 0, SAMPLE_WINDOW[1]);
+  const sampleStart = Math.min(SAMPLE_WINDOW[0], Number.isFinite(+variant.schedulingProbe?.start) ? +variant.schedulingProbe.start : SAMPLE_WINDOW[0]);
+  const sampleEnd = SAMPLE_WINDOW[1];
   const samples = await withHarnessPage({ skipStart: true, seed: scenario.seed }, async ({ page }) => {
     await page.evaluate(({ config, seed }) => {
       if(typeof installGamePack === 'function') installGamePack('aurora-galactica');
@@ -346,10 +435,11 @@ async function runVariant(scenario, variant){
         await applyAction(page, actions[i], down);
         i++;
       }
+      await applySchedulingProbe(page, variant.schedulingProbe);
       const nextActionT = i < actions.length ? actions[i].t : Infinity;
       let nextT;
-      if(t < SAMPLE_WINDOW[0]) nextT = Math.min(SAMPLE_WINDOW[0], nextActionT, duration);
-      else if(t <= SAMPLE_WINDOW[1]) nextT = Math.min(t + STEP, nextActionT, SAMPLE_WINDOW[1], duration);
+      if(t < sampleStart) nextT = Math.min(sampleStart, nextActionT, duration);
+      else if(t <= sampleEnd) nextT = Math.min(t + STEP, nextActionT, sampleEnd, duration);
       else nextT = Math.min(nextActionT, duration);
       if(nextT <= t + 0.000001){
         if(i < actions.length){
@@ -361,10 +451,10 @@ async function runVariant(scenario, variant){
       }
       await advance(page, nextT - t);
       t = nextT;
-      if(t >= SAMPLE_WINDOW[0] - 0.000001 && t <= SAMPLE_WINDOW[1] + 0.000001){
+      if(t >= sampleStart - 0.000001 && t <= sampleEnd + 0.000001){
         result.push(withScores(await sample(page)));
       }
-      if(t >= SAMPLE_WINDOW[1] && nextActionT === Infinity) break;
+      if(t >= sampleEnd && nextActionT === Infinity) break;
     }
     for(const key of down) await page.keyboard.up(key);
     return result;
@@ -391,8 +481,9 @@ async function runVariant(scenario, variant){
   };
   summary.diagnosis = diagnose(summary);
   return Object.assign({}, variant, {
-    sampleWindow: SAMPLE_WINDOW,
+    sampleWindow: [sampleStart, sampleEnd],
     sourceLossT: SOURCE_LOSS_T,
+    schedulingProbe: variant.schedulingProbe || null,
     summary
   });
 }
@@ -421,6 +512,7 @@ function buildReadme(report){
   for(const result of report.results){
     const summary = result.summary;
     lines.push(`### ${result.id}`);
+    if(result.schedulingProbe)lines.push(`- Scheduling probe: \`${JSON.stringify(result.schedulingProbe)}\``);
     lines.push(`- Source-column dive frames: ${summary.sourceColumnDiveFrames}/${summary.sampleCount}`);
     lines.push(`- Source-column lower-field frames: ${summary.sourceColumnLowerFieldFrames}/${summary.sampleCount}`);
     lines.push(`- Best source-column contact: ${summary.bestSourceColumnContact?.contactScore ?? 'n/a'} at t=${summary.bestSourceColumnContact?.stageClock ?? 'n/a'}`);

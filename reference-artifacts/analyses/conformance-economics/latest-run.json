@@ -1,30 +1,31 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-07T20-50-35-200Z-7213",
-  "startedAt": "2026-05-07T20:50:35.200Z",
-  "endedAt": "2026-05-07T20:50:35.391Z",
+  "id": "2026-05-07T21-05-03-818Z-11639",
+  "startedAt": "2026-05-07T21:05:03.818Z",
+  "endedAt": "2026-05-07T21:05:42.561Z",
   "branch": "codex/macbook-pro-stage4-butterfly-lane2-pressure",
-  "commit": "13704be",
+  "commit": "9c226ba",
   "command": [
     "npm",
     "run",
-    "harness:compare:stage4-pressure-source-replay"
+    "harness:analyze:stage4-lane2-action-precision"
   ],
   "axes": [
     "stage4-pressure",
     "conformance-economics"
   ],
   "resources": [
-    "cpu"
+    "cpu",
+    "browser"
   ],
-  "notes": "Stage4 compare final no cue",
+  "notes": "Stage4 lane2 scheduling ladder corrected probe timing",
   "measurement": {
-    "wallSeconds": 0.191,
-    "timeRealSeconds": 0.18,
-    "timeUserSeconds": 0.14,
-    "timeSystemSeconds": 0.03,
-    "cpuSeconds": 0.17,
+    "wallSeconds": 38.743,
+    "timeRealSeconds": 38.74,
+    "timeUserSeconds": 51.95,
+    "timeSystemSeconds": 13.81,
+    "cpuSeconds": 65.76,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -39,8 +40,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 223831838,
-    "artifactBytesAfter": 223830910,
-    "artifactBytesDelta": -928
+    "artifactBytesBefore": 226470164,
+    "artifactBytesAfter": 227482588,
+    "artifactBytesDelta": 1012424
   }
 }
