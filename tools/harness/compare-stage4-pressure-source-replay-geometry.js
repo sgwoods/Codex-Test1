@@ -263,8 +263,17 @@ function buildReadme(report){
   }
   lines.push('## Recommended Next Step');
   lines.push('');
-  lines.push('- Tune or probe `stage4-survival-boss-lane7` first: it preserved close replay pressure while the other two windows diverged much farther.');
-  lines.push('- For the two high-divergence windows, improve deterministic replay/action sampling before treating them as gameplay tuning targets.');
+  const near = report.results.filter(result => result.replay.bestThreat && result.replay.bestThreat.contactScore <= 12);
+  const far = report.results.filter(result => !result.replay.bestThreat || result.replay.bestThreat.contactScore > 12);
+  if(near.length){
+    lines.push(`- Preserve and refine close-pressure windows first: ${near.map(result => `\`${result.id}\``).join(', ')}.`);
+  }
+  if(far.length){
+    lines.push(`- Improve deterministic replay/action sampling before treating high-divergence windows as gameplay tuning targets: ${far.map(result => `\`${result.id}\``).join(', ')}.`);
+  }
+  if(!near.length && !far.length){
+    lines.push('- No promoted windows were classified for follow-up.');
+  }
   lines.push('');
   return `${lines.join('\n')}\n`;
 }

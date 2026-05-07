@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "artifact_type": "controlled-clock-exact-advance",
+  "generatedAt": "2026-05-07T13:11:41.302Z",
+  "branch": "codex/macbook-pro-aurora-stage4-loss-window-scenarios",
+  "commit": "b3bbb9c",
+  "problem": "Controlled-clock replay should not drift depending on action interval segmentation.",
+  "strategy": "Compare simT and stageClock against accumulated fractional advanceFor durations.",
+  "successMeasure": "Worst absolute clock delta <= 0.001 seconds.",
+  "ok": true,
+  "worstDelta": 0,
+  "samples": [
+    {
+      "duration": 0.517,
+      "expected": 0.517,
+      "simT": 0.517,
+      "stageClock": 0.517,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 0.1,
+      "expected": 0.617,
+      "simT": 0.617,
+      "stageClock": 0.617,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 0.083,
+      "expected": 0.7,
+      "simT": 0.7,
+      "stageClock": 0.7,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 0.317,
+      "expected": 1.017,
+      "simT": 1.017,
+      "stageClock": 1.017,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 1.133,
+      "expected": 2.15,
+      "simT": 2.15,
+      "stageClock": 2.15,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 0.011,
+      "expected": 2.161,
+      "simT": 2.161,
+      "stageClock": 2.161,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 2.801,
+      "expected": 4.962,
+      "simT": 4.962,
+      "stageClock": 4.962,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 0.005,
+      "expected": 4.967,
+      "simT": 4.967,
+      "stageClock": 4.967,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    },
+    {
+      "duration": 4.333,
+      "expected": 9.3,
+      "simT": 9.3,
+      "stageClock": 9.3,
+      "simDelta": 0,
+      "stageClockDelta": 0
+    }
+  ]
+}

@@ -29,6 +29,7 @@ const SOURCE_LOSS = {
 const SAMPLE_START = 12.95;
 const SAMPLE_END = 14.65;
 const DURATION = 14.8;
+const EXPECTED_LOSS_WINDOW = [13.65, 14.05];
 
 function fail(message, payload){
   console.error(message);
@@ -137,11 +138,14 @@ function shiftMatching(base, match, shift){
 function buildVariants(){
   const hand = loadHandScenario();
   const source = loadSourceSession();
+  const coarseShifts = [-0.75, -0.6, -0.45, -0.3, -0.15, 0.15, 0.3];
+  const fineTurnShifts = [-0.4, -0.35, -0.25, -0.2, -0.1, -0.05, 0.05, 0.1, 0.2, 0.25];
+  const post10Shifts = [-0.45, -0.4, -0.35, -0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.45];
   const variants = [
     hand,
     source
   ];
-  for(const shift of [-0.75, -0.6, -0.45, -0.3, -0.15, 0.15, 0.3]){
+  for(const shift of coarseShifts){
     variants.push(Object.assign(
       shiftMatching(source, action => action.action === 'down' && action.code === 'ArrowLeft' && Math.abs(action.t - 13.817) < 0.04, shift),
       {
@@ -151,7 +155,7 @@ function buildVariants(){
       }
     ));
   }
-  for(const shift of [-0.75, -0.6, -0.45, -0.3, -0.15, 0.15, 0.3]){
+  for(const shift of Array.from(new Set(coarseShifts.concat(fineTurnShifts))).sort((a, b) => a - b)){
     variants.push(Object.assign(
       shiftMatching(source, action => (
         (action.code === 'ArrowRight' && action.action === 'up' && Math.abs(action.t - 13.417) < 0.04) ||
@@ -165,7 +169,7 @@ function buildVariants(){
       }
     ));
   }
-  for(const shift of [-0.45, -0.3, -0.15, 0.15, 0.3, 0.45]){
+  for(const shift of post10Shifts){
     variants.push(Object.assign(
       shiftMatching(source, action => action.t >= 10.0, shift),
       {
@@ -329,6 +333,7 @@ function summarizeSamples(samples){
   const losses = samples.flatMap(sample => sample.losses || [])
     .filter((loss, index, all) => all.findIndex(candidate => Math.abs((candidate.t || 0) - (loss.t || 0)) < 0.002) === index);
   const lossesInWindow = losses.filter(loss => loss.stageClock >= SAMPLE_START && loss.stageClock <= SAMPLE_END);
+  const lossesInExpectedWindow = losses.filter(loss => loss.stageClock >= EXPECTED_LOSS_WINDOW[0] && loss.stageClock <= EXPECTED_LOSS_WINDOW[1]);
   const playerLaneCounts = samples.reduce((acc, sample) => {
     const lane = String(sample.player?.lane ?? 'unknown');
     acc[lane] = (acc[lane] || 0) + 1;
@@ -343,6 +348,7 @@ function summarizeSamples(samples){
     bestOverallContact: bestOverall,
     observedCollisionGeometry: allThreats.some(target => target.colliding),
     shipLossesInSampleWindow: lossesInWindow,
+    shipLossesInExpectedWindow: lossesInExpectedWindow,
     playerLaneCounts,
     atSourceLossTime: atSourceLoss ? {
       stageClock: atSourceLoss.stageClock,
@@ -357,8 +363,11 @@ function summarizeSamples(samples){
 
 function diagnose(summary){
   const best = summary.bestOverallContact;
+  if(summary.shipLossesInExpectedWindow.length){
+    return 'controlled sweep reproduced a ship-loss event inside the expected source loss window';
+  }
   if(summary.shipLossesInSampleWindow.length){
-    return 'controlled sweep reproduced a ship-loss event inside the source danger window';
+    return 'controlled sweep reproduced a ship-loss event near but outside the expected source loss window';
   }
   if(best?.colliding || summary.observedCollisionGeometry){
     return 'controlled sweep reached collision geometry without a matching exported loss event';
@@ -442,7 +451,7 @@ function buildReadme(report){
     '',
     '## Strategy',
     '',
-    'Replay the archived lane7 source session under controlled clock and sweep small key-event timing shifts around the danger turn. Sample player/attacker geometry at 60 Hz and compare each variant to the source loss position and contact score.',
+    'Replay the archived lane7 source session under controlled clock and sweep small key-event timing shifts around the danger turn. Sample player/attacker geometry at 60 Hz and compare each variant to the source loss position, expected loss window, and contact score.',
     '',
     '## Success Measure',
     '',
@@ -478,14 +487,21 @@ function rankingFor(result){
     sourceTimePlayerLaneDelta: summary.atSourceLossTime?.playerLaneDeltaFromSourceLoss ?? null,
     collisionGeometry: !!summary.observedCollisionGeometry,
     shipLossesInWindow: summary.shipLossesInSampleWindow.length,
+    shipLossesInExpectedWindow: summary.shipLossesInExpectedWindow.length,
+    firstExpectedWindowLoss: summary.shipLossesInExpectedWindow[0] || null,
+    firstSampleWindowLoss: summary.shipLossesInSampleWindow[0] || null,
     diagnosis: summary.diagnosis
   };
 }
 
 function buildRecommendation(rankings){
+  const expectedLoss = rankings.find(entry => entry.shipLossesInExpectedWindow > 0);
+  if(expectedLoss){
+    return `Promote \`${expectedLoss.id}\` into a deterministic regression scenario before changing gameplay constants; it reproduces a ship-loss event inside the expected source danger window.`;
+  }
   const collision = rankings.find(entry => entry.collisionGeometry || entry.shipLossesInWindow > 0);
   if(collision){
-    return `Promote \`${collision.id}\` into a deterministic regression scenario before changing gameplay constants; the archived pressure is recoverable through input timing.`;
+    return `Do not promote \`${collision.id}\` as conformant yet: it recovers a nearby pressure loss, but outside the expected source danger window. Use it to tune replay/input precision.`;
   }
   const near = rankings.find(entry => Number.isFinite(entry.bestContactScore) && entry.bestContactScore <= 4);
   if(near){
@@ -509,6 +525,7 @@ async function main(){
   const bestContact = results
     .map(rankingFor)
     .sort((a, b) => {
+      if(a.shipLossesInExpectedWindow !== b.shipLossesInExpectedWindow) return b.shipLossesInExpectedWindow - a.shipLossesInExpectedWindow;
       const av = Number.isFinite(a.bestContactScore) ? a.bestContactScore : Infinity;
       const bv = Number.isFinite(b.bestContactScore) ? b.bestContactScore : Infinity;
       return av - bv;
@@ -524,6 +541,7 @@ async function main(){
     sourceSession: rel(SOURCE_SESSION),
     handScenario: rel(HAND_SCENARIO),
     sourceLoss: SOURCE_LOSS,
+    expectedLossWindow: EXPECTED_LOSS_WINDOW,
     problem: 'The archived Stage 4 lane7 boss-contact pressure loss does not reproduce reliably through exact key-event replay.',
     strategy: 'Sweep controlled-clock variants around the danger turn and compare 60 Hz geometry against the source loss position and contact score.',
     successMeasure: 'Recover collision geometry or identify the closest input timing variant for replay precision and conformance scoring.',
@@ -538,6 +556,7 @@ async function main(){
     sampledVariants: results.filter(result => result.summary.sampleCount > 0).length,
     collisionGeometryVariants: results.filter(result => result.summary.observedCollisionGeometry).length,
     shipLossVariantsInWindow: results.filter(result => result.summary.shipLossesInSampleWindow.length > 0).length,
+    shipLossVariantsInExpectedWindow: results.filter(result => result.summary.shipLossesInExpectedWindow.length > 0).length,
     nearContactVariants: bestContact.filter(entry => Number.isFinite(entry.bestContactScore) && entry.bestContactScore <= 4).length,
     closeContactVariants: bestContact.filter(entry => Number.isFinite(entry.bestContactScore) && entry.bestContactScore <= 12).length,
     bestVariant: bestContact[0] || null,

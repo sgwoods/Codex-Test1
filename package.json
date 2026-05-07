@@ -66,6 +66,7 @@
     "harness:compare:stage4-pressure-source-replay": "node tools/harness/compare-stage4-pressure-source-replay-geometry.js",
     "harness:sweep:stage4-lane7-pressure-inputs": "node tools/harness/sweep-stage4-lane7-pressure-inputs.js",
     "harness:check:stage4-lane7-pressure-regression": "node tools/harness/check-stage4-lane7-pressure-regression.js",
+    "harness:check:controlled-clock-exact-advance": "node tools/harness/check-controlled-clock-exact-advance.js",
     "harness:check:video-artifact": "node tools/harness/check-video-artifact.js",
     "harness:check:portable-paths": "node tools/harness/check-summary-portability.js",
     "harness:repair:videos": "node tools/harness/repair-video-artifacts.js",

@@ -58,8 +58,9 @@ window.__galagaHarness__={
   let elapsed=0;
   while(elapsed<total){
    if(stopOnGameOver&&!started)break;
-   update(step);
-   elapsed+=step;
+   const dt=Math.min(step,total-elapsed);
+   update(dt);
+   elapsed+=dt;
   }
   draw();
   return this.state();
