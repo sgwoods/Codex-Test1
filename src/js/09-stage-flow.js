@@ -40,6 +40,10 @@ function spawnFormation(){
    profile
   });
   e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
+  if(S.stage>=14&&!S.challenge){
+   if(t==='boss')e.cool=.72+(c-3)*.16;
+   else if(t==='but'&&r<=1)e.cool+=.55;
+  }
   S.e.push(e);
  }
  for(let i=0;i<S.rogue;i++){

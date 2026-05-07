@@ -17,8 +17,8 @@
     "started": 1,
     "paused": 0,
     "stage": 8,
-    "score": 590,
-    "lives": 3,
+    "score": 490,
+    "lives": 4,
     "challenge": false,
     "recording": false,
     "seed": 8008,
@@ -58,17 +58,17 @@
       "backgroundMode": "aurora-borealis"
     },
     "audioCue": {
-      "cue": "enemyShot",
+      "cue": "attackCharge",
       "atmosphereId": "aurora-borealis",
       "audioTheme": "galaga-reference-assets",
       "phase": "stage",
       "variant": 0,
-      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
       "referenceClipStart": 0,
       "referenceClipDuration": 0,
       "stage": 8,
       "challenge": false,
-      "at": 1.313
+      "at": 1.202
     },
     "renderDebug": {
       "backgroundMode": "aurora-borealis",
@@ -103,13 +103,13 @@
     "max_enemy_bullets": 2,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 590,
-    "final_lives": 3,
+    "final_score": 490,
+    "final_lives": 4,
     "final_stage": 8,
     "final_challenge": false
   },
-  "event_count": 71,
-  "promoted_event_count": 14,
+  "event_count": 77,
+  "promoted_event_count": 17,
   "artifacts": {
     "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/contact-sheet-1s.png",
     "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/still-start.png",

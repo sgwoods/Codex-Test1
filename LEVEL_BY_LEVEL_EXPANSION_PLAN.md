@@ -12,9 +12,11 @@ This work is now represented directly in the quality scorecard as `Level arc
 and encounter shape`, currently `8.2/10`. That category is high priority for
 `1.4` because it measures whether Aurora develops a Galaga-like learning and
 encounter arc over time rather than repeating a strong early-stage loop. The
-expanded six-window stage-signature distance pass scores `5.8/10` and
-identifies the closest pair as two late-run windows, with mid/late regular
-windows also still too close.
+expanded six-window stage-signature distance pass scores `6.1/10` after adding
+attack-role features and a measured stage-14 escort variation. The former
+late-run cleanup/escort pair now separates to `0.204`; the closest remaining
+gap is late-run-cleanup-or-failure / mid-run-entry-variant at `0.087`, with
+mid-run-entry-variant / mid-run-pressure also too close at `0.097`.
 
 ## Decision
 
@@ -37,9 +39,10 @@ This means the immediate work is not just "tune the current loop." It is:
 
 The next assessment step should use the six-window stage-signature harness as a
 target for implementation. The next implementation step should be one
-challenge-stage movement/reward slice plus one later-level entry/escort
-variation, both measured against pressure, survivability, and signature
-distance.
+mid-run entry/attack grammar variation plus pressure replay precision work,
+both measured against survivability, signature distance, and reproducible loss
+windows. A later-level escort variation has now been proven valuable enough to
+keep, so the next best return is to reduce mid-run and mid/late repetition.
 
 ## Why This Is Important
 
@@ -283,11 +286,12 @@ making Platinum stronger by giving it a real second client.
 
 Do next:
 
-1. branch: `codex/macbook-pro-audio-phase-gate`
-2. fix or recalibrate the audio phase gate
-3. rerun quality conformance
-4. branch: `codex/macbook-pro-level-expansion-plan`
-5. produce the first detailed stage-family and challenge-stage blueprint
+1. branch: `codex/macbook-pro-aurora-midrun-signature-variation`
+2. implement one measured mid-run entry/attack grammar slice
+3. improve pressure replay precision for the Stage 4 collision-loss family
+4. rerun the six-window evidence cycle, stage-signature distance, level arc,
+   quality conformance, and targeted pressure/challenge guardrails
+5. update the scorecard with the value returned by the slice
 
 That gives Aurora a clean runway:
 

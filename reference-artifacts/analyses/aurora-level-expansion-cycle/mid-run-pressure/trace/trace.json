@@ -10,11 +10,11 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 4,
+    "max_attackers": 3,
     "max_enemy_bullets": 2,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 440,
+    "final_score": 390,
     "final_lives": 2,
     "final_stage": 6,
     "final_challenge": false
@@ -83,7 +83,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.578
+        "at": 0.579
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -112,8 +112,8 @@
       "challenge": 0,
       "score": 50,
       "lives": 3,
-      "player_x": 53.14,
-      "player_vx": -247.06,
+      "player_x": 57.26,
+      "player_vx": -246.83,
       "enemies": 39,
       "attackers": 0,
       "enemy_bullets": 0,
@@ -131,7 +131,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.66
+        "at": 0.654
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -158,7 +158,7 @@
       "t": 2,
       "stage": 6,
       "challenge": 0,
-      "score": 150,
+      "score": 180,
       "lives": 3,
       "player_x": 9,
       "player_vx": 0,
@@ -179,7 +179,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.719
+        "at": 0.718
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -206,14 +206,14 @@
       "t": 3,
       "stage": 6,
       "challenge": 0,
-      "score": 150,
+      "score": 180,
       "lives": 3,
-      "player_x": 190.87,
+      "player_x": 188.39,
       "player_vx": 247.99,
       "enemies": 37,
-      "attackers": 3,
+      "attackers": 1,
       "enemy_bullets": 1,
-      "player_bullets": 1,
+      "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 37,
       "audioCue": {
@@ -254,12 +254,12 @@
       "t": 4,
       "stage": 6,
       "challenge": 0,
-      "score": 280,
+      "score": 390,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 35,
-      "attackers": 4,
+      "attackers": 1,
       "enemy_bullets": 1,
       "player_bullets": 2,
       "challenge_enemies": 0,
@@ -275,7 +275,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.836
+        "at": 0.843
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -302,7 +302,7 @@
       "t": 5,
       "stage": 6,
       "challenge": 0,
-      "score": 280,
+      "score": 390,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
@@ -313,17 +313,17 @@
       "challenge_enemies": 0,
       "formation_active": 35,
       "audioCue": {
-        "cue": "stagePulse",
+        "cue": "playerShot",
         "atmosphereId": "aurora-hint",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 5,
-        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "referenceClipStart": 0.18,
-        "referenceClipDuration": 0.82,
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.893
+        "at": 0.904
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -350,28 +350,28 @@
       "t": 6,
       "stage": 6,
       "challenge": 0,
-      "score": 440,
+      "score": 390,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 34,
-      "attackers": 1,
+      "enemies": 35,
+      "attackers": 2,
       "enemy_bullets": 2,
-      "player_bullets": 1,
+      "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 34,
+      "formation_active": 35,
       "audioCue": {
-        "cue": "enemyBoom",
+        "cue": "playerShot",
         "atmosphereId": "aurora-hint",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.951
+        "at": 0.959
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -398,14 +398,14 @@
       "t": 7,
       "stage": 6,
       "challenge": 0,
-      "score": 440,
+      "score": 390,
       "lives": 2,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 34,
-      "attackers": 0,
-      "enemy_bullets": 1,
-      "player_bullets": 0,
+      "attackers": 3,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
       "challenge_enemies": 0,
       "formation_active": 34,
       "audioCue": {
@@ -419,7 +419,7 @@
         "referenceClipDuration": 0.82,
         "stage": 6,
         "challenge": false,
-        "at": 1.011
+        "at": 1.019
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -446,13 +446,13 @@
       "t": 8,
       "stage": 6,
       "challenge": 0,
-      "score": 440,
+      "score": 390,
       "lives": 2,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 34,
-      "attackers": 0,
-      "enemy_bullets": 0,
+      "attackers": 3,
+      "enemy_bullets": 2,
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 34,
@@ -467,7 +467,7 @@
         "referenceClipDuration": 0.82,
         "stage": 6,
         "challenge": false,
-        "at": 1.068
+        "at": 1.079
       },
       "stagePresentation": {
         "id": "scorpion-dawn",

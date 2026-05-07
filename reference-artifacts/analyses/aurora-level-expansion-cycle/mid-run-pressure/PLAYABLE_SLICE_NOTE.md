@@ -12,17 +12,17 @@ Duration: 8s
 
 - samples: 9
 - player x range: 262
-- max attackers: 4
+- max attackers: 3
 - max enemy bullets: 2
 - max challenge enemies: 0
 - final stage: 6
-- final score: 440
+- final score: 390
 
 ## Event Coverage
 
 - `formation_entry`: observed
 - `enemy_dive_start`: observed
-- `escort_dive_start`: not observed in this run
+- `escort_dive_start`: observed
 - `enemy_projectile`: observed
 - `player_hit`: observed
 - `wave_clear`: not observed in this run

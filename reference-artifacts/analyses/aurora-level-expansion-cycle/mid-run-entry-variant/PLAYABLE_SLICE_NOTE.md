@@ -16,7 +16,7 @@ Duration: 10s
 - max enemy bullets: 2
 - max challenge enemies: 0
 - final stage: 8
-- final score: 590
+- final score: 490
 
 ## Event Coverage
 
@@ -24,7 +24,7 @@ Duration: 10s
 - `enemy_dive_start`: observed
 - `escort_dive_start`: not observed in this run
 - `enemy_projectile`: observed
-- `player_hit`: observed
+- `player_hit`: not observed in this run
 - `wave_clear`: not observed in this run
 
 ## Implementation Use

@@ -84,14 +84,18 @@ pass:
 - May 7 stage-signature distance update:
   - overall Aurora score: `9.1/10`
   - quality report:
-    `reference-artifacts/analyses/quality-conformance/2026-05-07-53d37a8/report.json`
+    `reference-artifacts/analyses/quality-conformance/2026-05-07-fb2f674/report.json`
   - level arc and encounter shape: `8.2/10`
-  - expanded stage-signature score: `5.8/10`
-  - closest signature pair: `late-run-cleanup-or-failure / late-run-escort-variant`
-  - closest mid/late pair: `late-run-escort-variant / mid-run-pressure`
-  - conformance read: challenge-stage identity separates clearly and evidence
-    coverage is now complete, while regular-stage play remains too repetitive
-    inside late-run windows and across mid/late regular windows
+  - expanded stage-signature score: `6.1/10`
+  - late-run cleanup/escort distance: `0.204`
+  - closest signature pair: `late-run-cleanup-or-failure / mid-run-entry-variant`
+    at `0.087`
+  - closest same-band regular pair: `mid-run-entry-variant / mid-run-pressure`
+    at `0.097`
+  - conformance read: challenge-stage identity separates clearly, evidence
+    coverage is complete, and stage-14 escort grammar now registers as a
+    distinct late-stage behavior; regular-stage play remains too repetitive
+    across mid-run and mid/late windows
 - detailed metric-gap and automation agenda:
   `reference-artifacts/analyses/aurora-galaga-long-cycle/conformance-gap-evolution-plan-2026-05-06.json`
 
@@ -107,7 +111,7 @@ Current score gaps to a truly convincing Galaga-family conformance target:
 | Capture and rescue rule fidelity | `10.0` | `0.0` | Expand from covered scenarios into event-grammar and state-space checks. |
 | Challenge-stage timing fidelity | `9.9` | `0.1` | Add challenge path, hit-opportunity, non-lethal, and result-surface measurements beyond timing. |
 | Progression and persona depth | `8.8` | `1.2` | Use long-run distributional persona batches and stage-band variety reports. |
-| Level arc and encounter shape | `8.2` | `1.8` | Implement one challenge-stage movement/reward slice and one later-level entry/escort variation that increases regular-stage signature distance without unfair collapse. |
+| Level arc and encounter shape | `8.2` | `1.8` | Implement one mid-run entry/attack grammar slice and improve Stage 4 pressure replay precision so regular-stage signature distance rises without unfair collapse. |
 | Audio identity and cue alignment | `6.3` | `3.7` | Promote candidate reference subwindows, then build cue-level waveform/spectral comparison and parameter-sweep optimization. |
 | UI, shell, and graphics integrity | `9.2` | `0.8` | Split gameplay visual conformance from shell integrity before Track 3. |
 

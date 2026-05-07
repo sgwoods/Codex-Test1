@@ -84,6 +84,29 @@ function eventRates(events, duration){
   return Object.fromEntries([...counts.entries()].map(([family, count]) => [family, round(count / denom, 4)]));
 }
 
+function attackMix(events, duration){
+  const attacks = (events.events || []).filter(event => event.runtime_type === 'enemy_attack_start');
+  const byFamily = new Map();
+  for(const key of ['boss', 'but', 'bee', 'rogue']) byFamily.set(key, 0);
+  let escortCount = 0;
+  for(const event of attacks){
+    const family = event.entity_family || 'unknown';
+    if(byFamily.has(family)) byFamily.set(family, byFamily.get(family) + 1);
+    if(event.event_family === 'escort_dive_start') escortCount += 1;
+  }
+  const denom = Math.max(duration || 1, 1);
+  const total = Math.max(attacks.length, 1);
+  return {
+    totalAttackRate: attacks.length / denom,
+    escortAttackRate: escortCount / denom,
+    escortAttackShare: escortCount / total,
+    bossAttackShare: (byFamily.get('boss') || 0) / total,
+    butterflyAttackShare: (byFamily.get('but') || 0) / total,
+    beeAttackShare: (byFamily.get('bee') || 0) / total,
+    firstAttackTime: attacks.length ? attacks[0].time_s || 0 : duration || 0
+  };
+}
+
 function standardDeviation(values){
   if(values.length < 2) return 0;
   const mean = average(values);
@@ -106,6 +129,7 @@ function loadWindow(dir){
   const formationActive = samples.map(sample => sample.formation_active || 0);
   const cueSet = new Set(samples.map(sample => sample.audioCue?.cue).filter(Boolean));
   const stagePresentationSet = new Set(samples.map(sample => sample.stagePresentation?.id).filter(Boolean));
+  const attack = attackMix(events, duration);
 
   const features = {
     stage: normalize(manifest.config?.stage || summary.final_stage || 1, 20),
@@ -125,7 +149,14 @@ function loadWindow(dir){
     livesLost: normalize((manifest.config?.ships || 5) - (summary.final_lives || manifest.final_state?.lives || 0), 5),
     eventFamilyCoverage: normalize(families.size, EVENT_FAMILIES.length),
     audioCueVariety: normalize(cueSet.size, 6),
-    stagePresentationVariety: normalize(stagePresentationSet.size, 4)
+    stagePresentationVariety: normalize(stagePresentationSet.size, 4),
+    totalAttackRate: normalize(attack.totalAttackRate, 2),
+    escortAttackRate: normalize(attack.escortAttackRate, 1),
+    escortAttackShare: attack.escortAttackShare,
+    bossAttackShare: attack.bossAttackShare,
+    butterflyAttackShare: attack.butterflyAttackShare,
+    beeAttackShare: attack.beeAttackShare,
+    firstAttackTime: normalize(attack.firstAttackTime, Math.max(duration, 1))
   };
   for(const [family, rate] of Object.entries(eventRates(events, duration))){
     features[`eventRate:${family}`] = normalize(rate, 2);

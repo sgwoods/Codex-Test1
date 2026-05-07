@@ -106,6 +106,14 @@ function specialSquadronTuning(stage=S.stage){
    escortLift:16
   };
  }
+ if(stage>=14){
+  return {
+   escortOffset:36,
+   escortTrackX:6.4,
+   escortTrackY:24,
+   escortLift:24
+  };
+ }
  return {
   escortOffset:30,
   escortTrackX:7.4,
@@ -131,20 +139,23 @@ function carriedFighterTarget(e){
 
 function assignEscorts(boss){
  if(boss.t!=='boss'||!enemyHasEscortState(boss))return;
- const maxEscorts=S.stage===1&&S.scriptMode?1:2;
+ const lateEscortSurge=S.stage>=14&&!S.challenge;
+ const maxEscorts=S.stage===1&&S.scriptMode?1:(lateEscortSurge?3:2);
  const squadId=++S.squadSeq;
- const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
+ const columnReach=lateEscortSurge?3:2;
+ const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=columnReach).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;
  boss.squadId=cand.length?squadId:0;
  const { escortOffset }=specialSquadronTuning(S.stage);
+ const offsetOrder=lateEscortSurge?[-escortOffset,escortOffset,-escortOffset*.5]:[-escortOffset,escortOffset];
  for(const [i,e] of cand.entries()){
   if(!enemyHasEscortState(e))continue;
   e.dive=5;
   e.lead=boss.id;
-  e.off=(i?1:-1)*escortOffset;
-  e.shot=1;
+  e.off=offsetOrder[i]??((i?1:-1)*escortOffset);
+  e.shot=lateEscortSurge&&i>1?0:1;
   e.squadId=squadId;
   boss.esc++;
-  logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});
+  logEnemyAttackStart(e,'escort',{lead:boss.id,offset:+e.off.toFixed(2),pattern:lateEscortSurge?'late-stage-wide-escort':'standard-escort'});
  }
 }
