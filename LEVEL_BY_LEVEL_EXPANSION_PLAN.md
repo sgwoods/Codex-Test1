@@ -9,9 +9,11 @@ content, alien behavior, movement texture, and shared gameplay evidence to stand
 beside the original Galaga reference with more confidence.
 
 This work is now represented directly in the quality scorecard as `Level arc
-and encounter shape`, currently `7.4/10`. That category is high priority for
+and encounter shape`, currently `7.9/10`. That category is high priority for
 `1.4` because it measures whether Aurora develops a Galaga-like learning and
-encounter arc over time rather than repeating a strong early-stage loop.
+encounter arc over time rather than repeating a strong early-stage loop. The
+first stage-signature distance pass now scores `7.9/10` and identifies the
+closest pair as regular mid-run pressure versus late-run cleanup/failure.
 
 ## Decision
 
@@ -32,10 +34,11 @@ This means the immediate work is not just "tune the current loop." It is:
 4. create the video/evidence path that lets users and developers compare runs
 5. use the second-game preview to keep Platinum honest
 
-The next assessment step should be a stage-signature distance harness across
-early, challenge, mid-run, and late-run windows. The next implementation step
-should be one challenge-stage movement/reward slice plus one later-level
-entry/escort variation, both measured against pressure and survivability.
+The next assessment step should expand the stage-signature distance harness
+with more mid-run and late-run windows. The next implementation step should be
+one challenge-stage movement/reward slice plus one later-level entry/escort
+variation, both measured against pressure, survivability, and signature
+distance.
 
 ## Why This Is Important
 

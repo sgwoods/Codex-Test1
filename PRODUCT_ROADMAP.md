@@ -112,14 +112,14 @@ Specific deferred shell/UI cleanup to hold for that `1.6.0` family:
 
 Current conformance read:
 
-- see [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
-- overall Aurora quality is `9.0/10` across eleven scored categories
+- overall Aurora quality is `9.1/10` across eleven scored categories
 - audio identity and cue alignment is the weakest category at `6.3/10`
 - level arc and encounter shape is now a high-priority scored category at
-  `7.4/10`, with the main gap in automated proof that later stages and
-  challenge stages are not repetitive
+  `7.9/10`, backed by first-pass stage-signature distance scoring; the main
+  gap is now regular mid-run versus regular late-run distinction, not the
+  challenge-stage window
 - player movement conformance now reads `10/10`; the prior `8.0/10` gap was
   traced to harness recenter input suppression, not to gameplay movement
   constants
@@ -138,7 +138,7 @@ Current conformance read:
   mixed-source cue candidates, component sprite targets, waveform/spectrogram
   previews, and the reusable Platinum audio conformance lab output, while
   stage-rank gates require denser later-wave pressure
-- current cluster targets are `9.0/10` for Aurora and `7.7/10` reference /
+- current cluster targets are `9.1/10` for Aurora and `7.7/10` reference /
   `6.9/10` playtest for Guardians in the `1.3` Fidelity and Trust lane, rising
   toward `9.5/10` and `9.0/10` reference / `8.8/10` playtest by the `2.0`
   multi-game Platinum candidate lane

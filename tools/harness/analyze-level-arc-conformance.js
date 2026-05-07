@@ -46,7 +46,10 @@ function collectFiles(root, targetName){
     }
   }
   walk(fullRoot);
-  return found.sort();
+  return found.sort((a, b) => {
+    const delta = fs.statSync(a).mtimeMs - fs.statSync(b).mtimeMs;
+    return delta || a.localeCompare(b);
+  });
 }
 
 function latestReport(dir){
@@ -97,12 +100,14 @@ function main(){
   const captureReportPath = latestReport('reference-artifacts/analyses/correspondence/capture-rescue');
   const pressureGeometryPath = latestReport('reference-artifacts/analyses/aurora-stage4-pressure-geometry');
   const pressureLossPath = latestReport('reference-artifacts/analyses/aurora-stage4-loss-windows');
+  const stageSignaturePath = latestReport('reference-artifacts/analyses/stage-signature-distance');
 
   const challenge = challengeReportPath ? readJson(challengeReportPath) : { summary: {} };
   const progression = progressionReportPath ? readJson(progressionReportPath) : { summary: {} };
   const capture = captureReportPath ? readJson(captureReportPath) : { summary: {} };
   const pressureGeometry = pressureGeometryPath ? readJson(pressureGeometryPath) : { summary: {} };
   const pressureLoss = pressureLossPath ? readJson(pressureLossPath) : { summary: {} };
+  const stageSignature = stageSignaturePath ? readJson(stageSignaturePath) : { summary: {} };
 
   const challengeTiming = challenge.summary.total ? challenge.summary.passed / challenge.summary.total : 0;
   const progressionChecks = progression.summary.totalPersonaChecks
@@ -119,6 +124,9 @@ function main(){
   const pressureReplayCoverage = pressureLoss.summary.sourceWindowsFound
     ? pressureLoss.summary.replayReproducedWindows / pressureLoss.summary.sourceWindowsFound
     : 0;
+  const stageSignatureScore = (stageSignature.summary.signatureScore10 || 0) / 10;
+  const stageSignatureDistinctPairRatio = stageSignature.summary.distinctPairRatio || 0;
+  const stageSignatureRepetitionSafety = 1 - (stageSignature.summary.repetitionRisk || 1);
 
   const submetrics = [
     {
@@ -127,9 +135,9 @@ function main(){
       score10: scoreParts([
         { value: stageFamilyBlueprintCount / 6, weight: 0.35 },
         { value: evidenceWindowCount / 6, weight: 0.35 },
-        { value: 0.35, weight: 0.3 }
+        { value: stageSignatureDistinctPairRatio, weight: 0.3 }
       ]),
-      read: `${stageFamilyBlueprintCount}/6 stage families are blueprinted and ${evidenceWindowCount}/6 target evidence windows are present; implementation is still early.`
+      read: `${stageFamilyBlueprintCount}/6 stage families are blueprinted and ${evidenceWindowCount}/6 target evidence windows are present; stage-signature distinct pair ratio is ${stageSignature.summary.distinctPairRatio || 0}.`
     },
     {
       id: 'challenge-stage-identity',
@@ -148,9 +156,9 @@ function main(){
       score10: scoreParts([
         { value: evidenceWindowCount / 6, weight: 0.35 },
         { value: stageFamilyBlueprintCount / 6, weight: 0.25 },
-        { value: 0.45, weight: 0.4 }
+        { value: stageSignatureScore, weight: 0.4 }
       ]),
-      read: 'Later-level entry, escort, regrouping, and challenge-path grammar is planned, but not yet measured by a stage-signature distance harness.'
+      read: `Later-level entry, escort, regrouping, and challenge-path grammar is planned; the stage-signature distance score is ${stageSignature.summary.signatureScore10 || 0}/10.`
     },
     {
       id: 'pressure-curve-over-time',
@@ -190,9 +198,9 @@ function main(){
       score10: scoreParts([
         { value: stageFamilyBlueprintCount / 6, weight: 0.35 },
         { value: evidenceWindowCount / 6, weight: 0.25 },
-        { value: 0.2, weight: 0.4 }
+        { value: stageSignatureRepetitionSafety, weight: 0.4 }
       ]),
-      read: 'Aurora has a stage-family blueprint and evidence windows, but no automated stage-signature similarity penalty yet.'
+      read: `Stage-signature repetition risk is ${stageSignature.summary.repetitionRisk || 0}; closest pair is ${stageSignature.summary.closestPair ? `${stageSignature.summary.closestPair.a} / ${stageSignature.summary.closestPair.b}` : 'not measured'}.`
     }
   ];
 
@@ -224,9 +232,9 @@ function main(){
       strongestSubmetric: submetrics.reduce((best, metric) => metric.score10 > best.score10 ? metric : best, submetrics[0]),
       weakestSubmetric: submetrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, submetrics[0]),
       nextRecommendedWork: [
-        'build a stage-signature distance harness across early, challenge, mid-run, and late-run windows',
+        'expand stage-signature distance coverage with more mid-run and late-run windows',
         'implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback',
-        'add one later-level entry or escort variation family and measure pressure without unfair collapse'
+        'add one later-level entry or escort variation family and measure whether mid-run versus late-run signatures separate without unfair collapse'
       ]
     },
     evidence: {
@@ -236,6 +244,7 @@ function main(){
       captureReport: captureReportPath ? path.relative(ROOT, captureReportPath) : null,
       pressureGeometryReport: pressureGeometryPath ? path.relative(ROOT, pressureGeometryPath) : null,
       pressureLossReport: pressureLossPath ? path.relative(ROOT, pressureLossPath) : null,
+      stageSignatureReport: stageSignaturePath ? path.relative(ROOT, stageSignaturePath) : null,
       levelExpansionCycle: 'reference-artifacts/analyses/aurora-level-expansion-cycle'
     },
     submetrics

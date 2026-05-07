@@ -167,7 +167,7 @@ Practical standard:
   stricter read that exposes `7/14` broad Aurora audio reference windows needing
   tighter segmentation and `22` candidate subwindows for review/promotion
 - level arc and encounter shape is now a first-class quality category at
-  `7.4/10`; this should be treated as a high-priority `1.4` workstream because
+  `7.9/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
   repeating a strong early loop
 - movement now scores `10/10` after repairing the movement conformance harness
@@ -176,7 +176,7 @@ Practical standard:
 - next movement work should be manual/browser review plus richer reference
   trace extraction, not blind constant tuning
 - next implementation value is now highest in level-arc shape: challenge-stage
-  depth, stage-signature distance measurement, later-stage pressure/entry
+  depth, expanded stage-signature distance coverage, later-stage pressure/entry
   variation, gameplay-scale graphics, and audio identity
 - next-cycle work should be grouped deliberately into:
   - movement and control fidelity
@@ -196,7 +196,6 @@ Practical standard:
 See also:
 
 - [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
-- [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
 - [BETA_CANDIDATE_PLAN.md](BETA_CANDIDATE_PLAN.md)
 - [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
