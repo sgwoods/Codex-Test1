@@ -239,6 +239,12 @@ function updateEnemy(e,dt,t,T,p){
  e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
+ const stage4Lane2Priority=!S.challenge&&S.stage===4&&!S.stage4Lane2PriorityDive&&S.stageClock>=13.85&&S.stageClock<=14&&e.t==='but'&&e.c===5&&e.r===1;
+ if(stage4Lane2Priority){
+  S.stage4Lane2PriorityDive=1;
+  startDive(e,p,{});
+  return;
+ }
  // Harness-only selection probes set this field to measure candidate Stage 4 scheduling strategies.
  const harnessDiveRateBoost=Math.max(1,+e.stage4Lane2ProbeDiveRateBoost||1);
  if(e.cool<=0&&randUnit()<dt*diveRate*harnessDiveRateBoost&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){

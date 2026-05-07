@@ -116,7 +116,7 @@ function spawnStage(){
  const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1&&transitionMode==='challengeResult'
   ? currentGamePackReferenceTiming('postChallengeStageEntry')
   : null;
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.stage4Lane2PriorityDive=0;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
  S.transitionMode='';
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
