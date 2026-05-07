@@ -144,6 +144,12 @@ Current conformance read:
   `reference-artifacts/analyses/quality-conformance/2026-05-07-bfcc311/report.json`
 - the current stage-signature distance read is captured in
   `reference-artifacts/analyses/stage-signature-distance/2026-05-07-2aeaafa/report.json`
+- conformance economics are now tracked in
+  `CONFORMANCE_ECONOMICS.md` and
+  `reference-artifacts/analyses/conformance-economics/2026-05-07-f4e0d13/report.json`;
+  future long-cycle runs should use `npm run harness:measure` so local CPU,
+  browser/video, GPU, model/API, artifact-volume, and score-delta tradeoffs can
+  be reviewed before choosing the next major phase
 - the current long-cycle baseline is captured in
   `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
 - the Track 1 movement/shot-feel finding is captured in
