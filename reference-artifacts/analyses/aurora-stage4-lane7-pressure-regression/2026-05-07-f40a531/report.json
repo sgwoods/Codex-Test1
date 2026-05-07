@@ -1,0 +1,2523 @@
+{
+  "schema_version": 1,
+  "artifact_type": "aurora-stage4-lane7-pressure-regression",
+  "generatedAt": "2026-05-07T11:41:31.072Z",
+  "branch": "codex/macbook-pro-aurora-stage4-loss-window-scenarios",
+  "commit": "f40a531",
+  "scenario": "stage4-survival-lane7-input-sensitive-pressure",
+  "scenarioFile": "tools/harness/scenarios/stage4-survival-lane7-input-sensitive-pressure.json",
+  "expectedWindow": [
+    13.65,
+    14.05
+  ],
+  "sampleWindow": [
+    12.95,
+    14.65
+  ],
+  "sampleCount": 105,
+  "finalState": {
+    "started": 1,
+    "paused": 0,
+    "stage": 4,
+    "score": 720,
+    "lives": 4,
+    "challenge": false,
+    "recording": false,
+    "seed": 4301,
+    "simT": 16.45,
+    "stageClock": 16.45,
+    "persona": "advanced",
+    "atmosphere": {
+      "id": "aurora-hint",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-hint",
+      "audioTheme": "galaga-reference-assets",
+      "starfield": {
+        "id": "aurora-hint-stars",
+        "count": 92,
+        "alphaMin": 0.34,
+        "alphaMax": 0.7
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-rise",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "scorpion-dawn",
+      "atmosphereTheme": "aurora-hint",
+      "backgroundMode": "aurora-hint"
+    },
+    "audioCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-hint",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 34,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 4,
+      "challenge": false,
+      "at": 0.767
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "losses": [
+    {
+      "t": 13.867,
+      "stageClock": 13.867,
+      "cause": "enemy_collision",
+      "sourceType": "but",
+      "sourceLane": 8,
+      "sourceColumn": null,
+      "playerLane": 8,
+      "playerX": 238.15,
+      "enemyX": 234.3,
+      "enemyY": 335.84
+    }
+  ],
+  "match": {
+    "t": 13.867,
+    "stageClock": 13.867,
+    "cause": "enemy_collision",
+    "sourceType": "but",
+    "sourceLane": 8,
+    "sourceColumn": null,
+    "playerLane": 8,
+    "playerX": 238.15,
+    "enemyX": 234.3,
+    "enemyY": 335.84
+  },
+  "samples": [
+    {
+      "simT": 13.05,
+      "stageClock": 13.05,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.083,
+      "stageClock": 13.083,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.117,
+      "stageClock": 13.117,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.15,
+      "stageClock": 13.15,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.183,
+      "stageClock": 13.183,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.217,
+      "stageClock": 13.217,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.25,
+      "stageClock": 13.25,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.283,
+      "stageClock": 13.283,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.317,
+      "stageClock": 13.317,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.35,
+      "stageClock": 13.35,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.383,
+      "stageClock": 13.383,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.417,
+      "stageClock": 13.417,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.45,
+      "stageClock": 13.45,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.483,
+      "stageClock": 13.483,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.517,
+      "stageClock": 13.517,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.55,
+      "stageClock": 13.55,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.583,
+      "stageClock": 13.583,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.617,
+      "stageClock": 13.617,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.65,
+      "stageClock": 13.65,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.683,
+      "stageClock": 13.683,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.7,
+      "stageClock": 13.7,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.717,
+      "stageClock": 13.717,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 271,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.75,
+      "stageClock": 13.75,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 261.61,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.783,
+      "stageClock": 13.783,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 252.23,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.817,
+      "stageClock": 13.817,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 242.84,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.85,
+      "stageClock": 13.85,
+      "score": 720,
+      "lives": 5,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": []
+    },
+    {
+      "simT": 13.883,
+      "stageClock": 13.883,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.303
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 13.917,
+      "stageClock": 13.917,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.27
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 13.95,
+      "stageClock": 13.95,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.237
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 13.983,
+      "stageClock": 13.983,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.203
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.017,
+      "stageClock": 14.017,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.17
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.05,
+      "stageClock": 14.05,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.137
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.083,
+      "stageClock": 14.083,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.103
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.117,
+      "stageClock": 14.117,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.07
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.15,
+      "stageClock": 14.15,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.037
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.183,
+      "stageClock": 14.183,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 1.003
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.217,
+      "stageClock": 14.217,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.97
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.25,
+      "stageClock": 14.25,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.937
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.283,
+      "stageClock": 14.283,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.903
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.317,
+      "stageClock": 14.317,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.87
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.35,
+      "stageClock": 14.35,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.837
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.383,
+      "stageClock": 14.383,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.803
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.417,
+      "stageClock": 14.417,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.77
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.45,
+      "stageClock": 14.45,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.737
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.483,
+      "stageClock": 14.483,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.703
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.5,
+      "stageClock": 14.5,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.687
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.533,
+      "stageClock": 14.533,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.653
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.567,
+      "stageClock": 14.567,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.62
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.6,
+      "stageClock": 14.6,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.587
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.633,
+      "stageClock": 14.633,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.553
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.667,
+      "stageClock": 14.667,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.52
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.7,
+      "stageClock": 14.7,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.487
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.733,
+      "stageClock": 14.733,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.453
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.767,
+      "stageClock": 14.767,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.42
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.8,
+      "stageClock": 14.8,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.387
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.833,
+      "stageClock": 14.833,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.353
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.867,
+      "stageClock": 14.867,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.32
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.9,
+      "stageClock": 14.9,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.287
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.933,
+      "stageClock": 14.933,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.253
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 14.967,
+      "stageClock": 14.967,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.22
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15,
+      "stageClock": 15,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.187
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.033,
+      "stageClock": 15.033,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.153
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.067,
+      "stageClock": 15.067,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.12
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.1,
+      "stageClock": 15.1,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.087
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.133,
+      "stageClock": 15.133,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.053
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.167,
+      "stageClock": 15.167,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 238.15,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0.02
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.2,
+      "stageClock": 15.2,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 237.32,
+        "y": 340,
+        "vx": -49.6,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.233,
+      "stageClock": 15.233,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 233.81,
+        "y": 340,
+        "vx": -121.02,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.267,
+      "stageClock": 15.267,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 228.6,
+        "y": 340,
+        "vx": -166.74,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.3,
+      "stageClock": 15.3,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 222.28,
+        "y": 340,
+        "vx": -195.99,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.333,
+      "stageClock": 15.333,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 215.26,
+        "y": 340,
+        "vx": -214.71,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.367,
+      "stageClock": 15.367,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 207.79,
+        "y": 340,
+        "vx": -226.7,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.4,
+      "stageClock": 15.4,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 200.04,
+        "y": 340,
+        "vx": -234.37,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.433,
+      "stageClock": 15.433,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 192.1,
+        "y": 340,
+        "vx": -239.27,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.467,
+      "stageClock": 15.467,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 184.04,
+        "y": 340,
+        "vx": -242.42,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.5,
+      "stageClock": 15.5,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 175.91,
+        "y": 340,
+        "vx": -244.43,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.533,
+      "stageClock": 15.533,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 167.73,
+        "y": 340,
+        "vx": -245.71,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.567,
+      "stageClock": 15.567,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 159.52,
+        "y": 340,
+        "vx": -246.54,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.6,
+      "stageClock": 15.6,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 151.28,
+        "y": 340,
+        "vx": -247.06,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.633,
+      "stageClock": 15.633,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 143.04,
+        "y": 340,
+        "vx": -247.4,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.667,
+      "stageClock": 15.667,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 134.79,
+        "y": 340,
+        "vx": -247.62,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.7,
+      "stageClock": 15.7,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 126.53,
+        "y": 340,
+        "vx": -247.75,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.733,
+      "stageClock": 15.733,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 118.27,
+        "y": 340,
+        "vx": -247.84,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.767,
+      "stageClock": 15.767,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 110.01,
+        "y": 340,
+        "vx": -247.9,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.8,
+      "stageClock": 15.8,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 101.74,
+        "y": 340,
+        "vx": -247.94,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.833,
+      "stageClock": 15.833,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 93.48,
+        "y": 340,
+        "vx": -247.96,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.867,
+      "stageClock": 15.867,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 85.21,
+        "y": 340,
+        "vx": -247.97,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.9,
+      "stageClock": 15.9,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 76.95,
+        "y": 340,
+        "vx": -247.98,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.933,
+      "stageClock": 15.933,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 68.68,
+        "y": 340,
+        "vx": -247.99,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 15.967,
+      "stageClock": 15.967,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 60.41,
+        "y": 340,
+        "vx": -247.99,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16,
+      "stageClock": 16,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 52.15,
+        "y": 340,
+        "vx": -248,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.033,
+      "stageClock": 16.033,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 43.88,
+        "y": 340,
+        "vx": -248,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.067,
+      "stageClock": 16.067,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 35.61,
+        "y": 340,
+        "vx": -248,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.1,
+      "stageClock": 16.1,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 27.35,
+        "y": 340,
+        "vx": -248,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.133,
+      "stageClock": 16.133,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 19.08,
+        "y": 340,
+        "vx": -248,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.167,
+      "stageClock": 16.167,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 10.81,
+        "y": 340,
+        "vx": -248,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.2,
+      "stageClock": 16.2,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.233,
+      "stageClock": 16.233,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.267,
+      "stageClock": 16.267,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.3,
+      "stageClock": 16.3,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.333,
+      "stageClock": 16.333,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.367,
+      "stageClock": 16.367,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.4,
+      "stageClock": 16.4,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.433,
+      "stageClock": 16.433,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    },
+    {
+      "simT": 16.45,
+      "stageClock": 16.45,
+      "score": 720,
+      "lives": 4,
+      "player": {
+        "x": 9,
+        "y": 340,
+        "vx": 0,
+        "spawn": 0
+      },
+      "losses": [
+        {
+          "t": 13.867,
+          "stageClock": 13.867,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceLane": 8,
+          "sourceColumn": null,
+          "playerLane": 8,
+          "playerX": 238.15,
+          "enemyX": 234.3,
+          "enemyY": 335.84
+        }
+      ]
+    }
+  ],
+  "ok": true,
+  "problem": "The lane7 pressure source loss is input-sensitive and needs an automated regression target before gameplay constants are changed.",
+  "strategy": "Run the promoted controlled-clock sampler scenario and assert a body-contact loss in the recovered source danger window.",
+  "successMeasure": "At least one enemy_collision loss occurs between stage clocks 13.65 and 14.05 on player lane 7 or 8."
+}
