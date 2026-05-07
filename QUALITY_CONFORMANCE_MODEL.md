@@ -90,6 +90,9 @@ Each category scores from `1` to `10`.
      - `reference-artifacts/analyses/galaga-audio-overlap/*/metrics.json`
    - Focus:
      - cue identity against reference-inspired target sound
+     - active cue-window similarity against labeled Galaga reference clips
+     - reference-window precision, so broad clips do not silently masquerade as
+       isolated cue matches
      - stage / challenge timing windows for cue overlap and handoff
 
 10. `UI, shell, and graphics integrity`

@@ -43,6 +43,11 @@ function toWav(inPath, outPath){
   run('ffmpeg', ['-y', '-i', inPath, '-ac', '1', '-ar', '22050', outPath]);
 }
 
+function pythonForAudioReport(){
+  const bundled = path.join(process.env.HOME || '', '.cache', 'codex-runtimes', 'codex-primary-runtime', 'dependencies', 'python', 'bin', 'python3');
+  return fs.existsSync(bundled) ? bundled : 'python3';
+}
+
 async function main(){
   const commit = gitShortHead();
   const stamp = new Date().toISOString().slice(0, 10);
@@ -128,7 +133,7 @@ async function main(){
     items: manifest
   }, null, 2));
 
-  run('python3', [path.join(ROOT, 'tools', 'harness', 'render-audio-comparison-report.py'), manifestPath], { cwd: ROOT, stdio: 'inherit' });
+  run(pythonForAudioReport(), [path.join(ROOT, 'tools', 'harness', 'render-audio-comparison-report.py'), manifestPath], { cwd: ROOT, stdio: 'inherit' });
 
   console.log(JSON.stringify({ ok: true, outRoot }, null, 2));
 }

@@ -1,0 +1,1553 @@
+{
+  "commit": "beb232a",
+  "version": "1.3.0",
+  "items": [
+    {
+      "id": "demo-pulse",
+      "label": "Demo Pulse",
+      "focus": "Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.",
+      "cue": "attractPulse",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/demo-pulse-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9752,
+            "rms": 0.2565,
+            "spectral_centroid_hz": 1288.3,
+            "zero_crossings_per_s": 2043.2
+          },
+          "activeWindow": {
+            "start_s": 0.01,
+            "end_s": 3.712,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2587
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 0.9752,
+            "rms": 0.2639,
+            "spectral_centroid_hz": 1312.9,
+            "zero_crossings_per_s": 2128.9
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/demo-pulse-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2572,
+            "spectral_centroid_hz": 1288.1,
+            "zero_crossings_per_s": 2068.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.722,
+            "duration_s": 3.722,
+            "coverage": 0.94,
+            "threshold_rms": 0.259
+          },
+          "activeMetrics": {
+            "duration_s": 3.722,
+            "peak": 1.0,
+            "rms": 0.264,
+            "spectral_centroid_hz": 1288.2,
+            "zero_crossings_per_s": 2151.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Ambience / Convoy",
+          "wav": "samples/demo-pulse-reference.wav",
+          "metrics": {
+            "duration_s": 8.034,
+            "peak": 0.2267,
+            "rms": 0.0848,
+            "spectral_centroid_hz": 1175.0,
+            "zero_crossings_per_s": 577.3
+          },
+          "activeWindow": {
+            "start_s": 1.147,
+            "end_s": 7.942,
+            "duration_s": 6.795,
+            "coverage": 0.846,
+            "threshold_rms": 0.0866
+          },
+          "activeMetrics": {
+            "duration_s": 6.795,
+            "peak": 0.2267,
+            "rms": 0.0866,
+            "spectral_centroid_hz": 1175.3,
+            "zero_crossings_per_s": 598.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.02,
+          "spectral_centroid_hz": 24.7,
+          "zero_crossings_per_s": 22.8,
+          "rms": 0.0001
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 3.093,
+          "spectral_centroid_hz": 137.6,
+          "zero_crossings_per_s": 1530.9,
+          "rms": 0.1773
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 3.073,
+          "spectral_centroid_hz": 112.9,
+          "zero_crossings_per_s": 1553.7,
+          "rms": 0.1774
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "stage-start",
+      "label": "Stage Start",
+      "focus": "Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.",
+      "cue": "gameStart",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/stage-start-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.6093,
+            "rms": 0.0813,
+            "spectral_centroid_hz": 1220.7,
+            "zero_crossings_per_s": 600.3
+          },
+          "activeWindow": {
+            "start_s": 1.985,
+            "end_s": 3.96,
+            "duration_s": 1.975,
+            "coverage": 0.499,
+            "threshold_rms": 0.0814
+          },
+          "activeMetrics": {
+            "duration_s": 1.975,
+            "peak": 0.303,
+            "rms": 0.097,
+            "spectral_centroid_hz": 1146.1,
+            "zero_crossings_per_s": 770.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/stage-start-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.5486,
+            "rms": 0.0809,
+            "spectral_centroid_hz": 1168.9,
+            "zero_crossings_per_s": 585.9
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.96,
+            "duration_s": 3.96,
+            "coverage": 1.0,
+            "threshold_rms": 0.0806
+          },
+          "activeMetrics": {
+            "duration_s": 3.96,
+            "peak": 0.5486,
+            "rms": 0.0809,
+            "spectral_centroid_hz": 1168.9,
+            "zero_crossings_per_s": 585.9
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Start",
+          "wav": "samples/stage-start-reference.wav",
+          "metrics": {
+            "duration_s": 7.012,
+            "peak": 0.8508,
+            "rms": 0.2606,
+            "spectral_centroid_hz": 1392.3,
+            "zero_crossings_per_s": 2234.5
+          },
+          "activeWindow": {
+            "start_s": 0.718,
+            "end_s": 6.545,
+            "duration_s": 5.827,
+            "coverage": 0.831,
+            "threshold_rms": 0.2756
+          },
+          "activeMetrics": {
+            "duration_s": 5.827,
+            "peak": 0.8508,
+            "rms": 0.2798,
+            "spectral_centroid_hz": 1400.0,
+            "zero_crossings_per_s": 2509.3
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 1.985,
+          "spectral_centroid_hz": 22.8,
+          "zero_crossings_per_s": 184.9,
+          "rms": 0.0161
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 3.852,
+          "spectral_centroid_hz": 253.9,
+          "zero_crossings_per_s": 1738.5,
+          "rms": 0.1828
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 1.867,
+          "spectral_centroid_hz": 231.1,
+          "zero_crossings_per_s": 1923.4,
+          "rms": 0.1989
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      }
+    },
+    {
+      "id": "formation-pulse",
+      "label": "Formation Pulse",
+      "focus": "Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.",
+      "cue": "stagePulse",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/formation-pulse-aurora.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.885,
+            "rms": 0.2539,
+            "spectral_centroid_hz": 1128.0,
+            "zero_crossings_per_s": 1881.0
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.84,
+            "duration_s": 0.84,
+            "coverage": 1.0,
+            "threshold_rms": 0.2525
+          },
+          "activeMetrics": {
+            "duration_s": 0.84,
+            "peak": 0.885,
+            "rms": 0.2539,
+            "spectral_centroid_hz": 1128.0,
+            "zero_crossings_per_s": 1881.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/formation-pulse-galaga.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.819,
+            "rms": 0.2538,
+            "spectral_centroid_hz": 1224.8,
+            "zero_crossings_per_s": 1898.8
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.84,
+            "duration_s": 0.84,
+            "coverage": 1.0,
+            "threshold_rms": 0.2519
+          },
+          "activeMetrics": {
+            "duration_s": 0.84,
+            "peak": 0.819,
+            "rms": 0.2538,
+            "spectral_centroid_hz": 1224.8,
+            "zero_crossings_per_s": 1898.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Ambience / Convoy",
+          "wav": "samples/formation-pulse-reference.wav",
+          "metrics": {
+            "duration_s": 8.034,
+            "peak": 0.2267,
+            "rms": 0.0848,
+            "spectral_centroid_hz": 1175.0,
+            "zero_crossings_per_s": 577.3
+          },
+          "activeWindow": {
+            "start_s": 1.147,
+            "end_s": 7.942,
+            "duration_s": 6.795,
+            "coverage": 0.846,
+            "threshold_rms": 0.0866
+          },
+          "activeMetrics": {
+            "duration_s": 6.795,
+            "peak": 0.2267,
+            "rms": 0.0866,
+            "spectral_centroid_hz": 1175.3,
+            "zero_crossings_per_s": 598.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 96.8,
+          "zero_crossings_per_s": 17.8,
+          "rms": 0.0001
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 5.955,
+          "spectral_centroid_hz": 47.3,
+          "zero_crossings_per_s": 1283.0,
+          "rms": 0.1673
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 5.955,
+          "spectral_centroid_hz": 49.5,
+          "zero_crossings_per_s": 1300.8,
+          "rms": 0.1672
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "capture-beam",
+      "label": "Capture Beam",
+      "focus": "Compare whether the beam deploy moment reads clearly as tractor-beam danger.",
+      "cue": "captureBeam",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/capture-beam-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2561,
+            "spectral_centroid_hz": 1296.2,
+            "zero_crossings_per_s": 2075.8
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.732,
+            "duration_s": 3.732,
+            "coverage": 0.942,
+            "threshold_rms": 0.259
+          },
+          "activeMetrics": {
+            "duration_s": 3.732,
+            "peak": 1.0,
+            "rms": 0.2626,
+            "spectral_centroid_hz": 1297.3,
+            "zero_crossings_per_s": 2158.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/capture-beam-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9266,
+            "rms": 0.2591,
+            "spectral_centroid_hz": 1281.7,
+            "zero_crossings_per_s": 2077.3
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.762,
+            "duration_s": 3.762,
+            "coverage": 0.95,
+            "threshold_rms": 0.2602
+          },
+          "activeMetrics": {
+            "duration_s": 3.762,
+            "peak": 0.9266,
+            "rms": 0.2648,
+            "spectral_centroid_hz": 1283.5,
+            "zero_crossings_per_s": 2144.5
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Tractor Beam",
+          "wav": "samples/capture-beam-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.8581,
+            "rms": 0.3136,
+            "spectral_centroid_hz": 1829.9,
+            "zero_crossings_per_s": 2144.4
+          },
+          "activeWindow": {
+            "start_s": 0.189,
+            "end_s": 3.512,
+            "duration_s": 3.323,
+            "coverage": 0.822,
+            "threshold_rms": 0.3113
+          },
+          "activeMetrics": {
+            "duration_s": 3.323,
+            "peak": 0.8581,
+            "rms": 0.3458,
+            "spectral_centroid_hz": 1833.5,
+            "zero_crossings_per_s": 2595.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.03,
+          "spectral_centroid_hz": 13.8,
+          "zero_crossings_per_s": 13.5,
+          "rms": 0.0022
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.409,
+          "spectral_centroid_hz": 536.2,
+          "zero_crossings_per_s": 437.8,
+          "rms": 0.0832
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.439,
+          "spectral_centroid_hz": 550.0,
+          "zero_crossings_per_s": 451.3,
+          "rms": 0.081
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      }
+    },
+    {
+      "id": "fighter-captured",
+      "label": "Fighter Captured",
+      "focus": "Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.",
+      "cue": "captureSuccess",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/fighter-captured-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2564,
+            "spectral_centroid_hz": 1296.5,
+            "zero_crossings_per_s": 2091.4
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.752,
+            "duration_s": 3.752,
+            "coverage": 0.947,
+            "threshold_rms": 0.2581
+          },
+          "activeMetrics": {
+            "duration_s": 3.752,
+            "peak": 1.0,
+            "rms": 0.2623,
+            "spectral_centroid_hz": 1297.8,
+            "zero_crossings_per_s": 2166.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/fighter-captured-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2569,
+            "spectral_centroid_hz": 1286.3,
+            "zero_crossings_per_s": 2055.6
+          },
+          "activeWindow": {
+            "start_s": 0.01,
+            "end_s": 3.712,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2588
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 1.0,
+            "rms": 0.2644,
+            "spectral_centroid_hz": 1291.7,
+            "zero_crossings_per_s": 2143.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Fighter Captured",
+          "wav": "samples/fighter-captured-reference.wav",
+          "metrics": {
+            "duration_s": 6.037,
+            "peak": 0.6662,
+            "rms": 0.1487,
+            "spectral_centroid_hz": 1966.8,
+            "zero_crossings_per_s": 1901.7
+          },
+          "activeWindow": {
+            "start_s": 0.17,
+            "end_s": 6.037,
+            "duration_s": 5.868,
+            "coverage": 0.972,
+            "threshold_rms": 0.1453
+          },
+          "activeMetrics": {
+            "duration_s": 5.868,
+            "peak": 0.6662,
+            "rms": 0.1508,
+            "spectral_centroid_hz": 1967.2,
+            "zero_crossings_per_s": 1929.6
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.05,
+          "spectral_centroid_hz": 6.1,
+          "zero_crossings_per_s": 22.2,
+          "rms": 0.0021
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 2.116,
+          "spectral_centroid_hz": 669.4,
+          "zero_crossings_per_s": 236.4,
+          "rms": 0.1115
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 2.166,
+          "spectral_centroid_hz": 675.5,
+          "zero_crossings_per_s": 214.2,
+          "rms": 0.1136
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      }
+    },
+    {
+      "id": "captured-fighter-destroyed",
+      "label": "Captured Fighter Destroyed",
+      "focus": "Compare the regret/penalty moment when the carried fighter is destroyed.",
+      "cue": "capturedFighterDestroyed",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/captured-fighter-destroyed-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9172,
+            "rms": 0.2559,
+            "spectral_centroid_hz": 1290.2,
+            "zero_crossings_per_s": 2082.8
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.732,
+            "duration_s": 3.732,
+            "coverage": 0.942,
+            "threshold_rms": 0.2596
+          },
+          "activeMetrics": {
+            "duration_s": 3.732,
+            "peak": 0.9172,
+            "rms": 0.2624,
+            "spectral_centroid_hz": 1289.8,
+            "zero_crossings_per_s": 2167.1
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/captured-fighter-destroyed-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2559,
+            "spectral_centroid_hz": 1298.1,
+            "zero_crossings_per_s": 2086.9
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.732,
+            "duration_s": 3.732,
+            "coverage": 0.942,
+            "threshold_rms": 0.2582
+          },
+          "activeMetrics": {
+            "duration_s": 3.732,
+            "peak": 1.0,
+            "rms": 0.2624,
+            "spectral_centroid_hz": 1298.1,
+            "zero_crossings_per_s": 2167.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Captured Fighter Destroyed",
+          "wav": "samples/captured-fighter-destroyed-reference.wav",
+          "metrics": {
+            "duration_s": 3.019,
+            "peak": 0.8836,
+            "rms": 0.1949,
+            "spectral_centroid_hz": 1393.9,
+            "zero_crossings_per_s": 2037.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.019,
+            "duration_s": 3.019,
+            "coverage": 1.0,
+            "threshold_rms": 0.1804
+          },
+          "activeMetrics": {
+            "duration_s": 3.019,
+            "peak": 0.8836,
+            "rms": 0.1949,
+            "spectral_centroid_hz": 1393.9,
+            "zero_crossings_per_s": 2037.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 8.3,
+          "zero_crossings_per_s": 0.3,
+          "rms": 0.0
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.713,
+          "spectral_centroid_hz": 104.1,
+          "zero_crossings_per_s": 129.4,
+          "rms": 0.0675
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.713,
+          "spectral_centroid_hz": 95.8,
+          "zero_crossings_per_s": 129.7,
+          "rms": 0.0675
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      }
+    },
+    {
+      "id": "rescue-join",
+      "label": "Rescue Join",
+      "focus": "Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.",
+      "cue": "rescueJoin",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/rescue-join-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2592,
+            "spectral_centroid_hz": 1281.8,
+            "zero_crossings_per_s": 2072.2
+          },
+          "activeWindow": {
+            "start_s": 0.13,
+            "end_s": 3.772,
+            "duration_s": 3.642,
+            "coverage": 0.92,
+            "threshold_rms": 0.2607
+          },
+          "activeMetrics": {
+            "duration_s": 3.642,
+            "peak": 1.0,
+            "rms": 0.2655,
+            "spectral_centroid_hz": 1292.1,
+            "zero_crossings_per_s": 2134.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/rescue-join-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9956,
+            "rms": 0.2566,
+            "spectral_centroid_hz": 1288.9,
+            "zero_crossings_per_s": 2076.5
+          },
+          "activeWindow": {
+            "start_s": 0.01,
+            "end_s": 3.712,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2587
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 0.9956,
+            "rms": 0.264,
+            "spectral_centroid_hz": 1300.5,
+            "zero_crossings_per_s": 2161.6
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Fighter Rescued (Double Ship)",
+          "wav": "samples/rescue-join-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.429,
+            "rms": 0.0979,
+            "spectral_centroid_hz": 1532.1,
+            "zero_crossings_per_s": 1374.4
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 4.011,
+            "duration_s": 4.011,
+            "coverage": 0.993,
+            "threshold_rms": 0.0936
+          },
+          "activeMetrics": {
+            "duration_s": 4.011,
+            "peak": 0.429,
+            "rms": 0.0982,
+            "spectral_centroid_hz": 1530.9,
+            "zero_crossings_per_s": 1384.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 8.4,
+          "zero_crossings_per_s": 26.8,
+          "rms": 0.0015
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.369,
+          "spectral_centroid_hz": 238.8,
+          "zero_crossings_per_s": 750.4,
+          "rms": 0.1673
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.309,
+          "spectral_centroid_hz": 230.4,
+          "zero_crossings_per_s": 777.2,
+          "rms": 0.1658
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      }
+    },
+    {
+      "id": "ship-loss",
+      "label": "Ship Loss",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "cue": "playerHit",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/ship-loss-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2562,
+            "spectral_centroid_hz": 1288.8,
+            "zero_crossings_per_s": 2081.3
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.722,
+            "duration_s": 3.722,
+            "coverage": 0.94,
+            "threshold_rms": 0.2585
+          },
+          "activeMetrics": {
+            "duration_s": 3.722,
+            "peak": 1.0,
+            "rms": 0.2631,
+            "spectral_centroid_hz": 1290.1,
+            "zero_crossings_per_s": 2165.1
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/ship-loss-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9649,
+            "rms": 0.2583,
+            "spectral_centroid_hz": 1292.1,
+            "zero_crossings_per_s": 2059.6
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.732,
+            "duration_s": 3.732,
+            "coverage": 0.942,
+            "threshold_rms": 0.2595
+          },
+          "activeMetrics": {
+            "duration_s": 3.732,
+            "peak": 0.9649,
+            "rms": 0.2649,
+            "spectral_centroid_hz": 1295.4,
+            "zero_crossings_per_s": 2140.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Death",
+          "wav": "samples/ship-loss-reference.wav",
+          "metrics": {
+            "duration_s": 2.043,
+            "peak": 0.9449,
+            "rms": 0.1443,
+            "spectral_centroid_hz": 962.1,
+            "zero_crossings_per_s": 1201.9
+          },
+          "activeWindow": {
+            "start_s": 0.02,
+            "end_s": 0.988,
+            "duration_s": 0.968,
+            "coverage": 0.474,
+            "threshold_rms": 0.1211
+          },
+          "activeMetrics": {
+            "duration_s": 0.968,
+            "peak": 0.9449,
+            "rms": 0.1995,
+            "spectral_centroid_hz": 964.0,
+            "zero_crossings_per_s": 1195.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 5.3,
+          "zero_crossings_per_s": 25.1,
+          "rms": 0.0018
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 2.754,
+          "spectral_centroid_hz": 326.1,
+          "zero_crossings_per_s": 969.9,
+          "rms": 0.0636
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 2.764,
+          "spectral_centroid_hz": 331.4,
+          "zero_crossings_per_s": 944.8,
+          "rms": 0.0654
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      }
+    },
+    {
+      "id": "challenge-transition",
+      "label": "Challenge Transition",
+      "focus": "Compare how distinct and ceremonial the challenge-stage announcement feels.",
+      "cue": "challengeTransition",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-transition-aurora.wav",
+          "metrics": {
+            "duration_s": 1.08,
+            "peak": 0.8577,
+            "rms": 0.2543,
+            "spectral_centroid_hz": 1216.2,
+            "zero_crossings_per_s": 1910.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 1.08,
+            "duration_s": 1.08,
+            "coverage": 1.0,
+            "threshold_rms": 0.254
+          },
+          "activeMetrics": {
+            "duration_s": 1.08,
+            "peak": 0.8577,
+            "rms": 0.2543,
+            "spectral_centroid_hz": 1216.2,
+            "zero_crossings_per_s": 1910.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-transition-galaga.wav",
+          "metrics": {
+            "duration_s": 1.08,
+            "peak": 0.8182,
+            "rms": 0.2545,
+            "spectral_centroid_hz": 1198.5,
+            "zero_crossings_per_s": 1940.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 1.08,
+            "duration_s": 1.08,
+            "coverage": 1.0,
+            "threshold_rms": 0.2539
+          },
+          "activeMetrics": {
+            "duration_s": 1.08,
+            "peak": 0.8182,
+            "rms": 0.2545,
+            "spectral_centroid_hz": 1198.5,
+            "zero_crossings_per_s": 1940.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage",
+          "wav": "samples/challenge-transition-reference.wav",
+          "metrics": {
+            "duration_s": 3.019,
+            "peak": 0.9491,
+            "rms": 0.1601,
+            "spectral_centroid_hz": 1474.2,
+            "zero_crossings_per_s": 1296.0
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 2.375,
+            "duration_s": 2.375,
+            "coverage": 0.787,
+            "threshold_rms": 0.1018
+          },
+          "activeMetrics": {
+            "duration_s": 2.375,
+            "peak": 0.9491,
+            "rms": 0.1805,
+            "spectral_centroid_hz": 1473.2,
+            "zero_crossings_per_s": 1647.3
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 17.7,
+          "zero_crossings_per_s": 30.5,
+          "rms": 0.0002
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 1.295,
+          "spectral_centroid_hz": 257.0,
+          "zero_crossings_per_s": 262.9,
+          "rms": 0.0738
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 1.295,
+          "spectral_centroid_hz": 274.7,
+          "zero_crossings_per_s": 293.4,
+          "rms": 0.074
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "challenge-results",
+      "label": "Challenge Results",
+      "focus": "Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.",
+      "cue": "challengeResults",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-results-aurora.wav",
+          "metrics": {
+            "duration_s": 1.56,
+            "peak": 0.8263,
+            "rms": 0.2529,
+            "spectral_centroid_hz": 1254.1,
+            "zero_crossings_per_s": 2084.6
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 1.56,
+            "duration_s": 1.56,
+            "coverage": 1.0,
+            "threshold_rms": 0.25
+          },
+          "activeMetrics": {
+            "duration_s": 1.56,
+            "peak": 0.8263,
+            "rms": 0.2529,
+            "spectral_centroid_hz": 1254.1,
+            "zero_crossings_per_s": 2084.6
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-results-galaga.wav",
+          "metrics": {
+            "duration_s": 1.56,
+            "peak": 0.885,
+            "rms": 0.2531,
+            "spectral_centroid_hz": 1226.7,
+            "zero_crossings_per_s": 2123.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 1.317,
+            "duration_s": 1.317,
+            "coverage": 0.844,
+            "threshold_rms": 0.2506
+          },
+          "activeMetrics": {
+            "duration_s": 1.317,
+            "peak": 0.885,
+            "rms": 0.2553,
+            "spectral_centroid_hz": 1220.3,
+            "zero_crossings_per_s": 2021.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Results",
+          "wav": "samples/challenge-results-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.2975,
+            "rms": 0.0868,
+            "spectral_centroid_hz": 1900.3,
+            "zero_crossings_per_s": 2277.3
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 4.021,
+            "duration_s": 4.021,
+            "coverage": 0.995,
+            "threshold_rms": 0.0875
+          },
+          "activeMetrics": {
+            "duration_s": 4.021,
+            "peak": 0.2975,
+            "rms": 0.087,
+            "spectral_centroid_hz": 1910.0,
+            "zero_crossings_per_s": 2288.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.243,
+          "spectral_centroid_hz": 33.8,
+          "zero_crossings_per_s": 63.6,
+          "rms": 0.0024
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 2.461,
+          "spectral_centroid_hz": 655.9,
+          "zero_crossings_per_s": 203.6,
+          "rms": 0.1659
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 2.704,
+          "spectral_centroid_hz": 689.7,
+          "zero_crossings_per_s": 267.2,
+          "rms": 0.1683
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "challenge-perfect",
+      "label": "Challenge Perfect",
+      "focus": "Compare whether a perfect challenge result feels more celebratory than the standard results cue.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/challenge-perfect-aurora.wav",
+          "metrics": {
+            "duration_s": 1.74,
+            "peak": 0.8536,
+            "rms": 0.2575,
+            "spectral_centroid_hz": 1267.9,
+            "zero_crossings_per_s": 2147.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 1.74,
+            "duration_s": 1.74,
+            "coverage": 1.0,
+            "threshold_rms": 0.2545
+          },
+          "activeMetrics": {
+            "duration_s": 1.74,
+            "peak": 0.8536,
+            "rms": 0.2575,
+            "spectral_centroid_hz": 1267.9,
+            "zero_crossings_per_s": 2147.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/challenge-perfect-galaga.wav",
+          "metrics": {
+            "duration_s": 1.74,
+            "peak": 0.8577,
+            "rms": 0.2569,
+            "spectral_centroid_hz": 1252.4,
+            "zero_crossings_per_s": 2093.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 1.74,
+            "duration_s": 1.74,
+            "coverage": 1.0,
+            "threshold_rms": 0.2538
+          },
+          "activeMetrics": {
+            "duration_s": 1.74,
+            "peak": 0.8577,
+            "rms": 0.2569,
+            "spectral_centroid_hz": 1252.4,
+            "zero_crossings_per_s": 2093.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 4.04,
+            "peak": 0.438,
+            "rms": 0.1263,
+            "spectral_centroid_hz": 2423.0,
+            "zero_crossings_per_s": 2978.8
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 4.04,
+            "duration_s": 4.04,
+            "coverage": 1.0,
+            "threshold_rms": 0.124
+          },
+          "activeMetrics": {
+            "duration_s": 4.04,
+            "peak": 0.438,
+            "rms": 0.1263,
+            "spectral_centroid_hz": 2423.0,
+            "zero_crossings_per_s": 2978.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 15.5,
+          "zero_crossings_per_s": 54.0,
+          "rms": 0.0006
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 2.3,
+          "spectral_centroid_hz": 1155.1,
+          "zero_crossings_per_s": 831.1,
+          "rms": 0.1312
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 2.3,
+          "spectral_centroid_hz": 1170.6,
+          "zero_crossings_per_s": 885.1,
+          "rms": 0.1306
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "high-score-1st",
+      "label": "High Score 1st",
+      "focus": "Compare whether first place entry feels distinct and more important than a lower board placement.",
+      "cue": "highScoreFirst",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/high-score-1st-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2562,
+            "spectral_centroid_hz": 1293.7,
+            "zero_crossings_per_s": 2063.9
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.702,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2584
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 1.0,
+            "rms": 0.2636,
+            "spectral_centroid_hz": 1297.7,
+            "zero_crossings_per_s": 2156.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/high-score-1st-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9712,
+            "rms": 0.2561,
+            "spectral_centroid_hz": 1293.4,
+            "zero_crossings_per_s": 2044.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.702,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2589
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 0.9712,
+            "rms": 0.2635,
+            "spectral_centroid_hz": 1293.3,
+            "zero_crossings_per_s": 2134.9
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Name Entry (1st)",
+          "wav": "samples/high-score-1st-reference.wav",
+          "metrics": {
+            "duration_s": 8.034,
+            "peak": 0.9478,
+            "rms": 0.1954,
+            "spectral_centroid_hz": 1766.9,
+            "zero_crossings_per_s": 2077.4
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 6.695,
+            "duration_s": 6.695,
+            "coverage": 0.833,
+            "threshold_rms": 0.0949
+          },
+          "activeMetrics": {
+            "duration_s": 6.695,
+            "peak": 0.9478,
+            "rms": 0.214,
+            "spectral_centroid_hz": 1767.2,
+            "zero_crossings_per_s": 2477.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 4.4,
+          "zero_crossings_per_s": 21.1,
+          "rms": 0.0001
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 2.993,
+          "spectral_centroid_hz": 469.5,
+          "zero_crossings_per_s": 321.2,
+          "rms": 0.0496
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 2.993,
+          "spectral_centroid_hz": 473.9,
+          "zero_crossings_per_s": 342.3,
+          "rms": 0.0495
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "high-score-2nd-10th",
+      "label": "High Score 2nd-10th",
+      "focus": "Compare whether non-first leaderboard entry feels positive but smaller than first place.",
+      "cue": "highScoreOther",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/high-score-2nd-10th-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9735,
+            "rms": 0.2564,
+            "spectral_centroid_hz": 1288.1,
+            "zero_crossings_per_s": 2055.8
+          },
+          "activeWindow": {
+            "start_s": 0.01,
+            "end_s": 3.712,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2586
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 0.9735,
+            "rms": 0.2638,
+            "spectral_centroid_hz": 1304.6,
+            "zero_crossings_per_s": 2142.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/high-score-2nd-10th-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2582,
+            "spectral_centroid_hz": 1280.8,
+            "zero_crossings_per_s": 2062.6
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.732,
+            "duration_s": 3.732,
+            "coverage": 0.942,
+            "threshold_rms": 0.2602
+          },
+          "activeMetrics": {
+            "duration_s": 3.732,
+            "peak": 1.0,
+            "rms": 0.2649,
+            "spectral_centroid_hz": 1281.9,
+            "zero_crossings_per_s": 2138.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Name Entry (2nd-5th)",
+          "wav": "samples/high-score-2nd-10th-reference.wav",
+          "metrics": {
+            "duration_s": 15.0,
+            "peak": 1.0,
+            "rms": 0.2555,
+            "spectral_centroid_hz": 1707.1,
+            "zero_crossings_per_s": 2641.1
+          },
+          "activeWindow": {
+            "start_s": 0.399,
+            "end_s": 14.497,
+            "duration_s": 14.098,
+            "coverage": 0.94,
+            "threshold_rms": 0.2591
+          },
+          "activeMetrics": {
+            "duration_s": 14.098,
+            "peak": 0.9467,
+            "rms": 0.2624,
+            "spectral_centroid_hz": 1715.0,
+            "zero_crossings_per_s": 2757.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.03,
+          "spectral_centroid_hz": 22.7,
+          "zero_crossings_per_s": 4.0,
+          "rms": 0.0011
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 10.396,
+          "spectral_centroid_hz": 410.4,
+          "zero_crossings_per_s": 615.4,
+          "rms": 0.0014
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 10.366,
+          "spectral_centroid_hz": 433.1,
+          "zero_crossings_per_s": 619.4,
+          "rms": 0.0025
+        },
+        "referenceWindowStatus": "broad-reference-window-needs-segmentation"
+      }
+    },
+    {
+      "id": "game-over",
+      "label": "Game Over",
+      "focus": "Compare whether the ending cue feels final and emotionally complete enough.",
+      "cue": "gameOver",
+      "variants": {
+        "aurora": {
+          "label": "Aurora Application Mix",
+          "wav": "samples/game-over-aurora.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 0.9366,
+            "rms": 0.259,
+            "spectral_centroid_hz": 1284.0,
+            "zero_crossings_per_s": 2062.9
+          },
+          "activeWindow": {
+            "start_s": 0.11,
+            "end_s": 3.742,
+            "duration_s": 3.632,
+            "coverage": 0.917,
+            "threshold_rms": 0.2609
+          },
+          "activeMetrics": {
+            "duration_s": 3.632,
+            "peak": 0.9366,
+            "rms": 0.2663,
+            "spectral_centroid_hz": 1282.3,
+            "zero_crossings_per_s": 2138.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Galaga Original Reference (synthetic)",
+          "wav": "samples/game-over-galaga.wav",
+          "metrics": {
+            "duration_s": 3.96,
+            "peak": 1.0,
+            "rms": 0.2563,
+            "spectral_centroid_hz": 1294.4,
+            "zero_crossings_per_s": 2042.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 3.702,
+            "duration_s": 3.702,
+            "coverage": 0.935,
+            "threshold_rms": 0.2588
+          },
+          "activeMetrics": {
+            "duration_s": 3.702,
+            "peak": 1.0,
+            "rms": 0.2638,
+            "spectral_centroid_hz": 1297.3,
+            "zero_crossings_per_s": 2131.1
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Last Ship Destroyed Ambience",
+          "wav": "samples/game-over-reference.wav",
+          "metrics": {
+            "duration_s": 14.002,
+            "peak": 0.7676,
+            "rms": 0.1931,
+            "spectral_centroid_hz": 1455.1,
+            "zero_crossings_per_s": 840.5
+          },
+          "activeWindow": {
+            "start_s": 3.771,
+            "end_s": 14.002,
+            "duration_s": 10.23,
+            "coverage": 0.731,
+            "threshold_rms": 0.1604
+          },
+          "activeMetrics": {
+            "duration_s": 10.23,
+            "peak": 0.7676,
+            "rms": 0.2206,
+            "spectral_centroid_hz": 1115.8,
+            "zero_crossings_per_s": 601.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.07,
+          "spectral_centroid_hz": 15.0,
+          "zero_crossings_per_s": 7.1,
+          "rms": 0.0025
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 6.598,
+          "spectral_centroid_hz": 166.5,
+          "zero_crossings_per_s": 1536.8,
+          "rms": 0.0457
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 6.528,
+          "spectral_centroid_hz": 181.5,
+          "zero_crossings_per_s": 1529.7,
+          "rms": 0.0432
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      }
+    }
+  ],
+  "summary": {
+    "itemCount": 14,
+    "broadReferenceWindowCount": 7,
+    "averageAuroraVsSyntheticGalagaDurationDeltaS": 0.178,
+    "averageAuroraVsReferenceActiveDurationDeltaS": 3.236,
+    "averageAuroraVsReferenceActiveCentroidDeltaHz": 387.7
+  }
+}

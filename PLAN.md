@@ -31,7 +31,7 @@ This means:
 - keep the shipped `1.3.0` production line trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
-- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) as the
+- use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) as the
   readable current quality map before choosing beta-shaping work
 
 ### 2. Multi-Machine Release Discipline
@@ -123,8 +123,11 @@ This means:
 
 Current conformance read:
 
-- overall Aurora quality is `9.0/10`
-- audio identity and cue alignment is the weakest category at `6.1/10`
+- overall Aurora quality is `9.2/10`
+- audio identity and cue alignment is the weakest category at `6.4/10`
+- the audio score is now stricter: it includes active reference-cue similarity
+  and reference-window precision, with `7/14` Aurora audio reference windows
+  still needing tighter segmentation
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current long-cycle baseline is captured in

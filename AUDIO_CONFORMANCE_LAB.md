@@ -73,3 +73,29 @@ The next Guardians pass should be a human listening review of the generated
 runtime/reference cue preview pairs. Mark each reference window as clean or
 dirty, replace dirty windows, then retune the runtime mix and event density in
 live browser play.
+
+## Current Aurora Audio Read
+
+Aurora's audio comparison harness now captures browser-generated Aurora and
+synthetic Galaga-theme cue samples, converts them to WAV, computes active-window
+waveform/spectral metrics, and classifies whether each labeled reference clip is
+usable as a direct cue comparison or still needs tighter segmentation.
+
+Current artifact:
+
+`reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-07-main-beb232a/metrics.json`
+
+Current result:
+
+| Metric | Value |
+|---|---:|
+| Quality score audio category | `6.4/10` |
+| Active Aurora-vs-synthetic-Galaga duration delta | `0.050s` |
+| Active Aurora-vs-reference duration delta | `3.104s` |
+| Active Aurora-vs-reference centroid delta | `386.7Hz` |
+| Broad reference windows needing segmentation | `7/14` |
+
+This means Aurora's internal synthetic theme comparison is close, but the
+reference-facing audio score remains intentionally conservative until the broad
+Galaga clips are segmented into cleaner cue windows and the runtime cue shapes
+are tuned against those windows.

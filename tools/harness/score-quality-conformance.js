@@ -126,25 +126,67 @@ function scoreAudioAlignmentReport(report){
   return round(clamp(score, 1, 10), 1);
 }
 
-function scoreAudio(metricsTheme, metricsOverlap, alignmentReport){
+function audioVariantMetrics(item, key){
+  return item.variants?.[key]?.activeMetrics || item.variants?.[key]?.metrics || {};
+}
+
+function average(values){
+  const filtered = values.filter(value => Number.isFinite(value));
+  return filtered.length ? filtered.reduce((sum, value) => sum + value, 0) / filtered.length : 0;
+}
+
+function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport){
   const items = metricsTheme.items || [];
   const cueSimilarity = items.map(item => {
-    const aurora = item.variants?.aurora?.metrics || {};
-    const galaga = item.variants?.galaga?.metrics || {};
+    const aurora = audioVariantMetrics(item, 'aurora');
+    const galaga = audioVariantMetrics(item, 'galaga');
     const duration = closeness(aurora.duration_s, galaga.duration_s, 0.2);
     const centroid = closeness(aurora.spectral_centroid_hz, galaga.spectral_centroid_hz, 1000);
     const crossings = closeness(aurora.zero_crossings_per_s, galaga.zero_crossings_per_s, 120);
     return (duration + centroid + crossings) / 3;
   });
-  const cueAverage = cueSimilarity.length ? cueSimilarity.reduce((sum, value) => sum + value, 0) / cueSimilarity.length : 0;
+  const cueAverage = average(cueSimilarity);
+  const referenceSimilarity = items.map(item => {
+    const aurora = audioVariantMetrics(item, 'aurora');
+    const reference = audioVariantMetrics(item, 'reference');
+    const duration = closeness(aurora.duration_s, reference.duration_s, 2);
+    const centroid = closeness(aurora.spectral_centroid_hz, reference.spectral_centroid_hz, 1200);
+    const crossings = closeness(aurora.zero_crossings_per_s, reference.zero_crossings_per_s, 800);
+    return (duration + centroid + crossings) / 3;
+  });
+  const referenceAverage = average(referenceSimilarity);
+  const broadReferenceWindowCount = metricsTheme.summary?.broadReferenceWindowCount || 0;
+  const referencePrecision = items.length ? clamp(1 - ((broadReferenceWindowCount / items.length) * 0.5), 0, 1) : 0;
   const overlapStage1 = [
     closeness(metricsOverlap.stage1?.gameStartAfterSpawn, 0.622, 0.8),
     closeness(metricsOverlap.stage1?.firstPulseAfterSpawn, 3.148, 1.0),
     closeness(metricsOverlap.stage1?.firstDiveAfterSpawn, 8.202, 2.0)
   ];
-  const overlapAverage = overlapStage1.reduce((sum, value) => sum + value, 0) / overlapStage1.length;
+  const overlapAverage = average(overlapStage1);
   const alignmentAverage = scoreAudioAlignmentReport(alignmentReport) / 10;
-  return round(clamp(10 * ((0.45 * cueAverage) + (0.2 * overlapAverage) + (0.35 * alignmentAverage)), 1, 10), 1);
+  const score10 = round(clamp(10 * (
+    (0.3 * cueAverage)
+    + (0.2 * referenceAverage)
+    + (0.15 * referencePrecision)
+    + (0.2 * overlapAverage)
+    + (0.15 * alignmentAverage)
+  ), 1, 10), 1);
+  return {
+    score10,
+    cueIdentityAverage: round(cueAverage, 3),
+    referenceSimilarityAverage: round(referenceAverage, 3),
+    referencePrecisionAverage: round(referencePrecision, 3),
+    overlapAverage: round(overlapAverage, 3),
+    alignmentAverage: round(alignmentAverage, 3),
+    broadReferenceWindowCount,
+    totalReferenceItems: items.length,
+    averageReferenceDurationDeltaS: metricsTheme.summary?.averageAuroraVsReferenceActiveDurationDeltaS ?? null,
+    averageReferenceCentroidDeltaHz: metricsTheme.summary?.averageAuroraVsReferenceActiveCentroidDeltaHz ?? null
+  };
+}
+
+function scoreAudio(metricsTheme, metricsOverlap, alignmentReport){
+  return scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport).score10;
 }
 
 function buildReadme(report){
@@ -196,6 +238,7 @@ function main(){
   const audioAlignmentReport = readJson(latestReport('reference-artifacts/analyses/correspondence/audio-cue-alignment'));
   const audioThemeMetrics = readJson(latestMetrics('reference-artifacts/analyses/aurora-audio-theme-comparison'));
   const audioOverlapMetrics = readJson(latestMetrics('reference-artifacts/analyses/galaga-audio-overlap'));
+  const audioScore = scoreAudioDetails(audioThemeMetrics, audioOverlapMetrics, audioAlignmentReport);
 
   const categories = [
     {
@@ -259,9 +302,10 @@ function main(){
     {
       id: 'audio',
       label: 'Audio identity and cue alignment',
-      score10: scoreAudio(audioThemeMetrics, audioOverlapMetrics, audioAlignmentReport),
+      score10: audioScore.score10,
       evidence: ['audio-cue-alignment correspondence', 'aurora-audio-theme-comparison', 'galaga-audio-overlap'],
-      read: `Audio score blends cue identity with measured cue timing. The dedicated cue-alignment report passed ${audioAlignmentReport.summary.passed}/${audioAlignmentReport.summary.total} metrics, with worst current delta ${audioAlignmentReport.summary.worstCurrentDelta}.`
+      details: audioScore,
+      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, and cue alignment. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; active Aurora-vs-reference duration delta averages ${audioScore.averageReferenceDurationDeltaS}s.`
     },
     {
       id: 'ui-shell',
