@@ -625,7 +625,9 @@ window.__galagaHarness__={
   if(typeof window.MediaRecorder!=='function'||typeof sfx==='undefined'||!sfx.tap?.stream){
    return { ok:false, error:'Audio capture is not supported in this runtime.' };
   }
+  const captureOpts=Object.assign({},opts||{},{allowIdle:opts.allowIdle!==false});
   try{
+   if(typeof unlockAudioFromInteraction==='function')unlockAudioFromInteraction();
    AC();
    if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')await sfx.a.resume().catch(()=>{});
   }catch{}
@@ -633,7 +635,8 @@ window.__galagaHarness__={
   const mimeType=mimeCandidates.find(type=>!window.MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(type))||'';
   const chunks=[];
   const recorder=mimeType?new MediaRecorder(sfx.tap.stream,{mimeType}):new MediaRecorder(sfx.tap.stream);
-  const captureMs=Math.max(250,Math.round(1000*(opts.captureSeconds||this.estimateAudioCueDuration(name,opts))));
+  const captureMs=Math.max(250,Math.round(1000*(captureOpts.captureSeconds||this.estimateAudioCueDuration(name,captureOpts))));
+  const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
   const done=new Promise(resolve=>{
    recorder.ondataavailable=e=>{ if(e?.data?.size)chunks.push(e.data); };
    recorder.onerror=e=>resolve({ ok:false, error:e?.error?.message||'MediaRecorder failed.' });
@@ -642,6 +645,17 @@ window.__galagaHarness__={
      const blob=new Blob(chunks,{type:recorder.mimeType||mimeType||'audio/webm'});
      const buffer=await blob.arrayBuffer();
      const bytes=new Uint8Array(buffer);
+     if(bytes.length<minCaptureBytes){
+      resolve({
+       ok:false,
+       error:`Audio capture was too small to decode (${bytes.length} bytes).`,
+       byteLength:bytes.length,
+       mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
+       captureMs,
+       audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+      });
+      return;
+     }
      let binary='';
      const chunkSize=0x8000;
      for(let i=0;i<bytes.length;i+=chunkSize){
@@ -659,9 +673,10 @@ window.__galagaHarness__={
     }
    };
   });
-  recorder.start();
-  if(typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  recorder.start(100);
+  if(typeof sfx.playCue==='function')sfx.playCue(String(name),captureOpts);
   await new Promise(resolve=>setTimeout(resolve,captureMs));
+  try{ if(recorder.state==='recording'&&typeof recorder.requestData==='function')recorder.requestData(); }catch{}
   if(recorder.state!=='inactive')recorder.stop();
   return done;
  },

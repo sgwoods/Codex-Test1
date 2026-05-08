@@ -51,6 +51,39 @@ function toWav(inPath, outPath, window = null){
   run('ffmpeg', ['-y', '-i', inPath, ...referenceWindowArgs(window), '-ac', '1', '-ar', '22050', outPath]);
 }
 
+function decodedBytes(result){
+  if(!result?.base64) return 0;
+  try{
+    return Buffer.from(result.base64, 'base64').length;
+  }catch{
+    return 0;
+  }
+}
+
+async function captureCueWithRetry(row, cue, opts, label){
+  const attempts = Math.max(1, Number(process.env.AURORA_AUDIO_CAPTURE_RETRIES || 3));
+  let last = null;
+  for(let attempt = 1; attempt <= attempts; attempt += 1){
+    const capture = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141 + attempt, skipStart: true }, async ({ page }) => {
+      await page.evaluate(() => installGamePack('aurora-galactica', { persist: false }));
+      return await page.evaluate(async payload => {
+        return await window.__galagaHarness__.captureAudioCue(payload.cue, payload.opts);
+      }, {
+        cue,
+        opts: {
+          ...opts,
+          allowIdle: true,
+          minCaptureBytes: 512
+        }
+      });
+    });
+    const byteLength = decodedBytes(capture);
+    last = Object.assign({}, capture || {}, { byteLength, attempt });
+    if(capture?.ok && byteLength >= 512) return last;
+  }
+  fail(`${label} cue capture failed after retries`, { row: row.item.id, cue, last });
+}
+
 function pythonForAudioReport(){
   const bundled = path.join(process.env.HOME || '', '.cache', 'codex-runtimes', 'codex-primary-runtime', 'dependencies', 'python', 'bin', 'python3');
   return fs.existsSync(bundled) ? bundled : 'python3';
@@ -79,19 +112,8 @@ async function main(){
     delete auroraPayload.cue;
     if(!cue) fail('Missing cue in comparison entry preview payload', row);
 
-    const aurora = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
-      return await page.evaluate(async payload => {
-        return await window.__galagaHarness__.captureAudioCue(payload.cue, payload.opts);
-      }, { cue, opts: auroraPayload });
-    });
-    if(!aurora?.ok) fail('Aurora cue capture failed', { row, aurora });
-
-    const galaga = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
-      return await page.evaluate(async payload => {
-        return await window.__galagaHarness__.captureAudioCue(payload.cue, payload.opts);
-      }, { cue, opts: { ...auroraPayload, audioTheme: 'galaga-original-reference' } });
-    });
-    if(!galaga?.ok) fail('Galaga cue capture failed', { row, galaga });
+    const aurora = await captureCueWithRetry(row, cue, auroraPayload, 'Aurora');
+    const galaga = await captureCueWithRetry(row, cue, { ...auroraPayload, audioTheme: 'galaga-original-reference' }, 'Galaga');
 
     const auroraWebm = path.join(samplesDir, `${id}-aurora.webm`);
     const galagaWebm = path.join(samplesDir, `${id}-galaga.webm`);
@@ -118,13 +140,17 @@ async function main(){
         label: 'Aurora Application Mix',
         wav: path.relative(outRoot, auroraWav),
         webm: path.relative(outRoot, auroraWebm),
-        audioCue: aurora.audioCue || null
+        audioCue: aurora.audioCue || null,
+        captureAttempt: aurora.attempt || 1,
+        captureBytes: aurora.byteLength || 0
       },
       galaga: {
         label: 'Galaga Original Reference (synthetic)',
         wav: path.relative(outRoot, galagaWav),
         webm: path.relative(outRoot, galagaWebm),
-        audioCue: galaga.audioCue || null
+        audioCue: galaga.audioCue || null,
+        captureAttempt: galaga.attempt || 1,
+        captureBytes: galaga.byteLength || 0
       },
       reference: {
         label: row.item.referenceLabel || 'Reference',
