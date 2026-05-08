@@ -635,8 +635,12 @@ window.__galagaHarness__={
   const mimeType=mimeCandidates.find(type=>!window.MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(type))||'';
   const chunks=[];
   const recorder=mimeType?new MediaRecorder(sfx.tap.stream,{mimeType}):new MediaRecorder(sfx.tap.stream);
-  const captureMs=Math.max(250,Math.round(1000*(captureOpts.captureSeconds||this.estimateAudioCueDuration(name,captureOpts))));
+  const captureMs=Math.max(700,Math.round(1000*(captureOpts.captureSeconds||this.estimateAudioCueDuration(name,captureOpts))));
   const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
+  const audioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||null;
+  if(audioDebug)audioDebug.lastCue=null;
+  try{ if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(); }catch{}
+  let playedCue=null;
   const done=new Promise(resolve=>{
    recorder.ondataavailable=e=>{ if(e?.data?.size)chunks.push(e.data); };
    recorder.onerror=e=>resolve({ ok:false, error:e?.error?.message||'MediaRecorder failed.' });
@@ -652,7 +656,8 @@ window.__galagaHarness__={
        byteLength:bytes.length,
        mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
        captureMs,
-       audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+       requestedCue:String(name),
+       audioCue:playedCue||audioDebug?.lastCue||null
       });
       return;
      }
@@ -666,15 +671,26 @@ window.__galagaHarness__={
       mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
       captureMs,
       base64:btoa(binary),
-      audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+      requestedCue:String(name),
+      audioCue:playedCue||audioDebug?.lastCue||null
      });
     }catch(err){
      resolve({ ok:false, error:err?.message||String(err) });
     }
    };
   });
-  recorder.start(100);
+  try{
+   recorder.start(100);
+  }catch(err){
+   return {
+    ok:false,
+    error:err?.message||String(err),
+    requestedCue:String(name),
+    audioCue:playedCue||audioDebug?.lastCue||null
+   };
+  }
   if(typeof sfx.playCue==='function')sfx.playCue(String(name),captureOpts);
+  playedCue=audioDebug?.lastCue||null;
   await new Promise(resolve=>setTimeout(resolve,captureMs));
   try{ if(recorder.state==='recording'&&typeof recorder.requestData==='function')recorder.requestData(); }catch{}
   if(recorder.state!=='inactive')recorder.stop();

@@ -79,7 +79,11 @@ async function captureCueWithRetry(row, cue, opts, label){
     });
     const byteLength = decodedBytes(capture);
     last = Object.assign({}, capture || {}, { byteLength, attempt });
-    if(capture?.ok && byteLength >= 512) return last;
+    const capturedCue = String(capture?.audioCue?.cue || '').trim();
+    if(capture?.ok && byteLength >= 512 && capturedCue === cue) return last;
+    if(capture?.ok && byteLength >= 512 && capturedCue !== cue){
+      last.captureMismatch = { expectedCue: cue, capturedCue: capturedCue || '(none)' };
+    }
   }
   fail(`${label} cue capture failed after retries`, { row: row.item.id, cue, last });
 }

@@ -537,7 +537,7 @@ def main():
                 "metrics": m,
                 "activeWindow": active,
                 "activeMetrics": active_metrics,
-                "eventSegmentation": reference_segmentation(sample_rate, data),
+                "eventSegmentation": reference_segmentation(sample_rate, active_data),
                 "waveform": rel(wave_path, out_root) if wave_path else None,
                 "spectrogram": rel(spec_path, out_root) if spec_path else None,
             }
