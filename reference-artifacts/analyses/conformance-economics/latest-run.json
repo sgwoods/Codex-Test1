@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T17-35-26-069Z-77416",
-  "startedAt": "2026-05-08T17:35:26.069Z",
-  "endedAt": "2026-05-08T17:35:35.778Z",
+  "id": "2026-05-08T17-44-25-124Z-80643",
+  "startedAt": "2026-05-08T17:44:25.124Z",
+  "endedAt": "2026-05-08T17:44:40.541Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "7342ecb",
+  "commit": "ad63c7c",
   "command": [
     "npm",
     "run",
     "harness:analyze:aurora-challenge-perfect-candidates",
     "--",
     "--repeats=3",
-    "--candidate-ids=thin-bright-square-quiet-held,thin-bright-square-micro-held,thin-bright-square-quiet-tail,sparkle-low-rms"
+    "--candidate-ids=thin-bright-square-quiet-held,thin-bright-square-balanced-held,thin-bright-square-long-low-held,thin-bright-square-soft-attack-held,thin-bright-square-split-low-held,thin-bright-square-micro-held,thin-bright-square-quiet-tail"
   ],
   "axes": [
     "audio",
@@ -22,13 +22,13 @@
     "cpu",
     "browser"
   ],
-  "notes": "Challenge Perfect repeat-capture stability sweep",
+  "notes": "Challenge Perfect quiet-held RMS refinement sweep",
   "measurement": {
-    "wallSeconds": 9.709,
-    "timeRealSeconds": 9.7,
-    "timeUserSeconds": 12.95,
-    "timeSystemSeconds": 2.28,
-    "cpuSeconds": 15.23,
+    "wallSeconds": 15.417,
+    "timeRealSeconds": 15.41,
+    "timeUserSeconds": 22.2,
+    "timeSystemSeconds": 3.4,
+    "cpuSeconds": 25.6,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -50,8 +50,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 289511599,
-    "artifactBytesAfter": 290063593,
-    "artifactBytesDelta": 551994
+    "artifactBytesBefore": 290629119,
+    "artifactBytesAfter": 291554857,
+    "artifactBytesDelta": 925738
   }
 }

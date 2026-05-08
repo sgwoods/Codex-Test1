@@ -109,6 +109,26 @@ function candidateSpecs(){
       spec: { seq: [784, 1175, 1568, 2093, 2794], step: .049, wave: 'triangle', volume: .0058, slide: 22, lpHz: 6500, tones: [{ freq: 3136, duration: .145, wave: 'square', volume: .00145, slide: 0, lpHz: 7600, delay: .192 }] }
     },
     {
+      id: 'thin-bright-square-balanced-held',
+      label: 'Thin bright square balanced held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .052, wave: 'triangle', volume: .0051, slide: 20, lpHz: 6500, tones: [{ freq: 3136, duration: .17, wave: 'square', volume: .00115, slide: 0, lpHz: 7600, delay: .186 }] }
+    },
+    {
+      id: 'thin-bright-square-long-low-held',
+      label: 'Thin bright square long low held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .054, wave: 'triangle', volume: .0047, slide: 18, lpHz: 6500, tones: [{ freq: 3136, duration: .195, wave: 'square', volume: .00105, slide: 0, lpHz: 7600, delay: .182 }] }
+    },
+    {
+      id: 'thin-bright-square-soft-attack-held',
+      label: 'Thin bright square soft attack held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .052, wave: 'sine', volume: .0057, slide: 18, lpHz: 6800, tones: [{ freq: 3136, duration: .165, wave: 'square', volume: .00115, slide: 0, lpHz: 7600, delay: .188 }] }
+    },
+    {
+      id: 'thin-bright-square-split-low-held',
+      label: 'Thin bright square split low held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .052, wave: 'triangle', volume: .0048, slide: 18, lpHz: 6500, tones: [{ freq: 3136, duration: .09, wave: 'square', volume: .00095, slide: 0, lpHz: 7600, delay: .182 }, { freq: 3136, duration: .09, wave: 'square', volume: .00072, slide: 0, lpHz: 7600, delay: .286 }] }
+    },
+    {
       id: 'thin-bright-square-micro-held',
       label: 'Thin bright square micro held',
       spec: { seq: [784, 1175, 1568, 2093, 2794], step: .049, wave: 'triangle', volume: .0042, slide: 22, lpHz: 6500, tones: [{ freq: 3136, duration: .145, wave: 'square', volume: .001, slide: 0, lpHz: 7600, delay: .192 }] }
