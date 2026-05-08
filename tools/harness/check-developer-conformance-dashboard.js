@@ -14,6 +14,9 @@ function checkGeneratedDashboardPage(){
   const html = fs.readFileSync(htmlPath, 'utf8');
   const expected = [
     'id="refreshState" type="button"',
+    'id="gameSelector"',
+    'Select game conformance profile',
+    'Selected Game',
     'href="http://127.0.0.1:8000/"',
     'href="http://127.0.0.1:8000/release-dashboard.html"',
     'href="/RELEASE_CONFORMANCE_DASHBOARD.md"',
@@ -32,7 +35,9 @@ function checkGeneratedDashboardPage(){
     'Source / evidence family',
     'Next Best Ingestion Upgrade',
     'Missing next',
+    'platinumConformanceDashboardGame',
     "app.addEventListener('click', event =>",
+    "gameSelector.addEventListener('change'",
     "refreshState.addEventListener('click', refresh)"
   ];
   const missing = expected.filter(item => !html.includes(item));

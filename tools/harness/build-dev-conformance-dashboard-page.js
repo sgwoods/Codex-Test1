@@ -104,6 +104,27 @@ function html(data, options = {}){
     h1{margin:0;font-size:32px;line-height:1.05;letter-spacing:0}
     .subtitle{margin:8px 0 0;color:var(--muted);max-width:920px}
     .controls{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+    .gameSelectGroup{
+      display:grid;
+      gap:3px;
+      color:var(--muted);
+      font-size:10px;
+      text-transform:uppercase;
+      font-weight:850;
+      letter-spacing:.08em;
+    }
+    .gameSelectGroup select{
+      min-width:220px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--ink);
+      border-radius:6px;
+      padding:8px 10px;
+      font-size:13px;
+      font-weight:800;
+      text-transform:none;
+      letter-spacing:0;
+    }
     .pill,.button{
       border:1px solid var(--line);
       background:var(--panel);
@@ -118,7 +139,7 @@ function html(data, options = {}){
     .pill{cursor:pointer}
     .pill:disabled{cursor:wait;opacity:.75}
     .button{box-shadow:0 2px 0 rgba(0,0,0,.12)}
-    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
     .tabs{
       display:flex;
       gap:8px;
@@ -268,6 +289,9 @@ function html(data, options = {}){
         <p class="subtitle">${escapeHtml(subtitle)}</p>
       </div>
       <nav class="controls" aria-label="Dashboard links">
+        <label class="gameSelectGroup" for="gameSelector">Game
+          <select id="gameSelector" aria-label="Select game conformance profile"></select>
+        </label>
         <button class="pill" id="refreshState" type="button" aria-label="Refresh conformance dashboard data now">loading</button>
         <a class="button" href="${escapeHtml(gameHref)}">Game</a>
         <a class="button" href="${escapeHtml(releaseHref)}">Release</a>
@@ -281,10 +305,12 @@ function html(data, options = {}){
   <script>
     const app = document.getElementById('app');
     const refreshState = document.getElementById('refreshState');
+    const gameSelector = document.getElementById('gameSelector');
     const statusLine = document.getElementById('statusLine');
     let dashboard = JSON.parse(document.getElementById('initial-data').textContent);
     let lastRefresh = Date.now();
     let activeTab = 'conformance';
+    let activeGameKey = localStorage.getItem('platinumConformanceDashboardGame') || dashboard.activeGameKey || 'aurora-galactica';
     const refreshMs = 30000;
     const dataHref = ${JSON.stringify(dataHref)};
     const artifactBase = ${JSON.stringify(artifactBase)};
@@ -327,6 +353,55 @@ function html(data, options = {}){
       if(!value) return '#';
       if(/^https?:/i.test(value)) return value;
       return artifactBase + encodeURI(value);
+    }
+
+    function gameProfiles(){
+      const games = Array.isArray(dashboard.games) ? dashboard.games : [];
+      if(games.length) return games;
+      return [{
+        gameKey: dashboard.activeGameKey || 'aurora-galactica',
+        gameName: 'Aurora Galactica',
+        gameStatus: 'Active conformance investment',
+        currentInvestment: 'Current focus: raise Aurora conformance toward the next major release gate.',
+        releaseRead: 'Aurora is the current dashboard subject.',
+        releaseGate: dashboard.releaseGate || [],
+        priorityRows: dashboard.priorityRows || [],
+        ingestionSummary: dashboard.ingestionSummary || {},
+        ingestionRows: dashboard.ingestionRows || [],
+        economicsSummary: dashboard.economicsSummary || {},
+        scoreSemantics: dashboard.scoreSemantics || {},
+        sourceReports: dashboard.sourceReports || {},
+        newFirstClassAxes: dashboard.newFirstClassAxes || []
+      }];
+    }
+
+    function selectedGame(){
+      const games = gameProfiles();
+      const selected = games.find(game => game.gameKey === activeGameKey) || games[0] || {};
+      activeGameKey = selected.gameKey || activeGameKey;
+      return Object.assign({}, dashboard, selected, {
+        releaseGate: selected.releaseGate || dashboard.releaseGate || [],
+        priorityRows: selected.priorityRows || dashboard.priorityRows || [],
+        ingestionSummary: selected.ingestionSummary || dashboard.ingestionSummary || {},
+        ingestionRows: selected.ingestionRows || dashboard.ingestionRows || [],
+        economicsSummary: selected.economicsSummary || dashboard.economicsSummary || {},
+        scoreSemantics: selected.scoreSemantics || dashboard.scoreSemantics || {},
+        sourceReports: selected.sourceReports || dashboard.sourceReports || {},
+        newFirstClassAxes: selected.newFirstClassAxes || dashboard.newFirstClassAxes || []
+      });
+    }
+
+    function syncGameSelector(){
+      const games = gameProfiles();
+      gameSelector.innerHTML = games.map(game => {
+        const selected = game.gameKey === activeGameKey ? ' selected' : '';
+        const label = (game.gameName || game.gameKey || 'Unknown game') + (game.gameStatus ? ' - ' + game.gameStatus : '');
+        return '<option value="' + esc(game.gameKey || '') + '"' + selected + '>' + esc(label) + '</option>';
+      }).join('');
+      if(!games.some(game => game.gameKey === activeGameKey) && games[0]){
+        activeGameKey = games[0].gameKey;
+        gameSelector.value = activeGameKey;
+      }
     }
 
     function explanationBlock(label, value){
@@ -462,25 +537,33 @@ function html(data, options = {}){
       \`;
     }
 
-    function render(data){
+    function render(rootData){
+      syncGameSelector();
+      const data = selectedGame();
       const rows = Array.isArray(data.priorityRows) ? data.priorityRows : [];
       const gates = Array.isArray(data.releaseGate) ? data.releaseGate : [];
       const overall = gates.find(gate => gate.Gate === 'Overall quality');
+      const previewOverall = gates.find(gate => /reference conformance|playtest-weighted/i.test(gate.Gate || ''));
       const audio = rows.find(row => /Audio identity/.test(row.metric || ''));
       const level = rows.find(row => /Level arc/.test(row.metric || ''));
+      const weakest = rows
+        .filter(row => Number.isFinite(Number(row.score10)))
+        .sort((a, b) => Number(a.score10) - Number(b.score10))[0] || null;
+      const primaryGap = audio || weakest;
       const semantics = data.scoreSemantics || {};
       const economics = data.economicsSummary || {};
       app.innerHTML = \`
         <div class="grid">
-          <div class="card"><span class="label">Overall Quality</span><span class="value">\${esc(overall?.Current || '--')}</span></div>
-          <div class="card"><span class="label">Weakest Major Gap</span><span class="value \${scoreClass(audio?.score10)}">\${esc(audio?.current || '--')}</span><div class="small">Audio identity and event feedback</div></div>
-          <div class="card"><span class="label">Level Arc</span><span class="value \${scoreClass(level?.score10)}">\${esc(level?.current || '--')}</span><div class="small">Encounter shape and escalation</div></div>
+          <div class="card"><span class="label">Selected Game</span><span class="value">\${esc(data.gameName || 'Current game')}</span><div class="small">\${esc(data.gameStatus || 'Conformance profile')}</div></div>
+          <div class="card"><span class="label">Overall / Status</span><span class="value">\${esc(overall?.Current || previewOverall?.Current || '--')}</span><div class="small">\${esc(data.currentInvestment || data.releaseRead || 'No game status summary yet.')}</div></div>
+          <div class="card"><span class="label">Weakest Major Gap</span><span class="value \${scoreClass(primaryGap?.score10)}">\${esc(primaryGap?.current || '--')}</span><div class="small">\${esc(primaryGap?.metric || 'No scored gap yet')}</div></div>
+          <div class="card"><span class="label">Level / Primary Arc</span><span class="value \${scoreClass(level?.score10 || weakest?.score10)}">\${esc(level?.current || weakest?.current || '--')}</span><div class="small">\${esc(level ? 'Encounter shape and escalation' : (weakest?.metric || 'Awaiting scored metric'))}</div></div>
           <div class="card"><span class="label">Tracked Compute</span><span class="value">\${esc(economics.measuredRuns || 0)} runs</span><div class="small">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min wall / \${esc(Math.round((economics.cpuSeconds || 0) / 60))} min CPU</div></div>
         </div>
         \${dashboardTabs()}
         \${activeTab === 'ingestion' ? ingestionView(data) : conformanceView(data, rows, gates, semantics)}
       \`;
-      statusLine.textContent = 'Dashboard data: ' + (data.generatedAt || 'unknown') + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
+      statusLine.textContent = 'Dashboard data: ' + (rootData.generatedAt || data.generatedAt || 'unknown') + '. Selected game: ' + (data.gameName || activeGameKey) + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
     }
 
     app.addEventListener('click', event => {
@@ -494,6 +577,12 @@ function html(data, options = {}){
       if(!button) return;
       const details = button.closest('details');
       if(details) details.open = false;
+    });
+
+    gameSelector.addEventListener('change', () => {
+      activeGameKey = gameSelector.value || activeGameKey;
+      localStorage.setItem('platinumConformanceDashboardGame', activeGameKey);
+      render(dashboard);
     });
 
     async function refresh(){

@@ -628,6 +628,175 @@ function buildIngestionSummary(rows){
   };
 }
 
+function optionalJson(relPath){
+  const full = path.join(ROOT, relPath);
+  if(!fs.existsSync(full)) return null;
+  return readJson(full);
+}
+
+function buildGalaxyGuardiansProfile(){
+  const identityRoot = 'reference-artifacts/analyses/galaxy-guardians-identity';
+  const audioLabPath = 'reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json';
+  const referencePath = `${identityRoot}/reference-conformance-0.1.json`;
+  const candidatePath = `${identityRoot}/candidate-0.1.json`;
+  const playtestPath = `${identityRoot}/playtest-conformance-review-0.1.json`;
+  const visualPath = `${identityRoot}/visual-readability-0.1.json`;
+  const audioLab = optionalJson(audioLabPath);
+  const reference = optionalJson(referencePath);
+  const candidate = optionalJson(candidatePath);
+  const playtest = optionalJson(playtestPath);
+  const visual = optionalJson(visualPath);
+  const artifactCount = countFiles(identityRoot, file => file.endsWith('.json'));
+  const cueCount = audioLab?.summary?.cueCount || candidate?.candidateGate?.requiredRuntimeCueIds?.length || 0;
+  const requiredEvents = candidate?.candidateGate?.requiredRuntimeEvents?.length || 0;
+  const releaseRead = reference?.summary?.releaseRead || playtest?.summary?.releaseRead || 'Galaxy Guardians is tracked as a preview/ingestion game, not a public release candidate.';
+  const referenceScore = reference?.summary?.referenceConformanceScore10 ?? null;
+  const playtestScore = playtest?.summary?.playtestWeightedConformanceScore10 ?? reference?.summary?.playtestWeightedConformanceScore10 ?? null;
+  const publicReadinessScore = reference?.summary?.publicReleaseReadinessScore10 ?? null;
+  const audioScore = audioLab?.summary?.overallAudioConformanceScore10 ?? null;
+  const visualStatus = visual?.status || 'visual readability contract pending';
+  const gates = [
+    ['Preview reference conformance', Number.isFinite(+referenceScore) ? score(referenceScore) : '--', '>=7.5 for compelling preview', releaseRead],
+    ['Playtest-weighted conformance', Number.isFinite(+playtestScore) ? score(playtestScore) : '--', '>=7.0 for preview confidence', playtest?.summary?.releaseRead || 'Needs live browser/playback review before a beta-facing claim.'],
+    ['Public release readiness', Number.isFinite(+publicReadinessScore) ? score(publicReadinessScore) : 'not release scored', 'defer', 'Preview game remains intentionally non-production.'],
+    ['Audio conformance lab', Number.isFinite(+audioScore) ? score(audioScore) : '--', '>=7.0 preview target', audioLab?.summary?.reusablePlatformRead || 'Reusable game-configured audio lab.']
+  ];
+  const rows = [
+    row({
+      rank: 1,
+      metric: 'Preview reference conformance',
+      score10: referenceScore,
+      target: '>=7.5 compelling preview',
+      status: 'Measured preview artifact; not public release art',
+      why: 'Keeps the second game grounded in Galaxian-style evidence instead of Aurora inheritance.',
+      effort: 'Medium; 2-4 hrs browser/playback review plus focused scorer promotion',
+      next: 'Human-review cue windows and browser play feel, then rerun reference conformance before widening public claims.',
+      evidence: referencePath
+    }),
+    row({
+      rank: 2,
+      metric: 'Playable-preview conformance and feel',
+      score10: playtestScore,
+      target: '>=7.0 preview confidence',
+      status: 'Playtest-weighted preview score',
+      why: 'A preview can be technically present yet still not compelling enough to represent the game family.',
+      effort: 'Medium-high; 3-5 hrs with local browser/video review',
+      next: 'Run a motion-feel pass against formation entry, dive pacing, player shots, and loss feedback.',
+      evidence: playtestPath
+    }),
+    row({
+      rank: 3,
+      metric: 'Audio lab cue identity',
+      score10: audioScore,
+      target: '>=7.0 preview target',
+      status: 'Reusable Platinum audio conformance lab',
+      why: 'This is the first evidence that ingestion-derived cue targets can score a non-Aurora game.',
+      effort: 'Low-medium; 1-2 hrs listening review plus cue-window refinements',
+      next: 'Review weakest cue and promote accepted cue windows as reusable per-game audio targets.',
+      evidence: audioLabPath
+    }),
+    row({
+      rank: 4,
+      metric: 'Public release readiness',
+      score10: publicReadinessScore,
+      target: 'deferred until full game path exists',
+      status: 'Intentionally low preview/public boundary score',
+      why: 'Protects Platinum from presenting a preview as a shipped second game before rules, stages, scoring, and polish are ready.',
+      effort: 'High; multi-cycle game construction after preview acceptance',
+      next: 'Keep public playable claims disabled until ingestion, runtime, scoring, and harness coverage support a real release path.',
+      evidence: referencePath
+    })
+  ].map(item => updateRowCells(item));
+  const ingestionRows = [
+    ingestionRow({
+      rank: 1,
+      source: 'Galaxy Guardians identity artifacts',
+      axis: 'reference conformance / runtime identity',
+      artifactType: 'game-owned preview contracts',
+      coverage: `${artifactCount} JSON artifacts`,
+      annotationStatus: 'preview-scored',
+      confidence: 'medium',
+      linkedMetric: 'Preview reference conformance',
+      anchor: identityRoot,
+      next: 'Promote the strongest contracts into a reusable new-game ingestion manifest.'
+    }),
+    ingestionRow({
+      rank: 2,
+      source: 'Galaxy Guardians audio conformance lab',
+      axis: 'audio cue identity',
+      artifactType: 'waveform/spectrogram cue comparisons',
+      coverage: `${cueCount} cue targets`,
+      annotationStatus: audioLab ? 'scored' : 'missing',
+      confidence: audioLab ? 'medium-high' : 'low',
+      linkedMetric: 'Audio lab cue identity',
+      anchor: audioLabPath,
+      next: 'Use the lab as the template for game-selectable audio scoring across future packs.'
+    }),
+    ingestionRow({
+      rank: 3,
+      source: 'Candidate 0.1 runtime gate',
+      axis: 'runtime events / surfaces',
+      artifactType: 'required events, surfaces, cues, forbidden Aurora capabilities',
+      coverage: `${requiredEvents} required runtime events`,
+      annotationStatus: candidate ? 'gate-defined' : 'missing',
+      confidence: 'medium',
+      linkedMetric: 'Playable-preview conformance and feel',
+      anchor: candidatePath,
+      next: 'Generate dashboard maturity submetrics directly from required events and implemented evidence.'
+    }),
+    ingestionRow({
+      rank: 4,
+      source: 'Visual readability contract',
+      axis: 'sprite / formation readability',
+      artifactType: 'runtime readability and sprite distinction rules',
+      coverage: visual?.visualRequirements?.requiredVisualIds?.length ? `${visual.visualRequirements.requiredVisualIds.length} visual IDs` : 'visual IDs tracked',
+      annotationStatus: visualStatus,
+      confidence: 'medium',
+      linkedMetric: 'Preview reference conformance',
+      anchor: visualPath,
+      next: 'Tie sprite-component extraction and visual readability into a scored dashboard submetric.'
+    })
+  ];
+  return {
+    gameKey: 'galaxy-guardians-preview',
+    gameName: 'Galaxy Guardians',
+    gameStatus: 'Preview / ingestion',
+    currentInvestment: 'Paused while Aurora remains the active conformance investment; ready for measured preview review when we switch back.',
+    releaseRead,
+    scoreSemantics: {
+      headline: 'Galaxy Guardians scores are preview/ingestion scores, not public-release conformance claims.',
+      tenOutOfTen: 'A high preview score would mean the current preview contracts are satisfied, not that a full Galaxian-style game is complete.',
+      confidence: 'Confidence is tied to source manifests, runtime gates, audio lab artifacts, and live play review.',
+      resolution: 'Current resolution is preview-slice level; full-game progression, scoring, and release readiness remain separate gaps.'
+    },
+    releaseGate: tableObjects(['Gate', 'Current', 'Target', 'Notes'], gates),
+    priorityRows: rows.map(({ cells, ...entry }) => entry),
+    ingestionSummary: buildIngestionSummary(ingestionRows),
+    ingestionRows: ingestionRows.map(({ cells, ...entry }) => entry),
+    economicsSummary: {
+      measuredRuns: 0,
+      wallSeconds: 0,
+      cpuSeconds: 0,
+      metricPointCount: 0,
+      deltaCount: 0,
+      charts: []
+    },
+    sourceReports: {
+      referenceConformance: referencePath,
+      playtestReview: fs.existsSync(path.join(ROOT, playtestPath)) ? playtestPath : null,
+      audioLab: fs.existsSync(path.join(ROOT, audioLabPath)) ? audioLabPath : null,
+      candidateGate: fs.existsSync(path.join(ROOT, candidatePath)) ? candidatePath : null,
+      visualReadability: fs.existsSync(path.join(ROOT, visualPath)) ? visualPath : null
+    },
+    newFirstClassAxes: [
+      'Preview reference conformance: reference maturity, implementation gate coverage, and public-release boundary.',
+      'Audio cue identity: reusable game-configured cue scoring from isolated reference windows.',
+      'Runtime event and surface gate: required events, score table, attract text, and forbidden Aurora capabilities.',
+      'Visual readability: sprite distinction, formation visibility, and hit feedback at preview scale.'
+    ]
+  };
+}
+
 function resourceRows(economics){
   const byResource = economics.summary?.ledger?.byResource || {};
   return Object.entries(byResource)
@@ -933,13 +1102,55 @@ function main(){
   const branch = git('branch --show-current', '');
   const dirty = git('status --short', '').trim().length > 0;
   const reportDir = path.join(DASHBOARD_ANALYSIS_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}`);
+  const auroraGame = {
+    gameKey: 'aurora-galactica',
+    gameName: 'Aurora Galactica',
+    gameStatus: 'Active conformance investment',
+    currentInvestment: 'Current focus: raise Aurora gameplay/audio/level-arc/visual conformance toward the next major release gate.',
+    releaseRead: 'Aurora is the shipped first Platinum game and the current subject of long-cycle conformance scoring.',
+    releaseGate: tableObjects(releaseGateHeaders, releaseGate),
+    priorityRows: rows.map(({ cells, ...entry }) => entry),
+    economicsSummary: {
+      latestOverallScore10: economics.summary?.latestOverallScore10 ?? null,
+      latestLevelArcScore10: economics.summary?.latestLevelArcScore10 ?? null,
+      metricPointCount: economics.summary?.metricPointCount || 0,
+      deltaCount: economics.summary?.deltaCount || 0,
+      measuredRuns: economics.summary?.ledger?.runs || 0,
+      wallSeconds: economics.summary?.ledger?.wallSeconds || 0,
+      cpuSeconds: economics.summary?.ledger?.cpuSeconds || 0,
+      artifactBytes: economics.summary?.ledger?.artifactBytes || 0,
+      charts: economicsCharts
+    },
+    ingestionSummary,
+    ingestionRows: ingestionRows.map(({ cells, ...entry }) => entry),
+    scoreSemantics: {
+      headline: 'An x/10 score is a measured rollup at the current scorer resolution, not a claim of arcade-perfect behavior.',
+      tenOutOfTen: '10/10 means no known measured gap under the current scorer and evidence coverage. It remains a guardrail pass until broader reference, expert-play, and edge-case evidence says otherwise.',
+      confidence: 'Confidence estimates how much trust to place in the score as a release signal.',
+      resolution: 'Resolution describes how fine-grained the scorer currently is and which blind spots may remain.'
+    },
+    sourceReports,
+    newFirstClassAxes: [
+      'Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
+      'Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
+      'Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.',
+      'Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.',
+      'Popup/help/scoring surfaces: help, scoring, leaderboard, account, feedback, and game-over result formatting as their own modal-quality family.'
+    ]
+  };
+  const galaxyGuardiansGame = buildGalaxyGuardiansProfile();
   const dashboardData = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     artifactType: 'release-conformance-dashboard',
     generatedAt,
     commit,
     branch,
     dirty,
+    activeGameKey: 'aurora-galactica',
+    games: [
+      auroraGame,
+      galaxyGuardiansGame
+    ],
     sourceReports,
     scoreSemantics: {
       headline: 'An x/10 score is a measured rollup at the current scorer resolution, not a claim of arcade-perfect behavior.',
@@ -997,6 +1208,12 @@ function main(){
     'This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.',
     '',
     'Local dashboard: `http://127.0.0.1:4312/local-dev/conformance-dashboard.html` after `npm run local:resume`. Release-lane dashboard: `conformance-dashboard.html` is generated into `dist/dev`, copied through beta/production promotion, and published with the lane bundle.',
+    '',
+    '## Game Scope',
+    '',
+    `The dashboard data is game-selectable. Current default: \`${auroraGame.gameName}\` (${auroraGame.gameStatus}). Available game profiles: ${dashboardData.games.map(game => `\`${game.gameName}\``).join(', ')}.`,
+    '',
+    'Aurora remains the active investment target, but Galaxy Guardians is also represented as a preview/ingestion profile so the dashboard can switch subjects as the conformance project rotates between games.',
     '',
     '## Current Release Gate',
     '',

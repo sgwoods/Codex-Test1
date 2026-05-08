@@ -218,6 +218,8 @@ function checkConformanceDashboardArtifacts(cfg){
   const data = loadJson(dataPath);
   const requiredHtml = [
     'Aurora Conformance Dashboard',
+    'id="gameSelector"',
+    'Select game conformance profile',
     'data-tab="ingestion"',
     'Ingestion Framework',
     'Priority Investment Queue',
@@ -230,6 +232,9 @@ function checkConformanceDashboardArtifacts(cfg){
   }
   if(!Array.isArray(data.priorityRows) || !data.priorityRows.length){
     throw new Error(`Publish preflight failed: ${dataPath} is missing priorityRows. Refresh the release conformance dashboard before publishing.`);
+  }
+  if(!Array.isArray(data.games) || data.games.length < 2){
+    throw new Error(`Publish preflight failed: ${dataPath} is missing game-selectable conformance profiles. Refresh the release conformance dashboard before publishing.`);
   }
   if(!Array.isArray(data.ingestionRows) || !data.ingestionRows.length){
     throw new Error(`Publish preflight failed: ${dataPath} is missing ingestionRows. Refresh the release conformance dashboard before publishing.`);
