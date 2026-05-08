@@ -1,12 +1,30 @@
 #!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
 const { withHarnessPage } = require('./browser-check-util');
+const { ROOT } = require('./browser-check-util');
 
 function fail(message, details = {}){
   console.error(JSON.stringify({ ok: false, message, details }, null, 2));
   process.exit(1);
 }
 
+function checkGeneratedDashboardPage(){
+  const htmlPath = path.join(ROOT, 'local-dev', 'conformance-dashboard.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  const expected = [
+    'id="refreshState" type="button"',
+    'href="http://127.0.0.1:8000/"',
+    'href="http://127.0.0.1:8000/release-dashboard.html"',
+    'href="/RELEASE_CONFORMANCE_DASHBOARD.md"',
+    "refreshState.addEventListener('click', refresh)"
+  ];
+  const missing = expected.filter(item => !html.includes(item));
+  if(missing.length) fail('generated conformance dashboard page is missing live controls', { htmlPath, missing });
+}
+
 (async () => {
+  checkGeneratedDashboardPage();
   await withHarnessPage({ skipStart: true, seed: 9412, viewport: { width: 1280, height: 1000 } }, async ({ page }) => {
     await page.click('#settingsBtn');
     const local = await page.evaluate(() => ({

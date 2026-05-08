@@ -91,6 +91,8 @@ function html(data){
       font-size:13px;
       white-space:nowrap;
     }
+    .pill{cursor:pointer}
+    .pill:disabled{cursor:wait;opacity:.75}
     .button{box-shadow:0 2px 0 rgba(0,0,0,.12)}
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
     .card{
@@ -144,10 +146,10 @@ function html(data){
         <p class="subtitle">Internal localhost view of the current conformance plan, release gates, measurement debt, and highest-value next investments. This page reads generated artifacts and refreshes without exposing anything publicly.</p>
       </div>
       <nav class="controls" aria-label="Dashboard links">
-        <span class="pill" id="refreshState">loading</span>
-        <a class="button" href="../index.html">Game</a>
-        <a class="button" href="../release-dashboard.html">Release</a>
-        <a class="button" href="../RELEASE_CONFORMANCE_DASHBOARD.md">Markdown</a>
+        <button class="pill" id="refreshState" type="button" aria-label="Refresh conformance dashboard data now">loading</button>
+        <a class="button" href="http://127.0.0.1:8000/">Game</a>
+        <a class="button" href="http://127.0.0.1:8000/release-dashboard.html">Release</a>
+        <a class="button" href="/RELEASE_CONFORMANCE_DASHBOARD.md">Markdown</a>
       </nav>
     </header>
     <main id="app"></main>
@@ -254,6 +256,8 @@ function html(data){
 
     async function refresh(){
       try{
+        refreshState.disabled = true;
+        refreshState.textContent = 'refreshing';
         const response = await fetch('conformance-dashboard-data.json?ts=' + Date.now(), { cache:'no-store' });
         if(!response.ok) throw new Error('HTTP ' + response.status);
         dashboard = await response.json();
@@ -262,6 +266,9 @@ function html(data){
       }catch(err){
         refreshState.textContent = 'refresh failed';
         statusLine.textContent = 'Could not refresh dashboard data: ' + err.message;
+      }finally{
+        refreshState.disabled = false;
+        tick();
       }
     }
 
@@ -272,6 +279,7 @@ function html(data){
 
     render(dashboard);
     tick();
+    refreshState.addEventListener('click', refresh);
     setInterval(tick, 1000);
     setInterval(refresh, refreshMs);
   </script>
