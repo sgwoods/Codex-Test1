@@ -101,6 +101,7 @@ function main(){
   const pressureGeometryPath = latestReport('reference-artifacts/analyses/aurora-stage4-pressure-geometry');
   const pressureLossPath = latestReport('reference-artifacts/analyses/aurora-stage4-loss-windows');
   const stageSignaturePath = latestReport('reference-artifacts/analyses/stage-signature-distance');
+  const opportunityPath = latestReport('reference-artifacts/analyses/level-arc-opportunity-windows');
 
   const challenge = challengeReportPath ? readJson(challengeReportPath) : { summary: {} };
   const progression = progressionReportPath ? readJson(progressionReportPath) : { summary: {} };
@@ -108,6 +109,7 @@ function main(){
   const pressureGeometry = pressureGeometryPath ? readJson(pressureGeometryPath) : { summary: {} };
   const pressureLoss = pressureLossPath ? readJson(pressureLossPath) : { summary: {} };
   const stageSignature = stageSignaturePath ? readJson(stageSignaturePath) : { summary: {} };
+  const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {}, opportunities: [] };
 
   const challengeTiming = challenge.summary.total ? challenge.summary.passed / challenge.summary.total : 0;
   const progressionChecks = progression.summary.totalPersonaChecks
@@ -130,6 +132,9 @@ function main(){
   const stageSignatureScore = (stageSignature.summary.signatureScore10 || 0) / 10;
   const stageSignatureDistinctPairRatio = stageSignature.summary.distinctPairRatio || 0;
   const stageSignatureRepetitionSafety = 1 - (stageSignature.summary.repetitionRisk || 1);
+  const opportunityMeanReward = clamp((opportunity.summary.meanRewardIndex || 0) / 10);
+  const opportunityReadiness = clamp((opportunity.summary.score10 || 0) / 10);
+  const topOpportunity = opportunity.summary.highestPriorityOpportunity || opportunity.opportunities?.[0] || null;
 
   const submetrics = [
     {
@@ -149,9 +154,9 @@ function main(){
         { value: challengeTiming, weight: 0.25 },
         { value: challengeLayerBlueprintCount / 3, weight: 0.25 },
         { value: fileExists('reference-artifacts/analyses/aurora-galaga-long-cycle/challenge-stage-safety-2026-05-06.json') ? 1 : 0, weight: 0.2 },
-        { value: 0.45, weight: 0.3 }
+        { value: Math.max(0.45, opportunityReadiness), weight: 0.3 }
       ]),
-      read: `${challenge.summary?.passed || 0}/${challenge.summary?.total || 0} challenge timing checks pass and ${challengeLayerBlueprintCount}/3 content layers are blueprinted; distinctive playable challenge content is still limited.`
+      read: `${challenge.summary?.passed || 0}/${challenge.summary?.total || 0} challenge timing checks pass and ${challengeLayerBlueprintCount}/3 content layers are blueprinted; opportunity-window readiness is ${opportunity.summary.score10 || 0}/10.`
     },
     {
       id: 'movement-grammar-expansion',
@@ -180,10 +185,10 @@ function main(){
       label: 'Boss and reward opportunity design',
       score10: scoreParts([
         { value: captureCoverage, weight: 0.45 },
-        { value: 0.45, weight: 0.35 },
+        { value: Math.max(0.45, opportunityMeanReward), weight: 0.35 },
         { value: challengeLayerBlueprintCount / 3, weight: 0.2 }
       ]),
-      read: `${capture.summary?.passed || 0}/${capture.summary?.total || 0} capture/rescue scenarios match, but boss-entry and bonus-opportunity learning windows need direct long-run measurements.`
+      read: `${capture.summary?.passed || 0}/${capture.summary?.total || 0} capture/rescue scenarios match; level-arc opportunity windows show mean reward/opportunity signal ${opportunity.summary.meanRewardIndex || 0}/10.`
     },
     {
       id: 'learning-mastery-windows',
@@ -244,6 +249,9 @@ function main(){
         stageSignature.summary?.signatureScore10 >= 6.4
           ? 'preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice'
           : 'implement one mid-run or later-level variation and require improved regular-stage signature separation',
+        topOpportunity
+          ? `${topOpportunity.problem} Strategy: ${topOpportunity.strategy}`
+          : 'run level-arc opportunity windows so the next gameplay slice is ranked from evidence',
         'implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback'
       ]
     },
@@ -255,6 +263,7 @@ function main(){
       pressureGeometryReport: pressureGeometryPath ? path.relative(ROOT, pressureGeometryPath) : null,
       pressureLossReport: pressureLossPath ? path.relative(ROOT, pressureLossPath) : null,
       stageSignatureReport: stageSignaturePath ? path.relative(ROOT, stageSignaturePath) : null,
+      opportunityReport: opportunityPath ? path.relative(ROOT, opportunityPath) : null,
       levelExpansionCycle: 'reference-artifacts/analyses/aurora-level-expansion-cycle'
     },
     submetrics

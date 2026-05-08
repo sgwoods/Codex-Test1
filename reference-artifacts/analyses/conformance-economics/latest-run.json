@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-07T21-40-51-640Z-16808",
-  "startedAt": "2026-05-07T21:40:51.640Z",
-  "endedAt": "2026-05-07T21:42:00.760Z",
-  "branch": "codex/macbook-pro-stage4-butterfly-lane2-pressure",
-  "commit": "4f2fafe",
+  "id": "2026-05-08T04-05-42-914Z-26534",
+  "startedAt": "2026-05-08T04:05:42.914Z",
+  "endedAt": "2026-05-08T04:06:44.513Z",
+  "branch": "codex/macbook-pro-level-arc-long-cycle",
+  "commit": "8f0dde1",
   "command": [
     "npm",
     "run",
@@ -18,13 +18,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "Quality score after Stage4 lane2 priority candidate",
+  "notes": "Quality score after level arc opportunity instrumentation",
   "measurement": {
-    "wallSeconds": 69.12,
-    "timeRealSeconds": 69.11,
-    "timeUserSeconds": 61.76,
-    "timeSystemSeconds": 20.61,
-    "cpuSeconds": 82.37,
+    "wallSeconds": 61.599,
+    "timeRealSeconds": 61.59,
+    "timeUserSeconds": 51.97,
+    "timeSystemSeconds": 17.08,
+    "cpuSeconds": 69.05,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -39,8 +39,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 228043811,
-    "artifactBytesAfter": 228534517,
-    "artifactBytesDelta": 490706
+    "artifactBytesBefore": 230841052,
+    "artifactBytesAfter": 231325388,
+    "artifactBytesDelta": 484336
   }
 }

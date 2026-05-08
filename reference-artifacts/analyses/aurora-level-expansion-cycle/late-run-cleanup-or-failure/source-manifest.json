@@ -6,7 +6,7 @@
   "scenario": "stage12-variety",
   "scenario_path": "tools/harness/scenarios/stage12-variety.json",
   "seed": 12003,
-  "duration_s": 10,
+  "duration_s": 24,
   "config": {
     "stage": 12,
     "ships": 5,
@@ -22,8 +22,8 @@
     "challenge": false,
     "recording": false,
     "seed": 12003,
-    "simT": 10,
-    "stageClock": 10,
+    "simT": 24,
+    "stageClock": 24,
     "persona": null,
     "atmosphere": {
       "id": "aurora-borealis",
@@ -62,13 +62,13 @@
       "atmosphereId": "aurora-borealis",
       "audioTheme": "galaga-reference-assets",
       "phase": "stage",
-      "variant": 17,
+      "variant": 54,
       "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
       "referenceClipStart": 0.18,
       "referenceClipDuration": 0.82,
       "stage": 12,
       "challenge": false,
-      "at": 1.34
+      "at": 2.025
     },
     "renderDebug": {
       "backgroundMode": "aurora-borealis",
@@ -95,12 +95,12 @@
     }
   },
   "trace_summary": {
-    "sample_count": 11,
+    "sample_count": 25,
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 2,
-    "max_enemy_bullets": 2,
+    "max_attackers": 4,
+    "max_enemy_bullets": 3,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
     "final_score": 380,
@@ -108,8 +108,8 @@
     "final_stage": 12,
     "final_challenge": false
   },
-  "event_count": 77,
-  "promoted_event_count": 17,
+  "event_count": 184,
+  "promoted_event_count": 53,
   "artifacts": {
     "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/contact-sheet-1s.png",
     "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/frames/still-start.png",

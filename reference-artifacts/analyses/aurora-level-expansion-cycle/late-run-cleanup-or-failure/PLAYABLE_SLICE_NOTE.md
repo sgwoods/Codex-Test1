@@ -6,14 +6,14 @@ Scenario: `stage12-variety`
 
 Seed: `12003`
 
-Duration: 10s
+Duration: 24s
 
 ## Trace Summary
 
-- samples: 11
+- samples: 25
 - player x range: 262
-- max attackers: 2
-- max enemy bullets: 2
+- max attackers: 4
+- max enemy bullets: 3
 - max challenge enemies: 0
 - final stage: 12
 - final score: 380
@@ -21,6 +21,7 @@ Duration: 10s
 ## Event Coverage
 
 - `enemy_dive_start`: observed
+- `escort_dive_start`: observed
 - `enemy_projectile`: observed
 - `player_hit`: not observed in this run
 - `wave_clear`: not observed in this run
