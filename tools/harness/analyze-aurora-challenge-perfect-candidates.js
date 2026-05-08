@@ -199,7 +199,8 @@ function candidateSpecs(){
     ...generatedCandidateSpecs(),
     ...segmentedCandidateSpecs(),
     ...triangleNeighborhoodCandidateSpecs(),
-    ...bandTargetedCandidateSpecs()
+    ...bandTargetedCandidateSpecs(),
+    ...segmentAirCandidateSpecs()
   ];
 }
 
@@ -249,6 +250,11 @@ function bandGridLimit(){
   return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
 }
 
+function segmentAirGridLimit(){
+  const requested = Number(argValue('segment-air-grid-limit') || process.env.AURORA_AUDIO_SEGMENT_AIR_GRID_LIMIT || 0);
+  return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
+}
+
 function runTag(repeats, filter, generatedAt){
   const time = generatedAt.slice(11, 19).replace(/:/g, '');
   const parts = [];
@@ -260,6 +266,8 @@ function runTag(repeats, filter, generatedAt){
   if(triangleLimit) parts.push(`tri${triangleLimit}`);
   const bandLimit = bandGridLimit();
   if(bandLimit) parts.push(`band${bandLimit}`);
+  const segmentAirLimit = segmentAirGridLimit();
+  if(segmentAirLimit) parts.push(`segair${segmentAirLimit}`);
   if(repeats > 1) parts.push(`r${repeats}`);
   if(filter.size) parts.push('focused');
   return `${parts.join('-') || 'manual'}-${time}`;
@@ -282,7 +290,7 @@ function generatorSummary(rows){
   if(!generators.size) return null;
   return {
     families: Array.from(generators.values()),
-    controls: 'Use --grid-limit=N for quiet-held parametric generation, --segmented-grid-limit=N for onset/body/tail generation, --triangle-grid-limit=N for RMS-aware bright-triangle search, --band-grid-limit=N for band-energy targeted generation, and --candidate-ids for focused stability reruns.'
+    controls: 'Use --grid-limit=N for quiet-held parametric generation, --segmented-grid-limit=N for onset/body/tail generation, --triangle-grid-limit=N for RMS-aware bright-triangle search, --band-grid-limit=N for band-energy targeted generation, --segment-air-grid-limit=N for compact high-pass segment-role generation, and --candidate-ids for focused stability reruns.'
   };
 }
 
@@ -687,6 +695,105 @@ function bandTargetedCandidateSpecs(){
     .slice(0, limit);
 }
 
+function segmentAirCandidateSpecs(){
+  const limit = segmentAirGridLimit();
+  if(!limit) return [];
+  const onsetFreqs = [784, 988, 1175];
+  const bodyFreqs = [2093, 2637, 3136];
+  const tailFreqs = [2349, 3136, 4186];
+  const onsetDurations = [.1, .12, .14];
+  const bodyDelays = [.226, .238, .25];
+  const bodyDurations = [.034, .044, .054];
+  const tailDelays = [.306, .318, .33];
+  const tailDurations = [.068, .086, .104];
+  const baseVolumes = [.0044, .0054, .0064];
+  const airVolumes = [.0016, .0022, .0028];
+  const noiseVolumes = [0, .00035, .00065];
+  const hpProfiles = [
+    { name: 'soft', onset: 260, body: 900, tail: 1200 },
+    { name: 'clear', onset: 420, body: 1300, tail: 1700 },
+    { name: 'air', onset: 620, body: 1700, tail: 2300 }
+  ];
+  const specs = [];
+  for(const onsetFreq of onsetFreqs){
+    for(const bodyFreq of bodyFreqs){
+      for(const tailFreq of tailFreqs){
+        for(const onsetDuration of onsetDurations){
+          for(const bodyDelay of bodyDelays){
+            for(const bodyDuration of bodyDurations){
+              for(const tailDelay of tailDelays){
+                for(const tailDuration of tailDurations){
+                  if(tailDelay <= bodyDelay + bodyDuration + .018) continue;
+                  for(const volume of baseVolumes){
+                    for(const airVolume of airVolumes){
+                      for(const noiseVolume of noiseVolumes){
+                        for(const hp of hpProfiles){
+                          const expectedEnd = Math.max(onsetDuration, bodyDelay + bodyDuration, tailDelay + tailDuration, noiseVolume ? tailDelay + .052 : 0);
+                          const durationGap = Math.abs(expectedEnd - .42);
+                          const roleGap = Math.abs(bodyDelay - .239) + Math.abs(tailDelay - .319) + Math.abs(bodyDuration - .04) + Math.abs(tailDuration - .11);
+                          const energy = (volume * onsetDuration) + (airVolume * bodyDuration) + (airVolume * .74 * tailDuration) + (noiseVolume * .052);
+                          const energyGap = Math.abs(energy - .00225);
+                          const bandProxy = (bodyFreq + tailFreq + hp.body + hp.tail) / Math.max(1, onsetFreq * 4);
+                          const bandProxyGap = Math.abs(bandProxy - 1.65);
+                          const heuristic = (durationGap * 9)
+                            + (roleGap * 6)
+                            + (energyGap * 680)
+                            + (bandProxyGap * .18)
+                            + (noiseVolume ? -.025 : .035)
+                            + (hp.name === 'air' ? -.035 : 0);
+                          const id = [
+                            'segair',
+                            `o${onsetFreq}`,
+                            `b${bodyFreq}`,
+                            `t${tailFreq}`,
+                            `od${Math.round(onsetDuration * 1000)}`,
+                            `bd${Math.round(bodyDelay * 1000)}`,
+                            `bl${Math.round(bodyDuration * 1000)}`,
+                            `td${Math.round(tailDelay * 1000)}`,
+                            `tl${Math.round(tailDuration * 1000)}`,
+                            `v${Math.round(volume * 10000)}`,
+                            `av${Math.round(airVolume * 10000)}`,
+                            `n${Math.round(noiseVolume * 100000)}`,
+                            hp.name
+                          ].join('-');
+                          specs.push({
+                            id,
+                            label: `Segment-air ${onsetFreq}/${bodyFreq}/${tailFreq} ${bodyDelay}/${tailDelay}`,
+                            generated: true,
+                            generator: {
+                              family: 'compact-highpass-segment-air-grid',
+                              heuristic: round(heuristic, 5),
+                              expectedEnd: round(expectedEnd, 3),
+                              expectedEnergy: round(energy, 6),
+                              target: 'Preserve exact onset/body/tail reference roles while reducing sub/low-mid dominance and adding presence/air energy through high-pass tone shaping.',
+                              params: { onsetFreq, bodyFreq, tailFreq, onsetDuration, bodyDelay, bodyDuration, tailDelay, tailDuration, volume, airVolume, noiseVolume, hp }
+                            },
+                            spec: {
+                              tones: [
+                                { freq: onsetFreq, duration: onsetDuration, wave: 'triangle', volume, slide: 48, lpHz: 5200, hpHz: hp.onset, delay: 0 },
+                                { freq: bodyFreq, duration: bodyDuration, wave: 'square', volume: airVolume, slide: -120, lpHz: 8200, hpHz: hp.body, delay: bodyDelay },
+                                { freq: tailFreq, duration: tailDuration, wave: 'triangle', volume: airVolume * .74, slide: -160, lpHz: 9000, hpHz: hp.tail, delay: tailDelay }
+                              ],
+                              noise: noiseVolume ? [{ duration: .052, volume: noiseVolume, hp: 5200, delay: tailDelay + .006 }] : undefined
+                            }
+                          });
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return specs
+    .sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id))
+    .slice(0, limit);
+}
+
 function mean(values){
   const numeric = values.filter(value => Number.isFinite(+value)).map(Number);
   return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
@@ -751,18 +858,51 @@ function riskFromComparison(comparison){
   return riskBreakdown(comparison).risk10;
 }
 
+function segmentSummary(comparisons){
+  const rows = Array.isArray(comparisons) ? comparisons : [];
+  if(!rows.length){
+    return {
+      segmentRoleComparisonCount: 0,
+      averageSegmentRisk10: null,
+      worstSegmentRisk10: null,
+      worstSegmentRole: '',
+      exactSegmentRoleMatchCount: 0,
+      worstSegmentExactRoleMatch: false,
+      worstSegmentInterpretation: ''
+    };
+  }
+  const risks = rows.map(row => +row.auroraSegmentRisk10).filter(Number.isFinite);
+  const worst = rows
+    .slice()
+    .sort((a, b) => (+b.auroraSegmentRisk10 || 0) - (+a.auroraSegmentRisk10 || 0))[0] || {};
+  return {
+    segmentRoleComparisonCount: rows.length,
+    averageSegmentRisk10: round(mean(risks), 2),
+    worstSegmentRisk10: round(+worst.auroraSegmentRisk10 || 0, 2),
+    worstSegmentRole: worst.role || '',
+    exactSegmentRoleMatchCount: rows.filter(row => row.auroraExactRoleMatch).length,
+    worstSegmentExactRoleMatch: !!worst.auroraExactRoleMatch,
+    worstSegmentInterpretation: worst.interpretation || ''
+  };
+}
+
 function rejectionFor(row, baseline){
   if(!baseline) return 'missing-baseline';
   const riskDelta = round(baseline.risk10 - row.risk10, 3);
+  const segmentRiskDelta = Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+row.worstSegmentRisk10)
+    ? round(+baseline.worstSegmentRisk10 - +row.worstSegmentRisk10, 3)
+    : null;
   const centroidDelta = round(baseline.centroidGapHz - row.centroidGapHz, 1);
   const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
   const bandDelta = round((baseline.bandShapeGap ?? 0) - (row.bandShapeGap ?? 0), 4);
   const reasons = [];
   if(row.durationGapSeconds > .08) reasons.push(`duration gap ${row.durationGapSeconds}s > 0.08s`);
-  if(riskDelta < .25) reasons.push(`risk improvement ${riskDelta} < 0.25`);
+  if(segmentRiskDelta !== null && segmentRiskDelta < .35) reasons.push(`segment risk improvement ${segmentRiskDelta} < 0.35`);
+  if(segmentRiskDelta === null && riskDelta < .25) reasons.push(`risk improvement ${riskDelta} < 0.25`);
   if(centroidDelta <= 0) reasons.push(`centroid did not improve (${centroidDelta} Hz)`);
   if(rmsDelta < -.01) reasons.push(`RMS worsened by ${Math.abs(rmsDelta)}`);
   if(bandDelta < -.04) reasons.push(`spectral band shape worsened by ${Math.abs(bandDelta)}`);
+  if((row.exactSegmentRoleMatchCount || 0) < (baseline.exactSegmentRoleMatchCount || 0)) reasons.push('fewer exact segment-role matches than baseline');
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
@@ -781,18 +921,27 @@ function decisionFor(rows){
   }
   const measuredBest = candidates
     .filter(row => row.durationGapSeconds <= .08)
-    .sort((a, b) => a.risk10 - b.risk10 || a.rmsGap - b.rmsGap || a.centroidGapHz - b.centroidGapHz)[0] || null;
+    .sort((a, b) => (a.worstSegmentRisk10 ?? a.risk10) - (b.worstSegmentRisk10 ?? b.risk10) || a.risk10 - b.risk10 || a.rmsGap - b.rmsGap || a.centroidGapHz - b.centroidGapHz)[0] || null;
   const gated = candidates
     .filter(row => row.durationGapSeconds <= .08)
     .map(row => {
       const riskDelta = round(baseline.risk10 - row.risk10, 3);
+      const segmentRiskDelta = Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+row.worstSegmentRisk10)
+        ? round(+baseline.worstSegmentRisk10 - +row.worstSegmentRisk10, 3)
+        : null;
       const centroidDelta = round(baseline.centroidGapHz - row.centroidGapHz, 1);
       const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
       const bandDelta = round((baseline.bandShapeGap ?? 0) - (row.bandShapeGap ?? 0), 4);
-      return { row, riskDelta, centroidDelta, rmsDelta, bandDelta };
+      const exactSegmentRoleMatchDelta = (row.exactSegmentRoleMatchCount || 0) - (baseline.exactSegmentRoleMatchCount || 0);
+      return { row, riskDelta, segmentRiskDelta, centroidDelta, rmsDelta, bandDelta, exactSegmentRoleMatchDelta };
     })
-    .filter(item => item.riskDelta >= .25 && item.centroidDelta > 0 && item.rmsDelta >= -.01 && item.bandDelta >= -.04)
-    .sort((a, b) => b.riskDelta - a.riskDelta || b.centroidDelta - a.centroidDelta || b.bandDelta - a.bandDelta || b.rmsDelta - a.rmsDelta);
+    .filter(item => (item.segmentRiskDelta === null ? item.riskDelta >= .25 : item.segmentRiskDelta >= .35)
+      && item.riskDelta >= -.25
+      && item.centroidDelta > 0
+      && item.rmsDelta >= -.01
+      && item.bandDelta >= -.04
+      && item.exactSegmentRoleMatchDelta >= 0)
+    .sort((a, b) => (b.segmentRiskDelta ?? b.riskDelta) - (a.segmentRiskDelta ?? a.riskDelta) || b.riskDelta - a.riskDelta || b.centroidDelta - a.centroidDelta || b.bandDelta - a.bandDelta || b.rmsDelta - a.rmsDelta);
   const selected = gated[0] || null;
   if(!selected){
     return {
@@ -808,6 +957,9 @@ function decisionFor(rows){
   }
   const best = selected.row;
   const riskDelta = round(baseline.risk10 - best.risk10, 3);
+  const segmentRiskDelta = Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+best.worstSegmentRisk10)
+    ? round(+baseline.worstSegmentRisk10 - +best.worstSegmentRisk10, 3)
+    : null;
   const centroidDelta = round(baseline.centroidGapHz - best.centroidGapHz, 1);
   const rmsDelta = round(baseline.rmsGap - best.rmsGap, 4);
   const bandDelta = round((baseline.bandShapeGap ?? 0) - (best.bandShapeGap ?? 0), 4);
@@ -818,10 +970,11 @@ function decisionFor(rows){
     best: best.id,
     measuredBest: measuredBest?.id || null,
     riskDelta,
+    segmentRiskDelta,
     centroidDelta,
     rmsDelta,
     bandDelta,
-    reason: 'Selected candidate clears risk, centroid, RMS, band-shape, and duration gates. The measured-lowest-risk candidate is tracked separately so the next sweep can still learn from it.'
+    reason: 'Selected candidate clears segment-risk, whole-cue-risk, centroid, RMS, band-shape, segment-role, and duration gates. The measured-lowest-risk candidate is tracked separately so the next sweep can still learn from it.'
   };
 }
 
@@ -875,6 +1028,13 @@ function aggregateRows(sampleRows){
         clamp((+avgComparison.decay_ratio || 0) / 1.4, 0, 1),
         clamp((+avgComparison.burst_share || 0) / .5, 0, 1)
       ]), 3),
+      segmentRoleComparisonCount: Math.round(mean(group.map(row => row.segmentRoleComparisonCount || 0)) || 0),
+      averageSegmentRisk10: round(mean(group.map(row => row.averageSegmentRisk10)), 2),
+      worstSegmentRisk10: round(mean(group.map(row => row.worstSegmentRisk10)), 2),
+      worstSegmentRole: group.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentRole || '',
+      exactSegmentRoleMatchCount: Math.round(mean(group.map(row => row.exactSegmentRoleMatchCount || 0)) || 0),
+      worstSegmentExactRoleMatch: group.some(row => row.worstSegmentExactRoleMatch),
+      worstSegmentInterpretation: group.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentInterpretation || '',
       activeMetrics: {
         duration_s: round(mean(group.map(row => row.activeMetrics.duration_s)), 3),
         peak: round(mean(group.map(row => row.activeMetrics.peak)), 4),
@@ -909,11 +1069,14 @@ function aggregateRows(sampleRows){
         rmsGap: row.rmsGap,
         bandShapeGap: row.bandShapeGap,
         bandEnergyDelta: row.bandEnergyDelta,
-        envelopeShapeGap: row.envelopeShapeGap
+        envelopeShapeGap: row.envelopeShapeGap,
+        worstSegmentRisk10: row.worstSegmentRisk10,
+        worstSegmentRole: row.worstSegmentRole,
+        exactSegmentRoleMatchCount: row.exactSegmentRoleMatchCount
       }))
     });
   }
-  return rows.sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
+  return rows.sort((a, b) => (a.worstSegmentRisk10 ?? a.risk10) - (b.worstSegmentRisk10 ?? b.risk10) || a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
 }
 
 function annotateRejections(rows){
@@ -953,12 +1116,12 @@ function markdown(report){
     '',
     '## Candidates',
     '',
-    '| Candidate | Risk /10 | Dominant penalty | Duration Gap | Centroid Gap | Band Shape | Envelope | RMS Gap | Stability | Keeper read |',
-    '| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |'
+    '| Candidate | Risk /10 | Worst segment | Exact roles | Dominant penalty | Duration Gap | Centroid Gap | Band Shape | Envelope | RMS Gap | Stability | Keeper read |',
+    '| --- | ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |'
   ];
   for(const row of report.candidates){
     const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.dominantPenalty || 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.bandShapeGap ?? 'n/a'} | ${row.envelopeShapeGap ?? 'n/a'} | ${row.rmsGap} | ${stability} | ${row.keeperRead || ''} |`);
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.exactSegmentRoleMatchCount ?? 'n/a'}/${row.segmentRoleComparisonCount ?? 'n/a'} | ${row.dominantPenalty || 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.bandShapeGap ?? 'n/a'} | ${row.envelopeShapeGap ?? 'n/a'} | ${row.rmsGap} | ${stability} | ${row.keeperRead || ''} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}`;
@@ -1089,6 +1252,7 @@ async function main(){
     const id = baseCandidateId(item.id);
     const spec = candidates.find(candidate => slug(candidate.id) === id);
     const breakdown = riskBreakdown(comparison);
+    const segments = segmentSummary(item.segmentRoleComparisons);
     return {
       id: item.id,
       label: item.label,
@@ -1110,6 +1274,7 @@ async function main(){
         clamp((+comparison.decay_ratio || 0) / 1.4, 0, 1),
         clamp((+comparison.burst_share || 0) / .5, 0, 1)
       ]), 3),
+      ...segments,
       activeMetrics: item.variants.aurora.activeMetrics,
       referenceMetrics: item.variants.reference.activeMetrics,
       comparison
@@ -1130,9 +1295,9 @@ async function main(){
     repetitions: repeats,
     candidateFilter: filter.size ? [...filter].sort() : null,
     generator: generatorSummary(rows),
-    problem: 'Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.',
-    strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift. The comparison now includes spectral band-shape, rolloff, envelope segmentation, and optional tone high-pass shaping so future searches can target measured timbre instead of only duration and centroid.',
-    successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS or band-shape gap, and keep active duration within 0.08s of the reference.',
+    problem: 'Challenge Perfect is now the highest Aurora audio segment-level event-gap risk: duration is broadly aligned, but the reference onset/body/tail sub-events are collapsing into a single runtime segment.',
+    strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured segment risk drops without whole-cue or duration regressions. The comparison now includes role-by-role onset/body/tail segmentation, spectral band-shape, rolloff, envelope segmentation, and optional tone high-pass shaping so future searches can target measured sub-event structure instead of only duration and centroid.',
+    successMeasure: 'A keeper must reduce worst segment risk by at least 0.35, avoid materially worsening whole-cue risk, reduce centroid gap, avoid materially increasing RMS or band-shape gap, preserve exact segment-role matches, and keep active duration within 0.08s of the reference.',
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,
@@ -1148,6 +1313,8 @@ async function main(){
       ? 'Promote the recommended cue spec into the Aurora application audio theme, then run the full audio theme comparison and event-gap analysis.'
       : segmentedGridLimit()
         ? 'Use the segmented-family result to retune onset/body/tail synthesis parameters, then run another bounded segmented sweep before changing runtime audio.'
+        : segmentAirGridLimit()
+          ? 'Use the compact high-pass segment-air result to decide whether synthesized cue roles can satisfy both segmentation and band-shape gates, or whether this event needs a reference-clip/subclip playback strategy.'
         : bandGridLimit()
           ? 'Use the band-family result to decide whether tone filtering is enough or whether the next audio platform investment should be envelope shaping or reference-clip playback for this event.'
           : 'Expand the candidate generator around the best measured direction instead of manually changing the game pack.'
@@ -1164,6 +1331,9 @@ async function main(){
     topCandidates: rows.slice(0, 4).map(row => ({
       id: row.id,
       risk10: row.risk10,
+      worstSegmentRisk10: row.worstSegmentRisk10,
+      worstSegmentRole: row.worstSegmentRole,
+      exactSegmentRoleMatchCount: row.exactSegmentRoleMatchCount,
       dominantPenalty: row.dominantPenalty,
       centroidGapHz: row.centroidGapHz,
       bandShapeGap: row.bandShapeGap,
