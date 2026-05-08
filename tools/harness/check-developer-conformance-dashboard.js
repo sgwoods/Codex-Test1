@@ -27,6 +27,11 @@ function checkGeneratedDashboardPage(){
     'Tracked spend',
     'Value / cost read',
     'class="closeDetails"',
+    'data-tab="ingestion"',
+    'Ingestion Framework',
+    'Source / evidence family',
+    'Next Best Ingestion Upgrade',
+    'Missing next',
     "app.addEventListener('click', event =>",
     "refreshState.addEventListener('click', refresh)"
   ];

@@ -21,6 +21,10 @@ function writeJson(file, value){
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
 }
 
+function fileExists(file){
+  return fs.existsSync(path.join(ROOT, file));
+}
+
 function rel(file){
   return path.relative(ROOT, file).split(path.sep).join('/');
 }
@@ -54,6 +58,21 @@ function latestReport(artifact){
   const reports = walkReports(path.join(ANALYSES, artifact));
   if(!reports.length) return null;
   return reports[reports.length - 1];
+}
+
+function countFiles(dir, predicate = () => true){
+  let count = 0;
+  const root = path.resolve(ROOT, dir);
+  function walk(current){
+    if(!fs.existsSync(current)) return;
+    for(const entry of fs.readdirSync(current, { withFileTypes: true })){
+      const full = path.join(current, entry.name);
+      if(entry.isDirectory()) walk(full);
+      else if(entry.isFile() && predicate(full)) count++;
+    }
+  }
+  walk(root);
+  return count;
 }
 
 function latestCommittedQualityReport(){
@@ -466,6 +485,149 @@ function tableObjects(headers, rows){
   });
 }
 
+function ingestionRow({ rank, source, axis, artifactType, coverage, annotationStatus, confidence, linkedMetric, anchor, next }){
+  return {
+    rank,
+    source,
+    axis,
+    artifactType,
+    coverage,
+    annotationStatus,
+    confidence,
+    linkedMetric,
+    anchor,
+    next,
+    cells: [rank, source, axis, artifactType, coverage, annotationStatus, confidence, linkedMetric, anchor, next]
+  };
+}
+
+function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath, levelArcPath, visualLookPath }){
+  const evidenceCyclePath = 'reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json';
+  const evidenceCycle = fileExists(evidenceCyclePath) ? readJson(path.join(ROOT, evidenceCyclePath)) : null;
+  const audioClipCount = countFiles('src/assets/reference-audio', file => file.endsWith('.m4a'));
+  const sourceManifestCount = countFiles('reference-artifacts/analyses', file => file.endsWith('source-manifest.json'));
+  const eventLogCount = countFiles('reference-artifacts/analyses', file => file.endsWith('reference-events.json'));
+  const contactSheetCount = countFiles('reference-artifacts/analyses', file => /contact-sheet|contact-\d+|opening-contact/.test(path.basename(file)));
+  const stage4LossPath = latestReport('aurora-stage4-loss-windows');
+  const stage4Loss = stage4LossPath ? readJson(stage4LossPath) : null;
+  const audioGapPath = latestReport('aurora-audio-event-gap');
+  const audioGap = audioGapPath ? readJson(audioGapPath) : null;
+  const rows = [
+    ingestionRow({
+      rank: 1,
+      source: 'Galaga-family reference audio clips',
+      axis: 'audio identity / event feedback',
+      artifactType: 'reference m4a cue clips',
+      coverage: `${audioClipCount} clips`,
+      annotationStatus: 'clipped, mapped, partially scored',
+      confidence: 'medium-high',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: 'src/assets/reference-audio',
+      next: 'Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics.'
+    }),
+    ingestionRow({
+      rank: 2,
+      source: 'Aurora audio cue comparison and event-gap reports',
+      axis: 'audio cue scoring',
+      artifactType: 'waveform/spectral/alignment reports',
+      coverage: `${audio?.details?.totalReferenceItems || audioGap?.summary?.comparedCueCount || 0} compared cues`,
+      annotationStatus: 'scored',
+      confidence: 'medium-high',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: audioGapPath ? rel(audioGapPath) : rel(qualityPath),
+      next: 'Promote cue-level event semantics into the scorer so feedback meaning is measured, not only spectral similarity.'
+    }),
+    ingestionRow({
+      rank: 3,
+      source: 'Level arc and encounter-shape evidence',
+      axis: 'level arc / challenge / reward',
+      artifactType: 'stage signatures, pressure windows, persona reports',
+      coverage: `${levelArc.summary?.stageFamilyBlueprintCount || 0}/6 stage families; ${levelArc.summary?.evidenceWindowCount || 0}/6 evidence windows`,
+      annotationStatus: 'scored',
+      confidence: 'medium-high',
+      linkedMetric: 'Level arc and encounter shape',
+      anchor: levelArcPath ? rel(levelArcPath) : rel(qualityPath),
+      next: 'Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.'
+    }),
+    ingestionRow({
+      rank: 4,
+      source: 'Stage 4 pressure and loss-window diagnostics',
+      axis: 'pressure / fairness',
+      artifactType: 'loss windows, replay geometry, collision traces',
+      coverage: `${stage4Loss?.summary?.totalWindows || 3} promoted windows`,
+      annotationStatus: 'mined, replay-diagnostic',
+      confidence: 'medium',
+      linkedMetric: 'Stage 4 pressure exact replay / pressure curve precision',
+      anchor: stage4LossPath ? rel(stage4LossPath) : (levelArcPath ? rel(levelArcPath) : rel(qualityPath)),
+      next: 'Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.'
+    }),
+    ingestionRow({
+      rank: 5,
+      source: 'Aurora visual look screenshots',
+      axis: 'visual look / UI readability',
+      artifactType: 'browser screenshots plus DOM/canvas metrics',
+      coverage: `${visualLook?.summary?.surfaceCount || 0} surfaces`,
+      annotationStatus: visualLook ? 'first-pass scored' : 'missing scorer',
+      confidence: visualLook?.summary?.confidence || 'low',
+      linkedMetric: 'Overall visual look and feel',
+      anchor: visualLookPath ? rel(visualLookPath) : 'reference-artifacts/analyses/aurora-visual-look-conformance',
+      next: 'Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.'
+    }),
+    ingestionRow({
+      rank: 6,
+      source: 'Aurora evidence-cycle windows',
+      axis: 'general ingestion framework',
+      artifactType: 'manifests, contact sheets, traces, event logs, audio timelines',
+      coverage: `${evidenceCycle?.aurora_level_expansion?.window_count || 0} planned windows`,
+      annotationStatus: evidenceCycle?.aurora_level_expansion?.status || 'not generated',
+      confidence: 'medium',
+      linkedMetric: 'Level arc / challenge variation / visual look',
+      anchor: evidenceCyclePath,
+      next: 'Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest.'
+    }),
+    ingestionRow({
+      rank: 7,
+      source: 'Reference manifests and event logs inventory',
+      axis: 'source provenance / annotation coverage',
+      artifactType: 'source-manifest.json and reference-events.json',
+      coverage: `${sourceManifestCount} manifests; ${eventLogCount} event logs`,
+      annotationStatus: 'mixed',
+      confidence: 'mixed',
+      linkedMetric: 'All conformance metrics',
+      anchor: 'reference-artifacts/analyses',
+      next: 'Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest.'
+    }),
+    ingestionRow({
+      rank: 8,
+      source: 'Reference contact sheets and frame evidence',
+      axis: 'visual / motion / entry formation',
+      artifactType: 'contact sheets and still frames',
+      coverage: `${contactSheetCount} contact/frame evidence files`,
+      annotationStatus: 'extracted, partially labeled',
+      confidence: 'medium',
+      linkedMetric: 'Visual look, alien entry, challenge variation',
+      anchor: 'reference-artifacts/analyses',
+      next: 'Attach contact-sheet families to metric rows and add image-level comparison scores.'
+    })
+  ];
+  return rows;
+}
+
+function buildIngestionSummary(rows){
+  const highConfidenceCount = rows.filter(row => /high/.test(String(row.confidence).toLowerCase())).length;
+  const mixedOrLowConfidenceCount = rows.filter(row => /mixed|low/.test(String(row.confidence).toLowerCase())).length;
+  const scoredOrPromotedCount = rows.filter(row => /scored|mapped|generated|clipped|diagnostic|extracted/.test(String(row.annotationStatus).toLowerCase())).length;
+  const firstGap = rows.find(row => /low|mixed/.test(String(row.confidence).toLowerCase())) || rows[0] || {};
+  return {
+    sourceFamilyCount: rows.length,
+    highConfidenceCount,
+    mixedOrLowConfidenceCount,
+    scoredOrPromotedCount,
+    nextBestUpgrade: firstGap.next || 'Promote the next evidence family into a scorer-backed artifact.',
+    framing: 'Ingestion turns reference media and Aurora runtime captures into repeatable evidence: clips, contact sheets, traces, event logs, labels, scores, confidence, and next missing annotations.'
+  };
+}
+
 function resourceRows(economics){
   const byResource = economics.summary?.ledger?.byResource || {};
   return Object.entries(byResource)
@@ -746,6 +908,7 @@ function main(){
   const resourceHeaders = ['Resource', 'Measured runs', 'Wall time', 'CPU time'];
   const axisHeaders = ['Axis', 'Measured runs', 'Wall time', 'CPU time'];
   const nextEstimateHeaders = ['Priority', 'Metric', 'Current', 'Target', 'Gap to target', 'Estimated effort', 'Expected resources', 'Tracked spend', 'Value / cost read', 'Next action'];
+  const ingestionHeaders = ['Priority', 'Source / evidence family', 'Axis', 'Artifact type', 'Coverage', 'Annotation status', 'Confidence', 'Linked metric', 'Anchor', 'Missing next'];
   const economicsDir = economicsPath ? path.dirname(economicsPath) : null;
   const economicsCharts = economicsDir ? [
     path.join(economicsDir, 'score-trends.svg'),
@@ -755,12 +918,16 @@ function main(){
   const resourceSpendRows = resourceRows(economics);
   const axisSpendRows = axisRows(economics);
   const nextRows = nextEstimateRows(rows);
+  const ingestionRows = buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath, levelArcPath, visualLookPath });
+  const ingestionSummary = buildIngestionSummary(ingestionRows);
+  const evidenceCyclePath = 'reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json';
   const sourceReports = {
     quality: rel(qualityPath),
     investmentPriority: priorityPath ? rel(priorityPath) : null,
     levelArc: levelArcPath ? rel(levelArcPath) : null,
     economics: economicsPath ? rel(economicsPath) : null,
-    visualLook: visualLookPath ? rel(visualLookPath) : null
+    visualLook: visualLookPath ? rel(visualLookPath) : null,
+    evidenceCycle: fileExists(evidenceCyclePath) ? evidenceCyclePath : null
   };
   const commit = git('rev-parse --short HEAD', 'unknown');
   const branch = git('branch --show-current', '');
@@ -798,6 +965,9 @@ function main(){
     resourceSpendTable: tableObjects(resourceHeaders, resourceSpendRows),
     axisSpendTable: tableObjects(axisHeaders, axisSpendRows),
     nextGoalEstimateTable: tableObjects(nextEstimateHeaders, nextRows),
+    ingestionSummary,
+    ingestionRows: ingestionRows.map(({ cells, ...entry }) => entry),
+    ingestionTable: tableObjects(ingestionHeaders, ingestionRows),
     newFirstClassAxes: [
       'Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
       'Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
@@ -888,6 +1058,23 @@ function main(){
     '### Next Goal Estimates',
     '',
     table(nextEstimateHeaders, nextRows),
+    '',
+    '## Ingestion Framework View',
+    '',
+    'This view tracks the evidence pipeline behind the conformance scores: source media, extracted artifacts, annotation state, confidence, linked metric, and the next missing upgrade. It is intended to make long-cycle compute work easier to choose and easier to defend.',
+    '',
+    table(
+      ['Read', 'Current value'],
+      [
+        ['Evidence families tracked', ingestionSummary.sourceFamilyCount],
+        ['Scored or promoted families', ingestionSummary.scoredOrPromotedCount],
+        ['High-confidence families', ingestionSummary.highConfidenceCount],
+        ['Mixed or low-confidence families', ingestionSummary.mixedOrLowConfidenceCount],
+        ['Next best ingestion upgrade', ingestionSummary.nextBestUpgrade]
+      ]
+    ),
+    '',
+    table(ingestionHeaders, ingestionRows),
     '',
     '### Charts',
     '',

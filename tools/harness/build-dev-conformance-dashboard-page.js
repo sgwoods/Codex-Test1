@@ -95,6 +95,26 @@ function html(data){
     .pill:disabled{cursor:wait;opacity:.75}
     .button{box-shadow:0 2px 0 rgba(0,0,0,.12)}
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+    .tabs{
+      display:flex;
+      gap:8px;
+      margin:4px 0 16px;
+      border-bottom:1px solid var(--line);
+    }
+    .tab{
+      border:1px solid var(--line);
+      border-bottom:0;
+      background:#ede8df;
+      color:var(--ink);
+      border-radius:7px 7px 0 0;
+      padding:9px 13px;
+      font-weight:850;
+      cursor:pointer;
+    }
+    .tab.active{
+      background:var(--panel);
+      box-shadow:0 -1px 0 var(--panel) inset;
+    }
     .card{
       background:var(--panel);
       border:1px solid var(--line);
@@ -193,6 +213,9 @@ function html(data){
     .axisList li{padding:10px;border:1px solid var(--line);border-radius:7px;background:#fbfaf7}
     .evidence{display:grid;gap:8px}
     .evidence a{word-break:break-word}
+    .ingestionGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:14px}
+    .ingestionLead{max-width:980px;margin:0 0 14px;color:var(--muted)}
+    .anchorCell{max-width:260px;word-break:break-word}
     .statusLine{margin-top:10px;color:var(--muted);font-size:13px}
     .dirty{color:var(--red)}
     .clean{color:var(--green)}
@@ -200,11 +223,13 @@ function html(data){
       header{grid-template-columns:1fr}
       .controls{justify-content:flex-start}
       .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .ingestionGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .split{grid-template-columns:1fr}
     }
     @media (max-width:640px){
       .shell{padding:16px}
       .grid{grid-template-columns:1fr}
+      .ingestionGrid{grid-template-columns:1fr}
       table{display:block;overflow-x:auto}
       .metricExplanation{grid-template-columns:1fr}
       h1{font-size:26px}
@@ -235,6 +260,7 @@ function html(data){
     const statusLine = document.getElementById('statusLine');
     let dashboard = JSON.parse(document.getElementById('initial-data').textContent);
     let lastRefresh = Date.now();
+    let activeTab = 'conformance';
     const refreshMs = 30000;
 
     function esc(value){
@@ -296,21 +322,22 @@ function html(data){
         + '</details>';
     }
 
-    function render(data){
-      const rows = Array.isArray(data.priorityRows) ? data.priorityRows : [];
-      const gates = Array.isArray(data.releaseGate) ? data.releaseGate : [];
-      const overall = gates.find(gate => gate.Gate === 'Overall quality');
-      const audio = rows.find(row => /Audio identity/.test(row.metric || ''));
-      const level = rows.find(row => /Level arc/.test(row.metric || ''));
-      const semantics = data.scoreSemantics || {};
-      const economics = data.economicsSummary || {};
-      app.innerHTML = \`
-        <div class="grid">
-          <div class="card"><span class="label">Overall Quality</span><span class="value">\${esc(overall?.Current || '--')}</span></div>
-          <div class="card"><span class="label">Weakest Major Gap</span><span class="value \${scoreClass(audio?.score10)}">\${esc(audio?.current || '--')}</span><div class="small">Audio identity and event feedback</div></div>
-          <div class="card"><span class="label">Level Arc</span><span class="value \${scoreClass(level?.score10)}">\${esc(level?.current || '--')}</span><div class="small">Encounter shape and escalation</div></div>
-          <div class="card"><span class="label">Tracked Compute</span><span class="value">\${esc(economics.measuredRuns || 0)} runs</span><div class="small">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min wall / \${esc(Math.round((economics.cpuSeconds || 0) / 60))} min CPU</div></div>
-        </div>
+    function anchorLink(value){
+      if(!value) return '--';
+      const text = esc(value);
+      const href = /^https?:/i.test(value) ? value : '../' + encodeURI(value);
+      return '<a href="' + esc(href) + '">' + text + '</a>';
+    }
+
+    function dashboardTabs(){
+      return '<div class="tabs" role="tablist" aria-label="Dashboard views">'
+        + '<button class="tab ' + (activeTab === 'conformance' ? 'active' : '') + '" type="button" data-tab="conformance" role="tab" aria-selected="' + (activeTab === 'conformance') + '">Conformance</button>'
+        + '<button class="tab ' + (activeTab === 'ingestion' ? 'active' : '') + '" type="button" data-tab="ingestion" role="tab" aria-selected="' + (activeTab === 'ingestion') + '">Ingestion</button>'
+        + '</div>';
+    }
+
+    function conformanceView(data, rows, gates, semantics){
+      return \`
         <div class="split">
           <section>
             <h2>Priority Investment Queue</h2>
@@ -361,10 +388,76 @@ function html(data){
           </div>
         </div>
       \`;
+    }
+
+    function ingestionView(data){
+      const rows = Array.isArray(data.ingestionRows) ? data.ingestionRows : [];
+      const summary = data.ingestionSummary || {};
+      return \`
+        <section>
+          <h2>Ingestion Framework</h2>
+          <p class="ingestionLead">\${esc(summary.framing || 'Ingestion turns reference media and Aurora runtime captures into repeatable conformance evidence: clips, contact sheets, traces, event logs, labels, scores, confidence, and next missing annotations.')}</p>
+          <div class="ingestionGrid">
+            <div class="card"><span class="label">Evidence Families</span><span class="value">\${esc(summary.sourceFamilyCount || rows.length || 0)}</span></div>
+            <div class="card"><span class="label">Scored / Promoted</span><span class="value">\${esc(summary.scoredOrPromotedCount || 0)}</span></div>
+            <div class="card"><span class="label">High Confidence</span><span class="value">\${esc(summary.highConfidenceCount || 0)}</span></div>
+            <div class="card"><span class="label">Mixed / Low Confidence</span><span class="value">\${esc(summary.mixedOrLowConfidenceCount || 0)}</span></div>
+          </div>
+          <section class="card">
+            <h2>Next Best Ingestion Upgrade</h2>
+            <p>\${esc(summary.nextBestUpgrade || 'Promote the next evidence family into a scorer-backed artifact.')}</p>
+          </section>
+          <section>
+            <h2>Evidence Pipeline Queue</h2>
+            <table>
+              <thead><tr><th>Priority</th><th>Source / evidence family</th><th>Axis</th><th>Artifact type</th><th>Coverage</th><th>Annotation status</th><th>Confidence</th><th>Linked metric</th><th>Anchor</th><th>Missing next</th></tr></thead>
+              <tbody>\${rows.map(row => \`
+                <tr>
+                  <td class="priority">\${esc(row.rank)}</td>
+                  <td class="metric">\${esc(row.source)}</td>
+                  <td>\${esc(row.axis)}</td>
+                  <td>\${esc(row.artifactType)}</td>
+                  <td>\${esc(row.coverage)}</td>
+                  <td><span class="badge">\${esc(row.annotationStatus)}</span></td>
+                  <td><span class="badge">\${esc(row.confidence)}</span></td>
+                  <td>\${esc(row.linkedMetric)}</td>
+                  <td class="anchorCell">\${anchorLink(row.anchor)}</td>
+                  <td>\${esc(row.next)}</td>
+                </tr>\`).join('')}</tbody>
+            </table>
+          </section>
+        </section>
+      \`;
+    }
+
+    function render(data){
+      const rows = Array.isArray(data.priorityRows) ? data.priorityRows : [];
+      const gates = Array.isArray(data.releaseGate) ? data.releaseGate : [];
+      const overall = gates.find(gate => gate.Gate === 'Overall quality');
+      const audio = rows.find(row => /Audio identity/.test(row.metric || ''));
+      const level = rows.find(row => /Level arc/.test(row.metric || ''));
+      const semantics = data.scoreSemantics || {};
+      const economics = data.economicsSummary || {};
+      app.innerHTML = \`
+        <div class="grid">
+          <div class="card"><span class="label">Overall Quality</span><span class="value">\${esc(overall?.Current || '--')}</span></div>
+          <div class="card"><span class="label">Weakest Major Gap</span><span class="value \${scoreClass(audio?.score10)}">\${esc(audio?.current || '--')}</span><div class="small">Audio identity and event feedback</div></div>
+          <div class="card"><span class="label">Level Arc</span><span class="value \${scoreClass(level?.score10)}">\${esc(level?.current || '--')}</span><div class="small">Encounter shape and escalation</div></div>
+          <div class="card"><span class="label">Tracked Compute</span><span class="value">\${esc(economics.measuredRuns || 0)} runs</span><div class="small">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min wall / \${esc(Math.round((economics.cpuSeconds || 0) / 60))} min CPU</div></div>
+        </div>
+        \${dashboardTabs()}
+        \${activeTab === 'ingestion' ? ingestionView(data) : conformanceView(data, rows, gates, semantics)}
+      \`;
       statusLine.textContent = 'Dashboard data: ' + (data.generatedAt || 'unknown') + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
     }
 
     app.addEventListener('click', event => {
+      const tab = event.target.closest('[data-tab]');
+      if(tab){
+        activeTab = tab.dataset.tab || 'conformance';
+        render(dashboard);
+        return;
+      }
       const button = event.target.closest('.closeDetails');
       if(!button) return;
       const details = button.closest('details');

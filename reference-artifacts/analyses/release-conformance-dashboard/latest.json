@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T13:50:58.811Z",
-  "commit": "fee8820",
+  "generatedAt": "2026-05-08T14:05:21.934Z",
+  "commit": "3302efb",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
   "dirty": true,
   "sourceReports": {
@@ -10,7 +10,8 @@
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-d8240f0/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-dfb47de/report.json",
     "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-fee8820/report.json",
-    "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json"
+    "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
+    "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
   "scoreSemantics": {
     "headline": "An x/10 score is a measured rollup at the current scorer resolution, not a claim of arcade-perfect behavior.",
@@ -1122,6 +1123,210 @@
       "Tracked spend": "3 runs; 3.2 min wall; 3.7 min CPU",
       "Value / cost read": "Expected lift 0.18/10 on metric, 0.016/10 overall; investment score 0.86.",
       "Next action": "Tune only after audio and level-arc priorities unless regressions appear."
+    }
+  ],
+  "ingestionSummary": {
+    "sourceFamilyCount": 8,
+    "highConfidenceCount": 3,
+    "mixedOrLowConfidenceCount": 2,
+    "scoredOrPromotedCount": 6,
+    "nextBestUpgrade": "Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.",
+    "framing": "Ingestion turns reference media and Aurora runtime captures into repeatable evidence: clips, contact sheets, traces, event logs, labels, scores, confidence, and next missing annotations."
+  },
+  "ingestionRows": [
+    {
+      "rank": 1,
+      "source": "Galaga-family reference audio clips",
+      "axis": "audio identity / event feedback",
+      "artifactType": "reference m4a cue clips",
+      "coverage": "50 clips",
+      "annotationStatus": "clipped, mapped, partially scored",
+      "confidence": "medium-high",
+      "linkedMetric": "Audio identity, event feedback, and cue alignment",
+      "anchor": "src/assets/reference-audio",
+      "next": "Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics."
+    },
+    {
+      "rank": 2,
+      "source": "Aurora audio cue comparison and event-gap reports",
+      "axis": "audio cue scoring",
+      "artifactType": "waveform/spectral/alignment reports",
+      "coverage": "21 compared cues",
+      "annotationStatus": "scored",
+      "confidence": "medium-high",
+      "linkedMetric": "Audio identity, event feedback, and cue alignment",
+      "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-dfb47de-dirty/report.json",
+      "next": "Promote cue-level event semantics into the scorer so feedback meaning is measured, not only spectral similarity."
+    },
+    {
+      "rank": 3,
+      "source": "Level arc and encounter-shape evidence",
+      "axis": "level arc / challenge / reward",
+      "artifactType": "stage signatures, pressure windows, persona reports",
+      "coverage": "6/6 stage families; 6/6 evidence windows",
+      "annotationStatus": "scored",
+      "confidence": "medium-high",
+      "linkedMetric": "Level arc and encounter shape",
+      "anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-dfb47de/report.json",
+      "next": "Add more long-play reference windows and expert-route scoring for challenge/reward opportunities."
+    },
+    {
+      "rank": 4,
+      "source": "Stage 4 pressure and loss-window diagnostics",
+      "axis": "pressure / fairness",
+      "artifactType": "loss windows, replay geometry, collision traces",
+      "coverage": "3 promoted windows",
+      "annotationStatus": "mined, replay-diagnostic",
+      "confidence": "medium",
+      "linkedMetric": "Stage 4 pressure exact replay / pressure curve precision",
+      "anchor": "reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-4f2fafe/report.json",
+      "next": "Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning."
+    },
+    {
+      "rank": 5,
+      "source": "Aurora visual look screenshots",
+      "axis": "visual look / UI readability",
+      "artifactType": "browser screenshots plus DOM/canvas metrics",
+      "coverage": "4 surfaces",
+      "annotationStatus": "first-pass scored",
+      "confidence": "medium-low",
+      "linkedMetric": "Overall visual look and feel",
+      "anchor": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
+      "next": "Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique."
+    },
+    {
+      "rank": 6,
+      "source": "Aurora evidence-cycle windows",
+      "axis": "general ingestion framework",
+      "artifactType": "manifests, contact sheets, traces, event logs, audio timelines",
+      "coverage": "4 planned windows",
+      "annotationStatus": "seed-plan-only",
+      "confidence": "medium",
+      "linkedMetric": "Level arc / challenge variation / visual look",
+      "anchor": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json",
+      "next": "Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest."
+    },
+    {
+      "rank": 7,
+      "source": "Reference manifests and event logs inventory",
+      "axis": "source provenance / annotation coverage",
+      "artifactType": "source-manifest.json and reference-events.json",
+      "coverage": "10 manifests; 6 event logs",
+      "annotationStatus": "mixed",
+      "confidence": "mixed",
+      "linkedMetric": "All conformance metrics",
+      "anchor": "reference-artifacts/analyses",
+      "next": "Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest."
+    },
+    {
+      "rank": 8,
+      "source": "Reference contact sheets and frame evidence",
+      "axis": "visual / motion / entry formation",
+      "artifactType": "contact sheets and still frames",
+      "coverage": "27 contact/frame evidence files",
+      "annotationStatus": "extracted, partially labeled",
+      "confidence": "medium",
+      "linkedMetric": "Visual look, alien entry, challenge variation",
+      "anchor": "reference-artifacts/analyses",
+      "next": "Attach contact-sheet families to metric rows and add image-level comparison scores."
+    }
+  ],
+  "ingestionTable": [
+    {
+      "Priority": 1,
+      "Source / evidence family": "Galaga-family reference audio clips",
+      "Axis": "audio identity / event feedback",
+      "Artifact type": "reference m4a cue clips",
+      "Coverage": "50 clips",
+      "Annotation status": "clipped, mapped, partially scored",
+      "Confidence": "medium-high",
+      "Linked metric": "Audio identity, event feedback, and cue alignment",
+      "Anchor": "src/assets/reference-audio",
+      "Missing next": "Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics."
+    },
+    {
+      "Priority": 2,
+      "Source / evidence family": "Aurora audio cue comparison and event-gap reports",
+      "Axis": "audio cue scoring",
+      "Artifact type": "waveform/spectral/alignment reports",
+      "Coverage": "21 compared cues",
+      "Annotation status": "scored",
+      "Confidence": "medium-high",
+      "Linked metric": "Audio identity, event feedback, and cue alignment",
+      "Anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-dfb47de-dirty/report.json",
+      "Missing next": "Promote cue-level event semantics into the scorer so feedback meaning is measured, not only spectral similarity."
+    },
+    {
+      "Priority": 3,
+      "Source / evidence family": "Level arc and encounter-shape evidence",
+      "Axis": "level arc / challenge / reward",
+      "Artifact type": "stage signatures, pressure windows, persona reports",
+      "Coverage": "6/6 stage families; 6/6 evidence windows",
+      "Annotation status": "scored",
+      "Confidence": "medium-high",
+      "Linked metric": "Level arc and encounter shape",
+      "Anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-dfb47de/report.json",
+      "Missing next": "Add more long-play reference windows and expert-route scoring for challenge/reward opportunities."
+    },
+    {
+      "Priority": 4,
+      "Source / evidence family": "Stage 4 pressure and loss-window diagnostics",
+      "Axis": "pressure / fairness",
+      "Artifact type": "loss windows, replay geometry, collision traces",
+      "Coverage": "3 promoted windows",
+      "Annotation status": "mined, replay-diagnostic",
+      "Confidence": "medium",
+      "Linked metric": "Stage 4 pressure exact replay / pressure curve precision",
+      "Anchor": "reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-4f2fafe/report.json",
+      "Missing next": "Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning."
+    },
+    {
+      "Priority": 5,
+      "Source / evidence family": "Aurora visual look screenshots",
+      "Axis": "visual look / UI readability",
+      "Artifact type": "browser screenshots plus DOM/canvas metrics",
+      "Coverage": "4 surfaces",
+      "Annotation status": "first-pass scored",
+      "Confidence": "medium-low",
+      "Linked metric": "Overall visual look and feel",
+      "Anchor": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
+      "Missing next": "Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique."
+    },
+    {
+      "Priority": 6,
+      "Source / evidence family": "Aurora evidence-cycle windows",
+      "Axis": "general ingestion framework",
+      "Artifact type": "manifests, contact sheets, traces, event logs, audio timelines",
+      "Coverage": "4 planned windows",
+      "Annotation status": "seed-plan-only",
+      "Confidence": "medium",
+      "Linked metric": "Level arc / challenge variation / visual look",
+      "Anchor": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json",
+      "Missing next": "Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest."
+    },
+    {
+      "Priority": 7,
+      "Source / evidence family": "Reference manifests and event logs inventory",
+      "Axis": "source provenance / annotation coverage",
+      "Artifact type": "source-manifest.json and reference-events.json",
+      "Coverage": "10 manifests; 6 event logs",
+      "Annotation status": "mixed",
+      "Confidence": "mixed",
+      "Linked metric": "All conformance metrics",
+      "Anchor": "reference-artifacts/analyses",
+      "Missing next": "Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest."
+    },
+    {
+      "Priority": 8,
+      "Source / evidence family": "Reference contact sheets and frame evidence",
+      "Axis": "visual / motion / entry formation",
+      "Artifact type": "contact sheets and still frames",
+      "Coverage": "27 contact/frame evidence files",
+      "Annotation status": "extracted, partially labeled",
+      "Confidence": "medium",
+      "Linked metric": "Visual look, alien entry, challenge variation",
+      "Anchor": "reference-artifacts/analyses",
+      "Missing next": "Attach contact-sheet families to metric rows and add image-level comparison scores."
     }
   ],
   "newFirstClassAxes": [
