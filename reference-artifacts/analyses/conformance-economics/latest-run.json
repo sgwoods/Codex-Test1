@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T11-44-36-701Z-64337",
-  "startedAt": "2026-05-08T11:44:36.701Z",
-  "endedAt": "2026-05-08T11:44:36.893Z",
+  "id": "2026-05-08T12-17-52-477Z-83035",
+  "startedAt": "2026-05-08T12:17:52.477Z",
+  "endedAt": "2026-05-08T12:17:52.662Z",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "commit": "255ff96",
+  "commit": "ebd04ec",
   "command": [
     "npm",
     "run",
@@ -17,9 +17,9 @@
   "resources": [
     "cpu"
   ],
-  "notes": "Aurora audio event-gap analysis after impact/explosion comparison refresh",
+  "notes": "Aurora audio event-gap analysis after corrected reference subwindows",
   "measurement": {
-    "wallSeconds": 0.192,
+    "wallSeconds": 0.185,
     "timeRealSeconds": 0.18,
     "timeUserSeconds": 0.13,
     "timeSystemSeconds": 0.06,
@@ -38,8 +38,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 250741427,
-    "artifactBytesAfter": 250745861,
-    "artifactBytesDelta": 4434
+    "artifactBytesBefore": 253833016,
+    "artifactBytesAfter": 253828667,
+    "artifactBytesDelta": -4349
   }
 }

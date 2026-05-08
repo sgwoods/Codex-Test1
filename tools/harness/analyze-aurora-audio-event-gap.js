@@ -255,7 +255,9 @@ function main(){
     missingCriticalComparisonCues,
     nextStep: missingCriticalComparisonCues.length
       ? 'Add measured comparison coverage for impact/explosion cues first: enemyHit, bossHit, enemyBoom, and bossBoom. Then rerun the audio theme comparison and this event-gap analysis.'
-      : 'Promote narrower reference subwindows for the broadest remaining cues, then tune the highest-risk runtime cue.'
+      : broadReferenceWindowCount
+        ? 'Promote narrower reference subwindows for the broadest remaining cues, then tune the highest-risk runtime cue.'
+        : `Tune the highest-risk runtime cue next: ${highest.label || highest.cue || 'unknown cue'}. Rerun audio comparison and event-gap analysis after the change.`
   };
   fs.mkdirSync(outDir, { recursive: true });
   writeJson(path.join(outDir, 'report.json'), report);

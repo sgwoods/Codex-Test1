@@ -39,8 +39,16 @@ function decodeToFile(base64, outPath){
   fs.writeFileSync(outPath, Buffer.from(base64, 'base64'));
 }
 
-function toWav(inPath, outPath){
-  run('ffmpeg', ['-y', '-i', inPath, '-ac', '1', '-ar', '22050', outPath]);
+function referenceWindowArgs(window){
+  if(!window) return [];
+  const start = Number(window.startSeconds);
+  const end = Number(window.endSeconds);
+  if(!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return [];
+  return ['-ss', String(start), '-t', String(end - start)];
+}
+
+function toWav(inPath, outPath, window = null){
+  run('ffmpeg', ['-y', '-i', inPath, ...referenceWindowArgs(window), '-ac', '1', '-ar', '22050', outPath]);
 }
 
 function pythonForAudioReport(){
@@ -66,7 +74,7 @@ async function main(){
 
   for(const row of comparisonSets){
     const id = slug(row.item.label || row.entry.label || row.entry.id);
-    const auroraPayload = { ...row.entry.preview };
+    const auroraPayload = { ...row.entry.preview, audioTheme: 'aurora-application' };
     const cue = String(auroraPayload.cue || '').trim();
     delete auroraPayload.cue;
     if(!cue) fail('Missing cue in comparison entry preview payload', row);
@@ -98,7 +106,8 @@ async function main(){
     const referenceSource = path.join(ROOT, 'src', referenceRel.replace(/^assets\//, 'assets/'));
     if(!fs.existsSync(referenceSource)) fail('Reference clip missing', { referenceSource, row });
     const referenceWav = path.join(samplesDir, `${id}-reference.wav`);
-    toWav(referenceSource, referenceWav);
+    const referenceWindow = row.item.referenceWindow || null;
+    toWav(referenceSource, referenceWav, referenceWindow);
 
     manifest.push({
       id,
@@ -120,7 +129,8 @@ async function main(){
       reference: {
         label: row.item.referenceLabel || 'Reference',
         source: path.relative(ROOT, referenceSource),
-        wav: path.relative(outRoot, referenceWav)
+        wav: path.relative(outRoot, referenceWav),
+        window: referenceWindow
       }
     });
   }

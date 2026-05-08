@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-08T11:45:01.735Z`
+Generated: `2026-05-08T12:18:11.846Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -50,17 +50,17 @@ Every release candidate should include both a conformance read and a resource/ti
 | Latest level-arc conformance | 8.4/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 492 | History depth behind score trends |
 | Score deltas found | 68 | Past-goal movement available for review |
-| Measured runs | 69 | Tracked harness/model/local compute work |
-| Tracked wall time | 20.7 min | Human clock-time planning input |
-| Tracked CPU time | 29.8 min | Local compute-cost planning input |
-| Tracked artifact growth | 193 MB | Evidence volume and storage/review-cost proxy |
+| Measured runs | 78 | Tracked harness/model/local compute work |
+| Tracked wall time | 30.1 min | Human clock-time planning input |
+| Tracked CPU time | 46.1 min | Local compute-cost planning input |
+| Tracked artifact growth | 195.7 MB | Evidence volume and storage/review-cost proxy |
 
 ### Resource And Time Usage
 
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| cpu | 69 | 20.7 min | 29.8 min |
-| browser | 38 | 17.4 min | 26.1 min |
+| cpu | 78 | 30.1 min | 46.1 min |
+| browser | 43 | 26.8 min | 42.4 min |
 
 ### Past Goal Spend By Axis
 
@@ -68,8 +68,8 @@ Every release candidate should include both a conformance read and a resource/ti
 | --- | --- | --- | --- |
 | conformance-economics | 64 | 17.4 min | 24.4 min |
 | stage4-pressure | 28 | 12.8 min | 18.5 min |
+| audio | 13 | 12.7 min | 21.8 min |
 | quality-score | 3 | 3.2 min | 3.7 min |
-| audio | 4 | 3.2 min | 5.5 min |
 | level-arc | 34 | 1.4 min | 2.2 min |
 | conformance-loop | 21 | 1.1 min | 1.7 min |
 | economics | 1 | 0 min | 0 min |
@@ -89,11 +89,11 @@ Every release candidate should include both a conformance read and a resource/ti
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-08-ebd04ec/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-08-ebd04ec/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-08-ebd04ec/compute-minutes-by-resource.svg)
 
 ## New First-Class Axes Added
 
@@ -118,5 +118,5 @@ Every release candidate should include both a conformance read and a resource/ti
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-d8240f0/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-08-ebd04ec/report.json`
 - Equal current quality-category weight: `0.091`

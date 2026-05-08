@@ -594,7 +594,8 @@ const sfx={
     phase,
     challenge,
     frontDoor,
-    attractPhase
+    attractPhase,
+    audioTheme:opts.audioTheme
    });
   }
   return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
@@ -1407,7 +1408,9 @@ function resolvedAudioAtmosphere(opts={}){
  const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
   ? currentGamePackResolvedAtmosphere(opts)
   : Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase:String(opts.phase||'stage').trim()||'stage'});
- const selection=currentAudioOverrides().audioTheme;
+ const selection=opts.audioTheme!==undefined
+  ? sanitizeAudioThemeValue(opts.audioTheme)
+  : currentAudioOverrides().audioTheme;
  if(selection==='auto'||selection==='aurora-application')return atmosphere;
  const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
  const useGalagaReference=phase==='demo'||phase==='stage'||phase==='challenge'||phase==='results';

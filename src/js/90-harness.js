@@ -618,7 +618,7 @@ window.__galagaHarness__={
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
    endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
   }
-  return Math.max(.8,Math.min(4,endT+.12));
+  return Math.max(.25,Math.min(4,endT+.12));
  },
  async captureAudioCue(name,opts={}){
   if(!name)return null;
