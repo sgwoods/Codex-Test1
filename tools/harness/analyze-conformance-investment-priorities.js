@@ -184,19 +184,19 @@ function main(){
       nextAction: 'Split or further label shared shot/impact/explosion reference mappings, especially playerShot/enemyShot/bossHit and enemyHit/enemyBoom, then rerun audio comparison and semantic event-gap analysis.'
     }),
     buildCandidate({
-      id: 'stage12-natural-reward-window',
-      label: 'Naturalize Stage 12 boss/escort reward window',
+      id: 'level-arc-opportunity-coverage',
+      label: 'Tighten level-arc opportunity coverage and late reward reads',
       category: levelArc,
       quality,
       economics: ledger,
-      expectedLift10: 0.28,
+      expectedLift10: 0.24,
       confidence: 0.86,
       reuse: 0.95,
       risk: 0.18,
       costClass: 'low',
       computeAxis: 'conformance-loop',
-      rationale: `The frozen Stage 12 loop is ready; opportunity readiness is ${opportunity.summary?.score10 || 0}/10 and late reward evidence is still thin.`,
-      nextAction: 'Apply one narrow Stage 12 reward candidate and rerun the frozen conformance loop.'
+      rationale: `The Stage 12 learned reward route is now credited; opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gaps are ${opportunity.summary?.highestPriorityOpportunity?.id || 'missing level-arc opportunity coverage'} plus late reward thinness outside the Stage 12 route.`,
+      nextAction: 'Widen mid-run/late-run evidence coverage and add a Stage 14 reward-route probe before changing gameplay tuning.'
     }),
     buildCandidate({
       id: 'stage4-pressure-exact-replay',
@@ -269,7 +269,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: 'Audio remains the largest raw gap, but the Stage 12 natural reward loop ranks competitively because it has low compute cost, high measurement readiness, and strong reuse as a candidate-loop proving ground. Use this artifact as the tie-breaker before committing multi-hour compute cycles.'
+    interpretation: 'Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment, but the immediate level-arc task has shifted from Stage 12 reward discovery to better opportunity coverage and Stage 14 reward-route evidence.'
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));

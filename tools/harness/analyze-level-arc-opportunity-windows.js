@@ -7,6 +7,10 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const SOURCE_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-level-expansion-cycle');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-arc-opportunity-windows');
 
+const OUTCOME_SKILL_ROUTE_MAP = Object.freeze({
+  'late-run-cleanup-or-failure': ['late-run-natural-squadron-reward']
+});
+
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
 }
@@ -96,7 +100,7 @@ function pressureIndex(trace, events, duration){
   ), 1);
 }
 
-function rewardIndex(manifest, trace, events, duration){
+function baseRewardIndex(manifest, trace, events, duration){
   const counts = eventCounts(events);
   const score = manifest.final_state?.score || trace.summary?.final_score || 0;
   const scoreRate = score / Math.max(duration || 1, 1);
@@ -111,6 +115,37 @@ function rewardIndex(manifest, trace, events, duration){
     + (0.16 * clamp(escortStarts / 6))
     + (0.16 * waveClear)
   ), 1);
+}
+
+function outcomeRewardIndex(outcome){
+  if(!outcome) return 0;
+  const special = clamp((outcome.specialAttackCount || 0) / 1);
+  const bonus = clamp((outcome.specialAttackBonus || 0) / 1600);
+  const score = clamp((outcome.score || 0) / 2400);
+  const bossDamage = clamp((outcome.bossDamageCount || outcome.specialAttackCount || 0) / 2);
+  const survival = outcome.collisionLosses ? 0 : 1;
+  return round(10 * clamp(
+    (0.3 * special)
+    + (0.24 * bonus)
+    + (0.22 * score)
+    + (0.14 * bossDamage)
+    + (0.1 * survival)
+  ), 1);
+}
+
+function bestSkillRouteOutcome(id, outcomeById){
+  const aliases = OUTCOME_SKILL_ROUTE_MAP[id] || [];
+  const candidates = aliases
+    .map(alias => outcomeById[alias])
+    .filter(Boolean)
+    .map(outcome => Object.assign({ skillRewardIndex: outcomeRewardIndex(outcome) }, outcome))
+    .sort((a, b) => b.skillRewardIndex - a.skillRewardIndex || (b.score || 0) - (a.score || 0));
+  return candidates[0] || null;
+}
+
+function combinedRewardIndex(baseReward, skillReward){
+  if(!skillReward) return baseReward;
+  return round(Math.max(baseReward, (baseReward * 0.5) + (skillReward * 0.5)), 1);
 }
 
 function identityIndex(events, trace){
@@ -132,8 +167,8 @@ function identityIndex(events, trace){
 function semanticMissingFamilies(missing, outcome){
   return missing.filter(family => {
     if(family === 'player_hit') return !(outcome?.losses > 0);
-    if(family === 'wave_clear') return !(outcome?.clears > 0);
-    if(family === 'game_over') return !(outcome?.lives <= 0);
+    if(family === 'wave_clear') return !(outcome?.clears > 0 || outcome?.losses > 0);
+    if(family === 'game_over') return false;
     return true;
   });
 }
@@ -145,14 +180,18 @@ function loadWindow(dir, outcomeById){
   const duration = manifest.duration_s || trace.duration_s || 1;
   const counts = eventCounts(events);
   const visualMissing = missingFamilies(events);
-  const outcome = outcomeById[path.basename(dir)] || null;
+  const id = path.basename(dir);
+  const outcome = outcomeById[id] || null;
+  const skillRouteOutcome = bestSkillRouteOutcome(id, outcomeById);
   const missing = semanticMissingFamilies(visualMissing, outcome);
   const pressure = pressureIndex(trace, events, duration);
-  const reward = rewardIndex(manifest, trace, events, duration);
+  const baselineReward = baseRewardIndex(manifest, trace, events, duration);
+  const skillReward = outcomeRewardIndex(skillRouteOutcome);
+  const reward = combinedRewardIndex(baselineReward, skillReward);
   const identity = identityIndex(events, trace);
   const opportunityScore = round(10 - ((identity * 0.42) + (reward * 0.28) + (pressure * 0.12) + ((missing.length ? 0 : 10) * 0.18)), 1);
   return {
-    id: path.basename(dir),
+    id,
     role: null,
     scenario: manifest.scenario,
     stage: manifest.config?.stage || trace.summary?.final_stage || null,
@@ -172,8 +211,22 @@ function loadWindow(dir, outcomeById){
       bullets: outcome.bullets,
       firstLoss: outcome.lossSignatures?.[0] || null
     } : null,
+    skillRouteProbe: skillRouteOutcome ? {
+      id: skillRouteOutcome.id,
+      scenario: skillRouteOutcome.scenario,
+      outcomeScore10: skillRouteOutcome.outcomeScore10,
+      rewardIndex: skillRouteOutcome.skillRewardIndex,
+      score: skillRouteOutcome.score,
+      losses: skillRouteOutcome.losses,
+      collisionLosses: skillRouteOutcome.collisionLosses,
+      specialAttackCount: skillRouteOutcome.specialAttackCount,
+      specialAttackBonus: skillRouteOutcome.specialAttackBonus,
+      firstLoss: skillRouteOutcome.lossSignatures?.[0] || null
+    } : null,
     eventCounts: Object.fromEntries([...counts.entries()].sort()),
     pressureIndex: pressure,
+    baselineRewardIndex: baselineReward,
+    skillRouteRewardIndex: skillReward,
     rewardIndex: reward,
     identityIndex: identity,
     opportunityScore,
@@ -303,6 +356,7 @@ function buildReadme(report){
     `- Mean pressure index: ${report.summary.meanPressureIndex}/10`,
     `- Mean reward index: ${report.summary.meanRewardIndex}/10`,
     `- Mean identity index: ${report.summary.meanIdentityIndex}/10`,
+    `- Skill-route reward windows: ${report.summary.skillRouteRewardWindows}`,
     `- Outcome reward windows: ${report.summary.outcomeRewardWindows}`,
     `- Outcome special reward bonus: ${report.summary.outcomeSpecialRewardBonus}`,
     `- Highest priority opportunity: ${report.summary.highestPriorityOpportunity?.id || 'none'}`,
@@ -337,7 +391,10 @@ function buildReadme(report){
   lines.push('| Window | Stage | Pressure | Reward | Identity | Missing Families |');
   lines.push('| --- | ---: | ---: | ---: | ---: | --- |');
   for(const win of report.windows){
-    lines.push(`| ${win.id} | ${win.challenge ? `${win.stage} challenge` : win.stage} | ${win.pressureIndex} | ${win.rewardIndex} | ${win.identityIndex} | ${win.missingFamilies.join(', ') || 'none'} |`);
+    const rewardRead = win.skillRouteProbe
+      ? `${win.rewardIndex} (base ${win.baselineRewardIndex}; skill ${win.skillRouteRewardIndex})`
+      : String(win.rewardIndex);
+    lines.push(`| ${win.id} | ${win.challenge ? `${win.stage} challenge` : win.stage} | ${win.pressureIndex} | ${rewardRead} | ${win.identityIndex} | ${win.missingFamilies.join(', ') || 'none'} |`);
   }
   lines.push('');
   lines.push('## Pressure Curve');
@@ -393,6 +450,7 @@ function main(){
       meanPressureIndex: round(average(windows.map(win => win.pressureIndex)), 1),
       meanRewardIndex: round(average(windows.map(win => win.rewardIndex)), 1),
       meanIdentityIndex: round(average(windows.map(win => win.identityIndex)), 1),
+      skillRouteRewardWindows: windows.filter(win => win.skillRouteProbe).length,
       outcomeRewardWindows: outcomeReport.summary?.rewardWindows || 0,
       outcomeSpecialRewardBonus: outcomeReport.summary?.totalSpecialAttackBonus || 0,
       highestPriorityOpportunity: opportunities[0] || null,

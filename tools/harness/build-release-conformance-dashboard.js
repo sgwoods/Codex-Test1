@@ -134,7 +134,7 @@ function investmentForMetric(metric, investmentById){
   const text = String(metric || '').toLowerCase();
   if(text.includes('audio identity')) return investmentById['audio-reference-segmentation'] || null;
   if(text.includes('stage 4 pressure')) return investmentById['stage4-pressure-exact-replay'] || null;
-  if(text.includes('level arc')) return investmentById['stage12-natural-reward-window'] || null;
+  if(text.includes('level arc')) return investmentById['level-arc-opportunity-coverage'] || investmentById['stage12-natural-reward-window'] || null;
   if(text.includes('stage 1 opening timing')) return investmentById['stage1-timing-polish'] || null;
   if(text.includes('visual look') || text.includes('arcade console frame') || text.includes('popup') || text.includes('leaderboard')) return investmentById['ui-graphics-polish'] || null;
   return null;
@@ -866,7 +866,7 @@ function main(){
   const equalWeight = +(1 / qualityCount).toFixed(3);
   const investmentById = Object.fromEntries((priority.candidates || []).map(item => [item.id, item]));
   const audioCandidate = investmentById['audio-reference-segmentation'];
-  const stage12Candidate = investmentById['stage12-natural-reward-window'];
+  const levelArcCandidate = investmentById['level-arc-opportunity-coverage'] || investmentById['stage12-natural-reward-window'];
   const stage4Candidate = investmentById['stage4-pressure-exact-replay'];
 
   const alienEntryScore = Math.min(10, ((stage1Timing?.score10 || 0) * 0.45) + ((stage1Geometry?.score10 || 0) * 0.35) + ((levelArc.summary?.submetrics || []).find(m => m.id === 'movement-grammar-expansion')?.score10 || 8.4) * 0.2);
@@ -900,7 +900,7 @@ function main(){
       status: 'Measured release category',
       why: 'Controls whether long play feels like Galaga-like escalation rather than repeated pressure.',
       effort: 'Medium-high; 2-5 hrs',
-      next: stage12Candidate?.nextAction || 'Run level-arc candidate loop.',
+      next: levelArcCandidate?.nextAction || 'Run level-arc candidate loop.',
       evidence: levelArcPath ? rel(levelArcPath) : rel(qualityPath)
     }),
     row({
