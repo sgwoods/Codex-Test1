@@ -194,7 +194,12 @@ function candidateSpecs(){
       spec: { seq: [784, 1047, 1397, 2093, 3136], step: .048, wave: 'triangle', volume: .0072, slide: 28, lpHz: 6900, tones: [{ freq: 3520, duration: .078, wave: 'square', volume: .0017, slide: 0, lpHz: 7600, delay: .188 }] }
     }
   ];
-  return [...handCandidates, ...generatedCandidateSpecs()];
+  return [
+    ...handCandidates,
+    ...generatedCandidateSpecs(),
+    ...segmentedCandidateSpecs(),
+    ...triangleNeighborhoodCandidateSpecs()
+  ];
 }
 
 function round(value, digits = 3){
@@ -228,14 +233,49 @@ function gridLimit(){
   return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
 }
 
+function segmentedGridLimit(){
+  const requested = Number(argValue('segmented-grid-limit') || process.env.AURORA_AUDIO_SEGMENTED_GRID_LIMIT || 0);
+  return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
+}
+
+function triangleGridLimit(){
+  const requested = Number(argValue('triangle-grid-limit') || process.env.AURORA_AUDIO_TRIANGLE_GRID_LIMIT || 0);
+  return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
+}
+
 function runTag(repeats, filter, generatedAt){
   const time = generatedAt.slice(11, 19).replace(/:/g, '');
   const parts = [];
   const limit = gridLimit();
   if(limit) parts.push(`grid${limit}`);
+  const segmentedLimit = segmentedGridLimit();
+  if(segmentedLimit) parts.push(`seg${segmentedLimit}`);
+  const triangleLimit = triangleGridLimit();
+  if(triangleLimit) parts.push(`tri${triangleLimit}`);
   if(repeats > 1) parts.push(`r${repeats}`);
   if(filter.size) parts.push('focused');
   return `${parts.join('-') || 'manual'}-${time}`;
+}
+
+function generatorSummary(rows){
+  const generators = rows
+    .filter(row => row.generated && row.generator)
+    .reduce((map, row) => {
+      const family = row.generator.family || 'generated';
+      if(!map.has(family)) map.set(family, { family, selectedCandidates: 0, bestRisk10: null, bestCandidate: null });
+      const entry = map.get(family);
+      entry.selectedCandidates += 1;
+      if(entry.bestRisk10 === null || row.risk10 < entry.bestRisk10){
+        entry.bestRisk10 = row.risk10;
+        entry.bestCandidate = row.id;
+      }
+      return map;
+    }, new Map());
+  if(!generators.size) return null;
+  return {
+    families: Array.from(generators.values()),
+    controls: 'Use --grid-limit=N for quiet-held parametric generation, --segmented-grid-limit=N for onset/body/tail generation, --triangle-grid-limit=N for RMS-aware bright-triangle search, and --candidate-ids for focused stability reruns.'
+  };
 }
 
 function generatedCandidateSpecs(){
@@ -301,9 +341,183 @@ function generatedCandidateSpecs(){
     .slice(0, limit);
 }
 
+function segmentedCandidateSpecs(){
+  const limit = segmentedGridLimit();
+  if(!limit) return [];
+  const onsetFreqs = [520, 660, 784];
+  const midFreqs = [1047, 1320, 1568];
+  const presenceFreqs = [2349, 2637, 3136];
+  const onsetDurations = [.14, .16, .18];
+  const gaps = [.22, .24, .26];
+  const tails = [.09, .11, .13];
+  const volumes = [.0048, .0058, .0068, .0078];
+  const noiseVolumes = [.00025, .00045, .0007];
+  const specs = [];
+  for(const onsetFreq of onsetFreqs){
+    for(const midFreq of midFreqs){
+      for(const presenceFreq of presenceFreqs){
+        for(const onsetDuration of onsetDurations){
+          for(const gap of gaps){
+            for(const tailDuration of tails){
+              for(const volume of volumes){
+                for(const noiseVolume of noiseVolumes){
+                  const bodyDelay = gap;
+                  const tailDelay = gap + .085;
+                  const end = tailDelay + tailDuration;
+                  const lowMidShareProxy = (onsetFreq + midFreq) / Math.max(1, presenceFreq);
+                  const durationGap = Math.abs(end - .43);
+                  const bandProxyGap = Math.abs(lowMidShareProxy - .62);
+                  const energy = (volume * (onsetDuration + .045 + tailDuration)) + (noiseVolume * (.03 + .055));
+                  const energyGap = Math.abs(energy - .0022);
+                  const heuristic = (durationGap * 7.5) + (bandProxyGap * .32) + (energyGap * 800) + (presenceFreq > 3000 ? .025 : 0);
+                  const id = [
+                    'seg',
+                    `o${onsetFreq}`,
+                    `m${midFreq}`,
+                    `p${presenceFreq}`,
+                    `od${Math.round(onsetDuration * 1000)}`,
+                    `g${Math.round(gap * 1000)}`,
+                    `td${Math.round(tailDuration * 1000)}`,
+                    `v${Math.round(volume * 10000)}`,
+                    `n${Math.round(noiseVolume * 100000)}`
+                  ].join('-');
+                  specs.push({
+                    id,
+                    label: `Segmented ${onsetFreq}/${midFreq}/${presenceFreq} ${onsetDuration}/${gap}/${tailDuration}`,
+                    generated: true,
+                    generator: {
+                      family: 'segmented-onset-body-tail-grid',
+                      heuristic: round(heuristic, 5),
+                      expectedEnd: round(end, 3),
+                      expectedEnergy: round(energy, 6),
+                      target: '3-part reference segmentation: onset 0.000-0.180s, body 0.239-0.279s, tail 0.319-0.429s',
+                      params: { onsetFreq, midFreq, presenceFreq, onsetDuration, gap, tailDuration, volume, noiseVolume }
+                    },
+                    spec: {
+                      tones: [
+                        { freq: onsetFreq, duration: onsetDuration, wave: 'square', volume: volume * 1.25, slide: 180, detune: .004, lpHz: 4300, delay: 0 },
+                        { freq: midFreq, duration: Math.max(.055, onsetDuration * .62), wave: 'triangle', volume: volume * .72, slide: -90, detune: -.003, lpHz: 4700, delay: .018 },
+                        { freq: presenceFreq, duration: .045, wave: 'square', volume: volume * .44, slide: -220, detune: .002, lpHz: 6200, delay: bodyDelay },
+                        { freq: midFreq * .82, duration: tailDuration, wave: 'triangle', volume: volume * .58, slide: -120, detune: .002, lpHz: 4600, delay: tailDelay },
+                        { freq: presenceFreq * .84, duration: Math.max(.04, tailDuration * .58), wave: 'square', volume: volume * .25, slide: -260, lpHz: 6400, delay: tailDelay + .018 }
+                      ],
+                      noise: [
+                        { duration: .03, volume: noiseVolume, hp: 3200, delay: .012 },
+                        { duration: .055, volume: noiseVolume * .72, hp: 3600, delay: tailDelay + .01 }
+                      ]
+                    }
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return specs
+    .sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id))
+    .slice(0, limit);
+}
+
+function triangleNeighborhoodCandidateSpecs(){
+  const limit = triangleGridLimit();
+  if(!limit) return [];
+  const seq = [784, 1175, 1568, 2093, 2794];
+  const steps = [.046, .048, .05, .052];
+  const volumes = [.0076, .0082, .0088, .0094, .0098];
+  const toneVolumes = [.0026, .003, .0034, .0038];
+  const toneDurations = [.1, .12, .14, .16];
+  const delays = [.184, .192, .2];
+  const toneFreqs = [2794, 3136, 3520];
+  const noiseVolumes = [0, .00025, .00045, .0007];
+  const noiseHps = [3200, 4200, 5600];
+  const specs = [];
+  for(const step of steps){
+    for(const volume of volumes){
+      for(const toneVolume of toneVolumes){
+        for(const toneDuration of toneDurations){
+          for(const delay of delays){
+            for(const toneFreq of toneFreqs){
+              for(const noiseVolume of noiseVolumes){
+                for(const noiseHp of noiseHps){
+                  if(noiseVolume === 0 && noiseHp !== noiseHps[0]) continue;
+                  const expectedEnd = Math.max(seq.length * step, delay + toneDuration, noiseVolume ? delay + .07 : 0);
+                  const durationGap = Math.abs(expectedEnd - .43);
+                  const energy = (volume * seq.length * step) + (toneVolume * toneDuration) + (noiseVolume * .055);
+                  const energyGap = Math.abs(energy - .0026);
+                  const brightnessProxy = toneFreq / 3136;
+                  const brightnessGap = Math.abs(brightnessProxy - 1);
+                  const airProxyGap = noiseVolume ? Math.abs(noiseVolume - .00045) * 130 : .08;
+                  const heuristic = (durationGap * 9) + (energyGap * 900) + (brightnessGap * .14) + airProxyGap + (toneVolume > .0034 ? .025 : 0);
+                  const id = [
+                    'tri',
+                    `s${Math.round(step * 1000)}`,
+                    `v${Math.round(volume * 10000)}`,
+                    `tv${Math.round(toneVolume * 100000)}`,
+                    `td${Math.round(toneDuration * 1000)}`,
+                    `d${Math.round(delay * 1000)}`,
+                    `f${toneFreq}`,
+                    `n${Math.round(noiseVolume * 100000)}`,
+                    `hp${noiseHp}`
+                  ].join('-');
+                  specs.push({
+                    id,
+                    label: `Triangle air neighborhood ${step}/${volume}/${toneVolume}/${toneDuration}/${toneFreq}/${noiseVolume}`,
+                    generated: true,
+                    generator: {
+                      family: 'rms-aware-triangle-air-neighborhood-grid',
+                      heuristic: round(heuristic, 5),
+                      expectedEnd: round(expectedEnd, 3),
+                      expectedEnergy: round(energy, 6),
+                      target: 'Preserve the bright-triangle centroid/band improvement while adding a tiny high-pass air layer for Galaga-like presence energy without RMS drift.',
+                      params: { step, volume, toneVolume, toneDuration, delay, toneFreq, noiseVolume, noiseHp }
+                    },
+                    spec: {
+                      seq,
+                      step,
+                      wave: 'triangle',
+                      volume,
+                      slide: 34,
+                      lpHz: 6600,
+                      tones: [{ freq: toneFreq, duration: toneDuration, wave: 'triangle', volume: toneVolume, slide: 12, lpHz: 7400, delay }],
+                      noise: noiseVolume ? [{ duration: .055, volume: noiseVolume, hp: noiseHp, delay: delay + .018 }] : undefined
+                    }
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return specs
+    .sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id))
+    .slice(0, limit);
+}
+
 function mean(values){
   const numeric = values.filter(value => Number.isFinite(+value)).map(Number);
   return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
+}
+
+function meanBandEnergy(items){
+  const keys = ['sub_500', 'low_mid_500_1500', 'mid_1500_3000', 'presence_3000_6000', 'air_6000_plus'];
+  const band = {};
+  for(const key of keys){
+    band[key] = round(mean(items.map(item => item?.[key])), 4);
+  }
+  return band;
+}
+
+function bandEnergyDelta(active, reference){
+  const keys = ['sub_500', 'low_mid_500_1500', 'mid_1500_3000', 'presence_3000_6000', 'air_6000_plus'];
+  const delta = {};
+  for(const key of keys){
+    delta[key] = round((active?.[key] ?? 0) - (reference?.[key] ?? 0), 4);
+  }
+  return delta;
 }
 
 function stddev(values){
@@ -450,6 +664,8 @@ function aggregateRows(sampleRows){
       burst_share: round(mean(group.map(row => row.comparison.burst_share)), 3)
     };
     const breakdown = riskBreakdown(avgComparison);
+    const activeBandEnergy = meanBandEnergy(group.map(row => row.activeMetrics.band_energy));
+    const referenceBandEnergy = meanBandEnergy(group.map(row => row.referenceMetrics.band_energy));
     rows.push({
       id,
       label: first.baseLabel || first.label,
@@ -477,10 +693,15 @@ function aggregateRows(sampleRows){
         zero_crossings_per_s: round(mean(group.map(row => row.activeMetrics.zero_crossings_per_s)), 1),
         spectral_rolloff_85_hz: round(mean(group.map(row => row.activeMetrics.spectral_rolloff_85_hz)), 1),
         spectral_flatness: round(mean(group.map(row => row.activeMetrics.spectral_flatness)), 4),
+        band_energy: activeBandEnergy,
         attack_peak_position: round(mean(group.map(row => row.activeMetrics.attack_peak_position)), 3),
         decay_ratio: round(mean(group.map(row => row.activeMetrics.decay_ratio)), 3),
         burst_share: round(mean(group.map(row => row.activeMetrics.burst_share)), 3)
       },
+      referenceMetrics: {
+        band_energy: referenceBandEnergy
+      },
+      bandEnergyDelta: bandEnergyDelta(activeBandEnergy, referenceBandEnergy),
       comparison: avgComparison,
       stability: {
         repetitions: group.length,
@@ -497,6 +718,7 @@ function aggregateRows(sampleRows){
         centroidGapHz: row.centroidGapHz,
         rmsGap: row.rmsGap,
         bandShapeGap: row.bandShapeGap,
+        bandEnergyDelta: row.bandEnergyDelta,
         envelopeShapeGap: row.envelopeShapeGap
       }))
     });
@@ -699,6 +921,7 @@ async function main(){
         clamp((+comparison.burst_share || 0) / .5, 0, 1)
       ]), 3),
       activeMetrics: item.variants.aurora.activeMetrics,
+      referenceMetrics: item.variants.reference.activeMetrics,
       comparison
     };
   }).sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
@@ -716,12 +939,7 @@ async function main(){
     cue: CUE,
     repetitions: repeats,
     candidateFilter: filter.size ? [...filter].sort() : null,
-    generator: gridLimit() ? {
-      family: 'quiet-held-grid',
-      limit: gridLimit(),
-      selectedCandidates: rows.filter(row => row.generated).length,
-      controls: 'Use --grid-limit=N for bounded parametric generation and --candidate-ids for focused stability reruns.'
-    } : null,
+    generator: generatorSummary(rows),
     problem: 'Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.',
     strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift. The comparison now includes spectral band-shape, rolloff, and envelope segmentation so future searches can target timbre instead of only duration and centroid.',
     successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS or band-shape gap, and keep active duration within 0.08s of the reference.',
@@ -738,7 +956,9 @@ async function main(){
     decision,
     nextStep: decision.keep
       ? 'Promote the recommended cue spec into the Aurora application audio theme, then run the full audio theme comparison and event-gap analysis.'
-      : 'Expand the candidate generator around the best measured direction instead of manually changing the game pack.'
+      : segmentedGridLimit()
+        ? 'Use the segmented-family result to retune onset/body/tail synthesis parameters, then run another bounded segmented sweep before changing runtime audio.'
+        : 'Expand the candidate generator around the best measured direction instead of manually changing the game pack.'
   };
   fs.writeFileSync(path.join(outRoot, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(path.join(outRoot, 'README.md'), markdown(report));

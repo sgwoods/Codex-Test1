@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T18-19-46-414Z-93176",
-  "startedAt": "2026-05-08T18:19:46.414Z",
-  "endedAt": "2026-05-08T18:20:29.523Z",
+  "id": "2026-05-08T18-32-38-103Z-4562",
+  "startedAt": "2026-05-08T18:32:38.103Z",
+  "endedAt": "2026-05-08T18:33:19.168Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "f46b630",
+  "commit": "17ce604",
   "command": [
     "npm",
     "run",
     "harness:analyze:aurora-challenge-perfect-candidates",
     "--",
-    "--grid-limit=48"
+    "--triangle-grid-limit=48"
   ],
   "axes": [
     "audio",
@@ -21,13 +21,13 @@
     "cpu",
     "browser"
   ],
-  "notes": "Challenge Perfect timbre envelope segmented grid sweep",
+  "notes": "Challenge Perfect triangle air band-energy sweep",
   "measurement": {
-    "wallSeconds": 43.109,
-    "timeRealSeconds": 43.1,
-    "timeUserSeconds": 66.12,
-    "timeSystemSeconds": 8.86,
-    "cpuSeconds": 74.98,
+    "wallSeconds": 41.065,
+    "timeRealSeconds": 41.06,
+    "timeUserSeconds": 61.26,
+    "timeSystemSeconds": 8.29,
+    "cpuSeconds": 69.55,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -49,8 +49,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 299391000,
-    "artifactBytesAfter": 303213818,
-    "artifactBytesDelta": 3822818
+    "artifactBytesBefore": 310928999,
+    "artifactBytesAfter": 314724735,
+    "artifactBytesDelta": 3795736
   }
 }
