@@ -670,7 +670,13 @@ window.__galagaHarness__={
   const cueName=String(opts.name||'__candidateCue').trim()||'__candidateCue';
   const originalCueDef=sfx.cueDef;
   sfx.cueDef=function(name,cueOpts={}){
-   if(String(name)===cueName)return spec;
+   if(String(name)===cueName){
+    const atmosphere=typeof this.resolveAtmosphere==='function'
+     ? this.resolveAtmosphere(cueOpts||{})
+     : {id:'candidate',audioTheme:'candidate',phase:String(cueOpts?.phase||'stage')};
+    if(typeof this.recordCue==='function')this.recordCue(cueName,atmosphere,cueOpts||{},spec);
+    return spec;
+   }
    return originalCueDef.call(this,name,cueOpts);
   };
   try{

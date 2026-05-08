@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "artifact_type": "conformance-investment-priorities",
+  "generatedAt": "2026-05-08T17:30:41.501Z",
+  "commit": "5954866",
+  "evidence": {
+    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json",
+    "audioEventGapReport": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-cfa8497-dirty/report.json",
+    "audioCueCandidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-5954866-dirty/challengePerfect/report.json",
+    "opportunityReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-72e823c/report.json",
+    "levelArcReport": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json",
+    "stage14SweepReport": "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-08-fdcefbe/report.json",
+    "economicsReport": "reference-artifacts/analyses/conformance-economics/2026-05-08-e49e7ac/report.json",
+    "ledger": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl"
+  },
+  "problem": "Next work should be chosen by expected impact on the whole-game conformance score, not only by whichever local metric was most recently inspected.",
+  "strategy": "Rank candidates by weighted overall-score lift, current gap, confidence, reuse, risk, and measured compute history.",
+  "successMeasure": "Before long compute cycles, the selected work should have an explicit investment score and a measurable target/guardrail profile.",
+  "summary": {
+    "overallScore10": 9.3,
+    "weakestCategory": "audio",
+    "topCandidate": {
+      "id": "audio-reference-segmentation",
+      "label": "Tighten audio reference segmentation and cue matching",
+      "category": {
+        "id": "audio",
+        "label": "Audio identity and cue alignment",
+        "score10": 7.9,
+        "gap10": 2.1,
+        "equalOverallWeight": 0.091
+      },
+      "expectedLift10": 0.7,
+      "expectedOverallLift10": 0.064,
+      "confidence": 0.72,
+      "reuse": 0.9,
+      "risk": 0.28,
+      "costClass": "high",
+      "investmentScore": 2.9,
+      "measuredComputeHistory": {
+        "runs": 4,
+        "wallSeconds": 256.155,
+        "cpuSeconds": 294.37
+      },
+      "rationale": "Audio is still the weakest quality category. Semantic measurement debt is reduced, and the Challenge Perfect candidate loop now shows no safe keeper yet; measured-best thin-bright-square-quiet-held should guide the next generator pass.",
+      "nextAction": "Continue Challenge Perfect candidate generation around thin-bright-square-quiet-held; the latest sweep found no safe keeper, so do not promote a runtime cue yet."
+    }
+  },
+  "candidates": [
+    {
+      "id": "audio-reference-segmentation",
+      "label": "Tighten audio reference segmentation and cue matching",
+      "category": {
+        "id": "audio",
+        "label": "Audio identity and cue alignment",
+        "score10": 7.9,
+        "gap10": 2.1,
+        "equalOverallWeight": 0.091
+      },
+      "expectedLift10": 0.7,
+      "expectedOverallLift10": 0.064,
+      "confidence": 0.72,
+      "reuse": 0.9,
+      "risk": 0.28,
+      "costClass": "high",
+      "investmentScore": 2.9,
+      "measuredComputeHistory": {
+        "runs": 4,
+        "wallSeconds": 256.155,
+        "cpuSeconds": 294.37
+      },
+      "rationale": "Audio is still the weakest quality category. Semantic measurement debt is reduced, and the Challenge Perfect candidate loop now shows no safe keeper yet; measured-best thin-bright-square-quiet-held should guide the next generator pass.",
+      "nextAction": "Continue Challenge Perfect candidate generation around thin-bright-square-quiet-held; the latest sweep found no safe keeper, so do not promote a runtime cue yet."
+    },
+    {
+      "id": "level-arc-opportunity-coverage",
+      "label": "Tighten level-arc opportunity coverage and late reward reads",
+      "category": {
+        "id": "level-arc",
+        "label": "Level arc and encounter shape",
+        "score10": 8.5,
+        "gap10": 1.5,
+        "equalOverallWeight": 0.091
+      },
+      "expectedLift10": 0.24,
+      "expectedOverallLift10": 0.022,
+      "confidence": 0.86,
+      "reuse": 0.95,
+      "risk": 0.18,
+      "costClass": "low",
+      "investmentScore": 1.92,
+      "measuredComputeHistory": {
+        "runs": 31,
+        "wallSeconds": 217.712,
+        "cpuSeconds": 351.01
+      },
+      "rationale": "The Stage 12 and Stage 14 learned reward routes are now credited; the Stage 14 sweep found 7 natural special-bonus routes, opportunity readiness is 6.7/10, and the next gap is stage-1-baseline-missing-event-coverage.",
+      "nextAction": "Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning."
+    },
+    {
+      "id": "stage4-pressure-exact-replay",
+      "label": "Improve Stage 4 pressure exact replay",
+      "category": {
+        "id": "level-arc",
+        "label": "Level arc and encounter shape",
+        "score10": 8.5,
+        "gap10": 1.5,
+        "equalOverallWeight": 0.091
+      },
+      "expectedLift10": 0.35,
+      "expectedOverallLift10": 0.032,
+      "confidence": 0.74,
+      "reuse": 0.82,
+      "risk": 0.32,
+      "costClass": "medium",
+      "investmentScore": 1.73,
+      "measuredComputeHistory": {
+        "runs": 28,
+        "wallSeconds": 769.422,
+        "cpuSeconds": 1111.38
+      },
+      "rationale": "Level-arc pressure replay coverage remains a weak submetric, but prior cycles were more compute-heavy than the Stage 12 loop.",
+      "nextAction": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics."
+    },
+    {
+      "id": "stage1-timing-polish",
+      "label": "Stage 1 opening timing polish",
+      "category": {
+        "id": "stage1-timing",
+        "label": "Stage-1 opening timing fidelity",
+        "score10": 8.5,
+        "gap10": 1.5,
+        "equalOverallWeight": 0.091
+      },
+      "expectedLift10": 0.18,
+      "expectedOverallLift10": 0.016,
+      "confidence": 0.8,
+      "reuse": 0.62,
+      "risk": 0.22,
+      "costClass": "medium",
+      "investmentScore": 0.86,
+      "measuredComputeHistory": {
+        "runs": 4,
+        "wallSeconds": 256.155,
+        "cpuSeconds": 294.37
+      },
+      "rationale": "Stage 1 timing is a visible gap, but its current score is already reasonably high and the likely overall-score lift is smaller.",
+      "nextAction": "Defer until higher-gap audio and level-arc candidates have been exercised."
+    },
+    {
+      "id": "ui-graphics-polish",
+      "label": "UI/graphics shell polish",
+      "category": {
+        "id": "ui-shell",
+        "label": "UI, shell, and graphics integrity",
+        "score10": 9.2,
+        "gap10": 0.8,
+        "equalOverallWeight": 0.091
+      },
+      "expectedLift10": 0.12,
+      "expectedOverallLift10": 0.011,
+      "confidence": 0.68,
+      "reuse": 0.54,
+      "risk": 0.24,
+      "costClass": "medium",
+      "investmentScore": 0.45,
+      "measuredComputeHistory": {
+        "runs": 4,
+        "wallSeconds": 256.155,
+        "cpuSeconds": 294.37
+      },
+      "rationale": "Graphics integrity is important, but the current shell score is high; visual reference work should be planned after higher-gap axes.",
+      "nextAction": "Defer unless new ingestion evidence reveals a larger graphics-conformance gap."
+    }
+  ],
+  "interpretation": "Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now 0 attention rows, and the latest Challenge Perfect candidate decision is no-keeper. If the next cycle stays in level-arc instead, the immediate level-arc task is stage-1-baseline-missing-event-coverage."
+}

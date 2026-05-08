@@ -93,7 +93,16 @@ function latestLevelArcCategory(quality, levelArcReport){
   });
 }
 
-function nextAudioAction(audioEventGap){
+function nextAudioAction(audioEventGap, audioCueCandidate){
+  if(audioCueCandidate?.cue === 'challengePerfect'){
+    const decision = audioCueCandidate.decision || {};
+    if(decision.keep && decision.best){
+      return `Promote the measured Challenge Perfect candidate ${decision.best}, then rerun full audio comparison, event-gap analysis, and quality scoring.`;
+    }
+    if(decision.measuredBest){
+      return `Continue Challenge Perfect candidate generation around ${decision.measuredBest}; the latest sweep found no safe keeper, so do not promote a runtime cue yet.`;
+    }
+  }
   const nextStep = audioEventGap?.nextStep;
   if(nextStep) return nextStep;
   const highest = audioEventGap?.summary?.highestRiskLabel || audioEventGap?.summary?.highestRiskCue || '';
@@ -101,8 +110,12 @@ function nextAudioAction(audioEventGap){
   return 'Rerun audio comparison and semantic event-gap analysis, then tune the highest-risk runtime cue.';
 }
 
-function audioRationale(audioEventGap){
+function audioRationale(audioEventGap, audioCueCandidate){
   const summary = audioEventGap?.summary || {};
+  const decision = audioCueCandidate?.decision || null;
+  if(audioCueCandidate?.cue === 'challengePerfect' && decision && decision.keep === false){
+    return `Audio is still the weakest quality category. Semantic measurement debt is reduced, and the Challenge Perfect candidate loop now shows no safe keeper yet; measured-best ${decision.measuredBest || 'candidate'} should guide the next generator pass.`;
+  }
   if(Number.isFinite(+summary.semanticAverageScore10) && +summary.semanticAttentionCueCount === 0){
     return `Audio is still the weakest quality category, but semantic measurement debt is now reduced: semantic event score is ${summary.semanticAverageScore10}/10, semantic attention rows are ${summary.semanticAttentionCueCount}, and the highest runtime cue risk is ${summary.highestRiskLabel || summary.highestRiskCue}.`;
   }
@@ -197,12 +210,14 @@ function main(){
   const opportunityPath = latestReport('level-arc-opportunity-windows');
   const levelArcPath = latestReport('level-arc-conformance');
   const audioEventGapPath = latestReport('aurora-audio-event-gap');
+  const audioCueCandidatePath = latestReport('aurora-audio-cue-candidates');
   const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {} };
   const levelArcReport = levelArcPath ? readJson(levelArcPath) : { summary: {} };
   const audioEventGap = audioEventGapPath ? readJson(audioEventGapPath) : { summary: {} };
+  const audioCueCandidate = audioCueCandidatePath ? readJson(audioCueCandidatePath) : null;
   const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
   const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
@@ -225,8 +240,8 @@ function main(){
       risk: 0.28,
       costClass: 'high',
       computeAxis: 'quality-score',
-      rationale: audioRationale(audioEventGap),
-      nextAction: nextAudioAction(audioEventGap)
+      rationale: audioRationale(audioEventGap, audioCueCandidate),
+      nextAction: nextAudioAction(audioEventGap, audioCueCandidate)
     }),
     buildCandidate({
       id: 'level-arc-opportunity-coverage',
@@ -304,6 +319,7 @@ function main(){
     evidence: {
       qualityReport: rel(qualityPath),
       audioEventGapReport: audioEventGapPath ? rel(audioEventGapPath) : null,
+      audioCueCandidateReport: audioCueCandidatePath ? rel(audioCueCandidatePath) : null,
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
       levelArcReport: levelArcPath ? rel(levelArcPath) : null,
       stage14SweepReport: stage14SweepPath ? rel(stage14SweepPath) : null,
@@ -319,7 +335,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, so the next audio task is ${audioEventGap.summary?.highestRiskLabel || audioEventGap.summary?.highestRiskCue || 'the highest-risk runtime cue'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
+    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, and the latest Challenge Perfect candidate decision is ${audioCueCandidate?.decision?.status || 'not yet run'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));

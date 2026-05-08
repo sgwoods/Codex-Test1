@@ -1,28 +1,32 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T17-14-03-471Z-70308",
-  "startedAt": "2026-05-08T17:14:03.471Z",
-  "endedAt": "2026-05-08T17:14:03.471Z",
+  "id": "2026-05-08T17-29-28-913Z-75640",
+  "startedAt": "2026-05-08T17:29:28.913Z",
+  "endedAt": "2026-05-08T17:29:40.180Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "fe6137c",
+  "commit": "5954866",
   "command": [
-    "manual:model-usage"
+    "npm",
+    "run",
+    "harness:analyze:aurora-challenge-perfect-candidates"
   ],
   "axes": [
-    "conformance-economics"
+    "audio",
+    "conformance-loop"
   ],
   "resources": [
-    "codex",
-    "model-api"
+    "cpu",
+    "browser",
+    "codex"
   ],
-  "notes": "Manual Codex app usage snapshot from settings screen for GPU-equivalent accounting",
+  "notes": "Challenge Perfect quiet held-square refinement sweep",
   "measurement": {
-    "wallSeconds": 0,
-    "timeRealSeconds": null,
-    "timeUserSeconds": null,
-    "timeSystemSeconds": null,
-    "cpuSeconds": 0,
+    "wallSeconds": 11.267,
+    "timeRealSeconds": 11.26,
+    "timeUserSeconds": 16.77,
+    "timeSystemSeconds": 2.65,
+    "cpuSeconds": 19.42,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -30,22 +34,22 @@
   "resourcesDeclared": {
     "gpuMode": null,
     "gpuSeconds": null,
-    "modelProvider": "openai",
-    "modelName": "codex-app",
+    "modelProvider": null,
+    "modelName": null,
     "modelCalls": 0,
     "inputTokens": 0,
     "outputTokens": 0,
     "modelMinutes": 0,
-    "codexUsage5hLeftPercent": 92,
-    "codexUsageWeekLeftPercent": 86,
-    "codexModel5hLeftPercent": 100,
-    "codexModelWeekLeftPercent": 100,
-    "usageReset": "2026-05-08 15:52",
-    "weeklyReset": "2026-05-11"
+    "codexUsage5hLeftPercent": null,
+    "codexUsageWeekLeftPercent": null,
+    "codexModel5hLeftPercent": null,
+    "codexModelWeekLeftPercent": null,
+    "usageReset": null,
+    "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 287174908,
-    "artifactBytesAfter": 287174908,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 288841941,
+    "artifactBytesAfter": 288946137,
+    "artifactBytesDelta": 104196
   }
 }

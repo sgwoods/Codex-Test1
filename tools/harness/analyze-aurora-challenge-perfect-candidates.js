@@ -94,6 +94,31 @@ function candidateSpecs(){
       spec: { seq: [784, 1175, 1568, 2093, 2794], step: .048, wave: 'triangle', volume: .0094, slide: 26, lpHz: 6500, tones: [{ freq: 3136, duration: .11, wave: 'square', volume: .0032, slide: 8, lpHz: 7600, delay: .192 }] }
     },
     {
+      id: 'thin-bright-square-held',
+      label: 'Thin bright square held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .049, wave: 'triangle', volume: .0088, slide: 24, lpHz: 6500, tones: [{ freq: 3136, duration: .145, wave: 'square', volume: .0027, slide: 4, lpHz: 7600, delay: .192 }] }
+    },
+    {
+      id: 'thin-bright-square-soft-held',
+      label: 'Thin bright square soft held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .05, wave: 'triangle', volume: .0082, slide: 22, lpHz: 6400, tones: [{ freq: 3136, duration: .15, wave: 'square', volume: .0022, slide: 0, lpHz: 7400, delay: .19 }] }
+    },
+    {
+      id: 'thin-bright-square-quiet-held',
+      label: 'Thin bright square quiet held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .049, wave: 'triangle', volume: .0058, slide: 22, lpHz: 6500, tones: [{ freq: 3136, duration: .145, wave: 'square', volume: .00145, slide: 0, lpHz: 7600, delay: .192 }] }
+    },
+    {
+      id: 'thin-bright-square-micro-held',
+      label: 'Thin bright square micro held',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .049, wave: 'triangle', volume: .0042, slide: 22, lpHz: 6500, tones: [{ freq: 3136, duration: .145, wave: 'square', volume: .001, slide: 0, lpHz: 7600, delay: .192 }] }
+    },
+    {
+      id: 'thin-bright-square-quiet-tail',
+      label: 'Thin bright square quiet tail',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .049, wave: 'triangle', volume: .005, slide: 22, lpHz: 6500, tones: [{ freq: 3136, duration: .11, wave: 'square', volume: .00125, slide: 0, lpHz: 7600, delay: .192 }, { freq: 2794, duration: .05, wave: 'triangle', volume: .0008, slide: 0, lpHz: 6500, delay: .29 }] }
+    },
+    {
       id: 'high-square-stair',
       label: 'High square stair',
       spec: { seq: [932, 1245, 1661, 2217, 2960], step: .047, wave: 'square', volume: .0076, slide: 16, lpHz: 5600, tones: [{ freq: 3520, duration: .105, wave: 'triangle', volume: .0028, slide: 8, lpHz: 7000, delay: .188 }] }
@@ -114,9 +139,39 @@ function candidateSpecs(){
       spec: { seq: [784, 1175, 1568, 2093, 2794], step: .048, wave: 'triangle', volume: .0088, slide: 24, lpHz: 6200, tones: [{ freq: 3520, duration: .1, wave: 'sine', volume: .0026, slide: 0, lpHz: 7600, delay: .19 }], noise: [{ duration: .045, volume: .0011, hp: 3800, delay: .21 }] }
     },
     {
+      id: 'sparkle-low-rms',
+      label: 'Sparkle low RMS',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .048, wave: 'triangle', volume: .0077, slide: 24, lpHz: 6400, tones: [{ freq: 3520, duration: .092, wave: 'sine', volume: .002, slide: 0, lpHz: 7600, delay: .19 }], noise: [{ duration: .034, volume: .00045, hp: 4200, delay: .21 }] }
+    },
+    {
+      id: 'sparkle-low-rms-square-edge',
+      label: 'Sparkle low RMS square edge',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .048, wave: 'triangle', volume: .0075, slide: 24, lpHz: 6400, tones: [{ freq: 3520, duration: .082, wave: 'square', volume: .0015, slide: 0, lpHz: 7600, delay: .19 }], noise: [{ duration: .024, volume: .00028, hp: 4200, delay: .212 }] }
+    },
+    {
+      id: 'sparkle-low-rms-centered-zcr',
+      label: 'Sparkle low RMS centered ZCR',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .048, wave: 'triangle', volume: .0076, slide: 24, lpHz: 6400, tones: [{ freq: 3520, duration: .09, wave: 'triangle', volume: .0018, slide: 0, lpHz: 7600, delay: .19 }, { freq: 3136, duration: .05, wave: 'square', volume: .0009, slide: 0, lpHz: 7200, delay: .235 }], noise: [{ duration: .024, volume: .00025, hp: 4200, delay: .212 }] }
+    },
+    {
+      id: 'sparkle-short-tail',
+      label: 'Sparkle short tail',
+      spec: { seq: [784, 1175, 1568, 2093, 2794], step: .045, wave: 'triangle', volume: .008, slide: 20, lpHz: 6600, tones: [{ freq: 3520, duration: .07, wave: 'sine', volume: .0021, slide: 0, lpHz: 7800, delay: .18 }], noise: [{ duration: .026, volume: .00035, hp: 4400, delay: .198 }] }
+    },
+    {
       id: 'low-rms-harmonic',
       label: 'Low RMS harmonic',
       spec: { seq: [698, 1047, 1397, 2093, 3136], step: .05, wave: 'triangle', volume: .0082, slide: 36, lpHz: 7000, tones: [{ freq: 4186, duration: .1, wave: 'triangle', volume: .0028, slide: 12, lpHz: 8000, delay: .2 }] }
+    },
+    {
+      id: 'low-rms-brighter',
+      label: 'Low RMS brighter',
+      spec: { seq: [784, 1047, 1397, 2093, 3136], step: .048, wave: 'triangle', volume: .0078, slide: 32, lpHz: 7400, tones: [{ freq: 4186, duration: .088, wave: 'triangle', volume: .0022, slide: 6, lpHz: 8200, delay: .192 }] }
+    },
+    {
+      id: 'low-rms-square-edge',
+      label: 'Low RMS square edge',
+      spec: { seq: [784, 1047, 1397, 2093, 3136], step: .048, wave: 'triangle', volume: .0072, slide: 28, lpHz: 6900, tones: [{ freq: 3520, duration: .078, wave: 'square', volume: .0017, slide: 0, lpHz: 7600, delay: .188 }] }
     }
   ];
 }
@@ -146,33 +201,56 @@ function riskFromComparison(comparison){
 function decisionFor(rows){
   const baseline = rows.find(row => row.id === 'baseline-current');
   const candidates = rows.filter(row => row.id !== 'baseline-current');
-  const best = candidates
-    .filter(row => row.durationGapSeconds <= .08)
-    .sort((a, b) => a.risk10 - b.risk10 || a.rmsGap - b.rmsGap || a.centroidGapHz - b.centroidGapHz)[0] || null;
-  if(!baseline || !best){
+  if(!baseline){
     return {
       status: 'no-keeper',
       keep: false,
-      baseline: baseline?.id || null,
-      best: best?.id || null,
-      reason: 'No candidate preserved Challenge Perfect duration closely enough to be considered.'
+      baseline: null,
+      best: null,
+      measuredBest: null,
+      reason: 'Baseline Challenge Perfect row was not captured.'
     };
   }
+  const measuredBest = candidates
+    .filter(row => row.durationGapSeconds <= .08)
+    .sort((a, b) => a.risk10 - b.risk10 || a.rmsGap - b.rmsGap || a.centroidGapHz - b.centroidGapHz)[0] || null;
+  const gated = candidates
+    .filter(row => row.durationGapSeconds <= .08)
+    .map(row => {
+      const riskDelta = round(baseline.risk10 - row.risk10, 3);
+      const centroidDelta = round(baseline.centroidGapHz - row.centroidGapHz, 1);
+      const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
+      return { row, riskDelta, centroidDelta, rmsDelta };
+    })
+    .filter(item => item.riskDelta >= .25 && item.centroidDelta > 0 && item.rmsDelta >= -.01)
+    .sort((a, b) => b.riskDelta - a.riskDelta || b.centroidDelta - a.centroidDelta || b.rmsDelta - a.rmsDelta);
+  const selected = gated[0] || null;
+  if(!selected){
+    return {
+      status: 'no-keeper',
+      keep: false,
+      baseline: baseline.id,
+      best: null,
+      measuredBest: measuredBest?.id || null,
+      reason: measuredBest
+        ? 'The lowest-risk candidate did not clear all keeper gates, and no other candidate did either.'
+        : 'No candidate preserved Challenge Perfect duration closely enough to be considered.'
+    };
+  }
+  const best = selected.row;
   const riskDelta = round(baseline.risk10 - best.risk10, 3);
   const centroidDelta = round(baseline.centroidGapHz - best.centroidGapHz, 1);
   const rmsDelta = round(baseline.rmsGap - best.rmsGap, 4);
-  const keep = riskDelta >= .25 && centroidDelta > 0 && rmsDelta >= -.01 && best.durationGapSeconds <= .08;
   return {
-    status: keep ? 'candidate-recommended' : 'no-keeper',
-    keep,
+    status: 'candidate-recommended',
+    keep: true,
     baseline: baseline.id,
     best: best.id,
+    measuredBest: measuredBest?.id || null,
     riskDelta,
     centroidDelta,
     rmsDelta,
-    reason: keep
-      ? 'Best candidate reduces measured risk and centroid gap while preserving duration.'
-      : 'The best candidate did not clear the minimum risk and centroid improvement gate.'
+    reason: 'Selected candidate clears risk, centroid, RMS, and duration gates. The measured-lowest-risk candidate is tracked separately so the next sweep can still learn from it.'
   };
 }
 
@@ -215,6 +293,15 @@ function markdown(report){
 }
 
 async function captureCue(page, row, opts){
+  await page.evaluate(() => {
+    try{
+      if(typeof sfx !== 'undefined' && typeof sfx.stopReferenceClips === 'function') sfx.stopReferenceClips();
+      if(window.__platinumAudioDebug){
+        window.__platinumAudioDebug.lastCue = null;
+        window.__platinumAudioDebug.history = [];
+      }
+    }catch{}
+  });
   if(row.baseline){
     return await page.evaluate(async payload => {
       return await window.__galagaHarness__.captureAudioCue(payload.cue, payload.opts);
@@ -223,7 +310,7 @@ async function captureCue(page, row, opts){
   return await page.evaluate(async payload => {
     return await window.__galagaHarness__.captureAudioCueSpec(payload.spec, payload.opts);
   }, {
-    spec: row.spec,
+    spec: Object.assign({}, row.spec, { syntheticCandidateId: row.id }),
     opts: { ...opts, name: `__candidate_${row.id}` }
   });
 }
