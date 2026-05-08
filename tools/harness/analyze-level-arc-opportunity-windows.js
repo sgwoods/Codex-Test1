@@ -8,7 +8,8 @@ const SOURCE_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-l
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-arc-opportunity-windows');
 
 const OUTCOME_SKILL_ROUTE_MAP = Object.freeze({
-  'late-run-cleanup-or-failure': ['late-run-natural-squadron-reward']
+  'late-run-cleanup-or-failure': ['late-run-natural-squadron-reward'],
+  'late-run-escort-variant': ['late-run-natural-escort-reward']
 });
 
 function ensureDir(dir){

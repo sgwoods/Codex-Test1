@@ -1,0 +1,20 @@
+{
+  "name": "stage14-natural-escort-reward",
+  "seed": 14014,
+  "duration": 24,
+  "config": {
+    "stage": 14,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.45, "action": "down", "code": "Space" },
+    { "t": 0.65, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.7, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.71, "action": "down", "code": "ArrowRight" },
+    { "t": 3.36, "action": "up", "code": "ArrowRight" },
+    { "t": 4.55, "action": "down", "code": "ArrowLeft" },
+    { "t": 5.65, "action": "up", "code": "ArrowLeft" },
+    { "t": 23.5, "action": "up", "code": "Space" }
+  ]
+}

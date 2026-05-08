@@ -158,10 +158,14 @@ function main(){
   const qualityPath = latestReport('quality-conformance');
   if(!qualityPath) throw new Error('Missing quality-conformance report; run npm run harness:score:quality-conformance first.');
   const opportunityPath = latestReport('level-arc-opportunity-windows');
+  const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {} };
+  const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
+  const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
+  const nextOpportunityId = opportunity.summary?.highestPriorityOpportunity?.id || 'missing level-arc opportunity coverage';
 
   const audio = categoryById(quality, 'audio');
   const levelArc = categoryById(quality, 'level-arc');
@@ -195,8 +199,12 @@ function main(){
       risk: 0.18,
       costClass: 'low',
       computeAxis: 'conformance-loop',
-      rationale: `The Stage 12 learned reward route is now credited; opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gaps are ${opportunity.summary?.highestPriorityOpportunity?.id || 'missing level-arc opportunity coverage'} plus late reward thinness outside the Stage 12 route.`,
-      nextAction: 'Widen mid-run/late-run evidence coverage and add a Stage 14 reward-route probe before changing gameplay tuning.'
+      rationale: stage14SpecialRoutes
+        ? `The Stage 12 and Stage 14 learned reward routes are now credited; the Stage 14 sweep found ${stage14SpecialRoutes} natural special-bonus routes, opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gap is ${nextOpportunityId}.`
+        : `The Stage 12 learned reward route is now credited; opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gaps are ${nextOpportunityId} plus late reward thinness outside the Stage 12 route.`,
+      nextAction: stage14SpecialRoutes
+        ? 'Promote mid-run pressure event coverage by widening the Stage 6 evidence window for flank-dive and wave-clear semantics before changing gameplay tuning.'
+        : 'Widen mid-run/late-run evidence coverage and add a Stage 14 reward-route probe before changing gameplay tuning.'
     }),
     buildCandidate({
       id: 'stage4-pressure-exact-replay',
@@ -257,6 +265,7 @@ function main(){
     evidence: {
       qualityReport: rel(qualityPath),
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
+      stage14SweepReport: stage14SweepPath ? rel(stage14SweepPath) : null,
       economicsReport: economicsPath ? rel(economicsPath) : null,
       ledger: rel(LEDGER)
     },
@@ -269,7 +278,9 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: 'Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment, but the immediate level-arc task has shifted from Stage 12 reward discovery to better opportunity coverage and Stage 14 reward-route evidence.'
+    interpretation: stage14SpecialRoutes
+      ? 'Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment; Stage 12 and Stage 14 reward-route uncertainty has been reduced, so the immediate level-arc task is now mid-run pressure event coverage.'
+      : 'Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment, but the immediate level-arc task has shifted from Stage 12 reward discovery to better opportunity coverage and Stage 14 reward-route evidence.'
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
