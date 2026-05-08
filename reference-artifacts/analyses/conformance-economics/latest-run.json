@@ -1,35 +1,37 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T12-35-16-521Z-97061",
-  "startedAt": "2026-05-08T12:35:16.521Z",
-  "endedAt": "2026-05-08T12:35:16.712Z",
+  "id": "2026-05-08T13-48-56-678Z-13502",
+  "startedAt": "2026-05-08T13:48:56.678Z",
+  "endedAt": "2026-05-08T13:49:00.168Z",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "commit": "96c62d6",
+  "commit": "fee8820",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-audio-event-gap"
+    "harness:analyze:aurora-visual-look-conformance"
   ],
   "axes": [
-    "audio"
+    "visual-look"
   ],
   "resources": [
-    "cpu"
+    "cpu",
+    "browser",
+    "gpu"
   ],
-  "notes": "Aurora audio event-gap analysis after restoring accepted challenge-perfect baseline",
+  "notes": "First Aurora visual look conformance scorer baseline",
   "measurement": {
-    "wallSeconds": 0.191,
-    "timeRealSeconds": 0.18,
-    "timeUserSeconds": 0.13,
-    "timeSystemSeconds": 0.06,
-    "cpuSeconds": 0.19,
+    "wallSeconds": 3.49,
+    "timeRealSeconds": 3.48,
+    "timeUserSeconds": 2.52,
+    "timeSystemSeconds": 0.91,
+    "cpuSeconds": 3.43,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
   },
   "resourcesDeclared": {
-    "gpuMode": null,
+    "gpuMode": "expected-visual-review",
     "gpuSeconds": null,
     "modelProvider": null,
     "modelName": null,
@@ -38,8 +40,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 256172092,
-    "artifactBytesAfter": 256172026,
-    "artifactBytesDelta": -66
+    "artifactBytesBefore": 261034077,
+    "artifactBytesAfter": 261034073,
+    "artifactBytesDelta": -4
   }
 }

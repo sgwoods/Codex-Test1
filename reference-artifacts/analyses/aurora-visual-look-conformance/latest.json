@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-visual-look-conformance",
+  "generatedAt": "2026-05-08T13:48:56.843Z",
+  "commit": "fee8820",
+  "branch": "codex/macbook-pro-level-arc-long-cycle",
+  "dirty": true,
+  "problem": "Aurora visual look and feel was previously a low-confidence planning estimate with no dedicated scorer.",
+  "strategy": "Capture representative browser surfaces and score objective visual-readability, layout-containment, palette, contrast, text-overflow, and evidence-coverage metrics.",
+  "measurementLimits": [
+    "This first pass scores measurable browser/UI evidence, not arcade-authentic sprite art quality.",
+    "Reference Galaga/Galaga-family visual contact sheets are not yet fully linked as numeric targets.",
+    "GPU usage is currently inferred as an expected resource for future visual analysis, not directly measured by this script."
+  ],
+  "groundingBestCase": "Best case is a reference-backed visual scorer comparing Aurora and Galaga-family contact sheets for start/attract, gameplay, score, popup, and game-over surfaces.",
+  "summary": {
+    "score10": 8.62,
+    "confidence": "medium-low",
+    "resolution": "first-pass browser screenshot and DOM/canvas metric scorer",
+    "evidenceCoverage": 1,
+    "surfaceCount": 4,
+    "overflowCount": 4,
+    "frameContainmentAverage": 1,
+    "weakestSurface": {
+      "id": "settings",
+      "label": "Developer/settings popup surface",
+      "score10": 7.05
+    }
+  },
+  "surfaces": [
+    {
+      "id": "frontDoor",
+      "label": "Front door / attract shell",
+      "image": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/screenshots/frontDoor.png",
+      "score10": 8.16,
+      "layout": {
+        "visibleElementCount": 77,
+        "textElementCount": 69,
+        "textCharacterCount": 1380,
+        "longestText": "AURORA GALACTICA WAIT MODE AURORA BOREALIS STAGES SUPER BOSSES PARTNER WINGS PRESS ENTER TO START LOCAL SCORES ACTIVE ONLINE LEADERBOARD UNAVAILABLE AUTO DEMO IN PROGRESS HIGH SCORES NEXT ARROWS OR A/Z LEFT D/C RIGHT SPACE FIRE P PAUSE F FULLSCREEN U ULTRA SCALE ⚙ DEV TOOLS CHOOSE GAME TO SWITCH CABINETS PLATINUM RELEASE 1 GALAXY GUARDIANS PREVIEW AVAILABLE IN CHOOSE GAME",
+        "overflowCount": 1,
+        "overflow": [
+          {
+            "id": "cabinetLeftFrame",
+            "tag": "div",
+            "text": "🚀 CHOOSE GAME",
+            "widthDelta": 20,
+            "heightDelta": 0
+          }
+        ],
+        "buttonCount": 53,
+        "frame": {
+          "left": 358,
+          "top": 119,
+          "right": 924,
+          "bottom": 845,
+          "width": 566,
+          "height": 726
+        },
+        "canvas": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 940,
+          "width": 1280,
+          "height": 940
+        },
+        "statusPanels": {
+          "left": 995,
+          "top": 135,
+          "right": 995,
+          "bottom": 135,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "canvas": {
+        "width": 1280,
+        "height": 940,
+        "samples": 300800,
+        "quantizedColorCount": 125,
+        "nonDarkRatio": 0.0248,
+        "brightRatio": 0.0007,
+        "saturatedRatio": 0.001,
+        "luminanceP10": 0,
+        "luminanceP90": 8.7204,
+        "contrastSpread": 8.7204,
+        "activeLuminanceP10": 24.16,
+        "activeLuminanceP90": 47.5652,
+        "activeContrastSpread": 23.4052
+      }
+    },
+    {
+      "id": "gameplay",
+      "label": "Stage 1 gameplay readability",
+      "image": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/screenshots/gameplay.png",
+      "score10": 9.05,
+      "layout": {
+        "visibleElementCount": 58,
+        "textElementCount": 50,
+        "textCharacterCount": 621,
+        "longestText": "🧑‍🚀 SIGN IN PILOT OFFLINE ℹ 🕹 🎞 🏆 🐞 🔊 ⏸ ⚙",
+        "overflowCount": 1,
+        "overflow": [
+          {
+            "id": "cabinetLeftFrame",
+            "tag": "div",
+            "text": "🚀 CHOOSE GAME",
+            "widthDelta": 20,
+            "heightDelta": 0
+          }
+        ],
+        "buttonCount": 35,
+        "frame": {
+          "left": 358,
+          "top": 119,
+          "right": 924,
+          "bottom": 845,
+          "width": 566,
+          "height": 726
+        },
+        "canvas": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 940,
+          "width": 1280,
+          "height": 940
+        },
+        "statusPanels": {
+          "left": 995,
+          "top": 135,
+          "right": 995,
+          "bottom": 135,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "canvas": {
+        "width": 1280,
+        "height": 940,
+        "samples": 300800,
+        "quantizedColorCount": 199,
+        "nonDarkRatio": 0.0271,
+        "brightRatio": 0.0017,
+        "saturatedRatio": 0.0046,
+        "luminanceP10": 0,
+        "luminanceP90": 8.7204,
+        "contrastSpread": 8.7204,
+        "activeLuminanceP10": 24.509,
+        "activeLuminanceP90": 135.4292,
+        "activeContrastSpread": 110.9202
+      }
+    },
+    {
+      "id": "settings",
+      "label": "Developer/settings popup surface",
+      "image": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/screenshots/settings.png",
+      "score10": 7.05,
+      "layout": {
+        "visibleElementCount": 132,
+        "textElementCount": 118,
+        "textCharacterCount": 9114,
+        "longestText": "Developer Tools Local tools and diagnostic controls for this build. × 🔎 Open Viewer Open Conformance Dashboard 📘 Project Guide Export Log Auto Video: Off 🎵 Play Audio Test Conformance Rollup OVERALL CONFORMANCE 9.1/10 Weakest: Audio identity, event feedback, and cue alignment 6.3/10. Audio 6.3/10 · level arc 8.4/10 · visual 7.4/10. Generated 2026-05-08 12:35:31Z. Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles. Graphics Options Audio Theme Auto Aurora Application Mix Galaga Synth Approximation Galaga Reference Audio Graphics Theme Auto Classic Arcade Aurora Hint Aurora Borealis Aurora Crown Starfield Intensity Soft Reference Bright Vivid Starfield Speed Calm Reference Arcade Fast Graphics options apply live so we can tune look and feel without restarting the run. Developer Start State Root Production keeps start-state and test controls locked unless Root mode is enabled. Root mode active. Start-state controls restored. Start Stage Starting Ships First Bonus Ship Score Recurring Bonus Ship Score Force challenge opening Applies on next game start only. Set either score to 0 to disable that bonus-ship award. Platinum · Aurora Galactica · Platform 1.3.0 · Game 1.3.0 LANE DEVELOPMENT Version 1.3.0 May 08 2026, 9:03 AM EDT codex/macbook-pro-level-arc-long-cycle@dfb47de dirty AUDIO TEST STATUS Theme: galaga-reference-assets · last cue formationArrival (galaga-reference-assets) · requested galaga3-level-underscore.m4a · loaded galaga-last-ship-destroyed-ambience.m4a · started galaga3-level-underscore.m4a · active 3 LATEST NOTE Fidelity and second-cabinet release Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.",
+        "overflowCount": 1,
+        "overflow": [
+          {
+            "id": "cabinetLeftFrame",
+            "tag": "div",
+            "text": "🚀 CHOOSE GAME",
+            "widthDelta": 20,
+            "heightDelta": 0
+          }
+        ],
+        "buttonCount": 67,
+        "frame": {
+          "left": 358,
+          "top": 119,
+          "right": 924,
+          "bottom": 845,
+          "width": 566,
+          "height": 726
+        },
+        "canvas": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 940,
+          "width": 1280,
+          "height": 940
+        },
+        "statusPanels": {
+          "left": 995,
+          "top": 135,
+          "right": 995,
+          "bottom": 135,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "canvas": {
+        "width": 1280,
+        "height": 940,
+        "samples": 300800,
+        "quantizedColorCount": 199,
+        "nonDarkRatio": 0.0271,
+        "brightRatio": 0.0017,
+        "saturatedRatio": 0.0046,
+        "luminanceP10": 0,
+        "luminanceP90": 8.7204,
+        "contrastSpread": 8.7204,
+        "activeLuminanceP10": 24.509,
+        "activeLuminanceP90": 135.4292,
+        "activeContrastSpread": 110.9202
+      }
+    },
+    {
+      "id": "guide",
+      "label": "Guide/help popup surface",
+      "image": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/screenshots/guide.png",
+      "score10": 8.98,
+      "layout": {
+        "visibleElementCount": 74,
+        "textElementCount": 64,
+        "textCharacterCount": 1718,
+        "longestText": "🕹 Movement Use Arrow Left/Right or A / Z for left and D / C for right. The web build keeps both arrow keys and letter mappings active at the same time. 🚀 Fire Press Space to fire. The game supports both-handed movement layouts at the same time. ⏸ Pause P pauses the run. T opens Developer Tools. L exports the log and X exports and returns to wait mode. Arrow Left / A / ZMove left Arrow Right / D / CMove right SpaceFire PPause 🎞Open recent replays saved on this device TDeveloper Tools LExport session log XExport and return to wait mode",
+        "overflowCount": 1,
+        "overflow": [
+          {
+            "id": "cabinetLeftFrame",
+            "tag": "div",
+            "text": "🚀 CHOOSE GAME",
+            "widthDelta": 20,
+            "heightDelta": 0
+          }
+        ],
+        "buttonCount": 40,
+        "frame": {
+          "left": 358,
+          "top": 119,
+          "right": 924,
+          "bottom": 845,
+          "width": 566,
+          "height": 726
+        },
+        "canvas": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 940,
+          "width": 1280,
+          "height": 940
+        },
+        "statusPanels": {
+          "left": 995,
+          "top": 135,
+          "right": 995,
+          "bottom": 135,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "canvas": {
+        "width": 1280,
+        "height": 940,
+        "samples": 300800,
+        "quantizedColorCount": 199,
+        "nonDarkRatio": 0.0271,
+        "brightRatio": 0.0017,
+        "saturatedRatio": 0.0046,
+        "luminanceP10": 0,
+        "luminanceP90": 8.7204,
+        "contrastSpread": 8.7204,
+        "activeLuminanceP10": 24.509,
+        "activeLuminanceP90": 135.4292,
+        "activeContrastSpread": 110.9202
+      }
+    }
+  ]
+}

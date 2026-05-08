@@ -100,7 +100,7 @@ function metricAxisKeys(metric){
   if(text.includes('audio identity')) return ['audio'];
   if(text.includes('stage 4 pressure')) return ['stage4-pressure'];
   if(text.includes('level arc')) return ['level-arc', 'conformance-loop'];
-  if(text.includes('visual look')) return ['quality-score'];
+  if(text.includes('visual look')) return ['visual-look'];
   if(text.includes('alien entry')) return ['level-arc', 'quality-score'];
   if(text.includes('challenge-stage variation')) return ['level-arc', 'quality-score'];
   if(text.includes('progression')) return ['quality-score'];
@@ -245,8 +245,8 @@ function metricScoreContext(metric, score10){
   };
   if(text.includes('visual look')){
     return {
-      confidence: 'low',
-      resolution: 'estimated planning score; visual scorer not yet promoted',
+      confidence: 'medium-low',
+      resolution: 'first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers',
       scoreMeaning: scoreMeaning(score10)
     };
   }
@@ -512,10 +512,12 @@ function main(){
   const priorityPath = latestReport('conformance-investment-priorities');
   const levelArcPath = latestReport('level-arc-conformance');
   const economicsPath = latestReport('conformance-economics');
+  const visualLookPath = latestReport('aurora-visual-look-conformance');
   const quality = readJson(qualityPath);
   const priority = priorityPath ? readJson(priorityPath) : { candidates: [] };
   const levelArc = levelArcPath ? readJson(levelArcPath) : { summary: {} };
   const economics = economicsPath ? readJson(economicsPath) : { summary: {} };
+  const visualLook = visualLookPath ? readJson(visualLookPath) : null;
 
   const audio = category(quality, 'audio');
   const level = category(quality, 'level-arc');
@@ -538,7 +540,11 @@ function main(){
 
   const alienEntryScore = Math.min(10, ((stage1Timing?.score10 || 0) * 0.45) + ((stage1Geometry?.score10 || 0) * 0.35) + ((levelArc.summary?.submetrics || []).find(m => m.id === 'movement-grammar-expansion')?.score10 || 8.4) * 0.2);
   const challengeVariationScore = Math.min(10, ((challengeTiming?.score10 || 0) * 0.45) + ((levelArc.summary?.submetrics || []).find(m => m.id === 'challenge-stage-identity')?.score10 || 8.4) * 0.35 + ((levelArc.summary?.submetrics || []).find(m => m.id === 'long-run-non-repetition')?.score10 || 8.2) * 0.2);
-  const visualLookScore = 7.4;
+  const visualLookScore = Number.isFinite(+visualLook?.summary?.score10) ? +visualLook.summary.score10 : 7.4;
+  const visualLookStatus = visualLook
+    ? `Measured visual scorer; ${visualLook.summary?.confidence || 'medium-low'} confidence`
+    : 'Estimated; needs dedicated visual conformance scorer';
+  const visualLookResolution = visualLook?.summary?.resolution || 'Estimated planning value until scorer lands.';
   const frontDoorScore = 8.0;
   const popupScore = uiShell?.score10 || 0;
   const arcadeFrameScore = uiShell?.score10 || 0;
@@ -571,11 +577,11 @@ function main(){
       metric: 'Overall visual look and feel: gameplay, start page, typography complexity',
       score10: visualLookScore,
       target: '8.4-8.8',
-      status: 'Estimated; needs dedicated visual conformance scorer',
+      status: visualLookStatus,
       why: 'A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.',
-      effort: 'Medium; 2-4 hrs, screenshot/contact-sheet driven',
-      next: 'Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets.',
-      evidence: 'UI shell suite plus generated frame/contact-sheet artifacts'
+      effort: visualLook ? 'Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review' : 'Medium; 2-4 hrs, screenshot/contact-sheet driven',
+      next: visualLook ? 'Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.' : 'Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets.',
+      evidence: visualLookPath ? rel(visualLookPath) : 'UI shell suite plus generated frame/contact-sheet artifacts'
     }),
     row({
       rank: 4,
@@ -730,7 +736,7 @@ function main(){
     ['Level arc', score(level?.score10), '>=8.8', 'Long-play gameplay-quality gate'],
     ['Alien entry / formations', `${score(alienEntryScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
     ['Challenge variation', `${score(challengeVariationScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
-    ['Visual look and feel', score(visualLookScore), '>=8.4', 'New explicit gate; currently estimated'],
+    ['Visual look and feel', score(visualLookScore), '>=8.4', visualLook ? 'New explicit gate; first-pass scorer measured' : 'New explicit gate; currently estimated'],
     ['Arcade frame and popup surfaces', score(Math.min(arcadeFrameScore, popupScore)), '>=9.4', 'Split from generic UI shell before final gate'],
     ['No-regression guardrails', 'movement/combat/capture >=10; challenge timing >=9.8', 'Maintain', 'Hard blockers']
   ];
@@ -753,7 +759,8 @@ function main(){
     quality: rel(qualityPath),
     investmentPriority: priorityPath ? rel(priorityPath) : null,
     levelArc: levelArcPath ? rel(levelArcPath) : null,
-    economics: economicsPath ? rel(economicsPath) : null
+    economics: economicsPath ? rel(economicsPath) : null,
+    visualLook: visualLookPath ? rel(visualLookPath) : null
   };
   const commit = git('rev-parse --short HEAD', 'unknown');
   const branch = git('branch --show-current', '');

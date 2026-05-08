@@ -138,6 +138,23 @@ function collectMetricPoints(){
       closestPair: data.summary?.closestPair || null
     }));
   }
+  for(const file of walkReports(path.join(ANALYSES, 'aurora-visual-look-conformance'))){
+    const data = readJson(file);
+    points.push(point(file, 'visual-look', data.summary?.score10, {
+      confidence: data.summary?.confidence || null,
+      resolution: data.summary?.resolution || null,
+      weakestSurface: data.summary?.weakestSurface?.id || null,
+      surfaceCount: data.summary?.surfaceCount || 0
+    }));
+    for(const surface of data.surfaces || []){
+      points.push(point(file, `visual-look:${surface.id}`, surface.score10, {
+        label: surface.label,
+        overflowCount: surface.layout?.overflowCount ?? null,
+        quantizedColorCount: surface.canvas?.quantizedColorCount ?? null,
+        activeContrastSpread: surface.canvas?.activeContrastSpread ?? null
+      }));
+    }
+  }
   for(const file of walkReports(path.join(ANALYSES, 'aurora-stage4-loss-windows'))){
     const data = readJson(file);
     const total = data.summary?.totalWindows || 0;

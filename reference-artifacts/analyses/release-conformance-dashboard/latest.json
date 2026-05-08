@@ -1,15 +1,16 @@
 {
   "schemaVersion": 1,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T13:41:18.707Z",
-  "commit": "9e532df",
+  "generatedAt": "2026-05-08T13:50:58.811Z",
+  "commit": "fee8820",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
   "dirty": true,
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-dfb47de/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-d8240f0/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-dfb47de/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-dfb47de/report.json"
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-fee8820/report.json",
+    "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json"
   },
   "scoreSemantics": {
     "headline": "An x/10 score is a measured rollup at the current scorer resolution, not a claim of arcade-perfect behavior.",
@@ -51,9 +52,9 @@
     },
     {
       "Gate": "Visual look and feel",
-      "Current": "7.4/10",
+      "Current": "8.6/10",
       "Target": ">=8.4",
-      "Notes": "New explicit gate; currently estimated"
+      "Notes": "New explicit gate; first-pass scorer measured"
     },
     {
       "Gate": "Arcade frame and popup surfaces",
@@ -157,32 +158,32 @@
         "meaning": "Players decide at a glance whether the game feels like a polished arcade object. Designers use it to align readability, theme, typography, and visual hierarchy before subjective tuning."
       },
       "scoreContext": {
-        "confidence": "low",
-        "resolution": "estimated planning score; visual scorer not yet promoted",
-        "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+        "confidence": "medium-low",
+        "resolution": "first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers",
+        "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
       },
-      "score10": 7.4,
-      "current": "7.4/10",
+      "score10": 8.62,
+      "current": "8.6/10",
       "target": "8.4-8.8",
-      "status": "Estimated; needs dedicated visual conformance scorer",
+      "status": "Measured visual scorer; medium-low confidence",
       "why": "A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.",
-      "effort": "Medium; 2-4 hrs, screenshot/contact-sheet driven",
-      "next": "Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets.",
-      "evidence": "UI shell suite plus generated frame/contact-sheet artifacts",
+      "effort": "Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review",
+      "next": "Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.",
+      "evidence": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
       "costContext": {
         "costClass": "medium",
         "expectedResources": "cpu, browser, gpu",
         "trackedAxes": [
-          "quality-score"
+          "visual-look"
         ],
-        "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
-        "trackedRuns": 3,
-        "trackedWallSeconds": 191.709,
-        "trackedCpuSeconds": 219.71,
+        "trackedSpend": "1 runs; 0.1 min wall; 0.1 min CPU",
+        "trackedRuns": 1,
+        "trackedWallSeconds": 3.49,
+        "trackedCpuSeconds": 3.43,
         "expectedLift10": 0.12,
         "expectedOverallLift10": 0.011,
         "investmentScore": 0.45,
-        "gapToTarget": "+1",
+        "gapToTarget": "at target",
         "summary": "medium; cpu, browser, gpu",
         "valueCostRead": "Expected lift 0.12/10 on metric, 0.011/10 overall; investment score 0.45."
       }
@@ -732,17 +733,17 @@
     {
       "Priority": 3,
       "Metric": "Overall visual look and feel: gameplay, start page, typography complexity",
-      "Current": "7.4/10",
-      "Confidence": "low",
-      "Resolution": "estimated planning score; visual scorer not yet promoted",
+      "Current": "8.6/10",
+      "Confidence": "medium-low",
+      "Resolution": "first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers",
       "Cost / resources": "medium; cpu, browser, gpu",
-      "Tracked spend": "3 runs; 3.2 min wall; 3.7 min CPU",
+      "Tracked spend": "1 runs; 0.1 min wall; 0.1 min CPU",
       "Major-gate target": "8.4-8.8",
-      "Measurement status": "Estimated; needs dedicated visual conformance scorer",
+      "Measurement status": "Measured visual scorer; medium-low confidence",
       "Why this matters": "A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.",
-      "Effort / time estimate": "Medium; 2-4 hrs, screenshot/contact-sheet driven",
-      "Recommended next step": "Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets.",
-      "Evidence": "UI shell suite plus generated frame/contact-sheet artifacts"
+      "Effort / time estimate": "Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review",
+      "Recommended next step": "Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.",
+      "Evidence": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json"
     },
     {
       "Priority": 4,
@@ -943,30 +944,36 @@
   "economicsSummary": {
     "latestOverallScore10": 9.2,
     "latestLevelArcScore10": 8.4,
-    "metricPointCount": 512,
+    "metricPointCount": 517,
     "deltaCount": 70,
-    "measuredRuns": 86,
-    "wallSeconds": 2041.758,
-    "cpuSeconds": 3178.38,
-    "artifactBytes": 197713857,
+    "measuredRuns": 87,
+    "wallSeconds": 2045.248,
+    "cpuSeconds": 3181.81,
+    "artifactBytes": 197713853,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-dfb47de/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-dfb47de/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-dfb47de/compute-minutes-by-resource.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fee8820/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fee8820/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fee8820/compute-minutes-by-resource.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 86,
-      "Wall time": "34 min",
+      "Measured runs": 87,
+      "Wall time": "34.1 min",
       "CPU time": "53 min"
     },
     {
       "Resource": "browser",
-      "Measured runs": 47,
-      "Wall time": "30.7 min",
-      "CPU time": "49.2 min"
+      "Measured runs": 48,
+      "Wall time": "30.8 min",
+      "CPU time": "49.3 min"
+    },
+    {
+      "Resource": "gpu",
+      "Measured runs": 1,
+      "Wall time": "0.1 min",
+      "CPU time": "0.1 min"
     }
   ],
   "axisSpendTable": [
@@ -1007,6 +1014,12 @@
       "CPU time": "1.7 min"
     },
     {
+      "Axis": "visual-look",
+      "Measured runs": 1,
+      "Wall time": "0.1 min",
+      "CPU time": "0.1 min"
+    },
+    {
       "Axis": "economics",
       "Measured runs": 1,
       "Wall time": "0 min",
@@ -1041,14 +1054,14 @@
     {
       "Priority": 3,
       "Metric": "Overall visual look and feel: gameplay, start page, typography complexity",
-      "Current": "7.4/10",
+      "Current": "8.6/10",
       "Target": "8.4-8.8",
-      "Gap to target": "+1",
-      "Estimated effort": "Medium; 2-4 hrs, screenshot/contact-sheet driven",
+      "Gap to target": "at target",
+      "Estimated effort": "Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review",
       "Expected resources": "cpu, browser, gpu",
-      "Tracked spend": "3 runs; 3.2 min wall; 3.7 min CPU",
+      "Tracked spend": "1 runs; 0.1 min wall; 0.1 min CPU",
       "Value / cost read": "Expected lift 0.12/10 on metric, 0.011/10 overall; investment score 0.45.",
-      "Next action": "Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets."
+      "Next action": "Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers."
     },
     {
       "Priority": 4,
