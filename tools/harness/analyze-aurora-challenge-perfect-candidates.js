@@ -184,6 +184,36 @@ function clamp(value, min, max){
   return Math.max(min, Math.min(max, value));
 }
 
+function argValue(name){
+  const prefix = `--${name}=`;
+  const inline = process.argv.find(arg => arg.startsWith(prefix));
+  if(inline) return inline.slice(prefix.length);
+  const index = process.argv.indexOf(`--${name}`);
+  return index >= 0 ? process.argv[index + 1] : '';
+}
+
+function repeatCount(){
+  const requested = Number(argValue('repeats') || process.env.AURORA_AUDIO_CANDIDATE_REPEATS || 1);
+  return Number.isFinite(requested) ? Math.max(1, Math.min(5, Math.floor(requested))) : 1;
+}
+
+function candidateFilter(){
+  const raw = argValue('candidate-ids') || process.env.AURORA_AUDIO_CANDIDATE_IDS || '';
+  return new Set(String(raw).split(',').map(item => item.trim()).filter(Boolean));
+}
+
+function mean(values){
+  const numeric = values.filter(value => Number.isFinite(+value)).map(Number);
+  return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
+}
+
+function stddev(values){
+  const numeric = values.filter(value => Number.isFinite(+value)).map(Number);
+  if(numeric.length < 2) return 0;
+  const avg = mean(numeric);
+  return Math.sqrt(numeric.reduce((sum, value) => sum + Math.pow(value - avg, 2), 0) / numeric.length);
+}
+
 function riskFromComparison(comparison){
   const durationGap = +comparison.duration_s || 0;
   const centroidGap = +comparison.spectral_centroid_hz || 0;
@@ -254,6 +284,62 @@ function decisionFor(rows){
   };
 }
 
+function baseCandidateId(id){
+  return String(id || '').replace(/-r\d+$/, '');
+}
+
+function aggregateRows(sampleRows){
+  const groups = new Map();
+  for(const row of sampleRows){
+    const id = baseCandidateId(row.id);
+    if(!groups.has(id)) groups.set(id, []);
+    groups.get(id).push(row);
+  }
+  const rows = [];
+  for(const [id, group] of groups){
+    const first = group[0];
+    const avgComparison = {
+      duration_s: round(mean(group.map(row => row.comparison.duration_s)), 3),
+      spectral_centroid_hz: round(mean(group.map(row => row.comparison.spectral_centroid_hz)), 1),
+      zero_crossings_per_s: round(mean(group.map(row => row.comparison.zero_crossings_per_s)), 1),
+      rms: round(mean(group.map(row => row.comparison.rms)), 4)
+    };
+    rows.push({
+      id,
+      label: first.baseLabel || first.label,
+      risk10: riskFromComparison(avgComparison),
+      durationGapSeconds: avgComparison.duration_s,
+      centroidGapHz: avgComparison.spectral_centroid_hz,
+      zeroCrossingGapPerSecond: avgComparison.zero_crossings_per_s,
+      rmsGap: avgComparison.rms,
+      activeMetrics: {
+        duration_s: round(mean(group.map(row => row.activeMetrics.duration_s)), 3),
+        peak: round(mean(group.map(row => row.activeMetrics.peak)), 4),
+        rms: round(mean(group.map(row => row.activeMetrics.rms)), 4),
+        spectral_centroid_hz: round(mean(group.map(row => row.activeMetrics.spectral_centroid_hz)), 1),
+        zero_crossings_per_s: round(mean(group.map(row => row.activeMetrics.zero_crossings_per_s)), 1)
+      },
+      comparison: avgComparison,
+      stability: {
+        repetitions: group.length,
+        riskStd: round(stddev(group.map(row => row.risk10)), 3),
+        centroidGapStdHz: round(stddev(group.map(row => row.centroidGapHz)), 1),
+        rmsGapStd: round(stddev(group.map(row => row.rmsGap)), 4),
+        durationGapStdSeconds: round(stddev(group.map(row => row.durationGapSeconds)), 3)
+      },
+      samples: group.map(row => ({
+        id: row.id,
+        repetition: row.repetition,
+        risk10: row.risk10,
+        durationGapSeconds: row.durationGapSeconds,
+        centroidGapHz: row.centroidGapHz,
+        rmsGap: row.rmsGap
+      }))
+    });
+  }
+  return rows.sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
+}
+
 function markdown(report){
   const lines = [
     '# Aurora Challenge Perfect Audio Candidate Loop',
@@ -278,15 +364,18 @@ function markdown(report){
     `- Status: \`${report.decision.status}\``,
     `- Keep candidate: ${report.decision.keep ? 'yes' : 'no'}`,
     `- Best candidate: \`${report.decision.best || 'n/a'}\``,
+    `- Measured best: \`${report.decision.measuredBest || 'n/a'}\``,
     `- Reason: ${report.decision.reason}`,
+    `- Repetitions per candidate: ${report.repetitions}`,
     '',
     '## Candidates',
     '',
-    '| Candidate | Risk /10 | Duration Gap | Centroid Gap | ZCR Gap | RMS Gap |',
-    '| --- | ---: | ---: | ---: | ---: | ---: |'
+    '| Candidate | Risk /10 | Duration Gap | Centroid Gap | ZCR Gap | RMS Gap | Stability |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: |'
   ];
   for(const row of report.candidates){
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.zeroCrossingGapPerSecond} | ${row.rmsGap} |`);
+    const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.zeroCrossingGapPerSecond} | ${row.rmsGap} | ${stability} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}`;
@@ -327,14 +416,30 @@ async function main(){
   const { set, entry } = comparisonSet();
   const captureOpts = { ...(entry.preview || {}), audioTheme: 'aurora-application' };
   delete captureOpts.cue;
-  const candidates = candidateSpecs();
+  const repeats = repeatCount();
+  const filter = candidateFilter();
+  let candidates = candidateSpecs();
+  if(filter.size){
+    candidates = candidates.filter(row => row.baseline || filter.has(row.id));
+  }
+  const captureJobs = [];
+  for(const row of candidates){
+    for(let repetition = 1; repetition <= repeats; repetition += 1){
+      const suffix = repeats > 1 ? `-r${String(repetition).padStart(2, '0')}` : '';
+      captureJobs.push({
+        row,
+        repetition,
+        sampleId: `${slug(row.id)}${suffix}`
+      });
+    }
+  }
 
   const captures = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
     await page.evaluate(() => installGamePack('aurora-galactica', { persist: false }));
     const results = [];
-    for(const row of candidates){
-      const result = await captureCue(page, row, captureOpts);
-      results.push({ row, result });
+    for(const job of captureJobs){
+      const result = await captureCue(page, job.row, captureOpts);
+      results.push({ ...job, result });
     }
     return results;
   });
@@ -346,25 +451,21 @@ async function main(){
 
   const baselineCapture = captures.find(item => item.row.baseline);
   if(!baselineCapture?.result?.ok) fail('Baseline Challenge Perfect capture failed', baselineCapture);
-  const baselineWebm = path.join(samplesDir, 'baseline-current.webm');
-  const baselineWav = path.join(samplesDir, 'baseline-current.wav');
-  decodeToFile(baselineCapture.result.base64, baselineWebm);
-  toWav(baselineWebm, baselineWav);
+  const baselineWebm = path.join(samplesDir, `${baselineCapture.sampleId}.webm`);
+  const baselineWav = path.join(samplesDir, `${baselineCapture.sampleId}.wav`);
 
   const manifestItems = [];
   for(const capture of captures){
     const row = capture.row;
     if(!capture.result?.ok) fail('Challenge Perfect candidate capture failed', { id: row.id, result: capture.result });
-    const id = slug(row.id);
+    const id = capture.sampleId;
     const webm = path.join(samplesDir, `${id}.webm`);
     const wav = path.join(samplesDir, `${id}.wav`);
-    if(!row.baseline){
-      decodeToFile(capture.result.base64, webm);
-      toWav(webm, wav);
-    }
+    decodeToFile(capture.result.base64, webm);
+    toWav(webm, wav);
     manifestItems.push({
       id,
-      label: row.label,
+      label: repeats > 1 ? `${row.label} r${capture.repetition}` : row.label,
       focus: 'Candidate comparison against the measured Challenge Perfect reference window.',
       cue: CUE,
       aurora: {
@@ -400,11 +501,15 @@ async function main(){
 
   const metricsPath = path.join(outRoot, 'metrics.json');
   const metrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
-  const rows = metrics.items.map(item => {
+  const sampleRows = metrics.items.map(item => {
     const comparison = item.comparisons.auroraVsReferenceActive;
+    const id = baseCandidateId(item.id);
+    const spec = candidates.find(candidate => slug(candidate.id) === id);
     return {
       id: item.id,
       label: item.label,
+      baseLabel: spec?.label || item.label.replace(/ r\d+$/, ''),
+      repetition: Number((String(item.id).match(/-r(\d+)$/) || [])[1] || 1),
       risk10: riskFromComparison(comparison),
       durationGapSeconds: round(comparison.duration_s, 3),
       centroidGapHz: round(comparison.spectral_centroid_hz, 1),
@@ -414,6 +519,7 @@ async function main(){
       comparison
     };
   }).sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
+  const rows = aggregateRows(sampleRows);
 
   const decision = decisionFor(rows);
   const report = {
@@ -424,6 +530,8 @@ async function main(){
     commit,
     dirty,
     cue: CUE,
+    repetitions: repeats,
+    candidateFilter: filter.size ? [...filter].sort() : null,
     problem: 'Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.',
     strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift.',
     successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS gap, and keep active duration within 0.08s of the reference.',
@@ -434,6 +542,7 @@ async function main(){
       manifest: rel(manifestPath),
       metrics: rel(metricsPath)
     },
+    sampleCandidates: sampleRows,
     candidates: rows,
     decision,
     nextStep: decision.keep
