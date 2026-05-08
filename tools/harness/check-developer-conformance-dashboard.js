@@ -37,7 +37,9 @@ function checkGeneratedDashboardPage(){
     'Value / cost read',
     'class="closeDetails"',
     'data-detail-back="1"',
-    'Back to queue',
+    'Close details',
+    'data-detail-row=',
+    'aria-expanded=',
     'data-tab="ingestion"',
     'Ingestion Framework',
     'Source / evidence family',
@@ -124,10 +126,15 @@ async function checkDashboardViewportFit(){
       await page.click('[data-detail]');
       const detailOpen = await page.evaluate(() => ({
         panel: !!document.querySelector('.detailPanel'),
+        inlinePanel: !!document.querySelector('.metricRow.expanded .detailPanel'),
+        expandedButton: document.querySelector('[data-detail]')?.getAttribute('aria-expanded') || '',
         scrollWidth: document.documentElement.scrollWidth,
         clientWidth: document.documentElement.clientWidth
       }));
       if(!detailOpen.panel) fail('conformance dashboard detail panel did not open inline', { viewport, detailOpen });
+      if(!detailOpen.inlinePanel || detailOpen.expandedButton !== 'true'){
+        fail('conformance dashboard detail panel did not stay attached to the selected row', { viewport, detailOpen });
+      }
       if(detailOpen.scrollWidth > detailOpen.clientWidth + 1){
         fail('conformance dashboard overflows horizontally in metric detail view', { viewport, detailOpen });
       }

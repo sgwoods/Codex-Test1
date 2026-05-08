@@ -192,6 +192,12 @@ function html(data, options = {}){
       box-shadow:var(--shadow);
       min-width:0;
     }
+    .metricRow.expanded{align-items:start}
+    .metricRow .detailPanel{
+      grid-column:1/-1;
+      box-shadow:none;
+      background:#fbfaf7;
+    }
     .metricName{font-weight:850;min-width:0;overflow-wrap:anywhere}
     .metricSub{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
     .metricNext{font-size:13px;color:#34302a;min-width:0;overflow-wrap:anywhere}
@@ -302,6 +308,8 @@ function html(data, options = {}){
     .compactTable th,.compactTable td{font-size:13px;padding:8px;overflow-wrap:anywhere}
     .ingestionList{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
     .ingestionItem{display:grid;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:var(--shadow);min-width:0}
+    .ingestionItem.expanded{grid-row:span 2}
+    .ingestionItem .detailPanel{box-shadow:none;background:#fbfaf7}
     .ingestionMeta{display:flex;gap:6px;flex-wrap:wrap}
     .score{font-weight:850;white-space:nowrap}
     .costCell{min-width:150px}
@@ -515,24 +523,24 @@ function html(data, options = {}){
 
     function metricRow(row, index){
       const detailKey = rowDetailKey('metric', index);
-      return '<article class="metricRow">'
+      const isExpanded = activeDetail === detailKey;
+      return '<article class="metricRow' + (isExpanded ? ' expanded' : '') + '" data-detail-row="' + esc(detailKey) + '">'
         + '<div class="priority">' + esc(row.rank || index + 1) + '</div>'
         + '<div><div class="metricName">' + esc(row.metric) + '</div><div class="metricSub">' + esc(row.why || row.status || '') + '</div></div>'
         + '<div class="score ' + scoreClass(row.score10) + '">' + esc(row.current || '--') + '</div>'
         + '<div class="costCell"><span class="badge">' + esc(row.costContext?.costClass || '--') + '</span><div class="small">' + esc(row.costContext?.trackedSpend || row.effort || '--') + '</div></div>'
         + '<div class="metricNext">' + esc(row.next || row.status || '--') + '</div>'
-        + '<button class="detailButton" type="button" data-detail="' + esc(detailKey) + '">Details</button>'
+        + '<button class="detailButton" type="button" data-detail="' + esc(detailKey) + '" aria-expanded="' + (isExpanded ? 'true' : 'false') + '">' + (isExpanded ? 'Close' : 'Details') + '</button>'
+        + (isExpanded ? metricDetailPanel(row) : '')
         + '</article>';
     }
 
-    function metricDetailPanel(item){
-      if(!item) return '';
-      const row = item.row || {};
+    function metricDetailPanel(row){
       const explanation = row.explanation || {};
       const scoreContext = row.scoreContext || {};
       const costContext = row.costContext || {};
       return '<section class="detailPanel" id="metricDetailPanel">'
-        + '<div class="detailHeader"><div><span class="label">Metric drill-down</span><h2>' + esc(row.metric) + '</h2><p class="small">' + esc(row.status || '') + '</p></div><button class="backButton" type="button" data-detail-back="1">Back to queue</button></div>'
+        + '<div class="detailHeader"><div><span class="label">Metric drill-down</span><h2>' + esc(row.metric) + '</h2><p class="small">' + esc(row.status || '') + '</p></div><button class="backButton" type="button" data-detail-back="1">Close details</button></div>'
         + '<div class="detailGrid">'
         + explanationBlock('Score meaning', scoreContext.scoreMeaning)
         + explanationBlock('Confidence', scoreContext.confidence)
@@ -562,13 +570,11 @@ function html(data, options = {}){
     }
 
     function conformanceView(data, rows, gates, semantics){
-      const detail = selectedDetail('metric', rows);
       return \`
         <div class="split">
           <section>
             <h2>Priority Investment Queue</h2>
             <div class="metricList">\${rows.map(metricRow).join('')}</div>
-            \${metricDetailPanel(detail)}
           </section>
           <div>
             <section class="card">
@@ -600,14 +606,12 @@ function html(data, options = {}){
     function ingestionView(data){
       const rows = Array.isArray(data.ingestionRows) ? data.ingestionRows : [];
       const summary = data.ingestionSummary || {};
-      const detail = selectedDetail('ingestion', rows);
-      if(detail){
-        const row = detail.row || {};
+      function ingestionDetailPanel(row){
         return \`
           <section class="detailPanel">
             <div class="detailHeader">
               <div><span class="label">Ingestion drill-down</span><h2>\${esc(row.source)}</h2><p class="small">Source / evidence family mapped to \${esc(row.linkedMetric || 'a conformance metric')}</p></div>
-              <button class="backButton" type="button" data-detail-back="1">Back to ingestion queue</button>
+              <button class="backButton" type="button" data-detail-back="1">Close details</button>
             </div>
             <div class="detailGrid">
               \${explanationBlock('Axis', row.axis)}
@@ -639,15 +643,20 @@ function html(data, options = {}){
           <section>
             <h2>Evidence Pipeline Queue</h2>
             <span class="label">Source / evidence family</span>
-            <div class="ingestionList">\${rows.map((row, index) => \`
-              <article class="ingestionItem">
+            <div class="ingestionList">\${rows.map((row, index) => {
+              const detailKey = rowDetailKey('ingestion', index);
+              const isExpanded = activeDetail === detailKey;
+              return \`
+              <article class="ingestionItem\${isExpanded ? ' expanded' : ''}" data-detail-row="\${esc(detailKey)}">
                 <div><span class="badge">Priority \${esc(row.rank || index + 1)}</span></div>
                 <div class="metricName">\${esc(row.source)}</div>
                 <div class="ingestionMeta"><span class="badge">\${esc(row.axis)}</span><span class="badge">\${esc(row.confidence)}</span><span class="badge">\${esc(row.annotationStatus)}</span></div>
                 <div class="small"><strong>Coverage:</strong> \${esc(row.coverage)} · <strong>Artifact:</strong> \${esc(row.artifactType)}</div>
                 <div class="small"><strong>Missing next:</strong> \${esc(row.next)}</div>
-                <button class="detailButton" type="button" data-detail="\${esc(rowDetailKey('ingestion', index))}">Details</button>
-              </article>\`).join('')}</div>
+                <button class="detailButton" type="button" data-detail="\${esc(detailKey)}" aria-expanded="\${isExpanded ? 'true' : 'false'}">\${isExpanded ? 'Close' : 'Details'}</button>
+                \${isExpanded ? ingestionDetailPanel(row) : ''}
+              </article>\`;
+            }).join('')}</div>
           </section>
         </section>
       \`;
@@ -717,6 +726,9 @@ function html(data, options = {}){
     }
 
     app.addEventListener('click', event => {
+      function detailRow(key){
+        return [...document.querySelectorAll('[data-detail-row]')].find(row => row.dataset.detailRow === key) || null;
+      }
       const tab = event.target.closest('[data-tab]');
       if(tab){
         activeTab = tab.dataset.tab || 'conformance';
@@ -726,16 +738,22 @@ function html(data, options = {}){
       }
       const detailButton = event.target.closest('[data-detail]');
       if(detailButton){
-        activeDetail = detailButton.dataset.detail || null;
+        const key = detailButton.dataset.detail || null;
+        activeDetail = activeDetail === key ? null : key;
         render(dashboard);
-        const panel = document.querySelector('.detailPanel');
-        if(panel) panel.scrollIntoView({ block:'nearest' });
+        const row = detailRow(key);
+        if(row) row.scrollIntoView({ block:'nearest' });
+        const nextButton = row?.querySelector('[data-detail]');
+        if(nextButton) nextButton.focus({ preventScroll:true });
         return;
       }
       const backButton = event.target.closest('[data-detail-back]');
       if(backButton){
+        const key = activeDetail;
         activeDetail = null;
         render(dashboard);
+        const row = detailRow(key);
+        if(row) row.scrollIntoView({ block:'nearest' });
         return;
       }
       const button = event.target.closest('.closeDetails');
