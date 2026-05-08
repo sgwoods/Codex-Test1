@@ -272,10 +272,11 @@ function opportunityList(windows, stageSignature){
   return opportunities.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
 }
 
-function scoreSummary(windows, pressureCurve, opportunities, stageSignature){
+function scoreSummary(windows, pressureCurve, opportunities, stageSignature, outcomeReport){
   const coverage = average(windows.map(win => win.missingFamilies.length ? 0 : 1));
   const identity = average(windows.map(win => win.identityIndex / 10));
   const reward = average(windows.map(win => win.rewardIndex / 10));
+  const rewardEvidence = clamp((outcomeReport.summary?.rewardWindows || 0) / 2);
   const pressureShape = pressureCurve.regressions.length
     ? clamp(1 - (pressureCurve.regressions.length / Math.max(pressureCurve.adjacent.length, 1)))
     : 1;
@@ -283,7 +284,8 @@ function scoreSummary(windows, pressureCurve, opportunities, stageSignature){
   return round(10 * clamp(
     (0.28 * coverage)
     + (0.24 * identity)
-    + (0.18 * reward)
+    + (0.12 * reward)
+    + (0.06 * rewardEvidence)
     + (0.16 * pressureShape)
     + (0.14 * signature)
   ), 1);
@@ -301,6 +303,8 @@ function buildReadme(report){
     `- Mean pressure index: ${report.summary.meanPressureIndex}/10`,
     `- Mean reward index: ${report.summary.meanRewardIndex}/10`,
     `- Mean identity index: ${report.summary.meanIdentityIndex}/10`,
+    `- Outcome reward windows: ${report.summary.outcomeRewardWindows}`,
+    `- Outcome special reward bonus: ${report.summary.outcomeSpecialRewardBonus}`,
     `- Highest priority opportunity: ${report.summary.highestPriorityOpportunity?.id || 'none'}`,
     '',
     '## Problem',
@@ -366,7 +370,7 @@ function main(){
     .map(win => Object.assign(win, { role: roleForWindow(plan, win.id) }));
   const pressureCurve = pressureCurveRead(windows);
   const opportunities = opportunityList(windows, stageSignature);
-  const score10 = scoreSummary(windows, pressureCurve, opportunities, stageSignature);
+  const score10 = scoreSummary(windows, pressureCurve, opportunities, stageSignature, outcomeReport);
   const commit = gitShortCommit();
   const stamp = new Date().toISOString().slice(0, 10);
   const outDir = path.join(OUT_ROOT, `${stamp}-${commit}`);
@@ -389,6 +393,8 @@ function main(){
       meanPressureIndex: round(average(windows.map(win => win.pressureIndex)), 1),
       meanRewardIndex: round(average(windows.map(win => win.rewardIndex)), 1),
       meanIdentityIndex: round(average(windows.map(win => win.identityIndex)), 1),
+      outcomeRewardWindows: outcomeReport.summary?.rewardWindows || 0,
+      outcomeSpecialRewardBonus: outcomeReport.summary?.totalSpecialAttackBonus || 0,
       highestPriorityOpportunity: opportunities[0] || null,
       pressureCurve
     },

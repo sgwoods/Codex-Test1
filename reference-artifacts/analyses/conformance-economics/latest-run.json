@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T04-05-42-914Z-26534",
-  "startedAt": "2026-05-08T04:05:42.914Z",
-  "endedAt": "2026-05-08T04:06:44.513Z",
+  "id": "2026-05-08T08-26-14-368Z-35078",
+  "startedAt": "2026-05-08T08:26:14.368Z",
+  "endedAt": "2026-05-08T08:27:15.358Z",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "commit": "8f0dde1",
+  "commit": "50be6cf",
   "command": [
     "npm",
     "run",
@@ -18,13 +18,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "Quality score after level arc opportunity instrumentation",
+  "notes": "Quality score after Stage12 reward probe",
   "measurement": {
-    "wallSeconds": 61.599,
-    "timeRealSeconds": 61.59,
-    "timeUserSeconds": 51.97,
-    "timeSystemSeconds": 17.08,
-    "cpuSeconds": 69.05,
+    "wallSeconds": 60.99,
+    "timeRealSeconds": 60.98,
+    "timeUserSeconds": 51.55,
+    "timeSystemSeconds": 16.74,
+    "cpuSeconds": 68.29,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -39,8 +39,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 230841052,
-    "artifactBytesAfter": 231325388,
-    "artifactBytesDelta": 484336
+    "artifactBytesBefore": 232166671,
+    "artifactBytesAfter": 232650916,
+    "artifactBytesDelta": 484245
   }
 }

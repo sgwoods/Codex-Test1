@@ -11,6 +11,7 @@ const PROBES = [
   { id: 'mid-run-pressure', scenario: 'stage6-regular', expectedStage: 6 },
   { id: 'mid-run-entry-variant', scenario: 'stage8-entry-variant', expectedStage: 8 },
   { id: 'late-run-cleanup-or-failure', scenario: 'stage12-variety', expectedStage: 12 },
+  { id: 'late-run-squadron-reward', scenario: 'stage12-squadron-bonus', expectedStage: 12 },
   { id: 'late-run-escort-variant', scenario: 'stage14-escort-variant', expectedStage: 14 }
 ];
 
@@ -128,7 +129,7 @@ function scoreProbe(probe){
   const pressure = Math.min(1, ((probe.attacks || 0) / Math.max(probe.duration, 1)) / 1.2);
   const reward = Math.min(1, (probe.score || 0) / 1200);
   const special = Math.min(1, (probe.specialAttackCount || 0) / 2);
-  return round(10 * ((0.35 * endpoint) + (0.3 * pressure) + (0.2 * reward) + (0.15 * special)), 1);
+  return round(10 * ((0.3 * endpoint) + (0.25 * pressure) + (0.25 * reward) + (0.2 * special)), 1);
 }
 
 function buildReadme(report){
@@ -141,6 +142,8 @@ function buildReadme(report){
     `- Probes: ${report.summary.passed}/${report.summary.total}`,
     `- Windows with endpoint evidence: ${report.summary.endpointWindows}/${report.summary.total}`,
     `- Windows with collision-loss pressure: ${report.summary.collisionLossWindows}/${report.summary.total}`,
+    `- Windows with special reward evidence: ${report.summary.rewardWindows}/${report.summary.total}`,
+    `- Total special reward bonus: ${report.summary.totalSpecialAttackBonus}`,
     '',
     '## Probe Results',
     ''
@@ -182,6 +185,8 @@ function main(){
   const passed = probes.filter(probe => probe.ok).length;
   const endpointWindows = probes.filter(probe => probe.ok && (probe.losses || probe.clears)).length;
   const collisionLossWindows = probes.filter(probe => probe.ok && probe.collisionLosses).length;
+  const rewardWindows = probes.filter(probe => probe.ok && probe.specialAttackCount).length;
+  const totalSpecialAttackBonus = probes.reduce((sum, probe) => sum + (+probe.specialAttackBonus || 0), 0);
   const score10 = round(probes.reduce((sum, probe) => sum + probe.outcomeScore10, 0) / Math.max(probes.length, 1), 1);
   const report = {
     generatedAt: new Date().toISOString(),
@@ -194,13 +199,15 @@ function main(){
       total: probes.length,
       passed,
       endpointWindows,
-      collisionLossWindows
+      collisionLossWindows,
+      rewardWindows,
+      totalSpecialAttackBonus
     },
     probes
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
-  console.log(JSON.stringify({ ok: passed === probes.length, outDir, score10, endpointWindows, collisionLossWindows }, null, 2));
+  console.log(JSON.stringify({ ok: passed === probes.length, outDir, score10, endpointWindows, collisionLossWindows, rewardWindows, totalSpecialAttackBonus }, null, 2));
   if(passed !== probes.length) process.exit(1);
 }
 
