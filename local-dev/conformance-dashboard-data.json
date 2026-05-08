@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T22:08:40.146Z",
-  "commit": "fa37a87",
+  "generatedAt": "2026-05-08T22:56:06.299Z",
+  "commit": "63f90a0",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -91,10 +91,10 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "72 runs; 45.6 min wall; 78.9 min CPU",
-            "trackedRuns": 72,
-            "trackedWallSeconds": 2737.938,
-            "trackedCpuSeconds": 4734.08,
+            "trackedSpend": "78 runs; 53.3 min wall; 92.4 min CPU",
+            "trackedRuns": 78,
+            "trackedWallSeconds": 3195.089,
+            "trackedCpuSeconds": 5545.68,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.064,
             "investmentScore": 2.9,
@@ -698,15 +698,15 @@
         "latestLevelArcScore10": 8.5,
         "metricPointCount": 589,
         "deltaCount": 80,
-        "measuredRuns": 144,
-        "wallSeconds": 3893.671,
-        "cpuSeconds": 6374.49,
-        "artifactBytes": 293723137,
+        "measuredRuns": 150,
+        "wallSeconds": 4350.822,
+        "cpuSeconds": 7186.09,
+        "artifactBytes": 313918891,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -739,8 +739,8 @@
           "annotationStatus": "semantic-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-fa37a87-dirty/report.json",
-          "next": "Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change."
+          "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-63f90a0-dirty/report.json",
+          "next": "Tune the highest segment-level gap next: capturedFighterDestroyed onset. Rerun audio comparison and event-gap analysis after the change."
         },
         {
           "rank": 3,
@@ -825,7 +825,7 @@
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json",
         "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-8b6e3a8/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1050,7 +1050,7 @@
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-8b6e3a8/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -1139,10 +1139,10 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "72 runs; 45.6 min wall; 78.9 min CPU",
-        "trackedRuns": 72,
-        "trackedWallSeconds": 2737.938,
-        "trackedCpuSeconds": 4734.08,
+        "trackedSpend": "78 runs; 53.3 min wall; 92.4 min CPU",
+        "trackedRuns": 78,
+        "trackedWallSeconds": 3195.089,
+        "trackedCpuSeconds": 5545.68,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.064,
         "investmentScore": 2.9,
@@ -1749,7 +1749,7 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "72 runs; 45.6 min wall; 78.9 min CPU",
+      "Tracked spend": "78 runs; 53.3 min wall; 92.4 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
@@ -1988,29 +1988,29 @@
     "latestLevelArcScore10": 8.5,
     "metricPointCount": 589,
     "deltaCount": 80,
-    "measuredRuns": 144,
-    "wallSeconds": 3893.671,
-    "cpuSeconds": 6374.49,
-    "artifactBytes": 293723137,
+    "measuredRuns": 150,
+    "wallSeconds": 4350.822,
+    "cpuSeconds": 7186.09,
+    "artifactBytes": 313918891,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-2812d6d/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-fa37a87/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 143,
-      "Wall time": "64.9 min",
-      "CPU time": "106.2 min"
+      "Measured runs": 149,
+      "Wall time": "72.5 min",
+      "CPU time": "119.8 min"
     },
     {
       "Resource": "browser",
-      "Measured runs": 97,
-      "Wall time": "61.6 min",
-      "CPU time": "102.5 min"
+      "Measured runs": 102,
+      "Wall time": "69.2 min",
+      "CPU time": "116 min"
     },
     {
       "Resource": "gpu-equivalent",
@@ -2040,9 +2040,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 72,
-      "Wall time": "45.6 min",
-      "CPU time": "78.9 min"
+      "Measured runs": 78,
+      "Wall time": "53.3 min",
+      "CPU time": "92.4 min"
     },
     {
       "Axis": "conformance-economics",
@@ -2064,27 +2064,27 @@
     },
     {
       "Axis": "audio-reference-segmentation",
-      "Measured runs": 15,
-      "Wall time": "10.7 min",
-      "CPU time": "18.7 min"
+      "Measured runs": 16,
+      "Wall time": "11.1 min",
+      "CPU time": "19.4 min"
+    },
+    {
+      "Axis": "audio-event-gap",
+      "Measured runs": 12,
+      "Wall time": "8.8 min",
+      "CPU time": "16 min"
+    },
+    {
+      "Axis": "audio-theme-comparison",
+      "Measured runs": 8,
+      "Wall time": "8.7 min",
+      "CPU time": "15.9 min"
     },
     {
       "Axis": "audio-segmentation-normalization",
       "Measured runs": 7,
       "Wall time": "8.4 min",
       "CPU time": "15.1 min"
-    },
-    {
-      "Axis": "audio-event-gap",
-      "Measured runs": 10,
-      "Wall time": "7.5 min",
-      "CPU time": "13.6 min"
-    },
-    {
-      "Axis": "audio-theme-comparison",
-      "Measured runs": 7,
-      "Wall time": "7.4 min",
-      "CPU time": "13.5 min"
     }
   ],
   "nextGoalEstimateTable": [
@@ -2096,7 +2096,7 @@
       "Gap to target": "at target",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "72 runs; 45.6 min wall; 78.9 min CPU",
+      "Tracked spend": "78 runs; 53.3 min wall; 92.4 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.064/10 overall; investment score 2.9.",
       "Next action": "Tune the highest segment-level audio gap next: challengePerfect body. Rerun audio comparison, event-gap analysis, and quality scoring after the change."
     },
@@ -2215,8 +2215,8 @@
       "annotationStatus": "semantic-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-fa37a87-dirty/report.json",
-      "next": "Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change."
+      "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-63f90a0-dirty/report.json",
+      "next": "Tune the highest segment-level gap next: capturedFighterDestroyed onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
       "rank": 3,
@@ -2313,8 +2313,8 @@
       "Annotation status": "semantic-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-fa37a87-dirty/report.json",
-      "Missing next": "Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change."
+      "Anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-63f90a0-dirty/report.json",
+      "Missing next": "Tune the highest segment-level gap next: capturedFighterDestroyed onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
       "Priority": 3,

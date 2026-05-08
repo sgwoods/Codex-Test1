@@ -655,11 +655,12 @@ const sfx={
    this.recordCue(name,atmosphere,opts,null);
    return null;
   }
-  this.recordCue(name,atmosphere,opts,cue);
+  let selectedCue=cue;
   if(Array.isArray(cue.variants)&&cue.variants.length){
-   return cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
+   selectedCue=cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
   }
-  return cue;
+  this.recordCue(name,atmosphere,opts,selectedCue);
+  return selectedCue;
  },
  playCue(name,opts={}){
   if(DOCS_PREVIEW_MODE&&!opts.docsPreview)return;

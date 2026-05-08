@@ -638,6 +638,12 @@ window.__galagaHarness__={
   const captureMs=Math.max(700,Math.round(1000*(captureOpts.captureSeconds||this.estimateAudioCueDuration(name,captureOpts))));
   const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
   const audioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||null;
+  try{
+   if(typeof sfx.cueDef==='function'&&typeof sfx.loadReferenceBuffer==='function'){
+    const warmCue=sfx.cueDef(String(name),captureOpts);
+    if(warmCue&&warmCue.referenceClip)await sfx.loadReferenceBuffer(warmCue.referenceClip);
+   }
+  }catch{}
   if(audioDebug)audioDebug.lastCue=null;
   try{ if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(); }catch{}
   let playedCue=null;

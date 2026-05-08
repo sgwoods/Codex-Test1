@@ -1,0 +1,1739 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop",
+  "generatedAt": "2026-05-08T22:38:12.644Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "63f90a0",
+  "dirty": true,
+  "key": "formation-pulse",
+  "title": "Formation Pulse",
+  "cue": "stagePulse",
+  "problem": "Formation Pulse has the highest segment-level onset risk: the current classic pulse is a bright synthetic stab while the Galaga cadence reference has more low-frequency body and softer attack.",
+  "strategy": "Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.",
+  "successMeasure": "A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.",
+  "source": {
+    "comparisonSet": "formation-pulse-compare",
+    "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+    "referenceWindow": {
+      "startSeconds": 0.6,
+      "endSeconds": 0.84,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+      "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-63f90a0-dirty-audio-focus-223812/formation-pulse/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-63f90a0-dirty-audio-focus-223812/formation-pulse/metrics.json",
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "start_s": 0.08,
+          "end_s": 0.24,
+          "duration_s": 0.16,
+          "metrics": {
+            "duration_s": 0.16,
+            "peak": 0.1659,
+            "rms": 0.0821,
+            "spectral_centroid_hz": 1283.5,
+            "zero_crossings_per_s": 501,
+            "spectral_spread_hz": 1639.2,
+            "spectral_rolloff_85_hz": 2511.2,
+            "spectral_flatness": 0.1756,
+            "band_energy": {
+              "sub_500": 0.4678,
+              "low_mid_500_1500": 0.2503,
+              "mid_1500_3000": 0.1545,
+              "presence_3000_6000": 0.1044,
+              "air_6000_plus": 0.0229
+            },
+            "attack_peak_position": 0.25,
+            "decay_ratio": 0.999,
+            "envelope_contrast": 1.026,
+            "burst_share": 0.286
+          }
+        }
+      ],
+      "summary": {
+        "segmentCount": 1,
+        "status": "single-reference-body",
+        "thresholdRms": 0.0808,
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0.08,
+          "end_s": 0.24
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "refclip-s660-d240-v95",
+      "label": "Formation Pulse reference 0.66s/0.24s v0.95",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.2115,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.66,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.95
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.95,
+        "clipStart": 0.66,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.54,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.45776923076923076,
+        "zeroCrossing": 0.22716666666666666,
+        "rms": 0.16375,
+        "bandShape": 0.5142,
+        "rolloff": 0.4258076923076923,
+        "attack": 0.013333333333333332,
+        "decay": 0.03,
+        "burst": 0.2914285714285714
+      },
+      "dominantPenalty": "duration",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 595.1,
+      "zeroCrossingGapPerSecond": 408.9,
+      "rmsGap": 0.0262,
+      "bandShapeGap": 0.2571,
+      "rolloffGapHz": 1107.1,
+      "envelopeShapeGap": 0.112,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.56,
+      "worstSegmentRisk10": 2.56,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8037,
+        "rms": 0.1075,
+        "spectral_centroid_hz": 1913,
+        "zero_crossings_per_s": 956.1,
+        "spectral_spread_hz": 1615.5,
+        "spectral_rolloff_85_hz": 3624.2,
+        "spectral_flatness": 0.1788,
+        "band_energy": {
+          "sub_500": 0.2132,
+          "low_mid_500_1500": 0.2387,
+          "mid_1500_3000": 0.301,
+          "presence_3000_6000": 0.2219,
+          "air_6000_plus": 0.0252
+        },
+        "attack_peak_position": 0.988,
+        "decay_ratio": 1.122,
+        "envelope_contrast": 4.051,
+        "burst_share": 0.12
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2408,
+        "low_mid_500_1500": -0.0137,
+        "mid_1500_3000": 0.1367,
+        "presence_3000_6000": 0.1203,
+        "air_6000_plus": -0.0026
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 595.1,
+        "zero_crossings_per_s": 408.9,
+        "rms": 0.0262,
+        "spectral_spread_hz": 87,
+        "spectral_rolloff_85_hz": 1107.1,
+        "spectral_flatness": 0.0195,
+        "band_shape_distance": 0.2571,
+        "attack_peak_position": 0.012,
+        "decay_ratio": 0.096,
+        "envelope_contrast": 3.012,
+        "burst_share": 0.102
+      },
+      "keeperRead": "duration gap improved only -0.441s"
+    },
+    {
+      "id": "refclip-s600-d240-v105",
+      "label": "Formation Pulse reference 0.6s/0.24s v1.05",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.0665,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.24,
+          "referenceVolume": 1.05
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 1.05,
+        "clipStart": 0.6,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.56,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.4643076923076923,
+        "zeroCrossing": 0.19766666666666668,
+        "rms": 0.19624999999999998,
+        "bandShape": 0.5262,
+        "rolloff": 0.4310769230769231,
+        "attack": 0,
+        "decay": 0.04,
+        "burst": 0.2542857142857143
+      },
+      "dominantPenalty": "duration",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 603.6,
+      "zeroCrossingGapPerSecond": 355.8,
+      "rmsGap": 0.0314,
+      "bandShapeGap": 0.2631,
+      "rolloffGapHz": 1120.8,
+      "envelopeShapeGap": 0.098,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 3.55,
+      "worstSegmentRisk10": 3.55,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8222,
+        "rms": 0.1127,
+        "spectral_centroid_hz": 1921.5,
+        "zero_crossings_per_s": 903,
+        "spectral_spread_hz": 1618.9,
+        "spectral_rolloff_85_hz": 3637.9,
+        "spectral_flatness": 0.1814,
+        "band_energy": {
+          "sub_500": 0.2042,
+          "low_mid_500_1500": 0.2414,
+          "mid_1500_3000": 0.3111,
+          "presence_3000_6000": 0.2179,
+          "air_6000_plus": 0.0254
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.154,
+        "envelope_contrast": 4.085,
+        "burst_share": 0.133
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2498,
+        "low_mid_500_1500": -0.011,
+        "mid_1500_3000": 0.1468,
+        "presence_3000_6000": 0.1163,
+        "air_6000_plus": -0.0024
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 603.6,
+        "zero_crossings_per_s": 355.8,
+        "rms": 0.0314,
+        "spectral_spread_hz": 83.6,
+        "spectral_rolloff_85_hz": 1120.8,
+        "spectral_flatness": 0.0169,
+        "band_shape_distance": 0.2631,
+        "attack_peak_position": 0,
+        "decay_ratio": 0.128,
+        "envelope_contrast": 3.046,
+        "burst_share": 0.089
+      },
+      "keeperRead": "duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s600-d240-v95",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.95",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.0315,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.95
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.95,
+        "clipStart": 0.6,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.57,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.46861538461538466,
+        "zeroCrossing": 0.18255555555555558,
+        "rms": 0.19187500000000002,
+        "bandShape": 0.5306,
+        "rolloff": 0.4316538461538461,
+        "attack": 0,
+        "decay": 0.05437499999999999,
+        "burst": 0.2542857142857143
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 609.2,
+      "zeroCrossingGapPerSecond": 328.6,
+      "rmsGap": 0.0307,
+      "bandShapeGap": 0.2653,
+      "rolloffGapHz": 1122.3,
+      "envelopeShapeGap": 0.103,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 7.12,
+      "worstSegmentRisk10": 7.12,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8222,
+        "rms": 0.112,
+        "spectral_centroid_hz": 1927.1,
+        "zero_crossings_per_s": 875.8,
+        "spectral_spread_hz": 1618.5,
+        "spectral_rolloff_85_hz": 3639.4,
+        "spectral_flatness": 0.1814,
+        "band_energy": {
+          "sub_500": 0.202,
+          "low_mid_500_1500": 0.2414,
+          "mid_1500_3000": 0.3124,
+          "presence_3000_6000": 0.2187,
+          "air_6000_plus": 0.0255
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.2,
+        "envelope_contrast": 4.106,
+        "burst_share": 0.133
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.252,
+        "low_mid_500_1500": -0.011,
+        "mid_1500_3000": 0.1481,
+        "presence_3000_6000": 0.1171,
+        "air_6000_plus": -0.0023
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 609.2,
+        "zero_crossings_per_s": 328.6,
+        "rms": 0.0307,
+        "spectral_spread_hz": 84,
+        "spectral_rolloff_85_hz": 1122.3,
+        "spectral_flatness": 0.0169,
+        "band_shape_distance": 0.2653,
+        "attack_peak_position": 0,
+        "decay_ratio": 0.174,
+        "envelope_contrast": 3.067,
+        "burst_share": 0.089
+      },
+      "keeperRead": "segment risk improved only -0.2; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s600-d240-v62",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.62",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.084,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.62
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.62,
+        "clipStart": 0.6,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.68,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.5142307692307693,
+        "zeroCrossing": 0.2187222222222222,
+        "rms": 0.10874999999999999,
+        "bandShape": 0.545,
+        "rolloff": 0.4235,
+        "attack": 0,
+        "decay": 0.1446875,
+        "burst": 0.2914285714285714
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 668.5,
+      "zeroCrossingGapPerSecond": 393.7,
+      "rmsGap": 0.0174,
+      "bandShapeGap": 0.2725,
+      "rolloffGapHz": 1101.1,
+      "envelopeShapeGap": 0.145,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.73,
+      "worstSegmentRisk10": 6.73,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.7893,
+        "rms": 0.0987,
+        "spectral_centroid_hz": 1986.4,
+        "zero_crossings_per_s": 940.9,
+        "spectral_spread_hz": 1714,
+        "spectral_rolloff_85_hz": 3618.2,
+        "spectral_flatness": 0.2288,
+        "band_energy": {
+          "sub_500": 0.1962,
+          "low_mid_500_1500": 0.2377,
+          "mid_1500_3000": 0.3154,
+          "presence_3000_6000": 0.2174,
+          "air_6000_plus": 0.0333
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.489,
+        "envelope_contrast": 6.361,
+        "burst_share": 0.12
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2578,
+        "low_mid_500_1500": -0.0147,
+        "mid_1500_3000": 0.1511,
+        "presence_3000_6000": 0.1158,
+        "air_6000_plus": 0.0055
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 668.5,
+        "zero_crossings_per_s": 393.7,
+        "rms": 0.0174,
+        "spectral_spread_hz": 11.5,
+        "spectral_rolloff_85_hz": 1101.1,
+        "spectral_flatness": 0.0305,
+        "band_shape_distance": 0.2725,
+        "attack_peak_position": 0,
+        "decay_ratio": 0.463,
+        "envelope_contrast": 5.322,
+        "burst_share": 0.102
+      },
+      "keeperRead": "segment risk improved only 0.19; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s660-d240-v86",
+      "label": "Formation Pulse reference 0.66s/0.24s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.18,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.66,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.86,
+        "clipStart": 0.66,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.8,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.5383076923076923,
+        "zeroCrossing": 0.1698888888888889,
+        "rms": 0.18312499999999998,
+        "bandShape": 0.5548,
+        "rolloff": 0.4747692307692308,
+        "attack": 0.013333333333333332,
+        "decay": 0.09937499999999999,
+        "burst": 0.2542857142857143
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 699.8,
+      "zeroCrossingGapPerSecond": 305.8,
+      "rmsGap": 0.0293,
+      "bandShapeGap": 0.2774,
+      "rolloffGapHz": 1234.4,
+      "envelopeShapeGap": 0.122,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 7.12,
+      "worstSegmentRisk10": 7.12,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8056,
+        "rms": 0.1106,
+        "spectral_centroid_hz": 2017.7,
+        "zero_crossings_per_s": 853,
+        "spectral_spread_hz": 1766.6,
+        "spectral_rolloff_85_hz": 3751.5,
+        "spectral_flatness": 0.2413,
+        "band_energy": {
+          "sub_500": 0.1936,
+          "low_mid_500_1500": 0.2354,
+          "mid_1500_3000": 0.316,
+          "presence_3000_6000": 0.2195,
+          "air_6000_plus": 0.0355
+        },
+        "attack_peak_position": 0.988,
+        "decay_ratio": 1.344,
+        "envelope_contrast": 4.858,
+        "burst_share": 0.133
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2604,
+        "low_mid_500_1500": -0.017,
+        "mid_1500_3000": 0.1517,
+        "presence_3000_6000": 0.1179,
+        "air_6000_plus": 0.0077
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 699.8,
+        "zero_crossings_per_s": 305.8,
+        "rms": 0.0293,
+        "spectral_spread_hz": 64.1,
+        "spectral_rolloff_85_hz": 1234.4,
+        "spectral_flatness": 0.043,
+        "band_shape_distance": 0.2774,
+        "attack_peak_position": 0.012,
+        "decay_ratio": 0.318,
+        "envelope_contrast": 3.819,
+        "burst_share": 0.089
+      },
+      "keeperRead": "segment risk improved only -0.2; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s540-d240-v86",
+      "label": "Formation Pulse reference 0.54s/0.24s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.18,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.54,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.86,
+        "clipStart": 0.54,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.81,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.4656923076923077,
+        "zeroCrossing": 0.2793333333333333,
+        "rms": 0.274375,
+        "bandShape": 0.5364,
+        "rolloff": 0.43630769230769234,
+        "attack": 0.026666666666666665,
+        "decay": 0.18874999999999997,
+        "burst": 0.15142857142857144
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 605.4,
+      "zeroCrossingGapPerSecond": 502.8,
+      "rmsGap": 0.0439,
+      "bandShapeGap": 0.2682,
+      "rolloffGapHz": 1134.4,
+      "envelopeShapeGap": 0.122,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.88,
+      "worstSegmentRisk10": 6.88,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.7893,
+        "rms": 0.1252,
+        "spectral_centroid_hz": 1923.3,
+        "zero_crossings_per_s": 1050,
+        "spectral_spread_hz": 1657,
+        "spectral_rolloff_85_hz": 3651.5,
+        "spectral_flatness": 0.2011,
+        "band_energy": {
+          "sub_500": 0.1864,
+          "low_mid_500_1500": 0.271,
+          "mid_1500_3000": 0.3086,
+          "presence_3000_6000": 0.2069,
+          "air_6000_plus": 0.0271
+        },
+        "attack_peak_position": 0.976,
+        "decay_ratio": 1.63,
+        "envelope_contrast": 5.079,
+        "burst_share": 0.169
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2676,
+        "low_mid_500_1500": 0.0186,
+        "mid_1500_3000": 0.1443,
+        "presence_3000_6000": 0.1053,
+        "air_6000_plus": -0.0007
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 605.4,
+        "zero_crossings_per_s": 502.8,
+        "rms": 0.0439,
+        "spectral_spread_hz": 45.5,
+        "spectral_rolloff_85_hz": 1134.4,
+        "spectral_flatness": 0.0028,
+        "band_shape_distance": 0.2682,
+        "attack_peak_position": 0.024,
+        "decay_ratio": 0.604,
+        "envelope_contrast": 4.04,
+        "burst_share": 0.053
+      },
+      "keeperRead": "segment risk improved only 0.04; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s540-d240-v95",
+      "label": "Formation Pulse reference 0.54s/0.24s v0.95",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.2115,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.54,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.95
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.95,
+        "clipStart": 0.54,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.91,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.4893846153846154,
+        "zeroCrossing": 0.3475,
+        "rms": 0.236875,
+        "bandShape": 0.5444,
+        "rolloff": 0.4596153846153846,
+        "attack": 0.041111111111111105,
+        "decay": 0.12125,
+        "burst": 0.22
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 636.2,
+      "zeroCrossingGapPerSecond": 625.5,
+      "rmsGap": 0.0379,
+      "bandShapeGap": 0.2722,
+      "rolloffGapHz": 1195,
+      "envelopeShapeGap": 0.127,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 7.12,
+      "worstSegmentRisk10": 7.12,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8178,
+        "rms": 0.1192,
+        "spectral_centroid_hz": 1954.1,
+        "zero_crossings_per_s": 1172.7,
+        "spectral_spread_hz": 1644.6,
+        "spectral_rolloff_85_hz": 3712.1,
+        "spectral_flatness": 0.2037,
+        "band_energy": {
+          "sub_500": 0.1833,
+          "low_mid_500_1500": 0.2586,
+          "mid_1500_3000": 0.3152,
+          "presence_3000_6000": 0.2167,
+          "air_6000_plus": 0.0263
+        },
+        "attack_peak_position": 0.963,
+        "decay_ratio": 1.414,
+        "envelope_contrast": 4.471,
+        "burst_share": 0.145
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2707,
+        "low_mid_500_1500": 0.0062,
+        "mid_1500_3000": 0.1509,
+        "presence_3000_6000": 0.1151,
+        "air_6000_plus": -0.0015
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 636.2,
+        "zero_crossings_per_s": 625.5,
+        "rms": 0.0379,
+        "spectral_spread_hz": 57.9,
+        "spectral_rolloff_85_hz": 1195,
+        "spectral_flatness": 0.0054,
+        "band_shape_distance": 0.2722,
+        "attack_peak_position": 0.037,
+        "decay_ratio": 0.388,
+        "envelope_contrast": 3.432,
+        "burst_share": 0.077
+      },
+      "keeperRead": "segment risk improved only -0.2; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s600-d240-v86",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.86,
+        "clipStart": 0.6,
+        "clipDuration": 0.24
+      },
+      "risk10": 3.97,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.49369230769230765,
+        "zeroCrossing": 0.31722222222222224,
+        "rms": 0.27625,
+        "bandShape": 0.5782,
+        "rolloff": 0.4456538461538462,
+        "attack": 0.013333333333333332,
+        "decay": 0.21749999999999997,
+        "burst": 0.15142857142857144
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 641.8,
+      "zeroCrossingGapPerSecond": 571,
+      "rmsGap": 0.0442,
+      "bandShapeGap": 0.2891,
+      "rolloffGapHz": 1158.7,
+      "envelopeShapeGap": 0.127,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 7.11,
+      "worstSegmentRisk10": 7.11,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.818,
+        "rms": 0.1255,
+        "spectral_centroid_hz": 1959.7,
+        "zero_crossings_per_s": 1118.2,
+        "spectral_spread_hz": 1654.2,
+        "spectral_rolloff_85_hz": 3675.8,
+        "spectral_flatness": 0.2108,
+        "band_energy": {
+          "sub_500": 0.1652,
+          "low_mid_500_1500": 0.2798,
+          "mid_1500_3000": 0.3188,
+          "presence_3000_6000": 0.2088,
+          "air_6000_plus": 0.0274
+        },
+        "attack_peak_position": 0.988,
+        "decay_ratio": 1.722,
+        "envelope_contrast": 5.282,
+        "burst_share": 0.169
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2888,
+        "low_mid_500_1500": 0.0274,
+        "mid_1500_3000": 0.1545,
+        "presence_3000_6000": 0.1072,
+        "air_6000_plus": -0.0004
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 641.8,
+        "zero_crossings_per_s": 571,
+        "rms": 0.0442,
+        "spectral_spread_hz": 48.3,
+        "spectral_rolloff_85_hz": 1158.7,
+        "spectral_flatness": 0.0125,
+        "band_shape_distance": 0.2891,
+        "attack_peak_position": 0.012,
+        "decay_ratio": 0.696,
+        "envelope_contrast": 4.243,
+        "burst_share": 0.053
+      },
+      "keeperRead": "segment risk improved only -0.19; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s600-d200-v86",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.16,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.2,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.86,
+        "clipStart": 0.6,
+        "clipDuration": 0.2
+      },
+      "risk10": 4.14,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.5225384615384615,
+        "zeroCrossing": 0.29783333333333334,
+        "rms": 0.27,
+        "bandShape": 0.5888,
+        "rolloff": 0.4730384615384616,
+        "attack": 0.041111111111111105,
+        "decay": 0.30906249999999996,
+        "burst": 0.18571428571428572
+      },
+      "dominantPenalty": "bandShape",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 679.3,
+      "zeroCrossingGapPerSecond": 536.1,
+      "rmsGap": 0.0432,
+      "bandShapeGap": 0.2944,
+      "rolloffGapHz": 1229.9,
+      "envelopeShapeGap": 0.179,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.89,
+      "worstSegmentRisk10": 6.89,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8133,
+        "rms": 0.1245,
+        "spectral_centroid_hz": 1997.2,
+        "zero_crossings_per_s": 1083.3,
+        "spectral_spread_hz": 1705,
+        "spectral_rolloff_85_hz": 3747,
+        "spectral_flatness": 0.2308,
+        "band_energy": {
+          "sub_500": 0.1595,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.3173,
+          "presence_3000_6000": 0.2095,
+          "air_6000_plus": 0.0312
+        },
+        "attack_peak_position": 0.963,
+        "decay_ratio": 2.015,
+        "envelope_contrast": 7.967,
+        "burst_share": 0.157
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2945,
+        "low_mid_500_1500": 0.0301,
+        "mid_1500_3000": 0.153,
+        "presence_3000_6000": 0.1079,
+        "air_6000_plus": 0.0034
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 679.3,
+        "zero_crossings_per_s": 536.1,
+        "rms": 0.0432,
+        "spectral_spread_hz": 2.5,
+        "spectral_rolloff_85_hz": 1229.9,
+        "spectral_flatness": 0.0325,
+        "band_shape_distance": 0.2944,
+        "attack_peak_position": 0.037,
+        "decay_ratio": 0.989,
+        "envelope_contrast": 6.928,
+        "burst_share": 0.065
+      },
+      "keeperRead": "segment risk improved only 0.03; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "low-soft-march",
+      "label": "Low soft march",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "tones": [
+          {
+            "freq": 196,
+            "duration": 0.13,
+            "wave": "triangle",
+            "volume": 0.01,
+            "slide": -12,
+            "lpHz": 1500
+          },
+          {
+            "freq": 392,
+            "duration": 0.09,
+            "wave": "triangle",
+            "volume": 0.006,
+            "slide": -22,
+            "lpHz": 2300,
+            "delay": 0.028
+          }
+        ]
+      },
+      "risk10": 4.28,
+      "riskBreakdown": {
+        "duration": 0.0011764705882352942,
+        "centroid": 0.5046923076923077,
+        "zeroCrossing": 0.738111111111111,
+        "rms": 0.855,
+        "bandShape": 0.5928,
+        "rolloff": 0.4748076923076923,
+        "attack": 0.12777777777777777,
+        "decay": 0.46312499999999995,
+        "burst": 0.5285714285714286
+      },
+      "dominantPenalty": "rms",
+      "durationGapSeconds": 0.001,
+      "centroidGapHz": 656.1,
+      "zeroCrossingGapPerSecond": 1328.6,
+      "rmsGap": 0.1368,
+      "bandShapeGap": 0.2964,
+      "rolloffGapHz": 1234.5,
+      "envelopeShapeGap": 0.373,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.7,
+      "worstSegmentRisk10": 6.7,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "activeMetrics": {
+        "duration_s": 0.211,
+        "peak": 0.9118,
+        "rms": 0.2181,
+        "spectral_centroid_hz": 1974,
+        "zero_crossings_per_s": 1875.8,
+        "spectral_spread_hz": 1626.6,
+        "spectral_rolloff_85_hz": 3751.6,
+        "spectral_flatness": 0.1689,
+        "band_energy": {
+          "sub_500": 0.1598,
+          "low_mid_500_1500": 0.275,
+          "mid_1500_3000": 0.3187,
+          "presence_3000_6000": 0.2209,
+          "air_6000_plus": 0.0256
+        },
+        "attack_peak_position": 0.885,
+        "decay_ratio": 2.508,
+        "envelope_contrast": 4.424,
+        "burst_share": 0.407
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.2942,
+        "low_mid_500_1500": 0.0226,
+        "mid_1500_3000": 0.1544,
+        "presence_3000_6000": 0.1193,
+        "air_6000_plus": -0.0022
+      },
+      "comparison": {
+        "duration_s": 0.001,
+        "spectral_centroid_hz": 656.1,
+        "zero_crossings_per_s": 1328.6,
+        "rms": 0.1368,
+        "spectral_spread_hz": 75.9,
+        "spectral_rolloff_85_hz": 1234.5,
+        "spectral_flatness": 0.0294,
+        "band_shape_distance": 0.2964,
+        "attack_peak_position": 0.115,
+        "decay_ratio": 1.482,
+        "envelope_contrast": 3.385,
+        "burst_share": 0.185
+      },
+      "keeperRead": "whole-cue risk improved only 0.22; segment risk improved only 0.22; duration gap improved only 0.008s"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "spec": null,
+      "risk10": 4.5,
+      "riskBreakdown": {
+        "duration": 0.010588235294117647,
+        "centroid": 0.5272307692307692,
+        "zeroCrossing": 0.7483888888888889,
+        "rms": 0.89125,
+        "bandShape": 0.6064,
+        "rolloff": 0.48134615384615387,
+        "attack": 0.044444444444444446,
+        "decay": 0.70125,
+        "burst": 0.6857142857142857
+      },
+      "dominantPenalty": "rms",
+      "durationGapSeconds": 0.009,
+      "centroidGapHz": 685.4,
+      "zeroCrossingGapPerSecond": 1347.1,
+      "rmsGap": 0.1426,
+      "bandShapeGap": 0.3032,
+      "rolloffGapHz": 1251.5,
+      "envelopeShapeGap": 0.477,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.92,
+      "worstSegmentRisk10": 6.92,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "activeMetrics": {
+        "duration_s": 0.201,
+        "peak": 0.9195,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 2003.3,
+        "zero_crossings_per_s": 1894.3,
+        "spectral_spread_hz": 1641.8,
+        "spectral_rolloff_85_hz": 3768.6,
+        "spectral_flatness": 0.1967,
+        "band_energy": {
+          "sub_500": 0.1515,
+          "low_mid_500_1500": 0.2731,
+          "mid_1500_3000": 0.3278,
+          "presence_3000_6000": 0.2206,
+          "air_6000_plus": 0.027
+        },
+        "attack_peak_position": 0.96,
+        "decay_ratio": 3.27,
+        "envelope_contrast": 2.453,
+        "burst_share": 0.462
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.3025,
+        "low_mid_500_1500": 0.0207,
+        "mid_1500_3000": 0.1635,
+        "presence_3000_6000": 0.119,
+        "air_6000_plus": -0.0008
+      },
+      "comparison": {
+        "duration_s": 0.009,
+        "spectral_centroid_hz": 685.4,
+        "zero_crossings_per_s": 1347.1,
+        "rms": 0.1426,
+        "spectral_spread_hz": 60.7,
+        "spectral_rolloff_85_hz": 1251.5,
+        "spectral_flatness": 0.0016,
+        "band_shape_distance": 0.3032,
+        "attack_peak_position": 0.04,
+        "decay_ratio": 2.244,
+        "envelope_contrast": 1.414,
+        "burst_share": 0.24
+      },
+      "keeperRead": "baseline"
+    },
+    {
+      "id": "convoy-current-window",
+      "label": "Convoy current guide window",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.86,
+        "clipStart": 0.6,
+        "clipDuration": 0.24
+      },
+      "risk10": 5.07,
+      "riskBreakdown": {
+        "duration": 0.010588235294117647,
+        "centroid": 0.6,
+        "zeroCrossing": 1,
+        "rms": 0.814375,
+        "bandShape": 0.6914,
+        "rolloff": 0.4928461538461539,
+        "attack": 0.08888888888888889,
+        "decay": 1,
+        "burst": 0.46571428571428575
+      },
+      "dominantPenalty": "zeroCrossing",
+      "durationGapSeconds": 0.009,
+      "centroidGapHz": 780,
+      "zeroCrossingGapPerSecond": 2112.7,
+      "rmsGap": 0.1303,
+      "bandShapeGap": 0.3457,
+      "rolloffGapHz": 1281.4,
+      "envelopeShapeGap": 0.518,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 7.04,
+      "worstSegmentRisk10": 7.04,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "activeMetrics": {
+        "duration_s": 0.201,
+        "peak": 0.8079,
+        "rms": 0.2116,
+        "spectral_centroid_hz": 2097.9,
+        "zero_crossings_per_s": 2659.9,
+        "spectral_spread_hz": 1614.6,
+        "spectral_rolloff_85_hz": 3798.5,
+        "spectral_flatness": 0.1684,
+        "band_energy": {
+          "sub_500": 0.1085,
+          "low_mid_500_1500": 0.2853,
+          "mid_1500_3000": 0.3402,
+          "presence_3000_6000": 0.2384,
+          "air_6000_plus": 0.0276
+        },
+        "attack_peak_position": 0.92,
+        "decay_ratio": 4.698,
+        "envelope_contrast": 3.569,
+        "burst_share": 0.385
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.3455,
+        "low_mid_500_1500": 0.0329,
+        "mid_1500_3000": 0.1759,
+        "presence_3000_6000": 0.1368,
+        "air_6000_plus": -0.0002
+      },
+      "comparison": {
+        "duration_s": 0.009,
+        "spectral_centroid_hz": 780,
+        "zero_crossings_per_s": 2112.7,
+        "rms": 0.1303,
+        "spectral_spread_hz": 87.9,
+        "spectral_rolloff_85_hz": 1281.4,
+        "spectral_flatness": 0.0299,
+        "band_shape_distance": 0.3457,
+        "attack_peak_position": 0.08,
+        "decay_ratio": 3.672,
+        "envelope_contrast": 2.53,
+        "burst_share": 0.163
+      },
+      "keeperRead": "whole-cue risk improved only -0.57; segment risk improved only -0.12; duration gap improved only 0s"
+    },
+    {
+      "id": "refclip-s600-d200-v74",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.74",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.202,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.2,
+          "referenceVolume": 0.74
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.74,
+        "clipStart": 0.6,
+        "clipDuration": 0.2
+      },
+      "risk10": 5.15,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.48946153846153845,
+        "zeroCrossing": 0.7473333333333334,
+        "rms": 0.605625,
+        "bandShape": 0.625,
+        "rolloff": 0.4252307692307692,
+        "attack": 0.5288888888888889,
+        "decay": 0.1003125,
+        "burst": 0.26
+      },
+      "dominantPenalty": "zeroCrossing",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 636.3,
+      "zeroCrossingGapPerSecond": 1345.2,
+      "rmsGap": 0.0969,
+      "bandShapeGap": 0.3125,
+      "rolloffGapHz": 1105.6,
+      "envelopeShapeGap": 0.296,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.72,
+      "worstSegmentRisk10": 6.72,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8711,
+        "rms": 0.1782,
+        "spectral_centroid_hz": 1954.2,
+        "zero_crossings_per_s": 1892.4,
+        "spectral_spread_hz": 1650.2,
+        "spectral_rolloff_85_hz": 3622.7,
+        "spectral_flatness": 0.2153,
+        "band_energy": {
+          "sub_500": 0.1429,
+          "low_mid_500_1500": 0.3248,
+          "mid_1500_3000": 0.3128,
+          "presence_3000_6000": 0.1932,
+          "air_6000_plus": 0.0263
+        },
+        "attack_peak_position": 0.524,
+        "decay_ratio": 0.705,
+        "envelope_contrast": 5.997,
+        "burst_share": 0.313
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.3111,
+        "low_mid_500_1500": 0.0724,
+        "mid_1500_3000": 0.1485,
+        "presence_3000_6000": 0.0916,
+        "air_6000_plus": -0.0015
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 636.3,
+        "zero_crossings_per_s": 1345.2,
+        "rms": 0.0969,
+        "spectral_spread_hz": 52.3,
+        "spectral_rolloff_85_hz": 1105.6,
+        "spectral_flatness": 0.017,
+        "band_shape_distance": 0.3125,
+        "attack_peak_position": 0.476,
+        "decay_ratio": 0.321,
+        "envelope_contrast": 4.958,
+        "burst_share": 0.091
+      },
+      "keeperRead": "whole-cue risk improved only -0.65; segment risk improved only 0.2; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s600-d200-v95",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.95",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.1915,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.2,
+          "referenceVolume": 0.95
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.95,
+        "clipStart": 0.6,
+        "clipDuration": 0.2
+      },
+      "risk10": 5.21,
+      "riskBreakdown": {
+        "duration": 0.5294117647058824,
+        "centroid": 0.5093846153846154,
+        "zeroCrossing": 0.7877777777777778,
+        "rms": 0.61625,
+        "bandShape": 0.6462,
+        "rolloff": 0.4322307692307692,
+        "attack": 0.5144444444444445,
+        "decay": 0.07406249999999999,
+        "burst": 0.19142857142857145
+      },
+      "dominantPenalty": "zeroCrossing",
+      "durationGapSeconds": 0.45,
+      "centroidGapHz": 662.2,
+      "zeroCrossingGapPerSecond": 1418,
+      "rmsGap": 0.0986,
+      "bandShapeGap": 0.3231,
+      "rolloffGapHz": 1123.8,
+      "envelopeShapeGap": 0.26,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 6.75,
+      "worstSegmentRisk10": 6.75,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 0,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "peak": 0.8227,
+        "rms": 0.1799,
+        "spectral_centroid_hz": 1980.1,
+        "zero_crossings_per_s": 1965.2,
+        "spectral_spread_hz": 1652.6,
+        "spectral_rolloff_85_hz": 3640.9,
+        "spectral_flatness": 0.2148,
+        "band_energy": {
+          "sub_500": 0.1323,
+          "low_mid_500_1500": 0.3265,
+          "mid_1500_3000": 0.3165,
+          "presence_3000_6000": 0.1983,
+          "air_6000_plus": 0.0264
+        },
+        "attack_peak_position": 0.537,
+        "decay_ratio": 0.789,
+        "envelope_contrast": 4.64,
+        "burst_share": 0.289
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.3217,
+        "low_mid_500_1500": 0.0741,
+        "mid_1500_3000": 0.1522,
+        "presence_3000_6000": 0.0967,
+        "air_6000_plus": -0.0014
+      },
+      "comparison": {
+        "duration_s": 0.45,
+        "spectral_centroid_hz": 662.2,
+        "zero_crossings_per_s": 1418,
+        "rms": 0.0986,
+        "spectral_spread_hz": 49.9,
+        "spectral_rolloff_85_hz": 1123.8,
+        "spectral_flatness": 0.0165,
+        "band_shape_distance": 0.3231,
+        "attack_peak_position": 0.463,
+        "decay_ratio": 0.237,
+        "envelope_contrast": 3.601,
+        "burst_share": 0.067
+      },
+      "keeperRead": "whole-cue risk improved only -0.71; segment risk improved only 0.17; duration gap improved only -0.441s; fewer exact segment-role matches than baseline"
+    },
+    {
+      "id": "refclip-s600-d240-v74",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.74",
+      "generated": true,
+      "generator": {
+        "family": "formation-pulse-reference-subclip-grid",
+        "heuristic": 0.042,
+        "target": "Make the basic formation cadence feel closer to an arcade marching/pressure bed while preserving short repeatable pulse behavior.",
+        "params": {
+          "clipStart": 0.6,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.74
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "cooldownMs": 1250,
+        "referenceVolume": 0.74,
+        "clipStart": 0.6,
+        "clipDuration": 0.24
+      },
+      "risk10": 5.34,
+      "riskBreakdown": {
+        "duration": 0.04588235294117647,
+        "centroid": 0.6123076923076923,
+        "zeroCrossing": 0.9972777777777777,
+        "rms": 0.69875,
+        "bandShape": 0.665,
+        "rolloff": 0.4876538461538462,
+        "attack": 0.37,
+        "decay": 1,
+        "burst": 0.5342857142857144
+      },
+      "dominantPenalty": "decay",
+      "durationGapSeconds": 0.039,
+      "centroidGapHz": 796,
+      "zeroCrossingGapPerSecond": 1795.1,
+      "rmsGap": 0.1118,
+      "bandShapeGap": 0.3325,
+      "rolloffGapHz": 1267.9,
+      "envelopeShapeGap": 0.635,
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 7.26,
+      "worstSegmentRisk10": 7.26,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "activeMetrics": {
+        "duration_s": 0.171,
+        "peak": 0.8154,
+        "rms": 0.1931,
+        "spectral_centroid_hz": 2113.9,
+        "zero_crossings_per_s": 2342.3,
+        "spectral_spread_hz": 1638,
+        "spectral_rolloff_85_hz": 3785,
+        "spectral_flatness": 0.2008,
+        "band_energy": {
+          "sub_500": 0.1468,
+          "low_mid_500_1500": 0.2271,
+          "mid_1500_3000": 0.3447,
+          "presence_3000_6000": 0.2519,
+          "air_6000_plus": 0.0295
+        },
+        "attack_peak_position": 0.667,
+        "decay_ratio": 13670.648,
+        "envelope_contrast": 87.525,
+        "burst_share": 0.409
+      },
+      "referenceMetrics": {
+        "duration_s": 0.21,
+        "peak": 0.1659,
+        "rms": 0.0813,
+        "spectral_centroid_hz": 1317.9,
+        "zero_crossings_per_s": 547.2,
+        "spectral_spread_hz": 1702.5,
+        "spectral_rolloff_85_hz": 2517.1,
+        "spectral_flatness": 0.1983,
+        "band_energy": {
+          "sub_500": 0.454,
+          "low_mid_500_1500": 0.2524,
+          "mid_1500_3000": 0.1643,
+          "presence_3000_6000": 0.1016,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.026,
+        "envelope_contrast": 1.039,
+        "burst_share": 0.222
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.3072,
+        "low_mid_500_1500": -0.0253,
+        "mid_1500_3000": 0.1804,
+        "presence_3000_6000": 0.1503,
+        "air_6000_plus": 0.0017
+      },
+      "comparison": {
+        "duration_s": 0.039,
+        "spectral_centroid_hz": 796,
+        "zero_crossings_per_s": 1795.1,
+        "rms": 0.1118,
+        "spectral_spread_hz": 64.5,
+        "spectral_rolloff_85_hz": 1267.9,
+        "spectral_flatness": 0.0025,
+        "band_shape_distance": 0.3325,
+        "attack_peak_position": 0.333,
+        "decay_ratio": 13669.622,
+        "envelope_contrast": 86.486,
+        "burst_share": 0.187
+      },
+      "keeperRead": "whole-cue risk improved only -0.84; segment risk improved only -0.34; duration gap improved only -0.03s"
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": null,
+    "measuredBest": "refclip-s660-d240-v95",
+    "reason": "No Formation Pulse candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+  },
+  "nextStep": "Do not promote Formation Pulse yet; use the measured best candidate to refine the generator or scoring gates."
+}
