@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-cue-candidate-loop",
+  "generatedAt": "2026-05-08T20:27:20.133Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "f52327e",
+  "dirty": true,
+  "cue": "captureBeam",
+  "repetitions": 1,
+  "candidateFilter": [
+    "low-mid-balanced-midlift",
+    "midlift-bright-hp",
+    "midlift-midband-early",
+    "midlift-reference-ratio",
+    "midlift-subtrim-pulse"
+  ],
+  "problem": "Capture Beam is the highest whole-cue Aurora audio event-gap risk. The current runtime cue is too long, too low-heavy, and peaks too late, so the tractor-beam danger/rescue moment reads less urgently than Galaga.",
+  "strategy": "Generate bounded synthetic beam candidates, capture each through the live browser audio engine, compare them against the measured Galaga tractor-beam window, and recommend promotion only when measured urgency improves without trading away stability. This favors shorter active duration, brighter centroid, lower sub-bass, stronger mid-band energy, earlier attack, and lower segment risk.",
+  "successMeasure": "A keeper must reduce overall capture-beam risk by at least 0.3, keep duration gap within 0.09s, improve segment risk when available, improve centroid by at least 80 Hz, materially reduce sub-bass, materially increase mid-band energy, move the attack earlier, avoid band-shape regression, and avoid RMS regression.",
+  "source": {
+    "comparisonSet": "capture-beam-compare",
+    "referenceClip": "assets/reference-audio/galaga3-tractor-beam.m4a",
+    "referenceWindow": {
+      "startSeconds": 3.199,
+      "endSeconds": 3.679,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+      "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+    },
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "start_s": 0,
+          "end_s": 0.269,
+          "duration_s": 0.269,
+          "metrics": {
+            "duration_s": 0.269,
+            "peak": 0.6609,
+            "rms": 0.3402,
+            "spectral_centroid_hz": 1795,
+            "zero_crossings_per_s": 2657.4,
+            "spectral_spread_hz": 1259.7,
+            "spectral_rolloff_85_hz": 2564.6,
+            "spectral_flatness": 0.1418,
+            "band_energy": {
+              "sub_500": 0.0251,
+              "low_mid_500_1500": 0.5239,
+              "mid_1500_3000": 0.3362,
+              "presence_3000_6000": 0.0968,
+              "air_6000_plus": 0.018
+            },
+            "attack_peak_position": 0.061,
+            "decay_ratio": 0.93,
+            "envelope_contrast": 1.042,
+            "burst_share": 0
+          }
+        }
+      ],
+      "summary": {
+        "segmentCount": 1,
+        "status": "single-reference-body",
+        "thresholdRms": 0.1104,
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0,
+          "end_s": 0.269
+        }
+      }
+    },
+    "outputRoot": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-f52327e-dirty-capture-beam-202720-filtered/captureBeam"
+  },
+  "decision": {
+    "status": "candidate-recommended",
+    "keep": true,
+    "baseline": "baseline-current",
+    "best": "midlift-midband-early",
+    "measuredBest": "midlift-midband-early",
+    "riskDelta": 2.19,
+    "segmentRiskDelta": 1.67,
+    "centroidDelta": 392,
+    "bandDelta": 0.0778,
+    "subDelta": 0.0882,
+    "midDelta": 0.0416,
+    "attackDelta": 0.056,
+    "rmsDelta": 0.023,
+    "reason": "Selected candidate clears duration, risk, segment, centroid, sub-bass, mid-band, attack timing, band-shape, and RMS gates."
+  },
+  "candidates": [
+    {
+      "id": "midlift-midband-early",
+      "label": "Midlift midband early beam",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.079,
+      "centroidGapHz": 247.5,
+      "zeroCrossingGapPerSecond": 360.1,
+      "rmsGap": 0.0301,
+      "bandShapeGap": 0.2581,
+      "rolloffGapHz": 168,
+      "activeMetrics": {
+        "duration_s": 0.26,
+        "rms": 0.273,
+        "spectral_centroid_hz": 1545.4,
+        "zero_crossings_per_s": 2462.4,
+        "spectral_rolloff_85_hz": 2731.3,
+        "band_energy": {
+          "sub_500": 0.2728,
+          "low_mid_500_1500": 0.428,
+          "mid_1500_3000": 0.1933,
+          "presence_3000_6000": 0.0777,
+          "air_6000_plus": 0.0281
+        },
+        "attack_peak_position": 0.344,
+        "decay_ratio": 1.129,
+        "burst_share": 0.242
+      },
+      "referenceMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.3031,
+        "spectral_centroid_hz": 1792.9,
+        "zero_crossings_per_s": 2822.5,
+        "spectral_rolloff_85_hz": 2563.3,
+        "band_energy": {
+          "sub_500": 0.025,
+          "low_mid_500_1500": 0.5257,
+          "mid_1500_3000": 0.3345,
+          "presence_3000_6000": 0.097,
+          "air_6000_plus": 0.0179
+        },
+        "attack_peak_position": 0.048,
+        "decay_ratio": 0.532,
+        "burst_share": 0.047
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.2478,
+        "low_mid_500_1500": -0.0977,
+        "mid_1500_3000": -0.1412,
+        "presence_3000_6000": -0.0193,
+        "air_6000_plus": 0.0102
+      },
+      "comparison": {
+        "duration_s": 0.079,
+        "spectral_centroid_hz": 247.5,
+        "zero_crossings_per_s": 360.1,
+        "rms": 0.0301,
+        "spectral_rolloff_85_hz": 168,
+        "band_shape_distance": 0.2581,
+        "attack_peak_position": 0.296,
+        "decay_ratio": 0.597,
+        "burst_share": 0.195
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.1,
+      "worstSegmentRisk10": 4.1,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "midlift-midband-early",
+          "repetition": 1,
+          "risk10": 4.8,
+          "durationGapSeconds": 0.079,
+          "centroidGapHz": 247.5,
+          "rmsGap": 0.0301,
+          "bandShapeGap": 0.2581,
+          "bandEnergyDelta": {
+            "sub_500": 0.2478,
+            "low_mid_500_1500": -0.0977,
+            "mid_1500_3000": -0.1412,
+            "presence_3000_6000": -0.0193,
+            "air_6000_plus": 0.0102
+          },
+          "worstSegmentRisk10": 4.1,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.8,
+      "riskBreakdown": {
+        "duration": 0.329,
+        "centroid": 0.275,
+        "zeroCrossing": 0.24,
+        "rms": 0.215,
+        "bandShape": 0.615,
+        "subBass": 0.729,
+        "missingMid": 0.642,
+        "rolloff": 0.093,
+        "attack": 0.9,
+        "segment": 0.41,
+        "floor": 0.35
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "midlift-subtrim-pulse",
+      "label": "Midlift sub-trim pulse",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.021,
+      "centroidGapHz": 423.2,
+      "zeroCrossingGapPerSecond": 641.9,
+      "rmsGap": 0.0273,
+      "bandShapeGap": 0.3114,
+      "rolloffGapHz": 39.5,
+      "activeMetrics": {
+        "duration_s": 0.36,
+        "rms": 0.2758,
+        "spectral_centroid_hz": 1369.7,
+        "zero_crossings_per_s": 2180.6,
+        "spectral_rolloff_85_hz": 2602.8,
+        "band_energy": {
+          "sub_500": 0.3327,
+          "low_mid_500_1500": 0.3821,
+          "mid_1500_3000": 0.1841,
+          "presence_3000_6000": 0.0795,
+          "air_6000_plus": 0.0216
+        },
+        "attack_peak_position": 0.889,
+        "decay_ratio": 0.908,
+        "burst_share": 0.217
+      },
+      "referenceMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.3031,
+        "spectral_centroid_hz": 1792.9,
+        "zero_crossings_per_s": 2822.5,
+        "spectral_rolloff_85_hz": 2563.3,
+        "band_energy": {
+          "sub_500": 0.025,
+          "low_mid_500_1500": 0.5257,
+          "mid_1500_3000": 0.3345,
+          "presence_3000_6000": 0.097,
+          "air_6000_plus": 0.0179
+        },
+        "attack_peak_position": 0.048,
+        "decay_ratio": 0.532,
+        "burst_share": 0.047
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.3077,
+        "low_mid_500_1500": -0.1436,
+        "mid_1500_3000": -0.1504,
+        "presence_3000_6000": -0.0175,
+        "air_6000_plus": 0.0037
+      },
+      "comparison": {
+        "duration_s": 0.021,
+        "spectral_centroid_hz": 423.2,
+        "zero_crossings_per_s": 641.9,
+        "rms": 0.0273,
+        "spectral_rolloff_85_hz": 39.5,
+        "band_shape_distance": 0.3114,
+        "attack_peak_position": 0.841,
+        "decay_ratio": 0.376,
+        "burst_share": 0.17
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 3.83,
+      "worstSegmentRisk10": 3.83,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "midlift-subtrim-pulse",
+          "repetition": 1,
+          "risk10": 5.17,
+          "durationGapSeconds": 0.021,
+          "centroidGapHz": 423.2,
+          "rmsGap": 0.0273,
+          "bandShapeGap": 0.3114,
+          "bandEnergyDelta": {
+            "sub_500": 0.3077,
+            "low_mid_500_1500": -0.1436,
+            "mid_1500_3000": -0.1504,
+            "presence_3000_6000": -0.0175,
+            "air_6000_plus": 0.0037
+          },
+          "worstSegmentRisk10": 3.83,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.17,
+      "riskBreakdown": {
+        "duration": 0.088,
+        "centroid": 0.47,
+        "zeroCrossing": 0.428,
+        "rms": 0.195,
+        "bandShape": 0.741,
+        "subBass": 0.905,
+        "missingMid": 0.684,
+        "rolloff": 0.022,
+        "attack": 0.9,
+        "segment": 0.383,
+        "floor": 0.35
+      },
+      "dominantPenalty": "subBass",
+      "keeperRead": "sub-bass reduction 0.0283 < 0.05; mid-band gain 0.0324 < 0.04; attack timing improvement -0.489 < 0.04"
+    },
+    {
+      "id": "midlift-bright-hp",
+      "label": "Midlift bright high-pass beam",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 445.4,
+      "zeroCrossingGapPerSecond": 667.3,
+      "rmsGap": 0.0461,
+      "bandShapeGap": 0.2795,
+      "rolloffGapHz": 179.1,
+      "activeMetrics": {
+        "duration_s": 0.349,
+        "rms": 0.257,
+        "spectral_centroid_hz": 1347.5,
+        "zero_crossings_per_s": 2155.2,
+        "spectral_rolloff_85_hz": 2384.2,
+        "band_energy": {
+          "sub_500": 0.3044,
+          "low_mid_500_1500": 0.3941,
+          "mid_1500_3000": 0.2,
+          "presence_3000_6000": 0.0842,
+          "air_6000_plus": 0.0172
+        },
+        "attack_peak_position": 0.605,
+        "decay_ratio": 1.019,
+        "burst_share": 0.227
+      },
+      "referenceMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.3031,
+        "spectral_centroid_hz": 1792.9,
+        "zero_crossings_per_s": 2822.5,
+        "spectral_rolloff_85_hz": 2563.3,
+        "band_energy": {
+          "sub_500": 0.025,
+          "low_mid_500_1500": 0.5257,
+          "mid_1500_3000": 0.3345,
+          "presence_3000_6000": 0.097,
+          "air_6000_plus": 0.0179
+        },
+        "attack_peak_position": 0.048,
+        "decay_ratio": 0.532,
+        "burst_share": 0.047
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.2794,
+        "low_mid_500_1500": -0.1316,
+        "mid_1500_3000": -0.1345,
+        "presence_3000_6000": -0.0128,
+        "air_6000_plus": -0.0007
+      },
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 445.4,
+        "zero_crossings_per_s": 667.3,
+        "rms": 0.0461,
+        "spectral_rolloff_85_hz": 179.1,
+        "band_shape_distance": 0.2795,
+        "attack_peak_position": 0.557,
+        "decay_ratio": 0.487,
+        "burst_share": 0.18
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.27,
+      "worstSegmentRisk10": 4.27,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "midlift-bright-hp",
+          "repetition": 1,
+          "risk10": 5.19,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 445.4,
+          "rmsGap": 0.0461,
+          "bandShapeGap": 0.2795,
+          "bandEnergyDelta": {
+            "sub_500": 0.2794,
+            "low_mid_500_1500": -0.1316,
+            "mid_1500_3000": -0.1345,
+            "presence_3000_6000": -0.0128,
+            "air_6000_plus": -0.0007
+          },
+          "worstSegmentRisk10": 4.27,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.19,
+      "riskBreakdown": {
+        "duration": 0.042,
+        "centroid": 0.495,
+        "zeroCrossing": 0.445,
+        "rms": 0.329,
+        "bandShape": 0.665,
+        "subBass": 0.822,
+        "missingMid": 0.611,
+        "rolloff": 0.099,
+        "attack": 0.9,
+        "segment": 0.427,
+        "floor": 0.35
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "attack timing improvement -0.205 < 0.04"
+    },
+    {
+      "id": "midlift-reference-ratio",
+      "label": "Midlift reference ratio beam",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.03,
+      "centroidGapHz": 398.5,
+      "zeroCrossingGapPerSecond": 764.2,
+      "rmsGap": 0.0306,
+      "bandShapeGap": 0.3275,
+      "rolloffGapHz": 136.6,
+      "activeMetrics": {
+        "duration_s": 0.309,
+        "rms": 0.2725,
+        "spectral_centroid_hz": 1394.4,
+        "zero_crossings_per_s": 2058.3,
+        "spectral_rolloff_85_hz": 2426.7,
+        "band_energy": {
+          "sub_500": 0.3435,
+          "low_mid_500_1500": 0.3007,
+          "mid_1500_3000": 0.2319,
+          "presence_3000_6000": 0.1008,
+          "air_6000_plus": 0.0231
+        },
+        "attack_peak_position": 0.632,
+        "decay_ratio": 0.899,
+        "burst_share": 0.282
+      },
+      "referenceMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.3031,
+        "spectral_centroid_hz": 1792.9,
+        "zero_crossings_per_s": 2822.5,
+        "spectral_rolloff_85_hz": 2563.3,
+        "band_energy": {
+          "sub_500": 0.025,
+          "low_mid_500_1500": 0.5257,
+          "mid_1500_3000": 0.3345,
+          "presence_3000_6000": 0.097,
+          "air_6000_plus": 0.0179
+        },
+        "attack_peak_position": 0.048,
+        "decay_ratio": 0.532,
+        "burst_share": 0.047
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.3185,
+        "low_mid_500_1500": -0.225,
+        "mid_1500_3000": -0.1026,
+        "presence_3000_6000": 0.0038,
+        "air_6000_plus": 0.0052
+      },
+      "comparison": {
+        "duration_s": 0.03,
+        "spectral_centroid_hz": 398.5,
+        "zero_crossings_per_s": 764.2,
+        "rms": 0.0306,
+        "spectral_rolloff_85_hz": 136.6,
+        "band_shape_distance": 0.3275,
+        "attack_peak_position": 0.584,
+        "decay_ratio": 0.367,
+        "burst_share": 0.235
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.53,
+      "worstSegmentRisk10": 4.53,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "midlift-reference-ratio",
+          "repetition": 1,
+          "risk10": 5.26,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 398.5,
+          "rmsGap": 0.0306,
+          "bandShapeGap": 0.3275,
+          "bandEnergyDelta": {
+            "sub_500": 0.3185,
+            "low_mid_500_1500": -0.225,
+            "mid_1500_3000": -0.1026,
+            "presence_3000_6000": 0.0038,
+            "air_6000_plus": 0.0052
+          },
+          "worstSegmentRisk10": 4.53,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.26,
+      "riskBreakdown": {
+        "duration": 0.125,
+        "centroid": 0.443,
+        "zeroCrossing": 0.509,
+        "rms": 0.219,
+        "bandShape": 0.78,
+        "subBass": 0.937,
+        "missingMid": 0.466,
+        "rolloff": 0.076,
+        "attack": 0.9,
+        "segment": 0.453,
+        "floor": 0.35
+      },
+      "dominantPenalty": "subBass",
+      "keeperRead": "sub-bass reduction 0.0175 < 0.05; attack timing improvement -0.232 < 0.04"
+    },
+    {
+      "id": "low-mid-balanced-midlift",
+      "label": "Low-mid balanced midlift",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.08,
+      "centroidGapHz": 574.6,
+      "zeroCrossingGapPerSecond": 840.3,
+      "rmsGap": 0.0455,
+      "bandShapeGap": 0.3467,
+      "rolloffGapHz": 411.7,
+      "activeMetrics": {
+        "duration_s": 0.419,
+        "rms": 0.2576,
+        "spectral_centroid_hz": 1218.3,
+        "zero_crossings_per_s": 1982.2,
+        "spectral_rolloff_85_hz": 2151.6,
+        "band_energy": {
+          "sub_500": 0.3716,
+          "low_mid_500_1500": 0.333,
+          "mid_1500_3000": 0.2036,
+          "presence_3000_6000": 0.0815,
+          "air_6000_plus": 0.0102
+        },
+        "attack_peak_position": 0.442,
+        "decay_ratio": 1.021,
+        "burst_share": 0.226
+      },
+      "referenceMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.3031,
+        "spectral_centroid_hz": 1792.9,
+        "zero_crossings_per_s": 2822.5,
+        "spectral_rolloff_85_hz": 2563.3,
+        "band_energy": {
+          "sub_500": 0.025,
+          "low_mid_500_1500": 0.5257,
+          "mid_1500_3000": 0.3345,
+          "presence_3000_6000": 0.097,
+          "air_6000_plus": 0.0179
+        },
+        "attack_peak_position": 0.048,
+        "decay_ratio": 0.532,
+        "burst_share": 0.047
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.3466,
+        "low_mid_500_1500": -0.1927,
+        "mid_1500_3000": -0.1309,
+        "presence_3000_6000": -0.0155,
+        "air_6000_plus": -0.0077
+      },
+      "comparison": {
+        "duration_s": 0.08,
+        "spectral_centroid_hz": 574.6,
+        "zero_crossings_per_s": 840.3,
+        "rms": 0.0455,
+        "spectral_rolloff_85_hz": 411.7,
+        "band_shape_distance": 0.3467,
+        "attack_peak_position": 0.394,
+        "decay_ratio": 0.489,
+        "burst_share": 0.179
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.98,
+      "worstSegmentRisk10": 4.98,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "low-mid-balanced-midlift",
+          "repetition": 1,
+          "risk10": 6.27,
+          "durationGapSeconds": 0.08,
+          "centroidGapHz": 574.6,
+          "rmsGap": 0.0455,
+          "bandShapeGap": 0.3467,
+          "bandEnergyDelta": {
+            "sub_500": 0.3466,
+            "low_mid_500_1500": -0.1927,
+            "mid_1500_3000": -0.1309,
+            "presence_3000_6000": -0.0155,
+            "air_6000_plus": -0.0077
+          },
+          "worstSegmentRisk10": 4.98,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 6.27,
+      "riskBreakdown": {
+        "duration": 0.333,
+        "centroid": 0.638,
+        "zeroCrossing": 0.56,
+        "rms": 0.325,
+        "bandShape": 0.825,
+        "subBass": 1.019,
+        "missingMid": 0.595,
+        "rolloff": 0.229,
+        "attack": 0.9,
+        "segment": 0.498,
+        "floor": 0.35
+      },
+      "dominantPenalty": "subBass",
+      "keeperRead": "centroid improvement 64.9 Hz < 80 Hz; sub-bass reduction -0.0106 < 0.05; attack timing improvement -0.042 < 0.04"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.141,
+      "centroidGapHz": 639.5,
+      "zeroCrossingGapPerSecond": 935,
+      "rmsGap": 0.0531,
+      "bandShapeGap": 0.3359,
+      "rolloffGapHz": 432.1,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "rms": 0.25,
+        "spectral_centroid_hz": 1153.4,
+        "zero_crossings_per_s": 1887.5,
+        "spectral_rolloff_85_hz": 2131.2,
+        "band_energy": {
+          "sub_500": 0.361,
+          "low_mid_500_1500": 0.4127,
+          "mid_1500_3000": 0.1517,
+          "presence_3000_6000": 0.0614,
+          "air_6000_plus": 0.0134
+        },
+        "attack_peak_position": 0.4,
+        "decay_ratio": 1.02,
+        "burst_share": 0.311
+      },
+      "referenceMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.3031,
+        "spectral_centroid_hz": 1792.9,
+        "zero_crossings_per_s": 2822.5,
+        "spectral_rolloff_85_hz": 2563.3,
+        "band_energy": {
+          "sub_500": 0.025,
+          "low_mid_500_1500": 0.5257,
+          "mid_1500_3000": 0.3345,
+          "presence_3000_6000": 0.097,
+          "air_6000_plus": 0.0179
+        },
+        "attack_peak_position": 0.048,
+        "decay_ratio": 0.532,
+        "burst_share": 0.047
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.336,
+        "low_mid_500_1500": -0.113,
+        "mid_1500_3000": -0.1828,
+        "presence_3000_6000": -0.0356,
+        "air_6000_plus": -0.0045
+      },
+      "comparison": {
+        "duration_s": 0.141,
+        "spectral_centroid_hz": 639.5,
+        "zero_crossings_per_s": 935,
+        "rms": 0.0531,
+        "spectral_rolloff_85_hz": 432.1,
+        "band_shape_distance": 0.3359,
+        "attack_peak_position": 0.352,
+        "decay_ratio": 0.488,
+        "burst_share": 0.264
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.77,
+      "worstSegmentRisk10": 5.77,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "baseline-current",
+          "repetition": 1,
+          "risk10": 6.99,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 639.5,
+          "rmsGap": 0.0531,
+          "bandShapeGap": 0.3359,
+          "bandEnergyDelta": {
+            "sub_500": 0.336,
+            "low_mid_500_1500": -0.113,
+            "mid_1500_3000": -0.1828,
+            "presence_3000_6000": -0.0356,
+            "air_6000_plus": -0.0045
+          },
+          "worstSegmentRisk10": 5.77,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 6.99,
+      "riskBreakdown": {
+        "duration": 0.587,
+        "centroid": 0.711,
+        "zeroCrossing": 0.623,
+        "rms": 0.379,
+        "bandShape": 0.8,
+        "subBass": 0.988,
+        "missingMid": 0.831,
+        "rolloff": 0.24,
+        "attack": 0.9,
+        "segment": 0.577,
+        "floor": 0.35
+      },
+      "dominantPenalty": "subBass",
+      "keeperRead": "baseline"
+    }
+  ],
+  "nextStep": "Promote the selected Capture Beam spec into the Aurora runtime themes, rerun the audio theme comparison/event-gap suite, and refresh conformance economics/dashboard artifacts."
+}
