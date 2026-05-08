@@ -77,7 +77,7 @@ function comparisonSet(){
 }
 
 function candidateSpecs(){
-  return [
+  const handCandidates = [
     {
       id: 'baseline-current',
       label: 'Current Aurora baseline',
@@ -194,6 +194,7 @@ function candidateSpecs(){
       spec: { seq: [784, 1047, 1397, 2093, 3136], step: .048, wave: 'triangle', volume: .0072, slide: 28, lpHz: 6900, tones: [{ freq: 3520, duration: .078, wave: 'square', volume: .0017, slide: 0, lpHz: 7600, delay: .188 }] }
     }
   ];
+  return [...handCandidates, ...generatedCandidateSpecs()];
 }
 
 function round(value, digits = 3){
@@ -222,6 +223,84 @@ function candidateFilter(){
   return new Set(String(raw).split(',').map(item => item.trim()).filter(Boolean));
 }
 
+function gridLimit(){
+  const requested = Number(argValue('grid-limit') || process.env.AURORA_AUDIO_CANDIDATE_GRID_LIMIT || 0);
+  return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
+}
+
+function runTag(repeats, filter, generatedAt){
+  const time = generatedAt.slice(11, 19).replace(/:/g, '');
+  const parts = [];
+  const limit = gridLimit();
+  if(limit) parts.push(`grid${limit}`);
+  if(repeats > 1) parts.push(`r${repeats}`);
+  if(filter.size) parts.push('focused');
+  return `${parts.join('-') || 'manual'}-${time}`;
+}
+
+function generatedCandidateSpecs(){
+  const limit = gridLimit();
+  if(!limit) return [];
+  const seq = [784, 1175, 1568, 2093, 2794];
+  const waves = ['triangle', 'sine'];
+  const steps = [.047, .049, .051, .053, .055];
+  const volumes = [.0046, .005, .0054, .0058, .0062];
+  const toneVolumes = [.00085, .00105, .00125, .00145];
+  const toneDurations = [.13, .15, .17, .19, .21];
+  const delays = [.178, .188, .198];
+  const specs = [];
+  for(const wave of waves){
+    for(const step of steps){
+      for(const volume of volumes){
+        for(const toneVolume of toneVolumes){
+          for(const toneDuration of toneDurations){
+            for(const delay of delays){
+              const expectedEnd = Math.max((seq.length * step), delay + toneDuration);
+              const expectedGap = Math.abs(expectedEnd - .48);
+              const energy = (volume * seq.length * step) + (toneVolume * toneDuration);
+              const energyGap = Math.abs(energy - .00155);
+              const heuristic = (expectedGap * 8) + (energyGap * 900) + (wave === 'sine' ? .04 : 0);
+              const id = [
+                'grid',
+                wave[0],
+                `s${Math.round(step * 1000)}`,
+                `v${Math.round(volume * 10000)}`,
+                `tv${Math.round(toneVolume * 100000)}`,
+                `td${Math.round(toneDuration * 1000)}`,
+                `d${Math.round(delay * 1000)}`
+              ].join('-');
+              specs.push({
+                id,
+                label: `Grid ${wave} step ${step} volume ${volume} tone ${toneVolume}/${toneDuration}`,
+                generated: true,
+                generator: {
+                  family: 'quiet-held-grid',
+                  heuristic: round(heuristic, 5),
+                  expectedEnd: round(expectedEnd, 3),
+                  expectedEnergy: round(energy, 6),
+                  params: { wave, step, volume, toneVolume, toneDuration, delay }
+                },
+                spec: {
+                  seq,
+                  step,
+                  wave,
+                  volume,
+                  slide: 20,
+                  lpHz: 6500,
+                  tones: [{ freq: 3136, duration: toneDuration, wave: 'square', volume: toneVolume, slide: 0, lpHz: 7600, delay }]
+                }
+              });
+            }
+          }
+        }
+      }
+    }
+  }
+  return specs
+    .sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id))
+    .slice(0, limit);
+}
+
 function mean(values){
   const numeric = values.filter(value => Number.isFinite(+value)).map(Number);
   return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
@@ -234,18 +313,41 @@ function stddev(values){
   return Math.sqrt(numeric.reduce((sum, value) => sum + Math.pow(value - avg, 2), 0) / numeric.length);
 }
 
-function riskFromComparison(comparison){
+function riskBreakdown(comparison){
   const durationGap = +comparison.duration_s || 0;
   const centroidGap = +comparison.spectral_centroid_hz || 0;
   const zcrGap = +comparison.zero_crossings_per_s || 0;
   const rmsGap = +comparison.rms || 0;
-  const raw =
-    clamp(durationGap / 3, 0, 3.4) +
-    clamp(centroidGap / 500, 0, 2.5) +
-    clamp(zcrGap / 1200, 0, 2.1) +
-    clamp(rmsGap / .13, 0, 1.5) +
-    .45;
-  return round(clamp(raw * 1.05, 0, 10), 2);
+  const parts = {
+    duration: clamp(durationGap / 3, 0, 3.4),
+    centroid: clamp(centroidGap / 500, 0, 2.5),
+    zeroCrossing: clamp(zcrGap / 1200, 0, 2.1),
+    rms: clamp(rmsGap / .13, 0, 1.5),
+    floor: .45
+  };
+  const scaled = Object.fromEntries(Object.entries(parts).map(([key, value]) => [key, round(value * 1.05, 3)]));
+  const risk10 = round(clamp(Object.values(parts).reduce((sum, value) => sum + value, 0) * 1.05, 0, 10), 2);
+  const dominant = Object.entries(scaled)
+    .filter(([key]) => key !== 'floor')
+    .sort((a, b) => b[1] - a[1])[0]?.[0] || 'none';
+  return { risk10, components: scaled, dominant };
+}
+
+function riskFromComparison(comparison){
+  return riskBreakdown(comparison).risk10;
+}
+
+function rejectionFor(row, baseline){
+  if(!baseline) return 'missing-baseline';
+  const riskDelta = round(baseline.risk10 - row.risk10, 3);
+  const centroidDelta = round(baseline.centroidGapHz - row.centroidGapHz, 1);
+  const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
+  const reasons = [];
+  if(row.durationGapSeconds > .08) reasons.push(`duration gap ${row.durationGapSeconds}s > 0.08s`);
+  if(riskDelta < .25) reasons.push(`risk improvement ${riskDelta} < 0.25`);
+  if(centroidDelta <= 0) reasons.push(`centroid did not improve (${centroidDelta} Hz)`);
+  if(rmsDelta < -.01) reasons.push(`RMS worsened by ${Math.abs(rmsDelta)}`);
+  return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
 function decisionFor(rows){
@@ -324,10 +426,15 @@ function aggregateRows(sampleRows){
       zero_crossings_per_s: round(mean(group.map(row => row.comparison.zero_crossings_per_s)), 1),
       rms: round(mean(group.map(row => row.comparison.rms)), 4)
     };
+    const breakdown = riskBreakdown(avgComparison);
     rows.push({
       id,
       label: first.baseLabel || first.label,
-      risk10: riskFromComparison(avgComparison),
+      generated: !!first.generated,
+      generator: first.generator || null,
+      risk10: breakdown.risk10,
+      riskBreakdown: breakdown.components,
+      dominantPenalty: breakdown.dominant,
       durationGapSeconds: avgComparison.duration_s,
       centroidGapHz: avgComparison.spectral_centroid_hz,
       zeroCrossingGapPerSecond: avgComparison.zero_crossings_per_s,
@@ -360,6 +467,13 @@ function aggregateRows(sampleRows){
   return rows.sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
 }
 
+function annotateRejections(rows){
+  const baseline = rows.find(row => row.id === 'baseline-current');
+  return rows.map(row => Object.assign(row, {
+    keeperRead: row.id === 'baseline-current' ? 'baseline' : rejectionFor(row, baseline)
+  }));
+}
+
 function markdown(report){
   const lines = [
     '# Aurora Challenge Perfect Audio Candidate Loop',
@@ -390,12 +504,12 @@ function markdown(report){
     '',
     '## Candidates',
     '',
-    '| Candidate | Risk /10 | Duration Gap | Centroid Gap | ZCR Gap | RMS Gap | Stability |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | ---: |'
+    '| Candidate | Risk /10 | Dominant penalty | Duration Gap | Centroid Gap | ZCR Gap | RMS Gap | Stability | Keeper read |',
+    '| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |'
   ];
   for(const row of report.candidates){
     const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.zeroCrossingGapPerSecond} | ${row.rmsGap} | ${stability} |`);
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.dominantPenalty || 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.zeroCrossingGapPerSecond} | ${row.rmsGap} | ${stability} | ${row.keeperRead || ''} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}`;
@@ -429,15 +543,15 @@ async function main(){
   const commit = git(['rev-parse', '--short', 'HEAD'], 'unknown');
   const dirty = git(['status', '--short'], '').trim().length > 0;
   const stamp = generatedAt.slice(0, 10);
-  const outRoot = path.join(OUT_ROOT, `${stamp}-${commit}${dirty ? '-dirty' : ''}`, CUE);
-  const samplesDir = path.join(outRoot, 'samples');
-  ensureDir(samplesDir);
 
   const { set, entry } = comparisonSet();
   const captureOpts = { ...(entry.preview || {}), audioTheme: 'aurora-application' };
   delete captureOpts.cue;
   const repeats = repeatCount();
   const filter = candidateFilter();
+  const outRoot = path.join(OUT_ROOT, `${stamp}-${commit}${dirty ? '-dirty' : ''}-${runTag(repeats, filter, generatedAt)}`, CUE);
+  const samplesDir = path.join(outRoot, 'samples');
+  ensureDir(samplesDir);
   let candidates = candidateSpecs();
   if(filter.size){
     candidates = candidates.filter(row => row.baseline || filter.has(row.id));
@@ -525,12 +639,17 @@ async function main(){
     const comparison = item.comparisons.auroraVsReferenceActive;
     const id = baseCandidateId(item.id);
     const spec = candidates.find(candidate => slug(candidate.id) === id);
+    const breakdown = riskBreakdown(comparison);
     return {
       id: item.id,
       label: item.label,
       baseLabel: spec?.label || item.label.replace(/ r\d+$/, ''),
       repetition: Number((String(item.id).match(/-r(\d+)$/) || [])[1] || 1),
-      risk10: riskFromComparison(comparison),
+      generated: !!spec?.generated,
+      generator: spec?.generator || null,
+      risk10: breakdown.risk10,
+      riskBreakdown: breakdown.components,
+      dominantPenalty: breakdown.dominant,
       durationGapSeconds: round(comparison.duration_s, 3),
       centroidGapHz: round(comparison.spectral_centroid_hz, 1),
       zeroCrossingGapPerSecond: round(comparison.zero_crossings_per_s, 1),
@@ -539,7 +658,7 @@ async function main(){
       comparison
     };
   }).sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
-  const rows = aggregateRows(sampleRows);
+  const rows = annotateRejections(aggregateRows(sampleRows));
 
   const decision = decisionFor(rows);
   const report = {
@@ -552,6 +671,12 @@ async function main(){
     cue: CUE,
     repetitions: repeats,
     candidateFilter: filter.size ? [...filter].sort() : null,
+    generator: gridLimit() ? {
+      family: 'quiet-held-grid',
+      limit: gridLimit(),
+      selectedCandidates: rows.filter(row => row.generated).length,
+      controls: 'Use --grid-limit=N for bounded parametric generation and --candidate-ids for focused stability reruns.'
+    } : null,
     problem: 'Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.',
     strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift.',
     successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS gap, and keep active duration within 0.08s of the reference.',
@@ -581,9 +706,11 @@ async function main(){
     topCandidates: rows.slice(0, 4).map(row => ({
       id: row.id,
       risk10: row.risk10,
+      dominantPenalty: row.dominantPenalty,
       centroidGapHz: row.centroidGapHz,
       rmsGap: row.rmsGap,
-      durationGapSeconds: row.durationGapSeconds
+      durationGapSeconds: row.durationGapSeconds,
+      keeperRead: row.keeperRead
     }))
   }, null, 2));
 }
