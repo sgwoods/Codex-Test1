@@ -1,0 +1,1110 @@
+{
+  "generatedAt": "2026-05-08T19:26:14.930Z",
+  "commit": "522e411",
+  "version": "1.3.0",
+  "items": [
+    {
+      "id": "demo-pulse",
+      "label": "Demo Pulse",
+      "focus": "Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.",
+      "cue": "attractPulse",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/demo-pulse-aurora.wav",
+        "webm": "samples/demo-pulse-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.716
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/demo-pulse-galaga.wav",
+        "webm": "samples/demo-pulse-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.584
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/demo-pulse-reference.wav",
+        "window": {
+          "startSeconds": 4.598,
+          "endSeconds": 4.838,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-96c62d6 nested corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture; original 4.148s window plus 0.450s-0.690s candidate"
+        }
+      }
+    },
+    {
+      "id": "stage-start",
+      "label": "Stage Start",
+      "focus": "Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.",
+      "cue": "gameStart",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/stage-start-aurora.wav",
+        "webm": "samples/stage-start-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.044
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/stage-start-galaga.wav",
+        "webm": "samples/stage-start-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.987
+        }
+      },
+      "reference": {
+        "label": "Start",
+        "source": "src/assets/reference-audio/galaga3-start.m4a",
+        "wav": "samples/stage-start-reference.wav",
+        "window": {
+          "startSeconds": 0.55,
+          "endSeconds": 1.09,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "formation-pulse",
+      "label": "Formation Pulse",
+      "focus": "Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/formation-pulse-aurora.wav",
+        "webm": "samples/formation-pulse-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.593
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/formation-pulse-galaga.wav",
+        "webm": "samples/formation-pulse-galaga.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-original-reference",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.617
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "player-shot",
+      "label": "Player Shot",
+      "focus": "Compare whether player fire reads as a quick arcade shot instead of a generic impact.",
+      "cue": "playerShot",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/player-shot-aurora.wav",
+        "webm": "samples/player-shot-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.634
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/player-shot-galaga.wav",
+        "webm": "samples/player-shot-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.592
+        }
+      },
+      "reference": {
+        "label": "Flagship/Fighter Shot",
+        "source": "src/assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "wav": "samples/player-shot-reference.wav",
+        "window": {
+          "startSeconds": 0.05,
+          "endSeconds": 0.29,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "distinct initial high-transient subwindow reserved for player fire; lower score than the shared best window but prevents playerShot/enemyShot/bossHit semantic collapse"
+        }
+      }
+    },
+    {
+      "id": "enemy-shot",
+      "label": "Enemy Shot",
+      "focus": "Compare whether enemy fire is distinct enough from player fire and boss damage.",
+      "cue": "enemyShot",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/enemy-shot-aurora.wav",
+        "webm": "samples/enemy-shot-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.582
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/enemy-shot-galaga.wav",
+        "webm": "samples/enemy-shot-galaga.webm",
+        "audioCue": {
+          "cue": "enemyShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-original-reference",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.585
+        }
+      },
+      "reference": {
+        "label": "Flagship/Fighter Shot",
+        "source": "src/assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "wav": "samples/enemy-shot-reference.wav",
+        "window": {
+          "startSeconds": 0.9,
+          "endSeconds": 1.14,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "second measured high-transient subwindow reserved for enemy projectile feedback so enemyShot no longer scores against the same active phrase as playerShot"
+        }
+      }
+    },
+    {
+      "id": "enemy-hit",
+      "label": "Enemy Hit",
+      "focus": "Compare whether an enemy impact gives immediate hit confirmation.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/enemy-hit-aurora.wav",
+        "webm": "samples/enemy-hit-aurora.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.574
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/enemy-hit-galaga.wav",
+        "webm": "samples/enemy-hit-galaga.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-original-reference",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.578
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "boss-hit",
+      "label": "Boss Hit",
+      "focus": "Compare whether boss damage reads as a distinct multi-hit event.",
+      "cue": "bossHit",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/boss-hit-aurora.wav",
+        "webm": "samples/boss-hit-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.598
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/boss-hit-galaga.wav",
+        "webm": "samples/boss-hit-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.596
+        }
+      },
+      "reference": {
+        "label": "Boss Damage / Flagship Fighter Shot",
+        "source": "src/assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "wav": "samples/boss-hit-reference.wav",
+        "window": {
+          "startSeconds": 1.149,
+          "endSeconds": 1.439,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"
+        }
+      }
+    },
+    {
+      "id": "enemy-boom",
+      "label": "Enemy Boom",
+      "focus": "Compare whether normal enemy destruction is more emphatic than a simple hit.",
+      "cue": "enemyBoom",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/enemy-boom-aurora.wav",
+        "webm": "samples/enemy-boom-aurora.webm",
+        "audioCue": {
+          "cue": "enemyBoom",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.577
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/enemy-boom-galaga.wav",
+        "webm": "samples/enemy-boom-galaga.webm",
+        "audioCue": {
+          "cue": "enemyBoom",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-original-reference",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.577
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-boom-reference.wav",
+        "window": {
+          "startSeconds": 0.5,
+          "endSeconds": 0.74,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"
+        }
+      }
+    },
+    {
+      "id": "boss-boom",
+      "label": "Boss Boom",
+      "focus": "Compare whether boss destruction feels larger and more final than normal enemy destruction.",
+      "cue": "bossBoom",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/boss-boom-aurora.wav",
+        "webm": "samples/boss-boom-aurora.webm",
+        "audioCue": {
+          "cue": "attractPulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "demo",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.907
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/boss-boom-galaga.wav",
+        "webm": "samples/boss-boom-galaga.webm",
+        "audioCue": {
+          "cue": "bossBoom",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-original-reference",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.575
+        }
+      },
+      "reference": {
+        "label": "Boss Death / Sasori",
+        "source": "src/assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "wav": "samples/boss-boom-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "capture-beam",
+      "label": "Capture Beam",
+      "focus": "Compare whether the beam deploy moment reads clearly as tractor-beam danger.",
+      "cue": "captureBeam",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/capture-beam-aurora.wav",
+        "webm": "samples/capture-beam-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.947
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/capture-beam-galaga.wav",
+        "webm": "samples/capture-beam-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.971
+        }
+      },
+      "reference": {
+        "label": "Tractor Beam",
+        "source": "src/assets/reference-audio/galaga3-tractor-beam.m4a",
+        "wav": "samples/capture-beam-reference.wav",
+        "window": {
+          "startSeconds": 3.199,
+          "endSeconds": 3.679,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "capture-retreat",
+      "label": "Capture Retreat",
+      "focus": "Compare whether the post-capture retreat phase remains audible as a distinct state.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/capture-retreat-aurora.wav",
+        "webm": "samples/capture-retreat-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.979
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/capture-retreat-galaga.wav",
+        "webm": "samples/capture-retreat-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.973
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "fighter-captured",
+      "label": "Fighter Captured",
+      "focus": "Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.",
+      "cue": "captureSuccess",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/fighter-captured-aurora.wav",
+        "webm": "samples/fighter-captured-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.959
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/fighter-captured-galaga.wav",
+        "webm": "samples/fighter-captured-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.959
+        }
+      },
+      "reference": {
+        "label": "Fighter Captured",
+        "source": "src/assets/reference-audio/galaga3-fighter-captured.m4a",
+        "wav": "samples/fighter-captured-reference.wav",
+        "window": {
+          "startSeconds": 4.248,
+          "endSeconds": 4.668,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "captured-fighter-destroyed",
+      "label": "Captured Fighter Destroyed",
+      "focus": "Compare the regret/penalty moment when the carried fighter is destroyed.",
+      "cue": "capturedFighterDestroyed",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/captured-fighter-destroyed-aurora.wav",
+        "webm": "samples/captured-fighter-destroyed-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.583
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/captured-fighter-destroyed-galaga.wav",
+        "webm": "samples/captured-fighter-destroyed-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.575
+        }
+      },
+      "reference": {
+        "label": "Captured Fighter Destroyed",
+        "source": "src/assets/reference-audio/galaga3-captured-fighter-destroyed.m4a",
+        "wav": "samples/captured-fighter-destroyed-reference.wav",
+        "window": {
+          "startSeconds": 1.949,
+          "endSeconds": 2.189,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "rescue-join",
+      "label": "Rescue Join",
+      "focus": "Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.",
+      "cue": "rescueJoin",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/rescue-join-aurora.wav",
+        "webm": "samples/rescue-join-aurora.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 1,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.929
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/rescue-join-galaga.wav",
+        "webm": "samples/rescue-join-galaga.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 1,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.918
+        }
+      },
+      "reference": {
+        "label": "Fighter Rescued (Double Ship)",
+        "source": "src/assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+        "wav": "samples/rescue-join-reference.wav",
+        "window": {
+          "startSeconds": 2.399,
+          "endSeconds": 2.759,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "ship-loss",
+      "label": "Ship Loss",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/ship-loss-aurora.wav",
+        "webm": "samples/ship-loss-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.97
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/ship-loss-galaga.wav",
+        "webm": "samples/ship-loss-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.969
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "challenge-transition",
+      "label": "Challenge Transition",
+      "focus": "Compare how distinct and ceremonial the challenge-stage announcement feels.",
+      "cue": "challengeTransition",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/challenge-transition-aurora.wav",
+        "webm": "samples/challenge-transition-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.962
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/challenge-transition-galaga.wav",
+        "webm": "samples/challenge-transition-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.959
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage",
+        "source": "src/assets/reference-audio/galaga3-challenging-stage.m4a",
+        "wav": "samples/challenge-transition-reference.wav",
+        "window": {
+          "startSeconds": 0.4,
+          "endSeconds": 0.88,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "challenge-results",
+      "label": "Challenge Results",
+      "focus": "Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.",
+      "cue": "challengeResults",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/challenge-results-aurora.wav",
+        "webm": "samples/challenge-results-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.961
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/challenge-results-galaga.wav",
+        "webm": "samples/challenge-results-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.957
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Results",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-results.m4a",
+        "wav": "samples/challenge-results-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 1.17,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "challenge-perfect",
+      "label": "Challenge Perfect",
+      "focus": "Compare whether a perfect challenge result feels more celebratory than the standard results cue.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/challenge-perfect-aurora.wav",
+        "webm": "samples/challenge-perfect-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.98
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/challenge-perfect-galaga.wav",
+        "webm": "samples/challenge-perfect-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.974
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "high-score-1st",
+      "label": "High Score 1st",
+      "focus": "Compare whether first place entry feels distinct and more important than a lower board placement.",
+      "cue": "highScoreFirst",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/high-score-1st-aurora.wav",
+        "webm": "samples/high-score-1st-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.965
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/high-score-1st-galaga.wav",
+        "webm": "samples/high-score-1st-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.958
+        }
+      },
+      "reference": {
+        "label": "Name Entry (1st)",
+        "source": "src/assets/reference-audio/galaga3-name-entry-1st.m4a",
+        "wav": "samples/high-score-1st-reference.wav",
+        "window": {
+          "startSeconds": 2.649,
+          "endSeconds": 3.129,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "high-score-2nd-10th",
+      "label": "High Score 2nd-10th",
+      "focus": "Compare whether non-first leaderboard entry feels positive but smaller than first place.",
+      "cue": "highScoreOther",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/high-score-2nd-10th-aurora.wav",
+        "webm": "samples/high-score-2nd-10th-aurora.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.961
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/high-score-2nd-10th-galaga.wav",
+        "webm": "samples/high-score-2nd-10th-galaga.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.963
+        }
+      },
+      "reference": {
+        "label": "Name Entry (2nd-5th)",
+        "source": "src/assets/reference-audio/galaga3-name-entry-2nd-5th.m4a",
+        "wav": "samples/high-score-2nd-10th-reference.wav",
+        "window": {
+          "startSeconds": 2.899,
+          "endSeconds": 3.319,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "game-over",
+      "label": "Game Over",
+      "focus": "Compare whether the ending cue feels final and emotionally complete enough.",
+      "cue": "gameOver",
+      "aurora": {
+        "label": "Aurora Application Mix",
+        "wav": "samples/game-over-aurora.wav",
+        "webm": "samples/game-over-aurora.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 2,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.305
+        }
+      },
+      "galaga": {
+        "label": "Galaga Original Reference (synthetic)",
+        "wav": "samples/game-over-galaga.wav",
+        "webm": "samples/game-over-galaga.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 2,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.317
+        }
+      },
+      "reference": {
+        "label": "Last Ship Destroyed Ambience",
+        "source": "src/assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a",
+        "wav": "samples/game-over-reference.wav",
+        "window": {
+          "startSeconds": 3.798,
+          "endSeconds": 4.638,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    }
+  ]
+}

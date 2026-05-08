@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T18:33:39.598Z",
-  "commit": "17ce604",
+  "generatedAt": "2026-05-08T19:24:54.634Z",
+  "commit": "522e411",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -91,10 +91,10 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "42 runs; 24.7 min wall; 41.7 min CPU",
-            "trackedRuns": 42,
-            "trackedWallSeconds": 1479.48,
-            "trackedCpuSeconds": 2499.88,
+            "trackedSpend": "47 runs; 27.4 min wall; 46.6 min CPU",
+            "trackedRuns": 47,
+            "trackedWallSeconds": 1646.368,
+            "trackedCpuSeconds": 2796.96,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.064,
             "investmentScore": 2.9,
@@ -131,10 +131,10 @@
               "level-arc",
               "conformance-loop"
             ],
-            "trackedSpend": "83 runs; 12.1 min wall; 19.7 min CPU",
-            "trackedRuns": 83,
-            "trackedWallSeconds": 723.746,
-            "trackedCpuSeconds": 1182.51,
+            "trackedSpend": "88 runs; 14.8 min wall; 24.7 min CPU",
+            "trackedRuns": 88,
+            "trackedWallSeconds": 890.634,
+            "trackedCpuSeconds": 1479.59,
             "expectedLift10": 0.24,
             "expectedOverallLift10": 0.022,
             "investmentScore": 1.92,
@@ -698,15 +698,15 @@
         "latestLevelArcScore10": 8.5,
         "metricPointCount": 589,
         "deltaCount": 80,
-        "measuredRuns": 114,
-        "wallSeconds": 2635.213,
-        "cpuSeconds": 4140.29,
-        "artifactBytes": 232169258,
+        "measuredRuns": 119,
+        "wallSeconds": 2802.101,
+        "cpuSeconds": 4437.37,
+        "artifactBytes": 245277861,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -823,9 +823,9 @@
       },
       "sourceReports": {
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json",
-        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-17ce604/report.json",
+        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-522e411/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1048,9 +1048,9 @@
   ],
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json",
-    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-17ce604/report.json",
+    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-522e411/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -1139,10 +1139,10 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "42 runs; 24.7 min wall; 41.7 min CPU",
-        "trackedRuns": 42,
-        "trackedWallSeconds": 1479.48,
-        "trackedCpuSeconds": 2499.88,
+        "trackedSpend": "47 runs; 27.4 min wall; 46.6 min CPU",
+        "trackedRuns": 47,
+        "trackedWallSeconds": 1646.368,
+        "trackedCpuSeconds": 2796.96,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.064,
         "investmentScore": 2.9,
@@ -1179,10 +1179,10 @@
           "level-arc",
           "conformance-loop"
         ],
-        "trackedSpend": "83 runs; 12.1 min wall; 19.7 min CPU",
-        "trackedRuns": 83,
-        "trackedWallSeconds": 723.746,
-        "trackedCpuSeconds": 1182.51,
+        "trackedSpend": "88 runs; 14.8 min wall; 24.7 min CPU",
+        "trackedRuns": 88,
+        "trackedWallSeconds": 890.634,
+        "trackedCpuSeconds": 1479.59,
         "expectedLift10": 0.24,
         "expectedOverallLift10": 0.022,
         "investmentScore": 1.92,
@@ -1749,7 +1749,7 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "42 runs; 24.7 min wall; 41.7 min CPU",
+      "Tracked spend": "47 runs; 27.4 min wall; 46.6 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
@@ -1764,7 +1764,7 @@
       "Confidence": "medium-high",
       "Resolution": "multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence",
       "Cost / resources": "low; cpu, browser",
-      "Tracked spend": "83 runs; 12.1 min wall; 19.7 min CPU",
+      "Tracked spend": "88 runs; 14.8 min wall; 24.7 min CPU",
       "Major-gate target": "8.8-9.0",
       "Measurement status": "Measured release category",
       "Why this matters": "Controls whether long play feels like Galaga-like escalation rather than repeated pressure.",
@@ -1988,29 +1988,29 @@
     "latestLevelArcScore10": 8.5,
     "metricPointCount": 589,
     "deltaCount": 80,
-    "measuredRuns": 114,
-    "wallSeconds": 2635.213,
-    "cpuSeconds": 4140.29,
-    "artifactBytes": 232169258,
+    "measuredRuns": 119,
+    "wallSeconds": 2802.101,
+    "cpuSeconds": 4437.37,
+    "artifactBytes": 245277861,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-17ce604/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-522e411/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 113,
-      "Wall time": "43.9 min",
-      "CPU time": "69 min"
+      "Measured runs": 118,
+      "Wall time": "46.7 min",
+      "CPU time": "74 min"
     },
     {
       "Resource": "browser",
-      "Measured runs": 71,
-      "Wall time": "40.6 min",
-      "CPU time": "65.2 min"
+      "Measured runs": 76,
+      "Wall time": "43.4 min",
+      "CPU time": "70.2 min"
     },
     {
       "Resource": "gpu-equivalent",
@@ -2040,9 +2040,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 42,
-      "Wall time": "24.7 min",
-      "CPU time": "41.7 min"
+      "Measured runs": 47,
+      "Wall time": "27.4 min",
+      "CPU time": "46.6 min"
     },
     {
       "Axis": "conformance-economics",
@@ -2058,9 +2058,9 @@
     },
     {
       "Axis": "conformance-loop",
-      "Measured runs": 44,
-      "Wall time": "8.9 min",
-      "CPU time": "14.6 min"
+      "Measured runs": 49,
+      "Wall time": "11.7 min",
+      "CPU time": "19.6 min"
     },
     {
       "Axis": "quality-score",
@@ -2096,7 +2096,7 @@
       "Gap to target": "at target",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "42 runs; 24.7 min wall; 41.7 min CPU",
+      "Tracked spend": "47 runs; 27.4 min wall; 46.6 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.064/10 overall; investment score 2.9.",
       "Next action": "Continue Challenge Perfect candidate generation around thin-bright-triangle; the latest sweep found no safe keeper, so do not promote a runtime cue yet."
     },
@@ -2108,7 +2108,7 @@
       "Gap to target": "+0.3",
       "Estimated effort": "Medium-high; 2-5 hrs",
       "Expected resources": "cpu, browser",
-      "Tracked spend": "83 runs; 12.1 min wall; 19.7 min CPU",
+      "Tracked spend": "88 runs; 14.8 min wall; 24.7 min CPU",
       "Value / cost read": "Expected lift 0.24/10 on metric, 0.022/10 overall; investment score 1.92.",
       "Next action": "Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning."
     },

@@ -198,7 +198,8 @@ function candidateSpecs(){
     ...handCandidates,
     ...generatedCandidateSpecs(),
     ...segmentedCandidateSpecs(),
-    ...triangleNeighborhoodCandidateSpecs()
+    ...triangleNeighborhoodCandidateSpecs(),
+    ...bandTargetedCandidateSpecs()
   ];
 }
 
@@ -243,6 +244,11 @@ function triangleGridLimit(){
   return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
 }
 
+function bandGridLimit(){
+  const requested = Number(argValue('band-grid-limit') || process.env.AURORA_AUDIO_BAND_GRID_LIMIT || 0);
+  return Number.isFinite(requested) ? Math.max(0, Math.min(160, Math.floor(requested))) : 0;
+}
+
 function runTag(repeats, filter, generatedAt){
   const time = generatedAt.slice(11, 19).replace(/:/g, '');
   const parts = [];
@@ -252,6 +258,8 @@ function runTag(repeats, filter, generatedAt){
   if(segmentedLimit) parts.push(`seg${segmentedLimit}`);
   const triangleLimit = triangleGridLimit();
   if(triangleLimit) parts.push(`tri${triangleLimit}`);
+  const bandLimit = bandGridLimit();
+  if(bandLimit) parts.push(`band${bandLimit}`);
   if(repeats > 1) parts.push(`r${repeats}`);
   if(filter.size) parts.push('focused');
   return `${parts.join('-') || 'manual'}-${time}`;
@@ -274,7 +282,7 @@ function generatorSummary(rows){
   if(!generators.size) return null;
   return {
     families: Array.from(generators.values()),
-    controls: 'Use --grid-limit=N for quiet-held parametric generation, --segmented-grid-limit=N for onset/body/tail generation, --triangle-grid-limit=N for RMS-aware bright-triangle search, and --candidate-ids for focused stability reruns.'
+    controls: 'Use --grid-limit=N for quiet-held parametric generation, --segmented-grid-limit=N for onset/body/tail generation, --triangle-grid-limit=N for RMS-aware bright-triangle search, --band-grid-limit=N for band-energy targeted generation, and --candidate-ids for focused stability reruns.'
   };
 }
 
@@ -487,6 +495,188 @@ function triangleNeighborhoodCandidateSpecs(){
                 }
               }
             }
+          }
+        }
+      }
+    }
+  }
+  return specs
+    .sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id))
+    .slice(0, limit);
+}
+
+function bandTargetedCandidateSpecs(){
+  const limit = bandGridLimit();
+  if(!limit) return [];
+  const specs = [];
+  const baseShapes = [
+    {
+      name: 'square-top-tail',
+      seq: [784, 1175, 1568, 2093, 2794],
+      step: .048,
+      wave: 'triangle',
+      volume: .0076,
+      slide: 24,
+      lpHz: 7200,
+      leadFreq: 3136,
+      leadWave: 'square',
+      leadDelay: .192
+    },
+    {
+      name: 'triangle-ladder-tail',
+      seq: [880, 1175, 1568, 2093, 2794],
+      step: .05,
+      wave: 'triangle',
+      volume: .0082,
+      slide: 32,
+      lpHz: 7600,
+      leadFreq: 3520,
+      leadWave: 'triangle',
+      leadDelay: .19
+    },
+    {
+      name: 'high-square-stair-tail',
+      seq: [932, 1245, 1661, 2217, 2960],
+      step: .047,
+      wave: 'square',
+      volume: .0058,
+      slide: 12,
+      lpHz: 6800,
+      leadFreq: 3520,
+      leadWave: 'square',
+      leadDelay: .188
+    }
+  ];
+  const leadVolumes = [.0018, .0023, .0028, .0033];
+  const tailFrequencies = [3520, 4186, 4699, 5274];
+  const tailWaves = ['triangle', 'square'];
+  const tailDelays = [.272, .296, .32];
+  const tailDurations = [.1, .13, .16, .19];
+  const noiseVolumes = [.0007, .0011, .0016, .0021];
+  const noiseHps = [3600, 4600, 5600, 6800];
+  for(const base of baseShapes){
+    for(const leadVolume of leadVolumes){
+      for(const tailFreq of tailFrequencies){
+        for(const tailWave of tailWaves){
+          for(const tailDelay of tailDelays){
+            for(const tailDuration of tailDurations){
+              for(const noiseVolume of noiseVolumes){
+                for(const noiseHp of noiseHps){
+                  const sequenceEnd = base.seq.length * base.step;
+                  const leadEnd = base.leadDelay + .09;
+                  const tailEnd = tailDelay + tailDuration;
+                  const noiseEnd = tailDelay + Math.max(.07, tailDuration * .72);
+                  const expectedEnd = Math.max(sequenceEnd, leadEnd, tailEnd, noiseEnd);
+                  const durationGap = Math.abs(expectedEnd - .48);
+                  const energy = (base.volume * base.seq.length * base.step)
+                    + (leadVolume * .09)
+                    + (leadVolume * .58 * tailDuration)
+                    + (noiseVolume * Math.max(.07, tailDuration * .72));
+                  const energyGap = Math.abs(energy - .0029);
+                  const presencePush = (leadVolume * 150) + (tailWave === 'square' ? .08 : .03) + (noiseVolume * 70);
+                  const airPush = (tailFreq / 5200) + (noiseHp / 9000) + (noiseVolume * 80);
+                  const lowPenalty = base.wave === 'square' ? .035 : 0;
+                  const leadHpHz = Math.round(Math.max(700, Math.min(1800, base.leadFreq * .32)));
+                  const tailHpHz = Math.round(Math.max(1100, Math.min(2600, tailFreq * .38)));
+                  const heuristic = (durationGap * 8.5) + (energyGap * 760) - (presencePush * .22) - (airPush * .12) + lowPenalty;
+                  const id = [
+                    'band',
+                    base.name,
+                    `lv${Math.round(leadVolume * 100000)}`,
+                    `tf${tailFreq}`,
+                    tailWave[0],
+                    `td${Math.round(tailDelay * 1000)}`,
+                    `tl${Math.round(tailDuration * 1000)}`,
+                    `n${Math.round(noiseVolume * 100000)}`,
+                    `hp${noiseHp}`
+                  ].join('-');
+                  specs.push({
+                    id,
+                    label: `Band targeted ${base.name} ${tailFreq}/${tailWave}/${noiseVolume}`,
+                    generated: true,
+                    generator: {
+                      family: 'presence-air-band-targeted-grid',
+                      heuristic: round(heuristic, 5),
+                      expectedEnd: round(expectedEnd, 3),
+                      expectedEnergy: round(energy, 6),
+                      target: 'Counter the measured Challenge Perfect band gap: reduce low-mid dominance while adding presence_3000_6000 and air_6000_plus energy with a quiet high-frequency tail and tone high-pass filtering.',
+                      params: { base: base.name, leadVolume, tailFreq, tailWave, tailDelay, tailDuration, noiseVolume, noiseHp, leadHpHz, tailHpHz }
+                    },
+                    spec: {
+                      seq: base.seq,
+                      step: base.step,
+                      wave: base.wave,
+                      volume: base.volume,
+                      slide: base.slide,
+                      lpHz: base.lpHz,
+                      tones: [
+                        { freq: base.leadFreq, duration: .09, wave: base.leadWave, volume: leadVolume, slide: -80, lpHz: 7800, hpHz: leadHpHz, delay: base.leadDelay },
+                        { freq: tailFreq, duration: tailDuration, wave: tailWave, volume: leadVolume * .58, slide: -180, lpHz: 8800, hpHz: tailHpHz, delay: tailDelay }
+                      ],
+                      noise: [
+                        { duration: Math.max(.07, tailDuration * .72), volume: noiseVolume, hp: noiseHp, delay: tailDelay + .006 }
+                      ]
+                    }
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  const harmonicProfiles = [
+    { name: 'sine-balanced-air', low: 880, lowMid: 1320, mid: 2093, presence: 3520, air: 5274 },
+    { name: 'sine-presence-air', low: 988, lowMid: 1480, mid: 2349, presence: 4186, air: 6272 },
+    { name: 'soft-square-presence', low: 784, lowMid: 1175, mid: 2093, presence: 3136, air: 4699 }
+  ];
+  const profileVolumes = [.0048, .0058, .0068, .0078];
+  const airVolumes = [.0014, .002, .0026, .0032];
+  const harmonicNoiseVolumes = [.0009, .0013, .0018, .0024];
+  for(const profile of harmonicProfiles){
+    for(const volume of profileVolumes){
+      for(const airVolume of airVolumes){
+        for(const noiseVolume of harmonicNoiseVolumes){
+          for(const noiseHp of [3800, 5200, 6800]){
+            const squarePresence = profile.name.includes('square');
+            const expectedEnd = .445;
+            const energy = (volume * .255) + (airVolume * .235) + (noiseVolume * .135);
+            const energyGap = Math.abs(energy - .0028);
+            const presencePush = airVolume * 190 + noiseVolume * 65 + (squarePresence ? .06 : 0);
+            const subProxy = volume * (profile.low < 900 ? 24 : 12);
+            const heuristic = (energyGap * 760) - (presencePush * .2) + (subProxy * .18) + (noiseHp === 6800 ? -.035 : 0) - .85;
+            const id = [
+              'band',
+              profile.name,
+              `v${Math.round(volume * 10000)}`,
+              `av${Math.round(airVolume * 10000)}`,
+              `n${Math.round(noiseVolume * 100000)}`,
+              `hp${noiseHp}`
+            ].join('-');
+            specs.push({
+              id,
+              label: `Band targeted ${profile.name} ${volume}/${airVolume}/${noiseVolume}`,
+              generated: true,
+              generator: {
+                family: 'presence-air-harmonic-band-grid',
+                heuristic: round(heuristic, 5),
+                expectedEnd: round(expectedEnd, 3),
+                expectedEnergy: round(energy, 6),
+                target: 'Search harmonic, mostly-sine cue shapes that raise presence and air without the sub-band bloom seen in triangle and square ladder candidates, using per-tone high-pass shaping as a measured platform capability.',
+                params: { profile: profile.name, volume, airVolume, noiseVolume, noiseHp, toneHpHz: { low: 180, lowMid: 360, mid: 720, presence: 1200, air: 1800 } }
+              },
+              spec: {
+                tones: [
+                  { freq: profile.low, duration: .09, wave: 'sine', volume: volume * .58, slide: 30, lpHz: 3600, hpHz: 180, delay: 0 },
+                  { freq: profile.lowMid, duration: .12, wave: 'sine', volume: volume, slide: 24, lpHz: 5200, hpHz: 360, delay: .045 },
+                  { freq: profile.mid, duration: .115, wave: 'triangle', volume: volume * .82, slide: -40, lpHz: 6800, hpHz: 720, delay: .125 },
+                  { freq: profile.presence, duration: .135, wave: squarePresence ? 'square' : 'sine', volume: airVolume, slide: -80, lpHz: 8600, hpHz: 1200, delay: .22 },
+                  { freq: profile.air, duration: .125, wave: 'sine', volume: airVolume * .72, slide: -120, lpHz: 9600, hpHz: 1800, delay: .32 }
+                ],
+                noise: [{ duration: .135, volume: noiseVolume, hp: noiseHp, delay: .304 }]
+              }
+            });
           }
         }
       }
@@ -941,7 +1131,7 @@ async function main(){
     candidateFilter: filter.size ? [...filter].sort() : null,
     generator: generatorSummary(rows),
     problem: 'Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.',
-    strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift. The comparison now includes spectral band-shape, rolloff, and envelope segmentation so future searches can target timbre instead of only duration and centroid.',
+    strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift. The comparison now includes spectral band-shape, rolloff, envelope segmentation, and optional tone high-pass shaping so future searches can target measured timbre instead of only duration and centroid.',
     successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS or band-shape gap, and keep active duration within 0.08s of the reference.',
     source: {
       comparisonSet: set.id,
@@ -958,7 +1148,9 @@ async function main(){
       ? 'Promote the recommended cue spec into the Aurora application audio theme, then run the full audio theme comparison and event-gap analysis.'
       : segmentedGridLimit()
         ? 'Use the segmented-family result to retune onset/body/tail synthesis parameters, then run another bounded segmented sweep before changing runtime audio.'
-        : 'Expand the candidate generator around the best measured direction instead of manually changing the game pack.'
+        : bandGridLimit()
+          ? 'Use the band-family result to decide whether tone filtering is enough or whether the next audio platform investment should be envelope shaping or reference-clip playback for this event.'
+          : 'Expand the candidate generator around the best measured direction instead of manually changing the game pack.'
   };
   fs.writeFileSync(path.join(outRoot, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(path.join(outRoot, 'README.md'), markdown(report));
