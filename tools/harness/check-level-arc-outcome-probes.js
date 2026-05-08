@@ -11,6 +11,7 @@ const PROBES = [
   { id: 'mid-run-pressure', scenario: 'stage6-regular', expectedStage: 6 },
   { id: 'mid-run-entry-variant', scenario: 'stage8-entry-variant', expectedStage: 8 },
   { id: 'late-run-cleanup-or-failure', scenario: 'stage12-variety', expectedStage: 12 },
+  { id: 'late-run-natural-squadron-reward', scenario: 'stage12-natural-squadron-reward', expectedStage: 12 },
   { id: 'late-run-squadron-reward', scenario: 'stage12-squadron-bonus', expectedStage: 12 },
   { id: 'late-run-escort-variant', scenario: 'stage14-escort-variant', expectedStage: 14 }
 ];

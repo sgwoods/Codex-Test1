@@ -1,0 +1,1373 @@
+{
+  "generatedAt": "2026-05-08T15:25:31.193Z",
+  "commit": "acc8b71",
+  "problem": "Stage 12 has natural boss/escort pressure, but current evidence does not show a player-visible special reward payoff in the late-run cleanup window.",
+  "strategy": "Search deterministic player input routes around the natural squadron timing before asking for gameplay tuning, preserving run logs for every candidate.",
+  "successMeasure": "Find at least one natural route with special_attack_bonus or boss damage and no added collision-loss spike; otherwise promote the failure as evidence for a guarded gameplay candidate.",
+  "summary": {
+    "score10": 8.8,
+    "tested": 32,
+    "passed": 32,
+    "failed": 0,
+    "specialBonusCandidates": 2,
+    "bossDamageCandidates": 4,
+    "bestCandidate": {
+      "id": "right-early-short",
+      "score10": 8.8,
+      "score": 3030,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 2
+    }
+  },
+  "interpretation": "At least one deterministic route can harvest the natural Stage 12 squadron reward. Next work should promote the best route into outcome probes and compare player-skill opportunity against reference reward timing before gameplay tuning.",
+  "results": [
+    {
+      "ok": true,
+      "id": "right-early-short",
+      "route": {
+        "id": "right-early-short",
+        "releaseLeftAt": 7.2,
+        "rightAt": 7.21,
+        "rightHold": 0.65
+      },
+      "score10": 8.8,
+      "score": 3030,
+      "lives": 4,
+      "attacks": 25,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 2,
+      "bossKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 14.11,
+        "lane": 4,
+        "playerLane": 5,
+        "escorts": 2,
+        "bossVx": -11.45,
+        "bossVy": 80.17
+      },
+      "firstSpecial": {
+        "t": 23.11,
+        "bonus": 1600,
+        "escorts": 2
+      },
+      "firstLoss": {
+        "t": 18.443,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-early-short-seed12003-2026-05-08T15-24-51-847Z-36800-3bq2l9/neo-galaga-session-ngt-1778253892993-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-early-short-seed12003-2026-05-08T15-24-51-847Z-36800-3bq2l9/neo-galaga-session-ngt-1778253892993-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s7-6-h0-45",
+      "route": {
+        "id": "right-s7-6-h0-45",
+        "releaseLeftAt": 7.6,
+        "rightAt": 7.61,
+        "rightHold": 0.45
+      },
+      "score10": 7.8,
+      "score": 2140,
+      "lives": 4,
+      "attacks": 26,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 800,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 9.577,
+        "lane": 6,
+        "playerLane": 4,
+        "escorts": 2,
+        "bossVx": -48.19,
+        "bossVy": 84.28
+      },
+      "firstSpecial": {
+        "t": 10.877,
+        "bonus": 800,
+        "escorts": 1
+      },
+      "firstLoss": {
+        "t": 18.21,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h0-45-seed12003-2026-05-08T15-24-55-922Z-36854-cccbyn/neo-galaga-session-ngt-1778253897132-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h0-45-seed12003-2026-05-08T15-24-55-922Z-36854-cccbyn/neo-galaga-session-ngt-1778253897132-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-h1-5",
+      "route": {
+        "id": "right-s8-h1-5",
+        "releaseLeftAt": 8,
+        "rightAt": 8.01,
+        "rightHold": 1.5
+      },
+      "score10": 4.3,
+      "score": 930,
+      "lives": 2,
+      "attacks": 26,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 0,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 10.427,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 35.81,
+        "bossVy": 98.17
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 12.793,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h1-5-seed12003-2026-05-08T15-25-07-130Z-37036-v4i87w/neo-galaga-session-ngt-1778253908361-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h1-5-seed12003-2026-05-08T15-25-07-130Z-37036-v4i87w/neo-galaga-session-ngt-1778253908361-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-7-h0-8",
+      "route": {
+        "id": "right-s8-7-h0-8",
+        "releaseLeftAt": 8.7,
+        "rightAt": 8.71,
+        "rightHold": 0.8
+      },
+      "score10": 3.5,
+      "score": 1120,
+      "lives": 2,
+      "attacks": 20,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 11.327,
+        "lane": 5,
+        "playerLane": 6,
+        "escorts": 2,
+        "bossVx": 3.36,
+        "bossVy": 91.6
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.777,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 6,
+        "sourceLane": 6
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h0-8-seed12003-2026-05-08T15-25-18-356Z-37196-y418bl/neo-galaga-session-ngt-1778253919568-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h0-8-seed12003-2026-05-08T15-25-18-356Z-37196-y418bl/neo-galaga-session-ngt-1778253919568-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s7-6-h1-5",
+      "route": {
+        "id": "right-s7-6-h1-5",
+        "releaseLeftAt": 7.6,
+        "rightAt": 7.61,
+        "rightHold": 1.5
+      },
+      "score10": 3.2,
+      "score": 640,
+      "lives": 5,
+      "attacks": 25,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 15.943,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 66.82,
+        "bossVy": 108.65
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h1-5-seed12003-2026-05-08T15-25-00-246Z-36930-eqh8z4/neo-galaga-session-ngt-1778253901417-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h1-5-seed12003-2026-05-08T15-25-00-246Z-36930-eqh8z4/neo-galaga-session-ngt-1778253901417-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-7-h1-5",
+      "route": {
+        "id": "right-s8-7-h1-5",
+        "releaseLeftAt": 8.7,
+        "rightAt": 8.71,
+        "rightHold": 1.5
+      },
+      "score10": 3.2,
+      "score": 640,
+      "lives": 5,
+      "attacks": 27,
+      "bullets": 27,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 15.993,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 12.11,
+        "bossVy": 104.98
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h1-5-seed12003-2026-05-08T15-25-21-164Z-37235-35jmih/neo-galaga-session-ngt-1778253922360-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h1-5-seed12003-2026-05-08T15-25-21-164Z-37235-35jmih/neo-galaga-session-ngt-1778253922360-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s9-h1-5",
+      "route": {
+        "id": "right-s9-h1-5",
+        "releaseLeftAt": 9,
+        "rightAt": 9.01,
+        "rightHold": 1.5
+      },
+      "score10": 3.1,
+      "score": 540,
+      "lives": 5,
+      "attacks": 27,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 14.027,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 55.1,
+        "bossVy": 97.05
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h1-5-seed12003-2026-05-08T15-25-28-392Z-37462-72c5jz/neo-galaga-session-ngt-1778253929669-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h1-5-seed12003-2026-05-08T15-25-28-392Z-37462-72c5jz/neo-galaga-session-ngt-1778253929669-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-35-h0-8",
+      "route": {
+        "id": "right-s8-35-h0-8",
+        "releaseLeftAt": 8.35,
+        "rightAt": 8.36,
+        "rightHold": 0.8
+      },
+      "score10": 2.9,
+      "score": 1520,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 10.41,
+        "lane": 5,
+        "playerLane": 6,
+        "escorts": 2,
+        "bossVx": 11.13,
+        "bossVy": 98.17
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 13.66,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 6,
+        "sourceLane": 6
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h0-8-seed12003-2026-05-08T15-25-11-339Z-37087-mfypks/neo-galaga-session-ngt-1778253912701-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h0-8-seed12003-2026-05-08T15-25-11-339Z-37087-mfypks/neo-galaga-session-ngt-1778253912701-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-h0-8",
+      "route": {
+        "id": "right-s8-h0-8",
+        "releaseLeftAt": 8,
+        "rightAt": 8.01,
+        "rightHold": 0.8
+      },
+      "score10": 2.5,
+      "score": 1330,
+      "lives": 5,
+      "attacks": 23,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h0-8-seed12003-2026-05-08T15-25-04-427Z-36982-qmqwo9/neo-galaga-session-ngt-1778253905641-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h0-8-seed12003-2026-05-08T15-25-04-427Z-36982-qmqwo9/neo-galaga-session-ngt-1778253905641-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-h0-45",
+      "route": {
+        "id": "right-s8-h0-45",
+        "releaseLeftAt": 8,
+        "rightAt": 8.01,
+        "rightHold": 0.45
+      },
+      "score10": 2.4,
+      "score": 960,
+      "lives": 3,
+      "attacks": 22,
+      "bullets": 15,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 15.46,
+        "lane": 5,
+        "playerLane": 4,
+        "escorts": 2,
+        "bossVx": 11.35,
+        "bossVy": 114.87
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 12.693,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h0-45-seed12003-2026-05-08T15-25-02-983Z-36965-zjo2wb/neo-galaga-session-ngt-1778253904284-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h0-45-seed12003-2026-05-08T15-25-02-983Z-36965-zjo2wb/neo-galaga-session-ngt-1778253904284-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-35-h0-45",
+      "route": {
+        "id": "right-s8-35-h0-45",
+        "releaseLeftAt": 8.35,
+        "rightAt": 8.36,
+        "rightHold": 0.45
+      },
+      "score10": 2.2,
+      "score": 800,
+      "lives": 3,
+      "attacks": 20,
+      "bullets": 16,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 12.243,
+        "lane": 5,
+        "playerLane": 4,
+        "escorts": 2,
+        "bossVx": -16.99,
+        "bossVy": 89.63
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 13.677,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h0-45-seed12003-2026-05-08T15-25-09-904Z-37070-1rl62u/neo-galaga-session-ngt-1778253911146-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h0-45-seed12003-2026-05-08T15-25-09-904Z-37070-1rl62u/neo-galaga-session-ngt-1778253911146-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s9-h0-8",
+      "route": {
+        "id": "right-s9-h0-8",
+        "releaseLeftAt": 9,
+        "rightAt": 9.01,
+        "rightHold": 0.8
+      },
+      "score10": 2.1,
+      "score": 880,
+      "lives": 5,
+      "attacks": 23,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h0-8-seed12003-2026-05-08T15-25-25-360Z-37312-9ptsr2/neo-galaga-session-ngt-1778253926713-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h0-8-seed12003-2026-05-08T15-25-25-360Z-37312-9ptsr2/neo-galaga-session-ngt-1778253926713-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s9-h0-45",
+      "route": {
+        "id": "right-s9-h0-45",
+        "releaseLeftAt": 9,
+        "rightAt": 9.01,
+        "rightHold": 0.45
+      },
+      "score10": 2,
+      "score": 800,
+      "lives": 4,
+      "attacks": 21,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 9.727,
+        "cause": "enemy_bullet",
+        "sourceType": "but",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h0-45-seed12003-2026-05-08T15-25-24-047Z-37269-gnw98e/neo-galaga-session-ngt-1778253925205-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h0-45-seed12003-2026-05-08T15-25-24-047Z-37269-gnw98e/neo-galaga-session-ngt-1778253925205-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s7-6-h1-9",
+      "route": {
+        "id": "right-s7-6-h1-9",
+        "releaseLeftAt": 7.6,
+        "rightAt": 7.61,
+        "rightHold": 1.9
+      },
+      "score10": 2,
+      "score": 640,
+      "lives": 4,
+      "attacks": 23,
+      "bullets": 22,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 23.85,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 36.53,
+        "bossVy": 102.53
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 15.527,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h1-9-seed12003-2026-05-08T15-25-01-563Z-36948-z0h4z0/neo-galaga-session-ngt-1778253902801-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h1-9-seed12003-2026-05-08T15-25-01-563Z-36948-z0h4z0/neo-galaga-session-ngt-1778253902801-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-h1-9",
+      "route": {
+        "id": "right-s8-h1-9",
+        "releaseLeftAt": 8,
+        "rightAt": 8.01,
+        "rightHold": 1.9
+      },
+      "score10": 2,
+      "score": 610,
+      "lives": 4,
+      "attacks": 25,
+      "bullets": 25,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 15.143,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 84.92,
+        "bossVy": 104.06
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 16.61,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h1-9-seed12003-2026-05-08T15-25-08-519Z-37053-nsp26m/neo-galaga-session-ngt-1778253909726-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h1-9-seed12003-2026-05-08T15-25-08-519Z-37053-nsp26m/neo-galaga-session-ngt-1778253909726-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-35-h1-15",
+      "route": {
+        "id": "right-s8-35-h1-15",
+        "releaseLeftAt": 8.35,
+        "rightAt": 8.36,
+        "rightHold": 1.15
+      },
+      "score10": 2,
+      "score": 610,
+      "lives": 4,
+      "attacks": 22,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 19.443,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 43.85,
+        "bossVy": 108.16
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.71,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h1-15-seed12003-2026-05-08T15-25-12-962Z-37104-khdzfk/neo-galaga-session-ngt-1778253914143-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h1-15-seed12003-2026-05-08T15-25-12-962Z-37104-khdzfk/neo-galaga-session-ngt-1778253914143-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-35-h1-5",
+      "route": {
+        "id": "right-s8-35-h1-5",
+        "releaseLeftAt": 8.35,
+        "rightAt": 8.36,
+        "rightHold": 1.5
+      },
+      "score10": 2,
+      "score": 610,
+      "lives": 3,
+      "attacks": 20,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 14.693,
+        "lane": 5,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 37.45,
+        "bossVy": 96.01
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 10.927,
+        "cause": "enemy_bullet",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h1-5-seed12003-2026-05-08T15-25-14-310Z-37123-8lqqb4/neo-galaga-session-ngt-1778253915512-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h1-5-seed12003-2026-05-08T15-25-14-310Z-37123-8lqqb4/neo-galaga-session-ngt-1778253915512-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-35-h1-9",
+      "route": {
+        "id": "right-s8-35-h1-9",
+        "releaseLeftAt": 8.35,
+        "rightAt": 8.36,
+        "rightHold": 1.9
+      },
+      "score10": 2,
+      "score": 610,
+      "lives": 2,
+      "attacks": 24,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 11.31,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 66.31,
+        "bossVy": 91.29
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.693,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h1-9-seed12003-2026-05-08T15-25-15-688Z-37141-akhmlh/neo-galaga-session-ngt-1778253916845-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-35-h1-9-seed12003-2026-05-08T15-25-15-688Z-37141-akhmlh/neo-galaga-session-ngt-1778253916845-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s9-h1-15",
+      "route": {
+        "id": "right-s9-h1-15",
+        "releaseLeftAt": 9,
+        "rightAt": 9.01,
+        "rightHold": 1.15
+      },
+      "score10": 1.9,
+      "score": 540,
+      "lives": 4,
+      "attacks": 23,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 18.177,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 26.48,
+        "bossVy": 111.5
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 14.527,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h1-15-seed12003-2026-05-08T15-25-26-892Z-37443-1w2ooq/neo-galaga-session-ngt-1778253928212-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h1-15-seed12003-2026-05-08T15-25-26-892Z-37443-1w2ooq/neo-galaga-session-ngt-1778253928212-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s9-h1-9",
+      "route": {
+        "id": "right-s9-h1-9",
+        "releaseLeftAt": 9,
+        "rightAt": 9.01,
+        "rightHold": 1.9
+      },
+      "score10": 1.9,
+      "score": 540,
+      "lives": 4,
+      "attacks": 24,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 11.36,
+        "lane": 5,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 26.19,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 19.41,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h1-9-seed12003-2026-05-08T15-25-29-821Z-37485-70err4/neo-galaga-session-ngt-1778253931067-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s9-h1-9-seed12003-2026-05-08T15-25-29-821Z-37485-70err4/neo-galaga-session-ngt-1778253931067-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-early-long",
+      "route": {
+        "id": "right-early-long",
+        "releaseLeftAt": 7.2,
+        "rightAt": 7.21,
+        "rightHold": 1.75
+      },
+      "score10": 1.9,
+      "score": 510,
+      "lives": 4,
+      "attacks": 23,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 13.21,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 36.67,
+        "bossVy": 85.65
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 18.243,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-early-long-seed12003-2026-05-08T15-24-54-478Z-36837-nd6rnm/neo-galaga-session-ngt-1778253895763-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-early-long-seed12003-2026-05-08T15-24-54-478Z-36837-nd6rnm/neo-galaga-session-ngt-1778253895763-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-h1-15",
+      "route": {
+        "id": "right-s8-h1-15",
+        "releaseLeftAt": 8,
+        "rightAt": 8.01,
+        "rightHold": 1.15
+      },
+      "score10": 1.9,
+      "score": 510,
+      "lives": 4,
+      "attacks": 23,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 10.443,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 35.85,
+        "bossVy": 98.17
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 15.46,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h1-15-seed12003-2026-05-08T15-25-05-788Z-36999-s7ecsx/neo-galaga-session-ngt-1778253906946-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-h1-15-seed12003-2026-05-08T15-25-05-788Z-36999-s7ecsx/neo-galaga-session-ngt-1778253906946-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s7-6-h1-15",
+      "route": {
+        "id": "right-s7-6-h1-15",
+        "releaseLeftAt": 7.6,
+        "rightAt": 7.61,
+        "rightHold": 1.15
+      },
+      "score10": 1.9,
+      "score": 530,
+      "lives": 3,
+      "attacks": 23,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 4.927,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 66.43,
+        "bossVy": 99
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 5.443,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 7,
+        "sourceLane": 7
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h1-15-seed12003-2026-05-08T15-24-58-594Z-36908-wdffbk/neo-galaga-session-ngt-1778253900011-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h1-15-seed12003-2026-05-08T15-24-58-594Z-36908-wdffbk/neo-galaga-session-ngt-1778253900011-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-7-h1-15",
+      "route": {
+        "id": "right-s8-7-h1-15",
+        "releaseLeftAt": 8.7,
+        "rightAt": 8.71,
+        "rightHold": 1.15
+      },
+      "score10": 1.9,
+      "score": 480,
+      "lives": 3,
+      "attacks": 22,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 17.293,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 2,
+        "bossVx": 35.1,
+        "bossVy": 85.06
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 14.527,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h1-15-seed12003-2026-05-08T15-25-19-751Z-37218-47k2ll/neo-galaga-session-ngt-1778253921003-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h1-15-seed12003-2026-05-08T15-25-19-751Z-37218-47k2ll/neo-galaga-session-ngt-1778253921003-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "baseline-left-edge",
+      "route": {
+        "id": "baseline-left-edge",
+        "releaseLeftAt": 8.4
+      },
+      "score10": 1.8,
+      "score": 380,
+      "lives": 4,
+      "attacks": 22,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 9.533,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 2,
+        "bossVx": -86.94,
+        "bossVy": 84.28
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.067,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/baseline-left-edge-seed12003-2026-05-08T15-24-46-303Z-36699-ewt01z/neo-galaga-session-ngt-1778253887536-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/baseline-left-edge-seed12003-2026-05-08T15-24-46-303Z-36699-ewt01z/neo-galaga-session-ngt-1778253887536-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "hold-left-through-squadron",
+      "route": {
+        "id": "hold-left-through-squadron",
+        "releaseLeftAt": 11.4
+      },
+      "score10": 1.8,
+      "score": 380,
+      "lives": 3,
+      "attacks": 28,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 9.543,
+        "lane": 6,
+        "playerLane": 0,
+        "escorts": 2,
+        "bossVx": -93.25,
+        "bossVy": 84.28
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.077,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/hold-left-through-squadron-seed12003-2026-05-08T15-24-47-712Z-36738-3q97n4/neo-galaga-session-ngt-1778253888934-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/hold-left-through-squadron-seed12003-2026-05-08T15-24-47-712Z-36738-3q97n4/neo-galaga-session-ngt-1778253888934-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "release-left-before-squadron",
+      "route": {
+        "id": "release-left-before-squadron",
+        "releaseLeftAt": 7.6
+      },
+      "score10": 1.8,
+      "score": 380,
+      "lives": 3,
+      "attacks": 26,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 9.533,
+        "lane": 6,
+        "playerLane": 0,
+        "escorts": 2,
+        "bossVx": -93.25,
+        "bossVy": 84.28
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.067,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/release-left-before-squadron-seed12003-2026-05-08T15-24-49-087Z-36755-j2ia7d/neo-galaga-session-ngt-1778253890319-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/release-left-before-squadron-seed12003-2026-05-08T15-24-49-087Z-36755-j2ia7d/neo-galaga-session-ngt-1778253890319-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s7-6-h0-8",
+      "route": {
+        "id": "right-s7-6-h0-8",
+        "releaseLeftAt": 7.6,
+        "rightAt": 7.61,
+        "rightHold": 0.8
+      },
+      "score10": 0.8,
+      "score": 750,
+      "lives": 2,
+      "attacks": 16,
+      "bullets": 15,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 9.877,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 6,
+        "sourceLane": 7
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h0-8-seed12003-2026-05-08T15-24-57-285Z-36891-b563pl/neo-galaga-session-ngt-1778253898441-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s7-6-h0-8-seed12003-2026-05-08T15-24-57-285Z-36891-b563pl/neo-galaga-session-ngt-1778253898441-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-7-h0-45",
+      "route": {
+        "id": "right-s8-7-h0-45",
+        "releaseLeftAt": 8.7,
+        "rightAt": 8.71,
+        "rightHold": 0.45
+      },
+      "score10": 0.7,
+      "score": 700,
+      "lives": 3,
+      "attacks": 18,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 9.727,
+        "cause": "enemy_bullet",
+        "sourceType": "but",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h0-45-seed12003-2026-05-08T15-25-17-006Z-37179-oruu5l/neo-galaga-session-ngt-1778253918198-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h0-45-seed12003-2026-05-08T15-25-17-006Z-37179-oruu5l/neo-galaga-session-ngt-1778253918198-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "center-before-squadron",
+      "route": {
+        "id": "center-before-squadron",
+        "releaseLeftAt": 5.22
+      },
+      "score10": 0.5,
+      "score": 480,
+      "lives": 4,
+      "attacks": 21,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 6.237,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/center-before-squadron-seed12003-2026-05-08T15-24-50-472Z-36779-xw2509/neo-galaga-session-ngt-1778253891670-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/center-before-squadron-seed12003-2026-05-08T15-24-50-472Z-36779-xw2509/neo-galaga-session-ngt-1778253891670-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-s8-7-h1-9",
+      "route": {
+        "id": "right-s8-7-h1-9",
+        "releaseLeftAt": 8.7,
+        "rightAt": 8.71,
+        "rightHold": 1.9
+      },
+      "score10": 0.5,
+      "score": 480,
+      "lives": 4,
+      "attacks": 21,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 20.043,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h1-9-seed12003-2026-05-08T15-25-22-518Z-37252-v9nilz/neo-galaga-session-ngt-1778253923878-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-s8-7-h1-9-seed12003-2026-05-08T15-25-22-518Z-37252-v9nilz/neo-galaga-session-ngt-1778253923878-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-early-medium",
+      "route": {
+        "id": "right-early-medium",
+        "releaseLeftAt": 7.2,
+        "rightAt": 7.21,
+        "rightHold": 1.15
+      },
+      "score10": 0.5,
+      "score": 510,
+      "lives": 3,
+      "attacks": 18,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 15.377,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-early-medium-seed12003-2026-05-08T15-24-53-178Z-36820-fyvmyg/neo-galaga-session-ngt-1778253894325-3.json",
+        "reference-artifacts/analyses/stage12-squadron-reward-input-sweep/2026-05-08-acc8b71/runs/right-early-medium-seed12003-2026-05-08T15-24-53-178Z-36820-fyvmyg/neo-galaga-session-ngt-1778253894325-3-system-status.json"
+      ]
+    }
+  ],
+  "failed": []
+}

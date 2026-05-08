@@ -1,37 +1,37 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T13-48-56-678Z-13502",
-  "startedAt": "2026-05-08T13:48:56.678Z",
-  "endedAt": "2026-05-08T13:49:00.168Z",
-  "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "commit": "fee8820",
+  "id": "2026-05-08T15-15-08-307Z-34897",
+  "startedAt": "2026-05-08T15:15:08.307Z",
+  "endedAt": "2026-05-08T15:15:08.451Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "acc8b71",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-visual-look-conformance"
+    "harness:analyze:level-arc-conformance"
   ],
   "axes": [
-    "visual-look"
+    "level-arc",
+    "conformance-loop",
+    "conformance-economics"
   ],
   "resources": [
-    "cpu",
-    "browser",
-    "gpu"
+    "cpu"
   ],
-  "notes": "First Aurora visual look conformance scorer baseline",
+  "notes": "Candidate loop Stage 12 level-arc guardrail (stage12-late-reward/stage12-baseline-main-acc8b71)",
   "measurement": {
-    "wallSeconds": 3.49,
-    "timeRealSeconds": 3.48,
-    "timeUserSeconds": 2.52,
-    "timeSystemSeconds": 0.91,
-    "cpuSeconds": 3.43,
+    "wallSeconds": 0.144,
+    "timeRealSeconds": 0.14,
+    "timeUserSeconds": 0.11,
+    "timeSystemSeconds": 0.02,
+    "cpuSeconds": 0.13,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
   },
   "resourcesDeclared": {
-    "gpuMode": "expected-visual-review",
+    "gpuMode": null,
     "gpuSeconds": null,
     "modelProvider": null,
     "modelName": null,
@@ -40,8 +40,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 261034077,
-    "artifactBytesAfter": 261034073,
-    "artifactBytesDelta": -4
+    "artifactBytesBefore": 263242350,
+    "artifactBytesAfter": 263249072,
+    "artifactBytesDelta": 6722
   }
 }
