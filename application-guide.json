@@ -517,10 +517,10 @@
       "referenceLabel": "Ambience / Convoy",
       "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
       "referenceWindow": {
-        "startSeconds": 4.148,
-        "endSeconds": 7.84,
-        "source": "aurora-audio-theme-comparison/2026-05-08-main-255ff96 best candidate",
-        "selection": "highest-scoring non-overlapping reference subwindow against Aurora active cue"
+        "startSeconds": 4.598,
+        "endSeconds": 4.838,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-96c62d6 nested corrected-capture best candidate",
+        "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture; original 4.148s window plus 0.450s-0.690s candidate"
       },
       "mappingStatus": "Synthetic Galaga runtime cue vs actual indexed reference clip.",
       "mappingConfidence": "high"
@@ -794,6 +794,12 @@
       "focus": "Compare whether the ending cue feels final and emotionally complete enough.",
       "referenceLabel": "Last Ship Destroyed Ambience",
       "referenceClip": "assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a",
+      "referenceWindow": {
+        "startSeconds": 3.798,
+        "endSeconds": 4.638,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+        "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+      },
       "mappingStatus": "Best current end-state reference; still broader than Aurora's single slot.",
       "mappingConfidence": "medium"
     }
