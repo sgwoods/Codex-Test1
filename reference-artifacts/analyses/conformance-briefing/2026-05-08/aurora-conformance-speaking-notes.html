@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Aurora Conformance Loop Speaking Notes</title>
+  <style>
+    @page { size: Letter; margin: 0.65in; }
+    body {
+      margin: 0;
+      color: #151515;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+      font-size: 12.5pt;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22pt;
+      line-height: 1.1;
+    }
+    h2 {
+      margin: 22px 0 8px;
+      font-size: 15pt;
+      border-bottom: 1px solid #c8c8c8;
+      padding-bottom: 4px;
+    }
+    p { margin: 0 0 9px; }
+    ul { margin: 6px 0 12px 20px; padding: 0; }
+    li { margin: 0 0 5px; }
+    .meta {
+      color: #555;
+      font-size: 10pt;
+      margin-bottom: 18px;
+    }
+    .slide {
+      page-break-inside: avoid;
+    }
+    .callout {
+      border-left: 4px solid #245b8f;
+      background: #f2f6fb;
+      padding: 9px 12px;
+      margin: 12px 0;
+    }
+    .small {
+      color: #555;
+      font-size: 10.5pt;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aurora Conformance Loop Speaking Notes</h1>
+  <p class="meta">Two-slide talk track for conformance iteration, compute economics, and model-assisted assessment.</p>
+
+  <section class="slide">
+    <h2>Slide 1: Conformance Improvement Loop</h2>
+    <p>The core idea is that we are treating conformance as an evidence-driven engineering loop, not as subjective arcade imitation.</p>
+    <p>We start by ingesting reference material: video, audio, frames, sprites, timing traces, and stage behavior. That gives us the target.</p>
+    <p>Then we convert the reference into measurements: waveform comparisons, spectral analysis, motion paths, pressure windows, contact sheets, and timing traces.</p>
+    <p>The model's role is not just to suggest random gameplay changes. Its highest value is helping us design better metrics, diagnose gaps, propose scorer logic, and choose the next-best experiment.</p>
+    <p>Once we have a measurable hypothesis, we spend local compute: CPU and browser harnesses for deterministic gameplay testing, and GPU or visual compute for frame and image comparison.</p>
+    <p>Then we make a candidate improvement. That could be gameplay tuning, audio feedback, graphics work, or an improvement to the ingestion harness itself.</p>
+    <p>After that, we score it. We check conformance movement, release gates, and no-regression guardrails.</p>
+    <p>Finally, we document economics: wall time, CPU/GPU/API usage, artifact growth, and return on effort. That feeds the next cycle, so we keep improving the system's judgment over time.</p>
+    <div class="callout">
+      <strong>Key line:</strong> We are not trying to spend more compute. We are trying to get more arcade fidelity, better game feel, and more reusable harness logic per unit of compute.
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Slide 2: How We Optimize Conformance ROI</h2>
+    <p>This second slide breaks the loop into workstreams.</p>
+    <p>Reference ingestion is foundational because it defines what we are trying to match. Without that, we are tuning from memory.</p>
+    <p>Audio analysis is currently one of the highest-value areas because Aurora's audio identity and event feedback are still weaker than core movement or combat.</p>
+    <p>Gameplay analysis is where CPU and browser harnesses matter most. This is how we test pressure, pacing, level arc, stage shape, and repeatability.</p>
+    <p>Visual analysis is where GPU or image-style computation becomes more useful. We want sprite alignment, contact sheets, alien entry, UI surfaces, and overall arcade feel to become measurable rather than purely subjective.</p>
+    <p>Model-assisted planning helps us decide what to measure next and how. We want the model improving the evaluation system, not just giving us one-off design opinions.</p>
+    <p>Candidate implementation is where Codex and the codebase turn the evidence into actual changes.</p>
+    <p>Regression verification keeps us from damaging areas that are already strong, like movement, combat responsiveness, and capture/rescue rules.</p>
+    <p>Economics tracking is what makes this scalable. We want to know whether three hours of CPU, GPU, or model/API work created a measurable score gain, better harness logic, or just noise.</p>
+    <div class="callout">
+      <strong>Decision rule:</strong> Pick the work with the best expected conformance gain per unit of effort, while preserving guardrails.
+    </div>
+    <p class="small">Current highest-value sequence: audio identity and event feedback, then level arc and encounter shape, then visual look-and-feel scoring, then Stage pressure replay precision.</p>
+  </section>
+</body>
+</html>
