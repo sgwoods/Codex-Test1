@@ -540,6 +540,66 @@
       "mappingConfidence": "high"
     },
     {
+      "id": "player-shot-compare",
+      "label": "Player Shot",
+      "entryId": "player-shot-classic",
+      "focus": "Compare whether player fire reads as a quick arcade shot instead of a generic impact.",
+      "referenceLabel": "Flagship/Fighter Shot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "mappingStatus": "Measured coverage added for shot identity; current reference clip is shared and may still be too broad.",
+      "mappingConfidence": "medium"
+    },
+    {
+      "id": "enemy-shot-compare",
+      "label": "Enemy Shot",
+      "entryId": "enemy-shot-classic",
+      "focus": "Compare whether enemy fire is distinct enough from player fire and boss damage.",
+      "referenceLabel": "Flagship/Fighter Shot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "mappingStatus": "Measured coverage added for projectile feedback; current reference clip is shared and may still be too broad.",
+      "mappingConfidence": "medium"
+    },
+    {
+      "id": "enemy-hit-compare",
+      "label": "Enemy Hit",
+      "entryId": "enemy-hit-aurora",
+      "focus": "Compare whether an enemy impact gives immediate hit confirmation.",
+      "referenceLabel": "Zako",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+      "mappingStatus": "Measured coverage added for impact feedback; hit and kill hierarchy still needs refinement.",
+      "mappingConfidence": "medium"
+    },
+    {
+      "id": "boss-hit-compare",
+      "label": "Boss Hit",
+      "entryId": "boss-hit-aurora",
+      "focus": "Compare whether boss damage reads as a distinct multi-hit event.",
+      "referenceLabel": "Boss Damage / Flagship Fighter Shot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "mappingStatus": "Measured coverage added for boss damage feedback; reference source is mixed and may require subwindow promotion.",
+      "mappingConfidence": "medium"
+    },
+    {
+      "id": "enemy-boom-compare",
+      "label": "Enemy Boom",
+      "entryId": "enemy-boom-aurora",
+      "focus": "Compare whether normal enemy destruction is more emphatic than a simple hit.",
+      "referenceLabel": "Zako",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+      "mappingStatus": "Measured coverage added for destruction feedback; may need a better split between impact and explosion.",
+      "mappingConfidence": "medium"
+    },
+    {
+      "id": "boss-boom-compare",
+      "label": "Boss Boom",
+      "entryId": "boss-boom-aurora",
+      "focus": "Compare whether boss destruction feels larger and more final than normal enemy destruction.",
+      "referenceLabel": "Boss Death / Sasori",
+      "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+      "mappingStatus": "Measured coverage added for boss destruction feedback.",
+      "mappingConfidence": "high"
+    },
+    {
       "id": "capture-beam-compare",
       "label": "Capture Beam",
       "entryId": "capture-beam",
@@ -548,6 +608,16 @@
       "referenceClip": "assets/reference-audio/galaga3-tractor-beam.m4a",
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
+    },
+    {
+      "id": "capture-retreat-compare",
+      "label": "Capture Retreat",
+      "entryId": "capture-retreat",
+      "focus": "Compare whether the post-capture retreat phase remains audible as a distinct state.",
+      "referenceLabel": "Capturing",
+      "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+      "mappingStatus": "Measured coverage added for the transition between beam danger and captured-fighter state.",
+      "mappingConfidence": "medium"
     },
     {
       "id": "capture-success-compare",

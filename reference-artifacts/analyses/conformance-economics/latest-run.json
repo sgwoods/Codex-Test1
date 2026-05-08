@@ -1,31 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T10-14-31-833Z-45376",
-  "startedAt": "2026-05-08T10:14:31.833Z",
-  "endedAt": "2026-05-08T10:14:31.981Z",
+  "id": "2026-05-08T11-44-36-701Z-64337",
+  "startedAt": "2026-05-08T11:44:36.701Z",
+  "endedAt": "2026-05-08T11:44:36.893Z",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "commit": "d8240f0",
+  "commit": "255ff96",
   "command": [
     "npm",
     "run",
-    "harness:analyze:level-arc-conformance"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
-    "level-arc",
-    "conformance-loop",
-    "conformance-economics"
+    "audio"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "Candidate loop Stage 12 level-arc guardrail (stage12-late-reward/stage12-post-reject-baseline)",
+  "notes": "Aurora audio event-gap analysis after impact/explosion comparison refresh",
   "measurement": {
-    "wallSeconds": 0.148,
-    "timeRealSeconds": 0.14,
-    "timeUserSeconds": 0.11,
-    "timeSystemSeconds": 0.02,
-    "cpuSeconds": 0.13,
+    "wallSeconds": 0.192,
+    "timeRealSeconds": 0.18,
+    "timeUserSeconds": 0.13,
+    "timeSystemSeconds": 0.06,
+    "cpuSeconds": 0.19,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -40,8 +38,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 236326682,
-    "artifactBytesAfter": 236326682,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 250741427,
+    "artifactBytesAfter": 250745861,
+    "artifactBytesDelta": 4434
   }
 }

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T10:56:44.173Z",
-  "commit": "afc27e6",
+  "generatedAt": "2026-05-08T11:45:01.735Z",
+  "commit": "255ff96",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
   "dirty": true,
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-d8240f0/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/report.json"
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/report.json"
   },
   "equalQualityCategoryWeight": 0.091,
   "releaseGate": [
@@ -439,28 +439,28 @@
     "latestLevelArcScore10": 8.4,
     "metricPointCount": 492,
     "deltaCount": 68,
-    "measuredRuns": 65,
-    "wallSeconds": 1046.861,
-    "cpuSeconds": 1461.85,
-    "artifactBytes": 179548979,
+    "measuredRuns": 69,
+    "wallSeconds": 1239.085,
+    "cpuSeconds": 1790.55,
+    "artifactBytes": 193044057,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/compute-minutes-by-resource.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-255ff96/compute-minutes-by-resource.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 65,
-      "Wall time": "17.4 min",
-      "CPU time": "24.4 min"
+      "Measured runs": 69,
+      "Wall time": "20.7 min",
+      "CPU time": "29.8 min"
     },
     {
       "Resource": "browser",
-      "Measured runs": 36,
-      "Wall time": "14.2 min",
-      "CPU time": "20.6 min"
+      "Measured runs": 38,
+      "Wall time": "17.4 min",
+      "CPU time": "26.1 min"
     }
   ],
   "axisSpendTable": [
@@ -481,6 +481,12 @@
       "Measured runs": 3,
       "Wall time": "3.2 min",
       "CPU time": "3.7 min"
+    },
+    {
+      "Axis": "audio",
+      "Measured runs": 4,
+      "Wall time": "3.2 min",
+      "CPU time": "5.5 min"
     },
     {
       "Axis": "level-arc",
