@@ -7,6 +7,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'conformance-economics');
 const LEDGER = path.join(OUT_ROOT, 'run-ledger.jsonl');
+const GPU_EQUIVALENT_RESOURCES = new Set(['gpu', 'model-api', 'openai-api', 'codex', 'codex-app', 'llm', 'model']);
 
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
@@ -219,17 +220,51 @@ function metricDeltas(points){
 }
 
 function summarizeLedger(entries){
+  function isGpuEquivalent(entry){
+    const declared = entry.resourcesDeclared || {};
+    const resources = entry.resources || [];
+    return resources.some(resource => GPU_EQUIVALENT_RESOURCES.has(resource))
+      || !!declared.modelProvider
+      || !!declared.modelName
+      || !!declared.modelCalls
+      || !!declared.inputTokens
+      || !!declared.outputTokens
+      || !!declared.gpuSeconds
+      || !!declared.modelMinutes;
+  }
+  function addResource(acc, resource, entry){
+    acc.byResource[resource] = acc.byResource[resource] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
+    acc.byResource[resource].runs += 1;
+    acc.byResource[resource].wallSeconds += entry.measurement?.wallSeconds || 0;
+    acc.byResource[resource].cpuSeconds += entry.measurement?.cpuSeconds || 0;
+  }
   const totals = entries.reduce((acc, entry) => {
     acc.runs += 1;
     acc.wallSeconds += entry.measurement?.wallSeconds || 0;
     acc.cpuSeconds += entry.measurement?.cpuSeconds || 0;
     acc.artifactBytes += entry.outputs?.artifactBytesDelta || 0;
-    for(const resource of entry.resources || ['unspecified']){
-      acc.byResource[resource] = acc.byResource[resource] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
-      acc.byResource[resource].runs += 1;
-      acc.byResource[resource].wallSeconds += entry.measurement?.wallSeconds || 0;
-      acc.byResource[resource].cpuSeconds += entry.measurement?.cpuSeconds || 0;
+    const declared = entry.resourcesDeclared || {};
+    acc.modelUsage.modelCalls += declared.modelCalls || 0;
+    acc.modelUsage.inputTokens += declared.inputTokens || 0;
+    acc.modelUsage.outputTokens += declared.outputTokens || 0;
+    acc.modelUsage.gpuSeconds += declared.gpuSeconds || 0;
+    acc.modelUsage.modelMinutes += declared.modelMinutes || 0;
+    if(Number.isFinite(declared.codexUsage5hLeftPercent) || Number.isFinite(declared.codexUsageWeekLeftPercent) || Number.isFinite(declared.codexModel5hLeftPercent) || Number.isFinite(declared.codexModelWeekLeftPercent)){
+      acc.modelUsage.codexUsageSnapshots += 1;
+      acc.modelUsage.latestCodexUsageSnapshot = {
+        startedAt: entry.startedAt || null,
+        codexUsage5hLeftPercent: declared.codexUsage5hLeftPercent ?? null,
+        codexUsageWeekLeftPercent: declared.codexUsageWeekLeftPercent ?? null,
+        codexModel5hLeftPercent: declared.codexModel5hLeftPercent ?? null,
+        codexModelWeekLeftPercent: declared.codexModelWeekLeftPercent ?? null,
+        usageReset: declared.usageReset || null,
+        weeklyReset: declared.weeklyReset || null
+      };
     }
+    for(const resource of entry.resources || ['unspecified']){
+      addResource(acc, resource, entry);
+    }
+    if(isGpuEquivalent(entry)) addResource(acc, 'gpu-equivalent', entry);
     for(const axis of entry.axes || ['unspecified']){
       acc.byAxis[axis] = acc.byAxis[axis] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
       acc.byAxis[axis].runs += 1;
@@ -237,9 +272,27 @@ function summarizeLedger(entries){
       acc.byAxis[axis].cpuSeconds += entry.measurement?.cpuSeconds || 0;
     }
     return acc;
-  }, { runs: 0, wallSeconds: 0, cpuSeconds: 0, artifactBytes: 0, byResource: {}, byAxis: {} });
+  }, {
+    runs: 0,
+    wallSeconds: 0,
+    cpuSeconds: 0,
+    artifactBytes: 0,
+    byResource: {},
+    byAxis: {},
+    modelUsage: {
+      modelCalls: 0,
+      inputTokens: 0,
+      outputTokens: 0,
+      gpuSeconds: 0,
+      modelMinutes: 0,
+      codexUsageSnapshots: 0,
+      latestCodexUsageSnapshot: null
+    }
+  });
   totals.wallSeconds = round(totals.wallSeconds, 3);
   totals.cpuSeconds = round(totals.cpuSeconds, 3);
+  totals.modelUsage.gpuSeconds = round(totals.modelUsage.gpuSeconds, 3) || 0;
+  totals.modelUsage.modelMinutes = round(totals.modelUsage.modelMinutes, 3) || 0;
   for(const group of [totals.byResource, totals.byAxis]){
     for(const value of Object.values(group)){
       value.wallSeconds = round(value.wallSeconds, 3);
@@ -375,6 +428,9 @@ function buildReadme(report){
     `- Measured runs in ledger: ${report.summary.ledger.runs}`,
     `- Tracked wall time: ${report.summary.ledger.wallSeconds}s`,
     `- Tracked CPU time: ${report.summary.ledger.cpuSeconds}s`,
+    `- GPU-equivalent model/Codex runs: ${report.summary.ledger.byResource['gpu-equivalent']?.runs || 0}`,
+    `- Declared model calls: ${report.summary.ledger.modelUsage.modelCalls}`,
+    `- Declared model tokens: ${report.summary.ledger.modelUsage.inputTokens} input / ${report.summary.ledger.modelUsage.outputTokens} output`,
     '',
     '## Charts',
     '',
@@ -386,7 +442,7 @@ function buildReadme(report){
     '',
     '- Treat artifact volume and run count as compute proxies until a command has a measured ledger entry.',
     '- Separate gameplay-quality gains from measurement-precision gains. A harness that explains a failure better has value even when player-facing conformance has not moved yet.',
-    '- Track model/API/GPU work explicitly when Codex or OpenAI APIs design or execute a long-cycle assessment. Do not log secrets or raw prompts in the ledger.',
+    '- Track model/API/GPU work explicitly when Codex or OpenAI APIs design or execute a long-cycle assessment. Use the `gpu-equivalent` resource rollup for Codex/model/API work and do not log secrets or raw prompts in the ledger.',
     '- Prefer high-ROI next steps: large gap, clear measurable target, modest local compute, and reusable harness/platform logic.',
     '',
     '## Highest-Value Recent Deltas',
@@ -399,6 +455,7 @@ function buildReadme(report){
   lines.push('## Next Instrumentation Step');
   lines.push('');
   lines.push('- Run expensive harnesses through `npm run harness:measure -- --axis <axis> --resource cpu --resource browser -- <command>` so future economics charts can compute cost per score delta instead of relying on artifact-size proxies.');
+  lines.push('- Log Codex/model/API-only planning or review work with `npm run harness:measure -- --manual --axis <axis> --resource codex --model-provider openai --model <model> --model-minutes <minutes> --notes "<short note>"`. Optional quota snapshots from the app usage screen can be stored with `--codex-usage-5h-left-percent`, `--codex-usage-week-left-percent`, `--codex-model-5h-left-percent`, and `--codex-model-week-left-percent`.');
   lines.push('');
   return `${lines.join('\n')}\n`;
 }
