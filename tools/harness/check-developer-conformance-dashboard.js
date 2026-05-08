@@ -20,6 +20,9 @@ function checkGeneratedDashboardPage(){
     'class="metricDetails"',
     'Grounding best case',
     'Player / designer meaning',
+    'Score Semantics',
+    'Confidence',
+    'Resolution',
     "refreshState.addEventListener('click', refresh)"
   ];
   const missing = expected.filter(item => !html.includes(item));

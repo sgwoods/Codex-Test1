@@ -111,10 +111,12 @@ function table(headers, rows){
 
 function row({ rank, metric, score10, target, status, why, effort, next, evidence }){
   const normalizedScore = Number.isFinite(+score10) ? +(+score10).toFixed(3) : null;
+  const scoreContext = metricScoreContext(metric, normalizedScore);
   return {
     rank,
     metric,
     explanation: metricExplanation(metric),
+    scoreContext,
     score10: normalizedScore,
     current: score(score10),
     target,
@@ -123,8 +125,118 @@ function row({ rank, metric, score10, target, status, why, effort, next, evidenc
     effort,
     next,
     evidence,
-    cells: [rank, metric, score(score10), target, status, why, effort, next, evidence]
+    cells: [rank, metric, score(score10), scoreContext.confidence, scoreContext.resolution, target, status, why, effort, next, evidence]
   };
+}
+
+function scoreMeaning(score10){
+  if(!Number.isFinite(+score10)) return 'Planning estimate or unscored proxy; useful for prioritization, not release proof.';
+  if(+score10 >= 9.95) return 'No known measured gap under the current scorer and evidence coverage. This is a guardrail pass, not proof of perfection.';
+  if(+score10 >= 9) return 'Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish.';
+  if(+score10 >= 8) return 'Good conformance, but the gap is likely visible to attentive players or designers in some scenarios.';
+  if(+score10 >= 7) return 'Material conformance gap with meaningful user-experience or reference-identity impact.';
+  return 'Major conformance gap or immature metric requiring stronger evidence before release confidence.';
+}
+
+function metricScoreContext(metric, score10){
+  const text = String(metric || '').toLowerCase();
+  const base = {
+    confidence: 'medium',
+    resolution: 'scorer-backed artifact with selected harness windows',
+    scoreMeaning: scoreMeaning(score10)
+  };
+  if(text.includes('visual look')){
+    return {
+      confidence: 'low',
+      resolution: 'estimated planning score; visual scorer not yet promoted',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('alien entry')){
+    return {
+      confidence: 'medium',
+      resolution: 'composite proxy from opening timing, geometry, and movement grammar',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('challenge-stage variation')){
+    return {
+      confidence: 'medium',
+      resolution: 'composite proxy from challenge timing, challenge identity, and non-repetition',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('audio identity')){
+    return {
+      confidence: 'medium-high',
+      resolution: '21 cue/event comparisons with waveform, spectral, overlap, and alignment features',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('level arc')){
+    return {
+      confidence: 'medium-high',
+      resolution: 'multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('stage 4 pressure')){
+    return {
+      confidence: 'medium',
+      resolution: 'narrow pressure/loss replay windows; exact replay coverage still limited',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('arcade console frame') || text.includes('popup') || text.includes('leaderboard')){
+    return {
+      confidence: 'medium',
+      resolution: 'UI shell proxy; dedicated visual/modal rubric still needed',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('dive fairness')){
+    return {
+      confidence: 'medium-high',
+      resolution: 'seed/persona safety guardrails and pressure-sensitive collision checks',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('player movement')){
+    return {
+      confidence: 'high-current-pass',
+      resolution: 'reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('shot and hit')){
+    return {
+      confidence: 'high-current-pass',
+      resolution: 'functional combat-response guardrails; audiovisual semantics are scored separately',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('stage 1 opening geometry')){
+    return {
+      confidence: 'high-current-pass',
+      resolution: 'opening formation geometry checks; later-stage entry variation is separate',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('capture and rescue')){
+    return {
+      confidence: 'high-current-pass',
+      resolution: 'rule/state harness checks; feedback clarity and reward feel are separate',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  if(text.includes('challenge-stage timing')){
+    return {
+      confidence: 'high-current-pass',
+      resolution: 'challenge timing deltas within tolerance; variation and teaching value are separate',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
+  return base;
 }
 
 function metricExplanation(metric){
@@ -523,7 +635,7 @@ function main(){
   ];
 
   const releaseGateHeaders = ['Gate', 'Current', 'Target', 'Notes'];
-  const priorityHeaders = ['Priority', 'Metric', 'Current', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'];
+  const priorityHeaders = ['Priority', 'Metric', 'Current', 'Confidence', 'Resolution', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'];
   const resourceHeaders = ['Resource', 'Measured runs', 'Wall time', 'CPU time'];
   const axisHeaders = ['Axis', 'Measured runs', 'Wall time', 'CPU time'];
   const nextEstimateHeaders = ['Priority', 'Metric', 'Current', 'Target', 'Gap to target', 'Estimated effort', 'Expected resources', 'Next action'];
@@ -554,6 +666,12 @@ function main(){
     branch,
     dirty,
     sourceReports,
+    scoreSemantics: {
+      headline: 'An x/10 score is a measured rollup at the current scorer resolution, not a claim of arcade-perfect behavior.',
+      tenOutOfTen: '10/10 means no known measured gap under the current scorer and evidence coverage. It remains a guardrail pass until broader reference, expert-play, and edge-case evidence says otherwise.',
+      confidence: 'Confidence estimates how much trust to place in the score as a release signal.',
+      resolution: 'Resolution describes how fine-grained the scorer currently is and which blind spots may remain.'
+    },
     equalQualityCategoryWeight: equalWeight,
     releaseGate: tableObjects(releaseGateHeaders, releaseGate),
     priorityRows: rows.map(({ cells, ...entry }) => entry),
@@ -605,6 +723,22 @@ function main(){
     '## Current Release Gate',
     '',
     table(releaseGateHeaders, releaseGate),
+    '',
+    '## How To Read Scores',
+    '',
+    'An `x/10` score is a measured roll-up at the current scorer resolution, not a claim of arcade-perfect behavior. A `10/10` metric means no known measured gap under the current harness and evidence coverage. It should be treated as a guardrail pass until broader reference, expert-play, visual, audio, and edge-case evidence increases confidence.',
+    '',
+    table(
+      ['Read', 'Meaning'],
+      [
+        ['10/10', 'No known measured gap under the current scorer. Protect as a guardrail; do not read as perfect.'],
+        ['9.x', 'Strong measured conformance with remaining risk mostly in edge cases, coverage, or polish.'],
+        ['8.x', 'Good conformance, but attentive players or designers may notice scenario-specific gaps.'],
+        ['7.x', 'Material conformance gap with user-experience or reference-identity impact.'],
+        ['Confidence', 'How much trust to place in this score as a release signal.'],
+        ['Resolution', 'How fine-grained the scorer is and what kinds of blind spots may remain.']
+      ]
+    ),
     '',
     '## Priority Table',
     '',

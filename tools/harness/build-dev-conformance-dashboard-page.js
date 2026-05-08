@@ -144,6 +144,17 @@ function html(data){
       letter-spacing:.08em;
       margin-bottom:2px;
     }
+    .badge{
+      display:inline-block;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:3px 7px;
+      background:#fbfaf7;
+      font-size:12px;
+      font-weight:800;
+      color:#4e4a43;
+      white-space:nowrap;
+    }
     .score{font-weight:850;white-space:nowrap}
     .good{color:var(--green)} .watch{color:var(--yellow)} .gap{color:var(--red)}
     .small{font-size:13px;color:var(--muted)}
@@ -234,9 +245,13 @@ function html(data){
 
     function metricCell(row){
       const explanation = row.explanation || {};
+      const scoreContext = row.scoreContext || {};
       return '<details class="metricDetails">'
         + '<summary><span>' + esc(row.metric) + '</span></summary>'
         + '<div class="metricExplanation">'
+        + explanationBlock('Score meaning', scoreContext.scoreMeaning)
+        + explanationBlock('Confidence', scoreContext.confidence)
+        + explanationBlock('Resolution', scoreContext.resolution)
         + explanationBlock('Calculation', explanation.calculation)
         + explanationBlock('Grounding best case', explanation.grounding)
         + explanationBlock('Player / designer meaning', explanation.meaning)
@@ -251,6 +266,7 @@ function html(data){
       const audio = rows.find(row => /Audio identity/.test(row.metric || ''));
       const level = rows.find(row => /Level arc/.test(row.metric || ''));
       const visual = rows.find(row => /visual look/i.test(row.metric || ''));
+      const semantics = data.scoreSemantics || {};
       app.innerHTML = \`
         <div class="grid">
           <div class="card"><span class="label">Overall Quality</span><span class="value">\${esc(overall?.Current || '--')}</span></div>
@@ -262,12 +278,14 @@ function html(data){
           <section>
             <h2>Priority Investment Queue</h2>
             <table>
-              <thead><tr><th>Rank</th><th>Metric</th><th>Current</th><th>Target</th><th>Status</th><th>Recommended next step</th><th>Evidence</th></tr></thead>
+              <thead><tr><th>Rank</th><th>Metric</th><th>Current</th><th>Confidence</th><th>Resolution</th><th>Target</th><th>Status</th><th>Recommended next step</th><th>Evidence</th></tr></thead>
               <tbody>\${rows.map(row => \`
                 <tr>
                   <td class="priority">\${esc(row.rank)}</td>
                   <td class="metric">\${metricCell(row)}</td>
                   <td class="score \${scoreClass(row.score10)}">\${esc(row.current)}</td>
+                  <td><span class="badge">\${esc(row.scoreContext?.confidence || '--')}</span></td>
+                  <td class="small">\${esc(row.scoreContext?.resolution || '--')}</td>
                   <td>\${esc(row.target)}</td>
                   <td>\${esc(row.status)}<div class="small">\${esc(row.effort)}</div></td>
                   <td>\${esc(row.next)}</td>
@@ -276,6 +294,13 @@ function html(data){
             </table>
           </section>
           <div>
+            <section class="card">
+              <h2>Score Semantics</h2>
+              <p><strong>\${esc(semantics.headline || 'Scores are current measured rollups, not perfection claims.')}</strong></p>
+              <p class="small">\${esc(semantics.tenOutOfTen || '10/10 means no known measured gap at the current scorer resolution.')}</p>
+              <p class="small"><strong>Confidence:</strong> \${esc(semantics.confidence || 'Trust level for the score as a release signal.')}</p>
+              <p class="small"><strong>Resolution:</strong> \${esc(semantics.resolution || 'How fine-grained the scorer is today.')}</p>
+            </section>
             <section class="card">
               <h2>Release Gates</h2>
               <table>
