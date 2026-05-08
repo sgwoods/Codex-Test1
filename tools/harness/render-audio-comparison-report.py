@@ -188,6 +188,77 @@ def metric_deltas(left, right):
     }
 
 
+def segment_gap_score(delta):
+    return round(min(10.0, (
+        min(float(delta.get("duration_s") or 0) / 0.22, 1.8) +
+        min(float(delta.get("spectral_centroid_hz") or 0) / 650.0, 2.2) +
+        min(float(delta.get("zero_crossings_per_s") or 0) / 1100.0, 1.4) +
+        min(float(delta.get("rms") or 0) / 0.16, 1.2) +
+        min(float(delta.get("band_shape_distance") or 0) / 0.32, 1.7) +
+        min(float(delta.get("spectral_rolloff_85_hz") or 0) / 2600.0, 1.2) +
+        min(float(delta.get("attack_peak_position") or 0) / 0.45, 0.9) +
+        min(float(delta.get("burst_share") or 0) / 0.34, 0.6)
+    )), 2)
+
+
+def segment_center(segment):
+    return (float(segment.get("start_s") or 0) + float(segment.get("end_s") or 0)) / 2.0
+
+
+def matching_segment(reference_segment, candidate_segments):
+    if not candidate_segments:
+        return None, False
+    role = reference_segment.get("role")
+    same_role = [segment for segment in candidate_segments if segment.get("role") == role]
+    pool = same_role or candidate_segments
+    ref_center = segment_center(reference_segment)
+    return min(pool, key=lambda segment: abs(segment_center(segment) - ref_center)), bool(same_role)
+
+
+def segment_role_comparisons(item_report):
+    variants = item_report.get("variants") or {}
+    reference_segments = ((variants.get("reference") or {}).get("eventSegmentation") or {}).get("segments") or []
+    aurora_segments = ((variants.get("aurora") or {}).get("eventSegmentation") or {}).get("segments") or []
+    galaga_segments = ((variants.get("galaga") or {}).get("eventSegmentation") or {}).get("segments") or []
+    comparisons = []
+    for ref in reference_segments:
+        aur, aur_exact_role = matching_segment(ref, aurora_segments)
+        gal, gal_exact_role = matching_segment(ref, galaga_segments)
+        aur_delta = metric_deltas(aur.get("metrics") if aur else {}, ref.get("metrics") or {}) if aur else None
+        gal_delta = metric_deltas(gal.get("metrics") if gal else {}, ref.get("metrics") or {}) if gal else None
+        comparisons.append({
+            "role": ref.get("role") or "segment",
+            "referenceWindow": {"start_s": ref.get("start_s"), "end_s": ref.get("end_s"), "duration_s": ref.get("duration_s")},
+            "auroraWindow": {"start_s": aur.get("start_s"), "end_s": aur.get("end_s"), "duration_s": aur.get("duration_s")} if aur else None,
+            "syntheticGalagaWindow": {"start_s": gal.get("start_s"), "end_s": gal.get("end_s"), "duration_s": gal.get("duration_s")} if gal else None,
+            "auroraExactRoleMatch": aur_exact_role,
+            "syntheticGalagaExactRoleMatch": gal_exact_role,
+            "auroraVsReference": aur_delta,
+            "syntheticGalagaVsReference": gal_delta,
+            "auroraSegmentRisk10": segment_gap_score(aur_delta or {}),
+            "syntheticGalagaSegmentRisk10": segment_gap_score(gal_delta or {}),
+            "interpretation": segment_interpretation(ref.get("role") or "segment", aur_delta or {}, aur_exact_role),
+        })
+    comparisons.sort(key=lambda item: (-item["auroraSegmentRisk10"], str(item["role"])))
+    return comparisons
+
+
+def segment_interpretation(role, delta, exact_role_match=True):
+    if not delta:
+        return f"{role} segment is missing from the runtime capture."
+    if not exact_role_match:
+        return f"{role} reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
+    if float(delta.get("duration_s") or 0) > 0.12:
+        return f"{role} timing/duration differs enough to tune event pacing before timbre."
+    if float(delta.get("band_shape_distance") or 0) > 0.16 or float(delta.get("spectral_rolloff_85_hz") or 0) > 1800:
+        return f"{role} timbre is the leading gap: band shape/rolloff differ from the reference segment."
+    if float(delta.get("attack_peak_position") or 0) > 0.28 or float(delta.get("burst_share") or 0) > 0.2:
+        return f"{role} envelope is the leading gap: transient placement or burst structure differs."
+    if float(delta.get("rms") or 0) > 0.08:
+        return f"{role} loudness/energy differs; tune gain after timing and timbre remain stable."
+    return f"{role} segment is comparatively close; keep it as a guardrail while other segments improve."
+
+
 def band_shape_distance(left, right):
     keys = sorted(set(left.keys()) | set(right.keys()))
     if not keys:
@@ -329,6 +400,16 @@ def average_delta(items, path):
     return round(sum(values) / len(values), 3) if values else 0.0
 
 
+def average_worst_segment_risk(items):
+    risks = []
+    for item in items:
+        comparisons = item.get("segmentRoleComparisons") or []
+        if not comparisons:
+            continue
+        risks.append(max(float(segment.get("auroraSegmentRisk10") or 0) for segment in comparisons))
+    return round(sum(risks) / len(risks), 3) if risks else 0.0
+
+
 def reference_window_status(reference_metrics, reference_window, aurora_metrics, galaga_metrics):
     runtime_duration = max(aurora_metrics["duration_s"], galaga_metrics["duration_s"], 1e-9)
     if reference_metrics["duration_s"] > runtime_duration * 1.8 and reference_window["coverage"] > 0.75:
@@ -456,6 +537,7 @@ def main():
                 "metrics": m,
                 "activeWindow": active,
                 "activeMetrics": active_metrics,
+                "eventSegmentation": reference_segmentation(sample_rate, data),
                 "waveform": rel(wave_path, out_root) if wave_path else None,
                 "spectrogram": rel(spec_path, out_root) if spec_path else None,
             }
@@ -489,6 +571,7 @@ def main():
             loaded_variants["reference"]["sampleRate"],
             loaded_variants["reference"]["data"],
         )
+        item_report["segmentRoleComparisons"] = segment_role_comparisons(item_report)
         readme_lines.extend([
             "",
             f"- Quick read: synthetic Galaga duration delta vs reference = `{abs(gal['duration_s'] - ref['duration_s']):.3f}s`; Aurora duration delta vs reference = `{abs(aur['duration_s'] - ref['duration_s']):.3f}s`.",
@@ -499,6 +582,21 @@ def main():
             f"- Envelope shape: attack position delta = `{item_report['comparisons']['auroraVsReferenceActive']['attack_peak_position']:.3f}`; decay ratio delta = `{item_report['comparisons']['auroraVsReferenceActive']['decay_ratio']:.3f}`; burst-share delta = `{item_report['comparisons']['auroraVsReferenceActive']['burst_share']:.3f}`.",
             f"- Reference segmentation: `{item_report['referenceSegmentation']['summary']['status']}` with `{item_report['referenceSegmentation']['summary']['segmentCount']}` segment(s); dominant role `{item_report['referenceSegmentation']['summary']['dominantRole']}`.",
         ])
+        if item_report["segmentRoleComparisons"]:
+            worst_segment = item_report["segmentRoleComparisons"][0]
+            readme_lines.append(f"- Worst segment role: `{worst_segment['role']}` risk `{worst_segment['auroraSegmentRisk10']}/10`; {worst_segment['interpretation']}")
+            readme_lines.extend([
+                "",
+                "| Segment role | Reference window | Aurora window | Risk /10 | Duration gap | Centroid gap | Band gap | Rolloff gap | Read |",
+                "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+            ])
+            for segment in item_report["segmentRoleComparisons"]:
+                delta = segment.get("auroraVsReference") or {}
+                ref_win = segment.get("referenceWindow") or {}
+                aur_win = segment.get("auroraWindow") or {}
+                readme_lines.append(
+                    f"| {segment['role']} | {ref_win.get('start_s')}-{ref_win.get('end_s')}s | {aur_win.get('start_s')}-{aur_win.get('end_s')}s | {segment['auroraSegmentRisk10']} | {delta.get('duration_s', 'n/a')}s | {delta.get('spectral_centroid_hz', 'n/a')}Hz | {delta.get('band_shape_distance', 'n/a')} | {delta.get('spectral_rolloff_85_hz', 'n/a')}Hz | {segment['interpretation']} |"
+                )
         if item_report["referenceSegmentCandidates"]:
             candidate_text = "; ".join(
                 f"{candidate['start_s']:.3f}-{candidate['end_s']:.3f}s score {candidate['score']:.3f}"
@@ -516,6 +614,8 @@ def main():
         ]),
         "referenceSegmentCandidateCount": sum(len(item.get("referenceSegmentCandidates") or []) for item in report["items"]),
         "referenceSegmentCount": sum((item.get("referenceSegmentation") or {}).get("summary", {}).get("segmentCount", 0) for item in report["items"]),
+        "segmentRoleComparisonCount": sum(len(item.get("segmentRoleComparisons") or []) for item in report["items"]),
+        "averageWorstSegmentRisk10": average_worst_segment_risk(report["items"]),
         "averageAuroraVsSyntheticGalagaDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsSyntheticGalaga", "duration_s"]),
         "averageAuroraVsReferenceActiveDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "duration_s"]),
         "averageAuroraVsReferenceActiveCentroidDeltaHz": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "spectral_centroid_hz"]),
@@ -529,6 +629,8 @@ def main():
         f"- Broad reference windows needing tighter segmentation: {report['summary']['broadReferenceWindowCount']}",
         f"- Candidate reference subwindows found: {report['summary']['referenceSegmentCandidateCount']}",
         f"- Reference segments found: `{report['summary']['referenceSegmentCount']}`",
+        f"- Segment role comparisons: `{report['summary']['segmentRoleComparisonCount']}`",
+        f"- Average worst segment risk: `{report['summary']['averageWorstSegmentRisk10']:.2f}/10`",
         f"- Average active Aurora-vs-synthetic-Galaga duration delta: `{report['summary']['averageAuroraVsSyntheticGalagaDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference duration delta: `{report['summary']['averageAuroraVsReferenceActiveDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference centroid delta: `{report['summary']['averageAuroraVsReferenceActiveCentroidDeltaHz']:.1f}Hz`",

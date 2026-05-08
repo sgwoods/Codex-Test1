@@ -176,6 +176,7 @@ function eventGapScore(item){
   const centroidGap = +comparison.spectral_centroid_hz || 0;
   const zcrGap = +comparison.zero_crossings_per_s || 0;
   const rmsGap = +comparison.rms || 0;
+  const worstSegmentRisk = worstSegment(item)?.auroraSegmentRisk10 || 0;
   const broadPenalty = /broad-reference-window/.test(item.comparisons?.referenceWindowStatus || '') ? 1.3 : 0;
   const segmentScore = (item.referenceSegmentCandidates || [])[0]?.score;
   const segmentPenalty = Number.isFinite(+segmentScore) ? clamp((.8 - +segmentScore) * 3, 0, 1.4) : .45;
@@ -184,18 +185,29 @@ function eventGapScore(item){
     clamp(centroidGap / 500, 0, 2.5) +
     clamp(zcrGap / 1200, 0, 2.1) +
     clamp(rmsGap / .13, 0, 1.5) +
+    clamp(worstSegmentRisk / 10, 0, 1.25) +
     broadPenalty +
     segmentPenalty;
   return round(clamp(raw * cuePriority(item.cue), 0, 10), 2);
+}
+
+function worstSegment(item){
+  return (item.segmentRoleComparisons || [])
+    .slice()
+    .sort((a, b) => (+b.auroraSegmentRisk10 || 0) - (+a.auroraSegmentRisk10 || 0) || String(a.role).localeCompare(String(b.role)))[0] || null;
 }
 
 function recommendation(item){
   const status = item.comparisons?.referenceWindowStatus || '';
   const cue = item.cue || '';
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
+  const segment = worstSegment(item);
   const segmentScore = (item.referenceSegmentCandidates || [])[0]?.score;
   if(/broad-reference-window/.test(status)){
     return 'Promote a narrower reference subwindow before runtime tuning; the current reference window is too broad for confident scoring.';
+  }
+  if(segment && +segment.auroraSegmentRisk10 >= 4.5){
+    return `Tune the ${segment.role} segment first: ${segment.interpretation}`;
   }
   if((+comparison.duration_s || 0) > 2){
     return 'Shorten or split the runtime cue to match the active reference phrase before timbre tuning.';
@@ -293,6 +305,7 @@ function semanticRecommendation(item, semantic, comparisonSet, eventMatrix, shar
 function rowForItem(item, context = {}){
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
   const bestSegment = (item.referenceSegmentCandidates || [])[0] || null;
+  const segment = worstSegment(item);
   const comparisonSet = context.comparisonByCue?.get(item.cue) || null;
   const sharedReferenceClipCount = context.referenceClipCounts?.get(comparisonSet?.referenceClip || '') || 0;
   const sharedReferenceWindowCount = context.referenceWindowCounts?.get(referenceWindowKey(comparisonSet)) || 0;
@@ -322,6 +335,11 @@ function rowForItem(item, context = {}){
       endSeconds: bestSegment.end_s,
       score: round(bestSegment.score, 3)
     } : null,
+    segmentRoleComparisonCount: (item.segmentRoleComparisons || []).length,
+    worstSegmentRole: segment?.role || null,
+    worstSegmentRisk10: segment ? round(segment.auroraSegmentRisk10, 2) : null,
+    worstSegmentInterpretation: segment?.interpretation || null,
+    worstSegmentDelta: segment?.auroraVsReference || null,
     ...semantics,
     sourceReferenceClipCount: sharedReferenceClipCount,
     sourceReferenceWindowCount: sharedReferenceWindowCount,
@@ -368,6 +386,8 @@ function markdown(report){
     `- Critical cues with comparison coverage: ${report.summary.criticalComparedCueCount}`,
     `- Missing critical comparison cues: ${report.summary.missingCriticalComparisonCueCount}`,
     `- Broad reference windows needing segmentation: ${report.summary.broadReferenceWindowCount}`,
+    `- Segment role comparisons: ${report.summary.segmentRoleComparisonCount}`,
+    `- Average worst segment risk: ${report.summary.averageWorstSegmentRisk10}/10`,
     `- Semantic event score: ${report.summary.semanticAverageScore10}/10`,
     `- Low semantic cue rows: ${report.summary.lowSemanticCueCount}`,
     `- Semantic attention rows: ${report.summary.semanticAttentionCueCount}`,
@@ -389,11 +409,11 @@ function markdown(report){
     '',
     '## Highest-Risk Compared Cues',
     '',
-    '| Rank | Cue | Label | Risk /10 | Status | Duration gap | Centroid gap | Best segment | Recommended action |',
-    '| ---: | --- | --- | ---: | --- | ---: | ---: | ---: | --- |'
+    '| Rank | Cue | Label | Risk /10 | Status | Duration gap | Centroid gap | Worst segment | Segment risk | Recommended action |',
+    '| ---: | --- | --- | ---: | --- | ---: | ---: | --- | ---: | --- |'
   );
   report.comparedCueRisks.slice(0, 12).forEach((item, index) => {
-    lines.push(`| ${index + 1} | ${item.cue} | ${item.label} | ${item.gapRisk10} | ${item.status} | ${item.durationGapSeconds}s | ${item.centroidGapHz} Hz | ${item.bestReferenceSegmentScore ?? 'n/a'} | ${item.recommendation} |`);
+    lines.push(`| ${index + 1} | ${item.cue} | ${item.label} | ${item.gapRisk10} | ${item.status} | ${item.durationGapSeconds}s | ${item.centroidGapHz} Hz | ${item.worstSegmentRole || 'n/a'} | ${item.worstSegmentRisk10 ?? 'n/a'} | ${item.recommendation} |`);
   });
   lines.push('', '## Missing Critical Comparison Coverage', '');
   if(report.missingCriticalComparisonCues.length){
@@ -449,6 +469,7 @@ function main(){
   };
   const comparedCueRisks = (metrics.items || []).map(item => rowForItem(item, rowContext))
     .sort((a, b) => b.gapRisk10 - a.gapRisk10 || String(a.cue).localeCompare(String(b.cue)));
+  const segmentComparedRows = comparedCueRisks.filter(item => Number.isFinite(+item.worstSegmentRisk10));
   const missingCriticalComparisonCues = Array.from(CRITICAL_CUES)
     .filter(cue => !comparedCueSet.has(cue))
     .map(cue => ({
@@ -496,6 +517,12 @@ function main(){
       criticalComparedCueCount: comparedCueRisks.filter(item => item.eventCritical).length,
       missingCriticalComparisonCueCount: missingCriticalComparisonCues.length,
       broadReferenceWindowCount,
+      segmentRoleComparisonCount: comparedCueRisks.reduce((sum, item) => sum + (+item.segmentRoleComparisonCount || 0), 0),
+      averageWorstSegmentRisk10: segmentComparedRows.length
+        ? round(segmentComparedRows.reduce((sum, item) => sum + (+item.worstSegmentRisk10 || 0), 0) / segmentComparedRows.length, 2)
+        : null,
+      highestSegmentRiskCue: segmentComparedRows.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.cue || '',
+      highestSegmentRiskRole: segmentComparedRows.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentRole || '',
       semanticAverageScore10,
       lowSemanticCueCount: lowSemanticRows.length,
       semanticAttentionCueCount: semanticAttentionRows.length,
@@ -519,6 +546,8 @@ function main(){
       ? 'Add measured comparison coverage for impact/explosion cues first: enemyHit, bossHit, enemyBoom, and bossBoom. Then rerun the audio theme comparison and this event-gap analysis.'
       : broadReferenceWindowCount
         ? 'Promote narrower reference subwindows for the broadest remaining cues, then tune the highest-risk runtime cue.'
+        : segmentComparedRows.some(item => +item.worstSegmentRisk10 >= 4.5)
+          ? `Tune the highest segment-level gap next: ${segmentComparedRows.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0].cue} ${segmentComparedRows.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0].worstSegmentRole}. Rerun audio comparison and event-gap analysis after the change.`
         : `Tune the highest-risk runtime cue next: ${highest.label || highest.cue || 'unknown cue'}. Rerun audio comparison and event-gap analysis after the change.`
   };
   fs.mkdirSync(outDir, { recursive: true });

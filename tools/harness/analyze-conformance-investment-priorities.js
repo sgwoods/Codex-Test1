@@ -94,6 +94,11 @@ function latestLevelArcCategory(quality, levelArcReport){
 }
 
 function nextAudioAction(audioEventGap, audioCueCandidate){
+  const segmentCue = audioEventGap?.summary?.highestSegmentRiskCue || '';
+  const segmentRole = audioEventGap?.summary?.highestSegmentRiskRole || '';
+  if(segmentCue && segmentRole){
+    return `Tune the highest segment-level audio gap next: ${segmentCue} ${segmentRole}. Rerun audio comparison, event-gap analysis, and quality scoring after the change.`;
+  }
   if(audioCueCandidate?.cue === 'challengePerfect'){
     const decision = audioCueCandidate.decision || {};
     if(decision.keep && decision.best){
@@ -113,6 +118,9 @@ function nextAudioAction(audioEventGap, audioCueCandidate){
 function audioRationale(audioEventGap, audioCueCandidate){
   const summary = audioEventGap?.summary || {};
   const decision = audioCueCandidate?.decision || null;
+  if(summary.highestSegmentRiskCue && summary.highestSegmentRiskRole){
+    return `Audio is still the weakest quality category, and the evaluator now has ${summary.segmentRoleComparisonCount || 0} segment-role comparisons. The current highest actionable segment gap is ${summary.highestSegmentRiskCue} ${summary.highestSegmentRiskRole}, with average worst segment risk ${summary.averageWorstSegmentRisk10 ?? 'unknown'}/10.`;
+  }
   if(audioCueCandidate?.cue === 'challengePerfect' && decision && decision.keep === false){
     return `Audio is still the weakest quality category. Semantic measurement debt is reduced, and the Challenge Perfect candidate loop now shows no safe keeper yet; measured-best ${decision.measuredBest || 'candidate'} should guide the next generator pass.`;
   }
@@ -335,7 +343,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, and the latest Challenge Perfect candidate decision is ${audioCueCandidate?.decision?.status || 'not yet run'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
+    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, segment-role comparisons are ${audioEventGap.summary?.segmentRoleComparisonCount ?? 'unknown'}, and the latest Challenge Perfect candidate decision is ${audioCueCandidate?.decision?.status || 'not yet run'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));

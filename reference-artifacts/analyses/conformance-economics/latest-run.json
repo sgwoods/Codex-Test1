@@ -1,35 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T19-24-14-555Z-19124",
-  "startedAt": "2026-05-08T19:24:14.555Z",
-  "endedAt": "2026-05-08T19:24:21.096Z",
+  "id": "2026-05-08T19-46-56-174Z-36935",
+  "startedAt": "2026-05-08T19:46:56.174Z",
+  "endedAt": "2026-05-08T19:46:56.375Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "522e411",
+  "commit": "4a81804",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-challenge-perfect-candidates",
-    "--",
-    "--candidate-ids=baseline-current,thin-bright-triangle",
-    "--",
-    "--repeats=3"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
     "audio",
-    "conformance-loop"
+    "audio-reference-segmentation"
   ],
   "resources": [
-    "cpu",
-    "browser"
+    "cpu"
   ],
-  "notes": "Challenge Perfect focused keeper stability rerun",
+  "notes": "Audio segment explicit match event-gap analysis",
   "measurement": {
-    "wallSeconds": 6.541,
-    "timeRealSeconds": 6.53,
-    "timeUserSeconds": 7.83,
-    "timeSystemSeconds": 1.95,
-    "cpuSeconds": 9.78,
+    "wallSeconds": 0.201,
+    "timeRealSeconds": 0.19,
+    "timeUserSeconds": 0.14,
+    "timeSystemSeconds": 0.09,
+    "cpuSeconds": 0.23,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -51,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 328455477,
-    "artifactBytesAfter": 328402933,
-    "artifactBytesDelta": -52544
+    "artifactBytesBefore": 333345230,
+    "artifactBytesAfter": 333345833,
+    "artifactBytesDelta": 603
   }
 }
