@@ -1,30 +1,31 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-08T08-26-14-368Z-35078",
-  "startedAt": "2026-05-08T08:26:14.368Z",
-  "endedAt": "2026-05-08T08:27:15.358Z",
+  "id": "2026-05-08T09-58-04-349Z-40003",
+  "startedAt": "2026-05-08T09:58:04.349Z",
+  "endedAt": "2026-05-08T09:58:04.494Z",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "commit": "50be6cf",
+  "commit": "5fdd723",
   "command": [
     "npm",
     "run",
-    "harness:score:quality-conformance"
+    "harness:analyze:level-arc-conformance"
   ],
   "axes": [
-    "quality-score",
+    "level-arc",
+    "conformance-loop",
     "conformance-economics"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "Quality score after Stage12 reward probe",
+  "notes": "Candidate loop Stage 12 level-arc guardrail (stage12-late-reward/stage12-late-reward-baseline)",
   "measurement": {
-    "wallSeconds": 60.99,
-    "timeRealSeconds": 60.98,
-    "timeUserSeconds": 51.55,
-    "timeSystemSeconds": 16.74,
-    "cpuSeconds": 68.29,
+    "wallSeconds": 0.145,
+    "timeRealSeconds": 0.14,
+    "timeUserSeconds": 0.11,
+    "timeSystemSeconds": 0.02,
+    "cpuSeconds": 0.13,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -39,8 +40,8 @@
     "outputTokens": 0
   },
   "outputs": {
-    "artifactBytesBefore": 232166671,
-    "artifactBytesAfter": 232650916,
-    "artifactBytesDelta": 484245
+    "artifactBytesBefore": 233993586,
+    "artifactBytesAfter": 233993586,
+    "artifactBytesDelta": 0
   }
 }

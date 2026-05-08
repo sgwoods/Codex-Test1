@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "id": "stage12-late-reward",
+  "title": "Stage 12 late reward opportunity",
+  "problem": "Stage 12 has measurable late-run pressure, but normal play does not yet surface enough boss/escort reward opportunity to feel like a Galaga-style late-stage learning and scoring window.",
+  "strategy": "Freeze the evaluator, constrain candidate edits to late-stage scheduling and reward surfacing, then keep only candidates that improve reward/opportunity evidence without weakening level-arc or endpoint guardrails.",
+  "successMeasure": "A candidate should raise opportunity readiness and reward evidence while preserving level-arc score and deterministic endpoint coverage. Natural late-run play should eventually produce reward opportunity without harness-only setup.",
+  "editableSurface": [
+    "Stage 12/late-stage enemy scheduling",
+    "Boss/escort opportunity timing",
+    "Reward telegraphing and score-event surfacing",
+    "Scenario evidence windows that widen observation without changing gameplay"
+  ],
+  "fixedBudget": {
+    "label": "short-platform-loop",
+    "expectedWallSeconds": 90,
+    "notes": "This loop is intentionally short: it validates the candidate-loop machinery and the Stage 12 reward metric surface before any long autonomous mutation cycle."
+  },
+  "targetMetrics": [
+    {
+      "id": "opportunity.score10",
+      "artifact": "level-arc-opportunity-windows",
+      "path": "summary.score10",
+      "minDelta": 0.2,
+      "direction": "increase"
+    },
+    {
+      "id": "opportunity.meanRewardIndex",
+      "artifact": "level-arc-opportunity-windows",
+      "path": "summary.meanRewardIndex",
+      "minDelta": 0.2,
+      "direction": "increase"
+    },
+    {
+      "id": "outcome.rewardWindows",
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.rewardWindows",
+      "minDelta": 1,
+      "direction": "increase"
+    }
+  ],
+  "guardrailMetrics": [
+    {
+      "id": "levelArc.score10",
+      "artifact": "level-arc-conformance",
+      "path": "summary.score10",
+      "minDelta": 0,
+      "direction": "preserve"
+    },
+    {
+      "id": "outcome.endpointWindows",
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.endpointWindows",
+      "minDelta": 0,
+      "direction": "preserve"
+    },
+    {
+      "id": "outcome.collisionLossWindows",
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.collisionLossWindows",
+      "minDelta": 0,
+      "direction": "preserve"
+    }
+  ],
+  "evaluators": [
+    {
+      "id": "outcome-probes",
+      "command": ["npm", "run", "harness:check:level-arc-outcome-probes"],
+      "axes": ["level-arc", "conformance-loop", "conformance-economics"],
+      "resources": ["cpu", "browser"],
+      "notes": "Candidate loop Stage 12 reward outcome probes"
+    },
+    {
+      "id": "opportunity-windows",
+      "command": ["npm", "run", "harness:analyze:level-arc-opportunity-windows"],
+      "axes": ["level-arc", "conformance-loop", "conformance-economics"],
+      "resources": ["cpu"],
+      "notes": "Candidate loop Stage 12 opportunity readiness"
+    },
+    {
+      "id": "level-arc",
+      "command": ["npm", "run", "harness:analyze:level-arc-conformance"],
+      "axes": ["level-arc", "conformance-loop", "conformance-economics"],
+      "resources": ["cpu"],
+      "notes": "Candidate loop Stage 12 level-arc guardrail"
+    }
+  ]
+}
