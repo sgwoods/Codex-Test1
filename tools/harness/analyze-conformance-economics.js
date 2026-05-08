@@ -219,6 +219,80 @@ function metricDeltas(points){
   return deltas.sort((a, b) => Math.abs(b.deltaScore10) - Math.abs(a.deltaScore10));
 }
 
+function normalizeInvestmentAxis(axis){
+  const raw = String(axis || '').replace(/^quality:/, '').replace(/^level-arc:/, '');
+  if(raw === 'audio') return 'audio';
+  if(raw === 'visual-look' || raw.startsWith('visual-look:')) return 'visual-look';
+  if(raw === 'level-arc' || raw.startsWith('level-arc')) return 'level-arc';
+  if(raw.startsWith('stage4-pressure')) return 'stage4-pressure';
+  if(raw === 'overall-quality') return 'overall-quality';
+  return raw;
+}
+
+function costEfficiency(deltas, ledgerSummary){
+  const byAxis = {};
+  for(const delta of deltas){
+    const axis = normalizeInvestmentAxis(delta.axis);
+    byAxis[axis] = byAxis[axis] || {
+      axis,
+      positiveScore10: 0,
+      negativeScore10: 0,
+      deltaCount: 0,
+      largestPositiveDelta10: 0,
+      largestNegativeDelta10: 0
+    };
+    byAxis[axis].deltaCount += 1;
+    if(delta.deltaScore10 > 0){
+      byAxis[axis].positiveScore10 += delta.deltaScore10;
+      byAxis[axis].largestPositiveDelta10 = Math.max(byAxis[axis].largestPositiveDelta10, delta.deltaScore10);
+    }else{
+      byAxis[axis].negativeScore10 += Math.abs(delta.deltaScore10);
+      byAxis[axis].largestNegativeDelta10 = Math.min(byAxis[axis].largestNegativeDelta10, delta.deltaScore10);
+    }
+  }
+  for(const [axis, spend] of Object.entries(ledgerSummary.byAxis || {})){
+    const normalized = normalizeInvestmentAxis(axis);
+    byAxis[normalized] = byAxis[normalized] || {
+      axis: normalized,
+      positiveScore10: 0,
+      negativeScore10: 0,
+      deltaCount: 0,
+      largestPositiveDelta10: 0,
+      largestNegativeDelta10: 0
+    };
+    byAxis[normalized].runs = (byAxis[normalized].runs || 0) + (spend.runs || 0);
+    byAxis[normalized].wallSeconds = (byAxis[normalized].wallSeconds || 0) + (spend.wallSeconds || 0);
+    byAxis[normalized].cpuSeconds = (byAxis[normalized].cpuSeconds || 0) + (spend.cpuSeconds || 0);
+  }
+  return Object.values(byAxis).map(item => {
+    const wallMinutes = round((item.wallSeconds || 0) / 60, 3) || 0;
+    const cpuMinutes = round((item.cpuSeconds || 0) / 60, 3) || 0;
+    const positiveScore10 = round(item.positiveScore10, 3) || 0;
+    return {
+      axis: item.axis,
+      runs: item.runs || 0,
+      wallMinutes,
+      cpuMinutes,
+      positiveScore10,
+      negativeScore10: round(item.negativeScore10, 3) || 0,
+      deltaCount: item.deltaCount || 0,
+      largestPositiveDelta10: round(item.largestPositiveDelta10, 3) || 0,
+      largestNegativeDelta10: round(item.largestNegativeDelta10, 3) || 0,
+      wallMinutesPerPositiveScore10: positiveScore10 > 0 && wallMinutes > 0 ? round(wallMinutes / positiveScore10, 2) : null,
+      cpuMinutesPerPositiveScore10: positiveScore10 > 0 && cpuMinutes > 0 ? round(cpuMinutes / positiveScore10, 2) : null,
+      attribution: (item.runs || 0) && positiveScore10 > 0
+        ? 'tracked-spend-and-score-movement'
+        : (item.runs || 0)
+          ? 'tracked-spend-no-positive-score-delta-yet'
+          : 'historical-score-movement-without-tracked-spend'
+    };
+  }).sort((a, b) => {
+    const ar = a.wallMinutesPerPositiveScore10 ?? Number.POSITIVE_INFINITY;
+    const br = b.wallMinutesPerPositiveScore10 ?? Number.POSITIVE_INFINITY;
+    return ar - br || b.positiveScore10 - a.positiveScore10 || a.axis.localeCompare(b.axis);
+  });
+}
+
 function summarizeLedger(entries){
   function isGpuEquivalent(entry){
     const declared = entry.resourcesDeclared || {};
@@ -386,7 +460,7 @@ function escapeXml(value){
     .replace(/"/g, '&quot;');
 }
 
-function buildCharts(outDir, points, deltas, ledgerSummary){
+function buildCharts(outDir, points, deltas, ledgerSummary, efficiency){
   const byAxis = axis => points.filter(p => p.axis === axis)
     .sort((a, b) => Date.parse(a.generatedAt) - Date.parse(b.generatedAt))
     .map(p => ({ y: p.score10, label: `${p.date}-${p.commit || 'na'}` }));
@@ -405,6 +479,14 @@ function buildCharts(outDir, points, deltas, ledgerSummary){
     value: round((value.wallSeconds || 0) / 60, 2) || 0
   })).sort((a, b) => b.value - a.value);
   svgBarChart(path.join(outDir, 'compute-minutes-by-resource.svg'), 'Tracked Compute Minutes By Resource Class', resourceBars.length ? resourceBars : [{ label: 'no measured runs yet', value: 0 }]);
+  const efficiencyBars = efficiency
+    .filter(item => Number.isFinite(item.wallMinutesPerPositiveScore10))
+    .slice(0, 9)
+    .map(item => ({
+      label: item.axis,
+      value: item.wallMinutesPerPositiveScore10
+    }));
+  svgBarChart(path.join(outDir, 'cost-per-positive-score-point.svg'), 'Tracked Wall Minutes Per +1 Score Point', efficiencyBars.length ? efficiencyBars : [{ label: 'no attributed score gains yet', value: 0 }]);
 }
 
 function buildReadme(report){
@@ -437,6 +519,7 @@ function buildReadme(report){
     '- `score-trends.svg`: conformance trends by score axis.',
     '- `largest-score-deltas.svg`: largest positive and negative score changes in the artifact history.',
     '- `compute-minutes-by-resource.svg`: measured future run time by resource class.',
+    '- `cost-per-positive-score-point.svg`: approximate tracked wall minutes spent per +1 positive score point by investment axis.',
     '',
     '## Interpretation Rules',
     '',
@@ -450,6 +533,14 @@ function buildReadme(report){
   ];
   for(const delta of report.deltas.slice(0, 8)){
     lines.push(`- ${delta.axis}: ${delta.before} -> ${delta.after} (${delta.deltaScore10 > 0 ? '+' : ''}${delta.deltaScore10})`);
+  }
+  lines.push('');
+  lines.push('## Relative Cost To Move Metrics');
+  lines.push('');
+  lines.push('| Axis | Runs | Wall min | Positive score gain | Wall min / +1 score | Attribution |');
+  lines.push('| --- | ---: | ---: | ---: | ---: | --- |');
+  for(const item of report.costEfficiency.slice(0, 10)){
+    lines.push(`| ${item.axis} | ${item.runs} | ${item.wallMinutes} | ${item.positiveScore10} | ${item.wallMinutesPerPositiveScore10 ?? 'n/a'} | ${item.attribution} |`);
   }
   lines.push('');
   lines.push('## Next Instrumentation Step');
@@ -470,6 +561,7 @@ function main(){
   const deltas = metricDeltas(metricPoints);
   const ledger = loadLedger();
   const ledgerSummary = summarizeLedger(ledger);
+  const efficiency = costEfficiency(deltas, ledgerSummary);
   const report = {
     schema_version: 1,
     artifact_type: 'conformance-economics',
@@ -486,15 +578,17 @@ function main(){
       deltaCount: deltas.length,
       latestOverallScore10: metricPoints.filter(p => p.axis === 'overall-quality').slice(-1)[0]?.score10 ?? null,
       latestLevelArcScore10: metricPoints.filter(p => p.axis === 'level-arc').slice(-1)[0]?.score10 ?? null,
+      costEfficiencyAxisCount: efficiency.length,
       ledger: ledgerSummary
     },
     metricPoints,
     deltas,
+    costEfficiency: efficiency,
     ledgerSummary
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
-  buildCharts(outDir, metricPoints, deltas, ledgerSummary);
+  buildCharts(outDir, metricPoints, deltas, ledgerSummary, efficiency);
   console.log(JSON.stringify({
     ok: true,
     outDir,
@@ -502,7 +596,8 @@ function main(){
     charts: [
       path.join(outDir, 'score-trends.svg'),
       path.join(outDir, 'largest-score-deltas.svg'),
-      path.join(outDir, 'compute-minutes-by-resource.svg')
+      path.join(outDir, 'compute-minutes-by-resource.svg'),
+      path.join(outDir, 'cost-per-positive-score-point.svg')
     ],
     summary: report.summary
   }, null, 2));

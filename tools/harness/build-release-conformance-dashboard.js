@@ -1093,7 +1093,8 @@ function main(){
   const economicsCharts = economicsDir ? [
     path.join(economicsDir, 'score-trends.svg'),
     path.join(economicsDir, 'largest-score-deltas.svg'),
-    path.join(economicsDir, 'compute-minutes-by-resource.svg')
+    path.join(economicsDir, 'compute-minutes-by-resource.svg'),
+    path.join(economicsDir, 'cost-per-positive-score-point.svg')
   ].filter(fs.existsSync).map(rel) : [];
   const resourceSpendRows = resourceRows(economics);
   const axisSpendRows = axisRows(economics);

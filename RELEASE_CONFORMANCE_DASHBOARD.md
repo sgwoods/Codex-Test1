@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-08T17:14:37.031Z`
+Generated: `2026-05-08T17:22:09.209Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -136,11 +136,13 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-08-fe6137c/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-08-e49e7ac/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-08-fe6137c/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-08-e49e7ac/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-08-fe6137c/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-08-e49e7ac/compute-minutes-by-resource.svg)
+
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-08-e49e7ac/cost-per-positive-score-point.svg)
 
 ## New First-Class Axes Added
 
@@ -165,5 +167,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-cfa8497/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-08-fe6137c/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-08-e49e7ac/report.json`
 - Equal current quality-category weight: `0.091`
