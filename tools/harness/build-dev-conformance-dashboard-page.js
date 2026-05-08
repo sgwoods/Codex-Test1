@@ -114,6 +114,36 @@ function html(data){
     tr:last-child td{border-bottom:0}
     .priority{font-weight:850;text-align:center;width:56px}
     .metric{font-weight:800;min-width:230px}
+    .metricDetails summary{
+      cursor:pointer;
+      list-style-position:outside;
+      padding:0 0 0 2px;
+    }
+    .metricDetails summary span{
+      display:inline;
+      text-decoration:underline;
+      text-decoration-style:dotted;
+      text-underline-offset:3px;
+    }
+    .metricExplanation{
+      display:grid;
+      gap:8px;
+      margin-top:10px;
+      padding:10px;
+      border:1px solid var(--line);
+      border-radius:7px;
+      background:#fbfaf7;
+      font-weight:500;
+    }
+    .explainLabel{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+      text-transform:uppercase;
+      font-weight:850;
+      letter-spacing:.08em;
+      margin-bottom:2px;
+    }
     .score{font-weight:850;white-space:nowrap}
     .good{color:var(--green)} .watch{color:var(--yellow)} .gap{color:var(--red)}
     .small{font-size:13px;color:var(--muted)}
@@ -198,6 +228,22 @@ function html(data){
         .join('');
     }
 
+    function explanationBlock(label, value){
+      return '<div><span class="explainLabel">' + esc(label) + '</span>' + esc(value || 'Not yet documented for this metric.') + '</div>';
+    }
+
+    function metricCell(row){
+      const explanation = row.explanation || {};
+      return '<details class="metricDetails">'
+        + '<summary><span>' + esc(row.metric) + '</span></summary>'
+        + '<div class="metricExplanation">'
+        + explanationBlock('Calculation', explanation.calculation)
+        + explanationBlock('Grounding best case', explanation.grounding)
+        + explanationBlock('Player / designer meaning', explanation.meaning)
+        + '</div>'
+        + '</details>';
+    }
+
     function render(data){
       const rows = Array.isArray(data.priorityRows) ? data.priorityRows : [];
       const gates = Array.isArray(data.releaseGate) ? data.releaseGate : [];
@@ -220,7 +266,7 @@ function html(data){
               <tbody>\${rows.map(row => \`
                 <tr>
                   <td class="priority">\${esc(row.rank)}</td>
-                  <td class="metric">\${esc(row.metric)}</td>
+                  <td class="metric">\${metricCell(row)}</td>
                   <td class="score \${scoreClass(row.score10)}">\${esc(row.current)}</td>
                   <td>\${esc(row.target)}</td>
                   <td>\${esc(row.status)}<div class="small">\${esc(row.effort)}</div></td>

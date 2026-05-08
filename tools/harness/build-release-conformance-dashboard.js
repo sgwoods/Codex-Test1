@@ -114,6 +114,7 @@ function row({ rank, metric, score10, target, status, why, effort, next, evidenc
   return {
     rank,
     metric,
+    explanation: metricExplanation(metric),
     score10: normalizedScore,
     current: score(score10),
     target,
@@ -124,6 +125,128 @@ function row({ rank, metric, score10, target, status, why, effort, next, evidenc
     evidence,
     cells: [rank, metric, score(score10), target, status, why, effort, next, evidence]
   };
+}
+
+function metricExplanation(metric){
+  const text = String(metric || '').toLowerCase();
+  const fallback = {
+    calculation: 'Score is read from the latest generated conformance artifact for this metric or from the dashboard composite proxy when the metric has not yet been promoted to a dedicated scorer.',
+    grounding: 'Best-case grounding is a canonical reference window or scorer-backed harness report with provenance, repeatable scenarios, and current Aurora comparison artifacts.',
+    meaning: 'For a player or designer, this metric says whether this part of the experience feels intentional, readable, fair, and close to the Galaga-like target rather than merely functional.'
+  };
+  if(text.includes('audio identity')){
+    return {
+      calculation: 'Release audio score blends cue identity, reference spectral similarity, reference-window precision, overlap, and event alignment from audio cue comparison artifacts.',
+      grounding: 'Best-case grounding comes from labeled Galaga-family reference audio clips, segmented Aurora runtime captures, cue/event logs, waveform and spectral measurements, and per-cue gap analysis.',
+      meaning: 'Players hear whether shots, hits, explosions, boss damage, capture, rescue, and challenge results communicate the right event at the right moment. Designers use it to protect feedback clarity and arcade identity.'
+    };
+  }
+  if(text.includes('level arc')){
+    return {
+      calculation: 'Level arc is read from the level-arc conformance report, combining stage distinctiveness, challenge-stage identity, later-stage complexity, pressure curve, reward/rescue layering, and learning/mastery windows.',
+      grounding: 'Best-case grounding is multi-stage reference evidence plus Aurora harness windows for stage families, challenge layers, stage signatures, pressure/loss windows, and persona progression.',
+      meaning: 'Players feel whether the game grows, teaches, surprises, and rewards mastery over time. Designers use it to detect repetition, flat difficulty, or escalation without reward.'
+    };
+  }
+  if(text.includes('visual look')){
+    return {
+      calculation: 'Current score is an estimated planning value until a dedicated visual conformance scorer lands; it is informed by UI shell checks, screenshots, contact sheets, and known visual debt.',
+      grounding: 'Best-case grounding will compare reference and Aurora contact sheets across start, attract, gameplay, score, popup, and game-over surfaces with palette, typography, density, sprite readability, and layout checks.',
+      meaning: 'Players decide at a glance whether the game feels like a polished arcade object. Designers use it to align readability, theme, typography, and visual hierarchy before subjective tuning.'
+    };
+  }
+  if(text.includes('stage 4 pressure')){
+    return {
+      calculation: 'Score is the current weakest level-arc pressure submetric, focused on whether known pressure/loss windows reproduce as exact or same-window replay events under controlled harness runs.',
+      grounding: 'Best-case grounding is source pressure/loss windows, frozen seeds, replayable input paths, collision diagnostics, and repeated current-vs-source pressure curve comparisons.',
+      meaning: 'Players should feel pressure that is learnable and fair, not random. Designers use it to tune threat density, dodge lanes, and failure recovery without creating arbitrary deaths.'
+    };
+  }
+  if(text.includes('alien entry')){
+    return {
+      calculation: 'Composite proxy: 45% stage-opening timing fidelity, 35% stage-opening geometry fidelity, and 20% movement-grammar expansion until alien entry is promoted to its own scorer.',
+      grounding: 'Best-case grounding will use reference and Aurora stage-entry contact sheets, rack timing traces, path-family labels, formation geometry, and early/mid/late level comparisons.',
+      meaning: 'Players read the whole level from the first entry pattern. Designers use it to make stages feel authored, recognizable, and increasingly sophisticated before combat fully starts.'
+    };
+  }
+  if(text.includes('challenge-stage variation')){
+    return {
+      calculation: 'Composite proxy: 45% challenge timing fidelity, 35% challenge-stage identity, and 20% long-run non-repetition until a dedicated challenge-variation scorer exists.',
+      grounding: 'Best-case grounding is reference challenge-stage footage, alien/path family labels, bonus opportunity windows, result feedback timing, and Aurora stage-to-stage variation traces.',
+      meaning: 'Players should experience challenge stages as learnable bonus set pieces that introduce new motion and scoring opportunities. Designers use it to prevent bonus rounds from becoming repetitive pauses.'
+    };
+  }
+  if(text.includes('progression')){
+    return {
+      calculation: 'Score is read from the progression/persona quality category, including persona safety checks, stage ordering, and whether different skill profiles see an appropriate ramp.',
+      grounding: 'Best-case grounding comes from controlled persona runs, stage snapshots, loss/recovery traces, and reference-informed expectations for learning, mastery, and escalation.',
+      meaning: 'Players should feel the game becoming harder for understandable reasons. Designers use it to keep novice, advanced, and expert experiences coherent across a long session.'
+    };
+  }
+  if(text.includes('stage 1 opening timing')){
+    return {
+      calculation: 'Score is read from the stage-1 opening timing category, comparing measured Aurora event timing against reference opening-window timing metrics and tolerances.',
+      grounding: 'Best-case grounding is a canonical stage-1 reference window with event timestamps, Aurora controlled-clock captures, and delta reports for first entry, arrival, and first dive timing.',
+      meaning: 'Players form their first feel judgment in the opening seconds. Designers use it to lock the initial rhythm before tuning deeper complexity.'
+    };
+  }
+  if(text.includes('arcade console frame')){
+    return {
+      calculation: 'Current score uses the UI shell quality category as a proxy until the frame gets its own arcade-style rubric.',
+      grounding: 'Best-case grounding will score cabinet rails, bezel proportions, button density, labels, build/date treatment, chroming, responsive fit, and visual consistency across local/dev/beta/prod surfaces.',
+      meaning: 'Players experience the frame as the cabinet around every game. Designers use it to make the platform feel trustworthy, arcade-native, and not like a generic web wrapper.'
+    };
+  }
+  if(text.includes('popup') || text.includes('leaderboard')){
+    return {
+      calculation: 'Current score uses the UI shell suite as a proxy until help, score, account, feedback, leaderboard, and game-over modals get a modal-specific scorer.',
+      grounding: 'Best-case grounding will compare each modal surface for layout, typography, arcade tone, score clarity, keyboard/controller ergonomics, and no-overlap responsive behavior.',
+      meaning: 'Players rely on these screens to understand scoring, recover from a run, file feedback, and trust records. Designers use it to keep utility surfaces polished without breaking arcade immersion.'
+    };
+  }
+  if(text.includes('dive fairness')){
+    return {
+      calculation: 'Score is read from the dive-safety quality category and associated harness checks for unfair collision, lane, and persona safety regressions.',
+      grounding: 'Best-case grounding is repeated persona/seed sweeps, collision windows, near-miss traces, and pressure diagnostics after every risky movement or threat change.',
+      meaning: 'Players accept hard deaths when they feel earned. Designers use it as a guardrail so added pressure does not become unfairness.'
+    };
+  }
+  if(text.includes('player movement')){
+    return {
+      calculation: 'Score is read from the player-movement correspondence category, comparing movement traces and control response against the reference-derived movement target.',
+      grounding: 'Best-case grounding is reference movement traces, Aurora controlled input traces, speed/position deltas, and regression checks across viewport and persona modes.',
+      meaning: 'Players feel this as the basic trust in the ship. Designers use it as a do-not-regress foundation for every other gameplay improvement.'
+    };
+  }
+  if(text.includes('shot and hit')){
+    return {
+      calculation: 'Score is read from the combat-responsiveness category, covering shot timing, hit registration, close-shot behavior, and event feedback guardrails.',
+      grounding: 'Best-case grounding is controlled shot/hit scenarios, close-contact tests, event logs, and paired visual/audio feedback timing.',
+      meaning: 'Players need shots and impacts to feel immediate and legible. Designers use it to protect core combat feel while improving explosions and sound semantics.'
+    };
+  }
+  if(text.includes('stage 1 opening geometry')){
+    return {
+      calculation: 'Score is read from the stage-1 opening geometry category, comparing formation layout and opening positions against the reference geometry target.',
+      grounding: 'Best-case grounding is reference contact sheets, Aurora opening captures, formation coordinate traces, and geometry tolerance checks.',
+      meaning: 'Players read formation authenticity before they consciously notice details. Designers use it as the locked baseline for alien-entry and formation work.'
+    };
+  }
+  if(text.includes('capture and rescue')){
+    return {
+      calculation: 'Score is read from the capture/rescue quality category, including capture, no-leak, rescue, and rule-boundary harness checks.',
+      grounding: 'Best-case grounding is reference capture/rescue behavior, controlled Aurora scenarios, event logs, state assertions, and score/reward feedback traces.',
+      meaning: 'Players see capture and rescue as a signature Galaga risk/reward mechanic. Designers use it as a hard identity guardrail while improving feedback and scoring opportunities.'
+    };
+  }
+  if(text.includes('challenge-stage timing')){
+    return {
+      calculation: 'Score is read from the challenge-stage timing category, comparing Aurora challenge entry, transition, result, and timing metrics against reference tolerances.',
+      grounding: 'Best-case grounding is reference challenge-stage timing windows, Aurora controlled-clock scenarios, result feedback traces, and pass/fail delta reports.',
+      meaning: 'Players need bonus stages to feel rhythmic and fair. Designers use this as the timing guardrail while adding more challenge-stage variety.'
+    };
+  }
+  return fallback;
 }
 
 function tableObjects(headers, rows){

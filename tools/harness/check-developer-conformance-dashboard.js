@@ -17,6 +17,9 @@ function checkGeneratedDashboardPage(){
     'href="http://127.0.0.1:8000/"',
     'href="http://127.0.0.1:8000/release-dashboard.html"',
     'href="/RELEASE_CONFORMANCE_DASHBOARD.md"',
+    'class="metricDetails"',
+    'Grounding best case',
+    'Player / designer meaning',
     "refreshState.addEventListener('click', refresh)"
   ];
   const missing = expected.filter(item => !html.includes(item));
