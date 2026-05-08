@@ -319,13 +319,35 @@ This is the rule that keeps release knowledge out of chat-only or machine-only
    - measured wall/CPU/GPU/API/resource usage where available
    - past-goal movement and effort actually spent
    - next-goal estimates and expected resource classes
-5. publish hosted `/dev` for integrated hosted review
-6. promote hosted `/beta`
-7. verify hosted `/beta`
-8. complete any required docs pass for the release line
-9. confirm or hand off release authority intentionally
-10. approve hosted `/beta`
-11. promote and publish hosted `/production`
+5. build the lane so `conformance-dashboard.html`,
+   `conformance-dashboard-data.json`, and their `assets/` copies are included
+   with the game, platform guides, and release dashboard
+6. publish hosted `/dev` for integrated hosted review
+7. promote hosted `/beta`
+8. verify hosted `/beta`
+9. complete any required docs pass for the release line
+10. confirm or hand off release authority intentionally
+11. approve hosted `/beta`
+12. promote and publish hosted `/production`
+
+## Conformance Dashboard Release Boundary
+
+The read-only conformance dashboard is now part of the Platinum release path.
+It should ship with hosted `/dev`, hosted `/beta`, and hosted `/production`
+whenever the game/platform bundle moves.
+
+That does not mean the full ingestion framework is a public platform surface.
+
+Release boundary:
+
+- publish the dashboard and its compact data file as platform release assets,
+  including the `assets/` copy used by the public Pages deployment
+- keep raw ingestion workspaces, source-media extraction, candidate clips,
+  unreviewed traces, and annotation notebooks engineering-owned
+- expose ingestion only as summarized release evidence unless a future
+  Root-gated evidence browser is intentionally designed and approved
+- keep metric definitions and reference truth owned by the game/application
+  while Platinum owns the presentation and lane delivery contract
 
 ## Hosted `/dev` History Rule
 

@@ -195,6 +195,7 @@ function checkReleaseConformanceDocs(){
     '### Resource And Time Usage',
     '### Past Goal Spend By Axis',
     '### Next Goal Estimates',
+    '## Ingestion Framework View',
     '### Charts',
     'compute-minutes-by-resource.svg'
   ];
@@ -205,6 +206,40 @@ function checkReleaseConformanceDocs(){
   }
   if(!economics.includes('## Release Documentation Rule')){
     throw new Error(`Publish preflight failed: ${economicsPath} is missing the release documentation rule for conformance economics.`);
+  }
+}
+
+function checkConformanceDashboardArtifacts(cfg){
+  const htmlPath = path.join(cfg.dir, 'conformance-dashboard.html');
+  const dataPath = path.join(cfg.dir, 'conformance-dashboard-data.json');
+  const assetHtmlPath = path.join(cfg.dir, 'assets', 'conformance-dashboard.html');
+  const assetDataPath = path.join(cfg.dir, 'assets', 'conformance-dashboard-data.json');
+  const html = loadText(htmlPath);
+  const data = loadJson(dataPath);
+  const requiredHtml = [
+    'Aurora Conformance Dashboard',
+    'data-tab="ingestion"',
+    'Ingestion Framework',
+    'Priority Investment Queue',
+    'conformance-dashboard-data.json'
+  ];
+  for(const text of requiredHtml){
+    if(!html.includes(text)){
+      throw new Error(`Publish preflight failed: ${htmlPath} is missing "${text}". Run npm run build after refreshing the conformance dashboard.`);
+    }
+  }
+  if(!Array.isArray(data.priorityRows) || !data.priorityRows.length){
+    throw new Error(`Publish preflight failed: ${dataPath} is missing priorityRows. Refresh the release conformance dashboard before publishing.`);
+  }
+  if(!Array.isArray(data.ingestionRows) || !data.ingestionRows.length){
+    throw new Error(`Publish preflight failed: ${dataPath} is missing ingestionRows. Refresh the release conformance dashboard before publishing.`);
+  }
+  if(!fs.existsSync(assetHtmlPath) || !fs.existsSync(assetDataPath)){
+    throw new Error(`Publish preflight failed: missing assets/conformance-dashboard.html or assets/conformance-dashboard-data.json. These asset copies are required because the public Pages workflow publishes the assets tree.`);
+  }
+  const assetHtml = loadText(assetHtmlPath);
+  if(!assetHtml.includes('data-tab="ingestion"') || !assetHtml.includes('../release-dashboard.html')){
+    throw new Error(`Publish preflight failed: ${assetHtmlPath} does not look like the release-lane conformance dashboard asset.`);
   }
 }
 
@@ -314,6 +349,7 @@ function main(){
   checkSourceDocs();
   checkReleaseConformanceDocs();
   checkArtifacts(cfg);
+  checkConformanceDashboardArtifacts(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production'){

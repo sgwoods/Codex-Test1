@@ -87,6 +87,8 @@ if(fs.existsSync(DEV_BUILD_INFO)){
   rewriteBetaText(path.join(BETA_DIR, 'platinum-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'player-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'release-dashboard.html'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard.html'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard-data.json'), sourceInfo, betaInfo);
 }
 
 const betaReadme = [

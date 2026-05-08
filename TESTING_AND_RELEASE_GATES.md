@@ -220,6 +220,42 @@ Default direction:
 - use Platinum as the host contract and tooling surface for launch, not as a
   substitute for game-owned reference truth
 
+## Dashboard And Ingestion Release Boundary
+
+The shipped Platinum platform should include the read-only conformance dashboard
+as a release surface.
+
+That means each `/dev`, `/beta`, and `/production` lane should carry:
+
+- `conformance-dashboard.html`
+- `conformance-dashboard-data.json`
+- `assets/conformance-dashboard.html`
+- `assets/conformance-dashboard-data.json`
+- a release-dashboard link to the conformance dashboard
+
+The release dashboard should link to the `assets/` copy because the public
+GitHub Pages workflow already publishes the asset tree for production. The
+top-level files remain lane artifacts for local/publish tooling.
+
+The dashboard is platform-owned presentation of release evidence. It is allowed
+to summarize application-owned game conformance, ingestion state, confidence,
+measurement debt, and compute/resource spend.
+
+The ingestion framework itself remains engineering-owned unless we explicitly
+promote a separate Root-gated or public evidence browser. Raw source media,
+reference extraction workspaces, candidate clips, unreviewed traces, and
+in-progress annotation notebooks should not automatically become player-facing
+Platinum assets just because the dashboard summarizes them.
+
+This gives us the right separation:
+
+- Platinum publishes the release evidence surface.
+- Aurora or another game owns its reference truth, metric definitions, and
+  ingestion artifacts.
+- The integrated release bundle records enough conformance and ingestion
+  summary data to explain the release without exposing the whole engineering
+  workspace.
+
 ## Gate Profiles By Change Type
 
 We want:

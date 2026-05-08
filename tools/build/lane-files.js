@@ -4,6 +4,8 @@ const path = require('path');
 const DEV_BASE_FILES = Object.freeze([
   'index.html',
   'release-dashboard.html',
+  'conformance-dashboard.html',
+  'conformance-dashboard-data.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',

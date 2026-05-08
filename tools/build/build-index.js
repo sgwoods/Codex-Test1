@@ -8,6 +8,8 @@ const {
   DIST_PRODUCTION,
   DEV_INDEX,
   DEV_DASHBOARD,
+  DEV_CONFORMANCE_DASHBOARD,
+  DEV_CONFORMANCE_DASHBOARD_DATA,
   DEV_PROJECT_GUIDE,
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
@@ -17,6 +19,8 @@ const {
   DEV_SCREENSHOT,
   PRODUCTION_INDEX,
   PRODUCTION_DASHBOARD,
+  PRODUCTION_CONFORMANCE_DASHBOARD,
+  PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
   PRODUCTION_PROJECT_GUIDE,
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
@@ -25,6 +29,7 @@ const {
   PRODUCTION_RELEASE_NOTES,
   PRODUCTION_SCREENSHOT
 } = require('./paths');
+const { html: buildConformanceDashboardHtml } = require('../harness/build-dev-conformance-dashboard-page');
 const pkg = require(path.resolve(ROOT, 'package.json'));
 
 const SRC = path.join(ROOT, 'src');
@@ -50,6 +55,8 @@ const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
+  'dist/dev/conformance-dashboard.html',
+  'dist/dev/conformance-dashboard-data.json',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -62,6 +69,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/assets/galaxy-guardians-coming-soon.svg',
   'dist/production/index.html',
   'dist/production/release-dashboard.html',
+  'dist/production/conformance-dashboard.html',
+  'dist/production/conformance-dashboard-data.json',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -73,6 +82,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/assets/galaxy-guardians-coming-soon.svg',
   'dist/beta/index.html',
   'dist/beta/release-dashboard.html',
+  'dist/beta/conformance-dashboard.html',
+  'dist/beta/conformance-dashboard-data.json',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -86,6 +97,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/README.txt',
   'index.html',
   'release-dashboard.html',
+  'conformance-dashboard.html',
+  'conformance-dashboard-data.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -93,6 +106,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'build-info.json',
   'dev/index.html',
   'dev/release-dashboard.html',
+  'dev/conformance-dashboard.html',
+  'dev/conformance-dashboard-data.json',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -101,6 +116,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/README.txt',
   'beta/index.html',
   'beta/release-dashboard.html',
+  'beta/conformance-dashboard.html',
+  'beta/conformance-dashboard-data.json',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
@@ -218,6 +235,41 @@ function loadConformanceDashboardSummary(){
       weakestMetric: '',
       weakestCurrent: '',
       dashboardUrl: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html'
+    };
+  }
+}
+
+function loadConformanceDashboardData(){
+  try{
+    return JSON.parse(read(CONFORMANCE_DASHBOARD_LATEST));
+  }catch{
+    return {
+      schemaVersion: 1,
+      artifactType: 'release-conformance-dashboard',
+      generatedAt: '',
+      commit: '',
+      branch: '',
+      dirty: false,
+      sourceReports: {},
+      scoreSemantics: {
+        headline: 'Conformance dashboard data unavailable for this build.',
+        tenOutOfTen: '',
+        confidence: '',
+        resolution: ''
+      },
+      releaseGate: [],
+      priorityRows: [],
+      economicsSummary: {},
+      ingestionSummary: {
+        sourceFamilyCount: 0,
+        highConfidenceCount: 0,
+        mixedOrLowConfidenceCount: 0,
+        scoredOrPromotedCount: 0,
+        nextBestUpgrade: 'Regenerate the release conformance dashboard before using this build for release review.',
+        framing: 'Conformance dashboard data was not available when this build was generated.'
+      },
+      ingestionRows: [],
+      newFirstClassAxes: []
     };
   }
 }
@@ -1315,6 +1367,7 @@ function statusLabel(status){
 
 function buildReleaseDashboard(buildInfo, latestNote, dashboard){
   const template = read(DASHBOARD_TEMPLATE);
+  const conformanceSummary = loadConformanceDashboardSummary();
   const timeline = (dashboard.timeline || []).map(step => `
     <article class="step ${esc(step.status)}">
       <div class="stepHeader">
@@ -1359,6 +1412,30 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         </div>
       </section>
       ${renderReleaseVersionDomains(buildInfo)}
+      <section class="versionDomains">
+        <h2>Conformance Dashboard</h2>
+        <p>The current release path carries a read-only conformance dashboard alongside the game, platform guides, and release dashboard. It summarizes scores, confidence, evidence, ingestion coverage, and compute spend without publishing the raw ingestion workspace.</p>
+        <div class="versionGrid">
+          <article class="versionCard">
+            <strong>Overall</strong>
+            <span>${esc(conformanceSummary.overallCurrent || '--')}</span>
+            <small>Current measured release conformance rollup.</small>
+          </article>
+          <article class="versionCard">
+            <strong>Weakest Metric</strong>
+            <span>${esc(conformanceSummary.weakestCurrent || '--')}</span>
+            <small>${esc(conformanceSummary.weakestMetric || 'No measured metric available.')}</small>
+          </article>
+          <article class="versionCard">
+            <strong>Generated</strong>
+            <span>${esc(conformanceSummary.generatedAt ? conformanceSummary.generatedAt.slice(0, 10) : '--')}</span>
+            <small>${esc(conformanceSummary.commit ? `source ${conformanceSummary.commit}` : 'Run the conformance dashboard builder before release review.')}</small>
+          </article>
+        </div>
+        <div class="heroLinks">
+          <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
+        </div>
+      </section>
       <section class="timeline">
         ${timeline}
       </section>
@@ -2390,6 +2467,8 @@ function lanePaths(lane){
       distDir: DIST_PRODUCTION,
       index: PRODUCTION_INDEX,
       dashboard: PRODUCTION_DASHBOARD,
+      conformanceDashboard: PRODUCTION_CONFORMANCE_DASHBOARD,
+      conformanceDashboardData: PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
@@ -2403,6 +2482,8 @@ function lanePaths(lane){
     distDir: DIST_DEV,
     index: DEV_INDEX,
     dashboard: DEV_DASHBOARD,
+    conformanceDashboard: DEV_CONFORMANCE_DASHBOARD,
+    conformanceDashboardData: DEV_CONFORMANCE_DASHBOARD_DATA,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
@@ -2448,6 +2529,7 @@ function build(options = {}){
   const releaseNotes = loadReleaseNotes();
   const releaseDashboard = loadReleaseDashboard();
   const conformanceDashboardSummary = loadConformanceDashboardSummary();
+  const conformanceDashboardData = loadConformanceDashboardData();
   const releaseManifest = loadReleaseManifest(buildVersion);
   const projectGuide = loadProjectGuide();
   const applicationGuide = loadApplicationGuide();
@@ -2539,6 +2621,17 @@ function build(options = {}){
 
   fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
   fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
+  fs.writeFileSync(out.conformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
+    title: 'Aurora Conformance Dashboard',
+    subtitle: 'Read-only release view of the current conformance plan, release gates, ingestion evidence, measurement debt, and highest-value next investments.',
+    gameHref: 'index.html',
+    releaseHref: 'release-dashboard.html',
+    markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
+    markdownLabel: 'Markdown',
+    dataHref: 'conformance-dashboard-data.json',
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
+  }));
+  fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
   fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
@@ -2553,10 +2646,26 @@ function build(options = {}){
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
     fs.copyFileSync(path.join(ROOT, 'export.mov.png'), out.screenshot);
   }
-  const copiedAssets = copyAssetTree(ASSETS_DIR, path.join(path.dirname(out.index), 'assets'));
+  const assetsOut = path.join(path.dirname(out.index), 'assets');
+  const copiedAssets = copyAssetTree(ASSETS_DIR, assetsOut);
+  const assetConformanceDashboard = path.join(assetsOut, 'conformance-dashboard.html');
+  const assetConformanceDashboardData = path.join(assetsOut, 'conformance-dashboard-data.json');
+  fs.writeFileSync(assetConformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
+    title: 'Aurora Conformance Dashboard',
+    subtitle: 'Read-only release view of the current conformance plan, release gates, ingestion evidence, measurement debt, and highest-value next investments.',
+    gameHref: '../index.html',
+    releaseHref: '../release-dashboard.html',
+    markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
+    markdownLabel: 'Markdown',
+    dataHref: 'conformance-dashboard-data.json',
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
+  }));
+  fs.writeFileSync(assetConformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   return [
     out.index,
     out.dashboard,
+    out.conformanceDashboard,
+    out.conformanceDashboardData,
     out.projectGuide,
     out.applicationGuide,
     out.platinumGuide,
@@ -2564,6 +2673,8 @@ function build(options = {}){
     out.buildInfo,
     out.releaseNotes,
     out.screenshot,
+    assetConformanceDashboard,
+    assetConformanceDashboardData,
     ...copiedAssets
   ];
 }

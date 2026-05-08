@@ -1,10 +1,10 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-08T14:17:41.634Z`
+Generated: `2026-05-08T14:26:50.283Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
-Local internal dashboard: `http://127.0.0.1:4312/local-dev/conformance-dashboard.html` after `npm run local:resume`. Refresh the underlying local page data with `npm run dev:conformance-dashboard` when running a live planning cycle.
+Local dashboard: `http://127.0.0.1:4312/local-dev/conformance-dashboard.html` after `npm run local:resume`. Release-lane dashboard: `conformance-dashboard.html` is generated into `dist/dev`, copied through beta/production promotion, and published with the lane bundle.
 
 ## Current Release Gate
 
@@ -146,7 +146,7 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.
 - Before a serious `/dev`, `/beta`, or `/production` release candidate, refresh `npm run harness:analyze:conformance-economics` and `npm run harness:build:release-conformance-dashboard` so release docs include conformance, resource/time, chart, past-goal, and next-goal reads.
 - Any long-cycle local compute or model/API/GPU-assisted assessment should be wrapped with `npm run harness:measure` and declared with its axis and resource classes.
-- Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.
+- Ship the read-only conformance dashboard with each `/dev`, `/beta`, and `/production` lane; keep raw ingestion workspaces and unreviewed evidence engineering-owned unless a Root-gated evidence browser is explicitly approved.
 - Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.
 - Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.
 - Prefer work with a large score gap, high user-experience impact, reusable ingestion/harness value, and clear guardrails.

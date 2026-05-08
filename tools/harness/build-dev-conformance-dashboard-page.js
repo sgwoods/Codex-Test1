@@ -36,13 +36,37 @@ function escScriptJson(value){
     .replace(/&/g, '\\u0026');
 }
 
-function html(data){
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[char]));
+}
+
+function normalizeArtifactBase(value){
+  const text = String(value || '').trim();
+  if(!text) return '../';
+  return text.endsWith('/') ? text : `${text}/`;
+}
+
+function html(data, options = {}){
+  const title = options.title || 'Aurora Conformance Dashboard';
+  const subtitle = options.subtitle || 'Internal localhost view of the current conformance plan, release gates, measurement debt, and highest-value next investments. This page reads generated artifacts and refreshes without exposing anything publicly.';
+  const gameHref = options.gameHref || 'http://127.0.0.1:8000/';
+  const releaseHref = options.releaseHref || 'http://127.0.0.1:8000/release-dashboard.html';
+  const markdownHref = options.markdownHref || '/RELEASE_CONFORMANCE_DASHBOARD.md';
+  const markdownLabel = options.markdownLabel || 'Markdown';
+  const dataHref = options.dataHref || 'conformance-dashboard-data.json';
+  const artifactBase = normalizeArtifactBase(options.artifactBase || '../');
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aurora Conformance Dashboard</title>
+  <title>${escapeHtml(title)}</title>
   <style>
     :root{
       color-scheme:light;
@@ -240,14 +264,14 @@ function html(data){
   <div class="shell">
     <header>
       <div>
-        <h1>Aurora Conformance Dashboard</h1>
-        <p class="subtitle">Internal localhost view of the current conformance plan, release gates, measurement debt, and highest-value next investments. This page reads generated artifacts and refreshes without exposing anything publicly.</p>
+        <h1>${escapeHtml(title)}</h1>
+        <p class="subtitle">${escapeHtml(subtitle)}</p>
       </div>
       <nav class="controls" aria-label="Dashboard links">
         <button class="pill" id="refreshState" type="button" aria-label="Refresh conformance dashboard data now">loading</button>
-        <a class="button" href="http://127.0.0.1:8000/">Game</a>
-        <a class="button" href="http://127.0.0.1:8000/release-dashboard.html">Release</a>
-        <a class="button" href="/RELEASE_CONFORMANCE_DASHBOARD.md">Markdown</a>
+        <a class="button" href="${escapeHtml(gameHref)}">Game</a>
+        <a class="button" href="${escapeHtml(releaseHref)}">Release</a>
+        <a class="button" href="${escapeHtml(markdownHref)}">${escapeHtml(markdownLabel)}</a>
       </nav>
     </header>
     <main id="app"></main>
@@ -262,6 +286,8 @@ function html(data){
     let lastRefresh = Date.now();
     let activeTab = 'conformance';
     const refreshMs = 30000;
+    const dataHref = ${JSON.stringify(dataHref)};
+    const artifactBase = ${JSON.stringify(artifactBase)};
 
     function esc(value){
       return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -293,8 +319,14 @@ function html(data){
     function evidenceLinks(reports){
       return Object.entries(reports || {})
         .filter(([, value]) => value)
-        .map(([key, value]) => '<a href="../' + encodeURI(value) + '">' + esc(key) + ': ' + esc(value) + '</a>')
+        .map(([key, value]) => '<a href="' + artifactHref(value) + '">' + esc(key) + ': ' + esc(value) + '</a>')
         .join('');
+    }
+
+    function artifactHref(value){
+      if(!value) return '#';
+      if(/^https?:/i.test(value)) return value;
+      return artifactBase + encodeURI(value);
     }
 
     function explanationBlock(label, value){
@@ -325,7 +357,7 @@ function html(data){
     function anchorLink(value){
       if(!value) return '--';
       const text = esc(value);
-      const href = /^https?:/i.test(value) ? value : '../' + encodeURI(value);
+      const href = artifactHref(value);
       return '<a href="' + esc(href) + '">' + text + '</a>';
     }
 
@@ -468,7 +500,7 @@ function html(data){
       try{
         refreshState.disabled = true;
         refreshState.textContent = 'refreshing';
-        const response = await fetch('conformance-dashboard-data.json?ts=' + Date.now(), { cache:'no-store' });
+        const response = await fetch(dataHref + '?ts=' + Date.now(), { cache:'no-store' });
         if(!response.ok) throw new Error('HTTP ' + response.status);
         dashboard = await response.json();
         lastRefresh = Date.now();
@@ -497,20 +529,32 @@ function html(data){
 </html>`;
 }
 
-function main(){
-  if(!fs.existsSync(SOURCE_DATA)){
-    throw new Error(`Missing ${rel(SOURCE_DATA)}. Run npm run harness:build:release-conformance-dashboard first.`);
+function buildDashboardPage({ sourceData = SOURCE_DATA, outHtml = OUT_HTML, outData = OUT_DATA, htmlOptions = {} } = {}){
+  const htmlFiles = Array.isArray(outHtml) ? outHtml : [outHtml];
+  const dataFiles = Array.isArray(outData) ? outData : [outData];
+  if(!fs.existsSync(sourceData)){
+    throw new Error(`Missing ${rel(sourceData)}. Run npm run harness:build:release-conformance-dashboard first.`);
   }
-  const data = readJson(SOURCE_DATA);
-  const markup = html(data);
-  for(const file of OUT_HTML) write(file, markup);
-  for(const file of OUT_DATA) write(file, JSON.stringify(data, null, 2));
+  const data = readJson(sourceData);
+  const markup = html(data, htmlOptions);
+  for(const file of htmlFiles) write(file, markup);
+  for(const file of dataFiles) write(file, JSON.stringify(data, null, 2));
+  return { sourceData, htmlFiles, dataFiles };
+}
+
+function main(){
+  const result = buildDashboardPage();
   console.log(JSON.stringify({
     ok: true,
-    source: rel(SOURCE_DATA),
-    html: OUT_HTML.map(rel),
-    data: OUT_DATA.map(rel)
+    source: rel(result.sourceData),
+    html: result.htmlFiles.map(rel),
+    data: result.dataFiles.map(rel)
   }, null, 2));
 }
 
-main();
+if(require.main === module) main();
+
+module.exports = {
+  html,
+  buildDashboardPage
+};
