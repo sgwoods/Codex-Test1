@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const http = require('http');
 const path = require('path');
 const { withHarnessPage } = require('./browser-check-util');
 const { ROOT } = require('./browser-check-util');
+const { launchHarnessBrowser } = require('./browser-launch');
 
 function fail(message, details = {}){
   console.error(JSON.stringify({ ok: false, message, details }, null, 2));
@@ -19,6 +21,8 @@ function checkGeneratedDashboardPage(){
     'id="gameSelector"',
     'Select game conformance profile',
     'Selected Game',
+    'data-tab="cost"',
+    'Cost / Value',
     'href="http://127.0.0.1:8000/"',
     'href="http://127.0.0.1:8000/release-dashboard.html"',
     'href="/RELEASE_CONFORMANCE_DASHBOARD.md"',
@@ -32,6 +36,8 @@ function checkGeneratedDashboardPage(){
     'Tracked spend',
     'Value / cost read',
     'class="closeDetails"',
+    'data-detail-back="1"',
+    'Back to queue',
     'data-tab="ingestion"',
     'Ingestion Framework',
     'Source / evidence family',
@@ -44,6 +50,16 @@ function checkGeneratedDashboardPage(){
   ];
   const missing = expected.filter(item => !html.includes(item));
   if(missing.length) fail('generated conformance dashboard page is missing live controls', { htmlPath, missing });
+  const horizontalOverflowPatterns = [
+    'overflow-x:auto',
+    'overflow-x: auto',
+    'table{display:block',
+    'display:block;overflow-x'
+  ];
+  const overflowMatches = horizontalOverflowPatterns.filter(item => html.includes(item));
+  if(overflowMatches.length){
+    fail('generated conformance dashboard reintroduced horizontal-scroll layout patterns', { htmlPath, overflowMatches });
+  }
   const games = Array.isArray(data.games) ? data.games : [];
   const gameKeys = games.map(game => game.gameKey);
   if(!gameKeys.includes('aurora-galactica') || !gameKeys.includes('galaxy-guardians-preview')){
@@ -55,8 +71,91 @@ function checkGeneratedDashboardPage(){
   }
 }
 
+function mime(file){
+  if(file.endsWith('.html')) return 'text/html; charset=utf-8';
+  if(file.endsWith('.json')) return 'application/json; charset=utf-8';
+  if(file.endsWith('.css')) return 'text/css; charset=utf-8';
+  if(file.endsWith('.js')) return 'application/javascript; charset=utf-8';
+  return 'application/octet-stream';
+}
+
+function serveLocalDev(){
+  const root = path.join(ROOT, 'local-dev');
+  const server = http.createServer((req, res) => {
+    const clean = decodeURIComponent((req.url || '/').split('?')[0]);
+    const rel = clean === '/' ? '/conformance-dashboard.html' : clean;
+    const file = path.resolve(root, '.' + rel);
+    if(!file.startsWith(root)) return res.writeHead(403).end('forbidden');
+    fs.readFile(file, (err, data) => {
+      if(err) return res.writeHead(404).end('not found');
+      res.writeHead(200, { 'content-type': mime(file), 'cache-control': 'no-store' });
+      res.end(data);
+    });
+  });
+  return new Promise(resolve => {
+    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+  });
+}
+
+async function checkDashboardViewportFit(){
+  const { server, port } = await serveLocalDev();
+  const browser = await launchHarnessBrowser({});
+  try{
+    for(const viewport of [{ width: 1280, height: 820 }, { width: 1024, height: 760 }, { width: 390, height: 820 }]){
+      const context = await browser.newContext({ viewport });
+      const page = await context.newPage();
+      await page.goto(`http://127.0.0.1:${port}/conformance-dashboard.html`, { waitUntil: 'networkidle' });
+      const before = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth,
+        bodyScrollWidth: document.body.scrollWidth,
+        bodyClientWidth: document.body.clientWidth,
+        tabs: [...document.querySelectorAll('[data-tab]')].map(tab => tab.textContent.trim()),
+        cards: document.querySelectorAll('.grid .card').length
+      }));
+      if(before.scrollWidth > before.clientWidth + 1 || before.bodyScrollWidth > before.bodyClientWidth + 1){
+        fail('conformance dashboard overflows horizontally before interaction', { viewport, before });
+      }
+      if(before.cards < 4) fail('conformance dashboard lost above-fold rollup cards', { viewport, before });
+      if(!before.tabs.includes('Cost / Value') || !before.tabs.includes('Ingestion')){
+        fail('conformance dashboard lost tabbed drill-down sections', { viewport, before });
+      }
+
+      await page.click('[data-detail]');
+      const detailOpen = await page.evaluate(() => ({
+        panel: !!document.querySelector('.detailPanel'),
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth
+      }));
+      if(!detailOpen.panel) fail('conformance dashboard detail panel did not open inline', { viewport, detailOpen });
+      if(detailOpen.scrollWidth > detailOpen.clientWidth + 1){
+        fail('conformance dashboard overflows horizontally in metric detail view', { viewport, detailOpen });
+      }
+      await page.click('[data-detail-back]');
+      const detailClosed = await page.evaluate(() => !!document.querySelector('.detailPanel'));
+      if(detailClosed) fail('conformance dashboard inline detail panel did not close', { viewport });
+
+      await page.click('[data-tab="ingestion"]');
+      const ingestion = await page.evaluate(() => ({
+        cards: document.querySelectorAll('.ingestionItem').length,
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth
+      }));
+      if(!ingestion.cards) fail('conformance dashboard ingestion tab has no evidence cards', { viewport, ingestion });
+      if(ingestion.scrollWidth > ingestion.clientWidth + 1){
+        fail('conformance dashboard overflows horizontally in ingestion view', { viewport, ingestion });
+      }
+      await context.close();
+    }
+  } finally {
+    await browser.close();
+    server.close();
+  }
+}
+
 (async () => {
   checkGeneratedDashboardPage();
+  await checkDashboardViewportFit();
   await withHarnessPage({ skipStart: true, seed: 9412, viewport: { width: 1280, height: 1000 } }, async ({ page }) => {
     await page.click('#settingsBtn');
     const local = await page.evaluate(() => ({
