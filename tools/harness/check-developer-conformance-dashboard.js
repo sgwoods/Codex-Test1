@@ -23,6 +23,9 @@ function checkGeneratedDashboardPage(){
     'Score Semantics',
     'Confidence',
     'Resolution',
+    'Cost / resources',
+    'Tracked spend',
+    'Value / cost read',
     "refreshState.addEventListener('click', refresh)"
   ];
   const missing = expected.filter(item => !html.includes(item));

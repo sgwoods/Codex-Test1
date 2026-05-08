@@ -156,6 +156,7 @@ function html(data){
       white-space:nowrap;
     }
     .score{font-weight:850;white-space:nowrap}
+    .costCell{min-width:150px}
     .good{color:var(--green)} .watch{color:var(--yellow)} .gap{color:var(--red)}
     .small{font-size:13px;color:var(--muted)}
     .axisList{display:grid;gap:8px;margin:0;padding:0;list-style:none}
@@ -246,12 +247,16 @@ function html(data){
     function metricCell(row){
       const explanation = row.explanation || {};
       const scoreContext = row.scoreContext || {};
+      const costContext = row.costContext || {};
       return '<details class="metricDetails">'
         + '<summary><span>' + esc(row.metric) + '</span></summary>'
         + '<div class="metricExplanation">'
         + explanationBlock('Score meaning', scoreContext.scoreMeaning)
         + explanationBlock('Confidence', scoreContext.confidence)
         + explanationBlock('Resolution', scoreContext.resolution)
+        + explanationBlock('Tracked spend', costContext.trackedSpend)
+        + explanationBlock('Expected resources', costContext.expectedResources)
+        + explanationBlock('Value / cost read', costContext.valueCostRead)
         + explanationBlock('Calculation', explanation.calculation)
         + explanationBlock('Grounding best case', explanation.grounding)
         + explanationBlock('Player / designer meaning', explanation.meaning)
@@ -265,20 +270,20 @@ function html(data){
       const overall = gates.find(gate => gate.Gate === 'Overall quality');
       const audio = rows.find(row => /Audio identity/.test(row.metric || ''));
       const level = rows.find(row => /Level arc/.test(row.metric || ''));
-      const visual = rows.find(row => /visual look/i.test(row.metric || ''));
       const semantics = data.scoreSemantics || {};
+      const economics = data.economicsSummary || {};
       app.innerHTML = \`
         <div class="grid">
           <div class="card"><span class="label">Overall Quality</span><span class="value">\${esc(overall?.Current || '--')}</span></div>
           <div class="card"><span class="label">Weakest Major Gap</span><span class="value \${scoreClass(audio?.score10)}">\${esc(audio?.current || '--')}</span><div class="small">Audio identity and event feedback</div></div>
           <div class="card"><span class="label">Level Arc</span><span class="value \${scoreClass(level?.score10)}">\${esc(level?.current || '--')}</span><div class="small">Encounter shape and escalation</div></div>
-          <div class="card"><span class="label">Visual Look</span><span class="value \${scoreClass(visual?.score10)}">\${esc(visual?.current || '--')}</span><div class="small">Estimated until scorer lands</div></div>
+          <div class="card"><span class="label">Tracked Compute</span><span class="value">\${esc(economics.measuredRuns || 0)} runs</span><div class="small">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min wall / \${esc(Math.round((economics.cpuSeconds || 0) / 60))} min CPU</div></div>
         </div>
         <div class="split">
           <section>
             <h2>Priority Investment Queue</h2>
             <table>
-              <thead><tr><th>Rank</th><th>Metric</th><th>Current</th><th>Confidence</th><th>Resolution</th><th>Target</th><th>Status</th><th>Recommended next step</th><th>Evidence</th></tr></thead>
+              <thead><tr><th>Rank</th><th>Metric</th><th>Current</th><th>Confidence</th><th>Resolution</th><th>Cost / resources</th><th>Tracked spend</th><th>Target</th><th>Status</th><th>Recommended next step</th><th>Evidence</th></tr></thead>
               <tbody>\${rows.map(row => \`
                 <tr>
                   <td class="priority">\${esc(row.rank)}</td>
@@ -286,6 +291,8 @@ function html(data){
                   <td class="score \${scoreClass(row.score10)}">\${esc(row.current)}</td>
                   <td><span class="badge">\${esc(row.scoreContext?.confidence || '--')}</span></td>
                   <td class="small">\${esc(row.scoreContext?.resolution || '--')}</td>
+                  <td class="costCell"><span class="badge">\${esc(row.costContext?.costClass || '--')}</span><div class="small">\${esc(row.costContext?.expectedResources || '--')}</div></td>
+                  <td class="small">\${esc(row.costContext?.trackedSpend || '--')}</td>
                   <td>\${esc(row.target)}</td>
                   <td>\${esc(row.status)}<div class="small">\${esc(row.effort)}</div></td>
                   <td>\${esc(row.next)}</td>

@@ -95,6 +95,49 @@ function inferredResources(metric){
   return Array.from(new Set(resources)).join(', ');
 }
 
+function metricAxisKeys(metric){
+  const text = String(metric || '').toLowerCase();
+  if(text.includes('audio identity')) return ['audio'];
+  if(text.includes('stage 4 pressure')) return ['stage4-pressure'];
+  if(text.includes('level arc')) return ['level-arc', 'conformance-loop'];
+  if(text.includes('visual look')) return ['quality-score'];
+  if(text.includes('alien entry')) return ['level-arc', 'quality-score'];
+  if(text.includes('challenge-stage variation')) return ['level-arc', 'quality-score'];
+  if(text.includes('progression')) return ['quality-score'];
+  if(text.includes('stage 1 opening timing')) return ['quality-score'];
+  if(text.includes('arcade console frame') || text.includes('popup') || text.includes('leaderboard')) return ['quality-score'];
+  if(text.includes('dive fairness')) return ['stage4-pressure', 'quality-score'];
+  if(text.includes('player movement') || text.includes('shot and hit') || text.includes('stage 1 opening geometry') || text.includes('capture and rescue') || text.includes('challenge-stage timing')) return ['quality-score'];
+  return ['quality-score'];
+}
+
+function investmentForMetric(metric, investmentById){
+  const text = String(metric || '').toLowerCase();
+  if(text.includes('audio identity')) return investmentById['audio-reference-segmentation'] || null;
+  if(text.includes('stage 4 pressure')) return investmentById['stage4-pressure-exact-replay'] || null;
+  if(text.includes('level arc')) return investmentById['stage12-natural-reward-window'] || null;
+  if(text.includes('stage 1 opening timing')) return investmentById['stage1-timing-polish'] || null;
+  if(text.includes('visual look') || text.includes('arcade console frame') || text.includes('popup') || text.includes('leaderboard')) return investmentById['ui-graphics-polish'] || null;
+  return null;
+}
+
+function sumAxisSpend(economics, axisKeys){
+  const byAxis = economics.summary?.ledger?.byAxis || {};
+  return axisKeys.reduce((sum, key) => {
+    const item = byAxis[key] || {};
+    return {
+      runs: sum.runs + (item.runs || 0),
+      wallSeconds: sum.wallSeconds + (item.wallSeconds || 0),
+      cpuSeconds: sum.cpuSeconds + (item.cpuSeconds || 0)
+    };
+  }, { runs: 0, wallSeconds: 0, cpuSeconds: 0 });
+}
+
+function compactSpend(value){
+  if(!value || !value.runs) return 'no dedicated spend tracked';
+  return `${value.runs} runs; ${minutes(value.wallSeconds)} wall; ${minutes(value.cpuSeconds)} CPU`;
+}
+
 function md(value){
   return String(value ?? '')
     .replace(/\|/g, '\\|')
@@ -124,9 +167,64 @@ function row({ rank, metric, score10, target, status, why, effort, next, evidenc
     why,
     effort,
     next,
-    evidence,
-    cells: [rank, metric, score(score10), scoreContext.confidence, scoreContext.resolution, target, status, why, effort, next, evidence]
+    evidence
   };
+}
+
+function updateRowCells(item){
+  const cost = item.costContext || {};
+  item.cells = [
+    item.rank,
+    item.metric,
+    item.current,
+    item.scoreContext?.confidence || '',
+    item.scoreContext?.resolution || '',
+    cost.summary || '',
+    cost.trackedSpend || '',
+    item.target,
+    item.status,
+    item.why,
+    item.effort,
+    item.next,
+    item.evidence
+  ];
+  return item;
+}
+
+function costSummary(costClass, resources){
+  return `${costClass || 'unclassified'}; ${resources || 'cpu'}`;
+}
+
+function addCostContext(item, economics, investmentById){
+  const axisKeys = metricAxisKeys(item.metric);
+  const candidate = investmentForMetric(item.metric, investmentById);
+  const axisSpend = sumAxisSpend(economics, axisKeys);
+  const measured = axisSpend.runs ? axisSpend : (candidate?.measuredComputeHistory || axisSpend);
+  const expectedResources = inferredResources(item.metric);
+  const costClass = candidate?.costClass || (/guardrail/i.test(item.effort || '') ? 'guardrail' : 'estimated');
+  const expectedLift10 = Number.isFinite(+candidate?.expectedLift10) ? +candidate.expectedLift10 : null;
+  const expectedOverallLift10 = Number.isFinite(+candidate?.expectedOverallLift10) ? +candidate.expectedOverallLift10 : null;
+  const investmentScore = Number.isFinite(+candidate?.investmentScore) ? +candidate.investmentScore : null;
+  item.costContext = {
+    costClass,
+    expectedResources,
+    trackedAxes: axisKeys,
+    trackedSpend: compactSpend(measured),
+    trackedRuns: measured.runs || 0,
+    trackedWallSeconds: measured.wallSeconds || 0,
+    trackedCpuSeconds: measured.cpuSeconds || 0,
+    expectedLift10,
+    expectedOverallLift10,
+    investmentScore,
+    gapToTarget: scoreGap(item.score10, item.target),
+    summary: costSummary(costClass, expectedResources),
+    valueCostRead: candidate
+      ? `Expected lift ${expectedLift10}/10 on metric, ${expectedOverallLift10}/10 overall; investment score ${investmentScore}.`
+      : (/guardrail/i.test(item.effort || '')
+        ? 'Guardrail spend: value is preventing regression rather than raising the score.'
+        : 'Estimated cost/value; dedicated investment candidate not yet generated.')
+  };
+  return updateRowCells(item);
 }
 
 function scoreMeaning(score10){
@@ -401,7 +499,9 @@ function nextEstimateRows(rows){
     item.target,
     scoreGap(item.score10, item.target),
     item.effort,
-    inferredResources(item.metric),
+    item.costContext?.expectedResources || inferredResources(item.metric),
+    item.costContext?.trackedSpend || 'no dedicated spend tracked',
+    item.costContext?.valueCostRead || '',
     item.next
   ]);
 }
@@ -443,7 +543,7 @@ function main(){
   const popupScore = uiShell?.score10 || 0;
   const arcadeFrameScore = uiShell?.score10 || 0;
 
-  const rows = [
+  const baseRows = [
     row({
       rank: 1,
       metric: 'Audio identity, event feedback, and cue alignment',
@@ -621,6 +721,7 @@ function main(){
       evidence: rel(qualityPath)
     })
   ];
+  const rows = baseRows.map(item => addCostContext(item, economics, investmentById));
 
   const generatedAt = new Date().toISOString();
   const releaseGate = [
@@ -635,10 +736,10 @@ function main(){
   ];
 
   const releaseGateHeaders = ['Gate', 'Current', 'Target', 'Notes'];
-  const priorityHeaders = ['Priority', 'Metric', 'Current', 'Confidence', 'Resolution', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'];
+  const priorityHeaders = ['Priority', 'Metric', 'Current', 'Confidence', 'Resolution', 'Cost / resources', 'Tracked spend', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'];
   const resourceHeaders = ['Resource', 'Measured runs', 'Wall time', 'CPU time'];
   const axisHeaders = ['Axis', 'Measured runs', 'Wall time', 'CPU time'];
-  const nextEstimateHeaders = ['Priority', 'Metric', 'Current', 'Target', 'Gap to target', 'Estimated effort', 'Expected resources', 'Next action'];
+  const nextEstimateHeaders = ['Priority', 'Metric', 'Current', 'Target', 'Gap to target', 'Estimated effort', 'Expected resources', 'Tracked spend', 'Value / cost read', 'Next action'];
   const economicsDir = economicsPath ? path.dirname(economicsPath) : null;
   const economicsCharts = economicsDir ? [
     path.join(economicsDir, 'score-trends.svg'),
