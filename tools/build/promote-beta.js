@@ -32,6 +32,8 @@ function buildBetaInfo(sourceInfo){
   return {
     ...sourceInfo,
     version: betaVersion,
+    versionLine: betaVersion,
+    versionScheme: 'semver-prerelease',
     label: betaLabel,
     branch: 'beta',
     state: `beta@${sourceInfo.shortCommit} clean`,
@@ -50,6 +52,7 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), betaInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${betaInfo.version}'`],
+    [new RegExp(`versionLine:'${escapeRegex(sourceInfo.versionLine || sourceInfo.version)}'`, 'g'), `versionLine:'${betaInfo.versionLine}'`],
     [new RegExp(`branch:'${escapeRegex(sourceInfo.branch)}'`, 'g'), `branch:'${betaInfo.branch}'`],
     [new RegExp(`state:'${escapeRegex(sourceState)}'`, 'g'), `state:'${betaInfo.state}'`],
     [new RegExp(escapeRegex(sourceState), 'g'), betaInfo.state],

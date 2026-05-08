@@ -26,6 +26,8 @@ function buildProductionInfo(sourceInfo){
   return {
     ...sourceInfo,
     version,
+    versionLine: version,
+    versionScheme: 'semver',
     label: `${version}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}`,
     branch: productionBranch,
     state: `${productionBranch}@${sourceInfo.shortCommit} clean`,
@@ -46,6 +48,7 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), productionInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${productionInfo.version}'`],
+    [new RegExp(`versionLine:'${escapeRegex(sourceInfo.versionLine || sourceInfo.version)}'`, 'g'), `versionLine:'${productionInfo.versionLine}'`],
     [new RegExp(`branch:'${escapeRegex(sourceInfo.branch || '')}'`, 'g'), `branch:'${productionInfo.branch}'`],
     [/branch:'[^']*'/g, `branch:'${productionInfo.branch}'`],
     [new RegExp(`state:'${escapeRegex(sourceInfo.state || '')}'`, 'g'), `state:'${productionInfo.state}'`],

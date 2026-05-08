@@ -317,7 +317,25 @@ function loadReleaseManifest(buildVersion = pkg.version){
   return {
     product,
     platform,
-    applications: normalizedApplications
+    applications: normalizedApplications,
+    development: normalizeDevelopmentVersion(raw.development, buildVersion)
+  };
+}
+
+function normalizeDevelopmentVersion(rawDevelopment, buildVersion){
+  const raw = rawDevelopment && typeof rawDevelopment === 'object' ? rawDevelopment : {};
+  const baseVersion = String(raw.baseVersion || buildVersion).trim() || buildVersion;
+  const iteration = Number.parseInt(raw.iteration, 10);
+  const computedLine = Number.isFinite(iteration) && iteration >= 0
+    ? `${baseVersion}.${iteration}`
+    : baseVersion;
+  const versionLine = String(raw.versionLine || computedLine).trim() || computedLine;
+  return {
+    baseVersion,
+    iteration: Number.isFinite(iteration) && iteration >= 0 ? iteration : null,
+    versionLine,
+    releaseTrack: String(raw.releaseTrack || 'hosted-dev-increment').trim() || 'hosted-dev-increment',
+    notes: String(raw.notes || '').trim()
   };
 }
 
@@ -799,8 +817,8 @@ function renderReleaseVersionDomains(buildInfo){
   const versionCards = [
     {
       label: 'Integrated Release',
-      value: buildInfo.version || '--',
-      detail: `Lane ${buildInfo.releaseChannel || 'development'}${buildInfo.label ? ` · ${buildInfo.label}` : ''}`
+      value: buildInfo.versionLine || buildInfo.version || '--',
+      detail: [`Lane ${buildInfo.releaseChannel || 'development'}`, buildInfo.versionLine && buildInfo.versionLine !== buildInfo.version ? `Base ${buildInfo.version}` : '', buildInfo.label || ''].filter(Boolean).join(' · ')
     },
     {
       label: 'Platinum Platform',
@@ -861,6 +879,10 @@ function renderReleaseVersionDomains(buildInfo){
       </div>
     </section>
   `.trim();
+}
+
+function displayBuildVersion(buildInfo){
+  return buildInfo.versionLine || buildInfo.version || '--';
 }
 
 function projectGuideStyles(){
@@ -1395,7 +1417,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         <div class="meta">
           <div class="metaCard">
             <span class="metaLabel">Target</span>
-            <span class="metaValue">${esc(dashboard.targetVersion || buildInfo.version)}</span>
+            <span class="metaValue">${esc(dashboard.targetVersion || displayBuildVersion(buildInfo))}</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Focus</span>
@@ -1403,7 +1425,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Release</span>
-            <span class="metaValue">${esc(buildInfo.version)}</span>
+            <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
@@ -1669,7 +1691,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -1704,7 +1726,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -1868,7 +1890,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -2077,7 +2099,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -2326,7 +2348,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -2361,7 +2383,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -2393,7 +2415,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -2427,7 +2449,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -2443,6 +2465,14 @@ function normalizeVersionForChannel(version, releaseChannel){
     return String(version).replace(/-(alpha|beta|rc)(\.[0-9]+)?$/, '');
   }
   return version;
+}
+
+function versionLineForChannel(version, releaseChannel, releaseManifest){
+  if(releaseChannel !== 'development') return version;
+  const dev = releaseManifest && releaseManifest.development && typeof releaseManifest.development === 'object'
+    ? releaseManifest.development
+    : {};
+  return String(dev.versionLine || version).trim() || version;
 }
 
 function parseArgs(argv){
@@ -2506,6 +2536,8 @@ function build(options = {}){
   const buildRepoRef = detectRepoRef();
   const buildReleaseChannel = buildLane === 'production' ? 'production' : 'development';
   const buildVersion = normalizeVersionForChannel(pkg.version, buildReleaseChannel);
+  const releaseManifest = loadReleaseManifest(buildVersion);
+  const buildVersionLine = versionLineForChannel(buildVersion, buildReleaseChannel, releaseManifest);
   const buildDirtyFiles = git('status --porcelain', '')
     .split('\n')
     .map(s => s.trim())
@@ -2513,7 +2545,7 @@ function build(options = {}){
     .filter(entry => !isGeneratedBuildPath(parsePorcelainPath(entry)));
   const buildDirty = buildDirtyFiles.length > 0;
   const buildNumber = process.env.BUILD_NUMBER || process.env.GITHUB_RUN_NUMBER || git('rev-list --count HEAD', '0');
-  const buildLabel = `${buildVersion}+build.${buildNumber}.sha.${buildShortCommit}${buildDirty ? '.dirty' : ''}`;
+  const buildLabel = `${buildVersionLine}+build.${buildNumber}.sha.${buildShortCommit}${buildDirty ? '.dirty' : ''}`;
   const buildState = `${buildBranch}@${buildShortCommit}${buildDirty ? ' dirty' : ' clean'}`;
   const buildUtc = new Date().toISOString();
   const buildReleaseEt = new Intl.DateTimeFormat('en-US',{
@@ -2530,7 +2562,6 @@ function build(options = {}){
   const releaseDashboard = loadReleaseDashboard();
   const conformanceDashboardSummary = loadConformanceDashboardSummary();
   const conformanceDashboardData = loadConformanceDashboardData();
-  const releaseManifest = loadReleaseManifest(buildVersion);
   const projectGuide = loadProjectGuide();
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
@@ -2558,6 +2589,7 @@ function build(options = {}){
   const testAccountUserId = testAccountUserIds[0] || '';
   const tokens = {
     BUILD_VERSION: buildVersion,
+    BUILD_VERSION_LINE: buildVersionLine,
     BUILD_LABEL: buildLabel,
     BUILD_CHANNEL: buildReleaseChannel,
     BUILD_COMMIT: buildCommit,
@@ -2602,6 +2634,8 @@ function build(options = {}){
   const buildInfo = {
     product: releaseManifest.product,
     version: buildVersion,
+    versionLine: buildVersionLine,
+    versionScheme: buildVersionLine !== buildVersion ? 'hosted-dev-increment' : 'semver',
     label: buildLabel,
     buildNumber,
     commit: buildCommit,
@@ -2615,6 +2649,7 @@ function build(options = {}){
     builtAtEt: buildReleaseEt,
     platform: releaseManifest.platform,
     applications: releaseManifest.applications,
+    development: releaseManifest.development,
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
     latestReleaseNote: latestNote
   };

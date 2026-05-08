@@ -466,7 +466,10 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',versionLine:'{{BUILD_VERSION_LINE}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+function buildVersionLine(){
+ return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
+}
 function humanizeReleaseTrack(value=''){
  const raw=String(value||'').trim();
  return raw?raw.replace(/-/g,' '):'';
@@ -477,6 +480,7 @@ function buildPlatformInfo(){
   key:'platinum',
   name:PLATFORM_NAME,
   version:BUILD_INFO.version||'--',
+  versionLine:buildVersionLine(),
   releaseTrack:'bundle-aligned',
   compatibility:'',
   notes:''
@@ -1524,7 +1528,7 @@ function syncSettingsUi(){
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
  if(settingsChannel)settingsChannel.textContent=`Lane ${String(BUILD_INFO.releaseChannel||'development').toUpperCase()}`;
- if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
+ if(settingsVersion)settingsVersion.textContent=`Version ${buildVersionLine()}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
