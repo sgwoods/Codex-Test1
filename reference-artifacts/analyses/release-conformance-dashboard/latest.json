@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T10:36:02.809Z",
-  "commit": "7979583",
+  "generatedAt": "2026-05-08T10:56:44.173Z",
+  "commit": "afc27e6",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
   "dirty": true,
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-d8240f0/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-d8240f0/report.json"
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/report.json"
   },
   "equalQualityCategoryWeight": 0.091,
   "releaseGate": [
@@ -434,6 +434,155 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"
     }
   ],
+  "economicsSummary": {
+    "latestOverallScore10": 9.1,
+    "latestLevelArcScore10": 8.4,
+    "metricPointCount": 492,
+    "deltaCount": 68,
+    "measuredRuns": 65,
+    "wallSeconds": 1046.861,
+    "cpuSeconds": 1461.85,
+    "artifactBytes": 179548979,
+    "charts": [
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-08-afc27e6/compute-minutes-by-resource.svg"
+    ]
+  },
+  "resourceSpendTable": [
+    {
+      "Resource": "cpu",
+      "Measured runs": 65,
+      "Wall time": "17.4 min",
+      "CPU time": "24.4 min"
+    },
+    {
+      "Resource": "browser",
+      "Measured runs": 36,
+      "Wall time": "14.2 min",
+      "CPU time": "20.6 min"
+    }
+  ],
+  "axisSpendTable": [
+    {
+      "Axis": "conformance-economics",
+      "Measured runs": 64,
+      "Wall time": "17.4 min",
+      "CPU time": "24.4 min"
+    },
+    {
+      "Axis": "stage4-pressure",
+      "Measured runs": 28,
+      "Wall time": "12.8 min",
+      "CPU time": "18.5 min"
+    },
+    {
+      "Axis": "quality-score",
+      "Measured runs": 3,
+      "Wall time": "3.2 min",
+      "CPU time": "3.7 min"
+    },
+    {
+      "Axis": "level-arc",
+      "Measured runs": 34,
+      "Wall time": "1.4 min",
+      "CPU time": "2.2 min"
+    },
+    {
+      "Axis": "conformance-loop",
+      "Measured runs": 21,
+      "Wall time": "1.1 min",
+      "CPU time": "1.7 min"
+    },
+    {
+      "Axis": "economics",
+      "Measured runs": 1,
+      "Wall time": "0 min",
+      "CPU time": "0 min"
+    }
+  ],
+  "nextGoalEstimateTable": [
+    {
+      "Priority": 1,
+      "Metric": "Audio identity, event feedback, and cue alignment",
+      "Current": "6.3/10",
+      "Target": "7.5-8.0",
+      "Gap to target": "+1.2",
+      "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
+      "Expected resources": "cpu, model-api, openai-api",
+      "Next action": "Run a longer audio segmentation/model-assisted analysis cycle."
+    },
+    {
+      "Priority": 2,
+      "Metric": "Level arc and encounter shape",
+      "Current": "8.4/10",
+      "Target": "8.8-9.0",
+      "Gap to target": "+0.4",
+      "Estimated effort": "Medium-high; 2-5 hrs",
+      "Expected resources": "cpu, browser",
+      "Next action": "Apply one narrow Stage 12 reward candidate and rerun the frozen conformance loop."
+    },
+    {
+      "Priority": 3,
+      "Metric": "Overall visual look and feel: gameplay, start page, typography complexity",
+      "Current": "7.4/10",
+      "Target": "8.4-8.8",
+      "Gap to target": "+1",
+      "Estimated effort": "Medium; 2-4 hrs, screenshot/contact-sheet driven",
+      "Expected resources": "cpu, browser, gpu",
+      "Next action": "Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets."
+    },
+    {
+      "Priority": 4,
+      "Metric": "Stage 4 pressure exact replay / pressure curve precision",
+      "Current": "7.5/10",
+      "Target": "8.2-8.6",
+      "Gap to target": "+0.7",
+      "Estimated effort": "Medium-high; prior runs ~12.8 min wall / 18.5 min CPU",
+      "Expected resources": "cpu, browser",
+      "Next action": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics."
+    },
+    {
+      "Priority": 5,
+      "Metric": "Alien entry to levels: formation, timing, and methods",
+      "Current": "9/10",
+      "Target": "9.0-9.4 with dedicated scorer",
+      "Gap to target": "at target",
+      "Estimated effort": "Medium; 1-3 hrs plus visual review",
+      "Expected resources": "cpu, browser",
+      "Next action": "Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels."
+    },
+    {
+      "Priority": 6,
+      "Metric": "Challenge-stage variation and new alien/formations introduction",
+      "Current": "9/10",
+      "Target": "9.0-9.4 with dedicated scorer",
+      "Gap to target": "at target",
+      "Estimated effort": "Medium-high; 2-4 hrs",
+      "Expected resources": "cpu, browser",
+      "Next action": "Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity."
+    },
+    {
+      "Priority": 7,
+      "Metric": "Progression and persona depth",
+      "Current": "8.8/10",
+      "Target": "9.1+",
+      "Gap to target": "+0.3",
+      "Estimated effort": "Low-medium; 1-2 hrs",
+      "Expected resources": "cpu",
+      "Next action": "Resolve remaining ordering edge case after higher-value audio/level-arc work."
+    },
+    {
+      "Priority": 8,
+      "Metric": "Stage 1 opening timing fidelity",
+      "Current": "8.5/10",
+      "Target": "8.8-9.2",
+      "Gap to target": "+0.3",
+      "Estimated effort": "Low-medium; 1-2 hrs",
+      "Expected resources": "cpu, browser",
+      "Next action": "Tune only after audio and level-arc priorities unless regressions appear."
+    }
+  ],
   "newFirstClassAxes": [
     "Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.",
     "Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.",
@@ -443,6 +592,8 @@
   ],
   "maintenanceRules": [
     "Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.",
+    "Before a serious /dev, /beta, or /production release candidate, refresh npm run harness:analyze:conformance-economics and npm run harness:build:release-conformance-dashboard so release docs include conformance, resource/time, chart, past-goal, and next-goal reads.",
+    "Any long-cycle local compute or model/API/GPU-assisted assessment should be wrapped with npm run harness:measure and declared with its axis and resource classes.",
     "Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.",
     "Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.",
     "Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.",

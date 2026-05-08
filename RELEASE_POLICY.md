@@ -289,6 +289,8 @@ Core artifacts include:
 - release scripts and harness scripts
 - reference profiles and correspondence check definitions
 - scorecards, release notes, dashboards, and readiness docs
+- release conformance analysis, including score tables, resource/time spend,
+  economics charts, past-goal movement, and next-goal estimates
 - curated reference inputs that the project depends on for tuning or review
 
 Generated artifacts do not all need to live in git, but they must not be
@@ -309,14 +311,21 @@ This is the rule that keeps release knowledge out of chat-only or machine-only
 
 1. build the local `localhost` candidate
 2. verify local `localhost` gates
-3. refresh the quality score and scorecard for the candidate
-4. publish hosted `/dev` for integrated hosted review
-5. promote hosted `/beta`
-6. verify hosted `/beta`
-7. complete any required docs pass for the release line
-8. confirm or hand off release authority intentionally
-9. approve hosted `/beta`
-10. promote and publish hosted `/production`
+3. refresh the quality score, conformance economics, release conformance
+   dashboard, and scorecard for the candidate
+4. confirm release docs include detailed conformance analysis:
+   - current score and gap tables
+   - score trend and delta charts
+   - measured wall/CPU/GPU/API/resource usage where available
+   - past-goal movement and effort actually spent
+   - next-goal estimates and expected resource classes
+5. publish hosted `/dev` for integrated hosted review
+6. promote hosted `/beta`
+7. verify hosted `/beta`
+8. complete any required docs pass for the release line
+9. confirm or hand off release authority intentionally
+10. approve hosted `/beta`
+11. promote and publish hosted `/production`
 
 ## Hosted `/dev` History Rule
 
@@ -350,3 +359,5 @@ The goal is to make sure:
 - hosted lanes are explicit
 - docs and release surfaces stay aligned with the product we actually ship
 - the quality score becomes part of release notes, not just a local experiment
+- release decisions account for conformance return on compute/time investment,
+  not only subjective polish intent

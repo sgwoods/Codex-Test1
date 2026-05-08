@@ -71,6 +71,30 @@ function score(value){
   return Number.isFinite(+value) ? `${(+value).toFixed(1).replace(/\.0$/, '')}/10` : '--';
 }
 
+function minutes(value){
+  return Number.isFinite(+value) ? `${(+value / 60).toFixed(1).replace(/\.0$/, '')} min` : '--';
+}
+
+function megabytes(value){
+  return Number.isFinite(+value) ? `${(+value / 1000000).toFixed(1).replace(/\.0$/, '')} MB` : '--';
+}
+
+function scoreGap(current, targetText){
+  const match = String(targetText || '').match(/(\d+(?:\.\d+)?)/);
+  if(!match || !Number.isFinite(+current)) return '--';
+  const gap = Math.max(0, +match[1] - +current);
+  return gap ? `+${gap.toFixed(1).replace(/\.0$/, '')}` : 'at target';
+}
+
+function inferredResources(metric){
+  const text = String(metric || '').toLowerCase();
+  const resources = ['cpu'];
+  if(/visual|frame|popup|arcade|entry|challenge|stage|level|pressure|movement/.test(text)) resources.push('browser');
+  if(/audio/.test(text)) resources.push('model-api', 'openai-api');
+  if(/visual|graphics|frame/.test(text)) resources.push('gpu');
+  return Array.from(new Set(resources)).join(', ');
+}
+
 function md(value){
   return String(value ?? '')
     .replace(/\|/g, '\\|')
@@ -107,6 +131,44 @@ function tableObjects(headers, rows){
     const cells = row.cells || row;
     return Object.fromEntries(headers.map((header, index) => [header, cells[index] ?? '']));
   });
+}
+
+function resourceRows(economics){
+  const byResource = economics.summary?.ledger?.byResource || {};
+  return Object.entries(byResource)
+    .map(([resource, value]) => [
+      resource,
+      value.runs || 0,
+      minutes(value.wallSeconds),
+      minutes(value.cpuSeconds)
+    ])
+    .sort((a, b) => parseFloat(String(b[2])) - parseFloat(String(a[2])));
+}
+
+function axisRows(economics){
+  const byAxis = economics.summary?.ledger?.byAxis || {};
+  return Object.entries(byAxis)
+    .map(([axis, value]) => [
+      axis,
+      value.runs || 0,
+      minutes(value.wallSeconds),
+      minutes(value.cpuSeconds)
+    ])
+    .sort((a, b) => parseFloat(String(b[2])) - parseFloat(String(a[2])))
+    .slice(0, 8);
+}
+
+function nextEstimateRows(rows){
+  return rows.slice(0, 8).map(item => [
+    item.rank,
+    item.metric,
+    item.current,
+    item.target,
+    scoreGap(item.score10, item.target),
+    item.effort,
+    inferredResources(item.metric),
+    item.next
+  ]);
 }
 
 function main(){
@@ -339,6 +401,18 @@ function main(){
 
   const releaseGateHeaders = ['Gate', 'Current', 'Target', 'Notes'];
   const priorityHeaders = ['Priority', 'Metric', 'Current', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'];
+  const resourceHeaders = ['Resource', 'Measured runs', 'Wall time', 'CPU time'];
+  const axisHeaders = ['Axis', 'Measured runs', 'Wall time', 'CPU time'];
+  const nextEstimateHeaders = ['Priority', 'Metric', 'Current', 'Target', 'Gap to target', 'Estimated effort', 'Expected resources', 'Next action'];
+  const economicsDir = economicsPath ? path.dirname(economicsPath) : null;
+  const economicsCharts = economicsDir ? [
+    path.join(economicsDir, 'score-trends.svg'),
+    path.join(economicsDir, 'largest-score-deltas.svg'),
+    path.join(economicsDir, 'compute-minutes-by-resource.svg')
+  ].filter(fs.existsSync).map(rel) : [];
+  const resourceSpendRows = resourceRows(economics);
+  const axisSpendRows = axisRows(economics);
+  const nextRows = nextEstimateRows(rows);
   const sourceReports = {
     quality: rel(qualityPath),
     investmentPriority: priorityPath ? rel(priorityPath) : null,
@@ -361,6 +435,20 @@ function main(){
     releaseGate: tableObjects(releaseGateHeaders, releaseGate),
     priorityRows: rows.map(({ cells, ...entry }) => entry),
     priorityTable: tableObjects(priorityHeaders, rows),
+    economicsSummary: {
+      latestOverallScore10: economics.summary?.latestOverallScore10 ?? null,
+      latestLevelArcScore10: economics.summary?.latestLevelArcScore10 ?? null,
+      metricPointCount: economics.summary?.metricPointCount || 0,
+      deltaCount: economics.summary?.deltaCount || 0,
+      measuredRuns: economics.summary?.ledger?.runs || 0,
+      wallSeconds: economics.summary?.ledger?.wallSeconds || 0,
+      cpuSeconds: economics.summary?.ledger?.cpuSeconds || 0,
+      artifactBytes: economics.summary?.ledger?.artifactBytes || 0,
+      charts: economicsCharts
+    },
+    resourceSpendTable: tableObjects(resourceHeaders, resourceSpendRows),
+    axisSpendTable: tableObjects(axisHeaders, axisSpendRows),
+    nextGoalEstimateTable: tableObjects(nextEstimateHeaders, nextRows),
     newFirstClassAxes: [
       'Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
       'Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
@@ -370,6 +458,8 @@ function main(){
     ],
     maintenanceRules: [
       'Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.',
+      'Before a serious /dev, /beta, or /production release candidate, refresh npm run harness:analyze:conformance-economics and npm run harness:build:release-conformance-dashboard so release docs include conformance, resource/time, chart, past-goal, and next-goal reads.',
+      'Any long-cycle local compute or model/API/GPU-assisted assessment should be wrapped with npm run harness:measure and declared with its axis and resource classes.',
       'Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.',
       'Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.',
       'Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.',
@@ -400,6 +490,46 @@ function main(){
       rows
     ),
     '',
+    '## Conformance Analysis And Economics',
+    '',
+    'Every release candidate should include both a conformance read and a resource/time read. The goal is to understand not only whether Aurora moved closer to Galaga-like conformance, but what local compute, browser/video work, GPU/model/API assistance, artifact volume, and retry cost were spent to get there.',
+    '',
+    table(
+      ['Measure', 'Current read', 'Release-documentation use'],
+      [
+        ['Latest overall conformance', score(economics.summary?.latestOverallScore10 ?? quality.summary?.overallScore10), 'Primary quality roll-up for release notes and scorecards'],
+        ['Latest level-arc conformance', score(economics.summary?.latestLevelArcScore10 ?? level?.score10), 'Long-play gameplay-shape gate'],
+        ['Metric points scanned', economics.summary?.metricPointCount || 0, 'History depth behind score trends'],
+        ['Score deltas found', economics.summary?.deltaCount || 0, 'Past-goal movement available for review'],
+        ['Measured runs', economics.summary?.ledger?.runs || 0, 'Tracked harness/model/local compute work'],
+        ['Tracked wall time', minutes(economics.summary?.ledger?.wallSeconds), 'Human clock-time planning input'],
+        ['Tracked CPU time', minutes(economics.summary?.ledger?.cpuSeconds), 'Local compute-cost planning input'],
+        ['Tracked artifact growth', megabytes(economics.summary?.ledger?.artifactBytes), 'Evidence volume and storage/review-cost proxy']
+      ]
+    ),
+    '',
+    '### Resource And Time Usage',
+    '',
+    resourceSpendRows.length
+      ? table(resourceHeaders, resourceSpendRows)
+      : '_No measured resource ledger entries yet. Wrap meaningful runs with `npm run harness:measure`._',
+    '',
+    '### Past Goal Spend By Axis',
+    '',
+    axisSpendRows.length
+      ? table(axisHeaders, axisSpendRows)
+      : '_No measured axis ledger entries yet._',
+    '',
+    '### Next Goal Estimates',
+    '',
+    table(nextEstimateHeaders, nextRows),
+    '',
+    '### Charts',
+    '',
+    economicsCharts.length
+      ? economicsCharts.map(chart => `![${path.basename(chart, '.svg')}](${chart})`).join('\n\n')
+      : '_Run `npm run harness:analyze:conformance-economics` to refresh score, delta, and resource charts._',
+    '',
     '## New First-Class Axes Added',
     '',
     '- Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
@@ -411,6 +541,8 @@ function main(){
     '## Maintenance Rules',
     '',
     '- Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.',
+    '- Before a serious `/dev`, `/beta`, or `/production` release candidate, refresh `npm run harness:analyze:conformance-economics` and `npm run harness:build:release-conformance-dashboard` so release docs include conformance, resource/time, chart, past-goal, and next-goal reads.',
+    '- Any long-cycle local compute or model/API/GPU-assisted assessment should be wrapped with `npm run harness:measure` and declared with its axis and resource classes.',
     '- Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.',
     '- Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.',
     '- Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.',

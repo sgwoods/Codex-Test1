@@ -83,3 +83,26 @@ Each major phase should report:
 This keeps long-cycle conformance work from becoming only "more compute." The
 goal is better evidence, better game feel, and reusable harness logic per unit
 of local resource spent.
+
+## Release Documentation Rule
+
+For every serious `/dev`, `/beta`, or `/production` candidate, refresh the
+economics report before final release documentation:
+
+```sh
+npm run harness:analyze:conformance-economics
+npm run harness:build:release-conformance-dashboard
+```
+
+The release conformance dashboard should then include:
+
+- current conformance score tables and gaps to the next gate
+- score trend, largest-delta, and compute-by-resource charts
+- measured wall time, CPU time, and declared resource classes
+- GPU/model/API declarations where they were used
+- past-goal movement and the effort spent to get it
+- next-goal estimates with expected resource classes and effort ranges
+
+If a release used meaningful long-cycle compute without a measured ledger
+entry, document that as measurement debt and wrap the next comparable command
+with `npm run harness:measure`.

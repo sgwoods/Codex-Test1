@@ -160,12 +160,22 @@ Check:
 
 - build info, release notes, and dashboard are present and coherent
 - lane metadata matches the candidate state honestly
+- `RELEASE_CONFORMANCE_DASHBOARD.md` is refreshed for the candidate and
+  includes conformance score tables, resource/time usage, charts, past-goal
+  movement, and next-goal estimates
+- `CONFORMANCE_ECONOMICS.md` and the latest
+  `reference-artifacts/analyses/conformance-economics/` report explain how
+  CPU/browser/GPU/model/API effort is being tracked
 
 How:
 
 - inspect local `dist/dev`
 - inspect generated `build-info.json`, `release-notes.json`,
   `release-dashboard.html`
+- run `npm run harness:analyze:conformance-economics`
+- run `npm run harness:build:release-conformance-dashboard`
+- inspect `score-trends.svg`, `largest-score-deltas.svg`, and
+  `compute-minutes-by-resource.svg`
 
 ### Documentation alignment
 
@@ -173,6 +183,9 @@ Check:
 
 - if the candidate changes release meaning, process, or operator workflow,
   supporting docs are updated
+- if the candidate includes serious conformance work, release docs state the
+  problem, strategy, success measure, measured score movement, resource/time
+  usage, and next-goal estimate
 
 How:
 

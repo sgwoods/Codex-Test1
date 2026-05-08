@@ -117,6 +117,10 @@ Current biggest gaps:
 Going forward:
 
 - every serious `/dev` or `/beta` candidate should refresh this scorecard
+- every serious release candidate should refresh
+  `RELEASE_CONFORMANCE_DASHBOARD.md` alongside the scorecard so the release
+  record includes conformance analysis, score tables, economics charts,
+  resource/time usage, past-goal movement, and next-goal estimates
 - `/beta` release notes should include the latest quality score and the top
   remaining gaps
 - `/production` release notes should include the approved-beta quality score and

@@ -26,6 +26,9 @@ const REQUIRED_SOURCE_DOCS = [
   'TESTING_AND_RELEASE_GATES.md',
   'RELEASE_POLICY.md',
   'RELEASE_READINESS_REVIEW.md',
+  'RELEASE_CONFORMANCE_DASHBOARD.md',
+  'CONFORMANCE_ECONOMICS.md',
+  'QUALITY_RELEASE_SCORECARD.md',
   'PLATINUM_LAUNCH_ART_DIRECTION.md',
   'PLATINUM_LUECK_REVIEW.md',
   'project-guide.json',
@@ -180,6 +183,31 @@ function checkSourceDocs(){
   }
 }
 
+function checkReleaseConformanceDocs(){
+  const dashboardPath = path.join(ROOT, 'RELEASE_CONFORMANCE_DASHBOARD.md');
+  const economicsPath = path.join(ROOT, 'CONFORMANCE_ECONOMICS.md');
+  const dashboard = loadText(dashboardPath);
+  const economics = loadText(economicsPath);
+  const requiredDashboardText = [
+    '## Current Release Gate',
+    '## Priority Table',
+    '## Conformance Analysis And Economics',
+    '### Resource And Time Usage',
+    '### Past Goal Spend By Axis',
+    '### Next Goal Estimates',
+    '### Charts',
+    'compute-minutes-by-resource.svg'
+  ];
+  for(const text of requiredDashboardText){
+    if(!dashboard.includes(text)){
+      throw new Error(`Publish preflight failed: ${dashboardPath} is missing "${text}". Run npm run harness:analyze:conformance-economics and npm run harness:build:release-conformance-dashboard before publishing.`);
+    }
+  }
+  if(!economics.includes('## Release Documentation Rule')){
+    throw new Error(`Publish preflight failed: ${economicsPath} is missing the release documentation rule for conformance economics.`);
+  }
+}
+
 function checkBuildInfo(cfg){
   const info = loadJson(cfg.buildInfo);
   const head = git(['rev-parse', 'HEAD']);
@@ -284,6 +312,7 @@ function main(){
   }
   checkGitClean();
   checkSourceDocs();
+  checkReleaseConformanceDocs();
   checkArtifacts(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
@@ -314,6 +343,7 @@ module.exports = {
   laneConfig,
   checkGitClean,
   checkSourceDocs,
+  checkReleaseConformanceDocs,
   checkArtifacts,
   checkBuildInfo,
   checkProductionReleaseDocs,
