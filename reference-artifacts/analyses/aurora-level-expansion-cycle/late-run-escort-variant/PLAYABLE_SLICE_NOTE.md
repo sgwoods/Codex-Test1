@@ -16,7 +16,7 @@ Duration: 12s
 - max enemy bullets: 2
 - max challenge enemies: 0
 - final stage: 14
-- final score: 1030
+- final score: 510
 
 ## Event Coverage
 

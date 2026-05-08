@@ -1,0 +1,432 @@
+{
+  "generatedAt": "2026-05-08T10:11:25.170Z",
+  "schema_version": 1,
+  "artifact_type": "conformance-candidate-loop",
+  "profile": {
+    "profileFile": "tools/harness/conformance-loop-profiles/stage12-late-reward.json",
+    "schema_version": 1,
+    "id": "stage12-late-reward",
+    "title": "Stage 12 late reward opportunity",
+    "problem": "Stage 12 has measurable late-run pressure, but normal play does not yet surface enough boss/escort reward opportunity to feel like a Galaga-style late-stage learning and scoring window.",
+    "strategy": "Freeze the evaluator, constrain candidate edits to late-stage scheduling and reward surfacing, then keep only candidates that improve reward/opportunity evidence without weakening level-arc or endpoint guardrails.",
+    "successMeasure": "A candidate should raise opportunity readiness and reward evidence while preserving level-arc score and deterministic endpoint coverage. Natural late-run play should eventually produce reward opportunity without harness-only setup.",
+    "editableSurface": [
+      "Stage 12/late-stage enemy scheduling",
+      "Boss/escort opportunity timing",
+      "Reward telegraphing and score-event surfacing",
+      "Scenario evidence windows that widen observation without changing gameplay"
+    ],
+    "fixedBudget": {
+      "label": "short-platform-loop",
+      "expectedWallSeconds": 90,
+      "notes": "This loop is intentionally short: it validates the candidate-loop machinery and the Stage 12 reward metric surface before any long autonomous mutation cycle."
+    },
+    "targetMetrics": [
+      {
+        "id": "opportunity.score10",
+        "artifact": "level-arc-opportunity-windows",
+        "path": "summary.score10",
+        "minDelta": 0.2,
+        "direction": "increase"
+      },
+      {
+        "id": "opportunity.meanRewardIndex",
+        "artifact": "level-arc-opportunity-windows",
+        "path": "summary.meanRewardIndex",
+        "minDelta": 0.2,
+        "direction": "increase"
+      },
+      {
+        "id": "outcome.rewardWindows",
+        "artifact": "level-arc-outcome-probes",
+        "path": "summary.rewardWindows",
+        "minDelta": 1,
+        "direction": "increase"
+      }
+    ],
+    "guardrailMetrics": [
+      {
+        "id": "levelArc.score10",
+        "artifact": "level-arc-conformance",
+        "path": "summary.score10",
+        "minDelta": 0,
+        "direction": "preserve"
+      },
+      {
+        "id": "outcome.endpointWindows",
+        "artifact": "level-arc-outcome-probes",
+        "path": "summary.endpointWindows",
+        "minDelta": 0,
+        "direction": "preserve"
+      },
+      {
+        "id": "outcome.collisionLossWindows",
+        "artifact": "level-arc-outcome-probes",
+        "path": "summary.collisionLossWindows",
+        "minDelta": 0,
+        "direction": "preserve"
+      }
+    ],
+    "evaluators": [
+      {
+        "id": "outcome-probes",
+        "command": [
+          "npm",
+          "run",
+          "harness:check:level-arc-outcome-probes"
+        ],
+        "axes": [
+          "level-arc",
+          "conformance-loop",
+          "conformance-economics"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Candidate loop Stage 12 reward outcome probes"
+      },
+      {
+        "id": "opportunity-windows",
+        "command": [
+          "npm",
+          "run",
+          "harness:analyze:level-arc-opportunity-windows"
+        ],
+        "axes": [
+          "level-arc",
+          "conformance-loop",
+          "conformance-economics"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Candidate loop Stage 12 opportunity readiness"
+      },
+      {
+        "id": "level-arc",
+        "command": [
+          "npm",
+          "run",
+          "harness:analyze:level-arc-conformance"
+        ],
+        "axes": [
+          "level-arc",
+          "conformance-loop",
+          "conformance-economics"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Candidate loop Stage 12 level-arc guardrail"
+      }
+    ]
+  },
+  "candidate": {
+    "id": "stage12-natural-reward-window-v2",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "notes": "Natural Stage 12 reward lock candidate v2",
+    "result": {
+      "skipped": false,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdoutTail": [
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-captured-fighter-destroyed.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-capturing.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-challenging-stage-0-39-hits.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-challenging-stage-40-hits.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-challenging-stage.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-coin-inserted.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-death.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-extra-fighter.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-fighter-captured.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-goei-midori-tonbo-momiji-enterprise.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-level-underscore.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-name-entry-1st.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-name-entry-2nd-5th.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-start.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-tractor-beam.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-transformation.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/reference-audio/galaga3-zako.m4a",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/source-logos/README.md",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/source-logos/logo2-cropped.jpeg",
+        "Built /Users/sgwoods/Development/Codex/Codex-test1/dist/dev/assets/source-logos/logo2.jpeg"
+      ],
+      "stderrTail": []
+    }
+  },
+  "git": {
+    "branch": "codex/macbook-pro-level-arc-long-cycle",
+    "commit": "d8240f0",
+    "dirty": true
+  },
+  "before": {
+    "opportunity.score10": {
+      "artifact": "level-arc-opportunity-windows",
+      "path": "summary.score10",
+      "value": 4.5,
+      "report": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json"
+    },
+    "opportunity.meanRewardIndex": {
+      "artifact": "level-arc-opportunity-windows",
+      "path": "summary.meanRewardIndex",
+      "value": 2.1,
+      "report": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json"
+    },
+    "outcome.rewardWindows": {
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.rewardWindows",
+      "value": 1,
+      "report": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+    },
+    "levelArc.score10": {
+      "artifact": "level-arc-conformance",
+      "path": "summary.score10",
+      "value": 8.4,
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"
+    },
+    "outcome.endpointWindows": {
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.endpointWindows",
+      "value": 3,
+      "report": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+    },
+    "outcome.collisionLossWindows": {
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.collisionLossWindows",
+      "value": 2,
+      "report": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+    }
+  },
+  "after": {
+    "opportunity.score10": {
+      "artifact": "level-arc-opportunity-windows",
+      "path": "summary.score10",
+      "value": 4.5,
+      "report": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json"
+    },
+    "opportunity.meanRewardIndex": {
+      "artifact": "level-arc-opportunity-windows",
+      "path": "summary.meanRewardIndex",
+      "value": 2.1,
+      "report": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json"
+    },
+    "outcome.rewardWindows": {
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.rewardWindows",
+      "value": 1,
+      "report": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+    },
+    "levelArc.score10": {
+      "artifact": "level-arc-conformance",
+      "path": "summary.score10",
+      "value": 8.4,
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"
+    },
+    "outcome.endpointWindows": {
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.endpointWindows",
+      "value": 3,
+      "report": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+    },
+    "outcome.collisionLossWindows": {
+      "artifact": "level-arc-outcome-probes",
+      "path": "summary.collisionLossWindows",
+      "value": 2,
+      "report": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+    }
+  },
+  "results": {
+    "targets": [
+      {
+        "id": "opportunity.score10",
+        "artifact": "level-arc-opportunity-windows",
+        "path": "summary.score10",
+        "direction": "increase",
+        "before": 4.5,
+        "after": 4.5,
+        "delta": 0,
+        "minDelta": 0.2,
+        "passed": false,
+        "beforeReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json",
+        "afterReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json"
+      },
+      {
+        "id": "opportunity.meanRewardIndex",
+        "artifact": "level-arc-opportunity-windows",
+        "path": "summary.meanRewardIndex",
+        "direction": "increase",
+        "before": 2.1,
+        "after": 2.1,
+        "delta": 0,
+        "minDelta": 0.2,
+        "passed": false,
+        "beforeReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json",
+        "afterReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json"
+      },
+      {
+        "id": "outcome.rewardWindows",
+        "artifact": "level-arc-outcome-probes",
+        "path": "summary.rewardWindows",
+        "direction": "increase",
+        "before": 1,
+        "after": 1,
+        "delta": 0,
+        "minDelta": 1,
+        "passed": false,
+        "beforeReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json",
+        "afterReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+      }
+    ],
+    "guardrails": [
+      {
+        "id": "levelArc.score10",
+        "artifact": "level-arc-conformance",
+        "path": "summary.score10",
+        "direction": "preserve",
+        "before": 8.4,
+        "after": 8.4,
+        "delta": 0,
+        "minDelta": 0,
+        "passed": true,
+        "beforeReport": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json",
+        "afterReport": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"
+      },
+      {
+        "id": "outcome.endpointWindows",
+        "artifact": "level-arc-outcome-probes",
+        "path": "summary.endpointWindows",
+        "direction": "preserve",
+        "before": 3,
+        "after": 3,
+        "delta": 0,
+        "minDelta": 0,
+        "passed": true,
+        "beforeReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json",
+        "afterReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+      },
+      {
+        "id": "outcome.collisionLossWindows",
+        "artifact": "level-arc-outcome-probes",
+        "path": "summary.collisionLossWindows",
+        "direction": "preserve",
+        "before": 2,
+        "after": 2,
+        "delta": 0,
+        "minDelta": 0,
+        "passed": true,
+        "beforeReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json",
+        "afterReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0/report.json"
+      }
+    ]
+  },
+  "evaluators": [
+    {
+      "id": "outcome-probes",
+      "command": [
+        "npm",
+        "run",
+        "harness:check:level-arc-outcome-probes"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdoutTail": [
+        "> aurora-galactica@1.3.0 harness:check:level-arc-outcome-probes",
+        "> node tools/harness/check-level-arc-outcome-probes.js",
+        "{",
+        "  \"ok\": true,",
+        "  \"outDir\": \"/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d8240f0\",",
+        "  \"score10\": 5.3,",
+        "  \"endpointWindows\": 3,",
+        "  \"collisionLossWindows\": 2,",
+        "  \"rewardWindows\": 1,",
+        "  \"totalSpecialAttackBonus\": 1600",
+        "}"
+      ],
+      "stderrTail": [
+        "{",
+        "  \"ok\": true,",
+        "  \"ledger\": \"reference-artifacts/analyses/conformance-economics/run-ledger.jsonl\",",
+        "  \"latestRun\": \"reference-artifacts/analyses/conformance-economics/latest-run.json\",",
+        "  \"wallSeconds\": 7.189,",
+        "  \"cpuSeconds\": 12.12,",
+        "  \"artifactBytesDelta\": 475759",
+        "}"
+      ]
+    },
+    {
+      "id": "opportunity-windows",
+      "command": [
+        "npm",
+        "run",
+        "harness:analyze:level-arc-opportunity-windows"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdoutTail": [
+        "> aurora-galactica@1.3.0 harness:analyze:level-arc-opportunity-windows",
+        "> node tools/harness/analyze-level-arc-opportunity-windows.js",
+        "{",
+        "  \"ok\": true,",
+        "  \"outDir\": \"/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0\",",
+        "  \"score10\": 4.5,",
+        "  \"highestPriorityOpportunity\": \"late-run-cleanup-or-failure-late-reward-thinness\"",
+        "}"
+      ],
+      "stderrTail": [
+        "{",
+        "  \"ok\": true,",
+        "  \"ledger\": \"reference-artifacts/analyses/conformance-economics/run-ledger.jsonl\",",
+        "  \"latestRun\": \"reference-artifacts/analyses/conformance-economics/latest-run.json\",",
+        "  \"wallSeconds\": 0.16,",
+        "  \"cpuSeconds\": 0.14,",
+        "  \"artifactBytesDelta\": -3",
+        "}"
+      ]
+    },
+    {
+      "id": "level-arc",
+      "command": [
+        "npm",
+        "run",
+        "harness:analyze:level-arc-conformance"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdoutTail": [
+        "> aurora-galactica@1.3.0 harness:analyze:level-arc-conformance",
+        "> node tools/harness/analyze-level-arc-conformance.js",
+        "{",
+        "  \"ok\": true,",
+        "  \"outDir\": \"/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0\",",
+        "  \"score10\": 8.4",
+        "}"
+      ],
+      "stderrTail": [
+        "{",
+        "  \"ok\": true,",
+        "  \"ledger\": \"reference-artifacts/analyses/conformance-economics/run-ledger.jsonl\",",
+        "  \"latestRun\": \"reference-artifacts/analyses/conformance-economics/latest-run.json\",",
+        "  \"wallSeconds\": 0.147,",
+        "  \"cpuSeconds\": 0.13,",
+        "  \"artifactBytesDelta\": 0",
+        "}"
+      ]
+    }
+  ],
+  "decision": {
+    "status": "candidate-rejected",
+    "keep": false,
+    "reason": "One or more target metrics did not improve enough to justify keeping the candidate."
+  },
+  "nextStep": "Use this metric read to make a narrow Stage 12 natural reward candidate, then rerun this same frozen loop."
+}

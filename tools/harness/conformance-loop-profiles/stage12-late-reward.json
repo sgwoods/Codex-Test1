@@ -64,6 +64,13 @@
   ],
   "evaluators": [
     {
+      "id": "evidence-windows",
+      "command": ["npm", "run", "harness:cycle:aurora-evidence-windows"],
+      "axes": ["level-arc", "conformance-loop", "conformance-economics"],
+      "resources": ["cpu", "browser"],
+      "notes": "Candidate loop Stage 12 level-expansion evidence refresh"
+    },
+    {
       "id": "outcome-probes",
       "command": ["npm", "run", "harness:check:level-arc-outcome-probes"],
       "axes": ["level-arc", "conformance-loop", "conformance-economics"],

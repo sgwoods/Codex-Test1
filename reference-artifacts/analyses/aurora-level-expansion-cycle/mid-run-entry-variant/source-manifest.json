@@ -58,17 +58,17 @@
       "backgroundMode": "aurora-borealis"
     },
     "audioCue": {
-      "cue": "enemyShot",
+      "cue": "attackCharge",
       "atmosphereId": "aurora-borealis",
       "audioTheme": "galaga-reference-assets",
       "phase": "stage",
       "variant": 0,
-      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
       "referenceClipStart": 0,
       "referenceClipDuration": 0,
       "stage": 8,
       "challenge": false,
-      "at": 1.385
+      "at": 1.188
     },
     "renderDebug": {
       "backgroundMode": "aurora-borealis",
@@ -109,7 +109,7 @@
     "final_challenge": false
   },
   "event_count": 78,
-  "promoted_event_count": 18,
+  "promoted_event_count": 17,
   "artifacts": {
     "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/contact-sheet-1s.png",
     "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/still-start.png",
