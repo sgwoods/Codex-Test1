@@ -30,6 +30,7 @@ const gamePreviewMission=document.getElementById('gamePreviewMission');
 const gamePreviewScoreTable=document.getElementById('gamePreviewScoreTable');
 const gamePreviewMilestones=document.getElementById('gamePreviewMilestones');
 const openViewerBtn=document.getElementById('openViewerBtn');
+const openConformanceDashboardBtn=document.getElementById('openConformanceDashboardBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
 const controlsDockBtn=document.getElementById('controlsDockBtn');
@@ -50,6 +51,10 @@ const settingsVersion=document.getElementById('settingsVersion');
 const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
+const conformanceToolsPanel=document.getElementById('conformanceToolsPanel');
+const conformanceRollupScore=document.getElementById('conformanceRollupScore');
+const conformanceRollupBody=document.getElementById('conformanceRollupBody');
+const conformanceDashboardHint=document.getElementById('conformanceDashboardHint');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const platformMessagePanel=document.getElementById('platformMessagePanel');
@@ -62,6 +67,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='{{BUILD_CHANNEL}}';
 const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('{{CONFORMANCE_DASHBOARD_SUMMARY_ENCODED}}'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1519,8 +1525,49 @@ function syncSettingsUi(){
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
+ syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
+function isLocalDashboardHost(){
+ if(window.__platinumForceExternalConformanceDashboard)return false;
+ const host=String(location.hostname||'').toLowerCase();
+ return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
+}
+function conformanceDashboardUrl(){
+ return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+}
+function syncConformanceDashboardUi(){
+ const summary=CONFORMANCE_DASHBOARD_SUMMARY&&typeof CONFORMANCE_DASHBOARD_SUMMARY==='object'
+  ? CONFORMANCE_DASHBOARD_SUMMARY
+  : {};
+ const local=isLocalDashboardHost();
+ const available=!!summary.available;
+ if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',!local);
+ if(openConformanceDashboardBtn){
+  openConformanceDashboardBtn.disabled=!local;
+  openConformanceDashboardBtn.title=local
+   ? 'Open the local conformance dashboard'
+   : 'Localhost-only for now. Future work will externalize this behind Root access.';
+ }
+ if(conformanceRollupScore)conformanceRollupScore.textContent=available ? (summary.overallCurrent||'--') : '--';
+ if(conformanceRollupBody){
+  if(!local){
+   conformanceRollupBody.textContent='Local-only dashboard hidden on external builds.';
+  }else if(available){
+   const generated=summary.generatedAt?summary.generatedAt.replace('T',' ').replace(/\.\d+Z$/,'Z'):'unknown';
+   const weak=summary.weakestMetric?`${summary.weakestMetric} ${summary.weakestCurrent||''}`.trim():'weakest axis pending';
+   conformanceRollupBody.textContent=`Weakest: ${weak}. Audio ${summary.audioCurrent||'--'} · level arc ${summary.levelArcCurrent||'--'} · visual ${summary.visualCurrent||'--'}. Generated ${generated}.`;
+  }else{
+   conformanceRollupBody.textContent='No generated conformance dashboard summary found for this build.';
+  }
+ }
+ if(conformanceDashboardHint){
+  conformanceDashboardHint.textContent=local
+   ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
+   : 'Future feature: expose this behind Root login password when external developer access is ready.';
+ }
+}
+window.__platinumSyncConformanceDashboardUi=syncConformanceDashboardUi;
 function syncAudioDebugUi(){
  if(!settingsAudioDebugBody)return;
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
@@ -1716,6 +1763,17 @@ function openProjectGuide(){
   try{win.focus();}catch{}
   showToast('Opened project guide');
  }else showToast('Allow popups to open the project guide');
+}
+function openConformanceDashboard(){
+ if(!isLocalDashboardHost()){
+  showToast('Conformance dashboard is localhost-only for now');
+  return;
+ }
+ const win=window.open(conformanceDashboardUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened conformance dashboard');
+ }else showToast('Allow popups to open the conformance dashboard');
 }
 function openPlayersGuideWindow(){
  const win=window.open(playersGuideUrl(), '_blank', 'noopener');
@@ -1969,6 +2027,7 @@ function toggleFullscreen(){if(!document.fullscreenElement)document.documentElem
 settingsBtn.addEventListener('click',()=>{if(settingsOpen)closeSettings();else openSettings();});
 if(settingsPanelClose)settingsPanelClose.addEventListener('click',closeSettings);
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
+if(openConformanceDashboardBtn)openConformanceDashboardBtn.addEventListener('click',()=>{openConformanceDashboard();closeSettings();});
 if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
 if(platformSplashBtn)platformSplashBtn.addEventListener('click',()=>{if(platformSplashOpen)closePlatformSplash();else openPlatformSplash();});
 if(platformSplashClose)platformSplashClose.addEventListener('click',()=>closePlatformSplash());

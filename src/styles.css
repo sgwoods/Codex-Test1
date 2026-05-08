@@ -151,6 +151,8 @@ mask:
 #settingsActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
 #settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
 #settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
+#settingsActions button:disabled{cursor:not-allowed;color:rgba(220,236,255,.42);border-color:rgba(150,170,190,.18);background:rgba(26,30,40,.56);box-shadow:none}
+#settingsActions button:disabled:hover{border-color:rgba(150,170,190,.18);background:rgba(26,30,40,.56)}
 #openViewerBtn{border-color:rgba(255,214,104,.4);background:rgba(46,34,8,.82);color:#fff0c5}
 #openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
@@ -158,6 +160,15 @@ mask:
 #settingsSections{display:flex;flex-direction:column;gap:12px;min-height:0}
 .settingsSection{display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid rgba(136,245,255,.14)}
 .settingsSection h4{margin:0;font-size:13px;letter-spacing:.05em}
+#conformanceToolsPanel{gap:8px}
+#conformanceToolsPanel.disabled{opacity:.55}
+#conformanceRollupCard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center;padding:10px 12px;border:1px solid rgba(145,255,179,.18);background:linear-gradient(180deg,rgba(7,20,13,.52),rgba(6,14,19,.72))}
+#conformanceRollupLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.62);letter-spacing:.08em;text-transform:uppercase}
+#conformanceRollupScore{font:700 22px/1 "Courier New",Consolas,monospace;color:#d8ffe4}
+#conformanceRollupBody{grid-column:1/-1;font-size:11px;line-height:1.35;color:#bfe9cc;overflow-wrap:anywhere}
+#conformanceDashboardHint{font-size:11px;line-height:1.25;color:#d7c38b}
+#conformanceToolsPanel.disabled #conformanceRollupCard{border-color:rgba(170,190,210,.14);background:rgba(26,30,40,.42)}
+#conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}

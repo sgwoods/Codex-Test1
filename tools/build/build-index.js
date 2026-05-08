@@ -41,6 +41,7 @@ const SHARED_REPLAY_STORE = path.join(ROOT, 'shared', 'replay-store.js');
 const SUPABASE_UMD = path.join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
+const CONFORMANCE_DASHBOARD_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json');
 const RELEASE_MANIFEST = path.join(ROOT, 'release-manifest.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
@@ -177,6 +178,46 @@ function loadReleaseDashboard(){
       strapline: 'Add release-dashboard.json to restore the public roadmap view.',
       timeline: [],
       legend: []
+    };
+  }
+}
+
+function loadConformanceDashboardSummary(){
+  try{
+    const raw = JSON.parse(read(CONFORMANCE_DASHBOARD_LATEST));
+    const gates = Array.isArray(raw.releaseGate) ? raw.releaseGate : [];
+    const rows = Array.isArray(raw.priorityRows) ? raw.priorityRows : [];
+    const gate = (name) => gates.find(item => String(item.Gate || '').toLowerCase() === name.toLowerCase()) || null;
+    const row = (pattern) => rows.find(item => pattern.test(String(item.metric || ''))) || null;
+    const weakest = rows
+      .filter(item => Number.isFinite(+item.score10))
+      .sort((a, b) => (+a.score10) - (+b.score10))[0] || null;
+    return {
+      available: true,
+      generatedAt: raw.generatedAt || '',
+      commit: raw.commit || '',
+      branch: raw.branch || '',
+      overallCurrent: gate('Overall quality')?.Current || '',
+      audioCurrent: row(/audio identity/i)?.current || '',
+      levelArcCurrent: row(/level arc/i)?.current || '',
+      visualCurrent: row(/visual look/i)?.current || '',
+      weakestMetric: weakest?.metric || '',
+      weakestCurrent: weakest?.current || '',
+      dashboardUrl: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html'
+    };
+  }catch{
+    return {
+      available: false,
+      generatedAt: '',
+      commit: '',
+      branch: '',
+      overallCurrent: '',
+      audioCurrent: '',
+      levelArcCurrent: '',
+      visualCurrent: '',
+      weakestMetric: '',
+      weakestCurrent: '',
+      dashboardUrl: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html'
     };
   }
 }
@@ -2406,6 +2447,7 @@ function build(options = {}){
   }).format(new Date()).replace(',', '');
   const releaseNotes = loadReleaseNotes();
   const releaseDashboard = loadReleaseDashboard();
+  const conformanceDashboardSummary = loadConformanceDashboardSummary();
   const releaseManifest = loadReleaseManifest(buildVersion);
   const projectGuide = loadProjectGuide();
   const applicationGuide = loadApplicationGuide();
@@ -2444,6 +2486,7 @@ function build(options = {}){
     BUILD_PRODUCT_NAME_JSON: JSON.stringify(releaseManifest.product),
     BUILD_PLATFORM_INFO_JSON: JSON.stringify(releaseManifest.platform),
     BUILD_APPLICATIONS_INFO_JSON: JSON.stringify(releaseManifest.applications),
+    CONFORMANCE_DASHBOARD_SUMMARY_ENCODED: encodeURIComponent(JSON.stringify(conformanceDashboardSummary)),
     SUPABASE_URL: supabaseUrl,
     SUPABASE_ANON_KEY: supabaseAnonKey,
     WEB3FORMS_ACCESS_KEY: web3FormsAccessKey,

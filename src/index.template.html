@@ -71,6 +71,7 @@
   </div>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
+    <button id="openConformanceDashboardBtn" type="button" aria-label="Open conformance dashboard">Open Conformance Dashboard</button>
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
@@ -78,6 +79,15 @@
     <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
   <div id="settingsSections">
+    <div id="conformanceToolsPanel" class="settingsSection">
+      <h4>Conformance Rollup</h4>
+      <div id="conformanceRollupCard">
+        <span id="conformanceRollupLabel">Overall conformance</span>
+        <span id="conformanceRollupScore">--</span>
+        <span id="conformanceRollupBody">Dashboard summary pending.</span>
+      </div>
+      <div id="conformanceDashboardHint">Local dashboard opens from localhost builds only.</div>
+    </div>
     <div id="graphicsPanel" class="settingsSection">
       <h4>Graphics Options</h4>
       <div class="settingsFieldGrid">
