@@ -11,7 +11,9 @@ function fail(message, details = {}){
 
 function checkGeneratedDashboardPage(){
   const htmlPath = path.join(ROOT, 'local-dev', 'conformance-dashboard.html');
+  const dataPath = path.join(ROOT, 'local-dev', 'conformance-dashboard-data.json');
   const html = fs.readFileSync(htmlPath, 'utf8');
+  const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   const expected = [
     'id="refreshState" type="button"',
     'id="gameSelector"',
@@ -42,6 +44,15 @@ function checkGeneratedDashboardPage(){
   ];
   const missing = expected.filter(item => !html.includes(item));
   if(missing.length) fail('generated conformance dashboard page is missing live controls', { htmlPath, missing });
+  const games = Array.isArray(data.games) ? data.games : [];
+  const gameKeys = games.map(game => game.gameKey);
+  if(!gameKeys.includes('aurora-galactica') || !gameKeys.includes('galaxy-guardians-preview')){
+    fail('generated conformance dashboard data is missing selectable game profiles', { dataPath, gameKeys });
+  }
+  const guardians = games.find(game => game.gameKey === 'galaxy-guardians-preview') || {};
+  if(!Array.isArray(guardians.priorityRows) || !guardians.priorityRows.length){
+    fail('Galaxy Guardians profile is missing conformance status rows', { dataPath, guardians });
+  }
 }
 
 (async () => {

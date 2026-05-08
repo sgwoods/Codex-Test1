@@ -1,10 +1,1050 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-08T14:26:50.283Z",
-  "commit": "18fc482",
+  "generatedAt": "2026-05-08T14:53:13.445Z",
+  "commit": "0854fbc",
   "branch": "codex/macbook-pro-level-arc-long-cycle",
-  "dirty": true,
+  "dirty": false,
+  "activeGameKey": "aurora-galactica",
+  "games": [
+    {
+      "gameKey": "aurora-galactica",
+      "gameName": "Aurora Galactica",
+      "gameStatus": "Active conformance investment",
+      "currentInvestment": "Current focus: raise Aurora gameplay/audio/level-arc/visual conformance toward the next major release gate.",
+      "releaseRead": "Aurora is the shipped first Platinum game and the current subject of long-cycle conformance scoring.",
+      "releaseGate": [
+        {
+          "Gate": "Overall quality",
+          "Current": "9.1/10",
+          "Target": ">=9.3",
+          "Notes": "Full score refresh after all major cycles"
+        },
+        {
+          "Gate": "Audio identity",
+          "Current": "7.7/10",
+          "Target": ">=7.5",
+          "Notes": "Primary user-experience gap"
+        },
+        {
+          "Gate": "Level arc",
+          "Current": "8.4/10",
+          "Target": ">=8.8",
+          "Notes": "Long-play gameplay-quality gate"
+        },
+        {
+          "Gate": "Alien entry / formations",
+          "Current": "9/10 composite",
+          "Target": ">=9.2 with dedicated scorer",
+          "Notes": "New explicit gate"
+        },
+        {
+          "Gate": "Challenge variation",
+          "Current": "9/10 composite",
+          "Target": ">=9.2 with dedicated scorer",
+          "Notes": "New explicit gate"
+        },
+        {
+          "Gate": "Visual look and feel",
+          "Current": "8.6/10",
+          "Target": ">=8.4",
+          "Notes": "New explicit gate; first-pass scorer measured"
+        },
+        {
+          "Gate": "Arcade frame and popup surfaces",
+          "Current": "9.2/10",
+          "Target": ">=9.4",
+          "Notes": "Split from generic UI shell before final gate"
+        },
+        {
+          "Gate": "No-regression guardrails",
+          "Current": "movement/combat/capture >=10; challenge timing >=9.8",
+          "Target": "Maintain",
+          "Notes": "Hard blockers"
+        }
+      ],
+      "priorityRows": [
+        {
+          "rank": 1,
+          "metric": "Audio identity, event feedback, and cue alignment",
+          "explanation": {
+            "calculation": "Release audio score blends cue identity, reference spectral similarity, reference-window precision, overlap, and event alignment from audio cue comparison artifacts.",
+            "grounding": "Best-case grounding comes from labeled Galaga-family reference audio clips, segmented Aurora runtime captures, cue/event logs, waveform and spectral measurements, and per-cue gap analysis.",
+            "meaning": "Players hear whether shots, hits, explosions, boss damage, capture, rescue, and challenge results communicate the right event at the right moment. Designers use it to protect feedback clarity and arcade identity."
+          },
+          "scoreContext": {
+            "confidence": "medium-high",
+            "resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
+            "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+          },
+          "score10": 7.7,
+          "current": "7.7/10",
+          "target": "7.5-8.0",
+          "status": "Measured release category; weakest axis",
+          "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
+          "effort": "High; 3-6 hrs local/model-assisted analysis",
+          "next": "Split or further label shared shot/impact/explosion reference mappings, especially playerShot/enemyShot/bossHit and enemyHit/enemyBoom, then rerun audio comparison and semantic event-gap analysis.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "high",
+            "expectedResources": "cpu, model-api, openai-api",
+            "trackedAxes": [
+              "audio"
+            ],
+            "trackedSpend": "21 runs; 16.6 min wall; 28.6 min CPU",
+            "trackedRuns": 21,
+            "trackedWallSeconds": 994.897,
+            "trackedCpuSeconds": 1716.53,
+            "expectedLift10": 0.7,
+            "expectedOverallLift10": 0.064,
+            "investmentScore": 2.99,
+            "gapToTarget": "at target",
+            "summary": "high; cpu, model-api, openai-api",
+            "valueCostRead": "Expected lift 0.7/10 on metric, 0.064/10 overall; investment score 2.99."
+          }
+        },
+        {
+          "rank": 2,
+          "metric": "Level arc and encounter shape",
+          "explanation": {
+            "calculation": "Level arc is read from the level-arc conformance report, combining stage distinctiveness, challenge-stage identity, later-stage complexity, pressure curve, reward/rescue layering, and learning/mastery windows.",
+            "grounding": "Best-case grounding is multi-stage reference evidence plus Aurora harness windows for stage families, challenge layers, stage signatures, pressure/loss windows, and persona progression.",
+            "meaning": "Players feel whether the game grows, teaches, surprises, and rewards mastery over time. Designers use it to detect repetition, flat difficulty, or escalation without reward."
+          },
+          "scoreContext": {
+            "confidence": "medium-high",
+            "resolution": "multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence",
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+          },
+          "score10": 8.4,
+          "current": "8.4/10",
+          "target": "8.8-9.0",
+          "status": "Measured release category",
+          "why": "Controls whether long play feels like Galaga-like escalation rather than repeated pressure.",
+          "effort": "Medium-high; 2-5 hrs",
+          "next": "Apply one narrow Stage 12 reward candidate and rerun the frozen conformance loop.",
+          "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "low",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "level-arc",
+              "conformance-loop"
+            ],
+            "trackedSpend": "55 runs; 2.6 min wall; 3.9 min CPU",
+            "trackedRuns": 55,
+            "trackedWallSeconds": 154.752,
+            "trackedCpuSeconds": 235.67,
+            "expectedLift10": 0.28,
+            "expectedOverallLift10": 0.025,
+            "investmentScore": 2.28,
+            "gapToTarget": "+0.4",
+            "summary": "low; cpu, browser",
+            "valueCostRead": "Expected lift 0.28/10 on metric, 0.025/10 overall; investment score 2.28."
+          }
+        },
+        {
+          "rank": 3,
+          "metric": "Overall visual look and feel: gameplay, start page, typography complexity",
+          "explanation": {
+            "calculation": "Current score is an estimated planning value until a dedicated visual conformance scorer lands; it is informed by UI shell checks, screenshots, contact sheets, and known visual debt.",
+            "grounding": "Best-case grounding will compare reference and Aurora contact sheets across start, attract, gameplay, score, popup, and game-over surfaces with palette, typography, density, sprite readability, and layout checks.",
+            "meaning": "Players decide at a glance whether the game feels like a polished arcade object. Designers use it to align readability, theme, typography, and visual hierarchy before subjective tuning."
+          },
+          "scoreContext": {
+            "confidence": "medium-low",
+            "resolution": "first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers",
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+          },
+          "score10": 8.62,
+          "current": "8.6/10",
+          "target": "8.4-8.8",
+          "status": "Measured visual scorer; medium-low confidence",
+          "why": "A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.",
+          "effort": "Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review",
+          "next": "Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.",
+          "evidence": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
+          "costContext": {
+            "costClass": "medium",
+            "expectedResources": "cpu, browser, gpu",
+            "trackedAxes": [
+              "visual-look"
+            ],
+            "trackedSpend": "1 runs; 0.1 min wall; 0.1 min CPU",
+            "trackedRuns": 1,
+            "trackedWallSeconds": 3.49,
+            "trackedCpuSeconds": 3.43,
+            "expectedLift10": 0.12,
+            "expectedOverallLift10": 0.011,
+            "investmentScore": 0.45,
+            "gapToTarget": "at target",
+            "summary": "medium; cpu, browser, gpu",
+            "valueCostRead": "Expected lift 0.12/10 on metric, 0.011/10 overall; investment score 0.45."
+          }
+        },
+        {
+          "rank": 4,
+          "metric": "Stage 4 pressure exact replay / pressure curve precision",
+          "explanation": {
+            "calculation": "Score is the current weakest level-arc pressure submetric, focused on whether known pressure/loss windows reproduce as exact or same-window replay events under controlled harness runs.",
+            "grounding": "Best-case grounding is source pressure/loss windows, frozen seeds, replayable input paths, collision diagnostics, and repeated current-vs-source pressure curve comparisons.",
+            "meaning": "Players should feel pressure that is learnable and fair, not random. Designers use it to tune threat density, dodge lanes, and failure recovery without creating arbitrary deaths."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "narrow pressure/loss replay windows; exact replay coverage still limited",
+            "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+          },
+          "score10": 7.5,
+          "current": "7.5/10",
+          "target": "8.2-8.6",
+          "status": "Measured level-arc weak submetric",
+          "why": "Pressure should be learnable and reproducible, not merely present in one run.",
+          "effort": "Medium-high; prior runs ~12.8 min wall / 18.5 min CPU",
+          "next": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.",
+          "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "medium",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "stage4-pressure"
+            ],
+            "trackedSpend": "28 runs; 12.8 min wall; 18.5 min CPU",
+            "trackedRuns": 28,
+            "trackedWallSeconds": 769.422,
+            "trackedCpuSeconds": 1111.38,
+            "expectedLift10": 0.35,
+            "expectedOverallLift10": 0.032,
+            "investmentScore": 1.76,
+            "gapToTarget": "+0.7",
+            "summary": "medium; cpu, browser",
+            "valueCostRead": "Expected lift 0.35/10 on metric, 0.032/10 overall; investment score 1.76."
+          }
+        },
+        {
+          "rank": 5,
+          "metric": "Alien entry to levels: formation, timing, and methods",
+          "explanation": {
+            "calculation": "Composite proxy: 45% stage-opening timing fidelity, 35% stage-opening geometry fidelity, and 20% movement-grammar expansion until alien entry is promoted to its own scorer.",
+            "grounding": "Best-case grounding will use reference and Aurora stage-entry contact sheets, rack timing traces, path-family labels, formation geometry, and early/mid/late level comparisons.",
+            "meaning": "Players read the whole level from the first entry pattern. Designers use it to make stages feel authored, recognizable, and increasingly sophisticated before combat fully starts."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "composite proxy from opening timing, geometry, and movement grammar",
+            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+          },
+          "score10": 9.005,
+          "current": "9/10",
+          "target": "9.0-9.4 with dedicated scorer",
+          "status": "Composite proxy: stage opening timing + geometry + movement grammar",
+          "why": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
+          "effort": "Medium; 1-3 hrs plus visual review",
+          "next": "Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "estimated",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "level-arc",
+              "quality-score"
+            ],
+            "trackedSpend": "37 runs; 4.6 min wall; 5.8 min CPU",
+            "trackedRuns": 37,
+            "trackedWallSeconds": 277.641,
+            "trackedCpuSeconds": 350.65999999999997,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "at target",
+            "summary": "estimated; cpu, browser",
+            "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
+          }
+        },
+        {
+          "rank": 6,
+          "metric": "Challenge-stage variation and new alien/formations introduction",
+          "explanation": {
+            "calculation": "Composite proxy: 45% challenge timing fidelity, 35% challenge-stage identity, and 20% long-run non-repetition until a dedicated challenge-variation scorer exists.",
+            "grounding": "Best-case grounding is reference challenge-stage footage, alien/path family labels, bonus opportunity windows, result feedback timing, and Aurora stage-to-stage variation traces.",
+            "meaning": "Players should experience challenge stages as learnable bonus set pieces that introduce new motion and scoring opportunities. Designers use it to prevent bonus rounds from becoming repetitive pauses."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "composite proxy from challenge timing, challenge identity, and non-repetition",
+            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+          },
+          "score10": 9.035,
+          "current": "9/10",
+          "target": "9.0-9.4 with dedicated scorer",
+          "status": "Composite proxy: challenge timing + challenge identity + non-repetition",
+          "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
+          "effort": "Medium-high; 2-4 hrs",
+          "next": "Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "estimated",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "level-arc",
+              "quality-score"
+            ],
+            "trackedSpend": "37 runs; 4.6 min wall; 5.8 min CPU",
+            "trackedRuns": 37,
+            "trackedWallSeconds": 277.641,
+            "trackedCpuSeconds": 350.65999999999997,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "at target",
+            "summary": "estimated; cpu, browser",
+            "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
+          }
+        },
+        {
+          "rank": 7,
+          "metric": "Progression and persona depth",
+          "explanation": {
+            "calculation": "Score is read from the progression/persona quality category, including persona safety checks, stage ordering, and whether different skill profiles see an appropriate ramp.",
+            "grounding": "Best-case grounding comes from controlled persona runs, stage snapshots, loss/recovery traces, and reference-informed expectations for learning, mastery, and escalation.",
+            "meaning": "Players should feel the game becoming harder for understandable reasons. Designers use it to keep novice, advanced, and expert experiences coherent across a long session."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "scorer-backed artifact with selected harness windows",
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+          },
+          "score10": 8.8,
+          "current": "8.8/10",
+          "target": "9.1+",
+          "status": "Measured release category",
+          "why": "Keeps the game learnable across skill levels and supports later-stage quality.",
+          "effort": "Low-medium; 1-2 hrs",
+          "next": "Resolve remaining ordering edge case after higher-value audio/level-arc work.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "estimated",
+            "expectedResources": "cpu",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "+0.3",
+            "summary": "estimated; cpu",
+            "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
+          }
+        },
+        {
+          "rank": 8,
+          "metric": "Stage 1 opening timing fidelity",
+          "explanation": {
+            "calculation": "Score is read from the stage-1 opening timing category, comparing measured Aurora event timing against reference opening-window timing metrics and tolerances.",
+            "grounding": "Best-case grounding is a canonical stage-1 reference window with event timestamps, Aurora controlled-clock captures, and delta reports for first entry, arrival, and first dive timing.",
+            "meaning": "Players form their first feel judgment in the opening seconds. Designers use it to lock the initial rhythm before tuning deeper complexity."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "scorer-backed artifact with selected harness windows",
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+          },
+          "score10": 8.5,
+          "current": "8.5/10",
+          "target": "8.8-9.2",
+          "status": "Measured release category",
+          "why": "First impression and direct reference feel.",
+          "effort": "Low-medium; 1-2 hrs",
+          "next": "Tune only after audio and level-arc priorities unless regressions appear.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "medium",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": 0.18,
+            "expectedOverallLift10": 0.016,
+            "investmentScore": 0.86,
+            "gapToTarget": "+0.3",
+            "summary": "medium; cpu, browser",
+            "valueCostRead": "Expected lift 0.18/10 on metric, 0.016/10 overall; investment score 0.86."
+          }
+        },
+        {
+          "rank": 9,
+          "metric": "Arcade console frame UI style",
+          "explanation": {
+            "calculation": "Current score uses the UI shell quality category as a proxy until the frame gets its own arcade-style rubric.",
+            "grounding": "Best-case grounding will score cabinet rails, bezel proportions, button density, labels, build/date treatment, chroming, responsive fit, and visual consistency across local/dev/beta/prod surfaces.",
+            "meaning": "Players experience the frame as the cabinet around every game. Designers use it to make the platform feel trustworthy, arcade-native, and not like a generic web wrapper."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "UI shell proxy; dedicated visual/modal rubric still needed",
+            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+          },
+          "score10": 9.2,
+          "current": "9.2/10",
+          "target": "9.4-9.6",
+          "status": "Measured as UI shell; needs separate arcade-frame style rubric",
+          "why": "The cabinet frame is the constant product surface around every game.",
+          "effort": "Medium; 1-3 hrs visual QA",
+          "next": "Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "medium",
+            "expectedResources": "cpu, browser, gpu",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": 0.12,
+            "expectedOverallLift10": 0.011,
+            "investmentScore": 0.45,
+            "gapToTarget": "+0.2",
+            "summary": "medium; cpu, browser, gpu",
+            "valueCostRead": "Expected lift 0.12/10 on metric, 0.011/10 overall; investment score 0.45."
+          }
+        },
+        {
+          "rank": 10,
+          "metric": "Popup/help/scoring/leaderboard surface formatting",
+          "explanation": {
+            "calculation": "Current score uses the UI shell suite as a proxy until help, score, account, feedback, leaderboard, and game-over modals get a modal-specific scorer.",
+            "grounding": "Best-case grounding will compare each modal surface for layout, typography, arcade tone, score clarity, keyboard/controller ergonomics, and no-overlap responsive behavior.",
+            "meaning": "Players rely on these screens to understand scoring, recover from a run, file feedback, and trust records. Designers use it to keep utility surfaces polished without breaking arcade immersion."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "UI shell proxy; dedicated visual/modal rubric still needed",
+            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+          },
+          "score10": 9.2,
+          "current": "9.2/10",
+          "target": "9.4-9.6",
+          "status": "Measured through UI shell suite; needs modal-specific scoring",
+          "why": "Popup surfaces carry learning, scoring trust, feedback, and player records.",
+          "effort": "Low-medium; 1-2 hrs",
+          "next": "Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "medium",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": 0.12,
+            "expectedOverallLift10": 0.011,
+            "investmentScore": 0.45,
+            "gapToTarget": "+0.2",
+            "summary": "medium; cpu, browser",
+            "valueCostRead": "Expected lift 0.12/10 on metric, 0.011/10 overall; investment score 0.45."
+          }
+        },
+        {
+          "rank": 11,
+          "metric": "Dive fairness and safety",
+          "explanation": {
+            "calculation": "Score is read from the dive-safety quality category and associated harness checks for unfair collision, lane, and persona safety regressions.",
+            "grounding": "Best-case grounding is repeated persona/seed sweeps, collision windows, near-miss traces, and pressure diagnostics after every risky movement or threat change.",
+            "meaning": "Players accept hard deaths when they feel earned. Designers use it as a guardrail so added pressure does not become unfairness."
+          },
+          "scoreContext": {
+            "confidence": "medium-high",
+            "resolution": "seed/persona safety guardrails and pressure-sensitive collision checks",
+            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+          },
+          "score10": 9.1,
+          "current": "9.1/10",
+          "target": "9.3+",
+          "status": "Measured release category",
+          "why": "Protects user trust while pressure is increased.",
+          "effort": "Guardrail; 30-90 min per risky gameplay cycle",
+          "next": "Keep as required guardrail for pressure/reward changes.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "guardrail",
+            "expectedResources": "cpu",
+            "trackedAxes": [
+              "stage4-pressure",
+              "quality-score"
+            ],
+            "trackedSpend": "31 runs; 16 min wall; 22.2 min CPU",
+            "trackedRuns": 31,
+            "trackedWallSeconds": 961.1310000000001,
+            "trackedCpuSeconds": 1331.0900000000001,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "+0.2",
+            "summary": "guardrail; cpu",
+            "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
+          }
+        },
+        {
+          "rank": 12,
+          "metric": "Player movement conformance",
+          "explanation": {
+            "calculation": "Score is read from the player-movement correspondence category, comparing movement traces and control response against the reference-derived movement target.",
+            "grounding": "Best-case grounding is reference movement traces, Aurora controlled input traces, speed/position deltas, and regression checks across viewport and persona modes.",
+            "meaning": "Players feel this as the basic trust in the ship. Designers use it as a do-not-regress foundation for every other gameplay improvement."
+          },
+          "scoreContext": {
+            "confidence": "high-current-pass",
+            "resolution": "reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution",
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+          },
+          "score10": 8.7,
+          "current": "8.7/10",
+          "target": "Maintain 10",
+          "status": "Measured release category",
+          "why": "Core control feel is already excellent.",
+          "effort": "Guardrail only",
+          "next": "Do not tune unless a new reference metric proves a gap.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "guardrail",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "+1.3",
+            "summary": "guardrail; cpu, browser",
+            "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
+          }
+        },
+        {
+          "rank": 13,
+          "metric": "Shot and hit responsiveness",
+          "explanation": {
+            "calculation": "Score is read from the combat-responsiveness category, covering shot timing, hit registration, close-shot behavior, and event feedback guardrails.",
+            "grounding": "Best-case grounding is controlled shot/hit scenarios, close-contact tests, event logs, and paired visual/audio feedback timing.",
+            "meaning": "Players need shots and impacts to feel immediate and legible. Designers use it to protect core combat feel while improving explosions and sound semantics."
+          },
+          "scoreContext": {
+            "confidence": "high-current-pass",
+            "resolution": "functional combat-response guardrails; audiovisual semantics are scored separately",
+            "scoreMeaning": "No known measured gap under the current scorer and evidence coverage. This is a guardrail pass, not proof of perfection."
+          },
+          "score10": 10,
+          "current": "10/10",
+          "target": "Maintain 10",
+          "status": "Measured release category",
+          "why": "Core combat response is already excellent.",
+          "effort": "Guardrail only",
+          "next": "Protect during explosion/audio/event feedback work.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "guardrail",
+            "expectedResources": "cpu",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "at target",
+            "summary": "guardrail; cpu",
+            "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
+          }
+        },
+        {
+          "rank": 14,
+          "metric": "Stage 1 opening geometry fidelity",
+          "explanation": {
+            "calculation": "Score is read from the stage-1 opening geometry category, comparing formation layout and opening positions against the reference geometry target.",
+            "grounding": "Best-case grounding is reference contact sheets, Aurora opening captures, formation coordinate traces, and geometry tolerance checks.",
+            "meaning": "Players read formation authenticity before they consciously notice details. Designers use it as the locked baseline for alien-entry and formation work."
+          },
+          "scoreContext": {
+            "confidence": "high-current-pass",
+            "resolution": "opening formation geometry checks; later-stage entry variation is separate",
+            "scoreMeaning": "No known measured gap under the current scorer and evidence coverage. This is a guardrail pass, not proof of perfection."
+          },
+          "score10": 10,
+          "current": "10/10",
+          "target": "Maintain 10",
+          "status": "Measured release category",
+          "why": "Formation geometry is already locked.",
+          "effort": "Guardrail only",
+          "next": "Protect during alien-entry visual work.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "guardrail",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "at target",
+            "summary": "guardrail; cpu, browser",
+            "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
+          }
+        },
+        {
+          "rank": 15,
+          "metric": "Capture and rescue rule fidelity",
+          "explanation": {
+            "calculation": "Score is read from the capture/rescue quality category, including capture, no-leak, rescue, and rule-boundary harness checks.",
+            "grounding": "Best-case grounding is reference capture/rescue behavior, controlled Aurora scenarios, event logs, state assertions, and score/reward feedback traces.",
+            "meaning": "Players see capture and rescue as a signature Galaga risk/reward mechanic. Designers use it as a hard identity guardrail while improving feedback and scoring opportunities."
+          },
+          "scoreContext": {
+            "confidence": "high-current-pass",
+            "resolution": "rule/state harness checks; feedback clarity and reward feel are separate",
+            "scoreMeaning": "No known measured gap under the current scorer and evidence coverage. This is a guardrail pass, not proof of perfection."
+          },
+          "score10": 10,
+          "current": "10/10",
+          "target": "Maintain 10",
+          "status": "Measured release category",
+          "why": "Strong Galaga identity mechanic; should not regress while feedback improves.",
+          "effort": "Guardrail only",
+          "next": "Use as release blocker for capture/rescue-adjacent audio or explosion changes.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "guardrail",
+            "expectedResources": "cpu",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "at target",
+            "summary": "guardrail; cpu",
+            "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
+          }
+        },
+        {
+          "rank": 16,
+          "metric": "Challenge-stage timing fidelity",
+          "explanation": {
+            "calculation": "Score is read from the challenge-stage timing category, comparing Aurora challenge entry, transition, result, and timing metrics against reference tolerances.",
+            "grounding": "Best-case grounding is reference challenge-stage timing windows, Aurora controlled-clock scenarios, result feedback traces, and pass/fail delta reports.",
+            "meaning": "Players need bonus stages to feel rhythmic and fair. Designers use this as the timing guardrail while adding more challenge-stage variety."
+          },
+          "scoreContext": {
+            "confidence": "high-current-pass",
+            "resolution": "challenge timing deltas within tolerance; variation and teaching value are separate",
+            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+          },
+          "score10": 9.9,
+          "current": "9.9/10",
+          "target": "Maintain 9.8+",
+          "status": "Measured release category",
+          "why": "Timing is strong; variation is the gap, not baseline timing.",
+          "effort": "Guardrail only",
+          "next": "Preserve while adding challenge variation scoring.",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+          "costContext": {
+            "costClass": "guardrail",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "quality-score"
+            ],
+            "trackedSpend": "3 runs; 3.2 min wall; 3.7 min CPU",
+            "trackedRuns": 3,
+            "trackedWallSeconds": 191.709,
+            "trackedCpuSeconds": 219.71,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "at target",
+            "summary": "guardrail; cpu, browser",
+            "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
+          }
+        }
+      ],
+      "economicsSummary": {
+        "latestOverallScore10": 9.1,
+        "latestLevelArcScore10": 8.4,
+        "metricPointCount": 537,
+        "deltaCount": 73,
+        "measuredRuns": 87,
+        "wallSeconds": 2045.248,
+        "cpuSeconds": 3181.81,
+        "artifactBytes": 197713853,
+        "charts": [
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-577ed6f/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-577ed6f/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-08-577ed6f/compute-minutes-by-resource.svg"
+        ]
+      },
+      "ingestionSummary": {
+        "sourceFamilyCount": 8,
+        "highConfidenceCount": 3,
+        "mixedOrLowConfidenceCount": 2,
+        "scoredOrPromotedCount": 6,
+        "nextBestUpgrade": "Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.",
+        "framing": "Ingestion turns reference media and Aurora runtime captures into repeatable evidence: clips, contact sheets, traces, event logs, labels, scores, confidence, and next missing annotations."
+      },
+      "ingestionRows": [
+        {
+          "rank": 1,
+          "source": "Galaga-family reference audio clips",
+          "axis": "audio identity / event feedback",
+          "artifactType": "reference m4a cue clips",
+          "coverage": "50 clips",
+          "annotationStatus": "clipped, mapped, partially scored",
+          "confidence": "medium-high",
+          "linkedMetric": "Audio identity, event feedback, and cue alignment",
+          "anchor": "src/assets/reference-audio",
+          "next": "Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics."
+        },
+        {
+          "rank": 2,
+          "source": "Aurora audio cue comparison and event-gap reports",
+          "axis": "audio cue scoring",
+          "artifactType": "waveform/spectral/alignment/semantic reports",
+          "coverage": "21 compared cues; semantic 9.43/10; 7 attention rows",
+          "annotationStatus": "semantic-scored",
+          "confidence": "medium-high",
+          "linkedMetric": "Audio identity, event feedback, and cue alignment",
+          "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-577ed6f-dirty/report.json",
+          "next": "Split or further label shared shot/impact/explosion reference mappings so playerShot, enemyShot, bossHit, enemyHit, and enemyBoom remain distinct."
+        },
+        {
+          "rank": 3,
+          "source": "Level arc and encounter-shape evidence",
+          "axis": "level arc / challenge / reward",
+          "artifactType": "stage signatures, pressure windows, persona reports",
+          "coverage": "6/6 stage families; 6/6 evidence windows",
+          "annotationStatus": "scored",
+          "confidence": "medium-high",
+          "linkedMetric": "Level arc and encounter shape",
+          "anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-577ed6f/report.json",
+          "next": "Add more long-play reference windows and expert-route scoring for challenge/reward opportunities."
+        },
+        {
+          "rank": 4,
+          "source": "Stage 4 pressure and loss-window diagnostics",
+          "axis": "pressure / fairness",
+          "artifactType": "loss windows, replay geometry, collision traces",
+          "coverage": "3 promoted windows",
+          "annotationStatus": "mined, replay-diagnostic",
+          "confidence": "medium",
+          "linkedMetric": "Stage 4 pressure exact replay / pressure curve precision",
+          "anchor": "reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-4f2fafe/report.json",
+          "next": "Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning."
+        },
+        {
+          "rank": 5,
+          "source": "Aurora visual look screenshots",
+          "axis": "visual look / UI readability",
+          "artifactType": "browser screenshots plus DOM/canvas metrics",
+          "coverage": "4 surfaces",
+          "annotationStatus": "first-pass scored",
+          "confidence": "medium-low",
+          "linkedMetric": "Overall visual look and feel",
+          "anchor": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
+          "next": "Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique."
+        },
+        {
+          "rank": 6,
+          "source": "Aurora evidence-cycle windows",
+          "axis": "general ingestion framework",
+          "artifactType": "manifests, contact sheets, traces, event logs, audio timelines",
+          "coverage": "4 planned windows",
+          "annotationStatus": "seed-plan-only",
+          "confidence": "medium",
+          "linkedMetric": "Level arc / challenge variation / visual look",
+          "anchor": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json",
+          "next": "Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest."
+        },
+        {
+          "rank": 7,
+          "source": "Reference manifests and event logs inventory",
+          "axis": "source provenance / annotation coverage",
+          "artifactType": "source-manifest.json and reference-events.json",
+          "coverage": "10 manifests; 6 event logs",
+          "annotationStatus": "mixed",
+          "confidence": "mixed",
+          "linkedMetric": "All conformance metrics",
+          "anchor": "reference-artifacts/analyses",
+          "next": "Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest."
+        },
+        {
+          "rank": 8,
+          "source": "Reference contact sheets and frame evidence",
+          "axis": "visual / motion / entry formation",
+          "artifactType": "contact sheets and still frames",
+          "coverage": "27 contact/frame evidence files",
+          "annotationStatus": "extracted, partially labeled",
+          "confidence": "medium",
+          "linkedMetric": "Visual look, alien entry, challenge variation",
+          "anchor": "reference-artifacts/analyses",
+          "next": "Attach contact-sheet families to metric rows and add image-level comparison scores."
+        }
+      ],
+      "scoreSemantics": {
+        "headline": "An x/10 score is a measured rollup at the current scorer resolution, not a claim of arcade-perfect behavior.",
+        "tenOutOfTen": "10/10 means no known measured gap under the current scorer and evidence coverage. It remains a guardrail pass until broader reference, expert-play, and edge-case evidence says otherwise.",
+        "confidence": "Confidence estimates how much trust to place in the score as a release signal.",
+        "resolution": "Resolution describes how fine-grained the scorer currently is and which blind spots may remain."
+      },
+      "sourceReports": {
+        "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
+        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-577ed6f/report.json",
+        "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-08-577ed6f/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-08-577ed6f/report.json",
+        "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
+        "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
+      },
+      "newFirstClassAxes": [
+        "Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.",
+        "Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.",
+        "Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.",
+        "Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.",
+        "Popup/help/scoring surfaces: help, scoring, leaderboard, account, feedback, and game-over result formatting as their own modal-quality family."
+      ]
+    },
+    {
+      "gameKey": "galaxy-guardians-preview",
+      "gameName": "Galaxy Guardians",
+      "gameStatus": "Preview / ingestion",
+      "currentInvestment": "Paused while Aurora remains the active conformance investment; ready for measured preview review when we switch back.",
+      "releaseRead": "Useful playable-preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass.",
+      "scoreSemantics": {
+        "headline": "Galaxy Guardians scores are preview/ingestion scores, not public-release conformance claims.",
+        "tenOutOfTen": "A high preview score would mean the current preview contracts are satisfied, not that a full Galaxian-style game is complete.",
+        "confidence": "Confidence is tied to source manifests, runtime gates, audio lab artifacts, and live play review.",
+        "resolution": "Current resolution is preview-slice level; full-game progression, scoring, and release readiness remain separate gaps."
+      },
+      "releaseGate": [
+        {
+          "Gate": "Preview reference conformance",
+          "Current": "7.7/10",
+          "Target": ">=7.5 for compelling preview",
+          "Notes": "Useful playable-preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
+        },
+        {
+          "Gate": "Playtest-weighted conformance",
+          "Current": "6.9/10",
+          "Target": ">=7.0 for preview confidence",
+          "Notes": "Closer, but still just below the compelling-preview bar. The runtime now has measured stage-rank pressure, component-derived sprites, labeled cue-window influenced audio, and a reusable Platinum audio conformance lab that compares runtime cue synthesis to promoted reference windows. Audio and motion feel still need live browser/playback review before a beta-facing claim."
+        },
+        {
+          "Gate": "Public release readiness",
+          "Current": "3.9/10",
+          "Target": "defer",
+          "Notes": "Preview game remains intentionally non-production."
+        },
+        {
+          "Gate": "Audio conformance lab",
+          "Current": "8.3/10",
+          "Target": ">=7.0 preview target",
+          "Notes": "This lab is game-configured and can be registered for Aurora or future Platinum game packs."
+        }
+      ],
+      "priorityRows": [
+        {
+          "rank": 1,
+          "metric": "Preview reference conformance",
+          "explanation": {
+            "calculation": "Score is read from the latest generated conformance artifact for this metric or from the dashboard composite proxy when the metric has not yet been promoted to a dedicated scorer.",
+            "grounding": "Best-case grounding is a canonical reference window or scorer-backed harness report with provenance, repeatable scenarios, and current Aurora comparison artifacts.",
+            "meaning": "For a player or designer, this metric says whether this part of the experience feels intentional, readable, fair, and close to the Galaga-like target rather than merely functional."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "scorer-backed artifact with selected harness windows",
+            "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+          },
+          "score10": 7.7,
+          "current": "7.7/10",
+          "target": ">=7.5 compelling preview",
+          "status": "Measured preview artifact; not public release art",
+          "why": "Keeps the second game grounded in Galaxian-style evidence instead of Aurora inheritance.",
+          "effort": "Medium; 2-4 hrs browser/playback review plus focused scorer promotion",
+          "next": "Human-review cue windows and browser play feel, then rerun reference conformance before widening public claims.",
+          "evidence": "reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json"
+        },
+        {
+          "rank": 2,
+          "metric": "Playable-preview conformance and feel",
+          "explanation": {
+            "calculation": "Score is read from the latest generated conformance artifact for this metric or from the dashboard composite proxy when the metric has not yet been promoted to a dedicated scorer.",
+            "grounding": "Best-case grounding is a canonical reference window or scorer-backed harness report with provenance, repeatable scenarios, and current Aurora comparison artifacts.",
+            "meaning": "For a player or designer, this metric says whether this part of the experience feels intentional, readable, fair, and close to the Galaga-like target rather than merely functional."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "scorer-backed artifact with selected harness windows",
+            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
+          },
+          "score10": 6.9,
+          "current": "6.9/10",
+          "target": ">=7.0 preview confidence",
+          "status": "Playtest-weighted preview score",
+          "why": "A preview can be technically present yet still not compelling enough to represent the game family.",
+          "effort": "Medium-high; 3-5 hrs with local browser/video review",
+          "next": "Run a motion-feel pass against formation entry, dive pacing, player shots, and loss feedback.",
+          "evidence": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json"
+        },
+        {
+          "rank": 3,
+          "metric": "Audio lab cue identity",
+          "explanation": {
+            "calculation": "Score is read from the latest generated conformance artifact for this metric or from the dashboard composite proxy when the metric has not yet been promoted to a dedicated scorer.",
+            "grounding": "Best-case grounding is a canonical reference window or scorer-backed harness report with provenance, repeatable scenarios, and current Aurora comparison artifacts.",
+            "meaning": "For a player or designer, this metric says whether this part of the experience feels intentional, readable, fair, and close to the Galaga-like target rather than merely functional."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "scorer-backed artifact with selected harness windows",
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+          },
+          "score10": 8.3,
+          "current": "8.3/10",
+          "target": ">=7.0 preview target",
+          "status": "Reusable Platinum audio conformance lab",
+          "why": "This is the first evidence that ingestion-derived cue targets can score a non-Aurora game.",
+          "effort": "Low-medium; 1-2 hrs listening review plus cue-window refinements",
+          "next": "Review weakest cue and promote accepted cue windows as reusable per-game audio targets.",
+          "evidence": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json"
+        },
+        {
+          "rank": 4,
+          "metric": "Public release readiness",
+          "explanation": {
+            "calculation": "Score is read from the latest generated conformance artifact for this metric or from the dashboard composite proxy when the metric has not yet been promoted to a dedicated scorer.",
+            "grounding": "Best-case grounding is a canonical reference window or scorer-backed harness report with provenance, repeatable scenarios, and current Aurora comparison artifacts.",
+            "meaning": "For a player or designer, this metric says whether this part of the experience feels intentional, readable, fair, and close to the Galaga-like target rather than merely functional."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "scorer-backed artifact with selected harness windows",
+            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
+          },
+          "score10": 3.9,
+          "current": "3.9/10",
+          "target": "deferred until full game path exists",
+          "status": "Intentionally low preview/public boundary score",
+          "why": "Protects Platinum from presenting a preview as a shipped second game before rules, stages, scoring, and polish are ready.",
+          "effort": "High; multi-cycle game construction after preview acceptance",
+          "next": "Keep public playable claims disabled until ingestion, runtime, scoring, and harness coverage support a real release path.",
+          "evidence": "reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json"
+        }
+      ],
+      "ingestionSummary": {
+        "sourceFamilyCount": 4,
+        "highConfidenceCount": 1,
+        "mixedOrLowConfidenceCount": 0,
+        "scoredOrPromotedCount": 2,
+        "nextBestUpgrade": "Promote the strongest contracts into a reusable new-game ingestion manifest.",
+        "framing": "Ingestion turns reference media and Aurora runtime captures into repeatable evidence: clips, contact sheets, traces, event logs, labels, scores, confidence, and next missing annotations."
+      },
+      "ingestionRows": [
+        {
+          "rank": 1,
+          "source": "Galaxy Guardians identity artifacts",
+          "axis": "reference conformance / runtime identity",
+          "artifactType": "game-owned preview contracts",
+          "coverage": "23 JSON artifacts",
+          "annotationStatus": "preview-scored",
+          "confidence": "medium",
+          "linkedMetric": "Preview reference conformance",
+          "anchor": "reference-artifacts/analyses/galaxy-guardians-identity",
+          "next": "Promote the strongest contracts into a reusable new-game ingestion manifest."
+        },
+        {
+          "rank": 2,
+          "source": "Galaxy Guardians audio conformance lab",
+          "axis": "audio cue identity",
+          "artifactType": "waveform/spectrogram cue comparisons",
+          "coverage": "8 cue targets",
+          "annotationStatus": "scored",
+          "confidence": "medium-high",
+          "linkedMetric": "Audio lab cue identity",
+          "anchor": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json",
+          "next": "Use the lab as the template for game-selectable audio scoring across future packs."
+        },
+        {
+          "rank": 3,
+          "source": "Candidate 0.1 runtime gate",
+          "axis": "runtime events / surfaces",
+          "artifactType": "required events, surfaces, cues, forbidden Aurora capabilities",
+          "coverage": "14 required runtime events",
+          "annotationStatus": "gate-defined",
+          "confidence": "medium",
+          "linkedMetric": "Playable-preview conformance and feel",
+          "anchor": "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
+          "next": "Generate dashboard maturity submetrics directly from required events and implemented evidence."
+        },
+        {
+          "rank": 4,
+          "source": "Visual readability contract",
+          "axis": "sprite / formation readability",
+          "artifactType": "runtime readability and sprite distinction rules",
+          "coverage": "4 visual IDs",
+          "annotationStatus": "dev-preview-visual-readability-contract-not-public-release-art",
+          "confidence": "medium",
+          "linkedMetric": "Preview reference conformance",
+          "anchor": "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json",
+          "next": "Tie sprite-component extraction and visual readability into a scored dashboard submetric."
+        }
+      ],
+      "economicsSummary": {
+        "measuredRuns": 0,
+        "wallSeconds": 0,
+        "cpuSeconds": 0,
+        "metricPointCount": 0,
+        "deltaCount": 0,
+        "charts": []
+      },
+      "sourceReports": {
+        "referenceConformance": "reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json",
+        "playtestReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+        "audioLab": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json",
+        "candidateGate": "reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json",
+        "visualReadability": "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json"
+      },
+      "newFirstClassAxes": [
+        "Preview reference conformance: reference maturity, implementation gate coverage, and public-release boundary.",
+        "Audio cue identity: reusable game-configured cue scoring from isolated reference windows.",
+        "Runtime event and surface gate: required events, score table, attract text, and forbidden Aurora capabilities.",
+        "Visual readability: sprite distinction, formation visibility, and hit feedback at preview scale."
+      ]
+    }
+  ],
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-08-577ed6f/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-577ed6f/report.json",
