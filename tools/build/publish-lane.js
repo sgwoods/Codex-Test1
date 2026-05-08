@@ -51,6 +51,14 @@ function run(cmd, args, options = {}){
   return typeof result === 'string' ? result.trim() : '';
 }
 
+function tryRun(cmd, args, options = {}){
+  try{
+    return run(cmd, args, options);
+  }catch{
+    return '';
+  }
+}
+
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
 }
@@ -145,6 +153,13 @@ function currentBuildShort(cfg){
   return info.shortCommit || 'unknown';
 }
 
+function configureCommitIdentity(repoDir){
+  const name = tryRun('git', ['-C', ROOT, 'config', '--get', 'user.name']);
+  const email = tryRun('git', ['-C', ROOT, 'config', '--get', 'user.email']);
+  if(name) run('git', ['-C', repoDir, 'config', 'user.name', name], { stdio: ['ignore', 'inherit', 'inherit'] });
+  if(email) run('git', ['-C', repoDir, 'config', 'user.email', email], { stdio: ['ignore', 'inherit', 'inherit'] });
+}
+
 function stagedPaths(cfg){
   const paths = cfg.files.map(file => cfg.targetDir === '.' ? file : path.join(cfg.targetDir, file));
   for(const file of cfg.rootFiles || []) paths.push(file);
@@ -171,6 +186,7 @@ function main(){
 
   try{
     run('gh', ['repo', 'clone', repoRef, repoDir], { stdio: ['ignore', 'inherit', 'inherit'] });
+    configureCommitIdentity(repoDir);
     stageArtifacts(repoDir, cfg);
     const status = gitStatus(repoDir);
     if(!status){
