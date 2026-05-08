@@ -207,6 +207,10 @@ Harness work should also follow the project reference program:
 For new-game work, the first serious gate should be game-owned reference
 evidence, not platform improvisation.
 
+Ingestion is now a formal subsystem of the conformance project. It should be
+treated as the evidence-producing phase that makes later gameplay, harness, and
+release claims possible.
+
 Default direction:
 
 - ingest user gameplay videos and other primary source artifacts into
@@ -219,6 +223,19 @@ Default direction:
   not buried only in Platinum-specific release logic
 - use Platinum as the host contract and tooling surface for launch, not as a
   substitute for game-owned reference truth
+
+For a new game, the first playable slice should cite:
+
+- source manifest
+- selected reference windows
+- event log or semantic profile
+- initial conformance targets
+- candidate harness plan
+- explicit confidence and known gaps
+
+If a release candidate includes a new or materially changed game behavior, its
+release notes and dashboard should identify which ingestion package or
+correspondence artifact grounds the claim.
 
 ## Dashboard And Ingestion Release Boundary
 

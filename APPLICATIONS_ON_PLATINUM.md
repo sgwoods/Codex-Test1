@@ -205,6 +205,10 @@ A new Platinum application should ideally arrive in stages:
 - manuals or descriptive artifacts where available
 - game-owned manifests, contact sheets, timing windows, waveforms, and other
   conformance evidence
+- reference-side event logs, semantic profiles, confidence notes, and initial
+  scorer targets
+- a clear statement of which behaviors are evidence-backed, low-confidence, or
+  intentionally deferred
 
 2. shell preview
 - name
@@ -214,6 +218,8 @@ A new Platinum application should ideally arrive in stages:
 3. minimal playable slice
 - enough real rules to prove the platform seam
 - not a rushed full public release
+- implementation choices traceable back to the ingestion package rather than
+  copied from Aurora or invented as user design
 
 4. application-owned harnesses
 - rules and scoring checks

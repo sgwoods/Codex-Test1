@@ -17,6 +17,29 @@ The score is deliberately evidence-first:
 - use reference-audio analyses where direct runtime reports are not yet richer
 - use surface integrity checks for shell, graphics, and panel stability
 
+## Ingestion As A Conformance Input
+
+Ingestion is the front half of the conformance system.
+
+For new-game and major-fidelity work, metrics should be promoted from
+game-owned ingestion evidence:
+
+- source manifests and provenance notes
+- clipped reference windows
+- contact sheets, motion traces, waveforms, and spectrograms
+- reference-side event logs
+- semantic slice profiles
+- confidence and uncertainty notes
+- generated correspondence targets
+
+The model may help plan algorithms, label evidence, and propose scorers, but
+the score should move because a rerunnable artifact says it moved.
+
+For new games, the first playable candidate should cite an ingestion package
+before it becomes a release claim. Platinum may present the resulting scorecard
+and dashboard, but the game owns the reference truth, metric definitions, and
+runtime correspondence evidence.
+
 ## Current Categories
 
 Each category scores from `1` to `10`.
@@ -131,6 +154,10 @@ Each category scores from `1` to `10`.
 
 The roll-up score is the simple average of the eleven category scores so that the
 low-scoring gaps stay visible.
+
+A `10/10` means "maxed at current scorer resolution", not perfect imitation.
+If ingestion improves the reference evidence or the scorer becomes more precise,
+that same behavior may be rescored with a more demanding metric.
 
 ## Current Caveats
 

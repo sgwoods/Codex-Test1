@@ -271,7 +271,8 @@ Desired outcome:
 
 We should get better at ingesting a second classic game lineage by turning
 preserved footage, manuals, timing libraries, and comparison artifacts into a
-repeatable pack-construction workflow.
+repeatable pack-construction workflow. This workflow is part of the conformance
+project, not a separate research sidecar.
 
 Desired outcome:
 
@@ -279,6 +280,8 @@ Desired outcome:
   intervention once the reference corpus exists
 - the ingestion flow yields game-owned manifests, conformance artifacts, and
   versioned runtime packages rather than only platform-specific glue
+- the first playable phases are derived from external artifacts, semantic event
+  logs, and correspondence targets before subjective design tuning
 - Platinum can propose its own extension points where needed instead of
   forcing every new mechanic into Aurora-shaped structures
 - the second game grows from a durable reference program rather than from

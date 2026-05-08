@@ -1,12 +1,43 @@
 # Classic Arcade Ingestion Framework
 
-This document defines the repeatable process for turning real classic arcade
-gameplay footage into Platinum game-pack knowledge.
+This document defines the repeatable process for turning external classic
+arcade artifacts into game-owned conformance knowledge and Platinum-compatible
+pack plans.
 
 `Galaxy Guardians` and its `Galaxian` reference lineage should be the first
 small end-to-end example, but the framework is intentionally broader than that.
 The goal is to make every future sibling game easier to study, model, build,
 test, and explain.
+
+## Formal Role In The Conformance Project
+
+Ingestion is a first-class subsystem of the conformance project.
+
+It is not only a documentation aid, a research notebook, or a manual design
+phase. Its job is to make the first playable phases of a new game come from
+measured external evidence instead of user-invented design.
+
+The ingestion framework should evolve alongside the games and Platinum itself.
+Each meaningful ingestion cycle should improve at least one of:
+
+- source coverage and provenance
+- clipped-window precision
+- annotation density and confidence
+- semantic event vocabulary
+- metric and scorer resolution
+- runtime correspondence targets
+- harness reproducibility
+- candidate pack generation
+- compute/time value tracking
+- reusable Platinum contract needs
+
+The operating principle is:
+
+- external artifacts teach the game
+- ingestion turns artifacts into structured evidence
+- conformance metrics turn evidence into measurable goals
+- game packs implement the game-owned rules
+- Platinum provides the reusable host, tooling, dashboards, and contracts
 
 ## Purpose
 
@@ -26,6 +57,54 @@ The first proof does not need to cover a whole game.
 
 It should cover one small slice completely enough that the same pattern can be
 reused for other games.
+
+## Primary-Phase Constraint: Evidence Before Design
+
+Primary ingestion phases should avoid arbitrary game design.
+
+Users and models may choose investigation goals, prioritize source windows, and
+review tradeoffs, but the first playable candidate should not be shaped mainly
+by memory, preference, or an existing Platinum game. It should be shaped by:
+
+- source manifests
+- clipped reference windows
+- extracted frame, motion, audio, and timing artifacts
+- reference-side event logs
+- semantic slice profiles
+- explicit uncertainty notes
+- measurable correspondence targets
+
+If the evidence is weak, the right output is usually an evidence gap or a
+prototype clearly labeled as low confidence, not a release claim.
+
+## Platinum Boundary
+
+Platinum should evolve to support ingestion without absorbing game-specific
+truth.
+
+Platinum may own reusable capabilities such as:
+
+- pack schemas and compatibility contracts
+- host runtime surfaces
+- input and session contracts
+- reference/evidence dashboard presentation
+- harness substrate and browser automation helpers
+- release-lane packaging for summarized conformance evidence
+- shared evidence viewers if they are intentionally promoted later
+
+The game pack should own:
+
+- rules and scoring truth
+- enemy, stage, motion, audio, and visual semantics
+- source manifests and reference windows
+- event vocabularies when they are game-specific
+- metric definitions and confidence claims
+- runtime correspondence reports
+- candidate implementation plans
+
+When ingestion exposes a reusable host need, it should become an explicit
+Platinum extension point. It should not become a sideways dependency on Aurora,
+Galaxy Guardians, or another game.
 
 ## First Target
 
@@ -250,6 +329,15 @@ rules differ.
 Platinum should absorb reusable host needs. The game pack should own
 game-specific rules.
 
+In a mature flow, this stage should become increasingly generative:
+
+- ingestion artifacts identify candidate game objects, events, timings, and
+  outcomes
+- metric gaps rank which game systems need implementation first
+- harness targets are produced before subjective tuning
+- the model may help assemble candidate algorithms, but the scorer and evidence
+  determine whether they survive
+
 ### 8. Harness Generation
 
 Every playable slice should leave behind harness coverage.
@@ -280,6 +368,33 @@ Review should ask:
 - did the playable slice preserve the player pressure seen in reference
 - did we document any intentional variation
 - did we strengthen the reusable ingestion framework
+
+## Ingestion Maturity Metrics
+
+A game is not equally ingestible just because it has some source clips.
+
+Track maturity explicitly so we know whether a game is ready for a shell
+preview, a playable slice, a release gate, or more reference work.
+
+Suggested metrics:
+
+| Metric | What It Measures | Why It Matters |
+| --- | --- | --- |
+| Source coverage | Number, duration, quality, and diversity of usable sources | Prevents one noisy clip from becoming the game definition |
+| Provenance confidence | Citation quality, local anchors, usage notes, and checksums | Makes later review and release claims defensible |
+| Window coverage | Start, attract, entry, combat, scoring, loss, stage, and special-mode windows | Ensures the model sees the whole game shape over time |
+| Annotation density | Events per second/window and confidence distribution | Shows whether clips are understood or merely archived |
+| Semantic event coverage | Mapped event families for motion, collision, score, audio, and UI feedback | Connects raw artifacts to playable behavior |
+| Metric promotion | Number of evidence-backed metrics with scorers and tolerances | Moves conformance from prose to measurable gates |
+| Runtime correspondence | Harness logs compared directly to reference-side event logs | Proves the candidate behaves like the learned game |
+| Candidate-generation readiness | Whether pack plans, rules, assets, and harness stubs can be derived from evidence | Measures progress toward low-design new-game creation |
+| Harness reproducibility | Stable seeds, deterministic windows, and rerunnable reports | Lets long-cycle compute improve the same target repeatedly |
+| Compute-value efficiency | Score/confidence gained per wall time, CPU, GPU, model/API call, and artifact volume | Helps choose the next highest-value investment |
+| Platform-extension pressure | Reusable needs discovered that belong in Platinum rather than the game | Keeps the host improving without merging game identities |
+
+Dashboard summaries may expose these metrics, but raw source media and
+unreviewed annotations remain engineering-owned unless we explicitly promote an
+evidence browser.
 
 ## Confidence Levels
 
