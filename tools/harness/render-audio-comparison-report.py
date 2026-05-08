@@ -42,6 +42,14 @@ def metrics(sample_rate, data):
             "rms": 0.0,
             "spectral_centroid_hz": 0.0,
             "zero_crossings_per_s": 0.0,
+            "spectral_spread_hz": 0.0,
+            "spectral_rolloff_85_hz": 0.0,
+            "spectral_flatness": 0.0,
+            "band_energy": {},
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.0,
+            "envelope_contrast": 0.0,
+            "burst_share": 0.0,
         }
     duration = float(data.size) / float(sample_rate)
     peak = float(np.max(np.abs(data)))
@@ -50,6 +58,14 @@ def metrics(sample_rate, data):
     freqs = np.fft.rfftfreq(data.size, d=1.0 / sample_rate)
     mag_sum = float(np.sum(spectrum))
     centroid = float(np.sum(freqs * spectrum) / mag_sum) if mag_sum > 0 else 0.0
+    spread = float(np.sqrt(np.sum(((freqs - centroid) ** 2) * spectrum) / mag_sum)) if mag_sum > 0 else 0.0
+    cumulative = np.cumsum(spectrum)
+    rolloff_index = int(np.searchsorted(cumulative, mag_sum * 0.85)) if mag_sum > 0 else 0
+    rolloff = float(freqs[min(rolloff_index, freqs.size - 1)]) if freqs.size else 0.0
+    positive = spectrum[spectrum > 0]
+    flatness = float(np.exp(np.mean(np.log(positive))) / max(np.mean(positive), 1e-12)) if positive.size else 0.0
+    band_energy = band_energy_ratios(freqs, spectrum)
+    envelope = envelope_metrics(sample_rate, data)
     zero_crossings = np.count_nonzero(np.diff(np.signbit(data)))
     return {
         "duration_s": round(duration, 3),
@@ -57,6 +73,64 @@ def metrics(sample_rate, data):
         "rms": round(rms, 4),
         "spectral_centroid_hz": round(centroid, 1),
         "zero_crossings_per_s": round(float(zero_crossings) / max(duration, 1e-9), 1),
+        "spectral_spread_hz": round(spread, 1),
+        "spectral_rolloff_85_hz": round(rolloff, 1),
+        "spectral_flatness": round(flatness, 4),
+        "band_energy": band_energy,
+        **envelope,
+    }
+
+
+def band_energy_ratios(freqs, spectrum):
+    total = float(np.sum(spectrum))
+    if total <= 0:
+        return {
+            "sub_500": 0.0,
+            "low_mid_500_1500": 0.0,
+            "mid_1500_3000": 0.0,
+            "presence_3000_6000": 0.0,
+            "air_6000_plus": 0.0,
+        }
+    bands = {
+        "sub_500": (0, 500),
+        "low_mid_500_1500": (500, 1500),
+        "mid_1500_3000": (1500, 3000),
+        "presence_3000_6000": (3000, 6000),
+        "air_6000_plus": (6000, float("inf")),
+    }
+    result = {}
+    for key, (lo, hi) in bands.items():
+        mask = (freqs >= lo) & (freqs < hi)
+        result[key] = round(float(np.sum(spectrum[mask])) / total, 4)
+    return result
+
+
+def envelope_metrics(sample_rate, data):
+    frame_size = max(1, int(sample_rate * 0.008))
+    frame_rms = np.array([
+        float(np.sqrt(np.mean(np.square(data[start:start + frame_size]))))
+        for start in range(0, data.size, frame_size)
+        if data[start:start + frame_size].size
+    ])
+    if frame_rms.size == 0:
+        return {
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.0,
+            "envelope_contrast": 0.0,
+            "burst_share": 0.0,
+        }
+    peak_index = int(np.argmax(frame_rms))
+    split = max(1, frame_rms.size // 2)
+    first_half = float(np.mean(frame_rms[:split]))
+    second_half = float(np.mean(frame_rms[split:])) if frame_rms[split:].size else 0.0
+    floor = float(np.percentile(frame_rms, 50))
+    high = float(np.percentile(frame_rms, 90))
+    burst_threshold = float(np.mean(frame_rms) + np.std(frame_rms) * 0.75)
+    return {
+        "attack_peak_position": round(peak_index / max(1, frame_rms.size - 1), 3),
+        "decay_ratio": round(second_half / max(first_half, 1e-9), 3),
+        "envelope_contrast": round(high / max(floor, 1e-9), 3),
+        "burst_share": round(float(np.count_nonzero(frame_rms >= burst_threshold)) / max(1, frame_rms.size), 3),
     }
 
 
@@ -103,7 +177,22 @@ def metric_deltas(left, right):
         "spectral_centroid_hz": round(abs((left.get("spectral_centroid_hz") or 0) - (right.get("spectral_centroid_hz") or 0)), 1),
         "zero_crossings_per_s": round(abs((left.get("zero_crossings_per_s") or 0) - (right.get("zero_crossings_per_s") or 0)), 1),
         "rms": round(abs((left.get("rms") or 0) - (right.get("rms") or 0)), 4),
+        "spectral_spread_hz": round(abs((left.get("spectral_spread_hz") or 0) - (right.get("spectral_spread_hz") or 0)), 1),
+        "spectral_rolloff_85_hz": round(abs((left.get("spectral_rolloff_85_hz") or 0) - (right.get("spectral_rolloff_85_hz") or 0)), 1),
+        "spectral_flatness": round(abs((left.get("spectral_flatness") or 0) - (right.get("spectral_flatness") or 0)), 4),
+        "band_shape_distance": round(band_shape_distance(left.get("band_energy") or {}, right.get("band_energy") or {}), 4),
+        "attack_peak_position": round(abs((left.get("attack_peak_position") or 0) - (right.get("attack_peak_position") or 0)), 3),
+        "decay_ratio": round(abs((left.get("decay_ratio") or 0) - (right.get("decay_ratio") or 0)), 3),
+        "envelope_contrast": round(abs((left.get("envelope_contrast") or 0) - (right.get("envelope_contrast") or 0)), 3),
+        "burst_share": round(abs((left.get("burst_share") or 0) - (right.get("burst_share") or 0)), 3),
     }
+
+
+def band_shape_distance(left, right):
+    keys = sorted(set(left.keys()) | set(right.keys()))
+    if not keys:
+        return 0.0
+    return sum(abs(float(left.get(key) or 0) - float(right.get(key) or 0)) for key in keys) / 2.0
 
 
 def closeness(value, target, tolerance):
@@ -117,7 +206,9 @@ def similarity_score(candidate, target):
     centroid = closeness(candidate.get("spectral_centroid_hz"), target.get("spectral_centroid_hz"), 1200)
     crossings = closeness(candidate.get("zero_crossings_per_s"), target.get("zero_crossings_per_s"), 800)
     rms = closeness(candidate.get("rms"), target.get("rms"), 0.2)
-    return round((0.2 * duration) + (0.35 * centroid) + (0.25 * crossings) + (0.2 * rms), 3)
+    band = 1.0 - min(1.0, band_shape_distance(candidate.get("band_energy") or {}, target.get("band_energy") or {}) / 0.55)
+    envelope = closeness(candidate.get("decay_ratio"), target.get("decay_ratio"), 1.5)
+    return round((0.16 * duration) + (0.27 * centroid) + (0.19 * crossings) + (0.16 * rms) + (0.14 * band) + (0.08 * envelope), 3)
 
 
 def reference_segment_candidates(sample_rate, data, target_metrics, max_candidates=3):
@@ -153,6 +244,78 @@ def reference_segment_candidates(sample_rate, data, target_metrics, max_candidat
         if len(picked) >= max_candidates:
             break
     return picked
+
+
+def reference_segmentation(sample_rate, data):
+    if data.size == 0:
+        return {"segments": [], "summary": {"segmentCount": 0, "status": "empty-reference"}}
+    frame_size = max(1, int(sample_rate * 0.02))
+    hop = max(1, int(sample_rate * 0.01))
+    starts = np.arange(0, max(1, data.size - frame_size + 1), hop)
+    rms_values = np.array([
+        float(np.sqrt(np.mean(np.square(data[start:start + frame_size]))))
+        for start in starts
+    ])
+    if rms_values.size == 0:
+        return {"segments": [], "summary": {"segmentCount": 0, "status": "empty-reference"}}
+    floor = float(np.percentile(rms_values, 25))
+    high = float(np.percentile(rms_values, 92))
+    threshold = max(0.006, floor + (high - floor) * 0.3)
+    active = rms_values >= threshold
+    segments = []
+    open_start = None
+    last_active = None
+    max_gap_frames = max(1, int(0.035 / (hop / sample_rate)))
+    for index, is_active in enumerate(active):
+        if is_active:
+            if open_start is None:
+                open_start = index
+            last_active = index
+            continue
+        if open_start is not None and last_active is not None and index - last_active <= max_gap_frames:
+            continue
+        if open_start is not None and last_active is not None:
+            segments.append((open_start, last_active))
+        open_start = None
+        last_active = None
+    if open_start is not None and last_active is not None:
+        segments.append((open_start, last_active))
+
+    described = []
+    for order, (start_index, end_index) in enumerate(segments):
+        start_sample = max(0, int(starts[start_index]))
+        end_sample = min(data.size, int(starts[end_index] + frame_size))
+        duration = (end_sample - start_sample) / sample_rate
+        if duration < 0.03:
+            continue
+        segment_data = data[start_sample:end_sample]
+        role = "onset" if order == 0 else ("tail" if order == len(segments) - 1 and order > 0 else "body")
+        described.append({
+            "role": role,
+            "start_s": round(start_sample / sample_rate, 3),
+            "end_s": round(end_sample / sample_rate, 3),
+            "duration_s": round(duration, 3),
+            "metrics": metrics(sample_rate, segment_data),
+        })
+    if not described:
+        described.append({
+            "role": "full-reference",
+            "start_s": 0.0,
+            "end_s": round(data.size / sample_rate, 3),
+            "duration_s": round(data.size / sample_rate, 3),
+            "metrics": metrics(sample_rate, data),
+        })
+    dominant = max(described, key=lambda segment: segment["metrics"].get("rms") or 0)
+    return {
+        "segments": described,
+        "summary": {
+            "segmentCount": len(described),
+            "status": "segmented-reference" if len(described) > 1 else "single-reference-body",
+            "thresholdRms": round(threshold, 4),
+            "dominantRole": dominant["role"],
+            "dominantWindow": {"start_s": dominant["start_s"], "end_s": dominant["end_s"]},
+        },
+    }
 
 
 def average_delta(items, path):
@@ -322,12 +485,19 @@ def main():
             loaded_variants["reference"]["data"],
             aur_active,
         )
+        item_report["referenceSegmentation"] = reference_segmentation(
+            loaded_variants["reference"]["sampleRate"],
+            loaded_variants["reference"]["data"],
+        )
         readme_lines.extend([
             "",
             f"- Quick read: synthetic Galaga duration delta vs reference = `{abs(gal['duration_s'] - ref['duration_s']):.3f}s`; Aurora duration delta vs reference = `{abs(aur['duration_s'] - ref['duration_s']):.3f}s`.",
             f"- Quick read: synthetic Galaga centroid delta vs reference = `{abs(gal['spectral_centroid_hz'] - ref['spectral_centroid_hz']):.1f}Hz`; Aurora centroid delta vs reference = `{abs(aur['spectral_centroid_hz'] - ref['spectral_centroid_hz']):.1f}Hz`.",
             f"- Active-window status: `{item_report['comparisons']['referenceWindowStatus']}`.",
             f"- Active quick read: Aurora vs reference duration delta = `{item_report['comparisons']['auroraVsReferenceActive']['duration_s']:.3f}s`; centroid delta = `{item_report['comparisons']['auroraVsReferenceActive']['spectral_centroid_hz']:.1f}Hz`.",
+            f"- Spectral shape: band distance = `{item_report['comparisons']['auroraVsReferenceActive']['band_shape_distance']:.4f}`; rolloff delta = `{item_report['comparisons']['auroraVsReferenceActive']['spectral_rolloff_85_hz']:.1f}Hz`.",
+            f"- Envelope shape: attack position delta = `{item_report['comparisons']['auroraVsReferenceActive']['attack_peak_position']:.3f}`; decay ratio delta = `{item_report['comparisons']['auroraVsReferenceActive']['decay_ratio']:.3f}`; burst-share delta = `{item_report['comparisons']['auroraVsReferenceActive']['burst_share']:.3f}`.",
+            f"- Reference segmentation: `{item_report['referenceSegmentation']['summary']['status']}` with `{item_report['referenceSegmentation']['summary']['segmentCount']}` segment(s); dominant role `{item_report['referenceSegmentation']['summary']['dominantRole']}`.",
         ])
         if item_report["referenceSegmentCandidates"]:
             candidate_text = "; ".join(
@@ -345,9 +515,12 @@ def main():
             if item["comparisons"]["referenceWindowStatus"] == "broad-reference-window-needs-segmentation"
         ]),
         "referenceSegmentCandidateCount": sum(len(item.get("referenceSegmentCandidates") or []) for item in report["items"]),
+        "referenceSegmentCount": sum((item.get("referenceSegmentation") or {}).get("summary", {}).get("segmentCount", 0) for item in report["items"]),
         "averageAuroraVsSyntheticGalagaDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsSyntheticGalaga", "duration_s"]),
         "averageAuroraVsReferenceActiveDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "duration_s"]),
         "averageAuroraVsReferenceActiveCentroidDeltaHz": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "spectral_centroid_hz"]),
+        "averageAuroraVsReferenceBandShapeDistance": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "band_shape_distance"]),
+        "averageAuroraVsReferenceEnvelopeDecayDelta": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "decay_ratio"]),
     }
     readme_lines.extend([
         "## Summary",
@@ -355,9 +528,12 @@ def main():
         f"- Items: {report['summary']['itemCount']}",
         f"- Broad reference windows needing tighter segmentation: {report['summary']['broadReferenceWindowCount']}",
         f"- Candidate reference subwindows found: {report['summary']['referenceSegmentCandidateCount']}",
+        f"- Reference segments found: `{report['summary']['referenceSegmentCount']}`",
         f"- Average active Aurora-vs-synthetic-Galaga duration delta: `{report['summary']['averageAuroraVsSyntheticGalagaDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference duration delta: `{report['summary']['averageAuroraVsReferenceActiveDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference centroid delta: `{report['summary']['averageAuroraVsReferenceActiveCentroidDeltaHz']:.1f}Hz`",
+        f"- Average active Aurora-vs-reference band-shape distance: `{report['summary']['averageAuroraVsReferenceBandShapeDistance']:.3f}`",
+        f"- Average active Aurora-vs-reference envelope decay delta: `{report['summary']['averageAuroraVsReferenceEnvelopeDecayDelta']:.3f}`",
         "",
     ])
 

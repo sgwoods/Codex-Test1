@@ -318,12 +318,22 @@ function riskBreakdown(comparison){
   const centroidGap = +comparison.spectral_centroid_hz || 0;
   const zcrGap = +comparison.zero_crossings_per_s || 0;
   const rmsGap = +comparison.rms || 0;
+  const bandShapeGap = +comparison.band_shape_distance || 0;
+  const rolloffGap = +comparison.spectral_rolloff_85_hz || 0;
+  const envelopeGap = (
+    clamp((+comparison.attack_peak_position || 0) / .5, 0, 1) +
+    clamp((+comparison.decay_ratio || 0) / 1.4, 0, 1) +
+    clamp((+comparison.burst_share || 0) / .5, 0, 1)
+  ) / 3;
   const parts = {
-    duration: clamp(durationGap / 3, 0, 3.4),
-    centroid: clamp(centroidGap / 500, 0, 2.5),
-    zeroCrossing: clamp(zcrGap / 1200, 0, 2.1),
-    rms: clamp(rmsGap / .13, 0, 1.5),
-    floor: .45
+    duration: clamp(durationGap / 3, 0, 2.7),
+    centroid: clamp(centroidGap / 550, 0, 2.25),
+    zeroCrossing: clamp(zcrGap / 1300, 0, 1.65),
+    rms: clamp(rmsGap / .15, 0, 1.15),
+    bandShape: clamp(bandShapeGap / .55, 0, 1.45),
+    rolloff: clamp(rolloffGap / 2600, 0, 1.05),
+    envelope: clamp(envelopeGap, 0, 1.15),
+    floor: .35
   };
   const scaled = Object.fromEntries(Object.entries(parts).map(([key, value]) => [key, round(value * 1.05, 3)]));
   const risk10 = round(clamp(Object.values(parts).reduce((sum, value) => sum + value, 0) * 1.05, 0, 10), 2);
@@ -342,11 +352,13 @@ function rejectionFor(row, baseline){
   const riskDelta = round(baseline.risk10 - row.risk10, 3);
   const centroidDelta = round(baseline.centroidGapHz - row.centroidGapHz, 1);
   const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
+  const bandDelta = round((baseline.bandShapeGap ?? 0) - (row.bandShapeGap ?? 0), 4);
   const reasons = [];
   if(row.durationGapSeconds > .08) reasons.push(`duration gap ${row.durationGapSeconds}s > 0.08s`);
   if(riskDelta < .25) reasons.push(`risk improvement ${riskDelta} < 0.25`);
   if(centroidDelta <= 0) reasons.push(`centroid did not improve (${centroidDelta} Hz)`);
   if(rmsDelta < -.01) reasons.push(`RMS worsened by ${Math.abs(rmsDelta)}`);
+  if(bandDelta < -.04) reasons.push(`spectral band shape worsened by ${Math.abs(bandDelta)}`);
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
@@ -372,10 +384,11 @@ function decisionFor(rows){
       const riskDelta = round(baseline.risk10 - row.risk10, 3);
       const centroidDelta = round(baseline.centroidGapHz - row.centroidGapHz, 1);
       const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
-      return { row, riskDelta, centroidDelta, rmsDelta };
+      const bandDelta = round((baseline.bandShapeGap ?? 0) - (row.bandShapeGap ?? 0), 4);
+      return { row, riskDelta, centroidDelta, rmsDelta, bandDelta };
     })
-    .filter(item => item.riskDelta >= .25 && item.centroidDelta > 0 && item.rmsDelta >= -.01)
-    .sort((a, b) => b.riskDelta - a.riskDelta || b.centroidDelta - a.centroidDelta || b.rmsDelta - a.rmsDelta);
+    .filter(item => item.riskDelta >= .25 && item.centroidDelta > 0 && item.rmsDelta >= -.01 && item.bandDelta >= -.04)
+    .sort((a, b) => b.riskDelta - a.riskDelta || b.centroidDelta - a.centroidDelta || b.bandDelta - a.bandDelta || b.rmsDelta - a.rmsDelta);
   const selected = gated[0] || null;
   if(!selected){
     return {
@@ -393,6 +406,7 @@ function decisionFor(rows){
   const riskDelta = round(baseline.risk10 - best.risk10, 3);
   const centroidDelta = round(baseline.centroidGapHz - best.centroidGapHz, 1);
   const rmsDelta = round(baseline.rmsGap - best.rmsGap, 4);
+  const bandDelta = round((baseline.bandShapeGap ?? 0) - (best.bandShapeGap ?? 0), 4);
   return {
     status: 'candidate-recommended',
     keep: true,
@@ -402,7 +416,8 @@ function decisionFor(rows){
     riskDelta,
     centroidDelta,
     rmsDelta,
-    reason: 'Selected candidate clears risk, centroid, RMS, and duration gates. The measured-lowest-risk candidate is tracked separately so the next sweep can still learn from it.'
+    bandDelta,
+    reason: 'Selected candidate clears risk, centroid, RMS, band-shape, and duration gates. The measured-lowest-risk candidate is tracked separately so the next sweep can still learn from it.'
   };
 }
 
@@ -424,7 +439,15 @@ function aggregateRows(sampleRows){
       duration_s: round(mean(group.map(row => row.comparison.duration_s)), 3),
       spectral_centroid_hz: round(mean(group.map(row => row.comparison.spectral_centroid_hz)), 1),
       zero_crossings_per_s: round(mean(group.map(row => row.comparison.zero_crossings_per_s)), 1),
-      rms: round(mean(group.map(row => row.comparison.rms)), 4)
+      rms: round(mean(group.map(row => row.comparison.rms)), 4),
+      spectral_spread_hz: round(mean(group.map(row => row.comparison.spectral_spread_hz)), 1),
+      spectral_rolloff_85_hz: round(mean(group.map(row => row.comparison.spectral_rolloff_85_hz)), 1),
+      spectral_flatness: round(mean(group.map(row => row.comparison.spectral_flatness)), 4),
+      band_shape_distance: round(mean(group.map(row => row.comparison.band_shape_distance)), 4),
+      attack_peak_position: round(mean(group.map(row => row.comparison.attack_peak_position)), 3),
+      decay_ratio: round(mean(group.map(row => row.comparison.decay_ratio)), 3),
+      envelope_contrast: round(mean(group.map(row => row.comparison.envelope_contrast)), 3),
+      burst_share: round(mean(group.map(row => row.comparison.burst_share)), 3)
     };
     const breakdown = riskBreakdown(avgComparison);
     rows.push({
@@ -439,12 +462,24 @@ function aggregateRows(sampleRows){
       centroidGapHz: avgComparison.spectral_centroid_hz,
       zeroCrossingGapPerSecond: avgComparison.zero_crossings_per_s,
       rmsGap: avgComparison.rms,
+      bandShapeGap: avgComparison.band_shape_distance,
+      rolloffGapHz: avgComparison.spectral_rolloff_85_hz,
+      envelopeShapeGap: round(mean([
+        clamp((+avgComparison.attack_peak_position || 0) / .5, 0, 1),
+        clamp((+avgComparison.decay_ratio || 0) / 1.4, 0, 1),
+        clamp((+avgComparison.burst_share || 0) / .5, 0, 1)
+      ]), 3),
       activeMetrics: {
         duration_s: round(mean(group.map(row => row.activeMetrics.duration_s)), 3),
         peak: round(mean(group.map(row => row.activeMetrics.peak)), 4),
         rms: round(mean(group.map(row => row.activeMetrics.rms)), 4),
         spectral_centroid_hz: round(mean(group.map(row => row.activeMetrics.spectral_centroid_hz)), 1),
-        zero_crossings_per_s: round(mean(group.map(row => row.activeMetrics.zero_crossings_per_s)), 1)
+        zero_crossings_per_s: round(mean(group.map(row => row.activeMetrics.zero_crossings_per_s)), 1),
+        spectral_rolloff_85_hz: round(mean(group.map(row => row.activeMetrics.spectral_rolloff_85_hz)), 1),
+        spectral_flatness: round(mean(group.map(row => row.activeMetrics.spectral_flatness)), 4),
+        attack_peak_position: round(mean(group.map(row => row.activeMetrics.attack_peak_position)), 3),
+        decay_ratio: round(mean(group.map(row => row.activeMetrics.decay_ratio)), 3),
+        burst_share: round(mean(group.map(row => row.activeMetrics.burst_share)), 3)
       },
       comparison: avgComparison,
       stability: {
@@ -460,7 +495,9 @@ function aggregateRows(sampleRows){
         risk10: row.risk10,
         durationGapSeconds: row.durationGapSeconds,
         centroidGapHz: row.centroidGapHz,
-        rmsGap: row.rmsGap
+        rmsGap: row.rmsGap,
+        bandShapeGap: row.bandShapeGap,
+        envelopeShapeGap: row.envelopeShapeGap
       }))
     });
   }
@@ -504,12 +541,12 @@ function markdown(report){
     '',
     '## Candidates',
     '',
-    '| Candidate | Risk /10 | Dominant penalty | Duration Gap | Centroid Gap | ZCR Gap | RMS Gap | Stability | Keeper read |',
-    '| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |'
+    '| Candidate | Risk /10 | Dominant penalty | Duration Gap | Centroid Gap | Band Shape | Envelope | RMS Gap | Stability | Keeper read |',
+    '| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |'
   ];
   for(const row of report.candidates){
     const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.dominantPenalty || 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.zeroCrossingGapPerSecond} | ${row.rmsGap} | ${stability} | ${row.keeperRead || ''} |`);
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.dominantPenalty || 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz} Hz | ${row.bandShapeGap ?? 'n/a'} | ${row.envelopeShapeGap ?? 'n/a'} | ${row.rmsGap} | ${stability} | ${row.keeperRead || ''} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}`;
@@ -654,11 +691,19 @@ async function main(){
       centroidGapHz: round(comparison.spectral_centroid_hz, 1),
       zeroCrossingGapPerSecond: round(comparison.zero_crossings_per_s, 1),
       rmsGap: round(comparison.rms, 4),
+      bandShapeGap: round(comparison.band_shape_distance, 4),
+      rolloffGapHz: round(comparison.spectral_rolloff_85_hz, 1),
+      envelopeShapeGap: round(mean([
+        clamp((+comparison.attack_peak_position || 0) / .5, 0, 1),
+        clamp((+comparison.decay_ratio || 0) / 1.4, 0, 1),
+        clamp((+comparison.burst_share || 0) / .5, 0, 1)
+      ]), 3),
       activeMetrics: item.variants.aurora.activeMetrics,
       comparison
     };
   }).sort((a, b) => a.risk10 - b.risk10 || a.durationGapSeconds - b.durationGapSeconds);
   const rows = annotateRejections(aggregateRows(sampleRows));
+  const referenceSegmentation = metrics.items[0]?.referenceSegmentation || null;
 
   const decision = decisionFor(rows);
   const report = {
@@ -678,12 +723,13 @@ async function main(){
       controls: 'Use --grid-limit=N for bounded parametric generation and --candidate-ids for focused stability reruns.'
     } : null,
     problem: 'Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.',
-    strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift.',
-    successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS gap, and keep active duration within 0.08s of the reference.',
+    strategy: 'Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift. The comparison now includes spectral band-shape, rolloff, and envelope segmentation so future searches can target timbre instead of only duration and centroid.',
+    successMeasure: 'A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS or band-shape gap, and keep active duration within 0.08s of the reference.',
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,
       referenceWindow: set.referenceWindow || null,
+      referenceSegmentation,
       manifest: rel(manifestPath),
       metrics: rel(metricsPath)
     },
@@ -708,6 +754,8 @@ async function main(){
       risk10: row.risk10,
       dominantPenalty: row.dominantPenalty,
       centroidGapHz: row.centroidGapHz,
+      bandShapeGap: row.bandShapeGap,
+      envelopeShapeGap: row.envelopeShapeGap,
       rmsGap: row.rmsGap,
       durationGapSeconds: row.durationGapSeconds,
       keeperRead: row.keeperRead
