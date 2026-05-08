@@ -545,7 +545,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       confidence: 'medium-high',
       linkedMetric: 'Audio identity, event feedback, and cue alignment',
       anchor: audioGapPath ? rel(audioGapPath) : rel(qualityPath),
-      next: 'Split or further label shared shot/impact/explosion reference mappings so playerShot, enemyShot, bossHit, enemyHit, and enemyBoom remain distinct.'
+      next: audioGap?.nextStep || 'Tune the highest-risk runtime cue after rerunning audio comparison and semantic event-gap analysis.'
     }),
     ingestionRow({
       rank: 3,

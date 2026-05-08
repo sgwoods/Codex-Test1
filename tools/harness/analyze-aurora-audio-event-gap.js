@@ -212,6 +212,27 @@ function recommendation(item){
   return 'Keep as secondary pass after higher-risk audio gaps are narrowed.';
 }
 
+function referenceWindowKey(set){
+  if(!set?.referenceClip) return '';
+  const win = set.referenceWindow || null;
+  if(!win) return `${set.referenceClip}::full`;
+  const start = Number.isFinite(+win.startSeconds) ? (+win.startSeconds).toFixed(3) : 'na';
+  const end = Number.isFinite(+win.endSeconds) ? (+win.endSeconds).toFixed(3) : 'na';
+  return `${set.referenceClip}::${start}-${end}`;
+}
+
+function hasDistinctReferenceWindow(set){
+  const win = set?.referenceWindow;
+  return Number.isFinite(+win?.startSeconds) && Number.isFinite(+win?.endSeconds) && +win.endSeconds > +win.startSeconds;
+}
+
+function sharedReferenceRiskCount(set, context){
+  const clipCount = context.referenceClipCounts?.get(set?.referenceClip || '') || 0;
+  if(clipCount <= 1) return 0;
+  const windowCount = context.referenceWindowCounts?.get(referenceWindowKey(set)) || 0;
+  return hasDistinctReferenceWindow(set) && windowCount <= 1 ? 1 : clipCount;
+}
+
 function semanticCueScore({ item, guideContext, comparisonSet, eventMatrix, sharedReferenceClipCount }){
   const semantic = EVENT_SEMANTICS[item.cue] || {
     class: item.focus ? 'documented-cue' : 'uncategorized-cue',
@@ -272,12 +293,16 @@ function semanticRecommendation(item, semantic, comparisonSet, eventMatrix, shar
 function rowForItem(item, context = {}){
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
   const bestSegment = (item.referenceSegmentCandidates || [])[0] || null;
+  const comparisonSet = context.comparisonByCue?.get(item.cue) || null;
+  const sharedReferenceClipCount = context.referenceClipCounts?.get(comparisonSet?.referenceClip || '') || 0;
+  const sharedReferenceWindowCount = context.referenceWindowCounts?.get(referenceWindowKey(comparisonSet)) || 0;
+  const semanticSharedReferenceCount = sharedReferenceRiskCount(comparisonSet, context);
   const semantics = semanticCueScore({
     item,
     guideContext: context.guideByCue?.get(item.cue)?.[0] || null,
-    comparisonSet: context.comparisonByCue?.get(item.cue) || null,
-    eventMatrix: context.eventByEntryId?.get(context.comparisonByCue?.get(item.cue)?.entryId) || null,
-    sharedReferenceClipCount: context.referenceClipCounts?.get(context.comparisonByCue?.get(item.cue)?.referenceClip || '') || 0
+    comparisonSet,
+    eventMatrix: context.eventByEntryId?.get(comparisonSet?.entryId) || null,
+    sharedReferenceClipCount: semanticSharedReferenceCount
   });
   return {
     id: item.id,
@@ -298,6 +323,9 @@ function rowForItem(item, context = {}){
       score: round(bestSegment.score, 3)
     } : null,
     ...semantics,
+    sourceReferenceClipCount: sharedReferenceClipCount,
+    sourceReferenceWindowCount: sharedReferenceWindowCount,
+    hasDistinctReferenceWindow: hasDistinctReferenceWindow(comparisonSet),
     recommendation: recommendation(item)
   };
 }
@@ -398,11 +426,14 @@ function main(){
   const audioContextById = new Map((guide.audioContexts || []).map(entry => [entry.id, entry]));
   const comparisonByCue = new Map();
   const referenceClipCounts = new Map();
+  const referenceWindowCounts = new Map();
   for(const set of guide.comparisonSets || []){
     const ctx = audioContextById.get(set.entryId);
     const cue = ctx?.preview?.cue || ctx?.cue;
     if(cue) comparisonByCue.set(cue, set);
     if(set.referenceClip) referenceClipCounts.set(set.referenceClip, (referenceClipCounts.get(set.referenceClip) || 0) + 1);
+    const windowKey = referenceWindowKey(set);
+    if(windowKey) referenceWindowCounts.set(windowKey, (referenceWindowCounts.get(windowKey) || 0) + 1);
   }
   const eventByEntryId = new Map((guide.audioEventMatrix || []).filter(entry => entry.entryId).map(entry => [entry.entryId, entry]));
   const rowContext = {
@@ -413,7 +444,8 @@ function main(){
     }, [])),
     comparisonByCue,
     eventByEntryId,
-    referenceClipCounts
+    referenceClipCounts,
+    referenceWindowCounts
   };
   const comparedCueRisks = (metrics.items || []).map(item => rowForItem(item, rowContext))
     .sort((a, b) => b.gapRisk10 - a.gapRisk10 || String(a.cue).localeCompare(String(b.cue)));
@@ -467,10 +499,12 @@ function main(){
       semanticAverageScore10,
       lowSemanticCueCount: lowSemanticRows.length,
       semanticAttentionCueCount: semanticAttentionRows.length,
+      distinctReferenceWindowCueCount: comparedCueRisks.filter(item => item.hasDistinctReferenceWindow).length,
       lowestSemanticCue: lowestSemantic.cue || '',
       lowestSemanticLabel: lowestSemantic.label || '',
       lowestSemanticScore10: lowestSemantic.semanticScore10 ?? null,
       sharedReferenceClipRiskCount: comparedCueRisks.filter(item => item.sharedReferenceClipCount > 1).length,
+      sharedSourceClipCueCount: comparedCueRisks.filter(item => item.sourceReferenceClipCount > 1).length,
       highestRiskCue: highest.cue || '',
       highestRiskLabel: highest.label || '',
       highestRisk10: highest.gapRisk10 ?? null

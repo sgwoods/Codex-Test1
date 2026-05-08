@@ -93,6 +93,22 @@ function latestLevelArcCategory(quality, levelArcReport){
   });
 }
 
+function nextAudioAction(audioEventGap){
+  const nextStep = audioEventGap?.nextStep;
+  if(nextStep) return nextStep;
+  const highest = audioEventGap?.summary?.highestRiskLabel || audioEventGap?.summary?.highestRiskCue || '';
+  if(highest) return `Tune the highest-risk runtime cue next: ${highest}. Rerun audio comparison and event-gap analysis after the change.`;
+  return 'Rerun audio comparison and semantic event-gap analysis, then tune the highest-risk runtime cue.';
+}
+
+function audioRationale(audioEventGap){
+  const summary = audioEventGap?.summary || {};
+  if(Number.isFinite(+summary.semanticAverageScore10) && +summary.semanticAttentionCueCount === 0){
+    return `Audio is still the weakest quality category, but semantic measurement debt is now reduced: semantic event score is ${summary.semanticAverageScore10}/10, semantic attention rows are ${summary.semanticAttentionCueCount}, and the highest runtime cue risk is ${summary.highestRiskLabel || summary.highestRiskCue}.`;
+  }
+  return 'Audio is the weakest quality category. The semantic event-gap scorer now shows coverage is strong, while shared shot/impact/explosion mappings remain the next clarity gap.';
+}
+
 function nextLevelArcAction(nextOpportunityId){
   if(nextOpportunityId === 'stage-1-baseline-missing-event-coverage'){
     return 'Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning.';
@@ -180,11 +196,13 @@ function main(){
   if(!qualityPath) throw new Error('Missing quality-conformance report; run npm run harness:score:quality-conformance first.');
   const opportunityPath = latestReport('level-arc-opportunity-windows');
   const levelArcPath = latestReport('level-arc-conformance');
+  const audioEventGapPath = latestReport('aurora-audio-event-gap');
   const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {} };
   const levelArcReport = levelArcPath ? readJson(levelArcPath) : { summary: {} };
+  const audioEventGap = audioEventGapPath ? readJson(audioEventGapPath) : { summary: {} };
   const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
   const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
@@ -207,8 +225,8 @@ function main(){
       risk: 0.28,
       costClass: 'high',
       computeAxis: 'quality-score',
-      rationale: 'Audio is the weakest quality category. The semantic event-gap scorer now shows coverage is strong, while shared shot/impact/explosion mappings remain the next clarity gap.',
-      nextAction: 'Split or further label shared shot/impact/explosion reference mappings, especially playerShot/enemyShot/bossHit and enemyHit/enemyBoom, then rerun audio comparison and semantic event-gap analysis.'
+      rationale: audioRationale(audioEventGap),
+      nextAction: nextAudioAction(audioEventGap)
     }),
     buildCandidate({
       id: 'level-arc-opportunity-coverage',
@@ -285,6 +303,7 @@ function main(){
     commit,
     evidence: {
       qualityReport: rel(qualityPath),
+      audioEventGapReport: audioEventGapPath ? rel(audioEventGapPath) : null,
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
       levelArcReport: levelArcPath ? rel(levelArcPath) : null,
       stage14SweepReport: stage14SweepPath ? rel(stage14SweepPath) : null,
@@ -300,7 +319,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: `Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment; Stage 12 and Stage 14 reward-route uncertainty has been reduced, and the immediate level-arc task is now ${nextOpportunityId}.`
+    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, so the next audio task is ${audioEventGap.summary?.highestRiskLabel || audioEventGap.summary?.highestRiskCue || 'the highest-risk runtime cue'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));

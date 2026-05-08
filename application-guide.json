@@ -564,8 +564,14 @@
       "focus": "Compare whether player fire reads as a quick arcade shot instead of a generic impact.",
       "referenceLabel": "Flagship/Fighter Shot",
       "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-      "mappingStatus": "Measured coverage added for shot identity; current reference clip is shared and may still be too broad.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.05,
+        "endSeconds": 0.29,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "distinct initial high-transient subwindow reserved for player fire; lower score than the shared best window but prevents playerShot/enemyShot/bossHit semantic collapse"
+      },
+      "mappingStatus": "Measured subwindow promoted for shot identity; uses a distinct initial transient so player fire can be scored separately from enemy fire and boss damage.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "enemy-shot-compare",
@@ -574,8 +580,14 @@
       "focus": "Compare whether enemy fire is distinct enough from player fire and boss damage.",
       "referenceLabel": "Flagship/Fighter Shot",
       "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-      "mappingStatus": "Measured coverage added for projectile feedback; current reference clip is shared and may still be too broad.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.9,
+        "endSeconds": 1.14,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "second measured high-transient subwindow reserved for enemy projectile feedback so enemyShot no longer scores against the same active phrase as playerShot"
+      },
+      "mappingStatus": "Measured subwindow promoted for enemy projectile feedback; still from the same source clip, but scored as a distinct reference phrase from playerShot and bossHit.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "enemy-hit-compare",
@@ -584,8 +596,14 @@
       "focus": "Compare whether an enemy impact gives immediate hit confirmation.",
       "referenceLabel": "Zako",
       "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
-      "mappingStatus": "Measured coverage added for impact feedback; hit and kill hierarchy still needs refinement.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.75,
+        "endSeconds": 0.99,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+      },
+      "mappingStatus": "Measured subwindow promoted for impact feedback; hit and kill hierarchy remains under review but is now scored against a distinct phrase from enemyBoom.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "boss-hit-compare",
@@ -594,8 +612,14 @@
       "focus": "Compare whether boss damage reads as a distinct multi-hit event.",
       "referenceLabel": "Boss Damage / Flagship Fighter Shot",
       "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-      "mappingStatus": "Measured coverage added for boss damage feedback; reference source is mixed and may require subwindow promotion.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 1.149,
+        "endSeconds": 1.439,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"
+      },
+      "mappingStatus": "Measured subwindow promoted for boss damage feedback; reference source remains shared, but bossHit now has a dedicated scoring window.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "enemy-boom-compare",
@@ -604,8 +628,14 @@
       "focus": "Compare whether normal enemy destruction is more emphatic than a simple hit.",
       "referenceLabel": "Zako",
       "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
-      "mappingStatus": "Measured coverage added for destruction feedback; may need a better split between impact and explosion.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.5,
+        "endSeconds": 0.74,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"
+      },
+      "mappingStatus": "Measured subwindow promoted for normal-enemy destruction feedback; enemyHit and enemyBoom now score against separate Zako phrases.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "boss-boom-compare",
