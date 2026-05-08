@@ -86,6 +86,16 @@ function category(report, id){
   return (report.categories || []).find(item => item.id === id) || null;
 }
 
+function levelArcScore(categoryRead, levelArcReport){
+  return Number.isFinite(+levelArcReport?.summary?.score10)
+    ? +levelArcReport.summary.score10
+    : categoryRead?.score10;
+}
+
+function levelArcSubmetric(levelArcReport, id){
+  return (levelArcReport?.submetrics || levelArcReport?.summary?.submetrics || []).find(item => item.id === id) || null;
+}
+
 function score(value){
   return Number.isFinite(+value) ? `${(+value).toFixed(1).replace(/\.0$/, '')}/10` : '--';
 }
@@ -869,8 +879,9 @@ function main(){
   const levelArcCandidate = investmentById['level-arc-opportunity-coverage'] || investmentById['stage12-natural-reward-window'];
   const stage4Candidate = investmentById['stage4-pressure-exact-replay'];
 
-  const alienEntryScore = Math.min(10, ((stage1Timing?.score10 || 0) * 0.45) + ((stage1Geometry?.score10 || 0) * 0.35) + ((levelArc.summary?.submetrics || []).find(m => m.id === 'movement-grammar-expansion')?.score10 || 8.4) * 0.2);
-  const challengeVariationScore = Math.min(10, ((challengeTiming?.score10 || 0) * 0.45) + ((levelArc.summary?.submetrics || []).find(m => m.id === 'challenge-stage-identity')?.score10 || 8.4) * 0.35 + ((levelArc.summary?.submetrics || []).find(m => m.id === 'long-run-non-repetition')?.score10 || 8.2) * 0.2);
+  const currentLevelArcScore = levelArcScore(level, levelArc);
+  const alienEntryScore = Math.min(10, ((stage1Timing?.score10 || 0) * 0.45) + ((stage1Geometry?.score10 || 0) * 0.35) + (levelArcSubmetric(levelArc, 'movement-grammar-expansion')?.score10 || 8.4) * 0.2);
+  const challengeVariationScore = Math.min(10, ((challengeTiming?.score10 || 0) * 0.45) + (levelArcSubmetric(levelArc, 'challenge-stage-identity')?.score10 || 8.4) * 0.35 + (levelArcSubmetric(levelArc, 'long-run-non-repetition')?.score10 || 8.2) * 0.2);
   const visualLookScore = Number.isFinite(+visualLook?.summary?.score10) ? +visualLook.summary.score10 : 7.4;
   const visualLookStatus = visualLook
     ? `Measured visual scorer; ${visualLook.summary?.confidence || 'medium-low'} confidence`
@@ -895,12 +906,12 @@ function main(){
     row({
       rank: 2,
       metric: 'Level arc and encounter shape',
-      score10: level?.score10,
+      score10: currentLevelArcScore,
       target: '8.8-9.0',
       status: 'Measured release category',
       why: 'Controls whether long play feels like Galaga-like escalation rather than repeated pressure.',
       effort: 'Medium-high; 2-5 hrs',
-      next: levelArcCandidate?.nextAction || 'Run level-arc candidate loop.',
+      next: levelArcCandidate?.nextAction || levelArc.summary?.nextRecommendedWork?.[0] || 'Run level-arc candidate loop.',
       evidence: levelArcPath ? rel(levelArcPath) : rel(qualityPath)
     }),
     row({
@@ -1064,7 +1075,7 @@ function main(){
   const releaseGate = [
     ['Overall quality', score(quality.summary?.overallScore10), '>=9.3', 'Full score refresh after all major cycles'],
     ['Audio identity', score(audio?.score10), '>=7.5', 'Primary user-experience gap'],
-    ['Level arc', score(level?.score10), '>=8.8', 'Long-play gameplay-quality gate'],
+    ['Level arc', score(currentLevelArcScore), '>=8.8', 'Long-play gameplay-quality gate'],
     ['Alien entry / formations', `${score(alienEntryScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
     ['Challenge variation', `${score(challengeVariationScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
     ['Visual look and feel', score(visualLookScore), '>=8.4', visualLook ? 'New explicit gate; first-pass scorer measured' : 'New explicit gate; currently estimated'],

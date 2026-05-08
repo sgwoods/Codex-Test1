@@ -1,0 +1,30 @@
+{
+  "name": "stage6-mid-run-wave-clear",
+  "seed": 6006,
+  "duration": 32,
+  "config": {
+    "stage": 6,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.4, "action": "down", "code": "Space" },
+    { "t": 0.6, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.2, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.21, "action": "down", "code": "ArrowRight" },
+    { "t": 5.1, "action": "up", "code": "ArrowRight" },
+    { "t": 5.12, "action": "down", "code": "ArrowLeft" },
+    { "t": 8.4, "action": "up", "code": "ArrowLeft" },
+    { "t": 8.42, "action": "down", "code": "ArrowRight" },
+    { "t": 12.2, "action": "up", "code": "ArrowRight" },
+    { "t": 12.22, "action": "down", "code": "ArrowLeft" },
+    { "t": 16.1, "action": "up", "code": "ArrowLeft" },
+    { "t": 16.12, "action": "down", "code": "ArrowRight" },
+    { "t": 20.3, "action": "up", "code": "ArrowRight" },
+    { "t": 20.32, "action": "down", "code": "ArrowLeft" },
+    { "t": 24.5, "action": "up", "code": "ArrowLeft" },
+    { "t": 24.52, "action": "down", "code": "ArrowRight" },
+    { "t": 29.0, "action": "up", "code": "ArrowRight" },
+    { "t": 31.5, "action": "up", "code": "Space" }
+  ]
+}

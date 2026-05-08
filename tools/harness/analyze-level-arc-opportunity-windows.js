@@ -8,6 +8,7 @@ const SOURCE_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-l
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-arc-opportunity-windows');
 
 const OUTCOME_SKILL_ROUTE_MAP = Object.freeze({
+  'mid-run-pressure': ['mid-run-pressure-widened-endpoint'],
   'late-run-cleanup-or-failure': ['late-run-natural-squadron-reward'],
   'late-run-escort-variant': ['late-run-natural-escort-reward']
 });
@@ -149,9 +150,10 @@ function combinedRewardIndex(baseReward, skillReward){
   return round(Math.max(baseReward, (baseReward * 0.5) + (skillReward * 0.5)), 1);
 }
 
-function identityIndex(events, trace){
+function identityIndex(events, trace, semanticMissing = null){
   const coverage = events.event_family_coverage || [];
-  const observed = coverage.filter(item => item.observed).length;
+  const unresolved = semanticMissing ? new Set(semanticMissing) : null;
+  const observed = coverage.filter(item => item.observed || (unresolved && !unresolved.has(item.family))).length;
   const coverageScore = coverage.length ? observed / coverage.length : 0;
   const counts = eventCounts(events);
   const roleCount = ['enemy_dive_start', 'escort_dive_start', 'flank_dive_start', 'challenge_enemy_path', 'challenge_enemy_hit', 'challenge_result']
@@ -165,10 +167,58 @@ function identityIndex(events, trace){
   ), 1);
 }
 
-function semanticMissingFamilies(missing, outcome){
+function stageSupportsFlankDive(stage){
+  return stage >= 8 && stage < 12;
+}
+
+function endpointEvidence(outcome, skillRouteOutcome){
+  return {
+    losses: Math.max(outcome?.losses || 0, skillRouteOutcome?.losses || 0),
+    clears: Math.max(outcome?.clears || 0, skillRouteOutcome?.clears || 0)
+  };
+}
+
+function semanticFamilyNotes(visualMissing, outcome, skillRouteOutcome, context = {}){
+  const endpoint = endpointEvidence(outcome, skillRouteOutcome);
+  const notes = [];
+  for(const family of visualMissing){
+    if(family === 'flank_dive_start' && !stageSupportsFlankDive(context.stage)){
+      notes.push({
+        family,
+        status: 'not-applicable',
+        reason: 'Aurora mid-run flank dives are a Stage 8-11 grammar; this Stage 6 window should not be penalized for absence.'
+      });
+    }else if(family === 'player_hit' && endpoint.losses > 0){
+      notes.push({
+        family,
+        status: 'satisfied-by-widened-outcome-route',
+        reason: 'A paired deterministic skill route reached player-loss endpoint evidence even though the short visual window did not.'
+      });
+    }else if(family === 'wave_clear' && (endpoint.clears > 0 || endpoint.losses > 0)){
+      notes.push({
+        family,
+        status: endpoint.clears > 0 ? 'satisfied-by-widened-clear-route' : 'satisfied-by-widened-endpoint-route',
+        reason: endpoint.clears > 0
+          ? 'A paired deterministic skill route reached wave-clear endpoint evidence.'
+          : 'A paired deterministic skill route reached loss endpoint evidence, proving this is not a pressure-only window.'
+      });
+    }else if(family === 'game_over'){
+      notes.push({
+        family,
+        status: 'not-required',
+        reason: 'Game-over is not required for level-arc opportunity coverage; endpoint loss/clear evidence is sufficient.'
+      });
+    }
+  }
+  return notes;
+}
+
+function semanticMissingFamilies(missing, outcome, skillRouteOutcome, context = {}){
+  const endpoint = endpointEvidence(outcome, skillRouteOutcome);
   return missing.filter(family => {
-    if(family === 'player_hit') return !(outcome?.losses > 0);
-    if(family === 'wave_clear') return !(outcome?.clears > 0 || outcome?.losses > 0);
+    if(family === 'flank_dive_start' && !stageSupportsFlankDive(context.stage)) return false;
+    if(family === 'player_hit') return !(endpoint.losses > 0);
+    if(family === 'wave_clear') return !(endpoint.clears > 0 || endpoint.losses > 0);
     if(family === 'game_over') return false;
     return true;
   });
@@ -184,18 +234,20 @@ function loadWindow(dir, outcomeById){
   const id = path.basename(dir);
   const outcome = outcomeById[id] || null;
   const skillRouteOutcome = bestSkillRouteOutcome(id, outcomeById);
-  const missing = semanticMissingFamilies(visualMissing, outcome);
+  const stage = manifest.config?.stage || trace.summary?.final_stage || null;
+  const semanticNotes = semanticFamilyNotes(visualMissing, outcome, skillRouteOutcome, { stage });
+  const missing = semanticMissingFamilies(visualMissing, outcome, skillRouteOutcome, { stage });
   const pressure = pressureIndex(trace, events, duration);
   const baselineReward = baseRewardIndex(manifest, trace, events, duration);
   const skillReward = outcomeRewardIndex(skillRouteOutcome);
   const reward = combinedRewardIndex(baselineReward, skillReward);
-  const identity = identityIndex(events, trace);
+  const identity = identityIndex(events, trace, missing);
   const opportunityScore = round(10 - ((identity * 0.42) + (reward * 0.28) + (pressure * 0.12) + ((missing.length ? 0 : 10) * 0.18)), 1);
   return {
     id,
     role: null,
     scenario: manifest.scenario,
-    stage: manifest.config?.stage || trace.summary?.final_stage || null,
+    stage,
     challenge: !!manifest.config?.challenge,
     duration,
     score: manifest.final_state?.score || trace.summary?.final_score || 0,
@@ -203,6 +255,7 @@ function loadWindow(dir, outcomeById){
     promotedEventCount: manifest.promoted_event_count || events.events?.length || 0,
     missingFamilies: missing,
     visualMissingFamilies: visualMissing,
+    semanticCoverageNotes: semanticNotes,
     outcomeProbe: outcome ? {
       score10: outcome.outcomeScore10,
       losses: outcome.losses,
@@ -219,6 +272,7 @@ function loadWindow(dir, outcomeById){
       rewardIndex: skillRouteOutcome.skillRewardIndex,
       score: skillRouteOutcome.score,
       losses: skillRouteOutcome.losses,
+      clears: skillRouteOutcome.clears,
       collisionLosses: skillRouteOutcome.collisionLosses,
       specialAttackCount: skillRouteOutcome.specialAttackCount,
       specialAttackBonus: skillRouteOutcome.specialAttackBonus,
@@ -389,13 +443,16 @@ function buildReadme(report){
   }
   lines.push('## Window Reads');
   lines.push('');
-  lines.push('| Window | Stage | Pressure | Reward | Identity | Missing Families |');
-  lines.push('| --- | ---: | ---: | ---: | ---: | --- |');
+  lines.push('| Window | Stage | Pressure | Reward | Identity | Semantic Missing | Raw Missing / Notes |');
+  lines.push('| --- | ---: | ---: | ---: | ---: | --- | --- |');
   for(const win of report.windows){
     const rewardRead = win.skillRouteProbe
       ? `${win.rewardIndex} (base ${win.baselineRewardIndex}; skill ${win.skillRouteRewardIndex})`
       : String(win.rewardIndex);
-    lines.push(`| ${win.id} | ${win.challenge ? `${win.stage} challenge` : win.stage} | ${win.pressureIndex} | ${rewardRead} | ${win.identityIndex} | ${win.missingFamilies.join(', ') || 'none'} |`);
+    const rawRead = win.visualMissingFamilies.length
+      ? `${win.visualMissingFamilies.join(', ')}${win.semanticCoverageNotes?.length ? `; notes: ${win.semanticCoverageNotes.map(note => `${note.family}=${note.status}`).join(', ')}` : ''}`
+      : 'none';
+    lines.push(`| ${win.id} | ${win.challenge ? `${win.stage} challenge` : win.stage} | ${win.pressureIndex} | ${rewardRead} | ${win.identityIndex} | ${win.missingFamilies.join(', ') || 'none'} | ${rawRead} |`);
   }
   lines.push('');
   lines.push('## Pressure Curve');

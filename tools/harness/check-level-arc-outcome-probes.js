@@ -9,6 +9,7 @@ const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-arc-o
 
 const PROBES = [
   { id: 'mid-run-pressure', scenario: 'stage6-regular', expectedStage: 6 },
+  { id: 'mid-run-pressure-widened-endpoint', scenario: 'stage6-mid-run-wave-clear', expectedStage: 6 },
   { id: 'mid-run-entry-variant', scenario: 'stage8-entry-variant', expectedStage: 8 },
   { id: 'late-run-cleanup-or-failure', scenario: 'stage12-variety', expectedStage: 12 },
   { id: 'late-run-natural-squadron-reward', scenario: 'stage12-natural-squadron-reward', expectedStage: 12 },

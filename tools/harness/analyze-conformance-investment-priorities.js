@@ -85,6 +85,27 @@ function categoryById(quality, id){
   return (quality.categories || []).find(category => category.id === id) || { id, label: id, score10: 0 };
 }
 
+function latestLevelArcCategory(quality, levelArcReport){
+  const base = categoryById(quality, 'level-arc');
+  if(!Number.isFinite(+levelArcReport?.summary?.score10)) return base;
+  return Object.assign({}, base, {
+    score10: +levelArcReport.summary.score10
+  });
+}
+
+function nextLevelArcAction(nextOpportunityId){
+  if(nextOpportunityId === 'stage-1-baseline-missing-event-coverage'){
+    return 'Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning.';
+  }
+  if(String(nextOpportunityId || '').includes('stage-1-baseline')){
+    return 'Resolve the Stage 1 baseline opportunity coverage gap with a longer deterministic opening route before gameplay tuning.';
+  }
+  if(String(nextOpportunityId || '').includes('mid-run-pressure')){
+    return 'Promote mid-run pressure event coverage by widening the Stage 6 evidence window for flank-dive and wave-clear semantics before changing gameplay tuning.';
+  }
+  return 'Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.';
+}
+
 function buildCandidate({ id, label, category, quality, economics, expectedLift10, confidence, reuse, risk, costClass, computeAxis, rationale, nextAction }){
   const categoryCount = Math.max((quality.categories || []).length, 1);
   const categoryWeight = 1 / categoryCount;
@@ -158,17 +179,19 @@ function main(){
   const qualityPath = latestReport('quality-conformance');
   if(!qualityPath) throw new Error('Missing quality-conformance report; run npm run harness:score:quality-conformance first.');
   const opportunityPath = latestReport('level-arc-opportunity-windows');
+  const levelArcPath = latestReport('level-arc-conformance');
   const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {} };
+  const levelArcReport = levelArcPath ? readJson(levelArcPath) : { summary: {} };
   const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
   const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
   const nextOpportunityId = opportunity.summary?.highestPriorityOpportunity?.id || 'missing level-arc opportunity coverage';
 
   const audio = categoryById(quality, 'audio');
-  const levelArc = categoryById(quality, 'level-arc');
+  const levelArc = latestLevelArcCategory(quality, levelArcReport);
   const stage1Timing = categoryById(quality, 'stage1-timing');
   const uiShell = categoryById(quality, 'ui-shell');
   const candidates = [
@@ -202,9 +225,7 @@ function main(){
       rationale: stage14SpecialRoutes
         ? `The Stage 12 and Stage 14 learned reward routes are now credited; the Stage 14 sweep found ${stage14SpecialRoutes} natural special-bonus routes, opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gap is ${nextOpportunityId}.`
         : `The Stage 12 learned reward route is now credited; opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gaps are ${nextOpportunityId} plus late reward thinness outside the Stage 12 route.`,
-      nextAction: stage14SpecialRoutes
-        ? 'Promote mid-run pressure event coverage by widening the Stage 6 evidence window for flank-dive and wave-clear semantics before changing gameplay tuning.'
-        : 'Widen mid-run/late-run evidence coverage and add a Stage 14 reward-route probe before changing gameplay tuning.'
+      nextAction: nextLevelArcAction(nextOpportunityId)
     }),
     buildCandidate({
       id: 'stage4-pressure-exact-replay',
@@ -265,6 +286,7 @@ function main(){
     evidence: {
       qualityReport: rel(qualityPath),
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
+      levelArcReport: levelArcPath ? rel(levelArcPath) : null,
       stage14SweepReport: stage14SweepPath ? rel(stage14SweepPath) : null,
       economicsReport: economicsPath ? rel(economicsPath) : null,
       ledger: rel(LEDGER)
@@ -278,9 +300,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: stage14SpecialRoutes
-      ? 'Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment; Stage 12 and Stage 14 reward-route uncertainty has been reduced, so the immediate level-arc task is now mid-run pressure event coverage.'
-      : 'Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment, but the immediate level-arc task has shifted from Stage 12 reward discovery to better opportunity coverage and Stage 14 reward-route evidence.'
+    interpretation: `Audio remains the largest raw gap. Level-arc work remains the best lower-cost gameplay-adjacent investment; Stage 12 and Stage 14 reward-route uncertainty has been reduced, and the immediate level-arc task is now ${nextOpportunityId}.`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
