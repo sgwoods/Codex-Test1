@@ -127,13 +127,43 @@ function html(data){
     }
     .metricExplanation{
       display:grid;
-      gap:8px;
+      grid-template-columns:repeat(3,minmax(170px,1fr));
+      gap:10px;
       margin-top:10px;
       padding:10px;
       border:1px solid var(--line);
       border-radius:7px;
       background:#fbfaf7;
       font-weight:500;
+    }
+    .metricExplanationHeader{
+      grid-column:1/-1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding-bottom:8px;
+      border-bottom:1px solid var(--line);
+    }
+    .metricExplanationTitle{font-weight:850}
+    .closeDetails{
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:6px;
+      padding:4px 8px;
+      font-size:12px;
+      font-weight:850;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .explainBlock{
+      min-width:0;
+      padding:8px;
+      border:1px solid #ebe5da;
+      border-radius:6px;
+      background:#fffefa;
+      font-size:13px;
+      line-height:1.35;
     }
     .explainLabel{
       display:block;
@@ -176,6 +206,7 @@ function html(data){
       .shell{padding:16px}
       .grid{grid-template-columns:1fr}
       table{display:block;overflow-x:auto}
+      .metricExplanation{grid-template-columns:1fr}
       h1{font-size:26px}
     }
   </style>
@@ -241,7 +272,7 @@ function html(data){
     }
 
     function explanationBlock(label, value){
-      return '<div><span class="explainLabel">' + esc(label) + '</span>' + esc(value || 'Not yet documented for this metric.') + '</div>';
+      return '<div class="explainBlock"><span class="explainLabel">' + esc(label) + '</span>' + esc(value || 'Not yet documented for this metric.') + '</div>';
     }
 
     function metricCell(row){
@@ -251,6 +282,7 @@ function html(data){
       return '<details class="metricDetails">'
         + '<summary><span>' + esc(row.metric) + '</span></summary>'
         + '<div class="metricExplanation">'
+        + '<div class="metricExplanationHeader"><span class="metricExplanationTitle">' + esc(row.metric) + '</span><button class="closeDetails" type="button">Close</button></div>'
         + explanationBlock('Score meaning', scoreContext.scoreMeaning)
         + explanationBlock('Confidence', scoreContext.confidence)
         + explanationBlock('Resolution', scoreContext.resolution)
@@ -331,6 +363,13 @@ function html(data){
       \`;
       statusLine.textContent = 'Dashboard data: ' + (data.generatedAt || 'unknown') + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
     }
+
+    app.addEventListener('click', event => {
+      const button = event.target.closest('.closeDetails');
+      if(!button) return;
+      const details = button.closest('details');
+      if(details) details.open = false;
+    });
 
     async function refresh(){
       try{

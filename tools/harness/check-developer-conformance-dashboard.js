@@ -26,6 +26,8 @@ function checkGeneratedDashboardPage(){
     'Cost / resources',
     'Tracked spend',
     'Value / cost read',
+    'class="closeDetails"',
+    "app.addEventListener('click', event =>",
     "refreshState.addEventListener('click', refresh)"
   ];
   const missing = expected.filter(item => !html.includes(item));
