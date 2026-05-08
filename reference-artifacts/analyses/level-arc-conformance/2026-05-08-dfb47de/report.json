@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-05-08T13:07:45.168Z",
+  "commit": "dfb47de",
+  "score10": 8.4,
+  "summary": {
+    "score10": 8.4,
+    "stageFamilyBlueprintCount": 6,
+    "challengeLayerBlueprintCount": 3,
+    "evidenceWindowCount": 6,
+    "pressureReplayCoverage": 0,
+    "pressureCollisionReplayCoverage": 0.667,
+    "priority": "high",
+    "strongestSubmetric": {
+      "id": "learning-mastery-windows",
+      "label": "Learning and mastery windows",
+      "score10": 9,
+      "read": "20/20 persona checks pass; progression ordering is not fully preserved."
+    },
+    "weakestSubmetric": {
+      "id": "pressure-curve-over-time",
+      "label": "Pressure curve over time",
+      "score10": 7.5,
+      "read": "3/3 source pressure/loss windows are found, but 0 reproduce as exact losses under replay. Pressure-collision replay diagnostics classify 2 as same-window or exact collision pressure."
+    },
+    "nextRecommendedWork": [
+      "improve Stage 4 pressure replay precision so source loss windows reproduce as exact deterministic windows",
+      "preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice",
+      "late-run-cleanup-or-failure has late-stage pressure evidence but low reward/opportunity signal (1.8/10). Strategy: Measure boss/escort score opportunities, hit-before-loss events, and clear/failure outcomes; then add one visible late-stage reward window rather than increasing raw attack density.",
+      "implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback"
+    ]
+  },
+  "evidence": {
+    "levelExpansionPlan": "LEVEL_BY_LEVEL_EXPANSION_PLAN.md",
+    "challengeReport": "reference-artifacts/analyses/correspondence/challenge-stage-timing/2026-05-06-3216ba8/report.json",
+    "progressionReport": "reference-artifacts/analyses/correspondence/persona-progression/2026-04-22-7e7f2e4/report.json",
+    "captureReport": "reference-artifacts/analyses/correspondence/capture-rescue/2026-04-19-7081c7a/report.json",
+    "pressureGeometryReport": "reference-artifacts/analyses/aurora-stage4-pressure-geometry/2026-05-07-4f2fafe/report.json",
+    "pressureLossReport": "reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-4f2fafe/report.json",
+    "stageSignatureReport": "reference-artifacts/analyses/stage-signature-distance/2026-05-08-8f0dde1/report.json",
+    "opportunityReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-08-d8240f0/report.json",
+    "levelExpansionCycle": "reference-artifacts/analyses/aurora-level-expansion-cycle"
+  },
+  "submetrics": [
+    {
+      "id": "stage-distinctiveness",
+      "label": "Stage distinctiveness",
+      "score10": 8.4,
+      "read": "6/6 stage families are blueprinted and 6/6 target evidence windows are present; stage-signature distinct pair ratio is 0.467."
+    },
+    {
+      "id": "challenge-stage-identity",
+      "label": "Challenge-stage identity",
+      "score10": 8.3,
+      "read": "5/5 challenge timing checks pass and 3/3 content layers are blueprinted; opportunity-window readiness is 4.5/10."
+    },
+    {
+      "id": "movement-grammar-expansion",
+      "label": "Movement grammar expansion",
+      "score10": 8.7,
+      "read": "Later-level entry, escort, regrouping, and challenge-path grammar is planned; the stage-signature distance score is 6.8/10."
+    },
+    {
+      "id": "pressure-curve-over-time",
+      "label": "Pressure curve over time",
+      "score10": 7.5,
+      "read": "3/3 source pressure/loss windows are found, but 0 reproduce as exact losses under replay. Pressure-collision replay diagnostics classify 2 as same-window or exact collision pressure."
+    },
+    {
+      "id": "boss-reward-opportunity",
+      "label": "Boss and reward opportunity design",
+      "score10": 8.1,
+      "read": "3/3 capture/rescue scenarios match; level-arc opportunity windows show mean reward/opportunity signal 2/10."
+    },
+    {
+      "id": "learning-mastery-windows",
+      "label": "Learning and mastery windows",
+      "score10": 9,
+      "read": "20/20 persona checks pass; progression ordering is not fully preserved."
+    },
+    {
+      "id": "long-run-non-repetition",
+      "label": "Long-run non-repetition",
+      "score10": 8.5,
+      "read": "Stage-signature repetition risk is 0.382; closest pair is late-run-cleanup-or-failure / late-run-escort-variant."
+    }
+  ]
+}

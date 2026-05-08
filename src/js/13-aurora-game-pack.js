@@ -403,7 +403,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    extendAward:Object.freeze({seq:[880,1175,1568],step:.058,wave:'triangle',volume:.015,slide:54,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.08}])}),
    capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:340,duration:.042,wave:'triangle',volume:.0118,slide:-250,lpHz:3500},{freq:208,duration:.092,wave:'sine',volume:.0088,slide:-130,lpHz:2360,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0056,hp:1500,delay:.01}])}),
    challengeResults:Object.freeze({seq:[440,587,784,988],step:.058,wave:'triangle',volume:.0134,slide:24,lpHz:3800,tones:Object.freeze([{freq:1245,duration:.12,wave:'sine',volume:.0054,slide:12,lpHz:4500,delay:.174}])}),
-   challengePerfect:Object.freeze({seq:[698,932,1175,1568,2093],step:.05,wave:'triangle',volume:.0152,slide:42,lpHz:4500,tones:Object.freeze([{freq:2637,duration:.14,wave:'sine',volume:.0068,slide:18,lpHz:5400,delay:.2}])}),
+   challengePerfect:Object.freeze({seq:[880,1175,1568,2093,2794,3520],step:.039,wave:'triangle',volume:.0086,slide:10,lpHz:6900,tones:Object.freeze([{freq:3136,duration:.075,wave:'square',volume:.0027,slide:0,lpHz:7600,delay:.195}])}),
    rescueJoin:Object.freeze({seq:[659,784,1047,1397],step:.05,wave:'triangle',volume:.014,slide:48,lpHz:4500,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:20,lpHz:5200,delay:.08}])}),
    captureRetreat:Object.freeze({seq:[330,392,494,587],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:784,duration:.18,wave:'sawtooth',volume:.005,slide:-70,lpHz:3200,delay:.08}])}),
    attractEnter:Object.freeze({

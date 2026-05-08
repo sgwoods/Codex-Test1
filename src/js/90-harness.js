@@ -665,6 +665,20 @@ window.__galagaHarness__={
   if(recorder.state!=='inactive')recorder.stop();
   return done;
  },
+ async captureAudioCueSpec(spec={},opts={}){
+  if(typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return {ok:false,error:'Audio engine is not available.'};
+  const cueName=String(opts.name||'__candidateCue').trim()||'__candidateCue';
+  const originalCueDef=sfx.cueDef;
+  sfx.cueDef=function(name,cueOpts={}){
+   if(String(name)===cueName)return spec;
+   return originalCueDef.call(this,name,cueOpts);
+  };
+  try{
+   return await this.captureAudioCue(cueName,opts);
+  }finally{
+   sfx.cueDef=originalCueDef;
+  }
+ },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {

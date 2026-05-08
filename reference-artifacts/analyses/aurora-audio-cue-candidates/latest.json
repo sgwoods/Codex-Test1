@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-cue-candidate-loop",
+  "generatedAt": "2026-05-08T13:05:36.258Z",
+  "branch": "codex/macbook-pro-level-arc-long-cycle",
+  "commit": "dfb47de",
+  "dirty": true,
+  "cue": "challengePerfect",
+  "problem": "Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.",
+  "strategy": "Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift.",
+  "successMeasure": "A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS gap, and keep active duration within 0.08s of the reference.",
+  "source": {
+    "comparisonSet": "challenge-perfect-compare",
+    "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+    "referenceWindow": {
+      "startSeconds": 0,
+      "endSeconds": 0.48,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+      "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-dfb47de-dirty/challengePerfect/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-dfb47de-dirty/challengePerfect/metrics.json"
+  },
+  "candidates": [
+    {
+      "id": "staccato-bright",
+      "label": "Staccato bright",
+      "risk10": 2.74,
+      "durationGapSeconds": 0.21,
+      "centroidGapHz": 427.3,
+      "zeroCrossingGapPerSecond": 321.2,
+      "rmsGap": 0.1257,
+      "activeMetrics": {
+        "duration_s": 0.27,
+        "peak": 0.9309,
+        "rms": 0.2678,
+        "spectral_centroid_hz": 1612.8,
+        "zero_crossings_per_s": 2577.4
+      },
+      "comparison": {
+        "duration_s": 0.21,
+        "spectral_centroid_hz": 427.3,
+        "zero_crossings_per_s": 321.2,
+        "rms": 0.1257
+      }
+    },
+    {
+      "id": "thin-bright-square-top",
+      "label": "Thin bright square top",
+      "risk10": 2.85,
+      "durationGapSeconds": 0.141,
+      "centroidGapHz": 624.2,
+      "zeroCrossingGapPerSecond": 126,
+      "rmsGap": 0.1123,
+      "activeMetrics": {
+        "duration_s": 0.339,
+        "peak": 0.8153,
+        "rms": 0.2544,
+        "spectral_centroid_hz": 1415.9,
+        "zero_crossings_per_s": 2130.2
+      },
+      "comparison": {
+        "duration_s": 0.141,
+        "spectral_centroid_hz": 624.2,
+        "zero_crossings_per_s": 126,
+        "rms": 0.1123
+      }
+    },
+    {
+      "id": "sparkle-noise-light",
+      "label": "Sparkle with light noise",
+      "risk10": 2.95,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 690.4,
+      "zeroCrossingGapPerSecond": 50.9,
+      "rmsGap": 0.1196,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8859,
+        "rms": 0.2617,
+        "spectral_centroid_hz": 1349.7,
+        "zero_crossings_per_s": 2307.1
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 690.4,
+        "zero_crossings_per_s": 50.9,
+        "rms": 0.1196
+      }
+    },
+    {
+      "id": "high-square-stair",
+      "label": "High square stair",
+      "risk10": 3.06,
+      "durationGapSeconds": 0.1,
+      "centroidGapHz": 620.9,
+      "zeroCrossingGapPerSecond": 126.9,
+      "rmsGap": 0.1403,
+      "activeMetrics": {
+        "duration_s": 0.38,
+        "peak": 0.8583,
+        "rms": 0.2824,
+        "spectral_centroid_hz": 1419.2,
+        "zero_crossings_per_s": 2383.1
+      },
+      "comparison": {
+        "duration_s": 0.1,
+        "spectral_centroid_hz": 620.9,
+        "zero_crossings_per_s": 126.9,
+        "rms": 0.1403
+      }
+    },
+    {
+      "id": "low-rms-harmonic",
+      "label": "Low RMS harmonic",
+      "risk10": 3.16,
+      "durationGapSeconds": 0.051,
+      "centroidGapHz": 752.8,
+      "zeroCrossingGapPerSecond": 322.4,
+      "rmsGap": 0.1004,
+      "activeMetrics": {
+        "duration_s": 0.429,
+        "peak": 0.978,
+        "rms": 0.2425,
+        "spectral_centroid_hz": 1287.3,
+        "zero_crossings_per_s": 1933.8
+      },
+      "comparison": {
+        "duration_s": 0.051,
+        "spectral_centroid_hz": 752.8,
+        "zero_crossings_per_s": 322.4,
+        "rms": 0.1004
+      }
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "risk10": 3.28,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 809.1,
+      "zeroCrossingGapPerSecond": 263.3,
+      "rmsGap": 0.1058,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8141,
+        "rms": 0.2479,
+        "spectral_centroid_hz": 1231,
+        "zero_crossings_per_s": 1992.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 809.1,
+        "zero_crossings_per_s": 263.3,
+        "rms": 0.1058
+      }
+    },
+    {
+      "id": "thin-bright-triangle",
+      "label": "Thin bright triangle ladder",
+      "risk10": 3.31,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 744,
+      "zeroCrossingGapPerSecond": 383.3,
+      "rmsGap": 0.1158,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.8584,
+        "rms": 0.2579,
+        "spectral_centroid_hz": 1296.1,
+        "zero_crossings_per_s": 1872.9
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 744,
+        "zero_crossings_per_s": 383.3,
+        "rms": 0.1158
+      }
+    },
+    {
+      "id": "octave-chime-thin",
+      "label": "Octave chime thin",
+      "risk10": 4.01,
+      "durationGapSeconds": 0.13,
+      "centroidGapHz": 850.8,
+      "zeroCrossingGapPerSecond": 540.3,
+      "rmsGap": 0.1525,
+      "activeMetrics": {
+        "duration_s": 0.35,
+        "peak": 0.8464,
+        "rms": 0.2946,
+        "spectral_centroid_hz": 1189.3,
+        "zero_crossings_per_s": 1715.9
+      },
+      "comparison": {
+        "duration_s": 0.13,
+        "spectral_centroid_hz": 850.8,
+        "zero_crossings_per_s": 540.3,
+        "rms": 0.1525
+      }
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": "sparkle-noise-light",
+    "riskDelta": 0.33,
+    "centroidDelta": 118.7,
+    "rmsDelta": -0.0138,
+    "reason": "The best candidate did not clear the minimum risk and centroid improvement gate."
+  },
+  "nextStep": "Expand the candidate generator around the best measured direction instead of manually changing the game pack."
+}
