@@ -1,8 +1,10 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-08T10:25:20.951Z`
+Generated: `2026-05-08T10:36:02.809Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
+
+Local internal dashboard: `http://127.0.0.1:4312/local-dev/conformance-dashboard.html` after `npm run local:resume`. Refresh the underlying local page data with `npm run dev:conformance-dashboard` when running a live planning cycle.
 
 ## Current Release Gate
 
@@ -49,6 +51,7 @@ This is the primary at-a-glance planning artifact for Aurora conformance work. I
 ## Maintenance Rules
 
 - Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.
+- Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.
 - Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.
 - Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.
 - Prefer work with a large score gap, high user-experience impact, reusable ingestion/harness value, and clear guardrails.

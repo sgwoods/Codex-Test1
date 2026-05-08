@@ -25,6 +25,15 @@ const SERVICES = [
     log: path.join(STATE_DIR, 'viewer.log'),
     pid: path.join(STATE_DIR, 'viewer.pid'),
     command: [NODE, path.join(ROOT, 'tools', 'log-viewer', 'server.js')]
+  },
+  {
+    name: 'conformance-dashboard',
+    url: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html',
+    expect: 'Aurora Conformance Dashboard',
+    port: 4312,
+    log: path.join(STATE_DIR, 'conformance-dashboard.log'),
+    pid: path.join(STATE_DIR, 'conformance-dashboard.pid'),
+    command: ['python3', '-m', 'http.server', '4312', '--directory', ROOT]
   }
 ];
 

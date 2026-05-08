@@ -8,7 +8,8 @@ const STATE_DIR = path.join(ROOT, '.local-services');
 
 const SERVICES = [
   { name: 'game', port: 8000, pid: path.join(STATE_DIR, 'game.pid') },
-  { name: 'viewer', port: 4311, pid: path.join(STATE_DIR, 'viewer.pid') }
+  { name: 'viewer', port: 4311, pid: path.join(STATE_DIR, 'viewer.pid') },
+  { name: 'conformance-dashboard', port: 4312, pid: path.join(STATE_DIR, 'conformance-dashboard.pid') }
 ];
 
 function listenerPids(port){

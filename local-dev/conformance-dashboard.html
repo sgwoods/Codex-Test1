@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurora Conformance Dashboard</title>
+  <style>
+    :root{
+      color-scheme:light;
+      --page:#f5f3ee;
+      --ink:#191714;
+      --muted:#69645d;
+      --panel:#ffffff;
+      --line:#d8d2c7;
+      --rail:#24221f;
+      --green:#16784f;
+      --yellow:#9c6f0a;
+      --red:#b03a2e;
+      --blue:#285e8e;
+      --shadow:0 16px 36px rgba(27,24,19,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--page);
+      color:var(--ink);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size:15px;
+      line-height:1.45;
+    }
+    a{color:var(--blue)}
+    .shell{max-width:1440px;margin:0 auto;padding:24px}
+    header{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:18px;
+      align-items:end;
+      padding:22px 0 18px;
+      border-bottom:3px solid var(--rail);
+    }
+    h1{margin:0;font-size:32px;line-height:1.05;letter-spacing:0}
+    .subtitle{margin:8px 0 0;color:var(--muted);max-width:920px}
+    .controls{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+    .pill,.button{
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--ink);
+      border-radius:6px;
+      padding:8px 10px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .button{box-shadow:0 2px 0 rgba(0,0,0,.12)}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:14px;
+      box-shadow:var(--shadow);
+      min-width:0;
+    }
+    .label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-bottom:5px}
+    .value{font-size:22px;font-weight:850;letter-spacing:0}
+    .split{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:start}
+    section{margin-top:14px}
+    h2{margin:0 0 10px;font-size:18px;letter-spacing:0}
+    table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+    th,td{padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+    th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#4e4a43;background:#ece6db}
+    tr:last-child td{border-bottom:0}
+    .priority{font-weight:850;text-align:center;width:56px}
+    .metric{font-weight:800;min-width:230px}
+    .score{font-weight:850;white-space:nowrap}
+    .good{color:var(--green)} .watch{color:var(--yellow)} .gap{color:var(--red)}
+    .small{font-size:13px;color:var(--muted)}
+    .axisList{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+    .axisList li{padding:10px;border:1px solid var(--line);border-radius:7px;background:#fbfaf7}
+    .evidence{display:grid;gap:8px}
+    .evidence a{word-break:break-word}
+    .statusLine{margin-top:10px;color:var(--muted);font-size:13px}
+    .dirty{color:var(--red)}
+    .clean{color:var(--green)}
+    @media (max-width:980px){
+      header{grid-template-columns:1fr}
+      .controls{justify-content:flex-start}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .split{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .shell{padding:16px}
+      .grid{grid-template-columns:1fr}
+      table{display:block;overflow-x:auto}
+      h1{font-size:26px}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div>
+        <h1>Aurora Conformance Dashboard</h1>
+        <p class="subtitle">Internal localhost view of the current conformance plan, release gates, measurement debt, and highest-value next investments. This page reads generated artifacts and refreshes without exposing anything publicly.</p>
+      </div>
+      <nav class="controls" aria-label="Dashboard links">
+        <span class="pill" id="refreshState">loading</span>
+        <a class="button" href="../index.html">Game</a>
+        <a class="button" href="../release-dashboard.html">Release</a>
+        <a class="button" href="../RELEASE_CONFORMANCE_DASHBOARD.md">Markdown</a>
+      </nav>
+    </header>
+    <main id="app"></main>
+    <p class="statusLine" id="statusLine"></p>
+  </div>
+  <script id="initial-data" type="application/json">{"schemaVersion":1,"artifactType":"release-conformance-dashboard","generatedAt":"2026-05-08T10:36:02.809Z","commit":"7979583","branch":"codex/macbook-pro-level-arc-long-cycle","dirty":true,"sourceReports":{"quality":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json","investmentPriority":"reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-d8240f0/report.json","levelArc":"reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json","economics":"reference-artifacts/analyses/conformance-economics/2026-05-08-d8240f0/report.json"},"equalQualityCategoryWeight":0.091,"releaseGate":[{"Gate":"Overall quality","Current":"9.1/10","Target":"\u003e=9.3","Notes":"Full score refresh after all major cycles"},{"Gate":"Audio identity","Current":"6.3/10","Target":"\u003e=7.5","Notes":"Primary user-experience gap"},{"Gate":"Level arc","Current":"8.4/10","Target":"\u003e=8.8","Notes":"Long-play gameplay-quality gate"},{"Gate":"Alien entry / formations","Current":"9/10 composite","Target":"\u003e=9.2 with dedicated scorer","Notes":"New explicit gate"},{"Gate":"Challenge variation","Current":"9/10 composite","Target":"\u003e=9.2 with dedicated scorer","Notes":"New explicit gate"},{"Gate":"Visual look and feel","Current":"7.4/10","Target":"\u003e=8.4","Notes":"New explicit gate; currently estimated"},{"Gate":"Arcade frame and popup surfaces","Current":"9.2/10","Target":"\u003e=9.4","Notes":"Split from generic UI shell before final gate"},{"Gate":"No-regression guardrails","Current":"movement/combat/capture \u003e=10; challenge timing \u003e=9.8","Target":"Maintain","Notes":"Hard blockers"}],"priorityRows":[{"rank":1,"metric":"Audio identity, event feedback, and cue alignment","score10":6.3,"current":"6.3/10","target":"7.5-8.0","status":"Measured release category; weakest axis","why":"Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.","effort":"High; 3-6 hrs local/model-assisted analysis","next":"Run a longer audio segmentation/model-assisted analysis cycle.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":2,"metric":"Level arc and encounter shape","score10":8.4,"current":"8.4/10","target":"8.8-9.0","status":"Measured release category","why":"Controls whether long play feels like Galaga-like escalation rather than repeated pressure.","effort":"Medium-high; 2-5 hrs","next":"Apply one narrow Stage 12 reward candidate and rerun the frozen conformance loop.","evidence":"reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"rank":3,"metric":"Overall visual look and feel: gameplay, start page, typography complexity","score10":7.4,"current":"7.4/10","target":"8.4-8.8","status":"Estimated; needs dedicated visual conformance scorer","why":"A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.","effort":"Medium; 2-4 hrs, screenshot/contact-sheet driven","next":"Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets.","evidence":"UI shell suite plus generated frame/contact-sheet artifacts"},{"rank":4,"metric":"Stage 4 pressure exact replay / pressure curve precision","score10":7.5,"current":"7.5/10","target":"8.2-8.6","status":"Measured level-arc weak submetric","why":"Pressure should be learnable and reproducible, not merely present in one run.","effort":"Medium-high; prior runs ~12.8 min wall / 18.5 min CPU","next":"Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.","evidence":"reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"rank":5,"metric":"Alien entry to levels: formation, timing, and methods","score10":9.005,"current":"9/10","target":"9.0-9.4 with dedicated scorer","status":"Composite proxy: stage opening timing + geometry + movement grammar","why":"Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.","effort":"Medium; 1-3 hrs plus visual review","next":"Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"rank":6,"metric":"Challenge-stage variation and new alien/formations introduction","score10":9.035,"current":"9/10","target":"9.0-9.4 with dedicated scorer","status":"Composite proxy: challenge timing + challenge identity + non-repetition","why":"Challenge stages should teach new motion/reward patterns, not only pause normal combat.","effort":"Medium-high; 2-4 hrs","next":"Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"rank":7,"metric":"Progression and persona depth","score10":8.8,"current":"8.8/10","target":"9.1+","status":"Measured release category","why":"Keeps the game learnable across skill levels and supports later-stage quality.","effort":"Low-medium; 1-2 hrs","next":"Resolve remaining ordering edge case after higher-value audio/level-arc work.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":8,"metric":"Stage 1 opening timing fidelity","score10":8.5,"current":"8.5/10","target":"8.8-9.2","status":"Measured release category","why":"First impression and direct reference feel.","effort":"Low-medium; 1-2 hrs","next":"Tune only after audio and level-arc priorities unless regressions appear.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":9,"metric":"Arcade console frame UI style","score10":9.2,"current":"9.2/10","target":"9.4-9.6","status":"Measured as UI shell; needs separate arcade-frame style rubric","why":"The cabinet frame is the constant product surface around every game.","effort":"Medium; 1-3 hrs visual QA","next":"Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":10,"metric":"Popup/help/scoring/leaderboard surface formatting","score10":9.2,"current":"9.2/10","target":"9.4-9.6","status":"Measured through UI shell suite; needs modal-specific scoring","why":"Popup surfaces carry learning, scoring trust, feedback, and player records.","effort":"Low-medium; 1-2 hrs","next":"Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":11,"metric":"Dive fairness and safety","score10":9.1,"current":"9.1/10","target":"9.3+","status":"Measured release category","why":"Protects user trust while pressure is increased.","effort":"Guardrail; 30-90 min per risky gameplay cycle","next":"Keep as required guardrail for pressure/reward changes.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":12,"metric":"Player movement conformance","score10":10,"current":"10/10","target":"Maintain 10","status":"Measured release category","why":"Core control feel is already excellent.","effort":"Guardrail only","next":"Do not tune unless a new reference metric proves a gap.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":13,"metric":"Shot and hit responsiveness","score10":10,"current":"10/10","target":"Maintain 10","status":"Measured release category","why":"Core combat response is already excellent.","effort":"Guardrail only","next":"Protect during explosion/audio/event feedback work.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":14,"metric":"Stage 1 opening geometry fidelity","score10":10,"current":"10/10","target":"Maintain 10","status":"Measured release category","why":"Formation geometry is already locked.","effort":"Guardrail only","next":"Protect during alien-entry visual work.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":15,"metric":"Capture and rescue rule fidelity","score10":10,"current":"10/10","target":"Maintain 10","status":"Measured release category","why":"Strong Galaga identity mechanic; should not regress while feedback improves.","effort":"Guardrail only","next":"Use as release blocker for capture/rescue-adjacent audio or explosion changes.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"rank":16,"metric":"Challenge-stage timing fidelity","score10":9.9,"current":"9.9/10","target":"Maintain 9.8+","status":"Measured release category","why":"Timing is strong; variation is the gap, not baseline timing.","effort":"Guardrail only","next":"Preserve while adding challenge variation scoring.","evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"}],"priorityTable":[{"Priority":1,"Metric":"Audio identity, event feedback, and cue alignment","Current":"6.3/10","Major-gate target":"7.5-8.0","Measurement status":"Measured release category; weakest axis","Why this matters":"Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.","Effort / time estimate":"High; 3-6 hrs local/model-assisted analysis","Recommended next step":"Run a longer audio segmentation/model-assisted analysis cycle.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":2,"Metric":"Level arc and encounter shape","Current":"8.4/10","Major-gate target":"8.8-9.0","Measurement status":"Measured release category","Why this matters":"Controls whether long play feels like Galaga-like escalation rather than repeated pressure.","Effort / time estimate":"Medium-high; 2-5 hrs","Recommended next step":"Apply one narrow Stage 12 reward candidate and rerun the frozen conformance loop.","Evidence":"reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"Priority":3,"Metric":"Overall visual look and feel: gameplay, start page, typography complexity","Current":"7.4/10","Major-gate target":"8.4-8.8","Measurement status":"Estimated; needs dedicated visual conformance scorer","Why this matters":"A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.","Effort / time estimate":"Medium; 2-4 hrs, screenshot/contact-sheet driven","Recommended next step":"Create a visual-look scorer covering start/attract page, gameplay readability, typography density, color discipline, and reference contact sheets.","Evidence":"UI shell suite plus generated frame/contact-sheet artifacts"},{"Priority":4,"Metric":"Stage 4 pressure exact replay / pressure curve precision","Current":"7.5/10","Major-gate target":"8.2-8.6","Measurement status":"Measured level-arc weak submetric","Why this matters":"Pressure should be learnable and reproducible, not merely present in one run.","Effort / time estimate":"Medium-high; prior runs ~12.8 min wall / 18.5 min CPU","Recommended next step":"Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.","Evidence":"reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"Priority":5,"Metric":"Alien entry to levels: formation, timing, and methods","Current":"9/10","Major-gate target":"9.0-9.4 with dedicated scorer","Measurement status":"Composite proxy: stage opening timing + geometry + movement grammar","Why this matters":"Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.","Effort / time estimate":"Medium; 1-3 hrs plus visual review","Recommended next step":"Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"Priority":6,"Metric":"Challenge-stage variation and new alien/formations introduction","Current":"9/10","Major-gate target":"9.0-9.4 with dedicated scorer","Measurement status":"Composite proxy: challenge timing + challenge identity + non-repetition","Why this matters":"Challenge stages should teach new motion/reward patterns, not only pause normal combat.","Effort / time estimate":"Medium-high; 2-4 hrs","Recommended next step":"Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-d8240f0/report.json"},{"Priority":7,"Metric":"Progression and persona depth","Current":"8.8/10","Major-gate target":"9.1+","Measurement status":"Measured release category","Why this matters":"Keeps the game learnable across skill levels and supports later-stage quality.","Effort / time estimate":"Low-medium; 1-2 hrs","Recommended next step":"Resolve remaining ordering edge case after higher-value audio/level-arc work.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":8,"Metric":"Stage 1 opening timing fidelity","Current":"8.5/10","Major-gate target":"8.8-9.2","Measurement status":"Measured release category","Why this matters":"First impression and direct reference feel.","Effort / time estimate":"Low-medium; 1-2 hrs","Recommended next step":"Tune only after audio and level-arc priorities unless regressions appear.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":9,"Metric":"Arcade console frame UI style","Current":"9.2/10","Major-gate target":"9.4-9.6","Measurement status":"Measured as UI shell; needs separate arcade-frame style rubric","Why this matters":"The cabinet frame is the constant product surface around every game.","Effort / time estimate":"Medium; 1-3 hrs visual QA","Recommended next step":"Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":10,"Metric":"Popup/help/scoring/leaderboard surface formatting","Current":"9.2/10","Major-gate target":"9.4-9.6","Measurement status":"Measured through UI shell suite; needs modal-specific scoring","Why this matters":"Popup surfaces carry learning, scoring trust, feedback, and player records.","Effort / time estimate":"Low-medium; 1-2 hrs","Recommended next step":"Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":11,"Metric":"Dive fairness and safety","Current":"9.1/10","Major-gate target":"9.3+","Measurement status":"Measured release category","Why this matters":"Protects user trust while pressure is increased.","Effort / time estimate":"Guardrail; 30-90 min per risky gameplay cycle","Recommended next step":"Keep as required guardrail for pressure/reward changes.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":12,"Metric":"Player movement conformance","Current":"10/10","Major-gate target":"Maintain 10","Measurement status":"Measured release category","Why this matters":"Core control feel is already excellent.","Effort / time estimate":"Guardrail only","Recommended next step":"Do not tune unless a new reference metric proves a gap.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":13,"Metric":"Shot and hit responsiveness","Current":"10/10","Major-gate target":"Maintain 10","Measurement status":"Measured release category","Why this matters":"Core combat response is already excellent.","Effort / time estimate":"Guardrail only","Recommended next step":"Protect during explosion/audio/event feedback work.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":14,"Metric":"Stage 1 opening geometry fidelity","Current":"10/10","Major-gate target":"Maintain 10","Measurement status":"Measured release category","Why this matters":"Formation geometry is already locked.","Effort / time estimate":"Guardrail only","Recommended next step":"Protect during alien-entry visual work.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":15,"Metric":"Capture and rescue rule fidelity","Current":"10/10","Major-gate target":"Maintain 10","Measurement status":"Measured release category","Why this matters":"Strong Galaga identity mechanic; should not regress while feedback improves.","Effort / time estimate":"Guardrail only","Recommended next step":"Use as release blocker for capture/rescue-adjacent audio or explosion changes.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"},{"Priority":16,"Metric":"Challenge-stage timing fidelity","Current":"9.9/10","Major-gate target":"Maintain 9.8+","Measurement status":"Measured release category","Why this matters":"Timing is strong; variation is the gap, not baseline timing.","Effort / time estimate":"Guardrail only","Recommended next step":"Preserve while adding challenge variation scoring.","Evidence":"reference-artifacts/analyses/quality-conformance/2026-05-08-50be6cf/report.json"}],"newFirstClassAxes":["Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.","Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.","Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.","Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.","Popup/help/scoring surfaces: help, scoring, leaderboard, account, feedback, and game-over result formatting as their own modal-quality family."],"maintenanceRules":["Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.","Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.","Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.","Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.","Prefer work with a large score gap, high user-experience impact, reusable ingestion/harness value, and clear guardrails."]}</script>
+  <script>
+    const app = document.getElementById('app');
+    const refreshState = document.getElementById('refreshState');
+    const statusLine = document.getElementById('statusLine');
+    let dashboard = JSON.parse(document.getElementById('initial-data').textContent);
+    let lastRefresh = Date.now();
+    const refreshMs = 30000;
+
+    function esc(value){
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[char]));
+    }
+
+    function scoreClass(score){
+      if(!Number.isFinite(Number(score))) return 'watch';
+      if(Number(score) >= 9) return 'good';
+      if(Number(score) >= 8) return 'watch';
+      return 'gap';
+    }
+
+    function ageText(iso){
+      const then = new Date(iso).getTime();
+      if(!Number.isFinite(then)) return 'unknown age';
+      const seconds = Math.max(0, Math.round((Date.now() - then) / 1000));
+      if(seconds < 90) return seconds + 's old';
+      const minutes = Math.round(seconds / 60);
+      if(minutes < 90) return minutes + 'm old';
+      return Math.round(minutes / 60) + 'h old';
+    }
+
+    function evidenceLinks(reports){
+      return Object.entries(reports || {})
+        .filter(([, value]) => value)
+        .map(([key, value]) => '<a href="../' + encodeURI(value) + '">' + esc(key) + ': ' + esc(value) + '</a>')
+        .join('');
+    }
+
+    function render(data){
+      const rows = Array.isArray(data.priorityRows) ? data.priorityRows : [];
+      const gates = Array.isArray(data.releaseGate) ? data.releaseGate : [];
+      const overall = gates.find(gate => gate.Gate === 'Overall quality');
+      const audio = rows.find(row => /Audio identity/.test(row.metric || ''));
+      const level = rows.find(row => /Level arc/.test(row.metric || ''));
+      const visual = rows.find(row => /visual look/i.test(row.metric || ''));
+      app.innerHTML = `
+        <div class="grid">
+          <div class="card"><span class="label">Overall Quality</span><span class="value">${esc(overall?.Current || '--')}</span></div>
+          <div class="card"><span class="label">Weakest Major Gap</span><span class="value ${scoreClass(audio?.score10)}">${esc(audio?.current || '--')}</span><div class="small">Audio identity and event feedback</div></div>
+          <div class="card"><span class="label">Level Arc</span><span class="value ${scoreClass(level?.score10)}">${esc(level?.current || '--')}</span><div class="small">Encounter shape and escalation</div></div>
+          <div class="card"><span class="label">Visual Look</span><span class="value ${scoreClass(visual?.score10)}">${esc(visual?.current || '--')}</span><div class="small">Estimated until scorer lands</div></div>
+        </div>
+        <div class="split">
+          <section>
+            <h2>Priority Investment Queue</h2>
+            <table>
+              <thead><tr><th>Rank</th><th>Metric</th><th>Current</th><th>Target</th><th>Status</th><th>Recommended next step</th><th>Evidence</th></tr></thead>
+              <tbody>${rows.map(row => `
+                <tr>
+                  <td class="priority">${esc(row.rank)}</td>
+                  <td class="metric">${esc(row.metric)}</td>
+                  <td class="score ${scoreClass(row.score10)}">${esc(row.current)}</td>
+                  <td>${esc(row.target)}</td>
+                  <td>${esc(row.status)}<div class="small">${esc(row.effort)}</div></td>
+                  <td>${esc(row.next)}</td>
+                  <td class="small">${esc(row.evidence)}</td>
+                </tr>`).join('')}</tbody>
+            </table>
+          </section>
+          <div>
+            <section class="card">
+              <h2>Release Gates</h2>
+              <table>
+                <thead><tr><th>Gate</th><th>Current</th><th>Target</th></tr></thead>
+                <tbody>${gates.map(gate => `
+                  <tr><td class="metric">${esc(gate.Gate)}</td><td class="score">${esc(gate.Current)}</td><td>${esc(gate.Target)}<div class="small">${esc(gate.Notes)}</div></td></tr>`).join('')}</tbody>
+              </table>
+            </section>
+            <section class="card">
+              <h2>First-Class Axes</h2>
+              <ul class="axisList">${(data.newFirstClassAxes || []).map(axis => '<li>' + esc(axis) + '</li>').join('')}</ul>
+            </section>
+            <section class="card">
+              <h2>Artifact State</h2>
+              <p><span class="label">Generated</span><strong>${esc(data.generatedAt || '--')}</strong> <span class="small">(${esc(ageText(data.generatedAt))})</span></p>
+              <p><span class="label">Branch</span><strong>${esc(data.branch || '--')}</strong> at <strong>${esc(data.commit || '--')}</strong> <span class="${data.dirty ? 'dirty' : 'clean'}">${data.dirty ? 'dirty' : 'clean'}</span></p>
+              <div class="evidence">${evidenceLinks(data.sourceReports)}</div>
+            </section>
+          </div>
+        </div>
+      `;
+      statusLine.textContent = 'Dashboard data: ' + (data.generatedAt || 'unknown') + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
+    }
+
+    async function refresh(){
+      try{
+        const response = await fetch('conformance-dashboard-data.json?ts=' + Date.now(), { cache:'no-store' });
+        if(!response.ok) throw new Error('HTTP ' + response.status);
+        dashboard = await response.json();
+        lastRefresh = Date.now();
+        render(dashboard);
+      }catch(err){
+        refreshState.textContent = 'refresh failed';
+        statusLine.textContent = 'Could not refresh dashboard data: ' + err.message;
+      }
+    }
+
+    function tick(){
+      const next = Math.max(0, Math.ceil((refreshMs - (Date.now() - lastRefresh)) / 1000));
+      refreshState.textContent = 'refresh in ' + next + 's';
+    }
+
+    render(dashboard);
+    tick();
+    setInterval(tick, 1000);
+    setInterval(refresh, refreshMs);
+  </script>
+</body>
+</html>

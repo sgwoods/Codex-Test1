@@ -1,17 +1,36 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT = path.join(ROOT, 'RELEASE_CONFORMANCE_DASHBOARD.md');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
+const DASHBOARD_ANALYSIS_ROOT = path.join(ANALYSES, 'release-conformance-dashboard');
 
 function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+function ensureDir(dir){
+  fs.mkdirSync(dir, { recursive: true });
+}
+
+function writeJson(file, value){
+  ensureDir(path.dirname(file));
+  fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
+}
+
 function rel(file){
   return path.relative(ROOT, file).split(path.sep).join('/');
+}
+
+function git(args, fallback = ''){
+  try{
+    return execSync(`git -C "${ROOT}" ${args}`, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  }catch{
+    return fallback;
+  }
 }
 
 function walkReports(dir){
@@ -62,12 +81,32 @@ function table(headers, rows){
   return [
     `| ${headers.map(md).join(' | ')} |`,
     `| ${headers.map(() => '---').join(' | ')} |`,
-    ...rows.map(row => `| ${row.map(md).join(' | ')} |`)
+    ...rows.map(row => `| ${(row.cells || row).map(md).join(' | ')} |`)
   ].join('\n');
 }
 
 function row({ rank, metric, score10, target, status, why, effort, next, evidence }){
-  return [rank, metric, score(score10), target, status, why, effort, next, evidence];
+  const normalizedScore = Number.isFinite(+score10) ? +(+score10).toFixed(3) : null;
+  return {
+    rank,
+    metric,
+    score10: normalizedScore,
+    current: score(score10),
+    target,
+    status,
+    why,
+    effort,
+    next,
+    evidence,
+    cells: [rank, metric, score(score10), target, status, why, effort, next, evidence]
+  };
+}
+
+function tableObjects(headers, rows){
+  return rows.map(row => {
+    const cells = row.cells || row;
+    return Object.fromEntries(headers.map((header, index) => [header, cells[index] ?? '']));
+  });
 }
 
 function main(){
@@ -298,6 +337,49 @@ function main(){
     ['No-regression guardrails', 'movement/combat/capture >=10; challenge timing >=9.8', 'Maintain', 'Hard blockers']
   ];
 
+  const releaseGateHeaders = ['Gate', 'Current', 'Target', 'Notes'];
+  const priorityHeaders = ['Priority', 'Metric', 'Current', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'];
+  const sourceReports = {
+    quality: rel(qualityPath),
+    investmentPriority: priorityPath ? rel(priorityPath) : null,
+    levelArc: levelArcPath ? rel(levelArcPath) : null,
+    economics: economicsPath ? rel(economicsPath) : null
+  };
+  const commit = git('rev-parse --short HEAD', 'unknown');
+  const branch = git('branch --show-current', '');
+  const dirty = git('status --short', '').trim().length > 0;
+  const reportDir = path.join(DASHBOARD_ANALYSIS_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}`);
+  const dashboardData = {
+    schemaVersion: 1,
+    artifactType: 'release-conformance-dashboard',
+    generatedAt,
+    commit,
+    branch,
+    dirty,
+    sourceReports,
+    equalQualityCategoryWeight: equalWeight,
+    releaseGate: tableObjects(releaseGateHeaders, releaseGate),
+    priorityRows: rows.map(({ cells, ...entry }) => entry),
+    priorityTable: tableObjects(priorityHeaders, rows),
+    newFirstClassAxes: [
+      'Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
+      'Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
+      'Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.',
+      'Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.',
+      'Popup/help/scoring surfaces: help, scoring, leaderboard, account, feedback, and game-over result formatting as their own modal-quality family.'
+    ],
+    maintenanceRules: [
+      'Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.',
+      'Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.',
+      'Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.',
+      'Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.',
+      'Prefer work with a large score gap, high user-experience impact, reusable ingestion/harness value, and clear guardrails.'
+    ]
+  };
+
+  writeJson(path.join(reportDir, 'report.json'), dashboardData);
+  writeJson(path.join(DASHBOARD_ANALYSIS_ROOT, 'latest.json'), dashboardData);
+
   const lines = [
     '# Release Conformance Dashboard',
     '',
@@ -305,14 +387,16 @@ function main(){
     '',
     'This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.',
     '',
+    'Local internal dashboard: `http://127.0.0.1:4312/local-dev/conformance-dashboard.html` after `npm run local:resume`. Refresh the underlying local page data with `npm run dev:conformance-dashboard` when running a live planning cycle.',
+    '',
     '## Current Release Gate',
     '',
-    table(['Gate', 'Current', 'Target', 'Notes'], releaseGate),
+    table(releaseGateHeaders, releaseGate),
     '',
     '## Priority Table',
     '',
     table(
-      ['Priority', 'Metric', 'Current', 'Major-gate target', 'Measurement status', 'Why this matters', 'Effort / time estimate', 'Recommended next step', 'Evidence'],
+      priorityHeaders,
       rows
     ),
     '',
@@ -327,6 +411,7 @@ function main(){
     '## Maintenance Rules',
     '',
     '- Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.',
+    '- Keep the local dashboard generated from this artifact data; do not link or publish it through player-facing Platinum surfaces until explicitly approved.',
     '- Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.',
     '- Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.',
     '- Prefer work with a large score gap, high user-experience impact, reusable ingestion/harness value, and clear guardrails.',
@@ -344,6 +429,8 @@ function main(){
   console.log(JSON.stringify({
     ok: true,
     output: rel(OUT),
+    data: rel(path.join(DASHBOARD_ANALYSIS_ROOT, 'latest.json')),
+    report: rel(path.join(reportDir, 'report.json')),
     qualityReport: rel(qualityPath),
     priorityReport: priorityPath ? rel(priorityPath) : null,
     levelArcReport: levelArcPath ? rel(levelArcPath) : null,
