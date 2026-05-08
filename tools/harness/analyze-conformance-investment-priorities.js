@@ -180,8 +180,8 @@ function main(){
       risk: 0.28,
       costClass: 'high',
       computeAxis: 'quality-score',
-      rationale: 'Audio is the weakest quality category and has clear harness gaps around reference-window precision and similarity.',
-      nextAction: 'Run a longer audio segmentation/model-assisted analysis cycle.'
+      rationale: 'Audio is the weakest quality category. The semantic event-gap scorer now shows coverage is strong, while shared shot/impact/explosion mappings remain the next clarity gap.',
+      nextAction: 'Split or further label shared shot/impact/explosion reference mappings, especially playerShot/enemyShot/bossHit and enemyHit/enemyBoom, then rerun audio comparison and semantic event-gap analysis.'
     }),
     buildCandidate({
       id: 'stage12-natural-reward-window',

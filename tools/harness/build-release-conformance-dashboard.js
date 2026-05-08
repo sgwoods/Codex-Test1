@@ -286,7 +286,7 @@ function metricScoreContext(metric, score10){
   if(text.includes('audio identity')){
     return {
       confidence: 'medium-high',
-      resolution: '21 cue/event comparisons with waveform, spectral, overlap, and alignment features',
+      resolution: '21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features',
       scoreMeaning: scoreMeaning(score10)
     };
   }
@@ -529,13 +529,13 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       rank: 2,
       source: 'Aurora audio cue comparison and event-gap reports',
       axis: 'audio cue scoring',
-      artifactType: 'waveform/spectral/alignment reports',
-      coverage: `${audio?.details?.totalReferenceItems || audioGap?.summary?.comparedCueCount || 0} compared cues`,
-      annotationStatus: 'scored',
+      artifactType: 'waveform/spectral/alignment/semantic reports',
+      coverage: `${audio?.details?.totalReferenceItems || audioGap?.summary?.comparedCueCount || 0} compared cues; semantic ${audioGap?.summary?.semanticAverageScore10 || audio?.details?.semanticEventScore10 || 'n/a'}/10; ${audioGap?.summary?.semanticAttentionCueCount ?? audio?.details?.semanticAttentionCueCount ?? 'n/a'} attention rows`,
+      annotationStatus: 'semantic-scored',
       confidence: 'medium-high',
       linkedMetric: 'Audio identity, event feedback, and cue alignment',
       anchor: audioGapPath ? rel(audioGapPath) : rel(qualityPath),
-      next: 'Promote cue-level event semantics into the scorer so feedback meaning is measured, not only spectral similarity.'
+      next: 'Split or further label shared shot/impact/explosion reference mappings so playerShot, enemyShot, bossHit, enemyHit, and enemyBoom remain distinct.'
     }),
     ingestionRow({
       rank: 3,

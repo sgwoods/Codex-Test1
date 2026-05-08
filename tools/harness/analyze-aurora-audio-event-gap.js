@@ -27,6 +27,97 @@ const CRITICAL_CUES = new Set([
   'challengePerfect'
 ]);
 
+const EVENT_SEMANTICS = Object.freeze({
+  playerShot: {
+    class: 'projectile-fired',
+    playerMeaning: 'The player acted; the shot should be quick, crisp, and distinct from impacts.',
+    distinctFrom: ['enemyShot', 'enemyHit', 'bossHit']
+  },
+  enemyShot: {
+    class: 'threat-fired',
+    playerMeaning: 'An enemy threat entered play; the cue should not collapse into the player shot sound.',
+    distinctFrom: ['playerShot', 'attackCharge', 'enemyHit']
+  },
+  enemyHit: {
+    class: 'impact-confirmation',
+    playerMeaning: 'A hit connected; the player should hear immediate damage feedback before destruction hierarchy.',
+    distinctFrom: ['enemyBoom', 'bossHit', 'playerShot']
+  },
+  bossHit: {
+    class: 'boss-damage-confirmation',
+    playerMeaning: 'A multi-hit boss was damaged but not necessarily destroyed.',
+    distinctFrom: ['bossBoom', 'enemyHit', 'playerShot']
+  },
+  enemyBoom: {
+    class: 'enemy-destroyed',
+    playerMeaning: 'A normal enemy was destroyed; the cue should feel more final than a hit.',
+    distinctFrom: ['enemyHit', 'bossBoom']
+  },
+  bossBoom: {
+    class: 'boss-destroyed',
+    playerMeaning: 'A boss was destroyed; the cue should feel larger and more final than normal enemy destruction.',
+    distinctFrom: ['bossHit', 'enemyBoom']
+  },
+  captureBeam: {
+    class: 'capture-danger',
+    playerMeaning: 'A tractor-beam threat is active and demands immediate player attention.',
+    distinctFrom: ['captureSuccess', 'captureRetreat']
+  },
+  captureSuccess: {
+    class: 'capture-state-change',
+    playerMeaning: 'The fighter has been captured; the player should understand the risk/reward state changed.',
+    distinctFrom: ['captureBeam', 'captureRetreat', 'playerHit']
+  },
+  captureRetreat: {
+    class: 'capture-retreat-state',
+    playerMeaning: 'The boss is leaving with the captured fighter; the captured state should remain legible.',
+    distinctFrom: ['captureBeam', 'captureSuccess']
+  },
+  capturedFighterDestroyed: {
+    class: 'captured-fighter-penalty',
+    playerMeaning: 'The carried fighter was destroyed; this should read as a penalty/regret event.',
+    distinctFrom: ['enemyBoom', 'rescueJoin']
+  },
+  rescueJoin: {
+    class: 'rescue-reward',
+    playerMeaning: 'The rescued fighter rejoined; the cue should clearly reward the player.',
+    distinctFrom: ['capturedFighterDestroyed', 'challengePerfect']
+  },
+  playerHit: {
+    class: 'player-ship-lost',
+    playerMeaning: 'The player lost a ship; the cue should be unmistakable and synchronized with death feedback.',
+    distinctFrom: ['enemyBoom', 'bossBoom']
+  },
+  challengeTransition: {
+    class: 'challenge-entry',
+    playerMeaning: 'A bonus/challenge set piece is starting; the cue should feel ceremonial.',
+    distinctFrom: ['stageTransition', 'challengeResults']
+  },
+  challengeResults: {
+    class: 'challenge-result',
+    playerMeaning: 'The challenge result is being scored; the phrase should feel like a result, not a generic transition.',
+    distinctFrom: ['challengeTransition', 'challengePerfect']
+  },
+  challengePerfect: {
+    class: 'perfect-challenge-result',
+    playerMeaning: 'A perfect challenge clear occurred; this should be more celebratory than the standard result.',
+    distinctFrom: ['challengeResults', 'rescueJoin']
+  },
+  gameOver: {
+    class: 'run-ended',
+    playerMeaning: 'The run is over; the ending cue should feel final and emotionally complete.',
+    distinctFrom: ['playerHit', 'highScoreFirst']
+  }
+});
+
+function confidenceValue(value){
+  const text = String(value || '').toLowerCase();
+  if(text.includes('high')) return 1;
+  if(text.includes('medium')) return .78;
+  if(text.includes('low')) return .48;
+  return .62;
+}
+
 function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
@@ -121,9 +212,73 @@ function recommendation(item){
   return 'Keep as secondary pass after higher-risk audio gaps are narrowed.';
 }
 
-function rowForItem(item){
+function semanticCueScore({ item, guideContext, comparisonSet, eventMatrix, sharedReferenceClipCount }){
+  const semantic = EVENT_SEMANTICS[item.cue] || {
+    class: item.focus ? 'documented-cue' : 'uncategorized-cue',
+    playerMeaning: item.focus || 'Cue is compared acoustically, but no explicit player/designer meaning has been promoted yet.',
+    distinctFrom: []
+  };
+  const statusText = [
+    item.comparisons?.referenceWindowStatus,
+    comparisonSet?.mappingStatus,
+    eventMatrix?.status,
+    eventMatrix?.note
+  ].filter(Boolean).join(' ').toLowerCase();
+  const baseCoverage = CRITICAL_CUES.has(item.cue) ? 1 : .85;
+  const confidence = confidenceValue(comparisonSet?.mappingConfidence);
+  const dedicatedSlot = guideContext?.preview?.cue === item.cue ? 1 : .65;
+  const referenceWindow = comparisonSet?.referenceWindow ? 1 : (/direct-cue-comparison/.test(item.comparisons?.referenceWindowStatus || '') ? .82 : .72);
+  const sharedReferencePenalty = Math.min(.28, Math.max(0, sharedReferenceClipCount - 1) * .1);
+  const languagePenalty = [
+    /shared/.test(statusText) ? .12 : 0,
+    /too broad/.test(statusText) ? .12 : 0,
+    /fuzzy/.test(statusText) ? .1 : 0,
+    /compressed/.test(statusText) ? .1 : 0,
+    /under review/.test(statusText) ? .07 : 0
+  ].reduce((sum, value) => sum + value, 0);
+  const raw = (
+    .28 * baseCoverage
+    + .24 * confidence
+    + .2 * dedicatedSlot
+    + .18 * referenceWindow
+    + .1 * clamp(1 - sharedReferencePenalty - languagePenalty, 0, 1)
+  );
+  return {
+    semanticClass: semantic.class,
+    playerMeaning: semantic.playerMeaning,
+    distinctFrom: semantic.distinctFrom,
+    mappingStatus: comparisonSet?.mappingStatus || eventMatrix?.status || 'no mapping status documented',
+    mappingConfidence: comparisonSet?.mappingConfidence || 'unknown',
+    sharedReferenceClipCount,
+    semanticScore10: round(clamp(raw * 10, 1, 10), 1),
+    semanticRecommendation: semanticRecommendation(item, semantic, comparisonSet, eventMatrix, sharedReferenceClipCount)
+  };
+}
+
+function semanticRecommendation(item, semantic, comparisonSet, eventMatrix, sharedReferenceClipCount){
+  const statusText = [comparisonSet?.mappingStatus, eventMatrix?.note].filter(Boolean).join(' ').toLowerCase();
+  if(sharedReferenceClipCount > 1 && /hit|boom|shot/i.test(item.cue || '')){
+    return `Split or label the shared reference source so ${item.cue} remains distinct from ${semantic.distinctFrom.join(', ') || 'adjacent cues'}.`;
+  }
+  if(/too broad|shared|fuzzy|compressed/.test(statusText)){
+    return 'Promote a narrower or cleaner semantic mapping before judging runtime synthesis quality.';
+  }
+  if(!comparisonSet?.referenceWindow && /direct-cue-comparison/.test(item.comparisons?.referenceWindowStatus || '')){
+    return 'Add a candidate reference subwindow so this direct comparison can be scored at finer resolution.';
+  }
+  return 'Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.';
+}
+
+function rowForItem(item, context = {}){
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
   const bestSegment = (item.referenceSegmentCandidates || [])[0] || null;
+  const semantics = semanticCueScore({
+    item,
+    guideContext: context.guideByCue?.get(item.cue)?.[0] || null,
+    comparisonSet: context.comparisonByCue?.get(item.cue) || null,
+    eventMatrix: context.eventByEntryId?.get(context.comparisonByCue?.get(item.cue)?.entryId) || null,
+    sharedReferenceClipCount: context.referenceClipCounts?.get(context.comparisonByCue?.get(item.cue)?.referenceClip || '') || 0
+  });
   return {
     id: item.id,
     label: item.label,
@@ -142,8 +297,22 @@ function rowForItem(item){
       endSeconds: bestSegment.end_s,
       score: round(bestSegment.score, 3)
     } : null,
+    ...semantics,
     recommendation: recommendation(item)
   };
+}
+
+function weightedAverage(rows, valueKey){
+  let sum = 0;
+  let weight = 0;
+  for(const row of rows){
+    const value = +row[valueKey];
+    if(!Number.isFinite(value)) continue;
+    const rowWeight = CRITICAL_CUES.has(row.cue) ? 1.3 : .85;
+    sum += value * rowWeight;
+    weight += rowWeight;
+  }
+  return weight ? round(sum / weight, 2) : null;
 }
 
 function markdown(report){
@@ -171,13 +340,30 @@ function markdown(report){
     `- Critical cues with comparison coverage: ${report.summary.criticalComparedCueCount}`,
     `- Missing critical comparison cues: ${report.summary.missingCriticalComparisonCueCount}`,
     `- Broad reference windows needing segmentation: ${report.summary.broadReferenceWindowCount}`,
+    `- Semantic event score: ${report.summary.semanticAverageScore10}/10`,
+    `- Low semantic cue rows: ${report.summary.lowSemanticCueCount}`,
+    `- Semantic attention rows: ${report.summary.semanticAttentionCueCount}`,
+    `- Shared-reference clip risks: ${report.summary.sharedReferenceClipRiskCount}`,
     `- Highest event-gap risk: ${report.summary.highestRiskCue} (${report.summary.highestRisk10}/10 risk)`,
+    '',
+    '## Semantic Event Read',
+    '',
+    'This layer asks whether the cue is mapped to the right gameplay meaning, not only whether the waveform is close. A low row usually means the cue has a shared reference source, fuzzy mapping, missing subwindow, or weak distinction from adjacent events.',
+    '',
+    '| Rank | Cue | Event class | Semantic /10 | Confidence | Shared refs | Player/designer meaning | Recommended action |',
+    '| ---: | --- | --- | ---: | --- | ---: | --- | --- |'
+  ];
+  report.semanticAttentionRows.slice(0, 12).forEach((item, index) => {
+    lines.push(`| ${index + 1} | ${item.cue} | ${item.semanticClass} | ${item.semanticScore10} | ${item.mappingConfidence} | ${item.sharedReferenceClipCount} | ${item.playerMeaning} | ${item.semanticRecommendation} |`);
+  });
+  if(!report.semanticAttentionRows.length) lines.push('| 1 | none | -- | -- | -- | -- | No semantic attention rows under current scorer. | Keep as guardrail. |');
+  lines.push(
     '',
     '## Highest-Risk Compared Cues',
     '',
     '| Rank | Cue | Label | Risk /10 | Status | Duration gap | Centroid gap | Best segment | Recommended action |',
     '| ---: | --- | --- | ---: | --- | ---: | ---: | ---: | --- |'
-  ];
+  );
   report.comparedCueRisks.slice(0, 12).forEach((item, index) => {
     lines.push(`| ${index + 1} | ${item.cue} | ${item.label} | ${item.gapRisk10} | ${item.status} | ${item.durationGapSeconds}s | ${item.centroidGapHz} Hz | ${item.bestReferenceSegmentScore ?? 'n/a'} | ${item.recommendation} |`);
   });
@@ -209,7 +395,27 @@ function main(){
     if(!guideByCue.has(cue)) guideByCue.set(cue, []);
     guideByCue.get(cue).push(ctx.label || ctx.id);
   }
-  const comparedCueRisks = (metrics.items || []).map(rowForItem)
+  const audioContextById = new Map((guide.audioContexts || []).map(entry => [entry.id, entry]));
+  const comparisonByCue = new Map();
+  const referenceClipCounts = new Map();
+  for(const set of guide.comparisonSets || []){
+    const ctx = audioContextById.get(set.entryId);
+    const cue = ctx?.preview?.cue || ctx?.cue;
+    if(cue) comparisonByCue.set(cue, set);
+    if(set.referenceClip) referenceClipCounts.set(set.referenceClip, (referenceClipCounts.get(set.referenceClip) || 0) + 1);
+  }
+  const eventByEntryId = new Map((guide.audioEventMatrix || []).filter(entry => entry.entryId).map(entry => [entry.entryId, entry]));
+  const rowContext = {
+    guideByCue: new Map((guide.audioContexts || []).reduce((pairs, ctx) => {
+      const cue = ctx.preview?.cue || ctx.cue;
+      if(cue) pairs.push([cue, [ctx]]);
+      return pairs;
+    }, [])),
+    comparisonByCue,
+    eventByEntryId,
+    referenceClipCounts
+  };
+  const comparedCueRisks = (metrics.items || []).map(item => rowForItem(item, rowContext))
     .sort((a, b) => b.gapRisk10 - a.gapRisk10 || String(a.cue).localeCompare(String(b.cue)));
   const missingCriticalComparisonCues = Array.from(CRITICAL_CUES)
     .filter(cue => !comparedCueSet.has(cue))
@@ -222,7 +428,18 @@ function main(){
     }))
     .sort((a, b) => String(a.cue).localeCompare(String(b.cue)));
   const broadReferenceWindowCount = comparedCueRisks.filter(item => /broad-reference-window/.test(item.status)).length;
+  const semanticAverageScore10 = weightedAverage(comparedCueRisks, 'semanticScore10');
+  const lowSemanticRows = comparedCueRisks
+    .filter(item => item.semanticScore10 < 8)
+    .sort((a, b) => a.semanticScore10 - b.semanticScore10 || b.gapRisk10 - a.gapRisk10);
+  const semanticAttentionRows = comparedCueRisks
+    .filter(item => item.semanticScore10 < 8.8 || item.sharedReferenceClipCount > 1)
+    .sort((a, b) => {
+      const sharedDelta = (b.sharedReferenceClipCount > 1 ? 1 : 0) - (a.sharedReferenceClipCount > 1 ? 1 : 0);
+      return sharedDelta || a.semanticScore10 - b.semanticScore10 || b.gapRisk10 - a.gapRisk10;
+    });
   const highest = comparedCueRisks[0] || {};
+  const lowestSemantic = lowSemanticRows[0] || {};
   const generatedAt = new Date().toISOString();
   const commit = git(['rev-parse', '--short', 'HEAD'], 'unknown');
   const dirty = git(['status', '--short'], '').trim().length > 0;
@@ -247,13 +464,24 @@ function main(){
       criticalComparedCueCount: comparedCueRisks.filter(item => item.eventCritical).length,
       missingCriticalComparisonCueCount: missingCriticalComparisonCues.length,
       broadReferenceWindowCount,
+      semanticAverageScore10,
+      lowSemanticCueCount: lowSemanticRows.length,
+      semanticAttentionCueCount: semanticAttentionRows.length,
+      lowestSemanticCue: lowestSemantic.cue || '',
+      lowestSemanticLabel: lowestSemantic.label || '',
+      lowestSemanticScore10: lowestSemantic.semanticScore10 ?? null,
+      sharedReferenceClipRiskCount: comparedCueRisks.filter(item => item.sharedReferenceClipCount > 1).length,
       highestRiskCue: highest.cue || '',
       highestRiskLabel: highest.label || '',
       highestRisk10: highest.gapRisk10 ?? null
     },
     comparedCueRisks,
+    lowSemanticCueRows: lowSemanticRows,
+    semanticAttentionRows,
     missingCriticalComparisonCues,
-    nextStep: missingCriticalComparisonCues.length
+    nextStep: semanticAttentionRows.some(item => item.sharedReferenceClipCount > 1 && /hit|boom|shot/i.test(item.cue || ''))
+      ? 'Split or further label the shared shot/impact/explosion reference mappings first, especially playerShot/enemyShot/bossHit and enemyHit/enemyBoom, then rerun the audio comparison and semantic event-gap analysis.'
+      : missingCriticalComparisonCues.length
       ? 'Add measured comparison coverage for impact/explosion cues first: enemyHit, bossHit, enemyBoom, and bossBoom. Then rerun the audio theme comparison and this event-gap analysis.'
       : broadReferenceWindowCount
         ? 'Promote narrower reference subwindows for the broadest remaining cues, then tune the highest-risk runtime cue.'

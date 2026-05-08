@@ -138,7 +138,7 @@ function average(values){
   return filtered.length ? filtered.reduce((sum, value) => sum + value, 0) / filtered.length : 0;
 }
 
-function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport){
+function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport, audioEventGapReport = null){
   const items = metricsTheme.items || [];
   const cueSimilarity = items.map(item => {
     const aurora = audioVariantMetrics(item, 'aurora');
@@ -167,12 +167,20 @@ function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport){
   ];
   const overlapAverage = average(overlapStage1);
   const alignmentAverage = scoreAudioAlignmentReport(alignmentReport) / 10;
+  const semanticEventAverage = Number.isFinite(+audioEventGapReport?.summary?.semanticAverageScore10)
+    ? clamp(+audioEventGapReport.summary.semanticAverageScore10 / 10, 0, 1)
+    : null;
+  const semanticWeight = semanticEventAverage == null ? 0 : 0.15;
+  const baseWeight = 1 - semanticWeight;
   const score10 = round(clamp(10 * (
-    (0.3 * cueAverage)
-    + (0.2 * referenceAverage)
-    + (0.15 * referencePrecision)
-    + (0.2 * overlapAverage)
-    + (0.15 * alignmentAverage)
+    baseWeight * (
+      (0.3 * cueAverage)
+      + (0.2 * referenceAverage)
+      + (0.15 * referencePrecision)
+      + (0.2 * overlapAverage)
+      + (0.15 * alignmentAverage)
+    )
+    + (semanticWeight * semanticEventAverage)
   ), 1, 10), 1);
   return {
     score10,
@@ -181,6 +189,12 @@ function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport){
     referencePrecisionAverage: round(referencePrecision, 3),
     overlapAverage: round(overlapAverage, 3),
     alignmentAverage: round(alignmentAverage, 3),
+    semanticEventAverage: semanticEventAverage == null ? null : round(semanticEventAverage, 3),
+    semanticEventScore10: audioEventGapReport?.summary?.semanticAverageScore10 ?? null,
+    semanticLowCueCount: audioEventGapReport?.summary?.lowSemanticCueCount ?? null,
+    semanticAttentionCueCount: audioEventGapReport?.summary?.semanticAttentionCueCount ?? null,
+    semanticLowestCue: audioEventGapReport?.summary?.lowestSemanticCue || null,
+    semanticSharedReferenceClipRiskCount: audioEventGapReport?.summary?.sharedReferenceClipRiskCount ?? null,
     broadReferenceWindowCount,
     totalReferenceItems: items.length,
     referenceSegmentCandidateCount: metricsTheme.summary?.referenceSegmentCandidateCount || 0,
@@ -237,6 +251,7 @@ function main(){
   const surfaceRun = runScript('check-dev-candidate-surface-suite.js');
   const audioAlignmentRun = runScript('check-audio-cue-alignment-correspondence.js');
   const levelArcRun = runScript('analyze-level-arc-conformance.js');
+  const audioEventGapRun = runScript('analyze-aurora-audio-event-gap.js');
 
   const movementReport = readJson(latestReport('reference-artifacts/analyses/correspondence/player-movement'));
   const stage1TimingReport = readJson(latestReport('reference-artifacts/analyses/correspondence/stage1-opening-first-dive'));
@@ -246,9 +261,10 @@ function main(){
   const progressionReport = readJson(latestReport('reference-artifacts/analyses/correspondence/persona-progression'));
   const levelArcReport = readJson(latestReport('reference-artifacts/analyses/level-arc-conformance'));
   const audioAlignmentReport = readJson(latestReport('reference-artifacts/analyses/correspondence/audio-cue-alignment'));
+  const audioEventGapReport = readJson(latestReport('reference-artifacts/analyses/aurora-audio-event-gap'));
   const audioThemeMetrics = readJson(latestMetrics('reference-artifacts/analyses/aurora-audio-theme-comparison'));
   const audioOverlapMetrics = readJson(latestMetrics('reference-artifacts/analyses/galaga-audio-overlap'));
-  const audioScore = scoreAudioDetails(audioThemeMetrics, audioOverlapMetrics, audioAlignmentReport);
+  const audioScore = scoreAudioDetails(audioThemeMetrics, audioOverlapMetrics, audioAlignmentReport, audioEventGapReport);
 
   const categories = [
     {
@@ -321,9 +337,9 @@ function main(){
       id: 'audio',
       label: 'Audio identity and cue alignment',
       score10: audioScore.score10,
-      evidence: ['audio-cue-alignment correspondence', 'aurora-audio-theme-comparison', 'galaga-audio-overlap'],
+      evidence: ['audio-cue-alignment correspondence', 'aurora-audio-theme-comparison', 'galaga-audio-overlap', 'aurora-audio-event-gap semantic read'],
       details: audioScore,
-      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, and cue alignment. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; ${audioScore.referenceSegmentCandidateCount} candidate subwindows were found; active Aurora-vs-reference duration delta averages ${audioScore.averageReferenceDurationDeltaS}s.`
+      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, and semantic event mapping. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; ${audioScore.referenceSegmentCandidateCount} candidate subwindows were found; semantic event score is ${audioScore.semanticEventScore10 ?? 'not measured'}/10 with ${audioScore.semanticAttentionCueCount ?? 'unknown'} semantic attention rows and ${audioScore.semanticSharedReferenceClipRiskCount ?? 'unknown'} shared-reference risks.`
     },
     {
       id: 'ui-shell',
@@ -349,6 +365,7 @@ function main(){
     stage2SafetyRun,
     surfaceRun,
     audioAlignmentRun,
+    audioEventGapRun,
     levelArcRun,
     categories,
     summary: {
