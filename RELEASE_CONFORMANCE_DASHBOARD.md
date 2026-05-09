@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-09T21:09:52.404Z`
+Generated: `2026-05-09T21:16:03.779Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -73,16 +73,16 @@ Every release candidate should include both a conformance read and a resource/ti
 | Latest level-arc conformance | 8.8/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 930 | History depth behind score trends |
 | Score deltas found | 115 | Past-goal movement available for review |
-| Measured runs | 309 | Tracked harness/model/local compute work |
-| Tracked wall time | 173.3 min | Human clock-time planning input |
-| Tracked CPU time | 297.2 min | Local compute-cost planning input |
-| Tracked artifact growth | 523.3 MB | Evidence volume and storage/review-cost proxy |
+| Measured runs | 311 | Tracked harness/model/local compute work |
+| Tracked wall time | 178.1 min | Human clock-time planning input |
+| Tracked CPU time | 306.2 min | Local compute-cost planning input |
+| Tracked artifact growth | 536.5 MB | Evidence volume and storage/review-cost proxy |
 
 ### Resource And Time Usage
 
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| cpu | 308 | 173.3 min | 297.2 min |
+| cpu | 310 | 178.1 min | 306.2 min |
 | browser | 123 | 96.4 min | 164.5 min |
 | gpu-equivalent | 7 | 0.8 min | 1.2 min |
 | codex | 6 | 0.7 min | 1.2 min |
@@ -94,11 +94,11 @@ Every release candidate should include both a conformance read and a resource/ti
 | Axis | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
 | audio | 146 | 112.1 min | 200.8 min |
-| audio-focus-candidate | 13 | 34.6 min | 63.5 min |
+| audio-focus-candidate | 14 | 39.4 min | 72.4 min |
 | audio-theme-comparison | 19 | 22.3 min | 41.1 min |
 | conformance-economics | 90 | 21.4 min | 30.7 min |
+| player-hit | 14 | 21.1 min | 38.3 min |
 | rescue-join | 11 | 18.2 min | 33.2 min |
-| player-hit | 13 | 16.3 min | 29.3 min |
 | audio-event-gap | 29 | 16.2 min | 29.4 min |
 | conformance-loop | 65 | 15.2 min | 25.3 min |
 
@@ -131,7 +131,7 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Galaga-family reference audio clips | audio identity / event feedback | reference m4a cue clips | 50 clips | clipped, mapped, partially scored | medium-high | Audio identity, event feedback, and cue alignment | src/assets/reference-audio | Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics. |
 | 2 | Aurora audio cue comparison and event-gap reports | audio cue scoring | waveform/spectral/alignment/semantic reports | 21 compared cues; semantic 9.78/10; 0 attention rows | semantic-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-event-gap/2026-05-09-5eb9b0b1-dirty/report.json | Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change. |
-| 3 | Aurora Audio Conformance Lab v2 | audio candidate loop / family promotion decisions | cue-family risk, candidate history, keeper decision, promotion gate | 8/8 target cues swept; 5 keeper candidates tracked; runtime promotions 4 | family-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-5eb9b0b1-dirty/report.json | Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change. |
+| 3 | Aurora Audio Conformance Lab v2 | audio candidate loop / family promotion decisions | cue-family risk, candidate history, keeper decision, promotion gate | 8/8 target cues swept; 5 keeper candidates tracked; runtime promotions 4 | family-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-1d575086-dirty/report.json | Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change. |
 | 4 | Aurora stagePulse cadence pressure analysis | formation pressure / cadence audio | tracked cadence pressure axes from full audio comparison | pressure 1.2/10; weakest brightness-control | scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-stage-pulse-cadence/2026-05-09-6584ce5b-dirty/report.json | Add a cadence-specific candidate generator that jointly optimizes low-band body, brightness control, zero-crossing calm, and gain. Promote only after both repeated focus gates and full audio-theme comparison improve. |
 | 5 | Boss entry and formation grammar scorer | formation grammar / boss entry / challenge identity | event grammar, timing, stage-signature, and measurement-debt report | 11 boss/formation windows | scored | medium | Boss entry and formation grammar | reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-09-5eb9b0b1/report.json | Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly. |
 | 6 | Level arc and encounter-shape evidence | level arc / challenge / reward | stage signatures, pressure windows, persona reports | 6/6 stage families; 11/6 evidence windows | scored | medium-high | Level arc and encounter shape | reference-artifacts/analyses/level-arc-conformance/2026-05-09-5eb9b0b1/report.json | Add more long-play reference windows and expert-route scoring for challenge/reward opportunities. |
@@ -143,13 +143,13 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/cost-per-positive-score-point.svg)
 
 ## New First-Class Axes Added
 
@@ -175,5 +175,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-09-5eb9b0b1/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-c3f4e668/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-09-5eb9b0b1/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/report.json`
 - Equal current quality-category weight: `0.083`

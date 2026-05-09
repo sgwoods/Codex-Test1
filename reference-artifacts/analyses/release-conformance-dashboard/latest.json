@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T21:09:52.404Z",
-  "commit": "5eb9b0b1",
+  "generatedAt": "2026-05-09T21:16:03.779Z",
+  "commit": "1d575086",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -791,15 +791,15 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 930,
         "deltaCount": 115,
-        "measuredRuns": 309,
-        "wallSeconds": 10397.012,
-        "cpuSeconds": 17831.92,
-        "artifactBytes": 523304243,
+        "measuredRuns": 311,
+        "wallSeconds": 10686.188,
+        "cpuSeconds": 18370.54,
+        "artifactBytes": 536479737,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -844,7 +844,7 @@
           "annotationStatus": "family-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-5eb9b0b1-dirty/report.json",
+          "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-1d575086-dirty/report.json",
           "next": "Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change."
         },
         {
@@ -954,9 +954,9 @@
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-5eb9b0b1/report.json",
         "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-c3f4e668/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-5eb9b0b1/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
-        "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-5eb9b0b1-dirty/report.json",
+        "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-1d575086-dirty/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1182,9 +1182,9 @@
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-5eb9b0b1/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-c3f4e668/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-5eb9b0b1/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
-    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-5eb9b0b1-dirty/report.json",
+    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-1d575086-dirty/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -2245,23 +2245,23 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 930,
     "deltaCount": 115,
-    "measuredRuns": 309,
-    "wallSeconds": 10397.012,
-    "cpuSeconds": 17831.92,
-    "artifactBytes": 523304243,
+    "measuredRuns": 311,
+    "wallSeconds": 10686.188,
+    "cpuSeconds": 18370.54,
+    "artifactBytes": 536479737,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-5eb9b0b1/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-1d575086/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 308,
-      "Wall time": "173.3 min",
-      "CPU time": "297.2 min"
+      "Measured runs": 310,
+      "Wall time": "178.1 min",
+      "CPU time": "306.2 min"
     },
     {
       "Resource": "browser",
@@ -2303,9 +2303,9 @@
     },
     {
       "Axis": "audio-focus-candidate",
-      "Measured runs": 13,
-      "Wall time": "34.6 min",
-      "CPU time": "63.5 min"
+      "Measured runs": 14,
+      "Wall time": "39.4 min",
+      "CPU time": "72.4 min"
     },
     {
       "Axis": "audio-theme-comparison",
@@ -2320,16 +2320,16 @@
       "CPU time": "30.7 min"
     },
     {
+      "Axis": "player-hit",
+      "Measured runs": 14,
+      "Wall time": "21.1 min",
+      "CPU time": "38.3 min"
+    },
+    {
       "Axis": "rescue-join",
       "Measured runs": 11,
       "Wall time": "18.2 min",
       "CPU time": "33.2 min"
-    },
-    {
-      "Axis": "player-hit",
-      "Measured runs": 13,
-      "Wall time": "16.3 min",
-      "CPU time": "29.3 min"
     },
     {
       "Axis": "audio-event-gap",
@@ -2484,7 +2484,7 @@
       "annotationStatus": "family-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-5eb9b0b1-dirty/report.json",
+      "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-1d575086-dirty/report.json",
       "next": "Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
@@ -2618,7 +2618,7 @@
       "Annotation status": "family-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-5eb9b0b1-dirty/report.json",
+      "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-1d575086-dirty/report.json",
       "Missing next": "Tune the highest segment-level gap next: stagePulse onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
