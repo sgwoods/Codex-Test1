@@ -2,7 +2,7 @@
   "id": "formation-boss-grammar-conformance",
   "label": "Boss entry and formation grammar conformance",
   "version": "0.1",
-  "intent": "Measure whether boss entry, escort composition, formation settling, and challenge-stage set pieces are evolving as recognizable Galaga-like choreography rather than generic repeated waves.",
+  "intent": "Measure whether boss entry, escort composition, formation settling, regular-stage alien entry variation, and challenge-stage set pieces are evolving as recognizable Galaga-like choreography rather than generic repeated waves.",
   "grounding": {
     "current": [
       "reference-artifacts/analyses/aurora-level-expansion-cycle/*/events/reference-events.json",
@@ -14,7 +14,9 @@
     ],
     "bestCase": [
       "stage-specific reference contact sheets with boss and escort entry labels",
+      "stage-specific reference contact sheets for alien entry formations, entry side, rack targets, and stage-to-stage novelty",
       "frame-level path traces for boss, escort, and challenge-stage formations",
+      "challenge-stage reference labels for new alien introduction, trajectory family, bonus opportunity, and result feedback",
       "rack slot coordinates at formation settle",
       "expert-route score/reward outcomes for boss opportunity windows"
     ]
@@ -48,7 +50,7 @@
       "id": "stage-variation",
       "label": "Stage-to-stage formation variation",
       "weight": 0.18,
-      "success": "Nearby regular stages maintain signature distance above the repetition-risk threshold."
+      "success": "Nearby regular stages maintain signature distance above the repetition-risk threshold and show visibly different alien entry formations, rack timing, and path methods."
     },
     {
       "id": "path-shape-precision",
@@ -57,12 +59,20 @@
       "success": "Runtime boss/escort/challenge path traces and formation slot positions are available first, then promoted to direct reference comparison against Galaga path families."
     }
   ],
+  "longCycleTrack": {
+    "id": "alien-entry-challenge-variation",
+    "label": "Alien entry and challenge-stage novelty",
+    "releasePriority": "high",
+    "problem": "Aurora can satisfy broad boss/formation checks while still feeling non-conformant because regular-stage entries repeat too much, challenging-stage trajectory families are too sparse, and new alien introduction is not yet measured as a learnable bonus-stage event.",
+    "strategy": "Run measured extraction first: broaden early/mid/late regular entry windows and several challenge-stage windows, label alien family, entry side, rack target, trajectory family, novelty role, and bonus opportunity, then tune stage scripts against the weakest measured gap.",
+    "successMeasure": "Before a major release gate, dedicated alien-entry/challenge-variation scoring should exceed 7.5/10, regular-stage minimum signature distance should exceed 0.22, at least four challenge-stage windows should be scored, and path precision should be grounded by Galaga-family reference contact sheets rather than heuristic runtime families only."
+  },
   "thresholds": {
     "targetRegularWindows": 6,
-    "targetChallengeWindows": 2,
+    "targetChallengeWindows": 4,
     "targetEscortBossWindows": 2,
     "targetDistinctPairDistance": 0.22,
-    "targetMinimumRegularDistance": 0.16,
+    "targetMinimumRegularDistance": 0.22,
     "heuristicPathFamilyCap10": 6.8,
     "bossTimingBandsSeconds": {
       "early": [8, 23],

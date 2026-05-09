@@ -127,6 +127,7 @@ function inferredResources(metric){
 function metricAxisKeys(metric){
   const text = String(metric || '').toLowerCase();
   if(text.includes('audio identity')) return ['audio'];
+  if(text.includes('alien entry and challenge')) return ['alien-entry', 'level-arc', 'conformance-loop'];
   if(text.includes('stage 4 pressure')) return ['stage4-pressure'];
   if(text.includes('level arc')) return ['level-arc', 'conformance-loop'];
   if(text.includes('boss entry') || text.includes('formation grammar')) return ['level-arc', 'conformance-loop'];
@@ -144,6 +145,7 @@ function metricAxisKeys(metric){
 function investmentForMetric(metric, investmentById){
   const text = String(metric || '').toLowerCase();
   if(text.includes('audio identity')) return investmentById['audio-reference-segmentation'] || null;
+  if(text.includes('alien entry and challenge')) return investmentById['alien-entry-challenge-variation'] || investmentById['formation-boss-reference-path-comparison'] || null;
   if(text.includes('boss entry') || text.includes('formation grammar')) return investmentById['formation-boss-frame-labeled-reference-paths'] || investmentById['formation-boss-reference-path-comparison'] || investmentById['formation-boss-path-slot-extraction'] || null;
   if(text.includes('stage 4 pressure')) return investmentById['stage4-pressure-exact-replay'] || null;
   if(text.includes('level arc')) return investmentById['level-arc-opportunity-coverage'] || investmentById['stage12-natural-reward-window'] || null;
@@ -281,6 +283,13 @@ function metricScoreContext(metric, score10){
       scoreMeaning: scoreMeaning(score10)
     };
   }
+  if(text.includes('alien entry and challenge')){
+    return {
+      confidence: 'medium',
+      resolution: 'dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
   if(text.includes('alien entry')){
     return {
       confidence: 'medium',
@@ -401,6 +410,13 @@ function metricExplanation(metric){
       calculation: 'Boss/formation grammar is read from the dedicated formation-boss-grammar report, blending boss entry timing, boss/escort composition, formation settle evidence, challenge pattern identity, stage variation, and path-shape precision.',
       grounding: 'Current grounding comes from Aurora level-expansion event logs, trace summaries, stage-signature distance, runtime path/slot extraction, heuristic path-family comparison, and the formation/boss grammar reference profile. Best-case grounding adds frame-labeled Galaga boss/escort/challenge paths and rack slot coordinates.',
       meaning: 'Players feel whether each stage has recognizable arcade choreography: bosses enter with readable intent, escorts matter, formations settle convincingly, and challenge stages teach memorable set pieces.'
+    };
+  }
+  if(text.includes('alien entry and challenge')){
+    return {
+      calculation: 'Dedicated scorer blends regular-stage signature distance, entry path-family specificity, challenging-stage trajectory variation, challenge alien novelty, and readiness for reference-grounded path comparison.',
+      grounding: 'Current grounding comes from stage-signature distance, formation/boss grammar reports, runtime path/slot extraction, and heuristic path-family comparison. Best-case grounding adds Galaga-family contact sheets and frame-labeled challenge/entry path families across several stages.',
+      meaning: 'Players feel this as whether levels and challenge stages are authored, surprising, and learnable. Designers use it to prevent repetitive entry waves and to make challenge stages introduce new alien motion, scoring, and mastery opportunities.'
     };
   }
   if(text.includes('visual look')){
@@ -884,11 +900,13 @@ function main(){
   const levelArcPath = latestReport('level-arc-conformance');
   const economicsPath = latestReport('conformance-economics');
   const visualLookPath = latestReport('aurora-visual-look-conformance');
+  const alienEntryChallengePath = latestReport('alien-entry-challenge-variation');
   const quality = readJson(qualityPath);
   const priority = priorityPath ? readJson(priorityPath) : { candidates: [] };
   const levelArc = levelArcPath ? readJson(levelArcPath) : { summary: {} };
   const economics = economicsPath ? readJson(economicsPath) : { summary: {} };
   const visualLook = visualLookPath ? readJson(visualLookPath) : null;
+  const alienEntryChallenge = alienEntryChallengePath ? readJson(alienEntryChallengePath) : null;
 
   const audio = category(quality, 'audio');
   const formationBoss = category(quality, 'formation-boss-grammar');
@@ -913,6 +931,9 @@ function main(){
   const currentLevelArcScore = levelArcScore(level, levelArc);
   const alienEntryScore = Math.min(10, ((stage1Timing?.score10 || 0) * 0.45) + ((stage1Geometry?.score10 || 0) * 0.35) + (levelArcSubmetric(levelArc, 'movement-grammar-expansion')?.score10 || 8.4) * 0.2);
   const challengeVariationScore = Math.min(10, ((challengeTiming?.score10 || 0) * 0.45) + (levelArcSubmetric(levelArc, 'challenge-stage-identity')?.score10 || 8.4) * 0.35 + (levelArcSubmetric(levelArc, 'long-run-non-repetition')?.score10 || 8.2) * 0.2);
+  const alienEntryChallengeScore = Number.isFinite(+alienEntryChallenge?.summary?.score10)
+    ? +alienEntryChallenge.summary.score10
+    : Math.min(alienEntryScore, challengeVariationScore);
   const visualLookScore = Number.isFinite(+visualLook?.summary?.score10) ? +visualLook.summary.score10 : 7.4;
   const visualLookStatus = visualLook
     ? `Measured visual scorer; ${visualLook.summary?.confidence || 'medium-low'} confidence`
@@ -936,6 +957,19 @@ function main(){
     }),
     row({
       rank: 2,
+      metric: 'Alien entry and challenge-stage novelty',
+      score10: alienEntryChallengeScore,
+      target: '7.5 first gate; 9.0+ mature',
+      status: alienEntryChallenge ? 'Dedicated long-cycle scorer; high-priority gameplay-authenticity gap' : 'Needs dedicated scorer refresh',
+      why: 'Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.',
+      effort: 'High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass',
+      next: alienEntryChallenge?.summary?.weakestMetric
+        ? `Attack ${alienEntryChallenge.summary.weakestMetric.label}: ${alienEntryChallenge.summary.weakestMetric.currentRead}`
+        : 'Run alien-entry/challenge-variation scorer after path extraction and challenge evidence expansion.',
+      evidence: alienEntryChallengePath ? rel(alienEntryChallengePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
+    }),
+    row({
+      rank: 3,
       metric: 'Level arc and encounter shape',
       score10: currentLevelArcScore,
       target: '8.8-9.0',
@@ -946,7 +980,7 @@ function main(){
       evidence: levelArcPath ? rel(levelArcPath) : rel(qualityPath)
     }),
     row({
-      rank: 3,
+      rank: 4,
       metric: 'Boss entry and formation grammar',
       score10: formationBoss?.score10,
       target: '8.0-8.5 first gate; 9.0+ with path/slot extraction',
@@ -959,7 +993,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 4,
+      rank: 5,
       metric: 'Overall visual look and feel: gameplay, start page, typography complexity',
       score10: visualLookScore,
       target: '8.4-8.8',
@@ -970,7 +1004,7 @@ function main(){
       evidence: visualLookPath ? rel(visualLookPath) : 'UI shell suite plus generated frame/contact-sheet artifacts'
     }),
     row({
-      rank: 5,
+      rank: 6,
       metric: 'Stage 4 pressure exact replay / pressure curve precision',
       score10: levelArc.summary?.weakestSubmetric?.score10 || 7.5,
       target: '8.2-8.6',
@@ -981,29 +1015,31 @@ function main(){
       evidence: levelArcPath ? rel(levelArcPath) : rel(qualityPath)
     }),
     row({
-      rank: 6,
+      rank: 7,
       metric: 'Alien entry to levels: formation, timing, and methods',
-      score10: Number.isFinite(+formationBoss?.score10) ? formationBoss.score10 : alienEntryScore,
+      score10: alienEntryChallenge?.metrics?.find(metric => metric.id === 'regular-stage-entry-variation')?.score10
+        || (Number.isFinite(+formationBoss?.score10) ? formationBoss.score10 : alienEntryScore),
       target: '9.0-9.4 with path and rack-slot scorer',
-      status: formationBoss ? 'Measured through boss/formation grammar category' : 'Composite proxy: stage opening timing + geometry + movement grammar',
+      status: alienEntryChallenge ? 'Dedicated alien-entry submetric' : (formationBoss ? 'Measured through boss/formation grammar category' : 'Composite proxy: stage opening timing + geometry + movement grammar'),
       why: 'Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.',
       effort: 'Medium; 1-3 hrs plus visual review',
-      next: 'Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels.',
-      evidence: `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
-    }),
-    row({
-      rank: 7,
-      metric: 'Challenge-stage variation and new alien/formations introduction',
-      score10: challengeVariationScore,
-      target: '9.0-9.4 with dedicated scorer',
-      status: 'Composite proxy: challenge timing + challenge identity + non-repetition',
-      why: 'Challenge stages should teach new motion/reward patterns, not only pause normal combat.',
-      effort: 'Medium-high; 2-4 hrs',
-      next: 'Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.',
-      evidence: `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
+      next: alienEntryChallenge ? 'Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.' : 'Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels.',
+      evidence: alienEntryChallengePath ? rel(alienEntryChallengePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
     }),
     row({
       rank: 8,
+      metric: 'Challenge-stage variation and new alien/formations introduction',
+      score10: alienEntryChallenge?.metrics?.find(metric => metric.id === 'challenge-trajectory-variation')?.score10
+        || challengeVariationScore,
+      target: '9.0-9.4 with dedicated scorer',
+      status: alienEntryChallenge ? 'Dedicated challenge trajectory/novelty submetric' : 'Composite proxy: challenge timing + challenge identity + non-repetition',
+      why: 'Challenge stages should teach new motion/reward patterns, not only pause normal combat.',
+      effort: 'Medium-high; 2-4 hrs',
+      next: alienEntryChallenge ? 'Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.' : 'Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.',
+      evidence: alienEntryChallengePath ? rel(alienEntryChallengePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
+    }),
+    row({
+      rank: 9,
       metric: 'Progression and persona depth',
       score10: progression?.score10,
       target: '9.1+',
@@ -1014,7 +1050,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 9,
+      rank: 10,
       metric: 'Stage 1 opening timing fidelity',
       score10: stage1Timing?.score10,
       target: '8.8-9.2',
@@ -1025,7 +1061,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 10,
+      rank: 11,
       metric: 'Arcade console frame UI style',
       score10: arcadeFrameScore,
       target: '9.4-9.6',
@@ -1036,7 +1072,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 11,
+      rank: 12,
       metric: 'Popup/help/scoring/leaderboard surface formatting',
       score10: popupScore,
       target: '9.4-9.6',
@@ -1047,7 +1083,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 12,
+      rank: 13,
       metric: 'Dive fairness and safety',
       score10: diveSafety?.score10,
       target: '9.3+',
@@ -1058,7 +1094,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 13,
+      rank: 14,
       metric: 'Player movement conformance',
       score10: movement?.score10,
       target: 'Maintain 10',
@@ -1069,7 +1105,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 14,
+      rank: 15,
       metric: 'Shot and hit responsiveness',
       score10: combat?.score10,
       target: 'Maintain 10',
@@ -1080,7 +1116,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 15,
+      rank: 16,
       metric: 'Stage 1 opening geometry fidelity',
       score10: stage1Geometry?.score10,
       target: 'Maintain 10',
@@ -1091,7 +1127,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 16,
+      rank: 17,
       metric: 'Capture and rescue rule fidelity',
       score10: capture?.score10,
       target: 'Maintain 10',
@@ -1102,7 +1138,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 17,
+      rank: 18,
       metric: 'Challenge-stage timing fidelity',
       score10: challengeTiming?.score10,
       target: 'Maintain 9.8+',
@@ -1120,9 +1156,10 @@ function main(){
     ['Overall quality', score(quality.summary?.overallScore10), '>=9.3', 'Full score refresh after all major cycles'],
     ['Audio identity', score(audio?.score10), '>=7.5', 'Primary user-experience gap'],
     ['Level arc', score(currentLevelArcScore), '>=8.8', 'Long-play gameplay-quality gate'],
+    ['Alien entry and challenge-stage novelty', score(alienEntryChallengeScore), '>=7.5 first gate; >=9.0 mature', 'New high-priority long-cycle gameplay-authenticity gate'],
     ['Boss entry and formation grammar', score(formationBoss?.score10), '>=8.0 first gate; >=9.0 mature', 'New measured gate for stage choreography'],
-    ['Alien entry / formations', `${score(Number.isFinite(+formationBoss?.score10) ? formationBoss.score10 : alienEntryScore)} measured`, '>=9.2 with path/rack scorer', 'Now backed by boss/formation grammar'],
-    ['Challenge variation', `${score(challengeVariationScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
+    ['Alien entry / formations', `${score(alienEntryChallenge?.metrics?.find(metric => metric.id === 'regular-stage-entry-variation')?.score10 || alienEntryScore)} measured`, '>=9.2 with path/rack scorer', 'Now backed by dedicated alien-entry/challenge variation scorer'],
+    ['Challenge variation', `${score(alienEntryChallenge?.metrics?.find(metric => metric.id === 'challenge-trajectory-variation')?.score10 || challengeVariationScore)} measured`, '>=9.2 with dedicated scorer', 'New explicit gate'],
     ['Visual look and feel', score(visualLookScore), '>=8.4', visualLook ? 'New explicit gate; first-pass scorer measured' : 'New explicit gate; currently estimated'],
     ['Arcade frame and popup surfaces', score(Math.min(arcadeFrameScore, popupScore)), '>=9.4', 'Split from generic UI shell before final gate'],
     ['No-regression guardrails', 'movement/combat/capture >=10; challenge timing >=9.8', 'Maintain', 'Hard blockers']
@@ -1152,6 +1189,7 @@ function main(){
     investmentPriority: priorityPath ? rel(priorityPath) : null,
     levelArc: levelArcPath ? rel(levelArcPath) : null,
     economics: economicsPath ? rel(economicsPath) : null,
+    alienEntryChallenge: alienEntryChallengePath ? rel(alienEntryChallengePath) : null,
     visualLook: visualLookPath ? rel(visualLookPath) : null,
     evidenceCycle: fileExists(evidenceCyclePath) ? evidenceCyclePath : null
   };

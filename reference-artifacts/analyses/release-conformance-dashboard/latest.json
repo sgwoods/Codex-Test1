@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T11:50:54.952Z",
-  "commit": "3dd22262",
+  "generatedAt": "2026-05-09T13:09:38.794Z",
+  "commit": "6cd0cb17",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -33,6 +33,12 @@
           "Notes": "Long-play gameplay-quality gate"
         },
         {
+          "Gate": "Alien entry and challenge-stage novelty",
+          "Current": "4.5/10",
+          "Target": ">=7.5 first gate; >=9.0 mature",
+          "Notes": "New high-priority long-cycle gameplay-authenticity gate"
+        },
+        {
           "Gate": "Boss entry and formation grammar",
           "Current": "8.4/10",
           "Target": ">=8.0 first gate; >=9.0 mature",
@@ -40,13 +46,13 @@
         },
         {
           "Gate": "Alien entry / formations",
-          "Current": "8.4/10 measured",
+          "Current": "5.2/10 measured",
           "Target": ">=9.2 with path/rack scorer",
-          "Notes": "Now backed by boss/formation grammar"
+          "Notes": "Now backed by dedicated alien-entry/challenge variation scorer"
         },
         {
           "Gate": "Challenge variation",
-          "Current": "9.3/10 composite",
+          "Current": "4/10 measured",
           "Target": ">=9.2 with dedicated scorer",
           "Notes": "New explicit gate"
         },
@@ -111,6 +117,47 @@
         },
         {
           "rank": 2,
+          "metric": "Alien entry and challenge-stage novelty",
+          "explanation": {
+            "calculation": "Dedicated scorer blends regular-stage signature distance, entry path-family specificity, challenging-stage trajectory variation, challenge alien novelty, and readiness for reference-grounded path comparison.",
+            "grounding": "Current grounding comes from stage-signature distance, formation/boss grammar reports, runtime path/slot extraction, and heuristic path-family comparison. Best-case grounding adds Galaga-family contact sheets and frame-labeled challenge/entry path families across several stages.",
+            "meaning": "Players feel this as whether levels and challenge stages are authored, surprising, and learnable. Designers use it to prevent repetitive entry waves and to make challenge stages introduce new alien motion, scoring, and mastery opportunities."
+          },
+          "scoreContext": {
+            "confidence": "medium",
+            "resolution": "dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness",
+            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
+          },
+          "score10": 4.5,
+          "current": "4.5/10",
+          "target": "7.5 first gate; 9.0+ mature",
+          "status": "Dedicated long-cycle scorer; high-priority gameplay-authenticity gap",
+          "why": "Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.",
+          "effort": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
+          "next": "Attack Challenging-stage alien novelty and introduction: 1/4 challenge evidence windows; challenge entity signatures bee|boss|but.",
+          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
+          "costContext": {
+            "costClass": "estimated",
+            "expectedResources": "cpu, browser",
+            "trackedAxes": [
+              "alien-entry",
+              "level-arc",
+              "conformance-loop"
+            ],
+            "trackedSpend": "126 runs; 22.2 min wall; 36.5 min CPU",
+            "trackedRuns": 126,
+            "trackedWallSeconds": 1329.009,
+            "trackedCpuSeconds": 2189.31,
+            "expectedLift10": null,
+            "expectedOverallLift10": null,
+            "investmentScore": null,
+            "gapToTarget": "+3",
+            "summary": "estimated; cpu, browser",
+            "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
+          }
+        },
+        {
+          "rank": 3,
           "metric": "Level arc and encounter shape",
           "explanation": {
             "calculation": "Level arc is read from the level-arc conformance report, combining stage distinctiveness, challenge-stage identity, later-stage complexity, pressure curve, reward/rescue layering, and learning/mastery windows.",
@@ -150,7 +197,7 @@
           }
         },
         {
-          "rank": 3,
+          "rank": 4,
           "metric": "Boss entry and formation grammar",
           "explanation": {
             "calculation": "Boss/formation grammar is read from the dedicated formation-boss-grammar report, blending boss entry timing, boss/escort composition, formation settle evidence, challenge pattern identity, stage variation, and path-shape precision.",
@@ -190,7 +237,7 @@
           }
         },
         {
-          "rank": 4,
+          "rank": 5,
           "metric": "Overall visual look and feel: gameplay, start page, typography complexity",
           "explanation": {
             "calculation": "Current score is an estimated planning value until a dedicated visual conformance scorer lands; it is informed by UI shell checks, screenshots, contact sheets, and known visual debt.",
@@ -229,7 +276,7 @@
           }
         },
         {
-          "rank": 5,
+          "rank": 6,
           "metric": "Stage 4 pressure exact replay / pressure curve precision",
           "explanation": {
             "calculation": "Score is the current weakest level-arc pressure submetric, focused on whether known pressure/loss windows reproduce as exact or same-window replay events under controlled harness runs.",
@@ -268,7 +315,7 @@
           }
         },
         {
-          "rank": 6,
+          "rank": 7,
           "metric": "Alien entry to levels: formation, timing, and methods",
           "explanation": {
             "calculation": "Composite proxy: 45% stage-opening timing fidelity, 35% stage-opening geometry fidelity, and 20% movement-grammar expansion until alien entry is promoted to its own scorer.",
@@ -278,16 +325,16 @@
           "scoreContext": {
             "confidence": "medium",
             "resolution": "composite proxy from opening timing, geometry, and movement grammar",
-            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
           },
-          "score10": 8.4,
-          "current": "8.4/10",
+          "score10": 5.2,
+          "current": "5.2/10",
           "target": "9.0-9.4 with path and rack-slot scorer",
-          "status": "Measured through boss/formation grammar category",
+          "status": "Dedicated alien-entry submetric",
           "why": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
           "effort": "Medium; 1-3 hrs plus visual review",
-          "next": "Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json",
+          "next": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.",
+          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu, browser",
@@ -302,13 +349,13 @@
             "expectedLift10": null,
             "expectedOverallLift10": null,
             "investmentScore": null,
-            "gapToTarget": "+0.6",
+            "gapToTarget": "+3.8",
             "summary": "estimated; cpu, browser",
             "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
           }
         },
         {
-          "rank": 7,
+          "rank": 8,
           "metric": "Challenge-stage variation and new alien/formations introduction",
           "explanation": {
             "calculation": "Composite proxy: 45% challenge timing fidelity, 35% challenge-stage identity, and 20% long-run non-repetition until a dedicated challenge-variation scorer exists.",
@@ -318,16 +365,16 @@
           "scoreContext": {
             "confidence": "medium",
             "resolution": "composite proxy from challenge timing, challenge identity, and non-repetition",
-            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
           },
-          "score10": 9.29,
-          "current": "9.3/10",
+          "score10": 4,
+          "current": "4/10",
           "target": "9.0-9.4 with dedicated scorer",
-          "status": "Composite proxy: challenge timing + challenge identity + non-repetition",
+          "status": "Dedicated challenge trajectory/novelty submetric",
           "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
           "effort": "Medium-high; 2-4 hrs",
-          "next": "Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json",
+          "next": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.",
+          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu, browser",
@@ -342,13 +389,13 @@
             "expectedLift10": null,
             "expectedOverallLift10": null,
             "investmentScore": null,
-            "gapToTarget": "at target",
+            "gapToTarget": "+5",
             "summary": "estimated; cpu, browser",
             "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
           }
         },
         {
-          "rank": 8,
+          "rank": 9,
           "metric": "Progression and persona depth",
           "explanation": {
             "calculation": "Score is read from the progression/persona quality category, including persona safety checks, stage ordering, and whether different skill profiles see an appropriate ramp.",
@@ -387,7 +434,7 @@
           }
         },
         {
-          "rank": 9,
+          "rank": 10,
           "metric": "Stage 1 opening timing fidelity",
           "explanation": {
             "calculation": "Score is read from the stage-1 opening timing category, comparing measured Aurora event timing against reference opening-window timing metrics and tolerances.",
@@ -426,7 +473,7 @@
           }
         },
         {
-          "rank": 10,
+          "rank": 11,
           "metric": "Arcade console frame UI style",
           "explanation": {
             "calculation": "Current score uses the UI shell quality category as a proxy until the frame gets its own arcade-style rubric.",
@@ -465,7 +512,7 @@
           }
         },
         {
-          "rank": 11,
+          "rank": 12,
           "metric": "Popup/help/scoring/leaderboard surface formatting",
           "explanation": {
             "calculation": "Current score uses the UI shell suite as a proxy until help, score, account, feedback, leaderboard, and game-over modals get a modal-specific scorer.",
@@ -504,7 +551,7 @@
           }
         },
         {
-          "rank": 12,
+          "rank": 13,
           "metric": "Dive fairness and safety",
           "explanation": {
             "calculation": "Score is read from the dive-safety quality category and associated harness checks for unfair collision, lane, and persona safety regressions.",
@@ -544,7 +591,7 @@
           }
         },
         {
-          "rank": 13,
+          "rank": 14,
           "metric": "Player movement conformance",
           "explanation": {
             "calculation": "Score is read from the player-movement correspondence category, comparing movement traces and control response against the reference-derived movement target.",
@@ -583,7 +630,7 @@
           }
         },
         {
-          "rank": 14,
+          "rank": 15,
           "metric": "Shot and hit responsiveness",
           "explanation": {
             "calculation": "Score is read from the combat-responsiveness category, covering shot timing, hit registration, close-shot behavior, and event feedback guardrails.",
@@ -622,7 +669,7 @@
           }
         },
         {
-          "rank": 15,
+          "rank": 16,
           "metric": "Stage 1 opening geometry fidelity",
           "explanation": {
             "calculation": "Score is read from the stage-1 opening geometry category, comparing formation layout and opening positions against the reference geometry target.",
@@ -661,7 +708,7 @@
           }
         },
         {
-          "rank": 16,
+          "rank": 17,
           "metric": "Capture and rescue rule fidelity",
           "explanation": {
             "calculation": "Score is read from the capture/rescue quality category, including capture, no-leak, rescue, and rule-boundary harness checks.",
@@ -700,7 +747,7 @@
           }
         },
         {
-          "rank": 17,
+          "rank": 18,
           "metric": "Challenge-stage timing fidelity",
           "explanation": {
             "calculation": "Score is read from the challenge-stage timing category, comparing Aurora challenge entry, transition, result, and timing metrics against reference tolerances.",
@@ -884,6 +931,7 @@
         "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-29a80ab4/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json",
         "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/report.json",
+        "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1110,6 +1158,7 @@
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-29a80ab4/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json",
     "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/report.json",
+    "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -1140,6 +1189,12 @@
       "Notes": "Long-play gameplay-quality gate"
     },
     {
+      "Gate": "Alien entry and challenge-stage novelty",
+      "Current": "4.5/10",
+      "Target": ">=7.5 first gate; >=9.0 mature",
+      "Notes": "New high-priority long-cycle gameplay-authenticity gate"
+    },
+    {
       "Gate": "Boss entry and formation grammar",
       "Current": "8.4/10",
       "Target": ">=8.0 first gate; >=9.0 mature",
@@ -1147,13 +1202,13 @@
     },
     {
       "Gate": "Alien entry / formations",
-      "Current": "8.4/10 measured",
+      "Current": "5.2/10 measured",
       "Target": ">=9.2 with path/rack scorer",
-      "Notes": "Now backed by boss/formation grammar"
+      "Notes": "Now backed by dedicated alien-entry/challenge variation scorer"
     },
     {
       "Gate": "Challenge variation",
-      "Current": "9.3/10 composite",
+      "Current": "4/10 measured",
       "Target": ">=9.2 with dedicated scorer",
       "Notes": "New explicit gate"
     },
@@ -1218,6 +1273,47 @@
     },
     {
       "rank": 2,
+      "metric": "Alien entry and challenge-stage novelty",
+      "explanation": {
+        "calculation": "Dedicated scorer blends regular-stage signature distance, entry path-family specificity, challenging-stage trajectory variation, challenge alien novelty, and readiness for reference-grounded path comparison.",
+        "grounding": "Current grounding comes from stage-signature distance, formation/boss grammar reports, runtime path/slot extraction, and heuristic path-family comparison. Best-case grounding adds Galaga-family contact sheets and frame-labeled challenge/entry path families across several stages.",
+        "meaning": "Players feel this as whether levels and challenge stages are authored, surprising, and learnable. Designers use it to prevent repetitive entry waves and to make challenge stages introduce new alien motion, scoring, and mastery opportunities."
+      },
+      "scoreContext": {
+        "confidence": "medium",
+        "resolution": "dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness",
+        "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
+      },
+      "score10": 4.5,
+      "current": "4.5/10",
+      "target": "7.5 first gate; 9.0+ mature",
+      "status": "Dedicated long-cycle scorer; high-priority gameplay-authenticity gap",
+      "why": "Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.",
+      "effort": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
+      "next": "Attack Challenging-stage alien novelty and introduction: 1/4 challenge evidence windows; challenge entity signatures bee|boss|but.",
+      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
+      "costContext": {
+        "costClass": "estimated",
+        "expectedResources": "cpu, browser",
+        "trackedAxes": [
+          "alien-entry",
+          "level-arc",
+          "conformance-loop"
+        ],
+        "trackedSpend": "126 runs; 22.2 min wall; 36.5 min CPU",
+        "trackedRuns": 126,
+        "trackedWallSeconds": 1329.009,
+        "trackedCpuSeconds": 2189.31,
+        "expectedLift10": null,
+        "expectedOverallLift10": null,
+        "investmentScore": null,
+        "gapToTarget": "+3",
+        "summary": "estimated; cpu, browser",
+        "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
+      }
+    },
+    {
+      "rank": 3,
       "metric": "Level arc and encounter shape",
       "explanation": {
         "calculation": "Level arc is read from the level-arc conformance report, combining stage distinctiveness, challenge-stage identity, later-stage complexity, pressure curve, reward/rescue layering, and learning/mastery windows.",
@@ -1257,7 +1353,7 @@
       }
     },
     {
-      "rank": 3,
+      "rank": 4,
       "metric": "Boss entry and formation grammar",
       "explanation": {
         "calculation": "Boss/formation grammar is read from the dedicated formation-boss-grammar report, blending boss entry timing, boss/escort composition, formation settle evidence, challenge pattern identity, stage variation, and path-shape precision.",
@@ -1297,7 +1393,7 @@
       }
     },
     {
-      "rank": 4,
+      "rank": 5,
       "metric": "Overall visual look and feel: gameplay, start page, typography complexity",
       "explanation": {
         "calculation": "Current score is an estimated planning value until a dedicated visual conformance scorer lands; it is informed by UI shell checks, screenshots, contact sheets, and known visual debt.",
@@ -1336,7 +1432,7 @@
       }
     },
     {
-      "rank": 5,
+      "rank": 6,
       "metric": "Stage 4 pressure exact replay / pressure curve precision",
       "explanation": {
         "calculation": "Score is the current weakest level-arc pressure submetric, focused on whether known pressure/loss windows reproduce as exact or same-window replay events under controlled harness runs.",
@@ -1375,7 +1471,7 @@
       }
     },
     {
-      "rank": 6,
+      "rank": 7,
       "metric": "Alien entry to levels: formation, timing, and methods",
       "explanation": {
         "calculation": "Composite proxy: 45% stage-opening timing fidelity, 35% stage-opening geometry fidelity, and 20% movement-grammar expansion until alien entry is promoted to its own scorer.",
@@ -1385,16 +1481,16 @@
       "scoreContext": {
         "confidence": "medium",
         "resolution": "composite proxy from opening timing, geometry, and movement grammar",
-        "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
+        "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
       },
-      "score10": 8.4,
-      "current": "8.4/10",
+      "score10": 5.2,
+      "current": "5.2/10",
       "target": "9.0-9.4 with path and rack-slot scorer",
-      "status": "Measured through boss/formation grammar category",
+      "status": "Dedicated alien-entry submetric",
       "why": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
       "effort": "Medium; 1-3 hrs plus visual review",
-      "next": "Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json",
+      "next": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.",
+      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu, browser",
@@ -1409,13 +1505,13 @@
         "expectedLift10": null,
         "expectedOverallLift10": null,
         "investmentScore": null,
-        "gapToTarget": "+0.6",
+        "gapToTarget": "+3.8",
         "summary": "estimated; cpu, browser",
         "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
       }
     },
     {
-      "rank": 7,
+      "rank": 8,
       "metric": "Challenge-stage variation and new alien/formations introduction",
       "explanation": {
         "calculation": "Composite proxy: 45% challenge timing fidelity, 35% challenge-stage identity, and 20% long-run non-repetition until a dedicated challenge-variation scorer exists.",
@@ -1425,16 +1521,16 @@
       "scoreContext": {
         "confidence": "medium",
         "resolution": "composite proxy from challenge timing, challenge identity, and non-repetition",
-        "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+        "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
       },
-      "score10": 9.29,
-      "current": "9.3/10",
+      "score10": 4,
+      "current": "4/10",
       "target": "9.0-9.4 with dedicated scorer",
-      "status": "Composite proxy: challenge timing + challenge identity + non-repetition",
+      "status": "Dedicated challenge trajectory/novelty submetric",
       "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
       "effort": "Medium-high; 2-4 hrs",
-      "next": "Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json",
+      "next": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.",
+      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu, browser",
@@ -1449,13 +1545,13 @@
         "expectedLift10": null,
         "expectedOverallLift10": null,
         "investmentScore": null,
-        "gapToTarget": "at target",
+        "gapToTarget": "+5",
         "summary": "estimated; cpu, browser",
         "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
       }
     },
     {
-      "rank": 8,
+      "rank": 9,
       "metric": "Progression and persona depth",
       "explanation": {
         "calculation": "Score is read from the progression/persona quality category, including persona safety checks, stage ordering, and whether different skill profiles see an appropriate ramp.",
@@ -1494,7 +1590,7 @@
       }
     },
     {
-      "rank": 9,
+      "rank": 10,
       "metric": "Stage 1 opening timing fidelity",
       "explanation": {
         "calculation": "Score is read from the stage-1 opening timing category, comparing measured Aurora event timing against reference opening-window timing metrics and tolerances.",
@@ -1533,7 +1629,7 @@
       }
     },
     {
-      "rank": 10,
+      "rank": 11,
       "metric": "Arcade console frame UI style",
       "explanation": {
         "calculation": "Current score uses the UI shell quality category as a proxy until the frame gets its own arcade-style rubric.",
@@ -1572,7 +1668,7 @@
       }
     },
     {
-      "rank": 11,
+      "rank": 12,
       "metric": "Popup/help/scoring/leaderboard surface formatting",
       "explanation": {
         "calculation": "Current score uses the UI shell suite as a proxy until help, score, account, feedback, leaderboard, and game-over modals get a modal-specific scorer.",
@@ -1611,7 +1707,7 @@
       }
     },
     {
-      "rank": 12,
+      "rank": 13,
       "metric": "Dive fairness and safety",
       "explanation": {
         "calculation": "Score is read from the dive-safety quality category and associated harness checks for unfair collision, lane, and persona safety regressions.",
@@ -1651,7 +1747,7 @@
       }
     },
     {
-      "rank": 13,
+      "rank": 14,
       "metric": "Player movement conformance",
       "explanation": {
         "calculation": "Score is read from the player-movement correspondence category, comparing movement traces and control response against the reference-derived movement target.",
@@ -1690,7 +1786,7 @@
       }
     },
     {
-      "rank": 14,
+      "rank": 15,
       "metric": "Shot and hit responsiveness",
       "explanation": {
         "calculation": "Score is read from the combat-responsiveness category, covering shot timing, hit registration, close-shot behavior, and event feedback guardrails.",
@@ -1729,7 +1825,7 @@
       }
     },
     {
-      "rank": 15,
+      "rank": 16,
       "metric": "Stage 1 opening geometry fidelity",
       "explanation": {
         "calculation": "Score is read from the stage-1 opening geometry category, comparing formation layout and opening positions against the reference geometry target.",
@@ -1768,7 +1864,7 @@
       }
     },
     {
-      "rank": 16,
+      "rank": 17,
       "metric": "Capture and rescue rule fidelity",
       "explanation": {
         "calculation": "Score is read from the capture/rescue quality category, including capture, no-leak, rescue, and rule-boundary harness checks.",
@@ -1807,7 +1903,7 @@
       }
     },
     {
-      "rank": 17,
+      "rank": 18,
       "metric": "Challenge-stage timing fidelity",
       "explanation": {
         "calculation": "Score is read from the challenge-stage timing category, comparing Aurora challenge entry, transition, result, and timing metrics against reference tolerances.",
@@ -1864,6 +1960,21 @@
     },
     {
       "Priority": 2,
+      "Metric": "Alien entry and challenge-stage novelty",
+      "Current": "4.5/10",
+      "Confidence": "medium",
+      "Resolution": "dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness",
+      "Cost / resources": "estimated; cpu, browser",
+      "Tracked spend": "126 runs; 22.2 min wall; 36.5 min CPU",
+      "Major-gate target": "7.5 first gate; 9.0+ mature",
+      "Measurement status": "Dedicated long-cycle scorer; high-priority gameplay-authenticity gap",
+      "Why this matters": "Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.",
+      "Effort / time estimate": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
+      "Recommended next step": "Attack Challenging-stage alien novelty and introduction: 1/4 challenge evidence windows; challenge entity signatures bee|boss|but.",
+      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json"
+    },
+    {
+      "Priority": 3,
       "Metric": "Level arc and encounter shape",
       "Current": "8.4/10",
       "Confidence": "medium-high",
@@ -1878,7 +1989,7 @@
       "Evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 3,
+      "Priority": 4,
       "Metric": "Boss entry and formation grammar",
       "Current": "8.4/10",
       "Confidence": "medium",
@@ -1893,7 +2004,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 4,
+      "Priority": 5,
       "Metric": "Overall visual look and feel: gameplay, start page, typography complexity",
       "Current": "8.6/10",
       "Confidence": "medium-low",
@@ -1908,7 +2019,7 @@
       "Evidence": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json"
     },
     {
-      "Priority": 5,
+      "Priority": 6,
       "Metric": "Stage 4 pressure exact replay / pressure curve precision",
       "Current": "7.5/10",
       "Confidence": "medium",
@@ -1923,37 +2034,37 @@
       "Evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 6,
+      "Priority": 7,
       "Metric": "Alien entry to levels: formation, timing, and methods",
-      "Current": "8.4/10",
+      "Current": "5.2/10",
       "Confidence": "medium",
       "Resolution": "composite proxy from opening timing, geometry, and movement grammar",
       "Cost / resources": "estimated; cpu, browser",
       "Tracked spend": "65 runs; 11.2 min wall; 16.1 min CPU",
       "Major-gate target": "9.0-9.4 with path and rack-slot scorer",
-      "Measurement status": "Measured through boss/formation grammar category",
+      "Measurement status": "Dedicated alien-entry submetric",
       "Why this matters": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
       "Effort / time estimate": "Medium; 1-3 hrs plus visual review",
-      "Recommended next step": "Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json"
+      "Recommended next step": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.",
+      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json"
     },
     {
-      "Priority": 7,
+      "Priority": 8,
       "Metric": "Challenge-stage variation and new alien/formations introduction",
-      "Current": "9.3/10",
+      "Current": "4/10",
       "Confidence": "medium",
       "Resolution": "composite proxy from challenge timing, challenge identity, and non-repetition",
       "Cost / resources": "estimated; cpu, browser",
       "Tracked spend": "65 runs; 11.2 min wall; 16.1 min CPU",
       "Major-gate target": "9.0-9.4 with dedicated scorer",
-      "Measurement status": "Composite proxy: challenge timing + challenge identity + non-repetition",
+      "Measurement status": "Dedicated challenge trajectory/novelty submetric",
       "Why this matters": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
       "Effort / time estimate": "Medium-high; 2-4 hrs",
-      "Recommended next step": "Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json"
+      "Recommended next step": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.",
+      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-6cd0cb17/report.json"
     },
     {
-      "Priority": 8,
+      "Priority": 9,
       "Metric": "Progression and persona depth",
       "Current": "8.8/10",
       "Confidence": "medium",
@@ -1968,7 +2079,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 9,
+      "Priority": 10,
       "Metric": "Stage 1 opening timing fidelity",
       "Current": "8.5/10",
       "Confidence": "medium",
@@ -1983,7 +2094,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 10,
+      "Priority": 11,
       "Metric": "Arcade console frame UI style",
       "Current": "9.2/10",
       "Confidence": "medium",
@@ -1998,7 +2109,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 11,
+      "Priority": 12,
       "Metric": "Popup/help/scoring/leaderboard surface formatting",
       "Current": "9.2/10",
       "Confidence": "medium",
@@ -2013,7 +2124,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 12,
+      "Priority": 13,
       "Metric": "Dive fairness and safety",
       "Current": "9.1/10",
       "Confidence": "medium-high",
@@ -2028,7 +2139,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 13,
+      "Priority": 14,
       "Metric": "Player movement conformance",
       "Current": "10/10",
       "Confidence": "high-current-pass",
@@ -2043,7 +2154,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 14,
+      "Priority": 15,
       "Metric": "Shot and hit responsiveness",
       "Current": "10/10",
       "Confidence": "high-current-pass",
@@ -2058,7 +2169,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 15,
+      "Priority": 16,
       "Metric": "Stage 1 opening geometry fidelity",
       "Current": "10/10",
       "Confidence": "high-current-pass",
@@ -2073,7 +2184,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 16,
+      "Priority": 17,
       "Metric": "Capture and rescue rule fidelity",
       "Current": "10/10",
       "Confidence": "high-current-pass",
@@ -2088,7 +2199,7 @@
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json"
     },
     {
-      "Priority": 17,
+      "Priority": 18,
       "Metric": "Challenge-stage timing fidelity",
       "Current": "9.9/10",
       "Confidence": "high-current-pass",
@@ -2222,6 +2333,18 @@
     },
     {
       "Priority": 2,
+      "Metric": "Alien entry and challenge-stage novelty",
+      "Current": "4.5/10",
+      "Target": "7.5 first gate; 9.0+ mature",
+      "Gap to target": "+3",
+      "Estimated effort": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
+      "Expected resources": "cpu, browser",
+      "Tracked spend": "126 runs; 22.2 min wall; 36.5 min CPU",
+      "Value / cost read": "Estimated cost/value; dedicated investment candidate not yet generated.",
+      "Next action": "Attack Challenging-stage alien novelty and introduction: 1/4 challenge evidence windows; challenge entity signatures bee|boss|but."
+    },
+    {
+      "Priority": 3,
       "Metric": "Level arc and encounter shape",
       "Current": "8.4/10",
       "Target": "8.8-9.0",
@@ -2233,7 +2356,7 @@
       "Next action": "Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning."
     },
     {
-      "Priority": 3,
+      "Priority": 4,
       "Metric": "Boss entry and formation grammar",
       "Current": "8.4/10",
       "Target": "8.0-8.5 first gate; 9.0+ with path/slot extraction",
@@ -2245,7 +2368,7 @@
       "Next action": "Advance Stage-to-stage formation variation: Minimum regular distance 0.106; distinct pair ratio 0.533."
     },
     {
-      "Priority": 4,
+      "Priority": 5,
       "Metric": "Overall visual look and feel: gameplay, start page, typography complexity",
       "Current": "8.6/10",
       "Target": "8.4-8.8",
@@ -2257,7 +2380,7 @@
       "Next action": "Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers."
     },
     {
-      "Priority": 5,
+      "Priority": 6,
       "Metric": "Stage 4 pressure exact replay / pressure curve precision",
       "Current": "7.5/10",
       "Target": "8.2-8.6",
@@ -2269,40 +2392,28 @@
       "Next action": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics."
     },
     {
-      "Priority": 6,
+      "Priority": 7,
       "Metric": "Alien entry to levels: formation, timing, and methods",
-      "Current": "8.4/10",
+      "Current": "5.2/10",
       "Target": "9.0-9.4 with path and rack-slot scorer",
-      "Gap to target": "+0.6",
+      "Gap to target": "+3.8",
       "Estimated effort": "Medium; 1-3 hrs plus visual review",
       "Expected resources": "cpu, browser",
       "Tracked spend": "65 runs; 11.2 min wall; 16.1 min CPU",
       "Value / cost read": "Estimated cost/value; dedicated investment candidate not yet generated.",
-      "Next action": "Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels."
+      "Next action": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc."
     },
     {
-      "Priority": 7,
+      "Priority": 8,
       "Metric": "Challenge-stage variation and new alien/formations introduction",
-      "Current": "9.3/10",
+      "Current": "4/10",
       "Target": "9.0-9.4 with dedicated scorer",
-      "Gap to target": "at target",
+      "Gap to target": "+5",
       "Estimated effort": "Medium-high; 2-4 hrs",
       "Expected resources": "cpu, browser",
       "Tracked spend": "65 runs; 11.2 min wall; 16.1 min CPU",
       "Value / cost read": "Estimated cost/value; dedicated investment candidate not yet generated.",
-      "Next action": "Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity."
-    },
-    {
-      "Priority": 8,
-      "Metric": "Progression and persona depth",
-      "Current": "8.8/10",
-      "Target": "9.1+",
-      "Gap to target": "+0.3",
-      "Estimated effort": "Low-medium; 1-2 hrs",
-      "Expected resources": "cpu",
-      "Tracked spend": "4 runs; 4.3 min wall; 4.9 min CPU",
-      "Value / cost read": "Estimated cost/value; dedicated investment candidate not yet generated.",
-      "Next action": "Resolve remaining ordering edge case after higher-value audio/level-arc work."
+      "Next action": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families."
     }
   ],
   "ingestionSummary": {
