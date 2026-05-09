@@ -58,6 +58,31 @@ The first proof does not need to cover a whole game.
 It should cover one small slice completely enough that the same pattern can be
 reused for other games.
 
+## Required Game Catalog Output
+
+Every game that enters primary ingestion must receive a maintained catalog entry
+in [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md). This is now a
+high-priority ingestion output, not a later release-writing task.
+
+The catalog must include:
+
+- an alien/enemy index with displayed names, roles, activity, stage presence,
+  target references, conformance scores, confidence, and next gaps
+- an audio cue index with runtime cue IDs, event meanings, extracted reference
+  clips or waveform/spectrogram anchors, conformance scores, confidence, and
+  next gaps
+- a stage-by-stage or wave-by-wave summary describing enemy composition, entry
+  formations, maneuvers, trajectories, difficulty, reward opportunities, and
+  current evidence
+- a persona section that explains beginner/novice, intermediate/advanced,
+  expert, and professional testing assumptions for both platform-level and
+  game-owned harnesses
+
+If direct extracted target evidence exists, link it from the catalog row. If the
+metric is still a proxy or heuristic, label the confidence accordingly. This is
+important because a low-confidence `10/10` harness pass is a signal to build a
+better scorer, not a claim of perfect conformance.
+
 ## Primary-Phase Constraint: Evidence Before Design
 
 Primary ingestion phases should avoid arbitrary game design.
@@ -191,6 +216,8 @@ Suggested anchor layout:
 - `reference-artifacts/analyses/<game-lineage>/<source-id>/frames/`
 - `reference-artifacts/analyses/<game-lineage>/<source-id>/audio/`
 - `reference-artifacts/analyses/<game-lineage>/<source-id>/events/`
+- `GAME_CONFORMANCE_CATALOG.md` rows updated with the promoted alien, audio,
+  stage, and persona evidence
 
 For `Galaxy Guardians`, use a `galaxian-reference` lineage folder unless a more
 specific source family is warranted.

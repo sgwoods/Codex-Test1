@@ -7,10 +7,15 @@ It exists so future work does not depend on memory or chat history when deciding
 For the repeatable source-to-game-pack process, pair this inventory with:
 
 - `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
+- `GAME_CONFORMANCE_CATALOG.md`
 
 That framework defines the manifest, window, event-log, semantic-model, and
 harness-planning chain that should govern `Galaxian` / `Galaxy Guardians` and
 future Platinum game ingestion.
+
+The game conformance catalog is the human-readable index that ties these media
+sources to each game's alien/enemy rows, audio cue rows, stage summaries, and
+persona testing expectations.
 
 ## Core Aurora / Galaga Reference Sources
 
@@ -66,7 +71,7 @@ These are the most important missing reference structures, not missing media fil
 4. Frame-level Galaxian timing bands that refine the first promoted event log
    into runtime-ready scout-wave timings.
 5. Reference-side event logs that align preserved video timestamps with Aurora-like event families.
-6. A durable labeled catalog of core ship/enemy/presentation image artifacts for comparison and documentation.
+6. A durable labeled catalog of core ship/enemy/presentation image artifacts for comparison and documentation. The first maintained human index now lives in `GAME_CONFORMANCE_CATALOG.md`; the remaining gap is generating more direct extracted target crops for Aurora's Galaga-family alien rows.
 7. Source manifests that record provenance, license notes, analysis status, and
    confidence before a discovered video becomes implementation evidence.
 8. Semantic slice profiles that translate reference windows into game-pack rules

@@ -77,11 +77,12 @@ release planning dashboard is in
 
 Current Aurora read:
 
-- overall release-quality score: `9.1/10`
+- overall release-quality score: `9.2/10`
 - weakest high-value category: audio identity and cue alignment, currently
   `7.3/10`
-- level arc and encounter shape: `8.4/10`
-- boss entry and formation grammar: `8.4/10`
+- level arc and encounter shape: `8.8/10`
+- boss entry and formation grammar: `9.0/10`
+- alien entry and challenge-stage novelty: `8.7/10`
 - player movement, shot/hit responsiveness, stage-1 geometry, and
   capture/rescue rules are current guardrail passes at `10/10` under current
   scorer resolution
@@ -228,6 +229,7 @@ The documentation should remain layered so readers can choose the right depth.
 | Resource usage, local CPU, GPU-equivalent model work, and cost-per-score | [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md) |
 | Platform ownership and architecture | [PLATINUM.md](PLATINUM.md) and [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md) |
 | Game/platform boundary | [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md) |
+| Per-game alien, audio, stage, and persona catalog | [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md) |
 | Ingestion process | [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md) |
 | Quality scoring model | [QUALITY_CONFORMANCE_MODEL.md](QUALITY_CONFORMANCE_MODEL.md) |
 | Current execution plan | [PLAN.md](PLAN.md) |
@@ -240,6 +242,7 @@ Refresh this document when any of these change:
 - release family or lane posture
 - primary conformance priorities
 - metric categories or interpretation rules
+- alien/audio/stage/persona catalog entries
 - ingestion's role in the project
 - platform/application boundary strategy
 - resource-economics policy

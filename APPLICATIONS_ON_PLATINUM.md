@@ -76,6 +76,8 @@ A Platinum application should own:
 - gameplay rules
 - scoring and stage progression
 - game-specific presentation and content
+- alien/enemy catalog entries, audio cue catalog entries, stage summaries, and
+  game-owned persona expectations in `GAME_CONFORMANCE_CATALOG.md`
 - application identity on the front door such as title and feature line
 - its own version line and changelog
 - its own conformance artifacts and readiness gates
@@ -103,6 +105,7 @@ At minimum, that means each application should eventually carry:
 - a declared compatibility target for the Platinum contract version
 - game-owned release notes or change history
 - game-owned conformance artifacts and scorecards where relevant
+- game-owned alien, audio, stage, and persona catalog rows
 - game-owned candidate and regression harness definitions
 
 The integrated bundle should then record which exact application versions it
@@ -363,6 +366,7 @@ runtime-ready rules:
 Use the reusable ingestion process in:
 
 - `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
+- `GAME_CONFORMANCE_CATALOG.md`
 
 That means the first scout-wave slice should be traceable through source
 manifest, clipped window, event log, semantic model, correspondence target, and
