@@ -7,6 +7,8 @@
     "current": [
       "reference-artifacts/analyses/aurora-level-expansion-cycle/*/events/reference-events.json",
       "reference-artifacts/analyses/aurora-level-expansion-cycle/*/trace/trace.json",
+      "reference-artifacts/analyses/formation-boss-path-slot-extraction/*/report.json",
+      "reference-artifacts/analyses/formation-boss-path-family-comparison/*/report.json",
       "reference-artifacts/analyses/stage-signature-distance/*/report.json",
       "reference-artifacts/analyses/level-arc-opportunity-windows/*/report.json"
     ],
@@ -52,7 +54,7 @@
       "id": "path-shape-precision",
       "label": "Path shape and set-formation precision",
       "weight": 0.16,
-      "success": "Frame-level boss/escort/challenge path traces and formation slot positions are available for direct reference comparison."
+      "success": "Runtime boss/escort/challenge path traces and formation slot positions are available first, then promoted to direct reference comparison against Galaga path families."
     }
   ],
   "thresholds": {
@@ -61,11 +63,44 @@
     "targetEscortBossWindows": 2,
     "targetDistinctPairDistance": 0.22,
     "targetMinimumRegularDistance": 0.16,
+    "heuristicPathFamilyCap10": 6.8,
     "bossTimingBandsSeconds": {
       "early": [8, 23],
       "mid": [2, 15],
       "late": [1, 12]
     }
   },
+  "referencePathFamilies": [
+    {
+      "id": "rack-slot-settle",
+      "label": "Rack slot settle",
+      "target": 5
+    },
+    {
+      "id": "entry-arc-to-rack",
+      "label": "Entry arc to rack",
+      "target": 5
+    },
+    {
+      "id": "boss-entry-or-dive",
+      "label": "Boss entry or dive",
+      "target": 4
+    },
+    {
+      "id": "escort-paired-dive",
+      "label": "Escort paired dive",
+      "target": 2
+    },
+    {
+      "id": "challenge-lane-wave",
+      "label": "Challenge lane wave",
+      "target": 1
+    },
+    {
+      "id": "challenge-sweeping-path",
+      "label": "Challenge sweeping path",
+      "target": 1
+    }
+  ],
   "releaseUse": "This family should appear as a key Level Arc / Formation Grammar gate before any major Aurora release that claims a meaningful Galaga conformance lift."
 }

@@ -1,32 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T00-53-17-872Z-20494",
-  "startedAt": "2026-05-09T00:53:17.872Z",
-  "endedAt": "2026-05-09T00:53:18.027Z",
+  "id": "2026-05-09T11-19-27-780Z-62183",
+  "startedAt": "2026-05-09T11:19:27.780Z",
+  "endedAt": "2026-05-09T11:19:27.960Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "5da7d96",
+  "commit": "29a80ab4",
   "command": [
     "npm",
     "run",
-    "harness:analyze:level-arc-conformance"
+    "harness:analyze:formation-boss-path-families"
   ],
   "axes": [
-    "level-arc",
-    "stage-signature",
-    "conformance-score",
-    "conformance-economics"
+    "formation-boss-grammar",
+    "path-family-comparison"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "Level-arc conformance refresh after stage-signature distance recompute",
+  "notes": "",
   "measurement": {
-    "wallSeconds": 0.155,
-    "timeRealSeconds": 0.15,
-    "timeUserSeconds": 0.11,
+    "wallSeconds": 0.18,
+    "timeRealSeconds": 0.17,
+    "timeUserSeconds": 0.14,
     "timeSystemSeconds": 0.03,
-    "cpuSeconds": 0.14,
+    "cpuSeconds": 0.17,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -48,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 468750804,
-    "artifactBytesAfter": 468750752,
-    "artifactBytesDelta": -52
+    "artifactBytesBefore": 476980243,
+    "artifactBytesAfter": 476980243,
+    "artifactBytesDelta": 0
   }
 }

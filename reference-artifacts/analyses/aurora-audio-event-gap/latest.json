@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-event-gap",
-  "generatedAt": "2026-05-09T10:38:47.365Z",
+  "generatedAt": "2026-05-09T11:20:40.007Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "4874ced4",
+  "commit": "29a80ab4",
   "dirty": true,
   "problem": "Aurora audio conformance is the weakest current release axis, but the next work must distinguish true runtime cue gaps from broad or missing reference measurements.",
   "strategy": "Reuse the latest captured Aurora audio comparison metrics, rank event cues by active-duration/timbre/reference-window risk, and expose missing critical cue coverage before tuning.",

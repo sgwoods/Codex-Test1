@@ -217,6 +217,8 @@ function main(){
   if(!qualityPath) throw new Error('Missing quality-conformance report; run npm run harness:score:quality-conformance first.');
   const opportunityPath = latestReport('level-arc-opportunity-windows');
   const levelArcPath = latestReport('level-arc-conformance');
+  const formationPathSlotPath = latestReport('formation-boss-path-slot-extraction');
+  const formationPathFamilyPath = latestReport('formation-boss-path-family-comparison');
   const audioEventGapPath = latestReport('aurora-audio-event-gap');
   const audioCueCandidatePath = latestReport('aurora-audio-cue-candidates');
   const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
@@ -224,12 +226,23 @@ function main(){
   const quality = readJson(qualityPath);
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {} };
   const levelArcReport = levelArcPath ? readJson(levelArcPath) : { summary: {} };
+  const formationPathSlot = formationPathSlotPath ? readJson(formationPathSlotPath) : { summary: {} };
+  const formationPathFamily = formationPathFamilyPath ? readJson(formationPathFamilyPath) : { summary: {} };
   const audioEventGap = audioEventGapPath ? readJson(audioEventGapPath) : { summary: {} };
   const audioCueCandidate = audioCueCandidatePath ? readJson(audioCueCandidatePath) : null;
   const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
   const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
   const nextOpportunityId = opportunity.summary?.highestPriorityOpportunity?.id || 'missing level-arc opportunity coverage';
+  const pathSlotAtRuntimeCap = Number.isFinite(+formationPathSlot.summary?.cappedPathSlotScore10)
+    && +formationPathSlot.summary.cappedPathSlotScore10 >= +formationPathSlot.summary.referenceComparisonCap10;
+  const pathFamilyAtHeuristicCap = Number.isFinite(+formationPathFamily.summary?.score10)
+    && +formationPathFamily.summary.score10 >= +formationPathFamily.summary.referenceComparisonCap10;
+  const formationPathCandidateId = pathFamilyAtHeuristicCap
+    ? 'formation-boss-frame-labeled-reference-paths'
+    : pathSlotAtRuntimeCap
+    ? 'formation-boss-reference-path-comparison'
+    : 'formation-boss-path-slot-extraction';
 
   const audio = categoryById(quality, 'audio');
   const levelArc = latestLevelArcCategory(quality, levelArcReport);
@@ -285,19 +298,31 @@ function main(){
       nextAction: 'Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.'
     }),
     buildCandidate({
-      id: 'formation-boss-path-slot-extraction',
-      label: 'Promote boss entry and formation path/slot extraction',
+      id: formationPathCandidateId,
+      label: pathFamilyAtHeuristicCap
+        ? 'Add frame-labeled Galaga boss and formation path references'
+        : pathSlotAtRuntimeCap
+        ? 'Compare boss and formation paths against reference families'
+        : 'Promote boss entry and formation path/slot extraction',
       category: formationBoss,
       quality,
       economics: ledger,
-      expectedLift10: 0.75,
-      confidence: 0.7,
+      expectedLift10: pathFamilyAtHeuristicCap ? 0.28 : pathSlotAtRuntimeCap ? 0.42 : 0.75,
+      confidence: pathFamilyAtHeuristicCap ? 0.58 : pathSlotAtRuntimeCap ? 0.62 : 0.7,
       reuse: 0.96,
-      risk: 0.3,
-      costClass: 'medium',
+      risk: pathFamilyAtHeuristicCap ? 0.42 : pathSlotAtRuntimeCap ? 0.38 : 0.3,
+      costClass: pathFamilyAtHeuristicCap ? 'high' : pathSlotAtRuntimeCap ? 'high' : 'medium',
       computeAxis: 'conformance-loop',
-      rationale: 'Boss entry and formation grammar is now a first-class scorer. Its current highest measurement debt is expected to be path-shape and set-formation precision, which affects Galaga-like stage choreography and is reusable for future game ingestion.',
-      nextAction: 'Extract frame-level boss/escort/challenge paths and formation slot coordinates for the current evidence windows, then rerun formation-boss grammar, level-arc, and quality scoring.'
+      rationale: pathFamilyAtHeuristicCap
+        ? `Heuristic path-family comparison is now available and capped at ${formationPathFamily.summary.score10}/10 with confidence ${formationPathFamily.summary.comparisonConfidence}. The remaining path-shape gap is labeled Galaga reference path data, not runtime extraction.`
+        : pathSlotAtRuntimeCap
+        ? `Runtime path extraction is now available and capped at ${formationPathSlot.summary.cappedPathSlotScore10}/10 until reference comparison lands. The latest extraction found ${formationPathSlot.summary.bossMovingTracks} moving boss tracks, ${formationPathSlot.summary.escortTracks} escort tracks, and ${formationPathSlot.summary.regularSlotTracks + formationPathSlot.summary.challengeSlotTracks} slot tracks.`
+        : 'Boss entry and formation grammar is now a first-class scorer. Its current highest measurement debt is path-shape and set-formation precision, which affects Galaga-like stage choreography and is reusable for future game ingestion.',
+      nextAction: pathFamilyAtHeuristicCap
+        ? 'Label boss, escort, rack-settle, and challenge path families from Galaga reference contact sheets or video traces, then replace heuristic coverage with direct shape-distance scoring.'
+        : pathSlotAtRuntimeCap
+        ? 'Add Galaga reference path-family labels and compare extracted Aurora boss/escort/challenge trajectories against those targets before tuning stage scripts.'
+        : 'Extract frame-level boss/escort/challenge paths and formation slot coordinates for the current evidence windows, then rerun formation-boss grammar, level-arc, and quality scoring.'
     }),
     buildCandidate({
       id: 'stage1-timing-polish',
@@ -346,6 +371,7 @@ function main(){
       audioCueCandidateReport: audioCueCandidatePath ? rel(audioCueCandidatePath) : null,
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
       levelArcReport: levelArcPath ? rel(levelArcPath) : null,
+      formationPathSlotReport: formationPathSlotPath ? rel(formationPathSlotPath) : null,
       stage14SweepReport: stage14SweepPath ? rel(stage14SweepPath) : null,
       economicsReport: economicsPath ? rel(economicsPath) : null,
       ledger: rel(LEDGER)

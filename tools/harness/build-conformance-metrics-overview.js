@@ -28,7 +28,10 @@ function walkReports(dir){
     }
   }
   walk(dir);
-  return found.sort();
+  return found.sort((a, b) => {
+    const delta = fs.statSync(a).mtimeMs - fs.statSync(b).mtimeMs;
+    return delta || a.localeCompare(b);
+  });
 }
 
 function latestAuroraReport(){

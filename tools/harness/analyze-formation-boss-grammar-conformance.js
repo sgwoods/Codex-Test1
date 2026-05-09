@@ -199,10 +199,25 @@ function buildReport(){
   const challengeBossSignal = challenge.length ? challenge.filter(window => window.bossEventCount > 0).length / challenge.length : 0;
   const stageSignaturePath = latestReport('reference-artifacts/analyses/stage-signature-distance');
   const stageSignature = stageSignaturePath ? readJson(stageSignaturePath) : { summary: {} };
+  const pathSlotPath = latestReport('reference-artifacts/analyses/formation-boss-path-slot-extraction');
+  const pathSlot = pathSlotPath ? readJson(pathSlotPath) : { summary: {} };
+  const pathFamilyPath = latestReport('reference-artifacts/analyses/formation-boss-path-family-comparison');
+  const pathFamily = pathFamilyPath ? readJson(pathFamilyPath) : { summary: {} };
   const minRegularDistance = stageSignature.summary?.minRegularDistance || stageSignature.summary?.closestRegularPair?.distance || 0;
   const distinctPairRatio = stageSignature.summary?.distinctPairRatio || 0;
   const regularDistanceScore = 0.55 * clamp(minRegularDistance / profile.thresholds.targetMinimumRegularDistance)
     + 0.45 * clamp(distinctPairRatio);
+  const pathSlotScore = Number.isFinite(+pathSlot.summary?.cappedPathSlotScore10)
+    ? +pathSlot.summary.cappedPathSlotScore10
+    : null;
+  const pathFamilyScore = Number.isFinite(+pathFamily.summary?.score10)
+    ? +pathFamily.summary.score10
+    : null;
+  const runtimeSlotTrackCount = (pathSlot.summary?.regularSlotTracks || 0) + (pathSlot.summary?.challengeSlotTracks || 0);
+  const runtimePathTrackCount = pathSlot.summary?.movingTracks || 0;
+  const runtimeBossMovingTrackCount = pathSlot.summary?.bossMovingTracks || 0;
+  const classifiedPathFamilyCount = pathFamily.summary?.classifiedTrackCount || 0;
+  const expectedPathFamilyCoverage = pathFamily.summary?.expectedFamilyCoverage || 0;
 
   const metrics = {
     'boss-entry-timing': {
@@ -224,9 +239,9 @@ function buildReport(){
     'formation-settle-evidence': {
       id: 'formation-settle-evidence',
       label: 'Formation settle evidence',
-      score10: round(10 * ((0.75 * clamp(formationWindows.length / Math.max(regular.length, 1))) + (0.25 * clamp(formationSlotHintCount / Math.max(regular.length, 1)))) , 1),
-      calculation: '75% regular-window formation-active settle proxy plus 25% source lane/column slot evidence.',
-      currentRead: `${formationWindows.length}/${regular.length} regular windows expose formation-active counts; ${formationSlotHintCount} events include source lane/column hints.`,
+      score10: round(10 * ((0.55 * clamp(formationWindows.length / Math.max(regular.length, 1))) + (0.45 * clamp(runtimeSlotTrackCount / Math.max(regular.length * 20, 1)))) , 1),
+      calculation: '55% regular-window formation-active settle proxy plus 45% runtime rack/challenge slot-coordinate extraction coverage.',
+      currentRead: `${formationWindows.length}/${regular.length} regular windows expose formation-active counts; path-slot extraction found ${runtimeSlotTrackCount} slot tracks.`,
       success: profile.metrics.find(metric => metric.id === 'formation-settle-evidence').success
     },
     'challenge-pattern-identity': {
@@ -248,9 +263,21 @@ function buildReport(){
     'path-shape-precision': {
       id: 'path-shape-precision',
       label: 'Path shape and set-formation precision',
-      score10: round(10 * ((0.55 * clamp(pathHintCount / Math.max(windows.length, 1))) + (0.45 * clamp(formationSlotHintCount / Math.max(windows.length, 1)))) , 1),
-      calculation: 'Direct motion-hint and formation slot-coordinate evidence coverage. This intentionally remains low until frame-level path extraction is promoted.',
-      currentRead: `${pathHintCount} motion hints and ${formationSlotHintCount} formation slot hints across ${windows.length} windows.`,
+      score10: pathFamilyScore != null
+        ? round(pathFamilyScore, 1)
+        : pathSlotScore == null
+        ? round(10 * ((0.55 * clamp(pathHintCount / Math.max(windows.length, 1))) + (0.45 * clamp(formationSlotHintCount / Math.max(windows.length, 1)))) , 1)
+        : round(pathSlotScore, 1),
+      calculation: pathFamilyScore != null
+        ? 'Heuristic path-family comparison score from extracted runtime trajectories, capped until frame-labeled Galaga reference path families are available.'
+        : pathSlotScore == null
+        ? 'Direct motion-hint and formation slot-coordinate evidence coverage. This intentionally remains low until frame-level path extraction is promoted.'
+        : 'Runtime path/slot extraction score, capped at the current no-reference-comparison ceiling so extraction coverage does not masquerade as arcade-perfect path fidelity.',
+      currentRead: pathFamilyScore != null
+        ? `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; capped score ${pathFamilyScore}/10 until direct reference labels land.`
+        : pathSlotScore == null
+        ? `${pathHintCount} motion hints and ${formationSlotHintCount} formation slot hints across ${windows.length} windows.`
+        : `${runtimePathTrackCount} moving tracks, ${runtimeBossMovingTrackCount} moving boss tracks, and ${runtimeSlotTrackCount} slot tracks; capped score ${pathSlotScore}/10 until reference path comparison lands.`,
       success: profile.metrics.find(metric => metric.id === 'path-shape-precision').success
     }
   };
@@ -277,10 +304,19 @@ function buildReport(){
       formationSettleProxyWindowCount: formationWindows.length,
       pathHintCount,
       formationSlotHintCount,
+      pathSlotExtractionScore10: pathSlot.summary?.extractionScore10 ?? null,
+      cappedPathSlotScore10: pathSlot.summary?.cappedPathSlotScore10 ?? null,
+      runtimePathTrackCount,
+      runtimeSlotTrackCount,
+      runtimeBossMovingTrackCount,
+      pathFamilyScore10: pathFamily.summary?.score10 ?? null,
+      pathFamilyComparisonConfidence: pathFamily.summary?.comparisonConfidence ?? null,
+      classifiedPathFamilyCount,
+      expectedPathFamilyCoverage,
       weakestMetric,
       strongestMetric,
       topProblem: weakestMetric.id === 'path-shape-precision'
-        ? 'Boss/escort path-shape and formation-slot precision are not yet extracted from frame evidence, so the scorer can see event grammar before it can see true path-authenticity.'
+        ? 'Boss/escort path-shape precision is still capped because the scorer has heuristic runtime path families before it has frame-labeled Galaga reference-family comparison.'
         : `${weakestMetric.label} is the largest measured gap in the current evidence set.`,
       strategy: 'Promote boss/escort/challenge path traces, formation slot coordinates, and stage-family entry labels into the ingestion corpus, then use this scorer to rank stage scripts and runtime changes.',
       successMeasure: 'Raise this family above 8.0/10 with path-shape precision above 5.0/10, minimum regular-stage signature distance above 0.16, and at least two challenge windows with distinct pattern identity.'
@@ -288,7 +324,9 @@ function buildReport(){
     metrics: Object.values(metrics),
     windows,
     sourceReports: {
-      stageSignature: stageSignaturePath ? path.relative(ROOT, stageSignaturePath) : null
+      stageSignature: stageSignaturePath ? path.relative(ROOT, stageSignaturePath) : null,
+      pathSlotExtraction: pathSlotPath ? path.relative(ROOT, pathSlotPath) : null,
+      pathFamilyComparison: pathFamilyPath ? path.relative(ROOT, pathFamilyPath) : null
     }
   };
   writeJson(path.join(outDir, 'report.json'), report);
