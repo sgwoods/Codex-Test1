@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop",
+  "generatedAt": "2026-05-09T18:25:06.995Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "0b62f863",
+  "dirty": true,
+  "key": "enemy-boom",
+  "title": "Enemy Boom",
+  "cue": "enemyBoom",
+  "repetitions": 3,
+  "problem": "Enemy Boom is the highest current whole-cue audio event gap: Aurora is too long, too bright, and late-peaking versus the compact Zako destruction reference.",
+  "strategy": "Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.",
+  "successMeasure": "A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.",
+  "source": {
+    "comparisonSet": "enemy-boom-compare",
+    "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+    "referenceWindow": {
+      "startSeconds": 0.5,
+      "endSeconds": 0.74,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+      "selection": "highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-0b62f863-dirty-audio-focus-182506/enemy-boom/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-0b62f863-dirty-audio-focus-182506/enemy-boom/metrics.json",
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "label": "normal enemy destruction transient",
+          "start_s": 0.02,
+          "end_s": 0.2,
+          "duration_s": 0.18,
+          "metrics": {
+            "duration_s": 0.18,
+            "peak": 0.743,
+            "rms": 0.3041,
+            "spectral_centroid_hz": 1375.4,
+            "zero_crossings_per_s": 1838.9,
+            "spectral_spread_hz": 1110.9,
+            "spectral_rolloff_85_hz": 2283.3,
+            "spectral_flatness": 0.1004,
+            "band_energy": {
+              "sub_500": 0.1137,
+              "low_mid_500_1500": 0.6079,
+              "mid_1500_3000": 0.2163,
+              "presence_3000_6000": 0.0514,
+              "air_6000_plus": 0.0107
+            },
+            "attack_peak_position": 0.091,
+            "decay_ratio": 0.966,
+            "envelope_contrast": 1.045,
+            "burst_share": 0.043
+          },
+          "curated": true
+        }
+      ],
+      "summary": {
+        "segmentCount": 1,
+        "status": "curated-reference-segmentation",
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0.02,
+          "end_s": 0.2
+        },
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.50-0.74s Zako window; normal enemy destruction is a compact finality transient",
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured Zako destruction transient"
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "refclip-s500-d280-v95",
+      "label": "Enemy Boom reference 0.5s/0.28s v0.95",
+      "generated": true,
+      "generator": {
+        "family": "enemy-boom-reference-subclip-grid",
+        "heuristic": 0.1915,
+        "target": "Make normal enemy destruction feel like a compact Galaga kill confirmation that is heavier than enemyHit but not as large as bossBoom.",
+        "params": {
+          "clipStart": 0.5,
+          "clipDuration": 0.28,
+          "referenceVolume": 0.95
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "cooldownMs": 260,
+        "referenceVolume": 0.95,
+        "clipStart": 0.5,
+        "clipDuration": 0.28
+      },
+      "durationGapSeconds": 0.42,
+      "centroidGapHz": 341.967,
+      "zeroCrossingGapPerSecond": 326,
+      "rmsGap": 0.065,
+      "bandShapeGap": 0.1794,
+      "rolloffGapHz": 1010.633,
+      "envelopeShapeGap": 0.409,
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "rms": 0.1987,
+        "spectral_centroid_hz": 1718.3,
+        "zero_crossings_per_s": 1560.6,
+        "spectral_rolloff_85_hz": 3293.9,
+        "band_energy": {
+          "sub_500": 0.1357,
+          "low_mid_500_1500": 0.4303,
+          "mid_1500_3000": 0.2635,
+          "presence_3000_6000": 0.1511,
+          "air_6000_plus": 0.0193
+        },
+        "attack_peak_position": 0.764,
+        "decay_ratio": 0.675,
+        "burst_share": 0.337
+      },
+      "referenceMetrics": {
+        "duration_s": 0.24,
+        "rms": 0.2634,
+        "spectral_centroid_hz": 1376.3,
+        "zero_crossings_per_s": 1575,
+        "spectral_rolloff_85_hz": 2283.3,
+        "band_energy": {
+          "sub_500": 0.1121,
+          "low_mid_500_1500": 0.6097,
+          "mid_1500_3000": 0.2163,
+          "presence_3000_6000": 0.0512,
+          "air_6000_plus": 0.0107
+        },
+        "attack_peak_position": 0.133,
+        "decay_ratio": 0.745,
+        "burst_share": 0.161
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0236,
+        "low_mid_500_1500": -0.1794,
+        "mid_1500_3000": 0.0472,
+        "presence_3000_6000": 0.0999,
+        "air_6000_plus": 0.0086
+      },
+      "comparison": {
+        "duration_s": 0.42,
+        "spectral_centroid_hz": 341.967,
+        "zero_crossings_per_s": 326,
+        "rms": 0.065,
+        "spectral_spread_hz": 360.267,
+        "spectral_rolloff_85_hz": 1010.633,
+        "spectral_flatness": 0.066,
+        "band_shape_distance": 0.1794,
+        "attack_peak_position": 0.6313,
+        "decay_ratio": 0.0697,
+        "envelope_contrast": 2.127,
+        "burst_share": 0.176
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 1.79,
+      "worstSegmentRisk10": 1.79,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.233,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 55.7,
+        "rmsGapStd": 0.0233
+      },
+      "samples": [
+        {
+          "id": "refclip-s500-d280-v95",
+          "repetition": 1,
+          "risk10": 4.07,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 295.8,
+          "rmsGap": 0.0818,
+          "bandShapeGap": 0.1751,
+          "worstSegmentRisk10": 0.6,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s500-d280-v95",
+          "repetition": 2,
+          "risk10": 3.52,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 420.3,
+          "rmsGap": 0.0317,
+          "bandShapeGap": 0.1883,
+          "worstSegmentRisk10": 4.23,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s500-d280-v95",
+          "repetition": 3,
+          "risk10": 3.93,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 309.8,
+          "rmsGap": 0.0806,
+          "bandShapeGap": 0.1749,
+          "worstSegmentRisk10": 0.54,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 3.84,
+      "riskBreakdown": {
+        "duration": 0.49411764705882355,
+        "centroid": 0.26305153846153845,
+        "zeroCrossing": 0.1811111111111111,
+        "rms": 0.40625,
+        "bandShape": 0.3588,
+        "rolloff": 0.388705,
+        "attack": 0.7014444444444444,
+        "decay": 0.02178125,
+        "burst": 0.5028571428571429
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "duration gap improved only -0.263s"
+    },
+    {
+      "id": "refclip-s500-d280-v105",
+      "label": "Enemy Boom reference 0.5s/0.28s v1.05",
+      "generated": true,
+      "generator": {
+        "family": "enemy-boom-reference-subclip-grid",
+        "heuristic": 0.2265,
+        "target": "Make normal enemy destruction feel like a compact Galaga kill confirmation that is heavier than enemyHit but not as large as bossBoom.",
+        "params": {
+          "clipStart": 0.5,
+          "clipDuration": 0.28,
+          "referenceVolume": 1.05
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "cooldownMs": 260,
+        "referenceVolume": 1.05,
+        "clipStart": 0.5,
+        "clipDuration": 0.28
+      },
+      "durationGapSeconds": 0.4097,
+      "centroidGapHz": 311.267,
+      "zeroCrossingGapPerSecond": 213.067,
+      "rmsGap": 0.063,
+      "bandShapeGap": 0.1645,
+      "rolloffGapHz": 931.833,
+      "envelopeShapeGap": 0.52,
+      "activeMetrics": {
+        "duration_s": 0.65,
+        "rms": 0.2,
+        "spectral_centroid_hz": 1687.6,
+        "zero_crossings_per_s": 1361.9,
+        "spectral_rolloff_85_hz": 3215.1,
+        "band_energy": {
+          "sub_500": 0.1346,
+          "low_mid_500_1500": 0.4452,
+          "mid_1500_3000": 0.2584,
+          "presence_3000_6000": 0.1434,
+          "air_6000_plus": 0.0184
+        },
+        "attack_peak_position": 0.936,
+        "decay_ratio": 0.784,
+        "burst_share": 0.38
+      },
+      "referenceMetrics": {
+        "duration_s": 0.24,
+        "rms": 0.2634,
+        "spectral_centroid_hz": 1376.3,
+        "zero_crossings_per_s": 1575,
+        "spectral_rolloff_85_hz": 2283.3,
+        "band_energy": {
+          "sub_500": 0.1121,
+          "low_mid_500_1500": 0.6097,
+          "mid_1500_3000": 0.2163,
+          "presence_3000_6000": 0.0512,
+          "air_6000_plus": 0.0107
+        },
+        "attack_peak_position": 0.133,
+        "decay_ratio": 0.745,
+        "burst_share": 0.161
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0225,
+        "low_mid_500_1500": -0.1645,
+        "mid_1500_3000": 0.0421,
+        "presence_3000_6000": 0.0922,
+        "air_6000_plus": 0.0077
+      },
+      "comparison": {
+        "duration_s": 0.4097,
+        "spectral_centroid_hz": 311.267,
+        "zero_crossings_per_s": 213.067,
+        "rms": 0.063,
+        "spectral_spread_hz": 339.967,
+        "spectral_rolloff_85_hz": 931.833,
+        "spectral_flatness": 0.063,
+        "band_shape_distance": 0.1645,
+        "attack_peak_position": 0.8033,
+        "decay_ratio": 0.1333,
+        "envelope_contrast": 2.204,
+        "burst_share": 0.2187
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.7,
+      "worstSegmentRisk10": 0.7,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.169,
+        "durationGapStdSeconds": 0.015,
+        "centroidGapStdHz": 32.5,
+        "rmsGapStd": 0.0156
+      },
+      "samples": [
+        {
+          "id": "refclip-s500-d280-v105",
+          "repetition": 1,
+          "risk10": 4.04,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 315.5,
+          "rmsGap": 0.0689,
+          "bandShapeGap": 0.1731,
+          "worstSegmentRisk10": 0.6,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s500-d280-v105",
+          "repetition": 2,
+          "risk10": 3.99,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 269.5,
+          "rmsGap": 0.0791,
+          "bandShapeGap": 0.1661,
+          "worstSegmentRisk10": 0.99,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s500-d280-v105",
+          "repetition": 3,
+          "risk10": 3.66,
+          "durationGapSeconds": 0.389,
+          "centroidGapHz": 348.8,
+          "rmsGap": 0.0422,
+          "bandShapeGap": 0.1542,
+          "worstSegmentRisk10": 0.52,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 3.89,
+      "riskBreakdown": {
+        "duration": 0.48200000000000004,
+        "centroid": 0.23943615384615385,
+        "zeroCrossing": 0.11837055555555556,
+        "rms": 0.39375,
+        "bandShape": 0.329,
+        "rolloff": 0.35839730769230765,
+        "attack": 0.8925555555555555,
+        "decay": 0.04165625,
+        "burst": 0.6248571428571429
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "duration gap improved only -0.253s"
+    },
+    {
+      "id": "refclip-s500-d240-v95",
+      "label": "Enemy Boom reference 0.5s/0.24s v0.95",
+      "generated": true,
+      "generator": {
+        "family": "enemy-boom-reference-subclip-grid",
+        "heuristic": 0.0315,
+        "target": "Make normal enemy destruction feel like a compact Galaga kill confirmation that is heavier than enemyHit but not as large as bossBoom.",
+        "params": {
+          "clipStart": 0.5,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.95
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "cooldownMs": 260,
+        "referenceVolume": 0.95,
+        "clipStart": 0.5,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.42,
+      "centroidGapHz": 370.3,
+      "zeroCrossingGapPerSecond": 417.467,
+      "rmsGap": 0.064,
+      "bandShapeGap": 0.1814,
+      "rolloffGapHz": 1090.933,
+      "envelopeShapeGap": 0.408,
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 1746.6,
+        "zero_crossings_per_s": 1517.7,
+        "spectral_rolloff_85_hz": 3374.2,
+        "band_energy": {
+          "sub_500": 0.1266,
+          "low_mid_500_1500": 0.4283,
+          "mid_1500_3000": 0.2712,
+          "presence_3000_6000": 0.155,
+          "air_6000_plus": 0.019
+        },
+        "attack_peak_position": 0.716,
+        "decay_ratio": 0.758,
+        "burst_share": 0.353
+      },
+      "referenceMetrics": {
+        "duration_s": 0.24,
+        "rms": 0.2634,
+        "spectral_centroid_hz": 1376.3,
+        "zero_crossings_per_s": 1575,
+        "spectral_rolloff_85_hz": 2283.3,
+        "band_energy": {
+          "sub_500": 0.1121,
+          "low_mid_500_1500": 0.6097,
+          "mid_1500_3000": 0.2163,
+          "presence_3000_6000": 0.0512,
+          "air_6000_plus": 0.0107
+        },
+        "attack_peak_position": 0.133,
+        "decay_ratio": 0.745,
+        "burst_share": 0.161
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0145,
+        "low_mid_500_1500": -0.1814,
+        "mid_1500_3000": 0.0549,
+        "presence_3000_6000": 0.1038,
+        "air_6000_plus": 0.0083
+      },
+      "comparison": {
+        "duration_s": 0.42,
+        "spectral_centroid_hz": 370.3,
+        "zero_crossings_per_s": 417.467,
+        "rms": 0.064,
+        "spectral_spread_hz": 356.967,
+        "spectral_rolloff_85_hz": 1090.933,
+        "spectral_flatness": 0.057,
+        "band_shape_distance": 0.1814,
+        "attack_peak_position": 0.5827,
+        "decay_ratio": 0.086,
+        "envelope_contrast": 2.221,
+        "burst_share": 0.192
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 1.8,
+      "worstSegmentRisk10": 1.8,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.399,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 38.6,
+        "rmsGapStd": 0.0264
+      },
+      "samples": [
+        {
+          "id": "refclip-s500-d240-v95",
+          "repetition": 1,
+          "risk10": 4.14,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 335.6,
+          "rmsGap": 0.0851,
+          "bandShapeGap": 0.1816,
+          "worstSegmentRisk10": 0.58,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s500-d240-v95",
+          "repetition": 2,
+          "risk10": 4.26,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 351.2,
+          "rmsGap": 0.0798,
+          "bandShapeGap": 0.1778,
+          "worstSegmentRisk10": 0.59,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s500-d240-v95",
+          "repetition": 3,
+          "risk10": 3.36,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 424.1,
+          "rmsGap": 0.0267,
+          "bandShapeGap": 0.1849,
+          "worstSegmentRisk10": 4.22,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 3.92,
+      "riskBreakdown": {
+        "duration": 0.49411764705882355,
+        "centroid": 0.28484615384615386,
+        "zeroCrossing": 0.2319261111111111,
+        "rms": 0.4,
+        "bandShape": 0.3628,
+        "rolloff": 0.41958961538461537,
+        "attack": 0.6474444444444444,
+        "decay": 0.026874999999999996,
+        "burst": 0.5485714285714286
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "duration gap improved only -0.263s; risk stability sd 0.399 > 0.35"
+    },
+    {
+      "id": "zako-destruction-guide-window",
+      "label": "Zako destruction guide window",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "cooldownMs": 260,
+        "referenceVolume": 0.95,
+        "clipStart": 0.5,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.42,
+      "centroidGapHz": 393.367,
+      "zeroCrossingGapPerSecond": 410.333,
+      "rmsGap": 0.068,
+      "bandShapeGap": 0.1871,
+      "rolloffGapHz": 1113.133,
+      "envelopeShapeGap": 0.461,
+      "activeMetrics": {
+        "duration_s": 0.66,
+        "rms": 0.1958,
+        "spectral_centroid_hz": 1769.7,
+        "zero_crossings_per_s": 1535.9,
+        "spectral_rolloff_85_hz": 3396.4,
+        "band_energy": {
+          "sub_500": 0.128,
+          "low_mid_500_1500": 0.4226,
+          "mid_1500_3000": 0.2713,
+          "presence_3000_6000": 0.157,
+          "air_6000_plus": 0.021
+        },
+        "attack_peak_position": 0.821,
+        "decay_ratio": 0.732,
+        "burst_share": 0.365
+      },
+      "referenceMetrics": {
+        "duration_s": 0.24,
+        "rms": 0.2634,
+        "spectral_centroid_hz": 1376.3,
+        "zero_crossings_per_s": 1575,
+        "spectral_rolloff_85_hz": 2283.3,
+        "band_energy": {
+          "sub_500": 0.1121,
+          "low_mid_500_1500": 0.6097,
+          "mid_1500_3000": 0.2163,
+          "presence_3000_6000": 0.0512,
+          "air_6000_plus": 0.0107
+        },
+        "attack_peak_position": 0.133,
+        "decay_ratio": 0.745,
+        "burst_share": 0.161
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0159,
+        "low_mid_500_1500": -0.1871,
+        "mid_1500_3000": 0.055,
+        "presence_3000_6000": 0.1058,
+        "air_6000_plus": 0.0103
+      },
+      "comparison": {
+        "duration_s": 0.42,
+        "spectral_centroid_hz": 393.367,
+        "zero_crossings_per_s": 410.333,
+        "rms": 0.068,
+        "spectral_spread_hz": 396.3,
+        "spectral_rolloff_85_hz": 1113.133,
+        "spectral_flatness": 0.082,
+        "band_shape_distance": 0.1871,
+        "attack_peak_position": 0.688,
+        "decay_ratio": 0.1107,
+        "envelope_contrast": 2.24,
+        "burst_share": 0.2043
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.08,
+      "worstSegmentRisk10": 2.08,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.306,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 29.8,
+        "rmsGapStd": 0.021
+      },
+      "samples": [
+        {
+          "id": "zako-destruction-guide-window",
+          "repetition": 1,
+          "risk10": 4.29,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 354.7,
+          "rmsGap": 0.0832,
+          "bandShapeGap": 0.1839,
+          "worstSegmentRisk10": 0.58,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "zako-destruction-guide-window",
+          "repetition": 2,
+          "risk10": 3.71,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 427.2,
+          "rmsGap": 0.0379,
+          "bandShapeGap": 0.1863,
+          "worstSegmentRisk10": 4.28,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "zako-destruction-guide-window",
+          "repetition": 3,
+          "risk10": 4.41,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 398.2,
+          "rmsGap": 0.0816,
+          "bandShapeGap": 0.1912,
+          "worstSegmentRisk10": 1.37,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.14,
+      "riskBreakdown": {
+        "duration": 0.49411764705882355,
+        "centroid": 0.30259,
+        "zeroCrossing": 0.2279627777777778,
+        "rms": 0.42500000000000004,
+        "bandShape": 0.3742,
+        "rolloff": 0.4281280769230769,
+        "attack": 0.7644444444444444,
+        "decay": 0.03459375,
+        "burst": 0.5837142857142857
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "duration gap improved only -0.263s"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "spec": null,
+      "durationGapSeconds": 0.1567,
+      "centroidGapHz": 581.467,
+      "zeroCrossingGapPerSecond": 530.967,
+      "rmsGap": 0.073,
+      "bandShapeGap": 0.3391,
+      "rolloffGapHz": 1400.733,
+      "envelopeShapeGap": 0.74,
+      "activeMetrics": {
+        "duration_s": 0.364,
+        "rms": 0.1901,
+        "spectral_centroid_hz": 1957.8,
+        "zero_crossings_per_s": 1533.8,
+        "spectral_rolloff_85_hz": 3684,
+        "band_energy": {
+          "sub_500": 0.1757,
+          "low_mid_500_1500": 0.2706,
+          "mid_1500_3000": 0.3135,
+          "presence_3000_6000": 0.214,
+          "air_6000_plus": 0.0262
+        },
+        "attack_peak_position": 0.957,
+        "decay_ratio": 4.951,
+        "burst_share": 0.338
+      },
+      "referenceMetrics": {
+        "duration_s": 0.24,
+        "rms": 0.2634,
+        "spectral_centroid_hz": 1376.3,
+        "zero_crossings_per_s": 1575,
+        "spectral_rolloff_85_hz": 2283.3,
+        "band_energy": {
+          "sub_500": 0.1121,
+          "low_mid_500_1500": 0.6097,
+          "mid_1500_3000": 0.2163,
+          "presence_3000_6000": 0.0512,
+          "air_6000_plus": 0.0107
+        },
+        "attack_peak_position": 0.133,
+        "decay_ratio": 0.745,
+        "burst_share": 0.161
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0636,
+        "low_mid_500_1500": -0.3391,
+        "mid_1500_3000": 0.0972,
+        "presence_3000_6000": 0.1628,
+        "air_6000_plus": 0.0155
+      },
+      "comparison": {
+        "duration_s": 0.1567,
+        "spectral_centroid_hz": 581.467,
+        "zero_crossings_per_s": 530.967,
+        "rms": 0.073,
+        "spectral_spread_hz": 535.8,
+        "spectral_rolloff_85_hz": 1400.733,
+        "spectral_flatness": 0.101,
+        "band_shape_distance": 0.3391,
+        "attack_peak_position": 0.8237,
+        "decay_ratio": 4.2057,
+        "envelope_contrast": 72.401,
+        "burst_share": 0.1877
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.36,
+      "worstSegmentRisk10": 5.36,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.853,
+        "durationGapStdSeconds": 0.187,
+        "centroidGapStdHz": 42.6,
+        "rmsGapStd": 0.0561
+      },
+      "samples": [
+        {
+          "id": "baseline-current",
+          "repetition": 1,
+          "risk10": 6.3,
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 524.2,
+          "rmsGap": 0.1519,
+          "bandShapeGap": 0.3725,
+          "worstSegmentRisk10": 5.8,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "baseline-current",
+          "repetition": 2,
+          "risk10": 4.27,
+          "durationGapSeconds": 0.001,
+          "centroidGapHz": 594,
+          "rmsGap": 0.0249,
+          "bandShapeGap": 0.291,
+          "worstSegmentRisk10": 4.78,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "baseline-current",
+          "repetition": 3,
+          "risk10": 4.86,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 626.2,
+          "rmsGap": 0.0432,
+          "bandShapeGap": 0.3539,
+          "worstSegmentRisk10": 5.49,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.28,
+      "riskBreakdown": {
+        "duration": 0.1843529411764706,
+        "centroid": 0.4472823076923077,
+        "zeroCrossing": 0.29498166666666664,
+        "rms": 0.45625,
+        "bandShape": 0.6782,
+        "rolloff": 0.5387434615384615,
+        "attack": 0.9152222222222222,
+        "decay": 1,
+        "burst": 0.5362857142857144
+      },
+      "dominantPenalty": "decay",
+      "keeperRead": "baseline"
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": null,
+    "measuredBest": "refclip-s500-d280-v95",
+    "reason": "No Enemy Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+  },
+  "nextStep": "Do not promote Enemy Boom yet; use the measured best candidate to refine the generator or scoring gates."
+}

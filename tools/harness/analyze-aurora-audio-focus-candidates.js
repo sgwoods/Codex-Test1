@@ -45,6 +45,57 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .3, segment: .3, duration: .08, acceptableDuration: .08, centroidWorsenHz: 100, bandWorsen: .05 }
   },
+  'enemy-boom': {
+    cue: 'enemyBoom',
+    entryId: 'enemy-boom-aurora',
+    comparisonId: 'enemy-boom-compare',
+    latest: 'latest-enemy-boom.json',
+    title: 'Enemy Boom',
+    problem: 'Enemy Boom is the highest current whole-cue audio event gap: Aurora is too long, too bright, and late-peaking versus the compact Zako destruction reference.',
+    target: 'Make normal enemy destruction feel like a compact Galaga kill confirmation that is heavier than enemyHit but not as large as bossBoom.',
+    cooldownMs: 260,
+    referenceStarts: [0.34, 0.42, 0.48, 0.5, 0.54, 0.58, 0.62, 0.66],
+    referenceDurations: [0.14, 0.18, 0.2, 0.24, 0.28, 0.32],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05],
+    handSpecs: [
+      {
+        id: 'zako-destruction-guide-window',
+        label: 'Zako destruction guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-zako.m4a',
+          cooldownMs: 260,
+          referenceVolume: .95,
+          clipStart: .5,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'short-low-mid-finality',
+        label: 'Short low-mid finality',
+        spec: {
+          tones: [
+            { freq: 180, duration: .09, wave: 'sawtooth', volume: .018, slide: -120, lpHz: 1650 },
+            { freq: 520, duration: .045, wave: 'triangle', volume: .008, slide: -180, lpHz: 2300, delay: .012 },
+            { freq: 118, duration: .11, wave: 'triangle', volume: .011, slide: -42, lpHz: 1300, delay: .032 }
+          ],
+          noise: [{ duration: .04, volume: .002, hp: 700, delay: .01 }]
+        }
+      },
+      {
+        id: 'compact-zako-pop',
+        label: 'Compact Zako pop',
+        spec: {
+          tones: [
+            { freq: 220, duration: .07, wave: 'sawtooth', volume: .017, slide: -160, lpHz: 1750 },
+            { freq: 360, duration: .055, wave: 'triangle', volume: .007, slide: -130, lpHz: 2100, delay: .01 },
+            { freq: 146, duration: .08, wave: 'triangle', volume: .01, slide: -48, lpHz: 1400, delay: .026 }
+          ],
+          noise: [{ duration: .035, volume: .0025, hp: 820, delay: .008 }]
+        }
+      }
+    ],
+    keeper: { risk: .35, segment: .35, duration: .12, acceptableDuration: .13, centroidWorsenHz: 90, bandWorsen: .045 }
+  },
   'formation-pulse': {
     cue: 'stagePulse',
     entryId: 'formation-pulse-classic',
@@ -309,6 +360,13 @@ function mean(values){
   return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
 }
 
+function stddev(values){
+  const numeric = values.map(Number).filter(Number.isFinite);
+  if(numeric.length < 2) return 0;
+  const avg = mean(numeric);
+  return Math.sqrt(numeric.reduce((sum, value) => sum + Math.pow(value - avg, 2), 0) / numeric.length);
+}
+
 function run(cmd, args, options = {}){
   const res = spawnSync(cmd, args, { encoding: 'utf8', ...options });
   if(res.status !== 0) fail(`${cmd} failed`, { args, status: res.status, stdout: res.stdout, stderr: res.stderr });
@@ -343,6 +401,11 @@ function gridLimit(){
 
 function candidateFilter(){
   return new Set(String(argValue('candidate-ids') || '').split(',').map(item => item.trim()).filter(Boolean));
+}
+
+function repeatCount(){
+  const raw = Number(argValue('repeats') || process.env.AURORA_AUDIO_FOCUS_REPEATS || 1);
+  return Number.isFinite(raw) ? Math.max(1, Math.min(5, Math.floor(raw))) : 1;
 }
 
 function pythonForAudioReport(){
@@ -510,6 +573,12 @@ function rejectionFor(row, baseline, config){
   if(row.bandShapeGap > baseline.bandShapeGap + (gate.bandWorsen ?? .05)) reasons.push(`band shape worsened by ${round(row.bandShapeGap - baseline.bandShapeGap, 4)}`);
   if(row.centroidGapHz > baseline.centroidGapHz + (gate.centroidWorsenHz ?? 100)) reasons.push(`centroid worsened by ${round(row.centroidGapHz - baseline.centroidGapHz, 1)} Hz`);
   if(row.exactSegmentRoleMatchCount < baseline.exactSegmentRoleMatchCount) reasons.push('fewer exact segment-role matches than baseline');
+  if((row.stability?.repetitions || 1) > 1){
+    if((row.stability.riskStd || 0) > .35) reasons.push(`risk stability sd ${row.stability.riskStd} > 0.35`);
+    if((row.stability.durationGapStdSeconds || 0) > .08) reasons.push(`duration stability sd ${row.stability.durationGapStdSeconds}s > 0.08s`);
+    if((row.stability.centroidGapStdHz || 0) > 120) reasons.push(`centroid stability sd ${row.stability.centroidGapStdHz} Hz > 120 Hz`);
+    if((row.stability.rmsGapStd || 0) > .035) reasons.push(`RMS stability sd ${row.stability.rmsGapStd} > 0.035`);
+  }
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
@@ -543,6 +612,99 @@ function decisionFor(rows, config){
   };
 }
 
+function aggregateRows(sampleRows){
+  const grouped = new Map();
+  for(const row of sampleRows){
+    if(!grouped.has(row.candidateId)) grouped.set(row.candidateId, []);
+    grouped.get(row.candidateId).push(row);
+  }
+  const rows = [];
+  for(const [candidateId, group] of grouped){
+    const first = group[0];
+    const avgComparison = {};
+    const comparisonKeys = new Set(group.flatMap(row => Object.keys(row.comparison || {})));
+    for(const key of comparisonKeys){
+      avgComparison[key] = round(mean(group.map(row => row.comparison?.[key])), key.includes('position') || key.includes('ratio') || key.includes('share') || key.includes('distance') ? 4 : 3);
+    }
+    const activeBandEnergy = {};
+    const referenceBandEnergy = {};
+    for(const key of ['sub_500', 'low_mid_500_1500', 'mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']){
+      activeBandEnergy[key] = round(mean(group.map(row => row.activeMetrics?.band_energy?.[key])), 4);
+      referenceBandEnergy[key] = round(mean(group.map(row => row.referenceMetrics?.band_energy?.[key])), 4);
+    }
+    const activeMetrics = {
+      duration_s: round(mean(group.map(row => row.activeMetrics?.duration_s)), 3),
+      rms: round(mean(group.map(row => row.activeMetrics?.rms)), 4),
+      spectral_centroid_hz: round(mean(group.map(row => row.activeMetrics?.spectral_centroid_hz)), 1),
+      zero_crossings_per_s: round(mean(group.map(row => row.activeMetrics?.zero_crossings_per_s)), 1),
+      spectral_rolloff_85_hz: round(mean(group.map(row => row.activeMetrics?.spectral_rolloff_85_hz)), 1),
+      band_energy: activeBandEnergy,
+      attack_peak_position: round(mean(group.map(row => row.activeMetrics?.attack_peak_position)), 3),
+      decay_ratio: round(mean(group.map(row => row.activeMetrics?.decay_ratio)), 3),
+      burst_share: round(mean(group.map(row => row.activeMetrics?.burst_share)), 3)
+    };
+    const referenceMetrics = {
+      duration_s: round(mean(group.map(row => row.referenceMetrics?.duration_s)), 3),
+      rms: round(mean(group.map(row => row.referenceMetrics?.rms)), 4),
+      spectral_centroid_hz: round(mean(group.map(row => row.referenceMetrics?.spectral_centroid_hz)), 1),
+      zero_crossings_per_s: round(mean(group.map(row => row.referenceMetrics?.zero_crossings_per_s)), 1),
+      spectral_rolloff_85_hz: round(mean(group.map(row => row.referenceMetrics?.spectral_rolloff_85_hz)), 1),
+      band_energy: referenceBandEnergy,
+      attack_peak_position: round(mean(group.map(row => row.referenceMetrics?.attack_peak_position)), 3),
+      decay_ratio: round(mean(group.map(row => row.referenceMetrics?.decay_ratio)), 3),
+      burst_share: round(mean(group.map(row => row.referenceMetrics?.burst_share)), 3)
+    };
+    const row = {
+      id: candidateId,
+      label: first.label,
+      generated: !!first.generated,
+      generator: first.generator || null,
+      spec: first.spec || null,
+      durationGapSeconds: avgComparison.duration_s,
+      centroidGapHz: avgComparison.spectral_centroid_hz,
+      zeroCrossingGapPerSecond: avgComparison.zero_crossings_per_s,
+      rmsGap: avgComparison.rms,
+      bandShapeGap: avgComparison.band_shape_distance,
+      rolloffGapHz: avgComparison.spectral_rolloff_85_hz,
+      envelopeShapeGap: round(mean(group.map(row => row.envelopeShapeGap)), 3),
+      activeMetrics,
+      referenceMetrics,
+      bandEnergyDelta: bandEnergyDelta(activeBandEnergy, referenceBandEnergy),
+      comparison: avgComparison,
+      segmentRoleComparisonCount: Math.round(mean(group.map(row => row.segmentRoleComparisonCount || 0)) || 0),
+      averageSegmentRisk10: round(mean(group.map(row => row.averageSegmentRisk10)), 2),
+      worstSegmentRisk10: round(mean(group.map(row => row.worstSegmentRisk10)), 2),
+      worstSegmentRole: group.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentRole || '',
+      exactSegmentRoleMatchCount: Math.round(mean(group.map(row => row.exactSegmentRoleMatchCount || 0)) || 0),
+      worstSegmentInterpretation: group.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentInterpretation || '',
+      stability: {
+        repetitions: group.length,
+        riskStd: round(stddev(group.map(row => row.risk10)), 3),
+        durationGapStdSeconds: round(stddev(group.map(row => row.durationGapSeconds)), 3),
+        centroidGapStdHz: round(stddev(group.map(row => row.centroidGapHz)), 1),
+        rmsGapStd: round(stddev(group.map(row => row.rmsGap)), 4)
+      },
+      samples: group.map(row => ({
+        id: row.id,
+        repetition: row.repetition,
+        risk10: row.risk10,
+        durationGapSeconds: row.durationGapSeconds,
+        centroidGapHz: row.centroidGapHz,
+        rmsGap: row.rmsGap,
+        bandShapeGap: row.bandShapeGap,
+        worstSegmentRisk10: row.worstSegmentRisk10,
+        worstSegmentRole: row.worstSegmentRole
+      }))
+    };
+    const breakdown = riskBreakdown(avgComparison);
+    row.risk10 = breakdown.risk10;
+    row.riskBreakdown = breakdown.components;
+    row.dominantPenalty = breakdown.dominant;
+    rows.push(row);
+  }
+  return rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 ?? 99) - (b.worstSegmentRisk10 ?? 99) || a.durationGapSeconds - b.durationGapSeconds);
+}
+
 async function captureCandidate(config, row, opts, index){
   const expectedCue = row.baseline ? config.cue : `__candidate_${row.id}`;
   const attempts = Math.max(1, Number(process.env.AURORA_AUDIO_CAPTURE_RETRIES || 3));
@@ -574,6 +736,7 @@ function markdown(report){
     '',
     `Generated: ${report.generatedAt}`,
     `Commit: ${report.commit}${report.dirty ? ' (dirty)' : ''}`,
+    `Repetitions per candidate: ${report.repetitions}`,
     '',
     '## Problem',
     '',
@@ -586,11 +749,12 @@ function markdown(report){
     `- Measured best: \`${report.decision.measuredBest || 'none'}\``,
     `- Reason: ${report.decision.reason}`,
     '',
-    '| Candidate | Risk | Worst Segment | Duration Gap | Centroid Gap | Band Gap | Keeper Read |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | --- |'
+    '| Candidate | Risk | Worst Segment | Duration Gap | Centroid Gap | Band Gap | Stability | Keeper Read |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |'
   ];
   for(const row of report.candidates.slice(0, 24)){
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz}Hz | ${row.bandShapeGap} | ${row.keeperRead} |`);
+    const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz}Hz | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}\n`;
@@ -605,6 +769,7 @@ async function analyzeCue(key, generatedAt, rootDir){
   const opts = { ...(entry.preview || {}), audioTheme: 'aurora-application', allowIdle: true, minCaptureBytes: 512 };
   delete opts.cue;
   const candidates = candidateSpecs(config, set);
+  const repeats = repeatCount();
   const cueDir = path.join(rootDir, key);
   const samplesDir = path.join(cueDir, 'samples');
   ensureDir(samplesDir);
@@ -617,9 +782,12 @@ async function analyzeCue(key, generatedAt, rootDir){
   const captures = [];
   for(let index = 0; index < candidates.length; index += 1){
     const row = candidates[index];
-    const result = await captureCandidate(config, row, opts, index);
-    if(!result?.ok) fail(`${config.title} candidate capture failed`, { id: row.id, result });
-    captures.push({ row, result, sampleId: slug(row.id) });
+    for(let repetition = 1; repetition <= repeats; repetition += 1){
+      const result = await captureCandidate(config, row, opts, (index * repeats) + repetition);
+      if(!result?.ok) fail(`${config.title} candidate capture failed`, { id: row.id, repetition, result });
+      const suffix = repeats > 1 ? `-r${String(repetition).padStart(2, '0')}` : '';
+      captures.push({ row, result, repetition, sampleId: `${slug(row.id)}${suffix}` });
+    }
   }
 
   const baselineCapture = captures.find(item => item.row.baseline);
@@ -630,12 +798,12 @@ async function analyzeCue(key, generatedAt, rootDir){
     const wav = path.join(samplesDir, `${capture.sampleId}.wav`);
     decodeToFile(capture.result.base64, webm);
     toWav(webm, wav);
-    sampleFiles.set(capture.row.id, { webm, wav });
+    sampleFiles.set(capture.sampleId, { webm, wav });
   }
-  const baselineFiles = sampleFiles.get(baselineCapture.row.id);
+  const baselineFiles = sampleFiles.get(baselineCapture.sampleId);
 
   const manifestItems = captures.map(capture => {
-    const files = sampleFiles.get(capture.row.id);
+    const files = sampleFiles.get(capture.sampleId);
     return {
       id: capture.sampleId,
       label: capture.row.label,
@@ -676,13 +844,16 @@ async function analyzeCue(key, generatedAt, rootDir){
 
   const metricsPath = path.join(cueDir, 'metrics.json');
   const metrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
-  const rows = metrics.items.map(item => {
-    const spec = candidates.find(candidate => slug(candidate.id) === item.id);
+  const sampleRows = metrics.items.map(item => {
+    const capture = captures.find(entry => entry.sampleId === item.id);
+    const spec = capture?.row || candidates.find(candidate => slug(candidate.id) === item.id);
     const comparison = item.comparisons.auroraVsReferenceActive;
     const breakdown = riskBreakdown(comparison);
     const segments = segmentSummary(item.segmentRoleComparisons);
     return {
       id: spec?.id || item.id,
+      candidateId: capture?.row?.id || spec?.id || item.id,
+      repetition: capture?.repetition || 1,
       label: spec?.label || item.label,
       generated: !!spec?.generated,
       generator: spec?.generator || null,
@@ -708,6 +879,7 @@ async function analyzeCue(key, generatedAt, rootDir){
       comparison
     };
   });
+  const rows = aggregateRows(sampleRows);
   const baseline = rows.find(row => row.id === 'baseline-current');
   rows.forEach(row => { row.keeperRead = row.id === 'baseline-current' ? 'baseline' : rejectionFor(row, baseline, config); });
   rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 || 99) - (b.worstSegmentRisk10 || 99));
@@ -723,6 +895,7 @@ async function analyzeCue(key, generatedAt, rootDir){
     key,
     title: config.title,
     cue: config.cue,
+    repetitions: repeats,
     problem: config.problem,
     strategy: 'Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.',
     successMeasure: 'A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.',
@@ -781,6 +954,7 @@ async function main(){
     commit,
     dirty,
     gridLimit: gridLimit(),
+    repetitions: repeatCount(),
     results
   };
   fs.writeFileSync(path.join(rootDir, 'summary.json'), `${JSON.stringify(summary, null, 2)}\n`);

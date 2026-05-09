@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T18:17:44.891Z",
+  "generatedAt": "2026-05-09T18:18:15.230Z",
   "commit": "878b7eb2",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
@@ -109,10 +109,10 @@
             "trackedCpuSeconds": 9761.97,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
-            "investmentScore": 3.27,
+            "investmentScore": 3.23,
             "gapToTarget": "+1.1",
             "summary": "high; cpu, model-api, openai-api",
-            "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.27."
+            "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.23."
           }
         },
         {
@@ -789,8 +789,8 @@
       "economicsSummary": {
         "latestOverallScore10": 9.1,
         "latestLevelArcScore10": 8.8,
-        "metricPointCount": 709,
-        "deltaCount": 106,
+        "metricPointCount": 731,
+        "deltaCount": 108,
         "measuredRuns": 212,
         "wallSeconds": 6883.368,
         "cpuSeconds": 11765.72,
@@ -1265,10 +1265,10 @@
         "trackedCpuSeconds": 9761.97,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
-        "investmentScore": 3.27,
+        "investmentScore": 3.23,
         "gapToTarget": "+1.1",
         "summary": "high; cpu, model-api, openai-api",
-        "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.27."
+        "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.23."
       }
     },
     {
@@ -2217,8 +2217,8 @@
   "economicsSummary": {
     "latestOverallScore10": 9.1,
     "latestLevelArcScore10": 8.8,
-    "metricPointCount": 709,
-    "deltaCount": 106,
+    "metricPointCount": 731,
+    "deltaCount": 108,
     "measuredRuns": 212,
     "wallSeconds": 6883.368,
     "cpuSeconds": 11765.72,
@@ -2328,7 +2328,7 @@
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
       "Tracked spend": "117 runs; 91.7 min wall; 162.7 min CPU",
-      "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.27.",
+      "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.23.",
       "Next action": "Tune the highest segment-level audio gap next: playerHit tail. Rerun audio comparison, event-gap analysis, and quality scoring after the change."
     },
     {

@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-09T18:18:15.230Z`
+Generated: `2026-05-09T18:25:54.663Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -44,7 +44,7 @@ An `x/10` score is a measured roll-up at the current scorer resolution, not a cl
 
 | Priority | Metric | Current | Confidence | Resolution | Cost / resources | Tracked spend | Major-gate target | Measurement status | Why this matters | Effort / time estimate | Recommended next step | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Audio identity, event feedback, and cue alignment | 6.4/10 | medium-high | 21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features | high; cpu, model-api, openai-api | 117 runs; 91.7 min wall; 162.7 min CPU | 7.5-8.0 | Measured release category; weakest axis | Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback. | High; 3-6 hrs local/model-assisted analysis | Tune the highest segment-level audio gap next: playerHit tail. Rerun audio comparison, event-gap analysis, and quality scoring after the change. | reference-artifacts/analyses/quality-conformance/2026-05-09-878b7eb2/report.json |
+| 1 | Audio identity, event feedback, and cue alignment | 6.4/10 | medium-high | 21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features | high; cpu, model-api, openai-api | 120 runs; 93.5 min wall; 166 min CPU | 7.5-8.0 | Measured release category; weakest axis | Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback. | High; 3-6 hrs local/model-assisted analysis | Tune the highest segment-level audio gap next: playerHit tail. Rerun audio comparison, event-gap analysis, and quality scoring after the change. | reference-artifacts/analyses/quality-conformance/2026-05-09-878b7eb2/report.json |
 | 2 | Alien entry and challenge-stage novelty | 8.7/10 | medium | dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness | estimated; cpu, browser | 126 runs; 22.2 min wall; 36.5 min CPU | 7.5 first gate; 9.0+ mature | Dedicated long-cycle scorer; high-priority gameplay-authenticity gap | Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap. | High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass | Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 10/10. | reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-66f38313/report.json |
 | 3 | Level arc and encounter shape | 8.8/10 | medium-high | multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence | low; cpu, browser | 126 runs; 22.2 min wall; 36.5 min CPU | 8.8-9.0 | Measured release category | Controls whether long play feels like Galaga-like escalation rather than repeated pressure. | Medium-high; 2-5 hrs | Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning. | reference-artifacts/analyses/level-arc-conformance/2026-05-09-878b7eb2/report.json |
 | 4 | Boss entry and formation grammar | 9/10 | medium | first-class boss/formation scorer using stage-window event grammar, boss timing, escort composition, challenge identity, and explicit path/slot measurement debt | high; cpu, browser | 126 runs; 22.2 min wall; 36.5 min CPU | 8.0-8.5 first gate; 9.0+ with path/slot extraction | Measured release category; new first-class axis | Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored. | Medium-high; 2-5 hrs, then recurring low-cost guardrail | Advance Path shape and set-formation precision: 520 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land. | reference-artifacts/analyses/quality-conformance/2026-05-09-878b7eb2/report.json |
@@ -73,16 +73,16 @@ Every release candidate should include both a conformance read and a resource/ti
 | Latest level-arc conformance | 8.8/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 731 | History depth behind score trends |
 | Score deltas found | 108 | Past-goal movement available for review |
-| Measured runs | 212 | Tracked harness/model/local compute work |
-| Tracked wall time | 114.7 min | Human clock-time planning input |
-| Tracked CPU time | 196.1 min | Local compute-cost planning input |
-| Tracked artifact growth | 407.6 MB | Evidence volume and storage/review-cost proxy |
+| Measured runs | 215 | Tracked harness/model/local compute work |
+| Tracked wall time | 116.6 min | Human clock-time planning input |
+| Tracked CPU time | 199.4 min | Local compute-cost planning input |
+| Tracked artifact growth | 411.4 MB | Evidence volume and storage/review-cost proxy |
 
 ### Resource And Time Usage
 
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| cpu | 211 | 114.7 min | 196.1 min |
+| cpu | 214 | 116.6 min | 199.4 min |
 | browser | 123 | 96.4 min | 164.5 min |
 | gpu-equivalent | 7 | 0.8 min | 1.2 min |
 | codex | 6 | 0.7 min | 1.2 min |
@@ -93,7 +93,7 @@ Every release candidate should include both a conformance read and a resource/ti
 
 | Axis | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| audio | 117 | 91.7 min | 162.7 min |
+| audio | 120 | 93.5 min | 166 min |
 | conformance-economics | 90 | 21.4 min | 30.7 min |
 | player-hit | 13 | 16.3 min | 29.3 min |
 | audio-event-gap | 24 | 16.2 min | 29.4 min |
@@ -106,7 +106,7 @@ Every release candidate should include both a conformance read and a resource/ti
 
 | Priority | Metric | Current | Target | Gap to target | Estimated effort | Expected resources | Tracked spend | Value / cost read | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Audio identity, event feedback, and cue alignment | 6.4/10 | 7.5-8.0 | +1.1 | High; 3-6 hrs local/model-assisted analysis | cpu, model-api, openai-api | 117 runs; 91.7 min wall; 162.7 min CPU | Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.23. | Tune the highest segment-level audio gap next: playerHit tail. Rerun audio comparison, event-gap analysis, and quality scoring after the change. |
+| 1 | Audio identity, event feedback, and cue alignment | 6.4/10 | 7.5-8.0 | +1.1 | High; 3-6 hrs local/model-assisted analysis | cpu, model-api, openai-api | 120 runs; 93.5 min wall; 166 min CPU | Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.23. | Tune the highest segment-level audio gap next: playerHit tail. Rerun audio comparison, event-gap analysis, and quality scoring after the change. |
 | 2 | Alien entry and challenge-stage novelty | 8.7/10 | 7.5 first gate; 9.0+ mature | at target | High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass | cpu, browser | 126 runs; 22.2 min wall; 36.5 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 10/10. |
 | 3 | Level arc and encounter shape | 8.8/10 | 8.8-9.0 | at target | Medium-high; 2-5 hrs | cpu, browser | 126 runs; 22.2 min wall; 36.5 min CPU | Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.68. | Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning. |
 | 4 | Boss entry and formation grammar | 9/10 | 8.0-8.5 first gate; 9.0+ with path/slot extraction | at target | Medium-high; 2-5 hrs, then recurring low-cost guardrail | cpu, browser | 126 runs; 22.2 min wall; 36.5 min CPU | Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.82. | Advance Path shape and set-formation precision: 520 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land. |
@@ -141,13 +141,13 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/cost-per-positive-score-point.svg)
 
 ## New First-Class Axes Added
 
@@ -171,7 +171,7 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 ## Evidence Index
 
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-09-878b7eb2/report.json`
-- Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-878b7eb2/report.json`
+- Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-0b62f863/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-09-878b7eb2/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/report.json`
 - Equal current quality-category weight: `0.083`

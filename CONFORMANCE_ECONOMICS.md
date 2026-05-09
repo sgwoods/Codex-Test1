@@ -2,8 +2,8 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-05-09T18:18:08.583Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/report.json`
+Generated: `2026-05-09T18:25:47.446Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/report.json`
 
 ## Current Local-Vs-Cloud Read
 
@@ -11,12 +11,12 @@ Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-09-
 | --- | --- | --- |
 | Overall quality | 9.1/10 | Current release-quality conformance roll-up. |
 | Level arc | 8.8/10 | Current long-play/gameplay-shape roll-up. |
-| Measured runs | 212 | Commands or manual entries logged in the economics ledger. |
-| Local CPU tracked wall | 114.7 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
+| Measured runs | 215 | Commands or manual entries logged in the economics ledger. |
+| Local CPU tracked wall | 116.6 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
 | Browser-backed local wall | 96.4 min | Subset of local work that exercised Chromium/gameplay runtime. |
 | GPU-equivalent tracked wall | 0.8 min | Declared Codex/model/API/GPU usage. This is currently small and under-instrumented. |
 | GPU-equivalent share | 0.7% | Approximate declared cloud/model share of tracked wall time. |
-| Artifact growth | 407.6 MB | Evidence volume and review/storage-cost proxy. |
+| Artifact growth | 411.4 MB | Evidence volume and review/storage-cost proxy. |
 
 The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.
 
@@ -24,18 +24,18 @@ The important read today: measured conformance advancement is overwhelmingly loc
 
 | Resource class | Measured runs | Wall time | CPU time | Share of tracked wall |
 | --- | --- | --- | --- | --- |
-| cpu | 211 | 114.7 min | 196.1 min | 100% |
-| browser | 123 | 96.4 min | 164.5 min | 84% |
+| cpu | 214 | 116.6 min | 199.4 min | 100% |
+| browser | 123 | 96.4 min | 164.5 min | 82.7% |
 | gpu-equivalent | 7 | 0.8 min | 1.2 min | 0.7% |
 | codex | 6 | 0.7 min | 1.2 min | 0.6% |
-| gpu | 1 | 0.1 min | 0.1 min | 0.1% |
+| gpu | 1 | 0.1 min | 0.1 min | 0% |
 | model-api | 1 | 0 min | 0 min | 0% |
 
 ## Spend By Conformance Axis
 
 | Axis | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| audio | 117 | 91.7 min | 162.7 min |
+| audio | 120 | 93.5 min | 166 min |
 | conformance-economics | 90 | 21.4 min | 30.7 min |
 | player-hit | 13 | 16.3 min | 29.3 min |
 | audio-event-gap | 24 | 16.2 min | 29.4 min |
@@ -55,7 +55,7 @@ The important read today: measured conformance advancement is overwhelmingly loc
 | formation-boss-grammar | 2 | 0.133 | 2.1 | 0.06 | tracked-spend-and-score-movement |
 | stage4-pressure | 28 | 12.824 | 10 | 1.28 | tracked-spend-and-score-movement |
 | level-arc | 61 | 6.929 | 3.4 | 2.04 | tracked-spend-and-score-movement |
-| audio | 117 | 91.717 | 4.1 | 22.37 | tracked-spend-and-score-movement |
+| audio | 120 | 93.545 | 4.1 | 22.82 | tracked-spend-and-score-movement |
 | movement | 0 | 0 | 7 | n/a | historical-score-movement-without-tracked-spend |
 | stage1-timing | 0 | 0 | 6.4 | n/a | historical-score-movement-without-tracked-spend |
 | challenge-timing | 0 | 0 | 5.7 | n/a | historical-score-movement-without-tracked-spend |
@@ -67,13 +67,13 @@ The important read today: measured conformance advancement is overwhelmingly loc
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/cost-per-positive-score-point.svg)
 
 ## Codex / OpenAI Accounting
 
