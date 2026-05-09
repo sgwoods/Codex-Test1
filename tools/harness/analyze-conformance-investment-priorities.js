@@ -93,7 +93,8 @@ function latestLevelArcCategory(quality, levelArcReport){
   });
 }
 
-function nextAudioAction(audioEventGap, audioCueCandidate){
+function nextAudioAction(audioEventGap, audioCueCandidate, audioContract){
+  if(audioContract?.nextStep) return audioContract.nextStep;
   const segmentCue = audioEventGap?.summary?.highestSegmentRiskCue || '';
   const segmentRole = audioEventGap?.summary?.highestSegmentRiskRole || '';
   if(segmentCue && segmentRole){
@@ -115,9 +116,12 @@ function nextAudioAction(audioEventGap, audioCueCandidate){
   return 'Rerun audio comparison and semantic event-gap analysis, then tune the highest-risk runtime cue.';
 }
 
-function audioRationale(audioEventGap, audioCueCandidate){
+function audioRationale(audioEventGap, audioCueCandidate, audioContract){
   const summary = audioEventGap?.summary || {};
   const decision = audioCueCandidate?.decision || null;
+  if(audioContract?.summary?.averageReadinessScore10){
+    return `Audio is still the weakest runtime quality category, but the process is now more repeatable: cue-contract readiness is ${audioContract.summary.averageReadinessScore10}/10, semantic event score is ${summary.semanticAverageScore10 ?? 'unknown'}/10, acoustic event score remains the key gap, and the highest actionable cue is ${summary.highestSegmentRiskCue || summary.highestRiskCue} ${summary.highestSegmentRiskRole || ''}.`;
+  }
   if(summary.highestSegmentRiskCue && summary.highestSegmentRiskRole){
     return `Audio is still the weakest quality category, and the evaluator now has ${summary.segmentRoleComparisonCount || 0} segment-role comparisons. The current highest actionable segment gap is ${summary.highestSegmentRiskCue} ${summary.highestSegmentRiskRole}, with average worst segment risk ${summary.averageWorstSegmentRisk10 ?? 'unknown'}/10.`;
   }
@@ -221,6 +225,7 @@ function main(){
   const formationPathFamilyPath = latestReport('formation-boss-path-family-comparison');
   const audioEventGapPath = latestReport('aurora-audio-event-gap');
   const audioCueCandidatePath = latestReport('aurora-audio-cue-candidates');
+  const audioContractPath = latestReport('aurora-audio-cue-contracts');
   const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
@@ -230,6 +235,7 @@ function main(){
   const formationPathFamily = formationPathFamilyPath ? readJson(formationPathFamilyPath) : { summary: {} };
   const audioEventGap = audioEventGapPath ? readJson(audioEventGapPath) : { summary: {} };
   const audioCueCandidate = audioCueCandidatePath ? readJson(audioCueCandidatePath) : null;
+  const audioContract = audioContractPath ? readJson(audioContractPath) : null;
   const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
   const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
@@ -252,7 +258,7 @@ function main(){
   const candidates = [
     buildCandidate({
       id: 'audio-reference-segmentation',
-      label: 'Tighten audio reference segmentation and cue matching',
+      label: 'Advance audio cue contracts, reference segmentation, and cue matching',
       category: audio,
       quality,
       economics: ledger,
@@ -262,8 +268,8 @@ function main(){
       risk: 0.28,
       costClass: 'high',
       computeAxis: 'quality-score',
-      rationale: audioRationale(audioEventGap, audioCueCandidate),
-      nextAction: nextAudioAction(audioEventGap, audioCueCandidate)
+      rationale: audioRationale(audioEventGap, audioCueCandidate, audioContract),
+      nextAction: nextAudioAction(audioEventGap, audioCueCandidate, audioContract)
     }),
     buildCandidate({
       id: 'level-arc-opportunity-coverage',

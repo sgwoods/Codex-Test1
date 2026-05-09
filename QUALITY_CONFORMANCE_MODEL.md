@@ -139,13 +139,22 @@ Each category scores from `1` to `10`.
 
 11. `Audio identity and cue alignment`
    - Evidence:
+     - `reference-artifacts/contracts/audio/aurora-audio-cue-contracts.json`
+     - `reference-artifacts/analyses/aurora-audio-cue-contracts/*/report.json`
+     - `reference-artifacts/analyses/aurora-audio-conformance-lab-v2/*/report.json`
      - `reference-artifacts/analyses/aurora-audio-theme-comparison/*/metrics.json`
+     - `reference-artifacts/analyses/aurora-audio-event-gap/*/report.json`
+     - `reference-artifacts/analyses/aurora-audio-promotion-precheck/*/report.json`
      - `reference-artifacts/analyses/galaga-audio-overlap/*/metrics.json`
    - Focus:
+     - cue contract fit: semantic meaning, timing slot, acoustic identity,
+       runtime context, and theme latitude
      - cue identity against reference-inspired target sound
      - active cue-window similarity against labeled Galaga reference clips
      - reference-window precision, so broad clips do not silently masquerade as
        isolated cue matches
+     - promotion safety from focused candidate loop to full-theme precheck to
+       live runtime recapture
      - stage / challenge timing windows for cue overlap and handoff
 
 12. `UI, shell, and graphics integrity`
@@ -179,8 +188,11 @@ that same behavior may be rescored with a more demanding metric.
 - `Player movement conformance` is currently phase-one evidence:
   - it is grounded in the documented control principles
   - it is not yet a full trace extraction from the preserved Galaga footage
-- `Audio identity and cue alignment` is partly reference-analysis based and not
-  yet a full runtime cue-by-cue correspondence family
+- `Audio identity and cue alignment` now has a formal cue-contract layer. The
+  current process is stronger than the runtime sound: semantic audio is high,
+  but acoustic event fit and stagePulse onset remain the measured weak points.
+  A candidate is not release-promotable until it survives focused scoring,
+  full-theme precheck, live recapture, alignment, semantic, and quality gates.
 - `Level arc and encounter shape` now includes first-pass stage-signature
   distance scoring, but it still needs broader mid-run and late-run evidence
   windows before the repetition penalty should be treated as complete

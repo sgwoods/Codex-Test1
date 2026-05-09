@@ -162,10 +162,13 @@ Practical standard:
   cycles, not immediately after the `/dev` refresh
 - the next serious public milestone is now the active `1.3.0` `MINOR` family,
   not a new `MAJOR`
-- after refreshing the conformance roll-up with active reference-cue matching,
-  audio identity is clearly the weakest category at `6.3/10`; this is a
-  stricter read that exposes `7/14` broad Aurora audio reference windows needing
-  tighter segmentation and `22` candidate subwindows for review/promotion
+- after refreshing the audio process with cue contracts and promotion
+  prechecks, audio identity remains the weakest runtime category at `6.8/10`,
+  while the process is now better instrumented: semantic event score is
+  `9.78/10`, acoustic event score is `5.6/10`, cue-contract readiness is
+  `8.94/10`, and the highest measured gap is `stagePulse` onset. This means the
+  next audio pass should improve candidate strategy and runtime validation, not
+  merely pick a pleasant isolated cue.
 - level arc and encounter shape is now a first-class quality category at
   `8.4/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
@@ -188,7 +191,7 @@ Practical standard:
   - movement and control fidelity
   - gameplay complexity and challenge-stage depth
   - graphical quality at gameplay scale
-  - audio identity and atmosphere
+  - audio identity, cue contracts, and theme latitude
   - gameplay trust and edge-case correctness
   - shell, overlay, and dock polish
   - pilot, leaderboard, replay, and admin operations
@@ -491,7 +494,7 @@ Work order for the next cycle:
 
 1. stage-1 timing fidelity
 2. challenge-stage timing fidelity
-3. audio identity and cue alignment
+3. audio identity, cue contracts, and cue alignment
 4. movement smoothness, if it still remains noticeable after the timing/audio
    work
 

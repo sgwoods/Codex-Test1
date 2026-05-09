@@ -49,6 +49,9 @@ confirms the cue windows and live mix.
 ```sh
 npm run harness:analyze:galaxy-guardians-audio-conformance-lab
 npm run harness:check:galaxy-guardians-audio-conformance-lab
+npm run harness:analyze:aurora-audio-cue-contracts
+npm run harness:analyze:aurora-audio-conformance-lab-v2
+npm run harness:analyze:aurora-audio-promotion-precheck -- --cue=stagePulse
 ```
 
 Generic form:
@@ -76,27 +79,88 @@ live browser play.
 
 ## Current Aurora Audio Read
 
-Aurora's audio comparison harness now captures browser-generated Aurora and
-synthetic Galaga-theme cue samples, converts them to WAV, computes active-window
-waveform/spectral metrics, and classifies whether each labeled reference clip is
-usable as a direct cue comparison or still needs tighter segmentation.
+Aurora now uses a cue-contract layer in addition to waveform/spectral analysis.
+The contract layer keeps each cue tied to five obligations:
+
+- semantic meaning: what the player should understand
+- timing slot: trigger, cooldown, stop behavior, overlap, and tail budget
+- acoustic identity: duration, onset/body/tail, centroid, band shape, and
+  envelope
+- runtime context: whether the cue survives real gameplay mix pressure
+- theme latitude: what can vary in Aurora or later theme packs without breaking
+  arcade readability
+
+This matters because the latest `rescueJoin` pass proved that isolated cue
+similarity is not enough. A candidate can look useful in a focused sweep and
+still fail the live theme once recaptured. Runtime promotion now requires both
+contract readiness and live validation.
 
 Current artifact:
 
-`reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-07-main-beb232a/metrics.json`
+`reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json`
+
+Current lab artifact:
+
+`reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json`
 
 Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `6.3/10` |
-| Active Aurora-vs-synthetic-Galaga duration delta | `0.178s` |
-| Active Aurora-vs-reference duration delta | `3.236s` |
-| Active Aurora-vs-reference centroid delta | `387.7Hz` |
-| Broad reference windows needing segmentation | `7/14` |
-| Candidate reference subwindows found | `22` |
+| Quality score audio category | `6.8/10` |
+| Overall quality score | `9.2/10` |
+| Semantic event score | `9.78/10` |
+| Acoustic event score | `5.6/10` |
+| Average worst segment risk | `4.4/10` |
+| Cue-contract readiness | `8.94/10` |
+| Contracted priority cue families | `8` cues |
+| Highest current audio gap | `stagePulse` onset |
+| Candidate loop coverage | `8/8` contracted cues |
 
-This means Aurora's internal synthetic theme comparison is close, but the
-reference-facing audio score remains intentionally conservative until the broad
-Galaga clips are segmented into cleaner cue windows and the runtime cue shapes
-are tuned against those windows.
+This means the process is now stronger than the current runtime audio. The
+contracts are ready enough to guide the next work, while the implementation
+still needs a sharper `stagePulse` onset strategy and composite-cue handling for
+ship loss.
+
+## Cue Contract Promotion Rule
+
+Runtime audio cannot be promoted from a focused candidate loop alone.
+
+A candidate must pass:
+
+1. cue contract fit: player meaning, timing slot, acoustic shape, runtime
+   context, and theme latitude
+2. focused candidate gates: segment risk, duration, centroid, band shape,
+   stability, and role match
+3. full-theme promotion precheck
+4. live runtime recapture
+5. cue alignment, semantic score, acoustic event score, and overall quality
+   guardrails
+
+Rejected candidates are preserved as useful evidence. They explain whether the
+next pass needs better reference segmentation, a new generator strategy, or a
+runtime/mix model rather than another subjective tweak.
+
+## Theme Latitude
+
+The lab now distinguishes three audio lanes:
+
+| Lane | Use | Constraint |
+| --- | --- | --- |
+| `referenceConformant` | closest Galaga-like mode and release-gate evidence | keep event meaning, timing slot, and acoustic segment shape close to reference |
+| `genreConformant` | arcade-faithful Aurora defaults | allow synthesis and pitch/color changes while preserving fixed-screen arcade readability |
+| `auroraVariant` | future theme packs and richer presentation | allow musical identity only when hit/kill/loss/reward/pressure remain unmistakable |
+
+The important idea is that variation is allowed, but it must be measured against
+declared cue obligations. A theme can be different without becoming ambiguous.
+
+## Next Aurora Audio Work
+
+The next high-value pass is contract-aware `stagePulse` onset work:
+
+- generate candidates that preserve cadence pressure rather than just waveform
+  closeness
+- score onset and body separately
+- measure masking against playerShot, enemyHit, enemyBoom, and boss cues
+- reject long ambience or soft pad behavior even if it sounds pleasant alone
+- run full promotion precheck and live recapture before any runtime change

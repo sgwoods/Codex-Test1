@@ -9,6 +9,8 @@ const OUT_ROOT = path.join(ANALYSES, 'aurora-audio-conformance-lab-v2');
 const EVENT_GAP_ROOT = path.join(ANALYSES, 'aurora-audio-event-gap');
 const CANDIDATE_ROOT = path.join(ANALYSES, 'aurora-audio-cue-candidates');
 const QUALITY_ROOT = path.join(ANALYSES, 'quality-conformance');
+const CONTRACT_ROOT = path.join(ANALYSES, 'aurora-audio-cue-contracts');
+const CONTRACT_PATH = path.join(ROOT, 'reference-artifacts', 'contracts', 'audio', 'aurora-audio-cue-contracts.json');
 const GUIDE_PATH = path.join(ROOT, 'application-guide.json');
 const AURORA_PACK_PATH = path.join(ROOT, 'src', 'js', '13-aurora-game-pack.js');
 
@@ -353,6 +355,8 @@ function markdown(report){
     `- Audio score: ${report.summary.audioScore10 ?? 'n/a'}/10`,
     `- Semantic audio: ${report.summary.semanticScore10 ?? 'n/a'}/10`,
     `- Highest current risk: ${report.summary.highestRiskCue || 'n/a'} ${report.summary.highestRisk10 ?? 'n/a'}/10`,
+    `- Cue-contract readiness: ${report.summary.contractReadinessScore10 ?? 'n/a'}/10`,
+    `- Contract blocked cues: ${report.summary.contractBlockedCueCount ?? 'n/a'}`,
     `- Runtime promotions accepted by this lab: ${report.summary.runtimePromotionCount}`,
     '',
     '## Cue Families',
@@ -377,6 +381,10 @@ function main(){
     : latestReport(EVENT_GAP_ROOT);
   if(!eventGapPath) throw new Error('Run npm run harness:analyze:aurora-audio-event-gap before the lab v2 analyzer.');
   const eventGap = readJson(eventGapPath);
+  const contractAnalysisPath = fs.existsSync(path.join(CONTRACT_ROOT, 'latest.json'))
+    ? path.join(CONTRACT_ROOT, 'latest.json')
+    : latestReport(CONTRACT_ROOT);
+  const contractAnalysis = contractAnalysisPath ? readJson(contractAnalysisPath) : null;
   const qualityAudio = qualityAudioSummary();
   const { comparisonByCue } = guideMaps();
   const risks = cueRiskRows(eventGap);
@@ -400,6 +408,8 @@ function main(){
       eventGap: rel(eventGapPath),
       quality: qualityAudio.path ? rel(qualityAudio.path) : null,
       applicationGuide: rel(GUIDE_PATH),
+      audioCueContracts: fs.existsSync(CONTRACT_PATH) ? rel(CONTRACT_PATH) : null,
+      contractAnalysis: contractAnalysisPath ? rel(contractAnalysisPath) : null,
       candidateRoot: rel(CANDIDATE_ROOT)
     },
     summary: {
@@ -416,10 +426,13 @@ function main(){
       keeperCueCount,
       runtimePromotionCount,
       candidateLoopCoverage: round(cueCount ? sweptCueCount / cueCount : 0, 3),
+      contractReadinessScore10: round(contractAnalysis?.summary?.averageReadinessScore10, 2),
+      contractBlockedCueCount: contractAnalysis?.summary?.blockedCueCount ?? null,
+      contractRuntimeTrialAllowedCueCount: contractAnalysis?.summary?.runtimeTrialAllowedCueCount ?? null,
       nextGap: eventGap.nextStep || ''
     },
     families,
-    nextStep: eventGap.nextStep || 'Run the next focused audio candidate loop, then rebuild this lab artifact.'
+    nextStep: contractAnalysis?.nextStep || eventGap.nextStep || 'Run the next focused audio candidate loop, then rebuild this lab artifact.'
   };
   const outDir = path.join(OUT_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}`);
   writeJson(path.join(outDir, 'report.json'), report);

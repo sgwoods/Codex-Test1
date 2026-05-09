@@ -393,9 +393,9 @@ function metricExplanation(metric){
   };
   if(text.includes('audio identity')){
     return {
-      calculation: 'Release audio score blends cue identity, reference spectral similarity, reference-window precision, overlap, and event alignment from audio cue comparison artifacts.',
-      grounding: 'Best-case grounding comes from labeled Galaga-family reference audio clips, segmented Aurora runtime captures, cue/event logs, waveform and spectral measurements, and per-cue gap analysis.',
-      meaning: 'Players hear whether shots, hits, explosions, boss damage, capture, rescue, and challenge results communicate the right event at the right moment. Designers use it to protect feedback clarity and arcade identity.'
+      calculation: 'Release audio score blends cue identity, reference spectral similarity, reference-window precision, overlap, event alignment, semantic event mapping, and cue-contract readiness from audio comparison and promotion artifacts.',
+      grounding: 'Best-case grounding comes from labeled Galaga-family reference audio clips, cue contracts, segmented Aurora runtime captures, cue/event logs, waveform and spectral measurements, promotion prechecks, and live recapture.',
+      meaning: 'Players hear whether shots, hits, explosions, boss damage, capture, rescue, pressure, loss, and challenge results communicate the right event at the right moment. Designers use it to protect feedback clarity, arcade identity, and safe theme variation.'
     };
   }
   if(text.includes('level arc')){
@@ -556,6 +556,8 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
   const audioGap = audioGapPath ? readJson(audioGapPath) : null;
   const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
   const audioLabV2 = audioLabV2Path ? readJson(audioLabV2Path) : null;
+  const audioContractPath = latestReport('aurora-audio-cue-contracts');
+  const audioContract = audioContractPath ? readJson(audioContractPath) : null;
   const stagePulsePath = latestReport('aurora-stage-pulse-cadence');
   const stagePulse = stagePulsePath ? readJson(stagePulsePath) : null;
   const rows = [
@@ -599,6 +601,20 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
     }),
     ingestionRow({
       rank: 4,
+      source: 'Aurora audio cue contracts',
+      axis: 'audio semantic contract / theme latitude / promotion safety',
+      artifactType: 'cue contract readiness, theme lanes, runtime-trial blockers',
+      coverage: audioContract
+        ? `${audioContract.summary?.contractCount || 0} contracts; readiness ${score(audioContract.summary?.averageReadinessScore10)}; blocked ${audioContract.summary?.blockedCueCount ?? 'n/a'}`
+        : 'pending',
+      annotationStatus: audioContract ? 'contract-scored' : 'pending',
+      confidence: audioContract ? 'medium-high' : 'low',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: audioContractPath ? rel(audioContractPath) : 'reference-artifacts/analyses/aurora-audio-cue-contracts',
+      next: audioContract?.nextStep || 'Generate cue contracts before promoting new audio runtime changes.'
+    }),
+    ingestionRow({
+      rank: 5,
       source: 'Aurora stagePulse cadence pressure analysis',
       axis: 'formation pressure / cadence audio',
       artifactType: 'tracked cadence pressure axes from full audio comparison',
@@ -612,7 +628,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: stagePulse?.nextStep || 'Generate cadence-specific candidates and require both repeated focus gates and full audio-theme comparison before runtime promotion.'
     }),
     ingestionRow({
-      rank: 5,
+      rank: 6,
       source: 'Boss entry and formation grammar scorer',
       axis: 'formation grammar / boss entry / challenge identity',
       artifactType: 'event grammar, timing, stage-signature, and measurement-debt report',
@@ -626,7 +642,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.'
     }),
     ingestionRow({
-      rank: 6,
+      rank: 7,
       source: 'Level arc and encounter-shape evidence',
       axis: 'level arc / challenge / reward',
       artifactType: 'stage signatures, pressure windows, persona reports',
@@ -638,7 +654,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.'
     }),
     ingestionRow({
-      rank: 7,
+      rank: 8,
       source: 'Stage 4 pressure and loss-window diagnostics',
       axis: 'pressure / fairness',
       artifactType: 'loss windows, replay geometry, collision traces',
@@ -650,7 +666,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.'
     }),
     ingestionRow({
-      rank: 8,
+      rank: 9,
       source: 'Aurora visual look screenshots',
       axis: 'visual look / UI readability',
       artifactType: 'browser screenshots plus DOM/canvas metrics',
@@ -662,7 +678,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.'
     }),
     ingestionRow({
-      rank: 8,
+      rank: 10,
       source: 'Aurora evidence-cycle windows',
       axis: 'general ingestion framework',
       artifactType: 'manifests, contact sheets, traces, event logs, audio timelines',
@@ -674,7 +690,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest.'
     }),
     ingestionRow({
-      rank: 9,
+      rank: 11,
       source: 'Reference manifests and event logs inventory',
       axis: 'source provenance / annotation coverage',
       artifactType: 'source-manifest.json and reference-events.json',
@@ -686,7 +702,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest.'
     }),
     ingestionRow({
-      rank: 10,
+      rank: 12,
       source: 'Reference contact sheets and frame evidence',
       axis: 'visual / motion / entry formation',
       artifactType: 'contact sheets and still frames',
@@ -934,6 +950,7 @@ function main(){
   const visualLookPath = latestReport('aurora-visual-look-conformance');
   const alienEntryChallengePath = latestReport('alien-entry-challenge-variation');
   const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
+  const audioContractPath = latestReport('aurora-audio-cue-contracts');
   const quality = readJson(qualityPath);
   const priority = priorityPath ? readJson(priorityPath) : { candidates: [] };
   const levelArc = levelArcPath ? readJson(levelArcPath) : { summary: {} };
@@ -1224,6 +1241,7 @@ function main(){
     economics: economicsPath ? rel(economicsPath) : null,
     alienEntryChallenge: alienEntryChallengePath ? rel(alienEntryChallengePath) : null,
     audioLabV2: audioLabV2Path ? rel(audioLabV2Path) : null,
+    audioCueContracts: audioContractPath ? rel(audioContractPath) : null,
     visualLook: visualLookPath ? rel(visualLookPath) : null,
     evidenceCycle: fileExists(evidenceCyclePath) ? evidenceCyclePath : null
   };

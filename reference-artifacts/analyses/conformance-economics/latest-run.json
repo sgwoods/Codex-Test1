@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T21-42-09-845Z-4351",
-  "startedAt": "2026-05-09T21:42:09.845Z",
-  "endedAt": "2026-05-09T21:43:13.394Z",
+  "id": "2026-05-09T22-04-15-621Z-14609",
+  "startedAt": "2026-05-09T22:04:15.621Z",
+  "endedAt": "2026-05-09T22:04:15.765Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "bbcc8df1",
+  "commit": "7edb5802",
   "command": [
     "npm",
     "run",
-    "harness:score:quality-conformance"
+    "harness:build:dev-conformance-dashboard"
   ],
   "axes": [
-    "quality"
+    "dashboard"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "quality conformance after restoring rejected rescueJoin trial",
+  "notes": "local dev dashboard refresh after economics update",
   "measurement": {
-    "wallSeconds": 63.549,
-    "timeRealSeconds": 63.54,
-    "timeUserSeconds": 54.15,
-    "timeSystemSeconds": 17.78,
-    "cpuSeconds": 71.93,
+    "wallSeconds": 0.144,
+    "timeRealSeconds": 0.14,
+    "timeUserSeconds": 0.11,
+    "timeSystemSeconds": 0.02,
+    "cpuSeconds": 0.13,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 669848835,
-    "artifactBytesAfter": 670350553,
-    "artifactBytesDelta": 501718
+    "artifactBytesBefore": 671375593,
+    "artifactBytesAfter": 671375593,
+    "artifactBytesDelta": 0
   }
 }

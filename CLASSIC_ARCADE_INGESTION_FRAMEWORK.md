@@ -71,6 +71,9 @@ The catalog must include:
 - an audio cue index with runtime cue IDs, event meanings, extracted reference
   clips or waveform/spectrogram anchors, conformance scores, confidence, and
   next gaps
+- an audio cue contract file for priority cues, covering semantic meaning,
+  timing slot, acoustic identity, runtime context, and theme latitude before
+  candidate promotion
 - a stage-by-stage or wave-by-wave summary describing enemy composition, entry
   formations, maneuvers, trajectories, difficulty, reward opportunities, and
   current evidence
@@ -216,6 +219,7 @@ Suggested anchor layout:
 - `reference-artifacts/analyses/<game-lineage>/<source-id>/frames/`
 - `reference-artifacts/analyses/<game-lineage>/<source-id>/audio/`
 - `reference-artifacts/analyses/<game-lineage>/<source-id>/events/`
+- `reference-artifacts/contracts/audio/<game-id>-audio-cue-contracts.json`
 - `GAME_CONFORMANCE_CATALOG.md` rows updated with the promoted alien, audio,
   stage, and persona evidence
 
@@ -463,6 +467,8 @@ Future tools should support:
 - movement-path extraction
 - shot and collision event inference
 - audio cue onset detection
+- audio cue contract generation and contract-readiness scoring
+- full-theme promotion prechecks before runtime cue promotion
 - semi-automated semantic model generation
 - harness-stub generation from slice profiles
 - cross-game lineage comparison
