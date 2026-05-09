@@ -7,6 +7,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'conformance-economics');
 const LEDGER = path.join(OUT_ROOT, 'run-ledger.jsonl');
+const TOP_LEVEL_DOC = path.join(ROOT, 'CONFORMANCE_ECONOMICS.md');
 const GPU_EQUIVALENT_RESOURCES = new Set(['gpu', 'model-api', 'openai-api', 'codex', 'codex-app', 'llm', 'model']);
 
 function ensureDir(dir){
@@ -71,6 +72,20 @@ function dirBytes(dir){
 
 function round(value, digits = 3){
   return Number.isFinite(+value) ? +(+value).toFixed(digits) : null;
+}
+
+function minutes(seconds, digits = 1){
+  return Number.isFinite(+seconds) ? `${round(+seconds / 60, digits)} min` : 'n/a';
+}
+
+function mb(bytes, digits = 1){
+  return Number.isFinite(+bytes) ? `${round(+bytes / 1000000, digits)} MB` : 'n/a';
+}
+
+function percent(part, total, digits = 1){
+  return Number.isFinite(+part) && Number.isFinite(+total) && +total > 0
+    ? `${round((+part / +total) * 100, digits)}%`
+    : 'n/a';
 }
 
 function reportStamp(file, data){
@@ -547,8 +562,216 @@ function buildReadme(report){
   lines.push('');
   lines.push('- Run expensive harnesses through `npm run harness:measure -- --axis <axis> --resource cpu --resource browser -- <command>` so future economics charts can compute cost per score delta instead of relying on artifact-size proxies.');
   lines.push('- Log Codex/model/API-only planning or review work with `npm run harness:measure -- --manual --axis <axis> --resource codex --model-provider openai --model <model> --model-minutes <minutes> --notes "<short note>"`. Optional quota snapshots from the app usage screen can be stored with `--codex-usage-5h-left-percent`, `--codex-usage-week-left-percent`, `--codex-model-5h-left-percent`, and `--codex-model-week-left-percent`.');
-  lines.push('');
   return `${lines.join('\n')}\n`;
+}
+
+function resourceRows(report){
+  return Object.entries(report.summary.ledger.byResource || {})
+    .map(([resource, value]) => ({
+      resource,
+      runs: value.runs || 0,
+      wallSeconds: value.wallSeconds || 0,
+      cpuSeconds: value.cpuSeconds || 0
+    }))
+    .sort((a, b) => b.wallSeconds - a.wallSeconds);
+}
+
+function axisRows(report){
+  return Object.entries(report.summary.ledger.byAxis || {})
+    .map(([axis, value]) => ({
+      axis,
+      runs: value.runs || 0,
+      wallSeconds: value.wallSeconds || 0,
+      cpuSeconds: value.cpuSeconds || 0
+    }))
+    .sort((a, b) => b.wallSeconds - a.wallSeconds);
+}
+
+function table(headers, rows){
+  return [
+    `| ${headers.join(' | ')} |`,
+    `| ${headers.map(() => '---').join(' | ')} |`,
+    ...rows.map(row => `| ${row.map(value => String(value ?? '').replace(/\n/g, ' ')).join(' | ')} |`)
+  ].join('\n');
+}
+
+function buildTopLevelDoc(report, outDir){
+  const ledger = report.summary.ledger;
+  const gpuEquivalent = ledger.byResource['gpu-equivalent'] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
+  const codex = ledger.byResource.codex || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
+  const modelApi = ledger.byResource['model-api'] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
+  const cpu = ledger.byResource.cpu || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
+  const browser = ledger.byResource.browser || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
+  const latestSnapshot = ledger.modelUsage.latestCodexUsageSnapshot;
+  const chart = name => `${rel(path.join(outDir, name))}`;
+  const resourceTable = table(
+    ['Resource class', 'Measured runs', 'Wall time', 'CPU time', 'Share of tracked wall'],
+    resourceRows(report).map(row => [
+      row.resource,
+      row.runs,
+      minutes(row.wallSeconds),
+      minutes(row.cpuSeconds),
+      percent(row.wallSeconds, ledger.wallSeconds)
+    ])
+  );
+  const axisTable = table(
+    ['Axis', 'Measured runs', 'Wall time', 'CPU time'],
+    axisRows(report).slice(0, 12).map(row => [
+      row.axis,
+      row.runs,
+      minutes(row.wallSeconds),
+      minutes(row.cpuSeconds)
+    ])
+  );
+  const efficiencyTable = table(
+    ['Axis', 'Runs', 'Wall min', 'Positive score gain', 'Wall min / +1 score', 'Attribution'],
+    report.costEfficiency.slice(0, 12).map(item => [
+      item.axis,
+      item.runs,
+      item.wallMinutes,
+      item.positiveScore10,
+      item.wallMinutesPerPositiveScore10 ?? 'n/a',
+      item.attribution
+    ])
+  );
+  const snapshotLines = latestSnapshot ? [
+    `- Latest Codex quota snapshot: ${latestSnapshot.startedAt || 'unknown time'}`,
+    `- General 5h left: ${latestSnapshot.codexUsage5hLeftPercent ?? 'n/a'}%`,
+    `- General weekly left: ${latestSnapshot.codexUsageWeekLeftPercent ?? 'n/a'}%`,
+    `- Model 5h left: ${latestSnapshot.codexModel5hLeftPercent ?? 'n/a'}%`,
+    `- Model weekly left: ${latestSnapshot.codexModelWeekLeftPercent ?? 'n/a'}%`
+  ] : ['- No Codex quota snapshot has been logged yet.'];
+  const lines = [
+    '# Conformance Economics And Resource Usage',
+    '',
+    'This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.',
+    '',
+    `Generated: \`${report.generatedAt}\``,
+    `Latest artifact: \`${rel(path.join(outDir, 'report.json'))}\``,
+    '',
+    '## Current Local-Vs-Cloud Read',
+    '',
+    table(
+      ['Read', 'Current value', 'Interpretation'],
+      [
+        ['Overall quality', `${report.summary.latestOverallScore10}/10`, 'Current release-quality conformance roll-up.'],
+        ['Level arc', `${report.summary.latestLevelArcScore10}/10`, 'Current long-play/gameplay-shape roll-up.'],
+        ['Measured runs', ledger.runs, 'Commands or manual entries logged in the economics ledger.'],
+        ['Local CPU tracked wall', minutes(cpu.wallSeconds), 'Main measured engine for harness execution, report generation, waveform/spectral work, and scoring.'],
+        ['Browser-backed local wall', minutes(browser.wallSeconds), 'Subset of local work that exercised Chromium/gameplay runtime.'],
+        ['GPU-equivalent tracked wall', minutes(gpuEquivalent.wallSeconds), 'Declared Codex/model/API/GPU usage. This is currently small and under-instrumented.'],
+        ['GPU-equivalent share', percent(gpuEquivalent.wallSeconds, ledger.wallSeconds), 'Approximate declared cloud/model share of tracked wall time.'],
+        ['Artifact growth', mb(ledger.artifactBytes), 'Evidence volume and review/storage-cost proxy.']
+      ]
+    ),
+    '',
+    'The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.',
+    '',
+    '## Resource Spend',
+    '',
+    resourceTable,
+    '',
+    '## Spend By Conformance Axis',
+    '',
+    axisTable,
+    '',
+    '## Cost Per Score Movement',
+    '',
+    efficiencyTable,
+    '',
+    '## Charts',
+    '',
+    `![Conformance score trends](${chart('score-trends.svg')})`,
+    '',
+    `![Largest score deltas](${chart('largest-score-deltas.svg')})`,
+    '',
+    `![Compute minutes by resource](${chart('compute-minutes-by-resource.svg')})`,
+    '',
+    `![Cost per positive score point](${chart('cost-per-positive-score-point.svg')})`,
+    '',
+    '## Codex / OpenAI Accounting',
+    '',
+    ...snapshotLines,
+    '',
+    table(
+      ['Cloud/model measure', 'Current logged value'],
+      [
+        ['Codex resource runs', codex.runs],
+        ['Model/API resource runs', modelApi.runs],
+        ['GPU-equivalent resource runs', gpuEquivalent.runs],
+        ['Declared model calls', ledger.modelUsage.modelCalls],
+        ['Declared input tokens', ledger.modelUsage.inputTokens],
+        ['Declared output tokens', ledger.modelUsage.outputTokens],
+        ['Declared model minutes', ledger.modelUsage.modelMinutes]
+      ]
+    ),
+    '',
+    'Current limitation: Codex conversation usage is not automatically visible to the repo. The project can track manual snapshots and declared model/API usage, but it cannot infer all cloud GPU use from a chat session unless we log it. Treat missing Codex/model entries as accounting debt, not proof that no model compute was used.',
+    '',
+    '## Local-First Doctrine',
+    '',
+    '- Prefer repeatable local CPU/browser harnesses for long-cycle assessment, sweeps, scoring, and regression checks.',
+    '- Use Codex/OpenAI model work to design better measurements, write harness logic, interpret failures, summarize tradeoffs, and choose high-value next investments.',
+    '- Convert model insight into persisted local logic whenever possible: new scorers, event extractors, dashboards, candidate loops, and artifact reports.',
+    '- Track model/API/Codex help as `gpu-equivalent` when it materially changes the plan, creates a harness, reviews evidence, or performs nontrivial analysis.',
+    '- Separate gameplay-facing gains from measurement-facing gains. A better scorer may not move the game score immediately, but it can reduce the cost of every future decision.',
+    '',
+    '## How To Measure Future Work',
+    '',
+    'Wrap meaningful local commands with the economics ledger:',
+    '',
+    '```sh',
+    'npm run harness:measure -- \\',
+    '  --axis audio \\',
+    '  --resource cpu \\',
+    '  --resource browser \\',
+    '  --notes "audio cue segmentation sweep" \\',
+    '  -- npm run harness:analyze:aurora-audio-event-gap',
+    '```',
+    '',
+    'Log Codex/model/API-only work without storing prompts, secrets, or private transcript content:',
+    '',
+    '```sh',
+    'npm run harness:measure -- \\',
+    '  --manual \\',
+    '  --axis audio \\',
+    '  --resource codex \\',
+    '  --resource model-api \\',
+    '  --model-provider openai \\',
+    '  --model gpt-5.3-codex \\',
+    '  --model-minutes 30 \\',
+    '  --notes "model-assisted cue-window review and harness design"',
+    '```',
+    '',
+    'If the Codex app usage screen is consulted, record only quota percentages and reset dates:',
+    '',
+    '```sh',
+    'npm run harness:measure -- \\',
+    '  --manual \\',
+    '  --axis conformance-planning \\',
+    '  --resource codex \\',
+    '  --codex-usage-5h-left-percent 92 \\',
+    '  --codex-usage-week-left-percent 86 \\',
+    '  --codex-model-5h-left-percent 100 \\',
+    '  --codex-model-week-left-percent 100 \\',
+    '  --usage-reset "2026-05-08 15:52" \\',
+    '  --weekly-reset "2026-05-11" \\',
+    '  --notes "quota snapshot before long conformance planning cycle"',
+    '```',
+    '',
+    '## Release Documentation Rule',
+    '',
+    'Before a serious `/dev`, `/beta`, or `/production` candidate, refresh:',
+    '',
+    '```sh',
+    'npm run harness:analyze:conformance-economics',
+    'npm run harness:build:release-conformance-dashboard',
+    'npm run harness:build:dev-conformance-dashboard',
+    '```',
+    '',
+    'The release record should include conformance score movement, local CPU/browser spend, GPU/model/API spend where declared, artifact volume, confidence/resolution, and the highest-value next resource investment.'
+  ];
+  return `${lines.join('\n')}`;
 }
 
 function main(){
@@ -589,10 +812,12 @@ function main(){
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
   buildCharts(outDir, metricPoints, deltas, ledgerSummary, efficiency);
+  fs.writeFileSync(TOP_LEVEL_DOC, buildTopLevelDoc(report, outDir));
   console.log(JSON.stringify({
     ok: true,
     outDir,
     report: path.join(outDir, 'report.json'),
+    topLevelDoc: TOP_LEVEL_DOC,
     charts: [
       path.join(outDir, 'score-trends.svg'),
       path.join(outDir, 'largest-score-deltas.svg'),

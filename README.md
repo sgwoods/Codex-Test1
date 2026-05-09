@@ -98,6 +98,11 @@ Best release and testing gate doc:
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
 - [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
 
+Best conformance/resource economics doc:
+
+- [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
+- [RELEASE_CONFORMANCE_DASHBOARD.md](RELEASE_CONFORMANCE_DASHBOARD.md)
+
 Release planning and readiness docs:
 
 - [PLAN.md](PLAN.md)

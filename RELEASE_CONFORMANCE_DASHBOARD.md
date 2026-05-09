@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-09T11:20:57.052Z`
+Generated: `2026-05-09T11:50:54.952Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -139,13 +139,13 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-29a80ab4/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-29a80ab4/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-29a80ab4/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-29a80ab4/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/cost-per-positive-score-point.svg)
 
 ## New First-Class Axes Added
 
@@ -171,5 +171,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-09-29a80ab4/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-29a80ab4/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-09-29a80ab4/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-29a80ab4/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-3dd22262/report.json`
 - Equal current quality-category weight: `0.083`
