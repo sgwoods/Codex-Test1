@@ -4,7 +4,8 @@ const AURORA_STAGE_BAND_PROFILES=Object.freeze([
  {name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic',pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1,steer:1,jitter:1,diveVy:1,diveAccel:1},
  {name:'scorpion',beeFamily:'scorpion',butFamily:'scorpion',bossFamily:'classic',challengeFamily:'classic',pulseX:.95,pulseY:.8,entryX:.92,entryY:.9,weave:1.18,steer:.96,jitter:1.1,diveVy:.98,diveAccel:1},
  {name:'stingray',beeFamily:'stingray',butFamily:'stingray',bossFamily:'stingray',challengeFamily:'dragonfly',pulseX:1.08,pulseY:.78,entryX:1.06,entryY:.82,weave:1.28,steer:1.06,jitter:1.16,diveVy:1.04,diveAccel:1.03},
- {name:'galboss',beeFamily:'galboss',butFamily:'galboss',bossFamily:'galboss',challengeFamily:'mosquito',pulseX:.9,pulseY:.72,entryX:.88,entryY:.76,weave:.9,steer:.9,jitter:.92,diveVy:1.02,diveAccel:.98}
+ {name:'galboss',beeFamily:'galboss',butFamily:'galboss',bossFamily:'galboss',challengeFamily:'mosquito',pulseX:.9,pulseY:.72,entryX:.88,entryY:.76,weave:.9,steer:.9,jitter:.92,diveVy:1.02,diveAccel:.98},
+ {name:'crown',beeFamily:'crown',butFamily:'crown',bossFamily:'crown',challengeFamily:'mosquito',pulseX:1.22,pulseY:.76,entryX:1.3,entryY:.94,weave:1.42,steer:1.1,jitter:1.28,diveVy:1.1,diveAccel:1.08}
 ]);
 
 const AURORA_ATMOSPHERE_THEMES=Object.freeze({
@@ -708,6 +709,22 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   arcAmp:1.62,
   dropAmp:1.12,
   laneTypes:Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee'])
+ }),
+ Object.freeze({
+  fromStage:19,
+  id:'crown-split-cascade',
+  pathFamily:'crown-split-cascade',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.42,
+  spawnOffsetX:68,
+  waveSpacingY:9,
+  rowSpacingY:8,
+  waveDelay:1.1,
+  slotDelay:.085,
+  arcAmp:1.78,
+  dropAmp:1.18,
+  laneTypes:Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss'])
  })
 ]);
 

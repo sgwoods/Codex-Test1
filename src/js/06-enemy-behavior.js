@@ -97,6 +97,9 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=startX+(laneX-startX)*(q<.58?Math.sin(q/.58*Math.PI/2):.82+(q-.58)*.43);
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
+	  }else if(pathFamily==='crown-split-cascade'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.6+p+slot*.35)*22*arcAmp;
+	   e.y=topY+Math.sin(q*Math.PI*1.8+p)*9*arcAmp+q*5*dropAmp;
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2+p)*9*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*2.2+p)*6*arcAmp;
@@ -112,6 +115,10 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
+	  }else if(pathFamily==='crown-split-cascade'){
+	   const cascade=slot%2?-1:1;
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.4+p*.4)*44+Math.sin(q*Math.PI)*28)*fm.challengeSweep*arcAmp*.82;
+	   e.y=topY+q*(10+slot*1.5)*dropAmp+Math.sin(q*8.4+p+wave*.35)*3.4+Math.max(0,q-.42)*cascade*9;
 	  }else if(pathFamily==='boss-led-loop'){
 	   const leader=e.t==='boss'?1:.72;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.05+p*.35)*34+Math.sin(q*Math.PI)*18)*fm.challengeSweep*arcAmp*leader;
@@ -128,6 +135,10 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
 	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='crown-split-cascade'){
+	   const exit=sweep*(slot%2?-1:1);
+	   e.x=laneX+exit*(22+q*92)*fm.challengeSweep*arcAmp+Math.sin(q*11+p)*4.2;
+	   e.y=topY+12+q*224*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;
@@ -173,10 +184,19 @@ function updateEnemy(e,dt,t,T,p){
 	  if(!stage1&&entryFamily==='scorpion-stagger-entry'){
 	   sx=tx+Math.sin(e.en*6.2+e.ph+e.r*.7)*(128+e.r*9)*fm.entryX*k+(e.c%2?-10:10)*k;
 	   sy=ty+Math.cos(e.en*3.5+e.ph)*(36+e.r*4)*fm.entryY*k+Math.sin(e.en*5+e.c)*5*k;
+	  }else if(!stage1&&entryFamily==='scorpion-tandem-hook-entry'){
+	   const side=e.c<5?-1:1;
+	   sx=tx+side*(Math.sin(e.en*4.7+e.ph)*(112+e.r*11)+Math.sin(e.en*8.1+e.c)*18)*fm.entryX*k;
+	   sy=ty+Math.cos(e.en*4.1+e.ph+e.r*.4)*(38+e.r*5)*fm.entryY*k+Math.sin(e.en*6.4+e.c)*8*k;
 	  }else if(!stage1&&entryFamily==='stingray-wide-flank-entry'){
 	   const mirror=e.entryMirror||1;
 	   sx=tx+mirror*Math.sin(e.en*4.4+e.ph)*(164+e.r*8)*fm.entryX*k;
 	   sy=ty+Math.cos(e.en*5.2+e.ph+e.c*.2)*(34+e.r*5)*fm.entryY*k;
+	  }else if(!stage1&&entryFamily==='stingray-pincer-entry'){
+	   const side=e.c<5?-1:1;
+	   const fold=Math.sin(Math.min(1,e.en/2.1)*Math.PI);
+	   sx=tx+side*(156+e.r*14)*Math.sin(e.en*3.05+e.ph)*fm.entryX*k-side*fold*(68+e.r*6)*k+Math.sin(e.en*8.8+e.c)*14*k;
+	   sy=ty+Math.cos(e.en*3.25+e.ph+e.c*.16)*(58+e.r*7)*fm.entryY*k+fold*(e.r<2?24:44)*k;
 	  }else if(!stage1&&entryFamily==='galboss-low-hook-entry'){
 	   const hook=Math.sin(Math.min(1,e.en/2.2)*Math.PI);
 	   sx=tx+Math.sin(e.en*3.8+e.ph)*(112+e.r*8)*fm.entryX*k+(e.c<5?-1:1)*hook*24*k;
@@ -184,6 +204,11 @@ function updateEnemy(e,dt,t,T,p){
 	  }else if(!stage1&&entryFamily==='late-boss-column-weave'){
 	   sx=tx+Math.sin(e.en*6.8+e.c*.65)*(96+e.r*12)*fm.entryX*k;
 	   sy=ty+Math.cos(e.en*3.2+e.ph)*(48+e.r*5)*fm.entryY*k+Math.sin(e.en*7.1+e.r)*7*k;
+	  }else if(!stage1&&entryFamily==='crown-split-weave-entry'){
+	   const side=e.c<5?-1:1;
+	   const crown=Math.sin(Math.min(1,e.en/2.35)*Math.PI);
+	   sx=tx+side*(Math.sin(e.en*5.9+e.ph)*(166+e.r*14)+crown*(64+e.r*7))*fm.entryX*k+Math.sin(e.en*10.6+e.c)*16*k;
+	   sy=ty+Math.cos(e.en*4.1+e.ph+e.r*.32)*(48+e.r*8)*fm.entryY*k+crown*(28+e.r*4)*k+crown*Math.sin(e.c*.9)*(18+e.r*3)*k;
 	  }
 	  e.x+=(sx-e.x)*Math.min(1,dt*(stage1?3.1:3.6));
   e.y+=(sy-e.y)*Math.min(1,dt*(stage1?3:3.4));

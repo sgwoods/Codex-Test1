@@ -1,0 +1,20 @@
+{
+  "name": "stage10-pincer-entry",
+  "seed": 10010,
+  "duration": 16,
+  "config": {
+    "stage": 10,
+    "ships": 4,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.55, "action": "down", "code": "ArrowLeft" },
+    { "t": 1.75, "action": "up", "code": "ArrowLeft" },
+    { "t": 1.8, "action": "down", "code": "ArrowRight" },
+    { "t": 4.6, "action": "up", "code": "ArrowRight" },
+    { "t": 4.65, "action": "down", "code": "ArrowLeft" },
+    { "t": 8.1, "action": "up", "code": "ArrowLeft" },
+    { "t": 15.4, "action": "up", "code": "Space" }
+  ]
+}

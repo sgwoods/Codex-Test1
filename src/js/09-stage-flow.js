@@ -5,6 +5,7 @@ function familyMotion(e){
   case 'scorpion': return { pulseX:.95,pulseY:.8,entryX:.92,entryY:.9,weave:1.18,steer:.96,jitter:1.1,diveVy:.98,diveAccel:1,challengeSweep:1,challengeDrop:1 };
   case 'stingray': return { pulseX:1.08,pulseY:.78,entryX:1.06,entryY:.82,weave:1.28,steer:1.06,jitter:1.16,diveVy:1.04,diveAccel:1.03,challengeSweep:1.2,challengeDrop:1.05 };
   case 'galboss': return { pulseX:.9,pulseY:.72,entryX:.88,entryY:.76,weave:.9,steer:.9,jitter:.92,diveVy:1.02,diveAccel:.98,challengeSweep:.86,challengeDrop:.95 };
+  case 'crown': return { pulseX:1.22,pulseY:.76,entryX:1.3,entryY:.94,weave:1.42,steer:1.1,jitter:1.28,diveVy:1.1,diveAccel:1.08,challengeSweep:1.46,challengeDrop:1.12 };
   case 'dragonfly': return { pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1.1,steer:1,jitter:1,diveVy:1,diveAccel:1,challengeSweep:1.14,challengeDrop:1 };
   case 'mosquito': return { pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1.22,steer:1,jitter:1,diveVy:1,diveAccel:1,challengeSweep:1.32,challengeDrop:1.08 };
   default: return { pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1,steer:1,jitter:1,diveVy:1,diveAccel:1,challengeSweep:1,challengeDrop:1 };
@@ -16,9 +17,12 @@ function formationLayout(stage){
 }
 
 function regularEntryPathFamily(stage){
+ if(stage>=16)return 'crown-split-weave-entry';
  if(stage>=14)return 'late-boss-column-weave';
  if(stage>=12)return 'galboss-low-hook-entry';
+ if(stage>=10)return 'stingray-pincer-entry';
  if(stage>=8)return 'stingray-wide-flank-entry';
+ if(stage>=6)return 'scorpion-tandem-hook-entry';
  if(stage>=4)return 'scorpion-stagger-entry';
  return 'classic-center-arc-entry';
 }

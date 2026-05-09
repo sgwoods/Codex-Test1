@@ -94,6 +94,44 @@ function scoreMetric(id, label, score10, currentRead, calculation, strategy){
   };
 }
 
+function meanFeature(window, key){
+  return average((window.classifications || [])
+    .map(item => +(item.features?.[key] ?? NaN))
+    .filter(Number.isFinite));
+}
+
+function geometryVector(window){
+  return [
+    clamp(meanFeature(window, 'xRange') / 280),
+    clamp(meanFeature(window, 'yRange') / 430),
+    clamp(meanFeature(window, 'pathLength') / 1250),
+    clamp(meanFeature(window, 'turnCount') / 14),
+    clamp(meanFeature(window, 'reversalCount') / 10),
+    clamp(meanFeature(window, 'lowerFieldShare'))
+  ];
+}
+
+function vectorDistance(a, b){
+  const av = geometryVector(a);
+  const bv = geometryVector(b);
+  const sum = av.reduce((total, value, index) => total + ((value - bv[index]) ** 2), 0);
+  return Math.sqrt(sum / Math.max(av.length, 1));
+}
+
+function geometryPairs(windows){
+  const pairs = [];
+  for(let i = 0; i < windows.length; i += 1){
+    for(let j = i + 1; j < windows.length; j += 1){
+      pairs.push({
+        a: windows[i].windowId,
+        b: windows[j].windowId,
+        distance: round(vectorDistance(windows[i], windows[j]))
+      });
+    }
+  }
+  return pairs.sort((a, b) => a.distance - b.distance || a.a.localeCompare(b.a) || a.b.localeCompare(b.b));
+}
+
 function buildReport(){
   const formationPath = latestReport('formation-boss-grammar-conformance');
   const pathFamilyPath = latestReport('formation-boss-path-family-comparison');
@@ -120,6 +158,9 @@ function buildReport(){
   const challengeSignatureCount = new Set(challengePath.map(window => familySignature(window.families))).size;
   const regularSignatureRatio = regularPath.length ? regularSignatureCount / regularPath.length : 0;
   const challengeSignatureRatio = challengePath.length ? challengeSignatureCount / Math.max(challengePath.length, 4) : 0;
+  const regularGeometryPairs = geometryPairs(regularPath);
+  const minRegularGeometryDistance = regularGeometryPairs[0]?.distance || 0;
+  const meanRegularGeometryDistance = average(regularGeometryPairs.map(pair => pair.distance));
   const regularEntitySets = regularFormation.map(window => entityFamilies(window).join('|'));
   const challengeEntitySets = challengeFormation.map(window => entityFamilies(window).join('|'));
   const regularEntityNoveltyRatio = regularEntitySets.length ? new Set(regularEntitySets).size / regularEntitySets.length : 0;
@@ -149,6 +190,14 @@ function buildReport(){
       'Promote per-stage path family labels and add authored route variants for early/mid/late stages before retuning score targets.'
     ),
     scoreMetric(
+      'regular-entry-geometry-separation',
+      'Regular-entry geometry separation',
+      10 * ((0.55 * clamp(minRegularGeometryDistance / 0.14)) + (0.45 * clamp(meanRegularGeometryDistance / 0.22))),
+      `Minimum regular geometry distance ${round(minRegularGeometryDistance)}; mean regular geometry distance ${round(meanRegularGeometryDistance)}; closest pair ${regularGeometryPairs[0] ? `${regularGeometryPairs[0].a} / ${regularGeometryPairs[0].b}` : 'n/a'}.`,
+      'Measures whether regular stages differ in actual trajectory geometry, using mean x/y range, path length, turns, reversals, and lower-field share instead of accepting a path-family label alone.',
+      'Tune the weakest close pair with a visibly different entry route, then rerun path-slot extraction and this scorer.'
+    ),
+    scoreMetric(
       'challenge-trajectory-variation',
       'Challenging-stage trajectory variation',
       10 * ((0.45 * challengePathCoverage) + (0.35 * challengeSignatureRatio) + (0.2 * clamp((challengePath[0]?.familyCount || 0) / 5))),
@@ -175,11 +224,12 @@ function buildReport(){
   ];
 
   const weights = {
-    'regular-stage-entry-variation': 0.25,
-    'entry-path-family-specificity': 0.22,
-    'challenge-trajectory-variation': 0.23,
-    'challenge-alien-novelty': 0.18,
-    'reference-grounded-path-precision': 0.12
+    'regular-stage-entry-variation': 0.19,
+    'entry-path-family-specificity': 0.17,
+    'regular-entry-geometry-separation': 0.18,
+    'challenge-trajectory-variation': 0.2,
+    'challenge-alien-novelty': 0.15,
+    'reference-grounded-path-precision': 0.11
   };
   const score10 = round(metrics.reduce((sum, metric) => sum + (metric.score10 * (weights[metric.id] || 0)), 0), 1);
   const weakestMetric = metrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, metrics[0]);
@@ -208,6 +258,9 @@ function buildReport(){
       challengePathWindowCount: challengePath.length,
       minRegularDistance: round(minRegularDistance),
       meanRegularDistance: round(meanRegularDistance),
+      minRegularGeometryDistance: round(minRegularGeometryDistance),
+      meanRegularGeometryDistance: round(meanRegularGeometryDistance),
+      closestRegularGeometryPair: regularGeometryPairs[0] || null,
       distinctPairRatio: round(distinctPairRatio),
       repetitionRisk: round(repetitionRisk),
       regularSignatureCount,

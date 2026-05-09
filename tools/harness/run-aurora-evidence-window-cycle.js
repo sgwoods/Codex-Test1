@@ -19,8 +19,10 @@ const WINDOW_SCENARIOS = {
 	  'challenge-stage-boss-led-loop': 'stage15-challenge-boss-led-loop',
 	  'mid-run-pressure': 'stage6-regular',
   'mid-run-entry-variant': 'stage8-entry-variant',
+  'mid-run-pincer-variant': 'stage10-pincer-entry',
   'late-run-cleanup-or-failure': 'stage12-variety',
-  'late-run-escort-variant': 'stage14-escort-variant'
+  'late-run-escort-variant': 'stage14-escort-variant',
+  'late-run-crown-entry': 'stage16-crown-entry'
 };
 
 function selectedWindowIds(argv){

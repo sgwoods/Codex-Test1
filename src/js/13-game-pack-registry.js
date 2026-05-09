@@ -69,12 +69,13 @@ function currentGamePackIsChallengeStage(stage){
 
 function stageBandIndex(stage){
  if(stage<4)return 0;
+ if(stage>=16)return 4;
  return 1+(Math.floor((stage-4)/4)%3);
 }
 
 function stageBandProfile(stage,challenge){
  const pack=currentGamePack();
- const base=pack.stageBandProfiles[stageBandIndex(stage)]||pack.stageBandProfiles[0];
+ const base=pack.stageBandProfiles[stageBandIndex(stage)]||pack.stageBandProfiles[pack.stageBandProfiles.length-1]||pack.stageBandProfiles[0];
  if(!challenge)return base;
  if(stage>=19)return Object.assign({},base,{challengeFamily:'mosquito'});
  if(stage>=11)return Object.assign({},base,{challengeFamily:'dragonfly'});
