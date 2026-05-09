@@ -1,30 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T11-19-27-780Z-62183",
-  "startedAt": "2026-05-09T11:19:27.780Z",
-  "endedAt": "2026-05-09T11:19:27.960Z",
+  "id": "2026-05-09T15-43-33-000Z-50729",
+  "startedAt": "2026-05-09T15:43:33.000Z",
+  "endedAt": "2026-05-09T15:43:33.205Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "29a80ab4",
+  "commit": "fcd71b79",
   "command": [
     "npm",
     "run",
-    "harness:analyze:formation-boss-path-families"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
-    "formation-boss-grammar",
-    "path-family-comparison"
+    "audio"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "",
+  "notes": "third post-change event gap for measured aurora-surge challengeResults",
   "measurement": {
-    "wallSeconds": 0.18,
-    "timeRealSeconds": 0.17,
+    "wallSeconds": 0.205,
+    "timeRealSeconds": 0.2,
     "timeUserSeconds": 0.14,
-    "timeSystemSeconds": 0.03,
-    "cpuSeconds": 0.17,
+    "timeSystemSeconds": 0.11,
+    "cpuSeconds": 0.25,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 476980243,
-    "artifactBytesAfter": 476980243,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 498272760,
+    "artifactBytesAfter": 498272953,
+    "artifactBytesDelta": 193
   }
 }

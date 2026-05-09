@@ -170,8 +170,12 @@ function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport, audioE
   const semanticEventAverage = Number.isFinite(+audioEventGapReport?.summary?.semanticAverageScore10)
     ? clamp(+audioEventGapReport.summary.semanticAverageScore10 / 10, 0, 1)
     : null;
-  const semanticWeight = semanticEventAverage == null ? 0 : 0.15;
-  const baseWeight = 1 - semanticWeight;
+  const acousticEventAverage = Number.isFinite(+audioEventGapReport?.summary?.averageWorstSegmentRisk10)
+    ? clamp(1 - (+audioEventGapReport.summary.averageWorstSegmentRisk10 / 10), 0, 1)
+    : null;
+  const semanticWeight = semanticEventAverage == null ? 0 : 0.1;
+  const acousticWeight = acousticEventAverage == null ? 0 : 0.15;
+  const baseWeight = 1 - semanticWeight - acousticWeight;
   const score10 = round(clamp(10 * (
     baseWeight * (
       (0.3 * cueAverage)
@@ -181,6 +185,7 @@ function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport, audioE
       + (0.15 * alignmentAverage)
     )
     + (semanticWeight * semanticEventAverage)
+    + (acousticWeight * acousticEventAverage)
   ), 1, 10), 1);
   return {
     score10,
@@ -190,7 +195,12 @@ function scoreAudioDetails(metricsTheme, metricsOverlap, alignmentReport, audioE
     overlapAverage: round(overlapAverage, 3),
     alignmentAverage: round(alignmentAverage, 3),
     semanticEventAverage: semanticEventAverage == null ? null : round(semanticEventAverage, 3),
+    acousticEventAverage: acousticEventAverage == null ? null : round(acousticEventAverage, 3),
     semanticEventScore10: audioEventGapReport?.summary?.semanticAverageScore10 ?? null,
+    acousticEventScore10: acousticEventAverage == null ? null : round(acousticEventAverage * 10, 2),
+    averageWorstSegmentRisk10: audioEventGapReport?.summary?.averageWorstSegmentRisk10 ?? null,
+    highestSegmentRiskCue: audioEventGapReport?.summary?.highestSegmentRiskCue || null,
+    highestSegmentRiskRole: audioEventGapReport?.summary?.highestSegmentRiskRole || null,
     semanticLowCueCount: audioEventGapReport?.summary?.lowSemanticCueCount ?? null,
     semanticAttentionCueCount: audioEventGapReport?.summary?.semanticAttentionCueCount ?? null,
     semanticLowestCue: audioEventGapReport?.summary?.lowestSemanticCue || null,
@@ -349,7 +359,7 @@ function main(){
       score10: audioScore.score10,
       evidence: ['audio-cue-alignment correspondence', 'aurora-audio-theme-comparison', 'galaga-audio-overlap', 'aurora-audio-event-gap semantic read'],
       details: audioScore,
-      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, and semantic event mapping. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; ${audioScore.referenceSegmentCandidateCount} candidate subwindows were found; semantic event score is ${audioScore.semanticEventScore10 ?? 'not measured'}/10 with ${audioScore.semanticAttentionCueCount ?? 'unknown'} semantic attention rows and ${audioScore.semanticSharedReferenceClipRiskCount ?? 'unknown'} shared-reference risks.`
+      read: `Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. ${audioScore.broadReferenceWindowCount}/${audioScore.totalReferenceItems} reference windows still need tighter segmentation; ${audioScore.referenceSegmentCandidateCount} candidate subwindows were found; semantic event score is ${audioScore.semanticEventScore10 ?? 'not measured'}/10, acoustic event score is ${audioScore.acousticEventScore10 ?? 'not measured'}/10, and highest segment risk is ${audioScore.highestSegmentRiskCue || 'unknown'} ${audioScore.highestSegmentRiskRole || ''}.`
     },
     {
       id: 'ui-shell',

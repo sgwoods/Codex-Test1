@@ -155,6 +155,22 @@ function latestMetrics(){
   return candidates[candidates.length - 1];
 }
 
+function baselineReport(){
+  const candidates = [
+    process.env.AURORA_AUDIO_EVENT_GAP_BASELINE || '',
+    path.join(OUT_ROOT, 'latest.json')
+  ].filter(Boolean);
+  for(const file of candidates){
+    if(!fs.existsSync(file)) continue;
+    try{
+      return { path: file, report: readJson(file) };
+    }catch{
+      continue;
+    }
+  }
+  return null;
+}
+
 function round(value, digits = 3){
   return Number.isFinite(+value) ? +(+value).toFixed(digits) : null;
 }
@@ -361,6 +377,68 @@ function weightedAverage(rows, valueKey){
   return weight ? round(sum / weight, 2) : null;
 }
 
+function candidateComparison(rows, baseline){
+  if(!baseline?.report?.comparedCueRisks?.length) return null;
+  const previousByCue = new Map(baseline.report.comparedCueRisks.map(row => [row.cue, row]));
+  const cueDeltas = rows
+    .map(row => {
+      const previous = previousByCue.get(row.cue);
+      if(!previous) return null;
+      return {
+        cue: row.cue,
+        label: row.label,
+        gapRiskDelta10: round((+row.gapRisk10 || 0) - (+previous.gapRisk10 || 0), 2),
+        worstSegmentRiskDelta10: Number.isFinite(+row.worstSegmentRisk10) && Number.isFinite(+previous.worstSegmentRisk10)
+          ? round(+row.worstSegmentRisk10 - +previous.worstSegmentRisk10, 2)
+          : null,
+        durationGapDeltaSeconds: Number.isFinite(+row.durationGapSeconds) && Number.isFinite(+previous.durationGapSeconds)
+          ? round(+row.durationGapSeconds - +previous.durationGapSeconds, 3)
+          : null,
+        centroidGapDeltaHz: Number.isFinite(+row.centroidGapHz) && Number.isFinite(+previous.centroidGapHz)
+          ? round(+row.centroidGapHz - +previous.centroidGapHz, 1)
+          : null,
+        currentGapRisk10: row.gapRisk10,
+        previousGapRisk10: previous.gapRisk10,
+        currentWorstSegmentRisk10: row.worstSegmentRisk10,
+        previousWorstSegmentRisk10: previous.worstSegmentRisk10
+      };
+    })
+    .filter(Boolean);
+  const bySegmentMagnitude = cueDeltas
+    .filter(row => Number.isFinite(+row.worstSegmentRiskDelta10))
+    .slice()
+    .sort((a, b) => Math.abs(+b.worstSegmentRiskDelta10) - Math.abs(+a.worstSegmentRiskDelta10));
+  const improvements = cueDeltas
+    .filter(row => (+row.gapRiskDelta10 < 0) || (+row.worstSegmentRiskDelta10 < 0))
+    .sort((a, b) => (+a.worstSegmentRiskDelta10 || +a.gapRiskDelta10 || 0) - (+b.worstSegmentRiskDelta10 || +b.gapRiskDelta10 || 0));
+  const regressions = cueDeltas
+    .filter(row => (+row.gapRiskDelta10 > 0) || (+row.worstSegmentRiskDelta10 > 0))
+    .sort((a, b) => (+b.worstSegmentRiskDelta10 || +b.gapRiskDelta10 || 0) - (+a.worstSegmentRiskDelta10 || +a.gapRiskDelta10 || 0));
+  const currentAverageWorst = rows.filter(row => Number.isFinite(+row.worstSegmentRisk10));
+  const previousAverageWorst = (baseline.report.comparedCueRisks || []).filter(row => Number.isFinite(+row.worstSegmentRisk10));
+  const currentAverageWorstSegmentRisk10 = currentAverageWorst.length
+    ? round(currentAverageWorst.reduce((sum, row) => sum + +row.worstSegmentRisk10, 0) / currentAverageWorst.length, 2)
+    : null;
+  const previousAverageWorstSegmentRisk10 = previousAverageWorst.length
+    ? round(previousAverageWorst.reduce((sum, row) => sum + +row.worstSegmentRisk10, 0) / previousAverageWorst.length, 2)
+    : null;
+  return {
+    baseline: rel(baseline.path),
+    baselineGeneratedAt: baseline.report.generatedAt || '',
+    cueDeltaCount: cueDeltas.length,
+    averageWorstSegmentRiskDelta10: Number.isFinite(+currentAverageWorstSegmentRisk10) && Number.isFinite(+previousAverageWorstSegmentRisk10)
+      ? round(currentAverageWorstSegmentRisk10 - previousAverageWorstSegmentRisk10, 2)
+      : null,
+    highestRiskCueChanged: (baseline.report.summary?.highestRiskCue || '') !== (rows[0]?.cue || ''),
+    previousHighestRiskCue: baseline.report.summary?.highestRiskCue || '',
+    currentHighestRiskCue: rows[0]?.cue || '',
+    strongestImprovement: improvements[0] || null,
+    strongestRegression: regressions[0] || null,
+    largestSegmentMovement: bySegmentMagnitude[0] || null,
+    cueDeltas
+  };
+}
+
 function markdown(report){
   const lines = [
     '# Aurora Audio Event Gap Analysis',
@@ -394,13 +472,40 @@ function markdown(report){
     `- Shared-reference clip risks: ${report.summary.sharedReferenceClipRiskCount}`,
     `- Highest event-gap risk: ${report.summary.highestRiskCue} (${report.summary.highestRisk10}/10 risk)`,
     '',
+    '## Candidate Value Read',
+    ''
+  ];
+  if(report.previousComparison){
+    const comparison = report.previousComparison;
+    lines.push(
+      `- Baseline report: \`${comparison.baseline}\``,
+      `- Average worst segment risk delta: ${comparison.averageWorstSegmentRiskDelta10}/10`,
+      `- Highest-risk cue changed: ${comparison.highestRiskCueChanged ? 'yes' : 'no'} (${comparison.previousHighestRiskCue || 'none'} -> ${comparison.currentHighestRiskCue || 'none'})`,
+      `- Strongest improvement: ${comparison.strongestImprovement ? `${comparison.strongestImprovement.cue} (${comparison.strongestImprovement.worstSegmentRiskDelta10 ?? comparison.strongestImprovement.gapRiskDelta10})` : 'none'}`,
+      `- Strongest regression: ${comparison.strongestRegression ? `${comparison.strongestRegression.cue} (+${comparison.strongestRegression.worstSegmentRiskDelta10 ?? comparison.strongestRegression.gapRiskDelta10})` : 'none'}`,
+      '',
+      '| Cue | Gap delta | Segment delta | Duration delta | Centroid delta |',
+      '| --- | ---: | ---: | ---: | ---: |'
+    );
+    comparison.cueDeltas
+      .slice()
+      .sort((a, b) => Math.abs(+b.worstSegmentRiskDelta10 || +b.gapRiskDelta10 || 0) - Math.abs(+a.worstSegmentRiskDelta10 || +a.gapRiskDelta10 || 0))
+      .slice(0, 10)
+      .forEach(item => {
+        lines.push(`| ${item.cue} | ${item.gapRiskDelta10} | ${item.worstSegmentRiskDelta10 ?? 'n/a'} | ${item.durationGapDeltaSeconds ?? 'n/a'}s | ${item.centroidGapDeltaHz ?? 'n/a'} Hz |`);
+      });
+  }else{
+    lines.push('No baseline report was available. Set `AURORA_AUDIO_EVENT_GAP_BASELINE` to compare a candidate run against a known target.');
+  }
+  lines.push(
+    '',
     '## Semantic Event Read',
     '',
     'This layer asks whether the cue is mapped to the right gameplay meaning, not only whether the waveform is close. A low row usually means the cue has a shared reference source, fuzzy mapping, missing subwindow, or weak distinction from adjacent events.',
     '',
     '| Rank | Cue | Event class | Semantic /10 | Confidence | Shared refs | Player/designer meaning | Recommended action |',
     '| ---: | --- | --- | ---: | --- | ---: | --- | --- |'
-  ];
+  );
   report.semanticAttentionRows.slice(0, 12).forEach((item, index) => {
     lines.push(`| ${index + 1} | ${item.cue} | ${item.semanticClass} | ${item.semanticScore10} | ${item.mappingConfidence} | ${item.sharedReferenceClipCount} | ${item.playerMeaning} | ${item.semanticRecommendation} |`);
   });
@@ -469,6 +574,7 @@ function main(){
   };
   const comparedCueRisks = (metrics.items || []).map(item => rowForItem(item, rowContext))
     .sort((a, b) => b.gapRisk10 - a.gapRisk10 || String(a.cue).localeCompare(String(b.cue)));
+  const previousComparison = candidateComparison(comparedCueRisks, baselineReport());
   const segmentComparedRows = comparedCueRisks.filter(item => Number.isFinite(+item.worstSegmentRisk10));
   const missingCriticalComparisonCues = Array.from(CRITICAL_CUES)
     .filter(cue => !comparedCueSet.has(cue))
@@ -537,6 +643,7 @@ function main(){
       highestRisk10: highest.gapRisk10 ?? null
     },
     comparedCueRisks,
+    previousComparison,
     lowSemanticCueRows: lowSemanticRows,
     semanticAttentionRows,
     missingCriticalComparisonCues,
