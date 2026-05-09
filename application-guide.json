@@ -570,6 +570,19 @@
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
         "selection": "distinct initial high-transient subwindow reserved for player fire; lower score than the shared best window but prevents playerShot/enemyShot/bossHit semantic collapse"
       },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.05-0.29s flagship/fighter-shot window; player fire is a single crisp transient rather than a multi-phase phrase",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "player fire transient",
+            "startSeconds": 0.08,
+            "endSeconds": 0.2
+          }
+        ]
+      },
       "mappingStatus": "Measured subwindow promoted for shot identity; uses a distinct initial transient so player fire can be scored separately from enemy fire and boss damage.",
       "mappingConfidence": "medium-high"
     },
@@ -585,6 +598,19 @@
         "endSeconds": 1.14,
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
         "selection": "second measured high-transient subwindow reserved for enemy projectile feedback so enemyShot no longer scores against the same active phrase as playerShot"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.90-1.14s flagship/fighter-shot window; enemy fire is a single projectile transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "enemy fire transient",
+            "startSeconds": 0.07,
+            "endSeconds": 0.22
+          }
+        ]
       },
       "mappingStatus": "Measured subwindow promoted for enemy projectile feedback; still from the same source clip, but scored as a distinct reference phrase from playerShot and bossHit.",
       "mappingConfidence": "medium-high"
@@ -602,6 +628,19 @@
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
         "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
       },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.75-0.99s Zako window; enemy hit is scored as immediate damage confirmation",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "enemy hit confirmation",
+            "startSeconds": 0.01,
+            "endSeconds": 0.17
+          }
+        ]
+      },
       "mappingStatus": "Measured subwindow promoted for impact feedback; hit and kill hierarchy remains under review but is now scored against a distinct phrase from enemyBoom.",
       "mappingConfidence": "medium-high"
     },
@@ -617,6 +656,19 @@
         "endSeconds": 1.439,
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
         "selection": "highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 1.149-1.439s boss-damage window; boss hit is a distinct damage confirmation transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "boss damage confirmation",
+            "startSeconds": 0,
+            "endSeconds": 0.15
+          }
+        ]
       },
       "mappingStatus": "Measured subwindow promoted for boss damage feedback; reference source remains shared, but bossHit now has a dedicated scoring window.",
       "mappingConfidence": "medium-high"
@@ -634,6 +686,19 @@
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
         "selection": "highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"
       },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured Zako destruction transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.50-0.74s Zako window; normal enemy destruction is a compact finality transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "normal enemy destruction transient",
+            "startSeconds": 0.02,
+            "endSeconds": 0.2
+          }
+        ]
+      },
       "mappingStatus": "Measured subwindow promoted for normal-enemy destruction feedback; enemyHit and enemyBoom now score against separate Zako phrases.",
       "mappingConfidence": "medium-high"
     },
@@ -644,6 +709,37 @@
       "focus": "Compare whether boss destruction feels larger and more final than normal enemy destruction.",
       "referenceLabel": "Boss Death / Sasori",
       "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+      "referenceWindow": {
+        "startSeconds": 0.798,
+        "endSeconds": 1.567,
+        "source": "aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 active-window measurement",
+        "selection": "full active boss-death phrase so destruction can be scored as a larger multi-burst event rather than a single generic explosion"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 boss-death burst candidates",
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 0.798-1.567s boss-death window; labels early, middle, and final destruction bursts",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "boss death opening burst",
+            "startSeconds": 0.052,
+            "endSeconds": 0.233
+          },
+          {
+            "role": "body",
+            "label": "boss death main burst",
+            "startSeconds": 0.252,
+            "endSeconds": 0.433
+          },
+          {
+            "role": "tail",
+            "label": "boss death final burst",
+            "startSeconds": 0.601,
+            "endSeconds": 0.769
+          }
+        ]
+      },
       "mappingStatus": "Measured coverage added for boss destruction feedback.",
       "mappingConfidence": "high"
     },
@@ -732,6 +828,19 @@
         "endSeconds": 2.189,
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
         "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 1.949-2.189s captured-fighter-destroyed window; penalty feedback is a compact regret/destruction transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "captured fighter destroyed transient",
+            "startSeconds": 0,
+            "endSeconds": 0.19
+          }
+        ]
       },
       "mappingStatus": "New Aurora cue slot added from the cue matrix.",
       "mappingConfidence": "high"

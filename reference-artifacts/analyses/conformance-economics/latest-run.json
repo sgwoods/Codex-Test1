@@ -1,15 +1,20 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T16-11-19-997Z-77784",
-  "startedAt": "2026-05-09T16:11:19.997Z",
-  "endedAt": "2026-05-09T16:11:20.227Z",
+  "id": "2026-05-09T18-15-56-821Z-97267",
+  "startedAt": "2026-05-09T18:15:56.821Z",
+  "endedAt": "2026-05-09T18:16:23.538Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "6c0e2b61",
+  "commit": "878b7eb2",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-audio-event-gap"
+    "harness:analyze:aurora-player-hit-candidates",
+    "--",
+    "--grid-limit=0",
+    "--reference-grid-limit=12",
+    "--repeats=2",
+    "--candidate-ids=refclip-s80-d968-v100,refclip-s50-d968-v100,reference-death-active-window,refclip-s50-d968-v92,refclip-s20-d968-v100"
   ],
   "axes": [
     "audio"
@@ -17,13 +22,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "event gap after captureBeam active-tail segmentation correction",
+  "notes": "playerHit adaptive gate reference candidate check",
   "measurement": {
-    "wallSeconds": 0.23,
-    "timeRealSeconds": 0.22,
-    "timeUserSeconds": 0.15,
-    "timeSystemSeconds": 0.11,
-    "cpuSeconds": 0.26,
+    "wallSeconds": 26.717,
+    "timeRealSeconds": 26.71,
+    "timeUserSeconds": 38.51,
+    "timeSystemSeconds": 9.48,
+    "cpuSeconds": 47.99,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +50,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 508923318,
-    "artifactBytesAfter": 508935560,
-    "artifactBytesDelta": 12242
+    "artifactBytesBefore": 526824779,
+    "artifactBytesAfter": 527757566,
+    "artifactBytesDelta": 932787
   }
 }

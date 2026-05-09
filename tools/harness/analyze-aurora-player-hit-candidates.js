@@ -382,9 +382,10 @@ function bandEnergyDelta(active, reference){
 function rejectionFor(row, baseline){
   if(!baseline) return 'no baseline';
   const reasons = [];
+  const durationImprovementFloor = round(Math.min(.18, Math.max(.02, (baseline.durationGapSeconds || 0) * .5)), 3);
   if(row.risk10 > baseline.risk10 - .35) reasons.push(`whole-cue risk improved only ${round(baseline.risk10 - row.risk10, 2)} (<0.35)`);
   if(row.worstSegmentRisk10 > baseline.worstSegmentRisk10 - .35) reasons.push(`segment risk improved only ${round(baseline.worstSegmentRisk10 - row.worstSegmentRisk10, 2)} (<0.35)`);
-  if(row.durationGapSeconds > baseline.durationGapSeconds - .18) reasons.push(`duration gap improved only ${round(baseline.durationGapSeconds - row.durationGapSeconds, 3)}s (<0.18s)`);
+  if(row.durationGapSeconds > baseline.durationGapSeconds - durationImprovementFloor) reasons.push(`duration gap improved only ${round(baseline.durationGapSeconds - row.durationGapSeconds, 3)}s (<${durationImprovementFloor}s)`);
   if(row.bandShapeGap > baseline.bandShapeGap + .04) reasons.push(`band shape worsened by ${round(row.bandShapeGap - baseline.bandShapeGap, 4)}`);
   if(row.centroidGapHz > baseline.centroidGapHz + 80) reasons.push(`centroid worsened by ${round(row.centroidGapHz - baseline.centroidGapHz, 1)} Hz`);
   if(row.exactSegmentRoleMatchCount < baseline.exactSegmentRoleMatchCount) reasons.push('fewer exact segment-role matches than baseline');
@@ -725,9 +726,9 @@ async function main(){
     cue: CUE,
     repetitions: repeats,
     candidateFilter: filter.size ? [...filter].sort() : null,
-    problem: 'Ship Loss/playerHit is the highest current audio event-gap risk: Aurora reads as a short bright hit, while the Galaga reference is a longer low-band death event with a sustained onset and trailing body.',
-    strategy: 'Capture bounded low-band, long-decay candidate specs through the live browser audio engine, compare against galaga3-death.m4a with active-window segmentation, and recommend promotion only if the candidate improves whole-cue risk, segment risk, duration, band shape, centroid, and role matching.',
-    successMeasure: 'A keeper must reduce whole-cue risk by at least 0.35, worst segment risk by at least 0.35, improve duration by at least 0.18s, avoid material band/centroid regressions, keep exact segment-role coverage at least as good as baseline, and remain stable across repeated captures.',
+    problem: 'Ship Loss/playerHit is the highest current segment-level audio event-gap risk: Aurora is close on whole-cue duration, but the Galaga reference has a low-band death tail that is not yet matched.',
+    strategy: 'Capture bounded low-band, long-decay candidate specs through the live browser audio engine, compare against galaga3-death.m4a with curated onset/body/tail segmentation, and recommend promotion only if the candidate improves whole-cue risk, segment risk, duration relative to the current baseline, band shape, centroid, and role matching.',
+    successMeasure: 'A keeper must reduce whole-cue risk by at least 0.35, worst segment risk by at least 0.35, improve duration by an adaptive threshold based on the current baseline gap, avoid material band/centroid regressions, keep exact segment-role coverage at least as good as baseline, and remain stable across repeated captures.',
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,
