@@ -729,9 +729,11 @@ window.__galagaHarness__={
    challenge:!!S.challenge,
    layout:typeof formationLayout==='function'?formationLayout(S.stage):null,
    targets:active.map(e=>({
-    id:e.id,
-    type:e.t,
-    row:e.r,
+	    id:e.id,
+	    type:e.t,
+	    family:e.fam||'classic',
+	    pathFamily:e.pathFamily||'classic-center-arc-entry',
+	    row:e.r,
     column:e.c,
     tx:+(+e.tx||0).toFixed(2),
     ty:+(+e.ty||0).toFixed(2),
@@ -814,11 +816,13 @@ window.__galagaHarness__={
   return {
    stage:S.stage,
    challenge:!!S.challenge,
-   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout():null,
-  enemies:active.map(e=>({
-   id:e.id,
-   type:e.t,
-   lane:e.c,
+	   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null,
+	  enemies:active.map(e=>({
+	   id:e.id,
+	   type:e.t,
+   family:e.fam||'classic',
+   pathFamily:e.pathFamily||'classic-lane-wave',
+	   lane:e.c,
    wave:e.wave,
    row:e.row,
    side:e.side,
@@ -1127,13 +1131,14 @@ window.__galagaHarness__={
   p.pending=0;
   p.returning=0;
   p.capBoss=null;
-  p.capT=0;
-  spawnStage();
-  for(const e of S.e){
-   if(!e?.ch||e.hp<=0)continue;
-   e.tm=0;
-   e.spawn=e.spawnPlan||0;
-  }
+	  p.capT=0;
+	  spawnStage();
+	  const challengeSpawnBase=Math.min(...S.e.filter(e=>e?.ch&&e.hp>0).map(e=>+e.spawnPlan||0));
+	  for(const e of S.e){
+	   if(!e?.ch||e.hp<=0)continue;
+	   e.tm=0;
+	   e.spawn=Math.max(0,(+e.spawnPlan||0)-challengeSpawnBase);
+	  }
   logEvent('harness_challenge_motion_profile_setup',{
    stage:S.stage,
    enemies:S.e.filter(e=>e.hp>0&&e.ch).length

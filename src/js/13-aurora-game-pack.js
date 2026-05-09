@@ -646,17 +646,83 @@ const AURORA_STAGE_CADENCE=Object.freeze({
  challengeEvery:4
 });
 
-const AURORA_CHALLENGE_LAYOUT=Object.freeze({
- groups:5,
- enemiesPerGroup:8,
- upperBandRatio:.5,
- spawnOffsetX:44,
- waveSpacingY:13,
- rowSpacingY:8,
- waveDelay:1.52,
- slotDelay:.18,
- laneTypes:Object.freeze(['boss','boss','but','bee','but','but','bee','but'])
-});
+const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
+ Object.freeze({
+  fromStage:3,
+  id:'classic-lane-wave',
+  pathFamily:'classic-lane-wave',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.5,
+  spawnOffsetX:44,
+  waveSpacingY:13,
+  rowSpacingY:8,
+  waveDelay:1.52,
+  slotDelay:.18,
+  laneTypes:Object.freeze(['boss','boss','but','bee','but','but','bee','but'])
+ }),
+ Object.freeze({
+  fromStage:7,
+  id:'scorpion-cross-sweep',
+  pathFamily:'cross-sweep',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.48,
+  spawnOffsetX:50,
+  waveSpacingY:12,
+  rowSpacingY:9,
+  waveDelay:1.38,
+  slotDelay:.14,
+  arcAmp:1.22,
+  dropAmp:1.02,
+  laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but'])
+ }),
+ Object.freeze({
+  fromStage:11,
+  id:'stingray-hook-arc',
+  pathFamily:'hook-arc',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.46,
+  spawnOffsetX:58,
+  waveSpacingY:11,
+  rowSpacingY:8,
+  waveDelay:1.28,
+  slotDelay:.12,
+  arcAmp:1.48,
+  dropAmp:1.08,
+  laneTypes:Object.freeze(['rogue','but','boss','bee','boss','bee','but','rogue'])
+ }),
+ Object.freeze({
+  fromStage:15,
+  id:'boss-led-late-loop',
+  pathFamily:'boss-led-loop',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.44,
+  spawnOffsetX:62,
+  waveSpacingY:10,
+  rowSpacingY:9,
+  waveDelay:1.18,
+  slotDelay:.1,
+  arcAmp:1.62,
+  dropAmp:1.12,
+  laneTypes:Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee'])
+ })
+]);
+
+const AURORA_CHALLENGE_LAYOUT=AURORA_CHALLENGE_LAYOUTS[0];
+
+const AURORA_CHALLENGE_DEFAULT_LAYOUT=AURORA_CHALLENGE_LAYOUT;
+
+function auroraChallengeLayoutForStage(stage){
+ let layout=AURORA_CHALLENGE_DEFAULT_LAYOUT;
+ for(const candidate of AURORA_CHALLENGE_LAYOUTS){
+  if(stage>=candidate.fromStage)layout=candidate;
+  else break;
+ }
+ return layout;
+}
 
 const AURORA_SCORING_RULES=Object.freeze({
  challengeEnemy:100,
@@ -734,6 +800,8 @@ const AURORA_GAME_PACK=Object.freeze({
  stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
  formationLayouts:AURORA_FORMATION_LAYOUTS,
  challengeLayout:AURORA_CHALLENGE_LAYOUT,
+ challengeLayouts:AURORA_CHALLENGE_LAYOUTS,
+ challengeLayoutForStage:auroraChallengeLayoutForStage,
  stageThemeProgression:AURORA_STAGE_THEME_PROGRESSION,
  frameAccents:AURORA_FRAME_ACCENTS,
  scoring:AURORA_SCORING_RULES

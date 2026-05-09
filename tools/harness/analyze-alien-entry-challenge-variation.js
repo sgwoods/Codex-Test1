@@ -76,6 +76,9 @@ function familySignature(families = []){
 
 function entityFamilies(window){
   return Object.keys(window.familyCounts || {})
+    .flatMap(key => String(key).split('|'))
+    .map(key => key.trim())
+    .filter(Boolean)
     .filter(key => !['stage_spawn', 'player_shot', 'challenge_clear', 'unknown'].includes(key))
     .sort();
 }
@@ -109,10 +112,10 @@ function buildReport(){
   const regularPath = pathWindows.filter(window => !window.challenge);
   const challengePath = pathWindows.filter(window => window.challenge);
 
-  const minRegularDistance = +(stageSignature.summary?.minRegularDistance || stageSignature.summary?.closestRegularPair?.distance || 0);
-  const meanRegularDistance = +(stageSignature.summary?.meanRegularDistance || 0);
-  const distinctPairRatio = +(stageSignature.summary?.distinctPairRatio || 0);
-  const repetitionRisk = +(stageSignature.summary?.repetitionRisk || 1);
+	  const minRegularDistance = +(stageSignature.summary?.minRegularDistance || stageSignature.summary?.closestRegularPair?.distance || 0);
+	  const meanRegularDistance = +(stageSignature.summary?.meanRegularDistance || 0);
+	  const distinctPairRatio = +(stageSignature.summary?.distinctPairRatio || 0);
+	  const repetitionRisk = clamp(1 - (minRegularDistance / 0.22));
   const regularSignatureCount = new Set(regularPath.map(window => familySignature(window.families))).size;
   const challengeSignatureCount = new Set(challengePath.map(window => familySignature(window.families))).size;
   const regularSignatureRatio = regularPath.length ? regularSignatureCount / regularPath.length : 0;

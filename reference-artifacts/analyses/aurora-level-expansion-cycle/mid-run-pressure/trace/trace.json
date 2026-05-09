@@ -10,12 +10,12 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 3,
+    "max_attackers": 6,
     "max_enemy_bullets": 2,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 390,
-    "final_lives": 2,
+    "final_score": 200,
+    "final_lives": 3,
     "final_stage": 6,
     "final_challenge": false
   },
@@ -72,6 +72,18 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 40,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "gameStart",
         "atmosphereId": "aurora-hint",
@@ -83,7 +95,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.572
+        "at": 0.587
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -104,7 +116,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 1,
@@ -120,6 +136,18 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-hint",
@@ -131,7 +159,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.654
+        "at": 0.708
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -152,22 +180,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 2,
       "stage": 6,
       "challenge": 0,
-      "score": 180,
+      "score": 100,
       "lives": 3,
       "player_x": 9,
       "player_vx": 0,
-      "enemies": 37,
+      "enemies": 38,
       "attackers": 0,
       "enemy_bullets": 1,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 37,
+      "formation_active": 38,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "enemyShot",
         "atmosphereId": "aurora-hint",
@@ -179,7 +223,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.716
+        "at": 0.769
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -200,22 +244,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 3,
       "stage": 6,
       "challenge": 0,
-      "score": 180,
+      "score": 100,
       "lives": 3,
       "player_x": 188.39,
       "player_vx": 247.99,
-      "enemies": 37,
+      "enemies": 38,
       "attackers": 1,
       "enemy_bullets": 1,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 37,
+      "formation_active": 38,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "attackCharge",
         "atmosphereId": "aurora-hint",
@@ -227,7 +287,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.775
+        "at": 0.836
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -248,34 +308,50 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 4,
       "stage": 6,
       "challenge": 0,
-      "score": 390,
+      "score": 200,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 35,
-      "attackers": 1,
-      "enemy_bullets": 1,
+      "enemies": 36,
+      "attackers": 2,
+      "enemy_bullets": 2,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
-        "cue": "playerShot",
+        "cue": "attackCharge",
         "atmosphereId": "aurora-hint",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.831
+        "at": 0.901
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -296,34 +372,50 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 5,
       "stage": 6,
       "challenge": 0,
-      "score": 390,
+      "score": 200,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 35,
+      "enemies": 36,
       "attackers": 2,
       "enemy_bullets": 2,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
-        "cue": "playerShot",
+        "cue": "attackCharge",
         "atmosphereId": "aurora-hint",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.891
+        "at": 0.961
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -344,22 +436,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 6,
       "stage": 6,
       "challenge": 0,
-      "score": 390,
+      "score": 200,
       "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 35,
-      "attackers": 2,
-      "enemy_bullets": 2,
+      "enemies": 36,
+      "attackers": 4,
+      "enemy_bullets": 1,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 35,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-hint",
@@ -371,7 +479,7 @@
         "referenceClipDuration": 0,
         "stage": 6,
         "challenge": false,
-        "at": 0.948
+        "at": 1.028
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -392,22 +500,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 7,
       "stage": 6,
       "challenge": 0,
-      "score": 390,
-      "lives": 2,
+      "score": 200,
+      "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 34,
-      "attackers": 3,
-      "enemy_bullets": 0,
+      "enemies": 36,
+      "attackers": 6,
+      "enemy_bullets": 2,
       "player_bullets": 1,
       "challenge_enemies": 0,
-      "formation_active": 34,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -419,7 +543,7 @@
         "referenceClipDuration": 0.82,
         "stage": 6,
         "challenge": false,
-        "at": 1.006
+        "at": 1.101
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -440,22 +564,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 8,
       "stage": 6,
       "challenge": 0,
-      "score": 390,
-      "lives": 2,
+      "score": 200,
+      "lives": 3,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 34,
-      "attackers": 3,
+      "enemies": 36,
+      "attackers": 4,
       "enemy_bullets": 2,
       "player_bullets": 0,
       "challenge_enemies": 0,
-      "formation_active": 34,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -467,7 +607,7 @@
         "referenceClipDuration": 0.82,
         "stage": 6,
         "challenge": false,
-        "at": 1.066
+        "at": 1.175
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -488,7 +628,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     }
   ]
 }

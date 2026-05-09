@@ -10,11 +10,11 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 2,
+    "max_attackers": 1,
     "max_enemy_bullets": 1,
     "max_player_bullets": 2,
     "max_challenge_enemies": 40,
-    "final_score": 5480,
+    "final_score": 5450,
     "final_lives": 3,
     "final_stage": 4,
     "final_challenge": false
@@ -136,6 +136,9 @@
       "player_bullets": 0,
       "challenge_enemies": 40,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "gameStart",
         "atmosphereId": "classic-arcade",
@@ -147,7 +150,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.578
+        "at": 0.586
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -168,7 +171,300 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 40
+      "challengeEnemyCount": 40,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 1,
@@ -184,6 +480,9 @@
       "player_bullets": 2,
       "challenge_enemies": 40,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -195,7 +494,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.662
+        "at": 0.689
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -216,7 +515,300 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 40
+      "challengeEnemyCount": 40,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 2,
@@ -232,6 +824,9 @@
       "player_bullets": 2,
       "challenge_enemies": 38,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -243,7 +838,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.721
+        "at": 0.762
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -264,7 +859,286 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 38
+      "challengeEnemyCount": 38,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 3,
@@ -280,6 +1154,9 @@
       "player_bullets": 2,
       "challenge_enemies": 38,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -291,7 +1168,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.78
+        "at": 0.826
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -312,7 +1189,286 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 38
+      "challengeEnemyCount": 38,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 4,
@@ -328,6 +1484,9 @@
       "player_bullets": 2,
       "challenge_enemies": 36,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -339,7 +1498,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.841
+        "at": 0.899
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -360,7 +1519,272 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 36
+      "challengeEnemyCount": 36,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 5,
@@ -376,6 +1800,9 @@
       "player_bullets": 2,
       "challenge_enemies": 31,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -387,7 +1814,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.898
+        "at": 0.96
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -408,7 +1835,237 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 31
+      "challengeEnemyCount": 31,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 6,
@@ -424,6 +2081,9 @@
       "player_bullets": 1,
       "challenge_enemies": 29,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -435,7 +2095,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 0.956
+        "at": 1.017
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -456,7 +2116,223 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 29
+      "challengeEnemyCount": 29,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 7,
@@ -472,6 +2348,9 @@
       "player_bullets": 2,
       "challenge_enemies": 28,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -483,7 +2362,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.014
+        "at": 1.076
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -504,7 +2383,216 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 28
+      "challengeEnemyCount": 28,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 8,
@@ -520,6 +2608,9 @@
       "player_bullets": 2,
       "challenge_enemies": 24,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -531,7 +2622,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.071
+        "at": 1.135
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -552,7 +2643,188 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 24
+      "challengeEnemyCount": 24,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 9,
@@ -568,6 +2840,9 @@
       "player_bullets": 2,
       "challenge_enemies": 23,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -579,7 +2854,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.132
+        "at": 1.195
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -600,7 +2875,181 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 23
+      "challengeEnemyCount": 23,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 10,
@@ -616,6 +3065,9 @@
       "player_bullets": 1,
       "challenge_enemies": 15,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "enemyBoom",
         "atmosphereId": "classic-arcade",
@@ -627,7 +3079,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.188
+        "at": 1.263
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -648,7 +3100,125 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 15
+      "challengeEnemyCount": 15,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 11,
@@ -664,6 +3234,9 @@
       "player_bullets": 2,
       "challenge_enemies": 14,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -675,7 +3248,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.246
+        "at": 1.335
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -696,7 +3269,118 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 14
+      "challengeEnemyCount": 14,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 12,
@@ -712,6 +3396,9 @@
       "player_bullets": 0,
       "challenge_enemies": 7,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -723,7 +3410,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.306
+        "at": 1.4
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -744,7 +3431,69 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 7
+      "challengeEnemyCount": 7,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "challengeEnemyFamilies": [
+        "classic"
+      ],
+      "challengePathFamilies": [
+        "classic-lane-wave"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "classic",
+          "pathFamily": "classic-lane-wave",
+          "lane": 4,
+          "wave": 4
+        }
+      ]
     },
     {
       "t": 13,
@@ -760,6 +3509,9 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "classic-arcade",
@@ -771,7 +3523,7 @@
         "referenceClipDuration": 0,
         "stage": 3,
         "challenge": true,
-        "at": 1.364
+        "at": 1.465
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -792,7 +3544,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 14,
@@ -808,6 +3564,9 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "challengeResults",
         "atmosphereId": "classic-arcade",
@@ -819,7 +3578,7 @@
         "referenceClipDuration": 1.55,
         "stage": 3,
         "challenge": true,
-        "at": 1.421
+        "at": 1.524
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -840,7 +3599,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 15,
@@ -856,6 +3619,9 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "challengeResults",
         "atmosphereId": "classic-arcade",
@@ -867,7 +3633,7 @@
         "referenceClipDuration": 1.55,
         "stage": 3,
         "challenge": true,
-        "at": 1.421
+        "at": 1.524
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -888,7 +3654,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 16,
@@ -904,6 +3674,9 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "stageTransition",
         "atmosphereId": "classic-arcade",
@@ -915,7 +3688,7 @@
         "referenceClipDuration": 0.86,
         "stage": 3,
         "challenge": true,
-        "at": 1.538
+        "at": 1.64
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -936,7 +3709,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 17,
@@ -952,6 +3729,9 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
       "audioCue": {
         "cue": "stageTransition",
         "atmosphereId": "classic-arcade",
@@ -963,7 +3743,7 @@
         "referenceClipDuration": 0.86,
         "stage": 3,
         "challenge": true,
-        "at": 1.538
+        "at": 1.64
       },
       "stagePresentation": {
         "id": "quiet-skies",
@@ -984,22 +3764,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 18,
       "stage": 4,
       "challenge": 0,
-      "score": 5300,
+      "score": 5350,
       "lives": 3,
       "player_x": 64,
       "player_vx": 0,
-      "enemies": 40,
+      "enemies": 39,
       "attackers": 0,
       "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 40,
+      "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-hint",
@@ -1011,7 +3807,7 @@
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 1.647
+        "at": 1.759
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1032,22 +3828,38 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 19,
       "stage": 4,
       "challenge": 0,
-      "score": 5480,
+      "score": 5400,
       "lives": 3,
       "player_x": 64,
       "player_vx": 0,
-      "enemies": 37,
+      "enemies": 38,
       "attackers": 0,
       "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 37,
+      "formation_active": 38,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-hint",
@@ -1059,7 +3871,7 @@
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 1.706
+        "at": 1.819
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1080,13 +3892,17 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 20,
       "stage": 4,
       "challenge": 0,
-      "score": 5480,
+      "score": 5450,
       "lives": 3,
       "player_x": 64,
       "player_vx": 0,
@@ -1096,6 +3912,18 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-hint",
@@ -1107,7 +3935,7 @@
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 1.764
+        "at": 1.883
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1128,13 +3956,17 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 21,
       "stage": 4,
       "challenge": 0,
-      "score": 5480,
+      "score": 5450,
       "lives": 3,
       "player_x": 64,
       "player_vx": 0,
@@ -1144,6 +3976,18 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -1155,7 +3999,7 @@
         "referenceClipDuration": 0.82,
         "stage": 4,
         "challenge": false,
-        "at": 1.824
+        "at": 1.966
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1176,13 +4020,17 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 22,
       "stage": 4,
       "challenge": 0,
-      "score": 5480,
+      "score": 5450,
       "lives": 3,
       "player_x": 64,
       "player_vx": 0,
@@ -1192,6 +4040,18 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-hint",
@@ -1203,7 +4063,7 @@
         "referenceClipDuration": 0.82,
         "stage": 4,
         "challenge": false,
-        "at": 1.881
+        "at": 2.025
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1224,13 +4084,17 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 23,
       "stage": 4,
       "challenge": 0,
-      "score": 5480,
+      "score": 5450,
       "lives": 3,
       "player_x": 64,
       "player_vx": 0,
@@ -1240,54 +4104,18 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 37,
-      "audioCue": {
-        "cue": "stagePulse",
-        "atmosphereId": "aurora-hint",
-        "audioTheme": "galaga-reference-assets",
-        "phase": "stage",
-        "variant": 8,
-        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "referenceClipStart": 0.18,
-        "referenceClipDuration": 0.82,
-        "stage": 4,
-        "challenge": false,
-        "at": 1.94
-      },
-      "stagePresentation": {
-        "id": "scorpion-dawn",
-        "atmosphereTheme": "aurora-hint",
-        "backgroundMode": "aurora-hint"
-      },
-      "visualAtmosphere": {
-        "id": "aurora-borealis",
-        "group": "aurora",
-        "phase": "stage",
-        "backgroundMode": "aurora-borealis",
-        "audioTheme": "aurora-rise",
-        "overrideThemeId": "aurora-borealis",
-        "starfield": {
-          "id": "aurora-borealis-stars",
-          "count": 88,
-          "alphaMin": 0.28,
-          "alphaMax": 0.64
-        }
-      },
-      "challengeEnemyCount": 0
-    },
-    {
-      "t": 24,
-      "stage": 4,
-      "challenge": 0,
-      "score": 5480,
-      "lives": 3,
-      "player_x": 64,
-      "player_vx": 0,
-      "enemies": 37,
-      "attackers": 2,
-      "enemy_bullets": 1,
-      "player_bullets": 0,
-      "challenge_enemies": 0,
-      "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
       "audioCue": {
         "cue": "attackCharge",
         "atmosphereId": "aurora-hint",
@@ -1299,7 +4127,7 @@
         "referenceClipDuration": 0,
         "stage": 4,
         "challenge": false,
-        "at": 1.998
+        "at": 2.085
       },
       "stagePresentation": {
         "id": "scorpion-dawn",
@@ -1320,7 +4148,75 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 24,
+      "stage": 4,
+      "challenge": 0,
+      "score": 5450,
+      "lives": 3,
+      "player_x": 64,
+      "player_vx": 0,
+      "enemies": 37,
+      "attackers": 1,
+      "enemy_bullets": 1,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "scorpion-stagger-entry"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 11,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 4,
+        "challenge": false,
+        "at": 2.147
+      },
+      "stagePresentation": {
+        "id": "scorpion-dawn",
+        "atmosphereTheme": "aurora-hint",
+        "backgroundMode": "aurora-hint"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-rise",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     }
   ]
 }

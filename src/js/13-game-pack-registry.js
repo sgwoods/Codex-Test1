@@ -192,8 +192,19 @@ function currentGamePackFormationLayout(stage){
  return layout;
 }
 
-function currentGamePackChallengeLayout(){
- return currentGamePack().challengeLayout;
+function currentGamePackChallengeLayout(stage){
+ const pack=currentGamePack();
+ const stageNumber=Number.isFinite(+stage)?+stage:(typeof S!=='undefined'?S.stage:1);
+ if(typeof pack.challengeLayoutForStage==='function')return pack.challengeLayoutForStage(stageNumber);
+ if(Array.isArray(pack.challengeLayouts)){
+  let layout=pack.challengeLayouts[0];
+  for(const candidate of pack.challengeLayouts){
+   if(stageNumber>=candidate.fromStage)layout=candidate;
+   else break;
+  }
+  return layout;
+ }
+ return pack.challengeLayout;
 }
 
 function currentGamePackFrameAccentTheme(stagePresentation){

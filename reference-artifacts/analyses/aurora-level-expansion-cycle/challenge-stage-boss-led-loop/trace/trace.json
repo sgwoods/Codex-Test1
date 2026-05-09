@@ -1,0 +1,3905 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
+  "window_id": "challenge-stage-boss-led-loop",
+  "scenario": "stage15-challenge-boss-led-loop",
+  "seed": 15015,
+  "duration_s": 24,
+  "summary": {
+    "sample_count": 25,
+    "player_x_min": 9,
+    "player_x_max": 271,
+    "player_x_range": 262,
+    "max_attackers": 8,
+    "max_enemy_bullets": 3,
+    "max_player_bullets": 2,
+    "max_challenge_enemies": 40,
+    "final_score": 3270,
+    "final_lives": 4,
+    "final_stage": 16,
+    "final_challenge": false
+  },
+  "captures": [
+    {
+      "t": 0,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-000.png"
+    },
+    {
+      "t": 1,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-001.png"
+    },
+    {
+      "t": 2,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-002.png"
+    },
+    {
+      "t": 3,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-003.png"
+    },
+    {
+      "t": 4,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-004.png"
+    },
+    {
+      "t": 5,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-005.png"
+    },
+    {
+      "t": 6,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-006.png"
+    },
+    {
+      "t": 7,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-007.png"
+    },
+    {
+      "t": 8,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-008.png"
+    },
+    {
+      "t": 9,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-009.png"
+    },
+    {
+      "t": 10,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-010.png"
+    },
+    {
+      "t": 11,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-011.png"
+    },
+    {
+      "t": 12,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-012.png"
+    },
+    {
+      "t": 13,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-013.png"
+    },
+    {
+      "t": 14,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-014.png"
+    },
+    {
+      "t": 15,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-015.png"
+    },
+    {
+      "t": 16,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-016.png"
+    },
+    {
+      "t": 17,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-017.png"
+    },
+    {
+      "t": 18,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-018.png"
+    },
+    {
+      "t": 19,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-019.png"
+    },
+    {
+      "t": 20,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-020.png"
+    },
+    {
+      "t": 21,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-021.png"
+    },
+    {
+      "t": 22,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-022.png"
+    },
+    {
+      "t": 23,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-023.png"
+    },
+    {
+      "t": 24,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/sample-024.png"
+    }
+  ],
+  "samples": [
+    {
+      "t": 0,
+      "stage": 15,
+      "challenge": 1,
+      "score": 0,
+      "lives": 5,
+      "player_x": 140,
+      "player_vx": 0,
+      "enemies": 40,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 40,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "gameStart",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 0.587
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 40,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 1,
+      "stage": 15,
+      "challenge": 1,
+      "score": 0,
+      "lives": 5,
+      "player_x": 210.42,
+      "player_vx": 245.71,
+      "enemies": 40,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 40,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 0.686
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 40,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 0
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 2,
+      "stage": 15,
+      "challenge": 1,
+      "score": 300,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 37,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 37,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 0.763
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 37,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 3,
+      "stage": 15,
+      "challenge": 1,
+      "score": 500,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 35,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 35,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 0.825
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 35,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 4,
+      "stage": 15,
+      "challenge": 1,
+      "score": 700,
+      "lives": 5,
+      "player_x": 66.81,
+      "player_vx": -248,
+      "enemies": 33,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 33,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 0.892
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 33,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 5,
+      "stage": 15,
+      "challenge": 1,
+      "score": 1200,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 28,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 28,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 0.951
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 28,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 0
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 3,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 6,
+      "stage": 15,
+      "challenge": 1,
+      "score": 1600,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 24,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
+      "challenge_enemies": 24,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "enemyBoom",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.01
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 24,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 7,
+      "stage": 15,
+      "challenge": 1,
+      "score": 1700,
+      "lives": 5,
+      "player_x": 40.88,
+      "player_vx": 228.4,
+      "enemies": 23,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 23,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.081
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 23,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 2,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 8,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2100,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 19,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
+      "challenge_enemies": 19,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "bossBoom",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.149
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 19,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 1
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 3
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 6,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 9,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2600,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 14,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 14,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.209
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 14,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 10,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2700,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 13,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 13,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.266
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 13,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 0
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 11,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2800,
+      "lives": 5,
+      "player_x": 141.21,
+      "player_vx": -247.91,
+      "enemies": 10,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
+      "challenge_enemies": 10,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.326
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 10,
+      "challengeEnemyTypes": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "challengeEnemyFamilies": [
+        "dragonfly"
+      ],
+      "challengePathFamilies": [
+        "boss-led-loop"
+      ],
+      "challengeEnemies": [
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 1
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 2
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 4,
+          "wave": 2
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 2
+        },
+        {
+          "type": "bee",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 7,
+          "wave": 2
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 3
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 3
+        },
+        {
+          "type": "boss",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 0,
+          "wave": 4
+        },
+        {
+          "type": "rogue",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 1,
+          "wave": 4
+        },
+        {
+          "type": "but",
+          "family": "dragonfly",
+          "pathFamily": "boss-led-loop",
+          "lane": 5,
+          "wave": 4
+        }
+      ]
+    },
+    {
+      "t": 12,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2900,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 0,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.382
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 13,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2900,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 0,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "challengeResults",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-challenging-stage-results.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 1.55,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.44
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 14,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2900,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 0,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "challengeResults",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-challenging-stage-results.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 1.55,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.44
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 15,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2900,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 0,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "stageTransition",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga-level-flag-v1.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0.86,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.559
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 16,
+      "stage": 15,
+      "challenge": 1,
+      "score": 2900,
+      "lives": 5,
+      "player_x": 9,
+      "player_vx": 0,
+      "enemies": 0,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 0,
+      "formationEnemyTypes": [],
+      "formationEnemyFamilies": [],
+      "formationPathFamilies": [],
+      "audioCue": {
+        "cue": "stageTransition",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga-level-flag-v1.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0.86,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.559
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 17,
+      "stage": 16,
+      "challenge": 0,
+      "score": 2950,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 39,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
+      "challenge_enemies": 0,
+      "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "enemyBoom",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 16,
+        "challenge": false,
+        "at": 1.676
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 18,
+      "stage": 16,
+      "challenge": 0,
+      "score": 2950,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 39,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 16,
+        "challenge": false,
+        "at": 1.734
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 19,
+      "stage": 16,
+      "challenge": 0,
+      "score": 2950,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 39,
+      "attackers": 0,
+      "enemy_bullets": 1,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 16,
+        "challenge": false,
+        "at": 1.794
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 20,
+      "stage": 16,
+      "challenge": 0,
+      "score": 2950,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 39,
+      "attackers": 8,
+      "enemy_bullets": 3,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 3,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 16,
+        "challenge": false,
+        "at": 1.852
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 21,
+      "stage": 16,
+      "challenge": 0,
+      "score": 3270,
+      "lives": 5,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 37,
+      "attackers": 4,
+      "enemy_bullets": 1,
+      "player_bullets": 1,
+      "challenge_enemies": 0,
+      "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "enemyBoom",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 16,
+        "challenge": false,
+        "at": 1.91
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 22,
+      "stage": 16,
+      "challenge": 0,
+      "score": 3270,
+      "lives": 4,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 36,
+      "attackers": 1,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 8,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 16,
+        "challenge": false,
+        "at": 1.968
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 23,
+      "stage": 16,
+      "challenge": 0,
+      "score": 3270,
+      "lives": 4,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 36,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 11,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 16,
+        "challenge": false,
+        "at": 2.027
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 24,
+      "stage": 16,
+      "challenge": 0,
+      "score": 3270,
+      "lives": 4,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 36,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "classic",
+        "scorpion"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 13,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 16,
+        "challenge": false,
+        "at": 2.082
+      },
+      "stagePresentation": {
+        "id": "crown-aurora",
+        "atmosphereTheme": "aurora-crown",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    }
+  ]
+}

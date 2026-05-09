@@ -29,7 +29,7 @@
     },
     {
       "family": "player_hit",
-      "observed": false
+      "observed": true
     },
     {
       "family": "wave_clear",
@@ -185,7 +185,7 @@
       "event_id": "late-run-escort-variant-009-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 3.9,
+      "time_s": 3.917,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -203,7 +203,25 @@
       "event_id": "late-run-escort-variant-010-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 4.633,
+      "time_s": 4,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "late-run-escort-variant-011-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 4.683,
       "duration_s": null,
       "entity_family": "bee",
       "entity_id": null,
@@ -218,12 +236,12 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-escort-variant-011-enemy_dive_start",
+      "event_id": "late-run-escort-variant-012-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 4.967,
+      "time_s": 4.833,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 9,
@@ -236,12 +254,30 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-escort-variant-012-enemy_projectile",
+      "event_id": "late-run-escort-variant-013-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 5.8,
+      "time_s": 5.65,
       "duration_s": null,
       "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 6,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "late-run-escort-variant-014-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 5.767,
+      "duration_s": null,
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 5,
@@ -251,87 +287,51 @@
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-015-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 6.667,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-016-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 7.417,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 0,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-escort-variant-013-enemy_dive_start",
+      "event_id": "late-run-escort-variant-017-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 5.9,
+      "time_s": 7.6,
       "duration_s": null,
-      "entity_family": "but",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 4,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "late-run-escort-variant-014-enemy_dive_start",
-      "event_family": "enemy_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 6.783,
-      "duration_s": null,
-      "entity_family": "boss",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 0,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "late-run-escort-variant-015-escort_dive_start",
-      "event_family": "escort_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 6.783,
-      "duration_s": null,
-      "entity_family": "but",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 0,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "late-run-escort-variant-016-escort_dive_start",
-      "event_family": "escort_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 6.783,
-      "duration_s": null,
-      "entity_family": "but",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 0,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "late-run-escort-variant-017-escort_dive_start",
-      "event_family": "escort_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 6.783,
-      "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "bee",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -347,9 +347,9 @@
       "event_id": "late-run-escort-variant-018-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 7.517,
+      "time_s": 8.417,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -365,9 +365,9 @@
       "event_id": "late-run-escort-variant-019-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 7.733,
+      "time_s": 8.5,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "boss",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -380,12 +380,12 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-escort-variant-020-enemy_dive_start",
-      "event_family": "enemy_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 8.617,
+      "event_id": "late-run-escort-variant-020-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 8.567,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "bee",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -395,36 +395,18 @@
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "late-run-escort-variant-021-enemy_projectile",
-      "event_family": "enemy_projectile",
-      "runtime_type": "enemy_bullet_fired",
-      "time_s": 9.35,
-      "duration_s": null,
-      "entity_family": "but",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 5,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-escort-variant-022-enemy_dive_start",
+      "event_id": "late-run-escort-variant-021-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 9.533,
+      "time_s": 9.417,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "boss",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 6,
+        "player_lane": 7,
         "source_lane": null,
         "source_column": null
       },
@@ -434,15 +416,15 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-escort-variant-023-enemy_dive_start",
-      "event_family": "enemy_dive_start",
+      "event_id": "late-run-escort-variant-022-escort_dive_start",
+      "event_family": "escort_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 10.433,
+      "time_s": 9.417,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 9,
+        "player_lane": 7,
         "source_lane": null,
         "source_column": null
       },
@@ -452,28 +434,64 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-escort-variant-024-enemy_projectile",
-      "event_family": "enemy_projectile",
-      "runtime_type": "enemy_bullet_fired",
-      "time_s": 10.65,
+      "event_id": "late-run-escort-variant-023-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 9.417,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 9,
+        "player_lane": 7,
         "source_lane": null,
         "source_column": null
       },
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-024-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 9.417,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 7,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
       "event_id": "late-run-escort-variant-025-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 11.167,
+      "time_s": 10.067,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "late-run-escort-variant-026-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 10.117,
       "duration_s": null,
       "entity_family": "bee",
       "entity_id": null,
@@ -488,10 +506,28 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "late-run-escort-variant-026-enemy_dive_start",
+      "event_id": "late-run-escort-variant-027-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 11.467,
+      "time_s": 10.3,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-028-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 10.3,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -506,10 +542,10 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "late-run-escort-variant-027-enemy_projectile",
-      "event_family": "enemy_projectile",
-      "runtime_type": "enemy_bullet_fired",
-      "time_s": 11.5,
+      "event_id": "late-run-escort-variant-029-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 10.3,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -521,7 +557,133 @@
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-030-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 10.3,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-031-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 11.083,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "late-run-escort-variant-032-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 11.483,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-033-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 11.483,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-034-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 11.483,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-035-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 11.483,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "late-run-escort-variant-036-player_hit",
+      "event_family": "player_hit",
+      "runtime_type": "ship_lost",
+      "time_s": 11.733,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": 795869550,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event ship_lost"
     }
   ]
 }

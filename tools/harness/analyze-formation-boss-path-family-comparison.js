@@ -131,15 +131,17 @@ function pointFeatures(track){
 function classifyTrack(track){
   const features = pointFeatures(track);
   const families = [];
-  const slotObserved = !!(track.slotObserved || track.challengeSlotObserved);
-  if(track.kind === 'regular' && slotObserved) families.push('rack-slot-settle');
-  if(track.kind === 'regular' && features.pathLength > 90 && features.yRange > 35) families.push('entry-arc-to-rack');
-  if(track.type === 'boss' && features.pathLength > 60) families.push('boss-entry-or-dive');
+	  const slotObserved = !!(track.slotObserved || track.challengeSlotObserved);
+	  if(track.kind === 'regular' && slotObserved) families.push('rack-slot-settle');
+	  if(track.kind === 'regular' && features.pathLength > 90 && features.yRange > 35) families.push('entry-arc-to-rack');
+	  if(track.kind === 'regular' && track.pathFamily && track.pathFamily !== 'classic-center-arc-entry') families.push(`entry-${track.pathFamily}`);
+	  if(track.type === 'boss' && features.pathLength > 60) families.push('boss-entry-or-dive');
   if(track.type === 'boss' && features.turnCount >= 2) families.push('boss-looping-arc');
   if(track.escort && features.pathLength > 55) families.push('escort-paired-dive');
-  if(track.kind === 'challenge' && slotObserved) families.push('challenge-lane-wave');
-  if(track.kind === 'challenge' && features.pathLength > 70 && features.xRange > 20) families.push('challenge-sweeping-path');
-  if(features.lowerFieldShare > 0.15 && features.yRange > 70) families.push('player-pressure-dive');
+	  if(track.kind === 'challenge' && slotObserved) families.push('challenge-lane-wave');
+	  if(track.kind === 'challenge' && features.pathLength > 70 && features.xRange > 20) families.push('challenge-sweeping-path');
+	  if(track.kind === 'challenge' && track.pathFamily && track.pathFamily !== 'classic-lane-wave') families.push(`challenge-${track.pathFamily}`);
+	  if(features.lowerFieldShare > 0.15 && features.yRange > 70) families.push('player-pressure-dive');
   return {
     id: track.id,
     kind: track.kind,

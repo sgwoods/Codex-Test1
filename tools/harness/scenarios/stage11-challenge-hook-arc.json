@@ -1,0 +1,24 @@
+{
+  "name": "stage11-challenge-hook-arc",
+  "seed": 11011,
+  "duration": 24,
+  "config": {
+    "stage": 11,
+    "ships": 5,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.6, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.81, "action": "down", "code": "ArrowRight" },
+    { "t": 6.0, "action": "up", "code": "ArrowRight" },
+    { "t": 6.01, "action": "down", "code": "ArrowLeft" },
+    { "t": 9.4, "action": "up", "code": "ArrowLeft" },
+    { "t": 9.41, "action": "down", "code": "ArrowRight" },
+    { "t": 13.3, "action": "up", "code": "ArrowRight" },
+    { "t": 13.31, "action": "down", "code": "ArrowLeft" },
+    { "t": 17.7, "action": "up", "code": "ArrowLeft" },
+    { "t": 20.8, "action": "up", "code": "Space" }
+  ]
+}

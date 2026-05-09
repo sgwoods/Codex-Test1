@@ -12,9 +12,12 @@ const SCENARIO_ROOT = path.join(ROOT, 'tools', 'harness', 'scenarios');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'formation-boss-path-slot-extraction');
 
 const WINDOW_SCENARIOS = {
-  'stage-1-baseline': 'stage1-descent',
-  'challenge-stage-candidate': 'stage3-challenge',
-  'mid-run-pressure': 'stage6-regular',
+	  'stage-1-baseline': 'stage1-descent',
+	  'challenge-stage-candidate': 'stage3-challenge',
+	  'challenge-stage-scorpion-cross': 'stage7-challenge-cross-sweep',
+	  'challenge-stage-stingray-hook': 'stage11-challenge-hook-arc',
+	  'challenge-stage-boss-led-loop': 'stage15-challenge-boss-led-loop',
+	  'mid-run-pressure': 'stage6-regular',
   'mid-run-entry-variant': 'stage8-entry-variant',
   'late-run-cleanup-or-failure': 'stage12-variety',
   'late-run-escort-variant': 'stage14-escort-variant'
@@ -110,6 +113,8 @@ function normalizeTarget(target, kind){
     rawId: target.id,
     kind,
     type: target.type,
+    family: target.family || null,
+    pathFamily: target.pathFamily || null,
     row: Number.isFinite(+target.row) ? +target.row : null,
     column: Number.isFinite(+target.column) ? +target.column : null,
     lane: Number.isFinite(+target.lane) ? +target.lane : null,
@@ -240,6 +245,8 @@ function summarizeTrack(id, points){
     id,
     kind: first.kind,
     type: first.type,
+    family: first.family,
+    pathFamily: first.pathFamily,
     row: first.row,
     column: first.column,
     lane: first.lane,

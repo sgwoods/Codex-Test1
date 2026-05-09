@@ -84,25 +84,61 @@ function updateChallengeEnemy(e,dt){
  // Challenge-stage fidelity is intentionally isolated here so we can tune the
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
- const fm=familyMotion(e);
- const classicStage3=S.stage===3&&e.fam==='classic';
- e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
- const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
- const laneX=PLAY_W/2+side*(48+slot*16);
- const topY=38+wave*14+row*8;
- if(u<3.15){
-  const q=u/3.15,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
-  e.x=startX+(laneX-startX)*curve;
-  e.y=topY+Math.sin(q*3.14+p)*2*fm.challengeDrop;
- }else if(u<9.7){
-  const q=(u-3.15)/6.55;
-  e.x=laneX+sweep*Math.sin(q*Math.PI)*28*fm.challengeSweep;
-  e.y=topY+q*(classicStage3?5.8:6.5)*fm.challengeDrop+Math.sin(q*5.5+p)*(classicStage3?.82:.95);
- }else{
-  const q=(u-9.7)/3.35;
-  e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
-  e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
- }
+	 const fm=familyMotion(e);
+	 const classicStage3=S.stage===3&&e.fam==='classic';
+	 e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
+	 const pathFamily=e.pathFamily||'classic-lane-wave';
+	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
+	 const laneX=PLAY_W/2+side*(48+slot*16);
+	 const topY=38+wave*14+row*8;
+	 if(u<3.15){
+	  const q=u/3.15,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
+	  if(pathFamily==='hook-arc'){
+	   e.x=startX+(laneX-startX)*(q<.58?Math.sin(q/.58*Math.PI/2):.82+(q-.58)*.43);
+	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
+	  }else if(pathFamily==='boss-led-loop'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2+p)*9*arcAmp;
+	   e.y=topY+Math.sin(q*Math.PI*2.2+p)*6*arcAmp;
+	  }else if(pathFamily==='cross-sweep'){
+	   e.x=startX+(laneX-startX)*q+sweep*Math.sin(q*Math.PI+p)*18*arcAmp;
+	   e.y=topY+Math.sin(q*Math.PI*1.25+p)*4*dropAmp;
+	  }else{
+	   e.x=startX+(laneX-startX)*curve;
+	   e.y=topY+Math.sin(q*3.14+p)*2*fm.challengeDrop;
+	  }
+	 }else if(u<9.7){
+	  const q=(u-3.15)/6.55;
+	  if(pathFamily==='hook-arc'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
+	  }else if(pathFamily==='boss-led-loop'){
+	   const leader=e.t==='boss'?1:.72;
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.05+p*.35)*34+Math.sin(q*Math.PI)*18)*fm.challengeSweep*arcAmp*leader;
+	   e.y=topY+q*9*dropAmp+Math.sin(q*Math.PI*2.6+p)*5*leader;
+	  }else if(pathFamily==='cross-sweep'){
+	   e.x=laneX-sweep*Math.sin(q*Math.PI)*54*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*7.5*dropAmp+Math.sin(q*6.8+p)*1.6;
+	  }else{
+	   e.x=laneX+sweep*Math.sin(q*Math.PI)*28*fm.challengeSweep;
+	   e.y=topY+q*(classicStage3?5.8:6.5)*fm.challengeDrop+Math.sin(q*5.5+p)*(classicStage3?.82:.95);
+	  }
+	 }else{
+	  const q=(u-9.7)/3.35;
+	  if(pathFamily==='hook-arc'){
+	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
+	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='boss-led-loop'){
+	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
+	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='cross-sweep'){
+	   e.x=laneX+sweep*(20-q*70)*fm.challengeSweep*arcAmp+Math.sin(q*8.2+p)*3.2;
+	   e.y=topY+7+q*202*fm.challengeDrop*dropAmp;
+	  }else{
+	   e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
+	   e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
+	  }
+	 }
  if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){
@@ -123,17 +159,33 @@ function updateEnemy(e,dt,t,T,p){
  const fm=familyMotion(e);
  const pulseX=(S.stage>=8?28:S.stage>=4?34:38)*fm.pulseX,pulseY=(S.stage>=8?1.9:S.stage>=4?2.6:3.4)*fm.pulseY;
  const tx=e.tx+Math.sin(t*.92+e.r*.45)*pulseX,ty=e.ty+Math.sin(t*1.35+e.c*.55)*pulseY;
- if(!e.form){
-  if(e.spawn>0){
-   e.spawn-=dt;
-   return;
-  }
-  const stage1=S.stage===1&&!S.challenge;
-  e.en+=dt*(stage1?1.02:1.35);
-  const k=Math.max(0,1-e.en*(stage1?0.35:0.42));
-  const sx=tx+Math.sin(e.en*(stage1?5.6:5)+e.ph)*(stage1?170:(S.stage>=6?136:150))*fm.entryX*k;
-  const sy=ty+Math.cos(e.en*(stage1?4.5:4)+e.ph)*(stage1?58:(S.stage>=6?42:48))*fm.entryY*k;
-  e.x+=(sx-e.x)*Math.min(1,dt*(stage1?3.1:3.6));
+	 if(!e.form){
+	  if(e.spawn>0){
+	   e.spawn-=dt;
+	   return;
+	  }
+	  const stage1=S.stage===1&&!S.challenge;
+	  const entryFamily=e.pathFamily||'classic-center-arc-entry';
+	  e.en+=dt*(stage1?1.02:1.35);
+	  const k=Math.max(0,1-e.en*(stage1?0.35:0.42));
+	  let sx=tx+Math.sin(e.en*(stage1?5.6:5)+e.ph)*(stage1?170:(S.stage>=6?136:150))*fm.entryX*k;
+	  let sy=ty+Math.cos(e.en*(stage1?4.5:4)+e.ph)*(stage1?58:(S.stage>=6?42:48))*fm.entryY*k;
+	  if(!stage1&&entryFamily==='scorpion-stagger-entry'){
+	   sx=tx+Math.sin(e.en*6.2+e.ph+e.r*.7)*(128+e.r*9)*fm.entryX*k+(e.c%2?-10:10)*k;
+	   sy=ty+Math.cos(e.en*3.5+e.ph)*(36+e.r*4)*fm.entryY*k+Math.sin(e.en*5+e.c)*5*k;
+	  }else if(!stage1&&entryFamily==='stingray-wide-flank-entry'){
+	   const mirror=e.entryMirror||1;
+	   sx=tx+mirror*Math.sin(e.en*4.4+e.ph)*(164+e.r*8)*fm.entryX*k;
+	   sy=ty+Math.cos(e.en*5.2+e.ph+e.c*.2)*(34+e.r*5)*fm.entryY*k;
+	  }else if(!stage1&&entryFamily==='galboss-low-hook-entry'){
+	   const hook=Math.sin(Math.min(1,e.en/2.2)*Math.PI);
+	   sx=tx+Math.sin(e.en*3.8+e.ph)*(112+e.r*8)*fm.entryX*k+(e.c<5?-1:1)*hook*24*k;
+	   sy=ty+Math.cos(e.en*4.8+e.ph)*(42+e.r*4)*fm.entryY*k+hook*18*k;
+	  }else if(!stage1&&entryFamily==='late-boss-column-weave'){
+	   sx=tx+Math.sin(e.en*6.8+e.c*.65)*(96+e.r*12)*fm.entryX*k;
+	   sy=ty+Math.cos(e.en*3.2+e.ph)*(48+e.r*5)*fm.entryY*k+Math.sin(e.en*7.1+e.r)*7*k;
+	  }
+	  e.x+=(sx-e.x)*Math.min(1,dt*(stage1?3.1:3.6));
   e.y+=(sy-e.y)*Math.min(1,dt*(stage1?3:3.4));
   if(e.en>(stage1?2.9:2.4))e.form=1;
   return;

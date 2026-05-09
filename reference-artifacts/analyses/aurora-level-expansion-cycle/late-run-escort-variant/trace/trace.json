@@ -10,12 +10,12 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 5,
-    "max_enemy_bullets": 2,
+    "max_attackers": 9,
+    "max_enemy_bullets": 3,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 510,
-    "final_lives": 5,
+    "final_score": 720,
+    "final_lives": 4,
     "final_stage": 14,
     "final_challenge": false
   },
@@ -88,6 +88,17 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 40,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "gameStart",
         "atmosphereId": "aurora-borealis",
@@ -99,7 +110,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.578
+        "at": 0.584
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -120,7 +131,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 1,
@@ -136,6 +151,17 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -147,7 +173,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.659
+        "at": 0.701
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -168,7 +194,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 2,
@@ -184,6 +214,17 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "enemyShot",
         "atmosphereId": "aurora-borealis",
@@ -195,7 +236,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.721
+        "at": 0.769
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -216,7 +257,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 3,
@@ -232,6 +277,17 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 37,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -243,7 +299,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.78
+        "at": 0.838
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -264,7 +320,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 4,
@@ -276,12 +336,23 @@
       "player_vx": 0,
       "enemies": 36,
       "attackers": 5,
-      "enemy_bullets": 2,
+      "enemy_bullets": 3,
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
-        "cue": "playerShot",
+        "cue": "enemyShot",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
@@ -291,7 +362,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.836
+        "at": 0.901
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -312,7 +383,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 5,
@@ -328,18 +403,29 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
-        "cue": "stagePulse",
+        "cue": "attackCharge",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 4,
-        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "referenceClipStart": 0.18,
-        "referenceClipDuration": 0.82,
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.893
+        "at": 0.971
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -360,7 +446,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 6,
@@ -376,6 +466,17 @@
       "player_bullets": 1,
       "challenge_enemies": 0,
       "formation_active": 35,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "enemyBoom",
         "atmosphereId": "aurora-borealis",
@@ -387,7 +488,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.954
+        "at": 1.034
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -408,7 +509,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 7,
@@ -419,23 +524,34 @@
       "player_x": 9,
       "player_vx": 0,
       "enemies": 33,
-      "attackers": 5,
+      "attackers": 2,
       "enemy_bullets": 1,
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 33,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
-        "cue": "attackCharge",
+        "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.01
+        "at": 1.11
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -456,22 +572,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 8,
       "stage": 14,
       "challenge": 0,
-      "score": 410,
+      "score": 510,
       "lives": 5,
       "player_x": 9,
       "player_vx": 0,
-      "enemies": 33,
-      "attackers": 5,
+      "enemies": 32,
+      "attackers": 1,
       "enemy_bullets": 1,
-      "player_bullets": 2,
+      "player_bullets": 1,
       "challenge_enemies": 0,
-      "formation_active": 33,
+      "formation_active": 32,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
@@ -483,7 +614,7 @@
         "referenceClipDuration": 0.82,
         "stage": 14,
         "challenge": false,
-        "at": 1.069
+        "at": 1.181
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -504,22 +635,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 9,
       "stage": 14,
       "challenge": 0,
-      "score": 410,
+      "score": 510,
       "lives": 5,
       "player_x": 55.05,
       "player_vx": 239.27,
-      "enemies": 33,
+      "enemies": 32,
       "attackers": 2,
-      "enemy_bullets": 0,
+      "enemy_bullets": 2,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 33,
+      "formation_active": 32,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -531,7 +677,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.132
+        "at": 1.244
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -552,34 +698,49 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 10,
       "stage": 14,
       "challenge": 0,
-      "score": 460,
+      "score": 560,
       "lives": 5,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 32,
-      "attackers": 2,
-      "enemy_bullets": 1,
+      "enemies": 31,
+      "attackers": 5,
+      "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 32,
+      "formation_active": 31,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
-        "cue": "playerShot",
+        "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
+        "variant": 17,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
         "stage": 14,
         "challenge": false,
-        "at": 1.194
+        "at": 1.32
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -600,22 +761,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 11,
       "stage": 14,
       "challenge": 0,
-      "score": 510,
+      "score": 560,
       "lives": 5,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 31,
-      "attackers": 2,
-      "enemy_bullets": 1,
-      "player_bullets": 2,
+      "attackers": 9,
+      "enemy_bullets": 2,
+      "player_bullets": 1,
       "challenge_enemies": 0,
       "formation_active": 31,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -627,7 +803,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.254
+        "at": 1.393
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -648,22 +824,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 12,
       "stage": 14,
       "challenge": 0,
-      "score": 510,
-      "lives": 5,
+      "score": 720,
+      "lives": 4,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 31,
-      "attackers": 1,
-      "enemy_bullets": 1,
+      "enemies": 29,
+      "attackers": 8,
+      "enemy_bullets": 0,
       "player_bullets": 0,
       "challenge_enemies": 0,
-      "formation_active": 31,
+      "formation_active": 29,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "galboss"
+      ],
+      "formationPathFamilies": [
+        "late-boss-column-weave"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
@@ -675,7 +866,7 @@
         "referenceClipDuration": 0.82,
         "stage": 14,
         "challenge": false,
-        "at": 1.312
+        "at": 1.464
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -696,7 +887,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     }
   ]
 }

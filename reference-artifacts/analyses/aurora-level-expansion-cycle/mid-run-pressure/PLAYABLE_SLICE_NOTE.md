@@ -12,11 +12,11 @@ Duration: 8s
 
 - samples: 9
 - player x range: 262
-- max attackers: 3
+- max attackers: 6
 - max enemy bullets: 2
 - max challenge enemies: 0
 - final stage: 6
-- final score: 390
+- final score: 200
 
 ## Event Coverage
 
@@ -25,7 +25,7 @@ Duration: 8s
 - `flank_dive_start`: not observed in this run
 - `escort_dive_start`: observed
 - `enemy_projectile`: observed
-- `player_hit`: observed
+- `player_hit`: not observed in this run
 - `wave_clear`: not observed in this run
 
 ## Implementation Use
