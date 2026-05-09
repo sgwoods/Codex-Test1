@@ -154,6 +154,7 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
     BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
     LANE_RELEASE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html',
     LANE_CONFORMANCE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
+    LANE_CONFORMANCE_DATA_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard-data.json',
     LANE_PROJECT_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/project-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html',
     PUBLIC_FOOTER_NOTE: 'Public portfolio summary synced to the production repository state.',

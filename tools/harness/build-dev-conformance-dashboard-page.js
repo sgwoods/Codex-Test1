@@ -61,6 +61,7 @@ function html(data, options = {}){
   const markdownLabel = options.markdownLabel || 'Markdown';
   const dataHref = options.dataHref || 'conformance-dashboard-data.json';
   const artifactBase = normalizeArtifactBase(options.artifactBase || '../');
+  const rawArtifactBase = normalizeArtifactBase(options.rawArtifactBase || artifactBase);
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -305,6 +306,10 @@ function html(data, options = {}){
     }
     .costStrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 12px}
     .costPanelGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .chartGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .chartCard{display:grid;gap:8px}
+    .chartCard img{width:100%;height:auto;border:1px solid var(--line);border-radius:7px;background:#fff}
+    .chartLinks{display:flex;gap:8px;flex-wrap:wrap}
     .compactTable th,.compactTable td{font-size:13px;padding:8px;overflow-wrap:anywhere}
     .ingestionList{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
     .ingestionItem{display:grid;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:var(--shadow);min-width:0}
@@ -333,7 +338,7 @@ function html(data, options = {}){
       .split{grid-template-columns:1fr}
       .metricRow{grid-template-columns:38px minmax(0,1fr) minmax(82px,.35fr);align-items:start}
       .metricNext,.metricRow .costCell,.metricRow .detailButton{grid-column:2/-1}
-      .costStrip,.costPanelGrid,.detailGrid{grid-template-columns:1fr}
+      .costStrip,.costPanelGrid,.detailGrid,.chartGrid{grid-template-columns:1fr}
     }
     @media (max-width:640px){
       .shell{padding:16px}
@@ -374,12 +379,13 @@ function html(data, options = {}){
     const statusLine = document.getElementById('statusLine');
     let dashboard = JSON.parse(document.getElementById('initial-data').textContent);
     let lastRefresh = Date.now();
-    let activeTab = 'conformance';
+    let activeTab = ['conformance', 'cost', 'ingestion'].includes(location.hash.replace('#', '')) ? location.hash.replace('#', '') : 'conformance';
     let activeDetail = null;
     let activeGameKey = localStorage.getItem('platinumConformanceDashboardGame') || dashboard.activeGameKey || 'aurora-galactica';
     const refreshMs = 30000;
     const dataHref = ${JSON.stringify(dataHref)};
     const artifactBase = ${JSON.stringify(artifactBase)};
+    const rawArtifactBase = ${JSON.stringify(rawArtifactBase)};
 
     function esc(value){
       return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -419,6 +425,12 @@ function html(data, options = {}){
       if(!value) return '#';
       if(/^https?:/i.test(value)) return value;
       return artifactBase + encodeURI(value);
+    }
+
+    function rawArtifactHref(value){
+      if(!value) return '#';
+      if(/^https?:/i.test(value)) return value;
+      return rawArtifactBase + encodeURI(value);
     }
 
     function gameProfiles(){
@@ -670,16 +682,40 @@ function html(data, options = {}){
         + '</tbody></table>';
     }
 
+    function chartTitle(value){
+      const name = String(value || '').split('/').pop() || 'chart';
+      return name.replace(/\\.svg$/i, '').replace(/-/g, ' ');
+    }
+
+    function economicsCharts(economics){
+      const charts = Array.isArray(economics.charts) ? economics.charts : [];
+      if(!charts.length){
+        return '<p class="small">No economics charts generated yet. Run the conformance economics analysis before release review.</p>';
+      }
+      return '<div class="chartGrid">' + charts.map(chart => {
+        return '<article class="card chartCard">'
+          + '<h2>' + esc(chartTitle(chart)) + '</h2>'
+          + '<a href="' + esc(artifactHref(chart)) + '"><img src="' + esc(rawArtifactHref(chart)) + '" alt="' + esc(chartTitle(chart)) + ' chart"></a>'
+          + '<div class="chartLinks"><a href="' + esc(artifactHref(chart)) + '">Open artifact</a><a href="' + esc(dataHref) + '">Open dashboard data</a></div>'
+          + '</article>';
+      }).join('') + '</div>';
+    }
+
     function costView(data, rows){
       const economics = data.economicsSummary || {};
       return \`
         <section>
           <h2>Cost / Value</h2>
+          <p class="small">This is the primary graphical deep dive for conformance economics: score movement versus measured local CPU/browser work, GPU-equivalent model/API usage, artifact growth, and expected metric lift. Use it to decide which conformance axis deserves the next long compute cycle.</p>
           <div class="costStrip">
             <div class="card"><span class="label">Measured runs</span><span class="value">\${esc(economics.measuredRuns || 0)}</span></div>
             <div class="card"><span class="label">Wall time</span><span class="value">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min</span></div>
             <div class="card"><span class="label">CPU time</span><span class="value">\${esc(Math.round((economics.cpuSeconds || 0) / 60))} min</span></div>
           </div>
+          <section class="card">
+            <h2>Economics Charts</h2>
+            \${economicsCharts(economics)}
+          </section>
           <div class="costPanelGrid">
             <section class="card">
               <h2>Metric Investment Read</h2>
@@ -733,6 +769,7 @@ function html(data, options = {}){
       if(tab){
         activeTab = tab.dataset.tab || 'conformance';
         activeDetail = null;
+        history.replaceState(null, '', '#' + activeTab);
         render(dashboard);
         return;
       }

@@ -103,6 +103,7 @@ function checkPublicProjectTemplate(){
     '{{BETA_BUILD_HREF}}',
     '{{LANE_RELEASE_DASHBOARD_HREF}}',
     '{{LANE_CONFORMANCE_DASHBOARD_HREF}}',
+    '{{LANE_CONFORMANCE_DATA_HREF}}',
     '{{LANE_PROJECT_GUIDE_HREF}}',
     '{{PUBLIC_FOOTER_NOTE}}',
     '{{PUBLIC_RELEASE_GATE_CARDS}}',

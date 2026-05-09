@@ -1791,6 +1791,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
     LANE_RELEASE_DASHBOARD_HREF: 'release-dashboard.html',
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
+    LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
     PUBLIC_FOOTER_NOTE: `${contextValue} project-page summary generated from lane build artifacts.`,
@@ -2727,7 +2728,8 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
-    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   fs.writeFileSync(out.publicProjectPage, buildPublicProjectPage(buildInfo, latestNote, releaseDashboard));
@@ -2757,7 +2759,8 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
-    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
   fs.writeFileSync(assetConformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   return [
