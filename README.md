@@ -220,6 +220,17 @@ That means refreshing:
 - testing and release-gate docs
 - hosted project, Platinum, and player guides
 
+The publish preflight also enforces a documentation visibility gate. Major
+curated conformance artifact families under `reference-artifacts/analyses/`
+must be referenced by the generated user-visible docs, dashboard data, or public
+project page before a lane can publish. The intended rhythm is:
+
+1. generate or promote evidence
+2. update the maintained catalog/dashboard/source doc that explains it
+3. run `npm run build`
+4. let `npm run publish:check:dev`, `npm run publish:check:beta`, or
+   `npm run publish:check:production` verify that the explanation is visible
+
 See:
 
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
