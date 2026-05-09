@@ -59,6 +59,13 @@ function mean(values){
   return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
 }
 
+function stddev(values){
+  const numeric = values.filter(value => Number.isFinite(+value)).map(Number);
+  if(numeric.length < 2) return 0;
+  const avg = mean(numeric);
+  return Math.sqrt(numeric.reduce((sum, value) => sum + Math.pow(value - avg, 2), 0) / numeric.length);
+}
+
 function decodeToFile(base64, outPath){
   fs.writeFileSync(outPath, Buffer.from(base64, 'base64'));
 }
@@ -92,10 +99,30 @@ function referenceGridLimit(){
   return Math.max(0, Number.isFinite(value) ? Math.floor(value) : 0);
 }
 
+function argValue(name){
+  const prefix = `--${name}=`;
+  const inline = process.argv.find(arg => arg.startsWith(prefix));
+  if(inline) return inline.slice(prefix.length);
+  const index = process.argv.indexOf(`--${name}`);
+  return index >= 0 ? process.argv[index + 1] : '';
+}
+
+function repeatCount(){
+  const requested = Number(argValue('repeats') || process.env.AURORA_PLAYER_HIT_CANDIDATE_REPEATS || 1);
+  return Number.isFinite(requested) ? Math.max(1, Math.min(5, Math.floor(requested))) : 1;
+}
+
 function candidateFilter(){
-  const arg = process.argv.find(item => item.startsWith('--candidate-ids='));
-  if(!arg) return new Set();
-  return new Set(arg.split('=')[1].split(',').map(item => item.trim()).filter(Boolean));
+  const raw = argValue('candidate-ids') || '';
+  return new Set(String(raw).split(',').map(item => item.trim()).filter(Boolean));
+}
+
+function runTag({ repeats, generatedAt }){
+  const parts = [`playerhit-grid${gridLimit()}`];
+  if(referenceGridLimit()) parts.push(`refgrid${referenceGridLimit()}`);
+  if(repeats > 1) parts.push(`${repeats}x`);
+  parts.push(generatedAt.slice(11, 19).replace(/:/g, ''));
+  return parts.join('-');
 }
 
 function comparisonSet(){
@@ -361,6 +388,12 @@ function rejectionFor(row, baseline){
   if(row.bandShapeGap > baseline.bandShapeGap + .04) reasons.push(`band shape worsened by ${round(row.bandShapeGap - baseline.bandShapeGap, 4)}`);
   if(row.centroidGapHz > baseline.centroidGapHz + 80) reasons.push(`centroid worsened by ${round(row.centroidGapHz - baseline.centroidGapHz, 1)} Hz`);
   if(row.exactSegmentRoleMatchCount < baseline.exactSegmentRoleMatchCount) reasons.push('fewer exact segment-role matches than baseline');
+  if((row.stability?.repetitions || 1) > 1){
+    if((row.stability.riskStd || 0) > .25) reasons.push(`risk stability sd ${row.stability.riskStd} > 0.25`);
+    if((row.stability.durationGapStdSeconds || 0) > .04) reasons.push(`duration stability sd ${row.stability.durationGapStdSeconds}s > 0.04s`);
+    if((row.stability.centroidGapStdHz || 0) > 80) reasons.push(`centroid stability sd ${row.stability.centroidGapStdHz} Hz > 80 Hz`);
+    if((row.stability.rmsGapStd || 0) > .02) reasons.push(`RMS stability sd ${row.stability.rmsGapStd} > 0.02`);
+  }
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
@@ -392,6 +425,98 @@ function decisionFor(rows){
     bandDelta: round(baseline.bandShapeGap - best.bandShapeGap, 4),
     reason: 'Selected candidate clears measured ship-loss keeper gates.'
   };
+}
+
+function aggregateRows(sampleRows){
+  const grouped = new Map();
+  for(const row of sampleRows){
+    if(!grouped.has(row.candidateId)) grouped.set(row.candidateId, []);
+    grouped.get(row.candidateId).push(row);
+  }
+  const rows = [];
+  for(const [candidateId, group] of grouped){
+    const first = group[0];
+    const avgComparison = {};
+    const comparisonKeys = new Set(group.flatMap(row => Object.keys(row.comparison || {})));
+    for(const key of comparisonKeys){
+      avgComparison[key] = round(mean(group.map(row => row.comparison?.[key])), key.includes('position') || key.includes('ratio') || key.includes('share') || key.includes('distance') ? 4 : 3);
+    }
+    const activeBandEnergy = {};
+    const referenceBandEnergy = {};
+    for(const key of ['sub_500', 'low_mid_500_1500', 'mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']){
+      activeBandEnergy[key] = round(mean(group.map(row => row.activeMetrics?.band_energy?.[key])), 4);
+      referenceBandEnergy[key] = round(mean(group.map(row => row.referenceMetrics?.band_energy?.[key])), 4);
+    }
+    const activeMetrics = {
+      duration_s: round(mean(group.map(row => row.activeMetrics?.duration_s)), 3),
+      rms: round(mean(group.map(row => row.activeMetrics?.rms)), 4),
+      spectral_centroid_hz: round(mean(group.map(row => row.activeMetrics?.spectral_centroid_hz)), 1),
+      zero_crossings_per_s: round(mean(group.map(row => row.activeMetrics?.zero_crossings_per_s)), 1),
+      spectral_rolloff_85_hz: round(mean(group.map(row => row.activeMetrics?.spectral_rolloff_85_hz)), 1),
+      band_energy: activeBandEnergy,
+      attack_peak_position: round(mean(group.map(row => row.activeMetrics?.attack_peak_position)), 3),
+      decay_ratio: round(mean(group.map(row => row.activeMetrics?.decay_ratio)), 3),
+      burst_share: round(mean(group.map(row => row.activeMetrics?.burst_share)), 3)
+    };
+    const referenceMetrics = {
+      duration_s: round(mean(group.map(row => row.referenceMetrics?.duration_s)), 3),
+      rms: round(mean(group.map(row => row.referenceMetrics?.rms)), 4),
+      spectral_centroid_hz: round(mean(group.map(row => row.referenceMetrics?.spectral_centroid_hz)), 1),
+      zero_crossings_per_s: round(mean(group.map(row => row.referenceMetrics?.zero_crossings_per_s)), 1),
+      spectral_rolloff_85_hz: round(mean(group.map(row => row.referenceMetrics?.spectral_rolloff_85_hz)), 1),
+      band_energy: referenceBandEnergy,
+      attack_peak_position: round(mean(group.map(row => row.referenceMetrics?.attack_peak_position)), 3),
+      decay_ratio: round(mean(group.map(row => row.referenceMetrics?.decay_ratio)), 3),
+      burst_share: round(mean(group.map(row => row.referenceMetrics?.burst_share)), 3)
+    };
+    const row = {
+      id: candidateId,
+      label: first.label,
+      generated: !!first.generated,
+      generator: first.generator || null,
+      durationGapSeconds: avgComparison.duration_s,
+      centroidGapHz: avgComparison.spectral_centroid_hz,
+      zeroCrossingGapPerSecond: avgComparison.zero_crossings_per_s,
+      rmsGap: avgComparison.rms,
+      bandShapeGap: avgComparison.band_shape_distance,
+      rolloffGapHz: avgComparison.spectral_rolloff_85_hz,
+      envelopeShapeGap: round(mean(group.map(row => row.envelopeShapeGap)), 3),
+      activeMetrics,
+      referenceMetrics,
+      bandEnergyDelta: bandEnergyDelta(activeBandEnergy, referenceBandEnergy),
+      comparison: avgComparison,
+      segmentRoleComparisonCount: Math.round(mean(group.map(row => row.segmentRoleComparisonCount || 0)) || 0),
+      averageSegmentRisk10: round(mean(group.map(row => row.averageSegmentRisk10)), 2),
+      worstSegmentRisk10: round(mean(group.map(row => row.worstSegmentRisk10)), 2),
+      worstSegmentRole: group.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentRole || '',
+      exactSegmentRoleMatchCount: Math.round(mean(group.map(row => row.exactSegmentRoleMatchCount || 0)) || 0),
+      worstSegmentInterpretation: group.slice().sort((a, b) => (+b.worstSegmentRisk10 || 0) - (+a.worstSegmentRisk10 || 0))[0]?.worstSegmentInterpretation || '',
+      stability: {
+        repetitions: group.length,
+        riskStd: round(stddev(group.map(row => row.risk10)), 3),
+        centroidGapStdHz: round(stddev(group.map(row => row.centroidGapHz)), 1),
+        rmsGapStd: round(stddev(group.map(row => row.rmsGap)), 4),
+        durationGapStdSeconds: round(stddev(group.map(row => row.durationGapSeconds)), 3)
+      },
+      samples: group.map(row => ({
+        id: row.id,
+        repetition: row.repetition,
+        risk10: row.risk10,
+        durationGapSeconds: row.durationGapSeconds,
+        centroidGapHz: row.centroidGapHz,
+        rmsGap: row.rmsGap,
+        bandShapeGap: row.bandShapeGap,
+        worstSegmentRisk10: row.worstSegmentRisk10,
+        worstSegmentRole: row.worstSegmentRole
+      }))
+    };
+    const breakdown = riskBreakdown(avgComparison);
+    row.risk10 = breakdown.risk10;
+    row.riskBreakdown = breakdown.components;
+    row.dominantPenalty = breakdown.dominant;
+    rows.push(row);
+  }
+  return rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 ?? 99) - (b.worstSegmentRisk10 ?? 99) || a.durationGapSeconds - b.durationGapSeconds);
 }
 
 async function captureRow(row, opts, attemptSeed){
@@ -449,11 +574,14 @@ function markdown(report){
     `- Measured best: \`${report.decision.measuredBest || 'none'}\``,
     `- Reason: ${report.decision.reason}`,
     '',
-    '| Candidate | Risk | Worst Segment | Duration Gap | Centroid Gap | Band Gap | Keeper Read |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | --- |'
+    `- Repetitions per candidate: ${report.repetitions}`,
+    '',
+    '| Candidate | Risk | Worst Segment | Duration Gap | Centroid Gap | Band Gap | Stability | Keeper Read |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |'
   ];
   for(const row of report.candidates.slice(0, 18)){
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz}Hz | ${row.bandShapeGap} | ${row.keeperRead} |`);
+    const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz}Hz | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}\n`;
@@ -468,10 +596,11 @@ async function main(){
   const captureOpts = { ...(entry.preview || {}), audioTheme: 'aurora-application' };
   delete captureOpts.cue;
   const filter = candidateFilter();
+  const repeats = repeatCount();
   let candidates = candidateSpecs();
   if(filter.size) candidates = candidates.filter(row => row.baseline || filter.has(row.id));
 
-  const outRoot = path.join(OUT_ROOT, `${stamp}-${commit}${dirty ? '-dirty' : ''}-playerhit-grid${gridLimit()}-${generatedAt.slice(11, 19).replace(/:/g, '')}`, CUE);
+  const outRoot = path.join(OUT_ROOT, `${stamp}-${commit}${dirty ? '-dirty' : ''}-${runTag({ repeats, generatedAt })}`, CUE);
   const samplesDir = path.join(outRoot, 'samples');
   ensureDir(samplesDir);
 
@@ -483,9 +612,12 @@ async function main(){
   const captures = [];
   for(let index = 0; index < candidates.length; index += 1){
     const row = candidates[index];
-    const result = await captureWithRetry(row, captureOpts, index);
-    if(!result?.ok) fail('Player Hit candidate capture failed', { id: row.id, result });
-    captures.push({ row, result, sampleId: slug(row.id) });
+    for(let repetition = 1; repetition <= repeats; repetition += 1){
+      const result = await captureWithRetry(row, captureOpts, (index * repeats) + repetition);
+      if(!result?.ok) fail('Player Hit candidate capture failed', { id: row.id, repetition, result });
+      const suffix = repeats > 1 ? `-r${String(repetition).padStart(2, '0')}` : '';
+      captures.push({ row, result, repetition, sampleId: `${slug(row.id)}${suffix}` });
+    }
   }
 
   const baselineCapture = captures.find(item => item.row.baseline);
@@ -541,14 +673,17 @@ async function main(){
 
   const metricsPath = path.join(outRoot, 'metrics.json');
   const metrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
-  const rows = metrics.items.map(item => {
+  const sampleRows = metrics.items.map(item => {
     const id = item.id;
-    const spec = candidates.find(candidate => slug(candidate.id) === id);
+    const capture = captures.find(entry => entry.sampleId === id);
+    const spec = capture?.row || candidates.find(candidate => slug(candidate.id) === id);
     const comparison = item.comparisons.auroraVsReferenceActive;
     const breakdown = riskBreakdown(comparison);
     const segments = segmentSummary(item.segmentRoleComparisons);
     return {
-      id: spec?.id || id,
+      id,
+      candidateId: spec?.id || id,
+      repetition: capture?.repetition || 1,
       label: spec?.label || item.label,
       generated: !!spec?.generated,
       generator: spec?.generator || null,
@@ -573,6 +708,7 @@ async function main(){
       comparison
     };
   });
+  const rows = aggregateRows(sampleRows);
   const baseline = rows.find(row => row.id === 'baseline-current');
   rows.forEach(row => { row.keeperRead = row.id === 'baseline-current' ? 'baseline' : rejectionFor(row, baseline); });
   rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 || 99) - (b.worstSegmentRisk10 || 99));
@@ -586,9 +722,11 @@ async function main(){
     commit,
     dirty,
     cue: CUE,
+    repetitions: repeats,
+    candidateFilter: filter.size ? [...filter].sort() : null,
     problem: 'Ship Loss/playerHit is the highest current audio event-gap risk: Aurora reads as a short bright hit, while the Galaga reference is a longer low-band death event with a sustained onset and trailing body.',
     strategy: 'Capture bounded low-band, long-decay candidate specs through the live browser audio engine, compare against galaga3-death.m4a with active-window segmentation, and recommend promotion only if the candidate improves whole-cue risk, segment risk, duration, band shape, centroid, and role matching.',
-    successMeasure: 'A keeper must reduce whole-cue risk by at least 0.35, worst segment risk by at least 0.35, improve duration by at least 0.18s, avoid material band/centroid regressions, and keep exact segment-role coverage at least as good as baseline.',
+    successMeasure: 'A keeper must reduce whole-cue risk by at least 0.35, worst segment risk by at least 0.35, improve duration by at least 0.18s, avoid material band/centroid regressions, keep exact segment-role coverage at least as good as baseline, and remain stable across repeated captures.',
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,

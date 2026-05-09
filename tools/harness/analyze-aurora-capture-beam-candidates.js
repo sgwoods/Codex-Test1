@@ -544,6 +544,12 @@ function rejectionFor(row, baseline){
   if(attackDelta < .04) reasons.push(`attack timing improvement ${attackDelta} < 0.04`);
   if(bandDelta < -.02) reasons.push(`band shape worsened by ${Math.abs(bandDelta)}`);
   if(rmsDelta < -.025) reasons.push(`RMS worsened by ${Math.abs(rmsDelta)}`);
+  if((row.stability?.repetitions || 1) > 1){
+    if((row.stability.riskStd || 0) > .25) reasons.push(`risk stability sd ${row.stability.riskStd} > 0.25`);
+    if((row.stability.durationGapStdSeconds || 0) > .04) reasons.push(`duration stability sd ${row.stability.durationGapStdSeconds}s > 0.04s`);
+    if((row.stability.centroidGapStdHz || 0) > 60) reasons.push(`centroid stability sd ${row.stability.centroidGapStdHz} Hz > 60 Hz`);
+    if((row.stability.rmsGapStd || 0) > .02) reasons.push(`RMS stability sd ${row.stability.rmsGapStd} > 0.02`);
+  }
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
@@ -580,7 +586,12 @@ function decisionFor(rows){
       const midDelta = round((row.activeMetrics?.band_energy?.mid_1500_3000 ?? 0) - (baseline.activeMetrics?.band_energy?.mid_1500_3000 ?? 0), 4);
       const attackDelta = round(Math.abs((baseline.activeMetrics?.attack_peak_position ?? 0) - (baseline.referenceMetrics?.attack_peak_position ?? 0)) - Math.abs((row.activeMetrics?.attack_peak_position ?? 0) - (row.referenceMetrics?.attack_peak_position ?? 0)), 3);
       const rmsDelta = round(baseline.rmsGap - row.rmsGap, 4);
-      return { row, riskDelta, segmentRiskDelta, centroidDelta, bandDelta, subDelta, midDelta, attackDelta, rmsDelta };
+      const stabilityPass = (row.stability?.repetitions || 1) <= 1
+        || ((row.stability.riskStd || 0) <= .25
+          && (row.stability.durationGapStdSeconds || 0) <= .04
+          && (row.stability.centroidGapStdHz || 0) <= 60
+          && (row.stability.rmsGapStd || 0) <= .02);
+      return { row, riskDelta, segmentRiskDelta, centroidDelta, bandDelta, subDelta, midDelta, attackDelta, rmsDelta, stabilityPass };
     })
     .filter(item => item.row.durationGapSeconds <= .09
       && item.riskDelta >= .3
@@ -590,7 +601,8 @@ function decisionFor(rows){
       && item.midDelta >= .04
       && item.attackDelta >= .04
       && item.bandDelta >= -.02
-      && item.rmsDelta >= -.025)
+      && item.rmsDelta >= -.025
+      && item.stabilityPass)
     .sort((a, b) => b.riskDelta - a.riskDelta || b.segmentRiskDelta - a.segmentRiskDelta || b.subDelta - a.subDelta || b.midDelta - a.midDelta);
   const selected = gated[0] || null;
   if(!selected){
@@ -619,7 +631,7 @@ function decisionFor(rows){
     midDelta: selected.midDelta,
     attackDelta: selected.attackDelta,
     rmsDelta: selected.rmsDelta,
-    reason: 'Selected candidate clears duration, risk, segment, centroid, sub-bass, mid-band, attack timing, band-shape, and RMS gates.'
+    reason: 'Selected candidate clears duration, risk, segment, centroid, sub-bass, mid-band, attack timing, band-shape, RMS, and repeatability gates.'
   };
 }
 
@@ -826,7 +838,7 @@ async function main(){
     candidateFilter: filter.size ? [...filter].sort() : null,
     problem: 'Capture Beam is the highest whole-cue Aurora audio event-gap risk. The current runtime cue is too long, too low-heavy, and peaks too late, so the tractor-beam danger/rescue moment reads less urgently than Galaga.',
     strategy: 'Generate bounded synthetic beam candidates, capture each through the live browser audio engine, compare them against the measured Galaga tractor-beam window, and recommend promotion only when measured urgency improves without trading away stability. This favors shorter active duration, brighter centroid, lower sub-bass, stronger mid-band energy, earlier attack, and lower segment risk.',
-    successMeasure: 'A keeper must reduce overall capture-beam risk by at least 0.3, keep duration gap within 0.09s, improve segment risk when available, improve centroid by at least 80 Hz, materially reduce sub-bass, materially increase mid-band energy, move the attack earlier, avoid band-shape regression, and avoid RMS regression.',
+    successMeasure: 'A keeper must reduce overall capture-beam risk by at least 0.3, keep duration gap within 0.09s, improve segment risk when available, improve centroid by at least 80 Hz, materially reduce sub-bass, materially increase mid-band energy, move the attack earlier, avoid band-shape/RMS regression, and stay stable across repeated captures.',
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,
@@ -841,9 +853,12 @@ async function main(){
       : 'Use the lowest-risk candidate and rejection reasons to seed a narrower second sweep before changing runtime audio.'
   };
   const reportPath = path.join(outRoot, 'candidate-report.json');
+  const canonicalReportPath = path.join(outRoot, 'report.json');
   const mdPath = path.join(outRoot, 'README.md');
   fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(canonicalReportPath, `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(mdPath, markdown(report));
+  fs.writeFileSync(path.join(OUT_ROOT, 'latest-capture-beam.json'), `${JSON.stringify(report, null, 2)}\n`);
 
   console.log(JSON.stringify({
     ok: true,

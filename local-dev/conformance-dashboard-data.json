@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T15:47:39.137Z",
-  "commit": "fcd71b79",
+  "generatedAt": "2026-05-09T16:00:25.131Z",
+  "commit": "18f9d4d5",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -22,7 +22,7 @@
         },
         {
           "Gate": "Audio identity",
-          "Current": "7/10",
+          "Current": "6.7/10",
           "Target": ">=7.5",
           "Notes": "Primary user-experience gap"
         },
@@ -87,10 +87,10 @@
           "scoreContext": {
             "confidence": "medium-high",
             "resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
-            "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
           },
-          "score10": 7,
-          "current": "7/10",
+          "score10": 6.7,
+          "current": "6.7/10",
           "target": "7.5-8.0",
           "status": "Measured release category; weakest axis",
           "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
@@ -110,7 +110,7 @@
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
             "investmentScore": 2.89,
-            "gapToTarget": "+0.5",
+            "gapToTarget": "+0.8",
             "summary": "high; cpu, model-api, openai-api",
             "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.89."
           }
@@ -789,8 +789,8 @@
       "economicsSummary": {
         "latestOverallScore10": 9.2,
         "latestLevelArcScore10": 8.8,
-        "metricPointCount": 665,
-        "deltaCount": 102,
+        "metricPointCount": 687,
+        "deltaCount": 103,
         "measuredRuns": 197,
         "wallSeconds": 6213.535,
         "cpuSeconds": 10530.44,
@@ -1178,7 +1178,7 @@
     },
     {
       "Gate": "Audio identity",
-      "Current": "7/10",
+      "Current": "6.7/10",
       "Target": ">=7.5",
       "Notes": "Primary user-experience gap"
     },
@@ -1243,10 +1243,10 @@
       "scoreContext": {
         "confidence": "medium-high",
         "resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
-        "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+        "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
       },
-      "score10": 7,
-      "current": "7/10",
+      "score10": 6.7,
+      "current": "6.7/10",
       "target": "7.5-8.0",
       "status": "Measured release category; weakest axis",
       "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
@@ -1266,7 +1266,7 @@
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
         "investmentScore": 2.89,
-        "gapToTarget": "+0.5",
+        "gapToTarget": "+0.8",
         "summary": "high; cpu, model-api, openai-api",
         "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.89."
       }
@@ -1946,7 +1946,7 @@
     {
       "Priority": 1,
       "Metric": "Audio identity, event feedback, and cue alignment",
-      "Current": "7/10",
+      "Current": "6.7/10",
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
@@ -2217,8 +2217,8 @@
   "economicsSummary": {
     "latestOverallScore10": 9.2,
     "latestLevelArcScore10": 8.8,
-    "metricPointCount": 665,
-    "deltaCount": 102,
+    "metricPointCount": 687,
+    "deltaCount": 103,
     "measuredRuns": 197,
     "wallSeconds": 6213.535,
     "cpuSeconds": 10530.44,
@@ -2322,9 +2322,9 @@
     {
       "Priority": 1,
       "Metric": "Audio identity, event feedback, and cue alignment",
-      "Current": "7/10",
+      "Current": "6.7/10",
       "Target": "7.5-8.0",
-      "Gap to target": "+0.5",
+      "Gap to target": "+0.8",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
       "Tracked spend": "102 runs; 80.6 min wall; 142.1 min CPU",
