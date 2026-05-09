@@ -102,6 +102,7 @@ function main(){
   const pressureLossPath = latestReport('reference-artifacts/analyses/aurora-stage4-loss-windows');
   const stageSignaturePath = latestReport('reference-artifacts/analyses/stage-signature-distance');
   const opportunityPath = latestReport('reference-artifacts/analyses/level-arc-opportunity-windows');
+  const formationBossPath = latestReport('reference-artifacts/analyses/formation-boss-grammar-conformance');
 
   const challenge = challengeReportPath ? readJson(challengeReportPath) : { summary: {} };
   const progression = progressionReportPath ? readJson(progressionReportPath) : { summary: {} };
@@ -110,6 +111,7 @@ function main(){
   const pressureLoss = pressureLossPath ? readJson(pressureLossPath) : { summary: {} };
   const stageSignature = stageSignaturePath ? readJson(stageSignaturePath) : { summary: {} };
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {}, opportunities: [] };
+  const formationBoss = formationBossPath ? readJson(formationBossPath) : { summary: {}, metrics: [] };
 
   const challengeTiming = challenge.summary.total ? challenge.summary.passed / challenge.summary.total : 0;
   const progressionChecks = progression.summary.totalPersonaChecks
@@ -134,6 +136,7 @@ function main(){
   const stageSignatureRepetitionSafety = 1 - (stageSignature.summary.repetitionRisk || 1);
   const opportunityMeanReward = clamp((opportunity.summary.meanRewardIndex || 0) / 10);
   const opportunityReadiness = clamp((opportunity.summary.score10 || 0) / 10);
+  const formationBossScore = clamp((formationBoss.summary.score10 || formationBoss.score10 || 0) / 10);
   const topOpportunity = opportunity.summary.highestPriorityOpportunity || opportunity.opportunities?.[0] || null;
 
   const submetrics = [
@@ -191,6 +194,18 @@ function main(){
       read: `${capture.summary?.passed || 0}/${capture.summary?.total || 0} capture/rescue scenarios match; level-arc opportunity windows show mean reward/opportunity signal ${opportunity.summary.meanRewardIndex || 0}/10.`
     },
     {
+      id: 'boss-entry-formation-grammar',
+      label: 'Boss entry and formation grammar',
+      score10: scoreParts([
+        { value: formationBossScore, weight: 0.7 },
+        { value: stageSignatureScore, weight: 0.15 },
+        { value: opportunityReadiness, weight: 0.15 }
+      ]),
+      read: formationBossPath
+        ? `Boss/formation grammar scores ${formationBoss.summary.score10 || formationBoss.score10}/10; weakest metric is ${formationBoss.summary.weakestMetric?.label || 'not reported'} (${formationBoss.summary.weakestMetric?.score10 ?? 'n/a'}/10).`
+        : 'Boss/formation grammar has not been measured yet; run npm run harness:analyze:formation-boss-grammar.'
+    },
+    {
       id: 'learning-mastery-windows',
       label: 'Learning and mastery windows',
       score10: scoreParts([
@@ -214,12 +229,13 @@ function main(){
   ];
 
   const weights = {
-    'stage-distinctiveness': 0.18,
-    'challenge-stage-identity': 0.18,
-    'movement-grammar-expansion': 0.14,
-    'pressure-curve-over-time': 0.14,
-    'boss-reward-opportunity': 0.12,
-    'learning-mastery-windows': 0.14,
+    'stage-distinctiveness': 0.16,
+    'challenge-stage-identity': 0.14,
+    'movement-grammar-expansion': 0.12,
+    'pressure-curve-over-time': 0.12,
+    'boss-reward-opportunity': 0.1,
+    'boss-entry-formation-grammar': 0.14,
+    'learning-mastery-windows': 0.12,
     'long-run-non-repetition': 0.1
   };
   const score10 = round(submetrics.reduce((sum, metric) => sum + (metric.score10 * weights[metric.id]), 0), 1);
@@ -239,6 +255,8 @@ function main(){
       evidenceWindowCount,
       pressureReplayCoverage: round(pressureReplayCoverage, 3),
       pressureCollisionReplayCoverage: round(pressureCollisionReplayCoverage, 3),
+      formationBossGrammarScore10: formationBoss.summary?.score10 || formationBoss.score10 || null,
+      formationBossGrammarWindowCount: formationBoss.summary?.windowCount || 0,
       priority: 'high',
       strongestSubmetric: submetrics.reduce((best, metric) => metric.score10 > best.score10 ? metric : best, submetrics[0]),
       weakestSubmetric: submetrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, submetrics[0]),
@@ -249,6 +267,9 @@ function main(){
         stageSignature.summary?.signatureScore10 >= 6.4
           ? 'preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice'
           : 'implement one mid-run or later-level variation and require improved regular-stage signature separation',
+        formationBoss.summary?.weakestMetric
+          ? `advance boss/formation grammar by targeting ${formationBoss.summary.weakestMetric.label}: ${formationBoss.summary.weakestMetric.currentRead}`
+          : 'run formation/boss grammar scoring so boss entry and set-formation work is no longer hidden inside broad level-arc scoring',
         topOpportunity
           ? `${topOpportunity.problem} Strategy: ${topOpportunity.strategy}`
           : 'run level-arc opportunity windows so the next gameplay slice is ranked from evidence',
@@ -264,6 +285,7 @@ function main(){
       pressureLossReport: pressureLossPath ? path.relative(ROOT, pressureLossPath) : null,
       stageSignatureReport: stageSignaturePath ? path.relative(ROOT, stageSignaturePath) : null,
       opportunityReport: opportunityPath ? path.relative(ROOT, opportunityPath) : null,
+      formationBossGrammarReport: formationBossPath ? path.relative(ROOT, formationBossPath) : null,
       levelExpansionCycle: 'reference-artifacts/analyses/aurora-level-expansion-cycle'
     },
     submetrics

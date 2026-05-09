@@ -233,6 +233,7 @@ function main(){
 
   const audio = categoryById(quality, 'audio');
   const levelArc = latestLevelArcCategory(quality, levelArcReport);
+  const formationBoss = categoryById(quality, 'formation-boss-grammar');
   const stage1Timing = categoryById(quality, 'stage1-timing');
   const uiShell = categoryById(quality, 'ui-shell');
   const candidates = [
@@ -282,6 +283,21 @@ function main(){
       computeAxis: 'stage4-pressure',
       rationale: 'Level-arc pressure replay coverage remains a weak submetric, but prior cycles were more compute-heavy than the Stage 12 loop.',
       nextAction: 'Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.'
+    }),
+    buildCandidate({
+      id: 'formation-boss-path-slot-extraction',
+      label: 'Promote boss entry and formation path/slot extraction',
+      category: formationBoss,
+      quality,
+      economics: ledger,
+      expectedLift10: 0.75,
+      confidence: 0.7,
+      reuse: 0.96,
+      risk: 0.3,
+      costClass: 'medium',
+      computeAxis: 'conformance-loop',
+      rationale: 'Boss entry and formation grammar is now a first-class scorer. Its current highest measurement debt is expected to be path-shape and set-formation precision, which affects Galaga-like stage choreography and is reusable for future game ingestion.',
+      nextAction: 'Extract frame-level boss/escort/challenge paths and formation slot coordinates for the current evidence windows, then rerun formation-boss grammar, level-arc, and quality scoring.'
     }),
     buildCandidate({
       id: 'stage1-timing-polish',

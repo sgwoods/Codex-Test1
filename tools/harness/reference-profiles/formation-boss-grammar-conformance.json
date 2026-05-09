@@ -1,0 +1,71 @@
+{
+  "id": "formation-boss-grammar-conformance",
+  "label": "Boss entry and formation grammar conformance",
+  "version": "0.1",
+  "intent": "Measure whether boss entry, escort composition, formation settling, and challenge-stage set pieces are evolving as recognizable Galaga-like choreography rather than generic repeated waves.",
+  "grounding": {
+    "current": [
+      "reference-artifacts/analyses/aurora-level-expansion-cycle/*/events/reference-events.json",
+      "reference-artifacts/analyses/aurora-level-expansion-cycle/*/trace/trace.json",
+      "reference-artifacts/analyses/stage-signature-distance/*/report.json",
+      "reference-artifacts/analyses/level-arc-opportunity-windows/*/report.json"
+    ],
+    "bestCase": [
+      "stage-specific reference contact sheets with boss and escort entry labels",
+      "frame-level path traces for boss, escort, and challenge-stage formations",
+      "rack slot coordinates at formation settle",
+      "expert-route score/reward outcomes for boss opportunity windows"
+    ]
+  },
+  "metrics": [
+    {
+      "id": "boss-entry-timing",
+      "label": "Boss entry timing",
+      "weight": 0.18,
+      "success": "Regular-stage boss appearances land in stage-band timing windows and vary enough over time to feel authored."
+    },
+    {
+      "id": "boss-escort-composition",
+      "label": "Boss escort composition",
+      "weight": 0.16,
+      "success": "Mid/late windows include visible boss and escort relationships rather than isolated boss dives only."
+    },
+    {
+      "id": "formation-settle-evidence",
+      "label": "Formation settle evidence",
+      "weight": 0.16,
+      "success": "Evidence captures formation-active counts and, in the next scorer version, target rack slot geometry by stage."
+    },
+    {
+      "id": "challenge-pattern-identity",
+      "label": "Challenge-stage pattern identity",
+      "weight": 0.16,
+      "success": "Challenge stages show wave start, path, hit, result, boss/family variety, and bonus-learning opportunities."
+    },
+    {
+      "id": "stage-variation",
+      "label": "Stage-to-stage formation variation",
+      "weight": 0.18,
+      "success": "Nearby regular stages maintain signature distance above the repetition-risk threshold."
+    },
+    {
+      "id": "path-shape-precision",
+      "label": "Path shape and set-formation precision",
+      "weight": 0.16,
+      "success": "Frame-level boss/escort/challenge path traces and formation slot positions are available for direct reference comparison."
+    }
+  ],
+  "thresholds": {
+    "targetRegularWindows": 6,
+    "targetChallengeWindows": 2,
+    "targetEscortBossWindows": 2,
+    "targetDistinctPairDistance": 0.22,
+    "targetMinimumRegularDistance": 0.16,
+    "bossTimingBandsSeconds": {
+      "early": [8, 23],
+      "mid": [2, 15],
+      "late": [1, 12]
+    }
+  },
+  "releaseUse": "This family should appear as a key Level Arc / Formation Grammar gate before any major Aurora release that claims a meaningful Galaga conformance lift."
+}

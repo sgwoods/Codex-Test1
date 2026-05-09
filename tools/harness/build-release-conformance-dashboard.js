@@ -129,6 +129,7 @@ function metricAxisKeys(metric){
   if(text.includes('audio identity')) return ['audio'];
   if(text.includes('stage 4 pressure')) return ['stage4-pressure'];
   if(text.includes('level arc')) return ['level-arc', 'conformance-loop'];
+  if(text.includes('boss entry') || text.includes('formation grammar')) return ['level-arc', 'conformance-loop'];
   if(text.includes('visual look')) return ['visual-look'];
   if(text.includes('alien entry')) return ['level-arc', 'quality-score'];
   if(text.includes('challenge-stage variation')) return ['level-arc', 'quality-score'];
@@ -307,6 +308,13 @@ function metricScoreContext(metric, score10){
       scoreMeaning: scoreMeaning(score10)
     };
   }
+  if(text.includes('boss entry') || text.includes('formation grammar')){
+    return {
+      confidence: 'medium',
+      resolution: 'first-class boss/formation scorer using stage-window event grammar, boss timing, escort composition, challenge identity, and explicit path/slot measurement debt',
+      scoreMeaning: scoreMeaning(score10)
+    };
+  }
   if(text.includes('stage 4 pressure')){
     return {
       confidence: 'medium',
@@ -385,6 +393,13 @@ function metricExplanation(metric){
       calculation: 'Level arc is read from the level-arc conformance report, combining stage distinctiveness, challenge-stage identity, later-stage complexity, pressure curve, reward/rescue layering, and learning/mastery windows.',
       grounding: 'Best-case grounding is multi-stage reference evidence plus Aurora harness windows for stage families, challenge layers, stage signatures, pressure/loss windows, and persona progression.',
       meaning: 'Players feel whether the game grows, teaches, surprises, and rewards mastery over time. Designers use it to detect repetition, flat difficulty, or escalation without reward.'
+    };
+  }
+  if(text.includes('boss entry') || text.includes('formation grammar')){
+    return {
+      calculation: 'Boss/formation grammar is read from the dedicated formation-boss-grammar report, blending boss entry timing, boss/escort composition, formation settle evidence, challenge pattern identity, stage variation, and path-shape precision.',
+      grounding: 'Current grounding comes from Aurora level-expansion event logs, trace summaries, stage-signature distance, and the formation/boss grammar reference profile. Best-case grounding adds frame-level boss/escort/challenge paths and rack slot coordinates.',
+      meaning: 'Players feel whether each stage has recognizable arcade choreography: bosses enter with readable intent, escorts matter, formations settle convincingly, and challenge stages teach memorable set pieces.'
     };
   }
   if(text.includes('visual look')){
@@ -549,6 +564,20 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
     }),
     ingestionRow({
       rank: 3,
+      source: 'Boss entry and formation grammar scorer',
+      axis: 'formation grammar / boss entry / challenge identity',
+      artifactType: 'event grammar, timing, stage-signature, and measurement-debt report',
+      coverage: levelArc.summary?.formationBossGrammarWindowCount
+        ? `${levelArc.summary.formationBossGrammarWindowCount} boss/formation windows`
+        : (levelArc.evidence?.formationBossGrammarReport ? 'tracked boss/formation report' : 'pending'),
+      annotationStatus: levelArc.evidence?.formationBossGrammarReport ? 'scored' : 'pending',
+      confidence: 'medium',
+      linkedMetric: 'Boss entry and formation grammar',
+      anchor: levelArc.evidence?.formationBossGrammarReport || 'reference-artifacts/analyses/formation-boss-grammar-conformance',
+      next: 'Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.'
+    }),
+    ingestionRow({
+      rank: 4,
       source: 'Level arc and encounter-shape evidence',
       axis: 'level arc / challenge / reward',
       artifactType: 'stage signatures, pressure windows, persona reports',
@@ -560,7 +589,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.'
     }),
     ingestionRow({
-      rank: 4,
+      rank: 5,
       source: 'Stage 4 pressure and loss-window diagnostics',
       axis: 'pressure / fairness',
       artifactType: 'loss windows, replay geometry, collision traces',
@@ -572,7 +601,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.'
     }),
     ingestionRow({
-      rank: 5,
+      rank: 6,
       source: 'Aurora visual look screenshots',
       axis: 'visual look / UI readability',
       artifactType: 'browser screenshots plus DOM/canvas metrics',
@@ -584,7 +613,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.'
     }),
     ingestionRow({
-      rank: 6,
+      rank: 7,
       source: 'Aurora evidence-cycle windows',
       axis: 'general ingestion framework',
       artifactType: 'manifests, contact sheets, traces, event logs, audio timelines',
@@ -596,7 +625,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest.'
     }),
     ingestionRow({
-      rank: 7,
+      rank: 8,
       source: 'Reference manifests and event logs inventory',
       axis: 'source provenance / annotation coverage',
       artifactType: 'source-manifest.json and reference-events.json',
@@ -608,7 +637,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest.'
     }),
     ingestionRow({
-      rank: 8,
+      rank: 9,
       source: 'Reference contact sheets and frame evidence',
       axis: 'visual / motion / entry formation',
       artifactType: 'contact sheets and still frames',
@@ -861,6 +890,7 @@ function main(){
   const visualLook = visualLookPath ? readJson(visualLookPath) : null;
 
   const audio = category(quality, 'audio');
+  const formationBoss = category(quality, 'formation-boss-grammar');
   const level = category(quality, 'level-arc');
   const stage1Timing = category(quality, 'stage1-timing');
   const stage1Geometry = category(quality, 'stage1-geometry');
@@ -916,6 +946,19 @@ function main(){
     }),
     row({
       rank: 3,
+      metric: 'Boss entry and formation grammar',
+      score10: formationBoss?.score10,
+      target: '8.0-8.5 first gate; 9.0+ with path/slot extraction',
+      status: 'Measured release category; new first-class axis',
+      why: 'Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.',
+      effort: 'Medium-high; 2-5 hrs, then recurring low-cost guardrail',
+      next: formationBoss?.details?.weakestMetric
+        ? `Advance ${formationBoss.details.weakestMetric.label}: ${formationBoss.details.weakestMetric.currentRead}`
+        : 'Run formation/boss grammar analysis and promote path/slot evidence.',
+      evidence: rel(qualityPath)
+    }),
+    row({
+      rank: 4,
       metric: 'Overall visual look and feel: gameplay, start page, typography complexity',
       score10: visualLookScore,
       target: '8.4-8.8',
@@ -926,7 +969,7 @@ function main(){
       evidence: visualLookPath ? rel(visualLookPath) : 'UI shell suite plus generated frame/contact-sheet artifacts'
     }),
     row({
-      rank: 4,
+      rank: 5,
       metric: 'Stage 4 pressure exact replay / pressure curve precision',
       score10: levelArc.summary?.weakestSubmetric?.score10 || 7.5,
       target: '8.2-8.6',
@@ -937,18 +980,18 @@ function main(){
       evidence: levelArcPath ? rel(levelArcPath) : rel(qualityPath)
     }),
     row({
-      rank: 5,
+      rank: 6,
       metric: 'Alien entry to levels: formation, timing, and methods',
-      score10: alienEntryScore,
-      target: '9.0-9.4 with dedicated scorer',
-      status: 'Composite proxy: stage opening timing + geometry + movement grammar',
+      score10: Number.isFinite(+formationBoss?.score10) ? formationBoss.score10 : alienEntryScore,
+      target: '9.0-9.4 with path and rack-slot scorer',
+      status: formationBoss ? 'Measured through boss/formation grammar category' : 'Composite proxy: stage opening timing + geometry + movement grammar',
       why: 'Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.',
       effort: 'Medium; 1-3 hrs plus visual review',
-      next: 'Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels.',
+      next: 'Promote stage-entry contact sheets, path labels, and formation slot coordinates across early/mid/late levels.',
       evidence: `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
     }),
     row({
-      rank: 6,
+      rank: 7,
       metric: 'Challenge-stage variation and new alien/formations introduction',
       score10: challengeVariationScore,
       target: '9.0-9.4 with dedicated scorer',
@@ -959,7 +1002,7 @@ function main(){
       evidence: `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
     }),
     row({
-      rank: 7,
+      rank: 8,
       metric: 'Progression and persona depth',
       score10: progression?.score10,
       target: '9.1+',
@@ -970,7 +1013,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 8,
+      rank: 9,
       metric: 'Stage 1 opening timing fidelity',
       score10: stage1Timing?.score10,
       target: '8.8-9.2',
@@ -981,7 +1024,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 9,
+      rank: 10,
       metric: 'Arcade console frame UI style',
       score10: arcadeFrameScore,
       target: '9.4-9.6',
@@ -992,7 +1035,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 10,
+      rank: 11,
       metric: 'Popup/help/scoring/leaderboard surface formatting',
       score10: popupScore,
       target: '9.4-9.6',
@@ -1003,7 +1046,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 11,
+      rank: 12,
       metric: 'Dive fairness and safety',
       score10: diveSafety?.score10,
       target: '9.3+',
@@ -1014,7 +1057,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 12,
+      rank: 13,
       metric: 'Player movement conformance',
       score10: movement?.score10,
       target: 'Maintain 10',
@@ -1025,7 +1068,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 13,
+      rank: 14,
       metric: 'Shot and hit responsiveness',
       score10: combat?.score10,
       target: 'Maintain 10',
@@ -1036,7 +1079,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 14,
+      rank: 15,
       metric: 'Stage 1 opening geometry fidelity',
       score10: stage1Geometry?.score10,
       target: 'Maintain 10',
@@ -1047,7 +1090,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 15,
+      rank: 16,
       metric: 'Capture and rescue rule fidelity',
       score10: capture?.score10,
       target: 'Maintain 10',
@@ -1058,7 +1101,7 @@ function main(){
       evidence: rel(qualityPath)
     }),
     row({
-      rank: 16,
+      rank: 17,
       metric: 'Challenge-stage timing fidelity',
       score10: challengeTiming?.score10,
       target: 'Maintain 9.8+',
@@ -1076,7 +1119,8 @@ function main(){
     ['Overall quality', score(quality.summary?.overallScore10), '>=9.3', 'Full score refresh after all major cycles'],
     ['Audio identity', score(audio?.score10), '>=7.5', 'Primary user-experience gap'],
     ['Level arc', score(currentLevelArcScore), '>=8.8', 'Long-play gameplay-quality gate'],
-    ['Alien entry / formations', `${score(alienEntryScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
+    ['Boss entry and formation grammar', score(formationBoss?.score10), '>=8.0 first gate; >=9.0 mature', 'New measured gate for stage choreography'],
+    ['Alien entry / formations', `${score(Number.isFinite(+formationBoss?.score10) ? formationBoss.score10 : alienEntryScore)} measured`, '>=9.2 with path/rack scorer', 'Now backed by boss/formation grammar'],
     ['Challenge variation', `${score(challengeVariationScore)} composite`, '>=9.2 with dedicated scorer', 'New explicit gate'],
     ['Visual look and feel', score(visualLookScore), '>=8.4', visualLook ? 'New explicit gate; first-pass scorer measured' : 'New explicit gate; currently estimated'],
     ['Arcade frame and popup surfaces', score(Math.min(arcadeFrameScore, popupScore)), '>=9.4', 'Split from generic UI shell before final gate'],
@@ -1144,6 +1188,7 @@ function main(){
     sourceReports,
     newFirstClassAxes: [
       'Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
+      'Boss entry and formation grammar: boss timing, escort composition, formation settle evidence, challenge pattern identity, stage variation, and path/slot precision.',
       'Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
       'Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.',
       'Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.',
@@ -1193,6 +1238,7 @@ function main(){
     ingestionTable: tableObjects(ingestionHeaders, ingestionRows),
     newFirstClassAxes: [
       'Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
+      'Boss entry and formation grammar: boss timing, escort composition, formation settle evidence, challenge pattern identity, stage variation, and path/slot precision.',
       'Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
       'Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.',
       'Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.',
@@ -1314,6 +1360,7 @@ function main(){
     '## New First-Class Axes Added',
     '',
     '- Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.',
+    '- Boss entry and formation grammar: boss timing, escort composition, formation settle evidence, challenge pattern identity, stage variation, and path/slot precision.',
     '- Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.',
     '- Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.',
     '- Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.',

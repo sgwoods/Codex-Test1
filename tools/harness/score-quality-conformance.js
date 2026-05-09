@@ -215,7 +215,7 @@ function buildReadme(report){
   const lines = [
     '# Quality Conformance Score',
     '',
-    'This artifact rolls Aurora quality into eleven evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.',
+    'This artifact rolls Aurora quality into twelve evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.',
     '',
     '## Overall',
     '',
@@ -250,6 +250,7 @@ function main(){
   const stage2SafetyRun = runScript('check-persona-stage2-safety.js');
   const surfaceRun = runScript('check-dev-candidate-surface-suite.js');
   const audioAlignmentRun = runScript('check-audio-cue-alignment-correspondence.js');
+  const formationBossRun = runScript('analyze-formation-boss-grammar-conformance.js');
   const levelArcRun = runScript('analyze-level-arc-conformance.js');
   const audioEventGapRun = runScript('analyze-aurora-audio-event-gap.js');
 
@@ -259,6 +260,7 @@ function main(){
   const captureReport = readJson(latestReport('reference-artifacts/analyses/correspondence/capture-rescue'));
   const challengeReport = readJson(latestReport('reference-artifacts/analyses/correspondence/challenge-stage-timing'));
   const progressionReport = readJson(latestReport('reference-artifacts/analyses/correspondence/persona-progression'));
+  const formationBossReport = readJson(latestReport('reference-artifacts/analyses/formation-boss-grammar-conformance'));
   const levelArcReport = readJson(latestReport('reference-artifacts/analyses/level-arc-conformance'));
   const audioAlignmentReport = readJson(latestReport('reference-artifacts/analyses/correspondence/audio-cue-alignment'));
   const audioEventGapReport = readJson(latestReport('reference-artifacts/analyses/aurora-audio-event-gap'));
@@ -326,6 +328,14 @@ function main(){
       read: `${progressionReport.summary.passedPersonaChecks}/${progressionReport.summary.totalPersonaChecks} persona checks passed; progression ordering is ${progressionReport.summary.currentProgressionOrderPreserved ? 'fully preserved' : 'still missing one ordering edge case'}.`
     },
     {
+      id: 'formation-boss-grammar',
+      label: 'Boss entry and formation grammar',
+      score10: round(clamp(formationBossReport.summary?.score10 || formationBossReport.score10 || 1, 1, 10), 1),
+      evidence: ['formation-boss-grammar-conformance report', 'stage-signature-distance report', 'level-expansion cycle evidence'],
+      details: formationBossReport.summary,
+      read: `Boss/formation grammar scores ${formationBossReport.summary.score10}/10 across ${formationBossReport.summary.windowCount} evidence windows; weakest metric is ${formationBossReport.summary.weakestMetric.label} (${formationBossReport.summary.weakestMetric.score10}/10).`
+    },
+    {
       id: 'level-arc',
       label: 'Level arc and encounter shape',
       score10: scoreLevelArcReport(levelArcReport),
@@ -366,6 +376,7 @@ function main(){
     surfaceRun,
     audioAlignmentRun,
     audioEventGapRun,
+    formationBossRun,
     levelArcRun,
     categories,
     summary: {

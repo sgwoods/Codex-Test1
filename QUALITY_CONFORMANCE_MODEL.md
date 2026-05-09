@@ -109,20 +109,35 @@ Each category scores from `1` to `10`.
      - ordering of the persona ladder
      - whether higher-skill personas still show deeper / stronger runs
 
-9. `Level arc and encounter shape`
+9. `Boss entry and formation grammar`
+   - Evidence:
+     - `tools/harness/analyze-formation-boss-grammar-conformance.js`
+     - `tools/harness/reference-profiles/formation-boss-grammar-conformance.json`
+     - `reference-artifacts/analyses/formation-boss-grammar-conformance/*/report.json`
+   - Focus:
+     - boss entry timing by stage band
+     - boss and escort composition
+     - set-formation settle evidence
+     - challenge-stage pattern identity
+     - stage-to-stage formation variation
+     - path-shape and formation-slot precision as explicit measurement debt
+
+10. `Level arc and encounter shape`
    - Evidence:
      - `reference-artifacts/analyses/level-arc-conformance/*/report.json`
      - `reference-artifacts/analyses/stage-signature-distance/*/report.json`
+     - `reference-artifacts/analyses/formation-boss-grammar-conformance/*/report.json`
      - `reference-artifacts/analyses/aurora-level-expansion-cycle`
    - Focus:
      - stage distinctiveness over time
      - challenge-stage identity and bonus-opportunity learning
      - movement grammar expansion
+     - boss entry and formation grammar
      - boss and reward opportunity design
      - pressure curves across early, middle, later, and challenge windows
      - long-run non-repetition
 
-10. `Audio identity and cue alignment`
+11. `Audio identity and cue alignment`
    - Evidence:
      - `reference-artifacts/analyses/aurora-audio-theme-comparison/*/metrics.json`
      - `reference-artifacts/analyses/galaga-audio-overlap/*/metrics.json`
@@ -133,7 +148,7 @@ Each category scores from `1` to `10`.
        isolated cue matches
      - stage / challenge timing windows for cue overlap and handoff
 
-11. `UI, shell, and graphics integrity`
+12. `UI, shell, and graphics integrity`
     - Evidence:
       - `tools/harness/check-dev-candidate-surface-suite.js`
     - Focus:
@@ -152,7 +167,7 @@ Each category scores from `1` to `10`.
 - `3-4.9`: meaningfully behind the intended standard
 - `1-2.9`: clearly weak and likely release-shaping
 
-The roll-up score is the simple average of the eleven category scores so that the
+The roll-up score is the simple average of the twelve category scores so that the
 low-scoring gaps stay visible.
 
 A `10/10` means "maxed at current scorer resolution", not perfect imitation.
@@ -169,6 +184,10 @@ that same behavior may be rescored with a more demanding metric.
 - `Level arc and encounter shape` now includes first-pass stage-signature
   distance scoring, but it still needs broader mid-run and late-run evidence
   windows before the repetition penalty should be treated as complete
+- `Boss entry and formation grammar` is now a first-class scored family. Its
+  timing, composition, and challenge-identity reads are useful now, while true
+  path-shape and rack-slot conformance remains intentionally low-confidence
+  until frame-level boss/escort/challenge path extraction is promoted.
 - The model is meant to be expanded, not treated as finished
 
 The main rule is simple:
