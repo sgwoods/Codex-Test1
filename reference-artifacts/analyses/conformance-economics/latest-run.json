@@ -1,19 +1,15 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T16-00-10-168Z-64343",
-  "startedAt": "2026-05-09T16:00:10.168Z",
-  "endedAt": "2026-05-09T16:00:16.875Z",
+  "id": "2026-05-09T16-11-19-997Z-77784",
+  "startedAt": "2026-05-09T16:11:19.997Z",
+  "endedAt": "2026-05-09T16:11:20.227Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "18f9d4d5",
+  "commit": "6c0e2b61",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-capture-beam-candidates",
-    "--",
-    "--candidate-ids=grid-720-1116-1730-140-480-square,low-mid-balanced-hp-lift",
-    "--grid-limit=48",
-    "--repeats=2"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
     "audio"
@@ -21,13 +17,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "captureBeam canonical report refresh",
+  "notes": "event gap after captureBeam active-tail segmentation correction",
   "measurement": {
-    "wallSeconds": 6.707,
-    "timeRealSeconds": 6.69,
-    "timeUserSeconds": 8.72,
-    "timeSystemSeconds": 1.82,
-    "cpuSeconds": 10.54,
+    "wallSeconds": 0.23,
+    "timeRealSeconds": 0.22,
+    "timeUserSeconds": 0.15,
+    "timeSystemSeconds": 0.11,
+    "cpuSeconds": 0.26,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -49,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 505051362,
-    "artifactBytesAfter": 505453205,
-    "artifactBytesDelta": 401843
+    "artifactBytesBefore": 508923318,
+    "artifactBytesAfter": 508935560,
+    "artifactBytesDelta": 12242
   }
 }

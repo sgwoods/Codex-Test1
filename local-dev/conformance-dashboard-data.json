@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T16:00:25.131Z",
+  "generatedAt": "2026-05-09T16:00:59.833Z",
   "commit": "18f9d4d5",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
@@ -95,7 +95,7 @@
           "status": "Measured release category; weakest axis",
           "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
           "effort": "High; 3-6 hrs local/model-assisted analysis",
-          "next": "Tune the highest segment-level audio gap next: challengeResults onset. Rerun audio comparison, event-gap analysis, and quality scoring after the change.",
+          "next": "Tune the highest segment-level audio gap next: playerHit body. Rerun audio comparison, event-gap analysis, and quality scoring after the change.",
           "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-fcd71b79/report.json",
           "costContext": {
             "costClass": "high",
@@ -103,16 +103,16 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "102 runs; 80.6 min wall; 142.1 min CPU",
-            "trackedRuns": 102,
-            "trackedWallSeconds": 4833.171,
-            "trackedCpuSeconds": 8526.69,
+            "trackedSpend": "109 runs; 82.5 min wall; 145.5 min CPU",
+            "trackedRuns": 109,
+            "trackedWallSeconds": 4949.745,
+            "trackedCpuSeconds": 8729.52,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
-            "investmentScore": 2.89,
+            "investmentScore": 3.12,
             "gapToTarget": "+0.8",
             "summary": "high; cpu, model-api, openai-api",
-            "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.89."
+            "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.12."
           }
         },
         {
@@ -190,10 +190,10 @@
             "trackedCpuSeconds": 2189.31,
             "expectedLift10": 0.24,
             "expectedOverallLift10": 0.02,
-            "investmentScore": 1.79,
+            "investmentScore": 1.68,
             "gapToTarget": "at target",
             "summary": "low; cpu, browser",
-            "valueCostRead": "Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.79."
+            "valueCostRead": "Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.68."
           }
         },
         {
@@ -230,10 +230,10 @@
             "trackedCpuSeconds": 2189.31,
             "expectedLift10": 0.28,
             "expectedOverallLift10": 0.023,
-            "investmentScore": 0.9,
+            "investmentScore": 0.82,
             "gapToTarget": "at target",
             "summary": "high; cpu, browser",
-            "valueCostRead": "Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.9."
+            "valueCostRead": "Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.82."
           }
         },
         {
@@ -308,10 +308,10 @@
             "trackedCpuSeconds": 1111.38,
             "expectedLift10": 0.35,
             "expectedOverallLift10": 0.029,
-            "investmentScore": 1.61,
+            "investmentScore": 1.51,
             "gapToTarget": "+2.2",
             "summary": "medium; cpu, browser",
-            "valueCostRead": "Expected lift 0.35/10 on metric, 0.029/10 overall; investment score 1.61."
+            "valueCostRead": "Expected lift 0.35/10 on metric, 0.029/10 overall; investment score 1.51."
           }
         },
         {
@@ -791,15 +791,15 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 687,
         "deltaCount": 103,
-        "measuredRuns": 197,
-        "wallSeconds": 6213.535,
-        "cpuSeconds": 10530.44,
-        "artifactBytes": 381462547,
+        "measuredRuns": 204,
+        "wallSeconds": 6330.109,
+        "cpuSeconds": 10733.27,
+        "artifactBytes": 387220916,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -928,9 +928,9 @@
       },
       "sourceReports": {
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-fcd71b79/report.json",
-        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-29a80ab4/report.json",
+        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-18f9d4d5/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-fcd71b79/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-66f38313/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
@@ -1155,9 +1155,9 @@
   ],
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-fcd71b79/report.json",
-    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-29a80ab4/report.json",
+    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-18f9d4d5/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-fcd71b79/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-66f38313/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
@@ -1251,7 +1251,7 @@
       "status": "Measured release category; weakest axis",
       "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "effort": "High; 3-6 hrs local/model-assisted analysis",
-      "next": "Tune the highest segment-level audio gap next: challengeResults onset. Rerun audio comparison, event-gap analysis, and quality scoring after the change.",
+      "next": "Tune the highest segment-level audio gap next: playerHit body. Rerun audio comparison, event-gap analysis, and quality scoring after the change.",
       "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-fcd71b79/report.json",
       "costContext": {
         "costClass": "high",
@@ -1259,16 +1259,16 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "102 runs; 80.6 min wall; 142.1 min CPU",
-        "trackedRuns": 102,
-        "trackedWallSeconds": 4833.171,
-        "trackedCpuSeconds": 8526.69,
+        "trackedSpend": "109 runs; 82.5 min wall; 145.5 min CPU",
+        "trackedRuns": 109,
+        "trackedWallSeconds": 4949.745,
+        "trackedCpuSeconds": 8729.52,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
-        "investmentScore": 2.89,
+        "investmentScore": 3.12,
         "gapToTarget": "+0.8",
         "summary": "high; cpu, model-api, openai-api",
-        "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.89."
+        "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.12."
       }
     },
     {
@@ -1346,10 +1346,10 @@
         "trackedCpuSeconds": 2189.31,
         "expectedLift10": 0.24,
         "expectedOverallLift10": 0.02,
-        "investmentScore": 1.79,
+        "investmentScore": 1.68,
         "gapToTarget": "at target",
         "summary": "low; cpu, browser",
-        "valueCostRead": "Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.79."
+        "valueCostRead": "Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.68."
       }
     },
     {
@@ -1386,10 +1386,10 @@
         "trackedCpuSeconds": 2189.31,
         "expectedLift10": 0.28,
         "expectedOverallLift10": 0.023,
-        "investmentScore": 0.9,
+        "investmentScore": 0.82,
         "gapToTarget": "at target",
         "summary": "high; cpu, browser",
-        "valueCostRead": "Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.9."
+        "valueCostRead": "Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.82."
       }
     },
     {
@@ -1464,10 +1464,10 @@
         "trackedCpuSeconds": 1111.38,
         "expectedLift10": 0.35,
         "expectedOverallLift10": 0.029,
-        "investmentScore": 1.61,
+        "investmentScore": 1.51,
         "gapToTarget": "+2.2",
         "summary": "medium; cpu, browser",
-        "valueCostRead": "Expected lift 0.35/10 on metric, 0.029/10 overall; investment score 1.61."
+        "valueCostRead": "Expected lift 0.35/10 on metric, 0.029/10 overall; investment score 1.51."
       }
     },
     {
@@ -1950,12 +1950,12 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "102 runs; 80.6 min wall; 142.1 min CPU",
+      "Tracked spend": "109 runs; 82.5 min wall; 145.5 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "Effort / time estimate": "High; 3-6 hrs local/model-assisted analysis",
-      "Recommended next step": "Tune the highest segment-level audio gap next: challengeResults onset. Rerun audio comparison, event-gap analysis, and quality scoring after the change.",
+      "Recommended next step": "Tune the highest segment-level audio gap next: playerHit body. Rerun audio comparison, event-gap analysis, and quality scoring after the change.",
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-fcd71b79/report.json"
     },
     {
@@ -2219,23 +2219,23 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 687,
     "deltaCount": 103,
-    "measuredRuns": 197,
-    "wallSeconds": 6213.535,
-    "cpuSeconds": 10530.44,
-    "artifactBytes": 381462547,
+    "measuredRuns": 204,
+    "wallSeconds": 6330.109,
+    "cpuSeconds": 10733.27,
+    "artifactBytes": 387220916,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-fcd71b79/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-18f9d4d5/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 196,
-      "Wall time": "103.6 min",
-      "CPU time": "175.5 min"
+      "Measured runs": 203,
+      "Wall time": "105.5 min",
+      "CPU time": "178.9 min"
     },
     {
       "Resource": "browser",
@@ -2271,9 +2271,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 102,
-      "Wall time": "80.6 min",
-      "CPU time": "142.1 min"
+      "Measured runs": 109,
+      "Wall time": "82.5 min",
+      "CPU time": "145.5 min"
     },
     {
       "Axis": "conformance-economics",
@@ -2327,9 +2327,9 @@
       "Gap to target": "+0.8",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "102 runs; 80.6 min wall; 142.1 min CPU",
-      "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.89.",
-      "Next action": "Tune the highest segment-level audio gap next: challengeResults onset. Rerun audio comparison, event-gap analysis, and quality scoring after the change."
+      "Tracked spend": "109 runs; 82.5 min wall; 145.5 min CPU",
+      "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.12.",
+      "Next action": "Tune the highest segment-level audio gap next: playerHit body. Rerun audio comparison, event-gap analysis, and quality scoring after the change."
     },
     {
       "Priority": 2,
@@ -2352,7 +2352,7 @@
       "Estimated effort": "Medium-high; 2-5 hrs",
       "Expected resources": "cpu, browser",
       "Tracked spend": "126 runs; 22.2 min wall; 36.5 min CPU",
-      "Value / cost read": "Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.79.",
+      "Value / cost read": "Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.68.",
       "Next action": "Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning."
     },
     {
@@ -2364,7 +2364,7 @@
       "Estimated effort": "Medium-high; 2-5 hrs, then recurring low-cost guardrail",
       "Expected resources": "cpu, browser",
       "Tracked spend": "126 runs; 22.2 min wall; 36.5 min CPU",
-      "Value / cost read": "Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.9.",
+      "Value / cost read": "Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.82.",
       "Next action": "Advance Path shape and set-formation precision: 520 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land."
     },
     {
@@ -2388,7 +2388,7 @@
       "Estimated effort": "Medium-high; prior runs ~12.8 min wall / 18.5 min CPU",
       "Expected resources": "cpu, browser",
       "Tracked spend": "28 runs; 12.8 min wall; 18.5 min CPU",
-      "Value / cost read": "Expected lift 0.35/10 on metric, 0.029/10 overall; investment score 1.61.",
+      "Value / cost read": "Expected lift 0.35/10 on metric, 0.029/10 overall; investment score 1.51.",
       "Next action": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics."
     },
     {

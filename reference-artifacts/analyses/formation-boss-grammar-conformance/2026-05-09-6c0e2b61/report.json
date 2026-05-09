@@ -1,0 +1,569 @@
+{
+  "generatedAt": "2026-05-09T16:12:52.688Z",
+  "commit": "6c0e2b61",
+  "artifactType": "formation-boss-grammar-conformance",
+  "profile": "tools/harness/reference-profiles/formation-boss-grammar-conformance.json",
+  "sourceRoot": "reference-artifacts/analyses/aurora-level-expansion-cycle",
+  "score10": 9,
+  "summary": {
+    "score10": 9,
+    "windowCount": 9,
+    "regularWindowCount": 5,
+    "challengeWindowCount": 4,
+    "bossRegularWindowCount": 5,
+    "bossEscortWindowCount": 3,
+    "formationSettleProxyWindowCount": 5,
+    "pathHintCount": 0,
+    "formationSlotHintCount": 0,
+    "pathSlotExtractionScore10": 10,
+    "cappedPathSlotScore10": 5.5,
+    "runtimePathTrackCount": 511,
+    "runtimeSlotTrackCount": 520,
+    "runtimeBossMovingTrackCount": 77,
+    "pathFamilyScore10": 6.8,
+    "pathFamilyComparisonConfidence": 0.64,
+    "classifiedPathFamilyCount": 520,
+    "expectedPathFamilyCoverage": 1,
+    "weakestMetric": {
+      "id": "path-shape-precision",
+      "label": "Path shape and set-formation precision",
+      "score10": 6.8,
+      "calculation": "Heuristic path-family comparison score from extracted runtime trajectories, capped until frame-labeled Galaga reference path families are available.",
+      "currentRead": "520 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.",
+      "success": "Runtime boss/escort/challenge path traces and formation slot positions are available first, then promoted to direct reference comparison against Galaga path families."
+    },
+    "strongestMetric": {
+      "id": "formation-settle-evidence",
+      "label": "Formation settle evidence",
+      "score10": 10,
+      "calculation": "55% regular-window formation-active settle proxy plus 45% runtime rack/challenge slot-coordinate extraction coverage.",
+      "currentRead": "5/5 regular windows expose formation-active counts; path-slot extraction found 520 slot tracks.",
+      "success": "Evidence captures formation-active counts and, in the next scorer version, target rack slot geometry by stage."
+    },
+    "topProblem": "Boss/escort path-shape precision is still capped because the scorer has heuristic runtime path families before it has frame-labeled Galaga reference-family comparison.",
+    "strategy": "Promote boss/escort/challenge path traces, formation slot coordinates, and stage-family entry labels into the ingestion corpus, then use this scorer to rank stage scripts and runtime changes.",
+    "successMeasure": "Raise this family above 8.0/10 with path-shape precision above 5.0/10, minimum regular-stage signature distance above 0.16, and at least two challenge windows with distinct pattern identity."
+  },
+  "metrics": [
+    {
+      "id": "boss-entry-timing",
+      "label": "Boss entry timing",
+      "score10": 8.7,
+      "calculation": "35% regular-window boss presence plus 65% first boss timing fit against early/mid/late stage-band timing windows.",
+      "currentRead": "5/5 regular windows expose boss presence; mean timing fit 0.8.",
+      "success": "Regular-stage boss appearances land in stage-band timing windows and vary enough over time to feel authored."
+    },
+    {
+      "id": "boss-escort-composition",
+      "label": "Boss escort composition",
+      "score10": 8.4,
+      "calculation": "60% boss-plus-escort windows versus target count plus 40% regular-window escort-start coverage.",
+      "currentRead": "3 regular windows contain both boss and escort signals; 3/5 regular windows have escort starts.",
+      "success": "Mid/late windows include visible boss and escort relationships rather than isolated boss dives only."
+    },
+    {
+      "id": "formation-settle-evidence",
+      "label": "Formation settle evidence",
+      "score10": 10,
+      "calculation": "55% regular-window formation-active settle proxy plus 45% runtime rack/challenge slot-coordinate extraction coverage.",
+      "currentRead": "5/5 regular windows expose formation-active counts; path-slot extraction found 520 slot tracks.",
+      "success": "Evidence captures formation-active counts and, in the next scorer version, target rack slot geometry by stage."
+    },
+    {
+      "id": "challenge-pattern-identity",
+      "label": "Challenge-stage pattern identity",
+      "score10": 10,
+      "calculation": "Challenge window coverage, required challenge event-family presence, enemy-family variety, and boss signal.",
+      "currentRead": "4/4 challenge windows; required-family average 1; boss signal 1.",
+      "success": "Challenge stages show wave start, path, hit, result, boss/family variety, and bonus-learning opportunities."
+    },
+    {
+      "id": "stage-variation",
+      "label": "Stage-to-stage formation variation",
+      "score10": 10,
+      "calculation": "55% closest regular-stage signature distance against minimum target plus 45% distinct-pair ratio.",
+      "currentRead": "Minimum regular distance 0.286; distinct pair ratio 1.",
+      "success": "Nearby regular stages maintain signature distance above the repetition-risk threshold and show visibly different alien entry formations, rack timing, and path methods."
+    },
+    {
+      "id": "path-shape-precision",
+      "label": "Path shape and set-formation precision",
+      "score10": 6.8,
+      "calculation": "Heuristic path-family comparison score from extracted runtime trajectories, capped until frame-labeled Galaga reference path families are available.",
+      "currentRead": "520 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.",
+      "success": "Runtime boss/escort/challenge path traces and formation slot positions are available first, then promoted to direct reference comparison against Galaga path families."
+    }
+  ],
+  "windows": [
+    {
+      "id": "challenge-stage-boss-led-loop",
+      "scenario": "stage15-challenge-boss-led-loop",
+      "stage": 15,
+      "band": "challenge",
+      "challenge": true,
+      "durationS": 24,
+      "eventCount": 100,
+      "attackCount": 0,
+      "bossEventCount": 12,
+      "bossAttackCount": 0,
+      "escortStartCount": 0,
+      "bossAndEscortWindow": false,
+      "firstBossAttackTime": null,
+      "firstBossPresenceTime": 1.5,
+      "firstEscortTime": null,
+      "firstChallengePathTime": 0.367,
+      "firstChallengeHitTime": 1.417,
+      "lanesTouched": 0,
+      "familyCounts": {
+        "stage_spawn": 2,
+        "player_shot": 65,
+        "rogue": 4,
+        "boss": 12,
+        "bee": 5,
+        "but": 11,
+        "challenge_clear": 1
+      },
+      "eventFamilies": [
+        "challenge_enemy_hit",
+        "challenge_enemy_path",
+        "challenge_result",
+        "challenge_wave_start"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 0,
+        "end": 36,
+        "min": 0,
+        "max": 39,
+        "mean": 12.04,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 40,
+        "familyVariety": 5,
+        "requiredFamiliesPresent": 4
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "challenge-stage-candidate",
+      "scenario": "stage3-challenge",
+      "stage": 3,
+      "band": "challenge",
+      "challenge": true,
+      "durationS": 24,
+      "eventCount": 108,
+      "attackCount": 0,
+      "bossEventCount": 8,
+      "bossAttackCount": 0,
+      "escortStartCount": 0,
+      "bossAndEscortWindow": false,
+      "firstBossAttackTime": null,
+      "firstBossPresenceTime": 4.15,
+      "firstEscortTime": null,
+      "firstChallengePathTime": 0.367,
+      "firstChallengeHitTime": 1.417,
+      "lanesTouched": 0,
+      "familyCounts": {
+        "stage_spawn": 2,
+        "player_shot": 69,
+        "but": 16,
+        "bee": 12,
+        "boss": 8,
+        "challenge_clear": 1
+      },
+      "eventFamilies": [
+        "challenge_enemy_hit",
+        "challenge_enemy_path",
+        "challenge_result",
+        "challenge_wave_start"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 0,
+        "end": 37,
+        "min": 0,
+        "max": 39,
+        "mean": 10.48,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 40,
+        "familyVariety": 4,
+        "requiredFamiliesPresent": 4
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "challenge-stage-scorpion-cross",
+      "scenario": "stage7-challenge-cross-sweep",
+      "stage": 7,
+      "band": "challenge",
+      "challenge": true,
+      "durationS": 24,
+      "eventCount": 100,
+      "attackCount": 0,
+      "bossEventCount": 7,
+      "bossAttackCount": 0,
+      "escortStartCount": 0,
+      "bossAndEscortWindow": false,
+      "firstBossAttackTime": null,
+      "firstBossPresenceTime": 1.433,
+      "firstEscortTime": null,
+      "firstChallengePathTime": 0.367,
+      "firstChallengeHitTime": 1.433,
+      "lanesTouched": 0,
+      "familyCounts": {
+        "stage_spawn": 2,
+        "player_shot": 65,
+        "boss": 7,
+        "bee": 10,
+        "but": 8,
+        "rogue": 7,
+        "challenge_clear": 1
+      },
+      "eventFamilies": [
+        "challenge_enemy_hit",
+        "challenge_enemy_path",
+        "challenge_result",
+        "challenge_wave_start"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 0,
+        "end": 37,
+        "min": 0,
+        "max": 40,
+        "mean": 12,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 40,
+        "familyVariety": 5,
+        "requiredFamiliesPresent": 4
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "challenge-stage-stingray-hook",
+      "scenario": "stage11-challenge-hook-arc",
+      "stage": 11,
+      "band": "challenge",
+      "challenge": true,
+      "durationS": 24,
+      "eventCount": 108,
+      "attackCount": 0,
+      "bossEventCount": 10,
+      "bossAttackCount": 0,
+      "escortStartCount": 0,
+      "bossAndEscortWindow": false,
+      "firstBossAttackTime": null,
+      "firstBossPresenceTime": 1.4,
+      "firstEscortTime": null,
+      "firstChallengePathTime": 0.367,
+      "firstChallengeHitTime": 1.4,
+      "lanesTouched": 0,
+      "familyCounts": {
+        "stage_spawn": 2,
+        "player_shot": 69,
+        "boss": 10,
+        "bee": 10,
+        "rogue": 8,
+        "but": 8,
+        "challenge_clear": 1
+      },
+      "eventFamilies": [
+        "challenge_enemy_hit",
+        "challenge_enemy_path",
+        "challenge_result",
+        "challenge_wave_start"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 0,
+        "end": 39,
+        "min": 0,
+        "max": 40,
+        "mean": 12.52,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 40,
+        "familyVariety": 5,
+        "requiredFamiliesPresent": 4
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "late-run-cleanup-or-failure",
+      "scenario": "stage12-variety",
+      "stage": 12,
+      "band": "late",
+      "challenge": false,
+      "durationS": 24,
+      "eventCount": 40,
+      "attackCount": 20,
+      "bossEventCount": 1,
+      "bossAttackCount": 1,
+      "escortStartCount": 0,
+      "bossAndEscortWindow": false,
+      "firstBossAttackTime": 22.083,
+      "firstBossPresenceTime": 22.083,
+      "firstEscortTime": null,
+      "firstChallengePathTime": null,
+      "firstChallengeHitTime": null,
+      "lanesTouched": 4,
+      "familyCounts": {
+        "bee": 24,
+        "but": 15,
+        "boss": 1
+      },
+      "eventFamilies": [
+        "enemy_dive_start",
+        "enemy_projectile",
+        "player_hit"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 40,
+        "end": 32,
+        "min": 32,
+        "max": 40,
+        "mean": 33.4,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 0,
+        "familyVariety": 3,
+        "requiredFamiliesPresent": 0
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "late-run-escort-variant",
+      "scenario": "stage14-escort-variant",
+      "stage": 14,
+      "band": "late",
+      "challenge": false,
+      "durationS": 12,
+      "eventCount": 36,
+      "attackCount": 22,
+      "bossEventCount": 8,
+      "bossAttackCount": 5,
+      "escortStartCount": 12,
+      "bossAndEscortWindow": true,
+      "firstBossAttackTime": 3,
+      "firstBossPresenceTime": 1.983,
+      "firstEscortTime": 3,
+      "firstChallengePathTime": null,
+      "firstChallengeHitTime": null,
+      "lanesTouched": 6,
+      "familyCounts": {
+        "stage_spawn": 1,
+        "boss": 8,
+        "but": 18,
+        "bee": 9
+      },
+      "eventFamilies": [
+        "enemy_dive_start",
+        "enemy_projectile",
+        "escort_dive_start",
+        "formation_entry",
+        "player_hit"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 40,
+        "end": 29,
+        "min": 29,
+        "max": 40,
+        "mean": 34.462,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 0,
+        "familyVariety": 3,
+        "requiredFamiliesPresent": 0
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "mid-run-entry-variant",
+      "scenario": "stage8-entry-variant",
+      "stage": 8,
+      "band": "mid",
+      "challenge": false,
+      "durationS": 16,
+      "eventCount": 26,
+      "attackCount": 12,
+      "bossEventCount": 3,
+      "bossAttackCount": 2,
+      "escortStartCount": 2,
+      "bossAndEscortWindow": true,
+      "firstBossAttackTime": 10.117,
+      "firstBossPresenceTime": 10.117,
+      "firstEscortTime": 15.15,
+      "firstChallengePathTime": null,
+      "firstChallengeHitTime": null,
+      "lanesTouched": 5,
+      "familyCounts": {
+        "stage_spawn": 1,
+        "but": 14,
+        "bee": 8,
+        "boss": 3
+      },
+      "eventFamilies": [
+        "enemy_dive_start",
+        "enemy_projectile",
+        "escort_dive_start",
+        "flank_dive_start",
+        "formation_entry",
+        "player_hit"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 40,
+        "end": 30,
+        "min": 30,
+        "max": 40,
+        "mean": 32.941,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 0,
+        "familyVariety": 3,
+        "requiredFamiliesPresent": 0
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "mid-run-pressure",
+      "scenario": "stage6-regular",
+      "stage": 6,
+      "band": "mid",
+      "challenge": false,
+      "durationS": 8,
+      "eventCount": 18,
+      "attackCount": 10,
+      "bossEventCount": 2,
+      "bossAttackCount": 2,
+      "escortStartCount": 4,
+      "bossAndEscortWindow": true,
+      "firstBossAttackTime": 5.717,
+      "firstBossPresenceTime": 5.717,
+      "firstEscortTime": 5.717,
+      "firstChallengePathTime": null,
+      "firstChallengeHitTime": null,
+      "lanesTouched": 3,
+      "familyCounts": {
+        "stage_spawn": 1,
+        "but": 11,
+        "bee": 4,
+        "boss": 2
+      },
+      "eventFamilies": [
+        "enemy_dive_start",
+        "enemy_projectile",
+        "escort_dive_start",
+        "formation_entry"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 40,
+        "end": 36,
+        "min": 36,
+        "max": 40,
+        "mean": 37.222,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 0,
+        "familyVariety": 3,
+        "requiredFamiliesPresent": 0
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    },
+    {
+      "id": "stage-1-baseline",
+      "scenario": "stage1-descent",
+      "stage": 1,
+      "band": "early",
+      "challenge": false,
+      "durationS": 24,
+      "eventCount": 23,
+      "attackCount": 6,
+      "bossEventCount": 1,
+      "bossAttackCount": 1,
+      "escortStartCount": 0,
+      "bossAndEscortWindow": false,
+      "firstBossAttackTime": 20.4,
+      "firstBossPresenceTime": 20.4,
+      "firstEscortTime": null,
+      "firstChallengePathTime": null,
+      "firstChallengeHitTime": null,
+      "lanesTouched": 4,
+      "familyCounts": {
+        "game_start": 1,
+        "stage_spawn": 1,
+        "key_down": 5,
+        "but": 7,
+        "bee": 8,
+        "boss": 1
+      },
+      "eventFamilies": [
+        "enemy_dive_start",
+        "enemy_projectile",
+        "formation_entry",
+        "player_move",
+        "stage_start"
+      ],
+      "formation": {
+        "observed": true,
+        "start": 40,
+        "end": 40,
+        "min": 40,
+        "max": 40,
+        "mean": 40,
+        "hasSettleProxy": true
+      },
+      "challengePattern": {
+        "maxEnemies": 0,
+        "familyVariety": 5,
+        "requiredFamiliesPresent": 0
+      },
+      "measurementDebt": {
+        "pathShapeMotionHints": 0,
+        "formationSlotCoordinates": 0
+      }
+    }
+  ],
+  "sourceReports": {
+    "stageSignature": "reference-artifacts/analyses/stage-signature-distance/2026-05-09-66f38313/report.json",
+    "pathSlotExtraction": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-09-66f38313/report.json",
+    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-09-66f38313/report.json"
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "generatedAt": "2026-05-09T16:11:50.365Z",
+  "profile": {
+    "id": "player-movement-conformance",
+    "title": "Player Movement Conformance",
+    "purpose": "Measure whether Aurora player movement still matches the documented joystick-translation principles for tap correction, hold travel, reversal, and firing while moving.",
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "capture": {
+      "stage": 1,
+      "ships": 3,
+      "seed": 2201,
+      "intervalMs": 16,
+      "tapHoldMs": 60,
+      "tapReleaseMs": 240,
+      "holdMs": 220,
+      "holdReleaseMs": 240,
+      "reversalFirstMs": 140,
+      "reversalSecondMs": 180,
+      "reversalReleaseMs": 240,
+      "moveFireLeadMs": 100,
+      "moveFirePostMs": 140,
+      "moveFireReleaseMs": 180,
+      "settleVxThreshold": 8
+    },
+    "referenceTraceSource": "reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65/movement-traces.json",
+    "targets": {
+      "tapAbsDelta": {
+        "min": 11.5,
+        "max": 19.5
+      },
+      "holdDelta": {
+        "min": 67,
+        "max": 97
+      },
+      "settleMsAfterRelease": {
+        "max": 320
+      },
+      "reversalCrossMs": {
+        "max": 280
+      },
+      "shotDelayMsWhileMoving": {
+        "max": 80
+      },
+      "postShotTravel": {
+        "min": 35
+      },
+      "maxFrameStep": {
+        "max": 17
+      }
+    }
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "baseline": {
+    "tapLeft": {
+      "startX": 140,
+      "endX": 122.96,
+      "absDelta": 17.04,
+      "maxFrameStep": 3.11
+    },
+    "holdRight": {
+      "startX": 122.96,
+      "endX": 213.95,
+      "delta": 90.99,
+      "maxFrameStep": 10.23,
+      "settleMsAfterRelease": 209
+    },
+    "reversal": {
+      "centerX": 213.95,
+      "reversalCrossMs": 268,
+      "maxFrameStep": 20.52,
+      "settleMsAfterRelease": 207
+    },
+    "moveFire": {
+      "shotDelayMs": 37,
+      "postShotTravel": 95.26,
+      "maxFrameStep": 13.97
+    },
+    "global": {
+      "maxFrameStep": 20.52
+    },
+    "subScores": {
+      "tapScore": 1,
+      "holdScore": 1,
+      "releaseScore": 1,
+      "reversalScore": 1,
+      "shotDelayScore": 1,
+      "postShotTravelScore": 1,
+      "frameStepScore": 0.793
+    },
+    "metricReads": {
+      "tapAbsDelta": {
+        "value": 17.04,
+        "target": {
+          "min": 11.5,
+          "max": 19.5
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "holdDelta": {
+        "value": 90.99,
+        "target": {
+          "min": 67,
+          "max": 97
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "settleMsAfterRelease": {
+        "value": 209,
+        "target": {
+          "max": 320
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "reversalCrossMs": {
+        "value": 268,
+        "target": {
+          "max": 280
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "shotDelayMsWhileMoving": {
+        "value": 37,
+        "target": {
+          "max": 80
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "postShotTravel": {
+        "value": 95.26,
+        "target": {
+          "min": 35
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "maxFrameStep": {
+        "value": 20.52,
+        "target": {
+          "max": 17
+        },
+        "score": 0.793,
+        "withinTolerance": false,
+        "gapPastMax": 3.52
+      }
+    },
+    "score10": 9.7
+  },
+  "current": {
+    "tapLeft": {
+      "startX": 140,
+      "endX": 122.86,
+      "absDelta": 17.14,
+      "maxFrameStep": 3.29
+    },
+    "holdRight": {
+      "startX": 122.86,
+      "endX": 213.91,
+      "delta": 91.05,
+      "maxFrameStep": 9.75,
+      "settleMsAfterRelease": 209
+    },
+    "reversal": {
+      "centerX": 213.91,
+      "reversalCrossMs": 267,
+      "maxFrameStep": 19.36,
+      "settleMsAfterRelease": 216
+    },
+    "moveFire": {
+      "shotDelayMs": 33,
+      "postShotTravel": 79.87,
+      "maxFrameStep": 12.01
+    },
+    "global": {
+      "maxFrameStep": 19.36
+    },
+    "subScores": {
+      "tapScore": 1,
+      "holdScore": 1,
+      "releaseScore": 1,
+      "reversalScore": 1,
+      "shotDelayScore": 1,
+      "postShotTravelScore": 1,
+      "frameStepScore": 0.861
+    },
+    "metricReads": {
+      "tapAbsDelta": {
+        "value": 17.14,
+        "target": {
+          "min": 11.5,
+          "max": 19.5
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "holdDelta": {
+        "value": 91.05,
+        "target": {
+          "min": 67,
+          "max": 97
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "settleMsAfterRelease": {
+        "value": 209,
+        "target": {
+          "max": 320
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "reversalCrossMs": {
+        "value": 267,
+        "target": {
+          "max": 280
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "shotDelayMsWhileMoving": {
+        "value": 33,
+        "target": {
+          "max": 80
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "postShotTravel": {
+        "value": 79.87,
+        "target": {
+          "min": 35
+        },
+        "score": 1,
+        "withinTolerance": true,
+        "gap": 0
+      },
+      "maxFrameStep": {
+        "value": 19.36,
+        "target": {
+          "max": 17
+        },
+        "score": 0.861,
+        "withinTolerance": false,
+        "gapPastMax": 2.36
+      }
+    },
+    "score10": 9.8
+  },
+  "summary": {
+    "baselineScore10": 9.7,
+    "currentScore10": 9.8,
+    "scoreDelta": 0.1
+  }
+}

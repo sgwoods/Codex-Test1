@@ -1230,7 +1230,8 @@ async function main(){
         label: set.referenceLabel || 'Challenge Perfect Reference',
         source: rel(referenceSource),
         wav: rel(referenceWav, outRoot),
-        window: set.referenceWindow || null
+        window: set.referenceWindow || null,
+        segmentation: set.referenceSegmentation || null
       }
     });
   }

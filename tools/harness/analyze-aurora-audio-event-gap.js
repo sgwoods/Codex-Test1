@@ -322,6 +322,7 @@ function rowForItem(item, context = {}){
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
   const bestSegment = (item.referenceSegmentCandidates || [])[0] || null;
   const segment = worstSegment(item);
+  const segmentationSummary = item.referenceSegmentation?.summary || {};
   const comparisonSet = context.comparisonByCue?.get(item.cue) || null;
   const sharedReferenceClipCount = context.referenceClipCounts?.get(comparisonSet?.referenceClip || '') || 0;
   const sharedReferenceWindowCount = context.referenceWindowCounts?.get(referenceWindowKey(comparisonSet)) || 0;
@@ -356,6 +357,14 @@ function rowForItem(item, context = {}){
     worstSegmentRisk10: segment ? round(segment.auroraSegmentRisk10, 2) : null,
     worstSegmentInterpretation: segment?.interpretation || null,
     worstSegmentDelta: segment?.auroraVsReference || null,
+    referenceSegmentationStatus: segmentationSummary.status || null,
+    referenceSegmentationConfidence: segmentationSummary.confidence || comparisonSet?.mappingConfidence || 'unknown',
+    referenceSegmentationResolution: segmentationSummary.resolution || (
+      (item.segmentRoleComparisons || []).length
+        ? 'auto energy segmentation with role-by-role comparison'
+        : 'whole-active-window comparison'
+    ),
+    referenceSegmentationSource: segmentationSummary.source || null,
     ...semantics,
     sourceReferenceClipCount: sharedReferenceClipCount,
     sourceReferenceWindowCount: sharedReferenceWindowCount,
@@ -514,11 +523,11 @@ function markdown(report){
     '',
     '## Highest-Risk Compared Cues',
     '',
-    '| Rank | Cue | Label | Risk /10 | Status | Duration gap | Centroid gap | Worst segment | Segment risk | Recommended action |',
-    '| ---: | --- | --- | ---: | --- | ---: | ---: | --- | ---: | --- |'
+    '| Rank | Cue | Label | Risk /10 | Confidence | Resolution | Duration gap | Centroid gap | Worst segment | Segment risk | Recommended action |',
+    '| ---: | --- | --- | ---: | --- | --- | ---: | ---: | --- | ---: | --- |'
   );
   report.comparedCueRisks.slice(0, 12).forEach((item, index) => {
-    lines.push(`| ${index + 1} | ${item.cue} | ${item.label} | ${item.gapRisk10} | ${item.status} | ${item.durationGapSeconds}s | ${item.centroidGapHz} Hz | ${item.worstSegmentRole || 'n/a'} | ${item.worstSegmentRisk10 ?? 'n/a'} | ${item.recommendation} |`);
+    lines.push(`| ${index + 1} | ${item.cue} | ${item.label} | ${item.gapRisk10} | ${item.referenceSegmentationConfidence || 'unknown'} | ${item.referenceSegmentationStatus || item.status} | ${item.durationGapSeconds}s | ${item.centroidGapHz} Hz | ${item.worstSegmentRole || 'n/a'} | ${item.worstSegmentRisk10 ?? 'n/a'} | ${item.recommendation} |`);
   });
   lines.push('', '## Missing Critical Comparison Coverage', '');
   if(report.missingCriticalComparisonCues.length){

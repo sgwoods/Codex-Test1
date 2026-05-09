@@ -774,7 +774,8 @@ async function main(){
         label: set.referenceLabel || 'Capture Beam Reference',
         source: rel(referenceSource),
         wav: rel(referenceWav, outRoot),
-        window: set.referenceWindow || null
+        window: set.referenceWindow || null,
+        segmentation: set.referenceSegmentation || null
       }
     });
   }

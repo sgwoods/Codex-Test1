@@ -656,7 +656,8 @@ async function main(){
         label: set.referenceLabel || 'Ship Loss Reference',
         source: rel(referenceSource),
         wav: rel(referenceWav, outRoot),
-        window: set.referenceWindow || null
+        window: set.referenceWindow || null,
+        segmentation: set.referenceSegmentation || null
       }
     };
   });

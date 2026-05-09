@@ -389,6 +389,55 @@ def reference_segmentation(sample_rate, data):
     }
 
 
+def number_or_none(value):
+    try:
+        parsed = float(value)
+        return parsed if math.isfinite(parsed) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def curated_reference_segmentation(sample_rate, data, segmentation):
+    if not isinstance(segmentation, dict):
+        return None
+    source_segments = segmentation.get("segments") or []
+    described = []
+    for index, source in enumerate(source_segments):
+        start = number_or_none(source.get("start_s", source.get("startSeconds")))
+        end = number_or_none(source.get("end_s", source.get("endSeconds")))
+        if start is None or end is None or end <= start:
+            continue
+        start_sample = max(0, min(data.size, int(round(start * sample_rate))))
+        end_sample = max(start_sample, min(data.size, int(round(end * sample_rate))))
+        if end_sample <= start_sample:
+            continue
+        segment_data = data[start_sample:end_sample]
+        described.append({
+            "role": source.get("role") or ("onset" if index == 0 else "body"),
+            "label": source.get("label") or source.get("role") or f"segment-{index + 1}",
+            "start_s": round(start_sample / sample_rate, 3),
+            "end_s": round(end_sample / sample_rate, 3),
+            "duration_s": round((end_sample - start_sample) / sample_rate, 3),
+            "metrics": metrics(sample_rate, segment_data),
+            "curated": True,
+        })
+    if not described:
+        return None
+    dominant = max(described, key=lambda segment: segment["metrics"].get("rms") or 0)
+    return {
+        "segments": described,
+        "summary": {
+            "segmentCount": len(described),
+            "status": "curated-reference-segmentation",
+            "dominantRole": dominant["role"],
+            "dominantWindow": {"start_s": dominant["start_s"], "end_s": dominant["end_s"]},
+            "confidence": segmentation.get("confidence") or "medium",
+            "resolution": segmentation.get("resolution") or "curated onset/body/tail reference windows",
+            "source": segmentation.get("source") or "application-guide",
+        },
+    }
+
+
 def average_delta(items, path):
     values = []
     for item in items:
@@ -531,13 +580,16 @@ def main():
             spec_path = os.path.join(plots_dir, f"{item['id']}-{key}-spectrogram.png")
             wave_path = save_waveform(sample_rate, data, wave_path, f"{item['label']} · {variant['label']} waveform")
             spec_path = save_spectrogram(sample_rate, data, spec_path, f"{item['label']} · {variant['label']} spectrogram")
+            segmentation = curated_reference_segmentation(sample_rate, data, variant.get("segmentation")) if key == "reference" else None
+            if segmentation is None:
+                segmentation = reference_segmentation(sample_rate, active_data)
             item_report["variants"][key] = {
                 "label": variant["label"],
                 "wav": variant["wav"],
                 "metrics": m,
                 "activeWindow": active,
                 "activeMetrics": active_metrics,
-                "eventSegmentation": reference_segmentation(sample_rate, active_data),
+                "eventSegmentation": segmentation,
                 "waveform": rel(wave_path, out_root) if wave_path else None,
                 "spectrogram": rel(spec_path, out_root) if spec_path else None,
             }
@@ -567,10 +619,7 @@ def main():
             loaded_variants["reference"]["data"],
             aur_active,
         )
-        item_report["referenceSegmentation"] = reference_segmentation(
-            loaded_variants["reference"]["sampleRate"],
-            loaded_variants["reference"]["data"],
-        )
+        item_report["referenceSegmentation"] = item_report["variants"]["reference"]["eventSegmentation"]
         item_report["segmentRoleComparisons"] = segment_role_comparisons(item_report)
         readme_lines.extend([
             "",

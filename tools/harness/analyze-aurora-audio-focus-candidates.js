@@ -657,7 +657,8 @@ async function analyzeCue(key, generatedAt, rootDir){
         label: set.referenceLabel || `${config.title} Reference`,
         source: rel(referenceSource),
         wav: rel(referenceWav, cueDir),
-        window: set.referenceWindow || null
+        window: set.referenceWindow || null,
+        segmentation: set.referenceSegmentation || null
       }
     };
   });

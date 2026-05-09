@@ -660,6 +660,31 @@
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
         "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
       },
+      "referenceSegmentation": {
+        "source": "curated from measured tractor-beam reference window after repeatability-gate pass",
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 3.199-3.679s tractor-beam window; labels separate beam strike from sustained beam body",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "beam deploy strike",
+            "startSeconds": 0,
+            "endSeconds": 0.17
+          },
+          {
+            "role": "body",
+            "label": "sustained tractor tone",
+            "startSeconds": 0.17,
+            "endSeconds": 0.269
+          },
+          {
+            "role": "tail",
+            "label": "active beam falloff",
+            "startSeconds": 0.269,
+            "endSeconds": 0.339
+          }
+        ]
+      },
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
     },
@@ -734,6 +759,31 @@
       "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
       "referenceLabel": "Death",
       "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+      "referenceSegmentation": {
+        "source": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
+        "confidence": "medium-high",
+        "resolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "ship-loss blast onset",
+            "startSeconds": 0.02,
+            "endSeconds": 0.459
+          },
+          {
+            "role": "body",
+            "label": "sustained death body",
+            "startSeconds": 0.459,
+            "endSeconds": 0.858
+          },
+          {
+            "role": "tail",
+            "label": "death cue falloff",
+            "startSeconds": 0.858,
+            "endSeconds": 0.988
+          }
+        ]
+      },
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
     },
@@ -765,6 +815,31 @@
         "endSeconds": 1.17,
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
         "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+      },
+      "referenceSegmentation": {
+        "source": "curated from challenging-stage-results reference window after challengeResults event-gap pass",
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 0.75-1.17s challenge-results phrase; labels distinguish attack, result body, and falloff",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "results phrase attack",
+            "startSeconds": 0,
+            "endSeconds": 0.14
+          },
+          {
+            "role": "body",
+            "label": "results phrase body",
+            "startSeconds": 0.14,
+            "endSeconds": 0.34
+          },
+          {
+            "role": "tail",
+            "label": "results phrase falloff",
+            "startSeconds": 0.34,
+            "endSeconds": 0.42
+          }
+        ]
       },
       "mappingStatus": "New Aurora cue slot added from the cue matrix.",
       "mappingConfidence": "high"

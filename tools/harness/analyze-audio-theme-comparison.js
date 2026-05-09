@@ -160,7 +160,8 @@ async function main(){
         label: row.item.referenceLabel || 'Reference',
         source: path.relative(ROOT, referenceSource),
         wav: path.relative(outRoot, referenceWav),
-        window: referenceWindow
+        window: referenceWindow,
+        segmentation: row.item.referenceSegmentation || null
       }
     });
   }
