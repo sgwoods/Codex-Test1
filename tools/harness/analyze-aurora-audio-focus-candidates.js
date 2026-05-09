@@ -303,7 +303,7 @@ const CUE_CONFIGS = {
         }
       }
     ],
-    keeper: { risk: .25, segment: .35, duration: .08, acceptableDuration: .16, centroidWorsenHz: 120, bandWorsen: .06 }
+    keeper: { risk: .25, segment: .35, duration: .08, acceptableDuration: .16, centroidWorsenHz: 120, bandWorsen: .06, cadencePressure: 1, cadencePressureMin: 3.5 }
   },
   'ship-loss': {
     cue: 'playerHit',
@@ -664,10 +664,47 @@ function referenceGridSpecs(config, set){
   return specs.sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id)).slice(0, limit);
 }
 
+function formationPulseCadenceSpecs(config){
+  if(config.cue !== 'stagePulse') return [];
+  const profiles = [
+    { id: 'sine82', wave: 'sine', freqs: [82, 123], volumes: [.0042, .0022], lpHz: [420, 560], attacks: [.07, .04], delays: [0, .058], durations: [.2, .13], scoreBias: .04 },
+    { id: 'sine98', wave: 'sine', freqs: [98, 147], volumes: [.004, .002], lpHz: [460, 620], attacks: [.076, .042], delays: [0, .062], durations: [.2, .12], scoreBias: .02 },
+    { id: 'tri98', wave: 'triangle', freqs: [98, 147], volumes: [.0038, .0018], lpHz: [480, 640], attacks: [.082, .046], delays: [0, .06], durations: [.21, .12], scoreBias: .03 },
+    { id: 'tri123', wave: 'triangle', freqs: [123, 185], volumes: [.0034, .0016], lpHz: [520, 700], attacks: [.07, .04], delays: [0, .052], durations: [.19, .11], scoreBias: .01 },
+    { id: 'square98', wave: 'square', freqs: [98, 147], volumes: [.0028, .0013], lpHz: [380, 520], attacks: [.06, .04], delays: [0, .064], durations: [.18, .1], scoreBias: .06 },
+    { id: 'sine98-body', wave: 'sine', freqs: [98], volumes: [.0048], lpHz: [440], attacks: [.09], delays: [0], durations: [.22], scoreBias: 0 }
+  ];
+  return profiles.map((profile, index) => ({
+    id: `cadence-${profile.id}`,
+    label: `Cadence generator ${profile.id}`,
+    generated: true,
+    generator: {
+      family: 'stage-pulse-cadence-pressure-grid',
+      heuristic: round((profile.scoreBias || 0) + (profile.freqs[0] / 10000) + (profile.lpHz[0] / 100000), 5),
+      target: 'Raise low-band body while reducing brightness, zero-crossing density, and RMS for formation pressure cadence.',
+      params: profile
+    },
+    spec: {
+      tones: profile.freqs.map((freq, toneIndex) => ({
+        freq,
+        duration: profile.durations[toneIndex] ?? profile.durations[0],
+        wave: profile.wave,
+        volume: profile.volumes[toneIndex] ?? profile.volumes[0],
+        slide: toneIndex ? -4 : -2,
+        lpHz: profile.lpHz[toneIndex] ?? profile.lpHz[0],
+        delay: profile.delays[toneIndex] ?? 0,
+        attack: profile.attacks[toneIndex] ?? profile.attacks[0],
+        singleOscillator: 1
+      }))
+    }
+  })).sort((a, b) => a.generator.heuristic - b.generator.heuristic || a.id.localeCompare(b.id));
+}
+
 function candidateSpecs(config, set){
   const candidates = [
     { id: 'baseline-current', label: 'Current Aurora baseline', baseline: true },
     ...(config.handSpecs || []),
+    ...formationPulseCadenceSpecs(config),
     ...referenceGridSpecs(config, set)
   ];
   const filter = candidateFilter();
@@ -732,6 +769,46 @@ function bandEnergyDelta(active, reference){
   return delta;
 }
 
+function scoreGap(value, tolerance){
+  const gap = Math.abs(+value || 0);
+  return round(Math.max(0, Math.min(10, 10 - ((gap / Math.max(tolerance, .001)) * 10))), 2);
+}
+
+function scoreDeficit(actual, target, tolerance){
+  const deficit = Math.max(0, (+target || 0) - (+actual || 0));
+  return round(Math.max(0, Math.min(10, 10 - ((deficit / Math.max(tolerance, .001)) * 10))), 2);
+}
+
+function scoreExcess(actual, target, tolerance){
+  const excess = Math.max(0, (+actual || 0) - (+target || 0));
+  return round(Math.max(0, Math.min(10, 10 - ((excess / Math.max(tolerance, .001)) * 10))), 2);
+}
+
+function weightedScore(rows){
+  const total = rows.reduce((sum, row) => sum + (+row.weight || 0), 0);
+  return total > 0 ? round(rows.reduce((sum, row) => sum + (+row.score10 || 0) * (+row.weight || 0), 0) / total, 2) : 0;
+}
+
+function cadencePressureAnalysis(activeMetrics, referenceMetrics){
+  const aurBand = activeMetrics?.band_energy || {};
+  const refBand = referenceMetrics?.band_energy || {};
+  const aurMidPresence = (+aurBand.mid_1500_3000 || 0) + (+aurBand.presence_3000_6000 || 0);
+  const refMidPresence = (+refBand.mid_1500_3000 || 0) + (+refBand.presence_3000_6000 || 0);
+  const axes = [
+    { id: 'low-band-body', score10: scoreDeficit(aurBand.sub_500, refBand.sub_500, .34), weight: .22, aurora: round(+aurBand.sub_500 || 0, 4), reference: round(+refBand.sub_500 || 0, 4) },
+    { id: 'brightness-control', score10: Math.min(scoreExcess(aurMidPresence, refMidPresence, .28), scoreGap((+activeMetrics.spectral_rolloff_85_hz || 0) - (+referenceMetrics.spectral_rolloff_85_hz || 0), 1800)), weight: .22, aurora: round(aurMidPresence, 4), reference: round(refMidPresence, 4) },
+    { id: 'zero-crossing-calm', score10: scoreGap((+activeMetrics.zero_crossings_per_s || 0) - (+referenceMetrics.zero_crossings_per_s || 0), 1700), weight: .18, aurora: round(+activeMetrics.zero_crossings_per_s || 0, 1), reference: round(+referenceMetrics.zero_crossings_per_s || 0, 1) },
+    { id: 'gain-match', score10: scoreGap((+activeMetrics.rms || 0) - (+referenceMetrics.rms || 0), .13), weight: .16, aurora: round(+activeMetrics.rms || 0, 4), reference: round(+referenceMetrics.rms || 0, 4) },
+    { id: 'duration-pocket', score10: scoreGap((+activeMetrics.duration_s || 0) - (+referenceMetrics.duration_s || 0), .12), weight: .12, aurora: round(+activeMetrics.duration_s || 0, 3), reference: round(+referenceMetrics.duration_s || 0, 3) },
+    { id: 'envelope-smoothness', score10: Math.min(scoreGap((+activeMetrics.attack_peak_position || 0) - (+referenceMetrics.attack_peak_position || 0), .5), scoreExcess(activeMetrics.burst_share, referenceMetrics.burst_share, .28)), weight: .1, aurora: { attack_peak_position: round(+activeMetrics.attack_peak_position || 0, 3), burst_share: round(+activeMetrics.burst_share || 0, 3) }, reference: { attack_peak_position: round(+referenceMetrics.attack_peak_position || 0, 3), burst_share: round(+referenceMetrics.burst_share || 0, 3) } }
+  ].sort((a, b) => a.score10 - b.score10 || b.weight - a.weight || a.id.localeCompare(b.id));
+  return {
+    score10: weightedScore(axes),
+    weakestAxis: axes[0]?.id || '',
+    axes
+  };
+}
+
 function rejectionFor(row, baseline, config){
   if(!baseline) return 'no baseline';
   const gate = config.keeper || {};
@@ -745,6 +822,12 @@ function rejectionFor(row, baseline, config){
   if(!durationImprovedEnough && !durationCloseEnough) reasons.push(`duration gap improved only ${round(baseline.durationGapSeconds - row.durationGapSeconds, 3)}s`);
   if(row.bandShapeGap > baseline.bandShapeGap + (gate.bandWorsen ?? .05)) reasons.push(`band shape worsened by ${round(row.bandShapeGap - baseline.bandShapeGap, 4)}`);
   if(row.centroidGapHz > baseline.centroidGapHz + (gate.centroidWorsenHz ?? 100)) reasons.push(`centroid worsened by ${round(row.centroidGapHz - baseline.centroidGapHz, 1)} Hz`);
+  if(row.cadencePressure && baseline.cadencePressure && row.cadencePressure.score10 < baseline.cadencePressure.score10 + (gate.cadencePressure ?? 1)){
+    reasons.push(`cadence pressure improved only ${round(row.cadencePressure.score10 - baseline.cadencePressure.score10, 2)}`);
+  }
+  if(row.cadencePressure && Number.isFinite(+gate.cadencePressureMin) && row.cadencePressure.score10 < +gate.cadencePressureMin){
+    reasons.push(`cadence pressure ${row.cadencePressure.score10} < ${gate.cadencePressureMin}`);
+  }
   if(row.exactSegmentRoleMatchCount < baseline.exactSegmentRoleMatchCount) reasons.push('fewer exact segment-role matches than baseline');
   if((row.stability?.repetitions || 1) > 1){
     if((row.stability.riskStd || 0) > .35) reasons.push(`risk stability sd ${row.stability.riskStd} > 0.35`);
@@ -846,6 +929,7 @@ function aggregateRows(sampleRows){
       activeMetrics,
       referenceMetrics,
       bandEnergyDelta: bandEnergyDelta(activeBandEnergy, referenceBandEnergy),
+      cadencePressure: first.configCue === 'stagePulse' ? cadencePressureAnalysis(activeMetrics, referenceMetrics) : null,
       comparison: avgComparison,
       segmentRoleComparisonCount: Math.round(mean(group.map(row => row.segmentRoleComparisonCount || 0)) || 0),
       averageSegmentRisk10: round(mean(group.map(row => row.averageSegmentRisk10)), 2),
@@ -1032,6 +1116,7 @@ async function analyzeCue(key, generatedAt, rootDir){
     return {
       id: spec?.id || item.id,
       candidateId: capture?.row?.id || spec?.id || item.id,
+      configCue: config.cue,
       repetition: capture?.repetition || 1,
       label: spec?.label || item.label,
       generated: !!spec?.generated,
@@ -1108,6 +1193,8 @@ async function analyzeCue(key, generatedAt, rootDir){
       durationGapSeconds: row.durationGapSeconds,
       centroidGapHz: row.centroidGapHz,
       bandShapeGap: row.bandShapeGap,
+      cadencePressureScore10: row.cadencePressure?.score10 ?? null,
+      cadenceWeakestAxis: row.cadencePressure?.weakestAxis || '',
       keeperRead: row.keeperRead
     }))
   };

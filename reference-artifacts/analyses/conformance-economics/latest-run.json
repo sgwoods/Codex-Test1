@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T19-03-15-176Z-54602",
-  "startedAt": "2026-05-09T19:03:15.176Z",
-  "endedAt": "2026-05-09T19:03:15.399Z",
+  "id": "2026-05-09T19-16-08-167Z-71686",
+  "startedAt": "2026-05-09T19:16:08.167Z",
+  "endedAt": "2026-05-09T19:17:14.896Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "d3306518",
+  "commit": "6584ce5b",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-stage-pulse-cadence"
+    "harness:score:quality-conformance"
   ],
   "axes": [
-    "audio"
+    "overall"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "tracked stagePulse cadence pressure summary",
+  "notes": "quality score after cadence generator no-keeper cycle",
   "measurement": {
-    "wallSeconds": 0.223,
-    "timeRealSeconds": 0.21,
-    "timeUserSeconds": 0.15,
-    "timeSystemSeconds": 0.12,
-    "cpuSeconds": 0.27,
+    "wallSeconds": 66.729,
+    "timeRealSeconds": 66.72,
+    "timeUserSeconds": 58.17,
+    "timeSystemSeconds": 19.4,
+    "cpuSeconds": 77.57,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 560073193,
-    "artifactBytesAfter": 560090857,
-    "artifactBytesDelta": 17664
+    "artifactBytesBefore": 567169031,
+    "artifactBytesAfter": 567685942,
+    "artifactBytesDelta": 516911
   }
 }
