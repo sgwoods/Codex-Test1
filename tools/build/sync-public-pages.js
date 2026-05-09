@@ -4,6 +4,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
 const { ROOT, PRODUCTION_BUILD_INFO } = require('./paths');
+const { buildPublicProjectSections } = require('./public-project-page-sections');
 const {
   checkGitClean,
   checkProductionCheckoutCurrent,
@@ -13,6 +14,7 @@ const {
 const BUILD_INFO = PRODUCTION_BUILD_INFO;
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
+const CONFORMANCE_DASHBOARD_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json');
 const PROJECT_TEMPLATE = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
 const CANONICAL_PROJECT_SLUG = 'aurora-galactica';
 const LEGACY_PROJECT_SLUG = 'codex-test1';
@@ -33,6 +35,14 @@ function loadGhToken(){
 
 function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function readJsonOr(file, fallback){
+  try{
+    return readJson(file);
+  }catch{
+    return fallback;
+  }
 }
 
 function read(file){
@@ -125,6 +135,7 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
   const template = read(PROJECT_TEMPLATE);
   const syncedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
   const templateSha = sha256(template).slice(0, 12);
+  const publicSections = buildPublicProjectSections(readJsonOr(CONFORMANCE_DASHBOARD_LATEST, {}));
   return fill(template, {
     PUBLIC_PAGE_EYEBROW: 'Public Portfolio Project Page',
     PUBLIC_RELEASE_CONTEXT_VALUE: 'Public portfolio sync',
@@ -145,7 +156,8 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
     LANE_CONFORMANCE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
     LANE_PROJECT_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/project-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html',
-    PUBLIC_FOOTER_NOTE: 'Public portfolio summary synced to the production repository state.'
+    PUBLIC_FOOTER_NOTE: 'Public portfolio summary synced to the production repository state.',
+    ...publicSections
   }).trimEnd() + '\n';
 }
 

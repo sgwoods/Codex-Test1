@@ -104,7 +104,12 @@ function checkPublicProjectTemplate(){
     '{{LANE_RELEASE_DASHBOARD_HREF}}',
     '{{LANE_CONFORMANCE_DASHBOARD_HREF}}',
     '{{LANE_PROJECT_GUIDE_HREF}}',
-    '{{PUBLIC_FOOTER_NOTE}}'
+    '{{PUBLIC_FOOTER_NOTE}}',
+    '{{PUBLIC_RELEASE_GATE_CARDS}}',
+    '{{PUBLIC_CONFORMANCE_SCORE_CHART}}',
+    '{{PUBLIC_RESOURCE_SUMMARY_CARDS}}',
+    '{{PUBLIC_INVESTMENT_QUEUE}}',
+    '{{PUBLIC_INGESTION_OVERVIEW_CARDS}}'
   ];
   for(const token of requiredTokens){
     if(!template.includes(token)){
@@ -277,10 +282,13 @@ function checkPublicProjectPageArtifact(cfg){
     'Aurora Galactica on Platinum',
     'Conformance system',
     'Open conformance dashboard',
-    'Conformance program',
-    'Ingestion framework',
+    'PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md',
+    'CLASSIC_ARCADE_INGESTION_FRAMEWORK.md',
     'Release Location',
     'Build Timestamp',
+    'Conformance readout',
+    'Value versus compute',
+    'Reference ingestion',
     buildInfo.label,
     buildInfo.commit
   ];

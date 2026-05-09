@@ -33,6 +33,7 @@ const {
   PRODUCTION_SCREENSHOT
 } = require('./paths');
 const { html: buildConformanceDashboardHtml } = require('../harness/build-dev-conformance-dashboard-page');
+const { buildPublicProjectSections } = require('./public-project-page-sections');
 const pkg = require(path.resolve(ROOT, 'package.json'));
 
 const SRC = path.join(ROOT, 'src');
@@ -1764,6 +1765,8 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
   const template = read(PUBLIC_PROJECT_PAGE_TEMPLATE);
   const templateSha = crypto.createHash('sha256').update(template).digest('hex').slice(0, 12);
   const syncedAt = buildInfo.builtAtUtc || new Date().toISOString();
+  const conformanceData = loadConformanceDashboardData();
+  const publicSections = buildPublicProjectSections(conformanceData);
   const releaseChannel = String(buildInfo.releaseChannel || '').toLowerCase();
   const isProduction = releaseChannel === 'production';
   const contextValue = isProduction ? 'Production lane' : 'Development lane';
@@ -1790,7 +1793,8 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
-    PUBLIC_FOOTER_NOTE: `${contextValue} project-page summary generated from lane build artifacts.`
+    PUBLIC_FOOTER_NOTE: `${contextValue} project-page summary generated from lane build artifacts.`,
+    ...publicSections
   };
   return fillBuildTokens(template, tokens).trimEnd() + '\n';
 }

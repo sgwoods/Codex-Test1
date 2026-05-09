@@ -173,6 +173,141 @@
             font-size: 18px;
         }
 
+        .narrative {
+            max-width: 900px;
+            margin: 0 0 18px;
+        }
+
+        .metricStrip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .miniMetric {
+            padding: 15px 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .miniMetric span,
+        .scoreMeta span,
+        .investmentMeta span {
+            color: #9cc4df;
+            font-size: 12px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .miniMetric strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 24px;
+        }
+
+        .miniMetric small {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .scoreChart {
+            display: grid;
+            gap: 12px;
+        }
+
+        .scoreRow,
+        .investmentRow {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .scoreHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .scoreName,
+        .scoreValue {
+            font-weight: 700;
+        }
+
+        .scoreValue {
+            white-space: nowrap;
+        }
+
+        .barTrack {
+            width: 100%;
+            height: 10px;
+            margin: 12px 0 10px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .barTrack span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #ffcf6e, #67e6a8);
+        }
+
+        .scoreRow.gap .barTrack span {
+            background: linear-gradient(90deg, #ff8a7a, #ffcf6e);
+        }
+
+        .scoreRow.watch .barTrack span {
+            background: linear-gradient(90deg, #ffcf6e, #9fe8ff);
+        }
+
+        .scoreRow.strong .barTrack span {
+            background: linear-gradient(90deg, #67e6a8, #9fe8ff);
+        }
+
+        .scoreRow p,
+        .investmentRow p,
+        .smallText {
+            margin: 8px 0 0;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .scoreMeta,
+        .investmentMeta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .investmentRow {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(220px, .9fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .investmentRow strong {
+            display: block;
+        }
+
+        .investmentMeta {
+            justify-content: flex-end;
+        }
+
+        .emptyState {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         .links {
             display: flex;
             flex-wrap: wrap;
@@ -214,6 +349,14 @@
             .heroTop {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .investmentRow {
+                grid-template-columns: 1fr;
+            }
+
+            .investmentMeta {
+                justify-content: flex-start;
             }
         }
     </style>
@@ -286,6 +429,7 @@
 
         <section class="panel">
             <h2>Conformance system</h2>
+            <p class="narrative">This public page is meant to be read directly, not only used as a launcher. The conformance program compares Aurora against Galaga-family reference behavior through captured examples, derived metrics, repeatable harnesses, confidence notes, and resource accounting. The linked markdown files and dashboards are drill-down artifacts behind the overview shown here.</p>
             <div class="grid">
                 <article class="card">
                     <h3>Ingestion</h3>
@@ -299,6 +443,36 @@
                     <h3>Resource economics</h3>
                     <p>The project tracks local compute, browser work, artifact growth, and GPU-equivalent Codex/OpenAI/API usage so future conformance investment can be chosen by value, confidence, and cost.</p>
                 </article>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Conformance readout</h2>
+            <p class="narrative">The score bars below are working measurements, not claims of perfection. A high number can still carry lower confidence when the scorer lacks enough reference windows or when the metric needs finer resolution. The goal is to make the gap visible, choose the next investment area, and then rerun the harnesses after each improvement.</p>
+            <div class="metricStrip">
+{{PUBLIC_RELEASE_GATE_CARDS}}
+            </div>
+            <div class="scoreChart">
+{{PUBLIC_CONFORMANCE_SCORE_CHART}}
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Value versus compute</h2>
+            <p class="narrative">Conformance work is also an economics problem. Local CPU and browser runs should do as much of the repetitive measurement as possible, while Codex/OpenAI/model calls are treated as GPU-equivalent strategy, critique, harness-design, and interpretation work. The project tracks both so we can compare effort against measured score movement over time.</p>
+            <div class="metricStrip">
+{{PUBLIC_RESOURCE_SUMMARY_CARDS}}
+            </div>
+            <div class="scoreChart">
+{{PUBLIC_INVESTMENT_QUEUE}}
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Reference ingestion</h2>
+            <p class="narrative">Ingestion is the repeatable bridge between external artifacts and playable software. It turns reference media into source windows, annotations, scoreable events, visual comparisons, audio cue maps, and measurement debt that future games can reuse rather than rediscovering by taste alone.</p>
+            <div class="grid">
+{{PUBLIC_INGESTION_OVERVIEW_CARDS}}
             </div>
         </section>
 
@@ -320,10 +494,10 @@
                 <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}">Open project guide</a>
                 <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}">Open Platinum guide</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PLAN.md">Roadmap</a>
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">Conformance program</a>
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">Ingestion framework</a>
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md">Reference baseline</a>
+                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PLAN.md">PLAN.md</a>
+                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a>
+                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a>
+                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md">REFERENCE_BASELINE.md</a>
             </div>
             <p class="footer">{{PUBLIC_FOOTER_NOTE}} Date label: {{PUBLIC_DATE_LONG}}.</p>
         </section>
