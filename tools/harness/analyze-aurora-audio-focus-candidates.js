@@ -117,6 +117,158 @@ const CUE_CONFIGS = {
       }
     ],
     keeper: { risk: .25, segment: .35, duration: .12, acceptableDuration: .1, centroidWorsenHz: 90, bandWorsen: .045 }
+  },
+  'capture-retreat': {
+    cue: 'captureRetreat',
+    entryId: 'capture-retreat',
+    comparisonId: 'capture-retreat-compare',
+    latest: 'latest-capture-retreat.json',
+    title: 'Capture Retreat',
+    problem: 'Capture Retreat is the highest whole-cue audio gap: Aurora has the right semantic state, but the measured cue is too spectrally distant from the Capturing reference and its onset reads like a generic synthetic climb.',
+    target: 'Make the post-capture retreat state sound like a distinct Galaga capturing/withdrawal phrase, separate from tractor-beam danger and capture success.',
+    cooldownMs: 1200,
+    referenceStarts: [2.18, 2.34, 2.46, 2.549, 2.62, 2.74, 2.9, 3.04],
+    referenceDurations: [0.18, 0.24, 0.3, 0.36, 0.42, 0.5, 0.62],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'capturing-guide-window',
+        label: 'Capturing guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-capturing.m4a',
+          cooldownMs: 1200,
+          referenceVolume: .95,
+          clipStart: 2.549,
+          clipDuration: .42
+        }
+      },
+      {
+        id: 'capturing-short-onset',
+        label: 'Capturing short onset',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-capturing.m4a',
+          cooldownMs: 1200,
+          referenceVolume: .86,
+          clipStart: 2.46,
+          clipDuration: .3
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .35, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .06 }
+  },
+  'captured-fighter-destroyed': {
+    cue: 'capturedFighterDestroyed',
+    entryId: 'captured-fighter-destroyed',
+    comparisonId: 'captured-fighter-destroyed-compare',
+    latest: 'latest-captured-fighter-destroyed.json',
+    title: 'Captured Fighter Destroyed',
+    problem: 'Captured Fighter Destroyed is the highest segment-level audio gap: the current penalty sound has the right slot, but its onset lacks the measured impact/noise body of the reference.',
+    target: 'Make destroying a carried fighter feel like a distinct penalty event, not a normal enemy pop or generic hit.',
+    cooldownMs: 1600,
+    referenceStarts: [1.62, 1.78, 1.88, 1.949, 2.02, 2.1, 2.18, 2.3],
+    referenceDurations: [0.14, 0.18, 0.2, 0.24, 0.3, 0.36, 0.44],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'penalty-guide-window',
+        label: 'Penalty guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',
+          cooldownMs: 1600,
+          referenceVolume: .95,
+          clipStart: 1.949,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'penalty-wide-impact',
+        label: 'Penalty wide impact',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',
+          cooldownMs: 1600,
+          referenceVolume: 1.05,
+          clipStart: 1.88,
+          clipDuration: .36
+        }
+      }
+    ],
+    keeper: { risk: .25, segment: .4, duration: .06, acceptableDuration: .08, centroidWorsenHz: 110, bandWorsen: .055 }
+  },
+  'rescue-join': {
+    cue: 'rescueJoin',
+    entryId: 'rescue-join',
+    comparisonId: 'rescue-join-compare',
+    latest: 'latest-rescue-join.json',
+    title: 'Rescue Join',
+    problem: 'Rescue Join is semantically correct but its tail remains a high segment risk, weakening the reward moment after saving a captured fighter.',
+    target: 'Make rescue/join read as a celebratory double-ship restoration cue with enough tail shape to feel earned.',
+    cooldownMs: 1800,
+    referenceStarts: [2.08, 2.22, 2.32, 2.399, 2.48, 2.58, 2.72],
+    referenceDurations: [0.18, 0.24, 0.3, 0.36, 0.44, 0.56, 0.68],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'rescue-guide-window',
+        label: 'Rescue guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',
+          cooldownMs: 1800,
+          referenceVolume: .95,
+          clipStart: 2.399,
+          clipDuration: .36
+        }
+      },
+      {
+        id: 'rescue-wide-tail',
+        label: 'Rescue wide tail',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',
+          cooldownMs: 1800,
+          referenceVolume: 1.05,
+          clipStart: 2.32,
+          clipDuration: .56
+        }
+      }
+    ],
+    keeper: { risk: .25, segment: .35, duration: .06, acceptableDuration: .1, centroidWorsenHz: 120, bandWorsen: .055 }
+  },
+  'capture-beam': {
+    cue: 'captureBeam',
+    entryId: 'capture-beam',
+    comparisonId: 'capture-beam-compare',
+    latest: 'latest-capture-beam.json',
+    title: 'Capture Beam',
+    problem: 'Capture Beam is the highest runtime whole-cue audio gap after capture-lifecycle promotion: the danger cue is semantically correct, but its captured active window is too short and too spectrally distant from the tractor-beam reference.',
+    target: 'Make tractor-beam deploy read as the long, threatening capture beam state that a player must immediately respect.',
+    cooldownMs: 1800,
+    referenceStarts: [2.72, 2.9, 3.04, 3.199, 3.34, 3.5, 3.68, 3.86],
+    referenceDurations: [0.24, 0.32, 0.4, 0.48, 0.6, 0.72, 0.9],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'tractor-guide-window',
+        label: 'Tractor guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-tractor-beam.m4a',
+          cooldownMs: 1800,
+          referenceVolume: .95,
+          clipStart: 3.199,
+          clipDuration: .48
+        }
+      },
+      {
+        id: 'tractor-long-danger',
+        label: 'Tractor long danger',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-tractor-beam.m4a',
+          cooldownMs: 1800,
+          referenceVolume: 1.05,
+          clipStart: 3.04,
+          clipDuration: .72
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .3, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .06 }
   }
 };
 
@@ -264,7 +416,7 @@ function referenceGridSpecs(config, set){
           },
           spec: {
             referenceClip: refClip,
-            cooldownMs: config.cue === 'stagePulse' ? 1250 : (config.cue === 'playerHit' ? 1800 : 220),
+            cooldownMs: config.cooldownMs || (config.cue === 'stagePulse' ? 1250 : (config.cue === 'playerHit' ? 1800 : 220)),
             referenceVolume,
             clipStart,
             clipDuration

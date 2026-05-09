@@ -1,0 +1,1470 @@
+{
+  "generatedAt": "2026-05-09T00:52:02.418Z",
+  "commit": "5da7d96",
+  "problem": "Level-arc evidence needs outcome semantics, not only visual pressure traces, because a Galaga-like arc depends on learnable losses, clears, and score/reward opportunities.",
+  "strategy": "Replay representative mid and late scenarios deterministically, preserve session logs, and summarize endpoint evidence alongside attack and reward signals.",
+  "successMeasure": "Each long-run window should have endpoint evidence or an explicit reason it is a pressure-only window; late windows should include measurable collision/clear/reward semantics before gameplay tuning.",
+  "summary": {
+    "score10": 7.3,
+    "total": 11,
+    "passed": 11,
+    "endpointWindows": 10,
+    "collisionLossWindows": 7,
+    "rewardWindows": 5,
+    "totalSpecialAttackBonus": 14400
+  },
+  "probes": [
+    {
+      "id": "stage-1-baseline-clear-route",
+      "scenario": "stage1-baseline-clear-route",
+      "ok": true,
+      "expectedStage": 1,
+      "duration": 42,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "recording": false,
+        "seed": 2003,
+        "simT": 42,
+        "stageClock": 42,
+        "persona": null,
+        "atmosphere": {
+          "id": "classic-arcade",
+          "group": "classic",
+          "phase": "stage",
+          "backgroundMode": "classic-stars",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "classic-arcade-stars",
+            "count": 108,
+            "alphaMin": 0.52,
+            "alphaMax": 0.96
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "classic-arcade",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "quiet-skies",
+          "atmosphereTheme": "classic-arcade",
+          "backgroundMode": "classic-stars"
+        },
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 90,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.75
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 1930,
+      "lives": 4,
+      "attacks": 14,
+      "bullets": 18,
+      "playerShots": 127,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "clears": 0,
+      "bulletsPerAttack": 1.286,
+      "avgAttackersOnScreenAtLoss": 1,
+      "avgRecentEnemyBulletsAtLoss": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 2,
+      "lossSignatures": [
+        {
+          "t": 22.037,
+          "stageClock": 22.037,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 5,
+          "sourceAttackMode": "escort",
+          "playerLane": 0,
+          "sourceLane": 0,
+          "sourceColumn": 3,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 1
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage1-baseline-clear-route-seed2003-2026-05-09T00-51-45-526Z-17074-nd1uja/neo-galaga-session-ngt-1778287907364-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage1-baseline-clear-route-seed2003-2026-05-09T00-51-45-526Z-17074-nd1uja/neo-galaga-session-ngt-1778287907364-3-system-status.json"
+      ],
+      "outcomeScore10": 6.2
+    },
+    {
+      "id": "mid-run-pressure",
+      "scenario": "stage6-regular",
+      "ok": true,
+      "expectedStage": 6,
+      "duration": 8,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 6,
+        "score": 550,
+        "lives": 3,
+        "challenge": false,
+        "recording": false,
+        "seed": 6006,
+        "simT": 8,
+        "stageClock": 8,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-hint",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-hint",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-hint-stars",
+            "count": 92,
+            "alphaMin": 0.34,
+            "alphaMax": 0.7
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-rise",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "scorpion-dawn",
+          "atmosphereTheme": "aurora-hint",
+          "backgroundMode": "aurora-hint"
+        },
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "aurora-hint",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 12,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 6,
+          "challenge": false,
+          "at": 0.709
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 550,
+      "lives": 3,
+      "attacks": 6,
+      "bullets": 4,
+      "playerShots": 21,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "clears": 0,
+      "bulletsPerAttack": 0.667,
+      "avgAttackersOnScreenAtLoss": 0,
+      "avgRecentEnemyBulletsAtLoss": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "lossSignatures": [],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage6-regular-seed6006-2026-05-09T00-51-47-787Z-17238-zr24pj/neo-galaga-session-ngt-1778287909109-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage6-regular-seed6006-2026-05-09T00-51-47-787Z-17238-zr24pj/neo-galaga-session-ngt-1778287909109-3-system-status.json"
+      ],
+      "outcomeScore10": 2.7
+    },
+    {
+      "id": "mid-run-pressure-widened-endpoint",
+      "scenario": "stage6-mid-run-wave-clear",
+      "ok": true,
+      "expectedStage": 6,
+      "duration": 32,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 6,
+        "score": 1030,
+        "lives": 3,
+        "challenge": false,
+        "recording": false,
+        "seed": 6006,
+        "simT": 32,
+        "stageClock": 32,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-hint",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-hint",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-hint-stars",
+            "count": 92,
+            "alphaMin": 0.34,
+            "alphaMax": 0.7
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-rise",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "scorpion-dawn",
+          "atmosphereTheme": "aurora-hint",
+          "backgroundMode": "aurora-hint"
+        },
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "aurora-hint",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 75,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 6,
+          "challenge": false,
+          "at": 0.676
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 1030,
+      "lives": 3,
+      "attacks": 40,
+      "bullets": 25,
+      "playerShots": 94,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "clears": 0,
+      "bulletsPerAttack": 0.625,
+      "avgAttackersOnScreenAtLoss": 2,
+      "avgRecentEnemyBulletsAtLoss": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "lossSignatures": [
+        {
+          "t": 8.62,
+          "stageClock": 8.62,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 1,
+          "sourceLane": 2,
+          "sourceColumn": 0,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 1
+        },
+        {
+          "t": 15.637,
+          "stageClock": 15.637,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 5,
+          "sourceAttackMode": "escort",
+          "playerLane": 0,
+          "sourceLane": 0,
+          "sourceColumn": 3,
+          "recentAttackStarts": 3,
+          "recentEnemyBullets": 1
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage6-mid-run-wave-clear-seed6006-2026-05-09T00-51-49-387Z-17320-ys0v9b/neo-galaga-session-ngt-1778287910646-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage6-mid-run-wave-clear-seed6006-2026-05-09T00-51-49-387Z-17320-ys0v9b/neo-galaga-session-ngt-1778287910646-3-system-status.json"
+      ],
+      "outcomeScore10": 7.6
+    },
+    {
+      "id": "mid-run-entry-variant",
+      "scenario": "stage8-entry-variant",
+      "ok": true,
+      "expectedStage": 8,
+      "duration": 10,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 8,
+        "score": 700,
+        "lives": 3,
+        "challenge": false,
+        "recording": false,
+        "seed": 8008,
+        "simT": 10,
+        "stageClock": 10,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "stingray-surge",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "attackCharge",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 8,
+          "challenge": false,
+          "at": 0.653
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 700,
+      "lives": 3,
+      "attacks": 7,
+      "bullets": 7,
+      "playerShots": 24,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "clears": 0,
+      "bulletsPerAttack": 1,
+      "avgAttackersOnScreenAtLoss": 2,
+      "avgRecentEnemyBulletsAtLoss": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "lossSignatures": [
+        {
+          "t": 5.133,
+          "stageClock": 5.133,
+          "cause": "enemy_bullet",
+          "sourceType": "bee",
+          "sourceDive": 0,
+          "sourceAttackMode": null,
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": null,
+          "recentAttackStarts": 3,
+          "recentEnemyBullets": 1
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage8-entry-variant-seed8008-2026-05-09T00-51-50-882Z-17483-ycchjr/neo-galaga-session-ngt-1778287912172-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage8-entry-variant-seed8008-2026-05-09T00-51-50-882Z-17483-ycchjr/neo-galaga-session-ngt-1778287912172-3-system-status.json"
+      ],
+      "outcomeScore10": 5.9
+    },
+    {
+      "id": "late-run-cleanup-or-failure",
+      "scenario": "stage12-variety",
+      "ok": true,
+      "expectedStage": 12,
+      "duration": 24,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 12,
+        "score": 380,
+        "lives": 4,
+        "challenge": false,
+        "recording": false,
+        "seed": 12003,
+        "simT": 24,
+        "stageClock": 24,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "enemyShot",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 12,
+          "challenge": false,
+          "at": 0.66
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 380,
+      "lives": 4,
+      "attacks": 22,
+      "bullets": 20,
+      "playerShots": 71,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "clears": 0,
+      "bulletsPerAttack": 0.909,
+      "avgAttackersOnScreenAtLoss": 4,
+      "avgRecentEnemyBulletsAtLoss": 3,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "lossSignatures": [
+        {
+          "t": 11.067,
+          "stageClock": 11.067,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 5,
+          "sourceAttackMode": "escort",
+          "playerLane": 0,
+          "sourceLane": 0,
+          "sourceColumn": 5,
+          "recentAttackStarts": 4,
+          "recentEnemyBullets": 3
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-variety-seed12003-2026-05-09T00-51-52-365Z-17604-laiwk2/neo-galaga-session-ngt-1778287913695-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-variety-seed12003-2026-05-09T00-51-52-365Z-17604-laiwk2/neo-galaga-session-ngt-1778287913695-3-system-status.json"
+      ],
+      "outcomeScore10": 5.7
+    },
+    {
+      "id": "late-run-squadron-reward-best-route",
+      "scenario": "stage12-squadron-reward-best-route",
+      "ok": true,
+      "expectedStage": 12,
+      "duration": 24,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 12,
+        "score": 4950,
+        "lives": 2,
+        "challenge": false,
+        "recording": false,
+        "seed": 12003,
+        "simT": 24,
+        "stageClock": 24,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 48,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 12,
+          "challenge": false,
+          "at": 0.68
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 4950,
+      "lives": 2,
+      "attacks": 20,
+      "bullets": 18,
+      "playerShots": 67,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 1,
+      "clears": 0,
+      "bulletsPerAttack": 0.9,
+      "avgAttackersOnScreenAtLoss": 1,
+      "avgRecentEnemyBulletsAtLoss": 2.333,
+      "specialAttackCount": 2,
+      "specialAttackBonus": 3200,
+      "bossDamageCount": 3,
+      "bossKillCount": 3,
+      "escortDiveKillCount": 6,
+      "lossSignatures": [
+        {
+          "t": 10.927,
+          "stageClock": 10.927,
+          "cause": "enemy_bullet",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 8,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 3
+        },
+        {
+          "t": 15.11,
+          "stageClock": 15.11,
+          "cause": "enemy_bullet",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 7,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 2
+        },
+        {
+          "t": 22.077,
+          "stageClock": 22.077,
+          "cause": "enemy_collision",
+          "sourceType": "bee",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 3,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 2
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-squadron-reward-best-route-seed12003-2026-05-09T00-51-53-897Z-17725-jtd1yp/neo-galaga-session-ngt-1778287915197-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-squadron-reward-best-route-seed12003-2026-05-09T00-51-53-897Z-17725-jtd1yp/neo-galaga-session-ngt-1778287915197-3-system-status.json"
+      ],
+      "outcomeScore10": 9.2
+    },
+    {
+      "id": "late-run-natural-squadron-reward",
+      "scenario": "stage12-natural-squadron-reward",
+      "ok": true,
+      "expectedStage": 12,
+      "duration": 24,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 12,
+        "score": 5270,
+        "lives": 3,
+        "challenge": false,
+        "recording": false,
+        "seed": 12003,
+        "simT": 24,
+        "stageClock": 24,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "attackCharge",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 12,
+          "challenge": false,
+          "at": 0.668
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 5270,
+      "lives": 3,
+      "attacks": 24,
+      "bullets": 19,
+      "playerShots": 72,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 0,
+      "clears": 0,
+      "bulletsPerAttack": 0.792,
+      "avgAttackersOnScreenAtLoss": 1,
+      "avgRecentEnemyBulletsAtLoss": 2.5,
+      "specialAttackCount": 2,
+      "specialAttackBonus": 3200,
+      "bossDamageCount": 3,
+      "bossKillCount": 3,
+      "escortDiveKillCount": 8,
+      "lossSignatures": [
+        {
+          "t": 10.927,
+          "stageClock": 10.927,
+          "cause": "enemy_bullet",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 8,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 3
+        },
+        {
+          "t": 15.11,
+          "stageClock": 15.11,
+          "cause": "enemy_bullet",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 7,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 2
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-natural-squadron-reward-seed12003-2026-05-09T00-51-55-404Z-17846-d8kh9q/neo-galaga-session-ngt-1778287916668-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-natural-squadron-reward-seed12003-2026-05-09T00-51-55-404Z-17846-d8kh9q/neo-galaga-session-ngt-1778287916668-3-system-status.json"
+      ],
+      "outcomeScore10": 9.6
+    },
+    {
+      "id": "late-run-squadron-reward",
+      "scenario": "stage12-squadron-bonus",
+      "ok": true,
+      "expectedStage": 12,
+      "duration": 8,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 13,
+        "score": 1680,
+        "lives": 4,
+        "challenge": false,
+        "recording": false,
+        "seed": 12012,
+        "simT": 7.633,
+        "stageClock": 2.3,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "enemyShot",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 13,
+          "challenge": false,
+          "at": 0.624
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 1680,
+      "lives": 4,
+      "attacks": 3,
+      "bullets": 0,
+      "playerShots": 5,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "clears": 1,
+      "bulletsPerAttack": 0,
+      "avgAttackersOnScreenAtLoss": 2,
+      "avgRecentEnemyBulletsAtLoss": 0,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 1,
+      "lossSignatures": [
+        {
+          "t": 1.7,
+          "stageClock": 1.7,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "escort",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 2,
+          "recentAttackStarts": 3,
+          "recentEnemyBullets": 0
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-squadron-bonus-seed12012-2026-05-09T00-51-56-878Z-17967-xitobu/neo-galaga-session-ngt-1778287918055-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage12-squadron-bonus-seed12012-2026-05-09T00-51-56-878Z-17967-xitobu/neo-galaga-session-ngt-1778287918055-3-system-status.json"
+      ],
+      "outcomeScore10": 7.3
+    },
+    {
+      "id": "late-run-escort-variant",
+      "scenario": "stage14-escort-variant",
+      "ok": true,
+      "expectedStage": 14,
+      "duration": 12,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 14,
+        "score": 970,
+        "lives": 4,
+        "challenge": false,
+        "recording": false,
+        "seed": 14014,
+        "simT": 12,
+        "stageClock": 12,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "attackCharge",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 14,
+          "challenge": false,
+          "at": 0.648
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 970,
+      "lives": 4,
+      "attacks": 11,
+      "bullets": 11,
+      "playerShots": 31,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "clears": 0,
+      "bulletsPerAttack": 1,
+      "avgAttackersOnScreenAtLoss": 2,
+      "avgRecentEnemyBulletsAtLoss": 4,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 1,
+      "lossSignatures": [
+        {
+          "t": 5.367,
+          "stageClock": 5.367,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 8,
+          "sourceLane": 8,
+          "sourceColumn": 9,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 4
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage14-escort-variant-seed14014-2026-05-09T00-51-58-224Z-18064-glsp4l/neo-galaga-session-ngt-1778287919446-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage14-escort-variant-seed14014-2026-05-09T00-51-58-224Z-18064-glsp4l/neo-galaga-session-ngt-1778287919446-3-system-status.json"
+      ],
+      "outcomeScore10": 6.9
+    },
+    {
+      "id": "late-run-escort-reward-best-route",
+      "scenario": "stage14-escort-reward-best-route",
+      "ok": true,
+      "expectedStage": 14,
+      "duration": 24,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 14,
+        "score": 6240,
+        "lives": 1,
+        "challenge": false,
+        "recording": false,
+        "seed": 14014,
+        "simT": 24,
+        "stageClock": 24,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "enemyShot",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 14,
+          "challenge": false,
+          "at": 0.647
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 6240,
+      "lives": 1,
+      "attacks": 22,
+      "bullets": 14,
+      "playerShots": 63,
+      "kills": 0,
+      "losses": 4,
+      "collisionLosses": 2,
+      "clears": 0,
+      "bulletsPerAttack": 0.636,
+      "avgAttackersOnScreenAtLoss": 2.25,
+      "avgRecentEnemyBulletsAtLoss": 2,
+      "specialAttackCount": 3,
+      "specialAttackBonus": 4800,
+      "bossDamageCount": 4,
+      "bossKillCount": 4,
+      "escortDiveKillCount": 6,
+      "lossSignatures": [
+        {
+          "t": 3.327,
+          "stageClock": 3.327,
+          "cause": "enemy_bullet",
+          "sourceType": "boss",
+          "sourceDive": 0,
+          "sourceAttackMode": null,
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": null,
+          "recentAttackStarts": 4,
+          "recentEnemyBullets": 2
+        },
+        {
+          "t": 7.577,
+          "stageClock": 7.577,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 6,
+          "sourceColumn": 8,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 1
+        },
+        {
+          "t": 14.543,
+          "stageClock": 14.543,
+          "cause": "enemy_bullet",
+          "sourceType": "boss",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 3,
+          "recentAttackStarts": 5,
+          "recentEnemyBullets": 3
+        },
+        {
+          "t": 18.643,
+          "stageClock": 18.643,
+          "cause": "enemy_collision",
+          "sourceType": "bee",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 0,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 2
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage14-escort-reward-best-route-seed14014-2026-05-09T00-51-59-638Z-18211-seaxbq/neo-galaga-session-ngt-1778287920840-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage14-escort-reward-best-route-seed14014-2026-05-09T00-51-59-638Z-18211-seaxbq/neo-galaga-session-ngt-1778287920840-3-system-status.json"
+      ],
+      "outcomeScore10": 9.4
+    },
+    {
+      "id": "late-run-natural-escort-reward",
+      "scenario": "stage14-natural-escort-reward",
+      "ok": true,
+      "expectedStage": 14,
+      "duration": 24,
+      "state": {
+        "started": 1,
+        "paused": 0,
+        "stage": 14,
+        "score": 3240,
+        "lives": 4,
+        "challenge": false,
+        "recording": false,
+        "seed": 14014,
+        "simT": 24,
+        "stageClock": 24,
+        "persona": null,
+        "atmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "stage",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "galboss-veil",
+          "atmosphereTheme": "aurora-borealis",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 48,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 14,
+          "challenge": false,
+          "at": 0.652
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "galaga-reference-assets"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 20000,
+          "awards": 0,
+          "flashT": 0,
+          "flashShips": 0
+        }
+      },
+      "score": 3240,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 16,
+      "playerShots": 74,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "clears": 0,
+      "bulletsPerAttack": 0.593,
+      "avgAttackersOnScreenAtLoss": 5,
+      "avgRecentEnemyBulletsAtLoss": 1,
+      "specialAttackCount": 2,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 3,
+      "bossKillCount": 3,
+      "escortDiveKillCount": 5,
+      "lossSignatures": [
+        {
+          "t": 4.833,
+          "stageClock": 4.833,
+          "cause": "enemy_bullet",
+          "sourceType": "bee",
+          "sourceDive": 0,
+          "sourceAttackMode": null,
+          "playerLane": 3,
+          "sourceLane": 4,
+          "sourceColumn": null,
+          "recentAttackStarts": 5,
+          "recentEnemyBullets": 1
+        }
+      ],
+      "files": [
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage14-natural-escort-reward-seed14014-2026-05-09T00-52-01-062Z-18332-0mve68/neo-galaga-session-ngt-1778287922271-3.json",
+        "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/runs/stage14-natural-escort-reward-seed14014-2026-05-09T00-52-01-062Z-18332-0mve68/neo-galaga-session-ngt-1778287922271-3-system-status.json"
+      ],
+      "outcomeScore10": 9.8
+    }
+  ]
+}

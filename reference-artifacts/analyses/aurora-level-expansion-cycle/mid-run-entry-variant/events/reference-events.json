@@ -7,7 +7,7 @@
   "window_id": "mid-run-entry-variant",
   "scenario": "stage8-entry-variant",
   "seed": 8008,
-  "duration_s": 10,
+  "duration_s": 16,
   "source_kind": "aurora_harness_or_self_play_video",
   "needs_waveform": false,
   "event_family_coverage": [
@@ -25,7 +25,7 @@
     },
     {
       "family": "escort_dive_start",
-      "observed": false
+      "observed": true
     },
     {
       "family": "enemy_projectile",
@@ -33,7 +33,7 @@
     },
     {
       "family": "player_hit",
-      "observed": false
+      "observed": true
     },
     {
       "family": "wave_clear",
@@ -59,12 +59,12 @@
       "event_id": "mid-run-entry-variant-002-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 1.783,
+      "time_s": 2.05,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 9,
+        "player_lane": 8,
         "source_lane": null,
         "source_column": null
       },
@@ -77,7 +77,7 @@
       "event_id": "mid-run-entry-variant-003-flank_dive_start",
       "event_family": "flank_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 2.183,
+      "time_s": 2.267,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -95,9 +95,9 @@
       "event_id": "mid-run-entry-variant-004-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 2.983,
+      "time_s": 3,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 1,
@@ -113,7 +113,7 @@
       "event_id": "mid-run-entry-variant-005-flank_dive_start",
       "event_family": "flank_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 3.3,
+      "time_s": 3.2,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -128,12 +128,12 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "mid-run-entry-variant-006-flank_dive_start",
-      "event_family": "flank_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 4.3,
+      "event_id": "mid-run-entry-variant-006-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 3.917,
       "duration_s": null,
-      "entity_family": "but",
+      "entity_family": "bee",
       "entity_id": null,
       "position_hint": {
         "player_lane": 0,
@@ -143,18 +143,18 @@
       "motion_hint": null,
       "audio_hint": null,
       "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
       "event_id": "mid-run-entry-variant-007-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 4.917,
+      "time_s": 4.133,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 3,
+        "player_lane": 0,
         "source_lane": null,
         "source_column": null
       },
@@ -164,33 +164,15 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "mid-run-entry-variant-008-enemy_projectile",
-      "event_family": "enemy_projectile",
-      "runtime_type": "enemy_bullet_fired",
-      "time_s": 5.033,
-      "duration_s": null,
-      "entity_family": "bee",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 4,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
-    },
-    {
-      "event_id": "mid-run-entry-variant-009-flank_dive_start",
+      "event_id": "mid-run-entry-variant-008-flank_dive_start",
       "event_family": "flank_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 5.217,
+      "time_s": 4.317,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 6,
+        "player_lane": 0,
         "source_lane": null,
         "source_column": null
       },
@@ -200,15 +182,33 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
+      "event_id": "mid-run-entry-variant-009-player_hit",
+      "event_family": "player_hit",
+      "runtime_type": "ship_lost",
+      "time_s": 4.583,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": 448066182,
+      "position_hint": {
+        "player_lane": 1,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event ship_lost"
+    },
+    {
       "event_id": "mid-run-entry-variant-010-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 6.033,
+      "time_s": 4.967,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
-        "player_lane": 9,
+        "player_lane": 1,
         "source_lane": null,
         "source_column": null
       },
@@ -221,9 +221,9 @@
       "event_id": "mid-run-entry-variant-011-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 6.117,
+      "time_s": 7.35,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 9,
@@ -236,28 +236,10 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
-      "event_id": "mid-run-entry-variant-012-enemy_dive_start",
-      "event_family": "enemy_dive_start",
-      "runtime_type": "enemy_attack_start",
-      "time_s": 7.017,
-      "duration_s": null,
-      "entity_family": "bee",
-      "entity_id": null,
-      "position_hint": {
-        "player_lane": 9,
-        "source_lane": null,
-        "source_column": null
-      },
-      "motion_hint": null,
-      "audio_hint": null,
-      "confidence": "medium",
-      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
-    },
-    {
-      "event_id": "mid-run-entry-variant-013-enemy_projectile",
+      "event_id": "mid-run-entry-variant-012-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 7.733,
+      "time_s": 8.083,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -272,10 +254,10 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "mid-run-entry-variant-014-enemy_dive_start",
-      "event_family": "enemy_dive_start",
+      "event_id": "mid-run-entry-variant-013-flank_dive_start",
+      "event_family": "flank_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 7.933,
+      "time_s": 8.4,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -290,12 +272,30 @@
       "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
     },
     {
+      "event_id": "mid-run-entry-variant-014-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 8.933,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
       "event_id": "mid-run-entry-variant-015-enemy_dive_start",
       "event_family": "enemy_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 8.833,
+      "time_s": 9.283,
       "duration_s": null,
-      "entity_family": "bee",
+      "entity_family": "but",
       "entity_id": null,
       "position_hint": {
         "player_lane": 9,
@@ -311,7 +311,115 @@
       "event_id": "mid-run-entry-variant-016-enemy_projectile",
       "event_family": "enemy_projectile",
       "runtime_type": "enemy_bullet_fired",
-      "time_s": 9.567,
+      "time_s": 10,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-entry-variant-017-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 10.183,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-018-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 10.967,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-entry-variant-019-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 11.067,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-020-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 11.783,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-entry-variant-021-flank_dive_start",
+      "event_family": "flank_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 11.95,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-022-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 12.817,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,
@@ -326,10 +434,154 @@
       "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
     },
     {
-      "event_id": "mid-run-entry-variant-017-flank_dive_start",
+      "event_id": "mid-run-entry-variant-023-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 12.817,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-024-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 13.583,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-entry-variant-025-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 13.767,
+      "duration_s": null,
+      "entity_family": "boss",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-026-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 13.767,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-027-escort_dive_start",
+      "event_family": "escort_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 13.767,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-028-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 14.033,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-entry-variant-029-enemy_dive_start",
+      "event_family": "enemy_dive_start",
+      "runtime_type": "enemy_attack_start",
+      "time_s": 14.95,
+      "duration_s": null,
+      "entity_family": "but",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_attack_start"
+    },
+    {
+      "event_id": "mid-run-entry-variant-030-enemy_projectile",
+      "event_family": "enemy_projectile",
+      "runtime_type": "enemy_bullet_fired",
+      "time_s": 15.683,
+      "duration_s": null,
+      "entity_family": "bee",
+      "entity_id": null,
+      "position_hint": {
+        "player_lane": 9,
+        "source_lane": null,
+        "source_column": null
+      },
+      "motion_hint": null,
+      "audio_hint": null,
+      "confidence": "medium",
+      "source_note": "promoted from Aurora harness runtime event enemy_bullet_fired"
+    },
+    {
+      "event_id": "mid-run-entry-variant-031-flank_dive_start",
       "event_family": "flank_dive_start",
       "runtime_type": "enemy_attack_start",
-      "time_s": 9.817,
+      "time_s": 15.867,
       "duration_s": null,
       "entity_family": "but",
       "entity_id": null,

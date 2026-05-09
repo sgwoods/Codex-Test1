@@ -2,15 +2,10 @@
   "schema_version": 1,
   "status": "aurora-evidence-windows-captured",
   "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
-  "generated_at": "2026-05-08T10:14:24.171Z",
+  "generated_at": "2026-05-09T00:52:43.868Z",
   "window_count": 6,
   "captured_this_run": [
-    "stage-1-baseline",
-    "challenge-stage-candidate",
-    "mid-run-pressure",
-    "mid-run-entry-variant",
-    "late-run-cleanup-or-failure",
-    "late-run-escort-variant"
+    "mid-run-entry-variant"
   ],
   "results": [
     {
@@ -40,8 +35,8 @@
       "scenario": "stage12-variety",
       "seed": 12003,
       "sample_count": 25,
-      "event_count": 190,
-      "promoted_event_count": 55,
+      "event_count": 179,
+      "promoted_event_count": 47,
       "trace_summary": {
         "sample_count": 25,
         "player_x_min": 9,
@@ -62,8 +57,8 @@
       "scenario": "stage14-escort-variant",
       "seed": 14014,
       "sample_count": 13,
-      "event_count": 110,
-      "promoted_event_count": 27,
+      "event_count": 118,
+      "promoted_event_count": 28,
       "trace_summary": {
         "sample_count": 13,
         "player_x_min": 9,
@@ -73,7 +68,7 @@
         "max_enemy_bullets": 2,
         "max_player_bullets": 2,
         "max_challenge_enemies": 0,
-        "final_score": 510,
+        "final_score": 860,
         "final_lives": 5,
         "final_stage": 14,
         "final_challenge": false
@@ -83,20 +78,20 @@
       "window_id": "mid-run-entry-variant",
       "scenario": "stage8-entry-variant",
       "seed": 8008,
-      "sample_count": 11,
-      "event_count": 78,
-      "promoted_event_count": 17,
+      "sample_count": 17,
+      "event_count": 122,
+      "promoted_event_count": 31,
       "trace_summary": {
-        "sample_count": 11,
+        "sample_count": 17,
         "player_x_min": 9,
         "player_x_max": 271,
         "player_x_range": 262,
-        "max_attackers": 2,
+        "max_attackers": 4,
         "max_enemy_bullets": 2,
         "max_player_bullets": 2,
         "max_challenge_enemies": 0,
-        "final_score": 490,
-        "final_lives": 4,
+        "final_score": 540,
+        "final_lives": 3,
         "final_stage": 8,
         "final_challenge": false
       }
@@ -106,8 +101,8 @@
       "scenario": "stage6-regular",
       "seed": 6006,
       "sample_count": 9,
-      "event_count": 63,
-      "promoted_event_count": 17,
+      "event_count": 65,
+      "promoted_event_count": 15,
       "trace_summary": {
         "sample_count": 9,
         "player_x_min": 9,
@@ -117,7 +112,7 @@
         "max_enemy_bullets": 2,
         "max_player_bullets": 2,
         "max_challenge_enemies": 0,
-        "final_score": 390,
+        "final_score": 440,
         "final_lives": 2,
         "final_stage": 6,
         "final_challenge": false

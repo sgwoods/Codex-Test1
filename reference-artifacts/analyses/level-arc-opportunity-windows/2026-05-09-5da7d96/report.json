@@ -1,0 +1,606 @@
+{
+  "generatedAt": "2026-05-09T00:53:17.620Z",
+  "commit": "5da7d96",
+  "problem": "Aurora needs a Galaga-like level arc: stages should become more distinct, reward-bearing, and learnable over time rather than repeating a similar pressure loop.",
+  "strategy": "Compute opportunity windows from deterministic evidence by combining event-family coverage, pressure shape, reward signal, identity signal, and stage-signature distance before choosing a gameplay change.",
+  "successMeasure": "Future work should raise the opportunity-window score, reduce missing event families, increase closest regular-stage signature distance, and improve level-arc score without hiding Stage 4 exact replay gaps.",
+  "evidence": {
+    "sourceRoot": "reference-artifacts/analyses/aurora-level-expansion-cycle",
+    "stageSignatureReport": "reference-artifacts/analyses/stage-signature-distance/2026-05-09-5da7d96/report.json",
+    "outcomeProbeReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-09-5da7d96/report.json"
+  },
+  "summary": {
+    "score10": 7.8,
+    "windowCount": 6,
+    "fullCoverageWindows": 6,
+    "meanPressureIndex": 5.2,
+    "meanRewardIndex": 3.8,
+    "meanIdentityIndex": 7.5,
+    "skillRouteRewardWindows": 4,
+    "outcomeRewardWindows": 5,
+    "outcomeSpecialRewardBonus": 14400,
+    "highestPriorityOpportunity": {
+      "id": "closest-regular-stage-signature-gap",
+      "priority": "high",
+      "window": "mid-run-entry-variant/mid-run-pressure",
+      "score": 3.4,
+      "problem": "mid-run-entry-variant and mid-run-pressure are too similar by computed gameplay signature distance (0.106).",
+      "strategy": "Use the feature trace to add one distinct movement/reward grammar to the weaker window, then rerun stage-signature distance.",
+      "successMeasure": "Closest regular pair distance rises above 0.16 and signatureScore10 improves without increasing exact pressure-loss regressions.",
+      "currentRead": {
+        "mid-run-entry-variant": {
+          "stage": 8,
+          "pressureIndex": 7.5,
+          "rewardIndex": 1,
+          "identityIndex": 8.1
+        },
+        "mid-run-pressure": {
+          "stage": 6,
+          "pressureIndex": 6.8,
+          "rewardIndex": 1.8,
+          "identityIndex": 7.3
+        }
+      }
+    },
+    "pressureCurve": {
+      "regularWindowCount": 5,
+      "meanRegularPressure": 5.9,
+      "adjacent": [
+        {
+          "from": "stage-1-baseline",
+          "to": "mid-run-pressure",
+          "fromStage": 1,
+          "toStage": 6,
+          "delta": 4.4
+        },
+        {
+          "from": "mid-run-pressure",
+          "to": "mid-run-entry-variant",
+          "fromStage": 6,
+          "toStage": 8,
+          "delta": 0.7
+        },
+        {
+          "from": "mid-run-entry-variant",
+          "to": "late-run-cleanup-or-failure",
+          "fromStage": 8,
+          "toStage": 12,
+          "delta": -1.2
+        },
+        {
+          "from": "late-run-cleanup-or-failure",
+          "to": "late-run-escort-variant",
+          "fromStage": 12,
+          "toStage": 14,
+          "delta": 0.3
+        }
+      ],
+      "regressions": [
+        {
+          "from": "mid-run-entry-variant",
+          "to": "late-run-cleanup-or-failure",
+          "fromStage": 8,
+          "toStage": 12,
+          "delta": -1.2
+        }
+      ],
+      "latePressureSpread": 6.6
+    }
+  },
+  "pressureCurve": {
+    "regularWindowCount": 5,
+    "meanRegularPressure": 5.9,
+    "adjacent": [
+      {
+        "from": "stage-1-baseline",
+        "to": "mid-run-pressure",
+        "fromStage": 1,
+        "toStage": 6,
+        "delta": 4.4
+      },
+      {
+        "from": "mid-run-pressure",
+        "to": "mid-run-entry-variant",
+        "fromStage": 6,
+        "toStage": 8,
+        "delta": 0.7
+      },
+      {
+        "from": "mid-run-entry-variant",
+        "to": "late-run-cleanup-or-failure",
+        "fromStage": 8,
+        "toStage": 12,
+        "delta": -1.2
+      },
+      {
+        "from": "late-run-cleanup-or-failure",
+        "to": "late-run-escort-variant",
+        "fromStage": 12,
+        "toStage": 14,
+        "delta": 0.3
+      }
+    ],
+    "regressions": [
+      {
+        "from": "mid-run-entry-variant",
+        "to": "late-run-cleanup-or-failure",
+        "fromStage": 8,
+        "toStage": 12,
+        "delta": -1.2
+      }
+    ],
+    "latePressureSpread": 6.6
+  },
+  "windows": [
+    {
+      "id": "challenge-stage-candidate",
+      "role": "challenge_stage_expansion_candidate",
+      "scenario": "stage3-challenge",
+      "stage": 3,
+      "challenge": true,
+      "duration": 24,
+      "score": 5480,
+      "finalLives": 3,
+      "promotedEventCount": 108,
+      "missingFamilies": [],
+      "visualMissingFamilies": [],
+      "semanticCoverageNotes": [],
+      "outcomeProbe": null,
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "challenge_enemy_hit": 36,
+        "challenge_enemy_path": 69,
+        "challenge_result": 1,
+        "challenge_wave_start": 2
+      },
+      "pressureIndex": 1.6,
+      "baselineRewardIndex": 6.6,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 6.6,
+      "identityIndex": 8.6,
+      "opportunityScore": 2.5,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/events/reference-events.json"
+      }
+    },
+    {
+      "id": "late-run-cleanup-or-failure",
+      "role": "late_run_cleanup_or_failure",
+      "scenario": "stage12-variety",
+      "stage": 12,
+      "challenge": false,
+      "duration": 24,
+      "score": 380,
+      "finalLives": 5,
+      "promotedEventCount": 47,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "semanticCoverageNotes": [
+        {
+          "family": "player_hit",
+          "status": "satisfied-by-widened-outcome-route",
+          "reason": "A paired deterministic skill route reached player-loss endpoint evidence even though the short visual window did not."
+        },
+        {
+          "family": "wave_clear",
+          "status": "satisfied-by-widened-endpoint-route",
+          "reason": "A paired deterministic skill route reached loss endpoint evidence, proving this is not a pressure-only window."
+        },
+        {
+          "family": "game_over",
+          "status": "not-required",
+          "reason": "Game-over is not required for level-arc opportunity coverage; endpoint loss/clear evidence is sufficient."
+        }
+      ],
+      "outcomeProbe": {
+        "score10": 5.7,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 1,
+        "attacks": 22,
+        "bullets": 20,
+        "firstLoss": {
+          "t": 11.067,
+          "stageClock": 11.067,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 5,
+          "sourceAttackMode": "escort",
+          "playerLane": 0,
+          "sourceLane": 0,
+          "sourceColumn": 5,
+          "recentAttackStarts": 4,
+          "recentEnemyBullets": 3
+        }
+      },
+      "skillRouteProbe": {
+        "id": "late-run-natural-squadron-reward",
+        "scenario": "stage12-natural-squadron-reward",
+        "outcomeScore10": 9.6,
+        "rewardIndex": 10,
+        "score": 5270,
+        "playerShots": 72,
+        "losses": 2,
+        "clears": 0,
+        "collisionLosses": 0,
+        "specialAttackCount": 2,
+        "specialAttackBonus": 3200,
+        "firstLoss": {
+          "t": 10.927,
+          "stageClock": 10.927,
+          "cause": "enemy_bullet",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 8,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 3
+        }
+      },
+      "eventCounts": {
+        "enemy_dive_start": 23,
+        "enemy_projectile": 22,
+        "escort_dive_start": 2
+      },
+      "pressureIndex": 6.3,
+      "baselineRewardIndex": 0.7,
+      "skillRouteRewardIndex": 10,
+      "rewardIndex": 5.3,
+      "identityIndex": 7.3,
+      "opportunityScore": 2.9,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/events/reference-events.json"
+      }
+    },
+    {
+      "id": "late-run-escort-variant",
+      "role": "late_run_escort_variant",
+      "scenario": "stage14-escort-variant",
+      "stage": 14,
+      "challenge": false,
+      "duration": 12,
+      "score": 860,
+      "finalLives": 5,
+      "promotedEventCount": 28,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "semanticCoverageNotes": [
+        {
+          "family": "player_hit",
+          "status": "satisfied-by-widened-outcome-route",
+          "reason": "A paired deterministic skill route reached player-loss endpoint evidence even though the short visual window did not."
+        },
+        {
+          "family": "wave_clear",
+          "status": "satisfied-by-widened-endpoint-route",
+          "reason": "A paired deterministic skill route reached loss endpoint evidence, proving this is not a pressure-only window."
+        },
+        {
+          "family": "game_over",
+          "status": "not-required",
+          "reason": "Game-over is not required for level-arc opportunity coverage; endpoint loss/clear evidence is sufficient."
+        }
+      ],
+      "outcomeProbe": {
+        "score10": 6.9,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 1,
+        "attacks": 11,
+        "bullets": 11,
+        "firstLoss": {
+          "t": 5.367,
+          "stageClock": 5.367,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 8,
+          "sourceLane": 8,
+          "sourceColumn": 9,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 4
+        }
+      },
+      "skillRouteProbe": {
+        "id": "late-run-natural-escort-reward",
+        "scenario": "stage14-natural-escort-reward",
+        "outcomeScore10": 9.8,
+        "rewardIndex": 10,
+        "score": 3240,
+        "playerShots": 74,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 0,
+        "specialAttackCount": 2,
+        "specialAttackBonus": 1600,
+        "firstLoss": {
+          "t": 4.833,
+          "stageClock": 4.833,
+          "cause": "enemy_bullet",
+          "sourceType": "bee",
+          "sourceDive": 0,
+          "sourceAttackMode": null,
+          "playerLane": 3,
+          "sourceLane": 4,
+          "sourceColumn": null,
+          "recentAttackStarts": 5,
+          "recentEnemyBullets": 1
+        }
+      },
+      "eventCounts": {
+        "enemy_dive_start": 10,
+        "enemy_projectile": 11,
+        "escort_dive_start": 6,
+        "formation_entry": 1
+      },
+      "pressureIndex": 6.6,
+      "baselineRewardIndex": 2.5,
+      "skillRouteRewardIndex": 10,
+      "rewardIndex": 6.3,
+      "identityIndex": 7.3,
+      "opportunityScore": 2.6,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-escort-variant/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-escort-variant/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-escort-variant/events/reference-events.json"
+      }
+    },
+    {
+      "id": "mid-run-entry-variant",
+      "role": "mid_run_entry_variant",
+      "scenario": "stage8-entry-variant",
+      "stage": 8,
+      "challenge": false,
+      "duration": 16,
+      "score": 540,
+      "finalLives": 3,
+      "promotedEventCount": 31,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "wave_clear"
+      ],
+      "semanticCoverageNotes": [
+        {
+          "family": "wave_clear",
+          "status": "satisfied-by-widened-endpoint-route",
+          "reason": "A paired deterministic skill route reached loss endpoint evidence, proving this is not a pressure-only window."
+        }
+      ],
+      "outcomeProbe": {
+        "score10": 5.9,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 0,
+        "attacks": 7,
+        "bullets": 7,
+        "firstLoss": {
+          "t": 5.133,
+          "stageClock": 5.133,
+          "cause": "enemy_bullet",
+          "sourceType": "bee",
+          "sourceDive": 0,
+          "sourceAttackMode": null,
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": null,
+          "recentAttackStarts": 3,
+          "recentEnemyBullets": 1
+        }
+      },
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "enemy_dive_start": 7,
+        "enemy_projectile": 14,
+        "escort_dive_start": 2,
+        "flank_dive_start": 6,
+        "formation_entry": 1,
+        "player_hit": 1
+      },
+      "pressureIndex": 7.5,
+      "baselineRewardIndex": 1,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 1,
+      "identityIndex": 8.1,
+      "opportunityScore": 3.6,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/events/reference-events.json"
+      }
+    },
+    {
+      "id": "mid-run-pressure",
+      "role": "mid_run_pressure",
+      "scenario": "stage6-regular",
+      "stage": 6,
+      "challenge": false,
+      "duration": 8,
+      "score": 440,
+      "finalLives": 2,
+      "promotedEventCount": 15,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "flank_dive_start",
+        "wave_clear"
+      ],
+      "semanticCoverageNotes": [
+        {
+          "family": "flank_dive_start",
+          "status": "not-applicable",
+          "reason": "Aurora mid-run flank dives are a Stage 8-11 grammar; this Stage 6 window should not be penalized for absence."
+        },
+        {
+          "family": "wave_clear",
+          "status": "satisfied-by-widened-endpoint-route",
+          "reason": "A paired deterministic skill route reached loss endpoint evidence, proving this is not a pressure-only window."
+        }
+      ],
+      "outcomeProbe": {
+        "score10": 2.7,
+        "losses": 0,
+        "clears": 0,
+        "collisionLosses": 0,
+        "attacks": 6,
+        "bullets": 4,
+        "firstLoss": null
+      },
+      "skillRouteProbe": {
+        "id": "mid-run-pressure-widened-endpoint",
+        "scenario": "stage6-mid-run-wave-clear",
+        "outcomeScore10": 7.6,
+        "rewardIndex": 2.3,
+        "score": 1030,
+        "playerShots": 94,
+        "losses": 2,
+        "clears": 0,
+        "collisionLosses": 2,
+        "specialAttackCount": 0,
+        "specialAttackBonus": 0,
+        "firstLoss": {
+          "t": 8.62,
+          "stageClock": 8.62,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 1,
+          "sourceLane": 2,
+          "sourceColumn": 0,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 1
+        }
+      },
+      "eventCounts": {
+        "enemy_dive_start": 5,
+        "enemy_projectile": 6,
+        "escort_dive_start": 2,
+        "formation_entry": 1,
+        "player_hit": 1
+      },
+      "pressureIndex": 6.8,
+      "baselineRewardIndex": 1.2,
+      "skillRouteRewardIndex": 2.3,
+      "rewardIndex": 1.8,
+      "identityIndex": 7.3,
+      "opportunityScore": 3.8,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/events/reference-events.json"
+      }
+    },
+    {
+      "id": "stage-1-baseline",
+      "role": "opening_baseline",
+      "scenario": "stage1-descent",
+      "stage": 1,
+      "challenge": false,
+      "duration": 24,
+      "score": 0,
+      "finalLives": 5,
+      "promotedEventCount": 23,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "player_shot",
+        "wave_clear"
+      ],
+      "semanticCoverageNotes": [
+        {
+          "family": "player_shot",
+          "status": "satisfied-by-widened-shot-route",
+          "reason": "A paired deterministic skill route observed player-fire evidence even though the short visual window did not."
+        },
+        {
+          "family": "wave_clear",
+          "status": "satisfied-by-widened-endpoint-route",
+          "reason": "A paired deterministic skill route reached loss endpoint evidence, proving this is not a pressure-only window."
+        }
+      ],
+      "outcomeProbe": null,
+      "skillRouteProbe": {
+        "id": "stage-1-baseline-clear-route",
+        "scenario": "stage1-baseline-clear-route",
+        "outcomeScore10": 6.2,
+        "rewardIndex": 3.2,
+        "score": 1930,
+        "playerShots": 127,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 1,
+        "specialAttackCount": 0,
+        "specialAttackBonus": 0,
+        "firstLoss": {
+          "t": 22.037,
+          "stageClock": 22.037,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 5,
+          "sourceAttackMode": "escort",
+          "playerLane": 0,
+          "sourceLane": 0,
+          "sourceColumn": 3,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 1
+        }
+      },
+      "eventCounts": {
+        "enemy_dive_start": 6,
+        "enemy_projectile": 10,
+        "formation_entry": 1,
+        "player_move": 5,
+        "stage_start": 1
+      },
+      "pressureIndex": 2.4,
+      "baselineRewardIndex": 0,
+      "skillRouteRewardIndex": 3.2,
+      "rewardIndex": 1.6,
+      "identityIndex": 6.4,
+      "opportunityScore": 4.8,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/events/reference-events.json"
+      }
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "closest-regular-stage-signature-gap",
+      "priority": "high",
+      "window": "mid-run-entry-variant/mid-run-pressure",
+      "score": 3.4,
+      "problem": "mid-run-entry-variant and mid-run-pressure are too similar by computed gameplay signature distance (0.106).",
+      "strategy": "Use the feature trace to add one distinct movement/reward grammar to the weaker window, then rerun stage-signature distance.",
+      "successMeasure": "Closest regular pair distance rises above 0.16 and signatureScore10 improves without increasing exact pressure-loss regressions.",
+      "currentRead": {
+        "mid-run-entry-variant": {
+          "stage": 8,
+          "pressureIndex": 7.5,
+          "rewardIndex": 1,
+          "identityIndex": 8.1
+        },
+        "mid-run-pressure": {
+          "stage": 6,
+          "pressureIndex": 6.8,
+          "rewardIndex": 1.8,
+          "identityIndex": 7.3
+        }
+      }
+    }
+  ]
+}

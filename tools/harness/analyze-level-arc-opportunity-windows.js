@@ -8,9 +8,10 @@ const SOURCE_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-l
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-arc-opportunity-windows');
 
 const OUTCOME_SKILL_ROUTE_MAP = Object.freeze({
+  'stage-1-baseline': ['stage-1-baseline-clear-route'],
   'mid-run-pressure': ['mid-run-pressure-widened-endpoint'],
-  'late-run-cleanup-or-failure': ['late-run-natural-squadron-reward'],
-  'late-run-escort-variant': ['late-run-natural-escort-reward']
+  'late-run-cleanup-or-failure': ['late-run-squadron-reward-best-route', 'late-run-natural-squadron-reward'],
+  'late-run-escort-variant': ['late-run-escort-reward-best-route', 'late-run-natural-escort-reward']
 });
 
 function ensureDir(dir){
@@ -194,6 +195,12 @@ function semanticFamilyNotes(visualMissing, outcome, skillRouteOutcome, context 
         status: 'satisfied-by-widened-outcome-route',
         reason: 'A paired deterministic skill route reached player-loss endpoint evidence even though the short visual window did not.'
       });
+    }else if(family === 'player_shot' && (skillRouteOutcome?.playerShots || outcome?.playerShots || 0) > 0){
+      notes.push({
+        family,
+        status: 'satisfied-by-widened-shot-route',
+        reason: 'A paired deterministic skill route observed player-fire evidence even though the short visual window did not.'
+      });
     }else if(family === 'wave_clear' && (endpoint.clears > 0 || endpoint.losses > 0)){
       notes.push({
         family,
@@ -217,6 +224,7 @@ function semanticMissingFamilies(missing, outcome, skillRouteOutcome, context = 
   const endpoint = endpointEvidence(outcome, skillRouteOutcome);
   return missing.filter(family => {
     if(family === 'flank_dive_start' && !stageSupportsFlankDive(context.stage)) return false;
+    if(family === 'player_shot') return !((skillRouteOutcome?.playerShots || outcome?.playerShots || 0) > 0);
     if(family === 'player_hit') return !(endpoint.losses > 0);
     if(family === 'wave_clear') return !(endpoint.clears > 0 || endpoint.losses > 0);
     if(family === 'game_over') return false;
@@ -271,6 +279,7 @@ function loadWindow(dir, outcomeById){
       outcomeScore10: skillRouteOutcome.outcomeScore10,
       rewardIndex: skillRouteOutcome.skillRewardIndex,
       score: skillRouteOutcome.score,
+      playerShots: skillRouteOutcome.playerShots,
       losses: skillRouteOutcome.losses,
       clears: skillRouteOutcome.clears,
       collisionLosses: skillRouteOutcome.collisionLosses,

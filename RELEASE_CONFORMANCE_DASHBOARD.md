@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-08T22:56:13.488Z`
+Generated: `2026-05-09T00:53:54.681Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -42,12 +42,12 @@ An `x/10` score is a measured roll-up at the current scorer resolution, not a cl
 
 | Priority | Metric | Current | Confidence | Resolution | Cost / resources | Tracked spend | Major-gate target | Measurement status | Why this matters | Effort / time estimate | Recommended next step | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Audio identity, event feedback, and cue alignment | 7.9/10 | medium-high | 21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features | high; cpu, model-api, openai-api | 87 runs; 63.2 min wall; 110.5 min CPU | 7.5-8.0 | Measured release category; weakest axis | Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback. | High; 3-6 hrs local/model-assisted analysis | Tune the highest segment-level audio gap next: challengePerfect body. Rerun audio comparison, event-gap analysis, and quality scoring after the change. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json |
-| 2 | Level arc and encounter shape | 8.5/10 | medium-high | multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence | low; cpu, browser | 88 runs; 14.8 min wall; 24.7 min CPU | 8.8-9.0 | Measured release category | Controls whether long play feels like Galaga-like escalation rather than repeated pressure. | Medium-high; 2-5 hrs | Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning. | reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json |
+| 1 | Audio identity, event feedback, and cue alignment | 7.9/10 | medium-high | 21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features | high; cpu, model-api, openai-api | 95 runs; 76.7 min wall; 135 min CPU | 7.5-8.0 | Measured release category; weakest axis | Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback. | High; 3-6 hrs local/model-assisted analysis | Tune the highest segment-level audio gap next: challengePerfect body. Rerun audio comparison, event-gap analysis, and quality scoring after the change. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json |
+| 2 | Level arc and encounter shape | 8.5/10 | medium-high | multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence | low; cpu, browser | 125 runs; 22 min wall; 36.3 min CPU | 8.8-9.0 | Measured release category | Controls whether long play feels like Galaga-like escalation rather than repeated pressure. | Medium-high; 2-5 hrs | Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning. | reference-artifacts/analyses/level-arc-conformance/2026-05-09-5da7d96/report.json |
 | 3 | Overall visual look and feel: gameplay, start page, typography complexity | 8.6/10 | medium-low | first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers | medium; cpu, browser, gpu | 1 runs; 0.1 min wall; 0.1 min CPU | 8.4-8.8 | Measured visual scorer; medium-low confidence | A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere. | Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review | Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers. | reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json |
-| 4 | Stage 4 pressure exact replay / pressure curve precision | 7.5/10 | medium | narrow pressure/loss replay windows; exact replay coverage still limited | medium; cpu, browser | 28 runs; 12.8 min wall; 18.5 min CPU | 8.2-8.6 | Measured level-arc weak submetric | Pressure should be learnable and reproducible, not merely present in one run. | Medium-high; prior runs ~12.8 min wall / 18.5 min CPU | Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics. | reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json |
-| 5 | Alien entry to levels: formation, timing, and methods | 9.1/10 | medium | composite proxy from opening timing, geometry, and movement grammar | estimated; cpu, browser | 43 runs; 7.5 min wall; 10 min CPU | 9.0-9.4 with dedicated scorer | Composite proxy: stage opening timing + geometry + movement grammar | Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts. | Medium; 1-3 hrs plus visual review | Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json |
-| 6 | Challenge-stage variation and new alien/formations introduction | 9.3/10 | medium | composite proxy from challenge timing, challenge identity, and non-repetition | estimated; cpu, browser | 43 runs; 7.5 min wall; 10 min CPU | 9.0-9.4 with dedicated scorer | Composite proxy: challenge timing + challenge identity + non-repetition | Challenge stages should teach new motion/reward patterns, not only pause normal combat. | Medium-high; 2-4 hrs | Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json |
+| 4 | Stage 4 pressure exact replay / pressure curve precision | 7.5/10 | medium | narrow pressure/loss replay windows; exact replay coverage still limited | medium; cpu, browser | 28 runs; 12.8 min wall; 18.5 min CPU | 8.2-8.6 | Measured level-arc weak submetric | Pressure should be learnable and reproducible, not merely present in one run. | Medium-high; prior runs ~12.8 min wall / 18.5 min CPU | Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics. | reference-artifacts/analyses/level-arc-conformance/2026-05-09-5da7d96/report.json |
+| 5 | Alien entry to levels: formation, timing, and methods | 9.1/10 | medium | composite proxy from opening timing, geometry, and movement grammar | estimated; cpu, browser | 64 runs; 11.1 min wall; 15.8 min CPU | 9.0-9.4 with dedicated scorer | Composite proxy: stage opening timing + geometry + movement grammar | Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts. | Medium; 1-3 hrs plus visual review | Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-5da7d96/report.json |
+| 6 | Challenge-stage variation and new alien/formations introduction | 9.3/10 | medium | composite proxy from challenge timing, challenge identity, and non-repetition | estimated; cpu, browser | 64 runs; 11.1 min wall; 15.8 min CPU | 9.0-9.4 with dedicated scorer | Composite proxy: challenge timing + challenge identity + non-repetition | Challenge stages should teach new motion/reward patterns, not only pause normal combat. | Medium-high; 2-4 hrs | Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json; reference-artifacts/analyses/level-arc-conformance/2026-05-09-5da7d96/report.json |
 | 7 | Progression and persona depth | 8.8/10 | medium | scorer-backed artifact with selected harness windows | estimated; cpu | 4 runs; 4.3 min wall; 4.9 min CPU | 9.1+ | Measured release category | Keeps the game learnable across skill levels and supports later-stage quality. | Low-medium; 1-2 hrs | Resolve remaining ordering edge case after higher-value audio/level-arc work. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json |
 | 8 | Stage 1 opening timing fidelity | 8.5/10 | medium | scorer-backed artifact with selected harness windows | medium; cpu, browser | 4 runs; 4.3 min wall; 4.9 min CPU | 8.8-9.2 | Measured release category | First impression and direct reference feel. | Low-medium; 1-2 hrs | Tune only after audio and level-arc priorities unless regressions appear. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json |
 | 9 | Arcade console frame UI style | 9.2/10 | medium | UI shell proxy; dedicated visual/modal rubric still needed | medium; cpu, browser, gpu | 4 runs; 4.3 min wall; 4.9 min CPU | 9.4-9.6 | Measured as UI shell; needs separate arcade-frame style rubric | The cabinet frame is the constant product surface around every game. | Medium; 1-3 hrs visual QA | Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment. | reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json |
@@ -67,19 +67,19 @@ Every release candidate should include both a conformance read and a resource/ti
 | --- | --- | --- |
 | Latest overall conformance | 9.3/10 | Primary quality roll-up for release notes and scorecards |
 | Latest level-arc conformance | 8.5/10 | Long-play gameplay-shape gate |
-| Metric points scanned | 589 | History depth behind score trends |
-| Score deltas found | 80 | Past-goal movement available for review |
-| Measured runs | 159 | Tracked harness/model/local compute work |
-| Tracked wall time | 82.4 min | Human clock-time planning input |
-| Tracked CPU time | 137.8 min | Local compute-cost planning input |
-| Tracked artifact growth | 331 MB | Evidence volume and storage/review-cost proxy |
+| Metric points scanned | 598 | History depth behind score trends |
+| Score deltas found | 84 | Past-goal movement available for review |
+| Measured runs | 188 | Tracked harness/model/local compute work |
+| Tracked wall time | 99.6 min | Human clock-time planning input |
+| Tracked CPU time | 168.1 min | Local compute-cost planning input |
+| Tracked artifact growth | 378.7 MB | Evidence volume and storage/review-cost proxy |
 
 ### Resource And Time Usage
 
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| cpu | 158 | 82.4 min | 137.8 min |
-| browser | 108 | 79.1 min | 134 min |
+| cpu | 187 | 99.6 min | 168.1 min |
+| browser | 122 | 96.2 min | 164.3 min |
 | gpu-equivalent | 7 | 0.8 min | 1.2 min |
 | codex | 6 | 0.7 min | 1.2 min |
 | gpu | 1 | 0.1 min | 0.1 min |
@@ -89,25 +89,25 @@ Every release candidate should include both a conformance read and a resource/ti
 
 | Axis | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| audio | 87 | 63.2 min | 110.5 min |
-| conformance-economics | 69 | 17.8 min | 24.8 min |
+| audio | 95 | 76.7 min | 135 min |
+| conformance-economics | 90 | 21.4 min | 30.7 min |
 | player-hit | 13 | 16.3 min | 29.3 min |
-| stage4-pressure | 28 | 12.8 min | 18.5 min |
-| audio-event-gap | 18 | 12.5 min | 22.8 min |
-| audio-theme-comparison | 11 | 12.4 min | 22.6 min |
-| conformance-loop | 49 | 11.7 min | 19.6 min |
-| audio-reference-segmentation | 16 | 11.1 min | 19.4 min |
+| audio-event-gap | 24 | 16.2 min | 29.4 min |
+| audio-theme-comparison | 14 | 16.1 min | 29.3 min |
+| audio-focus-candidate | 5 | 16.1 min | 29.1 min |
+| conformance-loop | 65 | 15.2 min | 25.3 min |
+| capture-retreat | 8 | 13.6 min | 24.5 min |
 
 ### Next Goal Estimates
 
 | Priority | Metric | Current | Target | Gap to target | Estimated effort | Expected resources | Tracked spend | Value / cost read | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Audio identity, event feedback, and cue alignment | 7.9/10 | 7.5-8.0 | at target | High; 3-6 hrs local/model-assisted analysis | cpu, model-api, openai-api | 87 runs; 63.2 min wall; 110.5 min CPU | Expected lift 0.7/10 on metric, 0.064/10 overall; investment score 2.9. | Tune the highest segment-level audio gap next: challengePerfect body. Rerun audio comparison, event-gap analysis, and quality scoring after the change. |
-| 2 | Level arc and encounter shape | 8.5/10 | 8.8-9.0 | +0.3 | Medium-high; 2-5 hrs | cpu, browser | 88 runs; 14.8 min wall; 24.7 min CPU | Expected lift 0.24/10 on metric, 0.022/10 overall; investment score 1.92. | Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning. |
+| 1 | Audio identity, event feedback, and cue alignment | 7.9/10 | 7.5-8.0 | at target | High; 3-6 hrs local/model-assisted analysis | cpu, model-api, openai-api | 95 runs; 76.7 min wall; 135 min CPU | Expected lift 0.7/10 on metric, 0.064/10 overall; investment score 2.9. | Tune the highest segment-level audio gap next: challengePerfect body. Rerun audio comparison, event-gap analysis, and quality scoring after the change. |
+| 2 | Level arc and encounter shape | 8.5/10 | 8.8-9.0 | +0.3 | Medium-high; 2-5 hrs | cpu, browser | 125 runs; 22 min wall; 36.3 min CPU | Expected lift 0.24/10 on metric, 0.022/10 overall; investment score 1.92. | Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning. |
 | 3 | Overall visual look and feel: gameplay, start page, typography complexity | 8.6/10 | 8.4-8.8 | at target | Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review | cpu, browser, gpu | 1 runs; 0.1 min wall; 0.1 min CPU | Expected lift 0.12/10 on metric, 0.011/10 overall; investment score 0.45. | Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers. |
 | 4 | Stage 4 pressure exact replay / pressure curve precision | 7.5/10 | 8.2-8.6 | +0.7 | Medium-high; prior runs ~12.8 min wall / 18.5 min CPU | cpu, browser | 28 runs; 12.8 min wall; 18.5 min CPU | Expected lift 0.35/10 on metric, 0.032/10 overall; investment score 1.73. | Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics. |
-| 5 | Alien entry to levels: formation, timing, and methods | 9.1/10 | 9.0-9.4 with dedicated scorer | at target | Medium; 1-3 hrs plus visual review | cpu, browser | 43 runs; 7.5 min wall; 10 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels. |
-| 6 | Challenge-stage variation and new alien/formations introduction | 9.3/10 | 9.0-9.4 with dedicated scorer | at target | Medium-high; 2-4 hrs | cpu, browser | 43 runs; 7.5 min wall; 10 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity. |
+| 5 | Alien entry to levels: formation, timing, and methods | 9.1/10 | 9.0-9.4 with dedicated scorer | at target | Medium; 1-3 hrs plus visual review | cpu, browser | 64 runs; 11.1 min wall; 15.8 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Promote alien-entry as its own scored submetric; compare stage-entry contact sheets and timing traces across early/mid/late levels. |
+| 6 | Challenge-stage variation and new alien/formations introduction | 9.3/10 | 9.0-9.4 with dedicated scorer | at target | Medium-high; 2-4 hrs | cpu, browser | 64 runs; 11.1 min wall; 15.8 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity. |
 | 7 | Progression and persona depth | 8.8/10 | 9.1+ | +0.3 | Low-medium; 1-2 hrs | cpu | 4 runs; 4.3 min wall; 4.9 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Resolve remaining ordering edge case after higher-value audio/level-arc work. |
 | 8 | Stage 1 opening timing fidelity | 8.5/10 | 8.8-9.2 | +0.3 | Low-medium; 1-2 hrs | cpu, browser | 4 runs; 4.3 min wall; 4.9 min CPU | Expected lift 0.18/10 on metric, 0.016/10 overall; investment score 0.86. | Tune only after audio and level-arc priorities unless regressions appear. |
 
@@ -126,8 +126,8 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 | Priority | Source / evidence family | Axis | Artifact type | Coverage | Annotation status | Confidence | Linked metric | Anchor | Missing next |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Galaga-family reference audio clips | audio identity / event feedback | reference m4a cue clips | 50 clips | clipped, mapped, partially scored | medium-high | Audio identity, event feedback, and cue alignment | src/assets/reference-audio | Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics. |
-| 2 | Aurora audio cue comparison and event-gap reports | audio cue scoring | waveform/spectral/alignment/semantic reports | 21 compared cues; semantic 9.76/10; 0 attention rows | semantic-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-event-gap/2026-05-08-63f90a0-dirty/report.json | Tune the highest segment-level gap next: capturedFighterDestroyed onset. Rerun audio comparison and event-gap analysis after the change. |
-| 3 | Level arc and encounter-shape evidence | level arc / challenge / reward | stage signatures, pressure windows, persona reports | 6/6 stage families; 6/6 evidence windows | scored | medium-high | Level arc and encounter shape | reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json | Add more long-play reference windows and expert-route scoring for challenge/reward opportunities. |
+| 2 | Aurora audio cue comparison and event-gap reports | audio cue scoring | waveform/spectral/alignment/semantic reports | 21 compared cues; semantic 9.76/10; 0 attention rows | semantic-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-event-gap/2026-05-09-5da7d96-dirty/report.json | Tune the highest segment-level gap next: challengeResults onset. Rerun audio comparison and event-gap analysis after the change. |
+| 3 | Level arc and encounter-shape evidence | level arc / challenge / reward | stage signatures, pressure windows, persona reports | 6/6 stage families; 6/6 evidence windows | scored | medium-high | Level arc and encounter shape | reference-artifacts/analyses/level-arc-conformance/2026-05-09-5da7d96/report.json | Add more long-play reference windows and expert-route scoring for challenge/reward opportunities. |
 | 4 | Stage 4 pressure and loss-window diagnostics | pressure / fairness | loss windows, replay geometry, collision traces | 3 promoted windows | mined, replay-diagnostic | medium | Stage 4 pressure exact replay / pressure curve precision | reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-fb2f674/report.json | Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning. |
 | 5 | Aurora visual look screenshots | visual look / UI readability | browser screenshots plus DOM/canvas metrics | 4 surfaces | first-pass scored | medium-low | Overall visual look and feel | reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json | Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique. |
 | 6 | Aurora evidence-cycle windows | general ingestion framework | manifests, contact sheets, traces, event logs, audio timelines | 4 planned windows | seed-plan-only | medium | Level arc / challenge variation / visual look | reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json | Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest. |
@@ -136,13 +136,13 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-08-63f90a0/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-09-5da7d96/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-08-63f90a0/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-09-5da7d96/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-08-63f90a0/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-09-5da7d96/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-08-63f90a0/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-09-5da7d96/cost-per-positive-score-point.svg)
 
 ## New First-Class Axes Added
 
@@ -166,6 +166,6 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-08-cfa8497/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-08-8b6e3a8/report.json`
-- Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-08-cfa8497/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-08-63f90a0/report.json`
+- Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-09-5da7d96/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-09-5da7d96/report.json`
 - Equal current quality-category weight: `0.091`

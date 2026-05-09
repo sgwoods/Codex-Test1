@@ -1,0 +1,2075 @@
+{
+  "generatedAt": "2026-05-09T00:24:15.006Z",
+  "commit": "5da7d96",
+  "version": "1.3.0",
+  "cue": "captureRetreat",
+  "items": [
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "capturing-guide-window",
+      "label": "Capturing guide window",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capturing guide window",
+        "wav": "samples/capturing-guide-window.wav",
+        "webm": "samples/capturing-guide-window.webm",
+        "audioCue": {
+          "cue": "__candidate_capturing-guide-window",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "capturing-short-onset",
+      "label": "Capturing short onset",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capturing short onset",
+        "wav": "samples/capturing-short-onset.wav",
+        "webm": "samples/capturing-short-onset.webm",
+        "audioCue": {
+          "cue": "__candidate_capturing-short-onset",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.622
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d420-v86",
+      "label": "Capture Retreat reference 2.549s/0.42s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.42s v0.86",
+        "wav": "samples/refclip-s2549-d420-v86.wav",
+        "webm": "samples/refclip-s2549-d420-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d420-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.6
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d420-v95",
+      "label": "Capture Retreat reference 2.549s/0.42s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.42s v0.95",
+        "wav": "samples/refclip-s2549-d420-v95.wav",
+        "webm": "samples/refclip-s2549-d420-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d420-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.616
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d420-v74",
+      "label": "Capture Retreat reference 2.549s/0.42s v0.74",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.42s v0.74",
+        "wav": "samples/refclip-s2549-d420-v74.wav",
+        "webm": "samples/refclip-s2549-d420-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d420-v74",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d420-v105",
+      "label": "Capture Retreat reference 2.549s/0.42s v1.05",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.42s v1.05",
+        "wav": "samples/refclip-s2549-d420-v105.wav",
+        "webm": "samples/refclip-s2549-d420-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d420-v105",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.604
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d420-v62",
+      "label": "Capture Retreat reference 2.549s/0.42s v0.62",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.42s v0.62",
+        "wav": "samples/refclip-s2549-d420-v62.wav",
+        "webm": "samples/refclip-s2549-d420-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d420-v62",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.61
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d420-v116",
+      "label": "Capture Retreat reference 2.549s/0.42s v1.16",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.42s v1.16",
+        "wav": "samples/refclip-s2549-d420-v116.wav",
+        "webm": "samples/refclip-s2549-d420-v116.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d420-v116",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d420-v86",
+      "label": "Capture Retreat reference 2.62s/0.42s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.42s v0.86",
+        "wav": "samples/refclip-s2620-d420-v86.wav",
+        "webm": "samples/refclip-s2620-d420-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d420-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.607
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d360-v86",
+      "label": "Capture Retreat reference 2.549s/0.36s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.36s v0.86",
+        "wav": "samples/refclip-s2549-d360-v86.wav",
+        "webm": "samples/refclip-s2549-d360-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d360-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.614
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d420-v95",
+      "label": "Capture Retreat reference 2.62s/0.42s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.42s v0.95",
+        "wav": "samples/refclip-s2620-d420-v95.wav",
+        "webm": "samples/refclip-s2620-d420-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d420-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.607
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d420-v74",
+      "label": "Capture Retreat reference 2.62s/0.42s v0.74",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.42s v0.74",
+        "wav": "samples/refclip-s2620-d420-v74.wav",
+        "webm": "samples/refclip-s2620-d420-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d420-v74",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.603
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d420-v86",
+      "label": "Capture Retreat reference 2.46s/0.42s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.42s v0.86",
+        "wav": "samples/refclip-s2460-d420-v86.wav",
+        "webm": "samples/refclip-s2460-d420-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d420-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d360-v95",
+      "label": "Capture Retreat reference 2.549s/0.36s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.36s v0.95",
+        "wav": "samples/refclip-s2549-d360-v95.wav",
+        "webm": "samples/refclip-s2549-d360-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d360-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.612
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d420-v105",
+      "label": "Capture Retreat reference 2.62s/0.42s v1.05",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.42s v1.05",
+        "wav": "samples/refclip-s2620-d420-v105.wav",
+        "webm": "samples/refclip-s2620-d420-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d420-v105",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.611
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d360-v74",
+      "label": "Capture Retreat reference 2.549s/0.36s v0.74",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.36s v0.74",
+        "wav": "samples/refclip-s2549-d360-v74.wav",
+        "webm": "samples/refclip-s2549-d360-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d360-v74",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.626
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d420-v62",
+      "label": "Capture Retreat reference 2.62s/0.42s v0.62",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.42s v0.62",
+        "wav": "samples/refclip-s2620-d420-v62.wav",
+        "webm": "samples/refclip-s2620-d420-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d420-v62",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.611
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d420-v95",
+      "label": "Capture Retreat reference 2.46s/0.42s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.42s v0.95",
+        "wav": "samples/refclip-s2460-d420-v95.wav",
+        "webm": "samples/refclip-s2460-d420-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d420-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.626
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d360-v105",
+      "label": "Capture Retreat reference 2.549s/0.36s v1.05",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.36s v1.05",
+        "wav": "samples/refclip-s2549-d360-v105.wav",
+        "webm": "samples/refclip-s2549-d360-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d360-v105",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.622
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d420-v74",
+      "label": "Capture Retreat reference 2.46s/0.42s v0.74",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.42s v0.74",
+        "wav": "samples/refclip-s2460-d420-v74.wav",
+        "webm": "samples/refclip-s2460-d420-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d420-v74",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.62
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d420-v116",
+      "label": "Capture Retreat reference 2.62s/0.42s v1.16",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.42s v1.16",
+        "wav": "samples/refclip-s2620-d420-v116.wav",
+        "webm": "samples/refclip-s2620-d420-v116.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d420-v116",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.6
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d500-v86",
+      "label": "Capture Retreat reference 2.549s/0.5s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.5s v0.86",
+        "wav": "samples/refclip-s2549-d500-v86.wav",
+        "webm": "samples/refclip-s2549-d500-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d500-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.5,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d360-v62",
+      "label": "Capture Retreat reference 2.549s/0.36s v0.62",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.36s v0.62",
+        "wav": "samples/refclip-s2549-d360-v62.wav",
+        "webm": "samples/refclip-s2549-d360-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d360-v62",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.625
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d420-v105",
+      "label": "Capture Retreat reference 2.46s/0.42s v1.05",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.42s v1.05",
+        "wav": "samples/refclip-s2460-d420-v105.wav",
+        "webm": "samples/refclip-s2460-d420-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d420-v105",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.608
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d360-v116",
+      "label": "Capture Retreat reference 2.549s/0.36s v1.16",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.36s v1.16",
+        "wav": "samples/refclip-s2549-d360-v116.wav",
+        "webm": "samples/refclip-s2549-d360-v116.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d360-v116",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.617
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d420-v62",
+      "label": "Capture Retreat reference 2.46s/0.42s v0.62",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.42s v0.62",
+        "wav": "samples/refclip-s2460-d420-v62.wav",
+        "webm": "samples/refclip-s2460-d420-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d420-v62",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d500-v95",
+      "label": "Capture Retreat reference 2.549s/0.5s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.5s v0.95",
+        "wav": "samples/refclip-s2549-d500-v95.wav",
+        "webm": "samples/refclip-s2549-d500-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d500-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.5,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.633
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d500-v74",
+      "label": "Capture Retreat reference 2.549s/0.5s v0.74",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.5s v0.74",
+        "wav": "samples/refclip-s2549-d500-v74.wav",
+        "webm": "samples/refclip-s2549-d500-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d500-v74",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.5,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d420-v116",
+      "label": "Capture Retreat reference 2.46s/0.42s v1.16",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.42s v1.16",
+        "wav": "samples/refclip-s2460-d420-v116.wav",
+        "webm": "samples/refclip-s2460-d420-v116.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d420-v116",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.42,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.609
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d500-v105",
+      "label": "Capture Retreat reference 2.549s/0.5s v1.05",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.5s v1.05",
+        "wav": "samples/refclip-s2549-d500-v105.wav",
+        "webm": "samples/refclip-s2549-d500-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d500-v105",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.5,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d500-v62",
+      "label": "Capture Retreat reference 2.549s/0.5s v0.62",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.5s v0.62",
+        "wav": "samples/refclip-s2549-d500-v62.wav",
+        "webm": "samples/refclip-s2549-d500-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d500-v62",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.5,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.602
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d500-v116",
+      "label": "Capture Retreat reference 2.549s/0.5s v1.16",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.5s v1.16",
+        "wav": "samples/refclip-s2549-d500-v116.wav",
+        "webm": "samples/refclip-s2549-d500-v116.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d500-v116",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.5,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.616
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d360-v86",
+      "label": "Capture Retreat reference 2.62s/0.36s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.36s v0.86",
+        "wav": "samples/refclip-s2620-d360-v86.wav",
+        "webm": "samples/refclip-s2620-d360-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d360-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d300-v86",
+      "label": "Capture Retreat reference 2.549s/0.3s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.3s v0.86",
+        "wav": "samples/refclip-s2549-d300-v86.wav",
+        "webm": "samples/refclip-s2549-d300-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d300-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.611
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d360-v95",
+      "label": "Capture Retreat reference 2.62s/0.36s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.36s v0.95",
+        "wav": "samples/refclip-s2620-d360-v95.wav",
+        "webm": "samples/refclip-s2620-d360-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d360-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.619
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2620-d360-v74",
+      "label": "Capture Retreat reference 2.62s/0.36s v0.74",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.62s/0.36s v0.74",
+        "wav": "samples/refclip-s2620-d360-v74.wav",
+        "webm": "samples/refclip-s2620-d360-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2620-d360-v74",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.62,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.604
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2460-d360-v86",
+      "label": "Capture Retreat reference 2.46s/0.36s v0.86",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.46s/0.36s v0.86",
+        "wav": "samples/refclip-s2460-d360-v86.wav",
+        "webm": "samples/refclip-s2460-d360-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2460-d360-v86",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.46,
+          "referenceClipDuration": 0.36,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.638
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s2549-d300-v95",
+      "label": "Capture Retreat reference 2.549s/0.3s v0.95",
+      "focus": "Candidate comparison for Capture Retreat.",
+      "cue": "captureRetreat",
+      "aurora": {
+        "label": "Capture Retreat reference 2.549s/0.3s v0.95",
+        "wav": "samples/refclip-s2549-d300-v95.wav",
+        "webm": "samples/refclip-s2549-d300-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s2549-d300-v95",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+          "referenceClipStart": 2.549,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.692
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "captureRetreat",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.702
+        }
+      },
+      "reference": {
+        "label": "Capturing",
+        "source": "src/assets/reference-audio/galaga3-capturing.m4a",
+        "wav": "samples/capture-retreat-reference.wav",
+        "window": {
+          "startSeconds": 2.549,
+          "endSeconds": 2.969,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,3021 @@
+{
+  "generatedAt": "2026-05-09T00:48:58.294Z",
+  "commit": "5da7d96",
+  "problem": "Stage 14 has a visible wide-escort boss window, but current level-arc evidence does not yet show whether skilled play can convert it into a Galaga-like high-value reward.",
+  "strategy": "Search deterministic player input routes around the natural Stage 14 escort timing, preserving run logs for every candidate before changing gameplay tuning.",
+  "successMeasure": "Find at least one natural route with special_attack_bonus, or at minimum a boss kill/damage path with bounded loss cost; otherwise promote the failure as a measured late-stage reward gap.",
+  "summary": {
+    "score10": 9.5,
+    "tested": 63,
+    "passed": 63,
+    "failed": 0,
+    "specialBonusCandidates": 7,
+    "bossDamageCandidates": 33,
+    "bossKillCandidates": 22,
+    "bestCandidate": {
+      "id": "right-r1-75-h0-65",
+      "score10": 9.5,
+      "score": 6240,
+      "losses": 4,
+      "collisionLosses": 2,
+      "bulletLosses": 2,
+      "specialAttackCount": 3,
+      "specialAttackBonus": 4800,
+      "bossDamageCount": 4,
+      "bossKillCount": 4,
+      "escortDiveKillCount": 6
+    }
+  },
+  "interpretation": "At least one deterministic route can harvest the natural Stage 14 wide-escort reward. Promote the best route into outcome probes and compare player-skill opportunity before gameplay tuning.",
+  "results": [
+    {
+      "ok": true,
+      "id": "right-r1-75-h0-65",
+      "route": {
+        "id": "right-r1-75-h0-65",
+        "releaseLeftAt": 1.75,
+        "rightAt": 1.76,
+        "rightHold": 0.65
+      },
+      "score10": 9.5,
+      "score": 6240,
+      "lives": 1,
+      "attacks": 22,
+      "bullets": 14,
+      "kills": 0,
+      "losses": 4,
+      "collisionLosses": 2,
+      "bulletLosses": 2,
+      "specialAttackCount": 3,
+      "specialAttackBonus": 4800,
+      "bossDamageCount": 4,
+      "bossKillCount": 4,
+      "escortDiveKillCount": 6,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 3.01,
+        "lane": 5,
+        "playerLane": 5,
+        "escorts": 3,
+        "bossVx": 34.46,
+        "bossVy": 80.07
+      },
+      "firstSpecial": {
+        "t": 3.593,
+        "bonus": 1600,
+        "escorts": 3
+      },
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h0-65-seed14014-2026-05-09T00-47-37-121Z-2684-cm0j0s/neo-galaga-session-ngt-1778287658361-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h0-65-seed14014-2026-05-09T00-47-37-121Z-2684-cm0j0s/neo-galaga-session-ngt-1778287658361-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r1-75-h0-35",
+      "route": {
+        "id": "right-r1-75-h0-35",
+        "releaseLeftAt": 1.75,
+        "rightAt": 1.76,
+        "rightHold": 0.35
+      },
+      "score10": 9.5,
+      "score": 2520,
+      "lives": 3,
+      "attacks": 30,
+      "bullets": 22,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 2,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 2,
+      "bossKillCount": 2,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 3.027,
+        "lane": 4,
+        "playerLane": 3,
+        "escorts": 3,
+        "bossVx": 9,
+        "bossVy": 80.07
+      },
+      "firstSpecial": {
+        "t": 16.127,
+        "bonus": 800,
+        "escorts": 1
+      },
+      "firstLoss": {
+        "t": 9.277,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 3,
+        "sourceLane": 3
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h0-35-seed14014-2026-05-09T00-47-35-683Z-2571-ff0fr8/neo-galaga-session-ngt-1778287656948-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h0-35-seed14014-2026-05-09T00-47-35-683Z-2571-ff0fr8/neo-galaga-session-ngt-1778287656948-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h1-45-l4-2",
+      "route": {
+        "id": "recover-r2-7-h1-45-l4-2",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 9.5,
+      "score": 3400,
+      "lives": 2,
+      "attacks": 23,
+      "bullets": 16,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 2,
+      "bulletLosses": 1,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 3,
+      "bossKillCount": 3,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.27,
+        "bossVy": 80.07
+      },
+      "firstSpecial": {
+        "t": 18.567,
+        "bonus": 1600,
+        "escorts": 3
+      },
+      "firstLoss": {
+        "t": 4.6,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 6,
+        "sourceLane": 6
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-45-l4-2-seed14014-2026-05-09T00-48-53-947Z-8965-12boag/neo-galaga-session-ngt-1778287735263-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-45-l4-2-seed14014-2026-05-09T00-48-53-947Z-8965-12boag/neo-galaga-session-ngt-1778287735263-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-5-h0-65",
+      "route": {
+        "id": "right-r2-5-h0-65",
+        "releaseLeftAt": 2.5,
+        "rightAt": 2.51,
+        "rightHold": 0.65
+      },
+      "score10": 9.5,
+      "score": 2860,
+      "lives": 1,
+      "attacks": 18,
+      "bullets": 10,
+      "kills": 0,
+      "losses": 4,
+      "collisionLosses": 2,
+      "bulletLosses": 2,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 3,
+      "bossKillCount": 3,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 12.027,
+        "lane": 5,
+        "playerLane": 5,
+        "escorts": 3,
+        "bossVx": 27.95,
+        "bossVy": 99.8
+      },
+      "firstSpecial": {
+        "t": 12.76,
+        "bonus": 1600,
+        "escorts": 3
+      },
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h0-65-seed14014-2026-05-09T00-47-59-202Z-4397-lo5zrp/neo-galaga-session-ngt-1778287680451-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h0-65-seed14014-2026-05-09T00-47-59-202Z-4397-lo5zrp/neo-galaga-session-ngt-1778287680451-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h1-05-l4-2",
+      "route": {
+        "id": "recover-r2-7-h1-05-l4-2",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 9.5,
+      "score": 3080,
+      "lives": 3,
+      "attacks": 29,
+      "bullets": 16,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 2,
+      "bossKillCount": 2,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.38,
+        "bossVy": 80.07
+      },
+      "firstSpecial": {
+        "t": 15.283,
+        "bonus": 1600,
+        "escorts": 3
+      },
+      "firstLoss": {
+        "t": 4.583,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 6,
+        "sourceLane": 6
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-05-l4-2-seed14014-2026-05-09T00-48-49-521Z-8558-tffkg8/neo-galaga-session-ngt-1778287730760-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-05-l4-2-seed14014-2026-05-09T00-48-49-521Z-8558-tffkg8/neo-galaga-session-ngt-1778287730760-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r3-h0-65",
+      "route": {
+        "id": "right-r3-h0-65",
+        "releaseLeftAt": 3,
+        "rightAt": 3.01,
+        "rightHold": 0.65
+      },
+      "score10": 9.5,
+      "score": 2990,
+      "lives": 3,
+      "attacks": 24,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 2,
+      "bossKillCount": 2,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -32.17,
+        "bossVy": 80.07
+      },
+      "firstSpecial": {
+        "t": 14.927,
+        "bonus": 1600,
+        "escorts": 2
+      },
+      "firstLoss": {
+        "t": 8.977,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h0-65-seed14014-2026-05-09T00-48-13-447Z-5564-f4q8yc/neo-galaga-session-ngt-1778287694659-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h0-65-seed14014-2026-05-09T00-48-13-447Z-5564-f4q8yc/neo-galaga-session-ngt-1778287694659-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-75-h0-95",
+      "route": {
+        "id": "right-r2-75-h0-95",
+        "releaseLeftAt": 2.75,
+        "rightAt": 2.76,
+        "rightHold": 0.95
+      },
+      "score10": 8,
+      "score": 2150,
+      "lives": 1,
+      "attacks": 23,
+      "bullets": 15,
+      "kills": 0,
+      "losses": 4,
+      "collisionLosses": 2,
+      "bulletLosses": 2,
+      "specialAttackCount": 1,
+      "specialAttackBonus": 1600,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -20.47,
+        "bossVy": 80.07
+      },
+      "firstSpecial": {
+        "t": 20.66,
+        "bonus": 1600,
+        "escorts": 2
+      },
+      "firstLoss": {
+        "t": 4.843,
+        "cause": "enemy_bullet",
+        "sourceType": "bee",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 8,
+        "sourceLane": 7
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h0-95-seed14014-2026-05-09T00-48-07-772Z-5109-5843as/neo-galaga-session-ngt-1778287688954-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h0-95-seed14014-2026-05-09T00-48-07-772Z-5109-5843as/neo-galaga-session-ngt-1778287688954-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-25-h0-65",
+      "route": {
+        "id": "right-r2-25-h0-65",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 0.65
+      },
+      "score10": 6.6,
+      "score": 1790,
+      "lives": 4,
+      "attacks": 24,
+      "bullets": 15,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 5,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 22.777,
+        "lane": 4,
+        "playerLane": 5,
+        "escorts": 3,
+        "bossVx": 37.07,
+        "bossVy": 95.17
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h0-65-seed14014-2026-05-09T00-47-51-796Z-3831-wooe2y/neo-galaga-session-ngt-1778287673106-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h0-65-seed14014-2026-05-09T00-47-51-796Z-3831-wooe2y/neo-galaga-session-ngt-1778287673106-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h0-65-l4-55",
+      "route": {
+        "id": "recover-r2-7-h0-65-l4-55",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 6.5,
+      "score": 1560,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 16,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 2,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.28,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.833,
+        "cause": "enemy_bullet",
+        "sourceType": "bee",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 3,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h0-65-l4-55-seed14014-2026-05-09T00-48-46-634Z-8351-tfl894/neo-galaga-session-ngt-1778287727829-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h0-65-l4-55-seed14014-2026-05-09T00-48-46-634Z-8351-tfl894/neo-galaga-session-ngt-1778287727829-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h1-45-l4-9",
+      "route": {
+        "id": "recover-r2-h1-45-l4-9",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 6,
+      "score": 1540,
+      "lives": 3,
+      "attacks": 24,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 3,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 7.95,
+        "lane": 4,
+        "playerLane": 7,
+        "escorts": 3,
+        "bossVx": 42.55,
+        "bossVy": 109.05
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 5.183,
+        "cause": "enemy_bullet",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 7,
+        "sourceLane": 7
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-45-l4-9-seed14014-2026-05-09T00-48-30-647Z-6951-dbaxi8/neo-galaga-session-ngt-1778287711962-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-45-l4-9-seed14014-2026-05-09T00-48-30-647Z-6951-dbaxi8/neo-galaga-session-ngt-1778287711962-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r3-h0-95",
+      "route": {
+        "id": "right-r3-h0-95",
+        "releaseLeftAt": 3,
+        "rightAt": 3.01,
+        "rightHold": 0.95
+      },
+      "score10": 6,
+      "score": 1480,
+      "lives": 3,
+      "attacks": 34,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -32.04,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 17.627,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 8,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h0-95-seed14014-2026-05-09T00-48-14-840Z-5677-lur25b/neo-galaga-session-ngt-1778287696028-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h0-95-seed14014-2026-05-09T00-48-14-840Z-5677-lur25b/neo-galaga-session-ngt-1778287696028-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "short-right-before-escort",
+      "route": {
+        "id": "short-right-before-escort",
+        "releaseLeftAt": 2.05,
+        "rightAt": 2.06,
+        "rightHold": 0.5
+      },
+      "score10": 5.9,
+      "score": 1180,
+      "lives": 2,
+      "attacks": 21,
+      "bullets": 13,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3.01,
+        "lane": 5,
+        "playerLane": 4,
+        "escorts": 3,
+        "bossVx": 18.27,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 7.143,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/short-right-before-escort-seed14014-2026-05-09T00-47-31-489Z-2230-p26is1/neo-galaga-session-ngt-1778287652695-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/short-right-before-escort-seed14014-2026-05-09T00-47-31-489Z-2230-p26is1/neo-galaga-session-ngt-1778287652695-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "baseline-stage14-route",
+      "route": {
+        "id": "baseline-stage14-route",
+        "releaseLeftAt": 2.4,
+        "rightAt": 2.45,
+        "rightHold": 2.75,
+        "leftAgainAt": 5.25,
+        "leftAgainHold": 3.45
+      },
+      "score10": 5.8,
+      "score": 1030,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 4,
+        "escorts": 3,
+        "bossVx": 19.45,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 5.367,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 8,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/baseline-stage14-route-seed14014-2026-05-09T00-47-26-661Z-1859-1fr9hw/neo-galaga-session-ngt-1778287648463-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/baseline-stage14-route-seed14014-2026-05-09T00-47-26-661Z-1859-1fr9hw/neo-galaga-session-ngt-1778287648463-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-5-h0-35",
+      "route": {
+        "id": "right-r2-5-h0-35",
+        "releaseLeftAt": 2.5,
+        "rightAt": 2.51,
+        "rightHold": 0.35
+      },
+      "score10": 5.7,
+      "score": 1700,
+      "lives": 4,
+      "attacks": 35,
+      "bullets": 24,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 3,
+        "escorts": 3,
+        "bossVx": 2.27,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 21.377,
+        "cause": "enemy_bullet",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 3,
+        "sourceLane": 3
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h0-35-seed14014-2026-05-09T00-47-57-714Z-4283-hexo3u/neo-galaga-session-ngt-1778287679006-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h0-35-seed14014-2026-05-09T00-47-57-714Z-4283-hexo3u/neo-galaga-session-ngt-1778287679006-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h0-65-l4-2",
+      "route": {
+        "id": "recover-r2-7-h0-65-l4-2",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 5.3,
+      "score": 780,
+      "lives": 5,
+      "attacks": 31,
+      "bullets": 24,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.41,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h0-65-l4-2-seed14014-2026-05-09T00-48-45-195Z-8222-91zlzk/neo-galaga-session-ngt-1778287726420-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h0-65-l4-2-seed14014-2026-05-09T00-48-45-195Z-8222-91zlzk/neo-galaga-session-ngt-1778287726420-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h1-05-l4-2",
+      "route": {
+        "id": "recover-r2-35-h1-05-l4-2",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 5.1,
+      "score": 1610,
+      "lives": 2,
+      "attacks": 25,
+      "bullets": 13,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 2,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 7.667,
+        "lane": 6,
+        "playerLane": 3,
+        "escorts": 3,
+        "bossVx": -46.12,
+        "bossVy": 80.38
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.867,
+        "cause": "enemy_bullet",
+        "sourceType": "bee",
+        "sourceDive": 0,
+        "sourceAttackMode": "dive",
+        "playerLane": 4,
+        "sourceLane": 4
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-05-l4-2-seed14014-2026-05-09T00-48-36-448Z-7443-ok2tfz/neo-galaga-session-ngt-1778287717737-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-05-l4-2-seed14014-2026-05-09T00-48-36-448Z-7443-ok2tfz/neo-galaga-session-ngt-1778287717737-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-25-h0-95",
+      "route": {
+        "id": "right-r2-25-h0-95",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 0.95
+      },
+      "score10": 5,
+      "score": 1310,
+      "lives": 3,
+      "attacks": 27,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 4.86,
+        "lane": 4,
+        "playerLane": 8,
+        "escorts": 3,
+        "bossVx": 42.81,
+        "bossVy": 109.47
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 9.16,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 8,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h0-95-seed14014-2026-05-09T00-47-53-284Z-3944-xljhmm/neo-galaga-session-ngt-1778287674535-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h0-95-seed14014-2026-05-09T00-47-53-284Z-3944-xljhmm/neo-galaga-session-ngt-1778287674535-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-75-h0-65",
+      "route": {
+        "id": "right-r2-75-h0-65",
+        "releaseLeftAt": 2.75,
+        "rightAt": 2.76,
+        "rightHold": 0.65
+      },
+      "score10": 5,
+      "score": 1160,
+      "lives": 2,
+      "attacks": 21,
+      "bullets": 15,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -20.36,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.577,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h0-65-seed14014-2026-05-09T00-48-06-284Z-4996-0xn2sb/neo-galaga-session-ngt-1778287687606-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h0-65-seed14014-2026-05-09T00-48-06-284Z-4996-0xn2sb/neo-galaga-session-ngt-1778287687606-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h0-65-l4-9",
+      "route": {
+        "id": "recover-r2-7-h0-65-l4-9",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 4.9,
+      "score": 990,
+      "lives": 4,
+      "attacks": 32,
+      "bullets": 17,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.31,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 17.483,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h0-65-l4-9-seed14014-2026-05-09T00-48-48-066Z-8476-isu8qy/neo-galaga-session-ngt-1778287729290-3.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-25-h0-35",
+      "route": {
+        "id": "right-r2-25-h0-35",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 0.35
+      },
+      "score10": 4.4,
+      "score": 1080,
+      "lives": 3,
+      "attacks": 24,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 2,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 3,
+        "escorts": 3,
+        "bossVx": -4.12,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 7.293,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 3,
+        "sourceLane": 3
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h0-35-seed14014-2026-05-09T00-47-50-334Z-3718-kgua42/neo-galaga-session-ngt-1778287671629-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h0-35-seed14014-2026-05-09T00-47-50-334Z-3718-kgua42/neo-galaga-session-ngt-1778287671629-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h0-65-l4-9",
+      "route": {
+        "id": "recover-r2-h0-65-l4-9",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 4.2,
+      "score": 800,
+      "lives": 2,
+      "attacks": 22,
+      "bullets": 13,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 2,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 6.083,
+        "lane": 4,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -79,
+        "bossVy": 97.38
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h0-65-l4-9-seed14014-2026-05-09T00-48-22-021Z-6245-ow0jbi/neo-galaga-session-ngt-1778287703291-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h0-65-l4-9-seed14014-2026-05-09T00-48-22-021Z-6245-ow0jbi/neo-galaga-session-ngt-1778287703291-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-h1-25",
+      "route": {
+        "id": "right-r2-h1-25",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.25
+      },
+      "score10": 3.6,
+      "score": 860,
+      "lives": 4,
+      "attacks": 28,
+      "bullets": 25,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 20.443,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 36.15,
+        "bossVy": 95.02
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 22.843,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h1-25-seed14014-2026-05-09T00-47-47-307Z-3492-t574pl/neo-galaga-session-ngt-1778287668562-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h1-25-seed14014-2026-05-09T00-47-47-307Z-3492-t574pl/neo-galaga-session-ngt-1778287668562-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-75-h1-25",
+      "route": {
+        "id": "right-r2-75-h1-25",
+        "releaseLeftAt": 2.75,
+        "rightAt": 2.76,
+        "rightHold": 1.25
+      },
+      "score10": 3.5,
+      "score": 1100,
+      "lives": 4,
+      "attacks": 33,
+      "bullets": 22,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -20.29,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 19.227,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h1-25-seed14014-2026-05-09T00-48-09-146Z-5222-eu94wu/neo-galaga-session-ngt-1778287690436-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h1-25-seed14014-2026-05-09T00-48-09-146Z-5222-eu94wu/neo-galaga-session-ngt-1778287690436-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-75-h1-55",
+      "route": {
+        "id": "right-r2-75-h1-55",
+        "releaseLeftAt": 2.75,
+        "rightAt": 2.76,
+        "rightHold": 1.55
+      },
+      "score10": 3.4,
+      "score": 840,
+      "lives": 3,
+      "attacks": 27,
+      "bullets": 17,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -20.28,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.643,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h1-55-seed14014-2026-05-09T00-48-10-595Z-5337-d2dvpw/neo-galaga-session-ngt-1778287691895-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h1-55-seed14014-2026-05-09T00-48-10-595Z-5337-d2dvpw/neo-galaga-session-ngt-1778287691895-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h1-05-l4-9",
+      "route": {
+        "id": "recover-r2-7-h1-05-l4-9",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 3.4,
+      "score": 730,
+      "lives": 3,
+      "attacks": 33,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.15,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 15.817,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-05-l4-9-seed14014-2026-05-09T00-48-52-518Z-8844-4zziby/neo-galaga-session-ngt-1778287733729-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-05-l4-9-seed14014-2026-05-09T00-48-52-518Z-8844-4zziby/neo-galaga-session-ngt-1778287733729-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r1-75-h0-95",
+      "route": {
+        "id": "right-r1-75-h0-95",
+        "releaseLeftAt": 1.75,
+        "rightAt": 1.76,
+        "rightHold": 0.95
+      },
+      "score10": 3.4,
+      "score": 860,
+      "lives": 2,
+      "attacks": 22,
+      "bullets": 15,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3.01,
+        "lane": 5,
+        "playerLane": 8,
+        "escorts": 3,
+        "bossVx": 66.54,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.493,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 8,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h0-95-seed14014-2026-05-09T00-47-38-515Z-2797-31avgi/neo-galaga-session-ngt-1778287659749-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h0-95-seed14014-2026-05-09T00-47-38-515Z-2797-31avgi/neo-galaga-session-ngt-1778287659749-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-h0-65",
+      "route": {
+        "id": "right-r2-h0-65",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 0.65
+      },
+      "score10": 3.2,
+      "score": 850,
+      "lives": 3,
+      "attacks": 18,
+      "bullets": 14,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 1,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h0-65-seed14014-2026-05-09T00-47-44-400Z-3257-9j6qfn/neo-galaga-session-ngt-1778287665705-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h0-65-seed14014-2026-05-09T00-47-44-400Z-3257-9j6qfn/neo-galaga-session-ngt-1778287665705-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-5-h1-55",
+      "route": {
+        "id": "right-r2-5-h1-55",
+        "releaseLeftAt": 2.5,
+        "rightAt": 2.51,
+        "rightHold": 1.55
+      },
+      "score10": 3,
+      "score": 830,
+      "lives": 5,
+      "attacks": 32,
+      "bullets": 26,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 3.927,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 24.44,
+        "bossVy": 103.15
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h1-55-seed14014-2026-05-09T00-48-03-467Z-4764-2g50pn/neo-galaga-session-ngt-1778287684662-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h1-55-seed14014-2026-05-09T00-48-03-467Z-4764-2g50pn/neo-galaga-session-ngt-1778287684662-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h1-45-l4-2",
+      "route": {
+        "id": "recover-r2-h1-45-l4-2",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 3,
+      "score": 830,
+      "lives": 5,
+      "attacks": 31,
+      "bullets": 25,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 12.183,
+        "lane": 6,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -65.67,
+        "bossVy": 84.96
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-45-l4-2-seed14014-2026-05-09T00-48-27-779Z-6709-0yg3f5/neo-galaga-session-ngt-1778287708969-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-45-l4-2-seed14014-2026-05-09T00-48-27-779Z-6709-0yg3f5/neo-galaga-session-ngt-1778287708969-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h1-45-l4-9",
+      "route": {
+        "id": "recover-r2-7-h1-45-l4-9",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 2.8,
+      "score": 700,
+      "lives": 3,
+      "attacks": 33,
+      "bullets": 26,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.15,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 12.017,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-45-l4-9-seed14014-2026-05-09T00-48-56-946Z-9207-ewx379/neo-galaga-session-ngt-1778287738151-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-45-l4-9-seed14014-2026-05-09T00-48-56-946Z-9207-ewx379/neo-galaga-session-ngt-1778287738151-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h0-65-l4-2",
+      "route": {
+        "id": "recover-r2-h0-65-l4-2",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 2.8,
+      "score": 650,
+      "lives": 2,
+      "attacks": 19,
+      "bullets": 14,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 2,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 20.583,
+        "lane": 4,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -77.2,
+        "bossVy": 115.85
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h0-65-l4-2-seed14014-2026-05-09T00-48-19-077Z-6016-wav7kd/neo-galaga-session-ngt-1778287700387-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h0-65-l4-2-seed14014-2026-05-09T00-48-19-077Z-6016-wav7kd/neo-galaga-session-ngt-1778287700387-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r3-h0-35",
+      "route": {
+        "id": "right-r3-h0-35",
+        "releaseLeftAt": 3,
+        "rightAt": 3.01,
+        "rightHold": 0.35
+      },
+      "score10": 2.8,
+      "score": 1460,
+      "lives": 3,
+      "attacks": 32,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 7,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -32.09,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.477,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 3,
+        "sourceLane": 3
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h0-35-seed14014-2026-05-09T00-48-12-063Z-5451-cdycuy/neo-galaga-session-ngt-1778287693271-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h0-35-seed14014-2026-05-09T00-48-12-063Z-5451-cdycuy/neo-galaga-session-ngt-1778287693271-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h1-05-l4-55",
+      "route": {
+        "id": "recover-r2-h1-05-l4-55",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 2.7,
+      "score": 620,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 10.4,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -56.13,
+        "bossVy": 79.57
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.383,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "capture",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-05-l4-55-seed14014-2026-05-09T00-48-24-861Z-6473-gszria/neo-galaga-session-ngt-1778287706146-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-05-l4-55-seed14014-2026-05-09T00-48-24-861Z-6473-gszria/neo-galaga-session-ngt-1778287706146-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-h0-95",
+      "route": {
+        "id": "right-r2-h0-95",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 0.95
+      },
+      "score10": 2.7,
+      "score": 1270,
+      "lives": 3,
+      "attacks": 27,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 5.66,
+        "lane": 5,
+        "playerLane": 8,
+        "escorts": 3,
+        "bossVx": 4.98,
+        "bossVy": 114.64
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 8.677,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "capture",
+        "playerLane": 8,
+        "sourceLane": 7
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h0-95-seed14014-2026-05-09T00-47-45-923Z-3373-z2b823/neo-galaga-session-ngt-1778287667133-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h0-95-seed14014-2026-05-09T00-47-45-923Z-3373-z2b823/neo-galaga-session-ngt-1778287667133-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-25-h1-55",
+      "route": {
+        "id": "right-r2-25-h1-55",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 1.55
+      },
+      "score10": 2.6,
+      "score": 1050,
+      "lives": 4,
+      "attacks": 30,
+      "bullets": 27,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 4,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 10.36,
+        "lane": 5,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 67.35,
+        "bossVy": 77.42
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 11.86,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h1-55-seed14014-2026-05-09T00-47-56-078Z-4170-6q6o3e/neo-galaga-session-ngt-1778287677361-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h1-55-seed14014-2026-05-09T00-47-56-078Z-4170-6q6o3e/neo-galaga-session-ngt-1778287677361-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-h0-35",
+      "route": {
+        "id": "right-r2-h0-35",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 0.35
+      },
+      "score10": 2.6,
+      "score": 920,
+      "lives": 3,
+      "attacks": 27,
+      "bullets": 16,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 3.01,
+        "lane": 5,
+        "playerLane": 3,
+        "escorts": 3,
+        "bossVx": 2.32,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 5.36,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 3,
+        "sourceLane": 3
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h0-35-seed14014-2026-05-09T00-47-42-912Z-3140-6d6ass/neo-galaga-session-ngt-1778287664230-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h0-35-seed14014-2026-05-09T00-47-42-912Z-3140-6d6ass/neo-galaga-session-ngt-1778287664230-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-75-h0-35",
+      "route": {
+        "id": "right-r2-75-h0-35",
+        "releaseLeftAt": 2.75,
+        "rightAt": 2.76,
+        "rightHold": 0.35
+      },
+      "score10": 2.6,
+      "score": 1140,
+      "lives": 1,
+      "attacks": 28,
+      "bullets": 14,
+      "kills": 0,
+      "losses": 4,
+      "collisionLosses": 4,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 5,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -20.4,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.577,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 3,
+        "sourceLane": 3
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h0-35-seed14014-2026-05-09T00-48-04-838Z-4877-bf4glg/neo-galaga-session-ngt-1778287686110-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-75-h0-35-seed14014-2026-05-09T00-48-04-838Z-4877-bf4glg/neo-galaga-session-ngt-1778287686110-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h1-05-l4-9",
+      "route": {
+        "id": "recover-r2-35-h1-05-l4-9",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 2.5,
+      "score": 870,
+      "lives": 4,
+      "attacks": 29,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 12.15,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -55.09,
+        "bossVy": 101.7
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 20.533,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-05-l4-9-seed14014-2026-05-09T00-48-39-426Z-7710-3qbfbq/neo-galaga-session-ngt-1778287720603-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-05-l4-9-seed14014-2026-05-09T00-48-39-426Z-7710-3qbfbq/neo-galaga-session-ngt-1778287720603-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r3-h1-25",
+      "route": {
+        "id": "right-r3-h1-25",
+        "releaseLeftAt": 3,
+        "rightAt": 3.01,
+        "rightHold": 1.25
+      },
+      "score10": 2.5,
+      "score": 790,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 3,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -31.86,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 12.86,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h1-25-seed14014-2026-05-09T00-48-16-224Z-5790-dhmkxu/neo-galaga-session-ngt-1778287697512-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h1-25-seed14014-2026-05-09T00-48-16-224Z-5790-dhmkxu/neo-galaga-session-ngt-1778287697512-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-then-left-recover",
+      "route": {
+        "id": "right-then-left-recover",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.35
+      },
+      "score10": 2.5,
+      "score": 680,
+      "lives": 4,
+      "attacks": 29,
+      "bullets": 22,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 5.733,
+        "lane": 4,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -30.15,
+        "bossVy": 91.14
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 16.667,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-then-left-recover-seed14014-2026-05-09T00-47-34-285Z-2458-j8br4k/neo-galaga-session-ngt-1778287655503-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-then-left-recover-seed14014-2026-05-09T00-47-34-285Z-2458-j8br4k/neo-galaga-session-ngt-1778287655503-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-h1-55",
+      "route": {
+        "id": "right-r2-h1-55",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.55
+      },
+      "score10": 2.5,
+      "score": 680,
+      "lives": 2,
+      "attacks": 23,
+      "bullets": 17,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 21.46,
+        "lane": 4,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 63.38,
+        "bossVy": 79.83
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 14.627,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h1-55-seed14014-2026-05-09T00-47-48-734Z-3605-hcq359/neo-galaga-session-ngt-1778287670141-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-h1-55-seed14014-2026-05-09T00-47-48-734Z-3605-hcq359/neo-galaga-session-ngt-1778287670141-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-5-h0-95",
+      "route": {
+        "id": "right-r2-5-h0-95",
+        "releaseLeftAt": 2.5,
+        "rightAt": 2.51,
+        "rightHold": 0.95
+      },
+      "score10": 2.5,
+      "score": 810,
+      "lives": 1,
+      "attacks": 23,
+      "bullets": 13,
+      "kills": 0,
+      "losses": 4,
+      "collisionLosses": 4,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 3.927,
+        "lane": 6,
+        "playerLane": 8,
+        "escorts": 3,
+        "bossVx": 10.34,
+        "bossVy": 103.15
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 7.41,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 8,
+        "sourceLane": 7
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h0-95-seed14014-2026-05-09T00-48-00-640Z-4512-ym7n38/neo-galaga-session-ngt-1778287681909-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h0-95-seed14014-2026-05-09T00-48-00-640Z-4512-ym7n38/neo-galaga-session-ngt-1778287681909-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-25-h1-25",
+      "route": {
+        "id": "right-r2-25-h1-25",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 1.25
+      },
+      "score10": 2.4,
+      "score": 630,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 25,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 2,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 11.843,
+        "lane": 5,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 74.22,
+        "bossVy": 114.47
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 8.11,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h1-25-seed14014-2026-05-09T00-47-54-699Z-4057-nhab2r/neo-galaga-session-ngt-1778287675904-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-25-h1-25-seed14014-2026-05-09T00-47-54-699Z-4057-nhab2r/neo-galaga-session-ngt-1778287675904-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r2-5-h1-25",
+      "route": {
+        "id": "right-r2-5-h1-25",
+        "releaseLeftAt": 2.5,
+        "rightAt": 2.51,
+        "rightHold": 1.25
+      },
+      "score10": 2.3,
+      "score": 470,
+      "lives": 5,
+      "attacks": 38,
+      "bullets": 26,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 5,
+      "firstRewardWindow": {
+        "t": 3.927,
+        "lane": 6,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 24.49,
+        "bossVy": 103.15
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h1-25-seed14014-2026-05-09T00-48-02-072Z-4625-hijfcs/neo-galaga-session-ngt-1778287683274-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r2-5-h1-25-seed14014-2026-05-09T00-48-02-072Z-4625-hijfcs/neo-galaga-session-ngt-1778287683274-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h1-45-l4-55",
+      "route": {
+        "id": "recover-r2-7-h1-45-l4-55",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 2.1,
+      "score": 410,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.25,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 17.4,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-45-l4-55-seed14014-2026-05-09T00-48-55-450Z-9086-q8aa0q/neo-galaga-session-ngt-1778287736759-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-45-l4-55-seed14014-2026-05-09T00-48-55-450Z-9086-q8aa0q/neo-galaga-session-ngt-1778287736759-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-7-h1-05-l4-55",
+      "route": {
+        "id": "recover-r2-7-h1-05-l4-55",
+        "releaseLeftAt": 2.7,
+        "rightAt": 2.71,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 2.1,
+      "score": 410,
+      "lives": 3,
+      "attacks": 28,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 2.993,
+        "lane": 5,
+        "playerLane": 2,
+        "escorts": 3,
+        "bossVx": -15.23,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 17.683,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-05-l4-55-seed14014-2026-05-09T00-48-50-987Z-8720-uhsnbn/neo-galaga-session-ngt-1778287732328-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-7-h1-05-l4-55-seed14014-2026-05-09T00-48-50-987Z-8720-uhsnbn/neo-galaga-session-ngt-1778287732328-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h1-45-l4-9",
+      "route": {
+        "id": "recover-r2-35-h1-45-l4-9",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.8,
+      "score": 600,
+      "lives": 4,
+      "attacks": 32,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 7.567,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -45.49,
+        "bossVy": 82.15
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 10.933,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-45-l4-9-seed14014-2026-05-09T00-48-43-796Z-8080-hwkv8b/neo-galaga-session-ngt-1778287724976-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-45-l4-9-seed14014-2026-05-09T00-48-43-796Z-8080-hwkv8b/neo-galaga-session-ngt-1778287724976-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h1-45-l4-2",
+      "route": {
+        "id": "recover-r2-35-h1-45-l4-2",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.8,
+      "score": 550,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 16.6,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -38.25,
+        "bossVy": 76.49
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 16.967,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-45-l4-2-seed14014-2026-05-09T00-48-40-800Z-7831-aekat3/neo-galaga-session-ngt-1778287722106-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-45-l4-2-seed14014-2026-05-09T00-48-40-800Z-7831-aekat3/neo-galaga-session-ngt-1778287722106-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r3-h1-55",
+      "route": {
+        "id": "right-r3-h1-55",
+        "releaseLeftAt": 3,
+        "rightAt": 3.01,
+        "rightHold": 1.55
+      },
+      "score10": 1.8,
+      "score": 470,
+      "lives": 4,
+      "attacks": 27,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -32.12,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 16.443,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h1-55-seed14014-2026-05-09T00-48-17-690Z-5903-f47ybv/neo-galaga-session-ngt-1778287698879-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r3-h1-55-seed14014-2026-05-09T00-48-17-690Z-5903-f47ybv/neo-galaga-session-ngt-1778287698879-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h1-05-l4-2",
+      "route": {
+        "id": "recover-r2-h1-05-l4-2",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.8,
+      "score": 620,
+      "lives": 3,
+      "attacks": 22,
+      "bullets": 18,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 17.733,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -88.18,
+        "bossVy": 100.88
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 19.167,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-05-l4-2-seed14014-2026-05-09T00-48-23-473Z-6360-3fpxtr/neo-galaga-session-ngt-1778287704674-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-05-l4-2-seed14014-2026-05-09T00-48-23-473Z-6360-3fpxtr/neo-galaga-session-ngt-1778287704674-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h1-45-l4-55",
+      "route": {
+        "id": "recover-r2-h1-45-l4-55",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.8,
+      "score": 620,
+      "lives": 3,
+      "attacks": 30,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 7.483,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -87.03,
+        "bossVy": 83.03
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 9.083,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-45-l4-55-seed14014-2026-05-09T00-48-29-173Z-6830-ts6zfs/neo-galaga-session-ngt-1778287710477-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-45-l4-55-seed14014-2026-05-09T00-48-29-173Z-6830-ts6zfs/neo-galaga-session-ngt-1778287710477-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h0-65-l4-2",
+      "route": {
+        "id": "recover-r2-35-h0-65-l4-2",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.2,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.8,
+      "score": 600,
+      "lives": 3,
+      "attacks": 21,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 13.467,
+        "lane": 6,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -96.76,
+        "bossVy": 90.99
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h0-65-l4-2-seed14014-2026-05-09T00-48-32-143Z-7072-5522hf/neo-galaga-session-ngt-1778287713444-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h0-65-l4-2-seed14014-2026-05-09T00-48-32-143Z-7072-5522hf/neo-galaga-session-ngt-1778287713444-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h0-65-l4-55",
+      "route": {
+        "id": "recover-r2-35-h0-65-l4-55",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.8,
+      "score": 600,
+      "lives": 3,
+      "attacks": 21,
+      "bullets": 20,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 13.467,
+        "lane": 6,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -96.94,
+        "bossVy": 90.99
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h0-65-l4-55-seed14014-2026-05-09T00-48-33-614Z-7194-uyklp7/neo-galaga-session-ngt-1778287714811-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h0-65-l4-55-seed14014-2026-05-09T00-48-33-614Z-7194-uyklp7/neo-galaga-session-ngt-1778287714811-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-through-boss-line",
+      "route": {
+        "id": "right-through-boss-line",
+        "releaseLeftAt": 2.25,
+        "rightAt": 2.26,
+        "rightHold": 1.05
+      },
+      "score10": 1.8,
+      "score": 570,
+      "lives": 3,
+      "attacks": 27,
+      "bullets": 22,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 8.627,
+        "lane": 5,
+        "playerLane": 8,
+        "escorts": 3,
+        "bossVx": 47.8,
+        "bossVy": 76.38
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 10.227,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 8,
+        "sourceLane": 8
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-through-boss-line-seed14014-2026-05-09T00-47-32-881Z-2343-1d1m92/neo-galaga-session-ngt-1778287654104-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-through-boss-line-seed14014-2026-05-09T00-47-32-881Z-2343-1d1m92/neo-galaga-session-ngt-1778287654104-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h1-05-l4-55",
+      "route": {
+        "id": "recover-r2-35-h1-05-l4-55",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.7,
+      "score": 440,
+      "lives": 5,
+      "attacks": 26,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 0,
+      "collisionLosses": 0,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 23.083,
+        "lane": 4,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -39.8,
+        "bossVy": 105.95
+      },
+      "firstSpecial": null,
+      "firstLoss": null,
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-05-l4-55-seed14014-2026-05-09T00-48-37-931Z-7564-v77941/neo-galaga-session-ngt-1778287719238-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-05-l4-55-seed14014-2026-05-09T00-48-37-931Z-7564-v77941/neo-galaga-session-ngt-1778287719238-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h0-65-l4-9",
+      "route": {
+        "id": "recover-r2-35-h0-65-l4-9",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.7,
+      "score": 520,
+      "lives": 4,
+      "attacks": 29,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 0,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 11.767,
+        "lane": 4,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -48.45,
+        "bossVy": 96.84
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h0-65-l4-9-seed14014-2026-05-09T00-48-35-013Z-7315-ev7h1s/neo-galaga-session-ngt-1778287716234-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h0-65-l4-9-seed14014-2026-05-09T00-48-35-013Z-7315-ev7h1s/neo-galaga-session-ngt-1778287716234-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "center-before-escort",
+      "route": {
+        "id": "center-before-escort",
+        "releaseLeftAt": 1.95
+      },
+      "score10": 1.7,
+      "score": 370,
+      "lives": 4,
+      "attacks": 33,
+      "bullets": 23,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 1,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -31.98,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 14.583,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "capture",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/center-before-escort-seed14014-2026-05-09T00-47-30-033Z-2112-argg9a/neo-galaga-session-ngt-1778287651327-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/center-before-escort-seed14014-2026-05-09T00-47-30-033Z-2112-argg9a/neo-galaga-session-ngt-1778287651327-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h1-05-l4-9",
+      "route": {
+        "id": "recover-r2-h1-05-l4-9",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 1.05,
+        "leftAgainAt": 4.9,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.2,
+      "score": 560,
+      "lives": 4,
+      "attacks": 32,
+      "bullets": 26,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 11.283,
+        "lane": 4,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -50.26,
+        "bossVy": 110.26
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 24,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-05-l4-9-seed14014-2026-05-09T00-48-26-326Z-6588-5ywpbj/neo-galaga-session-ngt-1778287707609-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h1-05-l4-9-seed14014-2026-05-09T00-48-26-326Z-6588-5ywpbj/neo-galaga-session-ngt-1778287707609-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-35-h1-45-l4-55",
+      "route": {
+        "id": "recover-r2-35-h1-45-l4-55",
+        "releaseLeftAt": 2.35,
+        "rightAt": 2.36,
+        "rightHold": 1.45,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.2,
+      "score": 440,
+      "lives": 4,
+      "attacks": 24,
+      "bullets": 21,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 1,
+      "firstRewardWindow": {
+        "t": 21.933,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -72.16,
+        "bossVy": 104.64
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 15.35,
+        "cause": "enemy_collision",
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 0,
+        "sourceLane": 1
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-45-l4-55-seed14014-2026-05-09T00-48-42-287Z-7954-eoly18/neo-galaga-session-ngt-1778287723617-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-35-h1-45-l4-55-seed14014-2026-05-09T00-48-42-287Z-7954-eoly18/neo-galaga-session-ngt-1778287723617-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "recover-r2-h0-65-l4-55",
+      "route": {
+        "id": "recover-r2-h0-65-l4-55",
+        "releaseLeftAt": 2,
+        "rightAt": 2.01,
+        "rightHold": 0.65,
+        "leftAgainAt": 4.55,
+        "leftAgainHold": 1.1
+      },
+      "score10": 1.1,
+      "score": 490,
+      "lives": 3,
+      "attacks": 18,
+      "bullets": 16,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 1,
+      "bulletLosses": 1,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 1,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 0,
+      "firstRewardWindow": null,
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 3.327,
+        "cause": "enemy_bullet",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceAttackMode": null,
+        "playerLane": 5,
+        "sourceLane": 5
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h0-65-l4-55-seed14014-2026-05-09T00-48-20-554Z-6130-kywzwa/neo-galaga-session-ngt-1778287701842-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/recover-r2-h0-65-l4-55-seed14014-2026-05-09T00-48-20-554Z-6130-kywzwa/neo-galaga-session-ngt-1778287701842-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "hold-left-through-escort",
+      "route": {
+        "id": "hold-left-through-escort",
+        "releaseLeftAt": 3.55
+      },
+      "score10": 1.1,
+      "score": 210,
+      "lives": 4,
+      "attacks": 32,
+      "bullets": 22,
+      "kills": 0,
+      "losses": 1,
+      "collisionLosses": 1,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 4,
+      "firstRewardWindow": {
+        "t": 3,
+        "lane": 5,
+        "playerLane": 0,
+        "escorts": 3,
+        "bossVx": -32.22,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 12.167,
+        "cause": "enemy_collision",
+        "sourceType": "but",
+        "sourceDive": 5,
+        "sourceAttackMode": "escort",
+        "playerLane": 0,
+        "sourceLane": 0
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/hold-left-through-escort-seed14014-2026-05-09T00-47-28-639Z-1999-8m91x2/neo-galaga-session-ngt-1778287649846-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/hold-left-through-escort-seed14014-2026-05-09T00-47-28-639Z-1999-8m91x2/neo-galaga-session-ngt-1778287649846-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r1-75-h1-25",
+      "route": {
+        "id": "right-r1-75-h1-25",
+        "releaseLeftAt": 1.75,
+        "rightAt": 1.76,
+        "rightHold": 1.25
+      },
+      "score10": 1.1,
+      "score": 310,
+      "lives": 3,
+      "attacks": 24,
+      "bullets": 19,
+      "kills": 0,
+      "losses": 2,
+      "collisionLosses": 2,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 2,
+      "firstRewardWindow": {
+        "t": 3.01,
+        "lane": 5,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 80.8,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.493,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h1-25-seed14014-2026-05-09T00-47-39-924Z-2911-98eza5/neo-galaga-session-ngt-1778287661258-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h1-25-seed14014-2026-05-09T00-47-39-924Z-2911-98eza5/neo-galaga-session-ngt-1778287661258-3-system-status.json"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "right-r1-75-h1-55",
+      "route": {
+        "id": "right-r1-75-h1-55",
+        "releaseLeftAt": 1.75,
+        "rightAt": 1.76,
+        "rightHold": 1.55
+      },
+      "score10": 1.1,
+      "score": 310,
+      "lives": 2,
+      "attacks": 24,
+      "bullets": 17,
+      "kills": 0,
+      "losses": 3,
+      "collisionLosses": 3,
+      "bulletLosses": 0,
+      "specialAttackCount": 0,
+      "specialAttackBonus": 0,
+      "bossDamageCount": 0,
+      "bossKillCount": 0,
+      "escortDiveKillCount": 0,
+      "rewardWindowCount": 3,
+      "firstRewardWindow": {
+        "t": 3.01,
+        "lane": 5,
+        "playerLane": 9,
+        "escorts": 3,
+        "bossVx": 80.98,
+        "bossVy": 80.07
+      },
+      "firstSpecial": null,
+      "firstLoss": {
+        "t": 4.493,
+        "cause": "enemy_collision",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceAttackMode": "dive",
+        "playerLane": 9,
+        "sourceLane": 9
+      },
+      "files": [
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h1-55-seed14014-2026-05-09T00-47-41-454Z-3025-08jhc1/neo-galaga-session-ngt-1778287662721-3.json",
+        "reference-artifacts/analyses/stage14-escort-reward-input-sweep/2026-05-09-5da7d96/runs/right-r1-75-h1-55-seed14014-2026-05-09T00-47-41-454Z-3025-08jhc1/neo-galaga-session-ngt-1778287662721-3-system-status.json"
+      ]
+    }
+  ],
+  "failed": []
+}

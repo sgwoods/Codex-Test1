@@ -1,0 +1,30 @@
+{
+  "name": "stage1-baseline-clear-route",
+  "seed": 2003,
+  "duration": 42,
+  "config": {
+    "stage": 1,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.4, "action": "down", "code": "Space" },
+    { "t": 0.7, "action": "down", "code": "ArrowLeft" },
+    { "t": 4.0, "action": "up", "code": "ArrowLeft" },
+    { "t": 4.02, "action": "down", "code": "ArrowRight" },
+    { "t": 8.6, "action": "up", "code": "ArrowRight" },
+    { "t": 8.62, "action": "down", "code": "ArrowLeft" },
+    { "t": 13.1, "action": "up", "code": "ArrowLeft" },
+    { "t": 13.12, "action": "down", "code": "ArrowRight" },
+    { "t": 17.9, "action": "up", "code": "ArrowRight" },
+    { "t": 17.92, "action": "down", "code": "ArrowLeft" },
+    { "t": 22.4, "action": "up", "code": "ArrowLeft" },
+    { "t": 22.42, "action": "down", "code": "ArrowRight" },
+    { "t": 27.0, "action": "up", "code": "ArrowRight" },
+    { "t": 27.02, "action": "down", "code": "ArrowLeft" },
+    { "t": 31.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 31.82, "action": "down", "code": "ArrowRight" },
+    { "t": 37.5, "action": "up", "code": "ArrowRight" },
+    { "t": 40.5, "action": "up", "code": "Space" }
+  ]
+}

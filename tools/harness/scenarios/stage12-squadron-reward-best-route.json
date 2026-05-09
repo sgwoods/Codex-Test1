@@ -1,0 +1,22 @@
+{
+  "name": "stage12-squadron-reward-best-route",
+  "seed": 12003,
+  "duration": 24,
+  "config": {
+    "stage": 12,
+    "ships": 5,
+    "challenge": false
+  },
+  "actions": [
+    { "t": 0.5, "action": "down", "code": "Space" },
+    { "t": 0.7, "action": "down", "code": "ArrowLeft" },
+    { "t": 2.6, "action": "up", "code": "ArrowLeft" },
+    { "t": 2.61, "action": "down", "code": "ArrowRight" },
+    { "t": 5.2, "action": "up", "code": "ArrowRight" },
+    { "t": 5.21, "action": "down", "code": "ArrowLeft" },
+    { "t": 7.2, "action": "up", "code": "ArrowLeft" },
+    { "t": 7.21, "action": "down", "code": "ArrowRight" },
+    { "t": 7.86, "action": "up", "code": "ArrowRight" },
+    { "t": 23.5, "action": "up", "code": "Space" }
+  ]
+}
