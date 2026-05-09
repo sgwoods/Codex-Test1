@@ -27,11 +27,16 @@ It is centered on:
 - keeping the shipped line trustworthy
 - improving fidelity where the game still feels less authentic than the arcade
   reference
+- treating conformance as a standing project layer with its own ingestion,
+  harnessing, dashboard, and resource-economics loop
 - maturing Aurora as a product with durable pilot, replay, and release
   operations
 - growing Platinum into a host for more than one serious game experience
 - making release identity, testing, and tracking separable across the
   integrated bundle, the platform, and each game
+
+The maintained top-level explanation of this program is
+[PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
 
 ## Near-Term Release Direction
 
@@ -86,6 +91,9 @@ Current decision:
   second real game
 - reserve `2.0` for the first genuinely multi-game Platinum milestone
 - treat `1.4` as the first post-ship arcade-depth and platform-boundary family
+- make conformance-program maturity a release asset: every major pickup should
+  improve either the game, the ingestion/scoring system, the platform substrate,
+  or the resource-economics loop
 - promote level-by-level arcade depth to the next major product pillar after
   the `1.3.0` release
 - make shared gameplay-video publishing an early roadmap capability

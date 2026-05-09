@@ -1,7 +1,7 @@
 {
   "title": "Aurora Galactica And Platinum Project Guide",
-  "strapline": "A current, hosted map of the project: what Platinum is, what Aurora owns, how the release lanes work, what is automated, and which maintained docs are the source of truth.",
-  "currentGoal": "Keep Platinum Release 1 stable, close the small Aurora trust-fix cluster, and keep the platform, applications, hosted docs, and release lanes aligned as one disciplined system.",
+  "strapline": "A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.",
+  "currentGoal": "Advance the post-1.3.0 conformance program: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.",
   "sections": [
     {
       "id": "snapshot",
@@ -10,19 +10,42 @@
       "cards": [
         {
           "title": "What Shipped",
-          "body": "`1.2.0 - Platinum Release 1` shipped Aurora Galactica as the first playable game on Platinum, established hosted `/dev`, kept hosted `/beta` and hosted `/production` explicit, and made the shell, picker, and shared docs part of the product rather than internal scaffolding."
+          "body": "`1.3.0` is the current public Aurora / Platinum release family. It ships Aurora Galactica as the first serious Platinum application, keeps hosted `/dev`, `/beta`, and `/production` explicit, and makes the shell, picker, release dashboards, and hosted docs part of the product."
         },
         {
           "title": "What The Platform Owns",
-          "body": "Platinum owns the shell, release framing, hosted lanes, pack selection path, shared services, and the first-class hosted documentation surfaces that explain the platform and release model."
+          "body": "Platinum owns the shell, release framing, hosted lanes, pack selection path, shared services, conformance dashboard surfaces, and first-class hosted documentation that explain the platform and release model."
         },
         {
           "title": "What The Application Owns",
-          "body": "Aurora owns Aurora gameplay: scoring, stage flow, challenge cadence, capture and rescue, dual-fighter behavior, enemy behavior, and game-specific content."
+          "body": "Each game owns its own gameplay truth. Aurora owns scoring, stage flow, challenge cadence, capture and rescue, dual-fighter behavior, enemy behavior, visual/audio identity, and Aurora-specific conformance evidence."
         },
         {
           "title": "Current Focus",
-          "body": "The main work is now post-release discipline: small Aurora trust fixes, a stronger platform-versus-application documentation split, and keeping localhost, hosted `/dev`, hosted `/beta`, and hosted `/production` aligned."
+          "body": "The main work is now conformance advancement: audio/event feedback, level arc, boss and formation grammar, visual reference grounding, resource economics, and ingestion-backed preparation for Galaxy Guardians and future games."
+        }
+      ]
+    },
+    {
+      "id": "conformance-program",
+      "title": "Conformance Program",
+      "summary": "How reference evidence becomes measurable software quality.",
+      "cards": [
+        {
+          "title": "Ingestion",
+          "body": "Ingestion gathers source footage, clips, manifests, contact sheets, waveforms, event logs, semantic annotations, and confidence notes. It is the evidence front-end for conformance, not a loose design notebook."
+        },
+        {
+          "title": "Harnessing",
+          "body": "Harnesses run local CPU/browser checks against reference-derived targets: movement, timing, audio, stage shape, boss formation grammar, visual surfaces, pressure windows, and shell behavior."
+        },
+        {
+          "title": "Metrics",
+          "body": "Metrics include score, confidence, resolution, evidence links, target gaps, user-experience meaning, and cost to move. A 10/10 score means maxed at current scorer resolution, not perfect imitation."
+        },
+        {
+          "title": "Resource Economics",
+          "body": "Local CPU and browser runs should carry repeated measurement. Codex/OpenAI/model work is tracked as GPU-equivalent when it materially shapes strategy, harnesses, code, or analysis."
         }
       ]
     },
@@ -94,6 +117,16 @@
           "detail": "Current milestone and release-train status."
         },
         {
+          "label": "Hosted Conformance Dashboard",
+          "href": "conformance-dashboard.html",
+          "detail": "Game-selectable conformance score, priority, ingestion, and resource-economics dashboard."
+        },
+        {
+          "label": "Project State And Conformance Program",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+          "detail": "Maintained top-level explanation of the platform, game, ingestion, harnessing, model-assisted workflow, and conformance program."
+        },
+        {
           "label": "Platinum Platform Source",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PLATINUM.md",
           "detail": "Canonical platform source document."
@@ -102,6 +135,16 @@
           "label": "Applications On Platinum",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/APPLICATIONS_ON_PLATINUM.md",
           "detail": "Application-layer responsibilities and remaining platform/application seam notes."
+        },
+        {
+          "label": "Classic Arcade Ingestion Framework",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
+          "detail": "Repeatable evidence pipeline for turning external game artifacts into game-owned conformance packages."
+        },
+        {
+          "label": "Conformance Economics",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/CONFORMANCE_ECONOMICS.md",
+          "detail": "Local CPU/browser versus GPU-equivalent model/API usage and cost-per-score movement."
         },
         {
           "label": "Testing And Release Gates",
@@ -125,14 +168,20 @@
       "title": "Likely Next Steps",
       "summary": "The work that most naturally follows the current shipped state.",
       "bullets": [
-        "Bundle the small Aurora trust fixes into the `1.2.1` patch line.",
-        "Keep Platinum shell and docs discipline boring and reliable.",
-        "Strengthen the platform/application contract before the second application becomes fully playable.",
-        "Use the smallest useful `Galaxy Guardians` gameplay slice to prove the platform seam rather than rushing a second public launch."
+        "Use the conformance dashboard to choose the highest-value Aurora investment by score gap, user impact, confidence, and resource cost.",
+        "Prioritize audio/event feedback, level arc, boss/formation grammar, and visual reference grounding for the next major user-experience lift.",
+        "Keep Platinum shell and docs discipline boring and reliable while the games become more ambitious.",
+        "Advance Galaxy Guardians through ingestion-backed reference evidence before treating it as a serious public playable candidate."
       ]
     }
   ],
   "sourceDocs": [
+    {
+      "id": "project-state-conformance-doc",
+      "title": "Project State And Conformance Program",
+      "summary": "Top-level maintained explanation of the broader project, conformance loop, ingestion role, platform/game separation, and model/local-compute strategy.",
+      "file": "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md"
+    },
     {
       "id": "readme-doc",
       "title": "README Source",

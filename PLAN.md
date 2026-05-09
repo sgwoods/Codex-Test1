@@ -24,6 +24,12 @@ This means:
 - the post-release work should now be treated as intentional carry-forward, not
   as rediscovery after the ship is already done
 
+Top-level program framing is now maintained in
+[PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
+Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion,
+harnesses, dashboards, release lanes, Codex/model assistance, and local
+resource economics fit together.
+
 ## Active Workstreams
 
 ### 1. `1.3.0` Production Stabilization
@@ -57,6 +63,18 @@ This means:
   challenge patterns
 - use original Galaga reference evidence to shape later-level entry styles,
   attack pacing, and movement variation
+
+### 3b. Conformance Program And Ingestion System
+
+- keep conformance as its own project layer, not only as Aurora polish
+- use ingestion packages as the evidence front-end for both Aurora refinements
+  and future games
+- keep metrics, confidence, resolution, dashboards, and economics current after
+  each meaningful work cycle
+- convert Codex/model-assisted analysis into durable local harnesses, scorers,
+  reports, and platform capabilities whenever possible
+- prefer local CPU/browser sweeps for repeated measurement and use
+  GPU-equivalent model effort where it increases leverage
 
 ### 4. Gameplay Trust And Edge-Case Correctness
 
