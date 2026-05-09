@@ -59,7 +59,11 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
     [new RegExp(`releaseChannel:'${escapeRegex(sourceChannel)}'`, 'g'), `releaseChannel:'${betaInfo.releaseChannel}'`],
     [new RegExp(`dirty:${sourceInfo.dirty ? 'true' : 'false'}`, 'g'), `dirty:${betaInfo.dirty ? 'true' : 'false'}`],
     [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${betaInfo.label}`],
-    [new RegExp(`Lane ${escapeRegex(sourceChannel)}`, 'g'), `Lane ${betaInfo.releaseChannel}`]
+    [new RegExp(`Lane ${escapeRegex(sourceChannel)}`, 'g'), `Lane ${betaInfo.releaseChannel}`],
+    [/Development lane Project Page/g, 'Beta lane Project Page'],
+    [/Development lane<\/span>/g, 'Beta lane</span>'],
+    [/Generated from the development lane artifacts served locally and on hosted \/dev\./g, 'Generated from the beta lane artifacts promoted from the reviewed development build.'],
+    [/Development lane project-page summary generated from lane build artifacts\./g, 'Beta lane project-page summary generated from promoted lane artifacts.']
   ];
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);

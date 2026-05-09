@@ -223,21 +223,26 @@
     <main class="shell">
         <section class="hero">
             <div class="heroTop">
-                <span class="eyebrow">Public Project Page</span>
+                <span class="eyebrow">{{PUBLIC_PAGE_EYEBROW}}</span>
                 <a class="homeLink" href="https://sgwoods.github.io/public/">Steven Woods</a>
             </div>
             <h1>Aurora Galactica on Platinum</h1>
             <p>Aurora Galactica is the first shipped game on the Platinum browser-arcade platform and the active proof of a broader conformance program: reference ingestion, local harnessing, score dashboards, release lanes, and Codex-assisted development working together to make inspired arcade software more measurable and repeatable.</p>
             <div class="meta">
                 <div class="metaCard">
-                    <span class="metaLabel">Current Release</span>
+                    <span class="metaLabel">Release Version</span>
                     <span class="metaValue">{{BUILD_VERSION}}</span>
-                    <div class="metaNote">Current public line for the active game build.</div>
+                    <div class="metaNote">Version label for the release location shown on this page.</div>
                 </div>
                 <div class="metaCard">
-                    <span class="metaLabel">Updated</span>
+                    <span class="metaLabel">Release Location</span>
+                    <span class="metaValue">{{PUBLIC_RELEASE_CONTEXT_VALUE}}</span>
+                    <div class="metaNote">{{PUBLIC_RELEASE_CONTEXT_NOTE}}</div>
+                </div>
+                <div class="metaCard">
+                    <span class="metaLabel">Build Timestamp</span>
                     <span class="metaValue">{{BUILD_RELEASE_ET}}</span>
-                    <div class="metaNote">Most recent synced release timestamp for the public project surface.</div>
+                    <div class="metaNote">Timestamp of the build artifact for this release location, not necessarily the final public portfolio sync time.</div>
                 </div>
                 <div class="metaCard">
                     <span class="metaLabel">Current Focus</span>
@@ -247,16 +252,16 @@
                 <div class="metaCard">
                     <span class="metaLabel">Latest Note</span>
                     <span class="metaValue">{{LATEST_RELEASE_TITLE}}</span>
-                    <div class="metaNote">Public page synced from the latest shipped release note and repository state.</div>
+                    <div class="metaNote">Release note carried by this lane's generated artifacts.</div>
                 </div>
             </div>
             <div class="links">
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open live game</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html">Open conformance dashboard</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html">Open project guide</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html">Open Platinum guide</a>
+                <a class="button" href="{{LANE_GAME_HREF}}">Open this lane build</a>
+                <a class="button" href="{{BETA_BUILD_HREF}}">Open beta build</a>
+                <a class="button" href="{{LANE_RELEASE_DASHBOARD_HREF}}">Open release dashboard</a>
+                <a class="button" href="{{LANE_CONFORMANCE_DASHBOARD_HREF}}">Open conformance dashboard</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}">Open project guide</a>
+                <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}">Open Platinum guide</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
             </div>
         </section>
@@ -308,19 +313,19 @@
         <section class="panel">
             <h2>Where to look</h2>
             <div class="links">
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open live game</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html">Open conformance dashboard</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html">Open project guide</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html">Open Platinum guide</a>
+                <a class="button" href="{{LANE_GAME_HREF}}">Open this lane build</a>
+                <a class="button" href="{{BETA_BUILD_HREF}}">Open beta build</a>
+                <a class="button" href="{{LANE_RELEASE_DASHBOARD_HREF}}">Open release dashboard</a>
+                <a class="button" href="{{LANE_CONFORMANCE_DASHBOARD_HREF}}">Open conformance dashboard</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}">Open project guide</a>
+                <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}">Open Platinum guide</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PLAN.md">Roadmap</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">Conformance program</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">Ingestion framework</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md">Reference baseline</a>
             </div>
-            <p class="footer">Public summary synced to the repository state on {{PUBLIC_DATE_LONG}}.</p>
+            <p class="footer">{{PUBLIC_FOOTER_NOTE}} Date label: {{PUBLIC_DATE_LONG}}.</p>
         </section>
     </main>
 </body>

@@ -126,6 +126,9 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
   const syncedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
   const templateSha = sha256(template).slice(0, 12);
   return fill(template, {
+    PUBLIC_PAGE_EYEBROW: 'Public Portfolio Project Page',
+    PUBLIC_RELEASE_CONTEXT_VALUE: 'Public portfolio sync',
+    PUBLIC_RELEASE_CONTEXT_NOTE: 'Synced to the public portfolio from the live production release state.',
     PUBLIC_DATE_LONG: publicDateLong(pushedAt),
     BUILD_VERSION: buildInfo.version,
     BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
@@ -135,7 +138,14 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
     PUBLIC_SYNCED_AT: syncedAt,
     PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
     LATEST_RELEASE_TITLE: latestNote.title,
-    LATEST_RELEASE_BODY: latestNote.summary
+    LATEST_RELEASE_BODY: latestNote.summary,
+    LANE_GAME_HREF: 'https://sgwoods.github.io/Aurora-Galactica/',
+    BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
+    LANE_RELEASE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html',
+    LANE_CONFORMANCE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
+    LANE_PROJECT_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/project-guide.html',
+    LANE_PLATINUM_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html',
+    PUBLIC_FOOTER_NOTE: 'Public portfolio summary synced to the production repository state.'
   }).trimEnd() + '\n';
 }
 

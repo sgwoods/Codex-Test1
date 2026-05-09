@@ -87,7 +87,25 @@ function checkBetaCheckoutCurrent(){
 function checkPublicProjectTemplate(){
   const templatePath = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
   const template = loadText(templatePath);
-  const requiredTokens = ['{{BUILD_VERSION}}', '{{BUILD_RELEASE_ET}}', '{{BUILD_LABEL}}', '{{PUBLIC_CURRENT_FOCUS}}', '{{LATEST_RELEASE_TITLE}}', '{{PUBLIC_SOURCE_COMMIT}}', '{{PUBLIC_TEMPLATE_SHA}}', '{{PUBLIC_SYNCED_AT}}'];
+  const requiredTokens = [
+    '{{PUBLIC_PAGE_EYEBROW}}',
+    '{{PUBLIC_RELEASE_CONTEXT_VALUE}}',
+    '{{PUBLIC_RELEASE_CONTEXT_NOTE}}',
+    '{{BUILD_VERSION}}',
+    '{{BUILD_RELEASE_ET}}',
+    '{{BUILD_LABEL}}',
+    '{{PUBLIC_CURRENT_FOCUS}}',
+    '{{LATEST_RELEASE_TITLE}}',
+    '{{PUBLIC_SOURCE_COMMIT}}',
+    '{{PUBLIC_TEMPLATE_SHA}}',
+    '{{PUBLIC_SYNCED_AT}}',
+    '{{LANE_GAME_HREF}}',
+    '{{BETA_BUILD_HREF}}',
+    '{{LANE_RELEASE_DASHBOARD_HREF}}',
+    '{{LANE_CONFORMANCE_DASHBOARD_HREF}}',
+    '{{LANE_PROJECT_GUIDE_HREF}}',
+    '{{PUBLIC_FOOTER_NOTE}}'
+  ];
   for(const token of requiredTokens){
     if(!template.includes(token)){
       throw new Error(`Publish preflight failed: ${templatePath} is missing required token ${token}. Restore the current public template before publishing production.`);
@@ -261,6 +279,8 @@ function checkPublicProjectPageArtifact(cfg){
     'Open conformance dashboard',
     'Conformance program',
     'Ingestion framework',
+    'Release Location',
+    'Build Timestamp',
     buildInfo.label,
     buildInfo.commit
   ];

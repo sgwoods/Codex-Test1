@@ -56,7 +56,11 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
     [new RegExp(`releaseChannel:'${escapeRegex(sourceInfo.releaseChannel)}'`, 'g'), `releaseChannel:'${productionInfo.releaseChannel}'`],
     [new RegExp(`dirty:${sourceInfo.dirty ? 'true' : 'false'}`, 'g'), 'dirty:false'],
     [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${productionInfo.label}`],
-    [new RegExp(`Lane ${escapeRegex(sourceInfo.releaseChannel)}`, 'g'), `Lane ${productionInfo.releaseChannel}`]
+    [new RegExp(`Lane ${escapeRegex(sourceInfo.releaseChannel)}`, 'g'), `Lane ${productionInfo.releaseChannel}`],
+    [/Beta lane Project Page/g, 'Production lane Project Page'],
+    [/Beta lane<\/span>/g, 'Production lane</span>'],
+    [/Generated from the beta lane artifacts promoted from the reviewed development build\./g, 'Generated from the production lane artifacts that feed the public release path.'],
+    [/Beta lane project-page summary generated from promoted lane artifacts\./g, 'Production lane project-page summary generated from approved release artifacts.']
   ];
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);

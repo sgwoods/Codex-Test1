@@ -1764,7 +1764,16 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
   const template = read(PUBLIC_PROJECT_PAGE_TEMPLATE);
   const templateSha = crypto.createHash('sha256').update(template).digest('hex').slice(0, 12);
   const syncedAt = buildInfo.builtAtUtc || new Date().toISOString();
+  const releaseChannel = String(buildInfo.releaseChannel || '').toLowerCase();
+  const isProduction = releaseChannel === 'production';
+  const contextValue = isProduction ? 'Production lane' : 'Development lane';
+  const contextNote = isProduction
+    ? 'Generated from the production lane artifacts that feed the public release path.'
+    : 'Generated from the development lane artifacts served locally and on hosted /dev.';
   const tokens = {
+    PUBLIC_PAGE_EYEBROW: `${contextValue} Project Page`,
+    PUBLIC_RELEASE_CONTEXT_VALUE: contextValue,
+    PUBLIC_RELEASE_CONTEXT_NOTE: contextNote,
     PUBLIC_DATE_LONG: publicPageDateLong(buildInfo.builtAtUtc),
     BUILD_VERSION: displayBuildVersion(buildInfo),
     BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
@@ -1774,7 +1783,14 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     PUBLIC_SYNCED_AT: String(syncedAt).replace(/\.\d{3}Z$/, 'Z'),
     PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
     LATEST_RELEASE_TITLE: latestNote.title,
-    LATEST_RELEASE_BODY: latestNote.summary
+    LATEST_RELEASE_BODY: latestNote.summary,
+    LANE_GAME_HREF: 'index.html',
+    BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
+    LANE_RELEASE_DASHBOARD_HREF: 'release-dashboard.html',
+    LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
+    LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
+    LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
+    PUBLIC_FOOTER_NOTE: `${contextValue} project-page summary generated from lane build artifacts.`
   };
   return fillBuildTokens(template, tokens).trimEnd() + '\n';
 }
