@@ -181,6 +181,86 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'sub-bass-soft-march',
+        label: 'Sub bass soft march',
+        spec: {
+          tones: [
+            { freq: 98, duration: .18, wave: 'triangle', volume: .006, slide: -4, lpHz: 850 },
+            { freq: 196, duration: .16, wave: 'sine', volume: .0075, slide: -10, lpHz: 1200, delay: .018 },
+            { freq: 294, duration: .1, wave: 'triangle', volume: .0035, slide: -12, lpHz: 1450, delay: .052 }
+          ]
+        }
+      },
+      {
+        id: 'low-convoy-thump',
+        label: 'Low convoy thump',
+        spec: {
+          tones: [
+            { freq: 110, duration: .17, wave: 'triangle', volume: .0062, slide: -6, lpHz: 900 },
+            { freq: 220, duration: .145, wave: 'triangle', volume: .007, slide: -18, lpHz: 1220, delay: .012 },
+            { freq: 330, duration: .075, wave: 'sine', volume: .0032, slide: -16, lpHz: 1500, delay: .058 }
+          ]
+        }
+      },
+      {
+        id: 'soft-double-low-pulse',
+        label: 'Soft double low pulse',
+        spec: {
+          seq: [196, 220],
+          step: .066,
+          wave: 'triangle',
+          volume: .0068,
+          slide: -8,
+          lpHz: 1180,
+          tones: [
+            { freq: 98, duration: .19, wave: 'sine', volume: .0052, slide: -3, lpHz: 820, delay: .01 }
+          ]
+        }
+      },
+      {
+        id: 'sub500-weighted-march',
+        label: 'Sub-500 weighted march',
+        spec: {
+          tones: [
+            { freq: 82, duration: .19, wave: 'triangle', volume: .0058, slide: -2, lpHz: 780 },
+            { freq: 164, duration: .16, wave: 'triangle', volume: .0074, slide: -7, lpHz: 1000, delay: .016 },
+            { freq: 246, duration: .11, wave: 'sine', volume: .0042, slide: -9, lpHz: 1280, delay: .048 }
+          ]
+        }
+      },
+      {
+        id: 'soft-attack-low-march',
+        label: 'Soft attack low march',
+        spec: {
+          tones: [
+            { freq: 147, duration: .18, wave: 'square', volume: .0062, slide: -4, lpHz: 760, attack: .052 },
+            { freq: 294, duration: .15, wave: 'triangle', volume: .0048, slide: -8, lpHz: 980, delay: .022, attack: .04 },
+            { freq: 196, duration: .12, wave: 'triangle', volume: .0036, slide: -5, lpHz: 680, delay: .07, attack: .032 }
+          ]
+        }
+      },
+      {
+        id: 'late-crest-low-bed',
+        label: 'Late crest low bed',
+        spec: {
+          tones: [
+            { freq: 98, duration: .2, wave: 'triangle', volume: .0054, slide: -2, lpHz: 620, attack: .09 },
+            { freq: 196, duration: .16, wave: 'square', volume: .0058, slide: -6, lpHz: 860, delay: .038, attack: .06 },
+            { freq: 294, duration: .095, wave: 'triangle', volume: .003, slide: -10, lpHz: 1080, delay: .092, attack: .028 }
+          ]
+        }
+      },
+      {
+        id: 'muted-square-march',
+        label: 'Muted square march',
+        spec: {
+          tones: [
+            { freq: 165, duration: .16, wave: 'square', volume: .0056, slide: -5, lpHz: 700, attack: .036 },
+            { freq: 330, duration: .11, wave: 'square', volume: .0036, slide: -10, lpHz: 950, delay: .04, attack: .03 }
+          ]
+        }
+      },
+      {
         id: 'convoy-current-window',
         label: 'Convoy current guide window',
         spec: {
@@ -639,6 +719,9 @@ function rejectionFor(row, baseline, config){
     if((row.stability.riskStd || 0) > .35) reasons.push(`risk stability sd ${row.stability.riskStd} > 0.35`);
     if((row.stability.durationGapStdSeconds || 0) > .08) reasons.push(`duration stability sd ${row.stability.durationGapStdSeconds}s > 0.08s`);
     if((row.stability.centroidGapStdHz || 0) > 120) reasons.push(`centroid stability sd ${row.stability.centroidGapStdHz} Hz > 120 Hz`);
+    if((row.stability.zeroCrossingGapStdPerSecond || 0) > 420) reasons.push(`zero-crossing stability sd ${row.stability.zeroCrossingGapStdPerSecond}/s > 420/s`);
+    if((row.stability.bandShapeGapStd || 0) > .045) reasons.push(`band-shape stability sd ${row.stability.bandShapeGapStd} > 0.045`);
+    if((row.stability.decayRatioGapStd || 0) > 1.2) reasons.push(`decay stability sd ${row.stability.decayRatioGapStd} > 1.2`);
     if((row.stability.rmsGapStd || 0) > .035) reasons.push(`RMS stability sd ${row.stability.rmsGapStd} > 0.035`);
   }
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
@@ -744,6 +827,9 @@ function aggregateRows(sampleRows){
         riskStd: round(stddev(group.map(row => row.risk10)), 3),
         durationGapStdSeconds: round(stddev(group.map(row => row.durationGapSeconds)), 3),
         centroidGapStdHz: round(stddev(group.map(row => row.centroidGapHz)), 1),
+        zeroCrossingGapStdPerSecond: round(stddev(group.map(row => row.zeroCrossingGapPerSecond)), 1),
+        bandShapeGapStd: round(stddev(group.map(row => row.bandShapeGap)), 4),
+        decayRatioGapStd: round(stddev(group.map(row => row.comparison?.decay_ratio)), 3),
         rmsGapStd: round(stddev(group.map(row => row.rmsGap)), 4)
       },
       samples: group.map(row => ({

@@ -683,7 +683,7 @@ const sfx={
   this.logCueEvent(cueEntry);
   if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
-   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.hpHz||0,tone.delay||0,allowIdle);
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.hpHz||0,tone.delay||0,allowIdle,tone.attack);
   }
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
    this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0,allowIdle);
@@ -784,8 +784,8 @@ const sfx={
    'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a'
   ].forEach(clip=>{this.loadReferenceBuffer(clip).catch(()=>{});});
  },
- play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,hpHz=0,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter(),hp=hpHz>0?A.createBiquadFilter():null;
-  lp.type='lowpass';lp.frequency.value=lpHz;if(hp){hp.type='highpass';hp.frequency.value=hpHz;}g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
+ play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,hpHz=0,at=0,allowIdle=0,attack=.008){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter(),hp=hpHz>0?A.createBiquadFilter():null,atk=Math.max(.001,Math.min(d*.8,Number.isFinite(+attack)?+attack:.008));
+  lp.type='lowpass';lp.frequency.value=lpHz;if(hp){hp.type='highpass';hp.frequency.value=hpHz;}g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+atk);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
   o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);
   o.connect(hp||lp);o2.connect(hp||lp);if(hp)hp.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);

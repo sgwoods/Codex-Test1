@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T18-33-14-818Z-16751",
-  "startedAt": "2026-05-09T18:33:14.818Z",
-  "endedAt": "2026-05-09T18:33:15.042Z",
+  "id": "2026-05-09T18-52-18-907Z-42221",
+  "startedAt": "2026-05-09T18:52:18.907Z",
+  "endedAt": "2026-05-09T18:53:25.212Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "c3f4e668",
+  "commit": "a05d3601",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-audio-event-gap"
+    "harness:score:quality-conformance"
   ],
   "axes": [
-    "audio"
+    "overall"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "event gap after enemyBoom compact promotion",
+  "notes": "quality score after stagePulse harness stability refinement",
   "measurement": {
-    "wallSeconds": 0.224,
-    "timeRealSeconds": 0.22,
-    "timeUserSeconds": 0.16,
-    "timeSystemSeconds": 0.11,
-    "cpuSeconds": 0.27,
+    "wallSeconds": 66.305,
+    "timeRealSeconds": 66.3,
+    "timeUserSeconds": 58.28,
+    "timeSystemSeconds": 19.1,
+    "cpuSeconds": 77.38,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 539064943,
-    "artifactBytesAfter": 539135103,
-    "artifactBytesDelta": 70160
+    "artifactBytesBefore": 555275649,
+    "artifactBytesAfter": 555792477,
+    "artifactBytesDelta": 516828
   }
 }
