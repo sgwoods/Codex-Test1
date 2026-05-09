@@ -98,8 +98,13 @@
       "links": [
         {
           "label": "Hosted Aurora Application Guide",
-          "href": "application-guide.html",
-          "detail": "Aurora-specific audio and graphics catalog with live cue preview buttons."
+          "href": "application-guide.html#conformance-alien-index",
+          "detail": "Aurora-specific audio, graphics, alien, stage, and persona catalog with live cue preview buttons."
+        },
+        {
+          "label": "Hosted Game Conformance Catalog",
+          "href": "project-guide.html#game-conformance-catalog-doc",
+          "detail": "Generated full-text view of the maintained alien, audio, stage, and persona catalog."
         },
         {
           "label": "Hosted Platinum Guide",
@@ -181,6 +186,12 @@
       "title": "Project State And Conformance Program",
       "summary": "Top-level maintained explanation of the broader project, conformance loop, ingestion role, platform/game separation, and model/local-compute strategy.",
       "file": "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md"
+    },
+    {
+      "id": "game-conformance-catalog-doc",
+      "title": "Game Conformance Catalog",
+      "summary": "Maintained per-game alien/enemy, audio cue, stage, and persona index rendered into the hosted project guide so the catalog is user-visible rather than only a repository artifact.",
+      "file": "GAME_CONFORMANCE_CATALOG.md"
     },
     {
       "id": "readme-doc",

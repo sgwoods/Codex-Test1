@@ -1793,6 +1793,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
     LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
+    LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
     PUBLIC_FOOTER_NOTE: `${contextValue} project-page summary generated from lane build artifacts.`,
     ...publicSections
@@ -1810,6 +1811,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'visual-contexts', title: 'Graphics Contexts' },
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
     { id: 'stage-families', title: 'Stage Family Progression' },
+    { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
+    { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
+    { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
+    { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'graphics-controls', title: 'Presentation Controls' },
     { id: 'guide-links', title: 'Related Guides' }
   ];
@@ -1918,6 +1923,42 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.families || '')}</td>
       <td><code>${esc(entry.bossArchetype || '')}</code></td>
       <td>${esc(entry.description || '')}</td>
+    </tr>
+  `).join('\n');
+  const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
+      <td>${esc(entry.activity || '')}</td>
+      <td>${esc(entry.presence || '')}</td>
+      <td>${esc(entry.reference || '')}</td>
+      <td><strong>${esc(entry.score || '')}</strong><br><span class="docMeta">${esc(entry.confidence || '')}</span></td>
+      <td>${esc(entry.next || '')}</td>
+    </tr>
+  `).join('\n');
+  const conformanceAudioRows = (guide.conformanceAudioRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.family || '')}</strong><br><span class="docMeta"><code>${esc(entry.cues || '')}</code></span></td>
+      <td>${esc(entry.meaning || '')}</td>
+      <td>${esc(entry.reference || '')}</td>
+      <td><strong>${esc(entry.score || '')}</strong><br><span class="docMeta">${esc(entry.confidence || '')}</span></td>
+      <td>${esc(entry.next || '')}</td>
+    </tr>
+  `).join('\n');
+  const stageConformanceRows = (guide.stageConformanceRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.stage || '')}</strong></td>
+      <td>${esc(entry.summary || '')}</td>
+      <td>${esc(entry.aspects || '')}</td>
+      <td>${esc(entry.evidence || '')}</td>
+      <td>${esc(entry.gap || '')}</td>
+    </tr>
+  `).join('\n');
+  const personaRows = (guide.personaRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
+      <td>${esc(entry.role || '')}</td>
+      <td>${esc(entry.expected || '')}</td>
+      <td>${esc(entry.checks || '')}</td>
     </tr>
   `).join('\n');
   const controlRows = (guide.graphicsControls || []).map((entry) => `
@@ -2117,6 +2158,98 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${stageFamilyRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="conformance-alien-index">
+          <div class="sectionHeader">
+            <h2>Alien Conformance Index</h2>
+            <p>Current game-visible alien and enemy roles with activity, presence, evidence anchors, confidence, and the next conformance gap. This is the generated-guide view of the maintained game conformance catalog.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Alien / Role</th>
+                  <th>Activity</th>
+                  <th>Presence</th>
+                  <th>Reference</th>
+                  <th>Score / Confidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${conformanceAlienRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="conformance-audio-index">
+          <div class="sectionHeader">
+            <h2>Audio Conformance Index</h2>
+            <p>The major event-audio families, what they mean to the player, which Galaga-family references currently ground them, and where measurement still needs to improve.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Cue Family</th>
+                  <th>Gameplay Meaning</th>
+                  <th>Reference</th>
+                  <th>Score / Confidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${conformanceAudioRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="stage-conformance-summary">
+          <div class="sectionHeader">
+            <h2>Stage Conformance Summary</h2>
+            <p>Stage-by-stage and stage-band summary of difficulty, maneuvers, trajectory identity, gameplay description, current evidence, and the main conformance gap.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Stage / Band</th>
+                  <th>Gameplay Summary</th>
+                  <th>Key Aspects</th>
+                  <th>Evidence</th>
+                  <th>Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${stageConformanceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="persona-catalog">
+          <div class="sectionHeader">
+            <h2>Testing Personas</h2>
+            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the harness substrate; Aurora owns what each persona should prove for its gameplay.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Persona</th>
+                  <th>Testing Role</th>
+                  <th>Expected Behavior</th>
+                  <th>Game-Specific Checks</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${personaRows}
               </tbody>
             </table>
           </div>

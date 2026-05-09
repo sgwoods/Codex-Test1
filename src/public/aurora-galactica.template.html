@@ -429,7 +429,7 @@
 
         <section class="panel">
             <h2>Conformance system</h2>
-            <p class="narrative">This public page is meant to be read directly, not only used as a launcher. The conformance program compares Aurora against Galaga-family reference behavior through captured examples, derived metrics, repeatable harnesses, confidence notes, and resource accounting. The linked markdown files and dashboards are drill-down artifacts behind the overview shown here.</p>
+            <p class="narrative">This public page is meant to be read directly, not only used as a launcher. The conformance program compares Aurora against Galaga-family reference behavior through captured examples, derived metrics, repeatable harnesses, confidence notes, and resource accounting. The generated guide pages, dashboards, and source artifacts are drill-down surfaces behind the overview shown here.</p>
             <div class="grid">
                 <article class="card">
                     <h3>Ingestion</h3>
@@ -480,8 +480,45 @@
 {{PUBLIC_INGESTION_OVERVIEW_CARDS}}
             </div>
             <div class="links">
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/GAME_CONFORMANCE_CATALOG.md">Open game conformance catalog</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#game-conformance-catalog-doc">Open generated game conformance catalog</a>
+                <a class="button" href="{{LANE_APPLICATION_GUIDE_HREF}}#conformance-alien-index">Open Aurora catalog tables</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_MEDIA_INVENTORY.md">Open reference media inventory</a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Game conformance catalog</h2>
+            <p class="narrative">The project now treats alien/enemy roles, audio cues, stage behavior, and test personas as visible documentation surfaces. The rows below are the public-page overview; the generated project and application guides carry the fuller tables.</p>
+            <div class="grid">
+                <article class="card">
+                    <h3>Aurora aliens</h3>
+                    <p>Bee/Zako scouts, Butterfly escorts, Boss Galaga command bosses, challenge rogues, and captured fighters are tracked by runtime type, activity, stage presence, reference evidence, score confidence, and next visual/path gaps.</p>
+                </article>
+                <article class="card">
+                    <h3>Aurora audio</h3>
+                    <p>Start, formation, shots, enemy impact, boss damage, capture/rescue, challenge, game-over, and high-score cues are documented with target clips and current conformance confidence.</p>
+                </article>
+                <article class="card">
+                    <h3>Stage summaries</h3>
+                    <p>Stage 1 onboarding, Stage 3 challenge, Stage 4 pressure, Stage 7/11/15 challenge set pieces, and Stage 12-14 reward routes are summarized by maneuvers, difficulty, trajectory identity, and remaining evidence gaps.</p>
+                </article>
+                <article class="card">
+                    <h3>Personas</h3>
+                    <p>Beginner, Intermediate, Expert, and Professional testing personas are visible as platform-supported, game-owned expectations instead of hidden harness labels.</p>
+                </article>
+                <article class="card">
+                    <h3>Galaxy Guardians</h3>
+                    <p>Signal Flagship, Signal Escort, Signal Scout, and Player Interceptor rows connect the preview to Galaxian frame crops, component sprite targets, audio cue targets, and preview-grade conformance scores.</p>
+                </article>
+                <article class="card">
+                    <h3>Confidence rule</h3>
+                    <p>An x/10 score is a current-resolution measurement. Low-confidence or proxy rows are deliberately marked so the next work can improve the scorer rather than hide the uncertainty.</p>
+                </article>
+            </div>
+            <div class="links">
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#game-conformance-catalog-doc">Read full generated catalog</a>
+                <a class="button" href="{{LANE_APPLICATION_GUIDE_HREF}}#stage-conformance-summary">Open stage summary tables</a>
+                <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}#persona-contract">Open platform persona contract</a>
             </div>
         </section>
 
@@ -501,6 +538,7 @@
                 <a class="button" href="{{LANE_RELEASE_DASHBOARD_HREF}}">Open release dashboard</a>
                 <a class="button" href="{{LANE_CONFORMANCE_DASHBOARD_HREF}}">Open conformance dashboard</a>
                 <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}">Open project guide</a>
+                <a class="button" href="{{LANE_APPLICATION_GUIDE_HREF}}">Open application guide</a>
                 <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}">Open Platinum guide</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PLAN.md">PLAN.md</a>

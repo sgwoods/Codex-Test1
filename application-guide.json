@@ -1074,6 +1074,195 @@
       "description": "Late Aurora crown band tying the strongest shell/front-door identity back into the deeper stage family."
     }
   ],
+  "conformanceAlienRows": [
+    {
+      "name": "Bee / Zako Scout",
+      "runtime": "type bee; families classic, scorpion, stingray, galboss",
+      "activity": "Basic formation alien; dives, fires, supplies early pressure, and appears in challenge groups.",
+      "presence": "All regular stages and challenge stages.",
+      "reference": "Galaga Zako/scout behavior, challenge-stage evidence, and galaga3-zako audio reference.",
+      "score": "8.7/10 behavior",
+      "confidence": "medium; visual likeness is still low-confidence proxy",
+      "next": "Add extracted Galaga alien sprite/contact-sheet crop targets and score Aurora displayed sprites against them."
+    },
+    {
+      "name": "Butterfly / Escort Alien",
+      "runtime": "type but; families classic, scorpion, stingray, galboss",
+      "activity": "Mid-value formation alien; dives more dangerously, escorts bosses in special attacks, and participates in challenge set pieces.",
+      "presence": "All regular stages, with high-value role in stages 4 and later.",
+      "reference": "Galaga butterfly/escort behavior through boss/formation grammar and path-family reports.",
+      "score": "8.7/10 behavior; 9.0/10 boss grammar contribution",
+      "confidence": "medium; visual likeness pending",
+      "next": "Add per-role visual crop scoring and separate escort-path precision against Galaga reference windows."
+    },
+    {
+      "name": "Boss Galaga / Command Boss",
+      "runtime": "type boss; families classic, stingray, galboss",
+      "activity": "Two-hit boss; captures player ship, carries captured fighter, leads special attacks, and awards high dive/squadron points.",
+      "presence": "All regular stages; capture/rescue and special-attack windows.",
+      "reference": "Galaga boss, tractor beam, capture/rescue, boss-hit, and boss-death timing/audio references.",
+      "score": "9.0/10 boss/formation grammar",
+      "confidence": "medium-high for behavior; audiovisual damage feedback still weaker",
+      "next": "Improve explosion/damage visual event authenticity and direct boss path precision from extracted reference paths."
+    },
+    {
+      "name": "Challenge Rogue / Specialty Alien",
+      "runtime": "type rogue in challenge and captured-fighter contexts",
+      "activity": "Challenge-stage novelty role used to create distinct set pieces and visible learning opportunities.",
+      "presence": "Challenge stages 7, 11, and 15 in current evidence windows.",
+      "reference": "Galaga challenging-stage specialty waves and bonus-stage composition.",
+      "score": "7.9/10 challenge alien novelty",
+      "confidence": "medium",
+      "next": "Ground specialty alien introduction against actual Galaga challenge-stage contact sheets and score reward clarity separately."
+    },
+    {
+      "name": "Captured Fighter",
+      "runtime": "carried player fighter state on boss",
+      "activity": "Converts player state into risk/reward: destroy too early for loss, rescue for dual fighter.",
+      "presence": "Capture/rescue stages after boss capture.",
+      "reference": "Galaga capture/rescue audio and event flow correspondence artifacts.",
+      "score": "guardrail pass for flow",
+      "confidence": "medium-high for state flow; visual feedback lower",
+      "next": "Add visual event/effects scoring for captured-fighter destruction, rescue join, and player comprehension."
+    }
+  ],
+  "conformanceAudioRows": [
+    {
+      "family": "Start and stage entry",
+      "cues": "gameStart, formationArrival, stageTransition",
+      "meaning": "Begins run and anchors formation-arrival timing.",
+      "reference": "galaga2-game-start, galaga3-level-underscore, galaga-level-flag.",
+      "score": "7.3/10 audio category",
+      "confidence": "medium",
+      "next": "Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow."
+    },
+    {
+      "family": "Player and enemy fire",
+      "cues": "playerShot, enemyShot",
+      "meaning": "Differentiates player action from enemy pressure.",
+      "reference": "Dedicated subwindows from galaga3-boss-damage-flagship-fighter-shot.",
+      "score": "measured but weak category",
+      "confidence": "medium",
+      "next": "Improve cue distinctness, cooldown fit, and event alignment without masking hit feedback."
+    },
+    {
+      "family": "Enemy impact and destruction",
+      "cues": "enemyHit, enemyBoom",
+      "meaning": "Immediate feedback that a missile impacted or destroyed a normal alien.",
+      "reference": "galaga3-zako subwindows and aurora-audio-event-gap latest report.",
+      "score": "open high-value gap",
+      "confidence": "medium",
+      "next": "Add event-specific explosion/impact scorer for missile impact, alien death, ship impact, immunity, and boss damage."
+    },
+    {
+      "family": "Boss damage and destruction",
+      "cues": "bossHit, bossBoom",
+      "meaning": "Shows multi-hit boss damage and final destruction clearly.",
+      "reference": "galaga3-boss-damage-flagship-fighter-shot and galaga3-boss-death-sasori.",
+      "score": "measured but still in audio gap",
+      "confidence": "medium-high",
+      "next": "Score first-hit flash, sound onset, hold/cadence, final explosion, and player comprehension."
+    },
+    {
+      "family": "Capture and rescue",
+      "cues": "captureBeam, captureSuccess, captureRetreat, rescueJoin, capturedFighterDestroyed",
+      "meaning": "Explains the most important Galaga-style risk/reward loop.",
+      "reference": "Tractor beam, captured-fighter, capturing, rescued-double-ship, and captured-fighter-destroyed clips.",
+      "score": "flow guardrail pass",
+      "confidence": "medium-high",
+      "next": "Improve event-rich logs and status/commentary hooks around capture and rescue."
+    },
+    {
+      "family": "Challenge results",
+      "cues": "challengeTransition, challengeResults, challengePerfect",
+      "meaning": "Marks bonus-stage entry and result/reward feedback.",
+      "reference": "galaga challenging-stage, results, and perfect-result clips.",
+      "score": "timing guardrail pass",
+      "confidence": "medium",
+      "next": "Add score/result surface conformance and direct challenge-stage audio fit checks."
+    }
+  ],
+  "stageConformanceRows": [
+    {
+      "stage": "Stage 1",
+      "summary": "Baseline rack entry, first dives, low pressure, player onboarding.",
+      "aspects": "Formation arrival timing, first dive timing, safe early pressure, classic visual/audio framing.",
+      "evidence": "stage-1-baseline evidence window; stage-1 geometry and shot trust guardrails.",
+      "gap": "Improve direct visual reference grounding for alien/player likeness."
+    },
+    {
+      "stage": "Stage 3 / first challenge",
+      "summary": "First challenging stage and bonus-stage learning moment.",
+      "aspects": "Non-lethal challenge behavior, scoreable windows, group readability, perfect-result feedback.",
+      "evidence": "Challenge timing guardrails and challenge-stage candidate window.",
+      "gap": "Add direct Galaga challenge contact-sheet path labels."
+    },
+    {
+      "stage": "Stage 4",
+      "summary": "First major pressure step and capture/squadron importance.",
+      "aspects": "Boss capture, special attacks, lane pressure, player loss windows, fairness.",
+      "evidence": "Stage 4 pressure geometry, lane loss windows, close-shot trust harnesses.",
+      "gap": "Continue pressure precision while protecting fairness and persona safety."
+    },
+    {
+      "stage": "Stage 7 challenge",
+      "summary": "Scorpion cross-sweep challenge set piece.",
+      "aspects": "New trajectory family, challenge alien novelty, bonus opportunity clarity.",
+      "evidence": "challenge-stage-scorpion-cross; alien-entry/challenge score 8.7/10.",
+      "gap": "Score reward clarity and reference-grounded path precision."
+    },
+    {
+      "stage": "Stage 11 challenge",
+      "summary": "Stingray hook-arc challenge set piece.",
+      "aspects": "Hooking trajectories, mixed alien composition, learning-stage novelty.",
+      "evidence": "challenge-stage-stingray-hook; challenge trajectory variation maxed at current scorer resolution.",
+      "gap": "Move from internal variation scoring to direct reference comparison."
+    },
+    {
+      "stage": "Stage 12 to 14",
+      "summary": "Late-run cleanup, pressure, squadron reward, and advanced route planning.",
+      "aspects": "Higher pressure, special-attack scoring, escort recovery route, advanced-persona outcomes.",
+      "evidence": "late-run-cleanup-or-failure, late-run-escort-variant, level-arc probes, escort-reward sweeps.",
+      "gap": "Improve direct late-stage path/cadence precision and replay-style pressure analysis."
+    },
+    {
+      "stage": "Stage 15 challenge",
+      "summary": "Boss-led late-loop challenge set piece.",
+      "aspects": "Boss-led entry style, late challenge novelty, high bonus readability.",
+      "evidence": "challenge-stage-boss-led-loop; challenge window coverage now 4/4.",
+      "gap": "Ground boss-led challenge path against extracted Galaga challenge-stage reference paths."
+    }
+  ],
+  "personaRows": [
+    {
+      "label": "Beginner",
+      "harnessId": "novice",
+      "role": "Low-skill onboarding and unfairness detector.",
+      "expected": "Moves less efficiently, misses more challenge opportunities, but should still experience readable cause and effect.",
+      "checks": "Stage 1, Stage 2 safety, first challenge clarity."
+    },
+    {
+      "label": "Intermediate",
+      "harnessId": "advanced",
+      "role": "Competent casual-play proxy.",
+      "expected": "Clears early waves more often and engages capture/rescue and challenge bonuses inconsistently.",
+      "checks": "Mid-run pressure, challenge hit rate, Stage 4 fairness."
+    },
+    {
+      "label": "Expert",
+      "harnessId": "expert",
+      "role": "Skilled player proxy.",
+      "expected": "Reaches deeper stage bands, positions better, and reveals whether reward routes are viable.",
+      "checks": "Stage 12/14 reward routes, boss/squadron scoring."
+    },
+    {
+      "label": "Professional",
+      "harnessId": "professional",
+      "role": "High-skill regression guard and release-confidence proxy.",
+      "expected": "Exploits strong routes without collapsing from unfair timing or broken scoring.",
+      "checks": "Professional stage-2 checks, long-run progression ordering, late reward windows."
+    }
+  ],
   "graphicsControls": [
     {
       "label": "Audio Theme",
