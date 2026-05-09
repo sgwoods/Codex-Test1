@@ -261,6 +261,37 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'single-low-sine-march',
+        label: 'Single oscillator low sine march',
+        spec: {
+          tones: [
+            { freq: 98, duration: .2, wave: 'sine', volume: .0062, slide: -2, lpHz: 620, attack: .07, singleOscillator: 1 },
+            { freq: 196, duration: .15, wave: 'sine', volume: .0042, slide: -4, lpHz: 900, delay: .038, attack: .044, singleOscillator: 1 },
+            { freq: 147, duration: .12, wave: 'sine', volume: .0036, slide: -3, lpHz: 740, delay: .086, attack: .026, singleOscillator: 1 }
+          ]
+        }
+      },
+      {
+        id: 'single-muted-triangle-bed',
+        label: 'Single muted triangle bed',
+        spec: {
+          tones: [
+            { freq: 123, duration: .19, wave: 'triangle', volume: .0068, slide: -4, lpHz: 700, attack: .058, singleOscillator: 1 },
+            { freq: 246, duration: .13, wave: 'triangle', volume: .0046, slide: -8, lpHz: 980, delay: .046, attack: .036, singleOscillator: 1 }
+          ]
+        }
+      },
+      {
+        id: 'single-low-square-pulse',
+        label: 'Single low square pulse',
+        spec: {
+          tones: [
+            { freq: 147, duration: .17, wave: 'square', volume: .0058, slide: -5, lpHz: 720, attack: .042, singleOscillator: 1 },
+            { freq: 196, duration: .12, wave: 'square', volume: .004, slide: -6, lpHz: 880, delay: .055, attack: .032, singleOscillator: 1 }
+          ]
+        }
+      },
+      {
         id: 'convoy-current-window',
         label: 'Convoy current guide window',
         spec: {

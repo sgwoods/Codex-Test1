@@ -554,6 +554,8 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
   const stage4Loss = stage4LossPath ? readJson(stage4LossPath) : null;
   const audioGapPath = latestReport('aurora-audio-event-gap');
   const audioGap = audioGapPath ? readJson(audioGapPath) : null;
+  const stagePulsePath = latestReport('aurora-stage-pulse-cadence');
+  const stagePulse = stagePulsePath ? readJson(stagePulsePath) : null;
   const rows = [
     ingestionRow({
       rank: 1,
@@ -581,6 +583,20 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
     }),
     ingestionRow({
       rank: 3,
+      source: 'Aurora stagePulse cadence pressure analysis',
+      axis: 'formation pressure / cadence audio',
+      artifactType: 'tracked cadence pressure axes from full audio comparison',
+      coverage: stagePulse
+        ? `pressure ${score(stagePulse.cadencePressureAnalysis?.score10)}; weakest ${stagePulse.cadencePressureAnalysis?.weakestAxis || 'n/a'}`
+        : 'pending',
+      annotationStatus: stagePulse ? 'scored' : 'pending',
+      confidence: 'medium-high',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: stagePulsePath ? rel(stagePulsePath) : 'reference-artifacts/analyses/aurora-stage-pulse-cadence',
+      next: stagePulse?.nextStep || 'Generate cadence-specific candidates and require both repeated focus gates and full audio-theme comparison before runtime promotion.'
+    }),
+    ingestionRow({
+      rank: 4,
       source: 'Boss entry and formation grammar scorer',
       axis: 'formation grammar / boss entry / challenge identity',
       artifactType: 'event grammar, timing, stage-signature, and measurement-debt report',
@@ -594,7 +610,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.'
     }),
     ingestionRow({
-      rank: 4,
+      rank: 5,
       source: 'Level arc and encounter-shape evidence',
       axis: 'level arc / challenge / reward',
       artifactType: 'stage signatures, pressure windows, persona reports',
@@ -606,7 +622,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.'
     }),
     ingestionRow({
-      rank: 5,
+      rank: 6,
       source: 'Stage 4 pressure and loss-window diagnostics',
       axis: 'pressure / fairness',
       artifactType: 'loss windows, replay geometry, collision traces',
@@ -618,7 +634,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.'
     }),
     ingestionRow({
-      rank: 6,
+      rank: 7,
       source: 'Aurora visual look screenshots',
       axis: 'visual look / UI readability',
       artifactType: 'browser screenshots plus DOM/canvas metrics',
@@ -630,7 +646,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.'
     }),
     ingestionRow({
-      rank: 7,
+      rank: 8,
       source: 'Aurora evidence-cycle windows',
       axis: 'general ingestion framework',
       artifactType: 'manifests, contact sheets, traces, event logs, audio timelines',
@@ -642,7 +658,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest.'
     }),
     ingestionRow({
-      rank: 8,
+      rank: 9,
       source: 'Reference manifests and event logs inventory',
       axis: 'source provenance / annotation coverage',
       artifactType: 'source-manifest.json and reference-events.json',
@@ -654,7 +670,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest.'
     }),
     ingestionRow({
-      rank: 9,
+      rank: 10,
       source: 'Reference contact sheets and frame evidence',
       axis: 'visual / motion / entry formation',
       artifactType: 'contact sheets and still frames',

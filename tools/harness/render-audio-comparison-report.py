@@ -281,6 +281,133 @@ def segment_interpretation(role, delta, exact_role_match=True):
     return f"{role} segment is comparatively close; keep it as a guardrail while other segments improve."
 
 
+def score_gap(value, tolerance):
+    try:
+        gap = abs(float(value))
+    except (TypeError, ValueError):
+        return 0.0
+    return round(max(0.0, min(10.0, 10.0 - ((gap / max(tolerance, 0.001)) * 10.0))), 2)
+
+
+def score_deficit(actual, target, tolerance):
+    try:
+        deficit = max(0.0, float(target) - float(actual))
+    except (TypeError, ValueError):
+        return 0.0
+    return round(max(0.0, min(10.0, 10.0 - ((deficit / max(tolerance, 0.001)) * 10.0))), 2)
+
+
+def score_excess(actual, target, tolerance):
+    try:
+        excess = max(0.0, float(actual) - float(target))
+    except (TypeError, ValueError):
+        return 0.0
+    return round(max(0.0, min(10.0, 10.0 - ((excess / max(tolerance, 0.001)) * 10.0))), 2)
+
+
+def weighted_score(rows):
+    total_weight = sum(float(row.get("weight") or 0) for row in rows)
+    if total_weight <= 0:
+        return 0.0
+    return round(sum(float(row.get("score10") or 0) * float(row.get("weight") or 0) for row in rows) / total_weight, 2)
+
+
+def stage_pulse_cadence_analysis(item_report):
+    if item_report.get("cue") != "stagePulse":
+        return None
+    variants = item_report.get("variants") or {}
+    aur = (variants.get("aurora") or {}).get("activeMetrics") or {}
+    ref = (variants.get("reference") or {}).get("activeMetrics") or {}
+    if not aur or not ref:
+        return None
+    aur_band = aur.get("band_energy") or {}
+    ref_band = ref.get("band_energy") or {}
+    aur_mid_presence = float(aur_band.get("mid_1500_3000") or 0) + float(aur_band.get("presence_3000_6000") or 0)
+    ref_mid_presence = float(ref_band.get("mid_1500_3000") or 0) + float(ref_band.get("presence_3000_6000") or 0)
+    axes = [
+        {
+            "id": "low-band-body",
+            "label": "Low-band body",
+            "score10": score_deficit(aur_band.get("sub_500"), ref_band.get("sub_500"), 0.34),
+            "weight": 0.22,
+            "aurora": round(float(aur_band.get("sub_500") or 0), 4),
+            "reference": round(float(ref_band.get("sub_500") or 0), 4),
+            "meaning": "Formation pressure should have enough low-frequency body to read as a marching bed, not only a bright tick.",
+        },
+        {
+            "id": "brightness-control",
+            "label": "Brightness control",
+            "score10": min(
+                score_excess(aur_mid_presence, ref_mid_presence, 0.28),
+                score_gap((aur.get("spectral_rolloff_85_hz") or 0) - (ref.get("spectral_rolloff_85_hz") or 0), 1800),
+            ),
+            "weight": 0.22,
+            "aurora": round(aur_mid_presence, 4),
+            "reference": round(ref_mid_presence, 4),
+            "meaning": "A pressure cadence can be audible without pulling too much energy into mid/presence bands.",
+        },
+        {
+            "id": "zero-crossing-calm",
+            "label": "Zero-crossing calm",
+            "score10": score_gap((aur.get("zero_crossings_per_s") or 0) - (ref.get("zero_crossings_per_s") or 0), 1700),
+            "weight": 0.18,
+            "aurora": round(float(aur.get("zero_crossings_per_s") or 0), 1),
+            "reference": round(float(ref.get("zero_crossings_per_s") or 0), 1),
+            "meaning": "Lower crossing density keeps the cadence from feeling scratchy or over-complex.",
+        },
+        {
+            "id": "gain-match",
+            "label": "Gain match",
+            "score10": score_gap((aur.get("rms") or 0) - (ref.get("rms") or 0), 0.13),
+            "weight": 0.16,
+            "aurora": round(float(aur.get("rms") or 0), 4),
+            "reference": round(float(ref.get("rms") or 0), 4),
+            "meaning": "Formation cadence should create pressure without masking shot, hit, and capture feedback.",
+        },
+        {
+            "id": "duration-pocket",
+            "label": "Duration pocket",
+            "score10": score_gap((aur.get("duration_s") or 0) - (ref.get("duration_s") or 0), 0.12),
+            "weight": 0.12,
+            "aurora": round(float(aur.get("duration_s") or 0), 3),
+            "reference": round(float(ref.get("duration_s") or 0), 3),
+            "meaning": "The pulse needs to sit inside the repeat cadence without smearing into a continuous drone.",
+        },
+        {
+            "id": "envelope-smoothness",
+            "label": "Envelope smoothness",
+            "score10": min(
+                score_gap((aur.get("attack_peak_position") or 0) - (ref.get("attack_peak_position") or 0), 0.5),
+                score_excess(aur.get("burst_share"), ref.get("burst_share"), 0.28),
+            ),
+            "weight": 0.10,
+            "aurora": {
+                "attack_peak_position": round(float(aur.get("attack_peak_position") or 0), 3),
+                "burst_share": round(float(aur.get("burst_share") or 0), 3),
+            },
+            "reference": {
+                "attack_peak_position": round(float(ref.get("attack_peak_position") or 0), 3),
+                "burst_share": round(float(ref.get("burst_share") or 0), 3),
+            },
+            "meaning": "The cadence should feel like pressure building, not a foreground impact event.",
+        },
+    ]
+    axes.sort(key=lambda row: (row["score10"], -row["weight"], row["id"]))
+    weakest = axes[0] if axes else None
+    return {
+        "schemaVersion": 1,
+        "artifactType": "stage-pulse-cadence-pressure-analysis",
+        "score10": weighted_score(axes),
+        "weakestAxis": weakest["id"] if weakest else "",
+        "axes": axes,
+        "diagnosis": [
+            "Current Aurora cadence remains too bright/thin versus the reference pressure bed when judged by low-band body, mid/presence energy, and zero-crossing density.",
+            "Simple low-band tone swaps and soft attacks are not sufficient unless the candidate also stabilizes segment risk, zero-crossing behavior, and envelope decay across repeated captures.",
+        ],
+        "recommendedNextExperiment": "Generate candidates that explicitly optimize low-band body and zero-crossing calm together, then require full audio-theme comparison before runtime promotion.",
+    }
+
+
 def band_shape_distance(left, right):
     keys = sorted(set(left.keys()) | set(right.keys()))
     if not keys:
@@ -643,6 +770,7 @@ def main():
         )
         item_report["referenceSegmentation"] = item_report["variants"]["reference"]["eventSegmentation"]
         item_report["segmentRoleComparisons"] = segment_role_comparisons(item_report)
+        item_report["cadencePressureAnalysis"] = stage_pulse_cadence_analysis(item_report)
         readme_lines.extend([
             "",
             f"- Quick read: synthetic Galaga duration delta vs reference = `{abs(gal['duration_s'] - ref['duration_s']):.3f}s`; Aurora duration delta vs reference = `{abs(aur['duration_s'] - ref['duration_s']):.3f}s`.",
@@ -674,6 +802,23 @@ def main():
                 for candidate in item_report["referenceSegmentCandidates"]
             )
             readme_lines.append(f"- Candidate reference subwindows: {candidate_text}.")
+        if item_report["cadencePressureAnalysis"]:
+            cadence = item_report["cadencePressureAnalysis"]
+            readme_lines.extend([
+                "",
+                "### Formation Cadence Pressure Analysis",
+                "",
+                f"- Cadence pressure score: `{cadence['score10']}/10`",
+                f"- Weakest axis: `{cadence['weakestAxis']}`",
+                f"- Next experiment: {cadence['recommendedNextExperiment']}",
+                "",
+                "| Axis | Score | Aurora | Reference | Player/Designer Meaning |",
+                "| --- | ---: | --- | --- | --- |",
+            ])
+            for axis in cadence["axes"]:
+                readme_lines.append(
+                    f"| {axis['label']} | {axis['score10']} | `{json.dumps(axis['aurora'])}` | `{json.dumps(axis['reference'])}` | {axis['meaning']} |"
+                )
         readme_lines.append("")
         report["items"].append(item_report)
 
