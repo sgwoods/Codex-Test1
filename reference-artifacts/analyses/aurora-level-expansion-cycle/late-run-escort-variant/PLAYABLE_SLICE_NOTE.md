@@ -12,11 +12,11 @@ Duration: 12s
 
 - samples: 13
 - player x range: 262
-- max attackers: 9
+- max attackers: 8
 - max enemy bullets: 3
 - max challenge enemies: 0
 - final stage: 14
-- final score: 720
+- final score: 2240
 
 ## Event Coverage
 

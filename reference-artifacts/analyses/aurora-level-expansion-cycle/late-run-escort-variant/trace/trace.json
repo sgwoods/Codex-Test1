@@ -10,11 +10,11 @@
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 9,
+    "max_attackers": 8,
     "max_enemy_bullets": 3,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 720,
+    "final_score": 2240,
     "final_lives": 4,
     "final_stage": 14,
     "final_challenge": false
@@ -110,7 +110,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.584
+        "at": 0.594
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -173,7 +173,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.701
+        "at": 0.681
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -236,7 +236,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.769
+        "at": 0.742
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -299,7 +299,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.838
+        "at": 0.802
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -362,7 +362,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.901
+        "at": 0.865
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -425,7 +425,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 0.971
+        "at": 0.923
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -488,7 +488,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.034
+        "at": 0.989
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -551,7 +551,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.11
+        "at": 1.05
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -614,7 +614,7 @@
         "referenceClipDuration": 0.82,
         "stage": 14,
         "challenge": false,
-        "at": 1.181
+        "at": 1.108
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -677,7 +677,7 @@
         "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.244
+        "at": 1.167
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -708,16 +708,16 @@
       "t": 10,
       "stage": 14,
       "challenge": 0,
-      "score": 560,
+      "score": 2160,
       "lives": 5,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 31,
-      "attackers": 5,
+      "enemies": 30,
+      "attackers": 4,
       "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 31,
+      "formation_active": 30,
       "formationEnemyTypes": [
         "bee",
         "boss",
@@ -730,17 +730,17 @@
         "late-boss-column-weave"
       ],
       "audioCue": {
-        "cue": "stagePulse",
+        "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 17,
-        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "referenceClipStart": 0.18,
-        "referenceClipDuration": 0.82,
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.32
+        "at": 1.235
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -771,16 +771,16 @@
       "t": 11,
       "stage": 14,
       "challenge": 0,
-      "score": 560,
+      "score": 2240,
       "lives": 5,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 31,
-      "attackers": 9,
-      "enemy_bullets": 2,
-      "player_bullets": 1,
+      "enemies": 29,
+      "attackers": 8,
+      "enemy_bullets": 3,
+      "player_bullets": 2,
       "challenge_enemies": 0,
-      "formation_active": 31,
+      "formation_active": 29,
       "formationEnemyTypes": [
         "bee",
         "boss",
@@ -793,17 +793,17 @@
         "late-boss-column-weave"
       ],
       "audioCue": {
-        "cue": "playerShot",
+        "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
+        "variant": 18,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
         "stage": 14,
         "challenge": false,
-        "at": 1.393
+        "at": 1.304
       },
       "stagePresentation": {
         "id": "galboss-veil",
@@ -834,16 +834,16 @@
       "t": 12,
       "stage": 14,
       "challenge": 0,
-      "score": 720,
+      "score": 2240,
       "lives": 4,
       "player_x": 271,
       "player_vx": 0,
-      "enemies": 29,
-      "attackers": 8,
+      "enemies": 28,
+      "attackers": 5,
       "enemy_bullets": 0,
       "player_bullets": 0,
       "challenge_enemies": 0,
-      "formation_active": 29,
+      "formation_active": 28,
       "formationEnemyTypes": [
         "bee",
         "boss",
@@ -856,17 +856,17 @@
         "late-boss-column-weave"
       ],
       "audioCue": {
-        "cue": "stagePulse",
+        "cue": "playerHit",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 22,
-        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "referenceClipStart": 0.18,
-        "referenceClipDuration": 0.82,
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
         "stage": 14,
         "challenge": false,
-        "at": 1.464
+        "at": 1.368
       },
       "stagePresentation": {
         "id": "galboss-veil",

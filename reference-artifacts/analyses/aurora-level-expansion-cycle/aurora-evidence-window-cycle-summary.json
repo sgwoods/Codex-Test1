@@ -2,10 +2,10 @@
   "schema_version": 1,
   "status": "aurora-evidence-windows-captured",
   "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
-  "generated_at": "2026-05-09T20:06:11.942Z",
+  "generated_at": "2026-05-09T20:14:48.666Z",
   "window_count": 11,
   "captured_this_run": [
-    "mid-run-pincer-variant"
+    "late-run-escort-variant"
   ],
   "results": [
     {
@@ -145,18 +145,18 @@
       "scenario": "stage14-escort-variant",
       "seed": 14014,
       "sample_count": 13,
-      "event_count": 130,
-      "promoted_event_count": 36,
+      "event_count": 128,
+      "promoted_event_count": 33,
       "trace_summary": {
         "sample_count": 13,
         "player_x_min": 9,
         "player_x_max": 271,
         "player_x_range": 262,
-        "max_attackers": 9,
+        "max_attackers": 8,
         "max_enemy_bullets": 3,
         "max_player_bullets": 2,
         "max_challenge_enemies": 0,
-        "final_score": 720,
+        "final_score": 2240,
         "final_lives": 4,
         "final_stage": 14,
         "final_challenge": false
