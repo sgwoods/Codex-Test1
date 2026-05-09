@@ -158,6 +158,116 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .35, segment: .35, duration: .12, acceptableDuration: .13, centroidWorsenHz: 90, bandWorsen: .045 }
   },
+  'boss-hit': {
+    cue: 'bossHit',
+    entryId: 'boss-hit-aurora',
+    comparisonId: 'boss-hit-compare',
+    latest: 'latest-boss-hit.json',
+    title: 'Boss Hit',
+    problem: 'Boss Hit must read as multi-hit boss damage, not as a normal enemy pop or a player shot; current coverage has reference scoring but no focused keeper loop.',
+    target: 'Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.',
+    cooldownMs: 240,
+    referenceStarts: [0.94, 1.02, 1.08, 1.149, 1.2, 1.28, 1.36],
+    referenceDurations: [0.16, 0.2, 0.24, 0.29, 0.34, 0.42],
+    referenceVolumes: [0.72, 0.86, 0.98, 1.08, 1.18],
+    handSpecs: [
+      {
+        id: 'boss-damage-guide-window',
+        label: 'Boss damage guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 240,
+          referenceVolume: 1.04,
+          clipStart: 1.149,
+          clipDuration: .29
+        }
+      },
+      {
+        id: 'lowmid-boss-damage-snap',
+        label: 'Low-mid boss damage snap',
+        spec: {
+          tones: [
+            { freq: 360, duration: .075, wave: 'triangle', volume: .014, slide: -145, lpHz: 2200 },
+            { freq: 185, duration: .12, wave: 'sawtooth', volume: .012, slide: -80, lpHz: 1500, delay: .014 },
+            { freq: 720, duration: .04, wave: 'triangle', volume: .006, slide: -260, lpHz: 2600, delay: .006 }
+          ],
+          noise: [{ duration: .032, volume: .0024, hp: 920, delay: .008 }]
+        }
+      },
+      {
+        id: 'two-step-boss-chip',
+        label: 'Two-step boss chip',
+        spec: {
+          seq: [620, 410],
+          step: .034,
+          wave: 'triangle',
+          volume: .011,
+          slide: -115,
+          lpHz: 2100,
+          tones: [
+            { freq: 210, duration: .105, wave: 'triangle', volume: .009, slide: -55, lpHz: 1300, delay: .036 }
+          ],
+          noise: [{ duration: .026, volume: .0014, hp: 760, delay: .006 }]
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .35, duration: .08, acceptableDuration: .1, centroidWorsenHz: 100, bandWorsen: .05 }
+  },
+  'boss-boom': {
+    cue: 'bossBoom',
+    entryId: 'boss-boom-aurora',
+    comparisonId: 'boss-boom-compare',
+    latest: 'latest-boss-boom.json',
+    title: 'Boss Boom',
+    problem: 'Boss Boom should be the largest destruction cue in the hierarchy, but it needs a focused loop to compare reference phrase windows, body/tail duration, and boss-finality scale.',
+    target: 'Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.',
+    cooldownMs: 360,
+    referenceStarts: [0.62, 0.72, 0.798, 0.88, 0.98, 1.08, 1.18],
+    referenceDurations: [0.42, 0.56, 0.64, 0.769, 0.9, 1.05],
+    referenceVolumes: [0.78, 0.92, 1.04, 1.18, 1.3],
+    handSpecs: [
+      {
+        id: 'boss-death-guide-window',
+        label: 'Boss death guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-death-sasori.m4a',
+          cooldownMs: 360,
+          referenceVolume: 1.18,
+          clipStart: .798,
+          clipDuration: .769
+        }
+      },
+      {
+        id: 'wide-boss-finality',
+        label: 'Wide boss finality',
+        spec: {
+          tones: [
+            { freq: 520, duration: .065, wave: 'triangle', volume: .012, slide: -220, lpHz: 2600 },
+            { freq: 300, duration: .12, wave: 'sawtooth', volume: .014, slide: -135, lpHz: 1900, delay: .018 },
+            { freq: 150, duration: .22, wave: 'triangle', volume: .014, slide: -60, lpHz: 1200, delay: .05 }
+          ],
+          noise: [{ duration: .07, volume: .0036, hp: 760, delay: .012 }]
+        }
+      },
+      {
+        id: 'boss-two-burst-collapse',
+        label: 'Boss two-burst collapse',
+        spec: {
+          seq: [680, 450, 280],
+          step: .045,
+          wave: 'triangle',
+          volume: .0105,
+          slide: -140,
+          lpHz: 2300,
+          tones: [
+            { freq: 170, duration: .19, wave: 'sine', volume: .013, slide: -52, lpHz: 1180, delay: .08 }
+          ],
+          noise: [{ duration: .052, volume: .003, hp: 820, delay: .014 }]
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .35, duration: .12, acceptableDuration: .18, centroidWorsenHz: 110, bandWorsen: .055 }
+  },
   'formation-pulse': {
     cue: 'stagePulse',
     entryId: 'formation-pulse-classic',

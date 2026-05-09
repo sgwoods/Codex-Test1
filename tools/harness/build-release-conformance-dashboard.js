@@ -554,6 +554,8 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
   const stage4Loss = stage4LossPath ? readJson(stage4LossPath) : null;
   const audioGapPath = latestReport('aurora-audio-event-gap');
   const audioGap = audioGapPath ? readJson(audioGapPath) : null;
+  const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
+  const audioLabV2 = audioLabV2Path ? readJson(audioLabV2Path) : null;
   const stagePulsePath = latestReport('aurora-stage-pulse-cadence');
   const stagePulse = stagePulsePath ? readJson(stagePulsePath) : null;
   const rows = [
@@ -583,6 +585,20 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
     }),
     ingestionRow({
       rank: 3,
+      source: 'Aurora Audio Conformance Lab v2',
+      axis: 'audio candidate loop / family promotion decisions',
+      artifactType: 'cue-family risk, candidate history, keeper decision, promotion gate',
+      coverage: audioLabV2
+        ? `${audioLabV2.summary?.sweptCueCount || 0}/${audioLabV2.summary?.cueCount || 0} target cues swept; ${audioLabV2.summary?.keeperCueCount || 0} keeper candidates tracked; runtime promotions ${audioLabV2.summary?.runtimePromotionCount || 0}`
+        : 'pending',
+      annotationStatus: audioLabV2 ? 'family-scored' : 'pending',
+      confidence: audioLabV2 ? 'medium-high' : 'low',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: audioLabV2Path ? rel(audioLabV2Path) : 'reference-artifacts/analyses/aurora-audio-conformance-lab-v2',
+      next: audioLabV2?.nextStep || 'Run Audio Conformance Lab v2 after audio event-gap analysis and focused candidate sweeps.'
+    }),
+    ingestionRow({
+      rank: 4,
       source: 'Aurora stagePulse cadence pressure analysis',
       axis: 'formation pressure / cadence audio',
       artifactType: 'tracked cadence pressure axes from full audio comparison',
@@ -596,7 +612,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: stagePulse?.nextStep || 'Generate cadence-specific candidates and require both repeated focus gates and full audio-theme comparison before runtime promotion.'
     }),
     ingestionRow({
-      rank: 4,
+      rank: 5,
       source: 'Boss entry and formation grammar scorer',
       axis: 'formation grammar / boss entry / challenge identity',
       artifactType: 'event grammar, timing, stage-signature, and measurement-debt report',
@@ -610,7 +626,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.'
     }),
     ingestionRow({
-      rank: 5,
+      rank: 6,
       source: 'Level arc and encounter-shape evidence',
       axis: 'level arc / challenge / reward',
       artifactType: 'stage signatures, pressure windows, persona reports',
@@ -622,7 +638,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.'
     }),
     ingestionRow({
-      rank: 6,
+      rank: 7,
       source: 'Stage 4 pressure and loss-window diagnostics',
       axis: 'pressure / fairness',
       artifactType: 'loss windows, replay geometry, collision traces',
@@ -634,7 +650,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.'
     }),
     ingestionRow({
-      rank: 7,
+      rank: 8,
       source: 'Aurora visual look screenshots',
       axis: 'visual look / UI readability',
       artifactType: 'browser screenshots plus DOM/canvas metrics',
@@ -917,6 +933,7 @@ function main(){
   const economicsPath = latestReport('conformance-economics');
   const visualLookPath = latestReport('aurora-visual-look-conformance');
   const alienEntryChallengePath = latestReport('alien-entry-challenge-variation');
+  const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
   const quality = readJson(qualityPath);
   const priority = priorityPath ? readJson(priorityPath) : { candidates: [] };
   const levelArc = levelArcPath ? readJson(levelArcPath) : { summary: {} };
@@ -1206,6 +1223,7 @@ function main(){
     levelArc: levelArcPath ? rel(levelArcPath) : null,
     economics: economicsPath ? rel(economicsPath) : null,
     alienEntryChallenge: alienEntryChallengePath ? rel(alienEntryChallengePath) : null,
+    audioLabV2: audioLabV2Path ? rel(audioLabV2Path) : null,
     visualLook: visualLookPath ? rel(visualLookPath) : null,
     evidenceCycle: fileExists(evidenceCyclePath) ? evidenceCyclePath : null
   };

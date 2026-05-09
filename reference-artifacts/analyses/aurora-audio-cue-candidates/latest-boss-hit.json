@@ -1,0 +1,5103 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop",
+  "generatedAt": "2026-05-09T20:34:49.814Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "e8d1c7ef",
+  "dirty": true,
+  "key": "boss-hit",
+  "title": "Boss Hit",
+  "cue": "bossHit",
+  "repetitions": 2,
+  "problem": "Boss Hit must read as multi-hit boss damage, not as a normal enemy pop or a player shot; current coverage has reference scoring but no focused keeper loop.",
+  "strategy": "Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.",
+  "successMeasure": "A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.",
+  "source": {
+    "comparisonSet": "boss-hit-compare",
+    "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+    "referenceWindow": {
+      "startSeconds": 1.149,
+      "endSeconds": 1.439,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+      "selection": "highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-e8d1c7ef-dirty-audio-focus-203449/boss-hit/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-e8d1c7ef-dirty-audio-focus-203449/boss-hit/metrics.json",
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "label": "boss damage confirmation",
+          "start_s": 0,
+          "end_s": 0.15,
+          "duration_s": 0.15,
+          "metrics": {
+            "duration_s": 0.15,
+            "peak": 0.6245,
+            "rms": 0.2709,
+            "spectral_centroid_hz": 1452.4,
+            "zero_crossings_per_s": 1773.1,
+            "spectral_spread_hz": 1357,
+            "spectral_rolloff_85_hz": 2226.3,
+            "spectral_flatness": 0.1668,
+            "band_energy": {
+              "sub_500": 0.105,
+              "low_mid_500_1500": 0.6103,
+              "mid_1500_3000": 0.1997,
+              "presence_3000_6000": 0.0643,
+              "air_6000_plus": 0.0207
+            },
+            "attack_peak_position": 0,
+            "decay_ratio": 0.657,
+            "envelope_contrast": 1.168,
+            "burst_share": 0.211
+          },
+          "curated": true
+        }
+      ],
+      "summary": {
+        "segmentCount": 1,
+        "status": "curated-reference-segmentation",
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0,
+          "end_s": 0.15
+        },
+        "confidence": "high",
+        "resolution": "relative to the clipped 1.149-1.439s boss-damage window; boss hit is a distinct damage confirmation transient",
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient"
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "refclip-s1149-d240-v108",
+      "label": "Boss Hit reference 1.149s/0.24s v1.08",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.277,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.24,
+          "referenceVolume": 1.08
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.08,
+        "clipStart": 1.149,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 37.6,
+      "zeroCrossingGapPerSecond": 605.7,
+      "rmsGap": 0.02,
+      "bandShapeGap": 0.0068,
+      "rolloffGapHz": 33.4,
+      "envelopeShapeGap": 0.05,
+      "activeMetrics": {
+        "duration_s": 0.225,
+        "rms": 0.2038,
+        "spectral_centroid_hz": 1416.6,
+        "zero_crossings_per_s": 1679.4,
+        "spectral_rolloff_85_hz": 2204.7,
+        "band_energy": {
+          "sub_500": 0.1083,
+          "low_mid_500_1500": 0.6099,
+          "mid_1500_3000": 0.2005,
+          "presence_3000_6000": 0.0648,
+          "air_6000_plus": 0.0166
+        },
+        "attack_peak_position": 0.091,
+        "decay_ratio": 0.274,
+        "burst_share": 0.386
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0049,
+        "low_mid_500_1500": -0.0007,
+        "mid_1500_3000": -0.0005,
+        "presence_3000_6000": 0.0005,
+        "air_6000_plus": -0.0042
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 37.6,
+        "zero_crossings_per_s": 605.7,
+        "rms": 0.02,
+        "spectral_spread_hz": 103.9,
+        "spectral_rolloff_85_hz": 33.4,
+        "spectral_flatness": 0.025,
+        "band_shape_distance": 0.0068,
+        "attack_peak_position": 0.0905,
+        "decay_ratio": 0.0965,
+        "envelope_contrast": 0.035,
+        "burst_share": 0.007
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.73,
+      "worstSegmentRisk10": 0.73,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.04,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 17.6,
+        "zeroCrossingGapStdPerSecond": 64,
+        "bandShapeGapStd": 0.0016,
+        "decayRatioGapStd": 0.02,
+        "rmsGapStd": 0.0022
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d240-v108",
+          "repetition": 1,
+          "risk10": 0.56,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 55.2,
+          "rmsGap": 0.0179,
+          "bandShapeGap": 0.0083,
+          "worstSegmentRisk10": 0.69,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d240-v108",
+          "repetition": 2,
+          "risk10": 0.64,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 20,
+          "rmsGap": 0.0223,
+          "bandShapeGap": 0.0052,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.6,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.028923076923076923,
+        "zeroCrossing": 0.3365,
+        "rms": 0.125,
+        "bandShape": 0.0136,
+        "rolloff": 0.012846153846153846,
+        "attack": 0.10055555555555555,
+        "decay": 0.03015625,
+        "burst": 0.02
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d340-v108",
+      "label": "Boss Hit reference 1.149s/0.34s v1.08",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.277,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.34,
+          "referenceVolume": 1.08
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.08,
+        "clipStart": 1.149,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 16.9,
+      "zeroCrossingGapPerSecond": 661,
+      "rmsGap": 0.025,
+      "bandShapeGap": 0.0058,
+      "rolloffGapHz": 6.55,
+      "envelopeShapeGap": 0.056,
+      "activeMetrics": {
+        "duration_s": 0.23,
+        "rms": 0.199,
+        "spectral_centroid_hz": 1437.3,
+        "zero_crossings_per_s": 1624.1,
+        "spectral_rolloff_85_hz": 2231.6,
+        "band_energy": {
+          "sub_500": 0.1066,
+          "low_mid_500_1500": 0.6076,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0666,
+          "air_6000_plus": 0.0183
+        },
+        "attack_peak_position": 0.089,
+        "decay_ratio": 0.27,
+        "burst_share": 0.379
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0032,
+        "low_mid_500_1500": -0.003,
+        "mid_1500_3000": 0,
+        "presence_3000_6000": 0.0023,
+        "air_6000_plus": -0.0025
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 16.9,
+        "zero_crossings_per_s": 661,
+        "rms": 0.025,
+        "spectral_spread_hz": 63.75,
+        "spectral_rolloff_85_hz": 6.55,
+        "spectral_flatness": 0.012,
+        "band_shape_distance": 0.0058,
+        "attack_peak_position": 0.089,
+        "decay_ratio": 0.0925,
+        "envelope_contrast": 0.024,
+        "burst_share": 0.014
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.71,
+      "worstSegmentRisk10": 0.71,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.02,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 3.1,
+        "zeroCrossingGapStdPerSecond": 8.7,
+        "bandShapeGapStd": 0.0006,
+        "decayRatioGapStd": 0.024,
+        "rmsGapStd": 0.0026
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d340-v108",
+          "repetition": 1,
+          "risk10": 0.6,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 13.8,
+          "rmsGap": 0.0275,
+          "bandShapeGap": 0.0063,
+          "worstSegmentRisk10": 0.66,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d340-v108",
+          "repetition": 2,
+          "risk10": 0.64,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 20,
+          "rmsGap": 0.0223,
+          "bandShapeGap": 0.0052,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.62,
+      "riskBreakdown": {
+        "duration": 0.011764705882352941,
+        "centroid": 0.013,
+        "zeroCrossing": 0.3672222222222222,
+        "rms": 0.15625,
+        "bandShape": 0.0116,
+        "rolloff": 0.0025192307692307693,
+        "attack": 0.09888888888888889,
+        "decay": 0.028906249999999998,
+        "burst": 0.04
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d290-v98",
+      "label": "Boss Hit reference 1.149s/0.29s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.042,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.149,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 33.8,
+      "zeroCrossingGapPerSecond": 597.35,
+      "rmsGap": 0.025,
+      "bandShapeGap": 0.0086,
+      "rolloffGapHz": 28.85,
+      "envelopeShapeGap": 0.05,
+      "activeMetrics": {
+        "duration_s": 0.225,
+        "rms": 0.1985,
+        "spectral_centroid_hz": 1420.4,
+        "zero_crossings_per_s": 1687.8,
+        "spectral_rolloff_85_hz": 2209.3,
+        "band_energy": {
+          "sub_500": 0.1088,
+          "low_mid_500_1500": 0.6064,
+          "mid_1500_3000": 0.2025,
+          "presence_3000_6000": 0.0656,
+          "air_6000_plus": 0.0168
+        },
+        "attack_peak_position": 0.091,
+        "decay_ratio": 0.273,
+        "burst_share": 0.386
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0054,
+        "low_mid_500_1500": -0.0042,
+        "mid_1500_3000": 0.0015,
+        "presence_3000_6000": 0.0013,
+        "air_6000_plus": -0.004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 33.8,
+        "zero_crossings_per_s": 597.35,
+        "rms": 0.025,
+        "spectral_spread_hz": 98.4,
+        "spectral_rolloff_85_hz": 28.85,
+        "spectral_flatness": 0.023,
+        "band_shape_distance": 0.0086,
+        "attack_peak_position": 0.0905,
+        "decay_ratio": 0.0955,
+        "envelope_contrast": 0.03,
+        "burst_share": 0.007
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.85,
+      "worstSegmentRisk10": 0.85,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.02,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 16.8,
+        "zeroCrossingGapStdPerSecond": 37.4,
+        "bandShapeGapStd": 0.0018,
+        "decayRatioGapStd": 0.019,
+        "rmsGapStd": 0.0006
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d290-v98",
+          "repetition": 1,
+          "risk10": 0.64,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 17,
+          "rmsGap": 0.026,
+          "bandShapeGap": 0.0067,
+          "worstSegmentRisk10": 0.81,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d290-v98",
+          "repetition": 2,
+          "risk10": 0.6,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 50.6,
+          "rmsGap": 0.0248,
+          "bandShapeGap": 0.0104,
+          "worstSegmentRisk10": 0.88,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.62,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.026,
+        "zeroCrossing": 0.3318611111111111,
+        "rms": 0.15625,
+        "bandShape": 0.0172,
+        "rolloff": 0.011096153846153846,
+        "attack": 0.10055555555555555,
+        "decay": 0.02984375,
+        "burst": 0.02
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d240-v98",
+      "label": "Boss Hit reference 1.149s/0.24s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.242,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.149,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 17.55,
+      "zeroCrossingGapPerSecond": 613.05,
+      "rmsGap": 0.029,
+      "bandShapeGap": 0.0098,
+      "rolloffGapHz": 7.65,
+      "envelopeShapeGap": 0.065,
+      "activeMetrics": {
+        "duration_s": 0.23,
+        "rms": 0.1947,
+        "spectral_centroid_hz": 1436.7,
+        "zero_crossings_per_s": 1672.1,
+        "spectral_rolloff_85_hz": 2222.9,
+        "band_energy": {
+          "sub_500": 0.1118,
+          "low_mid_500_1500": 0.6039,
+          "mid_1500_3000": 0.1997,
+          "presence_3000_6000": 0.0653,
+          "air_6000_plus": 0.0194
+        },
+        "attack_peak_position": 0.071,
+        "decay_ratio": 0.267,
+        "burst_share": 0.362
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0084,
+        "low_mid_500_1500": -0.0067,
+        "mid_1500_3000": -0.0013,
+        "presence_3000_6000": 0.001,
+        "air_6000_plus": -0.0014
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 17.55,
+        "zero_crossings_per_s": 613.05,
+        "rms": 0.029,
+        "spectral_spread_hz": 41.55,
+        "spectral_rolloff_85_hz": 7.65,
+        "spectral_flatness": 0.009,
+        "band_shape_distance": 0.0098,
+        "attack_peak_position": 0.071,
+        "decay_ratio": 0.089,
+        "envelope_contrast": 0.09,
+        "burst_share": 0.031
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.72,
+      "worstSegmentRisk10": 0.72,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 1.1,
+        "zeroCrossingGapStdPerSecond": 74.1,
+        "bandShapeGapStd": 0.0043,
+        "decayRatioGapStd": 0.019,
+        "rmsGapStd": 0.0001
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d240-v98",
+          "repetition": 1,
+          "risk10": 0.63,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 18.6,
+          "rmsGap": 0.0293,
+          "bandShapeGap": 0.0141,
+          "worstSegmentRisk10": 0.84,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d240-v98",
+          "repetition": 2,
+          "risk10": 0.63,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 16.5,
+          "rmsGap": 0.0291,
+          "bandShapeGap": 0.0055,
+          "worstSegmentRisk10": 0.59,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.63,
+      "riskBreakdown": {
+        "duration": 0.011764705882352941,
+        "centroid": 0.0135,
+        "zeroCrossing": 0.3405833333333333,
+        "rms": 0.18125,
+        "bandShape": 0.0196,
+        "rolloff": 0.0029423076923076924,
+        "attack": 0.07888888888888888,
+        "decay": 0.027812499999999997,
+        "burst": 0.08857142857142858
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "boss-damage-guide-window",
+      "label": "Boss damage guide window",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.04,
+        "clipStart": 1.149,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 55.15,
+      "zeroCrossingGapPerSecond": 627.45,
+      "rmsGap": 0.022,
+      "bandShapeGap": 0.0105,
+      "rolloffGapHz": 49.75,
+      "envelopeShapeGap": 0.041,
+      "activeMetrics": {
+        "duration_s": 0.225,
+        "rms": 0.2024,
+        "spectral_centroid_hz": 1399.1,
+        "zero_crossings_per_s": 1657.7,
+        "spectral_rolloff_85_hz": 2180.8,
+        "band_energy": {
+          "sub_500": 0.1107,
+          "low_mid_500_1500": 0.6078,
+          "mid_1500_3000": 0.2022,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0149
+        },
+        "attack_peak_position": 0.073,
+        "decay_ratio": 0.254,
+        "burst_share": 0.386
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0073,
+        "low_mid_500_1500": -0.0028,
+        "mid_1500_3000": 0.0012,
+        "presence_3000_6000": 0,
+        "air_6000_plus": -0.0059
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 55.15,
+        "zero_crossings_per_s": 627.45,
+        "rms": 0.022,
+        "spectral_spread_hz": 141.15,
+        "spectral_rolloff_85_hz": 49.75,
+        "spectral_flatness": 0.036,
+        "band_shape_distance": 0.0105,
+        "attack_peak_position": 0.0725,
+        "decay_ratio": 0.0755,
+        "envelope_contrast": 0.023,
+        "burst_share": 0.007
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.74,
+      "worstSegmentRisk10": 0.74,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.07,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 0.1,
+        "zeroCrossingGapStdPerSecond": 85.8,
+        "bandShapeGapStd": 0.0022,
+        "decayRatioGapStd": 0.002,
+        "rmsGapStd": 0.0036
+      },
+      "samples": [
+        {
+          "id": "boss-damage-guide-window",
+          "repetition": 1,
+          "risk10": 0.56,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 55.2,
+          "rmsGap": 0.0179,
+          "bandShapeGap": 0.0083,
+          "worstSegmentRisk10": 0.69,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "boss-damage-guide-window",
+          "repetition": 2,
+          "risk10": 0.7,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 55.1,
+          "rmsGap": 0.0251,
+          "bandShapeGap": 0.0127,
+          "worstSegmentRisk10": 0.78,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.63,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.042423076923076924,
+        "zeroCrossing": 0.34858333333333336,
+        "rms": 0.13749999999999998,
+        "bandShape": 0.021,
+        "rolloff": 0.019134615384615385,
+        "attack": 0.08055555555555555,
+        "decay": 0.023593749999999997,
+        "burst": 0.02
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d340-v118",
+      "label": "Boss Hit reference 1.149s/0.34s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.312,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.34,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.18,
+        "clipStart": 1.149,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 7.95,
+      "zeroCrossingGapPerSecond": 647.9,
+      "rmsGap": 0.025,
+      "bandShapeGap": 0.0165,
+      "rolloffGapHz": 26.15,
+      "envelopeShapeGap": 0.056,
+      "activeMetrics": {
+        "duration_s": 0.23,
+        "rms": 0.1991,
+        "spectral_centroid_hz": 1446.3,
+        "zero_crossings_per_s": 1637.2,
+        "spectral_rolloff_85_hz": 2251.2,
+        "band_energy": {
+          "sub_500": 0.116,
+          "low_mid_500_1500": 0.5965,
+          "mid_1500_3000": 0.1995,
+          "presence_3000_6000": 0.0678,
+          "air_6000_plus": 0.0202
+        },
+        "attack_peak_position": 0.089,
+        "decay_ratio": 0.264,
+        "burst_share": 0.379
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0126,
+        "low_mid_500_1500": -0.0141,
+        "mid_1500_3000": -0.0015,
+        "presence_3000_6000": 0.0035,
+        "air_6000_plus": -0.0006
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 7.95,
+        "zero_crossings_per_s": 647.9,
+        "rms": 0.025,
+        "spectral_spread_hz": 24.45,
+        "spectral_rolloff_85_hz": 26.15,
+        "spectral_flatness": 0.003,
+        "band_shape_distance": 0.0165,
+        "attack_peak_position": 0.089,
+        "decay_ratio": 0.0855,
+        "envelope_contrast": 0.037,
+        "burst_share": 0.014
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.75,
+      "worstSegmentRisk10": 0.75,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.05,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 5.9,
+        "zeroCrossingGapStdPerSecond": 4.4,
+        "bandShapeGapStd": 0.0102,
+        "decayRatioGapStd": 0.016,
+        "rmsGapStd": 0.0027
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d340-v118",
+          "repetition": 1,
+          "risk10": 0.7,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 2.1,
+          "rmsGap": 0.0221,
+          "bandShapeGap": 0.0266,
+          "worstSegmentRisk10": 0.84,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d340-v118",
+          "repetition": 2,
+          "risk10": 0.6,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 13.8,
+          "rmsGap": 0.0275,
+          "bandShapeGap": 0.0063,
+          "worstSegmentRisk10": 0.66,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.65,
+      "riskBreakdown": {
+        "duration": 0.011764705882352941,
+        "centroid": 0.006115384615384615,
+        "zeroCrossing": 0.35994444444444446,
+        "rms": 0.15625,
+        "bandShape": 0.033,
+        "rolloff": 0.010057692307692307,
+        "attack": 0.09888888888888889,
+        "decay": 0.02671875,
+        "burst": 0.04
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d240-v86",
+      "label": "Boss Hit reference 1.149s/0.24s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.2,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.149,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 6.4,
+      "zeroCrossingGapPerSecond": 633.55,
+      "rmsGap": 0.048,
+      "bandShapeGap": 0.0224,
+      "rolloffGapHz": 50.1,
+      "envelopeShapeGap": 0.039,
+      "activeMetrics": {
+        "duration_s": 0.225,
+        "rms": 0.1757,
+        "spectral_centroid_hz": 1453.4,
+        "zero_crossings_per_s": 1651.6,
+        "spectral_rolloff_85_hz": 2280.6,
+        "band_energy": {
+          "sub_500": 0.1204,
+          "low_mid_500_1500": 0.5915,
+          "mid_1500_3000": 0.1985,
+          "presence_3000_6000": 0.0687,
+          "air_6000_plus": 0.021
+        },
+        "attack_peak_position": 0.055,
+        "decay_ratio": 0.269,
+        "burst_share": 0.403
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.017,
+        "low_mid_500_1500": -0.0191,
+        "mid_1500_3000": -0.0025,
+        "presence_3000_6000": 0.0044,
+        "air_6000_plus": 0.0002
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 6.4,
+        "zero_crossings_per_s": 633.55,
+        "rms": 0.048,
+        "spectral_spread_hz": 36.65,
+        "spectral_rolloff_85_hz": 50.1,
+        "spectral_flatness": 0.005,
+        "band_shape_distance": 0.0224,
+        "attack_peak_position": 0.055,
+        "decay_ratio": 0.0905,
+        "envelope_contrast": 0.03,
+        "burst_share": 0.0105
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.8,
+      "worstSegmentRisk10": 0.8,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.05,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 0.8,
+        "zeroCrossingGapStdPerSecond": 9.9,
+        "bandShapeGapStd": 0.0129,
+        "decayRatioGapStd": 0.006,
+        "rmsGapStd": 0.0018
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d240-v86",
+          "repetition": 1,
+          "risk10": 0.69,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 7.2,
+          "rmsGap": 0.05,
+          "bandShapeGap": 0.0095,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d240-v86",
+          "repetition": 2,
+          "risk10": 0.79,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 5.6,
+          "rmsGap": 0.0465,
+          "bandShapeGap": 0.0353,
+          "worstSegmentRisk10": 0.84,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.74,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.004923076923076923,
+        "zeroCrossing": 0.3519722222222222,
+        "rms": 0.3,
+        "bandShape": 0.0448,
+        "rolloff": 0.01926923076923077,
+        "attack": 0.06111111111111111,
+        "decay": 0.028281249999999997,
+        "burst": 0.030000000000000002
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d200-v86",
+      "label": "Boss Hit reference 1.149s/0.2s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.36,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.2,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.149,
+        "clipDuration": 0.2
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 6.4,
+      "zeroCrossingGapPerSecond": 633.55,
+      "rmsGap": 0.048,
+      "bandShapeGap": 0.0224,
+      "rolloffGapHz": 50.1,
+      "envelopeShapeGap": 0.039,
+      "activeMetrics": {
+        "duration_s": 0.225,
+        "rms": 0.1757,
+        "spectral_centroid_hz": 1453.4,
+        "zero_crossings_per_s": 1651.6,
+        "spectral_rolloff_85_hz": 2280.6,
+        "band_energy": {
+          "sub_500": 0.1204,
+          "low_mid_500_1500": 0.5915,
+          "mid_1500_3000": 0.1985,
+          "presence_3000_6000": 0.0687,
+          "air_6000_plus": 0.021
+        },
+        "attack_peak_position": 0.055,
+        "decay_ratio": 0.269,
+        "burst_share": 0.403
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.017,
+        "low_mid_500_1500": -0.0191,
+        "mid_1500_3000": -0.0025,
+        "presence_3000_6000": 0.0044,
+        "air_6000_plus": 0.0002
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 6.4,
+        "zero_crossings_per_s": 633.55,
+        "rms": 0.048,
+        "spectral_spread_hz": 36.65,
+        "spectral_rolloff_85_hz": 50.1,
+        "spectral_flatness": 0.005,
+        "band_shape_distance": 0.0224,
+        "attack_peak_position": 0.055,
+        "decay_ratio": 0.0905,
+        "envelope_contrast": 0.03,
+        "burst_share": 0.0105
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.8,
+      "worstSegmentRisk10": 0.8,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.05,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 0.8,
+        "zeroCrossingGapStdPerSecond": 9.9,
+        "bandShapeGapStd": 0.0129,
+        "decayRatioGapStd": 0.006,
+        "rmsGapStd": 0.0018
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d200-v86",
+          "repetition": 1,
+          "risk10": 0.79,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 5.6,
+          "rmsGap": 0.0465,
+          "bandShapeGap": 0.0353,
+          "worstSegmentRisk10": 0.84,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d200-v86",
+          "repetition": 2,
+          "risk10": 0.69,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 7.2,
+          "rmsGap": 0.05,
+          "bandShapeGap": 0.0095,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.74,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.004923076923076923,
+        "zeroCrossing": 0.3519722222222222,
+        "rms": 0.3,
+        "bandShape": 0.0448,
+        "rolloff": 0.01926923076923077,
+        "attack": 0.06111111111111111,
+        "decay": 0.028281249999999997,
+        "burst": 0.030000000000000002
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d340-v86",
+      "label": "Boss Hit reference 1.149s/0.34s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.2,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.34,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.149,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0,
+      "centroidGapHz": 25.75,
+      "zeroCrossingGapPerSecond": 660,
+      "rmsGap": 0.048,
+      "bandShapeGap": 0.0102,
+      "rolloffGapHz": 31.85,
+      "envelopeShapeGap": 0.053,
+      "activeMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.1756,
+        "spectral_centroid_hz": 1428.5,
+        "zero_crossings_per_s": 1625.1,
+        "spectral_rolloff_85_hz": 2226,
+        "band_energy": {
+          "sub_500": 0.1121,
+          "low_mid_500_1500": 0.6043,
+          "mid_1500_3000": 0.2004,
+          "presence_3000_6000": 0.0651,
+          "air_6000_plus": 0.0182
+        },
+        "attack_peak_position": 0.074,
+        "decay_ratio": 0.259,
+        "burst_share": 0.375
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0087,
+        "low_mid_500_1500": -0.0063,
+        "mid_1500_3000": -0.0006,
+        "presence_3000_6000": 0.0008,
+        "air_6000_plus": -0.0026
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 25.75,
+        "zero_crossings_per_s": 660,
+        "rms": 0.048,
+        "spectral_spread_hz": 66.4,
+        "spectral_rolloff_85_hz": 31.85,
+        "spectral_flatness": 0.013,
+        "band_shape_distance": 0.0102,
+        "attack_peak_position": 0.074,
+        "decay_ratio": 0.081,
+        "envelope_contrast": 0.03,
+        "burst_share": 0.018
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 0.82,
+      "worstSegmentRisk10": 0.82,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset segment is comparatively close; keep it as a guardrail while other segments improve.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.05,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 18.6,
+        "zeroCrossingGapStdPerSecond": 36.4,
+        "bandShapeGapStd": 0.0007,
+        "decayRatioGapStd": 0.003,
+        "rmsGapStd": 0.0017
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d340-v86",
+          "repetition": 1,
+          "risk10": 0.69,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 7.2,
+          "rmsGap": 0.05,
+          "bandShapeGap": 0.0095,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d340-v86",
+          "repetition": 2,
+          "risk10": 0.79,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 44.3,
+          "rmsGap": 0.0466,
+          "bandShapeGap": 0.0108,
+          "worstSegmentRisk10": 0.88,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.74,
+      "riskBreakdown": {
+        "duration": 0,
+        "centroid": 0.019807692307692307,
+        "zeroCrossing": 0.36666666666666664,
+        "rms": 0.3,
+        "bandShape": 0.0204,
+        "rolloff": 0.01225,
+        "attack": 0.08222222222222221,
+        "decay": 0.025312499999999998,
+        "burst": 0.05142857142857143
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d340-v72",
+      "label": "Boss Hit reference 1.149s/0.34s v0.72",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.249,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.34,
+          "referenceVolume": 0.72
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.72,
+        "clipStart": 1.149,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 11.3,
+      "zeroCrossingGapPerSecond": 643.5,
+      "rmsGap": 0.076,
+      "bandShapeGap": 0.0309,
+      "rolloffGapHz": 79.45,
+      "envelopeShapeGap": 0.093,
+      "activeMetrics": {
+        "duration_s": 0.23,
+        "rms": 0.1482,
+        "spectral_centroid_hz": 1460.4,
+        "zero_crossings_per_s": 1641.6,
+        "spectral_rolloff_85_hz": 2310,
+        "band_energy": {
+          "sub_500": 0.1237,
+          "low_mid_500_1500": 0.5821,
+          "mid_1500_3000": 0.2023,
+          "presence_3000_6000": 0.0708,
+          "air_6000_plus": 0.0211
+        },
+        "attack_peak_position": 0.053,
+        "decay_ratio": 0.279,
+        "burst_share": 0.328
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0203,
+        "low_mid_500_1500": -0.0285,
+        "mid_1500_3000": 0.0013,
+        "presence_3000_6000": 0.0065,
+        "air_6000_plus": 0.0003
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 11.3,
+        "zero_crossings_per_s": 643.5,
+        "rms": 0.076,
+        "spectral_spread_hz": 63.95,
+        "spectral_rolloff_85_hz": 79.45,
+        "spectral_flatness": 0.012,
+        "band_shape_distance": 0.0309,
+        "attack_peak_position": 0.0535,
+        "decay_ratio": 0.1015,
+        "envelope_contrast": 0.071,
+        "burst_share": 0.0655
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 1.07,
+      "worstSegmentRisk10": 1.07,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset loudness/energy differs; tune gain after timing and timbre remain stable.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.085,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 6.2,
+        "zeroCrossingGapStdPerSecond": 0,
+        "bandShapeGapStd": 0.0147,
+        "decayRatioGapStd": 0.006,
+        "rmsGapStd": 0.0019
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d340-v72",
+          "repetition": 1,
+          "risk10": 1.07,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 17.5,
+          "rmsGap": 0.0738,
+          "bandShapeGap": 0.0456,
+          "worstSegmentRisk10": 1.15,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d340-v72",
+          "repetition": 2,
+          "risk10": 0.9,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 5.1,
+          "rmsGap": 0.0776,
+          "bandShapeGap": 0.0162,
+          "worstSegmentRisk10": 0.99,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 0.99,
+      "riskBreakdown": {
+        "duration": 0.011764705882352941,
+        "centroid": 0.008692307692307694,
+        "zeroCrossing": 0.3575,
+        "rms": 0.475,
+        "bandShape": 0.0618,
+        "rolloff": 0.03055769230769231,
+        "attack": 0.05944444444444444,
+        "decay": 0.03171875,
+        "burst": 0.18714285714285717
+      },
+      "dominantPenalty": "rms",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d290-v72",
+      "label": "Boss Hit reference 1.149s/0.29s v0.72",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.049,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.72
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.72,
+        "clipStart": 1.149,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 10.7,
+      "zeroCrossingGapPerSecond": 606.25,
+      "rmsGap": 0.074,
+      "bandShapeGap": 0.0316,
+      "rolloffGapHz": 78.8,
+      "envelopeShapeGap": 0.156,
+      "activeMetrics": {
+        "duration_s": 0.225,
+        "rms": 0.1499,
+        "spectral_centroid_hz": 1461,
+        "zero_crossings_per_s": 1678.9,
+        "spectral_rolloff_85_hz": 2309.3,
+        "band_energy": {
+          "sub_500": 0.1238,
+          "low_mid_500_1500": 0.5816,
+          "mid_1500_3000": 0.203,
+          "presence_3000_6000": 0.0706,
+          "air_6000_plus": 0.0211
+        },
+        "attack_peak_position": 0.055,
+        "decay_ratio": 0.29,
+        "burst_share": 0.263
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0204,
+        "low_mid_500_1500": -0.029,
+        "mid_1500_3000": 0.002,
+        "presence_3000_6000": 0.0063,
+        "air_6000_plus": 0.0003
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 10.7,
+        "zero_crossings_per_s": 606.25,
+        "rms": 0.074,
+        "spectral_spread_hz": 64.4,
+        "spectral_rolloff_85_hz": 78.8,
+        "spectral_flatness": 0.012,
+        "band_shape_distance": 0.0316,
+        "attack_peak_position": 0.055,
+        "decay_ratio": 0.1115,
+        "envelope_contrast": 0.083,
+        "burst_share": 0.13
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 1.07,
+      "worstSegmentRisk10": 1.07,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset loudness/energy differs; tune gain after timing and timbre remain stable.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.06,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 6.8,
+        "zeroCrossingGapStdPerSecond": 37.3,
+        "bandShapeGapStd": 0.0141,
+        "decayRatioGapStd": 0.017,
+        "rmsGapStd": 0.0003
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d290-v72",
+          "repetition": 1,
+          "risk10": 0.95,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 3.9,
+          "rmsGap": 0.0743,
+          "bandShapeGap": 0.0175,
+          "worstSegmentRisk10": 0.99,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d290-v72",
+          "repetition": 2,
+          "risk10": 1.07,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 17.5,
+          "rmsGap": 0.0738,
+          "bandShapeGap": 0.0456,
+          "worstSegmentRisk10": 1.15,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.01,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.00823076923076923,
+        "zeroCrossing": 0.3368055555555556,
+        "rms": 0.46249999999999997,
+        "bandShape": 0.0632,
+        "rolloff": 0.030307692307692306,
+        "attack": 0.06111111111111111,
+        "decay": 0.03484375,
+        "burst": 0.37142857142857144
+      },
+      "dominantPenalty": "rms",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1080-d290-v98",
+      "label": "Boss Hit reference 1.08s/0.29s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.249,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.08,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.08,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.07,
+      "centroidGapHz": 75.05,
+      "zeroCrossingGapPerSecond": 267.95,
+      "rmsGap": 0.001,
+      "bandShapeGap": 0.1242,
+      "rolloffGapHz": 52.6,
+      "envelopeShapeGap": 0.228,
+      "activeMetrics": {
+        "duration_s": 0.29,
+        "rms": 0.2243,
+        "spectral_centroid_hz": 1529.3,
+        "zero_crossings_per_s": 2017.2,
+        "spectral_rolloff_85_hz": 2283.1,
+        "band_energy": {
+          "sub_500": 0.0805,
+          "low_mid_500_1500": 0.5185,
+          "mid_1500_3000": 0.3247,
+          "presence_3000_6000": 0.0647,
+          "air_6000_plus": 0.0117
+        },
+        "attack_peak_position": 0.236,
+        "decay_ratio": 0.404,
+        "burst_share": 0.27
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0229,
+        "low_mid_500_1500": -0.0921,
+        "mid_1500_3000": 0.1237,
+        "presence_3000_6000": 0.0004,
+        "air_6000_plus": -0.0091
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.07,
+        "spectral_centroid_hz": 75.05,
+        "zero_crossings_per_s": 267.95,
+        "rms": 0.001,
+        "spectral_spread_hz": 222,
+        "spectral_rolloff_85_hz": 52.6,
+        "spectral_flatness": 0.048,
+        "band_shape_distance": 0.1242,
+        "attack_peak_position": 0.236,
+        "decay_ratio": 0.226,
+        "envelope_contrast": 0.264,
+        "burst_share": 0.123
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.3,
+      "worstSegmentRisk10": 2.3,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.055,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 2.9,
+        "zeroCrossingGapStdPerSecond": 3.4,
+        "bandShapeGapStd": 0.0002,
+        "decayRatioGapStd": 0.001,
+        "rmsGapStd": 0.0004
+      },
+      "samples": [
+        {
+          "id": "refclip-s1080-d290-v98",
+          "repetition": 1,
+          "risk10": 1.3,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 77.9,
+          "rmsGap": 0.0003,
+          "bandShapeGap": 0.124,
+          "worstSegmentRisk10": 2.4,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1080-d290-v98",
+          "repetition": 2,
+          "risk10": 1.19,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 72.2,
+          "rmsGap": 0.001,
+          "bandShapeGap": 0.1244,
+          "worstSegmentRisk10": 2.2,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.25,
+      "riskBreakdown": {
+        "duration": 0.0823529411764706,
+        "centroid": 0.05773076923076923,
+        "zeroCrossing": 0.1488611111111111,
+        "rms": 0.00625,
+        "bandShape": 0.2484,
+        "rolloff": 0.020230769230769233,
+        "attack": 0.2622222222222222,
+        "decay": 0.070625,
+        "burst": 0.3514285714285714
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1080-d290-v118",
+      "label": "Boss Hit reference 1.08s/0.29s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.319,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.08,
+          "clipDuration": 0.29,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.18,
+        "clipStart": 1.08,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.075,
+      "centroidGapHz": 84.8,
+      "zeroCrossingGapPerSecond": 230.75,
+      "rmsGap": 0.003,
+      "bandShapeGap": 0.1201,
+      "rolloffGapHz": 63.1,
+      "envelopeShapeGap": 0.226,
+      "activeMetrics": {
+        "duration_s": 0.295,
+        "rms": 0.2272,
+        "spectral_centroid_hz": 1539,
+        "zero_crossings_per_s": 2054.4,
+        "spectral_rolloff_85_hz": 2293.6,
+        "band_energy": {
+          "sub_500": 0.0883,
+          "low_mid_500_1500": 0.5126,
+          "mid_1500_3000": 0.3197,
+          "presence_3000_6000": 0.0656,
+          "air_6000_plus": 0.0139
+        },
+        "attack_peak_position": 0.26,
+        "decay_ratio": 0.39,
+        "burst_share": 0.279
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0151,
+        "low_mid_500_1500": -0.098,
+        "mid_1500_3000": 0.1187,
+        "presence_3000_6000": 0.0013,
+        "air_6000_plus": -0.0069
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.075,
+        "spectral_centroid_hz": 84.8,
+        "zero_crossings_per_s": 230.75,
+        "rms": 0.003,
+        "spectral_spread_hz": 170.1,
+        "spectral_rolloff_85_hz": 63.1,
+        "spectral_flatness": 0.035,
+        "band_shape_distance": 0.1201,
+        "attack_peak_position": 0.2595,
+        "decay_ratio": 0.212,
+        "envelope_contrast": 0.229,
+        "burst_share": 0.1135
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.39,
+      "worstSegmentRisk10": 2.39,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.05,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 1.3,
+        "zeroCrossingGapStdPerSecond": 7.7,
+        "bandShapeGapStd": 0.0009,
+        "decayRatioGapStd": 0.01,
+        "rmsGapStd": 0.0004
+      },
+      "samples": [
+        {
+          "id": "refclip-s1080-d290-v118",
+          "repetition": 1,
+          "risk10": 1.22,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 83.5,
+          "rmsGap": 0.0037,
+          "bandShapeGap": 0.121,
+          "worstSegmentRisk10": 2.31,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1080-d290-v118",
+          "repetition": 2,
+          "risk10": 1.32,
+          "durationGapSeconds": 0.08,
+          "centroidGapHz": 86.1,
+          "rmsGap": 0.0029,
+          "bandShapeGap": 0.1191,
+          "worstSegmentRisk10": 2.47,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.27,
+      "riskBreakdown": {
+        "duration": 0.08823529411764706,
+        "centroid": 0.06523076923076923,
+        "zeroCrossing": 0.12819444444444444,
+        "rms": 0.01875,
+        "bandShape": 0.2402,
+        "rolloff": 0.02426923076923077,
+        "attack": 0.28833333333333333,
+        "decay": 0.06624999999999999,
+        "burst": 0.32428571428571434
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1080-d290-v108",
+      "label": "Boss Hit reference 1.08s/0.29s v1.08",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.284,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.08,
+          "clipDuration": 0.29,
+          "referenceVolume": 1.08
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.08,
+        "clipStart": 1.08,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.075,
+      "centroidGapHz": 79.6,
+      "zeroCrossingGapPerSecond": 230.75,
+      "rmsGap": 0.003,
+      "bandShapeGap": 0.1196,
+      "rolloffGapHz": 61.35,
+      "envelopeShapeGap": 0.238,
+      "activeMetrics": {
+        "duration_s": 0.295,
+        "rms": 0.227,
+        "spectral_centroid_hz": 1533.8,
+        "zero_crossings_per_s": 2054.4,
+        "spectral_rolloff_85_hz": 2291.9,
+        "band_energy": {
+          "sub_500": 0.0862,
+          "low_mid_500_1500": 0.5158,
+          "mid_1500_3000": 0.3196,
+          "presence_3000_6000": 0.0652,
+          "air_6000_plus": 0.0132
+        },
+        "attack_peak_position": 0.288,
+        "decay_ratio": 0.397,
+        "burst_share": 0.279
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0172,
+        "low_mid_500_1500": -0.0948,
+        "mid_1500_3000": 0.1186,
+        "presence_3000_6000": 0.0009,
+        "air_6000_plus": -0.0076
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.075,
+        "spectral_centroid_hz": 79.6,
+        "zero_crossings_per_s": 230.75,
+        "rms": 0.003,
+        "spectral_spread_hz": 185.9,
+        "spectral_rolloff_85_hz": 61.35,
+        "spectral_flatness": 0.04,
+        "band_shape_distance": 0.1196,
+        "attack_peak_position": 0.2875,
+        "decay_ratio": 0.2195,
+        "envelope_contrast": 0.235,
+        "burst_share": 0.1135
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.42,
+      "worstSegmentRisk10": 2.42,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.02,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 6.5,
+        "zeroCrossingGapStdPerSecond": 7.7,
+        "bandShapeGapStd": 0.0004,
+        "decayRatioGapStd": 0.017,
+        "rmsGapStd": 0.0002
+      },
+      "samples": [
+        {
+          "id": "refclip-s1080-d290-v108",
+          "repetition": 1,
+          "risk10": 1.28,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 73.1,
+          "rmsGap": 0.0032,
+          "bandShapeGap": 0.12,
+          "worstSegmentRisk10": 2.37,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1080-d290-v108",
+          "repetition": 2,
+          "risk10": 1.32,
+          "durationGapSeconds": 0.08,
+          "centroidGapHz": 86.1,
+          "rmsGap": 0.0029,
+          "bandShapeGap": 0.1191,
+          "worstSegmentRisk10": 2.47,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.3,
+      "riskBreakdown": {
+        "duration": 0.08823529411764706,
+        "centroid": 0.06123076923076923,
+        "zeroCrossing": 0.12819444444444444,
+        "rms": 0.01875,
+        "bandShape": 0.2392,
+        "rolloff": 0.023596153846153847,
+        "attack": 0.3194444444444444,
+        "decay": 0.06859375,
+        "burst": 0.32428571428571434
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1080-d290-v86",
+      "label": "Boss Hit reference 1.08s/0.29s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.207,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.08,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.08,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.07,
+      "centroidGapHz": 81.85,
+      "zeroCrossingGapPerSecond": 216.2,
+      "rmsGap": 0.026,
+      "bandShapeGap": 0.12,
+      "rolloffGapHz": 62.95,
+      "envelopeShapeGap": 0.211,
+      "activeMetrics": {
+        "duration_s": 0.29,
+        "rms": 0.1982,
+        "spectral_centroid_hz": 1536.1,
+        "zero_crossings_per_s": 2068.9,
+        "spectral_rolloff_85_hz": 2293.5,
+        "band_energy": {
+          "sub_500": 0.0889,
+          "low_mid_500_1500": 0.5123,
+          "mid_1500_3000": 0.3198,
+          "presence_3000_6000": 0.0654,
+          "air_6000_plus": 0.0137
+        },
+        "attack_peak_position": 0.222,
+        "decay_ratio": 0.411,
+        "burst_share": 0.284
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0145,
+        "low_mid_500_1500": -0.0983,
+        "mid_1500_3000": 0.1188,
+        "presence_3000_6000": 0.0011,
+        "air_6000_plus": -0.0071
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.07,
+        "spectral_centroid_hz": 81.85,
+        "zero_crossings_per_s": 216.2,
+        "rms": 0.026,
+        "spectral_spread_hz": 172.8,
+        "spectral_rolloff_85_hz": 62.95,
+        "spectral_flatness": 0.036,
+        "band_shape_distance": 0.12,
+        "attack_peak_position": 0.222,
+        "decay_ratio": 0.233,
+        "envelope_contrast": 0.235,
+        "burst_share": 0.1095
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.51,
+      "worstSegmentRisk10": 2.51,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.05,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 2.8,
+        "zeroCrossingGapStdPerSecond": 62.2,
+        "bandShapeGapStd": 0.0029,
+        "decayRatioGapStd": 0.007,
+        "rmsGapStd": 0.0015
+      },
+      "samples": [
+        {
+          "id": "refclip-s1080-d290-v86",
+          "repetition": 1,
+          "risk10": 1.37,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 79.1,
+          "rmsGap": 0.0272,
+          "bandShapeGap": 0.1228,
+          "worstSegmentRisk10": 2.36,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1080-d290-v86",
+          "repetition": 2,
+          "risk10": 1.27,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 84.6,
+          "rmsGap": 0.0242,
+          "bandShapeGap": 0.1171,
+          "worstSegmentRisk10": 2.67,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.32,
+      "riskBreakdown": {
+        "duration": 0.0823529411764706,
+        "centroid": 0.06296153846153846,
+        "zeroCrossing": 0.1201111111111111,
+        "rms": 0.16249999999999998,
+        "bandShape": 0.24,
+        "rolloff": 0.02421153846153846,
+        "attack": 0.24666666666666667,
+        "decay": 0.0728125,
+        "burst": 0.3128571428571429
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1080-d290-v72",
+      "label": "Boss Hit reference 1.08s/0.29s v0.72",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.256,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.08,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.72
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.72,
+        "clipStart": 1.08,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.065,
+      "centroidGapHz": 73.35,
+      "zeroCrossingGapPerSecond": 154.95,
+      "rmsGap": 0.058,
+      "bandShapeGap": 0.1242,
+      "rolloffGapHz": 46.8,
+      "envelopeShapeGap": 0.232,
+      "activeMetrics": {
+        "duration_s": 0.285,
+        "rms": 0.1654,
+        "spectral_centroid_hz": 1527.6,
+        "zero_crossings_per_s": 2130.2,
+        "spectral_rolloff_85_hz": 2277.3,
+        "band_energy": {
+          "sub_500": 0.0763,
+          "low_mid_500_1500": 0.5234,
+          "mid_1500_3000": 0.3248,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0112
+        },
+        "attack_peak_position": 0.253,
+        "decay_ratio": 0.422,
+        "burst_share": 0.274
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0271,
+        "low_mid_500_1500": -0.0872,
+        "mid_1500_3000": 0.1238,
+        "presence_3000_6000": 0,
+        "air_6000_plus": -0.0096
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.065,
+        "spectral_centroid_hz": 73.35,
+        "zero_crossings_per_s": 154.95,
+        "rms": 0.058,
+        "spectral_spread_hz": 240.25,
+        "spectral_rolloff_85_hz": 46.8,
+        "spectral_flatness": 0.056,
+        "band_shape_distance": 0.1242,
+        "attack_peak_position": 0.253,
+        "decay_ratio": 0.244,
+        "envelope_contrast": 0.246,
+        "burst_share": 0.119
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.72,
+      "worstSegmentRisk10": 2.72,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.085,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 1.6,
+        "zeroCrossingGapStdPerSecond": 19.8,
+        "bandShapeGapStd": 0.0035,
+        "decayRatioGapStd": 0.027,
+        "rmsGapStd": 0.0002
+      },
+      "samples": [
+        {
+          "id": "refclip-s1080-d290-v72",
+          "repetition": 1,
+          "risk10": 1.57,
+          "durationGapSeconds": 0.07,
+          "centroidGapHz": 74.9,
+          "rmsGap": 0.0586,
+          "bandShapeGap": 0.1207,
+          "worstSegmentRisk10": 2.88,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1080-d290-v72",
+          "repetition": 2,
+          "risk10": 1.4,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 71.8,
+          "rmsGap": 0.0583,
+          "bandShapeGap": 0.1277,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.49,
+      "riskBreakdown": {
+        "duration": 0.07647058823529412,
+        "centroid": 0.056423076923076916,
+        "zeroCrossing": 0.08608333333333333,
+        "rms": 0.3625,
+        "bandShape": 0.2484,
+        "rolloff": 0.018,
+        "attack": 0.2811111111111111,
+        "decay": 0.07625,
+        "burst": 0.34
+      },
+      "dominantPenalty": "rms",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s1149-d290-v118",
+      "label": "Boss Hit reference 1.149s/0.29s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.112,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.29,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.18,
+        "clipStart": 1.149,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.065,
+      "centroidGapHz": 286.3,
+      "zeroCrossingGapPerSecond": 338.1,
+      "rmsGap": 0.02,
+      "bandShapeGap": 0.1344,
+      "rolloffGapHz": 735.4,
+      "envelopeShapeGap": 0.209,
+      "activeMetrics": {
+        "duration_s": 0.285,
+        "rms": 0.2038,
+        "spectral_centroid_hz": 1720.5,
+        "zero_crossings_per_s": 1953.5,
+        "spectral_rolloff_85_hz": 2965.9,
+        "band_energy": {
+          "sub_500": 0.1012,
+          "low_mid_500_1500": 0.4811,
+          "mid_1500_3000": 0.2643,
+          "presence_3000_6000": 0.1329,
+          "air_6000_plus": 0.0207
+        },
+        "attack_peak_position": 0.387,
+        "decay_ratio": 0.729,
+        "burst_share": 0.387
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0022,
+        "low_mid_500_1500": -0.1295,
+        "mid_1500_3000": 0.0633,
+        "presence_3000_6000": 0.0686,
+        "air_6000_plus": -0.0001
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.065,
+        "spectral_centroid_hz": 286.3,
+        "zero_crossings_per_s": 338.1,
+        "rms": 0.02,
+        "spectral_spread_hz": 162.95,
+        "spectral_rolloff_85_hz": 735.4,
+        "spectral_flatness": 0.016,
+        "band_shape_distance": 0.1344,
+        "attack_peak_position": 0.387,
+        "decay_ratio": 0.5505,
+        "envelope_contrast": 1.704,
+        "burst_share": 0.008
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.8,
+      "worstSegmentRisk10": 2.8,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.515,
+        "durationGapStdSeconds": 0.055,
+        "centroidGapStdHz": 266.3,
+        "zeroCrossingGapStdPerSecond": 331.6,
+        "bandShapeGapStd": 0.1292,
+        "decayRatioGapStd": 0.435,
+        "rmsGapStd": 0.0022
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d290-v118",
+          "repetition": 1,
+          "risk10": 3.67,
+          "durationGapSeconds": 0.12,
+          "centroidGapHz": 552.6,
+          "rmsGap": 0.0179,
+          "bandShapeGap": 0.2635,
+          "worstSegmentRisk10": 4.83,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d290-v118",
+          "repetition": 2,
+          "risk10": 0.64,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 20,
+          "rmsGap": 0.0223,
+          "bandShapeGap": 0.0052,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.15,
+      "riskBreakdown": {
+        "duration": 0.07647058823529412,
+        "centroid": 0.22023076923076923,
+        "zeroCrossing": 0.18783333333333335,
+        "rms": 0.125,
+        "bandShape": 0.2688,
+        "rolloff": 0.28284615384615386,
+        "attack": 0.43,
+        "decay": 0.17203125,
+        "burst": 0.02285714285714286
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "risk stability sd 1.515 > 0.35; centroid stability sd 266.3 Hz > 120 Hz; band-shape stability sd 0.1292 > 0.045"
+    },
+    {
+      "id": "refclip-s1149-d290-v86",
+      "label": "Boss Hit reference 1.149s/0.29s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.149,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 274.8,
+      "zeroCrossingGapPerSecond": 338.6,
+      "rmsGap": 0.033,
+      "bandShapeGap": 0.1341,
+      "rolloffGapHz": 737.85,
+      "envelopeShapeGap": 0.209,
+      "activeMetrics": {
+        "duration_s": 0.28,
+        "rms": 0.1906,
+        "spectral_centroid_hz": 1721.8,
+        "zero_crossings_per_s": 2000.1,
+        "spectral_rolloff_85_hz": 2968.4,
+        "band_energy": {
+          "sub_500": 0.1042,
+          "low_mid_500_1500": 0.48,
+          "mid_1500_3000": 0.2626,
+          "presence_3000_6000": 0.1319,
+          "air_6000_plus": 0.0215
+        },
+        "attack_peak_position": 0.371,
+        "decay_ratio": 0.772,
+        "burst_share": 0.383
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0008,
+        "low_mid_500_1500": -0.1306,
+        "mid_1500_3000": 0.0616,
+        "presence_3000_6000": 0.0676,
+        "air_6000_plus": 0.0007
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 274.8,
+        "zero_crossings_per_s": 338.6,
+        "rms": 0.033,
+        "spectral_spread_hz": 138.25,
+        "spectral_rolloff_85_hz": 737.85,
+        "spectral_flatness": 0.008,
+        "band_shape_distance": 0.1341,
+        "attack_peak_position": 0.3705,
+        "decay_ratio": 0.594,
+        "envelope_contrast": 1.679,
+        "burst_share": 0.0105
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.86,
+      "worstSegmentRisk10": 2.86,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.5,
+        "durationGapStdSeconds": 0.06,
+        "centroidGapStdHz": 267.6,
+        "zeroCrossingGapStdPerSecond": 285,
+        "bandShapeGapStd": 0.1246,
+        "decayRatioGapStd": 0.51,
+        "rmsGapStd": 0.0167
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d290-v86",
+          "repetition": 1,
+          "risk10": 3.69,
+          "durationGapSeconds": 0.12,
+          "centroidGapHz": 542.4,
+          "rmsGap": 0.0166,
+          "bandShapeGap": 0.2587,
+          "worstSegmentRisk10": 4.95,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d290-v86",
+          "repetition": 2,
+          "risk10": 0.69,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 7.2,
+          "rmsGap": 0.05,
+          "bandShapeGap": 0.0095,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.19,
+      "riskBreakdown": {
+        "duration": 0.07058823529411765,
+        "centroid": 0.2113846153846154,
+        "zeroCrossing": 0.18811111111111112,
+        "rms": 0.20625000000000002,
+        "bandShape": 0.2682,
+        "rolloff": 0.28378846153846154,
+        "attack": 0.4116666666666666,
+        "decay": 0.18562499999999998,
+        "burst": 0.030000000000000002
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "risk stability sd 1.5 > 0.35; centroid stability sd 267.6 Hz > 120 Hz; band-shape stability sd 0.1246 > 0.045"
+    },
+    {
+      "id": "refclip-s1149-d240-v118",
+      "label": "Boss Hit reference 1.149s/0.24s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.312,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.24,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.18,
+        "clipStart": 1.149,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.0695,
+      "centroidGapHz": 288.6,
+      "zeroCrossingGapPerSecond": 485.65,
+      "rmsGap": 0.022,
+      "bandShapeGap": 0.1344,
+      "rolloffGapHz": 718.4,
+      "envelopeShapeGap": 0.219,
+      "activeMetrics": {
+        "duration_s": 0.29,
+        "rms": 0.2024,
+        "spectral_centroid_hz": 1722.8,
+        "zero_crossings_per_s": 2101.1,
+        "spectral_rolloff_85_hz": 2948.9,
+        "band_energy": {
+          "sub_500": 0.1005,
+          "low_mid_500_1500": 0.4817,
+          "mid_1500_3000": 0.264,
+          "presence_3000_6000": 0.1333,
+          "air_6000_plus": 0.0207
+        },
+        "attack_peak_position": 0.391,
+        "decay_ratio": 0.69,
+        "burst_share": 0.372
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0029,
+        "low_mid_500_1500": -0.1289,
+        "mid_1500_3000": 0.063,
+        "presence_3000_6000": 0.069,
+        "air_6000_plus": -0.0001
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0695,
+        "spectral_centroid_hz": 288.6,
+        "zero_crossings_per_s": 485.65,
+        "rms": 0.022,
+        "spectral_spread_hz": 162.15,
+        "spectral_rolloff_85_hz": 718.4,
+        "spectral_flatness": 0.013,
+        "band_shape_distance": 0.1344,
+        "attack_peak_position": 0.3905,
+        "decay_ratio": 0.512,
+        "envelope_contrast": 1.698,
+        "burst_share": 0.0215
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.81,
+      "worstSegmentRisk10": 2.81,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.6,
+        "durationGapStdSeconds": 0.06,
+        "centroidGapStdHz": 268.6,
+        "zeroCrossingGapStdPerSecond": 184.1,
+        "bandShapeGapStd": 0.1292,
+        "decayRatioGapStd": 0.396,
+        "rmsGapStd": 0.0008
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d240-v118",
+          "repetition": 1,
+          "risk10": 0.64,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 20,
+          "rmsGap": 0.0223,
+          "bandShapeGap": 0.0052,
+          "worstSegmentRisk10": 0.76,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d240-v118",
+          "repetition": 2,
+          "risk10": 3.84,
+          "durationGapSeconds": 0.129,
+          "centroidGapHz": 557.2,
+          "rmsGap": 0.0207,
+          "bandShapeGap": 0.2636,
+          "worstSegmentRisk10": 4.85,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.24,
+      "riskBreakdown": {
+        "duration": 0.08176470588235295,
+        "centroid": 0.22200000000000003,
+        "zeroCrossing": 0.2698055555555555,
+        "rms": 0.13749999999999998,
+        "bandShape": 0.2688,
+        "rolloff": 0.2763076923076923,
+        "attack": 0.4338888888888889,
+        "decay": 0.16,
+        "burst": 0.06142857142857143
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "risk stability sd 1.6 > 0.35; centroid stability sd 268.6 Hz > 120 Hz; band-shape stability sd 0.1292 > 0.045"
+    },
+    {
+      "id": "refclip-s1149-d290-v108",
+      "label": "Boss Hit reference 1.149s/0.29s v1.08",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.077,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.29,
+          "referenceVolume": 1.08
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.08,
+        "clipStart": 1.149,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.0505,
+      "centroidGapHz": 267.7,
+      "zeroCrossingGapPerSecond": 667.75,
+      "rmsGap": 0.014,
+      "bandShapeGap": 0.137,
+      "rolloffGapHz": 722.6,
+      "envelopeShapeGap": 0.262,
+      "activeMetrics": {
+        "duration_s": 0.271,
+        "rms": 0.2106,
+        "spectral_centroid_hz": 1708.1,
+        "zero_crossings_per_s": 1617.4,
+        "spectral_rolloff_85_hz": 2947.6,
+        "band_energy": {
+          "sub_500": 0.1128,
+          "low_mid_500_1500": 0.4748,
+          "mid_1500_3000": 0.2594,
+          "presence_3000_6000": 0.132,
+          "air_6000_plus": 0.0212
+        },
+        "attack_peak_position": 0.417,
+        "decay_ratio": 1.063,
+        "burst_share": 0.394
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0094,
+        "low_mid_500_1500": -0.1358,
+        "mid_1500_3000": 0.0584,
+        "presence_3000_6000": 0.0677,
+        "air_6000_plus": 0.0004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0505,
+        "spectral_centroid_hz": 267.7,
+        "zero_crossings_per_s": 667.75,
+        "rms": 0.014,
+        "spectral_spread_hz": 148.15,
+        "spectral_rolloff_85_hz": 722.6,
+        "spectral_flatness": 0.007,
+        "band_shape_distance": 0.137,
+        "attack_peak_position": 0.417,
+        "decay_ratio": 0.885,
+        "envelope_contrast": 0.58,
+        "burst_share": 0.0155
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.3,
+      "worstSegmentRisk10": 2.3,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.725,
+        "durationGapStdSeconds": 0.04,
+        "centroidGapStdHz": 253.9,
+        "zeroCrossingGapStdPerSecond": 15.5,
+        "bandShapeGapStd": 0.1306,
+        "decayRatioGapStd": 0.816,
+        "rmsGapStd": 0.0134
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d290-v108",
+          "repetition": 1,
+          "risk10": 4.05,
+          "durationGapSeconds": 0.091,
+          "centroidGapHz": 521.6,
+          "rmsGap": 0.0008,
+          "bandShapeGap": 0.2676,
+          "worstSegmentRisk10": 3.93,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d290-v108",
+          "repetition": 2,
+          "risk10": 0.6,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 13.8,
+          "rmsGap": 0.0275,
+          "bandShapeGap": 0.0063,
+          "worstSegmentRisk10": 0.66,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.33,
+      "riskBreakdown": {
+        "duration": 0.05941176470588236,
+        "centroid": 0.2059230769230769,
+        "zeroCrossing": 0.3709722222222222,
+        "rms": 0.0875,
+        "bandShape": 0.274,
+        "rolloff": 0.27792307692307694,
+        "attack": 0.4633333333333333,
+        "decay": 0.2765625,
+        "burst": 0.04428571428571429
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "risk stability sd 1.725 > 0.35; centroid stability sd 253.9 Hz > 120 Hz; band-shape stability sd 0.1306 > 0.045"
+    },
+    {
+      "id": "refclip-s1020-d290-v86",
+      "label": "Boss Hit reference 1.02s/0.29s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.387,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.02,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.02,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.119,
+      "centroidGapHz": 250.2,
+      "zeroCrossingGapPerSecond": 160.8,
+      "rmsGap": 0.022,
+      "bandShapeGap": 0.1921,
+      "rolloffGapHz": 527.2,
+      "envelopeShapeGap": 0.348,
+      "activeMetrics": {
+        "duration_s": 0.339,
+        "rms": 0.2018,
+        "spectral_centroid_hz": 1704.4,
+        "zero_crossings_per_s": 2124.3,
+        "spectral_rolloff_85_hz": 2757.7,
+        "band_energy": {
+          "sub_500": 0.0639,
+          "low_mid_500_1500": 0.4673,
+          "mid_1500_3000": 0.3507,
+          "presence_3000_6000": 0.1067,
+          "air_6000_plus": 0.0115
+        },
+        "attack_peak_position": 0.357,
+        "decay_ratio": 0.57,
+        "burst_share": 0.209
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0395,
+        "low_mid_500_1500": -0.1433,
+        "mid_1500_3000": 0.1497,
+        "presence_3000_6000": 0.0424,
+        "air_6000_plus": -0.0093
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.119,
+        "spectral_centroid_hz": 250.2,
+        "zero_crossings_per_s": 160.8,
+        "rms": 0.022,
+        "spectral_spread_hz": 175.9,
+        "spectral_rolloff_85_hz": 527.2,
+        "spectral_flatness": 0.046,
+        "band_shape_distance": 0.1921,
+        "attack_peak_position": 0.357,
+        "decay_ratio": 0.392,
+        "envelope_contrast": 0.22,
+        "burst_share": 0.184
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 3.64,
+      "worstSegmentRisk10": 3.64,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 0,
+        "zeroCrossingGapStdPerSecond": 0,
+        "bandShapeGapStd": 0,
+        "decayRatioGapStd": 0,
+        "rmsGapStd": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s1020-d290-v86",
+          "repetition": 1,
+          "risk10": 2.33,
+          "durationGapSeconds": 0.119,
+          "centroidGapHz": 250.2,
+          "rmsGap": 0.0221,
+          "bandShapeGap": 0.1921,
+          "worstSegmentRisk10": 3.64,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1020-d290-v86",
+          "repetition": 2,
+          "risk10": 2.33,
+          "durationGapSeconds": 0.119,
+          "centroidGapHz": 250.2,
+          "rmsGap": 0.0221,
+          "bandShapeGap": 0.1921,
+          "worstSegmentRisk10": 3.64,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.33,
+      "riskBreakdown": {
+        "duration": 0.13999999999999999,
+        "centroid": 0.19246153846153846,
+        "zeroCrossing": 0.08933333333333333,
+        "rms": 0.13749999999999998,
+        "bandShape": 0.3842,
+        "rolloff": 0.20276923076923078,
+        "attack": 0.3966666666666666,
+        "decay": 0.1225,
+        "burst": 0.5257142857142857
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "duration gap improved only -0.074s"
+    },
+    {
+      "id": "refclip-s1149-d340-v98",
+      "label": "Boss Hit reference 1.149s/0.34s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.242,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.34,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.149,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0.0205,
+      "centroidGapHz": 273.55,
+      "zeroCrossingGapPerSecond": 541.7,
+      "rmsGap": 0.022,
+      "bandShapeGap": 0.1408,
+      "rolloffGapHz": 725.05,
+      "envelopeShapeGap": 0.331,
+      "activeMetrics": {
+        "duration_s": 0.241,
+        "rms": 0.2202,
+        "spectral_centroid_hz": 1710.8,
+        "zero_crossings_per_s": 1743.4,
+        "spectral_rolloff_85_hz": 2955.6,
+        "band_energy": {
+          "sub_500": 0.1132,
+          "low_mid_500_1500": 0.4715,
+          "mid_1500_3000": 0.2615,
+          "presence_3000_6000": 0.1326,
+          "air_6000_plus": 0.0212
+        },
+        "attack_peak_position": 0.538,
+        "decay_ratio": 1.151,
+        "burst_share": 0.424
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0098,
+        "low_mid_500_1500": -0.1391,
+        "mid_1500_3000": 0.0605,
+        "presence_3000_6000": 0.0683,
+        "air_6000_plus": 0.0004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0205,
+        "spectral_centroid_hz": 273.55,
+        "zero_crossings_per_s": 541.7,
+        "rms": 0.022,
+        "spectral_spread_hz": 181.6,
+        "spectral_rolloff_85_hz": 725.05,
+        "spectral_flatness": 0.031,
+        "band_shape_distance": 0.1408,
+        "attack_peak_position": 0.5375,
+        "decay_ratio": 0.973,
+        "envelope_contrast": 0.059,
+        "burst_share": 0.045
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 2.52,
+      "worstSegmentRisk10": 2.52,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.775,
+        "durationGapStdSeconds": 0.011,
+        "centroidGapStdHz": 256.6,
+        "zeroCrossingGapStdPerSecond": 93.1,
+        "bandShapeGapStd": 0.1341,
+        "decayRatioGapStd": 0.859,
+        "rmsGapStd": 0.0037
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d340-v98",
+          "repetition": 1,
+          "risk10": 0.64,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 17,
+          "rmsGap": 0.026,
+          "bandShapeGap": 0.0067,
+          "worstSegmentRisk10": 0.81,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d340-v98",
+          "repetition": 2,
+          "risk10": 4.19,
+          "durationGapSeconds": 0.031,
+          "centroidGapHz": 530.1,
+          "rmsGap": 0.0186,
+          "bandShapeGap": 0.2749,
+          "worstSegmentRisk10": 4.23,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.46,
+      "riskBreakdown": {
+        "duration": 0.024117647058823532,
+        "centroid": 0.21042307692307693,
+        "zeroCrossing": 0.30094444444444446,
+        "rms": 0.13749999999999998,
+        "bandShape": 0.2816,
+        "rolloff": 0.27886538461538457,
+        "attack": 0.5972222222222222,
+        "decay": 0.30406249999999996,
+        "burst": 0.1285714285714286
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "risk stability sd 1.775 > 0.35; centroid stability sd 256.6 Hz > 120 Hz; band-shape stability sd 0.1341 > 0.045"
+    },
+    {
+      "id": "refclip-s1149-d240-v72",
+      "label": "Boss Hit reference 1.149s/0.24s v0.72",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.249,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.149,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.72
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.72,
+        "clipStart": 1.149,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.0245,
+      "centroidGapHz": 283.6,
+      "zeroCrossingGapPerSecond": 545.3,
+      "rmsGap": 0.042,
+      "bandShapeGap": 0.2084,
+      "rolloffGapHz": 809.1,
+      "envelopeShapeGap": 0.362,
+      "activeMetrics": {
+        "duration_s": 0.206,
+        "rms": 0.1818,
+        "spectral_centroid_hz": 1737.8,
+        "zero_crossings_per_s": 1739.8,
+        "spectral_rolloff_85_hz": 3039.6,
+        "band_energy": {
+          "sub_500": 0.1572,
+          "low_mid_500_1500": 0.4034,
+          "mid_1500_3000": 0.2624,
+          "presence_3000_6000": 0.1508,
+          "air_6000_plus": 0.0262
+        },
+        "attack_peak_position": 0.359,
+        "decay_ratio": 2.115,
+        "burst_share": 0.334
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0538,
+        "low_mid_500_1500": -0.2072,
+        "mid_1500_3000": 0.0614,
+        "presence_3000_6000": 0.0865,
+        "air_6000_plus": 0.0054
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0245,
+        "spectral_centroid_hz": 283.6,
+        "zero_crossings_per_s": 545.3,
+        "rms": 0.042,
+        "spectral_spread_hz": 181.6,
+        "spectral_rolloff_85_hz": 809.1,
+        "spectral_flatness": 0.022,
+        "band_shape_distance": 0.2084,
+        "attack_peak_position": 0.359,
+        "decay_ratio": 1.937,
+        "envelope_contrast": 1.571,
+        "burst_share": 0.0595
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 3.26,
+      "worstSegmentRisk10": 3.26,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.705,
+        "durationGapStdSeconds": 0.014,
+        "centroidGapStdHz": 266.1,
+        "zeroCrossingGapStdPerSecond": 98.2,
+        "bandShapeGapStd": 0.1628,
+        "decayRatioGapStd": 1.842,
+        "rmsGapStd": 0.0317
+      },
+      "samples": [
+        {
+          "id": "refclip-s1149-d240-v72",
+          "repetition": 1,
+          "risk10": 1.07,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 17.5,
+          "rmsGap": 0.0738,
+          "bandShapeGap": 0.0456,
+          "worstSegmentRisk10": 1.15,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1149-d240-v72",
+          "repetition": 2,
+          "risk10": 4.48,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 549.7,
+          "rmsGap": 0.0105,
+          "bandShapeGap": 0.3711,
+          "worstSegmentRisk10": 5.37,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.83,
+      "riskBreakdown": {
+        "duration": 0.028823529411764706,
+        "centroid": 0.21815384615384617,
+        "zeroCrossing": 0.3029444444444444,
+        "rms": 0.2625,
+        "bandShape": 0.4168,
+        "rolloff": 0.3111923076923077,
+        "attack": 0.39888888888888885,
+        "decay": 0.6053125,
+        "burst": 0.17
+      },
+      "dominantPenalty": "decay",
+      "keeperRead": "risk stability sd 1.705 > 0.35; centroid stability sd 266.1 Hz > 120 Hz; band-shape stability sd 0.1628 > 0.045; decay stability sd 1.842 > 1.2"
+    },
+    {
+      "id": "refclip-s1200-d290-v98",
+      "label": "Boss Hit reference 1.2s/0.29s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.195,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.2,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.0395,
+      "centroidGapHz": 365.05,
+      "zeroCrossingGapPerSecond": 737,
+      "rmsGap": 0.045,
+      "bandShapeGap": 0.2243,
+      "rolloffGapHz": 797.9,
+      "envelopeShapeGap": 0.414,
+      "activeMetrics": {
+        "duration_s": 0.181,
+        "rms": 0.179,
+        "spectral_centroid_hz": 1636.2,
+        "zero_crossings_per_s": 1548.1,
+        "spectral_rolloff_85_hz": 2911.2,
+        "band_energy": {
+          "sub_500": 0.1672,
+          "low_mid_500_1500": 0.4024,
+          "mid_1500_3000": 0.271,
+          "presence_3000_6000": 0.1413,
+          "air_6000_plus": 0.0182
+        },
+        "attack_peak_position": 0.563,
+        "decay_ratio": 1.954,
+        "burst_share": 0.349
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0638,
+        "low_mid_500_1500": -0.2082,
+        "mid_1500_3000": 0.07,
+        "presence_3000_6000": 0.077,
+        "air_6000_plus": -0.0026
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0395,
+        "spectral_centroid_hz": 365.05,
+        "zero_crossings_per_s": 737,
+        "rms": 0.045,
+        "spectral_spread_hz": 275.2,
+        "spectral_rolloff_85_hz": 797.9,
+        "spectral_flatness": 0.043,
+        "band_shape_distance": 0.2243,
+        "attack_peak_position": 0.563,
+        "decay_ratio": 1.8905,
+        "envelope_contrast": 2.49,
+        "burst_share": 0.0445
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 3.69,
+      "worstSegmentRisk10": 3.69,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.655,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 182,
+        "zeroCrossingGapStdPerSecond": 204.2,
+        "bandShapeGapStd": 0.1633,
+        "decayRatioGapStd": 1.776,
+        "rmsGapStd": 0.0245
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d290-v98",
+          "repetition": 1,
+          "risk10": 1.6,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 183.1,
+          "rmsGap": 0.0693,
+          "bandShapeGap": 0.061,
+          "worstSegmentRisk10": 2.14,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d290-v98",
+          "repetition": 2,
+          "risk10": 4.91,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 547,
+          "rmsGap": 0.0204,
+          "bandShapeGap": 0.3876,
+          "worstSegmentRisk10": 5.23,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 3.33,
+      "riskBreakdown": {
+        "duration": 0.04647058823529412,
+        "centroid": 0.2808076923076923,
+        "zeroCrossing": 0.40944444444444444,
+        "rms": 0.28125,
+        "bandShape": 0.4486,
+        "rolloff": 0.30688461538461537,
+        "attack": 0.6255555555555555,
+        "decay": 0.59078125,
+        "burst": 0.12714285714285714
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "risk stability sd 1.655 > 0.35; centroid stability sd 182 Hz > 120 Hz; band-shape stability sd 0.1633 > 0.045; decay stability sd 1.776 > 1.2"
+    },
+    {
+      "id": "refclip-s1280-d290-v86",
+      "label": "Boss Hit reference 1.28s/0.29s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.393,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.28,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.28,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.1005,
+      "centroidGapHz": 535.45,
+      "zeroCrossingGapPerSecond": 341.15,
+      "rmsGap": 0.011,
+      "bandShapeGap": 0.2633,
+      "rolloffGapHz": 1442.3,
+      "envelopeShapeGap": 0.432,
+      "activeMetrics": {
+        "duration_s": 0.321,
+        "rms": 0.217,
+        "spectral_centroid_hz": 1989.7,
+        "zero_crossings_per_s": 1944,
+        "spectral_rolloff_85_hz": 3672.8,
+        "band_energy": {
+          "sub_500": 0.1064,
+          "low_mid_500_1500": 0.351,
+          "mid_1500_3000": 0.3222,
+          "presence_3000_6000": 0.1969,
+          "air_6000_plus": 0.0236
+        },
+        "attack_peak_position": 0.726,
+        "decay_ratio": 1.485,
+        "burst_share": 0.421
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.003,
+        "low_mid_500_1500": -0.2596,
+        "mid_1500_3000": 0.1212,
+        "presence_3000_6000": 0.1326,
+        "air_6000_plus": 0.0028
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.1005,
+        "spectral_centroid_hz": 535.45,
+        "zero_crossings_per_s": 341.15,
+        "rms": 0.011,
+        "spectral_spread_hz": 248.45,
+        "spectral_rolloff_85_hz": 1442.3,
+        "spectral_flatness": 0.02,
+        "band_shape_distance": 0.2633,
+        "attack_peak_position": 0.7255,
+        "decay_ratio": 1.3065,
+        "envelope_contrast": 2.138,
+        "burst_share": 0.028
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.42,
+      "worstSegmentRisk10": 4.42,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.195,
+        "durationGapStdSeconds": 0.019,
+        "centroidGapStdHz": 20.6,
+        "zeroCrossingGapStdPerSecond": 338.8,
+        "bandShapeGapStd": 0.0008,
+        "decayRatioGapStd": 0.343,
+        "rmsGapStd": 0.0069
+      },
+      "samples": [
+        {
+          "id": "refclip-s1280-d290-v86",
+          "repetition": 1,
+          "risk10": 4.06,
+          "durationGapSeconds": 0.081,
+          "centroidGapHz": 514.9,
+          "rmsGap": 0.0043,
+          "bandShapeGap": 0.2624,
+          "worstSegmentRisk10": 4,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1280-d290-v86",
+          "repetition": 2,
+          "risk10": 3.67,
+          "durationGapSeconds": 0.12,
+          "centroidGapHz": 556,
+          "rmsGap": 0.0181,
+          "bandShapeGap": 0.2641,
+          "worstSegmentRisk10": 4.83,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 3.86,
+      "riskBreakdown": {
+        "duration": 0.11823529411764706,
+        "centroid": 0.4118846153846154,
+        "zeroCrossing": 0.18952777777777777,
+        "rms": 0.06874999999999999,
+        "bandShape": 0.5266,
+        "rolloff": 0.5547307692307692,
+        "attack": 0.8061111111111111,
+        "decay": 0.40828125,
+        "burst": 0.08
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "duration gap improved only -0.056s"
+    },
+    {
+      "id": "refclip-s1200-d240-v98",
+      "label": "Boss Hit reference 1.2s/0.24s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.395,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.2,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.039,
+      "centroidGapHz": 581.6,
+      "zeroCrossingGapPerSecond": 380.9,
+      "rmsGap": 0.01,
+      "bandShapeGap": 0.366,
+      "rolloffGapHz": 1555.8,
+      "envelopeShapeGap": 0.537,
+      "activeMetrics": {
+        "duration_s": 0.181,
+        "rms": 0.2135,
+        "spectral_centroid_hz": 2035.8,
+        "zero_crossings_per_s": 1904.2,
+        "spectral_rolloff_85_hz": 3786.3,
+        "band_energy": {
+          "sub_500": 0.1719,
+          "low_mid_500_1500": 0.2446,
+          "mid_1500_3000": 0.3208,
+          "presence_3000_6000": 0.2312,
+          "air_6000_plus": 0.0317
+        },
+        "attack_peak_position": 0.545,
+        "decay_ratio": 3.886,
+        "burst_share": 0.391
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0685,
+        "low_mid_500_1500": -0.366,
+        "mid_1500_3000": 0.1198,
+        "presence_3000_6000": 0.1669,
+        "air_6000_plus": 0.0109
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.039,
+        "spectral_centroid_hz": 581.6,
+        "zero_crossings_per_s": 380.9,
+        "rms": 0.01,
+        "spectral_spread_hz": 350.85,
+        "spectral_rolloff_85_hz": 1555.8,
+        "spectral_flatness": 0.05,
+        "band_shape_distance": 0.366,
+        "attack_peak_position": 0.545,
+        "decay_ratio": 3.708,
+        "envelope_contrast": 2.927,
+        "burst_share": 0.002
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.05,
+      "worstSegmentRisk10": 5.05,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 0,
+        "zeroCrossingGapStdPerSecond": 0,
+        "bandShapeGapStd": 0,
+        "decayRatioGapStd": 0,
+        "rmsGapStd": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d240-v98",
+          "repetition": 1,
+          "risk10": 4.32,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 581.6,
+          "rmsGap": 0.0104,
+          "bandShapeGap": 0.366,
+          "worstSegmentRisk10": 5.05,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d240-v98",
+          "repetition": 2,
+          "risk10": 4.32,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 581.6,
+          "rmsGap": 0.0104,
+          "bandShapeGap": 0.366,
+          "worstSegmentRisk10": 5.05,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.32,
+      "riskBreakdown": {
+        "duration": 0.04588235294117647,
+        "centroid": 0.4473846153846154,
+        "zeroCrossing": 0.2116111111111111,
+        "rms": 0.0625,
+        "bandShape": 0.732,
+        "rolloff": 0.5983846153846154,
+        "attack": 0.6055555555555556,
+        "decay": 1,
+        "burst": 0.005714285714285715
+      },
+      "dominantPenalty": "decay",
+      "keeperRead": "segment risk improved only 0.06"
+    },
+    {
+      "id": "refclip-s1200-d240-v86",
+      "label": "Boss Hit reference 1.2s/0.24s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.353,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.24,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.2,
+        "clipDuration": 0.24
+      },
+      "durationGapSeconds": 0.0845,
+      "centroidGapHz": 550.95,
+      "zeroCrossingGapPerSecond": 287.3,
+      "rmsGap": 0.019,
+      "bandShapeGap": 0.3214,
+      "rolloffGapHz": 1479.65,
+      "envelopeShapeGap": 0.538,
+      "activeMetrics": {
+        "duration_s": 0.256,
+        "rms": 0.2047,
+        "spectral_centroid_hz": 2005.2,
+        "zero_crossings_per_s": 2039.6,
+        "spectral_rolloff_85_hz": 3710.2,
+        "band_energy": {
+          "sub_500": 0.1437,
+          "low_mid_500_1500": 0.292,
+          "mid_1500_3000": 0.3207,
+          "presence_3000_6000": 0.2174,
+          "air_6000_plus": 0.0262
+        },
+        "attack_peak_position": 0.845,
+        "decay_ratio": 2.557,
+        "burst_share": 0.368
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0403,
+        "low_mid_500_1500": -0.3186,
+        "mid_1500_3000": 0.1197,
+        "presence_3000_6000": 0.1531,
+        "air_6000_plus": 0.0054
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0845,
+        "spectral_centroid_hz": 550.95,
+        "zero_crossings_per_s": 287.3,
+        "rms": 0.019,
+        "spectral_spread_hz": 274,
+        "spectral_rolloff_85_hz": 1479.65,
+        "spectral_flatness": 0.028,
+        "band_shape_distance": 0.3214,
+        "attack_peak_position": 0.845,
+        "decay_ratio": 2.3785,
+        "envelope_contrast": 3.262,
+        "burst_share": 0.025
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.96,
+      "worstSegmentRisk10": 4.96,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.585,
+        "durationGapStdSeconds": 0.036,
+        "centroidGapStdHz": 3.8,
+        "zeroCrossingGapStdPerSecond": 245.5,
+        "bandShapeGapStd": 0.062,
+        "decayRatioGapStd": 1.364,
+        "rmsGapStd": 0.0002
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d240-v86",
+          "repetition": 1,
+          "risk10": 3.73,
+          "durationGapSeconds": 0.12,
+          "centroidGapHz": 554.7,
+          "rmsGap": 0.019,
+          "bandShapeGap": 0.2594,
+          "worstSegmentRisk10": 4.82,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d240-v86",
+          "repetition": 2,
+          "risk10": 4.9,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 547.2,
+          "rmsGap": 0.0194,
+          "bandShapeGap": 0.3834,
+          "worstSegmentRisk10": 5.1,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.43,
+      "riskBreakdown": {
+        "duration": 0.09941176470588237,
+        "centroid": 0.42380769230769233,
+        "zeroCrossing": 0.15961111111111112,
+        "rms": 0.11875,
+        "bandShape": 0.6428,
+        "rolloff": 0.5690961538461539,
+        "attack": 0.9388888888888889,
+        "decay": 0.7432812499999999,
+        "burst": 0.07142857142857144
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only 0.15; risk stability sd 0.585 > 0.35; band-shape stability sd 0.062 > 0.045; decay stability sd 1.364 > 1.2"
+    },
+    {
+      "id": "refclip-s1200-d290-v118",
+      "label": "Boss Hit reference 1.2s/0.29s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.265,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.29,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.18,
+        "clipStart": 1.2,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.039,
+      "centroidGapHz": 533.85,
+      "zeroCrossingGapPerSecond": 458.2,
+      "rmsGap": 0.015,
+      "bandShapeGap": 0.3719,
+      "rolloffGapHz": 1484.05,
+      "envelopeShapeGap": 0.621,
+      "activeMetrics": {
+        "duration_s": 0.181,
+        "rms": 0.2091,
+        "spectral_centroid_hz": 1988.1,
+        "zero_crossings_per_s": 1826.9,
+        "spectral_rolloff_85_hz": 3714.6,
+        "band_energy": {
+          "sub_500": 0.1817,
+          "low_mid_500_1500": 0.2387,
+          "mid_1500_3000": 0.3214,
+          "presence_3000_6000": 0.2308,
+          "air_6000_plus": 0.0275
+        },
+        "attack_peak_position": 0.773,
+        "decay_ratio": 3.75,
+        "burst_share": 0.391
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0783,
+        "low_mid_500_1500": -0.3719,
+        "mid_1500_3000": 0.1204,
+        "presence_3000_6000": 0.1665,
+        "air_6000_plus": 0.0067
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.039,
+        "spectral_centroid_hz": 533.85,
+        "zero_crossings_per_s": 458.2,
+        "rms": 0.015,
+        "spectral_spread_hz": 280.55,
+        "spectral_rolloff_85_hz": 1484.05,
+        "spectral_flatness": 0.017,
+        "band_shape_distance": 0.3719,
+        "attack_peak_position": 0.773,
+        "decay_ratio": 3.5715,
+        "envelope_contrast": 2.892,
+        "burst_share": 0.002
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.39,
+      "worstSegmentRisk10": 5.39,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.095,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 5.3,
+        "zeroCrossingGapStdPerSecond": 0,
+        "bandShapeGapStd": 0.0058,
+        "decayRatioGapStd": 0.042,
+        "rmsGapStd": 0.002
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d290-v118",
+          "repetition": 1,
+          "risk10": 4.68,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 539.1,
+          "rmsGap": 0.0128,
+          "bandShapeGap": 0.366,
+          "worstSegmentRisk10": 5.36,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d290-v118",
+          "repetition": 2,
+          "risk10": 4.49,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 528.6,
+          "rmsGap": 0.0169,
+          "bandShapeGap": 0.3777,
+          "worstSegmentRisk10": 5.41,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.59,
+      "riskBreakdown": {
+        "duration": 0.04588235294117647,
+        "centroid": 0.41065384615384615,
+        "zeroCrossing": 0.25455555555555553,
+        "rms": 0.09375,
+        "bandShape": 0.7438,
+        "rolloff": 0.5707884615384615,
+        "attack": 0.8588888888888889,
+        "decay": 1,
+        "burst": 0.005714285714285715
+      },
+      "dominantPenalty": "decay",
+      "keeperRead": "segment risk improved only -0.28"
+    },
+    {
+      "id": "refclip-s1200-d290-v86",
+      "label": "Boss Hit reference 1.2s/0.29s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.153,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.2,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.034,
+      "centroidGapHz": 559.2,
+      "zeroCrossingGapPerSecond": 433.9,
+      "rmsGap": 0.01,
+      "bandShapeGap": 0.3572,
+      "rolloffGapHz": 1520.15,
+      "envelopeShapeGap": 0.712,
+      "activeMetrics": {
+        "duration_s": 0.186,
+        "rms": 0.2138,
+        "spectral_centroid_hz": 2013.4,
+        "zero_crossings_per_s": 1851.2,
+        "spectral_rolloff_85_hz": 3750.7,
+        "band_energy": {
+          "sub_500": 0.1682,
+          "low_mid_500_1500": 0.2534,
+          "mid_1500_3000": 0.3237,
+          "presence_3000_6000": 0.2247,
+          "air_6000_plus": 0.0301
+        },
+        "attack_peak_position": 0.98,
+        "decay_ratio": 3.609,
+        "burst_share": 0.413
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0648,
+        "low_mid_500_1500": -0.3572,
+        "mid_1500_3000": 0.1227,
+        "presence_3000_6000": 0.1604,
+        "air_6000_plus": 0.0093
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.034,
+        "spectral_centroid_hz": 559.2,
+        "zero_crossings_per_s": 433.9,
+        "rms": 0.01,
+        "spectral_spread_hz": 322.95,
+        "spectral_rolloff_85_hz": 1520.15,
+        "spectral_flatness": 0.043,
+        "band_shape_distance": 0.3572,
+        "attack_peak_position": 0.98,
+        "decay_ratio": 3.431,
+        "envelope_contrast": 2.072,
+        "burst_share": 0.049
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.35,
+      "worstSegmentRisk10": 5.35,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.2,
+        "durationGapStdSeconds": 0.015,
+        "centroidGapStdHz": 24.6,
+        "zeroCrossingGapStdPerSecond": 58,
+        "bandShapeGapStd": 0.0226,
+        "decayRatioGapStd": 0.253,
+        "rmsGapStd": 0.0087
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d290-v86",
+          "repetition": 1,
+          "risk10": 4.93,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 583.8,
+          "rmsGap": 0.0188,
+          "bandShapeGap": 0.3798,
+          "worstSegmentRisk10": 5.36,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d290-v86",
+          "repetition": 2,
+          "risk10": 4.53,
+          "durationGapSeconds": 0.019,
+          "centroidGapHz": 534.6,
+          "rmsGap": 0.0015,
+          "bandShapeGap": 0.3346,
+          "worstSegmentRisk10": 5.33,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.74,
+      "riskBreakdown": {
+        "duration": 0.04,
+        "centroid": 0.43015384615384616,
+        "zeroCrossing": 0.24105555555555555,
+        "rms": 0.0625,
+        "bandShape": 0.7144,
+        "rolloff": 0.5846730769230769,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.14
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only -0.24"
+    },
+    {
+      "id": "refclip-s1200-d340-v98",
+      "label": "Boss Hit reference 1.2s/0.34s v0.98",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.395,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.34,
+          "referenceVolume": 0.98
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.98,
+        "clipStart": 1.2,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0.034,
+      "centroidGapHz": 603.35,
+      "zeroCrossingGapPerSecond": 431.75,
+      "rmsGap": 0.011,
+      "bandShapeGap": 0.3626,
+      "rolloffGapHz": 1553.5,
+      "envelopeShapeGap": 0.678,
+      "activeMetrics": {
+        "duration_s": 0.186,
+        "rms": 0.2128,
+        "spectral_centroid_hz": 2057.6,
+        "zero_crossings_per_s": 1853.4,
+        "spectral_rolloff_85_hz": 3784,
+        "band_energy": {
+          "sub_500": 0.1679,
+          "low_mid_500_1500": 0.248,
+          "mid_1500_3000": 0.3232,
+          "presence_3000_6000": 0.2262,
+          "air_6000_plus": 0.0348
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 3.577,
+        "burst_share": 0.404
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0645,
+        "low_mid_500_1500": -0.3626,
+        "mid_1500_3000": 0.1222,
+        "presence_3000_6000": 0.1619,
+        "air_6000_plus": 0.014
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.034,
+        "spectral_centroid_hz": 603.35,
+        "zero_crossings_per_s": 431.75,
+        "rms": 0.011,
+        "spectral_spread_hz": 396.55,
+        "spectral_rolloff_85_hz": 1553.5,
+        "spectral_flatness": 0.069,
+        "band_shape_distance": 0.3626,
+        "attack_peak_position": 1,
+        "decay_ratio": 3.3985,
+        "envelope_contrast": 2.595,
+        "burst_share": 0.013
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.43,
+      "worstSegmentRisk10": 5.43,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.125,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 13.9,
+        "zeroCrossingGapStdPerSecond": 92.6,
+        "bandShapeGapStd": 0.0109,
+        "decayRatioGapStd": 0.22,
+        "rmsGapStd": 0.0062
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d340-v98",
+          "repetition": 1,
+          "risk10": 4.67,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 589.5,
+          "rmsGap": 0.005,
+          "bandShapeGap": 0.3517,
+          "worstSegmentRisk10": 5.39,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d340-v98",
+          "repetition": 2,
+          "risk10": 4.92,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 617.2,
+          "rmsGap": 0.0173,
+          "bandShapeGap": 0.3735,
+          "worstSegmentRisk10": 5.47,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.8,
+      "riskBreakdown": {
+        "duration": 0.04,
+        "centroid": 0.46411538461538465,
+        "zeroCrossing": 0.2398611111111111,
+        "rms": 0.06874999999999999,
+        "bandShape": 0.7252,
+        "rolloff": 0.5975,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.037142857142857144
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only -0.32"
+    },
+    {
+      "id": "refclip-s1200-d290-v108",
+      "label": "Boss Hit reference 1.2s/0.29s v1.08",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.23,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.29,
+          "referenceVolume": 1.08
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 1.08,
+        "clipStart": 1.2,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.044,
+      "centroidGapHz": 554.55,
+      "zeroCrossingGapPerSecond": 476.15,
+      "rmsGap": 0.016,
+      "bandShapeGap": 0.3745,
+      "rolloffGapHz": 1517.55,
+      "envelopeShapeGap": 0.682,
+      "activeMetrics": {
+        "duration_s": 0.176,
+        "rms": 0.2077,
+        "spectral_centroid_hz": 2008.8,
+        "zero_crossings_per_s": 1809,
+        "spectral_rolloff_85_hz": 3748.1,
+        "band_energy": {
+          "sub_500": 0.1796,
+          "low_mid_500_1500": 0.2362,
+          "mid_1500_3000": 0.3212,
+          "presence_3000_6000": 0.2351,
+          "air_6000_plus": 0.0281
+        },
+        "attack_peak_position": 0.978,
+        "decay_ratio": 3.907,
+        "burst_share": 0.378
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0762,
+        "low_mid_500_1500": -0.3744,
+        "mid_1500_3000": 0.1202,
+        "presence_3000_6000": 0.1708,
+        "air_6000_plus": 0.0073
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.044,
+        "spectral_centroid_hz": 554.55,
+        "zero_crossings_per_s": 476.15,
+        "rms": 0.016,
+        "spectral_spread_hz": 290.15,
+        "spectral_rolloff_85_hz": 1517.55,
+        "spectral_flatness": 0.025,
+        "band_shape_distance": 0.3745,
+        "attack_peak_position": 0.9775,
+        "decay_ratio": 3.729,
+        "envelope_contrast": 3.02,
+        "burst_share": 0.0155
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.3,
+      "worstSegmentRisk10": 5.3,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.07,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 7.3,
+        "zeroCrossingGapStdPerSecond": 56.6,
+        "bandShapeGapStd": 0.0091,
+        "decayRatioGapStd": 0.013,
+        "rmsGapStd": 0.0032
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d290-v108",
+          "repetition": 1,
+          "risk10": 4.9,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 547.2,
+          "rmsGap": 0.0194,
+          "bandShapeGap": 0.3835,
+          "worstSegmentRisk10": 5.1,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d290-v108",
+          "repetition": 2,
+          "risk10": 4.76,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 561.9,
+          "rmsGap": 0.013,
+          "bandShapeGap": 0.3654,
+          "worstSegmentRisk10": 5.49,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.83,
+      "riskBreakdown": {
+        "duration": 0.05176470588235294,
+        "centroid": 0.426576923076923,
+        "zeroCrossing": 0.26452777777777775,
+        "rms": 0.1,
+        "bandShape": 0.749,
+        "rolloff": 0.5836730769230769,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.04428571428571429
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only -0.19"
+    },
+    {
+      "id": "refclip-s1200-d340-v86",
+      "label": "Boss Hit reference 1.2s/0.34s v0.86",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.353,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.34,
+          "referenceVolume": 0.86
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.86,
+        "clipStart": 1.2,
+        "clipDuration": 0.34
+      },
+      "durationGapSeconds": 0.039,
+      "centroidGapHz": 554.7,
+      "zeroCrossingGapPerSecond": 465.6,
+      "rmsGap": 0.017,
+      "bandShapeGap": 0.3794,
+      "rolloffGapHz": 1493.8,
+      "envelopeShapeGap": 0.692,
+      "activeMetrics": {
+        "duration_s": 0.181,
+        "rms": 0.2074,
+        "spectral_centroid_hz": 2008.9,
+        "zero_crossings_per_s": 1819.5,
+        "spectral_rolloff_85_hz": 3724.3,
+        "band_energy": {
+          "sub_500": 0.184,
+          "low_mid_500_1500": 0.2312,
+          "mid_1500_3000": 0.3236,
+          "presence_3000_6000": 0.2326,
+          "air_6000_plus": 0.0288
+        },
+        "attack_peak_position": 0.957,
+        "decay_ratio": 3.868,
+        "burst_share": 0.39
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0806,
+        "low_mid_500_1500": -0.3794,
+        "mid_1500_3000": 0.1226,
+        "presence_3000_6000": 0.1683,
+        "air_6000_plus": 0.008
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.039,
+        "spectral_centroid_hz": 554.7,
+        "zero_crossings_per_s": 465.6,
+        "rms": 0.017,
+        "spectral_spread_hz": 307.65,
+        "spectral_rolloff_85_hz": 1493.8,
+        "spectral_flatness": 0.036,
+        "band_shape_distance": 0.3794,
+        "attack_peak_position": 0.9565,
+        "decay_ratio": 3.69,
+        "envelope_contrast": 2.997,
+        "burst_share": 0.0265
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.71,
+      "worstSegmentRisk10": 5.71,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.09,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 28.1,
+        "zeroCrossingGapStdPerSecond": 84.7,
+        "bandShapeGapStd": 0.0168,
+        "decayRatioGapStd": 0.175,
+        "rmsGapStd": 0.0082
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d340-v86",
+          "repetition": 1,
+          "risk10": 4.92,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 526.6,
+          "rmsGap": 0.0247,
+          "bandShapeGap": 0.3962,
+          "worstSegmentRisk10": 5.53,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d340-v86",
+          "repetition": 2,
+          "risk10": 4.74,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 582.8,
+          "rmsGap": 0.0083,
+          "bandShapeGap": 0.3626,
+          "worstSegmentRisk10": 5.88,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.83,
+      "riskBreakdown": {
+        "duration": 0.04588235294117647,
+        "centroid": 0.4266923076923077,
+        "zeroCrossing": 0.25866666666666666,
+        "rms": 0.10625000000000001,
+        "bandShape": 0.7588,
+        "rolloff": 0.5745384615384616,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.07571428571428572
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only -0.6"
+    },
+    {
+      "id": "refclip-s1200-d290-v72",
+      "label": "Boss Hit reference 1.2s/0.29s v0.72",
+      "generated": true,
+      "generator": {
+        "family": "boss-hit-reference-subclip-grid",
+        "heuristic": 0.202,
+        "target": "Make boss damage feel distinct, compact, and more substantial than enemyHit while staying smaller than bossBoom.",
+        "params": {
+          "clipStart": 1.2,
+          "clipDuration": 0.29,
+          "referenceVolume": 0.72
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "cooldownMs": 240,
+        "referenceVolume": 0.72,
+        "clipStart": 1.2,
+        "clipDuration": 0.29
+      },
+      "durationGapSeconds": 0.036,
+      "centroidGapHz": 539.7,
+      "zeroCrossingGapPerSecond": 739.75,
+      "rmsGap": 0.034,
+      "bandShapeGap": 0.3462,
+      "rolloffGapHz": 1505.7,
+      "envelopeShapeGap": 0.696,
+      "activeMetrics": {
+        "duration_s": 0.256,
+        "rms": 0.1954,
+        "spectral_centroid_hz": 1993.9,
+        "zero_crossings_per_s": 1545.4,
+        "spectral_rolloff_85_hz": 3736.2,
+        "band_energy": {
+          "sub_500": 0.1666,
+          "low_mid_500_1500": 0.2644,
+          "mid_1500_3000": 0.3187,
+          "presence_3000_6000": 0.2233,
+          "air_6000_plus": 0.027
+        },
+        "attack_peak_position": 0.982,
+        "decay_ratio": 3.437,
+        "burst_share": 0.332
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0632,
+        "low_mid_500_1500": -0.3462,
+        "mid_1500_3000": 0.1177,
+        "presence_3000_6000": 0.159,
+        "air_6000_plus": 0.0062
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.036,
+        "spectral_centroid_hz": 539.7,
+        "zero_crossings_per_s": 739.75,
+        "rms": 0.034,
+        "spectral_spread_hz": 291.1,
+        "spectral_rolloff_85_hz": 1505.7,
+        "spectral_flatness": 0.033,
+        "band_shape_distance": 0.3462,
+        "attack_peak_position": 0.982,
+        "decay_ratio": 3.259,
+        "envelope_contrast": 1.761,
+        "burst_share": 0.082
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.71,
+      "worstSegmentRisk10": 4.71,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.6,
+        "durationGapStdSeconds": 0.025,
+        "centroidGapStdHz": 8.8,
+        "zeroCrossingGapStdPerSecond": 345.8,
+        "bandShapeGapStd": 0.0384,
+        "decayRatioGapStd": 1.009,
+        "rmsGapStd": 0.0285
+      },
+      "samples": [
+        {
+          "id": "refclip-s1200-d290-v72",
+          "repetition": 1,
+          "risk10": 5.46,
+          "durationGapSeconds": 0.061,
+          "centroidGapHz": 530.9,
+          "rmsGap": 0.0621,
+          "bandShapeGap": 0.3846,
+          "worstSegmentRisk10": 5.1,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s1200-d290-v72",
+          "repetition": 2,
+          "risk10": 4.26,
+          "durationGapSeconds": 0.011,
+          "centroidGapHz": 548.5,
+          "rmsGap": 0.0051,
+          "bandShapeGap": 0.3078,
+          "worstSegmentRisk10": 4.31,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 4.96,
+      "riskBreakdown": {
+        "duration": 0.042352941176470586,
+        "centroid": 0.4151538461538462,
+        "zeroCrossing": 0.41097222222222224,
+        "rms": 0.21250000000000002,
+        "bandShape": 0.6924,
+        "rolloff": 0.5791153846153846,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.23428571428571432
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "whole-cue risk improved only 0.23; risk stability sd 0.6 > 0.35"
+    },
+    {
+      "id": "two-step-boss-chip",
+      "label": "Two-step boss chip",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "seq": [
+          620,
+          410
+        ],
+        "step": 0.034,
+        "wave": "triangle",
+        "volume": 0.011,
+        "slide": -115,
+        "lpHz": 2100,
+        "tones": [
+          {
+            "freq": 210,
+            "duration": 0.105,
+            "wave": "triangle",
+            "volume": 0.009,
+            "slide": -55,
+            "lpHz": 1300,
+            "delay": 0.036
+          }
+        ],
+        "noise": [
+          {
+            "duration": 0.026,
+            "volume": 0.0014,
+            "hp": 760,
+            "delay": 0.006
+          }
+        ]
+      },
+      "durationGapSeconds": 0.046,
+      "centroidGapHz": 531.25,
+      "zeroCrossingGapPerSecond": 831.35,
+      "rmsGap": 0.045,
+      "bandShapeGap": 0.3472,
+      "rolloffGapHz": 1462.25,
+      "envelopeShapeGap": 0.722,
+      "activeMetrics": {
+        "duration_s": 0.266,
+        "rms": 0.1901,
+        "spectral_centroid_hz": 1985.5,
+        "zero_crossings_per_s": 1453.8,
+        "spectral_rolloff_85_hz": 3692.8,
+        "band_energy": {
+          "sub_500": 0.1702,
+          "low_mid_500_1500": 0.2633,
+          "mid_1500_3000": 0.3194,
+          "presence_3000_6000": 0.2194,
+          "air_6000_plus": 0.0278
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 3.353,
+        "burst_share": 0.33
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0668,
+        "low_mid_500_1500": -0.3473,
+        "mid_1500_3000": 0.1184,
+        "presence_3000_6000": 0.1551,
+        "air_6000_plus": 0.007
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.046,
+        "spectral_centroid_hz": 531.25,
+        "zero_crossings_per_s": 831.35,
+        "rms": 0.045,
+        "spectral_spread_hz": 294,
+        "spectral_rolloff_85_hz": 1462.25,
+        "spectral_flatness": 0.03,
+        "band_shape_distance": 0.3472,
+        "attack_peak_position": 1,
+        "decay_ratio": 3.1745,
+        "envelope_contrast": 1.63,
+        "burst_share": 0.1185
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 4.86,
+      "worstSegmentRisk10": 4.86,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.7,
+        "durationGapStdSeconds": 0.035,
+        "centroidGapStdHz": 35.1,
+        "zeroCrossingGapStdPerSecond": 463.5,
+        "bandShapeGapStd": 0.0502,
+        "decayRatioGapStd": 1.066,
+        "rmsGapStd": 0.0338
+      },
+      "samples": [
+        {
+          "id": "two-step-boss-chip",
+          "repetition": 1,
+          "risk10": 5.67,
+          "durationGapSeconds": 0.081,
+          "centroidGapHz": 496.1,
+          "rmsGap": 0.0784,
+          "bandShapeGap": 0.3974,
+          "worstSegmentRisk10": 5.33,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "two-step-boss-chip",
+          "repetition": 2,
+          "risk10": 4.27,
+          "durationGapSeconds": 0.011,
+          "centroidGapHz": 566.4,
+          "rmsGap": 0.0108,
+          "bandShapeGap": 0.2971,
+          "worstSegmentRisk10": 4.39,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.07,
+      "riskBreakdown": {
+        "duration": 0.05411764705882353,
+        "centroid": 0.40865384615384615,
+        "zeroCrossing": 0.4618611111111111,
+        "rms": 0.28125,
+        "bandShape": 0.6944,
+        "rolloff": 0.5624038461538462,
+        "attack": 1,
+        "decay": 0.99203125,
+        "burst": 0.3385714285714286
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "whole-cue risk improved only 0.12; segment risk improved only 0.25; risk stability sd 0.7 > 0.35; zero-crossing stability sd 463.5/s > 420/s; band-shape stability sd 0.0502 > 0.045"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "spec": null,
+      "durationGapSeconds": 0.045,
+      "centroidGapHz": 602.9,
+      "zeroCrossingGapPerSecond": 764.25,
+      "rmsGap": 0.038,
+      "bandShapeGap": 0.3671,
+      "rolloffGapHz": 1548.1,
+      "envelopeShapeGap": 0.742,
+      "activeMetrics": {
+        "duration_s": 0.256,
+        "rms": 0.1857,
+        "spectral_centroid_hz": 2057.1,
+        "zero_crossings_per_s": 1520.9,
+        "spectral_rolloff_85_hz": 3778.6,
+        "band_energy": {
+          "sub_500": 0.1767,
+          "low_mid_500_1500": 0.2435,
+          "mid_1500_3000": 0.3168,
+          "presence_3000_6000": 0.2275,
+          "air_6000_plus": 0.0357
+        },
+        "attack_peak_position": 0.948,
+        "decay_ratio": 3.625,
+        "burst_share": 0.309
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0733,
+        "low_mid_500_1500": -0.3671,
+        "mid_1500_3000": 0.1158,
+        "presence_3000_6000": 0.1632,
+        "air_6000_plus": 0.0149
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.045,
+        "spectral_centroid_hz": 602.9,
+        "zero_crossings_per_s": 764.25,
+        "rms": 0.038,
+        "spectral_spread_hz": 410.55,
+        "spectral_rolloff_85_hz": 1548.1,
+        "spectral_flatness": 0.068,
+        "band_shape_distance": 0.3671,
+        "attack_peak_position": 0.948,
+        "decay_ratio": 3.4465,
+        "envelope_contrast": 3.028,
+        "burst_share": 0.098
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.11,
+      "worstSegmentRisk10": 5.11,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.715,
+        "durationGapStdSeconds": 0.036,
+        "centroidGapStdHz": 70.2,
+        "zeroCrossingGapStdPerSecond": 397.6,
+        "bandShapeGapStd": 0.0302,
+        "decayRatioGapStd": 0.595,
+        "rmsGapStd": 0.034
+      },
+      "samples": [
+        {
+          "id": "baseline-current",
+          "repetition": 1,
+          "risk10": 4.44,
+          "durationGapSeconds": 0.009,
+          "centroidGapHz": 532.7,
+          "rmsGap": 0.0042,
+          "bandShapeGap": 0.3369,
+          "worstSegmentRisk10": 4.86,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "baseline-current",
+          "repetition": 2,
+          "risk10": 5.87,
+          "durationGapSeconds": 0.081,
+          "centroidGapHz": 673.1,
+          "rmsGap": 0.0722,
+          "bandShapeGap": 0.3973,
+          "worstSegmentRisk10": 5.36,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.19,
+      "riskBreakdown": {
+        "duration": 0.052941176470588235,
+        "centroid": 0.46376923076923077,
+        "zeroCrossing": 0.4245833333333333,
+        "rms": 0.2375,
+        "bandShape": 0.7342,
+        "rolloff": 0.5954230769230768,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.28
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "baseline"
+    },
+    {
+      "id": "lowmid-boss-damage-snap",
+      "label": "Low-mid boss damage snap",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "tones": [
+          {
+            "freq": 360,
+            "duration": 0.075,
+            "wave": "triangle",
+            "volume": 0.014,
+            "slide": -145,
+            "lpHz": 2200
+          },
+          {
+            "freq": 185,
+            "duration": 0.12,
+            "wave": "sawtooth",
+            "volume": 0.012,
+            "slide": -80,
+            "lpHz": 1500,
+            "delay": 0.014
+          },
+          {
+            "freq": 720,
+            "duration": 0.04,
+            "wave": "triangle",
+            "volume": 0.006,
+            "slide": -260,
+            "lpHz": 2600,
+            "delay": 0.006
+          }
+        ],
+        "noise": [
+          {
+            "duration": 0.032,
+            "volume": 0.0024,
+            "hp": 920,
+            "delay": 0.008
+          }
+        ]
+      },
+      "durationGapSeconds": 0.055,
+      "centroidGapHz": 627.75,
+      "zeroCrossingGapPerSecond": 771.35,
+      "rmsGap": 0.04,
+      "bandShapeGap": 0.38,
+      "rolloffGapHz": 1559.4,
+      "envelopeShapeGap": 0.765,
+      "activeMetrics": {
+        "duration_s": 0.246,
+        "rms": 0.1837,
+        "spectral_centroid_hz": 2082,
+        "zero_crossings_per_s": 1513.8,
+        "spectral_rolloff_85_hz": 3789.9,
+        "band_energy": {
+          "sub_500": 0.1803,
+          "low_mid_500_1500": 0.2306,
+          "mid_1500_3000": 0.3188,
+          "presence_3000_6000": 0.2335,
+          "air_6000_plus": 0.0369
+        },
+        "attack_peak_position": 0.943,
+        "decay_ratio": 4.129,
+        "burst_share": 0.314
+      },
+      "referenceMetrics": {
+        "duration_s": 0.22,
+        "rms": 0.2239,
+        "spectral_centroid_hz": 1454.2,
+        "zero_crossings_per_s": 2285.1,
+        "spectral_rolloff_85_hz": 2230.5,
+        "band_energy": {
+          "sub_500": 0.1034,
+          "low_mid_500_1500": 0.6106,
+          "mid_1500_3000": 0.201,
+          "presence_3000_6000": 0.0643,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0,
+        "decay_ratio": 0.178,
+        "burst_share": 0.393
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0769,
+        "low_mid_500_1500": -0.38,
+        "mid_1500_3000": 0.1178,
+        "presence_3000_6000": 0.1692,
+        "air_6000_plus": 0.0161
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.055,
+        "spectral_centroid_hz": 627.75,
+        "zero_crossings_per_s": 771.35,
+        "rms": 0.04,
+        "spectral_spread_hz": 429.9,
+        "spectral_rolloff_85_hz": 1559.4,
+        "spectral_flatness": 0.077,
+        "band_shape_distance": 0.38,
+        "attack_peak_position": 0.943,
+        "decay_ratio": 3.9505,
+        "envelope_contrast": 3.028,
+        "burst_share": 0.103
+      },
+      "segmentRoleComparisonCount": 1,
+      "averageSegmentRisk10": 5.62,
+      "worstSegmentRisk10": 5.62,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.565,
+        "durationGapStdSeconds": 0.026,
+        "centroidGapStdHz": 45.4,
+        "zeroCrossingGapStdPerSecond": 390.5,
+        "bandShapeGapStd": 0.0174,
+        "decayRatioGapStd": 0.091,
+        "rmsGapStd": 0.032
+      },
+      "samples": [
+        {
+          "id": "lowmid-boss-damage-snap",
+          "repetition": 1,
+          "risk10": 4.74,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 582.4,
+          "rmsGap": 0.0083,
+          "bandShapeGap": 0.3626,
+          "worstSegmentRisk10": 5.88,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "lowmid-boss-damage-snap",
+          "repetition": 2,
+          "risk10": 5.87,
+          "durationGapSeconds": 0.081,
+          "centroidGapHz": 673.1,
+          "rmsGap": 0.0722,
+          "bandShapeGap": 0.3973,
+          "worstSegmentRisk10": 5.36,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 5.3,
+      "riskBreakdown": {
+        "duration": 0.06470588235294118,
+        "centroid": 0.4828846153846154,
+        "zeroCrossing": 0.4285277777777778,
+        "rms": 0.25,
+        "bandShape": 0.76,
+        "rolloff": 0.5997692307692308,
+        "attack": 1,
+        "decay": 1,
+        "burst": 0.29428571428571426
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "whole-cue risk improved only -0.11; segment risk improved only -0.51; risk stability sd 0.565 > 0.35"
+    }
+  ],
+  "decision": {
+    "status": "candidate-recommended",
+    "keep": true,
+    "baseline": "baseline-current",
+    "best": "refclip-s1149-d240-v108",
+    "measuredBest": "refclip-s1149-d240-v108",
+    "riskDelta": 4.59,
+    "segmentRiskDelta": 4.38,
+    "durationDeltaSeconds": 0.04,
+    "bandDelta": 0.3603,
+    "reason": "Boss Hit candidate clears measured keeper gates."
+  },
+  "nextStep": "Promote refclip-s1149-d240-v108 for Boss Hit, then rerun the full audio comparison and event-gap rollup."
+}

@@ -1,0 +1,5162 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop",
+  "generatedAt": "2026-05-09T20:34:49.814Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "e8d1c7ef",
+  "dirty": true,
+  "key": "boss-boom",
+  "title": "Boss Boom",
+  "cue": "bossBoom",
+  "repetitions": 2,
+  "problem": "Boss Boom should be the largest destruction cue in the hierarchy, but it needs a focused loop to compare reference phrase windows, body/tail duration, and boss-finality scale.",
+  "strategy": "Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.",
+  "successMeasure": "A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.",
+  "source": {
+    "comparisonSet": "boss-boom-compare",
+    "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+    "referenceWindow": {
+      "startSeconds": 0.798,
+      "endSeconds": 1.567,
+      "source": "aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 active-window measurement",
+      "selection": "full active boss-death phrase so destruction can be scored as a larger multi-burst event rather than a single generic explosion"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-e8d1c7ef-dirty-audio-focus-203449/boss-boom/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-e8d1c7ef-dirty-audio-focus-203449/boss-boom/metrics.json",
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "label": "boss death opening burst",
+          "start_s": 0.052,
+          "end_s": 0.233,
+          "duration_s": 0.181,
+          "metrics": {
+            "duration_s": 0.181,
+            "peak": 0.7174,
+            "rms": 0.2801,
+            "spectral_centroid_hz": 1688.9,
+            "zero_crossings_per_s": 2232.1,
+            "spectral_spread_hz": 1387.7,
+            "spectral_rolloff_85_hz": 2005.5,
+            "spectral_flatness": 0.1621,
+            "band_energy": {
+              "sub_500": 0.1604,
+              "low_mid_500_1500": 0.2882,
+              "mid_1500_3000": 0.48,
+              "presence_3000_6000": 0.0443,
+              "air_6000_plus": 0.0272
+            },
+            "attack_peak_position": 0.591,
+            "decay_ratio": 1.453,
+            "envelope_contrast": 1.03,
+            "burst_share": 0.261
+          },
+          "curated": true
+        },
+        {
+          "role": "body",
+          "label": "boss death main burst",
+          "start_s": 0.252,
+          "end_s": 0.433,
+          "duration_s": 0.181,
+          "metrics": {
+            "duration_s": 0.181,
+            "peak": 0.7076,
+            "rms": 0.2692,
+            "spectral_centroid_hz": 1898.2,
+            "zero_crossings_per_s": 2270.7,
+            "spectral_spread_hz": 1657.2,
+            "spectral_rolloff_85_hz": 2281.8,
+            "spectral_flatness": 0.2319,
+            "band_energy": {
+              "sub_500": 0.1469,
+              "low_mid_500_1500": 0.1694,
+              "mid_1500_3000": 0.5833,
+              "presence_3000_6000": 0.0586,
+              "air_6000_plus": 0.0418
+            },
+            "attack_peak_position": 0.364,
+            "decay_ratio": 1.376,
+            "envelope_contrast": 1.078,
+            "burst_share": 0.478
+          },
+          "curated": true
+        },
+        {
+          "role": "tail",
+          "label": "boss death final burst",
+          "start_s": 0.601,
+          "end_s": 0.769,
+          "duration_s": 0.168,
+          "metrics": {
+            "duration_s": 0.168,
+            "peak": 0.7216,
+            "rms": 0.2088,
+            "spectral_centroid_hz": 1900.5,
+            "zero_crossings_per_s": 2690.8,
+            "spectral_spread_hz": 1472.9,
+            "spectral_rolloff_85_hz": 2684.8,
+            "spectral_flatness": 0.1574,
+            "band_energy": {
+              "sub_500": 0.0477,
+              "low_mid_500_1500": 0.3803,
+              "mid_1500_3000": 0.4904,
+              "presence_3000_6000": 0.0564,
+              "air_6000_plus": 0.0251
+            },
+            "attack_peak_position": 0.238,
+            "decay_ratio": 0.009,
+            "envelope_contrast": 21.592,
+            "burst_share": 0.318
+          },
+          "curated": true
+        }
+      ],
+      "summary": {
+        "segmentCount": 3,
+        "status": "curated-reference-segmentation",
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0.052,
+          "end_s": 0.233
+        },
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 0.798-1.567s boss-death window; labels early, middle, and final destruction bursts",
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 boss-death burst candidates"
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "refclip-s798-d640-v104",
+      "label": "Boss Boom reference 0.798s/0.64s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.579,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.64,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.798,
+        "clipDuration": 0.64
+      },
+      "durationGapSeconds": 0.025,
+      "centroidGapHz": 27.45,
+      "zeroCrossingGapPerSecond": 289.15,
+      "rmsGap": 0.014,
+      "bandShapeGap": 0.0465,
+      "rolloffGapHz": 83,
+      "envelopeShapeGap": 0.047,
+      "activeMetrics": {
+        "duration_s": 0.295,
+        "rms": 0.2392,
+        "spectral_centroid_hz": 1665.3,
+        "zero_crossings_per_s": 2148.1,
+        "spectral_rolloff_85_hz": 2195.9,
+        "band_energy": {
+          "sub_500": 0.1482,
+          "low_mid_500_1500": 0.2457,
+          "mid_1500_3000": 0.5433,
+          "presence_3000_6000": 0.0427,
+          "air_6000_plus": 0.0202
+        },
+        "attack_peak_position": 0.986,
+        "decay_ratio": 1.209,
+        "burst_share": 0.467
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0035,
+        "low_mid_500_1500": -0.0368,
+        "mid_1500_3000": 0.0401,
+        "presence_3000_6000": -0.0012,
+        "air_6000_plus": -0.0056
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.025,
+        "spectral_centroid_hz": 27.45,
+        "zero_crossings_per_s": 289.15,
+        "rms": 0.014,
+        "spectral_spread_hz": 96.75,
+        "spectral_rolloff_85_hz": 83,
+        "spectral_flatness": 0.023,
+        "band_shape_distance": 0.0465,
+        "attack_peak_position": 0.014,
+        "decay_ratio": 0.3325,
+        "envelope_contrast": 0.087,
+        "burst_share": 0.0075
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.32,
+      "worstSegmentRisk10": 2.74,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "tail reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.285,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 15.1,
+        "zeroCrossingGapStdPerSecond": 165.4,
+        "bandShapeGapStd": 0.042,
+        "decayRatioGapStd": 0.079,
+        "rmsGapStd": 0.0064
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d640-v104",
+          "repetition": 1,
+          "risk10": 0.29,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 12.4,
+          "rmsGap": 0.0207,
+          "bandShapeGap": 0.0045,
+          "worstSegmentRisk10": 2.45,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d640-v104",
+          "repetition": 2,
+          "risk10": 0.86,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 42.5,
+          "rmsGap": 0.008,
+          "bandShapeGap": 0.0884,
+          "worstSegmentRisk10": 3.03,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 0.57,
+      "riskBreakdown": {
+        "duration": 0.029411764705882356,
+        "centroid": 0.021115384615384616,
+        "zeroCrossing": 0.1606388888888889,
+        "rms": 0.0875,
+        "bandShape": 0.093,
+        "rolloff": 0.03192307692307692,
+        "attack": 0.015555555555555555,
+        "decay": 0.10390625,
+        "burst": 0.02142857142857143
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s798-d640-v130",
+      "label": "Boss Boom reference 0.798s/0.64s v1.3",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.67,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.64,
+          "referenceVolume": 1.3
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.3,
+        "clipStart": 0.798,
+        "clipDuration": 0.64
+      },
+      "durationGapSeconds": 0.025,
+      "centroidGapHz": 9.55,
+      "zeroCrossingGapPerSecond": 490.15,
+      "rmsGap": 0.007,
+      "bandShapeGap": 0.0841,
+      "rolloffGapHz": 171.05,
+      "envelopeShapeGap": 0.131,
+      "activeMetrics": {
+        "duration_s": 0.295,
+        "rms": 0.2466,
+        "spectral_centroid_hz": 1702.3,
+        "zero_crossings_per_s": 2349.1,
+        "spectral_rolloff_85_hz": 2289.6,
+        "band_energy": {
+          "sub_500": 0.1509,
+          "low_mid_500_1500": 0.2026,
+          "mid_1500_3000": 0.5807,
+          "presence_3000_6000": 0.0441,
+          "air_6000_plus": 0.0218
+        },
+        "attack_peak_position": 0.793,
+        "decay_ratio": 1.111,
+        "burst_share": 0.453
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0062,
+        "low_mid_500_1500": -0.0799,
+        "mid_1500_3000": 0.0775,
+        "presence_3000_6000": 0.0002,
+        "air_6000_plus": -0.004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.025,
+        "spectral_centroid_hz": 9.55,
+        "zero_crossings_per_s": 490.15,
+        "rms": 0.007,
+        "spectral_spread_hz": 31.95,
+        "spectral_rolloff_85_hz": 171.05,
+        "spectral_flatness": 0.009,
+        "band_shape_distance": 0.0841,
+        "attack_peak_position": 0.2075,
+        "decay_ratio": 0.4315,
+        "envelope_contrast": 0.13,
+        "burst_share": 0.01
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.65,
+      "worstSegmentRisk10": 3.04,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "tail reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.195,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 4,
+        "zeroCrossingGapStdPerSecond": 5.8,
+        "bandShapeGapStd": 0.0035,
+        "decayRatioGapStd": 0.022,
+        "rmsGapStd": 0.0016
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d640-v130",
+          "repetition": 1,
+          "risk10": 1.23,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 13.5,
+          "rmsGap": 0.0085,
+          "bandShapeGap": 0.0806,
+          "worstSegmentRisk10": 3.49,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s798-d640-v130",
+          "repetition": 2,
+          "risk10": 0.84,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 5.6,
+          "rmsGap": 0.0054,
+          "bandShapeGap": 0.0876,
+          "worstSegmentRisk10": 2.58,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.04,
+      "riskBreakdown": {
+        "duration": 0.029411764705882356,
+        "centroid": 0.007346153846153847,
+        "zeroCrossing": 0.2723055555555555,
+        "rms": 0.04375,
+        "bandShape": 0.1682,
+        "rolloff": 0.06578846153846155,
+        "attack": 0.23055555555555554,
+        "decay": 0.13484374999999998,
+        "burst": 0.028571428571428574
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s798-d640-v92",
+      "label": "Boss Boom reference 0.798s/0.64s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.537,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.64,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.798,
+        "clipDuration": 0.64
+      },
+      "durationGapSeconds": 0.025,
+      "centroidGapHz": 70.05,
+      "zeroCrossingGapPerSecond": 215.9,
+      "rmsGap": 0.033,
+      "bandShapeGap": 0.0522,
+      "rolloffGapHz": 96.3,
+      "envelopeShapeGap": 0.163,
+      "activeMetrics": {
+        "duration_s": 0.295,
+        "rms": 0.221,
+        "spectral_centroid_hz": 1622.7,
+        "zero_crossings_per_s": 2074.8,
+        "spectral_rolloff_85_hz": 2179.1,
+        "band_energy": {
+          "sub_500": 0.1527,
+          "low_mid_500_1500": 0.2457,
+          "mid_1500_3000": 0.5447,
+          "presence_3000_6000": 0.041,
+          "air_6000_plus": 0.0159
+        },
+        "attack_peak_position": 0.702,
+        "decay_ratio": 1.2,
+        "burst_share": 0.48
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.008,
+        "low_mid_500_1500": -0.0368,
+        "mid_1500_3000": 0.0415,
+        "presence_3000_6000": -0.0029,
+        "air_6000_plus": -0.0099
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.025,
+        "spectral_centroid_hz": 70.05,
+        "zero_crossings_per_s": 215.9,
+        "rms": 0.033,
+        "spectral_spread_hz": 194.25,
+        "spectral_rolloff_85_hz": 96.3,
+        "spectral_flatness": 0.043,
+        "band_shape_distance": 0.0522,
+        "attack_peak_position": 0.298,
+        "decay_ratio": 0.3425,
+        "envelope_contrast": 0.093,
+        "burst_share": 0.017
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.38,
+      "worstSegmentRisk10": 2.8,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "tail reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.125,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 21,
+        "zeroCrossingGapStdPerSecond": 148.8,
+        "bandShapeGapStd": 0.0372,
+        "decayRatioGapStd": 0.054,
+        "rmsGapStd": 0.0051
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d640-v92",
+          "repetition": 1,
+          "risk10": 0.94,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 49,
+          "rmsGap": 0.0274,
+          "bandShapeGap": 0.0894,
+          "worstSegmentRisk10": 3.04,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s798-d640-v92",
+          "repetition": 2,
+          "risk10": 1.19,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 91.1,
+          "rmsGap": 0.0376,
+          "bandShapeGap": 0.015,
+          "worstSegmentRisk10": 2.55,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 1.07,
+      "riskBreakdown": {
+        "duration": 0.029411764705882356,
+        "centroid": 0.053884615384615385,
+        "zeroCrossing": 0.11994444444444445,
+        "rms": 0.20625000000000002,
+        "bandShape": 0.1044,
+        "rolloff": 0.037038461538461534,
+        "attack": 0.3311111111111111,
+        "decay": 0.10703125000000001,
+        "burst": 0.04857142857142858
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s798-d640-v78",
+      "label": "Boss Boom reference 0.798s/0.64s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.544,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.64,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.798,
+        "clipDuration": 0.64
+      },
+      "durationGapSeconds": 0.025,
+      "centroidGapHz": 33.9,
+      "zeroCrossingGapPerSecond": 435.8,
+      "rmsGap": 0.057,
+      "bandShapeGap": 0.0898,
+      "rolloffGapHz": 162.5,
+      "envelopeShapeGap": 0.19,
+      "activeMetrics": {
+        "duration_s": 0.295,
+        "rms": 0.1963,
+        "spectral_centroid_hz": 1658.8,
+        "zero_crossings_per_s": 2294.7,
+        "spectral_rolloff_85_hz": 2281.1,
+        "band_energy": {
+          "sub_500": 0.1587,
+          "low_mid_500_1500": 0.2015,
+          "mid_1500_3000": 0.5789,
+          "presence_3000_6000": 0.0432,
+          "air_6000_plus": 0.0178
+        },
+        "attack_peak_position": 0.617,
+        "decay_ratio": 1.151,
+        "burst_share": 0.467
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.014,
+        "low_mid_500_1500": -0.081,
+        "mid_1500_3000": 0.0757,
+        "presence_3000_6000": -0.0007,
+        "air_6000_plus": -0.008
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.025,
+        "spectral_centroid_hz": 33.9,
+        "zero_crossings_per_s": 435.8,
+        "rms": 0.057,
+        "spectral_spread_hz": 113.55,
+        "spectral_rolloff_85_hz": 162.5,
+        "spectral_flatness": 0.028,
+        "band_shape_distance": 0.0898,
+        "attack_peak_position": 0.3825,
+        "decay_ratio": 0.391,
+        "envelope_contrast": 0.14,
+        "burst_share": 0.0075
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.65,
+      "worstSegmentRisk10": 2.93,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "tail reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.09,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 6.1,
+        "zeroCrossingGapStdPerSecond": 4.9,
+        "bandShapeGapStd": 0.0025,
+        "decayRatioGapStd": 0.026,
+        "rmsGapStd": 0.0024
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d640-v78",
+          "repetition": 1,
+          "risk10": 1.42,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 27.8,
+          "rmsGap": 0.0596,
+          "bandShapeGap": 0.0873,
+          "worstSegmentRisk10": 3.07,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s798-d640-v78",
+          "repetition": 2,
+          "risk10": 1.6,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 40,
+          "rmsGap": 0.0548,
+          "bandShapeGap": 0.0922,
+          "worstSegmentRisk10": 2.78,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 1.51,
+      "riskBreakdown": {
+        "duration": 0.029411764705882356,
+        "centroid": 0.026076923076923077,
+        "zeroCrossing": 0.2421111111111111,
+        "rms": 0.35625,
+        "bandShape": 0.1796,
+        "rolloff": 0.0625,
+        "attack": 0.425,
+        "decay": 0.1221875,
+        "burst": 0.02142857142857143
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s798-d640-v118",
+      "label": "Boss Boom reference 0.798s/0.64s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.628,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.64,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.798,
+        "clipDuration": 0.64
+      },
+      "durationGapSeconds": 0.0345,
+      "centroidGapHz": 109.15,
+      "zeroCrossingGapPerSecond": 979.5,
+      "rmsGap": 0.043,
+      "bandShapeGap": 0.0925,
+      "rolloffGapHz": 581.85,
+      "envelopeShapeGap": 0.328,
+      "activeMetrics": {
+        "duration_s": 0.325,
+        "rms": 0.289,
+        "spectral_centroid_hz": 1787.6,
+        "zero_crossings_per_s": 2838.4,
+        "spectral_rolloff_85_hz": 2700.5,
+        "band_energy": {
+          "sub_500": 0.133,
+          "low_mid_500_1500": 0.2482,
+          "mid_1500_3000": 0.5109,
+          "presence_3000_6000": 0.0864,
+          "air_6000_plus": 0.0216
+        },
+        "attack_peak_position": 0.653,
+        "decay_ratio": 1.072,
+        "burst_share": 0.306
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0117,
+        "low_mid_500_1500": -0.0343,
+        "mid_1500_3000": 0.0077,
+        "presence_3000_6000": 0.0425,
+        "air_6000_plus": -0.0042
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0345,
+        "spectral_centroid_hz": 109.15,
+        "zero_crossings_per_s": 979.5,
+        "rms": 0.043,
+        "spectral_spread_hz": 110.85,
+        "spectral_rolloff_85_hz": 581.85,
+        "spectral_flatness": 0.031,
+        "band_shape_distance": 0.0925,
+        "attack_peak_position": 0.3475,
+        "decay_ratio": 0.47,
+        "envelope_contrast": 0.182,
+        "burst_share": 0.1575
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.17,
+      "worstSegmentRisk10": 4.18,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 1.305,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 94.9,
+        "zeroCrossingGapStdPerSecond": 525,
+        "bandShapeGapStd": 0.005,
+        "decayRatioGapStd": 0.066,
+        "rmsGapStd": 0.0354
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d640-v118",
+          "repetition": 1,
+          "risk10": 0.82,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 14.3,
+          "rmsGap": 0.0076,
+          "bandShapeGap": 0.0876,
+          "worstSegmentRisk10": 3.25,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s798-d640-v118",
+          "repetition": 2,
+          "risk10": 3.43,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 204,
+          "rmsGap": 0.0785,
+          "bandShapeGap": 0.0975,
+          "worstSegmentRisk10": 5.11,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.12,
+      "riskBreakdown": {
+        "duration": 0.040588235294117654,
+        "centroid": 0.08396153846153846,
+        "zeroCrossing": 0.5441666666666667,
+        "rms": 0.26875,
+        "bandShape": 0.185,
+        "rolloff": 0.22378846153846155,
+        "attack": 0.38611111111111107,
+        "decay": 0.14687499999999998,
+        "burst": 0.45
+      },
+      "dominantPenalty": "zeroCrossing",
+      "keeperRead": "segment risk improved only 0.13; risk stability sd 1.305 > 0.35; zero-crossing stability sd 525/s > 420/s; RMS stability sd 0.0354 > 0.035"
+    },
+    {
+      "id": "refclip-s720-d769-v78",
+      "label": "Boss Boom reference 0.72s/0.769s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.262,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.72,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.72,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.136,
+      "centroidGapHz": 119.3,
+      "zeroCrossingGapPerSecond": 779.55,
+      "rmsGap": 0.032,
+      "bandShapeGap": 0.0802,
+      "rolloffGapHz": 769.2,
+      "envelopeShapeGap": 0.359,
+      "activeMetrics": {
+        "duration_s": 0.456,
+        "rms": 0.2393,
+        "spectral_centroid_hz": 1774.4,
+        "zero_crossings_per_s": 2638.5,
+        "spectral_rolloff_85_hz": 2887.8,
+        "band_energy": {
+          "sub_500": 0.1394,
+          "low_mid_500_1500": 0.2567,
+          "mid_1500_3000": 0.494,
+          "presence_3000_6000": 0.0917,
+          "air_6000_plus": 0.0183
+        },
+        "attack_peak_position": 0.753,
+        "decay_ratio": 1.328,
+        "burst_share": 0.217
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0053,
+        "low_mid_500_1500": -0.0258,
+        "mid_1500_3000": -0.0092,
+        "presence_3000_6000": 0.0478,
+        "air_6000_plus": -0.0075
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.136,
+        "spectral_centroid_hz": 119.3,
+        "zero_crossings_per_s": 779.55,
+        "rms": 0.032,
+        "spectral_spread_hz": 131.4,
+        "spectral_rolloff_85_hz": 769.2,
+        "spectral_flatness": 0.032,
+        "band_shape_distance": 0.0802,
+        "attack_peak_position": 0.2475,
+        "decay_ratio": 0.3115,
+        "envelope_contrast": 0.209,
+        "burst_share": 0.246
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.2,
+      "worstSegmentRisk10": 3.67,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.28,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 81.7,
+        "zeroCrossingGapStdPerSecond": 138.6,
+        "bandShapeGapStd": 0.0169,
+        "decayRatioGapStd": 0.215,
+        "rmsGapStd": 0.0142
+      },
+      "samples": [
+        {
+          "id": "refclip-s720-d769-v78",
+          "repetition": 1,
+          "risk10": 1.91,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 37.6,
+          "rmsGap": 0.0463,
+          "bandShapeGap": 0.0633,
+          "worstSegmentRisk10": 2.98,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s720-d769-v78",
+          "repetition": 2,
+          "risk10": 2.47,
+          "durationGapSeconds": 0.131,
+          "centroidGapHz": 201,
+          "rmsGap": 0.0179,
+          "bandShapeGap": 0.097,
+          "worstSegmentRisk10": 4.35,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.19,
+      "riskBreakdown": {
+        "duration": 0.16,
+        "centroid": 0.09176923076923077,
+        "zeroCrossing": 0.4330833333333333,
+        "rms": 0.2,
+        "bandShape": 0.1604,
+        "rolloff": 0.29584615384615387,
+        "attack": 0.27499999999999997,
+        "decay": 0.09734374999999999,
+        "burst": 0.7028571428571428
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s720-d769-v92",
+      "label": "Boss Boom reference 0.72s/0.769s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.255,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.72,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.72,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.141,
+      "centroidGapHz": 203.35,
+      "zeroCrossingGapPerSecond": 876.45,
+      "rmsGap": 0.043,
+      "bandShapeGap": 0.086,
+      "rolloffGapHz": 958.55,
+      "envelopeShapeGap": 0.282,
+      "activeMetrics": {
+        "duration_s": 0.461,
+        "rms": 0.297,
+        "spectral_centroid_hz": 1896.1,
+        "zero_crossings_per_s": 2735.4,
+        "spectral_rolloff_85_hz": 3077.2,
+        "band_energy": {
+          "sub_500": 0.1205,
+          "low_mid_500_1500": 0.2748,
+          "mid_1500_3000": 0.4524,
+          "presence_3000_6000": 0.1299,
+          "air_6000_plus": 0.0226
+        },
+        "attack_peak_position": 0.895,
+        "decay_ratio": 1.476,
+        "burst_share": 0.216
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0242,
+        "low_mid_500_1500": -0.0077,
+        "mid_1500_3000": -0.0508,
+        "presence_3000_6000": 0.086,
+        "air_6000_plus": -0.0032
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.141,
+        "spectral_centroid_hz": 203.35,
+        "zero_crossings_per_s": 876.45,
+        "rms": 0.043,
+        "spectral_spread_hz": 127.7,
+        "spectral_rolloff_85_hz": 958.55,
+        "spectral_flatness": 0.027,
+        "band_shape_distance": 0.086,
+        "attack_peak_position": 0.105,
+        "decay_ratio": 0.0665,
+        "envelope_contrast": 0.218,
+        "burst_share": 0.2475
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.84,
+      "worstSegmentRisk10": 3.54,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "tail timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.025,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 5.5,
+        "zeroCrossingGapStdPerSecond": 11.9,
+        "bandShapeGapStd": 0.0003,
+        "decayRatioGapStd": 0.013,
+        "rmsGapStd": 0.0003
+      },
+      "samples": [
+        {
+          "id": "refclip-s720-d769-v92",
+          "repetition": 1,
+          "risk10": 2.33,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 208.9,
+          "rmsGap": 0.0432,
+          "bandShapeGap": 0.0862,
+          "worstSegmentRisk10": 3.47,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s720-d769-v92",
+          "repetition": 2,
+          "risk10": 2.28,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 197.8,
+          "rmsGap": 0.0437,
+          "bandShapeGap": 0.0857,
+          "worstSegmentRisk10": 3.61,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 2.3,
+      "riskBreakdown": {
+        "duration": 0.16588235294117645,
+        "centroid": 0.15642307692307691,
+        "zeroCrossing": 0.48691666666666666,
+        "rms": 0.26875,
+        "bandShape": 0.172,
+        "rolloff": 0.3686730769230769,
+        "attack": 0.11666666666666665,
+        "decay": 0.02078125,
+        "burst": 0.7071428571428572
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s620-d769-v78",
+      "label": "Boss Boom reference 0.62s/0.769s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.562,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.62,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.62,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.271,
+      "centroidGapHz": 147.55,
+      "zeroCrossingGapPerSecond": 465.35,
+      "rmsGap": 0.006,
+      "bandShapeGap": 0.1045,
+      "rolloffGapHz": 996.4,
+      "envelopeShapeGap": 0.335,
+      "activeMetrics": {
+        "duration_s": 0.591,
+        "rms": 0.2479,
+        "spectral_centroid_hz": 1840.3,
+        "zero_crossings_per_s": 2324.3,
+        "spectral_rolloff_85_hz": 3115,
+        "band_energy": {
+          "sub_500": 0.1361,
+          "low_mid_500_1500": 0.2986,
+          "mid_1500_3000": 0.4123,
+          "presence_3000_6000": 0.1323,
+          "air_6000_plus": 0.0208
+        },
+        "attack_peak_position": 0.911,
+        "decay_ratio": 2.185,
+        "burst_share": 0.216
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0086,
+        "low_mid_500_1500": 0.0161,
+        "mid_1500_3000": -0.0909,
+        "presence_3000_6000": 0.0884,
+        "air_6000_plus": -0.005
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.271,
+        "spectral_centroid_hz": 147.55,
+        "zero_crossings_per_s": 465.35,
+        "rms": 0.006,
+        "spectral_spread_hz": 102.5,
+        "spectral_rolloff_85_hz": 996.4,
+        "spectral_flatness": 0.018,
+        "band_shape_distance": 0.1045,
+        "attack_peak_position": 0.089,
+        "decay_ratio": 0.6425,
+        "envelope_contrast": 0.375,
+        "burst_share": 0.247
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.83,
+      "worstSegmentRisk10": 3.18,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.02,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 1.3,
+        "zeroCrossingGapStdPerSecond": 2.5,
+        "bandShapeGapStd": 0.0009,
+        "decayRatioGapStd": 0.01,
+        "rmsGapStd": 0.0005
+      },
+      "samples": [
+        {
+          "id": "refclip-s620-d769-v78",
+          "repetition": 1,
+          "risk10": 2.29,
+          "durationGapSeconds": 0.271,
+          "centroidGapHz": 148.8,
+          "rmsGap": 0.0052,
+          "bandShapeGap": 0.1054,
+          "worstSegmentRisk10": 3.18,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s620-d769-v78",
+          "repetition": 2,
+          "risk10": 2.33,
+          "durationGapSeconds": 0.271,
+          "centroidGapHz": 146.3,
+          "rmsGap": 0.0061,
+          "bandShapeGap": 0.1036,
+          "worstSegmentRisk10": 3.17,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.31,
+      "riskBreakdown": {
+        "duration": 0.31882352941176473,
+        "centroid": 0.1135,
+        "zeroCrossing": 0.2585277777777778,
+        "rms": 0.0375,
+        "bandShape": 0.209,
+        "rolloff": 0.3832307692307692,
+        "attack": 0.09888888888888889,
+        "decay": 0.20078124999999997,
+        "burst": 0.7057142857142857
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "duration gap improved only -0.191s"
+    },
+    {
+      "id": "refclip-s980-d769-v104",
+      "label": "Boss Boom reference 0.98s/0.769s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.609,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.98,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.98,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.044,
+      "centroidGapHz": 253,
+      "zeroCrossingGapPerSecond": 13.55,
+      "rmsGap": 0.012,
+      "bandShapeGap": 0.2051,
+      "rolloffGapHz": 1503.55,
+      "envelopeShapeGap": 0.136,
+      "activeMetrics": {
+        "duration_s": 0.276,
+        "rms": 0.2413,
+        "spectral_centroid_hz": 1945.7,
+        "zero_crossings_per_s": 1853.3,
+        "spectral_rolloff_85_hz": 3622.2,
+        "band_energy": {
+          "sub_500": 0.1279,
+          "low_mid_500_1500": 0.3434,
+          "mid_1500_3000": 0.317,
+          "presence_3000_6000": 0.1881,
+          "air_6000_plus": 0.0237
+        },
+        "attack_peak_position": 0.766,
+        "decay_ratio": 1.264,
+        "burst_share": 0.443
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0168,
+        "low_mid_500_1500": 0.0609,
+        "mid_1500_3000": -0.1862,
+        "presence_3000_6000": 0.1442,
+        "air_6000_plus": -0.0021
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.044,
+        "spectral_centroid_hz": 253,
+        "zero_crossings_per_s": 13.55,
+        "rms": 0.012,
+        "spectral_spread_hz": 255.5,
+        "spectral_rolloff_85_hz": 1503.55,
+        "spectral_flatness": 0.04,
+        "band_shape_distance": 0.2051,
+        "attack_peak_position": 0.2345,
+        "decay_ratio": 0.2785,
+        "envelope_contrast": 0.222,
+        "burst_share": 0.0205
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.1,
+      "worstSegmentRisk10": 3.36,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.005,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 4.5,
+        "zeroCrossingGapStdPerSecond": 5.6,
+        "bandShapeGapStd": 0.0043,
+        "decayRatioGapStd": 0.137,
+        "rmsGapStd": 0.0016
+      },
+      "samples": [
+        {
+          "id": "refclip-s980-d769-v104",
+          "repetition": 1,
+          "risk10": 2.31,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 257.5,
+          "rmsGap": 0.0138,
+          "bandShapeGap": 0.2094,
+          "worstSegmentRisk10": 3.39,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s980-d769-v104",
+          "repetition": 2,
+          "risk10": 2.32,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 248.5,
+          "rmsGap": 0.0107,
+          "bandShapeGap": 0.2008,
+          "worstSegmentRisk10": 3.33,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.31,
+      "riskBreakdown": {
+        "duration": 0.05176470588235294,
+        "centroid": 0.1946153846153846,
+        "zeroCrossing": 0.007527777777777778,
+        "rms": 0.075,
+        "bandShape": 0.4102,
+        "rolloff": 0.5782884615384615,
+        "attack": 0.26055555555555554,
+        "decay": 0.08703125,
+        "burst": 0.05857142857142858
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s620-d769-v92",
+      "label": "Boss Boom reference 0.62s/0.769s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.555,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.62,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.62,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.266,
+      "centroidGapHz": 140.25,
+      "zeroCrossingGapPerSecond": 519.85,
+      "rmsGap": 0.019,
+      "bandShapeGap": 0.0834,
+      "rolloffGapHz": 678.4,
+      "envelopeShapeGap": 0.407,
+      "activeMetrics": {
+        "duration_s": 0.586,
+        "rms": 0.2724,
+        "spectral_centroid_hz": 1833,
+        "zero_crossings_per_s": 2378.8,
+        "spectral_rolloff_85_hz": 2797,
+        "band_energy": {
+          "sub_500": 0.1396,
+          "low_mid_500_1500": 0.2842,
+          "mid_1500_3000": 0.4322,
+          "presence_3000_6000": 0.1236,
+          "air_6000_plus": 0.0205
+        },
+        "attack_peak_position": 0.758,
+        "decay_ratio": 2.024,
+        "burst_share": 0.184
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0051,
+        "low_mid_500_1500": 0.0017,
+        "mid_1500_3000": -0.071,
+        "presence_3000_6000": 0.0797,
+        "air_6000_plus": -0.0053
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.266,
+        "spectral_centroid_hz": 140.25,
+        "zero_crossings_per_s": 519.85,
+        "rms": 0.019,
+        "spectral_spread_hz": 74.3,
+        "spectral_rolloff_85_hz": 678.4,
+        "spectral_flatness": 0.013,
+        "band_shape_distance": 0.0834,
+        "attack_peak_position": 0.242,
+        "decay_ratio": 0.4825,
+        "envelope_contrast": 0.123,
+        "burst_share": 0.2795
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.03,
+      "worstSegmentRisk10": 3.71,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.145,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 2.7,
+        "zeroCrossingGapStdPerSecond": 68.9,
+        "bandShapeGapStd": 0.0045,
+        "decayRatioGapStd": 0.008,
+        "rmsGapStd": 0.0014
+      },
+      "samples": [
+        {
+          "id": "refclip-s620-d769-v92",
+          "repetition": 1,
+          "risk10": 2.18,
+          "durationGapSeconds": 0.271,
+          "centroidGapHz": 142.9,
+          "rmsGap": 0.0174,
+          "bandShapeGap": 0.0878,
+          "worstSegmentRisk10": 3.98,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s620-d769-v92",
+          "repetition": 2,
+          "risk10": 2.47,
+          "durationGapSeconds": 0.261,
+          "centroidGapHz": 137.6,
+          "rmsGap": 0.0203,
+          "bandShapeGap": 0.0789,
+          "worstSegmentRisk10": 3.43,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.33,
+      "riskBreakdown": {
+        "duration": 0.3129411764705883,
+        "centroid": 0.10788461538461538,
+        "zeroCrossing": 0.2888055555555556,
+        "rms": 0.11875,
+        "bandShape": 0.1668,
+        "rolloff": 0.2609230769230769,
+        "attack": 0.2688888888888889,
+        "decay": 0.15078124999999998,
+        "burst": 0.7985714285714287
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "duration gap improved only -0.186s"
+    },
+    {
+      "id": "refclip-s798-d900-v78",
+      "label": "Boss Boom reference 0.798s/0.9s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.552,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.9,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.798,
+        "clipDuration": 0.9
+      },
+      "durationGapSeconds": 0.0295,
+      "centroidGapHz": 271.6,
+      "zeroCrossingGapPerSecond": 752.45,
+      "rmsGap": 0.023,
+      "bandShapeGap": 0.1321,
+      "rolloffGapHz": 1376.05,
+      "envelopeShapeGap": 0.258,
+      "activeMetrics": {
+        "duration_s": 0.35,
+        "rms": 0.2762,
+        "spectral_centroid_hz": 1964.3,
+        "zero_crossings_per_s": 2611.4,
+        "spectral_rolloff_85_hz": 3494.7,
+        "band_energy": {
+          "sub_500": 0.1132,
+          "low_mid_500_1500": 0.2975,
+          "mid_1500_3000": 0.4042,
+          "presence_3000_6000": 0.1603,
+          "air_6000_plus": 0.0248
+        },
+        "attack_peak_position": 0.845,
+        "decay_ratio": 1.09,
+        "burst_share": 0.303
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0315,
+        "low_mid_500_1500": 0.015,
+        "mid_1500_3000": -0.099,
+        "presence_3000_6000": 0.1164,
+        "air_6000_plus": -0.001
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0295,
+        "spectral_centroid_hz": 271.6,
+        "zero_crossings_per_s": 752.45,
+        "rms": 0.023,
+        "spectral_spread_hz": 203.3,
+        "spectral_rolloff_85_hz": 1376.05,
+        "spectral_flatness": 0.041,
+        "band_shape_distance": 0.1321,
+        "attack_peak_position": 0.155,
+        "decay_ratio": 0.4525,
+        "envelope_contrast": 0.403,
+        "burst_share": 0.1605
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.5,
+      "worstSegmentRisk10": 3.84,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.305,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 21.3,
+        "zeroCrossingGapStdPerSecond": 460.9,
+        "bandShapeGapStd": 0.0166,
+        "decayRatioGapStd": 0.072,
+        "rmsGapStd": 0.0092
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d900-v78",
+          "repetition": 1,
+          "risk10": 2.73,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 250.3,
+          "rmsGap": 0.0318,
+          "bandShapeGap": 0.1155,
+          "worstSegmentRisk10": 4.36,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d900-v78",
+          "repetition": 2,
+          "risk10": 2.12,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 292.9,
+          "rmsGap": 0.0135,
+          "bandShapeGap": 0.1487,
+          "worstSegmentRisk10": 3.32,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.43,
+      "riskBreakdown": {
+        "duration": 0.03470588235294118,
+        "centroid": 0.20892307692307693,
+        "zeroCrossing": 0.4180277777777778,
+        "rms": 0.14375,
+        "bandShape": 0.2642,
+        "rolloff": 0.52925,
+        "attack": 0.17222222222222222,
+        "decay": 0.14140624999999998,
+        "burst": 0.45857142857142863
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "zero-crossing stability sd 460.9/s > 420/s"
+    },
+    {
+      "id": "refclip-s720-d769-v118",
+      "label": "Boss Boom reference 0.72s/0.769s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.346,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.72,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.72,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.165,
+      "centroidGapHz": 207.1,
+      "zeroCrossingGapPerSecond": 747.2,
+      "rmsGap": 0.059,
+      "bandShapeGap": 0.09,
+      "rolloffGapHz": 1027.2,
+      "envelopeShapeGap": 0.332,
+      "activeMetrics": {
+        "duration_s": 0.485,
+        "rms": 0.3123,
+        "spectral_centroid_hz": 1899.8,
+        "zero_crossings_per_s": 2606.1,
+        "spectral_rolloff_85_hz": 3145.8,
+        "band_energy": {
+          "sub_500": 0.1224,
+          "low_mid_500_1500": 0.2819,
+          "mid_1500_3000": 0.4413,
+          "presence_3000_6000": 0.1296,
+          "air_6000_plus": 0.025
+        },
+        "attack_peak_position": 0.956,
+        "decay_ratio": 1.193,
+        "burst_share": 0.171
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0223,
+        "low_mid_500_1500": -0.0006,
+        "mid_1500_3000": -0.0619,
+        "presence_3000_6000": 0.0857,
+        "air_6000_plus": -0.0008
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.165,
+        "spectral_centroid_hz": 207.1,
+        "zero_crossings_per_s": 747.2,
+        "rms": 0.059,
+        "spectral_spread_hz": 156.5,
+        "spectral_rolloff_85_hz": 1027.2,
+        "spectral_flatness": 0.042,
+        "band_shape_distance": 0.09,
+        "attack_peak_position": 0.044,
+        "decay_ratio": 0.349,
+        "envelope_contrast": 0.151,
+        "burst_share": 0.2925
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.99,
+      "worstSegmentRisk10": 4.23,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.025,
+        "durationGapStdSeconds": 0.024,
+        "centroidGapStdHz": 11.4,
+        "zeroCrossingGapStdPerSecond": 160.7,
+        "bandShapeGapStd": 0.0055,
+        "decayRatioGapStd": 0.256,
+        "rmsGapStd": 0.002
+      },
+      "samples": [
+        {
+          "id": "refclip-s720-d769-v118",
+          "repetition": 1,
+          "risk10": 2.47,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 218.5,
+          "rmsGap": 0.0608,
+          "bandShapeGap": 0.0846,
+          "worstSegmentRisk10": 4.39,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s720-d769-v118",
+          "repetition": 2,
+          "risk10": 2.42,
+          "durationGapSeconds": 0.189,
+          "centroidGapHz": 195.7,
+          "rmsGap": 0.0568,
+          "bandShapeGap": 0.0955,
+          "worstSegmentRisk10": 4.08,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.44,
+      "riskBreakdown": {
+        "duration": 0.19411764705882353,
+        "centroid": 0.15930769230769232,
+        "zeroCrossing": 0.41511111111111115,
+        "rms": 0.36874999999999997,
+        "bandShape": 0.18,
+        "rolloff": 0.3950769230769231,
+        "attack": 0.048888888888888885,
+        "decay": 0.10906249999999999,
+        "burst": 0.8357142857142857
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "segment risk improved only 0.08"
+    },
+    {
+      "id": "refclip-s720-d769-v130",
+      "label": "Boss Boom reference 0.72s/0.769s v1.3",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.388,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.72,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.3
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.3,
+        "clipStart": 0.72,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.146,
+      "centroidGapHz": 196.8,
+      "zeroCrossingGapPerSecond": 908.45,
+      "rmsGap": 0.058,
+      "bandShapeGap": 0.0835,
+      "rolloffGapHz": 855,
+      "envelopeShapeGap": 0.386,
+      "activeMetrics": {
+        "duration_s": 0.466,
+        "rms": 0.3117,
+        "spectral_centroid_hz": 1889.5,
+        "zero_crossings_per_s": 2767.4,
+        "spectral_rolloff_85_hz": 2973.6,
+        "band_energy": {
+          "sub_500": 0.1204,
+          "low_mid_500_1500": 0.2701,
+          "mid_1500_3000": 0.4603,
+          "presence_3000_6000": 0.1274,
+          "air_6000_plus": 0.0218
+        },
+        "attack_peak_position": 0.791,
+        "decay_ratio": 1.324,
+        "burst_share": 0.163
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0243,
+        "low_mid_500_1500": -0.0124,
+        "mid_1500_3000": -0.0429,
+        "presence_3000_6000": 0.0835,
+        "air_6000_plus": -0.004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.146,
+        "spectral_centroid_hz": 196.8,
+        "zero_crossings_per_s": 908.45,
+        "rms": 0.058,
+        "spectral_spread_hz": 112.9,
+        "spectral_rolloff_85_hz": 855,
+        "spectral_flatness": 0.024,
+        "band_shape_distance": 0.0835,
+        "attack_peak_position": 0.209,
+        "decay_ratio": 0.2185,
+        "envelope_contrast": 0.113,
+        "burst_share": 0.3
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.72,
+      "worstSegmentRisk10": 4.15,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.08,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 21.2,
+        "zeroCrossingGapStdPerSecond": 91.7,
+        "bandShapeGapStd": 0.0018,
+        "decayRatioGapStd": 0.105,
+        "rmsGapStd": 0.0022
+      },
+      "samples": [
+        {
+          "id": "refclip-s720-d769-v130",
+          "repetition": 1,
+          "risk10": 2.45,
+          "durationGapSeconds": 0.151,
+          "centroidGapHz": 175.6,
+          "rmsGap": 0.0605,
+          "bandShapeGap": 0.0817,
+          "worstSegmentRisk10": 3.91,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s720-d769-v130",
+          "repetition": 2,
+          "risk10": 2.61,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 218,
+          "rmsGap": 0.056,
+          "bandShapeGap": 0.0853,
+          "worstSegmentRisk10": 4.39,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.53,
+      "riskBreakdown": {
+        "duration": 0.17176470588235293,
+        "centroid": 0.1513846153846154,
+        "zeroCrossing": 0.5046944444444444,
+        "rms": 0.3625,
+        "bandShape": 0.167,
+        "rolloff": 0.32884615384615384,
+        "attack": 0.23222222222222222,
+        "decay": 0.06828125,
+        "burst": 0.8571428571428572
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "segment risk improved only 0.16"
+    },
+    {
+      "id": "refclip-s720-d769-v104",
+      "label": "Boss Boom reference 0.72s/0.769s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.297,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.72,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.72,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.141,
+      "centroidGapHz": 210.25,
+      "zeroCrossingGapPerSecond": 873.2,
+      "rmsGap": 0.061,
+      "bandShapeGap": 0.0841,
+      "rolloffGapHz": 933.6,
+      "envelopeShapeGap": 0.363,
+      "activeMetrics": {
+        "duration_s": 0.461,
+        "rms": 0.3147,
+        "spectral_centroid_hz": 1903,
+        "zero_crossings_per_s": 2732.1,
+        "spectral_rolloff_85_hz": 3052.2,
+        "band_energy": {
+          "sub_500": 0.1189,
+          "low_mid_500_1500": 0.2714,
+          "mid_1500_3000": 0.4581,
+          "presence_3000_6000": 0.128,
+          "air_6000_plus": 0.0236
+        },
+        "attack_peak_position": 0.825,
+        "decay_ratio": 1.338,
+        "burst_share": 0.172
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0258,
+        "low_mid_500_1500": -0.0111,
+        "mid_1500_3000": -0.0451,
+        "presence_3000_6000": 0.0841,
+        "air_6000_plus": -0.0022
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.141,
+        "spectral_centroid_hz": 210.25,
+        "zero_crossings_per_s": 873.2,
+        "rms": 0.061,
+        "spectral_spread_hz": 140.8,
+        "spectral_rolloff_85_hz": 933.6,
+        "spectral_flatness": 0.033,
+        "band_shape_distance": 0.0841,
+        "attack_peak_position": 0.1755,
+        "decay_ratio": 0.2045,
+        "envelope_contrast": 0.161,
+        "burst_share": 0.291
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.9,
+      "worstSegmentRisk10": 4.31,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.065,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 0.1,
+        "zeroCrossingGapStdPerSecond": 13,
+        "bandShapeGapStd": 0.0009,
+        "decayRatioGapStd": 0.143,
+        "rmsGapStd": 0.0026
+      },
+      "samples": [
+        {
+          "id": "refclip-s720-d769-v104",
+          "repetition": 1,
+          "risk10": 2.46,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 210.3,
+          "rmsGap": 0.0638,
+          "bandShapeGap": 0.085,
+          "worstSegmentRisk10": 4.4,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s720-d769-v104",
+          "repetition": 2,
+          "risk10": 2.59,
+          "durationGapSeconds": 0.141,
+          "centroidGapHz": 210.2,
+          "rmsGap": 0.0586,
+          "bandShapeGap": 0.0832,
+          "worstSegmentRisk10": 4.21,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.53,
+      "riskBreakdown": {
+        "duration": 0.16588235294117645,
+        "centroid": 0.16173076923076923,
+        "zeroCrossing": 0.48511111111111116,
+        "rms": 0.38125,
+        "bandShape": 0.1682,
+        "rolloff": 0.35907692307692307,
+        "attack": 0.19499999999999998,
+        "decay": 0.06390625,
+        "burst": 0.8314285714285714
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "segment risk improved only 0"
+    },
+    {
+      "id": "refclip-s980-d769-v78",
+      "label": "Boss Boom reference 0.98s/0.769s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.574,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.98,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.98,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.0245,
+      "centroidGapHz": 272,
+      "zeroCrossingGapPerSecond": 482.8,
+      "rmsGap": 0.025,
+      "bandShapeGap": 0.1674,
+      "rolloffGapHz": 1425.45,
+      "envelopeShapeGap": 0.294,
+      "activeMetrics": {
+        "duration_s": 0.306,
+        "rms": 0.2636,
+        "spectral_centroid_hz": 1964.7,
+        "zero_crossings_per_s": 2321.2,
+        "spectral_rolloff_85_hz": 3544.1,
+        "band_energy": {
+          "sub_500": 0.1139,
+          "low_mid_500_1500": 0.3208,
+          "mid_1500_3000": 0.3671,
+          "presence_3000_6000": 0.1728,
+          "air_6000_plus": 0.0254
+        },
+        "attack_peak_position": 0.642,
+        "decay_ratio": 1.118,
+        "burst_share": 0.341
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0308,
+        "low_mid_500_1500": 0.0383,
+        "mid_1500_3000": -0.1361,
+        "presence_3000_6000": 0.1289,
+        "air_6000_plus": -0.0004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0245,
+        "spectral_centroid_hz": 272,
+        "zero_crossings_per_s": 482.8,
+        "rms": 0.025,
+        "spectral_spread_hz": 243.7,
+        "spectral_rolloff_85_hz": 1425.45,
+        "spectral_flatness": 0.055,
+        "band_shape_distance": 0.1674,
+        "attack_peak_position": 0.3585,
+        "decay_ratio": 0.4245,
+        "envelope_contrast": 0.437,
+        "burst_share": 0.122
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.16,
+      "worstSegmentRisk10": 3.49,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.31,
+        "durationGapStdSeconds": 0.014,
+        "centroidGapStdHz": 0,
+        "zeroCrossingGapStdPerSecond": 462.3,
+        "bandShapeGapStd": 0.04,
+        "decayRatioGapStd": 0.129,
+        "rmsGapStd": 0.0101
+      },
+      "samples": [
+        {
+          "id": "refclip-s980-d769-v78",
+          "repetition": 1,
+          "risk10": 2.35,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 272,
+          "rmsGap": 0.0147,
+          "bandShapeGap": 0.2074,
+          "worstSegmentRisk10": 3.39,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s980-d769-v78",
+          "repetition": 2,
+          "risk10": 2.97,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 272,
+          "rmsGap": 0.0349,
+          "bandShapeGap": 0.1274,
+          "worstSegmentRisk10": 3.58,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.66,
+      "riskBreakdown": {
+        "duration": 0.028823529411764706,
+        "centroid": 0.20923076923076922,
+        "zeroCrossing": 0.26822222222222225,
+        "rms": 0.15625,
+        "bandShape": 0.3348,
+        "rolloff": 0.54825,
+        "attack": 0.3983333333333333,
+        "decay": 0.13265624999999998,
+        "burst": 0.3485714285714286
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "zero-crossing stability sd 462.3/s > 420/s"
+    },
+    {
+      "id": "refclip-s980-d769-v118",
+      "label": "Boss Boom reference 0.98s/0.769s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.658,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.98,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.98,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.049,
+      "centroidGapHz": 260,
+      "zeroCrossingGapPerSecond": 421.1,
+      "rmsGap": 0.039,
+      "bandShapeGap": 0.1448,
+      "rolloffGapHz": 1347.05,
+      "envelopeShapeGap": 0.303,
+      "activeMetrics": {
+        "duration_s": 0.33,
+        "rms": 0.2795,
+        "spectral_centroid_hz": 1952.7,
+        "zero_crossings_per_s": 2248.8,
+        "spectral_rolloff_85_hz": 3465.7,
+        "band_energy": {
+          "sub_500": 0.1166,
+          "low_mid_500_1500": 0.309,
+          "mid_1500_3000": 0.389,
+          "presence_3000_6000": 0.1594,
+          "air_6000_plus": 0.0261
+        },
+        "attack_peak_position": 0.602,
+        "decay_ratio": 1.205,
+        "burst_share": 0.337
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0281,
+        "low_mid_500_1500": 0.0265,
+        "mid_1500_3000": -0.1142,
+        "presence_3000_6000": 0.1155,
+        "air_6000_plus": 0.0003
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.049,
+        "spectral_centroid_hz": 260,
+        "zero_crossings_per_s": 421.1,
+        "rms": 0.039,
+        "spectral_spread_hz": 235.1,
+        "spectral_rolloff_85_hz": 1347.05,
+        "spectral_flatness": 0.055,
+        "band_shape_distance": 0.1448,
+        "attack_peak_position": 0.398,
+        "decay_ratio": 0.3375,
+        "envelope_contrast": 0.204,
+        "burst_share": 0.1265
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.16,
+      "worstSegmentRisk10": 3.5,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.355,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 20.9,
+        "zeroCrossingGapStdPerSecond": 389.9,
+        "bandShapeGapStd": 0.0557,
+        "decayRatioGapStd": 0.001,
+        "rmsGapStd": 0.026
+      },
+      "samples": [
+        {
+          "id": "refclip-s980-d769-v118",
+          "repetition": 1,
+          "risk10": 2.31,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 280.9,
+          "rmsGap": 0.0129,
+          "bandShapeGap": 0.2004,
+          "worstSegmentRisk10": 3.37,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s980-d769-v118",
+          "repetition": 2,
+          "risk10": 3.02,
+          "durationGapSeconds": 0.059,
+          "centroidGapHz": 239.1,
+          "rmsGap": 0.0648,
+          "bandShapeGap": 0.0891,
+          "worstSegmentRisk10": 3.62,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.66,
+      "riskBreakdown": {
+        "duration": 0.05764705882352941,
+        "centroid": 0.2,
+        "zeroCrossing": 0.23394444444444445,
+        "rms": 0.24375,
+        "bandShape": 0.2896,
+        "rolloff": 0.5180961538461538,
+        "attack": 0.44222222222222224,
+        "decay": 0.10546875,
+        "burst": 0.36142857142857143
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "risk stability sd 0.355 > 0.35; band-shape stability sd 0.0557 > 0.045"
+    },
+    {
+      "id": "refclip-s798-d900-v104",
+      "label": "Boss Boom reference 0.798s/0.9s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.587,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.9,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.798,
+        "clipDuration": 0.9
+      },
+      "durationGapSeconds": 0.044,
+      "centroidGapHz": 307.65,
+      "zeroCrossingGapPerSecond": 172.4,
+      "rmsGap": 0.04,
+      "bandShapeGap": 0.123,
+      "rolloffGapHz": 1325.2,
+      "envelopeShapeGap": 0.428,
+      "activeMetrics": {
+        "duration_s": 0.364,
+        "rms": 0.2937,
+        "spectral_centroid_hz": 2000.4,
+        "zero_crossings_per_s": 2031.3,
+        "spectral_rolloff_85_hz": 3443.8,
+        "band_energy": {
+          "sub_500": 0.1116,
+          "low_mid_500_1500": 0.2947,
+          "mid_1500_3000": 0.4134,
+          "presence_3000_6000": 0.1515,
+          "air_6000_plus": 0.0289
+        },
+        "attack_peak_position": 0.561,
+        "decay_ratio": 0.875,
+        "burst_share": 0.258
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0331,
+        "low_mid_500_1500": 0.0122,
+        "mid_1500_3000": -0.0898,
+        "presence_3000_6000": 0.1076,
+        "air_6000_plus": 0.0031
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.044,
+        "spectral_centroid_hz": 307.65,
+        "zero_crossings_per_s": 172.4,
+        "rms": 0.04,
+        "spectral_spread_hz": 259.35,
+        "spectral_rolloff_85_hz": 1325.2,
+        "spectral_flatness": 0.063,
+        "band_shape_distance": 0.123,
+        "attack_peak_position": 0.4395,
+        "decay_ratio": 0.6675,
+        "envelope_contrast": 0.196,
+        "burst_share": 0.205
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.05,
+      "worstSegmentRisk10": 3.37,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.025,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 6.3,
+        "zeroCrossingGapStdPerSecond": 58,
+        "bandShapeGapStd": 0.0008,
+        "decayRatioGapStd": 0.013,
+        "rmsGapStd": 0.0005
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d900-v104",
+          "repetition": 1,
+          "risk10": 2.72,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 313.9,
+          "rmsGap": 0.0407,
+          "bandShapeGap": 0.1237,
+          "worstSegmentRisk10": 3.5,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d900-v104",
+          "repetition": 2,
+          "risk10": 2.67,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 301.4,
+          "rmsGap": 0.0396,
+          "bandShapeGap": 0.1222,
+          "worstSegmentRisk10": 3.23,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.69,
+      "riskBreakdown": {
+        "duration": 0.05176470588235294,
+        "centroid": 0.23665384615384613,
+        "zeroCrossing": 0.09577777777777778,
+        "rms": 0.25,
+        "bandShape": 0.246,
+        "rolloff": 0.5096923076923077,
+        "attack": 0.48833333333333334,
+        "decay": 0.20859375,
+        "burst": 0.5857142857142857
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s620-d769-v104",
+      "label": "Boss Boom reference 0.62s/0.769s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.597,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.62,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.62,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.3005,
+      "centroidGapHz": 158.7,
+      "zeroCrossingGapPerSecond": 756.8,
+      "rmsGap": 0.042,
+      "bandShapeGap": 0.0933,
+      "rolloffGapHz": 852.8,
+      "envelopeShapeGap": 0.377,
+      "activeMetrics": {
+        "duration_s": 0.621,
+        "rms": 0.2952,
+        "spectral_centroid_hz": 1851.4,
+        "zero_crossings_per_s": 2615.7,
+        "spectral_rolloff_85_hz": 2971.4,
+        "band_energy": {
+          "sub_500": 0.1301,
+          "low_mid_500_1500": 0.2913,
+          "mid_1500_3000": 0.4297,
+          "presence_3000_6000": 0.1278,
+          "air_6000_plus": 0.0213
+        },
+        "attack_peak_position": 0.797,
+        "decay_ratio": 1.579,
+        "burst_share": 0.178
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0146,
+        "low_mid_500_1500": 0.0088,
+        "mid_1500_3000": -0.0735,
+        "presence_3000_6000": 0.0839,
+        "air_6000_plus": -0.0045
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.3005,
+        "spectral_centroid_hz": 158.7,
+        "zero_crossings_per_s": 756.8,
+        "rms": 0.042,
+        "spectral_spread_hz": 92.35,
+        "spectral_rolloff_85_hz": 852.8,
+        "spectral_flatness": 0.017,
+        "band_shape_distance": 0.0933,
+        "attack_peak_position": 0.203,
+        "decay_ratio": 0.286,
+        "envelope_contrast": 0.117,
+        "burst_share": 0.285
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.28,
+      "worstSegmentRisk10": 3.62,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "tail timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.245,
+        "durationGapStdSeconds": 0.04,
+        "centroidGapStdHz": 12.7,
+        "zeroCrossingGapStdPerSecond": 202.4,
+        "bandShapeGapStd": 0.0155,
+        "decayRatioGapStd": 0.037,
+        "rmsGapStd": 0.0157
+      },
+      "samples": [
+        {
+          "id": "refclip-s620-d769-v104",
+          "repetition": 1,
+          "risk10": 2.44,
+          "durationGapSeconds": 0.261,
+          "centroidGapHz": 146,
+          "rmsGap": 0.026,
+          "bandShapeGap": 0.0778,
+          "worstSegmentRisk10": 3.23,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s620-d769-v104",
+          "repetition": 2,
+          "risk10": 2.93,
+          "durationGapSeconds": 0.34,
+          "centroidGapHz": 171.4,
+          "rmsGap": 0.0574,
+          "bandShapeGap": 0.1087,
+          "worstSegmentRisk10": 4.01,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 2.69,
+      "riskBreakdown": {
+        "duration": 0.35352941176470587,
+        "centroid": 0.12207692307692307,
+        "zeroCrossing": 0.4204444444444444,
+        "rms": 0.2625,
+        "bandShape": 0.1866,
+        "rolloff": 0.32799999999999996,
+        "attack": 0.22555555555555556,
+        "decay": 0.08937499999999998,
+        "burst": 0.8142857142857143
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "duration gap improved only -0.221s"
+    },
+    {
+      "id": "refclip-s798-d769-v104",
+      "label": "Boss Boom reference 0.798s/0.769s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.063,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.798,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.001,
+      "centroidGapHz": 282.25,
+      "zeroCrossingGapPerSecond": 353.55,
+      "rmsGap": 0.057,
+      "bandShapeGap": 0.125,
+      "rolloffGapHz": 1303.65,
+      "envelopeShapeGap": 0.433,
+      "activeMetrics": {
+        "duration_s": 0.321,
+        "rms": 0.3107,
+        "spectral_centroid_hz": 1975,
+        "zero_crossings_per_s": 2212.5,
+        "spectral_rolloff_85_hz": 3422.3,
+        "band_energy": {
+          "sub_500": 0.1112,
+          "low_mid_500_1500": 0.2999,
+          "mid_1500_3000": 0.4117,
+          "presence_3000_6000": 0.1505,
+          "air_6000_plus": 0.0267
+        },
+        "attack_peak_position": 0.6,
+        "decay_ratio": 1.034,
+        "burst_share": 0.22
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0335,
+        "low_mid_500_1500": 0.0174,
+        "mid_1500_3000": -0.0915,
+        "presence_3000_6000": 0.1066,
+        "air_6000_plus": 0.0009
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.001,
+        "spectral_centroid_hz": 282.25,
+        "zero_crossings_per_s": 353.55,
+        "rms": 0.057,
+        "spectral_spread_hz": 219.65,
+        "spectral_rolloff_85_hz": 1303.65,
+        "spectral_flatness": 0.047,
+        "band_shape_distance": 0.125,
+        "attack_peak_position": 0.4,
+        "decay_ratio": 0.5085,
+        "envelope_contrast": 0.14,
+        "burst_share": 0.2435
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.25,
+      "worstSegmentRisk10": 3.65,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.06,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 10.1,
+        "zeroCrossingGapStdPerSecond": 88.8,
+        "bandShapeGapStd": 0.0029,
+        "decayRatioGapStd": 0.004,
+        "rmsGapStd": 0.0012
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d769-v104",
+          "repetition": 1,
+          "risk10": 2.75,
+          "durationGapSeconds": 0.001,
+          "centroidGapHz": 272.2,
+          "rmsGap": 0.0584,
+          "bandShapeGap": 0.1279,
+          "worstSegmentRisk10": 3.72,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d769-v104",
+          "repetition": 2,
+          "risk10": 2.63,
+          "durationGapSeconds": 0.001,
+          "centroidGapHz": 292.3,
+          "rmsGap": 0.056,
+          "bandShapeGap": 0.1221,
+          "worstSegmentRisk10": 3.58,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.69,
+      "riskBreakdown": {
+        "duration": 0.0011764705882352942,
+        "centroid": 0.21711538461538463,
+        "zeroCrossing": 0.19641666666666668,
+        "rms": 0.35625,
+        "bandShape": 0.25,
+        "rolloff": 0.5014038461538461,
+        "attack": 0.4444444444444445,
+        "decay": 0.15890624999999997,
+        "burst": 0.6957142857142857
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s880-d769-v130",
+      "label": "Boss Boom reference 0.88s/0.769s v1.3",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.4,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.88,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.3
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.3,
+        "clipStart": 0.88,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 254.8,
+      "zeroCrossingGapPerSecond": 723.75,
+      "rmsGap": 0.074,
+      "bandShapeGap": 0.0983,
+      "rolloffGapHz": 1260.3,
+      "envelopeShapeGap": 0.365,
+      "activeMetrics": {
+        "duration_s": 0.31,
+        "rms": 0.3275,
+        "spectral_centroid_hz": 1947.5,
+        "zero_crossings_per_s": 2582.7,
+        "spectral_rolloff_85_hz": 3378.9,
+        "band_energy": {
+          "sub_500": 0.1062,
+          "low_mid_500_1500": 0.2804,
+          "mid_1500_3000": 0.4468,
+          "presence_3000_6000": 0.1397,
+          "air_6000_plus": 0.027
+        },
+        "attack_peak_position": 0.671,
+        "decay_ratio": 0.986,
+        "burst_share": 0.269
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0385,
+        "low_mid_500_1500": -0.0021,
+        "mid_1500_3000": -0.0564,
+        "presence_3000_6000": 0.0958,
+        "air_6000_plus": 0.0012
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 254.8,
+        "zero_crossings_per_s": 723.75,
+        "rms": 0.074,
+        "spectral_spread_hz": 188.7,
+        "spectral_rolloff_85_hz": 1260.3,
+        "spectral_flatness": 0.05,
+        "band_shape_distance": 0.0983,
+        "attack_peak_position": 0.329,
+        "decay_ratio": 0.5565,
+        "envelope_contrast": 0.264,
+        "burst_share": 0.194
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.76,
+      "worstSegmentRisk10": 4.04,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.19,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 15.2,
+        "zeroCrossingGapStdPerSecond": 305.3,
+        "bandShapeGapStd": 0.0026,
+        "decayRatioGapStd": 0.062,
+        "rmsGapStd": 0.0018
+      },
+      "samples": [
+        {
+          "id": "refclip-s880-d769-v130",
+          "repetition": 1,
+          "risk10": 2.88,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 239.6,
+          "rmsGap": 0.0758,
+          "bandShapeGap": 0.0957,
+          "worstSegmentRisk10": 4.25,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s880-d769-v130",
+          "repetition": 2,
+          "risk10": 2.5,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 270,
+          "rmsGap": 0.0722,
+          "bandShapeGap": 0.1008,
+          "worstSegmentRisk10": 3.82,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.69,
+      "riskBreakdown": {
+        "duration": 0.011764705882352941,
+        "centroid": 0.196,
+        "zeroCrossing": 0.40208333333333335,
+        "rms": 0.46249999999999997,
+        "bandShape": 0.1966,
+        "rolloff": 0.4847307692307692,
+        "attack": 0.3655555555555556,
+        "decay": 0.17390624999999998,
+        "burst": 0.5542857142857144
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "segment risk improved only 0.27"
+    },
+    {
+      "id": "refclip-s798-d769-v92",
+      "label": "Boss Boom reference 0.798s/0.769s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.021,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.798,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.005,
+      "centroidGapHz": 301.55,
+      "zeroCrossingGapPerSecond": 449.15,
+      "rmsGap": 0.04,
+      "bandShapeGap": 0.1353,
+      "rolloffGapHz": 1393.9,
+      "envelopeShapeGap": 0.405,
+      "activeMetrics": {
+        "duration_s": 0.316,
+        "rms": 0.2936,
+        "spectral_centroid_hz": 1994.3,
+        "zero_crossings_per_s": 2308.1,
+        "spectral_rolloff_85_hz": 3512.5,
+        "band_energy": {
+          "sub_500": 0.116,
+          "low_mid_500_1500": 0.3012,
+          "mid_1500_3000": 0.3967,
+          "presence_3000_6000": 0.1586,
+          "air_6000_plus": 0.0277
+        },
+        "attack_peak_position": 0.629,
+        "decay_ratio": 1.05,
+        "burst_share": 0.236
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0287,
+        "low_mid_500_1500": 0.0187,
+        "mid_1500_3000": -0.1065,
+        "presence_3000_6000": 0.1147,
+        "air_6000_plus": 0.0019
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.005,
+        "spectral_centroid_hz": 301.55,
+        "zero_crossings_per_s": 449.15,
+        "rms": 0.04,
+        "spectral_spread_hz": 256.65,
+        "spectral_rolloff_85_hz": 1393.9,
+        "spectral_flatness": 0.061,
+        "band_shape_distance": 0.1353,
+        "attack_peak_position": 0.3715,
+        "decay_ratio": 0.4925,
+        "envelope_contrast": 0.155,
+        "burst_share": 0.227
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.45,
+      "worstSegmentRisk10": 3.73,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.11,
+        "durationGapStdSeconds": 0.004,
+        "centroidGapStdHz": 3.6,
+        "zeroCrossingGapStdPerSecond": 137.6,
+        "bandShapeGapStd": 0.0012,
+        "decayRatioGapStd": 0.01,
+        "rmsGapStd": 0.0003
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d769-v92",
+          "repetition": 1,
+          "risk10": 2.82,
+          "durationGapSeconds": 0.009,
+          "centroidGapHz": 298,
+          "rmsGap": 0.0398,
+          "bandShapeGap": 0.1365,
+          "worstSegmentRisk10": 4.04,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d769-v92",
+          "repetition": 2,
+          "risk10": 2.6,
+          "durationGapSeconds": 0.001,
+          "centroidGapHz": 305.1,
+          "rmsGap": 0.0405,
+          "bandShapeGap": 0.1341,
+          "worstSegmentRisk10": 3.41,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.71,
+      "riskBreakdown": {
+        "duration": 0.0058823529411764705,
+        "centroid": 0.23196153846153847,
+        "zeroCrossing": 0.24952777777777777,
+        "rms": 0.25,
+        "bandShape": 0.2706,
+        "rolloff": 0.5361153846153847,
+        "attack": 0.41277777777777774,
+        "decay": 0.15390625,
+        "burst": 0.6485714285714287
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "clears keeper gates"
+    },
+    {
+      "id": "refclip-s798-d769-v118",
+      "label": "Boss Boom reference 0.798s/0.769s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.112,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.798,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.095,
+      "centroidGapHz": 248.6,
+      "zeroCrossingGapPerSecond": 476.35,
+      "rmsGap": 0.05,
+      "bandShapeGap": 0.0995,
+      "rolloffGapHz": 1107.85,
+      "envelopeShapeGap": 0.434,
+      "activeMetrics": {
+        "duration_s": 0.415,
+        "rms": 0.3033,
+        "spectral_centroid_hz": 1941.3,
+        "zero_crossings_per_s": 2335.3,
+        "spectral_rolloff_85_hz": 3226.5,
+        "band_energy": {
+          "sub_500": 0.116,
+          "low_mid_500_1500": 0.2811,
+          "mid_1500_3000": 0.4394,
+          "presence_3000_6000": 0.1384,
+          "air_6000_plus": 0.0252
+        },
+        "attack_peak_position": 0.57,
+        "decay_ratio": 1.03,
+        "burst_share": 0.231
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0287,
+        "low_mid_500_1500": -0.0014,
+        "mid_1500_3000": -0.0638,
+        "presence_3000_6000": 0.0945,
+        "air_6000_plus": -0.0006
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.095,
+        "spectral_centroid_hz": 248.6,
+        "zero_crossings_per_s": 476.35,
+        "rms": 0.05,
+        "spectral_spread_hz": 172.85,
+        "spectral_rolloff_85_hz": 1107.85,
+        "spectral_flatness": 0.036,
+        "band_shape_distance": 0.0995,
+        "attack_peak_position": 0.4305,
+        "decay_ratio": 0.512,
+        "envelope_contrast": 0.174,
+        "burst_share": 0.2315
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.38,
+      "worstSegmentRisk10": 3.79,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.165,
+        "durationGapStdSeconds": 0.094,
+        "centroidGapStdHz": 33.4,
+        "zeroCrossingGapStdPerSecond": 80.8,
+        "bandShapeGapStd": 0.0173,
+        "decayRatioGapStd": 0.046,
+        "rmsGapStd": 0.0043
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d769-v118",
+          "repetition": 1,
+          "risk10": 2.54,
+          "durationGapSeconds": 0.189,
+          "centroidGapHz": 215.2,
+          "rmsGap": 0.0455,
+          "bandShapeGap": 0.0822,
+          "worstSegmentRisk10": 4.09,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d769-v118",
+          "repetition": 2,
+          "risk10": 2.87,
+          "durationGapSeconds": 0.001,
+          "centroidGapHz": 282,
+          "rmsGap": 0.0541,
+          "bandShapeGap": 0.1167,
+          "worstSegmentRisk10": 3.49,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.71,
+      "riskBreakdown": {
+        "duration": 0.11176470588235295,
+        "centroid": 0.19123076923076923,
+        "zeroCrossing": 0.2646388888888889,
+        "rms": 0.3125,
+        "bandShape": 0.199,
+        "rolloff": 0.4260961538461538,
+        "attack": 0.47833333333333333,
+        "decay": 0.16,
+        "burst": 0.6614285714285715
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "duration stability sd 0.094s > 0.08s"
+    },
+    {
+      "id": "refclip-s798-d769-v78",
+      "label": "Boss Boom reference 0.798s/0.769s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.028,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.798,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.019,
+      "centroidGapHz": 246.55,
+      "zeroCrossingGapPerSecond": 795.7,
+      "rmsGap": 0.032,
+      "bandShapeGap": 0.1398,
+      "rolloffGapHz": 1362.4,
+      "envelopeShapeGap": 0.375,
+      "activeMetrics": {
+        "duration_s": 0.33,
+        "rms": 0.2856,
+        "spectral_centroid_hz": 1939.3,
+        "zero_crossings_per_s": 2654.6,
+        "spectral_rolloff_85_hz": 3481,
+        "band_energy": {
+          "sub_500": 0.1162,
+          "low_mid_500_1500": 0.3102,
+          "mid_1500_3000": 0.3938,
+          "presence_3000_6000": 0.1553,
+          "air_6000_plus": 0.0246
+        },
+        "attack_peak_position": 0.666,
+        "decay_ratio": 1.117,
+        "burst_share": 0.246
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0285,
+        "low_mid_500_1500": 0.0277,
+        "mid_1500_3000": -0.1094,
+        "presence_3000_6000": 0.1114,
+        "air_6000_plus": -0.0012
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.019,
+        "spectral_centroid_hz": 246.55,
+        "zero_crossings_per_s": 795.7,
+        "rms": 0.032,
+        "spectral_spread_hz": 191.85,
+        "spectral_rolloff_85_hz": 1362.4,
+        "spectral_flatness": 0.041,
+        "band_shape_distance": 0.1398,
+        "attack_peak_position": 0.334,
+        "decay_ratio": 0.4255,
+        "envelope_contrast": 0.425,
+        "burst_share": 0.217
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.28,
+      "worstSegmentRisk10": 3.66,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.27,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 40,
+        "zeroCrossingGapStdPerSecond": 607.4,
+        "bandShapeGapStd": 0.0111,
+        "decayRatioGapStd": 0.081,
+        "rmsGapStd": 0.0075
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d769-v78",
+          "repetition": 1,
+          "risk10": 2.99,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 206.6,
+          "rmsGap": 0.0396,
+          "bandShapeGap": 0.1287,
+          "worstSegmentRisk10": 4.15,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s798-d769-v78",
+          "repetition": 2,
+          "risk10": 2.45,
+          "durationGapSeconds": 0.009,
+          "centroidGapHz": 286.5,
+          "rmsGap": 0.0246,
+          "bandShapeGap": 0.1509,
+          "worstSegmentRisk10": 3.16,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.72,
+      "riskBreakdown": {
+        "duration": 0.02235294117647059,
+        "centroid": 0.18965384615384617,
+        "zeroCrossing": 0.4420555555555556,
+        "rms": 0.2,
+        "bandShape": 0.2796,
+        "rolloff": 0.524,
+        "attack": 0.3711111111111111,
+        "decay": 0.13296875,
+        "burst": 0.62
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "zero-crossing stability sd 607.4/s > 420/s"
+    },
+    {
+      "id": "refclip-s880-d769-v78",
+      "label": "Boss Boom reference 0.88s/0.769s v0.78",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.274,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.88,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.78
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.78,
+        "clipStart": 0.88,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0,
+      "centroidGapHz": 254.45,
+      "zeroCrossingGapPerSecond": 973.2,
+      "rmsGap": 0.034,
+      "bandShapeGap": 0.1259,
+      "rolloffGapHz": 1308.15,
+      "envelopeShapeGap": 0.394,
+      "activeMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2878,
+        "spectral_centroid_hz": 1947.2,
+        "zero_crossings_per_s": 2832.1,
+        "spectral_rolloff_85_hz": 3426.8,
+        "band_energy": {
+          "sub_500": 0.1026,
+          "low_mid_500_1500": 0.2977,
+          "mid_1500_3000": 0.422,
+          "presence_3000_6000": 0.1545,
+          "air_6000_plus": 0.0232
+        },
+        "attack_peak_position": 0.65,
+        "decay_ratio": 0.898,
+        "burst_share": 0.256
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0421,
+        "low_mid_500_1500": 0.0152,
+        "mid_1500_3000": -0.0812,
+        "presence_3000_6000": 0.1106,
+        "air_6000_plus": -0.0026
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 254.45,
+        "zero_crossings_per_s": 973.2,
+        "rms": 0.034,
+        "spectral_spread_hz": 154.5,
+        "spectral_rolloff_85_hz": 1308.15,
+        "spectral_flatness": 0.031,
+        "band_shape_distance": 0.1259,
+        "attack_peak_position": 0.35,
+        "decay_ratio": 0.644,
+        "envelope_contrast": 0.354,
+        "burst_share": 0.207
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.85,
+      "worstSegmentRisk10": 4.35,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.065,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 0.1,
+        "zeroCrossingGapStdPerSecond": 21.9,
+        "bandShapeGapStd": 0.0009,
+        "decayRatioGapStd": 0.013,
+        "rmsGapStd": 0.0007
+      },
+      "samples": [
+        {
+          "id": "refclip-s880-d769-v78",
+          "repetition": 1,
+          "risk10": 2.82,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 254.6,
+          "rmsGap": 0.0336,
+          "bandShapeGap": 0.1268,
+          "worstSegmentRisk10": 4.35,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s880-d769-v78",
+          "repetition": 2,
+          "risk10": 2.69,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 254.3,
+          "rmsGap": 0.035,
+          "bandShapeGap": 0.1249,
+          "worstSegmentRisk10": 4.34,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.75,
+      "riskBreakdown": {
+        "duration": 0,
+        "centroid": 0.1957307692307692,
+        "zeroCrossing": 0.5406666666666667,
+        "rms": 0.21250000000000002,
+        "bandShape": 0.2518,
+        "rolloff": 0.5031346153846155,
+        "attack": 0.38888888888888884,
+        "decay": 0.20124999999999998,
+        "burst": 0.5914285714285714
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "segment risk improved only -0.04"
+    },
+    {
+      "id": "refclip-s798-d900-v118",
+      "label": "Boss Boom reference 0.798s/0.9s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.636,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.9,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.798,
+        "clipDuration": 0.9
+      },
+      "durationGapSeconds": 0.039,
+      "centroidGapHz": 283.1,
+      "zeroCrossingGapPerSecond": 293,
+      "rmsGap": 0.041,
+      "bandShapeGap": 0.1199,
+      "rolloffGapHz": 1306,
+      "envelopeShapeGap": 0.505,
+      "activeMetrics": {
+        "duration_s": 0.359,
+        "rms": 0.2948,
+        "spectral_centroid_hz": 1975.8,
+        "zero_crossings_per_s": 2151.9,
+        "spectral_rolloff_85_hz": 3424.6,
+        "band_energy": {
+          "sub_500": 0.114,
+          "low_mid_500_1500": 0.2948,
+          "mid_1500_3000": 0.4142,
+          "presence_3000_6000": 0.151,
+          "air_6000_plus": 0.0261
+        },
+        "attack_peak_position": 0.478,
+        "decay_ratio": 0.901,
+        "burst_share": 0.207
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0307,
+        "low_mid_500_1500": 0.0123,
+        "mid_1500_3000": -0.089,
+        "presence_3000_6000": 0.1071,
+        "air_6000_plus": 0.0003
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.039,
+        "spectral_centroid_hz": 283.1,
+        "zero_crossings_per_s": 293,
+        "rms": 0.041,
+        "spectral_spread_hz": 213.6,
+        "spectral_rolloff_85_hz": 1306,
+        "spectral_flatness": 0.046,
+        "band_shape_distance": 0.1199,
+        "attack_peak_position": 0.5225,
+        "decay_ratio": 0.6415,
+        "envelope_contrast": 0.195,
+        "burst_share": 0.2565
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 2.97,
+      "worstSegmentRisk10": 3.12,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.065,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 15.6,
+        "zeroCrossingGapStdPerSecond": 29.2,
+        "bandShapeGapStd": 0.0019,
+        "decayRatioGapStd": 0.033,
+        "rmsGapStd": 0.0015
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d900-v118",
+          "repetition": 1,
+          "risk10": 2.77,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 267.5,
+          "rmsGap": 0.0428,
+          "bandShapeGap": 0.1218,
+          "worstSegmentRisk10": 3.13,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d900-v118",
+          "repetition": 2,
+          "risk10": 2.9,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 298.7,
+          "rmsGap": 0.0397,
+          "bandShapeGap": 0.118,
+          "worstSegmentRisk10": 3.11,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.83,
+      "riskBreakdown": {
+        "duration": 0.04588235294117647,
+        "centroid": 0.2177692307692308,
+        "zeroCrossing": 0.16277777777777777,
+        "rms": 0.25625,
+        "bandShape": 0.2398,
+        "rolloff": 0.5023076923076923,
+        "attack": 0.5805555555555555,
+        "decay": 0.20046874999999997,
+        "burst": 0.7328571428571429
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only 0.22"
+    },
+    {
+      "id": "refclip-s798-d769-v130",
+      "label": "Boss Boom reference 0.798s/0.769s v1.3",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.154,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.3
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.3,
+        "clipStart": 0.798,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.0105,
+      "centroidGapHz": 251.7,
+      "zeroCrossingGapPerSecond": 691.25,
+      "rmsGap": 0.061,
+      "bandShapeGap": 0.1077,
+      "rolloffGapHz": 1246.6,
+      "envelopeShapeGap": 0.442,
+      "activeMetrics": {
+        "duration_s": 0.331,
+        "rms": 0.3145,
+        "spectral_centroid_hz": 1944.4,
+        "zero_crossings_per_s": 2550.2,
+        "spectral_rolloff_85_hz": 3365.2,
+        "band_energy": {
+          "sub_500": 0.1135,
+          "low_mid_500_1500": 0.2832,
+          "mid_1500_3000": 0.4338,
+          "presence_3000_6000": 0.1451,
+          "air_6000_plus": 0.0244
+        },
+        "attack_peak_position": 0.522,
+        "decay_ratio": 0.953,
+        "burst_share": 0.25
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0312,
+        "low_mid_500_1500": 0.0007,
+        "mid_1500_3000": -0.0694,
+        "presence_3000_6000": 0.1012,
+        "air_6000_plus": -0.0014
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0105,
+        "spectral_centroid_hz": 251.7,
+        "zero_crossings_per_s": 691.25,
+        "rms": 0.061,
+        "spectral_spread_hz": 167.1,
+        "spectral_rolloff_85_hz": 1246.6,
+        "spectral_flatness": 0.036,
+        "band_shape_distance": 0.1077,
+        "attack_peak_position": 0.4785,
+        "decay_ratio": 0.589,
+        "envelope_contrast": 0.141,
+        "burst_share": 0.2135
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.64,
+      "worstSegmentRisk10": 3.9,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.14,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 33,
+        "zeroCrossingGapStdPerSecond": 177.4,
+        "bandShapeGapStd": 0.0162,
+        "decayRatioGapStd": 0.009,
+        "rmsGapStd": 0.0128
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d769-v130",
+          "repetition": 1,
+          "risk10": 2.98,
+          "durationGapSeconds": 0.001,
+          "centroidGapHz": 284.7,
+          "rmsGap": 0.0482,
+          "bandShapeGap": 0.1239,
+          "worstSegmentRisk10": 3.99,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s798-d769-v130",
+          "repetition": 2,
+          "risk10": 2.7,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 218.7,
+          "rmsGap": 0.0737,
+          "bandShapeGap": 0.0915,
+          "worstSegmentRisk10": 3.8,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.84,
+      "riskBreakdown": {
+        "duration": 0.012352941176470589,
+        "centroid": 0.1936153846153846,
+        "zeroCrossing": 0.3840277777777778,
+        "rms": 0.38125,
+        "bandShape": 0.2154,
+        "rolloff": 0.47946153846153844,
+        "attack": 0.5316666666666666,
+        "decay": 0.1840625,
+        "burst": 0.61
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only 0.21"
+    },
+    {
+      "id": "refclip-s620-d769-v118",
+      "label": "Boss Boom reference 0.62s/0.769s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.646,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.62,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.62,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.275,
+      "centroidGapHz": 158.15,
+      "zeroCrossingGapPerSecond": 707.6,
+      "rmsGap": 0.047,
+      "bandShapeGap": 0.1015,
+      "rolloffGapHz": 900.8,
+      "envelopeShapeGap": 0.407,
+      "activeMetrics": {
+        "duration_s": 0.595,
+        "rms": 0.3004,
+        "spectral_centroid_hz": 1850.9,
+        "zero_crossings_per_s": 2566.5,
+        "spectral_rolloff_85_hz": 3019.4,
+        "band_energy": {
+          "sub_500": 0.1286,
+          "low_mid_500_1500": 0.3003,
+          "mid_1500_3000": 0.4211,
+          "presence_3000_6000": 0.1275,
+          "air_6000_plus": 0.0226
+        },
+        "attack_peak_position": 0.656,
+        "decay_ratio": 1.627,
+        "burst_share": 0.206
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0161,
+        "low_mid_500_1500": 0.0178,
+        "mid_1500_3000": -0.0821,
+        "presence_3000_6000": 0.0836,
+        "air_6000_plus": -0.0032
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.275,
+        "spectral_centroid_hz": 158.15,
+        "zero_crossings_per_s": 707.6,
+        "rms": 0.047,
+        "spectral_spread_hz": 114.55,
+        "spectral_rolloff_85_hz": 900.8,
+        "spectral_flatness": 0.023,
+        "band_shape_distance": 0.1015,
+        "attack_peak_position": 0.344,
+        "decay_ratio": 0.324,
+        "envelope_contrast": 0.174,
+        "burst_share": 0.2575
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.77,
+      "worstSegmentRisk10": 4.34,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.715,
+        "durationGapStdSeconds": 0.014,
+        "centroidGapStdHz": 32.2,
+        "zeroCrossingGapStdPerSecond": 153.2,
+        "bandShapeGapStd": 0.0161,
+        "decayRatioGapStd": 0.085,
+        "rmsGapStd": 0.0119
+      },
+      "samples": [
+        {
+          "id": "refclip-s620-d769-v118",
+          "repetition": 1,
+          "risk10": 3.56,
+          "durationGapSeconds": 0.289,
+          "centroidGapHz": 190.3,
+          "rmsGap": 0.0588,
+          "bandShapeGap": 0.1176,
+          "worstSegmentRisk10": 4.47,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s620-d769-v118",
+          "repetition": 2,
+          "risk10": 2.13,
+          "durationGapSeconds": 0.261,
+          "centroidGapHz": 126,
+          "rmsGap": 0.035,
+          "bandShapeGap": 0.0853,
+          "worstSegmentRisk10": 4.2,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 2.85,
+      "riskBreakdown": {
+        "duration": 0.3235294117647059,
+        "centroid": 0.12165384615384615,
+        "zeroCrossing": 0.39311111111111113,
+        "rms": 0.29375,
+        "bandShape": 0.203,
+        "rolloff": 0.34646153846153843,
+        "attack": 0.3822222222222222,
+        "decay": 0.10124999999999999,
+        "burst": 0.7357142857142858
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only 0.2; segment risk improved only -0.03; duration gap improved only -0.195s; risk stability sd 0.715 > 0.35"
+    },
+    {
+      "id": "boss-death-guide-window",
+      "label": "Boss death guide window",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.798,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.0345,
+      "centroidGapHz": 180.4,
+      "zeroCrossingGapPerSecond": 1262.5,
+      "rmsGap": 0.078,
+      "bandShapeGap": 0.1074,
+      "rolloffGapHz": 927.55,
+      "envelopeShapeGap": 0.464,
+      "activeMetrics": {
+        "duration_s": 0.355,
+        "rms": 0.331,
+        "spectral_centroid_hz": 1873.1,
+        "zero_crossings_per_s": 3121.4,
+        "spectral_rolloff_85_hz": 3046.2,
+        "band_energy": {
+          "sub_500": 0.1141,
+          "low_mid_500_1500": 0.3041,
+          "mid_1500_3000": 0.4303,
+          "presence_3000_6000": 0.1298,
+          "air_6000_plus": 0.0219
+        },
+        "attack_peak_position": 0.615,
+        "decay_ratio": 0.974,
+        "burst_share": 0.188
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0306,
+        "low_mid_500_1500": 0.0216,
+        "mid_1500_3000": -0.0729,
+        "presence_3000_6000": 0.0859,
+        "air_6000_plus": -0.0039
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0345,
+        "spectral_centroid_hz": 180.4,
+        "zero_crossings_per_s": 1262.5,
+        "rms": 0.078,
+        "spectral_spread_hz": 98.2,
+        "spectral_rolloff_85_hz": 927.55,
+        "spectral_flatness": 0.026,
+        "band_shape_distance": 0.1074,
+        "attack_peak_position": 0.385,
+        "decay_ratio": 0.5675,
+        "envelope_contrast": 0.234,
+        "burst_share": 0.275
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.78,
+      "worstSegmentRisk10": 4.69,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 2,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.04,
+        "durationGapStdSeconds": 0.015,
+        "centroidGapStdHz": 12.1,
+        "zeroCrossingGapStdPerSecond": 95.1,
+        "bandShapeGapStd": 0.0031,
+        "decayRatioGapStd": 0.036,
+        "rmsGapStd": 0.0038
+      },
+      "samples": [
+        {
+          "id": "boss-death-guide-window",
+          "repetition": 1,
+          "risk10": 2.87,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 168.3,
+          "rmsGap": 0.0813,
+          "bandShapeGap": 0.1105,
+          "worstSegmentRisk10": 4.24,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "boss-death-guide-window",
+          "repetition": 2,
+          "risk10": 2.95,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 192.5,
+          "rmsGap": 0.0737,
+          "bandShapeGap": 0.1043,
+          "worstSegmentRisk10": 5.13,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 2.91,
+      "riskBreakdown": {
+        "duration": 0.040588235294117654,
+        "centroid": 0.13876923076923078,
+        "zeroCrossing": 0.7013888888888888,
+        "rms": 0.4875,
+        "bandShape": 0.2148,
+        "rolloff": 0.35674999999999996,
+        "attack": 0.42777777777777776,
+        "decay": 0.17734375,
+        "burst": 0.7857142857142858
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only 0.14; segment risk improved only -0.38"
+    },
+    {
+      "id": "refclip-s798-d900-v92",
+      "label": "Boss Boom reference 0.798s/0.9s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.545,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.798,
+          "clipDuration": 0.9,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.798,
+        "clipDuration": 0.9
+      },
+      "durationGapSeconds": 0.039,
+      "centroidGapHz": 259.45,
+      "zeroCrossingGapPerSecond": 885,
+      "rmsGap": 0.043,
+      "bandShapeGap": 0.1244,
+      "rolloffGapHz": 1231.75,
+      "envelopeShapeGap": 0.494,
+      "activeMetrics": {
+        "duration_s": 0.359,
+        "rms": 0.2969,
+        "spectral_centroid_hz": 1952.2,
+        "zero_crossings_per_s": 2743.9,
+        "spectral_rolloff_85_hz": 3350.4,
+        "band_energy": {
+          "sub_500": 0.1089,
+          "low_mid_500_1500": 0.304,
+          "mid_1500_3000": 0.416,
+          "presence_3000_6000": 0.1461,
+          "air_6000_plus": 0.0252
+        },
+        "attack_peak_position": 0.513,
+        "decay_ratio": 0.957,
+        "burst_share": 0.199
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0358,
+        "low_mid_500_1500": 0.0215,
+        "mid_1500_3000": -0.0872,
+        "presence_3000_6000": 0.1022,
+        "air_6000_plus": -0.0006
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.039,
+        "spectral_centroid_hz": 259.45,
+        "zero_crossings_per_s": 885,
+        "rms": 0.043,
+        "spectral_spread_hz": 180.75,
+        "spectral_rolloff_85_hz": 1231.75,
+        "spectral_flatness": 0.047,
+        "band_shape_distance": 0.1244,
+        "attack_peak_position": 0.4875,
+        "decay_ratio": 0.585,
+        "envelope_contrast": 0.166,
+        "burst_share": 0.2645
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.65,
+      "worstSegmentRisk10": 4.11,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.01,
+        "durationGapStdSeconds": 0.01,
+        "centroidGapStdHz": 48.3,
+        "zeroCrossingGapStdPerSecond": 469.1,
+        "bandShapeGapStd": 0.0053,
+        "decayRatioGapStd": 0.065,
+        "rmsGapStd": 0.0115
+      },
+      "samples": [
+        {
+          "id": "refclip-s798-d900-v92",
+          "repetition": 1,
+          "risk10": 3,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 307.7,
+          "rmsGap": 0.0319,
+          "bandShapeGap": 0.1297,
+          "worstSegmentRisk10": 3.79,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s798-d900-v92",
+          "repetition": 2,
+          "risk10": 3.02,
+          "durationGapSeconds": 0.049,
+          "centroidGapHz": 211.2,
+          "rmsGap": 0.0548,
+          "bandShapeGap": 0.1191,
+          "worstSegmentRisk10": 4.42,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.01,
+      "riskBreakdown": {
+        "duration": 0.04588235294117647,
+        "centroid": 0.19957692307692307,
+        "zeroCrossing": 0.49166666666666664,
+        "rms": 0.26875,
+        "bandShape": 0.2488,
+        "rolloff": 0.47375,
+        "attack": 0.5416666666666666,
+        "decay": 0.1828125,
+        "burst": 0.7557142857142858
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only 0.04; segment risk improved only 0.2; zero-crossing stability sd 469.1/s > 420/s"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "spec": null,
+      "durationGapSeconds": 0.0795,
+      "centroidGapHz": 310.6,
+      "zeroCrossingGapPerSecond": 324.7,
+      "rmsGap": 0.049,
+      "bandShapeGap": 0.228,
+      "rolloffGapHz": 1588.1,
+      "envelopeShapeGap": 0.268,
+      "activeMetrics": {
+        "duration_s": 0.261,
+        "rms": 0.2048,
+        "spectral_centroid_hz": 2003.3,
+        "zero_crossings_per_s": 2052.3,
+        "spectral_rolloff_85_hz": 3706.7,
+        "band_energy": {
+          "sub_500": 0.1382,
+          "low_mid_500_1500": 0.2963,
+          "mid_1500_3000": 0.3246,
+          "presence_3000_6000": 0.2148,
+          "air_6000_plus": 0.0262
+        },
+        "attack_peak_position": 0.834,
+        "decay_ratio": 2.406,
+        "burst_share": 0.382
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0065,
+        "low_mid_500_1500": 0.0138,
+        "mid_1500_3000": -0.1786,
+        "presence_3000_6000": 0.1709,
+        "air_6000_plus": 0.0004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.0795,
+        "spectral_centroid_hz": 310.6,
+        "zero_crossings_per_s": 324.7,
+        "rms": 0.049,
+        "spectral_spread_hz": 264.3,
+        "spectral_rolloff_85_hz": 1588.1,
+        "spectral_flatness": 0.035,
+        "band_shape_distance": 0.228,
+        "attack_peak_position": 0.1665,
+        "decay_ratio": 1.2415,
+        "envelope_contrast": 3.685,
+        "burst_share": 0.0815
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.99,
+      "worstSegmentRisk10": 4.31,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.01,
+        "durationGapStdSeconds": 0.06,
+        "centroidGapStdHz": 1.5,
+        "zeroCrossingGapStdPerSecond": 193.4,
+        "bandShapeGapStd": 0.0019,
+        "decayRatioGapStd": 0.864,
+        "rmsGapStd": 0.0001
+      },
+      "samples": [
+        {
+          "id": "baseline-current",
+          "repetition": 1,
+          "risk10": 3.04,
+          "durationGapSeconds": 0.139,
+          "centroidGapHz": 309.1,
+          "rmsGap": 0.0488,
+          "bandShapeGap": 0.2261,
+          "worstSegmentRisk10": 4.37,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "baseline-current",
+          "repetition": 2,
+          "risk10": 3.06,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 312.1,
+          "rmsGap": 0.0486,
+          "bandShapeGap": 0.2298,
+          "worstSegmentRisk10": 4.24,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.05,
+      "riskBreakdown": {
+        "duration": 0.09352941176470589,
+        "centroid": 0.23892307692307693,
+        "zeroCrossing": 0.18038888888888888,
+        "rms": 0.30625,
+        "bandShape": 0.456,
+        "rolloff": 0.6108076923076923,
+        "attack": 0.185,
+        "decay": 0.38796875,
+        "burst": 0.23285714285714287
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "baseline"
+    },
+    {
+      "id": "refclip-s880-d769-v104",
+      "label": "Boss Boom reference 0.88s/0.769s v1.04",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.309,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.88,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.04
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.04,
+        "clipStart": 0.88,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.016,
+      "centroidGapHz": 263.25,
+      "zeroCrossingGapPerSecond": 530.05,
+      "rmsGap": 0.041,
+      "bandShapeGap": 0.1285,
+      "rolloffGapHz": 1315.1,
+      "envelopeShapeGap": 0.622,
+      "activeMetrics": {
+        "duration_s": 0.336,
+        "rms": 0.2946,
+        "spectral_centroid_hz": 1956,
+        "zero_crossings_per_s": 2389,
+        "spectral_rolloff_85_hz": 3433.7,
+        "band_energy": {
+          "sub_500": 0.1154,
+          "low_mid_500_1500": 0.3008,
+          "mid_1500_3000": 0.4059,
+          "presence_3000_6000": 0.1541,
+          "air_6000_plus": 0.0239
+        },
+        "attack_peak_position": 0.41,
+        "decay_ratio": 0.718,
+        "burst_share": 0.13
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0293,
+        "low_mid_500_1500": 0.0183,
+        "mid_1500_3000": -0.0973,
+        "presence_3000_6000": 0.1102,
+        "air_6000_plus": -0.0019
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.016,
+        "spectral_centroid_hz": 263.25,
+        "zero_crossings_per_s": 530.05,
+        "rms": 0.041,
+        "spectral_spread_hz": 191.35,
+        "spectral_rolloff_85_hz": 1315.1,
+        "spectral_flatness": 0.033,
+        "band_shape_distance": 0.1285,
+        "attack_peak_position": 0.59,
+        "decay_ratio": 0.824,
+        "envelope_contrast": 0.066,
+        "burst_share": 0.3335
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.22,
+      "worstSegmentRisk10": 3.28,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "tail reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.025,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 5.6,
+        "zeroCrossingGapStdPerSecond": 15.2,
+        "bandShapeGapStd": 0.0029,
+        "decayRatioGapStd": 0.02,
+        "rmsGapStd": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s880-d769-v104",
+          "repetition": 1,
+          "risk10": 3.06,
+          "durationGapSeconds": 0.011,
+          "centroidGapHz": 268.9,
+          "rmsGap": 0.0411,
+          "bandShapeGap": 0.1314,
+          "worstSegmentRisk10": 3.33,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s880-d769-v104",
+          "repetition": 2,
+          "risk10": 3.11,
+          "durationGapSeconds": 0.021,
+          "centroidGapHz": 257.6,
+          "rmsGap": 0.041,
+          "bandShapeGap": 0.1256,
+          "worstSegmentRisk10": 3.23,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.08,
+      "riskBreakdown": {
+        "duration": 0.018823529411764708,
+        "centroid": 0.2025,
+        "zeroCrossing": 0.2944722222222222,
+        "rms": 0.25625,
+        "bandShape": 0.257,
+        "rolloff": 0.5058076923076923,
+        "attack": 0.6555555555555556,
+        "decay": 0.25749999999999995,
+        "burst": 0.952857142857143
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only -0.03"
+    },
+    {
+      "id": "refclip-s980-d769-v92",
+      "label": "Boss Boom reference 0.98s/0.769s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.567,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.98,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.98,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.02,
+      "centroidGapHz": 223.55,
+      "zeroCrossingGapPerSecond": 1008.55,
+      "rmsGap": 0.062,
+      "bandShapeGap": 0.1009,
+      "rolloffGapHz": 1255.45,
+      "envelopeShapeGap": 0.485,
+      "activeMetrics": {
+        "duration_s": 0.34,
+        "rms": 0.3152,
+        "spectral_centroid_hz": 1916.3,
+        "zero_crossings_per_s": 2867.5,
+        "spectral_rolloff_85_hz": 3374.1,
+        "band_energy": {
+          "sub_500": 0.1068,
+          "low_mid_500_1500": 0.2865,
+          "mid_1500_3000": 0.4432,
+          "presence_3000_6000": 0.1407,
+          "air_6000_plus": 0.0229
+        },
+        "attack_peak_position": 0.393,
+        "decay_ratio": 0.947,
+        "burst_share": 0.256
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0379,
+        "low_mid_500_1500": 0.004,
+        "mid_1500_3000": -0.06,
+        "presence_3000_6000": 0.0968,
+        "air_6000_plus": -0.0029
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.02,
+        "spectral_centroid_hz": 223.55,
+        "zero_crossings_per_s": 1008.55,
+        "rms": 0.062,
+        "spectral_spread_hz": 131.3,
+        "spectral_rolloff_85_hz": 1255.45,
+        "spectral_flatness": 0.027,
+        "band_shape_distance": 0.1009,
+        "attack_peak_position": 0.6075,
+        "decay_ratio": 0.5955,
+        "envelope_contrast": 0.307,
+        "burst_share": 0.207
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.47,
+      "worstSegmentRisk10": 3.75,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.04,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 6.4,
+        "zeroCrossingGapStdPerSecond": 54.4,
+        "bandShapeGapStd": 0.0004,
+        "decayRatioGapStd": 0.044,
+        "rmsGapStd": 0.0011
+      },
+      "samples": [
+        {
+          "id": "refclip-s980-d769-v92",
+          "repetition": 1,
+          "risk10": 3.15,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 229.9,
+          "rmsGap": 0.0606,
+          "bandShapeGap": 0.1005,
+          "worstSegmentRisk10": 3.8,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s980-d769-v92",
+          "repetition": 2,
+          "risk10": 3.07,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 217.2,
+          "rmsGap": 0.0628,
+          "bandShapeGap": 0.1013,
+          "worstSegmentRisk10": 3.69,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.11,
+      "riskBreakdown": {
+        "duration": 0.023529411764705882,
+        "centroid": 0.17196153846153847,
+        "zeroCrossing": 0.5603055555555555,
+        "rms": 0.3875,
+        "bandShape": 0.2018,
+        "rolloff": 0.48286538461538464,
+        "attack": 0.675,
+        "decay": 0.18609375,
+        "burst": 0.5914285714285714
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "whole-cue risk improved only -0.06"
+    },
+    {
+      "id": "refclip-s880-d769-v118",
+      "label": "Boss Boom reference 0.88s/0.769s v1.18",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.358,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.88,
+          "clipDuration": 0.769,
+          "referenceVolume": 1.18
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 1.18,
+        "clipStart": 0.88,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.025,
+      "centroidGapHz": 236.9,
+      "zeroCrossingGapPerSecond": 848,
+      "rmsGap": 0.051,
+      "bandShapeGap": 0.1117,
+      "rolloffGapHz": 1221.15,
+      "envelopeShapeGap": 0.621,
+      "activeMetrics": {
+        "duration_s": 0.345,
+        "rms": 0.3049,
+        "spectral_centroid_hz": 1929.6,
+        "zero_crossings_per_s": 2706.9,
+        "spectral_rolloff_85_hz": 3339.8,
+        "band_energy": {
+          "sub_500": 0.1164,
+          "low_mid_500_1500": 0.282,
+          "mid_1500_3000": 0.4345,
+          "presence_3000_6000": 0.1454,
+          "air_6000_plus": 0.0218
+        },
+        "attack_peak_position": 0.375,
+        "decay_ratio": 0.928,
+        "burst_share": 0.101
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0283,
+        "low_mid_500_1500": -0.0005,
+        "mid_1500_3000": -0.0687,
+        "presence_3000_6000": 0.1015,
+        "air_6000_plus": -0.004
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.025,
+        "spectral_centroid_hz": 236.9,
+        "zero_crossings_per_s": 848,
+        "rms": 0.051,
+        "spectral_spread_hz": 137.6,
+        "spectral_rolloff_85_hz": 1221.15,
+        "spectral_flatness": 0.024,
+        "band_shape_distance": 0.1117,
+        "attack_peak_position": 0.625,
+        "decay_ratio": 0.614,
+        "envelope_contrast": 0.058,
+        "burst_share": 0.3625
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.71,
+      "worstSegmentRisk10": 3.86,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset loudness/energy differs; tune gain after timing and timbre remain stable.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.095,
+        "durationGapStdSeconds": 0.014,
+        "centroidGapStdHz": 16.1,
+        "zeroCrossingGapStdPerSecond": 236.4,
+        "bandShapeGapStd": 0.0179,
+        "decayRatioGapStd": 0.149,
+        "rmsGapStd": 0.0083
+      },
+      "samples": [
+        {
+          "id": "refclip-s880-d769-v118",
+          "repetition": 1,
+          "risk10": 3.26,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 220.8,
+          "rmsGap": 0.0597,
+          "bandShapeGap": 0.0937,
+          "worstSegmentRisk10": 4.43,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s880-d769-v118",
+          "repetition": 2,
+          "risk10": 3.07,
+          "durationGapSeconds": 0.011,
+          "centroidGapHz": 253,
+          "rmsGap": 0.0431,
+          "bandShapeGap": 0.1296,
+          "worstSegmentRisk10": 3.29,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.17,
+      "riskBreakdown": {
+        "duration": 0.029411764705882356,
+        "centroid": 0.18223076923076922,
+        "zeroCrossing": 0.4711111111111111,
+        "rms": 0.31875,
+        "bandShape": 0.2234,
+        "rolloff": 0.46967307692307697,
+        "attack": 0.6944444444444444,
+        "decay": 0.191875,
+        "burst": 1
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only -0.12"
+    },
+    {
+      "id": "boss-two-burst-collapse",
+      "label": "Boss two-burst collapse",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "seq": [
+          680,
+          450,
+          280
+        ],
+        "step": 0.045,
+        "wave": "triangle",
+        "volume": 0.0105,
+        "slide": -140,
+        "lpHz": 2300,
+        "tones": [
+          {
+            "freq": 170,
+            "duration": 0.19,
+            "wave": "sine",
+            "volume": 0.013,
+            "slide": -52,
+            "lpHz": 1180,
+            "delay": 0.08
+          }
+        ],
+        "noise": [
+          {
+            "duration": 0.052,
+            "volume": 0.003,
+            "hp": 820,
+            "delay": 0.014
+          }
+        ]
+      },
+      "durationGapSeconds": 0.074,
+      "centroidGapHz": 298.2,
+      "zeroCrossingGapPerSecond": 306.1,
+      "rmsGap": 0.063,
+      "bandShapeGap": 0.2145,
+      "rolloffGapHz": 1613.95,
+      "envelopeShapeGap": 0.364,
+      "activeMetrics": {
+        "duration_s": 0.246,
+        "rms": 0.1908,
+        "spectral_centroid_hz": 1990.9,
+        "zero_crossings_per_s": 1598.1,
+        "spectral_rolloff_85_hz": 3732.6,
+        "band_energy": {
+          "sub_500": 0.1732,
+          "low_mid_500_1500": 0.2507,
+          "mid_1500_3000": 0.3208,
+          "presence_3000_6000": 0.229,
+          "air_6000_plus": 0.0265
+        },
+        "attack_peak_position": 0.837,
+        "decay_ratio": 3.222,
+        "burst_share": 0.329
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0285,
+        "low_mid_500_1500": -0.0318,
+        "mid_1500_3000": -0.1824,
+        "presence_3000_6000": 0.1851,
+        "air_6000_plus": 0.0007
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.074,
+        "spectral_centroid_hz": 298.2,
+        "zero_crossings_per_s": 306.1,
+        "rms": 0.063,
+        "spectral_spread_hz": 265.85,
+        "spectral_rolloff_85_hz": 1613.95,
+        "spectral_flatness": 0.018,
+        "band_shape_distance": 0.2145,
+        "attack_peak_position": 0.163,
+        "decay_ratio": 1.6795,
+        "envelope_contrast": 1.906,
+        "burst_share": 0.1345
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.74,
+      "worstSegmentRisk10": 3.84,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.36,
+        "durationGapStdSeconds": 0.035,
+        "centroidGapStdHz": 7.4,
+        "zeroCrossingGapStdPerSecond": 260.8,
+        "bandShapeGapStd": 0.0344,
+        "decayRatioGapStd": 0.784,
+        "rmsGapStd": 0.0288
+      },
+      "samples": [
+        {
+          "id": "boss-two-burst-collapse",
+          "repetition": 1,
+          "risk10": 3.54,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 290.8,
+          "rmsGap": 0.0915,
+          "bandShapeGap": 0.2489,
+          "worstSegmentRisk10": 4.24,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "boss-two-burst-collapse",
+          "repetition": 2,
+          "risk10": 2.82,
+          "durationGapSeconds": 0.109,
+          "centroidGapHz": 305.6,
+          "rmsGap": 0.034,
+          "bandShapeGap": 0.1801,
+          "worstSegmentRisk10": 3.43,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 3.18,
+      "riskBreakdown": {
+        "duration": 0.08705882352941176,
+        "centroid": 0.22938461538461538,
+        "zeroCrossing": 0.17005555555555557,
+        "rms": 0.39375,
+        "bandShape": 0.429,
+        "rolloff": 0.62075,
+        "attack": 0.1811111111111111,
+        "decay": 0.5248437499999999,
+        "burst": 0.38428571428571434
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "whole-cue risk improved only -0.13; risk stability sd 0.36 > 0.35"
+    },
+    {
+      "id": "refclip-s880-d769-v92",
+      "label": "Boss Boom reference 0.88s/0.769s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "boss-boom-reference-subclip-grid",
+        "heuristic": 0.267,
+        "target": "Make boss destruction feel larger and more final than enemyBoom without becoming a long muddy overlap risk during dense play.",
+        "params": {
+          "clipStart": 0.88,
+          "clipDuration": 0.769,
+          "referenceVolume": 0.92
+        }
+      },
+      "spec": {
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "cooldownMs": 360,
+        "referenceVolume": 0.92,
+        "clipStart": 0.88,
+        "clipDuration": 0.769
+      },
+      "durationGapSeconds": 0.034,
+      "centroidGapHz": 245.25,
+      "zeroCrossingGapPerSecond": 770.75,
+      "rmsGap": 0.038,
+      "bandShapeGap": 0.136,
+      "rolloffGapHz": 1355.05,
+      "envelopeShapeGap": 0.571,
+      "activeMetrics": {
+        "duration_s": 0.315,
+        "rms": 0.291,
+        "spectral_centroid_hz": 1938,
+        "zero_crossings_per_s": 2629.6,
+        "spectral_rolloff_85_hz": 3473.7,
+        "band_energy": {
+          "sub_500": 0.1168,
+          "low_mid_500_1500": 0.3029,
+          "mid_1500_3000": 0.4024,
+          "presence_3000_6000": 0.1547,
+          "air_6000_plus": 0.0234
+        },
+        "attack_peak_position": 0.308,
+        "decay_ratio": 1.018,
+        "burst_share": 0.191
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.0279,
+        "low_mid_500_1500": 0.0204,
+        "mid_1500_3000": -0.1008,
+        "presence_3000_6000": 0.1108,
+        "air_6000_plus": -0.0024
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.034,
+        "spectral_centroid_hz": 245.25,
+        "zero_crossings_per_s": 770.75,
+        "rms": 0.038,
+        "spectral_spread_hz": 175.65,
+        "spectral_rolloff_85_hz": 1355.05,
+        "spectral_flatness": 0.03,
+        "band_shape_distance": 0.136,
+        "attack_peak_position": 0.692,
+        "decay_ratio": 0.5245,
+        "envelope_contrast": 0.098,
+        "burst_share": 0.2725
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.18,
+      "worstSegmentRisk10": 3.51,
+      "worstSegmentRole": "onset",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.095,
+        "durationGapStdSeconds": 0.005,
+        "centroidGapStdHz": 28.1,
+        "zeroCrossingGapStdPerSecond": 197.5,
+        "bandShapeGapStd": 0.0367,
+        "decayRatioGapStd": 0.13,
+        "rmsGapStd": 0.0055
+      },
+      "samples": [
+        {
+          "id": "refclip-s880-d769-v92",
+          "repetition": 1,
+          "risk10": 3.16,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 217.1,
+          "rmsGap": 0.0431,
+          "bandShapeGap": 0.0993,
+          "worstSegmentRisk10": 3.72,
+          "worstSegmentRole": "onset"
+        },
+        {
+          "id": "refclip-s880-d769-v92",
+          "repetition": 2,
+          "risk10": 3.35,
+          "durationGapSeconds": 0.039,
+          "centroidGapHz": 273.4,
+          "rmsGap": 0.032,
+          "bandShapeGap": 0.1726,
+          "worstSegmentRisk10": 3.3,
+          "worstSegmentRole": "onset"
+        }
+      ],
+      "risk10": 3.26,
+      "riskBreakdown": {
+        "duration": 0.04,
+        "centroid": 0.18865384615384614,
+        "zeroCrossing": 0.42819444444444443,
+        "rms": 0.2375,
+        "bandShape": 0.272,
+        "rolloff": 0.5211730769230769,
+        "attack": 0.7688888888888888,
+        "decay": 0.16390624999999998,
+        "burst": 0.7785714285714287
+      },
+      "dominantPenalty": "burst",
+      "keeperRead": "whole-cue risk improved only -0.21"
+    },
+    {
+      "id": "wide-boss-finality",
+      "label": "Wide boss finality",
+      "generated": false,
+      "generator": null,
+      "spec": {
+        "tones": [
+          {
+            "freq": 520,
+            "duration": 0.065,
+            "wave": "triangle",
+            "volume": 0.012,
+            "slide": -220,
+            "lpHz": 2600
+          },
+          {
+            "freq": 300,
+            "duration": 0.12,
+            "wave": "sawtooth",
+            "volume": 0.014,
+            "slide": -135,
+            "lpHz": 1900,
+            "delay": 0.018
+          },
+          {
+            "freq": 150,
+            "duration": 0.22,
+            "wave": "triangle",
+            "volume": 0.014,
+            "slide": -60,
+            "lpHz": 1200,
+            "delay": 0.05
+          }
+        ],
+        "noise": [
+          {
+            "duration": 0.07,
+            "volume": 0.0036,
+            "hp": 760,
+            "delay": 0.012
+          }
+        ]
+      },
+      "durationGapSeconds": 0.029,
+      "centroidGapHz": 306.5,
+      "zeroCrossingGapPerSecond": 548.45,
+      "rmsGap": 0.071,
+      "bandShapeGap": 0.2353,
+      "rolloffGapHz": 1575.95,
+      "envelopeShapeGap": 0.373,
+      "activeMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.1823,
+        "spectral_centroid_hz": 1999.2,
+        "zero_crossings_per_s": 1755,
+        "spectral_rolloff_85_hz": 3694.6,
+        "band_energy": {
+          "sub_500": 0.1478,
+          "low_mid_500_1500": 0.288,
+          "mid_1500_3000": 0.3219,
+          "presence_3000_6000": 0.2167,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 0.835,
+        "decay_ratio": 2.606,
+        "burst_share": 0.29
+      },
+      "referenceMetrics": {
+        "duration_s": 0.32,
+        "rms": 0.2535,
+        "spectral_centroid_hz": 1692.7,
+        "zero_crossings_per_s": 1858.9,
+        "spectral_rolloff_85_hz": 2118.6,
+        "band_energy": {
+          "sub_500": 0.1447,
+          "low_mid_500_1500": 0.2825,
+          "mid_1500_3000": 0.5032,
+          "presence_3000_6000": 0.0439,
+          "air_6000_plus": 0.0258
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 1.542,
+        "burst_share": 0.463
+      },
+      "bandEnergyDelta": {
+        "sub_500": 0.0031,
+        "low_mid_500_1500": 0.0055,
+        "mid_1500_3000": -0.1813,
+        "presence_3000_6000": 0.1728,
+        "air_6000_plus": 0
+      },
+      "cadencePressure": null,
+      "comparison": {
+        "duration_s": 0.029,
+        "spectral_centroid_hz": 306.5,
+        "zero_crossings_per_s": 548.45,
+        "rms": 0.071,
+        "spectral_spread_hz": 265.1,
+        "spectral_rolloff_85_hz": 1575.95,
+        "spectral_flatness": 0.037,
+        "band_shape_distance": 0.2353,
+        "attack_peak_position": 0.165,
+        "decay_ratio": 1.4135,
+        "envelope_contrast": 3.443,
+        "burst_share": 0.173
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 3.97,
+      "worstSegmentRisk10": 4.27,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 1,
+      "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0.3,
+        "durationGapStdSeconds": 0,
+        "centroidGapStdHz": 3.4,
+        "zeroCrossingGapStdPerSecond": 104,
+        "bandShapeGapStd": 0.012,
+        "decayRatioGapStd": 1.065,
+        "rmsGapStd": 0.0225
+      },
+      "samples": [
+        {
+          "id": "wide-boss-finality",
+          "repetition": 1,
+          "risk10": 3.58,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 303.1,
+          "rmsGap": 0.0937,
+          "bandShapeGap": 0.2472,
+          "worstSegmentRisk10": 4.31,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "wide-boss-finality",
+          "repetition": 2,
+          "risk10": 2.98,
+          "durationGapSeconds": 0.029,
+          "centroidGapHz": 309.9,
+          "rmsGap": 0.0488,
+          "bandShapeGap": 0.2233,
+          "worstSegmentRisk10": 4.23,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.28,
+      "riskBreakdown": {
+        "duration": 0.03411764705882353,
+        "centroid": 0.23576923076923076,
+        "zeroCrossing": 0.3046944444444445,
+        "rms": 0.44375,
+        "bandShape": 0.4706,
+        "rolloff": 0.6061346153846154,
+        "attack": 0.18333333333333335,
+        "decay": 0.44171875,
+        "burst": 0.4942857142857143
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "whole-cue risk improved only -0.23; segment risk improved only 0.04"
+    }
+  ],
+  "decision": {
+    "status": "candidate-recommended",
+    "keep": true,
+    "baseline": "baseline-current",
+    "best": "refclip-s798-d640-v104",
+    "measuredBest": "refclip-s798-d640-v104",
+    "riskDelta": 2.48,
+    "segmentRiskDelta": 1.57,
+    "durationDeltaSeconds": 0.055,
+    "bandDelta": 0.1815,
+    "reason": "Boss Boom candidate clears measured keeper gates."
+  },
+  "nextStep": "Promote refclip-s798-d640-v104 for Boss Boom, then rerun the full audio comparison and event-gap rollup."
+}

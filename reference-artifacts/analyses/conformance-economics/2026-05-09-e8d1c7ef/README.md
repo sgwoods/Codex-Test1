@@ -1,0 +1,67 @@
+# Conformance Economics
+
+Generated: `2026-05-09T20:43:35.163Z`
+
+## Problem
+
+Conformance work should not only ask whether a score improved. It should also ask how much local compute, model/API help, GPU/video work, artifact volume, and retry cost were spent to create that improvement.
+
+## Strategy
+
+This artifact joins historical conformance reports with an optional measured-run ledger. Existing reports provide score trends and artifact-volume proxies; future measured runs add wall time, CPU time, memory, resource classes, and declared model/API/GPU usage.
+
+## Current Read
+
+- Metric points scanned: 886
+- Score deltas found: 114
+- Measured runs in ledger: 293
+- Tracked wall time: 9529.578s
+- Tracked CPU time: 16309.5s
+- GPU-equivalent model/Codex runs: 7
+- Declared model calls: 0
+- Declared model tokens: 0 input / 0 output
+
+## Charts
+
+- `score-trends.svg`: conformance trends by score axis.
+- `largest-score-deltas.svg`: largest positive and negative score changes in the artifact history.
+- `compute-minutes-by-resource.svg`: measured future run time by resource class.
+- `cost-per-positive-score-point.svg`: approximate tracked wall minutes spent per +1 positive score point by investment axis.
+
+## Interpretation Rules
+
+- Treat artifact volume and run count as compute proxies until a command has a measured ledger entry.
+- Separate gameplay-quality gains from measurement-precision gains. A harness that explains a failure better has value even when player-facing conformance has not moved yet.
+- Track model/API/GPU work explicitly when Codex or OpenAI APIs design or execute a long-cycle assessment. Use the `gpu-equivalent` resource rollup for Codex/model/API work and do not log secrets or raw prompts in the ledger.
+- Prefer high-ROI next steps: large gap, clear measurable target, modest local compute, and reusable harness/platform logic.
+
+## Highest-Value Recent Deltas
+
+- quality:challenge-timing: 4.2 -> 8.4 (+4.2)
+- quality:stage1-timing: 2.1 -> 5.6 (+3.5)
+- stage4-pressure-collision-diagnostic-coverage: 3.333 -> 6.667 (+3.334)
+- stage4-pressure-exact-replay-coverage: 3.333 -> 0 (-3.333)
+- stage4-pressure-exact-replay-coverage: 0 -> 3.333 (+3.333)
+- stage4-pressure-exact-replay-coverage: 3.333 -> 0 (-3.333)
+- stage4-pressure-collision-diagnostic-coverage: 0 -> 3.333 (+3.333)
+- stage-signature-distance: 6.7 -> 10 (+3.3)
+
+## Relative Cost To Move Metrics
+
+| Axis | Runs | Wall min | Positive score gain | Wall min / +1 score | Attribution |
+| --- | ---: | ---: | ---: | ---: | --- |
+| formation-boss-grammar | 2 | 0.133 | 2.3 | 0.06 | tracked-spend-and-score-movement |
+| stage4-pressure | 28 | 12.824 | 10 | 1.28 | tracked-spend-and-score-movement |
+| level-arc | 95 | 8.738 | 3.4 | 2.57 | tracked-spend-and-score-movement |
+| audio | 146 | 112.103 | 4.6 | 24.37 | tracked-spend-and-score-movement |
+| movement | 0 | 0 | 7 | n/a | historical-score-movement-without-tracked-spend |
+| stage1-timing | 0 | 0 | 6.4 | n/a | historical-score-movement-without-tracked-spend |
+| challenge-timing | 0 | 0 | 5.7 | n/a | historical-score-movement-without-tracked-spend |
+| stage-signature-distance | 0 | 0 | 4.3 | n/a | historical-score-movement-without-tracked-spend |
+| movement-grammar-expansion | 0 | 0 | 3.4 | n/a | historical-score-movement-without-tracked-spend |
+| stage-distinctiveness | 0 | 0 | 3.3 | n/a | historical-score-movement-without-tracked-spend |
+
+## Next Instrumentation Step
+
+- Run expensive harnesses through `npm run harness:measure -- --axis <axis> --resource cpu --resource browser -- <command>` so future economics charts can compute cost per score delta instead of relying on artifact-size proxies.
+- Log Codex/model/API-only planning or review work with `npm run harness:measure -- --manual --axis <axis> --resource codex --model-provider openai --model <model> --model-minutes <minutes> --notes "<short note>"`. Optional quota snapshots from the app usage screen can be stored with `--codex-usage-5h-left-percent`, `--codex-usage-week-left-percent`, `--codex-model-5h-left-percent`, and `--codex-model-week-left-percent`.
