@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T20-55-32-219Z-53735",
-  "startedAt": "2026-05-09T20:55:32.219Z",
-  "endedAt": "2026-05-09T20:55:32.434Z",
+  "id": "2026-05-09T21-09-45-268Z-74589",
+  "startedAt": "2026-05-09T21:09:45.268Z",
+  "endedAt": "2026-05-09T21:09:45.493Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "fa13c102",
+  "commit": "5eb9b0b1",
   "command": [
     "npm",
     "run",
@@ -17,13 +17,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "higher impact post enemyBoom lab rollup",
+  "notes": "loss reward rescueJoin evidence lab rollup",
   "measurement": {
-    "wallSeconds": 0.215,
-    "timeRealSeconds": 0.2,
-    "timeUserSeconds": 0.14,
-    "timeSystemSeconds": 0.11,
-    "cpuSeconds": 0.25,
+    "wallSeconds": 0.225,
+    "timeRealSeconds": 0.22,
+    "timeUserSeconds": 0.15,
+    "timeSystemSeconds": 0.12,
+    "cpuSeconds": 0.27,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 633923727,
-    "artifactBytesAfter": 633971398,
-    "artifactBytesDelta": 47671
+    "artifactBytesBefore": 647661185,
+    "artifactBytesAfter": 648390672,
+    "artifactBytesDelta": 729487
   }
 }
