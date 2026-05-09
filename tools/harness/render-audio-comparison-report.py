@@ -157,9 +157,31 @@ def active_window(sample_rate, data):
         full = float(data.size) / float(sample_rate)
         return {"start_s": 0.0, "end_s": round(full, 3), "duration_s": round(full, 3), "coverage": 1.0}, data
 
+    active_set = set(int(index) for index in active)
+    max_gap_frames = max(1, int(0.035 / (hop / sample_rate)))
+    islands = []
+    open_start = int(active[0])
+    last_active = int(active[0])
+    for frame_index in [int(index) for index in active[1:]]:
+        if frame_index - last_active <= max_gap_frames:
+            last_active = frame_index
+            continue
+        islands.append((open_start, last_active))
+        open_start = frame_index
+        last_active = frame_index
+    islands.append((open_start, last_active))
+
+    def island_score(island):
+        start_index, end_index = island
+        indices = [index for index in range(start_index, end_index + 1) if index in active_set]
+        if not indices:
+            return 0.0
+        return float(np.sum(frame_rms[indices]))
+
+    best_start, best_end = max(islands, key=island_score)
     pad = int(sample_rate * 0.05)
-    start = max(0, int(frame_starts[int(active[0])]) - pad)
-    end = min(data.size, int(frame_starts[int(active[-1])] + frame_size) + pad)
+    start = max(0, int(frame_starts[best_start]) - pad)
+    end = min(data.size, int(frame_starts[best_end] + frame_size) + pad)
     duration = float(end - start) / float(sample_rate)
     full_duration = float(data.size) / float(sample_rate)
     return {

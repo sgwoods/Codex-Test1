@@ -1,20 +1,15 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-09T18-25-06-855Z-6854",
-  "startedAt": "2026-05-09T18:25:06.855Z",
-  "endedAt": "2026-05-09T18:25:34.403Z",
+  "id": "2026-05-09T18-33-14-818Z-16751",
+  "startedAt": "2026-05-09T18:33:14.818Z",
+  "endedAt": "2026-05-09T18:33:15.042Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "0b62f863",
+  "commit": "c3f4e668",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-audio-focus-candidates",
-    "--",
-    "--cue=enemy-boom",
-    "--reference-grid-limit=36",
-    "--repeats=3",
-    "--candidate-ids=refclip-s500-d280-v95,refclip-s500-d240-v95,refclip-s500-d280-v105,zako-destruction-guide-window"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
     "audio"
@@ -22,13 +17,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "enemyBoom repeated focused keeper check",
+  "notes": "event gap after enemyBoom compact promotion",
   "measurement": {
-    "wallSeconds": 27.548,
-    "timeRealSeconds": 27.54,
-    "timeUserSeconds": 39.14,
-    "timeSystemSeconds": 10.58,
-    "cpuSeconds": 49.72,
+    "wallSeconds": 0.224,
+    "timeRealSeconds": 0.22,
+    "timeUserSeconds": 0.16,
+    "timeSystemSeconds": 0.11,
+    "cpuSeconds": 0.27,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -50,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 531856814,
-    "artifactBytesAfter": 532787043,
-    "artifactBytesDelta": 930229
+    "artifactBytesBefore": 539064943,
+    "artifactBytesAfter": 539135103,
+    "artifactBytesDelta": 70160
   }
 }

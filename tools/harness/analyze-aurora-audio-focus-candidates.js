@@ -92,6 +92,68 @@ const CUE_CONFIGS = {
           ],
           noise: [{ duration: .035, volume: .0025, hp: 820, delay: .008 }]
         }
+      },
+      {
+        id: 'lowmid-front-pop',
+        label: 'Low-mid front pop',
+        spec: {
+          tones: [
+            { freq: 760, duration: .05, wave: 'triangle', volume: .010, slide: -280, lpHz: 1550 },
+            { freq: 420, duration: .075, wave: 'sawtooth', volume: .013, slide: -150, lpHz: 1450, delay: .006 },
+            { freq: 190, duration: .095, wave: 'triangle', volume: .010, slide: -55, lpHz: 1200, delay: .018 }
+          ],
+          noise: [{ duration: .026, volume: .0012, hp: 620, delay: .006 }]
+        }
+      },
+      {
+        id: 'zako-lowmid-click-body',
+        label: 'Zako low-mid click body',
+        spec: {
+          tones: [
+            { freq: 980, duration: .032, wave: 'triangle', volume: .008, slide: -440, lpHz: 1700 },
+            { freq: 560, duration: .07, wave: 'triangle', volume: .012, slide: -170, lpHz: 1550, delay: .008 },
+            { freq: 260, duration: .09, wave: 'sawtooth', volume: .009, slide: -80, lpHz: 1250, delay: .02 }
+          ],
+          noise: [{ duration: .024, volume: .0016, hp: 720, delay: .004 }]
+        }
+      },
+      {
+        id: 'dry-finality-thud',
+        label: 'Dry finality thud',
+        spec: {
+          tones: [
+            { freq: 640, duration: .042, wave: 'sawtooth', volume: .011, slide: -260, lpHz: 1500 },
+            { freq: 330, duration: .085, wave: 'triangle', volume: .013, slide: -110, lpHz: 1350, delay: .008 },
+            { freq: 146, duration: .08, wave: 'triangle', volume: .008, slide: -36, lpHz: 1050, delay: .024 }
+          ],
+          noise: [{ duration: .02, volume: .001, hp: 560, delay: .006 }]
+        }
+      },
+      {
+        id: 'single-burst-lowmid',
+        label: 'Single burst low-mid',
+        spec: {
+          tones: [
+            { freq: 520, duration: .11, wave: 'sawtooth', volume: .017, slide: -260, lpHz: 1450 },
+            { freq: 250, duration: .095, wave: 'triangle', volume: .010, slide: -70, lpHz: 1150, delay: .012 }
+          ],
+          noise: [{ duration: .018, volume: .0011, hp: 620, delay: .004 }]
+        }
+      },
+      {
+        id: 'zako-seq-lowmid',
+        label: 'Zako sequence low-mid',
+        spec: {
+          seq: [740, 520, 360],
+          step: .026,
+          wave: 'triangle',
+          volume: .0105,
+          slide: -120,
+          lpHz: 1550,
+          tones: [
+            { freq: 220, duration: .085, wave: 'triangle', volume: .009, slide: -50, lpHz: 1100, delay: .04 }
+          ]
+        }
       }
     ],
     keeper: { risk: .35, segment: .35, duration: .12, acceptableDuration: .13, centroidWorsenHz: 90, bandWorsen: .045 }

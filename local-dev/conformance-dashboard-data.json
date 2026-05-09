@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T18:18:15.230Z",
-  "commit": "878b7eb2",
+  "generatedAt": "2026-05-09T18:25:54.663Z",
+  "commit": "0b62f863",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -103,10 +103,10 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "117 runs; 91.7 min wall; 162.7 min CPU",
-            "trackedRuns": 117,
-            "trackedWallSeconds": 5503.004,
-            "trackedCpuSeconds": 9761.97,
+            "trackedSpend": "120 runs; 93.5 min wall; 166 min CPU",
+            "trackedRuns": 120,
+            "trackedWallSeconds": 5612.728,
+            "trackedCpuSeconds": 9960.38,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
             "investmentScore": 3.23,
@@ -791,15 +791,15 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 731,
         "deltaCount": 108,
-        "measuredRuns": 212,
-        "wallSeconds": 6883.368,
-        "cpuSeconds": 11765.72,
-        "artifactBytes": 407629789,
+        "measuredRuns": 215,
+        "wallSeconds": 6993.092,
+        "cpuSeconds": 11964.13,
+        "artifactBytes": 411437093,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -928,9 +928,9 @@
       },
       "sourceReports": {
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-878b7eb2/report.json",
-        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-878b7eb2/report.json",
+        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-0b62f863/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-878b7eb2/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-66f38313/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
@@ -1155,9 +1155,9 @@
   ],
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-878b7eb2/report.json",
-    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-878b7eb2/report.json",
+    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-0b62f863/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-878b7eb2/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-66f38313/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
@@ -1259,10 +1259,10 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "117 runs; 91.7 min wall; 162.7 min CPU",
-        "trackedRuns": 117,
-        "trackedWallSeconds": 5503.004,
-        "trackedCpuSeconds": 9761.97,
+        "trackedSpend": "120 runs; 93.5 min wall; 166 min CPU",
+        "trackedRuns": 120,
+        "trackedWallSeconds": 5612.728,
+        "trackedCpuSeconds": 9960.38,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
         "investmentScore": 3.23,
@@ -1950,7 +1950,7 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "117 runs; 91.7 min wall; 162.7 min CPU",
+      "Tracked spend": "120 runs; 93.5 min wall; 166 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
@@ -2219,23 +2219,23 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 731,
     "deltaCount": 108,
-    "measuredRuns": 212,
-    "wallSeconds": 6883.368,
-    "cpuSeconds": 11765.72,
-    "artifactBytes": 407629789,
+    "measuredRuns": 215,
+    "wallSeconds": 6993.092,
+    "cpuSeconds": 11964.13,
+    "artifactBytes": 411437093,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-878b7eb2/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-09-0b62f863/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 211,
-      "Wall time": "114.7 min",
-      "CPU time": "196.1 min"
+      "Measured runs": 214,
+      "Wall time": "116.6 min",
+      "CPU time": "199.4 min"
     },
     {
       "Resource": "browser",
@@ -2271,9 +2271,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 117,
-      "Wall time": "91.7 min",
-      "CPU time": "162.7 min"
+      "Measured runs": 120,
+      "Wall time": "93.5 min",
+      "CPU time": "166 min"
     },
     {
       "Axis": "conformance-economics",
@@ -2327,7 +2327,7 @@
       "Gap to target": "+1.1",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "117 runs; 91.7 min wall; 162.7 min CPU",
+      "Tracked spend": "120 runs; 93.5 min wall; 166 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.23.",
       "Next action": "Tune the highest segment-level audio gap next: playerHit tail. Rerun audio comparison, event-gap analysis, and quality scoring after the change."
     },
