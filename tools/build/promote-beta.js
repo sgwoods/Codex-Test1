@@ -92,6 +92,7 @@ if(fs.existsSync(DEV_BUILD_INFO)){
   rewriteBetaText(path.join(BETA_DIR, 'release-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard-data.json'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'public-project-page.html'), sourceInfo, betaInfo);
 }
 
 const betaReadme = [

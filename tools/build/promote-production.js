@@ -111,6 +111,7 @@ if(fs.existsSync(BETA_BUILD_INFO)){
   rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard-data.json'), sourceInfo, productionInfo);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'public-project-page.html'), sourceInfo, productionInfo);
 }
 
 console.log(`Promoted approved beta artifacts to ${DIST_PRODUCTION}`);

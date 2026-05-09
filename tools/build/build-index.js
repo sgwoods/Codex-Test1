@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { execSync } = require('child_process');
 const {
   ROOT,
@@ -10,6 +11,7 @@ const {
   DEV_DASHBOARD,
   DEV_CONFORMANCE_DASHBOARD,
   DEV_CONFORMANCE_DASHBOARD_DATA,
+  DEV_PUBLIC_PROJECT_PAGE,
   DEV_PROJECT_GUIDE,
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
@@ -21,6 +23,7 @@ const {
   PRODUCTION_DASHBOARD,
   PRODUCTION_CONFORMANCE_DASHBOARD,
   PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
+  PRODUCTION_PUBLIC_PROJECT_PAGE,
   PRODUCTION_PROJECT_GUIDE,
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
@@ -36,6 +39,7 @@ const SRC = path.join(ROOT, 'src');
 const SCRIPT_DIR = path.join(SRC, 'js');
 const TEMPLATE = path.join(SRC, 'index.template.html');
 const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
+const PUBLIC_PROJECT_PAGE_TEMPLATE = path.join(SRC, 'public', 'aurora-galactica.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
 const APPLICATION_GUIDE_TEMPLATE = path.join(SRC, 'application-guide.template.html');
 const PLATINUM_GUIDE_TEMPLATE = path.join(SRC, 'platinum-guide.template.html');
@@ -57,6 +61,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/release-dashboard.html',
   'dist/dev/conformance-dashboard.html',
   'dist/dev/conformance-dashboard-data.json',
+  'dist/dev/public-project-page.html',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -71,6 +76,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/release-dashboard.html',
   'dist/production/conformance-dashboard.html',
   'dist/production/conformance-dashboard-data.json',
+  'dist/production/public-project-page.html',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -84,6 +90,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/release-dashboard.html',
   'dist/beta/conformance-dashboard.html',
   'dist/beta/conformance-dashboard-data.json',
+  'dist/beta/public-project-page.html',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -99,6 +106,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'release-dashboard.html',
   'conformance-dashboard.html',
   'conformance-dashboard-data.json',
+  'public-project-page.html',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -108,6 +116,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/release-dashboard.html',
   'dev/conformance-dashboard.html',
   'dev/conformance-dashboard-data.json',
+  'dev/public-project-page.html',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -118,6 +127,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/release-dashboard.html',
   'beta/conformance-dashboard.html',
   'beta/conformance-dashboard-data.json',
+  'beta/public-project-page.html',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
@@ -488,6 +498,15 @@ function publicDateLong(buildInfo){
     month: 'long',
     day: 'numeric'
   }).format(new Date(source));
+}
+
+function publicPageDateLong(source){
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(new Date(source || new Date().toISOString()));
 }
 
 function humanizeReleaseLabel(value = ''){
@@ -1456,6 +1475,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         </div>
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
+          <a class="button" href="public-project-page.html">Open lane project page</a>
         </div>
       </section>
       <section class="timeline">
@@ -1708,10 +1728,12 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
+            <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
         </section>
@@ -1736,6 +1758,25 @@ function buildProjectGuide(buildInfo, latestNote, guide){
     .replace('{{PROJECT_GUIDE_STYLES}}', projectGuideStyles())
     .replace('{{PROJECT_GUIDE_BODY}}', body)
     .trimEnd() + '\n';
+}
+
+function buildPublicProjectPage(buildInfo, latestNote, dashboard){
+  const template = read(PUBLIC_PROJECT_PAGE_TEMPLATE);
+  const templateSha = crypto.createHash('sha256').update(template).digest('hex').slice(0, 12);
+  const syncedAt = buildInfo.builtAtUtc || new Date().toISOString();
+  const tokens = {
+    PUBLIC_DATE_LONG: publicPageDateLong(buildInfo.builtAtUtc),
+    BUILD_VERSION: displayBuildVersion(buildInfo),
+    BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
+    BUILD_LABEL: buildInfo.label,
+    PUBLIC_SOURCE_COMMIT: buildInfo.commit,
+    PUBLIC_TEMPLATE_SHA: templateSha,
+    PUBLIC_SYNCED_AT: String(syncedAt).replace(/\.\d{3}Z$/, 'Z'),
+    PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
+    LATEST_RELEASE_TITLE: latestNote.title,
+    LATEST_RELEASE_BODY: latestNote.summary
+  };
+  return fillBuildTokens(template, tokens).trimEnd() + '\n';
 }
 
 function buildApplicationGuide(buildInfo, latestNote, guide){
@@ -2499,6 +2540,7 @@ function lanePaths(lane){
       dashboard: PRODUCTION_DASHBOARD,
       conformanceDashboard: PRODUCTION_CONFORMANCE_DASHBOARD,
       conformanceDashboardData: PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
+      publicProjectPage: PRODUCTION_PUBLIC_PROJECT_PAGE,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
@@ -2514,6 +2556,7 @@ function lanePaths(lane){
     dashboard: DEV_DASHBOARD,
     conformanceDashboard: DEV_CONFORMANCE_DASHBOARD,
     conformanceDashboardData: DEV_CONFORMANCE_DASHBOARD_DATA,
+    publicProjectPage: DEV_PUBLIC_PROJECT_PAGE,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
@@ -2667,6 +2710,7 @@ function build(options = {}){
     artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
   }));
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
+  fs.writeFileSync(out.publicProjectPage, buildPublicProjectPage(buildInfo, latestNote, releaseDashboard));
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
   fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
@@ -2701,6 +2745,7 @@ function build(options = {}){
     out.dashboard,
     out.conformanceDashboard,
     out.conformanceDashboardData,
+    out.publicProjectPage,
     out.projectGuide,
     out.applicationGuide,
     out.platinumGuide,

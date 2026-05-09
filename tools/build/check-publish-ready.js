@@ -17,6 +17,7 @@ const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-
 
 const REQUIRED_SOURCE_DOCS = [
   'README.md',
+  'PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md',
   'PLAN.md',
   'PRODUCT_ROADMAP.md',
   'PLATINUM.md',
@@ -27,7 +28,9 @@ const REQUIRED_SOURCE_DOCS = [
   'RELEASE_POLICY.md',
   'RELEASE_READINESS_REVIEW.md',
   'RELEASE_CONFORMANCE_DASHBOARD.md',
+  'CONFORMANCE_METRICS_OVERVIEW.md',
   'CONFORMANCE_ECONOMICS.md',
+  'CLASSIC_ARCADE_INGESTION_FRAMEWORK.md',
   'QUALITY_RELEASE_SCORECARD.md',
   'PLATINUM_LAUNCH_ART_DIRECTION.md',
   'PLATINUM_LUECK_REVIEW.md',
@@ -248,6 +251,26 @@ function checkConformanceDashboardArtifacts(cfg){
   }
 }
 
+function checkPublicProjectPageArtifact(cfg){
+  const htmlPath = path.join(cfg.dir, 'public-project-page.html');
+  const buildInfo = loadJson(cfg.buildInfo);
+  const html = loadText(htmlPath);
+  const required = [
+    'Aurora Galactica on Platinum',
+    'Conformance system',
+    'Open conformance dashboard',
+    'Conformance program',
+    'Ingestion framework',
+    buildInfo.label,
+    buildInfo.commit
+  ];
+  for(const text of required){
+    if(!html.includes(text)){
+      throw new Error(`Publish preflight failed: ${htmlPath} is missing "${text}". Run npm run build or re-promote the lane after refreshing the public project page template.`);
+    }
+  }
+}
+
 function checkBuildInfo(cfg){
   const info = loadJson(cfg.buildInfo);
   const head = git(['rev-parse', 'HEAD']);
@@ -355,6 +378,7 @@ function main(){
   checkReleaseConformanceDocs();
   checkArtifacts(cfg);
   checkConformanceDashboardArtifacts(cfg);
+  checkPublicProjectPageArtifact(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production'){
@@ -390,5 +414,6 @@ module.exports = {
   checkProductionReleaseDocs,
   checkProductionCheckoutCurrent,
   checkBetaCheckoutCurrent,
-  checkPublicProjectTemplate
+  checkPublicProjectTemplate,
+  checkPublicProjectPageArtifact
 };
