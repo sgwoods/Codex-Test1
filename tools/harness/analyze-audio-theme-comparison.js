@@ -95,8 +95,10 @@ function pythonForAudioReport(){
 
 async function main(){
   const commit = gitShortHead();
-  const stamp = new Date().toISOString().slice(0, 10);
-  const outRoot = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-theme-comparison', `${stamp}-main-${commit}`);
+  const generatedAt = new Date().toISOString();
+  const stamp = generatedAt.slice(0, 10);
+  const runClock = generatedAt.slice(11, 19).replace(/:/g, '');
+  const outRoot = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-theme-comparison', `${stamp}-main-${commit}-${runClock}`);
   const samplesDir = path.join(outRoot, 'samples');
   ensureDir(samplesDir);
 
@@ -168,7 +170,7 @@ async function main(){
 
   const manifestPath = path.join(outRoot, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify({
-    generatedAt: new Date().toISOString(),
+    generatedAt,
     commit,
     version: require(path.join(ROOT, 'package.json')).version,
     items: manifest

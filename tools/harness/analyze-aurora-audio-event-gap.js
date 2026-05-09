@@ -6,8 +6,18 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const SOURCE_ROOT = path.join(ANALYSES, 'aurora-audio-theme-comparison');
-const OUT_ROOT = path.join(ANALYSES, 'aurora-audio-event-gap');
 const GUIDE = path.join(ROOT, 'application-guide.json');
+
+function argValue(name, fallback = ''){
+  const prefix = `--${name}=`;
+  const inline = process.argv.find(arg => arg.startsWith(prefix));
+  if(inline) return inline.slice(prefix.length);
+  const index = process.argv.indexOf(`--${name}`);
+  if(index >= 0 && process.argv[index + 1]) return process.argv[index + 1];
+  return fallback;
+}
+
+const OUT_ROOT = path.resolve(ROOT, argValue('out-root', path.join('reference-artifacts', 'analyses', 'aurora-audio-event-gap')));
 
 const CRITICAL_CUES = new Set([
   'playerShot',
@@ -140,6 +150,12 @@ function git(args, fallback = ''){
 }
 
 function latestMetrics(){
+  const override = argValue('metrics');
+  if(override){
+    const file = path.resolve(ROOT, override);
+    if(!fs.existsSync(file)) throw new Error(`Audio event gap metrics override not found: ${override}`);
+    return file;
+  }
   const candidates = [];
   function walk(dir){
     if(!fs.existsSync(dir)) return;
@@ -611,7 +627,8 @@ function main(){
   const generatedAt = new Date().toISOString();
   const commit = git(['rev-parse', '--short', 'HEAD'], 'unknown');
   const dirty = git(['status', '--short'], '').trim().length > 0;
-  const outDir = path.join(OUT_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}`);
+  const runClock = generatedAt.slice(11, 19).replace(/:/g, '');
+  const outDir = path.join(OUT_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}-${runClock}`);
   const report = {
     schemaVersion: 1,
     artifactType: 'aurora-audio-event-gap',
