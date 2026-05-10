@@ -11,6 +11,7 @@ const EVENT_GAP_LATEST = path.join(ANALYSES, 'aurora-audio-event-gap', 'latest.j
 const OUT_ROOT = path.join(ANALYSES, 'aurora-audio-promotion-precheck');
 
 const DEFAULT_REPORTS = Object.freeze({
+  stagePulse: 'latest-formation-pulse.json',
   rescueJoin: 'latest-rescue-join.json',
   playerHit: 'latest-player-hit-focus.json',
   challengePerfect: 'latest.json',

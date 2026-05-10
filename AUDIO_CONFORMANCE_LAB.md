@@ -112,7 +112,7 @@ Current result:
 | Semantic event score | `9.78/10` |
 | Acoustic event score | `5.6/10` |
 | Average worst segment risk | `4.4/10` |
-| Cue-contract readiness | `8.94/10` |
+| Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
 | Highest current audio gap | `stagePulse` onset |
 | Candidate loop coverage | `8/8` contracted cues |
@@ -121,6 +121,22 @@ This means the process is now stronger than the current runtime audio. The
 contracts are ready enough to guide the next work, while the implementation
 still needs a sharper `stagePulse` onset strategy and composite-cue handling for
 ship loss.
+
+Latest `stagePulse` pass:
+
+- Measured loop: `contract-aware stagePulse masking candidate loop`
+- Cost: `373.244s` wall, `703.97s` CPU, `13.7 MB` artifact delta
+- Measured best: `soft-attack-low-march`
+- Focused result: risk `3.62/10`, worst onset segment `5.3/10`, cadence
+  pressure `4.59/10`, masking separation `3.88/10`
+- Promotion precheck: rejected
+- Why rejected: the candidate improved local risk and would improve full-theme
+  cue gap by `0.72/10`, but it failed masking separation and repeat-stability
+  gates
+
+That is a useful near miss, not a runtime change. It tells us the next generator
+must reduce transient brightness and measurement variance while keeping the
+low-band pressure body.
 
 ## Cue Contract Promotion Rule
 
@@ -156,11 +172,13 @@ declared cue obligations. A theme can be different without becoming ambiguous.
 
 ## Next Aurora Audio Work
 
-The next high-value pass is contract-aware `stagePulse` onset work:
+The next high-value pass is a stronger `stagePulse` pressure-bed generator:
 
-- generate candidates that preserve cadence pressure rather than just waveform
-  closeness
-- score onset and body separately
-- measure masking against playerShot, enemyHit, enemyBoom, and boss cues
-- reject long ambience or soft pad behavior even if it sounds pleasant alone
-- run full promotion precheck and live recapture before any runtime change
+- reduce transient brightness headroom against `playerShot`, `enemyHit`,
+  `enemyBoom`, `bossHit`, and `bossBoom`
+- reduce repeat variance across risk, centroid, zero crossing, band shape, and
+  RMS
+- keep cadence pressure above the current near miss
+- keep full-theme promotion precheck as a hard gate before runtime changes
+- if this still fails, pivot to impact/explosion cues for higher user-perceived
+  feedback return while preserving the stagePulse evidence

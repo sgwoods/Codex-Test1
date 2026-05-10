@@ -1,5 +1,70 @@
 # Restart From Here
 
+## Current Checkpoint: May 9, 2026 Aurora Conformance Work
+
+Active local workspace:
+
+- `/Users/sgwoods/Development/Codex/Codex-test1`
+- Current working branch: `codex/macbook-pro-stage12-level-arc-conformance`
+- Latest committed conformance commits:
+  - `c9ef29d2 Add Aurora audio cue contracts`
+  - `7edb5802 Add audio promotion precheck evidence`
+
+Authority and lane constraints:
+
+- `Codex-Test1/main` remains the authoritative engineering source.
+- `Aurora-Galactica` remains the public release-host mirror.
+- This MacBook may develop, test, branch, commit, push, and merge normal development work.
+- Do not approve beta, publish beta, promote production, or publish production from this machine unless release authority is explicitly transferred here.
+- Release authority remains on `imacm1` / `iMacM1` unless changed.
+
+Current conformance focus:
+
+- Aurora audio is the active high-value conformance investment.
+- Current measured runtime state:
+  - Overall quality: `9.2/10`
+  - Audio conformance: `6.8/10`
+  - Semantic audio score: `9.78/10`
+  - Acoustic event score: `5.6/10`
+  - Average worst segment risk: `4.4/10`
+  - Cue-contract readiness: `9.09/10`
+  - Highest cue gap: `stagePulse`
+  - Highest segment gap: `stagePulse` onset, `7.14/10` risk
+- No latest runtime audio candidate has been accepted. The last measured runtime trial was rejected and rolled back.
+- The useful headway is process-level: reusable cue contracts, promotion precheck evidence, persistent candidate histories, and dashboard/release documentation now make audio changes harder to promote without proof.
+- Latest `stagePulse` candidate pass found a useful near miss, not a keeper:
+  `soft-attack-low-march` improved focused risk to `3.62/10` and cadence
+  pressure to `4.59/10`, but promotion remains blocked because masking
+  separation was `3.88/10` and repeat stability failed.
+
+Current audio plan:
+
+1. Build a stronger low-brightness, low-variance `stagePulse` pressure-bed generator.
+2. Optimize for pressure cadence, onset band shape, low-band body, zero-crossing calm, gain control, and masking against important shot/hit/explosion cues.
+3. Promote no runtime cue unless focused candidate gates, promotion precheck, full audio comparison, event-gap rollup, cue alignment, and quality scoring all hold or improve.
+4. If `stagePulse` still produces no stable keeper, preserve the evidence and pivot to higher user-impact impact/explosion cues while keeping the new harness capability reusable for future games.
+
+Useful local URLs:
+
+- Game: <http://127.0.0.1:8000/>
+- Local viewer/dashboard server: <http://127.0.0.1:4312/>
+- Conformance dashboard: <http://127.0.0.1:4312/local-dev/conformance-dashboard.html>
+- Public project preview: <http://127.0.0.1:4312/local-dev/public-aurora-galactica-preview.html>
+
+Useful current commands:
+
+```bash
+npm run harness:check:aurora-audio-cue-contracts
+npm run harness:analyze:aurora-audio-cue-contracts
+npm run harness:analyze:aurora-audio-conformance-lab-v2
+npm run harness:analyze:aurora-audio-focus-candidates -- --cue=formation-pulse
+npm run harness:analyze:aurora-stage-pulse-cadence
+npm run harness:analyze:aurora-audio-promotion-precheck -- --cue=stagePulse
+```
+
+Read this checkpoint first, then continue into the older project restart notes
+below for historical release and machine setup context.
+
 This is the durable handoff point for restarting Aurora and Platinum work from
 a new machine or a new Codex thread after the April 24-25, 2026 release and
 multi-machine workflow refresh.

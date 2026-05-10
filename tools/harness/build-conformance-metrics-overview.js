@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const OUT = path.join(ROOT, 'CONFORMANCE_METRICS_OVERVIEW.md');
 const LEGACY_OUT = path.join(ROOT, 'CONFORMANCE_METRIC_OVERVIEW.md');
 const AURORA_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'quality-conformance');
+const AURORA_AUDIO_CONTRACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-cue-contracts', 'latest.json');
 const GUARDIANS_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'reference-conformance-0.1.json');
 const GUARDIANS_PLAYTEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'playtest-conformance-review-0.1.json');
 
@@ -61,6 +62,15 @@ function buildTable(headers, rows){
 function categoryScore(report, id, fallback = 0){
   const category = (report.categories || []).find(item => item.id === id);
   return category?.score10 ?? fallback;
+}
+
+function audioContractSummary(){
+  if(!fs.existsSync(AURORA_AUDIO_CONTRACT)) return null;
+  try{
+    return readJson(AURORA_AUDIO_CONTRACT);
+  }catch{
+    return null;
+  }
 }
 
 function releaseTargetSections(aurora, guardians, guardiansPlaytest){
@@ -131,6 +141,7 @@ function main(){
   const aurora = readJson(auroraReportPath);
   const guardians = readJson(GUARDIANS_CONFORMANCE);
   const guardiansPlaytest = readJson(GUARDIANS_PLAYTEST);
+  const audioContract = audioContractSummary();
   const generatedAt = new Date().toISOString();
 
   const overallTable = buildTable(
@@ -139,10 +150,10 @@ function main(){
       [
         'Aurora Galactica current dev line',
         score(aurora.summary.overallScore10),
-        `strongest ${aurora.summary.strongestCategory.label} ${score(aurora.summary.strongestCategory.score10)}; weakest ${aurora.summary.weakestCategory.label} ${score(aurora.summary.weakestCategory.score10)}`,
-        'release-quality conformance score',
+        `strongest ${aurora.summary.strongestCategory.label} ${score(aurora.summary.strongestCategory.score10)}; weakest ${aurora.summary.weakestCategory.label} ${score(aurora.summary.weakestCategory.score10)}${audioContract ? `; audio contract readiness ${score(audioContract.summary.averageReadinessScore10)}` : ''}`,
+        audioContract ? 'release-quality conformance score plus audio cue-contract read' : 'release-quality conformance score',
         `${aurora.summary.weakestCategory.label} (${score(aurora.summary.weakestCategory.score10)})`,
-        rel(auroraReportPath)
+        audioContract ? `${rel(auroraReportPath)}; ${rel(AURORA_AUDIO_CONTRACT)}` : rel(auroraReportPath)
       ],
       [
         'Galaxy Guardians 0.1 playable preview',
@@ -185,8 +196,12 @@ function main(){
     (aurora.categories || []).map(category => [
       category.label,
       score(category.score10),
-      (category.evidence || []).join(', '),
-      category.read
+      category.id === 'audio' && audioContract
+        ? [...(category.evidence || []), 'audio-cue-contracts', 'audio-promotion-precheck'].join(', ')
+        : (category.evidence || []).join(', '),
+      category.id === 'audio' && audioContract
+        ? `${category.read} Cue-contract readiness is ${score(audioContract.summary.averageReadinessScore10)}; latest contract next step: ${audioContract.nextStep}`
+        : category.read
     ])
   );
 

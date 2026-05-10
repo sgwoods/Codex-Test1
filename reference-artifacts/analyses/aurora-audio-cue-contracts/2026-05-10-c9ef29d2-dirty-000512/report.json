@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-cue-contract-analysis",
-  "generatedAt": "2026-05-10T00:08:46.517Z",
+  "generatedAt": "2026-05-10T00:05:12.183Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "commit": "c9ef29d2",
   "dirty": true,
@@ -112,7 +112,7 @@
         }
       },
       "status": "blocked-by-promotion-precheck",
-      "recommendation": "Do not promote soft-attack-low-march; the latest stagePulse pass improved local risk but still failed masking/stability gates. Build a lower-brightness, lower-variance pressure-bed family before another runtime trial.",
+      "recommendation": "Attack stagePulse onset with a contract-aware candidate family that measures pressure cadence, onset band shape, and masking against combat cues.",
       "nextLearningQuestions": [
         "Is the reference window too narrow for formation pressure?",
         "Do we need a ducking/mix model before tuning tone?"
@@ -667,5 +667,5 @@
     }
   ],
   "processPosition": "The audio process now separates contract readiness from runtime promotion. Current evidence says contracts can guide the next candidate cycle, but no cue should ship from synthetic or focused evidence alone.",
-  "nextStep": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+  "nextStep": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
 }

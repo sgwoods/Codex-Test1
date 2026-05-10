@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-09T22:04:10.617Z",
-  "commit": "7edb5802",
+  "generatedAt": "2026-05-10T00:06:09.207Z",
+  "commit": "c9ef29d2",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -103,10 +103,10 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "160 runs; 116.1 min wall; 208.2 min CPU",
-            "trackedRuns": 160,
-            "trackedWallSeconds": 6963.121,
-            "trackedCpuSeconds": 12489.22,
+            "trackedSpend": "163 runs; 122.3 min wall; 219.9 min CPU",
+            "trackedRuns": 163,
+            "trackedWallSeconds": 7336.889,
+            "trackedCpuSeconds": 13193.86,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
             "investmentScore": 3.08,
@@ -791,15 +791,15 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 952,
         "deltaCount": 115,
-        "measuredRuns": 331,
-        "wallSeconds": 11053.92,
-        "cpuSeconds": 18961.34,
-        "artifactBytes": 546430064,
+        "measuredRuns": 337,
+        "wallSeconds": 11428.442,
+        "cpuSeconds": 19666.73,
+        "artifactBytes": 561350206,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -844,7 +844,7 @@
           "annotationStatus": "family-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-7edb5802-dirty/report.json",
+          "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
           "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
         },
         {
@@ -852,11 +852,11 @@
           "source": "Aurora audio cue contracts",
           "axis": "audio semantic contract / theme latitude / promotion safety",
           "artifactType": "cue contract readiness, theme lanes, runtime-trial blockers",
-          "coverage": "8 contracts; readiness 8.9/10; blocked 3",
+          "coverage": "8 contracts; readiness 9.1/10; blocked 3",
           "annotationStatus": "contract-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-09-7edb5802-dirty-215835/report.json",
+          "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
           "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
         },
         {
@@ -964,12 +964,12 @@
       },
       "sourceReports": {
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
-        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-7edb5802/report.json",
+        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-10-c9ef29d2/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-bbcc8df1/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
-        "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-7edb5802-dirty/report.json",
-        "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-09-7edb5802-dirty-215835/report.json",
+        "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
+        "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1193,12 +1193,12 @@
   ],
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
-    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-09-7edb5802/report.json",
+    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-10-c9ef29d2/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-bbcc8df1/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
-    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-7edb5802-dirty/report.json",
-    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-09-7edb5802-dirty-215835/report.json",
+    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
+    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -1299,10 +1299,10 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "160 runs; 116.1 min wall; 208.2 min CPU",
-        "trackedRuns": 160,
-        "trackedWallSeconds": 6963.121,
-        "trackedCpuSeconds": 12489.22,
+        "trackedSpend": "163 runs; 122.3 min wall; 219.9 min CPU",
+        "trackedRuns": 163,
+        "trackedWallSeconds": 7336.889,
+        "trackedCpuSeconds": 13193.86,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
         "investmentScore": 3.08,
@@ -1990,7 +1990,7 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "160 runs; 116.1 min wall; 208.2 min CPU",
+      "Tracked spend": "163 runs; 122.3 min wall; 219.9 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
@@ -2259,23 +2259,23 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 952,
     "deltaCount": 115,
-    "measuredRuns": 331,
-    "wallSeconds": 11053.92,
-    "cpuSeconds": 18961.34,
-    "artifactBytes": 546430064,
+    "measuredRuns": 337,
+    "wallSeconds": 11428.442,
+    "cpuSeconds": 19666.73,
+    "artifactBytes": 561350206,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-09-7edb5802/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 330,
-      "Wall time": "184.2 min",
-      "CPU time": "316 min"
+      "Measured runs": 336,
+      "Wall time": "190.5 min",
+      "CPU time": "327.8 min"
     },
     {
       "Resource": "browser",
@@ -2311,9 +2311,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 160,
-      "Wall time": "116.1 min",
-      "CPU time": "208.2 min"
+      "Measured runs": 163,
+      "Wall time": "122.3 min",
+      "CPU time": "219.9 min"
     },
     {
       "Axis": "audio-focus-candidate",
@@ -2367,7 +2367,7 @@
       "Gap to target": "+0.7",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "160 runs; 116.1 min wall; 208.2 min CPU",
+      "Tracked spend": "163 runs; 122.3 min wall; 219.9 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.08.",
       "Next action": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
     },
@@ -2498,7 +2498,7 @@
       "annotationStatus": "family-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-7edb5802-dirty/report.json",
+      "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
       "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
     },
     {
@@ -2506,11 +2506,11 @@
       "source": "Aurora audio cue contracts",
       "axis": "audio semantic contract / theme latitude / promotion safety",
       "artifactType": "cue contract readiness, theme lanes, runtime-trial blockers",
-      "coverage": "8 contracts; readiness 8.9/10; blocked 3",
+      "coverage": "8 contracts; readiness 9.1/10; blocked 3",
       "annotationStatus": "contract-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-09-7edb5802-dirty-215835/report.json",
+      "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
       "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
     },
     {
@@ -2644,7 +2644,7 @@
       "Annotation status": "family-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-09-7edb5802-dirty/report.json",
+      "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
       "Missing next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
     },
     {
@@ -2652,11 +2652,11 @@
       "Source / evidence family": "Aurora audio cue contracts",
       "Axis": "audio semantic contract / theme latitude / promotion safety",
       "Artifact type": "cue contract readiness, theme lanes, runtime-trial blockers",
-      "Coverage": "8 contracts; readiness 8.9/10; blocked 3",
+      "Coverage": "8 contracts; readiness 9.1/10; blocked 3",
       "Annotation status": "contract-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-09-7edb5802-dirty-215835/report.json",
+      "Anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
       "Missing next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
     },
     {

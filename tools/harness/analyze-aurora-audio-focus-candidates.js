@@ -6,6 +6,9 @@ const { withHarnessPage, ROOT } = require('./browser-check-util');
 
 const GUIDE = require(path.join(ROOT, 'application-guide.json'));
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-cue-candidates');
+const THEME_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-theme-comparison');
+const MASKING_CRITICAL_CUES = Object.freeze(['playerShot', 'enemyHit', 'enemyBoom', 'bossHit', 'bossBoom', 'playerHit', 'rescueJoin']);
+let criticalMaskingProfiles = null;
 
 const CUE_CONFIGS = {
   'enemy-hit': {
@@ -413,7 +416,7 @@ const CUE_CONFIGS = {
         }
       }
     ],
-    keeper: { risk: .25, segment: .35, duration: .08, acceptableDuration: .16, centroidWorsenHz: 120, bandWorsen: .06, cadencePressure: 1, cadencePressureMin: 3.5 }
+    keeper: { risk: .25, segment: .35, duration: .08, acceptableDuration: .16, centroidWorsenHz: 120, bandWorsen: .06, cadencePressure: 1, cadencePressureMin: 3.5, maskingSeparation: 1, maskingSeparationMin: 4 }
   },
   'ship-loss': {
     cue: 'playerHit',
@@ -650,6 +653,65 @@ function stddev(values){
   return Math.sqrt(numeric.reduce((sum, value) => sum + Math.pow(value - avg, 2), 0) / numeric.length);
 }
 
+function walkFiles(root, fileName){
+  const found = [];
+  function walk(dir){
+    if(!fs.existsSync(dir)) return;
+    for(const entry of fs.readdirSync(dir, { withFileTypes: true })){
+      const full = path.join(dir, entry.name);
+      if(entry.isDirectory()) walk(full);
+      else if(entry.isFile() && entry.name === fileName) found.push(full);
+    }
+  }
+  walk(root);
+  return found;
+}
+
+function latestThemeMetricsPath(){
+  const metrics = walkFiles(THEME_ROOT, 'metrics.json')
+    .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs || a.localeCompare(b));
+  return metrics[0] || '';
+}
+
+function bandSum(metrics, keys){
+  const band = metrics?.band_energy || {};
+  return keys.reduce((sum, key) => sum + (+band[key] || 0), 0);
+}
+
+function criticalEventProfiles(){
+  if(criticalMaskingProfiles) return criticalMaskingProfiles;
+  const metricsPath = latestThemeMetricsPath();
+  if(!metricsPath){
+    criticalMaskingProfiles = { metricsPath: '', cues: [] };
+    return criticalMaskingProfiles;
+  }
+  try{
+    const theme = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
+    criticalMaskingProfiles = {
+      metricsPath,
+      cues: MASKING_CRITICAL_CUES
+        .map(cue => {
+          const item = (theme.items || []).find(row => row.cue === cue);
+          const metrics = item?.variants?.aurora?.activeMetrics;
+          if(!metrics) return null;
+          return {
+            cue,
+            rms: +metrics.rms || 0,
+            zeroCrossingsPerSecond: +metrics.zero_crossings_per_s || 0,
+            spectralCentroidHz: +metrics.spectral_centroid_hz || 0,
+            sub500: +(metrics.band_energy?.sub_500) || 0,
+            brightness: bandSum(metrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']),
+            durationSeconds: +metrics.duration_s || 0
+          };
+        })
+        .filter(Boolean)
+    };
+  }catch{
+    criticalMaskingProfiles = { metricsPath, cues: [] };
+  }
+  return criticalMaskingProfiles;
+}
+
 function run(cmd, args, options = {}){
   const res = spawnSync(cmd, args, { encoding: 'utf8', ...options });
   if(res.status !== 0) fail(`${cmd} failed`, { args, status: res.status, stdout: res.stdout, stderr: res.stderr });
@@ -782,7 +844,11 @@ function formationPulseCadenceSpecs(config){
     { id: 'tri98', wave: 'triangle', freqs: [98, 147], volumes: [.0038, .0018], lpHz: [480, 640], attacks: [.082, .046], delays: [0, .06], durations: [.21, .12], scoreBias: .03 },
     { id: 'tri123', wave: 'triangle', freqs: [123, 185], volumes: [.0034, .0016], lpHz: [520, 700], attacks: [.07, .04], delays: [0, .052], durations: [.19, .11], scoreBias: .01 },
     { id: 'square98', wave: 'square', freqs: [98, 147], volumes: [.0028, .0013], lpHz: [380, 520], attacks: [.06, .04], delays: [0, .064], durations: [.18, .1], scoreBias: .06 },
-    { id: 'sine98-body', wave: 'sine', freqs: [98], volumes: [.0048], lpHz: [440], attacks: [.09], delays: [0], durations: [.22], scoreBias: 0 }
+    { id: 'sine98-body', wave: 'sine', freqs: [98], volumes: [.0048], lpHz: [440], attacks: [.09], delays: [0], durations: [.22], scoreBias: 0 },
+    { id: 'contract-sine74-pressure', wave: 'sine', freqs: [74, 111, 148], volumes: [.0028, .0016, .001], lpHz: [320, 440, 520], attacks: [.11, .08, .058], delays: [0, .072, .132], durations: [.26, .18, .12], scoreBias: -.05 },
+    { id: 'contract-sine98-calm-body', wave: 'sine', freqs: [98, 147], volumes: [.0032, .0014], lpHz: [360, 500], attacks: [.12, .075], delays: [0, .084], durations: [.25, .13], scoreBias: -.045 },
+    { id: 'contract-triangle82-lowpass-bed', wave: 'triangle', freqs: [82, 123], volumes: [.0026, .0012], lpHz: [300, 420], attacks: [.095, .068], delays: [0, .078], durations: [.24, .13], scoreBias: -.035 },
+    { id: 'contract-sine123-pressure-pocket', wave: 'sine', freqs: [123, 92], volumes: [.0025, .0012], lpHz: [420, 340], attacks: [.105, .075], delays: [0, .064], durations: [.22, .14], scoreBias: -.025 }
   ];
   return profiles.map((profile, index) => ({
     id: `cadence-${profile.id}`,
@@ -919,6 +985,77 @@ function cadencePressureAnalysis(activeMetrics, referenceMetrics){
   };
 }
 
+function maskingSeparationAnalysis(activeMetrics, referenceMetrics){
+  const profiles = criticalEventProfiles();
+  const cues = profiles.cues || [];
+  if(!cues.length) return null;
+  const aurBand = activeMetrics?.band_energy || {};
+  const refBand = referenceMetrics?.band_energy || {};
+  const aurBrightness = bandSum(activeMetrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']);
+  const refBrightness = bandSum(referenceMetrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']);
+  const eventBrightness = mean(cues.map(cue => cue.brightness)) || 0;
+  const eventRms = mean(cues.map(cue => cue.rms)) || 0;
+  const eventZcr = mean(cues.map(cue => cue.zeroCrossingsPerSecond)) || 0;
+  const eventSub = mean(cues.map(cue => cue.sub500)) || 0;
+  const gainTarget = Math.min(+referenceMetrics.rms || eventRms * .45, eventRms * .48);
+  const brightnessTarget = Math.min(refBrightness || eventBrightness * .48, eventBrightness * .5);
+  const zcrTarget = Math.min(+referenceMetrics.zero_crossings_per_s || eventZcr * .55, eventZcr * .58);
+  const axes = [
+    {
+      id: 'bed-gain-headroom',
+      score10: scoreExcess(+activeMetrics.rms || 0, gainTarget, .12),
+      weight: .24,
+      aurora: round(+activeMetrics.rms || 0, 4),
+      target: round(gainTarget, 4),
+      criticalEventMean: round(eventRms, 4),
+      interpretation: 'A formation bed should sit below shot/hit/explosion loudness so momentary events remain readable.'
+    },
+    {
+      id: 'transient-brightness-headroom',
+      score10: scoreExcess(aurBrightness, brightnessTarget, .28),
+      weight: .24,
+      aurora: round(aurBrightness, 4),
+      target: round(brightnessTarget, 4),
+      criticalEventMean: round(eventBrightness, 4),
+      interpretation: 'Formation cadence should avoid occupying the same bright transient band as shots and impacts.'
+    },
+    {
+      id: 'zero-crossing-calm',
+      score10: scoreExcess(+activeMetrics.zero_crossings_per_s || 0, zcrTarget, 1650),
+      weight: .18,
+      aurora: round(+activeMetrics.zero_crossings_per_s || 0, 1),
+      target: round(zcrTarget, 1),
+      criticalEventMean: round(eventZcr, 1),
+      interpretation: 'A calmer bed leaves sharper high-frequency texture for action cues.'
+    },
+    {
+      id: 'low-band-pressure-body',
+      score10: scoreDeficit(+aurBand.sub_500 || 0, +refBand.sub_500 || eventSub, .34),
+      weight: .18,
+      aurora: round(+aurBand.sub_500 || 0, 4),
+      reference: round(+refBand.sub_500 || 0, 4),
+      criticalEventMean: round(eventSub, 4),
+      interpretation: 'The pressure cue should carry body without being mistaken for a hit or explosion.'
+    },
+    {
+      id: 'duration-pocket',
+      score10: scoreGap((+activeMetrics.duration_s || 0) - (+referenceMetrics.duration_s || 0), .12),
+      weight: .16,
+      aurora: round(+activeMetrics.duration_s || 0, 3),
+      reference: round(+referenceMetrics.duration_s || 0, 3),
+      interpretation: 'The pulse must fit the repeated stage cadence pocket.'
+    }
+  ].sort((a, b) => a.score10 - b.score10 || b.weight - a.weight || a.id.localeCompare(b.id));
+  return {
+    score10: weightedScore(axes),
+    weakestAxis: axes[0]?.id || '',
+    sourceThemeMetrics: profiles.metricsPath ? rel(profiles.metricsPath) : '',
+    criticalCueCount: cues.length,
+    criticalCues: cues.map(cue => cue.cue),
+    axes
+  };
+}
+
 function rejectionFor(row, baseline, config){
   if(!baseline) return 'no baseline';
   const gate = config.keeper || {};
@@ -937,6 +1074,12 @@ function rejectionFor(row, baseline, config){
   }
   if(row.cadencePressure && Number.isFinite(+gate.cadencePressureMin) && row.cadencePressure.score10 < +gate.cadencePressureMin){
     reasons.push(`cadence pressure ${row.cadencePressure.score10} < ${gate.cadencePressureMin}`);
+  }
+  if(row.maskingSeparation && baseline.maskingSeparation && row.maskingSeparation.score10 < baseline.maskingSeparation.score10 + (gate.maskingSeparation ?? 1)){
+    reasons.push(`masking separation improved only ${round(row.maskingSeparation.score10 - baseline.maskingSeparation.score10, 2)}`);
+  }
+  if(row.maskingSeparation && Number.isFinite(+gate.maskingSeparationMin) && row.maskingSeparation.score10 < +gate.maskingSeparationMin){
+    reasons.push(`masking separation ${row.maskingSeparation.score10} < ${gate.maskingSeparationMin}`);
   }
   if(row.exactSegmentRoleMatchCount < baseline.exactSegmentRoleMatchCount) reasons.push('fewer exact segment-role matches than baseline');
   if((row.stability?.repetitions || 1) > 1){
@@ -1040,6 +1183,7 @@ function aggregateRows(sampleRows){
       referenceMetrics,
       bandEnergyDelta: bandEnergyDelta(activeBandEnergy, referenceBandEnergy),
       cadencePressure: first.configCue === 'stagePulse' ? cadencePressureAnalysis(activeMetrics, referenceMetrics) : null,
+      maskingSeparation: first.configCue === 'stagePulse' ? maskingSeparationAnalysis(activeMetrics, referenceMetrics) : null,
       comparison: avgComparison,
       segmentRoleComparisonCount: Math.round(mean(group.map(row => row.segmentRoleComparisonCount || 0)) || 0),
       averageSegmentRisk10: round(mean(group.map(row => row.averageSegmentRisk10)), 2),
@@ -1122,12 +1266,12 @@ function markdown(report){
     `- Measured best: \`${report.decision.measuredBest || 'none'}\``,
     `- Reason: ${report.decision.reason}`,
     '',
-    '| Candidate | Risk | Worst Segment | Duration Gap | Centroid Gap | Band Gap | Stability | Keeper Read |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |'
+    '| Candidate | Risk | Worst Segment | Cadence | Masking | Duration Gap | Band Gap | Stability | Keeper Read |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |'
   ];
   for(const row of report.candidates.slice(0, 24)){
     const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.centroidGapHz}Hz | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.cadencePressure?.score10 ?? 'n/a'} | ${row.maskingSeparation?.score10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}\n`;
@@ -1272,7 +1416,9 @@ async function analyzeCue(key, generatedAt, rootDir){
     repetitions: repeats,
     problem: config.problem,
     strategy: 'Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.',
-    successMeasure: 'A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.',
+    successMeasure: config.cue === 'stagePulse'
+      ? 'A keeper must improve whole-cue risk, onset segment risk, cadence pressure, and masking separation while preserving duration pocket, band shape, and segment-role guards.'
+      : 'A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.',
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,
@@ -1305,6 +1451,8 @@ async function analyzeCue(key, generatedAt, rootDir){
       bandShapeGap: row.bandShapeGap,
       cadencePressureScore10: row.cadencePressure?.score10 ?? null,
       cadenceWeakestAxis: row.cadencePressure?.weakestAxis || '',
+      maskingSeparationScore10: row.maskingSeparation?.score10 ?? null,
+      maskingWeakestAxis: row.maskingSeparation?.weakestAxis || '',
       keeperRead: row.keeperRead
     }))
   };

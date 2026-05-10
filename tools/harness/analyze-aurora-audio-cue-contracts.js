@@ -237,8 +237,26 @@ function statusFor({ riskRow, candidate, precheck, readinessScore10 }){
   return 'contract-needs-evidence';
 }
 
-function recommendation({ contract, riskRow, runtime, status }){
+function measuredCandidateRead(candidate){
+  const decision = candidate?.report?.decision || null;
+  const candidateId = decision?.best || decision?.measuredBest || '';
+  const row = (candidate?.report?.candidates || []).find(item => item.id === candidateId) || null;
+  return {
+    candidateId,
+    risk10: row?.risk10 ?? null,
+    worstSegmentRisk10: row?.worstSegmentRisk10 ?? null,
+    cadencePressureScore10: row?.cadencePressure?.score10 ?? null,
+    maskingSeparationScore10: row?.maskingSeparation?.score10 ?? null,
+    keeperRead: row?.keeperRead || ''
+  };
+}
+
+function recommendation({ contract, riskRow, candidate, precheck, runtime, status }){
   if(contract.cue === 'stagePulse'){
+    const measured = measuredCandidateRead(candidate);
+    if(precheck?.report?.decision?.status === 'precheck-reject' && measured.candidateId){
+      return `Do not promote ${measured.candidateId}; the latest stagePulse pass improved local risk but still failed masking/stability gates. Build a lower-brightness, lower-variance pressure-bed family before another runtime trial.`;
+    }
     return 'Attack stagePulse onset with a contract-aware candidate family that measures pressure cadence, onset band shape, and masking against combat cues.';
   }
   if(contract.cue === 'playerHit'){
@@ -320,9 +338,21 @@ function evaluateContract({ contract, maps, risks, themeLanes }){
       } : null
     },
     status,
-    recommendation: recommendation({ contract, riskRow, runtime, status }),
+    recommendation: recommendation({ contract, riskRow, candidate, precheck, runtime, status }),
     nextLearningQuestions: contract.nextLearningQuestions || []
   };
+}
+
+function nextStepFor(highest, cues){
+  if(highest?.cue === 'stagePulse'){
+    const stagePulse = cues.find(row => row.cue === 'stagePulse');
+    const measured = measuredCandidateRead(latestCandidate('stagePulse'));
+    if(stagePulse?.evidence?.promotionPrecheck?.status === 'precheck-reject' && measured.candidateId){
+      return `StagePulse candidate ${measured.candidateId} is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.`;
+    }
+    return 'Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial.';
+  }
+  return `Run a contract-aware candidate pass for ${highest?.cue || 'the highest-risk cue'}, then rerun promotion precheck and live validation.`;
 }
 
 function markdown(report){
@@ -429,9 +459,7 @@ function main(){
     },
     cues,
     processPosition: 'The audio process now separates contract readiness from runtime promotion. Current evidence says contracts can guide the next candidate cycle, but no cue should ship from synthetic or focused evidence alone.',
-    nextStep: highest?.cue === 'stagePulse'
-      ? 'Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial.'
-      : `Run a contract-aware candidate pass for ${highest?.cue || 'the highest-risk cue'}, then rerun promotion precheck and live validation.`
+    nextStep: nextStepFor(highest, cues)
   };
   const runClock = generatedAt.slice(11, 19).replace(/:/g, '');
   const outDir = path.join(OUT_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}-${runClock}`);
