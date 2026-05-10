@@ -706,6 +706,12 @@ window.__galagaHarness__={
   if(typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return {ok:false,error:'Audio engine is not available.'};
   const cueName=String(opts.name||'__candidateCue').trim()||'__candidateCue';
   const originalCueDef=sfx.cueDef;
+  const referenceClip=String(spec.referenceClip||'').trim();
+  const clearReferenceCandidateState=()=>{
+   if(!referenceClip)return;
+   if(sfx.referenceCooldowns)delete sfx.referenceCooldowns[referenceClip];
+   if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(source=>String(source?.__clip||'').trim()===referenceClip);
+  };
   sfx.cueDef=function(name,cueOpts={}){
    if(String(name)===cueName){
     const atmosphere=typeof this.resolveAtmosphere==='function'
@@ -717,8 +723,10 @@ window.__galagaHarness__={
    return originalCueDef.call(this,name,cueOpts);
   };
   try{
+   clearReferenceCandidateState();
    return await this.captureAudioCue(cueName,opts);
   }finally{
+   clearReferenceCandidateState();
    sfx.cueDef=originalCueDef;
   }
  },

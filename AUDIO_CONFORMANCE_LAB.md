@@ -150,6 +150,35 @@ Targeted stability follow-up:
   still did not solve masking; the next family needs better envelope/phase or
   reference-subclip strategy, not merely quieter synthesis.
 
+May 10 `stagePulse` and capture-beam follow-up:
+
+- Broader `stagePulse` sweep cost: `562.365s` wall, `1062s` CPU,
+  `22.6 MB` artifact delta
+- Best isolated `stagePulse` read before runtime trial:
+  `refclip-s540-d360-v105` with focused risk `2.23/10`, worst onset
+  `2.48/10`, cadence pressure `6.99/10`, and masking separation `7.1/10`
+- Promotion precheck result: rejected because focused keeper gates did not
+  clear, even though the synthetic full-theme precheck showed large potential
+  wins (`4.53/10` cue gap improvement and `4.77/10` worst-segment improvement)
+- Runtime trial result: rolled back; once the trial was measured against the
+  restored canonical target and built bundle, it did not clear focused keeper
+  gates
+- Harness improvement kept: reference-clip candidate captures now clear their
+  own cooldown and active tail before measurement, so future candidate sweeps
+  are less likely to mis-score a candidate because a prior reference clip was
+  still active or throttled
+- Capture-beam pass cost: `12.569s` wall, `20.17s` CPU, `1.1 MB` artifact
+  delta
+- Capture-beam measured best: `early-peak-siren`, risk `4.02/10`, worst
+  segment `4.96/10`; rejected because it did not materially improve centroid
+  or mid-band energy
+
+Read: `stagePulse` is not a quick promotion. It needs a better pressure-bed
+model or a better reference segmentation strategy. `captureBeam` is now the
+next high-user-impact audio gap with a clear failure shape: the generator is
+removing sub-bass but not adding enough mid-band identity or capture-event
+clarity.
+
 ## Cue Contract Promotion Rule
 
 Runtime audio cannot be promoted from a focused candidate loop alone.
@@ -184,15 +213,14 @@ declared cue obligations. A theme can be different without becoming ambiguous.
 
 ## Next Aurora Audio Work
 
-The next high-value pass is a phase/envelope-aware `stagePulse` pressure-bed
-strategy:
+The next high-value audio pass should split into two measured tracks:
 
-- keep or exceed the full-grid near miss cadence pressure while reducing
-  transient brightness and repeat variance
-- explore reference-subclip, envelope-shaping, and phase-stable synthesis
-  candidates instead of only lowering gain/low-pass filters
-- preserve masking guards against `playerShot`, `enemyHit`, `enemyBoom`,
-  `bossHit`, and `bossBoom`
-- keep full-theme promotion precheck as a hard gate before runtime changes
-- if this still fails, pivot to impact/explosion cues for higher user-perceived
-  feedback return while preserving the stagePulse evidence
+- `stagePulse` pressure-bed modeling: phase/envelope-aware candidates, alternate
+  reference segmentation, and cadence/masking gates that explain why a wide
+  reference phrase is or is not a valid runtime cue
+- `captureBeam` event clarity: candidates that add mid-band identity, clearer
+  rise/hold/tail segmentation, and better player meaning during capture/rescue
+  moments
+- Both tracks must preserve masking guards against `playerShot`, `enemyHit`,
+  `enemyBoom`, `bossHit`, and `bossBoom`
+- Full-theme promotion precheck remains a hard gate before runtime changes

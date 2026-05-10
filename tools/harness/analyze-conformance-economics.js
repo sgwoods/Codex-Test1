@@ -308,19 +308,187 @@ function costEfficiency(deltas, ledgerSummary){
   });
 }
 
-function summarizeLedger(entries){
-  function isGpuEquivalent(entry){
+function isGpuEquivalentEntry(entry){
+  const declared = entry.resourcesDeclared || {};
+  const resources = entry.resources || [];
+  return resources.some(resource => GPU_EQUIVALENT_RESOURCES.has(resource))
+    || !!declared.modelProvider
+    || !!declared.modelName
+    || !!declared.modelCalls
+    || !!declared.inputTokens
+    || !!declared.outputTokens
+    || !!declared.gpuSeconds
+    || !!declared.modelMinutes;
+}
+
+function entryText(entry){
+  return [
+    ...(entry.axes || []),
+    ...(entry.resources || []),
+    entry.command || '',
+    entry.notes || '',
+    entry.kind || ''
+  ].join(' ').toLowerCase();
+}
+
+function purposeForEntry(entry){
+  const text = entryText(entry);
+  if(/\baudio\b|cue|pulse|hit|boom|explosion|waveform|spectral|centroid|onset/.test(text)){
+    return 'Audio conformance and cue feedback';
+  }
+  if(/level|stage|formation|boss|alien|challenge|pressure|movement|combat|capture|trajectory|lane/.test(text)){
+    return 'Gameplay behavior and level complexity';
+  }
+  if(/visual|video|sprite|frame|screenshot|contact|look|palette|surface|typography/.test(text)){
+    return 'Visual and video reference analysis';
+  }
+  if(/dashboard|release|documentation|economics|portfolio|public|planning|roadmap/.test(text)){
+    return 'Dashboard, docs, and release planning';
+  }
+  if(/ingestion|reference|artifact|evidence|harness|score|scorer|metric|contract|candidate|sweep/.test(text)){
+    return 'Harness, ingestion, and assessment logic';
+  }
+  if(isGpuEquivalentEntry(entry)){
+    return 'Model-assisted implementation and review';
+  }
+  return 'Measurement support and maintenance';
+}
+
+function addPurposeBucket(acc, purpose, entry, seconds){
+  if(!Number.isFinite(seconds) || seconds <= 0) return;
+  const bucket = acc[purpose] || {
+    purpose,
+    runs: 0,
+    wallSeconds: 0,
+    cpuSeconds: 0,
+    examples: []
+  };
+  bucket.runs += 1;
+  bucket.wallSeconds += seconds;
+  bucket.cpuSeconds += entry.measurement?.cpuSeconds || 0;
+  const example = entry.notes || entry.command || (entry.axes || []).join(', ');
+  if(example && bucket.examples.length < 3) bucket.examples.push(example);
+  acc[purpose] = bucket;
+}
+
+function purposeRowsFromBuckets(buckets, totalSeconds){
+  return Object.values(buckets)
+    .map(bucket => ({
+      purpose: bucket.purpose,
+      runs: bucket.runs,
+      wallSeconds: round(bucket.wallSeconds, 3) || 0,
+      wallMinutes: round(bucket.wallSeconds / 60, 2) || 0,
+      cpuSeconds: round(bucket.cpuSeconds, 3) || 0,
+      share: round(totalSeconds > 0 ? bucket.wallSeconds / totalSeconds : 0, 4) || 0,
+      sharePercent: round(totalSeconds > 0 ? (bucket.wallSeconds / totalSeconds) * 100 : 0, 1) || 0,
+      examples: bucket.examples,
+      interpretation: purposeInterpretation(bucket.purpose)
+    }))
+    .sort((a, b) => b.wallSeconds - a.wallSeconds || a.purpose.localeCompare(b.purpose));
+}
+
+function purposeInterpretation(purpose){
+  const reads = {
+    'Audio conformance and cue feedback': 'Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding.',
+    'Gameplay behavior and level complexity': 'Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture.',
+    'Visual and video reference analysis': 'Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability.',
+    'Dashboard, docs, and release planning': 'Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned.',
+    'Harness, ingestion, and assessment logic': 'Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion.',
+    'Model-assisted implementation and review': 'Moves code/design synthesis, evidence interpretation, planning, and implementation review that should later become local harness logic.',
+    'Measurement support and maintenance': 'Keeps the measured workflow healthy: setup, status, reproducibility, and plumbing.'
+  };
+  return reads[purpose] || 'Tracked project work whose gameplay effect should be reviewed with its linked score axis.';
+}
+
+function gameplayPartForAxis(axis){
+  const text = String(axis || '').toLowerCase();
+  if(/audio|cue|sound|pulse|hit|boom|semantic/.test(text)) return 'Audio feedback and event clarity';
+  if(/level-arc|stage|formation|boss|alien|challenge|trajectory|pressure/.test(text)) return 'Gameplay complexity and stage arc';
+  if(/movement|combat|capture|collision|input|shot|safety/.test(text)) return 'Core mechanics and control feel';
+  if(/visual|ui|popup|frame|surface|look|typography/.test(text)) return 'Visual/UI arcade presentation';
+  if(/overall|quality|conformance/.test(text)) return 'Overall release-quality rollup';
+  return 'Measurement confidence and harness coverage';
+}
+
+function computeApplicationSummary(entries, deltas){
+  const gpuBuckets = {};
+  const cpuBuckets = {};
+  let gpuSeconds = 0;
+  let cpuSeconds = 0;
+  for(const entry of entries){
     const declared = entry.resourcesDeclared || {};
     const resources = entry.resources || [];
-    return resources.some(resource => GPU_EQUIVALENT_RESOURCES.has(resource))
-      || !!declared.modelProvider
-      || !!declared.modelName
-      || !!declared.modelCalls
-      || !!declared.inputTokens
-      || !!declared.outputTokens
-      || !!declared.gpuSeconds
-      || !!declared.modelMinutes;
+    const purpose = purposeForEntry(entry);
+    if(isGpuEquivalentEntry(entry)){
+      const seconds = (declared.modelMinutes || 0) * 60
+        || declared.gpuSeconds
+        || entry.measurement?.wallSeconds
+        || 0;
+      gpuSeconds += seconds;
+      addPurposeBucket(gpuBuckets, purpose, entry, seconds);
+    }
+    if(resources.includes('cpu') || resources.includes('browser') || (!resources.length && entry.measurement?.cpuSeconds)){
+      const seconds = entry.measurement?.wallSeconds || 0;
+      cpuSeconds += seconds;
+      addPurposeBucket(cpuBuckets, purpose, entry, seconds);
+    }
   }
+
+  const impactBuckets = {};
+  let impactTotal = 0;
+  for(const delta of deltas){
+    if(!(delta.deltaScore10 > 0)) continue;
+    const part = gameplayPartForAxis(delta.axis);
+    impactBuckets[part] = impactBuckets[part] || {
+      part,
+      positiveScore10: 0,
+      axes: new Set()
+    };
+    impactBuckets[part].positiveScore10 += delta.deltaScore10;
+    impactBuckets[part].axes.add(delta.axis);
+    impactTotal += delta.deltaScore10;
+  }
+  const gameplayImprovementByPart = Object.values(impactBuckets)
+    .map(bucket => ({
+      part: bucket.part,
+      positiveScore10: round(bucket.positiveScore10, 3) || 0,
+      share: round(impactTotal > 0 ? bucket.positiveScore10 / impactTotal : 0, 4) || 0,
+      sharePercent: round(impactTotal > 0 ? (bucket.positiveScore10 / impactTotal) * 100 : 0, 1) || 0,
+      axes: Array.from(bucket.axes).slice(0, 8),
+      interpretation: gameplayImpactInterpretation(bucket.part)
+    }))
+    .sort((a, b) => b.positiveScore10 - a.positiveScore10 || a.part.localeCompare(b.part));
+
+  return {
+    gpuUseByPurpose: purposeRowsFromBuckets(gpuBuckets, gpuSeconds),
+    cpuUseByPurpose: purposeRowsFromBuckets(cpuBuckets, cpuSeconds),
+    gameplayImprovementByPart,
+    totals: {
+      gpuEquivalentWallSeconds: round(gpuSeconds, 3) || 0,
+      cpuLocalWallSeconds: round(cpuSeconds, 3) || 0,
+      positiveScore10Attributed: round(impactTotal, 3) || 0
+    },
+    limitations: [
+      'GPU-equivalent accounting includes declared Codex/OpenAI/model/API/GPU usage and manual ledger entries. The repo cannot automatically read every Codex chat token or quota draw.',
+      'Impact attribution is best-effort. It groups positive score movement by conformance axis, not a controlled causal experiment.',
+      'A harness or documentation gain may improve future decision quality without immediately moving a gameplay score.'
+    ]
+  };
+}
+
+function gameplayImpactInterpretation(part){
+  const reads = {
+    'Audio feedback and event clarity': 'Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity.',
+    'Gameplay complexity and stage arc': 'Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve.',
+    'Core mechanics and control feel': 'Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes.',
+    'Visual/UI arcade presentation': 'Player-perceived polish, readability, arcade cabinet feel, modal quality, and first-glance confidence.',
+    'Overall release-quality rollup': 'Composite release score movement that reflects several subsystems at once.',
+    'Measurement confidence and harness coverage': 'Better ability to know whether future changes are genuinely conformant.'
+  };
+  return reads[part] || 'Positive score movement grouped by the nearest project area.';
+}
+
+function summarizeLedger(entries){
   function addResource(acc, resource, entry){
     acc.byResource[resource] = acc.byResource[resource] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
     acc.byResource[resource].runs += 1;
@@ -353,7 +521,7 @@ function summarizeLedger(entries){
     for(const resource of entry.resources || ['unspecified']){
       addResource(acc, resource, entry);
     }
-    if(isGpuEquivalent(entry)) addResource(acc, 'gpu-equivalent', entry);
+    if(isGpuEquivalentEntry(entry)) addResource(acc, 'gpu-equivalent', entry);
     for(const axis of entry.axes || ['unspecified']){
       acc.byAxis[axis] = acc.byAxis[axis] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
       acc.byAxis[axis].runs += 1;
@@ -467,6 +635,76 @@ function svgBarChart(file, title, bars){
   fs.writeFileSync(file, `${lines.join('\n')}\n`);
 }
 
+function polar(cx, cy, radius, angle){
+  const rad = (angle - 90) * Math.PI / 180;
+  return {
+    x: cx + radius * Math.cos(rad),
+    y: cy + radius * Math.sin(rad)
+  };
+}
+
+function piePath(cx, cy, radius, startAngle, endAngle){
+  const start = polar(cx, cy, radius, endAngle);
+  const end = polar(cx, cy, radius, startAngle);
+  const largeArc = endAngle - startAngle <= 180 ? 0 : 1;
+  return [
+    `M ${cx} ${cy}`,
+    `L ${start.x} ${start.y}`,
+    `A ${radius} ${radius} 0 ${largeArc} 0 ${end.x} ${end.y}`,
+    'Z'
+  ].join(' ');
+}
+
+function svgPieChart(file, title, slices, opts = {}){
+  const width = 980;
+  const height = 430;
+  const cx = 245;
+  const cy = 225;
+  const radius = 142;
+  const colors = ['#2b6cb0', '#38a169', '#d69e2e', '#c53030', '#805ad5', '#319795', '#dd6b20', '#718096'];
+  const values = slices
+    .filter(slice => Number.isFinite(slice.value) && slice.value > 0)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 8);
+  const total = values.reduce((sum, slice) => sum + slice.value, 0);
+  const lines = [
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`,
+    '<rect width="100%" height="100%" fill="#fff"/>',
+    `<text x="48" y="36" font-family="Arial, sans-serif" font-size="20" font-weight="700">${escapeXml(title)}</text>`,
+    `<text x="48" y="62" font-family="Arial, sans-serif" font-size="12" fill="#555">${escapeXml(opts.subtitle || '')}</text>`
+  ];
+  if(!values.length || total <= 0){
+    lines.push(`<circle cx="${cx}" cy="${cy}" r="${radius}" fill="#f4f1eb" stroke="#ccc"/>`);
+    lines.push(`<text x="${cx}" y="${cy}" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#555">No tracked data yet</text>`);
+  } else {
+    let cursor = 0;
+    values.forEach((slice, index) => {
+      const next = cursor + (slice.value / total) * 360;
+      lines.push(`<path d="${piePath(cx, cy, radius, cursor, next)}" fill="${colors[index % colors.length]}" stroke="#fff" stroke-width="2"><title>${escapeXml(`${slice.label}: ${slice.displayValue || slice.value} (${round((slice.value / total) * 100, 1)}%)`)}</title></path>`);
+      cursor = next;
+    });
+    lines.push(`<circle cx="${cx}" cy="${cy}" r="58" fill="#fff" stroke="#ddd"/>`);
+    lines.push(`<text x="${cx}" y="${cy - 6}" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700">${escapeXml(opts.center || '')}</text>`);
+    lines.push(`<text x="${cx}" y="${cy + 16}" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555">${escapeXml(opts.centerSub || '')}</text>`);
+  }
+  const legendX = 455;
+  let legendY = 106;
+  values.forEach((slice, index) => {
+    const pct = total > 0 ? round((slice.value / total) * 100, 1) : 0;
+    lines.push(`<rect x="${legendX}" y="${legendY - 13}" width="16" height="16" rx="2" fill="${colors[index % colors.length]}"/>`);
+    lines.push(`<text x="${legendX + 24}" y="${legendY}" font-family="Arial, sans-serif" font-size="14" font-weight="700">${escapeXml(slice.label)}</text>`);
+    lines.push(`<text x="${legendX + 24}" y="${legendY + 20}" font-family="Arial, sans-serif" font-size="12" fill="#555">${escapeXml(`${slice.displayValue || slice.value} - ${pct}%`)}</text>`);
+    if(slice.note){
+      lines.push(`<text x="${legendX + 24}" y="${legendY + 38}" font-family="Arial, sans-serif" font-size="11" fill="#666">${escapeXml(slice.note).slice(0, 88)}</text>`);
+      legendY += 68;
+    } else {
+      legendY += 50;
+    }
+  });
+  lines.push('</svg>');
+  fs.writeFileSync(file, `${lines.join('\n')}\n`);
+}
+
 function escapeXml(value){
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -475,7 +713,7 @@ function escapeXml(value){
     .replace(/"/g, '&quot;');
 }
 
-function buildCharts(outDir, points, deltas, ledgerSummary, efficiency){
+function buildCharts(outDir, points, deltas, ledgerSummary, efficiency, computeApplication){
   const byAxis = axis => points.filter(p => p.axis === axis)
     .sort((a, b) => Date.parse(a.generatedAt) - Date.parse(b.generatedAt))
     .map(p => ({ y: p.score10, label: `${p.date}-${p.commit || 'na'}` }));
@@ -502,6 +740,51 @@ function buildCharts(outDir, points, deltas, ledgerSummary, efficiency){
       value: item.wallMinutesPerPositiveScore10
     }));
   svgBarChart(path.join(outDir, 'cost-per-positive-score-point.svg'), 'Tracked Wall Minutes Per +1 Score Point', efficiencyBars.length ? efficiencyBars : [{ label: 'no attributed score gains yet', value: 0 }]);
+  svgPieChart(
+    path.join(outDir, 'gpu-equivalent-use-by-purpose.svg'),
+    'GPU-Equivalent Use By Project Purpose',
+    (computeApplication.gpuUseByPurpose || []).map(row => ({
+      label: row.purpose,
+      value: row.wallSeconds,
+      displayValue: `${row.wallMinutes} min`,
+      note: row.interpretation
+    })),
+    {
+      subtitle: 'Declared Codex/OpenAI/model/API/GPU use. Manual ledger entries fill gaps where app usage is not automatic.',
+      center: minutes(computeApplication.totals?.gpuEquivalentWallSeconds || 0),
+      centerSub: 'tracked GPU-equivalent'
+    }
+  );
+  svgPieChart(
+    path.join(outDir, 'cpu-use-by-purpose.svg'),
+    'Local CPU/Browser Use By Project Purpose',
+    (computeApplication.cpuUseByPurpose || []).map(row => ({
+      label: row.purpose,
+      value: row.wallSeconds,
+      displayValue: `${row.wallMinutes} min`,
+      note: row.interpretation
+    })),
+    {
+      subtitle: 'Measured local harness/browser work grouped by the kind of conformance value it creates.',
+      center: minutes(computeApplication.totals?.cpuLocalWallSeconds || 0),
+      centerSub: 'tracked local wall'
+    }
+  );
+  svgPieChart(
+    path.join(outDir, 'gameplay-improvement-by-project-part.svg'),
+    'Positive Score Movement By Project Part',
+    (computeApplication.gameplayImprovementByPart || []).map(row => ({
+      label: row.part,
+      value: row.positiveScore10,
+      displayValue: `+${row.positiveScore10} score`,
+      note: row.interpretation
+    })),
+    {
+      subtitle: 'Best-effort attribution from recorded positive score deltas, grouped by conformance area.',
+      center: `+${computeApplication.totals?.positiveScore10Attributed || 0}`,
+      centerSub: 'tracked score movement'
+    }
+  );
 }
 
 function buildReadme(report){
@@ -535,6 +818,9 @@ function buildReadme(report){
     '- `largest-score-deltas.svg`: largest positive and negative score changes in the artifact history.',
     '- `compute-minutes-by-resource.svg`: measured future run time by resource class.',
     '- `cost-per-positive-score-point.svg`: approximate tracked wall minutes spent per +1 positive score point by investment axis.',
+    '- `gpu-equivalent-use-by-purpose.svg`: declared Codex/OpenAI/model/API/GPU work grouped by what it accomplished.',
+    '- `cpu-use-by-purpose.svg`: measured local CPU/browser work grouped by what it accomplished.',
+    '- `gameplay-improvement-by-project-part.svg`: best-effort grouping of positive score movement by player-facing project area.',
     '',
     '## Interpretation Rules',
     '',
@@ -634,6 +920,39 @@ function buildTopLevelDoc(report, outDir){
       item.attribution
     ])
   );
+  const computeApplication = report.computeApplication || {};
+  const gpuPurposeRows = computeApplication.gpuUseByPurpose || [];
+  const cpuPurposeRows = computeApplication.cpuUseByPurpose || [];
+  const improvementRows = computeApplication.gameplayImprovementByPart || [];
+  const gpuPurposeTable = gpuPurposeRows.length ? table(
+    ['GPU-equivalent purpose', 'Runs', 'Wall time', 'Share', 'Meaning'],
+    gpuPurposeRows.map(row => [
+      row.purpose,
+      row.runs,
+      minutes(row.wallSeconds),
+      `${row.sharePercent}%`,
+      row.interpretation
+    ])
+  ) : '_No declared GPU-equivalent purpose rows yet._';
+  const cpuPurposeTable = cpuPurposeRows.length ? table(
+    ['Local CPU/browser purpose', 'Runs', 'Wall time', 'Share', 'Meaning'],
+    cpuPurposeRows.map(row => [
+      row.purpose,
+      row.runs,
+      minutes(row.wallSeconds),
+      `${row.sharePercent}%`,
+      row.interpretation
+    ])
+  ) : '_No tracked local CPU/browser purpose rows yet._';
+  const improvementTable = improvementRows.length ? table(
+    ['Project part', 'Positive score movement', 'Share', 'Player/designer meaning'],
+    improvementRows.map(row => [
+      row.part,
+      `+${row.positiveScore10}`,
+      `${row.sharePercent}%`,
+      row.interpretation
+    ])
+  ) : '_No positive score movement rows are attributable yet._';
   const snapshotLines = latestSnapshot ? [
     `- Latest Codex quota snapshot: ${latestSnapshot.startedAt || 'unknown time'}`,
     `- General 5h left: ${latestSnapshot.codexUsage5hLeftPercent ?? 'n/a'}%`,
@@ -671,6 +990,22 @@ function buildTopLevelDoc(report, outDir){
     '',
     resourceTable,
     '',
+    '## Compute Application And Impact',
+    '',
+    'These tables answer the practical question behind the economics work: when we spend local CPU/browser time or GPU-equivalent model time, what kind of conformance value are we buying?',
+    '',
+    '### GPU-Equivalent Use By Purpose',
+    '',
+    gpuPurposeTable,
+    '',
+    '### Local CPU/Browser Use By Purpose',
+    '',
+    cpuPurposeTable,
+    '',
+    '### Positive Score Movement By Project Area',
+    '',
+    improvementTable,
+    '',
     '## Spend By Conformance Axis',
     '',
     axisTable,
@@ -688,6 +1023,12 @@ function buildTopLevelDoc(report, outDir){
     `![Compute minutes by resource](${chart('compute-minutes-by-resource.svg')})`,
     '',
     `![Cost per positive score point](${chart('cost-per-positive-score-point.svg')})`,
+    '',
+    `![GPU-equivalent use by purpose](${chart('gpu-equivalent-use-by-purpose.svg')})`,
+    '',
+    `![Local CPU use by purpose](${chart('cpu-use-by-purpose.svg')})`,
+    '',
+    `![Gameplay improvement by project part](${chart('gameplay-improvement-by-project-part.svg')})`,
     '',
     '## Codex / OpenAI Accounting',
     '',
@@ -785,6 +1126,7 @@ function main(){
   const ledger = loadLedger();
   const ledgerSummary = summarizeLedger(ledger);
   const efficiency = costEfficiency(deltas, ledgerSummary);
+  const computeApplication = computeApplicationSummary(ledger, deltas);
   const report = {
     schema_version: 1,
     artifact_type: 'conformance-economics',
@@ -807,11 +1149,12 @@ function main(){
     metricPoints,
     deltas,
     costEfficiency: efficiency,
+    computeApplication,
     ledgerSummary
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
-  buildCharts(outDir, metricPoints, deltas, ledgerSummary, efficiency);
+  buildCharts(outDir, metricPoints, deltas, ledgerSummary, efficiency, computeApplication);
   fs.writeFileSync(TOP_LEVEL_DOC, buildTopLevelDoc(report, outDir));
   console.log(JSON.stringify({
     ok: true,
@@ -822,7 +1165,10 @@ function main(){
       path.join(outDir, 'score-trends.svg'),
       path.join(outDir, 'largest-score-deltas.svg'),
       path.join(outDir, 'compute-minutes-by-resource.svg'),
-      path.join(outDir, 'cost-per-positive-score-point.svg')
+      path.join(outDir, 'cost-per-positive-score-point.svg'),
+      path.join(outDir, 'gpu-equivalent-use-by-purpose.svg'),
+      path.join(outDir, 'cpu-use-by-purpose.svg'),
+      path.join(outDir, 'gameplay-improvement-by-project-part.svg')
     ],
     summary: report.summary
   }, null, 2));

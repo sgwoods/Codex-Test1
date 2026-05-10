@@ -1226,10 +1226,17 @@ function main(){
     path.join(economicsDir, 'score-trends.svg'),
     path.join(economicsDir, 'largest-score-deltas.svg'),
     path.join(economicsDir, 'compute-minutes-by-resource.svg'),
-    path.join(economicsDir, 'cost-per-positive-score-point.svg')
+    path.join(economicsDir, 'cost-per-positive-score-point.svg'),
+    path.join(economicsDir, 'gpu-equivalent-use-by-purpose.svg'),
+    path.join(economicsDir, 'cpu-use-by-purpose.svg'),
+    path.join(economicsDir, 'gameplay-improvement-by-project-part.svg')
   ].filter(fs.existsSync).map(rel) : [];
   const resourceSpendRows = resourceRows(economics);
   const axisSpendRows = axisRows(economics);
+  const computeApplication = economics.computeApplication || {};
+  const gpuPurposeRows = computeApplication.gpuUseByPurpose || [];
+  const cpuPurposeRows = computeApplication.cpuUseByPurpose || [];
+  const gameplayImpactRows = computeApplication.gameplayImprovementByPart || [];
   const nextRows = nextEstimateRows(rows);
   const ingestionRows = buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath, levelArcPath, visualLookPath });
   const ingestionSummary = buildIngestionSummary(ingestionRows);
@@ -1266,6 +1273,7 @@ function main(){
       wallSeconds: economics.summary?.ledger?.wallSeconds || 0,
       cpuSeconds: economics.summary?.ledger?.cpuSeconds || 0,
       artifactBytes: economics.summary?.ledger?.artifactBytes || 0,
+      computeApplication: economics.computeApplication || null,
       charts: economicsCharts
     },
     ingestionSummary,
@@ -1319,6 +1327,7 @@ function main(){
       wallSeconds: economics.summary?.ledger?.wallSeconds || 0,
       cpuSeconds: economics.summary?.ledger?.cpuSeconds || 0,
       artifactBytes: economics.summary?.ledger?.artifactBytes || 0,
+      computeApplication: economics.computeApplication || null,
       charts: economicsCharts
     },
     resourceSpendTable: tableObjects(resourceHeaders, resourceSpendRows),
@@ -1408,6 +1417,31 @@ function main(){
         ['Tracked artifact growth', megabytes(economics.summary?.ledger?.artifactBytes), 'Evidence volume and storage/review-cost proxy']
       ]
     ),
+    '',
+    '### Compute Application And Impact',
+    '',
+    'The economics view now separates _how_ resources were applied from _what_ improved. GPU-equivalent rows cover declared Codex/OpenAI/model/API/GPU usage; CPU/browser rows cover local harness and runtime work. Impact rows are best-effort groupings of positive score movement by project area.',
+    '',
+    gpuPurposeRows.length
+      ? table(
+        ['GPU-equivalent purpose', 'Runs', 'Wall time', 'Share', 'Meaning'],
+        gpuPurposeRows.map(row => [row.purpose, row.runs, minutes(row.wallSeconds), `${row.sharePercent}%`, row.interpretation])
+      )
+      : '_No declared GPU-equivalent purpose rows yet._',
+    '',
+    cpuPurposeRows.length
+      ? table(
+        ['Local CPU/browser purpose', 'Runs', 'Wall time', 'Share', 'Meaning'],
+        cpuPurposeRows.map(row => [row.purpose, row.runs, minutes(row.wallSeconds), `${row.sharePercent}%`, row.interpretation])
+      )
+      : '_No tracked local CPU/browser purpose rows yet._',
+    '',
+    gameplayImpactRows.length
+      ? table(
+        ['Project part', 'Positive score movement', 'Share', 'Player/designer meaning'],
+        gameplayImpactRows.map(row => [row.part, `+${row.positiveScore10}`, `${row.sharePercent}%`, row.interpretation])
+      )
+      : '_No positive score movement rows are attributable yet._',
     '',
     '### Resource And Time Usage',
     '',

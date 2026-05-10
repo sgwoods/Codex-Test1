@@ -701,6 +701,38 @@ function html(data, options = {}){
       }).join('') + '</div>';
     }
 
+    function computeApplicationPanel(economics){
+      const application = economics.computeApplication || {};
+      const gpuRows = (application.gpuUseByPurpose || []).slice(0, 5).map(row => ({
+        Purpose: row.purpose,
+        Runs: row.runs,
+        Wall: Math.round((row.wallSeconds || 0) / 60) + ' min',
+        Share: (row.sharePercent ?? 0) + '%'
+      }));
+      const cpuRows = (application.cpuUseByPurpose || []).slice(0, 5).map(row => ({
+        Purpose: row.purpose,
+        Runs: row.runs,
+        Wall: Math.round((row.wallSeconds || 0) / 60) + ' min',
+        Share: (row.sharePercent ?? 0) + '%'
+      }));
+      const impactRows = (application.gameplayImprovementByPart || []).slice(0, 5).map(row => ({
+        'Project part': row.part,
+        Movement: '+' + row.positiveScore10,
+        Share: (row.sharePercent ?? 0) + '%'
+      }));
+      const limitations = Array.isArray(application.limitations) ? application.limitations : [];
+      return '<section class="card">'
+        + '<h2>CPU / GPU Application</h2>'
+        + '<p class="small">Purpose charts distinguish local CPU/browser harness work from declared GPU-equivalent Codex/OpenAI/model/API work, then compare that spend with best-effort score movement by project area.</p>'
+        + '<div class="costPanelGrid">'
+        + '<section><h2>GPU-Equivalent Purpose</h2>' + tableFromRows(gpuRows, 'No declared GPU-equivalent purpose rows yet.') + '</section>'
+        + '<section><h2>Local CPU Purpose</h2>' + tableFromRows(cpuRows, 'No tracked local CPU/browser purpose rows yet.') + '</section>'
+        + '<section><h2>Gameplay Improvement</h2>' + tableFromRows(impactRows, 'No positive score movement attribution yet.') + '</section>'
+        + '</div>'
+        + (limitations.length ? '<p class="small">' + esc(limitations[0]) + '</p>' : '')
+        + '</section>';
+    }
+
     function costView(data, rows){
       const economics = data.economicsSummary || {};
       return \`
@@ -712,6 +744,7 @@ function html(data, options = {}){
             <div class="card"><span class="label">Wall time</span><span class="value">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min</span></div>
             <div class="card"><span class="label">CPU time</span><span class="value">\${esc(Math.round((economics.cpuSeconds || 0) / 60))} min</span></div>
           </div>
+          \${computeApplicationPanel(economics)}
           <section class="card">
             <h2>Economics Charts</h2>
             \${economicsCharts(economics)}
