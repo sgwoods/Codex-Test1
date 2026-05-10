@@ -255,6 +255,9 @@ function recommendation({ contract, riskRow, candidate, precheck, runtime, statu
   if(contract.cue === 'stagePulse'){
     const measured = measuredCandidateRead(candidate);
     if(precheck?.report?.decision?.status === 'precheck-reject' && measured.candidateId){
+      if((+measured.cadencePressureScore10 || 0) < 3 && (+measured.maskingSeparationScore10 || 0) < 3){
+        return `Do not promote ${measured.candidateId}; the targeted low-brightness/stability family lost pressure-bed character and still failed masking. Move to phase/envelope-aware or reference-subclip candidates.`;
+      }
       return `Do not promote ${measured.candidateId}; the latest stagePulse pass improved local risk but still failed masking/stability gates. Build a lower-brightness, lower-variance pressure-bed family before another runtime trial.`;
     }
     return 'Attack stagePulse onset with a contract-aware candidate family that measures pressure cadence, onset band shape, and masking against combat cues.';
@@ -348,6 +351,9 @@ function nextStepFor(highest, cues){
     const stagePulse = cues.find(row => row.cue === 'stagePulse');
     const measured = measuredCandidateRead(latestCandidate('stagePulse'));
     if(stagePulse?.evidence?.promotionPrecheck?.status === 'precheck-reject' && measured.candidateId){
+      if((+measured.cadencePressureScore10 || 0) < 3 && (+measured.maskingSeparationScore10 || 0) < 3){
+        return `StagePulse candidate ${measured.candidateId} confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck.`;
+      }
       return `StagePulse candidate ${measured.candidateId} is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.`;
     }
     return 'Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial.';

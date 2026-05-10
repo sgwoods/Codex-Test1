@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-10T00:06:09.207Z",
+  "generatedAt": "2026-05-10T00:08:57.769Z",
   "commit": "c9ef29d2",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
@@ -95,7 +95,7 @@
           "status": "Measured release category; weakest axis",
           "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
           "effort": "High; 3-6 hrs local/model-assisted analysis",
-          "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial.",
+          "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.",
           "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
           "costContext": {
             "costClass": "high",
@@ -103,10 +103,10 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "163 runs; 122.3 min wall; 219.9 min CPU",
-            "trackedRuns": 163,
-            "trackedWallSeconds": 7336.889,
-            "trackedCpuSeconds": 13193.86,
+            "trackedSpend": "164 runs; 122.3 min wall; 219.9 min CPU",
+            "trackedRuns": 164,
+            "trackedWallSeconds": 7337.097,
+            "trackedCpuSeconds": 13194.11,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
             "investmentScore": 3.08,
@@ -791,10 +791,10 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 952,
         "deltaCount": 115,
-        "measuredRuns": 337,
-        "wallSeconds": 11428.442,
-        "cpuSeconds": 19666.73,
-        "artifactBytes": 561350206,
+        "measuredRuns": 338,
+        "wallSeconds": 11428.65,
+        "cpuSeconds": 19666.98,
+        "artifactBytes": 561379363,
         "charts": [
           "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/score-trends.svg",
           "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/largest-score-deltas.svg",
@@ -845,7 +845,7 @@
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
           "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-          "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+          "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
         },
         {
           "rank": 4,
@@ -856,8 +856,8 @@
           "annotationStatus": "contract-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
-          "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+          "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
+          "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
         },
         {
           "rank": 5,
@@ -969,7 +969,7 @@
         "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
         "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-        "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
+        "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1198,7 +1198,7 @@
     "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
     "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
+    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -1291,7 +1291,7 @@
       "status": "Measured release category; weakest axis",
       "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "effort": "High; 3-6 hrs local/model-assisted analysis",
-      "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial.",
+      "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.",
       "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
       "costContext": {
         "costClass": "high",
@@ -1299,10 +1299,10 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "163 runs; 122.3 min wall; 219.9 min CPU",
-        "trackedRuns": 163,
-        "trackedWallSeconds": 7336.889,
-        "trackedCpuSeconds": 13193.86,
+        "trackedSpend": "164 runs; 122.3 min wall; 219.9 min CPU",
+        "trackedRuns": 164,
+        "trackedWallSeconds": 7337.097,
+        "trackedCpuSeconds": 13194.11,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
         "investmentScore": 3.08,
@@ -1990,12 +1990,12 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "163 runs; 122.3 min wall; 219.9 min CPU",
+      "Tracked spend": "164 runs; 122.3 min wall; 219.9 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "Effort / time estimate": "High; 3-6 hrs local/model-assisted analysis",
-      "Recommended next step": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial.",
+      "Recommended next step": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.",
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json"
     },
     {
@@ -2259,10 +2259,10 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 952,
     "deltaCount": 115,
-    "measuredRuns": 337,
-    "wallSeconds": 11428.442,
-    "cpuSeconds": 19666.73,
-    "artifactBytes": 561350206,
+    "measuredRuns": 338,
+    "wallSeconds": 11428.65,
+    "cpuSeconds": 19666.98,
+    "artifactBytes": 561379363,
     "charts": [
       "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/score-trends.svg",
       "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/largest-score-deltas.svg",
@@ -2273,7 +2273,7 @@
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 336,
+      "Measured runs": 337,
       "Wall time": "190.5 min",
       "CPU time": "327.8 min"
     },
@@ -2311,7 +2311,7 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 163,
+      "Measured runs": 164,
       "Wall time": "122.3 min",
       "CPU time": "219.9 min"
     },
@@ -2367,9 +2367,9 @@
       "Gap to target": "+0.7",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "163 runs; 122.3 min wall; 219.9 min CPU",
+      "Tracked spend": "164 runs; 122.3 min wall; 219.9 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.08.",
-      "Next action": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+      "Next action": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
     },
     {
       "Priority": 2,
@@ -2499,7 +2499,7 @@
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
       "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-      "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+      "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
     },
     {
       "rank": 4,
@@ -2510,8 +2510,8 @@
       "annotationStatus": "contract-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
-      "next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+      "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
+      "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
     },
     {
       "rank": 5,
@@ -2645,7 +2645,7 @@
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
       "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-      "Missing next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+      "Missing next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
     },
     {
       "Priority": 4,
@@ -2656,8 +2656,8 @@
       "Annotation status": "contract-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000512/report.json",
-      "Missing next": "Run a contract-aware stagePulse onset candidate pass that scores pressure cadence, onset band shape, and masking against shots/hits before any runtime promotion trial."
+      "Anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
+      "Missing next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
     },
     {
       "Priority": 5,

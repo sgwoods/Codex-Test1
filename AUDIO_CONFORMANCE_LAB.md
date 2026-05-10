@@ -122,7 +122,7 @@ contracts are ready enough to guide the next work, while the implementation
 still needs a sharper `stagePulse` onset strategy and composite-cue handling for
 ship loss.
 
-Latest `stagePulse` pass:
+Full-grid `stagePulse` pass:
 
 - Measured loop: `contract-aware stagePulse masking candidate loop`
 - Cost: `373.244s` wall, `703.97s` CPU, `13.7 MB` artifact delta
@@ -137,6 +137,18 @@ Latest `stagePulse` pass:
 That is a useful near miss, not a runtime change. It tells us the next generator
 must reduce transient brightness and measurement variance while keeping the
 low-band pressure body.
+
+Targeted stability follow-up:
+
+- Measured loop: `targeted stable low-brightness stagePulse generator pass`
+- Cost: `26.041s` wall, `47.95s` CPU, `0.4 MB` artifact delta
+- Measured best: `cadence-stable-two-step-pressure-pocket`
+- Focused result: risk `4.41/10`, worst onset segment `6.91/10`, cadence
+  pressure `2.03/10`, masking separation `1.8/10`
+- Promotion precheck: rejected
+- Read: simple low-gain/low-pass stabilization reduced musical pressure and
+  still did not solve masking; the next family needs better envelope/phase or
+  reference-subclip strategy, not merely quieter synthesis.
 
 ## Cue Contract Promotion Rule
 
@@ -172,13 +184,15 @@ declared cue obligations. A theme can be different without becoming ambiguous.
 
 ## Next Aurora Audio Work
 
-The next high-value pass is a stronger `stagePulse` pressure-bed generator:
+The next high-value pass is a phase/envelope-aware `stagePulse` pressure-bed
+strategy:
 
-- reduce transient brightness headroom against `playerShot`, `enemyHit`,
-  `enemyBoom`, `bossHit`, and `bossBoom`
-- reduce repeat variance across risk, centroid, zero crossing, band shape, and
-  RMS
-- keep cadence pressure above the current near miss
+- keep or exceed the full-grid near miss cadence pressure while reducing
+  transient brightness and repeat variance
+- explore reference-subclip, envelope-shaping, and phase-stable synthesis
+  candidates instead of only lowering gain/low-pass filters
+- preserve masking guards against `playerShot`, `enemyHit`, `enemyBoom`,
+  `bossHit`, and `bossBoom`
 - keep full-theme promotion precheck as a hard gate before runtime changes
 - if this still fails, pivot to impact/explosion cues for higher user-perceived
   feedback return while preserving the stagePulse evidence

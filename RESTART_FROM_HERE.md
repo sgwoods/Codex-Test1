@@ -36,10 +36,14 @@ Current conformance focus:
   `soft-attack-low-march` improved focused risk to `3.62/10` and cadence
   pressure to `4.59/10`, but promotion remains blocked because masking
   separation was `3.88/10` and repeat stability failed.
+- The first targeted low-brightness/stability follow-up also failed:
+  `cadence-stable-two-step-pressure-pocket` scored focused risk `4.41/10`,
+  cadence pressure `2.03/10`, and masking separation `1.8/10`. This says
+  quieter/low-pass synthesis alone loses the pressure-bed character.
 
 Current audio plan:
 
-1. Build a stronger low-brightness, low-variance `stagePulse` pressure-bed generator.
+1. Build a phase/envelope-aware `stagePulse` pressure-bed strategy instead of only lowering gain or low-pass filtering.
 2. Optimize for pressure cadence, onset band shape, low-band body, zero-crossing calm, gain control, and masking against important shot/hit/explosion cues.
 3. Promote no runtime cue unless focused candidate gates, promotion precheck, full audio comparison, event-gap rollup, cue alignment, and quality scoring all hold or improve.
 4. If `stagePulse` still produces no stable keeper, preserve the evidence and pivot to higher user-impact impact/explosion cues while keeping the new harness capability reusable for future games.

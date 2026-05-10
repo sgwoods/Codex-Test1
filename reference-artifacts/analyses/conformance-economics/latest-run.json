@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-10T00-08-46-391Z-34068",
-  "startedAt": "2026-05-10T00:08:46.391Z",
-  "endedAt": "2026-05-10T00:08:46.599Z",
+  "id": "2026-05-10T00-12-39-393Z-37973",
+  "startedAt": "2026-05-10T00:12:39.393Z",
+  "endedAt": "2026-05-10T00:12:39.598Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "c9ef29d2",
+  "commit": "b879bdaa",
   "command": [
     "npm",
     "run",
@@ -17,9 +17,9 @@
   "resources": [
     "cpu"
   ],
-  "notes": "audio cue contracts after stagePulse near-miss documentation",
+  "notes": "audio cue contracts after targeted stagePulse failure",
   "measurement": {
-    "wallSeconds": 0.208,
+    "wallSeconds": 0.205,
     "timeRealSeconds": 0.2,
     "timeUserSeconds": 0.14,
     "timeSystemSeconds": 0.11,
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 686521567,
-    "artifactBytesAfter": 686550724,
-    "artifactBytesDelta": 29157
+    "artifactBytesBefore": 687494814,
+    "artifactBytesAfter": 687523819,
+    "artifactBytesDelta": 29005
   }
 }

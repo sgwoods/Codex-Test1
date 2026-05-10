@@ -848,7 +848,11 @@ function formationPulseCadenceSpecs(config){
     { id: 'contract-sine74-pressure', wave: 'sine', freqs: [74, 111, 148], volumes: [.0028, .0016, .001], lpHz: [320, 440, 520], attacks: [.11, .08, .058], delays: [0, .072, .132], durations: [.26, .18, .12], scoreBias: -.05 },
     { id: 'contract-sine98-calm-body', wave: 'sine', freqs: [98, 147], volumes: [.0032, .0014], lpHz: [360, 500], attacks: [.12, .075], delays: [0, .084], durations: [.25, .13], scoreBias: -.045 },
     { id: 'contract-triangle82-lowpass-bed', wave: 'triangle', freqs: [82, 123], volumes: [.0026, .0012], lpHz: [300, 420], attacks: [.095, .068], delays: [0, .078], durations: [.24, .13], scoreBias: -.035 },
-    { id: 'contract-sine123-pressure-pocket', wave: 'sine', freqs: [123, 92], volumes: [.0025, .0012], lpHz: [420, 340], attacks: [.105, .075], delays: [0, .064], durations: [.22, .14], scoreBias: -.025 }
+    { id: 'contract-sine123-pressure-pocket', wave: 'sine', freqs: [123, 92], volumes: [.0025, .0012], lpHz: [420, 340], attacks: [.105, .075], delays: [0, .064], durations: [.22, .14], scoreBias: -.025 },
+    { id: 'stable-soft-near-miss-lowpass', wave: 'triangle', freqs: [147, 294, 196], volumes: [.0046, .0028, .0022], lpHz: [520, 680, 560], attacks: [.07, .052, .042], delays: [0, .035, .083], durations: [.2, .145, .105], scoreBias: -.07 },
+    { id: 'stable-sine-near-miss-lowpass', wave: 'sine', freqs: [147, 294, 196], volumes: [.0048, .0026, .002], lpHz: [480, 620, 520], attacks: [.078, .058, .044], delays: [0, .038, .086], durations: [.21, .14, .1], scoreBias: -.068 },
+    { id: 'stable-monotone-low-pressure-pocket', wave: 'sine', freqs: [123], volumes: [.0042], lpHz: [390], attacks: [.12], delays: [0], durations: [.24], scoreBias: -.06 },
+    { id: 'stable-two-step-pressure-pocket', wave: 'sine', freqs: [123, 185], volumes: [.0038, .0018], lpHz: [410, 540], attacks: [.105, .07], delays: [0, .075], durations: [.23, .115], scoreBias: -.055 }
   ];
   return profiles.map((profile, index) => ({
     id: `cadence-${profile.id}`,
