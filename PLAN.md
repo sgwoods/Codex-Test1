@@ -150,21 +150,23 @@ Current conformance read:
 - audio identity and cue alignment is the weakest category at `7.1/10`; the
   audio process is stronger than the runtime score, with cue-contract readiness
   at `9.09/10`, semantic event score at `9.78/10`, acoustic event score at
-  `6.1/10`, and `stagePulse` onset still the highest current audio gap
+  `6.07/10`, and `stagePulse` onset still the highest current audio gap
 - level arc and encounter shape is now a first-class high-priority category at
   `8.8/10`, with remaining opportunity in long-run non-repetition, stage
   pressure precision, and higher-resolution challenge/reward evidence
-- the latest audio work produced a runtime reliability improvement rather than
-  a `stagePulse` promotion: normal inter-level/result phrases are less clipped,
-  final-loss audio now stops active transition beds before game-over ambience,
-  and `harness:check:audio-runtime-recovery` verifies that critical reference
-  cues actually start after death and on the next game. `stagePulse` remains
-  the top measured gap, so the next pass should use phase/envelope or
-  reference-subclip strategy, not isolated subjective tuning
+- the latest audio work produced runtime reliability and challenge-entry UX
+  improvements rather than a `stagePulse` promotion: normal inter-level/result
+  phrases are less clipped, `challengeTransition` now plays a measured `1.6s`
+  phrase with preserved tail-past-spawn budget, final-loss audio stops active
+  transition beds before game-over ambience, and
+  `harness:check:audio-runtime-recovery` verifies that critical reference cues
+  actually start after death and on the next game. `stagePulse` remains the top
+  measured gap, so the next pass should use a lower-variance pressure-bed
+  generator, not isolated subjective tuning or simple reference-subclip reuse
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in
-  `reference-artifacts/analyses/quality-conformance/2026-05-10-5e8df85b/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-10-eedc85ba/report.json`
 - conformance economics are now tracked in
   `CONFORMANCE_ECONOMICS.md` and the latest
   `reference-artifacts/analyses/conformance-economics/*/report.json`; this is

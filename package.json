@@ -94,6 +94,7 @@
     "harness:check:replay-exit-audio": "node tools/harness/check-replay-exit-wait-audio.js",
     "harness:check:audio-gameover-tail": "node tools/harness/check-audio-gameover-tail.js",
     "harness:check:audio-runtime-recovery": "node tools/harness/check-audio-runtime-recovery.js",
+    "harness:analyze:audio-transition-overlap": "node tools/harness/analyze-audio-transition-overlap.js",
     "harness:check:board-messages": "node tools/harness/check-board-messages.js",
     "harness:check:opening-formation": "node tools/harness/check-opening-formation-layout.js",
     "harness:check:stage1-opening-correspondence": "node tools/harness/check-stage1-opening-correspondence.js",

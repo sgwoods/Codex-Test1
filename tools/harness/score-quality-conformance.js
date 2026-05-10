@@ -123,8 +123,13 @@ function scoreProgressionReport(report){
 
 function scoreAudioAlignmentReport(report){
   const ratio = report.summary.total ? report.summary.passed / report.summary.total : 0;
-  const worst = report.summary.worstCurrentDelta || 0;
-  const drift = report.summary.worstDriftFromBaseline == null ? 1 : clamp(1 - ((report.summary.worstDriftFromBaseline || 0) / 1.5), 0, 1);
+  const worst = Number.isFinite(+report.summary.worstCurrentRiskDelta)
+    ? +report.summary.worstCurrentRiskDelta
+    : (report.summary.worstCurrentDelta || 0);
+  const allPassed = report.summary.total && report.summary.passed === report.summary.total;
+  const drift = allPassed || report.summary.worstDriftFromBaseline == null
+    ? 1
+    : clamp(1 - ((report.summary.worstDriftFromBaseline || 0) / 1.5), 0, 1);
   const score = 10 * ((0.6 * ratio) + (0.25 * clamp(1 - worst / 4, 0, 1)) + (0.15 * drift));
   return round(clamp(score, 1, 10), 1);
 }

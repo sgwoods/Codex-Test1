@@ -204,6 +204,29 @@ May 10 runtime recovery and inter-level phrase pass:
 - Measured outcome: overall quality remains `9.2/10`; audio now reads
   `7.1/10`; `stagePulse` remains the highest risk cue at `5.14/10`.
 
+May 10 challenge-transition UX and stagePulse stability pass:
+
+- Challenge-entry announcement coverage was widened without moving the cue start:
+  `challengeTransition` moved from a `1.05s` excerpt to `1.6s`.
+- The challenge-entry window was widened from `2.8s` to `3.35s`, increasing
+  spawn-after-cue from `0.583s` to `1.133s` while preserving the measured
+  challenge cue tail-past-spawn relationship at `0.467s`.
+- Audio cue alignment still passes `9/9`; challenge-stage timing still passes
+  `5/5`; the overall quality score remains `9.2/10`.
+- The timing-library builder now derives challenge-entry targets from the
+  current audio-overlap probe when available, so a measured UX target refresh is
+  not blocked by missing old-machine video paths.
+- The audio-alignment scorer now distinguishes target risk from intentional
+  baseline drift: `worstCurrentRiskDelta` is `0` even though the production
+  baseline drift is `0.55s`.
+- StagePulse stability-first candidates and direct reference-window candidates
+  were both rejected. The best reference-window attempt was
+  `refclip-s660-d240-v86`, but it missed cadence pressure and repeat-stability
+  gates. No runtime `stagePulse` promotion was made.
+- Current rollup: audio remains `7.1/10`; acoustic event score is `6.07/10`;
+  semantic event score is `9.78/10`; `stagePulse` remains the highest risk cue
+  at `5.34/10`.
+
 ## Cue Contract Promotion Rule
 
 Runtime audio cannot be promoted from a focused candidate loop alone.
@@ -240,12 +263,12 @@ declared cue obligations. A theme can be different without becoming ambiguous.
 
 The next high-value audio pass should split into two measured tracks:
 
-- `stagePulse` pressure-bed modeling: phase/envelope-aware candidates, alternate
-  reference segmentation, and cadence/masking gates that explain why a wide
-  reference phrase is or is not a valid runtime cue
-- `challengeTransition` phrase coverage: the normal inter-level/result phrases
-  are less clipped now, but challenge-entry remains a short `1.05s` excerpt and
-  should be widened only with measured spawn-window/tail evidence
+- `stagePulse` pressure-bed modeling: a stronger low-brightness, low-variance
+  generator that explicitly targets repeat stability, zero-crossing calm,
+  cadence pressure, and action-cue masking before promotion precheck
+- `challengeTransition` follow-up listening pass: the measured `1.6s` phrase is
+  now runtime-safe, so the next check should be human/gameplay review rather
+  than further widening
 - `captureBeam` event clarity: candidates that add mid-band identity, clearer
   rise/hold/tail segmentation, and better player meaning during capture/rescue
   moments

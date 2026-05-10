@@ -131,8 +131,8 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
   firstPulseDelay:2.35
  }),
  challengeEntry:Object.freeze({
-  transitionWindow:2.8,
-  cueLeadBeforeSpawn:0.58,
+  transitionWindow:3.35,
+  cueLeadBeforeSpawn:1.13,
   firstEnemyArrivalDelay:.96,
   cadenceHoldAfterSpawn:1.28
  }),
@@ -212,7 +212,7 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  challengeTransition:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage.m4a',{
   cooldownMs:2600,
   clipStart:0,
-  clipDuration:1.05,
+  clipDuration:1.6,
   stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect','stageTransition'])
  }),
  challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{

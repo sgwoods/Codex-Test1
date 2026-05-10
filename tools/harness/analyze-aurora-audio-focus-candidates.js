@@ -892,7 +892,12 @@ function formationPulseCadenceSpecs(config){
     { id: 'anchor-low-square-body', family: 'stage-pulse-anchor-body-refinement', waves: ['square'], freqs: [147], volumes: [.0054], lpHz: [520], attacks: [.06], delays: [0], durations: [.18], slides: [-3], scoreBias: -.174 },
     { id: 'anchor-low-triangle-body', family: 'stage-pulse-anchor-body-refinement', waves: ['triangle'], freqs: [123], volumes: [.0062], lpHz: [420], attacks: [.078], delays: [0], durations: [.19], slides: [-2], scoreBias: -.173 },
     { id: 'anchor-body-sub-support', family: 'stage-pulse-anchor-body-refinement', waves: ['square', 'sine'], freqs: [147, 74], volumes: [.0051, .0014], lpHz: [520, 260], attacks: [.058, .12], delays: [0, .048], durations: [.172, .132], slides: [-3, -1], scoreBias: -.175 },
-    { id: 'anchor-body-no-tail', family: 'stage-pulse-anchor-body-refinement', waves: ['triangle'], freqs: [147], volumes: [.0057], lpHz: [500], attacks: [.062], delays: [0], durations: [.166], slides: [-3], scoreBias: -.176 }
+    { id: 'anchor-body-no-tail', family: 'stage-pulse-anchor-body-refinement', waves: ['triangle'], freqs: [147], volumes: [.0057], lpHz: [500], attacks: [.062], delays: [0], durations: [.166], slides: [-3], scoreBias: -.176 },
+    { id: 'stability-anchor-sub-lowgain', family: 'stage-pulse-stability-refinement', waves: ['square', 'sine'], freqs: [147, 74], volumes: [.0043, .0011], lpHz: [460, 240], attacks: [.074, .15], delays: [0, .054], durations: [.185, .145], slides: [-2, -1], scoreBias: -.183 },
+    { id: 'stability-anchor-sub-steady', family: 'stage-pulse-stability-refinement', waves: ['square', 'sine'], freqs: [147, 98], volumes: [.0045, .0013], lpHz: [480, 300], attacks: [.086, .13], delays: [0, .062], durations: [.195, .132], slides: [-2, -1], scoreBias: -.181 },
+    { id: 'stability-soft-square-triad', family: 'stage-pulse-stability-refinement', waves: ['square', 'triangle', 'sine'], freqs: [147, 294, 196], volumes: [.0044, .0026, .0016], lpHz: [520, 640, 460], attacks: [.082, .06, .052], delays: [0, .036, .092], durations: [.195, .12, .082], slides: [-2, -4, -3], scoreBias: -.18 },
+    { id: 'stability-single-pressure-body', family: 'stage-pulse-stability-refinement', waves: ['square'], freqs: [147], volumes: [.0049], lpHz: [470], attacks: [.09], delays: [0], durations: [.19], slides: [-2], scoreBias: -.179 },
+    { id: 'stability-sine-pressure-pocket', family: 'stage-pulse-stability-refinement', waves: ['sine', 'triangle'], freqs: [123, 185], volumes: [.0046, .0014], lpHz: [380, 480], attacks: [.11, .07], delays: [0, .082], durations: [.215, .095], slides: [-1, -2], scoreBias: -.178 }
   ];
   return profiles.map((profile, index) => ({
     id: `cadence-${profile.id}`,

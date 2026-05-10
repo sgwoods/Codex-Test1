@@ -23,15 +23,15 @@ It is meant to shorten iteration cycles by giving us one place to look for:
 - `reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
 - `reference-artifacts/analyses/galaga-audio-reference-video-3/README.md`
 - `reference-artifacts/analyses/galaga-audio-cue-matrix/README.md`
-- `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md`
-- `reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md`
+- `reference-artifacts/analyses/galaga-timing-alignment/2026-05-10-main-eedc85ba/README.md`
+- `reference-artifacts/analyses/galaga-audio-overlap/2026-05-10-main-eedc85ba/README.md`
 - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md`
 - `reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604/README.md`
 
 ## Current latest measured artifacts
 
-- Timing alignment: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f`
-- Audio overlap: `reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba`
+- Timing alignment: `reference-artifacts/analyses/galaga-timing-alignment/2026-05-10-main-eedc85ba`
+- Audio overlap: `reference-artifacts/analyses/galaga-audio-overlap/2026-05-10-main-eedc85ba`
 - Stage opening timing: `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba`
 - Boss timing: `reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604`
 
@@ -40,12 +40,12 @@ It is meant to shorten iteration cycles by giving us one place to look for:
 | Event family | Aurora cue slots | Key measured targets / current comparison |
 | --- | --- | --- |
 | Opening Sequence | `gameStart`, `formationArrival`, `stagePulse` | startPhraseDuration: 4; formationArrivalAfterStart: 4.18; firstVisibleAlienArrivalsAfterStart: 5.35; firstConvoyPulseAfterStart: 6.15 |
-| Formation Arrival And Convoy Cadence | `formationArrival`, `stagePulse`, `attackCharge` | firstStagePulseAfterSpawn: 0.817; firstAttackAfterSpawn: 8.2; firstLowerFieldAfterSpawn: 9.35 |
-| Enemy Dive And Charge | `attackCharge` | firstChargeAfterDive: 0 |
+| Formation Arrival And Convoy Cadence | `formationArrival`, `stagePulse`, `attackCharge` | Reference assets and notes only |
+| Enemy Dive And Charge | `attackCharge` | firstChargeAfterDive: 0.125 |
 | Capture Beam And Capture Flow | `captureBeam`, `captureSuccess`, `captureRetreat`, `capturedFighterDestroyed`, `rescueJoin` | Reference assets and notes only |
-| Ship Loss And Respawn | `playerHit`, `gameOver` | playerHitCueRelativeToLoss: 0 |
-| Stage Clear And Next Stage | `stageTransition`, `stagePulse` | transitionWindow: 3.204; transitionCueAfterProbe: 2.022; spawnAfterTransitionCue: 1.182 |
-| Challenge Entry, Results, And Perfect | `challengeTransition`, `challengeResults`, `challengePerfect`, `stageTransition` | challengeEntry.cueAfterProbe: 2.219; challengeEntry.spawnAfterCue: 0.583; challengePerfect.resultCueAfterClear: 0.342; challengePerfect.nextCueAfterClear: 2.85 |
+| Ship Loss And Respawn | `playerHit`, `gameOver` | Reference assets and notes only |
+| Stage Clear And Next Stage | `stageTransition`, `stagePulse` | transitionWindow: 3.208; transitionCueAfterProbe: 2.024; spawnAfterTransitionCue: 1.184 |
+| Challenge Entry, Results, And Perfect | `challengeTransition`, `challengeResults`, `challengePerfect`, `stageTransition` | challengeEntry.cueAfterProbe: 2.224; challengeEntry.spawnAfterCue: 1.133; challengeEntry.tailPastSpawn: 0.467; challengePerfect.resultCueAfterClear: 0.342 |
 | Boss Hit And Boss Death | `bossHit`, `bossBoom` | firstHit.damageToCue: 0; firstHit.triggerToCue: 0; death.killToCue: 0.001; death.pulseBeforeBossBoom: 0.226 |
 | High Score And Results Flow | `highScoreFirst`, `highScoreOther` | Reference assets and notes only |
 

@@ -152,7 +152,7 @@ Current conformance read:
 - audio identity and cue alignment is the weakest category at `7.1/10`; the
   process is stronger than the runtime score, with cue-contract readiness at
   `9.09/10`, semantic event score at `9.78/10`, and acoustic event score at
-  `6.1/10`
+  `6.07/10`
 - level arc and encounter shape is now a high-priority scored category at
   `8.8/10`, backed by level-arc and stage-signature evidence. Remaining
   opportunity is in long-run non-repetition, exact pressure replay, and
@@ -160,12 +160,14 @@ Current conformance read:
 - player movement conformance now reads `10/10`; the prior `8.0/10` gap was
   traced to harness recenter input suppression, not to gameplay movement
   constants
-- latest audio investment produced a runtime reliability improvement and
-  reusable evidence: normal inter-level/result phrases are less clipped, final
-  loss now clears active transition beds before game-over ambience, and a new
-  runtime-recovery harness verifies that critical reference cues actually
-  start. It did not promote `stagePulse`; next audio work should use
-  phase/envelope-aware or reference-subclip strategy.
+- latest audio investment produced runtime reliability, challenge-entry UX, and
+  reusable evidence: normal inter-level/result phrases are less clipped,
+  `challengeTransition` now uses a measured `1.6s` phrase with preserved
+  tail-past-spawn budget, final loss clears active transition beds before
+  game-over ambience, and a new runtime-recovery harness verifies that critical
+  reference cues actually start. It did not promote `stagePulse`; synthesized
+  stability-first and direct reference-window sweeps both rejected promotion,
+  so the next audio work should use a lower-variance pressure-bed generator.
 - the next major Aurora quality cycle is tracked in
   [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md),
   with a baseline artifact at
