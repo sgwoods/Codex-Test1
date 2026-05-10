@@ -218,19 +218,19 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
   cooldownMs:2400,
   clipStart:0,
-  clipDuration:1.55,
+  clipDuration:1.95,
   stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
  }),
  challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{
   cooldownMs:2400,
   clipStart:0,
-  clipDuration:1.7,
+  clipDuration:2.15,
   stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
  }),
  stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{
-  cooldownMs:1800,
+  cooldownMs:2400,
   clipStart:0,
-  clipDuration:2.8,
+  clipDuration:3.35,
   stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
  }),
  attractEnter:Object.freeze({

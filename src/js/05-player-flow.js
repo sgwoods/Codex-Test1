@@ -107,6 +107,9 @@ function gameOver(){
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
+ if(usesRuntimeGalagaReferenceAudio()&&typeof sfx.stopCueNames==='function'){
+  sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect']);
+ }
  sfx.over();
  if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
  if(typeof stopRunRecordingAfterAudioTail==='function')stopRunRecordingAfterAudioTail(7000,VIDEO_REC.sessionId);

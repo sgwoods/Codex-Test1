@@ -576,7 +576,9 @@ const AC=()=>{
 };
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
 if(!Array.isArray(window.__platinumAudioDebug.history))window.__platinumAudioDebug.history=[];
-if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0};
+if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0,startedHistory:[],blockedHistory:[]};
+if(!Array.isArray(window.__platinumAudioDebug.reference.startedHistory))window.__platinumAudioDebug.reference.startedHistory=[];
+if(!Array.isArray(window.__platinumAudioDebug.reference.blockedHistory))window.__platinumAudioDebug.reference.blockedHistory=[];
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
  a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
@@ -676,6 +678,7 @@ const sfx={
     cooldownMs:cue.cooldownMs,
     clipStart:cue.clipStart,
     clipDuration:cue.clipDuration,
+    force:!!opts.force,
     cueEntry
    });
    return;
@@ -702,13 +705,33 @@ const sfx={
   if(!allow.size)return;
   this.stopReferenceClips(source=>allow.has(String(source?.__cue||'').trim()));
  },
+ recordReferenceBlocked(reason='',clip='',opts={}){
+  const ref=window.__platinumAudioDebug.reference;
+  const entry=Object.freeze({
+   reason:String(reason||'blocked'),
+   clip:String(clip||''),
+   cue:String(opts?.cueEntry?.cue||''),
+   at:+(performance.now()/1000).toFixed(3),
+   remainingMs:Number.isFinite(+opts.remainingMs)?Math.max(0,+opts.remainingMs):0
+  });
+  ref.blockedHistory.push(entry);
+  if(ref.blockedHistory.length>32)ref.blockedHistory.shift();
+  ref.lastBlocked=entry;
+ },
  playReferenceClip(src='',opts={}){
   const clip=String(src||'').trim();
-  if(!clip||(!(aud||opts.allowIdle)))return;
+  if(!clip)return;
+  if(!(aud||opts.allowIdle)){
+   this.recordReferenceBlocked('idle-gated',clip,opts);
+   return;
+  }
   const now=performance.now();
   const cooldown=Math.max(0,+opts.cooldownMs||0);
   const lastAt=+this.referenceCooldowns[clip]||0;
-  if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
+  if(cooldown&&!opts.force&&lastAt&&(now-lastAt)<cooldown){
+   this.recordReferenceBlocked('cooldown',clip,Object.assign({},opts,{remainingMs:cooldown-(now-lastAt)}));
+   return;
+  }
   this.referenceCooldowns[clip]=now;
   window.__platinumAudioDebug.reference.lastRequested=clip;
   this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
@@ -716,7 +739,11 @@ const sfx={
   const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
   const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
   this.loadReferenceBuffer(clip).then(buffer=>{
-   if(!buffer||audioMuted)return;
+   if(!buffer)return;
+   if(audioMuted){
+    this.recordReferenceBlocked('muted',clip,opts);
+    return;
+   }
    try{
       const A=AC();
     if(typeof A.resume==='function'&&A.state==='suspended')A.resume().catch(()=>{});
@@ -736,6 +763,15 @@ const sfx={
       this.referenceActive.push(source);
       window.__platinumAudioDebug.reference.lastStarted=clip;
       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
+      window.__platinumAudioDebug.reference.startedHistory.push(Object.freeze({
+       clip,
+       cue:String(opts?.cueEntry?.cue||'').trim(),
+       clipStart,
+       clipDuration,
+       at:+(performance.now()/1000).toFixed(3),
+       activeCount:this.referenceActive.length
+      }));
+      if(window.__platinumAudioDebug.reference.startedHistory.length>32)window.__platinumAudioDebug.reference.startedHistory.shift();
       if(this.referenceActive.length>24)this.referenceActive.splice(0,this.referenceActive.length-24);
       const cleanup=()=>{
        this.referenceActive=this.referenceActive.filter(entry=>entry!==source);
@@ -800,15 +836,15 @@ const sfx={
  enemyShot(){this.playCue('enemyShot',{phase:S.challenge?'challenge':'stage'})},
  hit(){this.playCue('enemyHit',{phase:S.challenge?'challenge':'stage'})},
  bossHit(){this.playCue('bossHit',{phase:S.challenge?'challenge':'stage'})},
- shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage'})},
+ shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage',force:1})},
  boom(k='bee'){this.playCue(k==='boss'||k==='rogue'?'bossBoom':'enemyBoom',{phase:S.challenge?'challenge':'stage'})},
  beam(){this.playCue('captureBeam',{phase:S.challenge?'challenge':'stage'})},
  captureSuccess(){this.playCue('captureSuccess',{phase:S.challenge?'challenge':'stage'})},
  rescue(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
  extend(){this.playCue('extendAward',{phase:'stage'})},
- over(){this.playCue('gameOver',{phase:'results'})},
+ over(){this.playCue('gameOver',{phase:'results',force:1})},
  capturedFighterDestroyed(){this.playCue('capturedFighterDestroyed',{phase:S.challenge?'challenge':'stage'})},
- challengeResult(perfect=0){this.playCue(perfect?'challengePerfect':'challengeResults',{phase:'challenge',challenge:1})},
+ challengeResult(perfect=0){this.playCue(perfect?'challengePerfect':'challengeResults',{phase:'challenge',challenge:1,force:1})},
  march(i=0){this.playCue('stagePulse',{phase:S.challenge?'challenge':'stage',variant:i})},
  attackCharge(){this.playCue('attackCharge',{phase:S.challenge?'challenge':'stage'})},
  uiTick(){this.playCue('uiTick',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
@@ -816,7 +852,7 @@ const sfx={
  captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
  join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
  highScore(rank=0){this.playCue(rank===1?'highScoreFirst':'highScoreOther',{phase:'results'})},
- transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})},
+ transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge,force:1})},
  attractEnter(phase='demo'){
   const frontDoorTheme=currentGamePack()?.frontDoor?.atmosphereTheme||'';
   this.playCue('attractEnter',{

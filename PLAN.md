@@ -147,22 +147,24 @@ resource economics fit together.
 Current conformance read:
 
 - overall Aurora quality is `9.2/10` across the current scored categories
-- audio identity and cue alignment is the weakest category at `6.8/10`; the
+- audio identity and cue alignment is the weakest category at `7.1/10`; the
   audio process is stronger than the runtime score, with cue-contract readiness
   at `9.09/10`, semantic event score at `9.78/10`, acoustic event score at
-  `5.6/10`, and `stagePulse` onset still the highest current audio gap
+  `6.1/10`, and `stagePulse` onset still the highest current audio gap
 - level arc and encounter shape is now a first-class high-priority category at
   `8.8/10`, with remaining opportunity in long-run non-repetition, stage
   pressure precision, and higher-resolution challenge/reward evidence
-- the latest `stagePulse` audio work produced evidence rather than a promotion:
-  `soft-attack-low-march` was a near miss, while the targeted
-  low-brightness/stability follow-up proved that simply making the cue quieter
-  loses pressure-bed character. The next audio pass should use phase/envelope
-  or reference-subclip strategy, not isolated subjective tuning
+- the latest audio work produced a runtime reliability improvement rather than
+  a `stagePulse` promotion: normal inter-level/result phrases are less clipped,
+  final-loss audio now stops active transition beds before game-over ambience,
+  and `harness:check:audio-runtime-recovery` verifies that critical reference
+  cues actually start after death and on the next game. `stagePulse` remains
+  the top measured gap, so the next pass should use phase/envelope or
+  reference-subclip strategy, not isolated subjective tuning
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in
-  `reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-10-5e8df85b/report.json`
 - conformance economics are now tracked in
   `CONFORMANCE_ECONOMICS.md` and the latest
   `reference-artifacts/analyses/conformance-economics/*/report.json`; this is

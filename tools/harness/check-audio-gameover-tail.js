@@ -31,7 +31,7 @@ async function main(){
   if(!result.transitionCue || result.transitionCue.cue !== 'stageTransition'){
     fail('stage transition cue did not resolve for audio tail check', result);
   }
-  if(+result.transitionCue.referenceClipDuration < 2.6){
+  if(+result.transitionCue.referenceClipDuration < 3.2){
     fail('stage transition reference cue remains too abbreviated for inter-level readability', result);
   }
   if(!result.loss || result.loss.started !== false){

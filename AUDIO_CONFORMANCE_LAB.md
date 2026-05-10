@@ -107,11 +107,11 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `6.8/10` |
+| Quality score audio category | `7.1/10` |
 | Overall quality score | `9.2/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `5.6/10` |
-| Average worst segment risk | `4.4/10` |
+| Acoustic event score | `6.1/10` |
+| Average worst segment risk | `3.7/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
 | Highest current audio gap | `stagePulse` onset |
@@ -179,6 +179,31 @@ next high-user-impact audio gap with a clear failure shape: the generator is
 removing sub-bass but not adding enough mid-band identity or capture-event
 clarity.
 
+May 10 runtime recovery and inter-level phrase pass:
+
+- Weighted-masking `stagePulse` follow-up tested stable-family and anchored-body
+  candidates. The best measured candidate was
+  `cadence-anchor-body-sub-support` with focused risk `3.84/10`, worst onset
+  `5.55/10`, cadence pressure `3.8/10`, and masking separation `5.37/10`,
+  but it failed repeat-stability gates. No runtime `stagePulse` promotion was
+  made.
+- Runtime user-experience fix kept: critical reference cues now record actual
+  start/block history and final-loss/inter-level cues can bypass stale cooldown
+  suppression when they are semantically required.
+- Game-over now stops active stage/inter-level reference beds before playing the
+  final loss ambience, reducing the risk that a transition phrase masks or
+  suppresses the death/game-over read.
+- Normal inter-level phrase coverage was widened: `stageTransition` moved from
+  `2.8s` to `3.35s`. Challenge result phrases were also widened
+  (`challengeResults` `1.55s -> 1.95s`, `challengePerfect` `1.7s -> 2.15s`)
+  while cue-alignment still passes `9/9`.
+- New guardrail: `npm run harness:check:audio-runtime-recovery` verifies that
+  `stageTransition`, `playerHit`, `gameOver`, and the next `gameStart`
+  actually start in the browser runtime, with no critical idle/mute/cooldown
+  blocks.
+- Measured outcome: overall quality remains `9.2/10`; audio now reads
+  `7.1/10`; `stagePulse` remains the highest risk cue at `5.14/10`.
+
 ## Cue Contract Promotion Rule
 
 Runtime audio cannot be promoted from a focused candidate loop alone.
@@ -218,6 +243,9 @@ The next high-value audio pass should split into two measured tracks:
 - `stagePulse` pressure-bed modeling: phase/envelope-aware candidates, alternate
   reference segmentation, and cadence/masking gates that explain why a wide
   reference phrase is or is not a valid runtime cue
+- `challengeTransition` phrase coverage: the normal inter-level/result phrases
+  are less clipped now, but challenge-entry remains a short `1.05s` excerpt and
+  should be widened only with measured spawn-window/tail evidence
 - `captureBeam` event clarity: candidates that add mid-band identity, clearer
   rise/hold/tail segmentation, and better player meaning during capture/rescue
   moments

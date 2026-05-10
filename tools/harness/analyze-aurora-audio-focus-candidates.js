@@ -711,6 +711,7 @@ function criticalEventProfiles(){
             spectralCentroidHz: +metrics.spectral_centroid_hz || 0,
             sub500: +(metrics.band_energy?.sub_500) || 0,
             brightness: bandSum(metrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']),
+            brightnessLoudness: bandSum(metrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']) * (+metrics.rms || 0),
             durationSeconds: +metrics.duration_s || 0
           };
         })
@@ -880,7 +881,18 @@ function formationPulseCadenceSpecs(config){
     { id: 'refined-sine-body-pocket', family: 'stage-pulse-soft-march-refinement', waves: ['sine', 'triangle', 'sine'], freqs: [98, 147, 196], volumes: [.0068, .0022, .0015], lpHz: [330, 470, 560], attacks: [.14, .084, .058], delays: [0, .078, .138], durations: [.25, .13, .08], slides: [-1, -3, -3], scoreBias: -.136 },
     { id: 'refined-body-plus-soft-click', family: 'stage-pulse-soft-march-refinement', waves: ['sine', 'triangle', 'square'], freqs: [82, 123, 196], volumes: [.0066, .0024, .0012], lpHz: [300, 420, 520], attacks: [.16, .095, .05], delays: [0, .074, .152], durations: [.255, .145, .055], slides: [-1, -2, -4], scoreBias: -.138 },
     { id: 'refined-low-dual-body', family: 'stage-pulse-soft-march-refinement', waves: ['triangle', 'sine'], freqs: [98, 147], volumes: [.0072, .0024], lpHz: [340, 470], attacks: [.135, .082], delays: [0, .082], durations: [.245, .128], slides: [-2, -3], scoreBias: -.14 },
-    { id: 'refined-muted-square-underbody', family: 'stage-pulse-soft-march-refinement', waves: ['square', 'sine'], freqs: [98, 147], volumes: [.0056, .002], lpHz: [310, 430], attacks: [.14, .084], delays: [0, .088], durations: [.24, .12], slides: [-2, -3], scoreBias: -.142 }
+    { id: 'refined-muted-square-underbody', family: 'stage-pulse-soft-march-refinement', waves: ['square', 'sine'], freqs: [98, 147], volumes: [.0056, .002], lpHz: [310, 430], attacks: [.14, .084], delays: [0, .088], durations: [.24, .12], slides: [-2, -3], scoreBias: -.142 },
+    { id: 'mask-soft-march-short', family: 'stage-pulse-masking-safe-refinement', waves: ['square', 'triangle', 'triangle'], freqs: [147, 294, 196], volumes: [.0048, .0029, .002], lpHz: [620, 760, 560], attacks: [.064, .044, .034], delays: [0, .02, .064], durations: [.165, .11, .078], slides: [-3, -6, -4], scoreBias: -.155 },
+    { id: 'mask-soft-march-under', family: 'stage-pulse-masking-safe-refinement', waves: ['triangle', 'triangle', 'sine'], freqs: [147, 220, 98], volumes: [.0044, .0024, .0022], lpHz: [540, 660, 340], attacks: [.08, .052, .11], delays: [0, .032, .076], durations: [.17, .095, .126], slides: [-3, -4, -1], scoreBias: -.158 },
+    { id: 'mask-triangle-pocket-short', family: 'stage-pulse-masking-safe-refinement', waves: ['triangle', 'sine', 'triangle'], freqs: [98, 147, 196], volumes: [.0052, .0019, .0011], lpHz: [340, 460, 560], attacks: [.12, .078, .046], delays: [0, .058, .104], durations: [.205, .105, .062], slides: [-2, -3, -3], scoreBias: -.16 },
+    { id: 'mask-weighted-body-short', family: 'stage-pulse-masking-safe-refinement', waves: ['sine', 'triangle'], freqs: [98, 147], volumes: [.0058, .0017], lpHz: [320, 430], attacks: [.13, .078], delays: [0, .068], durations: [.215, .092], slides: [-1, -2], scoreBias: -.162 },
+    { id: 'mask-low-click-pocket', family: 'stage-pulse-masking-safe-refinement', waves: ['sine', 'triangle', 'square'], freqs: [82, 123, 196], volumes: [.0056, .0018, .0008], lpHz: [280, 380, 460], attacks: [.15, .092, .042], delays: [0, .064, .126], durations: [.22, .095, .042], slides: [-1, -2, -3], scoreBias: -.164 },
+    { id: 'anchor-soft-body-short', family: 'stage-pulse-anchor-body-refinement', waves: ['square', 'triangle'], freqs: [147, 196], volumes: [.0056, .0012], lpHz: [560, 520], attacks: [.052, .04], delays: [0, .086], durations: [.17, .06], slides: [-3, -3], scoreBias: -.171 },
+    { id: 'anchor-triangle-body-short', family: 'stage-pulse-anchor-body-refinement', waves: ['triangle', 'sine'], freqs: [123, 196], volumes: [.0058, .001], lpHz: [420, 520], attacks: [.068, .04], delays: [0, .09], durations: [.18, .05], slides: [-2, -3], scoreBias: -.172 },
+    { id: 'anchor-low-square-body', family: 'stage-pulse-anchor-body-refinement', waves: ['square'], freqs: [147], volumes: [.0054], lpHz: [520], attacks: [.06], delays: [0], durations: [.18], slides: [-3], scoreBias: -.174 },
+    { id: 'anchor-low-triangle-body', family: 'stage-pulse-anchor-body-refinement', waves: ['triangle'], freqs: [123], volumes: [.0062], lpHz: [420], attacks: [.078], delays: [0], durations: [.19], slides: [-2], scoreBias: -.173 },
+    { id: 'anchor-body-sub-support', family: 'stage-pulse-anchor-body-refinement', waves: ['square', 'sine'], freqs: [147, 74], volumes: [.0051, .0014], lpHz: [520, 260], attacks: [.058, .12], delays: [0, .048], durations: [.172, .132], slides: [-3, -1], scoreBias: -.175 },
+    { id: 'anchor-body-no-tail', family: 'stage-pulse-anchor-body-refinement', waves: ['triangle'], freqs: [147], volumes: [.0057], lpHz: [500], attacks: [.062], delays: [0], durations: [.166], slides: [-3], scoreBias: -.176 }
   ];
   return profiles.map((profile, index) => ({
     id: `cadence-${profile.id}`,
@@ -1161,11 +1173,15 @@ function maskingSeparationAnalysis(activeMetrics, referenceMetrics){
   const aurBrightness = bandSum(activeMetrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']);
   const refBrightness = bandSum(referenceMetrics, ['mid_1500_3000', 'presence_3000_6000', 'air_6000_plus']);
   const eventBrightness = mean(cues.map(cue => cue.brightness)) || 0;
+  const aurBrightnessLoudness = aurBrightness * (+activeMetrics.rms || 0);
+  const refBrightnessLoudness = refBrightness * (+referenceMetrics.rms || 0);
+  const eventBrightnessLoudness = mean(cues.map(cue => cue.brightnessLoudness)) || 0;
   const eventRms = mean(cues.map(cue => cue.rms)) || 0;
   const eventZcr = mean(cues.map(cue => cue.zeroCrossingsPerSecond)) || 0;
   const eventSub = mean(cues.map(cue => cue.sub500)) || 0;
   const gainTarget = Math.min(+referenceMetrics.rms || eventRms * .45, eventRms * .48);
-  const brightnessTarget = Math.min(refBrightness || eventBrightness * .48, eventBrightness * .5);
+  const brightnessTarget = Math.max(refBrightness + .14, eventBrightness * .78);
+  const brightnessLoudnessTarget = Math.max(refBrightnessLoudness * 1.6, eventBrightnessLoudness * .74);
   const zcrTarget = Math.min(+referenceMetrics.zero_crossings_per_s || eventZcr * .55, eventZcr * .58);
   const axes = [
     {
@@ -1178,18 +1194,27 @@ function maskingSeparationAnalysis(activeMetrics, referenceMetrics){
       interpretation: 'A formation bed should sit below shot/hit/explosion loudness so momentary events remain readable.'
     },
     {
-      id: 'transient-brightness-headroom',
-      score10: scoreExcess(aurBrightness, brightnessTarget, .28),
+      id: 'weighted-transient-headroom',
+      score10: scoreExcess(aurBrightnessLoudness, brightnessLoudnessTarget, .08),
       weight: .24,
+      aurora: round(aurBrightnessLoudness, 4),
+      target: round(brightnessLoudnessTarget, 4),
+      criticalEventMean: round(eventBrightnessLoudness, 4),
+      interpretation: 'Formation cadence should keep actual bright-band loudness below combat events, not only reduce normalized spectral share.'
+    },
+    {
+      id: 'spectral-brightness-share',
+      score10: scoreExcess(aurBrightness, brightnessTarget, .24),
+      weight: .1,
       aurora: round(aurBrightness, 4),
       target: round(brightnessTarget, 4),
       criticalEventMean: round(eventBrightness, 4),
-      interpretation: 'Formation cadence should avoid occupying the same bright transient band as shots and impacts.'
+      interpretation: 'Normalized brightness share is a secondary warning: the bed may be quiet, but it should still leave spectral space for action cues.'
     },
     {
       id: 'zero-crossing-calm',
       score10: scoreExcess(+activeMetrics.zero_crossings_per_s || 0, zcrTarget, 1650),
-      weight: .18,
+      weight: .14,
       aurora: round(+activeMetrics.zero_crossings_per_s || 0, 1),
       target: round(zcrTarget, 1),
       criticalEventMean: round(eventZcr, 1),
@@ -1207,7 +1232,7 @@ function maskingSeparationAnalysis(activeMetrics, referenceMetrics){
     {
       id: 'duration-pocket',
       score10: scoreGap((+activeMetrics.duration_s || 0) - (+referenceMetrics.duration_s || 0), .12),
-      weight: .16,
+      weight: .1,
       aurora: round(+activeMetrics.duration_s || 0, 3),
       reference: round(+referenceMetrics.duration_s || 0, 3),
       interpretation: 'The pulse must fit the repeated stage cadence pocket.'
