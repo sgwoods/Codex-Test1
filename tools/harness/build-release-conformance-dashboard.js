@@ -957,6 +957,7 @@ function main(){
   const economics = economicsPath ? readJson(economicsPath) : { summary: {} };
   const visualLook = visualLookPath ? readJson(visualLookPath) : null;
   const alienEntryChallenge = alienEntryChallengePath ? readJson(alienEntryChallengePath) : null;
+  const audioContract = audioContractPath ? readJson(audioContractPath) : null;
 
   const audio = category(quality, 'audio');
   const formationBoss = category(quality, 'formation-boss-grammar');
@@ -1002,8 +1003,8 @@ function main(){
       status: 'Measured release category; weakest axis',
       why: 'Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.',
       effort: 'High; 3-6 hrs local/model-assisted analysis',
-      next: audioCandidate?.nextAction || 'Run audio segmentation and cue-matching cycle.',
-      evidence: rel(qualityPath)
+      next: audioContract?.nextStep || audioCandidate?.nextAction || 'Run audio segmentation and cue-matching cycle.',
+      evidence: audioContractPath ? `${rel(qualityPath)}; ${rel(audioContractPath)}` : rel(qualityPath)
     }),
     row({
       rank: 2,
