@@ -27,6 +27,7 @@ const REQUIRED_SOURCE_DOCS = [
   'TESTING_AND_RELEASE_GATES.md',
   'RELEASE_POLICY.md',
   'RELEASE_READINESS_REVIEW.md',
+  'STRATEGIC_BETA_REVIEW.md',
   'RELEASE_CONFORMANCE_DASHBOARD.md',
   'CONFORMANCE_METRICS_OVERVIEW.md',
   'CONFORMANCE_ECONOMICS.md',
@@ -63,6 +64,7 @@ const USER_VISIBLE_SECTIONS = [
     file: 'public-project-page.html',
     requiredText: [
       'Game conformance catalog',
+      'live conformance dashboard game profiles',
       'Open generated game conformance catalog',
       'Open Aurora catalog tables'
     ]
@@ -221,7 +223,8 @@ function checkPublicProjectTemplate(){
     '{{PUBLIC_CONFORMANCE_SCORE_CHART}}',
     '{{PUBLIC_RESOURCE_SUMMARY_CARDS}}',
     '{{PUBLIC_INVESTMENT_QUEUE}}',
-    '{{PUBLIC_INGESTION_OVERVIEW_CARDS}}'
+    '{{PUBLIC_INGESTION_OVERVIEW_CARDS}}',
+    '{{PUBLIC_GAME_CATALOG_CARDS}}'
   ];
   for(const token of requiredTokens){
     if(!template.includes(token)){
@@ -347,6 +350,37 @@ function checkReleaseConformanceDocs(){
   }
 }
 
+function checkStrategicBetaReviewDoc(){
+  const reviewPath = path.join(ROOT, 'STRATEGIC_BETA_REVIEW.md');
+  const review = loadText(reviewPath);
+  const requiredText = [
+    '# Strategic Beta Review',
+    '## Trigger',
+    '## Current Assessment',
+    '## Beta-Readiness Standard',
+    '## Review Log',
+    'after every major hosted `/beta` push'
+  ];
+  for(const text of requiredText){
+    if(!review.includes(text)){
+      throw new Error(`Publish preflight failed: ${reviewPath} is missing "${text}". Refresh the strategic beta review before publishing.`);
+    }
+  }
+}
+
+function checkDocumentationFreshness(){
+  try{
+    execFileSync('node', [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')], {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: documentation freshness check failed.\n${stderr || stdout || err.message}`);
+  }
+}
+
 function checkConformanceDashboardArtifacts(cfg){
   const htmlPath = path.join(cfg.dir, 'conformance-dashboard.html');
   const dataPath = path.join(cfg.dir, 'conformance-dashboard-data.json');
@@ -441,6 +475,8 @@ function checkPublicProjectPageArtifact(cfg){
     'Conformance readout',
     'Value versus compute',
     'Reference ingestion',
+    'live conformance dashboard game profiles',
+    'Strategic beta review',
     buildInfo.label,
     buildInfo.commit
   ];
@@ -556,6 +592,8 @@ function main(){
   checkGitClean();
   checkSourceDocs();
   checkReleaseConformanceDocs();
+  checkStrategicBetaReviewDoc();
+  checkDocumentationFreshness();
   checkArtifacts(cfg);
   checkConformanceDashboardArtifacts(cfg);
   checkDocumentationVisibility(cfg);
@@ -597,5 +635,7 @@ module.exports = {
   checkBetaCheckoutCurrent,
   checkPublicProjectTemplate,
   checkPublicProjectPageArtifact,
-  checkDocumentationVisibility
+  checkDocumentationVisibility,
+  checkStrategicBetaReviewDoc,
+  checkDocumentationFreshness
 };

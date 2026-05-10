@@ -204,6 +204,9 @@ Current conformance read:
   [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - the concrete first level-expansion execution plan is tracked in
   [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
+- beta-readiness and long-horizon strategic review is tracked in
+  [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md) and should be refreshed
+  after each major hosted `/beta` push
 
 ## Post-1.3.0 Pickup
 

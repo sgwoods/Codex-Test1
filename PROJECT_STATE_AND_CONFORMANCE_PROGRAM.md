@@ -79,9 +79,9 @@ Current Aurora read:
 
 - overall release-quality score: `9.2/10`
 - weakest high-value category: audio identity and cue alignment, currently
-  `6.7/10`
+  `7.1/10`
 - audio cue-contract readiness: `9.09/10`; semantic event scoring is strong at
-  `9.78/10`, but acoustic event fit remains weak at `5.93/10`
+  `9.78/10`, but acoustic event fit remains weak at `6.07/10`
 - level arc and encounter shape: `8.8/10`
 - boss entry and formation grammar: `9.2/10`
 - alien entry and challenge-stage novelty: `7.8/10`
@@ -284,6 +284,7 @@ The documentation should remain layered so readers can choose the right depth.
 | Platform ownership and architecture | [PLATINUM.md](PLATINUM.md) and [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md) |
 | Game/platform boundary | [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md) |
 | Per-game alien, audio, stage, and persona catalog | [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md) |
+| Expert beta strategy review | [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md) |
 | Ingestion process | [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md) |
 | Quality scoring model | [QUALITY_CONFORMANCE_MODEL.md](QUALITY_CONFORMANCE_MODEL.md) |
 | Current execution plan | [PLAN.md](PLAN.md) |
@@ -301,6 +302,8 @@ Refresh this document when any of these change:
 - platform/application boundary strategy
 - resource-economics policy
 - status of Aurora, Galaxy Guardians, or a future game
+- major hosted `/beta` pushes or beta-readiness decisions, which should also
+  refresh [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md)
 
 Before a serious `/dev`, `/beta`, or `/production` candidate, refresh:
 

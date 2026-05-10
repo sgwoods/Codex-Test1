@@ -134,13 +134,47 @@ function ingestionCards(data){
 ${cards}`;
 }
 
+function gameCatalogCards(data){
+  const games = Array.isArray(data?.games) ? data.games : [];
+  if(!games.length){
+    return `
+                <article class="card">
+                    <h3>Game profiles pending</h3>
+                    <p>Game-selectable conformance profiles are not available in this build. Refresh the release conformance dashboard before release review.</p>
+                </article>`;
+  }
+  return games.slice(0, 3).map((game) => {
+    const gates = Array.isArray(game.releaseGate) ? game.releaseGate.slice(0, 4) : [];
+    const priorities = Array.isArray(game.priorityRows) ? game.priorityRows.slice(0, 3) : [];
+    const ingestion = Array.isArray(game.ingestionRows) ? game.ingestionRows.slice(0, 2) : [];
+    const gateList = gates.length
+      ? `<p class="smallText"><strong>Key gates:</strong> ${gates.map(gate => `${gate.Gate}: ${gate.Current}`).map(esc).join('; ')}.</p>`
+      : '';
+    const priorityList = priorities.length
+      ? `<p class="smallText"><strong>Next work:</strong> ${priorities.map(row => `${row.metric} (${row.current || row.Current || 'n/a'})`).map(esc).join('; ')}.</p>`
+      : '';
+    const artifactList = ingestion.length
+      ? `<p class="smallText"><strong>Live artifacts:</strong> ${ingestion.map(row => row.anchor || row.source || '').filter(Boolean).map(esc).join('; ')}.</p>`
+      : '';
+    return `
+                <article class="card">
+                    <h3>${esc(game.gameName || 'Game profile')}</h3>
+                    <p><strong>${esc(game.gameStatus || 'Status pending')}.</strong> ${esc(game.releaseRead || game.currentInvestment || '')}</p>
+                    ${gateList}
+                    ${priorityList}
+                    ${artifactList}
+                </article>`;
+  }).join('\n');
+}
+
 function buildPublicProjectSections(data = {}){
   return {
     PUBLIC_RELEASE_GATE_CARDS: releaseGateCards(data),
     PUBLIC_CONFORMANCE_SCORE_CHART: scoreRows(data),
     PUBLIC_RESOURCE_SUMMARY_CARDS: resourceSummary(data),
     PUBLIC_INVESTMENT_QUEUE: investmentRows(data),
-    PUBLIC_INGESTION_OVERVIEW_CARDS: ingestionCards(data)
+    PUBLIC_INGESTION_OVERVIEW_CARDS: ingestionCards(data),
+    PUBLIC_GAME_CATALOG_CARDS: gameCatalogCards(data)
   };
 }
 

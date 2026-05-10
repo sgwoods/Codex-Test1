@@ -161,6 +161,7 @@
     "harness:build:conformance-metrics-overview": "node tools/harness/build-conformance-metrics-overview.js",
     "harness:build:release-conformance-dashboard": "node tools/harness/build-release-conformance-dashboard.js",
     "harness:build:dev-conformance-dashboard": "node tools/harness/build-dev-conformance-dashboard-page.js",
+    "harness:check:documentation-freshness": "node tools/harness/check-documentation-freshness.js",
     "dev:conformance-dashboard": "node tools/dev/conformance-dashboard-watch.js",
     "harness:analyze:conformance-economics": "node tools/harness/analyze-conformance-economics.js",
     "harness:measure": "node tools/harness/measure-conformance-command.js",

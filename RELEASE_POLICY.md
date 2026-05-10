@@ -281,11 +281,16 @@ That refresh should cover at least:
 - `APPLICATIONS_ON_PLATINUM.md`
 - `TESTING_AND_RELEASE_GATES.md`
 - `RELEASE_READINESS_REVIEW.md`
+- `STRATEGIC_BETA_REVIEW.md`
 - hosted `project-guide.html`
 - hosted `platinum-guide.html`
 - hosted `player-guide.html`
 
 This should be treated as a real release artifact pass, not optional cleanup.
+After each major hosted `/beta` push, the strategic beta review must be
+refreshed so the next lane decision is checked against near-term player value,
+long-term platform/ingestion goals, documentation freshness, and
+value-versus-compute evidence.
 
 ## Core Artifact Commit Rule
 

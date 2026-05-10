@@ -57,6 +57,7 @@ const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
+const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
@@ -135,7 +136,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/player-guide.html',
   'beta/build-info.json',
   'beta/README.txt',
-  'beta/README.md'
+  'beta/README.md',
+  'local-dev/public-aurora-galactica-preview.html'
 ]);
 
 function loadEnvFile(file){
@@ -2865,7 +2867,12 @@ function build(options = {}){
     rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
-  fs.writeFileSync(out.publicProjectPage, buildPublicProjectPage(buildInfo, latestNote, releaseDashboard));
+  const publicProjectPageHtml = buildPublicProjectPage(buildInfo, latestNote, releaseDashboard);
+  fs.writeFileSync(out.publicProjectPage, publicProjectPageHtml);
+  if(buildLane === 'dev'){
+    fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
+    fs.writeFileSync(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW, publicProjectPageHtml);
+  }
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
   fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
@@ -2902,6 +2909,7 @@ function build(options = {}){
     out.conformanceDashboard,
     out.conformanceDashboardData,
     out.publicProjectPage,
+    ...(buildLane === 'dev' ? [LOCAL_DEV_PUBLIC_PROJECT_PREVIEW] : []),
     out.projectGuide,
     out.applicationGuide,
     out.platinumGuide,
