@@ -137,6 +137,8 @@ For the immediate next cycle, that means:
 - do not republish `/dev` for every single small change
 - group the next meaningful fidelity work into a small bundle
 - refresh the scorecard and lane metadata when that bundle is ready
+- use the next hosted-dev increment as `1.3.0.1` review posture: useful for
+  integrated review, not yet a beta-promotion claim
 
 ### When To Shape The Next Hosted `/beta`
 
@@ -160,17 +162,18 @@ Practical standard:
 - current hosted `/dev` is our stabilized integration base
 - the next hosted `/beta` should come only after one or two deliberate fidelity
   cycles, not immediately after the `/dev` refresh
-- the next serious public milestone is now the active `1.3.0` `MINOR` family,
-  not a new `MAJOR`
+- the next short-cycle artifact is `1.3.0.1` on `/dev`; the next serious beta
+  family remains `1.4.0` arcade depth
 - after refreshing the audio process with cue contracts and promotion
   prechecks, audio identity remains the weakest runtime category at `6.8/10`,
   while the process is now better instrumented: semantic event score is
   `9.78/10`, acoustic event score is `5.6/10`, cue-contract readiness is
-  `8.94/10`, and the highest measured gap is `stagePulse` onset. This means the
-  next audio pass should improve candidate strategy and runtime validation, not
-  merely pick a pleasant isolated cue.
+  `9.09/10`, and the highest measured gap is `stagePulse` onset. The latest
+  stagePulse work produced a near miss plus a targeted negative result, so the
+  next audio pass should use phase/envelope-aware or reference-subclip
+  candidate strategy, not merely pick a pleasant isolated cue.
 - level arc and encounter shape is now a first-class quality category at
-  `8.4/10`; this should be treated as a high-priority `1.4` workstream because
+  `8.8/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
   repeating a strong early loop
 - the six-window stage-signature read is now `6.4/10` after adding attack-role
@@ -198,9 +201,10 @@ Practical standard:
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
 - after `1.3.0`, the pickup order should stay explicit:
-  - `1.4.0` arcade depth and platform-contract follow-through
-  - `1.5.0` shared-video evidence
-  - `1.6.0` pilot-facing cabinet polish
+  - short term: `1.3.0.1` hosted-dev conformance/documentation increment
+  - medium term: `1.4.0` arcade depth and platform-contract follow-through
+  - longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
+    cabinet polish, leading toward `2.0` multi-game Platinum
 
 See also:
 

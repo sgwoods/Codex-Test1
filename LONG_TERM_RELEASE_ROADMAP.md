@@ -28,7 +28,7 @@ work from becoming a loose bag of good ideas.
 
 ## Current Baseline
 
-As of May 5, 2026:
+As of May 10, 2026:
 
 - shipped production family:
   - `1.3.0`
@@ -37,10 +37,39 @@ As of May 5, 2026:
 - `main` is the authoritative forward integration line
 - the other machine is already advancing a Galaxians-style sibling track and
   stronger harness/reference analysis
+- local post-production work is accumulating as a `1.3.0.1` hosted-dev review
+  increment, not as an immediate beta-promotion candidate
+- the current recommendation is to hold hosted `/beta` until one coherent
+  user-visible conformance bundle lands and can be explained as better play,
+  sound, stage shape, or visual fidelity
 
 The current shipped line is strong enough that the next cycle should not be a
 recovery release. It should be the first intentional polish-and-platform cycle
 toward the next era.
+
+## Short / Medium / Long Planning Frame
+
+Short term:
+
+- use `1.3.0.1` as a hosted-dev review increment for current conformance
+  dashboards, public/project docs, and one measurable feel bundle
+- do more conformance before beta rather than moving beta immediately
+- prioritize audio/event feedback unless stage/challenge variation offers a
+  faster visible user-experience return
+
+Medium term:
+
+- make `1.4.0` the first serious arcade-depth beta family
+- emphasize alien entry variation, challenge-stage novelty, stage progression,
+  boss/formation grammar, visual reference grounding, and audio/event feedback
+- keep Platinum/application seams explicit as the game work deepens
+
+Longer term:
+
+- use `1.5.0` for shared videos, replay evidence, and flight recorder
+- use `1.6.0` for message-to-pilot and cabinet polish
+- reserve `2.0` for a credible multi-game Platinum milestone backed by
+  ingestion-driven game-owned conformance packages
 
 ## Major Roadmap Adjustment
 

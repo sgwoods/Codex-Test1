@@ -1,6 +1,6 @@
 # Project State And Conformance Program
 
-Updated: May 9, 2026
+Updated: May 10, 2026
 
 This is the maintained top-level explanation of the broader Aurora / Platinum
 effort. It is meant to answer four questions at once:
@@ -79,10 +79,12 @@ Current Aurora read:
 
 - overall release-quality score: `9.2/10`
 - weakest high-value category: audio identity and cue alignment, currently
-  `7.3/10`
+  `6.8/10`
+- audio cue-contract readiness: `9.09/10`; semantic event scoring is strong at
+  `9.78/10`, but acoustic event fit remains weak at `5.6/10`
 - level arc and encounter shape: `8.8/10`
-- boss entry and formation grammar: `9.0/10`
-- alien entry and challenge-stage novelty: `8.7/10`
+- boss entry and formation grammar: `9.2/10`
+- alien entry and challenge-stage novelty: `8.0/10`
 - player movement, shot/hit responsiveness, stage-1 geometry, and
   capture/rescue rules are current guardrail passes at `10/10` under current
   scorer resolution
@@ -95,6 +97,10 @@ Important interpretation:
   scorer can hide meaningful feel gaps
 - a better scorer may temporarily lower a score while improving the project
   because it exposes a truer gap
+- the latest `stagePulse` audio work is a good example: it did not raise the
+  runtime audio score, but it taught the harness that simple low-pass/gain
+  stabilization loses pressure-bed character and that the next candidate family
+  should be phase/envelope-aware or reference-subclip based
 
 ## Per-Game Status
 
@@ -216,6 +222,41 @@ level, the important areas are:
 
 The next major release gate should be judged not only by a higher overall score,
 but by whether the improved categories are the ones players actually feel.
+
+## Release Recommendation
+
+Current recommendation:
+
+- do not move directly to hosted `/beta` from the current local state
+- do move toward a hosted `/dev` review increment once the bundle is coherent
+- make that short-cycle artifact `1.3.0.1`, carrying current dashboard/docs
+  work plus one measurable user-facing conformance improvement or a clear
+  evidence-backed pivot
+- hold hosted `/beta` for the `1.4.0` arcade-depth family, after the next
+  improvement can be explained as better play, sound, stage shape, or visual
+  fidelity rather than only better process
+
+Short term:
+
+- finish one focused conformance bundle, with audio/event feedback still the
+  highest-value gap unless level/challenge variation offers faster visible
+  return
+- keep all candidate work wrapped in `harness:measure`
+- refresh dashboard, scorecard, public project page, and project guide before
+  any hosted `/dev` publish
+
+Medium term:
+
+- shape `1.4.0` around arcade depth: alien entry variation, challenge-stage
+  novelty, stage progression, boss/formation grammar, visual reference
+  grounding, and measured audio feedback
+
+Longer term:
+
+- use `1.5.0` for shared video evidence and flight-recorder publishing
+- use `1.6.0` for message-to-pilot and cabinet-surface polish
+- reserve `2.0` for a credible multi-game Platinum milestone backed by
+  ingestion-driven game-owned conformance packages
 
 ## Documentation System
 

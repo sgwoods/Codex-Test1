@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-10T00:08:57.769Z",
-  "commit": "c9ef29d2",
+  "generatedAt": "2026-05-10T00:13:06.510Z",
+  "commit": "b879bdaa",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -95,7 +95,7 @@
           "status": "Measured release category; weakest axis",
           "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
           "effort": "High; 3-6 hrs local/model-assisted analysis",
-          "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.",
+          "next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck.",
           "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
           "costContext": {
             "costClass": "high",
@@ -103,10 +103,10 @@
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "164 runs; 122.3 min wall; 219.9 min CPU",
-            "trackedRuns": 164,
-            "trackedWallSeconds": 7337.097,
-            "trackedCpuSeconds": 13194.11,
+            "trackedSpend": "167 runs; 122.7 min wall; 220.7 min CPU",
+            "trackedRuns": 167,
+            "trackedWallSeconds": 7363.648,
+            "trackedCpuSeconds": 13242.73,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
             "investmentScore": 3.08,
@@ -791,15 +791,15 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 952,
         "deltaCount": 115,
-        "measuredRuns": 338,
-        "wallSeconds": 11428.65,
-        "cpuSeconds": 19666.98,
-        "artifactBytes": 561379363,
+        "measuredRuns": 341,
+        "wallSeconds": 11455.201,
+        "cpuSeconds": 19715.6,
+        "artifactBytes": 562346071,
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/cost-per-positive-score-point.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/cost-per-positive-score-point.svg"
         ]
       },
       "ingestionSummary": {
@@ -844,8 +844,8 @@
           "annotationStatus": "family-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-          "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+          "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-b879bdaa-dirty/report.json",
+          "next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
         },
         {
           "rank": 4,
@@ -856,8 +856,8 @@
           "annotationStatus": "contract-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
-          "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+          "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-b879bdaa-dirty-001239/report.json",
+          "next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
         },
         {
           "rank": 5,
@@ -964,12 +964,12 @@
       },
       "sourceReports": {
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
-        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-10-c9ef29d2/report.json",
+        "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-10-b879bdaa/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-bbcc8df1/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
-        "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-        "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
+        "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-b879bdaa-dirty/report.json",
+        "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-b879bdaa-dirty-001239/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
         "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
       },
@@ -1193,12 +1193,12 @@
   ],
   "sourceReports": {
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
-    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-10-c9ef29d2/report.json",
+    "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-10-b879bdaa/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-09-bbcc8df1/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-09-cd6fb677/report.json",
-    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
+    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-b879bdaa-dirty/report.json",
+    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-b879bdaa-dirty-001239/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
     "evidenceCycle": "reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json"
   },
@@ -1291,7 +1291,7 @@
       "status": "Measured release category; weakest axis",
       "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "effort": "High; 3-6 hrs local/model-assisted analysis",
-      "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.",
+      "next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck.",
       "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json",
       "costContext": {
         "costClass": "high",
@@ -1299,10 +1299,10 @@
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "164 runs; 122.3 min wall; 219.9 min CPU",
-        "trackedRuns": 164,
-        "trackedWallSeconds": 7337.097,
-        "trackedCpuSeconds": 13194.11,
+        "trackedSpend": "167 runs; 122.7 min wall; 220.7 min CPU",
+        "trackedRuns": 167,
+        "trackedWallSeconds": 7363.648,
+        "trackedCpuSeconds": 13242.73,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
         "investmentScore": 3.08,
@@ -1990,12 +1990,12 @@
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "164 runs; 122.3 min wall; 219.9 min CPU",
+      "Tracked spend": "167 runs; 122.7 min wall; 220.7 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "Effort / time estimate": "High; 3-6 hrs local/model-assisted analysis",
-      "Recommended next step": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck.",
+      "Recommended next step": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck.",
       "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json"
     },
     {
@@ -2259,23 +2259,23 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 952,
     "deltaCount": 115,
-    "measuredRuns": 338,
-    "wallSeconds": 11428.65,
-    "cpuSeconds": 19666.98,
-    "artifactBytes": 561379363,
+    "measuredRuns": 341,
+    "wallSeconds": 11455.201,
+    "cpuSeconds": 19715.6,
+    "artifactBytes": 562346071,
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-10-c9ef29d2/cost-per-positive-score-point.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-10-b879bdaa/cost-per-positive-score-point.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 337,
-      "Wall time": "190.5 min",
-      "CPU time": "327.8 min"
+      "Measured runs": 340,
+      "Wall time": "190.9 min",
+      "CPU time": "328.6 min"
     },
     {
       "Resource": "browser",
@@ -2311,9 +2311,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 164,
-      "Wall time": "122.3 min",
-      "CPU time": "219.9 min"
+      "Measured runs": 167,
+      "Wall time": "122.7 min",
+      "CPU time": "220.7 min"
     },
     {
       "Axis": "audio-focus-candidate",
@@ -2367,9 +2367,9 @@
       "Gap to target": "+0.7",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "164 runs; 122.3 min wall; 219.9 min CPU",
+      "Tracked spend": "167 runs; 122.7 min wall; 220.7 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 3.08.",
-      "Next action": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+      "Next action": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
     },
     {
       "Priority": 2,
@@ -2498,8 +2498,8 @@
       "annotationStatus": "family-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-      "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+      "anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-b879bdaa-dirty/report.json",
+      "next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
     },
     {
       "rank": 4,
@@ -2510,8 +2510,8 @@
       "annotationStatus": "contract-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
-      "next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+      "anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-b879bdaa-dirty-001239/report.json",
+      "next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
     },
     {
       "rank": 5,
@@ -2644,8 +2644,8 @@
       "Annotation status": "family-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-c9ef29d2-dirty/report.json",
-      "Missing next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+      "Anchor": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-10-b879bdaa-dirty/report.json",
+      "Missing next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
     },
     {
       "Priority": 4,
@@ -2656,8 +2656,8 @@
       "Annotation status": "contract-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-c9ef29d2-dirty-000846/report.json",
-      "Missing next": "StagePulse candidate soft-attack-low-march is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+      "Anchor": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-10-b879bdaa-dirty-001239/report.json",
+      "Missing next": "StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
     },
     {
       "Priority": 5,

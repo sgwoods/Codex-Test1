@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-10T00:13:00.613Z`
+Generated: `2026-05-10T12:50:03.450Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses both a reference-conformance preview metric set and a stricter playtest-weighted score because its Galaxian evidence is still being promoted from source footage into frame-level/audio-level measurements.
 
