@@ -159,8 +159,11 @@ function buildReport(){
   const regularSignatureRatio = regularPath.length ? regularSignatureCount / regularPath.length : 0;
   const challengeSignatureRatio = challengePath.length ? challengeSignatureCount / Math.max(challengePath.length, 4) : 0;
   const regularGeometryPairs = geometryPairs(regularPath);
+  const challengeGeometryPairs = geometryPairs(challengePath);
   const minRegularGeometryDistance = regularGeometryPairs[0]?.distance || 0;
   const meanRegularGeometryDistance = average(regularGeometryPairs.map(pair => pair.distance));
+  const minChallengeGeometryDistance = challengeGeometryPairs[0]?.distance || 0;
+  const meanChallengeGeometryDistance = average(challengeGeometryPairs.map(pair => pair.distance));
   const regularEntitySets = regularFormation.map(window => entityFamilies(window).join('|'));
   const challengeEntitySets = challengeFormation.map(window => entityFamilies(window).join('|'));
   const regularEntityNoveltyRatio = regularEntitySets.length ? new Set(regularEntitySets).size / regularEntitySets.length : 0;
@@ -171,6 +174,21 @@ function buildReport(){
   const referenceCap = +(pathFamily.summary?.referenceComparisonCap10 || 0);
   const pathFamilyScore = +(pathFamily.summary?.score10 || 0);
   const directReferenceReady = referenceCap > 7.5 ? 1 : 0;
+  const challengeArrivalRuntimeScore = 10 * (
+    (0.28 * challengePathCoverage)
+    + (0.26 * clamp(average(challengePath.map(window => meanFeature(window, 'xRange'))) / 165))
+    + (0.22 * clamp(average(challengePath.map(window => meanFeature(window, 'pathLength'))) / 950))
+    + (0.14 * clamp(average(challengePath.map(window => meanFeature(window, 'turnCount'))) / 8))
+    + (0.1 * clamp(meanChallengeGeometryDistance / 0.18))
+  );
+  const challengeReferenceCap = directReferenceReady ? 10 : 6.8;
+  const challengePatternDepthRaw = 10 * (
+    (0.24 * challengePathCoverage)
+    + (0.24 * clamp(challengeSignatureCount / 5))
+    + (0.18 * challengeEntityNoveltyRatio)
+    + (0.18 * average(challengeFormation.map(window => clamp(entityFamilies(window).length / 5))))
+    + (0.16 * clamp(meanChallengeGeometryDistance / 0.18))
+  );
 
   const metrics = [
     scoreMetric(
@@ -206,12 +224,28 @@ function buildReport(){
       'Capture and compare challenge stages across several challenge numbers, then add trajectory families for sweeps, arcs, lane waves, boss-led waves, and late-stage specialty entries.'
     ),
     scoreMetric(
+      'challenge-arrival-vs-appearance',
+      'Challenging-stage arrival versus appearance',
+      Math.min(challengeArrivalRuntimeScore, challengeReferenceCap),
+      `Runtime arrival evidence score ${round(challengeArrivalRuntimeScore, 1)}/10; reference cap ${round(challengeReferenceCap, 1)}/10; challenge geometry mean distance ${round(meanChallengeGeometryDistance)}.`,
+      'Measures whether challenge-stage aliens visibly arrive through readable paths rather than feeling like they simply appear in place. This is capped until contact-sheet or frame-labeled Galaga challenge references prove the arrival grammar.',
+      'Add challenge-stage contact sheets with first-visible, entry-side, path-commit, target-group, and exit labels; then tune challenge spawns and paths against the weakest arrival/readability delta.'
+    ),
+    scoreMetric(
       'challenge-alien-novelty',
       'Challenging-stage alien novelty and introduction',
       10 * ((0.45 * challengeCoverage) + (0.25 * challengeEntityNoveltyRatio) + (0.2 * average(challengeFormation.map(window => clamp(entityFamilies(window).length / 5)))) + (0.1 * clamp(challengeFormation.length / 6))),
       `${challengeFormation.length}/4 challenge evidence windows; challenge entity signatures ${challengeEntitySets.join(', ') || 'none'}.`,
       'Measures whether challenge stages use alien introductions and enemy composition as a teaching/reward device.',
       'Add evidence windows for successive challenge stages and score new-alien introduction, path novelty, bonus opportunity clarity, and result feedback as separate signals.'
+    ),
+    scoreMetric(
+      'challenge-pattern-novelty-depth',
+      'Challenging-stage pattern novelty depth',
+      Math.min(challengePatternDepthRaw, directReferenceReady ? 10 : 7.2),
+      `Pattern-depth raw score ${round(challengePatternDepthRaw, 1)}/10; ${challengeSignatureCount} challenge path signatures; challenge entity novelty ratio ${round(challengeEntityNoveltyRatio)}.`,
+      'Measures whether later challenge stages create genuinely new learnable set pieces by combining path family, alien composition, group timing, and bonus opportunity instead of reskinning the same wave.',
+      'Split challenge stages into named pattern contracts, then run long-cycle persona and path extraction to verify each challenge stage teaches a distinct bonus-stage skill.'
     ),
     scoreMetric(
       'reference-grounded-path-precision',
@@ -224,12 +258,14 @@ function buildReport(){
   ];
 
   const weights = {
-    'regular-stage-entry-variation': 0.19,
-    'entry-path-family-specificity': 0.17,
-    'regular-entry-geometry-separation': 0.18,
-    'challenge-trajectory-variation': 0.2,
-    'challenge-alien-novelty': 0.15,
-    'reference-grounded-path-precision': 0.11
+    'regular-stage-entry-variation': 0.16,
+    'entry-path-family-specificity': 0.14,
+    'regular-entry-geometry-separation': 0.15,
+    'challenge-trajectory-variation': 0.13,
+    'challenge-arrival-vs-appearance': 0.14,
+    'challenge-alien-novelty': 0.12,
+    'challenge-pattern-novelty-depth': 0.11,
+    'reference-grounded-path-precision': 0.05
   };
   const score10 = round(metrics.reduce((sum, metric) => sum + (metric.score10 * (weights[metric.id] || 0)), 0), 1);
   const weakestMetric = metrics.reduce((worst, metric) => metric.score10 < worst.score10 ? metric : worst, metrics[0]);
@@ -245,9 +281,9 @@ function buildReport(){
       score10,
       confidence: 'medium',
       resolution: 'Dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness.',
-      problem: 'Aurora still reads too repetitive for alien entry and challenge-stage invention: regular stages are not distinct enough, challenge-stage trajectory evidence is too sparse, and alien novelty is not yet scored against multiple reference-like challenge set pieces.',
-      strategy: 'Run a long-cycle evidence pass before gameplay tuning: capture early/mid/late regular entries and several challenge stages, label alien families and path families, promote reference contact sheets, then tune stage scripts and challenge waves against the resulting gaps.',
-      successMeasure: 'Raise this score above 7.5 with at least four challenge evidence windows, regular-stage minimum signature distance above 0.22, two or more distinct challenge trajectory signatures, and reference-grounded path precision readiness above 7.0.',
+      problem: 'Aurora still reads too repetitive for alien entry and challenge-stage invention: regular stages are not distinct enough, challenge stages need stronger arrival-versus-appearance evidence, and alien novelty is not yet scored against multiple reference-like challenge set pieces.',
+      strategy: 'Run a long-cycle evidence pass before gameplay tuning: capture early/mid/late regular entries and several challenge stages, label first-visible arrival, alien families, path families, target groups, exits, and bonus opportunities, promote reference contact sheets, then tune stage scripts and challenge waves against the resulting gaps.',
+      successMeasure: 'Raise this score above 7.5 with at least four challenge evidence windows, regular-stage minimum signature distance above 0.22, two or more distinct challenge trajectory signatures, challenge arrival/readability above 7.2, and reference-grounded path precision readiness above 7.0.',
       weakestMetric
     },
     metrics,
@@ -261,6 +297,9 @@ function buildReport(){
       minRegularGeometryDistance: round(minRegularGeometryDistance),
       meanRegularGeometryDistance: round(meanRegularGeometryDistance),
       closestRegularGeometryPair: regularGeometryPairs[0] || null,
+      minChallengeGeometryDistance: round(minChallengeGeometryDistance),
+      meanChallengeGeometryDistance: round(meanChallengeGeometryDistance),
+      closestChallengeGeometryPair: challengeGeometryPairs[0] || null,
       distinctPairRatio: round(distinctPairRatio),
       repetitionRisk: round(repetitionRisk),
       regularSignatureCount,
@@ -276,7 +315,7 @@ function buildReport(){
     },
     longCyclePlan: [
       'Refresh runtime extraction across stage 1, 2, 4, 6, 8, 10, 12, 14 and challenge stages 3, 7, 11, 15.',
-      'Generate contact sheets and path SVGs for each window, then label alien family, entry side, path family, rack target, novelty role, and bonus opportunity.',
+      'Generate contact sheets and path SVGs for each window, then label alien family, first visible frame, entry side, arrival path, target group, exit path, rack target, novelty role, and bonus opportunity.',
       'Add Galaga-family reference contact sheets for regular entries and challenging stages so path precision can move from heuristic coverage to direct comparison.',
       'Rank gameplay changes by measured gap: regular-stage signature distance first, challenge trajectory family count second, alien novelty and reward clarity third.',
       'After each candidate change, rerun path-slot extraction, path-family comparison, this scorer, level-arc scoring, and quality conformance.'

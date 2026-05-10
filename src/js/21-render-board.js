@@ -42,7 +42,7 @@ function enemyDims(e){
 }
 
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.08:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.14:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 
@@ -398,7 +398,13 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
-  if(f.flash){
+  if(f.ring){
+   ctx.strokeStyle=f.c;
+   ctx.lineWidth=Math.max(1,.8+f.t*2.5);
+   ctx.beginPath();
+   ctx.arc(f.x,f.y,Math.max(2,f.r*(1.12-f.t*.32)),0,7);
+   ctx.stroke();
+  }else if(f.flash){
    ctx.fillStyle=f.c;
    ctx.fillRect(f.x-f.r*.6,f.y-1,f.r*1.2,2);
    ctx.fillRect(f.x-1,f.y-f.r*.6,2,f.r*1.2);

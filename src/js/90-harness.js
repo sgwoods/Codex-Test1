@@ -972,9 +972,8 @@ window.__galagaHarness__={
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
   holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
   S.shake=Math.max(S.shake,.22);
-  ex(boss.x,boss.y,20,'#fff4a8');
-  ex(boss.x,boss.y,10,'#ff8cd7');
-  ex(boss.x,boss.y,6,'#d8f2ff');
+  if(typeof bossDamageFx==='function')bossDamageFx(boss.x,boss.y);
+  else ex(boss.x,boss.y,12,'#fff4a8');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
   return true;

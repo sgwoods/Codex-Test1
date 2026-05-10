@@ -207,7 +207,7 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200}),
  rescueJoin:referenceAudioCue('assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',{cooldownMs:1800}),
  extendAward:referenceAudioCue('assets/reference-audio/galaga3-extra-fighter.m4a',{cooldownMs:2200}),
- playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800}),
+ playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800,clipStart:.1,clipDuration:1.75}),
  capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600}),
  challengeTransition:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage.m4a',{
   cooldownMs:2600,
@@ -230,7 +230,7 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{
   cooldownMs:1800,
   clipStart:0,
-  clipDuration:.86,
+  clipDuration:2.8,
   stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
  }),
  attractEnter:Object.freeze({
@@ -243,13 +243,13 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
    demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95})
   })
  }),
- gameOver:referenceAudioCue('assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',{cooldownMs:3600}),
+ gameOver:referenceAudioCue('assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',{cooldownMs:3600,clipStart:2.3,clipDuration:4.2}),
  highScoreFirst:referenceAudioCue('assets/reference-audio/galaga3-name-entry-1st.m4a',{cooldownMs:2000}),
  highScoreOther:referenceAudioCue('assets/reference-audio/galaga3-name-entry-2nd-5th.m4a',{cooldownMs:1800})
 });
 
 const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
- playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800,referenceVolume:1,clipStart:.02,clipDuration:.92}),
+ playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800,referenceVolume:1,clipStart:.1,clipDuration:1.55}),
  enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
  bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
  enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),

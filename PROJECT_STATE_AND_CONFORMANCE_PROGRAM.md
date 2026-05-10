@@ -79,12 +79,12 @@ Current Aurora read:
 
 - overall release-quality score: `9.2/10`
 - weakest high-value category: audio identity and cue alignment, currently
-  `6.8/10`
+  `6.7/10`
 - audio cue-contract readiness: `9.09/10`; semantic event scoring is strong at
-  `9.78/10`, but acoustic event fit remains weak at `5.6/10`
+  `9.78/10`, but acoustic event fit remains weak at `5.93/10`
 - level arc and encounter shape: `8.8/10`
 - boss entry and formation grammar: `9.2/10`
-- alien entry and challenge-stage novelty: `8.0/10`
+- alien entry and challenge-stage novelty: `7.8/10`
 - player movement, shot/hit responsiveness, stage-1 geometry, and
   capture/rescue rules are current guardrail passes at `10/10` under current
   scorer resolution
@@ -97,10 +97,10 @@ Important interpretation:
   scorer can hide meaningful feel gaps
 - a better scorer may temporarily lower a score while improving the project
   because it exposes a truer gap
-- the latest `stagePulse` audio work is a good example: it did not raise the
-  runtime audio score, but it taught the harness that simple low-pass/gain
-  stabilization loses pressure-bed character and that the next candidate family
-  should be phase/envelope-aware or reference-subclip based
+- the latest audio and challenge-stage work is a good example: widening the
+  inter-level phrase and preserving the game-over tail improved player-facing
+  continuity, while the stricter challenge scorer lowered confidence in
+  "arrival versus appearance" and exposed a truer stage-variation gap
 
 ## Per-Game Status
 
@@ -210,9 +210,9 @@ The dashboard currently keeps the detailed investment queue. At the strategic
 level, the important areas are:
 
 1. audio identity, event feedback, and cue alignment
-2. level arc and encounter shape
-3. boss entry and formation grammar
-4. alien entry, rack timing, and stage-to-stage formation variation
+2. alien entry, challenge-stage arrival, and challenge-stage novelty
+3. level arc and encounter shape
+4. boss entry and formation grammar
 5. visual look and feel, including start/attract typography and gameplay
    readability
 6. arcade cabinet frame, popup, help, scoring, leaderboard, and result surfaces
@@ -239,11 +239,24 @@ Current recommendation:
 Short term:
 
 - finish one focused conformance bundle, with audio/event feedback still the
-  highest-value gap unless level/challenge variation offers faster visible
-  return
+  highest-value gap unless challenge-stage arrival/novelty offers faster
+  visible return
 - keep all candidate work wrapped in `harness:measure`
 - refresh dashboard, scorecard, public project page, and project guide before
   any hosted `/dev` publish
+
+Latest local playtest response:
+
+- `stageTransition` now uses a longer reference-backed window so the inter-level
+  moment is less abrupt.
+- final ship loss now plays/logs `gameOver` before session export and keeps a
+  recording tail so the final audio does not disappear from captured evidence.
+- wait-mode copy is simplified for the Aurora start screen while preserving the
+  game-picker hint and Guardians showcase content.
+- boss first-hit feedback now uses compact damage sparks/ring/flash instead of
+  clunky full-destruction bursts.
+- challenge-stage timing still passes, but challenge-stage arrival and pattern
+  novelty are now separated as their own conformance problem.
 
 Medium term:
 

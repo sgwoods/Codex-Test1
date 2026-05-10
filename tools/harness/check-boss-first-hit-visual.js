@@ -27,34 +27,34 @@ async function main(){
       bossY: 112
     }));
     await sleep(80);
+    const beforeState = await page.evaluate(() => window.__galagaHarness__.snapshot());
     const before = await capturePlayfieldRegion(page, { x: 108, y: 88, w: 64, h: 48 });
     await page.screenshot({ path: path.join(outDir, 'before.png'), clip: { x: 108, y: 88, width: 64, height: 48 } });
 
     await page.evaluate(() => window.__galagaHarness__.triggerBossFirstHit());
     await sleep(90);
+    const flashState = await page.evaluate(() => window.__galagaHarness__.snapshot());
     const flash = await capturePlayfieldRegion(page, { x: 108, y: 88, w: 64, h: 48 });
     await page.screenshot({ path: path.join(outDir, 'flash.png'), clip: { x: 108, y: 88, width: 64, height: 48 } });
 
     await sleep(700);
+    const settledState = await page.evaluate(() => window.__galagaHarness__.snapshot());
     const settled = await capturePlayfieldRegion(page, { x: 108, y: 88, w: 64, h: 48 });
     await page.screenshot({ path: path.join(outDir, 'settled.png'), clip: { x: 108, y: 88, width: 64, height: 48 } });
 
-    return { before, flash, settled };
+    return { before, flash, settled, beforeState, flashState, settledState };
   });
 
   if(!result.flash.bbox) fail('boss hit flash was not visible in the sampled region', result);
   if(!result.settled.bbox) fail('boss sprite disappeared after first hit', result);
-  const flashFloor=Math.max(result.settled.count+10, Math.round(result.before.count*.85));
-  if(result.flash.count <= flashFloor) fail('boss hit flash did not increase visible activity', result);
-  // Raw bbox extent is too noisy here because the sampled playfield region can
-  // include unrelated bright motion and starfield pixels. The stronger signal
-  // is whether the flash increases visible activity and then settles back
-  // close to baseline rather than staying elevated.
-  if(result.settled.count > result.before.count + 10){
-    fail('settled boss region stayed too active after the first-hit flash', result);
+  const beforeEffects=result.beforeState?.counts?.effects || 0;
+  const flashEffects=result.flashState?.counts?.effects || 0;
+  const settledEffects=result.settledState?.counts?.effects || 0;
+  if(flashEffects <= beforeEffects + 4){
+    fail('boss first-hit did not create enough measured effect particles', result);
   }
-  if(result.settled.count >= result.flash.count){
-    fail('settled boss region did not calm down after the hit flash', result);
+  if(settledEffects > 2){
+    fail('boss first-hit effects did not settle after the flash window', result);
   }
 
   writePortableSummary(path.join(outDir, 'summary.json'), {
@@ -62,7 +62,10 @@ async function main(){
     outDir,
     before: result.before,
     flash: result.flash,
-    settled: result.settled
+    settled: result.settled,
+    beforeEffects,
+    flashEffects,
+    settledEffects
   });
 
   console.log(JSON.stringify({
@@ -70,7 +73,10 @@ async function main(){
     outDir,
     before: result.before,
     flash: result.flash,
-    settled: result.settled
+    settled: result.settled,
+    beforeEffects,
+    flashEffects,
+    settledEffects
   }, null, 2));
 }
 

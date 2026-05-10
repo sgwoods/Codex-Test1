@@ -104,12 +104,13 @@ function gameOver(){
  started=0;
  paused=0;
  if(typeof syncPauseUi==='function')syncPauseUi();
- if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
- stopRunRecording();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
  sfx.over();
+ if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
+ if(typeof stopRunRecordingAfterAudioTail==='function')stopRunRecordingAfterAudioTail(7000,VIDEO_REC.sessionId);
+ else stopRunRecording();
 }
 
 function attractMoveAxis(p){
