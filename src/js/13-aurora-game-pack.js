@@ -249,6 +249,7 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
 });
 
 const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
+ playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800,referenceVolume:1,clipStart:.02,clipDuration:.92}),
  enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
  bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
  enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
@@ -264,7 +265,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    formationArrival:Object.freeze({seq:[330,440,587],step:.052,wave:'triangle',volume:.0112,slide:20,lpHz:3600,tones:Object.freeze([{freq:784,duration:.1,wave:'square',volume:.0048,slide:-22,lpHz:4200,delay:.104}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:1140,duration:.028,wave:'square',volume:.006,slide:-620,detune:.006,lpHz:6200},{freq:1520,duration:.018,wave:'square',volume:.003,slide:-480,detune:-.004,lpHz:6800,delay:.006}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.075,wave:'triangle',volume:.009,slide:-130,detune:.002,lpHz:3000},{freq:258,duration:.05,wave:'square',volume:.004,slide:-90,detune:.002,lpHz:2600,delay:.012}])}),
-   playerHit:Object.freeze({tones:Object.freeze([{freq:228,duration:.11,wave:'square',volume:.022,slide:-300,detune:.012,lpHz:2600},{freq:176,duration:.19,wave:'sawtooth',volume:.024,slide:-320,detune:.016,lpHz:2100,delay:.016},{freq:124,duration:.28,wave:'triangle',volume:.022,slide:-150,detune:.009,lpHz:1600,delay:.028}]),noise:Object.freeze([{duration:.16,volume:.016,hp:1120,delay:.012},{duration:.08,volume:.01,hp:760,delay:.03}])}),
+   playerHit:AURORA_MEASURED_EFFECT_CUES.playerHit,
    enemyHit:AURORA_MEASURED_EFFECT_CUES.enemyHit,
    bossHit:AURORA_MEASURED_EFFECT_CUES.bossHit,
    enemyBoom:AURORA_MEASURED_EFFECT_CUES.enemyBoom,
@@ -381,7 +382,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
      stage:Object.freeze({seq:[784,1175],step:.042,wave:'triangle',volume:.0085,slide:26,lpHz:4500})
     })
    }),
-   playerHit:Object.freeze({tones:Object.freeze([{freq:220,duration:.13,wave:'triangle',volume:.02,slide:-220,lpHz:2200},{freq:165,duration:.22,wave:'sawtooth',volume:.018,slide:-240,lpHz:1800,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:980,delay:.02}])}),
+   playerHit:AURORA_MEASURED_EFFECT_CUES.playerHit,
    gameOver:Object.freeze({seq:[330,262,220,196,165,131],step:.092,wave:'triangle',volume:.0162,slide:-58,lpHz:2120,tones:Object.freeze([{freq:175,duration:.12,wave:'triangle',volume:.0058,slide:-22,lpHz:2300,delay:.01},{freq:131,duration:.18,wave:'triangle',volume:.0062,slide:-28,lpHz:1860,delay:.182},{freq:98,duration:.4,wave:'sawtooth',volume:.0148,slide:-96,lpHz:1660,delay:.27}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])})
   })
  }),
@@ -452,7 +453,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
      stage:Object.freeze({seq:[880,1318],step:.042,wave:'triangle',volume:.009,slide:28,lpHz:4700})
     })
    }),
-   playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800,referenceVolume:1,clipStart:.02,clipDuration:.968}),
+   playerHit:AURORA_MEASURED_EFFECT_CUES.playerHit,
    gameOver:Object.freeze({seq:[392,330,262,220,175,147],step:.09,wave:'triangle',volume:.016,slide:-60,lpHz:2220,tones:Object.freeze([{freq:196,duration:.11,wave:'triangle',volume:.0054,slide:-20,lpHz:2500,delay:.01},{freq:147,duration:.18,wave:'triangle',volume:.006,slide:-28,lpHz:1950,delay:.18},{freq:110,duration:.4,wave:'sawtooth',volume:.0144,slide:-94,lpHz:1720,delay:.264}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])}),
    highScoreFirst:Object.freeze({seq:[659,880,1175,1568,2093],step:.048,wave:'triangle',volume:.0152,slide:38,lpHz:4500,tones:Object.freeze([{freq:2794,duration:.12,wave:'sine',volume:.0064,slide:16,lpHz:5400,delay:.192}])}),
    highScoreOther:Object.freeze({seq:[523,698,932,1175],step:.054,wave:'triangle',volume:.0132,slide:24,lpHz:4100,tones:Object.freeze([{freq:1568,duration:.1,wave:'sine',volume:.0048,slide:10,lpHz:4900,delay:.168}])})
@@ -522,7 +523,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
      stage:Object.freeze({seq:[988,1480],step:.042,wave:'triangle',volume:.0092,slide:28,lpHz:4900})
     })
    }),
-   playerHit:Object.freeze({tones:Object.freeze([{freq:262,duration:.12,wave:'triangle',volume:.02,slide:-220,lpHz:2500},{freq:196,duration:.22,wave:'sawtooth',volume:.018,slide:-235,lpHz:1950,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
+   playerHit:AURORA_MEASURED_EFFECT_CUES.playerHit,
    capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:356,duration:.042,wave:'triangle',volume:.012,slide:-250,lpHz:3600},{freq:220,duration:.094,wave:'sine',volume:.009,slide:-130,lpHz:2440,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0058,hp:1540,delay:.01}])}),
    challengeResults:Object.freeze({seq:[494,659,880,1175],step:.056,wave:'triangle',volume:.0138,slide:24,lpHz:3960,tones:Object.freeze([{freq:1480,duration:.12,wave:'sine',volume:.0056,slide:12,lpHz:4700,delay:.17}])}),
    challengePerfect:Object.freeze({seq:[784,1047,1397,1865,2349],step:.048,wave:'triangle',volume:.0156,slide:42,lpHz:4700,tones:Object.freeze([{freq:3136,duration:.14,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.192}])}),

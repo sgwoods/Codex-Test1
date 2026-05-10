@@ -453,7 +453,17 @@ const CUE_CONFIGS = {
         }
       }
     ],
-    keeper: { risk: .25, segment: .35, duration: .12, acceptableDuration: .1, centroidWorsenHz: 90, bandWorsen: .045 }
+    keeper: { risk: .25, segment: .35, duration: .12, acceptableDuration: .1, centroidWorsenHz: 90, bandWorsen: .045 },
+    lossComposite: {
+      family: 'loss-cue-composite',
+      roles: ['onset', 'body', 'tail'],
+      roleWeights: { onset: .36, body: .44, tail: .2 },
+      maxRoleRisk10: { onset: 3.2, body: 3.4, tail: 3.4 },
+      durationTolerance: .14,
+      scheduledCoverageMin: .78,
+      scheduledCoverageMax: 1.18,
+      minScore10: 7.2
+    }
   },
   'capture-retreat': {
     cue: 'captureRetreat',
@@ -953,6 +963,141 @@ function segmentSummary(comparisons = []){
   };
 }
 
+function segmentRoleMap(comparisons = []){
+  const roles = {};
+  for(const item of comparisons){
+    const role = String(item.role || '').trim();
+    if(!role) continue;
+    roles[role] = {
+      role,
+      risk10: round(item.auroraSegmentRisk10, 2),
+      exactRoleMatch: !!item.auroraExactRoleMatch,
+      referenceWindow: item.referenceWindow || null,
+      auroraWindow: item.auroraWindow || null,
+      comparison: item.auroraVsReference || null,
+      interpretation: item.interpretation || ''
+    };
+  }
+  return roles;
+}
+
+function aggregateSegmentRoles(group){
+  const roleNames = Array.from(new Set(group.flatMap(row => Object.keys(row.segmentRoles || {})))).sort();
+  const roles = {};
+  for(const role of roleNames){
+    const samples = group.map(row => row.segmentRoles?.[role]).filter(Boolean);
+    const risks = samples.map(item => item.risk10);
+    const exactMatches = samples.filter(item => item.exactRoleMatch).length;
+    const referenceWindows = samples.map(item => item.referenceWindow).filter(Boolean);
+    const auroraWindows = samples.map(item => item.auroraWindow).filter(Boolean);
+    roles[role] = {
+      role,
+      risk10: round(mean(risks), 2),
+      worstRisk10: round(Math.max(...risks.map(Number).filter(Number.isFinite)), 2),
+      exactRoleMatchRate: round(exactMatches / Math.max(1, samples.length), 2),
+      referenceWindow: referenceWindows[0] || null,
+      auroraWindow: auroraWindows[0] || null,
+      averageAuroraDurationSeconds: round(mean(auroraWindows.map(item => item?.duration_s)), 3),
+      interpretation: samples.slice().sort((a, b) => (+b.risk10 || 0) - (+a.risk10 || 0))[0]?.interpretation || ''
+    };
+  }
+  return roles;
+}
+
+function scheduledCueDurationSeconds(row){
+  const specDuration = Number(row.spec?.clipDuration);
+  if(row.spec?.referenceClip && Number.isFinite(specDuration) && specDuration > 0) return round(specDuration, 3);
+  return round(row.activeMetrics?.duration_s, 3);
+}
+
+function referenceCompositeDurationSeconds(row){
+  const windows = Object.values(row.segmentRoleAverages || {}).map(item => item.referenceWindow).filter(Boolean);
+  const starts = windows.map(item => Number(item.start_s ?? item.startSeconds)).filter(Number.isFinite);
+  const ends = windows.map(item => Number(item.end_s ?? item.endSeconds)).filter(Number.isFinite);
+  if(starts.length && ends.length){
+    const duration = Math.max(...ends) - Math.min(...starts);
+    if(duration > 0) return round(duration, 3);
+  }
+  return round(row.referenceMetrics?.duration_s, 3);
+}
+
+function lossCompositeAnalysis(row, config){
+  const gate = config.lossComposite;
+  if(!gate) return null;
+  const roles = gate.roles || Object.keys(row.segmentRoleAverages || {});
+  const scheduledDurationSeconds = scheduledCueDurationSeconds(row);
+  const referenceDurationSeconds = referenceCompositeDurationSeconds(row);
+  const activeDurationSeconds = round(row.activeMetrics?.duration_s, 3);
+  const durationGapSeconds = Number.isFinite(scheduledDurationSeconds) && Number.isFinite(referenceDurationSeconds)
+    ? round(Math.abs(scheduledDurationSeconds - referenceDurationSeconds), 3)
+    : null;
+  const activeDurationGapSeconds = Number.isFinite(activeDurationSeconds) && Number.isFinite(referenceDurationSeconds)
+    ? round(Math.abs(activeDurationSeconds - referenceDurationSeconds), 3)
+    : null;
+  const scheduledCoverage = Number.isFinite(scheduledDurationSeconds) && Number.isFinite(referenceDurationSeconds) && referenceDurationSeconds > 0
+    ? round(scheduledDurationSeconds / referenceDurationSeconds, 3)
+    : null;
+  const activeCoverage = Number.isFinite(activeDurationSeconds) && Number.isFinite(referenceDurationSeconds) && referenceDurationSeconds > 0
+    ? round(activeDurationSeconds / referenceDurationSeconds, 3)
+    : null;
+  const roleRows = roles.map(role => {
+    const item = row.segmentRoleAverages?.[role] || {};
+    const maxRisk10 = Number(gate.maxRoleRisk10?.[role] ?? gate.maxRoleRisk10?.default ?? 3.5);
+    const risk10 = Number(item.risk10);
+    return {
+      role,
+      risk10: Number.isFinite(risk10) ? round(risk10, 2) : null,
+      score10: Number.isFinite(risk10) ? round(Math.max(0, 10 - risk10), 2) : 0,
+      weight: Number(gate.roleWeights?.[role] ?? 1),
+      maxRisk10,
+      clears: Number.isFinite(risk10) && risk10 <= maxRisk10,
+      exactRoleMatchRate: item.exactRoleMatchRate ?? null,
+      interpretation: item.interpretation || ''
+    };
+  });
+  const durationClears = Number.isFinite(durationGapSeconds)
+    && durationGapSeconds <= Number(gate.durationTolerance ?? .14)
+    && Number.isFinite(scheduledCoverage)
+    && scheduledCoverage >= Number(gate.scheduledCoverageMin ?? .75)
+    && scheduledCoverage <= Number(gate.scheduledCoverageMax ?? 1.25);
+  const roleScore10 = weightedScore(roleRows);
+  const durationScore10 = Number.isFinite(durationGapSeconds) ? scoreGap(durationGapSeconds, Number(gate.durationTolerance ?? .14)) : 0;
+  const coverageScore10 = Number.isFinite(scheduledCoverage) ? Math.min(
+    scoreDeficit(scheduledCoverage, Number(gate.scheduledCoverageMin ?? .75), .2),
+    scoreExcess(scheduledCoverage, Number(gate.scheduledCoverageMax ?? 1.25), .2)
+  ) : 0;
+  const score10 = weightedScore([
+    { score10: roleScore10, weight: .62 },
+    { score10: durationScore10, weight: .24 },
+    { score10: coverageScore10, weight: .14 }
+  ]);
+  const clearsRoleGates = roleRows.every(item => item.clears);
+  const clearsScore = score10 >= Number(gate.minScore10 ?? 7);
+  return {
+    family: gate.family || 'loss-cue-composite',
+    scheduledDurationSeconds,
+    activeDurationSeconds,
+    referenceDurationSeconds,
+    durationGapSeconds,
+    activeDurationGapSeconds,
+    scheduledCoverage,
+    activeCoverage,
+    durationToleranceSeconds: Number(gate.durationTolerance ?? .14),
+    roleScore10,
+    durationScore10,
+    coverageScore10,
+    score10,
+    roles: roleRows,
+    clearsDuration: !!durationClears,
+    clearsRoleGates,
+    clearsScore,
+    clears: !!durationClears && clearsRoleGates && clearsScore,
+    interpretation: durationClears
+      ? 'Scheduled phrase duration preserves the full loss cue even when active-window energy sees a quiet tail.'
+      : 'Loss cue duration still needs a wider scheduled phrase or stronger tail/body energy.'
+  };
+}
+
 function bandEnergyDelta(active, reference){
   const keys = ['sub_500', 'low_mid_500_1500', 'mid_1500_3000', 'presence_3000_6000', 'air_6000_plus'];
   const delta = {};
@@ -1079,9 +1224,17 @@ function rejectionFor(row, baseline, config){
   if(Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+row.worstSegmentRisk10) && row.worstSegmentRisk10 > baseline.worstSegmentRisk10 - (gate.segment ?? .3)){
     reasons.push(`segment risk improved only ${round(baseline.worstSegmentRisk10 - row.worstSegmentRisk10, 2)}`);
   }
-  const durationImprovedEnough = row.durationGapSeconds <= baseline.durationGapSeconds - (gate.duration ?? .08);
-  const durationCloseEnough = row.durationGapSeconds <= (gate.acceptableDuration ?? 0);
-  if(!durationImprovedEnough && !durationCloseEnough) reasons.push(`duration gap improved only ${round(baseline.durationGapSeconds - row.durationGapSeconds, 3)}s`);
+  const rowDurationGap = row.lossComposite?.durationGapSeconds ?? row.durationGapSeconds;
+  const baselineDurationGap = baseline.lossComposite?.durationGapSeconds ?? baseline.durationGapSeconds;
+  const acceptableDuration = row.lossComposite?.durationToleranceSeconds ?? gate.acceptableDuration ?? 0;
+  const durationImprovedEnough = rowDurationGap <= baselineDurationGap - (gate.duration ?? .08);
+  const durationCloseEnough = rowDurationGap <= acceptableDuration;
+  if(!durationImprovedEnough && !durationCloseEnough) reasons.push(`duration gap improved only ${round(baselineDurationGap - rowDurationGap, 3)}s`);
+  if(row.lossComposite){
+    if(!row.lossComposite.clearsDuration) reasons.push(`loss composite duration gate failed (${row.lossComposite.durationGapSeconds}s scheduled gap)`);
+    if(!row.lossComposite.clearsRoleGates) reasons.push('loss composite role gate failed');
+    if(!row.lossComposite.clearsScore) reasons.push(`loss composite score ${row.lossComposite.score10} < ${config.lossComposite?.minScore10 ?? 7}`);
+  }
   if(row.bandShapeGap > baseline.bandShapeGap + (gate.bandWorsen ?? .05)) reasons.push(`band shape worsened by ${round(row.bandShapeGap - baseline.bandShapeGap, 4)}`);
   if(row.centroidGapHz > baseline.centroidGapHz + (gate.centroidWorsenHz ?? 100)) reasons.push(`centroid worsened by ${round(row.centroidGapHz - baseline.centroidGapHz, 1)} Hz`);
   if(row.cadencePressure && baseline.cadencePressure && row.cadencePressure.score10 < baseline.cadencePressure.score10 + (gate.cadencePressure ?? 1)){
@@ -1133,13 +1286,13 @@ function decisionFor(rows, config){
     measuredBest: measuredBest?.id || best.id,
     riskDelta: round(baseline.risk10 - best.risk10, 2),
     segmentRiskDelta: round((baseline.worstSegmentRisk10 || 0) - (best.worstSegmentRisk10 || 0), 2),
-    durationDeltaSeconds: round(baseline.durationGapSeconds - best.durationGapSeconds, 3),
+    durationDeltaSeconds: round((baseline.lossComposite?.durationGapSeconds ?? baseline.durationGapSeconds) - (best.lossComposite?.durationGapSeconds ?? best.durationGapSeconds), 3),
     bandDelta: round(baseline.bandShapeGap - best.bandShapeGap, 4),
     reason: `${config.title} candidate clears measured keeper gates.`
   };
 }
 
-function aggregateRows(sampleRows){
+function aggregateRows(sampleRows, config){
   const grouped = new Map();
   for(const row of sampleRows){
     if(!grouped.has(row.candidateId)) grouped.set(row.candidateId, []);
@@ -1181,6 +1334,7 @@ function aggregateRows(sampleRows){
       decay_ratio: round(mean(group.map(row => row.referenceMetrics?.decay_ratio)), 3),
       burst_share: round(mean(group.map(row => row.referenceMetrics?.burst_share)), 3)
     };
+    const segmentRoleAverages = aggregateSegmentRoles(group);
     const row = {
       id: candidateId,
       label: first.label,
@@ -1200,6 +1354,7 @@ function aggregateRows(sampleRows){
       cadencePressure: first.configCue === 'stagePulse' ? cadencePressureAnalysis(activeMetrics, referenceMetrics) : null,
       maskingSeparation: first.configCue === 'stagePulse' ? maskingSeparationAnalysis(activeMetrics, referenceMetrics) : null,
       comparison: avgComparison,
+      segmentRoleAverages,
       segmentRoleComparisonCount: Math.round(mean(group.map(row => row.segmentRoleComparisonCount || 0)) || 0),
       averageSegmentRisk10: round(mean(group.map(row => row.averageSegmentRisk10)), 2),
       worstSegmentRisk10: round(mean(group.map(row => row.worstSegmentRisk10)), 2),
@@ -1225,13 +1380,15 @@ function aggregateRows(sampleRows){
         rmsGap: row.rmsGap,
         bandShapeGap: row.bandShapeGap,
         worstSegmentRisk10: row.worstSegmentRisk10,
-        worstSegmentRole: row.worstSegmentRole
+        worstSegmentRole: row.worstSegmentRole,
+        segmentRoles: row.segmentRoles
       }))
     };
     const breakdown = riskBreakdown(avgComparison);
     row.risk10 = breakdown.risk10;
     row.riskBreakdown = breakdown.components;
     row.dominantPenalty = breakdown.dominant;
+    row.lossComposite = lossCompositeAnalysis(row, config);
     rows.push(row);
   }
   return rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 ?? 99) - (b.worstSegmentRisk10 ?? 99) || a.durationGapSeconds - b.durationGapSeconds);
@@ -1281,12 +1438,14 @@ function markdown(report){
     `- Measured best: \`${report.decision.measuredBest || 'none'}\``,
     `- Reason: ${report.decision.reason}`,
     '',
-    '| Candidate | Risk | Worst Segment | Cadence | Masking | Duration Gap | Band Gap | Stability | Keeper Read |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |'
+    '| Candidate | Risk | Worst Segment | Composite | Cadence | Masking | Duration Gap | Band Gap | Stability | Keeper Read |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |'
   ];
   for(const row of report.candidates.slice(0, 24)){
     const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${row.cadencePressure?.score10 ?? 'n/a'} | ${row.maskingSeparation?.score10 ?? 'n/a'} | ${row.durationGapSeconds}s | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
+    const composite = row.lossComposite ? `${row.lossComposite.score10} (${row.lossComposite.durationGapSeconds}s)` : 'n/a';
+    const durationGap = row.lossComposite?.durationGapSeconds ?? row.durationGapSeconds;
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${composite} | ${row.cadencePressure?.score10 ?? 'n/a'} | ${row.maskingSeparation?.score10 ?? 'n/a'} | ${durationGap}s | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}\n`;
@@ -1382,6 +1541,7 @@ async function analyzeCue(key, generatedAt, rootDir){
     const comparison = item.comparisons.auroraVsReferenceActive;
     const breakdown = riskBreakdown(comparison);
     const segments = segmentSummary(item.segmentRoleComparisons);
+    const segmentRoles = segmentRoleMap(item.segmentRoleComparisons);
     return {
       id: spec?.id || item.id,
       candidateId: capture?.row?.id || spec?.id || item.id,
@@ -1406,13 +1566,14 @@ async function analyzeCue(key, generatedAt, rootDir){
         clamp((+comparison.burst_share || 0) / .35, 0, 1)
       ]), 3),
       ...segments,
+      segmentRoles,
       activeMetrics: item.variants.aurora.activeMetrics,
       referenceMetrics: item.variants.reference.activeMetrics,
       bandEnergyDelta: bandEnergyDelta(item.variants.aurora.activeMetrics?.band_energy, item.variants.reference.activeMetrics?.band_energy),
       comparison
     };
   });
-  const rows = aggregateRows(sampleRows);
+  const rows = aggregateRows(sampleRows, config);
   const baseline = rows.find(row => row.id === 'baseline-current');
   rows.forEach(row => { row.keeperRead = row.id === 'baseline-current' ? 'baseline' : rejectionFor(row, baseline, config); });
   rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 || 99) - (b.worstSegmentRisk10 || 99));
@@ -1433,6 +1594,8 @@ async function analyzeCue(key, generatedAt, rootDir){
     strategy: 'Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.',
     successMeasure: config.cue === 'stagePulse'
       ? 'A keeper must improve whole-cue risk, onset segment risk, cadence pressure, and masking separation while preserving duration pocket, band shape, and segment-role guards.'
+      : config.lossComposite
+        ? 'A keeper must improve whole-cue risk and onset/body/tail segment risk while preserving scheduled loss-phrase duration, semantic role coverage, and band/centroid guardrails.'
       : 'A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.',
     source: {
       comparisonSet: set.id,
@@ -1464,6 +1627,9 @@ async function analyzeCue(key, generatedAt, rootDir){
       durationGapSeconds: row.durationGapSeconds,
       centroidGapHz: row.centroidGapHz,
       bandShapeGap: row.bandShapeGap,
+      lossCompositeScore10: row.lossComposite?.score10 ?? null,
+      lossCompositeDurationGapSeconds: row.lossComposite?.durationGapSeconds ?? null,
+      lossCompositeClears: row.lossComposite?.clears ?? null,
       cadencePressureScore10: row.cadencePressure?.score10 ?? null,
       cadenceWeakestAxis: row.cadencePressure?.weakestAxis || '',
       maskingSeparationScore10: row.maskingSeparation?.score10 ?? null,

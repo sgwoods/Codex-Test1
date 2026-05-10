@@ -266,6 +266,9 @@ function recommendation({ contract, riskRow, candidate, precheck, runtime, statu
     return 'Attack stagePulse onset with a contract-aware candidate family that measures pressure cadence, onset band shape, and masking against combat cues.';
   }
   if(contract.cue === 'playerHit'){
+    if(candidate?.report?.decision?.keep === true && (+riskRow?.worstSegmentRisk10 || 0) < 3){
+      return 'Keep the measured composite loss cue as the runtime guardrail; playerHit is now secondary until higher-risk audio gaps are narrowed.';
+    }
     return 'Build composite loss-cue scoring before any runtime promotion: onset/body/tail should be scheduled and scored separately against restart and gameOver overlap.';
   }
   if(status === 'blocked-by-promotion-precheck'){
@@ -355,7 +358,7 @@ function nextStepFor(highest, cues){
     const measured = measuredCandidateRead(latestCandidate('stagePulse'));
     if(stagePulse?.evidence?.promotionPrecheck?.status === 'precheck-reject' && measured.candidateId){
       if(/^cadence-phase-/.test(measured.candidateId)){
-        return `StagePulse candidate ${measured.candidateId} is a phase/envelope near miss, but repeat stability and masking reject promotion. Preserve it as generator evidence and prioritize higher user-impact audio gaps such as playerHit body/composite loss cues before another stagePulse runtime trial.`;
+        return `StagePulse candidate ${measured.candidateId} is a phase/envelope near miss, but repeat stability and masking reject promotion. Preserve it as generator evidence and run a broader stagePulse onset strategy that compares reference subclips, pressure cadence, and combat masking before another runtime trial.`;
       }
       if((+measured.cadencePressureScore10 || 0) < 3 && (+measured.maskingSeparationScore10 || 0) < 3){
         return `StagePulse candidate ${measured.candidateId} confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck.`;

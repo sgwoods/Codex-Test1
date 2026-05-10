@@ -2,8 +2,8 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-05-10T13:09:49.402Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-10-41f7caa8/report.json`
+Generated: `2026-05-10T13:33:00.240Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-10-d5dfeffe/report.json`
 
 ## Current Local-Vs-Cloud Read
 
@@ -11,12 +11,12 @@ Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-10-
 | --- | --- | --- |
 | Overall quality | 9.2/10 | Current release-quality conformance roll-up. |
 | Level arc | 8.8/10 | Current long-play/gameplay-shape roll-up. |
-| Measured runs | 355 | Commands or manual entries logged in the economics ledger. |
-| Local CPU tracked wall | 196.9 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
-| Browser-backed local wall | 96.4 min | Subset of local work that exercised Chromium/gameplay runtime. |
+| Measured runs | 371 | Commands or manual entries logged in the economics ledger. |
+| Local CPU tracked wall | 202.8 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
+| Browser-backed local wall | 100 min | Subset of local work that exercised Chromium/gameplay runtime. |
 | GPU-equivalent tracked wall | 0.8 min | Declared Codex/model/API/GPU usage. This is currently small and under-instrumented. |
 | GPU-equivalent share | 0.4% | Approximate declared cloud/model share of tracked wall time. |
-| Artifact growth | 574.6 MB | Evidence volume and review/storage-cost proxy. |
+| Artifact growth | 585.2 MB | Evidence volume and review/storage-cost proxy. |
 
 The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.
 
@@ -24,8 +24,8 @@ The important read today: measured conformance advancement is overwhelmingly loc
 
 | Resource class | Measured runs | Wall time | CPU time | Share of tracked wall |
 | --- | --- | --- | --- | --- |
-| cpu | 354 | 196.9 min | 338.6 min | 100% |
-| browser | 123 | 96.4 min | 164.5 min | 48.9% |
+| cpu | 370 | 202.8 min | 348 min | 100% |
+| browser | 127 | 100 min | 171.3 min | 49.3% |
 | gpu-equivalent | 7 | 0.8 min | 1.2 min | 0.4% |
 | codex | 6 | 0.7 min | 1.2 min | 0.4% |
 | gpu | 1 | 0.1 min | 0.1 min | 0% |
@@ -35,17 +35,17 @@ The important read today: measured conformance advancement is overwhelmingly loc
 
 | Axis | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
-| audio | 180 | 127.7 min | 229.4 min |
-| audio-focus-candidate | 14 | 39.4 min | 72.4 min |
-| audio-theme-comparison | 19 | 22.3 min | 41.1 min |
-| conformance-economics | 90 | 21.4 min | 30.7 min |
-| player-hit | 14 | 21.1 min | 38.3 min |
+| audio | 191 | 133.5 min | 238.8 min |
+| audio-focus-candidate | 15 | 40.3 min | 74.2 min |
+| audio-theme-comparison | 21 | 24.9 min | 45.8 min |
+| player-hit | 19 | 24.6 min | 44.8 min |
+| conformance-economics | 91 | 21.4 min | 30.7 min |
 | rescue-join | 11 | 18.2 min | 33.2 min |
-| audio-event-gap | 29 | 16.2 min | 29.4 min |
+| audio-event-gap | 31 | 16.2 min | 29.4 min |
+| quality-score | 14 | 15.3 min | 17.7 min |
 | conformance-loop | 65 | 15.2 min | 25.3 min |
 | capture-retreat | 8 | 13.6 min | 24.5 min |
 | capture-lifecycle | 8 | 13.6 min | 24.5 min |
-| quality-score | 12 | 13.1 min | 15.2 min |
 | stage4-pressure | 28 | 12.8 min | 18.5 min |
 
 ## Cost Per Score Movement
@@ -55,7 +55,7 @@ The important read today: measured conformance advancement is overwhelmingly loc
 | formation-boss-grammar | 2 | 0.133 | 2.3 | 0.06 | tracked-spend-and-score-movement |
 | stage4-pressure | 28 | 12.824 | 10 | 1.28 | tracked-spend-and-score-movement |
 | level-arc | 95 | 8.738 | 3.4 | 2.57 | tracked-spend-and-score-movement |
-| audio | 180 | 127.658 | 4.9 | 26.05 | tracked-spend-and-score-movement |
+| audio | 191 | 133.526 | 4.9 | 27.25 | tracked-spend-and-score-movement |
 | movement | 0 | 0 | 7 | n/a | historical-score-movement-without-tracked-spend |
 | stage1-timing | 0 | 0 | 6.4 | n/a | historical-score-movement-without-tracked-spend |
 | challenge-timing | 0 | 0 | 5.7 | n/a | historical-score-movement-without-tracked-spend |
@@ -67,13 +67,13 @@ The important read today: measured conformance advancement is overwhelmingly loc
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-10-41f7caa8/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-10-d5dfeffe/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-10-41f7caa8/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-10-d5dfeffe/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-10-41f7caa8/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-10-d5dfeffe/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-10-41f7caa8/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-10-d5dfeffe/cost-per-positive-score-point.svg)
 
 ## Codex / OpenAI Accounting
 
