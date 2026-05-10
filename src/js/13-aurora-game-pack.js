@@ -248,6 +248,13 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  highScoreOther:referenceAudioCue('assets/reference-audio/galaga3-name-entry-2nd-5th.m4a',{cooldownMs:1800})
 });
 
+const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
+ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
+ bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
+ enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
+ bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64})
+});
+
 const AURORA_AUDIO_THEMES=Object.freeze({
  'classic-arcade':Object.freeze({
   id:'classic-arcade',
@@ -258,10 +265,10 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    playerShot:Object.freeze({tones:Object.freeze([{freq:1140,duration:.028,wave:'square',volume:.006,slide:-620,detune:.006,lpHz:6200},{freq:1520,duration:.018,wave:'square',volume:.003,slide:-480,detune:-.004,lpHz:6800,delay:.006}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.075,wave:'triangle',volume:.009,slide:-130,detune:.002,lpHz:3000},{freq:258,duration:.05,wave:'square',volume:.004,slide:-90,detune:.002,lpHz:2600,delay:.012}])}),
    playerHit:Object.freeze({tones:Object.freeze([{freq:228,duration:.11,wave:'square',volume:.022,slide:-300,detune:.012,lpHz:2600},{freq:176,duration:.19,wave:'sawtooth',volume:.024,slide:-320,detune:.016,lpHz:2100,delay:.016},{freq:124,duration:.28,wave:'triangle',volume:.022,slide:-150,detune:.009,lpHz:1600,delay:.028}]),noise:Object.freeze([{duration:.16,volume:.016,hp:1120,delay:.012},{duration:.08,volume:.01,hp:760,delay:.03}])}),
-   enemyHit:Object.freeze({tones:Object.freeze([{freq:228,duration:.05,wave:'square',volume:.013,slide:-180,detune:.008,lpHz:3200},{freq:146,duration:.1,wave:'sawtooth',volume:.015,slide:-220,detune:.012,lpHz:2300,delay:.02}]),noise:Object.freeze([{duration:.05,volume:.006,hp:1600,delay:.012}])}),
-   bossHit:Object.freeze({tones:Object.freeze([{freq:312,duration:.06,wave:'square',volume:.015,slide:-120,detune:.004,lpHz:3600},{freq:202,duration:.12,wave:'triangle',volume:.012,slide:-80,detune:.003,lpHz:2500,delay:.014}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1900,delay:.01}])}),
-   enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.026,wave:'square',volume:.008,slide:-340,detune:.004,lpHz:4200},{freq:360,duration:.04,wave:'square',volume:.006,slide:-280,detune:-.003,lpHz:3600,delay:.012},{freq:240,duration:.075,wave:'triangle',volume:.006,slide:-90,detune:-.004,lpHz:2100,delay:.018}])}),
-   bossBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.026,wave:'square',volume:.011,slide:-340,detune:.004,lpHz:4200},{freq:280,duration:.04,wave:'square',volume:.008,slide:-280,detune:-.003,lpHz:3600,delay:.012},{freq:180,duration:.11,wave:'triangle',volume:.011,slide:-90,detune:-.004,lpHz:2100,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.004,hp:1400,delay:.016}])}),
+   enemyHit:AURORA_MEASURED_EFFECT_CUES.enemyHit,
+   bossHit:AURORA_MEASURED_EFFECT_CUES.bossHit,
+   enemyBoom:AURORA_MEASURED_EFFECT_CUES.enemyBoom,
+   bossBoom:AURORA_MEASURED_EFFECT_CUES.bossBoom,
    captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800,referenceVolume:.74,clipStart:3.5,clipDuration:.48}),
    captureSuccess:Object.freeze({seq:[370,330,294,247],step:.055,wave:'square',volume:.0125,slide:-18,lpHz:2600,tones:Object.freeze([{freq:185,duration:.14,wave:'triangle',volume:.0058,slide:-40,lpHz:2200,delay:.11}])}),
    captureRetreat:Object.freeze({seq:[247,294,370,494],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:620,duration:.18,wave:'square',volume:.006,slide:-70,detune:.08,lpHz:3400,delay:.06}])}),
@@ -318,10 +325,10 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    gameStart:Object.freeze({seq:[392,523,698,932,1175],step:.054,wave:'triangle',volume:.0186,slide:66,lpHz:3260,tones:Object.freeze([{freq:196,duration:.18,wave:'triangle',volume:.0038,slide:8,lpHz:1760,delay:0},{freq:988,duration:.076,wave:'sine',volume:.0052,slide:12,lpHz:3600,delay:0},{freq:1397,duration:.11,wave:'sine',volume:.0056,slide:18,lpHz:3920,delay:.162},{freq:1760,duration:.17,wave:'sine',volume:.0078,slide:34,lpHz:4200,delay:.216}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:980,duration:.03,wave:'triangle',volume:.006,slide:-520,lpHz:5200},{freq:1468,duration:.018,wave:'sine',volume:.003,slide:-260,lpHz:5600,delay:.005}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:298,duration:.08,wave:'triangle',volume:.008,slide:-110,lpHz:2600},{freq:220,duration:.055,wave:'sine',volume:.0038,slide:-70,lpHz:2300,delay:.014}])}),
-   enemyHit:Object.freeze({tones:Object.freeze([{freq:202,duration:.055,wave:'triangle',volume:.012,slide:-150,lpHz:2800},{freq:138,duration:.11,wave:'sawtooth',volume:.012,slide:-170,lpHz:2100,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1500,delay:.012}])}),
-   bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
-   enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
-   bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
+   enemyHit:AURORA_MEASURED_EFFECT_CUES.enemyHit,
+   bossHit:AURORA_MEASURED_EFFECT_CUES.bossHit,
+   enemyBoom:AURORA_MEASURED_EFFECT_CUES.enemyBoom,
+   bossBoom:AURORA_MEASURED_EFFECT_CUES.bossBoom,
    captureBeam:Object.freeze({tones:Object.freeze([{freq:640,duration:.052,wave:'square',volume:.0122,slide:360,lpHz:3800,hpHz:380},{freq:1220,duration:.155,wave:'square',volume:.0102,slide:210,lpHz:4400,hpHz:620,delay:.022},{freq:1840,duration:.095,wave:'triangle',volume:.007,slide:-120,lpHz:5600,hpHz:980,delay:.104},{freq:2180,duration:.044,wave:'triangle',volume:.0026,slide:-80,lpHz:6000,hpHz:1300,delay:.18}]),noise:Object.freeze([{duration:.02,volume:.0005,hp:3300,delay:.01}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
@@ -385,10 +392,10 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    gameStart:Object.freeze({seq:[440,587,784,1047,1318],step:.05,wave:'triangle',volume:.0194,slide:60,lpHz:3660,tones:Object.freeze([{freq:220,duration:.18,wave:'triangle',volume:.0038,slide:8,lpHz:1820,delay:0},{freq:1175,duration:.076,wave:'sine',volume:.0048,slide:12,lpHz:4100,delay:0},{freq:1568,duration:.118,wave:'sine',volume:.0062,slide:24,lpHz:4400,delay:.15},{freq:1976,duration:.17,wave:'sine',volume:.0082,slide:30,lpHz:4700,delay:.2}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:1080,duration:.028,wave:'triangle',volume:.0064,slide:-560,lpHz:5600},{freq:1610,duration:.017,wave:'sine',volume:.0032,slide:-240,lpHz:6200,delay:.005}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:320,duration:.078,wave:'triangle',volume:.0086,slide:-118,lpHz:2800},{freq:236,duration:.054,wave:'sine',volume:.0038,slide:-72,lpHz:2400,delay:.014}])}),
-   enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
-   bossHit:Object.freeze({tones:Object.freeze([{freq:300,duration:.064,wave:'triangle',volume:.0145,slide:-112,lpHz:3400},{freq:208,duration:.126,wave:'sine',volume:.0095,slide:-76,lpHz:2600,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1840,delay:.01}])}),
-   enemyBoom:Object.freeze({tones:Object.freeze([{freq:220,duration:.07,wave:'sawtooth',volume:.017,slide:-160,lpHz:1750},{freq:360,duration:.055,wave:'triangle',volume:.007,slide:-130,lpHz:2100,delay:.01},{freq:146,duration:.08,wave:'triangle',volume:.01,slide:-48,lpHz:1400,delay:.026}]),noise:Object.freeze([{duration:.035,volume:.0025,hp:820,delay:.008}])}),
-   bossBoom:Object.freeze({tones:Object.freeze([{freq:410,duration:.03,wave:'triangle',volume:.0105,slide:-270,lpHz:4100},{freq:276,duration:.054,wave:'triangle',volume:.0072,slide:-176,lpHz:3400,delay:.014},{freq:184,duration:.112,wave:'sine',volume:.0082,slide:-72,lpHz:2200,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1320,delay:.016}])}),
+   enemyHit:AURORA_MEASURED_EFFECT_CUES.enemyHit,
+   bossHit:AURORA_MEASURED_EFFECT_CUES.bossHit,
+   enemyBoom:AURORA_MEASURED_EFFECT_CUES.enemyBoom,
+   bossBoom:AURORA_MEASURED_EFFECT_CUES.bossBoom,
    captureBeam:Object.freeze({tones:Object.freeze([{freq:640,duration:.052,wave:'square',volume:.0122,slide:360,lpHz:3800,hpHz:380},{freq:1220,duration:.155,wave:'square',volume:.0102,slide:210,lpHz:4400,hpHz:620,delay:.022},{freq:1840,duration:.095,wave:'triangle',volume:.007,slide:-120,lpHz:5600,hpHz:980,delay:.104},{freq:2180,duration:.044,wave:'triangle',volume:.0026,slide:-80,lpHz:6000,hpHz:1300,delay:.18}]),noise:Object.freeze([{duration:.02,volume:.0005,hp:3300,delay:.01}])}),
    captureSuccess:Object.freeze({seq:[415,370,330,294],step:.054,wave:'triangle',volume:.0126,slide:-16,lpHz:2800,tones:Object.freeze([{freq:220,duration:.14,wave:'sine',volume:.0056,slide:-36,lpHz:2400,delay:.108}])}),
    stagePulse:Object.freeze({
@@ -458,10 +465,10 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    gameStart:Object.freeze({seq:[523,698,932,1245,1568],step:.048,wave:'triangle',volume:.0202,slide:56,lpHz:3940,tones:Object.freeze([{freq:262,duration:.18,wave:'triangle',volume:.0038,slide:8,lpHz:1900,delay:0},{freq:1397,duration:.078,wave:'sine',volume:.0048,slide:12,lpHz:4500,delay:0},{freq:1865,duration:.12,wave:'sine',volume:.0062,slide:18,lpHz:4700,delay:.144},{freq:2349,duration:.18,wave:'sine',volume:.0084,slide:24,lpHz:5200,delay:.192}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:1160,duration:.028,wave:'triangle',volume:.0066,slide:-590,lpHz:5900},{freq:1720,duration:.017,wave:'sine',volume:.0033,slide:-250,lpHz:6400,delay:.005}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.078,wave:'triangle',volume:.0088,slide:-120,lpHz:2900},{freq:250,duration:.054,wave:'sine',volume:.0039,slide:-74,lpHz:2500,delay:.014}])}),
-   enemyHit:Object.freeze({tones:Object.freeze([{freq:234,duration:.055,wave:'triangle',volume:.0128,slide:-165,lpHz:3100},{freq:156,duration:.105,wave:'sawtooth',volume:.0128,slide:-188,lpHz:2250,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1580,delay:.012}])}),
-   bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.064,wave:'triangle',volume:.0148,slide:-114,lpHz:3500},{freq:220,duration:.128,wave:'sine',volume:.0096,slide:-76,lpHz:2680,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1860,delay:.01}])}),
-   enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.03,wave:'triangle',volume:.009,slide:-300,lpHz:4100},{freq:356,duration:.05,wave:'triangle',volume:.0055,slide:-176,lpHz:3300,delay:.014},{freq:240,duration:.086,wave:'sine',volume:.0054,slide:-64,lpHz:2060,delay:.024}])}),
-   bossBoom:Object.freeze({tones:Object.freeze([{freq:432,duration:.03,wave:'triangle',volume:.0108,slide:-278,lpHz:4300},{freq:290,duration:.054,wave:'triangle',volume:.0074,slide:-178,lpHz:3500,delay:.014},{freq:196,duration:.114,wave:'sine',volume:.0084,slide:-74,lpHz:2260,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1340,delay:.016}])}),
+   enemyHit:AURORA_MEASURED_EFFECT_CUES.enemyHit,
+   bossHit:AURORA_MEASURED_EFFECT_CUES.bossHit,
+   enemyBoom:AURORA_MEASURED_EFFECT_CUES.enemyBoom,
+   bossBoom:AURORA_MEASURED_EFFECT_CUES.bossBoom,
    captureBeam:Object.freeze({tones:Object.freeze([{freq:640,duration:.052,wave:'square',volume:.0122,slide:360,lpHz:3800,hpHz:380},{freq:1220,duration:.155,wave:'square',volume:.0102,slide:210,lpHz:4400,hpHz:620,delay:.022},{freq:1840,duration:.095,wave:'triangle',volume:.007,slide:-120,lpHz:5600,hpHz:980,delay:.104},{freq:2180,duration:.044,wave:'triangle',volume:.0026,slide:-80,lpHz:6000,hpHz:1300,delay:.18}]),noise:Object.freeze([{duration:.02,volume:.0005,hp:3300,delay:.01}])}),
    captureSuccess:Object.freeze({seq:[466,415,370,330],step:.052,wave:'triangle',volume:.0128,slide:-14,lpHz:2920,tones:Object.freeze([{freq:247,duration:.14,wave:'sine',volume:.0058,slide:-30,lpHz:2500,delay:.106}])}),
    stagePulse:Object.freeze({

@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-10T00-12-39-393Z-37973",
-  "startedAt": "2026-05-10T00:12:39.393Z",
-  "endedAt": "2026-05-10T00:12:39.598Z",
+  "id": "2026-05-10T13-10-12-903Z-85051",
+  "startedAt": "2026-05-10T13:10:12.903Z",
+  "endedAt": "2026-05-10T13:10:13.046Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "b879bdaa",
+  "commit": "41f7caa8",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-audio-cue-contracts"
+    "harness:build:conformance-metrics-overview"
   ],
   "axes": [
-    "audio"
+    "documentation"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "audio cue contracts after targeted stagePulse failure",
+  "notes": "refresh conformance metrics overview after audio cycle",
   "measurement": {
-    "wallSeconds": 0.205,
-    "timeRealSeconds": 0.2,
-    "timeUserSeconds": 0.14,
-    "timeSystemSeconds": 0.11,
-    "cpuSeconds": 0.25,
+    "wallSeconds": 0.143,
+    "timeRealSeconds": 0.14,
+    "timeUserSeconds": 0.11,
+    "timeSystemSeconds": 0.02,
+    "cpuSeconds": 0.13,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 687494814,
-    "artifactBytesAfter": 687523819,
-    "artifactBytesDelta": 29005
+    "artifactBytesBefore": 701678982,
+    "artifactBytesAfter": 701678982,
+    "artifactBytesDelta": 0
   }
 }

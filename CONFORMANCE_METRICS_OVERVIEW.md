@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-10T12:50:03.450Z`
+Generated: `2026-05-10T13:10:13.036Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses both a reference-conformance preview metric set and a stricter playtest-weighted score because its Galaxian evidence is still being promoted from source footage into frame-level/audio-level measurements.
 
@@ -8,7 +8,7 @@ This document summarizes the current conformance scoring model for both the ship
 
 | Game / scope | Primary score | Secondary scores | Status | Weakest current area | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| Aurora Galactica current dev line | 9.2/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 6.8/10; audio contract readiness 9.09/10 | release-quality conformance score plus audio cue-contract read | Audio identity and cue alignment (6.8/10) | reference-artifacts/analyses/quality-conformance/2026-05-09-bbcc8df1/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json |
+| Aurora Galactica current dev line | 9.2/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 7/10; audio contract readiness 9.09/10 | release-quality conformance score plus audio cue-contract read | Audio identity and cue alignment (7/10) | reference-artifacts/analyses/quality-conformance/2026-05-10-41f7caa8/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json |
 | Galaxy Guardians 0.1 playable preview | 7.7/10 | playtest weighted 6.9/10; maturity 7/10; gate coverage 9.5/10; public readiness 3.9/10 | preview-reference-conformance-model-not-production-release-score | Formation and rack timing | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
 
 ## Release Cluster Conformance Targets
@@ -17,7 +17,7 @@ These are planning targets, not release promises. They give each upcoming cluste
 
 | Release cluster / focus | Aurora target | Aurora focus metrics | Guardians target | Guardians focus metrics | Release decision meaning |
 | --- | --- | --- | --- | --- | --- |
-| Current dev baseline | 9.2/10 | audio 6.8; movement 10; boss/formation 9.2; stage opening 8.5; challenge timing 9.9; shell integrity 9.2 | 7.7/10 reference; 6.9/10 playtest | maturity 7; gate coverage 9.5; public readiness 3.9; audio feel 6.4 | Baseline for the next beta-candidate discussion, now weighted by local playtest feel. |
+| Current dev baseline | 9.2/10 | audio 7; movement 10; boss/formation 9.2; stage opening 8.5; challenge timing 9.9; shell integrity 9.2 | 7.7/10 reference; 6.9/10 playtest | maturity 7; gate coverage 9.5; public readiness 3.9; audio feel 6.4 | Baseline for the next beta-candidate discussion, now weighted by local playtest feel. |
 | `1.3` Fidelity and Trust | 9.0/10 | audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4 | 7.7/10 reference; 6.9/10 playtest | rack timing >= 6.2; movement pressure 6.2; visual identity 6.7; audio feel 6.4 | Aurora can move beta if the weakest feel gaps improve and Guardians stays out of production but credible as a beta preview. |
 | `1.4` Arcade Depth / Guardians 0.1 Preview | 9.2/10 | level-depth >= 8.4; boss/formation grammar >= 8.0; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6 | 7.8/10 reference; 7.0/10 playtest | frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0 | Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora. |
 | `1.5` Flight Recorder and Shared Evidence | 9.3/10 | replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6 | 8.2/10 | source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0 | Shared video and evidence become release infrastructure for both applications. |
@@ -39,7 +39,7 @@ xychart-beta
 | Metric family | Aurora current | Aurora next target | Guardians current | Guardians next target | Why it matters |
 | --- | --- | --- | --- | --- | --- |
 | Movement and pressure | 10/10 | 8.6/10 in `1.3`; 8.8/10 in `1.4` | 6.2/10 playtest; 6.2/10 reference category | browser-reviewed runtime tuning in `1.3`; 7.2/10 playtest in `1.4` | This is the strongest direct feel signal during live play. |
-| Audio identity / acoustic fit | 6.8/10 | 7.2/10 in `1.3`; 7.6/10 in `1.4` | 6.4/10 playtest; 6.4/10 reference category | human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4` | Audio is the weakest shared conformance area today. |
+| Audio identity / acoustic fit | 7/10 | 7.2/10 in `1.3`; 7.6/10 in `1.4` | 6.4/10 playtest; 6.4/10 reference category | human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4` | Audio is the weakest shared conformance area today. |
 | Visual identity | 9.2/10 shell integrity; game sprites not separately scored in the roll-up | add a visible arcade-depth visual score in `1.4` | 6.7/10 playtest; 6.8/10 reference category | browser-reviewed component-sprite polish in `1.3`; 7.0/10 playtest in `1.4` | Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview. |
 | Boss entry and formation grammar | 9.2/10 | >=8.0 first gate in `1.4`; >=9.0 with path/rack extraction | rack timing 6.2/10 reference category | frame-derived rack timing >=7.2; dive paths >=7.2 | Boss entry, escort composition, formation settling, and challenge set pieces are the arcade choreography players recognize by stage. |
 | Stage / rack / wave timing | stage opening 8.5; challenge timing 9.9 | challenge and later-stage targets >= 8.6 in `1.4` | rack timing 6.2/10 | browser-reviewed rack timing in `1.3`; 7.2/10 in `1.4` | Timing separates authentic arcade pressure from approximate motion. |
@@ -74,8 +74,8 @@ xychart-beta
 
 | Metric | Score | Evidence | Current read |
 | --- | --- | --- | --- |
-| Player movement conformance | 10/10 | player-movement report | Current movement scored 10/10 against the control-principles profile, versus 9.9/10 for the shipped local baseline. |
-| Shot and hit responsiveness | 10/10 | close-shot-hit, movement fire window | Close-shot responsiveness passed, and movement-fire post-shot travel was 36.09, with shot delay 2ms. |
+| Player movement conformance | 10/10 | player-movement report | Current movement scored 10/10 against the control-principles profile, versus 10/10 for the shipped local baseline. |
+| Shot and hit responsiveness | 10/10 | close-shot-hit, movement fire window | Close-shot responsiveness passed, and movement-fire post-shot travel was 51.1, with shot delay 3ms. |
 | Stage-1 opening timing fidelity | 8.5/10 | stage1-opening-first-dive report | 4/4 metrics were within tolerance; worst current delta was 0.18. |
 | Stage-1 opening geometry fidelity | 10/10 | stage1-opening-spacing report | Geometry held steady with 0 changed targets and max drift 0. |
 | Dive fairness and safety | 9.1/10 | persona-stage2-safety | Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail. |
@@ -84,7 +84,7 @@ xychart-beta
 | Progression and persona depth | 8.8/10 | persona-progression correspondence | 20/20 persona checks passed; progression ordering is still missing one ordering edge case. |
 | Boss entry and formation grammar | 9.2/10 | formation-boss-grammar-conformance report, stage-signature-distance report, level-expansion cycle evidence | Boss/formation grammar scores 9.2/10 across 11 evidence windows; weakest metric is Path shape and set-formation precision (6.8/10). |
 | Level arc and encounter shape | 8.8/10 | level-arc-conformance report, stage-signature-distance report, level-expansion cycle evidence | Level arc score is 8.8/10 with 6/6 stage families blueprinted and 11/6 evidence windows present; weakest submetric is Long-run non-repetition (6/10). |
-| Audio identity and cue alignment | 6.8/10 | audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap, aurora-audio-event-gap semantic read, audio-cue-contracts, audio-promotion-precheck | Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 27 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 5.6/10, and highest segment risk is stagePulse onset. Cue-contract readiness is 9.09/10; latest contract next step: StagePulse candidate cadence-stable-two-step-pressure-pocket confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck. |
+| Audio identity and cue alignment | 7/10 | audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap, aurora-audio-event-gap semantic read, audio-cue-contracts, audio-promotion-precheck | Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 24 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 5.81/10, and highest segment risk is playerHit body. Cue-contract readiness is 9.09/10; latest contract next step: StagePulse candidate cadence-phase-muted-square-body is a phase/envelope near miss, but repeat stability and masking reject promotion. Preserve it as generator evidence and prioritize higher user-impact audio gaps such as playerHit body/composite loss cues before another stagePulse runtime trial. |
 | UI, shell, and graphics integrity | 9.2/10 | dev candidate surface suite | The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed. |
 
 ## Guardians Scoring Decision

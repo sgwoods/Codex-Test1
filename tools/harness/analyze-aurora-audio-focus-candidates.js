@@ -852,14 +852,25 @@ function formationPulseCadenceSpecs(config){
     { id: 'stable-soft-near-miss-lowpass', wave: 'triangle', freqs: [147, 294, 196], volumes: [.0046, .0028, .0022], lpHz: [520, 680, 560], attacks: [.07, .052, .042], delays: [0, .035, .083], durations: [.2, .145, .105], scoreBias: -.07 },
     { id: 'stable-sine-near-miss-lowpass', wave: 'sine', freqs: [147, 294, 196], volumes: [.0048, .0026, .002], lpHz: [480, 620, 520], attacks: [.078, .058, .044], delays: [0, .038, .086], durations: [.21, .14, .1], scoreBias: -.068 },
     { id: 'stable-monotone-low-pressure-pocket', wave: 'sine', freqs: [123], volumes: [.0042], lpHz: [390], attacks: [.12], delays: [0], durations: [.24], scoreBias: -.06 },
-    { id: 'stable-two-step-pressure-pocket', wave: 'sine', freqs: [123, 185], volumes: [.0038, .0018], lpHz: [410, 540], attacks: [.105, .07], delays: [0, .075], durations: [.23, .115], scoreBias: -.055 }
+    { id: 'stable-two-step-pressure-pocket', wave: 'sine', freqs: [123, 185], volumes: [.0038, .0018], lpHz: [410, 540], attacks: [.105, .07], delays: [0, .075], durations: [.23, .115], scoreBias: -.055 },
+    { id: 'phase-soft-square-near-miss', family: 'stage-pulse-phase-envelope-grid', waves: ['square', 'triangle', 'triangle'], freqs: [147, 294, 196], volumes: [.0062, .0044, .0032], lpHz: [760, 940, 680], attacks: [.062, .046, .038], delays: [0, .024, .074], durations: [.19, .145, .112], slides: [-4, -8, -5], scoreBias: -.09 },
+    { id: 'phase-soft-square-low-rms', family: 'stage-pulse-phase-envelope-grid', waves: ['square', 'triangle', 'sine'], freqs: [147, 294, 196], volumes: [.0048, .0032, .0024], lpHz: [700, 880, 620], attacks: [.075, .054, .044], delays: [0, .032, .082], durations: [.205, .14, .104], slides: [-3, -7, -4], scoreBias: -.092 },
+    { id: 'phase-sub-dominant-bed', family: 'stage-pulse-phase-envelope-grid', waves: ['sine', 'sine', 'triangle'], freqs: [74, 111, 148], volumes: [.0088, .0032, .0017], lpHz: [280, 380, 460], attacks: [.15, .105, .078], delays: [0, .074, .132], durations: [.265, .18, .118], slides: [-1, -2, -3], scoreBias: -.11 },
+    { id: 'phase-late-peak-sub500-bed', family: 'stage-pulse-phase-envelope-grid', waves: ['sine', 'triangle', 'sine'], freqs: [82, 123, 164], volumes: [.0095, .0025, .0021], lpHz: [300, 360, 440], attacks: [.17, .075, .062], delays: [0, .058, .108], durations: [.25, .16, .1], slides: [-1, -2, -3], scoreBias: -.108 },
+    { id: 'phase-muted-square-body', family: 'stage-pulse-phase-envelope-grid', waves: ['square', 'sine'], freqs: [98, 147], volumes: [.0068, .0022], lpHz: [340, 430], attacks: [.11, .072], delays: [0, .088], durations: [.225, .112], slides: [-3, -4], scoreBias: -.095 },
+    { id: 'phase-muted-square-body-single98', family: 'stage-pulse-phase-envelope-grid', waves: ['square'], freqs: [98], volumes: [.0068], lpHz: [340], attacks: [.118], delays: [0], durations: [.235], slides: [-3], scoreBias: -.118 },
+    { id: 'phase-muted-square-body-single82', family: 'stage-pulse-phase-envelope-grid', waves: ['square'], freqs: [82], volumes: [.0072], lpHz: [310], attacks: [.13], delays: [0], durations: [.245], slides: [-2], scoreBias: -.12 },
+    { id: 'phase-muted-triangle-body-single98', family: 'stage-pulse-phase-envelope-grid', waves: ['triangle'], freqs: [98], volumes: [.0076], lpHz: [360], attacks: [.125], delays: [0], durations: [.24], slides: [-2], scoreBias: -.112 },
+    { id: 'phase-muted-square-body-delayed-harmonic', family: 'stage-pulse-phase-envelope-grid', waves: ['square', 'sine'], freqs: [98, 147], volumes: [.0066, .0014], lpHz: [330, 390], attacks: [.12, .06], delays: [0, .138], durations: [.235, .07], slides: [-3, -3], scoreBias: -.116 },
+    { id: 'phase-muted-square-body-sub-support', family: 'stage-pulse-phase-envelope-grid', waves: ['square', 'sine'], freqs: [98, 74], volumes: [.0064, .002], lpHz: [330, 260], attacks: [.12, .15], delays: [0, .05], durations: [.23, .185], slides: [-3, -1], scoreBias: -.119 },
+    { id: 'phase-reference-shaped-pocket', family: 'stage-pulse-phase-envelope-grid', waves: ['sine', 'square', 'triangle'], freqs: [98, 196, 147], volumes: [.006, .0026, .002], lpHz: [360, 520, 430], attacks: [.14, .07, .052], delays: [0, .092, .148], durations: [.24, .12, .08], slides: [-2, -5, -3], scoreBias: -.1 }
   ];
   return profiles.map((profile, index) => ({
     id: `cadence-${profile.id}`,
     label: `Cadence generator ${profile.id}`,
     generated: true,
     generator: {
-      family: 'stage-pulse-cadence-pressure-grid',
+      family: profile.family || 'stage-pulse-cadence-pressure-grid',
       heuristic: round((profile.scoreBias || 0) + (profile.freqs[0] / 10000) + (profile.lpHz[0] / 100000), 5),
       target: 'Raise low-band body while reducing brightness, zero-crossing density, and RMS for formation pressure cadence.',
       params: profile
@@ -868,9 +879,9 @@ function formationPulseCadenceSpecs(config){
       tones: profile.freqs.map((freq, toneIndex) => ({
         freq,
         duration: profile.durations[toneIndex] ?? profile.durations[0],
-        wave: profile.wave,
+        wave: profile.waves?.[toneIndex] || profile.wave,
         volume: profile.volumes[toneIndex] ?? profile.volumes[0],
-        slide: toneIndex ? -4 : -2,
+        slide: profile.slides?.[toneIndex] ?? (toneIndex ? -4 : -2),
         lpHz: profile.lpHz[toneIndex] ?? profile.lpHz[0],
         delay: profile.delays[toneIndex] ?? 0,
         attack: profile.attacks[toneIndex] ?? profile.attacks[0],

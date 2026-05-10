@@ -255,6 +255,9 @@ function recommendation({ contract, riskRow, candidate, precheck, runtime, statu
   if(contract.cue === 'stagePulse'){
     const measured = measuredCandidateRead(candidate);
     if(precheck?.report?.decision?.status === 'precheck-reject' && measured.candidateId){
+      if(/^cadence-phase-/.test(measured.candidateId)){
+        return `Do not promote ${measured.candidateId}; the phase/envelope family produced a near miss but failed repeat stability and masking. Preserve the evidence and move effort to higher-return impact, loss, or composite-cue scoring before another stagePulse runtime trial.`;
+      }
       if((+measured.cadencePressureScore10 || 0) < 3 && (+measured.maskingSeparationScore10 || 0) < 3){
         return `Do not promote ${measured.candidateId}; the targeted low-brightness/stability family lost pressure-bed character and still failed masking. Move to phase/envelope-aware or reference-subclip candidates.`;
       }
@@ -351,6 +354,9 @@ function nextStepFor(highest, cues){
     const stagePulse = cues.find(row => row.cue === 'stagePulse');
     const measured = measuredCandidateRead(latestCandidate('stagePulse'));
     if(stagePulse?.evidence?.promotionPrecheck?.status === 'precheck-reject' && measured.candidateId){
+      if(/^cadence-phase-/.test(measured.candidateId)){
+        return `StagePulse candidate ${measured.candidateId} is a phase/envelope near miss, but repeat stability and masking reject promotion. Preserve it as generator evidence and prioritize higher user-impact audio gaps such as playerHit body/composite loss cues before another stagePulse runtime trial.`;
+      }
       if((+measured.cadencePressureScore10 || 0) < 3 && (+measured.maskingSeparationScore10 || 0) < 3){
         return `StagePulse candidate ${measured.candidateId} confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck.`;
       }
