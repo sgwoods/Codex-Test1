@@ -456,9 +456,9 @@ const CUE_CONFIGS = {
     entryId: 'player-hit',
     comparisonId: 'ship-loss-compare',
     latest: 'latest-player-hit-focus.json',
-    title: 'Ship Loss Body',
-    problem: 'Ship Loss onset is now much better, but its body segment remains too bright and too extended versus the measured Galaga death body window.',
-    target: 'Search for a better death clip envelope/body while preserving the strong onset improvement from the previous pass.',
+    title: 'Ship Loss Tail/Body',
+    problem: 'Ship Loss now uses Galaga source audio, but raw segment scoring still flags the tail/body because the browser-captured Galaga baseline also carries high reference-segmentation risk. The next gap is calibration: distinguish true runtime regressions from analyzer noise before promoting a more player-readable loss phrase.',
+    target: 'Preserve the recognizable Galaga death phrase, keep the full onset/body/tail meaning intact after a ship loss, and use browser-self-calibrated segment gates so the loop improves the game without chasing scorer artifacts.',
     referenceStarts: [0, .02, .05, .08, .1, .12, .16],
     referenceDurations: [.72, .84, .92, .968, 1.04, 1.16, 1.28],
     referenceVolumes: [.74, .82, .9, 1],
@@ -499,6 +499,45 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'curated-segment-exact',
+        label: 'Curated segment exact',
+        spec: {
+          cooldownMs: 1800,
+          scheduledDuration: .968,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1, clipStart: .02, clipDuration: .439, delay: 0 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1, clipStart: .459, clipDuration: .399, delay: .439 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1, clipStart: .858, clipDuration: .13, delay: .838 }
+          ]
+        }
+      },
+      {
+        id: 'curated-segment-tail-lift',
+        label: 'Curated segment tail lift',
+        spec: {
+          cooldownMs: 1800,
+          scheduledDuration: .968,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .98, clipStart: .02, clipDuration: .439, delay: 0 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .9, clipStart: .459, clipDuration: .399, delay: .439 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1.18, clipStart: .858, clipDuration: .13, delay: .832 }
+          ]
+        }
+      },
+      {
+        id: 'curated-segment-body-tail-crossfade',
+        label: 'Curated segment body/tail crossfade',
+        spec: {
+          cooldownMs: 1800,
+          scheduledDuration: .968,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1, clipStart: .02, clipDuration: .439, delay: 0 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .88, clipStart: .459, clipDuration: .399, delay: .42 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1.08, clipStart: .858, clipDuration: .13, delay: .8 }
+          ]
+        }
+      },
+      {
         id: 'segmented-loss-body-guarded',
         label: 'Segmented loss body guarded',
         spec: {
@@ -531,6 +570,13 @@ const CUE_CONFIGS = {
       roles: ['onset', 'body', 'tail'],
       roleWeights: { onset: .36, body: .44, tail: .2 },
       maxRoleRisk10: { onset: 3.2, body: 3.4, tail: 3.4 },
+      calibration: {
+        mode: 'synthetic-galaga-browser-capture',
+        roleRiskMode: 'calibrated',
+        maxRoleRisk10: { onset: 1.35, body: 1.1, tail: 1.05, default: 1.15 },
+        rawSegmentWorsenMax10: .35,
+        rationale: 'A Galaga-source browser capture can score high against hand segmentation; calibrated gates measure excess Aurora risk above the synthetic Galaga capture before blocking a candidate.'
+      },
       durationTolerance: .14,
       scheduledCoverageMin: .78,
       scheduledCoverageMax: 1.18,
@@ -719,6 +765,12 @@ function round(value, places = 3){
   return Math.round(n * scale) / scale;
 }
 
+function finiteMetric(value){
+  if(value === null || value === undefined || value === '') return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
 function clamp(value, min, max){
   return Math.min(max, Math.max(min, value));
 }
@@ -726,6 +778,11 @@ function clamp(value, min, max){
 function mean(values){
   const numeric = values.map(Number).filter(Number.isFinite);
   return numeric.length ? numeric.reduce((sum, value) => sum + value, 0) / numeric.length : null;
+}
+
+function maxFinite(values){
+  const numeric = values.map(finiteMetric).filter(Number.isFinite);
+  return numeric.length ? Math.max(...numeric) : null;
 }
 
 function stddev(values){
@@ -1064,13 +1121,28 @@ function segmentRoleMap(comparisons = []){
   for(const item of comparisons){
     const role = String(item.role || '').trim();
     if(!role) continue;
+    const auroraRisk10 = finiteMetric(item.auroraSegmentRisk10);
+    const syntheticRisk10 = finiteMetric(item.syntheticGalagaSegmentRisk10);
+    const calibrationDelta10 = Number.isFinite(auroraRisk10) && Number.isFinite(syntheticRisk10)
+      ? auroraRisk10 - syntheticRisk10
+      : null;
+    const calibratedRisk10 = Number.isFinite(calibrationDelta10)
+      ? Math.max(0, calibrationDelta10)
+      : auroraRisk10;
     roles[role] = {
       role,
-      risk10: round(item.auroraSegmentRisk10, 2),
+      risk10: Number.isFinite(auroraRisk10) ? round(auroraRisk10, 2) : null,
+      rawRisk10: Number.isFinite(auroraRisk10) ? round(auroraRisk10, 2) : null,
+      syntheticRisk10: Number.isFinite(syntheticRisk10) ? round(syntheticRisk10, 2) : null,
+      calibratedRisk10: Number.isFinite(calibratedRisk10) ? round(calibratedRisk10, 2) : null,
+      calibrationDelta10: Number.isFinite(calibrationDelta10) ? round(calibrationDelta10, 2) : null,
       exactRoleMatch: !!item.auroraExactRoleMatch,
+      syntheticExactRoleMatch: !!item.syntheticGalagaExactRoleMatch,
       referenceWindow: item.referenceWindow || null,
       auroraWindow: item.auroraWindow || null,
+      syntheticWindow: item.syntheticGalagaWindow || null,
       comparison: item.auroraVsReference || null,
+      syntheticComparison: item.syntheticGalagaVsReference || null,
       interpretation: item.interpretation || ''
     };
   }
@@ -1082,19 +1154,40 @@ function aggregateSegmentRoles(group){
   const roles = {};
   for(const role of roleNames){
     const samples = group.map(row => row.segmentRoles?.[role]).filter(Boolean);
-    const risks = samples.map(item => item.risk10);
+    const risks = samples.map(item => finiteMetric(item.rawRisk10 ?? item.risk10)).filter(Number.isFinite);
+    const syntheticRisks = samples.map(item => finiteMetric(item.syntheticRisk10)).filter(Number.isFinite);
+    const calibratedRisks = samples.map(item => finiteMetric(item.calibratedRisk10)).filter(Number.isFinite);
+    const calibrationDeltas = samples.map(item => finiteMetric(item.calibrationDelta10)).filter(Number.isFinite);
     const exactMatches = samples.filter(item => item.exactRoleMatch).length;
+    const syntheticExactMatches = samples.filter(item => item.syntheticExactRoleMatch).length;
     const referenceWindows = samples.map(item => item.referenceWindow).filter(Boolean);
     const auroraWindows = samples.map(item => item.auroraWindow).filter(Boolean);
+    const syntheticWindows = samples.map(item => item.syntheticWindow).filter(Boolean);
+    const averageRisk10 = mean(risks);
+    const averageSyntheticRisk10 = mean(syntheticRisks);
+    const averageCalibratedRisk10 = mean(calibratedRisks);
+    const averageCalibrationDelta10 = mean(calibrationDeltas);
+    const averageAuroraDurationSeconds = mean(auroraWindows.map(item => item?.duration_s).filter(value => finiteMetric(value) !== null));
+    const averageSyntheticDurationSeconds = mean(syntheticWindows.map(item => item?.duration_s).filter(value => finiteMetric(value) !== null));
     roles[role] = {
       role,
-      risk10: round(mean(risks), 2),
-      worstRisk10: round(Math.max(...risks.map(Number).filter(Number.isFinite)), 2),
+      risk10: Number.isFinite(averageRisk10) ? round(averageRisk10, 2) : null,
+      rawRisk10: Number.isFinite(averageRisk10) ? round(averageRisk10, 2) : null,
+      worstRisk10: Number.isFinite(maxFinite(risks)) ? round(maxFinite(risks), 2) : null,
+      syntheticRisk10: Number.isFinite(averageSyntheticRisk10) ? round(averageSyntheticRisk10, 2) : null,
+      worstSyntheticRisk10: Number.isFinite(maxFinite(syntheticRisks)) ? round(maxFinite(syntheticRisks), 2) : null,
+      calibratedRisk10: Number.isFinite(averageCalibratedRisk10) ? round(averageCalibratedRisk10, 2) : null,
+      worstCalibratedRisk10: Number.isFinite(maxFinite(calibratedRisks)) ? round(maxFinite(calibratedRisks), 2) : null,
+      calibrationDelta10: Number.isFinite(averageCalibrationDelta10) ? round(averageCalibrationDelta10, 2) : null,
+      worstCalibrationDelta10: Number.isFinite(maxFinite(calibrationDeltas)) ? round(maxFinite(calibrationDeltas), 2) : null,
       exactRoleMatchRate: round(exactMatches / Math.max(1, samples.length), 2),
+      syntheticExactRoleMatchRate: round(syntheticExactMatches / Math.max(1, samples.length), 2),
       referenceWindow: referenceWindows[0] || null,
       auroraWindow: auroraWindows[0] || null,
-      averageAuroraDurationSeconds: round(mean(auroraWindows.map(item => item?.duration_s)), 3),
-      interpretation: samples.slice().sort((a, b) => (+b.risk10 || 0) - (+a.risk10 || 0))[0]?.interpretation || ''
+      syntheticWindow: syntheticWindows[0] || null,
+      averageAuroraDurationSeconds: Number.isFinite(averageAuroraDurationSeconds) ? round(averageAuroraDurationSeconds, 3) : null,
+      averageSyntheticDurationSeconds: Number.isFinite(averageSyntheticDurationSeconds) ? round(averageSyntheticDurationSeconds, 3) : null,
+      interpretation: samples.slice().sort((a, b) => (+b.rawRisk10 || +b.risk10 || 0) - (+a.rawRisk10 || +a.risk10 || 0))[0]?.interpretation || ''
     };
   }
   return roles;
@@ -1187,6 +1280,9 @@ function referenceCompositeDurationSeconds(row){
 function lossCompositeAnalysis(row, config){
   const gate = config.lossComposite;
   if(!gate) return null;
+  const calibration = gate.calibration || null;
+  const usesCalibratedRoles = calibration?.mode === 'synthetic-galaga-browser-capture'
+    && calibration?.roleRiskMode === 'calibrated';
   const roles = gate.roles || Object.keys(row.segmentRoleAverages || {});
   const scheduledDurationSeconds = scheduledCueDurationSeconds(row);
   const referenceDurationSeconds = referenceCompositeDurationSeconds(row);
@@ -1205,11 +1301,21 @@ function lossCompositeAnalysis(row, config){
     : null;
   const roleRows = roles.map(role => {
     const item = row.segmentRoleAverages?.[role] || {};
-    const maxRisk10 = Number(gate.maxRoleRisk10?.[role] ?? gate.maxRoleRisk10?.default ?? 3.5);
-    const risk10 = Number(item.risk10);
+    const rawRisk10 = finiteMetric(item.rawRisk10 ?? item.risk10);
+    const syntheticRisk10 = finiteMetric(item.syntheticRisk10);
+    const calibratedRisk10 = finiteMetric(item.calibratedRisk10);
+    const risk10 = usesCalibratedRoles && Number.isFinite(calibratedRisk10) ? calibratedRisk10 : rawRisk10;
+    const maxRisk10 = Number(usesCalibratedRoles
+      ? calibration.maxRoleRisk10?.[role] ?? calibration.maxRoleRisk10?.default ?? gate.maxRoleRisk10?.[role] ?? gate.maxRoleRisk10?.default ?? 3.5
+      : gate.maxRoleRisk10?.[role] ?? gate.maxRoleRisk10?.default ?? 3.5);
     return {
       role,
       risk10: Number.isFinite(risk10) ? round(risk10, 2) : null,
+      rawRisk10: Number.isFinite(rawRisk10) ? round(rawRisk10, 2) : null,
+      syntheticRisk10: Number.isFinite(syntheticRisk10) ? round(syntheticRisk10, 2) : null,
+      calibratedRisk10: Number.isFinite(calibratedRisk10) ? round(calibratedRisk10, 2) : null,
+      calibrationDelta10: Number.isFinite(item.calibrationDelta10) ? round(item.calibrationDelta10, 2) : null,
+      riskMode: usesCalibratedRoles ? 'calibrated-excess-over-synthetic-galaga-browser-capture' : 'raw-segment-risk',
       score10: Number.isFinite(risk10) ? round(Math.max(0, 10 - risk10), 2) : 0,
       weight: Number(gate.roleWeights?.[role] ?? 1),
       maxRisk10,
@@ -1238,6 +1344,12 @@ function lossCompositeAnalysis(row, config){
   const clearsScore = score10 >= Number(gate.minScore10 ?? 7);
   return {
     family: gate.family || 'loss-cue-composite',
+    calibration: usesCalibratedRoles ? {
+      mode: calibration.mode,
+      roleRiskMode: calibration.roleRiskMode,
+      rawSegmentWorsenMax10: Number(calibration.rawSegmentWorsenMax10 ?? .35),
+      rationale: calibration.rationale || ''
+    } : null,
     scheduledDurationSeconds,
     activeDurationSeconds,
     referenceDurationSeconds,
@@ -1397,8 +1509,17 @@ function rejectionFor(row, baseline, config){
   const gate = config.keeper || {};
   const reasons = [];
   if(row.risk10 > baseline.risk10 - (gate.risk ?? .3)) reasons.push(`whole-cue risk improved only ${round(baseline.risk10 - row.risk10, 2)}`);
-  if(Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+row.worstSegmentRisk10) && row.worstSegmentRisk10 > baseline.worstSegmentRisk10 - (gate.segment ?? .3)){
-    reasons.push(`segment risk improved only ${round(baseline.worstSegmentRisk10 - row.worstSegmentRisk10, 2)}`);
+  const usesCalibratedRoleGates = row.lossComposite?.calibration?.roleRiskMode === 'calibrated';
+  if(Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+row.worstSegmentRisk10)){
+    if(usesCalibratedRoleGates){
+      const rawSegmentWorsen = round(row.worstSegmentRisk10 - baseline.worstSegmentRisk10, 2);
+      const rawSegmentWorsenMax10 = Number(row.lossComposite?.calibration?.rawSegmentWorsenMax10 ?? gate.rawSegmentWorsenMax10 ?? .35);
+      if(rawSegmentWorsen > rawSegmentWorsenMax10){
+        reasons.push(`raw segment risk worsened by ${rawSegmentWorsen}/10 > ${rawSegmentWorsenMax10}/10 calibration guard`);
+      }
+    }else if(row.worstSegmentRisk10 > baseline.worstSegmentRisk10 - (gate.segment ?? .3)){
+      reasons.push(`segment risk improved only ${round(baseline.worstSegmentRisk10 - row.worstSegmentRisk10, 2)}`);
+    }
   }
   const rowDurationGap = row.lossComposite?.durationGapSeconds ?? row.durationGapSeconds;
   const baselineDurationGap = baseline.lossComposite?.durationGapSeconds ?? baseline.durationGapSeconds;
@@ -1451,7 +1572,7 @@ function decisionFor(rows, config){
       baseline: baseline?.id || null,
       best: null,
       measuredBest: measuredBest?.id || null,
-      reason: `No ${config.title} candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates.`
+      reason: `No ${config.title} candidate cleared whole-cue, ${config.lossComposite?.calibration ? 'calibrated role/segment' : 'segment'}, duration, band, centroid, and role-match gates.`
     };
   }
   return {
@@ -1464,7 +1585,7 @@ function decisionFor(rows, config){
     segmentRiskDelta: round((baseline.worstSegmentRisk10 || 0) - (best.worstSegmentRisk10 || 0), 2),
     durationDeltaSeconds: round((baseline.lossComposite?.durationGapSeconds ?? baseline.durationGapSeconds) - (best.lossComposite?.durationGapSeconds ?? best.durationGapSeconds), 3),
     bandDelta: round(baseline.bandShapeGap - best.bandShapeGap, 4),
-    reason: `${config.title} candidate clears measured keeper gates.`
+    reason: `${config.title} candidate clears measured ${config.lossComposite?.calibration ? 'calibrated ' : ''}keeper gates.`
   };
 }
 

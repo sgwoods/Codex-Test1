@@ -189,10 +189,12 @@ that same behavior may be rescored with a more demanding metric.
   - it is grounded in the documented control principles
   - it is not yet a full trace extraction from the preserved Galaga footage
 - `Audio identity and cue alignment` now has a formal cue-contract layer. The
-  current process is stronger than the runtime sound: semantic audio is high,
-  but acoustic event fit and stagePulse onset remain the measured weak points.
-  A candidate is not release-promotable until it survives focused scoring,
-  full-theme precheck, live recapture, alignment, semantic, and quality gates.
+  current process is stronger and has now promoted one calibrated layered
+  `playerHit` runtime lift. Semantic audio is high, but acoustic event fit,
+  residual ship-loss tail shape, and `stagePulse` pressure-bed onset remain the
+  measured weak points. A candidate is not release-promotable until it survives
+  focused scoring, full-theme precheck, live recapture, alignment, semantic,
+  and quality gates.
 - `Level arc and encounter shape` now includes first-pass stage-signature
   distance scoring, but it still needs broader mid-run and late-run evidence
   windows before the repetition penalty should be treated as complete

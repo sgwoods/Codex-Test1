@@ -60,6 +60,7 @@ const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
 const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
 const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
+const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
@@ -2051,6 +2052,7 @@ const ALIEN_REFERENCE_CONTEXT = {
 
 let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
+let applicationArtifactConformanceCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -2080,6 +2082,23 @@ function loadGalagaReferenceSpriteModels(){
     galagaReferenceSpriteModelCache = [];
   }
   return galagaReferenceSpriteModelCache;
+}
+
+function loadApplicationArtifactConformance(){
+  if(applicationArtifactConformanceCache) return applicationArtifactConformanceCache;
+  if(!fs.existsSync(APPLICATION_ARTIFACT_CONFORMANCE)){
+    applicationArtifactConformanceCache = { rows: [] };
+    return applicationArtifactConformanceCache;
+  }
+  try {
+    const artifact = readJson(APPLICATION_ARTIFACT_CONFORMANCE);
+    applicationArtifactConformanceCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : []
+    });
+  } catch (err) {
+    applicationArtifactConformanceCache = { rows: [] };
+  }
+  return applicationArtifactConformanceCache;
 }
 
 function referenceSpriteModelMediaForKey(spriteKey){
@@ -2307,6 +2326,15 @@ function renderConformanceAudioReview(entry, guide){
   `;
 }
 
+function renderArtifactEvidenceList(evidence){
+  const items = String(evidence || '')
+    .split(/\s*;\s*/)
+    .map(item => item.trim())
+    .filter(Boolean);
+  if(!items.length) return '<span class="docMeta">Evidence pending</span>';
+  return items.map(item => `<code>${esc(item)}</code>`).join('<br>');
+}
+
 function buildApplicationGuide(buildInfo, latestNote, guide){
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
@@ -2317,6 +2345,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'visual-contexts', title: 'Graphics Contexts' },
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
     { id: 'stage-families', title: 'Stage Family Progression' },
+    { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
@@ -2432,6 +2461,20 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.description || '')}</td>
     </tr>
   `).join('\n');
+  const artifactConformance = loadApplicationArtifactConformance();
+  const artifactConformanceRows = (artifactConformance.rows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.surface || '')}</strong><br><span class="docMeta">${esc(entry.status || '')}</span></td>
+      <td><strong>${esc(entry.current || '')}</strong><br><span class="docMeta">Target: ${esc(entry.target || '')}</span></td>
+      <td>${esc(entry.measurement || '')}</td>
+      <td>${renderArtifactEvidenceList(entry.evidence)}</td>
+      <td>${esc(entry.next || '')}</td>
+    </tr>
+  `).join('\n') || `
+    <tr>
+      <td colspan="5"><span class="docMeta">Artifact conformance status pending. Run <code>npm run harness:analyze:application-artifact-conformance</code> to generate this table.</span></td>
+    </tr>
+  `;
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -2668,6 +2711,29 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${stageFamilyRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="artifact-conformance-status">
+          <div class="sectionHeader">
+            <h2>Artifact Conformance Status</h2>
+            <p>Target-versus-current conformance across the application artifacts that shape the game: sprite targets, sprite motion, audio cues, backgrounds, shell/icon surfaces, fonts, stage feel, and boss choreography. Rows are generated from the current analysis artifacts so the scorecard stays tied to measured evidence.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Artifact Surface</th>
+                  <th>Current / Target</th>
+                  <th>Measurement</th>
+                  <th>Evidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${artifactConformanceRows}
               </tbody>
             </table>
           </div>

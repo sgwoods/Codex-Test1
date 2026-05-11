@@ -146,27 +146,26 @@ resource economics fit together.
 
 Current conformance read:
 
-- overall Aurora quality is `9.1/10` across the current scored categories
-- audio identity and cue alignment is the weakest category at `7.2/10`; the
+- overall Aurora quality is `9.2/10` across the current scored categories
+- audio identity and cue alignment is the weakest category at `7.3/10`; the
   audio process is stronger than the runtime score, with cue-contract readiness
   at `9.09/10`, semantic event score at `9.78/10`, acoustic event score at
-  `6.20/10`, and `playerHit` tail now the highest current audio gap
+  `6.31/10`, and `playerHit` tail now the highest current audio gap
 - level arc and encounter shape is now a first-class high-priority category at
   `8.8/10`, with remaining opportunity in long-run non-repetition, stage
   pressure precision, and higher-resolution challenge/reward evidence
-- the latest audio work improved the measurement process more than runtime
-  sound: browser-backed audio captures now use an explicit `80ms` preroll,
-  record capture metadata, and support composite analysis windows for layered
-  cues. Stabilized `stagePulse` sweeps produced no safe keeper, a focused
-  `rescueJoin` keeper was rejected by full-theme precheck, and the latest
-  `playerHit` composite pass found no keeper after correcting the reference
-  analysis span. The next audio pass should focus on `playerHit` tail/body
-  modeling and browser-capture calibration rather than a shorter clip
-  substitution
+- the latest audio work produced both harness value and a runtime lift:
+  browser-backed audio captures now use an explicit `80ms` preroll, record
+  capture metadata, support composite analysis windows for layered cues, and
+  apply calibrated browser-reference gates for source-backed loss phrases. The
+  accepted `playerHit` layered runtime cue improved the full-theme cue gap by
+  `2.65/10` while keeping semantic scoring high. The next audio pass should
+  refine the remaining `playerHit` tail gap and then return to `stagePulse`
+  pressure-bed strategy.
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in
-  `reference-artifacts/analyses/quality-conformance/2026-05-11-23c856ad/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd/report.json`
 - conformance economics are now tracked in
   `CONFORMANCE_ECONOMICS.md` and the latest
   `reference-artifacts/analyses/conformance-economics/*/report.json`; this is

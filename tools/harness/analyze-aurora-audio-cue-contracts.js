@@ -226,11 +226,14 @@ function scoreTheme(contract, themeLanes){
   return round(10 * checks.filter(Boolean).length / checks.length, 2);
 }
 
-function statusFor({ riskRow, candidate, precheck, readinessScore10 }){
+function statusFor({ contract, riskRow, candidate, precheck, readinessScore10 }){
   const candidateDecision = candidate?.report?.decision || null;
   const precheckDecision = precheck?.report?.decision || null;
   if(precheckDecision?.status === 'precheck-reject') return 'blocked-by-promotion-precheck';
   if(candidateDecision?.keep === false) return 'candidate-loop-needs-new-strategy';
+  if(candidateDecision?.keep === true && precheckDecision?.allowRuntimeTrial === true && contract.cue === 'playerHit' && (+riskRow?.gapRisk10 || 0) < 4){
+    return 'runtime-validated-watch-tail';
+  }
   if(precheckDecision?.allowRuntimeTrial === true) return 'runtime-trial-allowed-not-promoted';
   if((+riskRow?.worstSegmentRisk10 || 0) >= 6.5) return 'highest-risk-contract-target';
   if(readinessScore10 >= 8) return 'contract-ready-for-next-candidate-cycle';
@@ -266,6 +269,9 @@ function recommendation({ contract, riskRow, candidate, precheck, runtime, statu
     return 'Attack stagePulse onset with a contract-aware candidate family that measures pressure cadence, onset band shape, and masking against combat cues.';
   }
   if(contract.cue === 'playerHit'){
+    if(candidate?.report?.decision?.keep === true && precheck?.report?.decision?.allowRuntimeTrial === true && (+riskRow?.gapRisk10 || 0) < 4){
+      return 'Keep the calibrated layered ship-loss cue in runtime and focus the next pass on the residual playerHit tail gap or a higher-value stagePulse pressure-bed strategy.';
+    }
     if(candidate?.report?.decision?.keep === true && (+riskRow?.worstSegmentRisk10 || 0) < 3){
       return 'Keep the measured composite loss cue as the runtime guardrail; playerHit is now secondary until higher-risk audio gaps are narrowed.';
     }
@@ -301,7 +307,7 @@ function evaluateContract({ contract, maps, risks, themeLanes }){
     + .2 * themeLatitudeScore10,
     2
   );
-  const status = statusFor({ riskRow, candidate, precheck, readinessScore10 });
+  const status = statusFor({ contract, riskRow, candidate, precheck, readinessScore10 });
   return {
     cue: contract.cue,
     family: contract.family,
@@ -353,6 +359,12 @@ function evaluateContract({ contract, maps, risks, themeLanes }){
 }
 
 function nextStepFor(highest, cues){
+  if(highest?.cue === 'playerHit'){
+    const playerHit = cues.find(row => row.cue === 'playerHit');
+    if(playerHit?.status === 'runtime-validated-watch-tail'){
+      return 'Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.';
+    }
+  }
   if(highest?.cue === 'stagePulse'){
     const stagePulse = cues.find(row => row.cue === 'stagePulse');
     const measured = measuredCandidateRead(latestCandidate('stagePulse'));

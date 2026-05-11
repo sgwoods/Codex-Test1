@@ -107,22 +107,22 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `7.2/10` |
-| Overall quality score | `9.1/10` |
+| Quality score audio category | `7.3/10` |
+| Overall quality score | `9.2/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.20/10` |
-| Average worst segment risk | `3.80/10` |
+| Acoustic event score | `6.31/10` |
+| Average worst segment risk | `3.69/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
 | Highest current audio gap | `playerHit` tail |
 | Candidate loop coverage | `8/8` contracted cues |
 
-This means the process is now stronger than the current runtime audio. The
-contracts are ready enough to guide the next work, while the implementation
-still needs stronger composite-cue handling for ship loss, a calibrated
-browser-capture scoring baseline, and a sharper `stagePulse` onset strategy.
-The stricter composite scorer lowered the headline roll-up, which is a healthy
-measurement correction rather than a runtime regression.
+This means the process and runtime audio both moved forward, while audio still
+remains Aurora's weakest quality category. The latest win is a calibrated,
+layered `playerHit` loss phrase: the full-theme cue gap improved materially,
+semantic scoring stayed high, and overall quality returned to `9.2/10`.
+Remaining work is now narrower: `playerHit` tail/body refinement under the new
+calibration policy, followed by a sharper `stagePulse` pressure-bed strategy.
 
 May 11 capture-stability and ship-loss trial pass:
 
@@ -177,6 +177,32 @@ Read: this pass improved the measuring system more than the runtime mix. It
 turned "ship loss sounds wrong" into a narrower diagnosis: tail/body timbre and
 browser-captured reference calibration still need work before a beta-worthy
 audio promotion.
+
+May 11 calibrated ship-loss promotion pass:
+
+- Harness improvement kept: focused candidate scoring now carries synthetic
+  Galaga browser-capture risk beside raw Aurora risk and supports calibrated
+  onset/body/tail gates. This prevents the loop from rejecting Galaga-source
+  cues only because the hand segmentation and browser capture disagree.
+- Candidate added: `curated-segment-tail-lift`, a layered death phrase using
+  the curated onset/body/tail windows from `galaga3-death.m4a`.
+- Focused result: whole-cue risk improved by `2.56/10`, scheduled duration gap
+  closed to `0s`, loss-composite score reached `9.76/10`, and repeat stability
+  cleared.
+- Promotion precheck: runtime trial allowed with an explicit warning. Full-theme
+  cue gap improved by `2.65/10`; raw worst-segment risk worsened by only
+  `0.06/10`, inside the calibrated trial tolerance.
+- Runtime validation: audio comparison, event-gap analysis, cue-contract check,
+  audio cue alignment (`9/9`), runtime recovery, game-over tail, build, and
+  quality score passed.
+- Current roll-up after validation: overall quality `9.2/10`, audio `7.3/10`,
+  semantic event score `9.78/10`, acoustic event score `6.31/10`, average worst
+  segment risk `3.69/10`, highest audio risk `playerHit` tail at `3.61/10`.
+
+Read: this is a user-visible loss-feedback improvement and a process
+improvement. The ship-loss cue now preserves a fuller, better-timed arcade
+death phrase while the harness records the residual tail gap instead of hiding
+it.
 
 Full-grid `stagePulse` pass:
 

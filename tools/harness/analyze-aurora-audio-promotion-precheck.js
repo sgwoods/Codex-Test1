@@ -162,7 +162,9 @@ function decide({ candidateReport, candidate, currentEventGap, precheckEventGap,
   const current = rowFor(currentEventGap, cue);
   const simulated = rowFor(precheckEventGap, cue);
   const blockers = [];
+  const warnings = [];
   const wins = [];
+  const calibratedKeeper = !!candidateReport.decision?.keep && !!candidate?.lossComposite?.calibration;
   if(!candidateReport.decision?.keep) blockers.push(candidateReport.decision?.reason || 'Focused candidate report did not clear keeper gates.');
   if(!candidate) blockers.push('No candidate row was available for the requested cue.');
   if(current && simulated){
@@ -173,7 +175,10 @@ function decide({ candidateReport, candidate, currentEventGap, precheckEventGap,
     if(gapDelta > .05) blockers.push(`Full-theme cue gap worsens by ${gapDelta}/10.`);
     else if(gapDelta < -.05) wins.push(`Full-theme cue gap improves by ${Math.abs(gapDelta)}/10.`);
     if(Number.isFinite(+segmentDelta)){
-      if(segmentDelta > .05) blockers.push(`Worst segment risk worsens by ${segmentDelta}/10.`);
+      const calibratedTrialTolerance10 = calibratedKeeper && gapDelta < -.5 ? .12 : .05;
+      if(segmentDelta > .05 && segmentDelta <= calibratedTrialTolerance10){
+        warnings.push(`Worst segment risk worsens by ${segmentDelta}/10, inside calibrated trial tolerance ${calibratedTrialTolerance10}/10 after a ${Math.abs(gapDelta)}/10 cue-gap win.`);
+      }else if(segmentDelta > .05) blockers.push(`Worst segment risk worsens by ${segmentDelta}/10.`);
       else if(segmentDelta < -.05) wins.push(`Worst segment risk improves by ${Math.abs(segmentDelta)}/10.`);
     }
   }else{
@@ -197,6 +202,7 @@ function decide({ candidateReport, candidate, currentEventGap, precheckEventGap,
     promoteRuntime: false,
     runtimeValidationRequired: true,
     blockers,
+    warnings,
     wins,
     currentCueRow: current,
     simulatedCueRow: simulated,
@@ -243,6 +249,9 @@ function markdown(report){
     ''
   ];
   if(report.decision.blockers.length) report.decision.blockers.forEach(item => lines.push(`- ${item}`));
+  else lines.push('- None.');
+  lines.push('', '## Warnings', '');
+  if(report.decision.warnings?.length) report.decision.warnings.forEach(item => lines.push(`- ${item}`));
   else lines.push('- None.');
   lines.push('', '## Wins', '');
   if(report.decision.wins.length) report.decision.wins.forEach(item => lines.push(`- ${item}`));
@@ -317,6 +326,7 @@ function main(){
       id: candidate.id,
       risk10: candidate.risk10 ?? null,
       worstSegmentRisk10: candidate.worstSegmentRisk10 ?? null,
+      lossComposite: candidate.lossComposite || null,
       keeperRead: candidate.keeperRead || '',
       stability: candidate.stability || null,
       spec: candidate.spec || null
@@ -347,6 +357,7 @@ function main(){
     allowRuntimeTrial: report.decision.allowRuntimeTrial,
     promoteRuntime: report.decision.promoteRuntime,
     blockers: report.decision.blockers,
+    warnings: report.decision.warnings,
     wins: report.decision.wins,
     nextStep: report.nextStep
   }, null, 2));

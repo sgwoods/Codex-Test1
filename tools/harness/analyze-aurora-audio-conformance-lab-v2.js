@@ -177,9 +177,52 @@ function promotedRuntimeSpec(cue, report){
   if(!bestId) return null;
   const best = (report.candidates || []).find(row => row.id === bestId);
   const spec = best?.spec || null;
-  if(!spec?.referenceClip || !Number.isFinite(+spec.clipStart) || !Number.isFinite(+spec.clipDuration)) return null;
   if(!fs.existsSync(AURORA_PACK_PATH)) return null;
   const source = fs.readFileSync(AURORA_PACK_PATH, 'utf8');
+  if(Array.isArray(spec?.layers) && spec.layers.length){
+    const cueSourcePresent = source.includes(`${cue}:Object.freeze`);
+    const refs = [];
+    const refRe = /referenceAudioCue\('([^']+)'\,\{([^}]*)\}\)/g;
+    let refMatch;
+    while((refMatch = refRe.exec(source))){
+      const opts = {};
+      for(const part of refMatch[2].split(',')){
+        const [key, raw] = part.split(':').map(value => String(value || '').trim());
+        if(!key || !raw) continue;
+        const numeric = Number(raw.startsWith('.') ? `0${raw}` : raw);
+        opts[key] = Number.isFinite(numeric) ? numeric : raw;
+      }
+      refs.push({ referenceClip: refMatch[1], opts });
+    }
+    const layerMatched = spec.layers.every(layer => refs.some(ref => {
+      if(ref.referenceClip !== layer.referenceClip) return false;
+      const clipStartMatch = Math.abs((ref.opts.clipStart ?? NaN) - +layer.clipStart) < .001;
+      const clipDurationMatch = Math.abs((ref.opts.clipDuration ?? NaN) - +layer.clipDuration) < .001;
+      const delayMatch = !Number.isFinite(+layer.delay) || Math.abs((ref.opts.delay ?? 0) - +layer.delay) < .001;
+      const volumeMatch = !Number.isFinite(+layer.referenceVolume) || Math.abs((ref.opts.referenceVolume ?? NaN) - +layer.referenceVolume) < .011;
+      return clipStartMatch && clipDurationMatch && delayMatch && volumeMatch;
+    }));
+    if(cueSourcePresent && layerMatched){
+      return {
+        status: 'runtime-promoted-layered',
+        source: rel(AURORA_PACK_PATH),
+        best: bestId,
+        spec: {
+          cooldownMs: spec.cooldownMs,
+          scheduledDuration: spec.scheduledDuration,
+          layers: spec.layers.map(layer => ({
+            referenceClip: layer.referenceClip,
+            referenceVolume: layer.referenceVolume,
+            clipStart: layer.clipStart,
+            clipDuration: layer.clipDuration,
+            delay: layer.delay
+          }))
+        }
+      };
+    }
+    return null;
+  }
+  if(!spec?.referenceClip || !Number.isFinite(+spec.clipStart) || !Number.isFinite(+spec.clipDuration)) return null;
   const re = new RegExp(`${cue}:referenceAudioCue\\('([^']+)'\\,\\{([^}]*)\\}\\)`, 'g');
   let match;
   while((match = re.exec(source))){

@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-11T18-04-49-888Z-34639",
-  "startedAt": "2026-05-11T18:04:49.888Z",
-  "endedAt": "2026-05-11T18:04:50.299Z",
+  "id": "2026-05-11T20-18-16-887Z-76038",
+  "startedAt": "2026-05-11T20:18:16.887Z",
+  "endedAt": "2026-05-11T20:18:21.529Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "23c856ad",
+  "commit": "b83393cd",
   "command": [
     "npm",
     "run",
-    "harness:analyze:conformance-economics"
+    "harness:check:developer-conformance-dashboard"
   ],
   "axes": [
-    "conformance-economics"
+    "dashboard"
   ],
   "resources": [
-    "cpu"
+    "cpu",
+    "browser"
   ],
-  "notes": "refresh economics after composite ship-loss pass",
+  "notes": "developer dashboard guard after playerHit audio promotion",
   "measurement": {
-    "wallSeconds": 0.411,
-    "timeRealSeconds": 0.4,
-    "timeUserSeconds": 0.25,
-    "timeSystemSeconds": 0.1,
-    "cpuSeconds": 0.35,
+    "wallSeconds": 4.642,
+    "timeRealSeconds": 4.63,
+    "timeUserSeconds": 2.7,
+    "timeSystemSeconds": 1.27,
+    "cpuSeconds": 3.97,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 936628246,
-    "artifactBytesAfter": 937494122,
-    "artifactBytesDelta": 865876
+    "artifactBytesBefore": 946879565,
+    "artifactBytesAfter": 946879565,
+    "artifactBytesDelta": 0
   }
 }

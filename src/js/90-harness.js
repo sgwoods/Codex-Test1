@@ -926,6 +926,101 @@ window.__galagaHarness__={
   if(typeof draw==='function')draw();
   return this.renderState();
  },
+ spriteRuntimeState(){
+  const enemies=S.e
+   .filter(e=>e.hp>0)
+   .map(e=>({
+    id:e.id,
+    t:e.t||'',
+    fam:e.fam||'classic',
+    hp:+(e.hp||0),
+    max:+(e.max||0),
+    x:+(+e.x||0).toFixed(2),
+    y:+(+e.y||0).toFixed(2),
+    dive:+(e.dive||0),
+    carry:!!e.carry
+   }));
+  return{
+   stage:S.stage,
+   challenge:!!S.challenge,
+   simT:+(+S.simT||0).toFixed(3),
+   player:{
+    x:+(+S.p.x||0).toFixed(2),
+    y:+(+S.p.y||0).toFixed(2),
+    dual:!!S.p.dual,
+    captured:!!S.p.captured
+   },
+   enemies
+  };
+ },
+ setupSpriteRuntimeCapture(cfg={}){
+  const kind=String(cfg.kind||'player-fighter');
+  const enemyKinds={
+   'bee-line':{t:'bee',fam:'classic',w:32,h:26,stage:1},
+   'but-line':{t:'but',fam:'classic',w:34,h:27,stage:1},
+   'boss-line':{t:'boss',fam:'classic',w:38,h:30,stage:1},
+   'rogue-fighter':{t:'rogue',fam:'classic',w:35,h:28,stage:4},
+   'challenge-dragonfly':{t:'bee',fam:'dragonfly',w:32,h:26,stage:3,challenge:1},
+   'challenge-mosquito':{t:'bee',fam:'mosquito',w:32,h:26,stage:7,challenge:1}
+  };
+  S.stage=Math.max(1,+cfg.stage||enemyKinds[kind]?.stage||1);
+  S.challenge=!!(cfg.challenge!==undefined?cfg.challenge:enemyKinds[kind]?.challenge);
+  S.simT=0;
+  S.stageClock=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=8;
+  S.attackGapT=8;
+  if(cfg.clearBackdrop!==false)S.st.length=0;
+  Object.assign(S.p,{
+   x:cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18),
+   y:+cfg.playerY||PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:kind==='dual-fighter'?1:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  for(const e of S.e)e.hp=0;
+  const spec=enemyKinds[kind];
+  if(spec){
+   const e=S.e[0];
+   if(!e)return Object.assign({ok:false,kind,error:'no-enemy-slot'},this.spriteRuntimeState());
+   Object.assign(e,{
+    t:spec.t,
+    fam:spec.fam,
+    hp:spec.t==='boss'?2:1,
+    max:spec.t==='boss'?2:1,
+    form:1,
+    dive:0,
+    carry:0,
+    beam:0,
+    beamT:0,
+    low:0,
+    esc:0,
+    squadId:0,
+    shot:0,
+    x:cl(+cfg.enemyX||PLAY_W/2,28,PLAY_W-28),
+    y:+cfg.enemyY||132,
+    tx:cl(+cfg.enemyX||PLAY_W/2,28,PLAY_W-28),
+    ty:+cfg.enemyY||132,
+    vx:0,
+    vy:0,
+    tm:0,
+    ph:0,
+    cool:99
+   });
+  }
+  if(typeof draw==='function')draw();
+  return Object.assign({ok:true,kind},this.spriteRuntimeState());
+ },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
   if(!boss)return null;
