@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "documentation-provenance",
+  "purpose": "Machine-readable source-of-truth map for the hosted project documentation. Generated pages should summarize persistent repo artifacts and analysis outputs rather than carrying current release facts only as hand-edited prose.",
+  "rules": [
+    "Do not edit generated HTML to change project state, metrics, release posture, or conformance claims.",
+    "Current scores, cost, confidence, release labels, application status, and next priorities must come from committed JSON, Markdown, or reference-artifact inputs.",
+    "Templates may contain stable explanatory framing and layout, but each current/readout section must list the artifact family that owns the facts.",
+    "Release preflight must fail if this provenance manifest is missing, if declared source artifacts are missing, or if the public/project pages stop rendering provenance."
+  ],
+  "surfaces": [
+    {
+      "id": "public-project-page",
+      "title": "Public Project Page",
+      "visiblePath": "public-project-page.html",
+      "template": "src/public/aurora-galactica.template.html",
+      "builder": "tools/build/build-index.js#buildPublicProjectPage",
+      "summary": "Narrative public overview of the release lane, conformance program, resource economics, ingestion, and game catalog.",
+      "sections": [
+        {
+          "id": "release-identity",
+          "label": "Release identity and current focus",
+          "sourceArtifacts": [
+            "release-manifest.json",
+            "release-dashboard.json",
+            "release-notes.json"
+          ],
+          "currentness": "Build tokens and release dashboard fields are injected by npm run build for the active lane.",
+          "riskIfStale": "The public page can show a stale version/date/focus even when the game artifact has moved."
+        },
+        {
+          "id": "conformance-readout",
+          "label": "Conformance readout and release gates",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "RELEASE_CONFORMANCE_DASHBOARD.md"
+          ],
+          "currentness": "Score bars and gate cards are generated from the release conformance dashboard artifact.",
+          "riskIfStale": "Scores may become narrative claims rather than measured dashboard outputs."
+        },
+        {
+          "id": "value-versus-compute",
+          "label": "Value versus compute",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "CONFORMANCE_ECONOMICS.md",
+            "reference-artifacts/analyses/conformance-economics"
+          ],
+          "currentness": "Resource cards and investment rows are generated from economics fields in the dashboard artifact and linked economics docs.",
+          "riskIfStale": "CPU/GPU-equivalent spend can drift away from the measured conformance gains it is supposed to justify."
+        },
+        {
+          "id": "reference-ingestion",
+          "label": "Reference ingestion",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
+            "REFERENCE_MEDIA_INVENTORY.md",
+            "ARTIFACT_POLICY.md"
+          ],
+          "currentness": "Ingestion cards are generated from dashboard ingestion rows and linked to maintained ingestion/reference docs.",
+          "riskIfStale": "The public story can imply repeatable ingestion without showing the artifacts that make it repeatable."
+        },
+        {
+          "id": "game-conformance-catalog",
+          "label": "Game conformance catalog",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "GAME_CONFORMANCE_CATALOG.md",
+            "application-guide.json",
+            "reference-artifacts/analyses/application-artifact-conformance/latest.json"
+          ],
+          "currentness": "Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.",
+          "riskIfStale": "Game-specific conformance can collapse into a generic platform summary."
+        }
+      ]
+    },
+    {
+      "id": "project-guide",
+      "title": "Hosted Project Guide",
+      "visiblePath": "project-guide.html",
+      "template": "src/project-guide.template.html",
+      "builder": "tools/build/build-index.js#buildProjectGuide",
+      "summary": "Long-form hosted guide that renders maintained project sections plus source Markdown documents.",
+      "sections": [
+        {
+          "id": "guide-structure",
+          "label": "Guide overview and source document index",
+          "sourceArtifacts": [
+            "project-guide.json",
+            "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+            "PLAN.md",
+            "PRODUCT_ROADMAP.md",
+            "RELEASE_READINESS_REVIEW.md"
+          ],
+          "currentness": "Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files.",
+          "riskIfStale": "The hosted guide can stop matching the maintained repo documentation."
+        },
+        {
+          "id": "documentation-provenance",
+          "label": "Documentation provenance",
+          "sourceArtifacts": [
+            "documentation-provenance.json"
+          ],
+          "currentness": "The hosted guide renders this manifest as a build-time table.",
+          "riskIfStale": "Readers and release reviewers lose the map from public statements back to durable artifacts."
+        }
+      ]
+    },
+    {
+      "id": "application-guide",
+      "title": "Aurora Application Guide",
+      "visiblePath": "application-guide.html",
+      "template": "src/application-guide.template.html",
+      "builder": "tools/build/build-index.js#buildApplicationGuide",
+      "summary": "Aurora-owned audio, visual, alien, stage, artifact-conformance, and persona catalog.",
+      "sections": [
+        {
+          "id": "audio-visual-catalog",
+          "label": "Audio and visual catalog",
+          "sourceArtifacts": [
+            "application-guide.json",
+            "src/js/13-aurora-game-pack.js",
+            "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
+            "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
+          ],
+          "currentness": "Guide rows are generated from application-guide.json and freshness-checked against runtime audio cue durations.",
+          "riskIfStale": "Audio review buttons and event descriptions can drift away from runtime cues."
+        },
+        {
+          "id": "artifact-conformance-status",
+          "label": "Artifact conformance status",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+            "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
+            "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json"
+          ],
+          "currentness": "The artifact scorecard is generated from analysis outputs rather than a single static sprite claim.",
+          "riskIfStale": "Sprite/audio/visual claims can look precise while no longer matching the latest harness artifacts."
+        }
+      ]
+    },
+    {
+      "id": "conformance-dashboard",
+      "title": "Conformance Dashboard",
+      "visiblePath": "conformance-dashboard.html",
+      "template": "tools/harness/build-dev-conformance-dashboard-page.js",
+      "builder": "tools/harness/build-dev-conformance-dashboard-page.js",
+      "summary": "Primary live score, confidence, cost, ingestion, and investment dashboard.",
+      "sections": [
+        {
+          "id": "dashboard-data",
+          "label": "Dashboard data and metrics",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/release-conformance-dashboard/latest.json"
+          ],
+          "currentness": "The HTML and raw JSON are built from the same release-conformance artifact.",
+          "riskIfStale": "The dashboard can show polished charts over stale or missing metric data."
+        }
+      ]
+    }
+  ]
+}

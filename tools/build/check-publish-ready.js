@@ -43,6 +43,7 @@ const REQUIRED_SOURCE_DOCS = [
   'application-guide.json',
   'platinum-guide.json',
   'player-guide.json',
+  'documentation-provenance.json',
   'release-dashboard.json',
   'release-manifest.json',
   'release-notes.json'
@@ -70,6 +71,16 @@ const USER_VISIBLE_SECTIONS = [
     ]
   },
   {
+    id: 'public-documentation-provenance',
+    file: 'public-project-page.html',
+    requiredText: [
+      'Documentation provenance',
+      'documentation-provenance.json',
+      'Persistent Inputs',
+      'release-conformance-dashboard/latest.json'
+    ]
+  },
+  {
     id: 'generated-game-catalog',
     file: 'project-guide.html',
     requiredText: [
@@ -77,7 +88,8 @@ const USER_VISIBLE_SECTIONS = [
       'Alien And Enemy Index',
       'Audio Cue Index',
       'Stage Index',
-      'Persona Index'
+      'Persona Index',
+      'Documentation Provenance'
     ]
   },
   {
@@ -224,7 +236,8 @@ function checkPublicProjectTemplate(){
     '{{PUBLIC_RESOURCE_SUMMARY_CARDS}}',
     '{{PUBLIC_INVESTMENT_QUEUE}}',
     '{{PUBLIC_INGESTION_OVERVIEW_CARDS}}',
-    '{{PUBLIC_GAME_CATALOG_CARDS}}'
+    '{{PUBLIC_GAME_CATALOG_CARDS}}',
+    '{{PUBLIC_DOCUMENTATION_PROVENANCE}}'
   ];
   for(const token of requiredTokens){
     if(!template.includes(token)){
@@ -475,6 +488,8 @@ function checkPublicProjectPageArtifact(cfg){
     'Conformance readout',
     'Value versus compute',
     'Reference ingestion',
+    'Documentation provenance',
+    'documentation-provenance.json',
     'live conformance dashboard game profiles',
     'Strategic beta review',
     buildInfo.label,

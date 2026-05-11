@@ -57,6 +57,7 @@ const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
+const DOCUMENTATION_PROVENANCE = path.join(ROOT, 'documentation-provenance.json');
 const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
 const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
@@ -332,6 +333,23 @@ function loadConformanceDashboardData(){
       },
       ingestionRows: [],
       newFirstClassAxes: []
+    };
+  }
+}
+
+function loadDocumentationProvenance(){
+  try{
+    const raw = JSON.parse(read(DOCUMENTATION_PROVENANCE));
+    return Object.assign({}, raw, {
+      surfaces: Array.isArray(raw.surfaces) ? raw.surfaces : []
+    });
+  }catch{
+    return {
+      schemaVersion: 0,
+      artifactType: 'documentation-provenance',
+      purpose: 'Documentation provenance unavailable for this build.',
+      rules: [],
+      surfaces: []
     };
   }
 }
@@ -1859,13 +1877,38 @@ function renderSourceDocSection(section){
   `;
 }
 
+function buildDocumentationProvenanceGuideSection(provenance){
+  const surfaces = Array.isArray(provenance?.surfaces) ? provenance.surfaces : [];
+  return {
+    id: 'documentation-provenance',
+    title: 'Documentation Provenance',
+    summary: provenance?.purpose || 'Build-time map from hosted documentation sections back to persistent source artifacts.',
+    table: {
+      columns: ['Visible Surface', 'Generated From', 'Persistent Inputs', 'Freshness Rule'],
+      rows: surfaces.map(surface => {
+        const sections = Array.isArray(surface.sections) ? surface.sections : [];
+        const sourceArtifacts = Array.from(new Set(sections.flatMap(section => Array.isArray(section.sourceArtifacts) ? section.sourceArtifacts : [])));
+        const freshness = sections.map(section => `${section.label || section.id}: ${section.currentness || 'declared in manifest'}`).join(' ');
+        return [
+          `${surface.title || surface.id}\n\n\`${surface.visiblePath || ''}\``,
+          `\`${surface.builder || 'build pipeline'}\`\n\nTemplate: \`${surface.template || 'n/a'}\``,
+          sourceArtifacts.map(item => `\`${item}\``).join(', '),
+          freshness
+        ];
+      })
+    }
+  };
+}
+
 function buildProjectGuide(buildInfo, latestNote, guide){
   const template = read(PROJECT_GUIDE_TEMPLATE);
-  const orderedSections = [...(guide.sections || []), ...(guide.sourceDocs || [])];
+  const provenanceSection = buildDocumentationProvenanceGuideSection(loadDocumentationProvenance());
+  const guideSections = [...(guide.sections || []), provenanceSection];
+  const orderedSections = [...guideSections, ...(guide.sourceDocs || [])];
   const toc = orderedSections.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
   `).join('\n');
-  const sections = (guide.sections || []).map(renderGuideSection).join('\n');
+  const sections = guideSections.map(renderGuideSection).join('\n');
   const sourceDocs = (guide.sourceDocs || []).map(renderSourceDocSection).join('\n');
   const body = `
     <main class="shell">
@@ -1936,7 +1979,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
   const templateSha = crypto.createHash('sha256').update(template).digest('hex').slice(0, 12);
   const syncedAt = buildInfo.builtAtUtc || new Date().toISOString();
   const conformanceData = loadConformanceDashboardData();
-  const publicSections = buildPublicProjectSections(conformanceData);
+  const publicSections = buildPublicProjectSections(conformanceData, loadDocumentationProvenance());
   const releaseChannel = String(buildInfo.releaseChannel || '').toLowerCase();
   const isProduction = releaseChannel === 'production';
   const contextValue = isProduction ? 'Production lane' : 'Development lane';

@@ -167,14 +167,40 @@ function gameCatalogCards(data){
   }).join('\n');
 }
 
-function buildPublicProjectSections(data = {}){
+function provenanceRows(provenance = {}){
+  const surfaces = Array.isArray(provenance?.surfaces) ? provenance.surfaces : [];
+  if(!surfaces.length){
+    return '<p class="emptyState">Documentation provenance is not available in this build. Restore documentation-provenance.json before release review.</p>';
+  }
+  return surfaces.map((surface) => {
+    const sections = Array.isArray(surface.sections) ? surface.sections : [];
+    const sourceList = Array.from(new Set(sections.flatMap(section => Array.isArray(section.sourceArtifacts) ? section.sourceArtifacts : [])));
+    const labels = sections.map(section => section.label || section.id).filter(Boolean).slice(0, 4);
+    return `
+                <article class="investmentRow">
+                    <div>
+                        <strong>${esc(surface.title || surface.id || 'Documentation surface')}</strong>
+                        <p>${esc(surface.summary || '')}</p>
+                        <p class="smallText"><strong>Generated as:</strong> ${esc(surface.visiblePath || 'lane documentation')}.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Builder: ${esc(surface.builder || 'build pipeline')}</span>
+                        <span>Sections: ${esc(labels.join('; ') || 'declared in manifest')}</span>
+                        <span>Persistent Inputs: ${esc(sourceList.slice(0, 4).join('; ') || 'pending')}</span>
+                    </div>
+                </article>`;
+  }).join('\n');
+}
+
+function buildPublicProjectSections(data = {}, provenance = {}){
   return {
     PUBLIC_RELEASE_GATE_CARDS: releaseGateCards(data),
     PUBLIC_CONFORMANCE_SCORE_CHART: scoreRows(data),
     PUBLIC_RESOURCE_SUMMARY_CARDS: resourceSummary(data),
     PUBLIC_INVESTMENT_QUEUE: investmentRows(data),
     PUBLIC_INGESTION_OVERVIEW_CARDS: ingestionCards(data),
-    PUBLIC_GAME_CATALOG_CARDS: gameCatalogCards(data)
+    PUBLIC_GAME_CATALOG_CARDS: gameCatalogCards(data),
+    PUBLIC_DOCUMENTATION_PROVENANCE: provenanceRows(provenance)
   };
 }
 

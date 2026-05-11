@@ -84,7 +84,14 @@ product effort rather than an internal note. The key maintained surfaces are:
 - `AUDIO_CONFORMANCE_LAB.md`
 - `STRATEGIC_BETA_REVIEW.md`
 - hosted project guide, application guide, conformance dashboard, release
-  dashboard, and public project page
+  dashboard, public project page, and `documentation-provenance.json`
+
+The hosted public project page and project guide now render a documentation
+provenance section from `documentation-provenance.json`, and publish preflight
+checks fail if that source map or generated section disappears. Current scores,
+costs, release posture, game status, and artifact claims should therefore be
+changed in their persistent source artifacts first, then rebuilt into the
+visible pages.
 
 Documentation suggestions carried forward:
 
