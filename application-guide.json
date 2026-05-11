@@ -893,6 +893,11 @@
           }
         ]
       },
+      "analysisPolicy": {
+        "activeMetricsSource": "analysisWindow",
+        "eventSegmentationSource": "analysisWindow",
+        "reason": "Ship loss is a composite onset/body/tail event; conformance should score the scheduled cue window rather than the single loudest active island."
+      },
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
     },
@@ -1267,7 +1272,7 @@
       "reference": "Galaga Zako/scout behavior, challenge-stage evidence, and galaga3-zako audio reference.",
       "score": "8.7/10 behavior",
       "confidence": "medium; visual likeness is still low-confidence proxy",
-      "next": "Add extracted Galaga alien sprite/contact-sheet crop targets and score Aurora displayed sprites against them."
+      "next": "Score Aurora displayed sprites against the inferred Galaga consensus models and source-frame pixel targets, then promote lossless/emulator targets when available."
     },
     {
       "name": "Butterfly / Escort Alien",
@@ -1277,7 +1282,7 @@
       "reference": "Galaga butterfly/escort behavior through boss/formation grammar and path-family reports.",
       "score": "8.7/10 behavior; 9.0/10 boss grammar contribution",
       "confidence": "medium; visual likeness pending",
-      "next": "Add per-role visual crop scoring and separate escort-path precision against Galaga reference windows."
+      "next": "Run per-role visual scoring against the inferred Galaga consensus model and separate escort-path precision against reference windows."
     },
     {
       "name": "Boss Galaga / Command Boss",
@@ -1297,7 +1302,7 @@
       "reference": "Galaga challenging-stage specialty waves and bonus-stage composition.",
       "score": "7.9/10 challenge alien novelty",
       "confidence": "medium",
-      "next": "Ground specialty alien introduction against actual Galaga challenge-stage contact sheets and score reward clarity separately."
+      "next": "Promote a challenge-only Galaga target when the ingestion has a clean bonus-stage sheet, then score reward clarity separately."
     },
     {
       "name": "Captured Fighter",
@@ -1307,7 +1312,7 @@
       "reference": "Galaga capture/rescue audio and event flow correspondence artifacts.",
       "score": "guardrail pass for flow",
       "confidence": "medium-high for state flow; visual feedback lower",
-      "next": "Add visual event/effects scoring for captured-fighter destruction, rescue join, and player comprehension."
+      "next": "Use the generated dual-fighter target for rescue/carry review, then add visual event scoring for destruction, rescue join, and player comprehension."
     }
   ],
   "conformanceAudioRows": [
@@ -1316,7 +1321,7 @@
       "cues": "gameStart, formationArrival, stageTransition",
       "meaning": "Begins run and anchors formation-arrival timing.",
       "reference": "galaga2-game-start, galaga3-level-underscore, galaga-level-flag.",
-      "score": "7.3/10 audio category",
+      "score": "7.2/10 audio category",
       "confidence": "medium",
       "next": "Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow."
     },
@@ -1355,6 +1360,15 @@
       "score": "flow guardrail pass",
       "confidence": "medium-high",
       "next": "Improve event-rich logs and status/commentary hooks around capture and rescue."
+    },
+    {
+      "family": "Player loss and game over",
+      "cues": "playerHit, gameOver",
+      "meaning": "Explains ship loss, final loss, and the emotional end of a run without muting the next start.",
+      "reference": "galaga3-death and game-over reference windows with onset/body/tail segmentation.",
+      "score": "highest current audio gap; playerHit tail",
+      "confidence": "medium-high",
+      "next": "Run tail/body composite modeling plus browser-capture calibration before allowing a runtime audio promotion."
     },
     {
       "family": "Challenge results",

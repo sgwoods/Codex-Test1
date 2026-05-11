@@ -1,0 +1,282 @@
+{
+  "gameKey": "aurora-galaga-reference",
+  "artifactType": "source-frame-pixel-reference-sprite-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-11",
+  "status": "source-frame-pixel-targets",
+  "generatedBy": "tools/harness/promote-galaga-reference-sprite-targets.js",
+  "sourceEvidence": {
+    "stageReferenceFrames": "reference-artifacts/analyses/galaga-stage-reference-video/frames",
+    "note": "Targets are exact unscaled source-frame pixel crops. Canonical ROM sprite equivalence depends on the upstream reference frame fidelity."
+  },
+  "targets": [
+    {
+      "id": "galaga-player-fighter",
+      "role": "player-fighter",
+      "catalogKeys": [
+        "player-fighter"
+      ],
+      "label": "Galaga player fighter target",
+      "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+      "pixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
+      "crop": {
+        "sourceWidth": 360,
+        "sourceHeight": 480,
+        "x": 204,
+        "y": 426,
+        "width": 36,
+        "height": 36
+      },
+      "pixelScale": 1,
+      "sourcePixelExact": true,
+      "note": "Exact source-frame crop for player ship visual comparison.",
+      "metrics": {
+        "width": 36,
+        "height": 36,
+        "litPixels": 342,
+        "litRatio": 0.26389,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 6,
+          "y": 0,
+          "width": 25,
+          "height": 29
+        }
+      }
+    },
+    {
+      "id": "galaga-dual-fighter",
+      "role": "dual-fighter",
+      "catalogKeys": [
+        "dual-fighter",
+        "rogue-fighter"
+      ],
+      "label": "Galaga dual-fighter target",
+      "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png",
+      "pixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "crop": {
+        "sourceWidth": 360,
+        "sourceHeight": 480,
+        "x": 162,
+        "y": 418,
+        "width": 54,
+        "height": 42
+      },
+      "pixelScale": 1,
+      "sourcePixelExact": true,
+      "note": "Exact source-frame crop for rescue, dual-fighter, and captured-fighter comparison.",
+      "metrics": {
+        "width": 54,
+        "height": 42,
+        "litPixels": 672,
+        "litRatio": 0.2963,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 10,
+          "width": 52,
+          "height": 32
+        }
+      }
+    },
+    {
+      "id": "galaga-zako-dive",
+      "role": "zako-scout",
+      "catalogKeys": [
+        "bee-line"
+      ],
+      "label": "Galaga Zako scout target",
+      "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+      "pixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "crop": {
+        "sourceWidth": 360,
+        "sourceHeight": 480,
+        "x": 38,
+        "y": 156,
+        "width": 36,
+        "height": 36
+      },
+      "pixelScale": 1,
+      "sourcePixelExact": true,
+      "note": "Exact source-frame crop from a live Zako/scout dive pose.",
+      "metrics": {
+        "width": 36,
+        "height": 36,
+        "litPixels": 219,
+        "litRatio": 0.16898,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 4,
+          "y": 11,
+          "width": 21,
+          "height": 23
+        }
+      }
+    },
+    {
+      "id": "galaga-butterfly-escort",
+      "role": "butterfly-escort",
+      "catalogKeys": [
+        "but-line"
+      ],
+      "label": "Galaga butterfly escort target",
+      "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+      "pixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "crop": {
+        "sourceWidth": 360,
+        "sourceHeight": 480,
+        "x": 74,
+        "y": 86,
+        "width": 34,
+        "height": 34
+      },
+      "pixelScale": 1,
+      "sourcePixelExact": true,
+      "note": "Exact source-frame crop for escort/butterfly visual comparison.",
+      "metrics": {
+        "width": 34,
+        "height": 34,
+        "litPixels": 188,
+        "litRatio": 0.16263,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 6,
+          "y": 6,
+          "width": 15,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "galaga-command-boss",
+      "role": "command-boss",
+      "catalogKeys": [
+        "boss-line"
+      ],
+      "label": "Galaga command boss target",
+      "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+      "pixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "crop": {
+        "sourceWidth": 360,
+        "sourceHeight": 480,
+        "x": 120,
+        "y": 62,
+        "width": 28,
+        "height": 28
+      },
+      "pixelScale": 1,
+      "sourcePixelExact": true,
+      "note": "Exact source-frame crop from a live formation boss window.",
+      "metrics": {
+        "width": 28,
+        "height": 28,
+        "litPixels": 325,
+        "litRatio": 0.41454,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 28,
+          "height": 25
+        }
+      }
+    },
+    {
+      "id": "galaga-specialty-dive",
+      "role": "specialty-dive",
+      "catalogKeys": [
+        "challenge-dragonfly",
+        "challenge-mosquito"
+      ],
+      "label": "Galaga specialty dive target",
+      "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+      "pixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "crop": {
+        "sourceWidth": 360,
+        "sourceHeight": 480,
+        "x": 23,
+        "y": 169,
+        "width": 34,
+        "height": 34
+      },
+      "pixelScale": 1,
+      "sourcePixelExact": true,
+      "note": "Exact source-frame dive crop used as the challenge-specialty target until a challenge-only sheet is promoted.",
+      "metrics": {
+        "width": 34,
+        "height": 34,
+        "litPixels": 181,
+        "litRatio": 0.15657,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 19,
+          "y": 0,
+          "width": 15,
+          "height": 21
+        }
+      }
+    }
+  ],
+  "summary": {
+    "targetCount": 6,
+    "catalogKeys": [
+      "bee-line",
+      "boss-line",
+      "but-line",
+      "challenge-dragonfly",
+      "challenge-mosquito",
+      "dual-fighter",
+      "player-fighter",
+      "rogue-fighter"
+    ],
+    "totalLitPixels": 1927
+  },
+  "nextAuthoringStep": "Use these pixel targets as the canonical docs/comparison inputs, then add an emulator/lossless ingest source to promote ROM-equivalent sprite sheets."
+}

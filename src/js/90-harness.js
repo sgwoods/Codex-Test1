@@ -602,6 +602,29 @@ window.__galagaHarness__={
   if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return .9;
   const cue=sfx.cueDef(String(name),opts||{});
   if(!cue)return .9;
+  if(Array.isArray(cue.layers)&&cue.layers.length){
+   const ends=cue.layers.map(layer=>{
+    const delay=Math.max(0,+layer.delay||0);
+    if(layer.referenceClip){
+     const clipped=Math.max(0,+layer.clipDuration||0);
+     return delay+(clipped>0?clipped:4);
+    }
+    let endT=.12;
+    if(Array.isArray(layer.seq)&&layer.seq.length){
+     const step=Math.max(.01,+layer.step||.05);
+     endT=Math.max(endT,((layer.seq.length-1)*step*.92)+step+.06);
+    }
+    if(Array.isArray(layer.tones))for(const tone of layer.tones){
+     endT=Math.max(endT,Math.max(0,+tone.delay||0)+Math.max(.01,+tone.duration||.08)+.06);
+    }
+    if(Array.isArray(layer.noise))for(const burst of layer.noise){
+     endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
+    }
+    return delay+endT;
+   });
+   const scheduled=Number.isFinite(+cue.scheduledDuration)&&+cue.scheduledDuration>0?+cue.scheduledDuration:Math.max(...ends);
+   return Math.max(.25,Math.min(4,scheduled+.16));
+  }
   if(cue.referenceClip){
    const clipped=Math.max(0,+cue.clipDuration||0);
    if(clipped>0)return Math.max(.08,Math.min(12,clipped+.04));
@@ -642,7 +665,10 @@ window.__galagaHarness__={
   try{
    if(typeof sfx.cueDef==='function'&&typeof sfx.loadReferenceBuffer==='function'){
     const warmCue=sfx.cueDef(String(name),captureOpts);
-    if(warmCue&&warmCue.referenceClip)await sfx.loadReferenceBuffer(warmCue.referenceClip);
+    const clips=[];
+    if(warmCue&&warmCue.referenceClip)clips.push(warmCue.referenceClip);
+    if(Array.isArray(warmCue?.layers))for(const layer of warmCue.layers)if(layer?.referenceClip)clips.push(layer.referenceClip);
+    for(const clip of Array.from(new Set(clips)))await sfx.loadReferenceBuffer(clip);
    }
   }catch{}
   if(audioDebug)audioDebug.lastCue=null;
@@ -711,11 +737,12 @@ window.__galagaHarness__={
   if(typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return {ok:false,error:'Audio engine is not available.'};
   const cueName=String(opts.name||'__candidateCue').trim()||'__candidateCue';
   const originalCueDef=sfx.cueDef;
-  const referenceClip=String(spec.referenceClip||'').trim();
+  const referenceClips=[String(spec.referenceClip||'').trim(),...(Array.isArray(spec.layers)?spec.layers.map(layer=>String(layer?.referenceClip||'').trim()):[])].filter(Boolean);
   const clearReferenceCandidateState=()=>{
-   if(!referenceClip)return;
-   if(sfx.referenceCooldowns)delete sfx.referenceCooldowns[referenceClip];
-   if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(source=>String(source?.__clip||'').trim()===referenceClip);
+   if(!referenceClips.length)return;
+   for(const referenceClip of referenceClips)if(sfx.referenceCooldowns)delete sfx.referenceCooldowns[referenceClip];
+   if(sfx.referenceCooldowns)delete sfx.referenceCooldowns[`__cue__:${cueName}`];
+   if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(source=>referenceClips.includes(String(source?.__clip||'').trim()));
   };
   sfx.cueDef=function(name,cueOpts={}){
    if(String(name)===cueName){

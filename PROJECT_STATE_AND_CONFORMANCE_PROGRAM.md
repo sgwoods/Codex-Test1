@@ -77,11 +77,11 @@ release planning dashboard is in
 
 Current Aurora read:
 
-- overall release-quality score: `9.2/10`
+- overall release-quality score: `9.1/10`
 - weakest high-value category: audio identity and cue alignment, currently
-  `7.3/10`
+  `7.2/10`
 - audio cue-contract readiness: `9.09/10`; semantic event scoring is strong at
-  `9.78/10`, but acoustic event fit remains weak at `5.45/10`
+  `9.78/10`, but acoustic event fit remains the active gap at `6.20/10`
 - level arc and encounter shape: `8.8/10`
 - boss entry and formation grammar: `9.2/10`
 - alien entry and challenge-stage novelty: `7.8/10`
@@ -98,9 +98,10 @@ Important interpretation:
 - a better scorer may temporarily lower a score while improving the project
   because it exposes a truer gap
 - the latest audio and challenge-stage work is a good example: stabilizing
-  browser audio capture exposed `playerHit` body as the true highest audio gap,
-  while the stricter challenge scorer lowered confidence in "arrival versus
-  appearance" and exposed a truer stage-variation gap
+  browser audio capture and adding composite analysis windows exposed
+  `playerHit` tail/body fit as the true highest audio gap, while the stricter
+  challenge scorer lowered confidence in "arrival versus appearance" and
+  exposed a truer stage-variation gap
 
 ## Per-Game Status
 
@@ -239,8 +240,8 @@ Current recommendation:
 Short term:
 
 - finish one focused conformance bundle, with audio/event feedback still the
-  highest-value gap unless challenge-stage arrival/novelty offers faster
-  visible return
+  highest-value gap, but treat the latest ship-loss pass as a measurement
+  improvement rather than a beta-worthy runtime lift
 - keep all candidate work wrapped in `harness:measure`
 - refresh dashboard, scorecard, public project page, and project guide before
   any hosted `/dev` publish

@@ -22,16 +22,16 @@ Current conformance focus:
 
 - Aurora audio is the active high-value conformance investment.
 - Current measured runtime state:
-  - Overall quality: `9.2/10`
-  - Audio conformance: `6.8/10`
+  - Overall quality: `9.1/10`
+  - Audio conformance: `7.2/10`
   - Semantic audio score: `9.78/10`
-  - Acoustic event score: `5.6/10`
-  - Average worst segment risk: `4.4/10`
+  - Acoustic event score: `6.20/10`
+  - Average worst segment risk: `3.80/10`
   - Cue-contract readiness: `9.09/10`
-  - Highest cue gap: `stagePulse`
-  - Highest segment gap: `stagePulse` onset, `7.14/10` risk
-- No latest runtime audio candidate has been accepted. The last measured runtime trial was rejected and rolled back.
-- The useful headway is process-level: reusable cue contracts, promotion precheck evidence, persistent candidate histories, and dashboard/release documentation now make audio changes harder to promote without proof.
+  - Highest cue gap: `playerHit`
+  - Highest segment gap: `playerHit` tail, `6.19/10` risk
+- No latest runtime audio candidate has been accepted. The last measured runtime trial was rejected and rolled back, and the follow-up composite `playerHit` pass found no safe keeper.
+- The useful headway is process-level: reusable cue contracts, promotion precheck evidence, layered cue analysis, composite analysis windows, persistent candidate histories, and dashboard/release documentation now make audio changes harder to promote without proof.
 - Latest `stagePulse` candidate pass found a useful near miss, not a keeper:
   `soft-attack-low-march` improved focused risk to `3.62/10` and cadence
   pressure to `4.59/10`, but promotion remains blocked because masking
@@ -43,10 +43,10 @@ Current conformance focus:
 
 Current audio plan:
 
-1. Build a phase/envelope-aware `stagePulse` pressure-bed strategy instead of only lowering gain or low-pass filtering.
-2. Optimize for pressure cadence, onset band shape, low-band body, zero-crossing calm, gain control, and masking against important shot/hit/explosion cues.
+1. Build a `playerHit` tail/body composite strategy and browser-capture calibration baseline before another runtime ship-loss trial.
+2. Keep `stagePulse` pressure-bed strategy as the next ambience lane: optimize pressure cadence, onset band shape, low-band body, zero-crossing calm, gain control, and masking against important shot/hit/explosion cues.
 3. Promote no runtime cue unless focused candidate gates, promotion precheck, full audio comparison, event-gap rollup, cue alignment, and quality scoring all hold or improve.
-4. If `stagePulse` still produces no stable keeper, preserve the evidence and pivot to higher user-impact impact/explosion cues while keeping the new harness capability reusable for future games.
+4. If `playerHit` still produces no stable keeper, preserve the evidence and pivot to a better reference/capture calibration strategy before subjective tuning.
 
 Useful local URLs:
 
@@ -61,9 +61,9 @@ Useful current commands:
 npm run harness:check:aurora-audio-cue-contracts
 npm run harness:analyze:aurora-audio-cue-contracts
 npm run harness:analyze:aurora-audio-conformance-lab-v2
-npm run harness:analyze:aurora-audio-focus-candidates -- --cue=formation-pulse
+npm run harness:analyze:aurora-audio-focus-candidates -- --cue=ship-loss
 npm run harness:analyze:aurora-stage-pulse-cadence
-npm run harness:analyze:aurora-audio-promotion-precheck -- --cue=stagePulse
+npm run harness:analyze:aurora-audio-promotion-precheck -- --cue=playerHit
 ```
 
 Read this checkpoint first, then continue into the older project restart notes

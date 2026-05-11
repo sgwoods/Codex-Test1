@@ -58,6 +58,8 @@ const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
 const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
+const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
+const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
@@ -163,6 +165,10 @@ loadEnvFile(path.join(ROOT, '.env.local'));
 
 function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+}
+
+function readJson(file){
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 function rel(file){
@@ -1494,6 +1500,21 @@ function applicationGuideStyles(){
     .catalogMediaImg.isPixelated{
       image-rendering:pixelated;
     }
+    .mediaCrop{
+      position:relative;
+      overflow:hidden;
+      max-width:100%;
+      margin:0 auto;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .mediaCrop img{
+      display:block;
+      max-width:none;
+      transform-origin:top left;
+      image-rendering:pixelated;
+    }
     .pixelSprite{
       display:grid;
       grid-template-columns:repeat(var(--pixel-cols), 8px);
@@ -2004,29 +2025,91 @@ const ALIEN_REFERENCE_CONTEXT = {
   'bee-line': [{
     label: 'Galaga reference context',
     src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
-    note: 'Stage-frame context; direct crop scorer still pending.'
+    note: 'Score-table context for role and color family.'
   }],
   'but-line': [{
     label: 'Galaga reference context',
     src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
-    note: 'Stage-frame context; direct crop scorer still pending.'
+    note: 'Score-table context for role and color family.'
   }],
   'boss-line': [{
     label: 'Galaga boss context',
     src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
-    note: 'Stage-frame context; boss crop/path target still pending.'
+    note: 'Score-table context for boss role and points.'
   }],
   'rogue-fighter': [{
     label: 'Capture/rescue context',
     src: 'reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png',
-    note: 'Reference-media context; captured-fighter visual scorer still pending.'
+    note: 'Reference-media context for capture and rescue flow.'
   }],
   'challenge-dragonfly': [{
     label: 'Challenge window context',
     src: 'reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/contact-sheet-1s.png',
-    note: 'Runtime evidence window; direct Galaga challenge crop target pending.'
+    note: 'Runtime evidence window for current challenge presentation.'
   }]
 };
+
+let galagaReferenceSpriteTargetsCache = null;
+let galagaReferenceSpriteModelCache = null;
+
+function loadGalagaReferenceSpriteTargets(){
+  if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
+  if(!fs.existsSync(GALAGA_REFERENCE_SPRITE_TARGETS)){
+    galagaReferenceSpriteTargetsCache = [];
+    return galagaReferenceSpriteTargetsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_REFERENCE_SPRITE_TARGETS);
+    galagaReferenceSpriteTargetsCache = Array.isArray(artifact.targets) ? artifact.targets : [];
+  } catch (err) {
+    galagaReferenceSpriteTargetsCache = [];
+  }
+  return galagaReferenceSpriteTargetsCache;
+}
+
+function loadGalagaReferenceSpriteModels(){
+  if(galagaReferenceSpriteModelCache) return galagaReferenceSpriteModelCache;
+  if(!fs.existsSync(GALAGA_REFERENCE_SPRITE_MODEL)){
+    galagaReferenceSpriteModelCache = [];
+    return galagaReferenceSpriteModelCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_REFERENCE_SPRITE_MODEL);
+    galagaReferenceSpriteModelCache = Array.isArray(artifact.targets) ? artifact.targets : [];
+  } catch (err) {
+    galagaReferenceSpriteModelCache = [];
+  }
+  return galagaReferenceSpriteModelCache;
+}
+
+function referenceSpriteModelMediaForKey(spriteKey){
+  if(!spriteKey) return [];
+  return loadGalagaReferenceSpriteModels()
+    .filter(target => Array.isArray(target.catalogKeys) && target.catalogKeys.includes(spriteKey) && target.modelImage)
+    .map(target => ({
+      label: target.label || target.id || 'Inferred Galaga sprite model',
+      src: target.modelImage,
+      pixelated: true,
+      kind: 'referenceSpriteModel',
+      note: `Consensus model; ${target.sampleCount || 0} sample${target.sampleCount === 1 ? '' : 's'}, ${Math.round((target.averageConfidence || 0) * 100)}% average confidence.`
+    }));
+}
+
+function referenceSpriteMediaForKey(spriteKey){
+  if(!spriteKey) return [];
+  return [
+    ...referenceSpriteModelMediaForKey(spriteKey),
+    ...loadGalagaReferenceSpriteTargets()
+    .filter(target => Array.isArray(target.catalogKeys) && target.catalogKeys.includes(spriteKey) && target.pixelTarget)
+    .map(target => ({
+      label: target.label || target.id || 'Galaga sprite target',
+      src: target.pixelTarget,
+      pixelated: true,
+      kind: 'referenceSpriteTarget',
+      note: target.note || 'Exact source-frame pixel target.'
+    }))
+  ];
+}
 
 const AUDIO_PLOT_STEMS = {
   gameStart: 'stage-start',
@@ -2094,10 +2177,25 @@ function renderPixelSprite(sprite){
 function renderMediaImage(item){
   if(!item || !item.src) return '';
   const href = catalogMediaHref(item.src);
+  const crop = item.crop || {};
+  const cropWidth = Number(crop.width || crop.w);
+  const cropHeight = Number(crop.height || crop.h);
+  const sourceWidth = Number(crop.sourceWidth || crop.srcWidth);
+  const sourceHeight = Number(crop.sourceHeight || crop.srcHeight);
+  const cropX = Number(crop.x || 0);
+  const cropY = Number(crop.y || 0);
+  const scale = Number(crop.scale || 4);
+  const hasCrop = [cropWidth, cropHeight, sourceWidth, sourceHeight, cropX, cropY, scale]
+    .every(Number.isFinite) && cropWidth > 0 && cropHeight > 0 && sourceWidth > 0 && sourceHeight > 0 && scale > 0;
+  const media = hasCrop
+    ? `<div class="mediaCrop" style="width:${Math.round(cropWidth * scale)}px;height:${Math.round(cropHeight * scale)}px">
+        <img src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy" style="width:${Math.round(sourceWidth * scale)}px;height:${Math.round(sourceHeight * scale)}px;transform:translate(-${Math.round(cropX * scale)}px,-${Math.round(cropY * scale)}px)">
+      </div>`
+    : `<img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy">`;
   return `
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">${esc(item.label || 'Evidence image')}</span>
-      <img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy">
+      ${media}
       ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
     </div>
   `;
@@ -2107,8 +2205,10 @@ function renderCatalogVisualMedia(entry, options = {}){
   const sprite = catalogSpriteForEntry(entry);
   const spriteKey = spriteKeyForEntry(entry);
   const media = entry?.media || {};
+  const wantsReferenceTargets = options.includeReferenceTargets || options.includeReferenceContext;
   const images = [
     ...(Array.isArray(media.images) ? media.images : []),
+    ...(wantsReferenceTargets ? referenceSpriteMediaForKey(spriteKey) : []),
     ...(options.includeReferenceContext ? (ALIEN_REFERENCE_CONTEXT[spriteKey] || []) : [])
   ];
   const items = [
@@ -2118,7 +2218,8 @@ function renderCatalogVisualMedia(entry, options = {}){
   if(!items.length){
     return '<div class="mediaPlaceholder">Inline visual evidence pending.</div>';
   }
-  const pending = options.showPendingTarget
+  const hasCropTarget = images.some(item => item?.crop || item?.kind === 'referenceSpriteTarget' || item?.kind === 'referenceSpriteModel');
+  const pending = options.showPendingTarget && !hasCropTarget
     ? '<div class="mediaPlaceholder">Direct extracted crop comparison pending promotion into this row.</div>'
     : '';
   return `<div class="catalogMedia"><div class="catalogMediaGrid">${items.join('')}</div>${pending}</div>`;
@@ -2316,7 +2417,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const shipRows = (guide.shipCatalog || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.type || '')}</span></td>
-      <td>${renderCatalogVisualMedia(entry)}</td>
+      <td>${renderCatalogVisualMedia(entry, { includeReferenceTargets: true })}</td>
       <td>${esc(entry.families || '')}</td>
       <td>${esc(entry.appears || '')}</td>
       <td>${esc(entry.context || '')}</td>

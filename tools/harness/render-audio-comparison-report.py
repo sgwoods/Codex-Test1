@@ -193,6 +193,37 @@ def active_window(sample_rate, data):
     }, data[start:end]
 
 
+def float_or_none(value):
+    try:
+        parsed = float(value)
+        return parsed if math.isfinite(parsed) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def analysis_window_data(sample_rate, data, window):
+    if not isinstance(window, dict):
+        return data, None
+    start = float_or_none(window.get("start_s", window.get("startSeconds")))
+    end = float_or_none(window.get("end_s", window.get("endSeconds")))
+    duration = float_or_none(window.get("duration_s", window.get("durationSeconds")))
+    if start is None:
+        return data, None
+    if end is None and duration is not None:
+        end = start + duration
+    if end is None or end <= start:
+        return data, None
+    start_sample = max(0, min(data.size, int(round(start * sample_rate))))
+    end_sample = max(start_sample, min(data.size, int(round(end * sample_rate))))
+    if end_sample <= start_sample:
+        return data, None
+    return data[start_sample:end_sample], {
+        "start_s": round(start_sample / sample_rate, 3),
+        "end_s": round(end_sample / sample_rate, 3),
+        "duration_s": round((end_sample - start_sample) / sample_rate, 3),
+    }
+
+
 def metric_deltas(left, right):
     return {
         "duration_s": round(abs((left.get("duration_s") or 0) - (right.get("duration_s") or 0)), 3),
@@ -704,8 +735,10 @@ def main():
             "label": item["label"],
             "focus": item["focus"],
             "cue": item["cue"],
+            "analysisPolicy": item.get("analysisPolicy") or {},
             "variants": {},
         }
+        analysis_policy = item_report["analysisPolicy"]
         readme_lines.extend([
             f"## {item['label']}",
             "",
@@ -723,20 +756,25 @@ def main():
             sample_rate, data = load_wav(wav_path)
             loaded_variants[key] = {"sampleRate": sample_rate, "data": data}
             m = metrics(sample_rate, data)
-            active, active_data = active_window(sample_rate, data)
-            active_metrics = metrics(sample_rate, active_data)
+            analysis_data, applied_analysis_window = analysis_window_data(sample_rate, data, variant.get("analysisWindow"))
+            active, active_data = active_window(sample_rate, analysis_data)
+            active_metrics_source = analysis_policy.get("activeMetricsSource")
+            active_metrics = metrics(sample_rate, analysis_data if active_metrics_source == "analysisWindow" else active_data)
             wave_path = os.path.join(plots_dir, f"{item['id']}-{key}-waveform.png")
             spec_path = os.path.join(plots_dir, f"{item['id']}-{key}-spectrogram.png")
             wave_path = save_waveform(sample_rate, data, wave_path, f"{item['label']} · {variant['label']} waveform")
             spec_path = save_spectrogram(sample_rate, data, spec_path, f"{item['label']} · {variant['label']} spectrogram")
             segmentation = curated_reference_segmentation(sample_rate, data, variant.get("segmentation")) if key == "reference" else None
             if segmentation is None:
-                segmentation = reference_segmentation(sample_rate, active_data)
+                segmentation_source = analysis_data if analysis_policy.get("eventSegmentationSource") == "analysisWindow" else active_data
+                segmentation = reference_segmentation(sample_rate, segmentation_source)
             item_report["variants"][key] = {
                 "label": variant["label"],
                 "wav": variant["wav"],
                 "metrics": m,
                 "activeWindow": active,
+                "analysisWindow": applied_analysis_window,
+                "activeMetricsSource": active_metrics_source or "activeWindow",
                 "activeMetrics": active_metrics,
                 "eventSegmentation": segmentation,
                 "waveform": rel(wave_path, out_root) if wave_path else None,

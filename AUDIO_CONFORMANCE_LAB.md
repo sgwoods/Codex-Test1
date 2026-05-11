@@ -107,20 +107,22 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `7.3/10` |
-| Overall quality score | `9.2/10` |
+| Quality score audio category | `7.2/10` |
+| Overall quality score | `9.1/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `5.45/10` |
-| Average worst segment risk | `4.55/10` |
+| Acoustic event score | `6.20/10` |
+| Average worst segment risk | `3.80/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
-| Highest current audio gap | `playerHit` body |
+| Highest current audio gap | `playerHit` tail |
 | Candidate loop coverage | `8/8` contracted cues |
 
 This means the process is now stronger than the current runtime audio. The
 contracts are ready enough to guide the next work, while the implementation
-still needs stronger composite-cue handling for ship loss and a sharper
-`stagePulse` onset strategy.
+still needs stronger composite-cue handling for ship loss, a calibrated
+browser-capture scoring baseline, and a sharper `stagePulse` onset strategy.
+The stricter composite scorer lowered the headline roll-up, which is a healthy
+measurement correction rather than a runtime regression.
 
 May 11 capture-stability and ship-loss trial pass:
 
@@ -149,6 +151,32 @@ Read: `playerHit` is now the highest measured audio gap because the improved
 capture path exposes that death onset/body/tail are not represented as separate
 runtime-evaluable sub-events. The next valuable pass is not a shorter clip; it
 is a contract-aware composite cue strategy for ship loss.
+
+May 11 composite ship-loss scoring follow-up:
+
+- Platform improvement kept: the runtime audio engine now supports measured
+  layered cue definitions, and harness capture duration/preload logic can
+  evaluate every reference clip used by a layered cue.
+- Harness improvement kept: audio comparison manifests can declare an
+  `analysisWindow` policy, so a composite cue can be scored over the scheduled
+  onset/body/tail window rather than only the loudest active island.
+- Reference correction kept: `ship-loss-compare` now scores against the
+  curated death-event segment span instead of the entire source file.
+- Focused candidate outcome: no `playerHit` keeper survived the updated
+  whole-cue, segment, duration, band, centroid, and role-match gates.
+  `segmented-loss-body-dip` was the best measured candidate, but it still
+  missed the role/segment gate.
+- Promotion precheck outcome: rejected. The candidate showed a possible
+  full-theme cue-gap improvement, but no runtime trial is allowed until the
+  focused gates clear.
+- Current roll-up after refresh: overall quality `9.1/10`, audio `7.2/10`,
+  semantic event score `9.78/10`, acoustic event score `6.20/10`, average worst
+  segment risk `3.80/10`, highest gap `playerHit` tail at `6.19/10`.
+
+Read: this pass improved the measuring system more than the runtime mix. It
+turned "ship loss sounds wrong" into a narrower diagnosis: tail/body timbre and
+browser-captured reference calibration still need work before a beta-worthy
+audio promotion.
 
 Full-grid `stagePulse` pass:
 
@@ -291,6 +319,10 @@ declared cue obligations. A theme can be different without becoming ambiguous.
 
 The next high-value audio pass should split into two measured tracks:
 
+- `playerHit` tail/body composite modeling: create a tail-specific candidate
+  family and a browser-capture calibration baseline so reference-backed cues
+  are not penalized for capture/encoding differences rather than real game
+  sound differences
 - `stagePulse` pressure-bed modeling: a stronger low-brightness, low-variance
   generator that explicitly targets repeat stability, zero-crossing calm,
   cadence pressure, and action-cue masking before promotion precheck

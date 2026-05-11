@@ -607,15 +607,20 @@ const sfx={
   return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
  },
  recordCue(name,atmosphere,opts={},cue=null){
+  const cueLayers=Array.isArray(cue?.layers)?cue.layers:[];
+  const firstReferenceLayer=cueLayers.find(layer=>layer&&layer.referenceClip)||null;
+  const referenceClip=String(cue?.referenceClip||firstReferenceLayer?.referenceClip||'').trim();
+  const referenceClipStart=Number.isFinite(+cue?.clipStart)?+cue.clipStart:(Number.isFinite(+firstReferenceLayer?.clipStart)?+firstReferenceLayer.clipStart:0);
+  const referenceClipDuration=Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:(Number.isFinite(+cue?.scheduledDuration)?+cue.scheduledDuration:(Number.isFinite(+firstReferenceLayer?.clipDuration)?+firstReferenceLayer.clipDuration:0));
   const entry=Object.freeze({
    cue:String(name||''),
    atmosphereId:atmosphere?.id||'classic-arcade',
    audioTheme:atmosphere?.audioTheme||'classic-arcade',
    phase:atmosphere?.phase||opts.phase||'stage',
    variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
-   referenceClip:String(cue?.referenceClip||'').trim(),
-   referenceClipStart:Number.isFinite(+cue?.clipStart)?+cue.clipStart:0,
-   referenceClipDuration:Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:0,
+   referenceClip,
+   referenceClipStart,
+   referenceClipDuration,
    stage:+(S.stage||0),
    challenge:!!S.challenge,
    at:+(performance.now()/1000).toFixed(3)
@@ -664,12 +669,86 @@ const sfx={
   this.recordCue(name,atmosphere,opts,selectedCue);
   return selectedCue;
  },
+ cueLayerDuration(layer={}){
+  const delay=Math.max(0,+layer.delay||0);
+  if(layer.referenceClip){
+   const clipped=Math.max(0,+layer.clipDuration||0);
+   return delay+(clipped>0?clipped:4);
+  }
+  let endT=.12;
+  if(Array.isArray(layer.seq)&&layer.seq.length){
+   const step=Math.max(.01,+layer.step||.05);
+   endT=Math.max(endT,((layer.seq.length-1)*step*.92)+step+.06);
+  }
+  if(Array.isArray(layer.tones))for(const tone of layer.tones){
+   endT=Math.max(endT,Math.max(0,+tone.delay||0)+Math.max(.01,+tone.duration||.08)+.06);
+  }
+  if(Array.isArray(layer.noise))for(const burst of layer.noise){
+   endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
+  }
+  return delay+endT;
+ },
+ cueScheduledDuration(cue={}){
+  if(Number.isFinite(+cue.scheduledDuration)&&+cue.scheduledDuration>0)return +cue.scheduledDuration;
+  if(Number.isFinite(+cue.clipDuration)&&+cue.clipDuration>0)return +cue.clipDuration;
+  if(Array.isArray(cue.layers)&&cue.layers.length)return Math.max(...cue.layers.map(layer=>this.cueLayerDuration(layer)));
+  return 0;
+ },
+ playSyntheticLayer(layer={},allowIdle=0){
+  const delay=Math.max(0,+layer.delay||0);
+  if(Array.isArray(layer.seq)&&layer.seq.length){
+   const step=Math.max(.01,+layer.step||.05);
+   for(let i=0;i<layer.seq.length;i++)if(layer.seq[i]>0)this.play(layer.seq[i],step,layer.wave||'square',layer.volume||.02,layer.slide||0,0,layer.lpHz||3600,layer.hpHz||0,delay+(i*step*.92),allowIdle);
+  }
+  if(Array.isArray(layer.tones))for(const tone of layer.tones){
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.hpHz||0,delay+Math.max(0,+tone.delay||0),allowIdle,tone.attack,tone.singleOscillator||tone.single);
+  }
+  if(Array.isArray(layer.noise))for(const burst of layer.noise){
+   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,delay+Math.max(0,+burst.delay||0),allowIdle);
+  }
+ },
+ playLayeredCue(name,cue={},opts={},cueEntry=null,allowIdle=0){
+  const layers=Array.isArray(cue.layers)?cue.layers.filter(Boolean):[];
+  if(!layers.length)return;
+  if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
+  const cooldown=Math.max(0,+cue.cooldownMs||0);
+  const cooldownKey=`__cue__:${String(name||'')}`;
+  const now=performance.now();
+  const lastAt=+this.referenceCooldowns[cooldownKey]||0;
+  if(cooldown&&!opts.force&&lastAt&&(now-lastAt)<cooldown){
+   this.recordReferenceBlocked('cooldown',layers.find(layer=>layer.referenceClip)?.referenceClip||'',Object.assign({},opts,{cueEntry,remainingMs:cooldown-(now-lastAt)}));
+   return;
+  }
+  if(cooldown)this.referenceCooldowns[cooldownKey]=now;
+  this.logCueEvent(cueEntry);
+  for(const layer of layers){
+   if(layer.referenceClip){
+    this.playReferenceClip(layer.referenceClip,{
+     allowIdle,
+     volume:Number.isFinite(+layer.referenceVolume)?+layer.referenceVolume:(Number.isFinite(+cue.referenceVolume)?+cue.referenceVolume:1),
+     cooldownMs:0,
+     clipStart:layer.clipStart,
+     clipDuration:layer.clipDuration,
+     delay:layer.delay,
+     force:true,
+     cueEntry,
+     suppressCueLog:true
+    });
+   }else{
+    this.playSyntheticLayer(layer,allowIdle);
+   }
+  }
+ },
  playCue(name,opts={}){
   if(DOCS_PREVIEW_MODE&&!opts.docsPreview)return;
   const cue=this.cueDef(name,opts);
   if(!cue)return;
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
   const cueEntry=window.__platinumAudioDebug.lastCue||null;
+  if(Array.isArray(cue.layers)&&cue.layers.length){
+   this.playLayeredCue(name,cue,opts,cueEntry,allowIdle);
+   return;
+  }
   if(cue.referenceClip){
    if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
    this.playReferenceClip(cue.referenceClip,{
@@ -734,10 +813,11 @@ const sfx={
   }
   this.referenceCooldowns[clip]=now;
   window.__platinumAudioDebug.reference.lastRequested=clip;
-  this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
+  if(!opts.suppressCueLog)this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
   const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
   const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
+  const delay=Math.max(0,Number.isFinite(+opts.delay)?+opts.delay:0);
   this.loadReferenceBuffer(clip).then(buffer=>{
    if(!buffer)return;
    if(audioMuted){
@@ -757,9 +837,10 @@ const sfx={
     source.__clipDuration=clipDuration;
       source.connect(gain);
       gain.connect(this.bus);
-      if(clipDuration>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
-      else if(clipStart>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
-      else source.start();
+      const startAt=A.currentTime+delay;
+      if(clipDuration>0)source.start(startAt,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
+      else if(clipStart>0)source.start(startAt,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
+      else source.start(startAt);
       this.referenceActive.push(source);
       window.__platinumAudioDebug.reference.lastStarted=clip;
       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
@@ -768,7 +849,8 @@ const sfx={
        cue:String(opts?.cueEntry?.cue||'').trim(),
        clipStart,
        clipDuration,
-       at:+(performance.now()/1000).toFixed(3),
+       delay,
+       at:+((performance.now()/1000)+delay).toFixed(3),
        activeCount:this.referenceActive.length
       }));
       if(window.__platinumAudioDebug.reference.startedHistory.length>32)window.__platinumAudioDebug.reference.startedHistory.shift();

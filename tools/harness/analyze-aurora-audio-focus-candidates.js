@@ -484,6 +484,45 @@ const CUE_CONFIGS = {
           clipStart: .02,
           clipDuration: 1.04
         }
+      },
+      {
+        id: 'segmented-loss-body-dip',
+        label: 'Segmented loss body dip',
+        spec: {
+          cooldownMs: 1800,
+          scheduledDuration: .97,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1, clipStart: .02, clipDuration: .39, delay: 0 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .82, clipStart: .459, clipDuration: .33, delay: .45 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .96, clipStart: .858, clipDuration: .13, delay: .84 }
+          ]
+        }
+      },
+      {
+        id: 'segmented-loss-body-guarded',
+        label: 'Segmented loss body guarded',
+        spec: {
+          cooldownMs: 1800,
+          scheduledDuration: 1.02,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1, clipStart: .02, clipDuration: .43, delay: 0 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .88, clipStart: .459, clipDuration: .37, delay: .47 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1.02, clipStart: .858, clipDuration: .13, delay: .89 }
+          ]
+        }
+      },
+      {
+        id: 'segmented-loss-tail-forward',
+        label: 'Segmented loss tail forward',
+        spec: {
+          cooldownMs: 1800,
+          scheduledDuration: .95,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .96, clipStart: .02, clipDuration: .36, delay: 0 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: .78, clipStart: .459, clipDuration: .31, delay: .42 },
+            { referenceClip: 'assets/reference-audio/galaga3-death.m4a', referenceVolume: 1.12, clipStart: .858, clipDuration: .13, delay: .82 }
+          ]
+        }
       }
     ],
     keeper: { risk: .25, segment: .35, duration: .12, acceptableDuration: .1, centroidWorsenHz: 90, bandWorsen: .045 },
@@ -1062,9 +1101,76 @@ function aggregateSegmentRoles(group){
 }
 
 function scheduledCueDurationSeconds(row){
+  const scheduledSpecDuration = specScheduledDurationSeconds(row.spec);
+  if(Number.isFinite(scheduledSpecDuration) && scheduledSpecDuration > 0) return scheduledSpecDuration;
   const specDuration = Number(row.spec?.clipDuration);
   if(row.spec?.referenceClip && Number.isFinite(specDuration) && specDuration > 0) return round(specDuration, 3);
   return round(row.activeMetrics?.duration_s, 3);
+}
+
+function specScheduledDurationSeconds(spec = {}){
+  spec = spec || {};
+  if(Number.isFinite(+spec.scheduledDuration) && +spec.scheduledDuration > 0) return round(+spec.scheduledDuration, 3);
+  if(Number.isFinite(+spec.clipDuration) && +spec.clipDuration > 0) return round(+spec.clipDuration, 3);
+  if(Array.isArray(spec.layers) && spec.layers.length){
+    const ends = spec.layers.map(layer => {
+      const delay = Math.max(0, +layer.delay || 0);
+      if(layer.referenceClip){
+        const duration = Number.isFinite(+layer.clipDuration) && +layer.clipDuration > 0 ? +layer.clipDuration : 4;
+        return delay + duration;
+      }
+      let endT = .12;
+      if(Array.isArray(layer.seq) && layer.seq.length){
+        const step = Math.max(.01, +layer.step || .05);
+        endT = Math.max(endT, ((layer.seq.length - 1) * step * .92) + step + .06);
+      }
+      if(Array.isArray(layer.tones))for(const tone of layer.tones){
+        endT = Math.max(endT, Math.max(0, +tone.delay || 0) + Math.max(.01, +tone.duration || .08) + .06);
+      }
+      if(Array.isArray(layer.noise))for(const burst of layer.noise){
+        endT = Math.max(endT, Math.max(0, +burst.delay || 0) + Math.max(.01, +burst.duration || .08) + .04);
+      }
+      return delay + endT;
+    });
+    return round(Math.max(...ends), 3);
+  }
+  return null;
+}
+
+function analysisWindowForCapture(result = {}, spec = {}){
+  spec = spec || {};
+  const prerollMs = Number(result.capturePrerollMs);
+  const specDuration = specScheduledDurationSeconds(spec);
+  const cueDuration = Number(result.audioCue?.referenceClipDuration);
+  const duration = Number.isFinite(specDuration) && specDuration > 0
+    ? specDuration
+    : Number.isFinite(cueDuration) && cueDuration > 0
+      ? cueDuration
+      : null;
+  if(!Number.isFinite(prerollMs) || !Number.isFinite(duration) || duration <= 0) return null;
+  return {
+    start_s: round(prerollMs / 1000, 3),
+    duration_s: round(duration, 3),
+    source: 'captured-cue-preroll-and-scheduled-cue-duration'
+  };
+}
+
+function referenceAnalysisWindow(set = {}){
+  const segments = set?.referenceSegmentation?.segments || [];
+  const starts = segments.map(segment => Number(segment.startSeconds ?? segment.start_s)).filter(Number.isFinite);
+  const ends = segments.map(segment => Number(segment.endSeconds ?? segment.end_s)).filter(Number.isFinite);
+  if(starts.length && ends.length){
+    const start = Math.min(...starts);
+    const end = Math.max(...ends);
+    if(end > start){
+      return {
+        start_s: round(start, 3),
+        duration_s: round(end - start, 3),
+        source: 'curated-reference-segmentation-span'
+      };
+    }
+  }
+  return null;
 }
 
 function referenceCompositeDurationSeconds(row){
@@ -1566,11 +1672,17 @@ async function analyzeCue(key, generatedAt, rootDir){
 
   const manifestItems = captures.map(capture => {
     const files = sampleFiles.get(capture.sampleId);
+    const baselineAnalysisWindow = analysisWindowForCapture(baselineCapture.result, baselineCapture.row.spec || {});
     return {
       id: capture.sampleId,
       label: capture.row.label,
       focus: `Candidate comparison for ${config.title}.`,
       cue: config.cue,
+      analysisPolicy: config.lossComposite ? {
+        activeMetricsSource: 'analysisWindow',
+        eventSegmentationSource: 'analysisWindow',
+        reason: 'Composite loss cues need onset/body/tail scoring over the scheduled cue window, not only the single loudest active island.'
+      } : null,
       aurora: {
         label: capture.row.label,
         wav: rel(files.wav, cueDir),
@@ -1581,19 +1693,28 @@ async function analyzeCue(key, generatedAt, rootDir){
           byteLength: capture.result.byteLength || null,
           captureMs: capture.result.captureMs || null,
           capturePrerollMs: capture.result.capturePrerollMs || null
-        }
+        },
+        analysisWindow: analysisWindowForCapture(capture.result, capture.row.spec || {})
       },
       galaga: {
         label: 'Current Aurora baseline',
         wav: rel(baselineFiles.wav, cueDir),
         webm: rel(baselineFiles.webm, cueDir),
-        audioCue: baselineCapture.result.audioCue || null
+        audioCue: baselineCapture.result.audioCue || null,
+        capture: {
+          attempt: baselineCapture.result.attempt || null,
+          byteLength: baselineCapture.result.byteLength || null,
+          captureMs: baselineCapture.result.captureMs || null,
+          capturePrerollMs: baselineCapture.result.capturePrerollMs || null
+        },
+        analysisWindow: baselineAnalysisWindow
       },
       reference: {
         label: set.referenceLabel || `${config.title} Reference`,
         source: rel(referenceSource),
         wav: rel(referenceWav, cueDir),
         window: set.referenceWindow || null,
+        analysisWindow: referenceAnalysisWindow(set),
         segmentation: set.referenceSegmentation || null
       }
     };
@@ -1605,6 +1726,11 @@ async function analyzeCue(key, generatedAt, rootDir){
     commit,
     version: require(path.join(ROOT, 'package.json')).version,
     cue: config.cue,
+    analysisPolicy: config.lossComposite ? {
+      activeMetricsSource: 'analysisWindow',
+      eventSegmentationSource: 'analysisWindow',
+      reason: 'Composite loss cues need onset/body/tail scoring over the scheduled cue window, not only the single loudest active island.'
+    } : null,
     items: manifestItems
   }, null, 2)}\n`);
 

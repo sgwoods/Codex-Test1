@@ -1,0 +1,1023 @@
+{
+  "gameKey": "aurora-galaga-reference",
+  "artifactType": "consensus-reference-sprite-pixel-model",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-11",
+  "status": "consensus-source-frame-pixel-model",
+  "generatedBy": "tools/harness/analyze-galaga-reference-sprite-model.js",
+  "sourceEvidence": {
+    "pixelTargets": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json",
+    "sourceFrameCount": 4,
+    "sourceFrames": [
+      "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+      "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png",
+      "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+      "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png"
+    ],
+    "note": "Models are inferred from exact source-frame targets plus similar lit components harvested from the ingested reference frame set."
+  },
+  "targets": [
+    {
+      "id": "galaga-player-fighter-model",
+      "sourceTargetId": "galaga-player-fighter",
+      "role": "player-fighter",
+      "catalogKeys": [
+        "player-fighter"
+      ],
+      "label": "Inferred Galaga player fighter model",
+      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-player-fighter-model.png",
+      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
+      "logicalGrid": {
+        "cols": 36,
+        "rows": 36
+      },
+      "displayScale": 4,
+      "modelKind": "consensus-from-source-frame-components",
+      "sampleCount": 8,
+      "averageConfidence": 0.8433,
+      "rows": [
+        "....................................",
+        "....................................",
+        "....................................",
+        "..................WC................",
+        "..................WW................",
+        "..................WW................",
+        "..................WM................",
+        "...............MWWWWWW..............",
+        "...............WWWWWWW..............",
+        "..............GWWWWWWW..............",
+        "...............WWWWWWW..............",
+        "...............WWWWWWW..............",
+        "........RRR....WWWWWWW....RRR.......",
+        "........RRRR...WWWWWWW...RRRR.......",
+        "........RRRR...WWWWWWW...RRRRR......",
+        "........RRRR...WWCRCWWG..RRRR.......",
+        "...RRR..RRRR.WWWWRRRWWWWWRRRR...RR..",
+        "...RRR..RRRW.WWWWRRRWWWWWCYYR...RR..",
+        "...RRR..GGBBBCCRYRRRRYWWBBBBW..RRR..",
+        "...RRR..GGBBBBCYRRRRRRCWBBBBW..RRR..",
+        "...RRC..BBBBBRRRRRYRRRRWBBBBB..RRR..",
+        "...RRC..BBBBBCRRRRYRRRRWBBBBB..RRR..",
+        "...WWC..BBBBGCCYRRRRYRRWCBBBB..RCC..",
+        "...WWW..BWWWWCCCWWWWCCCCCWWWW..WWW..",
+        "...WWWWWWWWWCCCCWWWWCCRRWWWWWBBWWW..",
+        "...WWWWWWWWWCCCCCWWWCCRRWWWWWBBWWW..",
+        "...WWWWWWWCRRRRYCCWWWRRRRCCCWWWWWW..",
+        "...WWWWWWWWYRRRYCCWWWRRRRRRRWWWWWW..",
+        "...WWWWWWRWRRRRYRWWWRRRRRRYRWWWWWW..",
+        "...WWWWWWRWRRRRYRWWWWRRRRRYRWWWWWW..",
+        "...WWWWWW..RRRRR.RWWWRRRRRRRWWWWWW..",
+        "...WWWWWM..RRRR..WWC..RRRR...WWWWW..",
+        "...WWW...........WWW...........MWW..",
+        "...WWW...........WWW...........MWW..",
+        ".....M............M.............MM..",
+        "...................................."
+      ],
+      "confidenceRows": [
+        "HHHHHHHHHHHHHHMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHMHLMHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHMHLMHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHMHLMHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHMHLMHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHLMMHMMLHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHMLMHHHMLMHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHLMHHHHHMMHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHMMHHHHHHMHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHMHHHHHHMHHHHHHHHHHHHH",
+        "HHHHHHHHLHHMHHHMHHHHHHMHHMHHLMMHHHHH",
+        "HHHHHHHHLHHLHHHMHHHHHHMHHLHHLMMHHHHH",
+        "HHHHHHHHLHHLHHHMHHHHHHMHHLHHLLMHHHHH",
+        "HHHHHHHHLHHLHHHMLLMLLLLMHLHHLHHHHHHH",
+        "HHHLLLHHLHHLHMHHLLLLLLMMLLLLMMHMLLHH",
+        "HHHLLLHHLMMLHMHHLLLLLLHHLLLLMMHMLLHH",
+        "HHHHHMHHLMLMMLLMLLHHLLLLLLMLLMHMHHHH",
+        "HHHHHMHHLMMHHLLMHHHHHMLLMHHMLMHMHHHH",
+        "HHHLLLHHLHHHMLMMHMLHHHLLLHHHLHHLHHHH",
+        "HHHLLLHHLMHHLLMHHMLHHHMLLHHHLHHMHMHH",
+        "HHHLLLHHLMHMMMLMMHHLLMLLLLHHMHHLLLHH",
+        "HHHLMLMMLLLMLHHMLMMLMMMLLMLLLMHLMMHH",
+        "HHHMMHLLLLLMLMMLLMHMLLLMLMLLMLLMHHHH",
+        "HHHMMHLLLLLMLMMMLMHMMMLMLMLLMLLMHHHH",
+        "HHHMMHHHHMLLHHHLLLMMLMHHMMLLHHHHHHHH",
+        "HHHLMHHHHLLLHHHLLLMMLLHHHLMLHHHHHHHH",
+        "HHHLMHHHMLLLHHHLLLMMLLHHHMLLLMHHHHHH",
+        "HHHLMHHHMLLMHHHLLLMMLLHHHHLLLHHHHHHH",
+        "HHHMMHHHLMMMHHHMMLMLLLHHHMLMLMHHHHHH",
+        "HHHMMHHMLHHMHHMHHLHLMHMHHMMHMMHHHHHH",
+        "HHHMMLMHHHHHHHHHHLHLMHHHHHHHHHHLMMHH",
+        "HHHMMLHHHHHHHHHHHLHLMHHHHHHHHHHLMMHH",
+        "HHHHHLHHHHHHHHHHHMLMHHHHHHHHHHHMLLHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      ],
+      "palette": {
+        "B": "#3884ff",
+        "C": "#26e4e8",
+        "G": "#40de67",
+        "M": "#c65cff",
+        "R": "#ff3a30",
+        "W": "#f4f8ff",
+        "Y": "#ffda3c"
+      },
+      "metrics": {
+        "width": 36,
+        "height": 36,
+        "filledPixels": 574,
+        "fillRatio": 0.4429,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ]
+      },
+      "samples": [
+        {
+          "kind": "seed-pixel-target",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+          "crop": {
+            "sourceWidth": 360,
+            "sourceHeight": 480,
+            "x": 204,
+            "y": 426,
+            "width": 36,
+            "height": 36
+          },
+          "similarityToSeed": 1,
+          "score": 10
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+          "crop": {
+            "x": 208,
+            "y": 426,
+            "width": 29,
+            "height": 31
+          },
+          "similarityToSeed": 0.912,
+          "score": 1.1194
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png",
+          "crop": {
+            "x": 25,
+            "y": 453,
+            "width": 25,
+            "height": 27
+          },
+          "similarityToSeed": 0.8866,
+          "score": 0.9128
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 25,
+            "y": 453,
+            "width": 25,
+            "height": 27
+          },
+          "similarityToSeed": 0.8835,
+          "score": 0.9108
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png",
+          "crop": {
+            "x": 25,
+            "y": 453,
+            "width": 25,
+            "height": 27
+          },
+          "similarityToSeed": 0.8827,
+          "score": 0.9106
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png",
+          "crop": {
+            "x": 102,
+            "y": 453,
+            "width": 26,
+            "height": 27
+          },
+          "similarityToSeed": 0.8935,
+          "score": 0.8995
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 76,
+            "y": 453,
+            "width": 26,
+            "height": 27
+          },
+          "similarityToSeed": 0.8688,
+          "score": 0.8983
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png",
+          "crop": {
+            "x": 154,
+            "y": 453,
+            "width": 25,
+            "height": 27
+          },
+          "similarityToSeed": 0.8681,
+          "score": 0.897
+        }
+      ],
+      "note": "Consensus model inferred from aligned source-frame component candidates; use confidence rows before treating any cell as canonical."
+    },
+    {
+      "id": "galaga-dual-fighter-model",
+      "sourceTargetId": "galaga-dual-fighter",
+      "role": "dual-fighter",
+      "catalogKeys": [
+        "dual-fighter",
+        "rogue-fighter"
+      ],
+      "label": "Inferred Galaga dual-fighter model",
+      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
+      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "logicalGrid": {
+        "cols": 54,
+        "rows": 42
+      },
+      "displayScale": 4,
+      "modelKind": "consensus-from-source-frame-components",
+      "sampleCount": 1,
+      "averageConfidence": 1,
+      "rows": [
+        "......................................................",
+        "......................................................",
+        "......................................................",
+        "..................WM......................WC..........",
+        "..................WW......................WW..........",
+        "..................WW......................WW..........",
+        "..................WW......................WW..........",
+        "..................WW......................WW..........",
+        "..................WW......................WW..........",
+        "................MWWWW...................MWWWW.........",
+        "................WWWWW...................CWWWWM........",
+        "................WWWWW...................CWWWWM........",
+        "................WWWWW...................CWWWWM........",
+        "............R...WWWWW...................CWWWWM........",
+        "...........RR...WWWWW...RR..........RR..CWWWWM..RR....",
+        "...........RRR..WWWWW...RR..........RR..MWWWWM..RR....",
+        "...........RRR..WWWWW...RR..........RR..MWWWWM..RR....",
+        "...........RRR..WWWWWM..RR.........RRR..CWWWWM..RR....",
+        "...........MW..GWWCCWWB.MW.........MWM.BWWCCWWG.MW....",
+        "...........CWMBBWWCCWWB.WW.........MWMBBWWCCWWBBWW....",
+        "......RRR..GGBBBRRRRCCBBBB...RRRR..GGBBBCCRRCCBBBG...R",
+        "......RR...BBBBBYRRRYRBBBB...RRRR...BBBBRRRRYRBBBB...R",
+        "......RR...BBBBBYRRRYRBBBB...RRRR...BBBBRRRRYRBBBB...R",
+        ".......RR..BBBWWRRRRRRWWBB...RRRR...BBWWYRRRRYWWBB...R",
+        "......RRR..BBBWWRRRYRRWWBB...YRRR..BBBWWYRYYRYWWBB...Y",
+        ".......WG.GWWWWWRYWWYRWWWWB..WWWC.MWWWWWRRCCYRWWWWC..W",
+        ".......WG.WWWWWWCCWWCCWWWWWW.WWWM.WWWWWWCCCCCCWWWWWW.W",
+        ".......WG.WWWWWWCCWWCCWWWWWW.WWWM.WWWWWWCCCCCCWWWWWW.W",
+        ".......WWWWWWWRRRCWWRYYRWWWWWWWWWWWWWWRRRRGGRRYRWWWWWW",
+        ".......WWWWWWWRRRCWGRRRRWWWWWWWWWWWWWWRRYCGGRRRRWWWWWW",
+        ".......WWWWW.RRRRCGGCRRRRRWWWWWWWWWW.RRRYCGGCYRRR.WWWW",
+        ".......WWWWG.RRRYRGGYRRRR.WWWWWWWWWG.RRRRYGGYRRR..CWWW",
+        ".......WWWWG.RRRYRGGYRRRR.WWWWWWWWWG.RRRRYGGYRRR..CWWW",
+        ".......WWW...RRR..WW.RRRR..BWWWWWW...RRRR.GG.RRRR...WW",
+        ".......WWM....RR..WW..RR....MWWWWM....RR..GG..RR....BW",
+        ".......WM.........WW.........WWWM.........WW.........W",
+        "...MW.................................................",
+        "...MW.................................................",
+        "...CW.................................................",
+        "...CW.................................................",
+        "..WWWWC...............................................",
+        "..WWWWW..............................................."
+      ],
+      "confidenceRows": [
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      ],
+      "palette": {
+        "B": "#3884ff",
+        "C": "#26e4e8",
+        "G": "#40de67",
+        "M": "#c65cff",
+        "R": "#ff3a30",
+        "W": "#f4f8ff",
+        "Y": "#ffda3c"
+      },
+      "metrics": {
+        "width": 54,
+        "height": 42,
+        "filledPixels": 830,
+        "fillRatio": 0.366,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ]
+      },
+      "samples": [
+        {
+          "kind": "seed-pixel-target",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png",
+          "crop": {
+            "sourceWidth": 360,
+            "sourceHeight": 480,
+            "x": 162,
+            "y": 418,
+            "width": 54,
+            "height": 42
+          },
+          "similarityToSeed": 1,
+          "score": 10
+        }
+      ],
+      "note": "Consensus model inferred from aligned source-frame component candidates; use confidence rows before treating any cell as canonical."
+    },
+    {
+      "id": "galaga-zako-dive-model",
+      "sourceTargetId": "galaga-zako-dive",
+      "role": "zako-scout",
+      "catalogKeys": [
+        "bee-line"
+      ],
+      "label": "Inferred Galaga Zako scout model",
+      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
+      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "logicalGrid": {
+        "cols": 36,
+        "rows": 36
+      },
+      "displayScale": 4,
+      "modelKind": "consensus-from-source-frame-components",
+      "sampleCount": 3,
+      "averageConfidence": 0.9214,
+      "rows": [
+        "....................................",
+        "....................................",
+        "....................................",
+        "............BBB.....................",
+        "............BBB.....................",
+        "............BBB.....................",
+        "............BBB.....................",
+        "...............BBB........BBBBB.....",
+        "...........G...BBB.......BBBBBBB....",
+        "...........G...BBB.......BBBBBBB....",
+        ".........RRYRRR...BBBBBBBBBBBBBBBB..",
+        ".....MYYMYYYRRRWGGBBBBBBBBBBBBBBBB..",
+        ".....MYYYYYRRYYYYYBBBBBBBBBBBBBBBB..",
+        ".....MYYYYYRRYYYYYBBBBBBBBBBBBBBBB..",
+        "......RRRYYYYYYYYYBBBB..BB..BBB.....",
+        "......RRRYYYYYYYYYRRRRRRG....BB.....",
+        ".....YCCRYYYYYYYYYRRRYCCG...........",
+        ".....YCCRYYYYYYYYYRRRYCCG...........",
+        "......BBBGGCYYYRRRRYYYYYRR..........",
+        "........BGGYYYYRRRRYYYYYYR..........",
+        "...BBBBB.BBBBBBBBBRYYYRRRR..........",
+        "...BBBBB.BBBBBBBBBRYYYRRRR..........",
+        "...BBBBB...BBBBBBBRYYRRRRR..........",
+        "............BBBBBB...RRR............",
+        "............BBBBBBB...RR............",
+        "............BBBBBBB...RR............",
+        "............BBBBBBB.................",
+        "............BBBBBBB.................",
+        "............BBBBBBBBB...............",
+        "............BBBBBBBBB...............",
+        "............BBBBBBBBBB..............",
+        ".............BBBBBBBBB..............",
+        "...............BBBBBBB..............",
+        "...............BBBBBBB..............",
+        "....................................",
+        "...................................."
+      ],
+      "confidenceRows": [
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHMMMHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHMMMHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHMMMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHMHMMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHMMHMMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHMMHMMHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHMMHMMHHHHHHHHMMMMMHHHHH",
+        "HHHHHHHHHHHMMMMHMMHHHHHHHMMMMMMMHHHH",
+        "HHHHHHHHHHHMMMMHMMHHHHHHHMMMMMMMHHHH",
+        "HHHHHHHHHMHMMMMHHHHHHHHHHHHHHHHHHMHH",
+        "HHHHHMMMMMMHMMMMHHHHHHHHHHHHHHHHHMHH",
+        "HHHHHMMMMMMMMHHHMMHHHHHHHHHHHHHHHMHH",
+        "HHHHHMMMMMMHHHHHHHMMMHHHHHHHHHHHHMHH",
+        "HHHHHHMHHMMMMHHHHHMMMHMMHHMMHHHMMHHH",
+        "HHHHHMMMMHHHHHHHHHMHHMMMMHHHHMMHHHHH",
+        "HHHHHMMMMHHHHHHHHHHHHMMMMMMHHHHHHHHH",
+        "HHHHHMMMMHHHHHHHHHHHHMMMMMMHHHHHHHHH",
+        "HHHHHHMMMMMMMHHMMMHMMMHHMMMMMHHHHHHH",
+        "HHHHHHHHMMMMMHHMMMHMMMHHHMMMMMHHHHHH",
+        "HHHMMMMMMMMMMMMMMMHMMMMMMMMMMMHHHHHH",
+        "HHHMMMMMMMMMMMMMMMHMMMMMMMMMMMHHHHHH",
+        "HHHMMMMMMMMMMHHHHHMMMHMMMMMMMHHHHHHH",
+        "HHHHHHHHMMMHMHHHHHHHHHMMMMMMMHHHHHHH",
+        "HHHHHHHHMMHHMHHHHHHHHMHHMMMMMHHHHHHH",
+        "HHHHHHHHMMHHMHHHHHHHHMHHMMMMMHHHHHHH",
+        "HHHHMMMMHHHHMHHHHHHMMHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHMHHHHHHMMMMMMMMMMHMMMHHH",
+        "HHHHHHHHHHHHMHHHHHHHHMMMMMMMMHMMMHHH",
+        "HHHHHHHHHHHHMMMMMMHHHMMMMMMMMHMMMHHH",
+        "HHHHHHHHHHHHMMMMMMMMMHMMMMMMMHHHHHHH",
+        "HHHHHHHHHHHHHMMMMMMMMHMMMMMMMHHHHHHH",
+        "HHHHHHHHHHHHHHHMMMMMMHMMMMMHHHHHHHHH",
+        "HHHHHHHHHHHHHHHMMMMMMMHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      ],
+      "palette": {
+        "B": "#3884ff",
+        "C": "#26e4e8",
+        "G": "#40de67",
+        "M": "#c65cff",
+        "R": "#ff3a30",
+        "W": "#f4f8ff",
+        "Y": "#ffda3c"
+      },
+      "metrics": {
+        "width": 36,
+        "height": 36,
+        "filledPixels": 427,
+        "fillRatio": 0.3295,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ]
+      },
+      "samples": [
+        {
+          "kind": "seed-pixel-target",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "sourceWidth": 360,
+            "sourceHeight": 480,
+            "x": 38,
+            "y": 156,
+            "width": 36,
+            "height": 36
+          },
+          "similarityToSeed": 1,
+          "score": 10
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 40,
+            "y": 165,
+            "width": 25,
+            "height": 27
+          },
+          "similarityToSeed": 1,
+          "score": 1.26
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 151,
+            "y": 196,
+            "width": 23,
+            "height": 23
+          },
+          "similarityToSeed": 0.8079,
+          "score": 1.0189
+        }
+      ],
+      "note": "Consensus model inferred from aligned source-frame component candidates; use confidence rows before treating any cell as canonical."
+    },
+    {
+      "id": "galaga-butterfly-escort-model",
+      "sourceTargetId": "galaga-butterfly-escort",
+      "role": "butterfly-escort",
+      "catalogKeys": [
+        "but-line"
+      ],
+      "label": "Inferred Galaga butterfly escort model",
+      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
+      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "logicalGrid": {
+        "cols": 34,
+        "rows": 34
+      },
+      "displayScale": 4,
+      "modelKind": "consensus-from-source-frame-components",
+      "sampleCount": 7,
+      "averageConfidence": 0.8989,
+      "rows": [
+        "..................................",
+        "..................................",
+        "..................................",
+        "..................................",
+        "....RRRR...................RRRR...",
+        "....RRRR...................RRRR...",
+        "....RRRR.....BBBB..BBB.....RRRR...",
+        "....RRRR....BMMRR.RRRM.....RRRR...",
+        "....RRRR....BMMRR.RRRM.....RRRR...",
+        "....RRRR.RRWWMMRCCCCRRWWWW.RRRR...",
+        "....RRRR.RRWWMMRRCCRRRWWWW.RRRR...",
+        "....RRRR.RRCCYYYYCRRYYWWWW.RRRR...",
+        "....RRRR.RRCCCCCCRRRCCWWWW.RRRR...",
+        "....RRRR.RRWCCCCCRRRCCCWWR.RRRR...",
+        "....RRRRRRRRYRRGGGWWWRRRRRRRRRR...",
+        "....RRRRRRRRRRRGGGWWWRRRRRRRRRR...",
+        "....RRRRRRRRRRRGBGWWWRRRRRRRRRR...",
+        "........RRRRRRBBBBBBBBRRRRR.......",
+        "........RRRRRRBBBBBBBBRRRRR.......",
+        "........RRRRRRBBBBBBBBRRRRR.......",
+        "........RRRRRRBBBBBBBBRRRRR.......",
+        "....RRRRRRRRRRBBBBBBBBRRRRRRRRR...",
+        "....RRRRRRRRRRBBBBBBBBRRRRRRRRR...",
+        "....RRRRRRRRRRRBBBBBBBRRRRRRRRR...",
+        "....RRRRRRRRRRBGGBBBBBRRRRRRRRR...",
+        "....RRRRRRRRRRBBGBBBBBRRRRRRRRR...",
+        "....RRRRRRRR.RBBBBBBBBRRRRRRRRR...",
+        "....RRRRRRRR.RBBBBBBBBRRRRRRRRR...",
+        "....RRRRRRR..BBBBBBBBB...RRRRRR...",
+        "....RRRRRRR.....BBBB.....RRRRRR...",
+        "....RRRRRRR......BBB.....RRRRRR...",
+        "..................................",
+        "..................................",
+        ".................................."
+      ],
+      "confidenceRows": [
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHMHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHMHHHHHHH",
+        "HHHHHHHHHHHHHMHHLHHLHLHHHHMHHHHHHH",
+        "HHHHHHHHHHHHLMMLLMMMLLMHHHMHHHHHHH",
+        "HHHHHHHHHHHHLMMLLMMMLLMHHHMHHHHHHH",
+        "HHHHHHHMHLLHMLMLLHMLLLLMMLHHHHHHHH",
+        "HHHHHHHMHLLMLLMLLMMLLLLHMLHHHHHHHH",
+        "HHHHHHHMHLLLLLHHLMMMMLLHMLHMHHHHHH",
+        "HHHHHHHMHLLLMHHHHMMHMMLHMLHHHHHHHH",
+        "HHHHHHHHMLLLMHMMMLLMMMLMMLMHHHHHHH",
+        "HHHHHHHHHHHMLMLLLMLLLLMMHHHHHHHHHH",
+        "HHHHHHHHHHHMLMLLLMLLLMHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHMMLLLLLLLHHHHHHHHHHHH",
+        "HHHHHHHMHHHHMLMHHHHHHMMHHHMMHHHHHH",
+        "HHHHHHHMHHHHMLMHHHHHHMMHHHMMHHHHHH",
+        "HHHHHHHMHHHHMLMHHHHHHMMHHHMMHHHHHH",
+        "HHHHMMMMHHHHMLMHHHHHHMMHHHMMMHHHHH",
+        "HHHHHHHHHHHHMLLMHHHHHMMHHHHHHMMHHH",
+        "HHHHHHHHHHHHMLLMHHHHHMMHHHHHHMMHHH",
+        "HHHHHHHHHHHHMLLMHHHHMMMHHHHHHHHHHH",
+        "HHHHHHHHHHHHMLLMMHHMMMLHHHHHHHHHHH",
+        "HHHHHHHHHHHHMLMLMHHHHMLMHHHHHHHHHH",
+        "HHHHHHHHHHHLMLMHHHHHHMLMHHHHHHHHHH",
+        "HHHHHHHHHHHLMLMHHHHHHMLMHHHHHHHHHH",
+        "HHHHHHHHHHHHHLHHHHHHHLHHMMHHHHHHHH",
+        "HHHHHHHHHHHHHHHHLHHMHHHHMMHHHHHHHH",
+        "HHHHHHHHHHMHHHHHMMMLHHHHMMHHHMMHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      ],
+      "palette": {
+        "B": "#3884ff",
+        "C": "#26e4e8",
+        "G": "#40de67",
+        "M": "#c65cff",
+        "R": "#ff3a30",
+        "W": "#f4f8ff",
+        "Y": "#ffda3c"
+      },
+      "metrics": {
+        "width": 34,
+        "height": 34,
+        "filledPixels": 589,
+        "fillRatio": 0.5095,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ]
+      },
+      "samples": [
+        {
+          "kind": "seed-pixel-target",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "sourceWidth": 360,
+            "sourceHeight": 480,
+            "x": 74,
+            "y": 86,
+            "width": 34,
+            "height": 34
+          },
+          "similarityToSeed": 1,
+          "score": 10
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 78,
+            "y": 90,
+            "width": 19,
+            "height": 20
+          },
+          "similarityToSeed": 1,
+          "score": 1.26
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 205,
+            "y": 90,
+            "width": 19,
+            "height": 20
+          },
+          "similarityToSeed": 0.9775,
+          "score": 1.195
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 130,
+            "y": 90,
+            "width": 18,
+            "height": 20
+          },
+          "similarityToSeed": 0.9637,
+          "score": 1.1769
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "x": 154,
+            "y": 90,
+            "width": 18,
+            "height": 20
+          },
+          "similarityToSeed": 0.9602,
+          "score": 1.1713
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+          "crop": {
+            "x": 240,
+            "y": 270,
+            "width": 20,
+            "height": 21
+          },
+          "similarityToSeed": 0.9109,
+          "score": 0.9577
+        },
+        {
+          "kind": "frame-component",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+          "crop": {
+            "x": 86,
+            "y": 156,
+            "width": 20,
+            "height": 21
+          },
+          "similarityToSeed": 0.8971,
+          "score": 0.9409
+        }
+      ],
+      "note": "Consensus model inferred from aligned source-frame component candidates; use confidence rows before treating any cell as canonical."
+    },
+    {
+      "id": "galaga-command-boss-model",
+      "sourceTargetId": "galaga-command-boss",
+      "role": "command-boss",
+      "catalogKeys": [
+        "boss-line"
+      ],
+      "label": "Inferred Galaga command boss model",
+      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
+      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "logicalGrid": {
+        "cols": 28,
+        "rows": 28
+      },
+      "displayScale": 4,
+      "modelKind": "consensus-from-source-frame-components",
+      "sampleCount": 1,
+      "averageConfidence": 1,
+      "rows": [
+        "...............MG.GG........",
+        "..........BBGGMMGGGGRRGG....",
+        "..........BGGGRRGGRRRRGGG...",
+        "............GGRRGGRRRYGB....",
+        "............GGGGBBGGGGB.....",
+        ".............GGGBBGGGG......",
+        "..........BBGGYYGGGYGGBBB...",
+        "B.........BBGGYYGGYYGGGGG...",
+        "GG......GGBBGGYYYYYYYYBBGG..",
+        "GGB.....GGBBGGYYYYYYYYBBGGG.",
+        "BBGGGGGGGGBBGGYYYYYYYYGGBBBB",
+        "BBGGG.GGGGBB.GYYYYYYYMBGBBBB",
+        "BBGG...GBBBB.MYYYYYYCM.GGGBB",
+        "BB......BBBB..RYR.RR...GGGB.",
+        "GG......BGGB...RR.RR...BGG..",
+        "GG......BGBB...RR.RR...BGG..",
+        "BB......GGBBG.........GGBB..",
+        "BB......GGBBGG.......GGGBB..",
+        "G.........GGGB.......BBBG...",
+        "..........GGGG.......BBB....",
+        "............GGG.....GGB.....",
+        "............GGGG..BBGG......",
+        ".............GGGG.GGGB......",
+        "...............GG.GG........",
+        "...............G..GG........",
+        "............................",
+        "............................",
+        "............................"
+      ],
+      "confidenceRows": [
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      ],
+      "palette": {
+        "B": "#3884ff",
+        "C": "#26e4e8",
+        "G": "#40de67",
+        "M": "#c65cff",
+        "R": "#ff3a30",
+        "W": "#f4f8ff",
+        "Y": "#ffda3c"
+      },
+      "metrics": {
+        "width": 28,
+        "height": 28,
+        "filledPixels": 325,
+        "fillRatio": 0.4145,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "Y"
+        ]
+      },
+      "samples": [
+        {
+          "kind": "seed-pixel-target",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "sourceWidth": 360,
+            "sourceHeight": 480,
+            "x": 120,
+            "y": 62,
+            "width": 28,
+            "height": 28
+          },
+          "similarityToSeed": 1,
+          "score": 10
+        }
+      ],
+      "note": "Consensus model inferred from aligned source-frame component candidates; use confidence rows before treating any cell as canonical."
+    },
+    {
+      "id": "galaga-specialty-dive-model",
+      "sourceTargetId": "galaga-specialty-dive",
+      "role": "specialty-dive",
+      "catalogKeys": [
+        "challenge-dragonfly",
+        "challenge-mosquito"
+      ],
+      "label": "Inferred Galaga specialty dive model",
+      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "logicalGrid": {
+        "cols": 34,
+        "rows": 34
+      },
+      "displayScale": 4,
+      "modelKind": "consensus-from-source-frame-components",
+      "sampleCount": 1,
+      "averageConfidence": 1,
+      "rows": [
+        "................BBBB..............",
+        "................BBBB..............",
+        "....................BBBB..........",
+        "..............GG....BBBB..........",
+        "..............GG....BBBB..........",
+        "............RRYYRRRR....BBBBBBBBBB",
+        "......MMYYMMYYYYRRRRWWGGBBBBBBBBBB",
+        "......MMYYYYYYRRRRYYYYYYBBBBBBBBBB",
+        "......MMYYYYYYRRRRYYYYYYBBBBBBBBBB",
+        "........RRRRYYYYYYYYYYYYBBBBBB..BB",
+        "........RRRRYYYYYYYYYYYYRRRRRRRRGG",
+        "......YYCCRRYYYYYYYYYYYYRRRRYYCCGG",
+        "......YYCCRRYYYYYYYYYYYYRRRRYYCCGG",
+        "........BBBBGGCCYYYYRRRRRRYYYYYYRR",
+        "..........BBGGYYYYYYRRRRRRYYYYYYYY",
+        "....BBBBBB..BBBBBBBBBBBBRRYYYYRRRR",
+        "....BBBBBB..BBBBBBBBBBBBRRYYYYRRRR",
+        "....BBBBBB....BBBBBBBBBBRRYYRRRRRR",
+        "................BBBBBBBB....RRRR..",
+        "................BBBBBBBB....RRRR..",
+        "................BBBBBBBBBB....RR..",
+        "................BBBBBBBBBB........",
+        "................BBBBBBBBBB........",
+        "................BBBBBBBBBB........",
+        "................BBBBBBBBBBBB......",
+        "................BBBBBBBBBBBBBB....",
+        "..................BBBBBBBBBBBB....",
+        "..................BBBBBBBBBBBB....",
+        "....................BBBBBBBBBB....",
+        "..................................",
+        "..................................",
+        "..................................",
+        "..................................",
+        ".................................."
+      ],
+      "confidenceRows": [
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      ],
+      "palette": {
+        "B": "#3884ff",
+        "C": "#26e4e8",
+        "G": "#40de67",
+        "M": "#c65cff",
+        "R": "#ff3a30",
+        "W": "#f4f8ff",
+        "Y": "#ffda3c"
+      },
+      "metrics": {
+        "width": 34,
+        "height": 34,
+        "filledPixels": 490,
+        "fillRatio": 0.4239,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ]
+      },
+      "samples": [
+        {
+          "kind": "seed-pixel-target",
+          "sourceFrame": "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+          "crop": {
+            "sourceWidth": 360,
+            "sourceHeight": 480,
+            "x": 23,
+            "y": 169,
+            "width": 34,
+            "height": 34
+          },
+          "similarityToSeed": 1,
+          "score": 10
+        }
+      ],
+      "note": "Consensus model inferred from aligned source-frame component candidates; use confidence rows before treating any cell as canonical."
+    }
+  ],
+  "summary": {
+    "targetCount": 6,
+    "catalogKeys": [
+      "bee-line",
+      "boss-line",
+      "but-line",
+      "challenge-dragonfly",
+      "challenge-mosquito",
+      "dual-fighter",
+      "player-fighter",
+      "rogue-fighter"
+    ],
+    "totalSamples": 21,
+    "averageConfidence": 0.9439,
+    "weakestModel": "galaga-player-fighter-model"
+  },
+  "nextAuthoringStep": "Compare runtime sprites against these inferred consensus models, then replace or strengthen low-confidence cells with lossless/emulator-derived evidence."
+}

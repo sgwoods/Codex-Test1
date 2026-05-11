@@ -60,6 +60,39 @@ function decodedBytes(result){
   }
 }
 
+function round(value, digits = 3){
+  return Number.isFinite(+value) ? +(+value).toFixed(digits) : null;
+}
+
+function analysisWindowFromCapture(capture){
+  const prerollMs = Number(capture?.capturePrerollMs);
+  const duration = Number(capture?.audioCue?.referenceClipDuration);
+  if(!Number.isFinite(prerollMs) || !Number.isFinite(duration) || duration <= 0) return null;
+  return {
+    start_s: round(prerollMs / 1000, 3),
+    duration_s: round(duration, 3),
+    source: 'captured-cue-preroll-and-runtime-reference-duration'
+  };
+}
+
+function referenceAnalysisWindow(item){
+  const segments = item?.referenceSegmentation?.segments || [];
+  const starts = segments.map(segment => Number(segment.startSeconds ?? segment.start_s)).filter(Number.isFinite);
+  const ends = segments.map(segment => Number(segment.endSeconds ?? segment.end_s)).filter(Number.isFinite);
+  if(starts.length && ends.length){
+    const start = Math.min(...starts);
+    const end = Math.max(...ends);
+    if(end > start){
+      return {
+        start_s: round(start, 3),
+        duration_s: round(end - start, 3),
+        source: 'curated-reference-segmentation-span'
+      };
+    }
+  }
+  return null;
+}
+
 async function captureCueWithRetry(row, cue, opts, label){
   const attempts = Math.max(1, Number(process.env.AURORA_AUDIO_CAPTURE_RETRIES || 3));
   let last = null;
@@ -142,11 +175,19 @@ async function main(){
       label: row.item.label || row.entry.label || row.entry.id,
       focus: row.item.focus || '',
       cue,
+      analysisPolicy: row.item.analysisPolicy || null,
       aurora: {
         label: 'Aurora Application Mix',
         wav: path.relative(outRoot, auroraWav),
         webm: path.relative(outRoot, auroraWebm),
         audioCue: aurora.audioCue || null,
+        capture: {
+          attempt: aurora.attempt || 1,
+          byteLength: aurora.byteLength || 0,
+          captureMs: aurora.captureMs || null,
+          capturePrerollMs: aurora.capturePrerollMs || null
+        },
+        analysisWindow: analysisWindowFromCapture(aurora),
         captureAttempt: aurora.attempt || 1,
         captureBytes: aurora.byteLength || 0
       },
@@ -155,6 +196,13 @@ async function main(){
         wav: path.relative(outRoot, galagaWav),
         webm: path.relative(outRoot, galagaWebm),
         audioCue: galaga.audioCue || null,
+        capture: {
+          attempt: galaga.attempt || 1,
+          byteLength: galaga.byteLength || 0,
+          captureMs: galaga.captureMs || null,
+          capturePrerollMs: galaga.capturePrerollMs || null
+        },
+        analysisWindow: analysisWindowFromCapture(galaga),
         captureAttempt: galaga.attempt || 1,
         captureBytes: galaga.byteLength || 0
       },
@@ -163,6 +211,7 @@ async function main(){
         source: path.relative(ROOT, referenceSource),
         wav: path.relative(outRoot, referenceWav),
         window: referenceWindow,
+        analysisWindow: referenceAnalysisWindow(row.item),
         segmentation: row.item.referenceSegmentation || null
       }
     });
