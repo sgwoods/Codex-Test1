@@ -47,16 +47,26 @@ async function readState(page){
       const style = getComputedStyle(el);
       return !el.hidden && style.display !== 'none' && style.visibility !== 'hidden' && box(el).width > 0 && box(el).height > 0;
     };
+    const scoreCells = Array.from(document.querySelectorAll('#leaderboardPanelTable .scoreCell'));
+    const lastScoreCell = scoreCells[scoreCells.length - 1] || null;
     return {
+      viewport: { width: window.innerWidth, height: window.innerHeight },
       frame: box(document.getElementById('playfieldFrame')),
       statusPanels: box(document.getElementById('statusPanels')),
       settingsPanel: box(document.getElementById('settingsPanel')),
       accountPanel: box(document.getElementById('accountPanel')),
       leaderboardPanel: box(document.getElementById('leaderboardPanel')),
+      leaderboardViews: box(document.getElementById('leaderboardViews')),
       platformMessagePanel: box(document.getElementById('platformMessagePanel')),
       feedbackModal: box(document.getElementById('feedbackModal')),
       helpModal: box(document.getElementById('helpModal')),
       gamePickerModal: box(document.getElementById('gamePickerModal')),
+      leaderboardScoreCellCount: scoreCells.length,
+      leaderboardLastScoreCell: box(lastScoreCell),
+      leaderboardClientHeight: document.getElementById('leaderboardPanel')?.clientHeight || 0,
+      leaderboardScrollHeight: document.getElementById('leaderboardPanel')?.scrollHeight || 0,
+      statusPanelsClientHeight: document.getElementById('statusPanels')?.clientHeight || 0,
+      statusPanelsScrollHeight: document.getElementById('statusPanels')?.scrollHeight || 0,
       settingsOpen: visible('#settingsPanel'),
       accountOpen: visible('#accountPanel'),
       leaderboardOpen: visible('#leaderboardPanel'),
@@ -88,6 +98,15 @@ async function main(){
   }, async ({ page }) => {
     await page.waitForTimeout(250);
     await page.evaluate(() => {
+      const rows = Array.from({ length: 10 }, (_, index) => ({
+        id: `framed-score-${index + 1}`,
+        initials: ['SGW', 'KJE', 'YOU', 'DKA', 'ROL', 'ROB', 'AAA', 'BBB', 'CCC', 'DDD'][index],
+        score: [126960, 122670, 87070, 76770, 61170, 45620, 45610, 44650, 33150, 32480][index],
+        stage: Math.max(1, 14 - index),
+        build: ['1.3.0', '1.2.3', '1.0.2', '1.0.0'][index % 4],
+        at: `2026-05-${String(Math.max(1, 10 - index)).padStart(2, '0')}T12:00:00.000Z`
+      }));
+      if(window.__galagaHarness__) window.__galagaHarness__.seedLocalLeaderboard(rows);
       if(typeof draw === 'function') draw();
     });
 
@@ -104,10 +123,33 @@ async function main(){
 
     await page.locator('#leaderboardDockBtn').click();
     await page.waitForTimeout(180);
+    await page.locator('#leaderboardViewButtons button[data-view="local"]').click();
+    await page.waitForTimeout(180);
     states.leaderboard = await readState(page);
     baseline = assertFramedStatus('leaderboard', states.leaderboard, baseline);
     if(states.leaderboard.platformMessagesOpen || !states.leaderboard.leaderboardOpen || states.leaderboard.accountOpen){
       fail('leaderboard did not replace the existing framed popout cleanly', states.leaderboard);
+    }
+    if(states.leaderboard.leaderboardScoreCellCount < 50){
+      fail('leaderboard framed popout did not render the full top-10 score grid', states.leaderboard);
+    }
+    if(states.leaderboard.leaderboardScrollHeight > states.leaderboard.leaderboardClientHeight + TOLERANCE){
+      fail('leaderboard framed popout requires internal scrolling to see all score rows', states.leaderboard);
+    }
+    if(states.leaderboard.statusPanelsScrollHeight > states.leaderboard.statusPanelsClientHeight + TOLERANCE){
+      fail('leaderboard framed popout and score controls overflow the framed overlay footprint', states.leaderboard);
+    }
+    if(states.leaderboard.statusPanels.top < -TOLERANCE || states.leaderboard.statusPanels.bottom > states.leaderboard.viewport.height + TOLERANCE){
+      fail('leaderboard framed popout requires browser-window scrolling to see the full score panel', states.leaderboard);
+    }
+    if(states.leaderboard.leaderboardLastScoreCell && states.leaderboard.leaderboardViews && states.leaderboard.leaderboardLastScoreCell.bottom > states.leaderboard.leaderboardViews.top - TOLERANCE){
+      fail('leaderboard framed popout hides the final score row behind score view controls', states.leaderboard);
+    }
+    if(states.leaderboard.leaderboardLastScoreCell && states.leaderboard.leaderboardPanel && states.leaderboard.leaderboardLastScoreCell.right > states.leaderboard.leaderboardPanel.right - TOLERANCE){
+      fail('leaderboard framed popout clips the final score column past the panel edge', states.leaderboard);
+    }
+    if(states.leaderboard.leaderboardViews && !rectInside(states.leaderboard.frame, states.leaderboard.leaderboardViews)){
+      fail('leaderboard score view controls escaped the gameplay frame', states.leaderboard);
     }
 
     await page.locator('#accountDockBtn').click();

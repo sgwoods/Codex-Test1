@@ -256,7 +256,8 @@ function syncCabinetShellLayout({
    const framedMinW=Math.min(600,framedMaxW);
    const panelW=Math.max(framedMinW,Math.min(framedMaxW,Math.floor(viewW*.78)));
    const top=Math.floor(oy);
-   const maxHeight=Math.max(180,Math.floor(viewH));
+   const visibleBottom=Math.max(top+180,innerHeight-14);
+   const maxHeight=Math.max(180,Math.min(Math.floor(viewH),Math.floor(visibleBottom-top)));
    statusPanels.style.width=`${panelW}px`;
    statusPanels.style.height=`${maxHeight}px`;
    statusPanels.style.left=`${Math.floor(ox+(viewW-panelW)/2)}px`;
