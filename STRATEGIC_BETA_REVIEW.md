@@ -1,6 +1,6 @@
 # Strategic Beta Review
 
-Updated: May 10, 2026
+Updated: May 11, 2026
 
 This is the maintained expert assessment for whether the project is on track
 near-term and long-term before or after a major hosted `/beta` push. It is
@@ -31,9 +31,11 @@ The review should answer:
 
 ## Current Assessment
 
-Do not move directly to the next hosted `/beta` from the current local state.
-Use `1.3.0.1` as a hosted-dev review increment, then shape the next serious
-beta family around `1.4.0` arcade depth.
+Use the hosted `1.3.0.1` `/dev` lane as the current beta-readiness review
+package. It is now a real review increment, not just a future plan. If the
+bundle is accepted, the beta publish should be requested from `imacm1 /
+iMacM1`, which currently holds release authority. Keep the next larger beta
+family centered on `1.4.0` arcade depth.
 
 Current strengths:
 
@@ -55,9 +57,10 @@ Current risks:
   identity, challenge-stage arrival authenticity, start/wait-mode polish,
   explosion feedback, and visual style.
 - Audio conformance has consumed the largest measured local compute spend while
-  the runtime score remains `7.1/10`; the next audio work should diagnose the
-  scoring/reference/generator problem rather than simply sweeping more pleasant
-  candidates.
+  the runtime score remains the weakest high-value category at `7.3/10`; the
+  latest ship-loss promotion is a real user-visible lift, but the next audio
+  work should still attack calibrated event gaps rather than simply sweeping
+  more pleasant candidates.
 - GPU-equivalent accounting is conceptually correct but still under-instruments
   Codex/model effort. Treat missing model usage as accounting debt, not proof
   that cloud/model compute was irrelevant.
@@ -76,16 +79,17 @@ A beta candidate should have:
 
 ## Next Recommended Investment
 
-Before the next conformance compute cycle, finish the documentation freshness
+Before the next conformance compute cycle, finish the beta-request readiness
 sprint:
 
-- make the public project page show live game-selectable catalog summaries
-  instead of only static cards
-- fix stale Aurora audio cue windows in `application-guide.json` and generated
-  HTML
-- sync the local public-project preview from the current development build
-- add a release preflight check that compares runtime audio cue windows against
-  user-visible documentation
+- keep the detailed `1.3.0.1` release note, public project page, application
+  guide, release dashboard, scorecards, and project guide aligned
+- confirm `npm run build`, documentation freshness, and publish preflight are
+  green from the source repo
+- preserve the beta handoff rule: MacBook may prepare and push source/dev
+  review work, but `imacm1` must perform beta publish unless authority changes
+- record any docs/dashboard suggestions that are not part of the beta bundle as
+  explicit next-plan items
 
 Then return to the highest-value user experience work:
 
@@ -108,4 +112,5 @@ Each major beta push should add a short dated entry below summarizing:
 
 | Date | Candidate / lane | Recommendation | Reason |
 | --- | --- | --- | --- |
+| May 11, 2026 | Hosted `/dev` `1.3.0.1` review line | Prepare beta request, authority-gated | Overall quality is `9.2/10`; audio is up to `7.3/10` with a measured ship-loss cue lift, dashboard/docs/economics are now part of the candidate story, and remaining gaps are understood enough to request a beta publish from `imacm1` if the review accepts the bundle. |
 | May 10, 2026 | Local `1.3.0.1` dev-review preparation | Hold beta; continue hosted-dev and conformance work | Audio remains `7.1/10`, alien/challenge novelty and visual/event feedback remain player-visible gaps, and docs needed freshness checks before a serious beta claim. |

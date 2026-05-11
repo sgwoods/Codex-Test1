@@ -1270,7 +1270,7 @@
       "activity": "Basic formation alien; dives, fires, supplies early pressure, and appears in challenge groups.",
       "presence": "All regular stages and challenge stages.",
       "reference": "Galaga Zako/scout behavior, challenge-stage evidence, and galaga3-zako audio reference.",
-      "score": "8.7/10 behavior",
+      "score": "7.8/10 behavior/stage-role within current alien-entry scorer",
       "confidence": "medium; visual likeness is still low-confidence proxy",
       "next": "Score Aurora displayed sprites against the inferred Galaga consensus models and source-frame pixel targets, then promote lossless/emulator targets when available."
     },
@@ -1280,7 +1280,7 @@
       "activity": "Mid-value formation alien; dives more dangerously, escorts bosses in special attacks, and participates in challenge set pieces.",
       "presence": "All regular stages, with high-value role in stages 4 and later.",
       "reference": "Galaga butterfly/escort behavior through boss/formation grammar and path-family reports.",
-      "score": "8.7/10 behavior; 9.0/10 boss grammar contribution",
+      "score": "7.8/10 behavior/stage-role; 9.2/10 boss grammar contribution",
       "confidence": "medium; visual likeness pending",
       "next": "Run per-role visual scoring against the inferred Galaga consensus model and separate escort-path precision against reference windows."
     },
@@ -1290,7 +1290,7 @@
       "activity": "Two-hit boss; captures player ship, carries captured fighter, leads special attacks, and awards high dive/squadron points.",
       "presence": "All regular stages; capture/rescue and special-attack windows.",
       "reference": "Galaga boss, tractor beam, capture/rescue, boss-hit, and boss-death timing/audio references.",
-      "score": "9.0/10 boss/formation grammar",
+      "score": "9.2/10 boss/formation grammar",
       "confidence": "medium-high for behavior; audiovisual damage feedback still weaker",
       "next": "Improve explosion/damage visual event authenticity and direct boss path precision from extracted reference paths."
     },
@@ -1300,7 +1300,7 @@
       "activity": "Challenge-stage novelty role used to create distinct set pieces and visible learning opportunities.",
       "presence": "Challenge stages 7, 11, and 15 in current evidence windows.",
       "reference": "Galaga challenging-stage specialty waves and bonus-stage composition.",
-      "score": "7.9/10 challenge alien novelty",
+      "score": "7.8/10 challenge alien novelty",
       "confidence": "medium",
       "next": "Promote a challenge-only Galaga target when the ingestion has a clean bonus-stage sheet, then score reward clarity separately."
     },
@@ -1321,7 +1321,7 @@
       "cues": "gameStart, formationArrival, stageTransition",
       "meaning": "Begins run and anchors formation-arrival timing.",
       "reference": "galaga2-game-start, galaga3-level-underscore, galaga-level-flag.",
-      "score": "7.2/10 audio category",
+      "score": "7.3/10 audio category",
       "confidence": "medium",
       "next": "Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow."
     },
@@ -1366,9 +1366,9 @@
       "cues": "playerHit, gameOver",
       "meaning": "Explains ship loss, final loss, and the emotional end of a run without muting the next start.",
       "reference": "galaga3-death and game-over reference windows with onset/body/tail segmentation.",
-      "score": "highest current audio gap; playerHit tail",
+      "score": "measured ship-loss cue promoted; residual playerHit tail is still the highest current segment gap",
       "confidence": "medium-high",
-      "next": "Run tail/body composite modeling plus browser-capture calibration before allowing a runtime audio promotion."
+      "next": "Refine the remaining tail/body fit with composite modeling and browser-capture calibration before attempting another runtime audio promotion."
     },
     {
       "family": "Challenge results",
@@ -1406,7 +1406,7 @@
       "stage": "Stage 7 challenge",
       "summary": "Scorpion cross-sweep challenge set piece.",
       "aspects": "New trajectory family, challenge alien novelty, bonus opportunity clarity.",
-      "evidence": "challenge-stage-scorpion-cross; alien-entry/challenge score 8.7/10.",
+      "evidence": "challenge-stage-scorpion-cross; alien-entry/challenge score 7.8/10.",
       "gap": "Score reward clarity and reference-grounded path precision."
     },
     {

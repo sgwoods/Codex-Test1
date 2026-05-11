@@ -248,20 +248,20 @@ Rule:
 
 ## Current Promotion Reality
 
-As of May 5, 2026:
+As of May 11, 2026:
 
-- hosted `/dev` is on the active `1.3.0` line
+- hosted `/dev` is on the active `1.3.0.1` hosted-dev review line
 - hosted `/beta` is on the approved `1.3.0` beta lane
 - hosted `/production` is on the shipped `1.3.0` public line
 
 That means:
 
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are now aligned
-  around one coherent release family
+- hosted `/dev` is intentionally ahead for review while hosted `/beta` and
+  hosted `/production` preserve one coherent shipped release family
 - platform, application, and bundle tracking should stay explicit even when the
-  lanes are aligned
-- the next release cycle should let lanes diverge only when there is a coherent
-  new improvement bundle worth sharing
+  lanes are close
+- the next beta action should be an authority-gated promotion from an accepted
+  hosted-dev review bundle, not an automatic mirror of `/dev`
 
 ## Major `x.y` Documentation Gate
 

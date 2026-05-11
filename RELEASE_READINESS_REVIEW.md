@@ -4,19 +4,48 @@
 
 Aurora `1.3.0` is the release currently live on hosted `/production`.
 
-Verified May 5, 2026:
+Verified May 11, 2026:
 
 - hosted `/production`
   - current live family: `1.3.0`
 - hosted `/beta`
   - current live family: `1.3.0 beta`
 - hosted `/dev`
-  - current live family: `1.3.0`
+  - current review family: `1.3.0.1`
 
 For exact active labels, use each lane's `build-info.json`. The key release
-decision is that all three hosted lanes are now aligned around the `1.3.0`
-family, with `/beta` preserving the expected beta suffix and `/production`
-carrying the public ship label.
+decision is that hosted `/beta` and `/production` preserve the shipped `1.3.0`
+family, while hosted `/dev` is intentionally ahead as the current
+post-production review increment.
+
+## Current Hosted-Dev Review Read
+
+As of May 11, 2026, hosted `/dev` is intentionally ahead of the shipped family
+as the `1.3.0.1` review increment. It carries the current conformance dashboard,
+public documentation, resource-economics reporting, application artifact
+scorecard, runtime sprite static-crop scoring, and a measured calibrated
+ship-loss audio cue lift.
+
+This changes the near-term release question from "is 1.3.0 shipped?" to "is
+the 1.3.0.1 hosted-dev review bundle strong enough to request a beta publish
+from the release-authority machine?"
+
+Current local/dev review quality position:
+
+- overall quality score:
+  - `9.2/10`
+- weakest high-value category:
+  - audio identity and cue alignment at `7.3/10`
+- current audio support:
+  - semantic event score `9.78/10`
+  - acoustic event score `6.31/10`
+  - cue alignment `9/9`
+- highest remaining audio gap:
+  - residual `playerHit` tail after the calibrated ship-loss promotion
+
+Release authority note: this MacBook may prepare and publish hosted `/dev`, but
+hosted `/beta` and `/production` remain blocked here while release authority is
+held by `imacm1 / iMacM1`.
 
 ## What Is Now True
 
@@ -26,8 +55,8 @@ carrying the public ship label.
   Platinum
 - `Galaxy Guardians` is now part of the public product story as the first
   second-cabinet sneak peek, while still remaining a preview-first application
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned around
-  the same `1.3.0` release family
+- hosted `/beta` and hosted `/production` are aligned around the same `1.3.0`
+  release family, while hosted `/dev` carries the `1.3.0.1` review increment
 - layered release identity is now explicit across the integrated bundle, the
   Platinum platform, and each application
 - the shipped release family is backed by committed docs, harnesses, and
@@ -110,6 +139,7 @@ The `1.3.0` shipped line depends on these docs being current and committed:
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
 - [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md)
 - [BETA_TO_PRODUCTION_PLAN.md](BETA_TO_PRODUCTION_PLAN.md)
+- [RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md](RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md)
 - [release-dashboard.json](release-dashboard.json)
 - [release-notes.json](release-notes.json)
 - [release-manifest.json](release-manifest.json)
@@ -119,11 +149,13 @@ The `1.3.0` shipped line depends on these docs being current and committed:
 The production push is complete. The follow-up work now is:
 
 1. keep the `1.3.0` production family trustworthy while it settles in public
-2. shift the active execution frame to `1.4.0` arcade depth and
+2. review the `1.3.0.1` hosted-dev bundle and request beta only from the
+   release-authority machine if accepted
+3. shift the active execution frame to `1.4.0` arcade depth and
    platform-contract cleanup
-3. continue `Galaxy Guardians` through measured evidence and application-owned
+4. continue `Galaxy Guardians` through measured evidence and application-owned
    runtime work without over-claiming polish
-4. keep layered platform/application release tracking visible in docs,
+5. keep layered platform/application release tracking visible in docs,
    dashboards, and build surfaces
 
 ## Recommendation

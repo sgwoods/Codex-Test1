@@ -1,15 +1,15 @@
 # Restart From Here
 
-## Current Checkpoint: May 11, 2026 Calibrated Audio / Deploy-Ready Branch
+## Current Checkpoint: May 11, 2026 Hosted-Dev Review / Beta Handoff
 
 Active local workspace:
 
 - `/Users/sgwoods/Development/Codex/Codex-test1`
-- Current working branch: `codex/macbook-pro-stage12-level-arc-conformance`
-- Latest pushed conformance commit:
-  - `4431ed7d Promote calibrated ship-loss audio cue`
-- Upstream branch:
-  - `origin/codex/macbook-pro-stage12-level-arc-conformance`
+- Current working branch: `main`
+- Latest integrated hosted-dev source before this documentation refresh:
+  - `2d44f356 Clean conformance artifact outputs and docs freshness`
+- Previous conformance branch merged into `main`:
+  - `codex/macbook-pro-stage12-level-arc-conformance`
 
 Authority and lane constraints:
 
@@ -67,19 +67,18 @@ Current audio plan:
 
 Deployment posture:
 
-- Local game service is up at commit `4431ed7d`:
-  `1.3.0.1+build.698.sha.4431ed7d.dirty`.
-- Hosted `/dev` is still older at `acc8b71`; beta and production remain on
-  `0123dd0`.
+- Hosted `/dev` carries the `1.3.0.1` review increment from the integrated
+  `main` line.
+- Hosted `/beta` and hosted `/production` remain on the shipped `1.3.0` family.
 - This MacBook can push normal development and can prepare/publish hosted
   `/dev` if that remains the intended lane, but it must not approve beta,
   publish beta, promote production, or publish production while release
   authority remains on `iMacM1`.
-- Before deployment, decide whether to:
-  - publish this branch to hosted `/dev` for review, or
-  - open/merge a PR to `main` first and publish `/dev` from the integrated line.
-- Remaining local dirty state is only generated local preview stamp plus older
-  untracked scratch analysis folders; committed deployable work is pushed.
+- The current work is a documentation/release-note/readiness refresh so the
+  `1.3.0.1` hosted-dev review package can be handed to the authority machine
+  for a possible beta publish.
+- Next beta action, if accepted, must be performed from `imacm1 / iMacM1`
+  unless release authority is explicitly transferred.
 
 Useful local URLs:
 
@@ -122,7 +121,7 @@ multi-machine workflow refresh.
 
 ## Live Lane State
 
-Verified on April 26, 2026:
+Historical lane snapshot from April 26, 2026:
 
 - hosted `/dev`
   - `1.2.3+build.532.sha.b959491`
@@ -134,8 +133,8 @@ Verified on April 26, 2026:
   - `1.2.3+build.532.sha.b959491`
   - [production build-info](https://sgwoods.github.io/Aurora-Galactica/build-info.json)
 
-This means hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned
-to the same current trust-and-pilot release family.
+That snapshot is preserved for release history only. Use `npm run
+machine:status` and each lane's `build-info.json` for the current live labels.
 
 ## Canonical Startup Path
 

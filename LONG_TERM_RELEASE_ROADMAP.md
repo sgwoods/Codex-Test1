@@ -28,20 +28,21 @@ work from becoming a loose bag of good ideas.
 
 ## Current Baseline
 
-As of May 10, 2026:
+As of May 11, 2026:
 
 - shipped production family:
   - `1.3.0`
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned around
-  the same family
+- hosted `/dev` carries the `1.3.0.1` review increment while hosted `/beta`
+  and hosted `/production` preserve the shipped `1.3.0` family
 - `main` is the authoritative forward integration line
 - the other machine is already advancing a Galaxians-style sibling track and
   stronger harness/reference analysis
-- local post-production work is accumulating as a `1.3.0.1` hosted-dev review
-  increment, not as an immediate beta-promotion candidate
-- the current recommendation is to hold hosted `/beta` until one coherent
-  user-visible conformance bundle lands and can be explained as better play,
-  sound, stage shape, or visual fidelity
+- the `1.3.0.1` review increment now bundles current conformance dashboards,
+  public/project docs, resource economics, application artifact conformance,
+  runtime static sprite scoring, and a measured audio/event-feedback lift
+- the current recommendation is to review this hosted-dev package and request
+  beta only from the release-authority machine if the player-visible value is
+  accepted
 
 The current shipped line is strong enough that the next cycle should not be a
 recovery release. It should be the first intentional polish-and-platform cycle
@@ -51,11 +52,13 @@ toward the next era.
 
 Short term:
 
-- use `1.3.0.1` as a hosted-dev review increment for current conformance
-  dashboards, public/project docs, and one measurable feel bundle
-- do more conformance before beta rather than moving beta immediately
-- prioritize audio/event feedback unless stage/challenge variation offers a
-  faster visible user-experience return
+- finish review of the `1.3.0.1` hosted-dev package and make the beta-request
+  handoff authority-gated
+- keep release notes, scorecards, dashboards, public project docs, and
+  economics aligned with the same current score read
+- after the beta decision, prioritize the next highest-value conformance lift:
+  audio/event feedback, alien/challenge variation, level arc, or visual motion
+  fidelity depending on cost/value evidence
 
 Medium term:
 

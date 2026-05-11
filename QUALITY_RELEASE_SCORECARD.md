@@ -10,38 +10,39 @@ Purpose:
 - show where the biggest quality gaps are right now
 - make the quality score part of release discussion, not a side note
 
-As of May 5, 2026:
+As of May 11, 2026:
 
 - current shipped family:
   - `1.3.0`
   - bundled quality score `8.8/10`
 - hosted `/dev`:
-  - `1.3.0`
+  - `1.3.0.1` hosted-dev review increment
+  - current development quality score `9.2/10`
 - hosted `/beta`:
   - `1.3.0 beta`
 - hosted `/production`:
   - `1.3.0`
 
-Branch-local refresh on May 4, 2026:
+Branch-local refresh on May 11, 2026:
 
 - branch:
   - `main`
-- commit:
-  - `26ca77c`
 - generated artifact:
-  - `reference-artifacts/analyses/quality-conformance/2026-05-04-26ca77c/`
+  - `reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd/report.json`
 - overall quality score:
-  - `8.8/10`
+  - `9.2/10`
 - weakest category:
-  - audio identity and cue alignment, `6.1/10`
+  - audio identity and cue alignment, `7.3/10`
 - notes:
-  - the dev-candidate surface suite is green again after correcting the
-    framed-overlay leaderboard footprint and rebuilding the dev shell
-- `wait-score-overlay`, `framed-popout-bounds`, `front-door-copy`, and
-    `platinum-pack-boot` are green on the rebuilt `1.3.0` candidate
-  - the current player movement score from the refreshed artifact is `8.0/10`
-  - this branch-local refresh now underpins the live `/dev` publish, but does
-    not by itself approve beta or production
+  - the hosted-dev review line now includes conformance dashboard, public docs,
+    economics reporting, application artifact conformance, runtime static sprite
+    scoring, and a calibrated layered ship-loss audio cue
+  - audio cue alignment remains green at `9/9`
+  - semantic audio score remains high at `9.78/10`; acoustic event score is
+    `6.31/10`
+  - this branch-local refresh can support a beta request, but does not approve
+    beta or production from this MacBook while release authority remains on
+    `imacm1`
 
 Readable project-level overview:
 
@@ -62,16 +63,18 @@ It is the best table to use when discussing what to improve next.
 
 | Category | Branch-local score | Status | Next read |
 | --- | ---: | --- | --- |
-| Overall quality score | `8.8` | Strong | Good base, not a fidelity finish line. |
-| Player movement conformance | `8.0` | Needs work | Main feel gap after audio; use reference traces before tuning. |
+| Overall quality score | `9.2` | Strong | Good base, not a fidelity finish line. |
+| Player movement conformance | `10.0` | Guardrail pass | Maxed at current scorer resolution; keep trace-backed before further tuning. |
 | Shot and hit responsiveness | `10.0` | Strong | Preserve while changing movement and pacing. |
 | Stage-1 opening timing fidelity | `8.5` | Good | Healthy but still measurable room remains. |
 | Stage-1 opening geometry fidelity | `10.0` | Strong | Preserve during level expansion. |
 | Dive fairness and safety | `9.1` | Strong | Keep watching collision pressure. |
 | Capture and rescue rule fidelity | `10.0` | Strong | Preserve during platform/game separation work. |
-| Challenge-stage timing fidelity | `8.4` | Needs work | Timing is decent; content depth still needs expansion. |
-| Progression and persona depth | `8.8` | Good | One ordering edge case remains visible. |
-| Audio identity and cue alignment | `6.1` | Weakest | Highest-priority conformance gap. |
+| Challenge-stage timing fidelity | `9.2` | Strong timing | Variation and novelty are the gap, not baseline timing. |
+| Level arc and encounter shape | `8.8` | Good | Improve long-run non-repetition and stage/reward texture. |
+| Alien entry and challenge novelty | `7.8` | Needs work | Direct reference path labels, arrival style, and specialty-alien introduction. |
+| Boss entry and formation grammar | `9.2` | Strong broad score | Improve direct path/slot reference precision. |
+| Audio identity and cue alignment | `7.3` | Weakest | Move toward `7.5+` with calibrated event-gap work. |
 | UI, shell, and graphics integrity | `9.2` | Strong | Surface gates are green again. |
 
 ## Hosted Lane Comparison Table
@@ -79,18 +82,20 @@ It is the best table to use when discussing what to improve next.
 This table describes the current hosted shipped family, not the branch-local
 Guardians/conformance work.
 
-| Category | Current shipped line | Hosted `/dev` | Hosted `/beta` | Hosted `/production` | Reference gameplay |
+| Category | Shipped `1.3.0` family | Hosted `/dev` `1.3.0.1` review | Hosted `/beta` | Hosted `/production` | Reference gameplay |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Overall quality score | `8.8` | `8.8` | `8.8` | `8.8` | `10` |
-| Player movement conformance | `8.4` | `8.4` | `8.4` | `8.4` | `10` |
-| Shot and hit responsiveness | `10.0` | `~10.0` | `10.0` | `10.0` | `10` |
+| Overall quality score | `8.8` | `9.2` | `8.8` | `8.8` | `10` |
+| Player movement conformance | `8.4` | `10.0` | `8.4` | `8.4` | `10` |
+| Shot and hit responsiveness | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
 | Stage-1 opening timing fidelity | `8.5` | `8.5` | `8.5` | `8.5` | `10` |
 | Stage-1 opening geometry fidelity | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
 | Dive fairness and safety | `9.1` | `9.1` | `9.1` | `9.1` | `10` |
 | Capture and rescue rule fidelity | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
-| Challenge-stage timing fidelity | `8.4` | `8.4` | `8.4` | `8.4` | `10` |
-| Progression and persona depth | `8.8` | `8.8` | `8.8` | `8.8` | `10` |
-| Audio identity and cue alignment | `6.1` | `6.1` | `6.1` | `6.1` | `10` |
+| Challenge-stage timing fidelity | `8.4` | `9.2` | `8.4` | `8.4` | `10` |
+| Level arc and encounter shape | not split | `8.8` | not split | not split | `10` |
+| Alien entry and challenge novelty | not split | `7.8` | not split | not split | `10` |
+| Boss entry and formation grammar | not split | `9.2` | not split | not split | `10` |
+| Audio identity and cue alignment | `6.1` | `7.3` | `6.1` | `6.1` | `10` |
 | UI, shell, and graphics integrity | `9.2` | `9.2` | `9.2` | `9.2` | `10` |
 
 ## Read
@@ -104,13 +109,16 @@ Current shipped-family strengths:
 - early dive safety
 - stage and challenge timing compared with the older public line
 
-Current biggest gaps:
+Current biggest hosted-dev review gaps:
 
-- audio identity remains the weakest bundled category
-- movement is much healthier than before, but still worth refining further for
-  feel
-- the next major gains are more likely to come from polish than from basic
-  correctness repair
+- audio identity remains the weakest high-value category, now at `7.3/10`
+- alien entry, challenge-stage arrival/novelty, and level arc are the strongest
+  gameplay-authenticity targets for the next arcade-depth cycle
+- static sprite/runtime visual scoring is useful but incomplete until temporal
+  motion windows cover flapping, pulsing, dive rotation, capture/rescue, and
+  dual-fighter transitions
+- the next major gains should combine player-visible polish with reusable
+  scoring and ingestion improvements
 
 ## Release Use
 
@@ -133,8 +141,10 @@ Current conclusion:
 
 - the shipped `1.3.0` family reads like a meaningful quality-and-platform
   release, not a patch-sized follow-up
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are now aligned on
-  the same public-family story
-- the next cycle should focus on movement feel, audio identity, gameplay trust
-  follow-up, second-game/platform maturity, and stronger analysis/harness depth
-  rather than broad emergency repair
+- hosted `/dev` is now intentionally ahead as the `1.3.0.1` review increment,
+  while hosted `/beta` and `/production` remain on the shipped public family
+- the next immediate release action is a review and possible beta request from
+  the release-authority machine, not a production move from this MacBook
+- the next cycle should focus on audio identity, alien/challenge-stage novelty,
+  level arc, visual artifact motion scoring, second-game/platform maturity, and
+  stronger analysis/harness depth rather than broad emergency repair

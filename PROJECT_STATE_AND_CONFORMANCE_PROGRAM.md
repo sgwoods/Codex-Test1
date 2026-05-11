@@ -51,7 +51,7 @@ Aurora / Platinum is in a post-`1.3.0` shipped posture.
 
 - hosted `/production` carries the public `1.3.0` family
 - hosted `/beta` is the reviewed candidate lane
-- hosted `/dev` is the integrated hosted review lane
+- hosted `/dev` carries the active `1.3.0.1` integrated hosted review lane
 - local `localhost` is the active engineering lane
 - `main` is the authoritative integration line for the deliberate `1.4.0`
   pickup
@@ -230,23 +230,23 @@ but by whether the improved categories are the ones players actually feel.
 
 Current recommendation:
 
-- do not move directly to hosted `/beta` from the current local state
-- do move toward a hosted `/dev` review increment once the bundle is coherent
-- make that short-cycle artifact `1.3.0.1`, carrying current dashboard/docs
-  work plus one measurable user-facing conformance improvement or a clear
-  evidence-backed pivot
-- hold hosted `/beta` for the `1.4.0` arcade-depth family, after the next
-  improvement can be explained as better play, sound, stage shape, or visual
-  fidelity rather than only better process
+- treat hosted `/dev` as the current `1.3.0.1` review increment
+- complete the documentation/release-note/readiness review before any beta
+  request
+- if the review accepts the bundle as a real player-visible improvement, ask
+  the release-authority machine to publish hosted `/beta`
+- keep the larger `1.4.0` family focused on arcade depth: alien entry,
+  challenge-stage novelty, stage progression, boss/formation grammar, visual
+  reference grounding, and measured audio feedback
 
 Short term:
 
-- finish one focused conformance bundle, with audio/event feedback still the
-  highest-value gap, but treat the latest ship-loss pass as a measurement
-  improvement rather than a beta-worthy runtime lift
+- finish the `1.3.0.1` release-readiness documentation pass and preserve the
+  detailed release note as the handoff artifact for beta authority
 - keep all candidate work wrapped in `harness:measure`
-- refresh dashboard, scorecard, public project page, and project guide before
-  any hosted `/dev` publish
+- keep dashboard, scorecard, public project page, project guide, release notes,
+  and strategic review aligned with the same current score read before beta
+  publish
 
 Latest local playtest response:
 

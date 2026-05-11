@@ -169,7 +169,7 @@ May 11 composite ship-loss scoring follow-up:
 - Promotion precheck outcome: rejected. The candidate showed a possible
   full-theme cue-gap improvement, but no runtime trial is allowed until the
   focused gates clear.
-- Current roll-up after refresh: overall quality `9.1/10`, audio `7.2/10`,
+- At that point, the roll-up after refresh was: overall quality `9.1/10`, audio `7.2/10`,
   semantic event score `9.78/10`, acoustic event score `6.20/10`, average worst
   segment risk `3.80/10`, highest gap `playerHit` tail at `6.19/10`.
 
@@ -305,7 +305,7 @@ May 10 challenge-transition UX and stagePulse stability pass:
   were both rejected. The best reference-window attempt was
   `refclip-s660-d240-v86`, but it missed cadence pressure and repeat-stability
   gates. No runtime `stagePulse` promotion was made.
-- Current rollup: audio remains `7.1/10`; acoustic event score is `6.07/10`;
+- At that point, the rollup was: audio remained `7.1/10`; acoustic event score was `6.07/10`;
   semantic event score is `9.78/10`; `stagePulse` remains the highest risk cue
   at `5.34/10`.
 

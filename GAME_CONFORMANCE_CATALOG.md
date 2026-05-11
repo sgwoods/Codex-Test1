@@ -1,6 +1,6 @@
 # Game Conformance Catalog
 
-Updated: May 10, 2026
+Updated: May 11, 2026
 
 This is the maintained index for game-specific conformance evidence across
 Platinum applications. It gives each game a durable catalog of:

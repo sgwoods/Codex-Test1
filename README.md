@@ -116,6 +116,7 @@ Release planning and readiness docs:
 - [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md](RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md)
 - [release-dashboard.json](release-dashboard.json)
 - [release-notes.json](release-notes.json)
 
@@ -128,7 +129,7 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.3.0` line
+  - active `1.3.0.1` hosted-dev review line
 - hosted `/beta`:
   - approved `1.3.0` beta lane
 - hosted `/production`:
@@ -138,6 +139,8 @@ What that means:
 
 - Aurora now ships as the first playable application on Platinum
 - the current production family is `1.3.0`
+- hosted `/dev` now carries the post-production conformance/docs/dashboard
+  review increment that can be inspected before any beta request
 - Galaxy Guardians is now part of the public Platinum story as a second-cabinet
   sneak peek
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
@@ -146,6 +149,8 @@ What that means:
 Current go-forward focus:
 
 - keep the current `1.3.0` production line stable
+- review the `1.3.0.1` hosted-dev increment and, if accepted, request the
+  hosted `/beta` publish from the release-authority machine
 - use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
   as the maintained overview of how Platinum, applications, ingestion,
   harnessing, conformance metrics, and resource economics fit together
@@ -154,8 +159,9 @@ Current go-forward focus:
 - use the multi-machine bootstrap and release-authority workflow
 - keep folding in the other machine's Galaxians-style second-game work and
   stronger harness/reference analysis
-- improve movement fidelity against real Galaga footage
-- continue audio identity polish beyond cue timing
+- prioritize the next measurable conformance lifts in audio/event feedback,
+  alien/challenge-stage variation, level arc, visual artifact fidelity, and
+  gameplay-scale stage choreography
 - keep the platform/application boundary strong before deeper multi-game growth
 
 ## Run Locally

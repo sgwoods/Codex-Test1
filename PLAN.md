@@ -2,10 +2,10 @@
 
 ## Current State
 
-Verified May 5, 2026:
+Verified May 11, 2026:
 
 - hosted `/dev`
-  - active `1.3.0` line
+  - active `1.3.0.1` hosted-dev review line
 - hosted `/beta`
   - approved `1.3.0` beta lane
 - hosted `/production`
@@ -17,8 +17,9 @@ This means:
 
 - the `1.3.0` fidelity-and-second-cabinet release is now the stable public
   family
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned around
-  the same release family
+- hosted `/dev` now carries the post-production conformance/docs/dashboard
+  review increment, while `/beta` and `/production` preserve the shipped
+  `1.3.0` family
 - the active source-planning question has moved from "what must land for `1.3.0`?"
   to "what is the cleanest deliberate `1.4.0` pickup?"
 - the post-release work should now be treated as intentional carry-forward, not
@@ -129,9 +130,9 @@ resource economics fit together.
 
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
-3. do not move to hosted `/beta` immediately from the current local state;
-   first create one coherent user-visible conformance bundle and review it on
-   `/dev`
+3. review the hosted `1.3.0.1` `/dev` increment as the current coherent
+   conformance/docs/dashboard bundle; if accepted, request the beta publish
+   from `imacm1`, the current release-authority machine
 4. prioritize audio/event feedback and stage-shape conformance over more broad
    planning; the planning scaffolding is strong enough, while runtime feel still
    needs a measurable lift
@@ -185,16 +186,17 @@ Current conformance read:
 ## Release Direction
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
-  shipped `1.3.0` family
+  release discipline, but hosted `/dev` is intentionally ahead as the
+  `1.3.0.1` review increment
 - the active source line should now present itself as the deliberate `1.4.0`
   pickup family
-- the next practical release artifact should be a `1.3.0.1` hosted-dev review
-  increment that bundles documentation, dashboard, and one coherent
-  conformance/feel improvement; it should not be treated as a beta promise by
-  itself
-- the next hosted `/beta` should wait for a defensible user-visible lift,
-  preferably either audio/event feedback movement toward `7.5+` or a
-  stage/challenge variation bundle that materially improves long-play feel
+- the next practical release artifact is the `1.3.0.1` hosted-dev review
+  increment: documentation, dashboard, economics, application artifact
+  conformance, and a measured audio/event-feedback lift are now assembled for
+  review
+- the next hosted `/beta` decision should be a deliberate handoff from this
+  reviewed `/dev` increment, performed only on the release-authority machine
+  and only if the player-visible value is accepted as enough for the beta lane
 - `1.3.0` was the intentional bundle for fidelity, trust, and the first
   significant second-game Platinum story
 - the shipped `1.3.0` family is now the stable public baseline while `main`
@@ -211,8 +213,9 @@ Current conformance read:
 
 After `1.3.0` ships, the plan should pick up in this order:
 
-1. Short term: `1.3.0.1` hosted-dev integration increment for current
-   dashboards/docs plus one meaningful conformance feel bundle.
+1. Short term: review and, if accepted, request beta publication of the
+   `1.3.0.1` hosted-dev integration increment from the release-authority
+   machine.
 2. Medium term: `1.4.0` arcade depth and platform-contract follow-through,
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.

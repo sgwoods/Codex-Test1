@@ -11,10 +11,10 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 5, 2026:
+As of May 11, 2026:
 
 - hosted `/dev` points at:
-  - the active `1.3.0` line
+  - the active `1.3.0.1` hosted-dev review line
 - hosted `/beta` now points at:
   - the approved `1.3.0` beta lane
 - hosted `/production` now points at:
@@ -24,12 +24,14 @@ This means:
 
 - the `1.3.0` quality-and-second-cabinet release is now the public baseline on
   hosted `/production`
-- hosted `/dev` and hosted `/beta` remain aligned with that same family while
-  the next bundle is assembled
+- hosted `/dev` now carries the post-production conformance/docs/dashboard
+  review increment while hosted `/beta` and `/production` preserve the shipped
+  family
 - the active source release family has moved on to the deliberate `1.4.0`
   pickup
-- the immediate execution question is now "what belongs in the first true
-  post-1.3.0 arcade-depth and platform-contract cycle?"
+- the immediate execution question is now whether the `1.3.0.1` hosted-dev
+  review bundle is strong enough to request a beta publish from the
+  release-authority machine, and what should remain queued for `1.4.0`
 
 The forward line and the current shipped family now include:
 
@@ -137,13 +139,13 @@ For the immediate next cycle, that means:
 - do not republish `/dev` for every single small change
 - group the next meaningful fidelity work into a small bundle
 - refresh the scorecard and lane metadata when that bundle is ready
-- use the next hosted-dev increment as `1.3.0.1` review posture: useful for
-  integrated review, not yet a beta-promotion claim
+- use the `1.3.0.1` hosted-dev increment as the integrated review posture:
+  useful for beta-readiness review, but not itself a beta approval
 
 ### When To Shape The Next Hosted `/beta`
 
-Do not move current hosted `/dev` to hosted `/beta` immediately just because
-`/dev` is now current.
+Do not move current hosted `/dev` to hosted `/beta` as an automatic mirror
+operation. Treat the `1.3.0.1` lane as a candidate review package.
 
 The next hosted `/beta` should wait until we have:
 
@@ -156,14 +158,17 @@ The next hosted `/beta` should wait until we have:
   current stable beta/prod line
 - release notes and docs that can honestly explain why this is the next serious
   candidate
+- release authority on the machine that performs the beta publish
 
 Practical standard:
 
-- current hosted `/dev` is our stabilized integration base
-- the next hosted `/beta` should come only after one or two deliberate fidelity
-  cycles, not immediately after the `/dev` refresh
-- the next short-cycle artifact is `1.3.0.1` on `/dev`; the next serious beta
-  family remains `1.4.0` arcade depth
+- current hosted `/dev` is the `1.3.0.1` review bundle
+- the next hosted `/beta` can be requested only after the docs, dashboards,
+  release note, and current conformance read are accepted as a real
+  player-visible step over shipped `1.3.0`
+- the beta publish itself must happen from `imacm1 / iMacM1` unless release
+  authority is explicitly transferred
+- the next larger beta family remains `1.4.0` arcade depth
 - after refreshing the audio process with cue contracts, promotion prechecks,
   layered cue support, composite analysis windows, and calibrated
   browser-reference gates, audio identity remains the weakest runtime category
@@ -203,10 +208,29 @@ Practical standard:
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
 - after `1.3.0`, the pickup order should stay explicit:
-  - short term: `1.3.0.1` hosted-dev conformance/documentation increment
+  - short term: `1.3.0.1` hosted-dev review and beta-request handoff
   - medium term: `1.4.0` arcade depth and platform-contract follow-through
   - longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
     cabinet polish, leading toward `2.0` multi-game Platinum
+
+### `1.3.0.1` Beta Request Handoff
+
+If the hosted-dev review is accepted, the release-authority machine should:
+
+1. sync the authoritative source repo from `origin/main`
+2. run machine bootstrap/status/doctor and confirm release authority still
+   points at `imacm1 / iMacM1`
+3. run `npm run build`
+4. run `npm run harness:check:documentation-freshness`
+5. run `npm run publish:check:dev`
+6. inspect the hosted `/dev` lane and release note
+7. publish hosted `/beta` only from the authority machine
+8. run hosted beta verification and update the strategic beta review with the
+   actual beta lane stamp, any score movement, and any accepted gaps
+
+The MacBook may continue source, branch, commit, push, merge, and hosted-dev
+work, but it should not approve beta or publish beta while release authority
+remains on `imacm1`.
 
 See also:
 

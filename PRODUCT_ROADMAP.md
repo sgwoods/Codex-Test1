@@ -2,10 +2,10 @@
 
 ## Current Shipped State
 
-Verified May 5, 2026:
+Verified May 11, 2026:
 
 - hosted `/dev`
-  - active `1.3.0` line
+  - active `1.3.0.1` hosted-dev review line
 - hosted `/beta`
   - approved `1.3.0` beta lane
 - hosted `/production`
@@ -15,7 +15,7 @@ Aurora is in a post-`1.3.0` ship posture:
 
 - production now carries the current `1.3.0` public family
 - beta remains the proving lane for the next release step
-- dev remains the forward lane for the next coherent bundle
+- dev carries the current forward review bundle
 - `main` is the forward line for the deliberate `1.4.0` pickup
 
 ## Roadmap Frame
@@ -49,25 +49,26 @@ Goals:
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### Shape `1.3.0.1` Hosted-Dev Review
+### Review `1.3.0.1` Hosted Dev
 
-The next practical artifact should be a fourth-segment hosted-dev increment:
+The current practical artifact is a fourth-segment hosted-dev increment:
 
 - `1.3.0.1`
 
-This should collect the current documentation/dashboard/conformance process
-work plus one coherent user-visible feel improvement. It is a review increment,
-not a beta promise by itself.
+It collects the current documentation/dashboard/conformance process work,
+application artifact conformance scoring, resource economics, and a measured
+audio/event-feedback lift. It is a review increment, not a beta approval by
+itself.
 
 Recommended gate:
 
-- keep local and hosted `/dev` aligned only after the bundle is coherent
+- keep source and hosted `/dev` aligned for review
 - show the conformance dashboard and public project page with current short,
   medium, and long-term plans
 - require at least one measurable user-facing improvement or a clearly
   documented negative result that changes the next investment decision
-- keep hosted `/beta` unchanged until the improvement is strong enough to
-  explain to a player, not only to a developer
+- keep hosted `/beta` unchanged until the improvement is accepted and the
+  release-authority machine performs the beta publish
 
 ### Pick Up `1.4.0`
 
@@ -126,8 +127,8 @@ Current decision:
 
 Once `1.3.0` is out, the roadmap pickup should be:
 
-- Short term: `1.3.0.1` for hosted-dev review of the current conformance
-  dashboard/docs plus one measurable feel bundle.
+- Short term: `1.3.0.1` hosted-dev review, source/docs readiness, and
+  authority-gated beta request if accepted.
 - Medium term: `1.4.0` for level-by-level arcade depth plus
   platform-contract cleanup.
 - Longer term: `1.5.0` for shared-video evidence and flight-recorder
@@ -149,10 +150,10 @@ Current conformance read:
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
 - overall Aurora quality is `9.2/10` across the current scored categories
-- audio identity and cue alignment is the weakest category at `7.1/10`; the
+- audio identity and cue alignment is the weakest category at `7.3/10`; the
   process is stronger than the runtime score, with cue-contract readiness at
   `9.09/10`, semantic event score at `9.78/10`, and acoustic event score at
-  `6.07/10`
+  `6.31/10`
 - level arc and encounter shape is now a high-priority scored category at
   `8.8/10`, backed by level-arc and stage-signature evidence. Remaining
   opportunity is in long-run non-repetition, exact pressure replay, and
@@ -160,14 +161,14 @@ Current conformance read:
 - player movement conformance now reads `10/10`; the prior `8.0/10` gap was
   traced to harness recenter input suppression, not to gameplay movement
   constants
-- latest audio investment produced runtime reliability, challenge-entry UX, and
-  reusable evidence: normal inter-level/result phrases are less clipped,
-  `challengeTransition` now uses a measured `1.6s` phrase with preserved
-  tail-past-spawn budget, final loss clears active transition beds before
-  game-over ambience, and a new runtime-recovery harness verifies that critical
-  reference cues actually start. It did not promote `stagePulse`; synthesized
-  stability-first and direct reference-window sweeps both rejected promotion,
-  so the next audio work should use a lower-variance pressure-bed generator.
+- latest audio investment produced both runtime reliability and a measured
+  cue-quality lift: normal inter-level/result phrases are less clipped,
+  final loss clears active transition beds before game-over ambience, the
+  runtime-recovery harness verifies that critical reference cues actually
+  start, and the calibrated layered `playerHit` ship-loss cue was promoted
+  after focused gates, precheck, recapture, alignment, and quality guardrails.
+  `stagePulse` still needs a better pressure-bed strategy, and the residual
+  `playerHit` tail remains the highest current segment gap.
 - the next major Aurora quality cycle is tracked in
   [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md),
   with a baseline artifact at

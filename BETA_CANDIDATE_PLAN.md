@@ -5,13 +5,13 @@
 The old `1.2.3` beta candidate has already been promoted and shipped, and the
 `1.3.0` production family is now the stable public baseline.
 
-Verified May 10, 2026 from the maintained source docs and local conformance
+Verified May 11, 2026 from the maintained source docs and local conformance
 artifacts:
 
-- hosted `/dev`, hosted `/beta`, and hosted `/production` are aligned around
-  the shipped `1.3.0` family
-- local development is accumulating the next hosted-dev increment on the
-  `1.3.0.1` line
+- hosted `/dev` carries the `1.3.0.1` hosted-dev review increment
+- hosted `/beta` and hosted `/production` preserve the shipped `1.3.0` family
+- local development is preparing the release-note/docs/readiness handoff for a
+  possible beta request
 - `main` remains the authoritative integration line for the deliberate `1.4.0`
   arcade-depth pickup
 
@@ -45,12 +45,13 @@ Current local conformance read:
   - stage-1 geometry fidelity
   - capture/rescue rule fidelity
 - weakest bundled category:
-  - audio identity and cue alignment at `6.8/10`
+  - audio identity and cue alignment at `7.3/10`
 - current audio process strength:
   - cue-contract readiness `9.09/10`
   - semantic event score `9.78/10`
-  - acoustic event score `5.6/10`
-  - highest current audio gap: `stagePulse` onset
+  - acoustic event score `6.31/10`
+  - highest current audio gap: `playerHit` tail after the calibrated
+    ship-loss cue promotion
 
 ## What The Next Beta Should Be About
 
@@ -59,10 +60,10 @@ refresh.
 
 Recommendation:
 
-- do not move to hosted `/beta` now
-- first shape a coherent hosted `/dev` review increment on `1.3.0.1`
-- promote to beta only after the candidate includes a defensible user-visible
-  lift, not only improved measurement infrastructure
+- do not mirror hosted `/dev` to hosted `/beta` automatically
+- finish the coherent hosted `/dev` review package on `1.3.0.1`
+- request beta if the candidate's user-visible lift and updated docs are
+  accepted, and only from the release-authority machine
 
 The next serious beta family should most likely belong to:
 
@@ -72,13 +73,13 @@ The next serious beta family should most likely belong to:
 
 ### Audio and event feedback
 
-- move audio from `6.8/10` toward `7.5+`
+- move audio from `7.3/10` toward `7.5+`
 - keep semantic score high while improving acoustic fit
 - promote no runtime cue without focused gates, promotion precheck, live
   recapture, cue alignment, and quality-score guardrails
-- use the latest `stagePulse` evidence: simple low-brightness stabilization is
-  not enough; next candidates need phase/envelope-aware or reference-subclip
-  strategy
+- use the latest ship-loss evidence: calibrated browser-reference gates and
+  layered cue windows can promote a keeper, but residual tail/body fit still
+  needs direct attention before audio can stop being the weakest category
 
 ### Level arc and challenge-stage depth
 
@@ -118,6 +119,7 @@ The next serious beta family should most likely belong to:
 - live beta verification
 - current docs and release surfaces
 - explicit beta approval before any production move
+- release authority confirmed on the publishing machine before `publish:beta`
 
 ## Decision Rule
 

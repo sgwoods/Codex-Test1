@@ -118,9 +118,14 @@ That pass should refresh:
 
 - `release-notes.json`
 - `release-dashboard.json`
+- detailed release note for the candidate family
 - `README.md`
 - `PLAN.md`
 - `PRODUCT_ROADMAP.md`
+- `PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md`
+- `CONFORMANCE_METRICS_OVERVIEW.md`
+- `RELEASE_CONFORMANCE_DASHBOARD.md`
+- `CONFORMANCE_ECONOMICS.md`
 - `RELEASE_POLICY.md`
 - `RELEASE_READINESS_REVIEW.md`
 - `ARCHITECTURE.md`
