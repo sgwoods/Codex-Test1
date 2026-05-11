@@ -353,6 +353,39 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'soft-attack-low-march-single',
+        label: 'Soft attack low march, single oscillator',
+        spec: {
+          tones: [
+            { freq: 147, duration: .18, wave: 'square', volume: .0058, slide: -4, lpHz: 720, attack: .058, singleOscillator: 1 },
+            { freq: 294, duration: .145, wave: 'triangle', volume: .0038, slide: -8, lpHz: 860, delay: .026, attack: .044, singleOscillator: 1 },
+            { freq: 196, duration: .11, wave: 'triangle', volume: .0028, slide: -5, lpHz: 620, delay: .078, attack: .036, singleOscillator: 1 }
+          ]
+        }
+      },
+      {
+        id: 'soft-attack-low-march-headroom',
+        label: 'Soft attack low march with combat headroom',
+        spec: {
+          tones: [
+            { freq: 147, duration: .17, wave: 'square', volume: .0048, slide: -3, lpHz: 640, attack: .068, singleOscillator: 1 },
+            { freq: 294, duration: .125, wave: 'triangle', volume: .0031, slide: -6, lpHz: 760, delay: .032, attack: .05, singleOscillator: 1 },
+            { freq: 196, duration: .09, wave: 'triangle', volume: .0022, slide: -4, lpHz: 560, delay: .086, attack: .04, singleOscillator: 1 }
+          ]
+        }
+      },
+      {
+        id: 'soft-attack-low-march-body-pocket',
+        label: 'Soft attack low march body pocket',
+        spec: {
+          tones: [
+            { freq: 123, duration: .19, wave: 'triangle', volume: .0061, slide: -3, lpHz: 520, attack: .075, singleOscillator: 1 },
+            { freq: 246, duration: .135, wave: 'triangle', volume: .0035, slide: -7, lpHz: 720, delay: .038, attack: .046, singleOscillator: 1 },
+            { freq: 184, duration: .09, wave: 'sine', volume: .002, slide: -3, lpHz: 520, delay: .09, attack: .04, singleOscillator: 1 }
+          ]
+        }
+      },
+      {
         id: 'late-crest-low-bed',
         label: 'Late crest low bed',
         spec: {
@@ -1463,6 +1496,7 @@ function markdown(report){
     `Generated: ${report.generatedAt}`,
     `Commit: ${report.commit}${report.dirty ? ' (dirty)' : ''}`,
     `Repetitions per candidate: ${report.repetitions}`,
+    `Capture preroll: ${report.capturePlan?.defaultPrerollMs ?? 'n/a'}ms`,
     '',
     '## Problem',
     '',
@@ -1541,7 +1575,13 @@ async function analyzeCue(key, generatedAt, rootDir){
         label: capture.row.label,
         wav: rel(files.wav, cueDir),
         webm: rel(files.webm, cueDir),
-        audioCue: capture.result.audioCue || null
+        audioCue: capture.result.audioCue || null,
+        capture: {
+          attempt: capture.result.attempt || null,
+          byteLength: capture.result.byteLength || null,
+          captureMs: capture.result.captureMs || null,
+          capturePrerollMs: capture.result.capturePrerollMs || null
+        }
       },
       galaga: {
         label: 'Current Aurora baseline',
@@ -1629,6 +1669,12 @@ async function analyzeCue(key, generatedAt, rootDir){
     repetitions: repeats,
     problem: config.problem,
     strategy: 'Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.',
+    capturePlan: {
+      repetitions: repeats,
+      attemptsPerSample: Math.max(1, Number(process.env.AURORA_AUDIO_CAPTURE_RETRIES || 3)),
+      defaultPrerollMs: 80,
+      rationale: 'Short cue captures include a small recorder preroll so onset analysis reflects the cue rather than MediaRecorder startup timing.'
+    },
     successMeasure: config.cue === 'stagePulse'
       ? 'A keeper must improve whole-cue risk, onset segment risk, cadence pressure, and masking separation while preserving duration pocket, band shape, and segment-role guards.'
       : config.lossComposite

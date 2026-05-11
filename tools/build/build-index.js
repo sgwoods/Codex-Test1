@@ -58,6 +58,7 @@ const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
 const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
+const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
@@ -164,6 +165,10 @@ function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 }
 
+function rel(file){
+  return path.relative(ROOT, file).replace(/\\/g, '/');
+}
+
 function copyAssetTree(srcDir, destDir){
   if(!fs.existsSync(srcDir)) return [];
   fs.mkdirSync(destDir, { recursive: true });
@@ -177,6 +182,43 @@ function copyAssetTree(srcDir, destDir){
     }
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.copyFileSync(src, dest);
+    copied.push(dest);
+  }
+  return copied;
+}
+
+function normalizeAssetSourcePath(sourcePath){
+  return String(sourcePath || '')
+    .replace(/\\/g, '/')
+    .replace(/^\.\//, '')
+    .replace(/^\/+/, '')
+    .trim();
+}
+
+function catalogMediaHref(sourcePath){
+  const normalized = normalizeAssetSourcePath(sourcePath);
+  if(!normalized) return '';
+  if(/^(?:https?:|data:|assets\/)/.test(normalized)) return normalized;
+  CATALOG_MEDIA_SOURCE_PATHS.add(normalized);
+  const ext = path.extname(normalized);
+  const rawBase = path.basename(normalized, ext) || 'media';
+  const base = rawBase.replace(/[^a-zA-Z0-9._-]+/g, '-').slice(0, 72) || 'media';
+  const hash = crypto.createHash('sha1').update(normalized).digest('hex').slice(0, 10);
+  return `assets/catalog-media/${hash}-${base}${ext}`;
+}
+
+function copyCatalogMediaAssets(destAssetsDir){
+  if(!CATALOG_MEDIA_SOURCE_PATHS.size) return [];
+  const copied = [];
+  const catalogDir = path.join(destAssetsDir, 'catalog-media');
+  fs.mkdirSync(catalogDir, { recursive: true });
+  for(const sourcePath of CATALOG_MEDIA_SOURCE_PATHS){
+    const source = path.join(ROOT, sourcePath);
+    if(!fs.existsSync(source) || !fs.statSync(source).isFile()) continue;
+    const href = catalogMediaHref(sourcePath);
+    const dest = path.join(path.dirname(destAssetsDir), href);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.copyFileSync(source, dest);
     copied.push(dest);
   }
   return copied;
@@ -403,6 +445,10 @@ function loadApplicationGuide(){
       graphicsContexts: Array.isArray(raw.graphicsContexts) ? raw.graphicsContexts : [],
       shipCatalog: Array.isArray(raw.shipCatalog) ? raw.shipCatalog : [],
       stageFamilies: Array.isArray(raw.stageFamilies) ? raw.stageFamilies : [],
+      conformanceAlienRows: Array.isArray(raw.conformanceAlienRows) ? raw.conformanceAlienRows : [],
+      conformanceAudioRows: Array.isArray(raw.conformanceAudioRows) ? raw.conformanceAudioRows : [],
+      stageConformanceRows: Array.isArray(raw.stageConformanceRows) ? raw.stageConformanceRows : [],
+      personaRows: Array.isArray(raw.personaRows) ? raw.personaRows : [],
       graphicsControls: Array.isArray(raw.graphicsControls) ? raw.graphicsControls : [],
       links: Array.isArray(raw.links) ? raw.links : []
     };
@@ -418,6 +464,10 @@ function loadApplicationGuide(){
       graphicsContexts: [],
       shipCatalog: [],
       stageFamilies: [],
+      conformanceAlienRows: [],
+      conformanceAudioRows: [],
+      stageConformanceRows: [],
+      personaRows: [],
       graphicsControls: [],
       links: []
     };
@@ -1323,6 +1373,12 @@ function applicationGuideStyles(){
     .audioAction:hover{
       background:rgba(105,226,167,0.2);
     }
+    .audioAction.isCompact{
+      min-width:0;
+      padding:7px 10px;
+      font-size:12px;
+      letter-spacing:.02em;
+    }
     .audioStatus{
       margin-top:16px;
       padding:12px 14px;
@@ -1390,6 +1446,96 @@ function applicationGuideStyles(){
     .visualMeta strong{
       color:#eff7ff;
       font-weight:600;
+    }
+    .catalogMedia{
+      display:grid;
+      gap:10px;
+      min-width:190px;
+    }
+    .catalogMediaGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(108px,1fr));
+      gap:10px;
+      align-items:stretch;
+    }
+    .catalogMediaItem{
+      min-width:0;
+      padding:8px;
+      border-radius:14px;
+      background:rgba(6,15,24,0.66);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .catalogMediaLabel{
+      display:block;
+      margin:0 0 6px;
+      color:#dff7ff;
+      font-size:11px;
+      line-height:1.35;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .catalogMediaNote{
+      display:block;
+      margin-top:6px;
+      color:var(--soft);
+      font-size:11px;
+      line-height:1.35;
+    }
+    .catalogMediaImg{
+      display:block;
+      width:100%;
+      max-height:126px;
+      object-fit:contain;
+      image-rendering:auto;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .catalogMediaImg.isPixelated{
+      image-rendering:pixelated;
+    }
+    .pixelSprite{
+      display:grid;
+      grid-template-columns:repeat(var(--pixel-cols), 8px);
+      gap:1px;
+      justify-content:center;
+      align-content:center;
+      min-height:58px;
+      padding:10px 8px;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .pixelSprite span{
+      width:8px;
+      height:8px;
+      background:transparent;
+    }
+    .pixelSprite span.isFilled{
+      background:var(--pixel-color);
+      box-shadow:0 0 10px color-mix(in srgb, var(--pixel-color), transparent 55%);
+    }
+    .mediaPlaceholder{
+      padding:10px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.045);
+      border:1px dashed rgba(255,255,255,0.16);
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .conformanceActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .waveformStrip{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+      gap:8px;
+    }
+    .waveformStrip .catalogMediaImg{
+      max-height:86px;
     }
     .previewFrame{
       position:absolute;
@@ -1803,6 +1949,263 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
   return fillBuildTokens(template, tokens).trimEnd() + '\n';
 }
 
+const AURORA_PIXEL_SPRITES = {
+  'player-fighter': {
+    label: 'Current Aurora player sprite',
+    rows: ['..AA..', '.CBBC.', 'CABBAC', '.ABBA.', '..AA..'],
+    colors: { A: '#9adfff', B: '#72c8ff', C: '#ff4658' }
+  },
+  'dual-fighter': {
+    label: 'Current dual-fighter state',
+    rows: ['..AA....AA..', '.CBBC..CBBC.', 'CABBACCABBAC', '.ABBA..ABBA.', '..AA....AA..'],
+    colors: { A: '#9adfff', B: '#72c8ff', C: '#ff4658' }
+  },
+  'bee-line': {
+    label: 'Current Aurora bee sprite',
+    rows: ['...BB....', '.ABCCB.A.', 'AABBBB.AA', '.A.BB..A.', '..ACCBA..'],
+    colors: { A: '#4e95ff', B: '#ffd24a', C: '#f08f2e' }
+  },
+  'but-line': {
+    label: 'Current Aurora butterfly sprite',
+    rows: ['...BB....', '.ABCCB.A.', 'AABBBB.AA', '.ABCCB.A.', '..ABBA..'],
+    colors: { A: '#62a5ff', B: '#ff3d51', C: '#ffd25a' }
+  },
+  'boss-line': {
+    label: 'Current Aurora boss sprite',
+    rows: ['...CAAC..', '.AABBAA.', 'AABCCBAA', '.AABBAA.', '..ABBBA..'],
+    colors: { A: '#60f0cf', B: '#5fe85c', C: '#cc5fff' }
+  },
+  'rogue-fighter': {
+    label: 'Current Aurora rogue/captured-fighter sprite',
+    rows: ['...CAAC..', '.AABBAA.', 'AABCCBAA', '.AABBAA.', '..ABBBA..'],
+    colors: { A: '#a3cfff', B: '#ff5ea0', C: '#ffe36a' }
+  },
+  'challenge-dragonfly': {
+    label: 'Current challenge dragonfly family',
+    rows: ['.A...A.', '..BBB..', 'ABBCBBA', 'B.BBB.B', '..ACA..'],
+    colors: { A: '#98ffab', B: '#94f0ff', C: '#ffe76f' }
+  },
+  'challenge-mosquito': {
+    label: 'Current challenge mosquito family',
+    rows: ['..A.A..', '.B.B.B.', 'BBCCBBB', '.ABCCA.', '..B.B..'],
+    colors: { A: '#ffab85', B: '#ffe179', C: '#74f4ff' }
+  }
+};
+
+const ALIEN_ROW_SPRITES = [
+  [/bee|zako/i, 'bee-line'],
+  [/butterfly|escort/i, 'but-line'],
+  [/captured/i, 'rogue-fighter'],
+  [/boss|command/i, 'boss-line'],
+  [/challenge|specialty/i, 'challenge-dragonfly']
+];
+
+const ALIEN_REFERENCE_CONTEXT = {
+  'bee-line': [{
+    label: 'Galaga reference context',
+    src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
+    note: 'Stage-frame context; direct crop scorer still pending.'
+  }],
+  'but-line': [{
+    label: 'Galaga reference context',
+    src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
+    note: 'Stage-frame context; direct crop scorer still pending.'
+  }],
+  'boss-line': [{
+    label: 'Galaga boss context',
+    src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
+    note: 'Stage-frame context; boss crop/path target still pending.'
+  }],
+  'rogue-fighter': [{
+    label: 'Capture/rescue context',
+    src: 'reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png',
+    note: 'Reference-media context; captured-fighter visual scorer still pending.'
+  }],
+  'challenge-dragonfly': [{
+    label: 'Challenge window context',
+    src: 'reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/contact-sheet-1s.png',
+    note: 'Runtime evidence window; direct Galaga challenge crop target pending.'
+  }]
+};
+
+const AUDIO_PLOT_STEMS = {
+  gameStart: 'stage-start',
+  formationArrival: 'formation-pulse',
+  stageTransition: 'stage-start',
+  stagePulse: 'formation-pulse',
+  playerShot: 'player-shot',
+  enemyShot: 'enemy-shot',
+  enemyHit: 'enemy-hit',
+  enemyBoom: 'enemy-boom',
+  bossHit: 'boss-hit',
+  bossBoom: 'boss-boom',
+  captureBeam: 'capture-beam',
+  captureSuccess: 'fighter-captured',
+  captureRetreat: 'capture-retreat',
+  rescueJoin: 'rescue-join',
+  capturedFighterDestroyed: 'captured-fighter-destroyed',
+  challengeTransition: 'challenge-transition',
+  challengeResults: 'challenge-results',
+  challengePerfect: 'challenge-perfect',
+  gameOver: 'game-over',
+  highScoreFirst: 'high-score-1st',
+  highScoreOther: 'high-score-2nd-10th',
+  playerHit: 'ship-loss'
+};
+
+function catalogSpriteForEntry(entry){
+  const explicit = entry?.media?.spriteKey || entry?.spriteKey || entry?.id || '';
+  if(AURORA_PIXEL_SPRITES[explicit]) return AURORA_PIXEL_SPRITES[explicit];
+  const text = `${entry?.name || ''} ${entry?.runtime || ''}`;
+  const match = ALIEN_ROW_SPRITES.find(([pattern]) => pattern.test(text));
+  return match ? AURORA_PIXEL_SPRITES[match[1]] : null;
+}
+
+function spriteKeyForEntry(entry){
+  const explicit = entry?.media?.spriteKey || entry?.spriteKey || entry?.id || '';
+  if(AURORA_PIXEL_SPRITES[explicit]) return explicit;
+  const text = `${entry?.name || ''} ${entry?.runtime || ''}`;
+  const match = ALIEN_ROW_SPRITES.find(([pattern]) => pattern.test(text));
+  return match ? match[1] : '';
+}
+
+function renderPixelSprite(sprite){
+  if(!sprite || !Array.isArray(sprite.rows) || !sprite.rows.length) return '';
+  const cols = Math.max(...sprite.rows.map(row => String(row).length));
+  const colors = sprite.colors || {};
+  const cells = [];
+  for(const row of sprite.rows){
+    const padded = String(row).padEnd(cols, '.');
+    for(const token of padded){
+      const color = colors[token] || '';
+      cells.push(color
+        ? `<span class="isFilled" style="--pixel-color:${esc(color)}"></span>`
+        : '<span></span>');
+    }
+  }
+  return `
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">${esc(sprite.label || 'Runtime sprite')}</span>
+      <div class="pixelSprite" style="--pixel-cols:${cols}" aria-hidden="true">${cells.join('')}</div>
+    </div>
+  `;
+}
+
+function renderMediaImage(item){
+  if(!item || !item.src) return '';
+  const href = catalogMediaHref(item.src);
+  return `
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">${esc(item.label || 'Evidence image')}</span>
+      <img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy">
+      ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
+    </div>
+  `;
+}
+
+function renderCatalogVisualMedia(entry, options = {}){
+  const sprite = catalogSpriteForEntry(entry);
+  const spriteKey = spriteKeyForEntry(entry);
+  const media = entry?.media || {};
+  const images = [
+    ...(Array.isArray(media.images) ? media.images : []),
+    ...(options.includeReferenceContext ? (ALIEN_REFERENCE_CONTEXT[spriteKey] || []) : [])
+  ];
+  const items = [
+    renderPixelSprite(sprite),
+    ...images.map(renderMediaImage)
+  ].filter(Boolean);
+  if(!items.length){
+    return '<div class="mediaPlaceholder">Inline visual evidence pending.</div>';
+  }
+  const pending = options.showPendingTarget
+    ? '<div class="mediaPlaceholder">Direct extracted crop comparison pending promotion into this row.</div>'
+    : '';
+  return `<div class="catalogMedia"><div class="catalogMediaGrid">${items.join('')}</div>${pending}</div>`;
+}
+
+function parseCueNames(cues){
+  return String(cues || '')
+    .split(',')
+    .map(cue => cue.trim())
+    .filter(Boolean);
+}
+
+function audioEntriesForConformanceRow(entry, guide){
+  const cues = new Set(parseCueNames(entry.cues));
+  if(!cues.size) return [];
+  return (guide.audioContexts || []).filter(item => cues.has(item.cue));
+}
+
+function referenceClipsForEntries(entries, guide){
+  const ids = new Set(entries.map(entry => entry.id).filter(Boolean));
+  const clips = [];
+  for(const source of [...(guide.comparisonSets || []), ...(guide.audioEventMatrix || [])]){
+    if(!ids.has(source.entryId) || !source.referenceClip) continue;
+    if(clips.some(item => item.referenceClip === source.referenceClip)) continue;
+    clips.push({
+      label: source.referenceLabel || source.label || source.event || 'Reference',
+      referenceClip: source.referenceClip
+    });
+  }
+  return clips;
+}
+
+function audioPlotDirs(){
+  const root = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-theme-comparison');
+  if(!fs.existsSync(root)) return [];
+  return fs.readdirSync(root, { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => path.join(root, entry.name))
+    .sort()
+    .reverse();
+}
+
+function findAudioPlot(stem, variant, kind){
+  if(!stem) return '';
+  const filename = `${stem}-${variant}-${kind}.png`;
+  for(const dir of audioPlotDirs()){
+    const full = path.join(dir, 'plots', filename);
+    if(fs.existsSync(full)) return rel(full);
+  }
+  return '';
+}
+
+function renderAudioEvidenceImages(entries){
+  const stems = Array.from(new Set(entries.map(entry => AUDIO_PLOT_STEMS[entry.cue]).filter(Boolean))).slice(0, 2);
+  const images = [];
+  for(const stem of stems){
+    const auroraWaveform = findAudioPlot(stem, 'aurora', 'waveform');
+    const referenceSpectrogram = findAudioPlot(stem, 'reference', 'spectrogram') || findAudioPlot(stem, 'galaga', 'spectrogram');
+    if(auroraWaveform) images.push({ label: `${stem} Aurora waveform`, src: auroraWaveform });
+    if(referenceSpectrogram) images.push({ label: `${stem} reference spectrogram`, src: referenceSpectrogram });
+  }
+  if(!images.length) return '<div class="mediaPlaceholder">Waveform or spectrogram preview pending for this row.</div>';
+  return `<div class="waveformStrip">${images.map(renderMediaImage).join('')}</div>`;
+}
+
+function renderConformanceAudioReview(entry, guide){
+  const entries = audioEntriesForConformanceRow(entry, guide);
+  const runtimeButtons = entries.map(item => {
+    const index = (guide.audioContexts || []).indexOf(item);
+    return `<button class="audioAction isCompact" type="button" data-audio-index="${index}">Play ${esc(item.label || item.cue || 'Cue')}</button>`;
+  });
+  const references = referenceClipsForEntries(entries, guide).map(item => (
+    `<button class="audioAction isCompact" type="button" data-event-reference="${esc(item.referenceClip)}" data-event-label="${esc(item.label)}">Ref ${esc(item.label)}</button>`
+  ));
+  const compare = entries.find(item => (guide.comparisonSets || []).some(row => row.entryId === item.id));
+  const compareButton = compare
+    ? `<button class="audioAction isCompact" type="button" data-compare-entry-id="${esc(compare.id)}" data-theme-play="triple">Compare ${esc(compare.label || compare.cue)}</button>`
+    : '';
+  const actions = [...runtimeButtons, ...references, compareButton].filter(Boolean);
+  return `
+    <div class="catalogMedia">
+      ${actions.length ? `<div class="conformanceActions">${actions.join('')}</div>` : '<div class="mediaPlaceholder">Playable cue mapping pending.</div>'}
+      ${renderAudioEvidenceImages(entries)}
+    </div>
+  `;
+}
+
 function buildApplicationGuide(buildInfo, latestNote, guide){
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
@@ -1913,6 +2316,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const shipRows = (guide.shipCatalog || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.type || '')}</span></td>
+      <td>${renderCatalogVisualMedia(entry)}</td>
       <td>${esc(entry.families || '')}</td>
       <td>${esc(entry.appears || '')}</td>
       <td>${esc(entry.context || '')}</td>
@@ -1930,6 +2334,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
+      <td>${renderCatalogVisualMedia(entry, { includeReferenceContext: true, showPendingTarget: true })}</td>
       <td>${esc(entry.activity || '')}</td>
       <td>${esc(entry.presence || '')}</td>
       <td>${esc(entry.reference || '')}</td>
@@ -1941,6 +2346,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     <tr>
       <td><strong>${esc(entry.family || '')}</strong><br><span class="docMeta"><code>${esc(entry.cues || '')}</code></span></td>
       <td>${esc(entry.meaning || '')}</td>
+      <td>${renderConformanceAudioReview(entry, guide)}</td>
       <td>${esc(entry.reference || '')}</td>
       <td><strong>${esc(entry.score || '')}</strong><br><span class="docMeta">${esc(entry.confidence || '')}</span></td>
       <td>${esc(entry.next || '')}</td>
@@ -2130,6 +2536,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               <thead>
                 <tr>
                   <th>Ship / Type</th>
+                  <th>Visual</th>
                   <th>Families / Presentation</th>
                   <th>Where It Appears</th>
                   <th>Gameplay Context</th>
@@ -2175,6 +2582,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               <thead>
                 <tr>
                   <th>Alien / Role</th>
+                  <th>Visual Evidence</th>
                   <th>Activity</th>
                   <th>Presence</th>
                   <th>Reference</th>
@@ -2200,6 +2608,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 <tr>
                   <th>Cue Family</th>
                   <th>Gameplay Meaning</th>
+                  <th>Human Review</th>
                   <th>Reference</th>
                   <th>Score / Confidence</th>
                   <th>Next Gap</th>
@@ -2459,10 +2868,15 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               }
               return;
             }
-            if(!playEntry(entry, mode === 'galaga' ? 'galaga' : 'aurora')){
+            const playMode = mode === 'galaga'
+              ? 'galaga'
+              : mode === 'galaga-assets'
+                ? 'galaga-assets'
+                : 'aurora';
+            if(!playEntry(entry, playMode)){
               return;
             }
-            setStatus('Played ' + (mode === 'galaga' ? 'Galaga' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
+            setStatus('Played ' + (playMode === 'galaga' ? 'Galaga' : playMode === 'galaga-assets' ? 'Galaga runtime reference' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
             return;
           }
           const compareSetButton = event.target.closest('[data-compare-set]');
@@ -2470,6 +2884,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             const mode = compareSetButton.getAttribute('data-compare-set');
             playSet(
               mode === 'galaga' ? 'galaga'
+              : mode === 'galaga-assets' ? 'galaga-assets'
               : mode === 'ab' ? 'ab'
               : mode === 'reference' ? 'reference'
               : mode === 'triple' ? 'triple'
@@ -2889,6 +3304,7 @@ function build(options = {}){
   }
   const assetsOut = path.join(path.dirname(out.index), 'assets');
   const copiedAssets = copyAssetTree(ASSETS_DIR, assetsOut);
+  const copiedCatalogMedia = copyCatalogMediaAssets(assetsOut);
   const assetConformanceDashboard = path.join(assetsOut, 'conformance-dashboard.html');
   const assetConformanceDashboardData = path.join(assetsOut, 'conformance-dashboard-data.json');
   fs.writeFileSync(assetConformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
@@ -2919,7 +3335,8 @@ function build(options = {}){
     out.screenshot,
     assetConformanceDashboard,
     assetConformanceDashboardData,
-    ...copiedAssets
+    ...copiedAssets,
+    ...copiedCatalogMedia
   ];
 }
 

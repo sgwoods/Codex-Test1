@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-runtime-trial-decision",
+  "generatedAt": "2026-05-11T13:31:00.000Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "44ac29aa",
+  "dirty": true,
+  "cue": "playerHit",
+  "candidate": "promoted-active-window",
+  "decision": {
+    "status": "runtime-trial-rejected",
+    "promoteRuntime": false,
+    "reason": "Focused ship-loss candidate and promotion precheck were strong, but the measured runtime trial lowered the audio category score and did not resolve the full-theme active body/tail segmentation gap."
+  },
+  "problem": "Ship-loss audio is now the highest measured audio gap. The body/tail reference sub-events are not separated cleanly in the runtime active window, so the player death moment still reads as a collapsed high-energy segment under full-theme analysis.",
+  "strategy": "Use the focused ship-loss candidate loop and promotion precheck as proposal gates, then accept a runtime change only after a real full-theme audio comparison, event-gap rollup, cue-alignment guardrail, runtime recovery guardrail, and quality score.",
+  "trialCandidateEvidence": {
+    "focusedCandidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-11-44ac29aa-dirty-audio-focus-131800/ship-loss/report.json",
+    "promotionPrecheck": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-11-44ac29aa-dirty-132309-playerHit/report.json",
+    "focusedRiskDelta10": 5.06,
+    "focusedSegmentRiskDelta10": 5.44,
+    "lossCompositeScore10": 8.82,
+    "precheckWins": [
+      "Full-theme cue gap improves by 6.57/10.",
+      "Worst segment risk improves by 5.77/10.",
+      "Theme average worst-segment risk improves by 0.27/10."
+    ]
+  },
+  "runtimeTrialEvidence": {
+    "trialAudioThemeComparison": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-11-main-44ac29aa-132328/metrics.json",
+    "trialEventGap": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-11-44ac29aa-dirty-132456/report.json",
+    "observedTrialAudioScore10": 7.2,
+    "observedTrialHighestRiskCue": "playerHit",
+    "observedTrialHighestRisk10": 7.25,
+    "observedTrialAverageWorstSegmentRisk10": 4.64
+  },
+  "postRevertEvidence": {
+    "audioThemeComparison": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-11-main-44ac29aa-132658/metrics.json",
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-11-44ac29aa-dirty-132823/report.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-11-44ac29aa/report.json",
+    "audioCueAlignment": "npm run harness:check:audio-cue-alignment passed 9/9",
+    "audioRuntimeRecovery": "npm run harness:check:audio-runtime-recovery passed",
+    "audioGameOverTail": "npm run harness:check:audio-gameover-tail passed",
+    "currentOverallScore10": 9.2,
+    "currentAudioScore10": 7.3,
+    "currentHighestRiskCue": "playerHit",
+    "currentHighestRisk10": 7.57,
+    "currentAverageWorstSegmentRisk10": 4.55
+  },
+  "learning": [
+    "Focused candidate scoring and promotion precheck are necessary but not sufficient for composite cues.",
+    "PlayerHit needs a contract-aware active-window strategy that can represent onset/body/tail separately in runtime or in scoring, not only a shorter clip window.",
+    "Runtime trial acceptance must compare the real post-edit audio theme, event-gap, alignment, recovery, and quality artifacts before promotion."
+  ],
+  "nextStep": "Build a contract-aware playerHit candidate/pass that either separates death onset/body/tail into runtime cue phases or improves the scoring/capture strategy so the active body is evaluated against the intended sub-event."
+}

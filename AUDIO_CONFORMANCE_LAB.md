@@ -107,20 +107,48 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `7.1/10` |
+| Quality score audio category | `7.3/10` |
 | Overall quality score | `9.2/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.1/10` |
-| Average worst segment risk | `3.7/10` |
+| Acoustic event score | `5.45/10` |
+| Average worst segment risk | `4.55/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
-| Highest current audio gap | `stagePulse` onset |
+| Highest current audio gap | `playerHit` body |
 | Candidate loop coverage | `8/8` contracted cues |
 
 This means the process is now stronger than the current runtime audio. The
 contracts are ready enough to guide the next work, while the implementation
-still needs a sharper `stagePulse` onset strategy and composite-cue handling for
-ship loss.
+still needs stronger composite-cue handling for ship loss and a sharper
+`stagePulse` onset strategy.
+
+May 11 capture-stability and ship-loss trial pass:
+
+- Harness improvement kept: browser-backed audio captures now include an
+  explicit `80ms` recorder preroll, and candidate artifacts record capture
+  attempt, byte length, capture duration, and preroll. This reduces the chance
+  that short cue candidates are scored against `MediaRecorder` startup timing
+  rather than the cue itself.
+- Fresh `stagePulse` sweeps showed that previous low-risk synthetic candidates
+  were partly measurement artifacts. Under stabilized capture, no
+  `stagePulse` candidate cleared focused keeper gates; no runtime promotion was
+  made.
+- Impact/reward sweep found one focused `rescueJoin` keeper, but full-theme
+  promotion precheck rejected it because the cue gap and worst segment risk
+  worsened in context.
+- Ship-loss sweep found a focused `playerHit` keeper
+  (`promoted-active-window`) with risk improvement `5.06/10` and loss-composite
+  score `8.82/10`. Promotion precheck allowed a runtime trial.
+- Runtime `playerHit` trial was rejected and rolled back. The full-theme trial
+  lowered the audio category score to `7.2/10` and did not solve the
+  active-window body/tail segmentation issue.
+- Persisted trial decision:
+  `reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-11-44ac29aa-playerHit-rejected/report.json`
+
+Read: `playerHit` is now the highest measured audio gap because the improved
+capture path exposes that death onset/body/tail are not represented as separate
+runtime-evaluable sub-events. The next valuable pass is not a shorter clip; it
+is a contract-aware composite cue strategy for ship loss.
 
 Full-grid `stagePulse` pass:
 

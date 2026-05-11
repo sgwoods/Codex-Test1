@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-11T01-10-33-368Z-83107",
-  "startedAt": "2026-05-11T01:10:33.368Z",
-  "endedAt": "2026-05-11T01:10:33.780Z",
+  "id": "2026-05-11T13-35-57-899Z-96109",
+  "startedAt": "2026-05-11T13:35:57.899Z",
+  "endedAt": "2026-05-11T13:35:58.153Z",
   "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "46e1b45c",
+  "commit": "44ac29aa",
   "command": [
     "npm",
     "run",
-    "harness:build:release-conformance-dashboard"
+    "harness:analyze:conformance-economics"
   ],
   "axes": [
-    "dashboard"
+    "conformance-economics"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "release dashboard refresh after alien-entry path precision pass",
+  "notes": "refresh economics after audio capture-stability pass",
   "measurement": {
-    "wallSeconds": 0.412,
-    "timeRealSeconds": 0.4,
-    "timeUserSeconds": 0.22,
-    "timeSystemSeconds": 0.25,
-    "cpuSeconds": 0.47,
+    "wallSeconds": 0.254,
+    "timeRealSeconds": 0.25,
+    "timeUserSeconds": 0.17,
+    "timeSystemSeconds": 0.06,
+    "cpuSeconds": 0.23,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 812254328,
-    "artifactBytesAfter": 813261779,
-    "artifactBytesDelta": 1007451
+    "artifactBytesBefore": 924061591,
+    "artifactBytesAfter": 924911784,
+    "artifactBytesDelta": 850193
   }
 }

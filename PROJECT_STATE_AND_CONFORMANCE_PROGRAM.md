@@ -1,6 +1,6 @@
 # Project State And Conformance Program
 
-Updated: May 10, 2026
+Updated: May 11, 2026
 
 This is the maintained top-level explanation of the broader Aurora / Platinum
 effort. It is meant to answer four questions at once:
@@ -79,9 +79,9 @@ Current Aurora read:
 
 - overall release-quality score: `9.2/10`
 - weakest high-value category: audio identity and cue alignment, currently
-  `7.1/10`
+  `7.3/10`
 - audio cue-contract readiness: `9.09/10`; semantic event scoring is strong at
-  `9.78/10`, but acoustic event fit remains weak at `6.07/10`
+  `9.78/10`, but acoustic event fit remains weak at `5.45/10`
 - level arc and encounter shape: `8.8/10`
 - boss entry and formation grammar: `9.2/10`
 - alien entry and challenge-stage novelty: `7.8/10`
@@ -97,10 +97,10 @@ Important interpretation:
   scorer can hide meaningful feel gaps
 - a better scorer may temporarily lower a score while improving the project
   because it exposes a truer gap
-- the latest audio and challenge-stage work is a good example: widening the
-  inter-level phrase and preserving the game-over tail improved player-facing
-  continuity, while the stricter challenge scorer lowered confidence in
-  "arrival versus appearance" and exposed a truer stage-variation gap
+- the latest audio and challenge-stage work is a good example: stabilizing
+  browser audio capture exposed `playerHit` body as the true highest audio gap,
+  while the stricter challenge scorer lowered confidence in "arrival versus
+  appearance" and exposed a truer stage-variation gap
 
 ## Per-Game Status
 

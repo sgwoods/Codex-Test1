@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-promotion-precheck",
+  "generatedAt": "2026-05-11T12:36:14.845Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "44ac29aa",
+  "dirty": true,
+  "cue": "rescueJoin",
+  "problem": "Focused audio cue sweeps can find local candidates that look promising in isolation, then fail once placed in the full Aurora theme and event-gap scoring context.",
+  "strategy": "Replace one cue in the latest full-theme metrics with a representative candidate capture, run the normal event-gap scorer against that synthetic theme, and block runtime promotion unless the cue and aggregate guardrails improve.",
+  "successMeasure": "A candidate may be promoted only when focused keeper gates, full-theme cue gap, worst-segment risk, theme average risk, and semantic score all hold or improve.",
+  "candidate": {
+    "id": "refclip-s2399-d300-v105",
+    "risk10": 3.88,
+    "worstSegmentRisk10": 5.08,
+    "keeperRead": "clears keeper gates",
+    "stability": {
+      "repetitions": 3,
+      "riskStd": 0.093,
+      "durationGapStdSeconds": 0.034,
+      "centroidGapStdHz": 13.7,
+      "zeroCrossingGapStdPerSecond": 115.1,
+      "bandShapeGapStd": 0.0092,
+      "decayRatioGapStd": 0.895,
+      "rmsGapStd": 0.0148
+    },
+    "spec": {
+      "referenceClip": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+      "cooldownMs": 1800,
+      "referenceVolume": 1.05,
+      "clipStart": 2.399,
+      "clipDuration": 0.3
+    }
+  },
+  "decision": {
+    "status": "precheck-reject",
+    "allowRuntimeTrial": false,
+    "promoteRuntime": false,
+    "runtimeValidationRequired": true,
+    "blockers": [
+      "Full-theme cue gap worsens by 0.33/10.",
+      "Worst segment risk worsens by 0.69/10."
+    ],
+    "wins": [],
+    "currentCueRow": {
+      "id": "rescue-join",
+      "label": "Rescue Join",
+      "cue": "rescueJoin",
+      "focus": "Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.",
+      "status": "active-segment-detected",
+      "eventCritical": true,
+      "gapRisk10": 3.27,
+      "durationGapSeconds": 0.051,
+      "centroidGapHz": 398.6,
+      "zeroCrossingGapPerSecond": 283.6,
+      "rmsGap": 0.1232,
+      "bestReferenceSegmentScore": 0.674,
+      "bestReferenceSegment": {
+        "startSeconds": 0.05,
+        "endSeconds": 0.251,
+        "score": 0.674
+      },
+      "segmentRoleComparisonCount": 1,
+      "worstSegmentRole": "onset",
+      "worstSegmentRisk10": 4.69,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "worstSegmentDelta": {
+        "duration_s": 0.05,
+        "spectral_centroid_hz": 537.1,
+        "zero_crossings_per_s": 1007.2,
+        "rms": 0.1717,
+        "spectral_spread_hz": 324.2,
+        "spectral_rolloff_85_hz": 1535.6,
+        "spectral_flatness": 0.0195,
+        "band_shape_distance": 0.2458,
+        "attack_peak_position": 0.083,
+        "decay_ratio": 0.132,
+        "envelope_contrast": 0.098,
+        "burst_share": 0.034
+      },
+      "referenceSegmentationStatus": "single-reference-body",
+      "referenceSegmentationConfidence": "high",
+      "referenceSegmentationResolution": "auto energy segmentation with role-by-role comparison",
+      "referenceSegmentationSource": null,
+      "semanticClass": "rescue-reward",
+      "playerMeaning": "The rescued fighter rejoined; the cue should clearly reward the player.",
+      "distinctFrom": [
+        "capturedFighterDestroyed",
+        "challengePerfect"
+      ],
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high",
+      "sharedReferenceClipCount": 0,
+      "semanticScore10": 10,
+      "semanticRecommendation": "Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.",
+      "sourceReferenceClipCount": 1,
+      "sourceReferenceWindowCount": 1,
+      "hasDistinctReferenceWindow": true,
+      "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+    },
+    "simulatedCueRow": {
+      "id": "rescue-join",
+      "label": "Rescue Join (promotion precheck)",
+      "cue": "rescueJoin",
+      "focus": "Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.",
+      "status": "active-segment-detected",
+      "eventCritical": true,
+      "gapRisk10": 3.6,
+      "durationGapSeconds": 0.041,
+      "centroidGapHz": 396.4,
+      "zeroCrossingGapPerSecond": 382.7,
+      "rmsGap": 0.1263,
+      "bestReferenceSegmentScore": 0.635,
+      "bestReferenceSegment": {
+        "startSeconds": 0.05,
+        "endSeconds": 0.241,
+        "score": 0.635
+      },
+      "segmentRoleComparisonCount": 1,
+      "worstSegmentRole": "onset",
+      "worstSegmentRisk10": 5.38,
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "worstSegmentDelta": {
+        "duration_s": 0.04,
+        "spectral_centroid_hz": 605.8,
+        "zero_crossings_per_s": 1219.6,
+        "rms": 0.1778,
+        "spectral_spread_hz": 169,
+        "spectral_rolloff_85_hz": 1560.6,
+        "spectral_flatness": 0.059,
+        "band_shape_distance": 0.2305,
+        "attack_peak_position": 0.058,
+        "decay_ratio": 0.093,
+        "envelope_contrast": 0.152,
+        "burst_share": 0.222
+      },
+      "referenceSegmentationStatus": "single-reference-body",
+      "referenceSegmentationConfidence": "high",
+      "referenceSegmentationResolution": "auto energy segmentation with role-by-role comparison",
+      "referenceSegmentationSource": null,
+      "semanticClass": "rescue-reward",
+      "playerMeaning": "The rescued fighter rejoined; the cue should clearly reward the player.",
+      "distinctFrom": [
+        "capturedFighterDestroyed",
+        "challengePerfect"
+      ],
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high",
+      "sharedReferenceClipCount": 0,
+      "semanticScore10": 10,
+      "semanticRecommendation": "Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.",
+      "sourceReferenceClipCount": 1,
+      "sourceReferenceWindowCount": 1,
+      "hasDistinctReferenceWindow": true,
+      "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+    },
+    "summaryDelta": {
+      "averageWorstSegmentRisk10": 0.03,
+      "highestRiskCue": "stagePulse -> stagePulse",
+      "highestRisk10": 0,
+      "semanticAverageScore10": 0
+    }
+  },
+  "source": {
+    "candidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-rescue-join.json",
+    "candidateFocusMetrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-11-44ac29aa-dirty-audio-focus-121239/rescue-join/metrics.json",
+    "themeMetrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-11-main-44ac29aa-021631/metrics.json",
+    "syntheticThemeMetrics": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-11-44ac29aa-dirty-123614-rescueJoin/candidate-theme-metrics.json",
+    "simulatedEventGap": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-11-44ac29aa-dirty-123614-rescueJoin/event-gap/latest.json",
+    "currentEventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
+  },
+  "nextStep": "Do not promote rescueJoin; use this precheck evidence to pivot toward a stronger candidate family or the current highest-risk cue (stagePulse)."
+}

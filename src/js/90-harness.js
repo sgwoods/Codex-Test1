@@ -636,6 +636,7 @@ window.__galagaHarness__={
   const chunks=[];
   const recorder=mimeType?new MediaRecorder(sfx.tap.stream,{mimeType}):new MediaRecorder(sfx.tap.stream);
   const captureMs=Math.max(700,Math.round(1000*(captureOpts.captureSeconds||this.estimateAudioCueDuration(name,captureOpts))));
+  const capturePrerollMs=Math.max(0,Math.min(500,Number.isFinite(+captureOpts.capturePrerollMs)?Math.round(+captureOpts.capturePrerollMs):80));
   const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
   const audioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||null;
   try{
@@ -662,6 +663,7 @@ window.__galagaHarness__={
        byteLength:bytes.length,
        mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
        captureMs,
+       capturePrerollMs,
        requestedCue:String(name),
        audioCue:playedCue||audioDebug?.lastCue||null
       });
@@ -676,6 +678,7 @@ window.__galagaHarness__={
       ok:true,
       mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
       captureMs,
+      capturePrerollMs,
       base64:btoa(binary),
       requestedCue:String(name),
       audioCue:playedCue||audioDebug?.lastCue||null
@@ -692,9 +695,11 @@ window.__galagaHarness__={
     ok:false,
     error:err?.message||String(err),
     requestedCue:String(name),
+    capturePrerollMs,
     audioCue:playedCue||audioDebug?.lastCue||null
    };
   }
+  if(capturePrerollMs>0)await new Promise(resolve=>setTimeout(resolve,capturePrerollMs));
   if(typeof sfx.playCue==='function')sfx.playCue(String(name),captureOpts);
   playedCue=audioDebug?.lastCue||null;
   await new Promise(resolve=>setTimeout(resolve,captureMs));
