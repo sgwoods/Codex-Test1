@@ -17,7 +17,7 @@ function formationLayout(stage){
 }
 
 function regularEntryPathFamily(stage){
- if(stage>=16)return 'crown-split-weave-entry';
+ if(stage>=16)return 'crown-looping-split-entry';
  if(stage>=14)return 'late-boss-column-weave';
  if(stage>=12)return 'galboss-low-hook-entry';
  if(stage>=10)return 'stingray-pincer-entry';

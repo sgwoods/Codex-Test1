@@ -194,13 +194,16 @@ function updateEnemy(e,dt,t,T,p){
 	   sy=ty+Math.cos(e.en*5.2+e.ph+e.c*.2)*(34+e.r*5)*fm.entryY*k;
 	  }else if(!stage1&&entryFamily==='stingray-pincer-entry'){
 	   const side=e.c<5?-1:1;
-	   const fold=Math.sin(Math.min(1,e.en/2.1)*Math.PI);
-	   sx=tx+side*(156+e.r*14)*Math.sin(e.en*3.05+e.ph)*fm.entryX*k-side*fold*(68+e.r*6)*k+Math.sin(e.en*8.8+e.c)*14*k;
-	   sy=ty+Math.cos(e.en*3.25+e.ph+e.c*.16)*(58+e.r*7)*fm.entryY*k+fold*(e.r<2?24:44)*k;
+	   const fold=Math.sin(Math.min(1,e.en/2.05)*Math.PI);
+	   const sweep=Math.cos(e.en*1.85+e.ph*.42);
+	   sx=tx+side*(sweep*(184+e.r*18)*fm.entryX-fold*(92+e.r*8))*k+Math.sin(e.en*5.15+e.c)*8*k;
+	   sy=ty+Math.sin(e.en*2.35+e.ph+e.c*.12)*(42+e.r*6)*fm.entryY*k+fold*(52+e.r*9)*k;
 	  }else if(!stage1&&entryFamily==='galboss-low-hook-entry'){
-	   const hook=Math.sin(Math.min(1,e.en/2.2)*Math.PI);
-	   sx=tx+Math.sin(e.en*3.8+e.ph)*(112+e.r*8)*fm.entryX*k+(e.c<5?-1:1)*hook*24*k;
-	   sy=ty+Math.cos(e.en*4.8+e.ph)*(42+e.r*4)*fm.entryY*k+hook*18*k;
+	   const side=e.c<5?-1:1;
+	   const hook=Math.sin(Math.min(1,e.en/2.05)*Math.PI);
+	   const dip=Math.sin(Math.min(1,e.en/1.62)*Math.PI);
+	   sx=tx+Math.sin(e.en*2.65+e.ph)*(62+e.r*5)*fm.entryX*k+side*hook*(22+e.r*3)*k;
+	   sy=ty+Math.cos(e.en*3.35+e.ph)*(36+e.r*4)*fm.entryY*k+dip*(78+e.r*10)*k;
 	  }else if(!stage1&&entryFamily==='late-boss-column-weave'){
 	   sx=tx+Math.sin(e.en*6.8+e.c*.65)*(96+e.r*12)*fm.entryX*k;
 	   sy=ty+Math.cos(e.en*3.2+e.ph)*(48+e.r*5)*fm.entryY*k+Math.sin(e.en*7.1+e.r)*7*k;
@@ -209,6 +212,13 @@ function updateEnemy(e,dt,t,T,p){
 	   const crown=Math.sin(Math.min(1,e.en/2.35)*Math.PI);
 	   sx=tx+side*(Math.sin(e.en*5.9+e.ph)*(166+e.r*14)+crown*(64+e.r*7))*fm.entryX*k+Math.sin(e.en*10.6+e.c)*16*k;
 	   sy=ty+Math.cos(e.en*4.1+e.ph+e.r*.32)*(48+e.r*8)*fm.entryY*k+crown*(28+e.r*4)*k+crown*Math.sin(e.c*.9)*(18+e.r*3)*k;
+	  }else if(!stage1&&entryFamily==='crown-looping-split-entry'){
+	   const side=e.c<5?-1:1;
+	   const crown=Math.sin(Math.min(1,e.en/2.15)*Math.PI);
+	   const loop=Math.sin(e.en*7.4+e.ph+e.r*.42);
+	   const split=Math.sin(e.en*3.15+e.c*.55);
+	   sx=tx+side*(Math.sin(e.en*4.85+e.ph)*(142+e.r*18)+crown*(94+e.r*9))*fm.entryX*k+loop*(34+e.r*5)*k-side*split*(26+e.r*4)*k;
+	   sy=ty+Math.cos(e.en*5.75+e.ph+e.r*.36)*(64+e.r*10)*fm.entryY*k+crown*(44+e.r*6)*k+Math.sin(e.en*10.9+e.c*.7)*(12+e.r*3)*k;
 	  }
 	  e.x+=(sx-e.x)*Math.min(1,dt*(stage1?3.1:3.6));
   e.y+=(sy-e.y)*Math.min(1,dt*(stage1?3:3.4));

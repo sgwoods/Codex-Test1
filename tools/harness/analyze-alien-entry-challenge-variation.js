@@ -111,6 +111,17 @@ function geometryVector(window){
   ];
 }
 
+function geometryVectorObject(window){
+  return {
+    xRange: round(meanFeature(window, 'xRange')),
+    yRange: round(meanFeature(window, 'yRange')),
+    pathLength: round(meanFeature(window, 'pathLength')),
+    turnCount: round(meanFeature(window, 'turnCount')),
+    reversalCount: round(meanFeature(window, 'reversalCount')),
+    lowerFieldShare: round(meanFeature(window, 'lowerFieldShare'))
+  };
+}
+
 function vectorDistance(a, b){
   const av = geometryVector(a);
   const bv = geometryVector(b);
@@ -130,6 +141,17 @@ function geometryPairs(windows){
     }
   }
   return pairs.sort((a, b) => a.distance - b.distance || a.a.localeCompare(b.a) || a.b.localeCompare(b.b));
+}
+
+function geometryPairDetails(pair, windows){
+  if(!pair) return null;
+  const a = windows.find(window => window.windowId === pair.a);
+  const b = windows.find(window => window.windowId === pair.b);
+  if(!a || !b) return pair;
+  const aVector = geometryVectorObject(a);
+  const bVector = geometryVectorObject(b);
+  const delta = Object.fromEntries(Object.keys(aVector).map(key => [key, round((bVector[key] || 0) - (aVector[key] || 0))]));
+  return Object.assign({}, pair, { aVector, bVector, delta });
 }
 
 function buildReport(){
@@ -296,10 +318,10 @@ function buildReport(){
       meanRegularDistance: round(meanRegularDistance),
       minRegularGeometryDistance: round(minRegularGeometryDistance),
       meanRegularGeometryDistance: round(meanRegularGeometryDistance),
-      closestRegularGeometryPair: regularGeometryPairs[0] || null,
+      closestRegularGeometryPair: geometryPairDetails(regularGeometryPairs[0], regularPath),
       minChallengeGeometryDistance: round(minChallengeGeometryDistance),
       meanChallengeGeometryDistance: round(meanChallengeGeometryDistance),
-      closestChallengeGeometryPair: challengeGeometryPairs[0] || null,
+      closestChallengeGeometryPair: geometryPairDetails(challengeGeometryPairs[0], challengePath),
       distinctPairRatio: round(distinctPairRatio),
       repetitionRisk: round(repetitionRisk),
       regularSignatureCount,
