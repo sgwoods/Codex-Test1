@@ -42,6 +42,14 @@ def metrics(sample_rate, data):
             "rms": 0.0,
             "spectral_centroid_hz": 0.0,
             "zero_crossings_per_s": 0.0,
+            "spectral_spread_hz": 0.0,
+            "spectral_rolloff_85_hz": 0.0,
+            "spectral_flatness": 0.0,
+            "band_energy": {},
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.0,
+            "envelope_contrast": 0.0,
+            "burst_share": 0.0,
         }
     duration = float(data.size) / float(sample_rate)
     peak = float(np.max(np.abs(data)))
@@ -50,6 +58,14 @@ def metrics(sample_rate, data):
     freqs = np.fft.rfftfreq(data.size, d=1.0 / sample_rate)
     mag_sum = float(np.sum(spectrum))
     centroid = float(np.sum(freqs * spectrum) / mag_sum) if mag_sum > 0 else 0.0
+    spread = float(np.sqrt(np.sum(((freqs - centroid) ** 2) * spectrum) / mag_sum)) if mag_sum > 0 else 0.0
+    cumulative = np.cumsum(spectrum)
+    rolloff_index = int(np.searchsorted(cumulative, mag_sum * 0.85)) if mag_sum > 0 else 0
+    rolloff = float(freqs[min(rolloff_index, freqs.size - 1)]) if freqs.size else 0.0
+    positive = spectrum[spectrum > 0]
+    flatness = float(np.exp(np.mean(np.log(positive))) / max(np.mean(positive), 1e-12)) if positive.size else 0.0
+    band_energy = band_energy_ratios(freqs, spectrum)
+    envelope = envelope_metrics(sample_rate, data)
     zero_crossings = np.count_nonzero(np.diff(np.signbit(data)))
     return {
         "duration_s": round(duration, 3),
@@ -57,6 +73,64 @@ def metrics(sample_rate, data):
         "rms": round(rms, 4),
         "spectral_centroid_hz": round(centroid, 1),
         "zero_crossings_per_s": round(float(zero_crossings) / max(duration, 1e-9), 1),
+        "spectral_spread_hz": round(spread, 1),
+        "spectral_rolloff_85_hz": round(rolloff, 1),
+        "spectral_flatness": round(flatness, 4),
+        "band_energy": band_energy,
+        **envelope,
+    }
+
+
+def band_energy_ratios(freqs, spectrum):
+    total = float(np.sum(spectrum))
+    if total <= 0:
+        return {
+            "sub_500": 0.0,
+            "low_mid_500_1500": 0.0,
+            "mid_1500_3000": 0.0,
+            "presence_3000_6000": 0.0,
+            "air_6000_plus": 0.0,
+        }
+    bands = {
+        "sub_500": (0, 500),
+        "low_mid_500_1500": (500, 1500),
+        "mid_1500_3000": (1500, 3000),
+        "presence_3000_6000": (3000, 6000),
+        "air_6000_plus": (6000, float("inf")),
+    }
+    result = {}
+    for key, (lo, hi) in bands.items():
+        mask = (freqs >= lo) & (freqs < hi)
+        result[key] = round(float(np.sum(spectrum[mask])) / total, 4)
+    return result
+
+
+def envelope_metrics(sample_rate, data):
+    frame_size = max(1, int(sample_rate * 0.008))
+    frame_rms = np.array([
+        float(np.sqrt(np.mean(np.square(data[start:start + frame_size]))))
+        for start in range(0, data.size, frame_size)
+        if data[start:start + frame_size].size
+    ])
+    if frame_rms.size == 0:
+        return {
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.0,
+            "envelope_contrast": 0.0,
+            "burst_share": 0.0,
+        }
+    peak_index = int(np.argmax(frame_rms))
+    split = max(1, frame_rms.size // 2)
+    first_half = float(np.mean(frame_rms[:split]))
+    second_half = float(np.mean(frame_rms[split:])) if frame_rms[split:].size else 0.0
+    floor = float(np.percentile(frame_rms, 50))
+    high = float(np.percentile(frame_rms, 90))
+    burst_threshold = float(np.mean(frame_rms) + np.std(frame_rms) * 0.75)
+    return {
+        "attack_peak_position": round(peak_index / max(1, frame_rms.size - 1), 3),
+        "decay_ratio": round(second_half / max(first_half, 1e-9), 3),
+        "envelope_contrast": round(high / max(floor, 1e-9), 3),
+        "burst_share": round(float(np.count_nonzero(frame_rms >= burst_threshold)) / max(1, frame_rms.size), 3),
     }
 
 
@@ -83,9 +157,31 @@ def active_window(sample_rate, data):
         full = float(data.size) / float(sample_rate)
         return {"start_s": 0.0, "end_s": round(full, 3), "duration_s": round(full, 3), "coverage": 1.0}, data
 
+    active_set = set(int(index) for index in active)
+    max_gap_frames = max(1, int(0.035 / (hop / sample_rate)))
+    islands = []
+    open_start = int(active[0])
+    last_active = int(active[0])
+    for frame_index in [int(index) for index in active[1:]]:
+        if frame_index - last_active <= max_gap_frames:
+            last_active = frame_index
+            continue
+        islands.append((open_start, last_active))
+        open_start = frame_index
+        last_active = frame_index
+    islands.append((open_start, last_active))
+
+    def island_score(island):
+        start_index, end_index = island
+        indices = [index for index in range(start_index, end_index + 1) if index in active_set]
+        if not indices:
+            return 0.0
+        return float(np.sum(frame_rms[indices]))
+
+    best_start, best_end = max(islands, key=island_score)
     pad = int(sample_rate * 0.05)
-    start = max(0, int(frame_starts[int(active[0])]) - pad)
-    end = min(data.size, int(frame_starts[int(active[-1])] + frame_size) + pad)
+    start = max(0, int(frame_starts[best_start]) - pad)
+    end = min(data.size, int(frame_starts[best_end] + frame_size) + pad)
     duration = float(end - start) / float(sample_rate)
     full_duration = float(data.size) / float(sample_rate)
     return {
@@ -97,13 +193,257 @@ def active_window(sample_rate, data):
     }, data[start:end]
 
 
+def float_or_none(value):
+    try:
+        parsed = float(value)
+        return parsed if math.isfinite(parsed) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def analysis_window_data(sample_rate, data, window):
+    if not isinstance(window, dict):
+        return data, None
+    start = float_or_none(window.get("start_s", window.get("startSeconds")))
+    end = float_or_none(window.get("end_s", window.get("endSeconds")))
+    duration = float_or_none(window.get("duration_s", window.get("durationSeconds")))
+    if start is None:
+        return data, None
+    if end is None and duration is not None:
+        end = start + duration
+    if end is None or end <= start:
+        return data, None
+    start_sample = max(0, min(data.size, int(round(start * sample_rate))))
+    end_sample = max(start_sample, min(data.size, int(round(end * sample_rate))))
+    if end_sample <= start_sample:
+        return data, None
+    return data[start_sample:end_sample], {
+        "start_s": round(start_sample / sample_rate, 3),
+        "end_s": round(end_sample / sample_rate, 3),
+        "duration_s": round((end_sample - start_sample) / sample_rate, 3),
+    }
+
+
 def metric_deltas(left, right):
     return {
         "duration_s": round(abs((left.get("duration_s") or 0) - (right.get("duration_s") or 0)), 3),
         "spectral_centroid_hz": round(abs((left.get("spectral_centroid_hz") or 0) - (right.get("spectral_centroid_hz") or 0)), 1),
         "zero_crossings_per_s": round(abs((left.get("zero_crossings_per_s") or 0) - (right.get("zero_crossings_per_s") or 0)), 1),
         "rms": round(abs((left.get("rms") or 0) - (right.get("rms") or 0)), 4),
+        "spectral_spread_hz": round(abs((left.get("spectral_spread_hz") or 0) - (right.get("spectral_spread_hz") or 0)), 1),
+        "spectral_rolloff_85_hz": round(abs((left.get("spectral_rolloff_85_hz") or 0) - (right.get("spectral_rolloff_85_hz") or 0)), 1),
+        "spectral_flatness": round(abs((left.get("spectral_flatness") or 0) - (right.get("spectral_flatness") or 0)), 4),
+        "band_shape_distance": round(band_shape_distance(left.get("band_energy") or {}, right.get("band_energy") or {}), 4),
+        "attack_peak_position": round(abs((left.get("attack_peak_position") or 0) - (right.get("attack_peak_position") or 0)), 3),
+        "decay_ratio": round(abs((left.get("decay_ratio") or 0) - (right.get("decay_ratio") or 0)), 3),
+        "envelope_contrast": round(abs((left.get("envelope_contrast") or 0) - (right.get("envelope_contrast") or 0)), 3),
+        "burst_share": round(abs((left.get("burst_share") or 0) - (right.get("burst_share") or 0)), 3),
     }
+
+
+def segment_gap_score(delta):
+    return round(min(10.0, (
+        min(float(delta.get("duration_s") or 0) / 0.22, 1.8) +
+        min(float(delta.get("spectral_centroid_hz") or 0) / 650.0, 2.2) +
+        min(float(delta.get("zero_crossings_per_s") or 0) / 1100.0, 1.4) +
+        min(float(delta.get("rms") or 0) / 0.16, 1.2) +
+        min(float(delta.get("band_shape_distance") or 0) / 0.32, 1.7) +
+        min(float(delta.get("spectral_rolloff_85_hz") or 0) / 2600.0, 1.2) +
+        min(float(delta.get("attack_peak_position") or 0) / 0.45, 0.9) +
+        min(float(delta.get("burst_share") or 0) / 0.34, 0.6)
+    )), 2)
+
+
+def segment_center(segment):
+    return (float(segment.get("start_s") or 0) + float(segment.get("end_s") or 0)) / 2.0
+
+
+def matching_segment(reference_segment, candidate_segments):
+    if not candidate_segments:
+        return None, False
+    role = reference_segment.get("role")
+    same_role = [segment for segment in candidate_segments if segment.get("role") == role]
+    pool = same_role or candidate_segments
+    ref_center = segment_center(reference_segment)
+    return min(pool, key=lambda segment: abs(segment_center(segment) - ref_center)), bool(same_role)
+
+
+def segment_role_comparisons(item_report):
+    variants = item_report.get("variants") or {}
+    reference_segments = ((variants.get("reference") or {}).get("eventSegmentation") or {}).get("segments") or []
+    aurora_segments = ((variants.get("aurora") or {}).get("eventSegmentation") or {}).get("segments") or []
+    galaga_segments = ((variants.get("galaga") or {}).get("eventSegmentation") or {}).get("segments") or []
+    comparisons = []
+    for ref in reference_segments:
+        aur, aur_exact_role = matching_segment(ref, aurora_segments)
+        gal, gal_exact_role = matching_segment(ref, galaga_segments)
+        aur_delta = metric_deltas(aur.get("metrics") if aur else {}, ref.get("metrics") or {}) if aur else None
+        gal_delta = metric_deltas(gal.get("metrics") if gal else {}, ref.get("metrics") or {}) if gal else None
+        comparisons.append({
+            "role": ref.get("role") or "segment",
+            "referenceWindow": {"start_s": ref.get("start_s"), "end_s": ref.get("end_s"), "duration_s": ref.get("duration_s")},
+            "auroraWindow": {"start_s": aur.get("start_s"), "end_s": aur.get("end_s"), "duration_s": aur.get("duration_s")} if aur else None,
+            "syntheticGalagaWindow": {"start_s": gal.get("start_s"), "end_s": gal.get("end_s"), "duration_s": gal.get("duration_s")} if gal else None,
+            "auroraExactRoleMatch": aur_exact_role,
+            "syntheticGalagaExactRoleMatch": gal_exact_role,
+            "auroraVsReference": aur_delta,
+            "syntheticGalagaVsReference": gal_delta,
+            "auroraSegmentRisk10": segment_gap_score(aur_delta or {}),
+            "syntheticGalagaSegmentRisk10": segment_gap_score(gal_delta or {}),
+            "interpretation": segment_interpretation(ref.get("role") or "segment", aur_delta or {}, aur_exact_role),
+        })
+    comparisons.sort(key=lambda item: (-item["auroraSegmentRisk10"], str(item["role"])))
+    return comparisons
+
+
+def segment_interpretation(role, delta, exact_role_match=True):
+    if not delta:
+        return f"{role} segment is missing from the runtime capture."
+    if not exact_role_match:
+        return f"{role} reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
+    if float(delta.get("duration_s") or 0) > 0.12:
+        return f"{role} timing/duration differs enough to tune event pacing before timbre."
+    if float(delta.get("band_shape_distance") or 0) > 0.16 or float(delta.get("spectral_rolloff_85_hz") or 0) > 1800:
+        return f"{role} timbre is the leading gap: band shape/rolloff differ from the reference segment."
+    if float(delta.get("attack_peak_position") or 0) > 0.28 or float(delta.get("burst_share") or 0) > 0.2:
+        return f"{role} envelope is the leading gap: transient placement or burst structure differs."
+    if float(delta.get("rms") or 0) > 0.08:
+        return f"{role} loudness/energy differs; tune gain after timing and timbre remain stable."
+    return f"{role} segment is comparatively close; keep it as a guardrail while other segments improve."
+
+
+def score_gap(value, tolerance):
+    try:
+        gap = abs(float(value))
+    except (TypeError, ValueError):
+        return 0.0
+    return round(max(0.0, min(10.0, 10.0 - ((gap / max(tolerance, 0.001)) * 10.0))), 2)
+
+
+def score_deficit(actual, target, tolerance):
+    try:
+        deficit = max(0.0, float(target) - float(actual))
+    except (TypeError, ValueError):
+        return 0.0
+    return round(max(0.0, min(10.0, 10.0 - ((deficit / max(tolerance, 0.001)) * 10.0))), 2)
+
+
+def score_excess(actual, target, tolerance):
+    try:
+        excess = max(0.0, float(actual) - float(target))
+    except (TypeError, ValueError):
+        return 0.0
+    return round(max(0.0, min(10.0, 10.0 - ((excess / max(tolerance, 0.001)) * 10.0))), 2)
+
+
+def weighted_score(rows):
+    total_weight = sum(float(row.get("weight") or 0) for row in rows)
+    if total_weight <= 0:
+        return 0.0
+    return round(sum(float(row.get("score10") or 0) * float(row.get("weight") or 0) for row in rows) / total_weight, 2)
+
+
+def stage_pulse_cadence_analysis(item_report):
+    if item_report.get("cue") != "stagePulse":
+        return None
+    variants = item_report.get("variants") or {}
+    aur = (variants.get("aurora") or {}).get("activeMetrics") or {}
+    ref = (variants.get("reference") or {}).get("activeMetrics") or {}
+    if not aur or not ref:
+        return None
+    aur_band = aur.get("band_energy") or {}
+    ref_band = ref.get("band_energy") or {}
+    aur_mid_presence = float(aur_band.get("mid_1500_3000") or 0) + float(aur_band.get("presence_3000_6000") or 0)
+    ref_mid_presence = float(ref_band.get("mid_1500_3000") or 0) + float(ref_band.get("presence_3000_6000") or 0)
+    axes = [
+        {
+            "id": "low-band-body",
+            "label": "Low-band body",
+            "score10": score_deficit(aur_band.get("sub_500"), ref_band.get("sub_500"), 0.34),
+            "weight": 0.22,
+            "aurora": round(float(aur_band.get("sub_500") or 0), 4),
+            "reference": round(float(ref_band.get("sub_500") or 0), 4),
+            "meaning": "Formation pressure should have enough low-frequency body to read as a marching bed, not only a bright tick.",
+        },
+        {
+            "id": "brightness-control",
+            "label": "Brightness control",
+            "score10": min(
+                score_excess(aur_mid_presence, ref_mid_presence, 0.28),
+                score_gap((aur.get("spectral_rolloff_85_hz") or 0) - (ref.get("spectral_rolloff_85_hz") or 0), 1800),
+            ),
+            "weight": 0.22,
+            "aurora": round(aur_mid_presence, 4),
+            "reference": round(ref_mid_presence, 4),
+            "meaning": "A pressure cadence can be audible without pulling too much energy into mid/presence bands.",
+        },
+        {
+            "id": "zero-crossing-calm",
+            "label": "Zero-crossing calm",
+            "score10": score_gap((aur.get("zero_crossings_per_s") or 0) - (ref.get("zero_crossings_per_s") or 0), 1700),
+            "weight": 0.18,
+            "aurora": round(float(aur.get("zero_crossings_per_s") or 0), 1),
+            "reference": round(float(ref.get("zero_crossings_per_s") or 0), 1),
+            "meaning": "Lower crossing density keeps the cadence from feeling scratchy or over-complex.",
+        },
+        {
+            "id": "gain-match",
+            "label": "Gain match",
+            "score10": score_gap((aur.get("rms") or 0) - (ref.get("rms") or 0), 0.13),
+            "weight": 0.16,
+            "aurora": round(float(aur.get("rms") or 0), 4),
+            "reference": round(float(ref.get("rms") or 0), 4),
+            "meaning": "Formation cadence should create pressure without masking shot, hit, and capture feedback.",
+        },
+        {
+            "id": "duration-pocket",
+            "label": "Duration pocket",
+            "score10": score_gap((aur.get("duration_s") or 0) - (ref.get("duration_s") or 0), 0.12),
+            "weight": 0.12,
+            "aurora": round(float(aur.get("duration_s") or 0), 3),
+            "reference": round(float(ref.get("duration_s") or 0), 3),
+            "meaning": "The pulse needs to sit inside the repeat cadence without smearing into a continuous drone.",
+        },
+        {
+            "id": "envelope-smoothness",
+            "label": "Envelope smoothness",
+            "score10": min(
+                score_gap((aur.get("attack_peak_position") or 0) - (ref.get("attack_peak_position") or 0), 0.5),
+                score_excess(aur.get("burst_share"), ref.get("burst_share"), 0.28),
+            ),
+            "weight": 0.10,
+            "aurora": {
+                "attack_peak_position": round(float(aur.get("attack_peak_position") or 0), 3),
+                "burst_share": round(float(aur.get("burst_share") or 0), 3),
+            },
+            "reference": {
+                "attack_peak_position": round(float(ref.get("attack_peak_position") or 0), 3),
+                "burst_share": round(float(ref.get("burst_share") or 0), 3),
+            },
+            "meaning": "The cadence should feel like pressure building, not a foreground impact event.",
+        },
+    ]
+    axes.sort(key=lambda row: (row["score10"], -row["weight"], row["id"]))
+    weakest = axes[0] if axes else None
+    return {
+        "schemaVersion": 1,
+        "artifactType": "stage-pulse-cadence-pressure-analysis",
+        "score10": weighted_score(axes),
+        "weakestAxis": weakest["id"] if weakest else "",
+        "axes": axes,
+        "diagnosis": [
+            "Current Aurora cadence remains too bright/thin versus the reference pressure bed when judged by low-band body, mid/presence energy, and zero-crossing density.",
+            "Simple low-band tone swaps and soft attacks are not sufficient unless the candidate also stabilizes segment risk, zero-crossing behavior, and envelope decay across repeated captures.",
+        ],
+        "recommendedNextExperiment": "Generate candidates that explicitly optimize low-band body and zero-crossing calm together, then require full audio-theme comparison before runtime promotion.",
+    }
+
+
+def band_shape_distance(left, right):
+    keys = sorted(set(left.keys()) | set(right.keys()))
+    if not keys:
+        return 0.0
+    return sum(abs(float(left.get(key) or 0) - float(right.get(key) or 0)) for key in keys) / 2.0
 
 
 def closeness(value, target, tolerance):
@@ -117,7 +457,9 @@ def similarity_score(candidate, target):
     centroid = closeness(candidate.get("spectral_centroid_hz"), target.get("spectral_centroid_hz"), 1200)
     crossings = closeness(candidate.get("zero_crossings_per_s"), target.get("zero_crossings_per_s"), 800)
     rms = closeness(candidate.get("rms"), target.get("rms"), 0.2)
-    return round((0.2 * duration) + (0.35 * centroid) + (0.25 * crossings) + (0.2 * rms), 3)
+    band = 1.0 - min(1.0, band_shape_distance(candidate.get("band_energy") or {}, target.get("band_energy") or {}) / 0.55)
+    envelope = closeness(candidate.get("decay_ratio"), target.get("decay_ratio"), 1.5)
+    return round((0.16 * duration) + (0.27 * centroid) + (0.19 * crossings) + (0.16 * rms) + (0.14 * band) + (0.08 * envelope), 3)
 
 
 def reference_segment_candidates(sample_rate, data, target_metrics, max_candidates=3):
@@ -155,6 +497,127 @@ def reference_segment_candidates(sample_rate, data, target_metrics, max_candidat
     return picked
 
 
+def reference_segmentation(sample_rate, data):
+    if data.size == 0:
+        return {"segments": [], "summary": {"segmentCount": 0, "status": "empty-reference"}}
+    frame_size = max(1, int(sample_rate * 0.02))
+    hop = max(1, int(sample_rate * 0.01))
+    starts = np.arange(0, max(1, data.size - frame_size + 1), hop)
+    rms_values = np.array([
+        float(np.sqrt(np.mean(np.square(data[start:start + frame_size]))))
+        for start in starts
+    ])
+    if rms_values.size == 0:
+        return {"segments": [], "summary": {"segmentCount": 0, "status": "empty-reference"}}
+    floor = float(np.percentile(rms_values, 25))
+    high = float(np.percentile(rms_values, 92))
+    threshold = max(0.006, floor + (high - floor) * 0.3)
+    active = rms_values >= threshold
+    segments = []
+    open_start = None
+    last_active = None
+    max_gap_frames = max(1, int(0.035 / (hop / sample_rate)))
+    for index, is_active in enumerate(active):
+        if is_active:
+            if open_start is None:
+                open_start = index
+            last_active = index
+            continue
+        if open_start is not None and last_active is not None and index - last_active <= max_gap_frames:
+            continue
+        if open_start is not None and last_active is not None:
+            segments.append((open_start, last_active))
+        open_start = None
+        last_active = None
+    if open_start is not None and last_active is not None:
+        segments.append((open_start, last_active))
+
+    described = []
+    for order, (start_index, end_index) in enumerate(segments):
+        start_sample = max(0, int(starts[start_index]))
+        end_sample = min(data.size, int(starts[end_index] + frame_size))
+        duration = (end_sample - start_sample) / sample_rate
+        if duration < 0.03:
+            continue
+        segment_data = data[start_sample:end_sample]
+        role = "onset" if order == 0 else ("tail" if order == len(segments) - 1 and order > 0 else "body")
+        described.append({
+            "role": role,
+            "start_s": round(start_sample / sample_rate, 3),
+            "end_s": round(end_sample / sample_rate, 3),
+            "duration_s": round(duration, 3),
+            "metrics": metrics(sample_rate, segment_data),
+        })
+    if not described:
+        described.append({
+            "role": "full-reference",
+            "start_s": 0.0,
+            "end_s": round(data.size / sample_rate, 3),
+            "duration_s": round(data.size / sample_rate, 3),
+            "metrics": metrics(sample_rate, data),
+        })
+    dominant = max(described, key=lambda segment: segment["metrics"].get("rms") or 0)
+    return {
+        "segments": described,
+        "summary": {
+            "segmentCount": len(described),
+            "status": "segmented-reference" if len(described) > 1 else "single-reference-body",
+            "thresholdRms": round(threshold, 4),
+            "dominantRole": dominant["role"],
+            "dominantWindow": {"start_s": dominant["start_s"], "end_s": dominant["end_s"]},
+        },
+    }
+
+
+def number_or_none(value):
+    try:
+        parsed = float(value)
+        return parsed if math.isfinite(parsed) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def curated_reference_segmentation(sample_rate, data, segmentation):
+    if not isinstance(segmentation, dict):
+        return None
+    source_segments = segmentation.get("segments") or []
+    described = []
+    for index, source in enumerate(source_segments):
+        start = number_or_none(source.get("start_s", source.get("startSeconds")))
+        end = number_or_none(source.get("end_s", source.get("endSeconds")))
+        if start is None or end is None or end <= start:
+            continue
+        start_sample = max(0, min(data.size, int(round(start * sample_rate))))
+        end_sample = max(start_sample, min(data.size, int(round(end * sample_rate))))
+        if end_sample <= start_sample:
+            continue
+        segment_data = data[start_sample:end_sample]
+        described.append({
+            "role": source.get("role") or ("onset" if index == 0 else "body"),
+            "label": source.get("label") or source.get("role") or f"segment-{index + 1}",
+            "start_s": round(start_sample / sample_rate, 3),
+            "end_s": round(end_sample / sample_rate, 3),
+            "duration_s": round((end_sample - start_sample) / sample_rate, 3),
+            "metrics": metrics(sample_rate, segment_data),
+            "curated": True,
+        })
+    if not described:
+        return None
+    dominant = max(described, key=lambda segment: segment["metrics"].get("rms") or 0)
+    return {
+        "segments": described,
+        "summary": {
+            "segmentCount": len(described),
+            "status": "curated-reference-segmentation",
+            "dominantRole": dominant["role"],
+            "dominantWindow": {"start_s": dominant["start_s"], "end_s": dominant["end_s"]},
+            "confidence": segmentation.get("confidence") or "medium",
+            "resolution": segmentation.get("resolution") or "curated onset/body/tail reference windows",
+            "source": segmentation.get("source") or "application-guide",
+        },
+    }
+
+
 def average_delta(items, path):
     values = []
     for item in items:
@@ -164,6 +627,16 @@ def average_delta(items, path):
         if isinstance(value, (int, float)) and math.isfinite(value):
             values.append(float(value))
     return round(sum(values) / len(values), 3) if values else 0.0
+
+
+def average_worst_segment_risk(items):
+    risks = []
+    for item in items:
+        comparisons = item.get("segmentRoleComparisons") or []
+        if not comparisons:
+            continue
+        risks.append(max(float(segment.get("auroraSegmentRisk10") or 0) for segment in comparisons))
+    return round(sum(risks) / len(risks), 3) if risks else 0.0
 
 
 def reference_window_status(reference_metrics, reference_window, aurora_metrics, galaga_metrics):
@@ -262,8 +735,10 @@ def main():
             "label": item["label"],
             "focus": item["focus"],
             "cue": item["cue"],
+            "analysisPolicy": item.get("analysisPolicy") or {},
             "variants": {},
         }
+        analysis_policy = item_report["analysisPolicy"]
         readme_lines.extend([
             f"## {item['label']}",
             "",
@@ -281,18 +756,27 @@ def main():
             sample_rate, data = load_wav(wav_path)
             loaded_variants[key] = {"sampleRate": sample_rate, "data": data}
             m = metrics(sample_rate, data)
-            active, active_data = active_window(sample_rate, data)
-            active_metrics = metrics(sample_rate, active_data)
+            analysis_data, applied_analysis_window = analysis_window_data(sample_rate, data, variant.get("analysisWindow"))
+            active, active_data = active_window(sample_rate, analysis_data)
+            active_metrics_source = analysis_policy.get("activeMetricsSource")
+            active_metrics = metrics(sample_rate, analysis_data if active_metrics_source == "analysisWindow" else active_data)
             wave_path = os.path.join(plots_dir, f"{item['id']}-{key}-waveform.png")
             spec_path = os.path.join(plots_dir, f"{item['id']}-{key}-spectrogram.png")
             wave_path = save_waveform(sample_rate, data, wave_path, f"{item['label']} · {variant['label']} waveform")
             spec_path = save_spectrogram(sample_rate, data, spec_path, f"{item['label']} · {variant['label']} spectrogram")
+            segmentation = curated_reference_segmentation(sample_rate, data, variant.get("segmentation")) if key == "reference" else None
+            if segmentation is None:
+                segmentation_source = analysis_data if analysis_policy.get("eventSegmentationSource") == "analysisWindow" else active_data
+                segmentation = reference_segmentation(sample_rate, segmentation_source)
             item_report["variants"][key] = {
                 "label": variant["label"],
                 "wav": variant["wav"],
                 "metrics": m,
                 "activeWindow": active,
+                "analysisWindow": applied_analysis_window,
+                "activeMetricsSource": active_metrics_source or "activeWindow",
                 "activeMetrics": active_metrics,
+                "eventSegmentation": segmentation,
                 "waveform": rel(wave_path, out_root) if wave_path else None,
                 "spectrogram": rel(spec_path, out_root) if spec_path else None,
             }
@@ -322,19 +806,57 @@ def main():
             loaded_variants["reference"]["data"],
             aur_active,
         )
+        item_report["referenceSegmentation"] = item_report["variants"]["reference"]["eventSegmentation"]
+        item_report["segmentRoleComparisons"] = segment_role_comparisons(item_report)
+        item_report["cadencePressureAnalysis"] = stage_pulse_cadence_analysis(item_report)
         readme_lines.extend([
             "",
             f"- Quick read: synthetic Galaga duration delta vs reference = `{abs(gal['duration_s'] - ref['duration_s']):.3f}s`; Aurora duration delta vs reference = `{abs(aur['duration_s'] - ref['duration_s']):.3f}s`.",
             f"- Quick read: synthetic Galaga centroid delta vs reference = `{abs(gal['spectral_centroid_hz'] - ref['spectral_centroid_hz']):.1f}Hz`; Aurora centroid delta vs reference = `{abs(aur['spectral_centroid_hz'] - ref['spectral_centroid_hz']):.1f}Hz`.",
             f"- Active-window status: `{item_report['comparisons']['referenceWindowStatus']}`.",
             f"- Active quick read: Aurora vs reference duration delta = `{item_report['comparisons']['auroraVsReferenceActive']['duration_s']:.3f}s`; centroid delta = `{item_report['comparisons']['auroraVsReferenceActive']['spectral_centroid_hz']:.1f}Hz`.",
+            f"- Spectral shape: band distance = `{item_report['comparisons']['auroraVsReferenceActive']['band_shape_distance']:.4f}`; rolloff delta = `{item_report['comparisons']['auroraVsReferenceActive']['spectral_rolloff_85_hz']:.1f}Hz`.",
+            f"- Envelope shape: attack position delta = `{item_report['comparisons']['auroraVsReferenceActive']['attack_peak_position']:.3f}`; decay ratio delta = `{item_report['comparisons']['auroraVsReferenceActive']['decay_ratio']:.3f}`; burst-share delta = `{item_report['comparisons']['auroraVsReferenceActive']['burst_share']:.3f}`.",
+            f"- Reference segmentation: `{item_report['referenceSegmentation']['summary']['status']}` with `{item_report['referenceSegmentation']['summary']['segmentCount']}` segment(s); dominant role `{item_report['referenceSegmentation']['summary']['dominantRole']}`.",
         ])
+        if item_report["segmentRoleComparisons"]:
+            worst_segment = item_report["segmentRoleComparisons"][0]
+            readme_lines.append(f"- Worst segment role: `{worst_segment['role']}` risk `{worst_segment['auroraSegmentRisk10']}/10`; {worst_segment['interpretation']}")
+            readme_lines.extend([
+                "",
+                "| Segment role | Reference window | Aurora window | Risk /10 | Duration gap | Centroid gap | Band gap | Rolloff gap | Read |",
+                "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+            ])
+            for segment in item_report["segmentRoleComparisons"]:
+                delta = segment.get("auroraVsReference") or {}
+                ref_win = segment.get("referenceWindow") or {}
+                aur_win = segment.get("auroraWindow") or {}
+                readme_lines.append(
+                    f"| {segment['role']} | {ref_win.get('start_s')}-{ref_win.get('end_s')}s | {aur_win.get('start_s')}-{aur_win.get('end_s')}s | {segment['auroraSegmentRisk10']} | {delta.get('duration_s', 'n/a')}s | {delta.get('spectral_centroid_hz', 'n/a')}Hz | {delta.get('band_shape_distance', 'n/a')} | {delta.get('spectral_rolloff_85_hz', 'n/a')}Hz | {segment['interpretation']} |"
+                )
         if item_report["referenceSegmentCandidates"]:
             candidate_text = "; ".join(
                 f"{candidate['start_s']:.3f}-{candidate['end_s']:.3f}s score {candidate['score']:.3f}"
                 for candidate in item_report["referenceSegmentCandidates"]
             )
             readme_lines.append(f"- Candidate reference subwindows: {candidate_text}.")
+        if item_report["cadencePressureAnalysis"]:
+            cadence = item_report["cadencePressureAnalysis"]
+            readme_lines.extend([
+                "",
+                "### Formation Cadence Pressure Analysis",
+                "",
+                f"- Cadence pressure score: `{cadence['score10']}/10`",
+                f"- Weakest axis: `{cadence['weakestAxis']}`",
+                f"- Next experiment: {cadence['recommendedNextExperiment']}",
+                "",
+                "| Axis | Score | Aurora | Reference | Player/Designer Meaning |",
+                "| --- | ---: | --- | --- | --- |",
+            ])
+            for axis in cadence["axes"]:
+                readme_lines.append(
+                    f"| {axis['label']} | {axis['score10']} | `{json.dumps(axis['aurora'])}` | `{json.dumps(axis['reference'])}` | {axis['meaning']} |"
+                )
         readme_lines.append("")
         report["items"].append(item_report)
 
@@ -345,9 +867,14 @@ def main():
             if item["comparisons"]["referenceWindowStatus"] == "broad-reference-window-needs-segmentation"
         ]),
         "referenceSegmentCandidateCount": sum(len(item.get("referenceSegmentCandidates") or []) for item in report["items"]),
+        "referenceSegmentCount": sum((item.get("referenceSegmentation") or {}).get("summary", {}).get("segmentCount", 0) for item in report["items"]),
+        "segmentRoleComparisonCount": sum(len(item.get("segmentRoleComparisons") or []) for item in report["items"]),
+        "averageWorstSegmentRisk10": average_worst_segment_risk(report["items"]),
         "averageAuroraVsSyntheticGalagaDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsSyntheticGalaga", "duration_s"]),
         "averageAuroraVsReferenceActiveDurationDeltaS": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "duration_s"]),
         "averageAuroraVsReferenceActiveCentroidDeltaHz": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "spectral_centroid_hz"]),
+        "averageAuroraVsReferenceBandShapeDistance": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "band_shape_distance"]),
+        "averageAuroraVsReferenceEnvelopeDecayDelta": average_delta(report["items"], ["comparisons", "auroraVsReferenceActive", "decay_ratio"]),
     }
     readme_lines.extend([
         "## Summary",
@@ -355,9 +882,14 @@ def main():
         f"- Items: {report['summary']['itemCount']}",
         f"- Broad reference windows needing tighter segmentation: {report['summary']['broadReferenceWindowCount']}",
         f"- Candidate reference subwindows found: {report['summary']['referenceSegmentCandidateCount']}",
+        f"- Reference segments found: `{report['summary']['referenceSegmentCount']}`",
+        f"- Segment role comparisons: `{report['summary']['segmentRoleComparisonCount']}`",
+        f"- Average worst segment risk: `{report['summary']['averageWorstSegmentRisk10']:.2f}/10`",
         f"- Average active Aurora-vs-synthetic-Galaga duration delta: `{report['summary']['averageAuroraVsSyntheticGalagaDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference duration delta: `{report['summary']['averageAuroraVsReferenceActiveDurationDeltaS']:.3f}s`",
         f"- Average active Aurora-vs-reference centroid delta: `{report['summary']['averageAuroraVsReferenceActiveCentroidDeltaHz']:.1f}Hz`",
+        f"- Average active Aurora-vs-reference band-shape distance: `{report['summary']['averageAuroraVsReferenceBandShapeDistance']:.3f}`",
+        f"- Average active Aurora-vs-reference envelope decay delta: `{report['summary']['averageAuroraVsReferenceEnvelopeDecayDelta']:.3f}`",
         "",
     ])
 

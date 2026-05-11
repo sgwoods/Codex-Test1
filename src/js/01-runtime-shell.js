@@ -98,6 +98,9 @@ function buildStampDateTimeText(){
  const parts=splitBuildStampDateTime(BUILD_INFO.released||'');
  return parts.time?`${parts.date} · ${parts.time}`:parts.date;
 }
+function shellBuildVersionLine(){
+ return typeof buildVersionLine==='function'?buildVersionLine():String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
+}
 function shellEscapeHtml(value){
  return String(value??'').replace(/[&<>"']/g,ch=>({
   '&':'&amp;',
@@ -120,7 +123,7 @@ function currentPlatformMessageRows(){
  }
  rows.push({
   kicker:'BUILD',
-  main:`${channel} · ${BUILD_INFO.version||'--'}`,
+  main:`${channel} · ${shellBuildVersionLine()}`,
   meta:buildStampDateTimeText()
  });
  rows.push({
@@ -204,7 +207,7 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=String(BUILD_INFO.releaseChannel||'development').toUpperCase();
- if(buildStampVersion)buildStampVersion.textContent=String(BUILD_INFO.version||'--');
+ if(buildStampVersion)buildStampVersion.textContent=shellBuildVersionLine();
  if(buildStampRelease)buildStampRelease.textContent=buildStampDateTimeText();
  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
  if(platformMessagePanelOpen)renderPlatformMessagePanel();

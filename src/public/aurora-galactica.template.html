@@ -173,6 +173,141 @@
             font-size: 18px;
         }
 
+        .narrative {
+            max-width: 900px;
+            margin: 0 0 18px;
+        }
+
+        .metricStrip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .miniMetric {
+            padding: 15px 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .miniMetric span,
+        .scoreMeta span,
+        .investmentMeta span {
+            color: #9cc4df;
+            font-size: 12px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .miniMetric strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 24px;
+        }
+
+        .miniMetric small {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .scoreChart {
+            display: grid;
+            gap: 12px;
+        }
+
+        .scoreRow,
+        .investmentRow {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .scoreHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .scoreName,
+        .scoreValue {
+            font-weight: 700;
+        }
+
+        .scoreValue {
+            white-space: nowrap;
+        }
+
+        .barTrack {
+            width: 100%;
+            height: 10px;
+            margin: 12px 0 10px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .barTrack span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #ffcf6e, #67e6a8);
+        }
+
+        .scoreRow.gap .barTrack span {
+            background: linear-gradient(90deg, #ff8a7a, #ffcf6e);
+        }
+
+        .scoreRow.watch .barTrack span {
+            background: linear-gradient(90deg, #ffcf6e, #9fe8ff);
+        }
+
+        .scoreRow.strong .barTrack span {
+            background: linear-gradient(90deg, #67e6a8, #9fe8ff);
+        }
+
+        .scoreRow p,
+        .investmentRow p,
+        .smallText {
+            margin: 8px 0 0;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .scoreMeta,
+        .investmentMeta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .investmentRow {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(220px, .9fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .investmentRow strong {
+            display: block;
+        }
+
+        .investmentMeta {
+            justify-content: flex-end;
+        }
+
+        .emptyState {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         .links {
             display: flex;
             flex-wrap: wrap;
@@ -215,6 +350,14 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .investmentRow {
+                grid-template-columns: 1fr;
+            }
+
+            .investmentMeta {
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
@@ -223,21 +366,26 @@
     <main class="shell">
         <section class="hero">
             <div class="heroTop">
-                <span class="eyebrow">Public Project Page</span>
+                <span class="eyebrow">{{PUBLIC_PAGE_EYEBROW}}</span>
                 <a class="homeLink" href="https://sgwoods.github.io/public/">Steven Woods</a>
             </div>
             <h1>Aurora Galactica on Platinum</h1>
-            <p>This project now ships Aurora Galactica as the first playable game pack on the Platinum browser-arcade platform, with hosted dev, beta, production, and first-class documentation surfaces kept aligned from the same repo source.</p>
+            <p>Aurora Galactica is the first shipped game on the Platinum browser-arcade platform and the active proof of a broader conformance program: reference ingestion, local harnessing, score dashboards, release lanes, and Codex-assisted development working together to make inspired arcade software more measurable and repeatable.</p>
             <div class="meta">
                 <div class="metaCard">
-                    <span class="metaLabel">Current Release</span>
+                    <span class="metaLabel">Release Version</span>
                     <span class="metaValue">{{BUILD_VERSION}}</span>
-                    <div class="metaNote">Current public line for the active game build.</div>
+                    <div class="metaNote">Version label for the release location shown on this page.</div>
                 </div>
                 <div class="metaCard">
-                    <span class="metaLabel">Updated</span>
+                    <span class="metaLabel">Release Location</span>
+                    <span class="metaValue">{{PUBLIC_RELEASE_CONTEXT_VALUE}}</span>
+                    <div class="metaNote">{{PUBLIC_RELEASE_CONTEXT_NOTE}}</div>
+                </div>
+                <div class="metaCard">
+                    <span class="metaLabel">Build Timestamp</span>
                     <span class="metaValue">{{BUILD_RELEASE_ET}}</span>
-                    <div class="metaNote">Most recent synced release timestamp for the public project surface.</div>
+                    <div class="metaNote">Timestamp of the build artifact for this release location, not necessarily the final public portfolio sync time.</div>
                 </div>
                 <div class="metaCard">
                     <span class="metaLabel">Current Focus</span>
@@ -247,15 +395,16 @@
                 <div class="metaCard">
                     <span class="metaLabel">Latest Note</span>
                     <span class="metaValue">{{LATEST_RELEASE_TITLE}}</span>
-                    <div class="metaNote">Public page synced from the latest shipped release note and repository state.</div>
+                    <div class="metaNote">Release note carried by this lane's generated artifacts.</div>
                 </div>
             </div>
             <div class="links">
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open live game</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html">Open project guide</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html">Open Platinum guide</a>
+                <a class="button" href="{{LANE_GAME_HREF}}">Open this lane build</a>
+                <a class="button" href="{{BETA_BUILD_HREF}}">Open beta build</a>
+                <a class="button" href="{{LANE_RELEASE_DASHBOARD_HREF}}">Open release dashboard</a>
+                <a class="button" href="{{LANE_CONFORMANCE_DASHBOARD_HREF}}">Open conformance dashboard</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}">Open project guide</a>
+                <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}">Open Platinum guide</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
             </div>
         </section>
@@ -265,16 +414,115 @@
             <div class="grid">
                 <article class="card">
                     <h3>Primary goal</h3>
-                    <p>Keep Platinum Release 1 stable while we separate platform and application documentation, close the small Aurora trust-fix cluster, and prepare the second-game seam without rushing it into production.</p>
+                    <p>Advance Aurora toward a stronger Galaga-like conformance gate while keeping Platinum clean as the reusable host and turning ingestion, harnesses, metrics, and resource economics into a repeatable path for future games.</p>
                 </article>
                 <article class="card">
-                    <h3>What is already solid</h3>
-                    <p>Platinum now owns the shell, picker, hosted lane model, and release framing, while Aurora remains a playable shipped pack with the main release documentation, dashboard, and player guide generated from maintained source docs.</p>
+                    <h3>How the platform helps</h3>
+                    <p>Platinum owns the shell, picker, hosted lane model, documentation surfaces, conformance dashboard, release framing, and shared harness substrate. Each game keeps its own rules, scoring, identity, and reference evidence.</p>
                 </article>
                 <article class="card">
-                    <h3>Current blocker</h3>
-                    <p>The biggest remaining risk is not broad architecture uncertainty anymore. It is making sure the fast-follow Aurora fixes, the hosted docs, and the platform/application boundary all stay aligned across localhost, hosted /dev, hosted /beta, and hosted /production.</p>
+                    <h3>Current conformance push</h3>
+                    <p>The highest-value work is audio/event feedback, level arc, alien entry and challenge-stage novelty, visual reference grounding, pressure replay precision, and Galaxy Guardians ingestion promotion before any broader second-game claim.</p>
                 </article>
+                <article class="card">
+                    <h3>Release posture</h3>
+                    <p>The project should not move directly to beta from the current local state. The next practical artifact is a 1.3.0.1 hosted-dev review increment; the next serious beta family is 1.4.0 arcade depth after a clear user-visible conformance lift.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Short, medium, and long plan</h2>
+            <p class="narrative">The current recommendation is to keep improving conformance before beta, not to spend time on broad new planning. The plan below keeps release movement tied to measurable player-facing value and keeps the public project page aligned with the same release path as the software.</p>
+            <div class="grid">
+                <article class="card">
+                    <h3>Short term: 1.3.0.1 dev review</h3>
+                    <p>Bundle the current conformance dashboard, documentation refresh, and one coherent feel improvement into a hosted-dev review increment. Audio/event feedback remains the highest-value gap unless stage/challenge variation yields faster visible return.</p>
+                </article>
+                <article class="card">
+                    <h3>Medium term: 1.4.0 arcade depth</h3>
+                    <p>Shape the next beta family around alien entry variation, challenge-stage novelty, level arc, boss/formation grammar, visual reference grounding, audio/event feedback, and cleaner Platinum/application seams.</p>
+                </article>
+                <article class="card">
+                    <h3>Long term: evidence to multi-game</h3>
+                    <p>Use 1.5.0 for shared video evidence and flight recorder, 1.6.0 for message-to-pilot cabinet polish, and 2.0 for a credible multi-game Platinum milestone built from ingestion-backed game-owned conformance packages.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Conformance system</h2>
+            <p class="narrative">This public page is meant to be read directly, not only used as a launcher. The conformance program compares Aurora against Galaga-family reference behavior through captured examples, derived metrics, repeatable harnesses, confidence notes, and resource accounting. The generated guide pages, dashboards, and source artifacts are drill-down surfaces behind the overview shown here.</p>
+            <div class="grid">
+                <article class="card">
+                    <h3>Ingestion</h3>
+                    <p>Reference footage, source manifests, clipped windows, contact sheets, waveforms, event logs, alien indexes, audio cue indexes, stage summaries, and confidence notes become game-owned evidence rather than loose design memory.</p>
+                </article>
+                <article class="card">
+                    <h3>Harnessing and scoring</h3>
+                    <p>Local CPU and browser harnesses measure movement, timing, audio, stage shape, boss formation grammar, visual surfaces, pressure windows, and shell behavior against reference-derived targets.</p>
+                </article>
+                <article class="card">
+                    <h3>Resource economics</h3>
+                    <p>The project tracks local compute, browser work, artifact growth, and GPU-equivalent Codex/OpenAI/API usage so future conformance investment can be chosen by value, confidence, and cost.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Conformance readout</h2>
+            <p class="narrative">The score bars below are working measurements, not claims of perfection. A high number can still carry lower confidence when the scorer lacks enough reference windows or when the metric needs finer resolution. The goal is to make the gap visible, choose the next investment area, and then rerun the harnesses after each improvement.</p>
+            <div class="metricStrip">
+{{PUBLIC_RELEASE_GATE_CARDS}}
+            </div>
+            <div class="scoreChart">
+{{PUBLIC_CONFORMANCE_SCORE_CHART}}
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Value versus compute</h2>
+            <p class="narrative">Conformance work is also an economics problem. Local CPU and browser runs should do as much of the repetitive measurement as possible, while Codex/OpenAI/model calls are treated as GPU-equivalent strategy, critique, harness-design, and interpretation work. The project tracks both so we can compare effort against measured score movement over time.</p>
+            <div class="metricStrip">
+{{PUBLIC_RESOURCE_SUMMARY_CARDS}}
+            </div>
+            <div class="scoreChart">
+{{PUBLIC_INVESTMENT_QUEUE}}
+            </div>
+            <div class="links">
+                <a class="button" href="{{LANE_CONFORMANCE_DASHBOARD_HREF}}#cost">Open Cost / Value deep dive</a>
+                <a class="button" href="{{LANE_CONFORMANCE_DATA_HREF}}">Open raw conformance data</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#release-conformance-dashboard-doc">Open generated release conformance report</a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Reference ingestion</h2>
+            <p class="narrative">Ingestion is the repeatable bridge between external artifacts and playable software. It turns reference media into source windows, annotations, scoreable events, visual comparisons, audio cue maps, and measurement debt that future games can reuse rather than rediscovering by taste alone.</p>
+            <div class="grid">
+{{PUBLIC_INGESTION_OVERVIEW_CARDS}}
+            </div>
+            <div class="links">
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#game-conformance-catalog-doc">Open generated game conformance catalog</a>
+                <a class="button" href="{{LANE_APPLICATION_GUIDE_HREF}}#conformance-alien-index">Open Aurora catalog tables</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#reference-media-inventory-doc">Open generated reference media inventory</a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Game conformance catalog</h2>
+            <p class="narrative">The project now treats alien/enemy roles, audio cues, stage behavior, and test personas as visible documentation surfaces. The rows below are generated from the live conformance dashboard game profiles; the generated project and application guides carry the fuller tables.</p>
+            <div class="grid">
+{{PUBLIC_GAME_CATALOG_CARDS}}
+                <article class="card">
+                    <h3>Confidence rule</h3>
+                    <p>An x/10 score is a current-resolution measurement. Low-confidence or proxy rows are deliberately marked so the next work can improve the scorer rather than hide the uncertainty.</p>
+                </article>
+            </div>
+            <div class="links">
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#game-conformance-catalog-doc">Read full generated catalog</a>
+                <a class="button" href="{{LANE_APPLICATION_GUIDE_HREF}}#stage-conformance-summary">Open stage summary tables</a>
+                <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}#persona-contract">Open platform persona contract</a>
             </div>
         </section>
 
@@ -289,16 +537,22 @@
         <section class="panel">
             <h2>Where to look</h2>
             <div class="links">
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Open live game</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Open release dashboard</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/project-guide.html">Open project guide</a>
-                <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html">Open Platinum guide</a>
+                <a class="button" href="{{LANE_GAME_HREF}}">Open this lane build</a>
+                <a class="button" href="{{BETA_BUILD_HREF}}">Open beta build</a>
+                <a class="button" href="{{LANE_RELEASE_DASHBOARD_HREF}}">Open release dashboard</a>
+                <a class="button" href="{{LANE_CONFORMANCE_DASHBOARD_HREF}}">Open conformance dashboard</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}">Open project guide</a>
+                <a class="button" href="{{LANE_APPLICATION_GUIDE_HREF}}">Open application guide</a>
+                <a class="button" href="{{LANE_PLATINUM_GUIDE_HREF}}">Open Platinum guide</a>
                 <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/PLAN.md">Roadmap</a>
-                <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md">Reference baseline</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#plan-doc">Plan source</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#project-state-conformance-doc">Project state and conformance program</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#game-conformance-catalog-doc">Game conformance catalog</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#strategic-beta-review-doc">Strategic beta review</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#classic-arcade-ingestion-framework-doc">Classic arcade ingestion framework</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#artifact-policy-doc">Artifact policy</a>
             </div>
-            <p class="footer">Public summary synced to the repository state on {{PUBLIC_DATE_LONG}}.</p>
+            <p class="footer">{{PUBLIC_FOOTER_NOTE}} Date label: {{PUBLIC_DATE_LONG}}.</p>
         </section>
     </main>
 </body>

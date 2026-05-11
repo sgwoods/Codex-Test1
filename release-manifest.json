@@ -1,5 +1,12 @@
 {
   "product": "Aurora Galactica",
+  "development": {
+    "baseVersion": "1.3.0",
+    "iteration": 1,
+    "versionLine": "1.3.0.1",
+    "releaseTrack": "hosted-dev-increment",
+    "notes": "Hosted /dev uses a fourth visible segment to count accumulated post-production integration increments while package.json remains SemVer."
+  },
   "platform": {
     "key": "platinum",
     "name": "Platinum",

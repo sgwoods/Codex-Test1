@@ -11,18 +11,24 @@ Use it when asking:
 
 ## Current Read
 
-As of April 22, 2026 on `codex/audio-cue-alignment-pass`:
+As of May 10, 2026 on the current Aurora conformance branch:
 
-- current forward line: hosted `/dev`
-- current shipped stable line: hosted `/beta` and hosted `/production`
-- dedicated audio cue correspondence result:
-  - `7/9` metrics passed
+- current forward line: local development, preparing a future hosted `/dev`
+  candidate
+- release-quality roll-up: `9.2/10`
+- audio identity and cue alignment: `6.7/10`
+- dedicated audio cue correspondence result: `9/9` metrics passed
+- latest acoustic event gap: semantic event score `9.78/10`, acoustic event
+  score `5.93/10`, highest risk cue `playerHit` body
 
-The biggest current audio-timing gaps are now:
+The biggest current audio gaps are now:
 
-- stage-1 first pulse is still far from the historical reference anchor
-- the challenge-entry transition clip still overlaps the spawn moment
-- the broad challenge and result timing families are now much closer to target
+- acoustic fit and event-body matching remain weak even though cue semantics are
+  strong
+- player loss / game-over needs continued listening review because it is both an
+  emotional moment and the latest highest-risk segment family
+- stage/inter-level phrases should preserve full reference intent whenever the
+  runtime window can fit them
 
 ## Stage 1 Opening Pulse
 
@@ -34,7 +40,8 @@ Target from the preserved Galaga-aligned Aurora timing library:
 Current Aurora:
 
 - stage spawn: `0.000`
-- first stage pulse: `6.317`
+- first stage pulse is now scored from formation-arrival context in the cue
+  alignment harness, not just raw stage spawn
 
 ```text
 Ideal / target
@@ -43,9 +50,9 @@ Ideal / target
 spawn                first pulse
 
 Current
-0.000                                                        6.317
-|------------------------------------------------------------|
-spawn                                                   first pulse
+0.000                         formation arrival        first pulse
+|-----------------------------|------------------------|
+spawn                     rack established         pressure cue
 ```
 
 ## Challenge Entry
@@ -77,6 +84,23 @@ probe                cue starts    challenge spawns
 The challenge lead-in is no longer collapsing. It is now almost exactly on the
 target spacing, but the full transition clip still extends about `0.466s`
 past spawn.
+
+## Inter-Level And Game-Over Continuity
+
+The latest local gameplay capture exposed two player-facing audio problems:
+
+- `stageTransition` was too abbreviated and made the inter-level beat feel cut
+  off. Aurora now uses a 2.8s reference-backed window from
+  `galaga-level-flag-v1.m4a` so the transition carries more of the intended
+  phrase.
+- final ship loss reached `gameOver`, but the recorder/export sequence stopped
+  before the end cue was logged and captured. Runtime now plays/logs `gameOver`
+  before session export, trims the silent lead-in in
+  `galaga-last-ship-destroyed-ambience.m4a`, and delays recording stop to keep
+  the tail.
+
+The new `harness:check:audio-gameover-tail` guardrail checks these requirements
+directly.
 
 ## Challenge Result To Next Stage
 
@@ -119,15 +143,16 @@ They affect:
 ## Release Implication
 
 The branch now has the challenge-entry and post-challenge timing family in a
-much healthier state. The remaining gaps are more specific:
+healthy state. The remaining gaps are more specific:
 
-1. score the stage-1 pulse from `formationArrival`, not raw stage spawn
-2. use an explicit overlap budget for the challenge-transition clip instead of
+1. preserve and listen-check player-loss and game-over cue tails
+2. continue improving acoustic event-body fit, especially `playerHit`
+3. use an explicit overlap budget for the challenge-transition clip instead of
    forcing a zero-overlap rule
 
 The next strong release bundle should keep improving:
 
-1. stage-1 opening pulse timing relative to formation arrival
+1. player-loss/game-over cue continuity
 2. challenge-transition clip-tail handling within an explicit overlap budget
 3. broader challenge/audio polish and final scorecard refresh
 

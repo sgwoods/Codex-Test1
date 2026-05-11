@@ -109,31 +109,55 @@ Each category scores from `1` to `10`.
      - ordering of the persona ladder
      - whether higher-skill personas still show deeper / stronger runs
 
-9. `Level arc and encounter shape`
+9. `Boss entry and formation grammar`
+   - Evidence:
+     - `tools/harness/analyze-formation-boss-grammar-conformance.js`
+     - `tools/harness/reference-profiles/formation-boss-grammar-conformance.json`
+     - `reference-artifacts/analyses/formation-boss-grammar-conformance/*/report.json`
+   - Focus:
+     - boss entry timing by stage band
+     - boss and escort composition
+     - set-formation settle evidence
+     - challenge-stage pattern identity
+     - stage-to-stage formation variation
+     - path-shape and formation-slot precision as explicit measurement debt
+
+10. `Level arc and encounter shape`
    - Evidence:
      - `reference-artifacts/analyses/level-arc-conformance/*/report.json`
      - `reference-artifacts/analyses/stage-signature-distance/*/report.json`
+     - `reference-artifacts/analyses/formation-boss-grammar-conformance/*/report.json`
      - `reference-artifacts/analyses/aurora-level-expansion-cycle`
    - Focus:
      - stage distinctiveness over time
      - challenge-stage identity and bonus-opportunity learning
      - movement grammar expansion
+     - boss entry and formation grammar
      - boss and reward opportunity design
      - pressure curves across early, middle, later, and challenge windows
      - long-run non-repetition
 
-10. `Audio identity and cue alignment`
+11. `Audio identity and cue alignment`
    - Evidence:
+     - `reference-artifacts/contracts/audio/aurora-audio-cue-contracts.json`
+     - `reference-artifacts/analyses/aurora-audio-cue-contracts/*/report.json`
+     - `reference-artifacts/analyses/aurora-audio-conformance-lab-v2/*/report.json`
      - `reference-artifacts/analyses/aurora-audio-theme-comparison/*/metrics.json`
+     - `reference-artifacts/analyses/aurora-audio-event-gap/*/report.json`
+     - `reference-artifacts/analyses/aurora-audio-promotion-precheck/*/report.json`
      - `reference-artifacts/analyses/galaga-audio-overlap/*/metrics.json`
    - Focus:
+     - cue contract fit: semantic meaning, timing slot, acoustic identity,
+       runtime context, and theme latitude
      - cue identity against reference-inspired target sound
      - active cue-window similarity against labeled Galaga reference clips
      - reference-window precision, so broad clips do not silently masquerade as
        isolated cue matches
+     - promotion safety from focused candidate loop to full-theme precheck to
+       live runtime recapture
      - stage / challenge timing windows for cue overlap and handoff
 
-11. `UI, shell, and graphics integrity`
+12. `UI, shell, and graphics integrity`
     - Evidence:
       - `tools/harness/check-dev-candidate-surface-suite.js`
     - Focus:
@@ -152,7 +176,7 @@ Each category scores from `1` to `10`.
 - `3-4.9`: meaningfully behind the intended standard
 - `1-2.9`: clearly weak and likely release-shaping
 
-The roll-up score is the simple average of the eleven category scores so that the
+The roll-up score is the simple average of the twelve category scores so that the
 low-scoring gaps stay visible.
 
 A `10/10` means "maxed at current scorer resolution", not perfect imitation.
@@ -164,11 +188,20 @@ that same behavior may be rescored with a more demanding metric.
 - `Player movement conformance` is currently phase-one evidence:
   - it is grounded in the documented control principles
   - it is not yet a full trace extraction from the preserved Galaga footage
-- `Audio identity and cue alignment` is partly reference-analysis based and not
-  yet a full runtime cue-by-cue correspondence family
+- `Audio identity and cue alignment` now has a formal cue-contract layer. The
+  current process is stronger and has now promoted one calibrated layered
+  `playerHit` runtime lift. Semantic audio is high, but acoustic event fit,
+  residual ship-loss tail shape, and `stagePulse` pressure-bed onset remain the
+  measured weak points. A candidate is not release-promotable until it survives
+  focused scoring, full-theme precheck, live recapture, alignment, semantic,
+  and quality gates.
 - `Level arc and encounter shape` now includes first-pass stage-signature
   distance scoring, but it still needs broader mid-run and late-run evidence
   windows before the repetition penalty should be treated as complete
+- `Boss entry and formation grammar` is now a first-class scored family. Its
+  timing, composition, and challenge-identity reads are useful now, while true
+  path-shape and rack-slot conformance remains intentionally low-confidence
+  until frame-level boss/escort/challenge path extraction is promoted.
 - The model is meant to be expanded, not treated as finished
 
 The main rule is simple:

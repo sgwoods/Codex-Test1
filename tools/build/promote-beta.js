@@ -32,6 +32,8 @@ function buildBetaInfo(sourceInfo){
   return {
     ...sourceInfo,
     version: betaVersion,
+    versionLine: betaVersion,
+    versionScheme: 'semver-prerelease',
     label: betaLabel,
     branch: 'beta',
     state: `beta@${sourceInfo.shortCommit} clean`,
@@ -50,13 +52,18 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), betaInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${betaInfo.version}'`],
+    [new RegExp(`versionLine:'${escapeRegex(sourceInfo.versionLine || sourceInfo.version)}'`, 'g'), `versionLine:'${betaInfo.versionLine}'`],
     [new RegExp(`branch:'${escapeRegex(sourceInfo.branch)}'`, 'g'), `branch:'${betaInfo.branch}'`],
     [new RegExp(`state:'${escapeRegex(sourceState)}'`, 'g'), `state:'${betaInfo.state}'`],
     [new RegExp(escapeRegex(sourceState), 'g'), betaInfo.state],
     [new RegExp(`releaseChannel:'${escapeRegex(sourceChannel)}'`, 'g'), `releaseChannel:'${betaInfo.releaseChannel}'`],
     [new RegExp(`dirty:${sourceInfo.dirty ? 'true' : 'false'}`, 'g'), `dirty:${betaInfo.dirty ? 'true' : 'false'}`],
     [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${betaInfo.label}`],
-    [new RegExp(`Lane ${escapeRegex(sourceChannel)}`, 'g'), `Lane ${betaInfo.releaseChannel}`]
+    [new RegExp(`Lane ${escapeRegex(sourceChannel)}`, 'g'), `Lane ${betaInfo.releaseChannel}`],
+    [/Development lane Project Page/g, 'Beta lane Project Page'],
+    [/Development lane<\/span>/g, 'Beta lane</span>'],
+    [/Generated from the development lane artifacts served locally and on hosted \/dev\./g, 'Generated from the beta lane artifacts promoted from the reviewed development build.'],
+    [/Development lane project-page summary generated from lane build artifacts\./g, 'Beta lane project-page summary generated from promoted lane artifacts.']
   ];
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);
@@ -89,6 +96,7 @@ if(fs.existsSync(DEV_BUILD_INFO)){
   rewriteBetaText(path.join(BETA_DIR, 'release-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard-data.json'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'public-project-page.html'), sourceInfo, betaInfo);
 }
 
 const betaReadme = [

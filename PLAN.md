@@ -24,6 +24,12 @@ This means:
 - the post-release work should now be treated as intentional carry-forward, not
   as rediscovery after the ship is already done
 
+Top-level program framing is now maintained in
+[PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
+Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion,
+harnesses, dashboards, release lanes, Codex/model assistance, and local
+resource economics fit together.
+
 ## Active Workstreams
 
 ### 1. `1.3.0` Production Stabilization
@@ -57,6 +63,18 @@ This means:
   challenge patterns
 - use original Galaga reference evidence to shape later-level entry styles,
   attack pacing, and movement variation
+
+### 3b. Conformance Program And Ingestion System
+
+- keep conformance as its own project layer, not only as Aurora polish
+- use ingestion packages as the evidence front-end for both Aurora refinements
+  and future games
+- keep metrics, confidence, resolution, dashboards, and economics current after
+  each meaningful work cycle
+- convert Codex/model-assisted analysis into durable local harnesses, scorers,
+  reports, and platform capabilities whenever possible
+- prefer local CPU/browser sweeps for repeated measurement and use
+  GPU-equivalent model effort where it increases leverage
 
 ### 4. Gameplay Trust And Edge-Case Correctness
 
@@ -111,45 +129,52 @@ This means:
 
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
-3. prioritize level-arc shape, movement fidelity, audio identity polish, and
-   boundary cleanup
-4. incorporate the other machine's Galaxians-style second-game, harness, and
+3. do not move to hosted `/beta` immediately from the current local state;
+   first create one coherent user-visible conformance bundle and review it on
+   `/dev`
+4. prioritize audio/event feedback and stage-shape conformance over more broad
+   planning; the planning scaffolding is strong enough, while runtime feel still
+   needs a measurable lift
+5. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-5. prioritize level-by-level arcade depth as the next major product pillar
-6. make shared gameplay-video publishing an early evidence/product capability
-7. continue narrow trust fixes from the open issue stream
-8. execute the measured Galaga long-cycle quality plan in
+6. prioritize level-by-level arcade depth as the next major product pillar
+7. make shared gameplay-video publishing an early evidence/product capability
+8. continue narrow trust fixes from the open issue stream
+9. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
 
 Current conformance read:
 
-- overall Aurora quality is `9.1/10` across eleven scored categories
-- audio identity and cue alignment is the weakest category at `6.3/10`
+- overall Aurora quality is `9.2/10` across the current scored categories
+- audio identity and cue alignment is the weakest category at `7.3/10`; the
+  audio process is stronger than the runtime score, with cue-contract readiness
+  at `9.09/10`, semantic event score at `9.78/10`, acoustic event score at
+  `6.31/10`, and `playerHit` tail now the highest current audio gap
 - level arc and encounter shape is now a first-class high-priority category at
-  `8.4/10`; the expanded six-window stage-signature distance harness scores
-  `6.4/10` after adding attack-role features, a stage-14 escort variation, and
-  a measured stage-8 flank-dive grammar. The closest mid/late gap is now
-  `0.129`, and the closest same-band regular pair is now `0.174`. The Stage 4
-  pressure replay harness now reads `1/3` exact source-window reproduction and
-  identifies the butterfly lane-2 window as the next high-value precision/tuning
-  target
-- the audio score is now stricter: it includes active reference-cue similarity
-  and reference-window precision, with `7/14` Aurora audio reference windows
-  still needing tighter segmentation and `22` candidate subwindows now proposed
-  for review/promotion
+  `8.8/10`, with remaining opportunity in long-run non-repetition, stage
+  pressure precision, and higher-resolution challenge/reward evidence
+- the latest audio work produced both harness value and a runtime lift:
+  browser-backed audio captures now use an explicit `80ms` preroll, record
+  capture metadata, support composite analysis windows for layered cues, and
+  apply calibrated browser-reference gates for source-backed loss phrases. The
+  accepted `playerHit` layered runtime cue improved the full-theme cue gap by
+  `2.65/10` while keeping semantic scoring high. The next audio pass should
+  refine the remaining `playerHit` tail gap and then return to `stagePulse`
+  pressure-bed strategy.
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in
-  `reference-artifacts/analyses/quality-conformance/2026-05-07-bfcc311/report.json`
-- the current stage-signature distance read is captured in
-  `reference-artifacts/analyses/stage-signature-distance/2026-05-07-2aeaafa/report.json`
+  `reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd/report.json`
 - conformance economics are now tracked in
-  `CONFORMANCE_ECONOMICS.md` and
-  `reference-artifacts/analyses/conformance-economics/2026-05-07-f4e0d13/report.json`;
-  future long-cycle runs should use `npm run harness:measure` so local CPU,
-  browser/video, GPU, model/API, artifact-volume, and score-delta tradeoffs can
-  be reviewed before choosing the next major phase
+  `CONFORMANCE_ECONOMICS.md` and the latest
+  `reference-artifacts/analyses/conformance-economics/*/report.json`; this is
+  now the standing documentation section for local CPU/browser spend,
+  GPU-equivalent Codex/OpenAI/API usage, artifact growth, score movement, and
+  cost-per-score reads. Future long-cycle runs should use
+  `npm run harness:measure` so local CPU, browser/video, GPU, model/API,
+  artifact-volume, and score-delta tradeoffs can be reviewed before choosing
+  the next major phase
 - the current long-cycle baseline is captured in
   `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
 - the Track 1 movement/shot-feel finding is captured in
@@ -163,6 +188,13 @@ Current conformance read:
   shipped `1.3.0` family
 - the active source line should now present itself as the deliberate `1.4.0`
   pickup family
+- the next practical release artifact should be a `1.3.0.1` hosted-dev review
+  increment that bundles documentation, dashboard, and one coherent
+  conformance/feel improvement; it should not be treated as a beta promise by
+  itself
+- the next hosted `/beta` should wait for a defensible user-visible lift,
+  preferably either audio/event feedback movement toward `7.5+` or a
+  stage/challenge variation bundle that materially improves long-play feel
 - `1.3.0` was the intentional bundle for fidelity, trust, and the first
   significant second-game Platinum story
 - the shipped `1.3.0` family is now the stable public baseline while `main`
@@ -171,14 +203,22 @@ Current conformance read:
   [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - the concrete first level-expansion execution plan is tracked in
   [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
+- beta-readiness and long-horizon strategic review is tracked in
+  [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md) and should be refreshed
+  after each major hosted `/beta` push
 
 ## Post-1.3.0 Pickup
 
 After `1.3.0` ships, the plan should pick up in this order:
 
-1. `1.4.0` arcade depth and platform-contract follow-through
-2. `1.5.0` shared-video evidence and flight-recorder capabilities
-3. `1.6.0` pilot-facing shell/message-to-pilot polish
+1. Short term: `1.3.0.1` hosted-dev integration increment for current
+   dashboards/docs plus one meaningful conformance feel bundle.
+2. Medium term: `1.4.0` arcade depth and platform-contract follow-through,
+   including alien entry/challenge novelty, stage shape, audio/event feedback,
+   and visual reference grounding.
+3. Longer term: `1.5.0` shared-video evidence and flight-recorder capabilities,
+   followed by `1.6.0` pilot-facing shell/message-to-pilot polish and `2.0`
+   multi-game Platinum maturity.
 
 That keeps the next cycle from collapsing back into unprioritized polish and
 preserves the release-family shape already captured in the roadmap docs.

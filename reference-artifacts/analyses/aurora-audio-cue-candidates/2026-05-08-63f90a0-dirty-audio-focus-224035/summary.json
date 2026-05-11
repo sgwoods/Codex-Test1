@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop-summary",
+  "generatedAt": "2026-05-08T22:40:35.466Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "63f90a0",
+  "dirty": true,
+  "gridLimit": 24,
+  "results": [
+    {
+      "key": "enemy-hit",
+      "report": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-63f90a0-dirty-audio-focus-224035/enemy-hit/report.json",
+      "decision": {
+        "status": "no-keeper",
+        "keep": false,
+        "baseline": "baseline-current",
+        "best": null,
+        "measuredBest": "refclip-s750-d200-v100",
+        "reason": "No Enemy Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+      },
+      "topCandidates": [
+        {
+          "id": "refclip-s750-d200-v100",
+          "risk10": 0.65,
+          "worstSegmentRisk10": 1.65,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.05,
+          "centroidGapHz": 12.2,
+          "bandShapeGap": 0.0033,
+          "keeperRead": "duration gap improved only -0.001s"
+        },
+        {
+          "id": "refclip-s720-d240-v100",
+          "risk10": 3.38,
+          "worstSegmentRisk10": 4.99,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 590.6,
+          "bandShapeGap": 0.2021,
+          "keeperRead": "segment risk improved only 0.13; duration gap improved only -0.371s"
+        },
+        {
+          "id": "refclip-s720-d240-v94",
+          "risk10": 3.44,
+          "worstSegmentRisk10": 5.24,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 575.8,
+          "bandShapeGap": 0.2012,
+          "keeperRead": "segment risk improved only -0.12; duration gap improved only -0.371s; fewer exact segment-role matches than baseline"
+        },
+        {
+          "id": "refclip-s750-d280-v94",
+          "risk10": 3.68,
+          "worstSegmentRisk10": 4.8,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 569.4,
+          "bandShapeGap": 0.2094,
+          "keeperRead": "duration gap improved only -0.371s"
+        },
+        {
+          "id": "refclip-s750-d280-v82",
+          "risk10": 3.79,
+          "worstSegmentRisk10": 5.04,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.42,
+          "centroidGapHz": 605.1,
+          "bandShapeGap": 0.2143,
+          "keeperRead": "segment risk improved only 0.08; duration gap improved only -0.371s"
+        }
+      ]
+    },
+    {
+      "key": "formation-pulse",
+      "report": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-63f90a0-dirty-audio-focus-224035/formation-pulse/report.json",
+      "decision": {
+        "status": "candidate-recommended",
+        "keep": true,
+        "baseline": "baseline-current",
+        "best": "refclip-s660-d240-v105",
+        "measuredBest": "refclip-s660-d240-v105",
+        "riskDelta": 1.94,
+        "segmentRiskDelta": 2.96,
+        "durationDeltaSeconds": 0.311,
+        "bandDelta": 0.1732,
+        "reason": "Formation Pulse candidate clears measured keeper gates."
+      },
+      "topCandidates": [
+        {
+          "id": "refclip-s660-d240-v105",
+          "risk10": 2.33,
+          "worstSegmentRisk10": 2.39,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.139,
+          "centroidGapHz": 91.3,
+          "bandShapeGap": 0.0975,
+          "keeperRead": "clears keeper gates"
+        },
+        {
+          "id": "refclip-s600-d300-v105",
+          "risk10": 3.44,
+          "worstSegmentRisk10": 2.66,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.45,
+          "centroidGapHz": 558.9,
+          "bandShapeGap": 0.2389,
+          "keeperRead": "duration gap improved only 0s"
+        },
+        {
+          "id": "refclip-s600-d240-v105",
+          "risk10": 3.54,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.45,
+          "centroidGapHz": 589.6,
+          "bandShapeGap": 0.2555,
+          "keeperRead": "duration gap improved only 0s"
+        },
+        {
+          "id": "refclip-s540-d240-v95",
+          "risk10": 3.58,
+          "worstSegmentRisk10": 2.53,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.45,
+          "centroidGapHz": 662.7,
+          "bandShapeGap": 0.2509,
+          "keeperRead": "duration gap improved only 0s"
+        },
+        {
+          "id": "refclip-s600-d240-v74",
+          "risk10": 3.59,
+          "worstSegmentRisk10": 7.05,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.45,
+          "centroidGapHz": 623.1,
+          "bandShapeGap": 0.2655,
+          "keeperRead": "segment risk improved only -1.7; duration gap improved only 0s"
+        }
+      ]
+    },
+    {
+      "key": "ship-loss",
+      "report": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-63f90a0-dirty-audio-focus-224035/ship-loss/report.json",
+      "decision": {
+        "status": "no-keeper",
+        "keep": false,
+        "baseline": "baseline-current",
+        "best": null,
+        "measuredBest": "refclip-s100-d720-v74",
+        "reason": "No Ship Loss Body candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+      },
+      "topCandidates": [
+        {
+          "id": "refclip-s100-d720-v74",
+          "risk10": 1.95,
+          "worstSegmentRisk10": 2.42,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.609,
+          "centroidGapHz": 106.4,
+          "bandShapeGap": 0.0241,
+          "keeperRead": "duration gap improved only -0.561s; fewer exact segment-role matches than baseline"
+        },
+        {
+          "id": "promoted-active-window",
+          "risk10": 3.63,
+          "worstSegmentRisk10": 7.01,
+          "worstSegmentRole": "body",
+          "durationGapSeconds": 0.048,
+          "centroidGapHz": 601.6,
+          "bandShapeGap": 0.2199,
+          "keeperRead": "whole-cue risk improved only 0.1; segment risk improved only 0.07; duration gap improved only 0s"
+        },
+        {
+          "id": "lower-gain-body-candidate",
+          "risk10": 3.72,
+          "worstSegmentRisk10": 6.56,
+          "worstSegmentRole": "body",
+          "durationGapSeconds": 0.05,
+          "centroidGapHz": 655.9,
+          "bandShapeGap": 0.2426,
+          "keeperRead": "whole-cue risk improved only 0.01; duration gap improved only -0.002s"
+        },
+        {
+          "id": "refclip-s80-d720-v100",
+          "risk10": 3.9,
+          "worstSegmentRisk10": 6.46,
+          "worstSegmentRole": "body",
+          "durationGapSeconds": 0.248,
+          "centroidGapHz": 599.1,
+          "bandShapeGap": 0.2215,
+          "keeperRead": "whole-cue risk improved only -0.17; duration gap improved only -0.2s; fewer exact segment-role matches than baseline"
+        },
+        {
+          "id": "refclip-s50-d720-v100",
+          "risk10": 3.91,
+          "worstSegmentRisk10": 6.69,
+          "worstSegmentRole": "body",
+          "durationGapSeconds": 0.258,
+          "centroidGapHz": 529.3,
+          "bandShapeGap": 0.1941,
+          "keeperRead": "whole-cue risk improved only -0.18; duration gap improved only -0.21s; fewer exact segment-role matches than baseline"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   "scenario": "stage8-entry-variant",
   "scenario_path": "tools/harness/scenarios/stage8-entry-variant.json",
   "seed": 8008,
-  "duration_s": 10,
+  "duration_s": 16,
   "config": {
     "stage": 8,
     "ships": 4,
@@ -17,13 +17,13 @@
     "started": 1,
     "paused": 0,
     "stage": 8,
-    "score": 490,
-    "lives": 4,
+    "score": 540,
+    "lives": 2,
     "challenge": false,
     "recording": false,
     "seed": 8008,
-    "simT": 10,
-    "stageClock": 10,
+    "simT": 16,
+    "stageClock": 16,
     "persona": null,
     "atmosphere": {
       "id": "aurora-borealis",
@@ -58,17 +58,17 @@
       "backgroundMode": "aurora-borealis"
     },
     "audioCue": {
-      "cue": "attackCharge",
+      "cue": "stagePulse",
       "atmosphereId": "aurora-borealis",
       "audioTheme": "galaga-reference-assets",
       "phase": "stage",
-      "variant": 0,
-      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
+      "variant": 33,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
       "stage": 8,
       "challenge": false,
-      "at": 1.188
+      "at": 1.68
     },
     "renderDebug": {
       "backgroundMode": "aurora-borealis",
@@ -95,21 +95,21 @@
     }
   },
   "trace_summary": {
-    "sample_count": 11,
+    "sample_count": 17,
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 2,
+    "max_attackers": 3,
     "max_enemy_bullets": 2,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 490,
-    "final_lives": 4,
+    "final_score": 540,
+    "final_lives": 2,
     "final_stage": 8,
     "final_challenge": false
   },
-  "event_count": 78,
-  "promoted_event_count": 17,
+  "event_count": 109,
+  "promoted_event_count": 26,
   "artifacts": {
     "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/contact-sheet-1s.png",
     "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/still-start.png",

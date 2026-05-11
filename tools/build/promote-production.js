@@ -26,6 +26,8 @@ function buildProductionInfo(sourceInfo){
   return {
     ...sourceInfo,
     version,
+    versionLine: version,
+    versionScheme: 'semver',
     label: `${version}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}`,
     branch: productionBranch,
     state: `${productionBranch}@${sourceInfo.shortCommit} clean`,
@@ -46,6 +48,7 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), productionInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${productionInfo.version}'`],
+    [new RegExp(`versionLine:'${escapeRegex(sourceInfo.versionLine || sourceInfo.version)}'`, 'g'), `versionLine:'${productionInfo.versionLine}'`],
     [new RegExp(`branch:'${escapeRegex(sourceInfo.branch || '')}'`, 'g'), `branch:'${productionInfo.branch}'`],
     [/branch:'[^']*'/g, `branch:'${productionInfo.branch}'`],
     [new RegExp(`state:'${escapeRegex(sourceInfo.state || '')}'`, 'g'), `state:'${productionInfo.state}'`],
@@ -53,7 +56,11 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
     [new RegExp(`releaseChannel:'${escapeRegex(sourceInfo.releaseChannel)}'`, 'g'), `releaseChannel:'${productionInfo.releaseChannel}'`],
     [new RegExp(`dirty:${sourceInfo.dirty ? 'true' : 'false'}`, 'g'), 'dirty:false'],
     [new RegExp(`Version ${escapeRegex(sourceInfo.label)}`, 'g'), `Version ${productionInfo.label}`],
-    [new RegExp(`Lane ${escapeRegex(sourceInfo.releaseChannel)}`, 'g'), `Lane ${productionInfo.releaseChannel}`]
+    [new RegExp(`Lane ${escapeRegex(sourceInfo.releaseChannel)}`, 'g'), `Lane ${productionInfo.releaseChannel}`],
+    [/Beta lane Project Page/g, 'Production lane Project Page'],
+    [/Beta lane<\/span>/g, 'Production lane</span>'],
+    [/Generated from the beta lane artifacts promoted from the reviewed development build\./g, 'Generated from the production lane artifacts that feed the public release path.'],
+    [/Beta lane project-page summary generated from promoted lane artifacts\./g, 'Production lane project-page summary generated from approved release artifacts.']
   ];
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);
@@ -108,6 +115,7 @@ if(fs.existsSync(BETA_BUILD_INFO)){
   rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard.html'), sourceInfo, productionInfo);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard-data.json'), sourceInfo, productionInfo);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'public-project-page.html'), sourceInfo, productionInfo);
 }
 
 console.log(`Promoted approved beta artifacts to ${DIST_PRODUCTION}`);

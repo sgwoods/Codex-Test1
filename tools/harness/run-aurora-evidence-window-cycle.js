@@ -12,12 +12,17 @@ const PLAN_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-lev
 const SCENARIO_ROOT = path.join(ROOT, 'tools', 'harness', 'scenarios');
 
 const WINDOW_SCENARIOS = {
-  'stage-1-baseline': 'stage1-descent',
-  'challenge-stage-candidate': 'stage3-challenge',
-  'mid-run-pressure': 'stage6-regular',
+	  'stage-1-baseline': 'stage1-descent',
+	  'challenge-stage-candidate': 'stage3-challenge',
+	  'challenge-stage-scorpion-cross': 'stage7-challenge-cross-sweep',
+	  'challenge-stage-stingray-hook': 'stage11-challenge-hook-arc',
+	  'challenge-stage-boss-led-loop': 'stage15-challenge-boss-led-loop',
+	  'mid-run-pressure': 'stage6-regular',
   'mid-run-entry-variant': 'stage8-entry-variant',
+  'mid-run-pincer-variant': 'stage10-pincer-entry',
   'late-run-cleanup-or-failure': 'stage12-variety',
-  'late-run-escort-variant': 'stage14-escort-variant'
+  'late-run-escort-variant': 'stage14-escort-variant',
+  'late-run-crown-entry': 'stage16-crown-entry'
 };
 
 function selectedWindowIds(argv){
@@ -120,6 +125,24 @@ function eventFamilyForRuntimeEvent(event, scenario, sampleEvents){
   return sampleEvents.has(event.type) ? event.type : null;
 }
 
+function challengeCompositionFromSamples(samples){
+  const byType = new Set();
+  const byFamily = new Set();
+  const byPathFamily = new Set();
+  for(const sample of samples || []){
+    for(const enemy of sample.challengeEnemies || []){
+      if(enemy.type) byType.add(enemy.type);
+      if(enemy.family) byFamily.add(enemy.family);
+      if(enemy.pathFamily) byPathFamily.add(enemy.pathFamily);
+    }
+  }
+  return {
+    types: [...byType].sort(),
+    families: [...byFamily].sort(),
+    pathFamilies: [...byPathFamily].sort()
+  };
+}
+
 function promoteEvents({ win, scenario, events, samples }){
   const allowed = new Set(win.event_families || []);
   const promoted = [];
@@ -149,16 +172,22 @@ function promoteEvents({ win, scenario, events, samples }){
   if(allowed.has('challenge_enemy_path') && !promoted.some(event => event.event_family === 'challenge_enemy_path')){
     const sample = samples.find(next => next.challengeEnemyCount > 0);
     if(sample){
+      const composition = challengeCompositionFromSamples(samples);
       promoted.push({
         event_id: `${win.window_id}-${String(promoted.length + 1).padStart(3, '0')}-challenge_enemy_path`,
         event_family: 'challenge_enemy_path',
         runtime_type: 'challenge_formation_sample',
         time_s: sample.t,
         duration_s: null,
-        entity_family: 'challenge_enemy',
+        entity_family: composition.types.join('|') || 'challenge_enemy',
         entity_id: null,
-        position_hint: { challenge_enemy_count: sample.challengeEnemyCount },
-        motion_hint: 'sampled challenge formation path evidence',
+        position_hint: {
+          challenge_enemy_count: sample.challengeEnemyCount,
+          challenge_enemy_types: composition.types,
+          challenge_enemy_families: composition.families,
+          challenge_path_families: composition.pathFamilies
+        },
+        motion_hint: composition.pathFamilies.join('|') || 'sampled challenge formation path evidence',
         audio_hint: null,
         confidence: 'medium',
         source_note: 'promoted from deterministic challengeFormationState sample'
@@ -264,13 +293,14 @@ function makeContactSheet(framesDir, outFile){
 
 async function captureSample(page, outFile, t){
   await page.locator('#playfieldFrame').screenshot({ path: outFile });
-  return page.evaluate(sampleT => {
-    const api = window.__galagaHarness__;
-    const snap = api.snapshot();
-    const formation = api.formationState();
-    const challenge = api.challengeFormationState();
-    const state = api.state();
-    return {
+	  return page.evaluate(sampleT => {
+	    const api = window.__galagaHarness__;
+	    const snap = api.snapshot();
+	    const formation = api.formationState();
+	    const challenge = api.challengeFormationState();
+	    const state = api.state();
+	    const compactUnique = values => [...new Set((values || []).filter(Boolean).map(value => String(value).trim()).filter(Boolean))].sort();
+	    return {
       t: +sampleT.toFixed(3),
       stage: snap.stage,
       challenge: snap.challenge ? 1 : 0,
@@ -283,14 +313,27 @@ async function captureSample(page, outFile, t){
       enemy_bullets: snap.counts.enemyBullets,
       player_bullets: snap.counts.playerBullets,
       challenge_enemies: challenge.enemies.length,
-      formation_active: formation.targets.length,
-      audioCue: state.audioCue || null,
-      stagePresentation: state.stagePresentation || null,
-      visualAtmosphere: state.visualAtmosphere || null,
-      challengeEnemyCount: challenge.enemies.length
-    };
-  }, t);
-}
+	      formation_active: formation.targets.length,
+	      formationEnemyTypes: compactUnique(formation.targets.map(e => e.type || '')),
+	      formationEnemyFamilies: compactUnique(formation.targets.map(e => e.family || '')),
+	      formationPathFamilies: compactUnique(formation.targets.map(e => e.pathFamily || '')),
+	      audioCue: state.audioCue || null,
+	      stagePresentation: state.stagePresentation || null,
+	      visualAtmosphere: state.visualAtmosphere || null,
+	      challengeEnemyCount: challenge.enemies.length,
+	      challengeEnemyTypes: compactUnique(challenge.enemies.map(e => e.type || '')),
+	      challengeEnemyFamilies: compactUnique(challenge.enemies.map(e => e.family || '')),
+	      challengePathFamilies: compactUnique(challenge.enemies.map(e => e.pathFamily || '')),
+	      challengeEnemies: challenge.enemies.map(e => ({
+	        type: e.type || '',
+	        family: e.family || '',
+	        pathFamily: e.pathFamily || '',
+	        lane: e.lane,
+	        wave: e.wave
+	      }))
+	    };
+	  }, t);
+	}
 
 async function runWindow({ browser, serverPort, plan, win, scenarioName }){
   const scenario = readJson(scenarioPath(scenarioName));

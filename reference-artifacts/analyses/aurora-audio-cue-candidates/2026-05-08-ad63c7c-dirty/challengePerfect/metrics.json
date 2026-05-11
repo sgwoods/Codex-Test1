@@ -1,0 +1,2860 @@
+{
+  "commit": "ad63c7c",
+  "version": "1.3.0",
+  "items": [
+    {
+      "id": "baseline-current-r01",
+      "label": "Current Aurora baseline r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 0.0,
+          "zero_crossings_per_s": 0.0,
+          "rms": 0.0
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.42,
+          "score": 0.546,
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.4117,
+            "rms": 0.1442,
+            "spectral_centroid_hz": 2084.7,
+            "zero_crossings_per_s": 2197.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "baseline-current-r02",
+      "label": "Current Aurora baseline r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 0.0,
+          "zero_crossings_per_s": 0.0,
+          "rms": 0.0
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.42,
+          "score": 0.546,
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.4117,
+            "rms": 0.1442,
+            "spectral_centroid_hz": 2084.7,
+            "zero_crossings_per_s": 2197.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "baseline-current-r03",
+      "label": "Current Aurora baseline r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 0.0,
+          "zero_crossings_per_s": 0.0,
+          "rms": 0.0
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.42,
+          "score": 0.546,
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.4117,
+            "rms": 0.1442,
+            "spectral_centroid_hz": 2084.7,
+            "zero_crossings_per_s": 2197.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r01",
+      "label": "Thin bright square quiet held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square quiet held",
+          "wav": "samples/thin-bright-square-quiet-held-r01.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.8453,
+            "rms": 0.2717,
+            "spectral_centroid_hz": 1351.8,
+            "zero_crossings_per_s": 2477.1
+          },
+          "activeWindow": {
+            "start_s": 0.11,
+            "end_s": 0.48,
+            "duration_s": 0.37,
+            "coverage": 0.772,
+            "threshold_rms": 0.26
+          },
+          "activeMetrics": {
+            "duration_s": 0.37,
+            "peak": 0.8453,
+            "rms": 0.2824,
+            "spectral_centroid_hz": 1350.1,
+            "zero_crossings_per_s": 2424.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.05,
+          "spectral_centroid_hz": 213.4,
+          "zero_crossings_per_s": 458.1,
+          "rms": 0.0332
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.11,
+          "spectral_centroid_hz": 690.0,
+          "zero_crossings_per_s": 168.6,
+          "rms": 0.1403
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.05,
+          "end_s": 0.42,
+          "score": 0.646,
+          "metrics": {
+            "duration_s": 0.37,
+            "peak": 0.4068,
+            "rms": 0.1398,
+            "spectral_centroid_hz": 1991.7,
+            "zero_crossings_per_s": 2346.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r02",
+      "label": "Thin bright square quiet held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square quiet held",
+          "wav": "samples/thin-bright-square-quiet-held-r02.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.8863,
+            "rms": 0.2931,
+            "spectral_centroid_hz": 1268.7,
+            "zero_crossings_per_s": 1881.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.2959
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.8863,
+            "rms": 0.2931,
+            "spectral_centroid_hz": 1268.7,
+            "zero_crossings_per_s": 1881.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 132.0,
+          "zero_crossings_per_s": 85.5,
+          "rms": 0.0439
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 771.4,
+          "zero_crossings_per_s": 375.0,
+          "rms": 0.151
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r03",
+      "label": "Thin bright square quiet held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square quiet held",
+          "wav": "samples/thin-bright-square-quiet-held-r03.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.9329,
+            "rms": 0.2571,
+            "spectral_centroid_hz": 1432.8,
+            "zero_crossings_per_s": 2533.3
+          },
+          "activeWindow": {
+            "start_s": 0.12,
+            "end_s": 0.48,
+            "duration_s": 0.36,
+            "coverage": 0.751,
+            "threshold_rms": 0.2496
+          },
+          "activeMetrics": {
+            "duration_s": 0.36,
+            "peak": 0.9329,
+            "rms": 0.2685,
+            "spectral_centroid_hz": 1398.7,
+            "zero_crossings_per_s": 2516.9
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 262.0,
+          "zero_crossings_per_s": 550.2,
+          "rms": 0.0193
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.12,
+          "spectral_centroid_hz": 641.4,
+          "zero_crossings_per_s": 260.7,
+          "rms": 0.1264
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.1,
+          "end_s": 0.46,
+          "score": 0.664,
+          "metrics": {
+            "duration_s": 0.36,
+            "peak": 0.4068,
+            "rms": 0.1365,
+            "spectral_centroid_hz": 2090.5,
+            "zero_crossings_per_s": 2525.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r01",
+      "label": "Thin bright square balanced held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square balanced held",
+          "wav": "samples/thin-bright-square-balanced-held-r01.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.9214,
+            "rms": 0.2692,
+            "spectral_centroid_hz": 1270.8,
+            "zero_crossings_per_s": 2138.9
+          },
+          "activeWindow": {
+            "start_s": 0.199,
+            "end_s": 0.479,
+            "duration_s": 0.28,
+            "coverage": 0.518,
+            "threshold_rms": 0.2711
+          },
+          "activeMetrics": {
+            "duration_s": 0.28,
+            "peak": 0.9214,
+            "rms": 0.2771,
+            "spectral_centroid_hz": 1337.2,
+            "zero_crossings_per_s": 2095.6
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 200.5,
+          "zero_crossings_per_s": 128.9,
+          "rms": 0.0279
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.2,
+          "spectral_centroid_hz": 702.9,
+          "zero_crossings_per_s": 160.6,
+          "rms": 0.135
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.28,
+          "score": 0.699,
+          "metrics": {
+            "duration_s": 0.28,
+            "peak": 0.4117,
+            "rms": 0.1479,
+            "spectral_centroid_hz": 1914.2,
+            "zero_crossings_per_s": 2107.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r02",
+      "label": "Thin bright square balanced held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square balanced held",
+          "wav": "samples/thin-bright-square-balanced-held-r02.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.8359,
+            "rms": 0.1761,
+            "spectral_centroid_hz": 1302.9,
+            "zero_crossings_per_s": 1275.9
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.29,
+            "duration_s": 0.29,
+            "coverage": 0.536,
+            "threshold_rms": 0.1558
+          },
+          "activeMetrics": {
+            "duration_s": 0.29,
+            "peak": 0.8359,
+            "rms": 0.2234,
+            "spectral_centroid_hz": 1309.8,
+            "zero_crossings_per_s": 1765.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.13,
+          "spectral_centroid_hz": 173.1,
+          "zero_crossings_per_s": 201.7,
+          "rms": 0.0258
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.19,
+          "spectral_centroid_hz": 730.3,
+          "zero_crossings_per_s": 491.2,
+          "rms": 0.0813
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.29,
+          "score": 0.619,
+          "metrics": {
+            "duration_s": 0.29,
+            "peak": 0.4117,
+            "rms": 0.1473,
+            "spectral_centroid_hz": 1977.5,
+            "zero_crossings_per_s": 2117.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r03",
+      "label": "Thin bright square balanced held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square balanced held",
+          "wav": "samples/thin-bright-square-balanced-held-r03.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.318,
+            "rms": 0.1067,
+            "spectral_centroid_hz": 1130.2,
+            "zero_crossings_per_s": 824.1
+          },
+          "activeWindow": {
+            "start_s": 0.07,
+            "end_s": 0.54,
+            "duration_s": 0.47,
+            "coverage": 0.871,
+            "threshold_rms": 0.1068
+          },
+          "activeMetrics": {
+            "duration_s": 0.47,
+            "peak": 0.318,
+            "rms": 0.1087,
+            "spectral_centroid_hz": 1097.1,
+            "zero_crossings_per_s": 769.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.05,
+          "spectral_centroid_hz": 39.6,
+          "zero_crossings_per_s": 1196.9,
+          "rms": 0.1405
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 943.0,
+          "zero_crossings_per_s": 1486.4,
+          "rms": 0.0334
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.47,
+          "score": 0.447,
+          "metrics": {
+            "duration_s": 0.47,
+            "peak": 0.4117,
+            "rms": 0.1426,
+            "spectral_centroid_hz": 2019.7,
+            "zero_crossings_per_s": 2272.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r01",
+      "label": "Thin bright square long low held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square long low held",
+          "wav": "samples/thin-bright-square-long-low-held-r01.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.4082,
+            "rms": 0.124,
+            "spectral_centroid_hz": 1219.6,
+            "zero_crossings_per_s": 827.8
+          },
+          "activeWindow": {
+            "start_s": 0.06,
+            "end_s": 0.54,
+            "duration_s": 0.48,
+            "coverage": 0.889,
+            "threshold_rms": 0.1201
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4082,
+            "rms": 0.1271,
+            "spectral_centroid_hz": 1206.2,
+            "zero_crossings_per_s": 799.6
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 69.5,
+          "zero_crossings_per_s": 1167.1,
+          "rms": 0.1221
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 833.9,
+          "zero_crossings_per_s": 1456.6,
+          "rms": 0.015
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r02",
+      "label": "Thin bright square long low held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square long low held",
+          "wav": "samples/thin-bright-square-long-low-held-r02.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.3612,
+            "rms": 0.1191,
+            "spectral_centroid_hz": 1175.6,
+            "zero_crossings_per_s": 824.1
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.54,
+            "duration_s": 0.54,
+            "coverage": 1.0,
+            "threshold_rms": 0.1174
+          },
+          "activeMetrics": {
+            "duration_s": 0.54,
+            "peak": 0.3612,
+            "rms": 0.1191,
+            "spectral_centroid_hz": 1175.6,
+            "zero_crossings_per_s": 824.1
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.12,
+          "spectral_centroid_hz": 38.9,
+          "zero_crossings_per_s": 1142.6,
+          "rms": 0.1301
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 864.5,
+          "zero_crossings_per_s": 1432.1,
+          "rms": 0.023
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r03",
+      "label": "Thin bright square long low held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square long low held",
+          "wav": "samples/thin-bright-square-long-low-held-r03.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.3649,
+            "rms": 0.1104,
+            "spectral_centroid_hz": 1323.9,
+            "zero_crossings_per_s": 933.3
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.54,
+            "duration_s": 0.54,
+            "coverage": 1.0,
+            "threshold_rms": 0.1066
+          },
+          "activeMetrics": {
+            "duration_s": 0.54,
+            "peak": 0.3649,
+            "rms": 0.1104,
+            "spectral_centroid_hz": 1323.9,
+            "zero_crossings_per_s": 933.3
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.12,
+          "spectral_centroid_hz": 187.2,
+          "zero_crossings_per_s": 1033.4,
+          "rms": 0.1388
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 716.2,
+          "zero_crossings_per_s": 1322.9,
+          "rms": 0.0317
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r01",
+      "label": "Thin bright square soft attack held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square soft attack held",
+          "wav": "samples/thin-bright-square-soft-attack-held-r01.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4205,
+            "rms": 0.1339,
+            "spectral_centroid_hz": 1161.2,
+            "zero_crossings_per_s": 793.8
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1333
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4205,
+            "rms": 0.1339,
+            "spectral_centroid_hz": 1161.2,
+            "zero_crossings_per_s": 793.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 24.5,
+          "zero_crossings_per_s": 1172.9,
+          "rms": 0.1153
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 878.9,
+          "zero_crossings_per_s": 1462.4,
+          "rms": 0.0082
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r02",
+      "label": "Thin bright square soft attack held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square soft attack held",
+          "wav": "samples/thin-bright-square-soft-attack-held-r02.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4773,
+            "rms": 0.15,
+            "spectral_centroid_hz": 1201.0,
+            "zero_crossings_per_s": 927.1
+          },
+          "activeWindow": {
+            "start_s": 0.06,
+            "end_s": 0.469,
+            "duration_s": 0.409,
+            "coverage": 0.853,
+            "threshold_rms": 0.1474
+          },
+          "activeMetrics": {
+            "duration_s": 0.409,
+            "peak": 0.4773,
+            "rms": 0.1557,
+            "spectral_centroid_hz": 1168.2,
+            "zero_crossings_per_s": 862.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.011,
+          "spectral_centroid_hz": 31.5,
+          "zero_crossings_per_s": 1104.3,
+          "rms": 0.0935
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.071,
+          "spectral_centroid_hz": 871.9,
+          "zero_crossings_per_s": 1393.8,
+          "rms": 0.0136
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.409,
+          "score": 0.493,
+          "metrics": {
+            "duration_s": 0.409,
+            "peak": 0.4117,
+            "rms": 0.1438,
+            "spectral_centroid_hz": 2009.1,
+            "zero_crossings_per_s": 2156.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r03",
+      "label": "Thin bright square soft attack held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square soft attack held",
+          "wav": "samples/thin-bright-square-soft-attack-held-r03.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4487,
+            "rms": 0.138,
+            "spectral_centroid_hz": 1227.3,
+            "zero_crossings_per_s": 966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1303
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4487,
+            "rms": 0.138,
+            "spectral_centroid_hz": 1227.3,
+            "zero_crossings_per_s": 966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 90.6,
+          "zero_crossings_per_s": 1000.0,
+          "rms": 0.1112
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 812.8,
+          "zero_crossings_per_s": 1289.5,
+          "rms": 0.0041
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r01",
+      "label": "Thin bright square split low held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square split low held",
+          "wav": "samples/thin-bright-square-split-low-held-r01.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.4491,
+            "rms": 0.129,
+            "spectral_centroid_hz": 1253.4,
+            "zero_crossings_per_s": 814.8
+          },
+          "activeWindow": {
+            "start_s": 0.02,
+            "end_s": 0.54,
+            "duration_s": 0.52,
+            "coverage": 0.963,
+            "threshold_rms": 0.1256
+          },
+          "activeMetrics": {
+            "duration_s": 0.52,
+            "peak": 0.4491,
+            "rms": 0.13,
+            "spectral_centroid_hz": 1321.1,
+            "zero_crossings_per_s": 778.6
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.1,
+          "spectral_centroid_hz": 184.4,
+          "zero_crossings_per_s": 1188.1,
+          "rms": 0.1192
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.04,
+          "spectral_centroid_hz": 719.0,
+          "zero_crossings_per_s": 1477.6,
+          "rms": 0.0121
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r02",
+      "label": "Thin bright square split low held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square split low held",
+          "wav": "samples/thin-bright-square-split-low-held-r02.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.4313,
+            "rms": 0.1326,
+            "spectral_centroid_hz": 1141.8,
+            "zero_crossings_per_s": 818.5
+          },
+          "activeWindow": {
+            "start_s": 0.02,
+            "end_s": 0.54,
+            "duration_s": 0.52,
+            "coverage": 0.963,
+            "threshold_rms": 0.1316
+          },
+          "activeMetrics": {
+            "duration_s": 0.52,
+            "peak": 0.4313,
+            "rms": 0.133,
+            "spectral_centroid_hz": 1135.3,
+            "zero_crossings_per_s": 817.1
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.1,
+          "spectral_centroid_hz": 1.4,
+          "zero_crossings_per_s": 1149.6,
+          "rms": 0.1162
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.04,
+          "spectral_centroid_hz": 904.8,
+          "zero_crossings_per_s": 1439.1,
+          "rms": 0.0091
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r03",
+      "label": "Thin bright square split low held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square split low held",
+          "wav": "samples/thin-bright-square-split-low-held-r03.wav",
+          "metrics": {
+            "duration_s": 0.54,
+            "peak": 0.5047,
+            "rms": 0.1498,
+            "spectral_centroid_hz": 1233.7,
+            "zero_crossings_per_s": 855.6
+          },
+          "activeWindow": {
+            "start_s": 0.02,
+            "end_s": 0.439,
+            "duration_s": 0.419,
+            "coverage": 0.777,
+            "threshold_rms": 0.1485
+          },
+          "activeMetrics": {
+            "duration_s": 0.419,
+            "peak": 0.5047,
+            "rms": 0.1538,
+            "spectral_centroid_hz": 1184.8,
+            "zero_crossings_per_s": 818.0
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.001,
+          "spectral_centroid_hz": 48.1,
+          "zero_crossings_per_s": 1148.7,
+          "rms": 0.0954
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.061,
+          "spectral_centroid_hz": 855.3,
+          "zero_crossings_per_s": 1438.2,
+          "rms": 0.0117
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.419,
+          "score": 0.496,
+          "metrics": {
+            "duration_s": 0.419,
+            "peak": 0.4117,
+            "rms": 0.1441,
+            "spectral_centroid_hz": 2022.8,
+            "zero_crossings_per_s": 2200.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-micro-held-r01",
+      "label": "Thin bright square micro held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square micro held",
+          "wav": "samples/thin-bright-square-micro-held-r01.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4468,
+            "rms": 0.1419,
+            "spectral_centroid_hz": 1162.4,
+            "zero_crossings_per_s": 927.1
+          },
+          "activeWindow": {
+            "start_s": 0.06,
+            "end_s": 0.48,
+            "duration_s": 0.42,
+            "coverage": 0.875,
+            "threshold_rms": 0.1426
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.4468,
+            "rms": 0.1449,
+            "spectral_centroid_hz": 1169.1,
+            "zero_crossings_per_s": 863.8
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 32.4,
+          "zero_crossings_per_s": 1102.9,
+          "rms": 0.1043
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 871.0,
+          "zero_crossings_per_s": 1392.4,
+          "rms": 0.0028
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.05,
+          "end_s": 0.47,
+          "score": 0.497,
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.4068,
+            "rms": 0.1385,
+            "spectral_centroid_hz": 2013.1,
+            "zero_crossings_per_s": 2414.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-micro-held-r02",
+      "label": "Thin bright square micro held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square micro held",
+          "wav": "samples/thin-bright-square-micro-held-r02.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.5294,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 1250.9,
+            "zero_crossings_per_s": 766.7
+          },
+          "activeWindow": {
+            "start_s": 0.01,
+            "end_s": 0.479,
+            "duration_s": 0.469,
+            "coverage": 0.978,
+            "threshold_rms": 0.1444
+          },
+          "activeMetrics": {
+            "duration_s": 0.469,
+            "peak": 0.5294,
+            "rms": 0.1432,
+            "spectral_centroid_hz": 1228.4,
+            "zero_crossings_per_s": 750.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.049,
+          "spectral_centroid_hz": 91.7,
+          "zero_crossings_per_s": 1216.5,
+          "rms": 0.106
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.011,
+          "spectral_centroid_hz": 811.7,
+          "zero_crossings_per_s": 1506.0,
+          "rms": 0.0011
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.469,
+          "score": 0.509,
+          "metrics": {
+            "duration_s": 0.469,
+            "peak": 0.4117,
+            "rms": 0.1426,
+            "spectral_centroid_hz": 2053.3,
+            "zero_crossings_per_s": 2273.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-micro-held-r03",
+      "label": "Thin bright square micro held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square micro held",
+          "wav": "samples/thin-bright-square-micro-held-r03.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4244,
+            "rms": 0.1309,
+            "spectral_centroid_hz": 1117.3,
+            "zero_crossings_per_s": 879.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1319
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4244,
+            "rms": 0.1309,
+            "spectral_centroid_hz": 1117.3,
+            "zero_crossings_per_s": 879.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 19.4,
+          "zero_crossings_per_s": 1087.5,
+          "rms": 0.1183
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 922.8,
+          "zero_crossings_per_s": 1377.0,
+          "rms": 0.0112
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r01",
+      "label": "Thin bright square quiet tail r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square quiet tail",
+          "wav": "samples/thin-bright-square-quiet-tail-r01.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.5299,
+            "rms": 0.1507,
+            "spectral_centroid_hz": 1249.6,
+            "zero_crossings_per_s": 810.4
+          },
+          "activeWindow": {
+            "start_s": 0.02,
+            "end_s": 0.48,
+            "duration_s": 0.46,
+            "coverage": 0.959,
+            "threshold_rms": 0.1465
+          },
+          "activeMetrics": {
+            "duration_s": 0.46,
+            "peak": 0.5299,
+            "rms": 0.1517,
+            "spectral_centroid_hz": 1201.9,
+            "zero_crossings_per_s": 808.5
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.04,
+          "spectral_centroid_hz": 65.2,
+          "zero_crossings_per_s": 1158.2,
+          "rms": 0.0975
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.02,
+          "spectral_centroid_hz": 838.2,
+          "zero_crossings_per_s": 1447.7,
+          "rms": 0.0096
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.46,
+          "score": 0.501,
+          "metrics": {
+            "duration_s": 0.46,
+            "peak": 0.4117,
+            "rms": 0.1432,
+            "spectral_centroid_hz": 2026.0,
+            "zero_crossings_per_s": 2284.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r02",
+      "label": "Thin bright square quiet tail r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square quiet tail",
+          "wav": "samples/thin-bright-square-quiet-tail-r02.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4604,
+            "rms": 0.1386,
+            "spectral_centroid_hz": 1235.3,
+            "zero_crossings_per_s": 985.4
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1327
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4604,
+            "rms": 0.1386,
+            "spectral_centroid_hz": 1235.3,
+            "zero_crossings_per_s": 985.4
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 98.6,
+          "zero_crossings_per_s": 981.3,
+          "rms": 0.1106
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 804.8,
+          "zero_crossings_per_s": 1270.8,
+          "rms": 0.0035
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": []
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r03",
+      "label": "Thin bright square quiet tail r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "variants": {
+        "aurora": {
+          "label": "Thin bright square quiet tail",
+          "wav": "samples/thin-bright-square-quiet-tail-r03.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4781,
+            "rms": 0.1275,
+            "spectral_centroid_hz": 1268.8,
+            "zero_crossings_per_s": 845.8
+          },
+          "activeWindow": {
+            "start_s": 0.05,
+            "end_s": 0.48,
+            "duration_s": 0.43,
+            "coverage": 0.896,
+            "threshold_rms": 0.1226
+          },
+          "activeMetrics": {
+            "duration_s": 0.43,
+            "peak": 0.4781,
+            "rms": 0.1295,
+            "spectral_centroid_hz": 1256.8,
+            "zero_crossings_per_s": 808.9
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.42,
+            "duration_s": 0.42,
+            "coverage": 1.0,
+            "threshold_rms": 0.2468
+          },
+          "activeMetrics": {
+            "duration_s": 0.42,
+            "peak": 0.8546,
+            "rms": 0.2492,
+            "spectral_centroid_hz": 1136.7,
+            "zero_crossings_per_s": 1966.7
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.48,
+            "duration_s": 0.48,
+            "coverage": 1.0,
+            "threshold_rms": 0.1415
+          },
+          "activeMetrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 120.1,
+          "zero_crossings_per_s": 1157.8,
+          "rms": 0.1197
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.05,
+          "spectral_centroid_hz": 783.3,
+          "zero_crossings_per_s": 1447.3,
+          "rms": 0.0126
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.06,
+          "spectral_centroid_hz": 903.4,
+          "zero_crossings_per_s": 289.5,
+          "rms": 0.1071
+        },
+        "referenceWindowStatus": "direct-cue-comparison"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.43,
+          "score": 0.514,
+          "metrics": {
+            "duration_s": 0.43,
+            "peak": 0.4117,
+            "rms": 0.1443,
+            "spectral_centroid_hz": 2015.9,
+            "zero_crossings_per_s": 2230.4
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "itemCount": 24,
+    "broadReferenceWindowCount": 0,
+    "referenceSegmentCandidateCount": 14,
+    "averageAuroraVsSyntheticGalagaDurationDeltaS": 0.056,
+    "averageAuroraVsReferenceActiveDurationDeltaS": 0.053,
+    "averageAuroraVsReferenceActiveCentroidDeltaHz": 819.929
+  }
+}

@@ -190,6 +190,17 @@ function stopRunRecording(){
  try{rec.stop();}catch{}
  syncRecordUi();
 }
+function stopRunRecordingAfterAudioTail(delayMs=2200,sessionId=''){
+ if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ const targetSession=String(sessionId||VIDEO_REC.sessionId||'');
+ const delay=Math.max(0,Number.isFinite(+delayMs)?+delayMs:2200);
+ setTimeout(()=>{
+  if(!VIDEO_REC.active||!VIDEO_REC.rec)return;
+  if(targetSession&&String(VIDEO_REC.sessionId||'')!==targetSession)return;
+  stopRunRecording();
+ },delay);
+}
+if(typeof window!=='undefined')window.stopRunRecordingAfterAudioTail=stopRunRecordingAfterAudioTail;
 function startRunRecording(){
  if(!shouldCaptureRunVideo())return;
  if(VIDEO_REC.active)stopRunRecording();
@@ -207,7 +218,7 @@ function startRunRecording(){
   sfx.recOsc.connect(sfx.recGain);
   sfx.recGain.connect(sfx.tap);
   sfx.recOsc.start();
-  for(const t of sfx.tap.stream.getAudioTracks())stream.addTrack(t);
+  for(const t of sfx.tap.stream.getAudioTracks())stream.addTrack(typeof t.clone==='function'?t.clone():t);
  }
  VIDEO_REC.stream=stream;
  const chunks=[];

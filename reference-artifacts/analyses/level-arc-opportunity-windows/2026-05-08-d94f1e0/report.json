@@ -1,0 +1,493 @@
+{
+  "generatedAt": "2026-05-08T15:58:23.245Z",
+  "commit": "d94f1e0",
+  "problem": "Aurora needs a Galaga-like level arc: stages should become more distinct, reward-bearing, and learnable over time rather than repeating a similar pressure loop.",
+  "strategy": "Compute opportunity windows from deterministic evidence by combining event-family coverage, pressure shape, reward signal, identity signal, and stage-signature distance before choosing a gameplay change.",
+  "successMeasure": "Future work should raise the opportunity-window score, reduce missing event families, increase closest regular-stage signature distance, and improve level-arc score without hiding Stage 4 exact replay gaps.",
+  "evidence": {
+    "sourceRoot": "reference-artifacts/analyses/aurora-level-expansion-cycle",
+    "stageSignatureReport": "reference-artifacts/analyses/stage-signature-distance/2026-05-08-8f0dde1/report.json",
+    "outcomeProbeReport": "reference-artifacts/analyses/level-arc-outcome-probes/2026-05-08-d94f1e0/report.json"
+  },
+  "summary": {
+    "score10": 5.9,
+    "windowCount": 6,
+    "fullCoverageWindows": 3,
+    "meanPressureIndex": 4.8,
+    "meanRewardIndex": 2.7,
+    "meanIdentityIndex": 5.7,
+    "skillRouteRewardWindows": 1,
+    "outcomeRewardWindows": 2,
+    "outcomeSpecialRewardBonus": 4800,
+    "highestPriorityOpportunity": {
+      "id": "mid-run-pressure-missing-event-coverage",
+      "priority": "high",
+      "window": "mid-run-pressure",
+      "score": 8,
+      "problem": "mid-run-pressure does not yet observe flank_dive_start, wave_clear.",
+      "strategy": "Add or widen deterministic evidence windows before gameplay tuning so the harness can distinguish missing behavior from absent conformance.",
+      "successMeasure": "The same window reports full planned event-family coverage and level-arc identity/readiness scores rise without weakening survival checks."
+    },
+    "pressureCurve": {
+      "regularWindowCount": 5,
+      "meanRegularPressure": 5.5,
+      "adjacent": [
+        {
+          "from": "stage-1-baseline",
+          "to": "mid-run-pressure",
+          "fromStage": 1,
+          "toStage": 6,
+          "delta": 4.6
+        },
+        {
+          "from": "mid-run-pressure",
+          "to": "mid-run-entry-variant",
+          "fromStage": 6,
+          "toStage": 8,
+          "delta": -2.7
+        },
+        {
+          "from": "mid-run-entry-variant",
+          "to": "late-run-cleanup-or-failure",
+          "fromStage": 8,
+          "toStage": 12,
+          "delta": 2.9
+        },
+        {
+          "from": "late-run-cleanup-or-failure",
+          "to": "late-run-escort-variant",
+          "fromStage": 12,
+          "toStage": 14,
+          "delta": -0.6
+        }
+      ],
+      "regressions": [
+        {
+          "from": "mid-run-pressure",
+          "to": "mid-run-entry-variant",
+          "fromStage": 6,
+          "toStage": 8,
+          "delta": -2.7
+        }
+      ],
+      "latePressureSpread": 7.2
+    }
+  },
+  "pressureCurve": {
+    "regularWindowCount": 5,
+    "meanRegularPressure": 5.5,
+    "adjacent": [
+      {
+        "from": "stage-1-baseline",
+        "to": "mid-run-pressure",
+        "fromStage": 1,
+        "toStage": 6,
+        "delta": 4.6
+      },
+      {
+        "from": "mid-run-pressure",
+        "to": "mid-run-entry-variant",
+        "fromStage": 6,
+        "toStage": 8,
+        "delta": -2.7
+      },
+      {
+        "from": "mid-run-entry-variant",
+        "to": "late-run-cleanup-or-failure",
+        "fromStage": 8,
+        "toStage": 12,
+        "delta": 2.9
+      },
+      {
+        "from": "late-run-cleanup-or-failure",
+        "to": "late-run-escort-variant",
+        "fromStage": 12,
+        "toStage": 14,
+        "delta": -0.6
+      }
+    ],
+    "regressions": [
+      {
+        "from": "mid-run-pressure",
+        "to": "mid-run-entry-variant",
+        "fromStage": 6,
+        "toStage": 8,
+        "delta": -2.7
+      }
+    ],
+    "latePressureSpread": 7.2
+  },
+  "windows": [
+    {
+      "id": "challenge-stage-candidate",
+      "role": "challenge_stage_expansion_candidate",
+      "scenario": "stage3-challenge",
+      "stage": 3,
+      "challenge": true,
+      "duration": 24,
+      "score": 5480,
+      "finalLives": 3,
+      "promotedEventCount": 108,
+      "missingFamilies": [],
+      "visualMissingFamilies": [],
+      "outcomeProbe": null,
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "challenge_enemy_hit": 36,
+        "challenge_enemy_path": 69,
+        "challenge_result": 1,
+        "challenge_wave_start": 2
+      },
+      "pressureIndex": 1.6,
+      "baselineRewardIndex": 6.6,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 6.6,
+      "identityIndex": 8.6,
+      "opportunityScore": 2.5,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/events/reference-events.json"
+      }
+    },
+    {
+      "id": "late-run-cleanup-or-failure",
+      "role": "late_run_cleanup_or_failure",
+      "scenario": "stage12-variety",
+      "stage": 12,
+      "challenge": false,
+      "duration": 24,
+      "score": 380,
+      "finalLives": 5,
+      "promotedEventCount": 55,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "outcomeProbe": {
+        "score10": 5.7,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 1,
+        "attacks": 22,
+        "bullets": 20,
+        "firstLoss": {
+          "t": 11.067,
+          "stageClock": 11.067,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 5,
+          "sourceAttackMode": "escort",
+          "playerLane": 0,
+          "sourceLane": 0,
+          "sourceColumn": 5,
+          "recentAttackStarts": 4,
+          "recentEnemyBullets": 3
+        }
+      },
+      "skillRouteProbe": {
+        "id": "late-run-natural-squadron-reward",
+        "scenario": "stage12-natural-squadron-reward",
+        "outcomeScore10": 9.6,
+        "rewardIndex": 10,
+        "score": 5270,
+        "losses": 2,
+        "collisionLosses": 0,
+        "specialAttackCount": 2,
+        "specialAttackBonus": 3200,
+        "firstLoss": {
+          "t": 10.927,
+          "stageClock": 10.927,
+          "cause": "enemy_bullet",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": 8,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 3
+        }
+      },
+      "eventCounts": {
+        "enemy_dive_start": 23,
+        "enemy_projectile": 26,
+        "escort_dive_start": 6
+      },
+      "pressureIndex": 7.2,
+      "baselineRewardIndex": 1.8,
+      "skillRouteRewardIndex": 10,
+      "rewardIndex": 5.9,
+      "identityIndex": 4.8,
+      "opportunityScore": 3.7,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-cleanup-or-failure/events/reference-events.json"
+      }
+    },
+    {
+      "id": "late-run-escort-variant",
+      "role": "late_run_escort_variant",
+      "scenario": "stage14-escort-variant",
+      "stage": 14,
+      "challenge": false,
+      "duration": 12,
+      "score": 510,
+      "finalLives": 5,
+      "promotedEventCount": 27,
+      "missingFamilies": [],
+      "visualMissingFamilies": [
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "outcomeProbe": {
+        "score10": 6.9,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 1,
+        "attacks": 11,
+        "bullets": 11,
+        "firstLoss": {
+          "t": 5.367,
+          "stageClock": 5.367,
+          "cause": "enemy_collision",
+          "sourceType": "but",
+          "sourceDive": 1,
+          "sourceAttackMode": "dive",
+          "playerLane": 8,
+          "sourceLane": 8,
+          "sourceColumn": 9,
+          "recentAttackStarts": 2,
+          "recentEnemyBullets": 4
+        }
+      },
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "enemy_dive_start": 10,
+        "enemy_projectile": 10,
+        "escort_dive_start": 6,
+        "formation_entry": 1
+      },
+      "pressureIndex": 6.6,
+      "baselineRewardIndex": 2.1,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 2.1,
+      "identityIndex": 5.1,
+      "opportunityScore": 4.7,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-escort-variant/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-escort-variant/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/late-run-escort-variant/events/reference-events.json"
+      }
+    },
+    {
+      "id": "mid-run-entry-variant",
+      "role": "mid_run_entry_variant",
+      "scenario": "stage8-entry-variant",
+      "stage": 8,
+      "challenge": false,
+      "duration": 10,
+      "score": 490,
+      "finalLives": 4,
+      "promotedEventCount": 17,
+      "missingFamilies": [
+        "escort_dive_start"
+      ],
+      "visualMissingFamilies": [
+        "escort_dive_start",
+        "player_hit",
+        "wave_clear"
+      ],
+      "outcomeProbe": {
+        "score10": 5.9,
+        "losses": 1,
+        "clears": 0,
+        "collisionLosses": 0,
+        "attacks": 7,
+        "bullets": 7,
+        "firstLoss": {
+          "t": 5.133,
+          "stageClock": 5.133,
+          "cause": "enemy_bullet",
+          "sourceType": "bee",
+          "sourceDive": 0,
+          "sourceAttackMode": null,
+          "playerLane": 5,
+          "sourceLane": 5,
+          "sourceColumn": null,
+          "recentAttackStarts": 3,
+          "recentEnemyBullets": 1
+        }
+      },
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "enemy_dive_start": 4,
+        "enemy_projectile": 7,
+        "flank_dive_start": 5,
+        "formation_entry": 1
+      },
+      "pressureIndex": 4.3,
+      "baselineRewardIndex": 0.6,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 0.6,
+      "identityIndex": 5.1,
+      "opportunityScore": 7.2,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/events/reference-events.json"
+      }
+    },
+    {
+      "id": "mid-run-pressure",
+      "role": "mid_run_pressure",
+      "scenario": "stage6-regular",
+      "stage": 6,
+      "challenge": false,
+      "duration": 8,
+      "score": 390,
+      "finalLives": 2,
+      "promotedEventCount": 17,
+      "missingFamilies": [
+        "flank_dive_start",
+        "wave_clear"
+      ],
+      "visualMissingFamilies": [
+        "flank_dive_start",
+        "wave_clear"
+      ],
+      "outcomeProbe": {
+        "score10": 2.7,
+        "losses": 0,
+        "clears": 0,
+        "collisionLosses": 0,
+        "attacks": 6,
+        "bullets": 4,
+        "firstLoss": null
+      },
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "enemy_dive_start": 5,
+        "enemy_projectile": 8,
+        "escort_dive_start": 2,
+        "formation_entry": 1,
+        "player_hit": 1
+      },
+      "pressureIndex": 7,
+      "baselineRewardIndex": 1.2,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 1.2,
+      "identityIndex": 5.8,
+      "opportunityScore": 6.4,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-pressure/events/reference-events.json"
+      }
+    },
+    {
+      "id": "stage-1-baseline",
+      "role": "opening_baseline",
+      "scenario": "stage1-descent",
+      "stage": 1,
+      "challenge": false,
+      "duration": 24,
+      "score": 0,
+      "finalLives": 5,
+      "promotedEventCount": 23,
+      "missingFamilies": [
+        "player_shot",
+        "wave_clear"
+      ],
+      "visualMissingFamilies": [
+        "player_shot",
+        "wave_clear"
+      ],
+      "outcomeProbe": null,
+      "skillRouteProbe": null,
+      "eventCounts": {
+        "enemy_dive_start": 6,
+        "enemy_projectile": 10,
+        "formation_entry": 1,
+        "player_move": 5,
+        "stage_start": 1
+      },
+      "pressureIndex": 2.4,
+      "baselineRewardIndex": 0,
+      "skillRouteRewardIndex": 0,
+      "rewardIndex": 0,
+      "identityIndex": 4.9,
+      "opportunityScore": 7.7,
+      "artifacts": {
+        "manifest": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/source-manifest.json",
+        "trace": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/trace/trace.json",
+        "events": "reference-artifacts/analyses/aurora-level-expansion-cycle/stage-1-baseline/events/reference-events.json"
+      }
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "mid-run-pressure-missing-event-coverage",
+      "priority": "high",
+      "window": "mid-run-pressure",
+      "score": 8,
+      "problem": "mid-run-pressure does not yet observe flank_dive_start, wave_clear.",
+      "strategy": "Add or widen deterministic evidence windows before gameplay tuning so the harness can distinguish missing behavior from absent conformance.",
+      "successMeasure": "The same window reports full planned event-family coverage and level-arc identity/readiness scores rise without weakening survival checks."
+    },
+    {
+      "id": "stage-1-baseline-missing-event-coverage",
+      "priority": "high",
+      "window": "stage-1-baseline",
+      "score": 8,
+      "problem": "stage-1-baseline does not yet observe player_shot, wave_clear.",
+      "strategy": "Add or widen deterministic evidence windows before gameplay tuning so the harness can distinguish missing behavior from absent conformance.",
+      "successMeasure": "The same window reports full planned event-family coverage and level-arc identity/readiness scores rise without weakening survival checks."
+    },
+    {
+      "id": "late-run-escort-variant-late-reward-thinness",
+      "priority": "high",
+      "window": "late-run-escort-variant",
+      "score": 7.9,
+      "problem": "late-run-escort-variant has late-stage pressure evidence but low reward/opportunity signal (2.1/10).",
+      "strategy": "Measure boss/escort score opportunities, hit-before-loss events, and clear/failure outcomes; then add one visible late-stage reward window rather than increasing raw attack density.",
+      "successMeasure": "Reward index reaches 5+/10 while pressure index does not increase by more than 1 point unless survival evidence also improves."
+    },
+    {
+      "id": "mid-run-entry-variant-missing-event-coverage",
+      "priority": "medium",
+      "window": "mid-run-entry-variant",
+      "score": 7,
+      "problem": "mid-run-entry-variant does not yet observe escort_dive_start.",
+      "strategy": "Add or widen deterministic evidence windows before gameplay tuning so the harness can distinguish missing behavior from absent conformance.",
+      "successMeasure": "The same window reports full planned event-family coverage and level-arc identity/readiness scores rise without weakening survival checks."
+    },
+    {
+      "id": "closest-regular-stage-signature-gap",
+      "priority": "high",
+      "window": "late-run-cleanup-or-failure/late-run-escort-variant",
+      "score": 1.5,
+      "problem": "late-run-cleanup-or-failure and late-run-escort-variant are too similar by computed gameplay signature distance (0.136).",
+      "strategy": "Use the feature trace to add one distinct movement/reward grammar to the weaker window, then rerun stage-signature distance.",
+      "successMeasure": "Closest regular pair distance rises above 0.16 and signatureScore10 improves without increasing exact pressure-loss regressions.",
+      "currentRead": {
+        "late-run-cleanup-or-failure": {
+          "stage": 12,
+          "pressureIndex": 7.2,
+          "rewardIndex": 5.9,
+          "identityIndex": 4.8
+        },
+        "late-run-escort-variant": {
+          "stage": 14,
+          "pressureIndex": 6.6,
+          "rewardIndex": 2.1,
+          "identityIndex": 5.1
+        }
+      }
+    }
+  ]
+}

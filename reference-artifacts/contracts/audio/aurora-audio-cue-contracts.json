@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "audio-cue-contracts",
+  "game": "aurora-galactica",
+  "lineageTarget": "galaga",
+  "generatedBy": "Codex audio conformance planning cycle",
+  "purpose": "Define the semantic, timing, acoustic, runtime, and theme-latitude obligations that audio ingestion and conformance tooling must satisfy before runtime cue promotion.",
+  "philosophy": {
+    "topLevelGoal": "Treat audio as a gameplay language: every cue should tell the player what happened, when it happened, how important it is, and whether the game state changed.",
+    "conformanceGoal": "Support highly conformant Galaga-like realizations while preserving a documented lane for genre-faithful Aurora variants and later theme packs.",
+    "ingestionGoal": "Make cue contracts repeatable for future games so reference clips, segmentation, candidate generation, runtime validation, and theme latitude can be derived before subjective tuning."
+  },
+  "scoringLayers": [
+    {
+      "id": "semantic-meaning",
+      "label": "Semantic Meaning",
+      "meaning": "The gameplay message the player should understand from the cue.",
+      "measuredBy": "audio event matrix coverage, semantic event score, distinct-from relationships"
+    },
+    {
+      "id": "timing-slot",
+      "label": "Timing Slot",
+      "meaning": "The trigger, cooldown, stop behavior, overlap budget, and allowed tail length.",
+      "measuredBy": "audio cue alignment, runtime event logs, transition overlap analysis"
+    },
+    {
+      "id": "acoustic-identity",
+      "label": "Acoustic Identity",
+      "meaning": "Envelope, duration, spectral centroid, band shape, noise/tone split, and segment role fit.",
+      "measuredBy": "audio theme comparison, event-gap segment risk, focused candidate sweeps"
+    },
+    {
+      "id": "runtime-context",
+      "label": "Runtime Context",
+      "meaning": "Whether the cue survives actual gameplay mix pressure without masking adjacent events.",
+      "measuredBy": "promotion precheck, live runtime recapture, quality score, semantic regression guard"
+    },
+    {
+      "id": "theme-latitude",
+      "label": "Theme Latitude",
+      "meaning": "What may vary in Aurora or future theme packs while preserving arcade genre meaning.",
+      "measuredBy": "contract declared lane, required invariants, forbidden changes, variant allowances"
+    }
+  ],
+  "themeLanes": {
+    "referenceConformant": {
+      "goal": "Use measured reference windows or close synthetic equivalents.",
+      "allowed": "Small gain, cooldown, and window trimming changes when they improve runtime clarity.",
+      "forbidden": "Changing semantic class, reversing emotional meaning, masking adjacent critical cues, or stretching a transient into a musical flourish."
+    },
+    "genreConformant": {
+      "goal": "Stay arcade-faithful even when the exact reference waveform is not copied.",
+      "allowed": "Synthesis, chip-like remixes, alternate pitch centers, and small phrase variations that preserve event class and timing slot.",
+      "forbidden": "Ambient pads, long cinematic tails, or modern UI sounds that break fixed-screen arcade readability."
+    },
+    "auroraVariant": {
+      "goal": "Permit Aurora identity and later theme packs while preserving cue contract semantics.",
+      "allowed": "Harmonic color, staged theme shifts, brighter/lower variants, and musical motifs that keep the cue legible in play.",
+      "forbidden": "Any variant that makes hit vs kill, loss vs reward, or pressure vs transition ambiguous."
+    }
+  },
+  "promotionPolicy": {
+    "candidateCanOnlyBecomeTrialWhen": [
+      "focused candidate gates pass or the cue contract explicitly marks the candidate as a composite trial",
+      "the full-theme promotion precheck allows a runtime trial",
+      "semantic score is expected to hold",
+      "the candidate does not increase overlap or masking risk by contract"
+    ],
+    "candidateCanOnlyBePromotedWhen": [
+      "runtime recapture improves or holds event gap for the target cue",
+      "average worst-segment risk holds or improves",
+      "semantic audio score does not regress",
+      "audio cue alignment remains fully green",
+      "overall quality remains at or above the release gate",
+      "the accepted decision and rejected alternatives are persisted"
+    ]
+  },
+  "cueContracts": [
+    {
+      "cue": "stagePulse",
+      "family": "formation-stage-ambience",
+      "priority": 1,
+      "semanticClass": "formation-pressure-cadence",
+      "playerMeaning": "The alien rack is alive, organized, and exerting pressure even when no shot or dive is occurring.",
+      "designerMeaning": "This is the board heartbeat; it shapes perceived difficulty and must not become decorative ambience.",
+      "eventShape": {
+        "structure": "repeating-pressure-bed",
+        "segments": ["onset", "body"],
+        "trigger": "starts after formation arrival and repeats during standard-stage play",
+        "cooldownPolicy": "cadence must preserve pressure without masking shots, hits, or transition cues",
+        "overlapPolicy": "must duck or stop for stageTransition, challengeTransition, challengeResults, and challengePerfect"
+      },
+      "targetGrounding": {
+        "comparisonSet": "formation-pulse-compare",
+        "referenceClips": ["assets/reference-audio/galaga3-ambience-convoy.m4a"],
+        "referenceExpectation": "short bright cadence body with a convincing onset and rack-pressure feel"
+      },
+      "themeLatitude": {
+        "defaultLane": "genreConformant",
+        "strictInvariants": ["cadence pressure", "short dry onset", "low masking of combat cues"],
+        "variantAllowances": ["pitch center", "slight harmonic color", "stage-family motif shifts"],
+        "forbiddenChanges": ["long ambience wash", "soft pad bed", "loss of per-pulse onset"]
+      },
+      "ingestionRequirements": ["extract multiple rack cadence windows", "score onset/body separately", "measure masking against shots and explosions"],
+      "nextLearningQuestions": ["Is the reference window too narrow for formation pressure?", "Do we need a ducking/mix model before tuning tone?"]
+    },
+    {
+      "cue": "enemyHit",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "impact-confirmation",
+      "playerMeaning": "A shot connected but may not have destroyed the target.",
+      "designerMeaning": "The cue should separate contact from final destruction so the player understands damage hierarchy.",
+      "eventShape": {
+        "structure": "single-transient",
+        "segments": ["onset"],
+        "trigger": "fires immediately on standard enemy hit",
+        "cooldownPolicy": "short cooldown; should tolerate rapid shot cadence",
+        "overlapPolicy": "may overlap lightly with enemyBoom only if hit/kill distinction remains legible"
+      },
+      "targetGrounding": {
+        "comparisonSet": "enemy-hit-compare",
+        "referenceClips": ["assets/reference-audio/galaga3-zako.m4a"],
+        "referenceExpectation": "sharp damage transient distinct from the destruction phrase"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": ["short onset", "damage-not-destruction meaning", "distinct from playerShot"],
+        "variantAllowances": ["small pitch/gain shifts by enemy family"],
+        "forbiddenChanges": ["large explosion tail", "reward-like chime"]
+      },
+      "ingestionRequirements": ["segment damage onset from Zako destruction", "score distinctness against enemyBoom and bossHit"],
+      "nextLearningQuestions": ["Do boss/multi-hit enemies need a separate damage layer?"]
+    },
+    {
+      "cue": "enemyBoom",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "enemy-destroyed",
+      "playerMeaning": "A normal enemy was destroyed and points were earned.",
+      "designerMeaning": "The cue should feel final but smaller than boss destruction.",
+      "eventShape": {
+        "structure": "destruction-transient",
+        "segments": ["onset", "tail"],
+        "trigger": "fires on standard enemy destruction",
+        "cooldownPolicy": "short enough for dense challenge-stage kills",
+        "overlapPolicy": "can overlap with score feedback, but must not bury playerShot or playerHit"
+      },
+      "targetGrounding": {
+        "comparisonSet": "enemy-boom-compare",
+        "referenceClips": ["assets/reference-audio/galaga3-zako.m4a"],
+        "referenceExpectation": "measured Zako destruction burst with dry arcade tail"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": ["kill finality", "smaller than bossBoom", "distinct from enemyHit"],
+        "variantAllowances": ["enemy-family color and small gain scaling"],
+        "forbiddenChanges": ["boss-sized blast", "musical reward cue"]
+      },
+      "ingestionRequirements": ["preserve accepted reference-subclip history", "score tail masking in dense kill sequences"],
+      "nextLearningQuestions": ["Should challenge-stage dense kills use a lower gain or grouped limiter?"]
+    },
+    {
+      "cue": "bossHit",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "boss-damage-confirmation",
+      "playerMeaning": "A boss or stronger target took damage but may still be alive.",
+      "designerMeaning": "This cue teaches multi-hit state without confusing it with final destruction.",
+      "eventShape": {
+        "structure": "heavy-damage-transient",
+        "segments": ["onset", "body"],
+        "trigger": "fires on non-lethal boss damage",
+        "cooldownPolicy": "must support multi-hit boss sequences",
+        "overlapPolicy": "should not mask bossBoom or capture cues"
+      },
+      "targetGrounding": {
+        "comparisonSet": "boss-hit-compare",
+        "referenceClips": ["assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"],
+        "referenceExpectation": "heavier damage confirmation with boss hierarchy"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": ["damage not death", "heavier than enemyHit", "distinct from bossBoom"],
+        "variantAllowances": ["stage-rank intensity scaling", "small boss-family tonal color"],
+        "forbiddenChanges": ["normal enemy hit collapse", "full explosion finality"]
+      },
+      "ingestionRequirements": ["score role distinction against enemyHit and bossBoom", "preserve boss multi-hit player comprehension"],
+      "nextLearningQuestions": ["Should visual damage flash and bossHit audio share a timing contract?"]
+    },
+    {
+      "cue": "bossBoom",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "boss-destroyed",
+      "playerMeaning": "A boss was destroyed; this should sound more consequential than a normal kill.",
+      "designerMeaning": "This is combat hierarchy feedback and reward punctuation.",
+      "eventShape": {
+        "structure": "large-destruction-phrase",
+        "segments": ["onset", "body", "tail"],
+        "trigger": "fires on boss destruction",
+        "cooldownPolicy": "longer than normal enemy destruction",
+        "overlapPolicy": "can dominate nearby enemyBoom but not playerHit or capture/rescue state changes"
+      },
+      "targetGrounding": {
+        "comparisonSet": "boss-boom-compare",
+        "referenceClips": ["assets/reference-audio/galaga3-boss-death-sasori.m4a"],
+        "referenceExpectation": "larger boss-death burst with finality and dry arcade tail"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": ["boss finality", "larger than enemyBoom", "not reward-chime-like"],
+        "variantAllowances": ["boss-family accent", "slight score-value intensity"],
+        "forbiddenChanges": ["normal enemy kill collapse", "long cinematic explosion"]
+      },
+      "ingestionRequirements": ["score against enemyBoom size and tail", "measure overlap in escort kill clusters"],
+      "nextLearningQuestions": ["Does bossBoom need a score-surface synchronization marker?"]
+    },
+    {
+      "cue": "rescueJoin",
+      "family": "reward-loss-feedback",
+      "priority": 3,
+      "semanticClass": "rescue-reward",
+      "playerMeaning": "The captured fighter was rescued and rejoined; this is a major positive state change.",
+      "designerMeaning": "The cue must reward skill and clearly announce dual-fighter restoration.",
+      "eventShape": {
+        "structure": "reward-phrase",
+        "segments": ["onset", "body"],
+        "trigger": "fires on rescue-join completion beat",
+        "cooldownPolicy": "long; should not retrigger during the same rescue sequence",
+        "overlapPolicy": "must not be confused with challengePerfect or capturedFighterDestroyed"
+      },
+      "targetGrounding": {
+        "comparisonSet": "rescue-join-compare",
+        "referenceClips": ["assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a"],
+        "referenceExpectation": "celebratory double-ship restoration phrase"
+      },
+      "themeLatitude": {
+        "defaultLane": "genreConformant",
+        "strictInvariants": ["reward state change", "distinct from loss", "distinct from perfect challenge"],
+        "variantAllowances": ["Aurora melodic lift", "short motif color", "slight stage-family variation"],
+        "forbiddenChanges": ["ordinary score tick", "ambiguous capture/loss cue"]
+      },
+      "ingestionRequirements": ["require full-theme precheck plus live recapture", "persist rejected runtime-trial evidence"],
+      "nextLearningQuestions": ["Can reference subclip promotion work, or should this stay a synthesized arcade reward motif?"]
+    },
+    {
+      "cue": "playerHit",
+      "family": "reward-loss-feedback",
+      "priority": 2,
+      "semanticClass": "player-ship-lost",
+      "playerMeaning": "The player lost a ship; this should be unmistakable and emotionally negative.",
+      "designerMeaning": "Ship loss is a composite event and must align audio, explosion, remaining-ship state, and restart pacing.",
+      "eventShape": {
+        "structure": "composite-loss-phrase",
+        "segments": ["onset", "body", "tail"],
+        "trigger": "fires immediately on player ship destruction",
+        "cooldownPolicy": "long; one cue per loss event",
+        "overlapPolicy": "must dominate enemyBoom/bossBoom but not smear into gameOver or next-life restart"
+      },
+      "targetGrounding": {
+        "comparisonSet": "ship-loss-compare",
+        "referenceClips": ["assets/reference-audio/galaga3-death.m4a"],
+        "referenceExpectation": "longer death cue with separable onset/body/tail"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": ["loss meaning", "composite segment shape", "dominates ordinary explosions"],
+        "variantAllowances": ["small timbre changes by theme if segment roles remain clear"],
+        "forbiddenChanges": ["short normal explosion", "reward-like pitch rise", "masking gameOver"]
+      },
+      "ingestionRequirements": ["composite candidate scoring", "runtime visual/audio sync capture", "tail-to-restart overlap scoring"],
+      "nextLearningQuestions": ["Should the player death implementation become a scheduled multi-part cue rather than one clipped sample?"]
+    },
+    {
+      "cue": "challengePerfect",
+      "family": "reward-loss-feedback",
+      "priority": 3,
+      "semanticClass": "perfect-challenge-result",
+      "playerMeaning": "The player perfectly cleared a challenge stage; this is special and should exceed the standard result cue.",
+      "designerMeaning": "Perfect-clear audio should reinforce mastery and high-score pursuit without delaying next-stage pacing.",
+      "eventShape": {
+        "structure": "ceremonial-result-phrase",
+        "segments": ["onset", "body", "tail"],
+        "trigger": "fires shortly after perfect challenge clear",
+        "cooldownPolicy": "one cue per challenge result",
+        "overlapPolicy": "must stop or avoid stagePulse and challengeTransition; must leave clean handoff to next stage"
+      },
+      "targetGrounding": {
+        "comparisonSet": "challenge-perfect-compare",
+        "referenceClips": ["assets/reference-audio/galaga2-challenging-stage-perfect.m4a"],
+        "referenceExpectation": "celebratory result phrase distinct from normal challenge results"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": ["more celebratory than challengeResults", "clean post-clear timing", "no ordinary score-tick collapse"],
+        "variantAllowances": ["theme-colored flourish if timing and result hierarchy remain"],
+        "forbiddenChanges": ["too-short UI chirp", "masking next-stage transition"]
+      },
+      "ingestionRequirements": ["score phrase timing against challenge clear and next-stage cue", "preserve overlap gates"],
+      "nextLearningQuestions": ["Do we need separate perfect-result scoring for audio and score-surface animation?"]
+    }
+  ]
+}

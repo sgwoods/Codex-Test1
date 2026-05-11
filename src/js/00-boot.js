@@ -466,7 +466,10 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',versionLine:'{{BUILD_VERSION_LINE}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+function buildVersionLine(){
+ return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
+}
 function humanizeReleaseTrack(value=''){
  const raw=String(value||'').trim();
  return raw?raw.replace(/-/g,' '):'';
@@ -477,6 +480,7 @@ function buildPlatformInfo(){
   key:'platinum',
   name:PLATFORM_NAME,
   version:BUILD_INFO.version||'--',
+  versionLine:buildVersionLine(),
   releaseTrack:'bundle-aligned',
   compatibility:'',
   notes:''
@@ -572,7 +576,9 @@ const AC=()=>{
 };
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
 if(!Array.isArray(window.__platinumAudioDebug.history))window.__platinumAudioDebug.history=[];
-if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0};
+if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0,startedHistory:[],blockedHistory:[]};
+if(!Array.isArray(window.__platinumAudioDebug.reference.startedHistory))window.__platinumAudioDebug.reference.startedHistory=[];
+if(!Array.isArray(window.__platinumAudioDebug.reference.blockedHistory))window.__platinumAudioDebug.reference.blockedHistory=[];
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
  a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
@@ -601,15 +607,20 @@ const sfx={
   return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
  },
  recordCue(name,atmosphere,opts={},cue=null){
+  const cueLayers=Array.isArray(cue?.layers)?cue.layers:[];
+  const firstReferenceLayer=cueLayers.find(layer=>layer&&layer.referenceClip)||null;
+  const referenceClip=String(cue?.referenceClip||firstReferenceLayer?.referenceClip||'').trim();
+  const referenceClipStart=Number.isFinite(+cue?.clipStart)?+cue.clipStart:(Number.isFinite(+firstReferenceLayer?.clipStart)?+firstReferenceLayer.clipStart:0);
+  const referenceClipDuration=Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:(Number.isFinite(+cue?.scheduledDuration)?+cue.scheduledDuration:(Number.isFinite(+firstReferenceLayer?.clipDuration)?+firstReferenceLayer.clipDuration:0));
   const entry=Object.freeze({
    cue:String(name||''),
    atmosphereId:atmosphere?.id||'classic-arcade',
    audioTheme:atmosphere?.audioTheme||'classic-arcade',
    phase:atmosphere?.phase||opts.phase||'stage',
    variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
-   referenceClip:String(cue?.referenceClip||'').trim(),
-   referenceClipStart:Number.isFinite(+cue?.clipStart)?+cue.clipStart:0,
-   referenceClipDuration:Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:0,
+   referenceClip,
+   referenceClipStart,
+   referenceClipDuration,
    stage:+(S.stage||0),
    challenge:!!S.challenge,
    at:+(performance.now()/1000).toFixed(3)
@@ -651,11 +662,82 @@ const sfx={
    this.recordCue(name,atmosphere,opts,null);
    return null;
   }
-  this.recordCue(name,atmosphere,opts,cue);
+  let selectedCue=cue;
   if(Array.isArray(cue.variants)&&cue.variants.length){
-   return cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
+   selectedCue=cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
   }
-  return cue;
+  this.recordCue(name,atmosphere,opts,selectedCue);
+  return selectedCue;
+ },
+ cueLayerDuration(layer={}){
+  const delay=Math.max(0,+layer.delay||0);
+  if(layer.referenceClip){
+   const clipped=Math.max(0,+layer.clipDuration||0);
+   return delay+(clipped>0?clipped:4);
+  }
+  let endT=.12;
+  if(Array.isArray(layer.seq)&&layer.seq.length){
+   const step=Math.max(.01,+layer.step||.05);
+   endT=Math.max(endT,((layer.seq.length-1)*step*.92)+step+.06);
+  }
+  if(Array.isArray(layer.tones))for(const tone of layer.tones){
+   endT=Math.max(endT,Math.max(0,+tone.delay||0)+Math.max(.01,+tone.duration||.08)+.06);
+  }
+  if(Array.isArray(layer.noise))for(const burst of layer.noise){
+   endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
+  }
+  return delay+endT;
+ },
+ cueScheduledDuration(cue={}){
+  if(Number.isFinite(+cue.scheduledDuration)&&+cue.scheduledDuration>0)return +cue.scheduledDuration;
+  if(Number.isFinite(+cue.clipDuration)&&+cue.clipDuration>0)return +cue.clipDuration;
+  if(Array.isArray(cue.layers)&&cue.layers.length)return Math.max(...cue.layers.map(layer=>this.cueLayerDuration(layer)));
+  return 0;
+ },
+ playSyntheticLayer(layer={},allowIdle=0){
+  const delay=Math.max(0,+layer.delay||0);
+  if(Array.isArray(layer.seq)&&layer.seq.length){
+   const step=Math.max(.01,+layer.step||.05);
+   for(let i=0;i<layer.seq.length;i++)if(layer.seq[i]>0)this.play(layer.seq[i],step,layer.wave||'square',layer.volume||.02,layer.slide||0,0,layer.lpHz||3600,layer.hpHz||0,delay+(i*step*.92),allowIdle);
+  }
+  if(Array.isArray(layer.tones))for(const tone of layer.tones){
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.hpHz||0,delay+Math.max(0,+tone.delay||0),allowIdle,tone.attack,tone.singleOscillator||tone.single);
+  }
+  if(Array.isArray(layer.noise))for(const burst of layer.noise){
+   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,delay+Math.max(0,+burst.delay||0),allowIdle);
+  }
+ },
+ playLayeredCue(name,cue={},opts={},cueEntry=null,allowIdle=0){
+  const layers=Array.isArray(cue.layers)?cue.layers.filter(Boolean):[];
+  if(!layers.length)return;
+  if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
+  const cooldown=Math.max(0,+cue.cooldownMs||0);
+  const cooldownKey=`__cue__:${String(name||'')}`;
+  const now=performance.now();
+  const lastAt=+this.referenceCooldowns[cooldownKey]||0;
+  if(cooldown&&!opts.force&&lastAt&&(now-lastAt)<cooldown){
+   this.recordReferenceBlocked('cooldown',layers.find(layer=>layer.referenceClip)?.referenceClip||'',Object.assign({},opts,{cueEntry,remainingMs:cooldown-(now-lastAt)}));
+   return;
+  }
+  if(cooldown)this.referenceCooldowns[cooldownKey]=now;
+  this.logCueEvent(cueEntry);
+  for(const layer of layers){
+   if(layer.referenceClip){
+    this.playReferenceClip(layer.referenceClip,{
+     allowIdle,
+     volume:Number.isFinite(+layer.referenceVolume)?+layer.referenceVolume:(Number.isFinite(+cue.referenceVolume)?+cue.referenceVolume:1),
+     cooldownMs:0,
+     clipStart:layer.clipStart,
+     clipDuration:layer.clipDuration,
+     delay:layer.delay,
+     force:true,
+     cueEntry,
+     suppressCueLog:true
+    });
+   }else{
+    this.playSyntheticLayer(layer,allowIdle);
+   }
+  }
  },
  playCue(name,opts={}){
   if(DOCS_PREVIEW_MODE&&!opts.docsPreview)return;
@@ -663,6 +745,10 @@ const sfx={
   if(!cue)return;
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
   const cueEntry=window.__platinumAudioDebug.lastCue||null;
+  if(Array.isArray(cue.layers)&&cue.layers.length){
+   this.playLayeredCue(name,cue,opts,cueEntry,allowIdle);
+   return;
+  }
   if(cue.referenceClip){
    if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
    this.playReferenceClip(cue.referenceClip,{
@@ -671,6 +757,7 @@ const sfx={
     cooldownMs:cue.cooldownMs,
     clipStart:cue.clipStart,
     clipDuration:cue.clipDuration,
+    force:!!opts.force,
     cueEntry
    });
    return;
@@ -678,7 +765,7 @@ const sfx={
   this.logCueEvent(cueEntry);
   if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
-   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.hpHz||0,tone.delay||0,allowIdle,tone.attack,tone.singleOscillator||tone.single);
   }
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
    this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0,allowIdle);
@@ -697,21 +784,46 @@ const sfx={
   if(!allow.size)return;
   this.stopReferenceClips(source=>allow.has(String(source?.__cue||'').trim()));
  },
+ recordReferenceBlocked(reason='',clip='',opts={}){
+  const ref=window.__platinumAudioDebug.reference;
+  const entry=Object.freeze({
+   reason:String(reason||'blocked'),
+   clip:String(clip||''),
+   cue:String(opts?.cueEntry?.cue||''),
+   at:+(performance.now()/1000).toFixed(3),
+   remainingMs:Number.isFinite(+opts.remainingMs)?Math.max(0,+opts.remainingMs):0
+  });
+  ref.blockedHistory.push(entry);
+  if(ref.blockedHistory.length>32)ref.blockedHistory.shift();
+  ref.lastBlocked=entry;
+ },
  playReferenceClip(src='',opts={}){
   const clip=String(src||'').trim();
-  if(!clip||(!(aud||opts.allowIdle)))return;
+  if(!clip)return;
+  if(!(aud||opts.allowIdle)){
+   this.recordReferenceBlocked('idle-gated',clip,opts);
+   return;
+  }
   const now=performance.now();
   const cooldown=Math.max(0,+opts.cooldownMs||0);
   const lastAt=+this.referenceCooldowns[clip]||0;
-  if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
+  if(cooldown&&!opts.force&&lastAt&&(now-lastAt)<cooldown){
+   this.recordReferenceBlocked('cooldown',clip,Object.assign({},opts,{remainingMs:cooldown-(now-lastAt)}));
+   return;
+  }
   this.referenceCooldowns[clip]=now;
   window.__platinumAudioDebug.reference.lastRequested=clip;
-  this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
+  if(!opts.suppressCueLog)this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
   const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
   const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
+  const delay=Math.max(0,Number.isFinite(+opts.delay)?+opts.delay:0);
   this.loadReferenceBuffer(clip).then(buffer=>{
-   if(!buffer||audioMuted)return;
+   if(!buffer)return;
+   if(audioMuted){
+    this.recordReferenceBlocked('muted',clip,opts);
+    return;
+   }
    try{
       const A=AC();
     if(typeof A.resume==='function'&&A.state==='suspended')A.resume().catch(()=>{});
@@ -725,12 +837,23 @@ const sfx={
     source.__clipDuration=clipDuration;
       source.connect(gain);
       gain.connect(this.bus);
-      if(clipDuration>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
-      else if(clipStart>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
-      else source.start();
+      const startAt=A.currentTime+delay;
+      if(clipDuration>0)source.start(startAt,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
+      else if(clipStart>0)source.start(startAt,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
+      else source.start(startAt);
       this.referenceActive.push(source);
       window.__platinumAudioDebug.reference.lastStarted=clip;
       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
+      window.__platinumAudioDebug.reference.startedHistory.push(Object.freeze({
+       clip,
+       cue:String(opts?.cueEntry?.cue||'').trim(),
+       clipStart,
+       clipDuration,
+       delay,
+       at:+((performance.now()/1000)+delay).toFixed(3),
+       activeCount:this.referenceActive.length
+      }));
+      if(window.__platinumAudioDebug.reference.startedHistory.length>32)window.__platinumAudioDebug.reference.startedHistory.shift();
       if(this.referenceActive.length>24)this.referenceActive.splice(0,this.referenceActive.length-24);
       const cleanup=()=>{
        this.referenceActive=this.referenceActive.filter(entry=>entry!==source);
@@ -779,31 +902,31 @@ const sfx={
    'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a'
   ].forEach(clip=>{this.loadReferenceBuffer(clip).catch(()=>{});});
  },
- play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
-  lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
+ play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,hpHz=0,at=0,allowIdle=0,attack=.008,single=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=single?null:A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter(),hp=hpHz>0?A.createBiquadFilter():null,atk=Math.max(.001,Math.min(d*.8,Number.isFinite(+attack)?+attack:.008));
+  lp.type='lowpass';lp.frequency.value=lpHz;if(hp){hp.type='highpass';hp.frequency.value=hpHz;}g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+atk);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
-  o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);
-  o.connect(lp);o2.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);
+  if(o2){o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);}
+  o.connect(hp||lp);if(o2)o2.connect(hp||lp);if(hp)hp.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);if(o2)o2.start(tm);o.stop(tm+d+.03);if(o2)o2.stop(tm+d+.03);
  },
  noise(d=.08,v=.02,hp=900,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
   src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(this.bus);src.start(tm);src.stop(tm+d+.01);
  },
- seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600,allowIdle=0){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92,allowIdle)},
+ seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600,allowIdle=0){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,0,i*step*.92,allowIdle)},
  start(){this.playCue('gameStart',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
  formationArrival(){this.playCue('formationArrival',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
  shot(){this.playCue('playerShot',{phase:S.challenge?'challenge':'stage'})},
  enemyShot(){this.playCue('enemyShot',{phase:S.challenge?'challenge':'stage'})},
  hit(){this.playCue('enemyHit',{phase:S.challenge?'challenge':'stage'})},
  bossHit(){this.playCue('bossHit',{phase:S.challenge?'challenge':'stage'})},
- shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage'})},
+ shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage',force:1})},
  boom(k='bee'){this.playCue(k==='boss'||k==='rogue'?'bossBoom':'enemyBoom',{phase:S.challenge?'challenge':'stage'})},
  beam(){this.playCue('captureBeam',{phase:S.challenge?'challenge':'stage'})},
  captureSuccess(){this.playCue('captureSuccess',{phase:S.challenge?'challenge':'stage'})},
  rescue(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
  extend(){this.playCue('extendAward',{phase:'stage'})},
- over(){this.playCue('gameOver',{phase:'results'})},
+ over(){this.playCue('gameOver',{phase:'results',force:1})},
  capturedFighterDestroyed(){this.playCue('capturedFighterDestroyed',{phase:S.challenge?'challenge':'stage'})},
- challengeResult(perfect=0){this.playCue(perfect?'challengePerfect':'challengeResults',{phase:'challenge',challenge:1})},
+ challengeResult(perfect=0){this.playCue(perfect?'challengePerfect':'challengeResults',{phase:'challenge',challenge:1,force:1})},
  march(i=0){this.playCue('stagePulse',{phase:S.challenge?'challenge':'stage',variant:i})},
  attackCharge(){this.playCue('attackCharge',{phase:S.challenge?'challenge':'stage'})},
  uiTick(){this.playCue('uiTick',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
@@ -811,7 +934,7 @@ const sfx={
  captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
  join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
  highScore(rank=0){this.playCue(rank===1?'highScoreFirst':'highScoreOther',{phase:'results'})},
- transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})},
+ transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge,force:1})},
  attractEnter(phase='demo'){
   const frontDoorTheme=currentGamePack()?.frontDoor?.atmosphereTheme||'';
   this.playCue('attractEnter',{
@@ -1524,7 +1647,7 @@ function syncSettingsUi(){
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
  if(settingsChannel)settingsChannel.textContent=`Lane ${String(BUILD_INFO.releaseChannel||'development').toUpperCase()}`;
- if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
+ if(settingsVersion)settingsVersion.textContent=`Version ${buildVersionLine()}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();

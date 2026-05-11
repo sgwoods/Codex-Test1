@@ -158,4 +158,14 @@ function assignEscorts(boss){
   boss.esc++;
   logEnemyAttackStart(e,'escort',{lead:boss.id,offset:+e.off.toFixed(2),pattern:lateEscortSurge?'late-stage-wide-escort':'standard-escort'});
  }
+ if(S.stage>=12&&boss.esc>=2&&!S.challenge){
+  logEvent('late_reward_squadron_window',Object.assign({
+   stage:S.stage,
+   escorts:boss.esc,
+   escortOffset:+escortOffset.toFixed(2),
+   bossVx:+boss.vx.toFixed(2),
+   bossVy:+boss.vy.toFixed(2),
+   playerLane:playLane(S.p.x)
+  },enemyRef(boss)));
+ }
 }

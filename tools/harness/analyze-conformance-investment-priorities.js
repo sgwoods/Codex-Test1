@@ -85,6 +85,68 @@ function categoryById(quality, id){
   return (quality.categories || []).find(category => category.id === id) || { id, label: id, score10: 0 };
 }
 
+function latestLevelArcCategory(quality, levelArcReport){
+  const base = categoryById(quality, 'level-arc');
+  if(!Number.isFinite(+levelArcReport?.summary?.score10)) return base;
+  return Object.assign({}, base, {
+    score10: +levelArcReport.summary.score10
+  });
+}
+
+function nextAudioAction(audioEventGap, audioCueCandidate, audioContract){
+  if(audioContract?.nextStep) return audioContract.nextStep;
+  const segmentCue = audioEventGap?.summary?.highestSegmentRiskCue || '';
+  const segmentRole = audioEventGap?.summary?.highestSegmentRiskRole || '';
+  if(segmentCue && segmentRole){
+    return `Tune the highest segment-level audio gap next: ${segmentCue} ${segmentRole}. Rerun audio comparison, event-gap analysis, and quality scoring after the change.`;
+  }
+  if(audioCueCandidate?.cue === 'challengePerfect'){
+    const decision = audioCueCandidate.decision || {};
+    if(decision.keep && decision.best){
+      return `Promote the measured Challenge Perfect candidate ${decision.best}, then rerun full audio comparison, event-gap analysis, and quality scoring.`;
+    }
+    if(decision.measuredBest){
+      return `Continue Challenge Perfect candidate generation around ${decision.measuredBest}; the latest sweep found no safe keeper, so do not promote a runtime cue yet.`;
+    }
+  }
+  const nextStep = audioEventGap?.nextStep;
+  if(nextStep) return nextStep;
+  const highest = audioEventGap?.summary?.highestRiskLabel || audioEventGap?.summary?.highestRiskCue || '';
+  if(highest) return `Tune the highest-risk runtime cue next: ${highest}. Rerun audio comparison and event-gap analysis after the change.`;
+  return 'Rerun audio comparison and semantic event-gap analysis, then tune the highest-risk runtime cue.';
+}
+
+function audioRationale(audioEventGap, audioCueCandidate, audioContract){
+  const summary = audioEventGap?.summary || {};
+  const decision = audioCueCandidate?.decision || null;
+  if(audioContract?.summary?.averageReadinessScore10){
+    return `Audio is still the weakest runtime quality category, but the process is now more repeatable: cue-contract readiness is ${audioContract.summary.averageReadinessScore10}/10, semantic event score is ${summary.semanticAverageScore10 ?? 'unknown'}/10, acoustic event score remains the key gap, and the highest actionable cue is ${summary.highestSegmentRiskCue || summary.highestRiskCue} ${summary.highestSegmentRiskRole || ''}.`;
+  }
+  if(summary.highestSegmentRiskCue && summary.highestSegmentRiskRole){
+    return `Audio is still the weakest quality category, and the evaluator now has ${summary.segmentRoleComparisonCount || 0} segment-role comparisons. The current highest actionable segment gap is ${summary.highestSegmentRiskCue} ${summary.highestSegmentRiskRole}, with average worst segment risk ${summary.averageWorstSegmentRisk10 ?? 'unknown'}/10.`;
+  }
+  if(audioCueCandidate?.cue === 'challengePerfect' && decision && decision.keep === false){
+    return `Audio is still the weakest quality category. Semantic measurement debt is reduced, and the Challenge Perfect candidate loop now shows no safe keeper yet; measured-best ${decision.measuredBest || 'candidate'} should guide the next generator pass.`;
+  }
+  if(Number.isFinite(+summary.semanticAverageScore10) && +summary.semanticAttentionCueCount === 0){
+    return `Audio is still the weakest quality category, but semantic measurement debt is now reduced: semantic event score is ${summary.semanticAverageScore10}/10, semantic attention rows are ${summary.semanticAttentionCueCount}, and the highest runtime cue risk is ${summary.highestRiskLabel || summary.highestRiskCue}.`;
+  }
+  return 'Audio is the weakest quality category. The semantic event-gap scorer now shows coverage is strong, while shared shot/impact/explosion mappings remain the next clarity gap.';
+}
+
+function nextLevelArcAction(nextOpportunityId){
+  if(nextOpportunityId === 'stage-1-baseline-missing-event-coverage'){
+    return 'Widen the Stage 1 baseline evidence window for player-shot and endpoint semantics before gameplay tuning.';
+  }
+  if(String(nextOpportunityId || '').includes('stage-1-baseline')){
+    return 'Resolve the Stage 1 baseline opportunity coverage gap with a longer deterministic opening route before gameplay tuning.';
+  }
+  if(String(nextOpportunityId || '').includes('mid-run-pressure')){
+    return 'Promote mid-run pressure event coverage by widening the Stage 6 evidence window for flank-dive and wave-clear semantics before changing gameplay tuning.';
+  }
+  return 'Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.';
+}
+
 function buildCandidate({ id, label, category, quality, economics, expectedLift10, confidence, reuse, risk, costClass, computeAxis, rationale, nextAction }){
   const categoryCount = Math.max((quality.categories || []).length, 1);
   const categoryWeight = 1 / categoryCount;
@@ -158,19 +220,45 @@ function main(){
   const qualityPath = latestReport('quality-conformance');
   if(!qualityPath) throw new Error('Missing quality-conformance report; run npm run harness:score:quality-conformance first.');
   const opportunityPath = latestReport('level-arc-opportunity-windows');
+  const levelArcPath = latestReport('level-arc-conformance');
+  const formationPathSlotPath = latestReport('formation-boss-path-slot-extraction');
+  const formationPathFamilyPath = latestReport('formation-boss-path-family-comparison');
+  const audioEventGapPath = latestReport('aurora-audio-event-gap');
+  const audioCueCandidatePath = latestReport('aurora-audio-cue-candidates');
+  const audioContractPath = latestReport('aurora-audio-cue-contracts');
+  const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
   const opportunity = opportunityPath ? readJson(opportunityPath) : { summary: {} };
+  const levelArcReport = levelArcPath ? readJson(levelArcPath) : { summary: {} };
+  const formationPathSlot = formationPathSlotPath ? readJson(formationPathSlotPath) : { summary: {} };
+  const formationPathFamily = formationPathFamilyPath ? readJson(formationPathFamilyPath) : { summary: {} };
+  const audioEventGap = audioEventGapPath ? readJson(audioEventGapPath) : { summary: {} };
+  const audioCueCandidate = audioCueCandidatePath ? readJson(audioCueCandidatePath) : null;
+  const audioContract = audioContractPath ? readJson(audioContractPath) : null;
+  const stage14Sweep = stage14SweepPath ? readJson(stage14SweepPath) : { summary: {} };
   const ledger = loadLedger();
+  const stage14SpecialRoutes = stage14Sweep.summary?.specialBonusCandidates || 0;
+  const nextOpportunityId = opportunity.summary?.highestPriorityOpportunity?.id || 'missing level-arc opportunity coverage';
+  const pathSlotAtRuntimeCap = Number.isFinite(+formationPathSlot.summary?.cappedPathSlotScore10)
+    && +formationPathSlot.summary.cappedPathSlotScore10 >= +formationPathSlot.summary.referenceComparisonCap10;
+  const pathFamilyAtHeuristicCap = Number.isFinite(+formationPathFamily.summary?.score10)
+    && +formationPathFamily.summary.score10 >= +formationPathFamily.summary.referenceComparisonCap10;
+  const formationPathCandidateId = pathFamilyAtHeuristicCap
+    ? 'formation-boss-frame-labeled-reference-paths'
+    : pathSlotAtRuntimeCap
+    ? 'formation-boss-reference-path-comparison'
+    : 'formation-boss-path-slot-extraction';
 
   const audio = categoryById(quality, 'audio');
-  const levelArc = categoryById(quality, 'level-arc');
+  const levelArc = latestLevelArcCategory(quality, levelArcReport);
+  const formationBoss = categoryById(quality, 'formation-boss-grammar');
   const stage1Timing = categoryById(quality, 'stage1-timing');
   const uiShell = categoryById(quality, 'ui-shell');
   const candidates = [
     buildCandidate({
       id: 'audio-reference-segmentation',
-      label: 'Tighten audio reference segmentation and cue matching',
+      label: 'Advance audio cue contracts, reference segmentation, and cue matching',
       category: audio,
       quality,
       economics: ledger,
@@ -180,23 +268,25 @@ function main(){
       risk: 0.28,
       costClass: 'high',
       computeAxis: 'quality-score',
-      rationale: 'Audio is the weakest quality category. The semantic event-gap scorer now shows coverage is strong, while shared shot/impact/explosion mappings remain the next clarity gap.',
-      nextAction: 'Split or further label shared shot/impact/explosion reference mappings, especially playerShot/enemyShot/bossHit and enemyHit/enemyBoom, then rerun audio comparison and semantic event-gap analysis.'
+      rationale: audioRationale(audioEventGap, audioCueCandidate, audioContract),
+      nextAction: nextAudioAction(audioEventGap, audioCueCandidate, audioContract)
     }),
     buildCandidate({
-      id: 'stage12-natural-reward-window',
-      label: 'Naturalize Stage 12 boss/escort reward window',
+      id: 'level-arc-opportunity-coverage',
+      label: 'Tighten level-arc opportunity coverage and late reward reads',
       category: levelArc,
       quality,
       economics: ledger,
-      expectedLift10: 0.28,
+      expectedLift10: 0.24,
       confidence: 0.86,
       reuse: 0.95,
       risk: 0.18,
       costClass: 'low',
       computeAxis: 'conformance-loop',
-      rationale: `The frozen Stage 12 loop is ready; opportunity readiness is ${opportunity.summary?.score10 || 0}/10 and late reward evidence is still thin.`,
-      nextAction: 'Apply one narrow Stage 12 reward candidate and rerun the frozen conformance loop.'
+      rationale: stage14SpecialRoutes
+        ? `The Stage 12 and Stage 14 learned reward routes are now credited; the Stage 14 sweep found ${stage14SpecialRoutes} natural special-bonus routes, opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gap is ${nextOpportunityId}.`
+        : `The Stage 12 learned reward route is now credited; opportunity readiness is ${opportunity.summary?.score10 || 0}/10, and the next gaps are ${nextOpportunityId} plus late reward thinness outside the Stage 12 route.`,
+      nextAction: nextLevelArcAction(nextOpportunityId)
     }),
     buildCandidate({
       id: 'stage4-pressure-exact-replay',
@@ -212,6 +302,33 @@ function main(){
       computeAxis: 'stage4-pressure',
       rationale: 'Level-arc pressure replay coverage remains a weak submetric, but prior cycles were more compute-heavy than the Stage 12 loop.',
       nextAction: 'Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.'
+    }),
+    buildCandidate({
+      id: formationPathCandidateId,
+      label: pathFamilyAtHeuristicCap
+        ? 'Add frame-labeled Galaga boss and formation path references'
+        : pathSlotAtRuntimeCap
+        ? 'Compare boss and formation paths against reference families'
+        : 'Promote boss entry and formation path/slot extraction',
+      category: formationBoss,
+      quality,
+      economics: ledger,
+      expectedLift10: pathFamilyAtHeuristicCap ? 0.28 : pathSlotAtRuntimeCap ? 0.42 : 0.75,
+      confidence: pathFamilyAtHeuristicCap ? 0.58 : pathSlotAtRuntimeCap ? 0.62 : 0.7,
+      reuse: 0.96,
+      risk: pathFamilyAtHeuristicCap ? 0.42 : pathSlotAtRuntimeCap ? 0.38 : 0.3,
+      costClass: pathFamilyAtHeuristicCap ? 'high' : pathSlotAtRuntimeCap ? 'high' : 'medium',
+      computeAxis: 'conformance-loop',
+      rationale: pathFamilyAtHeuristicCap
+        ? `Heuristic path-family comparison is now available and capped at ${formationPathFamily.summary.score10}/10 with confidence ${formationPathFamily.summary.comparisonConfidence}. The remaining path-shape gap is labeled Galaga reference path data, not runtime extraction.`
+        : pathSlotAtRuntimeCap
+        ? `Runtime path extraction is now available and capped at ${formationPathSlot.summary.cappedPathSlotScore10}/10 until reference comparison lands. The latest extraction found ${formationPathSlot.summary.bossMovingTracks} moving boss tracks, ${formationPathSlot.summary.escortTracks} escort tracks, and ${formationPathSlot.summary.regularSlotTracks + formationPathSlot.summary.challengeSlotTracks} slot tracks.`
+        : 'Boss entry and formation grammar is now a first-class scorer. Its current highest measurement debt is path-shape and set-formation precision, which affects Galaga-like stage choreography and is reusable for future game ingestion.',
+      nextAction: pathFamilyAtHeuristicCap
+        ? 'Label boss, escort, rack-settle, and challenge path families from Galaga reference contact sheets or video traces, then replace heuristic coverage with direct shape-distance scoring.'
+        : pathSlotAtRuntimeCap
+        ? 'Add Galaga reference path-family labels and compare extracted Aurora boss/escort/challenge trajectories against those targets before tuning stage scripts.'
+        : 'Extract frame-level boss/escort/challenge paths and formation slot coordinates for the current evidence windows, then rerun formation-boss grammar, level-arc, and quality scoring.'
     }),
     buildCandidate({
       id: 'stage1-timing-polish',
@@ -256,7 +373,12 @@ function main(){
     commit,
     evidence: {
       qualityReport: rel(qualityPath),
+      audioEventGapReport: audioEventGapPath ? rel(audioEventGapPath) : null,
+      audioCueCandidateReport: audioCueCandidatePath ? rel(audioCueCandidatePath) : null,
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
+      levelArcReport: levelArcPath ? rel(levelArcPath) : null,
+      formationPathSlotReport: formationPathSlotPath ? rel(formationPathSlotPath) : null,
+      stage14SweepReport: stage14SweepPath ? rel(stage14SweepPath) : null,
       economicsReport: economicsPath ? rel(economicsPath) : null,
       ledger: rel(LEDGER)
     },
@@ -269,7 +391,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: 'Audio remains the largest raw gap, but the Stage 12 natural reward loop ranks competitively because it has low compute cost, high measurement readiness, and strong reuse as a candidate-loop proving ground. Use this artifact as the tie-breaker before committing multi-hour compute cycles.'
+    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, segment-role comparisons are ${audioEventGap.summary?.segmentRoleComparisonCount ?? 'unknown'}, and the latest Challenge Perfect candidate decision is ${audioCueCandidate?.decision?.status || 'not yet run'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));

@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-cue-contract-analysis",
+  "generatedAt": "2026-05-10T13:09:05.487Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "41f7caa8",
+  "dirty": true,
+  "problem": "Aurora audio needs a formal contract layer so ingestion, candidate generation, runtime logging, comparison, promotion, and theme variation all optimize the same player-facing meaning rather than isolated waveform similarity.",
+  "strategy": "Load the audio cue contracts, join them to application guide mappings, event-gap risks, focused candidate reports, promotion prechecks, and current quality scoring, then identify which cue families need stronger evidence or a different generation strategy.",
+  "successMeasure": "A cue contract is ready for runtime work when semantic meaning, reference grounding, runtime evidence, and theme latitude all score strongly, and runtime promotion remains blocked until live recapture holds the full quality gates.",
+  "source": {
+    "contracts": "reference-artifacts/contracts/audio/aurora-audio-cue-contracts.json",
+    "applicationGuide": "application-guide.json",
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-10-41f7caa8/report.json"
+  },
+  "summary": {
+    "contractCount": 8,
+    "averageReadinessScore10": 9.09,
+    "audioScore10": 7,
+    "acousticEventScore10": 5.81,
+    "semanticEventScore10": 9.78,
+    "highestRiskCue": "stagePulse",
+    "highestRisk10": 5.18,
+    "highestWorstSegmentCue": "playerHit",
+    "runtimeTrialAllowedCueCount": 1,
+    "blockedCueCount": 3,
+    "compositeCueCount": 4
+  },
+  "cues": [
+    {
+      "cue": "stagePulse",
+      "family": "formation-stage-ambience",
+      "priority": 1,
+      "semanticClass": "formation-pressure-cadence",
+      "playerMeaning": "The alien rack is alive, organized, and exerting pressure even when no shot or dive is occurring.",
+      "eventShape": {
+        "structure": "repeating-pressure-bed",
+        "segments": [
+          "onset",
+          "body"
+        ],
+        "trigger": "starts after formation arrival and repeats during standard-stage play",
+        "cooldownPolicy": "cadence must preserve pressure without masking shots, hits, or transition cues",
+        "overlapPolicy": "must duck or stop for stageTransition, challengeTransition, challengeResults, and challengePerfect"
+      },
+      "themeLatitude": {
+        "defaultLane": "genreConformant",
+        "strictInvariants": [
+          "cadence pressure",
+          "short dry onset",
+          "low masking of combat cues"
+        ],
+        "variantAllowances": [
+          "pitch center",
+          "slight harmonic color",
+          "stage-family motif shifts"
+        ],
+        "forbiddenChanges": [
+          "long ambience wash",
+          "soft pad bed",
+          "loss of per-pulse onset"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 8.75,
+        "runtimeEvidenceScore10": 10,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 9.68
+      },
+      "currentRisk": {
+        "gapRisk10": 5.18,
+        "worstSegmentRole": "onset",
+        "worstSegmentRisk10": 7.04,
+        "semanticScore10": 9.6,
+        "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 1,
+        "comparisonSets": [
+          "formation-pulse-compare"
+        ],
+        "reference": {
+          "score10": 8.75,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": false
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-formation-pulse.json",
+          "status": "no-keeper",
+          "keep": false,
+          "best": null,
+          "measuredBest": "cadence-phase-muted-square-body",
+          "reason": "No Formation Pulse candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+        },
+        "promotionPrecheck": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-10-b879bdaa-dirty-001142-stagePulse/report.json",
+          "status": "precheck-reject",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "blockers": [
+            "No Formation Pulse candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+          ],
+          "wins": [
+            "Full-theme cue gap improves by 0.64/10.",
+            "Worst segment risk improves by 0.09/10."
+          ]
+        }
+      },
+      "status": "blocked-by-promotion-precheck",
+      "recommendation": "Do not promote cadence-phase-muted-square-body; the targeted low-brightness/stability family lost pressure-bed character and still failed masking. Move to phase/envelope-aware or reference-subclip candidates.",
+      "nextLearningQuestions": [
+        "Is the reference window too narrow for formation pressure?",
+        "Do we need a ducking/mix model before tuning tone?"
+      ]
+    },
+    {
+      "cue": "enemyHit",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "impact-confirmation",
+      "playerMeaning": "A shot connected but may not have destroyed the target.",
+      "eventShape": {
+        "structure": "single-transient",
+        "segments": [
+          "onset"
+        ],
+        "trigger": "fires immediately on standard enemy hit",
+        "cooldownPolicy": "short cooldown; should tolerate rapid shot cadence",
+        "overlapPolicy": "may overlap lightly with enemyBoom only if hit/kill distinction remains legible"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": [
+          "short onset",
+          "damage-not-destruction meaning",
+          "distinct from playerShot"
+        ],
+        "variantAllowances": [
+          "small pitch/gain shifts by enemy family"
+        ],
+        "forbiddenChanges": [
+          "large explosion tail",
+          "reward-like chime"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 10,
+        "runtimeEvidenceScore10": 6.25,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 8.8
+      },
+      "currentRisk": {
+        "gapRisk10": 1.85,
+        "worstSegmentRole": "onset",
+        "worstSegmentRisk10": 1.99,
+        "semanticScore10": 9.8,
+        "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 1,
+        "comparisonSets": [
+          "enemy-hit-compare"
+        ],
+        "reference": {
+          "score10": 10,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": true
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-enemy-hit.json",
+          "status": "candidate-recommended",
+          "keep": true,
+          "best": "refclip-s750-d200-v100",
+          "measuredBest": "refclip-s750-d200-v100",
+          "reason": "Enemy Hit candidate clears measured keeper gates."
+        },
+        "promotionPrecheck": null
+      },
+      "status": "contract-ready-for-next-candidate-cycle",
+      "recommendation": "Keep this cue as a guardrail while higher-risk audio contracts are improved.",
+      "nextLearningQuestions": [
+        "Do boss/multi-hit enemies need a separate damage layer?"
+      ]
+    },
+    {
+      "cue": "enemyBoom",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "enemy-destroyed",
+      "playerMeaning": "A normal enemy was destroyed and points were earned.",
+      "eventShape": {
+        "structure": "destruction-transient",
+        "segments": [
+          "onset",
+          "tail"
+        ],
+        "trigger": "fires on standard enemy destruction",
+        "cooldownPolicy": "short enough for dense challenge-stage kills",
+        "overlapPolicy": "can overlap with score feedback, but must not bury playerShot or playerHit"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": [
+          "kill finality",
+          "smaller than bossBoom",
+          "distinct from enemyHit"
+        ],
+        "variantAllowances": [
+          "enemy-family color and small gain scaling"
+        ],
+        "forbiddenChanges": [
+          "boss-sized blast",
+          "musical reward cue"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 10,
+        "runtimeEvidenceScore10": 6.25,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 8.8
+      },
+      "currentRisk": {
+        "gapRisk10": 1.05,
+        "worstSegmentRole": "onset",
+        "worstSegmentRisk10": 0.61,
+        "semanticScore10": 10,
+        "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 0,
+        "comparisonSets": [
+          "enemy-boom-compare"
+        ],
+        "reference": {
+          "score10": 10,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": true
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-enemy-boom.json",
+          "status": "candidate-recommended",
+          "keep": true,
+          "best": "refclip-s540-d240-v105",
+          "measuredBest": "refclip-s540-d240-v105",
+          "reason": "Enemy Boom candidate clears measured keeper gates."
+        },
+        "promotionPrecheck": null
+      },
+      "status": "contract-ready-for-next-candidate-cycle",
+      "recommendation": "Keep this cue as a guardrail while higher-risk audio contracts are improved.",
+      "nextLearningQuestions": [
+        "Should challenge-stage dense kills use a lower gain or grouped limiter?"
+      ]
+    },
+    {
+      "cue": "bossHit",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "boss-damage-confirmation",
+      "playerMeaning": "A boss or stronger target took damage but may still be alive.",
+      "eventShape": {
+        "structure": "heavy-damage-transient",
+        "segments": [
+          "onset",
+          "body"
+        ],
+        "trigger": "fires on non-lethal boss damage",
+        "cooldownPolicy": "must support multi-hit boss sequences",
+        "overlapPolicy": "should not mask bossBoom or capture cues"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": [
+          "damage not death",
+          "heavier than enemyHit",
+          "distinct from bossBoom"
+        ],
+        "variantAllowances": [
+          "stage-rank intensity scaling",
+          "small boss-family tonal color"
+        ],
+        "forbiddenChanges": [
+          "normal enemy hit collapse",
+          "full explosion finality"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 10,
+        "runtimeEvidenceScore10": 6.25,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 8.8
+      },
+      "currentRisk": {
+        "gapRisk10": 0.87,
+        "worstSegmentRole": "onset",
+        "worstSegmentRisk10": 0.92,
+        "semanticScore10": 9.8,
+        "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 1,
+        "comparisonSets": [
+          "boss-hit-compare"
+        ],
+        "reference": {
+          "score10": 10,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": true
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-boss-hit.json",
+          "status": "candidate-recommended",
+          "keep": true,
+          "best": "refclip-s1149-d240-v108",
+          "measuredBest": "refclip-s1149-d240-v108",
+          "reason": "Boss Hit candidate clears measured keeper gates."
+        },
+        "promotionPrecheck": null
+      },
+      "status": "contract-ready-for-next-candidate-cycle",
+      "recommendation": "Keep this cue as a guardrail while higher-risk audio contracts are improved.",
+      "nextLearningQuestions": [
+        "Should visual damage flash and bossHit audio share a timing contract?"
+      ]
+    },
+    {
+      "cue": "bossBoom",
+      "family": "impact-explosion-feedback",
+      "priority": 2,
+      "semanticClass": "boss-destroyed",
+      "playerMeaning": "A boss was destroyed; this should sound more consequential than a normal kill.",
+      "eventShape": {
+        "structure": "large-destruction-phrase",
+        "segments": [
+          "onset",
+          "body",
+          "tail"
+        ],
+        "trigger": "fires on boss destruction",
+        "cooldownPolicy": "longer than normal enemy destruction",
+        "overlapPolicy": "can dominate nearby enemyBoom but not playerHit or capture/rescue state changes"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": [
+          "boss finality",
+          "larger than enemyBoom",
+          "not reward-chime-like"
+        ],
+        "variantAllowances": [
+          "boss-family accent",
+          "slight score-value intensity"
+        ],
+        "forbiddenChanges": [
+          "normal enemy kill collapse",
+          "long cinematic explosion"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 10,
+        "runtimeEvidenceScore10": 6.25,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 8.8
+      },
+      "currentRisk": {
+        "gapRisk10": 1,
+        "worstSegmentRole": "tail",
+        "worstSegmentRisk10": 3.32,
+        "semanticScore10": 10,
+        "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 0,
+        "comparisonSets": [
+          "boss-boom-compare"
+        ],
+        "reference": {
+          "score10": 10,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": true
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-boss-boom.json",
+          "status": "candidate-recommended",
+          "keep": true,
+          "best": "refclip-s798-d640-v104",
+          "measuredBest": "refclip-s798-d640-v104",
+          "reason": "Boss Boom candidate clears measured keeper gates."
+        },
+        "promotionPrecheck": null
+      },
+      "status": "contract-ready-for-next-candidate-cycle",
+      "recommendation": "Keep this cue as a guardrail while higher-risk audio contracts are improved.",
+      "nextLearningQuestions": [
+        "Does bossBoom need a score-surface synchronization marker?"
+      ]
+    },
+    {
+      "cue": "rescueJoin",
+      "family": "reward-loss-feedback",
+      "priority": 3,
+      "semanticClass": "rescue-reward",
+      "playerMeaning": "The captured fighter was rescued and rejoined; this is a major positive state change.",
+      "eventShape": {
+        "structure": "reward-phrase",
+        "segments": [
+          "onset",
+          "body"
+        ],
+        "trigger": "fires on rescue-join completion beat",
+        "cooldownPolicy": "long; should not retrigger during the same rescue sequence",
+        "overlapPolicy": "must not be confused with challengePerfect or capturedFighterDestroyed"
+      },
+      "themeLatitude": {
+        "defaultLane": "genreConformant",
+        "strictInvariants": [
+          "reward state change",
+          "distinct from loss",
+          "distinct from perfect challenge"
+        ],
+        "variantAllowances": [
+          "Aurora melodic lift",
+          "short motif color",
+          "slight stage-family variation"
+        ],
+        "forbiddenChanges": [
+          "ordinary score tick",
+          "ambiguous capture/loss cue"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 8.75,
+        "runtimeEvidenceScore10": 10,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 9.68
+      },
+      "currentRisk": {
+        "gapRisk10": 3.28,
+        "worstSegmentRole": "onset",
+        "worstSegmentRisk10": 5.37,
+        "semanticScore10": 10,
+        "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 1,
+        "comparisonSets": [
+          "rescue-join-compare"
+        ],
+        "reference": {
+          "score10": 8.75,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": false
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-rescue-join.json",
+          "status": "candidate-recommended",
+          "keep": true,
+          "best": "refclip-s2320-d300-v95",
+          "measuredBest": "refclip-s2399-d240-v116",
+          "reason": "Rescue Join candidate clears measured keeper gates."
+        },
+        "promotionPrecheck": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-09-bbcc8df1-dirty-rescueJoin/report.json",
+          "status": "precheck-trial-allowed",
+          "allowRuntimeTrial": true,
+          "promoteRuntime": false,
+          "blockers": [],
+          "wins": [
+            "Full-theme cue gap improves by 0.49/10.",
+            "Worst segment risk improves by 0.56/10."
+          ]
+        }
+      },
+      "status": "runtime-trial-allowed-not-promoted",
+      "recommendation": "Run a measured runtime trial only if it can be recaptured immediately with full event-gap, cue-alignment, and quality scoring.",
+      "nextLearningQuestions": [
+        "Can reference subclip promotion work, or should this stay a synthesized arcade reward motif?"
+      ]
+    },
+    {
+      "cue": "playerHit",
+      "family": "reward-loss-feedback",
+      "priority": 2,
+      "semanticClass": "player-ship-lost",
+      "playerMeaning": "The player lost a ship; this should be unmistakable and emotionally negative.",
+      "eventShape": {
+        "structure": "composite-loss-phrase",
+        "segments": [
+          "onset",
+          "body",
+          "tail"
+        ],
+        "trigger": "fires immediately on player ship destruction",
+        "cooldownPolicy": "long; one cue per loss event",
+        "overlapPolicy": "must dominate enemyBoom/bossBoom but not smear into gameOver or next-life restart"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": [
+          "loss meaning",
+          "composite segment shape",
+          "dominates ordinary explosions"
+        ],
+        "variantAllowances": [
+          "small timbre changes by theme if segment roles remain clear"
+        ],
+        "forbiddenChanges": [
+          "short normal explosion",
+          "reward-like pitch rise",
+          "masking gameOver"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 8.75,
+        "runtimeEvidenceScore10": 10,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 9.68
+      },
+      "currentRisk": {
+        "gapRisk10": 5.1,
+        "worstSegmentRole": "body",
+        "worstSegmentRisk10": 7.27,
+        "semanticScore10": 9.4,
+        "recommendation": "Tune the body segment first: body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 1,
+        "comparisonSets": [
+          "ship-loss-compare"
+        ],
+        "reference": {
+          "score10": 8.75,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": false,
+          "hasReferenceSegmentation": true
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-hit-focus.json",
+          "status": "no-keeper",
+          "keep": false,
+          "best": null,
+          "measuredBest": "promoted-active-window",
+          "reason": "No Ship Loss Body candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+        },
+        "promotionPrecheck": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-09-bbcc8df1-dirty-214117-playerHit/report.json",
+          "status": "precheck-reject",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "blockers": [
+            "No Ship Loss Body candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates.",
+            "Worst segment risk worsens by 0.57/10."
+          ],
+          "wins": [
+            "Full-theme cue gap improves by 0.18/10."
+          ]
+        }
+      },
+      "status": "blocked-by-promotion-precheck",
+      "recommendation": "Build composite loss-cue scoring before any runtime promotion: onset/body/tail should be scheduled and scored separately against restart and gameOver overlap.",
+      "nextLearningQuestions": [
+        "Should the player death implementation become a scheduled multi-part cue rather than one clipped sample?"
+      ]
+    },
+    {
+      "cue": "challengePerfect",
+      "family": "reward-loss-feedback",
+      "priority": 3,
+      "semanticClass": "perfect-challenge-result",
+      "playerMeaning": "The player perfectly cleared a challenge stage; this is special and should exceed the standard result cue.",
+      "eventShape": {
+        "structure": "ceremonial-result-phrase",
+        "segments": [
+          "onset",
+          "body",
+          "tail"
+        ],
+        "trigger": "fires shortly after perfect challenge clear",
+        "cooldownPolicy": "one cue per challenge result",
+        "overlapPolicy": "must stop or avoid stagePulse and challengeTransition; must leave clean handoff to next stage"
+      },
+      "themeLatitude": {
+        "defaultLane": "referenceConformant",
+        "strictInvariants": [
+          "more celebratory than challengeResults",
+          "clean post-clear timing",
+          "no ordinary score-tick collapse"
+        ],
+        "variantAllowances": [
+          "theme-colored flourish if timing and result hierarchy remain"
+        ],
+        "forbiddenChanges": [
+          "too-short UI chirp",
+          "masking next-stage transition"
+        ]
+      },
+      "scores": {
+        "completenessScore10": 10,
+        "referenceGroundingScore10": 8.75,
+        "runtimeEvidenceScore10": 6.25,
+        "themeLatitudeScore10": 10,
+        "readinessScore10": 8.47
+      },
+      "currentRisk": {
+        "gapRisk10": 1.45,
+        "worstSegmentRole": "onset",
+        "worstSegmentRisk10": 5.32,
+        "semanticScore10": 10,
+        "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+      },
+      "evidence": {
+        "applicationContextPresent": true,
+        "eventMatrixRows": 1,
+        "comparisonSets": [
+          "challenge-perfect-compare"
+        ],
+        "reference": {
+          "score10": 8.75,
+          "comparisonSetFound": true,
+          "referenceClipsExist": true,
+          "hasReferenceWindow": true,
+          "hasReferenceSegmentation": false
+        },
+        "candidate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest.json",
+          "status": "no-keeper",
+          "keep": false,
+          "best": null,
+          "measuredBest": null,
+          "reason": "No candidate preserved Challenge Perfect duration closely enough to be considered."
+        },
+        "promotionPrecheck": null
+      },
+      "status": "candidate-loop-needs-new-strategy",
+      "recommendation": "Keep this cue as a guardrail while higher-risk audio contracts are improved.",
+      "nextLearningQuestions": [
+        "Do we need separate perfect-result scoring for audio and score-surface animation?"
+      ]
+    }
+  ],
+  "processPosition": "The audio process now separates contract readiness from runtime promotion. Current evidence says contracts can guide the next candidate cycle, but no cue should ship from synthetic or focused evidence alone.",
+  "nextStep": "StagePulse candidate cadence-phase-muted-square-body confirms that simple low-brightness stabilization loses pressure-bed character and still fails masking. Next try phase/envelope-aware synthesis or reference-subclip candidates, then rerun focused repeats and promotion precheck."
+}

@@ -1,0 +1,487 @@
+{
+  "generatedAt": "2026-05-08T21:58:16.620Z",
+  "commit": "fa37a87",
+  "version": "1.3.0",
+  "items": [
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "low-rumble-long-decay",
+      "label": "Low rumble long decay",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Low rumble long decay",
+        "wav": "samples/low-rumble-long-decay.wav",
+        "webm": "samples/low-rumble-long-decay.webm",
+        "audioCue": {
+          "cue": "__candidate_low-rumble-long-decay",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.611
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "two-pulse-low-bloom",
+      "label": "Two pulse low bloom",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Two pulse low bloom",
+        "wav": "samples/two-pulse-low-bloom.wav",
+        "webm": "samples/two-pulse-low-bloom.webm",
+        "audioCue": {
+          "cue": "__candidate_two-pulse-low-bloom",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "sub-heavy-collapse",
+      "label": "Sub-heavy collapse",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Sub-heavy collapse",
+        "wav": "samples/sub-heavy-collapse.wav",
+        "webm": "samples/sub-heavy-collapse.webm",
+        "audioCue": {
+          "cue": "__candidate_sub-heavy-collapse",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "deathgrid-b176-t82-d960-lp1100-v200-n25-bd420",
+      "label": "Death grid 176/82 0.96s lp1100",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Death grid 176/82 0.96s lp1100",
+        "wav": "samples/deathgrid-b176-t82-d960-lp1100-v200-n25-bd420.wav",
+        "webm": "samples/deathgrid-b176-t82-d960-lp1100-v200-n25-bd420.webm",
+        "audioCue": {
+          "cue": "__candidate_deathgrid-b176-t82-d960-lp1100-v200-n25-bd420",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.599
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "deathgrid-b176-t82-d960-lp1100-v200-n25-bd500",
+      "label": "Death grid 176/82 0.96s lp1100",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Death grid 176/82 0.96s lp1100",
+        "wav": "samples/deathgrid-b176-t82-d960-lp1100-v200-n25-bd500.wav",
+        "webm": "samples/deathgrid-b176-t82-d960-lp1100-v200-n25-bd500.webm",
+        "audioCue": {
+          "cue": "__candidate_deathgrid-b176-t82-d960-lp1100-v200-n25-bd500",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.603
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "deathgrid-b176-t82-d960-lp1100-v200-n25-bd580",
+      "label": "Death grid 176/82 0.96s lp1100",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Death grid 176/82 0.96s lp1100",
+        "wav": "samples/deathgrid-b176-t82-d960-lp1100-v200-n25-bd580.wav",
+        "webm": "samples/deathgrid-b176-t82-d960-lp1100-v200-n25-bd580.webm",
+        "audioCue": {
+          "cue": "__candidate_deathgrid-b176-t82-d960-lp1100-v200-n25-bd580",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.6
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "deathgrid-b156-t82-d960-lp1100-v200-n25-bd420",
+      "label": "Death grid 156/82 0.96s lp1100",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Death grid 156/82 0.96s lp1100",
+        "wav": "samples/deathgrid-b156-t82-d960-lp1100-v200-n25-bd420.wav",
+        "webm": "samples/deathgrid-b156-t82-d960-lp1100-v200-n25-bd420.webm",
+        "audioCue": {
+          "cue": "__candidate_deathgrid-b156-t82-d960-lp1100-v200-n25-bd420",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.603
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "deathgrid-b156-t82-d960-lp1100-v200-n25-bd500",
+      "label": "Death grid 156/82 0.96s lp1100",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Death grid 156/82 0.96s lp1100",
+        "wav": "samples/deathgrid-b156-t82-d960-lp1100-v200-n25-bd500.wav",
+        "webm": "samples/deathgrid-b156-t82-d960-lp1100-v200-n25-bd500.webm",
+        "audioCue": {
+          "cue": "__candidate_deathgrid-b156-t82-d960-lp1100-v200-n25-bd500",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    },
+    {
+      "id": "deathgrid-b156-t82-d960-lp1100-v200-n25-bd580",
+      "label": "Death grid 156/82 0.96s lp1100",
+      "focus": "Candidate comparison against the measured Galaga ship-loss reference.",
+      "cue": "playerHit",
+      "aurora": {
+        "label": "Death grid 156/82 0.96s lp1100",
+        "wav": "samples/deathgrid-b156-t82-d960-lp1100-v200-n25-bd580.wav",
+        "webm": "samples/deathgrid-b156-t82-d960-lp1100-v200-n25-bd580.webm",
+        "audioCue": {
+          "cue": "__candidate_deathgrid-b156-t82-d960-lp1100-v200-n25-bd580",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "playerHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.666
+        }
+      },
+      "reference": {
+        "label": "Death",
+        "source": "src/assets/reference-audio/galaga3-death.m4a",
+        "wav": "samples/ship-loss-reference.wav",
+        "window": null
+      }
+    }
+  ]
+}

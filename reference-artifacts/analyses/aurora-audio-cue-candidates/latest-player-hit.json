@@ -1,0 +1,891 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-player-hit-audio-cue-candidate-loop",
+  "generatedAt": "2026-05-09T18:15:56.963Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "878b7eb2",
+  "dirty": true,
+  "cue": "playerHit",
+  "repetitions": 2,
+  "candidateFilter": [
+    "refclip-s20-d968-v100",
+    "refclip-s50-d968-v100",
+    "refclip-s50-d968-v92",
+    "refclip-s80-d968-v100",
+    "reference-death-active-window"
+  ],
+  "problem": "Ship Loss/playerHit is the highest current segment-level audio event-gap risk: Aurora is close on whole-cue duration, but the Galaga reference has a low-band death tail that is not yet matched.",
+  "strategy": "Capture bounded low-band, long-decay candidate specs through the live browser audio engine, compare against galaga3-death.m4a with curated onset/body/tail segmentation, and recommend promotion only if the candidate improves whole-cue risk, segment risk, duration relative to the current baseline, band shape, centroid, and role matching.",
+  "successMeasure": "A keeper must reduce whole-cue risk by at least 0.35, worst segment risk by at least 0.35, improve duration by an adaptive threshold based on the current baseline gap, avoid material band/centroid regressions, keep exact segment-role coverage at least as good as baseline, and remain stable across repeated captures.",
+  "source": {
+    "comparisonSet": "ship-loss-compare",
+    "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+    "referenceWindow": null,
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-878b7eb2-dirty-playerhit-grid0-refgrid12-2x-181556/playerHit/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-09-878b7eb2-dirty-playerhit-grid0-refgrid12-2x-181556/playerHit/metrics.json",
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "label": "ship-loss blast onset",
+          "start_s": 0.02,
+          "end_s": 0.459,
+          "duration_s": 0.439,
+          "metrics": {
+            "duration_s": 0.439,
+            "peak": 0.9449,
+            "rms": 0.2493,
+            "spectral_centroid_hz": 1023.2,
+            "zero_crossings_per_s": 1113.9,
+            "spectral_spread_hz": 1198,
+            "spectral_rolloff_85_hz": 1635.5,
+            "spectral_flatness": 0.1133,
+            "band_energy": {
+              "sub_500": 0.3419,
+              "low_mid_500_1500": 0.4786,
+              "mid_1500_3000": 0.1336,
+              "presence_3000_6000": 0.0321,
+              "air_6000_plus": 0.0138
+            },
+            "attack_peak_position": 0.37,
+            "decay_ratio": 1.241,
+            "envelope_contrast": 1.365,
+            "burst_share": 0.182
+          },
+          "curated": true
+        },
+        {
+          "role": "body",
+          "label": "sustained death body",
+          "start_s": 0.459,
+          "end_s": 0.858,
+          "duration_s": 0.399,
+          "metrics": {
+            "duration_s": 0.399,
+            "peak": 0.741,
+            "rms": 0.1553,
+            "spectral_centroid_hz": 991.6,
+            "zero_crossings_per_s": 1258.1,
+            "spectral_spread_hz": 1198.4,
+            "spectral_rolloff_85_hz": 1566.4,
+            "spectral_flatness": 0.1105,
+            "band_energy": {
+              "sub_500": 0.3556,
+              "low_mid_500_1500": 0.4808,
+              "mid_1500_3000": 0.1199,
+              "presence_3000_6000": 0.0291,
+              "air_6000_plus": 0.0146
+            },
+            "attack_peak_position": 0.204,
+            "decay_ratio": 0.829,
+            "envelope_contrast": 1.263,
+            "burst_share": 0.2
+          },
+          "curated": true
+        },
+        {
+          "role": "tail",
+          "label": "death cue falloff",
+          "start_s": 0.858,
+          "end_s": 0.988,
+          "duration_s": 0.13,
+          "metrics": {
+            "duration_s": 0.13,
+            "peak": 0.3091,
+            "rms": 0.1113,
+            "spectral_centroid_hz": 967.1,
+            "zero_crossings_per_s": 1277.1,
+            "spectral_spread_hz": 1143.1,
+            "spectral_rolloff_85_hz": 1554.1,
+            "spectral_flatness": 0.102,
+            "band_energy": {
+              "sub_500": 0.3559,
+              "low_mid_500_1500": 0.4812,
+              "mid_1500_3000": 0.1219,
+              "presence_3000_6000": 0.0285,
+              "air_6000_plus": 0.0124
+            },
+            "attack_peak_position": 0.312,
+            "decay_ratio": 0.917,
+            "envelope_contrast": 1.195,
+            "burst_share": 0.353
+          },
+          "curated": true
+        }
+      ],
+      "summary": {
+        "segmentCount": 3,
+        "status": "curated-reference-segmentation",
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0.02,
+          "end_s": 0.459
+        },
+        "confidence": "medium-high",
+        "resolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+        "source": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass"
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "reference-death-active-window",
+      "label": "Reference death active window",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.038,
+      "centroidGapHz": 552.2,
+      "zeroCrossingGapPerSecond": 301.3,
+      "rmsGap": 0.04,
+      "bandShapeGap": 0.2073,
+      "rolloffGapHz": 1277.6,
+      "envelopeShapeGap": 0.201,
+      "activeMetrics": {
+        "duration_s": 0.93,
+        "rms": 0.2396,
+        "spectral_centroid_hz": 1516.2,
+        "zero_crossings_per_s": 1496.5,
+        "spectral_rolloff_85_hz": 2870.5,
+        "band_energy": {
+          "sub_500": 0.2527,
+          "low_mid_500_1500": 0.3708,
+          "mid_1500_3000": 0.2303,
+          "presence_3000_6000": 0.1295,
+          "air_6000_plus": 0.0167
+        },
+        "attack_peak_position": 0.534,
+        "decay_ratio": 1.071,
+        "burst_share": 0.265
+      },
+      "referenceMetrics": {
+        "duration_s": 0.968,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 964,
+        "zero_crossings_per_s": 1195.2,
+        "spectral_rolloff_85_hz": 1592.9,
+        "band_energy": {
+          "sub_500": 0.3487,
+          "low_mid_500_1500": 0.4821,
+          "mid_1500_3000": 0.1312,
+          "presence_3000_6000": 0.0296,
+          "air_6000_plus": 0.0084
+        },
+        "attack_peak_position": 0.165,
+        "decay_ratio": 0.625,
+        "burst_share": 0.246
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.096,
+        "low_mid_500_1500": -0.1113,
+        "mid_1500_3000": 0.0991,
+        "presence_3000_6000": 0.0999,
+        "air_6000_plus": 0.0083
+      },
+      "comparison": {
+        "duration_s": 0.038,
+        "spectral_centroid_hz": 552.2,
+        "zero_crossings_per_s": 301.3,
+        "rms": 0.04,
+        "spectral_spread_hz": 455.6,
+        "spectral_rolloff_85_hz": 1277.6,
+        "spectral_flatness": 0.07,
+        "band_shape_distance": 0.2073,
+        "attack_peak_position": 0.369,
+        "decay_ratio": 0.446,
+        "envelope_contrast": 0.19,
+        "burst_share": 0.019
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 5.6,
+      "worstSegmentRisk10": 7.92,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 3,
+      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "reference-death-active-window-r01",
+          "repetition": 1,
+          "risk10": 3.02,
+          "durationGapSeconds": 0.038,
+          "centroidGapHz": 552.2,
+          "rmsGap": 0.0401,
+          "bandShapeGap": 0.2073,
+          "worstSegmentRisk10": 7.92,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "reference-death-active-window-r02",
+          "repetition": 2,
+          "risk10": 3.02,
+          "durationGapSeconds": 0.038,
+          "centroidGapHz": 552.2,
+          "rmsGap": 0.0401,
+          "bandShapeGap": 0.2073,
+          "worstSegmentRisk10": 7.92,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.02,
+      "riskBreakdown": {
+        "duration": 0.04470588235294118,
+        "centroid": 0.4247692307692308,
+        "zeroCrossing": 0.1673888888888889,
+        "rms": 0.2857142857142857,
+        "bandShape": 0.4146,
+        "rolloff": 0.49138461538461536,
+        "attack": 0.41,
+        "decay": 0.139375,
+        "burst": 0.054285714285714284
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "segment risk improved only -0.67 (<0.35); duration gap improved only 0.01s (<0.024s)"
+    },
+    {
+      "id": "refclip-s20-d968-v100",
+      "label": "Reference death subclip 0.02s/0.968s v1",
+      "generated": true,
+      "generator": {
+        "family": "reference-death-subclip-grid",
+        "heuristic": 0.045,
+        "target": "Search reference death clip windows for better Ship Loss onset/body timing while preserving canonical Galaga timbre.",
+        "params": {
+          "clipStart": 0.02,
+          "clipDuration": 0.968,
+          "referenceVolume": 1
+        }
+      },
+      "durationGapSeconds": 0.038,
+      "centroidGapHz": 604.6,
+      "zeroCrossingGapPerSecond": 468,
+      "rmsGap": 0.056,
+      "bandShapeGap": 0.2214,
+      "rolloffGapHz": 1551.7,
+      "envelopeShapeGap": 0.23,
+      "activeMetrics": {
+        "duration_s": 0.93,
+        "rms": 0.255,
+        "spectral_centroid_hz": 1568.6,
+        "zero_crossings_per_s": 1663.2,
+        "spectral_rolloff_85_hz": 3144.6,
+        "band_energy": {
+          "sub_500": 0.2395,
+          "low_mid_500_1500": 0.3699,
+          "mid_1500_3000": 0.2369,
+          "presence_3000_6000": 0.1355,
+          "air_6000_plus": 0.0183
+        },
+        "attack_peak_position": 0.526,
+        "decay_ratio": 1.068,
+        "burst_share": 0.299
+      },
+      "referenceMetrics": {
+        "duration_s": 0.968,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 964,
+        "zero_crossings_per_s": 1195.2,
+        "spectral_rolloff_85_hz": 1592.9,
+        "band_energy": {
+          "sub_500": 0.3487,
+          "low_mid_500_1500": 0.4821,
+          "mid_1500_3000": 0.1312,
+          "presence_3000_6000": 0.0296,
+          "air_6000_plus": 0.0084
+        },
+        "attack_peak_position": 0.165,
+        "decay_ratio": 0.625,
+        "burst_share": 0.246
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.1092,
+        "low_mid_500_1500": -0.1122,
+        "mid_1500_3000": 0.1057,
+        "presence_3000_6000": 0.1059,
+        "air_6000_plus": 0.0099
+      },
+      "comparison": {
+        "duration_s": 0.038,
+        "spectral_centroid_hz": 604.6,
+        "zero_crossings_per_s": 468,
+        "rms": 0.056,
+        "spectral_spread_hz": 497.9,
+        "spectral_rolloff_85_hz": 1551.7,
+        "spectral_flatness": 0.079,
+        "band_shape_distance": 0.2214,
+        "attack_peak_position": 0.361,
+        "decay_ratio": 0.443,
+        "envelope_contrast": 0.18,
+        "burst_share": 0.053
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 5.15,
+      "worstSegmentRisk10": 7.05,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 3,
+      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s20-d968-v100-r01",
+          "repetition": 1,
+          "risk10": 3.46,
+          "durationGapSeconds": 0.038,
+          "centroidGapHz": 604.6,
+          "rmsGap": 0.0555,
+          "bandShapeGap": 0.2214,
+          "worstSegmentRisk10": 7.05,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s20-d968-v100-r02",
+          "repetition": 2,
+          "risk10": 3.46,
+          "durationGapSeconds": 0.038,
+          "centroidGapHz": 604.6,
+          "rmsGap": 0.0555,
+          "bandShapeGap": 0.2214,
+          "worstSegmentRisk10": 7.05,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.46,
+      "riskBreakdown": {
+        "duration": 0.04470588235294118,
+        "centroid": 0.4650769230769231,
+        "zeroCrossing": 0.26,
+        "rms": 0.39999999999999997,
+        "bandShape": 0.4428,
+        "rolloff": 0.5968076923076924,
+        "attack": 0.4011111111111111,
+        "decay": 0.1384375,
+        "burst": 0.15142857142857144
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "segment risk improved only 0.2 (<0.35); duration gap improved only 0.01s (<0.024s)"
+    },
+    {
+      "id": "refclip-s50-d968-v100",
+      "label": "Reference death subclip 0.05s/0.968s v1",
+      "generated": true,
+      "generator": {
+        "family": "reference-death-subclip-grid",
+        "heuristic": 0.12,
+        "target": "Search reference death clip windows for better Ship Loss onset/body timing while preserving canonical Galaga timbre.",
+        "params": {
+          "clipStart": 0.05,
+          "clipDuration": 0.968,
+          "referenceVolume": 1
+        }
+      },
+      "durationGapSeconds": 0.018,
+      "centroidGapHz": 610.9,
+      "zeroCrossingGapPerSecond": 521.4,
+      "rmsGap": 0.057,
+      "bandShapeGap": 0.2223,
+      "rolloffGapHz": 1414.1,
+      "envelopeShapeGap": 0.256,
+      "activeMetrics": {
+        "duration_s": 0.95,
+        "rms": 0.256,
+        "spectral_centroid_hz": 1574.9,
+        "zero_crossings_per_s": 1716.6,
+        "spectral_rolloff_85_hz": 3007,
+        "band_energy": {
+          "sub_500": 0.2368,
+          "low_mid_500_1500": 0.3717,
+          "mid_1500_3000": 0.2412,
+          "presence_3000_6000": 0.1313,
+          "air_6000_plus": 0.0189
+        },
+        "attack_peak_position": 0.672,
+        "decay_ratio": 1.246,
+        "burst_share": 0.242
+      },
+      "referenceMetrics": {
+        "duration_s": 0.968,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 964,
+        "zero_crossings_per_s": 1195.2,
+        "spectral_rolloff_85_hz": 1592.9,
+        "band_energy": {
+          "sub_500": 0.3487,
+          "low_mid_500_1500": 0.4821,
+          "mid_1500_3000": 0.1312,
+          "presence_3000_6000": 0.0296,
+          "air_6000_plus": 0.0084
+        },
+        "attack_peak_position": 0.165,
+        "decay_ratio": 0.625,
+        "burst_share": 0.246
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.1119,
+        "low_mid_500_1500": -0.1104,
+        "mid_1500_3000": 0.11,
+        "presence_3000_6000": 0.1017,
+        "air_6000_plus": 0.0105
+      },
+      "comparison": {
+        "duration_s": 0.018,
+        "spectral_centroid_hz": 610.9,
+        "zero_crossings_per_s": 521.4,
+        "rms": 0.057,
+        "spectral_spread_hz": 509,
+        "spectral_rolloff_85_hz": 1414.1,
+        "spectral_flatness": 0.084,
+        "band_shape_distance": 0.2223,
+        "attack_peak_position": 0.507,
+        "decay_ratio": 0.621,
+        "envelope_contrast": 0.237,
+        "burst_share": 0.004
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 5.48,
+      "worstSegmentRisk10": 7.46,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 3,
+      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s50-d968-v100-r01",
+          "repetition": 1,
+          "risk10": 3.55,
+          "durationGapSeconds": 0.018,
+          "centroidGapHz": 610.9,
+          "rmsGap": 0.0565,
+          "bandShapeGap": 0.2223,
+          "worstSegmentRisk10": 7.46,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s50-d968-v100-r02",
+          "repetition": 2,
+          "risk10": 3.55,
+          "durationGapSeconds": 0.018,
+          "centroidGapHz": 610.9,
+          "rmsGap": 0.0565,
+          "bandShapeGap": 0.2223,
+          "worstSegmentRisk10": 7.46,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.56,
+      "riskBreakdown": {
+        "duration": 0.021176470588235293,
+        "centroid": 0.4699230769230769,
+        "zeroCrossing": 0.28966666666666663,
+        "rms": 0.40714285714285714,
+        "bandShape": 0.4446,
+        "rolloff": 0.5438846153846153,
+        "attack": 0.5633333333333334,
+        "decay": 0.1940625,
+        "burst": 0.01142857142857143
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only -0.21 (<0.35)"
+    },
+    {
+      "id": "refclip-s80-d968-v100",
+      "label": "Reference death subclip 0.08s/0.968s v1",
+      "generated": true,
+      "generator": {
+        "family": "reference-death-subclip-grid",
+        "heuristic": 0.195,
+        "target": "Search reference death clip windows for better Ship Loss onset/body timing while preserving canonical Galaga timbre.",
+        "params": {
+          "clipStart": 0.08,
+          "clipDuration": 0.968,
+          "referenceVolume": 1
+        }
+      },
+      "durationGapSeconds": 0.008,
+      "centroidGapHz": 611.7,
+      "zeroCrossingGapPerSecond": 541.3,
+      "rmsGap": 0.051,
+      "bandShapeGap": 0.2231,
+      "rolloffGapHz": 1487.3,
+      "envelopeShapeGap": 0.303,
+      "activeMetrics": {
+        "duration_s": 0.96,
+        "rms": 0.2506,
+        "spectral_centroid_hz": 1575.7,
+        "zero_crossings_per_s": 1736.5,
+        "spectral_rolloff_85_hz": 3080.2,
+        "band_energy": {
+          "sub_500": 0.235,
+          "low_mid_500_1500": 0.3727,
+          "mid_1500_3000": 0.2398,
+          "presence_3000_6000": 0.1336,
+          "air_6000_plus": 0.0189
+        },
+        "attack_peak_position": 0.767,
+        "decay_ratio": 1.148,
+        "burst_share": 0.273
+      },
+      "referenceMetrics": {
+        "duration_s": 0.968,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 964,
+        "zero_crossings_per_s": 1195.2,
+        "spectral_rolloff_85_hz": 1592.9,
+        "band_energy": {
+          "sub_500": 0.3487,
+          "low_mid_500_1500": 0.4821,
+          "mid_1500_3000": 0.1312,
+          "presence_3000_6000": 0.0296,
+          "air_6000_plus": 0.0084
+        },
+        "attack_peak_position": 0.165,
+        "decay_ratio": 0.625,
+        "burst_share": 0.246
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.1137,
+        "low_mid_500_1500": -0.1094,
+        "mid_1500_3000": 0.1086,
+        "presence_3000_6000": 0.104,
+        "air_6000_plus": 0.0105
+      },
+      "comparison": {
+        "duration_s": 0.008,
+        "spectral_centroid_hz": 611.7,
+        "zero_crossings_per_s": 541.3,
+        "rms": 0.051,
+        "spectral_spread_hz": 507.7,
+        "spectral_rolloff_85_hz": 1487.3,
+        "spectral_flatness": 0.088,
+        "band_shape_distance": 0.2231,
+        "attack_peak_position": 0.602,
+        "decay_ratio": 0.523,
+        "envelope_contrast": 0.186,
+        "burst_share": 0.027
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 5.29,
+      "worstSegmentRisk10": 7.25,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 3,
+      "worstSegmentInterpretation": "tail timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s80-d968-v100-r01",
+          "repetition": 1,
+          "risk10": 3.67,
+          "durationGapSeconds": 0.008,
+          "centroidGapHz": 611.7,
+          "rmsGap": 0.0511,
+          "bandShapeGap": 0.2231,
+          "worstSegmentRisk10": 7.25,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "refclip-s80-d968-v100-r02",
+          "repetition": 2,
+          "risk10": 3.67,
+          "durationGapSeconds": 0.008,
+          "centroidGapHz": 611.7,
+          "rmsGap": 0.0511,
+          "bandShapeGap": 0.2231,
+          "worstSegmentRisk10": 7.25,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 3.67,
+      "riskBreakdown": {
+        "duration": 0.009411764705882354,
+        "centroid": 0.47053846153846157,
+        "zeroCrossing": 0.3007222222222222,
+        "rms": 0.3642857142857142,
+        "bandShape": 0.4462,
+        "rolloff": 0.5720384615384615,
+        "attack": 0.6688888888888889,
+        "decay": 0.16343749999999999,
+        "burst": 0.07714285714285715
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "segment risk improved only 0 (<0.35)"
+    },
+    {
+      "id": "refclip-s50-d968-v92",
+      "label": "Reference death subclip 0.05s/0.968s v0.92",
+      "generated": true,
+      "generator": {
+        "family": "reference-death-subclip-grid",
+        "heuristic": 0.084,
+        "target": "Search reference death clip windows for better Ship Loss onset/body timing while preserving canonical Galaga timbre.",
+        "params": {
+          "clipStart": 0.05,
+          "clipDuration": 0.968,
+          "referenceVolume": 0.92
+        }
+      },
+      "durationGapSeconds": 0.018,
+      "centroidGapHz": 628.8,
+      "zeroCrossingGapPerSecond": 476.2,
+      "rmsGap": 0.043,
+      "bandShapeGap": 0.2336,
+      "rolloffGapHz": 1636.2,
+      "envelopeShapeGap": 0.307,
+      "activeMetrics": {
+        "duration_s": 0.95,
+        "rms": 0.2427,
+        "spectral_centroid_hz": 1592.8,
+        "zero_crossings_per_s": 1671.4,
+        "spectral_rolloff_85_hz": 3229.1,
+        "band_energy": {
+          "sub_500": 0.2312,
+          "low_mid_500_1500": 0.366,
+          "mid_1500_3000": 0.2461,
+          "presence_3000_6000": 0.1386,
+          "air_6000_plus": 0.018
+        },
+        "attack_peak_position": 0.731,
+        "decay_ratio": 1.295,
+        "burst_share": 0.275
+      },
+      "referenceMetrics": {
+        "duration_s": 0.968,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 964,
+        "zero_crossings_per_s": 1195.2,
+        "spectral_rolloff_85_hz": 1592.9,
+        "band_energy": {
+          "sub_500": 0.3487,
+          "low_mid_500_1500": 0.4821,
+          "mid_1500_3000": 0.1312,
+          "presence_3000_6000": 0.0296,
+          "air_6000_plus": 0.0084
+        },
+        "attack_peak_position": 0.165,
+        "decay_ratio": 0.625,
+        "burst_share": 0.246
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.1175,
+        "low_mid_500_1500": -0.1161,
+        "mid_1500_3000": 0.1149,
+        "presence_3000_6000": 0.109,
+        "air_6000_plus": 0.0096
+      },
+      "comparison": {
+        "duration_s": 0.018,
+        "spectral_centroid_hz": 628.8,
+        "zero_crossings_per_s": 476.2,
+        "rms": 0.043,
+        "spectral_spread_hz": 494.9,
+        "spectral_rolloff_85_hz": 1636.2,
+        "spectral_flatness": 0.074,
+        "band_shape_distance": 0.2336,
+        "attack_peak_position": 0.566,
+        "decay_ratio": 0.67,
+        "envelope_contrast": 0.125,
+        "burst_share": 0.029
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 5.25,
+      "worstSegmentRisk10": 7.41,
+      "worstSegmentRole": "body",
+      "exactSegmentRoleMatchCount": 3,
+      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "refclip-s50-d968-v92-r01",
+          "repetition": 1,
+          "risk10": 3.74,
+          "durationGapSeconds": 0.018,
+          "centroidGapHz": 628.8,
+          "rmsGap": 0.0432,
+          "bandShapeGap": 0.2336,
+          "worstSegmentRisk10": 7.41,
+          "worstSegmentRole": "body"
+        },
+        {
+          "id": "refclip-s50-d968-v92-r02",
+          "repetition": 2,
+          "risk10": 3.74,
+          "durationGapSeconds": 0.018,
+          "centroidGapHz": 628.8,
+          "rmsGap": 0.0432,
+          "bandShapeGap": 0.2336,
+          "worstSegmentRisk10": 7.41,
+          "worstSegmentRole": "body"
+        }
+      ],
+      "risk10": 3.74,
+      "riskBreakdown": {
+        "duration": 0.021176470588235293,
+        "centroid": 0.48369230769230764,
+        "zeroCrossing": 0.26455555555555554,
+        "rms": 0.3071428571428571,
+        "bandShape": 0.4672,
+        "rolloff": 0.6293076923076923,
+        "attack": 0.6288888888888888,
+        "decay": 0.209375,
+        "burst": 0.08285714285714287
+      },
+      "dominantPenalty": "rolloff",
+      "keeperRead": "segment risk improved only -0.16 (<0.35)"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "durationGapSeconds": 0.048,
+      "centroidGapHz": 667.5,
+      "zeroCrossingGapPerSecond": 642.5,
+      "rmsGap": 0.079,
+      "bandShapeGap": 0.2479,
+      "rolloffGapHz": 1771.7,
+      "envelopeShapeGap": 0.409,
+      "activeMetrics": {
+        "duration_s": 0.92,
+        "rms": 0.2783,
+        "spectral_centroid_hz": 1631.5,
+        "zero_crossings_per_s": 1837.7,
+        "spectral_rolloff_85_hz": 3364.6,
+        "band_energy": {
+          "sub_500": 0.219,
+          "low_mid_500_1500": 0.3639,
+          "mid_1500_3000": 0.2541,
+          "presence_3000_6000": 0.1445,
+          "air_6000_plus": 0.0185
+        },
+        "attack_peak_position": 1,
+        "decay_ratio": 0.996,
+        "burst_share": 0.31
+      },
+      "referenceMetrics": {
+        "duration_s": 0.968,
+        "rms": 0.1995,
+        "spectral_centroid_hz": 964,
+        "zero_crossings_per_s": 1195.2,
+        "spectral_rolloff_85_hz": 1592.9,
+        "band_energy": {
+          "sub_500": 0.3487,
+          "low_mid_500_1500": 0.4821,
+          "mid_1500_3000": 0.1312,
+          "presence_3000_6000": 0.0296,
+          "air_6000_plus": 0.0084
+        },
+        "attack_peak_position": 0.165,
+        "decay_ratio": 0.625,
+        "burst_share": 0.246
+      },
+      "bandEnergyDelta": {
+        "sub_500": -0.1297,
+        "low_mid_500_1500": -0.1182,
+        "mid_1500_3000": 0.1229,
+        "presence_3000_6000": 0.1149,
+        "air_6000_plus": 0.0101
+      },
+      "comparison": {
+        "duration_s": 0.048,
+        "spectral_centroid_hz": 667.5,
+        "zero_crossings_per_s": 642.5,
+        "rms": 0.079,
+        "spectral_spread_hz": 500.6,
+        "spectral_rolloff_85_hz": 1771.7,
+        "spectral_flatness": 0.074,
+        "band_shape_distance": 0.2479,
+        "attack_peak_position": 0.835,
+        "decay_ratio": 0.371,
+        "envelope_contrast": 0.336,
+        "burst_share": 0.064
+      },
+      "segmentRoleComparisonCount": 3,
+      "averageSegmentRisk10": 6.54,
+      "worstSegmentRisk10": 7.25,
+      "worstSegmentRole": "tail",
+      "exactSegmentRoleMatchCount": 3,
+      "worstSegmentInterpretation": "tail timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "stability": {
+        "repetitions": 2,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "baseline-current-r01",
+          "repetition": 1,
+          "risk10": 4.55,
+          "durationGapSeconds": 0.048,
+          "centroidGapHz": 667.5,
+          "rmsGap": 0.0788,
+          "bandShapeGap": 0.2479,
+          "worstSegmentRisk10": 7.25,
+          "worstSegmentRole": "tail"
+        },
+        {
+          "id": "baseline-current-r02",
+          "repetition": 2,
+          "risk10": 4.55,
+          "durationGapSeconds": 0.048,
+          "centroidGapHz": 667.5,
+          "rmsGap": 0.0788,
+          "bandShapeGap": 0.2479,
+          "worstSegmentRisk10": 7.25,
+          "worstSegmentRole": "tail"
+        }
+      ],
+      "risk10": 4.55,
+      "riskBreakdown": {
+        "duration": 0.05647058823529412,
+        "centroid": 0.5134615384615384,
+        "zeroCrossing": 0.35694444444444445,
+        "rms": 0.5642857142857143,
+        "bandShape": 0.4958,
+        "rolloff": 0.6814230769230769,
+        "attack": 0.9277777777777777,
+        "decay": 0.1159375,
+        "burst": 0.18285714285714288
+      },
+      "dominantPenalty": "attack",
+      "keeperRead": "baseline"
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": null,
+    "measuredBest": "reference-death-active-window",
+    "reason": "No candidate cleared the whole-cue, segment-risk, duration, band-shape, centroid, and role-match gates."
+  },
+  "nextStep": "Use the best measured candidates to expand the low-band envelope generator, or consider a reference-subclip strategy for ship loss if synthesized cues keep failing duration and band-shape gates."
+}

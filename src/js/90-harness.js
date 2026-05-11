@@ -602,6 +602,29 @@ window.__galagaHarness__={
   if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return .9;
   const cue=sfx.cueDef(String(name),opts||{});
   if(!cue)return .9;
+  if(Array.isArray(cue.layers)&&cue.layers.length){
+   const ends=cue.layers.map(layer=>{
+    const delay=Math.max(0,+layer.delay||0);
+    if(layer.referenceClip){
+     const clipped=Math.max(0,+layer.clipDuration||0);
+     return delay+(clipped>0?clipped:4);
+    }
+    let endT=.12;
+    if(Array.isArray(layer.seq)&&layer.seq.length){
+     const step=Math.max(.01,+layer.step||.05);
+     endT=Math.max(endT,((layer.seq.length-1)*step*.92)+step+.06);
+    }
+    if(Array.isArray(layer.tones))for(const tone of layer.tones){
+     endT=Math.max(endT,Math.max(0,+tone.delay||0)+Math.max(.01,+tone.duration||.08)+.06);
+    }
+    if(Array.isArray(layer.noise))for(const burst of layer.noise){
+     endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
+    }
+    return delay+endT;
+   });
+   const scheduled=Number.isFinite(+cue.scheduledDuration)&&+cue.scheduledDuration>0?+cue.scheduledDuration:Math.max(...ends);
+   return Math.max(.25,Math.min(4,scheduled+.16));
+  }
   if(cue.referenceClip){
    const clipped=Math.max(0,+cue.clipDuration||0);
    if(clipped>0)return Math.max(.08,Math.min(12,clipped+.04));
@@ -625,7 +648,9 @@ window.__galagaHarness__={
   if(typeof window.MediaRecorder!=='function'||typeof sfx==='undefined'||!sfx.tap?.stream){
    return { ok:false, error:'Audio capture is not supported in this runtime.' };
   }
+  const captureOpts=Object.assign({},opts||{},{allowIdle:opts.allowIdle!==false});
   try{
+   if(typeof unlockAudioFromInteraction==='function')unlockAudioFromInteraction();
    AC();
    if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')await sfx.a.resume().catch(()=>{});
   }catch{}
@@ -633,7 +658,22 @@ window.__galagaHarness__={
   const mimeType=mimeCandidates.find(type=>!window.MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(type))||'';
   const chunks=[];
   const recorder=mimeType?new MediaRecorder(sfx.tap.stream,{mimeType}):new MediaRecorder(sfx.tap.stream);
-  const captureMs=Math.max(250,Math.round(1000*(opts.captureSeconds||this.estimateAudioCueDuration(name,opts))));
+  const captureMs=Math.max(700,Math.round(1000*(captureOpts.captureSeconds||this.estimateAudioCueDuration(name,captureOpts))));
+  const capturePrerollMs=Math.max(0,Math.min(500,Number.isFinite(+captureOpts.capturePrerollMs)?Math.round(+captureOpts.capturePrerollMs):80));
+  const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
+  const audioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||null;
+  try{
+   if(typeof sfx.cueDef==='function'&&typeof sfx.loadReferenceBuffer==='function'){
+    const warmCue=sfx.cueDef(String(name),captureOpts);
+    const clips=[];
+    if(warmCue&&warmCue.referenceClip)clips.push(warmCue.referenceClip);
+    if(Array.isArray(warmCue?.layers))for(const layer of warmCue.layers)if(layer?.referenceClip)clips.push(layer.referenceClip);
+    for(const clip of Array.from(new Set(clips)))await sfx.loadReferenceBuffer(clip);
+   }
+  }catch{}
+  if(audioDebug)audioDebug.lastCue=null;
+  try{ if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(); }catch{}
+  let playedCue=null;
   const done=new Promise(resolve=>{
    recorder.ondataavailable=e=>{ if(e?.data?.size)chunks.push(e.data); };
    recorder.onerror=e=>resolve({ ok:false, error:e?.error?.message||'MediaRecorder failed.' });
@@ -642,6 +682,19 @@ window.__galagaHarness__={
      const blob=new Blob(chunks,{type:recorder.mimeType||mimeType||'audio/webm'});
      const buffer=await blob.arrayBuffer();
      const bytes=new Uint8Array(buffer);
+     if(bytes.length<minCaptureBytes){
+      resolve({
+       ok:false,
+       error:`Audio capture was too small to decode (${bytes.length} bytes).`,
+       byteLength:bytes.length,
+       mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
+       captureMs,
+       capturePrerollMs,
+       requestedCue:String(name),
+       audioCue:playedCue||audioDebug?.lastCue||null
+      });
+      return;
+     }
      let binary='';
      const chunkSize=0x8000;
      for(let i=0;i<bytes.length;i+=chunkSize){
@@ -651,17 +704,32 @@ window.__galagaHarness__={
       ok:true,
       mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
       captureMs,
+      capturePrerollMs,
       base64:btoa(binary),
-      audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+      requestedCue:String(name),
+      audioCue:playedCue||audioDebug?.lastCue||null
      });
     }catch(err){
      resolve({ ok:false, error:err?.message||String(err) });
     }
    };
   });
-  recorder.start();
-  if(typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  try{
+   recorder.start(100);
+  }catch(err){
+   return {
+    ok:false,
+    error:err?.message||String(err),
+    requestedCue:String(name),
+    capturePrerollMs,
+    audioCue:playedCue||audioDebug?.lastCue||null
+   };
+  }
+  if(capturePrerollMs>0)await new Promise(resolve=>setTimeout(resolve,capturePrerollMs));
+  if(typeof sfx.playCue==='function')sfx.playCue(String(name),captureOpts);
+  playedCue=audioDebug?.lastCue||null;
   await new Promise(resolve=>setTimeout(resolve,captureMs));
+  try{ if(recorder.state==='recording'&&typeof recorder.requestData==='function')recorder.requestData(); }catch{}
   if(recorder.state!=='inactive')recorder.stop();
   return done;
  },
@@ -669,13 +737,28 @@ window.__galagaHarness__={
   if(typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return {ok:false,error:'Audio engine is not available.'};
   const cueName=String(opts.name||'__candidateCue').trim()||'__candidateCue';
   const originalCueDef=sfx.cueDef;
+  const referenceClips=[String(spec.referenceClip||'').trim(),...(Array.isArray(spec.layers)?spec.layers.map(layer=>String(layer?.referenceClip||'').trim()):[])].filter(Boolean);
+  const clearReferenceCandidateState=()=>{
+   if(!referenceClips.length)return;
+   for(const referenceClip of referenceClips)if(sfx.referenceCooldowns)delete sfx.referenceCooldowns[referenceClip];
+   if(sfx.referenceCooldowns)delete sfx.referenceCooldowns[`__cue__:${cueName}`];
+   if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips(source=>referenceClips.includes(String(source?.__clip||'').trim()));
+  };
   sfx.cueDef=function(name,cueOpts={}){
-   if(String(name)===cueName)return spec;
+   if(String(name)===cueName){
+    const atmosphere=typeof this.resolveAtmosphere==='function'
+     ? this.resolveAtmosphere(cueOpts||{})
+     : {id:'candidate',audioTheme:'candidate',phase:String(cueOpts?.phase||'stage')};
+    if(typeof this.recordCue==='function')this.recordCue(cueName,atmosphere,cueOpts||{},spec);
+    return spec;
+   }
    return originalCueDef.call(this,name,cueOpts);
   };
   try{
+   clearReferenceCandidateState();
    return await this.captureAudioCue(cueName,opts);
   }finally{
+   clearReferenceCandidateState();
    sfx.cueDef=originalCueDef;
   }
  },
@@ -686,9 +769,11 @@ window.__galagaHarness__={
    challenge:!!S.challenge,
    layout:typeof formationLayout==='function'?formationLayout(S.stage):null,
    targets:active.map(e=>({
-    id:e.id,
-    type:e.t,
-    row:e.r,
+	    id:e.id,
+	    type:e.t,
+	    family:e.fam||'classic',
+	    pathFamily:e.pathFamily||'classic-center-arc-entry',
+	    row:e.r,
     column:e.c,
     tx:+(+e.tx||0).toFixed(2),
     ty:+(+e.ty||0).toFixed(2),
@@ -771,11 +856,13 @@ window.__galagaHarness__={
   return {
    stage:S.stage,
    challenge:!!S.challenge,
-   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout():null,
-  enemies:active.map(e=>({
-   id:e.id,
-   type:e.t,
-   lane:e.c,
+	   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null,
+	  enemies:active.map(e=>({
+	   id:e.id,
+	   type:e.t,
+   family:e.fam||'classic',
+   pathFamily:e.pathFamily||'classic-lane-wave',
+	   lane:e.c,
    wave:e.wave,
    row:e.row,
    side:e.side,
@@ -838,6 +925,101 @@ window.__galagaHarness__={
  redraw(){
   if(typeof draw==='function')draw();
   return this.renderState();
+ },
+ spriteRuntimeState(){
+  const enemies=S.e
+   .filter(e=>e.hp>0)
+   .map(e=>({
+    id:e.id,
+    t:e.t||'',
+    fam:e.fam||'classic',
+    hp:+(e.hp||0),
+    max:+(e.max||0),
+    x:+(+e.x||0).toFixed(2),
+    y:+(+e.y||0).toFixed(2),
+    dive:+(e.dive||0),
+    carry:!!e.carry
+   }));
+  return{
+   stage:S.stage,
+   challenge:!!S.challenge,
+   simT:+(+S.simT||0).toFixed(3),
+   player:{
+    x:+(+S.p.x||0).toFixed(2),
+    y:+(+S.p.y||0).toFixed(2),
+    dual:!!S.p.dual,
+    captured:!!S.p.captured
+   },
+   enemies
+  };
+ },
+ setupSpriteRuntimeCapture(cfg={}){
+  const kind=String(cfg.kind||'player-fighter');
+  const enemyKinds={
+   'bee-line':{t:'bee',fam:'classic',w:32,h:26,stage:1},
+   'but-line':{t:'but',fam:'classic',w:34,h:27,stage:1},
+   'boss-line':{t:'boss',fam:'classic',w:38,h:30,stage:1},
+   'rogue-fighter':{t:'rogue',fam:'classic',w:35,h:28,stage:4},
+   'challenge-dragonfly':{t:'bee',fam:'dragonfly',w:32,h:26,stage:3,challenge:1},
+   'challenge-mosquito':{t:'bee',fam:'mosquito',w:32,h:26,stage:7,challenge:1}
+  };
+  S.stage=Math.max(1,+cfg.stage||enemyKinds[kind]?.stage||1);
+  S.challenge=!!(cfg.challenge!==undefined?cfg.challenge:enemyKinds[kind]?.challenge);
+  S.simT=0;
+  S.stageClock=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.att=0;
+  S.recoverT=8;
+  S.attackGapT=8;
+  if(cfg.clearBackdrop!==false)S.st.length=0;
+  Object.assign(S.p,{
+   x:cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18),
+   y:+cfg.playerY||PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:kind==='dual-fighter'?1:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  for(const e of S.e)e.hp=0;
+  const spec=enemyKinds[kind];
+  if(spec){
+   const e=S.e[0];
+   if(!e)return Object.assign({ok:false,kind,error:'no-enemy-slot'},this.spriteRuntimeState());
+   Object.assign(e,{
+    t:spec.t,
+    fam:spec.fam,
+    hp:spec.t==='boss'?2:1,
+    max:spec.t==='boss'?2:1,
+    form:1,
+    dive:0,
+    carry:0,
+    beam:0,
+    beamT:0,
+    low:0,
+    esc:0,
+    squadId:0,
+    shot:0,
+    x:cl(+cfg.enemyX||PLAY_W/2,28,PLAY_W-28),
+    y:+cfg.enemyY||132,
+    tx:cl(+cfg.enemyX||PLAY_W/2,28,PLAY_W-28),
+    ty:+cfg.enemyY||132,
+    vx:0,
+    vy:0,
+    tm:0,
+    ph:0,
+    cool:99
+   });
+  }
+  if(typeof draw==='function')draw();
+  return Object.assign({ok:true,kind},this.spriteRuntimeState());
  },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
@@ -917,9 +1099,8 @@ window.__galagaHarness__={
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
   holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
   S.shake=Math.max(S.shake,.22);
-  ex(boss.x,boss.y,20,'#fff4a8');
-  ex(boss.x,boss.y,10,'#ff8cd7');
-  ex(boss.x,boss.y,6,'#d8f2ff');
+  if(typeof bossDamageFx==='function')bossDamageFx(boss.x,boss.y);
+  else ex(boss.x,boss.y,12,'#fff4a8');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
   return true;
@@ -1084,13 +1265,14 @@ window.__galagaHarness__={
   p.pending=0;
   p.returning=0;
   p.capBoss=null;
-  p.capT=0;
-  spawnStage();
-  for(const e of S.e){
-   if(!e?.ch||e.hp<=0)continue;
-   e.tm=0;
-   e.spawn=e.spawnPlan||0;
-  }
+	  p.capT=0;
+	  spawnStage();
+	  const challengeSpawnBase=Math.min(...S.e.filter(e=>e?.ch&&e.hp>0).map(e=>+e.spawnPlan||0));
+	  for(const e of S.e){
+	   if(!e?.ch||e.hp<=0)continue;
+	   e.tm=0;
+	   e.spawn=Math.max(0,(+e.spawnPlan||0)-challengeSpawnBase);
+	  }
   logEvent('harness_challenge_motion_profile_setup',{
    stage:S.stage,
    enemies:S.e.filter(e=>e.hp>0&&e.ch).length

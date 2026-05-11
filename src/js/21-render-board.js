@@ -5,6 +5,7 @@ const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
  galboss:[[0,1],[6,1],[2,4],[4,4]],
+ crown:[[3,0],[1,1],[5,1],[0,4],[6,4]],
  dragonfly:[[1,0],[5,0],[0,3],[6,3]],
  mosquito:[[2,0],[4,0],[1,4],[5,4]]
 };
@@ -19,6 +20,8 @@ function enemyPalette(e,flap,hot){
    return{a:flap?'#56efff':'#7fdfff',b:hot?'#4d92ff':'#86b0ff',c:'#ffe76f',pat:FAMILY_PIXELS.stingray};
   case 'galboss':
    return damaged?{a:flap?'#b4c9ff':'#d6e2ff',b:hot?'#ffd37a':'#ffe29a',c:'#ff5fb0',pat:FAMILY_PIXELS.galboss}:{a:flap?'#ff8be9':'#ffb0ef',b:hot?'#77ffd3':'#53e5b7',c:'#fff18f',pat:FAMILY_PIXELS.galboss};
+  case 'crown':
+   return damaged?{a:flap?'#fff6b8':'#ffffff',b:hot?'#ff9fd8':'#d7a5ff',c:'#66ffe0',pat:FAMILY_PIXELS.crown}:{a:flap?'#aaffea':'#d8fff5',b:hot?'#ffd55a':'#ffe996',c:'#c58cff',pat:FAMILY_PIXELS.crown};
   case 'dragonfly':
    return{a:flap?'#69ff8e':'#98ffab',b:hot?'#5ce1ff':'#94f0ff',c:'#ffe76f',pat:FAMILY_PIXELS.dragonfly};
   case 'mosquito':
@@ -39,7 +42,7 @@ function enemyDims(e){
 }
 
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.08:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.14:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 
@@ -395,7 +398,13 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
-  if(f.flash){
+  if(f.ring){
+   ctx.strokeStyle=f.c;
+   ctx.lineWidth=Math.max(1,.8+f.t*2.5);
+   ctx.beginPath();
+   ctx.arc(f.x,f.y,Math.max(2,f.r*(1.12-f.t*.32)),0,7);
+   ctx.stroke();
+  }else if(f.flash){
    ctx.fillStyle=f.c;
    ctx.fillRect(f.x-f.r*.6,f.y-1,f.r*1.2,2);
    ctx.fillRect(f.x-1,f.y-f.r*.6,2,f.r*1.2);

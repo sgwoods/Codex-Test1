@@ -1,0 +1,996 @@
+{
+  "generatedAt": "2026-05-08T16:15:33.796Z",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.3.0",
+    "versionLine": "1.3.0.1",
+    "label": "1.3.0.1+build.629.sha.fdcefbe.dirty",
+    "commit": "fdcefbebbf03ff12da77a5d5cc30edfd02feae57",
+    "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+    "dirty": true,
+    "released": "May 08 2026, 12:12 PM EDT",
+    "state": "codex/macbook-pro-stage12-level-arc-conformance@fdcefbe dirty",
+    "releaseChannel": "development",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.3.0",
+      "releaseTrack": "active-candidate",
+      "compatibility": "platinum-1.3",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract."
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.3.0",
+        "versionLine": "1.3.0",
+        "releaseTrack": "primary-candidate",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.3",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "non-production-playable-preview",
+        "platformCompatibility": "platinum-1.3",
+        "launchPolicy": "development-and-beta-only"
+      }
+    ]
+  },
+  "location": "http://127.0.0.1:63980/index.html",
+  "game": {
+    "stage": 14,
+    "score": 1140,
+    "lives": 1,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 54,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 14,
+      "challenge": false,
+      "at": 0.631
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-death.m4a",
+      "lastLoaded": "assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a",
+      "lastStarted": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+      "lastError": "",
+      "activeCount": 5
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue stagePulse (galaga-reference-assets) · requested galaga3-death.m4a · loaded galaga3-boss-damage-flagship-fighter-shot.m4a · started galaga3-boss-damage-flagship-fighter-shot.m4a · active 5"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+17.033s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 17.033,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "dive",
+        "x": 182.75,
+        "y": 266.45,
+        "vx": 2.6,
+        "vy": 237,
+        "bulletLane": 6,
+        "playerLane": 7,
+        "id": 956944931,
+        "enemyType": "bee",
+        "enemyFamily": "galboss",
+        "column": 2,
+        "row": 2,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+17.250s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 17.25,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+17.350s",
+      "level": "info",
+      "action": "ship_lost",
+      "message": "ship_lost",
+      "data": {
+        "t": 17.35,
+        "type": "ship_lost",
+        "stage": 14,
+        "score": 980,
+        "livesBefore": 3,
+        "stageClock": 17.35,
+        "attackers": 5,
+        "enemyBullets": 2,
+        "enemies": 25,
+        "playerX": 207.85,
+        "playerY": 340,
+        "playerLane": 7,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 956944931,
+        "enemyType": "bee",
+        "enemyDive": 1,
+        "enemyX": 201.01,
+        "enemyY": 335.17,
+        "enemyLane": 6,
+        "enemyForm": true,
+        "challenge": false
+      }
+    },
+    {
+      "at": "+17.867s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 17.867,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 225.03,
+        "stageClock": 17.867,
+        "playerLane": 7,
+        "id": 795869550,
+        "enemyType": "boss",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+18.250s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 18.25,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "escort",
+        "x": 128.05,
+        "y": 337.31,
+        "vx": 15.22,
+        "vy": 237,
+        "bulletLane": 4,
+        "playerLane": 7,
+        "id": 811915836,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 1,
+        "lane": 4,
+        "dive": 5,
+        "carry": false
+      }
+    },
+    {
+      "at": "+18.400s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 18.4,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 356.29,
+        "stageClock": 18.4,
+        "playerLane": 7,
+        "id": 948655646,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 4,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+18.400s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 18.4,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 356.29,
+        "stageClock": 18.4,
+        "playerLane": 7,
+        "id": 811915836,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 1,
+        "lane": 4,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+18.400s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 18.4,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 356.29,
+        "stageClock": 18.4,
+        "playerLane": 7,
+        "id": 743314619,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 6,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+18.683s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 18.683,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+18.933s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 18.933,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+19.317s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 19.317,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+19.567s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 19.567,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+19.950s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 19.95,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+20.117s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 20.117,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "formation",
+        "x": 156.01,
+        "y": 88.33,
+        "vx": 0.34,
+        "vy": 210,
+        "bulletLane": 5,
+        "playerLane": 7,
+        "id": 162055028,
+        "enemyType": "bee",
+        "enemyFamily": "galboss",
+        "column": 4,
+        "row": 3,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+20.200s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 20.2,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+20.233s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 20.233,
+        "type": "enemy_attack_start",
+        "stage": 14,
+        "mode": "dive",
+        "x": 96.69,
+        "y": 52.83,
+        "originLane": 3,
+        "targetLane": 7,
+        "playerLane": 7,
+        "id": 191611931,
+        "enemyType": "bee",
+        "enemyFamily": "galboss",
+        "column": 0,
+        "row": 2,
+        "lane": 3,
+        "dive": 1,
+        "carry": false,
+        "targetX": 207.85,
+        "scripted": 0,
+        "pattern": "standard-dive"
+      }
+    },
+    {
+      "at": "+20.583s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 20.583,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+20.833s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 20.833,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+21.183s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 21.183,
+        "type": "enemy_attack_start",
+        "stage": 14,
+        "mode": "dive",
+        "x": 169.18,
+        "y": 38.8,
+        "originLane": 5,
+        "targetLane": 7,
+        "playerLane": 7,
+        "id": 811915836,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 207.85,
+        "scripted": 0,
+        "pattern": "standard-dive"
+      }
+    },
+    {
+      "at": "+21.217s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 21.217,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+21.217s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 21.217,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 224.92,
+        "stageClock": 21.217,
+        "playerLane": 7,
+        "id": 191611931,
+        "enemyType": "bee",
+        "enemyFamily": "galboss",
+        "column": 0,
+        "row": 2,
+        "lane": 4,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+21.467s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 21.467,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+21.850s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 21.85,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+21.867s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 21.867,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "formation",
+        "x": 199.58,
+        "y": 62.03,
+        "vx": 1.87,
+        "vy": 210,
+        "bulletLane": 6,
+        "playerLane": 7,
+        "id": 719802877,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 7,
+        "row": 1,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+22.050s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 22.05,
+        "type": "enemy_attack_start",
+        "stage": 14,
+        "mode": "dive",
+        "x": 153.98,
+        "y": 39.53,
+        "originLane": 5,
+        "targetLane": 7,
+        "playerLane": 7,
+        "id": 948655646,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 4,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 207.85,
+        "scripted": 0,
+        "pattern": "standard-dive"
+      }
+    },
+    {
+      "at": "+22.100s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 22.1,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+22.183s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 22.183,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 224.43,
+        "stageClock": 22.183,
+        "playerLane": 7,
+        "id": 811915836,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+22.483s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 22.483,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+22.733s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 22.733,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+22.917s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 22.917,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "dive",
+        "x": 190.17,
+        "y": 224.71,
+        "vx": 2.2,
+        "vy": 237,
+        "bulletLane": 6,
+        "playerLane": 7,
+        "id": 948655646,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 4,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+22.933s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 22.933,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "formation",
+        "x": 111.89,
+        "y": 77.15,
+        "vx": -0.81,
+        "vy": 210,
+        "bulletLane": 4,
+        "playerLane": 7,
+        "id": 129387437,
+        "enemyType": "bee",
+        "enemyFamily": "galboss",
+        "column": 1,
+        "row": 2,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+22.967s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 22.967,
+        "type": "enemy_attack_start",
+        "stage": 14,
+        "mode": "dive",
+        "x": 93.18,
+        "y": 40.43,
+        "originLane": 3,
+        "targetLane": 7,
+        "playerLane": 7,
+        "id": 793409337,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 0,
+        "row": 1,
+        "lane": 3,
+        "dive": 1,
+        "carry": false,
+        "targetX": 207.85,
+        "scripted": 0,
+        "pattern": "standard-dive"
+      }
+    },
+    {
+      "at": "+23.017s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 23.017,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 227.46,
+        "stageClock": 23.017,
+        "playerLane": 7,
+        "id": 948655646,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 4,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+23.117s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 23.117,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 207.85,
+        "y": 322,
+        "shotXs": [
+          207.85
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+23.150s",
+      "level": "info",
+      "action": "ship_lost",
+      "message": "ship_lost",
+      "data": {
+        "t": 23.15,
+        "type": "ship_lost",
+        "stage": 14,
+        "score": 980,
+        "livesBefore": 2,
+        "stageClock": 23.15,
+        "attackers": 2,
+        "enemyBullets": 2,
+        "enemies": 24,
+        "playerX": 207.85,
+        "playerY": 340,
+        "playerLane": 7,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_bullet",
+        "bulletKind": "formation",
+        "sourceId": 719802877,
+        "sourceType": "but",
+        "sourceDive": 0,
+        "bulletX": 202.01,
+        "bulletY": 335.03,
+        "bulletLane": 6,
+        "bulletVx": 1.87,
+        "bulletVy": 210
+      }
+    },
+    {
+      "at": "+23.167s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 23.167,
+        "type": "enemy_killed",
+        "points": 160,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 948655646,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 4,
+        "row": 1,
+        "lane": 6,
+        "carry": false
+      }
+    },
+    {
+      "at": "+23.500s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 23.5,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+23.617s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 23.617,
+        "type": "enemy_bullet_fired",
+        "stage": 14,
+        "kind": "dive",
+        "x": 145.45,
+        "y": 161.97,
+        "vx": 6.73,
+        "vy": 237,
+        "bulletLane": 5,
+        "playerLane": 7,
+        "id": 793409337,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 0,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+23.983s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 23.983,
+        "type": "enemy_lower_field",
+        "stage": 14,
+        "y": 224.42,
+        "stageClock": 23.983,
+        "playerLane": 7,
+        "id": 793409337,
+        "enemyType": "but",
+        "enemyFamily": "galboss",
+        "column": 0,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+24.000s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 24,
+        "type": "harness_stop",
+        "label": "recover-r2-h1-45-l4-9"
+      }
+    }
+  ]
+}

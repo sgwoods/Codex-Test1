@@ -1,0 +1,1103 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-conformance-lab-v2",
+  "generatedAt": "2026-05-11T13:30:13.200Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "44ac29aa",
+  "dirty": true,
+  "problem": "Aurora audio is the current weakest quality category; stagePulse onset and acoustic event matching are the highest measured risks.",
+  "strategy": "Group cue families by player meaning, attach current event-gap risk, attach focused candidate-loop history, and allow runtime promotion only after measured keeper gates plus full audio/semantic/quality checks.",
+  "successMeasure": "Move audio toward 7.5+/10 while preserving 9/9 cue alignment, semantic audio near 9.78/10, and overall quality >= 9.2/10.",
+  "promotionRule": "This analyzer records keeper candidates but does not edit runtime cue definitions. Runtime promotion requires a keeper, a refreshed full theme comparison, no cue-alignment regression, no semantic regression, and overall quality >= 9.2.",
+  "source": {
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-11-44ac29aa/report.json",
+    "applicationGuide": "application-guide.json",
+    "audioCueContracts": "reference-artifacts/contracts/audio/aurora-audio-cue-contracts.json",
+    "contractAnalysis": "reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json",
+    "candidateRoot": "reference-artifacts/analyses/aurora-audio-cue-candidates"
+  },
+  "summary": {
+    "audioScore10": 7.3,
+    "overallScore10": 9.2,
+    "semanticScore10": 9.78,
+    "averageWorstSegmentRisk10": 4.55,
+    "highestRiskCue": "playerHit",
+    "highestRisk10": 7.57,
+    "highestSegmentRiskCue": "playerHit",
+    "highestSegmentRiskRole": "body",
+    "cueCount": 8,
+    "sweptCueCount": 8,
+    "keeperCueCount": 2,
+    "runtimePromotionCount": 0,
+    "candidateLoopCoverage": 1,
+    "contractReadinessScore10": 9.09,
+    "contractBlockedCueCount": 8,
+    "contractRuntimeTrialAllowedCueCount": 0,
+    "nextGap": "Tune the highest segment-level gap next: playerHit body. Rerun audio comparison and event-gap analysis after the change."
+  },
+  "families": [
+    {
+      "id": "formation-stage-ambience",
+      "label": "Formation / Stage Ambience",
+      "priority": 1,
+      "problem": "Make the board cadence create Galaga-like pressure without crowding combat cues.",
+      "playerMeaning": "Players should feel the alien rack is alive and advancing even before an immediate threat fires.",
+      "scoreContext": {
+        "averageRisk10": 4.38,
+        "averageWorstSegmentRisk10": 6.98,
+        "cueCount": 1,
+        "sweptCueCount": 1
+      },
+      "cues": [
+        {
+          "cue": "stagePulse",
+          "playerMeaning": "Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.",
+          "semanticClass": "documented-cue",
+          "currentRisk": {
+            "gapRisk10": 4.38,
+            "worstSegmentRole": "onset",
+            "worstSegmentRisk10": 6.98,
+            "semanticScore10": 9.6,
+            "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "formation-pulse-compare",
+              "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+              "referenceWindow": {
+                "startSeconds": 0.6,
+                "endSeconds": 0.84,
+                "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+                "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+              },
+              "referenceSegmentation": null
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "formation-pulse-classic",
+              "runtimeCue": "stagePulse",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-formation-pulse.json",
+            "title": "Formation Pulse",
+            "candidateCount": 9,
+            "repetitions": 4,
+            "topCandidates": [
+              {
+                "id": "convoy-current-window",
+                "label": "Convoy current guide window",
+                "risk10": 4.73,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 5.95,
+                "durationGapSeconds": 0.079,
+                "centroidGapHz": 620.3,
+                "bandShapeGap": 0.2832,
+                "cadencePressureScore10": 2.41,
+                "keeperRead": "cadence pressure improved only 0.93; cadence pressure 2.41 < 3.5; masking separation 3.91 < 4; risk stability sd 1.147 > 0.35; centroid stability sd 272.1 Hz > 120 Hz; zero-crossing stability sd 863.1/s > 420/s; band-shape stability sd 0.1019 > 0.045; decay stability sd 14.983 > 1.2; RMS stability sd 0.049 > 0.035"
+              },
+              {
+                "id": "refclip-s660-d240-v74",
+                "label": "Formation Pulse reference 0.66s/0.24s v0.74",
+                "risk10": 4.83,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 5.9,
+                "durationGapSeconds": 0.104,
+                "centroidGapHz": 582.4,
+                "bandShapeGap": 0.2972,
+                "cadencePressureScore10": 2.11,
+                "keeperRead": "cadence pressure improved only 0.63; cadence pressure 2.11 < 3.5; masking separation 3.99 < 4; risk stability sd 1.019 > 0.35; centroid stability sd 255.7 Hz > 120 Hz; zero-crossing stability sd 787.2/s > 420/s; band-shape stability sd 0.0929 > 0.045; decay stability sd 1955.247 > 1.2; RMS stability sd 0.0403 > 0.035"
+              },
+              {
+                "id": "refclip-s720-d240-v86",
+                "label": "Formation Pulse reference 0.72s/0.24s v0.86",
+                "risk10": 5.09,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 7.02,
+                "durationGapSeconds": 0.059,
+                "centroidGapHz": 772.8,
+                "bandShapeGap": 0.3386,
+                "cadencePressureScore10": 1.84,
+                "keeperRead": "whole-cue risk improved only 0.01; segment risk improved only 0.03; cadence pressure improved only 0.36; cadence pressure 1.84 < 3.5; masking separation improved only 0.22; masking separation 2.13 < 4; decay stability sd 6403.857 > 1.2"
+              },
+              {
+                "id": "refclip-s600-d240-v86",
+                "label": "Formation Pulse reference 0.6s/0.24s v0.86",
+                "risk10": 5.18,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 6.98,
+                "durationGapSeconds": 0.084,
+                "centroidGapHz": 738.2,
+                "bandShapeGap": 0.3404,
+                "cadencePressureScore10": 1.21,
+                "keeperRead": "whole-cue risk improved only -0.08; segment risk improved only 0.07; cadence pressure improved only -0.27; cadence pressure 1.21 < 3.5; masking separation improved only -0.06; masking separation 1.85 < 4; decay stability sd 3073.202 > 1.2"
+              },
+              {
+                "id": "refclip-s660-d240-v86",
+                "label": "Formation Pulse reference 0.66s/0.24s v0.86",
+                "risk10": 5.27,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 7.02,
+                "durationGapSeconds": 0.084,
+                "centroidGapHz": 738.6,
+                "bandShapeGap": 0.3434,
+                "cadencePressureScore10": 1.16,
+                "keeperRead": "whole-cue risk improved only -0.17; segment risk improved only 0.03; cadence pressure improved only -0.32; cadence pressure 1.16 < 3.5; masking separation improved only -0.14; masking separation 1.77 < 4; decay stability sd 5752.362 > 1.2"
+              }
+            ],
+            "decision": {
+              "status": "no-keeper",
+              "keep": false,
+              "baseline": "baseline-current",
+              "best": null,
+              "measuredBest": "convoy-current-window",
+              "reason": "No Formation Pulse candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+            }
+          },
+          "decision": {
+            "status": "no-keeper",
+            "keep": false,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": null,
+            "measuredBest": "convoy-current-window",
+            "reason": "No Formation Pulse candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+          }
+        }
+      ],
+      "decision": {
+        "status": "swept-no-runtime-keeper",
+        "acceptedCueCount": 0,
+        "sweptCueCount": 1,
+        "missingCueCount": 0,
+        "noKeeperCueCount": 1,
+        "highestRiskCue": "stagePulse",
+        "highestRisk10": 4.38,
+        "runtimePromotionReady": false,
+        "recommendation": "Continue candidate generation for stagePulse; current risk 4.38/10."
+      }
+    },
+    {
+      "id": "impact-explosion-feedback",
+      "label": "Impact / Explosion Feedback",
+      "priority": 2,
+      "problem": "Separate hit confirmation, boss damage, normal destruction, and boss destruction so combat outcomes are legible.",
+      "playerMeaning": "Players should immediately understand hit, damage, destruction, and boss hierarchy from sound alone.",
+      "scoreContext": {
+        "averageRisk10": 2.37,
+        "averageWorstSegmentRisk10": 3.79,
+        "cueCount": 4,
+        "sweptCueCount": 4
+      },
+      "cues": [
+        {
+          "cue": "enemyHit",
+          "playerMeaning": "A hit connected; the player should hear immediate damage feedback before destruction hierarchy.",
+          "semanticClass": "impact-confirmation",
+          "currentRisk": {
+            "gapRisk10": 2.24,
+            "worstSegmentRole": "onset",
+            "worstSegmentRisk10": 2.27,
+            "semanticScore10": 9.8,
+            "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "enemy-hit-compare",
+              "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+              "referenceWindow": {
+                "startSeconds": 0.75,
+                "endSeconds": 0.99,
+                "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+                "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+              },
+              "referenceSegmentation": {
+                "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+                "confidence": "high",
+                "resolution": "relative to the clipped 0.75-0.99s Zako window; enemy hit is scored as immediate damage confirmation",
+                "segments": [
+                  {
+                    "role": "onset",
+                    "label": "enemy hit confirmation",
+                    "startSeconds": 0.01,
+                    "endSeconds": 0.17
+                  }
+                ]
+              }
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "enemy-hit-aurora",
+              "runtimeCue": "enemyHit",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-enemy-hit.json",
+            "title": "Enemy Hit",
+            "candidateCount": 51,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "refclip-s750-d200-v100",
+                "label": "Enemy Hit reference 0.75s/0.2s v1",
+                "risk10": 0.69,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 2.04,
+                "durationGapSeconds": 0.043,
+                "centroidGapHz": 23.7,
+                "bandShapeGap": 0.0119,
+                "cadencePressureScore10": null,
+                "keeperRead": "segment risk improved only -0.1"
+              },
+              {
+                "id": "refclip-s750-d280-v94",
+                "label": "Enemy Hit reference 0.75s/0.28s v0.94",
+                "risk10": 0.74,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 2.14,
+                "durationGapSeconds": 0.04,
+                "centroidGapHz": 27.8,
+                "bandShapeGap": 0.0096,
+                "cadencePressureScore10": null,
+                "keeperRead": "segment risk improved only -0.2"
+              },
+              {
+                "id": "refclip-s750-d180-v100",
+                "label": "Enemy Hit reference 0.75s/0.18s v1",
+                "risk10": 0.75,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 1.97,
+                "durationGapSeconds": 0.04,
+                "centroidGapHz": 41.6,
+                "bandShapeGap": 0.0113,
+                "cadencePressureScore10": null,
+                "keeperRead": "segment risk improved only -0.03"
+              },
+              {
+                "id": "refclip-s720-d240-v100",
+                "label": "Enemy Hit reference 0.72s/0.24s v1",
+                "risk10": 0.92,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 2.16,
+                "durationGapSeconds": 0.069,
+                "centroidGapHz": 15.7,
+                "bandShapeGap": 0.0113,
+                "cadencePressureScore10": null,
+                "keeperRead": "segment risk improved only -0.22"
+              },
+              {
+                "id": "refclip-s750-d180-v82",
+                "label": "Enemy Hit reference 0.75s/0.18s v0.82",
+                "risk10": 0.93,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 2.44,
+                "durationGapSeconds": 0.03,
+                "centroidGapHz": 110.9,
+                "bandShapeGap": 0.0248,
+                "cadencePressureScore10": null,
+                "keeperRead": "segment risk improved only -0.5"
+              }
+            ],
+            "decision": {
+              "status": "no-keeper",
+              "keep": false,
+              "baseline": "baseline-current",
+              "best": null,
+              "measuredBest": "refclip-s750-d200-v100",
+              "reason": "No Enemy Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+            }
+          },
+          "decision": {
+            "status": "no-keeper",
+            "keep": false,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": null,
+            "measuredBest": "refclip-s750-d200-v100",
+            "reason": "No Enemy Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+          }
+        },
+        {
+          "cue": "bossHit",
+          "playerMeaning": "A multi-hit boss was damaged but not necessarily destroyed.",
+          "semanticClass": "boss-damage-confirmation",
+          "currentRisk": {
+            "gapRisk10": 2.88,
+            "worstSegmentRole": "onset",
+            "worstSegmentRisk10": 5.03,
+            "semanticScore10": 9.8,
+            "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "boss-hit-compare",
+              "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+              "referenceWindow": {
+                "startSeconds": 1.149,
+                "endSeconds": 1.439,
+                "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+                "selection": "highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"
+              },
+              "referenceSegmentation": {
+                "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+                "confidence": "high",
+                "resolution": "relative to the clipped 1.149-1.439s boss-damage window; boss hit is a distinct damage confirmation transient",
+                "segments": [
+                  {
+                    "role": "onset",
+                    "label": "boss damage confirmation",
+                    "startSeconds": 0,
+                    "endSeconds": 0.15
+                  }
+                ]
+              }
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "boss-hit-aurora",
+              "runtimeCue": "bossHit",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-boss-hit.json",
+            "title": "Boss Hit",
+            "candidateCount": 52,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "refclip-s1020-d290-v98",
+                "label": "Boss Hit reference 1.02s/0.29s v0.98",
+                "risk10": 2.68,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 3.49,
+                "durationGapSeconds": 0.179,
+                "centroidGapHz": 241.3,
+                "bandShapeGap": 0.1923,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap improved only -0.072s"
+              },
+              {
+                "id": "refclip-s1020-d290-v86",
+                "label": "Boss Hit reference 1.02s/0.29s v0.86",
+                "risk10": 2.76,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 3.65,
+                "durationGapSeconds": 0.176,
+                "centroidGapHz": 228.9,
+                "bandShapeGap": 0.1888,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap improved only -0.068s"
+              },
+              {
+                "id": "refclip-s1080-d290-v98",
+                "label": "Boss Hit reference 1.08s/0.29s v0.98",
+                "risk10": 3.18,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 3.49,
+                "durationGapSeconds": 0.104,
+                "centroidGapHz": 351.8,
+                "bandShapeGap": 0.2231,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap improved only 0.004s; risk stability sd 0.96 > 0.35; centroid stability sd 196.3 Hz > 120 Hz; band-shape stability sd 0.0661 > 0.045"
+              },
+              {
+                "id": "refclip-s1080-d290-v118",
+                "label": "Boss Hit reference 1.08s/0.29s v1.18",
+                "risk10": 3.2,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 3.29,
+                "durationGapSeconds": 0.11,
+                "centroidGapHz": 346.8,
+                "bandShapeGap": 0.2183,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap improved only -0.003s; risk stability sd 0.99 > 0.35; centroid stability sd 220.2 Hz > 120 Hz; band-shape stability sd 0.0728 > 0.045"
+              },
+              {
+                "id": "refclip-s1080-d290-v108",
+                "label": "Boss Hit reference 1.08s/0.29s v1.08",
+                "risk10": 3.22,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 3.61,
+                "durationGapSeconds": 0.11,
+                "centroidGapHz": 365.2,
+                "bandShapeGap": 0.2192,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap improved only -0.002s; risk stability sd 0.974 > 0.35; centroid stability sd 210.5 Hz > 120 Hz; band-shape stability sd 0.0647 > 0.045"
+              }
+            ],
+            "decision": {
+              "status": "no-keeper",
+              "keep": false,
+              "baseline": "baseline-current",
+              "best": null,
+              "measuredBest": "refclip-s1020-d290-v98",
+              "reason": "No Boss Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+            }
+          },
+          "decision": {
+            "status": "no-keeper",
+            "keep": false,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": null,
+            "measuredBest": "refclip-s1020-d290-v98",
+            "reason": "No Boss Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+          }
+        },
+        {
+          "cue": "enemyBoom",
+          "playerMeaning": "A normal enemy was destroyed; the cue should feel more final than a hit.",
+          "semanticClass": "enemy-destroyed",
+          "currentRisk": {
+            "gapRisk10": 2.06,
+            "worstSegmentRole": "onset",
+            "worstSegmentRisk10": 3.72,
+            "semanticScore10": 10,
+            "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "enemy-boom-compare",
+              "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+              "referenceWindow": {
+                "startSeconds": 0.5,
+                "endSeconds": 0.74,
+                "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+                "selection": "highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"
+              },
+              "referenceSegmentation": {
+                "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured Zako destruction transient",
+                "confidence": "high",
+                "resolution": "relative to the clipped 0.50-0.74s Zako window; normal enemy destruction is a compact finality transient",
+                "segments": [
+                  {
+                    "role": "onset",
+                    "label": "normal enemy destruction transient",
+                    "startSeconds": 0.02,
+                    "endSeconds": 0.2
+                  }
+                ]
+              }
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "enemy-boom-aurora",
+              "runtimeCue": "enemyBoom",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-enemy-boom.json",
+            "title": "Enemy Boom",
+            "candidateCount": 57,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "refclip-s480-d240-v95",
+                "label": "Enemy Boom reference 0.48s/0.24s v0.95",
+                "risk10": 1.03,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 0.59,
+                "durationGapSeconds": 0.069,
+                "centroidGapHz": 4.2,
+                "bandShapeGap": 0.0116,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only -0.59"
+              },
+              {
+                "id": "refclip-s500-d240-v105",
+                "label": "Enemy Boom reference 0.5s/0.24s v1.05",
+                "risk10": 1.69,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 1.73,
+                "durationGapSeconds": 0.103,
+                "centroidGapHz": 137.7,
+                "bandShapeGap": 0.0579,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only -1.25; segment risk improved only -0.42; centroid worsened by 124.4 Hz; risk stability sd 1.226 > 0.35; centroid stability sd 181.9 Hz > 120 Hz; band-shape stability sd 0.0759 > 0.045"
+              },
+              {
+                "id": "refclip-s500-d240-v95",
+                "label": "Enemy Boom reference 0.5s/0.24s v0.95",
+                "risk10": 1.81,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 0.98,
+                "durationGapSeconds": 0.12,
+                "centroidGapHz": 144.6,
+                "bandShapeGap": 0.072,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only -1.37; segment risk improved only 0.33; band shape worsened by 0.0551; centroid worsened by 131.3 Hz; risk stability sd 1.226 > 0.35; duration stability sd 0.099s > 0.08s; centroid stability sd 197.5 Hz > 120 Hz; band-shape stability sd 0.0672 > 0.045"
+              },
+              {
+                "id": "refclip-s500-d240-v86",
+                "label": "Enemy Boom reference 0.5s/0.24s v0.86",
+                "risk10": 1.92,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 2.51,
+                "durationGapSeconds": 0.106,
+                "centroidGapHz": 151,
+                "bandShapeGap": 0.0759,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only -1.48; segment risk improved only -1.2; band shape worsened by 0.059; centroid worsened by 137.6 Hz; risk stability sd 1.202 > 0.35; centroid stability sd 186.6 Hz > 120 Hz; band-shape stability sd 0.0691 > 0.045"
+              },
+              {
+                "id": "refclip-s480-d240-v86",
+                "label": "Enemy Boom reference 0.48s/0.24s v0.86",
+                "risk10": 1.96,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 1.88,
+                "durationGapSeconds": 0.079,
+                "centroidGapHz": 179.7,
+                "bandShapeGap": 0.1002,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only -1.52; segment risk improved only -0.57; band shape worsened by 0.0833; centroid worsened by 166.4 Hz; fewer exact segment-role matches than baseline; risk stability sd 1.07 > 0.35; centroid stability sd 243.2 Hz > 120 Hz; band-shape stability sd 0.1065 > 0.045"
+              }
+            ],
+            "decision": {
+              "status": "no-keeper",
+              "keep": false,
+              "baseline": "baseline-current",
+              "best": null,
+              "measuredBest": "refclip-s480-d240-v95",
+              "reason": "No Enemy Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+            }
+          },
+          "decision": {
+            "status": "no-keeper",
+            "keep": false,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": null,
+            "measuredBest": "refclip-s480-d240-v95",
+            "reason": "No Enemy Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+          }
+        },
+        {
+          "cue": "bossBoom",
+          "playerMeaning": "A boss was destroyed; the cue should feel larger and more final than normal enemy destruction.",
+          "semanticClass": "boss-destroyed",
+          "currentRisk": {
+            "gapRisk10": 2.3,
+            "worstSegmentRole": "body",
+            "worstSegmentRisk10": 4.13,
+            "semanticScore10": 10,
+            "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "boss-boom-compare",
+              "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+              "referenceWindow": {
+                "startSeconds": 0.798,
+                "endSeconds": 1.567,
+                "source": "aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 active-window measurement",
+                "selection": "full active boss-death phrase so destruction can be scored as a larger multi-burst event rather than a single generic explosion"
+              },
+              "referenceSegmentation": {
+                "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 boss-death burst candidates",
+                "confidence": "medium-high",
+                "resolution": "relative to the clipped 0.798-1.567s boss-death window; labels early, middle, and final destruction bursts",
+                "segments": [
+                  {
+                    "role": "onset",
+                    "label": "boss death opening burst",
+                    "startSeconds": 0.052,
+                    "endSeconds": 0.233
+                  },
+                  {
+                    "role": "body",
+                    "label": "boss death main burst",
+                    "startSeconds": 0.252,
+                    "endSeconds": 0.433
+                  },
+                  {
+                    "role": "tail",
+                    "label": "boss death final burst",
+                    "startSeconds": 0.601,
+                    "endSeconds": 0.769
+                  }
+                ]
+              }
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "boss-boom-aurora",
+              "runtimeCue": "bossBoom",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-boss-boom.json",
+            "title": "Boss Boom",
+            "candidateCount": 52,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "refclip-s720-d640-v92",
+                "label": "Boss Boom reference 0.72s/0.64s v0.92",
+                "risk10": 2.23,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 3.74,
+                "durationGapSeconds": 0.27,
+                "centroidGapHz": 149.1,
+                "bandShapeGap": 0.094,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only 0.25; duration gap improved only -0.129s"
+              },
+              {
+                "id": "refclip-s720-d640-v104",
+                "label": "Boss Boom reference 0.72s/0.64s v1.04",
+                "risk10": 2.24,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 3.85,
+                "durationGapSeconds": 0.29,
+                "centroidGapHz": 138,
+                "bandShapeGap": 0.0839,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only 0.24; segment risk improved only 0.34; duration gap improved only -0.149s"
+              },
+              {
+                "id": "refclip-s620-d769-v130",
+                "label": "Boss Boom reference 0.62s/0.769s v1.3",
+                "risk10": 2.26,
+                "worstSegmentRole": "tail",
+                "worstSegmentRisk10": 4.32,
+                "durationGapSeconds": 0.254,
+                "centroidGapHz": 148.4,
+                "bandShapeGap": 0.0762,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only 0.22; segment risk improved only -0.13; duration gap improved only -0.113s; risk stability sd 0.485 > 0.35"
+              },
+              {
+                "id": "refclip-s798-d640-v78",
+                "label": "Boss Boom reference 0.798s/0.64s v0.78",
+                "risk10": 2.36,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 3.92,
+                "durationGapSeconds": 0.134,
+                "centroidGapHz": 202.2,
+                "bandShapeGap": 0.1035,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only 0.12; segment risk improved only 0.27"
+              },
+              {
+                "id": "refclip-s720-d640-v78",
+                "label": "Boss Boom reference 0.72s/0.64s v0.78",
+                "risk10": 2.41,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 3.66,
+                "durationGapSeconds": 0.263,
+                "centroidGapHz": 147.4,
+                "bandShapeGap": 0.1108,
+                "cadencePressureScore10": null,
+                "keeperRead": "whole-cue risk improved only 0.07; duration gap improved only -0.122s"
+              }
+            ],
+            "decision": {
+              "status": "no-keeper",
+              "keep": false,
+              "baseline": "baseline-current",
+              "best": null,
+              "measuredBest": "refclip-s720-d640-v92",
+              "reason": "No Boss Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+            }
+          },
+          "decision": {
+            "status": "no-keeper",
+            "keep": false,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": null,
+            "measuredBest": "refclip-s720-d640-v92",
+            "reason": "No Boss Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+          }
+        }
+      ],
+      "decision": {
+        "status": "swept-no-runtime-keeper",
+        "acceptedCueCount": 0,
+        "sweptCueCount": 4,
+        "missingCueCount": 0,
+        "noKeeperCueCount": 4,
+        "highestRiskCue": "bossHit",
+        "highestRisk10": 2.88,
+        "runtimePromotionReady": false,
+        "recommendation": "Continue candidate generation for bossHit; current risk 2.88/10."
+      }
+    },
+    {
+      "id": "reward-loss-feedback",
+      "label": "Reward / Loss Feedback",
+      "priority": 3,
+      "problem": "Make ship loss, rescue reward, and perfect challenge events emotionally clear and arcade-readable.",
+      "playerMeaning": "Players should hear regret, reward, and celebration as distinct state changes.",
+      "scoreContext": {
+        "averageRisk10": 4.07,
+        "averageWorstSegmentRisk10": 5.78,
+        "cueCount": 3,
+        "sweptCueCount": 3
+      },
+      "cues": [
+        {
+          "cue": "playerHit",
+          "playerMeaning": "The player lost a ship; the cue should be unmistakable and synchronized with death feedback.",
+          "semanticClass": "player-ship-lost",
+          "currentRisk": {
+            "gapRisk10": 7.57,
+            "worstSegmentRole": "body",
+            "worstSegmentRisk10": 7.66,
+            "semanticScore10": 9.4,
+            "recommendation": "Tune the body segment first: body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "ship-loss-compare",
+              "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+              "referenceWindow": null,
+              "referenceSegmentation": {
+                "source": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
+                "confidence": "medium-high",
+                "resolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+                "segments": [
+                  {
+                    "role": "onset",
+                    "label": "ship-loss blast onset",
+                    "startSeconds": 0.02,
+                    "endSeconds": 0.459
+                  },
+                  {
+                    "role": "body",
+                    "label": "sustained death body",
+                    "startSeconds": 0.459,
+                    "endSeconds": 0.858
+                  },
+                  {
+                    "role": "tail",
+                    "label": "death cue falloff",
+                    "startSeconds": 0.858,
+                    "endSeconds": 0.988
+                  }
+                ]
+              }
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "player-hit",
+              "runtimeCue": "playerHit",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-hit-focus.json",
+            "title": "Ship Loss Body",
+            "candidateCount": 51,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "promoted-active-window",
+                "label": "Promoted active window",
+                "risk10": 1.7,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 2.18,
+                "durationGapSeconds": 0.492,
+                "centroidGapHz": 31.9,
+                "bandShapeGap": 0.0067,
+                "cadencePressureScore10": null,
+                "keeperRead": "clears keeper gates"
+              },
+              {
+                "id": "refclip-s0-d720-v100",
+                "label": "Ship Loss Body reference 0s/0.72s v1",
+                "risk10": 1.78,
+                "worstSegmentRole": "tail",
+                "worstSegmentRisk10": 2.51,
+                "durationGapSeconds": 0.406,
+                "centroidGapHz": 58.4,
+                "bandShapeGap": 0.0213,
+                "cadencePressureScore10": null,
+                "keeperRead": "loss composite duration gate failed (0.248s scheduled gap); loss composite score 6.24 < 7.2; risk stability sd 0.693 > 0.35; duration stability sd 0.091s > 0.08s"
+              },
+              {
+                "id": "refclip-s100-d720-v100",
+                "label": "Ship Loss Body reference 0.1s/0.72s v1",
+                "risk10": 1.84,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 2.13,
+                "durationGapSeconds": 0.512,
+                "centroidGapHz": 44.6,
+                "bandShapeGap": 0.0077,
+                "cadencePressureScore10": null,
+                "keeperRead": "loss composite duration gate failed (0.248s scheduled gap); loss composite score 6.15 < 7.2"
+              },
+              {
+                "id": "refclip-s20-d720-v100",
+                "label": "Ship Loss Body reference 0.02s/0.72s v1",
+                "risk10": 2.7,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 3.83,
+                "durationGapSeconds": 0.502,
+                "centroidGapHz": 223.5,
+                "bandShapeGap": 0.0794,
+                "cadencePressureScore10": null,
+                "keeperRead": "loss composite duration gate failed (0.248s scheduled gap); loss composite role gate failed; loss composite score 5.18 < 7.2; risk stability sd 1.565 > 0.35; centroid stability sd 285.3 Hz > 120 Hz; band-shape stability sd 0.1045 > 0.045"
+              },
+              {
+                "id": "refclip-s0-d840-v100",
+                "label": "Ship Loss Body reference 0s/0.84s v1",
+                "risk10": 3.1,
+                "worstSegmentRole": "body",
+                "worstSegmentRisk10": 4.36,
+                "durationGapSeconds": 0.519,
+                "centroidGapHz": 266.1,
+                "bandShapeGap": 0.0971,
+                "cadencePressureScore10": null,
+                "keeperRead": "loss composite role gate failed; loss composite score 5.31 < 7.2; risk stability sd 1.63 > 0.35; centroid stability sd 347.5 Hz > 120 Hz; band-shape stability sd 0.1265 > 0.045"
+              }
+            ],
+            "decision": {
+              "status": "candidate-recommended",
+              "keep": true,
+              "baseline": "baseline-current",
+              "best": "promoted-active-window",
+              "measuredBest": "promoted-active-window",
+              "riskDelta": 5.06,
+              "segmentRiskDelta": 5.44,
+              "durationDeltaSeconds": 0.665,
+              "bandDelta": 0.3351,
+              "reason": "Ship Loss Body candidate clears measured keeper gates."
+            }
+          },
+          "decision": {
+            "status": "candidate-recommended",
+            "keep": true,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": "promoted-active-window",
+            "measuredBest": "promoted-active-window",
+            "reason": "Ship Loss Body candidate clears measured keeper gates."
+          }
+        },
+        {
+          "cue": "rescueJoin",
+          "playerMeaning": "The rescued fighter rejoined; the cue should clearly reward the player.",
+          "semanticClass": "rescue-reward",
+          "currentRisk": {
+            "gapRisk10": 3.11,
+            "worstSegmentRole": "onset",
+            "worstSegmentRisk10": 5.02,
+            "semanticScore10": 10,
+            "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "rescue-join-compare",
+              "referenceClip": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+              "referenceWindow": {
+                "startSeconds": 2.399,
+                "endSeconds": 2.759,
+                "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+                "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+              },
+              "referenceSegmentation": null
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "rescue-join",
+              "runtimeCue": "rescueJoin",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-rescue-join.json",
+            "title": "Rescue Join",
+            "candidateCount": 51,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "refclip-s2399-d360-v105",
+                "label": "Rescue Join reference 2.399s/0.36s v1.05",
+                "risk10": 3.09,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 4.33,
+                "durationGapSeconds": 0.031,
+                "centroidGapHz": 289,
+                "bandShapeGap": 0.1906,
+                "cadencePressureScore10": null,
+                "keeperRead": "risk stability sd 1.654 > 0.35; centroid stability sd 174.8 Hz > 120 Hz; band-shape stability sd 0.0918 > 0.045; decay stability sd 1.262 > 1.2; RMS stability sd 0.0552 > 0.035"
+              },
+              {
+                "id": "refclip-s2399-d240-v95",
+                "label": "Rescue Join reference 2.399s/0.24s v0.95",
+                "risk10": 3.19,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 4.86,
+                "durationGapSeconds": 0.137,
+                "centroidGapHz": 290.2,
+                "bandShapeGap": 0.1999,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap improved only -0.092s; risk stability sd 1.332 > 0.35; centroid stability sd 175.8 Hz > 120 Hz; band-shape stability sd 0.097 > 0.045; decay stability sd 1.275 > 1.2; RMS stability sd 0.0443 > 0.035"
+              },
+              {
+                "id": "refclip-s2320-d300-v95",
+                "label": "Rescue Join reference 2.32s/0.3s v0.95",
+                "risk10": 3.68,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 5.19,
+                "durationGapSeconds": 0.054,
+                "centroidGapHz": 378.5,
+                "bandShapeGap": 0.2481,
+                "cadencePressureScore10": null,
+                "keeperRead": "risk stability sd 0.577 > 0.35"
+              },
+              {
+                "id": "refclip-s2480-d300-v74",
+                "label": "Rescue Join reference 2.48s/0.3s v0.74",
+                "risk10": 3.73,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 5.3,
+                "durationGapSeconds": 0.14,
+                "centroidGapHz": 397.9,
+                "bandShapeGap": 0.2738,
+                "cadencePressureScore10": null,
+                "keeperRead": "segment risk improved only 0.24; duration gap improved only -0.096s; decay stability sd 1.432 > 1.2"
+              },
+              {
+                "id": "refclip-s2580-d360-v86",
+                "label": "Rescue Join reference 2.58s/0.36s v0.86",
+                "risk10": 3.74,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 5.03,
+                "durationGapSeconds": 0.074,
+                "centroidGapHz": 416.1,
+                "bandShapeGap": 0.2574,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration stability sd 0.082s > 0.08s; decay stability sd 1.324 > 1.2"
+              }
+            ],
+            "decision": {
+              "status": "candidate-recommended",
+              "keep": true,
+              "baseline": "baseline-current",
+              "best": "refclip-s2399-d300-v105",
+              "measuredBest": "refclip-s2399-d360-v105",
+              "riskDelta": 0.33,
+              "segmentRiskDelta": 0.46,
+              "durationDeltaSeconds": -0.01,
+              "bandDelta": -0.0052,
+              "reason": "Rescue Join candidate clears measured keeper gates."
+            }
+          },
+          "decision": {
+            "status": "candidate-recommended",
+            "keep": true,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": "refclip-s2399-d300-v105",
+            "measuredBest": "refclip-s2399-d360-v105",
+            "reason": "Rescue Join candidate clears measured keeper gates."
+          }
+        },
+        {
+          "cue": "challengePerfect",
+          "playerMeaning": "A perfect challenge clear occurred; this should be more celebratory than the standard result.",
+          "semanticClass": "perfect-challenge-result",
+          "currentRisk": {
+            "gapRisk10": 1.54,
+            "worstSegmentRole": "onset",
+            "worstSegmentRisk10": 4.67,
+            "semanticScore10": 10,
+            "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+          },
+          "targetReference": [
+            {
+              "comparisonSet": "challenge-perfect-compare",
+              "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+              "referenceWindow": {
+                "startSeconds": 0,
+                "endSeconds": 0.48,
+                "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+                "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+              },
+              "referenceSegmentation": null
+            }
+          ],
+          "runtimeMapping": [
+            {
+              "entryId": "challenge-perfect",
+              "runtimeCue": "challengePerfect",
+              "mappingStatus": "",
+              "mappingConfidence": ""
+            }
+          ],
+          "candidateHistory": {
+            "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest.json",
+            "title": "",
+            "candidateCount": 2,
+            "repetitions": 3,
+            "topCandidates": [
+              {
+                "id": "segair-o1175-b2093-t3136-od140-bd238-bl44-td318-tl104-v64-av28-n35-air",
+                "label": "Segment-air 1175/2093/3136 0.238/0.318",
+                "risk10": 4.19,
+                "worstSegmentRole": "onset",
+                "worstSegmentRisk10": 5.07,
+                "durationGapSeconds": 0.16,
+                "centroidGapHz": 123.5,
+                "bandShapeGap": 0.276,
+                "cadencePressureScore10": null,
+                "keeperRead": "duration gap 0.16s > 0.08s; segment risk improvement -0.2 < 0.35; centroid did not improve (-23.2 Hz); RMS worsened by 0.0546"
+              }
+            ],
+            "decision": {
+              "status": "no-keeper",
+              "keep": false,
+              "baseline": "baseline-current",
+              "best": null,
+              "measuredBest": null,
+              "reason": "No candidate preserved Challenge Perfect duration closely enough to be considered."
+            }
+          },
+          "decision": {
+            "status": "no-keeper",
+            "keep": false,
+            "acceptedRuntimePromotion": false,
+            "runtimePromotion": null,
+            "best": null,
+            "measuredBest": null,
+            "reason": "No candidate preserved Challenge Perfect duration closely enough to be considered."
+          }
+        }
+      ],
+      "decision": {
+        "status": "keeper-found-awaiting-full-promotion-gates",
+        "acceptedCueCount": 2,
+        "sweptCueCount": 3,
+        "missingCueCount": 0,
+        "noKeeperCueCount": 1,
+        "highestRiskCue": "playerHit",
+        "highestRisk10": 7.57,
+        "runtimePromotionReady": true,
+        "recommendation": "Review accepted Reward / Loss Feedback cue(s) against final theme comparison, semantic score, and overall quality before editing runtime audio."
+      }
+    }
+  ],
+  "nextStep": "StagePulse candidate convoy-current-window is a measured near miss: full-theme precheck shows improvement, but focused masking/stability gates reject promotion. Next build a stronger low-brightness, low-variance pressure-bed generator, then rerun focused repeats and promotion precheck."
+}

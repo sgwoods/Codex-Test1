@@ -4,18 +4,18 @@
   "window_id": "mid-run-entry-variant",
   "scenario": "stage8-entry-variant",
   "seed": 8008,
-  "duration_s": 10,
+  "duration_s": 16,
   "summary": {
-    "sample_count": 11,
+    "sample_count": 17,
     "player_x_min": 9,
     "player_x_max": 271,
     "player_x_range": 262,
-    "max_attackers": 2,
+    "max_attackers": 3,
     "max_enemy_bullets": 2,
     "max_player_bullets": 2,
     "max_challenge_enemies": 0,
-    "final_score": 490,
-    "final_lives": 4,
+    "final_score": 540,
+    "final_lives": 2,
     "final_stage": 8,
     "final_challenge": false
   },
@@ -63,6 +63,30 @@
     {
       "t": 10,
       "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-010.png"
+    },
+    {
+      "t": 11,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-011.png"
+    },
+    {
+      "t": 12,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-012.png"
+    },
+    {
+      "t": 13,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-013.png"
+    },
+    {
+      "t": 14,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-014.png"
+    },
+    {
+      "t": 15,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-015.png"
+    },
+    {
+      "t": 16,
+      "file": "reference-artifacts/analyses/aurora-level-expansion-cycle/mid-run-entry-variant/frames/sample-016.png"
     }
   ],
   "samples": [
@@ -80,6 +104,17 @@
       "player_bullets": 0,
       "challenge_enemies": 0,
       "formation_active": 40,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "gameStart",
         "atmosphereId": "aurora-borealis",
@@ -91,7 +126,7 @@
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 0.577
+        "at": 0.593
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -112,7 +147,11 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 1,
@@ -128,6 +167,17 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 39,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -139,7 +189,7 @@
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 0.659
+        "at": 0.732
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -160,22 +210,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 2,
       "stage": 8,
       "challenge": 0,
-      "score": 290,
+      "score": 230,
       "lives": 4,
       "player_x": 266.67,
       "player_vx": -121.02,
       "enemies": 36,
       "attackers": 0,
-      "enemy_bullets": 1,
+      "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 36,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -187,7 +252,7 @@
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 0.722
+        "at": 0.812
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -208,13 +273,17 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 3,
       "stage": 8,
       "challenge": 0,
-      "score": 340,
+      "score": 280,
       "lives": 4,
       "player_x": 27.13,
       "player_vx": -248,
@@ -224,6 +293,17 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 35,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "enemyShot",
         "atmosphereId": "aurora-borealis",
@@ -235,7 +315,7 @@
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 0.778
+        "at": 0.873
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -256,13 +336,17 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 4,
       "stage": 8,
       "challenge": 0,
-      "score": 390,
+      "score": 330,
       "lives": 4,
       "player_x": 9,
       "player_vx": 0,
@@ -272,6 +356,17 @@
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 34,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
@@ -283,7 +378,7 @@
         "referenceClipDuration": 0.82,
         "stage": 8,
         "challenge": false,
-        "at": 0.837
+        "at": 0.93
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -304,34 +399,49 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 5,
       "stage": 8,
       "challenge": 0,
-      "score": 390,
-      "lives": 4,
-      "player_x": 128.88,
-      "player_vx": 247.84,
-      "enemies": 34,
+      "score": 330,
+      "lives": 3,
+      "player_x": 28.31,
+      "player_vx": 206.39,
+      "enemies": 33,
       "attackers": 1,
-      "enemy_bullets": 1,
-      "player_bullets": 2,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
       "challenge_enemies": 0,
-      "formation_active": 34,
+      "formation_active": 33,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
-        "cue": "enemyShot",
+        "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
+        "variant": 4,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
         "stage": 8,
         "challenge": false,
-        "at": 0.896
+        "at": 1.003
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -352,22 +462,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 6,
       "stage": 8,
       "challenge": 0,
-      "score": 490,
-      "lives": 4,
-      "player_x": 271,
-      "player_vx": 0,
-      "enemies": 32,
-      "attackers": 1,
-      "enemy_bullets": 1,
-      "player_bullets": 2,
+      "score": 330,
+      "lives": 3,
+      "player_x": 60.82,
+      "player_vx": 378.76,
+      "enemies": 33,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 1,
       "challenge_enemies": 0,
-      "formation_active": 32,
+      "formation_active": 33,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -379,7 +504,7 @@
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 0.953
+        "at": 1.073
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -400,22 +525,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 7,
       "stage": 8,
       "challenge": 0,
-      "score": 490,
-      "lives": 4,
+      "score": 380,
+      "lives": 3,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 32,
-      "attackers": 1,
-      "enemy_bullets": 1,
+      "attackers": 0,
+      "enemy_bullets": 0,
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 32,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
@@ -427,7 +567,7 @@
         "referenceClipDuration": 0.82,
         "stage": 8,
         "challenge": false,
-        "at": 1.011
+        "at": 1.129
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -448,22 +588,37 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 8,
       "stage": 8,
       "challenge": 0,
-      "score": 490,
-      "lives": 4,
+      "score": 380,
+      "lives": 3,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 32,
-      "attackers": 2,
+      "attackers": 1,
       "enemy_bullets": 1,
       "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 32,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
         "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
@@ -475,7 +630,7 @@
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 1.071
+        "at": 1.192
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -496,34 +651,49 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 9,
       "stage": 8,
       "challenge": 0,
-      "score": 490,
-      "lives": 4,
+      "score": 380,
+      "lives": 3,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 32,
-      "attackers": 2,
-      "enemy_bullets": 1,
-      "player_bullets": 0,
+      "attackers": 1,
+      "enemy_bullets": 2,
+      "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 32,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
-        "cue": "attackCharge",
+        "cue": "stagePulse",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
-        "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
-        "referenceClipStart": 0,
-        "referenceClipDuration": 0,
+        "variant": 15,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
         "stage": 8,
         "challenge": false,
-        "at": 1.128
+        "at": 1.254
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -544,34 +714,49 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     },
     {
       "t": 10,
       "stage": 8,
       "challenge": 0,
-      "score": 490,
-      "lives": 4,
+      "score": 380,
+      "lives": 3,
       "player_x": 271,
       "player_vx": 0,
       "enemies": 32,
-      "attackers": 2,
-      "enemy_bullets": 1,
-      "player_bullets": 0,
+      "attackers": 1,
+      "enemy_bullets": 2,
+      "player_bullets": 2,
       "challenge_enemies": 0,
       "formation_active": 32,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
       "audioCue": {
-        "cue": "attackCharge",
+        "cue": "playerShot",
         "atmosphereId": "aurora-borealis",
         "audioTheme": "galaga-reference-assets",
         "phase": "stage",
         "variant": 0,
-        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
         "referenceClipStart": 0,
         "referenceClipDuration": 0,
         "stage": 8,
         "challenge": false,
-        "at": 1.188
+        "at": 1.312
       },
       "stagePresentation": {
         "id": "stingray-surge",
@@ -592,7 +777,389 @@
           "alphaMax": 0.64
         }
       },
-      "challengeEnemyCount": 0
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 11,
+      "stage": 8,
+      "challenge": 0,
+      "score": 540,
+      "lives": 3,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 31,
+      "attackers": 1,
+      "enemy_bullets": 1,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 31,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 8,
+        "challenge": false,
+        "at": 1.371
+      },
+      "stagePresentation": {
+        "id": "stingray-surge",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 12,
+      "stage": 8,
+      "challenge": 0,
+      "score": 540,
+      "lives": 3,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 31,
+      "attackers": 3,
+      "enemy_bullets": 1,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 31,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 23,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 8,
+        "challenge": false,
+        "at": 1.431
+      },
+      "stagePresentation": {
+        "id": "stingray-surge",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 13,
+      "stage": 8,
+      "challenge": 0,
+      "score": 540,
+      "lives": 2,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 30,
+      "attackers": 2,
+      "enemy_bullets": 0,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 30,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 25,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 8,
+        "challenge": false,
+        "at": 1.492
+      },
+      "stagePresentation": {
+        "id": "stingray-surge",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 14,
+      "stage": 8,
+      "challenge": 0,
+      "score": 540,
+      "lives": 2,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 30,
+      "attackers": 1,
+      "enemy_bullets": 1,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 30,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 8,
+        "challenge": false,
+        "at": 1.557
+      },
+      "stagePresentation": {
+        "id": "stingray-surge",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 15,
+      "stage": 8,
+      "challenge": 0,
+      "score": 540,
+      "lives": 2,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 30,
+      "attackers": 0,
+      "enemy_bullets": 0,
+      "player_bullets": 2,
+      "challenge_enemies": 0,
+      "formation_active": 30,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 8,
+        "challenge": false,
+        "at": 1.618
+      },
+      "stagePresentation": {
+        "id": "stingray-surge",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
+    },
+    {
+      "t": 16,
+      "stage": 8,
+      "challenge": 0,
+      "score": 540,
+      "lives": 2,
+      "player_x": 271,
+      "player_vx": 0,
+      "enemies": 30,
+      "attackers": 3,
+      "enemy_bullets": 2,
+      "player_bullets": 0,
+      "challenge_enemies": 0,
+      "formation_active": 30,
+      "formationEnemyTypes": [
+        "bee",
+        "boss",
+        "but"
+      ],
+      "formationEnemyFamilies": [
+        "stingray"
+      ],
+      "formationPathFamilies": [
+        "stingray-wide-flank-entry"
+      ],
+      "audioCue": {
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 33,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "stage": 8,
+        "challenge": false,
+        "at": 1.68
+      },
+      "stagePresentation": {
+        "id": "stingray-surge",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "challengeEnemyCount": 0,
+      "challengeEnemyTypes": [],
+      "challengeEnemyFamilies": [],
+      "challengePathFamilies": [],
+      "challengeEnemies": []
     }
   ]
 }

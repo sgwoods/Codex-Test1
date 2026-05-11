@@ -17,6 +17,7 @@ const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-
 
 const REQUIRED_SOURCE_DOCS = [
   'README.md',
+  'PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md',
   'PLAN.md',
   'PRODUCT_ROADMAP.md',
   'PLATINUM.md',
@@ -26,8 +27,15 @@ const REQUIRED_SOURCE_DOCS = [
   'TESTING_AND_RELEASE_GATES.md',
   'RELEASE_POLICY.md',
   'RELEASE_READINESS_REVIEW.md',
+  'STRATEGIC_BETA_REVIEW.md',
   'RELEASE_CONFORMANCE_DASHBOARD.md',
+  'CONFORMANCE_METRICS_OVERVIEW.md',
   'CONFORMANCE_ECONOMICS.md',
+  'CLASSIC_ARCADE_INGESTION_FRAMEWORK.md',
+  'GAME_CONFORMANCE_CATALOG.md',
+  'REFERENCE_MEDIA_INVENTORY.md',
+  'ARTIFACT_POLICY.md',
+  'AUDIO_CONFORMANCE_LAB.md',
   'QUALITY_RELEASE_SCORECARD.md',
   'PLATINUM_LAUNCH_ART_DIRECTION.md',
   'PLATINUM_LUECK_REVIEW.md',
@@ -38,6 +46,112 @@ const REQUIRED_SOURCE_DOCS = [
   'release-dashboard.json',
   'release-manifest.json',
   'release-notes.json'
+];
+
+const USER_VISIBLE_DOC_FILES = [
+  'public-project-page.html',
+  'project-guide.html',
+  'application-guide.html',
+  'platinum-guide.html',
+  'conformance-dashboard.html',
+  'conformance-dashboard-data.json',
+  'release-dashboard.html'
+];
+
+const USER_VISIBLE_SECTIONS = [
+  {
+    id: 'public-conformance-catalog',
+    file: 'public-project-page.html',
+    requiredText: [
+      'Game conformance catalog',
+      'live conformance dashboard game profiles',
+      'Open generated game conformance catalog',
+      'Open Aurora catalog tables'
+    ]
+  },
+  {
+    id: 'generated-game-catalog',
+    file: 'project-guide.html',
+    requiredText: [
+      'Game Conformance Catalog',
+      'Alien And Enemy Index',
+      'Audio Cue Index',
+      'Stage Index',
+      'Persona Index'
+    ]
+  },
+  {
+    id: 'aurora-application-catalog',
+    file: 'application-guide.html',
+    requiredText: [
+      'Alien Conformance Index',
+      'Audio Conformance Index',
+      'Stage Conformance Summary',
+      'Testing Personas'
+    ]
+  },
+  {
+    id: 'platform-persona-contract',
+    file: 'platinum-guide.html',
+    requiredText: [
+      'Platform Persona Contract',
+      'What Platinum Owns',
+      'What Each Game Owns'
+    ]
+  }
+];
+
+const REQUIRED_VISIBLE_ARTIFACT_FAMILIES = [
+  {
+    id: 'quality-conformance',
+    path: 'reference-artifacts/analyses/quality-conformance',
+    meaning: 'quality score rollups that feed release gates'
+  },
+  {
+    id: 'conformance-economics',
+    path: 'reference-artifacts/analyses/conformance-economics',
+    meaning: 'value-versus-compute charts and resource accounting'
+  },
+  {
+    id: 'aurora-audio-theme-comparison',
+    path: 'reference-artifacts/analyses/aurora-audio-theme-comparison',
+    meaning: 'audio cue identity and waveform/spectral comparison evidence'
+  },
+  {
+    id: 'aurora-audio-cue-candidates',
+    path: 'reference-artifacts/analyses/aurora-audio-cue-candidates',
+    meaning: 'candidate cue extraction and segment-selection evidence'
+  },
+  {
+    id: 'aurora-audio-event-gap',
+    path: 'reference-artifacts/analyses/aurora-audio-event-gap',
+    meaning: 'audio/event feedback gap analysis'
+  },
+  {
+    id: 'alien-entry-challenge-variation',
+    path: 'reference-artifacts/analyses/alien-entry-challenge-variation',
+    meaning: 'alien entry, challenge-stage novelty, and path-family scoring'
+  },
+  {
+    id: 'formation-boss-grammar-conformance',
+    path: 'reference-artifacts/analyses/formation-boss-grammar-conformance',
+    meaning: 'boss entry and formation grammar scoring'
+  },
+  {
+    id: 'level-arc-conformance',
+    path: 'reference-artifacts/analyses/level-arc-conformance',
+    meaning: 'long-play stage shape and encounter progression scoring'
+  },
+  {
+    id: 'aurora-visual-look-conformance',
+    path: 'reference-artifacts/analyses/aurora-visual-look-conformance',
+    meaning: 'visual look-and-feel conformance scoring'
+  },
+  {
+    id: 'galaxy-guardians-identity',
+    path: 'reference-artifacts/analyses/galaxy-guardians-identity',
+    meaning: 'second-game ingestion identity, sprite, audio, and movement evidence'
+  }
 ];
 
 function parseArgs(argv){
@@ -84,7 +198,34 @@ function checkBetaCheckoutCurrent(){
 function checkPublicProjectTemplate(){
   const templatePath = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
   const template = loadText(templatePath);
-  const requiredTokens = ['{{BUILD_VERSION}}', '{{BUILD_RELEASE_ET}}', '{{BUILD_LABEL}}', '{{PUBLIC_CURRENT_FOCUS}}', '{{LATEST_RELEASE_TITLE}}', '{{PUBLIC_SOURCE_COMMIT}}', '{{PUBLIC_TEMPLATE_SHA}}', '{{PUBLIC_SYNCED_AT}}'];
+  const requiredTokens = [
+    '{{PUBLIC_PAGE_EYEBROW}}',
+    '{{PUBLIC_RELEASE_CONTEXT_VALUE}}',
+    '{{PUBLIC_RELEASE_CONTEXT_NOTE}}',
+    '{{BUILD_VERSION}}',
+    '{{BUILD_RELEASE_ET}}',
+    '{{BUILD_LABEL}}',
+    '{{PUBLIC_CURRENT_FOCUS}}',
+    '{{LATEST_RELEASE_TITLE}}',
+    '{{PUBLIC_SOURCE_COMMIT}}',
+    '{{PUBLIC_TEMPLATE_SHA}}',
+    '{{PUBLIC_SYNCED_AT}}',
+    '{{LANE_GAME_HREF}}',
+    '{{BETA_BUILD_HREF}}',
+    '{{LANE_RELEASE_DASHBOARD_HREF}}',
+    '{{LANE_CONFORMANCE_DASHBOARD_HREF}}',
+    '{{LANE_CONFORMANCE_DATA_HREF}}',
+    '{{LANE_PROJECT_GUIDE_HREF}}',
+    '{{LANE_APPLICATION_GUIDE_HREF}}',
+    '{{LANE_PLATINUM_GUIDE_HREF}}',
+    '{{PUBLIC_FOOTER_NOTE}}',
+    '{{PUBLIC_RELEASE_GATE_CARDS}}',
+    '{{PUBLIC_CONFORMANCE_SCORE_CHART}}',
+    '{{PUBLIC_RESOURCE_SUMMARY_CARDS}}',
+    '{{PUBLIC_INVESTMENT_QUEUE}}',
+    '{{PUBLIC_INGESTION_OVERVIEW_CARDS}}',
+    '{{PUBLIC_GAME_CATALOG_CARDS}}'
+  ];
   for(const token of requiredTokens){
     if(!template.includes(token)){
       throw new Error(`Publish preflight failed: ${templatePath} is missing required token ${token}. Restore the current public template before publishing production.`);
@@ -209,6 +350,37 @@ function checkReleaseConformanceDocs(){
   }
 }
 
+function checkStrategicBetaReviewDoc(){
+  const reviewPath = path.join(ROOT, 'STRATEGIC_BETA_REVIEW.md');
+  const review = loadText(reviewPath);
+  const requiredText = [
+    '# Strategic Beta Review',
+    '## Trigger',
+    '## Current Assessment',
+    '## Beta-Readiness Standard',
+    '## Review Log',
+    'after every major hosted `/beta` push'
+  ];
+  for(const text of requiredText){
+    if(!review.includes(text)){
+      throw new Error(`Publish preflight failed: ${reviewPath} is missing "${text}". Refresh the strategic beta review before publishing.`);
+    }
+  }
+}
+
+function checkDocumentationFreshness(){
+  try{
+    execFileSync('node', [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')], {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: documentation freshness check failed.\n${stderr || stdout || err.message}`);
+  }
+}
+
 function checkConformanceDashboardArtifacts(cfg){
   const htmlPath = path.join(cfg.dir, 'conformance-dashboard.html');
   const dataPath = path.join(cfg.dir, 'conformance-dashboard-data.json');
@@ -245,6 +417,73 @@ function checkConformanceDashboardArtifacts(cfg){
   const assetHtml = loadText(assetHtmlPath);
   if(!assetHtml.includes('data-tab="ingestion"') || !assetHtml.includes('../release-dashboard.html')){
     throw new Error(`Publish preflight failed: ${assetHtmlPath} does not look like the release-lane conformance dashboard asset.`);
+  }
+}
+
+function loadUserVisibleDocs(cfg){
+  const docs = new Map();
+  for(const file of USER_VISIBLE_DOC_FILES){
+    const full = path.join(cfg.dir, file);
+    if(fs.existsSync(full)){
+      docs.set(file, loadText(full));
+    }
+  }
+  return docs;
+}
+
+function checkDocumentationVisibility(cfg){
+  const docs = loadUserVisibleDocs(cfg);
+  for(const item of USER_VISIBLE_SECTIONS){
+    const html = docs.get(item.file);
+    if(!html){
+      throw new Error(`Publish preflight failed: missing user-visible documentation surface ${path.join(cfg.dir, item.file)}. ${cfg.nextStep}`);
+    }
+    for(const text of item.requiredText){
+      if(!html.includes(text)){
+        throw new Error(`Publish preflight failed: ${path.join(cfg.dir, item.file)} is missing the user-visible documentation section "${text}". Run npm run build after refreshing the generated documentation manifests.`);
+      }
+    }
+  }
+
+  const visibleCorpus = Array.from(docs.values()).join('\n');
+  for(const family of REQUIRED_VISIBLE_ARTIFACT_FAMILIES){
+    const full = path.join(ROOT, family.path);
+    if(!fs.existsSync(full)) continue;
+    if(!visibleCorpus.includes(family.path)){
+      throw new Error(
+        `Publish preflight failed: ${family.path} exists but is not referenced in the generated user-visible docs. ` +
+        `This artifact family represents ${family.meaning}; add it to the project/application guide, conformance dashboard, release dashboard, or public project page before publishing.`
+      );
+    }
+  }
+}
+
+function checkPublicProjectPageArtifact(cfg){
+  const htmlPath = path.join(cfg.dir, 'public-project-page.html');
+  const buildInfo = loadJson(cfg.buildInfo);
+  const html = loadText(htmlPath);
+  const required = [
+    'Aurora Galactica on Platinum',
+    'Conformance system',
+    'Open conformance dashboard',
+    'Project state and conformance program',
+    'Classic arcade ingestion framework',
+    'Open generated release conformance report',
+    'Open generated reference media inventory',
+    'Release Location',
+    'Build Timestamp',
+    'Conformance readout',
+    'Value versus compute',
+    'Reference ingestion',
+    'live conformance dashboard game profiles',
+    'Strategic beta review',
+    buildInfo.label,
+    buildInfo.commit
+  ];
+  for(const text of required){
+    if(!html.includes(text)){
+      throw new Error(`Publish preflight failed: ${htmlPath} is missing "${text}". Run npm run build or re-promote the lane after refreshing the public project page template.`);
+    }
   }
 }
 
@@ -353,8 +592,12 @@ function main(){
   checkGitClean();
   checkSourceDocs();
   checkReleaseConformanceDocs();
+  checkStrategicBetaReviewDoc();
+  checkDocumentationFreshness();
   checkArtifacts(cfg);
   checkConformanceDashboardArtifacts(cfg);
+  checkDocumentationVisibility(cfg);
+  checkPublicProjectPageArtifact(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production'){
@@ -390,5 +633,9 @@ module.exports = {
   checkProductionReleaseDocs,
   checkProductionCheckoutCurrent,
   checkBetaCheckoutCurrent,
-  checkPublicProjectTemplate
+  checkPublicProjectTemplate,
+  checkPublicProjectPageArtifact,
+  checkDocumentationVisibility,
+  checkStrategicBetaReviewDoc,
+  checkDocumentationFreshness
 };

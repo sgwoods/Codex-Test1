@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-promotion-precheck",
+  "generatedAt": "2026-05-11T18:01:34.717Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "23c856ad",
+  "dirty": true,
+  "cue": "playerHit",
+  "problem": "Focused audio cue sweeps can find local candidates that look promising in isolation, then fail once placed in the full Aurora theme and event-gap scoring context.",
+  "strategy": "Replace one cue in the latest full-theme metrics with a representative candidate capture, run the normal event-gap scorer against that synthetic theme, and block runtime promotion unless the cue and aggregate guardrails improve.",
+  "successMeasure": "A candidate may be promoted only when focused keeper gates, full-theme cue gap, worst-segment risk, theme average risk, and semantic score all hold or improve.",
+  "candidate": {
+    "id": "segmented-loss-body-dip",
+    "risk10": 3.52,
+    "worstSegmentRisk10": 7.29,
+    "keeperRead": "segment risk improved only -0.06; loss composite role gate failed; loss composite score 6.56 < 7.2",
+    "stability": {
+      "repetitions": 3,
+      "riskStd": 0.029,
+      "durationGapStdSeconds": 0,
+      "centroidGapStdHz": 45.8,
+      "zeroCrossingGapStdPerSecond": 119.4,
+      "bandShapeGapStd": 0.0163,
+      "decayRatioGapStd": 0.104,
+      "rmsGapStd": 0.0141
+    },
+    "spec": {
+      "cooldownMs": 1800,
+      "scheduledDuration": 0.97,
+      "layers": [
+        {
+          "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+          "referenceVolume": 1,
+          "clipStart": 0.02,
+          "clipDuration": 0.39,
+          "delay": 0
+        },
+        {
+          "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+          "referenceVolume": 0.82,
+          "clipStart": 0.459,
+          "clipDuration": 0.33,
+          "delay": 0.45
+        },
+        {
+          "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+          "referenceVolume": 0.96,
+          "clipStart": 0.858,
+          "clipDuration": 0.13,
+          "delay": 0.84
+        }
+      ]
+    }
+  },
+  "decision": {
+    "status": "precheck-reject",
+    "allowRuntimeTrial": false,
+    "promoteRuntime": false,
+    "runtimeValidationRequired": true,
+    "blockers": [
+      "No Ship Loss Body candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+    ],
+    "wins": [
+      "Full-theme cue gap improves by 2.6/10."
+    ],
+    "currentCueRow": {
+      "id": "ship-loss",
+      "label": "Ship Loss",
+      "cue": "playerHit",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "status": "active-segment-detected",
+      "eventCritical": true,
+      "gapRisk10": 6.19,
+      "durationGapSeconds": 0.572,
+      "centroidGapHz": 763.2,
+      "zeroCrossingGapPerSecond": 1114.4,
+      "rmsGap": 0.1077,
+      "bestReferenceSegmentScore": 0.41,
+      "bestReferenceSegment": {
+        "startSeconds": 0,
+        "endSeconds": 1.54,
+        "score": 0.41
+      },
+      "segmentRoleComparisonCount": 3,
+      "worstSegmentRole": "tail",
+      "worstSegmentRisk10": 7.37,
+      "worstSegmentInterpretation": "tail timbre is the leading gap: band shape/rolloff differ from the reference segment.",
+      "worstSegmentDelta": {
+        "duration_s": 0.04,
+        "spectral_centroid_hz": 941.8,
+        "zero_crossings_per_s": 1687.7,
+        "rms": 0.2983,
+        "spectral_spread_hz": 438.7,
+        "spectral_rolloff_85_hz": 1793.8,
+        "spectral_flatness": 0.1293,
+        "band_shape_distance": 0.3357,
+        "attack_peak_position": 0.688,
+        "decay_ratio": 0.19,
+        "envelope_contrast": 0.07,
+        "burst_share": 0.171
+      },
+      "referenceSegmentationStatus": "curated-reference-segmentation",
+      "referenceSegmentationConfidence": "medium-high",
+      "referenceSegmentationResolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+      "referenceSegmentationSource": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
+      "semanticClass": "player-ship-lost",
+      "playerMeaning": "The player lost a ship; the cue should be unmistakable and synchronized with death feedback.",
+      "distinctFrom": [
+        "enemyBoom",
+        "bossBoom"
+      ],
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high",
+      "sharedReferenceClipCount": 0,
+      "semanticScore10": 9.4,
+      "semanticRecommendation": "Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.",
+      "sourceReferenceClipCount": 1,
+      "sourceReferenceWindowCount": 1,
+      "hasDistinctReferenceWindow": false,
+      "recommendation": "Tune the tail segment first: tail timbre is the leading gap: band shape/rolloff differ from the reference segment."
+    },
+    "simulatedCueRow": {
+      "id": "ship-loss",
+      "label": "Ship Loss (promotion precheck)",
+      "cue": "playerHit",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "status": "active-segment-detected",
+      "eventCritical": true,
+      "gapRisk10": 3.59,
+      "durationGapSeconds": 0.002,
+      "centroidGapHz": 631.8,
+      "zeroCrossingGapPerSecond": 393.4,
+      "rmsGap": 0.0452,
+      "bestReferenceSegmentScore": 0.652,
+      "bestReferenceSegment": {
+        "startSeconds": 0.1,
+        "endSeconds": 1.07,
+        "score": 0.652
+      },
+      "segmentRoleComparisonCount": 3,
+      "worstSegmentRole": "body",
+      "worstSegmentRisk10": 7.4,
+      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
+      "worstSegmentDelta": {
+        "duration_s": 0.219,
+        "spectral_centroid_hz": 870.1,
+        "zero_crossings_per_s": 1208,
+        "rms": 0.1573,
+        "spectral_spread_hz": 411.6,
+        "spectral_rolloff_85_hz": 2018.6,
+        "spectral_flatness": 0.0844,
+        "band_shape_distance": 0.3351,
+        "attack_peak_position": 0.387,
+        "decay_ratio": 0.193,
+        "envelope_contrast": 0.097,
+        "burst_share": 0.104
+      },
+      "referenceSegmentationStatus": "curated-reference-segmentation",
+      "referenceSegmentationConfidence": "medium-high",
+      "referenceSegmentationResolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+      "referenceSegmentationSource": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
+      "semanticClass": "player-ship-lost",
+      "playerMeaning": "The player lost a ship; the cue should be unmistakable and synchronized with death feedback.",
+      "distinctFrom": [
+        "enemyBoom",
+        "bossBoom"
+      ],
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high",
+      "sharedReferenceClipCount": 0,
+      "semanticScore10": 9.4,
+      "semanticRecommendation": "Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.",
+      "sourceReferenceClipCount": 1,
+      "sourceReferenceWindowCount": 1,
+      "hasDistinctReferenceWindow": false,
+      "recommendation": "Tune the body segment first: body timing/duration differs enough to tune event pacing before timbre."
+    },
+    "summaryDelta": {
+      "averageWorstSegmentRisk10": 0.01,
+      "highestRiskCue": "playerHit -> stagePulse",
+      "highestRisk10": -1.44,
+      "semanticAverageScore10": 0
+    }
+  },
+  "source": {
+    "candidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-hit-focus.json",
+    "candidateFocusMetrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-11-23c856ad-dirty-audio-focus-175606/ship-loss/metrics.json",
+    "themeMetrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-11-main-23c856ad-175746/metrics.json",
+    "syntheticThemeMetrics": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-11-23c856ad-dirty-180134-playerHit/candidate-theme-metrics.json",
+    "simulatedEventGap": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-11-23c856ad-dirty-180134-playerHit/event-gap/latest.json",
+    "currentEventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
+  },
+  "nextStep": "Do not promote playerHit; use this precheck evidence to pivot toward a stronger candidate family or the current highest-risk cue (playerHit)."
+}

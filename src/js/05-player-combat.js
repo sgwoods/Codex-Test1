@@ -72,9 +72,7 @@ function resolvePlayerBulletHit(i,seg){
      holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
      e.hitT=Math.max(e.hitT,bossTiming?.hitFlashDuration??.46);
      S.shake=Math.max(S.shake,.22);
-     ex(e.x,e.y,20,'#fff4a8');
-     ex(e.x,e.y,10,'#ff8cd7');
-     ex(e.x,e.y,6,'#d8f2ff');
+     bossDamageFx(e.x,e.y);
      sfx.bossHit();
     }else sfx.hit();
    }

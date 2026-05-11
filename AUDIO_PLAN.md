@@ -122,9 +122,19 @@ Primary family references:
 
 ## Recommended Near-Term Audio Strategy
 
-1. Keep the current synthesized `sfx` implementation as the shipping baseline.
+1. Keep the current synthesized `sfx` implementation as the shipping baseline
+   unless a measured, reference-backed sample window improves player clarity
+   without cue-alignment regression.
 2. Use the reference manifest above to define Aurora `audioProfile` mappings.
-3. Introduce sample-backed replacements gradually for the highest-value events:
+3. Preserve full reference phrases when the gameplay window can support them.
+   The latest `stageTransition` pass widened the inter-level phrase to 2.8s
+   after local playtest evidence showed the previous excerpt felt visibly cut
+   off.
+4. Treat player loss and game over as a critical audio lifecycle: the cue must
+   play, be logged before session export, and remain audible in captured
+   evidence. The `gameOver` reference window now skips the silent lead-in and
+   the recorder keeps a tail after final ship loss.
+5. Introduce sample-backed replacements gradually for the highest-value events:
    - `boot`
    - `credit`
    - `capture_beam`
@@ -133,9 +143,9 @@ Primary family references:
    - `fighter_destroyed`
    - `enemy_destroyed`
    - `extra_life`
-4. Keep stage-band and branded-world themes pack-owned rather than hardcoded in
+6. Keep stage-band and branded-world themes pack-owned rather than hardcoded in
    the runtime.
-5. When a `Galaxian`-like sibling pack is introduced, define a separate
+7. When a `Galaxian`-like sibling pack is introduced, define a separate
    `audioProfile` rather than sharing Aurora’s full palette.
 
 `Galaxy Guardians` now has an initial pack-owned sound cue catalog for the

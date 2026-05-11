@@ -1,0 +1,24 @@
+{
+  "name": "stage7-challenge-cross-sweep",
+  "seed": 7007,
+  "duration": 24,
+  "config": {
+    "stage": 7,
+    "ships": 4,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.55, "action": "down", "code": "ArrowRight" },
+    { "t": 2.4, "action": "up", "code": "ArrowRight" },
+    { "t": 2.41, "action": "down", "code": "ArrowLeft" },
+    { "t": 5.1, "action": "up", "code": "ArrowLeft" },
+    { "t": 5.11, "action": "down", "code": "ArrowRight" },
+    { "t": 8.2, "action": "up", "code": "ArrowRight" },
+    { "t": 8.21, "action": "down", "code": "ArrowLeft" },
+    { "t": 12.0, "action": "up", "code": "ArrowLeft" },
+    { "t": 12.01, "action": "down", "code": "ArrowRight" },
+    { "t": 16.2, "action": "up", "code": "ArrowRight" },
+    { "t": 20.5, "action": "up", "code": "Space" }
+  ]
+}

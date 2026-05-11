@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "status": "deterministic-harness-capture",
+  "generated_by": "tools/harness/run-aurora-evidence-window-cycle.js",
+  "window_id": "challenge-stage-boss-led-loop",
+  "scenario": "stage15-challenge-boss-led-loop",
+  "scenario_path": "tools/harness/scenarios/stage15-challenge-boss-led-loop.json",
+  "seed": 15015,
+  "duration_s": 24,
+  "config": {
+    "stage": 15,
+    "ships": 5,
+    "challenge": true
+  },
+  "output_root": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop",
+  "final_state": {
+    "started": 1,
+    "paused": 0,
+    "stage": 16,
+    "score": 3270,
+    "lives": 4,
+    "challenge": false,
+    "recording": false,
+    "seed": 15015,
+    "simT": 24,
+    "stageClock": 7.75,
+    "persona": null,
+    "atmosphere": {
+      "id": "aurora-crown",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "starfield": {
+        "id": "aurora-crown-stars",
+        "count": 84,
+        "alphaMin": 0.3,
+        "alphaMax": 0.68
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-crown",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "crown-aurora",
+      "atmosphereTheme": "aurora-crown",
+      "backgroundMode": "aurora-borealis"
+    },
+    "audioCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-crown",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 13,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 16,
+      "challenge": false,
+      "at": 2.082
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "trace_summary": {
+    "sample_count": 25,
+    "player_x_min": 9,
+    "player_x_max": 271,
+    "player_x_range": 262,
+    "max_attackers": 8,
+    "max_enemy_bullets": 3,
+    "max_player_bullets": 2,
+    "max_challenge_enemies": 40,
+    "final_score": 3270,
+    "final_lives": 4,
+    "final_stage": 16,
+    "final_challenge": false
+  },
+  "event_count": 163,
+  "promoted_event_count": 100,
+  "artifacts": {
+    "contact_sheet_1s": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/contact-sheet-1s.png",
+    "still_start": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/still-start.png",
+    "still_mid": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/still-mid.png",
+    "still_end": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/frames/still-end.png",
+    "trace_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/trace/trace.json",
+    "trace_csv": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/trace/trace.csv",
+    "trace_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/trace/player-pressure.svg",
+    "audio_timeline_svg": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/audio/audio-cue-timeline.svg",
+    "audio_timeline_json": "reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-boss-led-loop/audio/audio-cue-timeline.json"
+  }
+}

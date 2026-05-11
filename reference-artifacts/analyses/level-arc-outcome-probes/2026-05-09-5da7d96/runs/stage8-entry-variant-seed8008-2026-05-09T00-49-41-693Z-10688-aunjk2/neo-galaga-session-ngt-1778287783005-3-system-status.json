@@ -1,0 +1,958 @@
+{
+  "generatedAt": "2026-05-09T00:49:43.065Z",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.3.0",
+    "versionLine": "1.3.0.1",
+    "label": "1.3.0.1+build.649.sha.5da7d96.dirty",
+    "commit": "5da7d965cc0f3849c5608832682579849baa032f",
+    "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+    "dirty": true,
+    "released": "May 08 2026, 8:43 PM EDT",
+    "state": "codex/macbook-pro-stage12-level-arc-conformance@5da7d96 dirty",
+    "releaseChannel": "development",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.3.0",
+      "releaseTrack": "active-candidate",
+      "compatibility": "platinum-1.3",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract."
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.3.0",
+        "versionLine": "1.3.0",
+        "releaseTrack": "primary-candidate",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.3",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "non-production-playable-preview",
+        "platformCompatibility": "platinum-1.3",
+        "launchPolicy": "development-and-beta-only"
+      }
+    ]
+  },
+  "location": "http://127.0.0.1:56521/index.html",
+  "game": {
+    "stage": 8,
+    "score": 700,
+    "lives": 3,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "attackCharge",
+      "atmosphereId": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 8,
+      "challenge": false,
+      "at": 0.648
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-death.m4a",
+      "lastLoaded": "assets/reference-audio/galaga3-zako.m4a",
+      "lastStarted": "assets/reference-audio/galaga3-zako.m4a",
+      "lastError": "",
+      "activeCount": 6
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue attackCharge (galaga-reference-assets) · requested galaga3-death.m4a · loaded galaga3-zako.m4a · started galaga3-zako.m4a · active 6"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+3.167s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 3.167,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 8
+      }
+    },
+    {
+      "at": "+3.533s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 3.533,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+3.783s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 3.783,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+3.817s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 3.817,
+        "type": "enemy_bullet_fired",
+        "stage": 8,
+        "kind": "formation",
+        "x": 160.7,
+        "y": 88.33,
+        "vx": 1.2,
+        "vy": 186,
+        "bulletLane": 5,
+        "playerLane": 0,
+        "id": 693073300,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 4,
+        "row": 3,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+4.017s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 4.017,
+        "type": "enemy_attack_start",
+        "stage": 8,
+        "mode": "dive",
+        "x": 88.19,
+        "y": 28.12,
+        "originLane": 3,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 332208951,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 0,
+        "row": 0,
+        "lane": 3,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 0,
+        "pattern": "mid-run-flank-dive"
+      }
+    },
+    {
+      "at": "+4.100s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 4.1,
+        "type": "enemy_lower_field",
+        "stage": 8,
+        "y": 227.7,
+        "stageClock": 4.1,
+        "playerLane": 0,
+        "id": 448066182,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 8,
+        "row": 1,
+        "lane": 1,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+4.167s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 4.167,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+4.250s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 4.25,
+        "type": "enemy_killed",
+        "points": 160,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 448066182,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 8,
+        "row": 1,
+        "lane": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+4.400s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 4.4,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      }
+    },
+    {
+      "at": "+4.417s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 4.417,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+4.450s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 4.45,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+4.667s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 4.667,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 47.11,
+        "y": 322,
+        "shotXs": [
+          47.11
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+4.950s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 4.95,
+        "type": "enemy_attack_start",
+        "stage": 8,
+        "mode": "dive",
+        "x": 225.13,
+        "y": 26.32,
+        "originLane": 7,
+        "targetLane": 4,
+        "playerLane": 4,
+        "id": 896205674,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 9,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false,
+        "targetX": 116.49,
+        "scripted": 0,
+        "pattern": "mid-run-flank-dive"
+      }
+    },
+    {
+      "at": "+5.050s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 5.05,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 141.27,
+        "y": 322,
+        "shotXs": [
+          141.27
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+5.117s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 5.117,
+        "type": "enemy_lower_field",
+        "stage": 8,
+        "y": 223.79,
+        "stageClock": 5.117,
+        "playerLane": 5,
+        "id": 332208951,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 0,
+        "row": 0,
+        "lane": 2,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+5.133s",
+      "level": "info",
+      "action": "ship_lost",
+      "message": "ship_lost",
+      "data": {
+        "t": 5.133,
+        "type": "ship_lost",
+        "stage": 8,
+        "score": 550,
+        "livesBefore": 4,
+        "stageClock": 5.133,
+        "attackers": 2,
+        "enemyBullets": 0,
+        "enemies": 33,
+        "playerX": 161.94,
+        "playerY": 340,
+        "playerLane": 5,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_bullet",
+        "bulletKind": "formation",
+        "sourceId": 693073300,
+        "sourceType": "bee",
+        "sourceDive": 0,
+        "bulletX": 162.3,
+        "bulletY": 336.33,
+        "bulletLane": 5,
+        "bulletVx": 1.2,
+        "bulletVy": 186
+      }
+    },
+    {
+      "at": "+5.133s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 5.133,
+        "type": "audio_cue",
+        "cue": "playerHit",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 8
+      }
+    },
+    {
+      "at": "+5.467s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 5.467,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 642913162,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 3,
+        "row": 3,
+        "lane": 5,
+        "carry": false
+      }
+    },
+    {
+      "at": "+5.917s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 5.917,
+        "type": "enemy_bullet_fired",
+        "stage": 8,
+        "kind": "dive",
+        "x": 173.03,
+        "y": 225.81,
+        "vx": -3.6,
+        "vy": 213,
+        "bulletLane": 6,
+        "playerLane": 5,
+        "id": 896205674,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 9,
+        "row": 0,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+6.000s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 6,
+        "type": "enemy_lower_field",
+        "stage": 8,
+        "y": 224.69,
+        "stageClock": 6,
+        "playerLane": 5,
+        "id": 896205674,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 9,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+6.467s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 6.467,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 166.07,
+        "y": 322,
+        "shotXs": [
+          166.07
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+6.717s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 6.717,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 228.07,
+        "y": 322,
+        "shotXs": [
+          228.07
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+6.883s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 6.883,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 693073300,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 4,
+        "row": 3,
+        "lane": 5,
+        "carry": false
+      }
+    },
+    {
+      "at": "+6.967s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 6.967,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+7.133s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 7.133,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 611621577,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 8,
+        "row": 3,
+        "lane": 7,
+        "carry": false
+      }
+    },
+    {
+      "at": "+7.217s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 7.217,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+7.600s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 7.6,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+7.700s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 7.7,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      }
+    },
+    {
+      "at": "+7.850s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 7.85,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+7.883s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 7.883,
+        "type": "enemy_attack_start",
+        "stage": 8,
+        "mode": "dive",
+        "x": 103.63,
+        "y": 28.46,
+        "originLane": 3,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 797430340,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 1,
+        "row": 0,
+        "lane": 3,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 0,
+        "pattern": "mid-run-flank-dive"
+      }
+    },
+    {
+      "at": "+8.233s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 8.233,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+8.400s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 8.4,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+8.600s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 8.6,
+        "type": "enemy_bullet_fired",
+        "stage": 8,
+        "kind": "dive",
+        "x": 176.77,
+        "y": 159.31,
+        "vx": 12.14,
+        "vy": 213,
+        "bulletLane": 6,
+        "playerLane": 9,
+        "id": 797430340,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 1,
+        "row": 0,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+8.617s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 8.617,
+        "type": "enemy_bullet_fired",
+        "stage": 8,
+        "kind": "formation",
+        "x": 99.75,
+        "y": 89.34,
+        "vx": 1.22,
+        "vy": 186,
+        "bulletLane": 3,
+        "playerLane": 9,
+        "id": 955945349,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 0,
+        "row": 3,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+8.817s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 8.817,
+        "type": "enemy_attack_start",
+        "stage": 8,
+        "mode": "dive",
+        "x": 147.35,
+        "y": 52.66,
+        "originLane": 5,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 741957361,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 3,
+        "row": 2,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 0,
+        "pattern": "standard-dive"
+      }
+    },
+    {
+      "at": "+8.967s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 8.967,
+        "type": "enemy_lower_field",
+        "stage": 8,
+        "y": 225.16,
+        "stageClock": 8.967,
+        "playerLane": 9,
+        "id": 797430340,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 1,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+9.683s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 9.683,
+        "type": "enemy_bullet_fired",
+        "stage": 8,
+        "kind": "formation",
+        "x": 130.13,
+        "y": 89.56,
+        "vx": -1.4,
+        "vy": 186,
+        "bulletLane": 4,
+        "playerLane": 9,
+        "id": 514785632,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 2,
+        "row": 3,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+9.750s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 9.75,
+        "type": "enemy_attack_start",
+        "stage": 8,
+        "mode": "dive",
+        "x": 210.18,
+        "y": 25.75,
+        "originLane": 7,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 253759458,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 8,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 0,
+        "pattern": "mid-run-flank-dive"
+      }
+    },
+    {
+      "at": "+9.783s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 9.783,
+        "type": "enemy_lower_field",
+        "stage": 8,
+        "y": 224.13,
+        "stageClock": 9.783,
+        "playerLane": 9,
+        "id": 741957361,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 3,
+        "row": 2,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+10.000s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 10,
+        "type": "harness_stop",
+        "label": "stage8-entry-variant"
+      }
+    }
+  ]
+}

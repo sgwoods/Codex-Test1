@@ -27,11 +27,16 @@ It is centered on:
 - keeping the shipped line trustworthy
 - improving fidelity where the game still feels less authentic than the arcade
   reference
+- treating conformance as a standing project layer with its own ingestion,
+  harnessing, dashboard, and resource-economics loop
 - maturing Aurora as a product with durable pilot, replay, and release
   operations
 - growing Platinum into a host for more than one serious game experience
 - making release identity, testing, and tracking separable across the
   integrated bundle, the platform, and each game
+
+The maintained top-level explanation of this program is
+[PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
 
 ## Near-Term Release Direction
 
@@ -43,6 +48,26 @@ Goals:
   trustworthy after the fidelity-and-second-cabinet release
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
+
+### Shape `1.3.0.1` Hosted-Dev Review
+
+The next practical artifact should be a fourth-segment hosted-dev increment:
+
+- `1.3.0.1`
+
+This should collect the current documentation/dashboard/conformance process
+work plus one coherent user-visible feel improvement. It is a review increment,
+not a beta promise by itself.
+
+Recommended gate:
+
+- keep local and hosted `/dev` aligned only after the bundle is coherent
+- show the conformance dashboard and public project page with current short,
+  medium, and long-term plans
+- require at least one measurable user-facing improvement or a clearly
+  documented negative result that changes the next investment decision
+- keep hosted `/beta` unchanged until the improvement is strong enough to
+  explain to a player, not only to a developer
 
 ### Pick Up `1.4.0`
 
@@ -59,8 +84,10 @@ Reason:
 
 That pickup should focus on:
 
-- movement fidelity
-- audio identity polish
+- audio identity, event feedback, and cue-contract runtime promotion only when
+  measured guards pass
+- alien entry, challenge-stage novelty, and level-arc progression
+- movement fidelity as a guardrail plus targeted browser/manual review
 - gameplay trust fixes
 - platform-contract follow-through after the first layered release/version pass
 - level-by-level expansion planning
@@ -86,6 +113,9 @@ Current decision:
   second real game
 - reserve `2.0` for the first genuinely multi-game Platinum milestone
 - treat `1.4` as the first post-ship arcade-depth and platform-boundary family
+- make conformance-program maturity a release asset: every major pickup should
+  improve either the game, the ingestion/scoring system, the platform substrate,
+  or the resource-economics loop
 - promote level-by-level arcade depth to the next major product pillar after
   the `1.3.0` release
 - make shared gameplay-video publishing an early roadmap capability
@@ -96,9 +126,13 @@ Current decision:
 
 Once `1.3.0` is out, the roadmap pickup should be:
 
-- `1.4.0` for level-by-level arcade depth plus platform-contract cleanup
-- `1.5.0` for shared-video evidence and flight-recorder publishing
-- `1.6.0` for pilot-facing shell, message, and cabinet-surface polish
+- Short term: `1.3.0.1` for hosted-dev review of the current conformance
+  dashboard/docs plus one measurable feel bundle.
+- Medium term: `1.4.0` for level-by-level arcade depth plus
+  platform-contract cleanup.
+- Longer term: `1.5.0` for shared-video evidence and flight-recorder
+  publishing, `1.6.0` for pilot-facing shell/message/cabinet-surface polish,
+  and `2.0` for a genuinely multi-game Platinum candidate.
 
 That sequencing should be treated as intentional carry-forward planning, not
 something to rediscover after the release is already shipped.
@@ -114,19 +148,26 @@ Current conformance read:
 
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
-- overall Aurora quality is `9.1/10` across eleven scored categories
-- audio identity and cue alignment is the weakest category at `6.3/10`
+- overall Aurora quality is `9.2/10` across the current scored categories
+- audio identity and cue alignment is the weakest category at `7.1/10`; the
+  process is stronger than the runtime score, with cue-contract readiness at
+  `9.09/10`, semantic event score at `9.78/10`, and acoustic event score at
+  `6.07/10`
 - level arc and encounter shape is now a high-priority scored category at
-  `8.4/10`, backed by six-window stage-signature distance scoring. The
-  stage-signature read is now `6.4/10`; stage-14 escort-role variation and
-  stage-8 flank grammar widened the former late-run, mid-run, and same-band
-  regular repetition gaps. The pressure harness now distinguishes exact source
-  replay, same-window collision pressure, and blocking pre-window losses; exact
-  Stage 4 replay coverage is `1/3`, with the butterfly lane-2 window still the
-  cleanest next tuning target
+  `8.8/10`, backed by level-arc and stage-signature evidence. Remaining
+  opportunity is in long-run non-repetition, exact pressure replay, and
+  challenge/reward texture
 - player movement conformance now reads `10/10`; the prior `8.0/10` gap was
   traced to harness recenter input suppression, not to gameplay movement
   constants
+- latest audio investment produced runtime reliability, challenge-entry UX, and
+  reusable evidence: normal inter-level/result phrases are less clipped,
+  `challengeTransition` now uses a measured `1.6s` phrase with preserved
+  tail-past-spawn budget, final loss clears active transition beds before
+  game-over ambience, and a new runtime-recovery harness verifies that critical
+  reference cues actually start. It did not promote `stagePulse`; synthesized
+  stability-first and direct reference-window sweeps both rejected promotion,
+  so the next audio work should use a lower-variance pressure-bed generator.
 - the next major Aurora quality cycle is tracked in
   [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md),
   with a baseline artifact at
@@ -142,7 +183,7 @@ Current conformance read:
   mixed-source cue candidates, component sprite targets, waveform/spectrogram
   previews, and the reusable Platinum audio conformance lab output, while
   stage-rank gates require denser later-wave pressure
-- current cluster targets are `9.1/10` for Aurora and `7.7/10` reference /
+- current cluster targets are `9.2/10` for Aurora and `7.7/10` reference /
   `6.9/10` playtest for Guardians in the `1.3` Fidelity and Trust lane, rising
   toward `9.5/10` and `9.0/10` reference / `8.8/10` playtest by the `2.0`
   multi-game Platinum candidate lane

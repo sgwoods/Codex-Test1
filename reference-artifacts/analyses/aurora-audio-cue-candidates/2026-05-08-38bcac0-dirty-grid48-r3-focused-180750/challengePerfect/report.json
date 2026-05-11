@@ -1,0 +1,1267 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-cue-candidate-loop",
+  "generatedAt": "2026-05-08T18:07:50.760Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "38bcac0",
+  "dirty": true,
+  "cue": "challengePerfect",
+  "repetitions": 3,
+  "candidateFilter": [
+    "grid-s-s49-v50-tv145-td210-d198",
+    "grid-t-s51-v46-tv145-td210-d198",
+    "grid-t-s55-v46-tv105-td210-d198",
+    "grid-t-s55-v50-tv85-td210-d198",
+    "thin-bright-square-top"
+  ],
+  "generator": {
+    "family": "quiet-held-grid",
+    "limit": 48,
+    "selectedCandidates": 4,
+    "controls": "Use --grid-limit=N for bounded parametric generation and --candidate-ids for focused stability reruns."
+  },
+  "problem": "Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.",
+  "strategy": "Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift.",
+  "successMeasure": "A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS gap, and keep active duration within 0.08s of the reference.",
+  "source": {
+    "comparisonSet": "challenge-perfect-compare",
+    "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+    "referenceWindow": {
+      "startSeconds": 0,
+      "endSeconds": 0.48,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+      "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-38bcac0-dirty-grid48-r3-focused-180750/challengePerfect/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-38bcac0-dirty-grid48-r3-focused-180750/challengePerfect/metrics.json"
+  },
+  "sampleCandidates": [
+    {
+      "id": "thin-bright-square-top-r03",
+      "label": "Thin bright square top r3",
+      "baseLabel": "Thin bright square top",
+      "repetition": 3,
+      "generated": false,
+      "generator": null,
+      "risk10": 2.92,
+      "riskBreakdown": {
+        "duration": 0,
+        "centroid": 1.283,
+        "zeroCrossing": 0.228,
+        "rms": 0.94,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0,
+      "centroidGapHz": 611.1,
+      "zeroCrossingGapPerSecond": 260.5,
+      "rmsGap": 0.1164,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.8995,
+        "rms": 0.2585,
+        "spectral_centroid_hz": 1429,
+        "zero_crossings_per_s": 2516.7
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 611.1,
+        "zero_crossings_per_s": 260.5,
+        "rms": 0.1164
+      }
+    },
+    {
+      "id": "grid-t-s55-v50-tv85-td210-d198-r01",
+      "label": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21 r1",
+      "baseLabel": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21",
+      "repetition": 1,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.57915,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001554,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.005,
+          "toneVolume": 0.00085,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 2.97,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.388,
+        "zeroCrossing": 0.082,
+        "rms": 1.01,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 661,
+      "zeroCrossingGapPerSecond": 93.8,
+      "rmsGap": 0.1251,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.9424,
+        "rms": 0.2672,
+        "spectral_centroid_hz": 1379.1,
+        "zero_crossings_per_s": 2350
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 661,
+        "zero_crossings_per_s": 93.8,
+        "rms": 0.1251
+      }
+    },
+    {
+      "id": "baseline-current-r01",
+      "label": "Current Aurora baseline r1",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 1,
+      "generated": false,
+      "generator": null,
+      "risk10": 3.17,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.627,
+        "zeroCrossing": 0.214,
+        "rms": 0.839,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 774.9,
+      "zeroCrossingGapPerSecond": 244.3,
+      "rmsGap": 0.1039,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.7858,
+        "rms": 0.246,
+        "spectral_centroid_hz": 1265.2,
+        "zero_crossings_per_s": 2011.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 774.9,
+        "zero_crossings_per_s": 244.3,
+        "rms": 0.1039
+      }
+    },
+    {
+      "id": "baseline-current-r02",
+      "label": "Current Aurora baseline r2",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 2,
+      "generated": false,
+      "generator": null,
+      "risk10": 3.17,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.627,
+        "zeroCrossing": 0.214,
+        "rms": 0.839,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 774.9,
+      "zeroCrossingGapPerSecond": 244.3,
+      "rmsGap": 0.1039,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.7858,
+        "rms": 0.246,
+        "spectral_centroid_hz": 1265.2,
+        "zero_crossings_per_s": 2011.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 774.9,
+        "zero_crossings_per_s": 244.3,
+        "rms": 0.1039
+      }
+    },
+    {
+      "id": "baseline-current-r03",
+      "label": "Current Aurora baseline r3",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 3,
+      "generated": false,
+      "generator": null,
+      "risk10": 3.17,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.627,
+        "zeroCrossing": 0.214,
+        "rms": 0.839,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 774.9,
+      "zeroCrossingGapPerSecond": 244.3,
+      "rmsGap": 0.1039,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.7858,
+        "rms": 0.246,
+        "spectral_centroid_hz": 1265.2,
+        "zero_crossings_per_s": 2011.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 774.9,
+        "zero_crossings_per_s": 244.3,
+        "rms": 0.1039
+      }
+    },
+    {
+      "id": "grid-t-s55-v50-tv85-td210-d198-r02",
+      "label": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21 r2",
+      "baseLabel": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21",
+      "repetition": 2,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.57915,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001554,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.005,
+          "toneVolume": 0.00085,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.17,
+      "riskBreakdown": {
+        "duration": 0.039,
+        "centroid": 1.424,
+        "zeroCrossing": 0.475,
+        "rms": 0.756,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.111,
+      "centroidGapHz": 678.1,
+      "zeroCrossingGapPerSecond": 542.3,
+      "rmsGap": 0.0936,
+      "activeMetrics": {
+        "duration_s": 0.369,
+        "peak": 0.8571,
+        "rms": 0.2357,
+        "spectral_centroid_hz": 1362,
+        "zero_crossings_per_s": 1713.9
+      },
+      "comparison": {
+        "duration_s": 0.111,
+        "spectral_centroid_hz": 678.1,
+        "zero_crossings_per_s": 542.3,
+        "rms": 0.0936
+      }
+    },
+    {
+      "id": "thin-bright-square-top-r01",
+      "label": "Thin bright square top r1",
+      "baseLabel": "Thin bright square top",
+      "repetition": 1,
+      "generated": false,
+      "generator": null,
+      "risk10": 3.34,
+      "riskBreakdown": {
+        "duration": 0.049,
+        "centroid": 1.514,
+        "zeroCrossing": 0.185,
+        "rms": 1.116,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.14,
+      "centroidGapHz": 720.9,
+      "zeroCrossingGapPerSecond": 211.4,
+      "rmsGap": 0.1382,
+      "activeMetrics": {
+        "duration_s": 0.34,
+        "peak": 0.8286,
+        "rms": 0.2803,
+        "spectral_centroid_hz": 1319.2,
+        "zero_crossings_per_s": 2467.6
+      },
+      "comparison": {
+        "duration_s": 0.14,
+        "spectral_centroid_hz": 720.9,
+        "zero_crossings_per_s": 211.4,
+        "rms": 0.1382
+      }
+    },
+    {
+      "id": "grid-s-s49-v50-tv145-td210-d198-r02",
+      "label": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21 r2",
+      "baseLabel": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21",
+      "repetition": 2,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63445,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.00153,
+        "params": {
+          "wave": "sine",
+          "step": 0.049,
+          "volume": 0.005,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.38,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.765,
+        "zeroCrossing": 1.109,
+        "rms": 0.017,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 840.4,
+      "zeroCrossingGapPerSecond": 1267.3,
+      "rmsGap": 0.0021,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.4612,
+        "rms": 0.1442,
+        "spectral_centroid_hz": 1199.7,
+        "zero_crossings_per_s": 988.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 840.4,
+        "zero_crossings_per_s": 1267.3,
+        "rms": 0.0021
+      }
+    },
+    {
+      "id": "grid-t-s51-v46-tv145-td210-d198-r03",
+      "label": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21 r3",
+      "baseLabel": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21",
+      "repetition": 3,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.64125,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001478,
+        "params": {
+          "wave": "triangle",
+          "step": 0.051,
+          "volume": 0.0046,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.51,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.793,
+        "zeroCrossing": 1.187,
+        "rms": 0.039,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 853.9,
+      "zeroCrossingGapPerSecond": 1356.2,
+      "rmsGap": 0.0048,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.4814,
+        "rms": 0.1373,
+        "spectral_centroid_hz": 1186.2,
+        "zero_crossings_per_s": 900
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 853.9,
+        "zero_crossings_per_s": 1356.2,
+        "rms": 0.0048
+      }
+    },
+    {
+      "id": "grid-s-s49-v50-tv145-td210-d198-r03",
+      "label": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21 r3",
+      "baseLabel": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21",
+      "repetition": 3,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63445,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.00153,
+        "params": {
+          "wave": "sine",
+          "step": 0.049,
+          "volume": 0.005,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.58,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.793,
+        "zeroCrossing": 1.23,
+        "rms": 0.06,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 853.8,
+      "zeroCrossingGapPerSecond": 1406.2,
+      "rmsGap": 0.0074,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.5197,
+        "rms": 0.1495,
+        "spectral_centroid_hz": 1186.3,
+        "zero_crossings_per_s": 850
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 853.8,
+        "zero_crossings_per_s": 1406.2,
+        "rms": 0.0074
+      }
+    },
+    {
+      "id": "grid-t-s51-v46-tv145-td210-d198-r02",
+      "label": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21 r2",
+      "baseLabel": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21",
+      "repetition": 2,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.64125,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001478,
+        "params": {
+          "wave": "triangle",
+          "step": 0.051,
+          "volume": 0.0046,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.59,
+      "riskBreakdown": {
+        "duration": 0.011,
+        "centroid": 1.84,
+        "zeroCrossing": 1.254,
+        "rms": 0.009,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.03,
+      "centroidGapHz": 876,
+      "zeroCrossingGapPerSecond": 1432.9,
+      "rmsGap": 0.0011,
+      "activeMetrics": {
+        "duration_s": 0.51,
+        "peak": 0.4855,
+        "rms": 0.1432,
+        "spectral_centroid_hz": 1164.1,
+        "zero_crossings_per_s": 823.3
+      },
+      "comparison": {
+        "duration_s": 0.03,
+        "spectral_centroid_hz": 876,
+        "zero_crossings_per_s": 1432.9,
+        "rms": 0.0011
+      }
+    },
+    {
+      "id": "thin-bright-square-top-r02",
+      "label": "Thin bright square top r2",
+      "baseLabel": "Thin bright square top",
+      "repetition": 2,
+      "generated": false,
+      "generator": null,
+      "risk10": 3.61,
+      "riskBreakdown": {
+        "duration": 0,
+        "centroid": 1.663,
+        "zeroCrossing": 0.301,
+        "rms": 1.175,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0,
+      "centroidGapHz": 792,
+      "zeroCrossingGapPerSecond": 343.7,
+      "rmsGap": 0.1455,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.8847,
+        "rms": 0.2876,
+        "spectral_centroid_hz": 1248.1,
+        "zero_crossings_per_s": 1912.5
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 792,
+        "zero_crossings_per_s": 343.7,
+        "rms": 0.1455
+      }
+    },
+    {
+      "id": "grid-t-s55-v46-tv105-td210-d198-r03",
+      "label": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21 r3",
+      "baseLabel": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21",
+      "repetition": 3,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63405,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001486,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.0046,
+          "toneVolume": 0.00105,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.61,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.694,
+        "zeroCrossing": 1.269,
+        "rms": 0.154,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 806.5,
+      "zeroCrossingGapPerSecond": 1450.6,
+      "rmsGap": 0.0191,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.3539,
+        "rms": 0.123,
+        "spectral_centroid_hz": 1233.6,
+        "zero_crossings_per_s": 805.6
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 806.5,
+        "zero_crossings_per_s": 1450.6,
+        "rms": 0.0191
+      }
+    },
+    {
+      "id": "grid-s-s49-v50-tv145-td210-d198-r01",
+      "label": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21 r1",
+      "baseLabel": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21",
+      "repetition": 1,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63445,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.00153,
+        "params": {
+          "wave": "sine",
+          "step": 0.049,
+          "volume": 0.005,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.65,
+      "riskBreakdown": {
+        "duration": 0.042,
+        "centroid": 1.864,
+        "zeroCrossing": 1.238,
+        "rms": 0.036,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.12,
+      "centroidGapHz": 887.8,
+      "zeroCrossingGapPerSecond": 1414.5,
+      "rmsGap": 0.0045,
+      "activeMetrics": {
+        "duration_s": 0.6,
+        "peak": 0.533,
+        "rms": 0.1376,
+        "spectral_centroid_hz": 1152.3,
+        "zero_crossings_per_s": 841.7
+      },
+      "comparison": {
+        "duration_s": 0.12,
+        "spectral_centroid_hz": 887.8,
+        "zero_crossings_per_s": 1414.5,
+        "rms": 0.0045
+      }
+    },
+    {
+      "id": "grid-t-s55-v46-tv105-td210-d198-r01",
+      "label": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21 r1",
+      "baseLabel": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21",
+      "repetition": 1,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63405,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001486,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.0046,
+          "toneVolume": 0.00105,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.67,
+      "riskBreakdown": {
+        "duration": 0.011,
+        "centroid": 1.752,
+        "zeroCrossing": 1.304,
+        "rms": 0.136,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.03,
+      "centroidGapHz": 834.3,
+      "zeroCrossingGapPerSecond": 1489.8,
+      "rmsGap": 0.0168,
+      "activeMetrics": {
+        "duration_s": 0.51,
+        "peak": 0.3786,
+        "rms": 0.1253,
+        "spectral_centroid_hz": 1205.8,
+        "zero_crossings_per_s": 766.4
+      },
+      "comparison": {
+        "duration_s": 0.03,
+        "spectral_centroid_hz": 834.3,
+        "zero_crossings_per_s": 1489.8,
+        "rms": 0.0168
+      }
+    },
+    {
+      "id": "grid-t-s55-v46-tv105-td210-d198-r02",
+      "label": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21 r2",
+      "baseLabel": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21",
+      "repetition": 2,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63405,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001486,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.0046,
+          "toneVolume": 0.00105,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.71,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.79,
+        "zeroCrossing": 1.208,
+        "rms": 0.218,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 852.2,
+      "zeroCrossingGapPerSecond": 1380.3,
+      "rmsGap": 0.027,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.3863,
+        "rms": 0.1151,
+        "spectral_centroid_hz": 1187.9,
+        "zero_crossings_per_s": 875.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 852.2,
+        "zero_crossings_per_s": 1380.3,
+        "rms": 0.027
+      }
+    },
+    {
+      "id": "grid-t-s51-v46-tv145-td210-d198-r01",
+      "label": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21 r1",
+      "baseLabel": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21",
+      "repetition": 1,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.64125,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001478,
+        "params": {
+          "wave": "triangle",
+          "step": 0.051,
+          "volume": 0.0046,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.77,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.973,
+        "zeroCrossing": 1.247,
+        "rms": 0.058,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 939.4,
+      "zeroCrossingGapPerSecond": 1424.7,
+      "rmsGap": 0.0072,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.4521,
+        "rms": 0.1349,
+        "spectral_centroid_hz": 1100.7,
+        "zero_crossings_per_s": 831.5
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 939.4,
+        "zero_crossings_per_s": 1424.7,
+        "rms": 0.0072
+      }
+    },
+    {
+      "id": "grid-t-s55-v50-tv85-td210-d198-r03",
+      "label": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21 r3",
+      "baseLabel": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21",
+      "repetition": 3,
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.57915,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001554,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.005,
+          "toneVolume": 0.00085,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.99,
+      "riskBreakdown": {
+        "duration": 0.032,
+        "centroid": 1.946,
+        "zeroCrossing": 1.264,
+        "rms": 0.275,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.091,
+      "centroidGapHz": 926.9,
+      "zeroCrossingGapPerSecond": 1444.7,
+      "rmsGap": 0.034,
+      "activeMetrics": {
+        "duration_s": 0.389,
+        "peak": 0.3066,
+        "rms": 0.1081,
+        "spectral_centroid_hz": 1113.2,
+        "zero_crossings_per_s": 811.5
+      },
+      "comparison": {
+        "duration_s": 0.091,
+        "spectral_centroid_hz": 926.9,
+        "zero_crossings_per_s": 1444.7,
+        "rms": 0.034
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "risk10": 3.17,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.627,
+        "zeroCrossing": 0.214,
+        "rms": 0.839,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 774.9,
+      "zeroCrossingGapPerSecond": 244.3,
+      "rmsGap": 0.1039,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.7858,
+        "rms": 0.246,
+        "spectral_centroid_hz": 1265.2,
+        "zero_crossings_per_s": 2011.9
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 774.9,
+        "zero_crossings_per_s": 244.3,
+        "rms": 0.1039
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "baseline-current-r01",
+          "repetition": 1,
+          "risk10": 3.17,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 774.9,
+          "rmsGap": 0.1039
+        },
+        {
+          "id": "baseline-current-r02",
+          "repetition": 2,
+          "risk10": 3.17,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 774.9,
+          "rmsGap": 0.1039
+        },
+        {
+          "id": "baseline-current-r03",
+          "repetition": 3,
+          "risk10": 3.17,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 774.9,
+          "rmsGap": 0.1039
+        }
+      ],
+      "keeperRead": "baseline"
+    },
+    {
+      "id": "thin-bright-square-top",
+      "label": "Thin bright square top",
+      "generated": false,
+      "generator": null,
+      "risk10": 3.29,
+      "riskBreakdown": {
+        "duration": 0.016,
+        "centroid": 1.487,
+        "zeroCrossing": 0.238,
+        "rms": 1.077,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.047,
+      "centroidGapHz": 708,
+      "zeroCrossingGapPerSecond": 271.9,
+      "rmsGap": 0.1334,
+      "activeMetrics": {
+        "duration_s": 0.433,
+        "peak": 0.8709,
+        "rms": 0.2755,
+        "spectral_centroid_hz": 1332.1,
+        "zero_crossings_per_s": 2298.9
+      },
+      "comparison": {
+        "duration_s": 0.047,
+        "spectral_centroid_hz": 708,
+        "zero_crossings_per_s": 271.9,
+        "rms": 0.1334
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.284,
+        "centroidGapStdHz": 74.4,
+        "rmsGapStd": 0.0124,
+        "durationGapStdSeconds": 0.066
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-top-r03",
+          "repetition": 3,
+          "risk10": 2.92,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 611.1,
+          "rmsGap": 0.1164
+        },
+        {
+          "id": "thin-bright-square-top-r01",
+          "repetition": 1,
+          "risk10": 3.34,
+          "durationGapSeconds": 0.14,
+          "centroidGapHz": 720.9,
+          "rmsGap": 0.1382
+        },
+        {
+          "id": "thin-bright-square-top-r02",
+          "repetition": 2,
+          "risk10": 3.61,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 792,
+          "rmsGap": 0.1455
+        }
+      ],
+      "keeperRead": "risk improvement -0.12 < 0.25; RMS worsened by 0.0295"
+    },
+    {
+      "id": "grid-t-s55-v50-tv85-td210-d198",
+      "label": "Grid triangle step 0.055 volume 0.005 tone 0.00085/0.21",
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.57915,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001554,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.005,
+          "toneVolume": 0.00085,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.38,
+      "riskBreakdown": {
+        "duration": 0.03,
+        "centroid": 1.586,
+        "zeroCrossing": 0.607,
+        "rms": 0.68,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.087,
+      "centroidGapHz": 755.3,
+      "zeroCrossingGapPerSecond": 693.6,
+      "rmsGap": 0.0842,
+      "activeMetrics": {
+        "duration_s": 0.433,
+        "peak": 0.702,
+        "rms": 0.2037,
+        "spectral_centroid_hz": 1284.8,
+        "zero_crossings_per_s": 1625.1
+      },
+      "comparison": {
+        "duration_s": 0.087,
+        "spectral_centroid_hz": 755.3,
+        "zero_crossings_per_s": 693.6,
+        "rms": 0.0842
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.441,
+        "centroidGapStdHz": 121.5,
+        "rmsGapStd": 0.0378,
+        "durationGapStdSeconds": 0.021
+      },
+      "samples": [
+        {
+          "id": "grid-t-s55-v50-tv85-td210-d198-r01",
+          "repetition": 1,
+          "risk10": 2.97,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 661,
+          "rmsGap": 0.1251
+        },
+        {
+          "id": "grid-t-s55-v50-tv85-td210-d198-r02",
+          "repetition": 2,
+          "risk10": 3.17,
+          "durationGapSeconds": 0.111,
+          "centroidGapHz": 678.1,
+          "rmsGap": 0.0936
+        },
+        {
+          "id": "grid-t-s55-v50-tv85-td210-d198-r03",
+          "repetition": 3,
+          "risk10": 3.99,
+          "durationGapSeconds": 0.091,
+          "centroidGapHz": 926.9,
+          "rmsGap": 0.034
+        }
+      ],
+      "keeperRead": "duration gap 0.087s > 0.08s; risk improvement -0.21 < 0.25"
+    },
+    {
+      "id": "grid-s-s49-v50-tv145-td210-d198",
+      "label": "Grid sine step 0.049 volume 0.005 tone 0.00145/0.21",
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63445,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.00153,
+        "params": {
+          "wave": "sine",
+          "step": 0.049,
+          "volume": 0.005,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.54,
+      "riskBreakdown": {
+        "duration": 0.028,
+        "centroid": 1.807,
+        "zeroCrossing": 1.192,
+        "rms": 0.038,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.08,
+      "centroidGapHz": 860.7,
+      "zeroCrossingGapPerSecond": 1362.7,
+      "rmsGap": 0.0047,
+      "activeMetrics": {
+        "duration_s": 0.56,
+        "peak": 0.5046,
+        "rms": 0.1438,
+        "spectral_centroid_hz": 1179.4,
+        "zero_crossings_per_s": 893.5
+      },
+      "comparison": {
+        "duration_s": 0.08,
+        "spectral_centroid_hz": 860.7,
+        "zero_crossings_per_s": 1362.7,
+        "rms": 0.0047
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.114,
+        "centroidGapStdHz": 20,
+        "rmsGapStd": 0.0022,
+        "durationGapStdSeconds": 0.028
+      },
+      "samples": [
+        {
+          "id": "grid-s-s49-v50-tv145-td210-d198-r02",
+          "repetition": 2,
+          "risk10": 3.38,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 840.4,
+          "rmsGap": 0.0021
+        },
+        {
+          "id": "grid-s-s49-v50-tv145-td210-d198-r03",
+          "repetition": 3,
+          "risk10": 3.58,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 853.8,
+          "rmsGap": 0.0074
+        },
+        {
+          "id": "grid-s-s49-v50-tv145-td210-d198-r01",
+          "repetition": 1,
+          "risk10": 3.65,
+          "durationGapSeconds": 0.12,
+          "centroidGapHz": 887.8,
+          "rmsGap": 0.0045
+        }
+      ],
+      "keeperRead": "risk improvement -0.37 < 0.25; centroid did not improve (-85.8 Hz)"
+    },
+    {
+      "id": "grid-t-s51-v46-tv145-td210-d198",
+      "label": "Grid triangle step 0.051 volume 0.0046 tone 0.00145/0.21",
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.64125,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001478,
+        "params": {
+          "wave": "triangle",
+          "step": 0.051,
+          "volume": 0.0046,
+          "toneVolume": 0.00145,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.62,
+      "riskBreakdown": {
+        "duration": 0.018,
+        "centroid": 1.869,
+        "zeroCrossing": 1.229,
+        "rms": 0.036,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.05,
+      "centroidGapHz": 889.8,
+      "zeroCrossingGapPerSecond": 1404.6,
+      "rmsGap": 0.0044,
+      "activeMetrics": {
+        "duration_s": 0.53,
+        "peak": 0.473,
+        "rms": 0.1385,
+        "spectral_centroid_hz": 1150.3,
+        "zero_crossings_per_s": 851.6
+      },
+      "comparison": {
+        "duration_s": 0.05,
+        "spectral_centroid_hz": 889.8,
+        "zero_crossings_per_s": 1404.6,
+        "rms": 0.0044
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.109,
+        "centroidGapStdHz": 36.2,
+        "rmsGapStd": 0.0025,
+        "durationGapStdSeconds": 0.014
+      },
+      "samples": [
+        {
+          "id": "grid-t-s51-v46-tv145-td210-d198-r03",
+          "repetition": 3,
+          "risk10": 3.51,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 853.9,
+          "rmsGap": 0.0048
+        },
+        {
+          "id": "grid-t-s51-v46-tv145-td210-d198-r02",
+          "repetition": 2,
+          "risk10": 3.59,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 876,
+          "rmsGap": 0.0011
+        },
+        {
+          "id": "grid-t-s51-v46-tv145-td210-d198-r01",
+          "repetition": 1,
+          "risk10": 3.77,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 939.4,
+          "rmsGap": 0.0072
+        }
+      ],
+      "keeperRead": "risk improvement -0.45 < 0.25; centroid did not improve (-114.9 Hz)"
+    },
+    {
+      "id": "grid-t-s55-v46-tv105-td210-d198",
+      "label": "Grid triangle step 0.055 volume 0.0046 tone 0.00105/0.21",
+      "generated": true,
+      "generator": {
+        "family": "quiet-held-grid",
+        "heuristic": 0.63405,
+        "expectedEnd": 0.408,
+        "expectedEnergy": 0.001486,
+        "params": {
+          "wave": "triangle",
+          "step": 0.055,
+          "volume": 0.0046,
+          "toneVolume": 0.00105,
+          "toneDuration": 0.21,
+          "delay": 0.198
+        }
+      },
+      "risk10": 3.66,
+      "riskBreakdown": {
+        "duration": 0.018,
+        "centroid": 1.745,
+        "zeroCrossing": 1.26,
+        "rms": 0.17,
+        "floor": 0.473
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.05,
+      "centroidGapHz": 831,
+      "zeroCrossingGapPerSecond": 1440.2,
+      "rmsGap": 0.021,
+      "activeMetrics": {
+        "duration_s": 0.53,
+        "peak": 0.3729,
+        "rms": 0.1211,
+        "spectral_centroid_hz": 1209.1,
+        "zero_crossings_per_s": 816
+      },
+      "comparison": {
+        "duration_s": 0.05,
+        "spectral_centroid_hz": 831,
+        "zero_crossings_per_s": 1440.2,
+        "rms": 0.021
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.041,
+        "centroidGapStdHz": 18.8,
+        "rmsGapStd": 0.0044,
+        "durationGapStdSeconds": 0.014
+      },
+      "samples": [
+        {
+          "id": "grid-t-s55-v46-tv105-td210-d198-r03",
+          "repetition": 3,
+          "risk10": 3.61,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 806.5,
+          "rmsGap": 0.0191
+        },
+        {
+          "id": "grid-t-s55-v46-tv105-td210-d198-r01",
+          "repetition": 1,
+          "risk10": 3.67,
+          "durationGapSeconds": 0.03,
+          "centroidGapHz": 834.3,
+          "rmsGap": 0.0168
+        },
+        {
+          "id": "grid-t-s55-v46-tv105-td210-d198-r02",
+          "repetition": 2,
+          "risk10": 3.71,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 852.2,
+          "rmsGap": 0.027
+        }
+      ],
+      "keeperRead": "risk improvement -0.49 < 0.25; centroid did not improve (-56.1 Hz)"
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": null,
+    "measuredBest": "thin-bright-square-top",
+    "reason": "The lowest-risk candidate did not clear all keeper gates, and no other candidate did either."
+  },
+  "nextStep": "Expand the candidate generator around the best measured direction instead of manually changing the game pack."
+}

@@ -1,0 +1,1439 @@
+{
+  "generatedAt": "2026-05-08T22:40:35.466Z",
+  "commit": "63f90a0",
+  "version": "1.3.0",
+  "cue": "enemyHit",
+  "items": [
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "short-low-mid-snap",
+      "label": "Short low-mid snap",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Short low-mid snap",
+        "wav": "samples/short-low-mid-snap.wav",
+        "webm": "samples/short-low-mid-snap.webm",
+        "audioCue": {
+          "cue": "__candidate_short-low-mid-snap",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.621
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "zako-window-current",
+      "label": "Zako current guide window",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Zako current guide window",
+        "wav": "samples/zako-window-current.wav",
+        "webm": "samples/zako-window-current.webm",
+        "audioCue": {
+          "cue": "__candidate_zako-window-current",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.611
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d240-v82",
+      "label": "Enemy Hit reference 0.75s/0.24s v0.82",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.24s v0.82",
+        "wav": "samples/refclip-s750-d240-v82.wav",
+        "webm": "samples/refclip-s750-d240-v82.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d240-v82",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.664
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d240-v94",
+      "label": "Enemy Hit reference 0.75s/0.24s v0.94",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.24s v0.94",
+        "wav": "samples/refclip-s750-d240-v94.wav",
+        "webm": "samples/refclip-s750-d240-v94.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d240-v94",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.61
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d240-v100",
+      "label": "Enemy Hit reference 0.75s/0.24s v1",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.24s v1",
+        "wav": "samples/refclip-s750-d240-v100.wav",
+        "webm": "samples/refclip-s750-d240-v100.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d240-v100",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.602
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d240-v70",
+      "label": "Enemy Hit reference 0.75s/0.24s v0.7",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.24s v0.7",
+        "wav": "samples/refclip-s750-d240-v70.wav",
+        "webm": "samples/refclip-s750-d240-v70.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d240-v70",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d240-v58",
+      "label": "Enemy Hit reference 0.75s/0.24s v0.58",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.24s v0.58",
+        "wav": "samples/refclip-s750-d240-v58.wav",
+        "webm": "samples/refclip-s750-d240-v58.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d240-v58",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.621
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s720-d240-v82",
+      "label": "Enemy Hit reference 0.72s/0.24s v0.82",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.72s/0.24s v0.82",
+        "wav": "samples/refclip-s720-d240-v82.wav",
+        "webm": "samples/refclip-s720-d240-v82.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s720-d240-v82",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.72,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.603
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s720-d240-v94",
+      "label": "Enemy Hit reference 0.72s/0.24s v0.94",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.72s/0.24s v0.94",
+        "wav": "samples/refclip-s720-d240-v94.wav",
+        "webm": "samples/refclip-s720-d240-v94.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s720-d240-v94",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.72,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.607
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s790-d240-v82",
+      "label": "Enemy Hit reference 0.79s/0.24s v0.82",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.79s/0.24s v0.82",
+        "wav": "samples/refclip-s790-d240-v82.wav",
+        "webm": "samples/refclip-s790-d240-v82.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s790-d240-v82",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.79,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.596
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s720-d240-v100",
+      "label": "Enemy Hit reference 0.72s/0.24s v1",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.72s/0.24s v1",
+        "wav": "samples/refclip-s720-d240-v100.wav",
+        "webm": "samples/refclip-s720-d240-v100.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s720-d240-v100",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.72,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.608
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s720-d240-v70",
+      "label": "Enemy Hit reference 0.72s/0.24s v0.7",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.72s/0.24s v0.7",
+        "wav": "samples/refclip-s720-d240-v70.wav",
+        "webm": "samples/refclip-s720-d240-v70.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s720-d240-v70",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.72,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.599
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s790-d240-v94",
+      "label": "Enemy Hit reference 0.79s/0.24s v0.94",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.79s/0.24s v0.94",
+        "wav": "samples/refclip-s790-d240-v94.wav",
+        "webm": "samples/refclip-s790-d240-v94.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s790-d240-v94",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.79,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s790-d240-v100",
+      "label": "Enemy Hit reference 0.79s/0.24s v1",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.79s/0.24s v1",
+        "wav": "samples/refclip-s790-d240-v100.wav",
+        "webm": "samples/refclip-s790-d240-v100.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s790-d240-v100",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.79,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.613
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d200-v82",
+      "label": "Enemy Hit reference 0.75s/0.2s v0.82",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.2s v0.82",
+        "wav": "samples/refclip-s750-d200-v82.wav",
+        "webm": "samples/refclip-s750-d200-v82.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d200-v82",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.604
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d280-v82",
+      "label": "Enemy Hit reference 0.75s/0.28s v0.82",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.28s v0.82",
+        "wav": "samples/refclip-s750-d280-v82.wav",
+        "webm": "samples/refclip-s750-d280-v82.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d280-v82",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.28,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s790-d240-v70",
+      "label": "Enemy Hit reference 0.79s/0.24s v0.7",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.79s/0.24s v0.7",
+        "wav": "samples/refclip-s790-d240-v70.wav",
+        "webm": "samples/refclip-s790-d240-v70.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s790-d240-v70",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.79,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.596
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s720-d240-v58",
+      "label": "Enemy Hit reference 0.72s/0.24s v0.58",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.72s/0.24s v0.58",
+        "wav": "samples/refclip-s720-d240-v58.wav",
+        "webm": "samples/refclip-s720-d240-v58.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s720-d240-v58",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.72,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.635
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d200-v94",
+      "label": "Enemy Hit reference 0.75s/0.2s v0.94",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.2s v0.94",
+        "wav": "samples/refclip-s750-d200-v94.wav",
+        "webm": "samples/refclip-s750-d200-v94.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d200-v94",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.609
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d280-v94",
+      "label": "Enemy Hit reference 0.75s/0.28s v0.94",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.28s v0.94",
+        "wav": "samples/refclip-s750-d280-v94.wav",
+        "webm": "samples/refclip-s750-d280-v94.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d280-v94",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.28,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d200-v100",
+      "label": "Enemy Hit reference 0.75s/0.2s v1",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.2s v1",
+        "wav": "samples/refclip-s750-d200-v100.wav",
+        "webm": "samples/refclip-s750-d200-v100.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d200-v100",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.599
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d280-v100",
+      "label": "Enemy Hit reference 0.75s/0.28s v1",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.28s v1",
+        "wav": "samples/refclip-s750-d280-v100.wav",
+        "webm": "samples/refclip-s750-d280-v100.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d280-v100",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.28,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d200-v70",
+      "label": "Enemy Hit reference 0.75s/0.2s v0.7",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.2s v0.7",
+        "wav": "samples/refclip-s750-d200-v70.wav",
+        "webm": "samples/refclip-s750-d200-v70.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d200-v70",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d280-v70",
+      "label": "Enemy Hit reference 0.75s/0.28s v0.7",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.28s v0.7",
+        "wav": "samples/refclip-s750-d280-v70.wav",
+        "webm": "samples/refclip-s750-d280-v70.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d280-v70",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.28,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s790-d240-v58",
+      "label": "Enemy Hit reference 0.79s/0.24s v0.58",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.79s/0.24s v0.58",
+        "wav": "samples/refclip-s790-d240-v58.wav",
+        "webm": "samples/refclip-s790-d240-v58.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s790-d240-v58",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.79,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    },
+    {
+      "id": "refclip-s750-d180-v82",
+      "label": "Enemy Hit reference 0.75s/0.18s v0.82",
+      "focus": "Candidate comparison for Enemy Hit.",
+      "cue": "enemyHit",
+      "aurora": {
+        "label": "Enemy Hit reference 0.75s/0.18s v0.82",
+        "wav": "samples/refclip-s750-d180-v82.wav",
+        "webm": "samples/refclip-s750-d180-v82.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s750-d180-v82",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0.75,
+          "referenceClipDuration": 0.18,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.598
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "enemyHit",
+          "atmosphereId": "aurora-borealis",
+          "audioTheme": "aurora-surge",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.678
+        }
+      },
+      "reference": {
+        "label": "Zako",
+        "source": "src/assets/reference-audio/galaga3-zako.m4a",
+        "wav": "samples/enemy-hit-reference.wav",
+        "window": {
+          "startSeconds": 0.75,
+          "endSeconds": 0.99,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+          "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+        }
+      }
+    }
+  ]
+}

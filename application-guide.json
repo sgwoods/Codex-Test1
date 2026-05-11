@@ -564,8 +564,27 @@
       "focus": "Compare whether player fire reads as a quick arcade shot instead of a generic impact.",
       "referenceLabel": "Flagship/Fighter Shot",
       "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-      "mappingStatus": "Measured coverage added for shot identity; current reference clip is shared and may still be too broad.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.05,
+        "endSeconds": 0.29,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "distinct initial high-transient subwindow reserved for player fire; lower score than the shared best window but prevents playerShot/enemyShot/bossHit semantic collapse"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.05-0.29s flagship/fighter-shot window; player fire is a single crisp transient rather than a multi-phase phrase",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "player fire transient",
+            "startSeconds": 0.08,
+            "endSeconds": 0.2
+          }
+        ]
+      },
+      "mappingStatus": "Measured subwindow promoted for shot identity; uses a distinct initial transient so player fire can be scored separately from enemy fire and boss damage.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "enemy-shot-compare",
@@ -574,8 +593,27 @@
       "focus": "Compare whether enemy fire is distinct enough from player fire and boss damage.",
       "referenceLabel": "Flagship/Fighter Shot",
       "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-      "mappingStatus": "Measured coverage added for projectile feedback; current reference clip is shared and may still be too broad.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.9,
+        "endSeconds": 1.14,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "second measured high-transient subwindow reserved for enemy projectile feedback so enemyShot no longer scores against the same active phrase as playerShot"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.90-1.14s flagship/fighter-shot window; enemy fire is a single projectile transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "enemy fire transient",
+            "startSeconds": 0.07,
+            "endSeconds": 0.22
+          }
+        ]
+      },
+      "mappingStatus": "Measured subwindow promoted for enemy projectile feedback; still from the same source clip, but scored as a distinct reference phrase from playerShot and bossHit.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "enemy-hit-compare",
@@ -584,8 +622,27 @@
       "focus": "Compare whether an enemy impact gives immediate hit confirmation.",
       "referenceLabel": "Zako",
       "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
-      "mappingStatus": "Measured coverage added for impact feedback; hit and kill hierarchy still needs refinement.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.75,
+        "endSeconds": 0.99,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.75-0.99s Zako window; enemy hit is scored as immediate damage confirmation",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "enemy hit confirmation",
+            "startSeconds": 0.01,
+            "endSeconds": 0.17
+          }
+        ]
+      },
+      "mappingStatus": "Measured subwindow promoted for impact feedback; hit and kill hierarchy remains under review but is now scored against a distinct phrase from enemyBoom.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "boss-hit-compare",
@@ -594,8 +651,27 @@
       "focus": "Compare whether boss damage reads as a distinct multi-hit event.",
       "referenceLabel": "Boss Damage / Flagship Fighter Shot",
       "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
-      "mappingStatus": "Measured coverage added for boss damage feedback; reference source is mixed and may require subwindow promotion.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 1.149,
+        "endSeconds": 1.439,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 1.149-1.439s boss-damage window; boss hit is a distinct damage confirmation transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "boss damage confirmation",
+            "startSeconds": 0,
+            "endSeconds": 0.15
+          }
+        ]
+      },
+      "mappingStatus": "Measured subwindow promoted for boss damage feedback; reference source remains shared, but bossHit now has a dedicated scoring window.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "enemy-boom-compare",
@@ -604,8 +680,27 @@
       "focus": "Compare whether normal enemy destruction is more emphatic than a simple hit.",
       "referenceLabel": "Zako",
       "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
-      "mappingStatus": "Measured coverage added for destruction feedback; may need a better split between impact and explosion.",
-      "mappingConfidence": "medium"
+      "referenceWindow": {
+        "startSeconds": 0.5,
+        "endSeconds": 0.74,
+        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate",
+        "selection": "highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured Zako destruction transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 0.50-0.74s Zako window; normal enemy destruction is a compact finality transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "normal enemy destruction transient",
+            "startSeconds": 0.02,
+            "endSeconds": 0.2
+          }
+        ]
+      },
+      "mappingStatus": "Measured subwindow promoted for normal-enemy destruction feedback; enemyHit and enemyBoom now score against separate Zako phrases.",
+      "mappingConfidence": "medium-high"
     },
     {
       "id": "boss-boom-compare",
@@ -614,6 +709,37 @@
       "focus": "Compare whether boss destruction feels larger and more final than normal enemy destruction.",
       "referenceLabel": "Boss Death / Sasori",
       "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+      "referenceWindow": {
+        "startSeconds": 0.798,
+        "endSeconds": 1.567,
+        "source": "aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 active-window measurement",
+        "selection": "full active boss-death phrase so destruction can be scored as a larger multi-burst event rather than a single generic explosion"
+      },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 boss-death burst candidates",
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 0.798-1.567s boss-death window; labels early, middle, and final destruction bursts",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "boss death opening burst",
+            "startSeconds": 0.052,
+            "endSeconds": 0.233
+          },
+          {
+            "role": "body",
+            "label": "boss death main burst",
+            "startSeconds": 0.252,
+            "endSeconds": 0.433
+          },
+          {
+            "role": "tail",
+            "label": "boss death final burst",
+            "startSeconds": 0.601,
+            "endSeconds": 0.769
+          }
+        ]
+      },
       "mappingStatus": "Measured coverage added for boss destruction feedback.",
       "mappingConfidence": "high"
     },
@@ -629,6 +755,31 @@
         "endSeconds": 3.679,
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
         "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+      },
+      "referenceSegmentation": {
+        "source": "curated from measured tractor-beam reference window after repeatability-gate pass",
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 3.199-3.679s tractor-beam window; labels separate beam strike from sustained beam body",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "beam deploy strike",
+            "startSeconds": 0,
+            "endSeconds": 0.17
+          },
+          {
+            "role": "body",
+            "label": "sustained tractor tone",
+            "startSeconds": 0.17,
+            "endSeconds": 0.269
+          },
+          {
+            "role": "tail",
+            "label": "active beam falloff",
+            "startSeconds": 0.269,
+            "endSeconds": 0.339
+          }
+        ]
       },
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
@@ -678,6 +829,19 @@
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
         "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
       },
+      "referenceSegmentation": {
+        "source": "curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient",
+        "confidence": "high",
+        "resolution": "relative to the clipped 1.949-2.189s captured-fighter-destroyed window; penalty feedback is a compact regret/destruction transient",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "captured fighter destroyed transient",
+            "startSeconds": 0,
+            "endSeconds": 0.19
+          }
+        ]
+      },
       "mappingStatus": "New Aurora cue slot added from the cue matrix.",
       "mappingConfidence": "high"
     },
@@ -704,6 +868,36 @@
       "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
       "referenceLabel": "Death",
       "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+      "referenceSegmentation": {
+        "source": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
+        "confidence": "medium-high",
+        "resolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "ship-loss blast onset",
+            "startSeconds": 0.02,
+            "endSeconds": 0.459
+          },
+          {
+            "role": "body",
+            "label": "sustained death body",
+            "startSeconds": 0.459,
+            "endSeconds": 0.858
+          },
+          {
+            "role": "tail",
+            "label": "death cue falloff",
+            "startSeconds": 0.858,
+            "endSeconds": 0.988
+          }
+        ]
+      },
+      "analysisPolicy": {
+        "activeMetricsSource": "analysisWindow",
+        "eventSegmentationSource": "analysisWindow",
+        "reason": "Ship loss is a composite onset/body/tail event; conformance should score the scheduled cue window rather than the single loudest active island."
+      },
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
     },
@@ -735,6 +929,31 @@
         "endSeconds": 1.17,
         "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
         "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+      },
+      "referenceSegmentation": {
+        "source": "curated from challenging-stage-results reference window after challengeResults event-gap pass",
+        "confidence": "medium-high",
+        "resolution": "relative to the clipped 0.75-1.17s challenge-results phrase; labels distinguish attack, result body, and falloff",
+        "segments": [
+          {
+            "role": "onset",
+            "label": "results phrase attack",
+            "startSeconds": 0,
+            "endSeconds": 0.14
+          },
+          {
+            "role": "body",
+            "label": "results phrase body",
+            "startSeconds": 0.14,
+            "endSeconds": 0.34
+          },
+          {
+            "role": "tail",
+            "label": "results phrase falloff",
+            "startSeconds": 0.34,
+            "endSeconds": 0.42
+          }
+        ]
       },
       "mappingStatus": "New Aurora cue slot added from the cue matrix.",
       "mappingConfidence": "high"
@@ -1042,6 +1261,204 @@
       "families": "bee galboss · but galboss · boss galboss · challenge mosquito",
       "bossArchetype": "super-partner-pair",
       "description": "Late Aurora crown band tying the strongest shell/front-door identity back into the deeper stage family."
+    }
+  ],
+  "conformanceAlienRows": [
+    {
+      "name": "Bee / Zako Scout",
+      "runtime": "type bee; families classic, scorpion, stingray, galboss",
+      "activity": "Basic formation alien; dives, fires, supplies early pressure, and appears in challenge groups.",
+      "presence": "All regular stages and challenge stages.",
+      "reference": "Galaga Zako/scout behavior, challenge-stage evidence, and galaga3-zako audio reference.",
+      "score": "8.7/10 behavior",
+      "confidence": "medium; visual likeness is still low-confidence proxy",
+      "next": "Score Aurora displayed sprites against the inferred Galaga consensus models and source-frame pixel targets, then promote lossless/emulator targets when available."
+    },
+    {
+      "name": "Butterfly / Escort Alien",
+      "runtime": "type but; families classic, scorpion, stingray, galboss",
+      "activity": "Mid-value formation alien; dives more dangerously, escorts bosses in special attacks, and participates in challenge set pieces.",
+      "presence": "All regular stages, with high-value role in stages 4 and later.",
+      "reference": "Galaga butterfly/escort behavior through boss/formation grammar and path-family reports.",
+      "score": "8.7/10 behavior; 9.0/10 boss grammar contribution",
+      "confidence": "medium; visual likeness pending",
+      "next": "Run per-role visual scoring against the inferred Galaga consensus model and separate escort-path precision against reference windows."
+    },
+    {
+      "name": "Boss Galaga / Command Boss",
+      "runtime": "type boss; families classic, stingray, galboss",
+      "activity": "Two-hit boss; captures player ship, carries captured fighter, leads special attacks, and awards high dive/squadron points.",
+      "presence": "All regular stages; capture/rescue and special-attack windows.",
+      "reference": "Galaga boss, tractor beam, capture/rescue, boss-hit, and boss-death timing/audio references.",
+      "score": "9.0/10 boss/formation grammar",
+      "confidence": "medium-high for behavior; audiovisual damage feedback still weaker",
+      "next": "Improve explosion/damage visual event authenticity and direct boss path precision from extracted reference paths."
+    },
+    {
+      "name": "Challenge Rogue / Specialty Alien",
+      "runtime": "type rogue in challenge and captured-fighter contexts",
+      "activity": "Challenge-stage novelty role used to create distinct set pieces and visible learning opportunities.",
+      "presence": "Challenge stages 7, 11, and 15 in current evidence windows.",
+      "reference": "Galaga challenging-stage specialty waves and bonus-stage composition.",
+      "score": "7.9/10 challenge alien novelty",
+      "confidence": "medium",
+      "next": "Promote a challenge-only Galaga target when the ingestion has a clean bonus-stage sheet, then score reward clarity separately."
+    },
+    {
+      "name": "Captured Fighter",
+      "runtime": "carried player fighter state on boss",
+      "activity": "Converts player state into risk/reward: destroy too early for loss, rescue for dual fighter.",
+      "presence": "Capture/rescue stages after boss capture.",
+      "reference": "Galaga capture/rescue audio and event flow correspondence artifacts.",
+      "score": "guardrail pass for flow",
+      "confidence": "medium-high for state flow; visual feedback lower",
+      "next": "Use the generated dual-fighter target for rescue/carry review, then add visual event scoring for destruction, rescue join, and player comprehension."
+    }
+  ],
+  "conformanceAudioRows": [
+    {
+      "family": "Start and stage entry",
+      "cues": "gameStart, formationArrival, stageTransition",
+      "meaning": "Begins run and anchors formation-arrival timing.",
+      "reference": "galaga2-game-start, galaga3-level-underscore, galaga-level-flag.",
+      "score": "7.2/10 audio category",
+      "confidence": "medium",
+      "next": "Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow."
+    },
+    {
+      "family": "Player and enemy fire",
+      "cues": "playerShot, enemyShot",
+      "meaning": "Differentiates player action from enemy pressure.",
+      "reference": "Dedicated subwindows from galaga3-boss-damage-flagship-fighter-shot.",
+      "score": "measured but weak category",
+      "confidence": "medium",
+      "next": "Improve cue distinctness, cooldown fit, and event alignment without masking hit feedback."
+    },
+    {
+      "family": "Enemy impact and destruction",
+      "cues": "enemyHit, enemyBoom",
+      "meaning": "Immediate feedback that a missile impacted or destroyed a normal alien.",
+      "reference": "galaga3-zako subwindows and aurora-audio-event-gap latest report.",
+      "score": "open high-value gap",
+      "confidence": "medium",
+      "next": "Add event-specific explosion/impact scorer for missile impact, alien death, ship impact, immunity, and boss damage."
+    },
+    {
+      "family": "Boss damage and destruction",
+      "cues": "bossHit, bossBoom",
+      "meaning": "Shows multi-hit boss damage and final destruction clearly.",
+      "reference": "galaga3-boss-damage-flagship-fighter-shot and galaga3-boss-death-sasori.",
+      "score": "measured but still in audio gap",
+      "confidence": "medium-high",
+      "next": "Score first-hit flash, sound onset, hold/cadence, final explosion, and player comprehension."
+    },
+    {
+      "family": "Capture and rescue",
+      "cues": "captureBeam, captureSuccess, captureRetreat, rescueJoin, capturedFighterDestroyed",
+      "meaning": "Explains the most important Galaga-style risk/reward loop.",
+      "reference": "Tractor beam, captured-fighter, capturing, rescued-double-ship, and captured-fighter-destroyed clips.",
+      "score": "flow guardrail pass",
+      "confidence": "medium-high",
+      "next": "Improve event-rich logs and status/commentary hooks around capture and rescue."
+    },
+    {
+      "family": "Player loss and game over",
+      "cues": "playerHit, gameOver",
+      "meaning": "Explains ship loss, final loss, and the emotional end of a run without muting the next start.",
+      "reference": "galaga3-death and game-over reference windows with onset/body/tail segmentation.",
+      "score": "highest current audio gap; playerHit tail",
+      "confidence": "medium-high",
+      "next": "Run tail/body composite modeling plus browser-capture calibration before allowing a runtime audio promotion."
+    },
+    {
+      "family": "Challenge results",
+      "cues": "challengeTransition, challengeResults, challengePerfect",
+      "meaning": "Marks bonus-stage entry and result/reward feedback.",
+      "reference": "galaga challenging-stage, results, and perfect-result clips.",
+      "score": "timing guardrail pass",
+      "confidence": "medium",
+      "next": "Add score/result surface conformance and direct challenge-stage audio fit checks."
+    }
+  ],
+  "stageConformanceRows": [
+    {
+      "stage": "Stage 1",
+      "summary": "Baseline rack entry, first dives, low pressure, player onboarding.",
+      "aspects": "Formation arrival timing, first dive timing, safe early pressure, classic visual/audio framing.",
+      "evidence": "stage-1-baseline evidence window; stage-1 geometry and shot trust guardrails.",
+      "gap": "Improve direct visual reference grounding for alien/player likeness."
+    },
+    {
+      "stage": "Stage 3 / first challenge",
+      "summary": "First challenging stage and bonus-stage learning moment.",
+      "aspects": "Non-lethal challenge behavior, scoreable windows, group readability, perfect-result feedback.",
+      "evidence": "Challenge timing guardrails and challenge-stage candidate window.",
+      "gap": "Add direct Galaga challenge contact-sheet path labels."
+    },
+    {
+      "stage": "Stage 4",
+      "summary": "First major pressure step and capture/squadron importance.",
+      "aspects": "Boss capture, special attacks, lane pressure, player loss windows, fairness.",
+      "evidence": "Stage 4 pressure geometry, lane loss windows, close-shot trust harnesses.",
+      "gap": "Continue pressure precision while protecting fairness and persona safety."
+    },
+    {
+      "stage": "Stage 7 challenge",
+      "summary": "Scorpion cross-sweep challenge set piece.",
+      "aspects": "New trajectory family, challenge alien novelty, bonus opportunity clarity.",
+      "evidence": "challenge-stage-scorpion-cross; alien-entry/challenge score 8.7/10.",
+      "gap": "Score reward clarity and reference-grounded path precision."
+    },
+    {
+      "stage": "Stage 11 challenge",
+      "summary": "Stingray hook-arc challenge set piece.",
+      "aspects": "Hooking trajectories, mixed alien composition, learning-stage novelty.",
+      "evidence": "challenge-stage-stingray-hook; challenge trajectory variation maxed at current scorer resolution.",
+      "gap": "Move from internal variation scoring to direct reference comparison."
+    },
+    {
+      "stage": "Stage 12 to 14",
+      "summary": "Late-run cleanup, pressure, squadron reward, and advanced route planning.",
+      "aspects": "Higher pressure, special-attack scoring, escort recovery route, advanced-persona outcomes.",
+      "evidence": "late-run-cleanup-or-failure, late-run-escort-variant, level-arc probes, escort-reward sweeps.",
+      "gap": "Improve direct late-stage path/cadence precision and replay-style pressure analysis."
+    },
+    {
+      "stage": "Stage 15 challenge",
+      "summary": "Boss-led late-loop challenge set piece.",
+      "aspects": "Boss-led entry style, late challenge novelty, high bonus readability.",
+      "evidence": "challenge-stage-boss-led-loop; challenge window coverage now 4/4.",
+      "gap": "Ground boss-led challenge path against extracted Galaga challenge-stage reference paths."
+    }
+  ],
+  "personaRows": [
+    {
+      "label": "Beginner",
+      "harnessId": "novice",
+      "role": "Low-skill onboarding and unfairness detector.",
+      "expected": "Moves less efficiently, misses more challenge opportunities, but should still experience readable cause and effect.",
+      "checks": "Stage 1, Stage 2 safety, first challenge clarity."
+    },
+    {
+      "label": "Intermediate",
+      "harnessId": "advanced",
+      "role": "Competent casual-play proxy.",
+      "expected": "Clears early waves more often and engages capture/rescue and challenge bonuses inconsistently.",
+      "checks": "Mid-run pressure, challenge hit rate, Stage 4 fairness."
+    },
+    {
+      "label": "Expert",
+      "harnessId": "expert",
+      "role": "Skilled player proxy.",
+      "expected": "Reaches deeper stage bands, positions better, and reveals whether reward routes are viable.",
+      "checks": "Stage 12/14 reward routes, boss/squadron scoring."
+    },
+    {
+      "label": "Professional",
+      "harnessId": "professional",
+      "role": "High-skill regression guard and release-confidence proxy.",
+      "expected": "Exploits strong routes without collapsing from unfair timing or broken scoring.",
+      "checks": "Professional stage-2 checks, long-run progression ordering, late reward windows."
     }
   ],
   "graphicsControls": [
@@ -1365,8 +1782,8 @@
       "id": "stage-transition-event",
       "event": "Normal stage-to-stage transition",
       "phase": "stage",
-      "timing": "Queued late in the inter-stage window. Normal transition window is about 3.2s; the reference excerpt used is 0.86s.",
-      "audioName": "stageTransition -> galaga-level-flag-v1.m4a excerpt 0.00s-0.86s",
+      "timing": "Queued late in the inter-stage window. The runtime cue now preserves a 3.35s reference-backed phrase when the handoff budget allows, so the inter-level moment no longer collapses into a short flag blip.",
+      "audioName": "stageTransition -> galaga-level-flag-v1.m4a excerpt 0.00s-3.35s",
       "trigger": "Initiated during the inter-stage handoff once the board has cleared and the transition timer reaches its cue point.",
       "stop": "Stops stagePulse, challengeResults, and challengePerfect before playback.",
       "note": "Now cue-budgeted and backed by reference timing windows, with later-stage entry delays used to keep arrival/cadence from stepping on the handoff.",
@@ -1377,8 +1794,8 @@
       "id": "challenge-transition-event",
       "event": "Challenge-stage entry",
       "phase": "challenge",
-      "timing": "Queued late in the normal-to-challenge window. Transition window is now about 4.35s; the challenge cue lands about 1.72s before spawn, and challenge enemy arrivals are delayed by about 0.96s after stage spawn in reference mode.",
-      "audioName": "challengeTransition -> galaga2-challenging-stage.m4a excerpt 0.00s-1.05s",
+      "timing": "Queued late in the normal-to-challenge window. The challenge-entry window is now 3.35s; the cue starts about 1.13s before challenge spawn, uses a 1.6s excerpt, and preserves about 0.47s of cue tail past spawn in reference mode.",
+      "audioName": "challengeTransition -> galaga2-challenging-stage.m4a excerpt 0.00s-1.60s",
       "trigger": "Initiated when the next stage is a challenge stage and the transition timer reaches the challenge cue point.",
       "stop": "Stops stagePulse, stageTransition, challengeResults, and challengePerfect before playback.",
       "note": "Still one of the most sensitive timing/problem areas in live play, but it is now managed by a named reference timing window instead of a single hardcoded delay.",
@@ -1390,7 +1807,7 @@
       "event": "Challenge results",
       "phase": "challenge",
       "timing": "Queued about 0.34s after challenge clear; the post-challenge handoff is now widened so the next-stage cue lands about 4.38s after clear and the next stage spawns about 6.0s after clear in the measured perfect-clear path.",
-      "audioName": "challengeResults -> galaga2-challenging-stage-results.m4a excerpt 0.00s-1.55s",
+      "audioName": "challengeResults -> galaga2-challenging-stage-results.m4a excerpt 0.00s-1.95s",
       "trigger": "Initiated when a challenge stage is cleared without a perfect result.",
       "stop": "Stops stagePulse, stageTransition, and challengeTransition before playback; also holds ambient cadence.",
       "note": "Now separated from challengePerfect and given a wider hold window so the result phrase can finish before the next-stage handoff.",
@@ -1401,8 +1818,8 @@
       "id": "challenge-perfect-event",
       "event": "Challenge perfect result",
       "phase": "challenge",
-      "timing": "Queued about 0.34s after a perfect challenge clear; excerpt runs 1.7s with extra cadence hold before the next-stage handoff, which now uses the same widened measured window as challenge results.",
-      "audioName": "challengePerfect -> galaga2-challenging-stage-perfect.m4a excerpt 0.00s-1.70s",
+      "timing": "Queued about 0.34s after a perfect challenge clear; excerpt runs 2.15s with extra cadence hold before the next-stage handoff, which now uses the same widened measured window as challenge results.",
+      "audioName": "challengePerfect -> galaga2-challenging-stage-perfect.m4a excerpt 0.00s-2.15s",
       "trigger": "Initiated when a challenge stage is cleared perfectly.",
       "stop": "Stops stagePulse, stageTransition, and challengeTransition before playback; also holds ambient cadence.",
       "note": "Direct reference mapping with runtime-safe duration.",

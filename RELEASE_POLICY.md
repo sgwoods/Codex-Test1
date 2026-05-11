@@ -8,9 +8,9 @@ metadata for the hosted bundle.
 Examples:
 
 - local `localhost`:
-  - `x.y.z+build.NNN.sha.abcdef0.dirty`
+  - `x.y.z.n+build.NNN.sha.abcdef0.dirty`
 - hosted `/dev`:
-  - `x.y.z+build.NNN.sha.abcdef0`
+  - `x.y.z.n+build.NNN.sha.abcdef0`
 - hosted `/beta`:
   - `x.y.z-beta.1+build.NNN.sha.abcdef0.beta`
 - hosted `/production`:
@@ -35,10 +35,16 @@ The intended version domains are:
     `Aurora Galactica`, `Galaxy Guardians`, and future sibling games
 - build identity
   - build number, commit hash, dirty state, and lane metadata
+- hosted development version line
+  - a fourth visible segment such as `1.3.0.1` for accumulated `/dev`
+    increments between formal release families
+  - this is a display/build-train line, not the `package.json` SemVer value
 
 Rules:
 
 - do not assume every version domain must move together
+- keep `package.json` on valid SemVer, such as `1.3.0`, even when hosted
+  `/dev` displays a fourth-segment line such as `1.3.0.1`
 - a platform-only fix may advance the platform version without forcing every
   application version to change
 - a game-only release may advance one game's version and the integrated bundle
@@ -141,6 +147,9 @@ That means:
 Current versioning read for the next cycle:
 
 - the shipped `1.3.0` family is now the stable public baseline
+- hosted `/dev` may use fourth-segment increments such as `1.3.0.1`,
+  `1.3.0.2`, and so on to make accumulated development value visible before a
+  formal beta/production candidate is cut
 - the next coherent public candidate should not collapse back into a `1.3.1`
   fast-follow patch if it is really the first deliberate post-release depth and
   platform-contract bundle
@@ -272,11 +281,16 @@ That refresh should cover at least:
 - `APPLICATIONS_ON_PLATINUM.md`
 - `TESTING_AND_RELEASE_GATES.md`
 - `RELEASE_READINESS_REVIEW.md`
+- `STRATEGIC_BETA_REVIEW.md`
 - hosted `project-guide.html`
 - hosted `platinum-guide.html`
 - hosted `player-guide.html`
 
 This should be treated as a real release artifact pass, not optional cleanup.
+After each major hosted `/beta` push, the strategic beta review must be
+refreshed so the next lane decision is checked against near-term player value,
+long-term platform/ingestion goals, documentation freshness, and
+value-versus-compute evidence.
 
 ## Core Artifact Commit Rule
 

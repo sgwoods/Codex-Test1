@@ -80,6 +80,10 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 
 ## Canonical Source Docs
 
+Best top-level state and conformance-program overview:
+
+- [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+
 Best platform overview:
 
 - [PLATINUM.md](PLATINUM.md)
@@ -97,6 +101,14 @@ Best release and testing gate doc:
 
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
 - [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
+
+Best conformance/resource economics doc:
+
+- [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
+- [QUALITY_CONFORMANCE_MODEL.md](QUALITY_CONFORMANCE_MODEL.md)
+- [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
+- [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
+- [RELEASE_CONFORMANCE_DASHBOARD.md](RELEASE_CONFORMANCE_DASHBOARD.md)
 
 Release planning and readiness docs:
 
@@ -134,7 +146,10 @@ What that means:
 Current go-forward focus:
 
 - keep the current `1.3.0` production line stable
-- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) for the
+- use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+  as the maintained overview of how Platinum, applications, ingestion,
+  harnessing, conformance metrics, and resource economics fit together
+- use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
   current readable quality table before shaping the `1.4.0` pickup
 - use the multi-machine bootstrap and release-authority workflow
 - keep folding in the other machine's Galaxians-style second-game work and
@@ -204,6 +219,17 @@ That means refreshing:
 - platform and application docs
 - testing and release-gate docs
 - hosted project, Platinum, and player guides
+
+The publish preflight also enforces a documentation visibility gate. Major
+curated conformance artifact families under `reference-artifacts/analyses/`
+must be referenced by the generated user-visible docs, dashboard data, or public
+project page before a lane can publish. The intended rhythm is:
+
+1. generate or promote evidence
+2. update the maintained catalog/dashboard/source doc that explains it
+3. run `npm run build`
+4. let `npm run publish:check:dev`, `npm run publish:check:beta`, or
+   `npm run publish:check:production` verify that the explanation is visible
 
 See:
 

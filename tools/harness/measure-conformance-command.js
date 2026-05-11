@@ -17,8 +17,16 @@ function parseArgs(argv){
     modelCalls: 0,
     inputTokens: 0,
     outputTokens: 0,
+    modelMinutes: 0,
     gpuMode: null,
     gpuSeconds: null,
+    manual: false,
+    codexUsage5hLeftPercent: null,
+    codexUsageWeekLeftPercent: null,
+    codexModel5hLeftPercent: null,
+    codexModelWeekLeftPercent: null,
+    usageReset: null,
+    weeklyReset: null,
     command: []
   };
   const sep = argv.indexOf('--');
@@ -39,8 +47,16 @@ function parseArgs(argv){
     else if(key === 'model-calls') opts.modelCalls = +value || 0;
     else if(key === 'input-tokens') opts.inputTokens = +value || 0;
     else if(key === 'output-tokens') opts.outputTokens = +value || 0;
+    else if(key === 'model-minutes') opts.modelMinutes = +value || 0;
     else if(key === 'gpu-mode') opts.gpuMode = value;
     else if(key === 'gpu-seconds') opts.gpuSeconds = +value || null;
+    else if(key === 'manual') opts.manual = value !== '0' && value !== 'false';
+    else if(key === 'codex-usage-5h-left-percent') opts.codexUsage5hLeftPercent = +value;
+    else if(key === 'codex-usage-week-left-percent') opts.codexUsageWeekLeftPercent = +value;
+    else if(key === 'codex-model-5h-left-percent') opts.codexModel5hLeftPercent = +value;
+    else if(key === 'codex-model-week-left-percent') opts.codexModelWeekLeftPercent = +value;
+    else if(key === 'usage-reset') opts.usageReset = value;
+    else if(key === 'weekly-reset') opts.weeklyReset = value;
   }
   return opts;
 }
@@ -99,8 +115,9 @@ function stripTimeOutput(stderr){
 
 function main(){
   const opts = parseArgs(process.argv.slice(2));
-  if(!opts.command.length){
+  if(!opts.command.length && !opts.manual){
     console.error('Usage: node tools/harness/measure-conformance-command.js --axis level-arc --resource cpu -- <command> [args...]');
+    console.error('Manual model/Codex usage: node tools/harness/measure-conformance-command.js --manual --axis audio --resource codex --model-provider openai --model gpt-5.3-codex --model-minutes 30 --notes "planning/review"');
     process.exit(1);
   }
   ensureDir(OUT_ROOT);
@@ -108,21 +125,25 @@ function main(){
   const start = Date.now();
   const startedAt = new Date(start).toISOString();
   const command = opts.command;
-  const timeBin = fs.existsSync('/usr/bin/time') ? '/usr/bin/time' : null;
-  const runArgs = timeBin ? ['-p', ...command] : command.slice(1);
-  const runCommand = timeBin || command[0];
-  const result = spawnSync(runCommand, runArgs, {
-    cwd: ROOT,
-    encoding: 'utf8',
-    maxBuffer: 1024 * 1024 * 80,
-    stdio: ['inherit', 'pipe', 'pipe']
-  });
+  const result = opts.manual
+    ? { stdout: '', stderr: '', status: 0, signal: null }
+    : (() => {
+      const timeBin = fs.existsSync('/usr/bin/time') ? '/usr/bin/time' : null;
+      const runArgs = timeBin ? ['-p', ...command] : command.slice(1);
+      const runCommand = timeBin || command[0];
+      return spawnSync(runCommand, runArgs, {
+        cwd: ROOT,
+        encoding: 'utf8',
+        maxBuffer: 1024 * 1024 * 80,
+        stdio: ['inherit', 'pipe', 'pipe']
+      });
+    })();
   const end = Date.now();
   if(result.stdout) process.stdout.write(result.stdout);
   const cleanStderr = stripTimeOutput(result.stderr || '');
   if(cleanStderr) process.stderr.write(cleanStderr.endsWith('\n') ? cleanStderr : `${cleanStderr}\n`);
   const parsed = parseTimeOutput(result.stderr || '');
-  const wallSeconds = (end - start) / 1000;
+  const wallSeconds = opts.manual && opts.modelMinutes ? opts.modelMinutes * 60 : (end - start) / 1000;
   const afterBytes = dirBytes(path.join(ROOT, 'reference-artifacts'));
   const entry = {
     schema_version: 1,
@@ -132,9 +153,9 @@ function main(){
     endedAt: new Date(end).toISOString(),
     branch: git(['branch', '--show-current']) || null,
     commit: git(['rev-parse', '--short', 'HEAD']) || null,
-    command,
+    command: command.length ? command : ['manual:model-usage'],
     axes: opts.axes.length ? opts.axes : ['unspecified'],
-    resources: opts.resources.length ? opts.resources : ['cpu'],
+    resources: opts.resources.length ? opts.resources : (opts.manual ? ['codex', 'model-api'] : ['cpu']),
     notes: opts.notes,
     measurement: {
       wallSeconds: +wallSeconds.toFixed(3),
@@ -153,7 +174,14 @@ function main(){
       modelName: opts.modelName,
       modelCalls: opts.modelCalls,
       inputTokens: opts.inputTokens,
-      outputTokens: opts.outputTokens
+      outputTokens: opts.outputTokens,
+      modelMinutes: opts.modelMinutes,
+      codexUsage5hLeftPercent: Number.isFinite(opts.codexUsage5hLeftPercent) ? opts.codexUsage5hLeftPercent : null,
+      codexUsageWeekLeftPercent: Number.isFinite(opts.codexUsageWeekLeftPercent) ? opts.codexUsageWeekLeftPercent : null,
+      codexModel5hLeftPercent: Number.isFinite(opts.codexModel5hLeftPercent) ? opts.codexModel5hLeftPercent : null,
+      codexModelWeekLeftPercent: Number.isFinite(opts.codexModelWeekLeftPercent) ? opts.codexModelWeekLeftPercent : null,
+      usageReset: opts.usageReset,
+      weeklyReset: opts.weeklyReset
     },
     outputs: {
       artifactBytesBefore: beforeBytes,

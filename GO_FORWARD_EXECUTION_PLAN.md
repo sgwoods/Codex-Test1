@@ -137,6 +137,8 @@ For the immediate next cycle, that means:
 - do not republish `/dev` for every single small change
 - group the next meaningful fidelity work into a small bundle
 - refresh the scorecard and lane metadata when that bundle is ready
+- use the next hosted-dev increment as `1.3.0.1` review posture: useful for
+  integrated review, not yet a beta-promotion claim
 
 ### When To Shape The Next Hosted `/beta`
 
@@ -160,14 +162,20 @@ Practical standard:
 - current hosted `/dev` is our stabilized integration base
 - the next hosted `/beta` should come only after one or two deliberate fidelity
   cycles, not immediately after the `/dev` refresh
-- the next serious public milestone is now the active `1.3.0` `MINOR` family,
-  not a new `MAJOR`
-- after refreshing the conformance roll-up with active reference-cue matching,
-  audio identity is clearly the weakest category at `6.3/10`; this is a
-  stricter read that exposes `7/14` broad Aurora audio reference windows needing
-  tighter segmentation and `22` candidate subwindows for review/promotion
+- the next short-cycle artifact is `1.3.0.1` on `/dev`; the next serious beta
+  family remains `1.4.0` arcade depth
+- after refreshing the audio process with cue contracts, promotion prechecks,
+  layered cue support, composite analysis windows, and calibrated
+  browser-reference gates, audio identity remains the weakest runtime category
+  at `7.3/10`, while the process is now better instrumented: semantic event
+  score is `9.78/10`, acoustic event score is `6.31/10`, cue-contract readiness
+  is `9.09/10`, and the highest measured gap is the smaller residual
+  `playerHit` tail. The latest accepted runtime lift is a layered `playerHit`
+  ship-loss phrase that improved full-theme cue gap by `2.65/10`. The next
+  audio pass should refine the remaining tail gap and then return to
+  `stagePulse` pressure-bed strategy.
 - level arc and encounter shape is now a first-class quality category at
-  `8.4/10`; this should be treated as a high-priority `1.4` workstream because
+  `8.8/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
   repeating a strong early loop
 - the six-window stage-signature read is now `6.4/10` after adding attack-role
@@ -188,16 +196,17 @@ Practical standard:
   - movement and control fidelity
   - gameplay complexity and challenge-stage depth
   - graphical quality at gameplay scale
-  - audio identity and atmosphere
+  - audio identity, cue contracts, and theme latitude
   - gameplay trust and edge-case correctness
   - shell, overlay, and dock polish
   - pilot, leaderboard, replay, and admin operations
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
 - after `1.3.0`, the pickup order should stay explicit:
-  - `1.4.0` arcade depth and platform-contract follow-through
-  - `1.5.0` shared-video evidence
-  - `1.6.0` pilot-facing cabinet polish
+  - short term: `1.3.0.1` hosted-dev conformance/documentation increment
+  - medium term: `1.4.0` arcade depth and platform-contract follow-through
+  - longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
+    cabinet polish, leading toward `2.0` multi-game Platinum
 
 See also:
 
@@ -491,7 +500,7 @@ Work order for the next cycle:
 
 1. stage-1 timing fidelity
 2. challenge-stage timing fidelity
-3. audio identity and cue alignment
+3. audio identity, cue contracts, and cue alignment
 4. movement smoothness, if it still remains noticeable after the timing/audio
    work
 

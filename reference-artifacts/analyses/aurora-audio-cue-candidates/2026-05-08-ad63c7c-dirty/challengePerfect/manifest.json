@@ -1,0 +1,1279 @@
+{
+  "generatedAt": "2026-05-08T17:44:25.274Z",
+  "commit": "ad63c7c",
+  "version": "1.3.0",
+  "items": [
+    {
+      "id": "baseline-current-r01",
+      "label": "Current Aurora baseline r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "baseline-current-r02",
+      "label": "Current Aurora baseline r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 2,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.39
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "baseline-current-r03",
+      "label": "Current Aurora baseline r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.915
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r01",
+      "label": "Thin bright square quiet held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square quiet held",
+        "wav": "samples/thin-bright-square-quiet-held-r01.wav",
+        "webm": "samples/thin-bright-square-quiet-held-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 2.549
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r02",
+      "label": "Thin bright square quiet held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square quiet held",
+        "wav": "samples/thin-bright-square-quiet-held-r02.wav",
+        "webm": "samples/thin-bright-square-quiet-held-r02.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 2.94
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r03",
+      "label": "Thin bright square quiet held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square quiet held",
+        "wav": "samples/thin-bright-square-quiet-held-r03.wav",
+        "webm": "samples/thin-bright-square-quiet-held-r03.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 3.54
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r01",
+      "label": "Thin bright square balanced held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square balanced held",
+        "wav": "samples/thin-bright-square-balanced-held-r01.wav",
+        "webm": "samples/thin-bright-square-balanced-held-r01.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 9,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 4.073
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r02",
+      "label": "Thin bright square balanced held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square balanced held",
+        "wav": "samples/thin-bright-square-balanced-held-r02.wav",
+        "webm": "samples/thin-bright-square-balanced-held-r02.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 10,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 4.457
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r03",
+      "label": "Thin bright square balanced held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square balanced held",
+        "wav": "samples/thin-bright-square-balanced-held-r03.wav",
+        "webm": "samples/thin-bright-square-balanced-held-r03.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 12,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 5.223
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r01",
+      "label": "Thin bright square long low held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square long low held",
+        "wav": "samples/thin-bright-square-long-low-held-r01.wav",
+        "webm": "samples/thin-bright-square-long-low-held-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 5.715
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r02",
+      "label": "Thin bright square long low held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square long low held",
+        "wav": "samples/thin-bright-square-long-low-held-r02.wav",
+        "webm": "samples/thin-bright-square-long-low-held-r02.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 6.348
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r03",
+      "label": "Thin bright square long low held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square long low held",
+        "wav": "samples/thin-bright-square-long-low-held-r03.wav",
+        "webm": "samples/thin-bright-square-long-low-held-r03.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 16,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 6.757
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r01",
+      "label": "Thin bright square soft attack held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square soft attack held",
+        "wav": "samples/thin-bright-square-soft-attack-held-r01.wav",
+        "webm": "samples/thin-bright-square-soft-attack-held-r01.webm",
+        "audioCue": {
+          "cue": "attractPulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "demo",
+          "variant": 3,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 7.44
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r02",
+      "label": "Thin bright square soft attack held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square soft attack held",
+        "wav": "samples/thin-bright-square-soft-attack-held-r02.wav",
+        "webm": "samples/thin-bright-square-soft-attack-held-r02.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 19,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 7.906
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r03",
+      "label": "Thin bright square soft attack held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square soft attack held",
+        "wav": "samples/thin-bright-square-soft-attack-held-r03.wav",
+        "webm": "samples/thin-bright-square-soft-attack-held-r03.webm",
+        "audioCue": {
+          "cue": "attackCharge",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 8.498
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r01",
+      "label": "Thin bright square split low held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square split low held",
+        "wav": "samples/thin-bright-square-split-low-held-r01.wav",
+        "webm": "samples/thin-bright-square-split-low-held-r01.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 22,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 9.056
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r02",
+      "label": "Thin bright square split low held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square split low held",
+        "wav": "samples/thin-bright-square-split-low-held-r02.wav",
+        "webm": "samples/thin-bright-square-split-low-held-r02.webm",
+        "audioCue": {
+          "cue": "attractPulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "demo",
+          "variant": 4,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 9.59
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r03",
+      "label": "Thin bright square split low held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square split low held",
+        "wav": "samples/thin-bright-square-split-low-held-r03.wav",
+        "webm": "samples/thin-bright-square-split-low-held-r03.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 10.182
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-micro-held-r01",
+      "label": "Thin bright square micro held r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square micro held",
+        "wav": "samples/thin-bright-square-micro-held-r01.wav",
+        "webm": "samples/thin-bright-square-micro-held-r01.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 26,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 10.59
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-micro-held-r02",
+      "label": "Thin bright square micro held r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square micro held",
+        "wav": "samples/thin-bright-square-micro-held-r02.wav",
+        "webm": "samples/thin-bright-square-micro-held-r02.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 11.207
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-micro-held-r03",
+      "label": "Thin bright square micro held r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square micro held",
+        "wav": "samples/thin-bright-square-micro-held-r03.wav",
+        "webm": "samples/thin-bright-square-micro-held-r03.webm",
+        "audioCue": {
+          "cue": "attractPulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "demo",
+          "variant": 5,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 11.748
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r01",
+      "label": "Thin bright square quiet tail r1",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square quiet tail",
+        "wav": "samples/thin-bright-square-quiet-tail-r01.wav",
+        "webm": "samples/thin-bright-square-quiet-tail-r01.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 30,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 12.123
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r02",
+      "label": "Thin bright square quiet tail r2",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square quiet tail",
+        "wav": "samples/thin-bright-square-quiet-tail-r02.wav",
+        "webm": "samples/thin-bright-square-quiet-tail-r02.webm",
+        "audioCue": {
+          "cue": "enemyBoom",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 12.748
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r03",
+      "label": "Thin bright square quiet tail r3",
+      "focus": "Candidate comparison against the measured Challenge Perfect reference window.",
+      "cue": "challengePerfect",
+      "aurora": {
+        "label": "Thin bright square quiet tail",
+        "wav": "samples/thin-bright-square-quiet-tail-r03.wav",
+        "webm": "samples/thin-bright-square-quiet-tail-r03.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 13.315
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current-r01.wav",
+        "webm": "samples/baseline-current-r01.webm",
+        "audioCue": {
+          "cue": "playerShot",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 1.04
+        }
+      },
+      "reference": {
+        "label": "Challenging Stage Perfect",
+        "source": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+        "wav": "samples/challenge-perfect-reference.wav",
+        "window": {
+          "startSeconds": 0,
+          "endSeconds": 0.48,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    }
+  ]
+}

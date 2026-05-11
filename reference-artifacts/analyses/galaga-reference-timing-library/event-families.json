@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-12T13:54:57.362Z",
+  "generatedAt": "2026-05-10T20:48:19.310Z",
   "purpose": "Durable reference timing and audio-fidelity library for Galaga-aligned polish work in Aurora and future fixed-screen arcade packs.",
   "rule": "Use measured reference artifacts first for timing, motion, audio, pacing, and transition decisions. Manual listening/viewing is secondary validation.",
   "sourcePacks": [
@@ -8,14 +8,14 @@
     "reference-artifacts/analyses/galaga-audio-reference-video-2/README.md",
     "reference-artifacts/analyses/galaga-audio-reference-video-3/README.md",
     "reference-artifacts/analyses/galaga-audio-cue-matrix/README.md",
-    "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md",
-    "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md",
+    "reference-artifacts/analyses/galaga-timing-alignment/2026-05-10-main-eedc85ba/README.md",
+    "reference-artifacts/analyses/galaga-audio-overlap/2026-05-10-main-eedc85ba/README.md",
     "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md",
     "reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604/README.md"
   ],
   "latestArtifacts": {
-    "timingAlignment": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f",
-    "audioOverlap": "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba",
+    "timingAlignment": "reference-artifacts/analyses/galaga-timing-alignment/2026-05-10-main-eedc85ba",
+    "audioOverlap": "reference-artifacts/analyses/galaga-audio-overlap/2026-05-10-main-eedc85ba",
     "stageOpening": "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba",
     "bossTiming": "reference-artifacts/analyses/galaga-boss-timing/2026-04-12-main-d2c2604"
   },
@@ -42,9 +42,9 @@
         "firstConvoyPulseAfterStart": 6.15
       },
       "auroraCurrent": {
-        "firstPulseAfterSpawn": 6.291,
-        "firstDiveAfterSpawn": 9.791,
-        "gameStartTailPastFirstPulse": -2.29
+        "firstPulseAfterSpawn": 6.293,
+        "firstDiveAfterSpawn": 8.193,
+        "gameStartTailPastFirstPulse": -2.293
       },
       "notes": [
         "Preserve the full canonical game-start phrase where feasible.",
@@ -64,13 +64,9 @@
       "referenceAssets": [
         "src/assets/reference-audio/galaga3-level-underscore.m4a",
         "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
-        "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png"
+        "reference-artifacts/analyses/galaga-timing-alignment/2026-05-10-main-eedc85ba/stage1-first-16s-contact.png"
       ],
-      "auroraCurrent": {
-        "firstStagePulseAfterSpawn": 0.817,
-        "firstAttackAfterSpawn": 8.2,
-        "firstLowerFieldAfterSpawn": 9.35
-      },
+      "auroraCurrent": {},
       "notes": [
         "This is one of the main timing-sensitive areas for subjective “feel”.",
         "Use measured board motion from the archived gameplay video before nudging cadence by ear."
@@ -85,10 +81,10 @@
       "focus": "Dive-start timing versus visible enemy commitment and fall path.",
       "referenceAssets": [
         "src/assets/reference-audio/galaga3-attack-charger.m4a",
-        "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md"
+        "reference-artifacts/analyses/galaga-audio-overlap/2026-05-10-main-eedc85ba/README.md"
       ],
       "auroraCurrent": {
-        "firstChargeAfterDive": 0
+        "firstChargeAfterDive": 0.125
       },
       "notes": [
         "The charge cue should line up with the moment an alien visibly commits to the dive, not with bullets or later descent frames."
@@ -129,9 +125,7 @@
         "src/assets/reference-audio/galaga3-death.m4a",
         "src/assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a"
       ],
-      "auroraCurrent": {
-        "playerHitCueRelativeToLoss": 0
-      },
+      "auroraCurrent": {},
       "notes": [
         "Ordinary ship loss and terminal game-over ambience should remain separate concepts.",
         "Future work should add more visual-timing measurements here, not just cue timestamps."
@@ -148,12 +142,12 @@
       "referenceAssets": [
         "src/assets/reference-audio/galaga-level-flag-v1.m4a",
         "src/assets/reference-audio/galaga-level-flag-v2.m4a",
-        "reference-artifacts/analyses/galaga-audio-overlap/2026-04-12-main-a777fba/README.md"
+        "reference-artifacts/analyses/galaga-audio-overlap/2026-05-10-main-eedc85ba/README.md"
       ],
       "auroraCurrent": {
-        "transitionWindow": 3.204,
-        "transitionCueAfterProbe": 2.022,
-        "spawnAfterTransitionCue": 1.182
+        "transitionWindow": 3.208,
+        "transitionCueAfterProbe": 2.024,
+        "spawnAfterTransitionCue": 1.184
       },
       "notes": [
         "This family should capture how much quiet space the player gets between stage completion and the next arrival."
@@ -177,13 +171,14 @@
       ],
       "auroraCurrent": {
         "challengeEntry": {
-          "cueAfterProbe": 2.219,
-          "spawnAfterCue": 0.583
+          "cueAfterProbe": 2.224,
+          "spawnAfterCue": 1.133,
+          "tailPastSpawn": 0.467
         },
         "challengePerfect": {
           "resultCueAfterClear": 0.342,
-          "nextCueAfterClear": 2.85,
-          "spawnAfterClear": 3.95
+          "nextCueAfterClear": 2.851,
+          "spawnAfterClear": 4.401
         }
       },
       "notes": [

@@ -88,6 +88,14 @@ staging by default and are ignored unless deliberately retained. Keep a raw run
 in git only when it is linked from a manifest, README, dashboard, or issue and
 has a clear quality/conformance purpose.
 
+Promoted conformance evidence must also be visible to readers. When an artifact
+family becomes part of release reasoning, link it from a generated documentation
+surface by updating the relevant maintained source: `GAME_CONFORMANCE_CATALOG.md`,
+`REFERENCE_MEDIA_INVENTORY.md`, `RELEASE_CONFORMANCE_DASHBOARD.md`,
+`CONFORMANCE_ECONOMICS.md`, or the guide manifests. The publish preflight checks
+the generated lane docs and dashboard data for the currently required artifact
+families, so evidence should not remain only in a local folder.
+
 ## Formal Workflow
 
 ### Dev
@@ -102,7 +110,9 @@ has a clear quality/conformance purpose.
 4. Review it in the viewer or analyzer from the imported run folder.
 5. If the run should become release or conformance evidence, promote only the
    reviewed outputs into `reference-artifacts/analyses/` and link them from an
-   inventory, dashboard, scorecard, or issue.
+   inventory, dashboard, scorecard, generated guide section, or issue.
+6. Run `npm run build` before release checks so the generated user-visible docs
+   include the updated explanation.
 
 ### Evidence Cycles
 

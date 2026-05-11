@@ -24,9 +24,9 @@
       ],
       "selection_note": "Preserve the trusted opening, first rack settling, first player shot, and early dive feel."
     },
-    {
-      "window_id": "challenge-stage-candidate",
-      "role": "challenge_stage_expansion_candidate",
+	    {
+	      "window_id": "challenge-stage-candidate",
+	      "role": "challenge_stage_expansion_candidate",
       "source_kind": "aurora_harness_or_reference_video",
       "needs_waveform": true,
       "event_families": [
@@ -35,8 +35,47 @@
         "challenge_enemy_hit",
         "challenge_result"
       ],
-      "selection_note": "Use this to choose the first richer challenge-stage movement family and scoring presentation."
-    },
+	      "selection_note": "Use this to choose the first richer challenge-stage movement family and scoring presentation."
+	    },
+	    {
+	      "window_id": "challenge-stage-scorpion-cross",
+	      "role": "challenge_stage_second_pattern",
+	      "source_kind": "aurora_harness_or_reference_video",
+	      "needs_waveform": true,
+	      "event_families": [
+	        "challenge_wave_start",
+	        "challenge_enemy_path",
+	        "challenge_enemy_hit",
+	        "challenge_result"
+	      ],
+	      "selection_note": "Measure whether the second challenge stage introduces a visibly different cross-sweep alien composition and path family."
+	    },
+	    {
+	      "window_id": "challenge-stage-stingray-hook",
+	      "role": "challenge_stage_third_pattern",
+	      "source_kind": "aurora_harness_or_reference_video",
+	      "needs_waveform": true,
+	      "event_families": [
+	        "challenge_wave_start",
+	        "challenge_enemy_path",
+	        "challenge_enemy_hit",
+	        "challenge_result"
+	      ],
+	      "selection_note": "Measure whether the third challenge stage teaches hook-arc trajectories and a new alien composition."
+	    },
+	    {
+	      "window_id": "challenge-stage-boss-led-loop",
+	      "role": "challenge_stage_fourth_pattern",
+	      "source_kind": "aurora_harness_or_reference_video",
+	      "needs_waveform": true,
+	      "event_families": [
+	        "challenge_wave_start",
+	        "challenge_enemy_path",
+	        "challenge_enemy_hit",
+	        "challenge_result"
+	      ],
+	      "selection_note": "Measure whether the fourth challenge stage reads as a boss-led loop set piece with a distinct bonus-stage identity."
+	    },
     {
       "window_id": "mid-run-pressure",
       "role": "mid_run_pressure",
@@ -70,6 +109,22 @@
       "selection_note": "Add a second mid-run window so stage-signature distance can tell mid-run texture from a single seed artifact."
     },
     {
+      "window_id": "mid-run-pincer-variant",
+      "role": "mid_run_pincer_variant",
+      "source_kind": "aurora_harness_or_self_play_video",
+      "needs_waveform": false,
+      "event_families": [
+        "formation_entry",
+        "enemy_dive_start",
+        "flank_dive_start",
+        "escort_dive_start",
+        "enemy_projectile",
+        "player_hit",
+        "wave_clear"
+      ],
+      "selection_note": "Measure whether the second stingray-band regular stage has a visibly different pincer entry rather than reusing the stage-8 wide-flank read."
+    },
+    {
       "window_id": "late-run-cleanup-or-failure",
       "role": "late_run_cleanup_or_failure",
       "source_kind": "aurora_harness_or_self_play_video",
@@ -99,6 +154,22 @@
         "game_over"
       ],
       "selection_note": "Add a second late-run window focused on higher-stage pressure and possible escort/body-contact signatures."
+    },
+    {
+      "window_id": "late-run-crown-entry",
+      "role": "late_run_crown_entry",
+      "source_kind": "aurora_harness_or_self_play_video",
+      "needs_waveform": false,
+      "event_families": [
+        "formation_entry",
+        "enemy_dive_start",
+        "escort_dive_start",
+        "enemy_projectile",
+        "player_hit",
+        "wave_clear",
+        "game_over"
+      ],
+      "selection_note": "Measure the crown-band stage-16 alien family, split-weave entry path, late pressure, and whether it reads as a new plateau rather than a recycled scorpion band."
     }
   ],
   "required_artifacts": [

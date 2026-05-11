@@ -8,11 +8,17 @@ const HARNESS = path.join(ROOT, 'tools', 'harness', 'run-gameplay.js');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-arc-outcome-probes');
 
 const PROBES = [
+  { id: 'stage-1-baseline-clear-route', scenario: 'stage1-baseline-clear-route', expectedStage: 1 },
   { id: 'mid-run-pressure', scenario: 'stage6-regular', expectedStage: 6 },
+  { id: 'mid-run-pressure-widened-endpoint', scenario: 'stage6-mid-run-wave-clear', expectedStage: 6 },
   { id: 'mid-run-entry-variant', scenario: 'stage8-entry-variant', expectedStage: 8 },
   { id: 'late-run-cleanup-or-failure', scenario: 'stage12-variety', expectedStage: 12 },
+  { id: 'late-run-squadron-reward-best-route', scenario: 'stage12-squadron-reward-best-route', expectedStage: 12 },
+  { id: 'late-run-natural-squadron-reward', scenario: 'stage12-natural-squadron-reward', expectedStage: 12 },
   { id: 'late-run-squadron-reward', scenario: 'stage12-squadron-bonus', expectedStage: 12 },
-  { id: 'late-run-escort-variant', scenario: 'stage14-escort-variant', expectedStage: 14 }
+  { id: 'late-run-escort-variant', scenario: 'stage14-escort-variant', expectedStage: 14 },
+  { id: 'late-run-escort-reward-best-route', scenario: 'stage14-escort-reward-best-route', expectedStage: 14 },
+  { id: 'late-run-natural-escort-reward', scenario: 'stage14-natural-escort-reward', expectedStage: 14 }
 ];
 
 function ensureDir(dir){
@@ -21,6 +27,10 @@ function ensureDir(dir){
 
 function writeJson(file, data){
   fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+}
+
+function readJson(file){
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 function rel(file){
@@ -37,6 +47,16 @@ function gitShortCommit(){
 
 function round(value, digits = 3){
   return Number.isFinite(value) ? +value.toFixed(digits) : 0;
+}
+
+function loadSession(summary){
+  const file = (summary.files || []).find(item => item.endsWith('.json') && !item.endsWith('-system-status.json'));
+  if(!file) return null;
+  try{
+    return readJson(file).session || null;
+  }catch{
+    return null;
+  }
 }
 
 function runProbe(probe, runRoot){
@@ -79,10 +99,16 @@ function runProbe(probe, runRoot){
     };
   }
   const analysis = summary.analysis || {};
+  const session = loadSession(summary);
+  const events = session?.events || [];
   const stageMetrics = analysis.stageMetrics?.[String(probe.expectedStage)] || {};
   const losses = analysis.shipLost || [];
   const collisionLosses = losses.filter(loss => loss.cause === 'enemy_collision');
   const stageClears = analysis.stageClears || [];
+  const bossDamage = events.filter(event => event.type === 'enemy_damaged' && event.enemyType === 'boss');
+  const bossKills = events.filter(event => event.type === 'enemy_killed' && event.enemyType === 'boss');
+  const escortDiveKills = events.filter(event => event.type === 'enemy_killed' && event.enemyType === 'but' && event.dive);
+  const playerShots = events.filter(event => event.type === 'player_shot');
   const attacks = stageMetrics.attacks || 0;
   const bullets = stageMetrics.bullets || 0;
   const duration = summary.duration || analysis.duration || 1;
@@ -97,6 +123,7 @@ function runProbe(probe, runRoot){
     lives: summary.state?.lives || 0,
     attacks,
     bullets,
+    playerShots: playerShots.length,
     kills: stageMetrics.kills || 0,
     losses: losses.length,
     collisionLosses: collisionLosses.length,
@@ -106,6 +133,9 @@ function runProbe(probe, runRoot){
     avgRecentEnemyBulletsAtLoss: round(analysis.bulletPressure?.byStage?.[String(probe.expectedStage)]?.avgRecentEnemyBulletsAtLoss || 0),
     specialAttackCount: analysis.specialAttackMetrics?.count || 0,
     specialAttackBonus: analysis.specialAttackMetrics?.totalBonus || 0,
+    bossDamageCount: bossDamage.length,
+    bossKillCount: bossKills.length,
+    escortDiveKillCount: escortDiveKills.length,
     lossSignatures: losses.map(loss => ({
       t: round(loss.t),
       stageClock: round(loss.stageClock),
@@ -157,10 +187,14 @@ function buildReadme(report){
       lines.push(`- Lives: ${probe.lives}`);
       lines.push(`- Attacks: ${probe.attacks}`);
       lines.push(`- Enemy bullets: ${probe.bullets}`);
+      lines.push(`- Player shots: ${probe.playerShots}`);
       lines.push(`- Losses: ${probe.losses}`);
       lines.push(`- Clears: ${probe.clears}`);
       lines.push(`- Collision losses: ${probe.collisionLosses}`);
       lines.push(`- Special attack count: ${probe.specialAttackCount}`);
+      lines.push(`- Boss damage count: ${probe.bossDamageCount}`);
+      lines.push(`- Boss kill count: ${probe.bossKillCount}`);
+      lines.push(`- Escort dive kill count: ${probe.escortDiveKillCount}`);
       if(probe.lossSignatures.length){
         lines.push(`- First loss: \`${JSON.stringify(probe.lossSignatures[0])}\``);
       }

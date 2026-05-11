@@ -1,0 +1,1439 @@
+{
+  "generatedAt": "2026-05-08T22:40:35.466Z",
+  "commit": "63f90a0",
+  "version": "1.3.0",
+  "cue": "stagePulse",
+  "items": [
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "low-soft-march",
+      "label": "Low soft march",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Low soft march",
+        "wav": "samples/low-soft-march.wav",
+        "webm": "samples/low-soft-march.webm",
+        "audioCue": {
+          "cue": "__candidate_low-soft-march",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.599
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "convoy-current-window",
+      "label": "Convoy current guide window",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Convoy current guide window",
+        "wav": "samples/convoy-current-window.wav",
+        "webm": "samples/convoy-current-window.webm",
+        "audioCue": {
+          "cue": "__candidate_convoy-current-window",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.607
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d240-v86",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.86",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.24s v0.86",
+        "wav": "samples/refclip-s600-d240-v86.wav",
+        "webm": "samples/refclip-s600-d240-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d240-v86",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.598
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d240-v95",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.95",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.24s v0.95",
+        "wav": "samples/refclip-s600-d240-v95.wav",
+        "webm": "samples/refclip-s600-d240-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d240-v95",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.615
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d240-v74",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.74",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.24s v0.74",
+        "wav": "samples/refclip-s600-d240-v74.wav",
+        "webm": "samples/refclip-s600-d240-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d240-v74",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.604
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d240-v105",
+      "label": "Formation Pulse reference 0.6s/0.24s v1.05",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.24s v1.05",
+        "wav": "samples/refclip-s600-d240-v105.wav",
+        "webm": "samples/refclip-s600-d240-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d240-v105",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d240-v62",
+      "label": "Formation Pulse reference 0.6s/0.24s v0.62",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.24s v0.62",
+        "wav": "samples/refclip-s600-d240-v62.wav",
+        "webm": "samples/refclip-s600-d240-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d240-v62",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.597
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d200-v86",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.86",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.2s v0.86",
+        "wav": "samples/refclip-s600-d200-v86.wav",
+        "webm": "samples/refclip-s600-d200-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d200-v86",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.597
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s540-d240-v86",
+      "label": "Formation Pulse reference 0.54s/0.24s v0.86",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.54s/0.24s v0.86",
+        "wav": "samples/refclip-s540-d240-v86.wav",
+        "webm": "samples/refclip-s540-d240-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s540-d240-v86",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.54,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.609
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s660-d240-v86",
+      "label": "Formation Pulse reference 0.66s/0.24s v0.86",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.66s/0.24s v0.86",
+        "wav": "samples/refclip-s660-d240-v86.wav",
+        "webm": "samples/refclip-s660-d240-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s660-d240-v86",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.66,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d200-v95",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.95",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.2s v0.95",
+        "wav": "samples/refclip-s600-d200-v95.wav",
+        "webm": "samples/refclip-s600-d200-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d200-v95",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d200-v74",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.74",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.2s v0.74",
+        "wav": "samples/refclip-s600-d200-v74.wav",
+        "webm": "samples/refclip-s600-d200-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d200-v74",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.612
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s540-d240-v95",
+      "label": "Formation Pulse reference 0.54s/0.24s v0.95",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.54s/0.24s v0.95",
+        "wav": "samples/refclip-s540-d240-v95.wav",
+        "webm": "samples/refclip-s540-d240-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s540-d240-v95",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.54,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s660-d240-v95",
+      "label": "Formation Pulse reference 0.66s/0.24s v0.95",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.66s/0.24s v0.95",
+        "wav": "samples/refclip-s660-d240-v95.wav",
+        "webm": "samples/refclip-s660-d240-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s660-d240-v95",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.66,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.715
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s540-d240-v74",
+      "label": "Formation Pulse reference 0.54s/0.24s v0.74",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.54s/0.24s v0.74",
+        "wav": "samples/refclip-s540-d240-v74.wav",
+        "webm": "samples/refclip-s540-d240-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s540-d240-v74",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.54,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.638
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s660-d240-v74",
+      "label": "Formation Pulse reference 0.66s/0.24s v0.74",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.66s/0.24s v0.74",
+        "wav": "samples/refclip-s660-d240-v74.wav",
+        "webm": "samples/refclip-s660-d240-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s660-d240-v74",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.66,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.609
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d200-v105",
+      "label": "Formation Pulse reference 0.6s/0.2s v1.05",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.2s v1.05",
+        "wav": "samples/refclip-s600-d200-v105.wav",
+        "webm": "samples/refclip-s600-d200-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d200-v105",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.609
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d300-v86",
+      "label": "Formation Pulse reference 0.6s/0.3s v0.86",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.3s v0.86",
+        "wav": "samples/refclip-s600-d300-v86.wav",
+        "webm": "samples/refclip-s600-d300-v86.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d300-v86",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.622
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d200-v62",
+      "label": "Formation Pulse reference 0.6s/0.2s v0.62",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.2s v0.62",
+        "wav": "samples/refclip-s600-d200-v62.wav",
+        "webm": "samples/refclip-s600-d200-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d200-v62",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.2,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.597
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s540-d240-v105",
+      "label": "Formation Pulse reference 0.54s/0.24s v1.05",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.54s/0.24s v1.05",
+        "wav": "samples/refclip-s540-d240-v105.wav",
+        "webm": "samples/refclip-s540-d240-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s540-d240-v105",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.54,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.606
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s660-d240-v105",
+      "label": "Formation Pulse reference 0.66s/0.24s v1.05",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.66s/0.24s v1.05",
+        "wav": "samples/refclip-s660-d240-v105.wav",
+        "webm": "samples/refclip-s660-d240-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s660-d240-v105",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.66,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s540-d240-v62",
+      "label": "Formation Pulse reference 0.54s/0.24s v0.62",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.54s/0.24s v0.62",
+        "wav": "samples/refclip-s540-d240-v62.wav",
+        "webm": "samples/refclip-s540-d240-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s540-d240-v62",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.54,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.601
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s660-d240-v62",
+      "label": "Formation Pulse reference 0.66s/0.24s v0.62",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.66s/0.24s v0.62",
+        "wav": "samples/refclip-s660-d240-v62.wav",
+        "webm": "samples/refclip-s660-d240-v62.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s660-d240-v62",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.66,
+          "referenceClipDuration": 0.24,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.603
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d300-v95",
+      "label": "Formation Pulse reference 0.6s/0.3s v0.95",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.3s v0.95",
+        "wav": "samples/refclip-s600-d300-v95.wav",
+        "webm": "samples/refclip-s600-d300-v95.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d300-v95",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.611
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d300-v74",
+      "label": "Formation Pulse reference 0.6s/0.3s v0.74",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.3s v0.74",
+        "wav": "samples/refclip-s600-d300-v74.wav",
+        "webm": "samples/refclip-s600-d300-v74.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d300-v74",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.636
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    },
+    {
+      "id": "refclip-s600-d300-v105",
+      "label": "Formation Pulse reference 0.6s/0.3s v1.05",
+      "focus": "Candidate comparison for Formation Pulse.",
+      "cue": "stagePulse",
+      "aurora": {
+        "label": "Formation Pulse reference 0.6s/0.3s v1.05",
+        "wav": "samples/refclip-s600-d300-v105.wav",
+        "webm": "samples/refclip-s600-d300-v105.webm",
+        "audioCue": {
+          "cue": "__candidate_refclip-s600-d300-v105",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.6,
+          "referenceClipDuration": 0.3,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.6
+        }
+      },
+      "galaga": {
+        "label": "Current Aurora baseline",
+        "wav": "samples/baseline-current.wav",
+        "webm": "samples/baseline-current.webm",
+        "audioCue": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 0.605
+        }
+      },
+      "reference": {
+        "label": "Ambience / Convoy",
+        "source": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "wav": "samples/formation-pulse-reference.wav",
+        "window": {
+          "startSeconds": 0.6,
+          "endSeconds": 0.84,
+          "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+          "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        }
+      }
+    }
+  ]
+}

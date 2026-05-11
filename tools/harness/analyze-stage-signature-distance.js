@@ -62,6 +62,19 @@ function average(values){
   return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : 0;
 }
 
+function uniqueSampleValues(samples, key){
+  const out = new Set();
+  for(const sample of samples){
+    const value = sample[key];
+    if(Array.isArray(value)){
+      for(const item of value) if(item) out.add(String(item));
+    }else if(value){
+      out.add(String(value));
+    }
+  }
+  return out;
+}
+
 function eventFamilies(events){
   const observed = new Set();
   for(const entry of events.event_family_coverage || []){
@@ -128,9 +141,13 @@ function loadWindow(dir){
   const bullets = samples.map(sample => sample.enemy_bullets || 0);
   const challengeEnemies = samples.map(sample => sample.challenge_enemies || sample.challengeEnemyCount || 0);
   const formationActive = samples.map(sample => sample.formation_active || 0);
-  const cueSet = new Set(samples.map(sample => sample.audioCue?.cue).filter(Boolean));
-  const stagePresentationSet = new Set(samples.map(sample => sample.stagePresentation?.id).filter(Boolean));
-  const attack = attackMix(events, duration);
+	  const cueSet = new Set(samples.map(sample => sample.audioCue?.cue).filter(Boolean));
+	  const stagePresentationSet = new Set(samples.map(sample => sample.stagePresentation?.id).filter(Boolean));
+	  const formationPathFamilies = uniqueSampleValues(samples, 'formationPathFamilies');
+	  const challengePathFamilies = uniqueSampleValues(samples, 'challengePathFamilies');
+	  const formationEnemyTypes = uniqueSampleValues(samples, 'formationEnemyTypes');
+	  const challengeEnemyTypes = uniqueSampleValues(samples, 'challengeEnemyTypes');
+	  const attack = attackMix(events, duration);
 
   const features = {
     stage: normalize(manifest.config?.stage || summary.final_stage || 1, 20),
@@ -149,9 +166,13 @@ function loadWindow(dir){
     finalScore: normalize(summary.final_score || 0, 6000),
     livesLost: normalize((manifest.config?.ships || 5) - (summary.final_lives || manifest.final_state?.lives || 0), 5),
     eventFamilyCoverage: normalize(families.size, EVENT_FAMILIES.length),
-    audioCueVariety: normalize(cueSet.size, 6),
-    stagePresentationVariety: normalize(stagePresentationSet.size, 4),
-    totalAttackRate: normalize(attack.totalAttackRate, 2),
+	    audioCueVariety: normalize(cueSet.size, 6),
+	    stagePresentationVariety: normalize(stagePresentationSet.size, 4),
+	    formationPathFamilyVariety: normalize(formationPathFamilies.size, 5),
+	    challengePathFamilyVariety: normalize(challengePathFamilies.size, 5),
+	    formationEnemyTypeVariety: normalize(formationEnemyTypes.size, 5),
+	    challengeEnemyTypeVariety: normalize(challengeEnemyTypes.size, 5),
+	    totalAttackRate: normalize(attack.totalAttackRate, 2),
     escortAttackRate: normalize(attack.escortAttackRate, 1),
     escortAttackShare: attack.escortAttackShare,
     bossAttackShare: attack.bossAttackShare,
@@ -162,9 +183,15 @@ function loadWindow(dir){
   for(const [family, rate] of Object.entries(eventRates(events, duration))){
     features[`eventRate:${family}`] = normalize(rate, 2);
   }
-  for(const family of EVENT_FAMILIES){
-    features[`eventPresent:${family}`] = families.has(family) ? 1 : 0;
-  }
+	  for(const family of EVENT_FAMILIES){
+	    features[`eventPresent:${family}`] = families.has(family) ? 1 : 0;
+	  }
+	  for(const family of [...formationPathFamilies, ...challengePathFamilies]){
+	    features[`pathFamily:${family}`] = 1;
+	  }
+	  for(const type of [...formationEnemyTypes, ...challengeEnemyTypes]){
+	    features[`enemyType:${type}`] = 1;
+	  }
 
   return {
     id: path.basename(dir),
@@ -187,11 +214,14 @@ function stageBand(stage, challenge){
 }
 
 function featureWeight(key){
-  if(key.startsWith('eventPresent:')) return 0.35;
-  if(key.startsWith('eventRate:')) return 1.8;
-  if(key.endsWith('AttackRate') || key.endsWith('AttackShare')) return 1.7;
-  if(['maxAttackers', 'meanAttackers', 'maxEnemyBullets', 'meanEnemyBullets'].includes(key)) return 1.45;
-  if(['eventFamilyCoverage', 'firstAttackTime', 'stagePresentationVariety'].includes(key)) return 1.25;
+	  if(key.startsWith('eventPresent:')) return 0.35;
+	  if(key.startsWith('eventRate:')) return 1.8;
+	  if(key.startsWith('pathFamily:')) return 2.2;
+	  if(key.startsWith('enemyType:')) return 0.8;
+	  if(key.endsWith('AttackRate') || key.endsWith('AttackShare')) return 1.7;
+	  if(['maxAttackers', 'meanAttackers', 'maxEnemyBullets', 'meanEnemyBullets'].includes(key)) return 1.45;
+	  if(['eventFamilyCoverage', 'firstAttackTime', 'stagePresentationVariety', 'formationPathFamilyVariety', 'challengePathFamilyVariety'].includes(key)) return 1.25;
+	  if(['formationEnemyTypeVariety', 'challengeEnemyTypeVariety'].includes(key)) return 0.8;
   if(['livesLost', 'finalScore', 'maxChallengeEnemies', 'meanChallengeEnemies'].includes(key)) return 1.0;
   if(['stage', 'isChallenge', 'formationActiveMean', 'audioCueVariety'].includes(key)) return 0.75;
   if(['duration', 'playerRange', 'playerStd', 'maxPlayerBullets'].includes(key)) return 0.45;

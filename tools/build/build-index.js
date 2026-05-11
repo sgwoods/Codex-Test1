@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { execSync } = require('child_process');
 const {
   ROOT,
@@ -10,6 +11,7 @@ const {
   DEV_DASHBOARD,
   DEV_CONFORMANCE_DASHBOARD,
   DEV_CONFORMANCE_DASHBOARD_DATA,
+  DEV_PUBLIC_PROJECT_PAGE,
   DEV_PROJECT_GUIDE,
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
@@ -21,6 +23,7 @@ const {
   PRODUCTION_DASHBOARD,
   PRODUCTION_CONFORMANCE_DASHBOARD,
   PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
+  PRODUCTION_PUBLIC_PROJECT_PAGE,
   PRODUCTION_PROJECT_GUIDE,
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
@@ -30,12 +33,14 @@ const {
   PRODUCTION_SCREENSHOT
 } = require('./paths');
 const { html: buildConformanceDashboardHtml } = require('../harness/build-dev-conformance-dashboard-page');
+const { buildPublicProjectSections } = require('./public-project-page-sections');
 const pkg = require(path.resolve(ROOT, 'package.json'));
 
 const SRC = path.join(ROOT, 'src');
 const SCRIPT_DIR = path.join(SRC, 'js');
 const TEMPLATE = path.join(SRC, 'index.template.html');
 const DASHBOARD_TEMPLATE = path.join(SRC, 'release-dashboard.template.html');
+const PUBLIC_PROJECT_PAGE_TEMPLATE = path.join(SRC, 'public', 'aurora-galactica.template.html');
 const PROJECT_GUIDE_TEMPLATE = path.join(SRC, 'project-guide.template.html');
 const APPLICATION_GUIDE_TEMPLATE = path.join(SRC, 'application-guide.template.html');
 const PLATINUM_GUIDE_TEMPLATE = path.join(SRC, 'platinum-guide.template.html');
@@ -52,11 +57,17 @@ const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
+const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
+const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
+const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
+const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
+const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
   'dist/dev/conformance-dashboard.html',
   'dist/dev/conformance-dashboard-data.json',
+  'dist/dev/public-project-page.html',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -71,6 +82,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/release-dashboard.html',
   'dist/production/conformance-dashboard.html',
   'dist/production/conformance-dashboard-data.json',
+  'dist/production/public-project-page.html',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -84,6 +96,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/release-dashboard.html',
   'dist/beta/conformance-dashboard.html',
   'dist/beta/conformance-dashboard-data.json',
+  'dist/beta/public-project-page.html',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -99,6 +112,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'release-dashboard.html',
   'conformance-dashboard.html',
   'conformance-dashboard-data.json',
+  'public-project-page.html',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -108,6 +122,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/release-dashboard.html',
   'dev/conformance-dashboard.html',
   'dev/conformance-dashboard-data.json',
+  'dev/public-project-page.html',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -118,13 +133,15 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/release-dashboard.html',
   'beta/conformance-dashboard.html',
   'beta/conformance-dashboard-data.json',
+  'beta/public-project-page.html',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
   'beta/player-guide.html',
   'beta/build-info.json',
   'beta/README.txt',
-  'beta/README.md'
+  'beta/README.md',
+  'local-dev/public-aurora-galactica-preview.html'
 ]);
 
 function loadEnvFile(file){
@@ -151,6 +168,14 @@ function read(file){
   return fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 }
 
+function readJson(file){
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function rel(file){
+  return path.relative(ROOT, file).replace(/\\/g, '/');
+}
+
 function copyAssetTree(srcDir, destDir){
   if(!fs.existsSync(srcDir)) return [];
   fs.mkdirSync(destDir, { recursive: true });
@@ -164,6 +189,43 @@ function copyAssetTree(srcDir, destDir){
     }
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.copyFileSync(src, dest);
+    copied.push(dest);
+  }
+  return copied;
+}
+
+function normalizeAssetSourcePath(sourcePath){
+  return String(sourcePath || '')
+    .replace(/\\/g, '/')
+    .replace(/^\.\//, '')
+    .replace(/^\/+/, '')
+    .trim();
+}
+
+function catalogMediaHref(sourcePath){
+  const normalized = normalizeAssetSourcePath(sourcePath);
+  if(!normalized) return '';
+  if(/^(?:https?:|data:|assets\/)/.test(normalized)) return normalized;
+  CATALOG_MEDIA_SOURCE_PATHS.add(normalized);
+  const ext = path.extname(normalized);
+  const rawBase = path.basename(normalized, ext) || 'media';
+  const base = rawBase.replace(/[^a-zA-Z0-9._-]+/g, '-').slice(0, 72) || 'media';
+  const hash = crypto.createHash('sha1').update(normalized).digest('hex').slice(0, 10);
+  return `assets/catalog-media/${hash}-${base}${ext}`;
+}
+
+function copyCatalogMediaAssets(destAssetsDir){
+  if(!CATALOG_MEDIA_SOURCE_PATHS.size) return [];
+  const copied = [];
+  const catalogDir = path.join(destAssetsDir, 'catalog-media');
+  fs.mkdirSync(catalogDir, { recursive: true });
+  for(const sourcePath of CATALOG_MEDIA_SOURCE_PATHS){
+    const source = path.join(ROOT, sourcePath);
+    if(!fs.existsSync(source) || !fs.statSync(source).isFile()) continue;
+    const href = catalogMediaHref(sourcePath);
+    const dest = path.join(path.dirname(destAssetsDir), href);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.copyFileSync(source, dest);
     copied.push(dest);
   }
   return copied;
@@ -317,7 +379,25 @@ function loadReleaseManifest(buildVersion = pkg.version){
   return {
     product,
     platform,
-    applications: normalizedApplications
+    applications: normalizedApplications,
+    development: normalizeDevelopmentVersion(raw.development, buildVersion)
+  };
+}
+
+function normalizeDevelopmentVersion(rawDevelopment, buildVersion){
+  const raw = rawDevelopment && typeof rawDevelopment === 'object' ? rawDevelopment : {};
+  const baseVersion = String(raw.baseVersion || buildVersion).trim() || buildVersion;
+  const iteration = Number.parseInt(raw.iteration, 10);
+  const computedLine = Number.isFinite(iteration) && iteration >= 0
+    ? `${baseVersion}.${iteration}`
+    : baseVersion;
+  const versionLine = String(raw.versionLine || computedLine).trim() || computedLine;
+  return {
+    baseVersion,
+    iteration: Number.isFinite(iteration) && iteration >= 0 ? iteration : null,
+    versionLine,
+    releaseTrack: String(raw.releaseTrack || 'hosted-dev-increment').trim() || 'hosted-dev-increment',
+    notes: String(raw.notes || '').trim()
   };
 }
 
@@ -372,6 +452,10 @@ function loadApplicationGuide(){
       graphicsContexts: Array.isArray(raw.graphicsContexts) ? raw.graphicsContexts : [],
       shipCatalog: Array.isArray(raw.shipCatalog) ? raw.shipCatalog : [],
       stageFamilies: Array.isArray(raw.stageFamilies) ? raw.stageFamilies : [],
+      conformanceAlienRows: Array.isArray(raw.conformanceAlienRows) ? raw.conformanceAlienRows : [],
+      conformanceAudioRows: Array.isArray(raw.conformanceAudioRows) ? raw.conformanceAudioRows : [],
+      stageConformanceRows: Array.isArray(raw.stageConformanceRows) ? raw.stageConformanceRows : [],
+      personaRows: Array.isArray(raw.personaRows) ? raw.personaRows : [],
       graphicsControls: Array.isArray(raw.graphicsControls) ? raw.graphicsControls : [],
       links: Array.isArray(raw.links) ? raw.links : []
     };
@@ -387,6 +471,10 @@ function loadApplicationGuide(){
       graphicsContexts: [],
       shipCatalog: [],
       stageFamilies: [],
+      conformanceAlienRows: [],
+      conformanceAudioRows: [],
+      stageConformanceRows: [],
+      personaRows: [],
       graphicsControls: [],
       links: []
     };
@@ -470,6 +558,15 @@ function publicDateLong(buildInfo){
     month: 'long',
     day: 'numeric'
   }).format(new Date(source));
+}
+
+function publicPageDateLong(source){
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(new Date(source || new Date().toISOString()));
 }
 
 function humanizeReleaseLabel(value = ''){
@@ -799,8 +896,8 @@ function renderReleaseVersionDomains(buildInfo){
   const versionCards = [
     {
       label: 'Integrated Release',
-      value: buildInfo.version || '--',
-      detail: `Lane ${buildInfo.releaseChannel || 'development'}${buildInfo.label ? ` · ${buildInfo.label}` : ''}`
+      value: buildInfo.versionLine || buildInfo.version || '--',
+      detail: [`Lane ${buildInfo.releaseChannel || 'development'}`, buildInfo.versionLine && buildInfo.versionLine !== buildInfo.version ? `Base ${buildInfo.version}` : '', buildInfo.label || ''].filter(Boolean).join(' · ')
     },
     {
       label: 'Platinum Platform',
@@ -861,6 +958,10 @@ function renderReleaseVersionDomains(buildInfo){
       </div>
     </section>
   `.trim();
+}
+
+function displayBuildVersion(buildInfo){
+  return buildInfo.versionLine || buildInfo.version || '--';
 }
 
 function projectGuideStyles(){
@@ -1279,6 +1380,12 @@ function applicationGuideStyles(){
     .audioAction:hover{
       background:rgba(105,226,167,0.2);
     }
+    .audioAction.isCompact{
+      min-width:0;
+      padding:7px 10px;
+      font-size:12px;
+      letter-spacing:.02em;
+    }
     .audioStatus{
       margin-top:16px;
       padding:12px 14px;
@@ -1347,6 +1454,111 @@ function applicationGuideStyles(){
       color:#eff7ff;
       font-weight:600;
     }
+    .catalogMedia{
+      display:grid;
+      gap:10px;
+      min-width:190px;
+    }
+    .catalogMediaGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(108px,1fr));
+      gap:10px;
+      align-items:stretch;
+    }
+    .catalogMediaItem{
+      min-width:0;
+      padding:8px;
+      border-radius:14px;
+      background:rgba(6,15,24,0.66);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .catalogMediaLabel{
+      display:block;
+      margin:0 0 6px;
+      color:#dff7ff;
+      font-size:11px;
+      line-height:1.35;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .catalogMediaNote{
+      display:block;
+      margin-top:6px;
+      color:var(--soft);
+      font-size:11px;
+      line-height:1.35;
+    }
+    .catalogMediaImg{
+      display:block;
+      width:100%;
+      max-height:126px;
+      object-fit:contain;
+      image-rendering:auto;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .catalogMediaImg.isPixelated{
+      image-rendering:pixelated;
+    }
+    .mediaCrop{
+      position:relative;
+      overflow:hidden;
+      max-width:100%;
+      margin:0 auto;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .mediaCrop img{
+      display:block;
+      max-width:none;
+      transform-origin:top left;
+      image-rendering:pixelated;
+    }
+    .pixelSprite{
+      display:grid;
+      grid-template-columns:repeat(var(--pixel-cols), 8px);
+      gap:1px;
+      justify-content:center;
+      align-content:center;
+      min-height:58px;
+      padding:10px 8px;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .pixelSprite span{
+      width:8px;
+      height:8px;
+      background:transparent;
+    }
+    .pixelSprite span.isFilled{
+      background:var(--pixel-color);
+      box-shadow:0 0 10px color-mix(in srgb, var(--pixel-color), transparent 55%);
+    }
+    .mediaPlaceholder{
+      padding:10px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.045);
+      border:1px dashed rgba(255,255,255,0.16);
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .conformanceActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .waveformStrip{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+      gap:8px;
+    }
+    .waveformStrip .catalogMediaImg{
+      max-height:86px;
+    }
     .previewFrame{
       position:absolute;
       width:1px;
@@ -1395,7 +1607,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         <div class="meta">
           <div class="metaCard">
             <span class="metaLabel">Target</span>
-            <span class="metaValue">${esc(dashboard.targetVersion || buildInfo.version)}</span>
+            <span class="metaValue">${esc(dashboard.targetVersion || displayBuildVersion(buildInfo))}</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Focus</span>
@@ -1403,7 +1615,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Release</span>
-            <span class="metaValue">${esc(buildInfo.version)}</span>
+            <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
@@ -1434,6 +1646,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         </div>
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
+          <a class="button" href="public-project-page.html">Open lane project page</a>
         </div>
       </section>
       <section class="timeline">
@@ -1669,7 +1882,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -1686,10 +1899,12 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
+            <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
         </section>
@@ -1704,7 +1919,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -1714,6 +1929,410 @@ function buildProjectGuide(buildInfo, latestNote, guide){
     .replace('{{PROJECT_GUIDE_STYLES}}', projectGuideStyles())
     .replace('{{PROJECT_GUIDE_BODY}}', body)
     .trimEnd() + '\n';
+}
+
+function buildPublicProjectPage(buildInfo, latestNote, dashboard){
+  const template = read(PUBLIC_PROJECT_PAGE_TEMPLATE);
+  const templateSha = crypto.createHash('sha256').update(template).digest('hex').slice(0, 12);
+  const syncedAt = buildInfo.builtAtUtc || new Date().toISOString();
+  const conformanceData = loadConformanceDashboardData();
+  const publicSections = buildPublicProjectSections(conformanceData);
+  const releaseChannel = String(buildInfo.releaseChannel || '').toLowerCase();
+  const isProduction = releaseChannel === 'production';
+  const contextValue = isProduction ? 'Production lane' : 'Development lane';
+  const contextNote = isProduction
+    ? 'Generated from the production lane artifacts that feed the public release path.'
+    : 'Generated from the development lane artifacts served locally and on hosted /dev.';
+  const tokens = {
+    PUBLIC_PAGE_EYEBROW: `${contextValue} Project Page`,
+    PUBLIC_RELEASE_CONTEXT_VALUE: contextValue,
+    PUBLIC_RELEASE_CONTEXT_NOTE: contextNote,
+    PUBLIC_DATE_LONG: publicPageDateLong(buildInfo.builtAtUtc),
+    BUILD_VERSION: displayBuildVersion(buildInfo),
+    BUILD_RELEASE_ET: buildInfo.builtAtEt || buildInfo.released || '',
+    BUILD_LABEL: buildInfo.label,
+    PUBLIC_SOURCE_COMMIT: buildInfo.commit,
+    PUBLIC_TEMPLATE_SHA: templateSha,
+    PUBLIC_SYNCED_AT: String(syncedAt).replace(/\.\d{3}Z$/, 'Z'),
+    PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
+    LATEST_RELEASE_TITLE: latestNote.title,
+    LATEST_RELEASE_BODY: latestNote.summary,
+    LANE_GAME_HREF: 'index.html',
+    BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
+    LANE_RELEASE_DASHBOARD_HREF: 'release-dashboard.html',
+    LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
+    LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
+    LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
+    LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
+    LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
+    PUBLIC_FOOTER_NOTE: `${contextValue} project-page summary generated from lane build artifacts.`,
+    ...publicSections
+  };
+  return fillBuildTokens(template, tokens).trimEnd() + '\n';
+}
+
+const AURORA_PIXEL_SPRITES = {
+  'player-fighter': {
+    label: 'Current Aurora player sprite',
+    rows: ['..AA..', '.CBBC.', 'CABBAC', '.ABBA.', '..AA..'],
+    colors: { A: '#9adfff', B: '#72c8ff', C: '#ff4658' }
+  },
+  'dual-fighter': {
+    label: 'Current dual-fighter state',
+    rows: ['..AA....AA..', '.CBBC..CBBC.', 'CABBACCABBAC', '.ABBA..ABBA.', '..AA....AA..'],
+    colors: { A: '#9adfff', B: '#72c8ff', C: '#ff4658' }
+  },
+  'bee-line': {
+    label: 'Current Aurora bee sprite',
+    rows: ['...BB....', '.ABCCB.A.', 'AABBBB.AA', '.A.BB..A.', '..ACCBA..'],
+    colors: { A: '#4e95ff', B: '#ffd24a', C: '#f08f2e' }
+  },
+  'but-line': {
+    label: 'Current Aurora butterfly sprite',
+    rows: ['...BB....', '.ABCCB.A.', 'AABBBB.AA', '.ABCCB.A.', '..ABBA..'],
+    colors: { A: '#62a5ff', B: '#ff3d51', C: '#ffd25a' }
+  },
+  'boss-line': {
+    label: 'Current Aurora boss sprite',
+    rows: ['...CAAC..', '.AABBAA.', 'AABCCBAA', '.AABBAA.', '..ABBBA..'],
+    colors: { A: '#60f0cf', B: '#5fe85c', C: '#cc5fff' }
+  },
+  'rogue-fighter': {
+    label: 'Current Aurora rogue/captured-fighter sprite',
+    rows: ['...CAAC..', '.AABBAA.', 'AABCCBAA', '.AABBAA.', '..ABBBA..'],
+    colors: { A: '#a3cfff', B: '#ff5ea0', C: '#ffe36a' }
+  },
+  'challenge-dragonfly': {
+    label: 'Current challenge dragonfly family',
+    rows: ['.A...A.', '..BBB..', 'ABBCBBA', 'B.BBB.B', '..ACA..'],
+    colors: { A: '#98ffab', B: '#94f0ff', C: '#ffe76f' }
+  },
+  'challenge-mosquito': {
+    label: 'Current challenge mosquito family',
+    rows: ['..A.A..', '.B.B.B.', 'BBCCBBB', '.ABCCA.', '..B.B..'],
+    colors: { A: '#ffab85', B: '#ffe179', C: '#74f4ff' }
+  }
+};
+
+const ALIEN_ROW_SPRITES = [
+  [/bee|zako/i, 'bee-line'],
+  [/butterfly|escort/i, 'but-line'],
+  [/captured/i, 'rogue-fighter'],
+  [/boss|command/i, 'boss-line'],
+  [/challenge|specialty/i, 'challenge-dragonfly']
+];
+
+const ALIEN_REFERENCE_CONTEXT = {
+  'bee-line': [{
+    label: 'Galaga reference context',
+    src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
+    note: 'Score-table context for role and color family.'
+  }],
+  'but-line': [{
+    label: 'Galaga reference context',
+    src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
+    note: 'Score-table context for role and color family.'
+  }],
+  'boss-line': [{
+    label: 'Galaga boss context',
+    src: 'reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png',
+    note: 'Score-table context for boss role and points.'
+  }],
+  'rogue-fighter': [{
+    label: 'Capture/rescue context',
+    src: 'reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png',
+    note: 'Reference-media context for capture and rescue flow.'
+  }],
+  'challenge-dragonfly': [{
+    label: 'Challenge window context',
+    src: 'reference-artifacts/analyses/aurora-level-expansion-cycle/challenge-stage-candidate/frames/contact-sheet-1s.png',
+    note: 'Runtime evidence window for current challenge presentation.'
+  }]
+};
+
+let galagaReferenceSpriteTargetsCache = null;
+let galagaReferenceSpriteModelCache = null;
+let applicationArtifactConformanceCache = null;
+
+function loadGalagaReferenceSpriteTargets(){
+  if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
+  if(!fs.existsSync(GALAGA_REFERENCE_SPRITE_TARGETS)){
+    galagaReferenceSpriteTargetsCache = [];
+    return galagaReferenceSpriteTargetsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_REFERENCE_SPRITE_TARGETS);
+    galagaReferenceSpriteTargetsCache = Array.isArray(artifact.targets) ? artifact.targets : [];
+  } catch (err) {
+    galagaReferenceSpriteTargetsCache = [];
+  }
+  return galagaReferenceSpriteTargetsCache;
+}
+
+function loadGalagaReferenceSpriteModels(){
+  if(galagaReferenceSpriteModelCache) return galagaReferenceSpriteModelCache;
+  if(!fs.existsSync(GALAGA_REFERENCE_SPRITE_MODEL)){
+    galagaReferenceSpriteModelCache = [];
+    return galagaReferenceSpriteModelCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_REFERENCE_SPRITE_MODEL);
+    galagaReferenceSpriteModelCache = Array.isArray(artifact.targets) ? artifact.targets : [];
+  } catch (err) {
+    galagaReferenceSpriteModelCache = [];
+  }
+  return galagaReferenceSpriteModelCache;
+}
+
+function loadApplicationArtifactConformance(){
+  if(applicationArtifactConformanceCache) return applicationArtifactConformanceCache;
+  if(!fs.existsSync(APPLICATION_ARTIFACT_CONFORMANCE)){
+    applicationArtifactConformanceCache = { rows: [] };
+    return applicationArtifactConformanceCache;
+  }
+  try {
+    const artifact = readJson(APPLICATION_ARTIFACT_CONFORMANCE);
+    applicationArtifactConformanceCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : []
+    });
+  } catch (err) {
+    applicationArtifactConformanceCache = { rows: [] };
+  }
+  return applicationArtifactConformanceCache;
+}
+
+function referenceSpriteModelMediaForKey(spriteKey){
+  if(!spriteKey) return [];
+  return loadGalagaReferenceSpriteModels()
+    .filter(target => Array.isArray(target.catalogKeys) && target.catalogKeys.includes(spriteKey) && target.modelImage)
+    .map(target => ({
+      label: target.label || target.id || 'Inferred Galaga sprite model',
+      src: target.modelImage,
+      pixelated: true,
+      kind: 'referenceSpriteModel',
+      note: `Consensus model; ${target.sampleCount || 0} sample${target.sampleCount === 1 ? '' : 's'}, ${Math.round((target.averageConfidence || 0) * 100)}% average confidence.`
+    }));
+}
+
+function referenceSpriteMediaForKey(spriteKey){
+  if(!spriteKey) return [];
+  return [
+    ...referenceSpriteModelMediaForKey(spriteKey),
+    ...loadGalagaReferenceSpriteTargets()
+    .filter(target => Array.isArray(target.catalogKeys) && target.catalogKeys.includes(spriteKey) && target.pixelTarget)
+    .map(target => ({
+      label: target.label || target.id || 'Galaga sprite target',
+      src: target.pixelTarget,
+      pixelated: true,
+      kind: 'referenceSpriteTarget',
+      note: target.note || 'Exact source-frame pixel target.'
+    }))
+  ];
+}
+
+const AUDIO_PLOT_STEMS = {
+  gameStart: 'stage-start',
+  formationArrival: 'formation-pulse',
+  stageTransition: 'stage-start',
+  stagePulse: 'formation-pulse',
+  playerShot: 'player-shot',
+  enemyShot: 'enemy-shot',
+  enemyHit: 'enemy-hit',
+  enemyBoom: 'enemy-boom',
+  bossHit: 'boss-hit',
+  bossBoom: 'boss-boom',
+  captureBeam: 'capture-beam',
+  captureSuccess: 'fighter-captured',
+  captureRetreat: 'capture-retreat',
+  rescueJoin: 'rescue-join',
+  capturedFighterDestroyed: 'captured-fighter-destroyed',
+  challengeTransition: 'challenge-transition',
+  challengeResults: 'challenge-results',
+  challengePerfect: 'challenge-perfect',
+  gameOver: 'game-over',
+  highScoreFirst: 'high-score-1st',
+  highScoreOther: 'high-score-2nd-10th',
+  playerHit: 'ship-loss'
+};
+
+function catalogSpriteForEntry(entry){
+  const explicit = entry?.media?.spriteKey || entry?.spriteKey || entry?.id || '';
+  if(AURORA_PIXEL_SPRITES[explicit]) return AURORA_PIXEL_SPRITES[explicit];
+  const text = `${entry?.name || ''} ${entry?.runtime || ''}`;
+  const match = ALIEN_ROW_SPRITES.find(([pattern]) => pattern.test(text));
+  return match ? AURORA_PIXEL_SPRITES[match[1]] : null;
+}
+
+function spriteKeyForEntry(entry){
+  const explicit = entry?.media?.spriteKey || entry?.spriteKey || entry?.id || '';
+  if(AURORA_PIXEL_SPRITES[explicit]) return explicit;
+  const text = `${entry?.name || ''} ${entry?.runtime || ''}`;
+  const match = ALIEN_ROW_SPRITES.find(([pattern]) => pattern.test(text));
+  return match ? match[1] : '';
+}
+
+function renderPixelSprite(sprite){
+  if(!sprite || !Array.isArray(sprite.rows) || !sprite.rows.length) return '';
+  const cols = Math.max(...sprite.rows.map(row => String(row).length));
+  const colors = sprite.colors || {};
+  const cells = [];
+  for(const row of sprite.rows){
+    const padded = String(row).padEnd(cols, '.');
+    for(const token of padded){
+      const color = colors[token] || '';
+      cells.push(color
+        ? `<span class="isFilled" style="--pixel-color:${esc(color)}"></span>`
+        : '<span></span>');
+    }
+  }
+  return `
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">${esc(sprite.label || 'Runtime sprite')}</span>
+      <div class="pixelSprite" style="--pixel-cols:${cols}" aria-hidden="true">${cells.join('')}</div>
+    </div>
+  `;
+}
+
+function renderMediaImage(item){
+  if(!item || !item.src) return '';
+  const href = catalogMediaHref(item.src);
+  const crop = item.crop || {};
+  const cropWidth = Number(crop.width || crop.w);
+  const cropHeight = Number(crop.height || crop.h);
+  const sourceWidth = Number(crop.sourceWidth || crop.srcWidth);
+  const sourceHeight = Number(crop.sourceHeight || crop.srcHeight);
+  const cropX = Number(crop.x || 0);
+  const cropY = Number(crop.y || 0);
+  const scale = Number(crop.scale || 4);
+  const hasCrop = [cropWidth, cropHeight, sourceWidth, sourceHeight, cropX, cropY, scale]
+    .every(Number.isFinite) && cropWidth > 0 && cropHeight > 0 && sourceWidth > 0 && sourceHeight > 0 && scale > 0;
+  const media = hasCrop
+    ? `<div class="mediaCrop" style="width:${Math.round(cropWidth * scale)}px;height:${Math.round(cropHeight * scale)}px">
+        <img src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy" style="width:${Math.round(sourceWidth * scale)}px;height:${Math.round(sourceHeight * scale)}px;transform:translate(-${Math.round(cropX * scale)}px,-${Math.round(cropY * scale)}px)">
+      </div>`
+    : `<img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy">`;
+  return `
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">${esc(item.label || 'Evidence image')}</span>
+      ${media}
+      ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
+    </div>
+  `;
+}
+
+function renderCatalogVisualMedia(entry, options = {}){
+  const sprite = catalogSpriteForEntry(entry);
+  const spriteKey = spriteKeyForEntry(entry);
+  const media = entry?.media || {};
+  const wantsReferenceTargets = options.includeReferenceTargets || options.includeReferenceContext;
+  const images = [
+    ...(Array.isArray(media.images) ? media.images : []),
+    ...(wantsReferenceTargets ? referenceSpriteMediaForKey(spriteKey) : []),
+    ...(options.includeReferenceContext ? (ALIEN_REFERENCE_CONTEXT[spriteKey] || []) : [])
+  ];
+  const items = [
+    renderPixelSprite(sprite),
+    ...images.map(renderMediaImage)
+  ].filter(Boolean);
+  if(!items.length){
+    return '<div class="mediaPlaceholder">Inline visual evidence pending.</div>';
+  }
+  const hasCropTarget = images.some(item => item?.crop || item?.kind === 'referenceSpriteTarget' || item?.kind === 'referenceSpriteModel');
+  const pending = options.showPendingTarget && !hasCropTarget
+    ? '<div class="mediaPlaceholder">Direct extracted crop comparison pending promotion into this row.</div>'
+    : '';
+  return `<div class="catalogMedia"><div class="catalogMediaGrid">${items.join('')}</div>${pending}</div>`;
+}
+
+function parseCueNames(cues){
+  return String(cues || '')
+    .split(',')
+    .map(cue => cue.trim())
+    .filter(Boolean);
+}
+
+function audioEntriesForConformanceRow(entry, guide){
+  const cues = new Set(parseCueNames(entry.cues));
+  if(!cues.size) return [];
+  return (guide.audioContexts || []).filter(item => cues.has(item.cue));
+}
+
+function referenceClipsForEntries(entries, guide){
+  const ids = new Set(entries.map(entry => entry.id).filter(Boolean));
+  const clips = [];
+  for(const source of [...(guide.comparisonSets || []), ...(guide.audioEventMatrix || [])]){
+    if(!ids.has(source.entryId) || !source.referenceClip) continue;
+    if(clips.some(item => item.referenceClip === source.referenceClip)) continue;
+    clips.push({
+      label: source.referenceLabel || source.label || source.event || 'Reference',
+      referenceClip: source.referenceClip
+    });
+  }
+  return clips;
+}
+
+function audioPlotDirs(){
+  const root = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-theme-comparison');
+  if(!fs.existsSync(root)) return [];
+  return fs.readdirSync(root, { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => path.join(root, entry.name))
+    .sort()
+    .reverse();
+}
+
+function findAudioPlot(stem, variant, kind){
+  if(!stem) return '';
+  const filename = `${stem}-${variant}-${kind}.png`;
+  for(const dir of audioPlotDirs()){
+    const full = path.join(dir, 'plots', filename);
+    if(fs.existsSync(full)) return rel(full);
+  }
+  return '';
+}
+
+function renderAudioEvidenceImages(entries){
+  const stems = Array.from(new Set(entries.map(entry => AUDIO_PLOT_STEMS[entry.cue]).filter(Boolean))).slice(0, 2);
+  const images = [];
+  for(const stem of stems){
+    const auroraWaveform = findAudioPlot(stem, 'aurora', 'waveform');
+    const referenceSpectrogram = findAudioPlot(stem, 'reference', 'spectrogram') || findAudioPlot(stem, 'galaga', 'spectrogram');
+    if(auroraWaveform) images.push({ label: `${stem} Aurora waveform`, src: auroraWaveform });
+    if(referenceSpectrogram) images.push({ label: `${stem} reference spectrogram`, src: referenceSpectrogram });
+  }
+  if(!images.length) return '<div class="mediaPlaceholder">Waveform or spectrogram preview pending for this row.</div>';
+  return `<div class="waveformStrip">${images.map(renderMediaImage).join('')}</div>`;
+}
+
+function renderConformanceAudioReview(entry, guide){
+  const entries = audioEntriesForConformanceRow(entry, guide);
+  const runtimeButtons = entries.map(item => {
+    const index = (guide.audioContexts || []).indexOf(item);
+    return `<button class="audioAction isCompact" type="button" data-audio-index="${index}">Play ${esc(item.label || item.cue || 'Cue')}</button>`;
+  });
+  const references = referenceClipsForEntries(entries, guide).map(item => (
+    `<button class="audioAction isCompact" type="button" data-event-reference="${esc(item.referenceClip)}" data-event-label="${esc(item.label)}">Ref ${esc(item.label)}</button>`
+  ));
+  const compare = entries.find(item => (guide.comparisonSets || []).some(row => row.entryId === item.id));
+  const compareButton = compare
+    ? `<button class="audioAction isCompact" type="button" data-compare-entry-id="${esc(compare.id)}" data-theme-play="triple">Compare ${esc(compare.label || compare.cue)}</button>`
+    : '';
+  const actions = [...runtimeButtons, ...references, compareButton].filter(Boolean);
+  return `
+    <div class="catalogMedia">
+      ${actions.length ? `<div class="conformanceActions">${actions.join('')}</div>` : '<div class="mediaPlaceholder">Playable cue mapping pending.</div>'}
+      ${renderAudioEvidenceImages(entries)}
+    </div>
+  `;
+}
+
+function renderArtifactEvidenceList(evidence){
+  const items = String(evidence || '')
+    .split(/\s*;\s*/)
+    .map(item => item.trim())
+    .filter(Boolean);
+  if(!items.length) return '<span class="docMeta">Evidence pending</span>';
+  return items.map(item => `<code>${esc(item)}</code>`).join('<br>');
 }
 
 function buildApplicationGuide(buildInfo, latestNote, guide){
@@ -1726,6 +2345,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'visual-contexts', title: 'Graphics Contexts' },
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
     { id: 'stage-families', title: 'Stage Family Progression' },
+    { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
+    { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
+    { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
+    { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
+    { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'graphics-controls', title: 'Presentation Controls' },
     { id: 'guide-links', title: 'Related Guides' }
   ];
@@ -1822,6 +2446,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const shipRows = (guide.shipCatalog || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.type || '')}</span></td>
+      <td>${renderCatalogVisualMedia(entry, { includeReferenceTargets: true })}</td>
       <td>${esc(entry.families || '')}</td>
       <td>${esc(entry.appears || '')}</td>
       <td>${esc(entry.context || '')}</td>
@@ -1834,6 +2459,58 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.families || '')}</td>
       <td><code>${esc(entry.bossArchetype || '')}</code></td>
       <td>${esc(entry.description || '')}</td>
+    </tr>
+  `).join('\n');
+  const artifactConformance = loadApplicationArtifactConformance();
+  const artifactConformanceRows = (artifactConformance.rows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.surface || '')}</strong><br><span class="docMeta">${esc(entry.status || '')}</span></td>
+      <td><strong>${esc(entry.current || '')}</strong><br><span class="docMeta">Target: ${esc(entry.target || '')}</span></td>
+      <td>${esc(entry.measurement || '')}</td>
+      <td>${renderArtifactEvidenceList(entry.evidence)}</td>
+      <td>${esc(entry.next || '')}</td>
+    </tr>
+  `).join('\n') || `
+    <tr>
+      <td colspan="5"><span class="docMeta">Artifact conformance status pending. Run <code>npm run harness:analyze:application-artifact-conformance</code> to generate this table.</span></td>
+    </tr>
+  `;
+  const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
+      <td>${renderCatalogVisualMedia(entry, { includeReferenceContext: true, showPendingTarget: true })}</td>
+      <td>${esc(entry.activity || '')}</td>
+      <td>${esc(entry.presence || '')}</td>
+      <td>${esc(entry.reference || '')}</td>
+      <td><strong>${esc(entry.score || '')}</strong><br><span class="docMeta">${esc(entry.confidence || '')}</span></td>
+      <td>${esc(entry.next || '')}</td>
+    </tr>
+  `).join('\n');
+  const conformanceAudioRows = (guide.conformanceAudioRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.family || '')}</strong><br><span class="docMeta"><code>${esc(entry.cues || '')}</code></span></td>
+      <td>${esc(entry.meaning || '')}</td>
+      <td>${renderConformanceAudioReview(entry, guide)}</td>
+      <td>${esc(entry.reference || '')}</td>
+      <td><strong>${esc(entry.score || '')}</strong><br><span class="docMeta">${esc(entry.confidence || '')}</span></td>
+      <td>${esc(entry.next || '')}</td>
+    </tr>
+  `).join('\n');
+  const stageConformanceRows = (guide.stageConformanceRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.stage || '')}</strong></td>
+      <td>${esc(entry.summary || '')}</td>
+      <td>${esc(entry.aspects || '')}</td>
+      <td>${esc(entry.evidence || '')}</td>
+      <td>${esc(entry.gap || '')}</td>
+    </tr>
+  `).join('\n');
+  const personaRows = (guide.personaRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
+      <td>${esc(entry.role || '')}</td>
+      <td>${esc(entry.expected || '')}</td>
+      <td>${esc(entry.checks || '')}</td>
     </tr>
   `).join('\n');
   const controlRows = (guide.graphicsControls || []).map((entry) => `
@@ -1868,7 +2545,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -2003,6 +2680,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               <thead>
                 <tr>
                   <th>Ship / Type</th>
+                  <th>Visual</th>
                   <th>Families / Presentation</th>
                   <th>Where It Appears</th>
                   <th>Gameplay Context</th>
@@ -2033,6 +2711,123 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${stageFamilyRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="artifact-conformance-status">
+          <div class="sectionHeader">
+            <h2>Artifact Conformance Status</h2>
+            <p>Target-versus-current conformance across the application artifacts that shape the game: sprite targets, sprite motion, audio cues, backgrounds, shell/icon surfaces, fonts, stage feel, and boss choreography. Rows are generated from the current analysis artifacts so the scorecard stays tied to measured evidence.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Artifact Surface</th>
+                  <th>Current / Target</th>
+                  <th>Measurement</th>
+                  <th>Evidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${artifactConformanceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="conformance-alien-index">
+          <div class="sectionHeader">
+            <h2>Alien Conformance Index</h2>
+            <p>Current game-visible alien and enemy roles with activity, presence, evidence anchors, confidence, and the next conformance gap. This is the generated-guide view of the maintained game conformance catalog.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Alien / Role</th>
+                  <th>Visual Evidence</th>
+                  <th>Activity</th>
+                  <th>Presence</th>
+                  <th>Reference</th>
+                  <th>Score / Confidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${conformanceAlienRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="conformance-audio-index">
+          <div class="sectionHeader">
+            <h2>Audio Conformance Index</h2>
+            <p>The major event-audio families, what they mean to the player, which Galaga-family references currently ground them, and where measurement still needs to improve.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Cue Family</th>
+                  <th>Gameplay Meaning</th>
+                  <th>Human Review</th>
+                  <th>Reference</th>
+                  <th>Score / Confidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${conformanceAudioRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="stage-conformance-summary">
+          <div class="sectionHeader">
+            <h2>Stage Conformance Summary</h2>
+            <p>Stage-by-stage and stage-band summary of difficulty, maneuvers, trajectory identity, gameplay description, current evidence, and the main conformance gap.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Stage / Band</th>
+                  <th>Gameplay Summary</th>
+                  <th>Key Aspects</th>
+                  <th>Evidence</th>
+                  <th>Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${stageConformanceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="persona-catalog">
+          <div class="sectionHeader">
+            <h2>Testing Personas</h2>
+            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the harness substrate; Aurora owns what each persona should prove for its gameplay.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Persona</th>
+                  <th>Testing Role</th>
+                  <th>Expected Behavior</th>
+                  <th>Game-Specific Checks</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${personaRows}
               </tbody>
             </table>
           </div>
@@ -2077,7 +2872,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -2240,10 +3035,15 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               }
               return;
             }
-            if(!playEntry(entry, mode === 'galaga' ? 'galaga' : 'aurora')){
+            const playMode = mode === 'galaga'
+              ? 'galaga'
+              : mode === 'galaga-assets'
+                ? 'galaga-assets'
+                : 'aurora';
+            if(!playEntry(entry, playMode)){
               return;
             }
-            setStatus('Played ' + (mode === 'galaga' ? 'Galaga' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
+            setStatus('Played ' + (playMode === 'galaga' ? 'Galaga' : playMode === 'galaga-assets' ? 'Galaga runtime reference' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
             return;
           }
           const compareSetButton = event.target.closest('[data-compare-set]');
@@ -2251,6 +3051,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             const mode = compareSetButton.getAttribute('data-compare-set');
             playSet(
               mode === 'galaga' ? 'galaga'
+              : mode === 'galaga-assets' ? 'galaga-assets'
               : mode === 'ab' ? 'ab'
               : mode === 'reference' ? 'reference'
               : mode === 'triple' ? 'triple'
@@ -2326,7 +3127,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -2361,7 +3162,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -2393,7 +3194,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">${esc(buildInfo.version)}</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -2427,7 +3228,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
         </ul>
         <p class="footer">
           Latest release note: <strong>${esc(latestNote.title)}</strong><br>
-          Release ${esc(buildInfo.version)} · Updated ${esc(publicDateLong(buildInfo))}
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
         </p>
       </aside>
     </main>
@@ -2443,6 +3244,14 @@ function normalizeVersionForChannel(version, releaseChannel){
     return String(version).replace(/-(alpha|beta|rc)(\.[0-9]+)?$/, '');
   }
   return version;
+}
+
+function versionLineForChannel(version, releaseChannel, releaseManifest){
+  if(releaseChannel !== 'development') return version;
+  const dev = releaseManifest && releaseManifest.development && typeof releaseManifest.development === 'object'
+    ? releaseManifest.development
+    : {};
+  return String(dev.versionLine || version).trim() || version;
 }
 
 function parseArgs(argv){
@@ -2469,6 +3278,7 @@ function lanePaths(lane){
       dashboard: PRODUCTION_DASHBOARD,
       conformanceDashboard: PRODUCTION_CONFORMANCE_DASHBOARD,
       conformanceDashboardData: PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
+      publicProjectPage: PRODUCTION_PUBLIC_PROJECT_PAGE,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
@@ -2484,6 +3294,7 @@ function lanePaths(lane){
     dashboard: DEV_DASHBOARD,
     conformanceDashboard: DEV_CONFORMANCE_DASHBOARD,
     conformanceDashboardData: DEV_CONFORMANCE_DASHBOARD_DATA,
+    publicProjectPage: DEV_PUBLIC_PROJECT_PAGE,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
@@ -2506,6 +3317,8 @@ function build(options = {}){
   const buildRepoRef = detectRepoRef();
   const buildReleaseChannel = buildLane === 'production' ? 'production' : 'development';
   const buildVersion = normalizeVersionForChannel(pkg.version, buildReleaseChannel);
+  const releaseManifest = loadReleaseManifest(buildVersion);
+  const buildVersionLine = versionLineForChannel(buildVersion, buildReleaseChannel, releaseManifest);
   const buildDirtyFiles = git('status --porcelain', '')
     .split('\n')
     .map(s => s.trim())
@@ -2513,7 +3326,7 @@ function build(options = {}){
     .filter(entry => !isGeneratedBuildPath(parsePorcelainPath(entry)));
   const buildDirty = buildDirtyFiles.length > 0;
   const buildNumber = process.env.BUILD_NUMBER || process.env.GITHUB_RUN_NUMBER || git('rev-list --count HEAD', '0');
-  const buildLabel = `${buildVersion}+build.${buildNumber}.sha.${buildShortCommit}${buildDirty ? '.dirty' : ''}`;
+  const buildLabel = `${buildVersionLine}+build.${buildNumber}.sha.${buildShortCommit}${buildDirty ? '.dirty' : ''}`;
   const buildState = `${buildBranch}@${buildShortCommit}${buildDirty ? ' dirty' : ' clean'}`;
   const buildUtc = new Date().toISOString();
   const buildReleaseEt = new Intl.DateTimeFormat('en-US',{
@@ -2530,7 +3343,6 @@ function build(options = {}){
   const releaseDashboard = loadReleaseDashboard();
   const conformanceDashboardSummary = loadConformanceDashboardSummary();
   const conformanceDashboardData = loadConformanceDashboardData();
-  const releaseManifest = loadReleaseManifest(buildVersion);
   const projectGuide = loadProjectGuide();
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
@@ -2558,6 +3370,7 @@ function build(options = {}){
   const testAccountUserId = testAccountUserIds[0] || '';
   const tokens = {
     BUILD_VERSION: buildVersion,
+    BUILD_VERSION_LINE: buildVersionLine,
     BUILD_LABEL: buildLabel,
     BUILD_CHANNEL: buildReleaseChannel,
     BUILD_COMMIT: buildCommit,
@@ -2602,6 +3415,8 @@ function build(options = {}){
   const buildInfo = {
     product: releaseManifest.product,
     version: buildVersion,
+    versionLine: buildVersionLine,
+    versionScheme: buildVersionLine !== buildVersion ? 'hosted-dev-increment' : 'semver',
     label: buildLabel,
     buildNumber,
     commit: buildCommit,
@@ -2615,6 +3430,7 @@ function build(options = {}){
     builtAtEt: buildReleaseEt,
     platform: releaseManifest.platform,
     applications: releaseManifest.applications,
+    development: releaseManifest.development,
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
     latestReleaseNote: latestNote
   };
@@ -2629,9 +3445,16 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
-    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
+  const publicProjectPageHtml = buildPublicProjectPage(buildInfo, latestNote, releaseDashboard);
+  fs.writeFileSync(out.publicProjectPage, publicProjectPageHtml);
+  if(buildLane === 'dev'){
+    fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
+    fs.writeFileSync(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW, publicProjectPageHtml);
+  }
   fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
   fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
@@ -2648,6 +3471,7 @@ function build(options = {}){
   }
   const assetsOut = path.join(path.dirname(out.index), 'assets');
   const copiedAssets = copyAssetTree(ASSETS_DIR, assetsOut);
+  const copiedCatalogMedia = copyCatalogMediaAssets(assetsOut);
   const assetConformanceDashboard = path.join(assetsOut, 'conformance-dashboard.html');
   const assetConformanceDashboardData = path.join(assetsOut, 'conformance-dashboard-data.json');
   fs.writeFileSync(assetConformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
@@ -2658,7 +3482,8 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
-    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
   fs.writeFileSync(assetConformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   return [
@@ -2666,6 +3491,8 @@ function build(options = {}){
     out.dashboard,
     out.conformanceDashboard,
     out.conformanceDashboardData,
+    out.publicProjectPage,
+    ...(buildLane === 'dev' ? [LOCAL_DEV_PUBLIC_PROJECT_PREVIEW] : []),
     out.projectGuide,
     out.applicationGuide,
     out.platinumGuide,
@@ -2675,7 +3502,8 @@ function build(options = {}){
     out.screenshot,
     assetConformanceDashboard,
     assetConformanceDashboardData,
-    ...copiedAssets
+    ...copiedAssets,
+    ...copiedCatalogMedia
   ];
 }
 

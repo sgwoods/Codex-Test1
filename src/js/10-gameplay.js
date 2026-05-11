@@ -9,6 +9,24 @@ function ex(x,y,n=10,col='#fff'){
  S.fx.push({x,y,vx:0,vy:0,t:n>14?.11:.08,r:n>14?10:7,c:'#fff',flash:1});
 }
 
+function bossDamageFx(x,y){
+ for(let i=0;i<12;i++){
+  const side=i%2?-1:1;
+  S.fx.push({
+   x:x+side*auxRnd(7,1.5),
+   y:y+auxRnd(5,-5),
+   vx:side*auxRnd(84,18),
+   vy:auxRnd(46,-46),
+   t:auxRnd(.18,.08),
+   r:auxRnd(1.4,.55),
+   c:i%3===0?'#fff7ba':(i%3===1?'#7ff5ff':'#ff94d4'),
+   sq:1
+  });
+ }
+ S.fx.push({x,y,vx:0,vy:0,t:.22,r:13,c:'#fff0a8',ring:1});
+ S.fx.push({x,y,vx:0,vy:0,t:.13,r:7,c:'#eaf9ff',flash:1});
+}
+
 
 function updateAuroraGameplay(dt){
  if((!started&&!S.attract)||paused)return;

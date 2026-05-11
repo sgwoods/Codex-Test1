@@ -1,0 +1,24 @@
+{
+  "name": "stage15-challenge-boss-led-loop",
+  "seed": 15015,
+  "duration": 24,
+  "config": {
+    "stage": 15,
+    "ships": 5,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.65, "action": "down", "code": "ArrowRight" },
+    { "t": 3.1, "action": "up", "code": "ArrowRight" },
+    { "t": 3.11, "action": "down", "code": "ArrowLeft" },
+    { "t": 6.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 6.81, "action": "down", "code": "ArrowRight" },
+    { "t": 10.4, "action": "up", "code": "ArrowRight" },
+    { "t": 10.41, "action": "down", "code": "ArrowLeft" },
+    { "t": 14.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 14.81, "action": "down", "code": "ArrowRight" },
+    { "t": 18.6, "action": "up", "code": "ArrowRight" },
+    { "t": 20.9, "action": "up", "code": "Space" }
+  ]
+}

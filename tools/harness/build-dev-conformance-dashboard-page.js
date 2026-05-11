@@ -61,6 +61,7 @@ function html(data, options = {}){
   const markdownLabel = options.markdownLabel || 'Markdown';
   const dataHref = options.dataHref || 'conformance-dashboard-data.json';
   const artifactBase = normalizeArtifactBase(options.artifactBase || '../');
+  const rawArtifactBase = normalizeArtifactBase(options.rawArtifactBase || artifactBase);
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -92,7 +93,7 @@ function html(data, options = {}){
       line-height:1.45;
     }
     a{color:var(--blue)}
-    .shell{max-width:1440px;margin:0 auto;padding:24px}
+    .shell{width:min(100%,1440px);margin:0 auto;padding:18px 20px;overflow-x:hidden}
     header{
       display:grid;
       grid-template-columns:minmax(0,1fr) auto;
@@ -139,7 +140,7 @@ function html(data, options = {}){
     .pill{cursor:pointer}
     .pill:disabled{cursor:wait;opacity:.75}
     .button{box-shadow:0 2px 0 rgba(0,0,0,.12)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
+    .grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:14px 0}
     .tabs{
       display:flex;
       gap:8px;
@@ -164,21 +165,74 @@ function html(data, options = {}){
       background:var(--panel);
       border:1px solid var(--line);
       border-radius:8px;
-      padding:14px;
+      padding:12px;
       box-shadow:var(--shadow);
       min-width:0;
     }
     .label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-bottom:5px}
-    .value{font-size:22px;font-weight:850;letter-spacing:0}
-    .split{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:start}
-    section{margin-top:14px}
+    .value{font-size:clamp(18px,2vw,22px);font-weight:850;letter-spacing:0;overflow-wrap:anywhere}
+    .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,380px);gap:14px;align-items:start}
+    section{margin-top:12px}
     h2{margin:0 0 10px;font-size:18px;letter-spacing:0}
-    table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+    table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);table-layout:fixed}
     th,td{padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
     th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#4e4a43;background:#ece6db}
     tr:last-child td{border-bottom:0}
-    .priority{font-weight:850;text-align:center;width:56px}
-    .metric{font-weight:800;min-width:230px}
+    .priority{font-weight:850;text-align:center;width:48px}
+    .metric{font-weight:800;min-width:0}
+    .metricList{display:grid;gap:10px}
+    .metricRow{
+      display:grid;
+      grid-template-columns:46px minmax(0,1.7fr) minmax(92px,.45fr) minmax(120px,.7fr) minmax(0,1.2fr) auto;
+      gap:10px;
+      align-items:center;
+      padding:11px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:8px;
+      box-shadow:var(--shadow);
+      min-width:0;
+    }
+    .metricRow.expanded{align-items:start}
+    .metricRow .detailPanel{
+      grid-column:1/-1;
+      box-shadow:none;
+      background:#fbfaf7;
+    }
+    .metricName{font-weight:850;min-width:0;overflow-wrap:anywhere}
+    .metricSub{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .metricNext{font-size:13px;color:#34302a;min-width:0;overflow-wrap:anywhere}
+    .detailButton,.backButton{
+      border:1px solid var(--line);
+      background:#fbfaf7;
+      color:var(--ink);
+      border-radius:6px;
+      padding:7px 9px;
+      font-size:12px;
+      font-weight:850;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .detailPanel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:13px;
+      box-shadow:var(--shadow);
+      min-width:0;
+    }
+    .detailHeader{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:10px;
+    }
+    .detailHeader h2{margin:0}
+    .detailGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .overviewStack{display:grid;gap:12px}
     .metricDetails summary{
       cursor:pointer;
       list-style-position:outside;
@@ -192,7 +246,7 @@ function html(data, options = {}){
     }
     .metricExplanation{
       display:grid;
-      grid-template-columns:repeat(3,minmax(170px,1fr));
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:10px;
       margin-top:10px;
       padding:10px;
@@ -250,6 +304,18 @@ function html(data, options = {}){
       color:#4e4a43;
       white-space:nowrap;
     }
+    .costStrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 12px}
+    .costPanelGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .chartGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .chartCard{display:grid;gap:8px}
+    .chartCard img{width:100%;height:auto;border:1px solid var(--line);border-radius:7px;background:#fff}
+    .chartLinks{display:flex;gap:8px;flex-wrap:wrap}
+    .compactTable th,.compactTable td{font-size:13px;padding:8px;overflow-wrap:anywhere}
+    .ingestionList{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+    .ingestionItem{display:grid;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:var(--shadow);min-width:0}
+    .ingestionItem.expanded{grid-row:span 2}
+    .ingestionItem .detailPanel{box-shadow:none;background:#fbfaf7}
+    .ingestionMeta{display:flex;gap:6px;flex-wrap:wrap}
     .score{font-weight:850;white-space:nowrap}
     .costCell{min-width:150px}
     .good{color:var(--green)} .watch{color:var(--yellow)} .gap{color:var(--red)}
@@ -270,12 +336,16 @@ function html(data, options = {}){
       .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .ingestionGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .split{grid-template-columns:1fr}
+      .metricRow{grid-template-columns:38px minmax(0,1fr) minmax(82px,.35fr);align-items:start}
+      .metricNext,.metricRow .costCell,.metricRow .detailButton{grid-column:2/-1}
+      .costStrip,.costPanelGrid,.detailGrid,.chartGrid{grid-template-columns:1fr}
     }
     @media (max-width:640px){
       .shell{padding:16px}
       .grid{grid-template-columns:1fr}
       .ingestionGrid{grid-template-columns:1fr}
-      table{display:block;overflow-x:auto}
+      .metricRow{grid-template-columns:34px minmax(0,1fr)}
+      .metricRow .score{grid-column:2}
       .metricExplanation{grid-template-columns:1fr}
       h1{font-size:26px}
     }
@@ -309,11 +379,13 @@ function html(data, options = {}){
     const statusLine = document.getElementById('statusLine');
     let dashboard = JSON.parse(document.getElementById('initial-data').textContent);
     let lastRefresh = Date.now();
-    let activeTab = 'conformance';
+    let activeTab = ['conformance', 'cost', 'ingestion'].includes(location.hash.replace('#', '')) ? location.hash.replace('#', '') : 'conformance';
+    let activeDetail = null;
     let activeGameKey = localStorage.getItem('platinumConformanceDashboardGame') || dashboard.activeGameKey || 'aurora-galactica';
     const refreshMs = 30000;
     const dataHref = ${JSON.stringify(dataHref)};
     const artifactBase = ${JSON.stringify(artifactBase)};
+    const rawArtifactBase = ${JSON.stringify(rawArtifactBase)};
 
     function esc(value){
       return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -353,6 +425,12 @@ function html(data, options = {}){
       if(!value) return '#';
       if(/^https?:/i.test(value)) return value;
       return artifactBase + encodeURI(value);
+    }
+
+    function rawArtifactHref(value){
+      if(!value) return '#';
+      if(/^https?:/i.test(value)) return value;
+      return rawArtifactBase + encodeURI(value);
     }
 
     function gameProfiles(){
@@ -439,8 +517,68 @@ function html(data, options = {}){
     function dashboardTabs(){
       return '<div class="tabs" role="tablist" aria-label="Dashboard views">'
         + '<button class="tab ' + (activeTab === 'conformance' ? 'active' : '') + '" type="button" data-tab="conformance" role="tab" aria-selected="' + (activeTab === 'conformance') + '">Conformance</button>'
+        + '<button class="tab ' + (activeTab === 'cost' ? 'active' : '') + '" type="button" data-tab="cost" role="tab" aria-selected="' + (activeTab === 'cost') + '">Cost / Value</button>'
         + '<button class="tab ' + (activeTab === 'ingestion' ? 'active' : '') + '" type="button" data-tab="ingestion" role="tab" aria-selected="' + (activeTab === 'ingestion') + '">Ingestion</button>'
         + '</div>';
+    }
+
+    function rowDetailKey(type, index){
+      return type + ':' + index;
+    }
+
+    function selectedDetail(type, rows){
+      if(!activeDetail || !activeDetail.startsWith(type + ':')) return null;
+      const index = Number(activeDetail.split(':')[1]);
+      if(!Number.isInteger(index) || index < 0 || index >= rows.length) return null;
+      return { index, row: rows[index] };
+    }
+
+    function metricRow(row, index){
+      const detailKey = rowDetailKey('metric', index);
+      const isExpanded = activeDetail === detailKey;
+      return '<article class="metricRow' + (isExpanded ? ' expanded' : '') + '" data-detail-row="' + esc(detailKey) + '">'
+        + '<div class="priority">' + esc(row.rank || index + 1) + '</div>'
+        + '<div><div class="metricName">' + esc(row.metric) + '</div><div class="metricSub">' + esc(row.why || row.status || '') + '</div></div>'
+        + '<div class="score ' + scoreClass(row.score10) + '">' + esc(row.current || '--') + '</div>'
+        + '<div class="costCell"><span class="badge">' + esc(row.costContext?.costClass || '--') + '</span><div class="small">' + esc(row.costContext?.trackedSpend || row.effort || '--') + '</div></div>'
+        + '<div class="metricNext">' + esc(row.next || row.status || '--') + '</div>'
+        + '<button class="detailButton" type="button" data-detail="' + esc(detailKey) + '" aria-expanded="' + (isExpanded ? 'true' : 'false') + '">' + (isExpanded ? 'Close' : 'Details') + '</button>'
+        + (isExpanded ? metricDetailPanel(row) : '')
+        + '</article>';
+    }
+
+    function metricDetailPanel(row){
+      const explanation = row.explanation || {};
+      const scoreContext = row.scoreContext || {};
+      const costContext = row.costContext || {};
+      return '<section class="detailPanel" id="metricDetailPanel">'
+        + '<div class="detailHeader"><div><span class="label">Metric drill-down</span><h2>' + esc(row.metric) + '</h2><p class="small">' + esc(row.status || '') + '</p></div><button class="backButton" type="button" data-detail-back="1">Close details</button></div>'
+        + '<div class="detailGrid">'
+        + explanationBlock('Score meaning', scoreContext.scoreMeaning)
+        + explanationBlock('Confidence', scoreContext.confidence)
+        + explanationBlock('Resolution', scoreContext.resolution)
+        + explanationBlock('Cost / resources', costContext.summary || costContext.expectedResources)
+        + explanationBlock('Tracked spend', costContext.trackedSpend)
+        + explanationBlock('Value / cost read', costContext.valueCostRead)
+        + explanationBlock('Calculation', explanation.calculation)
+        + explanationBlock('Grounding best case', explanation.grounding)
+        + explanationBlock('Player / designer meaning', explanation.meaning)
+        + explanationBlock('Recommended next step', row.next)
+        + explanationBlock('Evidence', row.evidence)
+        + explanationBlock('Target', row.target)
+        + '</div>'
+        + '<details class="metricDetails" open><summary><span>Full metric row text</span></summary><div class="metricExplanation">'
+        + explanationBlock('Why this matters', row.why)
+        + explanationBlock('Effort', row.effort)
+        + explanationBlock('Gap to target', costContext.gapToTarget)
+        + '</div></details>'
+        + '</section>';
+    }
+
+    function gateGrid(gates){
+      return '<div class="overviewStack">' + gates.map(gate => (
+        '<article class="card"><span class="label">' + esc(gate.Gate) + '</span><span class="value">' + esc(gate.Current) + '</span><div class="small">Target: ' + esc(gate.Target) + '</div><div class="small">' + esc(gate.Notes) + '</div></article>'
+      )).join('') + '</div>';
     }
 
     function conformanceView(data, rows, gates, semantics){
@@ -448,23 +586,7 @@ function html(data, options = {}){
         <div class="split">
           <section>
             <h2>Priority Investment Queue</h2>
-            <table>
-              <thead><tr><th>Rank</th><th>Metric</th><th>Current</th><th>Confidence</th><th>Resolution</th><th>Cost / resources</th><th>Tracked spend</th><th>Target</th><th>Status</th><th>Recommended next step</th><th>Evidence</th></tr></thead>
-              <tbody>\${rows.map(row => \`
-                <tr>
-                  <td class="priority">\${esc(row.rank)}</td>
-                  <td class="metric">\${metricCell(row)}</td>
-                  <td class="score \${scoreClass(row.score10)}">\${esc(row.current)}</td>
-                  <td><span class="badge">\${esc(row.scoreContext?.confidence || '--')}</span></td>
-                  <td class="small">\${esc(row.scoreContext?.resolution || '--')}</td>
-                  <td class="costCell"><span class="badge">\${esc(row.costContext?.costClass || '--')}</span><div class="small">\${esc(row.costContext?.expectedResources || '--')}</div></td>
-                  <td class="small">\${esc(row.costContext?.trackedSpend || '--')}</td>
-                  <td>\${esc(row.target)}</td>
-                  <td>\${esc(row.status)}<div class="small">\${esc(row.effort)}</div></td>
-                  <td>\${esc(row.next)}</td>
-                  <td class="small">\${esc(row.evidence)}</td>
-                </tr>\`).join('')}</tbody>
-            </table>
+            <div class="metricList">\${rows.map(metricRow).join('')}</div>
           </section>
           <div>
             <section class="card">
@@ -476,11 +598,7 @@ function html(data, options = {}){
             </section>
             <section class="card">
               <h2>Release Gates</h2>
-              <table>
-                <thead><tr><th>Gate</th><th>Current</th><th>Target</th></tr></thead>
-                <tbody>\${gates.map(gate => \`
-                  <tr><td class="metric">\${esc(gate.Gate)}</td><td class="score">\${esc(gate.Current)}</td><td>\${esc(gate.Target)}<div class="small">\${esc(gate.Notes)}</div></td></tr>\`).join('')}</tbody>
-              </table>
+              \${gateGrid(gates.slice(0, 6))}
             </section>
             <section class="card">
               <h2>First-Class Axes</h2>
@@ -500,6 +618,26 @@ function html(data, options = {}){
     function ingestionView(data){
       const rows = Array.isArray(data.ingestionRows) ? data.ingestionRows : [];
       const summary = data.ingestionSummary || {};
+      function ingestionDetailPanel(row){
+        return \`
+          <section class="detailPanel">
+            <div class="detailHeader">
+              <div><span class="label">Ingestion drill-down</span><h2>\${esc(row.source)}</h2><p class="small">Source / evidence family mapped to \${esc(row.linkedMetric || 'a conformance metric')}</p></div>
+              <button class="backButton" type="button" data-detail-back="1">Close details</button>
+            </div>
+            <div class="detailGrid">
+              \${explanationBlock('Axis', row.axis)}
+              \${explanationBlock('Artifact type', row.artifactType)}
+              \${explanationBlock('Coverage', row.coverage)}
+              \${explanationBlock('Annotation status', row.annotationStatus)}
+              \${explanationBlock('Confidence', row.confidence)}
+              \${explanationBlock('Linked metric', row.linkedMetric)}
+              \${explanationBlock('Anchor', row.anchor)}
+              \${explanationBlock('Missing next', row.next)}
+            </div>
+          </section>
+        \`;
+      }
       return \`
         <section>
           <h2>Ingestion Framework</h2>
@@ -516,23 +654,113 @@ function html(data, options = {}){
           </section>
           <section>
             <h2>Evidence Pipeline Queue</h2>
-            <table>
-              <thead><tr><th>Priority</th><th>Source / evidence family</th><th>Axis</th><th>Artifact type</th><th>Coverage</th><th>Annotation status</th><th>Confidence</th><th>Linked metric</th><th>Anchor</th><th>Missing next</th></tr></thead>
-              <tbody>\${rows.map(row => \`
-                <tr>
-                  <td class="priority">\${esc(row.rank)}</td>
-                  <td class="metric">\${esc(row.source)}</td>
-                  <td>\${esc(row.axis)}</td>
-                  <td>\${esc(row.artifactType)}</td>
-                  <td>\${esc(row.coverage)}</td>
-                  <td><span class="badge">\${esc(row.annotationStatus)}</span></td>
-                  <td><span class="badge">\${esc(row.confidence)}</span></td>
-                  <td>\${esc(row.linkedMetric)}</td>
-                  <td class="anchorCell">\${anchorLink(row.anchor)}</td>
-                  <td>\${esc(row.next)}</td>
-                </tr>\`).join('')}</tbody>
-            </table>
+            <span class="label">Source / evidence family</span>
+            <div class="ingestionList">\${rows.map((row, index) => {
+              const detailKey = rowDetailKey('ingestion', index);
+              const isExpanded = activeDetail === detailKey;
+              return \`
+              <article class="ingestionItem\${isExpanded ? ' expanded' : ''}" data-detail-row="\${esc(detailKey)}">
+                <div><span class="badge">Priority \${esc(row.rank || index + 1)}</span></div>
+                <div class="metricName">\${esc(row.source)}</div>
+                <div class="ingestionMeta"><span class="badge">\${esc(row.axis)}</span><span class="badge">\${esc(row.confidence)}</span><span class="badge">\${esc(row.annotationStatus)}</span></div>
+                <div class="small"><strong>Coverage:</strong> \${esc(row.coverage)} · <strong>Artifact:</strong> \${esc(row.artifactType)}</div>
+                <div class="small"><strong>Missing next:</strong> \${esc(row.next)}</div>
+                <button class="detailButton" type="button" data-detail="\${esc(detailKey)}" aria-expanded="\${isExpanded ? 'true' : 'false'}">\${isExpanded ? 'Close' : 'Details'}</button>
+                \${isExpanded ? ingestionDetailPanel(row) : ''}
+              </article>\`;
+            }).join('')}</div>
           </section>
+        </section>
+      \`;
+    }
+
+    function tableFromRows(rows, empty){
+      if(!Array.isArray(rows) || !rows.length) return '<p class="small">' + esc(empty || 'No rows available yet.') + '</p>';
+      const headers = Object.keys(rows[0]);
+      return '<table class="compactTable"><thead><tr>' + headers.map(header => '<th>' + esc(header) + '</th>').join('') + '</tr></thead><tbody>'
+        + rows.map(row => '<tr>' + headers.map(header => '<td>' + esc(row[header]) + '</td>').join('') + '</tr>').join('')
+        + '</tbody></table>';
+    }
+
+    function chartTitle(value){
+      const name = String(value || '').split('/').pop() || 'chart';
+      return name.replace(/\\.svg$/i, '').replace(/-/g, ' ');
+    }
+
+    function economicsCharts(economics){
+      const charts = Array.isArray(economics.charts) ? economics.charts : [];
+      if(!charts.length){
+        return '<p class="small">No economics charts generated yet. Run the conformance economics analysis before release review.</p>';
+      }
+      return '<div class="chartGrid">' + charts.map(chart => {
+        return '<article class="card chartCard">'
+          + '<h2>' + esc(chartTitle(chart)) + '</h2>'
+          + '<a href="' + esc(artifactHref(chart)) + '"><img src="' + esc(rawArtifactHref(chart)) + '" alt="' + esc(chartTitle(chart)) + ' chart"></a>'
+          + '<div class="chartLinks"><a href="' + esc(artifactHref(chart)) + '">Open artifact</a><a href="' + esc(dataHref) + '">Open dashboard data</a></div>'
+          + '</article>';
+      }).join('') + '</div>';
+    }
+
+    function computeApplicationPanel(economics){
+      const application = economics.computeApplication || {};
+      const gpuRows = (application.gpuUseByPurpose || []).slice(0, 5).map(row => ({
+        Purpose: row.purpose,
+        Runs: row.runs,
+        Wall: Math.round((row.wallSeconds || 0) / 60) + ' min',
+        Share: (row.sharePercent ?? 0) + '%'
+      }));
+      const cpuRows = (application.cpuUseByPurpose || []).slice(0, 5).map(row => ({
+        Purpose: row.purpose,
+        Runs: row.runs,
+        Wall: Math.round((row.wallSeconds || 0) / 60) + ' min',
+        Share: (row.sharePercent ?? 0) + '%'
+      }));
+      const impactRows = (application.gameplayImprovementByPart || []).slice(0, 5).map(row => ({
+        'Project part': row.part,
+        Movement: '+' + row.positiveScore10,
+        Share: (row.sharePercent ?? 0) + '%'
+      }));
+      const limitations = Array.isArray(application.limitations) ? application.limitations : [];
+      return '<section class="card">'
+        + '<h2>CPU / GPU Application</h2>'
+        + '<p class="small">Purpose charts distinguish local CPU/browser harness work from declared GPU-equivalent Codex/OpenAI/model/API work, then compare that spend with best-effort score movement by project area.</p>'
+        + '<div class="costPanelGrid">'
+        + '<section><h2>GPU-Equivalent Purpose</h2>' + tableFromRows(gpuRows, 'No declared GPU-equivalent purpose rows yet.') + '</section>'
+        + '<section><h2>Local CPU Purpose</h2>' + tableFromRows(cpuRows, 'No tracked local CPU/browser purpose rows yet.') + '</section>'
+        + '<section><h2>Gameplay Improvement</h2>' + tableFromRows(impactRows, 'No positive score movement attribution yet.') + '</section>'
+        + '</div>'
+        + (limitations.length ? '<p class="small">' + esc(limitations[0]) + '</p>' : '')
+        + '</section>';
+    }
+
+    function costView(data, rows){
+      const economics = data.economicsSummary || {};
+      return \`
+        <section>
+          <h2>Cost / Value</h2>
+          <p class="small">This is the primary graphical deep dive for conformance economics: score movement versus measured local CPU/browser work, GPU-equivalent model/API usage, artifact growth, and expected metric lift. Use it to decide which conformance axis deserves the next long compute cycle.</p>
+          <div class="costStrip">
+            <div class="card"><span class="label">Measured runs</span><span class="value">\${esc(economics.measuredRuns || 0)}</span></div>
+            <div class="card"><span class="label">Wall time</span><span class="value">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min</span></div>
+            <div class="card"><span class="label">CPU time</span><span class="value">\${esc(Math.round((economics.cpuSeconds || 0) / 60))} min</span></div>
+          </div>
+          \${computeApplicationPanel(economics)}
+          <section class="card">
+            <h2>Economics Charts</h2>
+            \${economicsCharts(economics)}
+          </section>
+          <div class="costPanelGrid">
+            <section class="card">
+              <h2>Metric Investment Read</h2>
+              <div class="metricList">\${rows.slice(0, 5).map(metricRow).join('')}</div>
+            </section>
+            <section class="card">
+              <h2>Resource Spend</h2>
+              \${tableFromRows(data.resourceSpendTable, 'No resource spend table generated yet.')}
+              <h2 style="margin-top:14px">Axis Spend</h2>
+              \${tableFromRows((data.axisSpendTable || []).slice(0, 8), 'No axis spend table generated yet.')}
+            </section>
+          </div>
         </section>
       \`;
     }
@@ -561,16 +789,41 @@ function html(data, options = {}){
           <div class="card"><span class="label">Tracked Compute</span><span class="value">\${esc(economics.measuredRuns || 0)} runs</span><div class="small">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min wall / \${esc(Math.round((economics.cpuSeconds || 0) / 60))} min CPU</div></div>
         </div>
         \${dashboardTabs()}
-        \${activeTab === 'ingestion' ? ingestionView(data) : conformanceView(data, rows, gates, semantics)}
+        \${activeTab === 'ingestion' ? ingestionView(data) : activeTab === 'cost' ? costView(data, rows) : conformanceView(data, rows, gates, semantics)}
       \`;
       statusLine.textContent = 'Dashboard data: ' + (rootData.generatedAt || data.generatedAt || 'unknown') + '. Selected game: ' + (data.gameName || activeGameKey) + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
     }
 
     app.addEventListener('click', event => {
+      function detailRow(key){
+        return [...document.querySelectorAll('[data-detail-row]')].find(row => row.dataset.detailRow === key) || null;
+      }
       const tab = event.target.closest('[data-tab]');
       if(tab){
         activeTab = tab.dataset.tab || 'conformance';
+        activeDetail = null;
+        history.replaceState(null, '', '#' + activeTab);
         render(dashboard);
+        return;
+      }
+      const detailButton = event.target.closest('[data-detail]');
+      if(detailButton){
+        const key = detailButton.dataset.detail || null;
+        activeDetail = activeDetail === key ? null : key;
+        render(dashboard);
+        const row = detailRow(key);
+        if(row) row.scrollIntoView({ block:'nearest' });
+        const nextButton = row?.querySelector('[data-detail]');
+        if(nextButton) nextButton.focus({ preventScroll:true });
+        return;
+      }
+      const backButton = event.target.closest('[data-detail-back]');
+      if(backButton){
+        const key = activeDetail;
+        activeDetail = null;
+        render(dashboard);
+        const row = detailRow(key);
+        if(row) row.scrollIntoView({ block:'nearest' });
         return;
       }
       const button = event.target.closest('.closeDetails');
@@ -581,6 +834,7 @@ function html(data, options = {}){
 
     gameSelector.addEventListener('change', () => {
       activeGameKey = gameSelector.value || activeGameKey;
+      activeDetail = null;
       localStorage.setItem('platinumConformanceDashboardGame', activeGameKey);
       render(dashboard);
     });

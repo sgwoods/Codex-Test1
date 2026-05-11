@@ -1,0 +1,1063 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-cue-candidate-loop",
+  "generatedAt": "2026-05-08T17:44:25.274Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "ad63c7c",
+  "dirty": true,
+  "cue": "challengePerfect",
+  "repetitions": 3,
+  "candidateFilter": [
+    "thin-bright-square-balanced-held",
+    "thin-bright-square-long-low-held",
+    "thin-bright-square-micro-held",
+    "thin-bright-square-quiet-held",
+    "thin-bright-square-quiet-tail",
+    "thin-bright-square-soft-attack-held",
+    "thin-bright-square-split-low-held"
+  ],
+  "problem": "Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.",
+  "strategy": "Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift.",
+  "successMeasure": "A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS gap, and keep active duration within 0.08s of the reference.",
+  "source": {
+    "comparisonSet": "challenge-perfect-compare",
+    "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+    "referenceWindow": {
+      "startSeconds": 0,
+      "endSeconds": 0.48,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+      "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-ad63c7c-dirty/challengePerfect/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-ad63c7c-dirty/challengePerfect/metrics.json"
+  },
+  "sampleCandidates": [
+    {
+      "id": "thin-bright-square-quiet-held-r03",
+      "label": "Thin bright square quiet held r3",
+      "baseLabel": "Thin bright square quiet held",
+      "repetition": 3,
+      "risk10": 3.11,
+      "durationGapSeconds": 0.12,
+      "centroidGapHz": 641.4,
+      "zeroCrossingGapPerSecond": 260.7,
+      "rmsGap": 0.1264,
+      "activeMetrics": {
+        "duration_s": 0.36,
+        "peak": 0.9329,
+        "rms": 0.2685,
+        "spectral_centroid_hz": 1398.7,
+        "zero_crossings_per_s": 2516.9
+      },
+      "comparison": {
+        "duration_s": 0.12,
+        "spectral_centroid_hz": 641.4,
+        "zero_crossings_per_s": 260.7,
+        "rms": 0.1264
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r02",
+      "label": "Thin bright square balanced held r2",
+      "baseLabel": "Thin bright square balanced held",
+      "repetition": 2,
+      "risk10": 3.16,
+      "durationGapSeconds": 0.19,
+      "centroidGapHz": 730.3,
+      "zeroCrossingGapPerSecond": 491.2,
+      "rmsGap": 0.0813,
+      "activeMetrics": {
+        "duration_s": 0.29,
+        "peak": 0.8359,
+        "rms": 0.2234,
+        "spectral_centroid_hz": 1309.8,
+        "zero_crossings_per_s": 1765
+      },
+      "comparison": {
+        "duration_s": 0.19,
+        "spectral_centroid_hz": 730.3,
+        "zero_crossings_per_s": 491.2,
+        "rms": 0.0813
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r01",
+      "label": "Thin bright square quiet held r1",
+      "baseLabel": "Thin bright square quiet held",
+      "repetition": 1,
+      "risk10": 3.24,
+      "durationGapSeconds": 0.11,
+      "centroidGapHz": 690,
+      "zeroCrossingGapPerSecond": 168.6,
+      "rmsGap": 0.1403,
+      "activeMetrics": {
+        "duration_s": 0.37,
+        "peak": 0.8453,
+        "rms": 0.2824,
+        "spectral_centroid_hz": 1350.1,
+        "zero_crossings_per_s": 2424.8
+      },
+      "comparison": {
+        "duration_s": 0.11,
+        "spectral_centroid_hz": 690,
+        "zero_crossings_per_s": 168.6,
+        "rms": 0.1403
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r01",
+      "label": "Thin bright square balanced held r1",
+      "baseLabel": "Thin bright square balanced held",
+      "repetition": 1,
+      "risk10": 3.25,
+      "durationGapSeconds": 0.2,
+      "centroidGapHz": 702.9,
+      "zeroCrossingGapPerSecond": 160.6,
+      "rmsGap": 0.135,
+      "activeMetrics": {
+        "duration_s": 0.28,
+        "peak": 0.9214,
+        "rms": 0.2771,
+        "spectral_centroid_hz": 1337.2,
+        "zero_crossings_per_s": 2095.6
+      },
+      "comparison": {
+        "duration_s": 0.2,
+        "spectral_centroid_hz": 702.9,
+        "zero_crossings_per_s": 160.6,
+        "rms": 0.135
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r02",
+      "label": "Thin bright square quiet tail r2",
+      "baseLabel": "Thin bright square quiet tail",
+      "repetition": 2,
+      "risk10": 3.3,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 804.8,
+      "zeroCrossingGapPerSecond": 1270.8,
+      "rmsGap": 0.0035,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.4604,
+        "rms": 0.1386,
+        "spectral_centroid_hz": 1235.3,
+        "zero_crossings_per_s": 985.4
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 804.8,
+        "zero_crossings_per_s": 1270.8,
+        "rms": 0.0035
+      }
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r03",
+      "label": "Thin bright square soft attack held r3",
+      "baseLabel": "Thin bright square soft attack held",
+      "repetition": 3,
+      "risk10": 3.34,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 812.8,
+      "zeroCrossingGapPerSecond": 1289.5,
+      "rmsGap": 0.0041,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.4487,
+        "rms": 0.138,
+        "spectral_centroid_hz": 1227.3,
+        "zero_crossings_per_s": 966.7
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 812.8,
+        "zero_crossings_per_s": 1289.5,
+        "rms": 0.0041
+      }
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r01",
+      "label": "Thin bright square split low held r1",
+      "baseLabel": "Thin bright square split low held",
+      "repetition": 1,
+      "risk10": 3.39,
+      "durationGapSeconds": 0.04,
+      "centroidGapHz": 719,
+      "zeroCrossingGapPerSecond": 1477.6,
+      "rmsGap": 0.0121,
+      "activeMetrics": {
+        "duration_s": 0.52,
+        "peak": 0.4491,
+        "rms": 0.13,
+        "spectral_centroid_hz": 1321.1,
+        "zero_crossings_per_s": 778.6
+      },
+      "comparison": {
+        "duration_s": 0.04,
+        "spectral_centroid_hz": 719,
+        "zero_crossings_per_s": 1477.6,
+        "rms": 0.0121
+      }
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r03",
+      "label": "Thin bright square long low held r3",
+      "baseLabel": "Thin bright square long low held",
+      "repetition": 3,
+      "risk10": 3.41,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 716.2,
+      "zeroCrossingGapPerSecond": 1322.9,
+      "rmsGap": 0.0317,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.3649,
+        "rms": 0.1104,
+        "spectral_centroid_hz": 1323.9,
+        "zero_crossings_per_s": 933.3
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 716.2,
+        "zero_crossings_per_s": 1322.9,
+        "rms": 0.0317
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r03",
+      "label": "Thin bright square quiet tail r3",
+      "baseLabel": "Thin bright square quiet tail",
+      "repetition": 3,
+      "risk10": 3.5,
+      "durationGapSeconds": 0.05,
+      "centroidGapHz": 783.3,
+      "zeroCrossingGapPerSecond": 1447.3,
+      "rmsGap": 0.0126,
+      "activeMetrics": {
+        "duration_s": 0.43,
+        "peak": 0.4781,
+        "rms": 0.1295,
+        "spectral_centroid_hz": 1256.8,
+        "zero_crossings_per_s": 808.9
+      },
+      "comparison": {
+        "duration_s": 0.05,
+        "spectral_centroid_hz": 783.3,
+        "zero_crossings_per_s": 1447.3,
+        "rms": 0.0126
+      }
+    },
+    {
+      "id": "thin-bright-square-micro-held-r02",
+      "label": "Thin bright square micro held r2",
+      "baseLabel": "Thin bright square micro held",
+      "repetition": 2,
+      "risk10": 3.51,
+      "durationGapSeconds": 0.011,
+      "centroidGapHz": 811.7,
+      "zeroCrossingGapPerSecond": 1506,
+      "rmsGap": 0.0011,
+      "activeMetrics": {
+        "duration_s": 0.469,
+        "peak": 0.5294,
+        "rms": 0.1432,
+        "spectral_centroid_hz": 1228.4,
+        "zero_crossings_per_s": 750.2
+      },
+      "comparison": {
+        "duration_s": 0.011,
+        "spectral_centroid_hz": 811.7,
+        "zero_crossings_per_s": 1506,
+        "rms": 0.0011
+      }
+    },
+    {
+      "id": "baseline-current-r01",
+      "label": "Current Aurora baseline r1",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 1,
+      "risk10": 3.51,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 903.4,
+      "zeroCrossingGapPerSecond": 289.5,
+      "rmsGap": 0.1071,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8546,
+        "rms": 0.2492,
+        "spectral_centroid_hz": 1136.7,
+        "zero_crossings_per_s": 1966.7
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 903.4,
+        "zero_crossings_per_s": 289.5,
+        "rms": 0.1071
+      }
+    },
+    {
+      "id": "baseline-current-r02",
+      "label": "Current Aurora baseline r2",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 2,
+      "risk10": 3.51,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 903.4,
+      "zeroCrossingGapPerSecond": 289.5,
+      "rmsGap": 0.1071,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8546,
+        "rms": 0.2492,
+        "spectral_centroid_hz": 1136.7,
+        "zero_crossings_per_s": 1966.7
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 903.4,
+        "zero_crossings_per_s": 289.5,
+        "rms": 0.1071
+      }
+    },
+    {
+      "id": "baseline-current-r03",
+      "label": "Current Aurora baseline r3",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 3,
+      "risk10": 3.51,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 903.4,
+      "zeroCrossingGapPerSecond": 289.5,
+      "rmsGap": 0.1071,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8546,
+        "rms": 0.2492,
+        "spectral_centroid_hz": 1136.7,
+        "zero_crossings_per_s": 1966.7
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 903.4,
+        "zero_crossings_per_s": 289.5,
+        "rms": 0.1071
+      }
+    },
+    {
+      "id": "thin-bright-square-micro-held-r01",
+      "label": "Thin bright square micro held r1",
+      "baseLabel": "Thin bright square micro held",
+      "repetition": 1,
+      "risk10": 3.56,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 871,
+      "zeroCrossingGapPerSecond": 1392.4,
+      "rmsGap": 0.0028,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.4468,
+        "rms": 0.1449,
+        "spectral_centroid_hz": 1169.1,
+        "zero_crossings_per_s": 863.8
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 871,
+        "zero_crossings_per_s": 1392.4,
+        "rms": 0.0028
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-tail-r01",
+      "label": "Thin bright square quiet tail r1",
+      "baseLabel": "Thin bright square quiet tail",
+      "repetition": 1,
+      "risk10": 3.58,
+      "durationGapSeconds": 0.02,
+      "centroidGapHz": 838.2,
+      "zeroCrossingGapPerSecond": 1447.7,
+      "rmsGap": 0.0096,
+      "activeMetrics": {
+        "duration_s": 0.46,
+        "peak": 0.5299,
+        "rms": 0.1517,
+        "spectral_centroid_hz": 1201.9,
+        "zero_crossings_per_s": 808.5
+      },
+      "comparison": {
+        "duration_s": 0.02,
+        "spectral_centroid_hz": 838.2,
+        "zero_crossings_per_s": 1447.7,
+        "rms": 0.0096
+      }
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r01",
+      "label": "Thin bright square long low held r1",
+      "baseLabel": "Thin bright square long low held",
+      "repetition": 1,
+      "risk10": 3.62,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 833.9,
+      "zeroCrossingGapPerSecond": 1456.6,
+      "rmsGap": 0.015,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.4082,
+        "rms": 0.1271,
+        "spectral_centroid_hz": 1206.2,
+        "zero_crossings_per_s": 799.6
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 833.9,
+        "zero_crossings_per_s": 1456.6,
+        "rms": 0.015
+      }
+    },
+    {
+      "id": "thin-bright-square-quiet-held-r02",
+      "label": "Thin bright square quiet held r2",
+      "baseLabel": "Thin bright square quiet held",
+      "repetition": 2,
+      "risk10": 3.64,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 771.4,
+      "zeroCrossingGapPerSecond": 375,
+      "rmsGap": 0.151,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.8863,
+        "rms": 0.2931,
+        "spectral_centroid_hz": 1268.7,
+        "zero_crossings_per_s": 1881.2
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 771.4,
+        "zero_crossings_per_s": 375,
+        "rms": 0.151
+      }
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r03",
+      "label": "Thin bright square split low held r3",
+      "baseLabel": "Thin bright square split low held",
+      "repetition": 3,
+      "risk10": 3.64,
+      "durationGapSeconds": 0.061,
+      "centroidGapHz": 855.3,
+      "zeroCrossingGapPerSecond": 1438.2,
+      "rmsGap": 0.0117,
+      "activeMetrics": {
+        "duration_s": 0.419,
+        "peak": 0.5047,
+        "rms": 0.1538,
+        "spectral_centroid_hz": 1184.8,
+        "zero_crossings_per_s": 818
+      },
+      "comparison": {
+        "duration_s": 0.061,
+        "spectral_centroid_hz": 855.3,
+        "zero_crossings_per_s": 1438.2,
+        "rms": 0.0117
+      }
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r01",
+      "label": "Thin bright square soft attack held r1",
+      "baseLabel": "Thin bright square soft attack held",
+      "repetition": 1,
+      "risk10": 3.66,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 878.9,
+      "zeroCrossingGapPerSecond": 1462.4,
+      "rmsGap": 0.0082,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.4205,
+        "rms": 0.1339,
+        "spectral_centroid_hz": 1161.2,
+        "zero_crossings_per_s": 793.8
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 878.9,
+        "zero_crossings_per_s": 1462.4,
+        "rms": 0.0082
+      }
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held-r02",
+      "label": "Thin bright square soft attack held r2",
+      "baseLabel": "Thin bright square soft attack held",
+      "repetition": 2,
+      "risk10": 3.66,
+      "durationGapSeconds": 0.071,
+      "centroidGapHz": 871.9,
+      "zeroCrossingGapPerSecond": 1393.8,
+      "rmsGap": 0.0136,
+      "activeMetrics": {
+        "duration_s": 0.409,
+        "peak": 0.4773,
+        "rms": 0.1557,
+        "spectral_centroid_hz": 1168.2,
+        "zero_crossings_per_s": 862.4
+      },
+      "comparison": {
+        "duration_s": 0.071,
+        "spectral_centroid_hz": 871.9,
+        "zero_crossings_per_s": 1393.8,
+        "rms": 0.0136
+      }
+    },
+    {
+      "id": "thin-bright-square-micro-held-r03",
+      "label": "Thin bright square micro held r3",
+      "baseLabel": "Thin bright square micro held",
+      "repetition": 3,
+      "risk10": 3.71,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 922.8,
+      "zeroCrossingGapPerSecond": 1377,
+      "rmsGap": 0.0112,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.4244,
+        "rms": 0.1309,
+        "spectral_centroid_hz": 1117.3,
+        "zero_crossings_per_s": 879.2
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 922.8,
+        "zero_crossings_per_s": 1377,
+        "rms": 0.0112
+      }
+    },
+    {
+      "id": "thin-bright-square-split-low-held-r02",
+      "label": "Thin bright square split low held r2",
+      "baseLabel": "Thin bright square split low held",
+      "repetition": 2,
+      "risk10": 3.72,
+      "durationGapSeconds": 0.04,
+      "centroidGapHz": 904.8,
+      "zeroCrossingGapPerSecond": 1439.1,
+      "rmsGap": 0.0091,
+      "activeMetrics": {
+        "duration_s": 0.52,
+        "peak": 0.4313,
+        "rms": 0.133,
+        "spectral_centroid_hz": 1135.3,
+        "zero_crossings_per_s": 817.1
+      },
+      "comparison": {
+        "duration_s": 0.04,
+        "spectral_centroid_hz": 904.8,
+        "zero_crossings_per_s": 1439.1,
+        "rms": 0.0091
+      }
+    },
+    {
+      "id": "thin-bright-square-long-low-held-r02",
+      "label": "Thin bright square long low held r2",
+      "baseLabel": "Thin bright square long low held",
+      "repetition": 2,
+      "risk10": 3.75,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 864.5,
+      "zeroCrossingGapPerSecond": 1432.1,
+      "rmsGap": 0.023,
+      "activeMetrics": {
+        "duration_s": 0.54,
+        "peak": 0.3612,
+        "rms": 0.1191,
+        "spectral_centroid_hz": 1175.6,
+        "zero_crossings_per_s": 824.1
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 864.5,
+        "zero_crossings_per_s": 1432.1,
+        "rms": 0.023
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held-r03",
+      "label": "Thin bright square balanced held r3",
+      "baseLabel": "Thin bright square balanced held",
+      "repetition": 3,
+      "risk10": 4.03,
+      "durationGapSeconds": 0.01,
+      "centroidGapHz": 943,
+      "zeroCrossingGapPerSecond": 1486.4,
+      "rmsGap": 0.0334,
+      "activeMetrics": {
+        "duration_s": 0.47,
+        "peak": 0.318,
+        "rms": 0.1087,
+        "spectral_centroid_hz": 1097.1,
+        "zero_crossings_per_s": 769.8
+      },
+      "comparison": {
+        "duration_s": 0.01,
+        "spectral_centroid_hz": 943,
+        "zero_crossings_per_s": 1486.4,
+        "rms": 0.0334
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "thin-bright-square-quiet-held",
+      "label": "Thin bright square quiet held",
+      "risk10": 3.33,
+      "durationGapSeconds": 0.077,
+      "centroidGapHz": 700.9,
+      "zeroCrossingGapPerSecond": 268.1,
+      "rmsGap": 0.1392,
+      "activeMetrics": {
+        "duration_s": 0.403,
+        "peak": 0.8882,
+        "rms": 0.2813,
+        "spectral_centroid_hz": 1339.2,
+        "zero_crossings_per_s": 2274.3
+      },
+      "comparison": {
+        "duration_s": 0.077,
+        "spectral_centroid_hz": 700.9,
+        "zero_crossings_per_s": 268.1,
+        "rms": 0.1392
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.226,
+        "centroidGapStdHz": 53.6,
+        "rmsGapStd": 0.0101,
+        "durationGapStdSeconds": 0.054
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-quiet-held-r03",
+          "repetition": 3,
+          "risk10": 3.11,
+          "durationGapSeconds": 0.12,
+          "centroidGapHz": 641.4,
+          "rmsGap": 0.1264
+        },
+        {
+          "id": "thin-bright-square-quiet-held-r01",
+          "repetition": 1,
+          "risk10": 3.24,
+          "durationGapSeconds": 0.11,
+          "centroidGapHz": 690,
+          "rmsGap": 0.1403
+        },
+        {
+          "id": "thin-bright-square-quiet-held-r02",
+          "repetition": 2,
+          "risk10": 3.64,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 771.4,
+          "rmsGap": 0.151
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-quiet-tail",
+      "label": "Thin bright square quiet tail",
+      "risk10": 3.46,
+      "durationGapSeconds": 0.023,
+      "centroidGapHz": 808.8,
+      "zeroCrossingGapPerSecond": 1388.6,
+      "rmsGap": 0.0086,
+      "activeMetrics": {
+        "duration_s": 0.457,
+        "peak": 0.4895,
+        "rms": 0.1399,
+        "spectral_centroid_hz": 1231.3,
+        "zero_crossings_per_s": 867.6
+      },
+      "comparison": {
+        "duration_s": 0.023,
+        "spectral_centroid_hz": 808.8,
+        "zero_crossings_per_s": 1388.6,
+        "rms": 0.0086
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.118,
+        "centroidGapStdHz": 22.6,
+        "rmsGapStd": 0.0038,
+        "durationGapStdSeconds": 0.021
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-quiet-tail-r02",
+          "repetition": 2,
+          "risk10": 3.3,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 804.8,
+          "rmsGap": 0.0035
+        },
+        {
+          "id": "thin-bright-square-quiet-tail-r03",
+          "repetition": 3,
+          "risk10": 3.5,
+          "durationGapSeconds": 0.05,
+          "centroidGapHz": 783.3,
+          "rmsGap": 0.0126
+        },
+        {
+          "id": "thin-bright-square-quiet-tail-r01",
+          "repetition": 1,
+          "risk10": 3.58,
+          "durationGapSeconds": 0.02,
+          "centroidGapHz": 838.2,
+          "rmsGap": 0.0096
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-balanced-held",
+      "label": "Thin bright square balanced held",
+      "risk10": 3.48,
+      "durationGapSeconds": 0.133,
+      "centroidGapHz": 792.1,
+      "zeroCrossingGapPerSecond": 712.7,
+      "rmsGap": 0.0832,
+      "activeMetrics": {
+        "duration_s": 0.347,
+        "peak": 0.6918,
+        "rms": 0.2031,
+        "spectral_centroid_hz": 1248,
+        "zero_crossings_per_s": 1543.5
+      },
+      "comparison": {
+        "duration_s": 0.133,
+        "spectral_centroid_hz": 792.1,
+        "zero_crossings_per_s": 712.7,
+        "rms": 0.0832
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.391,
+        "centroidGapStdHz": 107.3,
+        "rmsGapStd": 0.0415,
+        "durationGapStdSeconds": 0.087
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-balanced-held-r02",
+          "repetition": 2,
+          "risk10": 3.16,
+          "durationGapSeconds": 0.19,
+          "centroidGapHz": 730.3,
+          "rmsGap": 0.0813
+        },
+        {
+          "id": "thin-bright-square-balanced-held-r01",
+          "repetition": 1,
+          "risk10": 3.25,
+          "durationGapSeconds": 0.2,
+          "centroidGapHz": 702.9,
+          "rmsGap": 0.135
+        },
+        {
+          "id": "thin-bright-square-balanced-held-r03",
+          "repetition": 3,
+          "risk10": 4.03,
+          "durationGapSeconds": 0.01,
+          "centroidGapHz": 943,
+          "rmsGap": 0.0334
+        }
+      ]
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "risk10": 3.51,
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 903.4,
+      "zeroCrossingGapPerSecond": 289.5,
+      "rmsGap": 0.1071,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8546,
+        "rms": 0.2492,
+        "spectral_centroid_hz": 1136.7,
+        "zero_crossings_per_s": 1966.7
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 903.4,
+        "zero_crossings_per_s": 289.5,
+        "rms": 0.1071
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "baseline-current-r01",
+          "repetition": 1,
+          "risk10": 3.51,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 903.4,
+          "rmsGap": 0.1071
+        },
+        {
+          "id": "baseline-current-r02",
+          "repetition": 2,
+          "risk10": 3.51,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 903.4,
+          "rmsGap": 0.1071
+        },
+        {
+          "id": "baseline-current-r03",
+          "repetition": 3,
+          "risk10": 3.51,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 903.4,
+          "rmsGap": 0.1071
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-soft-attack-held",
+      "label": "Thin bright square soft attack held",
+      "risk10": 3.55,
+      "durationGapSeconds": 0.024,
+      "centroidGapHz": 854.5,
+      "zeroCrossingGapPerSecond": 1381.9,
+      "rmsGap": 0.0086,
+      "activeMetrics": {
+        "duration_s": 0.456,
+        "peak": 0.4488,
+        "rms": 0.1425,
+        "spectral_centroid_hz": 1185.6,
+        "zero_crossings_per_s": 874.3
+      },
+      "comparison": {
+        "duration_s": 0.024,
+        "spectral_centroid_hz": 854.5,
+        "zero_crossings_per_s": 1381.9,
+        "rms": 0.0086
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.151,
+        "centroidGapStdHz": 29.6,
+        "rmsGapStd": 0.0039,
+        "durationGapStdSeconds": 0.033
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-soft-attack-held-r03",
+          "repetition": 3,
+          "risk10": 3.34,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 812.8,
+          "rmsGap": 0.0041
+        },
+        {
+          "id": "thin-bright-square-soft-attack-held-r01",
+          "repetition": 1,
+          "risk10": 3.66,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 878.9,
+          "rmsGap": 0.0082
+        },
+        {
+          "id": "thin-bright-square-soft-attack-held-r02",
+          "repetition": 2,
+          "risk10": 3.66,
+          "durationGapSeconds": 0.071,
+          "centroidGapHz": 871.9,
+          "rmsGap": 0.0136
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-split-low-held",
+      "label": "Thin bright square split low held",
+      "risk10": 3.58,
+      "durationGapSeconds": 0.047,
+      "centroidGapHz": 826.4,
+      "zeroCrossingGapPerSecond": 1451.6,
+      "rmsGap": 0.011,
+      "activeMetrics": {
+        "duration_s": 0.486,
+        "peak": 0.4617,
+        "rms": 0.1389,
+        "spectral_centroid_hz": 1213.7,
+        "zero_crossings_per_s": 804.6
+      },
+      "comparison": {
+        "duration_s": 0.047,
+        "spectral_centroid_hz": 826.4,
+        "zero_crossings_per_s": 1451.6,
+        "rms": 0.011
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.141,
+        "centroidGapStdHz": 78.6,
+        "rmsGapStd": 0.0013,
+        "durationGapStdSeconds": 0.01
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-split-low-held-r01",
+          "repetition": 1,
+          "risk10": 3.39,
+          "durationGapSeconds": 0.04,
+          "centroidGapHz": 719,
+          "rmsGap": 0.0121
+        },
+        {
+          "id": "thin-bright-square-split-low-held-r03",
+          "repetition": 3,
+          "risk10": 3.64,
+          "durationGapSeconds": 0.061,
+          "centroidGapHz": 855.3,
+          "rmsGap": 0.0117
+        },
+        {
+          "id": "thin-bright-square-split-low-held-r02",
+          "repetition": 2,
+          "risk10": 3.72,
+          "durationGapSeconds": 0.04,
+          "centroidGapHz": 904.8,
+          "rmsGap": 0.0091
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-micro-held",
+      "label": "Thin bright square micro held",
+      "risk10": 3.59,
+      "durationGapSeconds": 0.024,
+      "centroidGapHz": 868.5,
+      "zeroCrossingGapPerSecond": 1425.1,
+      "rmsGap": 0.005,
+      "activeMetrics": {
+        "duration_s": 0.456,
+        "peak": 0.4669,
+        "rms": 0.1397,
+        "spectral_centroid_hz": 1171.6,
+        "zero_crossings_per_s": 831.1
+      },
+      "comparison": {
+        "duration_s": 0.024,
+        "spectral_centroid_hz": 868.5,
+        "zero_crossings_per_s": 1425.1,
+        "rms": 0.005
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.085,
+        "centroidGapStdHz": 45.4,
+        "rmsGapStd": 0.0044,
+        "durationGapStdSeconds": 0.026
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-micro-held-r02",
+          "repetition": 2,
+          "risk10": 3.51,
+          "durationGapSeconds": 0.011,
+          "centroidGapHz": 811.7,
+          "rmsGap": 0.0011
+        },
+        {
+          "id": "thin-bright-square-micro-held-r01",
+          "repetition": 1,
+          "risk10": 3.56,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 871,
+          "rmsGap": 0.0028
+        },
+        {
+          "id": "thin-bright-square-micro-held-r03",
+          "repetition": 3,
+          "risk10": 3.71,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 922.8,
+          "rmsGap": 0.0112
+        }
+      ]
+    },
+    {
+      "id": "thin-bright-square-long-low-held",
+      "label": "Thin bright square long low held",
+      "risk10": 3.59,
+      "durationGapSeconds": 0.04,
+      "centroidGapHz": 804.9,
+      "zeroCrossingGapPerSecond": 1403.9,
+      "rmsGap": 0.0232,
+      "activeMetrics": {
+        "duration_s": 0.52,
+        "peak": 0.3781,
+        "rms": 0.1189,
+        "spectral_centroid_hz": 1235.2,
+        "zero_crossings_per_s": 852.3
+      },
+      "comparison": {
+        "duration_s": 0.04,
+        "spectral_centroid_hz": 804.9,
+        "zero_crossings_per_s": 1403.9,
+        "rms": 0.0232
+      },
+      "stability": {
+        "repetitions": 3,
+        "riskStd": 0.14,
+        "centroidGapStdHz": 63.9,
+        "rmsGapStd": 0.0068,
+        "durationGapStdSeconds": 0.028
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-long-low-held-r03",
+          "repetition": 3,
+          "risk10": 3.41,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 716.2,
+          "rmsGap": 0.0317
+        },
+        {
+          "id": "thin-bright-square-long-low-held-r01",
+          "repetition": 1,
+          "risk10": 3.62,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 833.9,
+          "rmsGap": 0.015
+        },
+        {
+          "id": "thin-bright-square-long-low-held-r02",
+          "repetition": 2,
+          "risk10": 3.75,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 864.5,
+          "rmsGap": 0.023
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": null,
+    "measuredBest": "thin-bright-square-quiet-held",
+    "reason": "The lowest-risk candidate did not clear all keeper gates, and no other candidate did either."
+  },
+  "nextStep": "Expand the candidate generator around the best measured direction instead of manually changing the game pack."
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "audio-cue-event-timeline",
+  "note": "The deterministic evidence cycle captures audio cue timing from runtime events. Browser video capture did not provide a reliable audio stream on this MacBook cycle.",
+  "audio_cues": [
+    {
+      "t": 0,
+      "cue": "gameStart",
+      "referenceClip": "assets/reference-audio/galaga2-game-start.m4a"
+    },
+    {
+      "t": 0.367,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 1.433,
+      "cue": "bossBoom",
+      "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a"
+    },
+    {
+      "t": 1.533,
+      "cue": "enemyBoom",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a"
+    },
+    {
+      "t": 3.05,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 5.083,
+      "cue": "enemyBoom",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a"
+    },
+    {
+      "t": 6.1,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 9.117,
+      "cue": "bossBoom",
+      "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a"
+    },
+    {
+      "t": 9.133,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 9.3,
+      "cue": "enemyBoom",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a"
+    },
+    {
+      "t": 12.16,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 12.61,
+      "cue": "challengeResults",
+      "referenceClip": "assets/reference-audio/galaga2-challenging-stage-results.m4a"
+    },
+    {
+      "t": 15.133,
+      "cue": "stageTransition",
+      "referenceClip": "assets/reference-audio/galaga-level-flag-v1.m4a"
+    },
+    {
+      "t": 16.717,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 17.3,
+      "cue": "enemyBoom",
+      "referenceClip": "assets/reference-audio/galaga3-zako.m4a"
+    },
+    {
+      "t": 19.05,
+      "cue": "attackCharge",
+      "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a"
+    },
+    {
+      "t": 19.117,
+      "cue": "playerShot",
+      "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+    },
+    {
+      "t": 19.217,
+      "cue": "stagePulse",
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a"
+    }
+  ]
+}

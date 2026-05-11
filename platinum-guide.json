@@ -69,6 +69,25 @@
       ]
     },
     {
+      "id": "persona-contract",
+      "title": "Platform Persona Contract",
+      "summary": "How Platinum supports beginner, intermediate, expert, and professional testing without owning game-specific truth.",
+      "cards": [
+        {
+          "title": "What Platinum Owns",
+          "body": "Platinum owns stable persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, and cross-game resource accounting for persona runs."
+        },
+        {
+          "title": "What Each Game Owns",
+          "body": "Each game owns which scenarios matter for each persona, what success or failure means, which behaviors intentionally differ from the reference game, and which persona outcomes block release gates."
+        },
+        {
+          "title": "Current Vocabulary",
+          "body": "The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora's historical harness IDs are novice, advanced, expert, and professional."
+        }
+      ]
+    },
+    {
       "id": "future",
       "title": "Platform Future Areas Of Improvement",
       "summary": "The most important next platform improvements as the project matures.",

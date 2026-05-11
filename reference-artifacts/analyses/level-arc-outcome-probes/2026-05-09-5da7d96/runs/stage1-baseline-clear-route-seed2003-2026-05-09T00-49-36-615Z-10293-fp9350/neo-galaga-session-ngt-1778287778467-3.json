@@ -1,0 +1,7711 @@
+{
+  "session": {
+    "id": "ngt-1778287778467-3",
+    "build": "1.3.0.1+build.649.sha.5da7d96.dirty",
+    "reason": "game_start",
+    "createdAt": "2026-05-09T00:49:38.467Z",
+    "url": "http://127.0.0.1:56483/index.html",
+    "viewport": {
+      "w": 1440,
+      "h": 1800,
+      "dpr": 1
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.0.0 Safari/537.36",
+    "events": [
+      {
+        "t": 0,
+        "type": "game_start",
+        "persona": null,
+        "requestedStage": 1,
+        "stage": 1,
+        "startStageMode": "internal",
+        "forceChallenge": false
+      },
+      {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 1,
+        "challenge": false,
+        "persona": null
+      },
+      {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 1,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      },
+      {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 0.4,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 0.417,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 140,
+        "y": 322,
+        "shotXs": [
+          140
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 0.417,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 0.667,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 140,
+        "y": 322,
+        "shotXs": [
+          140
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 0.7,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 1.05,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 69.58,
+        "y": 322,
+        "shotXs": [
+          69.58
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 1.3,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 1.683,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 1.933,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.317,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.567,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.9,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 54585824,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 0,
+        "carry": false
+      },
+      {
+        "t": 2.9,
+        "type": "audio_cue",
+        "cue": "enemyBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 2.917,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.2,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.55,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.833,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 4.02,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.17,
+        "type": "audio_cue",
+        "cue": "formationArrival",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-level-underscore.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 4.187,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 35.58,
+        "y": 322,
+        "shotXs": [
+          35.58
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.47,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 104.11,
+        "y": 322,
+        "shotXs": [
+          104.11
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.82,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 190.87,
+        "y": 322,
+        "shotXs": [
+          190.87
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.953,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 519537610,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 1,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 5.07,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 252.87,
+        "y": 322,
+        "shotXs": [
+          252.87
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.303,
+        "type": "enemy_damaged",
+        "stage": 1,
+        "hpBefore": 2,
+        "hpAfter": 1,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 808136305,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 5.32,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.703,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.92,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 148.71,
+        "y": 67.8,
+        "vx": 9.78,
+        "vy": 156,
+        "bulletLane": 5,
+        "playerLane": 9,
+        "id": 495474296,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 5.953,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.303,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 6.337,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.587,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.97,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.02,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 656827869,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 1,
+        "lane": 9,
+        "carry": false
+      },
+      {
+        "t": 7.22,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.437,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 72277552,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      },
+      {
+        "t": 7.47,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.853,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.987,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 222.53,
+        "y": 49.28,
+        "vx": 3.88,
+        "vy": 156,
+        "bulletLane": 7,
+        "playerLane": 9,
+        "id": 134545206,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 0,
+        "lane": 7,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 8.103,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 8.203,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 103.51,
+        "y": 31.39,
+        "originLane": 3,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 684708567,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 3,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      },
+      {
+        "t": 8.337,
+        "type": "audio_cue",
+        "cue": "attackCharge",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 8.487,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 8.57,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 387795809,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 1,
+        "lane": 9,
+        "carry": false
+      },
+      {
+        "t": 8.6,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.62,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.737,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 255.13,
+        "y": 322,
+        "shotXs": [
+          255.13
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 9.12,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 163.51,
+        "y": 322,
+        "shotXs": [
+          163.51
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 9.337,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 223.5,
+        "stageClock": 9.337,
+        "playerLane": 4,
+        "id": 684708567,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 9.37,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 101.53,
+        "y": 322,
+        "shotXs": [
+          101.53
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 9.52,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 251377273,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 3,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 9.62,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 39.53,
+        "y": 322,
+        "shotXs": [
+          39.53
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 9.82,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 933879004,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 1,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 9.87,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 9.92,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 205.69,
+        "y": 24.62,
+        "originLane": 7,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 930021182,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 1
+      },
+      {
+        "t": 10.187,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 86.69,
+        "y": 54.79,
+        "vx": -6.22,
+        "vy": 156,
+        "bulletLane": 3,
+        "playerLane": 0,
+        "id": 969422282,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 10.253,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 10.503,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 10.887,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 11.103,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 225.66,
+        "stageClock": 11.103,
+        "playerLane": 0,
+        "id": 930021182,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 11.137,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 11.52,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 11.77,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 12.153,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 12.403,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 12.403,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 101.26,
+        "y": 58.39,
+        "originLane": 3,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 562265913,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 3,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 1
+      },
+      {
+        "t": 12.787,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 13.003,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "dive",
+        "x": 82.74,
+        "y": 159.43,
+        "vx": -6.26,
+        "vy": 156,
+        "bulletLane": 3,
+        "playerLane": 0,
+        "id": 562265913,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 13.037,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 13.1,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 13.12,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 13.42,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 67.16,
+        "y": 322,
+        "shotXs": [
+          67.16
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 13.437,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 224.65,
+        "stageClock": 13.437,
+        "playerLane": 2,
+        "id": 562265913,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 2,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 13.52,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 562265913,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 13.67,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 128.88,
+        "y": 322,
+        "shotXs": [
+          128.88
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 13.92,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 190.87,
+        "y": 322,
+        "shotXs": [
+          190.87
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 14.07,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 11526471,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 3,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 14.17,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 252.87,
+        "y": 322,
+        "shotXs": [
+          252.87
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 14.203,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 254.5,
+        "y": 54.8,
+        "originLane": 8,
+        "targetLane": 8,
+        "playerLane": 8,
+        "id": 953789639,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 2,
+        "lane": 8,
+        "dive": 1,
+        "carry": false,
+        "targetX": 261.13,
+        "scripted": 1
+      },
+      {
+        "t": 14.353,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 809063590,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 2,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 14.42,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 14.487,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 135.5,
+        "y": 82.98,
+        "vx": 10.84,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 9,
+        "id": 965408983,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 2,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 14.537,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 953789639,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 2,
+        "lane": 8,
+        "carry": false
+      },
+      {
+        "t": 14.67,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 15.053,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 15.303,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 15.687,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 15.937,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 16.32,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 16.47,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 199.82,
+        "y": 90.92,
+        "vx": 5.69,
+        "vy": 156,
+        "bulletLane": 6,
+        "playerLane": 9,
+        "id": 693105450,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 3,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 16.57,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 16.953,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 17.203,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 17.303,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 165.62,
+        "y": 41.88,
+        "originLane": 5,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      },
+      {
+        "t": 17.587,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 17.837,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 17.9,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 17.92,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.22,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 212.84,
+        "y": 322,
+        "shotXs": [
+          212.84
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 18.403,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 169.5,
+        "y": 79.86,
+        "vx": -0.15,
+        "vy": 156,
+        "bulletLane": 5,
+        "playerLane": 5,
+        "id": 612058538,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 2,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 18.42,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 225.45,
+        "stageClock": 18.42,
+        "playerLane": 5,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 18.47,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 151.12,
+        "y": 322,
+        "shotXs": [
+          151.12
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 18.637,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 890707246,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 3,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 18.72,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 89.13,
+        "y": 322,
+        "shotXs": [
+          89.13
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 18.87,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 214987562,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 3,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 18.97,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 27.13,
+        "y": 322,
+        "shotXs": [
+          27.13
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 19.187,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 969422282,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 19.22,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 19.603,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 19.853,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 20.237,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 20.403,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 138.13,
+        "y": 29.65,
+        "originLane": 4,
+        "targetLane": 0,
+        "playerLane": 0,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 9,
+        "scripted": 1
+      },
+      {
+        "t": 20.403,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "escort",
+        "x": 148.72,
+        "y": 43.65,
+        "originLane": 5,
+        "targetLane": null,
+        "playerLane": 0,
+        "id": 495474296,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 5,
+        "dive": 5,
+        "carry": false,
+        "lead": 955225200,
+        "offset": -30,
+        "pattern": "standard-escort"
+      },
+      {
+        "t": 20.403,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 182.71,
+        "y": 92.1,
+        "vx": -11,
+        "vy": 156,
+        "bulletLane": 6,
+        "playerLane": 0,
+        "id": 505724415,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 20.487,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 20.87,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 21.12,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 21.503,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 21.587,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 224.94,
+        "stageClock": 21.587,
+        "playerLane": 0,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 2,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 21.753,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 22.037,
+        "type": "ship_lost",
+        "stage": 1,
+        "score": 1010,
+        "livesBefore": 5,
+        "stageClock": 22.037,
+        "attackers": 2,
+        "enemyBullets": 1,
+        "enemies": 26,
+        "playerX": 9,
+        "playerY": 340,
+        "playerLane": 0,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 495474296,
+        "enemyType": "but",
+        "enemyDive": 5,
+        "enemyX": 6.21,
+        "enemyY": 331.04,
+        "enemyLane": 0,
+        "enemyForm": true,
+        "challenge": false
+      },
+      {
+        "t": 22.037,
+        "type": "audio_cue",
+        "cue": "playerHit",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 22.053,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 114.7,
+        "y": 97.4,
+        "vx": -8.46,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 0,
+        "id": 736338577,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 3,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 22.4,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 22.42,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.37,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9.83,
+        "y": 322,
+        "shotXs": [
+          9.83
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 23.62,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 59.07,
+        "y": 322,
+        "shotXs": [
+          59.07
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 23.937,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 220.5,
+        "y": 76.63,
+        "vx": -6.67,
+        "vy": 156,
+        "bulletLane": 7,
+        "playerLane": 4,
+        "id": 366653994,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 2,
+        "lane": 7,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 24.003,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 153.67,
+        "y": 322,
+        "shotXs": [
+          153.67
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 24.103,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 182.62,
+        "y": 68.08,
+        "originLane": 6,
+        "targetLane": 6,
+        "playerLane": 6,
+        "id": 505724415,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 6,
+        "dive": 1,
+        "carry": false,
+        "targetX": 178.47,
+        "scripted": 1
+      },
+      {
+        "t": 24.253,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 215.67,
+        "y": 322,
+        "shotXs": [
+          215.67
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 24.437,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 371814362,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 2,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 24.503,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 24.687,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 366653994,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 2,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 24.753,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 25.12,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 224.95,
+        "stageClock": 25.12,
+        "playerLane": 9,
+        "id": 505724415,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 25.137,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 25.387,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 25.77,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 25.953,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 138.32,
+        "y": 53.62,
+        "vx": 10.61,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 9,
+        "id": 955225200,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 26.003,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 199.83,
+        "y": 38.89,
+        "originLane": 6,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 564026307,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 6,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      },
+      {
+        "t": 26.02,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 26.403,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 26.653,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 27,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 27.02,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 27.02,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 27.137,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 225.49,
+        "stageClock": 27.137,
+        "playerLane": 8,
+        "id": 564026307,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 27.287,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 220.93,
+        "y": 322,
+        "shotXs": [
+          220.93
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 27.32,
+        "type": "enemy_killed",
+        "points": 160,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 564026307,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 27.537,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 159.38,
+        "y": 322,
+        "shotXs": [
+          159.38
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 27.787,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 97.4,
+        "y": 322,
+        "shotXs": [
+          97.4
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 28.02,
+        "type": "enemy_damaged",
+        "stage": 1,
+        "hpBefore": 2,
+        "hpAfter": 1,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 204165053,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 28.037,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 35.4,
+        "y": 322,
+        "shotXs": [
+          35.4
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 28.12,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 233.45,
+        "y": 91.39,
+        "vx": -11,
+        "vy": 156,
+        "bulletLane": 8,
+        "playerLane": 0,
+        "id": 960157998,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 3,
+        "lane": 8,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 28.187,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 315096383,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 3,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 28.287,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 28.67,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 28.92,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 29.303,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 29.553,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 29.603,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "capture",
+        "x": 189.6,
+        "y": 24.87,
+        "originLane": 6,
+        "targetLane": 1,
+        "playerLane": 0,
+        "id": 808136305,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 6,
+        "dive": 4,
+        "carry": false,
+        "targetX": 32.9,
+        "targetY": 132,
+        "scripted": 1
+      },
+      {
+        "t": 29.937,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 30.187,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 30.57,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 30.82,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 31.203,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 31.387,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 250.41,
+        "y": 92.92,
+        "vx": -11,
+        "vy": 156,
+        "bulletLane": 8,
+        "playerLane": 0,
+        "id": 503674111,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 3,
+        "lane": 8,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 31.453,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 31.8,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 31.82,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 31.82,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 31.97,
+        "type": "capture_started",
+        "stage": 1,
+        "playerX": 31.89,
+        "playerY": 340,
+        "playerLane": 1,
+        "id": 808136305,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 1,
+        "dive": 2,
+        "carry": false
+      },
+      {
+        "t": 31.97,
+        "type": "audio_cue",
+        "cue": "captureBeam",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-tractor-beam.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 32.087,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 34.94,
+        "y": 252.96,
+        "shotXs": [
+          34.94
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": true
+      },
+      {
+        "t": 32.253,
+        "type": "enemy_killed",
+        "points": 400,
+        "dive": 2,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 808136305,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 1,
+        "carry": false
+      },
+      {
+        "t": 32.253,
+        "type": "audio_cue",
+        "cue": "bossBoom",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 32.27,
+        "type": "capture_escape",
+        "stage": 1,
+        "reason": "boss_destroyed",
+        "playerX": 37.32,
+        "playerY": 214.73,
+        "playerLane": 1,
+        "bossId": 808136305,
+        "timeSinceCaptureStart": 0.3
+      },
+      {
+        "t": 32.27,
+        "type": "audio_cue",
+        "cue": "rescueJoin",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 32.703,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 38.15,
+        "y": 322,
+        "shotXs": [
+          38.15
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 32.953,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 87.39,
+        "y": 322,
+        "shotXs": [
+          87.39
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 33.303,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 135.49,
+        "y": 82.9,
+        "vx": 3.06,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 6,
+        "id": 965408983,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 2,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 33.337,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 181.99,
+        "y": 322,
+        "shotXs": [
+          181.99
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 33.587,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 243.99,
+        "y": 322,
+        "shotXs": [
+          243.99
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 33.737,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 505724415,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 33.837,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 34.003,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 135.49,
+        "y": 58.9,
+        "originLane": 4,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 965408983,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 2,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      },
+      {
+        "t": 34.22,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 34.47,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 34.853,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 35.037,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 225.98,
+        "stageClock": 35.037,
+        "playerLane": 9,
+        "id": 965408983,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 2,
+        "lane": 6,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 35.103,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 35.287,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 199.29,
+        "y": 90.86,
+        "vx": 5.74,
+        "vy": 156,
+        "bulletLane": 6,
+        "playerLane": 9,
+        "id": 693105450,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 3,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 35.487,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 35.737,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 36.12,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 36.37,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 36.753,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 37.003,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 37.203,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 223.9,
+        "y": 25.42,
+        "originLane": 7,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 134545206,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      },
+      {
+        "t": 37.22,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 169.49,
+        "y": 79.72,
+        "vx": 8.12,
+        "vy": 156,
+        "bulletLane": 5,
+        "playerLane": 9,
+        "id": 612058538,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 2,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 37.387,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 37.5,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 37.633,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 38.017,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 38.267,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 38.383,
+        "type": "enemy_lower_field",
+        "stage": 1,
+        "y": 224.16,
+        "stageClock": 38.383,
+        "playerLane": 9,
+        "id": 134545206,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 0,
+        "lane": 8,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 38.383,
+        "type": "enemy_killed",
+        "points": 160,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 134545206,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      },
+      {
+        "t": 38.517,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 38.767,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 39.15,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 39.217,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 183.18,
+        "y": 63.98,
+        "vx": 7.03,
+        "vy": 156,
+        "bulletLane": 6,
+        "playerLane": 9,
+        "id": 495698355,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 1,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 39.4,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 39.783,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 40.033,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 40.417,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 271,
+        "y": 322,
+        "shotXs": [
+          271
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 40.5,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 41.017,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "dive",
+        "x": 156.05,
+        "y": 27.7,
+        "originLane": 5,
+        "targetLane": 9,
+        "playerLane": 9,
+        "id": 204165053,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 271,
+        "scripted": 1
+      },
+      {
+        "t": 41.017,
+        "type": "enemy_attack_start",
+        "stage": 1,
+        "mode": "escort",
+        "x": 166.22,
+        "y": 41.7,
+        "originLane": 5,
+        "targetLane": null,
+        "playerLane": 9,
+        "id": 622513080,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 5,
+        "dive": 5,
+        "carry": false,
+        "lead": 204165053,
+        "offset": -30,
+        "pattern": "standard-escort"
+      },
+      {
+        "t": 41.317,
+        "type": "enemy_bullet_fired",
+        "stage": 1,
+        "kind": "script",
+        "x": 114.17,
+        "y": 97.4,
+        "vx": 11,
+        "vy": 156,
+        "bulletLane": 4,
+        "playerLane": 9,
+        "id": 736338577,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 3,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 42,
+        "type": "harness_stop",
+        "label": "stage1-baseline-clear-route"
+      }
+    ],
+    "snapshots": [
+      {
+        "t": 0,
+        "tag": "stage_spawn",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 3072510256,
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.948,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 3072510256,
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.948,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.517,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0.517,
+        "stageClock": 0.517,
+        "rngState": 3072510256,
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.14,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.431,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 1.033,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 1.033,
+        "stageClock": 1.033,
+        "rngState": 3072510256,
+        "player": {
+          "x": 73.68,
+          "y": 340,
+          "vx": -245.14,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 1.914,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 1.55,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 1.55,
+        "stageClock": 1.55,
+        "rngState": 3072510256,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 1.398,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 2.067,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 2.067,
+        "stageClock": 2.067,
+        "rngState": 3072510256,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.107,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0.881,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 2.583,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 2.583,
+        "stageClock": 2.583,
+        "rngState": 3072510256,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.223,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0.364,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 3.1,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 80,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 3.1,
+        "stageClock": 3.1,
+        "rngState": 3072510256,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.057,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 39,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 1,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 3.617,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 80,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 3.617,
+        "stageClock": 3.617,
+        "rngState": 3072510256,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.173,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 39,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 4.12,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 80,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 4.12,
+        "stageClock": 4.12,
+        "rngState": 3072510256,
+        "player": {
+          "x": 21.6,
+          "y": 340,
+          "vx": 182.99,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 39,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 4.637,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 80,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 4.637,
+        "stageClock": 4.637,
+        "rngState": 3072510256,
+        "player": {
+          "x": 145.4,
+          "y": 340,
+          "vx": 247.94,
+          "cd": 0.073,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 39,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 5.153,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 160,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 5.153,
+        "stageClock": 5.153,
+        "rngState": 3072510256,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.157,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 38,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 5.67,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 160,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 5.67,
+        "stageClock": 5.67,
+        "rngState": 3072510256,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 38,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 6.187,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 160,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 6.187,
+        "stageClock": 6.187,
+        "rngState": 3072510256,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.007,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 38,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 6.703,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 160,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 6.703,
+        "stageClock": 6.703,
+        "rngState": 3072510256,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.123,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 38,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 7.22,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 240,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 7.22,
+        "stageClock": 7.22,
+        "rngState": 3072510256,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.24,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 37,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 7.737,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 320,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 7.737,
+        "stageClock": 7.737,
+        "rngState": 3072510256,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 36,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 8.253,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 320,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 8.253,
+        "stageClock": 8.253,
+        "rngState": 2440674586,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.09,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 36,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 8.753,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 8.753,
+        "stageClock": 8.753,
+        "rngState": 2440674586,
+        "player": {
+          "x": 251.69,
+          "y": 340,
+          "vx": -206.39,
+          "cd": 0.223,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 35,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 3,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 9.27,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 400,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 9.27,
+        "stageClock": 9.27,
+        "rngState": 2440674586,
+        "player": {
+          "x": 126.33,
+          "y": 340,
+          "vx": -247.96,
+          "cd": 0.09,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 35,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 9.787,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 450,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 9.787,
+        "stageClock": 9.787,
+        "rngState": 2440674586,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.073,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 34,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 10.303,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 10.303,
+        "stageClock": 10.303,
+        "rngState": 1808838916,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.19,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 10.82,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 10.82,
+        "stageClock": 10.82,
+        "rngState": 1808838916,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 11.337,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 11.337,
+        "stageClock": 11.337,
+        "rngState": 1808838916,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.04,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 11.853,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 11.853,
+        "stageClock": 11.853,
+        "rngState": 1808838916,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.157,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 12.37,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 12.37,
+        "stageClock": 12.37,
+        "rngState": 1808838916,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.023,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 12.887,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 12.887,
+        "stageClock": 12.887,
+        "rngState": 4208299202,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.14,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 13.387,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 530,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 13.387,
+        "stageClock": 13.387,
+        "rngState": 1680956522,
+        "player": {
+          "x": 59.07,
+          "y": 340,
+          "vx": 241.02,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 33,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 13.903,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 630,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 13.903,
+        "stageClock": 13.903,
+        "rngState": 1680956522,
+        "player": {
+          "x": 186.73,
+          "y": 340,
+          "vx": 247.99,
+          "cd": 0.007,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 32,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 14.42,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 730,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 14.42,
+        "stageClock": 14.42,
+        "rngState": 1049120852,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.24,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 30,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 17,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 14.937,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 14.937,
+        "stageClock": 14.937,
+        "rngState": 1049120852,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 15.453,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 15.453,
+        "stageClock": 15.453,
+        "rngState": 1049120852,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.09,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 15.97,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 15.97,
+        "stageClock": 15.97,
+        "rngState": 1049120852,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.207,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 16.487,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 16.487,
+        "stageClock": 16.487,
+        "rngState": 1049120852,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.073,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 17.003,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 17.003,
+        "stageClock": 17.003,
+        "rngState": 1049120852,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.19,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 17.52,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 17.52,
+        "stageClock": 17.52,
+        "rngState": 417285182,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 18.02,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 18.02,
+        "stageClock": 18.02,
+        "rngState": 417285182,
+        "player": {
+          "x": 258.4,
+          "y": 340,
+          "vx": -182.99,
+          "cd": 0.057,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 18.537,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 830,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 18.537,
+        "stageClock": 18.537,
+        "rngState": 2248850995,
+        "player": {
+          "x": 134.6,
+          "y": 340,
+          "vx": -247.94,
+          "cd": 0.173,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 19.053,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 930,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 19.053,
+        "stageClock": 19.053,
+        "rngState": 2248850995,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.157,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 27,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 3,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 19.57,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 19.57,
+        "stageClock": 19.57,
+        "rngState": 2248850995,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 26,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 20.087,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 20.087,
+        "stageClock": 20.087,
+        "rngState": 2248850995,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.007,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 26,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 20.603,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 20.603,
+        "stageClock": 20.603,
+        "rngState": 1617015325,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.123,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 26,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 21.12,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 21.12,
+        "stageClock": 21.12,
+        "rngState": 1617015325,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.24,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 26,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 21.637,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 5,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 21.637,
+        "stageClock": 21.637,
+        "rngState": 1617015325,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.107,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 26,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 22.153,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 22.153,
+        "stageClock": 22.153,
+        "rngState": 1617015325,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.303,
+          "inv": 2.583,
+          "spawn": 1.203,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 1.633,
+          "attackGapT": 1.303,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 63,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 22.653,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 22.653,
+        "stageClock": 22.653,
+        "rngState": 1617015325,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 2.083,
+          "spawn": 0.703,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 1.133,
+          "attackGapT": 0.803,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 23.17,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 23.17,
+        "stageClock": 23.17,
+        "rngState": 1617015325,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 1.567,
+          "spawn": 0.187,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0.617,
+          "attackGapT": 0.287,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 23.687,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 23.687,
+        "stageClock": 23.687,
+        "rngState": 1617015325,
+        "player": {
+          "x": 75.32,
+          "y": 340,
+          "vx": 245.14,
+          "cd": 0.173,
+          "inv": 1.05,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0.1,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 24.203,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1010,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 24.203,
+        "stageClock": 24.203,
+        "rngState": 985179655,
+        "player": {
+          "x": 203.27,
+          "y": 340,
+          "vx": 248,
+          "cd": 0.04,
+          "inv": 0.533,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 24.72,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1110,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 24.72,
+        "stageClock": 24.72,
+        "rngState": 985179655,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.023,
+          "inv": 0.017,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 17,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 25.237,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1110,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 25.237,
+        "stageClock": 25.237,
+        "rngState": 985179655,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.14,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 25.753,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1110,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 25.753,
+        "stageClock": 25.753,
+        "rngState": 985179655,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 26.27,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1110,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 26.27,
+        "stageClock": 26.27,
+        "rngState": 353343985,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 26.787,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1110,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 26.787,
+        "stageClock": 26.787,
+        "rngState": 353343985,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.107,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 27.287,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1110,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 27.287,
+        "stageClock": 27.287,
+        "rngState": 353343985,
+        "player": {
+          "x": 220.93,
+          "y": 340,
+          "vx": -241.02,
+          "cd": 0.24,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 27.803,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1270,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 27.803,
+        "stageClock": 27.803,
+        "rngState": 353343985,
+        "player": {
+          "x": 93.27,
+          "y": 340,
+          "vx": -247.99,
+          "cd": 0.223,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 22,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 28.32,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 28.32,
+        "stageClock": 28.32,
+        "rngState": 353343985,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.207,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 9,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 28.837,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 28.837,
+        "stageClock": 28.837,
+        "rngState": 353343985,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.073,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 29.353,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 29.353,
+        "stageClock": 29.353,
+        "rngState": 353343985,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.19,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 29.87,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 29.87,
+        "stageClock": 29.87,
+        "rngState": 2184909798,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 30.387,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 30.387,
+        "stageClock": 30.387,
+        "rngState": 2184909798,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.04,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 30.903,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 30.903,
+        "stageClock": 30.903,
+        "rngState": 2184909798,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.157,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 31.42,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 31.42,
+        "stageClock": 31.42,
+        "rngState": 2184909798,
+        "player": {
+          "x": 9,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.023,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 31.92,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1320,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 31.92,
+        "stageClock": 31.92,
+        "rngState": 2184909798,
+        "player": {
+          "x": 21.6,
+          "y": 340,
+          "vx": 182.99,
+          "cd": 0.14,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 21,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 32.437,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1720,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 32.437,
+        "stageClock": 32.437,
+        "rngState": 2184909798,
+        "player": {
+          "x": 37.32,
+          "y": 301.11,
+          "vx": 0,
+          "cd": 0,
+          "inv": 1.033,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 20,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 17,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 32.953,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1720,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 32.953,
+        "stageClock": 32.953,
+        "rngState": 2184909798,
+        "player": {
+          "x": 87.39,
+          "y": 340,
+          "vx": 241.02,
+          "cd": 0.24,
+          "inv": 0.517,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 20,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 33.47,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1720,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 33.47,
+        "stageClock": 33.47,
+        "rngState": 2184909798,
+        "player": {
+          "x": 215.05,
+          "y": 340,
+          "vx": 247.99,
+          "cd": 0.107,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 20,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 33.987,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 33.987,
+        "stageClock": 33.987,
+        "rngState": 2184909798,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.09,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 34.503,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 34.503,
+        "stageClock": 34.503,
+        "rngState": 1553074128,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.207,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 35.02,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 35.02,
+        "stageClock": 35.02,
+        "rngState": 1553074128,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.073,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 35.537,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 35.537,
+        "stageClock": 35.537,
+        "rngState": 1553074128,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.19,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 36.053,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 36.053,
+        "stageClock": 36.053,
+        "rngState": 1553074128,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 36.57,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 36.57,
+        "stageClock": 36.57,
+        "rngState": 1553074128,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.04,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 37.087,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 37.087,
+        "stageClock": 37.087,
+        "rngState": 1553074128,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.157,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 37.6,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 37.6,
+        "stageClock": 37.6,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.027,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 38.117,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1770,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 38.117,
+        "stageClock": 38.117,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.14,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 38.633,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 38.633,
+        "stageClock": 38.633,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.123,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 39.15,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 39.15,
+        "stageClock": 39.15,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.24,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 39.667,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 39.667,
+        "stageClock": 39.667,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 40.183,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 40.183,
+        "stageClock": 40.183,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0.09,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 40.683,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 40.683,
+        "stageClock": 40.683,
+        "rngState": 921238458,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 41.2,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 41.2,
+        "stageClock": 41.2,
+        "rngState": 289402788,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 41.717,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 41.717,
+        "stageClock": 41.717,
+        "rngState": 2120968601,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 42,
+        "tag": "harness_stop",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 42,
+        "stageClock": 42,
+        "rngState": 2120968601,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 42,
+        "tag": "export",
+        "gameKey": "aurora-galactica",
+        "started": false,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1930,
+        "lives": 4,
+        "challenge": false,
+        "scriptMode": true,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 42,
+        "stageClock": 42,
+        "rngState": 2120968601,
+        "player": {
+          "x": 271,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 315096383,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      }
+    ],
+    "t0": 667.0999999046326,
+    "seed": 2003,
+    "duration": 42,
+    "eventCount": 226,
+    "snapshotCount": 85
+  }
+}

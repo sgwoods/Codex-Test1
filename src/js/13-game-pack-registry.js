@@ -69,12 +69,13 @@ function currentGamePackIsChallengeStage(stage){
 
 function stageBandIndex(stage){
  if(stage<4)return 0;
+ if(stage>=16)return 4;
  return 1+(Math.floor((stage-4)/4)%3);
 }
 
 function stageBandProfile(stage,challenge){
  const pack=currentGamePack();
- const base=pack.stageBandProfiles[stageBandIndex(stage)]||pack.stageBandProfiles[0];
+ const base=pack.stageBandProfiles[stageBandIndex(stage)]||pack.stageBandProfiles[pack.stageBandProfiles.length-1]||pack.stageBandProfiles[0];
  if(!challenge)return base;
  if(stage>=19)return Object.assign({},base,{challengeFamily:'mosquito'});
  if(stage>=11)return Object.assign({},base,{challengeFamily:'dragonfly'});
@@ -192,8 +193,19 @@ function currentGamePackFormationLayout(stage){
  return layout;
 }
 
-function currentGamePackChallengeLayout(){
- return currentGamePack().challengeLayout;
+function currentGamePackChallengeLayout(stage){
+ const pack=currentGamePack();
+ const stageNumber=Number.isFinite(+stage)?+stage:(typeof S!=='undefined'?S.stage:1);
+ if(typeof pack.challengeLayoutForStage==='function')return pack.challengeLayoutForStage(stageNumber);
+ if(Array.isArray(pack.challengeLayouts)){
+  let layout=pack.challengeLayouts[0];
+  for(const candidate of pack.challengeLayouts){
+   if(stageNumber>=candidate.fromStage)layout=candidate;
+   else break;
+  }
+  return layout;
+ }
+ return pack.challengeLayout;
 }
 
 function currentGamePackFrameAccentTheme(stagePresentation){

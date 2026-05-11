@@ -361,7 +361,7 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
  else syncSettingsUi();
  const activeMessage=started?gameplayMessageState():null;
  msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):(activeMessage?.mode==='board'?'boardMessage':'');
- if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.72)}px`;
+ if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.68)}px`;
  else if(!started&&msg.className==='gameOverScreen')msg.style.top=`${Math.floor(oy+viewH*.54)}px`;
  else if(activeMessage?.mode==='board')msg.style.top=`${Math.floor(oy+viewH*(activeMessage.topRatio||.48))}px`;
  else msg.style.top='';
@@ -385,15 +385,18 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
       pickerHint:'',
       quotePlaceholder:{kicker:'',text:'',attribution:''}
      };
-   const featureLine=frontDoor.featureLine?`<span class="startFeature">${frontDoor.featureLine}</span>`:'';
-   const noticeHint=frontDoor.noticeHint?`<span class="startNotice">${frontDoor.noticeHint}</span>`:'';
+   const showcaseMode=frontDoor.quoteSurface==='wait-mode-showcase';
+   const featureLine=showcaseMode&&frontDoor.featureLine?`<span class="startFeature">${frontDoor.featureLine}</span>`:'';
+   const noticeHint=showcaseMode&&frontDoor.noticeHint?`<span class="startNotice">${frontDoor.noticeHint}</span>`:'';
    const pickerHint=frontDoor.pickerHint?`<span class="startMeta startPickerHint">${frontDoor.pickerHint}</span>`:'';
-   const quoteBlock=frontDoor.quotePlaceholder?.text
+   const quoteBlock=showcaseMode&&frontDoor.quotePlaceholder?.text
     ? `<span class="startQuoteWrap"><span class="startQuoteKicker">${frontDoor.quotePlaceholder.kicker||'SIGNAL'}</span><span class="startQuoteText">${frontDoor.quotePlaceholder.text}</span>${frontDoor.quotePlaceholder.attribution?`<span class="startQuoteAttribution">${frontDoor.quotePlaceholder.attribution}</span>`:''}</span>`
     : '';
-   const missionBlock=buildStartMissionHtml(frontDoor.attractMission);
+   const missionBlock=showcaseMode?buildStartMissionHtml(frontDoor.attractMission):'';
    const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable);
-   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}${missionBlock}${scoreAdvanceBlock}<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">${frontDoor.attractLine}</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta">${frontDoor.utilityLine}</span>${pickerHint}${noticeHint}`;
+   const accountLine=showcaseMode?`<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span>`:'';
+   const utilityLine=showcaseMode?`<span class="startMeta">${frontDoor.utilityLine}</span>`:'';
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}${missionBlock}${scoreAdvanceBlock}${accountLine}<span class="startMeta">${frontDoor.attractLine}</span>${utilityLine}${pickerHint}${noticeHint}`;
   }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;

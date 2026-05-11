@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-stage-pulse-cadence-pressure-analysis",
+  "generatedAt": "2026-05-10T13:08:56.975Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "41f7caa8",
+  "dirty": true,
+  "problem": "Aurora stagePulse is the leading audio segment gap. As gameplay pressure, it should read as a low, calm formation cadence bed rather than a bright foreground tick.",
+  "strategy": "Use the full browser-rendered audio-theme comparison as the source of truth, then summarize the stagePulse cue with gameplay-facing cadence axes: low-band body, brightness control, zero-crossing calm, gain match, duration pocket, and envelope smoothness.",
+  "successMeasure": "Future candidates should raise cadence pressure score while also clearing the repeated-capture focus gates and the full audio event-gap report before runtime promotion.",
+  "source": {
+    "audioThemeMetrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-10-main-41f7caa8-130410/metrics.json",
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "candidateFocus": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-formation-pulse.json"
+  },
+  "cadencePressureAnalysis": {
+    "schemaVersion": 1,
+    "artifactType": "stage-pulse-cadence-pressure-analysis",
+    "score10": 1.53,
+    "weakestAxis": "brightness-control",
+    "axes": [
+      {
+        "id": "brightness-control",
+        "label": "Brightness control",
+        "score10": 0,
+        "weight": 0.22,
+        "aurora": 0.5785,
+        "reference": 0.2659,
+        "meaning": "A pressure cadence can be audible without pulling too much energy into mid/presence bands."
+      },
+      {
+        "id": "low-band-body",
+        "label": "Low-band body",
+        "score10": 0,
+        "weight": 0.22,
+        "aurora": 0.1085,
+        "reference": 0.454,
+        "meaning": "Formation pressure should have enough low-frequency body to read as a marching bed, not only a bright tick."
+      },
+      {
+        "id": "zero-crossing-calm",
+        "label": "Zero-crossing calm",
+        "score10": 0,
+        "weight": 0.18,
+        "aurora": 2714.6,
+        "reference": 547.2,
+        "meaning": "Lower crossing density keeps the cadence from feeling scratchy or over-complex."
+      },
+      {
+        "id": "gain-match",
+        "label": "Gain match",
+        "score10": 0,
+        "weight": 0.16,
+        "aurora": 0.2117,
+        "reference": 0.0813,
+        "meaning": "Formation cadence should create pressure without masking shot, hit, and capture feedback."
+      },
+      {
+        "id": "envelope-smoothness",
+        "label": "Envelope smoothness",
+        "score10": 4.18,
+        "weight": 0.1,
+        "aurora": {
+          "attack_peak_position": 0.92,
+          "burst_share": 0.385
+        },
+        "reference": {
+          "attack_peak_position": 1,
+          "burst_share": 0.222
+        },
+        "meaning": "The cadence should feel like pressure building, not a foreground impact event."
+      },
+      {
+        "id": "duration-pocket",
+        "label": "Duration pocket",
+        "score10": 9.25,
+        "weight": 0.12,
+        "aurora": 0.201,
+        "reference": 0.21,
+        "meaning": "The pulse needs to sit inside the repeat cadence without smearing into a continuous drone."
+      }
+    ],
+    "diagnosis": [
+      "Current Aurora cadence remains too bright/thin versus the reference pressure bed when judged by low-band body, mid/presence energy, and zero-crossing density.",
+      "Simple low-band tone swaps and soft attacks are not sufficient unless the candidate also stabilizes segment risk, zero-crossing behavior, and envelope decay across repeated captures."
+    ],
+    "recommendedNextExperiment": "Generate candidates that explicitly optimize low-band body and zero-crossing calm together, then require full audio-theme comparison before runtime promotion."
+  },
+  "eventGapContext": {
+    "highestRiskCue": "stagePulse",
+    "highestRiskLabel": "Formation Pulse",
+    "highestRisk10": 5.18,
+    "highestSegmentRiskCue": "playerHit",
+    "highestSegmentRiskRole": "body",
+    "averageWorstSegmentRisk10": 4.19
+  },
+  "candidateContext": {
+    "decision": {
+      "status": "no-keeper",
+      "keep": false,
+      "baseline": "baseline-current",
+      "best": null,
+      "measuredBest": "cadence-phase-muted-square-body",
+      "reason": "No Formation Pulse candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+    },
+    "topCandidates": [
+      {
+        "id": "cadence-phase-muted-square-body",
+        "risk10": 4.43,
+        "worstSegmentRisk10": 6.85,
+        "keeperRead": "segment risk improved only 0.17; cadence pressure improved only 0.69; cadence pressure 2.16 < 3.5; masking separation improved only 0.59; masking separation 2.1 < 4",
+        "stability": {
+          "repetitions": 5,
+          "riskStd": 0.08,
+          "durationGapStdSeconds": 0.009,
+          "centroidGapStdHz": 11.9,
+          "zeroCrossingGapStdPerSecond": 55.2,
+          "bandShapeGapStd": 0.0144,
+          "decayRatioGapStd": 0.789,
+          "rmsGapStd": 0.0103
+        }
+      },
+      {
+        "id": "baseline-current",
+        "risk10": 5.08,
+        "worstSegmentRisk10": 7.02,
+        "keeperRead": "baseline",
+        "stability": {
+          "repetitions": 5,
+          "riskStd": 0.017,
+          "durationGapStdSeconds": 0.009,
+          "centroidGapStdHz": 14.6,
+          "zeroCrossingGapStdPerSecond": 25.6,
+          "bandShapeGapStd": 0.0023,
+          "decayRatioGapStd": 1.999,
+          "rmsGapStd": 0.0045
+        }
+      }
+    ]
+  },
+  "nextStep": "Add a cadence-specific candidate generator that jointly optimizes low-band body, brightness control, zero-crossing calm, and gain. Promote only after both repeated focus gates and full audio-theme comparison improve."
+}

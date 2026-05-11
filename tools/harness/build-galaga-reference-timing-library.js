@@ -195,9 +195,14 @@ const library = {
         'src/assets/reference-audio/galaga3-challenging-stage.m4a'
       ],
       auroraCurrent: {
-        challengeEntry: timingMetrics ? {
+        challengeEntry: overlapMetrics ? {
+          cueAfterProbe: overlapMetrics.stage23?.transitionCueAfterProbe ?? null,
+          spawnAfterCue: overlapMetrics.stage23?.spawnAfterTransitionCue ?? null,
+          tailPastSpawn: overlapMetrics.stage23?.transitionCueTailPastSpawn ?? null
+        } : timingMetrics ? {
           cueAfterProbe: timingMetrics.aurora?.challengeEntry?.challengeCueAfterProbe ?? null,
-          spawnAfterCue: timingMetrics.aurora?.challengeEntry?.challengeSpawnAfterCue ?? null
+          spawnAfterCue: timingMetrics.aurora?.challengeEntry?.challengeSpawnAfterCue ?? null,
+          tailPastSpawn: null
         } : {},
         challengePerfect: overlapMetrics ? {
           resultCueAfterClear: overlapMetrics.challengePerfect?.resultCueAfterClear ?? null,

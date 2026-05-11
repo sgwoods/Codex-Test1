@@ -221,10 +221,19 @@ function summarize(metrics){
   const passed = metrics.filter(metric => metric.withinTolerance).length;
   const currentDeltas = metrics.map(metric => metric.currentDelta).filter(value => value != null);
   const driftDeltas = metrics.map(metric => metric.driftFromBaseline).filter(value => value != null);
+  const riskDeltas = metrics.map(metric => {
+    if(metric.withinTolerance) return 0;
+    if(metric.mode === 'max'){
+      const over = metric.current == null || metric.target == null ? null : metric.current - metric.target;
+      return over == null ? null : Math.max(0, +(over - metric.tolerance).toFixed(3));
+    }
+    return metric.currentDelta == null ? null : Math.max(0, +(Math.abs(metric.currentDelta) - metric.tolerance).toFixed(3));
+  }).filter(value => value != null);
   return {
     passed,
     total: metrics.length,
     worstCurrentDelta: currentDeltas.length ? Math.max(...currentDeltas.map(value => Math.abs(value))) : null,
+    worstCurrentRiskDelta: riskDeltas.length ? Math.max(...riskDeltas) : null,
     worstDriftFromBaseline: driftDeltas.length ? Math.max(...driftDeltas.map(value => Math.abs(value))) : null
   };
 }
@@ -247,6 +256,7 @@ function buildReadme(report){
     '',
     `- Passed metrics: ${report.summary.passed}/${report.summary.total}`,
     `- Worst current delta: ${String(report.summary.worstCurrentDelta)}`,
+    `- Worst current risk delta: ${String(report.summary.worstCurrentRiskDelta)}`,
     `- Worst drift from baseline: ${String(report.summary.worstDriftFromBaseline)}`,
     '',
     '## Scenario Support',

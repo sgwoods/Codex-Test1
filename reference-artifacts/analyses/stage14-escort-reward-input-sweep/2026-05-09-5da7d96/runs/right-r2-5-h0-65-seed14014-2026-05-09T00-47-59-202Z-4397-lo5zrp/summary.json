@@ -1,0 +1,604 @@
+{
+  "name": "right-r2-5-h0-65",
+  "persona": null,
+  "source": "external:right-r2-5-h0-65.json",
+  "duration": 24,
+  "config": {
+    "stage": 14,
+    "ships": 5,
+    "challenge": false,
+    "persona": null
+  },
+  "seed": 14014,
+  "state": {
+    "started": 1,
+    "paused": 0,
+    "stage": 14,
+    "score": 2860,
+    "lives": 1,
+    "challenge": false,
+    "recording": false,
+    "seed": 14014,
+    "simT": 24,
+    "stageClock": 24,
+    "persona": null,
+    "atmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "stage",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-surge",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "galboss-veil",
+      "atmosphereTheme": "aurora-borealis",
+      "backgroundMode": "aurora-borealis"
+    },
+    "audioCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 47,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 14,
+      "challenge": false,
+      "at": 0.668
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "files": [
+    "neo-galaga-session-ngt-1778287680451-3.json",
+    "neo-galaga-session-ngt-1778287680451-3-system-status.json"
+  ],
+  "artifactQuality": null,
+  "analysis": {
+    "id": "ngt-1778287680451-3",
+    "seed": 14014,
+    "duration": 24,
+    "eventCounts": {
+      "game_start": 1,
+      "stage_spawn": 1,
+      "stage_profile": 1,
+      "audio_cue": 7,
+      "key_down": 3,
+      "player_shot": 63,
+      "enemy_killed": 11,
+      "enemy_bullet_fired": 10,
+      "key_up": 3,
+      "enemy_attack_start": 18,
+      "ship_lost": 4,
+      "enemy_lower_field": 16,
+      "enemy_damaged": 3,
+      "late_reward_squadron_window": 1,
+      "special_attack_bonus": 1,
+      "harness_stop": 1
+    },
+    "stageClears": [],
+    "challengeClears": [],
+    "shipLost": [
+      {
+        "t": 3.327,
+        "stage": 14,
+        "score": 210,
+        "livesBefore": 5,
+        "cause": "enemy_bullet",
+        "bulletKind": "formation",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": null,
+        "stageClock": 3.327,
+        "gapFromPrev": null,
+        "recentAttackStarts": 1,
+        "recentEnemyBullets": 1,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": null,
+        "sourceOriginLane": null,
+        "sourceTargetLane": null,
+        "sourceColumn": null,
+        "snapshot": {
+          "t": 3.093,
+          "attackers": 1,
+          "enemies": 37,
+          "enemyBullets": 1,
+          "playerBullets": 2
+        }
+      },
+      {
+        "t": 9.26,
+        "stage": 14,
+        "score": 700,
+        "livesBefore": 4,
+        "cause": "enemy_collision",
+        "bulletKind": null,
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": true,
+        "stageClock": 9.26,
+        "gapFromPrev": 5.933,
+        "recentAttackStarts": 2,
+        "recentEnemyBullets": 1,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": "dive",
+        "sourceOriginLane": 7,
+        "sourceTargetLane": 5,
+        "sourceColumn": 9,
+        "snapshot": {
+          "t": 9.293,
+          "attackers": 1,
+          "enemies": 31,
+          "enemyBullets": 0,
+          "playerBullets": 2
+        }
+      },
+      {
+        "t": 13.427,
+        "stage": 14,
+        "score": 2300,
+        "livesBefore": 3,
+        "cause": "enemy_bullet",
+        "bulletKind": "dive",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": null,
+        "stageClock": 13.427,
+        "gapFromPrev": 4.167,
+        "recentAttackStarts": 5,
+        "recentEnemyBullets": 2,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": "dive",
+        "sourceOriginLane": 5,
+        "sourceTargetLane": 5,
+        "sourceColumn": 4,
+        "snapshot": {
+          "t": 13.427,
+          "attackers": 4,
+          "enemies": 30,
+          "enemyBullets": 0,
+          "playerBullets": 2
+        }
+      },
+      {
+        "t": 23.093,
+        "stage": 14,
+        "score": 2860,
+        "livesBefore": 2,
+        "cause": "enemy_collision",
+        "bulletKind": null,
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": true,
+        "stageClock": 23.093,
+        "gapFromPrev": 9.666,
+        "recentAttackStarts": 2,
+        "recentEnemyBullets": 2,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": "dive",
+        "sourceOriginLane": 4,
+        "sourceTargetLane": 5,
+        "sourceColumn": 1,
+        "snapshot": {
+          "t": 23.243,
+          "attackers": 1,
+          "enemies": 27,
+          "enemyBullets": 0,
+          "playerBullets": 1
+        }
+      }
+    ],
+    "lifeLost": [
+      {
+        "lossType": "ship_lost",
+        "t": 3.327,
+        "stage": 14,
+        "score": 210,
+        "livesBefore": 5,
+        "cause": "enemy_bullet",
+        "bulletKind": "formation",
+        "sourceType": "boss",
+        "sourceDive": 0,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": null,
+        "stageClock": 3.327,
+        "gapFromPrev": null,
+        "recentAttackStarts": 1,
+        "recentEnemyBullets": 1,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": null,
+        "sourceOriginLane": null,
+        "sourceTargetLane": null,
+        "sourceColumn": null,
+        "snapshot": {
+          "t": 3.093,
+          "attackers": 1,
+          "enemies": 37,
+          "enemyBullets": 1,
+          "playerBullets": 2
+        }
+      },
+      {
+        "lossType": "ship_lost",
+        "t": 9.26,
+        "stage": 14,
+        "score": 700,
+        "livesBefore": 4,
+        "cause": "enemy_collision",
+        "bulletKind": null,
+        "sourceType": "but",
+        "sourceDive": 1,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": true,
+        "stageClock": 9.26,
+        "gapFromPrev": 5.933,
+        "recentAttackStarts": 2,
+        "recentEnemyBullets": 1,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": "dive",
+        "sourceOriginLane": 7,
+        "sourceTargetLane": 5,
+        "sourceColumn": 9,
+        "snapshot": {
+          "t": 9.293,
+          "attackers": 1,
+          "enemies": 31,
+          "enemyBullets": 0,
+          "playerBullets": 2
+        }
+      },
+      {
+        "lossType": "ship_lost",
+        "t": 13.427,
+        "stage": 14,
+        "score": 2300,
+        "livesBefore": 3,
+        "cause": "enemy_bullet",
+        "bulletKind": "dive",
+        "sourceType": "boss",
+        "sourceDive": 1,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": null,
+        "stageClock": 13.427,
+        "gapFromPrev": 4.167,
+        "recentAttackStarts": 5,
+        "recentEnemyBullets": 2,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": "dive",
+        "sourceOriginLane": 5,
+        "sourceTargetLane": 5,
+        "sourceColumn": 4,
+        "snapshot": {
+          "t": 13.427,
+          "attackers": 4,
+          "enemies": 30,
+          "enemyBullets": 0,
+          "playerBullets": 2
+        }
+      },
+      {
+        "lossType": "ship_lost",
+        "t": 23.093,
+        "stage": 14,
+        "score": 2860,
+        "livesBefore": 2,
+        "cause": "enemy_collision",
+        "bulletKind": null,
+        "sourceType": "bee",
+        "sourceDive": 1,
+        "sourceLane": 5,
+        "playerLane": 5,
+        "enemyForm": true,
+        "stageClock": 23.093,
+        "gapFromPrev": 9.666,
+        "recentAttackStarts": 2,
+        "recentEnemyBullets": 2,
+        "recentCaptureStarts": 0,
+        "recentFighterCaptured": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "sourceAttackMode": "dive",
+        "sourceOriginLane": 4,
+        "sourceTargetLane": 5,
+        "sourceColumn": 1,
+        "snapshot": {
+          "t": 23.243,
+          "attackers": 1,
+          "enemies": 27,
+          "enemyBullets": 0,
+          "playerBullets": 1
+        }
+      }
+    ],
+    "stageMetrics": {
+      "0": {
+        "attacks": 0,
+        "bullets": 0,
+        "kills": 11,
+        "losses": 0
+      },
+      "14": {
+        "attacks": 18,
+        "bullets": 10,
+        "kills": 0,
+        "losses": 4
+      }
+    },
+    "bulletPressure": {
+      "overall": {
+        "attacks": 18,
+        "bullets": 10,
+        "bulletsPerAttack": 0.556,
+        "shipLosses": 4,
+        "bulletDeaths": 2,
+        "collisionDeaths": 2,
+        "lossesWithBulletsOnScreen": 1,
+        "lossesWithoutBulletsOnScreen": 3,
+        "lossesWithRecentEnemyBullets": 4,
+        "lossesWithoutRecentEnemyBullets": 0,
+        "avgRecentEnemyBulletsAtLoss": 1.5,
+        "avgAttackersOnScreenAtLoss": 1.75
+      },
+      "byStage": {
+        "0": {
+          "attacks": 0,
+          "bullets": 0,
+          "bulletsPerAttack": 0,
+          "shipLosses": 0,
+          "bulletDeaths": 0,
+          "collisionDeaths": 0,
+          "lossesWithBulletsOnScreen": 0,
+          "lossesWithoutBulletsOnScreen": 0,
+          "lossesWithRecentEnemyBullets": 0,
+          "lossesWithoutRecentEnemyBullets": 0,
+          "avgRecentEnemyBulletsAtLoss": 0,
+          "avgAttackersOnScreenAtLoss": 0
+        },
+        "14": {
+          "attacks": 18,
+          "bullets": 10,
+          "bulletsPerAttack": 0.556,
+          "shipLosses": 4,
+          "bulletDeaths": 2,
+          "collisionDeaths": 2,
+          "lossesWithBulletsOnScreen": 1,
+          "lossesWithoutBulletsOnScreen": 3,
+          "lossesWithRecentEnemyBullets": 4,
+          "lossesWithoutRecentEnemyBullets": 0,
+          "avgRecentEnemyBulletsAtLoss": 1.5,
+          "avgAttackersOnScreenAtLoss": 1.75
+        }
+      }
+    },
+    "stageLossClusters": {
+      "14": {
+        "count": 4,
+        "avgGap": 6.589,
+        "minGap": 4.167
+      }
+    },
+    "stageLossLanePatterns": {
+      "14": {
+        "playerLanes": [
+          5
+        ],
+        "sourceLanes": [
+          5
+        ],
+        "sourceColumns": [
+          9,
+          4,
+          1
+        ]
+      }
+    },
+    "lossCauseCounts": {
+      "enemy_bullet": 2,
+      "enemy_collision": 2
+    },
+    "lifeLossClusters": {
+      "14": {
+        "count": 4,
+        "avgGap": 6.589,
+        "minGap": 4.167
+      }
+    },
+    "lifeLossCauseCounts": {
+      "enemy_bullet": 2,
+      "enemy_collision": 2
+    },
+    "postHitPauseMetrics": {
+      "samples": 4,
+      "avgNextEnemyBullet": 3.455,
+      "minNextEnemyBullet": 3.333,
+      "avgNextEnemyAttack": 2.766,
+      "minNextEnemyAttack": 2.766
+    },
+    "captureMetrics": {
+      "captureStarts": 0,
+      "fightersCaptured": 0,
+      "fightersRescued": 0
+    },
+    "carriedFighterMetrics": {
+      "count": 0,
+      "standbyCount": 0,
+      "attackingCount": 0,
+      "totalPoints": 0
+    },
+    "specialAttackMetrics": {
+      "count": 1,
+      "totalBonus": 1600,
+      "maxEscorts": 3,
+      "avgEscortOffset": 30,
+      "maxEscortOffset": 36
+    },
+    "dualMetrics": {
+      "count": 0,
+      "avgSpread": 0,
+      "minSpread": 0,
+      "maxSpread": 0
+    },
+    "rescuePipeline": {
+      "captureStarts": 0,
+      "fightersCaptured": 0,
+      "rescued": 0,
+      "naturalCaptureCycleSuccess": false,
+      "firstCaptureStartToCaptured": null,
+      "firstCapturedToRescue": null,
+      "dualShotsAfterRescue": 0,
+      "firstRescueToDualShot": null,
+      "rescueToDualSuccess": false,
+      "destroyedInsteadOfRescued": false
+    },
+    "captureBranches": {
+      "rescuePodSpawns": 0,
+      "hostileTurns": 0,
+      "fighterRescues": 0,
+      "carriedFighterDestroyed": 0,
+      "divingRecoveryBranchTriggered": false,
+      "formationHostileBranchTriggered": false
+    },
+    "transition": {
+      "challengeClearAt": null,
+      "nextStage": null,
+      "stageSpawnAt": null,
+      "firstNextStageSnapshotAt": null,
+      "firstVisibleNextStageAt": null,
+      "challengeToSpawn": null,
+      "challengeToVisible": null,
+      "preSpawnNextStageWindow": null,
+      "prematureNextStageSnapshot": false,
+      "stageVisibleAfterSpawn": false
+    },
+    "challengeRules": {
+      "challengeStages": [],
+      "regularStages": [
+        14
+      ],
+      "challengeClears": [],
+      "bulletsDuringChallenge": 0,
+      "attacksDuringChallenge": 0,
+      "shipLossesDuringChallenge": 0,
+      "contactsDuringChallenge": 0,
+      "firstChallengeStage": null,
+      "cadenceLooksLikeFirstThenEveryFourthStage": true
+    },
+    "descent": {
+      "samples": 16,
+      "avgToLowerField": 1.062,
+      "byStage": {
+        "14": {
+          "samples": 16,
+          "avgToLowerField": 1.062
+        }
+      }
+    },
+    "varietyMetrics": {
+      "profiles": [
+        {
+          "stage": 14,
+          "challenge": false,
+          "band": "galboss",
+          "beeFamily": "galboss",
+          "butFamily": "galboss",
+          "bossFamily": "galboss",
+          "challengeFamily": "mosquito"
+        }
+      ],
+      "uniqueBands": [
+        "galboss"
+      ],
+      "uniqueFamilies": [
+        "galboss",
+        "mosquito"
+      ],
+      "nonClassicBands": [
+        "galboss"
+      ],
+      "nonClassicFamilies": [
+        "galboss",
+        "mosquito"
+      ]
+    },
+    "video": {
+      "file": null,
+      "ok": false,
+      "audio": false,
+      "error": "no video file found"
+    }
+  }
+}

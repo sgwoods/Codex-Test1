@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-cue-candidate-loop",
+  "generatedAt": "2026-05-08T18:19:24.878Z",
+  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
+  "commit": "f46b630",
+  "dirty": true,
+  "cue": "challengePerfect",
+  "repetitions": 1,
+  "candidateFilter": [
+    "staccato-bright",
+    "thin-bright-square-balanced-held"
+  ],
+  "generator": null,
+  "problem": "Challenge Perfect is now the highest Aurora audio event-gap risk: duration is aligned, but timbre remains far from the measured reference window.",
+  "strategy": "Generate a bounded set of synthetic cue specs, capture each through the live browser audio engine, compare against the same Galaga reference window, and recommend promotion only if measured risk drops without duration drift. The comparison now includes spectral band-shape, rolloff, and envelope segmentation so future searches can target timbre instead of only duration and centroid.",
+  "successMeasure": "A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid materially increasing RMS or band-shape gap, and keep active duration within 0.08s of the reference.",
+  "source": {
+    "comparisonSet": "challenge-perfect-compare",
+    "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+    "referenceWindow": {
+      "startSeconds": 0,
+      "endSeconds": 0.48,
+      "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
+      "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+    },
+    "referenceSegmentation": {
+      "segments": [
+        {
+          "role": "onset",
+          "start_s": 0,
+          "end_s": 0.18,
+          "duration_s": 0.18,
+          "metrics": {
+            "duration_s": 0.18,
+            "peak": 0.4117,
+            "rms": 0.1542,
+            "spectral_centroid_hz": 2073.2,
+            "zero_crossings_per_s": 1898.3,
+            "spectral_spread_hz": 2347.6,
+            "spectral_rolloff_85_hz": 5371.9,
+            "spectral_flatness": 0.2133,
+            "band_energy": {
+              "sub_500": 0.2961,
+              "low_mid_500_1500": 0.3559,
+              "mid_1500_3000": 0.1087,
+              "presence_3000_6000": 0.1638,
+              "air_6000_plus": 0.0755
+            },
+            "attack_peak_position": 0,
+            "decay_ratio": 0.837,
+            "envelope_contrast": 1.134,
+            "burst_share": 0.174
+          }
+        },
+        {
+          "role": "body",
+          "start_s": 0.239,
+          "end_s": 0.279,
+          "duration_s": 0.04,
+          "metrics": {
+            "duration_s": 0.04,
+            "peak": 0.4068,
+            "rms": 0.147,
+            "spectral_centroid_hz": 2311.2,
+            "zero_crossings_per_s": 3178.6,
+            "spectral_spread_hz": 2510.1,
+            "spectral_rolloff_85_hz": 5381.1,
+            "spectral_flatness": 0.3411,
+            "band_energy": {
+              "sub_500": 0.2431,
+              "low_mid_500_1500": 0.2758,
+              "mid_1500_3000": 0.2186,
+              "presence_3000_6000": 0.1697,
+              "air_6000_plus": 0.0927
+            },
+            "attack_peak_position": 0.2,
+            "decay_ratio": 0.954,
+            "envelope_contrast": 1.045,
+            "burst_share": 0.167
+          }
+        },
+        {
+          "role": "tail",
+          "start_s": 0.319,
+          "end_s": 0.429,
+          "duration_s": 0.11,
+          "metrics": {
+            "duration_s": 0.11,
+            "peak": 0.3918,
+            "rms": 0.1419,
+            "spectral_centroid_hz": 2149.8,
+            "zero_crossings_per_s": 2805.2,
+            "spectral_spread_hz": 2519.2,
+            "spectral_rolloff_85_hz": 5382.7,
+            "spectral_flatness": 0.2809,
+            "band_energy": {
+              "sub_500": 0.3009,
+              "low_mid_500_1500": 0.3076,
+              "mid_1500_3000": 0.1435,
+              "presence_3000_6000": 0.1515,
+              "air_6000_plus": 0.0965
+            },
+            "attack_peak_position": 0.308,
+            "decay_ratio": 0.987,
+            "envelope_contrast": 1.092,
+            "burst_share": 0.357
+          }
+        }
+      ],
+      "summary": {
+        "segmentCount": 3,
+        "status": "segmented-reference",
+        "thresholdRms": 0.1413,
+        "dominantRole": "onset",
+        "dominantWindow": {
+          "start_s": 0,
+          "end_s": 0.18
+        }
+      }
+    },
+    "manifest": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-f46b630-dirty-focused-181924/challengePerfect/manifest.json",
+    "metrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-08-f46b630-dirty-focused-181924/challengePerfect/metrics.json"
+  },
+  "sampleCandidates": [
+    {
+      "id": "staccato-bright",
+      "label": "Staccato bright",
+      "baseLabel": "Staccato bright",
+      "repetition": 1,
+      "generated": false,
+      "generator": null,
+      "risk10": 4.15,
+      "riskBreakdown": {
+        "duration": 0.063,
+        "centroid": 1.438,
+        "zeroCrossing": 0.018,
+        "rms": 0.781,
+        "bandShape": 0.255,
+        "rolloff": 1.103,
+        "envelope": 0.121,
+        "floor": 0.367
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.18,
+      "centroidGapHz": 753,
+      "zeroCrossingGapPerSecond": 22.5,
+      "rmsGap": 0.1116,
+      "bandShapeGap": 0.1334,
+      "rolloffGapHz": 3086.2,
+      "envelopeShapeGap": 0.116,
+      "activeMetrics": {
+        "duration_s": 0.3,
+        "peak": 0.7971,
+        "rms": 0.2537,
+        "spectral_centroid_hz": 1287.1,
+        "zero_crossings_per_s": 2233.7,
+        "spectral_spread_hz": 1253.8,
+        "spectral_rolloff_85_hz": 2247.1,
+        "spectral_flatness": 0.0966,
+        "band_energy": {
+          "sub_500": 0.3021,
+          "low_mid_500_1500": 0.4026,
+          "mid_1500_3000": 0.2035,
+          "presence_3000_6000": 0.082,
+          "air_6000_plus": 0.0098
+        },
+        "attack_peak_position": 0.054,
+        "decay_ratio": 1.031,
+        "envelope_contrast": 1.142,
+        "burst_share": 0.184
+      },
+      "comparison": {
+        "duration_s": 0.18,
+        "spectral_centroid_hz": 753,
+        "zero_crossings_per_s": 22.5,
+        "rms": 0.1116,
+        "spectral_spread_hz": 1145.8,
+        "spectral_rolloff_85_hz": 3086.2,
+        "spectral_flatness": 0.1339,
+        "band_shape_distance": 0.1334,
+        "attack_peak_position": 0.054,
+        "decay_ratio": 0.116,
+        "envelope_contrast": 0.021,
+        "burst_share": 0.078
+      }
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "baseLabel": "Current Aurora baseline",
+      "repetition": 1,
+      "generated": false,
+      "generator": null,
+      "risk10": 4.79,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.64,
+        "zeroCrossing": 0.217,
+        "rms": 0.747,
+        "bandShape": 0.283,
+        "rolloff": 1.103,
+        "envelope": 0.412,
+        "floor": 0.367
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 858.8,
+      "zeroCrossingGapPerSecond": 268.1,
+      "rmsGap": 0.1067,
+      "bandShapeGap": 0.1482,
+      "rolloffGapHz": 3178.5,
+      "envelopeShapeGap": 0.393,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8133,
+        "rms": 0.2488,
+        "spectral_centroid_hz": 1181.3,
+        "zero_crossings_per_s": 1988.1,
+        "spectral_spread_hz": 1280.4,
+        "spectral_rolloff_85_hz": 2154.8,
+        "spectral_flatness": 0.108,
+        "band_energy": {
+          "sub_500": 0.3404,
+          "low_mid_500_1500": 0.4266,
+          "mid_1500_3000": 0.156,
+          "presence_3000_6000": 0.0629,
+          "air_6000_plus": 0.014
+        },
+        "attack_peak_position": 0.731,
+        "decay_ratio": 1.013,
+        "envelope_contrast": 1.247,
+        "burst_share": 0.208
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 858.8,
+        "zero_crossings_per_s": 268.1,
+        "rms": 0.1067,
+        "spectral_spread_hz": 1119.2,
+        "spectral_rolloff_85_hz": 3178.5,
+        "spectral_flatness": 0.1225,
+        "band_shape_distance": 0.1482,
+        "attack_peak_position": 0.731,
+        "decay_ratio": 0.098,
+        "envelope_contrast": 0.084,
+        "burst_share": 0.054
+      }
+    },
+    {
+      "id": "thin-bright-square-balanced-held",
+      "label": "Thin bright square balanced held",
+      "baseLabel": "Thin bright square balanced held",
+      "repetition": 1,
+      "generated": false,
+      "generator": null,
+      "risk10": 4.85,
+      "riskBreakdown": {
+        "duration": 0,
+        "centroid": 1.633,
+        "zeroCrossing": 0.279,
+        "rms": 0.813,
+        "bandShape": 0.261,
+        "rolloff": 1.103,
+        "envelope": 0.398,
+        "floor": 0.367
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0,
+      "centroidGapHz": 855.3,
+      "zeroCrossingGapPerSecond": 345.8,
+      "rmsGap": 0.1162,
+      "bandShapeGap": 0.1368,
+      "rolloffGapHz": 3243.7,
+      "envelopeShapeGap": 0.379,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.8143,
+        "rms": 0.2583,
+        "spectral_centroid_hz": 1184.8,
+        "zero_crossings_per_s": 1910.4,
+        "spectral_spread_hz": 1257.8,
+        "spectral_rolloff_85_hz": 2089.6,
+        "spectral_flatness": 0.0863,
+        "band_energy": {
+          "sub_500": 0.3766,
+          "low_mid_500_1500": 0.3423,
+          "mid_1500_3000": 0.1927,
+          "presence_3000_6000": 0.0802,
+          "air_6000_plus": 0.0082
+        },
+        "attack_peak_position": 0.55,
+        "decay_ratio": 0.97,
+        "envelope_contrast": 1.149,
+        "burst_share": 0.213
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 855.3,
+        "zero_crossings_per_s": 345.8,
+        "rms": 0.1162,
+        "spectral_spread_hz": 1141.8,
+        "spectral_rolloff_85_hz": 3243.7,
+        "spectral_flatness": 0.1442,
+        "band_shape_distance": 0.1368,
+        "attack_peak_position": 0.55,
+        "decay_ratio": 0.055,
+        "envelope_contrast": 0.014,
+        "burst_share": 0.049
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "staccato-bright",
+      "label": "Staccato bright",
+      "generated": false,
+      "generator": null,
+      "risk10": 4.15,
+      "riskBreakdown": {
+        "duration": 0.063,
+        "centroid": 1.438,
+        "zeroCrossing": 0.018,
+        "rms": 0.781,
+        "bandShape": 0.255,
+        "rolloff": 1.103,
+        "envelope": 0.121,
+        "floor": 0.367
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.18,
+      "centroidGapHz": 753,
+      "zeroCrossingGapPerSecond": 22.5,
+      "rmsGap": 0.1116,
+      "bandShapeGap": 0.1334,
+      "rolloffGapHz": 3086.2,
+      "envelopeShapeGap": 0.116,
+      "activeMetrics": {
+        "duration_s": 0.3,
+        "peak": 0.7971,
+        "rms": 0.2537,
+        "spectral_centroid_hz": 1287.1,
+        "zero_crossings_per_s": 2233.7,
+        "spectral_rolloff_85_hz": 2247.1,
+        "spectral_flatness": 0.0966,
+        "attack_peak_position": 0.054,
+        "decay_ratio": 1.031,
+        "burst_share": 0.184
+      },
+      "comparison": {
+        "duration_s": 0.18,
+        "spectral_centroid_hz": 753,
+        "zero_crossings_per_s": 22.5,
+        "rms": 0.1116,
+        "spectral_spread_hz": 1145.8,
+        "spectral_rolloff_85_hz": 3086.2,
+        "spectral_flatness": 0.1339,
+        "band_shape_distance": 0.1334,
+        "attack_peak_position": 0.054,
+        "decay_ratio": 0.116,
+        "envelope_contrast": 0.021,
+        "burst_share": 0.078
+      },
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "staccato-bright",
+          "repetition": 1,
+          "risk10": 4.15,
+          "durationGapSeconds": 0.18,
+          "centroidGapHz": 753,
+          "rmsGap": 0.1116,
+          "bandShapeGap": 0.1334,
+          "envelopeShapeGap": 0.116
+        }
+      ],
+      "keeperRead": "duration gap 0.18s > 0.08s"
+    },
+    {
+      "id": "baseline-current",
+      "label": "Current Aurora baseline",
+      "generated": false,
+      "generator": null,
+      "risk10": 4.79,
+      "riskBreakdown": {
+        "duration": 0.021,
+        "centroid": 1.64,
+        "zeroCrossing": 0.217,
+        "rms": 0.747,
+        "bandShape": 0.283,
+        "rolloff": 1.103,
+        "envelope": 0.412,
+        "floor": 0.367
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0.06,
+      "centroidGapHz": 858.8,
+      "zeroCrossingGapPerSecond": 268.1,
+      "rmsGap": 0.1067,
+      "bandShapeGap": 0.1482,
+      "rolloffGapHz": 3178.5,
+      "envelopeShapeGap": 0.393,
+      "activeMetrics": {
+        "duration_s": 0.42,
+        "peak": 0.8133,
+        "rms": 0.2488,
+        "spectral_centroid_hz": 1181.3,
+        "zero_crossings_per_s": 1988.1,
+        "spectral_rolloff_85_hz": 2154.8,
+        "spectral_flatness": 0.108,
+        "attack_peak_position": 0.731,
+        "decay_ratio": 1.013,
+        "burst_share": 0.208
+      },
+      "comparison": {
+        "duration_s": 0.06,
+        "spectral_centroid_hz": 858.8,
+        "zero_crossings_per_s": 268.1,
+        "rms": 0.1067,
+        "spectral_spread_hz": 1119.2,
+        "spectral_rolloff_85_hz": 3178.5,
+        "spectral_flatness": 0.1225,
+        "band_shape_distance": 0.1482,
+        "attack_peak_position": 0.731,
+        "decay_ratio": 0.098,
+        "envelope_contrast": 0.084,
+        "burst_share": 0.054
+      },
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "baseline-current",
+          "repetition": 1,
+          "risk10": 4.79,
+          "durationGapSeconds": 0.06,
+          "centroidGapHz": 858.8,
+          "rmsGap": 0.1067,
+          "bandShapeGap": 0.1482,
+          "envelopeShapeGap": 0.393
+        }
+      ],
+      "keeperRead": "baseline"
+    },
+    {
+      "id": "thin-bright-square-balanced-held",
+      "label": "Thin bright square balanced held",
+      "generated": false,
+      "generator": null,
+      "risk10": 4.85,
+      "riskBreakdown": {
+        "duration": 0,
+        "centroid": 1.633,
+        "zeroCrossing": 0.279,
+        "rms": 0.813,
+        "bandShape": 0.261,
+        "rolloff": 1.103,
+        "envelope": 0.398,
+        "floor": 0.367
+      },
+      "dominantPenalty": "centroid",
+      "durationGapSeconds": 0,
+      "centroidGapHz": 855.3,
+      "zeroCrossingGapPerSecond": 345.8,
+      "rmsGap": 0.1162,
+      "bandShapeGap": 0.1368,
+      "rolloffGapHz": 3243.7,
+      "envelopeShapeGap": 0.379,
+      "activeMetrics": {
+        "duration_s": 0.48,
+        "peak": 0.8143,
+        "rms": 0.2583,
+        "spectral_centroid_hz": 1184.8,
+        "zero_crossings_per_s": 1910.4,
+        "spectral_rolloff_85_hz": 2089.6,
+        "spectral_flatness": 0.0863,
+        "attack_peak_position": 0.55,
+        "decay_ratio": 0.97,
+        "burst_share": 0.213
+      },
+      "comparison": {
+        "duration_s": 0,
+        "spectral_centroid_hz": 855.3,
+        "zero_crossings_per_s": 345.8,
+        "rms": 0.1162,
+        "spectral_spread_hz": 1141.8,
+        "spectral_rolloff_85_hz": 3243.7,
+        "spectral_flatness": 0.1442,
+        "band_shape_distance": 0.1368,
+        "attack_peak_position": 0.55,
+        "decay_ratio": 0.055,
+        "envelope_contrast": 0.014,
+        "burst_share": 0.049
+      },
+      "stability": {
+        "repetitions": 1,
+        "riskStd": 0,
+        "centroidGapStdHz": 0,
+        "rmsGapStd": 0,
+        "durationGapStdSeconds": 0
+      },
+      "samples": [
+        {
+          "id": "thin-bright-square-balanced-held",
+          "repetition": 1,
+          "risk10": 4.85,
+          "durationGapSeconds": 0,
+          "centroidGapHz": 855.3,
+          "rmsGap": 0.1162,
+          "bandShapeGap": 0.1368,
+          "envelopeShapeGap": 0.379
+        }
+      ],
+      "keeperRead": "risk improvement -0.06 < 0.25"
+    }
+  ],
+  "decision": {
+    "status": "no-keeper",
+    "keep": false,
+    "baseline": "baseline-current",
+    "best": null,
+    "measuredBest": "thin-bright-square-balanced-held",
+    "reason": "The lowest-risk candidate did not clear all keeper gates, and no other candidate did either."
+  },
+  "nextStep": "Expand the candidate generator around the best measured direction instead of manually changing the game pack."
+}

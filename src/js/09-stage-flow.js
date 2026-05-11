@@ -5,6 +5,7 @@ function familyMotion(e){
   case 'scorpion': return { pulseX:.95,pulseY:.8,entryX:.92,entryY:.9,weave:1.18,steer:.96,jitter:1.1,diveVy:.98,diveAccel:1,challengeSweep:1,challengeDrop:1 };
   case 'stingray': return { pulseX:1.08,pulseY:.78,entryX:1.06,entryY:.82,weave:1.28,steer:1.06,jitter:1.16,diveVy:1.04,diveAccel:1.03,challengeSweep:1.2,challengeDrop:1.05 };
   case 'galboss': return { pulseX:.9,pulseY:.72,entryX:.88,entryY:.76,weave:.9,steer:.9,jitter:.92,diveVy:1.02,diveAccel:.98,challengeSweep:.86,challengeDrop:.95 };
+  case 'crown': return { pulseX:1.22,pulseY:.76,entryX:1.3,entryY:.94,weave:1.42,steer:1.1,jitter:1.28,diveVy:1.1,diveAccel:1.08,challengeSweep:1.46,challengeDrop:1.12 };
   case 'dragonfly': return { pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1.1,steer:1,jitter:1,diveVy:1,diveAccel:1,challengeSweep:1.14,challengeDrop:1 };
   case 'mosquito': return { pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1.22,steer:1,jitter:1,diveVy:1,diveAccel:1,challengeSweep:1.32,challengeDrop:1.08 };
   default: return { pulseX:1,pulseY:1,entryX:1,entryY:1,weave:1,steer:1,jitter:1,diveVy:1,diveAccel:1,challengeSweep:1,challengeDrop:1 };
@@ -12,7 +13,18 @@ function familyMotion(e){
 }
 
 function formationLayout(stage){
- return currentGamePackFormationLayout(stage);
+	 return currentGamePackFormationLayout(stage);
+}
+
+function regularEntryPathFamily(stage){
+ if(stage>=16)return 'crown-looping-split-entry';
+ if(stage>=14)return 'late-boss-column-weave';
+ if(stage>=12)return 'galboss-low-hook-entry';
+ if(stage>=10)return 'stingray-pincer-entry';
+ if(stage>=8)return 'stingray-wide-flank-entry';
+ if(stage>=6)return 'scorpion-tandem-hook-entry';
+ if(stage>=4)return 'scorpion-stagger-entry';
+ return 'classic-center-arc-entry';
 }
 
 function spawnFormation(){
@@ -30,16 +42,18 @@ function spawnFormation(){
   let t='bee';
   if(r===0)t=(c>=3&&c<=6)?'boss':'but';
   else if(r===1)t='but';
-  const e=makePackEnemyState({
-   gamePack:currentGamePack(),
-   type:t,
+	  const e=makePackEnemyState({
+	   gamePack:currentGamePack(),
+	   type:t,
    row:r,
    column:c,
    tx:ox+c*gx,
-   ty:oy+r*gy,
-   profile
-  });
-  e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
+	   ty:oy+r*gy,
+	   profile
+	  });
+	  e.pathFamily=regularEntryPathFamily(S.stage);
+	  e.entryMirror=(S.stage>=8&&c>=cols/2)?-1:1;
+	  e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
   if(S.stage>=8&&S.stage<12&&!S.challenge){
    if(t==='but'&&(c<=1||c>=8))e.cool=.16+(c<=1?c:9-c)*.12;
    else if(t==='but')e.cool+=.55;
@@ -72,7 +86,7 @@ function spawnFormation(){
 
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
- const layout=currentGamePackChallengeLayout();
+ const layout=currentGamePackChallengeLayout(S.stage);
  const challengeTiming=usesReferenceTimingModel()&&!S.attract
   ? currentGamePackReferenceTiming('challengeEntry')
   : null;
@@ -99,11 +113,14 @@ function spawnChallenge(){
    side,
    slot,
    row,
-   group:wave,
-   sweep:wave%2?-1:1,
-   upperBandY,
-   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
-  }));
+	   group:wave,
+	   sweep:wave%2?-1:1,
+	   upperBandY,
+   pathFamily:layout.pathFamily||'classic-lane-wave',
+   arcAmp:layout.arcAmp||1,
+   dropAmp:layout.dropAmp||1,
+	   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
+	  }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
