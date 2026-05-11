@@ -1,14 +1,15 @@
 # Restart From Here
 
-## Current Checkpoint: May 9, 2026 Aurora Conformance Work
+## Current Checkpoint: May 11, 2026 Calibrated Audio / Deploy-Ready Branch
 
 Active local workspace:
 
 - `/Users/sgwoods/Development/Codex/Codex-test1`
 - Current working branch: `codex/macbook-pro-stage12-level-arc-conformance`
-- Latest committed conformance commits:
-  - `c9ef29d2 Add Aurora audio cue contracts`
-  - `7edb5802 Add audio promotion precheck evidence`
+- Latest pushed conformance commit:
+  - `4431ed7d Promote calibrated ship-loss audio cue`
+- Upstream branch:
+  - `origin/codex/macbook-pro-stage12-level-arc-conformance`
 
 Authority and lane constraints:
 
@@ -20,18 +21,25 @@ Authority and lane constraints:
 
 Current conformance focus:
 
-- Aurora audio is the active high-value conformance investment.
-- Current measured runtime state:
-  - Overall quality: `9.1/10`
-  - Audio conformance: `7.2/10`
+- Aurora audio just received a measured runtime lift and remains the active
+  high-value conformance investment.
+- Current measured local state:
+  - Overall quality: `9.2/10`
+  - Audio conformance: `7.3/10`
   - Semantic audio score: `9.78/10`
-  - Acoustic event score: `6.20/10`
-  - Average worst segment risk: `3.80/10`
+  - Acoustic event score: `6.31/10`
+  - Average worst segment risk: `3.69/10`
   - Cue-contract readiness: `9.09/10`
   - Highest cue gap: `playerHit`
-  - Highest segment gap: `playerHit` tail, `6.19/10` risk
-- No latest runtime audio candidate has been accepted. The last measured runtime trial was rejected and rolled back, and the follow-up composite `playerHit` pass found no safe keeper.
-- The useful headway is process-level: reusable cue contracts, promotion precheck evidence, layered cue analysis, composite analysis windows, persistent candidate histories, and dashboard/release documentation now make audio changes harder to promote without proof.
+  - Highest residual segment gap: `playerHit` tail, `3.61/10` risk
+- Accepted runtime lift: `playerHit` now uses a calibrated layered
+  onset/body/tail death phrase from `galaga3-death.m4a`.
+- Useful process headway: reusable cue contracts, calibrated browser-reference
+  role scoring, promotion precheck warnings, layered cue analysis, composite
+  analysis windows, persistent candidate histories, application artifact
+  conformance, runtime sprite conformance, dashboard/release documentation, and
+  economics charts now make audio and visual changes harder to promote without
+  proof.
 - Latest `stagePulse` candidate pass found a useful near miss, not a keeper:
   `soft-attack-low-march` improved focused risk to `3.62/10` and cadence
   pressure to `4.59/10`, but promotion remains blocked because masking
@@ -43,10 +51,35 @@ Current conformance focus:
 
 Current audio plan:
 
-1. Build a `playerHit` tail/body composite strategy and browser-capture calibration baseline before another runtime ship-loss trial.
-2. Keep `stagePulse` pressure-bed strategy as the next ambience lane: optimize pressure cadence, onset band shape, low-band body, zero-crossing calm, gain control, and masking against important shot/hit/explosion cues.
-3. Promote no runtime cue unless focused candidate gates, promotion precheck, full audio comparison, event-gap rollup, cue alignment, and quality scoring all hold or improve.
-4. If `playerHit` still produces no stable keeper, preserve the evidence and pivot to a better reference/capture calibration strategy before subjective tuning.
+1. Keep the calibrated layered `playerHit` ship-loss cue in runtime unless
+   manual listening finds a player-facing problem.
+2. If continuing audio, refine the residual `playerHit` tail/body gap using the
+   same calibrated scorer, or move to `stagePulse` pressure-bed strategy if
+   user impact per compute looks higher.
+3. Keep `stagePulse` pressure-bed strategy as the next ambience lane: optimize
+   pressure cadence, onset band shape, low-band body, zero-crossing calm, gain
+   control, and masking against important shot/hit/explosion cues.
+4. Promote no runtime cue unless focused candidate gates, promotion precheck,
+   full audio comparison, event-gap rollup, cue alignment, and quality scoring
+   all hold or improve.
+5. For gameplay conformance, the highest non-audio candidate remains
+   challenge-stage arrival/variation and alien entry novelty.
+
+Deployment posture:
+
+- Local game service is up at commit `4431ed7d`:
+  `1.3.0.1+build.698.sha.4431ed7d.dirty`.
+- Hosted `/dev` is still older at `acc8b71`; beta and production remain on
+  `0123dd0`.
+- This MacBook can push normal development and can prepare/publish hosted
+  `/dev` if that remains the intended lane, but it must not approve beta,
+  publish beta, promote production, or publish production while release
+  authority remains on `iMacM1`.
+- Before deployment, decide whether to:
+  - publish this branch to hosted `/dev` for review, or
+  - open/merge a PR to `main` first and publish `/dev` from the integrated line.
+- Remaining local dirty state is only generated local preview stamp plus older
+  untracked scratch analysis folders; committed deployable work is pushed.
 
 Useful local URLs:
 
