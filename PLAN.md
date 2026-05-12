@@ -98,6 +98,14 @@ resource economics fit together.
 - connect videos to issues, score records, release review, and player-facing
   history
 - use shared videos as durable reference material between users and machines
+- pursue top-10 high-score video publishing only through a backend-validated beta/production pipeline for signed-in and authorized pilots
+
+### 5b. Flashy Platform Features
+
+- keep the high-score video, Arcade Music, and Player Two persona work on separate branches
+- use [PLATFORM_FLASHY_FEATURES_ROADMAP.md](PLATFORM_FLASHY_FEATURES_ROADMAP.md) as the current branch and gate plan
+- treat Arcade Music as shell ambience, not reference-conformant game audio
+- treat Player Two as a platform persona contract plus game-owned adapters, with human-only leaderboard eligibility
 
 ### 6. Platform Boundary Cleanup
 
@@ -141,8 +149,10 @@ resource economics fit together.
    analysis progress into the main roadmap
 6. prioritize level-by-level arcade depth as the next major product pillar
 7. make shared gameplay-video publishing an early evidence/product capability
-8. continue narrow trust fixes from the open issue stream
-9. execute the measured Galaga long-cycle quality plan in
+8. keep the new high-visibility platform features branch-separated so they do
+   not muddy the `1.4.0` arcade-depth candidate
+9. continue narrow trust fixes from the open issue stream
+10. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
 
@@ -217,8 +227,8 @@ After `1.3.0` ships, the plan should pick up in this order:
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.
 3. Longer term: `1.5.0` shared-video evidence and flight-recorder capabilities,
-   followed by `1.6.0` pilot-facing shell/message-to-pilot polish and `2.0`
-   multi-game Platinum maturity.
+   followed by `1.6.0` pilot-facing shell/message-to-pilot polish plus
+   persona-opponent groundwork and `2.0` multi-game Platinum maturity.
 
 That keeps the next cycle from collapsing back into unprioritized polish and
 preserves the release-family shape already captured in the roadmap docs.

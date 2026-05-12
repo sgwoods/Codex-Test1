@@ -98,6 +98,7 @@
       "bullets": [
         "Formalize the game-pack schema and capability validation.",
         "Make storage and migration policy more explicit and less name-driven.",
+        "Split high-visibility platform features into separate branches: backend-safe high-score video publishing, opt-in Arcade Music, and signed-in Player Two persona mode.",
         "Keep platform docs and application docs separate and make the docs pass a real release gate for every meaningful x.y release.",
         "Prove the platform with the smallest useful playable second application before expanding into a much larger multi-game roadmap."
       ]
@@ -146,6 +147,12 @@
       "title": "Platinum Platform Source",
       "summary": "Canonical platform purpose, ownership, usage, boundary notes, and future improvement areas.",
       "file": "PLATINUM.md"
+    },
+    {
+      "id": "flashy-feature-roadmap-doc",
+      "title": "Flashy Feature Roadmap",
+      "summary": "Platform feature plan for high-score video publishing, Arcade Music, and Player Two persona mode.",
+      "file": "PLATFORM_FLASHY_FEATURES_ROADMAP.md"
     },
     {
       "id": "platinum-overview-doc",

@@ -30,6 +30,20 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 - Main runtime code:
   - `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
 
+### YouTube / Shared Video Channel (Planned)
+
+- Status:
+  - planned, not currently a runtime dependency
+- Intended use:
+  - optional Arcade Music playlist playback after user gesture
+  - future published video evidence for authorized beta/production top-10
+    human scores
+- Boundary:
+  - playlist playback can be shell-owned client behavior
+  - high-score video uploads require a backend/service-side credential holder; upload credentials must never be bundled into browser assets
+- Current plan:
+  - [PLATFORM_FLASHY_FEATURES_ROADMAP.md](PLATFORM_FLASHY_FEATURES_ROADMAP.md)
+
 ## Hosting And Delivery
 
 ### GitHub Pages
@@ -111,6 +125,7 @@ These are not external services.
 
 - Supabase
 - Web3Forms
+- YouTube only after a future branch intentionally enables Arcade Music or shared high-score video playback
 
 ### Hosting Dependencies
 

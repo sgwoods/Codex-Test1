@@ -1,6 +1,10 @@
 # Artifact Policy
 
-This project has four distinct artifact locations. Treating them as separate on purpose avoids the recurring confusion between player exports, browser-local replay state, developer review archives, and curated evidence packs.
+This project currently has four distinct artifact locations. Treating them as
+separate on purpose avoids the recurring confusion between player exports,
+browser-local replay state, developer review archives, and curated evidence
+packs. A planned fifth surface, remote high-score video evidence, is tracked
+below but is not implemented yet.
 
 ## Policy
 
@@ -152,6 +156,23 @@ There is no separate filesystem export location for `beta` or `production`.
 - `beta`: replay lives in browser storage, exports go to browser downloads
 - `production`: replay lives in browser storage, exports go to browser downloads
 
+### Planned Remote High-Score Video Evidence
+
+Future high-score video publishing is a separate remote artifact surface, not a
+replacement for browser-local replay or developer review archives.
+
+The planned policy is:
+
+- only signed-in and authorized pilots can publish
+- only beta/production top-10 human scores are eligible
+- the browser records and requests publication but never owns YouTube or shared channel upload credentials
+- a backend validates user, lane, score row, top-10 eligibility, and replay metadata before any upload or publication status change
+- trophy-page video playback reads from a published video metadata record, not from private local IndexedDB state
+- failed, pending, revoked, and unavailable video states must not block ordinary score submission
+
+Until this backend exists, beta and production player replay remains
+browser-local unless the player explicitly exports a recording.
+
 ## Non-Goals
 
 - `dist/dev/`, `dist/beta/`, and `dist/production/` are not runtime capture archives.
@@ -169,5 +190,6 @@ Going forward, use this distinction:
 - `<workspace>/harness-artifacts/` = canonical developer review archive after import/normalization
 - `<workspace>/reference-artifacts/analyses/` = curated evidence packs for
   quality, conformance, player-profile, and future-game research
+- future remote video metadata = published high-score evidence after backend validation, never raw client-side upload authority
 
 If documentation or UI text blurs those boundaries, treat it as a documentation bug and correct it.

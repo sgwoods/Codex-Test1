@@ -39,6 +39,12 @@ It is centered on:
 The maintained top-level explanation of this program is
 [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
 
+The current plan for the next high-visibility platform features is
+[PLATFORM_FLASHY_FEATURES_ROADMAP.md](PLATFORM_FLASHY_FEATURES_ROADMAP.md).
+Those features are intentionally split into separate branches because
+high-score video publishing, Arcade Music, and Player Two persona mode touch
+different platform risk surfaces.
+
 ## Near-Term Release Direction
 
 ### Stabilize `1.3.0`
@@ -131,8 +137,9 @@ Once `1.3.0` is out, the roadmap pickup should be:
 - Medium term: `1.4.0` for level-by-level arcade depth plus
   platform-contract cleanup.
 - Longer term: `1.5.0` for shared-video evidence and flight-recorder
-  publishing, `1.6.0` for pilot-facing shell/message/cabinet-surface polish,
-  and `2.0` for a genuinely multi-game Platinum candidate.
+  publishing, `1.6.0` for pilot-facing shell/message/cabinet-surface polish
+  and persona-opponent groundwork, and `2.0` for a genuinely multi-game
+  Platinum candidate.
 
 That sequencing should be treated as intentional carry-forward planning, not
 something to rediscover after the release is already shipped.
@@ -248,11 +255,13 @@ Target:
 
 - publish selected gameplay videos into a shareable catalog or repository that
   users and developers can reference
+- let signed-in, authorized beta/production pilots with top-10 human scores attach durable video evidence to trophy-page entries once the backend validation and upload pipeline is safe
 
 Why:
 
 - shared videos turn runs into durable evidence, player memory, issue context,
   and release-review material
+- high-score video publishing strengthens pilot trust only if the browser never owns upload credentials and the backend verifies lane, user, score, and eligibility before publication
 
 ### 6. UI, shell, and overlay polish
 
@@ -277,6 +286,7 @@ Themes:
 - permanent pilot identity
 - account lifecycle and deletion
 - replay/media and admin/control-centre growth
+- video-linked top-10 score entries for authorized signed-in pilots after the shared-video publishing backend exists
 
 ### 8. Layered release and ingestible games
 
@@ -335,6 +345,21 @@ Themes:
 - stronger action/state annotation
 - richer test personas
 - eventual learn-by-playing simulation work
+- signed-in `Player Two` mode where a human can choose a generic persona opponent, with bounded per-run jitter and human-only leaderboard submission
+
+### 12. Platform ambience and media controls
+
+Target:
+
+- add optional shell-owned ambience features without confusing them with
+  reference-conformant game audio
+
+Themes:
+
+- `Arcade Music` mode as an opt-in right-dock control above mute
+- YouTube playlist playback started by user gesture and handled as platform ambience
+- clear separation between game mute, game audio conformance, replay recording,
+  and external playlist music
 
 ## Platform Milestones
 

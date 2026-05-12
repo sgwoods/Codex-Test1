@@ -29,6 +29,7 @@ multiple games:
 - pack selection and boot path
 - common runtime, input, and session surfaces
 - shared services such as auth, leaderboard transport, and feedback transport
+- shared media services such as replay evidence, high-score video publication status, and shell-owned ambience controls
 - shared documentation and release discipline
 - platform-only harnesses and publish checks
 - a stable control contract that lets players move between hosted games with
@@ -137,6 +138,8 @@ pack:
 - leaderboard fetch and submit policy
 - feedback transport policy
 - replay/session plumbing
+- replay-video publication plumbing when score evidence becomes a hosted
+  feature
 
 This is implemented primarily through:
 
@@ -267,7 +270,7 @@ Desired outcome:
 - forward-compatible pack evolution
 - earlier validation failures during boot
 
-### 1b. Multi-game ingestion workflow
+### 2. Multi-game ingestion workflow
 
 We should get better at ingesting a second classic game lineage by turning
 preserved footage, manuals, timing libraries, and comparison artifacts into a
@@ -289,7 +292,7 @@ Desired outcome:
 - a game can launch through Platinum now while remaining portable to a thinner
   host later if we choose
 
-### 2. Storage and migration policy
+### 3. Storage and migration policy
 
 We should decide more intentionally what is:
 
@@ -298,7 +301,7 @@ We should decide more intentionally what is:
 - never migrated
 - clearly platform-owned versus application-owned data
 
-### 3. Shared control compliance
+### 4. Shared control compliance
 
 As additional games come online, Platinum should protect a common player-input
 contract:
@@ -309,7 +312,7 @@ contract:
 
 This matters both for human players and for future persona-driven play.
 
-### 4. Persona and simulated opponents
+### 5. Persona and simulated opponents
 
 Platinum should eventually support more than passive replay personas.
 
@@ -325,7 +328,23 @@ Desired outcome:
 - future learn-by-playing personas can train through simulation while still
   respecting platform contracts and pack-specific rules
 
-### 3. Platform-first documentation discipline
+### 6. Shared media and high-score evidence
+
+Platinum should own the platform side of visible shared media experiences.
+
+Desired outcome:
+
+- signed-in, authorized pilots can eventually attach durable video evidence to beta/production top-10 human scores
+- the browser never owns YouTube or shared-channel upload credentials
+- backend validation confirms user, lane, score row, top-10 eligibility, and replay metadata before publication
+- trophy and pilot surfaces can show pending, published, failed, and revoked video states without blocking normal scoring
+- optional shell ambience such as `Arcade Music` stays separate from reference-conformant game audio and does not pollute conformance scoring
+
+The current detailed plan is:
+
+- [PLATFORM_FLASHY_FEATURES_ROADMAP.md](PLATFORM_FLASHY_FEATURES_ROADMAP.md)
+
+### 7. Platform-first documentation discipline
 
 Every meaningful `x.y` release should have:
 
@@ -336,7 +355,7 @@ Every meaningful `x.y` release should have:
 - clear testing and gating status
 - explicit notes on any remaining platform/application coupling
 
-### 4. Cleaner multi-application proof
+### 8. Cleaner multi-application proof
 
 The best next platform proof is not a huge second-game launch.
 

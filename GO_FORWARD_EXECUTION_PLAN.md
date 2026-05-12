@@ -115,6 +115,9 @@ Recommended branch families:
 - `codex/<machine-id>-pilot-*`
 - `codex/<machine-id>-platform-*`
 - `codex/<machine-id>-galaxian-*`
+- `codex/platform-high-score-video-publishing`
+- `codex/platform-arcade-music-mode`
+- `codex/platform-player-two-persona-mode`
 
 Default rule:
 
@@ -122,6 +125,11 @@ Default rule:
 - merge back into `main`
 - republish hosted `/dev` only when the integrated branch is again coherent and
   worth sharing
+
+For the current high-visibility platform feature set, keep the branches
+separate. High-score video publishing, Arcade Music, and Player Two persona
+mode touch different risk surfaces and should not be reviewed as one mixed
+bundle unless their shared contract has already landed.
 
 ### When To Republish Hosted `/dev`
 
@@ -212,8 +220,9 @@ Practical standard:
   - short term: keep the refreshed public line stable while assembling the next
     hosted `/dev` review bundle
   - medium term: `1.4.0` arcade depth and platform-contract follow-through
-  - longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
-    cabinet polish, leading toward `2.0` multi-game Platinum
+- longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
+  cabinet polish, leading toward `2.0` multi-game Platinum
+- high-visibility platform work should follow the dedicated plan in [PLATFORM_FLASHY_FEATURES_ROADMAP.md](PLATFORM_FLASHY_FEATURES_ROADMAP.md): start with opt-in Arcade Music, then backend-safe high-score video publishing, then signed-in Player Two persona mode once the persona adapter contract is stronger
 
 ### `1.3.0.1` Beta And Production Promotion Record
 
