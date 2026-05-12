@@ -33,7 +33,7 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 ### YouTube Playlist Embed
 
 - Status:
-  - optional, enabled only when `ARCADE_MUSIC_PLAYLIST_ID` or `NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID` is configured at build time
+  - optional, configured by `release-manifest.json` and overrideable with `ARCADE_MUSIC_PLAYLIST_ID` or `NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID` at build time
 - Used for:
   - opt-in Arcade Music playback from the right rail
 - Boundary:

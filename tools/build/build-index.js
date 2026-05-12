@@ -371,7 +371,12 @@ function loadReleaseManifest(buildVersion = pkg.version){
     version: String(rawPlatform.version || buildVersion).trim() || buildVersion,
     releaseTrack: String(rawPlatform.releaseTrack || 'bundle-aligned').trim() || 'bundle-aligned',
     compatibility: String(rawPlatform.compatibility || '').trim(),
-    notes: String(rawPlatform.notes || '').trim()
+    notes: String(rawPlatform.notes || '').trim(),
+    media: rawPlatform.media && typeof rawPlatform.media === 'object'
+      ? {
+          arcadeMusicPlaylistId: String(rawPlatform.media.arcadeMusicPlaylistId || '').trim()
+        }
+      : {}
   };
 
   const applications = Array.isArray(raw.applications) ? raw.applications : [];
@@ -3510,7 +3515,7 @@ function build(options = {}){
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://iddyodcknmxupavnuuwg.supabase.co';
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || 'sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
   const web3FormsAccessKey = process.env.WEB3FORMS_ACCESS_KEY || '';
-  const arcadeMusicPlaylistId = process.env.ARCADE_MUSIC_PLAYLIST_ID || process.env.NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID || '';
+  const arcadeMusicPlaylistId = process.env.ARCADE_MUSIC_PLAYLIST_ID || process.env.NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID || releaseManifest.platform?.media?.arcadeMusicPlaylistId || '';
   const parseListEnv = (value) => String(value || '')
     .split(',')
     .map((item) => item.trim())

@@ -103,6 +103,7 @@ async function main(){
       '#helpClose'
     );
 
+    const musicDefault = await page.evaluate(() => window.__platinumArcadeMusic?.state?.());
     await page.evaluate(() => window.__platinumArcadeMusic?.setPlaylistForHarness?.('PLarcadeMusicHarness01'));
     const musicBefore = await page.locator('#arcadeMusicToggleBtn').getAttribute('aria-pressed');
     await page.locator('#arcadeMusicToggleBtn').click();
@@ -223,7 +224,7 @@ async function main(){
       scores,
       feedback,
       settings,
-      music: { before: musicBefore, active: musicActive, restored: musicRestored },
+      music: { default: musicDefault, before: musicBefore, active: musicActive, restored: musicRestored },
       mute: { before: muteBefore, after: muteAfter, restored: muteRestored },
       pause: { before: pauseBefore, active: pauseActive, restored: pauseRestored }
     };
@@ -249,6 +250,9 @@ async function main(){
   }
   if(result.controls.expanded !== 'true' || result.controls.activeTab !== 'controls' || result.controls.actionVisible){
     fail('controls dock button did not open the controls tab correctly', result);
+  }
+  if(!result.music.default?.configured){
+    fail('Arcade Music is not configured with a product playlist by default', result);
   }
   if(result.music.before !== 'false' || result.music.active.aria !== 'true' || result.music.active.title !== 'Arcade Music' || result.music.active.actionTip !== 'Arcade Music' || !/youtube-nocookie\.com\/embed\/videoseries/.test(result.music.active.src)){
     fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
