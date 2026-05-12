@@ -165,7 +165,9 @@ function stageArtifacts(repoDir, cfg){
     removeEntry(dest);
     copyFile(src, dest);
   }
-  ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir);
+  if(cfg.lane === 'production'){
+    ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir);
+  }
 }
 
 function gitStatus(repoDir){
