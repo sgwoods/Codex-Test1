@@ -11,27 +11,26 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 11, 2026:
+As of May 12, 2026:
 
 - hosted `/dev` points at:
-  - the active `1.3.0.1` hosted-dev review line
+  - the active `1.3.0.1` forward-review line
 - hosted `/beta` now points at:
-  - the approved `1.3.0` beta lane
+  - the refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
+    bundle
 - hosted `/production` now points at:
-  - the shipped `1.3.0` public line
+  - the refreshed `1.3.0` public line
 
 This means:
 
-- the `1.3.0` quality-and-second-cabinet release is now the public baseline on
-  hosted `/production`
-- hosted `/dev` now carries the post-production conformance/docs/dashboard
-  review increment while hosted `/beta` and `/production` preserve the shipped
-  family
+- the `1.3.0` quality-and-second-cabinet release remains the public baseline
+  on hosted `/production`, now refreshed through the accepted `1.3.0.1` bundle
+- hosted `/dev` remains the forward review lane while hosted `/beta` and
+  hosted `/production` now preserve the refreshed public family
 - the active source release family has moved on to the deliberate `1.4.0`
   pickup
-- the immediate execution question is now whether the `1.3.0.1` hosted-dev
-  review bundle is strong enough to request a beta publish from the
-  release-authority machine, and what should remain queued for `1.4.0`
+- the immediate execution question is now what the first coherent `1.4.0`
+  review bundle should be and what should remain queued behind it
 
 The forward line and the current shipped family now include:
 
@@ -139,13 +138,15 @@ For the immediate next cycle, that means:
 - do not republish `/dev` for every single small change
 - group the next meaningful fidelity work into a small bundle
 - refresh the scorecard and lane metadata when that bundle is ready
-- use the `1.3.0.1` hosted-dev increment as the integrated review posture:
-  useful for beta-readiness review, but not itself a beta approval
+- use the `1.3.0.1` hosted-dev increment as the visible forward-review posture
+  until the next coherent review bundle supersedes it
 
 ### When To Shape The Next Hosted `/beta`
 
 Do not move current hosted `/dev` to hosted `/beta` as an automatic mirror
-operation. Treat the `1.3.0.1` lane as a candidate review package.
+operation. The accepted `1.3.0.1` lane has already refreshed the public
+family; the next hosted `/beta` should wait for a real `1.4.0`-shaped
+candidate.
 
 The next hosted `/beta` should wait until we have:
 
@@ -162,12 +163,12 @@ The next hosted `/beta` should wait until we have:
 
 Practical standard:
 
-- current hosted `/dev` is the `1.3.0.1` review bundle
-- the next hosted `/beta` can be requested only after the docs, dashboards,
-  release note, and current conformance read are accepted as a real
-  player-visible step over shipped `1.3.0`
-- the beta publish itself must happen from `imacm1 / iMacM1` unless release
-  authority is explicitly transferred
+- current hosted `/dev` is the visible `1.3.0.1` forward-review line
+- the next hosted `/beta` should only be cut once the docs, dashboards,
+  release note, and current conformance read describe a real `1.4.0`-scale
+  improvement bundle
+- beta and production publish still must happen from `imacm1 / iMacM1` unless
+  release authority is explicitly transferred
 - the next larger beta family remains `1.4.0` arcade depth
 - after refreshing the audio process with cue contracts, promotion prechecks,
   layered cue support, composite analysis windows, and calibrated
@@ -208,14 +209,16 @@ Practical standard:
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
 - after `1.3.0`, the pickup order should stay explicit:
-  - short term: `1.3.0.1` hosted-dev review and beta-request handoff
+  - short term: keep the refreshed public line stable while assembling the next
+    hosted `/dev` review bundle
   - medium term: `1.4.0` arcade depth and platform-contract follow-through
   - longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
     cabinet polish, leading toward `2.0` multi-game Platinum
 
-### `1.3.0.1` Beta Request Handoff
+### `1.3.0.1` Beta And Production Promotion Record
 
-If the hosted-dev review is accepted, the release-authority machine should:
+The accepted `1.3.0.1` hosted-dev review bundle was promoted using this
+authority-machine path:
 
 1. sync the authoritative source repo from `origin/main`
 2. run machine bootstrap/status/doctor and confirm release authority still
@@ -225,8 +228,10 @@ If the hosted-dev review is accepted, the release-authority machine should:
 5. run `npm run publish:check:dev`
 6. inspect the hosted `/dev` lane and release note
 7. publish hosted `/beta` only from the authority machine
-8. run hosted beta verification and update the strategic beta review with the
-   actual beta lane stamp, any score movement, and any accepted gaps
+8. approve the refreshed beta candidate
+9. publish hosted `/production`
+10. verify hosted beta, hosted production, public sync, and post-publish
+    machine health
 
 The MacBook may continue source, branch, commit, push, merge, and hosted-dev
 work, but it should not approve beta or publish beta while release authority
@@ -256,10 +261,10 @@ a new promotion cycle.
 
 Current interpretation:
 
-- hosted `/dev`, hosted `/beta`, and hosted `/production` now share the same
-  stable post-patch base
-- the next improvement cycle should be assembled intentionally on `main` before
-  the lanes diverge again
+- hosted `/beta` and hosted `/production` now share the same refreshed public
+  base
+- hosted `/dev` remains the forward-review lane for the next intentional
+  improvement cycle
 
 ### 2. Require Harness Thinking For Bug Fixes
 

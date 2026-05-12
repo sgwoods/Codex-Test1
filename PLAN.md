@@ -2,24 +2,26 @@
 
 ## Current State
 
-Verified May 11, 2026:
+Verified May 12, 2026:
 
 - hosted `/dev`
-  - active `1.3.0.1` hosted-dev review line
+  - active `1.3.0.1` forward-review line
 - hosted `/beta`
-  - approved `1.3.0` beta lane
+  - refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
+    bundle
 - hosted `/production`
-  - shipped `1.3.0` public line
+  - refreshed `1.3.0` public line
 - `main`
-  - authoritative integration branch for the `1.4.0` pickup after the `1.3.0` ship
+  - authoritative integration branch for the `1.4.0` pickup after the `1.3.0`
+    production conformance refresh
 
 This means:
 
-- the `1.3.0` fidelity-and-second-cabinet release is now the stable public
-  family
-- hosted `/dev` now carries the post-production conformance/docs/dashboard
-  review increment, while `/beta` and `/production` preserve the shipped
-  `1.3.0` family
+- the `1.3.0` fidelity-and-second-cabinet release remains the public family,
+  now refreshed through the accepted `1.3.0.1` conformance/docs/dashboard
+  bundle
+- hosted `/dev` remains the forward review lane, while `/beta` and
+  `/production` now carry the refreshed public `1.3.0` story
 - the active source-planning question has moved from "what must land for `1.3.0`?"
   to "what is the cleanest deliberate `1.4.0` pickup?"
 - the post-release work should now be treated as intentional carry-forward, not
@@ -35,7 +37,7 @@ resource economics fit together.
 
 ### 1. `1.3.0` Production Stabilization
 
-- keep the shipped `1.3.0` production line trustworthy
+- keep the refreshed `1.3.0` production line trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) as the
@@ -130,9 +132,8 @@ resource economics fit together.
 
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
-3. review the hosted `1.3.0.1` `/dev` increment as the current coherent
-   conformance/docs/dashboard bundle; if accepted, request the beta publish
-   from `imacm1`, the current release-authority machine
+3. keep hosted `/dev` available for the next coherent review bundle instead of
+   using it as a casual mirror of `main`
 4. prioritize audio/event feedback and stage-shape conformance over more broad
    planning; the planning scaffolding is strong enough, while runtime feel still
    needs a measurable lift
@@ -190,13 +191,10 @@ Current conformance read:
   `1.3.0.1` review increment
 - the active source line should now present itself as the deliberate `1.4.0`
   pickup family
-- the next practical release artifact is the `1.3.0.1` hosted-dev review
-  increment: documentation, dashboard, economics, application artifact
-  conformance, and a measured audio/event-feedback lift are now assembled for
-  review
-- the next hosted `/beta` decision should be a deliberate handoff from this
-  reviewed `/dev` increment, performed only on the release-authority machine
-  and only if the player-visible value is accepted as enough for the beta lane
+- the latest practical release artifact was the accepted `1.3.0.1`
+  hosted-dev review increment, now refreshed into the public `1.3.0` family
+- the next hosted `/beta` decision should now wait for a coherent `1.4.0`
+  improvement bundle rather than immediately reusing the just-shipped refresh
 - `1.3.0` was the intentional bundle for fidelity, trust, and the first
   significant second-game Platinum story
 - the shipped `1.3.0` family is now the stable public baseline while `main`
@@ -213,9 +211,8 @@ Current conformance read:
 
 After `1.3.0` ships, the plan should pick up in this order:
 
-1. Short term: review and, if accepted, request beta publication of the
-   `1.3.0.1` hosted-dev integration increment from the release-authority
-   machine.
+1. Short term: keep the refreshed `1.3.0` public line trustworthy while
+   assembling the next coherent hosted `/dev` review bundle.
 2. Medium term: `1.4.0` arcade depth and platform-contract follow-through,
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.

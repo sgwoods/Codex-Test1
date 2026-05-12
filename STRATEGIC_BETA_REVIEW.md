@@ -1,6 +1,6 @@
 # Strategic Beta Review
 
-Updated: May 11, 2026
+Updated: May 12, 2026
 
 This is the maintained expert assessment for whether the project is on track
 near-term and long-term before or after a major hosted `/beta` push. It is
@@ -31,36 +31,35 @@ The review should answer:
 
 ## Current Assessment
 
-Use the hosted `1.3.0.1` `/dev` lane as the current beta-readiness review
-package. It is now a real review increment, not just a future plan. If the
-bundle is accepted, the beta publish should be requested from `imacm1 /
-iMacM1`, which currently holds release authority. Keep the next larger beta
-family centered on `1.4.0` arcade depth.
+The accepted `1.3.0.1` hosted-dev bundle has now refreshed the public `1.3.0`
+family on hosted `/beta` and hosted `/production`.
 
 Current strengths:
 
 - The strategy is sound: Codex/model reasoning designs better local harnesses,
   while local CPU/browser loops perform repeatable measurement.
-- The release lane model is disciplined: `/dev`, `/beta`, and `/production`
-  have distinct meanings and release authority is explicit.
+- The release lane model is disciplined: hosted `/dev`, hosted `/beta`, and
+  hosted `/production` have distinct meanings and release authority is explicit.
+- The public documentation set now explains provenance, evidence, current
+  scores, and resource economics more honestly than the earlier shipped line.
 - Aurora now has first-class conformance categories for audio, level arc,
   alien entry/challenge novelty, boss/formation grammar, visual look, and
   resource economics.
-- Galaxy Guardians is correctly framed as a preview/ingestion proof rather
-  than a shipped second game.
+- Galaxy Guardians is still correctly framed as a preview/ingestion proof
+  rather than a fully shipped second game.
 
 Current risks:
 
-- Documentation freshness is a release risk. Game sections, audio cue windows,
-  and public-page summaries can drift from runtime contracts unless checked.
-- The overall `9.2/10` quality score can obscure player-visible gaps in audio
-  identity, challenge-stage arrival authenticity, start/wait-mode polish,
-  explosion feedback, and visual style.
-- Audio conformance has consumed the largest measured local compute spend while
-  the runtime score remains the weakest high-value category at `7.3/10`; the
-  latest ship-loss promotion is a real user-visible lift, but the next audio
-  work should still attack calibrated event gaps rather than simply sweeping
-  more pleasant candidates.
+- Documentation freshness remains a release risk. The project is better
+  instrumented now, but user-visible docs can still drift if current artifact
+  sources stop being maintained.
+- The overall `9.2/10` quality score can still obscure player-visible gaps in
+  audio identity, challenge-stage arrival authenticity, explosion feedback,
+  and visual style.
+- Audio conformance remains the weakest high-value runtime category at
+  `7.3/10`; the latest ship-loss promotion is real, but the next audio work
+  should keep attacking calibrated event gaps rather than settling for
+  "pleasant enough" candidates.
 - GPU-equivalent accounting is conceptually correct but still under-instruments
   Codex/model effort. Treat missing model usage as accounting debt, not proof
   that cloud/model compute was irrelevant.
@@ -69,7 +68,8 @@ Current risks:
 
 A beta candidate should have:
 
-1. One coherent player-visible improvement bundle beyond hosted-dev parity.
+1. One coherent player-visible improvement bundle beyond the current public
+   family.
 2. A refreshed conformance dashboard and economics report.
 3. User-visible docs that explain the improvement, current gaps, evidence,
    cost, and next investment.
@@ -79,23 +79,23 @@ A beta candidate should have:
 
 ## Next Recommended Investment
 
-Before the next conformance compute cycle, finish the beta-request readiness
-sprint:
+Before the next major conformance compute cycle, keep the refreshed public line
+boring and trustworthy:
 
-- keep the detailed `1.3.0.1` release note, public project page, application
-  guide, release dashboard, scorecards, and project guide aligned
-- confirm `npm run build`, documentation freshness, and publish preflight are
-  green from the source repo
-- preserve the beta handoff rule: MacBook may prepare and push source/dev
-  review work, but `imacm1` must perform beta publish unless authority changes
-- record any docs/dashboard suggestions that are not part of the beta bundle as
-  explicit next-plan items
+- keep the detailed `1.3.0` production refresh note, public project page,
+  application guide, release dashboard, scorecards, and project guide aligned
+- preserve the authority rule: `imacm1 / iMacM1` performs beta/production
+  publish while it holds release authority
+- record docs/dashboard suggestions that are not part of the public line as
+  explicit next-plan items instead of ad hoc drift
 
 Then return to the highest-value user experience work:
 
 - audio/event feedback if the goal is immediate feel improvement
 - alien/challenge-stage arrival and novelty if the goal is the strongest
   `1.4.0` arcade-depth story
+- level arc, boss/formation grammar, and visual reference grounding if the goal
+  is deeper long-play authenticity
 
 ## Maintenance Rule
 
@@ -112,5 +112,6 @@ Each major beta push should add a short dated entry below summarizing:
 
 | Date | Candidate / lane | Recommendation | Reason |
 | --- | --- | --- | --- |
+| May 12, 2026 | Hosted `/beta` and `/production` refreshed `1.3.0` family | Proceed with `1.4.0` pickup; hold new beta until a real next bundle exists | The accepted `1.3.0.1` review bundle is now live publicly with a `9.2/10` maintained quality read, provenance-backed docs, economics, and a measured ship-loss cue lift. Remaining gaps are authentic next-cycle targets, not blockers to the refreshed public line. |
 | May 11, 2026 | Hosted `/dev` `1.3.0.1` review line | Prepare beta request, authority-gated | Overall quality is `9.2/10`; audio is up to `7.3/10` with a measured ship-loss cue lift, dashboard/docs/economics are now part of the candidate story, and remaining gaps are understood enough to request a beta publish from `imacm1` if the review accepts the bundle. |
 | May 10, 2026 | Local `1.3.0.1` dev-review preparation | Hold beta; continue hosted-dev and conformance work | Audio remains `7.1/10`, alien/challenge novelty and visual/event feedback remain player-visible gaps, and docs needed freshness checks before a serious beta claim. |

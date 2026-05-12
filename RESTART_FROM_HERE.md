@@ -1,23 +1,23 @@
 # Restart From Here
 
-## Current Checkpoint: May 11, 2026 Hosted-Dev Review / Beta Handoff
+## Current Checkpoint: May 12, 2026 Production Conformance Refresh / 1.4.0 Pickup
 
 Active local workspace:
 
-- `/Users/sgwoods/Development/Codex/Codex-test1`
+- `/Users/steven/Projects-All/Codex-Test1`
 - Current working branch: `main`
-- Latest integrated hosted-dev source before this documentation refresh:
-  - `2d44f356 Clean conformance artifact outputs and docs freshness`
-- Previous conformance branch merged into `main`:
-  - `codex/macbook-pro-stage12-level-arc-conformance`
+- Release authority machine:
+  - `imacm1 / iMacM1`
 
 Authority and lane constraints:
 
 - `Codex-Test1/main` remains the authoritative engineering source.
 - `Aurora-Galactica` remains the public release-host mirror.
-- This MacBook may develop, test, branch, commit, push, and merge normal development work.
-- Do not approve beta, publish beta, promote production, or publish production from this machine unless release authority is explicitly transferred here.
-- Release authority remains on `imacm1` / `iMacM1` unless changed.
+- This iMac may develop, test, branch, commit, push, merge, and publish
+  hosted `/dev`, hosted `/beta`, and hosted `/production` while release
+  authority remains here.
+- Do not publish production from any other machine unless release authority is
+  explicitly transferred there.
 
 Current conformance focus:
 
@@ -67,25 +67,19 @@ Current audio plan:
 
 Deployment posture:
 
-- Hosted `/dev` carries the `1.3.0.1` review increment from the integrated
-  `main` line.
-- Hosted `/beta` and hosted `/production` remain on the shipped `1.3.0` family.
-- This MacBook can push normal development and can prepare/publish hosted
-  `/dev` if that remains the intended lane, but it must not approve beta,
-  publish beta, promote production, or publish production while release
-  authority remains on `iMacM1`.
-- The current work is a documentation/release-note/readiness refresh so the
-  `1.3.0.1` hosted-dev review package can be handed to the authority machine
-  for a possible beta publish.
-- Next beta action, if accepted, must be performed from `imacm1 / iMacM1`
-  unless release authority is explicitly transferred.
+- Hosted `/dev` carries the visible `1.3.0.1` forward-review increment from
+  the integrated `main` line.
+- Hosted `/beta` and hosted `/production` now carry the refreshed public
+  `1.3.0` family sourced from that accepted review bundle.
+- The active planning frame is no longer a beta handoff; it is deliberate
+  `1.4.0` pickup work while keeping the refreshed public line trustworthy.
 
 Useful local URLs:
 
 - Game: <http://127.0.0.1:8000/>
-- Local viewer/dashboard server: <http://127.0.0.1:4312/>
-- Conformance dashboard: <http://127.0.0.1:4312/local-dev/conformance-dashboard.html>
-- Public project preview: <http://127.0.0.1:4312/local-dev/public-aurora-galactica-preview.html>
+- Local viewer/dashboard server: <http://127.0.0.1:4311/>
+- Conformance dashboard: <http://127.0.0.1:4311/local-dev/conformance-dashboard.html>
+- Public project preview: <http://127.0.0.1:4311/local-dev/public-aurora-galactica-preview.html>
 
 Useful current commands:
 
@@ -108,7 +102,7 @@ multi-machine workflow refresh.
 ## Authoritative Repo
 
 - repo:
-  - current authority-machine clone: `/Users/steven/Documents/Codex-Test1`
+  - current authority-machine clone: `/Users/steven/Projects-All/Codex-Test1`
   - on a new machine: use your own local clone path after `git clone`
 - primary Git remote:
   - `origin -> https://github.com/sgwoods/Codex-Test1.git`

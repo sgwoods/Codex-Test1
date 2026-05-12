@@ -11,7 +11,7 @@
     "key": "platinum",
     "name": "Platinum",
     "version": "1.3.0",
-    "releaseTrack": "active-candidate",
+    "releaseTrack": "production-live",
     "compatibility": "platinum-1.3",
     "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract."
   },
@@ -21,7 +21,7 @@
       "title": "Aurora Galactica",
       "version": "1.3.0",
       "versionLine": "1.3.0",
-      "releaseTrack": "primary-candidate",
+      "releaseTrack": "production-live",
       "runtimeStatus": "playable",
       "platformCompatibility": "platinum-1.3",
       "launchPolicy": "production-capable"
@@ -32,9 +32,9 @@
       "version": "0.1.0-preview",
       "versionLine": "0.1.0 preview",
       "releaseTrack": "playable-preview",
-      "runtimeStatus": "non-production-playable-preview",
+      "runtimeStatus": "production-playable-preview",
       "platformCompatibility": "platinum-1.3",
-      "launchPolicy": "development-and-beta-only"
+      "launchPolicy": "production-preview-playable"
     }
   ]
 }

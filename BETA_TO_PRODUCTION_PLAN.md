@@ -2,80 +2,95 @@
 
 ## Current Release State
 
-As of May 5, 2026:
+As of May 12, 2026:
 
 - hosted `/beta`
-  - approved `1.3.0` beta lane aligned with the production candidate source
+  - refreshed `1.3.0` beta lane sourced from the accepted `1.3.0.1`
+    hosted-dev review bundle
 - hosted `/production`
-  - `1.3.0` public line after this promotion completes
+  - refreshed `1.3.0` public line aligned with the accepted beta candidate
 
-This means the fidelity-and-second-cabinet production promotion should leave the
-shipped beta/production pair on the same committed `1.3.0` source state.
+This means the current public family is no longer the original May 5 `1.3.0`
+ship snapshot. It is the refreshed `1.3.0` line that carries the accepted
+conformance/documentation bundle first assembled on the `1.3.0.1` hosted-dev
+review line.
 
 ## Why This Promotion Mattered
 
-The case for performing this production push is:
+The case for this promotion was:
 
-- hosted `/production` still reflects the older `1.2.3` public line
-- hosted `/beta` now includes the shipped `1.3.0` improvement bundle
-- the supporting analysis is committed and durable
-- the remaining known issues are now mostly follow-up polish items for the next
-  minor cycle, not obvious ship blockers for the `1.3.0` family
+- hosted `/dev` had a coherent post-production bundle with real player-visible
+  and reviewer-visible value
+- the public docs and dashboards had become part of the product contract, not
+  just engineering support material
+- the measured ship-loss audio lift was good enough to move from review into
+  the public line
+- the remaining known issues were next-cycle authenticity/depth work, not
+  blockers to refreshing the current public family
 
-## Production Preconditions
+## Production Preconditions Used
 
-Before production promotion, we should confirm all of the following from the
-same committed source state:
+This refresh depended on all of the following from one coherent committed
+source state:
 
-1. hosted `/beta` is still the expected live label
-2. the local tree is clean
-3. release docs are current
-4. committed analysis artifacts are present
-5. beta approval happens before production promotion
-6. `dist/production` is promoted from the approved beta candidate rather than
-   rebuilt from a drifting source state later
+1. release authority confirmed on `imacm1 / iMacM1`
+2. local tree clean
+3. documentation refreshed before publish
+4. documentation freshness harness green
+5. hosted `/dev` verified as the expected review source
+6. hosted `/beta` republished from the refreshed source docs/artifacts
+7. beta approval repeated against the refreshed candidate
+8. `dist/production` promoted from that approved beta candidate
 
 ## Commands Used
 
 From the authoritative Aurora repo:
 
+- `npm run machine:bootstrap`
+- `npm run machine:status`
+- `npm run machine:doctor`
+- `npm run release:show-authority`
+- `npm run build`
+- `npm run harness:check:documentation-freshness`
+- `npm run publish:check:dev`
+- `npm run publish:verify:dev`
+- `npm run publish:beta`
 - `npm run approve:beta`
-- `npm run promote:production`
-- `npm run publish:check:production`
 - `npm run publish:production`
 
 And then verify:
 
+- hosted `/beta` build label
 - hosted `/production` build label
-- hosted `/production` asset availability
 - public project page sync
+- post-publish machine doctor
 
 ## Required Artifact Preservation
 
-The following artifact families should remain committed as part of the release
-record for this cycle:
+The following artifact families remain part of the durable release record for
+this refreshed public family:
 
-- `reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65`
-- `reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65`
-- `reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65`
-- `reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2`
-- `reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65`
+- `reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd`
+- `documentation-provenance.json`
+- generated public project page, project guide, release dashboard, and
+  conformance dashboard
+- current release notes, release dashboard data, and release manifest
+- current conformance dashboard source and economics source
 
-These are now part of the durable release story, not just development scratch
-material.
+These are release assets, not disposable scratch artifacts.
 
 ## Beta And Production Replication Expectation
 
 For beta and production, the release-host repo should receive the full public
 release package, not just the compiled game files.
 
-That public package includes:
+That package includes:
 
 - shipped runtime and assets
 - hosted guides
 - release dashboard and release notes
 - build metadata
-- release-facing public context
+- public-facing provenance and conformance context
 
 It does not need to duplicate the entire engineering repo.
 
@@ -90,31 +105,28 @@ remains:
 
 - [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
 
-The beta/production replication rule is therefore:
-
-- mirror the full public release surface
-- do not mirror the full internal engineering surface
-
 ## Current Risk View
 
-Main acceptable risks for this production push:
+Main accepted risks for this refreshed public line:
 
-- audio identity is still the weakest bundled quality category
-- some platform-owned compatibility names remain Aurora-shaped internally
-- the preview second-application pack still borrows Aurora data in ways that
-  should be cleaned before it becomes playable
+- audio identity is still the weakest high-value category
+- challenge-stage arrival/novelty and level-arc depth still need the larger
+  `1.4.0` pickup
+- temporal sprite-motion scoring is still incomplete compared with static
+  runtime-crop scoring
+- Galaxy Guardians remains preview-first, not a polished second shipped game
 
-These do not block the `1.3.0` production move, but they
-should stay visible in the next cycle.
+These are visible next-cycle targets, not hidden ship blockers.
 
 ## Next-Cycle Release Direction
 
 ### Immediate After Production
 
-- keep hosted `/dev` aligned with the current production family until the next
-  coherent polish bundle is ready
-- keep hosted `/beta` as the proving lane for the next candidate family
-- continue audio identity refinement if it remains the weakest quality category
+- keep hosted `/production` and hosted `/beta` trustworthy on the refreshed
+  public `1.3.0` family
+- keep hosted `/dev` available for the next coherent forward-review bundle
+- refresh scorecards, dashboards, and source docs whenever the next real review
+  candidate is assembled
 
 ### Next Minor Release
 
@@ -125,37 +137,46 @@ Current likely target:
 Focus:
 
 - stronger audio identity
-- ship-movement refinement that aligns more closely with real Galaga motion
-  instead of the current sometimes-jerky, sometimes-too-fast feel
+- alien entry and challenge-stage novelty
+- level arc and encounter shape
+- boss/formation grammar precision
+- visual reference grounding
 - continued Platinum/Aurora boundary cleanup
-- deeper reference-video ingestion and event-log extraction
-- better persona annotation and future player-versus-persona scaffolding
+- deeper ingestion-backed Galaxy Guardians evidence
 
 ### Next Major Release
 
-A major release should wait until Platinum is clearly hosting more than one real
-game experience cleanly.
+A major release should still wait until Platinum is clearly hosting more than
+one meaningful game experience cleanly.
 
 Current long-term major-release threshold:
 
 - at least two meaningfully playable Platinum applications
 - same-control compliance clearly documented and proven
 - pack schema and boundary naming cleaner than the current transitional state
+- ingestion-driven game-owned conformance packages mature enough to support
+  launch claims
 - persona-vs-player or learn-by-playing tooling materially more mature
 
 ## Current Non-Destructive Readiness Checks
 
-Current directly observed checks for this production plan:
+Current directly observed checks for this production path:
 
 - `npm run build`
-- `npm run harness:check:close-shot-hit`
-- `npm run harness:check:persona-stage2-safety`
-- `npm run harness:check:platinum-pack-boot`
-- hosted `/beta` live verification
+- `npm run harness:check:documentation-freshness`
+- `npm run publish:check:dev`
+- `npm run publish:verify:dev`
+- `npm run publish:check:beta`
+- `npm run publish:verify:beta`
+- `npm run publish:check:production`
+- `npm run publish:verify:production`
+- `npm run verify:public`
 
-Current release-order note:
+## Current Release-Order Note
 
-- the release chain for `1.3.0` runs from approved beta on the authoritative
-  source repo through production publish and public-page verification
-- the release record is not complete unless the public project surfaces also
-  reflect the same shipped family
+The refresh chain for this public line ran from accepted hosted `/dev` review
+work on the authoritative source repo through refreshed hosted `/beta`,
+approved beta promotion, production publish, and public-page verification.
+
+The release record is not complete unless the public project surfaces also
+reflect the same shipped family and evidence story.

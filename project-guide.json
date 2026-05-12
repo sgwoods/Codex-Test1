@@ -1,7 +1,7 @@
 {
   "title": "Aurora Galactica And Platinum Project Guide",
   "strapline": "A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.",
-  "currentGoal": "Advance the post-1.3.0 conformance program: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.",
+  "currentGoal": "Carry the refreshed 1.3.0 public family cleanly while advancing the post-1.3.0 conformance program: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.",
   "sections": [
     {
       "id": "snapshot",
@@ -10,7 +10,7 @@
       "cards": [
         {
           "title": "What Shipped",
-          "body": "`1.3.0` is the current public Aurora / Platinum release family. Hosted `/dev` now carries the `1.3.0.1` review increment, while `/beta` and `/production` preserve the shipped family. The release path keeps the shell, picker, release dashboards, and hosted docs part of the product."
+          "body": "`1.3.0` is the current public Aurora / Platinum release family. The accepted `1.3.0.1` hosted-dev review increment has now refreshed hosted `/beta` and hosted `/production`, while hosted `/dev` remains the visible forward-review line. The release path keeps the shell, picker, release dashboards, and hosted docs part of the product."
         },
         {
           "title": "What The Platform Owns",
@@ -55,7 +55,7 @@
       "summary": "How work is expected to move through the system.",
       "bullets": [
         "local `localhost` is the active engineering lane and the source of the current candidate.",
-        "hosted `/dev` is the shared integration preview and currently carries the `1.3.0.1` conformance/docs review increment.",
+        "hosted `/dev` is the shared integration preview and currently carries the visible `1.3.0.1` forward-review increment.",
         "hosted `/beta` is the reviewed release-candidate lane.",
         "hosted `/production` is the public promise and should move only from an approved hosted `/beta` candidate.",
         "A meaningful `x.y` release should now include a complete documentation pass before hosted `/production` promotion."
@@ -167,9 +167,9 @@
           "detail": "Current release-readiness and documentation-discipline review artifact."
         },
         {
-          "label": "1.3.0.1 Hosted Dev Release Note",
-          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md",
-          "detail": "Detailed beta-request handoff note for the current hosted-dev conformance review increment."
+          "label": "1.3.0 Production Refresh Note",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md",
+          "detail": "Detailed note for the refreshed public 1.3.0 family, including the accepted 1.3.0.1 review bundle, public documentation, conformance story, and measured audio lift."
         }
       ]
     },
@@ -205,10 +205,10 @@
       "file": "STRATEGIC_BETA_REVIEW.md"
     },
     {
-      "id": "release-note-1301-hosted-dev-doc",
-      "title": "1.3.0.1 Hosted Dev Release Note",
-      "summary": "Detailed hosted-dev conformance review and beta-request handoff note covering player-visible changes, metrics, economics, known gaps, and authority-gated release steps.",
-      "file": "RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md"
+      "id": "release-note-130-production-refresh-doc",
+      "title": "1.3.0 Production Conformance Refresh Note",
+      "summary": "Detailed production refresh note covering the accepted 1.3.0.1 review bundle, public-facing documentation/provenance improvements, measured conformance lifts, known gaps, and the next 1.4.0 direction.",
+      "file": "RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md"
     },
     {
       "id": "release-conformance-dashboard-doc",

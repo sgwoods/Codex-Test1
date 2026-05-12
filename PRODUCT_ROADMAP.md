@@ -2,14 +2,15 @@
 
 ## Current Shipped State
 
-Verified May 11, 2026:
+Verified May 12, 2026:
 
 - hosted `/dev`
-  - active `1.3.0.1` hosted-dev review line
+  - active `1.3.0.1` forward-review line
 - hosted `/beta`
-  - approved `1.3.0` beta lane
+  - refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
+    bundle
 - hosted `/production`
-  - shipped `1.3.0` public line
+  - refreshed `1.3.0` public line
 
 Aurora is in a post-`1.3.0` ship posture:
 
@@ -24,7 +25,7 @@ The roadmap is no longer centered on whether Platinum can host Aurora at all.
 
 It is centered on:
 
-- keeping the shipped line trustworthy
+- keeping the refreshed public line trustworthy
 - improving fidelity where the game still feels less authentic than the arcade
   reference
 - treating conformance as a standing project layer with its own ingestion,
@@ -49,26 +50,24 @@ Goals:
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### Review `1.3.0.1` Hosted Dev
+### `1.3.0.1` Review Bundle Is Now Publicly Carried
 
 The current practical artifact is a fourth-segment hosted-dev increment:
 
 - `1.3.0.1`
 
-It collects the current documentation/dashboard/conformance process work,
-application artifact conformance scoring, resource economics, and a measured
-audio/event-feedback lift. It is a review increment, not a beta approval by
-itself.
+That bundle collected the documentation/dashboard/conformance process work,
+application artifact conformance scoring, resource economics, and the measured
+audio/event-feedback lift that have now been refreshed into the public `1.3.0`
+family through hosted `/beta` and hosted `/production`.
 
 Recommended gate:
 
-- keep source and hosted `/dev` aligned for review
-- show the conformance dashboard and public project page with current short,
-  medium, and long-term plans
+- keep source and hosted `/dev` aligned for the next coherent review bundle
 - require at least one measurable user-facing improvement or a clearly
   documented negative result that changes the next investment decision
-- keep hosted `/beta` unchanged until the improvement is accepted and the
-  release-authority machine performs the beta publish
+- keep hosted `/beta` and hosted `/production` stable until a real `1.4.0`
+  candidate exists
 
 ### Pick Up `1.4.0`
 
@@ -127,8 +126,8 @@ Current decision:
 
 Once `1.3.0` is out, the roadmap pickup should be:
 
-- Short term: `1.3.0.1` hosted-dev review, source/docs readiness, and
-  authority-gated beta request if accepted.
+- Short term: keep the refreshed `1.3.0` public family stable while using
+  hosted `/dev` for the next real review bundle.
 - Medium term: `1.4.0` for level-by-level arcade depth plus
   platform-contract cleanup.
 - Longer term: `1.5.0` for shared-video evidence and flight-recorder

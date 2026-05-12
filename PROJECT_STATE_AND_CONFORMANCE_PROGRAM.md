@@ -1,6 +1,6 @@
 # Project State And Conformance Program
 
-Updated: May 11, 2026
+Updated: May 12, 2026
 
 This is the maintained top-level explanation of the broader Aurora / Platinum
 effort. It is meant to answer four questions at once:
@@ -49,9 +49,10 @@ game truth stays with the game and reference truth stays in ingestion artifacts.
 
 Aurora / Platinum is in a post-`1.3.0` shipped posture.
 
-- hosted `/production` carries the public `1.3.0` family
-- hosted `/beta` is the reviewed candidate lane
-- hosted `/dev` carries the active `1.3.0.1` integrated hosted review lane
+- hosted `/production` carries the refreshed public `1.3.0` family
+- hosted `/beta` is the reviewed lane aligned with that refreshed public family
+- hosted `/dev` carries the active `1.3.0.1` integrated hosted forward-review
+  line
 - local `localhost` is the active engineering lane
 - `main` is the authoritative integration line for the deliberate `1.4.0`
   pickup
@@ -230,23 +231,22 @@ but by whether the improved categories are the ones players actually feel.
 
 Current recommendation:
 
-- treat hosted `/dev` as the current `1.3.0.1` review increment
-- complete the documentation/release-note/readiness review before any beta
-  request
-- if the review accepts the bundle as a real player-visible improvement, ask
-  the release-authority machine to publish hosted `/beta`
+- treat the refreshed public `1.3.0` family as the stable current line
+- treat hosted `/dev` as the current forward-review increment rather than as an
+  automatic release candidate
+- use the next coherent hosted `/dev` bundle to justify the next beta request
 - keep the larger `1.4.0` family focused on arcade depth: alien entry,
   challenge-stage novelty, stage progression, boss/formation grammar, visual
   reference grounding, and measured audio feedback
 
 Short term:
 
-- finish the `1.3.0.1` release-readiness documentation pass and preserve the
-  detailed release note as the handoff artifact for beta authority
+- keep the refreshed `1.3.0` release note and readiness docs aligned with the
+  live public line
 - keep all candidate work wrapped in `harness:measure`
 - keep dashboard, scorecard, public project page, project guide, release notes,
-  and strategic review aligned with the same current score read before beta
-  publish
+  and strategic review aligned with the same current score read before the next
+  beta candidate is cut
 
 Latest local playtest response:
 

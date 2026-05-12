@@ -1,7 +1,7 @@
 {
   "targetVersion": "1.4.0",
-  "currentFocus": "Review the 1.3.0.1 hosted-dev conformance/docs/dashboard bundle; if accepted, request beta publication from the release-authority machine, then shape 1.4.0 around arcade depth, audio/event feedback, and cleaner Platinum/application seams.",
-  "strapline": "Aurora 1.3.0 is the live Platinum production family, and hosted /dev now carries the 1.3.0.1 review increment. The next beta action is authority-gated; the next larger release family remains 1.4.0 arcade depth.",
+  "currentFocus": "The accepted 1.3.0.1 hosted-dev conformance/docs/dashboard bundle has now refreshed the live 1.3.0 public family on hosted `/beta` and hosted `/production`; keep the line trustworthy, keep hosted `/dev` ready for the next coherent review bundle, and shape 1.4.0 around arcade depth, audio/event feedback, and cleaner Platinum/application seams.",
+  "strapline": "Aurora 1.3.0 remains the live Platinum production family, now refreshed from the accepted 1.3.0.1 hosted-dev increment. The next larger release family remains 1.4.0 arcade depth.",
   "timeline": [
     {
       "id": "foundation",
@@ -72,14 +72,20 @@
     {
       "id": "hosted-dev-1301-review",
       "title": "1.3.0.1 Hosted Dev Review",
-      "status": "in_progress",
-      "summary": "Hosted /dev now carries the post-production conformance review bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite capture scoring, and a measured calibrated ship-loss audio cue lift. The next action is review and, if accepted, beta publication from the release-authority machine."
+      "status": "done",
+      "summary": "Hosted /dev carried the post-production conformance review bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite capture scoring, and a measured calibrated ship-loss audio cue lift. That bundle was reviewed, accepted, and used as the authority-gated public refresh source."
+    },
+    {
+      "id": "production-conformance-refresh",
+      "title": "1.3.0 Production Conformance Refresh",
+      "status": "done",
+      "summary": "The accepted 1.3.0.1 hosted-dev review bundle was promoted through hosted `/beta` into hosted `/production`, refreshing the public 1.3.0 family with current conformance docs, provenance, economics, application artifact scoring, runtime sprite scoring, and the measured ship-loss audio lift."
     },
     {
       "id": "platform-contract",
       "title": "1.4.0 Platform Contract And Arcade Depth Pickup",
       "status": "in_progress",
-      "summary": "Shape 1.4.0 around arcade depth, audio/event feedback, visual reference grounding, challenge-stage novelty, level arc, and cleaner platform/application seams after the 1.3.0.1 beta-readiness review is resolved."
+      "summary": "Shape 1.4.0 around arcade depth, audio/event feedback, visual reference grounding, challenge-stage novelty, level arc, and cleaner platform/application seams now that the 1.3.0 production conformance refresh is live."
     },
     {
       "id": "second-application",

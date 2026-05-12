@@ -10,18 +10,18 @@ Purpose:
 - show where the biggest quality gaps are right now
 - make the quality score part of release discussion, not a side note
 
-As of May 11, 2026:
+As of May 12, 2026:
 
 - current shipped family:
   - `1.3.0`
-  - bundled quality score `8.8/10`
+  - refreshed bundled quality score `9.2/10`
 - hosted `/dev`:
-  - `1.3.0.1` hosted-dev review increment
+  - `1.3.0.1` hosted-dev forward-review increment
   - current development quality score `9.2/10`
 - hosted `/beta`:
-  - `1.3.0 beta`
+  - refreshed `1.3.0 beta`
 - hosted `/production`:
-  - `1.3.0`
+  - refreshed `1.3.0`
 
 Branch-local refresh on May 11, 2026:
 
@@ -34,15 +34,15 @@ Branch-local refresh on May 11, 2026:
 - weakest category:
   - audio identity and cue alignment, `7.3/10`
 - notes:
-  - the hosted-dev review line now includes conformance dashboard, public docs,
+  - the accepted review line now includes conformance dashboard, public docs,
     economics reporting, application artifact conformance, runtime static sprite
     scoring, and a calibrated layered ship-loss audio cue
   - audio cue alignment remains green at `9/9`
   - semantic audio score remains high at `9.78/10`; acoustic event score is
     `6.31/10`
-  - this branch-local refresh can support a beta request, but does not approve
-    beta or production from this MacBook while release authority remains on
-    `imacm1`
+  - this branch-local refresh is now the live public baseline on hosted `/beta`
+    and hosted `/production`, while hosted `/dev` remains the forward-review
+    lane for the next coherent bundle
 
 Readable project-level overview:
 
@@ -82,20 +82,20 @@ It is the best table to use when discussing what to improve next.
 This table describes the current hosted shipped family, not the branch-local
 Guardians/conformance work.
 
-| Category | Shipped `1.3.0` family | Hosted `/dev` `1.3.0.1` review | Hosted `/beta` | Hosted `/production` | Reference gameplay |
+| Category | Refreshed `1.3.0` public family | Hosted `/dev` `1.3.0.1` review | Hosted `/beta` | Hosted `/production` | Reference gameplay |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Overall quality score | `8.8` | `9.2` | `8.8` | `8.8` | `10` |
-| Player movement conformance | `8.4` | `10.0` | `8.4` | `8.4` | `10` |
+| Overall quality score | `9.2` | `9.2` | `9.2` | `9.2` | `10` |
+| Player movement conformance | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
 | Shot and hit responsiveness | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
 | Stage-1 opening timing fidelity | `8.5` | `8.5` | `8.5` | `8.5` | `10` |
 | Stage-1 opening geometry fidelity | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
 | Dive fairness and safety | `9.1` | `9.1` | `9.1` | `9.1` | `10` |
 | Capture and rescue rule fidelity | `10.0` | `10.0` | `10.0` | `10.0` | `10` |
-| Challenge-stage timing fidelity | `8.4` | `9.2` | `8.4` | `8.4` | `10` |
-| Level arc and encounter shape | not split | `8.8` | not split | not split | `10` |
-| Alien entry and challenge novelty | not split | `7.8` | not split | not split | `10` |
-| Boss entry and formation grammar | not split | `9.2` | not split | not split | `10` |
-| Audio identity and cue alignment | `6.1` | `7.3` | `6.1` | `6.1` | `10` |
+| Challenge-stage timing fidelity | `9.2` | `9.2` | `9.2` | `9.2` | `10` |
+| Level arc and encounter shape | `8.8` | `8.8` | `8.8` | `8.8` | `10` |
+| Alien entry and challenge novelty | `7.8` | `7.8` | `7.8` | `7.8` | `10` |
+| Boss entry and formation grammar | `9.2` | `9.2` | `9.2` | `9.2` | `10` |
+| Audio identity and cue alignment | `7.3` | `7.3` | `7.3` | `7.3` | `10` |
 | UI, shell, and graphics integrity | `9.2` | `9.2` | `9.2` | `9.2` | `10` |
 
 ## Read
@@ -109,7 +109,7 @@ Current shipped-family strengths:
 - early dive safety
 - stage and challenge timing compared with the older public line
 
-Current biggest hosted-dev review gaps:
+Current biggest public-family gaps:
 
 - audio identity remains the weakest high-value category, now at `7.3/10`
 - alien entry, challenge-stage arrival/novelty, and level arc are the strongest
@@ -141,10 +141,10 @@ Current conclusion:
 
 - the shipped `1.3.0` family reads like a meaningful quality-and-platform
   release, not a patch-sized follow-up
-- hosted `/dev` is now intentionally ahead as the `1.3.0.1` review increment,
-  while hosted `/beta` and `/production` remain on the shipped public family
-- the next immediate release action is a review and possible beta request from
-  the release-authority machine, not a production move from this MacBook
+- the refreshed public `1.3.0` family now carries the accepted `1.3.0.1`
+  conformance/docs bundle
+- hosted `/dev` remains intentionally ahead only as the visible forward-review
+  line for the next cycle
 - the next cycle should focus on audio identity, alien/challenge-stage novelty,
   level arc, visual artifact motion scoring, second-game/platform maturity, and
   stronger analysis/harness depth rather than broad emergency repair
