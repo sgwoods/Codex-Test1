@@ -51,6 +51,92 @@ function syncAudioUi(){
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
 }
+function sanitizeArcadeMusicPlaylistId(value=''){
+ const raw=String(value||'').trim();
+ return /^[A-Za-z0-9_-]{8,160}$/.test(raw)?raw:'';
+}
+function arcadeMusicQueryPlaylistId(){
+ try{
+  const params=new URLSearchParams(location.search||'');
+  return sanitizeArcadeMusicPlaylistId(params.get('arcadeMusicPlaylist')||params.get('musicPlaylist')||'');
+ }catch{
+  return '';
+ }
+}
+function arcadeMusicPlaylistId(){
+ return sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC.playlistOverride)||arcadeMusicQueryPlaylistId()||sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC_PLAYLIST_ID);
+}
+function arcadeMusicState(){
+ return {
+  state:ARCADE_MUSIC.state,
+  requested:!!ARCADE_MUSIC.requested,
+  configured:!!arcadeMusicPlaylistId(),
+  hasFrame:!!(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe')),
+  playlistId:arcadeMusicPlaylistId()
+ };
+}
+function syncArcadeMusicUi(){
+ if(!arcadeMusicToggleBtn)return;
+ const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const unavailable=ARCADE_MUSIC.state==='unavailable'||!arcadeMusicPlaylistId();
+ arcadeMusicToggleBtn.dataset.musicState=active?ARCADE_MUSIC.state:(unavailable?'unavailable':'off');
+ arcadeMusicToggleBtn.dataset.configured=arcadeMusicPlaylistId()?'true':'false';
+ arcadeMusicToggleBtn.setAttribute('aria-pressed',active?'true':'false');
+ arcadeMusicToggleBtn.setAttribute('aria-label',active?'Turn off Arcade Music':'Arcade Music');
+ arcadeMusicToggleBtn.title='Arcade Music';
+ arcadeMusicToggleBtn.dataset.actionTip='Arcade Music';
+ arcadeMusicToggleBtn.classList.toggle('active',active);
+ const icon=arcadeMusicToggleBtn.querySelector('.dockIcon');
+ if(icon)icon.textContent=active?'♫':'♪';
+}
+function arcadeMusicEmbedUrl(playlistId){
+ const origin=(location&&location.origin&&location.origin!=='null')?`&origin=${encodeURIComponent(location.origin)}`:'';
+ return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(playlistId)}&listType=playlist&autoplay=1&playsinline=1&enablejsapi=1&rel=0${origin}`;
+}
+function startArcadeMusic(){
+ const playlistId=arcadeMusicPlaylistId();
+ if(!playlistId){
+  ARCADE_MUSIC.state='unavailable';
+  ARCADE_MUSIC.requested=false;
+  writePref(ARCADE_MUSIC_PREF_KEY,'0');
+  syncArcadeMusicUi();
+  showToast('Arcade Music playlist not configured');
+  if(typeof logEvent==='function')logEvent('arcade_music_unavailable');
+  return false;
+ }
+ if(!arcadeMusicFrameHost)return false;
+ arcadeMusicFrameHost.innerHTML='';
+ const frame=document.createElement('iframe');
+ frame.id='arcadeMusicFrame';
+ frame.title='Arcade Music playlist';
+ frame.tabIndex=-1;
+ frame.allow='autoplay; encrypted-media; picture-in-picture';
+ frame.referrerPolicy='strict-origin-when-cross-origin';
+ frame.src=arcadeMusicEmbedUrl(playlistId);
+ arcadeMusicFrameHost.appendChild(frame);
+ ARCADE_MUSIC.iframe=frame;
+ ARCADE_MUSIC.state='playing';
+ ARCADE_MUSIC.requested=true;
+ writePref(ARCADE_MUSIC_PREF_KEY,'1');
+ syncArcadeMusicUi();
+ showToast('Arcade Music on');
+ if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true});
+ return true;
+}
+function stopArcadeMusic(opts={}){
+ if(arcadeMusicFrameHost)arcadeMusicFrameHost.innerHTML='';
+ ARCADE_MUSIC.iframe=null;
+ ARCADE_MUSIC.state='off';
+ ARCADE_MUSIC.requested=false;
+ writePref(ARCADE_MUSIC_PREF_KEY,'0');
+ syncArcadeMusicUi();
+ if(!opts.silent)showToast('Arcade Music off');
+ if(typeof logEvent==='function')logEvent('arcade_music_off',{silent:!!opts.silent});
+}
+function toggleArcadeMusic(){
+ if(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading')stopArcadeMusic();
+ else startArcadeMusic();
+}
 function syncPauseUi(){
  if(!pauseToggleBtn)return;
  const canPause=!!started;

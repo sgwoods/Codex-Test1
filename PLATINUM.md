@@ -29,6 +29,7 @@ multiple games:
 - pack selection and boot path
 - common runtime, input, and session surfaces
 - shared services such as auth, leaderboard transport, and feedback transport
+- optional shell-owned media ambience such as Arcade Music
 - shared documentation and release discipline
 - platform-only harnesses and publish checks
 - a stable control contract that lets players move between hosted games with
@@ -140,6 +141,7 @@ pack:
 - leaderboard fetch and submit policy
 - feedback transport policy
 - replay/session plumbing
+- opt-in Arcade Music playback policy
 
 This is implemented primarily through:
 

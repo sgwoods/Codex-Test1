@@ -30,6 +30,21 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 - Main runtime code:
   - `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
 
+### YouTube Playlist Embed
+
+- Status:
+  - optional, enabled only when `ARCADE_MUSIC_PLAYLIST_ID` or `NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID` is configured at build time
+- Used for:
+  - opt-in Arcade Music playback from the right rail
+- Boundary:
+  - the playlist embed is shell ambience, not Aurora reference audio
+  - the game mute control remains scoped to game audio
+  - high-score video upload credentials are not part of this client-side feature
+- Main runtime code:
+  - `/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js`
+- Build token source:
+  - `/Users/steven/Documents/Codex-Test1/tools/build/build-index.js`
+
 ## Hosting And Delivery
 
 ### GitHub Pages
@@ -111,6 +126,7 @@ These are not external services.
 
 - Supabase
 - Web3Forms
+- YouTube playlist embed, only when Arcade Music is configured
 
 ### Hosting Dependencies
 

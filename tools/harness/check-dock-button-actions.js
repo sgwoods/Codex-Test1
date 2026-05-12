@@ -103,6 +103,35 @@ async function main(){
       '#helpClose'
     );
 
+    await page.evaluate(() => window.__platinumArcadeMusic?.setPlaylistForHarness?.('PLarcadeMusicHarness01'));
+    const musicBefore = await page.locator('#arcadeMusicToggleBtn').getAttribute('aria-pressed');
+    await page.locator('#arcadeMusicToggleBtn').click();
+    const musicActive = await waitForHarness(page, () => {
+      const btn = document.querySelector('#arcadeMusicToggleBtn');
+      const state = window.__platinumArcadeMusic?.state?.();
+      const frame = document.querySelector('#arcadeMusicFrame');
+      return btn?.getAttribute('aria-pressed') === 'true' && state?.state === 'playing' && frame
+        ? {
+            aria: btn.getAttribute('aria-pressed'),
+            title: btn.getAttribute('title') || '',
+            actionTip: btn.dataset.actionTip || '',
+            src: frame.getAttribute('src') || '',
+            state
+          }
+        : null;
+    }, 1200, 50);
+    await page.locator('#arcadeMusicToggleBtn').click();
+    const musicRestored = await waitForHarness(page, () => {
+      const btn = document.querySelector('#arcadeMusicToggleBtn');
+      const state = window.__platinumArcadeMusic?.state?.();
+      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'off' && !document.querySelector('#arcadeMusicFrame')
+        ? {
+            aria: btn.getAttribute('aria-pressed'),
+            state
+          }
+        : null;
+    }, 1200, 50);
+
     const muteBefore = await page.locator('#muteToggleBtn').getAttribute('aria-pressed');
     await page.locator('#muteToggleBtn').click();
     const muteAfter = await page.locator('#muteToggleBtn').getAttribute('aria-pressed');
@@ -194,6 +223,7 @@ async function main(){
       scores,
       feedback,
       settings,
+      music: { before: musicBefore, active: musicActive, restored: musicRestored },
       mute: { before: muteBefore, after: muteAfter, restored: muteRestored },
       pause: { before: pauseBefore, active: pauseActive, restored: pauseRestored }
     };
@@ -219,6 +249,12 @@ async function main(){
   }
   if(result.controls.expanded !== 'true' || result.controls.activeTab !== 'controls' || result.controls.actionVisible){
     fail('controls dock button did not open the controls tab correctly', result);
+  }
+  if(result.music.before !== 'false' || result.music.active.aria !== 'true' || result.music.active.title !== 'Arcade Music' || result.music.active.actionTip !== 'Arcade Music' || !/youtube-nocookie\.com\/embed\/videoseries/.test(result.music.active.src)){
+    fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
+  }
+  if(result.music.restored.aria !== 'false' || result.music.restored.state.hasFrame){
+    fail('Arcade Music dock button did not stop and remove the playlist embed', result);
   }
   if(result.movie.expanded !== 'true') fail('movie dock button did not open via a real click', result);
   if(result.scores.expanded !== 'true') fail('scores dock button did not open via a real click', result);

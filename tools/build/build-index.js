@@ -3510,6 +3510,7 @@ function build(options = {}){
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://iddyodcknmxupavnuuwg.supabase.co';
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || 'sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
   const web3FormsAccessKey = process.env.WEB3FORMS_ACCESS_KEY || '';
+  const arcadeMusicPlaylistId = process.env.ARCADE_MUSIC_PLAYLIST_ID || process.env.NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID || '';
   const parseListEnv = (value) => String(value || '')
     .split(',')
     .map((item) => item.trim())
@@ -3541,6 +3542,7 @@ function build(options = {}){
     SUPABASE_URL: supabaseUrl,
     SUPABASE_ANON_KEY: supabaseAnonKey,
     WEB3FORMS_ACCESS_KEY: web3FormsAccessKey,
+    ARCADE_MUSIC_PLAYLIST_ID_JSON: JSON.stringify(arcadeMusicPlaylistId),
     TEST_ACCOUNT_EMAIL: testAccountEmail,
     TEST_ACCOUNT_USER_ID: testAccountUserId,
     TEST_ACCOUNT_EMAILS_JSON: JSON.stringify(testAccountEmails),

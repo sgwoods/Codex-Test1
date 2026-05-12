@@ -42,6 +42,8 @@ const fbType=document.getElementById('fbType'),fbSummary=document.getElementById
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
+const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -267,6 +269,7 @@ const SCORE_HISTORY_KEY=`${STORAGE_PREFIX}ScoreHistory`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
+const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
@@ -277,6 +280,7 @@ const LEGACY_STORAGE_KEYS={
  [SCORE_HISTORY_KEY]:`${LEGACY_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
+ [ARCADE_MUSIC_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusic`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
@@ -289,11 +293,14 @@ const PLATFORM_STORAGE_KEYS={
  [SCORE_HISTORY_KEY]:`${PLATFORM_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
+ [ARCADE_MUSIC_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusic`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+const ARCADE_MUSIC_PLAYLIST_ID={{ARCADE_MUSIC_PLAYLIST_ID_JSON}};
+const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1851,6 +1858,7 @@ function syncTestUi(){
  const cfg=loadTestCfg();
  applyTestCfgToControls(cfg);
  syncAudioUi();
+ syncArcadeMusicUi();
  syncPauseUi();
  syncSettingsUi();
  syncHelpUi();
@@ -2182,6 +2190,7 @@ if(rootMode)rootMode.addEventListener('input',()=>{
  syncDeveloperToolsUi();
 });
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
+if(arcadeMusicToggleBtn)arcadeMusicToggleBtn.addEventListener('click',toggleArcadeMusic);
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
 if(feedbackClose)feedbackClose.addEventListener('click',()=>closeFeedback());
@@ -2352,3 +2361,12 @@ window.openGamePreview=openGamePreview;
 window.closeGamePreview=closeGamePreview;
 window.openPlatformMessagePanel=openPlatformMessagePanel;
 window.closePlatformMessagePanel=closePlatformMessagePanel;
+window.__platinumArcadeMusic={
+ state:arcadeMusicState,
+ setPlaylistForHarness(id=''){
+  ARCADE_MUSIC.playlistOverride=sanitizeArcadeMusicPlaylistId(id);
+  syncArcadeMusicUi();
+  return arcadeMusicState();
+ },
+ stop:()=>stopArcadeMusic({silent:true})
+};

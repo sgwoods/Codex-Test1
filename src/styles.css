@@ -314,6 +314,10 @@ mask:
 #dockQuickTools .dockToolGroupUtility button:hover::after,
 #dockQuickTools .dockToolGroupUtility button:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(-2px)}
 #dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transform:none;filter:drop-shadow(0 0 10px rgba(126,242,255,.18))}
+#arcadeMusicToggleBtn[data-music-state="playing"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
+#arcadeMusicFrameHost{position:fixed;right:8px;bottom:8px;width:200px;height:200px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
+#arcadeMusicFrameHost iframe{display:block;width:200px;height:200px;border:0}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
