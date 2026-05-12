@@ -48,6 +48,17 @@ if(!Array.isArray(artifact.runs) || artifact.runs.length < 120){
     runCount: Array.isArray(artifact.runs) ? artifact.runs.length : 0
   });
 }
+if(!artifact.recordingEvidence || !Number.isFinite(+artifact.recordingEvidence.totalRuns)){
+  fail('Persona performance distribution is missing recorder/video accounting evidence.', {
+    recordingEvidence: artifact.recordingEvidence || null
+  });
+}
+if(+artifact.recordingEvidence.totalRuns !== artifact.runs.length){
+  fail('Persona recorder/video accounting does not match run count.', {
+    recordingEvidence: artifact.recordingEvidence,
+    runCount: artifact.runs.length
+  });
+}
 const svg = fs.readFileSync(CHART, 'utf8');
 for(const label of ['Beginner', 'Intermediate', 'Expert', 'Professional']){
   if(!svg.includes(label)){

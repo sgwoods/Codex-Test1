@@ -379,6 +379,12 @@ async function main(){
       seed: spec.seed,
       state,
       files: saved,
+      recording: {
+        mode: autoVideo ? 'video-and-session' : 'session-only',
+        requested: !!autoVideo,
+        expectedVideo: !!autoVideo,
+        primaryVideoFile: rawVideoFile || null
+      },
       artifactQuality
     };
     writePortableSummary(path.join(outDir, 'summary.json'), summary);

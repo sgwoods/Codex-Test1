@@ -120,11 +120,50 @@ function challengeHitRate(summary){
   return totals.total ? totals.hits / totals.total : 0;
 }
 
-function runRow(summaryFile){
+function recordingStatus(summary, metadata = {}){
+  const video = summary.analysis?.video || {};
+  if(video.status === 'not_requested' || video.expected === false || summary.recording?.requested === false){
+    return {
+      status: 'not_requested',
+      audio: null,
+      file: null,
+      expected: false,
+      reason: 'video recording disabled for this run'
+    };
+  }
+  if(video.file || video.status === 'recorded'){
+    return {
+      status: 'recorded',
+      audio: video.audio === true ? true : video.audio === false ? false : null,
+      file: video.file || null,
+      expected: true,
+      reason: video.audio === false ? 'recorded video has no audio stream' : 'recorded video artifact'
+    };
+  }
+  if(video.error === 'no video file found' && metadata.batchProfile === 'distribution'){
+    return {
+      status: 'not_requested',
+      audio: null,
+      file: null,
+      expected: false,
+      reason: 'distribution batches run session-only by default for throughput'
+    };
+  }
+  return {
+    status: video.status || 'missing',
+    audio: video.audio === true ? true : video.audio === false ? false : null,
+    file: video.file || null,
+    expected: true,
+    reason: video.error || 'video status unavailable'
+  };
+}
+
+function runRow(summaryFile, metadata = {}){
   const summary = readJson(summaryFile);
   const losses = summary.analysis?.shipLost || [];
   const duration = +(summary.analysis?.duration || summary.state?.simT || 0);
   const score = +(summary.state?.score || 0);
+  const recording = recordingStatus(summary, metadata);
   return {
     persona: summary.persona || 'default',
     label: PERSONA_LABELS[summary.persona] || summary.persona || 'Default',
@@ -140,6 +179,10 @@ function runRow(summaryFile){
     challengeClears: (summary.analysis?.challengeClears || []).length,
     challengeHitRate: fixed(challengeHitRate(summary), 4),
     gameOver: !summary.state?.started && +(summary.state?.lives || 0) === 0,
+    recordingStatus: recording.status,
+    recordingAudio: recording.audio,
+    recordingExpected: recording.expected,
+    recordingReason: recording.reason,
     sourceSummary: rel(summaryFile)
   };
 }
@@ -194,6 +237,26 @@ function buildFindings(summaryRows){
     }
   }
   return findings;
+}
+
+function buildRecordingEvidence(rows){
+  const evidence = {
+    totalRuns: rows.length,
+    recordedVideos: rows.filter(row => row.recordingStatus === 'recorded').length,
+    audioCheckedVideos: rows.filter(row => row.recordingStatus === 'recorded' && row.recordingAudio !== null).length,
+    audioFailures: rows.filter(row => row.recordingStatus === 'recorded' && row.recordingAudio === false).length,
+    videoNotRequested: rows.filter(row => row.recordingStatus === 'not_requested').length,
+    missingExpectedVideos: rows.filter(row => row.recordingExpected !== false && row.recordingStatus !== 'recorded').length
+  };
+  evidence.mode = evidence.videoNotRequested === evidence.totalRuns
+    ? 'session-only distribution batch'
+    : evidence.recordedVideos
+      ? 'mixed video/session evidence'
+      : 'video evidence unavailable';
+  evidence.read = evidence.videoNotRequested === evidence.totalRuns
+    ? 'This persona distribution prioritized local CPU throughput and deterministic JSON/session logs; it should not be read as recorder audio proof.'
+    : 'Recorded video rows can be used for recorder audio confidence; missing expected videos should be investigated before using clips as release evidence.';
+  return evidence;
 }
 
 function xScale(index, count, left, width){
@@ -323,6 +386,7 @@ function buildReadme(artifact){
     '- Use this as distributional evidence, not as a single perfect-play claim.',
     '- The strongest persona should generally reach later stages and score more over the same seed count.',
     '- If the ladder is out of order, recalibrate the persona policy or widen the seed distribution before tuning core gameplay.',
+    `- Recording evidence: ${artifact.recordingEvidence.mode}; ${artifact.recordingEvidence.read}`,
     '',
     '## Chart',
     '',
@@ -349,11 +413,12 @@ function main(){
   if(!summaryFiles.length){
     throw new Error(`No summary.json files found under ${batchDir}.`);
   }
-  const rows = summaryFiles.map(runRow).filter(row => PERSONA_ORDER.includes(row.persona));
+  const metadata = readBatchMetadata(batchDir);
+  const rows = summaryFiles.map(file => runRow(file, metadata)).filter(row => PERSONA_ORDER.includes(row.persona));
   const summaryRows = PERSONA_ORDER.map(persona => summarizePersona(rows, persona)).filter(row => row.runCount);
   const generatedAt = new Date().toISOString();
   const commit = gitShortCommit();
-  const metadata = readBatchMetadata(batchDir);
+  const recordingEvidence = buildRecordingEvidence(rows);
   const artifact = {
     schemaVersion: 1,
     artifactType: 'persona-performance-distribution',
@@ -380,6 +445,7 @@ function main(){
       gameResponsibility: 'Each game maps the generic persona to scenarios, expected outcomes, release blockers, and any game-specific behavior allowances.'
     },
     summaryRows,
+    recordingEvidence,
     runs: rows.sort((a, b) => PERSONA_ORDER.indexOf(a.persona) - PERSONA_ORDER.indexOf(b.persona) || a.seed - b.seed),
     findings: buildFindings(summaryRows),
     chart: 'performance-lines.svg',

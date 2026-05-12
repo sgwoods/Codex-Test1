@@ -462,6 +462,33 @@ function hasAudio(video){
   return { ok: true, streams, audio: streams.includes('audio') };
 }
 
+function videoAnalysis(run, summary){
+  if(run.videoFile){
+    return Object.assign({
+      status: 'recorded',
+      expected: true
+    }, hasAudio(run.videoFile));
+  }
+  if(summary?.recording?.requested === false || summary?.recording?.expectedVideo === false){
+    return {
+      ok: true,
+      status: 'not_requested',
+      expected: false,
+      audio: null,
+      streams: [],
+      error: null
+    };
+  }
+  return {
+    ok: false,
+    status: 'missing',
+    expected: true,
+    audio: false,
+    streams: [],
+    error: 'no video file found'
+  };
+}
+
 function findRunFiles(target){
   const stat = fs.statSync(target);
   if(stat.isFile() && target.endsWith('.json')){
@@ -488,6 +515,7 @@ function analyze(target){
     const found = fs.readdirSync(run.dir).find(f => /^neo-galaga-video-.*\.webm$/.test(f));
     if(found) run.videoFile = path.join(run.dir, found);
   }
+  const runSummary = run.summaryFile ? JSON.parse(fs.readFileSync(run.summaryFile, 'utf8')) : null;
   const session = run.session;
   const eventCounts = counts(session.events || []);
   const stageClears = (session.events || []).filter(e => e.type === 'stage_clear').map(e => ({ t: e.t, stage: e.stage, score: e.score }));
@@ -530,7 +558,7 @@ function analyze(target){
   const descent = descentMetrics(events);
   const bulletPressure = bulletPressureMetrics(session, shipLost);
   const profiles = stageProfiles(events);
-  const audio = run.videoFile ? hasAudio(run.videoFile) : { ok: false, audio: false, error: 'no video file found' };
+  const audio = videoAnalysis(run, runSummary);
   const analysis = {
     id: session.id,
     seed: session.seed || 0,
@@ -572,7 +600,7 @@ function analyze(target){
     video: Object.assign({ file: run.videoFile || null }, audio)
   };
   if(run.summaryFile){
-    const summary = JSON.parse(fs.readFileSync(run.summaryFile, 'utf8'));
+    const summary = runSummary || JSON.parse(fs.readFileSync(run.summaryFile, 'utf8'));
     summary.analysis = analysis;
     writePortableSummary(run.summaryFile, summary);
   }

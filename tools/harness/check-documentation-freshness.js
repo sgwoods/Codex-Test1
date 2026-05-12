@@ -244,6 +244,7 @@ if(fs.existsSync(APPLICATION_GUIDE_DIST)){
     'Persona Performance Distribution',
     'persona-performance-distribution/latest.json',
     'Seeded full-run games',
+    'Recording evidence',
     'Challenge Hit Rate'
   ];
   const missingApplicationText = requiredApplicationText.filter(text => !appHtml.includes(text));

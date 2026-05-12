@@ -167,6 +167,13 @@ function summarize(batch){
       totalRuns: batch.runs.length,
       totalDuration: 0,
       audioFailures: 0,
+      videoArtifacts: {
+        recorded: 0,
+        audioChecked: 0,
+        audioFailures: 0,
+        notRequested: 0,
+        missing: 0
+      },
       challengeHits: [],
       shipLost: 0,
       byPersona: {}
@@ -174,7 +181,16 @@ function summarize(batch){
   };
   for(const run of batch.results){
     report.aggregate.totalDuration += run.analysis?.duration || 0;
-    if(run.analysis?.video?.audio === false) report.aggregate.audioFailures++;
+    const video = run.analysis?.video || {};
+    if(video.status === 'not_requested' || video.expected === false){
+      report.aggregate.videoArtifacts.notRequested++;
+    }else if(video.file || video.status === 'recorded'){
+      report.aggregate.videoArtifacts.recorded++;
+      if(video.audio === true || video.audio === false) report.aggregate.videoArtifacts.audioChecked++;
+      if(video.audio === false) report.aggregate.videoArtifacts.audioFailures++;
+    }else if(video.status === 'missing' || video.audio === false){
+      report.aggregate.videoArtifacts.missing++;
+    }
     for(const c of run.analysis?.challengeClears || []) report.aggregate.challengeHits.push({ scenario: run.name, hits: c.hits, total: c.total, stage: c.stage });
     report.aggregate.shipLost += (run.analysis?.shipLost || []).length;
     const persona = run.persona || 'default';
@@ -255,6 +271,7 @@ function summarize(batch){
       addPressure(stageBucket, metrics);
     }
   }
+  report.aggregate.audioFailures = report.aggregate.videoArtifacts.audioFailures;
   for(const persona of Object.keys(report.aggregate.byPersona)){
     const bucket = report.aggregate.byPersona[persona];
     const scenarios = Object.values(bucket.scenarios);

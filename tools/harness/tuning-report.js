@@ -52,6 +52,30 @@ function makeFinding(priority, title, detail){
   return { priority, title, detail };
 }
 
+function videoEvidence(runs, profile = ''){
+  const out = {
+    recorded: 0,
+    audioChecked: 0,
+    audioFailures: 0,
+    notRequested: 0,
+    missing: 0
+  };
+  for(const run of runs){
+    const video = run.analysis?.video || {};
+    if(video.status === 'not_requested' || video.expected === false || run.recording?.requested === false ||
+      (profile === 'distribution' && video.error === 'no video file found' && !video.file)){
+      out.notRequested++;
+    }else if(video.file || video.status === 'recorded'){
+      out.recorded++;
+      if(video.audio === true || video.audio === false) out.audioChecked++;
+      if(video.audio === false) out.audioFailures++;
+    }else if(video.status === 'missing' || video.audio === false){
+      out.missing++;
+    }
+  }
+  return out;
+}
+
 function avgLossField(runs, pick){
   const vals = runs.flatMap(run => (run.analysis?.shipLost || []).map(pick)).filter(v => Number.isFinite(v));
   return avg(vals);
@@ -73,9 +97,13 @@ function buildReport(batch){
   const varietyRuns = scenarioRuns(allRuns, 'stage12-variety');
   const squadronRuns = scenarioRuns(allRuns, 'stage4-squadron-bonus');
 
-  const audioFailures = allRuns.filter(r => r.analysis?.video?.audio === false).length;
+  const videoArtifacts = videoEvidence(allRuns, batch.batchReport?.profile || '');
+  const audioFailures = videoArtifacts.audioFailures;
+  if(videoArtifacts.missing){
+    findings.push(makeFinding(1, 'Expected video artifacts were missing', `${videoArtifacts.missing}/${allRuns.length} runs expected video artifacts but did not produce one.`));
+  }
   if(audioFailures){
-    findings.push(makeFinding(1, 'Recorder audio is still unreliable', `${audioFailures}/${allRuns.length} generated videos had no audio track.`));
+    findings.push(makeFinding(1, 'Recorder audio is still unreliable', `${audioFailures}/${videoArtifacts.recorded} generated videos had no audio track.`));
   }
 
   const challengeRates = challengeRuns.flatMap(r => (r.analysis?.challengeClears || []).map(c => c.total ? c.hits / c.total : 0));
@@ -176,7 +204,11 @@ function buildReport(batch){
   }
 
   if(!findings.length){
-    findings.push(makeFinding(3, 'No obvious harness regressions', 'Audio, challenge scoring, and later-stage survivability all look within expected ranges for this batch.'));
+    if(batch.batchReport?.profile === 'distribution'){
+      findings.push(makeFinding(3, 'Persona distribution evidence summarized', 'Distribution profile runs prioritize repeated seeded session logs; recorder/video audio is intentionally outside this batch unless video recording is explicitly enabled.'));
+    }else{
+      findings.push(makeFinding(3, 'No obvious harness regressions', 'Audio, challenge scoring, and later-stage survivability all look within expected ranges for this batch.'));
+    }
   }
 
   findings.sort((a,b)=>a.priority-b.priority);
@@ -186,6 +218,7 @@ function buildReport(batch){
     summary: {
       runs: allRuns.length,
       audioFailures,
+      videoArtifacts,
       challengeAverageHitRate: +challengeAvg.toFixed(4),
       challengeAverageUpperBandTime: +challengeUpperBand.toFixed(4),
       stagePressureAverageShipLosses: +stageLossAvg.toFixed(4),

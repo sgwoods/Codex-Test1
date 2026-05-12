@@ -101,6 +101,7 @@ const USER_VISIBLE_SECTIONS = [
       'Stage Conformance Summary',
       'Testing Personas',
       'Persona Performance Distribution',
+      'Recording evidence',
       'persona-performance-distribution/latest.json'
     ]
   },

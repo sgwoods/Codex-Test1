@@ -2635,6 +2635,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const personaFindingRows = (personaDistribution.findings || []).map((finding) => `
     <li><strong>P${esc(finding.priority || '')}: ${esc(finding.title || '')}</strong> ${esc(finding.detail || '')}</li>
   `).join('\n');
+  const personaRecording = personaDistribution.recordingEvidence || {};
+  const personaRecordingText = personaRecording.totalRuns
+    ? `<p class="docMeta"><strong>Recording evidence:</strong> ${esc(personaRecording.mode || 'unclassified')}. Recorded videos: ${esc(personaRecording.recordedVideos || 0)}; audio-checked videos: ${esc(personaRecording.audioCheckedVideos || 0)}; audio failures: ${esc(personaRecording.audioFailures || 0)}; session-only runs: ${esc(personaRecording.videoNotRequested || 0)}. ${esc(personaRecording.read || '')}</p>`
+    : '<p class="docMeta"><strong>Recording evidence:</strong> pending recorder/video accounting for this persona distribution.</p>';
   const controlRows = (guide.graphicsControls || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong></td>
@@ -2985,6 +2989,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           <div class="docWrap personaReadout">
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code>. Raw run directories stay in <code>harness-artifacts/</code>; the published docs use the promoted summary and chart.</p>
             <p class="docMeta"><strong>Measurement limits:</strong> Seeded persona runs are not human playtest proof. They are repeatable skill-profile probes that help us find unfairness, progression order breaks, and whether higher-skill play actually unlocks more of the game.</p>
+            ${personaRecordingText}
             ${personaFindingRows ? `<ul class="bulletList">${personaFindingRows}</ul>` : '<p class="docMeta"><strong>Findings:</strong> no current distribution findings.</p>'}
           </div>
         </section>
