@@ -40,8 +40,8 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -270,6 +270,8 @@ const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
+const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
+const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
@@ -281,6 +283,8 @@ const LEGACY_STORAGE_KEYS={
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [ARCADE_MUSIC_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusic`,
+ [GAME_SOUND_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}GameSoundVolume`,
+ [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicVolume`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
@@ -294,13 +298,36 @@ const PLATFORM_STORAGE_KEYS={
  [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
  [ARCADE_MUSIC_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusic`,
+ [GAME_SOUND_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}GameSoundVolume`,
+ [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicVolume`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
 const SYSTEM_LOG_LIMIT=80;
+const DEFAULT_GAME_SOUND_VOLUME=.68;
+const DEFAULT_ARCADE_MUSIC_VOLUME=.72;
+function clampVolumeValue(value,fallback=1){
+ const n=+value;
+ return Number.isFinite(n)?Math.max(0,Math.min(1,n)):fallback;
+}
+function readVolumePref(key,fallback=1){
+ const raw=readPref(key);
+ if(raw==null||raw==='')return fallback;
+ const n=+raw;
+ if(!Number.isFinite(n))return fallback;
+ return clampVolumeValue(n>1?n/100:n,fallback);
+}
+function volumePercent(value){
+ return Math.round(clampVolumeValue(value,0)*100);
+}
+function volumePercentText(value){
+ return `${volumePercent(value)}%`;
+}
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+let gameSoundVolume=readVolumePref(GAME_SOUND_VOLUME_PREF_KEY,DEFAULT_GAME_SOUND_VOLUME);
+let arcadeMusicVolume=readVolumePref(ARCADE_MUSIC_VOLUME_PREF_KEY,DEFAULT_ARCADE_MUSIC_VOLUME);
 const ARCADE_MUSIC_PLAYLIST_ID={{ARCADE_MUSIC_PLAYLIST_ID_JSON}};
-const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null};
+const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null,lastTrackSignature:'',lastTrack:null};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -529,7 +556,7 @@ const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY='{{WEB3FORMS_ACCESS_KEY}}';
-let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0,platformTrackToastTimer=0;
 let gamePickerOpen=0,gamePickerPrevPaused=0;
 let platformSplashOpen=0,platformSplashPrevPaused=0;
 let gamePreviewOpen=0,gamePreviewPrevPaused=0;
@@ -571,7 +598,7 @@ const AC=()=>{
  const A=new (window.AudioContext||webkitAudioContext)();
  sfx.a=A;
  sfx.bus=A.createGain();
- sfx.bus.gain.value=audioMuted?0:.9;
+ sfx.bus.gain.value=audioMuted?0:gameSoundVolume;
  sfx.tap=A.createMediaStreamDestination();
  sfx.keep=A.createConstantSource();
  sfx.keep.offset.value=0;
@@ -1486,6 +1513,53 @@ function syncDeveloperToolsUi(){
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
 }
+function syncAudioMixControls(){
+ const gamePct=volumePercent(gameSoundVolume);
+ const musicPct=volumePercent(arcadeMusicVolume);
+ if(gameSoundVolumeControl){
+  gameSoundVolumeControl.value=String(gamePct);
+  gameSoundVolumeControl.setAttribute('aria-valuetext',volumePercentText(gameSoundVolume));
+ }
+ if(gameSoundVolumeValue)gameSoundVolumeValue.textContent=volumePercentText(gameSoundVolume);
+ if(musicVolume){
+  musicVolume.value=String(musicPct);
+  musicVolume.setAttribute('aria-valuetext',volumePercentText(arcadeMusicVolume));
+ }
+ if(musicVolumeValue)musicVolumeValue.textContent=volumePercentText(arcadeMusicVolume);
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ if(debug)debug.mix={gameSoundVolume:+gameSoundVolume.toFixed(3),arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),muted:!!audioMuted};
+}
+function audioMixTelemetryBase(){
+ return {
+  gameSoundVolume:+gameSoundVolume.toFixed(3),
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  muted:!!audioMuted,
+  musicState:ARCADE_MUSIC?.state||'off',
+  releaseChannel:BUILD_INFO?.releaseChannel||'development',
+  pack:typeof currentGamePackKey==='function'?currentGamePackKey():''
+ };
+}
+function logAudioMixSettingChange(setting='',source='developer_panel'){
+ if(typeof logEvent!=='function')return;
+ logEvent('audio_mix_changed',Object.assign({
+  setting:String(setting||'audio_mix'),
+  source:String(source||'developer_panel')
+ },audioMixTelemetryBase()));
+}
+function setGameSoundVolume(value,opts={}){
+ gameSoundVolume=clampVolumeValue(value,DEFAULT_GAME_SOUND_VOLUME);
+ writePref(GAME_SOUND_VOLUME_PREF_KEY,gameSoundVolume.toFixed(3));
+ if(sfx?.bus)sfx.bus.gain.value=audioMuted?0:gameSoundVolume;
+ syncAudioMixControls();
+ if(opts.log)logAudioMixSettingChange('game_sound_volume',opts.source||'developer_panel');
+}
+function setArcadeMusicVolume(value,opts={}){
+ arcadeMusicVolume=clampVolumeValue(value,DEFAULT_ARCADE_MUSIC_VOLUME);
+ writePref(ARCADE_MUSIC_VOLUME_PREF_KEY,arcadeMusicVolume.toFixed(3));
+ if(typeof applyArcadeMusicVolume==='function')applyArcadeMusicVolume();
+ syncAudioMixControls();
+ if(opts.log)logAudioMixSettingChange('arcade_music_volume',opts.source||'developer_panel');
+}
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();
  return{
@@ -1658,6 +1732,7 @@ function syncSettingsUi(){
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
+ syncAudioMixControls();
  syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
@@ -2030,6 +2105,19 @@ function showToast(t){
  clearTimeout(toastTimer);
  toastTimer=setTimeout(()=>feedbackToast.classList.remove('show'),1700);
 }
+function showPlatformTrackMessage(title='',artist=''){
+ const cleanTitle=String(title||'').trim();
+ const cleanArtist=String(artist||'').trim();
+ if(!platformTrackToast||!cleanTitle)return;
+ if(platformTrackTitle)platformTrackTitle.textContent=cleanTitle;
+ if(platformTrackArtist){
+  platformTrackArtist.textContent=cleanArtist;
+  platformTrackArtist.hidden=!cleanArtist;
+ }
+ platformTrackToast.classList.add('show');
+ clearTimeout(platformTrackToastTimer);
+ platformTrackToastTimer=setTimeout(()=>platformTrackToast.classList.remove('show'),4600);
+}
 function openFeedback(){
  if(feedbackOpen)return;
  closeDockOverlays('feedback');
@@ -2181,6 +2269,14 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+if(musicVolume){
+ musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
+ musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
+}
+if(gameSoundVolumeControl){
+ gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
+ gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
+}
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
@@ -2368,5 +2464,19 @@ window.__platinumArcadeMusic={
   syncArcadeMusicUi();
   return arcadeMusicState();
  },
+ noteTrackForHarness(title='Harness Track',artist='Harness Band'){
+  if(typeof acceptArcadeMusicTrack==='function')acceptArcadeMusicTrack({title,author:artist,video_id:`harness-${Date.now()}`},'harness');
+  return arcadeMusicState();
+ },
  stop:()=>stopArcadeMusic({silent:true})
+};
+window.__platinumAudioMix={
+ state(){
+  return Object.assign({},audioMixTelemetryBase(),{
+   gameSoundPercent:volumePercent(gameSoundVolume),
+   arcadeMusicPercent:volumePercent(arcadeMusicVolume)
+  });
+ },
+ setGameSoundVolume(value){setGameSoundVolume(value,{log:1,source:'harness'});return this.state();},
+ setArcadeMusicVolume(value){setArcadeMusicVolume(value,{log:1,source:'harness'});return this.state();}
 };

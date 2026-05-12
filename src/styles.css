@@ -170,16 +170,23 @@ mask:
 #conformanceToolsPanel.disabled #conformanceRollupCard{border-color:rgba(170,190,210,.14);background:rgba(26,30,40,.42)}
 #conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
+#audioMixPanel h4{color:#9eefff}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .settingsField{display:flex;flex-direction:column;gap:4px;min-width:0}
 .settingsFieldCompact{max-width:240px}
-#graphicsPanel label,#testPanel label{display:block;font-size:12px}
+#graphicsPanel label,#testPanel label,#audioMixPanel label{display:block;font-size:12px}
 #graphicsPanel label{color:#ffe6ae}
+#audioMixPanel label{color:#bff6ff}
 #testPanel label{color:#b7efd0}
 #graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
 #testPanel input{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
+.settingsRangeStack{display:flex;flex-direction:column;gap:10px;padding:8px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(5,14,26,.52)}
+.settingsRangeRow{display:grid;grid-template-columns:1fr;gap:5px;min-width:0}
+.settingsRangeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.settingsRangeValue{font:700 12px/1 "Courier New",Consolas,monospace;color:#ffe39a}
+.settingsRangeRow input[type="range"]{width:100%;accent-color:#7ef2ff;cursor:pointer}
 #testStage,#testShips{max-width:240px}
 #rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
 #rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
@@ -283,6 +290,11 @@ mask:
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
+#platformTrackToast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(12px);z-index:25;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;width:min(560px,calc(100vw - 32px));box-sizing:border-box;padding:7px 12px;border:1px solid rgba(255,227,154,.54);background:rgba(7,14,28,.92);color:#dff7ff;font:700 12px/1.15 "Courier New",Consolas,monospace;box-shadow:0 10px 28px rgba(0,0,0,.32),0 0 18px rgba(255,227,154,.12);opacity:0;pointer-events:none;transition:opacity .42s ease,transform .42s ease}
+#platformTrackToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#platformTrackLabel{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#ffe39a;white-space:nowrap}
+#platformTrackTitle{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f7fbff}
+#platformTrackArtist{min-width:0;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9eefff;text-align:right}
 #pickerDock{position:absolute;left:12px;top:12px;right:12px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
 #gamePickerDockBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:118px;padding:6px 4px;border:1px solid transparent;background:transparent;color:#f4fbff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:none;box-shadow:none;transition:color .14s,transform .14s,filter .14s}
 #gamePickerDockBtn:hover{color:#ffe39a;transform:translateY(-1px);filter:drop-shadow(0 0 14px rgba(126,242,255,.24))}
@@ -314,8 +326,11 @@ mask:
 #dockQuickTools .dockToolGroupUtility button:hover::after,
 #dockQuickTools .dockToolGroupUtility button:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(-2px)}
 #dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transform:none;filter:drop-shadow(0 0 10px rgba(126,242,255,.18))}
+#dockQuickTools .musicDockIcon{font-size:34px}
 #arcadeMusicToggleBtn[data-music-state="playing"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-state="playing"] .dockIcon{animation:arcadeMusicPulse 1.15s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,227,154,.42))}
 #arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
+@keyframes arcadeMusicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
 #arcadeMusicFrameHost{position:fixed;right:8px;bottom:8px;width:200px;height:200px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
 #arcadeMusicFrameHost iframe{display:block;width:200px;height:200px;border:0}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
@@ -579,7 +594,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #accountDockBtn{min-height:72px;padding:6px}
  #accountDockLabel,#accountDockStatus{display:none}
  #settingsActions{grid-template-columns:1fr}
- #settingsFieldGrid{grid-template-columns:1fr}
+ .settingsFieldGrid{grid-template-columns:1fr}
  #statusPanels:not(.framedOverlay):not(.waitOverlay){left:14px!important;right:14px!important;top:auto!important;bottom:126px!important;transform:none!important;width:auto!important;align-items:stretch}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#platformMessagePanel,#buildStamp{width:100%;max-width:none}
  #accountIdentityGrid,#accountFlightStats{grid-template-columns:1fr}

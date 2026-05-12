@@ -116,11 +116,50 @@ async function main(){
             aria: btn.getAttribute('aria-pressed'),
             title: btn.getAttribute('title') || '',
             actionTip: btn.dataset.actionTip || '',
+            icon: btn.querySelector('.dockIcon')?.textContent || '',
+            iconFontSize: getComputedStyle(btn.querySelector('.dockIcon')).fontSize,
+            muteIconFontSize: getComputedStyle(document.querySelector('#muteToggleBtn .dockIcon')).fontSize,
+            iconAnimation: getComputedStyle(btn.querySelector('.dockIcon')).animationName,
             src: frame.getAttribute('src') || '',
             state
           }
         : null;
     }, 1200, 50);
+    const musicTrackToast = await page.evaluate(() => {
+      window.__platinumArcadeMusic?.noteTrackForHarness?.('Harness Song', 'Harness Band');
+      const toast = document.querySelector('#platformTrackToast');
+      return {
+        visible: toast?.classList.contains('show') || false,
+        title: document.querySelector('#platformTrackTitle')?.textContent || '',
+        artist: document.querySelector('#platformTrackArtist')?.textContent || ''
+      };
+    });
+    const audioMix = await page.evaluate(() => {
+      const before = window.__platinumAudioMix?.state?.();
+      const music = document.querySelector('#musicVolume');
+      const game = document.querySelector('#gameSoundVolume');
+      if(music){
+        music.value = '77';
+        music.dispatchEvent(new Event('input', { bubbles: true }));
+        music.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      if(game){
+        game.value = '61';
+        game.dispatchEvent(new Event('input', { bubbles: true }));
+        game.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      const after = window.__platinumAudioMix?.state?.();
+      const events = window.__galagaHarness__?.recentEvents?.({ count: 20 }) || [];
+      return {
+        before,
+        after,
+        musicValue: music?.value || '',
+        gameValue: game?.value || '',
+        musicLabel: document.querySelector('#musicVolumeValue')?.textContent || '',
+        gameLabel: document.querySelector('#gameSoundVolumeValue')?.textContent || '',
+        audioMixEvents: events.filter(event => event.type === 'audio_mix_changed').map(event => event.setting)
+      };
+    });
     await page.locator('#arcadeMusicToggleBtn').click();
     const musicRestored = await waitForHarness(page, () => {
       const btn = document.querySelector('#arcadeMusicToggleBtn');
@@ -224,7 +263,8 @@ async function main(){
       scores,
       feedback,
       settings,
-      music: { default: musicDefault, before: musicBefore, active: musicActive, restored: musicRestored },
+      music: { default: musicDefault, before: musicBefore, active: musicActive, restored: musicRestored, trackToast: musicTrackToast },
+      audioMix,
       mute: { before: muteBefore, after: muteAfter, restored: muteRestored },
       pause: { before: pauseBefore, active: pauseActive, restored: pauseRestored }
     };
@@ -256,6 +296,21 @@ async function main(){
   }
   if(result.music.before !== 'false' || result.music.active.aria !== 'true' || result.music.active.title !== 'Arcade Music' || result.music.active.actionTip !== 'Arcade Music' || !/youtube-nocookie\.com\/embed\/videoseries/.test(result.music.active.src)){
     fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
+  }
+  if(result.music.active.icon !== '🎶' || result.music.active.iconFontSize !== result.music.active.muteIconFontSize || result.music.active.iconAnimation === 'none'){
+    fail('Arcade Music dock icon did not match the sound icon size or active pulse state', result);
+  }
+  if(!result.music.trackToast.visible || result.music.trackToast.title !== 'Harness Song' || result.music.trackToast.artist !== 'Harness Band'){
+    fail('Arcade Music track changes did not surface in the platform message box', result);
+  }
+  if(result.audioMix.before?.gameSoundPercent !== 68 || result.audioMix.before?.arcadeMusicPercent !== 72){
+    fail('Audio mix defaults no longer match the intended quieter game / louder music balance', result);
+  }
+  if(result.audioMix.after?.gameSoundPercent !== 61 || result.audioMix.after?.arcadeMusicPercent !== 77 || result.audioMix.musicLabel !== '77%' || result.audioMix.gameLabel !== '61%'){
+    fail('Audio mix sliders did not apply live values correctly', result);
+  }
+  if(!result.audioMix.audioMixEvents.includes('arcade_music_volume') || !result.audioMix.audioMixEvents.includes('game_sound_volume')){
+    fail('Audio mix slider changes were not logged to session telemetry', result);
   }
   if(result.music.restored.aria !== 'false' || result.music.restored.state.hasFrame){
     fail('Arcade Music dock button did not stop and remove the playlist embed', result);

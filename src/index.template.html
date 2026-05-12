@@ -52,7 +52,7 @@
         <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report a bug or send feedback" data-action-tip="Report a bug or send feedback"><span class="dockIcon" aria-hidden="true">🐞</span></button>
       </div>
       <div class="dockToolGroup dockToolGroupUtility">
-        <button id="arcadeMusicToggleBtn" type="button" aria-pressed="false" aria-label="Arcade Music" title="Arcade Music" data-action-tip="Arcade Music"><span class="dockIcon" aria-hidden="true">♪</span></button>
+        <button id="arcadeMusicToggleBtn" type="button" aria-pressed="false" aria-label="Arcade Music" title="Arcade Music" data-action-tip="Arcade Music"><span class="dockIcon musicDockIcon" aria-hidden="true">🎵</span></button>
         <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio" data-action-tip="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
         <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game" data-action-tip="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
         <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Open developer tools" data-action-tip="Open developer tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
@@ -63,6 +63,11 @@
 <div id="arcadeMusicFrameHost" aria-hidden="true"></div>
 <div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
+<div id="platformTrackToast" aria-live="polite" aria-atomic="true">
+  <span id="platformTrackLabel">Now Playing</span>
+  <span id="platformTrackTitle"></span>
+  <span id="platformTrackArtist"></span>
+</div>
 <div id="settingsPanel" aria-hidden="true">
   <div id="settingsPanelHead" class="framePopupHead">
     <div>
@@ -89,6 +94,26 @@
         <span id="conformanceRollupBody">Dashboard summary pending.</span>
       </div>
       <div id="conformanceDashboardHint">Open the read-only conformance dashboard for this build.</div>
+    </div>
+    <div id="audioMixPanel" class="settingsSection">
+      <h4>Audio Mix</h4>
+      <div class="settingsRangeStack">
+        <div class="settingsRangeRow">
+          <div class="settingsRangeHeader">
+            <label for="musicVolume">Music Volume</label>
+            <span id="musicVolumeValue" class="settingsRangeValue">--</span>
+          </div>
+          <input id="musicVolume" type="range" min="0" max="100" step="1" value="72" />
+        </div>
+        <div class="settingsRangeRow">
+          <div class="settingsRangeHeader">
+            <label for="gameSoundVolume">Game Sound</label>
+            <span id="gameSoundVolumeValue" class="settingsRangeValue">--</span>
+          </div>
+          <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="68" />
+        </div>
+      </div>
+      <div class="settingsHint">Audio mix changes apply live and are logged with the active session for production tuning.</div>
     </div>
     <div id="graphicsPanel" class="settingsSection">
       <h4>Graphics Options</h4>
