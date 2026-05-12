@@ -356,6 +356,10 @@ Release boundary:
 
 - publish the dashboard and its compact data file as platform release assets,
   including the `assets/` copy used by the public Pages deployment
+- expose the bundled read-only dashboard from the game settings/configuration
+  panel in hosted `/dev`, `/beta`, and `/production`
+- keep the public mirror Pages workflow aligned through the publish script so
+  top-level guide and conformance files are included in the deployed `_site`
 - keep raw ingestion workspaces, source-media extraction, candidate clips,
   unreviewed traces, and annotation notebooks engineering-owned
 - expose ingestion only as summarized release evidence unless a future

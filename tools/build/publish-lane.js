@@ -72,6 +72,29 @@ function copyFile(src, dest){
   fs.copyFileSync(src, dest);
 }
 
+function ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir){
+  const workflowPath = path.join(repoDir, '.github', 'workflows', 'pages.yml');
+  if(!fs.existsSync(workflowPath)) return;
+  const requiredCopies = [
+    '          cp conformance-dashboard.html _site/',
+    '          cp conformance-dashboard-data.json _site/',
+    '          cp public-project-page.html _site/',
+    '          cp application-guide.html _site/'
+  ];
+  let text = fs.readFileSync(workflowPath, 'utf8');
+  const missing = requiredCopies.filter(line => !text.includes(line));
+  if(!missing.length) return;
+  const anchor = '          cp release-dashboard.html _site/\n';
+  if(!text.includes(anchor)){
+    throw new Error(`Public Pages workflow is missing the release-dashboard copy anchor: ${workflowPath}`);
+  }
+  text = text.replace(
+    anchor,
+    `${anchor}${missing.join('\n')}\n`
+  );
+  fs.writeFileSync(workflowPath, text);
+}
+
 function loadJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
@@ -142,6 +165,7 @@ function stageArtifacts(repoDir, cfg){
     removeEntry(dest);
     copyFile(src, dest);
   }
+  ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir);
 }
 
 function gitStatus(repoDir){

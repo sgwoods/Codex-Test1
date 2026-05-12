@@ -196,12 +196,16 @@ async function checkDashboardViewportFit(){
       disabled: !!document.getElementById('openConformanceDashboardBtn')?.disabled,
       panelDisabled: document.getElementById('conformanceToolsPanel')?.classList.contains('disabled') || false,
       hint: document.getElementById('conformanceDashboardHint')?.textContent || '',
-      body: document.getElementById('conformanceRollupBody')?.textContent || ''
+      body: document.getElementById('conformanceRollupBody')?.textContent || '',
+      url: typeof window.__platinumConformanceDashboardUrl === 'function' ? window.__platinumConformanceDashboardUrl() : ''
     }));
-    if(!external.disabled) fail('external conformance dashboard launcher should be disabled', external);
-    if(!external.panelDisabled) fail('external conformance dashboard panel should be greyed out', external);
-    if(!/Root login password/.test(external.hint)) fail('external hint should point to future Root-gated access', external);
-    if(!/Local-only/.test(external.body)) fail('external rollup body should explain local-only state', external);
+    if(external.disabled) fail('external conformance dashboard launcher should remain enabled for release-lane builds', external);
+    if(external.panelDisabled) fail('external conformance dashboard panel should remain visible for release-lane builds', external);
+    if(!/read-only dashboard/.test(external.hint)) fail('external hint should describe bundled read-only dashboard access', external);
+    if(!/Weakest:/.test(external.body)) fail('external rollup body should keep the release conformance summary visible', external);
+    if(!/\/conformance-dashboard\.html$/.test(external.url)){
+      fail('external conformance dashboard launcher should resolve to the release-lane dashboard URL', external);
+    }
     await page.evaluate(() => {
       window.__platinumForceExternalConformanceDashboard = 0;
       window.__platinumSyncConformanceDashboardUi();

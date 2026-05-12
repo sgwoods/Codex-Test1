@@ -1660,7 +1660,8 @@ function isLocalDashboardHost(){
  return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
 }
 function conformanceDashboardUrl(){
- return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ if(isLocalDashboardHost())return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}conformance-dashboard.html`;
 }
 function syncConformanceDashboardUi(){
  const summary=CONFORMANCE_DASHBOARD_SUMMARY&&typeof CONFORMANCE_DASHBOARD_SUMMARY==='object'
@@ -1668,18 +1669,16 @@ function syncConformanceDashboardUi(){
   : {};
  const local=isLocalDashboardHost();
  const available=!!summary.available;
- if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',!local);
+ if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',false);
  if(openConformanceDashboardBtn){
-  openConformanceDashboardBtn.disabled=!local;
+  openConformanceDashboardBtn.disabled=false;
   openConformanceDashboardBtn.title=local
    ? 'Open the local conformance dashboard'
-   : 'Localhost-only for now. Future work will externalize this behind Root access.';
+   : 'Open the read-only conformance dashboard for this release lane.';
  }
  if(conformanceRollupScore)conformanceRollupScore.textContent=available ? (summary.overallCurrent||'--') : '--';
  if(conformanceRollupBody){
-  if(!local){
-   conformanceRollupBody.textContent='Local-only dashboard hidden on external builds.';
-  }else if(available){
+  if(available){
    const generated=summary.generatedAt?summary.generatedAt.replace('T',' ').replace(/\.\d+Z$/,'Z'):'unknown';
    const weak=summary.weakestMetric?`${summary.weakestMetric} ${summary.weakestCurrent||''}`.trim():'weakest axis pending';
    conformanceRollupBody.textContent=`Weakest: ${weak}. Audio ${summary.audioCurrent||'--'} · level arc ${summary.levelArcCurrent||'--'} · visual ${summary.visualCurrent||'--'}. Generated ${generated}.`;
@@ -1690,10 +1689,11 @@ function syncConformanceDashboardUi(){
  if(conformanceDashboardHint){
   conformanceDashboardHint.textContent=local
    ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
-   : 'Future feature: expose this behind Root login password when external developer access is ready.';
+   : 'Open the bundled read-only dashboard for this release lane. Raw ingestion workspaces remain engineering-owned.';
  }
 }
 window.__platinumSyncConformanceDashboardUi=syncConformanceDashboardUi;
+window.__platinumConformanceDashboardUrl=conformanceDashboardUrl;
 function syncAudioDebugUi(){
  if(!settingsAudioDebugBody)return;
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
@@ -1891,10 +1891,6 @@ function openProjectGuide(){
  }else showToast('Allow popups to open the project guide');
 }
 function openConformanceDashboard(){
- if(!isLocalDashboardHost()){
-  showToast('Conformance dashboard is localhost-only for now');
-  return;
- }
  const win=window.open(conformanceDashboardUrl(), '_blank', 'noopener');
  if(win){
   try{win.focus();}catch{}

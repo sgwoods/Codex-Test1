@@ -254,10 +254,12 @@ That means each `/dev`, `/beta`, and `/production` lane should carry:
 - `assets/conformance-dashboard.html`
 - `assets/conformance-dashboard-data.json`
 - a release-dashboard link to the conformance dashboard
+- a settings/configuration-panel launcher that opens the bundled read-only
+  dashboard for the active lane
 
-The release dashboard should link to the `assets/` copy because the public
-GitHub Pages workflow already publishes the asset tree for production. The
-top-level files remain lane artifacts for local/publish tooling.
+The release dashboard may link to the `assets/` copy, but the top-level
+dashboard files must also be published because the game settings/configuration
+launcher opens `conformance-dashboard.html` beside the active game lane.
 
 The dashboard is platform-owned presentation of release evidence. It is allowed
 to summarize application-owned game conformance, ingestion state, confidence,

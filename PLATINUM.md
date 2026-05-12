@@ -89,6 +89,9 @@ Current proof points:
   the shell surface
 - platform-only harnesses exist alongside Aurora gameplay harnesses
 - the build pipeline now generates hosted documentation pages as first-class release artifacts
+- the settings/configuration panel exposes the bundled read-only conformance
+  dashboard in hosted dev, beta, and production lanes while raw ingestion
+  workspaces remain engineering-owned
 
 ## Platform Structure
 
