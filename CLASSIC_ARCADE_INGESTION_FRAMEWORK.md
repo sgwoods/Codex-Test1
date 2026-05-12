@@ -80,6 +80,8 @@ The catalog must include:
 - a persona section that explains beginner/novice, intermediate/advanced,
   expert, and professional testing assumptions for both platform-level and
   game-owned harnesses
+- a playtest-weighted review layer when the game is playable enough that
+  evidence coverage and perceived authenticity can diverge meaningfully
 
 If direct extracted target evidence exists, link it from the catalog row. If the
 metric is still a proxy or heuristic, label the confidence accordingly. This is
@@ -151,8 +153,15 @@ Scope for the first complete example:
 - semantic slice profile
 - minimal Platinum pack requirements
 - harness plan for the first playable scout-wave slice
+- first-class application review plan covering score/progression/result flow,
+  browser review, and playtest-weighted review
 
 This should become the template for later windows and later games.
+
+The maintained first-class application review path for this example is now:
+
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 ## Pipeline Stages
 

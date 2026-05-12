@@ -23,6 +23,10 @@ That means this branch should prioritize:
 - harnesses that prove the second game remains playable as platform work
   continues
 
+This branch-local completeness plan works alongside the broader conformance
+program in
+[GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md).
+
 ## Current Truth
 
 Current shipped truth on `main`:

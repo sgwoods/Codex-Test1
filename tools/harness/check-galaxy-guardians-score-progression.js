@@ -19,6 +19,8 @@ function loadGuardiansRuntime(){
   const runtimeSource = fs.readFileSync(RUNTIME_SOURCE, 'utf8');
   const sandbox = {
     window: null,
+    buildPlatformInfo: () => ({ compatibility: '' }),
+    applicationReleaseRecord: (_gameKey, fallback = {}) => Object.assign({}, fallback || {}),
     GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES: Object.freeze({
       usesCaptureRescue: 0,
       usesDualFighterMode: 0,
@@ -33,6 +35,9 @@ function loadGuardiansRuntime(){
   vm.runInContext(`
     this.GALAXY_GUARDIANS_PACK = GALAXY_GUARDIANS_PACK;
     this.GALAXY_GUARDIANS_RUNTIME_PROFILE = GALAXY_GUARDIANS_RUNTIME_PROFILE;
+    this.createGalaxyGuardiansRuntimeState = createGalaxyGuardiansRuntimeState;
+    this.stepGalaxyGuardiansRuntime = stepGalaxyGuardiansRuntime;
+    this.summarizeGalaxyGuardiansRuntime = summarizeGalaxyGuardiansRuntime;
   `, sandbox);
   return sandbox;
 }

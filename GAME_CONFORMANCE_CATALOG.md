@@ -155,6 +155,31 @@ game-owned persona calibration before public playability:
 | Expert | Tests whether flagship/escort opportunities are deliberate rather than accidental. | Add escort-route and pressure-recovery probes. |
 | Professional | Tests whether the game can support mastery without unfair collapse. | Add long-run stage-rank pressure and exact path correspondence. |
 
+### Galaxy Guardians First-Class Promotion Targets
+
+The maintained Galaxy-specific promotion plan is:
+
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+
+Near-term first-class promotion targets:
+
+- keep reference conformance at or above `7.7/10` while raising the
+  playtest-weighted score from `6.9/10` to at least the `7.0/10` compelling
+  preview floor
+- move formation/rack timing and motion pressure from proxy-tuned
+  `6.2/10` reads toward `7.2/10` by promoting sprite-recognized timing and
+  browser-reviewed motion feel
+- move visual identity from `6.8/10` reference and `6.7/10` playtest toward
+  `7.2/10` through human-reviewed sprite targets and gameplay-scale review
+- move audio character from `6.4/10` toward `7.0/10` through human-listened
+  cue cleanup and cleaner isolated reference windows
+- complete game-owned score/progression/result identity so the game validates
+  Platinum changes as a second real application, not only as a preview shell
+
+Standing aggregate parity gate:
+
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
+
 ## Platform Persona Contract
 
 Platinum owns the persona harness substrate, not the game-specific truth behind

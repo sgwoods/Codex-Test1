@@ -31,6 +31,9 @@ Current artifacts:
 - `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
   movement, threat, visual, audio, runtime-event, and public-boundary
   requirements together.
+- `tools/harness/check-galaxy-guardians-first-class-conformance.js` -
+  aggregate first-class-conformance process gate that verifies the core Galaxy
+  artifacts, docs, and harness-family parity stay in sync.
 - `formation-entry-0.1.json` - first runtime entry/settle contract for the
   promoted Galaxian `formation_entry_start`, `formation_entry_settle`, and
   `formation_rack_complete` events.

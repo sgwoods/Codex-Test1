@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-11T20:17:38.373Z`
+Generated: `2026-05-12T13:04:45.262Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses both a reference-conformance preview metric set and a stricter playtest-weighted score because its Galaxian evidence is still being promoted from source footage into frame-level/audio-level measurements.
 
@@ -10,6 +10,12 @@ This document summarizes the current conformance scoring model for both the ship
 | --- | --- | --- | --- | --- | --- |
 | Aurora Galactica current dev line | 9.2/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 7.3/10; alien entry/challenge variation 7.8/10; audio contract readiness 9.09/10 | release-quality conformance score plus audio cue-contract read | Audio identity and cue alignment (7.3/10) | reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json |
 | Galaxy Guardians 0.1 playable preview | 7.7/10 | playtest weighted 6.9/10; maturity 7/10; gate coverage 9.5/10; public readiness 3.9/10 | preview-reference-conformance-model-not-production-release-score | Formation and rack timing | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
+
+## Galaxy Guardians First-Class Promotion Read
+
+Near-parity for `Galaxy Guardians` means process parity before score parity. The game should keep its own ingestion package, conformance metrics, score/progression/result identity, manual-review loop, and candidate-review path even while its absolute score remains lower than Aurora. The maintained Galaxy-specific strategy is in [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md), and the standing aggregate process gate is `npm run harness:check:galaxy-guardians-first-class-conformance`.
+
+Current read: reference 7.7/10, playtest 6.9/10, maturity 7/10, gate coverage 9.5/10, public readiness 3.9/10.
 
 ## Release Cluster Conformance Targets
 

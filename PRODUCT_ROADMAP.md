@@ -98,6 +98,10 @@ That pickup should focus on:
 - the branch-level `Galaxy Guardians` cleanup that turns the current preview
   slice into a minimally complete one-level playable game with its own scores,
   endings, and platform-validation value
+- the first-class Galaxy conformance pass in
+  [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md),
+  including the aggregate parity gate
+  `npm run harness:check:galaxy-guardians-first-class-conformance`
 - incorporate the other machine's Galaxians-style sibling work and stronger
   harness/reference analysis into the main line deliberately
 
@@ -128,6 +132,10 @@ Current decision:
   `2.0` multi-game release
 - use the first post-`1.3.0` iMac branch to make that second game genuinely
   playable enough to validate platform changes against two games
+- treat near-parity for `Galaxy Guardians` as process parity first:
+  game-owned evidence, game-owned metrics, game-owned score/replay/result
+  identity, and a readable candidate-review path before demanding Aurora-like
+  maturity
 
 ### Pick Up After `1.3.0`
 
@@ -190,6 +198,10 @@ Current conformance read:
   mixed-source cue candidates, component sprite targets, waveform/spectrogram
   previews, and the reusable Platinum audio conformance lab output, while
   stage-rank gates require denser later-wave pressure
+- the maintained Galaxy-first-class target and investment strategy now lives in
+  [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md),
+  with a standing aggregate process gate in
+  `npm run harness:check:galaxy-guardians-first-class-conformance`
 - current cluster targets are `9.2/10` for Aurora and `7.7/10` reference /
   `6.9/10` playtest for Guardians in the `1.3` Fidelity and Trust lane, rising
   toward `9.5/10` and `9.0/10` reference / `8.8/10` playtest by the `2.0`

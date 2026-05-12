@@ -35,7 +35,8 @@ Aurora should remain the reference application when we ask:
 
 `Galaxy Guardians` is currently a preview-first second-game application and
 sneak peek on the shipped line, while the active post-production iMac branch
-now targets it as a minimally complete one-level playable game.
+now targets it as both a minimally complete one-level playable game and a
+first-class conformance target.
 
 Right now it proves:
 
@@ -73,9 +74,12 @@ That is intentional.
 Current branch-level next step:
 
 - [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
 - own scores and pilot/replay identity
 - proper one-level completion and game-over endings
 - enough completeness to validate Platinum changes against two real games
+- keep the aggregate first-class conformance gate green:
+  `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 ## Application Responsibilities
 
@@ -296,10 +300,18 @@ grow beyond preview-only framing and earn:
 - proper loss ending
 - clean restart and result behavior
 - platform validation value as a second real game
+- a readable first-class conformance target and review story rather than only a
+  scattered preview harness set
 
 The first aggregate 0.1 candidate gate is already source-controlled, so future
 playable claims can cite one durable artifact instead of reassembling the
 visual, audio, movement, threat, and boundary evidence from memory.
+
+That candidate gate is now paired with a first-class conformance target and
+aggregate parity check:
+
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 - formation rack
 - dives

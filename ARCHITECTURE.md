@@ -207,6 +207,10 @@ Pack-boundary harness:
   verifies the development-lane Galaxy Guardians playable-preview adapter:
   keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and
   isolation from the public playable adapter registry.
+- `tools/harness/check-galaxy-guardians-first-class-conformance.js`
+  verifies that the Galaxy Guardians evidence stack, core docs, and harness
+  family still support the maintained first-class conformance target instead of
+  drifting back into a loose preview-only state.
 - `tools/harness/check-compact-cabinet-rails.js`
   verifies that both side-frame icon rails remain visible and inside the
   cabinet frame at the compact in-app browser scale, and that the Galaxy

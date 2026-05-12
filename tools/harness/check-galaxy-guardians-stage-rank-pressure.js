@@ -21,6 +21,8 @@ function readJson(relPath){
 function loadRuntime(){
   const sandbox = {
     window: null,
+    buildPlatformInfo: () => ({ compatibility: '' }),
+    applicationReleaseRecord: (_gameKey, fallback = {}) => Object.assign({}, fallback || {}),
     GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES: Object.freeze({
       usesCaptureRescue: 0,
       usesDualFighterMode: 0,
