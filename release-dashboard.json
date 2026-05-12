@@ -10,6 +10,38 @@
       "summary": "Browser build, harness, public hosting, and release identity are in place."
     },
     {
+      "id": "launch-100",
+      "title": "1.0.0 Aurora Launch",
+      "status": "done",
+      "summary": "Aurora's first public production launch established the initial live arcade slice, shared scoring, pilot identity, replay viewing, and the first real beta-to-production release ladder.",
+      "releaseNoteVersion": "1.0.0",
+      "releaseNoteDate": "2026-03-30"
+    },
+    {
+      "id": "launch-hotfix-100-build-284",
+      "title": "1.0.0 Post-Launch Score Submit Hotfix",
+      "status": "done",
+      "summary": "The first post-launch hotfix repaired shared score submission for signed-in runs and added a refresh reminder so stale hosted tabs could pick up live fixes cleanly.",
+      "releaseNoteVersion": "1.0.0+build.284",
+      "releaseNoteDate": "2026-03-31"
+    },
+    {
+      "id": "input-hotfix-101",
+      "title": "1.0.1 Input And Feedback Hotfix",
+      "status": "done",
+      "summary": "The 1.0.1 hotfix simplified alternate controls, added focus-loss input reset, and cleaned up player feedback delivery right after launch.",
+      "releaseNoteVersion": "1.0.1",
+      "releaseNoteDate": "2026-03-31"
+    },
+    {
+      "id": "movement-hotfix-102",
+      "title": "1.0.2 Movement Regression Hotfix",
+      "status": "done",
+      "summary": "The 1.0.2 emergency repair fixed the live movement regression introduced after launch and added stronger smoke coverage so obvious input failures are caught earlier.",
+      "releaseNoteVersion": "1.0.2",
+      "releaseNoteDate": "2026-04-02"
+    },
+    {
       "id": "platinum-release",
       "title": "1.2.0 Platinum Release 1",
       "status": "done",
