@@ -15,6 +15,14 @@ ship snapshot. It is the refreshed `1.3.0` line that carries the accepted
 conformance/documentation bundle first assembled on the `1.3.0.1` hosted-dev
 review line.
 
+Retrospective versioning note:
+
+- this same-family `1.3.0` production path is now treated as an exception
+- future production promotions with similar quality, gameplay, conformance, and
+  ingestion lift should move at least a real `PATCH` version
+- only true production-failure remediation should normally reuse the exact same
+  public production version
+
 ## Why This Promotion Mattered
 
 The case for this promotion was:

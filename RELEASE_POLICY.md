@@ -93,9 +93,40 @@ without forcing unrelated areas to churn.
     - UI polish
     - harness hardening
     - documentation and release-discipline follow-through inside the same release family
+    - meaningful compatible production improvements that players can actually feel,
+      including game-quality lifts, conformance improvements, and ingestion/runtime
+      optimizations that directly support shipped quality
   - not the right bucket when the public candidate story changes materially,
     such as adding a second cabinet or second-game surface that changes the
     release promise even if it remains preview-scoped
+
+## Production Version Regularity
+
+Hosted `/dev` is allowed to use a fourth-segment review line such as `1.3.0.1`
+because it is the integration/review lane.
+
+Hosted `/beta` and hosted `/production` should be more regular and easier to
+read publicly.
+
+Rules:
+
+- the normal expectation is that any beta or production promotion moves a real
+  public SemVer version
+- use at least a `PATCH` step for production-sized bundles that contain
+  meaningful compatible player-facing value, including gameplay polish,
+  conformance lifts, ingestion improvements that directly support shipped
+  quality, or release-surface upgrades that materially improve trust
+- use a `MINOR` step when the public release story itself changes, such as a
+  new cabinet, a new serious application surface, or a broader platform/game
+  milestone
+- do not reuse the exact same public production version just because the work
+  began as a hosted `/dev` review bundle
+- reserve same-version production republish behavior for true production-failure
+  remediation, such as correcting a broken publish, incomplete asset set, or
+  serious production-only defect where the honest story is "repair the shipped
+  release" rather than "announce a new release"
+- when in doubt between same-version refresh and a compatible new public
+  release, prefer at least the `PATCH` step
 
 ## Hosted Release Lanes
 
@@ -150,6 +181,8 @@ Current versioning read for the next cycle:
 - hosted `/dev` may use fourth-segment increments such as `1.3.0.1`,
   `1.3.0.2`, and so on to make accumulated development value visible before a
   formal beta/production candidate is cut
+- the May 12 same-family `1.3.0` production refresh should be treated as an
+  exception, not the default model for future promotions
 - the next coherent public candidate should not collapse back into a `1.3.1`
   fast-follow patch if it is really the first deliberate post-release depth and
   platform-contract bundle
@@ -262,6 +295,8 @@ That means:
   lanes are close
 - the next beta action should be an authority-gated promotion from an accepted
   hosted-dev review bundle, not an automatic mirror of `/dev`
+- future beta/production promotions of similar scope should move a real public
+  SemVer step rather than repeat the May 12 same-family production exception
 
 ## Major `x.y` Documentation Gate
 

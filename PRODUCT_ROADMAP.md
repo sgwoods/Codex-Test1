@@ -18,6 +18,8 @@ Aurora is in a post-`1.3.0` ship posture:
 - beta remains the proving lane for the next release step
 - dev carries the current forward review bundle
 - `main` is the forward line for the deliberate `1.4.0` pickup
+- future production promotions of similar scope should move a real public
+  SemVer version rather than repeat the May 12 same-family exception
 
 ## Roadmap Frame
 

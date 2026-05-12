@@ -22,6 +22,8 @@ This means:
   bundle
 - hosted `/dev` remains the forward review lane, while `/beta` and
   `/production` now carry the refreshed public `1.3.0` story
+- that same-family production refresh should be treated as an exception, not
+  the normal public versioning pattern
 - the active source-planning question has moved from "what must land for `1.3.0`?"
   to "what is the cleanest deliberate `1.4.0` pickup?"
 - the post-release work should now be treated as intentional carry-forward, not

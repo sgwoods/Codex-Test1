@@ -23,6 +23,15 @@ player-facing documentation, clearer provenance, a better measured conformance
 story, improved runtime ship-loss audio feedback, and a release package that
 explains not just what changed, but why the team believes it.
 
+Retrospective versioning note:
+
+- this production push remained in the public `1.3.0` family
+- going forward, a production bundle with this much game-quality improvement,
+  conformance lift, and ingestion/release-surface optimization should normally
+  ship as at least a new `PATCH` release
+- same-version production reuse should be reserved for production-failure
+  repair rather than treated as the normal way to carry substantial value
+
 ## What Players And Reviewers Get
 
 - A production line that is better documented in public, not only better
