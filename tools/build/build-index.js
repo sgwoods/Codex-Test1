@@ -62,6 +62,7 @@ const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-au
 const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
+const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
@@ -1577,6 +1578,25 @@ function applicationGuideStyles(){
     .waveformStrip .catalogMediaImg{
       max-height:86px;
     }
+    .distributionChartWrap{
+      margin:0 0 16px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(6,15,24,0.66);
+      overflow:auto;
+    }
+    .distributionChart{
+      display:block;
+      width:100%;
+      min-width:0;
+      height:auto;
+    }
+    .personaReadout{
+      margin-top:16px;
+    }
+    .personaReadout .bulletList{
+      margin-top:12px;
+    }
     .previewFrame{
       position:absolute;
       width:1px;
@@ -2144,6 +2164,44 @@ function loadApplicationArtifactConformance(){
   return applicationArtifactConformanceCache;
 }
 
+function loadPersonaPerformanceDistribution(){
+  if(!fs.existsSync(PERSONA_PERFORMANCE_DISTRIBUTION)){
+    return { summaryRows: [], findings: [], runs: [] };
+  }
+  try {
+    const artifact = readJson(PERSONA_PERFORMANCE_DISTRIBUTION);
+    return Object.assign({}, artifact, {
+      summaryRows: Array.isArray(artifact.summaryRows) ? artifact.summaryRows : [],
+      findings: Array.isArray(artifact.findings) ? artifact.findings : [],
+      runs: Array.isArray(artifact.runs) ? artifact.runs : []
+    });
+  } catch (err) {
+    return { summaryRows: [], findings: [], runs: [] };
+  }
+}
+
+function pct(value, digits = 1){
+  return `${(Number(value || 0) * 100).toFixed(digits)}%`;
+}
+
+function personaStatCell(stat, suffix = ''){
+  if(!stat || !Number.isFinite(+stat.avg)) return '<span class="docMeta">pending</span>';
+  const range = Number.isFinite(+stat.min) && Number.isFinite(+stat.max)
+    ? `<span class="docMeta">range ${esc(stat.min)}-${esc(stat.max)}${esc(suffix)}</span>`
+    : '';
+  return `<strong>${esc(stat.avg)}${esc(suffix)}</strong><br><span class="docMeta">median ${esc(stat.median)}${esc(suffix)}</span>${range ? `<br>${range}` : ''}`;
+}
+
+function personaPerformanceChartHtml(artifact){
+  const chartPath = 'reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg';
+  const full = path.join(ROOT, chartPath);
+  if(!fs.existsSync(full)){
+    return '<div class="mediaPlaceholder">Persona performance line chart pending. Run <code>npm run harness:analyze:persona-performance-distribution</code> after a distribution batch.</div>';
+  }
+  const href = catalogMediaHref(chartPath);
+  return `<img class="distributionChart" src="${esc(href)}" alt="Line chart of persona score and stage reached across repeated seeded full-run games" loading="lazy">`;
+}
+
 function referenceSpriteModelMediaForKey(spriteKey){
   if(!spriteKey) return [];
   return loadGalagaReferenceSpriteModels()
@@ -2393,6 +2451,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
     { id: 'persona-catalog', title: 'Testing Personas' },
+    { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
     { id: 'graphics-controls', title: 'Presentation Controls' },
     { id: 'guide-links', title: 'Related Guides' }
   ];
@@ -2555,6 +2614,26 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.expected || '')}</td>
       <td>${esc(entry.checks || '')}</td>
     </tr>
+  `).join('\n');
+  const personaDistribution = loadPersonaPerformanceDistribution();
+  const personaDistributionRows = (personaDistribution.summaryRows || []).map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta"><code>${esc(entry.persona || '')}</code><br>${esc(entry.seedRange || '')}</span></td>
+      <td><strong>${esc(entry.runCount || 0)}</strong><br><span class="docMeta">Seeded full-run games</span></td>
+      <td>${personaStatCell(entry.score)}</td>
+      <td>${personaStatCell(entry.stageReached)}</td>
+      <td>${personaStatCell(entry.durationMin, ' min')}</td>
+      <td>${personaStatCell(entry.scorePerMinute)}</td>
+      <td>${personaStatCell(entry.shipLosses)}</td>
+      <td><strong>${esc(pct(entry.challengeHitRate?.avg || 0))}</strong><br><span class="docMeta">median ${esc(pct(entry.challengeHitRate?.median || 0))}</span></td>
+    </tr>
+  `).join('\n') || `
+    <tr>
+      <td colspan="8"><span class="docMeta">Persona distribution pending. Run <code>npm run harness:batch -- --profile distribution --repeats 30</code>, then <code>npm run harness:analyze:persona-performance-distribution</code>.</span></td>
+    </tr>
+  `;
+  const personaFindingRows = (personaDistribution.findings || []).map((finding) => `
+    <li><strong>P${esc(finding.priority || '')}: ${esc(finding.title || '')}</strong> ${esc(finding.detail || '')}</li>
   `).join('\n');
   const controlRows = (guide.graphicsControls || []).map((entry) => `
     <tr>
@@ -2857,7 +2936,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
         <section class="section" id="persona-catalog">
           <div class="sectionHeader">
             <h2>Testing Personas</h2>
-            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the harness substrate; Aurora owns what each persona should prove for its gameplay.</p>
+            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the generic persona IDs, aliases, seeded execution, and comparison substrate; Aurora owns which scenarios matter and what each persona should prove for this game.</p>
           </div>
           <div class="tableWrap">
             <table class="dataTable">
@@ -2873,6 +2952,40 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 ${personaRows}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section" id="persona-performance-distribution">
+          <div class="sectionHeader">
+            <h2>Persona Performance Distribution</h2>
+            <p>Repeated seeded full-run gameplay for the generic Platinum personas. This measures score, stage depth, time alive, losses, and challenge performance as a distribution rather than treating one seeded route as the whole truth.</p>
+          </div>
+          <div class="distributionChartWrap">
+            ${personaPerformanceChartHtml(personaDistribution)}
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Persona</th>
+                  <th>Runs</th>
+                  <th>Score</th>
+                  <th>Stage Reached</th>
+                  <th>Time Alive</th>
+                  <th>Score / Min</th>
+                  <th>Ship Losses</th>
+                  <th>Challenge Hit Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${personaDistributionRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap personaReadout">
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code>. Raw run directories stay in <code>harness-artifacts/</code>; the published docs use the promoted summary and chart.</p>
+            <p class="docMeta"><strong>Measurement limits:</strong> Seeded persona runs are not human playtest proof. They are repeatable skill-profile probes that help us find unfairness, progression order breaks, and whether higher-skill play actually unlocks more of the game.</p>
+            ${personaFindingRows ? `<ul class="bulletList">${personaFindingRows}</ul>` : '<p class="docMeta"><strong>Findings:</strong> no current distribution findings.</p>'}
           </div>
         </section>
 

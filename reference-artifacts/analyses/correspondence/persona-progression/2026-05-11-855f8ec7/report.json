@@ -1,0 +1,477 @@
+{
+  "generatedAt": "2026-05-11T23:25:13.544Z",
+  "profile": {
+    "id": "persona-progression-correspondence",
+    "title": "Persona Progression Correspondence",
+    "purpose": "Compare shipped local baseline and current candidate progression outcomes across personas while checking that more skilled personas still travel farther and perform better on challenge and full-run evidence.",
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "personas": [
+      {
+        "id": "novice",
+        "challengeSeed": 3101,
+        "fullRunSeed": 51001
+      },
+      {
+        "id": "advanced",
+        "challengeSeed": 3201,
+        "fullRunSeed": 51101
+      },
+      {
+        "id": "expert",
+        "challengeSeed": 3301,
+        "fullRunSeed": 51201
+      },
+      {
+        "id": "professional",
+        "challengeSeed": 3401,
+        "fullRunSeed": 51301
+      }
+    ],
+    "scenarios": {
+      "challenge": "stage3-challenge-persona",
+      "fullRun": "full-run-persona"
+    },
+    "tolerances": {
+      "fullRunStageDrop": 1,
+      "fullRunScoreDropRatio": 0.25,
+      "challengeHitRateDrop": 0.15,
+      "challengeLossIncrease": 1
+    }
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "baseline": {
+    "novice": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-novice-seed3101-2026-05-11T23-19-23-667Z-26100-f644zj/neo-galaga-session-ngt-1778541579982-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-novice-seed3101-2026-05-11T23-19-23-667Z-26100-f644zj/neo-galaga-session-ngt-1778541579982-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-novice-seed51001-2026-05-11T23-19-42-115Z-26248-ktjbx0/neo-galaga-session-ngt-1778541592476-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-novice-seed51001-2026-05-11T23-19-42-115Z-26248-ktjbx0/neo-galaga-session-ngt-1778541592476-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 1,
+        "lives": 2,
+        "shipLost": 1,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 0,
+        "challengeDuration": null,
+        "challengeCleared": false
+      },
+      "fullRun": {
+        "endingStage": 5,
+        "score": 19200,
+        "lives": 0,
+        "shipLost": 3,
+        "stageClears": 3,
+        "challengeClears": 1,
+        "duration": 112.133,
+        "started": false
+      }
+    },
+    "advanced": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-advanced-seed3201-2026-05-11T23-20-52-805Z-26792-8bpn4b/neo-galaga-session-ngt-1778541670867-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-advanced-seed3201-2026-05-11T23-20-52-805Z-26792-8bpn4b/neo-galaga-session-ngt-1778541670867-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-advanced-seed51101-2026-05-11T23-21-14-003Z-26996-nmwxdx/neo-galaga-session-ngt-1778541690302-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-advanced-seed51101-2026-05-11T23-21-14-003Z-26996-nmwxdx/neo-galaga-session-ngt-1778541690302-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 1,
+        "lives": 1,
+        "shipLost": 2,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 0,
+        "challengeDuration": null,
+        "challengeCleared": false
+      },
+      "fullRun": {
+        "endingStage": 6,
+        "score": 22150,
+        "lives": 0,
+        "shipLost": 4,
+        "stageClears": 4,
+        "challengeClears": 1,
+        "duration": 125.283,
+        "started": false
+      }
+    },
+    "expert": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-expert-seed3301-2026-05-11T23-22-31-225Z-27633-bqcxhg/neo-galaga-session-ngt-1778541763134-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-expert-seed3301-2026-05-11T23-22-31-225Z-27633-bqcxhg/neo-galaga-session-ngt-1778541763134-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-expert-seed51201-2026-05-11T23-22-45-876Z-27788-ssi7dv/neo-galaga-session-ngt-1778541783289-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-expert-seed51201-2026-05-11T23-22-45-876Z-27788-ssi7dv/neo-galaga-session-ngt-1778541783289-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 1,
+        "lives": 2,
+        "shipLost": 1,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 0,
+        "challengeDuration": null,
+        "challengeCleared": false
+      },
+      "fullRun": {
+        "endingStage": 6,
+        "score": 27200,
+        "lives": 0,
+        "shipLost": 4,
+        "stageClears": 4,
+        "challengeClears": 1,
+        "duration": 137.65,
+        "started": false
+      }
+    },
+    "professional": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-professional-seed3401-2026-05-11T23-23-45-294Z-28340-dmt77l/neo-galaga-session-ngt-1778541840746-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-professional-seed3401-2026-05-11T23-23-45-294Z-28340-dmt77l/neo-galaga-session-ngt-1778541840746-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-professional-seed51301-2026-05-11T23-24-02-810Z-28492-u4qpps/neo-galaga-session-ngt-1778541853696-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-professional-seed51301-2026-05-11T23-24-02-810Z-28492-u4qpps/neo-galaga-session-ngt-1778541853696-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 1,
+        "lives": 3,
+        "shipLost": 0,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 0,
+        "challengeDuration": null,
+        "challengeCleared": false
+      },
+      "fullRun": {
+        "endingStage": 5,
+        "score": 34000,
+        "lives": 0,
+        "shipLost": 3,
+        "stageClears": 3,
+        "challengeClears": 1,
+        "duration": 102.5,
+        "started": false
+      }
+    }
+  },
+  "current": {
+    "novice": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-novice-seed3101-2026-05-11T23-20-10-367Z-26423-eijiip/neo-galaga-session-ngt-1778541622054-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-novice-seed3101-2026-05-11T23-20-10-367Z-26423-eijiip/neo-galaga-session-ngt-1778541622054-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-novice-seed51001-2026-05-11T23-20-23-642Z-26587-bakepo/neo-galaga-session-ngt-1778541634842-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-novice-seed51001-2026-05-11T23-20-23-642Z-26587-bakepo/neo-galaga-session-ngt-1778541634842-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 4,
+        "lives": 2,
+        "shipLost": 1,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 0.85,
+        "challengeDuration": 12.833,
+        "challengeCleared": true
+      },
+      "fullRun": {
+        "endingStage": 4,
+        "score": 16300,
+        "lives": 0,
+        "shipLost": 3,
+        "stageClears": 2,
+        "challengeClears": 1,
+        "duration": 88.383,
+        "started": false
+      }
+    },
+    "advanced": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-advanced-seed3201-2026-05-11T23-21-48-441Z-27194-jcne34/neo-galaga-session-ngt-1778541721242-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-advanced-seed3201-2026-05-11T23-21-48-441Z-27194-jcne34/neo-galaga-session-ngt-1778541721242-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-advanced-seed51101-2026-05-11T23-22-03-231Z-27365-7fz2yl/neo-galaga-session-ngt-1778541734025-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-advanced-seed51101-2026-05-11T23-22-03-231Z-27365-7fz2yl/neo-galaga-session-ngt-1778541734025-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 4,
+        "lives": 3,
+        "shipLost": 0,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 0.975,
+        "challengeDuration": 12.4,
+        "challengeCleared": true
+      },
+      "fullRun": {
+        "endingStage": 4,
+        "score": 18200,
+        "lives": 0,
+        "shipLost": 3,
+        "stageClears": 2,
+        "challengeClears": 1,
+        "duration": 87.2,
+        "started": false
+      }
+    },
+    "expert": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-expert-seed3301-2026-05-11T23-23-20-656Z-28018-cqy1iu/neo-galaga-session-ngt-1778541811265-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-expert-seed3301-2026-05-11T23-23-20-656Z-28018-cqy1iu/neo-galaga-session-ngt-1778541811265-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-expert-seed51201-2026-05-11T23-23-33-662Z-28171-t6vrtr/neo-galaga-session-ngt-1778541822691-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-expert-seed51201-2026-05-11T23-23-33-662Z-28171-t6vrtr/neo-galaga-session-ngt-1778541822691-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 4,
+        "lives": 3,
+        "shipLost": 1,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 1,
+        "challengeDuration": 11.7,
+        "challengeCleared": true
+      },
+      "fullRun": {
+        "endingStage": 13,
+        "score": 88940,
+        "lives": 2,
+        "shipLost": 2,
+        "stageClears": 9,
+        "challengeClears": 3,
+        "duration": 239.85,
+        "started": true
+      }
+    },
+    "professional": {
+      "files": {
+        "challenge": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-professional-seed3401-2026-05-11T23-24-30-673Z-28653-3jbaq3/neo-galaga-session-ngt-1778541883226-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/stage3-challenge-persona-professional-seed3401-2026-05-11T23-24-30-673Z-28653-3jbaq3/neo-galaga-session-ngt-1778541883226-3-system-status.json"
+        ],
+        "fullRun": [
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-professional-seed51301-2026-05-11T23-24-45-297Z-28811-9io9pt/neo-galaga-session-ngt-1778541896559-3.json",
+          "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/persona-progression/full-run-persona-professional-seed51301-2026-05-11T23-24-45-297Z-28811-9io9pt/neo-galaga-session-ngt-1778541896559-3-system-status.json"
+        ]
+      },
+      "challenge": {
+        "endingStage": 4,
+        "lives": 4,
+        "shipLost": 0,
+        "challengeShipLosses": 0,
+        "challengeHitRate": 1,
+        "challengeDuration": 11.617,
+        "challengeCleared": true
+      },
+      "fullRun": {
+        "endingStage": 6,
+        "score": 45610,
+        "lives": 0,
+        "shipLost": 4,
+        "stageClears": 4,
+        "challengeClears": 1,
+        "duration": 145.65,
+        "started": false
+      }
+    }
+  },
+  "checks": {
+    "novice": {
+      "persona": "novice",
+      "challengeCleared": {
+        "baseline": false,
+        "current": true,
+        "ok": true
+      },
+      "fullRunStage": {
+        "baseline": 5,
+        "current": 4,
+        "drift": -1,
+        "ok": true
+      },
+      "fullRunScore": {
+        "baseline": 19200,
+        "current": 16300,
+        "dropRatio": 0.151,
+        "ok": true
+      },
+      "challengeHitRate": {
+        "baseline": 0,
+        "current": 0.85,
+        "drift": 0.85,
+        "ok": true
+      },
+      "challengeLosses": {
+        "baseline": 0,
+        "current": 0,
+        "drift": 0,
+        "ok": true
+      }
+    },
+    "advanced": {
+      "persona": "advanced",
+      "challengeCleared": {
+        "baseline": false,
+        "current": true,
+        "ok": true
+      },
+      "fullRunStage": {
+        "baseline": 6,
+        "current": 4,
+        "drift": -2,
+        "ok": false
+      },
+      "fullRunScore": {
+        "baseline": 22150,
+        "current": 18200,
+        "dropRatio": 0.178,
+        "ok": true
+      },
+      "challengeHitRate": {
+        "baseline": 0,
+        "current": 0.975,
+        "drift": 0.975,
+        "ok": true
+      },
+      "challengeLosses": {
+        "baseline": 0,
+        "current": 0,
+        "drift": 0,
+        "ok": true
+      }
+    },
+    "expert": {
+      "persona": "expert",
+      "challengeCleared": {
+        "baseline": false,
+        "current": true,
+        "ok": true
+      },
+      "fullRunStage": {
+        "baseline": 6,
+        "current": 13,
+        "drift": 7,
+        "ok": true
+      },
+      "fullRunScore": {
+        "baseline": 27200,
+        "current": 88940,
+        "dropRatio": -2.27,
+        "ok": true
+      },
+      "challengeHitRate": {
+        "baseline": 0,
+        "current": 1,
+        "drift": 1,
+        "ok": true
+      },
+      "challengeLosses": {
+        "baseline": 0,
+        "current": 0,
+        "drift": 0,
+        "ok": true
+      }
+    },
+    "professional": {
+      "persona": "professional",
+      "challengeCleared": {
+        "baseline": false,
+        "current": true,
+        "ok": true
+      },
+      "fullRunStage": {
+        "baseline": 5,
+        "current": 6,
+        "drift": 1,
+        "ok": true
+      },
+      "fullRunScore": {
+        "baseline": 34000,
+        "current": 45610,
+        "dropRatio": -0.341,
+        "ok": true
+      },
+      "challengeHitRate": {
+        "baseline": 0,
+        "current": 1,
+        "drift": 1,
+        "ok": true
+      },
+      "challengeLosses": {
+        "baseline": 0,
+        "current": 0,
+        "drift": 0,
+        "ok": true
+      }
+    }
+  },
+  "progression": {
+    "baseline": [
+      {
+        "pair": "novice -> advanced",
+        "fullRunStage": true,
+        "fullRunScore": true,
+        "challengeHitRate": true
+      },
+      {
+        "pair": "advanced -> expert",
+        "fullRunStage": true,
+        "fullRunScore": true,
+        "challengeHitRate": true
+      },
+      {
+        "pair": "expert -> professional",
+        "fullRunStage": false,
+        "fullRunScore": true,
+        "challengeHitRate": true
+      }
+    ],
+    "current": [
+      {
+        "pair": "novice -> advanced",
+        "fullRunStage": true,
+        "fullRunScore": true,
+        "challengeHitRate": true
+      },
+      {
+        "pair": "advanced -> expert",
+        "fullRunStage": true,
+        "fullRunScore": true,
+        "challengeHitRate": true
+      },
+      {
+        "pair": "expert -> professional",
+        "fullRunStage": false,
+        "fullRunScore": false,
+        "challengeHitRate": true
+      }
+    ]
+  },
+  "summary": {
+    "passedPersonaChecks": 19,
+    "totalPersonaChecks": 20,
+    "baselineProgressionOrderPreserved": false,
+    "currentProgressionOrderPreserved": false
+  },
+  "status": "complete"
+}

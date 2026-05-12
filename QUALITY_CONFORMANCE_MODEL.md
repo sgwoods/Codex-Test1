@@ -104,10 +104,12 @@ Each category scores from `1` to `10`.
 8. `Progression and persona depth`
    - Evidence:
      - `reference-artifacts/analyses/correspondence/persona-progression/*/report.json`
+     - `reference-artifacts/analyses/persona-performance-distribution/latest.json`
    - Focus:
      - per-persona guardrails
      - ordering of the persona ladder
      - whether higher-skill personas still show deeper / stronger runs
+     - score, stage, time-alive, loss, and challenge-hit distributions over repeated seeded runs
 
 9. `Boss entry and formation grammar`
    - Evidence:

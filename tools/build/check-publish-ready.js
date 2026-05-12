@@ -99,7 +99,9 @@ const USER_VISIBLE_SECTIONS = [
       'Alien Conformance Index',
       'Audio Conformance Index',
       'Stage Conformance Summary',
-      'Testing Personas'
+      'Testing Personas',
+      'Persona Performance Distribution',
+      'persona-performance-distribution/latest.json'
     ]
   },
   {
@@ -108,7 +110,8 @@ const USER_VISIBLE_SECTIONS = [
     requiredText: [
       'Platform Persona Contract',
       'What Platinum Owns',
-      'What Each Game Owns'
+      'What Each Game Owns',
+      'Distribution Evidence'
     ]
   }
 ];
@@ -153,6 +156,11 @@ const REQUIRED_VISIBLE_ARTIFACT_FAMILIES = [
     id: 'level-arc-conformance',
     path: 'reference-artifacts/analyses/level-arc-conformance',
     meaning: 'long-play stage shape and encounter progression scoring'
+  },
+  {
+    id: 'persona-performance-distribution',
+    path: 'reference-artifacts/analyses/persona-performance-distribution',
+    meaning: 'persona distribution score, stage-depth, time, and challenge-hit evidence'
   },
   {
     id: 'aurora-visual-look-conformance',

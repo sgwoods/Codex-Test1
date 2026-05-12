@@ -109,6 +109,12 @@ Future docs may expose `beginner/intermediate/expert/professional` aliases in
 the dashboard while keeping the historical `novice/advanced/expert/professional`
 ids stable for harness compatibility.
 
+Distribution evidence is now promoted as a first-class persona artifact:
+`reference-artifacts/analyses/persona-performance-distribution/latest.json`.
+The current Aurora application guide renders a 30-run-per-persona score/stage
+chart and table from that artifact so one lucky or unlucky seed does not
+overstate the health of the persona ladder.
+
 ## Galaxy Guardians
 
 Galaxy Guardians is the Galaxian-style second-game preview and ingestion proof.
@@ -162,16 +168,18 @@ each persona.
 
 The platform should provide:
 
-- stable persona IDs and aliases
+- stable generic persona IDs and aliases
 - controlled seeds and deterministic clock execution
 - scenario registration and result comparison
 - dashboard display of persona outcomes
+- distribution tables and charts across repeated seeded runs
 - cross-game resource/economics accounting for persona runs
 
 Each game should provide:
 
 - which scenarios matter for each persona
 - what success, failure, score, stage depth, and confidence mean
+- how the generic personas map to that game's controls, threats, and scoring
 - which behaviors are allowed to differ from the reference game
 - which persona outcomes block a release gate
 

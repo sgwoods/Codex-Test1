@@ -473,6 +473,8 @@ Typical current examples include:
 - `node tools/harness/check-framed-popout-bounds.js`
 - `node tools/harness/check-dock-button-actions.js`
 - `node tools/harness/check-persona-repeatability.js`
+- `npm run harness:check:persona-performance-distribution` when persona
+  distribution evidence is part of the release story
 - `node tools/harness/check-front-door-copy-surface.js`
 - `node tools/harness/check-runtime-loop-crash-capture.js`
 - `node tools/harness/check-late-run-ship-loss-soak.js` for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions

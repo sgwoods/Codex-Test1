@@ -14,7 +14,9 @@ Authority posture: MacBook may prepare, commit, push, merge, and publish hosted
 beta stable on the shipped `1.3.0` family while using hosted `/dev` to review a
 coherent conformance bundle: refreshed dashboards and public docs, conformance
 economics, application artifact scoring, runtime sprite-capture scoring, and a
-measured audio/event-feedback lift.
+measured audio/event-feedback lift. The latest documentation pass also adds
+persona distribution evidence so gameplay evaluation is explained with repeated
+seeded runs rather than a single representative playthrough.
 
 This is not a production promotion. It is the package to review before asking
 the release-authority machine to publish the next hosted `/beta` candidate.
@@ -68,6 +70,9 @@ truthfulness of the project.
   aliens: sprites, sprite motion planning, audio cues, audio alignment,
   backgrounds, frame/popups/icons, fonts/text, level shape, and boss/formation
   choreography.
+- Persona performance distribution promotes 30 seeded full-run games per
+  generic Platinum persona into a maintained summary and chart covering score,
+  stage reached, time alive, losses, and challenge hit rate.
 - Conformance economics tracks local CPU/browser spend, GPU-equivalent
   Codex/OpenAI/API effort, artifact growth, and cost-per-score movement.
 
@@ -103,6 +108,8 @@ Documentation suggestions carried forward:
   scorer is visibly different from a gameplay regression.
 - Add more drill-down from the public project page into game-specific alien,
   audio, stage, persona, sprite, and artifact-conformance tables.
+- Keep persona evidence generic at the Platinum level, with each game mapping
+  those personas into its own controller, scenarios, and release blockers.
 - Add direct beta handoff checklists to make authority-gated release movement
   easier to verify from any machine.
 

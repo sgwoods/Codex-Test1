@@ -315,6 +315,10 @@ Platinum should eventually support more than passive replay personas.
 
 Desired outcome:
 
+- personas are generic platform-level skill profiles that can play multiple
+  games through game-owned adapters and scenario definitions
+- repeated seeded persona runs produce distribution evidence for score, stage
+  depth, time alive, losses, and challenge/reward performance
 - game packs can expose enough action/state annotation for richer personas
 - a player can compete against curated persona styles as a `Player 2`-like
   experience

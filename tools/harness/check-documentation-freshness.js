@@ -7,9 +7,11 @@ const APP_GUIDE = path.join(ROOT, 'application-guide.json');
 const AURORA_PACK = path.join(ROOT, 'src', 'js', '13-aurora-game-pack.js');
 const GAME_CATALOG = path.join(ROOT, 'GAME_CONFORMANCE_CATALOG.md');
 const DASHBOARD = path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json');
+const PERSONA_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const DOCUMENTATION_PROVENANCE = path.join(ROOT, 'documentation-provenance.json');
 const PUBLIC_TEMPLATE = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
 const PROJECT_GUIDE_DIST = path.join(ROOT, 'dist', 'dev', 'project-guide.html');
+const APPLICATION_GUIDE_DIST = path.join(ROOT, 'dist', 'dev', 'application-guide.html');
 const DIST_PUBLIC_PAGE = path.join(ROOT, 'dist', 'dev', 'public-project-page.html');
 const LOCAL_PUBLIC_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
 
@@ -126,9 +128,28 @@ const guide = readJson(APP_GUIDE);
 const source = read(AURORA_PACK);
 const catalog = read(GAME_CATALOG);
 const dashboard = readJson(DASHBOARD);
+const personaDistribution = readJson(PERSONA_DISTRIBUTION);
 const provenance = readJson(DOCUMENTATION_PROVENANCE);
 
 assertDocumentationProvenance(provenance);
+
+if(personaDistribution?.artifactType !== 'persona-performance-distribution'){
+  fail('Persona performance distribution artifact has the wrong artifactType.', {
+    expected: 'persona-performance-distribution',
+    actual: personaDistribution?.artifactType || null
+  });
+}
+const personaRows = Array.isArray(personaDistribution.summaryRows) ? personaDistribution.summaryRows : [];
+const underSampledPersonas = personaRows
+  .filter(row => ['novice', 'advanced', 'expert', 'professional'].includes(row.persona))
+  .filter(row => (+row.runCount || 0) < 30)
+  .map(row => ({ persona: row.persona, runCount: row.runCount }));
+if(personaRows.length < 4 || underSampledPersonas.length){
+  fail('Persona performance distribution is missing the 30-run generic persona evidence required by the current docs.', {
+    personaRows: personaRows.length,
+    underSampledPersonas
+  });
+}
 
 const publicTemplate = read(PUBLIC_TEMPLATE);
 if(!publicTemplate.includes('{{PUBLIC_DOCUMENTATION_PROVENANCE}}') || !publicTemplate.includes('id="documentation-provenance"')){
@@ -217,10 +238,28 @@ if(fs.existsSync(PROJECT_GUIDE_DIST)){
   }
 }
 
+if(fs.existsSync(APPLICATION_GUIDE_DIST)){
+  const appHtml = read(APPLICATION_GUIDE_DIST);
+  const requiredApplicationText = [
+    'Persona Performance Distribution',
+    'persona-performance-distribution/latest.json',
+    'Seeded full-run games',
+    'Challenge Hit Rate'
+  ];
+  const missingApplicationText = requiredApplicationText.filter(text => !appHtml.includes(text));
+  if(missingApplicationText.length){
+    fail('Application guide is missing generated persona performance distribution content.', {
+      missingApplicationText,
+      expectedAction: 'Run npm run build after refreshing reference-artifacts/analyses/persona-performance-distribution/latest.json.'
+    });
+  }
+}
+
 console.log(JSON.stringify({
   ok: true,
   checkedAudioEvents: CHECKED_AUDIO_EVENTS.length,
   audioCurrent,
+  personaRuns: personaDistribution.runCount || 0,
   provenanceSurfaces: provenance.surfaces.length,
   catalog: path.relative(ROOT, GAME_CATALOG),
   applicationGuide: path.relative(ROOT, APP_GUIDE),

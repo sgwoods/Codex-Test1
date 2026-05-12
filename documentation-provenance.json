@@ -68,7 +68,8 @@
             "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
             "GAME_CONFORMANCE_CATALOG.md",
             "application-guide.json",
-            "reference-artifacts/analyses/application-artifact-conformance/latest.json"
+            "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+            "reference-artifacts/analyses/persona-performance-distribution/latest.json"
           ],
           "currentness": "Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.",
           "riskIfStale": "Game-specific conformance can collapse into a generic platform summary."
@@ -133,10 +134,11 @@
           "sourceArtifacts": [
             "reference-artifacts/analyses/application-artifact-conformance/latest.json",
             "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
-            "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json"
+            "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+            "reference-artifacts/analyses/persona-performance-distribution/latest.json"
           ],
-          "currentness": "The artifact scorecard is generated from analysis outputs rather than a single static sprite claim.",
-          "riskIfStale": "Sprite/audio/visual claims can look precise while no longer matching the latest harness artifacts."
+          "currentness": "The artifact scorecard and persona performance distribution are generated from analysis outputs rather than single static claims.",
+          "riskIfStale": "Sprite/audio/visual/persona claims can look precise while no longer matching the latest harness artifacts."
         }
       ]
     },

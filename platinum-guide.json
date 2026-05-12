@@ -75,15 +75,19 @@
       "cards": [
         {
           "title": "What Platinum Owns",
-          "body": "Platinum owns stable persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, and cross-game resource accounting for persona runs."
+          "body": "Platinum owns stable generic persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, distribution reporting, and cross-game resource accounting for persona runs."
         },
         {
           "title": "What Each Game Owns",
-          "body": "Each game owns which scenarios matter for each persona, what success or failure means, which behaviors intentionally differ from the reference game, and which persona outcomes block release gates."
+          "body": "Each game maps the generic personas into game-specific controllers, scenarios, expected outcomes, acceptable reference deviations, and release-blocking persona evidence."
         },
         {
           "title": "Current Vocabulary",
-          "body": "The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora's historical harness IDs are novice, advanced, expert, and professional."
+          "body": "The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora's historical harness IDs are novice, advanced, expert, and professional; future games should keep the generic labels while providing game-owned behavior adapters."
+        },
+        {
+          "title": "Distribution Evidence",
+          "body": "Persona evidence should be read as distributions over seeded runs. The current Aurora guide publishes 30 full-run games per persona with score, stage, time, losses, and challenge-hit charts."
         }
       ]
     },
