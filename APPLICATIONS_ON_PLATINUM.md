@@ -34,7 +34,8 @@ Aurora should remain the reference application when we ask:
 ### Galaxy Guardians
 
 `Galaxy Guardians` is currently a preview-first second-game application and
-sneak peek.
+sneak peek on the shipped line, while the active post-production iMac branch
+now targets it as a minimally complete one-level playable game.
 
 Right now it proves:
 
@@ -68,6 +69,13 @@ It does not yet prove:
 - release-ready public playability
 
 That is intentional.
+
+Current branch-level next step:
+
+- [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
+- own scores and pilot/replay identity
+- proper one-level completion and game-over endings
+- enough completeness to validate Platinum changes against two real games
 
 ## Application Responsibilities
 
@@ -250,9 +258,10 @@ Near-term Aurora application work should now focus on:
 
 ### Galaxy Guardians next proof
 
-The current sneak peek is intentionally still production-non-playable. It
-should be used to keep the Platinum pack contract honest while the second game
-is still being specified.
+The current shipped sneak peek is intentionally still production-framed as a
+preview. On the new iMac post-production branch, the next proof is no longer
+"keep it preview-only." The next proof is to make it honestly playable as a
+minimal one-level game while still keeping the public maturity claim modest.
 
 The first non-production runtime slice is now underway as an application-owned
 model, not a public adapter. It creates a Galaxian-inspired scout-wave rack,
@@ -278,12 +287,19 @@ signal palette. The renderer is now registered through a Platinum game-board
 renderer registry, so the top-level render loop no longer branches on a
 specific game by name.
 
-The next application proof is maturing the first non-production playable slice.
-It now has the initial lifecycle path, but the behavior is still intentionally
-kept out of production until the measured 0.1 scout-wave evidence is stronger.
-The first aggregate 0.1 candidate gate is now source-controlled so future
-preview readiness claims can cite one durable artifact instead of reassembling
-the visual, audio, movement, threat, and boundary evidence from memory.
+The next application proof is maturing the first playable slice into a
+minimally complete game loop. That means the existing lifecycle path should now
+grow beyond preview-only framing and earn:
+
+- own score identity
+- proper completion ending
+- proper loss ending
+- clean restart and result behavior
+- platform validation value as a second real game
+
+The first aggregate 0.1 candidate gate is already source-controlled, so future
+playable claims can cite one durable artifact instead of reassembling the
+visual, audio, movement, threat, and boundary evidence from memory.
 
 - formation rack
 - dives

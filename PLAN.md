@@ -111,7 +111,9 @@ resource economics fit together.
 
 ### 7. Second-Application Proof
 
-- keep `Galaxy Guardians` preview-only until a minimal playable slice is real
+- promote `Galaxy Guardians` from preview-only framing into a minimally
+  complete one-level playable game on the dedicated post-production branch
+  [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work
@@ -139,10 +141,12 @@ resource economics fit together.
    needs a measurable lift
 5. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-6. prioritize level-by-level arcade depth as the next major product pillar
-7. make shared gameplay-video publishing an early evidence/product capability
-8. continue narrow trust fixes from the open issue stream
-9. execute the measured Galaga long-cycle quality plan in
+6. use the new Guardians playable branch to force score, replay, result, and
+   platform validation across two games rather than one
+7. prioritize level-by-level arcade depth as the next major product pillar
+8. make shared gameplay-video publishing an early evidence/product capability
+9. continue narrow trust fixes from the open issue stream
+10. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
 

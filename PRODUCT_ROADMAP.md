@@ -93,6 +93,9 @@ That pickup should focus on:
 - level-by-level expansion planning
 - challenging-stage and later-level depth
 - shared-video evidence and publishing foundations
+- the branch-level `Galaxy Guardians` cleanup that turns the current preview
+  slice into a minimally complete one-level playable game with its own scores,
+  endings, and platform-validation value
 - incorporate the other machine's Galaxians-style sibling work and stronger
   harness/reference analysis into the main line deliberately
 
@@ -121,6 +124,8 @@ Current decision:
 - make shared gameplay-video publishing an early roadmap capability
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release
+- use the first post-`1.3.0` iMac branch to make that second game genuinely
+  playable enough to validate platform changes against two games
 
 ### Pick Up After `1.3.0`
 
