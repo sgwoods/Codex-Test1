@@ -13,7 +13,9 @@
       "id": "platinum-release",
       "title": "1.2.0 Platinum Release 1",
       "status": "done",
-      "summary": "Aurora now ships as the first playable application on Platinum, with hosted `/dev`, hosted `/beta`, and hosted `/production` established as distinct lanes."
+      "summary": "Aurora now ships as the first playable application on Platinum, with hosted `/dev`, hosted `/beta`, and hosted `/production` established as distinct lanes.",
+      "releaseNoteVersion": "1.2.0",
+      "releaseNoteDate": "2026-04-07"
     },
     {
       "id": "docs-hardening",
@@ -25,31 +27,41 @@
       "id": "trust-fixes",
       "title": "1.2.1 Aurora Trust Fixes",
       "status": "done",
-      "summary": "The 1.2.1 patch shipped the dual-fighter survivor fix, challenge-stage bonus-stage numbering, game-over carry suppression, expanded carry-state coverage, and a clearer platform/application front-door copy boundary."
+      "summary": "The 1.2.1 patch shipped the dual-fighter survivor fix, challenge-stage bonus-stage numbering, game-over carry suppression, expanded carry-state coverage, and a clearer platform/application front-door copy boundary.",
+      "releaseNoteVersion": "1.2.1",
+      "releaseNoteDate": "2026-04-07"
     },
     {
       "id": "runtime-hardening",
       "title": "1.2.2 Runtime Hardening",
       "status": "done",
-      "summary": "The 1.2.2 patch shipped runtime-loop hardening, restart-time async score-submit safety, a late-run ship-loss soak gate in the release process, and Aurora-scoped configurable bonus-ship awards."
+      "summary": "The 1.2.2 patch shipped runtime-loop hardening, restart-time async score-submit safety, a late-run ship-loss soak gate in the release process, and Aurora-scoped configurable bonus-ship awards.",
+      "releaseNoteVersion": "1.2.2",
+      "releaseNoteDate": "2026-04-09"
     },
     {
       "id": "aurora-moment-polish",
       "title": "1.2.3 Aurora Score-Surface Polish",
       "status": "done",
-      "summary": "The 1.2.3 patch shipped clearer wait-mode score rotation, leaderboard trust context, and lightweight score filtering without changing Platinum shell ownership or broad gameplay rules."
+      "summary": "The 1.2.3 patch shipped clearer wait-mode score rotation, leaderboard trust context, and lightweight score filtering without changing Platinum shell ownership or broad gameplay rules.",
+      "releaseNoteVersion": "1.2.3",
+      "releaseNoteDate": "2026-04-09"
     },
     {
       "id": "beta-candidate-489",
       "title": "1.2.3 Beta Refresh",
       "status": "done",
-      "summary": "Hosted `/beta` now runs the `f6ba6c2` candidate line with refreshed timing, movement evidence, audio correspondence, production-ready defaults, and committed quality artifacts."
+      "summary": "Hosted `/beta` now runs the `f6ba6c2` candidate line with refreshed timing, movement evidence, audio correspondence, production-ready defaults, and committed quality artifacts.",
+      "releaseNoteVersion": "1.2.3",
+      "releaseNoteDate": "2026-04-26"
     },
     {
       "id": "production-promotion",
       "title": "1.2.3 Production Refresh",
       "status": "done",
-      "summary": "Hosted `/production` now runs the `f6ba6c2` release line with refreshed beta evidence, synced public project pages, and committed release-readiness documentation."
+      "summary": "Hosted `/production` now runs the `f6ba6c2` release line with refreshed beta evidence, synced public project pages, and committed release-readiness documentation.",
+      "releaseNoteVersion": "1.2.3",
+      "releaseNoteDate": "2026-04-26"
     },
     {
       "id": "multi-machine-discipline",
@@ -61,25 +73,33 @@
       "id": "trust-pilot-refresh",
       "title": "1.2.3 Trust And Pilot-Surface Refresh",
       "status": "done",
-      "summary": "The current patch line fixes signed-in end-of-run pilot locking, recent-flight and local-score visibility, a last-life runtime freeze, and multiple dock, panel, and login-polish issues without reopening broad gameplay tuning."
+      "summary": "The current patch line fixes signed-in end-of-run pilot locking, recent-flight and local-score visibility, a last-life runtime freeze, and multiple dock, panel, and login-polish issues without reopening broad gameplay tuning.",
+      "releaseNoteVersion": "1.2.3",
+      "releaseNoteDate": "2026-04-26"
     },
     {
       "id": "fidelity-trust-reset",
       "title": "1.3.0 Fidelity And Trust",
       "status": "done",
-      "summary": "1.3.0 is now the live Platinum production family, bundling Aurora fidelity and trust work with the first public Galaxy Guardians second-cabinet preview and the first layered platform/application version contract."
+      "summary": "1.3.0 is now the live Platinum production family, bundling Aurora fidelity and trust work with the first public Galaxy Guardians second-cabinet preview and the first layered platform/application version contract.",
+      "releaseNoteVersion": "1.3.0",
+      "releaseNoteDate": "2026-05-05"
     },
     {
       "id": "hosted-dev-1301-review",
       "title": "1.3.0.1 Hosted Dev Review",
       "status": "done",
-      "summary": "Hosted /dev carried the post-production conformance review bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite capture scoring, and a measured calibrated ship-loss audio cue lift. That bundle was reviewed, accepted, and used as the authority-gated public refresh source."
+      "summary": "Hosted /dev carried the post-production conformance review bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite capture scoring, and a measured calibrated ship-loss audio cue lift. That bundle was reviewed, accepted, and used as the authority-gated public refresh source.",
+      "releaseNoteVersion": "1.3.0.1",
+      "releaseNoteDate": "2026-05-11"
     },
     {
       "id": "production-conformance-refresh",
       "title": "1.3.0 Production Conformance Refresh",
       "status": "done",
-      "summary": "The accepted 1.3.0.1 hosted-dev review bundle was promoted through hosted `/beta` into hosted `/production`, refreshing the public 1.3.0 family with current conformance docs, provenance, economics, application artifact scoring, runtime sprite scoring, and the measured ship-loss audio lift."
+      "summary": "The accepted 1.3.0.1 hosted-dev review bundle was promoted through hosted `/beta` into hosted `/production`, refreshing the public 1.3.0 family with current conformance docs, provenance, economics, application artifact scoring, runtime sprite scoring, and the measured ship-loss audio lift.",
+      "releaseNoteVersion": "1.3.0",
+      "releaseNoteDate": "2026-05-12"
     },
     {
       "id": "platform-contract",
