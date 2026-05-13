@@ -103,7 +103,13 @@ function commentatorEvent(type,payload={}){
   case 'stage_clear':
    return queueCommentatorCallout('stage_clear','STAGE CLEAR',[`Score ${formatScore(payload.score||S.score)}`],{duration:2,minGap:4.5,force:1});
   case 'watch_mode':
-   return queueCommentatorCallout('watch_mode','WATCH MODE',[payload.persona?`${payload.persona} flying now.`:'Persona pilot active.'],{duration:2.2,minGap:3,force:1});
+   return queueCommentatorCallout('watch_mode','WATCH MODE',[payload.label?`${payload.label} pilot flying now.`:'Persona pilot flying now.'],{duration:2.2,minGap:3,force:1});
+  case 'player_two_queued':
+   return queueCommentatorCallout('player_two_queued','2UP QUEUED',[`${payload.initials||'2UP'} ${payload.label||'persona'} ready.`,'Human score only.'],{duration:2.3,minGap:3,force:1});
+  case 'player_two_progress':
+   return queueCommentatorCallout('player_two_progress','2UP UPDATE',[`${payload.initials||'2UP'} ${formatScore(payload.score||0)} STG ${String(payload.stage||1).padStart(2,'0')}`,'Human score only.'],{duration:2.1,minGap:10});
+  case 'player_two_stage':
+   return queueCommentatorCallout('player_two_stage','2UP STAGE ADVANCE',[`${payload.initials||'2UP'} reached stage ${payload.stage||1}.`,'Human score only.'],{duration:2.1,minGap:8});
   default:
    return false;
  }

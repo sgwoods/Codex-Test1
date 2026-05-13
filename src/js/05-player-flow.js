@@ -43,6 +43,9 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  if(S.watchMode){
   S.alertTxt=`WATCH MODE\n${watchModePersonaLabel(S.watchPersona)} PILOT`;
   S.alertT=Math.max(S.alertT,1.8);
+  if(typeof commentatorEvent==='function')commentatorEvent('watch_mode',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona)});
+ }else if(playerTwoRun?.enabled&&typeof commentatorEvent==='function'){
+  commentatorEvent('player_two_queued',playerTwoSnapshot(playerTwoRun));
  }
  S.startCueT=0;
  if(openingTiming){
@@ -314,11 +317,13 @@ function updatePlayerTwoRival(dt){
  if(nextStage!==p2.stage){
   p2.stage=nextStage;
   if(typeof logEvent==='function')logEvent('player_two_stage_advance',playerTwoSnapshot(p2));
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_stage',playerTwoSnapshot(p2));
  }
  p2.nextLogT=Math.max(0,(+p2.nextLogT||0)-dt);
  if(!p2.nextLogT){
   p2.nextLogT=8;
   if(typeof logEvent==='function')logEvent('player_two_progress',playerTwoSnapshot(p2));
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_progress',playerTwoSnapshot(p2));
  }
 }
 function playerTwoSnapshot(state=S.playerTwo){

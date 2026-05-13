@@ -8,7 +8,7 @@ function fail(message, payload){
 }
 
 async function main(){
-  const result = await withHarnessPage({ stage: 1, ships: 3, seed: 88331 }, async ({ page }) => page.evaluate(() => {
+  const manual = await withHarnessPage({ stage: 1, ships: 3, seed: 88331 }, async ({ page }) => page.evaluate(() => {
     const harness = window.__galagaHarness__;
     const defaultState = harness.commentatorState();
     const queued = harness.queueCommentator({
@@ -44,40 +44,90 @@ async function main(){
     };
   }));
 
-  if(!result.defaultState?.enabled){
-    fail('Commentator should default on', result);
+  if(!manual.defaultState?.enabled){
+    fail('Commentator should default on', manual);
   }
-  if(!result.queued){
-    fail('enabled Commentator should accept a harness callout', result);
+  if(!manual.queued){
+    fail('enabled Commentator should accept a harness callout', manual);
   }
-  if(!/TACTICAL UPDATE/.test(result.onText) || !/Boss lane opening/.test(result.onText)){
-    fail('queued Commentator callout did not render through the message box', result);
+  if(!/TACTICAL UPDATE/.test(manual.onText) || !/Boss lane opening/.test(manual.onText)){
+    fail('queued Commentator callout did not render through the message box', manual);
   }
-  if(!result.onState?.active || !result.onState?.title){
-    fail('Commentator state should report the active callout', result);
+  if(!manual.onState?.active || !manual.onState?.title){
+    fail('Commentator state should report the active callout', manual);
   }
-  if(result.disabledState?.enabled){
-    fail('Commentator harness toggle did not disable the feature', result);
+  if(manual.disabledState?.enabled){
+    fail('Commentator harness toggle did not disable the feature', manual);
   }
-  if(result.rejected){
-    fail('disabled Commentator should reject new callouts', result);
+  if(manual.rejected){
+    fail('disabled Commentator should reject new callouts', manual);
   }
-  if(/SHOULD NOT SHOW/.test(result.offText)){
-    fail('disabled Commentator callout leaked into the message box', result);
+  if(/SHOULD NOT SHOW/.test(manual.offText)){
+    fail('disabled Commentator callout leaked into the message box', manual);
   }
-  if(!result.settingEvents.some(e => e.enabled === false)){
-    fail('Commentator setting change should be logged for production learning', result);
+  if(!manual.settingEvents.some(e => e.enabled === false)){
+    fail('Commentator setting change should be logged for production learning', manual);
   }
-  if(!result.callouts.some(e => e.key === 'harness' && /TACTICAL UPDATE/.test(e.title || ''))){
-    fail('Commentator callout event should be logged with key and title', result);
+  if(!manual.callouts.some(e => e.key === 'harness' && /TACTICAL UPDATE/.test(e.title || ''))){
+    fail('Commentator callout event should be logged with key and title', manual);
+  }
+
+  const watch = await withHarnessPage({ skipStart: true, seed: 88332 }, async ({ page }) => page.evaluate(() => {
+    const harness = window.__galagaHarness__;
+    harness.showFrontDoor();
+    harness.startWatchMode({ persona: 'professional', seed: 88332 });
+    harness.advanceFor(2.25);
+    const text = document.getElementById('msg')?.innerText || document.getElementById('msg')?.textContent || '';
+    const events = harness.recentEvents({ count: 200 });
+    return {
+      text: text.replace(/\s+/g, ' ').trim(),
+      state: harness.commentatorState(),
+      callouts: events.filter(e => e.type === 'commentator_callout')
+    };
+  }));
+
+  if(!/WATCH MODE/.test(watch.text) || !/PROFESSIONAL/.test(watch.text)){
+    fail('Watch Mode should surface a Commentator callout after the opening banner', watch);
+  }
+  if(!watch.callouts.some(e => e.key === 'watch_mode')){
+    fail('Watch Mode should log the watch_mode Commentator callout', watch);
+  }
+
+  const playerTwo = await withHarnessPage({ skipStart: true, seed: 88333 }, async ({ page }) => page.evaluate(() => {
+    const harness = window.__galagaHarness__;
+    harness.showFrontDoor();
+    harness.setupPlayerTwoModeTest({ signedIn: true, initials: 'SGW', email: 'pilot@example.com' });
+    harness.setPlayerTwoMode({ enabled: true, persona: 'expert' });
+    harness.start({ autoVideo: false, controlledClock: true, seed: 88333, playerTwo: true, playerTwoPersona: 'expert' });
+    harness.advanceFor(2.05);
+    const text = document.getElementById('msg')?.innerText || document.getElementById('msg')?.textContent || '';
+    const live = harness.state();
+    const events = harness.recentEvents({ count: 200 });
+    return {
+      text: text.replace(/\s+/g, ' ').trim(),
+      live,
+      callouts: events.filter(e => e.type === 'commentator_callout')
+    };
+  }));
+
+  if(!/2UP QUEUED/.test(playerTwo.text) || !/Human score only/.test(playerTwo.text)){
+    fail('Player Two should surface a queued-rival Commentator callout after the opening banner', playerTwo);
+  }
+  if((playerTwo.live.playerTwo?.score | 0) !== 0 || playerTwo.live.playerTwo?.activeTurn !== 'queued'){
+    fail('Player Two callout must not start persona scoring during the 1UP turn', playerTwo);
+  }
+  if(!playerTwo.callouts.some(e => e.key === 'player_two_queued')){
+    fail('Player Two queued callout should be logged', playerTwo);
   }
 
   console.log(JSON.stringify({
     ok: true,
-    defaultEnabled: result.defaultState.enabled,
-    rendered: result.onText,
-    settingEvents: result.settingEvents.length,
-    callouts: result.callouts.length
+    defaultEnabled: manual.defaultState.enabled,
+    rendered: manual.onText,
+    watchMode: watch.text,
+    playerTwo: playerTwo.text,
+    settingEvents: manual.settingEvents.length,
+    callouts: manual.callouts.length + watch.callouts.length + playerTwo.callouts.length
   }, null, 2));
 }
 
