@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const path = require('path');
 const {
   DEFAULT_SAMPLE_RATE,
@@ -96,6 +97,13 @@ function sourceMapFromCandidates(root, config){
   return Object.fromEntries((candidates.sourceEvidence?.sourceReads || []).map(source => [source.sourceId, source.localPath]));
 }
 
+function priorCueMap(root, config){
+  const artifactPath = path.join(root, config.artifactPath);
+  if(!fs.existsSync(artifactPath)) return {};
+  const artifact = readJson(artifactPath);
+  return Object.fromEntries((artifact.cues || []).map(cue => [cue.cueName, cue]));
+}
+
 function reportMarkdown(config, artifact){
   const lines = [];
   lines.push(`# ${config.gameLabel} Audio Conformance Lab`);
@@ -126,15 +134,20 @@ function main(){
   const labeled = readJson(path.join(ROOT, config.labeledCueArtifact));
   const cueTargets = readJson(path.join(ROOT, config.cueTargetArtifact)).cueTargets || {};
   const sources = sourceMapFromCandidates(ROOT, config);
+  const priorCues = priorCueMap(ROOT, config);
   const outputDir = path.join(ROOT, config.artifactDir);
   const cues = [];
+  let referenceFallbackCueCount = 0;
 
   for(const cueName of config.runtimeCueNames){
     const targetWindow = (labeled.promotedCueWindows || []).find(cue => cue.cueName === cueName);
     const runtimeCue = theme.cues?.[cueName];
     if(!targetWindow || !runtimeCue) fail(`Missing audio lab cue ${cueName}`, { hasTarget: !!targetWindow, hasRuntimeCue: !!runtimeCue });
     const sourcePath = sources[targetWindow.sourceId];
-    if(!sourcePath) fail(`Missing source map entry for ${cueName}`, { sourceId: targetWindow.sourceId });
+    const priorCue = priorCues[cueName] || null;
+    if(!sourcePath && !priorCue?.reference?.pcm){
+      fail(`Missing source map entry for ${cueName}`, { sourceId: targetWindow.sourceId });
+    }
 
     const runtimeSamples = renderCueSamples(runtimeCue, { sampleRate: DEFAULT_SAMPLE_RATE });
     const runtimePcm = samplesToS16le(runtimeSamples);
@@ -147,19 +160,44 @@ function main(){
       spectrogram: runtimeSpectrogram
     });
 
-    const referencePcm = extractPcmFromVideo(sourcePath, targetWindow.absoluteStartSeconds, targetWindow.measuredDurationSeconds || targetWindow.durationSeconds, DEFAULT_SAMPLE_RATE);
     const referenceWaveform = path.join(outputDir, `${cueName}-reference-waveform.png`);
     const referenceSpectrogram = path.join(outputDir, `${cueName}-reference-spectrogram.png`);
-    renderAudioPreviewFromPcm({
-      pcm: referencePcm,
-      sampleRate: DEFAULT_SAMPLE_RATE,
-      waveform: referenceWaveform,
-      spectrogram: referenceSpectrogram
-    });
-
     const runtimeStatic = cueStaticMetrics(runtimeCue);
     const runtimePcmMetrics = analyzeSamples(runtimeSamples, DEFAULT_SAMPLE_RATE);
-    const referenceMetrics = analyzeSamples(bufferToSamples(referencePcm), DEFAULT_SAMPLE_RATE);
+    let referenceMetrics = null;
+    let referenceWaveformRel = '';
+    let referenceSpectrogramRel = '';
+    let referenceDurationSeconds = targetWindow.measuredDurationSeconds || targetWindow.durationSeconds;
+    let referenceSourceMode = 'live-video-window';
+    if(sourcePath && fs.existsSync(sourcePath)){
+      const referencePcm = extractPcmFromVideo(sourcePath, targetWindow.absoluteStartSeconds, targetWindow.measuredDurationSeconds || targetWindow.durationSeconds, DEFAULT_SAMPLE_RATE);
+      renderAudioPreviewFromPcm({
+        pcm: referencePcm,
+        sampleRate: DEFAULT_SAMPLE_RATE,
+        waveform: referenceWaveform,
+        spectrogram: referenceSpectrogram
+      });
+      referenceMetrics = analyzeSamples(bufferToSamples(referencePcm), DEFAULT_SAMPLE_RATE);
+      referenceWaveformRel = rel(ROOT, referenceWaveform);
+      referenceSpectrogramRel = rel(ROOT, referenceSpectrogram);
+    } else if(priorCue?.reference?.pcm) {
+      const priorWaveform = priorCue.reference.waveform;
+      const priorSpectrogram = priorCue.reference.spectrogram;
+      if(!priorWaveform || !priorSpectrogram){
+        fail(`Missing prior reference previews for ${cueName}`, { cueName, sourcePath, priorCue });
+      }
+      if(!fs.existsSync(path.join(ROOT, priorWaveform)) || !fs.existsSync(path.join(ROOT, priorSpectrogram))){
+        fail(`Missing prior reference preview files for ${cueName}`, { cueName, priorWaveform, priorSpectrogram });
+      }
+      referenceFallbackCueCount++;
+      referenceMetrics = priorCue.reference.pcm;
+      referenceWaveformRel = priorWaveform;
+      referenceSpectrogramRel = priorSpectrogram;
+      referenceDurationSeconds = priorCue.reference.durationSeconds || referenceDurationSeconds;
+      referenceSourceMode = 'existing-reference-fallback';
+    } else {
+      fail(`Missing live source and reusable prior reference for ${cueName}`, { cueName, sourcePath, sourceId: targetWindow.sourceId });
+    }
     const score = scoreCue({
       runtimeStatic,
       runtimePcmMetrics,
@@ -176,9 +214,10 @@ function main(){
       recommendation: recommendation(cueName, runtimeStatic, runtimePcmMetrics, referenceMetrics, cueTargets[cueName] || {}, score),
       reference: {
         startSeconds: targetWindow.absoluteStartSeconds,
-        durationSeconds: targetWindow.measuredDurationSeconds || targetWindow.durationSeconds,
-        waveform: rel(ROOT, referenceWaveform),
-        spectrogram: rel(ROOT, referenceSpectrogram),
+        durationSeconds: referenceDurationSeconds,
+        sourceMode: referenceSourceMode,
+        waveform: referenceWaveformRel,
+        spectrogram: referenceSpectrogramRel,
         pcm: referenceMetrics
       },
       runtime: {
@@ -204,7 +243,8 @@ function main(){
       cueTargetArtifact: config.cueTargetArtifact,
       cueCandidateArtifact: config.cueCandidateArtifact,
       sampleRateHz: DEFAULT_SAMPLE_RATE,
-      note: 'The lab stores JSON metrics and waveform/spectrogram PNG previews. It does not commit raw reference audio snippets.'
+      referenceSourceMode: referenceFallbackCueCount ? 'mixed-live-source-and-committed-reference-fallback' : 'live-source-window-extraction',
+      note: 'The lab stores JSON metrics and waveform/spectrogram PNG previews. It does not commit raw reference audio snippets, and it can reuse committed reference metrics when the original local source videos are unavailable on the current machine.'
     },
     summary: {
       cueCount: cues.length,
@@ -212,6 +252,7 @@ function main(){
       compellingPreviewTarget10: config.scoring.compellingPreviewTarget10,
       weakestCue: cues.slice().sort((a, b) => a.score10 - b.score10)[0]?.cueName || '',
       strongestCue: cues.slice().sort((a, b) => b.score10 - a.score10)[0]?.cueName || '',
+      referenceFallbackCueCount,
       reusablePlatformRead: 'This lab is game-configured and can be registered for Aurora or future Platinum game packs.'
     },
     cues,

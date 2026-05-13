@@ -54,6 +54,8 @@ function closeness(value, target, tolerance){
 function loadRuntime(){
   const sandbox = { console };
   sandbox.window = sandbox;
+  sandbox.buildPlatformInfo = () => ({ compatibility: '' });
+  sandbox.applicationReleaseRecord = (_gameKey, fallback = {}) => Object.assign({}, fallback || {});
   vm.createContext(sandbox);
   for(const file of [PACK_SOURCE, ADAPTER_SOURCE, RUNTIME_SOURCE]){
     vm.runInContext(fs.readFileSync(file, 'utf8'), sandbox, { filename: file });

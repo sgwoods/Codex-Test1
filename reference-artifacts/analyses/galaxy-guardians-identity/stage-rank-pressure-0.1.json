@@ -20,13 +20,13 @@
   "stageOneMustPreserve": {
     "firstScoutDiveDelay": 2.55,
     "flagshipEscortDelay": 6.65,
-    "scoutDiveIntervalBase": 1.6,
-    "firstEnemyShotDelay": 4.1,
-    "enemyShotIntervalBase": 1.25,
+    "scoutDiveIntervalBase": 1.52,
+    "firstEnemyShotDelay": 3.85,
+    "enemyShotIntervalBase": 1.15,
     "enemyShotMaxLive": 3,
     "enemyShotVy": 108,
-    "diveBaseVy": 36,
-    "diveAccel": 6.2,
+    "diveBaseVy": 32,
+    "diveAccel": 5.4,
     "formationDriftHz": 1.15
   },
   "stageThreeTargets": {
@@ -35,16 +35,16 @@
       2.36
     ],
     "scoutDiveIntervalBaseBandSeconds": [
-      1.35,
-      1.38
+      1.29,
+      1.3
     ],
     "firstEnemyShotDelayBandSeconds": [
-      3.11,
-      3.12
+      2.92,
+      2.93
     ],
     "enemyShotIntervalBaseBandSeconds": [
-      1.04,
-      1.06
+      0.96,
+      0.97
     ],
     "enemyShotMaxLive": 4,
     "enemyShotVyBandPxPerSecond": [
@@ -52,12 +52,12 @@
       126
     ],
     "diveBaseVyBandPxPerSecond": [
-      39,
-      40
+      34,
+      35
     ],
     "diveAccelBandPxPerSecondSquared": [
-      7.1,
-      7.2
+      6.2,
+      6.3
     ],
     "formationDriftHzBand": [
       1.22,
@@ -70,16 +70,16 @@
       2.15
     ],
     "scoutDiveIntervalBaseBandSeconds": [
-      1.11,
-      1.12
+      1.06,
+      1.07
     ],
     "firstEnemyShotDelayBandSeconds": [
-      2.13,
-      2.14
+      2,
+      2.01
     ],
     "enemyShotIntervalBaseBandSeconds": [
-      0.84,
-      0.86
+      0.78,
+      0.79
     ],
     "enemyShotMaxLive": 5,
     "enemyShotVyBandPxPerSecond": [
@@ -87,12 +87,12 @@
       143
     ],
     "diveBaseVyBandPxPerSecond": [
-      42,
-      43
+      37,
+      38
     ],
     "diveAccelBandPxPerSecondSquared": [
-      8,
-      8.1
+      7,
+      7.1
     ],
     "formationDriftHzBand": [
       1.31,

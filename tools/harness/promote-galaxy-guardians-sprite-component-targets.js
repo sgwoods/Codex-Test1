@@ -9,6 +9,21 @@ const SPRITE_EXTRACTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'ga
 const PACK_SOURCE = path.join(ROOT, 'src', 'js', '13-galaxy-guardians-game-pack.js');
 const OUT_DIR = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-component-targets-0.1');
 const OUT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'sprite-component-targets-0.1.json');
+const MANUAL_REVIEWED_COMPONENT_OVERRIDES = Object.freeze({
+  'player-interceptor': Object.freeze({
+    sourceMode: 'manual-reviewed-component-override',
+    extractedRows: Object.freeze([
+      '...A...',
+      '..ACA..',
+      '.WCCCW.',
+      'WCC.CCW',
+      '.WCFCW.',
+      '..FFF..',
+      '.A...A.'
+    ]),
+    note: 'The player-and-shot crop still overfills the interceptor into a block, so the maintained component target keeps a reviewed ship silhouette until player-only source windows are isolated.'
+  })
+});
 
 function fail(message, payload){
   console.error(message);
@@ -50,6 +65,8 @@ function rounded(value, places = 3){
 function loadPack(){
   const sandbox = {};
   sandbox.window = sandbox;
+  sandbox.buildPlatformInfo = () => ({ compatibility: '' });
+  sandbox.applicationReleaseRecord = (_gameKey, fallback = {}) => Object.assign({}, fallback || {});
   vm.createContext(sandbox);
   vm.runInContext(`${fs.readFileSync(PACK_SOURCE, 'utf8')}\nthis.GALAXY_GUARDIANS_PACK=GALAXY_GUARDIANS_PACK;`, sandbox, { filename: PACK_SOURCE });
   return sandbox.GALAXY_GUARDIANS_PACK;
@@ -216,6 +233,7 @@ function exportComponentPng(file, comp, id){
 
 function pickTarget(extraction, pack, spec){
   const runtimeRows = Array.from(pack.alienVisualCatalog?.[spec.id]?.pixelRows || []);
+  const manualOverride = MANUAL_REVIEWED_COMPONENT_OVERRIDES[spec.id] || null;
   const candidates = candidateComponents(extraction, spec.sourceCropFamily).map(candidate => {
     const rows = componentGrid(candidate.image, candidate.comp, spec.cols, spec.rows);
     const sim = silhouetteSimilarity(rows, runtimeRows);
@@ -231,23 +249,26 @@ function pickTarget(extraction, pack, spec){
   const selected = candidates[0];
   if(!selected) fail(`No component target found for ${spec.id}`, { spec });
   const componentCrop = exportComponentPng(selected.file, selected.comp, spec.id);
+  const extractedRows = manualOverride?.extractedRows ? Array.from(manualOverride.extractedRows) : selected.rows;
   return {
     id: spec.id,
     role: spec.role,
     sourceCropFamily: spec.sourceCropFamily,
     sourceCrop: rel(selected.file),
+    sourceMode: manualOverride?.sourceMode || 'component-crop-target',
     componentCrop,
     sourceId: selected.sample.sourceId,
     windowId: selected.sample.windowId,
     cols: spec.cols,
     rows: spec.rows,
     componentBox: selected.comp,
-    extractedRows: selected.rows,
+    extractedRows,
     runtimeRows,
-    extractedMetrics: spriteMetrics(selected.rows),
+    extractedMetrics: spriteMetrics(extractedRows),
     runtimeMetrics: spriteMetrics(runtimeRows),
-    silhouetteSimilarity: selected.sim,
-    reviewStatus: 'component-crop-target-needs-human-sprite-review'
+    silhouetteSimilarity: silhouetteSimilarity(extractedRows, runtimeRows),
+    reviewNote: manualOverride?.note || '',
+    reviewStatus: manualOverride ? 'manual-reviewed-component-target' : 'component-crop-target-needs-human-sprite-review'
   };
 }
 

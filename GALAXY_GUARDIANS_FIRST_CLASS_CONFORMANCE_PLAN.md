@@ -1,6 +1,6 @@
 # Galaxy Guardians First-Class Conformance Plan
 
-Updated: May 12, 2026
+Updated: May 13, 2026
 
 ## Purpose
 
@@ -172,6 +172,8 @@ chat.
 ## Relationship To Other Plans
 
 - the active long working-block execution sequence is tracked in
+  [GALAXY_GUARDIANS_8_HOUR_VISUAL_AUDIO_MOTION_PASS_PLAN.md](GALAXY_GUARDIANS_8_HOUR_VISUAL_AUDIO_MOTION_PASS_PLAN.md)
+- the earlier six-hour pass remains recorded in
   [GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md](GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md)
 - branch-local gameplay-completeness work remains in
   [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)

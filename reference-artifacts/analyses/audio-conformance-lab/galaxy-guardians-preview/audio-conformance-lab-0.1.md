@@ -2,12 +2,12 @@
 
 This report is generated from the reusable Platinum audio conformance lab. It compares runtime cue synthesis against promoted reference cue windows without committing raw copyrighted audio snippets.
 
-Overall score: **8.3/10**
+Overall score: **8.5/10**
 
 | Cue | Score | Runtime duration | Runtime freq proxy | Reference freq proxy | Main recommendation |
 |---|---:|---:|---:|---:|---|
 | playerShot | 8.4/10 | 0.064s | 1967.6 Hz | 3606.3 Hz | sharpen the transient/envelope shape; adjust decay so the cue reads less sustained |
-| enemyShot | 7.1/10 | 0.062s | 1402.3 Hz | 1687.5 Hz | lower the square/noise frequency proxy; adjust decay so the cue reads less sustained |
+| enemyShot | 8.6/10 | 0.088s | 852 Hz | 1687.5 Hz | adjust decay so the cue reads less sustained |
 | scoutDive | 8.4/10 | 0.22s | 1022.7 Hz | 1662.5 Hz | sharpen the transient/envelope shape |
 | flagshipDive | 8.5/10 | 0.32s | 1317.2 Hz | 2481.3 Hz | flagshipDive is close enough for the next human-listening pass |
 | scoutHit | 8.2/10 | 0.024s | 1040.1 Hz | 1775 Hz | sharpen the transient/envelope shape; adjust decay so the cue reads less sustained |

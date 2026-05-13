@@ -11,14 +11,16 @@
     "cueTargetArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/audio-cue-targets-0.1.json",
     "cueCandidateArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/audio-isolated-cue-candidates-0.1.json",
     "sampleRateHz": 22050,
-    "note": "The lab stores JSON metrics and waveform/spectrogram PNG previews. It does not commit raw reference audio snippets."
+    "referenceSourceMode": "mixed-live-source-and-committed-reference-fallback",
+    "note": "The lab stores JSON metrics and waveform/spectrogram PNG previews. It does not commit raw reference audio snippets, and it can reuse committed reference metrics when the original local source videos are unavailable on the current machine."
   },
   "summary": {
     "cueCount": 8,
-    "overallAudioConformanceScore10": 8.3,
+    "overallAudioConformanceScore10": 8.5,
     "compellingPreviewTarget10": 7,
-    "weakestCue": "enemyShot",
+    "weakestCue": "scoutHit",
     "strongestCue": "flagshipHit",
+    "referenceFallbackCueCount": 8,
     "reusablePlatformRead": "This lab is game-configured and can be registered for Aurora or future Platinum game packs."
   },
   "cues": [
@@ -40,6 +42,7 @@
       "reference": {
         "startSeconds": 21.102,
         "durationSeconds": 0.08,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerShot-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerShot-reference-spectrogram.png",
         "pcm": {
@@ -96,19 +99,20 @@
       "semanticLabel": "alien shot / low tick",
       "sourceId": "arcades-lounge-level-5",
       "windowId": "player-single-shot-pressure",
-      "score10": 7.1,
+      "score10": 8.6,
       "scoreParts": {
         "duration": 10,
-        "frequencyProxy": 3.9,
-        "envelopeShape": 8.8,
-        "decayShape": 6.2,
+        "frequencyProxy": 9,
+        "envelopeShape": 8,
+        "decayShape": 6.1,
         "hardwareCharacter": 10,
         "descent": 10
       },
-      "recommendation": "lower the square/noise frequency proxy; adjust decay so the cue reads less sustained",
+      "recommendation": "adjust decay so the cue reads less sustained",
       "reference": {
         "startSeconds": 17.829,
         "durationSeconds": 0.08,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/enemyShot-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/enemyShot-reference-spectrogram.png",
         "pcm": {
@@ -132,12 +136,12 @@
         "static": {
           "toneCount": 2,
           "noiseCount": 1,
-          "totalDurationSeconds": 0.062,
-          "firstFrequencyHz": 1080,
-          "lastFrequencyHz": 720,
-          "peakFrequencyHz": 1080,
-          "minFrequencyHz": 720,
-          "frequencyDropHz": 360,
+          "totalDurationSeconds": 0.088,
+          "firstFrequencyHz": 960,
+          "lastFrequencyHz": 620,
+          "peakFrequencyHz": 960,
+          "minFrequencyHz": 620,
+          "frequencyDropHz": 340,
           "waveFamilies": [
             "square"
           ],
@@ -145,18 +149,18 @@
           "hasSlide": true
         },
         "pcm": {
-          "durationSeconds": 0.062,
-          "rms": 0.00765,
-          "peak": 0.02214,
-          "zeroCrossingsPerSecond": 2804.6,
-          "zeroCrossingFrequencyProxyHz": 1402.3,
-          "burstFrameShare": 0.375,
-          "envelopeContrast": 1.733,
-          "decayRatio": 0.322,
-          "attackPeakPosition": 0.143,
-          "frameRmsP10": 0.00262,
-          "frameRmsP50": 0.00787,
-          "frameRmsP90": 0.01049
+          "durationSeconds": 0.088,
+          "rms": 0.00723,
+          "peak": 0.01984,
+          "zeroCrossingsPerSecond": 1704,
+          "zeroCrossingFrequencyProxyHz": 852,
+          "burstFrameShare": 0.333,
+          "envelopeContrast": 1.914,
+          "decayRatio": 0.314,
+          "attackPeakPosition": 0.182,
+          "frameRmsP10": 0.00122,
+          "frameRmsP50": 0.00607,
+          "frameRmsP90": 0.01073
         }
       }
     },
@@ -178,6 +182,7 @@
       "reference": {
         "startSeconds": 102.342,
         "durationSeconds": 0.08,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutDive-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutDive-reference-spectrogram.png",
         "pcm": {
@@ -247,6 +252,7 @@
       "reference": {
         "startSeconds": 21.233,
         "durationSeconds": 0.08,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipDive-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipDive-reference-spectrogram.png",
         "pcm": {
@@ -316,6 +322,7 @@
       "reference": {
         "startSeconds": 128.247,
         "durationSeconds": 0.02,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutHit-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/scoutHit-reference-spectrogram.png",
         "pcm": {
@@ -385,6 +392,7 @@
       "reference": {
         "startSeconds": 16.852,
         "durationSeconds": 0.08,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/escortHit-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/escortHit-reference-spectrogram.png",
         "pcm": {
@@ -454,6 +462,7 @@
       "reference": {
         "startSeconds": 34.562,
         "durationSeconds": 0.08,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipHit-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/flagshipHit-reference-spectrogram.png",
         "pcm": {
@@ -523,6 +532,7 @@
       "reference": {
         "startSeconds": 47.392,
         "durationSeconds": 0.21,
+        "sourceMode": "existing-reference-fallback",
         "waveform": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerLoss-reference-waveform.png",
         "spectrogram": "reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/playerLoss-reference-spectrogram.png",
         "pcm": {
