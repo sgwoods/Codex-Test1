@@ -28,6 +28,7 @@ window.__galagaHarness__={
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
  if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
  if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
+ if(cfg.watchPersona!==undefined&&typeof setWatchPersona==='function')setWatchPersona(cfg.watchPersona,{silent:1,source:'harness'});
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
@@ -413,6 +414,12 @@ window.__galagaHarness__={
    accountNotice:LEADERBOARD.accountNotice||''
   };
  },
+ startWatchMode(cfg={}){
+  if(typeof setSeed==='function'&&cfg.seed!==undefined)setSeed(cfg.seed);
+  if(typeof setWatchPersona==='function')setWatchPersona(cfg.persona||selectedWatchPersona?.()||'advanced',{silent:1,source:'harness'});
+  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness'});
+  return this.state();
+ },
  setupRemoteScoreSubmitTest(cfg={}){
   window.__platinumHarnessForceRemoteWrite=1;
   window.__auroraHarnessForceRemoteWrite=1;
@@ -515,6 +522,7 @@ window.__galagaHarness__={
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
+   watchMode:!!gameOverState?.watchMode,
    rank:+(gameOverState?.rank||0),
    editing:!!gameOverState?.editing,
    topScoreSigninPrompt:!!gameOverState?.topScoreSigninPrompt,
@@ -554,6 +562,9 @@ window.__galagaHarness__={
    simT:+(+S.simT||0).toFixed(3),
    stageClock:+(+S.stageClock||0).toFixed(3),
    persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,
+   harnessPersona:S.harnessPersona||null,
+   watchMode:!!S.watchMode,
+   watchPersona:S.watchPersona||'',
    playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    atmosphere:atmosphere?{
     id:atmosphere.id||'',

@@ -160,6 +160,8 @@ function currentReplayMeta(){
   attract:!!S.attract,
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
+  watchMode:!!S.watchMode,
+  watchPersona:S.watchPersona||'',
   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
   pilotUserId,
   pilotEmail,

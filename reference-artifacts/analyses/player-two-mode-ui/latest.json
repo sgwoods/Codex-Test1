@@ -4,10 +4,10 @@
   "feature": "Player Two persona rival mode",
   "generatedAt": "2026-05-12T00:00:00.000Z",
   "referenceDecision": {
-    "modeShape": "Galaga-inspired two-player score lane and alternating-turn vocabulary, adapted as a signed-in persona score race for Aurora's current single-human runtime.",
+    "modeShape": "Galaga-inspired two-player score lane and alternating-turn vocabulary. In the current Aurora runtime, 2UP is queued and must not score during 1UP's turn.",
     "startInput": "Use arcade-conventional 1 PLAYER / 2 PLAYERS selection, with keyboard shortcuts 1 and 2.",
     "hudVocabulary": "Use 1UP / HIGH SCORE / 2UP framing while the persona rival is active.",
-    "leaderboardBoundary": "Only the human 1UP score is leaderboard-eligible; the 2UP persona score is comparative telemetry and user feedback."
+    "leaderboardBoundary": "Only the human 1UP score is leaderboard-eligible; queued 2UP and Watch Mode persona scores are comparative telemetry and user feedback."
   },
   "sources": [
     {
@@ -27,8 +27,8 @@
     }
   ],
   "implementationNotes": [
-    "Aurora does not yet have true alternating-turn multi-run state. This first slice chooses the higher-value user experience: signed-in human run plus visible randomized persona rival score lane.",
-    "The persona rival is intentionally excluded from local and remote score submission.",
+    "Aurora does not yet have true alternating-turn multi-run state. This slice keeps 2UP queued during 1UP and adds a separate Watch Mode where personas can actively play for observation.",
+    "The persona rival and Watch Mode are intentionally excluded from local and remote score submission.",
     "Future conformance work can evolve this into true Galaga-style alternating turns once save/restore of per-player convoy state is available."
   ]
 }
