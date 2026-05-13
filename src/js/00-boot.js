@@ -1336,13 +1336,14 @@ function buildGameOverHtmlFromState(){
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
+ const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Sign in to post your replay and claim a verified score.</span>':'';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
   const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
   entryHtml=`<span class="gameOverEntry"><span class="entryLabel">ENTER INITIALS</span><span class="entrySlots">${shown}</span></span>`;
   footHtml='<span class="gameOverFoot"><span class="gameOverFootLine"><span class="k">Left/Right</span> select, <span class="k">Up/Down</span> change</span><span class="gameOverFootLine">type letters or press <span class="k">Enter</span> to save</span></span>';
  }
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${authPromptHtml}${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
  const activeView=(ATTRACT.phase==='scores'&&ATTRACT.active)?(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'):LEADERBOARD.view;
@@ -1357,6 +1358,20 @@ function buildGameOverState(score,stage,challenge=0){
  const shownStage=displayStageNumber(stage,challenge);
  const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
  const editing=!!res.rank&&!hasLockedPilotInitials;
+ const videoPosting=typeof topScoreVideoPostingEligibility==='function'
+  ? topScoreVideoPostingEligibility(res.rank)
+  : {top10:!!res.rank,signedIn:hasLockedPilotInitials,canPostVideo:!!res.rank&&hasLockedPilotInitials,verifiedScore:false,reason:'unavailable'};
+ const topScoreSigninPrompt=typeof shouldPromptForTopScoreSignin==='function'?shouldPromptForTopScoreSignin(res.rank):false;
+ if(topScoreSigninPrompt&&typeof logEvent==='function'){
+  logEvent('top_score_signin_prompt',{
+   rank:res.rank,
+   score:score|0,
+   stage:shownStage,
+   canPostVideo:!!videoPosting.canPostVideo,
+   verifiedScore:!!videoPosting.verifiedScore,
+   reason:videoPosting.reason||'sign_in_required'
+  });
+ }
  return{
   entryId:res.entry.id,
   rank:res.rank,
@@ -1369,6 +1384,8 @@ function buildGameOverState(score,stage,challenge=0){
   initials:(hasLockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
   editing,
+  topScoreSigninPrompt,
+  topScoreVideoPosting:videoPosting,
   remoteSubmitted:0
  };
 }

@@ -365,6 +365,14 @@ function loadReleaseManifest(buildVersion = pkg.version){
 
   const product = String(raw.product || 'Aurora Galactica').trim() || 'Aurora Galactica';
   const rawPlatform = raw.platform && typeof raw.platform === 'object' ? raw.platform : {};
+  const parseManifestList = (value) => {
+    if(Array.isArray(value)) return value.map(item => String(item || '').trim()).filter(Boolean);
+    return String(value || '')
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean);
+  };
+  const rawPlatformAuth = rawPlatform.auth && typeof rawPlatform.auth === 'object' ? rawPlatform.auth : {};
   const platform = {
     key: String(rawPlatform.key || 'platinum').trim() || 'platinum',
     name: String(rawPlatform.name || 'Platinum').trim() || 'Platinum',
@@ -376,7 +384,12 @@ function loadReleaseManifest(buildVersion = pkg.version){
       ? {
           arcadeMusicPlaylistId: String(rawPlatform.media.arcadeMusicPlaylistId || '').trim()
         }
-      : {}
+      : {},
+    auth: {
+      nonProductionTestPilotEmails: Array.from(new Set(parseManifestList(rawPlatformAuth.nonProductionTestPilotEmails)
+        .map(email => email.toLowerCase()))),
+      nonProductionTestPilotUserIds: Array.from(new Set(parseManifestList(rawPlatformAuth.nonProductionTestPilotUserIds)))
+    }
   };
 
   const applications = Array.isArray(raw.applications) ? raw.applications : [];
@@ -3522,11 +3535,17 @@ function build(options = {}){
     .filter(Boolean);
   const testAccountEmails = Array.from(new Set([
     ...parseListEnv(process.env.TEST_ACCOUNT_EMAILS).map((email) => email.toLowerCase()),
-    ...parseListEnv(process.env.TEST_ACCOUNT_EMAIL).map((email) => email.toLowerCase())
+    ...parseListEnv(process.env.TEST_ACCOUNT_EMAIL).map((email) => email.toLowerCase()),
+    ...(Array.isArray(releaseManifest.platform?.auth?.nonProductionTestPilotEmails)
+      ? releaseManifest.platform.auth.nonProductionTestPilotEmails.map((email) => String(email || '').trim().toLowerCase()).filter(Boolean)
+      : [])
   ]));
   const testAccountUserIds = Array.from(new Set([
     ...parseListEnv(process.env.TEST_ACCOUNT_USER_IDS),
-    ...parseListEnv(process.env.TEST_ACCOUNT_USER_ID)
+    ...parseListEnv(process.env.TEST_ACCOUNT_USER_ID),
+    ...(Array.isArray(releaseManifest.platform?.auth?.nonProductionTestPilotUserIds)
+      ? releaseManifest.platform.auth.nonProductionTestPilotUserIds.map((id) => String(id || '').trim()).filter(Boolean)
+      : [])
   ]));
   const testAccountEmail = testAccountEmails[0] || '';
   const testAccountUserId = testAccountUserIds[0] || '';

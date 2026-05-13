@@ -78,15 +78,11 @@ async function main(){
     if(!/read-only/i.test(result.status)){
       fail('non-production leaderboard did not advertise a read-only data path', result);
     }
-    const explainedDisabled = /disabled in this lane/i.test(result.accountSummary);
     const explainedTestPilot = /test pilot lane active/i.test(result.accountSummary);
-    if(!explainedDisabled && !explainedTestPilot){
-      fail('account panel did not explain the non-production account policy', result);
+    if(!explainedTestPilot){
+      fail('non-production account panel did not expose the configured test-pilot login path', result);
     }
-    if(explainedDisabled && (!result.signupDisabled || !result.loginDisabled || !result.mineDisabled)){
-      fail('non-production lane should fully disable account and personal-score actions when auth is not available', result);
-    }
-    if(explainedTestPilot && (result.signupDisabled || result.loginDisabled || !result.mineDisabled)){
+    if(result.signupDisabled || result.loginDisabled || !result.mineDisabled){
       fail('test-pilot non-production lane should allow account auth while keeping personal-score view disabled until sign-in', result);
     }
     if(!result.buildContainsSubmitBlockText || !result.buildContainsReadOnlyText){

@@ -53,7 +53,7 @@ async function runSuccessCase(page){
       email: 'pilot@example.com',
       initials: 'SGW'
     });
-    window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 76770, stage: 12 });
+    window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 76770, stage: 2 });
     await new Promise(resolve => setTimeout(resolve, 80));
     return window.__galagaHarness__.remoteScoreSubmitState();
   });
@@ -114,7 +114,7 @@ async function main(){
     if((success.calls || []).length !== 1){
       fail('remote score submit should run once immediately on game over for locked signed-in pilots', success);
     }
-    if((success.calls[0]?.score|0) !== 76770 || (success.calls[0]?.stage|0) !== 12){
+    if((success.calls[0]?.score|0) !== 76770 || (success.calls[0]?.stage|0) !== 2){
       fail('remote score submit payload lost the expected score or stage', success);
     }
     if(success.remoteSubmitted !== 1){

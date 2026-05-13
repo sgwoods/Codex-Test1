@@ -96,6 +96,7 @@ mask:
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
+#msg .gameOverAuthPrompt{display:block;color:#7ef2ff;font-size:.54em;letter-spacing:.06em;line-height:1.28;margin:-.12em auto .42em;max-width:28em}
 #msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
@@ -127,6 +128,7 @@ mask:
 #msg.gameOverScreen .gameOverTitle{font-size:1.34em;letter-spacing:.14em;margin-bottom:.16em}
 #msg.gameOverScreen .gameOverSub{font-size:.82em;letter-spacing:.08em;margin-bottom:.1em}
 #msg.gameOverScreen .gameOverMeta{font-size:.6em;margin-bottom:.38em}
+#msg.gameOverScreen .gameOverAuthPrompt{font-size:.48em;margin-bottom:.32em}
 #msg.gameOverScreen .scoreTable{gap:.16em 1.05em;font-size:.84em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
 #msg.gameOverScreen .gameOverEntry{font-size:.78em;margin:.3em auto .26em}

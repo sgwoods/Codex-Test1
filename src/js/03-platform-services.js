@@ -60,6 +60,33 @@ function remoteWriteEnabled(){
  if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
  return isSignedInAsTestAccount();
 }
+function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='undefined'?LEADERBOARD?.user:null)){
+ const normalizedRank=+rank||0;
+ const top10=normalizedRank>0&&normalizedRank<=10;
+ const signedIn=!!user;
+ const confirmed=!!(user?.email_confirmed_at||user?.confirmed_at);
+ const authLane=remoteAuthEnabled();
+ let reason='not_top_10';
+ if(top10&&!authLane)reason='auth_unavailable';
+ else if(top10&&!signedIn)reason='sign_in_required';
+ else if(top10&&signedIn)reason=confirmed?'signed_in_verified':'signed_in_unverified';
+ return{
+  top10,
+  signedIn,
+  emailConfirmed:confirmed,
+  remoteAuthEnabled:authLane,
+  canPostVideo:top10&&signedIn&&authLane,
+  verifiedScore:top10&&signedIn&&confirmed&&authLane,
+  reason
+ };
+}
+function canPostTopScoreVideo(rank=0){
+ return topScoreVideoPostingEligibility(rank).canPostVideo;
+}
+function shouldPromptForTopScoreSignin(rank=0){
+ const eligibility=topScoreVideoPostingEligibility(rank);
+ return eligibility.top10&&eligibility.remoteAuthEnabled&&!eligibility.signedIn;
+}
 function shouldHideTestAccountScores(){
  return configuredTestAccountUserIds().length>0;
 }

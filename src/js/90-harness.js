@@ -421,6 +421,27 @@ window.__galagaHarness__={
   syncAccountUi();
   return true;
  },
+ setupUnsignedTopScoreTest(){
+  delete window.__platinumHarnessForceRemoteWrite;
+  delete window.__auroraHarnessForceRemoteWrite;
+  localStorage.removeItem(SCOREBOARD_KEY);
+  localStorage.removeItem(SCORE_HISTORY_KEY);
+  localStorage.removeItem(SYSTEM_LOG_KEY);
+  LEADERBOARD.user=null;
+  LEADERBOARD.profile=null;
+  LEADERBOARD.accountNotice='';
+  if(typeof syncAccountUi==='function')syncAccountUi();
+  return true;
+ },
+ showGameOverScoreboard(){
+  if(gameOverState){
+   gameOverState.phase='scoreboard';
+   gameOverHtml=buildGameOverHtmlFromState();
+   const msgEl=document.getElementById('msg');
+   if(msgEl)msgEl.innerHTML=gameOverHtml;
+  }
+  return this.gameOverView();
+ },
  triggerRemoteScoreGameOver(cfg={}){
   started=1;
   paused=0;
@@ -465,6 +486,8 @@ window.__galagaHarness__={
    challenge:!!gameOverState?.challenge,
    rank:+(gameOverState?.rank||0),
    editing:!!gameOverState?.editing,
+   topScoreSigninPrompt:!!gameOverState?.topScoreSigninPrompt,
+   topScoreVideoPosting:Object.assign({},gameOverState?.topScoreVideoPosting||{}),
    initials:Array.isArray(gameOverState?.initials)?gameOverState.initials.join(''):''
   };
  },
