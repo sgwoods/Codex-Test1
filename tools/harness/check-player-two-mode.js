@@ -38,6 +38,18 @@ async function main(){
     window.__galagaHarness__.setPlayerTwoMode({ enabled: true, persona: 'professional' });
     window.__galagaHarness__.advanceFor(0);
     const frontDoorHtml = document.getElementById('msg')?.innerHTML || '';
+    document.querySelector('[data-player-two-persona="prev"]')?.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
+    window.__galagaHarness__.advanceFor(0);
+    const afterRivalPicker = {
+      state: window.__galagaHarness__.playerTwoState().selection,
+      html: document.getElementById('msg')?.innerHTML || ''
+    };
+    document.querySelector('[data-watch-persona="next"]')?.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
+    window.__galagaHarness__.advanceFor(0);
+    const afterWatchPicker = {
+      state: window.__galagaHarness__.playerTwoState().selection,
+      html: document.getElementById('msg')?.innerHTML || ''
+    };
     window.__galagaHarness__.start({
       autoVideo: false,
       controlledClock: true,
@@ -65,6 +77,8 @@ async function main(){
       live,
       p2,
       frontDoorHtml,
+      afterRivalPicker,
+      afterWatchPicker,
       hudRight,
       gameOver,
       afterHumanP2,
@@ -79,8 +93,14 @@ async function main(){
   if(!signed.p2.enabled || signed.p2.personaKey !== 'professional'){
     fail('signed Player Two mode should start a professional persona rival run', signed);
   }
-  if(!/2 PLAYERS/.test(signed.frontDoorHtml || '') || !/PRO RIVAL/.test(signed.frontDoorHtml || '') || !/HUMAN SCORE ONLY/.test(signed.frontDoorHtml || '') || !/WATCH/.test(signed.frontDoorHtml || '') || !/SCORE NOT RECORDED/.test(signed.frontDoorHtml || '')){
+  if(!/2 PLAYERS/.test(signed.frontDoorHtml || '') || !/PRO RIVAL/.test(signed.frontDoorHtml || '') || !/RIVAL/.test(signed.frontDoorHtml || '') || !/PILOT/.test(signed.frontDoorHtml || '') || !/HUMAN SCORE ONLY/.test(signed.frontDoorHtml || '') || !/WATCH/.test(signed.frontDoorHtml || '') || !/SCORE NOT RECORDED/.test(signed.frontDoorHtml || '')){
     fail('signed-in start screen should make 2UP rival and Watch Mode meanings clear before launch', signed);
+  }
+  if(signed.afterRivalPicker?.state?.personaKey !== 'expert' || !/EXPERT/.test(signed.afterRivalPicker?.html || '')){
+    fail('2UP Rival pilot selector should visibly cycle the role before launch', signed);
+  }
+  if(!/WATCH/.test(signed.afterWatchPicker?.html || '') || !/EXPERT/.test(signed.afterWatchPicker?.html || '') || signed.afterWatchPicker?.state?.personaKey !== 'expert'){
+    fail('Watch pilot selector should visibly cycle the watched role without launching a run', signed);
   }
   if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'queued'){
     fail('Player Two score must stay queued at 0 during the human 1UP turn', signed);

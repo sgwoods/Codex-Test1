@@ -200,7 +200,7 @@ function playerTwoSelectionState(){
  };
 }
 function selectedWatchPersona(){
- return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||selectedPlayerTwoPersona());
+ return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||'advanced');
 }
 function setWatchPersona(key,opts={}){
  const personaKey=normalizePlayerTwoPersona(key);
@@ -212,7 +212,6 @@ function cycleWatchPersona(dir=1,opts={}){
  const current=selectedWatchPersona();
  const idx=Math.max(0,PLAYER_TWO_PERSONA_ORDER.indexOf(current));
  const next=PLAYER_TWO_PERSONA_ORDER[(idx+(dir<0?-1:1)+PLAYER_TWO_PERSONA_ORDER.length)%PLAYER_TWO_PERSONA_ORDER.length];
- setPlayerTwoPersona(next,Object.assign({},opts,{silent:1}));
  return setWatchPersona(next,opts);
 }
 function watchModePersonaLabel(key=selectedWatchPersona()){
@@ -451,8 +450,10 @@ function buildPlayerTwoStartHtml(){
  const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked?' isLocked':''}`;
  const p2Status=p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
  const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
- const personaHint='<span class="k">[</span>/<span class="k">]</span> SET PILOT   <span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
- return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span><span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="cycle"><span class="playerModeKey"><b>RIVAL</b></span><span class="playerModeText"><strong>${state.personaLabel}</strong><em>${personaMeta}</em></span></span><span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b></span><span class="playerModeText"><strong>${watchLabel}</strong><em>SCORE NOT RECORDED</em></span></span><span class="playerModeHint">${personaHint}</span></span>`;
+ const personaHint='<span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
+ const rivalPicker=`<span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="next"><span class="playerModeKey"><b>RIVAL</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-player-two-persona="prev">&lt;</span><strong>${state.personaLabel}</strong><span class="playerModeArrow" data-player-two-persona="next">&gt;</span><em>${personaMeta}</em></span></span>`;
+ const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span></span>`;
+ return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
 }
 function buildPlayerTwoResultsHtml(){
  const p2=S.playerTwo;
@@ -521,9 +522,17 @@ function handlePlayerTwoWaitClick(target){
   if(typeof sfx!=='undefined')sfx.uiTick();
   return true;
  }
- if(target?.closest?.('[data-player-two-persona]')){
-  const next=cycleWatchPersona(1,{source:'click'});
-  setPlayerTwoPersona(next,{silent:1,source:'click'});
+ const playerPersonaTarget=target?.closest?.('[data-player-two-persona]');
+ if(playerPersonaTarget){
+  const dir=playerPersonaTarget.getAttribute('data-player-two-persona')==='prev'?-1:1;
+  cyclePlayerTwoPersona(dir,{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ const watchPersonaTarget=target?.closest?.('[data-watch-persona]');
+ if(watchPersonaTarget){
+  const dir=watchPersonaTarget.getAttribute('data-watch-persona')==='prev'?-1:1;
+  cycleWatchPersona(dir,{source:'click'});
   if(typeof sfx!=='undefined')sfx.uiTick();
   return true;
  }

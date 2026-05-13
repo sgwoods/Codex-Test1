@@ -91,17 +91,24 @@ mask:
 #msg .startMeta{display:block;color:rgba(231,240,255,.82);font-size:.62em;letter-spacing:.08em;line-height:1.42}
 #msg .startPickerHint{color:#ffe39a}
 #msg .startNotice{display:block;margin:.42em auto 0;max-width:34em;color:rgba(223,247,255,.76);font-size:.56em;letter-spacing:.08em;line-height:1.42}
-#msg .playerModeSelect{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(9.4em,1fr));gap:.18em .42em;justify-content:center;align-items:stretch;width:min(100%,26em);margin:.08em auto .42em;color:#f4f7ff;font-size:.56em;letter-spacing:.08em;line-height:1.12;text-transform:uppercase}
+#msg .playerModeSelect{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(9.8em,1fr));gap:.18em .42em;justify-content:center;align-items:stretch;width:min(100%,27em);margin:.08em auto .42em;color:#f4f7ff;font-size:.56em;letter-spacing:.08em;line-height:1.12;text-transform:uppercase}
 #msg .playerModeOption,#msg .playerModePersona,#msg .playerModeWatch{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.26em;align-items:center;border:1px solid rgba(126,242,255,.34);background:rgba(3,12,24,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 10px rgba(0,0,0,.24);padding:.34em .44em;text-align:left;cursor:pointer}
 #msg .playerModeKey{display:grid;gap:.02em;min-width:3.2em;color:#7ef2ff;text-align:center}
 #msg .playerModeKey b{color:inherit;font-size:.82em;letter-spacing:.1em}
+#msg .playerModeKey small{color:rgba(231,240,255,.7);font-size:.52em;letter-spacing:.1em}
 #msg .playerModeText{display:grid;gap:.08em;min-width:0}
 #msg .playerModeText strong{color:#f4f7ff;font-size:.9em;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #msg .playerModeText em{color:rgba(231,240,255,.78);font-style:normal;font-size:.64em;letter-spacing:.08em;line-height:1.16;white-space:normal;overflow:visible;text-overflow:clip}
+#msg .playerModeStepper{grid-template-columns:1.15em minmax(0,1fr) 1.15em;align-items:center}
+#msg .playerModeStepper strong{font-size:.74em;letter-spacing:.04em;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.05}
+#msg .playerModeStepper em{grid-column:1/4}
+#msg .playerModeArrow{display:inline-grid;place-items:center;min-width:1.05em;min-height:1.05em;border:1px solid rgba(126,242,255,.32);color:#ffd86d;background:rgba(255,216,109,.08);font-size:.88em;line-height:1}
+#msg .playerModePersona .playerModeText strong,#msg .playerModeWatch .playerModeText strong{text-align:center}
 #msg .playerModeOption.isSelected{border-color:#ffd86d;color:#ffd86d;text-shadow:0 0 8px rgba(255,216,109,.32)}
 #msg .playerModeOption.isSelected .playerModeKey,#msg .playerModeOption.isSelected .playerModeText strong{color:#ffd86d}
 #msg .playerModeOption.isLocked,#msg .playerModePersona.isLocked{color:rgba(231,240,255,.42);border-color:rgba(231,240,255,.16);cursor:not-allowed}
 #msg .playerModeOption.isLocked .playerModeKey,#msg .playerModeOption.isLocked .playerModeText strong,#msg .playerModePersona.isLocked .playerModeKey,#msg .playerModePersona.isLocked .playerModeText strong{color:rgba(231,240,255,.46)}
+#msg .playerModePersona.isLocked .playerModeArrow{border-color:rgba(231,240,255,.22);color:rgba(255,216,109,.5);background:rgba(255,255,255,.03)}
 #msg .playerModePersona{color:#7ef2ff}
 #msg .playerModePersona.isActive{border-color:rgba(255,216,109,.62);box-shadow:inset 0 0 0 1px rgba(255,216,109,.16),0 0 12px rgba(255,216,109,.12)}
 #msg .playerModeWatch{color:#ffd86d}
