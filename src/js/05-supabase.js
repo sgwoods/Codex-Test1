@@ -41,6 +41,7 @@ const accountPanelSub=document.getElementById('accountPanelSub');
 const accountDockIcon=document.getElementById('accountDockIcon');
 const accountDockLabel=document.getElementById('accountDockLabel');
 const accountDockStatus=document.getElementById('accountDockStatus');
+const accountPanelPortrait=document.getElementById('accountPanelPortrait');
 const accountPilotCallsign=document.getElementById('accountPilotCallsign');
 const accountPilotStatus=document.getElementById('accountPilotStatus');
 const accountGuideBtn=document.getElementById('accountGuideBtn');

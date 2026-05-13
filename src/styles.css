@@ -385,9 +385,23 @@ mask:
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
 #accountDockBtn[data-signed-in="true"] .dockPilotIcon{filter:none;opacity:1}
+#accountDockBtn[data-pilot-mode="watch"],
+#accountDockBtn[data-pilot-mode="player-two-active"],
+#accountDockBtn[data-pilot-mode="player-two-ready"],
+#accountDockBtn[data-pilot-mode="player-two-done"]{border-color:rgba(126,242,255,.72);background:linear-gradient(180deg,rgba(12,48,74,.96),rgba(8,24,43,.94));color:#7ef2ff}
+#accountDockBtn[data-pilot-mode="player-two-active"],
+#accountDockBtn[data-pilot-mode="player-two-ready"]{border-color:rgba(255,216,109,.78);color:#ffe39a}
+#accountDockBtn[data-pilot-mode="watch"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-active"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-ready"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-done"] .dockPilotIcon{filter:none;opacity:1}
 #accountDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
 #accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
+#accountDockBtn[data-pilot-mode="watch"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-active"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-ready"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-done"] #accountDockStatus{color:#fff2bf}
 #muteToggleBtn[data-muted="true"]{color:#ffe39a}
 #accountPanel{display:none;flex-direction:column;gap:10px;width:min(100%,620px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.32 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
@@ -396,6 +410,14 @@ mask:
 #accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
 #accountPanelPortrait{font-size:54px;line-height:1;filter:grayscale(1);opacity:.68}
 #accountPanel[data-signed-in="true"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanel[data-pilot-mode="watch"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-active"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-ready"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-done"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanel[data-pilot-mode="watch"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-active"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-ready"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-done"] #accountPanelTitle{color:#ffe39a}
 #accountPanelHeroText{display:flex;flex-direction:column;gap:3px;min-width:0}
 #accountPanelTitle,#accountPanelSub{display:block}
 #accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}

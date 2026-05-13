@@ -381,8 +381,10 @@ function syncAccountUi(){
  const initials=preferredInitialsFromUser();
  const dockId=pilotDisplayId();
  const hasLockedInitials=!!signedIn;
- if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
- if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'QUICK PILOT REFERENCE';
+ const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
+ const pilotMode=pilotCard?.mode||'human-local';
+ if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':(pilotCard?.panelTitle||'PILOT INFORMATION');
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':(pilotCard?.panelSub||'QUICK PILOT REFERENCE');
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
@@ -431,8 +433,9 @@ function syncAccountUi(){
  }
  if(accountSummary){
   if(pending)accountSummary.textContent='Connecting leaderboard...';
-  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
+  else if(!recovering&&pilotCard?.summary)accountSummary.textContent=pilotCard.summary;
+  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
   else if(NON_PRODUCTION_LANE&&!signedIn)accountSummary.textContent=nonProductionAccountSummary();
   else if(recovering)accountSummary.textContent='Recovery accepted. Save a new password to finish signing back in.';
@@ -442,22 +445,25 @@ function syncAccountUi(){
  const rows=rowsForPilotProfile();
  if(accountDockBtn){
   accountDockBtn.dataset.signedIn=signedIn?'true':'false';
+  accountDockBtn.dataset.pilotMode=pilotMode;
   accountDockBtn.classList.toggle('open',!!LEADERBOARD.accountPanelOpen);
-  accountDockBtn.title=signedIn?`${dockId} onboard`:'Pilot Sign In';
+  accountDockBtn.title=pilotCard?.dockTitle||(signedIn?`${dockId} onboard`:'Pilot Sign In');
  }
- if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
- if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
- if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
- if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.');
- if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
- if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
+ if(accountDockIcon&&pilotCard?.icon)accountDockIcon.textContent=pilotCard.icon;
+ if(accountPanelPortrait&&pilotCard?.icon)accountPanelPortrait.textContent=pilotCard.icon;
+ if(accountDockLabel)accountDockLabel.textContent=pilotCard?.dockLabel||(signedIn?'ONBOARD':'SIGN IN');
+ if(accountDockStatus)accountDockStatus.textContent=pilotCard?.dockStatus||(signedIn?dockId:'Pilot offline');
+ if(accountPilotCallsign)accountPilotCallsign.textContent=recovering?'RESET IN PROGRESS':(pilotCard?.callsign||(signedIn?`${dockId} IS ONBOARD`:'PILOT OFFLINE'));
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(pilotCard?.status||(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.'));
+ if(accountIdentityEmail)accountIdentityEmail.textContent=pilotCard?.email||`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
+ if(accountIdentityUserId)accountIdentityUserId.textContent=pilotCard?.userId||`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
  if(accountPanel){
   accountPanel.dataset.signedIn=signedIn?'true':'false';
+  accountPanel.dataset.pilotMode=pilotMode;
  }
  renderPilotFlightStats(rows,signedIn);
  renderPilotRecords(rows);
- const hudInitials=signedIn?dockId:'---';
- window.__platinumPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ window.__platinumPilotHudHtml=pilotCard?.hudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?dockId:'---'}</span>`;
  window.__auroraPilotHudHtml=window.__platinumPilotHudHtml;
  if(resetTestPilotScoresBtn){
   const show=testAccountEnabled();

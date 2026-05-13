@@ -167,6 +167,12 @@ const PLAYER_TWO_PERSONA_PROFILES=Object.freeze({
  expert:Object.freeze({id:'expert',label:'EXPERT',initials:'EXP',scorePerSecond:78,stageSeconds:78,variance:.1}),
  professional:Object.freeze({id:'professional',label:'PROFESSIONAL',initials:'PRO',scorePerSecond:96,stageSeconds:66,variance:.08})
 });
+const PLAYER_TWO_PERSONA_DESCRIPTIONS=Object.freeze({
+ novice:'Careful learner: slower movement, conservative shots, safer reactions.',
+ advanced:'Balanced pilot: steady movement, moderate firing, practical survival.',
+ expert:'Aggressive pilot: faster tracking, tighter aim, stronger dive response.',
+ professional:'Arcade-grade pilot: high tempo, sharper aim, pressure-ready movement.'
+});
 
 function normalizePlayerTwoPersona(value=''){
  const key=String(value||'').trim().toLowerCase();
@@ -216,6 +222,16 @@ function cycleWatchPersona(dir=1,opts={}){
 }
 function watchModePersonaLabel(key=selectedWatchPersona()){
  return (PLAYER_TWO_PERSONA_PROFILES[normalizePlayerTwoPersona(key)]||PLAYER_TWO_PERSONA_PROFILES.advanced).label;
+}
+function playerPersonaCardSummary(key='advanced'){
+ const personaKey=normalizePlayerTwoPersona(key);
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return{
+  key:personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  description:PLAYER_TWO_PERSONA_DESCRIPTIONS[personaKey]||PLAYER_TWO_PERSONA_DESCRIPTIONS.advanced
+ };
 }
 function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
  const key=setWatchPersona(personaKey,{silent:1,source:opts.source||'ui'});
@@ -437,6 +453,87 @@ function playerTwoSnapshot(state=S.playerTwo){
   elapsed:+(+p2.elapsed||0).toFixed(3),
   variance:+(+p2.variance||1).toFixed(4),
   eligibleForLeaderboard:false
+ };
+}
+function currentPilotCardState(){
+ const signedIn=typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user;
+ const verified=!!(typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email_confirmed_at);
+ const humanId=typeof pilotDisplayId==='function'?pilotDisplayId():(signedIn?'PILOT':'GUEST');
+ const p2=S.playerTwo;
+ if(S.watchMode){
+  const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
+  return{
+   mode:'watch',
+   icon:'🛰',
+   dockLabel:'WATCH',
+   dockStatus:persona.label,
+   dockTitle:`Watch Mode: ${persona.label} pilot onboard`,
+   panelTitle:'PILOT ONBOARD',
+   panelSub:'WATCH MODE PERSONA',
+   callsign:`${persona.label} IS FLYING`,
+   status:`${persona.description} Score not recorded.`,
+   summary:'Watch Mode is a persona-controlled demonstration run. Scores and videos are not eligible for posting.',
+   email:'Controller: Persona pilot',
+   userId:`Role: ${persona.initials} watch pilot`,
+   hudHtml:`<span class="hudLabel">WATCH</span> <span class="hudValue">${persona.initials}</span>`,
+   signedIn
+  };
+ }
+ if(p2?.enabled&&(p2.activeTurn==='p2'||p2.activeTurn==='done'||p2.activeTurn==='ready')){
+  const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
+  const active=p2.activeTurn==='p2';
+  const ready=p2.activeTurn==='ready';
+  return{
+   mode:active?'player-two-active':ready?'player-two-ready':'player-two-done',
+   icon:'🧑‍🚀',
+   dockLabel:active?'2UP PLAY':ready?'2UP READY':'2UP DONE',
+   dockStatus:persona.label,
+   dockTitle:`2UP ${persona.label} rival pilot ${active?'flying':ready?'ready':'complete'}`,
+   panelTitle:active?'2UP RIVAL ONBOARD':ready?'2UP RIVAL READY':'2UP RIVAL RESULTS',
+   panelSub:'PERSONA RIVAL PILOT',
+   callsign:`2UP ${persona.label}`,
+   status:`${persona.description} Human 1UP score is the only scoreboard entry.`,
+   summary:active?'Persona rival is flying now. This turn is comparison-only and will not post a score.':ready?'Persona rival is queued for the next turn. Press 2 from results to start it.':'Persona rival turn is complete. Only the human 1UP score remains eligible.',
+   email:'Controller: Persona rival',
+   userId:`Role: ${persona.initials} 2UP rival`,
+   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':' playerTwoHudReady'}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':'2UP DONE'}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`,
+   signedIn
+  };
+ }
+ if(p2?.enabled&&p2.activeTurn==='queued'){
+  const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
+  return{
+   mode:'human-with-rival',
+   icon:'🧑‍🚀',
+   dockLabel:signedIn?'1UP PILOT':'1UP',
+   dockStatus:signedIn?humanId:'LOCAL',
+   dockTitle:signedIn?`${humanId} onboard; ${persona.label} 2UP queued`:`Local 1UP pilot; ${persona.label} 2UP queued`,
+   panelTitle:'1UP PILOT',
+   panelSub:'HUMAN TURN ACTIVE',
+   callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
+   status:`2UP ${persona.label} rival is queued after the human turn. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. 2UP rival scores do not post.`:'Local score path active. Sign in to post verified human scores.',
+   email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
+   userId:`Queued rival: ${persona.label}`,
+   hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
+   signedIn
+  };
+ }
+ return{
+  mode:signedIn?'human-signed-in':'human-local',
+  icon:'🧑‍🚀',
+  dockLabel:signedIn?'ONBOARD':'SIGN IN',
+  dockStatus:signedIn?humanId:'Pilot offline',
+  dockTitle:signedIn?`${humanId} onboard`:'Pilot Sign In',
+  panelTitle:'PILOT INFORMATION',
+  panelSub:'QUICK PILOT REFERENCE',
+  callsign:signedIn?`${humanId} IS ONBOARD`:'PILOT OFFLINE',
+  status:signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.',
+  summary:'',
+  email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
+  userId:`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`,
+  hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
+  signedIn
  };
 }
 function buildPlayerTwoStartHtml(){

@@ -61,6 +61,11 @@ async function main(){
     const launch = window.__galagaHarness__.state();
     const p2 = launch.playerTwo || {};
     const hudRight = window.__galagaHarness__.playerTwoState().hudRight;
+    const launchPilotCard = {
+      dock: document.getElementById('accountDockBtn')?.textContent || '',
+      mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
+      summary: document.getElementById('accountSummary')?.textContent || ''
+    };
     window.__galagaHarness__.advanceFor(8);
     const live = window.__galagaHarness__.state();
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 12340, stage: 2 });
@@ -70,6 +75,11 @@ async function main(){
     window.__galagaHarness__.advanceFor(12);
     const p2Turn = window.__galagaHarness__.state();
     const p2TurnHud = window.__galagaHarness__.playerTwoState().hudRight;
+    const p2PilotCard = {
+      dock: document.getElementById('accountDockBtn')?.textContent || '',
+      mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
+      summary: document.getElementById('accountSummary')?.textContent || ''
+    };
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 43210, stage: 3 });
     const p2GameOver = window.__galagaHarness__.gameOverView();
     const board = JSON.parse(localStorage.getItem('auroraGalacticaTop10') || '[]');
@@ -80,10 +90,12 @@ async function main(){
       afterRivalPicker,
       afterWatchPicker,
       hudRight,
+      launchPilotCard,
       gameOver,
       afterHumanP2,
       p2Turn,
       p2TurnHud,
+      p2PilotCard,
       p2GameOver,
       board,
       boardScores: board.map(row => row.score)
@@ -105,8 +117,11 @@ async function main(){
   if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'queued'){
     fail('Player Two score must stay queued at 0 during the human 1UP turn', signed);
   }
-  if(!/2UP/.test(signed.hudRight || '')){
-    fail('Player Two mode should render the arcade-style 2UP HUD lane', signed);
+  if(!/PILOT/.test(signed.hudRight || '') || !/SGW/.test(signed.hudRight || '')){
+    fail('human 1UP turn should keep the current onboard pilot visible in the HUD while 2UP is queued', signed);
+  }
+  if(signed.launchPilotCard?.mode !== 'human-with-rival' || !/1UP PILOT/.test(signed.launchPilotCard?.dock || '') || !/SGW/.test(signed.launchPilotCard?.dock || '')){
+    fail('pilot card should show the human as onboard while a 2UP rival is queued', signed);
   }
   if(!/playerTwoResultReady/.test(signed.gameOver?.html || '') || !/playerTwoVersus/.test(signed.gameOver?.html || '') || !/2UP PRO/.test(signed.gameOver?.html || '') || !/START 2UP TURN/.test(signed.gameOver?.html || '') || !/HUMAN SCORE ONLY/.test(signed.gameOver?.html || '')){
     fail('game-over results should offer an arcade-style 2UP turn panel while preserving human-only leaderboard meaning', signed);
@@ -119,6 +134,9 @@ async function main(){
   }
   if(!/2UP PLAY/.test(signed.p2TurnHud || '')){
     fail('active 2UP persona turn should be visible in the HUD as the playing lane', signed);
+  }
+  if(signed.p2PilotCard?.mode !== 'player-two-active' || !/2UP PLAY/.test(signed.p2PilotCard?.dock || '') || !/PROFESSIONAL/.test(signed.p2PilotCard?.dock || '') || !/comparison-only/.test(signed.p2PilotCard?.summary || '')){
+    fail('pilot card should show the persona rival onboard during the active 2UP turn', signed);
   }
   if(!signed.p2GameOver?.playerTwoMode || !/playerTwoResultFinal/.test(signed.p2GameOver?.html || '') || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.p2GameOver?.html || '')){
     fail('2UP turn game over should show the final arcade comparison and explicit human-only score meaning', signed);
@@ -142,11 +160,18 @@ async function main(){
     });
     window.__galagaHarness__.advanceFor(18);
     const live = window.__galagaHarness__.state();
+    const pilotCard = {
+      dock: document.getElementById('accountDockBtn')?.textContent || '',
+      mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
+      summary: document.getElementById('accountSummary')?.textContent || '',
+      hudRight: window.__galagaHarness__.playerTwoState().hudRight
+    };
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 55550, stage: 3 });
     const gameOver = window.__galagaHarness__.gameOverView();
     const board = JSON.parse(localStorage.getItem('auroraGalacticaTop10') || '[]');
     return {
       live,
+      pilotCard,
       gameOver,
       board,
       boardScores: board.map(row => row.score)
@@ -158,6 +183,9 @@ async function main(){
   }
   if((watch.live.score | 0) <= 0){
     fail('Watch Mode persona should actively play and score during the watched run', watch);
+  }
+  if(watch.pilotCard?.mode !== 'watch' || !/WATCH/.test(watch.pilotCard?.dock || '') || !/PROFESSIONAL/.test(watch.pilotCard?.dock || '') || !/not eligible/.test(watch.pilotCard?.summary || '') || !/WATCH/.test(watch.pilotCard?.hudRight || '')){
+    fail('Watch Mode should show the persona as the pilot onboard and score-ineligible in the pilot card', watch);
   }
   if(!watch.gameOver?.watchMode || !/WATCH MODE/.test(watch.gameOver?.html || '') || !/SCORE NOT RECORDED/.test(watch.gameOver?.html || '')){
     fail('Watch Mode game over should clearly mark the run as non-recorded', watch);
