@@ -91,13 +91,21 @@ mask:
 #msg .startMeta{display:block;color:rgba(231,240,255,.82);font-size:.62em;letter-spacing:.08em;line-height:1.42}
 #msg .startPickerHint{color:#ffe39a}
 #msg .startNotice{display:block;margin:.42em auto 0;max-width:34em;color:rgba(223,247,255,.76);font-size:.56em;letter-spacing:.08em;line-height:1.42}
-#msg .playerModeSelect{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(8.4em,1fr));gap:.18em .5em;justify-content:center;align-items:center;width:min(100%,24em);margin:.08em auto .42em;color:#f4f7ff;font-size:.58em;letter-spacing:.08em;line-height:1.18}
-#msg .playerModeOption,#msg .playerModePersona,#msg .playerModeWatch{display:block;border:1px solid rgba(126,242,255,.34);background:rgba(3,12,24,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 10px rgba(0,0,0,.24);padding:.34em .48em;text-align:center;cursor:pointer;text-transform:uppercase}
+#msg .playerModeSelect{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(9.4em,1fr));gap:.18em .42em;justify-content:center;align-items:stretch;width:min(100%,26em);margin:.08em auto .42em;color:#f4f7ff;font-size:.56em;letter-spacing:.08em;line-height:1.12;text-transform:uppercase}
+#msg .playerModeOption,#msg .playerModePersona,#msg .playerModeWatch{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.26em;align-items:center;border:1px solid rgba(126,242,255,.34);background:rgba(3,12,24,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 10px rgba(0,0,0,.24);padding:.34em .44em;text-align:left;cursor:pointer}
+#msg .playerModeKey{display:grid;gap:.02em;min-width:3.2em;color:#7ef2ff;text-align:center}
+#msg .playerModeKey b{color:inherit;font-size:.82em;letter-spacing:.1em}
+#msg .playerModeText{display:grid;gap:.08em;min-width:0}
+#msg .playerModeText strong{color:#f4f7ff;font-size:.9em;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#msg .playerModeText em{color:rgba(231,240,255,.78);font-style:normal;font-size:.64em;letter-spacing:.08em;line-height:1.16;white-space:normal;overflow:visible;text-overflow:clip}
 #msg .playerModeOption.isSelected{border-color:#ffd86d;color:#ffd86d;text-shadow:0 0 8px rgba(255,216,109,.32)}
-#msg .playerModeOption.isLocked{color:rgba(231,240,255,.42);border-color:rgba(231,240,255,.16);cursor:not-allowed}
-#msg .playerModePersona{grid-column:1/3;color:#7ef2ff;font-size:.9em}
-#msg .playerModeWatch{grid-column:1/3;color:#ffd86d;font-size:.9em}
-#msg .playerModeHint{grid-column:1/3;color:rgba(231,240,255,.72);font-size:.82em}
+#msg .playerModeOption.isSelected .playerModeKey,#msg .playerModeOption.isSelected .playerModeText strong{color:#ffd86d}
+#msg .playerModeOption.isLocked,#msg .playerModePersona.isLocked{color:rgba(231,240,255,.42);border-color:rgba(231,240,255,.16);cursor:not-allowed}
+#msg .playerModeOption.isLocked .playerModeKey,#msg .playerModeOption.isLocked .playerModeText strong,#msg .playerModePersona.isLocked .playerModeKey,#msg .playerModePersona.isLocked .playerModeText strong{color:rgba(231,240,255,.46)}
+#msg .playerModePersona{color:#7ef2ff}
+#msg .playerModePersona.isActive{border-color:rgba(255,216,109,.62);box-shadow:inset 0 0 0 1px rgba(255,216,109,.16),0 0 12px rgba(255,216,109,.12)}
+#msg .playerModeWatch{color:#ffd86d}
+#msg .playerModeHint{grid-column:1/3;color:rgba(231,240,255,.72);font-size:.72em;text-align:center;line-height:1.28}
 #msg .startQuoteWrap{display:grid;gap:.12em;justify-items:center;margin:.08em auto .46em;max-width:28em}
 #msg .startQuoteKicker{display:block;color:#7ef2ff;font-size:.5em;letter-spacing:.24em;text-transform:uppercase}
 #msg .startQuoteText{display:block;color:#f4f7ff;font-size:.58em;line-height:1.38;letter-spacing:.04em}

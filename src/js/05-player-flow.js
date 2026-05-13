@@ -446,11 +446,13 @@ function buildPlayerTwoStartHtml(){
  const watchPersona=selectedWatchPersona();
  const watchLabel=watchModePersonaLabel(watchPersona);
  const p2Locked=!state.signedIn;
- const mode1Class=`playerModeOption${state.selected?'':' isSelected'}`;
- const mode2Class=`playerModeOption${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
- const status=p2Locked?'2 PLAYERS REQUIRES SIGN IN':`2UP ${state.personaLabel} QUEUED   HUMAN SCORE ONLY`;
- const personaHint='<span class="k">[</span>/<span class="k">]</span> CHANGE PERSONA';
- return `<span class="playerModeSelect" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="k">1</span> 1 PLAYER</span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="k">2</span> 2 PLAYERS</span><span class="playerModePersona" role="button" tabindex="0" data-player-two-persona="cycle">${status}</span><span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="k">W</span> WATCH ${watchLabel}</span><span class="playerModeHint">${personaHint}</span></span>`;
+ const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
+ const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
+ const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked?' isLocked':''}`;
+ const p2Status=p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
+ const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
+ const personaHint='<span class="k">[</span>/<span class="k">]</span> SET PILOT   <span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
+ return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span><span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="cycle"><span class="playerModeKey"><b>RIVAL</b></span><span class="playerModeText"><strong>${state.personaLabel}</strong><em>${personaMeta}</em></span></span><span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b></span><span class="playerModeText"><strong>${watchLabel}</strong><em>SCORE NOT RECORDED</em></span></span><span class="playerModeHint">${personaHint}</span></span>`;
 }
 function buildPlayerTwoResultsHtml(){
  const p2=S.playerTwo;

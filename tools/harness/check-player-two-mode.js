@@ -11,7 +11,11 @@ async function main(){
   const unsigned = await withHarnessPage({ skipStart: true, seed: 77102 }, async ({ page }) => page.evaluate(() => {
     window.__galagaHarness__.showFrontDoor();
     window.__galagaHarness__.setupPlayerTwoModeTest({ signedIn: false });
-    return window.__galagaHarness__.setPlayerTwoMode({ enabled: true, persona: 'expert' });
+    const blocked = window.__galagaHarness__.setPlayerTwoMode({ enabled: true, persona: 'expert' });
+    window.__galagaHarness__.advanceFor(0);
+    return Object.assign({}, blocked, {
+      frontDoorHtml: document.getElementById('msg')?.innerHTML || ''
+    });
   }));
 
   if(unsigned.selection?.selected){
@@ -19,6 +23,9 @@ async function main(){
   }
   if(!/sign in/i.test(unsigned.accountNotice || '')){
     fail('blocked Player Two mode should explain that sign-in is required', unsigned);
+  }
+  if(!/SIGN IN REQUIRED/.test(unsigned.frontDoorHtml || '') || !/LOCKED UNTIL SIGN-IN/.test(unsigned.frontDoorHtml || '') || !/SCORE NOT RECORDED/.test(unsigned.frontDoorHtml || '')){
+    fail('signed-out start screen should clearly show the locked 2UP lane while keeping Watch Mode available', unsigned);
   }
 
   const signed = await withHarnessPage({ skipStart: true, seed: 77103 }, async ({ page }) => page.evaluate(() => {
@@ -29,6 +36,8 @@ async function main(){
       email: 'pilot@example.com'
     });
     window.__galagaHarness__.setPlayerTwoMode({ enabled: true, persona: 'professional' });
+    window.__galagaHarness__.advanceFor(0);
+    const frontDoorHtml = document.getElementById('msg')?.innerHTML || '';
     window.__galagaHarness__.start({
       autoVideo: false,
       controlledClock: true,
@@ -36,10 +45,12 @@ async function main(){
       playerTwo: true,
       playerTwoPersona: 'professional'
     });
-    window.__galagaHarness__.advanceFor(18);
-    const live = window.__galagaHarness__.state();
-    const p2 = live.playerTwo || {};
+    window.__galagaHarness__.advanceFor(0);
+    const launch = window.__galagaHarness__.state();
+    const p2 = launch.playerTwo || {};
     const hudRight = window.__galagaHarness__.playerTwoState().hudRight;
+    window.__galagaHarness__.advanceFor(8);
+    const live = window.__galagaHarness__.state();
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 12340, stage: 2 });
     const gameOver = window.__galagaHarness__.gameOverView();
     const afterHumanP2 = window.__galagaHarness__.playerTwoState().run;
@@ -53,6 +64,7 @@ async function main(){
     return {
       live,
       p2,
+      frontDoorHtml,
       hudRight,
       gameOver,
       afterHumanP2,
@@ -66,6 +78,9 @@ async function main(){
 
   if(!signed.p2.enabled || signed.p2.personaKey !== 'professional'){
     fail('signed Player Two mode should start a professional persona rival run', signed);
+  }
+  if(!/2 PLAYERS/.test(signed.frontDoorHtml || '') || !/PRO RIVAL/.test(signed.frontDoorHtml || '') || !/HUMAN SCORE ONLY/.test(signed.frontDoorHtml || '') || !/WATCH/.test(signed.frontDoorHtml || '') || !/SCORE NOT RECORDED/.test(signed.frontDoorHtml || '')){
+    fail('signed-in start screen should make 2UP rival and Watch Mode meanings clear before launch', signed);
   }
   if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'queued'){
     fail('Player Two score must stay queued at 0 during the human 1UP turn', signed);
