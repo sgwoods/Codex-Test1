@@ -37,6 +37,7 @@ function updateAuroraGameplay(dt){
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
  S.audioPulseHoldT=Math.max(0,(+S.audioPulseHoldT||0)-dt);
+ if(typeof updateCommentator==='function')updateCommentator(dt);
  if(S.startCueT>0){
   S.startCueT=Math.max(0,S.startCueT-dt);
   if(!S.startCueT)sfx.start();
@@ -222,6 +223,7 @@ function updateAuroraGameplay(dt){
   if(S.cap)return;
   if(S.attract){logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'stage_clear'});enterAttractScores();return}
   logEvent('stage_clear',{stage:S.stage,score:S.score});
+  if(typeof commentatorEvent==='function')commentatorEvent('stage_clear',{stage:S.stage,score:S.score});
   S.stage++;
   queueStageTransition();
   return

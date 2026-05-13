@@ -181,6 +181,7 @@ mask:
 #conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
 #audioMixPanel h4{color:#9eefff}
+#commentatorPanel h4{color:#ffd86d}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .settingsField{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -188,6 +189,7 @@ mask:
 #graphicsPanel label,#testPanel label,#audioMixPanel label{display:block;font-size:12px}
 #graphicsPanel label{color:#ffe6ae}
 #audioMixPanel label{color:#bff6ff}
+#commentatorPanel label{color:#ffe39a}
 #testPanel label{color:#b7efd0}
 #graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
@@ -197,6 +199,10 @@ mask:
 .settingsRangeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .settingsRangeValue{font:700 12px/1 "Courier New",Consolas,monospace;color:#ffe39a}
 .settingsRangeRow input[type="range"]{width:100%;accent-color:#7ef2ff;cursor:pointer}
+.settingsToggleRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;align-items:center;padding:8px 10px;border:1px solid rgba(255,216,109,.18);background:rgba(28,21,5,.42);cursor:pointer}
+.settingsToggleRow input{grid-row:1/3;accent-color:#ffd86d;cursor:pointer}
+.settingsToggleLabel{font-size:12px;line-height:1.2;color:#fff0b5}
+.settingsToggleHint{font-size:11px;line-height:1.25;color:#d7c38b}
 #testStage,#testShips{max-width:240px}
 #rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
 #rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}

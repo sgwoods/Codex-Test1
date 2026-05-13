@@ -21,6 +21,7 @@ function capturePlayer(e){
  }
  S.lastCaptureStartT=S.stageClock;
  logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));
+ if(typeof commentatorEvent==='function')commentatorEvent('capture_started',{stage:S.stage,enemyId:e.id});
  sfx.beam();
 }
 

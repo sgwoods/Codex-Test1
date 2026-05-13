@@ -123,7 +123,7 @@ function gameplayMessageState(){
    topRatio:.48
   };
  }
- if(S.banner<=0)return null;
+ if(S.banner<=0)return typeof commentatorMessageState==='function'?commentatorMessageState():null;
  switch(S.bannerMode){
   case 'challengeIntro':
    return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};

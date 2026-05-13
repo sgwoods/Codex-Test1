@@ -329,6 +329,20 @@ window.__galagaHarness__={
   }
   return false;
  },
+ commentatorState(){
+  return window.__platinumCommentator?.state?.()||null;
+ },
+ setCommentatorEnabled(enabled=true){
+  return window.__platinumCommentator?.setEnabled?.(!!enabled,{log:1,source:'harness'})||null;
+ },
+ queueCommentator(cfg={}){
+  return !!window.__platinumCommentator?.queueForHarness?.(
+   cfg.key||'harness',
+   cfg.title||'TACTICAL UPDATE',
+   cfg.lines||['Harness callout'],
+   Object.assign({force:1,minGap:0,duration:+cfg.duration||1.5},cfg.opts||{})
+  );
+ },
  triggerShipLoss(cfg={}){
   const reserveLives = Math.max(0, Number.isFinite(+cfg.reserveLives) ? (+cfg.reserveLives|0) : 1);
   S.lives = reserveLives;

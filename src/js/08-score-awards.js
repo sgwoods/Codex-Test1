@@ -153,6 +153,7 @@ function awardKill(e,mode){
  awardScorePoints(pts);
  const carrying=enemyIsCarryingFighter(e);
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(carrying&&dive),turnedHostile:!!(carrying&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+ if(e.t==='boss'&&typeof commentatorEvent==='function')commentatorEvent('boss_destroyed',{points:pts,dive,carrying});
  if(carrying){
   if(dive){
    releaseCapturedFighter(e);
@@ -178,6 +179,7 @@ function awardRescueJoin(autoDock){
   playerX:+p.x.toFixed(2),
   playerY:+p.y.toFixed(2)
  },autoDock?{autoDock:1}:null));
+ if(typeof commentatorEvent==='function')commentatorEvent('fighter_rescued',{stage:S.stage,autoDock:!!autoDock});
  logEvent('rescue_join_phase',Object.assign({
   stage:S.stage,
   duration:1.1,
@@ -197,6 +199,7 @@ function finalizeChallengeClear(){
  S.bannerSub=`HITS ${S.ch.hits}/${S.ch.total}`;
  const bonusTotal=(S.ch.bonus||0)+perfect;
  if(bonusTotal)S.bannerSub+=`\nBONUS ${bonusTotal}`;
+ if(typeof commentatorEvent==='function')commentatorEvent(perfect?'challenge_perfect':'challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,bonusTotal});
  S.bannerMode='challengeResult';
  S.banner=1.15;
  S.pendingStage=S.stage+1;

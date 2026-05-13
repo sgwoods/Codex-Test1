@@ -41,7 +41,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -276,6 +276,7 @@ const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
 const PLAYER_TWO_MODE_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoMode`;
 const PLAYER_TWO_PERSONA_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoPersona`;
 const WATCH_MODE_PERSONA_PREF_KEY=`${STORAGE_PREFIX}WatchModePersona`;
+const COMMENTATOR_PREF_KEY=`${STORAGE_PREFIX}Commentator`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
@@ -293,6 +294,7 @@ const LEGACY_STORAGE_KEYS={
  [PLAYER_TWO_MODE_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoMode`,
  [PLAYER_TWO_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoPersona`,
  [WATCH_MODE_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}WatchModePersona`,
+ [COMMENTATOR_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}Commentator`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
@@ -312,6 +314,7 @@ const PLATFORM_STORAGE_KEYS={
  [PLAYER_TWO_MODE_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoMode`,
  [PLAYER_TWO_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoPersona`,
  [WATCH_MODE_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}WatchModePersona`,
+ [COMMENTATOR_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}Commentator`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
@@ -1094,7 +1097,7 @@ const P={
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:''};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
  id:'classic-arcade-stars',
@@ -1465,7 +1468,7 @@ function startAttractDemo(opts={}){
  ATTRACT.audioPulseTimer=.8;
  ATTRACT.audioPulseIndex=0;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionMode:'',transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionMode:'',transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
@@ -1793,6 +1796,7 @@ function syncSettingsUi(){
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
  syncAudioMixControls();
+ if(typeof syncCommentatorControls==='function')syncCommentatorControls();
  syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
