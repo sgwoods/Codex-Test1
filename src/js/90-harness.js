@@ -434,6 +434,10 @@ window.__galagaHarness__={
   if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness'});
   return this.state();
  },
+ startPlayerTwoTurn(){
+  if(typeof startPlayerTwoTurnFromGameOver==='function')startPlayerTwoTurnFromGameOver('harness');
+  return this.state();
+ },
  setupRemoteScoreSubmitTest(cfg={}){
   window.__platinumHarnessForceRemoteWrite=1;
   window.__auroraHarnessForceRemoteWrite=1;
@@ -537,6 +541,8 @@ window.__galagaHarness__={
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
    watchMode:!!gameOverState?.watchMode,
+   playerTwoMode:!!gameOverState?.playerTwoMode,
+   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    rank:+(gameOverState?.rank||0),
    editing:!!gameOverState?.editing,
    topScoreSigninPrompt:!!gameOverState?.topScoreSigninPrompt,

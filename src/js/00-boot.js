@@ -1371,8 +1371,9 @@ function buildAttractScoreboardHtml(){
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
 function buildGameOverState(score,stage,challenge=0){
- if(S.watchMode){
+ if(S.watchMode||S.playerTwo?.activeTurn==='done'){
   const shownStage=displayStageNumber(stage,challenge);
+  const playerTwoMode=!!(!S.watchMode&&S.playerTwo?.activeTurn==='done');
   return{
    entryId:'',
    rank:0,
@@ -1385,9 +1386,10 @@ function buildGameOverState(score,stage,challenge=0){
    initials:['-','-','-'],
    cursor:0,
    editing:false,
-   watchMode:true,
+   watchMode:!!S.watchMode,
+   playerTwoMode,
    topScoreSigninPrompt:false,
-   topScoreVideoPosting:{top10:false,signedIn:false,canPostVideo:false,verifiedScore:false,reason:'watch_mode'},
+   topScoreVideoPosting:{top10:false,signedIn:false,canPostVideo:false,verifiedScore:false,reason:playerTwoMode?'player_two_persona':'watch_mode'},
    remoteSubmitted:1
   };
  }
@@ -2412,11 +2414,12 @@ addEventListener('keydown',e=>{
   return;
  }
  if(!started&&gameOverState){
+  if(typeof handlePlayerTwoGameOverKey==='function'&&handlePlayerTwoGameOverKey(e))return;
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
     e.preventDefault();
     gameOverState.phase='scoreboard';
-    if(!gameOverState.editing&&!gameOverState.watchMode)submitGameOverScore();
+    if(!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode)submitGameOverScore();
     if(gameOverState.rank)sfx.highScore(gameOverState.rank);
     gameOverHtml=buildGameOverHtmlFromState();
    }
@@ -2492,7 +2495,7 @@ function launchCurrentGameFromWaitMode(e=null){
   e?.preventDefault?.();
   restorePlayableGamePackForLaunch();
  }
- if(gameOverState&&!gameOverState.editing)submitGameOverScore();
+ if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode)submitGameOverScore();
  stopAttractLoop();start();
  return true;
 }

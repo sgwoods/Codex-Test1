@@ -106,6 +106,8 @@ function commentatorEvent(type,payload={}){
    return queueCommentatorCallout('watch_mode','WATCH MODE',[payload.label?`${payload.label} pilot flying now.`:'Persona pilot flying now.'],{duration:2.2,minGap:3,force:1});
   case 'player_two_queued':
    return queueCommentatorCallout('player_two_queued','2UP QUEUED',[`${payload.initials||'2UP'} ${payload.label||'persona'} ready.`,'Human score only.'],{duration:2.3,minGap:3,force:1});
+  case 'player_two_turn_start':
+   return queueCommentatorCallout('player_two_turn_start','2UP TURN',[`${payload.initials||'2UP'} ${payload.label||'persona'} flying now.`,'Score will not post.'],{duration:2.35,minGap:3,force:1});
   case 'player_two_progress':
    return queueCommentatorCallout('player_two_progress','2UP UPDATE',[`${payload.initials||'2UP'} ${formatScore(payload.score||0)} STG ${String(payload.stage||1).padStart(2,'0')}`,'Human score only.'],{duration:2.1,minGap:10});
   case 'player_two_stage':
