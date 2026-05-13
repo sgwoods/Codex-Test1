@@ -122,6 +122,8 @@ mask:
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
 #msg .gameOverAuthPrompt{display:block;color:#7ef2ff;font-size:.54em;letter-spacing:.06em;line-height:1.28;margin:-.12em auto .42em;max-width:28em}
+#msg .gameOverAuthBtn{display:inline-flex;align-items:center;justify-content:center;margin:0 .2em;padding:.1em .42em;border:1px solid rgba(255,216,109,.62);background:rgba(61,46,9,.72);color:#ffe39a;font:700 .92em/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+#msg .gameOverAuthBtn:hover,#msg .gameOverAuthBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.88);box-shadow:0 0 10px rgba(255,216,109,.18)}
 #msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
@@ -564,8 +566,12 @@ mask:
 #leaderboardPanelTable .scoreCell.meta{display:flex;flex-direction:column;gap:2px;color:#dff7ff}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta{gap:1px}
 #leaderboardPanelTable .scoreCell.meta .scoreBuild{color:#8defff}
+#leaderboardPanelTable .scoreCell.meta .scoreMetaFooter{display:flex;align-items:center;gap:6px;min-width:0}
 #leaderboardPanelTable .scoreCell.meta .scoreDate{color:rgba(223,247,255,.78);font-size:.88em}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta .scoreDate{font-size:.82em}
+#leaderboardPanelTable .leaderboardReplayBtn{border:1px solid rgba(255,217,128,.36);background:rgba(61,46,9,.72);color:#ffe39a;font:700 9px/1 "Courier New",Consolas,monospace;padding:3px 5px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+#leaderboardPanelTable .leaderboardReplayBtn:hover,#leaderboardPanelTable .leaderboardReplayBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
+#statusPanels.framedOverlay #leaderboardPanelTable .leaderboardReplayBtn{font-size:8px;padding:2px 4px}
 #leaderboardPanelTable .scoreCell.score{text-align:right}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}

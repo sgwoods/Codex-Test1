@@ -250,14 +250,22 @@ if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
 if(accountPasswordToggle)accountPasswordToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPassword,accountPasswordToggle,'password'));
 if(accountPasswordConfirmToggle)accountPasswordConfirmToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password'));
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
-async function openReplayFromPilotRecordsTarget(target){
+async function openReplayFromScoreTarget(target,opts={}){
  const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';
  if(replayId&&typeof window.openMovieReplayById==='function'){
-  if(typeof closeAccountPanel==='function')closeAccountPanel();
+  if(opts.closeAccount&&typeof closeAccountPanel==='function')closeAccountPanel();
+  if(opts.closeLeaderboard&&typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+  if(typeof logEvent==='function')logEvent('score_replay_opened',{replayId,source:opts.source||'score_surface'});
   await window.openMovieReplayById(replayId);
   return true;
  }
  return false;
+}
+async function openReplayFromPilotRecordsTarget(target){
+ return openReplayFromScoreTarget(target,{closeAccount:true,source:'pilot_records'});
+}
+async function openReplayFromLeaderboardTarget(target){
+ return openReplayFromScoreTarget(target,{closeLeaderboard:true,source:'leaderboard'});
 }
 if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
  const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
@@ -281,6 +289,34 @@ if(accountRecordsTop5)accountRecordsTop5.addEventListener('keydown',e=>{
  e.preventDefault();
  e.stopPropagation();
  openReplayFromPilotRecordsTarget(row);
+});
+if(leaderboardPanel)leaderboardPanel.addEventListener('click',e=>{
+ const btn=e.target.closest('.leaderboardReplayBtn');
+ if(!btn)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromLeaderboardTarget(btn);
+});
+if(leaderboardPanel)leaderboardPanel.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const btn=e.target.closest('.leaderboardReplayBtn');
+ if(!btn)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromLeaderboardTarget(btn);
+});
+if(msg)msg.addEventListener('click',e=>{
+ const btn=e.target.closest('.gameOverAuthBtn');
+ if(!btn)return;
+ e.preventDefault();
+ e.stopPropagation();
+ if(typeof setAccountNotice==='function')setAccountNotice('Sign in to claim this top-10 score, tie the replay to your pilot, and prepare it for future video posting.');
+ if(typeof logEvent==='function')logEvent('top_score_signin_prompt_opened',{
+  rank:+(gameOverState?.rank||0),
+  score:+(gameOverState?.score||0),
+  stage:+(gameOverState?.shownStage||gameOverState?.stage||0)
+ });
+ if(typeof openAccountPanel==='function')openAccountPanel();
 });
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));

@@ -1354,7 +1354,7 @@ function buildGameOverHtmlFromState(){
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
- const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Sign in to post your replay and claim a verified score.</span>':'';
+ const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Top-10 run saved locally. Sign in to post your replay, claim a verified score, and prepare future video posting. <button type="button" class="gameOverAuthBtn">Pilot Sign In</button></span>':'';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
   const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');

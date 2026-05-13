@@ -1,5 +1,40 @@
 // Shared leaderboard and pilot account UI/state helpers.
 
+function findReplayForScoreRow(row,opts={}){
+ const runs=typeof replayCatalogRows==='function'?replayCatalogRows():[];
+ if(!row||!runs.length)return null;
+ if(row?.replayId){
+  const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
+  if(directRun)return directRun;
+ }
+ const scopedRuns=opts.activePilotOnly&&typeof replayMatchesActivePilot==='function'
+  ? runs.filter(run=>replayMatchesActivePilot(run))
+  : runs;
+ const runPool=scopedRuns.length?scopedRuns:runs;
+ const rowScore=+row.score||0;
+ const rowStage=+row.stage||0;
+ const rowStamp=Date.parse((typeof resolveRowTimestamp==='function'?resolveRowTimestamp(row):row?.at)||'');
+ const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+ if(Number.isFinite(rowStamp)){
+  const exactTimed=byScoreStage.find(run=>{
+   const replayStamp=Date.parse(run.createdAt||'');
+   return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+  });
+  if(exactTimed)return exactTimed;
+ }
+ if(byScoreStage.length)return byScoreStage[0];
+ if(Number.isFinite(rowStamp)){
+  const sameStageTimed=runPool.find(run=>{
+   if((+run.stage||0)!==rowStage)return false;
+   const replayStamp=Date.parse(run.createdAt||'');
+   return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+  });
+  if(sameStageTimed)return sameStageTimed;
+ }
+ const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
+ if(sameStageRuns.length===1)return sameStageRuns[0];
+ return null;
+}
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
@@ -32,43 +67,10 @@ function renderPilotRecords(rows){
   .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)||row.at||''}))
   .sort((a,b)=>(Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))||(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0))
   .slice(0,5);
- const replayForRow=(row)=>{
-  const runs=replayCatalogRows();
-  if(row?.replayId){
-   const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
-   if(directRun)return directRun;
-  }
-  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run));
-  const runPool=pilotMatchedRuns.length?pilotMatchedRuns:runs;
-  const rowScore=+row.score||0;
-  const rowStage=+row.stage||0;
-  const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
-  const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
-  if(Number.isFinite(rowStamp)){
-   const exactTimed=byScoreStage.find(run=>{
-    const replayStamp=Date.parse(run.createdAt||'');
-    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
-   });
-   if(exactTimed)return exactTimed;
-  }
-  if(byScoreStage.length)return byScoreStage[0];
-  if(Number.isFinite(rowStamp)){
-   const sameStageTimed=runPool.find(run=>{
-    if((+run.stage||0)!==rowStage)return false;
-    const replayStamp=Date.parse(run.createdAt||'');
-    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
-   });
-   if(sameStageTimed)return sameStageTimed;
-  }
-  const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
-  if(sameStageRuns.length===1)return sameStageRuns[0];
-  if(pilotMatchedRuns.length===1)return pilotMatchedRuns[0];
-  return null;
- };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
   const stamp=formatWhenShort(row.resolvedAt||resolveRowTimestamp(row)||row.at);
-  const replay=replayForRow(row);
+  const replay=findReplayForScoreRow(row,{activePilotOnly:true});
   return `<div class="accountRecordRow${replay?' hasReplay':''}"${replay?` data-replay-id="${replay.id}" tabindex="0" role="button" aria-label="Replay this flight"`:''}><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}" title="Replay this flight">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
  const bindReplayAction=(node,opts={})=>{
@@ -242,10 +244,12 @@ function renderLeaderboardPanel(){
  for(let i=0;i<10;i++){
   const row=limited[i]||{initials:'---',score:0,stage:0,idx:i+1,verified:0};
   const meta=formatLeaderboardRowMeta(row);
+  const replay=findReplayForScoreRow(row,{activePilotOnly:LEADERBOARD.view==='mine'});
+  const replayHtml=replay?`<button type="button" class="leaderboardReplayBtn" data-replay-id="${escapeLeaderboardHtml(replay.id)}" title="Watch this local replay">Replay</button>`:'';
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
   const fullMeta=`${meta.buildRaw} ${meta.dateLabel}`.trim();
-  body.push(`<span class="scoreCell meta" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreDate">${meta.dateLabel}</span></span>`);
+  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }
