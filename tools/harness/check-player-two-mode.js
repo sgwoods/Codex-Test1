@@ -46,6 +46,7 @@ async function main(){
     window.__galagaHarness__.startPlayerTwoTurn();
     window.__galagaHarness__.advanceFor(12);
     const p2Turn = window.__galagaHarness__.state();
+    const p2TurnHud = window.__galagaHarness__.playerTwoState().hudRight;
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 43210, stage: 3 });
     const p2GameOver = window.__galagaHarness__.gameOverView();
     const board = JSON.parse(localStorage.getItem('auroraGalacticaTop10') || '[]');
@@ -56,6 +57,7 @@ async function main(){
       gameOver,
       afterHumanP2,
       p2Turn,
+      p2TurnHud,
       p2GameOver,
       board,
       boardScores: board.map(row => row.score)
@@ -71,8 +73,8 @@ async function main(){
   if(!/2UP/.test(signed.hudRight || '')){
     fail('Player Two mode should render the arcade-style 2UP HUD lane', signed);
   }
-  if(!/2UP PRO/.test(signed.gameOver?.html || '') || !/START 2UP TURN/.test(signed.gameOver?.html || '') || !/HUMAN SCORE ONLY/.test(signed.gameOver?.html || '')){
-    fail('game-over results should offer a 2UP turn while preserving human-only leaderboard meaning', signed);
+  if(!/playerTwoResultReady/.test(signed.gameOver?.html || '') || !/playerTwoVersus/.test(signed.gameOver?.html || '') || !/2UP PRO/.test(signed.gameOver?.html || '') || !/START 2UP TURN/.test(signed.gameOver?.html || '') || !/HUMAN SCORE ONLY/.test(signed.gameOver?.html || '')){
+    fail('game-over results should offer an arcade-style 2UP turn panel while preserving human-only leaderboard meaning', signed);
   }
   if(signed.afterHumanP2?.activeTurn !== 'ready' || (signed.afterHumanP2?.humanScore | 0) !== 12340){
     fail('human game over should queue the persona 2UP turn without starting it during 1UP', signed);
@@ -80,8 +82,11 @@ async function main(){
   if(!signed.p2Turn.playerTwo?.enabled || signed.p2Turn.playerTwo?.activeTurn !== 'p2' || signed.p2Turn.harnessPersona !== 'professional'){
     fail('starting the 2UP turn should hand active play to the selected persona', signed);
   }
-  if(!signed.p2GameOver?.playerTwoMode || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.p2GameOver?.html || '')){
-    fail('2UP turn game over should be marked non-recorded with explicit human-only score meaning', signed);
+  if(!/2UP PLAY/.test(signed.p2TurnHud || '')){
+    fail('active 2UP persona turn should be visible in the HUD as the playing lane', signed);
+  }
+  if(!signed.p2GameOver?.playerTwoMode || !/playerTwoResultFinal/.test(signed.p2GameOver?.html || '') || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.p2GameOver?.html || '')){
+    fail('2UP turn game over should show the final arcade comparison and explicit human-only score meaning', signed);
   }
   if(!signed.boardScores.includes(12340)){
     fail('human score should be recorded in the local top-10 board', signed);

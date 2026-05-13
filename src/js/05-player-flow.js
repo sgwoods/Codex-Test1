@@ -457,15 +457,20 @@ function buildPlayerTwoResultsHtml(){
  if(!p2?.enabled)return '';
  const human=(p2.humanScore!=null?p2.humanScore:S.score)|0;
  const p2Score=p2.score|0;
- if(p2.activeTurn==='ready')return `<span class="playerTwoResult"><span>2UP ${p2.initials||'---'} READY   1UP ${formatScore(human)}</span><span><span class="k">2</span> START 2UP TURN   HUMAN SCORE ONLY</span></span>`;
- if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done')return `<span class="playerTwoResult"><span>2UP ${p2.initials||'---'} ${formatScore(p2Score)}   READY</span><span>2UP HAS NOT PLAYED THIS TURN   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+ const initials=p2.initials||'---';
+ if(p2.activeTurn==='ready')return `<span class="playerTwoResult playerTwoResultReady"><span class="playerTwoKicker">1UP COMPLETE</span><span class="playerTwoVersus"><span class="playerTwoLane is1up"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up"><b>2UP ${initials}</b><strong>READY</strong></span></span><span class="playerTwoPrompt"><span class="k">2</span> START 2UP TURN</span><span class="playerTwoRule">HUMAN SCORE ONLY</span></span>`;
+ if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done')return `<span class="playerTwoResult playerTwoResultQueued"><span class="playerTwoKicker">2UP ${initials} ${formatScore(p2Score)} READY</span><span class="playerTwoRule">2UP HAS NOT PLAYED THIS TURN   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
  const outcome=human>=p2Score?'1UP LEADS':'2UP LEADS';
- return `<span class="playerTwoResult"><span>2UP ${p2.initials||'---'} ${formatScore(p2Score)}   STG ${String(p2.stage||1).padStart(2,'0')}</span><span>${outcome}   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+ const humanClass=human>=p2Score?' isLeader':'';
+ const p2Class=p2Score>human?' isLeader':'';
+ return `<span class="playerTwoResult playerTwoResultFinal"><span class="playerTwoKicker">${outcome}</span><span class="playerTwoVersus"><span class="playerTwoLane is1up${humanClass}"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up${p2Class}"><b>2UP ${initials}</b><strong>${formatScore(p2Score)}</strong><em>STG ${String(p2.stage||1).padStart(2,'0')}</em></span></span><span class="playerTwoRule">1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
 }
 function playerTwoHudHtml(){
  const p2=S.playerTwo;
  if(!p2?.enabled)return '';
- return `<span class="hudLabel">2UP</span> <span class="hudValue">${formatScore(p2.score||0)}</span>`;
+ const state=p2.activeTurn==='p2'?' PLAY':p2.activeTurn==='ready'?' READY':'';
+ const cls=p2.activeTurn==='p2'?' playerTwoHudActive':p2.activeTurn==='ready'?' playerTwoHudReady':'';
+ return `<span class="playerTwoHud${cls}"><span class="hudLabel">2UP${state}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`;
 }
 function handlePlayerTwoWaitKey(e){
  if(started||gameOverState?.editing)return false;
