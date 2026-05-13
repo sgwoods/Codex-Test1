@@ -44,9 +44,9 @@ function syncAudioUi(){
  if(!muteToggleBtn)return;
  muteToggleBtn.dataset.muted=audioMuted?'true':'false';
  muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
- muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
- muteToggleBtn.title=audioMuted?'Unmute game audio':'Mute game audio';
- muteToggleBtn.dataset.actionTip=audioMuted?'Unmute game audio':'Mute game audio';
+ muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute sound effects':'Mute sound effects');
+ muteToggleBtn.title=audioMuted?'Unmute sound effects':'Mute sound effects';
+ muteToggleBtn.dataset.actionTip=audioMuted?'Unmute sound effects':'Mute sound effects';
  const icon=muteToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:gameSoundVolume;
@@ -75,6 +75,8 @@ function arcadeMusicState(){
   hasFrame:!!(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe')),
   playlistId:arcadeMusicPlaylistId(),
   arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  arcadeMusicMuted:!!arcadeMusicMuted,
+  audible:!!((ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading')&&!arcadeMusicMuted&&arcadeMusicVolume>0),
   gameSoundVolume:+gameSoundVolume.toFixed(3),
   lastTrack:ARCADE_MUSIC.lastTrack||null
  };
@@ -83,15 +85,20 @@ function syncArcadeMusicUi(){
  if(!arcadeMusicToggleBtn)return;
  const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
  const unavailable=ARCADE_MUSIC.state==='unavailable'||!arcadeMusicPlaylistId();
- arcadeMusicToggleBtn.dataset.musicState=active?ARCADE_MUSIC.state:(unavailable?'unavailable':'off');
+ const muted=active&&!!arcadeMusicMuted;
+ arcadeMusicToggleBtn.dataset.musicState=active?(muted?'muted':ARCADE_MUSIC.state):(unavailable?'unavailable':'off');
+ arcadeMusicToggleBtn.dataset.musicPlaying=active?'true':'false';
+ arcadeMusicToggleBtn.dataset.musicMuted=muted?'true':'false';
  arcadeMusicToggleBtn.dataset.configured=arcadeMusicPlaylistId()?'true':'false';
- arcadeMusicToggleBtn.setAttribute('aria-pressed',active?'true':'false');
- arcadeMusicToggleBtn.setAttribute('aria-label',active?'Turn off Arcade Music':'Arcade Music');
- arcadeMusicToggleBtn.title='Arcade Music';
- arcadeMusicToggleBtn.dataset.actionTip='Arcade Music';
- arcadeMusicToggleBtn.classList.toggle('active',active);
+ arcadeMusicToggleBtn.setAttribute('aria-pressed',muted?'true':'false');
+ const label=unavailable?'Arcade Music unavailable':(!active?'Start Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'));
+ arcadeMusicToggleBtn.setAttribute('aria-label',label);
+ arcadeMusicToggleBtn.title=label;
+ arcadeMusicToggleBtn.dataset.actionTip=label;
+ arcadeMusicToggleBtn.classList.toggle('active',active&&!muted);
+ arcadeMusicToggleBtn.classList.toggle('muted',muted);
  const icon=arcadeMusicToggleBtn.querySelector('.dockIcon');
- if(icon)icon.textContent=active?'🎶':'🎵';
+ if(icon)icon.textContent=active&&!muted?'🎶':'🎵';
 }
 function arcadeMusicEmbedUrl(playlistId){
  const origin=(location&&location.origin&&location.origin!=='null')?`&origin=${encodeURIComponent(location.origin)}`:'';
@@ -114,7 +121,7 @@ function arcadeMusicCommand(func='',args=[]){
 function applyArcadeMusicVolume(){
  const pct=volumePercent(arcadeMusicVolume);
  arcadeMusicCommand('setVolume',[pct]);
- arcadeMusicCommand(pct>0?'unMute':'mute',[]);
+ arcadeMusicCommand(pct>0&&!arcadeMusicMuted?'unMute':'mute',[]);
  return pct;
 }
 function primeArcadeMusicPlayerApi(){
@@ -143,7 +150,8 @@ function acceptArcadeMusicTrack(videoData={},source='youtube_player'){
   artist:track.artist,
   videoId:track.videoId,
   source,
-  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3)
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  arcadeMusicMuted:!!arcadeMusicMuted
  });
  return true;
 }
@@ -189,6 +197,8 @@ function startArcadeMusic(){
   return false;
  }
  if(!arcadeMusicFrameHost)return false;
+ arcadeMusicMuted=false;
+ writePref(ARCADE_MUSIC_MUTED_PREF_KEY,'0');
  arcadeMusicFrameHost.innerHTML='';
  const frame=document.createElement('iframe');
  frame.id='arcadeMusicFrame';
@@ -212,7 +222,7 @@ function startArcadeMusic(){
  syncArcadeMusicUi();
  [120,600,1800].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
  showToast('Arcade Music on');
- if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true,arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),gameSoundVolume:+gameSoundVolume.toFixed(3)});
+ if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true,arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),arcadeMusicMuted:!!arcadeMusicMuted,gameSoundVolume:+gameSoundVolume.toFixed(3),soundEffectsMuted:!!audioMuted});
  return true;
 }
 function stopArcadeMusic(opts={}){
@@ -227,9 +237,32 @@ function stopArcadeMusic(opts={}){
  if(!opts.silent)showToast('Arcade Music off');
  if(typeof logEvent==='function')logEvent('arcade_music_off',{silent:!!opts.silent});
 }
+function setArcadeMusicMuted(next,opts={}){
+ arcadeMusicMuted=!!next;
+ writePref(ARCADE_MUSIC_MUTED_PREF_KEY,arcadeMusicMuted?'1':'0');
+ applyArcadeMusicVolume();
+ syncArcadeMusicUi();
+ if(typeof syncAudioMixControls==='function')syncAudioMixControls();
+ if(!opts.silent)showToast(arcadeMusicMuted?'Arcade Music muted':'Arcade Music on');
+ if((opts.log||!opts.silent)&&typeof logEvent==='function')logEvent('arcade_music_mute_changed',Object.assign(
+  typeof audioMixTelemetryBase==='function'?audioMixTelemetryBase():{},
+  {
+  muted:!!arcadeMusicMuted,
+   arcadeMusicMuted:!!arcadeMusicMuted,
+   source:String(opts.source||'dock')
+  }
+ ));
+}
+function toggleArcadeMusicMute(){
+ const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ if(!active){
+  startArcadeMusic();
+  return;
+ }
+ setArcadeMusicMuted(!arcadeMusicMuted,{silent:0,source:'dock'});
+}
 function toggleArcadeMusic(){
- if(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading')stopArcadeMusic();
- else startArcadeMusic();
+ toggleArcadeMusicMute();
 }
 function syncPauseUi(){
  if(!pauseToggleBtn)return;
@@ -262,8 +295,8 @@ function setAudioMuted(next,opts={}){
  audioMuted=!!next;
  writePref(AUDIO_MUTED_PREF_KEY,audioMuted?'1':'0');
  syncAudioUi();
- if(!opts.silent)showToast(audioMuted?'Game audio muted':'Game audio on');
- if(!opts.silent&&typeof logEvent==='function')logEvent('audio_mute_changed',Object.assign({muted:!!audioMuted},typeof audioMixTelemetryBase==='function'?audioMixTelemetryBase():{}));
+ if(!opts.silent)showToast(audioMuted?'Sound effects muted':'Sound effects on');
+ if(!opts.silent&&typeof logEvent==='function')logEvent('audio_mute_changed',Object.assign({muted:!!audioMuted,soundEffectsMuted:!!audioMuted},typeof audioMixTelemetryBase==='function'?audioMixTelemetryBase():{}));
 }
 function splitBuildStampDateTime(value=''){
  const raw=String(value||'').trim().replace(/\s+/g,' ');

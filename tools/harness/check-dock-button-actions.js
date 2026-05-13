@@ -111,11 +111,14 @@ async function main(){
       const btn = document.querySelector('#arcadeMusicToggleBtn');
       const state = window.__platinumArcadeMusic?.state?.();
       const frame = document.querySelector('#arcadeMusicFrame');
-      return btn?.getAttribute('aria-pressed') === 'true' && state?.state === 'playing' && frame
+      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'playing' && frame
         ? {
             aria: btn.getAttribute('aria-pressed'),
             title: btn.getAttribute('title') || '',
             actionTip: btn.dataset.actionTip || '',
+            musicState: btn.dataset.musicState || '',
+            musicPlaying: btn.dataset.musicPlaying || '',
+            musicMuted: btn.dataset.musicMuted || '',
             icon: btn.querySelector('.dockIcon')?.textContent || '',
             iconFontSize: getComputedStyle(btn.querySelector('.dockIcon')).fontSize,
             muteIconFontSize: getComputedStyle(document.querySelector('#muteToggleBtn .dockIcon')).fontSize,
@@ -161,22 +164,64 @@ async function main(){
       };
     });
     await page.locator('#arcadeMusicToggleBtn').click();
-    const musicRestored = await waitForHarness(page, () => {
+    const musicMuted = await waitForHarness(page, () => {
       const btn = document.querySelector('#arcadeMusicToggleBtn');
       const state = window.__platinumArcadeMusic?.state?.();
-      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'off' && !document.querySelector('#arcadeMusicFrame')
+      return btn?.getAttribute('aria-pressed') === 'true' && state?.state === 'playing' && state?.arcadeMusicMuted && document.querySelector('#arcadeMusicFrame')
         ? {
             aria: btn.getAttribute('aria-pressed'),
+            title: btn.getAttribute('title') || '',
+            actionTip: btn.dataset.actionTip || '',
+            musicState: btn.dataset.musicState || '',
+            musicPlaying: btn.dataset.musicPlaying || '',
+            musicMuted: btn.dataset.musicMuted || '',
+            icon: btn.querySelector('.dockIcon')?.textContent || '',
+            iconAnimation: getComputedStyle(btn.querySelector('.dockIcon')).animationName,
             state
           }
         : null;
     }, 1200, 50);
+    await page.locator('#arcadeMusicToggleBtn').click();
+    const musicUnmuted = await waitForHarness(page, () => {
+      const btn = document.querySelector('#arcadeMusicToggleBtn');
+      const state = window.__platinumArcadeMusic?.state?.();
+      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'playing' && !state?.arcadeMusicMuted && document.querySelector('#arcadeMusicFrame')
+        ? {
+            aria: btn.getAttribute('aria-pressed'),
+            title: btn.getAttribute('title') || '',
+            actionTip: btn.dataset.actionTip || '',
+            musicState: btn.dataset.musicState || '',
+            musicPlaying: btn.dataset.musicPlaying || '',
+            musicMuted: btn.dataset.musicMuted || '',
+            icon: btn.querySelector('.dockIcon')?.textContent || '',
+            state
+          }
+        : null;
+    }, 1200, 50);
+    const musicStopped = await page.evaluate(() => {
+      window.__platinumArcadeMusic?.stop?.();
+      const btn = document.querySelector('#arcadeMusicToggleBtn');
+      return {
+        aria: btn?.getAttribute('aria-pressed') || '',
+        title: btn?.getAttribute('title') || '',
+        musicState: btn?.dataset.musicState || '',
+        musicPlaying: btn?.dataset.musicPlaying || '',
+        musicMuted: btn?.dataset.musicMuted || '',
+        state: window.__platinumArcadeMusic?.state?.()
+      };
+    });
 
     const muteBefore = await page.locator('#muteToggleBtn').getAttribute('aria-pressed');
     await page.locator('#muteToggleBtn').click();
     const muteAfter = await page.locator('#muteToggleBtn').getAttribute('aria-pressed');
     await page.locator('#muteToggleBtn').click();
     const muteRestored = await page.locator('#muteToggleBtn').getAttribute('aria-pressed');
+    const audioToggleEvents = await page.evaluate(() => {
+      const events = window.__galagaHarness__?.recentEvents?.({ count: 50 }) || [];
+      return events
+        .filter(event => event.type === 'arcade_music_mute_changed' || event.type === 'audio_mute_changed')
+        .map(event => ({ type: event.type, muted: event.muted, soundEffectsMuted: event.soundEffectsMuted, arcadeMusicMuted: event.arcadeMusicMuted }));
+    });
 
     const pauseBefore = await page.locator('#pauseToggleBtn').getAttribute('aria-pressed');
     await page.locator('#pauseToggleBtn').click();
@@ -263,9 +308,10 @@ async function main(){
       scores,
       feedback,
       settings,
-      music: { default: musicDefault, before: musicBefore, active: musicActive, restored: musicRestored, trackToast: musicTrackToast },
+      music: { default: musicDefault, before: musicBefore, active: musicActive, muted: musicMuted, unmuted: musicUnmuted, stopped: musicStopped, trackToast: musicTrackToast },
       audioMix,
       mute: { before: muteBefore, after: muteAfter, restored: muteRestored },
+      audioToggleEvents,
       pause: { before: pauseBefore, active: pauseActive, restored: pauseRestored }
     };
   });
@@ -294,7 +340,7 @@ async function main(){
   if(!result.music.default?.configured){
     fail('Arcade Music is not configured with a product playlist by default', result);
   }
-  if(result.music.before !== 'false' || result.music.active.aria !== 'true' || result.music.active.title !== 'Arcade Music' || result.music.active.actionTip !== 'Arcade Music' || !/youtube-nocookie\.com\/embed\/videoseries/.test(result.music.active.src)){
+  if(result.music.before !== 'false' || result.music.active.aria !== 'false' || result.music.active.title !== 'Mute Arcade Music' || result.music.active.actionTip !== 'Mute Arcade Music' || result.music.active.musicPlaying !== 'true' || result.music.active.musicMuted !== 'false' || result.music.active.state?.arcadeMusicMuted || !/youtube-nocookie\.com\/embed\/videoseries/.test(result.music.active.src)){
     fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
   }
   if(result.music.active.icon !== '🎶' || result.music.active.iconFontSize !== result.music.active.muteIconFontSize || result.music.active.iconAnimation === 'none'){
@@ -312,8 +358,14 @@ async function main(){
   if(!result.audioMix.audioMixEvents.includes('arcade_music_volume') || !result.audioMix.audioMixEvents.includes('game_sound_volume')){
     fail('Audio mix slider changes were not logged to session telemetry', result);
   }
-  if(result.music.restored.aria !== 'false' || result.music.restored.state.hasFrame){
-    fail('Arcade Music dock button did not stop and remove the playlist embed', result);
+  if(result.music.muted.aria !== 'true' || result.music.muted.title !== 'Unmute Arcade Music' || result.music.muted.musicState !== 'muted' || result.music.muted.musicMuted !== 'true' || !result.music.muted.state?.arcadeMusicMuted || !result.music.muted.state?.hasFrame){
+    fail('Arcade Music dock button did not mute the active playlist independently', result);
+  }
+  if(result.music.unmuted.aria !== 'false' || result.music.unmuted.title !== 'Mute Arcade Music' || result.music.unmuted.musicMuted !== 'false' || result.music.unmuted.state?.arcadeMusicMuted || !result.music.unmuted.state?.hasFrame){
+    fail('Arcade Music dock button did not unmute the active playlist independently', result);
+  }
+  if(result.music.stopped.aria !== 'false' || result.music.stopped.state?.hasFrame){
+    fail('Arcade Music harness stop did not remove the playlist embed', result);
   }
   if(result.movie.expanded !== 'true') fail('movie dock button did not open via a real click', result);
   if(result.scores.expanded !== 'true') fail('scores dock button did not open via a real click', result);
@@ -321,6 +373,9 @@ async function main(){
   if(result.settings.expanded !== 'true') fail('settings dock button did not open via a real click', result);
   if(result.mute.before === result.mute.after || result.mute.before !== result.mute.restored){
     fail('mute button did not toggle and restore aria-pressed state', result);
+  }
+  if(!result.audioToggleEvents.some(event => event.type === 'arcade_music_mute_changed' && event.arcadeMusicMuted === true) || !result.audioToggleEvents.some(event => event.type === 'audio_mute_changed' && event.soundEffectsMuted === true)){
+    fail('separate music and sound-effect mute changes were not logged to session telemetry', result);
   }
   if(result.pause.active.aria !== 'true' || !result.pause.active.paused || result.pause.restored.aria !== 'false' || result.pause.restored.paused){
     fail('pause button did not toggle paused state correctly', result);

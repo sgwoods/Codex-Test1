@@ -270,6 +270,7 @@ const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
+const ARCADE_MUSIC_MUTED_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicMuted`;
 const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
 const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
@@ -283,6 +284,7 @@ const LEGACY_STORAGE_KEYS={
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [ARCADE_MUSIC_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusic`,
+ [ARCADE_MUSIC_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicVolume`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
@@ -298,6 +300,7 @@ const PLATFORM_STORAGE_KEYS={
  [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
  [ARCADE_MUSIC_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusic`,
+ [ARCADE_MUSIC_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicVolume`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
@@ -324,6 +327,7 @@ function volumePercentText(value){
  return `${volumePercent(value)}%`;
 }
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+let arcadeMusicMuted=readPref(ARCADE_MUSIC_MUTED_PREF_KEY)==='1';
 let gameSoundVolume=readVolumePref(GAME_SOUND_VOLUME_PREF_KEY,DEFAULT_GAME_SOUND_VOLUME);
 let arcadeMusicVolume=readVolumePref(ARCADE_MUSIC_VOLUME_PREF_KEY,DEFAULT_ARCADE_MUSIC_VOLUME);
 const ARCADE_MUSIC_PLAYLIST_ID={{ARCADE_MUSIC_PLAYLIST_ID_JSON}};
@@ -1544,13 +1548,21 @@ function syncAudioMixControls(){
  }
  if(musicVolumeValue)musicVolumeValue.textContent=volumePercentText(arcadeMusicVolume);
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
- if(debug)debug.mix={gameSoundVolume:+gameSoundVolume.toFixed(3),arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),muted:!!audioMuted};
+ if(debug)debug.mix={
+  gameSoundVolume:+gameSoundVolume.toFixed(3),
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  muted:!!audioMuted,
+  soundEffectsMuted:!!audioMuted,
+  arcadeMusicMuted:!!arcadeMusicMuted
+ };
 }
 function audioMixTelemetryBase(){
  return {
   gameSoundVolume:+gameSoundVolume.toFixed(3),
   arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
   muted:!!audioMuted,
+  soundEffectsMuted:!!audioMuted,
+  arcadeMusicMuted:!!arcadeMusicMuted,
   musicState:ARCADE_MUSIC?.state||'off',
   releaseChannel:BUILD_INFO?.releaseChannel||'development',
   pack:typeof currentGamePackKey==='function'?currentGamePackKey():''
@@ -2485,13 +2497,17 @@ window.__platinumArcadeMusic={
   if(typeof acceptArcadeMusicTrack==='function')acceptArcadeMusicTrack({title,author:artist,video_id:`harness-${Date.now()}`},'harness');
   return arcadeMusicState();
  },
+ setMuted(value){setArcadeMusicMuted(!!value,{log:1,source:'harness'});return arcadeMusicState();},
+ toggleMute(){toggleArcadeMusicMute();return arcadeMusicState();},
  stop:()=>stopArcadeMusic({silent:true})
 };
 window.__platinumAudioMix={
  state(){
   return Object.assign({},audioMixTelemetryBase(),{
    gameSoundPercent:volumePercent(gameSoundVolume),
-   arcadeMusicPercent:volumePercent(arcadeMusicVolume)
+   arcadeMusicPercent:volumePercent(arcadeMusicVolume),
+   soundEffectsMuted:!!audioMuted,
+   arcadeMusicMuted:!!arcadeMusicMuted
   });
  },
  setGameSoundVolume(value){setGameSoundVolume(value,{log:1,source:'harness'});return this.state();},

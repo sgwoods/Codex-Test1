@@ -329,8 +329,10 @@ mask:
 #dockQuickTools .dockToolGroupUtility button:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(-2px)}
 #dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transform:none;filter:drop-shadow(0 0 10px rgba(126,242,255,.18))}
 #dockQuickTools .musicDockIcon{font-size:34px}
-#arcadeMusicToggleBtn[data-music-state="playing"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-playing="true"]{color:#ffe39a}
 #arcadeMusicToggleBtn[data-music-state="playing"] .dockIcon{animation:arcadeMusicPulse 1.15s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,227,154,.42))}
+#arcadeMusicToggleBtn[data-music-muted="true"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-muted="true"] .dockIcon{animation:none;filter:grayscale(.8) drop-shadow(0 0 8px rgba(255,227,154,.18));opacity:.72}
 #arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
 @keyframes arcadeMusicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
 #arcadeMusicFrameHost{position:fixed;right:8px;bottom:8px;width:200px;height:200px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
