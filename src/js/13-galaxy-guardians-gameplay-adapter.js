@@ -91,6 +91,223 @@ const GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS=Object.freeze([
  'production'
 ]);
 
+const GALAXY_GUARDIANS_HARNESS_PERSONAS=Object.freeze({
+ novice:Object.freeze({
+  name:'novice',
+  moveMul:.66,
+  urgentShotDx:16,
+  urgentShotLook:72,
+  diveThreatY:190,
+  diveThreatDx:26,
+  deadZone:11,
+  aimScout:10,
+  aimEscort:11,
+  aimFlagship:13,
+  shotCadence:.28,
+  stageOpeningHold:.5,
+  openShotY:96,
+  diveBias:84,
+  escortBias:10,
+  flagshipBias:24,
+  linkedEscortBias:6,
+  rackClearThreshold:10,
+  rackClearBonus:20,
+  heightBias:.78,
+  distanceBias:1.08
+ }),
+ advanced:Object.freeze({
+  name:'advanced',
+  moveMul:.78,
+  urgentShotDx:18,
+  urgentShotLook:108,
+  diveThreatY:170,
+  diveThreatDx:30,
+  deadZone:9,
+  aimScout:12,
+  aimEscort:14,
+  aimFlagship:16,
+  shotCadence:.18,
+  stageOpeningHold:.28,
+  openShotY:82,
+  diveBias:124,
+  escortBias:20,
+  flagshipBias:46,
+  linkedEscortBias:10,
+  rackClearThreshold:12,
+  rackClearBonus:30,
+  heightBias:.92,
+  distanceBias:.95
+ }),
+ expert:Object.freeze({
+  name:'expert',
+  moveMul:.88,
+  urgentShotDx:20,
+  urgentShotLook:132,
+  diveThreatY:158,
+  diveThreatDx:34,
+  deadZone:7,
+  aimScout:13,
+  aimEscort:15,
+  aimFlagship:18,
+  shotCadence:.14,
+  stageOpeningHold:.18,
+  openShotY:74,
+  diveBias:170,
+  escortBias:28,
+  flagshipBias:72,
+  linkedEscortBias:12,
+  rackClearThreshold:14,
+  rackClearBonus:42,
+  heightBias:1.02,
+  distanceBias:.88
+ }),
+ professional:Object.freeze({
+  name:'professional',
+  moveMul:.94,
+  urgentShotDx:22,
+  urgentShotLook:150,
+  diveThreatY:146,
+  diveThreatDx:38,
+  deadZone:5,
+  aimScout:14,
+  aimEscort:16,
+  aimFlagship:19,
+  shotCadence:.11,
+  stageOpeningHold:.12,
+  openShotY:68,
+  diveBias:220,
+  escortBias:36,
+  flagshipBias:92,
+  linkedEscortBias:22,
+  rackClearThreshold:14,
+  rackClearBonus:54,
+  heightBias:1.08,
+  distanceBias:.82,
+  holdFireDuringUrgentThreat:1
+ })
+});
+
+function guardiansHarnessPersonaCfgForKey(key=''){
+ return GALAXY_GUARDIANS_HARNESS_PERSONAS[String(key||'').toLowerCase()]||null;
+}
+
+function guardiansHarnessPersonaCfg(){
+ return guardiansHarnessPersonaCfgForKey(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'');
+}
+
+function guardiansHasManualInput(input={}){
+ return !!(input.left||input.right||input.fire);
+}
+
+function guardiansPersonaMemory(state,cfg){
+ if(!state.personaMemory||state.personaMemory.persona!==cfg.name){
+  state.personaMemory={
+   persona:cfg.name,
+   stage:state.stage|0,
+   stageStartT:+state.t||0,
+   nextShotAt:+state.t||0,
+   lastTargetId:''
+  };
+ }
+ if((state.personaMemory.stage|0)!==(state.stage|0)){
+  state.personaMemory.stage=state.stage|0;
+  state.personaMemory.stageStartT=+state.t||0;
+  state.personaMemory.nextShotAt=Math.max(+state.t||0,+state.player?.cooldown||0);
+  state.personaMemory.lastTargetId='';
+ }
+ return state.personaMemory;
+}
+
+function guardiansPersonaNearestShotThreat(state,cfg){
+ const player=state.player||{};
+ return (state.enemyShots||[])
+  .filter(shot=>shot&&shot.active!==0&&shot.y<player.y&&player.y-shot.y<cfg.urgentShotLook&&Math.abs(shot.x-player.x)<=cfg.urgentShotDx)
+  .sort((a,b)=>(player.y-a.y)-(player.y-b.y))[0]||null;
+}
+
+function guardiansPersonaNearestDiveThreat(state,cfg){
+ const player=state.player||{};
+ return (state.aliens||[])
+  .filter(alien=>alien.hp>0&&alien.mode==='diving'&&alien.y<player.y&&alien.y>=cfg.diveThreatY&&Math.abs(alien.x-player.x)<=cfg.diveThreatDx)
+  .sort((a,b)=>{
+   if(b.y!==a.y)return b.y-a.y;
+   return Math.abs(a.x-player.x)-Math.abs(b.x-player.x);
+  })[0]||null;
+}
+
+function guardiansPersonaTargetScore(alien,state,cfg){
+ const player=state.player||{};
+ const liveCount=(state.aliens||[]).filter(candidate=>candidate.hp>0).length;
+ const rackClearMode=liveCount<=cfg.rackClearThreshold;
+ let score=alien.y*cfg.heightBias-Math.abs(alien.x-player.x)*cfg.distanceBias;
+ if(alien.mode==='diving')score+=cfg.diveBias*(rackClearMode ? .55 : 1)+alien.y*.18;
+ if(alien.role==='escort')score+=cfg.escortBias;
+ if(alien.role==='flagship')score+=cfg.flagshipBias;
+ if(alien.linkedTo)score+=cfg.linkedEscortBias;
+ if(rackClearMode&&alien.mode!=='diving')score+=cfg.rackClearBonus;
+ if(alien.mode!=='diving'&&alien.y<cfg.openShotY)score-=10;
+ return score;
+}
+
+function guardiansPersonaSelectTarget(state,cfg){
+ const player=state.player||{};
+ return (state.aliens||[])
+  .filter(alien=>alien.hp>0)
+  .sort((a,b)=>{
+   const delta=guardiansPersonaTargetScore(b,state,cfg)-guardiansPersonaTargetScore(a,state,cfg);
+   if(Math.abs(delta)>1e-9)return delta;
+   if((b.mode==='diving')!==(a.mode==='diving'))return (b.mode==='diving')-(a.mode==='diving');
+   if((b.role==='flagship')!==(a.role==='flagship'))return (b.role==='flagship')-(a.role==='flagship');
+   if(b.y!==a.y)return b.y-a.y;
+   return Math.abs(a.x-player.x)-Math.abs(b.x-player.x);
+  })[0]||null;
+}
+
+function guardiansPersonaMoveAxis(state,cfg,target){
+ const player=state.player||{};
+ const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ const diveThreat=guardiansPersonaNearestDiveThreat(state,cfg);
+ if(diveThreat){
+  const away=diveThreat.x>=player.x?-1:1;
+  if((away<0&&player.x>18)||(away>0&&player.x<playfieldWidth-18))return away;
+ }
+ const shotThreat=guardiansPersonaNearestShotThreat(state,cfg);
+ if(shotThreat){
+  const away=shotThreat.x>=player.x?-1:1;
+  if((away<0&&player.x>18)||(away>0&&player.x<playfieldWidth-18))return away;
+ }
+ if(!target){
+  const mid=playfieldWidth/2;
+  if(Math.abs(player.x-mid)<=cfg.deadZone)return 0;
+  return player.x<mid?1:-1;
+ }
+ const dx=target.x-player.x;
+ if(Math.abs(dx)<=cfg.deadZone)return 0;
+ return dx>0?1:-1;
+}
+
+function galaxyGuardiansHarnessPersonaInput(state,personaKey=''){
+ const cfg=guardiansHarnessPersonaCfgForKey(personaKey||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'');
+ if(!cfg||!state||state.gameOver||state.resetT>0||!state.player?.visible)return {left:0,right:0,fire:0};
+ const mem=guardiansPersonaMemory(state,cfg);
+ const target=guardiansPersonaSelectTarget(state,cfg);
+ const axis=guardiansPersonaMoveAxis(state,cfg,target);
+ const urgentShot=guardiansPersonaNearestShotThreat(state,cfg);
+ let fire=0;
+ if(target&&!state.player.shot&&state.player.cooldown<=0&&state.t>=mem.nextShotAt){
+  const tol=target.role==='flagship'?cfg.aimFlagship:target.role==='escort'?cfg.aimEscort:cfg.aimScout;
+  const dx=Math.abs(target.x-state.player.x);
+  const stageOpenElapsed=Math.max(0,(+state.t||0)-(+mem.stageStartT||0));
+  const canFireFormation=target.mode==='diving'||target.y>=cfg.openShotY||stageOpenElapsed>=cfg.stageOpeningHold;
+  if(dx<=tol&&canFireFormation&&!(cfg.holdFireDuringUrgentThreat&&urgentShot)){
+   fire=1;
+   mem.nextShotAt=(+state.t||0)+cfg.shotCadence;
+   mem.lastTargetId=target.id;
+  }
+ }
+ return {left:axis<0,right:axis>0,fire};
+}
+
 function createGalaxyGuardiansInitialState(opts={}){
  return Object.freeze({
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
@@ -150,6 +367,9 @@ function syncGalaxyGuardiansShellState(state){
  S.score=state.score|0;
  S.stage=state.stage|0;
  S.lives=Math.max(0,(state.lives|0)-1);
+ S.harnessPersona=String(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ if(typeof currentGamePackStagePresentation==='function')S.stagePresentation=currentGamePackStagePresentation(S.stage,0);
+ if(typeof stageBandProfile==='function')S.profile=stageBandProfile(S.stage,0);
  S.stageClock=+state.t||0;
  S.simT=+state.t||0;
  S.challenge=0;
@@ -237,13 +457,24 @@ function startGalaxyGuardiansDevPreview(cfg={}){
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE=createGalaxyGuardiansRuntimeState({
   stage:S.stage,
   ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
-  seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719
+  seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719,
+  maxPlayableStage:Math.max(
+   1,
+   +cfg.maxPlayableStage
+   || +(window.__platinumHarnessRuntimeOverrides?.maxPlayableStage||window.__auroraHarnessRuntimeOverrides?.maxPlayableStage||0)
+   || 1
+  )
  });
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.audioEventIndex=GALAXY_GUARDIANS_ACTIVE_DEV_STATE.events.length;
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
- logEvent('game_start',{gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,devPreview:1});
+ logEvent('game_start',{
+  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+  devPreview:1,
+  persona:S.harnessPersona||null,
+  maxPlayableStage:GALAXY_GUARDIANS_ACTIVE_DEV_STATE.maxPlayableStage|0
+ });
  startRunRecording();
  sfx.playCue('gameStart',{phase:'stage'});
  msg.textContent='';
@@ -261,7 +492,11 @@ function galaxyGuardiansInputFromKeys(){
 
 function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
- stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,galaxyGuardiansInputFromKeys());
+ const manualInput=galaxyGuardiansInputFromKeys();
+ const personaInput=!guardiansHasManualInput(manualInput)
+  ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
+  : null;
+ stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
  playGalaxyGuardiansRuntimeCues(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(GALAXY_GUARDIANS_ACTIVE_DEV_STATE.gameOver){
@@ -280,8 +515,10 @@ function galaxyGuardiansCueNameForRuntimeEvent(event){
  if(event.type==='alien_dive_start')return 'scoutDive';
  if(event.type==='flagship_dive_start')return 'flagshipDive';
  if(event.type==='escort_join')return 'escortJoin';
+ if(event.type==='stage_advance')return 'stageAdvance';
  if(event.type==='enemy_wrap_or_return')return 'wrapReturn';
  if(event.type==='player_lost')return 'playerLoss';
+ if(event.type==='mission_complete')return 'gameOver';
  if(event.type==='game_over')return 'gameOver';
  if(event.type==='player_shot_resolved'){
   if(event.result!=='hit')return '';
@@ -329,3 +566,5 @@ const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
 window.galaxyGuardiansDevPreviewAllowed=galaxyGuardiansDevPreviewAllowed;
 window.currentGalaxyGuardiansDevPreviewState=currentGalaxyGuardiansDevPreviewState;
 window.summarizeGalaxyGuardiansDevPreview=summarizeGalaxyGuardiansDevPreview;
+window.galaxyGuardiansHarnessPersonaInput=galaxyGuardiansHarnessPersonaInput;
+window.guardiansHarnessPersonaCfgForKey=guardiansHarnessPersonaCfgForKey;

@@ -2,7 +2,7 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "reference-conformance-metric-set",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-05-02",
+  "createdOn": "2026-05-13",
   "status": "preview-reference-conformance-model-not-production-release-score",
   "purpose": "Define the first Galaxy Guardians reference conformance metric set by scoring the playable preview against the current Galaxian source profile, promoted semantic event log, game-owned runtime gates, and Platinum boundary rules.",
   "sourceEvidence": {
@@ -17,12 +17,12 @@
     "notes": "This is a first 0.1 metric model. It is intentionally conservative because most Galaxian evidence is still promoted from reviewed contact sheets, waveform windows, component sprite crop targets, and labeled cue candidates rather than final human-approved frame-level/acoustic extraction."
   },
   "summary": {
-    "referenceConformanceScore10": 7.7,
+    "referenceConformanceScore10": 7.6,
     "playtestWeightedConformanceScore10": 6.9,
-    "referenceMaturityScore10": 7.0,
-    "implementationGateCoverageScore10": 9.5,
-    "publicReleaseReadinessScore10": 3.9,
-    "releaseRead": "Useful playable-preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
+    "referenceMaturityScore10": 7.2,
+    "implementationGateCoverageScore10": 9.6,
+    "publicReleaseReadinessScore10": 4.2,
+    "releaseRead": "Useful playable-preview evidence now extends beyond the one-level public slice. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, longer-surface stage-band review, persona review runs, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is still stage-five-and-beyond collision fairness, later-band clear consistency, and another human-reviewed audio/browser pass."
   },
   "metricScale": {
     "0": "No implemented or measured relationship to the reference.",
@@ -43,7 +43,7 @@
     {
       "id": "promoted-semantic-event-coverage",
       "label": "Promoted semantic event coverage",
-      "weight": 14,
+      "weight": 12,
       "score10": 7.8,
       "evidenceLevel": "promoted-event-log-plus-runtime-events-and-visible-surfaces",
       "currentRead": "The preview covers the core runtime promoted events: formation entry, rack complete, dives, flagship/escort pressure, single-shot fire, shot resolution, wrap/return, plus an owned score table, stage-advance progression contract, and visible wait-mode/preview-modal attract surfaces.",
@@ -52,7 +52,7 @@
     {
       "id": "formation-rack-timing",
       "label": "Formation and rack timing",
-      "weight": 12,
+      "weight": 11,
       "score10": 6.2,
       "evidenceLevel": "promoted-events-runtime-bands-frame-motion-proxy-and-object-track-proxy",
       "currentRead": "Formation entry, settle, rack complete, and first-dive delay are modeled and gated. The latest runtime pass shortened entry and first-dive timing after playtest review found the preview too slow.",
@@ -61,7 +61,7 @@
     {
       "id": "movement-pressure",
       "label": "Movement and pressure model",
-      "weight": 14,
+      "weight": 12,
       "score10": 6.2,
       "evidenceLevel": "reference-window-inspired-runtime-contract-plus-runtime-vs-reference-track-comparison-plus-stage-rank-pressure-gate",
       "currentRead": "Scout dives, flagship dives, escort joins, enemy shots, and wrap/return pressure are implemented and gated. The latest pass increases dive speed, dive acceleration, enemy-shot pressure, wrap cadence, and bounded stage-rank pressure so stages three and five are measurably more urgent than stage one.",
@@ -70,7 +70,7 @@
     {
       "id": "single-shot-threat-scoring",
       "label": "Single-shot threat and scoring",
-      "weight": 12,
+      "weight": 11,
       "score10": 7.5,
       "evidenceLevel": "game-owned-runtime-and-score-contract",
       "currentRead": "Single-shot firing, enemy shots, role-specific score values, player loss, game-over behavior, owned score table, wave clear, and stage advance are implemented without Aurora capture/dual-fighter semantics.",
@@ -79,7 +79,7 @@
     {
       "id": "visual-alien-identity",
       "label": "Visual alien identity",
-      "weight": 10,
+      "weight": 9,
       "score10": 6.8,
       "evidenceLevel": "game-owned-visual-catalog-readability-gate-frame-crops-object-proxies-sprite-extraction-grid-targets-and-component-targets",
       "currentRead": "Flagship, escort, scout, and player interceptor visuals are now tuned from component crop targets, remain separate from Aurora, and are gated for role readability. The promoted component target artifact covers all four sprite roles with checked crop previews and silhouette target similarity.",
@@ -88,7 +88,7 @@
     {
       "id": "audio-reference-character",
       "label": "Audio character and reference fit",
-      "weight": 10,
+      "weight": 9,
       "score10": 6.4,
       "evidenceLevel": "cue-shape-contract-plus-measured-square-noise-targets-plus-waveform-spectrogram-pcm-proxy-plus-labeled-cue-window-previews-plus-runtime-reference-cue-lab",
       "currentRead": "Runtime cue IDs and role-separated cue shapes are gated, the cue target bands use labeled Galaxian cue-window candidates, the new reusable Platinum audio conformance lab compares runtime cue synthesis against promoted reference windows, and runtime cues were retuned toward sharper, higher-register square/noise character. The lab reports 8.3/10 cue-shape fit while the older whole-window acoustic proxy still reads 5.3/10, so the conformance score is intentionally conservative.",
@@ -98,7 +98,7 @@
       "id": "platform-and-game-boundaries",
       "label": "Platform and game boundaries",
       "weight": 10,
-      "score10": 10.0,
+      "score10": 10,
       "evidenceLevel": "pack-adapter-renderer-boundary-gates",
       "currentRead": "The preview remains non-production, does not inherit Aurora capture/dual/challenge/scoring mechanics, and uses Platinum only through shared capability boundaries.",
       "remainingGap": "Keep this mandatory as Guardians gets more real gameplay."
@@ -106,11 +106,20 @@
     {
       "id": "evidence-durability",
       "label": "Evidence durability",
-      "weight": 10,
+      "weight": 8,
       "score10": 9.7,
       "evidenceLevel": "source-controlled-artifacts-and-harnesses",
       "currentRead": "The reference profile, event log, identity artifacts, score/progression artifact, attract/score surface artifact, frame-motion artifact, object-track artifact, runtime-reference movement artifact, stage-rank pressure artifact, sprite extraction artifact, sprite-grid and component-target artifacts, audio comparison artifact, cue-candidate/labeled-cue artifacts, and 0.1 gates are committed and rerunnable.",
       "remainingGap": "Add human-reviewed component sprite/cue approval and browser-reviewed beta-candidate evidence."
+    },
+    {
+      "id": "long-surface-stage-arc-and-persona-review",
+      "label": "Long-surface stage arc and persona review",
+      "weight": 10,
+      "score10": 7,
+      "evidenceLevel": "source-derived-stage-band-contract-plus-deterministic-persona-review-runs",
+      "currentRead": "Guardians now has a longer-surface review contract that matches how this game really grows today: repeated racks, bounded stage-band escalation, shell-presentation shifts, and deterministic novice-to-professional review personas. The life-loss flow now preserves rack progress, which makes longer-surface review honest instead of constantly restarting from a fresh board.",
+      "remainingGap": "The later-session model is still weakest from stage five onward, where dive-collision fairness and consistent clear potential need another measured/browser-reviewed pass."
     }
   ],
   "requiredInputArtifacts": [
@@ -138,7 +147,8 @@
     "reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json",
     "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json",
     "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
-    "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+    "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json"
   ],
   "requiredHarnesses": [
     "npm run harness:check:galaxian-reference-profile",
@@ -173,12 +183,15 @@
     "npm run harness:check:galaxy-guardians-playtest-conformance-review",
     "npm run harness:check:galaxy-guardians-score-progression",
     "npm run harness:check:galaxy-guardians-threat-scoring",
-    "npm run harness:check:galaxy-guardians-visual-readability"
+    "npm run harness:check:galaxy-guardians-visual-readability",
+    "npm run harness:analyze:galaxy-guardians-long-surface-conformance",
+    "npm run harness:check:galaxy-guardians-long-surface-conformance"
   ],
   "nextMetricPromotions": [
     "human-reviewed sprite recognition from promoted Galaxian component crops",
     "Guardians attract and score-table pixel-layout comparison",
     "human-listened cleanup of labeled cue candidates into clean measured cue targets",
+    "browser-reviewed stage-five-and-beyond motion/fairness pass with persona review",
     "browser-reviewed beta-candidate pass for the tuned movement slice"
   ]
 }

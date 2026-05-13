@@ -224,6 +224,7 @@ That means every serious Galaxy review should preserve all three layers:
 - `npm run harness:check:galaxy-guardians-score-progression`
 - `npm run harness:check:galaxy-guardians-threat-scoring`
 - `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxy-guardians-long-surface-conformance`
 
 3. audiovisual and boundary review
 - `npm run harness:check:galaxy-guardians-visual-readability`

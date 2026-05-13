@@ -211,6 +211,10 @@ Pack-boundary harness:
   verifies that the Galaxy Guardians evidence stack, core docs, and harness
   family still support the maintained first-class conformance target instead of
   drifting back into a loose preview-only state.
+- `tools/harness/check-galaxy-guardians-long-surface-conformance.js`
+  verifies that the committed later-stage pressure bands, staged shell
+  presentation, and deterministic persona review runs stay aligned with the
+  current Guardians source instead of drifting back to one-level-only review.
 - `tools/harness/check-compact-cabinet-rails.js`
   verifies that both side-frame icon rails remain visible and inside the
   cabinet frame at the compact in-app browser scale, and that the Galaxy

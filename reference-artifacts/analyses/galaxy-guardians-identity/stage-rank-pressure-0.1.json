@@ -2,20 +2,21 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "galaxy-guardians-stage-rank-pressure-targets",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-05-03",
+  "createdOn": "2026-05-13",
   "status": "dev-preview-stage-pressure-contract-not-final-reference-match",
-  "purpose": "Keep the Galaxy Guardians preview from feeling like one static first-wave sketch by defining bounded stage-rank pressure for dives, shots, drift, and event density while preserving the measured stage-one scout-wave contract.",
+  "purpose": "Keep the Galaxy Guardians preview from feeling like one static first-wave sketch by defining a longer stage-band pressure model for dives, shots, drift, and event density while preserving the measured stage-one scout-wave contract.",
   "sourceEvidence": {
     "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
     "runtimeReferenceMovement": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
     "playtestConformanceReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
     "initialMeasuredProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
-    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "longSurfaceConformance": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json"
   },
   "rankModel": {
     "stageOneRank": 0,
-    "maxPreviewRank": 4,
-    "reason": "The preview should preserve the stage-one evidence windows, then add modest pressure through stage five without pretending to be a complete late-game model."
+    "maxPreviewRank": 6,
+    "reason": "The longer-surface review should preserve the stage-one evidence windows, escalate through stage three/five/seven, then hold a bounded late-session band across stages nine and eleven rather than pretending the whole game stops evolving after stage five."
   },
   "stageOneMustPreserve": {
     "firstScoutDiveDelay": 2.55,
@@ -31,80 +32,84 @@
   },
   "stageThreeTargets": {
     "firstScoutDiveDelayBandSeconds": [
-      2.3,
-      2.36
+      2.35,
+      2.37
     ],
     "scoutDiveIntervalBaseBandSeconds": [
-      1.29,
-      1.3
+      1.3,
+      1.31
     ],
     "firstEnemyShotDelayBandSeconds": [
-      2.92,
-      2.93
+      2.96,
+      2.97
     ],
     "enemyShotIntervalBaseBandSeconds": [
-      0.96,
-      0.97
+      0.97,
+      0.98
     ],
     "enemyShotMaxLive": 4,
     "enemyShotVyBandPxPerSecond": [
-      124,
+      125,
       126
     ],
     "diveBaseVyBandPxPerSecond": [
-      34,
-      35
+      35,
+      35.1
     ],
     "diveAccelBandPxPerSecondSquared": [
-      6.2,
-      6.3
+      6.24,
+      6.25
     ],
     "formationDriftHzBand": [
-      1.22,
+      1.23,
       1.24
     ]
   },
   "stageFiveTargets": {
     "firstScoutDiveDelayBandSeconds": [
-      2.14,
-      2.15
+      2.25,
+      2.27
     ],
     "scoutDiveIntervalBaseBandSeconds": [
-      1.06,
-      1.07
+      1.2,
+      1.21
     ],
     "firstEnemyShotDelayBandSeconds": [
-      2,
-      2.01
+      2.52,
+      2.53
     ],
     "enemyShotIntervalBaseBandSeconds": [
-      0.78,
-      0.79
+      0.88,
+      0.89
     ],
     "enemyShotMaxLive": 5,
     "enemyShotVyBandPxPerSecond": [
-      142,
-      143
+      133,
+      134
     ],
     "diveBaseVyBandPxPerSecond": [
-      37,
-      38
+      36.6,
+      36.7
     ],
     "diveAccelBandPxPerSecondSquared": [
-      7,
-      7.1
+      6.66,
+      6.67
     ],
     "formationDriftHzBand": [
-      1.31,
-      1.32
+      1.28,
+      1.29
     ]
   },
   "eventDensityTargets": {
     "simulationWindowSeconds": 10,
     "stageThreeMinimumExtraDiveEventsOverStageOne": 1,
     "stageThreeMinimumExtraEnemyShotsOverStageOne": 1,
-    "stageFiveMinimumExtraDiveEventsOverStageOne": 2,
-    "stageFiveMinimumExtraEnemyShotsOverStageOne": 2
+    "stageFiveMinimumExtraDiveEventsOverStageOne": 1,
+    "stageFiveMinimumExtraEnemyShotsOverStageOne": 2,
+    "stageSevenMinimumExtraDiveEventsOverStageOne": 2,
+    "stageSevenMinimumExtraEnemyShotsOverStageOne": 4,
+    "stageNineMinimumExtraDiveEventsOverStageOne": 2,
+    "stageNineMinimumExtraEnemyShotsOverStageOne": 5
   },
   "runtimeHooks": {
     "stageRankFunction": "window.guardiansStageRank",
@@ -113,8 +118,113 @@
     "npmScript": "npm run harness:check:galaxy-guardians-stage-rank-pressure"
   },
   "releaseUse": {
-    "dev": "Required before calling the preview pace meaningfully multi-stage.",
-    "beta": "Supports beta-preview discussion only as bounded pressure evidence; late-level arcade conformance still requires deeper reference-video timing.",
-    "production": "Not sufficient for production because this remains a first preview pressure model."
+    "dev": "Required before calling the preview meaningfully long-surface rather than a one-wave sketch.",
+    "beta": "Supports beta-preview discussion as bounded multi-stage pressure evidence; late-level arcade conformance still needs deeper reference-video timing.",
+    "production": "Not sufficient for production because this remains a longer-surface preview pressure model rather than a fully reference-verified game curve."
+  },
+  "stageSevenTargets": {
+    "firstScoutDiveDelayBandSeconds": [
+      2.16,
+      2.17
+    ],
+    "scoutDiveIntervalBaseBandSeconds": [
+      1.09,
+      1.1
+    ],
+    "firstEnemyShotDelayBandSeconds": [
+      2.07,
+      2.08
+    ],
+    "enemyShotIntervalBaseBandSeconds": [
+      0.79,
+      0.8
+    ],
+    "enemyShotMaxLive": 5,
+    "enemyShotVyBandPxPerSecond": [
+      142,
+      143
+    ],
+    "diveBaseVyBandPxPerSecond": [
+      38.1,
+      38.2
+    ],
+    "diveAccelBandPxPerSecondSquared": [
+      7.08,
+      7.09
+    ],
+    "formationDriftHzBand": [
+      1.32,
+      1.33
+    ]
+  },
+  "stageNineTargets": {
+    "firstScoutDiveDelayBandSeconds": [
+      2.06,
+      2.07
+    ],
+    "scoutDiveIntervalBaseBandSeconds": [
+      0.98,
+      0.99
+    ],
+    "firstEnemyShotDelayBandSeconds": [
+      1.77,
+      1.78
+    ],
+    "enemyShotIntervalBaseBandSeconds": [
+      0.7,
+      0.71
+    ],
+    "enemyShotMaxLive": 6,
+    "enemyShotVyBandPxPerSecond": [
+      151,
+      152
+    ],
+    "diveBaseVyBandPxPerSecond": [
+      39.6,
+      39.7
+    ],
+    "diveAccelBandPxPerSecondSquared": [
+      7.5,
+      7.51
+    ],
+    "formationDriftHzBand": [
+      1.36,
+      1.37
+    ]
+  },
+  "stageElevenTargets": {
+    "firstScoutDiveDelayBandSeconds": [
+      1.96,
+      1.98
+    ],
+    "scoutDiveIntervalBaseBandSeconds": [
+      0.88,
+      0.89
+    ],
+    "firstEnemyShotDelayBandSeconds": [
+      1.77,
+      1.78
+    ],
+    "enemyShotIntervalBaseBandSeconds": [
+      0.69,
+      0.7
+    ],
+    "enemyShotMaxLive": 6,
+    "enemyShotVyBandPxPerSecond": [
+      159,
+      160
+    ],
+    "diveBaseVyBandPxPerSecond": [
+      41.2,
+      41.3
+    ],
+    "diveAccelBandPxPerSecondSquared": [
+      7.92,
+      7.93
+    ],
+    "formationDriftHzBand": [
+      1.41,
+      1.42
+    ]
   }
 }

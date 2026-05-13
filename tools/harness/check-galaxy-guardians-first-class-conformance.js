@@ -16,7 +16,8 @@ const REQUIRED_DOC_CHECKS = [
       'first-class conformance',
       '7.7/10',
       '6.9/10',
-      'harness:check:galaxy-guardians-first-class-conformance'
+      'harness:check:galaxy-guardians-first-class-conformance',
+      'GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md'
     ]
   },
   {
@@ -67,7 +68,16 @@ const REQUIRED_DOC_CHECKS = [
     path: 'reference-artifacts/analyses/galaxy-guardians-identity/README.md',
     required: [
       'first-class-conformance',
-      'check-galaxy-guardians-first-class-conformance.js'
+      'check-galaxy-guardians-first-class-conformance.js',
+      'long-surface-conformance-0.1.json'
+    ]
+  },
+  {
+    path: 'GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md',
+    required: [
+      'long-surface',
+      'persona',
+      'harness:check:galaxy-guardians-long-surface-conformance'
     ]
   }
 ];
@@ -104,6 +114,10 @@ const REQUIRED_SCRIPT_GROUPS = {
     'harness:check:galaxy-guardians-movement-pacing',
     'harness:check:galaxy-guardians-stage-rank-pressure',
     'harness:check:galaxy-guardians-runtime-reference-movement'
+  ],
+  longSurface: [
+    'harness:analyze:galaxy-guardians-long-surface-conformance',
+    'harness:check:galaxy-guardians-long-surface-conformance'
   ],
   boundary: [
     'harness:check:gameplay-adapter-boundaries',
@@ -239,6 +253,7 @@ function main(){
     ['single-shot-threat-scoring', 7.0],
     ['visual-alien-identity', 6.5],
     ['audio-reference-character', 6.0],
+    ['long-surface-stage-arc-and-persona-review', 6.8],
     ['platform-and-game-boundaries', 10.0],
     ['evidence-durability', 9.5]
   ];
@@ -254,6 +269,7 @@ function main(){
     ['audio-character', 6.0],
     ['motion-pressure', 6.0],
     ['visual-identity', 6.5],
+    ['long-surface-readiness', 6.4],
     ['platform-boundary-readiness', 10.0]
   ];
   for(const [categoryId, floor] of requiredPlaytestCategories){

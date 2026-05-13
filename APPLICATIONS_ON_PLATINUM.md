@@ -75,6 +75,7 @@ Current branch-level next step:
 
 - [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
 - [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
 - own scores and pilot/replay identity
 - proper one-level completion and game-over endings
 - enough completeness to validate Platinum changes against two real games
@@ -94,6 +95,8 @@ A Platinum application should own:
 - its own version line and changelog
 - its own conformance artifacts and readiness gates
 - its own harnesses for game behavior
+- its own longer-surface review logic when the game grows beyond a single
+  playable slice
 - optional shell preferences that remain within the platform shell contract
 
 A Platinum application should not own:

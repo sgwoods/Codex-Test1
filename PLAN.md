@@ -119,6 +119,10 @@ resource economics fit together.
 - keep the broader Galaxy first-class conformance target readable through
   [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md),
   so ingestion, gameplay completeness, and release review do not drift apart
+- keep the new longer-surface and persona review model readable through
+  [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md),
+  so Guardians is judged by real repeated-rack stage bands instead of only a
+  one-level preview slice
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work
@@ -198,9 +202,9 @@ Current conformance read:
 - the Track 1 movement/shot-feel finding is captured in
   `reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json`
 - Galaxy Guardians 0.1 is now maintained through both scored artifacts and a
-  first-class process plan: reference conformance `7.7/10`, playtest-weighted
-  conformance `6.9/10`, public readiness `3.9/10`, and a standing aggregate
-  process gate in
+  first-class process plan: reference conformance `7.6/10`, playtest-weighted
+  conformance `6.9/10`, longer-surface/persona review `7.0/10`, public
+  readiness `4.2/10`, and a standing aggregate process gate in
   `npm run harness:check:galaxy-guardians-first-class-conformance`
 - Galaxy still is not part of the Aurora numeric roll-up, and that is correct;
   the goal is first-class game-specific parity, not to blur the applications

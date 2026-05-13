@@ -192,14 +192,16 @@ Current conformance read:
 - Guardians preview gates are green as pass/fail 0.1 evidence, but they are not
   yet part of the Aurora numeric roll-up
 - Guardians evidence-weighted reference conformance is now `7.7/10`, while the
-  stricter playtest-weighted score is `6.9/10` after local review found audio,
-  pace, and graphic likeness still just short of a compelling Galaxian-style
-  preview; cue-target gates now require labeled square/noise windows,
-  mixed-source cue candidates, component sprite targets, waveform/spectrogram
-  previews, and the reusable Platinum audio conformance lab output, while
-  stage-rank gates require denser later-wave pressure
+  stricter playtest-weighted score is `6.9/10`, and the new longer-surface
+  review is `7.0/10`; cue-target gates now require labeled square/noise
+  windows, mixed-source cue candidates, component sprite targets,
+  waveform/spectrogram previews, the reusable Platinum audio conformance lab
+  output, and a real longer-surface/persona review instead of only one-level
+  preview claims
 - the maintained Galaxy-first-class target and investment strategy now lives in
   [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md),
+  with the current longer-surface/persona execution layer in
+  [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md),
   with a standing aggregate process gate in
   `npm run harness:check:galaxy-guardians-first-class-conformance`
 - current cluster targets are `9.2/10` for Aurora and `7.7/10` reference /

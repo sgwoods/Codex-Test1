@@ -24,11 +24,12 @@ surfaces:
 
 The current maintained source of truth is:
 
-- reference conformance: `7.7/10`
+- reference conformance: `7.6/10`
 - playtest-weighted conformance: `6.9/10`
-- reference maturity: `7.0/10`
-- implementation gate coverage: `9.5/10`
-- public release readiness: `3.9/10`
+- long-surface and persona review: `7.0/10`
+- reference maturity: `7.2/10`
+- implementation gate coverage: `9.6/10`
+- public release readiness: `4.2/10`
 
 This means the Galaxy program is no longer missing machinery.
 
@@ -38,6 +39,7 @@ ones a player feels immediately:
 
 - formation/rack timing
 - lower-field motion pressure
+- stage-five-and-beyond survivability and clear consistency
 - sprite likeness at real gameplay scale
 - audio character under live playback
 - score/progression/end-state clarity
@@ -101,6 +103,9 @@ The first-class Galaxy process should always be reviewable through this spine:
 - `npm run harness:check:galaxy-guardians-one-level-completion`
 - `npm run harness:check:galaxy-guardians-score-progression`
 - `npm run harness:check:galaxy-guardians-threat-scoring`
+- longer-surface and persona review
+  - `npm run harness:analyze:galaxy-guardians-long-surface-conformance`
+  - `npm run harness:check:galaxy-guardians-long-surface-conformance`
 - visual identity
   - `npm run harness:check:galaxy-guardians-visual-readability`
   - `npm run harness:check:galaxy-guardians-sprite-grid-targets`
@@ -173,6 +178,8 @@ chat.
 
 - the active long working-block execution sequence is tracked in
   [GALAXY_GUARDIANS_8_HOUR_VISUAL_AUDIO_MOTION_PASS_PLAN.md](GALAXY_GUARDIANS_8_HOUR_VISUAL_AUDIO_MOTION_PASS_PLAN.md)
+- the maintained longer-surface and persona review model is in
+  [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
 - the earlier six-hour pass remains recorded in
   [GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md](GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md)
 - branch-local gameplay-completeness work remains in
