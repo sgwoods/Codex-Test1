@@ -1,0 +1,34 @@
+{
+  "artifactType": "player-two-mode-ui-reference",
+  "game": "aurora-galactica",
+  "feature": "Player Two persona rival mode",
+  "generatedAt": "2026-05-12T00:00:00.000Z",
+  "referenceDecision": {
+    "modeShape": "Galaga-inspired two-player score lane and alternating-turn vocabulary, adapted as a signed-in persona score race for Aurora's current single-human runtime.",
+    "startInput": "Use arcade-conventional 1 PLAYER / 2 PLAYERS selection, with keyboard shortcuts 1 and 2.",
+    "hudVocabulary": "Use 1UP / HIGH SCORE / 2UP framing while the persona rival is active.",
+    "leaderboardBoundary": "Only the human 1UP score is leaderboard-eligible; the 2UP persona score is comparative telemetry and user feedback."
+  },
+  "sources": [
+    {
+      "label": "UVL Galaga manual-derived description",
+      "url": "https://www.uvlist.net/game-75-Galaga",
+      "evidence": "Documents Galaga as a one- or two-player game; in two-player mode players take turns at the controls."
+    },
+    {
+      "label": "MobyGames Galaga title/scoring screenshot",
+      "url": "https://www.mobygames.com/game/8402/galaga/screenshots/arcade/1152809/",
+      "evidence": "Reference screenshot surface for title/scoring presentation."
+    },
+    {
+      "label": "Galaga.cc browser control summary",
+      "url": "https://galaga.cc/",
+      "evidence": "Documents 1 key for one-player start and 2 key for two-player start."
+    }
+  ],
+  "implementationNotes": [
+    "Aurora does not yet have true alternating-turn multi-run state. This first slice chooses the higher-value user experience: signed-in human run plus visible randomized persona rival score lane.",
+    "The persona rival is intentionally excluded from local and remote score submission.",
+    "Future conformance work can evolve this into true Galaga-style alternating turns once save/restore of per-player convoy state is available."
+  ]
+}

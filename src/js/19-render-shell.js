@@ -350,9 +350,10 @@ function syncCabinetShellLayout({
 function syncHudAndShellMessages({ox,oy,viewW,viewH}){
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
- const pilotHudHtml=(typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
+ const playerTwoHud=typeof playerTwoHudHtml==='function'?playerTwoHudHtml():'';
+ const pilotHudHtml=playerTwoHud || ((typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
   ? `<span class="hudLabel">PILOT</span> <span class="hudValue">${pilotDisplayId()}</span>`
-  : (window.__platinumPilotHudHtml||window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`);
+  : (window.__platinumPilotHudHtml||window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`));
  right.innerHTML=pilotHudHtml;
  const toolsVisible=!started||paused||feedbackOpen;
  settingsBtn.style.display='block';
@@ -395,9 +396,10 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
     : '';
    const missionBlock=showcaseMode?buildStartMissionHtml(frontDoor.attractMission):'';
    const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable);
+   const playerModeLine=typeof buildPlayerTwoStartHtml==='function'?buildPlayerTwoStartHtml():'';
    const accountLine=showcaseMode?`<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span>`:'';
    const utilityLine=showcaseMode?`<span class="startMeta">${frontDoor.utilityLine}</span>`:'';
-   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}${missionBlock}${scoreAdvanceBlock}${accountLine}<span class="startMeta">${frontDoor.attractLine}</span>${utilityLine}${pickerHint}${noticeHint}`;
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${playerModeLine}${quoteBlock}${missionBlock}${scoreAdvanceBlock}${accountLine}<span class="startMeta">${frontDoor.attractLine}</span>${utilityLine}${pickerHint}${noticeHint}`;
   }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;

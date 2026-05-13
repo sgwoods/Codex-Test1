@@ -273,6 +273,8 @@ const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
 const ARCADE_MUSIC_MUTED_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicMuted`;
 const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
 const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
+const PLAYER_TWO_MODE_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoMode`;
+const PLAYER_TWO_PERSONA_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoPersona`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
@@ -287,6 +289,8 @@ const LEGACY_STORAGE_KEYS={
  [ARCADE_MUSIC_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicVolume`,
+ [PLAYER_TWO_MODE_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoMode`,
+ [PLAYER_TWO_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoPersona`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
@@ -303,6 +307,8 @@ const PLATFORM_STORAGE_KEYS={
  [ARCADE_MUSIC_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicVolume`,
+ [PLAYER_TWO_MODE_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoMode`,
+ [PLAYER_TWO_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoPersona`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
@@ -1085,7 +1091,7 @@ const P={
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
  id:'classic-arcade-stars',
@@ -1257,7 +1263,7 @@ function isHarnessClockControlled(){
  return !!harnessClockControlled;
 }
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
-const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
@@ -1298,7 +1304,8 @@ function hitMissRatio(stats){
 }
 function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ const playerTwo=typeof buildPlayerTwoResultsHtml==='function'?buildPlayerTwoResultsHtml():'';
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString(),build:BUILD};
@@ -2440,24 +2447,27 @@ addEventListener('keydown',e=>{
    return;
   }
  }
- if(!started&&e.code==='Enter'){
-  const packCanStart=typeof currentGamePackCanStart==='function'
-   ? currentGamePackCanStart()
-   : typeof currentGamePackHasPlayableAdapter==='function'
-   ? currentGamePackHasPlayableAdapter()
-   : (typeof currentGamePackPlayable!=='function'||currentGamePackPlayable());
-  if(!packCanStart){
-   e.preventDefault();
-   restorePlayableGamePackForLaunch();
-  }
-  if(gameOverState&&!gameOverState.editing)submitGameOverScore();
-  stopAttractLoop();start();
- }
+ if(!started&&typeof handlePlayerTwoWaitKey==='function'&&handlePlayerTwoWaitKey(e))return;
+ if(!started&&e.code==='Enter')launchCurrentGameFromWaitMode(e);
  if(started&&e.code==='KeyP'){
   toggleGameplayPause();
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code))unlockAudioFromInteraction();
 });
+function launchCurrentGameFromWaitMode(e=null){
+ const packCanStart=typeof currentGamePackCanStart==='function'
+  ? currentGamePackCanStart()
+  : typeof currentGamePackHasPlayableAdapter==='function'
+  ? currentGamePackHasPlayableAdapter()
+  : (typeof currentGamePackPlayable!=='function'||currentGamePackPlayable());
+ if(!packCanStart){
+  e?.preventDefault?.();
+  restorePlayableGamePackForLaunch();
+ }
+ if(gameOverState&&!gameOverState.editing)submitGameOverScore();
+ stopAttractLoop();start();
+ return true;
+}
 addEventListener('keyup',e=>{
  keys[e.code]=0;
  if(!keyState[e.code])keyState[e.code]={downAt:0,upAt:performance.now()};
@@ -2473,6 +2483,10 @@ document.addEventListener('visibilitychange',()=>{
  if(document.visibilityState==='visible'&&typeof checkForHostedBuildUpdate==='function')checkForHostedBuildUpdate();
 });
 addEventListener('pointerdown',e=>{
+ if(typeof handlePlayerTwoWaitClick==='function'&&handlePlayerTwoWaitClick(e.target)){
+  e.preventDefault();
+  return;
+ }
  if(!settingsOpen)return;
  if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
  closeSettings();

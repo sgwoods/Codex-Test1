@@ -160,6 +160,7 @@ function currentReplayMeta(){
   attract:!!S.attract,
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
+  playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
   pilotUserId,
   pilotEmail,
   pilotInitials,

@@ -26,6 +26,8 @@ window.__galagaHarness__={
  }
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
+ if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
+ if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
@@ -382,6 +384,35 @@ window.__galagaHarness__={
   if(typeof resetActiveInputState==='function')resetActiveInputState(reason);
   return this.inputState();
  },
+ setupPlayerTwoModeTest(cfg={}){
+  window.__platinumHarnessPlayerTwoAuth=!!cfg.signedIn;
+  window.__auroraHarnessPlayerTwoAuth=window.__platinumHarnessPlayerTwoAuth;
+  const initials=sanitizeInitials(cfg.initials||'SGW').padEnd(3,'-').slice(0,3);
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user=cfg.signedIn===false?null:{
+   id:String(cfg.userId||'pilot-player-two'),
+   email:String(cfg.email||'pilot@example.com'),
+   email_confirmed_at:new Date().toISOString(),
+   user_metadata:{display_initials:initials}
+  };
+  LEADERBOARD.profile=LEADERBOARD.user?{user_id:LEADERBOARD.user.id,display_initials:initials}:null;
+  LEADERBOARD.accountNotice='';
+  if(typeof syncAccountUi==='function')syncAccountUi();
+  return this.playerTwoState();
+ },
+ setPlayerTwoMode(cfg={}){
+  if(cfg.persona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.persona,{silent:1,source:'harness'});
+  if(cfg.enabled!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.enabled,{silent:!!cfg.silent,source:'harness'});
+  return this.playerTwoState();
+ },
+ playerTwoState(){
+  return{
+   selection:typeof playerTwoSelectionState==='function'?playerTwoSelectionState():null,
+   run:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
+   hudRight:right?.textContent||'',
+   accountNotice:LEADERBOARD.accountNotice||''
+  };
+ },
  setupRemoteScoreSubmitTest(cfg={}){
   window.__platinumHarnessForceRemoteWrite=1;
   window.__auroraHarnessForceRemoteWrite=1;
@@ -523,6 +554,7 @@ window.__galagaHarness__={
    simT:+(+S.simT||0).toFixed(3),
    stageClock:+(+S.stageClock||0).toFixed(3),
    persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,
+   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    atmosphere:atmosphere?{
     id:atmosphere.id||'',
     group:atmosphere.group||'',
