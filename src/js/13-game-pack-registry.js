@@ -53,8 +53,15 @@ function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
  ACTIVE_GAME_PACK_KEY=nextPack.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
  ACTIVE_GAME_PACK=nextPack;
  PRODUCT_NAME=nextPack.metadata?.title||PRODUCT_NAME;
+ if(typeof S!=='undefined'&&typeof loadScoreboard==='function'){
+  const storedBest=typeof scoreBestKey==='function'?(+readPref(scoreBestKey(ACTIVE_GAME_PACK_KEY))||0):0;
+  const boardBest=loadScoreboard(ACTIVE_GAME_PACK_KEY)[0]?.score||0;
+  S.best=Math.max(storedBest,boardBest);
+ }
  syncInstalledPackShellChrome();
  if(opts.persist)writePref(GAME_PACK_PREF_KEY,ACTIVE_GAME_PACK_KEY);
+ if(typeof syncLeaderboardUi==='function')syncLeaderboardUi();
+ if(typeof syncAccountUi==='function')syncAccountUi();
  return ACTIVE_GAME_PACK;
 }
 

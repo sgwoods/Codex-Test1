@@ -148,10 +148,15 @@ function currentReplayMeta(){
  const pilotUserId=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.id?String(LEADERBOARD.user.id):'';
  const pilotEmail=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email?String(LEADERBOARD.user.email):'';
  const pilotInitials=typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'';
+ const gameKey=typeof currentGamePackKey==='function'?currentGamePackKey():'aurora-galactica';
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
  return {
   id:VIDEO_REC.sessionId||REC?.id||`replay-${Date.now()}`,
   source:'game_native',
   build:BUILD,
+  gameKey,
+  gameTitle:pack?.metadata?.title||scoreGameTitleForKey(gameKey),
+  gameVersionLine:pack?.metadata?.versionLine||pack?.metadata?.version||'',
   createdAt:REC?.createdAt||new Date().toISOString(),
   duration:recTime(),
   score:S.score|0,

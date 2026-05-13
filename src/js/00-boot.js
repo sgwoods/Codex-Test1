@@ -1045,7 +1045,84 @@ const P={
  }
 };
 
-const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
+const DEFAULT_SCORE_GAME_KEY='aurora-galactica';
+const DEFAULT_SCORE_GAME_TITLE='Aurora Galactica';
+
+function normalizeScoreRecordGameKey(value=''){
+ const key=String(value||'').trim();
+ return key||DEFAULT_SCORE_GAME_KEY;
+}
+
+function scoreGameTitleForKey(gameKey='',fallback=''){
+ const key=normalizeScoreRecordGameKey(gameKey);
+ try{
+  if(typeof getGamePack==='function'){
+   const title=String(getGamePack(key)?.metadata?.title||'').trim();
+   if(title)return title;
+  }
+ }catch{}
+ if(key==='galaxy-guardians-preview')return 'Galaxy Guardians';
+ return String(fallback||DEFAULT_SCORE_GAME_TITLE).trim()||DEFAULT_SCORE_GAME_TITLE;
+}
+
+function currentScoreStorageGameKey(){
+ const saved=String(readPref(GAME_PACK_PREF_KEY)||'').trim();
+ if(saved)return normalizeScoreRecordGameKey(saved);
+ try{
+  if(typeof currentGamePackKey==='function'){
+   const active=String(currentGamePackKey()||'').trim();
+   if(active)return normalizeScoreRecordGameKey(active);
+  }
+ }catch{}
+ return DEFAULT_SCORE_GAME_KEY;
+}
+
+function currentScoreStorageGameTitle(){
+ return scoreGameTitleForKey(currentScoreStorageGameKey());
+}
+
+function scoreStorageKey(baseKey='',gameKey=currentScoreStorageGameKey()){
+ const base=String(baseKey||'').trim();
+ const normalized=normalizeScoreRecordGameKey(gameKey);
+ return normalized===DEFAULT_SCORE_GAME_KEY?base:`${base}:${normalized}`;
+}
+
+function scoreBestKey(gameKey=currentScoreStorageGameKey()){
+ return scoreStorageKey(BEST_SCORE_KEY,gameKey);
+}
+
+function normalizeStoredScoreRow(row={},fallbackGameKey=DEFAULT_SCORE_GAME_KEY){
+ const gameKey=normalizeScoreRecordGameKey(row?.gameKey||row?.game_key||fallbackGameKey);
+ return {
+  id:String(row?.id||''),
+  initials:String(row?.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),
+  score:+row?.score|0,
+  stage:+row?.stage|0,
+  at:String(row?.at||''),
+  build:String(row?.build||''),
+  gameKey,
+  gameTitle:scoreGameTitleForKey(gameKey,String(row?.gameTitle||row?.game_title||'').trim())
+ };
+}
+
+function scoreRowGameKey(row={},fallbackGameKey=DEFAULT_SCORE_GAME_KEY){
+ return normalizeScoreRecordGameKey(row?.gameKey||row?.game_key||fallbackGameKey);
+}
+
+function scoreRowGameTitle(row={},fallbackGameKey=DEFAULT_SCORE_GAME_KEY){
+ const gameKey=scoreRowGameKey(row,fallbackGameKey);
+ return scoreGameTitleForKey(gameKey,String(row?.gameTitle||row?.game_title||'').trim());
+}
+
+function scoreRowMatchesGame(row={},gameKey=currentScoreStorageGameKey()){
+ return scoreRowGameKey(row)===normalizeScoreRecordGameKey(gameKey);
+}
+
+function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
+ return normalizeScoreRecordGameKey(gameKey)===DEFAULT_SCORE_GAME_KEY;
+}
+
+const S={score:0,best:+readPref(scoreBestKey())||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
@@ -1221,32 +1298,29 @@ function isHarnessClockControlled(){
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
 const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
-function loadScoreboard(){
+function loadScoreboard(gameKey=currentScoreStorageGameKey()){
  try{
-  return JSON.parse(readPref(SCOREBOARD_KEY)||'[]').filter(x=>x&&Number.isFinite(+x.score)).map(x=>({id:String(x.id||''),initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),score:+x.score|0,stage:+x.stage|0,at:String(x.at||''),build:String(x.build||'')})).sort((a,b)=>b.score-a.score).slice(0,10);
+  return JSON.parse(readPref(scoreStorageKey(SCOREBOARD_KEY,gameKey))||'[]')
+   .filter(x=>x&&Number.isFinite(+x.score))
+   .map(x=>normalizeStoredScoreRow(x,gameKey))
+   .sort((a,b)=>b.score-a.score||b.stage-a.stage||String(a.at||'').localeCompare(String(b.at||'')))
+   .slice(0,10);
  }catch{return[]}
 }
-function saveScoreboard(list){
- writePref(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
+function saveScoreboard(list,gameKey=currentScoreStorageGameKey()){
+ writePref(scoreStorageKey(SCOREBOARD_KEY,gameKey),JSON.stringify(list.slice(0,10)));
 }
-function loadScoreHistory(){
+function loadScoreHistory(gameKey=currentScoreStorageGameKey()){
  try{
-  return JSON.parse(readPref(SCORE_HISTORY_KEY)||'[]')
+  return JSON.parse(readPref(scoreStorageKey(SCORE_HISTORY_KEY,gameKey))||'[]')
    .filter(x=>x&&Number.isFinite(+x.score))
-   .map(x=>({
-    id:String(x.id||''),
-    initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),
-    score:+x.score|0,
-    stage:+x.stage|0,
-    at:String(x.at||''),
-    build:String(x.build||'')
-   }))
+   .map(x=>normalizeStoredScoreRow(x,gameKey))
    .sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))
    .slice(0,50);
  }catch{return[]}
 }
-function saveScoreHistory(list){
- writePref(SCORE_HISTORY_KEY,JSON.stringify(list.slice(0,50)));
+function saveScoreHistory(list,gameKey=currentScoreStorageGameKey()){
+ writePref(scoreStorageKey(SCORE_HISTORY_KEY,gameKey),JSON.stringify(list.slice(0,50)));
 }
 function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
 function sanitizeInitials(txt=''){return String(txt).toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)}
@@ -1258,12 +1332,25 @@ function hitMissRatio(stats){
  if(!stats?.shots)return 0;
  return Math.round((stats.hits/stats.shots)*100);
 }
-function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
+function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage),opts={}){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ const title=String(opts.title||'GAME OVER').trim()||'GAME OVER';
+ const sub=String(opts.sub||'RESULTS').trim()||'RESULTS';
+ return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
- const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString(),build:BUILD};
+ const gameKey=currentScoreStorageGameKey();
+ const gameTitle=currentScoreStorageGameTitle();
+ const entry={
+  id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,
+  initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),
+  score:score|0,
+  stage:stage|0,
+  at:new Date().toISOString(),
+  build:BUILD,
+  gameKey,
+  gameTitle
+ };
  const board=loadScoreboard();
  const history=loadScoreHistory();
  board.push(entry);
@@ -1273,29 +1360,35 @@ function recordScore(score,stage,initials='YOU'){
  const top=board.slice(0,10);
  saveScoreboard(top);
  S.best=top[0]?.score||0;
- writePref(BEST_SCORE_KEY,String(S.best));
+ writePref(scoreBestKey(gameKey),String(S.best));
  if(typeof syncAccountUi==='function')syncAccountUi();
  return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
 }
 function saveGameOverInitials(){
  if(!gameOverState?.entryId)return;
- const board=loadScoreboard();
+ const targetGameKey=normalizeScoreRecordGameKey(gameOverState.gameKey||currentScoreStorageGameKey());
+ const board=loadScoreboard(targetGameKey);
  const row=board.find(x=>x.id===gameOverState.entryId);
  if(row){
   row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
-  saveScoreboard(board);
+  saveScoreboard(board,targetGameKey);
   if(typeof syncAccountUi==='function')syncAccountUi();
  }
- const history=loadScoreHistory();
+ const history=loadScoreHistory(targetGameKey);
  const historyRow=history.find(x=>x.id===gameOverState.entryId);
  if(historyRow){
   historyRow.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
-  saveScoreHistory(history);
+  saveScoreHistory(history,targetGameKey);
  }
 }
 function buildGameOverHtmlFromState(){
  if(!gameOverState)return '';
- if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge);
+ if(gameOverState.phase==='results'){
+  return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge,{
+   title:gameOverState.resultTitle||'GAME OVER',
+   sub:gameOverState.resultSub||'RESULTS'
+  });
+ }
  const board=leaderboardRowsForView();
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
@@ -1308,7 +1401,7 @@ function buildGameOverHtmlFromState(){
   entryHtml=`<span class="gameOverEntry"><span class="entryLabel">ENTER INITIALS</span><span class="entrySlots">${shown}</span></span>`;
   footHtml='<span class="gameOverFoot"><span class="gameOverFootLine"><span class="k">Left/Right</span> select, <span class="k">Up/Down</span> change</span><span class="gameOverFootLine">type letters or press <span class="k">Enter</span> to save</span></span>';
  }
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">${gameOverState.resultTitle||'GAME OVER'}</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
  const activeView=(ATTRACT.phase==='scores'&&ATTRACT.active)?(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'):LEADERBOARD.view;
@@ -1317,20 +1410,30 @@ function buildAttractScoreboardHtml(){
  const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
-function buildGameOverState(score,stage,challenge=0){
+function buildGameOverState(score,stage,challenge=0,opts={}){
  const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
  const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
+ const gameKey=currentScoreStorageGameKey();
+ const gameTitle=currentScoreStorageGameTitle();
+ const outcome=String(opts.outcome||'game_over').trim()||'game_over';
+ const resultTitle=String(opts.resultTitle||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER')).trim()||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER');
+ const resultSub=String(opts.resultSub||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS')).trim()||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS');
  const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
  const editing=!!res.rank&&!hasLockedPilotInitials;
  return{
   entryId:res.entry.id,
   rank:res.rank,
   phase:'results',
+  outcome,
+  resultTitle,
+  resultSub,
   score:score|0,
   stage:stage|0,
   challenge:!!challenge,
   shownStage,
+  gameKey,
+  gameTitle,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
   initials:(hasLockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
@@ -1405,7 +1508,7 @@ window.enterAttractScores=enterAttractScores;
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;
- writePref(BEST_SCORE_KEY,String(S.best));
+ writePref(scoreBestKey(),String(S.best));
 }
 const DEFAULT_TEST_CFG=Object.freeze({
  stage:1,

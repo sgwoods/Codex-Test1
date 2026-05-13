@@ -34,7 +34,7 @@ Current shipped truth on `main`:
 - hosted `/production` still honestly frames `Galaxy Guardians` as a preview
   application
 - the runtime already owns player movement, single-shot fire, alien scoring,
-  life loss, stage advance, and game-over events
+  life loss, one-level mission completion, and game-over events
 - the platform score/pilot/replay surfaces still read as shared-Aurora-first
   rather than game-separated
 - the preview shell copy still says "DEV PREVIEW COMPLETE" and still treats the
@@ -155,6 +155,7 @@ Fourth priority:
    user-visible.
 5. Add harnesses for:
    - Guardians score isolation
+   - Guardians one-level completion surface
    - Guardians proper completion ending
    - Guardians proper loss ending
    - Guardians replay/session metadata identity
@@ -178,5 +179,8 @@ This branch is ready to merge when:
 - own scores and result history no longer bleed into Aurora surfaces
 - basic loss/completion/end-state behavior is clear and stable
 - the new harnesses pass from a clean source state
+
+The current long measured execution sequence for that work is tracked in
+[GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md](GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md).
 - the docs explain the new reality without pretending the game is more mature
   than it is

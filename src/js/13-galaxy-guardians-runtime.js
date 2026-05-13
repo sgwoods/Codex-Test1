@@ -60,9 +60,10 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   'player_shot_resolved',
   'enemy_shot',
   'enemy_wrap_or_return',
-  'player_lost',
-  'game_over',
-  'wave_clear',
+ 'player_lost',
+ 'game_over',
+ 'wave_clear',
+  'mission_complete',
   'stage_advance',
   'wave_reset'
  ]),
@@ -105,6 +106,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   playerRespawnDelay:1.35,
   playerInvulnerability:.95,
   waveClearDelay:1.2,
+  maxPlayableStage:1,
   wrapThreatModel:'bottom-exit-or-return-explicit-preview-rule',
   formation:Object.freeze({
    flagshipSlots:2,
@@ -211,13 +213,16 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   devPlayable:1,
   playablePreviewReleaseChannels:GALAXY_GUARDIANS_RUNTIME_PROFILE.playablePreviewReleaseChannels.slice(),
   stage:Math.max(1,+opts.stage||1),
-  score:0,
-  lives,
-  t:0,
-  gameOver:0,
+ score:0,
+ lives,
+ t:0,
+ gameOver:0,
+  completed:0,
+  gameOverReason:'',
   resetT:0,
   waveClearT:0,
   waveClearStage:0,
+  stats:{shots:0,hits:0},
   seed,
   rngSeed:seed,
   formationEntry:Object.assign({started:1,startedAt:0,settled:0,complete:0},guardiansRuntimeRules(+opts.stage||1)),
@@ -319,6 +324,7 @@ function fireGuardiansPlayerShot(state){
  if(p.shot||p.cooldown>0)return false;
  p.shot={x:p.x,y:p.y-8,vy:-178,active:1};
  p.cooldown=rules.singleShotCooldown;
+ state.stats.shots=(+state.stats.shots||0)+1;
  guardiansRuntimeEvent(state,'player_shot_fired',{x:+p.x.toFixed(2),y:+p.shot.y.toFixed(2),audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.playerShot.id,visualId:GALAXY_GUARDIANS_RUNTIME_PROFILE.playerVisualId});
  return true;
 }
@@ -363,6 +369,21 @@ function advanceGalaxyGuardiansStage(state){
  return state.stage;
 }
 
+function completeGalaxyGuardiansMission(state){
+ state.completed=1;
+ state.gameOver=1;
+ state.gameOverReason='mission_complete';
+ state.waveClearT=0;
+ state.player.shot=null;
+ state.enemyShots.length=0;
+ guardiansRuntimeEvent(state,'mission_complete',{
+  stage:state.stage,
+  score:state.score,
+  audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.gameOver.id
+ });
+ return true;
+}
+
 function loseGalaxyGuardiansPlayer(state,cause='collision'){
  if(state.gameOver||state.resetT>0||state.player.inv>0)return false;
  state.lives=Math.max(0,state.lives-1);
@@ -377,6 +398,7 @@ function loseGalaxyGuardiansPlayer(state,cause='collision'){
  });
  if(state.lives<=0){
   state.gameOver=1;
+  state.gameOverReason=String(cause||'player_lost');
   guardiansRuntimeEvent(state,'game_over',{score:state.score,stage:state.stage,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.gameOver.id});
  }
  return true;
@@ -474,7 +496,11 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  }
  if(state.waveClearT>0){
   state.waveClearT=Math.max(0,state.waveClearT-dt);
-  if(!state.waveClearT)advanceGalaxyGuardiansStage(state);
+  if(!state.waveClearT){
+   const maxPlayableStage=Math.max(1,+rules.maxPlayableStage||1);
+   if((state.stage|0)>=maxPlayableStage)completeGalaxyGuardiansMission(state);
+   else advanceGalaxyGuardiansStage(state);
+  }
   return state;
  }
  const entry=updateGalaxyGuardiansFormationEntry(state);
@@ -560,6 +586,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
     alien.hp=0;
     const points=guardiansAlienPoints(alien);
     state.score+=points;
+    state.stats.hits=(+state.stats.hits||0)+1;
     const hitDuration=alien.role==='flagship' ? .34 : (alien.role==='escort' ? .24 : .18);
     state.hitFlashes.push({
      role:alien.role,
@@ -610,6 +637,10 @@ function summarizeGalaxyGuardiansRuntime(state){
   enemyShotCount:state.enemyShots.filter(shot=>shot&&shot.active!==0).length,
   waveClearPending:state.waveClearT>0,
   waveClearT:+(+state.waveClearT||0).toFixed(3),
+  stats:{
+   shots:+(state.stats?.shots||0),
+   hits:+(state.stats?.hits||0)
+  },
   hitFlashCount:(state.hitFlashes||[]).length,
   hitFlashes:(state.hitFlashes||[]).map(flash=>({role:flash.role,visualId:flash.visualId,x:+flash.x.toFixed(2),y:+flash.y.toFixed(2),t:+flash.t.toFixed(3),duration:+flash.duration.toFixed(3)})),
   enemyShots:state.enemyShots.filter(shot=>shot&&shot.active!==0).map(shot=>({id:shot.id,role:shot.role,x:+shot.x.toFixed(2),y:+shot.y.toFixed(2)})),
@@ -617,6 +648,8 @@ function summarizeGalaxyGuardiansRuntime(state){
   playerInv:+(+state.player.inv||0).toFixed(3),
   resetT:+(+state.resetT||0).toFixed(3),
   gameOver:!!state.gameOver,
+  completed:!!state.completed,
+  gameOverReason:String(state.gameOverReason||''),
   activeDives:state.aliens.filter(alien=>alien.hp>0&&alien.mode==='diving').map(alien=>({id:alien.id,role:alien.role,linkedTo:alien.linkedTo||'',escortSlot:alien.escortSlot||0,x:+alien.x.toFixed(2),y:+alien.y.toFixed(2)})),
   eventTypes:Array.from(new Set(state.events.map(event=>event.type))),
   visualIds:Array.from(new Set(state.aliens.filter(alien=>alien.hp>0).map(alien=>alien.visualId))),
@@ -635,3 +668,4 @@ window.loseGalaxyGuardiansPlayer=loseGalaxyGuardiansPlayer;
 window.resetGalaxyGuardiansWave=resetGalaxyGuardiansWave;
 window.clearGalaxyGuardiansWave=clearGalaxyGuardiansWave;
 window.advanceGalaxyGuardiansStage=advanceGalaxyGuardiansStage;
+window.completeGalaxyGuardiansMission=completeGalaxyGuardiansMission;

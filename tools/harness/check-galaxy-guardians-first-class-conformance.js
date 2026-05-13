@@ -84,6 +84,8 @@ const REQUIRED_SCRIPT_GROUPS = {
   runtime: [
     'harness:check:galaxy-guardians-runtime-slice',
     'harness:check:galaxy-guardians-playable-preview',
+    'harness:check:galaxy-guardians-game-owned-identity',
+    'harness:check:galaxy-guardians-one-level-completion',
     'harness:check:galaxy-guardians-score-progression',
     'harness:check:galaxy-guardians-threat-scoring'
   ],

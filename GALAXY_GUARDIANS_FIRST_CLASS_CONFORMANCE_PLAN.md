@@ -95,10 +95,12 @@ The first-class Galaxy process should always be reviewable through this spine:
   - `npm run harness:check:galaxy-guardians-reference-conformance`
   - `npm run harness:check:galaxy-guardians-playtest-conformance-review`
 - runtime completeness
-  - `npm run harness:check:galaxy-guardians-runtime-slice`
-  - `npm run harness:check:galaxy-guardians-playable-preview`
-  - `npm run harness:check:galaxy-guardians-score-progression`
-  - `npm run harness:check:galaxy-guardians-threat-scoring`
+- `npm run harness:check:galaxy-guardians-runtime-slice`
+- `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxy-guardians-game-owned-identity`
+- `npm run harness:check:galaxy-guardians-one-level-completion`
+- `npm run harness:check:galaxy-guardians-score-progression`
+- `npm run harness:check:galaxy-guardians-threat-scoring`
 - visual identity
   - `npm run harness:check:galaxy-guardians-visual-readability`
   - `npm run harness:check:galaxy-guardians-sprite-grid-targets`
@@ -169,6 +171,8 @@ chat.
 
 ## Relationship To Other Plans
 
+- the active long working-block execution sequence is tracked in
+  [GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md](GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md)
 - branch-local gameplay-completeness work remains in
   [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
 - top-level release sequencing remains in [PLAN.md](PLAN.md) and

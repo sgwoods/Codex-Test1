@@ -154,9 +154,30 @@ function syncGalaxyGuardiansShellState(state){
  S.simT=+state.t||0;
  S.challenge=0;
  S.liveCount=state.aliens.filter(alien=>alien.hp>0).length;
+ S.stats={
+  shots:+state.stats?.shots||0,
+  hits:+state.stats?.hits||0
+ };
  if(state.gameOver){
-  gameOverHtml=`<span class="gameOverTitle">GALAXY GUARDIANS</span><span class="gameOverSub">DEV PREVIEW COMPLETE</span><span class="gameOverLine">SCORE ${String(state.score|0).padStart(6,'0')}</span><span class="gameOverHint">CHOOSE GAME TO RETURN TO AURORA</span>`;
+  if(!gameOverState&&typeof buildGameOverState==='function'){
+   const completed=!!state.completed||String(state.gameOverReason||'')==='mission_complete';
+   gameOverState=buildGameOverState(state.score|0,state.stage|0,false,completed?{
+    outcome:'mission_complete',
+    resultTitle:'MISSION COMPLETE',
+    resultSub:'SIGNAL RACK BROKEN'
+   }:undefined);
+   if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
+  }
+  gameOverHtml=typeof buildGameOverHtmlFromState==='function'
+   ? buildGameOverHtmlFromState()
+   : `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">GALAXY GUARDIANS</span><span class="gameOverLine">SCORE ${String(state.score|0).padStart(6,'0')}</span><span class="gameOverHint">PRESS ENTER TO PLAY AGAIN</span>`;
+  if(msg){
+   msg.className='gameOverScreen';
+   msg.innerHTML=gameOverHtml;
+  }
+  return;
  }
+ gameOverHtml='';
 }
 
 function closeGalaxyGuardiansDevOverlays(){
@@ -196,7 +217,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   bannerMode:'',
   bannerSub:'',
   alertT:0,
-  alertTxt:'',
+ alertTxt:'',
   challenge:0,
   forceChallenge:0,
   liveCount:0,
@@ -212,6 +233,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   simT:0,
   stageClock:0
  });
+ S.stats={shots:0,hits:0};
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE=createGalaxyGuardiansRuntimeState({
   stage:S.stage,
   ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
@@ -246,7 +268,8 @@ function updateGalaxyGuardiansDevPreview(dt){
   started=0;
   paused=0;
   if(typeof syncPauseUi==='function')syncPauseUi();
-  stopRunRecording();
+  if(typeof stopRunRecordingAfterAudioTail==='function')stopRunRecordingAfterAudioTail(2400,VIDEO_REC.sessionId);
+  else stopRunRecording();
  }
 }
 

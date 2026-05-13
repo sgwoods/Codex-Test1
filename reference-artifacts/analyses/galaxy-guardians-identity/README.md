@@ -61,7 +61,7 @@ Current artifacts:
   comparison that tuned the dev-preview dive speed, lateral span, and wrap
   pressure from the object-track proxy.
 - `score-progression-0.1.json` - first score-advance table, mission-language,
-  wave-clear, and stage-advance contract for the dev-only playable preview.
+  wave-clear, and one-level mission-complete contract for the playable preview.
 - `stage-rank-pressure-0.1.json` - bounded multi-stage pressure contract that
   preserves the measured stage-one timing while making stages three and five
   measurably faster and denser for dives, shots, drift, and wrap pressure.
