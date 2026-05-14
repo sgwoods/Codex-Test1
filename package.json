@@ -6,6 +6,9 @@
   "scripts": {
     "build": "node tools/build/build-index.js",
     "build:production": "node tools/build/build-index.js --lane production",
+    "review:code:packet": "node tools/review/build-code-review-packet.js",
+    "review:code:check": "node tools/review/check-code-review-gate.js",
+    "review:code": "npm run review:code:packet && npm run review:code:check",
     "promote:production": "node tools/build/promote-production.js",
     "approve:beta": "node tools/build/approve-beta.js",
     "publish:check:dev": "node tools/build/check-publish-ready.js --lane dev",
@@ -19,7 +22,7 @@
     "publish:dev:raw": "node tools/build/publish-lane.js --lane dev",
     "publish:beta:raw": "node tools/build/publish-lane.js --lane beta",
     "publish:production:raw": "node tools/build/publish-lane.js --lane production",
-    "publish:dev": "npm run build && npm run publish:check:dev && npm run publish:dev:raw && npm run publish:verify:dev",
+    "publish:dev": "npm run build && npm run review:code:check && npm run publish:check:dev && npm run publish:dev:raw && npm run publish:verify:dev",
     "publish:beta": "npm run build && npm run promote:beta && npm run publish:check:beta && npm run publish:beta:raw && npm run publish:verify:beta",
     "publish:production": "npm run build && npm run promote:production && npm run publish:check:production && npm run publish:production:raw && npm run publish:verify:production && npm run sync:public && npm run verify:public",
     "sync:public": "node tools/build/sync-public-pages.js",
