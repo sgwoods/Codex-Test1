@@ -622,6 +622,90 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .3, segment: .35, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .06 }
   },
+  'capture-success': {
+    cue: 'captureSuccess',
+    entryId: 'capture-success',
+    comparisonId: 'capture-success-compare',
+    latest: 'latest-capture-success.json',
+    title: 'Capture Success',
+    problem: 'Capture Success is now the highest segment-level audio gap: the player-facing state change is semantically correct, but the onset is not separated enough from the body/tail and can read as a generic synthetic phrase instead of a captured-fighter handoff.',
+    target: 'Make the exact captured-fighter moment read immediately and distinctly before the boss retreat cue begins to carry the state away.',
+    cooldownMs: 1400,
+    referenceStarts: [4.04, 4.16, 4.248, 4.32, 4.42, 4.5, 4.58],
+    referenceDurations: [0.14, 0.18, 0.21, 0.24, 0.3, 0.36, 0.42, 0.5],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'fighter-captured-guide-window',
+        label: 'Fighter captured guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+          cooldownMs: 1400,
+          referenceVolume: .95,
+          clipStart: 4.248,
+          clipDuration: .42
+        }
+      },
+      {
+        id: 'fighter-captured-active-core',
+        label: 'Fighter captured active core',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+          cooldownMs: 1400,
+          referenceVolume: 1.05,
+          clipStart: 4.248,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'fighter-captured-separated-onset',
+        label: 'Fighter captured separated onset',
+        spec: {
+          scheduledDuration: .29,
+          layers: [
+            {
+              referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+              referenceVolume: 1.06,
+              clipStart: 4.248,
+              clipDuration: .06,
+              delay: 0
+            },
+            {
+              referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+              referenceVolume: .92,
+              clipStart: 4.318,
+              clipDuration: .11,
+              delay: .072
+            },
+            {
+              referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+              referenceVolume: .82,
+              clipStart: 4.418,
+              clipDuration: .07,
+              delay: .17
+            }
+          ]
+        }
+      },
+      {
+        id: 'fighter-captured-low-synthetic-bridge',
+        label: 'Fighter captured low synthetic bridge',
+        spec: {
+          seq: [392, 330, 277],
+          step: .056,
+          wave: 'square',
+          volume: .0108,
+          slide: -22,
+          lpHz: 2800,
+          tones: [
+            { freq: 196, duration: .08, wave: 'triangle', volume: .0044, slide: -32, lpHz: 2100, delay: .092 },
+            { freq: 554, duration: .035, wave: 'square', volume: .0032, slide: -90, lpHz: 3600, delay: .012 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .45, duration: .06, acceptableDuration: .1, centroidWorsenHz: 120, bandWorsen: .06 }
+  },
   'captured-fighter-destroyed': {
     cue: 'capturedFighterDestroyed',
     entryId: 'captured-fighter-destroyed',

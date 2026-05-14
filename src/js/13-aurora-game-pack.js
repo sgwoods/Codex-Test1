@@ -261,7 +261,8 @@ const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
  enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
  bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
  enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
- bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64})
+ bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
+ captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400,referenceVolume:1.16,clipStart:4.248,clipDuration:.36})
 });
 
 const AURORA_CHALLENGE_RESULTS_HANDOFF_CUE=referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
@@ -414,7 +415,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    enemyBoom:AURORA_MEASURED_EFFECT_CUES.enemyBoom,
    bossBoom:AURORA_MEASURED_EFFECT_CUES.bossBoom,
    captureBeam:Object.freeze({tones:Object.freeze([{freq:640,duration:.052,wave:'square',volume:.0122,slide:360,lpHz:3800,hpHz:380},{freq:1220,duration:.155,wave:'square',volume:.0102,slide:210,lpHz:4400,hpHz:620,delay:.022},{freq:1840,duration:.095,wave:'triangle',volume:.007,slide:-120,lpHz:5600,hpHz:980,delay:.104},{freq:2180,duration:.044,wave:'triangle',volume:.0026,slide:-80,lpHz:6000,hpHz:1300,delay:.18}]),noise:Object.freeze([{duration:.02,volume:.0005,hp:3300,delay:.01}])}),
-   captureSuccess:Object.freeze({seq:[415,370,330,294],step:.054,wave:'triangle',volume:.0126,slide:-16,lpHz:2800,tones:Object.freeze([{freq:220,duration:.14,wave:'sine',volume:.0056,slide:-36,lpHz:2400,delay:.108}])}),
+   captureSuccess:AURORA_MEASURED_EFFECT_CUES.captureSuccess,
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:196,duration:.092,wave:'triangle',volume:.0028,slide:10,lpHz:1760},{freq:392,duration:.068,wave:'triangle',volume:.0106,slide:22,lpHz:2800},{freq:587,duration:.052,wave:'sine',volume:.0048,slide:18,lpHz:3600,delay:.018},{freq:880,duration:.042,wave:'triangle',volume:.0038,slide:14,lpHz:4700,delay:.038}])}),
