@@ -49,6 +49,54 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .3, segment: .3, duration: .08, acceptableDuration: .08, centroidWorsenHz: 100, bandWorsen: .05 }
   },
+  'enemy-shot': {
+    cue: 'enemyShot',
+    entryId: 'enemy-shot-classic',
+    comparisonId: 'enemy-shot-compare',
+    latest: 'latest-enemy-shot.json',
+    title: 'Enemy Shot',
+    problem: 'Enemy Shot is now the highest acoustic event gap in a fresh full-theme capture: enemy fire is semantically mapped, but its onset is too spectrally distant and too collapsed to read like the Galaga threat-fire transient.',
+    target: 'Make enemy projectile fire read as a crisp incoming-threat cue that stays distinct from playerShot, attackCharge, and enemyHit.',
+    cooldownMs: 220,
+    referenceStarts: [0.9, 0.94, 0.97, 1.0, 1.04, 1.08],
+    referenceDurations: [0.12, 0.15, 0.18, 0.2, 0.24, 0.28],
+    referenceVolumes: [0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'enemy-fire-guide-window',
+        label: 'Enemy fire guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 220,
+          referenceVolume: .88,
+          clipStart: .9,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'enemy-fire-narrow-transient',
+        label: 'Enemy fire narrow transient',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 220,
+          referenceVolume: .95,
+          clipStart: .97,
+          clipDuration: .15
+        }
+      },
+      {
+        id: 'dry-threat-snap',
+        label: 'Dry threat snap',
+        spec: {
+          tones: [
+            { freq: 480, duration: .052, wave: 'square', volume: .0072, slide: -150, lpHz: 2500 },
+            { freq: 260, duration: .06, wave: 'triangle', volume: .0048, slide: -90, lpHz: 2100, delay: .012 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .35, duration: .035, acceptableDuration: .06, centroidWorsenHz: 100, bandWorsen: .05 }
+  },
   'enemy-boom': {
     cue: 'enemyBoom',
     entryId: 'enemy-boom-aurora',
@@ -861,6 +909,83 @@ const CUE_CONFIGS = {
       }
     ],
     keeper: { risk: .25, segment: .45, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .055 }
+  },
+  'challenge-perfect': {
+    cue: 'challengePerfect',
+    entryId: 'challenge-perfect',
+    comparisonId: 'challenge-perfect-compare',
+    latest: 'latest-challenge-perfect.json',
+    title: 'Challenge Perfect',
+    problem: 'Challenge Perfect is the highest current segment-level audio gap: the cue is semantically correct and celebratory, but the measured onset is too peaky, too high-crossing, and too collapsed versus the Galaga perfect-clear reference phrase.',
+    target: 'Make a perfect challenging-stage clear read as an unmistakable arcade reward sting with a separated attack, a short readable body, and enough ceremony to distinguish it from the normal challenge-results handoff.',
+    cooldownMs: 2400,
+    referenceStarts: [0, .02, .04, .08, .12, .15, .2, .28],
+    referenceDurations: [.09, .12, .17, .24, .32, .48, .72, .96, 1.2, 1.6, 2.15],
+    referenceVolumes: [.74, .86, .95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'perfect-guide-window',
+        label: 'Perfect guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .95,
+          clipStart: 0,
+          clipDuration: .48
+        }
+      },
+      {
+        id: 'perfect-onset-body',
+        label: 'Perfect onset and body',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+          cooldownMs: 2400,
+          referenceVolume: 1.05,
+          clipStart: 0,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'perfect-full-handoff-safe',
+        label: 'Perfect full handoff-safe phrase',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .86,
+          clipStart: 0,
+          clipDuration: 1.2
+        }
+      },
+      {
+        id: 'low-zcr-perfect-sting',
+        label: 'Low-crossing perfect sting',
+        spec: {
+          seq: [784, 1047, 1318, 1760, 2349],
+          step: .048,
+          wave: 'triangle',
+          volume: .0142,
+          slide: 22,
+          lpHz: 4200,
+          tones: [
+            { freq: 392, duration: .12, wave: 'triangle', volume: .0044, slide: 8, lpHz: 2100, delay: 0 },
+            { freq: 2637, duration: .11, wave: 'sine', volume: .0056, slide: 12, lpHz: 5600, delay: .17 }
+          ]
+        }
+      },
+      {
+        id: 'separated-perfect-attack',
+        label: 'Separated perfect attack',
+        spec: {
+          tones: [
+            { freq: 523, duration: .085, wave: 'square', volume: .0058, slide: 4, lpHz: 2200, delay: 0 },
+            { freq: 880, duration: .062, wave: 'triangle', volume: .0098, slide: 18, lpHz: 3400, delay: .03 },
+            { freq: 1175, duration: .068, wave: 'triangle', volume: .0086, slide: 14, lpHz: 3800, delay: .083 },
+            { freq: 1760, duration: .095, wave: 'sine', volume: .0052, slide: 10, lpHz: 5200, delay: .16 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .25, segment: .45, duration: .05, acceptableDuration: .08, centroidWorsenHz: 120, bandWorsen: .055 }
   },
   'capture-beam': {
     cue: 'captureBeam',

@@ -150,11 +150,12 @@ resource economics fit together.
 
 Current conformance read:
 
-- overall Aurora quality is `9.2/10` across the current scored categories
-- audio identity and cue alignment is the weakest category at `7.3/10`; the
-  audio process is stronger than the runtime score, with cue-contract readiness
-  at `9.09/10`, semantic event score at `9.78/10`, acoustic event score at
-  `6.31/10`, and `playerHit` tail now the highest current audio gap
+- overall Aurora quality is `9.1/10` across the current scored categories
+- audio identity and cue alignment is the weakest category at `6.9/10`; the
+  audio process is stronger than the rounded runtime score, with cue-contract
+  readiness at `9.09/10`, semantic event score at `9.78/10`, acoustic event
+  score at `6.30/10`, average worst segment risk at `3.70/10`, and
+  `captureBeam` tail now the highest current audio segment gap
 - level arc and encounter shape is now a first-class high-priority category at
   `8.8/10`, with remaining opportunity in long-run non-repetition, stage
   pressure precision, and higher-resolution challenge/reward evidence
@@ -162,10 +163,12 @@ Current conformance read:
   browser-backed audio captures now use an explicit `80ms` preroll, record
   capture metadata, support composite analysis windows for layered cues, and
   apply calibrated browser-reference gates for source-backed loss phrases. The
-  accepted `playerHit` layered runtime cue improved the full-theme cue gap by
-  `2.65/10` while keeping semantic scoring high. The next audio pass should
-  refine the remaining `playerHit` tail gap and then return to `stagePulse`
-  pressure-bed strategy.
+  accepted `enemyShot` reference-subwindow cue improved the fresh acoustic
+  event rollup from `4.32/10` average worst-segment risk to `3.70/10` while
+  keeping semantic scoring high and cue alignment at `9/9`. The
+  `challengePerfect` pass found focused keepers but rejected runtime promotion
+  after broader quality guards fell, so the next audio pass should target
+  `captureBeam` tail or a stronger challenge-perfect mix model before promotion.
 - player movement now scores `10/10` after repairing the movement conformance
   harness recenter path; no gameplay movement constants were changed
 - the current quality score is captured in

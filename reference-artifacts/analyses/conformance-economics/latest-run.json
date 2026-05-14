@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-14T17-20-37-386Z-13878",
-  "startedAt": "2026-05-14T17:20:37.386Z",
-  "endedAt": "2026-05-14T17:20:37.751Z",
+  "id": "2026-05-14T18-00-46-748Z-51825",
+  "startedAt": "2026-05-14T18:00:46.748Z",
+  "endedAt": "2026-05-14T18:00:47.264Z",
   "branch": "codex/player-two-persona-mode",
-  "commit": "35b1b292",
+  "commit": "1c788342",
   "command": [
     "npm",
     "run",
@@ -17,13 +17,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "audio event gap with calibrated playerHit loss composite",
+  "notes": "enemyShot promoted cue event-gap rollup",
   "measurement": {
-    "wallSeconds": 0.365,
-    "timeRealSeconds": 0.36,
-    "timeUserSeconds": 0.22,
-    "timeSystemSeconds": 0.14,
-    "cpuSeconds": 0.36,
+    "wallSeconds": 0.516,
+    "timeRealSeconds": 0.5,
+    "timeUserSeconds": 0.26,
+    "timeSystemSeconds": 0.17,
+    "cpuSeconds": 0.43,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 572383304,
-    "artifactBytesAfter": 572460537,
-    "artifactBytesDelta": 77233
+    "artifactBytesBefore": 599279944,
+    "artifactBytesAfter": 599353358,
+    "artifactBytesDelta": 73414
   }
 }
