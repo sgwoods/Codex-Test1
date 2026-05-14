@@ -26,7 +26,7 @@ function fail(message, payload){
 function currentChangedFiles(report){
   const baseCommit = report.baseCommit || git(['merge-base', 'HEAD', report.baseRef || 'origin/main']);
   const committed = git(['diff', '--name-only', `${baseCommit}..HEAD`]).split('\n').filter(Boolean);
-  const dirty = git(['status', '--short']).split('\n').filter(Boolean).map(line => line.slice(3).trim()).filter(Boolean);
+  const dirty = git(['status', '--short']).split('\n').filter(Boolean).map(line => line.slice(2).trim()).filter(Boolean);
   return [...new Set([...committed, ...dirty])]
     .filter(file => !EXCLUDED_PREFIXES.some(prefix => file.startsWith(prefix)))
     .sort();

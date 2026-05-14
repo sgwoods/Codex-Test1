@@ -5,6 +5,9 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'code-review');
+const EXCLUDED_PREFIXES = Object.freeze([
+  'reference-artifacts/analyses/code-review/'
+]);
 
 function git(args, fallback = ''){
   try{
@@ -57,7 +60,7 @@ function statusRows(){
   return git(['status', '--short']).split('\n').filter(Boolean).map(line => ({
     raw: line,
     status: line.slice(0, 2).trim() || 'dirty',
-    file: line.slice(3).trim()
+    file: line.slice(2).trim()
   })).filter(row => row.file);
 }
 
@@ -67,7 +70,9 @@ function uniqueRows(baseRows, dirtyRows){
   for(const row of dirtyRows){
     if(!byFile.has(row.file)) byFile.set(row.file, { status: row.status, file: row.file, source: 'working-tree' });
   }
-  return [...byFile.values()].sort((a, b) => a.file.localeCompare(b.file));
+  return [...byFile.values()]
+    .filter(row => !EXCLUDED_PREFIXES.some(prefix => row.file.startsWith(prefix)))
+    .sort((a, b) => a.file.localeCompare(b.file));
 }
 
 function classify(file){
