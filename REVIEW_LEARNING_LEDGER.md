@@ -10,9 +10,9 @@ or simpler platform/game boundaries.
 
 ## Current Snapshot
 
-- generated: `2026-05-14T23:37:02.087Z`
+- generated: `2026-05-14T23:48:54.745Z`
 - branch: `codex/player-two-persona-mode`
-- commit: `ef7ae8c8`
+- commit: `6ac71b72`
 - review cycles tracked: `3`
 - issue notes tracked: `5`
 - accepted changes tracked: `3`
@@ -28,6 +28,9 @@ or simpler platform/game boundaries.
 4. During beta review, scan the issue-note categories for repeated patterns.
 5. Promote repeated patterns into one of: harness, release preflight, platform
    boundary rule, game-pack spec, documentation rule, or explicit non-goal.
+6. Before production, every issue must have a production disposition in
+   `review-dispositions.json`: either `addressed` or `dismissed`, with a
+   rationale and evidence.
 
 ## Issue Taxonomy
 
@@ -48,17 +51,17 @@ or simpler platform/game boundaries.
 | --- | --- | --- | --- | --- | --- |
 | historical | Platform architecture baseline | ARCHITECT_REVIEW_RESPONSE.md | standing | P0 0 / P1 0 / P2 4 / P3 0 | Baseline concerns are partly covered and partly continuing maturity work. |
 | 2026-05-14 | Local-to-hosted-dev code review gate | CODE_REVIEW_MODEL.md | standing | P0 0 / P1 0 / P2 0 / P3 0 | Accepted as a lightweight release-safety gate for development lane movement. |
-| 2026-05-14 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 95 | P0 0 / P1 0 / P2 1 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
+| 2026-05-14 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 97 | P0 0 / P1 0 / P2 1 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
 
 ## Issues And Notes
 
-| Severity | Category | Status | Id | Note | Proposed Action |
-| --- | --- | --- | --- | --- | --- |
-| P2 | architecture-boundary | accepted | architect-key-abstractions | Keep core runtime, shell, service adapter, game-pack, entity, scoring, stage, render, and auth concerns named and separated. | Continue moving shared behavior into Platinum-owned contracts and game-specific behavior into pack-owned data or adapters. |
-| P2 | architecture-boundary | in_progress | architect-magic-constants | Some movement, render spacing, animation timing, and gameplay update values still need clearer structural ownership. | Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments. |
-| P2 | harness-fragility | in_progress | architect-harness-fragility | Recorded-path harnesses can become brittle after motion and pacing changes. | Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract. |
-| P2 | conformance-evidence | in_progress | architect-enemy-spec | Enemy family definitions should become declarative enough to support new game ingestion and controlled experimentation. | Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs. |
-| P2 | release-tooling | review_note | code-review-release-tooling-review | package.json: Release or npm script surface changed; verify lane authority and publish behavior. | Verify the flagged surface with the targeted review questions and recommended checks before lane movement. |
+| Severity | Category | Status | Id | Note | Proposed Action | Production Disposition |
+| --- | --- | --- | --- | --- | --- | --- |
+| P2 | architecture-boundary | accepted | architect-key-abstractions | Keep core runtime, shell, service adapter, game-pack, entity, scoring, stage, render, and auth concerns named and separated. | Continue moving shared behavior into Platinum-owned contracts and game-specific behavior into pack-owned data or adapters. | addressed: The platform/application architecture documents and boundary harnesses now define the core runtime, shell, service adapter, game-pack, entity, scoring, stage, render, and auth concerns. |
+| P2 | architecture-boundary | in_progress | architect-magic-constants | Some movement, render spacing, animation timing, and gameplay update values still need clearer structural ownership. | Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments. | dismissed: Remaining movement, render-spacing, animation-timing, and gameplay tuning constants are a next-cycle maintainability concern, not a blocker for the current production candidate when targeted gameplay and boundary checks pass. |
+| P2 | harness-fragility | in_progress | architect-harness-fragility | Recorded-path harnesses can become brittle after motion and pacing changes. | Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract. | dismissed: Recorded-path fragility is acknowledged and retained as a harness-maturity concern. It does not block the current production candidate if the relevant release harnesses, documentation freshness check, and publish preflight pass. |
+| P2 | conformance-evidence | in_progress | architect-enemy-spec | Enemy family definitions should become declarative enough to support new game ingestion and controlled experimentation. | Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs. | dismissed: Declarative enemy-family and attack-pattern specs remain important for 1.4.0 and later conformance work. This is not a production blocker for a reviewed candidate unless the release claims those specs as complete. |
+| P2 | release-tooling | review_note | code-review-release-tooling-review | package.json: Release or npm script surface changed; verify lane authority and publish behavior. | Verify the flagged surface with the targeted review questions and recommended checks before lane movement. | addressed: The release-tooling changes are intentional: they add the review packet, review-learning ledger, public review documentation, and a production disposition gate. The review packet is current and publish preflight remains green for the dev lane. |
 
 ## Change Decisions
 

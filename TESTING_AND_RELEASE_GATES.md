@@ -536,6 +536,11 @@ Hosted `/beta` is the real production gate.
 Before moving hosted `/beta` to hosted `/production`, we expect:
 
 - `node tools/build/check-publish-ready.js --lane beta`
+- a completed review cycle:
+  - `npm run review:cycle`
+  - `npm run review:dispositions:check`
+- every architecture/code-review issue addressed or explicitly dismissed in
+  `review-dispositions.json`, with rationale and evidence
 - hosted `/beta` publish success
 - hosted `/beta` live label verification
 - hosted `/beta` live-input verification when input or gameplay start behavior could be affected

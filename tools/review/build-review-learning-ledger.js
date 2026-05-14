@@ -7,6 +7,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'review-learning');
 const LATEST_CODE_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'code-review', 'latest.json');
 const LEDGER_MD = path.join(ROOT, 'REVIEW_LEARNING_LEDGER.md');
+const REVIEW_DISPOSITIONS = path.join(ROOT, 'review-dispositions.json');
 
 function git(args, fallback = ''){
   try{
@@ -30,6 +31,20 @@ function readJson(file, fallback){
   }catch{
     return fallback;
   }
+}
+
+function dispositionMap(){
+  const data = readJson(REVIEW_DISPOSITIONS, { decisions: [] });
+  const map = new Map();
+  for(const item of Array.isArray(data.decisions) ? data.decisions : []){
+    if(!item || !item.id) continue;
+    map.set(String(item.id), {
+      decision: String(item.productionDisposition || '').trim(),
+      reason: String(item.reason || '').trim(),
+      evidence: Array.isArray(item.evidence) ? item.evidence.map(entry => String(entry || '').trim()).filter(Boolean) : []
+    });
+  }
+  return map;
 }
 
 function slugFor(now, commit){
@@ -247,6 +262,7 @@ function buildLedger(){
   const packetFindings = issueNotesFromPacket(packet);
   const architectureNotes = standingArchitectureNotes();
   const acceptedChanges = standingAcceptedChanges();
+  const dispositions = dispositionMap();
   const cycles = [
     {
       id: 'architect-lueck-baseline',
@@ -274,7 +290,9 @@ function buildLedger(){
     },
     packetCycle(packet)
   ].filter(Boolean);
-  const issueNotes = [...architectureNotes, ...packetFindings];
+  const issueNotes = [...architectureNotes, ...packetFindings].map(item => Object.assign({}, item, {
+    productionDisposition: dispositions.get(item.id) || null
+  }));
   const proposedChanges = [
     ...architectureNotes.map(item => ({
       id: `${item.id}-proposal`,
@@ -314,7 +332,12 @@ function buildLedger(){
       p0: issueNotes.filter(item => item.severity === 'P0').length,
       p1: issueNotes.filter(item => item.severity === 'P1').length,
       p2: issueNotes.filter(item => item.severity === 'P2').length,
-      p3: issueNotes.filter(item => item.severity === 'P3').length
+      p3: issueNotes.filter(item => item.severity === 'P3').length,
+      productionDisposition: {
+        addressed: issueNotes.filter(item => item.productionDisposition?.decision === 'addressed').length,
+        dismissed: issueNotes.filter(item => item.productionDisposition?.decision === 'dismissed').length,
+        missing: issueNotes.filter(item => !item.productionDisposition?.decision).length
+      }
     },
     taxonomy: taxonomy(),
     reviewCycles: cycles,
@@ -360,7 +383,10 @@ function md(ledger){
     item.status,
     item.id,
     item.note,
-    item.proposedChange
+    item.proposedChange,
+    item.productionDisposition
+      ? `${item.productionDisposition.decision}: ${item.productionDisposition.reason}`
+      : 'missing'
   ]);
   const proposedRows = ledger.proposedChanges.map(item => [
     item.category,
@@ -418,6 +444,9 @@ or simpler platform/game boundaries.
 4. During beta review, scan the issue-note categories for repeated patterns.
 5. Promote repeated patterns into one of: harness, release preflight, platform
    boundary rule, game-pack spec, documentation rule, or explicit non-goal.
+6. Before production, every issue must have a production disposition in
+   \`review-dispositions.json\`: either \`addressed\` or \`dismissed\`, with a
+   rationale and evidence.
 
 ## Issue Taxonomy
 
@@ -429,7 +458,7 @@ ${table(['Date', 'Focus', 'Source', 'Changed Files', 'Findings', 'Outcome'], cyc
 
 ## Issues And Notes
 
-${table(['Severity', 'Category', 'Status', 'Id', 'Note', 'Proposed Action'], issueRows)}
+${table(['Severity', 'Category', 'Status', 'Id', 'Note', 'Proposed Action', 'Production Disposition'], issueRows)}
 
 ## Change Decisions
 

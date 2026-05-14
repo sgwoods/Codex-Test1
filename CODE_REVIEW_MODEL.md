@@ -41,7 +41,7 @@ reviewer at those sources when platform/game separation matters.
 | Local iteration | advisory | Help shape code before it hardens. |
 | Local -> hosted `/dev` | blocks automatic P0/P1 only | Prevent obvious safety, security, boundary, and release-lane mistakes. |
 | Hosted `/dev` -> `/beta` | human review required | Confirm user-facing value, conformance evidence, docs, and release notes. |
-| `/beta` -> `/production` | release authority only | Confirm approved lane lineage and public release readiness. |
+| `/beta` -> `/production` | review required, all issues dispositioned | Confirm approved lane lineage, public release readiness, and that each review issue is either addressed or explicitly dismissed. |
 
 ## Severity
 
@@ -100,6 +100,17 @@ npm run review:code:check
 That check is intentionally narrow. It fails if the packet is missing, stale for
 the current changed source set, or contains automatic P0/P1 findings. P2/P3
 findings remain visible but do not block hosted `/dev`.
+
+Production movement is stricter. Before production, run:
+
+```bash
+npm run review:dispositions:check
+```
+
+The production preflight also runs this gate. Every issue in the review-learning
+ledger must have a production disposition in `review-dispositions.json`:
+`addressed` or `dismissed`, with rationale and evidence. P0/P1 issues must be
+addressed; they cannot be dismissed as non-blocking production risk.
 
 ## Review Learning Ledger
 

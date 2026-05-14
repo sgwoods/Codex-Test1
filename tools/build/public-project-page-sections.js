@@ -220,6 +220,7 @@ function reviewLearningSummaryCards(ledger){
                 </article>`;
   }
   const summary = ledger.summary || {};
+  const disposition = summary.productionDisposition || {};
   return `
                 <article class="miniMetric">
                     <span>Review cycles</span>
@@ -239,7 +240,7 @@ function reviewLearningSummaryCards(ledger){
                 <article class="miniMetric">
                     <span>Blocking findings</span>
                     <strong>P0 ${esc(summary.p0 ?? 0)} / P1 ${esc(summary.p1 ?? 0)}</strong>
-                    <small>P0/P1 findings block hosted-dev movement; P2/P3 stay visible for human review.</small>
+                    <small>P0/P1 findings block hosted-dev movement. Production dispositions: ${esc(disposition.addressed ?? '--')} addressed, ${esc(disposition.dismissed ?? '--')} dismissed, ${esc(disposition.missing ?? '--')} missing.</small>
                 </article>`;
 }
 
@@ -254,11 +255,12 @@ function reviewLearningIssueRows(ledger){
                         <strong>${esc(item.severity || 'P?')} - ${esc(item.category || 'uncategorized')} - ${esc(item.id || 'review-note')}</strong>
                         <p>${esc(item.note || '')}</p>
                         <p class="smallText"><strong>Proposed:</strong> ${esc(item.proposedChange || 'No proposed change recorded.')}</p>
+                        <p class="smallText"><strong>Production disposition:</strong> ${esc(item.productionDisposition?.decision || 'missing')} - ${esc(item.productionDisposition?.reason || 'Requires explicit addressed/dismissed decision before production.')}</p>
                     </div>
                     <div class="investmentMeta">
                         <span>Status: ${esc(item.status || 'unknown')}</span>
                         <span>Source: ${esc(item.source || 'review ledger')}</span>
-                        <span>Decision: ${esc(item.acceptedChange || 'pending')}</span>
+                        <span>Review decision: ${esc(item.acceptedChange || 'pending')}</span>
                     </div>
                 </article>`).join('\n');
 }

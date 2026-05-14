@@ -26,6 +26,10 @@ const REQUIRED_SOURCE_DOCS = [
   'ARCHITECTURE.md',
   'TESTING_AND_RELEASE_GATES.md',
   'RELEASE_POLICY.md',
+  'CODE_REVIEW_MODEL.md',
+  'REVIEW_LEARNING_LEDGER.md',
+  'ARCHITECT_REVIEW_RESPONSE.md',
+  'review-dispositions.json',
   'RELEASE_READINESS_REVIEW.md',
   'STRATEGIC_BETA_REVIEW.md',
   'RELEASE_CONFORMANCE_DASHBOARD.md',
@@ -247,6 +251,9 @@ function checkPublicProjectTemplate(){
     '{{PUBLIC_INVESTMENT_QUEUE}}',
     '{{PUBLIC_INGESTION_OVERVIEW_CARDS}}',
     '{{PUBLIC_GAME_CATALOG_CARDS}}',
+    '{{PUBLIC_REVIEW_LEARNING_SUMMARY}}',
+    '{{PUBLIC_REVIEW_LEARNING_ISSUES}}',
+    '{{PUBLIC_REVIEW_LEARNING_PATTERNS}}',
     '{{PUBLIC_DOCUMENTATION_PROVENANCE}}'
   ];
   for(const token of requiredTokens){
@@ -608,6 +615,21 @@ function checkProductionReleaseDocs(productionInfo){
   }
 }
 
+function checkProductionReviewDispositions(){
+  const script = path.join(ROOT, 'tools', 'review', 'check-review-dispositions.js');
+  try{
+    execFileSync(process.execPath, [script], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: production review dispositions are incomplete.\n${stderr || stdout || err.message}`);
+  }
+}
+
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const cfg = laneConfig(String(args.lane || '').toLowerCase());
@@ -643,6 +665,7 @@ function main(){
     checkPublicProjectTemplate();
     checkApprovedBetaForProduction(info);
     checkProductionReleaseDocs(info);
+    checkProductionReviewDispositions();
   }
   console.log(JSON.stringify({
     ok: true,

@@ -9,6 +9,7 @@
     "review:code:packet": "node tools/review/build-code-review-packet.js",
     "review:code:check": "node tools/review/check-code-review-gate.js",
     "review:ledger": "node tools/review/build-review-learning-ledger.js",
+    "review:dispositions:check": "node tools/review/check-review-dispositions.js",
     "review:code": "npm run review:code:packet && npm run review:code:check",
     "review:cycle": "npm run review:code:packet && npm run review:ledger && npm run review:code",
     "promote:production": "node tools/build/promote-production.js",
