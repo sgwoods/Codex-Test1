@@ -1,31 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-14T16-43-15-131Z-4625",
-  "startedAt": "2026-05-14T16:43:15.131Z",
-  "endedAt": "2026-05-14T16:44:19.891Z",
+  "id": "2026-05-14T17-20-37-386Z-13878",
+  "startedAt": "2026-05-14T17:20:37.386Z",
+  "endedAt": "2026-05-14T17:20:37.751Z",
   "branch": "codex/player-two-persona-mode",
-  "commit": "df15e918",
+  "commit": "35b1b292",
   "command": [
     "npm",
     "run",
-    "harness:score:quality-conformance"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
-    "audio",
-    "quality"
+    "audio"
   ],
   "resources": [
-    "cpu",
-    "browser"
+    "cpu"
   ],
-  "notes": "quality score after captureSuccess keeper promotion",
+  "notes": "audio event gap with calibrated playerHit loss composite",
   "measurement": {
-    "wallSeconds": 64.76,
-    "timeRealSeconds": 64.75,
-    "timeUserSeconds": 55.76,
-    "timeSystemSeconds": 17.6,
-    "cpuSeconds": 73.36,
+    "wallSeconds": 0.365,
+    "timeRealSeconds": 0.36,
+    "timeUserSeconds": 0.22,
+    "timeSystemSeconds": 0.14,
+    "cpuSeconds": 0.36,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -47,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 563147995,
-    "artifactBytesAfter": 563748943,
-    "artifactBytesDelta": 600948
+    "artifactBytesBefore": 572383304,
+    "artifactBytesAfter": 572460537,
+    "artifactBytesDelta": 77233
   }
 }

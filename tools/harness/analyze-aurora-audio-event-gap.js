@@ -6,6 +6,7 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const SOURCE_ROOT = path.join(ANALYSES, 'aurora-audio-theme-comparison');
+const AUDIO_CANDIDATE_ROOT = path.join(ANALYSES, 'aurora-audio-cue-candidates');
 const GUIDE = path.join(ROOT, 'application-guide.json');
 
 function argValue(name, fallback = ''){
@@ -202,13 +203,49 @@ function cuePriority(cueName){
   return .82;
 }
 
-function eventGapScore(item){
+function calibratedLossCompositeByCue(){
+  const file = path.join(AUDIO_CANDIDATE_ROOT, 'latest-player-hit-focus.json');
+  if(!fs.existsSync(file)) return new Map();
+  try{
+    const report = readJson(file);
+    const baseline = (report.candidates || []).find(candidate => candidate.id === 'baseline-current');
+    const composite = baseline?.lossComposite;
+    if(report.cue !== 'playerHit' || !composite?.calibration || !composite.clears) return new Map();
+    return new Map([['playerHit', {
+      source: rel(file),
+      decision: report.decision || null,
+      score10: composite.score10,
+      clears: composite.clears,
+      roles: composite.roles || [],
+      scheduledDurationSeconds: composite.scheduledDurationSeconds,
+      activeDurationSeconds: composite.activeDurationSeconds,
+      referenceDurationSeconds: composite.referenceDurationSeconds,
+      durationGapSeconds: composite.durationGapSeconds,
+      calibration: composite.calibration
+    }]]);
+  }catch{
+    return new Map();
+  }
+}
+
+function effectiveSegmentRiskForItem(item, calibration = null){
+  const raw = worstSegment(item)?.auroraSegmentRisk10;
+  if(item.cue !== 'playerHit' || !calibration?.clears) return +raw || 0;
+  const roles = calibration.roles || [];
+  const worst = roles
+    .filter(role => Number.isFinite(+role.risk10))
+    .slice()
+    .sort((a, b) => (+b.risk10 || 0) - (+a.risk10 || 0) || String(a.role).localeCompare(String(b.role)))[0];
+  return +worst?.risk10 || 0;
+}
+
+function eventGapScore(item, calibration = null){
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
   const durationGap = +comparison.duration_s || 0;
   const centroidGap = +comparison.spectral_centroid_hz || 0;
   const zcrGap = +comparison.zero_crossings_per_s || 0;
   const rmsGap = +comparison.rms || 0;
-  const worstSegmentRisk = worstSegment(item)?.auroraSegmentRisk10 || 0;
+  const worstSegmentRisk = effectiveSegmentRiskForItem(item, calibration);
   const broadPenalty = /broad-reference-window/.test(item.comparisons?.referenceWindowStatus || '') ? 1.3 : 0;
   const segmentScore = (item.referenceSegmentCandidates || [])[0]?.score;
   const segmentPenalty = Number.isFinite(+segmentScore) ? clamp((.8 - +segmentScore) * 3, 0, 1.4) : .45;
@@ -229,9 +266,12 @@ function worstSegment(item){
     .sort((a, b) => (+b.auroraSegmentRisk10 || 0) - (+a.auroraSegmentRisk10 || 0) || String(a.role).localeCompare(String(b.role)))[0] || null;
 }
 
-function recommendation(item){
+function recommendation(item, calibration = null){
   const status = item.comparisons?.referenceWindowStatus || '';
   const cue = item.cue || '';
+  if(cue === 'playerHit' && calibration?.clears){
+    return 'Keep playerHit as a calibrated guardrail for now: raw body/tail risk matches synthetic Galaga browser-capture behavior, so the next runtime work should target a non-calibrated cue gap.';
+  }
   const comparison = item.comparisons?.auroraVsReferenceActive || {};
   const segment = worstSegment(item);
   const segmentScore = (item.referenceSegmentCandidates || [])[0]?.score;
@@ -254,6 +294,28 @@ function recommendation(item){
     return 'Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state.';
   }
   return 'Keep as secondary pass after higher-risk audio gaps are narrowed.';
+}
+
+function calibratedLossRead(calibration){
+  if(!calibration?.clears) return null;
+  const roles = (calibration.roles || []).filter(role => Number.isFinite(+role.risk10));
+  const worst = roles
+    .slice()
+    .sort((a, b) => (+b.risk10 || 0) - (+a.risk10 || 0) || String(a.role).localeCompare(String(b.role)))[0] || null;
+  return {
+    source: calibration.source,
+    score10: calibration.score10,
+    clears: calibration.clears,
+    segmentRiskMode: 'calibrated-excess-over-synthetic-galaga-browser-capture',
+    worstRole: worst?.role || '',
+    worstRisk10: Number.isFinite(+worst?.risk10) ? round(+worst.risk10, 2) : null,
+    rawWorstRoleRisk10: Number.isFinite(+worst?.rawRisk10) ? round(+worst.rawRisk10, 2) : null,
+    syntheticWorstRoleRisk10: Number.isFinite(+worst?.syntheticRisk10) ? round(+worst.syntheticRisk10, 2) : null,
+    durationGapSeconds: calibration.durationGapSeconds,
+    scheduledDurationSeconds: calibration.scheduledDurationSeconds,
+    referenceDurationSeconds: calibration.referenceDurationSeconds,
+    rationale: calibration.calibration?.rationale || ''
+  };
 }
 
 function referenceWindowKey(set){
@@ -340,6 +402,12 @@ function rowForItem(item, context = {}){
   const segment = worstSegment(item);
   const segmentationSummary = item.referenceSegmentation?.summary || {};
   const comparisonSet = context.comparisonByCue?.get(item.cue) || null;
+  const calibratedLoss = context.calibratedLossByCue?.get(item.cue) || null;
+  const calibratedLossSegment = calibratedLossRead(calibratedLoss);
+  const effectiveWorstSegmentRisk10 = calibratedLossSegment
+    ? calibratedLossSegment.worstRisk10
+    : (segment ? round(segment.auroraSegmentRisk10, 2) : null);
+  const effectiveWorstSegmentRole = calibratedLossSegment?.worstRole || segment?.role || null;
   const sharedReferenceClipCount = context.referenceClipCounts?.get(comparisonSet?.referenceClip || '') || 0;
   const sharedReferenceWindowCount = context.referenceWindowCounts?.get(referenceWindowKey(comparisonSet)) || 0;
   const semanticSharedReferenceCount = sharedReferenceRiskCount(comparisonSet, context);
@@ -357,7 +425,7 @@ function rowForItem(item, context = {}){
     focus: item.focus,
     status: item.comparisons?.referenceWindowStatus || '',
     eventCritical: CRITICAL_CUES.has(item.cue),
-    gapRisk10: eventGapScore(item),
+    gapRisk10: eventGapScore(item, calibratedLoss),
     durationGapSeconds: round(comparison.duration_s, 3),
     centroidGapHz: round(comparison.spectral_centroid_hz, 1),
     zeroCrossingGapPerSecond: round(comparison.zero_crossings_per_s, 1),
@@ -369,8 +437,12 @@ function rowForItem(item, context = {}){
       score: round(bestSegment.score, 3)
     } : null,
     segmentRoleComparisonCount: (item.segmentRoleComparisons || []).length,
-    worstSegmentRole: segment?.role || null,
-    worstSegmentRisk10: segment ? round(segment.auroraSegmentRisk10, 2) : null,
+    segmentRiskMode: calibratedLossSegment?.segmentRiskMode || 'raw-segment-risk',
+    worstSegmentRole: effectiveWorstSegmentRole,
+    worstSegmentRisk10: effectiveWorstSegmentRisk10,
+    rawWorstSegmentRole: segment?.role || null,
+    rawWorstSegmentRisk10: segment ? round(segment.auroraSegmentRisk10, 2) : null,
+    calibratedLossComposite: calibratedLossSegment,
     worstSegmentInterpretation: segment?.interpretation || null,
     worstSegmentDelta: segment?.auroraVsReference || null,
     referenceSegmentationStatus: segmentationSummary.status || null,
@@ -385,7 +457,7 @@ function rowForItem(item, context = {}){
     sourceReferenceClipCount: sharedReferenceClipCount,
     sourceReferenceWindowCount: sharedReferenceWindowCount,
     hasDistinctReferenceWindow: hasDistinctReferenceWindow(comparisonSet),
-    recommendation: recommendation(item)
+    recommendation: recommendation(item, calibratedLoss)
   };
 }
 
@@ -595,7 +667,8 @@ function main(){
     comparisonByCue,
     eventByEntryId,
     referenceClipCounts,
-    referenceWindowCounts
+    referenceWindowCounts,
+    calibratedLossByCue: calibratedLossCompositeByCue()
   };
   const comparedCueRisks = (metrics.items || []).map(item => rowForItem(item, rowContext))
     .sort((a, b) => b.gapRisk10 - a.gapRisk10 || String(a.cue).localeCompare(String(b.cue)));

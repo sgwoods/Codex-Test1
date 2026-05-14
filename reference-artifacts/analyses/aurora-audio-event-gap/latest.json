@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-event-gap",
-  "generatedAt": "2026-05-14T16:44:19.782Z",
+  "generatedAt": "2026-05-14T17:22:26.372Z",
   "branch": "codex/player-two-persona-mode",
-  "commit": "df15e918",
+  "commit": "35b1b292",
   "dirty": true,
   "problem": "Aurora audio conformance is the weakest current release axis, but the next work must distinguish true runtime cue gaps from broad or missing reference measurements.",
   "strategy": "Reuse the latest captured Aurora audio comparison metrics, rank event cues by active-duration/timbre/reference-window risk, and expose missing critical cue coverage before tuning.",
@@ -31,9 +31,9 @@
     "missingCriticalComparisonCueCount": 0,
     "broadReferenceWindowCount": 0,
     "segmentRoleComparisonCount": 31,
-    "averageWorstSegmentRisk10": 4.07,
-    "highestSegmentRiskCue": "playerHit",
-    "highestSegmentRiskRole": "body",
+    "averageWorstSegmentRisk10": 3.76,
+    "highestSegmentRiskCue": "challengePerfect",
+    "highestSegmentRiskRole": "onset",
     "semanticAverageScore10": 9.78,
     "lowSemanticCueCount": 0,
     "semanticAttentionCueCount": 0,
@@ -67,8 +67,12 @@
         "score": 0.457
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 6.16,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 6.16,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0,
@@ -124,8 +128,12 @@
         "score": 0.415
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 6.24,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 6.24,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.011,
@@ -180,8 +188,12 @@
         "score": 0.6
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 4.82,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 4.82,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.045,
@@ -237,8 +249,12 @@
         "score": 0.56
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 5.75,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 5.75,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
       "worstSegmentDelta": {
         "duration_s": 0.18,
@@ -293,8 +309,12 @@
         "score": 0.66
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 4.74,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 4.74,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
       "worstSegmentDelta": {
         "duration_s": 0.1,
@@ -349,8 +369,12 @@
         "score": 0.734
       },
       "segmentRoleComparisonCount": 3,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "tail",
       "worstSegmentRisk10": 4.96,
+      "rawWorstSegmentRole": "tail",
+      "rawWorstSegmentRisk10": 4.96,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "tail reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.01,
@@ -405,8 +429,12 @@
         "score": 0.524
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 5.3,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 5.3,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
       "worstSegmentDelta": {
         "duration_s": 0.08,
@@ -440,62 +468,6 @@
       "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
     },
     {
-      "id": "ship-loss",
-      "label": "Ship Loss",
-      "cue": "playerHit",
-      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
-      "status": "active-segment-detected",
-      "eventCritical": true,
-      "gapRisk10": 3.12,
-      "durationGapSeconds": 0,
-      "centroidGapHz": 608.6,
-      "zeroCrossingGapPerSecond": 455.6,
-      "rmsGap": 0.0088,
-      "bestReferenceSegmentScore": 0.668,
-      "bestReferenceSegment": {
-        "startSeconds": 0.15,
-        "endSeconds": 1.118,
-        "score": 0.668
-      },
-      "segmentRoleComparisonCount": 3,
-      "worstSegmentRole": "body",
-      "worstSegmentRisk10": 6.53,
-      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
-      "worstSegmentDelta": {
-        "duration_s": 0.219,
-        "spectral_centroid_hz": 864.4,
-        "zero_crossings_per_s": 1246.9,
-        "rms": 0.0819,
-        "spectral_spread_hz": 395.9,
-        "spectral_rolloff_85_hz": 2024.2,
-        "spectral_flatness": 0.0744,
-        "band_shape_distance": 0.3351,
-        "attack_peak_position": 0.251,
-        "decay_ratio": 0.156,
-        "envelope_contrast": 0.13,
-        "burst_share": 0.061
-      },
-      "referenceSegmentationStatus": "curated-reference-segmentation",
-      "referenceSegmentationConfidence": "medium-high",
-      "referenceSegmentationResolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
-      "referenceSegmentationSource": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
-      "semanticClass": "player-ship-lost",
-      "playerMeaning": "The player lost a ship; the cue should be unmistakable and synchronized with death feedback.",
-      "distinctFrom": [
-        "enemyBoom",
-        "bossBoom"
-      ],
-      "mappingStatus": "Strong direct mapping.",
-      "mappingConfidence": "high",
-      "sharedReferenceClipCount": 0,
-      "semanticScore10": 9.4,
-      "semanticRecommendation": "Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.",
-      "sourceReferenceClipCount": 1,
-      "sourceReferenceWindowCount": 1,
-      "hasDistinctReferenceWindow": false,
-      "recommendation": "Tune the body segment first: body timing/duration differs enough to tune event pacing before timbre."
-    },
-    {
       "id": "stage-start",
       "label": "Stage Start",
       "cue": "gameStart",
@@ -514,8 +486,12 @@
         "score": 0.641
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 5.8,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 5.8,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
       "worstSegmentDelta": {
         "duration_s": 0.02,
@@ -567,8 +543,12 @@
         "score": 0.598
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 4.56,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 4.56,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.148,
@@ -620,8 +600,12 @@
         "score": 0.794
       },
       "segmentRoleComparisonCount": 3,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "body",
       "worstSegmentRisk10": 4.33,
+      "rawWorstSegmentRole": "body",
+      "rawWorstSegmentRisk10": 4.33,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "body reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.061,
@@ -658,6 +642,79 @@
       "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
     },
     {
+      "id": "ship-loss",
+      "label": "Ship Loss",
+      "cue": "playerHit",
+      "focus": "Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.",
+      "status": "active-segment-detected",
+      "eventCritical": true,
+      "gapRisk10": 2.37,
+      "durationGapSeconds": 0,
+      "centroidGapHz": 608.6,
+      "zeroCrossingGapPerSecond": 455.6,
+      "rmsGap": 0.0088,
+      "bestReferenceSegmentScore": 0.668,
+      "bestReferenceSegment": {
+        "startSeconds": 0.15,
+        "endSeconds": 1.118,
+        "score": 0.668
+      },
+      "segmentRoleComparisonCount": 3,
+      "segmentRiskMode": "calibrated-excess-over-synthetic-galaga-browser-capture",
+      "worstSegmentRole": "body",
+      "worstSegmentRisk10": 0,
+      "rawWorstSegmentRole": "body",
+      "rawWorstSegmentRisk10": 6.53,
+      "calibratedLossComposite": {
+        "source": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-hit-focus.json",
+        "score10": 10,
+        "clears": true,
+        "segmentRiskMode": "calibrated-excess-over-synthetic-galaga-browser-capture",
+        "worstRole": "body",
+        "worstRisk10": 0,
+        "rawWorstRoleRisk10": 6.18,
+        "syntheticWorstRoleRisk10": 6.18,
+        "durationGapSeconds": 0,
+        "scheduledDurationSeconds": 0.968,
+        "referenceDurationSeconds": 0.968,
+        "rationale": "A Galaga-source browser capture can score high against hand segmentation; calibrated gates measure excess Aurora risk above the synthetic Galaga capture before blocking a candidate."
+      },
+      "worstSegmentInterpretation": "body timing/duration differs enough to tune event pacing before timbre.",
+      "worstSegmentDelta": {
+        "duration_s": 0.219,
+        "spectral_centroid_hz": 864.4,
+        "zero_crossings_per_s": 1246.9,
+        "rms": 0.0819,
+        "spectral_spread_hz": 395.9,
+        "spectral_rolloff_85_hz": 2024.2,
+        "spectral_flatness": 0.0744,
+        "band_shape_distance": 0.3351,
+        "attack_peak_position": 0.251,
+        "decay_ratio": 0.156,
+        "envelope_contrast": 0.13,
+        "burst_share": 0.061
+      },
+      "referenceSegmentationStatus": "curated-reference-segmentation",
+      "referenceSegmentationConfidence": "medium-high",
+      "referenceSegmentationResolution": "relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail",
+      "referenceSegmentationSource": "curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass",
+      "semanticClass": "player-ship-lost",
+      "playerMeaning": "The player lost a ship; the cue should be unmistakable and synchronized with death feedback.",
+      "distinctFrom": [
+        "enemyBoom",
+        "bossBoom"
+      ],
+      "mappingStatus": "Strong direct mapping.",
+      "mappingConfidence": "high",
+      "sharedReferenceClipCount": 0,
+      "semanticScore10": 9.4,
+      "semanticRecommendation": "Keep semantic mapping as a guardrail while acoustic/timing gaps are tuned.",
+      "sourceReferenceClipCount": 1,
+      "sourceReferenceWindowCount": 1,
+      "hasDistinctReferenceWindow": false,
+      "recommendation": "Keep playerHit as a calibrated guardrail for now: raw body/tail risk matches synthetic Galaga browser-capture behavior, so the next runtime work should target a non-calibrated cue gap."
+    },
+    {
       "id": "challenge-results",
       "label": "Challenge Results",
       "cue": "challengeResults",
@@ -676,8 +733,12 @@
         "score": 0.721
       },
       "segmentRoleComparisonCount": 3,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 4.56,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 4.56,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
       "worstSegmentDelta": {
         "duration_s": 0.05,
@@ -732,8 +793,12 @@
         "score": 0.735
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 5.8,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 5.8,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
       "worstSegmentDelta": {
         "duration_s": 0.299,
@@ -788,8 +853,12 @@
         "score": 0.794
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 1.39,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 1.39,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.01,
@@ -844,8 +913,12 @@
         "score": 0.733
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 2.91,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 2.91,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0,
@@ -897,8 +970,12 @@
         "score": 0.874
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 3.21,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 3.21,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
       "worstSegmentDelta": {
         "duration_s": 0.12,
@@ -953,8 +1030,12 @@
         "score": 0.887
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 0.84,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 0.84,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset loudness/energy differs; tune gain after timing and timbre remain stable.",
       "worstSegmentDelta": {
         "duration_s": 0.01,
@@ -1009,8 +1090,12 @@
         "score": 0.879
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 0.92,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 0.92,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset loudness/energy differs; tune gain after timing and timbre remain stable.",
       "worstSegmentDelta": {
         "duration_s": 0,
@@ -1066,8 +1151,12 @@
         "score": 0.903
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 1.85,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 1.85,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
       "worstSegmentDelta": {
         "duration_s": 0.03,
@@ -1123,8 +1212,12 @@
         "score": 0.888
       },
       "segmentRoleComparisonCount": 3,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "tail",
       "worstSegmentRisk10": 2.79,
+      "rawWorstSegmentRole": "tail",
+      "rawWorstSegmentRisk10": 2.79,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "tail envelope is the leading gap: transient placement or burst structure differs.",
       "worstSegmentDelta": {
         "duration_s": 0,
@@ -1180,8 +1273,12 @@
         "score": 0.954
       },
       "segmentRoleComparisonCount": 1,
+      "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
       "worstSegmentRisk10": 1.96,
+      "rawWorstSegmentRole": "onset",
+      "rawWorstSegmentRisk10": 1.96,
+      "calibratedLossComposite": null,
       "worstSegmentInterpretation": "onset envelope is the leading gap: transient placement or burst structure differs.",
       "worstSegmentDelta": {
         "duration_s": 0.04,
@@ -1217,7 +1314,7 @@
   ],
   "previousComparison": {
     "baseline": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
-    "baselineGeneratedAt": "2026-05-14T16:43:04.229Z",
+    "baselineGeneratedAt": "2026-05-14T17:20:37.651Z",
     "cueDeltaCount": 21,
     "averageWorstSegmentRiskDelta10": 0,
     "highestRiskCueChanged": false,
@@ -1323,18 +1420,6 @@
         "previousWorstSegmentRisk10": 5.3
       },
       {
-        "cue": "playerHit",
-        "label": "Ship Loss",
-        "gapRiskDelta10": 0,
-        "worstSegmentRiskDelta10": 0,
-        "durationGapDeltaSeconds": 0,
-        "centroidGapDeltaHz": 0,
-        "currentGapRisk10": 3.12,
-        "previousGapRisk10": 3.12,
-        "currentWorstSegmentRisk10": 6.53,
-        "previousWorstSegmentRisk10": 6.53
-      },
-      {
         "cue": "gameStart",
         "label": "Stage Start",
         "gapRiskDelta10": 0,
@@ -1369,6 +1454,18 @@
         "previousGapRisk10": 2.45,
         "currentWorstSegmentRisk10": 4.33,
         "previousWorstSegmentRisk10": 4.33
+      },
+      {
+        "cue": "playerHit",
+        "label": "Ship Loss",
+        "gapRiskDelta10": 0,
+        "worstSegmentRiskDelta10": 0,
+        "durationGapDeltaSeconds": 0,
+        "centroidGapDeltaHz": 0,
+        "currentGapRisk10": 2.37,
+        "previousGapRisk10": 2.37,
+        "currentWorstSegmentRisk10": 0,
+        "previousWorstSegmentRisk10": 0
       },
       {
         "cue": "challengeResults",
@@ -1495,5 +1592,5 @@
   "lowSemanticCueRows": [],
   "semanticAttentionRows": [],
   "missingCriticalComparisonCues": [],
-  "nextStep": "Tune the highest segment-level gap next: playerHit body. Rerun audio comparison and event-gap analysis after the change."
+  "nextStep": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
 }
