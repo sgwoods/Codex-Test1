@@ -39,6 +39,8 @@ const REQUIRED_SOURCE_DOCS = [
   'QUALITY_RELEASE_SCORECARD.md',
   'PLATINUM_LAUNCH_ART_DIRECTION.md',
   'PLATINUM_LUECK_REVIEW.md',
+  'SUPABASE_DATA_API_ACCESS.md',
+  'supabase/data-api-access-contract.sql',
   'project-guide.json',
   'application-guide.json',
   'platinum-guide.json',
@@ -345,6 +347,19 @@ function checkSourceDocs(){
   }
 }
 
+function checkSupabaseDataApiContract(){
+  try{
+    execFileSync(process.execPath, [path.join(ROOT, 'tools', 'harness', 'check-supabase-data-api-contract.js')], {
+      cwd: ROOT,
+      stdio: 'pipe'
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: Supabase Data API access contract check failed.\n${stderr || stdout || err.message}`);
+  }
+}
+
 function checkReleaseConformanceDocs(){
   const dashboardPath = path.join(ROOT, 'RELEASE_CONFORMANCE_DASHBOARD.md');
   const economicsPath = path.join(ROOT, 'CONFORMANCE_ECONOMICS.md');
@@ -614,6 +629,7 @@ function main(){
   }
   checkGitClean();
   checkSourceDocs();
+  checkSupabaseDataApiContract();
   checkReleaseConformanceDocs();
   checkStrategicBetaReviewDoc();
   checkDocumentationFreshness();
@@ -651,6 +667,7 @@ module.exports = {
   checkGitClean,
   checkSourceDocs,
   checkReleaseConformanceDocs,
+  checkSupabaseDataApiContract,
   checkArtifacts,
   checkBuildInfo,
   checkProductionReleaseDocs,

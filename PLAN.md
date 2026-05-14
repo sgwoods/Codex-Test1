@@ -104,6 +104,8 @@ resource economics fit together.
 - keep pack contract thinking explicit
 - reduce remaining Aurora-shaped platform residue
 - improve the storage and schema seam before a second real playable game
+- keep shared-service access contracts explicit, including Supabase Data API
+  grants/RLS for profile and leaderboard tables
 - separate overall, platform, and per-game version tracking so release identity
   does not collapse into one number
 - keep platform, application, and integrated-bundle candidate paths distinct so

@@ -280,6 +280,28 @@ This gives us the right separation:
   summary data to explain the release without exposing the whole engineering
   workspace.
 
+## Supabase Data API Access Gate
+
+Platinum's auth, profile, and leaderboard paths use Supabase through the Data
+API. The maintained access contract is:
+
+- [SUPABASE_DATA_API_ACCESS.md](SUPABASE_DATA_API_ACCESS.md)
+- [supabase/data-api-access-contract.sql](supabase/data-api-access-contract.sql)
+
+This is now a release-hardening gate because Supabase public-schema tables need
+explicit grants for new projects beginning May 30, 2026 and for existing
+projects by October 30, 2026.
+
+The source-level gate is:
+
+- `npm run harness:check:supabase-data-api-contract`
+
+The publish preflight runs this check. If runtime code adds a new
+`supabase.from('table')` surface, the release path should fail until that table
+has an explicit Data API contract, RLS posture, and policy explanation. This is
+especially important for upcoming top-10 YouTube posting, replay metadata, and
+expanded pilot-record features.
+
 ## Gate Profiles By Change Type
 
 We want:
