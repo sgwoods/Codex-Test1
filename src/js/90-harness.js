@@ -748,9 +748,35 @@ window.__galagaHarness__={
   const capturePrerollMs=Math.max(0,Math.min(500,Number.isFinite(+captureOpts.capturePrerollMs)?Math.round(+captureOpts.capturePrerollMs):80));
   const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
   const audioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||null;
+  const cloneAudioSpec=spec=>{
+   if(!spec)return null;
+   try{return JSON.parse(JSON.stringify(spec));}catch{return null;}
+  };
+  let captureSpec=null;
+  const captureDiagnostics=()=>{
+   let tracks=[];
+   try{
+    tracks=Array.from(sfx.tap?.stream?.getAudioTracks?.()||[]).map(track=>({
+     kind:String(track.kind||''),
+     enabled:!!track.enabled,
+     muted:!!track.muted,
+     readyState:String(track.readyState||'')
+    }));
+   }catch{}
+   return {
+    audioContextState:String(sfx.a?.state||''),
+    audioMuted:!!audioMuted,
+    gameSoundVolume:Number.isFinite(+gameSoundVolume)?+gameSoundVolume:null,
+    busGain:Number.isFinite(+sfx.bus?.gain?.value)?+sfx.bus.gain.value:null,
+    tapTrackCount:tracks.length,
+    tapTracks:tracks,
+    referenceDebug:audioDebug?.reference||null
+   };
+  };
   try{
    if(typeof sfx.cueDef==='function'&&typeof sfx.loadReferenceBuffer==='function'){
     const warmCue=sfx.cueDef(String(name),captureOpts);
+    captureSpec=cloneAudioSpec(warmCue);
     const clips=[];
     if(warmCue&&warmCue.referenceClip)clips.push(warmCue.referenceClip);
     if(Array.isArray(warmCue?.layers))for(const layer of warmCue.layers)if(layer?.referenceClip)clips.push(layer.referenceClip);
@@ -777,7 +803,9 @@ window.__galagaHarness__={
        captureMs,
        capturePrerollMs,
        requestedCue:String(name),
-       audioCue:playedCue||audioDebug?.lastCue||null
+       audioCue:playedCue||audioDebug?.lastCue||null,
+       audioSpec:captureSpec,
+       captureDiagnostics:captureDiagnostics()
       });
       return;
      }
@@ -793,10 +821,12 @@ window.__galagaHarness__={
       capturePrerollMs,
       base64:btoa(binary),
       requestedCue:String(name),
-      audioCue:playedCue||audioDebug?.lastCue||null
+      audioCue:playedCue||audioDebug?.lastCue||null,
+      audioSpec:captureSpec,
+      captureDiagnostics:captureDiagnostics()
      });
     }catch(err){
-     resolve({ ok:false, error:err?.message||String(err) });
+     resolve({ ok:false, error:err?.message||String(err), audioSpec:captureSpec, captureDiagnostics:captureDiagnostics() });
     }
    };
   });
@@ -808,7 +838,9 @@ window.__galagaHarness__={
     error:err?.message||String(err),
     requestedCue:String(name),
     capturePrerollMs,
-    audioCue:playedCue||audioDebug?.lastCue||null
+    audioCue:playedCue||audioDebug?.lastCue||null,
+    audioSpec:captureSpec,
+    captureDiagnostics:captureDiagnostics()
    };
   }
   if(capturePrerollMs>0)await new Promise(resolve=>setTimeout(resolve,capturePrerollMs));
@@ -816,6 +848,7 @@ window.__galagaHarness__={
   playedCue=audioDebug?.lastCue||null;
   await new Promise(resolve=>setTimeout(resolve,captureMs));
   try{ if(recorder.state==='recording'&&typeof recorder.requestData==='function')recorder.requestData(); }catch{}
+  await new Promise(resolve=>setTimeout(resolve,80));
   if(recorder.state!=='inactive')recorder.stop();
   return done;
  },

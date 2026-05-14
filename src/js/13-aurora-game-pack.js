@@ -264,6 +264,14 @@ const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
  bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64})
 });
 
+const AURORA_CHALLENGE_RESULTS_HANDOFF_CUE=referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
+ cooldownMs:2400,
+ referenceVolume:.86,
+ clipStart:.55,
+ clipDuration:1.2,
+ stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
+});
+
 const AURORA_AUDIO_THEMES=Object.freeze({
  'classic-arcade':Object.freeze({
   id:'classic-arcade',
@@ -419,7 +427,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    challengeTransition:Object.freeze({seq:[587,784,1047,1318,1760,2349],step:.047,wave:'triangle',volume:.0142,slide:54,lpHz:4240,tones:Object.freeze([{freq:294,duration:.17,wave:'triangle',volume:.0034,slide:10,lpHz:1900,delay:0},{freq:1397,duration:.072,wave:'sine',volume:.0046,slide:14,lpHz:4700,delay:.047},{freq:2093,duration:.13,wave:'sine',volume:.007,slide:20,lpHz:5200,delay:.188}])}),
    extendAward:Object.freeze({seq:[880,1175,1568],step:.058,wave:'triangle',volume:.015,slide:54,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.08}])}),
    capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600,referenceVolume:.74,clipStart:2.02,clipDuration:.24}),
-   challengeResults:Object.freeze({seq:[196,262,330,392],step:.104,wave:'triangle',volume:.0092,slide:-6,lpHz:1900,tones:Object.freeze([{freq:147,duration:.44,wave:'triangle',volume:.0078,slide:-8,lpHz:1500,delay:0},{freq:523,duration:.28,wave:'sine',volume:.0038,slide:-10,lpHz:2300,delay:.09}])}),
+   challengeResults:AURORA_CHALLENGE_RESULTS_HANDOFF_CUE,
    challengePerfect:Object.freeze({seq:[880,1175,1568,2093,2794,3520],step:.039,wave:'triangle',volume:.0086,slide:10,lpHz:6900,tones:Object.freeze([{freq:3136,duration:.075,wave:'square',volume:.0027,slide:0,lpHz:7600,delay:.195}])}),
    rescueJoin:Object.freeze({seq:[659,784,1047,1397],step:.05,wave:'triangle',volume:.014,slide:48,lpHz:4500,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:20,lpHz:5200,delay:.08}])}),
    captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200,referenceVolume:1.16,clipStart:2.62,clipDuration:.42}),

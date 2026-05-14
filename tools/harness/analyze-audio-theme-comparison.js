@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { withHarnessPage, ROOT } = require('./browser-check-util');
+const { renderSpecToWav, specScheduledDurationSeconds } = require('./audio-spec-renderer');
 
 const guide = require(path.join(ROOT, 'application-guide.json'));
 
@@ -66,7 +67,9 @@ function round(value, digits = 3){
 
 function analysisWindowFromCapture(capture){
   const prerollMs = Number(capture?.capturePrerollMs);
-  const duration = Number(capture?.audioCue?.referenceClipDuration);
+  const specDuration = specScheduledDurationSeconds(capture?.audioSpec || {});
+  const cueDuration = Number(capture?.audioCue?.referenceClipDuration);
+  const duration = Number.isFinite(specDuration) && specDuration > 0 ? specDuration : cueDuration;
   if(!Number.isFinite(prerollMs) || !Number.isFinite(duration) || duration <= 0) return null;
   return {
     start_s: round(prerollMs / 1000, 3),
@@ -114,11 +117,38 @@ async function captureCueWithRetry(row, cue, opts, label){
     last = Object.assign({}, capture || {}, { byteLength, attempt });
     const capturedCue = String(capture?.audioCue?.cue || '').trim();
     if(capture?.ok && byteLength >= 512 && capturedCue === cue) return last;
+    if(attempt === attempts && capture?.audioSpec && capturedCue === cue){
+      return Object.assign({}, last, {
+        ok: true,
+        offlineRender: true,
+        offlineReason: capture?.error || 'Browser MediaRecorder returned no decodable bytes; rendered resolved cue spec offline.'
+      });
+    }
     if(capture?.ok && byteLength >= 512 && capturedCue !== cue){
       last.captureMismatch = { expectedCue: cue, capturedCue: capturedCue || '(none)' };
     }
   }
   fail(`${label} cue capture failed after retries`, { row: row.item.id, cue, last });
+}
+
+function writeCaptureAudioFiles(capture, webmPath, wavPath){
+  if(capture.offlineRender){
+    renderSpecToWav(capture.audioSpec || {}, wavPath, capture.capturePrerollMs || 80);
+    return {
+      webm: null,
+      wav: wavPath,
+      renderMode: 'offline-spec-render',
+      offlineReason: capture.offlineReason || ''
+    };
+  }
+  decodeToFile(capture.base64, webmPath);
+  toWav(webmPath, wavPath);
+  return {
+    webm: webmPath,
+    wav: wavPath,
+    renderMode: 'browser-media-recorder',
+    offlineReason: ''
+  };
 }
 
 function pythonForAudioReport(){
@@ -158,10 +188,8 @@ async function main(){
     const galagaWebm = path.join(samplesDir, `${id}-galaga.webm`);
     const auroraWav = path.join(samplesDir, `${id}-aurora.wav`);
     const galagaWav = path.join(samplesDir, `${id}-galaga.wav`);
-    decodeToFile(aurora.base64, auroraWebm);
-    decodeToFile(galaga.base64, galagaWebm);
-    toWav(auroraWebm, auroraWav);
-    toWav(galagaWebm, galagaWav);
+    const auroraFiles = writeCaptureAudioFiles(aurora, auroraWebm, auroraWav);
+    const galagaFiles = writeCaptureAudioFiles(galaga, galagaWebm, galagaWav);
 
     const referenceRel = row.item.referenceClip;
     const referenceSource = path.join(ROOT, 'src', referenceRel.replace(/^assets\//, 'assets/'));
@@ -179,7 +207,9 @@ async function main(){
       aurora: {
         label: 'Aurora Application Mix',
         wav: path.relative(outRoot, auroraWav),
-        webm: path.relative(outRoot, auroraWebm),
+        webm: auroraFiles.webm ? path.relative(outRoot, auroraFiles.webm) : null,
+        renderMode: auroraFiles.renderMode,
+        offlineReason: auroraFiles.offlineReason,
         audioCue: aurora.audioCue || null,
         capture: {
           attempt: aurora.attempt || 1,
@@ -194,7 +224,9 @@ async function main(){
       galaga: {
         label: 'Galaga Original Reference (synthetic)',
         wav: path.relative(outRoot, galagaWav),
-        webm: path.relative(outRoot, galagaWebm),
+        webm: galagaFiles.webm ? path.relative(outRoot, galagaFiles.webm) : null,
+        renderMode: galagaFiles.renderMode,
+        offlineReason: galagaFiles.offlineReason,
         audioCue: galaga.audioCue || null,
         capture: {
           attempt: galaga.attempt || 1,

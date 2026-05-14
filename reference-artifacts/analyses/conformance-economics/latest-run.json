@@ -1,30 +1,31 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-11T20-18-16-887Z-76038",
-  "startedAt": "2026-05-11T20:18:16.887Z",
-  "endedAt": "2026-05-11T20:18:21.529Z",
-  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "b83393cd",
+  "id": "2026-05-14T16-15-49-583Z-88890",
+  "startedAt": "2026-05-14T16:15:49.583Z",
+  "endedAt": "2026-05-14T16:16:52.430Z",
+  "branch": "codex/player-two-persona-mode",
+  "commit": "ce595bfb",
   "command": [
     "npm",
     "run",
-    "harness:check:developer-conformance-dashboard"
+    "harness:score:quality-conformance"
   ],
   "axes": [
-    "dashboard"
+    "audio",
+    "quality"
   ],
   "resources": [
     "cpu",
     "browser"
   ],
-  "notes": "developer dashboard guard after playerHit audio promotion",
+  "notes": "quality score after refreshed offline-render audio comparison",
   "measurement": {
-    "wallSeconds": 4.642,
-    "timeRealSeconds": 4.63,
-    "timeUserSeconds": 2.7,
-    "timeSystemSeconds": 1.27,
-    "cpuSeconds": 3.97,
+    "wallSeconds": 62.847,
+    "timeRealSeconds": 62.84,
+    "timeUserSeconds": 53.43,
+    "timeSystemSeconds": 17.49,
+    "cpuSeconds": 70.92,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +47,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 946879565,
-    "artifactBytesAfter": 946879565,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 552220608,
+    "artifactBytesAfter": 552734609,
+    "artifactBytesDelta": 514001
   }
 }
